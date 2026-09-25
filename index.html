@@ -186,7 +186,7 @@ const T={th:{
    clear1:[['g1','เก่งมาก {name}! แสงกลับมาทั้งถ้ำแล้ว'],['g2','ชาวบ้านต้องดีใจแน่ ๆ กลับไปเล่าให้ยายนวลฟังกัน']],
    shop1:[['nuan','อ้าว หลานมาแล้วเหรอ ยายชื่อนวล เปิดร้านนี้มาตั้งแต่แสงยังสว่างจ้า'],['nuan','ของแวววาวที่ขุดได้ในถ้ำ เอามาขายยายได้เลย แล้วเลือกของแต่งบ้านกลับไปนะจ๊ะ']],
    house1:[['g2','บ้านเรายังโล่งอยู่เลย ซื้อของที่ร้านยายนวลมาแต่งกันนะ'],['g1','กดปุ่ม 🪑 จัดบ้าน แล้วแตะพื้นเพื่อวางของ']]},
-  who:'ใครจะเล่น?',add:'➕ ผู้เล่นใหม่',manage:'จัดการ',manageDone:'เสร็จ',del:'ลบผู้เล่น {n}? ของทั้งหมดของคนนี้จะหายไป',delYes:'ลบ',cancel:'ยกเลิก',back:'← กลับ',full:'มีผู้เล่นครบ {n} คนแล้ว',sound:'เสียง',autoRead:'อ่านคำถามให้ฟัง',switchPlayer:'เปลี่ยนผู้เล่น',
+  who:'ใครจะเล่น?',add:'➕ ผู้เล่นใหม่',manage:'จัดการ',manageDone:'เสร็จ',del:'ลบผู้เล่น {n}? ของทั้งหมดของคนนี้จะหายไป',delYes:'ลบ',cancel:'ยกเลิก',back:'← กลับ',full:'มีผู้เล่นครบ {n} คนแล้ว',sound:'เสียง',autoRead:'อ่านคำถามให้ฟัง',bright:'ความสว่างในถ้ำ',brightLv:['ปกติ','สว่าง','สว่างมาก'],switchPlayer:'เปลี่ยนผู้เล่น',
   it:{gem:'อัญมณีสีฟ้า',coin:'เหรียญทองโบราณ',shell:'เปลือกหอยประกาย',feather:'ขนนกวิเศษ',star:'หินรูปดาว'},
   fu:{bed:'เตียง',table:'โต๊ะ',chair:'เก้าอี้',lamp:'โคมไฟ',rug:'พรม',plant:'ต้นไม้กระถาง',shelf:'ชั้นหนังสือ',sofa:'โซฟา',chest:'หีบของเล่น',display:'แท่นโชว์คริสตัล'}},
 en:{
@@ -216,7 +216,7 @@ en:{
    clear1:[['g1','Brilliant, {name}! The whole cave is shining again.'],['g2','The villagers will be so happy. Let us tell Granny Nuan.']],
    shop1:[['nuan','Oh, there you are, dear! I am Nuan. I have kept this shop since the days the light was bright.'],['nuan','Bring me the shiny things you dig up, and pick something nice for your home.']],
    house1:[['g2','Our home looks a little empty. Let us buy things at Granny Nuan\'s shop.'],['g1','Press 🪑 Decorate, then tap the floor to place things.']]},
-  who:"Who's playing?",add:'➕ New player',manage:'Manage',manageDone:'Done',del:'Delete player {n}? All their progress will be lost.',delYes:'Delete',cancel:'Cancel',back:'← Back',full:'All {n} player slots are used',sound:'Sound',autoRead:'Read questions aloud',switchPlayer:'Switch player',
+  who:"Who's playing?",add:'➕ New player',manage:'Manage',manageDone:'Done',del:'Delete player {n}? All their progress will be lost.',delYes:'Delete',cancel:'Cancel',back:'← Back',full:'All {n} player slots are used',sound:'Sound',autoRead:'Read questions aloud',bright:'Cave brightness',brightLv:['Normal','Bright','Very bright'],switchPlayer:'Switch player',
   it:{gem:'a blue gem',coin:'an old gold coin',shell:'a shiny shell',feather:'a magic feather',star:'a star stone'},
   fu:{bed:'Bed',table:'Table',chair:'Chair',lamp:'Lamp',rug:'Rug',plant:'Potted plant',shelf:'Bookshelf',sofa:'Sofa',chest:'Toy chest',display:'Crystal stand'}}};
 let LANG='th';
@@ -451,16 +451,22 @@ function label(text,x,y,z,color='#fdf6e8'){const c=document.createElement('canva
   g.fillStyle='rgba(26,19,44,.85)';g.beginPath();g.roundRect?g.roundRect((512-w)/2,14,w,68,30):g.rect((512-w)/2,14,w,68);g.fill();g.fillStyle=color;g.textAlign='center';g.textBaseline='middle';g.fillText(text,256,50);
   const tx=new THREE.CanvasTexture(c);tx.encoding=THREE.sRGBEncoding;const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:tx,transparent:true,depthTest:false,toneMapped:false}));sp.scale.set(2.6,.49,1);sp.position.set(x,y,z);sp.renderOrder=5;root.add(sp);return sp}
 /* ---- visibility (cave only) ---- */
-const VR=6;let VW,VH,visData,visTex,visCur,visTgt,seen,visUni={mem:{value:.38}},lastVis={x:-9,z:-9};
-function applyVisShader(m){m.onBeforeCompile=sh=>{sh.uniforms.visTex={value:visTex};sh.uniforms.visMem=visUni.mem;sh.uniforms.mapSize={value:new THREE.Vector2(MW,MH)};
+const VR=6;let VW,VH,visData,visTex,visCur,visTgt,seen,visUni={mem:{value:.38},base:{value:0}},lastVis={x:-9,z:-9};
+function applyVisShader(m){m.onBeforeCompile=sh=>{sh.uniforms.visTex={value:visTex};sh.uniforms.visMem=visUni.mem;sh.uniforms.visBase=visUni.base;sh.uniforms.mapSize={value:new THREE.Vector2(MW,MH)};
   sh.vertexShader='varying vec3 vWp;\n'+sh.vertexShader.replace('#include <project_vertex>','#include <project_vertex>\n vWp=(modelMatrix*vec4(transformed,1.0)).xyz;');
-  sh.fragmentShader='uniform sampler2D visTex;uniform float visMem;uniform vec2 mapSize;varying vec3 vWp;\n'+sh.fragmentShader.replace('#include <dithering_fragment>','#include <dithering_fragment>\n vec4 vv=texture2D(visTex,clamp(vWp.xz/mapSize,0.001,0.999)); gl_FragColor.rgb*=max(vv.r,vv.g*visMem);')}}
+  sh.fragmentShader='uniform sampler2D visTex;uniform float visMem;uniform float visBase;uniform vec2 mapSize;varying vec3 vWp;\n'+sh.fragmentShader.replace('#include <dithering_fragment>','#include <dithering_fragment>\n vec4 vv=texture2D(visTex,clamp(vWp.xz/mapSize,0.001,0.999)); gl_FragColor.rgb*=max(vv.r,max(vv.g*visMem,visBase));')}}
 function setupVis(){VW=MW*VR;VH=MH*VR;visData=new Uint8Array(VW*VH*4);visCur=new Float32Array(VW*VH);visTgt=new Float32Array(VW*VH);seen=new Float32Array(VW*VH);lastVis={x:-9,z:-9};
   visTex=new THREE.DataTexture(visData,VW,VH,THREE.RGBAFormat);visTex.magFilter=visTex.minFilter=THREE.LinearFilter}
 function blocked(x0,z0,x1,z1){let cx=Math.floor(x0),cz=Math.floor(z0);const tx=Math.floor(x1),tz=Math.floor(z1),dx=x1-x0,dz=z1-z0,sx=dx>0?1:-1,sz=dz>0?1:-1,tdx=dx?Math.abs(1/dx):1e9,tdz=dz?Math.abs(1/dz):1e9;
   let mx=dx?((dx>0?cx+1-x0:x0-cx)*tdx):1e9,mz=dz?((dz>0?cz+1-z0:z0-cz)*tdz):1e9;
   for(let n=0;n<80;n++){if(cx===tx&&cz===tz)return false;if(n>0&&isWallCell(cx,cz))return true;if(mx<mz){mx+=tdx;cx+=sx}else{mz+=tdz;cz+=sz}}return false}
-function updateVis(dt){if(M.lit)return;const R=6.5;
+// cave brightness: 0 = moody, 1 = bright (default), 2 = very bright
+const BRIGHT=[{exp:1.4,amb:.75,hemi:.5,lamp:1.8,dist:10,R:6.5,mem:.38,base:0,f0:9,f1:22},{exp:1.8,amb:1.05,hemi:.7,lamp:2.4,dist:12,R:7.5,mem:.6,base:.14,f0:14,f1:30},{exp:2.2,amb:1.4,hemi:.9,lamp:2.8,dist:14,R:9,mem:.8,base:.35,f0:20,f1:40}];
+let visR=7.5;
+function applyBright(){if(!S||!renderer||!M||M.lit)return;const b=BRIGHT[S.settings.bright??1];
+  renderer.toneMappingExposure=b.exp;world.amb.intensity=b.amb;world.hemi.intensity=b.hemi;world.lamp.intensity=b.lamp;world.lamp.distance=b.dist;
+  scene.fog.near=b.f0;scene.fog.far=b.f1;visR=b.R;visUni.mem.value=b.mem;visUni.base.value=b.base;lastVis={x:-9,z:-9}}
+function updateVis(dt){if(M.lit)return;const R=visR;
   if(Math.hypot(player.x-lastVis.x,player.z-lastVis.z)>.2){lastVis={x:player.x,z:player.z};
     for(let j=0;j<VH;j++)for(let i=0;i<VW;i++){const px=(i+.5)/VR,pz=(j+.5)/VR,d=Math.hypot(px-player.x,pz-player.z);let v=0;
       if(d<R){v=1-.7*Math.max(0,(d-R*.6)/(R*.4));if(blocked(player.x,player.z,px,pz))v=0}visTgt[j*VW+i]=v}}
@@ -728,8 +734,9 @@ function showMsg(html,ok,onOk,alt,onAlt){$('mBody').innerHTML=html;$('mOk').text
   if(alt){$('mAlt').hidden=false;$('mAlt').textContent=alt;$('mAlt').onclick=()=>{$('msg').hidden=true;onAlt&&onAlt()}}else $('mAlt').hidden=true;$('msg').hidden=false}
 function menu(){const st=S.settings;
   showMsg(`<div style="font-size:22px;margin-bottom:6px">${t('menuT')} · ${S.profile.name}</div><p>⭐ ${S.coins} · 💎 ${S.awake.length}/${CRYS.length}</p>
-    <div class="row" style="justify-content:center;margin:12px 0"><button class="chip${st.sound?' on':''}" id="sSound">${st.sound?'🔊':'🔇'} ${t('sound')}</button><button class="chip${st.autoRead?' on':''}" id="sRead">🗣️ ${t('autoRead')}</button></div>`,
+    <div class="row" style="justify-content:center;margin:12px 0"><button class="chip${st.sound?' on':''}" id="sSound">${st.sound?'🔊':'🔇'} ${t('sound')}</button><button class="chip${st.autoRead?' on':''}" id="sRead">🗣️ ${t('autoRead')}</button><button class="chip on" id="sBright">☀️ ${t('bright')}: ${t('brightLv')[st.bright??1]}</button></div>`,
     t('close'),null,t('switchPlayer'),()=>{speechSynthesis&&speechSynthesis.cancel();$('title').hidden=false;['hud','tools','zoomBox','bag'].forEach(id=>$(id).hidden=true);deco=null;drawTitle()});
+  $('sBright').onclick=()=>{st.bright=((st.bright??1)+1)%3;Store.save(S);applyBright();menu()};
   $('sSound').onclick=()=>{st.sound=!st.sound;SFX.on=st.sound;if(st.sound){SFX.init();SFX.play('coin')}Store.save(S);menu()};
   $('sRead').onclick=()=>{st.autoRead=!st.autoRead;Store.save(S);menu()}}
 function winCave(){SFX.play('win');once('clear1',winModal)}
@@ -798,9 +805,9 @@ function buildScene(name){npcs.forEach(removeSprite);npcs=[];const L={amb:world.
   M=MAPS[name];MW=M.W;MH=M.H;
   scene.fog=M.lit?new THREE.Fog(name==='village'?0x9fd4ff:0x2a2018,18,40):new THREE.Fog(0,9,22);scene.background=new THREE.Color(name==='village'?0x9fd4ff:0);
   renderer.toneMapping=M.lit?THREE.NoToneMapping:THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=M.lit?1:1.4;
-  L.amb.intensity=M.lit?(name==='village'?.55:.6):.75;L.hemi.intensity=M.lit?.45:.5;L.sun.intensity=name==='village'?.75:0;L.lamp.intensity=M.lit?.35:1.8;
+  L.amb.intensity=M.lit?(name==='village'?.55:.6):.75;L.hemi.intensity=M.lit?.45:.5;L.sun.intensity=name==='village'?.75:0;L.lamp.intensity=M.lit?.35:1.8;L.lamp.distance=M.lit?10:10;
   if(name==='cave')buildCave();else if(name==='village')buildVillage();else buildHouse();
-  world.trail=new THREE.Group();root.add(world.trail)}
+  world.trail=new THREE.Group();root.add(world.trail);applyBright()}
 function resize(){const w=innerWidth,h=innerHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
 function blockedCell(x,z){if(isWallCell(x,z))return true;return M===MAPS.house&&S.placed.some(p=>p.x===x&&p.z===z)}
 function moveSprite(sp,wx,wz,sp2){const vx=wx*sp2,vz=wz*sp2,ox=sp.x,oz=sp.z,W=(x,z)=>blockedCell(Math.floor(x),Math.floor(z));
