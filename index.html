@@ -131,6 +131,17 @@ input.name{width:100%;font:inherit;font-size:20px;padding:12px 16px;border-radiu
 .tool.act{border-color:var(--gold);background:rgba(245,192,90,.25);animation:bob 1s infinite}
 body.joyon .zoom{bottom:196px}
 @media (max-height:520px){#joy{width:124px;height:124px;left:12px;bottom:12px}#joyKnob{width:52px;height:52px;margin:-26px 0 0 -26px}body.joyon .zoom{bottom:auto;top:50px}}
+/* ---- pixel UI (stage 0.5): square corners cut by one pixel, hard 3px frame, hard drop shadow. Reads as a game, not an app.
+   Only corners and shadows change: box sizes stay the same, so layout and tap areas do not move. ---- */
+:root{--px:3px;--frame:#a8793a;--frameHi:#f5c05a}
+.pill,.tool,#toast,.card,.opt,.big,.ghost,.chip,.char,.item,#bag,#bag .slot,#dlg,#dlg .face,.kcard,.exp,input.name,.item button{border-radius:0;border-color:transparent;
+  box-shadow:0 calc(-1*var(--px)) 0 0 var(--frame),0 var(--px) 0 0 var(--frame),calc(-1*var(--px)) 0 0 0 var(--frame),var(--px) 0 0 0 var(--frame),inset 0 var(--px) 0 0 rgba(255,255,255,.07),inset 0 calc(-1*var(--px)) 0 0 rgba(0,0,0,.28),0 calc(var(--px)*2.3) 0 0 rgba(0,0,0,.35)}
+.chip.on,.char.on,#bag .slot.on{--frame:var(--frameHi)}
+.opt.ok{--frame:var(--ok)}.opt.no{--frame:var(--no)}
+.big,.item button{--frame:#8a5a1c}
+.opt,.ghost,.chip,.char,.item,#bag .slot,.kcard{--frame:#5a4a78}
+.pill,.tool,#toast,.card,#bag,#dlg{background:rgba(27,19,48,.95)}
+.pill,.tool,#toast{text-shadow:0 2px 0 rgba(0,0,0,.55)}
 </style>
 </head>
 <body>
@@ -547,7 +558,7 @@ function spriteFrame(sp){
 const box=(w,h,d,color,opts={})=>{const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),new THREE.MeshLambertMaterial({color,...opts}));return m};
 const add=(obj,x,y,z)=>{obj.position.set(x,y,z);root.add(obj);return obj};
 function label(text,x,y,z,color='#fdf6e8'){const c=document.createElement('canvas');c.width=512;c.height=96;const g=c.getContext('2d');g.font='600 44px Mitr, sans-serif';const w=Math.min(500,g.measureText(text).width+40);
-  g.fillStyle='rgba(26,19,44,.85)';g.beginPath();g.roundRect?g.roundRect((512-w)/2,14,w,68,30):g.rect((512-w)/2,14,w,68);g.fill();g.fillStyle=color;g.textAlign='center';g.textBaseline='middle';g.fillText(text,256,50);
+  {const x0=(512-w)/2,y0=14,h=68,u=6;g.fillStyle='rgba(26,19,44,.9)';g.fillRect(x0+u,y0,w-2*u,h);g.fillRect(x0,y0+u,w,h-2*u);g.fillStyle='#a8793a';g.fillRect(x0+u,y0,w-2*u,u);g.fillRect(x0+u,y0+h-u,w-2*u,u);g.fillRect(x0,y0+u,u,h-2*u);g.fillRect(x0+w-u,y0+u,u,h-2*u)}g.fillStyle=color;g.textAlign='center';g.textBaseline='middle';g.fillText(text,256,50);
   const tx=new THREE.CanvasTexture(c);tx.encoding=THREE.sRGBEncoding;const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:tx,transparent:true,depthTest:false,toneMapped:false}));sp.scale.set(2.6,.49,1);sp.position.set(x,y,z);sp.renderOrder=5;root.add(sp);return sp}
 /* ---- visibility (cave only) ---- */
 const VR=6;let VW,VH,visData,visTex,visCur,visTgt,seen,visUni={mem:{value:.38},base:{value:0}},lastVis={x:-9,z:-9};
@@ -573,8 +584,22 @@ function updateVis(dt){if(M.lit)return;const R=visR;
   for(let n=0;n<VW*VH;n++){const v=visCur[n]+=(visTgt[n]-visCur[n])*k;if(v>.35)seen[n]=1;visData[n*4]=v*255;visData[n*4+1]=seen[n]*255;visData[n*4+3]=255}
   visTex.needsUpdate=true}
 /* ---- scene builders ---- */
-function markTex(ch,bg){const c=document.createElement('canvas');c.width=c.height=64;const g=c.getContext('2d');g.fillStyle=bg;g.beginPath();g.arc(32,30,22,0,7);g.fill();g.beginPath();g.moveTo(22,46);g.lineTo(42,46);g.lineTo(32,60);g.fill();
-  g.font='bold 30px system-ui, sans-serif';g.textAlign='center';g.textBaseline='middle';g.fillStyle='#2b1d05';g.fillText(ch,32,31);const t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;return t}
+const MARK_ICON={'?':['..dddd..','.dd..dd.','.....dd.','....dd..','...dd...','...dd...','........','...dd...'],
+  '🏠':['...rr...','..rrrr..','.rrrrrr.','rrrrrrrr','.wwwwww.','.wbbwcw.','.wbbwww.','.wbbwww.'],
+  '🛒':['..dddd..','.d....d.','.d....d.','oooooooo','oyoooooo','oooooooo','oooooooo','.oooooo.'],
+  '💎':['........','.cccccc.','cwwccccc','cccccccc','.cccccc.','..cccc..','...cc...','........'],
+  '🚪':['.bbbbbb.','.bBBBBb.','.bBBBBb.','.bBByBb.','.bBBBBb.','.bBBBBb.','.bBBBBb.','.bbbbbb.']};
+const MARK_COL={d:'#2b1d05',r:'#e0584a',w:'#fff4dc',b:'#6b3f22',B:'#a8683a',c:'#5fd6ff',y:'#ffd27a',o:'#c8702a'};
+function markTex(ch,bg){const c=document.createElement('canvas');c.width=c.height=64;const g=c.getContext('2d'),U=4,cell=new Set(),px=(x,y,col)=>{g.fillStyle=col;g.fillRect(x*U,y*U,U,U)};
+  for(let y=0;y<16;y++)for(let x=0;x<16;x++){if((x-7.5)**2+(y-6.5)**2<=6.1**2||(y===13&&x>=6&&x<=9)||(y===14&&x>=7&&x<=8))cell.add(x+','+y)}
+  for(let y=0;y<16;y++)for(let x=0;x<16;x++){const k=x+','+y;if(cell.has(k))px(x,y,bg);else if([[1,0],[-1,0],[0,1],[0,-1]].some(([a,b])=>cell.has((x+a)+','+(y+b))))px(x,y,'#2b1d05')}
+  px(4,3,'rgba(255,255,255,.55)');px(5,2,'rgba(255,255,255,.55)');px(6,2,'rgba(255,255,255,.35)');
+  const ic=MARK_ICON[ch];
+  if(ic){const on=(x,y)=>y>=0&&y<8&&x>=0&&x<8&&ic[y][x]!=='.';
+    for(let y=-1;y<9;y++)for(let x=-1;x<9;x++)if(!on(x,y)&&[[1,0],[-1,0],[0,1],[0,-1]].some(([a,b])=>on(x+a,y+b)&&ic[y+b][x+a]!=='d'))px(x+4,y+3,'#2b1d05');
+    for(let y=0;y<8;y++)for(let x=0;x<8;x++)if(on(x,y))px(x+4,y+3,MARK_COL[ic[y][x]])}
+  else{g.font='bold 30px system-ui, sans-serif';g.textAlign='center';g.textBaseline='middle';g.fillStyle='#2b1d05';g.fillText(ch,32,28)}
+  const t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;t.magFilter=t.minFilter=THREE.NearestFilter;t.generateMipmaps=false;return t}
 function addMark(obj,ch,h,near,bg){const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:markTex(ch,bg||'#f5c05a'),transparent:true,depthTest:false,toneMapped:false}));sp.scale.set(.62,.62,1);sp.renderOrder=6;root.add(sp);
   world.marks.push({obj,sp,h,near,base:Math.random()*6});return sp}
 /* ---- pixel cave tileset (A-04 · PixelLab Wang 32px, 5x4 sheet). Tiles are laid on a half-cell offset grid so every
