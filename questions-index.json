@@ -1,0 +1,123 @@
+{
+ "version": 1,
+ "generated": "2026-09-25",
+ "ages": [
+  6,
+  7,
+  8
+ ],
+ "subjects": {
+  "math": {
+   "th": "คณิตศาสตร์",
+   "en": "Maths"
+  },
+  "english": {
+   "th": "ภาษาอังกฤษ",
+   "en": "English"
+  },
+  "thai": {
+   "th": "ภาษาไทย",
+   "en": "Thai"
+  },
+  "chinese": {
+   "th": "ภาษาจีน",
+   "en": "Chinese"
+  },
+  "general": {
+   "th": "วิทยาศาสตร์และความรู้รอบตัว",
+   "en": "Science & general knowledge"
+  }
+ },
+ "files": [
+  {
+   "file": "q-math-6.json",
+   "subject": "math",
+   "age": 6,
+   "count": 170
+  },
+  {
+   "file": "q-math-7.json",
+   "subject": "math",
+   "age": 7,
+   "count": 165
+  },
+  {
+   "file": "q-math-8.json",
+   "subject": "math",
+   "age": 8,
+   "count": 165
+  },
+  {
+   "file": "q-english-6.json",
+   "subject": "english",
+   "age": 6,
+   "count": 170
+  },
+  {
+   "file": "q-english-7.json",
+   "subject": "english",
+   "age": 7,
+   "count": 170
+  },
+  {
+   "file": "q-english-8.json",
+   "subject": "english",
+   "age": 8,
+   "count": 160
+  },
+  {
+   "file": "q-thai-6.json",
+   "subject": "thai",
+   "age": 6,
+   "count": 170
+  },
+  {
+   "file": "q-thai-7.json",
+   "subject": "thai",
+   "age": 7,
+   "count": 170
+  },
+  {
+   "file": "q-thai-8.json",
+   "subject": "thai",
+   "age": 8,
+   "count": 160
+  },
+  {
+   "file": "q-chinese-6.json",
+   "subject": "chinese",
+   "age": 6,
+   "count": 170
+  },
+  {
+   "file": "q-chinese-7.json",
+   "subject": "chinese",
+   "age": 7,
+   "count": 170
+  },
+  {
+   "file": "q-chinese-8.json",
+   "subject": "chinese",
+   "age": 8,
+   "count": 160
+  },
+  {
+   "file": "q-general-6.json",
+   "subject": "general",
+   "age": 6,
+   "count": 170
+  },
+  {
+   "file": "q-general-7.json",
+   "subject": "general",
+   "age": 7,
+   "count": 170
+  },
+  {
+   "file": "q-general-8.json",
+   "subject": "general",
+   "age": 8,
+   "count": 160
+  }
+ ]
+}
