@@ -1,5 +1,5 @@
 // Leah-PP service worker: network first (always newest when online), cache as backup when offline.
-const CACHE='leahpp-v7';
+const CACHE='leahpp-v10';
 const FILES=['./','index.html','manifest.json','questions-index.json',
 'q-math-6.json','q-math-7.json','q-math-8.json','q-english-6.json','q-english-7.json','q-english-8.json',
 'q-thai-6.json','q-thai-7.json','q-thai-8.json','q-chinese-6.json','q-chinese-7.json','q-chinese-8.json',

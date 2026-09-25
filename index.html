@@ -92,6 +92,36 @@ input.name{width:100%;font:inherit;font-size:20px;padding:12px 16px;border-radiu
 #dlg .say{font-size:20px;line-height:1.5;color:var(--ink);padding:0;background:none;text-align:left}
 #dlg .nx{position:absolute;right:16px;bottom:8px;color:var(--gold);font-size:14px;animation:bob 1s infinite}
 @keyframes bob{50%{transform:translateY(-3px)}}
+.kcard{background:rgba(255,255,255,.06);border:1.5px solid rgba(127,211,240,.25);border-radius:16px;padding:12px 14px;margin-bottom:10px;text-align:left;width:100%;display:block}
+.kcard .kq{font-size:17px;line-height:1.4}
+.kcard .ka{color:var(--ok);font-size:17px;margin-top:4px}
+.kcard .kx{color:var(--mute);font-size:15px;margin-top:6px;line-height:1.45}
+.kcard .ks{font-size:13px;color:var(--sky)}
+.zoom{display:grid;grid-template-columns:repeat(2,auto)}
+#rotate{position:fixed;inset:0;z-index:60;background:#0b0814;color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:24px}
+#rotate .rph{font-size:84px;animation:turn 2.2s ease-in-out infinite}
+#rotate .rtx{font-size:24px;color:var(--gold)}
+#rotate .rtx2{font-size:17px;color:var(--mute)}
+@keyframes turn{0%,30%{transform:rotate(0)}60%,100%{transform:rotate(-90deg)}}
+@media (max-height:520px){
+  .hud{top:6px;left:8px;right:8px;gap:6px}
+  .pill{padding:5px 10px;font-size:14px}
+  .tools{bottom:10px;right:10px;gap:8px}.tool{padding:6px 12px;font-size:15px}.tool .ic{font-size:20px}
+  .zoom{bottom:10px;left:10px;gap:6px}.zoom .tool{width:46px;height:46px;font-size:22px}
+  .modal{padding:8px}.card{padding:14px 16px;border-radius:20px}
+  .q{font-size:20px;margin:2px 0 6px}.opts{gap:8px}.opt{padding:10px 8px;font-size:18px;min-height:48px}
+  .exp{font-size:15px;margin-top:8px;padding:8px 10px}.big{padding:10px;font-size:17px;margin-top:8px}.ghost{padding:9px;margin-top:6px}
+  #dlg{bottom:8px;padding:8px 14px;gap:10px}#dlg .face,#dlg .face canvas{width:64px;height:64px}#dlg .say{font-size:17px}
+  .logo{margin:0 0 8px}.logo h1{font-size:28px}.lab{margin:8px 0 6px}.char canvas{width:64px;height:64px}
+  #toast{top:52px;font-size:15px;padding:7px 14px}
+  #bStart{position:sticky;bottom:6px;z-index:2;box-shadow:0 6px 18px rgba(0,0,0,.5)}
+  .chars{grid-template-columns:repeat(3,1fr);gap:8px}.char{padding:6px 4px}
+}
+#joy{position:absolute;left:18px;bottom:22px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(127,211,240,.18),rgba(127,211,240,.05));border:2px solid rgba(127,211,240,.45);touch-action:none;z-index:6}
+#joyKnob{position:absolute;left:50%;top:50%;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#d6f4fc,#5fb8d8);box-shadow:0 4px 12px rgba(0,0,0,.45);pointer-events:none}
+.tool.act{border-color:var(--gold);background:rgba(245,192,90,.25);animation:bob 1s infinite}
+body.joyon .zoom{bottom:196px}
+@media (max-height:520px){#joy{width:124px;height:124px;left:12px;bottom:12px}#joyKnob{width:52px;height:52px;margin:-26px 0 0 -26px}body.joyon .zoom{bottom:auto;top:50px}}
 </style>
 </head>
 <body>
@@ -102,10 +132,14 @@ input.name{width:100%;font:inherit;font-size:20px;padding:12px 16px;border-radiu
     <div class="pill">⭐ <b id="hCoins">0</b></div>
     <div class="pill">💎 <b id="hCrys">0</b>/<span id="hCrysT">10</span></div>
     <div class="sp"></div>
+    <button class="pill" id="bBook">📖 <b id="hBook">0</b></button>
     <button class="pill" id="bMenu">⚙️</button>
   </div>
-  <div class="zoom" id="zoomBox" hidden><button class="tool" id="zIn">+</button><button class="tool" id="zOut">−</button></div>
+  <div id="joy" hidden><div id="joyKnob"></div></div>
+  <div class="zoom" id="zoomBox" hidden><button class="tool" id="zIn">+</button><button class="tool" id="zOut">−</button><button class="tool" id="rL">⟲</button><button class="tool" id="rR">⟳</button></div>
+  <div id="rotate" hidden><div class="rph">📱</div><div class="rtx">หมุนเครื่องเป็นแนวนอนเพื่อเล่นเกม</div><div class="rtx2">Please turn your device sideways</div></div>
   <div class="tools" id="tools" hidden>
+    <button class="tool act" id="bAct" hidden><span class="ic" id="actIc">✋</span><span id="actTx"></span></button>
     <button class="tool" id="bCompass"><span class="ic">🧭</span><span id="tCompass"></span></button>
     <button class="tool" id="bWarp"><span class="ic">🔑</span><span id="tWarp"></span></button>
     <button class="tool" id="bDeco" hidden><span class="ic">🪑</span><span id="tDeco"></span></button>
@@ -122,6 +156,15 @@ input.name{width:100%;font:inherit;font-size:20px;padding:12px 16px;border-radiu
     <div class="opts" id="qOpts"></div>
     <div class="exp" id="qExp" hidden></div>
     <button class="big" id="qNext" hidden></button>
+  </div></section>
+
+  <section class="modal" id="book" hidden><div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><div style="font-size:22px" id="bkTitle"></div><div class="pill" id="bkCount"></div></div>
+    <div id="bkNext" style="color:var(--mute);margin:6px 0 10px;font-size:15px"></div>
+    <div class="row" id="bkTabs" style="margin-bottom:12px"></div>
+    <div id="bkList"></div>
+    <button class="ghost" id="bkMore" hidden></button>
+    <button class="ghost" id="bkClose"></button>
   </div></section>
 
   <section class="modal" id="shop" hidden><div class="card">
@@ -185,8 +228,11 @@ const T={th:{
    gate:[['g2','ประตูปัญญาเปิดแล้ว! ไปที่ประตูกันเถอะ ใช้กุญแจราชวัง 🔑 ก็ได้นะ']],
    clear1:[['g1','เก่งมาก {name}! แสงกลับมาทั้งถ้ำแล้ว'],['g2','ชาวบ้านต้องดีใจแน่ ๆ กลับไปเล่าให้ยายนวลฟังกัน']],
    shop1:[['nuan','อ้าว หลานมาแล้วเหรอ ยายชื่อนวล เปิดร้านนี้มาตั้งแต่แสงยังสว่างจ้า'],['nuan','ของแวววาวที่ขุดได้ในถ้ำ เอามาขายยายได้เลย แล้วเลือกของแต่งบ้านกลับไปนะจ๊ะ']],
+   book1:[['g2','ความรู้จากคริสตัลถูกบันทึกลงสมุดความรู้แล้ว ✨'],['g1','กดปุ่ม 📖 ด้านบนเปิดดูได้ทุกเมื่อ เก็บครบ 10 การ์ดได้รางวัลด้วยนะ']],
    house1:[['g2','บ้านเรายังโล่งอยู่เลย ซื้อของที่ร้านยายนวลมาแต่งกันนะ'],['g1','กดปุ่ม 🪑 จัดบ้าน แล้วแตะพื้นเพื่อวางของ']]},
-  who:'ใครจะเล่น?',add:'➕ ผู้เล่นใหม่',manage:'จัดการ',manageDone:'เสร็จ',del:'ลบผู้เล่น {n}? ของทั้งหมดของคนนี้จะหายไป',delYes:'ลบ',cancel:'ยกเลิก',back:'← กลับ',full:'มีผู้เล่นครบ {n} คนแล้ว',sound:'เสียง',autoRead:'อ่านคำถามให้ฟัง',bright:'ความสว่างในถ้ำ',brightLv:['ปกติ','สว่าง','สว่างมาก'],switchPlayer:'เปลี่ยนผู้เล่น',
+  who:'ใครจะเล่น?',add:'➕ ผู้เล่นใหม่',manage:'จัดการ',manageDone:'เสร็จ',del:'ลบผู้เล่น {n}? ของทั้งหมดของคนนี้จะหายไป',delYes:'ลบ',cancel:'ยกเลิก',back:'← กลับ',full:'มีผู้เล่นครบ {n} คนแล้ว',bkTitle:'📖 สมุดความรู้ของ{n}',bkCount:'{n} การ์ด',bkNext:'อีก {k} การ์ด ได้รางวัล {c} ⭐',bkAll:'ทั้งหมด',bkEmpty:'ยังไม่มีการ์ด ตอบคำถามถูกแล้วความรู้จะถูกบันทึกไว้ที่นี่',bkMore:'ดูเพิ่ม',bkReward:'สมุดความรู้ครบ {n} การ์ด! รางวัล +{c} ⭐',bkDone:'เก็บรางวัลสมุดครบทุกขั้นแล้ว เก่งมาก!',
+  joy:'จอย',onoff:['ปิด','เปิด'],acts:{crystal:'ตอบคำถาม',dig:'ขุด',peb:'คุยกับ Peb',gate:'ประตูปัญญา',cave:'เข้าถ้ำ',door:'เข้าบ้าน',exit:'ออก',shop:'ร้านค้า',fountain:'ดูน้ำพุ'},
+  sound:'เสียง',autoRead:'อ่านคำถามให้ฟัง',bright:'ความสว่างในถ้ำ',brightLv:['ปกติ','สว่าง','สว่างมาก'],switchPlayer:'เปลี่ยนผู้เล่น',
   it:{gem:'อัญมณีสีฟ้า',coin:'เหรียญทองโบราณ',shell:'เปลือกหอยประกาย',feather:'ขนนกวิเศษ',star:'หินรูปดาว'},
   fu:{bed:'เตียง',table:'โต๊ะ',chair:'เก้าอี้',lamp:'โคมไฟ',rug:'พรม',plant:'ต้นไม้กระถาง',shelf:'ชั้นหนังสือ',sofa:'โซฟา',chest:'หีบของเล่น',display:'แท่นโชว์คริสตัล'}},
 en:{
@@ -215,8 +261,11 @@ en:{
    gate:[['g2','The Wisdom Gate is open! Let us go. You can use the Royal Key 🔑 too.']],
    clear1:[['g1','Brilliant, {name}! The whole cave is shining again.'],['g2','The villagers will be so happy. Let us tell Granny Nuan.']],
    shop1:[['nuan','Oh, there you are, dear! I am Nuan. I have kept this shop since the days the light was bright.'],['nuan','Bring me the shiny things you dig up, and pick something nice for your home.']],
+   book1:[['g2','The crystal\'s knowledge was written into your Knowledge Book ✨'],['g1','Tap 📖 at the top to read it anytime. Collect 10 cards for a reward!']],
    house1:[['g2','Our home looks a little empty. Let us buy things at Granny Nuan\'s shop.'],['g1','Press 🪑 Decorate, then tap the floor to place things.']]},
-  who:"Who's playing?",add:'➕ New player',manage:'Manage',manageDone:'Done',del:'Delete player {n}? All their progress will be lost.',delYes:'Delete',cancel:'Cancel',back:'← Back',full:'All {n} player slots are used',sound:'Sound',autoRead:'Read questions aloud',bright:'Cave brightness',brightLv:['Normal','Bright','Very bright'],switchPlayer:'Switch player',
+  who:"Who's playing?",add:'➕ New player',manage:'Manage',manageDone:'Done',del:'Delete player {n}? All their progress will be lost.',delYes:'Delete',cancel:'Cancel',back:'← Back',full:'All {n} player slots are used',bkTitle:"📖 {n}'s Knowledge Book",bkCount:'{n} cards',bkNext:'{k} more cards for a {c} ⭐ reward',bkAll:'All',bkEmpty:'No cards yet. Answer questions correctly and the knowledge is saved here.',bkMore:'Show more',bkReward:'{n} cards in your Knowledge Book! Reward +{c} ⭐',bkDone:'All book rewards collected. Amazing!',
+  joy:'Joystick',onoff:['Off','On'],acts:{crystal:'Answer',dig:'Dig',peb:'Talk to Peb',gate:'Wisdom Gate',cave:'Enter cave',door:'Go inside',exit:'Leave',shop:'Shop',fountain:'Look'},
+  sound:'Sound',autoRead:'Read questions aloud',bright:'Cave brightness',brightLv:['Normal','Bright','Very bright'],switchPlayer:'Switch player',
   it:{gem:'a blue gem',coin:'an old gold coin',shell:'a shiny shell',feather:'a magic feather',star:'a star stone'},
   fu:{bed:'Bed',table:'Table',chair:'Chair',lamp:'Lamp',rug:'Rug',plant:'Potted plant',shelf:'Bookshelf',sofa:'Sofa',chest:'Toy chest',display:'Crystal stand'}}};
 let LANG='th';
@@ -270,8 +319,9 @@ const MAPS={
 '#.......#',
 '####E####'],wallH:2.0,lit:true}};
 // letters that block walking (drawn as objects, not walls)
-const SOLID={T:1,H:1,S:1,F:1,V:1};
-for(const k in MAPS){const m=MAPS[k];m.W=m.rows[0].length;m.H=m.rows.length;m.objs=[];m.cells=[];
+// letters that block walking, per map. In the village S is Granny Nuan's shop; in the cave S is the start spot and must stay walkable.
+const SOLID={village:{T:1,H:1,S:1,F:1,V:1},cave:{},house:{}};
+for(const k in MAPS){const m=MAPS[k];m.key=k;m.W=m.rows[0].length;m.H=m.rows.length;m.objs=[];m.cells=[];
   m.rows.forEach((row,z)=>[...row].forEach((ch,x)=>{
     const c={x:x+.5,z:z+.5};
     if(ch==='C')m.objs.push({type:'crystal',id:'c'+m.objs.filter(o=>o.type==='crystal').length,...c});
@@ -311,7 +361,7 @@ function layoutCave(seed){const r=seededRnd(seed);
 const newSeed=()=>(Math.random()*4294967295)>>>0;
 layoutCave(1);
 let M=MAPS.village,MW=M.W,MH=M.H;
-const isWallCell=(x,z)=>{if(x<0||z<0||x>=MW||z>=MH)return true;const ch=M.rows[z][x];return ch==='#'||!!SOLID[ch]};
+const isWallCell=(x,z)=>{if(x<0||z<0||x>=MW||z>=MH)return true;const ch=M.rows[z][x];return ch==='#'||!!(SOLID[M.key]||{})[ch]};
 const isWall=(x,z)=>isWallCell(Math.floor(x),Math.floor(z));
 const FALLBACK_Q=[{"age":6,"subject":"math","topic":"subtract","level":1,"answer":2,"th":{"q":"11 − 6 = ?","choices":["4","6","5","8"],"explain":"จาก 11 นับถอยหลัง 6 ได้ 5"},"en":{"q":"11 − 6 = ?","choices":["4","6","5","8"],"explain":"Count back 6 from 11 to get 5."},"id":"ma-0160"},{"age":6,"subject":"math","topic":"add","level":1,"answer":2,"th":{"q":"9 + 10 = ?","choices":["18","17","19","16"],"explain":"นับต่อจาก 9 ไปอีก 10 ได้ 19"},"en":{"q":"9 + 10 = ?","choices":["18","17","19","16"],"explain":"Count on 10 from 9 to get 19."},"id":"ma-0066"},{"age":6,"subject":"math","topic":"word-problem","level":1,"answer":0,"th":{"q":"ลีอามีดอกไม้ 5 ชิ้น ได้เพิ่มอีก 9 ชิ้น รวมเป็นกี่ชิ้น 🌸","choices":["14","12","16","11"],"explain":"5 + 9 = 14"},"en":{"q":"Leah has 5 flowers. She gets 9 more. How many now? 🌸","choices":["14","12","16","11"],"explain":"5 + 9 = 14"},"id":"ma-0092"},{"age":6,"subject":"math","topic":"word-problem","level":1,"answer":3,"th":{"q":"ลีอามีปลา 10 ชิ้น ให้เพื่อนไป 1 ชิ้น เหลือกี่ชิ้น 🐟","choices":["11","7","8","9"],"explain":"10 − 1 = 9"},"en":{"q":"Leah has 10 fish. She gives away 1. How many are left? 🐟","choices":["11","7","8","9"],"explain":"10 − 1 = 9"},"id":"ma-0167"},{"age":7,"subject":"math","topic":"subtract","level":2,"answer":0,"th":{"q":"49 − 35 = ?","choices":["14","11","17","15"],"explain":"ลบหลักสิบ แล้วลบหลักหน่วย ได้ 14"},"en":{"q":"49 − 35 = ?","choices":["14","11","17","15"],"explain":"Take away the tens, then the ones: 14."},"id":"ma-0306"},{"age":7,"subject":"math","topic":"subtract","level":2,"answer":3,"th":{"q":"52 − 12 = ?","choices":["41","43","42","40"],"explain":"ลบหลักสิบ แล้วลบหลักหน่วย ได้ 40"},"en":{"q":"52 − 12 = ?","choices":["41","43","42","40"],"explain":"Take away the tens, then the ones: 40."},"id":"ma-0178"},{"age":7,"subject":"math","topic":"subtract","level":2,"answer":0,"th":{"q":"71 − 13 = ?","choices":["58","48","57","56"],"explain":"ลบหลักสิบ แล้วลบหลักหน่วย ได้ 58"},"en":{"q":"71 − 13 = ?","choices":["58","48","57","56"],"explain":"Take away the tens, then the ones: 58."},"id":"ma-0290"},{"age":7,"subject":"math","topic":"add","level":2,"answer":3,"th":{"q":"27 + 27 = ?","choices":["57","51","44","54"],"explain":"บวกหลักสิบ แล้วบวกหลักหน่วย ได้ 54"},"en":{"q":"27 + 27 = ?","choices":["57","51","44","54"],"explain":"Add the tens, then the ones: 54."},"id":"ma-0234"},{"age":8,"subject":"math","topic":"patterns","level":3,"answer":2,"th":{"q":"เลขที่หายไปคืออะไร: 30, 55, 80, ?, 130","choices":["102","107","105","106"],"explain":"เพิ่มขึ้นทีละ 25"},"en":{"q":"What is the missing number: 30, 55, 80, ?, 130?","choices":["102","107","105","106"],"explain":"The numbers go up by 25 each time."},"id":"ma-0349"},{"age":8,"subject":"math","topic":"money","level":3,"answer":2,"th":{"q":"ซื้อของ 28 บาท จ่ายแบงก์ 100 บาท ได้เงินทอนกี่บาท","choices":["74 บาท","75 บาท","72 บาท","69 บาท"],"explain":"100 − 28 = 72 บาท"},"en":{"q":"Something costs 28 baht. You pay with 100 baht. How much change?","choices":["74 baht","75 baht","72 baht","69 baht"],"explain":"100 − 28 = 72 baht"},"id":"ma-0376"},{"age":8,"subject":"math","topic":"word-problem","level":3,"answer":3,"th":{"q":"มีแอปเปิล 12 ชิ้น แบ่งให้เพื่อน 4 คนเท่า ๆ กัน ได้คนละกี่ชิ้น 🍎","choices":["5","6","4","3"],"explain":"12 ÷ 4 = 3"},"en":{"q":"12 apples are shared equally between 4 friends. How many does each get? 🍎","choices":["5","6","4","3"],"explain":"12 ÷ 4 = 3"},"id":"ma-0364"},{"age":8,"subject":"math","topic":"add","level":3,"answer":3,"th":{"q":"530 + 324 = ?","choices":["851","864","852","854"],"explain":"บวกทีละหลัก ร้อย สิบ หน่วย ได้ 854"},"en":{"q":"530 + 324 = ?","choices":["851","864","852","854"],"explain":"Add hundreds, tens and ones: 854."},"id":"ma-0431"},{"age":6,"subject":"english","topic":"picture-word","level":1,"answer":3,"th":{"q":"ภาพนี้ภาษาอังกฤษคือคำไหน 🚗","choices":["train","boat","plane","car"],"explain":"🚗 = car (รถยนต์)"},"en":{"q":"Which word matches this picture? 🚗","choices":["train","boat","plane","car"],"explain":"🚗 is \"car\"."},"speak":"car","id":"en-0121"},{"age":6,"subject":"english","topic":"first-letter","level":1,"answer":2,"th":{"q":"คำภาษาอังกฤษของ 👨 (พ่อ) ขึ้นต้นด้วยตัวอักษรอะไร","choices":["K","O","F","W"],"explain":"father ขึ้นต้นด้วย F"},"en":{"q":"The English word for 👨 \"พ่อ\" starts with which letter?","choices":["K","O","F","W"],"explain":"\"father\" starts with F."},"speak":"father","id":"en-0064","needs":"th"},{"age":6,"subject":"english","topic":"thai-to-english","level":1,"answer":1,"th":{"q":"คำว่า \"ชีส\" ภาษาอังกฤษคือคำไหน","choices":["water","cheese","orange","egg"],"explain":"\"ชีส\" = cheese 🧀"},"en":{"q":"Which English word means \"ชีส\"?","choices":["water","cheese","orange","egg"],"explain":"\"ชีส\" is \"cheese\" 🧀."},"speak":"cheese","id":"en-0098","needs":"th"},{"age":6,"subject":"english","topic":"first-letter","level":1,"answer":1,"th":{"q":"คำภาษาอังกฤษของ 🍞 (ขนมปัง) ขึ้นต้นด้วยตัวอักษรอะไร","choices":["U","B","D","Z"],"explain":"bread ขึ้นต้นด้วย B"},"en":{"q":"The English word for 🍞 \"ขนมปัง\" starts with which letter?","choices":["U","B","D","Z"],"explain":"\"bread\" starts with B."},"speak":"bread","id":"en-0140","needs":"th"},{"age":7,"subject":"english","topic":"missing-letter","level":2,"answer":3,"th":{"q":"เติมตัวอักษรที่หายไป: ban_na 🍌","choices":["j","i","r","a"],"explain":"🍌 สะกดว่า banana"},"en":{"q":"Fill in the missing letter: ban_na 🍌","choices":["j","i","r","a"],"explain":"🍌 is spelled \"banana\"."},"speak":"banana","id":"en-0197"},{"age":7,"subject":"english","topic":"rhymes","level":2,"answer":0,"th":{"q":"คำไหนสัมผัสเสียงเดียวกับ \"house\"","choices":["blouse","sun","pig","cat"],"explain":"\"house\" กับ \"blouse\" ลงท้ายเสียงเดียวกัน"},"en":{"q":"Which word rhymes with \"house\"?","choices":["blouse","sun","pig","cat"],"explain":"\"house\" and \"blouse\" end with the same sound."},"speak":"house","id":"en-0317"},{"age":7,"subject":"english","topic":"opposites","level":2,"answer":3,"th":{"q":"คำตรงข้ามของ \"near\" (ใกล้) คือคำไหน","choices":["top","short","full","far"],"explain":"near (ใกล้) ตรงข้ามกับ far (ไกล)"},"en":{"q":"What is the opposite of \"near\"?","choices":["top","short","full","far"],"explain":"The opposite of \"near\" is \"far\"."},"speak":"near","id":"en-0234"},{"age":7,"subject":"english","topic":"opposites","level":2,"answer":3,"th":{"q":"คำตรงข้ามของ \"rich\" (รวย) คือคำไหน","choices":["far","old","new","poor"],"explain":"rich (รวย) ตรงข้ามกับ poor (จน)"},"en":{"q":"What is the opposite of \"rich\"?","choices":["far","old","new","poor"],"explain":"The opposite of \"rich\" is \"poor\"."},"speak":"rich","id":"en-0174"},{"age":8,"subject":"english","topic":"opposites","level":3,"answer":1,"th":{"q":"คำตรงข้ามของ \"bottom\" (ล่าง) คือคำไหน","choices":["soft","top","big","dark"],"explain":"bottom (ล่าง) ตรงข้ามกับ top (บน)"},"en":{"q":"What is the opposite of \"bottom\"?","choices":["soft","top","big","dark"],"explain":"The opposite of \"bottom\" is \"top\"."},"speak":"bottom","id":"en-0396"},{"age":8,"subject":"english","topic":"plurals","level":3,"answer":3,"th":{"q":"\"puppy\" มีหลายตัว/หลายอัน เขียนว่าอะไร","choices":["puppys","puppyies","puppiess","puppies"],"explain":"หนึ่ง puppy หลาย puppies"},"en":{"q":"What is the plural of \"puppy\"?","choices":["puppys","puppyies","puppiess","puppies"],"explain":"One puppy, two puppies."},"speak":"puppy","id":"en-0445"},{"age":8,"subject":"english","topic":"days-months","level":3,"answer":3,"th":{"q":"เดือน\"มิถุนายน\" ภาษาอังกฤษคือคำไหน","choices":["March","January","February","June"],"explain":"มิถุนายน = June"},"en":{"q":"Which month is \"มิถุนายน\"?","choices":["March","January","February","June"],"explain":"\"มิถุนายน\" is June."},"id":"en-0412","needs":"th"},{"age":8,"subject":"english","topic":"odd-one-out","level":3,"answer":0,"th":{"q":"คำไหนไม่ใช่อาหาร","choices":["purple","apple","grapes","cheese"],"explain":"\"purple\" ไม่ใช่อาหาร"},"en":{"q":"Which word is NOT food?","choices":["purple","apple","grapes","cheese"],"explain":"\"purple\" is not food."},"id":"en-0387"},{"age":6,"subject":"thai","topic":"alphabet","level":1,"answer":0,"th":{"q":"\"งู\" 🐍 คือตัวอักษรตัวไหน","choices":["ง","ช","ฃ","ฉ"],"explain":"ง งู"},"en":{"q":"Which Thai letter goes with \"งู\" 🐍?","choices":["ง","ช","ฃ","ฉ"],"explain":"\"งู\" is the word for the letter ง."},"speak":"งู","id":"th-0100","needs":"th"},{"age":6,"subject":"thai","topic":"picture-word","level":1,"answer":0,"th":{"q":"ภาพนี้คือคำไหน 🍚","choices":["ข้าว","สับปะรด","ไข่","กล้วย"],"explain":"🍚 คือ \"ข้าว\""},"en":{"q":"Which Thai word matches this picture? 🍚","choices":["ข้าว","สับปะรด","ไข่","กล้วย"],"explain":"🍚 is \"ข้าว\" (rice)."},"speak":"ข้าว","id":"th-0041","needs":"th"},{"age":6,"subject":"thai","topic":"alphabet","level":1,"answer":1,"th":{"q":"ต ... อะไร (ท่อง ก ไก่)","choices":["ธง","เต่า","เด็ก","มณโฑ"],"explain":"ต เต่า 🐢"},"en":{"q":"In the Thai alphabet chant, \"ต\" goes with which word?","choices":["ธง","เต่า","เด็ก","มณโฑ"],"explain":"\"ต\" goes with \"เต่า\" (turtle) 🐢."},"speak":"ต เต่า","id":"th-0019","needs":"th"},{"age":6,"subject":"thai","topic":"first-consonant","level":1,"answer":0,"th":{"q":"\"ช้าง\" 🐘 มีพยัญชนะตัวแรกคือตัวไหน","choices":["ช","ธ","ล","ศ"],"explain":"\"ช้าง\" ขึ้นต้นด้วย ช"},"en":{"q":"What is the first consonant of \"ช้าง\" 🐘?","choices":["ช","ธ","ล","ศ"],"explain":"\"ช้าง\" starts with ช."},"speak":"ช้าง","id":"th-0036","needs":"th"},{"age":7,"subject":"thai","topic":"odd-one-out","level":2,"answer":2,"th":{"q":"คำไหนไม่ใช่ธรรมชาติ","choices":["ภูเขา","ดาว","กบ","ดอกไม้"],"explain":"\"กบ\" ไม่ใช่ธรรมชาติ"},"en":{"q":"Which word is NOT nature?","choices":["ภูเขา","ดาว","กบ","ดอกไม้"],"explain":"\"กบ\" is not nature."},"id":"th-0329","needs":"th"},{"age":7,"subject":"thai","topic":"alphabet","level":1,"answer":1,"th":{"q":"\"สำเภา\" ⛵ คือตัวอักษรตัวไหน","choices":["ม","ภ","ล","ผ"],"explain":"ภ สำเภา"},"en":{"q":"Which Thai letter goes with \"สำเภา\" ⛵?","choices":["ม","ภ","ล","ผ"],"explain":"\"สำเภา\" is the word for the letter ภ."},"speak":"สำเภา","id":"th-0284","needs":"th"},{"age":7,"subject":"thai","topic":"opposites","level":2,"answer":2,"th":{"q":"คำตรงข้ามของ \"มาก\" คือคำไหน","choices":["ซ้าย","ร้องไห้","น้อย","ปิด"],"explain":"\"มาก\" ตรงข้ามกับ \"น้อย\""},"en":{"q":"Which Thai word is the opposite of \"มาก\"?","choices":["ซ้าย","ร้องไห้","น้อย","ปิด"],"explain":"\"มาก\" is the opposite of \"น้อย\"."},"speak":"มาก","id":"th-0203","needs":"th"},{"age":7,"subject":"thai","topic":"odd-one-out","level":2,"answer":0,"th":{"q":"คำไหนไม่ใช่สัตว์","choices":["ทะเล","นก","ปลา","ผึ้ง"],"explain":"\"ทะเล\" ไม่ใช่สัตว์"},"en":{"q":"Which word is NOT an animal?","choices":["ทะเล","นก","ปลา","ผึ้ง"],"explain":"\"ทะเล\" is not an animal."},"id":"th-0204","needs":"th"},{"age":8,"subject":"thai","topic":"opposites","level":2,"answer":1,"th":{"q":"คำตรงข้ามของ \"สกปรก\" คือคำไหน","choices":["ปิด","สะอาด","ออก","ใกล้"],"explain":"\"สกปรก\" ตรงข้ามกับ \"สะอาด\""},"en":{"q":"Which Thai word is the opposite of \"สกปรก\"?","choices":["ปิด","สะอาด","ออก","ใกล้"],"explain":"\"สกปรก\" is the opposite of \"สะอาด\"."},"speak":"สกปรก","id":"th-0341","needs":"th"},{"age":8,"subject":"thai","topic":"classifiers","level":3,"answer":3,"th":{"q":"ดอกไม้ 1 ___ ใช้ลักษณนามอะไร","choices":["คู่","สาย","คน","ดอก"],"explain":"ดอกไม้ 1 ดอก"},"en":{"q":"Which Thai classifier is used for \"ดอกไม้\" (flower)? ดอกไม้ 1 ___","choices":["คู่","สาย","คน","ดอก"],"explain":"We say \"ดอกไม้ 1 ดอก\"."},"speak":"ดอกไม้","id":"th-0342","needs":"th"},{"age":8,"subject":"thai","topic":"meaning","level":3,"answer":3,"th":{"q":"คำว่า \"horse\" ภาษาไทยเขียนว่าอย่างไร","choices":["ไก่","เป็ด","ลิง","ม้า"],"explain":"horse = \"ม้า\" 🐴"},"en":{"q":"How do you write \"horse\" in Thai?","choices":["ไก่","เป็ด","ลิง","ม้า"],"explain":"\"horse\" is \"ม้า\" in Thai 🐴."},"speak":"ม้า","id":"th-0394","needs":"th"},{"age":8,"subject":"thai","topic":"opposites","level":2,"answer":3,"th":{"q":"คำตรงข้ามของ \"หลัง\" คือคำไหน","choices":["ให้","ตื่น","ใหม่","หน้า"],"explain":"\"หลัง\" ตรงข้ามกับ \"หน้า\""},"en":{"q":"Which Thai word is the opposite of \"หลัง\"?","choices":["ให้","ตื่น","ใหม่","หน้า"],"explain":"\"หลัง\" is the opposite of \"หน้า\"."},"speak":"หลัง","id":"th-0396","needs":"th"},{"age":6,"subject":"chinese","topic":"picture-word","level":1,"answer":3,"th":{"q":"ภาษาจีนของภาพนี้คือคำไหน ✋","choices":["鼻子 (bízi)","耳朵 (ěrduo)","眼睛 (yǎnjing)","手 (shǒu)"],"explain":"✋ = 手 อ่านว่า shǒu แปลว่า มือ"},"en":{"q":"Which Chinese word matches this picture? ✋","choices":["鼻子 (bízi)","耳朵 (ěrduo)","眼睛 (yǎnjing)","手 (shǒu)"],"explain":"✋ is 手 (shǒu), \"hand\"."},"speak":"手","speakLang":"zh-CN","id":"zh-0029"},{"age":6,"subject":"chinese","topic":"counting","level":1,"answer":0,"th":{"q":"นับแล้วมีกี่ชิ้น ตอบเป็นภาษาจีน: 🍎🍎🍎🍎🍎🍎","choices":["六 (liù)","七 (qī)","五 (wǔ)","九 (jiǔ)"],"explain":"มี 6 ชิ้น = 六 (liù)"},"en":{"q":"Count them and answer in Chinese: 🍎🍎🍎🍎🍎🍎","choices":["六 (liù)","七 (qī)","五 (wǔ)","九 (jiǔ)"],"explain":"There are 6: 六 (liù)."},"speak":"六","speakLang":"zh-CN","id":"zh-0053"},{"age":6,"subject":"chinese","topic":"picture-word","level":1,"answer":2,"th":{"q":"ภาษาจีนของภาพนี้คือคำไหน ⬛","choices":["白色 (báisè)","蓝色 (lánsè)","黑色 (hēisè)","红色 (hóngsè)"],"explain":"⬛ = 黑色 อ่านว่า hēisè แปลว่า สีดำ"},"en":{"q":"Which Chinese word matches this picture? ⬛","choices":["白色 (báisè)","蓝色 (lánsè)","黑色 (hēisè)","红色 (hóngsè)"],"explain":"⬛ is 黑色 (hēisè), \"black\"."},"speak":"黑色","speakLang":"zh-CN","id":"zh-0057"},{"age":6,"subject":"chinese","topic":"counting","level":1,"answer":3,"th":{"q":"นับแล้วมีกี่ชิ้น ตอบเป็นภาษาจีน: 💎💎","choices":["九 (jiǔ)","八 (bā)","五 (wǔ)","二 (èr)"],"explain":"มี 2 ชิ้น = 二 (èr)"},"en":{"q":"Count them and answer in Chinese: 💎💎","choices":["九 (jiǔ)","八 (bā)","五 (wǔ)","二 (èr)"],"explain":"There are 2: 二 (èr)."},"speak":"二","speakLang":"zh-CN","id":"zh-0035"},{"age":7,"subject":"chinese","topic":"say-it","level":2,"answer":1,"th":{"q":"คำว่า \"ภูเขา\" ภาษาจีนคือคำไหน","choices":["雨 (yǔ)","山 (shān)","星星 (xīngxing)","花 (huā)"],"explain":"\"ภูเขา\" = 山 (shān)"},"en":{"q":"How do you say \"mountain\" in Chinese?","choices":["雨 (yǔ)","山 (shān)","星星 (xīngxing)","花 (huā)"],"explain":"\"mountain\" is 山 (shān)."},"speak":"山","speakLang":"zh-CN","id":"zh-0309"},{"age":7,"subject":"chinese","topic":"read-pinyin","level":2,"answer":1,"th":{"q":"一 (หนึ่ง) อ่านว่าอะไร","choices":["shí","yī","wǔ","sān"],"explain":"一 อ่านว่า yī"},"en":{"q":"How do you read 一 (\"one\")?","choices":["shí","yī","wǔ","sān"],"explain":"一 is read \"yī\"."},"speak":"一","speakLang":"zh-CN","id":"zh-0331"},{"age":7,"subject":"chinese","topic":"read-pinyin","level":2,"answer":1,"th":{"q":"上 (บน) อ่านว่าอะไร","choices":["dà","shàng","xiǎo","rén"],"explain":"上 อ่านว่า shàng"},"en":{"q":"How do you read 上 (\"up\")?","choices":["dà","shàng","xiǎo","rén"],"explain":"上 is read \"shàng\"."},"speak":"上","speakLang":"zh-CN","id":"zh-0223"},{"age":7,"subject":"chinese","topic":"read-pinyin","level":2,"answer":3,"th":{"q":"姐姐 (พี่สาว) อ่านว่าอะไร","choices":["nǎinai","mèimei","péngyou","jiějie"],"explain":"姐姐 อ่านว่า jiějie"},"en":{"q":"How do you read 姐姐 (\"older sister\")?","choices":["nǎinai","mèimei","péngyou","jiějie"],"explain":"姐姐 is read \"jiějie\"."},"speak":"姐姐","speakLang":"zh-CN","id":"zh-0217"},{"age":8,"subject":"chinese","topic":"number-math","level":3,"answer":2,"th":{"q":"三 + 五 = ? (ตอบเป็นตัวจีน)","choices":["三","九","八","七"],"explain":"3 + 5 = 8 = 八 (bā)"},"en":{"q":"三 + 五 = ? (answer in Chinese)","choices":["三","九","八","七"],"explain":"3 + 5 = 8, which is 八 (bā)."},"speak":"八","speakLang":"zh-CN","id":"zh-0391"},{"age":8,"subject":"chinese","topic":"number-math","level":3,"answer":1,"th":{"q":"二 + 二 = ? (ตอบเป็นตัวจีน)","choices":["九","四","二","三"],"explain":"2 + 2 = 4 = 四 (sì)"},"en":{"q":"二 + 二 = ? (answer in Chinese)","choices":["九","四","二","三"],"explain":"2 + 2 = 4, which is 四 (sì)."},"speak":"四","speakLang":"zh-CN","id":"zh-0439"},{"age":8,"subject":"chinese","topic":"pinyin","level":3,"answer":2,"th":{"q":"พินอิน \"píngguǒ\" เขียนเป็นตัวจีนว่าอะไร","choices":["米饭","牛奶","苹果","鸡蛋"],"explain":"píngguǒ = 苹果 (แอปเปิล)"},"en":{"q":"Which characters are written \"píngguǒ\" in pinyin?","choices":["米饭","牛奶","苹果","鸡蛋"],"explain":"\"píngguǒ\" is written 苹果 (\"apple\")."},"speak":"苹果","speakLang":"zh-CN","id":"zh-0417"},{"age":8,"subject":"chinese","topic":"number-math","level":3,"answer":0,"th":{"q":"四 + 二 = ? (ตอบเป็นตัวจีน)","choices":["六","五","七","二"],"explain":"4 + 2 = 6 = 六 (liù)"},"en":{"q":"四 + 二 = ? (answer in Chinese)","choices":["六","五","七","二"],"explain":"4 + 2 = 6, which is 六 (liù)."},"speak":"六","speakLang":"zh-CN","id":"zh-0346"},{"age":6,"subject":"general","topic":"animal-homes","level":1,"answer":2,"th":{"q":"สัตว์ตัวไหนอาศัยอยู่ในน้ำ","choices":["เสือชีตาห์ 🐆","แมลงวัน 🪰","ฉลาม 🦈","นกฮูก 🦉"],"explain":"ฉลามอาศัยอยู่ในน้ำ"},"en":{"q":"Which animal lives in water?","choices":["cheetah 🐆","fly 🪰","shark 🦈","owl 🦉"],"explain":"The shark lives in water."},"id":"gk-0093"},{"age":6,"subject":"general","topic":"animal-size","level":1,"answer":0,"th":{"q":"สัตว์ตัวไหนตัวใหญ่ที่สุด","choices":["ฮิปโป 🦛","แพะ 🐐","แมว 🐱","หนู 🐭"],"explain":"ฮิปโปตัวใหญ่ที่สุดในกลุ่มนี้"},"en":{"q":"Which animal is the biggest?","choices":["hippo 🦛","goat 🐐","cat 🐱","mouse 🐭"],"explain":"The hippo is the biggest here."},"id":"gk-0107"},{"age":6,"subject":"general","topic":"transport","level":1,"answer":1,"th":{"q":"พาหนะไหนแล่นในน้ำ","choices":["รถบัส","เรือ ⛵","รถไฟ","จักรยาน"],"explain":"เรือแล่นบนน้ำ"},"en":{"q":"Which vehicle travels on water?","choices":["a bus","a boat ⛵","a train","a bicycle"],"explain":"Boats travel on water."},"id":"gk-0043"},{"age":6,"subject":"general","topic":"animal-homes","level":1,"answer":1,"th":{"q":"ปลา 🐟 อาศัยอยู่ที่ไหน","choices":["รังผึ้ง","แม่น้ำหรือบ่อน้ำ","คอกม้า","โพรงใต้ดิน"],"explain":"ปลาอาศัยอยู่ในแม่น้ำหรือบ่อน้ำ"},"en":{"q":"Where does a fish 🐟 live?","choices":["a hive","a pond or river","a stable","a burrow"],"explain":"A fish lives in a pond or river."},"id":"gk-0038"},{"age":7,"subject":"general","topic":"animal-bodies","level":2,"answer":2,"th":{"q":"ตัวของแมว 🐱 ปกคลุมด้วยอะไร","choices":["ขนนก","เกล็ด","ขน","ผิวเรียบลื่นชุ่มชื้น"],"explain":"แมวมีขน"},"en":{"q":"What covers a cat 🐱's body?","choices":["feathers","scales","fur","smooth, damp skin"],"explain":"A cat is covered with fur."},"id":"gk-0238"},{"age":7,"subject":"general","topic":"colours","level":2,"answer":1,"th":{"q":"สีดำผสมสีขาวได้สีอะไร","choices":["สีแดง","สีเทา","สีส้ม","สีเหลือง"],"explain":"ดำ + ขาว = เทา"},"en":{"q":"Black mixed with white makes which colour?","choices":["red","grey","orange","yellow"],"explain":"Black + white = grey."},"id":"gk-0187"},{"age":7,"subject":"general","topic":"animal-legs","level":2,"answer":3,"th":{"q":"สัตว์ตัวไหนมี 2 ขา","choices":["แพะ 🐐","วัว 🐄","กิ้งก่าคาเมเลียน 🦎","เป็ด 🦆"],"explain":"เป็ดมี 2 ขา"},"en":{"q":"Which animal has 2 legs?","choices":["goat 🐐","cow 🐄","chameleon 🦎","duck 🦆"],"explain":"A duck has 2 legs."},"id":"gk-0255"},{"age":7,"subject":"general","topic":"animal-groups","level":2,"answer":2,"th":{"q":"สัตว์ตัวไหนเป็นสัตว์เลี้ยงลูกด้วยนม","choices":["นกอินทรี 🦅","นกกระจอกเทศ 🪶","ควาย 🐃","เพนกวิน 🐧"],"explain":"ควายให้นมลูก จึงเป็นสัตว์เลี้ยงลูกด้วยนม"},"en":{"q":"Which animal is a mammal?","choices":["eagle 🦅","ostrich 🪶","buffalo 🐃","penguin 🐧"],"explain":"The buffalo feeds its babies milk, so it is a mammal."},"id":"gk-0248"},{"age":8,"subject":"general","topic":"animal-babies","level":3,"answer":3,"th":{"q":"ลูกของหมา 🐶 ภาษาอังกฤษเรียกว่าอะไร","choices":["piglet","chick","pup","puppy"],"explain":"ลูกหมา เรียกว่า puppy"},"en":{"q":"What is a baby dog 🐶 called?","choices":["piglet","chick","pup","puppy"],"explain":"A baby dog is called a puppy."},"id":"gk-0495"},{"age":8,"subject":"general","topic":"animal-babies","level":3,"answer":3,"th":{"q":"ลูกของโลมา 🐬 ภาษาอังกฤษเรียกว่าอะไร","choices":["caterpillar","piglet","puppy","calf"],"explain":"ลูกโลมา เรียกว่า calf"},"en":{"q":"What is a baby dolphin 🐬 called?","choices":["caterpillar","piglet","puppy","calf"],"explain":"A baby dolphin is called a calf."},"id":"gk-0491"},{"age":8,"subject":"general","topic":"animal-groups","level":3,"answer":1,"th":{"q":"สัตว์ตัวไหนไม่ใช่สัตว์เลี้ยงลูกด้วยนม","choices":["หนู 🐭","งู 🐍","สิงโต 🦁","วัว 🐄"],"explain":"งูเป็นสัตว์เลื้อยคลาน ไม่ได้ให้นมลูก"},"en":{"q":"Which one is NOT a mammal?","choices":["mouse 🐭","snake 🐍","lion 🦁","cow 🐄"],"explain":"A snake is a reptile; it does not feed its babies milk."},"id":"gk-0341"},{"age":8,"subject":"general","topic":"animal-babies","level":3,"answer":1,"th":{"q":"ลูกของหนู 🐭 ภาษาอังกฤษเรียกว่าอะไร","choices":["tadpole","pup","kitten","calf"],"explain":"ลูกหนู เรียกว่า pup"},"en":{"q":"What is a baby mouse 🐭 called?","choices":["tadpole","pup","kitten","calf"],"explain":"A baby mouse is called a pup."},"id":"gk-0493"}];
 const QB={all:[],fallback:false,
@@ -351,7 +401,7 @@ const newId=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
 function upgrade(s){if(!s)return null;
   if(s.v===1)s={...s,v:2,bag:{},furn:{},placed:[],scene:'village'};
   if(s.v===2)s={...s,v:3,id:s.id||newId(),settings:{sound:true,autoRead:(s.profile&&s.profile.age)<=6}};
-  if(s.v===3){if(s.caveSeed===undefined)s.caveSeed=newSeed();if(s.skill===undefined)s.skill=0;if(!s.wrong)s.wrong=[];if(!s.seen)s.seen=s.introSeen?['intro']:[]}
+  if(s.v===3){if(!s.book)s.book=[];if(s.bookPaid===undefined)s.bookPaid=0;if(s.caveSeed===undefined)s.caveSeed=newSeed();if(s.skill===undefined)s.skill=0;if(!s.wrong)s.wrong=[];if(!s.seen)s.seen=s.introSeen?['intro']:[]}
   return s.v===SAVE_VERSION?s:null}
 const Store={
   ls(k,v){try{if(v===undefined)return JSON.parse(localStorage.getItem(k)||'null');if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,JSON.stringify(v))}catch(e){return null}},
@@ -384,14 +434,17 @@ addEventListener('pointerdown',()=>SFX.init(),{passive:true});
 
 /* ================= 4. GAME RULES (commands) ================= */
 let S=null;
-function newState(p){return{v:SAVE_VERSION,id:newId(),caveSeed:newSeed(),skill:0,wrong:[],seen:[],settings:{sound:true,autoRead:p.age<=6},profile:p,coins:0,awake:[],dug:[],asked:[],peb:false,clears:0,introSeen:false,bag:{},furn:{},placed:[],scene:'village',log:[]}}
+function newState(p){return{v:SAVE_VERSION,id:newId(),caveSeed:newSeed(),skill:0,wrong:[],book:[],bookPaid:0,seen:[],settings:{sound:true,autoRead:p.age<=6},profile:p,coins:0,awake:[],dug:[],asked:[],peb:false,clears:0,introSeen:false,bag:{},furn:{},placed:[],scene:'village',log:[]}}
 const REWARD={crystal:{6:5,7:6,8:8},peb:10};
+const BOOK_STEPS=[[10,10],[25,20],[50,40],[100,80],[200,150],[400,250]];
 function rollItem(){const ks=Object.keys(ITEMS),tot=ks.reduce((a,k)=>a+ITEMS[k].w,0);let r=Math.random()*tot;for(const k of ks){r-=ITEMS[k].w;if(r<=0)return k}return ks[0]}
 function command(type,data){
   let out={ok:true};
   if(type==='answer'){S.asked.push(data.qid);if(S.asked.length>400)S.asked.shift();
     S.skill=Math.max(-1.5,Math.min(1.5,(S.skill||0)+(data.correct?.2:-.3)));
     S.wrong=(S.wrong||[]).filter(i=>i!==data.qid);if(!data.correct){S.wrong.push(data.qid);if(S.wrong.length>20)S.wrong.shift()}
+    if(data.correct){S.book=S.book||[];if(!S.book.includes(data.qid)){S.book.push(data.qid);out.newCard=true;
+      S.bookPaid=S.bookPaid||0;const st=BOOK_STEPS.find(([n])=>n>S.bookPaid&&S.book.length>=n);if(st){S.bookPaid=st[0];S.coins+=st[1];out.bookReward=st}}}
     if(data.correct&&data.target.type==='crystal'&&!S.awake.includes(data.target.id)){S.awake.push(data.target.id);out.coins=REWARD.crystal[S.profile.age]||5;S.coins+=out.coins}
     if(data.correct&&data.target.type==='peb'&&!S.peb){S.peb=true;out.coins=REWARD.peb;S.coins+=out.coins}}
   else if(type==='dig'){if(S.dug.includes(data.id))out.ok=false;else{S.dug.push(data.id);out.item=rollItem();S.bag[out.item]=(S.bag[out.item]||0)+1}}
@@ -558,18 +611,20 @@ function drawFurniture(){if(!world.furn)return;world.furn.clear();for(const p of
 /* ================= 6. INPUT ================= */
 const keys={};let ptr=new Map(),pinch0=0,zoom0=1,tap0=null;
 function bindInput(){
-  addEventListener('keydown',e=>{if(e.target&&e.target.tagName==='INPUT')return;if(!$('dlg').hidden&&(e.key==='Enter'||e.key===' '||e.key==='e')){e.preventDefault();nextLine();return}keys[e.key.toLowerCase()]=1;if(e.key.startsWith('Arrow'))e.preventDefault();if((e.key==='e'||e.key==='Enter')&&!modalOpen())act('interact');if(e.key==='c')act('compass');if(e.key==='g')act('warp')});
+  addEventListener('keydown',e=>{if(e.target&&e.target.tagName==='INPUT')return;if(!$('dlg').hidden&&(e.key==='Enter'||e.key===' '||e.key==='e')){e.preventDefault();nextLine();return}keys[e.key.toLowerCase()]=1;if(e.key.startsWith('Arrow'))e.preventDefault();if((e.key==='e'||e.key==='Enter')&&!modalOpen())act('interact');if(e.key==='c')act('compass');if(e.key==='q')yawT+=Math.PI/4;if(e.key==='r')yawT-=Math.PI/4;if(e.key==='g')act('warp')});
   addEventListener('keyup',e=>{keys[e.key.toLowerCase()]=0});
   const cv=renderer.domElement;
-  cv.addEventListener('pointerdown',e=>{ptr.set(e.pointerId,{x:e.clientX,y:e.clientY});tap0=ptr.size===1?{x:e.clientX,y:e.clientY,t:performance.now(),id:e.pointerId}:null;if(ptr.size===2){const a=[...ptr.values()];pinch0=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);zoom0=zoomT}});
+  cv.addEventListener('pointerdown',e=>{ptr.set(e.pointerId,{x:e.clientX,y:e.clientY,sx:e.clientX,sy:e.clientY,type:e.pointerType,drag:false});tap0=ptr.size===1?{x:e.clientX,y:e.clientY,t:performance.now(),id:e.pointerId}:null;if(ptr.size===2){const a=[...ptr.values()];pinch0=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);zoom0=zoomT}});
   addEventListener('pointermove',e=>{const q=ptr.get(e.pointerId);if(!q)return;const dx=e.clientX-q.x;q.x=e.clientX;q.y=e.clientY;
-    if(ptr.size===2&&pinch0){const a=[...ptr.values()];zoomT=clampZ(zoom0*pinch0/Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y))}else if(ptr.size===1)yawT-=dx*.007});
-  const up=e=>{if(tap0&&e.pointerId===tap0.id){const mv=Math.hypot(e.clientX-tap0.x,e.clientY-tap0.y);if(mv<12&&performance.now()-tap0.t<450)act('tap',{sx:e.clientX,sy:e.clientY})}tap0=null;ptr.delete(e.pointerId);if(ptr.size<2)pinch0=0};
+    if(ptr.size===2&&pinch0){const a=[...ptr.values()];zoomT=clampZ(zoom0*pinch0/Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y))}
+    else if(ptr.size===1&&q.type==='mouse'){if(!q.drag&&Math.hypot(e.clientX-q.sx,e.clientY-q.sy)>6)q.drag=true;if(q.drag)yawT-=dx*.007}});
+  const up=e=>{if(tap0&&e.pointerId===tap0.id){const mv=Math.hypot(e.clientX-tap0.x,e.clientY-tap0.y),q=ptr.get(e.pointerId);if(e.type==='pointerup'&&mv<22&&performance.now()-tap0.t<1200&&!(q&&q.drag))act('tap',{sx:tap0.x,sy:tap0.y})}tap0=null;ptr.delete(e.pointerId);if(ptr.size<2)pinch0=0};
   addEventListener('pointerup',up);addEventListener('pointercancel',up);
   addEventListener('wheel',e=>{zoomT=clampZ(zoomT*Math.exp(e.deltaY*.0012))},{passive:true});
   ['gesturestart','gesturechange'].forEach(ev=>document.addEventListener(ev,e=>e.preventDefault(),{passive:false}));
+  $('rL').onclick=()=>{yawT+=Math.PI/4};$('rR').onclick=()=>{yawT-=Math.PI/4};
   $('zIn').onclick=()=>zoomT=clampZ(zoomT/1.25);$('zOut').onclick=()=>zoomT=clampZ(zoomT*1.25);
-  $('bCompass').onclick=()=>act('compass');$('bWarp').onclick=()=>act('warp');$('bMenu').onclick=()=>act('menu');$('bDeco').onclick=()=>toggleDeco();
+  $('bCompass').onclick=()=>act('compass');$('bWarp').onclick=()=>act('warp');$('bBook').onclick=()=>{if(S&&!modalOpen())openBook()};$('bkClose').onclick=()=>{$('book').hidden=true};$('bMenu').onclick=()=>act('menu');$('bDeco').onclick=()=>toggleDeco();
 }
 const padPrev={};
 function readPad(){if(!navigator.getGamepads)return null;let p=null;for(const q of navigator.getGamepads())if(q&&q.connected){p=q;break}if(!p)return null;
@@ -579,7 +634,7 @@ function readPad(){if(!navigator.getGamepads)return null;let p=null;for(const q 
   if(edge(0)){if(modalOpen())padConfirm();else act('interact')}if(edge(2))act('compass');if(edge(3))act('warp');
   return x||y?{x,y}:null}
 function padConfirm(){if(!$('dlg').hidden){nextLine();return}const b=[...document.querySelectorAll('.modal:not([hidden]) .big:not([hidden])')][0];if(b)b.click()}
-const modalOpen=()=>!$('dlg').hidden||!$('quiz').hidden||!$('msg').hidden||!$('title').hidden||!$('shop').hidden;
+const modalOpen=()=>!$('dlg').hidden||!$('quiz').hidden||!$('msg').hidden||!$('title').hidden||!$('shop').hidden||!$('book').hidden;
 
 /* ================= 7. ACTIONS ================= */
 function screenToGround(sx,sy){const r=renderer.domElement.getBoundingClientRect(),rc=new THREE.Raycaster();rc.setFromCamera(new THREE.Vector2((sx-r.left)/r.width*2-1,-(sy-r.top)/r.height*2+1),camera);
@@ -634,12 +689,12 @@ function drawTrail(p){world.trail.clear();if(!p)return;const m=new THREE.MeshBas
 function warp(){const p={x:CAVE.gatePos.x,z:CAVE.gatePos.z+1.2};player.x=p.x;player.z=p.z;player.path=null;if(peb.follow){peb.x=p.x+.8;peb.z=p.z+.4}burst(p.x,p.z,0xff9ad5);SFX.play('magic');toast(gateIsOpen()?t('gateOpen'):t('warped'))}
 /* ---- scene change ---- */
 function goScene(to,spawn,instant){
-  const doIt=()=>{command('scene',{to});deco&&toggleDeco(false);if(to==='cave')layoutCave(S.caveSeed);buildScene(to);
+  const doIt=()=>{yaw=yawT=0;command('scene',{to});deco&&toggleDeco(false);if(to==='cave')layoutCave(S.caveSeed);buildScene(to);
     const m=MAPS[to];const p=spawn==='fromCave'?m.startFromCave:spawn==='fromHouse'?{x:5.5,z:5.3}:m.start;
     player.x=p.x;player.z=p.z;player.path=null;pending=null;player.hz=to==='village'&&spawn==='fromCave'?-1:1;player.hx=0;
     peb.x=p.x+.9;peb.z=p.z+.3;const showPeb=to==='cave'||S.peb;peb.mesh.visible=peb.ghost.visible=peb.shadow.visible=showPeb;
     if(to==='cave'&&!S.peb){const po=CAVE.objs.find(o=>o.type==='peb');peb.x=po.x;peb.z=po.z}
-    applyStateToView();refreshHUD();$('fade').style.opacity=0;
+    unstick(player);applyStateToView();refreshHUD();$('fade').style.opacity=0;
     if(S.seen&&S.seen.includes('intro')){if(to==='cave')once('cave1');if(to==='house')once('house1')}};
   if(instant)return doIt();SFX.play('door');$('fade').style.opacity=1;setTimeout(doIt,360)}
 
@@ -664,7 +719,28 @@ function answer(k){if(!quizCur||quizCur.done)return;quizCur.done=true;const{q,ta
   $('qNext').onclick=()=>{$('quiz').hidden=true;quizCur=null;
     if(ok&&target.type==='crystal'){wakeCrystal(target.id,true);SFX.play('wake');toast(t('awake',{n:r.coins||0}));if(gateIsOpen()){openGate(true);once('gate')}else if(S.awake.length===5)once('half')}
     else if(ok&&target.type==='peb'){pebFriend(true);say(t('dlg').pebFriend)}
-    else toast(t('tryLater'))}}
+    else toast(t('tryLater'));
+    if(r.bookReward)setTimeout(()=>{SFX.play('coin');toast(t('bkReward',{n:r.bookReward[0],c:r.bookReward[1]}))},900);
+    if(r.newCard)setTimeout(()=>{if($('dlg').hidden&&$('quiz').hidden)once('book1')},1200)}}
+
+/* ================= 8a. ON-SCREEN JOYSTICK + ACTION BUTTON ================= */
+const JOY={x:0,y:0,id:null};
+function joyWanted(){return S&&S.settings&&S.settings.joy!==undefined?!!S.settings.joy:matchMedia('(pointer:coarse)').matches}
+function applyJoy(){const on=!!S&&$('title').hidden&&joyWanted()&&!deco;$('joy').hidden=!on;document.body.classList.toggle('joyon',on);if(!on){JOY.x=JOY.y=0;$('joyKnob').style.transform=''}}
+function bindJoy(){const el=$('joy'),kn=$('joyKnob');
+  const set=e=>{const r=el.getBoundingClientRect();let dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2);const lim=r.width*.31,m=Math.hypot(dx,dy);if(m>lim){dx*=lim/m;dy*=lim/m}
+    kn.style.transform=`translate(${dx}px,${dy}px)`;JOY.x=dx/lim;JOY.y=dy/lim};
+  el.addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();JOY.id=e.pointerId;try{el.setPointerCapture(e.pointerId)}catch(x){}set(e);SFX.init()});
+  el.addEventListener('pointermove',e=>{if(e.pointerId===JOY.id)set(e)});
+  const end=e=>{if(e.pointerId!==JOY.id)return;JOY.id=null;JOY.x=JOY.y=0;kn.style.transform=''};
+  ['pointerup','pointercancel','lostpointercapture'].forEach(n=>el.addEventListener(n,end));
+  $('bAct').onclick=()=>act('interact')}
+const ACT_IC={crystal:'💎',dig:'⛏️',peb:'🪨',gate:'🚪',cave:'💎',door:'🏠',exit:'🚪',shop:'🛒',fountain:'⛲'};
+let actT=0;
+function updateActBtn(dt){actT-=dt;if(actT>0)return;actT=.15;let o=null;
+  if(S&&player&&!modalOpen()&&!deco){o=objAt(player.x,player.z,1.4);
+    if(o&&o.type==='crystal'&&S.awake.includes(o.id))o=null;if(o&&o.type==='dig'&&S.dug.includes(o.id))o=null}
+  const b=$('bAct');b.hidden=!o;if(o){$('actIc').textContent=ACT_IC[o.type]||'✋';$('actTx').textContent=(t('acts')[o.type]||'')}}
 
 /* ================= 8b. DIALOGUE ================= */
 const FACE={leah:['leahIdle',14,4,36],dad:['dadIdle',10,0,44],mom:['momIdle',12,0,40],peb:['pebIdle',4,4,56],nuan:['nuanIdle',12,0,40]};
@@ -682,6 +758,23 @@ function nextLine(){const l=DLG.queue.shift();
   SFX.play('tap');if(S.settings.autoRead)speak(txt,LANG==='th'?'th-TH':'en-GB')}
 function once(key,cb){if(!S.seen)S.seen=[];if(S.seen.includes(key)){cb&&cb();return false}S.seen.push(key);Store.save(S);say(t('dlg')[key],cb);return true}
 
+/* ================= 8c. KNOWLEDGE BOOK ================= */
+let bookTab='all',bookShow=30;
+function openBook(){bookTab='all';bookShow=30;$('book').hidden=false;drawBook()}
+function drawBook(){const cards=(S.book||[]).map(id=>QB.all.find(q=>q.id===id)).filter(Boolean).reverse();
+  $('bkTitle').textContent=t('bkTitle',{n:S.profile.name});$('bkCount').textContent=t('bkCount',{n:S.book.length});$('bkClose').textContent=t('close');
+  const nx=BOOK_STEPS.find(([n])=>n>(S.bookPaid||0));$('bkNext').textContent=nx?t('bkNext',{k:nx[0]-S.book.length,c:nx[1]}):t('bkDone');
+  const subs=['all',...Object.keys(t('subj')).filter(k=>cards.some(q=>q.subject===k))];
+  const tb=$('bkTabs');tb.innerHTML='';for(const k of subs){const b=document.createElement('button');b.className='chip'+(bookTab===k?' on':'');const n=k==='all'?cards.length:cards.filter(q=>q.subject===k).length;
+    b.textContent=(k==='all'?t('bkAll'):t('subj')[k])+' '+n;b.onclick=()=>{bookTab=k;bookShow=30;drawBook()};tb.appendChild(b)}
+  const list=cards.filter(q=>bookTab==='all'||q.subject===bookTab),L=$('bkList');L.innerHTML='';
+  if(!list.length){L.innerHTML=`<div class="empty">${t('bkEmpty')}</div>`}
+  for(const q of list.slice(0,bookShow)){const Lq=q[LANG],d=document.createElement('button');d.className='kcard';
+    d.innerHTML=`<div class="ks">${t('subj')[q.subject]||q.subject}</div><div class="kq"></div><div class="ka"></div><div class="kx" hidden></div>`;
+    d.querySelector('.kq').textContent=Lq.q;d.querySelector('.ka').textContent='✓ '+Lq.choices[q.answer];d.querySelector('.kx').textContent=Lq.explain;
+    d.onclick=()=>{const x=d.querySelector('.kx');x.hidden=!x.hidden;if(!x.hidden&&S.settings.autoRead)speak(Lq.q+' '+Lq.choices[q.answer]+'. '+Lq.explain,LANG==='th'?'th-TH':'en-GB')};L.appendChild(d)}
+  $('bkMore').hidden=list.length<=bookShow;$('bkMore').textContent=t('bkMore');$('bkMore').onclick=()=>{bookShow+=30;drawBook()}}
+
 /* ================= 9. SHOP & HOUSE ================= */
 let shopTab='sell';
 function openShop(tab){shopTab=tab;$('shop').hidden=false;drawShop()}
@@ -698,7 +791,7 @@ function drawShop(){
   else for(const k in FURN){const f=FURN[k];const d=document.createElement('div');d.className='item';d.innerHTML=`<div class="em">${f.em}</div><div>${t('fu')[k]}${S.furn[k]?' · 🎒'+S.furn[k]:''}</div><div class="pr">${f.price} ⭐</div>`;
     const b=document.createElement('button');b.textContent=t('buyBtn');b.disabled=S.coins<f.price;b.onclick=()=>{const r=command('buy',{furn:k});if(r.ok){SFX.play('coin');toast(t('bought',{x:t('fu')[k]}));drawShop()}else toast(t('poor'))};d.appendChild(b);g.appendChild(d)}
 }
-function toggleDeco(force){deco=force===undefined?!deco:force;if(deco)deco={sel:Object.keys(S.furn)[0]||null};$('bag').hidden=!deco;const lift=deco?'calc(118px + env(safe-area-inset-bottom,0px))':'';$('tools').style.bottom=lift;$('zoomBox').style.bottom=lift;$('tDeco').textContent=deco?t('decoDone'):t('deco');drawBag();drawGrid();if(deco)toast(Object.keys(S.furn).length||S.placed.length?t('decoHint'):t('bagEmpty'))}
+function toggleDeco(force){deco=force===undefined?!deco:force;if(deco)deco={sel:Object.keys(S.furn)[0]||null};applyJoy();$('bag').hidden=!deco;const lift=deco?'calc(118px + env(safe-area-inset-bottom,0px))':'';$('tools').style.bottom=lift;$('zoomBox').style.bottom=lift;$('tDeco').textContent=deco?t('decoDone'):t('deco');drawBag();drawGrid();if(deco)toast(Object.keys(S.furn).length||S.placed.length?t('decoHint'):t('bagEmpty'))}
 function drawBag(){if(!deco)return;const b=$('bag');b.innerHTML='';const ks=Object.keys(S.furn);
   if(!ks.length){b.innerHTML=`<div style="padding:6px 10px;color:var(--mute)">${t('bagEmpty')}</div>`;return}
   if(!S.furn[deco.sel])deco.sel=ks[0];
@@ -728,14 +821,15 @@ function applyStateToView(){
   if(world.orb){const k=S.awake.length/CRYS.length+Math.min(S.clears,5)*.2;world.orbLight.intensity=.4+k*1.2;world.orb.mat.emissive.setRGB(.1+k*.2,.5+k*.3,.72+k*.2)}
   const inCave=M===CAVE,inHouse=M===MAPS.house;$('bCompass').hidden=$('bWarp').hidden=!inCave;$('bDeco').hidden=!inHouse;$('tDeco').textContent=t('deco');
 }
-function refreshHUD(){if(!S)return;$('hName').textContent=S.profile.name;$('hCoins').textContent=S.coins;$('hCrys').textContent=S.awake.length;$('hCrysT').textContent=CRYS.length;$('tCompass').textContent=t('compass');$('tWarp').textContent=t('warp');if(!$('shop').hidden)$('shopCoins').textContent=S.coins}
+function refreshHUD(){if(!S)return;$('hBook').textContent=(S.book||[]).length;$('hName').textContent=S.profile.name;$('hCoins').textContent=S.coins;$('hCrys').textContent=S.awake.length;$('hCrysT').textContent=CRYS.length;$('tCompass').textContent=t('compass');$('tWarp').textContent=t('warp');if(!$('shop').hidden)$('shopCoins').textContent=S.coins}
 let toastT=0;function toast(m){const el=$('toast');el.textContent=m;el.style.opacity=1;toastT=3.2}
 function showMsg(html,ok,onOk,alt,onAlt){$('mBody').innerHTML=html;$('mOk').textContent=ok;$('mOk').onclick=()=>{$('msg').hidden=true;onOk&&onOk()};
   if(alt){$('mAlt').hidden=false;$('mAlt').textContent=alt;$('mAlt').onclick=()=>{$('msg').hidden=true;onAlt&&onAlt()}}else $('mAlt').hidden=true;$('msg').hidden=false}
 function menu(){const st=S.settings;
   showMsg(`<div style="font-size:22px;margin-bottom:6px">${t('menuT')} · ${S.profile.name}</div><p>⭐ ${S.coins} · 💎 ${S.awake.length}/${CRYS.length}</p>
-    <div class="row" style="justify-content:center;margin:12px 0"><button class="chip${st.sound?' on':''}" id="sSound">${st.sound?'🔊':'🔇'} ${t('sound')}</button><button class="chip${st.autoRead?' on':''}" id="sRead">🗣️ ${t('autoRead')}</button><button class="chip on" id="sBright">☀️ ${t('bright')}: ${t('brightLv')[st.bright??1]}</button></div>`,
-    t('close'),null,t('switchPlayer'),()=>{speechSynthesis&&speechSynthesis.cancel();$('title').hidden=false;['hud','tools','zoomBox','bag'].forEach(id=>$(id).hidden=true);deco=null;drawTitle()});
+    <div class="row" style="justify-content:center;margin:12px 0"><button class="chip${st.sound?' on':''}" id="sSound">${st.sound?'🔊':'🔇'} ${t('sound')}</button><button class="chip${st.autoRead?' on':''}" id="sRead">🗣️ ${t('autoRead')}</button><button class="chip on" id="sBright">☀️ ${t('bright')}: ${t('brightLv')[st.bright??1]}</button><button class="chip${joyWanted()?' on':''}" id="sJoy">🕹️ ${t('joy')}: ${t('onoff')[joyWanted()?1:0]}</button></div>`,
+    t('close'),null,t('switchPlayer'),()=>{speechSynthesis&&speechSynthesis.cancel();$('title').hidden=false;['hud','tools','zoomBox','bag','joy'].forEach(id=>$(id).hidden=true);document.body.classList.remove('joyon');deco=null;drawTitle()});
+  $('sJoy').onclick=()=>{st.joy=!joyWanted();Store.save(S);applyJoy();menu()};
   $('sBright').onclick=()=>{st.bright=((st.bright??1)+1)%3;Store.save(S);applyBright();menu()};
   $('sSound').onclick=()=>{st.sound=!st.sound;SFX.on=st.sound;if(st.sound){SFX.init();SFX.play('coin')}Store.save(S);menu()};
   $('sRead').onclick=()=>{st.autoRead=!st.autoRead;Store.save(S);menu()}}
@@ -773,7 +867,11 @@ function drawTitle(){
   const rc=$('rChar');rc.innerHTML='';
   for(const k of['leah','dad','mom']){const b=document.createElement('button');b.className='char'+(form.char===k?' on':'');b.appendChild(charCanvas(k));b.appendChild(document.createTextNode(t(k)));b.onclick=()=>{form.char=k;drawTitle()};rc.appendChild(b)}
 }
-async function startGame(saved){
+const isTouch=()=>matchMedia('(pointer:coarse)').matches;
+function checkOrient(){$('rotate').hidden=!(isTouch()&&innerHeight>innerWidth)}
+addEventListener('resize',checkOrient);addEventListener('orientationchange',()=>setTimeout(checkOrient,200));
+async function goLandscape(){if(!isTouch())return;try{const d=document.documentElement;if(!document.fullscreenElement&&d.requestFullscreen)await d.requestFullscreen({navigationUI:'hide'});if(screen.orientation&&screen.orientation.lock)await screen.orientation.lock('landscape')}catch(e){}checkOrient()}
+async function startGame(saved){goLandscape();
   if(!window.THREE){$('tErr').textContent=t('loadErr');return}
   SFX.init();
   if(saved){S=saved}else{S=newState({name:(form.name||t(form.char==='leah'?'defName':form.char)).trim().slice(0,16),char:form.char,age:form.age,lang:form.lang});Store.save(S)}
@@ -783,7 +881,7 @@ async function startGame(saved){
   if(!renderer)initEngine();
   const C=CHARS[S.profile.char]||CHARS.leah;removeSprite(player);
   player=makeSprite(C.idle,C.walk,C.size,C.tint);
-  $('title').hidden=true;['hud','tools','zoomBox'].forEach(id=>$(id).hidden=false);
+  $('title').hidden=true;['hud','tools','zoomBox'].forEach(id=>$(id).hidden=false);applyJoy();
   $('tErr').textContent='';goScene(S.scene==='house'||S.scene==='cave'?S.scene:'village','start',true);
   once('intro');
 }
@@ -798,7 +896,7 @@ function initEngine(){
   sun.position.set(-6,12,8);scene.add(amb,hemi,sun,lamp);
   Object.assign(world,{amb,hemi,sun,lamp});
   peb=makeSprite('pebIdle',null,1.15,'#6f8a4a');
-  bindInput();addEventListener('resize',resize);resize();requestAnimationFrame(loop)}
+  bindInput();bindJoy();addEventListener('resize',resize);resize();requestAnimationFrame(loop)}
 // rebuild the world for a scene, keeping the shared lights
 let npcs=[];
 function buildScene(name){npcs.forEach(removeSprite);npcs=[];const L={amb:world.amb,hemi:world.hemi,sun:world.sun,lamp:world.lamp};if(root)scene.remove(root);root=new THREE.Group();scene.add(root);world=L;
@@ -810,6 +908,8 @@ function buildScene(name){npcs.forEach(removeSprite);npcs=[];const L={amb:world.
   world.trail=new THREE.Group();root.add(world.trail);applyBright()}
 function resize(){const w=innerWidth,h=innerHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
 function blockedCell(x,z){if(isWallCell(x,z))return true;return M===MAPS.house&&S.placed.some(p=>p.x===x&&p.z===z)}
+function unstick(sp){const cx=Math.floor(sp.x),cz=Math.floor(sp.z);if(!blockedCell(cx,cz))return false;
+  for(let r=1;r<6;r++)for(let dz=-r;dz<=r;dz++)for(let dx=-r;dx<=r;dx++){if(Math.max(Math.abs(dx),Math.abs(dz))!==r)continue;if(!blockedCell(cx+dx,cz+dz)){sp.x=cx+dx+.5;sp.z=cz+dz+.5;return true}}return false}
 function moveSprite(sp,wx,wz,sp2){const vx=wx*sp2,vz=wz*sp2,ox=sp.x,oz=sp.z,W=(x,z)=>blockedCell(Math.floor(x),Math.floor(z));
   if(!W(sp.x+vx+Math.sign(vx)*PR,sp.z-PR*.8)&&!W(sp.x+vx+Math.sign(vx)*PR,sp.z+PR*.8))sp.x+=vx;
   if(!W(sp.x-PR*.8,sp.z+vz+Math.sign(vz)*PR)&&!W(sp.x+PR*.8,sp.z+vz+Math.sign(vz)*PR))sp.z+=vz;
@@ -821,6 +921,8 @@ function loop(now){const dt=Math.min(.05,(now-last)/1000);last=now;requestAnimat
   const Fx=-Math.sin(yaw),Fz=-Math.cos(yaw),Rx=Math.cos(yaw),Rz=-Math.sin(yaw),SPEED=2.7;
   let ix=(keys.arrowright||keys.d?1:0)-(keys.arrowleft||keys.a?1:0),iy=(keys.arrowdown||keys.s?1:0)-(keys.arrowup||keys.w?1:0);
   const gp=readPad();if(!ix&&!iy&&gp){ix=gp.x;iy=gp.y}
+  if(!ix&&!iy&&Math.hypot(JOY.x,JOY.y)>.18){ix=JOY.x;iy=JOY.y}
+  updateActBtn(dt);
   let wx=0,wz=0,sp=0;
   if(!modalOpen()&&(ix||iy)){const m=Math.hypot(ix,iy);player.path=null;pending=null;wx=(Rx*ix-Fx*iy)/m;wz=(Rz*ix-Fz*iy)/m;sp=SPEED*Math.min(1,m)*dt}
   else if(player.path&&!modalOpen()){const p=player.path;while(p.length>1&&clearLine(player.x,player.z,p[1][0],p[1][1]))p.shift();
@@ -851,13 +953,13 @@ function loop(now){const dt=Math.min(.05,(now-last)/1000);last=now;requestAnimat
 /* ================= 13. BOOT ================= */
 (async()=>{
   await Promise.all(['leahIdle','dadIdle','momIdle','nuanIdle','pebIdle'].map(loadImg));
-  drawTitle();
+  drawTitle();checkOrient();
   $('bStart').onclick=()=>startGame(null);
   $('dlg').onclick=()=>nextLine();
   if(!window.THREE)$('tErr').textContent=T.th.loadErr+' / '+T.en.loadErr;
   if('serviceWorker' in navigator&&location.protocol==='https:')navigator.serviceWorker.register('sw.js').catch(()=>{});
 })();
-window.PP={nextLine,get dlgOpen(){return !$('dlg').hidden},get scene(){return scene},get npcs(){return npcs},Store,SFX,drawTitle,get S(){return S},get M(){return M},MAPS,get CRYS(){return CRYS},layoutCave,get marks(){return world.marks},CAVE,interact,answer,act,goScene,openShop,decoTap:(x,z)=>decoTap({x,z}),toggleDeco,get player(){return player},get quiz(){return quizCur},gateIsOpen,QB,command};
+window.PP={JOY,applyJoy,joyWanted,unstick:()=>unstick(player),isWall:(x,z)=>isWallCell(x,z),get yaw(){return yawT},checkOrient,openBook,get bookOpen(){return !$('book').hidden},nextLine,get dlgOpen(){return !$('dlg').hidden},get scene(){return scene},get npcs(){return npcs},Store,SFX,drawTitle,get S(){return S},get M(){return M},MAPS,get CRYS(){return CRYS},layoutCave,get marks(){return world.marks},CAVE,interact,answer,act,goScene,openShop,decoTap:(x,z)=>decoTap({x,z}),toggleDeco,get player(){return player},get quiz(){return quizCur},gateIsOpen,QB,command};
 </script>
 </body>
 </html>
