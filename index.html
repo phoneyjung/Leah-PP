@@ -231,7 +231,7 @@ const T={th:{
    book1:[['g2','ความรู้จากคริสตัลถูกบันทึกลงสมุดความรู้แล้ว ✨'],['g1','กดปุ่ม 📖 ด้านบนเปิดดูได้ทุกเมื่อ เก็บครบ 10 การ์ดได้รางวัลด้วยนะ']],
    house1:[['g2','บ้านเรายังโล่งอยู่เลย ซื้อของที่ร้านยายนวลมาแต่งกันนะ'],['g1','กดปุ่ม 🪑 จัดบ้าน แล้วแตะพื้นเพื่อวางของ']]},
   who:'ใครจะเล่น?',add:'➕ ผู้เล่นใหม่',manage:'จัดการ',manageDone:'เสร็จ',del:'ลบผู้เล่น {n}? ของทั้งหมดของคนนี้จะหายไป',delYes:'ลบ',cancel:'ยกเลิก',back:'← กลับ',full:'มีผู้เล่นครบ {n} คนแล้ว',bkTitle:'📖 สมุดความรู้ของ{n}',bkCount:'{n} การ์ด',bkNext:'อีก {k} การ์ด ได้รางวัล {c} ⭐',bkAll:'ทั้งหมด',bkEmpty:'ยังไม่มีการ์ด ตอบคำถามถูกแล้วความรู้จะถูกบันทึกไว้ที่นี่',bkMore:'ดูเพิ่ม',bkReward:'สมุดความรู้ครบ {n} การ์ด! รางวัล +{c} ⭐',bkDone:'เก็บรางวัลสมุดครบทุกขั้นแล้ว เก่งมาก!',
-  joy:'จอย',onoff:['ปิด','เปิด'],acts:{crystal:'ตอบคำถาม',dig:'ขุด',peb:'คุยกับ Peb',gate:'ประตูปัญญา',cave:'เข้าถ้ำ',door:'เข้าบ้าน',exit:'ออก',shop:'ร้านค้า',fountain:'ดูน้ำพุ'},
+  joy:'จอย',music:'เพลง',onoff:['ปิด','เปิด'],acts:{crystal:'ตอบคำถาม',dig:'ขุด',peb:'คุยกับ Peb',gate:'ประตูปัญญา',cave:'เข้าถ้ำ',door:'เข้าบ้าน',exit:'ออก',shop:'ร้านค้า',fountain:'ดูน้ำพุ'},
   sound:'เสียง',autoRead:'อ่านคำถามให้ฟัง',bright:'ความสว่างในถ้ำ',brightLv:['ปกติ','สว่าง','สว่างมาก'],switchPlayer:'เปลี่ยนผู้เล่น',
   it:{gem:'อัญมณีสีฟ้า',coin:'เหรียญทองโบราณ',shell:'เปลือกหอยประกาย',feather:'ขนนกวิเศษ',star:'หินรูปดาว'},
   fu:{bed:'เตียง',table:'โต๊ะ',chair:'เก้าอี้',lamp:'โคมไฟ',rug:'พรม',plant:'ต้นไม้กระถาง',shelf:'ชั้นหนังสือ',sofa:'โซฟา',chest:'หีบของเล่น',display:'แท่นโชว์คริสตัล'}},
@@ -264,7 +264,7 @@ en:{
    book1:[['g2','The crystal\'s knowledge was written into your Knowledge Book ✨'],['g1','Tap 📖 at the top to read it anytime. Collect 10 cards for a reward!']],
    house1:[['g2','Our home looks a little empty. Let us buy things at Granny Nuan\'s shop.'],['g1','Press 🪑 Decorate, then tap the floor to place things.']]},
   who:"Who's playing?",add:'➕ New player',manage:'Manage',manageDone:'Done',del:'Delete player {n}? All their progress will be lost.',delYes:'Delete',cancel:'Cancel',back:'← Back',full:'All {n} player slots are used',bkTitle:"📖 {n}'s Knowledge Book",bkCount:'{n} cards',bkNext:'{k} more cards for a {c} ⭐ reward',bkAll:'All',bkEmpty:'No cards yet. Answer questions correctly and the knowledge is saved here.',bkMore:'Show more',bkReward:'{n} cards in your Knowledge Book! Reward +{c} ⭐',bkDone:'All book rewards collected. Amazing!',
-  joy:'Joystick',onoff:['Off','On'],acts:{crystal:'Answer',dig:'Dig',peb:'Talk to Peb',gate:'Wisdom Gate',cave:'Enter cave',door:'Go inside',exit:'Leave',shop:'Shop',fountain:'Look'},
+  joy:'Joystick',music:'Music',onoff:['Off','On'],acts:{crystal:'Answer',dig:'Dig',peb:'Talk to Peb',gate:'Wisdom Gate',cave:'Enter cave',door:'Go inside',exit:'Leave',shop:'Shop',fountain:'Look'},
   sound:'Sound',autoRead:'Read questions aloud',bright:'Cave brightness',brightLv:['Normal','Bright','Very bright'],switchPlayer:'Switch player',
   it:{gem:'a blue gem',coin:'an old gold coin',shell:'a shiny shell',feather:'a magic feather',star:'a star stone'},
   fu:{bed:'Bed',table:'Table',chair:'Chair',lamp:'Lamp',rug:'Rug',plant:'Potted plant',shelf:'Bookshelf',sofa:'Sofa',chest:'Toy chest',display:'Crystal stand'}}};
@@ -431,6 +431,42 @@ const SFX={ctx:null,on:true,played:0,
     if(n==='win'){[523,659,784,1047,784,1047].forEach((f,i)=>T(f,.2,'triangle',.12,i*.12))}
   }catch(e){}}};
 addEventListener('pointerdown',()=>SFX.init(),{passive:true});
+
+/* ================= 3c. MUSIC (composed in code, no audio files) ================= */
+const MUSIC_TRACKS={
+  village:{bpm:104,wave:'triangle',vol:.045,bassVol:.05,
+    mel:[72,0,76,0,79,0,76,74, 72,0,74,76,74,0,0,0, 69,0,72,0,74,0,72,69, 67,0,69,72,72,0,0,0,
+         72,0,76,0,79,0,81,79, 76,0,79,76,74,0,0,0, 72,0,74,76,79,76,74,72, 74,0,72,0,72,0,0,0],
+    bass:[48,45,41,43,48,45,43,48]},
+  cave:{bpm:66,wave:'sine',vol:.05,bassVol:.035,echo:true,long:2.2,
+    mel:[69,0,0,0,72,0,0,0, 76,0,0,0,74,0,0,0, 72,0,0,0,69,0,0,0, 67,0,0,0,69,0,0,0,
+         64,0,0,0,67,0,0,0, 69,0,72,0,71,0,0,0, 69,0,0,0,67,0,64,0, 69,0,0,0,0,0,0,0],
+    bass:[45,45,41,43,45,40,41,45]},
+  house:{bpm:88,wave:'triangle',vol:.04,bassVol:0,box:true,
+    mel:[79,74,71,74,79,74,71,74, 81,76,72,76,81,76,72,76, 79,74,71,74,78,74,71,74, 76,72,69,72,74,71,67,0,
+         79,74,71,74,83,79,74,79, 81,76,72,76,79,76,72,76, 78,74,69,74,76,72,69,72, 74,71,67,71,67,0,0,0],
+    bass:[]}};
+const MUSIC={name:null,step:0,next:0,timer:null,bus:null,echo:null,notes:0,
+  mtof(m){return 440*Math.pow(2,(m-69)/12)},
+  ensure(){const c=SFX.ctx;if(!c)return false;if(!this.bus){this.bus=c.createGain();this.bus.gain.value=1;this.bus.connect(c.destination);
+      const d=c.createDelay(1);d.delayTime.value=.36;const fb=c.createGain();fb.gain.value=.38;const wet=c.createGain();wet.gain.value=.5;
+      d.connect(fb);fb.connect(d);d.connect(wet);wet.connect(this.bus);this.echo=d}return true},
+  wanted(){return !!(S&&S.settings&&S.settings.music!==false)},
+  play(name){if(!this.wanted()||!SFX.init||(SFX.init(),!this.ensure())){this.stop();return}
+    if(this.name===name&&this.timer)return;this.stop();this.name=name;this.step=0;this.next=SFX.ctx.currentTime+.15;
+    this.timer=setInterval(()=>this.tick(),90);this.tick()},
+  stop(){if(this.timer)clearInterval(this.timer);this.timer=null;this.name=null},
+  level(){return document.hidden?0:(!$('quiz').hidden||!$('dlg').hidden?.45:1)},
+  tick(){const c=SFX.ctx,tr=MUSIC_TRACKS[this.name];if(!c||!tr)return;const stepDur=60/tr.bpm/2;
+    this.bus.gain.setTargetAtTime(this.level(),c.currentTime,.2);
+    while(this.next<c.currentTime+.35){const i=this.step%tr.mel.length,m=tr.mel[i];
+      if(m)this.note(m,tr.box?.9:(tr.long||stepDur*1.6),tr.wave,tr.vol,this.next,tr.echo);
+      if(tr.bass.length&&i%8===0)this.note(tr.bass[(i/8)%tr.bass.length],stepDur*(tr.echo?8:6),'sine',tr.bassVol,this.next,false);
+      this.next+=stepDur;this.step++}},
+  note(m,d,wave,vol,t0,echo){const c=SFX.ctx,o=c.createOscillator(),g=c.createGain();o.type=wave;o.frequency.setValueAtTime(this.mtof(m),t0);
+    g.gain.setValueAtTime(0,t0);g.gain.linearRampToValueAtTime(vol,t0+(echo?.25:.015));g.gain.exponentialRampToValueAtTime(.0001,t0+d);
+    o.connect(g);g.connect(this.bus);if(echo&&this.echo)g.connect(this.echo);o.start(t0);o.stop(t0+d+.05);this.notes++}};
+document.addEventListener('visibilitychange',()=>{if(MUSIC.timer)MUSIC.tick()});
 
 /* ================= 4. GAME RULES (commands) ================= */
 let S=null;
@@ -689,7 +725,7 @@ function drawTrail(p){world.trail.clear();if(!p)return;const m=new THREE.MeshBas
 function warp(){const p={x:CAVE.gatePos.x,z:CAVE.gatePos.z+1.2};player.x=p.x;player.z=p.z;player.path=null;if(peb.follow){peb.x=p.x+.8;peb.z=p.z+.4}burst(p.x,p.z,0xff9ad5);SFX.play('magic');toast(gateIsOpen()?t('gateOpen'):t('warped'))}
 /* ---- scene change ---- */
 function goScene(to,spawn,instant){
-  const doIt=()=>{yaw=yawT=0;command('scene',{to});deco&&toggleDeco(false);if(to==='cave')layoutCave(S.caveSeed);buildScene(to);
+  const doIt=()=>{yaw=yawT=0;command('scene',{to});MUSIC.play(to);deco&&toggleDeco(false);if(to==='cave')layoutCave(S.caveSeed);buildScene(to);
     const m=MAPS[to];const p=spawn==='fromCave'?m.startFromCave:spawn==='fromHouse'?{x:5.5,z:5.3}:m.start;
     player.x=p.x;player.z=p.z;player.path=null;pending=null;player.hz=to==='village'&&spawn==='fromCave'?-1:1;player.hx=0;
     peb.x=p.x+.9;peb.z=p.z+.3;const showPeb=to==='cave'||S.peb;peb.mesh.visible=peb.ghost.visible=peb.shadow.visible=showPeb;
@@ -827,8 +863,9 @@ function showMsg(html,ok,onOk,alt,onAlt){$('mBody').innerHTML=html;$('mOk').text
   if(alt){$('mAlt').hidden=false;$('mAlt').textContent=alt;$('mAlt').onclick=()=>{$('msg').hidden=true;onAlt&&onAlt()}}else $('mAlt').hidden=true;$('msg').hidden=false}
 function menu(){const st=S.settings;
   showMsg(`<div style="font-size:22px;margin-bottom:6px">${t('menuT')} · ${S.profile.name}</div><p>⭐ ${S.coins} · 💎 ${S.awake.length}/${CRYS.length}</p>
-    <div class="row" style="justify-content:center;margin:12px 0"><button class="chip${st.sound?' on':''}" id="sSound">${st.sound?'🔊':'🔇'} ${t('sound')}</button><button class="chip${st.autoRead?' on':''}" id="sRead">🗣️ ${t('autoRead')}</button><button class="chip on" id="sBright">☀️ ${t('bright')}: ${t('brightLv')[st.bright??1]}</button><button class="chip${joyWanted()?' on':''}" id="sJoy">🕹️ ${t('joy')}: ${t('onoff')[joyWanted()?1:0]}</button></div>`,
-    t('close'),null,t('switchPlayer'),()=>{speechSynthesis&&speechSynthesis.cancel();$('title').hidden=false;['hud','tools','zoomBox','bag','joy'].forEach(id=>$(id).hidden=true);document.body.classList.remove('joyon');deco=null;drawTitle()});
+    <div class="row" style="justify-content:center;margin:12px 0"><button class="chip${st.sound?' on':''}" id="sSound">${st.sound?'🔊':'🔇'} ${t('sound')}</button><button class="chip${st.autoRead?' on':''}" id="sRead">🗣️ ${t('autoRead')}</button><button class="chip on" id="sBright">☀️ ${t('bright')}: ${t('brightLv')[st.bright??1]}</button><button class="chip${MUSIC.wanted()?' on':''}" id="sMusic">🎵 ${t('music')}: ${t('onoff')[MUSIC.wanted()?1:0]}</button><button class="chip${joyWanted()?' on':''}" id="sJoy">🕹️ ${t('joy')}: ${t('onoff')[joyWanted()?1:0]}</button></div>`,
+    t('close'),null,t('switchPlayer'),()=>{speechSynthesis&&speechSynthesis.cancel();$('title').hidden=false;MUSIC.stop();['hud','tools','zoomBox','bag','joy'].forEach(id=>$(id).hidden=true);document.body.classList.remove('joyon');deco=null;drawTitle()});
+  $('sMusic').onclick=()=>{st.music=!MUSIC.wanted();Store.save(S);if(st.music)MUSIC.play(S.scene);else MUSIC.stop();menu()};
   $('sJoy').onclick=()=>{st.joy=!joyWanted();Store.save(S);applyJoy();menu()};
   $('sBright').onclick=()=>{st.bright=((st.bright??1)+1)%3;Store.save(S);applyBright();menu()};
   $('sSound').onclick=()=>{st.sound=!st.sound;SFX.on=st.sound;if(st.sound){SFX.init();SFX.play('coin')}Store.save(S);menu()};
@@ -959,7 +996,7 @@ function loop(now){const dt=Math.min(.05,(now-last)/1000);last=now;requestAnimat
   if(!window.THREE)$('tErr').textContent=T.th.loadErr+' / '+T.en.loadErr;
   if('serviceWorker' in navigator&&location.protocol==='https:')navigator.serviceWorker.register('sw.js').catch(()=>{});
 })();
-window.PP={JOY,applyJoy,joyWanted,unstick:()=>unstick(player),isWall:(x,z)=>isWallCell(x,z),get yaw(){return yawT},checkOrient,openBook,get bookOpen(){return !$('book').hidden},nextLine,get dlgOpen(){return !$('dlg').hidden},get scene(){return scene},get npcs(){return npcs},Store,SFX,drawTitle,get S(){return S},get M(){return M},MAPS,get CRYS(){return CRYS},layoutCave,get marks(){return world.marks},CAVE,interact,answer,act,goScene,openShop,decoTap:(x,z)=>decoTap({x,z}),toggleDeco,get player(){return player},get quiz(){return quizCur},gateIsOpen,QB,command};
+window.PP={MUSIC,JOY,applyJoy,joyWanted,unstick:()=>unstick(player),isWall:(x,z)=>isWallCell(x,z),get yaw(){return yawT},checkOrient,openBook,get bookOpen(){return !$('book').hidden},nextLine,get dlgOpen(){return !$('dlg').hidden},get scene(){return scene},get npcs(){return npcs},Store,SFX,drawTitle,get S(){return S},get M(){return M},MAPS,get CRYS(){return CRYS},layoutCave,get marks(){return world.marks},CAVE,interact,answer,act,goScene,openShop,decoTap:(x,z)=>decoTap({x,z}),toggleDeco,get player(){return player},get quiz(){return quizCur},gateIsOpen,QB,command};
 </script>
 </body>
 </html>
