@@ -229,7 +229,7 @@ const T={th:{
   intro1:'คริสตัลแห่งความรู้แตกกระจายอยู่ในถ้ำ แสงของโลกจึงหรี่ลง',intro2:'ไปที่ปากถ้ำ ตอบคำถามให้ถูกเพื่อปลุกคริสตัลทั้ง 10 ชิ้น',intro3:'แตะพื้นเพื่อเดิน แตะสิ่งของเพื่อคุยหรือใช้งาน ของที่ขุดได้เอาไปขายที่ร้านยายนวล แล้วซื้อของแต่งบ้านได้',go:'ไปกันเลย!',
   crystal:'คริสตัลแห่งความรู้',listen:'🔊 ฟังคำถาม',next:'ต่อไป',right:'✅ ถูกต้อง! ',wrong:'💡 ',awake:'คริสตัลตื่นแล้ว! +{n} ⭐',tryLater:'ไม่เป็นไร คริสตัลยังรออยู่ ลองใหม่อีกทีนะ',already:'คริสตัลนี้ตื่นแล้ว ✨ ไปหาชิ้นอื่นกัน',
   noCrystal:'ปลุกคริสตัลครบทุกชิ้นแล้ว! ไปที่ประตูปัญญาได้เลย',compassOn:'เข็มทิศแสงชี้ทางไปคริสตัลที่ใกล้ที่สุด ✨',warped:'กุญแจราชวังพามาหน้าประตูแล้ว',
-  gateClosed:'ประตูปัญญายังปิดอยู่ ต้องปลุกคริสตัลอีก {n} ชิ้น',gateOpen:'ประตูปัญญาเปิดแล้ว! ✨',
+  lightBack:'แสงกลับมาที่หมู่บ้านแล้ว! ✨',gateClosed:'ประตูปัญญายังปิดอยู่ ต้องปลุกคริสตัลอีก {n} ชิ้น',gateOpen:'ประตูปัญญาเปิดแล้ว! ✨',
   win:'ผ่านถ้ำคริสตัลแล้ว!',winB:'แสงกลับมาสว่างทั้งถ้ำ ชาวบ้านดีใจมาก',toVillage:'กลับหมู่บ้าน 🏡',again:'เล่นถ้ำนี้อีกรอบ',menuT:'เมนู',toTitle:'กลับหน้าแรก',close:'ปิด',
   dug:'ขุดเจอ{x}! เก็บใส่กระเป๋าแล้ว',dugEmpty:'ตรงนี้ขุดไปแล้ว',
   pebHi:'Peb ผู้พิทักษ์ถ้ำโดนฝุ่นลืมจนงง! ช่วยปัดฝุ่นด้วยการตอบคำถามนะ',pebFriend:'Peb หายงงแล้ว! Peb จะเดินตามไปช่วยนะ 💚',pebTalk:'Peb: คริสตัลชอบซ่อนในมุมมืดนะ',
@@ -262,7 +262,7 @@ en:{
   intro1:'The Knowledge Crystals have shattered all over the cave, and the world is growing dark.',intro2:'Go to the cave and answer questions to wake all 10 crystals.',intro3:"Tap the floor to walk and tap things to use them. Sell what you dig up at Granny Nuan's shop and buy things for your home.",go:"Let's go!",
   crystal:'Knowledge Crystal',listen:'🔊 Listen',next:'Next',right:'✅ Correct! ',wrong:'💡 ',awake:'The crystal is awake! +{n} ⭐',tryLater:'No problem. The crystal will wait, try again soon.',already:"This crystal is already awake ✨ Let's find another one.",
   noCrystal:'All crystals are awake! Head to the Wisdom Gate.',compassOn:'The Light Compass shows the way to the nearest crystal ✨',warped:'The Royal Key brought you to the gate.',
-  gateClosed:'The Wisdom Gate is closed. Wake {n} more crystals.',gateOpen:'The Wisdom Gate is open! ✨',
+  lightBack:'Light is coming back to the village! ✨',gateClosed:'The Wisdom Gate is closed. Wake {n} more crystals.',gateOpen:'The Wisdom Gate is open! ✨',
   win:'Crystal Cave cleared!',winB:'Light is back in the cave and the villagers are delighted.',toVillage:'Back to the village 🏡',again:'Play this cave again',menuT:'Menu',toTitle:'Back to title',close:'Close',
   dug:'You found {x}! It is in your bag.',dugEmpty:'Already dug here',
   pebHi:'Peb, the cave guardian, is dizzy from Forget Dust! Answer a question to dust him off.',pebFriend:'Peb is back to normal and will follow you! 💚',pebTalk:'Peb: Crystals love hiding in dark corners.',
@@ -525,6 +525,11 @@ const TEXGEN={
   path:()=>pixTex((g,n)=>{const r=rnd(3);g.fillStyle='#c9a574';g.fillRect(0,0,n,n);for(let i=0;i<90;i++){g.fillStyle=['#b8935f','#d8b68a','#a8845a'][r()*3|0];g.fillRect(r()*n|0,r()*n|0,2,1)}}),
   hedge:()=>pixTex((g,n)=>{const r=rnd(5);g.fillStyle='#3f7a3a';g.fillRect(0,0,n,n);for(let i=0;i<200;i++){g.fillStyle=['#356b31','#4c8c45','#5aa14f'][r()*3|0];g.fillRect(r()*n|0,r()*n|0,2,2)}}),
   wood:()=>pixTex((g,n)=>{const r=rnd(11);for(let y=0;y<n;y+=8){g.fillStyle=['#b98452','#a9764a','#c58f5c'][(y/8)%3];g.fillRect(0,y,n,8);g.fillStyle='#8a5c36';g.fillRect(0,y+7,n,1);g.fillRect((r()*n)|0,y,1,7)}}),
+  timber:()=>pixTex((g,n)=>{const r=rnd(17);g.fillStyle='#f0dfc0';g.fillRect(0,0,n,n);for(let i=0;i<40;i++){g.fillStyle=['#e6d2ad','#f7ead2'][r()*2|0];g.fillRect(r()*n|0,r()*n|0,2,1)}
+    g.fillStyle='#7a5230';g.fillRect(0,0,n,3);g.fillRect(0,0,3,n);g.fillStyle='#9a6a40';g.fillRect(0,0,n,1);g.fillRect(0,0,1,n);g.fillStyle='#5a3a22';g.fillRect(3,3,n-3,1);g.fillRect(3,3,1,n-3)}),
+  roofTiles:()=>pixTex((g,n)=>{g.fillStyle='#c8584a';g.fillRect(0,0,n,n);for(let row=0;row<4;row++){const y=row*8,off=row%2?4:0;g.fillStyle='#8e3a32';g.fillRect(0,y+7,n,1);for(let x=off;x<n+8;x+=8){g.fillStyle='#8e3a32';g.fillRect(x%n,y,1,7);g.fillStyle='#e8806c';g.fillRect((x+1)%n,y,5,1)}}}),
+  boards:()=>pixTex((g,n)=>{const r=rnd(23);for(let x=0;x<n;x+=8){g.fillStyle=['#a8703f','#b88048','#9a6a3c','#b07a44'][(x/8)%4];g.fillRect(x,0,8,n);g.fillStyle='#6e4a2c';g.fillRect(x+7,0,1,n);g.fillStyle='#d09a60';g.fillRect(x,0,1,n)}for(let i=0;i<10;i++){g.fillStyle='#7a5230';g.fillRect(r()*n|0,r()*n|0,1,2)}}),
+  stoneB:()=>pixTex((g,n)=>{g.fillStyle='#b8b0c8';g.fillRect(0,0,n,n);for(let row=0;row<4;row++){const y=row*8,off=row%2?6:0;g.fillStyle='#7c7294';g.fillRect(0,y+7,n,1);for(let x=off;x<n+12;x+=12){g.fillStyle='#7c7294';g.fillRect(x%n,y,1,7);g.fillStyle='#d6d0e2';g.fillRect((x+1)%n,y,6,1)}}}),
   plaster:()=>pixTex((g,n)=>{const r=rnd(13);g.fillStyle='#f3e3c8';g.fillRect(0,0,n,n);for(let i=0;i<60;i++){g.fillStyle='#e8d4b4';g.fillRect(r()*n|0,r()*n|0,2,1)}g.fillStyle='#d9b98c';g.fillRect(0,n-4,n,4)})};
 function tex(key,pixel,fallbackColor){
   const tx=new THREE.TextureLoader().load(ASSET[key],undefined,undefined,()=>{console.warn('missing',ASSET[key]);if(fallbackColor){const c=document.createElement('canvas');c.width=512;c.height=64;const g=c.getContext('2d');for(let i=0;i<8;i++){g.fillStyle=fallbackColor;g.beginPath();g.arc(i*64+32,38,20,0,7);g.fill()}tx.image=c;tx.needsUpdate=true}});
@@ -556,6 +561,11 @@ function spriteFrame(sp){
   sp.mesh.rotation.set(0,yaw,0);sp.mesh.scale.set(1,1/Math.cos(pit),1);sp.ghost.position.copy(sp.mesh.position);sp.ghost.rotation.copy(sp.mesh.rotation);sp.ghost.scale.copy(sp.mesh.scale);sp.shadow.position.set(sp.x,.01,sp.z);
 }
 const box=(w,h,d,color,opts={})=>{const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),new THREE.MeshLambertMaterial({color,...opts}));return m};
+// box with pixel texture at 32 px per unit on every face (UVs scaled by each face's real size)
+function worldUV(geo,w,h,d){const uv=geo.attributes.uv,F=[[d,h],[d,h],[w,d],[w,d],[w,h],[w,h]];for(let i=0;i<uv.count;i++){const f=F[Math.floor(i/4)];uv.setXY(i,uv.getX(i)*f[0],uv.getY(i)*f[1])}return geo}
+const TEXC={};const texOf=k=>TEXC[k]||(TEXC[k]=TEXGEN[k]());
+const tbox=(w,h,d,k,color=0xffffff)=>new THREE.Mesh(worldUV(new THREE.BoxGeometry(w,h,d),w,h,d),new THREE.MeshLambertMaterial({map:texOf(k),color}));
+let TREE_GEO=null;
 const add=(obj,x,y,z)=>{obj.position.set(x,y,z);root.add(obj);return obj};
 function label(text,x,y,z,color='#fdf6e8'){const c=document.createElement('canvas');c.width=512;c.height=96;const g=c.getContext('2d');g.font='600 44px Mitr, sans-serif';const w=Math.min(500,g.measureText(text).width+40);
   {const x0=(512-w)/2,y0=14,h=68,u=6;g.fillStyle='rgba(26,19,44,.9)';g.fillRect(x0+u,y0,w-2*u,h);g.fillRect(x0,y0+u,w,h-2*u);g.fillStyle='#a8793a';g.fillRect(x0+u,y0,w-2*u,u);g.fillRect(x0+u,y0+h-u,w-2*u,u);g.fillRect(x0,y0+u,u,h-2*u);g.fillRect(x0+w-u,y0+u,u,h-2*u)}g.fillStyle=color;g.textAlign='center';g.textBaseline='middle';g.fillText(text,256,50);
@@ -602,6 +612,10 @@ function markTex(ch,bg){const c=document.createElement('canvas');c.width=c.heigh
   const t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;t.magFilter=t.minFilter=THREE.NearestFilter;t.generateMipmaps=false;return t}
 function addMark(obj,ch,h,near,bg){const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:markTex(ch,bg||'#f5c05a'),transparent:true,depthTest:false,toneMapped:false}));sp.scale.set(.62,.62,1);sp.renderOrder=6;root.add(sp);
   world.marks.push({obj,sp,h,near,base:Math.random()*6});return sp}
+/* ---- built-in pixel art drawn for Leah-PP (32 px = 1 cell, same outline and light as the PixelLab art).
+   Used until the PixelLab pieces (A-05 crystal/dig, A-06 gate) arrive, then kept as the fallback. Inline, so it can never go missing. ---- */
+const PIX={treeG:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAABACAYAAABcIPRGAAADiUlEQVR42u1aPWsbQRCdPdQJDAomQsbYhSyMVQSpiOsUKVUYnMZd/oRbF2nzQ9xYoEKli9RxYVcW5iyITLDjEDgQXBdQmsxlbrWzO3e3Eg7sNJLvTrtvvt6+XR9AsGDBggV7yba1t7NY5fhq1aBPLwbw+cM4u/d4/6BerAMI/PRisHTv+vYZAAAuz668OqJ8gjcBp+CpXZ5deXFC+SwVDny/28w5MpvMAQAgPr+r7ITyXSq2qCP4ZJpCo12H+Pwud6+MMzWfpSIBT61zsg8AALsHG3/LChZFHVHrAH8zfoJGu54BnU3msHuwkX1W6Q/lC7w06tR08P1uE65vn2E2mYv7I/LBQCbws8k8A59M0+wTv5sij+CTaQqdk33RIhj5psh+t5mLOjYsAEBv0MqVEpctfF5iUZWoU/A6VWKUKRiseXzWlC3quCQLlUuI43j9ezJNs8hTJ009ojvu1QGMvAk417DJNIXeoCVucI6dSrEQ1j/HMjotStjGxUy0+X99/W5lI2cGHu8fFFWTeungZDZQpudtwaBstXm4be2DqGzNj4axiOMRCFKkqSds5spArUwPcI2H1/E7gjc932jX4Wb8lKNNfH6lWsjWeHoZ0MY1/a43aC0tditzwFW7uGAhcCmLVAEv1kJ0JeZKSGcb1DU2513AXfVfiEY5Gw1jMXCqRm3gaem5lKlal/bnmv7ouJPbuenjuZSp8i2fKXgacRNbHR13snE48PgbLhO1Mo3jijqCtGWBgjeNyWkqUQaKnjBIy8YmL/QxkM3omKZSqlWNelHgEvC4uOmlF5eVEhx4XddLZIUNvG3t4IIUVYn8aBgvbRU52sSo2jYztvWFo11VVD73u80MuC6hqQYybUg4We2S4qiZTIsb28TvP70VpZIDq183gbcBN63WppW5kBaiegfB6eD1VOunEFJ6lOojZw/QUwYOtAs8SgNOhlcRd04HsN5dE7smNYFPpqmxJL2o0a29nQU9uyyrKKXnPGWVaSStf9863tc4kW0zrx9/+5i0aOm59gWi/QCWUlngHM1KzLWpEe/I8IhDMiG1zcNt4zXpOK4dmWgdIIMsXOAMEy5M10qMUz4DtsyYJuIOojhQ3Dgrd4AD8/HNq+zvbz/+MdiXn7+9/584gv/cggPBgeBAcCA4EBwIDgQHXooDkpczfL/F6PWduXevZcdMPlWpWncGimxWJPYHXez7gG3GspUAAAAASUVORK5CYII=',treeP:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAABACAYAAABcIPRGAAAFMUlEQVR42u1aQWgbVxB9K3IziDqYBivGCliqkQ+1AonPwio9ycLgXowPKqHoZrEEgg+CHAo6lIIw0c0Uwx6ELwkE26cSmz03AVkXLaktsEKj1KUgIdCt4B7KfP5+/b/6ktbBhZ2L5V1p983Mm5k3KwGBBRZYYIHdZovE5q9v8vrGTYN+9jKDn787ZufaFx+MW+sAAX/2MgMAMLsF7H7xAgBQa1wBAN48f+urI4af4Am4aLXGFR4u3YPZLSDXLjJH/HDC8JMqXuApAwBwdvwJ0wtTOD94P7EThh9U4c2MlbF78dQFGABzwoqUkDrZBgCcH7x3vWccZww/qcJHXWYtp8de2+kKcySaCI9dH8Yk4Cnaw8DzwEUj8LyNUh+hSSLPg681rpTgo4kw7J2joeAfLt0DAMQ3F7Xnxx0/OpBX1KOJMFpODylnTQmegNcaV7CyVaScNcQ3F4EDXA/LRMiPFina2fEnJX2iiTADb0VKrmu0nB5yh1sjBS80SeTNbsEFhF7X8/tan6eZAACvX53DTldcDutQyRgnA6ouw/d40TrNPpKZ2YHjVqSEXLsoLXR75wj3k195FnRo1GhTL5dxvuX0kMzMotPsS8GLn2s5PSzvPXGBp892mn2kflqbnEIU/Vy7yKZqrl1khcd3GirY6YUp2OkKO5/MzLLP0fvJGVm26LgYiLEcaF98MHg1KdKo5fQYd/lIpk62XZ3G7BZgRUrsPamTbWlrJYc6zT7q+X3MrMx51kFo3JZJYOydo//AcBHnM0PHc+0im7zMSY4ivLMs8o8e4O/f/vCsAe0i/vjLry4K8DcTaUDHCEgyM+s5jQeAczbMAe0MEO+tbJV1CBWHCXwyMyvtPLrg63un/mihSGz+Or65qDzPCzNVu1RlwE5XsLz3RHlt3zKwvhHH+kZcrmcePWCv+SFGnYq6lMj3TrM/EXitDMhkBL8qvn51jmgizAYSr/29eK9qkfX8vmtCD1OmxufQ/ioZ3XJ6LKvidaxsFbnDLbScnufmFhoXvBkrw4yVleD5Hk+tlKhDGVvfiLtkOD+peVHnpYnGktNmtyBVjVa2iuX8KqYXplw9XhxqLaeH3aUXrqjzFNTJoCeFIrH5649nvw9sW7qUkc0GnjaqTWwYcBmVlBQSwZvdgjbfpxemBgDyUpnvZjxt6Lxsqk/URmuNK5ZeK1uFla26WqQI1LVKcmDsdAXRRJgpWxqQvEYiysnmxVgO8PLZipSQO9zC7sVTmLGyNN10c3vnaAAUnRO5LtNSYgZV88JQdR8zVlaud1a2qtTq1H2omPmaIFA6c0I1M8ThFlLJZyX4SMl70Xh3OXBerAkRvKqg7Z0jBr6e35dOZu02SjfMoeg5mGSp7jT7DKQs6uITDCYz8qv+FDEp0E6zzzS+na4MLCSyVbLT7DNVOYwyPHjRtGuA6uCbHx9Lb8prffGvTA4v51dd+4BqRgzTSCpxF1KtkW+evx14lsnzmd976S9FmhSpjAIyZ4nro4L3FHP8DsDrfd1oyfbccaI+zIGQ1zJPj79Vg0X3AZZqCFHk63un0u2Lru+1F2jtA/w2xm9Q9fy+sriI/5QBMYu62fNtqQeAmZU5rRvyNrMyJz1W3zsF3l0OBICifv+Hb7W+Kxj5+4Fh4MQbRmLz17Jjo17HFwdkDslupFo+VKBU17lxB1Rgvv/6Lvv/8k+uFf/1j+/fE4fwP7fAgcCBwIHAgcCBwIHAgcCB2+KAzi9M/P4Vo6+/mUt9qfeYyU9VanzuDIyyrOjYv9FjlOxgqyOtAAAAAElFTkSuQmCC',crystal:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAeCAYAAAAy2w7YAAABVUlEQVR42mNgGPFATMnuv5iS3X+aW7Lj+///8de+Us8ydINglrz/C7GIVMuYcFny8u5BBlJdTZYvkTXBfIPuI2RfiSnZ/f///z9OXzISY+GiqwcZGBgYGMzZIGIFN7+hqNnu48nw6t4hRjElu/+v7h1iJDroyAW4LMFqEaXJF5deJmzBtOjqQbIiFqYfm16cQUeqZTBLyldcZCA5jmCJgBhASC0TttSFDDy3bCfZEsnaSRihQdVUhyvYqG4RyUUQLnDyF50sopuPKPEVE3LxEadtTxXXP2/OwyiOmOiR4gZ3HJELWLAJbk6uZFBR1WBgYGBgMGBgYLiOJm+Axr/OwMCQwMDAcOf2DYYjrhHE+WhzciUDA1QTKQCm3mb3Cga8NayYkt3/UAsrqgXV6hPHUFIezeIo1MIKpWClmUXoPmJBzrCrGRj+m0hJ0cRiRqq0zYhoqAAA6TS1x5rfuUgAAAAASUVORK5CYII=',mound:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAMCAYAAAB4MH11AAAAsElEQVR42mNgIAC0pfj+M9AKaEvx/f//7cR/fJYQcgAjPo1XTuQw6FhMwesImJqrzz4xkmwBAwMDQ7yDGl4LFh64hdNwnBZoS/H9hxmspiCCIX/rwRsMSxgYGLBaxITLcDUFEayG+0dgaGGId1BjiA+wwRofjLhcTi5ADzImahoO8w2yT5iwGf7kww+qJXUmbIIyAhxU8wWjthTff2MFIZpk1LMP3kEimVbFwdVnnxgB+e5FN8370RgAAAAASUVORK5CYII=',hole:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAOCAYAAAA1+Nx+AAAAsklEQVR42mNkwAPkhLj+45N/9O4bIwMBwIjP4AALJbyaN5y4R9AiRnIMJsUiRmTDSTUYm0XoljDiMvz8nVdEGWqoIobXEkZ0w4k1GJ9FyJYwMdAYUN0CGQEOlATDgq7g7ZdfDAwMDAzCPGxEGQhTDzNcTUGEIcdDi4GBgYFhyo5r/7FG8p4LT0hytYuBDNzlyGDKjmuQIHr07hsjLC3DNJBiONE5mdKMhq0ooW9RQYvCDgCnQlhg6drYvwAAAABJRU5ErkJggg==',gateC:'data:image/png;base64,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',gateO:'data:image/png;base64,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'};
+const artCache={};function artTex(k){if(artCache[k])return artCache[k];const t=new THREE.TextureLoader().load(PIX[k]);t.magFilter=t.minFilter=THREE.NearestFilter;t.generateMipmaps=false;t.encoding=THREE.sRGBEncoding;return artCache[k]=t}
 /* ---- pixel cave tileset (A-04 · PixelLab Wang 32px, 5x4 sheet). Tiles are laid on a half-cell offset grid so every
    floor/wall edge gets its hand-drawn border. Key = terrain at the tile's NW,NE,SW,SE corners (F floor, W wall). ---- */
 const WANG={WWWF:[0,0],WWFF:[1,0],WWFW:[2,0],FFFW:[3,0],FFWF:[4,0],WFWF:[0,1],FFFF:[1,1],FWFW:[2,1],FWFF:[3,1],WFFF:[4,1],WFWW:[0,2],FFWW:[1,2],FWWW:[2,2],FWWF:[3,2],WFFW:[4,2],WWWW:[1,3]};
@@ -629,21 +643,23 @@ function buildCave(){
   for(let z=0;z<MH;z++)for(let x=0;x<MW;x++)if(M.rows[z][x]==='#')add(new THREE.Mesh((x*7+z*3)%5<2?bg2:bg,wm),x+.5,M.wallH/2,z+.5);
   loadCaveTiles(im=>{
     if(im){const t=caveTileTex(im);fm.map=t.floor;fm.color.set(0x8c8890); // the pixel art is already bright; tone it down under the cave lights
-      for(const [m,k,c] of [[wTop,'top',0xb4b6c8],[wSide,'side',0x8f92a8]]){m.map=t[k];m.color.set(c);m.emissive.set(0xffffff);m.emissiveMap=t[k+'Glow'];m.emissiveIntensity=.6}}
+      for(const [m,k,c] of [[wTop,'top',0xa6a2c4],[wSide,'side',0x77729a]]){m.map=t[k];m.color.set(c);m.emissive.set(0xffffff);m.emissiveMap=t[k+'Glow'];m.emissiveIntensity=.6}}
     else{const f=tex('floor');f.wrapS=f.wrapT=THREE.RepeatWrapping;f.repeat.set(MW/2,MH/2);fm.map=f;fm.color.set(0xffffff);const w=tex('wall');wTop.map=wSide.map=w;wTop.color.set(0xffffff);wSide.color.set(0xffffff)}
     fm.needsUpdate=wTop.needsUpdate=wSide.needsUpdate=true});
   world.marks=[];world.crys={};
-  for(const o of CRYS){const g=new THREE.Group();const mat=new THREE.MeshLambertMaterial({color:0x8a8fa8,emissive:0x111122,transparent:true,opacity:.95});
-    for(let k=0;k<3;k++){const c=new THREE.Mesh(new THREE.ConeGeometry(.1+k*.035,.5+k*.14,5),mat);c.position.set((k-1)*.14,.25+k*.06,(k%2)*.09);c.rotation.z=(k-1)*.35;g.add(c)}
-    add(g,o.x,0,o.z);const l=new THREE.PointLight(0x7fe3ff,0,3.4);add(l,o.x,.8,o.z);const gs=new THREE.Sprite(new THREE.SpriteMaterial({map:glowC(),transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,toneMapped:false,opacity:0}));gs.scale.set(1.5,1.5,1);add(gs,o.x,.55,o.z);world.crys[o.id]={g,mat,light:l,glow:gs};addMark(o,'?',1.25,3.2,'#9fe8ff')}
-  world.dig={};const dtex=glowTex('rgba(255,230,140,1)','rgba(200,140,60,.7)');
-  for(const o of M.objs.filter(o=>o.type==='dig')){const m=new THREE.Mesh(new THREE.CircleGeometry(.34,20),new THREE.MeshBasicMaterial({map:dtex,transparent:true,depthWrite:false,toneMapped:false}));m.rotation.x=-Math.PI/2;add(m,o.x,.02,o.z);world.dig[o.id]=m}
-  const gp=CAVE.gatePos,w=CAVE.gateCells.length,gg=new THREE.Group(),gm=new THREE.MeshLambertMaterial({color:0x6a5a80,emissive:0});
-  const p1=new THREE.Mesh(new THREE.BoxGeometry(.3,2.6,.4),gm);p1.position.set(-w/2,1.3,0);const p2=p1.clone();p2.position.x=w/2;const top=new THREE.Mesh(new THREE.BoxGeometry(w+.6,.35,.45),gm);top.position.y=2.6;
-  const door=new THREE.Mesh(new THREE.PlaneGeometry(w,2.4),new THREE.MeshBasicMaterial({color:0x7fe3ff,transparent:true,opacity:.15,side:THREE.DoubleSide,toneMapped:false}));door.position.y=1.2;
-  gg.add(p1,p2,top,door);add(gg,gp.x,0,gp.z-.45);world.gate={mat:gm,door};
-  const ex=M.objs.find(o=>o.id==='caveExit');const exm=new THREE.Mesh(new THREE.CircleGeometry(.42,24),new THREE.MeshBasicMaterial({map:glowTex('rgba(160,255,190,1)','rgba(80,200,120,.5)'),transparent:true,depthWrite:false,toneMapped:false}));exm.rotation.x=-Math.PI/2;add(exm,ex.x,.03,ex.z);
-  addShafts(CAVE.free.filter(c=>c.walls===0),isTouch()?2:4);
+  for(const o of CRYS){const g=new THREE.Group();const mat=new THREE.MeshLambertMaterial({map:artTex('crystal'),color:0x5c6078,emissive:0x111122,transparent:true,alphaTest:.5,side:THREE.DoubleSide});applyVisShader(mat);
+    const pl=new THREE.Mesh(new THREE.PlaneGeometry(26/32,30/32),mat);pl.position.y=15/32;g.add(pl);
+    add(g,o.x,0,o.z);const l=new THREE.PointLight(0x7fe3ff,0,3.4);add(l,o.x,.8,o.z);const gs=new THREE.Sprite(new THREE.SpriteMaterial({map:glowC(),transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,toneMapped:false,opacity:0}));gs.scale.set(1.5,1.5,1);gs.visible=false;add(gs,o.x,.55,o.z);world.crys[o.id]={g,mat,light:l,glow:gs};addMark(o,'?',1.25,3.2,'#9fe8ff')}
+  world.dig={};world.holes={};const dtex=glowTex('rgba(255,230,140,1)','rgba(200,140,60,.7)');
+  for(const o of M.objs.filter(o=>o.type==='dig')){const g=new THREE.Group(),m=new THREE.Mesh(new THREE.CircleGeometry(.34,20),new THREE.MeshBasicMaterial({map:dtex,transparent:true,depthWrite:false,toneMapped:false}));m.rotation.x=-Math.PI/2;m.position.y=.02;g.add(m);
+    const mm=new THREE.MeshLambertMaterial({map:artTex('mound'),transparent:true,alphaTest:.5,side:THREE.DoubleSide});applyVisShader(mm);const mo=new THREE.Mesh(new THREE.PlaneGeometry(.75,.375),mm);mo.position.y=.19;g.add(mo);g.userData.mound=mo;add(g,o.x,0,o.z);world.dig[o.id]=g;
+    const hm=new THREE.MeshLambertMaterial({map:artTex('hole'),transparent:true,alphaTest:.5});applyVisShader(hm);const h=new THREE.Mesh(new THREE.PlaneGeometry(.75,.44),hm);h.rotation.x=-Math.PI/2;h.visible=false;add(h,o.x,.015,o.z);world.holes[o.id]=h}
+  const gp=CAVE.gatePos,gw=Math.max(3,CAVE.gateCells.length+1),gtex={c:artTex('gateC'),o:artTex('gateO')},gm=new THREE.MeshLambertMaterial({map:gtex.c,transparent:true,alphaTest:.5});
+  const door=new THREE.Mesh(new THREE.PlaneGeometry(gw,gw),gm);door.position.y=gw/2;const gg=new THREE.Group();gg.add(door);add(gg,gp.x,0,gp.z-.45);
+  const gl=new THREE.Sprite(new THREE.SpriteMaterial({map:glowW(),transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,toneMapped:false,opacity:0}));gl.scale.set(3.4,3.4,1);gl.visible=false;add(gl,gp.x,1.2,gp.z-.1);
+  world.gate={mat:gm,door,tex:gtex,glow:gl};
+  const ex=M.objs.find(o=>o.id==='caveExit');const exm=new THREE.Mesh(new THREE.CircleGeometry(.42,24),new THREE.MeshBasicMaterial({map:glowTex('rgba(255,246,210,1)','rgba(255,214,140,.5)'),transparent:true,depthWrite:false,toneMapped:false}));exm.rotation.x=-Math.PI/2;add(exm,ex.x,.03,ex.z);
+  addShafts(CAVE.free.filter(c=>c.walls===0),isTouch()?1:3,{force:[{x:Math.floor(ex.x),z:Math.floor(ex.z)}]});
 }
 /* ---- HD-2D look (Octopath Traveler style): vignette, tilt-shift blur at the top/bottom of the screen, light shafts with
    dust motes, glow around lights. Only the blur is costly: on by default on iPad/PC, off on phones, switchable in the menu. ---- */
@@ -655,7 +671,7 @@ function shaftTex(){const c=document.createElement('canvas');c.width=32;c.height
   const h=g.createLinearGradient(0,0,32,0);h.addColorStop(0,'#000');h.addColorStop(.5,'rgba(0,0,0,0)');h.addColorStop(1,'#000');g.globalCompositeOperation='destination-out';g.fillStyle=h;g.fillRect(0,0,32,128);
   return new THREE.CanvasTexture(c)}
 // light falling through cracks in the cave roof: open floor spots far apart, a leaning beam that faces the camera, a warm pool on the floor
-function addShafts(cells,n,o){o=o||{};world.shafts=[];const r=seededRnd(o.seed||11),h=o.h||6,picked=[];
+function addShafts(cells,n,o){o=o||{};world.shafts=[];const r=seededRnd(o.seed||11),h=o.h||6,picked=(o.force||[]).slice();n+=picked.length;
   for(let k=0;k<300&&picked.length<n;k++){const c=cells[r()*cells.length|0];if(c&&picked.every(p=>Math.hypot(p.x-c.x,p.z-c.z)>6))picked.push(c)}
   const mat=new THREE.MeshBasicMaterial({map:shaftTex(),transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,side:THREE.DoubleSide,toneMapped:false});
   const pool=new THREE.MeshBasicMaterial({map:glowW(),transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,toneMapped:false,opacity:.45*(o.op||1)});
@@ -682,30 +698,33 @@ function buildVillage(){world.marks=[];
   const pt=TEXGEN.path();const pathM=new THREE.MeshLambertMaterial({map:pt});
   const pathLine=(x0,z0,x1,z1)=>{const w=Math.abs(x1-x0)+1,d=Math.abs(z1-z0)+1;const p=new THREE.Mesh(new THREE.PlaneGeometry(w,d),pathM);p.rotation.x=-Math.PI/2;pt.repeat.set(w,d);add(p,(x0+x1)/2+.5,.01,(z0+z1)/2+.5)};
   pathLine(9,5,9,9);pathLine(5,5,13,5);
+  world.treeMat=['treeG','treeP'].map(k=>new THREE.MeshLambertMaterial({map:artTex(k),transparent:true,alphaTest:.5,side:THREE.DoubleSide}));world.treeShadow=new THREE.MeshBasicMaterial({color:0,transparent:true,opacity:.28,depthWrite:false});
   const hm=new THREE.MeshLambertMaterial({map:TEXGEN.hedge()});const hb=new THREE.BoxGeometry(1,M.wallH,1);
   for(let z=0;z<MH;z++)for(let x=0;x<MW;x++){const ch=M.rows[z][x];
     if(ch==='#')add(new THREE.Mesh(hb,hm),x+.5,M.wallH/2,z+.5);
-    if(ch==='T'){const g=new THREE.Group();const tr=box(.25,.8,.25,0x7a4f2c);tr.position.y=.4;const c1=new THREE.Mesh(new THREE.ConeGeometry(.55,1.1,7),new THREE.MeshLambertMaterial({color:0x3f8f45}));c1.position.y=1.2;const c2=c1.clone();c2.scale.set(.75,.8,.75);c2.position.y=1.7;g.add(tr,c1,c2);g.rotation.y=(x*7+z)%6;add(g,x+.5,0,z+.5);(world.trees=world.trees||[]).push(g)}}
+    if(ch==='T'){TREE_GEO=TREE_GEO||new THREE.PlaneGeometry(1.5,2).translate(0,1,0);const bl=(x*5+z*3)%4===0,g=new THREE.Group();
+      g.add(new THREE.Mesh(TREE_GEO,world.treeMat[bl?1:0]));const sh=new THREE.Mesh(new THREE.CircleGeometry(.5,16),world.treeShadow);sh.rotation.x=-Math.PI/2;sh.scale.set(1,.6,1);add(sh,x+.5,.012,z+.5);add(g,x+.5,0,z+.5);(world.trees=world.trees||[]).push(g)}}
   // Leah's house (3x2 cells at H)
-  const hx=5.5,hz=3,house=new THREE.Group();const walls=box(3,1.7,2,0xf3e3c8);walls.position.y=.85;const roof=new THREE.Mesh(new THREE.ConeGeometry(2.3,1.2,4),new THREE.MeshLambertMaterial({color:0xd86a5a}));roof.position.y=2.3;roof.rotation.y=Math.PI/4;roof.scale.set(1,1,.75);
-  const door=box(.6,1.1,.08,0x8a5c36);door.position.set(0,.55,1.02);const win1=box(.5,.45,.06,0x9fd4ff,{emissive:0x335577});win1.position.set(-.9,1.05,1.02);const win2=win1.clone();win2.position.x=.9;
-  house.add(walls,roof,door,win1,win2);add(house,hx,0,hz);label(t('house',{n:S.profile.name}),hx,2.9,hz);
+  const hx=5.5,hz=3,house=new THREE.Group();const walls=tbox(3,1.7,2,'timber');walls.position.y=.85;const roof=new THREE.Mesh(new THREE.ConeGeometry(2.3,1.2,4),new THREE.MeshLambertMaterial({map:(()=>{const t=TEXGEN.roofTiles();t.repeat.set(8,2);return t})()}));roof.position.y=2.3;roof.rotation.y=Math.PI/4;roof.scale.set(1,1,.75);
+  const door=tbox(.6,1.1,.08,'boards',0xc89870);door.position.set(0,.55,1.02);const win1=box(.5,.45,.06,0x9fd4ff,{emissive:0x335577});win1.position.set(-.9,1.05,1.02);const win2=win1.clone();win2.position.x=.9;
+  house.add(walls,roof,door,win1,win2);world.warm=[win1.material,win2.material];add(house,hx,0,hz);label(t('house',{n:S.profile.name}),hx,2.9,hz);
   // Granny Nuan's shop
-  const sx=13.5,sz=3,shop=new THREE.Group();const sw=box(3,1.5,2,0xfff0d6);sw.position.y=.75;const aw=new THREE.Group();
+  const sx=13.5,sz=3,shop=new THREE.Group();const sw=tbox(3,1.5,2,'boards',0xffe8cc);sw.position.y=.75;const aw=new THREE.Group();
   for(let i=0;i<6;i++){const s=box(.5,.08,1,i%2?0xffffff:0xe86b8a);s.position.set(-1.25+i*.5,1.6,.9);s.rotation.x=.35;aw.add(s)}
-  const counter=box(2.2,.7,.4,0xb98452);counter.position.set(0,.35,1.15);const goods=[0xf5c05a,0x7fd3f0,0xe86b8a,0x8fd46a].map((c,i)=>{const b=box(.25,.25,.25,c);b.position.set(-.75+i*.5,.83,1.15);return b});
-  shop.add(sw,aw,counter,...goods);add(shop,sx,0,sz);label(t('shopName'),sx,2.5,sz);
+  const counter=tbox(2.2,.7,.4,'boards');counter.position.set(0,.35,1.15);const goods=[0xf5c05a,0x7fd3f0,0xe86b8a,0x8fd46a].map((c,i)=>{const b=box(.25,.25,.25,c);b.position.set(-.75+i*.5,.83,1.15);return b});
+  shop.add(sw,aw,counter,...goods);add(shop,sx,0,sz);
+  world.warmGlow=[[hx-.9,1.05,hz+1.15],[hx+.9,1.05,hz+1.15],[sx-1.1,1.25,sz+1.3],[sx+1.1,1.25,sz+1.3]].map(([x,y,z])=>{const g=new THREE.Sprite(new THREE.SpriteMaterial({map:glowW(),transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,toneMapped:false,opacity:.5}));g.scale.set(1.1,1.1,1);add(g,x,y,z);return g});label(t('shopName'),sx,2.5,sz);
   // Granny Nuan stands beside her stall
   const nuan=makeSprite('nuanIdle',null,1.75,'#c98a9a');nuan.x=14.6;nuan.z=4.45;nuan.hx=0;nuan.hz=1;nuan.npc=true;npcs.push(nuan);
   addMark(M.objs.find(o=>o.id==='nuan'),'🛒',2.15);addMark({x:5.5,z:4.1},'🏠',2.2);
   // fountain of light
-  const f=M.objs.find(o=>o.type==='fountain');const fg=new THREE.Group();const base=new THREE.Mesh(new THREE.CylinderGeometry(.9,1,.4,16),new THREE.MeshLambertMaterial({color:0xcfc6e0}));base.position.y=.2;
+  const f=M.objs.find(o=>o.type==='fountain');const fg=new THREE.Group();const base=new THREE.Mesh(new THREE.CylinderGeometry(.9,1,.4,16),new THREE.MeshLambertMaterial({map:(()=>{const t=TEXGEN.stoneB();t.repeat.set(6,.5);return t})()}));base.position.y=.2;
   const water=new THREE.Mesh(new THREE.CircleGeometry(.78,20),new THREE.MeshBasicMaterial({color:0x7fd3f0,transparent:true,opacity:.85,toneMapped:false}));water.rotation.x=-Math.PI/2;water.position.y=.41;
-  const col=new THREE.Mesh(new THREE.CylinderGeometry(.12,.15,.9,10),new THREE.MeshLambertMaterial({color:0xcfc6e0}));col.position.y=.8;
+  const col=new THREE.Mesh(new THREE.CylinderGeometry(.12,.15,.9,10),new THREE.MeshLambertMaterial({map:(()=>{const t=TEXGEN.stoneB();t.repeat.set(1,1);return t})()}));col.position.y=.8;
   const orbM=new THREE.MeshLambertMaterial({color:0x8fe8ff,emissive:0x1a88b8});const orb=new THREE.Mesh(new THREE.OctahedronGeometry(.22),orbM);orb.position.y=1.4;fg.add(base,water,col,orb);add(fg,f.x,0,f.z);world.orb={m:orb,mat:orbM};
-  const fl=new THREE.PointLight(0x9fe8ff,.4,5);add(fl,f.x,1.4,f.z);world.orbLight=fl;
+  const fl=new THREE.PointLight(0x9fe8ff,.4,5);add(fl,f.x,1.4,f.z);world.orbLight=fl;const og=new THREE.Sprite(new THREE.SpriteMaterial({map:glowC(),transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,toneMapped:false,opacity:.35}));og.scale.set(1.6,1.6,1);add(og,f.x,1.4,f.z);world.orbGlow=og;
   // cave entrance (rocky arch at the bottom hedge)
-  const v=M.objs.find(o=>o.type==='cave');const cg=new THREE.Group();const rockM=new THREE.MeshLambertMaterial({color:0x6d6478});
+  const v=M.objs.find(o=>o.type==='cave');const cg=new THREE.Group();const rockM=new THREE.MeshLambertMaterial({map:(()=>{const t=TEXGEN.stoneB();t.repeat.set(2,2);return t})(),color:0x9a90b0,flatShading:true});
   [[-.9,.7],[.9,.7],[-.55,1.4],[.55,1.4],[0,1.6]].forEach(([x,y])=>{const r=new THREE.Mesh(new THREE.DodecahedronGeometry(.55),rockM);r.position.set(x,y,0);cg.add(r)});
   const hole=new THREE.Mesh(new THREE.PlaneGeometry(1.3,1.5),new THREE.MeshBasicMaterial({color:0x05040a}));hole.position.set(0,.75,.3);cg.add(hole);add(cg,v.x,0,v.z+.1);label(t('caveIn'),v.x,2.6,v.z);addMark({x:v.x,z:v.z+.4},'💎',2.1);
   const cr=new THREE.Mesh(new THREE.OctahedronGeometry(.16),new THREE.MeshLambertMaterial({color:0x8fe8ff,emissive:0x2aa8d8}));add(cr,v.x+.95,.2,v.z+.35);
@@ -716,7 +735,7 @@ function buildHouse(){world.marks=[];
   const pm=new THREE.MeshLambertMaterial({map:TEXGEN.plaster()});const bg=new THREE.BoxGeometry(1,M.wallH,1);
   for(let z=0;z<MH;z++)for(let x=0;x<MW;x++){const ch=M.rows[z][x];if(ch==='#'){const low=z===MH-1;const m=new THREE.Mesh(low?new THREE.BoxGeometry(1,.5,1):bg,pm);add(m,x+.5,low?.25:M.wallH/2,z+.5)}}
   const ex=M.objs.find(o=>o.type==='exit');addMark(ex,'🚪',1.3);const mat=new THREE.Mesh(new THREE.PlaneGeometry(1,.7),new THREE.MeshLambertMaterial({color:0x7a8f5a}));mat.rotation.x=-Math.PI/2;add(mat,ex.x,.02,ex.z+.1);
-  const win=box(1.4,.8,.06,0x9fd4ff,{emissive:0x446688});add(win,MW/2,1.3,1.03);
+  const win=box(1.4,.8,.06,0xffe7b0,{emissive:0x8a6a3a});add(win,MW/2,1.3,1.03);addShafts([],0,{force:[{x:Math.floor(MW/2),z:2}],w:1.5,h:3.4,op:.7,seed:31});
   world.furn=new THREE.Group();root.add(world.furn);drawFurniture();
   world.grid=new THREE.Group();root.add(world.grid);
 }
@@ -797,7 +816,7 @@ let marker;
 function showMarker([x,z]){if(!marker||marker.parent!==root){marker=new THREE.Mesh(new THREE.RingGeometry(.15,.24,24),new THREE.MeshBasicMaterial({color:0x7fe3ff,transparent:true,toneMapped:false,depthWrite:false}));marker.rotation.x=-Math.PI/2;root.add(marker)}marker.position.set(x,.03,z);marker.userData.t=1}
 function interact(o){pending=null;player.path=null;
   if(o.type==='crystal'){if(S.awake.includes(o.id)){toast(t('already'));return}askQuestion(o)}
-  else if(o.type==='dig'){const r=command('dig',{id:o.id});if(!r.ok){toast(t('dugEmpty'));return}world.dig[o.id].visible=false;burst(o.x,o.z,0x8a5a34,'dirt');burst(o.x,o.z,0xffd36a);SFX.play('dig');toast(t('dug',{x:ITEMS[r.item].em+' '+t('it')[r.item]}))}
+  else if(o.type==='dig'){const r=command('dig',{id:o.id});if(!r.ok){toast(t('dugEmpty'));return}world.dig[o.id].visible=false;if(world.holes[o.id])world.holes[o.id].visible=true;burst(o.x,o.z,0x8a5a34,'dirt');burst(o.x,o.z,0xffd36a);SFX.play('dig');toast(t('dug',{x:ITEMS[r.item].em+' '+t('it')[r.item]}))}
   else if(o.type==='peb'){if(S.peb){const hs=t('dlg').pebHints;say([['peb',hs[(S.hint=(S.hint||0)+1)%hs.length]]]);return}say(t('dlg').pebMeet,()=>askQuestion(o))}
   else if(o.type==='gate'){if(gateIsOpen())winCave();else toast(t('gateClosed',{n:CRYS.length-S.awake.length}))}
   else if(o.type==='cave')goScene('cave','start');
@@ -944,14 +963,34 @@ function burst(x,z,color,kind){const K={sparkle:{n:24,sz:.11,up:1.6,out:.6,g:4,l
   const g=new THREE.Points(geo,m);root.add(g);bursts.push({g,m,pos,vel,t:K.life,life:K.life,grav:K.g})}
 function ptsLayer(n,color,size,opacity){const pos=new Float32Array(n*3).fill(-50),geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
   const pts=new THREE.Points(geo,new THREE.PointsMaterial({color,size,transparent:true,opacity,depthWrite:false,toneMapped:false}));root.add(pts);return{pts,pos}}
-function updateFx(dt,now){if(!root||!player)return;
+/* ---- style 2 "Light Keeper": the village starts dim (muted, cool, never dark) and gets warmer and more colourful
+   every time the cave is cleared (3 clears = full light). The change plays as a short moment when you come back. ---- */
+const lightTarget=()=>Math.min(1,.35+.65*Math.min(S.clears||0,3)/3);
+let vLight=1,vLightAnim=null;
+function villageLook(L){const c=(a,b)=>new THREE.Color(a).lerp(new THREE.Color(b),L);
+  scene.background=c(0x7f9bb2,0x9fd4ff);if(scene.fog)scene.fog.color=c(0x7f9bb2,0x9fd4ff);
+  world.hemi.color=c(0xaebfe0,0xffe8c0);world.hemi.groundColor=c(0x2a3050,0x2a2040);world.sun.color=c(0xc8d6ff,0xfff2d8);world.sun.intensity=.45+.3*L;world.amb.color=c(0x7a88a8,0x8a7a90);
+  // muted look without a CSS filter (a filter on the 3D canvas costs frame rate on weak phones): tint the scene's lit materials toward grey-blue
+  if(!world.vTint){world.vTint=[];const seen=new Set();root.traverse(o=>{const m=o.material;if(o.isMesh&&m&&m.isMeshLambertMaterial&&!seen.has(m)){seen.add(m);world.vTint.push([m,m.color.clone()])}})}
+  const tint=c(0x9aa6b4,0xffffff);world.vTint.forEach(([m,c0])=>m.color.copy(c0).multiply(tint));
+  if(world.shafts)world.shaftOp=.5*(.35+.65*L);if(world.petals)world.petals.active=Math.round(world.petals.seed.length*(.25+.75*L));
+  if(world.warm)world.warm.forEach(m=>{m.color.set(0xffe2a8);m.emissive.set(new THREE.Color(0xffa040).multiplyScalar(.75-.45*L))});
+  if(world.warmGlow)world.warmGlow.forEach(g=>g.material.opacity=.55-.35*L);
+  const fx=$('fx');if(fx)fx.style.setProperty('--vig',(.34-.12*L).toFixed(3))}
+function applyLight(){if(M!==MAPS.village){vLightAnim=null;renderer.domElement.style.filter='';world.hemi.color.set(0xffe8c0);world.hemi.groundColor.set(0x2a2040);world.sun.color.set(0xfff2d8);world.amb.color.set(0x8a7a90);return}
+  const tgt=lightTarget();if(S.lightSeen===undefined){S.lightSeen=tgt;Store.save(S)}vLight=Math.min(S.lightSeen,tgt);villageLook(vLight);
+  vLightAnim=tgt>vLight+.001?{from:vLight,to:tgt,t:-1}:null}
+function updateLight(dt){const a=vLightAnim;if(!a||M!==MAPS.village||modalOpen())return;a.t+=dt;if(a.t<0)return;
+  if(!a.told){a.told=1;toast(t('lightBack'));SFX.play('magic');const f=M.objs.find(o=>o.type==='fountain');if(f){burst(f.x,f.z,0xfff4c0);burst(f.x,f.z,0xffd27a,'ring')}}
+  const k=Math.min(1,a.t/2.5);vLight=a.from+(a.to-a.from)*k*k*(3-2*k);villageLook(vLight);if(k>=1){S.lightSeen=a.to;Store.save(S);vLightAnim=null}}
+function updateFx(dt,now){if(!root||!player)return;updateLight(dt);
   // Forget Dust (WORLD.md): purple-grey dust swirls around Peb until Leah dusts it off
   const dazed=M===CAVE&&peb&&peb.mesh.visible&&!S.peb;
   if(dazed){const d=world.pebDust||(world.pebDust=Object.assign(ptsLayer(26,0xa99cc0,.13,.8),{seed:Array.from({length:26},()=>({a:Math.random()*6.28,r:.35+Math.random()*.35,y:.2+Math.random()*.9,s:.8+Math.random()*1.2}))}));
     d.pts.visible=true;d.seed.forEach((m,i)=>{m.a+=dt*m.s;d.pos[i*3]=peb.x+Math.cos(m.a)*m.r;d.pos[i*3+1]=m.y+Math.sin(now/300+i)*.05;d.pos[i*3+2]=peb.z+Math.sin(m.a)*m.r});d.pts.geometry.attributes.position.needsUpdate=true}
   else if(world.pebDust)world.pebDust.pts.visible=false;
-  if(world.trees)world.trees.forEach((g,i)=>g.rotation.z=Math.sin(now/1300+i*1.7)*.035);
-  if(world.petals){const p=world.petals;p.seed.forEach((m,i)=>{m.y-=m.v*dt;if(m.fresh||m.y<0||Math.hypot(m.x-player.x,m.z-player.z)>9){m.x=player.x+(Math.random()-.5)*14;m.z=player.z+(Math.random()-.5)*10;if(!m.fresh)m.y=5;m.fresh=false}
+  if(world.trees)world.trees.forEach((g,i)=>{g.rotation.y=yaw;g.rotation.z=Math.sin(now/1300+i*1.7)*.035});
+  if(world.petals){const p=world.petals;p.seed.forEach((m,i)=>{if(p.active!==undefined&&i>=p.active){p.pos[i*3+1]=-50;return}m.y-=m.v*dt;if(m.fresh||m.y<0||Math.hypot(m.x-player.x,m.z-player.z)>9){m.x=player.x+(Math.random()-.5)*14;m.z=player.z+(Math.random()-.5)*10;if(!m.fresh)m.y=5;m.fresh=false}
     m.x+=dt*.25;p.pos[i*3]=m.x+Math.sin(now/900+m.ph)*.5;p.pos[i*3+1]=m.y;p.pos[i*3+2]=m.z});p.pts.geometry.attributes.position.needsUpdate=true}
   if(world.spark){const p=world.spark;p.seed.forEach((m,i)=>{m.y+=m.v*dt;if(m.y>1.8)m.y=0;m.a+=dt;p.pos[i*3]=p.fx+Math.cos(m.a)*.3;p.pos[i*3+1]=1.35+m.y;p.pos[i*3+2]=p.fz+Math.sin(m.a)*.3});p.pts.geometry.attributes.position.needsUpdate=true}
   // small dust puffs at the feet while walking (not indoors)
@@ -967,14 +1006,14 @@ function flyCoins(){if(lastS!==S||lastCoins===null){lastS=S;lastCoins=S.coins;re
   for(let i=0;i<n;i++){const el=document.createElement('div'),x0=innerWidth/2+(Math.random()-.5)*80,y0=innerHeight*.5+(Math.random()-.5)*40;el.className='fly';el.textContent='⭐';el.style.left=x0+'px';el.style.top=y0+'px';document.body.appendChild(el);
     setTimeout(()=>{el.style.transform=`translate(${to.left+to.width/2-x0-11}px,${to.top+to.height/2-y0-11}px) scale(.7)`;el.style.opacity='.3'},30+i*70);setTimeout(()=>el.remove(),900+i*70)}
   const pill=$('hCoins').parentElement;setTimeout(()=>{pill.classList.remove('bump');void pill.offsetWidth;pill.classList.add('bump')},750+n*70)}
-function wakeCrystal(id,fx){if(!world.crys)return;const c=world.crys[id];if(!c)return;c.mat.color.set(0x8fe8ff);c.mat.emissive.set(0x2aa8d8);c.light.intensity=1.1;if(c.glow)c.glow.material.opacity=.7;if(fx){const o=CRYS.find(o=>o.id===id);burst(o.x,o.z,0x7fe3ff);burst(o.x,o.z,0xffffff)}}
-function openGate(fx){if(!world.gate)return;world.gate.mat.emissive.set(0x3a6a90);world.gate.door.material.opacity=.55;if(fx){toast(t('gateOpen'));burst(CAVE.gatePos.x,CAVE.gatePos.z,0xfff0a0)}}
+function wakeCrystal(id,fx){if(!world.crys)return;const c=world.crys[id];if(!c)return;c.mat.color.set(0xffffff);c.mat.emissive.set(0x0e3a4a);c.light.intensity=1.1;if(c.glow){c.glow.visible=true;c.glow.material.opacity=.7}if(fx){const o=CRYS.find(o=>o.id===id);burst(o.x,o.z,0x7fe3ff);burst(o.x,o.z,0xffffff)}}
+function openGate(fx){if(!world.gate)return;const G=world.gate;G.mat.map=G.tex.o;G.mat.emissiveMap=G.tex.o;G.mat.emissive.set(0xffffff);G.mat.emissiveIntensity=.6;G.mat.needsUpdate=true;G.glow.visible=true;G.glow.material.opacity=.8;if(fx){toast(t('gateOpen'));burst(CAVE.gatePos.x,CAVE.gatePos.z,0xfff0a0)}}
 function pebFriend(fx){peb.mat.color.set(0xffffff);peb.follow=true;if(fx){burst(peb.x,peb.z,0x9c8fb0,'dust');burst(peb.x,peb.z,0x9dffb0)}}
 function applyStateToView(){
-  if(M===CAVE){for(const o of CRYS){const c=world.crys[o.id];if(S.awake.includes(o.id))wakeCrystal(o.id,false);else{c.mat.color.set(0x8a8fa8);c.mat.emissive.set(0x111122);c.light.intensity=0;if(c.glow)c.glow.material.opacity=0}}
-    for(const id in world.dig)world.dig[id].visible=!S.dug.includes(id);if(gateIsOpen())openGate(false)}
+  if(M===CAVE){for(const o of CRYS){const c=world.crys[o.id];if(S.awake.includes(o.id))wakeCrystal(o.id,false);else{c.mat.color.set(0x5c6078);c.mat.emissive.set(0x111122);c.light.intensity=0;if(c.glow){c.glow.material.opacity=0;c.glow.visible=false}}}
+    for(const id in world.dig){world.dig[id].visible=!S.dug.includes(id);if(world.holes&&world.holes[id])world.holes[id].visible=S.dug.includes(id)}if(gateIsOpen())openGate(false)}
   if(S.peb)pebFriend(false);else{peb.mat.color.set(0x9a96a8);peb.follow=false}
-  if(world.orb){const k=S.awake.length/CRYS.length+Math.min(S.clears,5)*.2;world.orbLight.intensity=.4+k*1.2;world.orb.mat.emissive.setRGB(.1+k*.2,.5+k*.3,.72+k*.2)}
+  if(world.orb){const k=S.awake.length/CRYS.length+Math.min(S.clears,5)*.2;if(world.orbGlow)world.orbGlow.material.opacity=.25+.2*Math.min(1,k);world.orbLight.intensity=.4+k*1.2;world.orb.mat.emissive.setRGB(.1+k*.2,.5+k*.3,.72+k*.2)}
   const inCave=M===CAVE,inHouse=M===MAPS.house;$('bCompass').hidden=$('bWarp').hidden=!inCave;$('bDeco').hidden=!inHouse;$('tDeco').textContent=t('deco');
 }
 function refreshHUD(){if(!S)return;flyCoins();$('hBook').textContent=(S.book||[]).length;$('hName').textContent=S.profile.name;$('hCoins').textContent=S.coins;$('hCrys').textContent=S.awake.length;$('hCrysT').textContent=CRYS.length;$('tCompass').textContent=t('compass');$('tWarp').textContent=t('warp');if(!$('shop').hidden)$('shopCoins').textContent=S.coins}
@@ -1063,7 +1102,7 @@ function buildScene(name){npcs.forEach(removeSprite);npcs=[];const L={amb:world.
   renderer.toneMapping=M.lit?THREE.NoToneMapping:THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=M.lit?1:1.4;
   L.amb.intensity=M.lit?(name==='village'?.55:.6):.75;L.hemi.intensity=M.lit?.45:.5;L.sun.intensity=name==='village'?.75:0;L.lamp.intensity=M.lit?.35:1.8;L.lamp.distance=M.lit?10:10;
   if(name==='cave')buildCave();else if(name==='village')buildVillage();else buildHouse();
-  world.trail=new THREE.Group();root.add(world.trail);applyBright();applyHD2D()}
+  world.trail=new THREE.Group();root.add(world.trail);applyBright();applyHD2D();applyLight()}
 function resize(){const w=innerWidth,h=innerHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
 function blockedCell(x,z){if(isWallCell(x,z))return true;return M===MAPS.house&&S.placed.some(p=>p.x===x&&p.z===z)}
 function unstick(sp){const cx=Math.floor(sp.x),cz=Math.floor(sp.z);if(!blockedCell(cx,cz))return false;
@@ -1094,7 +1133,8 @@ function loop(now){const dt=Math.min(.05,(now-last)/1000);last=now;requestAnimat
   world.lamp.position.set(player.x,1.5,player.z);
   for(const n of npcs){const d=Math.hypot(player.x-n.x,player.z-n.z);if(d<3.2&&d>.01){n.hx=(player.x-n.x)/d;n.hz=(player.z-n.z)/d}else{n.hx=0;n.hz=1}spriteFrame(n)}
   spriteFrame(player);spriteFrame(peb);
-  if(world.crys)for(const o of CRYS){const c=world.crys[o.id];c.g.rotation.y+=dt*(S.awake.includes(o.id)?.6:.15);if(c.glow&&S.awake.includes(o.id))c.glow.material.opacity=.55+.15*Math.sin(now/400+o.x);if(!S.awake.includes(o.id))c.mat.emissive.setRGB(.05+.05*Math.sin(now/500+o.x),.05,.1+.08*Math.sin(now/500+o.x))}
+  if(world.crys)for(const o of CRYS){const c=world.crys[o.id];c.g.rotation.y=yaw;c.g.position.y=S.awake.includes(o.id)?.06+.04*Math.sin(now/500+o.x):0;if(c.glow&&S.awake.includes(o.id))c.glow.material.opacity=.55+.15*Math.sin(now/400+o.x);if(!S.awake.includes(o.id))c.mat.emissive.setRGB(.05+.05*Math.sin(now/500+o.x),.05,.1+.08*Math.sin(now/500+o.x))}
+  if(world.dig)for(const id in world.dig){const mo=world.dig[id].userData.mound;if(mo)mo.rotation.y=yaw}
   if(world.marks)for(const m of world.marks){let vis=true;const o=m.obj;
     if(m.near){const d=Math.hypot(o.x-player.x,o.z-player.z);vis=o.type==='crystal'&&!S.awake.includes(o.id)&&d<m.near&&!blocked(player.x,player.z,o.x,o.z)}
     if(M===MAPS.house&&deco)vis=false;
