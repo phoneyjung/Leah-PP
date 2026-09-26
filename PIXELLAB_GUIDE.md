@@ -106,7 +106,18 @@
 
 เข้า https://www.pixellab.ai/create-character
 - ตัวละครที่มีแล้ว: ลีอา · พ่อมด · เจ้าหญิง · Peb · ยายนวล (ค่าที่ใช้สร้างอยู่ใน `ART_GUIDE.md`)
-- ท่าเดิน: เปิดตัวละคร → **Add Animation** → **Walking (6 frames)** → แต่ละทิศมีปุ่ม 🚀 (สร้างทันที) และ ⚙️ (ตั้งค่า) → กด 🚀 เฉพาะ South · North · East · South-East · North-West (โค้ดกลับด้านให้ครบ 8 ทิศ)
+- **หน้า Add Animation (แบบใหม่ เห็นจริง 27 ก.ย. 2569)**
+  - ซ้าย: **Character Preview** + รายการ **Direction** (South · East · North · West · South-East · North-East · North-West · South-West)
+  - ขวา: **Select Animation Type → Template motion**
+    - **MODEL:** **Skeleton v3** (RECOMMENDED · BETA) = ขยับตัวละครเดิม สี ชุด ของในมือ **คงเดิมเป๊ะ** (ท่าเบากว่า ใช้เวลานานกว่า) | Standard (legacy) = วาดใหม่ทุกเฟรม สี/ชุดอาจเพี้ยน กำลังจะถูกเลิกใช้
+    - แท็บ All · Movement · Combat · Interactions
+    - **Movement:** Idle (Breathing Idle, Fight Stance Idle) · Jumping (4) · Running (3) · **Walking (19 แบบ:** Walk, Walking, Walking (4/6/8 frames), Walk/Walking Alt 1–9, Crouched Walking, Sad Walk, Scary Walk**)** · Backflip · Crouching · Front Flip · Getting Up · Slide
+    - Combat: Kicking (5) · Punching (3) · Reactions (2) · Fireball · Interactions: Drinking · Picking Up · Pull/Push/Throw Object
+    - เลือกท่าแล้วมี **MOVEMENT PREVIEW** (หุ่นตัวอย่าง + ทิศ + ความเร็ว) และ **ADJUST MOTION:** Arm swing · Stride · Posture
+  - **Describe your own → Custom Animation** (BETA): Model V3 | PixMiniMax · Action Description · Canvas (เช่น 88×88 กด Resize ได้) · Frame Count · ติ๊ก Keep first frame (idle pose) · 1 generation
+  - ล่างสุด: **Advanced Options** (ใช้ค่าเดิมของตัวละคร) · ปุ่ม **Generate Live** (ดูสด) / **Generate in Background** (ทำเบื้องหลัง สั่งหลายตัวพร้อมกันได้)
+- **ท่าเดินของเกมเรา:** Skeleton v3 → Movement → Walking → **Walking (6 frames)** → ADJUST MOTION ปล่อยค่าเดิม → Generate in Background · ต้องได้ครบ 8 ทิศ (ตัวผมหางม้าข้างเดียวห้ามใช้วิธีกลับด้านภาพ)
+- ~~แบบเก่า: Walking (6 frames) → ปุ่ม 🚀 ต่อทิศ~~ (หน้าจอเปลี่ยนแล้ว)
 - ดาวน์โหลด: ปุ่มบนการ์ด **Idle** → zip (มีท่ายืน + ท่าเดิน) ส่งมาทั้ง zip ไม่ต้องแตก
 
 ## 4. ส่งไฟล์กลับให้ Claude
