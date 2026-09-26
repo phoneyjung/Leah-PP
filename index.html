@@ -294,7 +294,7 @@ const t=(k,v)=>{let s=T[LANG][k]??T.th[k]??k;if(v)for(const x in v)s=s.replace('
 const $=id=>document.getElementById(id);
 
 /* ================= 2. DATA ================= */
-const ASSET={leahWalk:'leah-walk.png',leahIdle:'leah-idle.png',dadIdle:'dad-idle.png',momIdle:'mom-idle.png',pebIdle:'peb-idle.png',nuanIdle:'nuan-idle.png',floor:'cave-floor.jpg',wall:'cave-wall.jpg',caveTiles:'tiles-cave.png',villageTiles:'tiles-village.png',hedgeTiles:'tiles-hedge.png',fountain:'obj-fountain.png',villageProps:'props-village.png'};
+const ASSET={leahWalk:'leah-walk.png',leahIdle:'leah-idle.png',dadIdle:'dad-idle.png',momIdle:'mom-idle.png',pebIdle:'peb-idle.png',nuanIdle:'nuan-idle.png',floor:'cave-floor.jpg',wall:'cave-wall.jpg',caveTiles:'tiles-cave.png',villageTiles:'tiles-village.png',hedgeTiles:'tiles-hedge.png',fountain:'obj-fountain.png',villageProps:'props-village.png',caveProps:'props-cave.png',villageBuildings:'buildings-village.png'};
 const CHARS={leah:{idle:'leahIdle',walk:'leahWalk',size:1.45,tint:'#86c9e0'},dad:{idle:'dadIdle',walk:null,size:2.3,tint:'#6b3fa0'},mom:{idle:'momIdle',walk:null,size:1.9,tint:'#e08aa8'}};
 const ITEMS={gem:{em:'💎',price:6,w:3},coin:{em:'🪙',price:8,w:2},shell:{em:'🐚',price:3,w:4},feather:{em:'🪶',price:4,w:3},star:{em:'⭐',price:10,w:1}};
 const FURN={bed:{em:'🛏️',price:40},table:{em:'🪵',price:25},chair:{em:'🪑',price:15},lamp:{em:'💡',price:20},rug:{em:'🟣',price:12},plant:{em:'🪴',price:10},shelf:{em:'📚',price:30},sofa:{em:'🛋️',price:35},chest:{em:'🧸',price:18},display:{em:'💠',price:45}};
@@ -302,22 +302,22 @@ const FURN={bed:{em:'🛏️',price:40},table:{em:'🪵',price:25},chair:{em:'�
 const MAPS={
  cave:{rows:[
 '########################',
-'#C....#.....GG.....#..C#',
+'#C...d#.....GG.....#..C#',
 '#.....#............#...#',
 '#..##.#..##....##..#.D.#',
-'#..#C....#......#....###',
+'#..#C....#d....d#....###',
 '#..####..#..C...#..#...#',
 '#.........##..###..#.C.#',
-'###..D....#........#...#',
+'###..D....#........#d..#',
 '#C#..###..#..P.....###.#',
-'#.#....#.....####......#',
+'#.#...d#.....####......#',
 '#.##...#.C...#..#..D...#',
-'#......####..#C.#..###.#',
-'#..D......#.....#....#C#',
-'#.####....#..##.###..#.#',
+'#......####..#C.#..###d#',
+'#..D......#..d..#d...#C#',
+'#d####....#..##.###..#.#',
 '#....#.C..#........D.#.#',
 '#....#....#..###.......#',
-'#.........SX...........#',
+'#.........SX...d.......#',
 '########################'],wallH:2.2,lit:false},
  village:{rows:[
 '####################',
@@ -341,7 +341,7 @@ const MAPS={
 '####E####'],wallH:2.0,lit:true}};
 // letters that block walking (drawn as objects, not walls)
 // letters that block walking, per map. In the village S is Granny Nuan's shop; in the cave S is the start spot and must stay walkable.
-const SOLID={village:{T:1,H:1,S:1,F:1,V:1,o:1},cave:{},house:{}};
+const SOLID={village:{T:1,H:1,S:1,F:1,V:1,o:1},cave:{d:1},house:{}};
 for(const k in MAPS){const m=MAPS[k];m.key=k;m.W=m.rows[0].length;m.H=m.rows.length;m.objs=[];m.cells=[];
   m.rows.forEach((row,z)=>[...row].forEach((ch,x)=>{
     const c={x:x+.5,z:z+.5};
@@ -367,9 +367,9 @@ CAVE.gatePos={x:CAVE.gateCells.reduce((a,c)=>a+c.x,0)/CAVE.gateCells.length,z:CA
 let CRYS=[];
 // crystals and dig spots move to new hiding places every round (fixed within a round, so a reload keeps them put)
 CAVE.baseObjs=CAVE.objs.filter(o=>o.type!=='crystal'&&o.type!=='dig');
-{const W=CAVE.W,H=CAVE.H,wall=(x,z)=>x<0||z<0||x>=W||z>=H||CAVE.rows[z][x]==='#';
+{const W=CAVE.W,H=CAVE.H,wall=(x,z)=>x<0||z<0||x>=W||z>=H||'#d'.includes(CAVE.rows[z][x]);
  const st=CAVE.start,gp=CAVE.gatePos,free=[];
- for(let z=0;z<H;z++)for(let x=0;x<W;x++){const ch=CAVE.rows[z][x];if(ch==='#'||'SXGP'.includes(ch))continue;
+ for(let z=0;z<H;z++)for(let x=0;x<W;x++){const ch=CAVE.rows[z][x];if(ch==='#'||'SXGPd'.includes(ch))continue;
    if(Math.hypot(x+.5-st.x,z+.5-st.z)<3)continue;if(z<=2&&Math.abs(x+.5-gp.x)<2)continue;free.push({x,z,walls:[[1,0],[-1,0],[0,1],[0,-1]].filter(([a,b])=>wall(x+a,z+b)).length})}
  CAVE.free=free;CAVE.hidden=free.filter(c=>c.walls>=2&&Math.hypot(c.x+.5-st.x,c.z+.5-st.z)>=4)}
 function seededRnd(seed){let s=(seed>>>0)||1;return()=>{s^=s<<13;s^=s>>>17;s^=s<<5;return(s>>>0)/4294967296}}
@@ -566,8 +566,15 @@ function worldUV(geo,w,h,d){const uv=geo.attributes.uv,F=[[d,h],[d,h],[w,d],[w,d
 const TEXC={};const texOf=k=>TEXC[k]||(TEXC[k]=TEXGEN[k]());
 const tbox=(w,h,d,k,color=0xffffff)=>new THREE.Mesh(worldUV(new THREE.BoxGeometry(w,h,d),w,h,d),new THREE.MeshLambertMaterial({map:texOf(k),color}));
 let TREE_GEO=null;
+// PixelLab atlases (x,y,w,h in px): village buildings and cave props
+const ATLAS={V:{"w":390,"h":130,"r":{"house":[1,1,128,128],"shop":[131,1,128,128],"mouth":[261,1,128,128]}},C:{"w":330,"h":234,"r":{"pillar":[1,1,64,64],"pillar2":[67,1,64,64],"boulder":[133,1,64,64],"boulder2":[199,1,64,64],"nest":[265,1,64,64],"geode":[1,67,64,64],"geode2":[67,67,64,64],"beam":[133,67,64,64],"pool":[199,67,64,64],"stairs":[265,67,64,64],"crystal":[1,133,32,32],"compass":[35,133,32,32],"ladder":[69,133,32,32],"amethyst":[103,133,32,32],"mushR":[137,133,32,32],"cart":[171,133,32,32],"fossil":[1,167,32,32],"rune":[35,167,32,32],"shovel":[69,167,32,32],"moss":[103,167,32,32],"mushY":[137,167,32,32],"rope":[171,167,32,32],"slab":[1,201,32,32],"lantern":[35,201,32,32],"stalag":[69,201,32,32],"pebbles":[103,201,32,32],"crate":[137,201,32,32],"rocks":[171,201,32,32]}}};
+const CAVE_DECAL=[[1,9,"moss",0.3,0.0],[2,5,"pebbles",0.3,0.0],[5,6,"slab",0.0,-0.3],[6,15,"fossil",-0.3,0.0],[11,8,"rune",-0.3,0.0],[16,1,"mushY",0.0,-0.3],[22,3,"mushR",0.3,0.0],[22,16,"rocks",0.3,0.0],[1,2,"amethyst",-0.3,0.0],[5,12,"rope",0.0,0.3],[16,7,"shovel",0.0,-0.3],[8,12,"ladder",0.0,-0.3],[2,16,"lantern",0.0,0.3],[9,1,"crate",0.0,-0.3],[18,16,"moss",0.0,0.3],[19,4,"pebbles",0.0,-0.3]];
+const DSIZE={pillar:1.8,pillar2:1.8,boulder:1.6,boulder2:1.6,geode:1.4,geode2:1.4,beam:1.8,pool:1.7,cart:1,stalag:1,nest:1.5,stairs:2,crate:.8,lantern:.8,ladder:1,rune:.9};
+function rectGeo(A,k,size){const [x,y,w,h]=A.r[k],gh=size*h/w,g=new THREE.PlaneGeometry(size,gh).translate(0,gh/2,0),uv=g.attributes.uv,u0=x/A.w,u1=(x+w)/A.w,v1=1-y/A.h,v0=1-(y+h)/A.h;
+  for(let i=0;i<uv.count;i++)uv.setXY(i,uv.getX(i)>.5?u1:u0,uv.getY(i)>.5?v1:v0);return g}
+function atlasTex(im){const t=new THREE.Texture(im);t.needsUpdate=true;t.magFilter=t.minFilter=THREE.NearestFilter;t.generateMipmaps=false;t.encoding=THREE.sRGBEncoding;return t}
 // stand-up pictures face the camera and are stretched like the characters are, so the high camera does not squash them
-function faceCam(o,cap){o.rotation.y=yaw;const p=o.position,pit=Math.atan2(camera.position.y-.7,Math.hypot(camera.position.x-p.x,camera.position.z-p.z));o.scale.y=Math.min(cap||9,1/Math.cos(pit))}
+function faceCam(o,cap){o.rotation.y=yaw;const p=o.position,pit=Math.atan2(camera.position.y-.7,Math.hypot(camera.position.x-p.x,camera.position.z-p.z));o.scale.y=Math.min(cap||1.5,1/Math.cos(pit))}
 // village trees and props from PixelLab (A-13): one atlas, 66 px cells (64 px + 1 px gap), 4 per row
 const VPROPS={banana:0,bananaB:1,frangi:2,roundA:3,roundB:4,pink:5,mango:6,well:7,lamp:8,palm:9,coop:10,stall:11,bench:12,board:13,arch:14,bath:15};
 const TREE_PICK={'1,1':'roundA','2,1':'palm','3,1':'roundB','8,1':'pink','9,1':'roundA','16,1':'roundB','17,1':'mango','18,1':'roundA','1,2':'banana','18,2':'bananaB','1,8':'frangi','17,8':'roundB','18,8':'palm','1,9':'roundA','2,9':'roundB','17,9':'pink','18,9':'roundA'};
@@ -689,7 +696,16 @@ function buildCave(){
   const door=new THREE.Mesh(new THREE.PlaneGeometry(gw,gw),gm);door.position.y=gw/2;const gg=new THREE.Group();gg.add(door);add(gg,gp.x,0,gp.z-.45);
   const gl=new THREE.Sprite(new THREE.SpriteMaterial({map:glowW(),transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,toneMapped:false,opacity:0}));gl.scale.set(3.4,3.4,1);gl.visible=false;add(gl,gp.x,1.2,gp.z-.1);
   world.gate={mat:gm,door,tex:gtex,glow:gl};
-  const ex=M.objs.find(o=>o.id==='caveExit');const exm=new THREE.Mesh(new THREE.CircleGeometry(.42,24),new THREE.MeshBasicMaterial({map:glowTex('rgba(255,246,210,1)','rgba(255,214,140,.5)'),transparent:true,depthWrite:false,toneMapped:false}));exm.rotation.x=-Math.PI/2;add(exm,ex.x,.03,ex.z);
+  const ex=M.objs.find(o=>o.id==='caveExit');const exm=new THREE.Mesh(new THREE.CircleGeometry(.42,24),new THREE.MeshBasicMaterial({map:glowTex('rgba(255,246,210,1)','rgba(255,214,140,.5)'),transparent:true,depthWrite:false,toneMapped:false}));exm.rotation.x=-Math.PI/2;add(exm,ex.x,.03,ex.z);world.exitDisc=exm;
+  world.caveDecor=[];for(let z=0;z<MH;z++)for(let x=0;x<MW;x++)if(M.rows[z][x]==='d'){const b=tbox(.8,.8,.8,'stoneB',0x9a90b0);add(b,x+.5,.4,z+.5);world.caveDecor.push({x:x+.5,z:z+.5,ph:b})}
+  loadArt('caveProps',im=>{if(M!==CAVE||!im)return;const t=atlasTex(im),mat=new THREE.MeshLambertMaterial({map:t,alphaTest:.5});applyVisShader(mat);
+    const put=(k,x,z,size)=>{const g=new THREE.Group();g.add(new THREE.Mesh(rectGeo(ATLAS.C,k,size),mat));add(g,x,0,z);(world.billboards=world.billboards||[]).push(g)};
+    const SOLIDK={"1,13":"pillar","5,1":"boulder","6,9":"geode","10,4":"beam","13,12":"pool","15,4":"pillar2","15,16":"boulder2","17,12":"geode2","20,7":"cart","22,11":"stalag"};
+    world.caveDecor.forEach(d=>{const k=SOLIDK[Math.floor(d.x)+','+Math.floor(d.z)];if(!k)return;d.ph.visible=false;put(k,d.x,d.z,DSIZE[k]||1.6)});
+    CAVE_DECAL.forEach(([x,z,k,dx,dz])=>put(k,x+.5+dx,z+.5+dz,DSIZE[k]||.85));
+    const pb=CAVE.objs.find(o=>o.type==='peb');if(pb)put('nest',pb.x,pb.z-.3,DSIZE.nest);
+    const ex=M.objs.find(o=>o.id==='caveExit');if(ex){put('stairs',ex.x,ex.z+.35,DSIZE.stairs);if(world.exitDisc)world.exitDisc.visible=false}
+    for(const id in world.crys){const c=world.crys[id],pl=c.g.children[0];pl.geometry=rectGeo(ATLAS.C,'crystal',.95);pl.position.y=0;c.mat.map=t;c.mat.needsUpdate=true}});
   addShafts(CAVE.free.filter(c=>c.walls===0),isTouch()?1:3,{force:[{x:Math.floor(ex.x),z:Math.floor(ex.z)}]});
 }
 /* ---- HD-2D look (Octopath Traveler style): vignette, tilt-shift blur at the top/bottom of the screen, light shafts with
@@ -740,13 +756,13 @@ function buildVillage(){world.marks=[];
   // Leah's house (3x2 cells at H)
   const hx=5.5,hz=3,house=new THREE.Group();const walls=tbox(3,1.7,2,'timber');walls.position.y=.85;const roof=new THREE.Mesh(new THREE.ConeGeometry(2.3,1.2,4),new THREE.MeshLambertMaterial({map:(()=>{const t=TEXGEN.roofTiles();t.repeat.set(8,2);return t})()}));roof.position.y=2.3;roof.rotation.y=Math.PI/4;roof.scale.set(1,1,.75);
   const door=tbox(.6,1.1,.08,'boards',0xc89870);door.position.set(0,.55,1.02);const win1=box(.5,.45,.06,0x9fd4ff,{emissive:0x335577});win1.position.set(-.9,1.05,1.02);const win2=win1.clone();win2.position.x=.9;
-  house.add(walls,roof,door,win1,win2);world.warm=[win1.material,win2.material];add(house,hx,0,hz);label(t('house',{n:S.profile.name}),hx,2.9,hz);
+  house.add(walls,roof,door,win1,win2);world.warm=[win1.material,win2.material];add(house,hx,0,hz);world.houseG=house;world.houseLabel=label(t('house',{n:S.profile.name}),hx,2.9,hz);
   // Granny Nuan's shop
   const sx=13.5,sz=3,shop=new THREE.Group();const sw=tbox(3,1.5,2,'boards',0xffe8cc);sw.position.y=.75;const aw=new THREE.Group();
   for(let i=0;i<6;i++){const s=box(.5,.08,1,i%2?0xffffff:0xe86b8a);s.position.set(-1.25+i*.5,1.6,.9);s.rotation.x=.35;aw.add(s)}
   const counter=tbox(2.2,.7,.4,'boards');counter.position.set(0,.35,1.15);const goods=[0xf5c05a,0x7fd3f0,0xe86b8a,0x8fd46a].map((c,i)=>{const b=box(.25,.25,.25,c);b.position.set(-.75+i*.5,.83,1.15);return b});
-  shop.add(sw,aw,counter,...goods);add(shop,sx,0,sz);
-  world.warmGlow=[[hx-.9,1.05,hz+1.15],[hx+.9,1.05,hz+1.15],[sx-1.1,1.25,sz+1.3],[sx+1.1,1.25,sz+1.3]].map(([x,y,z])=>{const g=new THREE.Sprite(new THREE.SpriteMaterial({map:glowW(),transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,toneMapped:false,opacity:.5}));g.scale.set(1.1,1.1,1);add(g,x,y,z);return g});label(t('shopName'),sx,2.5,sz);
+  shop.add(sw,aw,counter,...goods);add(shop,sx,0,sz);world.shopG=shop;
+  world.warmGlow=[[hx-.9,1.05,hz+1.15],[hx+.9,1.05,hz+1.15],[sx-1.1,1.25,sz+1.3],[sx+1.1,1.25,sz+1.3]].map(([x,y,z])=>{const g=new THREE.Sprite(new THREE.SpriteMaterial({map:glowW(),transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,toneMapped:false,opacity:.5}));g.scale.set(1.1,1.1,1);add(g,x,y,z);return g});world.shopLabel=label(t('shopName'),sx,2.5,sz);
   // Granny Nuan stands beside her stall
   const nuan=makeSprite('nuanIdle',null,1.75,'#c98a9a');nuan.x=14.6;nuan.z=4.45;nuan.hx=0;nuan.hz=1;nuan.npc=true;npcs.push(nuan);
   addMark(M.objs.find(o=>o.id==='nuan'),'🛒',2.15);addMark({x:5.5,z:4.1},'🏠',2.2);
@@ -759,7 +775,7 @@ function buildVillage(){world.marks=[];
   // cave entrance (rocky arch at the bottom hedge)
   const v=M.objs.find(o=>o.type==='cave');const cg=new THREE.Group();const rockM=new THREE.MeshLambertMaterial({map:(()=>{const t=TEXGEN.stoneB();t.repeat.set(2,2);return t})(),color:0x9a90b0,flatShading:true});
   [[-.9,.7],[.9,.7],[-.55,1.4],[.55,1.4],[0,1.6]].forEach(([x,y])=>{const r=new THREE.Mesh(new THREE.DodecahedronGeometry(.55),rockM);r.position.set(x,y,0);cg.add(r)});
-  const hole=new THREE.Mesh(new THREE.PlaneGeometry(1.3,1.5),new THREE.MeshBasicMaterial({color:0x05040a}));hole.position.set(0,.75,.3);cg.add(hole);add(cg,v.x,0,v.z+.1);label(t('caveIn'),v.x,2.6,v.z);addMark({x:v.x,z:v.z+.4},'💎',2.1);
+  const hole=new THREE.Mesh(new THREE.PlaneGeometry(1.3,1.5),new THREE.MeshBasicMaterial({color:0x05040a}));hole.position.set(0,.75,.3);cg.add(hole);add(cg,v.x,0,v.z+.1);world.caveG=cg;world.caveLabel=label(t('caveIn'),v.x,2.6,v.z);addMark({x:v.x,z:v.z+.4},'💎',2.1);
   const cr=new THREE.Mesh(new THREE.OctahedronGeometry(.16),new THREE.MeshLambertMaterial({color:0x8fe8ff,emissive:0x2aa8d8}));add(cr,v.x+.95,.2,v.z+.35);
   root.add(mergedBlocks(hedgeCells,M.wallH,[hm,hmTop]));
   world.sunObj=world.sun;addVillageAir();
@@ -771,6 +787,12 @@ function buildVillage(){world.marks=[];
     const mat=new THREE.MeshBasicMaterial({map:t,alphaTest:.5});mat.userData.tint=1;
     (world.trees||[]).forEach(g=>{const k=TREE_PICK[g.userData.cell];if(!k)return;const m=g.children[0];m.geometry=atlasGeo(VPROPS[k],2.1);m.material=mat});
     (world.propPH||[]).forEach(p=>{p.box.visible=false;const b=new THREE.Group();b.add(new THREE.Mesh(atlasGeo(VPROPS[p.k],p.size),mat));add(b,p.x+.5,0,p.z+.5);(world.billboards=world.billboards||[]).push(b)});
+    world.vTint=null;villageLook(vLight)});
+  loadArt('villageBuildings',im=>{if(M!==MAPS.village||!im||!world.houseG)return;const t=atlasTex(im),mat=new THREE.MeshBasicMaterial({map:t,alphaTest:.5});mat.userData.tint=1;
+    const put=(k,x,z,size,lean)=>{const g=new THREE.Group();g.add(new THREE.Mesh(rectGeo(ATLAS.V,k,size),mat));add(g,x,0,z);(lean?(world.leaners=world.leaners||[]):(world.billboards=world.billboards||[])).push(g)};
+    world.houseG.visible=world.shopG.visible=false;world.caveG.children.forEach(c=>c.visible=false);(world.warmGlow||[]).forEach(g=>g.visible=false);
+    put('house',5.5,3.55,3.4);put('shop',13.5,3.55,3.4);put('mouth',9.5,9.85,3.2,1);
+    if(world.houseLabel)world.houseLabel.position.y=5.9;if(world.shopLabel)world.shopLabel.position.y=5.9;if(world.caveLabel)world.caveLabel.position.y=4.9;
     world.vTint=null;villageLook(vLight)});
   loadArt('fountain',im=>{const P=world.fountainParts;if(M!==MAPS.village||!P||!im)return;P.g.children.forEach(c=>c.visible=false);
     const t=new THREE.Texture(im);t.needsUpdate=true;t.magFilter=t.minFilter=THREE.NearestFilter;t.generateMipmaps=false;t.encoding=THREE.sRGBEncoding;
@@ -1036,7 +1058,7 @@ function updateFx(dt,now){if(!root||!player)return;updateLight(dt);
   if(dazed){const d=world.pebDust||(world.pebDust=Object.assign(ptsLayer(26,0xa99cc0,.13,.8),{seed:Array.from({length:26},()=>({a:Math.random()*6.28,r:.35+Math.random()*.35,y:.2+Math.random()*.9,s:.8+Math.random()*1.2}))}));
     d.pts.visible=true;d.seed.forEach((m,i)=>{m.a+=dt*m.s;d.pos[i*3]=peb.x+Math.cos(m.a)*m.r;d.pos[i*3+1]=m.y+Math.sin(now/300+i)*.05;d.pos[i*3+2]=peb.z+Math.sin(m.a)*m.r});d.pts.geometry.attributes.position.needsUpdate=true}
   else if(world.pebDust)world.pebDust.pts.visible=false;
-  if(world.fountainSprite){faceCam(world.fountainSprite);const P=world.fountainParts,fy=world.fountainSprite.scale.y*1.55;P.glow.position.y=P.light.position.y=fy;if(world.spark)world.spark.base=fy-.1}if(world.billboards)world.billboards.forEach(faceCam);if(world.trees)world.trees.forEach((g,i)=>{faceCam(g,1.35);g.rotation.z=Math.sin(now/1300+i*1.7)*.035});
+  if(world.leaners)world.leaners.forEach(o=>{o.rotation.order='YXZ';o.rotation.set(-.55,yaw,0)});if(world.fountainSprite){faceCam(world.fountainSprite,2);const P=world.fountainParts,fy=world.fountainSprite.scale.y*1.55;P.glow.position.y=P.light.position.y=fy;if(world.spark)world.spark.base=fy-.1}if(world.billboards)world.billboards.forEach(faceCam);if(world.trees)world.trees.forEach((g,i)=>{faceCam(g,1.35);g.rotation.z=Math.sin(now/1300+i*1.7)*.035});
   if(world.petals){const p=world.petals;p.seed.forEach((m,i)=>{if(p.active!==undefined&&i>=p.active){p.pos[i*3+1]=-50;return}m.y-=m.v*dt;if(m.fresh||m.y<0||Math.hypot(m.x-player.x,m.z-player.z)>9){m.x=player.x+(Math.random()-.5)*14;m.z=player.z+(Math.random()-.5)*10;if(!m.fresh)m.y=5;m.fresh=false}
     m.x+=dt*.25;p.pos[i*3]=m.x+Math.sin(now/900+m.ph)*.5;p.pos[i*3+1]=m.y;p.pos[i*3+2]=m.z});p.pts.geometry.attributes.position.needsUpdate=true}
   if(world.spark){const p=world.spark;p.seed.forEach((m,i)=>{m.y+=m.v*dt;if(m.y>1.8)m.y=0;m.a+=dt;p.pos[i*3]=p.fx+Math.cos(m.a)*.3;p.pos[i*3+1]=(p.base||1.35)+m.y;p.pos[i*3+2]=p.fz+Math.sin(m.a)*.3});p.pts.geometry.attributes.position.needsUpdate=true}
