@@ -294,7 +294,7 @@ const t=(k,v)=>{let s=T[LANG][k]??T.th[k]??k;if(v)for(const x in v)s=s.replace('
 const $=id=>document.getElementById(id);
 
 /* ================= 2. DATA ================= */
-const ASSET={leahWalk:'leah-walk.png',leahIdle:'leah-idle.png',dadIdle:'dad-idle.png',momIdle:'mom-idle.png',pebIdle:'peb-idle.png',nuanIdle:'nuan-idle.png',floor:'cave-floor.jpg',wall:'cave-wall.jpg',caveTiles:'tiles-cave.png',villageTiles:'tiles-village.png',hedgeTiles:'tiles-hedge.png',fountain:'obj-fountain.png'};
+const ASSET={leahWalk:'leah-walk.png',leahIdle:'leah-idle.png',dadIdle:'dad-idle.png',momIdle:'mom-idle.png',pebIdle:'peb-idle.png',nuanIdle:'nuan-idle.png',floor:'cave-floor.jpg',wall:'cave-wall.jpg',caveTiles:'tiles-cave.png',villageTiles:'tiles-village.png',hedgeTiles:'tiles-hedge.png',fountain:'obj-fountain.png',villageProps:'props-village.png'};
 const CHARS={leah:{idle:'leahIdle',walk:'leahWalk',size:1.45,tint:'#86c9e0'},dad:{idle:'dadIdle',walk:null,size:2.3,tint:'#6b3fa0'},mom:{idle:'momIdle',walk:null,size:1.9,tint:'#e08aa8'}};
 const ITEMS={gem:{em:'💎',price:6,w:3},coin:{em:'🪙',price:8,w:2},shell:{em:'🐚',price:3,w:4},feather:{em:'🪶',price:4,w:3},star:{em:'⭐',price:10,w:1}};
 const FURN={bed:{em:'🛏️',price:40},table:{em:'🪵',price:25},chair:{em:'🪑',price:15},lamp:{em:'💡',price:20},rug:{em:'🟣',price:12},plant:{em:'🪴',price:10},shelf:{em:'📚',price:30},sofa:{em:'🛋️',price:35},chest:{em:'🧸',price:18},display:{em:'💠',price:45}};
@@ -323,12 +323,12 @@ const MAPS={
 '####################',
 '#TTT....TT......TTT#',
 '#T..HHH.....SSS...T#',
-'#...HHH.....SSS....#',
-'#....h.......s.....#',
+'#...HHH.....SSS.o..#',
+'#..ooh.......so....#',
 '#..................#',
-'#.......F..........#',
-'#....A.....Q.......#',
-'#T...............TT#',
+'#.o...o.F...o...o..#',
+'#....A.....Q..o....#',
+'#T......o.o......TT#',
 '#TT......V.......TT#',
 '####################'],wallH:1.1,lit:true},
  house:{rows:[
@@ -341,7 +341,7 @@ const MAPS={
 '####E####'],wallH:2.0,lit:true}};
 // letters that block walking (drawn as objects, not walls)
 // letters that block walking, per map. In the village S is Granny Nuan's shop; in the cave S is the start spot and must stay walkable.
-const SOLID={village:{T:1,H:1,S:1,F:1,V:1},cave:{},house:{}};
+const SOLID={village:{T:1,H:1,S:1,F:1,V:1,o:1},cave:{},house:{}};
 for(const k in MAPS){const m=MAPS[k];m.key=k;m.W=m.rows[0].length;m.H=m.rows.length;m.objs=[];m.cells=[];
   m.rows.forEach((row,z)=>[...row].forEach((ch,x)=>{
     const c={x:x+.5,z:z+.5};
@@ -566,6 +566,14 @@ function worldUV(geo,w,h,d){const uv=geo.attributes.uv,F=[[d,h],[d,h],[w,d],[w,d
 const TEXC={};const texOf=k=>TEXC[k]||(TEXC[k]=TEXGEN[k]());
 const tbox=(w,h,d,k,color=0xffffff)=>new THREE.Mesh(worldUV(new THREE.BoxGeometry(w,h,d),w,h,d),new THREE.MeshLambertMaterial({map:texOf(k),color}));
 let TREE_GEO=null;
+// stand-up pictures face the camera and are stretched like the characters are, so the high camera does not squash them
+function faceCam(o,cap){o.rotation.y=yaw;const p=o.position,pit=Math.atan2(camera.position.y-.7,Math.hypot(camera.position.x-p.x,camera.position.z-p.z));o.scale.y=Math.min(cap||9,1/Math.cos(pit))}
+// village trees and props from PixelLab (A-13): one atlas, 66 px cells (64 px + 1 px gap), 4 per row
+const VPROPS={banana:0,bananaB:1,frangi:2,roundA:3,roundB:4,pink:5,mango:6,well:7,lamp:8,palm:9,coop:10,stall:11,bench:12,board:13,arch:14,bath:15};
+const TREE_PICK={'1,1':'roundA','2,1':'palm','3,1':'roundB','8,1':'pink','9,1':'roundA','16,1':'roundB','17,1':'mango','18,1':'roundA','1,2':'banana','18,2':'bananaB','1,8':'frangi','17,8':'roundB','18,8':'palm','1,9':'roundA','2,9':'roundB','17,9':'pink','18,9':'roundA'};
+const PROP_AT={'16,6':['well',2],'2,6':['coop',2],'16,3':['stall',2],'12,6':['bench',1.6],'6,6':['board',1.8],'14,7':['bath',1.5],'3,4':['arch',2],'4,4':['lamp',1.6],'14,4':['lamp',1.6],'8,8':['lamp',1.5],'10,8':['lamp',1.5]};
+function atlasGeo(i,size){const g=new THREE.PlaneGeometry(size,size).translate(0,size/2,0),uv=g.attributes.uv,S=264,c=i%4,r=Math.floor(i/4),u0=(c*66+1)/S,u1=u0+64/S,v1=1-(r*66+1)/S,v0=v1-64/S;
+  for(let k=0;k<uv.count;k++)uv.setXY(k,uv.getX(k)>.5?u1:u0,uv.getY(k)>.5?v1:v0);return g}
 // many blocks as ONE mesh with two draw calls (sides, tops) instead of six per block: big win on weak phones
 function mergedBlocks(cells,h,mats){const tpl=worldUV(new THREE.BoxGeometry(1,h,1),1,h,1),P=tpl.attributes.position,N=tpl.attributes.normal,U=tpl.attributes.uv,pos=[],nor=[],uv=[],idx=[];let v=0,sides=0;
   for(const f of [0,1,4,5,2]){for(const [x,z] of cells){for(let i=f*4;i<f*4+4;i++){pos.push(P.getX(i)+x+.5,P.getY(i)+h/2,P.getZ(i)+z+.5);nor.push(N.getX(i),N.getY(i),N.getZ(i));uv.push(U.getX(i),U.getY(i))}idx.push(v,v+2,v+1,v+2,v+3,v+1);v+=4}if(f===5)sides=idx.length}
@@ -726,8 +734,9 @@ function buildVillage(){world.marks=[];
   const hm=new THREE.MeshLambertMaterial({map:TEXGEN.hedge()}),hmTop=new THREE.MeshLambertMaterial({map:TEXGEN.hedge()});world.hedgeMats=[hm,hmTop];const hedgeCells=[];
   for(let z=0;z<MH;z++)for(let x=0;x<MW;x++){const ch=M.rows[z][x];
     if(ch==='#')hedgeCells.push([x,z]);
+    if(ch==='o'){const pk=PROP_AT[x+','+z]||['lamp',2],b=tbox(.6,.6,.6,'boards');add(b,x+.5,.3,z+.5);const sh=new THREE.Mesh(new THREE.CircleGeometry(.45,16),world.treeShadow);sh.rotation.x=-Math.PI/2;sh.scale.set(1,.6,1);add(sh,x+.5,.012,z+.5);(world.propPH=world.propPH||[]).push({x,z,k:pk[0],size:pk[1],box:b})}
     if(ch==='T'){TREE_GEO=TREE_GEO||new THREE.PlaneGeometry(1.5,2).translate(0,1,0);const bl=(x*5+z*3)%4===0,g=new THREE.Group();
-      g.add(new THREE.Mesh(TREE_GEO,world.treeMat[bl?1:0]));const sh=new THREE.Mesh(new THREE.CircleGeometry(.5,16),world.treeShadow);sh.rotation.x=-Math.PI/2;sh.scale.set(1,.6,1);add(sh,x+.5,.012,z+.5);add(g,x+.5,0,z+.5);(world.trees=world.trees||[]).push(g)}}
+      g.add(new THREE.Mesh(TREE_GEO,world.treeMat[bl?1:0]));const sh=new THREE.Mesh(new THREE.CircleGeometry(.5,16),world.treeShadow);sh.rotation.x=-Math.PI/2;sh.scale.set(1,.6,1);add(sh,x+.5,.012,z+.5);add(g,x+.5,0,z+.5);g.userData.cell=x+','+z;(world.trees=world.trees||[]).push(g)}}
   // Leah's house (3x2 cells at H)
   const hx=5.5,hz=3,house=new THREE.Group();const walls=tbox(3,1.7,2,'timber');walls.position.y=.85;const roof=new THREE.Mesh(new THREE.ConeGeometry(2.3,1.2,4),new THREE.MeshLambertMaterial({map:(()=>{const t=TEXGEN.roofTiles();t.repeat.set(8,2);return t})()}));roof.position.y=2.3;roof.rotation.y=Math.PI/4;roof.scale.set(1,1,.75);
   const door=tbox(.6,1.1,.08,'boards',0xc89870);door.position.set(0,.55,1.02);const win1=box(.5,.45,.06,0x9fd4ff,{emissive:0x335577});win1.position.set(-.9,1.05,1.02);const win2=win1.clone();win2.position.x=.9;
@@ -758,9 +767,14 @@ function buildVillage(){world.marks=[];
     if(t.ground){world.floorMat.map=t.ground;world.floorMat.needsUpdate=true;world.pathMeshes.forEach(m=>m.visible=false)}
     if(t.hedgeTop){const [side,top]=world.hedgeMats;side.map=t.hedgeSide;top.map=t.hedgeTop;top.color.set(0xa8c8a0);side.needsUpdate=top.needsUpdate=true}
     world.vTint=null;villageLook(vLight)}));
+  loadArt('villageProps',im=>{if(M!==MAPS.village||!im)return;const t=new THREE.Texture(im);t.needsUpdate=true;t.magFilter=t.minFilter=THREE.NearestFilter;t.generateMipmaps=false;t.encoding=THREE.sRGBEncoding;
+    const mat=new THREE.MeshBasicMaterial({map:t,alphaTest:.5});mat.userData.tint=1;
+    (world.trees||[]).forEach(g=>{const k=TREE_PICK[g.userData.cell];if(!k)return;const m=g.children[0];m.geometry=atlasGeo(VPROPS[k],2.1);m.material=mat});
+    (world.propPH||[]).forEach(p=>{p.box.visible=false;const b=new THREE.Group();b.add(new THREE.Mesh(atlasGeo(VPROPS[p.k],p.size),mat));add(b,p.x+.5,0,p.z+.5);(world.billboards=world.billboards||[]).push(b)});
+    world.vTint=null;villageLook(vLight)});
   loadArt('fountain',im=>{const P=world.fountainParts;if(M!==MAPS.village||!P||!im)return;P.g.children.forEach(c=>c.visible=false);
     const t=new THREE.Texture(im);t.needsUpdate=true;t.magFilter=t.minFilter=THREE.NearestFilter;t.generateMipmaps=false;t.encoding=THREE.sRGBEncoding;
-    const mat=new THREE.MeshLambertMaterial({map:t,transparent:true,alphaTest:.5,side:THREE.DoubleSide}),sp=new THREE.Group();sp.add(new THREE.Mesh(new THREE.PlaneGeometry(2,2).translate(0,1,0),mat));add(sp,P.f.x,0,P.f.z);
+    const mat=new THREE.MeshBasicMaterial({map:t,alphaTest:.5});mat.userData.tint=1;const sp=new THREE.Group();sp.add(new THREE.Mesh(new THREE.PlaneGeometry(1.8,1.8).translate(0,.9,0),mat));add(sp,P.f.x,0,P.f.z);
     world.fountainSprite=sp;P.light.position.y=P.glow.position.y=1.72;if(world.spark)world.spark.base=1.62;world.vTint=null;villageLook(vLight)});
 }
 function buildHouse(){world.marks=[];
@@ -1004,7 +1018,7 @@ function villageLook(L){const c=(a,b)=>new THREE.Color(a).lerp(new THREE.Color(b
   scene.background=c(0x7f9bb2,0x9fd4ff);if(scene.fog)scene.fog.color=c(0x7f9bb2,0x9fd4ff);
   world.hemi.color=c(0xaebfe0,0xffe8c0);world.hemi.groundColor=c(0x2a3050,0x2a2040);world.sun.color=c(0xc8d6ff,0xfff2d8);world.sun.intensity=.45+.3*L;world.amb.color=c(0x7a88a8,0x8a7a90);
   // muted look without a CSS filter (a filter on the 3D canvas costs frame rate on weak phones): tint the scene's lit materials toward grey-blue
-  if(!world.vTint){world.vTint=[];const seen=new Set();root.traverse(o=>{const m=o.material;if(o.isMesh&&m&&m.isMeshLambertMaterial&&!seen.has(m)){seen.add(m);world.vTint.push([m,m.color.clone()])}})}
+  if(!world.vTint){world.vTint=[];const seen=new Set();root.traverse(o=>{if(!o.isMesh||!o.material)return;for(const m of [].concat(o.material))if((m.isMeshLambertMaterial||(m.userData&&m.userData.tint))&&!seen.has(m)){seen.add(m);world.vTint.push([m,m.color.clone()])}})}
   const tint=c(0x9aa6b4,0xffffff);world.vTint.forEach(([m,c0])=>m.color.copy(c0).multiply(tint));
   if(world.shafts)world.shaftOp=.5*(.35+.65*L);if(world.petals)world.petals.active=Math.round(world.petals.seed.length*(.25+.75*L));
   if(world.warm)world.warm.forEach(m=>{m.color.set(0xffe2a8);m.emissive.set(new THREE.Color(0xffa040).multiplyScalar(.75-.45*L))});
@@ -1022,7 +1036,7 @@ function updateFx(dt,now){if(!root||!player)return;updateLight(dt);
   if(dazed){const d=world.pebDust||(world.pebDust=Object.assign(ptsLayer(26,0xa99cc0,.13,.8),{seed:Array.from({length:26},()=>({a:Math.random()*6.28,r:.35+Math.random()*.35,y:.2+Math.random()*.9,s:.8+Math.random()*1.2}))}));
     d.pts.visible=true;d.seed.forEach((m,i)=>{m.a+=dt*m.s;d.pos[i*3]=peb.x+Math.cos(m.a)*m.r;d.pos[i*3+1]=m.y+Math.sin(now/300+i)*.05;d.pos[i*3+2]=peb.z+Math.sin(m.a)*m.r});d.pts.geometry.attributes.position.needsUpdate=true}
   else if(world.pebDust)world.pebDust.pts.visible=false;
-  if(world.fountainSprite)world.fountainSprite.rotation.y=yaw;if(world.trees)world.trees.forEach((g,i)=>{g.rotation.y=yaw;g.rotation.z=Math.sin(now/1300+i*1.7)*.035});
+  if(world.fountainSprite){faceCam(world.fountainSprite);const P=world.fountainParts,fy=world.fountainSprite.scale.y*1.55;P.glow.position.y=P.light.position.y=fy;if(world.spark)world.spark.base=fy-.1}if(world.billboards)world.billboards.forEach(faceCam);if(world.trees)world.trees.forEach((g,i)=>{faceCam(g,1.35);g.rotation.z=Math.sin(now/1300+i*1.7)*.035});
   if(world.petals){const p=world.petals;p.seed.forEach((m,i)=>{if(p.active!==undefined&&i>=p.active){p.pos[i*3+1]=-50;return}m.y-=m.v*dt;if(m.fresh||m.y<0||Math.hypot(m.x-player.x,m.z-player.z)>9){m.x=player.x+(Math.random()-.5)*14;m.z=player.z+(Math.random()-.5)*10;if(!m.fresh)m.y=5;m.fresh=false}
     m.x+=dt*.25;p.pos[i*3]=m.x+Math.sin(now/900+m.ph)*.5;p.pos[i*3+1]=m.y;p.pos[i*3+2]=m.z});p.pts.geometry.attributes.position.needsUpdate=true}
   if(world.spark){const p=world.spark;p.seed.forEach((m,i)=>{m.y+=m.v*dt;if(m.y>1.8)m.y=0;m.a+=dt;p.pos[i*3]=p.fx+Math.cos(m.a)*.3;p.pos[i*3+1]=(p.base||1.35)+m.y;p.pos[i*3+2]=p.fz+Math.sin(m.a)*.3});p.pts.geometry.attributes.position.needsUpdate=true}
@@ -1166,7 +1180,7 @@ function loop(now){const dt=Math.min(.05,(now-last)/1000);last=now;requestAnimat
   world.lamp.position.set(player.x,1.5,player.z);
   for(const n of npcs){const d=Math.hypot(player.x-n.x,player.z-n.z);if(d<3.2&&d>.01){n.hx=(player.x-n.x)/d;n.hz=(player.z-n.z)/d}else{n.hx=0;n.hz=1}spriteFrame(n)}
   spriteFrame(player);spriteFrame(peb);
-  if(world.crys)for(const o of CRYS){const c=world.crys[o.id];c.g.rotation.y=yaw;c.g.position.y=S.awake.includes(o.id)?.06+.04*Math.sin(now/500+o.x):0;if(c.glow&&S.awake.includes(o.id))c.glow.material.opacity=.55+.15*Math.sin(now/400+o.x);if(!S.awake.includes(o.id))c.mat.emissive.setRGB(.05+.05*Math.sin(now/500+o.x),.05,.1+.08*Math.sin(now/500+o.x))}
+  if(world.crys)for(const o of CRYS){const c=world.crys[o.id];faceCam(c.g);c.g.position.y=S.awake.includes(o.id)?.06+.04*Math.sin(now/500+o.x):0;if(c.glow&&S.awake.includes(o.id))c.glow.material.opacity=.55+.15*Math.sin(now/400+o.x);if(!S.awake.includes(o.id))c.mat.emissive.setRGB(.05+.05*Math.sin(now/500+o.x),.05,.1+.08*Math.sin(now/500+o.x))}
   if(world.dig)for(const id in world.dig){const mo=world.dig[id].userData.mound;if(mo)mo.rotation.y=yaw}
   if(world.marks)for(const m of world.marks){let vis=true;const o=m.obj;
     if(m.near){const d=Math.hypot(o.x-player.x,o.z-player.z);vis=o.type==='crystal'&&!S.awake.includes(o.id)&&d<m.near&&!blocked(player.x,player.z,o.x,o.z)}
