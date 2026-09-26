@@ -1,0 +1,5 @@
+package/
+*.tgz
+tests/*.png
+tests/out/
+__pycache__/
