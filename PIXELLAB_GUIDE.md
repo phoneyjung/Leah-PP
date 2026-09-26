@@ -117,7 +117,8 @@
   - **Describe your own → Custom Animation** (BETA): Model V3 | PixMiniMax · Action Description · Canvas (เช่น 88×88 กด Resize ได้) · Frame Count · ติ๊ก Keep first frame (idle pose) · 1 generation
   - ล่างสุด: **Advanced Options** (ใช้ค่าเดิมของตัวละคร) · ปุ่ม **Generate Live** (ดูสด) / **Generate in Background** (ทำเบื้องหลัง สั่งหลายตัวพร้อมกันได้)
 - **ท่าเดินของเกมเรา:** Skeleton v3 → Movement → Walking → **Walking (6 frames)** → ADJUST MOTION ปล่อยค่าเดิม → Generate in Background · ต้องได้ครบ 8 ทิศ (ตัวผมหางม้าข้างเดียวห้ามใช้วิธีกลับด้านภาพ)
-- ~~แบบเก่า: Walking (6 frames) → ปุ่ม 🚀 ต่อทิศ~~ (หน้าจอเปลี่ยนแล้ว)
+- **หลังกด Generate ครั้งแรก ได้แค่ทิศที่เลือก (เช่น South)** · หน้าตัวละครจะมีการ์ด **Animations → Walking (6 frames)** แบ่ง 8 ช่องตามทิศ · ช่องที่ยังไม่มีมีปุ่ม **🚀 (สร้างทิศนี้)** ด้านบน และ **⚙️ (ตั้งค่า)** ด้านล่าง → กด 🚀 ทีละทิศจนครบ 8 · มุมขวาของการ์ด: "Hover to download · Drop GIF to add or replace" และถังขยะลบท่า
+- หน้าตัวละครยังมี **States** (Idle + New state) และแท็บด้านบน Character | Portrait & Vocal Animation (EXPERIMENTAL)
 - ดาวน์โหลด: ปุ่มบนการ์ด **Idle** → zip (มีท่ายืน + ท่าเดิน) ส่งมาทั้ง zip ไม่ต้องแตก
 
 ## 4. ส่งไฟล์กลับให้ Claude
