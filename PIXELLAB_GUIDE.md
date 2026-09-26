@@ -95,7 +95,9 @@
 
 โหมดอื่นในหน้าเดียวกัน
 - **Pro** (20 generations ต่อตัว 8 ทิศ): Mode Pro | Pro Flash · Character Size · Reference images (ได้ถึง 4 รูป) · **Style Character → "Choose from my characters"** (ใช้ตัวละครที่มีแล้ว เช่น ลีอา เป็นแบบสไตล์) · Style image
-- **Pro Flash** (8 generations ต่อตัว): Sprite Size 16–256 · Style Character / Style image ได้เหมือนกัน
+- **Pro Flash** (6–8 generations ต่อตัว): Sprite Size 16–256 (ปุ่ม 16 24 32 48 56 64 80 96 128 168 256 + แถบเลื่อน ทีละ 4px + ช่องติ๊ก Custom width and height) · Style Character (Choose from my characters) หรือ Style image
+  - ⚠️ **ข้อจำกัด: Style image ต้องไม่ใหญ่กว่าขนาดตัวละคร** · รูป 358×540 ขึ้นเตือน "Choose a larger supported canvas or crop the style image" และกด Generate ไม่ได้ → ตัวละคร 64px ใช้รูปสไตล์ไม่เกิน 64×64 (`style-kid-64.png`)
+  - ใต้รูปสไตล์มีช่องติ๊ก **Color palette · Outline · Detail · Shading** = ส่วนที่จะเลียนแบบจากรูปสไตล์ · **ตัวละครผู้เล่นให้เอาติ๊ก Color palette ออก** (ไม่งั้นสีผ้าคลุม/ผิวจะตามรูปสไตล์ ไม่ตามคำบรรยาย)
 - **Standard:** ปรับสัดส่วนตัวได้ (หัว แขน ขา ไหล่ สะโพก) มี Quick Presets: Default · **Chibi** · Cartoon · Stylized · Realistic · Heroic
 
 **Create from Reference:** อัปภาพตัวละครหันหน้า (ทิศใต้) ท่ายืน → ให้เครื่องหมุนครบ 8 ทิศ (v3 = Generate v3 Rotation · Pro = Rotate Character หรือ Create with Style/Concept 20 generations · Standard อัปรูปทีละทิศได้ 8 ช่อง)
