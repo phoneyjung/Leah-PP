@@ -294,7 +294,7 @@ const t=(k,v)=>{let s=T[LANG][k]??T.th[k]??k;if(v)for(const x in v)s=s.replace('
 const $=id=>document.getElementById(id);
 
 /* ================= 2. DATA ================= */
-const ASSET={leahWalk:'leah-walk.png',leahIdle:'leah-idle.png',dadIdle:'dad-idle.png',momIdle:'mom-idle.png',pebIdle:'peb-idle.png',nuanIdle:'nuan-idle.png',floor:'cave-floor.jpg',wall:'cave-wall.jpg',caveTiles:'tiles-cave.png'};
+const ASSET={leahWalk:'leah-walk.png',leahIdle:'leah-idle.png',dadIdle:'dad-idle.png',momIdle:'mom-idle.png',pebIdle:'peb-idle.png',nuanIdle:'nuan-idle.png',floor:'cave-floor.jpg',wall:'cave-wall.jpg',caveTiles:'tiles-cave.png',villageTiles:'tiles-village.png',hedgeTiles:'tiles-hedge.png',fountain:'obj-fountain.png'};
 const CHARS={leah:{idle:'leahIdle',walk:'leahWalk',size:1.45,tint:'#86c9e0'},dad:{idle:'dadIdle',walk:null,size:2.3,tint:'#6b3fa0'},mom:{idle:'momIdle',walk:null,size:1.9,tint:'#e08aa8'}};
 const ITEMS={gem:{em:'💎',price:6,w:3},coin:{em:'🪙',price:8,w:2},shell:{em:'🐚',price:3,w:4},feather:{em:'🪶',price:4,w:3},star:{em:'⭐',price:10,w:1}};
 const FURN={bed:{em:'🛏️',price:40},table:{em:'🪵',price:25},chair:{em:'🪑',price:15},lamp:{em:'💡',price:20},rug:{em:'🟣',price:12},plant:{em:'🪴',price:10},shelf:{em:'📚',price:30},sofa:{em:'🛋️',price:35},chest:{em:'🧸',price:18},display:{em:'💠',price:45}};
@@ -566,6 +566,11 @@ function worldUV(geo,w,h,d){const uv=geo.attributes.uv,F=[[d,h],[d,h],[w,d],[w,d
 const TEXC={};const texOf=k=>TEXC[k]||(TEXC[k]=TEXGEN[k]());
 const tbox=(w,h,d,k,color=0xffffff)=>new THREE.Mesh(worldUV(new THREE.BoxGeometry(w,h,d),w,h,d),new THREE.MeshLambertMaterial({map:texOf(k),color}));
 let TREE_GEO=null;
+// many blocks as ONE mesh with two draw calls (sides, tops) instead of six per block: big win on weak phones
+function mergedBlocks(cells,h,mats){const tpl=worldUV(new THREE.BoxGeometry(1,h,1),1,h,1),P=tpl.attributes.position,N=tpl.attributes.normal,U=tpl.attributes.uv,pos=[],nor=[],uv=[],idx=[];let v=0,sides=0;
+  for(const f of [0,1,4,5,2]){for(const [x,z] of cells){for(let i=f*4;i<f*4+4;i++){pos.push(P.getX(i)+x+.5,P.getY(i)+h/2,P.getZ(i)+z+.5);nor.push(N.getX(i),N.getY(i),N.getZ(i));uv.push(U.getX(i),U.getY(i))}idx.push(v,v+2,v+1,v+2,v+3,v+1);v+=4}if(f===5)sides=idx.length}
+  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));g.setAttribute('normal',new THREE.Float32BufferAttribute(nor,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));g.setIndex(idx);
+  g.addGroup(0,sides,0);g.addGroup(sides,idx.length-sides,1);return new THREE.Mesh(g,mats)}
 const add=(obj,x,y,z)=>{obj.position.set(x,y,z);root.add(obj);return obj};
 function label(text,x,y,z,color='#fdf6e8'){const c=document.createElement('canvas');c.width=512;c.height=96;const g=c.getContext('2d');g.font='600 44px Mitr, sans-serif';const w=Math.min(500,g.measureText(text).width+40);
   {const x0=(512-w)/2,y0=14,h=68,u=6;g.fillStyle='rgba(26,19,44,.9)';g.fillRect(x0+u,y0,w-2*u,h);g.fillRect(x0,y0+u,w,h-2*u);g.fillStyle='#a8793a';g.fillRect(x0+u,y0,w-2*u,u);g.fillRect(x0+u,y0+h-u,w-2*u,u);g.fillRect(x0,y0+u,u,h-2*u);g.fillRect(x0+w-u,y0+u,u,h-2*u)}g.fillStyle=color;g.textAlign='center';g.textBaseline='middle';g.fillText(text,256,50);
@@ -622,6 +627,24 @@ const WANG={WWWF:[0,0],WWFF:[1,0],WWFW:[2,0],FFFW:[3,0],FFWF:[4,0],WFWF:[0,1],FF
 let caveTileImg=null,caveTileCache=null; // null = not tried yet, false = file missing
 function loadCaveTiles(cb){if(caveTileImg!==null)return cb(caveTileImg);const im=new Image();
   im.onload=()=>{caveTileImg=im;cb(im)};im.onerror=()=>{console.warn('missing',ASSET.caveTiles);caveTileImg=false;cb(false)};im.src=ASSET.caveTiles}
+// load an art file once (name differs from the Promise-based loadImg used for sprites); cb(img) or cb(false) when the file is missing (the scene then keeps its built-in look)
+const imgCache={};function loadArt(k,cb){const c=imgCache[k];if(c===false)return cb(false);if(c){if(c.complete&&c.naturalWidth)return cb(c);c.addEventListener('load',()=>cb(c));c.addEventListener('error',()=>cb(false));return}
+  const im=new Image();imgCache[k]=im;im.onload=()=>cb(im);im.onerror=()=>{console.warn('missing',ASSET[k]);imgCache[k]=false;cb(false)};im.src=ASSET[k]}
+// lay a PixelLab Wang sheet (5x4, 32 px) on a half-cell offset grid: upper(x,z) says which terrain each cell has
+function wangCanvas(im,W,H,upper,seed){const T=32,cv=document.createElement('canvas');cv.width=W*T;cv.height=H*T;const g=cv.getContext('2d');g.imageSmoothingEnabled=false;const r=seededRnd(seed||7);
+  for(let z=0;z<=H;z++)for(let x=0;x<=W;x++){const k=[[x-1,z-1],[x,z-1],[x-1,z],[x,z]].map(([a,b])=>upper(a,b)?'W':'F').join('');let [tx,ty]=WANG[k];
+    if(k==='FFFF'&&r()<.5){tx=0;ty=3}
+    if(k==='WWWW'&&r()<.5){g.save();g.translate(x*T-T/2+T,z*T-T/2);g.scale(-1,1);g.drawImage(im,tx*T,ty*T,T,T,0,0,T,T);g.restore()}else g.drawImage(im,tx*T,ty*T,T,T,x*T-T/2,z*T-T/2,T,T)}
+  return cv}
+function pixCanvasTex(c,wrap,rx,ry){const t=new THREE.CanvasTexture(c);t.magFilter=t.minFilter=THREE.NearestFilter;t.generateMipmaps=false;t.encoding=THREE.sRGBEncoding;t.wrapS=t.wrapT=wrap?THREE.RepeatWrapping:THREE.ClampToEdgeWrapping;t.repeat.set(rx||1,ry||1);return t}
+const VILLAGE_PATH=(()=>{const P=new Set();for(let x=5;x<=13;x++)P.add(x+','+5);for(let z=5;z<=9;z++)P.add(9+','+z);for(let x=7;x<=10;x++)for(let z=5;z<=7;z++)P.add(x+','+z);return P})();
+let villageTexCache=null;
+function villageTex(vim,him){if(villageTexCache)return villageTexCache;const out={};
+  if(vim)out.ground=pixCanvasTex(wangCanvas(vim,MAPS.village.W,MAPS.village.H,(x,z)=>!VILLAGE_PATH.has(x+','+z),13));
+  if(him){const top=document.createElement('canvas');top.width=top.height=32;top.getContext('2d').drawImage(him,32,96,32,32,0,0,32,32);
+    const side=document.createElement('canvas');side.width=32;side.height=24;side.getContext('2d').drawImage(him,32,2,32,24,0,0,32,24);
+    out.hedgeTop=pixCanvasTex(top,1);out.hedgeSide=pixCanvasTex(side,1,1,MAPS.village.wallH*32/24)}
+  return villageTexCache=out}
 function caveTileTex(im){if(caveTileCache)return caveTileCache;const T=32,W=CAVE.W,H=CAVE.H,wall=(x,z)=>x<0||z<0||x>=W||z>=H||CAVE.rows[z][x]==='#';
   const cv=document.createElement('canvas');cv.width=W*T;cv.height=H*T;const g=cv.getContext('2d');g.imageSmoothingEnabled=false;const r=seededRnd(7);
   for(let z=0;z<=H;z++)for(let x=0;x<=W;x++){const k=[[x-1,z-1],[x,z-1],[x-1,z],[x,z]].map(([a,b])=>wall(a,b)?'W':'F').join('');
@@ -697,11 +720,12 @@ function buildVillage(){world.marks=[];
   const gt=TEXGEN.grass();gt.repeat.set(MW,MH);const floor=new THREE.Mesh(new THREE.PlaneGeometry(MW,MH),new THREE.MeshLambertMaterial({map:gt}));floor.rotation.x=-Math.PI/2;add(floor,MW/2,0,MH/2);
   const pt=TEXGEN.path();const pathM=new THREE.MeshLambertMaterial({map:pt});
   const pathLine=(x0,z0,x1,z1)=>{const w=Math.abs(x1-x0)+1,d=Math.abs(z1-z0)+1;const p=new THREE.Mesh(new THREE.PlaneGeometry(w,d),pathM);p.rotation.x=-Math.PI/2;pt.repeat.set(w,d);add(p,(x0+x1)/2+.5,.01,(z0+z1)/2+.5)};
-  pathLine(9,5,9,9);pathLine(5,5,13,5);
+  world.pathMeshes=[];{const r0=root.children.length;pathLine(9,5,9,9);pathLine(5,5,13,5);world.pathMeshes=root.children.slice(r0)}
+  world.floorMat=floor.material;
   world.treeMat=['treeG','treeP'].map(k=>new THREE.MeshLambertMaterial({map:artTex(k),transparent:true,alphaTest:.5,side:THREE.DoubleSide}));world.treeShadow=new THREE.MeshBasicMaterial({color:0,transparent:true,opacity:.28,depthWrite:false});
-  const hm=new THREE.MeshLambertMaterial({map:TEXGEN.hedge()});const hb=new THREE.BoxGeometry(1,M.wallH,1);
+  const hm=new THREE.MeshLambertMaterial({map:TEXGEN.hedge()}),hmTop=new THREE.MeshLambertMaterial({map:TEXGEN.hedge()});world.hedgeMats=[hm,hmTop];const hedgeCells=[];
   for(let z=0;z<MH;z++)for(let x=0;x<MW;x++){const ch=M.rows[z][x];
-    if(ch==='#')add(new THREE.Mesh(hb,hm),x+.5,M.wallH/2,z+.5);
+    if(ch==='#')hedgeCells.push([x,z]);
     if(ch==='T'){TREE_GEO=TREE_GEO||new THREE.PlaneGeometry(1.5,2).translate(0,1,0);const bl=(x*5+z*3)%4===0,g=new THREE.Group();
       g.add(new THREE.Mesh(TREE_GEO,world.treeMat[bl?1:0]));const sh=new THREE.Mesh(new THREE.CircleGeometry(.5,16),world.treeShadow);sh.rotation.x=-Math.PI/2;sh.scale.set(1,.6,1);add(sh,x+.5,.012,z+.5);add(g,x+.5,0,z+.5);(world.trees=world.trees||[]).push(g)}}
   // Leah's house (3x2 cells at H)
@@ -722,13 +746,22 @@ function buildVillage(){world.marks=[];
   const water=new THREE.Mesh(new THREE.CircleGeometry(.78,20),new THREE.MeshBasicMaterial({color:0x7fd3f0,transparent:true,opacity:.85,toneMapped:false}));water.rotation.x=-Math.PI/2;water.position.y=.41;
   const col=new THREE.Mesh(new THREE.CylinderGeometry(.12,.15,.9,10),new THREE.MeshLambertMaterial({map:(()=>{const t=TEXGEN.stoneB();t.repeat.set(1,1);return t})()}));col.position.y=.8;
   const orbM=new THREE.MeshLambertMaterial({color:0x8fe8ff,emissive:0x1a88b8});const orb=new THREE.Mesh(new THREE.OctahedronGeometry(.22),orbM);orb.position.y=1.4;fg.add(base,water,col,orb);add(fg,f.x,0,f.z);world.orb={m:orb,mat:orbM};
-  const fl=new THREE.PointLight(0x9fe8ff,.4,5);add(fl,f.x,1.4,f.z);world.orbLight=fl;const og=new THREE.Sprite(new THREE.SpriteMaterial({map:glowC(),transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,toneMapped:false,opacity:.35}));og.scale.set(1.6,1.6,1);add(og,f.x,1.4,f.z);world.orbGlow=og;
+  const fl=new THREE.PointLight(0x9fe8ff,.4,5);add(fl,f.x,1.4,f.z);world.orbLight=fl;const og=new THREE.Sprite(new THREE.SpriteMaterial({map:glowC(),transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,toneMapped:false,opacity:.35}));og.scale.set(1.6,1.6,1);add(og,f.x,1.4,f.z);world.orbGlow=og;world.fountainParts={g:fg,light:fl,glow:og,f};
   // cave entrance (rocky arch at the bottom hedge)
   const v=M.objs.find(o=>o.type==='cave');const cg=new THREE.Group();const rockM=new THREE.MeshLambertMaterial({map:(()=>{const t=TEXGEN.stoneB();t.repeat.set(2,2);return t})(),color:0x9a90b0,flatShading:true});
   [[-.9,.7],[.9,.7],[-.55,1.4],[.55,1.4],[0,1.6]].forEach(([x,y])=>{const r=new THREE.Mesh(new THREE.DodecahedronGeometry(.55),rockM);r.position.set(x,y,0);cg.add(r)});
   const hole=new THREE.Mesh(new THREE.PlaneGeometry(1.3,1.5),new THREE.MeshBasicMaterial({color:0x05040a}));hole.position.set(0,.75,.3);cg.add(hole);add(cg,v.x,0,v.z+.1);label(t('caveIn'),v.x,2.6,v.z);addMark({x:v.x,z:v.z+.4},'💎',2.1);
   const cr=new THREE.Mesh(new THREE.OctahedronGeometry(.16),new THREE.MeshLambertMaterial({color:0x8fe8ff,emissive:0x2aa8d8}));add(cr,v.x+.95,.2,v.z+.35);
+  root.add(mergedBlocks(hedgeCells,M.wallH,[hm,hmTop]));
   world.sunObj=world.sun;addVillageAir();
+  loadArt('villageTiles',vim=>loadArt('hedgeTiles',him=>{if(M!==MAPS.village||!world.floorMat)return;const t=villageTex(vim,him);
+    if(t.ground){world.floorMat.map=t.ground;world.floorMat.needsUpdate=true;world.pathMeshes.forEach(m=>m.visible=false)}
+    if(t.hedgeTop){const [side,top]=world.hedgeMats;side.map=t.hedgeSide;top.map=t.hedgeTop;top.color.set(0xa8c8a0);side.needsUpdate=top.needsUpdate=true}
+    world.vTint=null;villageLook(vLight)}));
+  loadArt('fountain',im=>{const P=world.fountainParts;if(M!==MAPS.village||!P||!im)return;P.g.children.forEach(c=>c.visible=false);
+    const t=new THREE.Texture(im);t.needsUpdate=true;t.magFilter=t.minFilter=THREE.NearestFilter;t.generateMipmaps=false;t.encoding=THREE.sRGBEncoding;
+    const mat=new THREE.MeshLambertMaterial({map:t,transparent:true,alphaTest:.5,side:THREE.DoubleSide}),sp=new THREE.Group();sp.add(new THREE.Mesh(new THREE.PlaneGeometry(2,2).translate(0,1,0),mat));add(sp,P.f.x,0,P.f.z);
+    world.fountainSprite=sp;P.light.position.y=P.glow.position.y=1.72;if(world.spark)world.spark.base=1.62;world.vTint=null;villageLook(vLight)});
 }
 function buildHouse(){world.marks=[];
   const wt=TEXGEN.wood();wt.repeat.set(MW,MH);const floor=new THREE.Mesh(new THREE.PlaneGeometry(MW,MH),new THREE.MeshLambertMaterial({map:wt}));floor.rotation.x=-Math.PI/2;add(floor,MW/2,0,MH/2);
@@ -989,10 +1022,10 @@ function updateFx(dt,now){if(!root||!player)return;updateLight(dt);
   if(dazed){const d=world.pebDust||(world.pebDust=Object.assign(ptsLayer(26,0xa99cc0,.13,.8),{seed:Array.from({length:26},()=>({a:Math.random()*6.28,r:.35+Math.random()*.35,y:.2+Math.random()*.9,s:.8+Math.random()*1.2}))}));
     d.pts.visible=true;d.seed.forEach((m,i)=>{m.a+=dt*m.s;d.pos[i*3]=peb.x+Math.cos(m.a)*m.r;d.pos[i*3+1]=m.y+Math.sin(now/300+i)*.05;d.pos[i*3+2]=peb.z+Math.sin(m.a)*m.r});d.pts.geometry.attributes.position.needsUpdate=true}
   else if(world.pebDust)world.pebDust.pts.visible=false;
-  if(world.trees)world.trees.forEach((g,i)=>{g.rotation.y=yaw;g.rotation.z=Math.sin(now/1300+i*1.7)*.035});
+  if(world.fountainSprite)world.fountainSprite.rotation.y=yaw;if(world.trees)world.trees.forEach((g,i)=>{g.rotation.y=yaw;g.rotation.z=Math.sin(now/1300+i*1.7)*.035});
   if(world.petals){const p=world.petals;p.seed.forEach((m,i)=>{if(p.active!==undefined&&i>=p.active){p.pos[i*3+1]=-50;return}m.y-=m.v*dt;if(m.fresh||m.y<0||Math.hypot(m.x-player.x,m.z-player.z)>9){m.x=player.x+(Math.random()-.5)*14;m.z=player.z+(Math.random()-.5)*10;if(!m.fresh)m.y=5;m.fresh=false}
     m.x+=dt*.25;p.pos[i*3]=m.x+Math.sin(now/900+m.ph)*.5;p.pos[i*3+1]=m.y;p.pos[i*3+2]=m.z});p.pts.geometry.attributes.position.needsUpdate=true}
-  if(world.spark){const p=world.spark;p.seed.forEach((m,i)=>{m.y+=m.v*dt;if(m.y>1.8)m.y=0;m.a+=dt;p.pos[i*3]=p.fx+Math.cos(m.a)*.3;p.pos[i*3+1]=1.35+m.y;p.pos[i*3+2]=p.fz+Math.sin(m.a)*.3});p.pts.geometry.attributes.position.needsUpdate=true}
+  if(world.spark){const p=world.spark;p.seed.forEach((m,i)=>{m.y+=m.v*dt;if(m.y>1.8)m.y=0;m.a+=dt;p.pos[i*3]=p.fx+Math.cos(m.a)*.3;p.pos[i*3+1]=(p.base||1.35)+m.y;p.pos[i*3+2]=p.fz+Math.sin(m.a)*.3});p.pts.geometry.attributes.position.needsUpdate=true}
   // small dust puffs at the feet while walking (not indoors)
   if(M===MAPS.house)return;const f=world.steps||(world.steps=Object.assign(ptsLayer(36,M===CAVE?0x9a7456:0xd8c29a,.07,.8),{life:new Float32Array(36),vel:new Float32Array(108),i:0,last:player.dist}));
   if(player.moving&&player.dist-f.last>.45){f.last=player.dist;for(let k=0;k<3;k++){const j=f.i=(f.i+1)%36;f.life[j]=.45;f.pos[j*3]=player.x+(Math.random()-.5)*.25;f.pos[j*3+1]=.04;f.pos[j*3+2]=player.z+(Math.random()-.5)*.2;f.vel[j*3]=(Math.random()-.5)*.6;f.vel[j*3+1]=.5+Math.random()*.4;f.vel[j*3+2]=(Math.random()-.5)*.6}}
