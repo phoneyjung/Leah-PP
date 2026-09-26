@@ -11,6 +11,7 @@
 - เกมทั้งเกมอยู่ใน `index.html` ไฟล์เดียว (HTML + CSS + JS) · ไม่มี build step · three.js r128 จาก cdnjs
 - ภาพ/ไฟล์ประกอบอยู่ที่ root ทั้งหมด (เจ้าของอัปโฟลเดอร์จากมือถือไม่ได้) · `sw.js` = PWA cache
 - เล่นจริงที่ GitHub Pages จาก branch `main`: https://phoneyjung.github.io/Leah-PP/
+- ไอคอนพิกเซล 17 ชิ้น (A-16) อยู่ใน `icons.png` ตำแหน่งแต่ละชิ้นใน `icons.json` · ยังไม่ได้ใส่ในเกม ใช้แทนอีโมจิในปุ่ม ตัวนับ กระเป๋า ร้าน
 - เอกสารอ่านประกอบ: `DEV_GUIDE.md` `ART_GUIDE.md` `ART_PLAN_05.md` `PIXELLAB_GUIDE.md` `V1_PLAN.md` `WORLD.md` `GDD.md`
 
 ## กติกาที่ต้องทำทุกครั้ง
