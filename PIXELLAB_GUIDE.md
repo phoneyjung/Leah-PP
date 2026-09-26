@@ -80,6 +80,28 @@
 - เคล็ดลับ: อยากได้ภาพใหญ่แต่รักษาความละเอียดพิกเซลเดิม ให้เอารูปขนาดปกติหลายรูปมาเรียงเป็นตาราง (เช่น 64px 4 รูป = 128px) ไม่ใช่ขยายรูป · `ref-A05-style.png` (192×128 ใช้กับของในถ้ำ — ⚠️ ต้องทำใหม่เป็น 32×32 ก่อนใช้ตามข้อ 3)
 
 ## 3. Characters (ตัวละครและท่าทาง)
+
+### หน้าสร้างตัวละคร (Create Character) · เห็นจริง 26 ก.ย. 2569
+แท็บบนสุด: **Create from Text** | Create from Reference
+
+**Create from Text** เรียงจากบนลงล่าง
+1. **Character Type:** **Humanoid** | Quadruped (EXPERIMENTAL)
+2. **Generation Mode:** **v3** (NEW) | Pro (NEW) | Standard — ช่องด้านล่างเปลี่ยนตามโหมด
+3. **Character Description** (REQUIRED สูงสุด 2000 ตัวอักษร) · มีปุ่ม ✨ มุมขวาล่างของช่อง = ให้ AI เขียนคำบรรยายเพิ่ม (ไม่ต้องกด)
+4. **Camera View:** Sidescroller | **Low Top-Down** | High Top-Down | Oblique (ใช้ไม่ได้)
+5. **Sprite Size** (โหมด v3): ปุ่ม 32 · 48 · 56 · **64** · 80 · 96 · 128 + แถบ Width/Height · ⚠️ **ค่าเริ่มต้นคือ 48 ต้องกด 64px ทุกครั้ง**
+6. **Detail:** **Highly detailed** · **Outline:** Default
+7. บรรทัด "Costs 2 generations." → ปุ่ม **Generate v3 Character**
+
+โหมดอื่นในหน้าเดียวกัน
+- **Pro** (20 generations ต่อตัว 8 ทิศ): Mode Pro | Pro Flash · Character Size · Reference images (ได้ถึง 4 รูป) · **Style Character → "Choose from my characters"** (ใช้ตัวละครที่มีแล้ว เช่น ลีอา เป็นแบบสไตล์) · Style image
+- **Pro Flash** (8 generations ต่อตัว): Sprite Size 16–256 · Style Character / Style image ได้เหมือนกัน
+- **Standard:** ปรับสัดส่วนตัวได้ (หัว แขน ขา ไหล่ สะโพก) มี Quick Presets: Default · **Chibi** · Cartoon · Stylized · Realistic · Heroic
+
+**Create from Reference:** อัปภาพตัวละครหันหน้า (ทิศใต้) ท่ายืน → ให้เครื่องหมุนครบ 8 ทิศ (v3 = Generate v3 Rotation · Pro = Rotate Character หรือ Create with Style/Concept 20 generations · Standard อัปรูปทีละทิศได้ 8 ช่อง)
+
+**ที่ใช้กับเกมเรา:** ตัวละครใหม่ใช้ **v3 · Low Top-Down · 64px · Highly detailed** (แบบเดียวกับลีอา ถูกสุด 2 generations) · ถ้าได้สไตล์ไม่เข้ากับลีอา ค่อยเจนใหม่ด้วย **Pro Flash + Style Character = ลีอา** (8 generations)
+
 เข้า https://www.pixellab.ai/create-character
 - ตัวละครที่มีแล้ว: ลีอา · พ่อมด · เจ้าหญิง · Peb · ยายนวล (ค่าที่ใช้สร้างอยู่ใน `ART_GUIDE.md`)
 - ท่าเดิน: เปิดตัวละคร → **Add Animation** → **Walking (6 frames)** → แต่ละทิศมีปุ่ม 🚀 (สร้างทันที) และ ⚙️ (ตั้งค่า) → กด 🚀 เฉพาะ South · North · East · South-East · North-West (โค้ดกลับด้านให้ครบ 8 ทิศ)
