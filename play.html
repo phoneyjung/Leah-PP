@@ -412,44 +412,71 @@ function buildMountain(){SEED=23;const m=newMap('mountain','town',34,22,23);m.na
   m.glows.push([17*T-34,7*T-76],[17*T+34,7*T-76]);m.spawnDefault=[16*T,19*T];return m}
 
 // ---------- Crystal Cave floors (rooms + corridors from a fixed seed, so saved crystals keep their ids) ----------
-const CAVE_CFG={cave1:{seed:101,w:36,h:26,rooms:8,crystals:8,digs:5,mons:[['slime',4],['bat',2]],next:'cave2'},
-  cave2:{seed:202,w:38,h:28,rooms:9,crystals:6,digs:5,mons:[['slime',4],['bat',3],['mushbug',3]],next:'cave3'},
-  cave3:{seed:303,w:40,h:30,rooms:7,crystals:4,digs:4,mons:[['bat',3],['mushbug',3]],boss:true}};
-function buildCave(id){const C=CAVE_CFG[id],m=newMap(id,'cave',C.w,C.h,C.seed);m.nameKey=id;const r=seeded(C.seed);SEED=C.seed;
-  const rooms=[];let tries=0;
-  if(C.boss)rooms.push({x:C.w-16,y:Math.floor(C.h/2)-6,w:13,h:11,boss:1});
-  while(rooms.length<C.rooms&&tries++<400){const w=5+Math.floor(r()*5),h=4+Math.floor(r()*4),x=2+Math.floor(r()*(C.w-w-4)),y=2+Math.floor(r()*(C.h-h-4));
-    if(rooms.some(o=>x<o.x+o.w+2&&x+w+2>o.x&&y<o.y+o.h+2&&y+h+2>o.y))continue;rooms.push({x,y,w,h})}
-  const carve=(x,y)=>{if(x>0&&y>0&&x<C.w-1&&y<C.h-1)m.FLOOR.add(key(x,y))};
-  rooms.forEach(o=>{for(let y=o.y;y<o.y+o.h;y++)for(let x=o.x;x<o.x+o.w;x++)carve(x,y)});
-  const cen=o=>[Math.floor(o.x+o.w/2),Math.floor(o.y+o.h/2)];
-  const order=[...rooms].sort((a,b)=>cen(a)[0]-cen(b)[0]);
-  for(let i=1;i<order.length;i++){const [ax,ay]=cen(order[i-1]),[bx,by]=cen(order[i]);const hx=r()<.5;
-    if(hx){for(let x=Math.min(ax,bx);x<=Math.max(ax,bx);x++){carve(x,ay);carve(x,ay+1)}for(let y=Math.min(ay,by);y<=Math.max(ay,by);y++){carve(bx,y);carve(bx+1,y)}}
-    else{for(let y=Math.min(ay,by);y<=Math.max(ay,by);y++){carve(ax,y);carve(ax+1,y)}for(let x=Math.min(ax,bx);x<=Math.max(ax,bx);x++){carve(x,by);carve(x,by+1)}}}
-  for(let y=0;y<C.h;y++)for(let x=0;x<C.w;x++)if(!m.FLOOR.has(key(x,y)))m.SOLID.add(key(x,y));
-  const start=order[0],end=C.boss?rooms.find(o=>o.boss):order[order.length-1];m.rooms=rooms;
-  const [sx,sy]=cen(start);m.exits.push({id:'up',x:sx*T+16,y:(start.y)*T+20,to:C.up||(id==='cave1'?'mountain':'cave'+(+id.slice(4)-1)),toExit:C.upExit||(id==='cave1'?'cave':'down'),label:id==='cave1'?'mountain':'up'});if(C.mul)m.mul=C.mul;m.mod=C.mod;m.bossEl=C.bossEl;if(C.mod==='house')m.expMul=1.5;if(C.mod==='dark')m.darkFloor=1;
-  addCave(m,'ladder',sx*T+16,start.y*T+14,{flat:1});
-  addStone(m,id,Math.min(start.x+start.w-1,sx+2),start.y+1);
-  if(C.next){const [ex,ey]=cen(end);m.exits.push({id:'down',x:ex*T+16,y:(ey+(C.boss?3:0))*T+16,to:C.next,toExit:'up',label:'down',lockBoss:!!C.boss});addCave(m,'stairs',ex*T+16,ey*T+30,{flat:1})}
-  const freeAny=()=>{for(let k=0;k<400;k++){const x=1+Math.floor(r()*(C.w-2)),y=1+Math.floor(r()*(C.h-2)),kk=key(x,y);if(m.SOLID.has(kk)||m.used?.has(kk))continue;if([...m.crystals,...m.digs].some(q=>Math.hypot(q.tx-x,q.ty-y)<2))continue;if(Math.hypot(x-sx,y-sy)<4)continue;(m.used||(m.used=new Set())).add(kk);return[x,y]}return null};
-  // things to find: sleeping crystals and sparkling dig spots, spread out, never on the path between stairs
-  const free=()=>{for(let k=0;k<600;k++){const o=rooms[Math.floor(r()*rooms.length)];if(o===start)continue;const x=o.x+1+Math.floor(r()*(o.w-2)),y=o.y+1+Math.floor(r()*(o.h-2)),kk=key(x,y);
-    if(m.SOLID.has(kk)||m.used?.has(kk))continue;if([...m.crystals,...m.digs].some(q=>Math.hypot(q.tx-x,q.ty-y)<(m.digs.length||m.crystals.length<C.crystals?3:2.2)))continue;if(m.exits.some(e=>Math.hypot(e.x/T-x,e.y/T-y)<2.5))continue;(m.used||(m.used=new Set())).add(kk);return[x,y]}return null};
-  for(let i=0;i<C.crystals;i++){const p=free();if(p)m.crystals.push({id:id+'-c'+i,tx:p[0],ty:p[1],x:p[0]*T+16,y:p[1]*T+22,awake:false})}
-  {const day=Math.floor(Date.now()/864e5),rd=seeded(C.seed*7+day),cells=[];for(let y=1;y<C.h-1;y++)for(let x=1;x<C.w-1;x++){const kk=key(x,y);if(m.FLOOR.has(kk)&&!m.SOLID.has(kk)&&!m.used?.has(kk)&&Math.hypot(x-sx,y-sy)>4&&!m.crystals.some(q=>Math.hypot(q.tx-x,q.ty-y)<2))cells.push([x,y])}
-    for(let i=0;i<C.digs&&cells.length;i++){const p=cells.splice(Math.floor(rd()*cells.length),1)[0];if(m.digs.some(q=>Math.hypot(q.tx-p[0],q.ty-p[1])<3)){i--;continue}m.digs.push({id:id+'-d'+i+'-'+day,tx:p[0],ty:p[1],x:p[0]*T+16,y:p[1]*T+18,done:false})}}
-  // decoration along the walls
-  const deco=['stalag','mushY','mushR','pebbles','rocks','moss','amethyst','crate','cart','lantern','geode','boulder','pillar'];
-  for(let i=0;i<rooms.length*4;i++){const o=rooms[Math.floor(r()*rooms.length)];if(o.boss&&r()<.6)continue;const edge=r()<.5,x=edge?(r()<.5?o.x:o.x+o.w-1):o.x+Math.floor(r()*o.w),y=edge?o.y+Math.floor(r()*o.h):(r()<.5?o.y:o.y+o.h-1),kk=key(x,y);
-    if(m.SOLID.has(kk)||m.used.has(kk)||m.exits.some(e=>Math.hypot(e.x/T-x,e.y/T-y)<2.5))continue;const k=deco[Math.floor(r()*deco.length)],big=CR[k][2]>32;
-    if(big&&(x===o.x||x===o.x+o.w-1||y===o.y||y===o.y+o.h-1)){addCave(m,k,x*T+16,y*T+30,{solid:1});m.used.add(kk)}else if(!big){addCave(m,k,x*T+16,y*T+26,{solid:k==='crate'||k==='cart'});m.used.add(kk);if(k==='lantern')m.glows.push([x*T+16,y*T+10])}}
-  // monsters (placed away from the entrance)
-  for(const [kind,n] of C.mons)for(let i=0;i<n;i++){for(let k=0;k<60;k++){const o=rooms[Math.floor(r()*rooms.length)];if(o===start)continue;const x=o.x+Math.floor(r()*o.w),y=o.y+Math.floor(r()*o.h);if(m.SOLID.has(key(x,y)))continue;m.spawns.push({kind,x:x*T+16,y:y*T+16});break}}
-  if(C.mod==='treasure'){m.chests=[];for(let i=0;i<2;i++){const p=freeAny();if(p)m.chests.push({x:p[0]*T+16,y:p[1]*T+24,open:false,id:id+'-c'+i+'-'+Math.floor(Date.now()/864e5)})}}
-  if(C.boss){const [bx,by]=cen(end);m.bossSpawn={x:bx*T+16,y:by*T+16};m.bossRoom=end;if(id==='cave3'){m.exits.push({id:'dream',x:bx*T+16,y:(end.y+end.h-2)*T+16,to:'dream1',toExit:'up',label:'dreamIn',needBoss:1});m.dreamDoor=1}}
-  m.seen=new Set();m.spawnDefault=[sx*T+16,(start.y+1)*T+16];return m}
+const CAVE_CFG={cave1:{gw:4,gh:3,branch:2,seed:101,w:36,h:26,rooms:8,crystals:8,digs:5,mons:[['slime',4],['bat',2]],next:'cave2'},
+  cave2:{gw:4,gh:3,branch:2,seed:202,w:38,h:28,rooms:9,crystals:6,digs:5,mons:[['slime',4],['bat',3],['mushbug',3]],next:'cave3'},
+  cave3:{gw:5,gh:3,branch:2,seed:303,w:40,h:30,rooms:7,crystals:4,digs:4,mons:[['bat',3],['mushbug',3]],boss:true}};
+const CHUNKS={"rooms":{"hall":["###.....###","#P.......P#","#..c...p..#","...........","....m......","...........","#..d...m..#","#p.......p#","###.....###"],"bend":["####...####","##.....P..#","#..p.c....#",".....##....","....###.m..","...........","#.d.....p.#","##..m....##","####...####"],"pillars":["####...####","#p.......c#","#..P...P..#","...........","..m..o..m..","...........","#..P...P..#","#d.......p#","####...####"],"pond":["###.....###","#p..c....P#","#...###...#","....#####..",".m..#####..","....###....","#.........#","#P..d...p.#","####...####"],"twin":["####...####","#c..#.#..p#","#...#.#...#","...........","..m..o..m..","...........","#...#.#...#","#p..#.#.d.#","####...####"],"nook":["####...####","#P..c...###","#.......p##","...........",".....m.....","...........","##p...d...#","###....P..#","####...####"],"cross":["###.....###","##p..c..P##","#.........#","...........","..o..m..o..","...........","#.........#","##P..d..p##","###.....###"],"ring":["####...####","#p.......c#","#..#####..#","...#####...",".m.#####.m.","...#####...","#..#####..#","#d.......p#","####...####"],"snake":["####...####","#P..#...c.#","#...#.....#","....#..p...",".m..o..m...","......#....","#.....#...#","#p.d..#..P#","####...####"],"garden":["###.....###","#p.c...p..#","#.........#","....ppp....","..m.....m..","...........","#.d.....c.#","#P.......P#","###.....###"],"wide":["##.......##","#.P.....p.#","#....c....#","...........","...m...m...","...........","#.d.......#","#p.......P#","##.......##"],"cave":["####...####","###.....###","#p...c...P#","...........","..m....o...","...........","#P..d....p#","###.....###","####...####"]},"entrance":["####...####","#p.......P#","#.........#","...S.......","...........","...........","#.........#","#P.......p#","####...####"],"arena":["###.....###","#P.......P#","#.........#","...........","...........","...........","#.........#","#p.......p#","###.....###"]};
+
+// ---------- caves built from hand-designed room chunks (Diablo 2 "presets" idea) ----------
+// Each floor = a grid of 11x9 rooms. A path runs from the entrance room (left edge) to the last room (right edge);
+// short side rooms always hold a reward. Props/crystals/monster spots come from the room designs, so nothing lands in a corridor.
+const CW=11,CHH=9,BIGP=['pillar','pillar2','geode','geode2'],SMALLP=['crystal','amethyst','mushR','mushY','stalag','pebbles','rocks','lantern','slab','fossil','rune','mushY','crystal'];
+function chunkPlan(C,r){const gw=C.gw,gh=C.gh,sy=Math.floor(r()*gh),ey=Math.floor(r()*gh),used=new Map(),K=(x,y)=>x+','+y,link=(a,b)=>{a.doors.add(b.gx>a.gx?'E':b.gx<a.gx?'W':b.gy>a.gy?'S':'N');b.doors.add(a.gx>b.gx?'E':a.gx<b.gx?'W':a.gy>b.gy?'S':'N')};
+  const cell=(x,y)=>{if(!used.has(K(x,y)))used.set(K(x,y),{gx:x,gy:y,doors:new Set()});return used.get(K(x,y))};
+  let cur=cell(0,sy);const path=[cur];let vmoves=0;
+  while(cur.gx<gw-1||cur.gy!==ey){let nx=cur.gx,ny=cur.gy;
+    if(cur.gx===gw-1)ny+=Math.sign(ey-cur.gy);
+    else{const up=cur.gy>0&&!used.has(K(cur.gx,cur.gy-1)),dn=cur.gy<gh-1&&!used.has(K(cur.gx,cur.gy+1)),q=r();if(vmoves<1&&up&&q<.25)ny--;else if(vmoves<1&&dn&&q<.5)ny++;else nx++}
+    vmoves=nx===cur.gx?vmoves+1:0;const nxt=cell(nx,ny);link(cur,nxt);path.push(nxt);cur=nxt}
+  const branches=[];for(let b=0;b<(C.branch||2);b++){for(let k=0;k<20;k++){const p=path[1+Math.floor(r()*Math.max(1,path.length-2))];if(!p)break;const d=[[0,-1],[0,1],[1,0],[-1,0]][Math.floor(r()*4)],x=p.gx+d[0],y=p.gy+d[1];if(x<0||y<0||x>=gw||y>=gh||used.has(K(x,y)))continue;const c=cell(x,y);c.branch=1;link(p,c);branches.push(c);break}}
+  return{used,start:path[0],end:path[path.length-1],path,branches}}
+function buildCave(id){const C=CAVE_CFG[id];const gw=C.gw||4,gh=C.gh||3,W=gw*CW,H=gh*CHH;const m=newMap(id,'cave',W,H,C.seed);m.nameKey=id;const r=seeded(C.seed);SEED=C.seed;
+  const plan=chunkPlan({gw,gh,branch:C.branch},r),grid=[],marks=[];for(let y=0;y<H;y++)grid.push(Array(W).fill('#'));
+  const names=Object.keys(CHUNKS.rooms);let bag=[];const pickRoom=()=>{if(!bag.length)bag=names.slice();return bag.splice(Math.floor(r()*bag.length),1)[0]};
+  m.rooms=[];for(const c of plan.used.values()){const isS=c===plan.start,isE=c===plan.end&&C.boss;let tpl=isS?CHUNKS.entrance:isE?CHUNKS.arena:CHUNKS.rooms[pickRoom()];if(!isS&&r()<.5)tpl=tpl.map(row=>row.split('').reverse().join(''));
+    const open=new Set(c.doors);if(isS)open.add('W');if(c===plan.end&&C.next)open.add('E');c.open=open;
+    for(let y=0;y<CHH;y++)for(let x=0;x<CW;x++){let ch=tpl[y][x];const edgeW=x===0&&y>=3&&y<=5,edgeE=x===CW-1&&y>=3&&y<=5,edgeN=y===0&&x>=4&&x<=6,edgeS=y===CHH-1&&x>=4&&x<=6;
+      if((edgeW&&!open.has('W'))||(edgeE&&!open.has('E'))||(edgeN&&!open.has('N'))||(edgeS&&!open.has('S')))ch='#';
+      if((x===0&&!edgeW)||(x===CW-1&&!edgeE)||(y===0&&!edgeN)||(y===CHH-1&&!edgeS))if(ch!=='#')ch='#';
+      const X=c.gx*CW+x,Y=c.gy*CHH+y;grid[Y][X]=ch==='#'?'#':'.';if('cdmPpoS'.includes(ch))marks.push({ch,x:X,y:Y,c})}
+    m.rooms.push({x:c.gx*CW+1,y:c.gy*CHH+1,w:CW-2,h:CHH-2,start:isS,boss:isE,branch:!!c.branch})}
+  for(let y=0;y<H;y++)for(let x=0;x<W;x++)if(grid[y][x]==='.'&&x>0&&y>0&&x<W-1&&y<H-1)m.FLOOR.add(key(x,y));
+  // the entrance sits on the map edge; keep its doorway walkable one tile in
+  const S=plan.start,sx=S.gx*CW+1,sy=S.gy*CHH+4;for(const yy of [sy-1,sy,sy+1])m.FLOOR.add(key(1,yy));
+  const E=plan.end,ex=E.gx*CW+CW-2,ey=E.gy*CHH+4;
+  // props from the room designs only
+  const solid=new Set(),place=(k,x,y,sol,glow)=>{addCave(m,k,x*T+16,y*T+(CR[k][2]>32?30:26),{solid:sol});if(sol)solid.add(key(x,y));if(glow)m.glows.push([x*T+16,y*T+10])};
+  for(const q of marks)if(q.ch==='P')place(BIGP[Math.floor(r()*BIGP.length)],q.x,q.y,true);
+  for(const q of marks)if(q.ch==='p'){const k=SMALLP[Math.floor(r()*SMALLP.length)];place(k,q.x,q.y,false,k==='lantern')}
+  // optional blockers: only kept if every floor tile can still be reached from the entrance
+  const reachAll=block=>{const ok=(x,y)=>{const kk=key(x,y);return m.FLOOR.has(kk)&&!solid.has(kk)&&!block.has(kk)};const seen=new Set([key(1,sy)]),st=[[1,sy]];let n=1;while(st.length){const [x,y]=st.pop();for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){const kk=key(x+dx,y+dy);if(!seen.has(kk)&&ok(x+dx,y+dy)){seen.add(kk);st.push([x+dx,y+dy]);n++}}}let tot=0;for(const k of m.FLOOR)if(!solid.has(k)&&!block.has(k))tot++;return n===tot};
+  for(const q of marks)if(q.ch==='o'&&r()<.5){const kk=key(q.x,q.y);if(reachAll(new Set([kk])))place('rocks',q.x,q.y,true)}
+  for(const k of solid)m.FLOOR.has(k)&&m.SOLID.add(k);
+  for(let y=0;y<H;y++)for(let x=0;x<W;x++)if(!m.FLOOR.has(key(x,y)))m.SOLID.add(key(x,y));
+  // nothing that looks walkable may be unreachable: turn unreachable floor into wall
+  {const seen=new Set([key(1,sy)]),st=[[1,sy]];while(st.length){const [x,y]=st.pop();for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){const kk=key(x+dx,y+dy);if(!seen.has(kk)&&m.FLOOR.has(kk)&&!m.SOLID.has(kk)){seen.add(kk);st.push([x+dx,y+dy])}}}
+    for(const k of [...m.FLOOR])if(!seen.has(k)&&!solid.has(k)){m.FLOOR.delete(k);m.SOLID.add(k)}m.objs=m.objs.filter(o=>!(o.solidKey&&!m.FLOOR.has(o.solidKey)))}
+  // exits on the map edge
+  m.exits.push({id:'up',x:1*T+16,y:sy*T+16,to:C.up||(id==='cave1'?'mountain':'cave'+(+id.slice(4)-1)),toExit:C.upExit||(id==='cave1'?'cave':'down'),label:id==='cave1'?'mountain':'up'});addCave(m,'ladder',1*T+16,sy*T+12,{flat:1});
+  if(C.mul)m.mul=C.mul;m.mod=C.mod;m.bossEl=C.bossEl;if(C.mod==='house')m.expMul=1.5;if(C.mod==='dark')m.darkFloor=1;
+  {const st=marks.find(q=>q.ch==='S');if(st)addStone(m,id,st.x,st.y)}
+  if(C.next){m.exits.push({id:'down',x:ex*T+16,y:ey*T+16,to:C.next,toExit:'up',label:'down',lockBoss:!!C.boss});addCave(m,'stairs',ex*T+16,ey*T+30,{flat:1})}
+  const occupied=(x,y,d)=>[...m.crystals,...m.digs].some(q=>Math.hypot(q.tx-x,q.ty-y)<d)||m.exits.some(e=>Math.hypot(e.x/T-.5-x,e.y/T-.5-y)<2.5)||m.SOLID.has(key(x,y));
+  const inStart=(x,y)=>Math.floor(x/CW)===S.gx&&Math.floor(y/CHH)===S.gy;
+  const floorCells=[...m.FLOOR].map(k=>k.split(',').map(Number)).filter(([x,y])=>!m.SOLID.has(key(x,y))&&!inStart(x,y));
+  // crystals: designed spots first (side rooms preferred), then any floor far from others
+  const cs=marks.filter(q=>q.ch==='c'&&q.c!==S).sort((a,b)=>(b.c.branch?1:0)-(a.c.branch?1:0)||r()-.5);
+  for(const q of cs){if(m.crystals.length>=C.crystals)break;if(occupied(q.x,q.y,3))continue;m.crystals.push({id:id+'-c'+m.crystals.length,tx:q.x,ty:q.y,x:q.x*T+16,y:q.y*T+22,awake:false})}
+  for(let k=0;m.crystals.length<C.crystals&&k<400;k++){const [x,y]=floorCells[Math.floor(r()*floorCells.length)];if(occupied(x,y,4))continue;m.crystals.push({id:id+'-c'+m.crystals.length,tx:x,ty:y,x:x*T+16,y:y*T+22,awake:false})}
+  // dig spots move every day (same for everyone on that day)
+  {const day=Math.floor(Date.now()/864e5),rd=seeded(C.seed*7+day),ds=marks.filter(q=>q.ch==='d'&&q.c!==S).map(q=>[q.x,q.y]).concat(floorCells.slice(0,0));const pool=ds.length>=C.digs?ds:ds.concat(floorCells);
+    for(let k=0;m.digs.length<C.digs&&k<400;k++){const [x,y]=pool[Math.floor(rd()*pool.length)];if(occupied(x,y,3))continue;m.digs.push({id:id+'-d'+m.digs.length+'-'+day,tx:x,ty:y,x:x*T+16,y:y*T+18,done:false})}}
+  // monsters: designed spots first, never in the entrance room
+  const ms=marks.filter(q=>q.ch==='m'&&q.c!==S);let mi=0;for(const [kind,n] of C.mons)for(let i=0;i<n;i++){let p=ms[mi++];if(!p||m.SOLID.has(key(p.x,p.y))){const f=floorCells[Math.floor(r()*floorCells.length)];p={x:f[0],y:f[1]}}m.spawns.push({kind,x:p.x*T+16,y:p.y*T+16})}
+  if(C.mod==='treasure'){m.chests=[];for(const b of plan.branches.concat(plan.path.slice(1,-1)).slice(0,2)){const cx=b.gx*CW+5,cy=b.gy*CHH+4;if(m.FLOOR.has(key(cx,cy))&&!m.SOLID.has(key(cx,cy)))m.chests.push({x:cx*T+16,y:cy*T+24,open:false,id:id+'-c'+m.chests.length+'-'+Math.floor(Date.now()/864e5)})}}
+  if(C.boss){const bx=E.gx*CW+5,by=E.gy*CHH+4;m.bossSpawn={x:bx*T+16,y:by*T+16};m.bossRoom={x:E.gx*CW+1,y:E.gy*CHH+1,w:CW-2,h:CHH-2,boss:1};
+    if(id==='cave3'){const side=!E.doors.has('S')?'S':!E.doors.has('N')?'N':null;const dy=side==='S'?E.gy*CHH+7:side==='N'?E.gy*CHH+1:by+2;m.exits.push({id:'dream',x:bx*T+16,y:dy*T+16,to:'dream1',toExit:'up',label:'dreamIn',needBoss:1});m.dreamDoor=1}}
+  m.seen=new Set();m.spawnDefault=[2*T+16,sy*T+16];m.plan=plan;return m}
 function addFarm(m,k,tx,ty,solid=true,dy=0){const r=FR[k];m.objs.push({img:'farm',sx:r[0],sy:r[1],sw:32,sh:32,x:tx*T+16,y:ty*T+28+dy,small:1,cs:.3,tall:0});if(solid)m.SOLID.add(key(tx,ty))}
 function buildHome(){SEED=31;const m=newMap('home','town',34,22,31);m.nameKey='home';
   const pr=(x0,y0,x1,y1)=>{for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++)m.PATH.add(key(x,y))};pr(6,11,33,12);pr(10,9,11,10);pr(19,10,20,10);pr(16,13,17,21);
@@ -522,7 +549,7 @@ function buildRoom(layout,fl=1,cfg=houseCfg()){const [W,H]=HSZ[Math.min(3,cfg.si
   m.layout=layout||[];placeFurniture(m);m.spawnDefault=fl===1?[cx*T+16,(H-2)*T+10]:[4*T+16,(H-3)*T+10];return m}
 function placeFurniture(m){m.objs.length=m.fixed;m.SOLID.forEach(k=>{if(m.FLOOR.has(k))m.SOLID.delete(k)});
   for(const f of m.layout){const r=FU[f.k];if(!r||!m.FLOOR.has(key(f.tx,f.ty)))continue;const o={img:'furn',sx:r[0]*66+1,sy:r[1]*66+1,sw:64,sh:64,x:f.tx*T+16,y:f.ty*T+28,tall:FLAT[f.k]?0:1,flat:!!FLAT[f.k],cs:.4,fu:f,flip:!!f.fl};if(IMG.furn)measure(o);else{o.cb=63;o.foot=20;o.fx=0;o.a=1}m.objs.push(o);if(!FLAT[f.k])m.SOLID.add(key(f.tx,f.ty))}}
-function dreamCfg(n){const id='dream'+n;if(CAVE_CFG[id])return;const k=Math.min(n,12),mod=n%5===0?'boss':['calm','dark','treasure','house','calm','dark','treasure','house'][(n*7+3)%8],hm=mod==='house'?2:1;CAVE_CFG[id]={mod,bossEl:n%15===5?'ice':n%15===10?'fire':n%15===0?'storm':null,seed:5000+n*37,w:34+k,h:24+Math.floor(k/2),rooms:7+Math.floor(k/3),crystals:3,digs:mod==='treasure'?9:4,mons:[['slime',(3+Math.floor(n/3))*hm],['bat',(2+Math.floor(n/4))*hm],['mushbug',(2+Math.floor(n/3))*hm]],next:'dream'+(n+1),boss:n%5===0,up:n===1?'cave3':'dream'+(n-1),upExit:n===1?'dream':'down',mul:2.3+.35*n};
+function dreamCfg(n){const id='dream'+n;if(CAVE_CFG[id])return;const k=Math.min(n,12),mod=n%5===0?'boss':['calm','dark','treasure','house','calm','dark','treasure','house'][(n*7+3)%8],hm=mod==='house'?2:1;CAVE_CFG[id]={gw:3+Math.min(2,Math.floor(n/5)),gh:3,branch:mod==='treasure'?3:2,mod,bossEl:n%15===5?'ice':n%15===10?'fire':n%15===0?'storm':null,seed:5000+n*37,w:34+k,h:24+Math.floor(k/2),rooms:7+Math.floor(k/3),crystals:3,digs:mod==='treasure'?9:4,mons:[['slime',(3+Math.floor(n/3))*hm],['bat',(2+Math.floor(n/4))*hm],['mushbug',(2+Math.floor(n/3))*hm]],next:'dream'+(n+1),boss:n%5===0,up:n===1?'cave3':'dream'+(n-1),upExit:n===1?'dream':'down',mul:2.3+.35*n};
   const C=CAVE_CFG[id],suf=k2=>C.mod!=='calm'&&C.mod!=='boss'?' · '+TX[k2]['mod_'+C.mod]:'';TX.th[id]=TX.th.dream+' · ชั้น '+n+suf('th');TX.en[id]=TX.en.dream+' · Floor '+n+suf('en');MAPS[id]=()=>buildCave(id)}
 const MAPS={room:()=>buildRoom(floorLayout(1),1),room2:()=>buildRoom(floorLayout(2),2),room3:()=>buildRoom(floorLayout(3),3),market:buildMarket,lake:buildLake,home:buildHome,plaza:buildPlaza,mountain:buildMountain,cave1:()=>buildCave('cave1'),cave2:()=>buildCave('cave2'),cave3:()=>buildCave('cave3')};
 
@@ -823,7 +850,7 @@ const CACHE_ORDER=[];function trimCache(cur){const i=CACHE_ORDER.indexOf(cur);if
 function getMap(id){if(!CACHE[id]){if(!MAPS[id]&&id.startsWith('dream'))dreamCfg(+id.slice(5));const m=MAPS[id]();sealPockets(m);m.objs.forEach(measure);buildGround(m);CACHE[id]=m}return CACHE[id]}
 function goMap(id,exitId,atStone){if(id.startsWith('dream')){const n=+id.slice(5);if(n>(S.dreamBest||0)){S.dreamBest=n;mission('dream')}}if(id==='home'&&VISIT){VISIT=null;resetRooms()}if(id==='room'){const h=HOME.get();if(!h.furnInit){h.furnInit=1;h.furn=Object.assign({bed:1,plant:1,rug:1},h.furn||{});HOME.put(h)}if(CACHE.room&&CACHE.room.visiting&&!goMap.keepVisit)delete CACHE.room}const m=getMap(id);trimCache(id);M=m;m.shadowSC=0;
   {const aw=S.crystals[id]||[],dim=dimToday(id,aw),rw=S.rewake&&S.rewake.date===today()?S.rewake.ids:[];let dimmedNow=0;(m.crystals||[]).forEach(c=>{c.awake=aw.includes(c.id)&&!(dim.has(c.id)&&!rw.includes(c.id));if(aw.includes(c.id)&&!c.awake)dimmedNow++});if(dimmedNow&&m.kind==='cave')setTimeout(()=>say('🌙 '+t('dimmed')),2600)}(m.digs||[]).forEach(d=>d.done=(S.digs[id]||[]).includes(d.id));m.stones.forEach(s=>s.awake=S.stones.includes(s.id));
-  let p=m.spawnDefault;if(exitId){const e=m.exits.find(e=>e.id===exitId);if(e){const cx=m.w*T/2,cy=m.h*T/2,dx=cx-e.x,dy=cy-e.y,d=Math.hypot(dx,dy)||1;p=[e.x+dx/d*30,e.y+dy/d*30];if(m.kind==='cave')p=[e.x,e.y+34]}}
+  let p=m.spawnDefault;if(exitId){const e=m.exits.find(e=>e.id===exitId);if(e){const cx=m.w*T/2,cy=m.h*T/2,dx=cx-e.x,dy=cy-e.y,d=Math.hypot(dx,dy)||1;p=[e.x+dx/d*30,e.y+dy/d*30];if(m.kind==='cave')p=e.x<3*T?[e.x+44,e.y+4]:e.x>m.w*T-3*T?[e.x-44,e.y+4]:[e.x,e.y+34]}}
   if(atStone){const s=m.stones[0];if(s)p=[s.x,s.y+26]}
   if(blockedAt(m,p[0],p[1])){const q=findPath(m,m.spawnDefault[0],m.spawnDefault[1],p[0],p[1]);p=q?q[q.length-1]:m.spawnDefault}
   (m.chests||[]).forEach(c=>c.open=(S.chests||[]).includes(c.id));P.x=p[0];P.y=p[1];P.path=null;P.target=null;P.act=null;setTimeout(()=>Net.enterMap(id),0);PEB.x=P.x+18;PEB.y=P.y-24;if(id==='cave3'&&S.peb&&!S.boss)setTimeout(()=>{say('🪨 '+t('n_peb')+': '+t('s_peb'));msgT=5},2400);spawnMonsters();makeMinimap(m);showCard(t(m.nameKey),t('town'));setLight();hud();save()}
