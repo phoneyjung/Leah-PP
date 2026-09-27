@@ -1,0 +1,68 @@
+{
+  "rules": {
+    "rooms": {
+      "$room": {
+        ".read": "auth != null",
+        "players": {
+          "$uid": {
+            ".write": "auth != null && auth.uid === $uid",
+            ".validate": "!newData.exists() || (newData.hasChildren(['n','m','x','y']) && newData.child('n').isString() && newData.child('n').val().length <= 12)"
+          }
+        },
+        "emotes": {
+          "$id": {
+            ".write": "auth != null && !data.exists()",
+            ".validate": "newData.child('u').val() === auth.uid && newData.child('e').isString() && newData.child('e').val().length <= 4"
+          }
+        },
+        "points": {
+          "$house": {
+            ".write": "auth != null",
+            ".validate": "newData.isNumber() && ((!data.exists() && newData.val() <= 20) || (newData.val() >= data.val() && newData.val() <= data.val() + 20))"
+          }
+        },
+        "maps": {
+          "$map": {
+            "mons": {
+              ".write": "auth != null"
+            },
+            "hits": {
+              ".write": "auth != null && !newData.exists()",
+              "$id": {
+                ".write": "auth != null && !data.exists()",
+                ".validate": "newData.child('u').val() === auth.uid && newData.child('d').isNumber() && newData.child('d').val() <= 500"
+              }
+            },
+            "dmg": {
+              ".write": "auth != null && !newData.exists()",
+              "$id": {
+                ".write": "auth != null && !data.exists()",
+                ".validate": "newData.child('n').isNumber() && newData.child('n').val() <= 200"
+              }
+            },
+            "fx": {
+              ".write": "auth != null && !newData.exists()",
+              "$id": {
+                ".write": "auth != null && !data.exists()"
+              }
+            }
+          }
+        },
+        "homes": {
+          "$uid": {
+            ".write": "auth != null && auth.uid === $uid",
+            ".validate": "!newData.exists() || newData.hasChildren(['lv'])"
+          }
+        },
+        "knock": {
+          "$uid": {
+            "$id": {
+              ".write": "auth != null && !data.exists()",
+              ".validate": "newData.child('n').isString() && newData.child('n').val().length <= 12"
+            }
+          }
+        }
+      }
+    }
+  }
+}

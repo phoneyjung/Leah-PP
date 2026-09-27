@@ -1,11 +1,11 @@
 // Leah-PP service worker: network first (always newest when online), cache as backup when offline.
-const CACHE='leahpp-v24';
+const CACHE='leahpp-v26';
 const FILES=['./','index.html','manifest.json','questions-index.json',
 'q-math-6.json','q-math-7.json','q-math-8.json','q-english-6.json','q-english-7.json','q-english-8.json',
 'q-thai-6.json','q-thai-7.json','q-thai-8.json','q-chinese-6.json','q-chinese-7.json','q-chinese-8.json',
 'q-general-6.json','q-general-7.json','q-general-8.json',
 'leah-walk.png','leah-idle.png','dad-idle.png','mom-idle.png','peb-idle.png','nuan-idle.png',
-'cave-floor.jpg','cave-wall.jpg','tiles-cave.png','tiles-village.png','tiles-hedge.png','obj-fountain.png','props-village.png','props-cave.png','buildings-village.png','tiles-house.png','furniture.png','play.html','tiles-cliff.png','tiles-water.png','tiles-cobble.png','props-mountain.png','props-farm.png','obj-lightstone.png','obj-lightstone-plaza.png','obj-cave-crystal.png','obj-rockfall.png','obj-bridge-rope.png','obj-bridge-stone.png','obj-fountain-big.png','obj-fountain-old.png',
+'cave-floor.jpg','cave-wall.jpg','tiles-cave.png','tiles-village.png','tiles-hedge.png','obj-fountain.png','props-village.png','props-cave.png','buildings-village.png','tiles-house.png','furniture.png','play.html','play.webmanifest','firebase-config.js','tiles-cliff.png','tiles-water.png','tiles-cobble.png','props-mountain.png','props-farm.png','obj-lightstone.png','obj-lightstone-plaza.png','obj-cave-crystal.png','obj-rockfall.png','obj-bridge-rope.png','obj-bridge-stone.png','obj-pier.png','obj-fountain-big.png','obj-fountain-old.png',
 'kid-braids-idle.png','kid-braids-stand.png','kid-braids-walk.png','kid-ponytail-idle.png','kid-ponytail-stand.png','kid-ponytail-walk.png','kid-bob-idle.png','kid-bob-stand.png','kid-bob-walk.png','kid-curly-idle.png','kid-curly-stand.png','kid-curly-walk.png','kid-blond-idle.png','kid-blond-stand.png','kid-blond-walk.png','kid-spiky-idle.png','kid-spiky-stand.png','kid-spiky-walk.png',
 'icon-192.png','icon-512.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>Promise.all(FILES.map(f=>c.add(f).catch(()=>null)))));self.skipWaiting()});

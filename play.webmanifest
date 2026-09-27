@@ -1,0 +1,14 @@
+{
+  "name": "Leah พาเพลิน",
+  "short_name": "พาเพลิน",
+  "start_url": "play.html",
+  "scope": "./",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#140d24",
+  "theme_color": "#1b1330",
+  "icons": [
+    {"src": "icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png"}
+  ]
+}
