@@ -1,0 +1,620 @@
+<!doctype html><html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#1b1330">
+<title>Leah พาเพลิน · 2D</title>
+<link rel="manifest" href="manifest.json">
+<style>
+:root{--ink:#fdf6e8;--bg:#1b1330;--gold:#a8793a;--sun:#f2c230;--wing:#4b8fe0;--leaf:#4fbf5a;--flame:#e0493c}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#0b0814;overflow:hidden;touch-action:none;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);-webkit-user-select:none;user-select:none}
+canvas#c{position:fixed;left:0;top:0}
+#vig{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 55%,rgba(10,6,20,0) 55%,rgba(10,6,20,.32) 100%)}
+.pn{background:rgba(27,19,48,.93);box-shadow:0 -3px 0 0 var(--gold),0 3px 0 0 var(--gold),-3px 0 0 0 var(--gold),3px 0 0 0 var(--gold),0 7px 0 0 rgba(0,0,0,.35);padding:8px 10px}
+button{font:inherit;color:var(--ink);background:#3a2a58;border:0;padding:8px 12px;cursor:pointer;box-shadow:0 -2px 0 0 #6d5a96,0 2px 0 0 #120b22,-2px 0 0 0 #6d5a96,2px 0 0 0 #120b22;touch-action:manipulation}
+button:active{transform:translateY(1px)}
+button:disabled{opacity:.45}
+.hide{display:none!important}
+/* HUD */
+#hud{position:fixed;top:calc(8px + env(safe-area-inset-top,0px));left:calc(8px + env(safe-area-inset-left,0px));min-width:170px;max-width:46vw;font-size:13px;pointer-events:none}
+#hud .nm{display:flex;align-items:center;gap:6px;font-weight:800;font-size:14px}
+#hud .rib{width:10px;height:14px;display:inline-block;clip-path:polygon(0 0,100% 0,100% 100%,50% 75%,0 100%)}
+.bar{height:9px;background:#120b22;margin-top:4px;position:relative;box-shadow:0 0 0 2px #120b22}
+.bar i{position:absolute;left:0;top:0;bottom:0;display:block}
+.bar b{position:absolute;right:3px;top:-3px;font-size:10px;font-weight:700;text-shadow:0 1px 0 #000}
+#hpw i{background:linear-gradient(#ff7a6b,#d33a2c)}#xpw i{background:linear-gradient(#ffe7a0,#e0a92e)}
+#hud .row{display:flex;gap:10px;margin-top:5px;font-weight:700}
+#topR{position:fixed;top:calc(8px + env(safe-area-inset-top,0px));right:calc(8px + env(safe-area-inset-right,0px));display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+#mmw{display:flex;flex-direction:column;align-items:center;gap:3px;padding:5px;cursor:pointer}
+#mm{display:block;image-rendering:pixelated}
+#mmn{font-size:11px;color:#ffe7b0;max-width:130px;text-align:center;line-height:1.2}
+#btns{display:flex;gap:8px}
+#btns button{padding:6px 9px;font-size:15px}
+#act{position:fixed;right:calc(14px + env(safe-area-inset-right,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));display:flex;gap:10px;align-items:flex-end}
+#act button{min-width:58px;min-height:58px;font-size:22px;border-radius:0}
+#act small{display:block;font-size:10px}
+#card{position:fixed;top:17%;left:50%;transform:translateX(-50%);text-align:center;color:#fff6dd;text-shadow:0 2px 0 #3b2a18,0 0 12px rgba(0,0,0,.6);transition:opacity .8s;pointer-events:none;opacity:0;white-space:nowrap}
+#card b{display:block;font-size:30px;letter-spacing:2px}#card i{font-style:normal;font-size:13px;opacity:.9}
+#msg{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);max-width:72%;font-size:14px;transition:opacity .35s;opacity:0;pointer-events:none;text-align:center}
+#fade{position:fixed;inset:0;background:#000;opacity:0;pointer-events:none;transition:opacity .35s}
+/* modal */
+#modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(8,5,16,.55);padding:calc(10px + env(safe-area-inset-top,0px)) 12px calc(10px + env(safe-area-inset-bottom,0px))}
+#modal>.pn{max-width:min(720px,96vw);max-height:92vh;overflow:auto;width:100%}
+#modal h2{margin:0 0 8px;font-size:17px;color:#ffe7b0}
+.qz{font-size:clamp(17px,4.2vh,24px);font-weight:800;margin:4px 0 12px;line-height:1.35}
+.ch{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ch button{font-size:clamp(16px,4vh,22px);padding:12px 8px;min-height:54px}
+.ch button.ok{background:#2f7d3a}.ch button.no{background:#8a2f2f}
+.note{font-size:12px;opacity:.8}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.it{display:flex;gap:8px;align-items:center;text-align:left;padding:8px;font-size:13px}
+.it canvas{image-rendering:pixelated;flex:0 0 auto}
+.it.on{box-shadow:0 0 0 3px #ffe7b0}
+.r0{color:#f3efe6}.r1{color:#7fb6ff}.r2{color:#ffe36b}.r3{color:#ffb347}.r4{color:#7df28a}
+/* creator */
+#cr{position:fixed;inset:0;display:flex;gap:12px;padding:calc(10px + env(safe-area-inset-top,0px)) 12px calc(10px + env(safe-area-inset-bottom,0px));background:radial-gradient(ellipse at 30% 40%,#2c3f5a,#140d24 70%)}
+#cr .l{flex:0 0 38%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+#cr .r{flex:1;overflow:auto;display:flex;flex-direction:column;gap:8px;padding:4px}
+#cr h1{font-size:17px;margin:0;color:#ffe7b0}#cr h3{font-size:13px;margin:0 0 6px;color:#ffe7b0}
+#cr canvas{image-rendering:pixelated}
+.g6{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.opt{padding:4px 2px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;background:#2a2044}
+.opt.on{background:#5a4690;box-shadow:0 0 0 3px #ffe7b0}
+.hs{color:#1b1330;font-weight:800;padding:6px 2px}
+.hs.on{box-shadow:0 0 0 3px #fff,0 0 12px 3px rgba(255,255,255,.5)}
+.ages{display:flex;flex-wrap:wrap;gap:6px}.ages button{padding:7px 10px;font-size:14px}.ages button.on{background:#5a4690;box-shadow:0 0 0 3px #ffe7b0}
+#cr input{font:inherit;font-size:15px;padding:8px;border:0;background:#fdf6e8;color:#1b1330;flex:1;min-width:0}
+.go{background:#c98a2e!important;color:#1b1330!important;font-weight:800;font-size:16px;padding:10px 16px}
+.row2{display:flex;gap:8px;align-items:center}
+@media (max-height:440px){#cr h3{margin-bottom:3px;font-size:12px}.opt{font-size:10px}#cr .pn{padding:5px 8px}#cr .r{gap:6px}.ages button{padding:5px 9px}#cr input{padding:6px}.hs{padding:4px 2px}}
+</style></head><body>
+<canvas id="c"></canvas><div id="vig"></div>
+<div id="hud" class="pn hide"><div class="nm"><span class="rib" id="hRib"></span><span id="hName"></span><span id="hLv"></span></div>
+ <div id="hpw" class="bar"><i id="hpI"></i><b id="hpT"></b></div><div id="xpw" class="bar"><i id="xpI"></i><b id="xpT"></b></div>
+ <div class="row"><span id="hCry">✨ 0</span><span id="hCoin">🪙 0</span></div><div id="goal" style="margin-top:5px;font-size:12px;color:#ffe7b0;line-height:1.3"></div></div>
+<div id="topR" class="hide"><div id="btns"><button id="bBag" title="กระเป๋า">🎒</button><button id="bMap" title="แผนที่">🗺️</button><button id="bSet" title="ตั้งค่า">⚙️</button></div>
+ <div class="pn" id="mmw"><canvas id="mm"></canvas><div id="mmn"></div></div></div>
+<div id="act" class="hide"><button id="bCmp" class="hide">🧭<small>หา</small></button><button id="bPot">🧪<small id="potN">0</small></button><button id="bAtk">⚔️<small id="atkL">ตี</small></button></div>
+<div id="card"><b id="cardB"></b><i id="cardI"></i></div>
+<div class="pn" id="msg"></div>
+<div id="fade"></div>
+<div id="modal" class="hide"><div class="pn" id="mBody"></div></div>
+<div id="cr" class="hide"></div>
+<script>
+// ===== Leah พาเพลิน 2D · play.html =====
+// Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
+const VERSION='play-2d-0.1';
+const T=32;
+const FILES={ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
+  props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',farm:'props-farm.png',
+  stone:'obj-lightstone.png',stonePlaza:'obj-lightstone-plaza.png',caveDoor:'obj-cave-crystal.png',rock:'obj-rockfall.png',
+  bridgeRope:'obj-bridge-rope.png',npc_leah:'leah-idle.png',npc_nuan:'nuan-idle.png',npc_mom:'mom-idle.png',npc_dad:'dad-idle.png',npc_peb:'peb-idle.png',bridgeStone:'obj-bridge-stone.png',fountBig:'obj-fountain-big.png',fountOld:'obj-fountain-old.png'};
+const KIDS=[['kid-braids','ผมเปีย','Braids'],['kid-ponytail','หางม้า','Ponytail'],['kid-bob','ผมบ็อบ','Bob'],['kid-curly','ผมหยิก','Curly'],['kid-blond','ผมยุ่ง','Messy'],['kid-spiky','ผมตั้ง','Spiky']];
+KIDS.forEach(([k])=>{FILES['i_'+k]=k+'-idle.png';FILES['s_'+k]=k+'-stand.png';FILES['w_'+k]=k+'-walk.png'});
+const EMBED=window.EMBED_ASSETS||null;  // the single-file preview build puts every image here
+const IMG={},MISSING=new Set();
+function loadImages(){return Promise.all(Object.entries(FILES).map(([k,f])=>new Promise(res=>{const im=new Image();im.onload=()=>{IMG[k]=im;res()};im.onerror=()=>{MISSING.add(k);res()};im.src=EMBED&&EMBED[f]?EMBED[f]:f})))}
+const has=k=>!!IMG[k];
+
+// ---- words (Thai / English) ----
+const TX={th:{bag:'กระเป๋า',map:'แผนที่',set:'ตั้งค่า',hit:'ตี',lv:'Lv',crystal:'คริสตัล',coin:'เหรียญ',
+  create:'สร้างผู้พิทักษ์แสง',pick:'1 · เลือกตัวละคร',house:'2 · เลือกบ้าน',age:'3 · อายุ',name:'4 · ชื่อเล่น',namePh:'ชื่อเล่นของเรา',rnd:'🎲 สุ่ม',start:'✨ เริ่มผจญภัย',
+  kidNote:'อายุต่ำกว่า 12: ไม่มีเลือด มอนไม่ตี ตอบคำถามปลุกคริสตัล',adultNote:'12 ปีขึ้นไป: มีเลือด เก็บเลเวล ปกป้องน้อง ๆ',
+  adultArt:'(ภาพตัวละครผู้ใหญ่ยังเป็นภาพชั่วคราว)',welcome:'ยินดีต้อนรับ',
+  wake:'✨ ปลุกคริสตัลด้วยความรู้',right:'ถูกต้อง! คริสตัลตื่นแล้ว',wrong:'ยังไม่ใช่ ลองอีกครั้งนะ',answer:'คำตอบคือ',ok:'ตกลง',close:'ปิด',
+  dig:'ขุดเจอ',found:'เจอคริสตัลหลับอยู่! แตะเพื่อปลุก',stoneOn:'✨ ศิลาแสงตื่นแล้ว · บันทึกจุดวาร์ป',warp:'วาร์ปไปจุดที่เคยไป',
+  down:'ลงชั้นถัดไป',up:'ขึ้นไปชั้นบน',soon:'ทางนี้ยังไปไม่ได้ (เร็ว ๆ นี้)',lvup:'เลเวลอัป!',fell:'ล้มแล้ว… กลับไปฟื้นที่ศิลาแสง',
+  equip:'ใส่',equipped:'ใส่อยู่',potion:'ยาฟื้นพลัง',boss:'ผู้พิทักษ์หินงง',bossWin:'ผู้พิทักษ์หายงงแล้ว! ถ้ำคริสตัลสว่างทั้งถ้ำ',
+  lang:'ภาษา',light:'ความสว่างของเมือง',reset:'ลบเซฟแล้วเริ่มใหม่',resetQ:'ลบตัวละครและความคืบหน้าทั้งหมด?',saved:'บันทึกแล้ว',
+  kidSafe:'มอนสเตอร์ไม่ตีเด็ก',noHit:'แตะมอนสเตอร์เพื่อตี',rock:'หินถล่มปิดทางขึ้นเขา… ได้ยินว่าข้างบนมีดินแดนหิมะ',
+  plaza:'ลานน้ำพุ',mountain:'ตีนเขา',cave1:'ถ้ำคริสตัล · ชั้น 1',cave2:'ถ้ำคริสตัล · ชั้น 2',cave3:'ถ้ำคริสตัล · ชั้น 3',town:'เมืองพาเพลิน · บทที่ 1',
+  goalPlaza:'🎯 ไปถ้ำคริสตัล: เดินขึ้นทางเหนือ',goalMountain:'🎯 เข้าปากถ้ำตรงหน้าผา',goalKid:'🎯 ตามหาคริสตัลที่หลับอยู่',goalAdult:'🎯 ปัดฝุ่นให้มอนสเตอร์',goalDown:'🎯 ลงบันไดไปชั้นถัดไป',goalBoss:'🎯 ช่วยผู้พิทักษ์หินให้หายงง',goalDone:'🎉 ถ้ำคริสตัลสว่างแล้ว! ถ้ำอื่นเปิดเร็ว ๆ นี้',floorDone:'✨ คริสตัลชั้นนี้ตื่นครบแล้ว!',compass:'เข็มทิศแสงชี้ไปทางคริสตัล',
+  n_leah:'ลีอา',n_nuan:'ยายนวล',n_mom:'เจ้าหญิง',n_dad:'พ่อมด',n_peb:'เป๊บ',
+  s_leah:'ถ้ำคริสตัลอยู่ทางเหนือ เดินตามทางหินไปเลย! เจอคริสตัลหลับอยู่ แตะแล้วตอบคำถามปลุกมันนะ',s_nuan:'ร้านยายยังจัดของไม่เสร็จ รอหน่อยนะหลาน… ระหว่างนี้ลองขุดตรงที่มีประกายในถ้ำดูสิ',s_dad:'ในถ้ำมืดนะ อยู่ใกล้แสงไว้ ผู้ใหญ่ช่วยปัดฝุ่นให้สัตว์ที่งง ๆ ด้วย',s_mom:'ศิลาแสงสีฟ้าคือจุดวาร์ป แตะแผนที่เล็กมุมขวาบนเพื่อวาร์ปกลับได้',s_peb:'ปิ๊บ ๆ! ชั้นล่างสุดมีผู้พิทักษ์หินที่งงมาก ๆ ช่วยเขาหน่อยนะ',
+  tipStart:'แตะพื้นเพื่อเดิน · แตะคนเพื่อคุย · ทำตามเป้าหมาย 🎯 ใต้ชื่อ',sound:'เสียง',
+  sw:'ดาบไม้',bow:'ธนู',staff:'คทา',dag:'มีดสั้น',atk:'พลังโจมตี',spd:'ความเร็ว',rng:'ระยะ',empty:'ยังไม่มีของ',gems:'อัญมณี'},
+ en:{bag:'Bag',map:'Map',set:'Settings',hit:'Hit',lv:'Lv',crystal:'Crystals',coin:'Coins',
+  create:'Create your Light Keeper',pick:'1 · Pick a character',house:'2 · Pick your house',age:'3 · Age',name:'4 · Nickname',namePh:'Your nickname',rnd:'🎲 Random',start:'✨ Start adventure',
+  kidNote:'Under 12: no health, monsters never attack, answer questions to wake crystals',adultNote:'12 and over: health, levels, protect the younger ones',
+  adultArt:'(adult artwork is temporary)',welcome:'Welcome',
+  wake:'✨ Wake the crystal with knowledge',right:'Correct! The crystal is awake',wrong:'Not quite, try again',answer:'The answer is',ok:'OK',close:'Close',
+  dig:'You dug up',found:'A sleeping crystal! Tap to wake it',stoneOn:'✨ Light Stone awake · warp point saved',warp:'Warp to a place you have visited',
+  down:'Go down',up:'Go up',soon:'This way is not open yet (coming soon)',lvup:'Level up!',fell:'You fainted… back to the Light Stone',
+  equip:'Equip',equipped:'Equipped',potion:'Potion',boss:'Dizzy Stone Guardian',bossWin:'The guardian is no longer dizzy! The whole Crystal Cave is lit',
+  lang:'Language',light:'Town brightness',reset:'Delete save and restart',resetQ:'Delete your character and all progress?',saved:'Saved',
+  kidSafe:'Monsters never attack kids',noHit:'Tap a monster to hit it',rock:'A rockfall blocks the mountain path… they say a snowy land lies above',
+  plaza:'Fountain Plaza',mountain:'Mountain Foot',cave1:'Crystal Cave · Floor 1',cave2:'Crystal Cave · Floor 2',cave3:'Crystal Cave · Floor 3',town:'Paphloen Town · Chapter 1',
+  goalPlaza:'🎯 Go to the Crystal Cave: walk north',goalMountain:'🎯 Enter the cave in the cliff',goalKid:'🎯 Find the sleeping crystals',goalAdult:'🎯 Clear the dust from the monsters',goalDown:'🎯 Take the stairs down',goalBoss:'🎯 Help the Stone Guardian stop being dizzy',goalDone:'🎉 The Crystal Cave is lit! More caves open soon',floorDone:'✨ Every crystal on this floor is awake!',compass:'The light compass points to a crystal',
+  n_leah:'Leah',n_nuan:'Granny Nuan',n_mom:'Princess',n_dad:'Wizard',n_peb:'Peb',
+  s_leah:'The Crystal Cave is to the north, follow the stone path! Tap a sleeping crystal and answer to wake it',s_nuan:'Granny\'s shop is not ready yet, dear… meanwhile try digging where it sparkles in the cave',s_dad:'The cave is dark, stay near the light. Grown-ups, please clear the dust off the dizzy creatures',s_mom:'Blue Light Stones are warp points. Tap the small map to warp back',s_peb:'Peep peep! The Stone Guardian on the bottom floor is very dizzy, please help him',
+  tipStart:'Tap the ground to walk · tap people to talk · follow the 🎯 goal under your name',sound:'Sound',
+  sw:'Wooden sword',bow:'Bow',staff:'Staff',dag:'Dagger',atk:'Attack',spd:'Speed',rng:'Range',empty:'Nothing yet',gems:'Gems'}};
+let SND=true,AC=null;
+function sfx(n){if(!SND)return;try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();const now=AC.currentTime,
+  seq={hit:[[220,.05,'square',.08]],kill:[[520,.07,'triangle',.1],[780,.09,'triangle',.1]],coin:[[988,.05,'square',.06],[1319,.08,'square',.06]],pick:[[660,.06,'triangle',.08],[880,.08,'triangle',.08]],
+   lvl:[[523,.08,'triangle',.1],[659,.08,'triangle',.1],[784,.08,'triangle',.1],[1047,.18,'triangle',.12]],wake:[[784,.1,'sine',.12],[988,.1,'sine',.12],[1319,.25,'sine',.12]],right:[[659,.08,'triangle',.1],[988,.16,'triangle',.1]],
+   wrong:[[330,.12,'sine',.08],[262,.16,'sine',.08]],warp:[[392,.08,'sine',.08],[523,.08,'sine',.08],[784,.14,'sine',.08]],dig:[[140,.06,'square',.07],[180,.06,'square',.07]],hurt:[[160,.1,'sawtooth',.07]],shoot:[[880,.04,'square',.04]]}[n]||[];
+  let tt=now;for(const [f,d,type,v] of seq){const o=AC.createOscillator(),g=AC.createGain();o.type=type;o.frequency.value=f;g.gain.setValueAtTime(v,tt);g.gain.exponentialRampToValueAtTime(.0001,tt+d);o.connect(g).connect(AC.destination);o.start(tt);o.stop(tt+d+.02);tt+=d*.9}}catch(e){}}
+let LANG='th';const t=k=>(TX[LANG]&&TX[LANG][k])||TX.th[k]||k;
+
+// ---- houses: the purple cape is keyed to exact magenta in the sprite files; only that is recoloured ----
+const HOUSES=[{id:'sun',th:'บ้านดวงอาทิตย์',en:'Sun House',col:'#f2c230',h:[44,.40,.72,.88]},{id:'wing',th:'บ้านปีกฟ้า',en:'Wing House',col:'#4b8fe0',h:[214,.26,.60,.72]},
+  {id:'leaf',th:'บ้านใบไม้',en:'Leaf House',col:'#4fbf5a',h:[122,.22,.52,.60]},{id:'flame',th:'บ้านเปลวไฟ',en:'Flame House',col:'#e0493c',h:[357,.28,.60,.78]}];
+const EMB={sun:['...##...','.#....#.','..####..','#.####.#','#.####.#','..####..','.#....#.','...##...'],wing:['......##','....####','..#####.','.####...','######..','.####...','..##....','........'],
+  leaf:['......##','....####','...#####','..####.#','.####.#.','.##.##..','.#.#....','#.......'],flame:['...#....','...##...','..###...','..####.#','.######.','.##..##.','.#....#.','..####..']};
+function embC(k,col,px){const c=document.createElement('canvas');c.width=c.height=8*px;const g=c.getContext('2d');g.fillStyle=col;EMB[k].forEach((r,y)=>[...r].forEach((ch,x)=>{if(ch==='#')g.fillRect(x*px,y*px,px,px)}));return c}
+function hslOf(r,g,b){const mx=Math.max(r,g,b),mn=Math.min(r,g,b),l=(mx+mn)/2,d=mx-mn;let h=0,s=0;if(d>1e-6){s=d/(1-Math.abs(2*l-1));h=mx===r?((g-b)/d)%6:mx===g?(b-r)/d+2:(r-g)/d+4;h*=60;if(h<0)h+=360}return[h,s,l]}
+function rgbOf(h,s,l){const c=(1-Math.abs(2*l-1))*s,x=c*(1-Math.abs((h/60)%2-1)),m=l-c/2;let r=0,g=0,b=0;if(h<60)[r,g,b]=[c,x,0];else if(h<120)[r,g,b]=[x,c,0];else if(h<180)[r,g,b]=[0,c,x];else if(h<240)[r,g,b]=[0,x,c];else if(h<300)[r,g,b]=[x,0,c];else[r,g,b]=[c,0,x];return[r+m,g+m,b+m]}
+function toCanvas(im){const c=document.createElement('canvas');c.width=im.width;c.height=im.height;c.getContext('2d').drawImage(im,0,0);return c}
+function recolorKey(im,H){const c=toCanvas(im),g=c.getContext('2d'),d=g.getImageData(0,0,c.width,c.height),p=d.data,idx=[],Ls=[];
+  for(let i=0;i<p.length;i+=4){if(!p[i+3])continue;const [h,s,l]=hslOf(p[i]/255,p[i+1]/255,p[i+2]/255);if(h>290&&h<310&&s>.7){idx.push(i);Ls.push(l)}}
+  if(!idx.length)return c;const st=[...Ls].sort((a,b)=>a-b),lo=st[Math.floor(st.length*.03)],hi=st[Math.floor(st.length*.97)],[hh,a,bb,sat]=H;
+  idx.forEach((i,k)=>{const tt=Math.min(1,Math.max(0,(Ls[k]-lo)/(hi-lo+1e-6))),[r,g2,b2]=rgbOf(hh,sat,a+tt*(bb-a));p[i]=r*255;p[i+1]=g2*255;p[i+2]=b2*255});g.putImageData(d,0,0);return c}
+// the old cave tiles have glowing cyan veins; cyan glow is reserved for things you can collect, so turn the veins lavender
+function calmCyan(im){const c=toCanvas(im),g=c.getContext('2d'),d=g.getImageData(0,0,c.width,c.height),p=d.data;
+  for(let i=0;i<p.length;i+=4){if(!p[i+3])continue;const [h,s,l]=hslOf(p[i]/255,p[i+1]/255,p[i+2]/255);if(h>160&&h<205&&s>.35){const [r,g2,b]=rgbOf(268,.35,Math.min(.72,l*.9));p[i]=r*255;p[i+1]=g2*255;p[i+2]=b*255}}g.putImageData(d,0,0);return c}
+// stand-in character sheet (used only if a kid sprite file is missing)
+function fakeSheet(cols,rows){const c=document.createElement('canvas');c.width=cols*64;c.height=rows*64;const g=c.getContext('2d');
+  for(let r=0;r<rows;r++)for(let q=0;q<cols;q++){const x=q*64,y=r*64,b=(q%2)*2;g.fillStyle='#3a2a1a';g.fillRect(x+22,y+18-b,20,18);g.fillStyle='#f1c9a5';g.fillRect(x+24,y+22-b,16,12);g.fillStyle='#ff00ff';g.fillRect(x+20,y+36,24,12);g.fillStyle='#f4f0e8';g.fillRect(x+24,y+36,16,12);g.fillStyle='#6b4a2a';g.fillRect(x+24,y+48,6,14);g.fillRect(x+34,y+48,6,14)}return c}
+
+// ===== engine =====
+const WANG={"BBBA": [[0, 0]], "BBAA": [[1, 0]], "BBAB": [[2, 0]], "AAAB": [[3, 0]], "AABA": [[4, 0]], "BABA": [[0, 1]], "AAAA": [[1, 1], [0, 3]], "ABAB": [[2, 1]], "ABAA": [[3, 1]], "BAAA": [[4, 1]], "BABB": [[0, 2]], "AABB": [[1, 2]], "ABBB": [[2, 2]], "ABBA": [[3, 2]], "BAAB": [[4, 2]], "BBBB": [[1, 3]]};
+const cv=document.getElementById('c'),ctx=cv.getContext('2d'),vig=document.getElementById('vig');
+let VW=0,VH=0,SC=1,camX=0,camY=0;
+const key=(x,y)=>x+','+y;
+function resize(){const dpr=devicePixelRatio||1,dw=Math.round(innerWidth*dpr),dh=Math.round(innerHeight*dpr);SC=Math.max(1,Math.round(dh/384));VW=Math.ceil(dw/SC);VH=Math.ceil(dh/SC);cv.width=VW*SC;cv.height=VH*SC;cv.style.width=(VW*SC/dpr)+'px';cv.style.height=(VH*SC/dpr)+'px';if(M)M.shadowSC=0}
+addEventListener('resize',resize);
+let SEED=1;const rnd=()=>(SEED=(SEED*16807)%2147483647)/2147483647;
+function seeded(s){let v=s%2147483647||1;return()=>(v=(v*16807)%2147483647)/2147483647}
+
+// --- ground: Wang tiles on a half-tile offset grid (a tile's 4 corners = 4 map cells) ---
+function wangLayer(g,im,isA,w,h,only,seed){const r=seeded(seed||7);
+  for(let y=0;y<=h;y++)for(let x=0;x<=w;x++){const k=[[x-1,y-1],[x,y-1],[x-1,y],[x,y]].map(([a,b])=>isA(a,b)?'A':'B').join('');if(only&&!k.includes('A'))continue;
+    const [tx,ty]=WANG[k][Math.floor(r()*WANG[k].length)];
+    if(!im){g.fillStyle=k==='BBBB'?'#4c8a3e':'#c9a46a';g.fillRect(x*T-16,y*T-16,T,T);continue}
+    if(k==='BBBB'&&r()<.5){g.save();g.translate(x*T-16+T,y*T-16);g.scale(-1,1);g.drawImage(im,tx*T,ty*T,T,T,0,0,T,T);g.restore()}else g.drawImage(im,tx*T,ty*T,T,T,x*T-16,y*T-16,T,T)}}
+function grassDecor(g,m){const r=seeded(m.seed+3);for(let i=0;i<m.w*m.h*.45;i++){const x=Math.floor(r()*m.w*T),y=Math.floor(r()*m.h*T),c=key(Math.floor(x/T),Math.floor(y/T));
+  if(m.PATH.has(c)||m.WATER.has(c)||m.CLIFF.has(c)||m.COBBLE.has(c)||m.kind==='cave')continue;const k=r();
+  if(k<.35){g.fillStyle='rgba(30,70,30,.16)';for(let j=0;j<18;j++)g.fillRect(x+Math.floor(r()*14)-7,y+Math.floor(r()*8)-4,1,1)}
+  else if(k<.85){g.fillStyle='#3d7a3a';g.fillRect(x,y,1,3);g.fillRect(x+2,y+1,1,2);g.fillStyle='#8fd06a';g.fillRect(x+1,y-1,1,3)}
+  else{g.fillStyle=['#fff6d8','#ffd6e6','#fff0a0'][Math.floor(r()*3)];g.fillRect(x,y,1,1);g.fillStyle='#3d7a3a';g.fillRect(x,y+1,1,1)}}}
+function buildGround(m){const c=document.createElement('canvas');c.width=m.w*T;c.height=m.h*T;const g=c.getContext('2d');g.imageSmoothingEnabled=false;
+  if(m.kind==='cave'){wangLayer(g,IMG.caveCalm||null,(x,y)=>m.FLOOR.has(key(x,y)),m.w,m.h,false,m.seed)}
+  else{wangLayer(g,IMG.ground||null,(x,y)=>m.PATH.has(key(x,y)),m.w,m.h,false,m.seed);
+    if(m.COBBLE.size)wangLayer(g,IMG.cobble||null,(x,y)=>m.COBBLE.has(key(x,y)),m.w,m.h,true,m.seed+1);
+    if(m.WATER.size)wangLayer(g,IMG.water||null,(x,y)=>m.WATER.has(key(x,y)),m.w,m.h,true,m.seed+2);
+    if(m.CLIFF.size)wangLayer(g,IMG.cliff||null,(x,y)=>m.CLIFF.has(key(x,y)),m.w,m.h,true,m.seed+4);grassDecor(g,m)}
+  if(m.paint)m.paint(g);m.ground=c}
+
+// --- sprites: measure the real foot line of each picture, make a silhouette for shadows ---
+function measure(o){const im=IMG[o.img];if(!im){o.cb=o.sh-1;o.foot=16;o.fx=0;o.a=1;return}const c=document.createElement('canvas');c.width=o.sw;c.height=o.sh;const g=c.getContext('2d');g.drawImage(im,o.sx,o.sy,o.sw,o.sh,0,0,o.sw,o.sh);
+  const d=g.getImageData(0,0,o.sw,o.sh).data,A=(x,y)=>d[(y*o.sw+x)*4+3]>40;let cb=o.sh-1;const row=y=>{for(let x=0;x<o.sw;x++)if(A(x,y))return 1;return 0};while(cb>0&&!row(cb))cb--;
+  let x0=o.sw,x1=0;for(let y=Math.max(0,cb-5);y<=cb;y++)for(let x=0;x<o.sw;x++)if(A(x,y)){x0=Math.min(x0,x);x1=Math.max(x1,x)}
+  o.cb=cb;o.foot=Math.max(8,x1-x0+1);o.fx=(x0+x1)/2-o.sw/2;g.globalCompositeOperation='source-in';g.fillStyle='#0e1a10';g.fillRect(0,0,o.sw,o.sh);o.sil=c;o.a=1}
+function silOf(im){const c=document.createElement('canvas');c.width=im.width;c.height=im.height;const g=c.getContext('2d');g.drawImage(im,0,0);g.globalCompositeOperation='source-in';g.fillStyle='#0e1a10';g.fillRect(0,0,c.width,c.height);return c}
+function softAO(c,x,y,w,a){const h=Math.max(3,w/3.4);c.save();c.translate(x,y);c.scale(1,h/w);const g=c.createRadialGradient(0,0,0,0,0,w/2);g.addColorStop(0,`rgba(10,20,26,${a})`);g.addColorStop(.6,`rgba(10,20,26,${a*.55})`);g.addColorStop(1,'rgba(10,20,26,0)');c.fillStyle=g;c.beginPath();c.arc(0,0,w/2,0,7);c.fill();c.restore()}
+// Trickster-style shadows: cast backwards and leaning right, merged into one soft layer, baked with the ground once per map
+function bakeShadows(m){const S=SC,Wp=m.w*T*S,Hp=m.h*T*S,mk=document.createElement('canvas');mk.width=Wp;mk.height=Hp;const g=mk.getContext('2d');g.imageSmoothingEnabled=true;const k=.55;
+  for(const o of m.objs){if(!o.sil||o.flat)continue;const sh=o.cs||.45,h=o.cb+1,X=Math.round(o.x-o.sw/2),Y=Math.round(o.y);
+    if(!o.small)for(let r=0;r<h;r+=2){g.globalAlpha=.3+.7*Math.pow(r/h,1.4);g.setTransform(S,0,-k*S,sh*S,S*(X+k*h),S*(Y-sh*h));g.drawImage(o.sil,0,r,o.sw,2,0,r,o.sw,2)}
+    g.setTransform(S,0,0,S,0,0);g.globalAlpha=1;softAO(g,o.x+o.fx,o.y,o.foot*(o.small?1.1:1.25),o.small?.7:1)}
+  const f=document.createElement('canvas');f.width=Wp;f.height=Hp;const q=f.getContext('2d');q.filter=`blur(${Math.round(2.5*S)}px)`;q.drawImage(mk,0,0);q.filter='none';q.globalCompositeOperation='source-in';q.fillStyle=m.kind==='cave'?'rgb(70,60,110)':'rgb(92,100,150)';q.fillRect(0,0,Wp,Hp);
+  const gh=document.createElement('canvas');gh.width=Wp;gh.height=Hp;const hc=gh.getContext('2d');hc.imageSmoothingEnabled=false;hc.drawImage(m.ground,0,0,Wp,Hp);hc.globalCompositeOperation='multiply';hc.imageSmoothingEnabled=true;hc.drawImage(f,0,0);m.shadow=gh;m.shadowSC=S}
+function drawObj(o,tm){const im=o.pick?o.pick():IMG[o.img];const X=Math.round(o.x-o.sw/2-camX),Y=Math.round(o.y-(o.cb+1)-camY);if(X>VW||Y>VH||X+o.sw<0||Y+o.sh<0)return;ctx.globalAlpha=o.a;
+  if(!im){ctx.fillStyle=o.col||'#6b8a4a';ctx.fillRect(X+o.sw/2-8,Y+o.sh-20,16,20);ctx.globalAlpha=1;return}
+  if(o.sway){const a=Math.sin(tm*1.3+o.ph)*1.6;for(let r=0;r<o.sh;r+=4){const kk=1-r/o.sh,dx=Math.round(a*kk*kk);ctx.drawImage(im,o.sx,o.sy+r,o.sw,4,X+dx,Y+r,o.sw,4)}}
+  else ctx.drawImage(im,o.sx,o.sy,o.sw,o.sh,X,Y,o.sw,o.sh);ctx.globalAlpha=1}
+function label(x,y,s,col){ctx.save();ctx.font='bold 8px system-ui,sans-serif';const w=ctx.measureText(s).width+8;ctx.fillStyle='rgba(27,19,48,.88)';ctx.fillRect(Math.round(x-w/2),Math.round(y-9),Math.round(w),11);ctx.fillStyle=col||'#a8793a';ctx.fillRect(Math.round(x-w/2),Math.round(y+2),Math.round(w),1);ctx.fillStyle='#fff3d6';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(s,x,y-3);ctx.restore()}
+function ring(x,y,tm,power,col){ctx.save();ctx.globalCompositeOperation='lighter';const c=col||'150,240,255';for(let i=0;i<2;i++){ctx.strokeStyle=`rgba(${c},${(.35+.45*power)*(i?.7:1)})`;ctx.lineWidth=i?1:1.5;ctx.setLineDash(i?[3,4]:[8,3]);ctx.lineDashOffset=(i?-1:1)*tm*12;ctx.beginPath();ctx.ellipse(x,y,i?11:17,i?5:8,0,0,7);ctx.stroke()}
+  ctx.setLineDash([]);const g=ctx.createRadialGradient(x,y,0,x,y,18);g.addColorStop(0,`rgba(${c},${.18+.3*power})`);g.addColorStop(1,`rgba(${c},0)`);ctx.fillStyle=g;ctx.fillRect(x-18,y-18,36,36);
+  for(let i=0;i<5;i++){const a=tm*1.3+i*1.26,py=y-((tm*14+i*7)%26);ctx.fillStyle='rgba(230,252,255,.8)';ctx.fillRect(Math.round(x+Math.cos(a)*10),Math.round(py),1,1)}ctx.restore()}
+function glow(x,y,r,rgb,a){const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,`rgba(${rgb},${a})`);g.addColorStop(1,`rgba(${rgb},0)`);ctx.fillStyle=g;ctx.fillRect(x-r,y-r,r*2,r*2)}
+
+// --- walking: A* on the tile grid, then straighten the path where the line is clear ---
+function walkable(m,tx,ty){return tx>=0&&ty>=0&&tx<m.w&&ty<m.h&&!m.SOLID.has(key(tx,ty))}
+function findPath(m,sx,sy,gx,gy){let [ax,ay]=[Math.floor(sx/T),Math.floor(sy/T)],[bx,by]=[Math.floor(gx/T),Math.floor(gy/T)];
+  if(!walkable(m,bx,by)){let best=null,bd=1e9;for(let r=1;r<4&&!best;r++)for(let dy=-r;dy<=r;dy++)for(let dx=-r;dx<=r;dx++){const x=bx+dx,y=by+dy;if(walkable(m,x,y)){const d=Math.hypot(dx,dy);if(d<bd){bd=d;best=[x,y]}}}if(!best)return null;[bx,by]=best;gx=bx*T+16;gy=by*T+16}
+  if(ax===bx&&ay===by)return[[gx,gy]];
+  const W=m.w,start=ay*W+ax,goal=by*W+bx,g=new Map([[start,0]]),came=new Map(),open=[[0,start]];let n=0;
+  const hh=(i)=>{const x=i%W,y=(i/W)|0,dx=Math.abs(x-bx),dy=Math.abs(y-by);return Math.max(dx,dy)+.414*Math.min(dx,dy)};
+  while(open.length&&n++<6000){let bi=0;for(let i=1;i<open.length;i++)if(open[i][0]<open[bi][0])bi=i;const [,cur]=open.splice(bi,1)[0];if(cur===goal)break;const cx=cur%W,cy=(cur/W)|0;
+    for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){if(!dx&&!dy)continue;const nx=cx+dx,ny=cy+dy;if(!walkable(m,nx,ny))continue;if(dx&&dy&&(!walkable(m,cx+dx,cy)||!walkable(m,cx,cy+dy)))continue;
+      const ni=ny*W+nx,ng=g.get(cur)+(dx&&dy?1.414:1);if(ng<(g.has(ni)?g.get(ni):1e9)){g.set(ni,ng);came.set(ni,cur);open.push([ng+hh(ni),ni])}}}
+  if(!came.has(goal))return null;const cells=[];let c=goal;while(c!==start){cells.push(c);c=came.get(c)}cells.reverse();
+  const pts=cells.map(i=>[(i%W)*T+16,((i/W)|0)*T+16]);pts[pts.length-1]=[gx,gy];
+  const out=[];let from=[sx,sy],i=0;while(i<pts.length){let j=pts.length-1;while(j>i&&!clearLine(m,from,pts[j]))j--;out.push(pts[j]);from=pts[j];i=j+1}return out}
+function clearLine(m,a,b){const d=Math.hypot(b[0]-a[0],b[1]-a[1]),n=Math.ceil(d/6);for(let i=1;i<=n;i++){const x=a[0]+(b[0]-a[0])*i/n,y=a[1]+(b[1]-a[1])*i/n;if(blockedAt(m,x,y))return false}return true}
+function blockedAt(m,x,y){if(x<5||y<5||x>m.w*T-5||y>m.h*T-3)return true;for(const [dx,dy] of [[-5,0],[5,0],[0,-3],[0,2]])if(m.SOLID.has(key(Math.floor((x+dx)/T),Math.floor((y+dy)/T))))return true;return false}
+
+// --- minimap (top right, like RO) ---
+const mm=document.getElementById('mm'),mc=mm.getContext('2d');let mmBase=null,MMS=3;
+function makeMinimap(m){MMS=Math.max(2,Math.min(4,Math.floor(130/m.w)));mm.width=m.w*MMS;mm.height=m.h*MMS;mm.style.width=mm.width+'px';mm.style.height=mm.height+'px';mmBase=document.createElement('canvas');mmBase.width=mm.width;mmBase.height=mm.height;const g=mmBase.getContext('2d');
+  for(let y=0;y<m.h;y++)for(let x=0;x<m.w;x++){const k=key(x,y);g.fillStyle=m.kind==='cave'?(m.FLOOR.has(k)?'#8a6a4a':'#3b3050'):m.CLIFF.has(k)?'#6b6384':m.WATER.has(k)&&(m.PATH.has(k)||m.COBBLE.has(k))?'#a0703a':m.WATER.has(k)?'#3aa7c2':m.COBBLE.has(k)?'#cfc2a8':m.PATH.has(k)?'#d8b879':'#4c8a3e';g.fillRect(x*MMS,y*MMS,MMS,MMS)}
+  for(const o of m.objs)if(o.sway){g.fillStyle='#24502a';g.fillRect(Math.floor(o.x/T)*MMS,Math.floor(o.y/T)*MMS,MMS,MMS)}
+  for(const b of m.blocks||[]){g.strokeStyle='#e0413b';g.lineWidth=1.5;const x=b.x/T*MMS,y=b.y/T*MMS;g.beginPath();g.moveTo(x-3,y-3);g.lineTo(x+3,y+3);g.moveTo(x+3,y-3);g.lineTo(x-3,y+3);g.stroke()}}
+function drawMinimap(tm){if(!mmBase)return;mc.drawImage(mmBase,0,0);
+  if(M.kind==='cave'&&M.seen){mc.fillStyle='rgba(12,8,22,.92)';for(let y=0;y<M.h;y++)for(let x=0;x<M.w;x++)if(!M.seen.has(key(x,y)))mc.fillRect(x*MMS,y*MMS,MMS,MMS)}
+  for(const e of M.exits){if(M.seen&&!M.seen.has(key(Math.floor(e.x/T),Math.floor(e.y/T))))continue;mc.fillStyle=e.locked?'#e0413b':'#8ff4ff';mc.fillRect(e.x/T*MMS-2,e.y/T*MMS-2,4,4)}
+  for(const s of M.stones){mc.fillStyle=s.awake?'#8ff4ff':'#9aa0a8';mc.fillRect(s.x/T*MMS-2,s.y/T*MMS-3,4,4)}
+  for(const c of M.crystals||[])if(c.awake){mc.fillStyle='#5fe0ff';mc.fillRect(c.x/T*MMS-1,c.y/T*MMS-1,3,3)}
+  if(M.boss&&!M.boss.gone){mc.fillStyle='#ff5a8a';mc.fillRect(M.boss.x/T*MMS-3,M.boss.y/T*MMS-3,6,6)}
+  if(Math.floor(tm*3)%2===0||P.moving){const x=P.x/T*MMS,y=P.y/T*MMS,a=DIR_ANG[P.row];mc.save();mc.translate(x,y);mc.rotate(a);mc.fillStyle='#fff';mc.strokeStyle='#1b1330';mc.lineWidth=1;mc.beginPath();mc.moveTo(5,0);mc.lineTo(-3,-3.5);mc.lineTo(-1.5,0);mc.lineTo(-3,3.5);mc.closePath();mc.fill();mc.stroke();mc.restore()}}
+// sprite rows: 0 S,1 SE,2 E,3 NE,4 N,5 NW,6 W,7 SW
+const DIR_ANG=[Math.PI/2,Math.PI/4,0,-Math.PI/4,-Math.PI/2,-3*Math.PI/4,Math.PI,3*Math.PI/4];
+const rowFor=(dx,dy)=>[2,1,0,7,6,5,4,3][((Math.round(Math.atan2(dy,dx)/(Math.PI/4))%8)+8)%8];
+
+// ===== maps =====
+const PR={banana:[1,1],bananaB:[67,1],frangi:[133,1],roundA:[199,1],roundB:[1,67],pink:[67,67],mango:[133,67],well:[199,67],lamp:[1,133],palm:[67,133],coop:[133,133],stall:[199,133],bench:[1,199],board:[67,199],arch:[133,199],bath:[199,199]};
+const MR={"pine": [1, 1], "pine2": [67, 1], "pineThick": [133, 1], "pineYoung": [199, 1], "pineTwin": [1, 67], "pineBird": [67, 67], "bush": [133, 67], "fern": [199, 67], "boulder": [1, 133], "rocks": [67, 133], "grass": [133, 133], "flowers": [199, 133], "log": [1, 199], "stump": [67, 199], "berry": [133, 199], "mossRock": [199, 199]},CR={"pillar": [1, 1, 64, 64], "pillar2": [67, 1, 64, 64], "boulder": [133, 1, 64, 64], "boulder2": [199, 1, 64, 64], "nest": [265, 1, 64, 64], "geode": [1, 67, 64, 64], "geode2": [67, 67, 64, 64], "beam": [133, 67, 64, 64], "pool": [199, 67, 64, 64], "stairs": [265, 67, 64, 64], "crystal": [1, 133, 32, 32], "compass": [35, 133, 32, 32], "ladder": [69, 133, 32, 32], "amethyst": [103, 133, 32, 32], "mushR": [137, 133, 32, 32], "cart": [171, 133, 32, 32], "fossil": [1, 167, 32, 32], "rune": [35, 167, 32, 32], "shovel": [69, 167, 32, 32], "moss": [103, 167, 32, 32], "mushY": [137, 167, 32, 32], "rope": [171, 167, 32, 32], "slab": [1, 201, 32, 32], "lantern": [35, 201, 32, 32], "stalag": [69, 201, 32, 32], "pebbles": [103, 201, 32, 32], "crate": [137, 201, 32, 32], "rocks": [171, 201, 32, 32]},FR={"sunflower": [1, 1, 32, 32], "wheelbarrowPumpkin": [35, 1, 32, 32], "eggBasket": [69, 1, 32, 32], "pumpkins": [103, 1, 32, 32], "milkCan": [137, 1, 32, 32], "strawberryBed": [171, 1, 32, 32], "vegBasket": [1, 35, 32, 32], "greenhouse": [35, 35, 32, 32], "waterBarrel": [69, 35, 32, 32], "birdhouse": [103, 35, 32, 32], "pumpkinPatch": [137, 35, 32, 32], "beehive": [171, 35, 32, 32], "appleCrate": [1, 69, 32, 32], "fruitBasket": [35, 69, 32, 32], "wateringCan": [69, 69, 32, 32], "fencePost": [103, 69, 32, 32], "scarecrow": [137, 69, 32, 32], "hayBale": [171, 69, 32, 32], "cabbageBed": [1, 103, 32, 32], "carrotBed": [35, 103, 32, 32], "tomatoBed": [69, 103, 32, 32], "sproutBed": [103, 103, 32, 32], "fenceCorner": [137, 103, 32, 32], "gateClosed": [171, 103, 32, 32], "gateOpen": [1, 137, 32, 32], "fenceTop": [35, 137, 32, 32], "fenceSide": [69, 137, 32, 32], "wheelbarrow": [103, 137, 32, 32], "firewood": [137, 137, 32, 32]};
+function newMap(id,kind,w,h,seed){return{id,kind,w,h,seed,PATH:new Set(),COBBLE:new Set(),WATER:new Set(),CLIFF:new Set(),FLOOR:new Set(),SOLID:new Set(),objs:[],decks:[],exits:[],stones:[],blocks:[],crystals:[],digs:[],spawns:[],glows:[],anims:[]}}
+function addTree(m,k,tx,ty,solid=true){const src=MR[k]?['mprops',MR[k]]:['props',PR[k]];m.objs.push({img:src[0],sx:src[1][0],sy:src[1][1],sw:64,sh:64,x:tx*T+16,y:ty*T+30,sway:1,tall:1,cs:.5,ph:rnd()*6});if(solid)m.SOLID.add(key(tx,ty))}
+function addProp(m,k,tx,ty,o={}){m.objs.push({img:'props',sx:PR[k][0],sy:PR[k][1],sw:64,sh:64,x:tx*T+16+(o.dx||0),y:ty*T+(o.dy??28),tall:o.tall??1,cs:o.cs??.45,lamp:k==='lamp'});if(o.solid!==0)m.SOLID.add(key(tx,ty))}
+function addDeco(m,k,tx,ty,solid,dx=0){m.objs.push({img:'mprops',sx:MR[k][0],sy:MR[k][1],sw:64,sh:64,x:tx*T+16+dx,y:ty*T+28,cs:.3,tall:0,small:!solid});if(solid)m.SOLID.add(key(tx,ty))}
+function addCave(m,k,x,y,o={}){const r=CR[k];m.objs.push({img:'cprops',sx:r[0],sy:r[1],sw:r[2],sh:r[3],x,y,tall:o.tall??(r[2]>32?1:0),small:r[2]<=32,cs:o.cs??.4,flat:o.flat});if(o.solid)m.SOLID.add(key(Math.floor(x/T),Math.floor(y/T)))}
+function addNpc(m,who,tx,ty,face=0){const o={img:'npc_'+who,sx:face*64,sy:0,sw:64,sh:64,x:tx*T+16,y:ty*T+28,tall:1,cs:.45,npc:who,face};m.objs.push(o);m.SOLID.add(key(tx,ty));(m.npcs||(m.npcs=[])).push(o)}
+function addStone(m,id,tx,ty,plaza){const o={img:plaza?'stonePlaza':'stone',sx:0,sy:0,sw:64,sh:64,x:tx*T+16,y:ty*T+28,tall:1,cs:.45,stoneId:id};m.objs.push(o);m.SOLID.add(key(tx,ty));m.stones.push({id,x:o.x,y:o.y,obj:o})}
+
+// ---------- Fountain Plaza (town centre, paved) ----------
+function buildPlaza(){SEED=11;const m=newMap('plaza','town',36,24,11),PX=18,PY=12;m.nameKey='plaza';
+  for(let y=0;y<m.h;y++)for(let x=0;x<m.w;x++)if(Math.hypot(x+.5-PX,y+.5-PY)<4.9)m.COBBLE.add(key(x,y));
+  const pr=(x0,y0,x1,y1)=>{for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++)m.COBBLE.add(key(x,y))};pr(17,0,18,8);pr(0,11,14,12);pr(22,11,35,12);pr(17,16,18,23);
+  for(let y=-1;y<=m.h;y++){const c=28+Math.round(1.4*Math.sin(y*.33+1));m.WATER.add(key(c,y));m.WATER.add(key(c+1,y))}
+  m.WATER.forEach(k=>m.SOLID.add(k));const br=[];for(const y of [11,12])for(let x=0;x<m.w;x++)if(m.WATER.has(key(x,y))){m.SOLID.delete(key(x,y));br.push(x)}
+  m.decks.push({img:'bridgeStone',x:(Math.min(...br)+Math.max(...br)+1)/2*T,y:12*T,oy:64});
+  [['roundA',11,7],['roundB',9,9],['mango',5,9],['roundA',8,15],['roundB',12,18],['roundA',23,6],['roundB',21,4],['frangi',14,5],['pink',24,15],['roundA',25,18],
+   ['roundB',32,6],['roundA',33,9],['palm',32,14],['roundB',32,17],['roundA',31,21],['roundA',4,6],['roundB',3,16],['roundA',6,20],['banana',12,21],['roundB',23,21],['bananaB',26,16],['frangi',2,13]].forEach(a=>addTree(m,...a));
+  const F={img:'fountBig',sx:0,sy:0,sw:128,sh:128,x:PX*T,y:(PY+1)*T+14,tall:1,cs:.35,pick:()=>(LIGHT<.6&&IMG.fountOld)||IMG.fountBig};m.objs.push(F);m.fountain=F;for(let x=16;x<=19;x++)for(let y=11;y<=12;y++)m.SOLID.add(key(x,y));
+  addProp(m,'bench',15,8,{tall:0,cs:.3});addProp(m,'bench',20,8,{tall:0,cs:.3});addProp(m,'board',13,9);addProp(m,'stall',25,9);addProp(m,'bath',22,15,{tall:0,cs:.3});
+  [[16,6],[19,6],[14,15],[21,15],[10,10],[16,18],[19,18]].forEach(([x,y])=>addProp(m,'lamp',x,y));
+  addDeco(m,'flowers',12,14,0);addDeco(m,'flowers',23,9,0);addDeco(m,'flowers',15,17,0);addDeco(m,'flowers',21,17,0);addDeco(m,'bush',11,14,1);addDeco(m,'bush',24,8,1);addDeco(m,'grass',7,12,0);addDeco(m,'grass',27,20,0);
+  addStone(m,'plaza',21,9,true);addNpc(m,'leah',16,15,0);addNpc(m,'nuan',26,10,0);addNpc(m,'mom',20,19,6);
+  m.exits.push({id:'n',x:18*T,y:12,to:'mountain',toExit:'s',label:'mountain'},{id:'w',x:14,y:12*T,locked:1,label:'soonW'},{id:'e',x:m.w*T-14,y:12*T,locked:1,label:'soonE'},{id:'s',x:18*T,y:m.h*T-8,locked:1,label:'soonS'});
+  m.spawnDefault=[18*T,7*T];return m}
+
+// ---------- Mountain Foot (cliffs, cave in the cliff, waterfall, rockfall) ----------
+function buildMountain(){SEED=23;const m=newMap('mountain','town',34,22,23);m.nameKey='mountain';
+  const base=x=>(x>=14&&x<=20)?6:Math.max(4,Math.min(7,5+Math.round(1.2*Math.sin(x*.55)+.8*Math.sin(x*1.3))));
+  for(let x=-1;x<=m.w;x++)for(let y=-1;y<=base(Math.max(0,Math.min(m.w-1,x)));y++)m.CLIFF.add(key(x,y));
+  for(let x=3;x<=5;x++)for(let y=1;y<=base(x)+1;y++)m.CLIFF.delete(key(x,y));
+  const pr=(x0,y0,x1,y1)=>{for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++)m.PATH.add(key(x,y))};
+  pr(15,9,16,21);pr(14,8,19,9);pr(4,12,16,13);pr(17,12,33,13);for(let y=1;y<=12;y++)m.PATH.add(key(4,y));
+  const sBase=Math.max(base(26),base(27),base(28),base(29));for(let y=sBase+1;y<m.h+1;y++){const c=27+Math.round(1.5*Math.sin(y*.35));m.WATER.add(key(c,y));m.WATER.add(key(c+1,y))}
+  m.CLIFF.forEach(k=>m.SOLID.add(k));m.WATER.forEach(k=>m.SOLID.add(k));for(let x=3;x<=5;x++)for(let y=1;y<=base(x)+1;y++)m.SOLID.add(key(x,y));m.SOLID.add(key(15,7));m.SOLID.add(key(18,7));
+  const br=[];for(const y of [12,13])for(let x=0;x<m.w;x++)if(m.WATER.has(key(x,y))){m.SOLID.delete(key(x,y));br.push(x)}
+  m.decks.push({img:'bridgeRope',x:(Math.min(...br)+Math.max(...br)+1)/2*T,y:13*T,oy:61});
+  [['pine',1,9],['pineTwin',2,11],['pine2',1,14],['pineThick',3,16],['pine',1,18],['pine2',6,19],['roundA',8,17],['pineYoung',10,20],['pineBird',8,8],['pine',11,9],
+   ['pine',31,9],['pineThick',32,10],['pink',30,15],['pine2',32,18],['roundB',31,20],['frangi',22,11],['roundA',23,16],['pineYoung',20,19],['bananaB',24,9]].forEach(a=>addTree(m,...a));
+  [['pine',1,2],['pine2',7,2],['pineThick',9,1],['pineTwin',11,2],['pine',13,1],['pine2',21,2],['pineYoung',23,1],['pine',25,2],['pineTwin',29,1],['pine2',31,2],['pine',33,3]].forEach(([k,x,y])=>addTree(m,k,x,y,false));
+  addDeco(m,'bush',7,base(7)+1,1);addDeco(m,'fern',12,base(12)+1,0);addDeco(m,'boulder',10,10,1);addDeco(m,'flowers',8,15,0);addDeco(m,'flowers',24,18,0);addDeco(m,'grass',12,18,0);
+  addDeco(m,'mossRock',25,10,0);addDeco(m,'stump',5,17,1);addDeco(m,'log',11,15,1);addDeco(m,'berry',29,17,1);
+  addProp(m,'lamp',14,10);addProp(m,'lamp',19,10);
+  addCave(m,'crate',13*T+16,8*T+28,{solid:1});addCave(m,'rope',12*T+14,8*T+24,{solid:1});
+  m.objs.push({img:'caveDoor',sx:0,sy:0,sw:128,sh:128,x:17*T,y:7*T-10,flat:1});
+  m.objs.push({img:'rock',sx:0,sy:0,sw:128,sh:128,x:4*T+16,y:(base(4)+2)*T+4,cs:.3});m.blocks.push({x:4*T+16,y:(base(4)+1)*T,msg:'rock'});
+  addStone(m,'mountain',20,8);addNpc(m,'dad',13,11,2);
+  m.exits.push({id:'s',x:16*T,y:m.h*T-6,to:'plaza',toExit:'n',label:'plaza'},{id:'e',x:m.w*T-14,y:13*T,locked:1,label:'soonE'},{id:'cave',x:17*T,y:7*T+20,to:'cave1',toExit:'up',label:'cave1'});
+  const wf={x:(27+Math.round(1.5*Math.sin((sBase+1)*.35)))*T+6,top:(sBase-1)*T+6,bot:(sBase+1)*T+14,w:2*T-12};
+  m.anims.push(tm=>{const x0=wf.x-camX,w=wf.w,top=wf.top-camY,bot=wf.bot-camY;ctx.fillStyle='rgba(120,215,235,.9)';ctx.fillRect(x0,top,w,bot-top);ctx.fillStyle='rgba(60,150,190,.9)';ctx.fillRect(x0,top,2,bot-top);ctx.fillRect(x0+w-2,top,2,bot-top);
+    for(let i=0;i<14;i++){const xx=x0+3+((i*7)%(w-6)),len=6+(i%4)*3,yy=top+((tm*60+i*17)%(bot-top+len))-len;ctx.fillStyle=i%3?'rgba(235,252,255,.9)':'rgba(175,235,248,.95)';const y1=Math.max(top,Math.round(yy));ctx.fillRect(xx,y1,1,Math.max(0,Math.min(len,bot-y1)))}
+    for(let i=0;i<16;i++){const a=tm*6+i*2.1,rx=Math.cos(a)*(8+(i%5)*2),ry=Math.abs(Math.sin(a*1.7))*5;ctx.fillStyle='rgba(255,255,255,.95)';ctx.fillRect(Math.round(x0+w/2+rx),Math.round(bot-ry),1+(i%2),1)}});
+  m.glows.push([17*T-34,7*T-76],[17*T+34,7*T-76]);m.spawnDefault=[16*T,19*T];return m}
+
+// ---------- Crystal Cave floors (rooms + corridors from a fixed seed, so saved crystals keep their ids) ----------
+const CAVE_CFG={cave1:{seed:101,w:36,h:26,rooms:8,crystals:8,digs:5,mons:[['slime',4],['bat',2]],next:'cave2'},
+  cave2:{seed:202,w:38,h:28,rooms:9,crystals:6,digs:5,mons:[['slime',4],['bat',3],['mushbug',3]],next:'cave3'},
+  cave3:{seed:303,w:40,h:30,rooms:7,crystals:4,digs:4,mons:[['bat',3],['mushbug',3]],boss:true}};
+function buildCave(id){const C=CAVE_CFG[id],m=newMap(id,'cave',C.w,C.h,C.seed);m.nameKey=id;const r=seeded(C.seed);SEED=C.seed;
+  const rooms=[];let tries=0;
+  if(C.boss)rooms.push({x:C.w-16,y:Math.floor(C.h/2)-6,w:13,h:11,boss:1});
+  while(rooms.length<C.rooms&&tries++<400){const w=5+Math.floor(r()*5),h=4+Math.floor(r()*4),x=2+Math.floor(r()*(C.w-w-4)),y=2+Math.floor(r()*(C.h-h-4));
+    if(rooms.some(o=>x<o.x+o.w+2&&x+w+2>o.x&&y<o.y+o.h+2&&y+h+2>o.y))continue;rooms.push({x,y,w,h})}
+  const carve=(x,y)=>{if(x>0&&y>0&&x<C.w-1&&y<C.h-1)m.FLOOR.add(key(x,y))};
+  rooms.forEach(o=>{for(let y=o.y;y<o.y+o.h;y++)for(let x=o.x;x<o.x+o.w;x++)carve(x,y)});
+  const cen=o=>[Math.floor(o.x+o.w/2),Math.floor(o.y+o.h/2)];
+  const order=[...rooms].sort((a,b)=>cen(a)[0]-cen(b)[0]);
+  for(let i=1;i<order.length;i++){const [ax,ay]=cen(order[i-1]),[bx,by]=cen(order[i]);const hx=r()<.5;
+    if(hx){for(let x=Math.min(ax,bx);x<=Math.max(ax,bx);x++){carve(x,ay);carve(x,ay+1)}for(let y=Math.min(ay,by);y<=Math.max(ay,by);y++){carve(bx,y);carve(bx+1,y)}}
+    else{for(let y=Math.min(ay,by);y<=Math.max(ay,by);y++){carve(ax,y);carve(ax+1,y)}for(let x=Math.min(ax,bx);x<=Math.max(ax,bx);x++){carve(x,by);carve(x,by+1)}}}
+  for(let y=0;y<C.h;y++)for(let x=0;x<C.w;x++)if(!m.FLOOR.has(key(x,y)))m.SOLID.add(key(x,y));
+  const start=order[0],end=C.boss?rooms.find(o=>o.boss):order[order.length-1];m.rooms=rooms;
+  const [sx,sy]=cen(start);m.exits.push({id:'up',x:sx*T+16,y:(start.y)*T+20,to:id==='cave1'?'mountain':'cave'+(+id.slice(4)-1),toExit:id==='cave1'?'cave':'down',label:id==='cave1'?'mountain':'up'});
+  addCave(m,'ladder',sx*T+16,start.y*T+14,{flat:1});
+  addStone(m,id,Math.min(start.x+start.w-1,sx+2),start.y+1);
+  if(C.next){const [ex,ey]=cen(end);m.exits.push({id:'down',x:ex*T+16,y:ey*T+16,to:C.next,toExit:'up',label:'down'});addCave(m,'stairs',ex*T+16,ey*T+30,{flat:1})}
+  const freeAny=()=>{for(let k=0;k<400;k++){const x=1+Math.floor(r()*(C.w-2)),y=1+Math.floor(r()*(C.h-2)),kk=key(x,y);if(m.SOLID.has(kk)||m.used?.has(kk))continue;if([...m.crystals,...m.digs].some(q=>Math.hypot(q.tx-x,q.ty-y)<2))continue;if(Math.hypot(x-sx,y-sy)<4)continue;(m.used||(m.used=new Set())).add(kk);return[x,y]}return null};
+  // things to find: sleeping crystals and sparkling dig spots, spread out, never on the path between stairs
+  const free=()=>{for(let k=0;k<600;k++){const o=rooms[Math.floor(r()*rooms.length)];if(o===start)continue;const x=o.x+1+Math.floor(r()*(o.w-2)),y=o.y+1+Math.floor(r()*(o.h-2)),kk=key(x,y);
+    if(m.SOLID.has(kk)||m.used?.has(kk))continue;if([...m.crystals,...m.digs].some(q=>Math.hypot(q.tx-x,q.ty-y)<(m.digs.length||m.crystals.length<C.crystals?3:2.2)))continue;if(m.exits.some(e=>Math.hypot(e.x/T-x,e.y/T-y)<2.5))continue;(m.used||(m.used=new Set())).add(kk);return[x,y]}return null};
+  for(let i=0;i<C.crystals;i++){const p=free();if(p)m.crystals.push({id:id+'-c'+i,tx:p[0],ty:p[1],x:p[0]*T+16,y:p[1]*T+22,awake:false})}
+  for(let i=0;i<C.digs;i++){let p=free();if(!p)p=freeAny();if(p)m.digs.push({id:id+'-d'+i,tx:p[0],ty:p[1],x:p[0]*T+16,y:p[1]*T+18,done:false})}
+  // decoration along the walls
+  const deco=['stalag','mushY','mushR','pebbles','rocks','moss','amethyst','crate','cart','lantern','geode','boulder','pillar'];
+  for(let i=0;i<rooms.length*4;i++){const o=rooms[Math.floor(r()*rooms.length)];if(o.boss&&r()<.6)continue;const edge=r()<.5,x=edge?(r()<.5?o.x:o.x+o.w-1):o.x+Math.floor(r()*o.w),y=edge?o.y+Math.floor(r()*o.h):(r()<.5?o.y:o.y+o.h-1),kk=key(x,y);
+    if(m.SOLID.has(kk)||m.used.has(kk)||m.exits.some(e=>Math.hypot(e.x/T-x,e.y/T-y)<2.5))continue;const k=deco[Math.floor(r()*deco.length)],big=CR[k][2]>32;
+    if(big&&(x===o.x||x===o.x+o.w-1||y===o.y||y===o.y+o.h-1)){addCave(m,k,x*T+16,y*T+30,{solid:1});m.used.add(kk)}else if(!big){addCave(m,k,x*T+16,y*T+26,{solid:k==='crate'||k==='cart'});m.used.add(kk);if(k==='lantern')m.glows.push([x*T+16,y*T+10])}}
+  // monsters (placed away from the entrance)
+  for(const [kind,n] of C.mons)for(let i=0;i<n;i++){for(let k=0;k<60;k++){const o=rooms[Math.floor(r()*rooms.length)];if(o===start)continue;const x=o.x+Math.floor(r()*o.w),y=o.y+Math.floor(r()*o.h);if(m.SOLID.has(key(x,y)))continue;m.spawns.push({kind,x:x*T+16,y:y*T+16});break}}
+  if(id==='cave3')addNpc(m,'peb',sx+1,start.y+start.h-1,0);
+  if(C.boss){const [bx,by]=cen(end);m.bossSpawn={x:bx*T+16,y:by*T+16};m.bossRoom=end}
+  m.seen=new Set();m.spawnDefault=[sx*T+16,(start.y+1)*T+16];return m}
+const MAPS={plaza:buildPlaza,mountain:buildMountain,cave1:()=>buildCave('cave1'),cave2:()=>buildCave('cave2'),cave3:()=>buildCave('cave3')};
+
+// ===== game state =====
+let M=null,LIGHT=.35,PAUSE=false;const CACHE={};
+const P={x:0,y:0,row:0,moving:false,dist:0,path:null,target:null,act:null,cd:0,hurt:0,dizzy:0,atkAnim:0};
+let S=null; // saved profile + progress
+const Store={key:'leahpp2d-v1',load(){try{return JSON.parse(localStorage.getItem(this.key)||'null')}catch(e){return null}},save(s){try{localStorage.setItem(this.key,JSON.stringify(s))}catch(e){}},clear(){try{localStorage.removeItem(this.key)}catch(e){}}};
+const Net={online:false,send(){},on(){}}; // multiplayer hook (Firebase later): positions, emotes, shared house points
+const isKid=()=>S&&S.age<12;
+function newSave(p){return{v:1,snd:true,name:p.name,kid:p.kid,house:p.house,age:p.age,lang:LANG,lv:1,exp:0,hp:40,coins:0,gems:0,potions:1,
+  inv:[mkItem('sw',0)],eq:0,crystals:{},digs:{},stones:['plaza'],lastStone:'plaza',boss:false,pos:{map:'plaza',x:18*T,y:7*T},asked:[]}}
+let UID=1;function mkItem(type,rar){const base={sw:6,bow:5,staff:7,dag:4}[type],mul=[1,1.25,1.55,2,1.8][rar];return{u:Date.now().toString(36)+(UID++),type,rar,atk:Math.round(base*mul+(rar?Math.floor(Math.random()*3):0)),spd:rar===4?1.2:1}}
+const WEP={sw:{cd:.55,range:26,icon:'🗡️'},bow:{cd:.8,range:150,icon:'🏹'},staff:{cd:1,range:120,icon:'🪄',splash:28},dag:{cd:.35,range:22,icon:'🔪'}};
+const RAR_COL=['#f3efe6','#7fb6ff','#ffe36b','#ffb347','#7df28a'];
+const weapon=()=>S.inv[S.eq]||{type:'sw',rar:0,atk:4,spd:1};
+const hpMax=()=>40+8*(S.lv-1),atkPow=()=>4+2*(S.lv-1)+weapon().atk,needExp=()=>Math.round(18*Math.pow(S.lv,1.45));
+function save(){if(!S)return;S.pos={map:M.id,x:Math.round(P.x),y:Math.round(P.y)};S.lang=LANG;Store.save(S)}
+
+// ---- player sprite sheets in house colour ----
+const PS={};function buildPlayerSheets(){const k=KIDS[S.kid][0],H=HOUSES[S.house].h;
+  PS.stand=IMG['s_'+k]?recolorKey(IMG['s_'+k],H):fakeSheet(8,1);PS.walk=IMG['w_'+k]?recolorKey(IMG['w_'+k],H):fakeSheet(6,8);PS.silS=silOf(PS.stand);PS.silW=silOf(PS.walk);PS.sc=0}
+function blurSheet(sil){const c=document.createElement('canvas');c.width=sil.width*SC;c.height=sil.height*SC;const x=c.getContext('2d');x.imageSmoothingEnabled=true;x.filter=`blur(${Math.round(1.6*SC)}px)`;x.drawImage(sil,0,0,c.width,c.height);return c}
+
+// ---- monsters: stand-in pixel art drawn in code until the PixelLab monsters arrive ----
+function pix(w,h,draw){const c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d');draw(g);const d=g.getImageData(0,0,w,h),p=d.data,o=new Uint8ClampedArray(p);
+  for(let y=0;y<h;y++)for(let x=0;x<w;x++){const i=(y*w+x)*4;if(p[i+3])continue;for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){const X=x+dx,Y=y+dy;if(X<0||Y<0||X>=w||Y>=h)continue;if(p[(Y*w+X)*4+3]>0){o[i]=34;o[i+1]=22;o[i+2]=44;o[i+3]=255;break}}}
+  g.putImageData(new ImageData(o,w,h),0,0);return c}
+function eyes(g,x,y,happy,sz=1){g.fillStyle='#1b1330';if(happy){g.fillRect(x,y+1,2*sz,1);g.fillRect(x-1,y,1,1);g.fillRect(x+2*sz,y,1,1);g.fillRect(x+6*sz,y+1,2*sz,1);g.fillRect(x+5*sz,y,1,1);g.fillRect(x+8*sz,y,1,1)}
+  else{for(const ox of [0,6*sz]){g.fillRect(x+ox,y-1,3,1);g.fillRect(x+ox+2,y,1,2);g.fillRect(x+ox,y+1,2,1);g.fillRect(x+ox,y,1,1)}}}
+const MON_ART={};function monArt(){const body=(col,dark)=>[col,dark];
+  for(const happy of [0,1]){
+    MON_ART['slime'+happy]=[0,1].map(f=>pix(26,22,g=>{const [c,d]=happy?['#ffb3d9','#e37fb4']:['#8f86a8','#6d6488'];g.fillStyle=d;g.fillRect(3,8+f,20,13-f);g.fillRect(6,5+f,14,4);g.fillStyle=c;g.fillRect(4,8+f,18,11-f);g.fillRect(7,6+f,12,3);g.fillStyle='rgba(255,255,255,.7)';g.fillRect(7,8+f,3,2);eyes(g,8,13,happy)}));
+    MON_ART['bat'+happy]=[0,1].map(f=>pix(30,20,g=>{const [c,d]=happy?['#cdb6ff','#9f86e0']:['#7c7394','#5c5474'];g.fillStyle=d;if(f){g.fillRect(1,4,9,6);g.fillRect(20,4,9,6)}else{g.fillRect(1,9,9,6);g.fillRect(20,9,9,6)}g.fillStyle=c;g.fillRect(9,5,12,11);g.fillRect(10,3,3,3);g.fillRect(17,3,3,3);g.fillStyle=happy?'#fff':'#c7c1d8';g.fillRect(12,14,2,2);g.fillRect(16,14,2,2);eyes(g,11,9,happy,.67)}));
+    MON_ART['mushbug'+happy]=[0,1].map(f=>pix(28,24,g=>{g.fillStyle='#5a3b2a';for(let i=0;i<4;i++)g.fillRect(6+i*5,19+((i+f)%2),2,4);g.fillStyle=happy?'#f4e6c8':'#d9c9aa';g.fillRect(7,12,14,8);g.fillStyle=happy?'#ff6b6b':'#a86a6a';g.fillRect(3,6,22,8);g.fillRect(6,3,16,4);g.fillStyle='#fff3e0';g.fillRect(8,5,3,2);g.fillRect(16,8,3,2);g.fillRect(12,4,2,2);eyes(g,9,15,happy)}));
+    MON_ART['golem'+happy]=[0,1].map(f=>pix(72,72,g=>{const c=happy?'#9b93b5':'#7a7390',d=happy?'#77709a':'#5c5674';g.fillStyle=d;g.fillRect(10,24+f,52,40);g.fillRect(2,30+f,12,24);g.fillRect(58,30+f,12,24);g.fillRect(18,62,12,9);g.fillRect(42,62,12,9);g.fillStyle=c;g.fillRect(14,20+f,44,40);g.fillRect(20,10+f,32,14);
+      g.fillStyle='#6fae5a';g.fillRect(20,9+f,32,4);g.fillRect(14,20+f,10,3);g.fillRect(46,22+f,12,3);g.fillStyle=happy?'#ffd6f0':'#b9a6ff';g.fillRect(28,4+f,4,6);g.fillRect(36,2+f,4,8);g.fillRect(44,5+f,3,5);
+      g.fillStyle='#1b1330';if(happy){g.fillRect(26,18+f,6,2);g.fillRect(40,18+f,6,2);g.fillRect(31,28+f,10,2);g.fillRect(30,26+f,2,2);g.fillRect(40,26+f,2,2)}else{for(const ox of [24,40]){g.fillRect(ox,15+f,7,2);g.fillRect(ox+5,17+f,2,4);g.fillRect(ox,21+f,6,2);g.fillRect(ox,17+f,2,3);g.fillRect(ox+2,18+f,2,1)}g.fillRect(30,30+f,12,2)}}))}}
+const MON_STAT={slime:{hp:18,atk:4,spd:24,exp:6},bat:{hp:12,atk:5,spd:40,exp:7,fly:1},mushbug:{hp:28,atk:7,spd:18,exp:11},golem:{hp:520,atk:12,spd:16,exp:160}};
+let MONS=[],DROPS=[],SHOTS=[],FX=[],TXT=[];
+function spawnMonsters(){MONS=[];DROPS=[];SHOTS=[];FX=[];TXT=[];if(M.kind!=='cave')return;const mul={cave1:1,cave2:1.6,cave3:2.3}[M.id];
+  for(const s of M.spawns)MONS.push(mkMon(s.kind,s.x,s.y,mul));
+  if(M.bossSpawn&&!S.boss){const b=mkMon('golem',M.bossSpawn.x,M.bossSpawn.y,1);b.boss=1;b.w=72;b.h=72;b.nextAtk=2;b.summoned=0;MONS.push(b);M.boss=b}else M.boss=null}
+function mkMon(kind,x,y,mul){const st=MON_STAT[kind];return{kind,x,y,hx:x,hy:y,hp:Math.round(st.hp*mul),max:Math.round(st.hp*mul),atk:Math.round(st.atk*mul),spd:st.spd,exp:Math.round(st.exp*mul),fly:st.fly,st:'wander',tx:x,ty:y,t:rnd()*3,cd:0,flash:0,happy:0,gone:0,w:26,h:22}}
+function monHit(mo,dmg,src){if(mo.happy)return;mo.hp-=dmg;sfx('hit');if(!mo.boss){const a=Math.atan2(mo.y-P.y,mo.x-P.x),nx=mo.x+Math.cos(a)*5,ny=mo.y+Math.sin(a)*5;if(!blockedAt(M,nx,ny)){mo.x=nx;mo.y=ny}}mo.flash=.15;TXT.push({x:mo.x,y:mo.y-(mo.h||20)-4,s:'-'+dmg,c:'#ffe8a0',t:0});for(let i=0;i<6;i++)FX.push({k:'dust',x:mo.x+(rnd()-.5)*16,y:mo.y-10+(rnd()-.5)*10,vx:(rnd()-.5)*30,vy:-20-rnd()*20,t:0,life:.6});
+  if(!isKid()&&!mo.boss)mo.st='chase';
+  if(mo.hp<=0){sfx('kill');mo.happy=1;mo.gone=1.6;gainExp(mo.exp);drop(mo);if(mo.boss){S.boss=true;save();bossWin()}}}
+function gainExp(n){S.exp+=n;TXT.push({x:P.x,y:P.y-72,s:'+'+n+' EXP',c:'#ffe36b',t:0});while(S.exp>=needExp()){S.exp-=needExp();S.lv++;S.hp=hpMax();sfx('lvl');say('⭐ '+t('lvup')+' Lv '+S.lv);for(let i=0;i<24;i++)FX.push({k:'star',x:P.x,y:P.y-30,vx:Math.cos(i/24*6.28)*60,vy:Math.sin(i/24*6.28)*60,t:0,life:.9})}hud()}
+function drop(mo){const r=Math.random(),n=Math.random();const f={cave1:1,cave2:2,cave3:3}[M.id]||1;
+  if(mo.boss){DROPS.push({k:'item',item:mkItem(['sw','bow','staff','dag'][Math.floor(Math.random()*4)],3),x:mo.x,y:mo.y+8});DROPS.push({k:'coin',n:60,x:mo.x+14,y:mo.y+4});return}
+  if(r<.65)DROPS.push({k:'coin',n:1+Math.floor(n*4*f),x:mo.x,y:mo.y});
+  if(Math.random()<.18)DROPS.push({k:'potion',x:mo.x+8,y:mo.y+4});
+  if(Math.random()<.1){const q=Math.random(),rar=q<.01?3:q<.08?2:q<.3?1:0;DROPS.push({k:'item',item:mkItem(['sw','bow','staff','dag'][Math.floor(Math.random()*4)],rar),x:mo.x-8,y:mo.y+2})}}
+function pickUp(d){sfx(d.k==='coin'?'coin':'pick');if(d.k==='coin'){S.coins+=d.n;TXT.push({x:d.x,y:d.y-14,s:'+'+d.n+'🪙',c:'#ffe36b',t:0})}else if(d.k==='potion'){S.potions++;TXT.push({x:d.x,y:d.y-14,s:'+1 🧪',c:'#ffb3d9',t:0})}else if(d.k==='gem'){S.gems++;TXT.push({x:d.x,y:d.y-14,s:'+1 💎',c:'#b8e0ff',t:0})}
+  else if(d.k==='item'){S.inv.push(d.item);say(WEP[d.item.type].icon+' '+itemName(d.item))}d.taken=1;hud();save()}
+const itemName=it=>t(it.type)+(it.rar?' '+['','✦','✦✦','✦✦✦','◆'][it.rar]:'');
+function bossWin(){say(t('bossWin'));LIGHT=1;for(let i=0;i<60;i++)FX.push({k:'star',x:M.boss.x+(rnd()-.5)*60,y:M.boss.y-40+(rnd()-.5)*40,vx:(rnd()-.5)*80,vy:-40-rnd()*60,t:0,life:1.4})}
+
+// ---- player actions ----
+function attackTarget(mo){P.target=mo;P.act=null;P.path=null}
+function doAttack(mo){const w=weapon(),W=WEP[w.type];P.cd=W.cd/(w.spd||1);P.atkAnim=.25;P.row=rowFor(mo.x-P.x,mo.y-P.y);const dmg=Math.max(1,Math.round(atkPow()*(.85+Math.random()*.3)));
+  if(w.type==='bow'||w.type==='staff'){sfx('shoot');}if(w.type==='bow'||w.type==='staff')SHOTS.push({k:w.type,x:P.x,y:P.y-26,tx:mo,sp:w.type==='bow'?260:170,dmg,from:'p'});
+  else{monHit(mo,dmg);FX.push({k:'slash',x:mo.x,y:mo.y-14,t:0,life:.25,a:Math.atan2(mo.y-P.y,mo.x-P.x)})}}
+function hurtPlayer(n){if(isKid()||P.dead)return;S.hp-=n;sfx('hurt');P.hurt=.3;TXT.push({x:P.x,y:P.y-66,s:'-'+n,c:'#ff7a6b',t:0});hud();if(S.hp<=0){S.hp=0;faint()}}
+function faint(){P.dead=1;say(t('fell'));fadeTo(()=>{S.hp=hpMax();P.dead=0;const st=S.lastStone||'plaza';const mapId=st==='plaza'?'plaza':st==='mountain'?'mountain':st;goMap(mapId,null,true)})}
+function usePotion(){if(!S.potions||isKid())return;S.potions--;S.hp=Math.min(hpMax(),S.hp+Math.round(hpMax()*.6));TXT.push({x:P.x,y:P.y-66,s:'+HP',c:'#8ff7a0',t:0});hud();save()}
+
+// ---- crystals & quiz ----
+let QBANK=[];async function loadQuestions(){const fb=[{"age": 6, "subject": "math", "topic": "subtract", "level": 1, "answer": 2, "th": {"q": "11 − 6 = ?", "choices": ["4", "6", "5", "8"], "explain": "จาก 11 นับถอยหลัง 6 ได้ 5"}, "en": {"q": "11 − 6 = ?", "choices": ["4", "6", "5", "8"], "explain": "Count back 6 from 11 to get 5."}, "id": "ma-0160"}, {"age": 6, "subject": "math", "topic": "add", "level": 1, "answer": 2, "th": {"q": "9 + 10 = ?", "choices": ["18", "17", "19", "16"], "explain": "นับต่อจาก 9 ไปอีก 10 ได้ 19"}, "en": {"q": "9 + 10 = ?", "choices": ["18", "17", "19", "16"], "explain": "Count on 10 from 9 to get 19."}, "id": "ma-0066"}, {"age": 6, "subject": "math", "topic": "word-problem", "level": 1, "answer": 0, "th": {"q": "ลีอามีดอกไม้ 5 ชิ้น ได้เพิ่มอีก 9 ชิ้น รวมเป็นกี่ชิ้น 🌸", "choices": ["14", "12", "16", "11"], "explain": "5 + 9 = 14"}, "en": {"q": "Leah has 5 flowers. She gets 9 more. How many now? 🌸", "choices": ["14", "12", "16", "11"], "explain": "5 + 9 = 14"}, "id": "ma-0092"}, {"age": 6, "subject": "math", "topic": "word-problem", "level": 1, "answer": 3, "th": {"q": "ลีอามีปลา 10 ชิ้น ให้เพื่อนไป 1 ชิ้น เหลือกี่ชิ้น 🐟", "choices": ["11", "7", "8", "9"], "explain": "10 − 1 = 9"}, "en": {"q": "Leah has 10 fish. She gives away 1. How many are left? 🐟", "choices": ["11", "7", "8", "9"], "explain": "10 − 1 = 9"}, "id": "ma-0167"}, {"age": 7, "subject": "math", "topic": "subtract", "level": 2, "answer": 0, "th": {"q": "49 − 35 = ?", "choices": ["14", "11", "17", "15"], "explain": "ลบหลักสิบ แล้วลบหลักหน่วย ได้ 14"}, "en": {"q": "49 − 35 = ?", "choices": ["14", "11", "17", "15"], "explain": "Take away the tens, then the ones: 14."}, "id": "ma-0306"}, {"age": 7, "subject": "math", "topic": "subtract", "level": 2, "answer": 3, "th": {"q": "52 − 12 = ?", "choices": ["41", "43", "42", "40"], "explain": "ลบหลักสิบ แล้วลบหลักหน่วย ได้ 40"}, "en": {"q": "52 − 12 = ?", "choices": ["41", "43", "42", "40"], "explain": "Take away the tens, then the ones: 40."}, "id": "ma-0178"}, {"age": 7, "subject": "math", "topic": "subtract", "level": 2, "answer": 0, "th": {"q": "71 − 13 = ?", "choices": ["58", "48", "57", "56"], "explain": "ลบหลักสิบ แล้วลบหลักหน่วย ได้ 58"}, "en": {"q": "71 − 13 = ?", "choices": ["58", "48", "57", "56"], "explain": "Take away the tens, then the ones: 58."}, "id": "ma-0290"}, {"age": 7, "subject": "math", "topic": "add", "level": 2, "answer": 3, "th": {"q": "27 + 27 = ?", "choices": ["57", "51", "44", "54"], "explain": "บวกหลักสิบ แล้วบวกหลักหน่วย ได้ 54"}, "en": {"q": "27 + 27 = ?", "choices": ["57", "51", "44", "54"], "explain": "Add the tens, then the ones: 54."}, "id": "ma-0234"}, {"age": 8, "subject": "math", "topic": "patterns", "level": 3, "answer": 2, "th": {"q": "เลขที่หายไปคืออะไร: 30, 55, 80, ?, 130", "choices": ["102", "107", "105", "106"], "explain": "เพิ่มขึ้นทีละ 25"}, "en": {"q": "What is the missing number: 30, 55, 80, ?, 130?", "choices": ["102", "107", "105", "106"], "explain": "The numbers go up by 25 each time."}, "id": "ma-0349"}, {"age": 8, "subject": "math", "topic": "money", "level": 3, "answer": 2, "th": {"q": "ซื้อของ 28 บาท จ่ายแบงก์ 100 บาท ได้เงินทอนกี่บาท", "choices": ["74 บาท", "75 บาท", "72 บาท", "69 บาท"], "explain": "100 − 28 = 72 บาท"}, "en": {"q": "Something costs 28 baht. You pay with 100 baht. How much change?", "choices": ["74 baht", "75 baht", "72 baht", "69 baht"], "explain": "100 − 28 = 72 baht"}, "id": "ma-0376"}, {"age": 8, "subject": "math", "topic": "word-problem", "level": 3, "answer": 3, "th": {"q": "มีแอปเปิล 12 ชิ้น แบ่งให้เพื่อน 4 คนเท่า ๆ กัน ได้คนละกี่ชิ้น 🍎", "choices": ["5", "6", "4", "3"], "explain": "12 ÷ 4 = 3"}, "en": {"q": "12 apples are shared equally between 4 friends. How many does each get? 🍎", "choices": ["5", "6", "4", "3"], "explain": "12 ÷ 4 = 3"}, "id": "ma-0364"}, {"age": 8, "subject": "math", "topic": "add", "level": 3, "answer": 3, "th": {"q": "530 + 324 = ?", "choices": ["851", "864", "852", "854"], "explain": "บวกทีละหลัก ร้อย สิบ หน่วย ได้ 854"}, "en": {"q": "530 + 324 = ?", "choices": ["851", "864", "852", "854"], "explain": "Add hundreds, tens and ones: 854."}, "id": "ma-0431"}, {"age": 6, "subject": "english", "topic": "picture-word", "level": 1, "answer": 3, "th": {"q": "ภาพนี้ภาษาอังกฤษคือคำไหน 🚗", "choices": ["train", "boat", "plane", "car"], "explain": "🚗 = car (รถยนต์)"}, "en": {"q": "Which word matches this picture? 🚗", "choices": ["train", "boat", "plane", "car"], "explain": "🚗 is \"car\"."}, "speak": "car", "id": "en-0121"}, {"age": 6, "subject": "english", "topic": "first-letter", "level": 1, "answer": 2, "th": {"q": "คำภาษาอังกฤษของ 👨 (พ่อ) ขึ้นต้นด้วยตัวอักษรอะไร", "choices": ["K", "O", "F", "W"], "explain": "father ขึ้นต้นด้วย F"}, "en": {"q": "The English word for 👨 \"พ่อ\" starts with which letter?", "choices": ["K", "O", "F", "W"], "explain": "\"father\" starts with F."}, "speak": "father", "id": "en-0064", "needs": "th"}, {"age": 6, "subject": "english", "topic": "thai-to-english", "level": 1, "answer": 1, "th": {"q": "คำว่า \"ชีส\" ภาษาอังกฤษคือคำไหน", "choices": ["water", "cheese", "orange", "egg"], "explain": "\"ชีส\" = cheese 🧀"}, "en": {"q": "Which English word means \"ชีส\"?", "choices": ["water", "cheese", "orange", "egg"], "explain": "\"ชีส\" is \"cheese\" 🧀."}, "speak": "cheese", "id": "en-0098", "needs": "th"}, {"age": 6, "subject": "english", "topic": "first-letter", "level": 1, "answer": 1, "th": {"q": "คำภาษาอังกฤษของ 🍞 (ขนมปัง) ขึ้นต้นด้วยตัวอักษรอะไร", "choices": ["U", "B", "D", "Z"], "explain": "bread ขึ้นต้นด้วย B"}, "en": {"q": "The English word for 🍞 \"ขนมปัง\" starts with which letter?", "choices": ["U", "B", "D", "Z"], "explain": "\"bread\" starts with B."}, "speak": "bread", "id": "en-0140", "needs": "th"}, {"age": 7, "subject": "english", "topic": "missing-letter", "level": 2, "answer": 3, "th": {"q": "เติมตัวอักษรที่หายไป: ban_na 🍌", "choices": ["j", "i", "r", "a"], "explain": "🍌 สะกดว่า banana"}, "en": {"q": "Fill in the missing letter: ban_na 🍌", "choices": ["j", "i", "r", "a"], "explain": "🍌 is spelled \"banana\"."}, "speak": "banana", "id": "en-0197"}, {"age": 7, "subject": "english", "topic": "rhymes", "level": 2, "answer": 0, "th": {"q": "คำไหนสัมผัสเสียงเดียวกับ \"house\"", "choices": ["blouse", "sun", "pig", "cat"], "explain": "\"house\" กับ \"blouse\" ลงท้ายเสียงเดียวกัน"}, "en": {"q": "Which word rhymes with \"house\"?", "choices": ["blouse", "sun", "pig", "cat"], "explain": "\"house\" and \"blouse\" end with the same sound."}, "speak": "house", "id": "en-0317"}, {"age": 7, "subject": "english", "topic": "opposites", "level": 2, "answer": 3, "th": {"q": "คำตรงข้ามของ \"near\" (ใกล้) คือคำไหน", "choices": ["top", "short", "full", "far"], "explain": "near (ใกล้) ตรงข้ามกับ far (ไกล)"}, "en": {"q": "What is the opposite of \"near\"?", "choices": ["top", "short", "full", "far"], "explain": "The opposite of \"near\" is \"far\"."}, "speak": "near", "id": "en-0234"}, {"age": 7, "subject": "english", "topic": "opposites", "level": 2, "answer": 3, "th": {"q": "คำตรงข้ามของ \"rich\" (รวย) คือคำไหน", "choices": ["far", "old", "new", "poor"], "explain": "rich (รวย) ตรงข้ามกับ poor (จน)"}, "en": {"q": "What is the opposite of \"rich\"?", "choices": ["far", "old", "new", "poor"], "explain": "The opposite of \"rich\" is \"poor\"."}, "speak": "rich", "id": "en-0174"}, {"age": 8, "subject": "english", "topic": "opposites", "level": 3, "answer": 1, "th": {"q": "คำตรงข้ามของ \"bottom\" (ล่าง) คือคำไหน", "choices": ["soft", "top", "big", "dark"], "explain": "bottom (ล่าง) ตรงข้ามกับ top (บน)"}, "en": {"q": "What is the opposite of \"bottom\"?", "choices": ["soft", "top", "big", "dark"], "explain": "The opposite of \"bottom\" is \"top\"."}, "speak": "bottom", "id": "en-0396"}, {"age": 8, "subject": "english", "topic": "plurals", "level": 3, "answer": 3, "th": {"q": "\"puppy\" มีหลายตัว/หลายอัน เขียนว่าอะไร", "choices": ["puppys", "puppyies", "puppiess", "puppies"], "explain": "หนึ่ง puppy หลาย puppies"}, "en": {"q": "What is the plural of \"puppy\"?", "choices": ["puppys", "puppyies", "puppiess", "puppies"], "explain": "One puppy, two puppies."}, "speak": "puppy", "id": "en-0445"}, {"age": 8, "subject": "english", "topic": "days-months", "level": 3, "answer": 3, "th": {"q": "เดือน\"มิถุนายน\" ภาษาอังกฤษคือคำไหน", "choices": ["March", "January", "February", "June"], "explain": "มิถุนายน = June"}, "en": {"q": "Which month is \"มิถุนายน\"?", "choices": ["March", "January", "February", "June"], "explain": "\"มิถุนายน\" is June."}, "id": "en-0412", "needs": "th"}, {"age": 8, "subject": "english", "topic": "odd-one-out", "level": 3, "answer": 0, "th": {"q": "คำไหนไม่ใช่อาหาร", "choices": ["purple", "apple", "grapes", "cheese"], "explain": "\"purple\" ไม่ใช่อาหาร"}, "en": {"q": "Which word is NOT food?", "choices": ["purple", "apple", "grapes", "cheese"], "explain": "\"purple\" is not food."}, "id": "en-0387"}, {"age": 6, "subject": "thai", "topic": "alphabet", "level": 1, "answer": 0, "th": {"q": "\"งู\" 🐍 คือตัวอักษรตัวไหน", "choices": ["ง", "ช", "ฃ", "ฉ"], "explain": "ง งู"}, "en": {"q": "Which Thai letter goes with \"งู\" 🐍?", "choices": ["ง", "ช", "ฃ", "ฉ"], "explain": "\"งู\" is the word for the letter ง."}, "speak": "งู", "id": "th-0100", "needs": "th"}, {"age": 6, "subject": "thai", "topic": "picture-word", "level": 1, "answer": 0, "th": {"q": "ภาพนี้คือคำไหน 🍚", "choices": ["ข้าว", "สับปะรด", "ไข่", "กล้วย"], "explain": "🍚 คือ \"ข้าว\""}, "en": {"q": "Which Thai word matches this picture? 🍚", "choices": ["ข้าว", "สับปะรด", "ไข่", "กล้วย"], "explain": "🍚 is \"ข้าว\" (rice)."}, "speak": "ข้าว", "id": "th-0041", "needs": "th"}, {"age": 6, "subject": "thai", "topic": "alphabet", "level": 1, "answer": 1, "th": {"q": "ต ... อะไร (ท่อง ก ไก่)", "choices": ["ธง", "เต่า", "เด็ก", "มณโฑ"], "explain": "ต เต่า 🐢"}, "en": {"q": "In the Thai alphabet chant, \"ต\" goes with which word?", "choices": ["ธง", "เต่า", "เด็ก", "มณโฑ"], "explain": "\"ต\" goes with \"เต่า\" (turtle) 🐢."}, "speak": "ต เต่า", "id": "th-0019", "needs": "th"}, {"age": 6, "subject": "thai", "topic": "first-consonant", "level": 1, "answer": 0, "th": {"q": "\"ช้าง\" 🐘 มีพยัญชนะตัวแรกคือตัวไหน", "choices": ["ช", "ธ", "ล", "ศ"], "explain": "\"ช้าง\" ขึ้นต้นด้วย ช"}, "en": {"q": "What is the first consonant of \"ช้าง\" 🐘?", "choices": ["ช", "ธ", "ล", "ศ"], "explain": "\"ช้าง\" starts with ช."}, "speak": "ช้าง", "id": "th-0036", "needs": "th"}, {"age": 7, "subject": "thai", "topic": "odd-one-out", "level": 2, "answer": 2, "th": {"q": "คำไหนไม่ใช่ธรรมชาติ", "choices": ["ภูเขา", "ดาว", "กบ", "ดอกไม้"], "explain": "\"กบ\" ไม่ใช่ธรรมชาติ"}, "en": {"q": "Which word is NOT nature?", "choices": ["ภูเขา", "ดาว", "กบ", "ดอกไม้"], "explain": "\"กบ\" is not nature."}, "id": "th-0329", "needs": "th"}, {"age": 7, "subject": "thai", "topic": "alphabet", "level": 1, "answer": 1, "th": {"q": "\"สำเภา\" ⛵ คือตัวอักษรตัวไหน", "choices": ["ม", "ภ", "ล", "ผ"], "explain": "ภ สำเภา"}, "en": {"q": "Which Thai letter goes with \"สำเภา\" ⛵?", "choices": ["ม", "ภ", "ล", "ผ"], "explain": "\"สำเภา\" is the word for the letter ภ."}, "speak": "สำเภา", "id": "th-0284", "needs": "th"}, {"age": 7, "subject": "thai", "topic": "opposites", "level": 2, "answer": 2, "th": {"q": "คำตรงข้ามของ \"มาก\" คือคำไหน", "choices": ["ซ้าย", "ร้องไห้", "น้อย", "ปิด"], "explain": "\"มาก\" ตรงข้ามกับ \"น้อย\""}, "en": {"q": "Which Thai word is the opposite of \"มาก\"?", "choices": ["ซ้าย", "ร้องไห้", "น้อย", "ปิด"], "explain": "\"มาก\" is the opposite of \"น้อย\"."}, "speak": "มาก", "id": "th-0203", "needs": "th"}, {"age": 7, "subject": "thai", "topic": "odd-one-out", "level": 2, "answer": 0, "th": {"q": "คำไหนไม่ใช่สัตว์", "choices": ["ทะเล", "นก", "ปลา", "ผึ้ง"], "explain": "\"ทะเล\" ไม่ใช่สัตว์"}, "en": {"q": "Which word is NOT an animal?", "choices": ["ทะเล", "นก", "ปลา", "ผึ้ง"], "explain": "\"ทะเล\" is not an animal."}, "id": "th-0204", "needs": "th"}, {"age": 8, "subject": "thai", "topic": "opposites", "level": 2, "answer": 1, "th": {"q": "คำตรงข้ามของ \"สกปรก\" คือคำไหน", "choices": ["ปิด", "สะอาด", "ออก", "ใกล้"], "explain": "\"สกปรก\" ตรงข้ามกับ \"สะอาด\""}, "en": {"q": "Which Thai word is the opposite of \"สกปรก\"?", "choices": ["ปิด", "สะอาด", "ออก", "ใกล้"], "explain": "\"สกปรก\" is the opposite of \"สะอาด\"."}, "speak": "สกปรก", "id": "th-0341", "needs": "th"}, {"age": 8, "subject": "thai", "topic": "classifiers", "level": 3, "answer": 3, "th": {"q": "ดอกไม้ 1 ___ ใช้ลักษณนามอะไร", "choices": ["คู่", "สาย", "คน", "ดอก"], "explain": "ดอกไม้ 1 ดอก"}, "en": {"q": "Which Thai classifier is used for \"ดอกไม้\" (flower)? ดอกไม้ 1 ___", "choices": ["คู่", "สาย", "คน", "ดอก"], "explain": "We say \"ดอกไม้ 1 ดอก\"."}, "speak": "ดอกไม้", "id": "th-0342", "needs": "th"}, {"age": 8, "subject": "thai", "topic": "meaning", "level": 3, "answer": 3, "th": {"q": "คำว่า \"horse\" ภาษาไทยเขียนว่าอย่างไร", "choices": ["ไก่", "เป็ด", "ลิง", "ม้า"], "explain": "horse = \"ม้า\" 🐴"}, "en": {"q": "How do you write \"horse\" in Thai?", "choices": ["ไก่", "เป็ด", "ลิง", "ม้า"], "explain": "\"horse\" is \"ม้า\" in Thai 🐴."}, "speak": "ม้า", "id": "th-0394", "needs": "th"}, {"age": 8, "subject": "thai", "topic": "opposites", "level": 2, "answer": 3, "th": {"q": "คำตรงข้ามของ \"หลัง\" คือคำไหน", "choices": ["ให้", "ตื่น", "ใหม่", "หน้า"], "explain": "\"หลัง\" ตรงข้ามกับ \"หน้า\""}, "en": {"q": "Which Thai word is the opposite of \"หลัง\"?", "choices": ["ให้", "ตื่น", "ใหม่", "หน้า"], "explain": "\"หลัง\" is the opposite of \"หน้า\"."}, "speak": "หลัง", "id": "th-0396", "needs": "th"}, {"age": 6, "subject": "chinese", "topic": "picture-word", "level": 1, "answer": 3, "th": {"q": "ภาษาจีนของภาพนี้คือคำไหน ✋", "choices": ["鼻子 (bízi)", "耳朵 (ěrduo)", "眼睛 (yǎnjing)", "手 (shǒu)"], "explain": "✋ = 手 อ่านว่า shǒu แปลว่า มือ"}, "en": {"q": "Which Chinese word matches this picture? ✋", "choices": ["鼻子 (bízi)", "耳朵 (ěrduo)", "眼睛 (yǎnjing)", "手 (shǒu)"], "explain": "✋ is 手 (shǒu), \"hand\"."}, "speak": "手", "speakLang": "zh-CN", "id": "zh-0029"}, {"age": 6, "subject": "chinese", "topic": "counting", "level": 1, "answer": 0, "th": {"q": "นับแล้วมีกี่ชิ้น ตอบเป็นภาษาจีน: 🍎🍎🍎🍎🍎🍎", "choices": ["六 (liù)", "七 (qī)", "五 (wǔ)", "九 (jiǔ)"], "explain": "มี 6 ชิ้น = 六 (liù)"}, "en": {"q": "Count them and answer in Chinese: 🍎🍎🍎🍎🍎🍎", "choices": ["六 (liù)", "七 (qī)", "五 (wǔ)", "九 (jiǔ)"], "explain": "There are 6: 六 (liù)."}, "speak": "六", "speakLang": "zh-CN", "id": "zh-0053"}, {"age": 6, "subject": "chinese", "topic": "picture-word", "level": 1, "answer": 2, "th": {"q": "ภาษาจีนของภาพนี้คือคำไหน ⬛", "choices": ["白色 (báisè)", "蓝色 (lánsè)", "黑色 (hēisè)", "红色 (hóngsè)"], "explain": "⬛ = 黑色 อ่านว่า hēisè แปลว่า สีดำ"}, "en": {"q": "Which Chinese word matches this picture? ⬛", "choices": ["白色 (báisè)", "蓝色 (lánsè)", "黑色 (hēisè)", "红色 (hóngsè)"], "explain": "⬛ is 黑色 (hēisè), \"black\"."}, "speak": "黑色", "speakLang": "zh-CN", "id": "zh-0057"}, {"age": 6, "subject": "chinese", "topic": "counting", "level": 1, "answer": 3, "th": {"q": "นับแล้วมีกี่ชิ้น ตอบเป็นภาษาจีน: 💎💎", "choices": ["九 (jiǔ)", "八 (bā)", "五 (wǔ)", "二 (èr)"], "explain": "มี 2 ชิ้น = 二 (èr)"}, "en": {"q": "Count them and answer in Chinese: 💎💎", "choices": ["九 (jiǔ)", "八 (bā)", "五 (wǔ)", "二 (èr)"], "explain": "There are 2: 二 (èr)."}, "speak": "二", "speakLang": "zh-CN", "id": "zh-0035"}, {"age": 7, "subject": "chinese", "topic": "say-it", "level": 2, "answer": 1, "th": {"q": "คำว่า \"ภูเขา\" ภาษาจีนคือคำไหน", "choices": ["雨 (yǔ)", "山 (shān)", "星星 (xīngxing)", "花 (huā)"], "explain": "\"ภูเขา\" = 山 (shān)"}, "en": {"q": "How do you say \"mountain\" in Chinese?", "choices": ["雨 (yǔ)", "山 (shān)", "星星 (xīngxing)", "花 (huā)"], "explain": "\"mountain\" is 山 (shān)."}, "speak": "山", "speakLang": "zh-CN", "id": "zh-0309"}, {"age": 7, "subject": "chinese", "topic": "read-pinyin", "level": 2, "answer": 1, "th": {"q": "一 (หนึ่ง) อ่านว่าอะไร", "choices": ["shí", "yī", "wǔ", "sān"], "explain": "一 อ่านว่า yī"}, "en": {"q": "How do you read 一 (\"one\")?", "choices": ["shí", "yī", "wǔ", "sān"], "explain": "一 is read \"yī\"."}, "speak": "一", "speakLang": "zh-CN", "id": "zh-0331"}, {"age": 7, "subject": "chinese", "topic": "read-pinyin", "level": 2, "answer": 1, "th": {"q": "上 (บน) อ่านว่าอะไร", "choices": ["dà", "shàng", "xiǎo", "rén"], "explain": "上 อ่านว่า shàng"}, "en": {"q": "How do you read 上 (\"up\")?", "choices": ["dà", "shàng", "xiǎo", "rén"], "explain": "上 is read \"shàng\"."}, "speak": "上", "speakLang": "zh-CN", "id": "zh-0223"}, {"age": 7, "subject": "chinese", "topic": "read-pinyin", "level": 2, "answer": 3, "th": {"q": "姐姐 (พี่สาว) อ่านว่าอะไร", "choices": ["nǎinai", "mèimei", "péngyou", "jiějie"], "explain": "姐姐 อ่านว่า jiějie"}, "en": {"q": "How do you read 姐姐 (\"older sister\")?", "choices": ["nǎinai", "mèimei", "péngyou", "jiějie"], "explain": "姐姐 is read \"jiějie\"."}, "speak": "姐姐", "speakLang": "zh-CN", "id": "zh-0217"}, {"age": 8, "subject": "chinese", "topic": "number-math", "level": 3, "answer": 2, "th": {"q": "三 + 五 = ? (ตอบเป็นตัวจีน)", "choices": ["三", "九", "八", "七"], "explain": "3 + 5 = 8 = 八 (bā)"}, "en": {"q": "三 + 五 = ? (answer in Chinese)", "choices": ["三", "九", "八", "七"], "explain": "3 + 5 = 8, which is 八 (bā)."}, "speak": "八", "speakLang": "zh-CN", "id": "zh-0391"}, {"age": 8, "subject": "chinese", "topic": "number-math", "level": 3, "answer": 1, "th": {"q": "二 + 二 = ? (ตอบเป็นตัวจีน)", "choices": ["九", "四", "二", "三"], "explain": "2 + 2 = 4 = 四 (sì)"}, "en": {"q": "二 + 二 = ? (answer in Chinese)", "choices": ["九", "四", "二", "三"], "explain": "2 + 2 = 4, which is 四 (sì)."}, "speak": "四", "speakLang": "zh-CN", "id": "zh-0439"}, {"age": 8, "subject": "chinese", "topic": "pinyin", "level": 3, "answer": 2, "th": {"q": "พินอิน \"píngguǒ\" เขียนเป็นตัวจีนว่าอะไร", "choices": ["米饭", "牛奶", "苹果", "鸡蛋"], "explain": "píngguǒ = 苹果 (แอปเปิล)"}, "en": {"q": "Which characters are written \"píngguǒ\" in pinyin?", "choices": ["米饭", "牛奶", "苹果", "鸡蛋"], "explain": "\"píngguǒ\" is written 苹果 (\"apple\")."}, "speak": "苹果", "speakLang": "zh-CN", "id": "zh-0417"}, {"age": 8, "subject": "chinese", "topic": "number-math", "level": 3, "answer": 0, "th": {"q": "四 + 二 = ? (ตอบเป็นตัวจีน)", "choices": ["六", "五", "七", "二"], "explain": "4 + 2 = 6 = 六 (liù)"}, "en": {"q": "四 + 二 = ? (answer in Chinese)", "choices": ["六", "五", "七", "二"], "explain": "4 + 2 = 6, which is 六 (liù)."}, "speak": "六", "speakLang": "zh-CN", "id": "zh-0346"}, {"age": 6, "subject": "general", "topic": "animal-homes", "level": 1, "answer": 2, "th": {"q": "สัตว์ตัวไหนอาศัยอยู่ในน้ำ", "choices": ["เสือชีตาห์ 🐆", "แมลงวัน 🪰", "ฉลาม 🦈", "นกฮูก 🦉"], "explain": "ฉลามอาศัยอยู่ในน้ำ"}, "en": {"q": "Which animal lives in water?", "choices": ["cheetah 🐆", "fly 🪰", "shark 🦈", "owl 🦉"], "explain": "The shark lives in water."}, "id": "gk-0093"}, {"age": 6, "subject": "general", "topic": "animal-size", "level": 1, "answer": 0, "th": {"q": "สัตว์ตัวไหนตัวใหญ่ที่สุด", "choices": ["ฮิปโป 🦛", "แพะ 🐐", "แมว 🐱", "หนู 🐭"], "explain": "ฮิปโปตัวใหญ่ที่สุดในกลุ่มนี้"}, "en": {"q": "Which animal is the biggest?", "choices": ["hippo 🦛", "goat 🐐", "cat 🐱", "mouse 🐭"], "explain": "The hippo is the biggest here."}, "id": "gk-0107"}, {"age": 6, "subject": "general", "topic": "transport", "level": 1, "answer": 1, "th": {"q": "พาหนะไหนแล่นในน้ำ", "choices": ["รถบัส", "เรือ ⛵", "รถไฟ", "จักรยาน"], "explain": "เรือแล่นบนน้ำ"}, "en": {"q": "Which vehicle travels on water?", "choices": ["a bus", "a boat ⛵", "a train", "a bicycle"], "explain": "Boats travel on water."}, "id": "gk-0043"}, {"age": 6, "subject": "general", "topic": "animal-homes", "level": 1, "answer": 1, "th": {"q": "ปลา 🐟 อาศัยอยู่ที่ไหน", "choices": ["รังผึ้ง", "แม่น้ำหรือบ่อน้ำ", "คอกม้า", "โพรงใต้ดิน"], "explain": "ปลาอาศัยอยู่ในแม่น้ำหรือบ่อน้ำ"}, "en": {"q": "Where does a fish 🐟 live?", "choices": ["a hive", "a pond or river", "a stable", "a burrow"], "explain": "A fish lives in a pond or river."}, "id": "gk-0038"}, {"age": 7, "subject": "general", "topic": "animal-bodies", "level": 2, "answer": 2, "th": {"q": "ตัวของแมว 🐱 ปกคลุมด้วยอะไร", "choices": ["ขนนก", "เกล็ด", "ขน", "ผิวเรียบลื่นชุ่มชื้น"], "explain": "แมวมีขน"}, "en": {"q": "What covers a cat 🐱's body?", "choices": ["feathers", "scales", "fur", "smooth, damp skin"], "explain": "A cat is covered with fur."}, "id": "gk-0238"}, {"age": 7, "subject": "general", "topic": "colours", "level": 2, "answer": 1, "th": {"q": "สีดำผสมสีขาวได้สีอะไร", "choices": ["สีแดง", "สีเทา", "สีส้ม", "สีเหลือง"], "explain": "ดำ + ขาว = เทา"}, "en": {"q": "Black mixed with white makes which colour?", "choices": ["red", "grey", "orange", "yellow"], "explain": "Black + white = grey."}, "id": "gk-0187"}, {"age": 7, "subject": "general", "topic": "animal-legs", "level": 2, "answer": 3, "th": {"q": "สัตว์ตัวไหนมี 2 ขา", "choices": ["แพะ 🐐", "วัว 🐄", "กิ้งก่าคาเมเลียน 🦎", "เป็ด 🦆"], "explain": "เป็ดมี 2 ขา"}, "en": {"q": "Which animal has 2 legs?", "choices": ["goat 🐐", "cow 🐄", "chameleon 🦎", "duck 🦆"], "explain": "A duck has 2 legs."}, "id": "gk-0255"}, {"age": 7, "subject": "general", "topic": "animal-groups", "level": 2, "answer": 2, "th": {"q": "สัตว์ตัวไหนเป็นสัตว์เลี้ยงลูกด้วยนม", "choices": ["นกอินทรี 🦅", "นกกระจอกเทศ 🪶", "ควาย 🐃", "เพนกวิน 🐧"], "explain": "ควายให้นมลูก จึงเป็นสัตว์เลี้ยงลูกด้วยนม"}, "en": {"q": "Which animal is a mammal?", "choices": ["eagle 🦅", "ostrich 🪶", "buffalo 🐃", "penguin 🐧"], "explain": "The buffalo feeds its babies milk, so it is a mammal."}, "id": "gk-0248"}, {"age": 8, "subject": "general", "topic": "animal-babies", "level": 3, "answer": 3, "th": {"q": "ลูกของหมา 🐶 ภาษาอังกฤษเรียกว่าอะไร", "choices": ["piglet", "chick", "pup", "puppy"], "explain": "ลูกหมา เรียกว่า puppy"}, "en": {"q": "What is a baby dog 🐶 called?", "choices": ["piglet", "chick", "pup", "puppy"], "explain": "A baby dog is called a puppy."}, "id": "gk-0495"}, {"age": 8, "subject": "general", "topic": "animal-babies", "level": 3, "answer": 3, "th": {"q": "ลูกของโลมา 🐬 ภาษาอังกฤษเรียกว่าอะไร", "choices": ["caterpillar", "piglet", "puppy", "calf"], "explain": "ลูกโลมา เรียกว่า calf"}, "en": {"q": "What is a baby dolphin 🐬 called?", "choices": ["caterpillar", "piglet", "puppy", "calf"], "explain": "A baby dolphin is called a calf."}, "id": "gk-0491"}, {"age": 8, "subject": "general", "topic": "animal-groups", "level": 3, "answer": 1, "th": {"q": "สัตว์ตัวไหนไม่ใช่สัตว์เลี้ยงลูกด้วยนม", "choices": ["หนู 🐭", "งู 🐍", "สิงโต 🦁", "วัว 🐄"], "explain": "งูเป็นสัตว์เลื้อยคลาน ไม่ได้ให้นมลูก"}, "en": {"q": "Which one is NOT a mammal?", "choices": ["mouse 🐭", "snake 🐍", "lion 🦁", "cow 🐄"], "explain": "A snake is a reptile; it does not feed its babies milk."}, "id": "gk-0341"}, {"age": 8, "subject": "general", "topic": "animal-babies", "level": 3, "answer": 1, "th": {"q": "ลูกของหนู 🐭 ภาษาอังกฤษเรียกว่าอะไร", "choices": ["tadpole", "pup", "kitten", "calf"], "explain": "ลูกหนู เรียกว่า pup"}, "en": {"q": "What is a baby mouse 🐭 called?", "choices": ["tadpole", "pup", "kitten", "calf"], "explain": "A baby mouse is called a pup."}, "id": "gk-0493"}];if(window.EMBED_Q){QBANK=window.EMBED_Q;return}try{const idx=await (await fetch('questions-index.json',{cache:'no-cache'})).json();const parts=await Promise.all(idx.files.map(f=>fetch(f.f).then(r=>r.json()).then(j=>j.questions||j).catch(()=>[])));QBANK=parts.flat();if(!QBANK.length)QBANK=fb}catch(e){QBANK=fb}}
+function pickQuestion(){const age=Math.max(6,Math.min(8,S.age>=12?8:S.age||7));let pool=QBANK.filter(q=>Math.abs(q.age-age)<=1&&!(LANG==='en'&&q.subject==='thai')&&q[LANG]);if(!pool.length)pool=QBANK.filter(q=>q[LANG]);
+  let fresh=pool.filter(q=>!S.asked.includes(q.id));if(!fresh.length){S.asked=[];fresh=pool}const q=fresh[Math.floor(Math.random()*fresh.length)];S.asked.push(q.id);if(S.asked.length>300)S.asked.shift();return q}
+function openQuiz(c){if(c.awake)return;const q=pickQuestion(),L=q[LANG]||q.th;let tries=0;PAUSE=true;
+  const body=`<h2>${t('wake')}</h2><div class="qz">${L.q}</div><div class="ch">${L.choices.map((c2,i)=>`<button data-i="${i}">${c2}</button>`).join('')}</div><p class="note" id="qfb"></p>`;
+  modal(body,false);document.querySelectorAll('.ch button').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;if(b.disabled)return;
+    if(i===q.answer){b.classList.add('ok');sfx('right');wakeCrystal(c,tries===0);setTimeout(()=>{closeModal();say(t('right'))},650)}
+    else{tries++;sfx('wrong');b.classList.add('no');b.disabled=true;const fbEl=document.getElementById('qfb');
+      if(tries>=2){document.querySelectorAll('.ch button')[q.answer].classList.add('ok');fbEl.textContent=t('answer')+' '+L.choices[q.answer]+(L.explain?' · '+L.explain:'');wakeCrystal(c,false);setTimeout(()=>{closeModal()},2600)}
+      else fbEl.textContent=t('wrong')}})}
+function wakeCrystal(c,full){c.awake=true;setTimeout(()=>sfx('wake'),300);setTimeout(()=>{const f=M.crystals||[];if(f.length&&f.every(x=>x.awake)){say(t('floorDone'));for(let i=0;i<50;i++)FX.push({k:'spark',x:P.x+(rnd()-.5)*80,y:P.y-30+(rnd()-.5)*50,vx:(rnd()-.5)*60,vy:-40-rnd()*50,t:0,life:1.3})}},900);(S.crystals[M.id]||(S.crystals[M.id]=[])).push(c.id);S.coins+=full?5:2;gainExp(full?10:5);setLight();for(let i=0;i<30;i++)FX.push({k:'spark',x:c.x,y:c.y-12,vx:(rnd()-.5)*70,vy:-30-rnd()*70,t:0,life:1});hud();save()}
+const totalCrystals=()=>Object.values(S.crystals).reduce((a,b)=>a+b.length,0);
+function setLight(){LIGHT=S.boss?1:Math.min(1,.35+.65*totalCrystals()/12)}
+function doDig(d){d.done=true;sfx('dig');(S.digs[M.id]||(S.digs[M.id]=[])).push(d.id);P.atkAnim=.6;for(let i=0;i<14;i++)FX.push({k:'dirt',x:d.x,y:d.y,vx:(rnd()-.5)*60,vy:-40-rnd()*40,t:0,life:.7});
+  const r=Math.random();setTimeout(()=>{if(r<.55)DROPS.push({k:'coin',n:3+Math.floor(Math.random()*8),x:d.x,y:d.y});else if(r<.8)DROPS.push({k:'gem',x:d.x,y:d.y});else if(r<.92)DROPS.push({k:'potion',x:d.x,y:d.y});else DROPS.push({k:'item',item:mkItem(['sw','bow','staff','dag'][Math.floor(Math.random()*4)],Math.random()<.3?1:0),x:d.x,y:d.y});say('⛏️ '+t('dig')+'!')},450);save()}
+
+// ---- travel between maps ----
+const fadeEl=document.getElementById('fade');function fadeTo(fn){fadeEl.style.opacity=1;setTimeout(()=>{fn();setTimeout(()=>fadeEl.style.opacity=0,80)},360)}
+function getMap(id){if(!CACHE[id]){const m=MAPS[id]();m.objs.forEach(measure);buildGround(m);CACHE[id]=m}return CACHE[id]}
+function goMap(id,exitId,atStone){const m=getMap(id);M=m;m.shadowSC=0;
+  (m.crystals||[]).forEach(c=>c.awake=(S.crystals[id]||[]).includes(c.id));(m.digs||[]).forEach(d=>d.done=(S.digs[id]||[]).includes(d.id));m.stones.forEach(s=>s.awake=S.stones.includes(s.id));
+  let p=m.spawnDefault;if(exitId){const e=m.exits.find(e=>e.id===exitId);if(e){const cx=m.w*T/2,cy=m.h*T/2,dx=cx-e.x,dy=cy-e.y,d=Math.hypot(dx,dy)||1;p=[e.x+dx/d*30,e.y+dy/d*30];if(m.kind==='cave')p=[e.x,e.y+34]}}
+  if(atStone){const s=m.stones[0];if(s)p=[s.x,s.y+26]}
+  if(blockedAt(m,p[0],p[1])){const q=findPath(m,m.spawnDefault[0],m.spawnDefault[1],p[0],p[1]);p=q?q[q.length-1]:m.spawnDefault}
+  P.x=p[0];P.y=p[1];P.path=null;P.target=null;P.act=null;spawnMonsters();makeMinimap(m);showCard(t(m.nameKey),t('town'));setLight();hud();save()}
+function useExit(e){if(e.locked){say(t('soon'));return}sfx('warp');fadeTo(()=>goMap(e.to,e.toExit))}
+
+// ===== UI =====
+const $=id=>document.getElementById(id);
+let msgT=0;function say(s){$('msg').textContent=s;$('msg').style.opacity=1;msgT=3}
+function showCard(a,b){$('cardB').textContent=a;$('cardI').textContent=b;$('card').style.opacity=1;clearTimeout(showCard.t);showCard.t=setTimeout(()=>$('card').style.opacity=0,2000)}
+function hud(){if(!S)return;const H=HOUSES[S.house];$('hRib').style.background=H.col;$('hName').textContent=S.name;$('hLv').textContent=' '+t('lv')+' '+S.lv;
+  const kid=isKid();$('hpw').classList.toggle('hide',kid);if(!kid){$('hpI').style.width=(100*S.hp/hpMax())+'%';$('hpT').textContent=S.hp+'/'+hpMax()}
+  $('xpI').style.width=(100*S.exp/needExp())+'%';$('xpT').textContent='EXP '+S.exp+'/'+needExp();$('hCry').textContent='✨ '+totalCrystals();$('hCoin').textContent='🪙 '+S.coins+(S.gems?'  💎 '+S.gems:'');
+  $('bPot').classList.toggle('hide',kid);$('bCmp').classList.toggle('hide',!(M&&M.kind==='cave'));$('potN').textContent=S.potions;$('atkL').textContent=t('hit');$('mmn').textContent=M?t(M.nameKey):''}
+function modal(html,closable=true){$('mBody').innerHTML=html+(closable?`<div style="text-align:right;margin-top:10px"><button id="mX">${t('close')}</button></div>`:'');$('modal').classList.remove('hide');PAUSE=true;if(closable)$('mX').onclick=closeModal}
+function closeModal(){$('modal').classList.add('hide');PAUSE=false}
+function wepIcon(it,px=2){const c=document.createElement('canvas');c.width=c.height=12*px;const g=c.getContext('2d'),col=RAR_COL[it.rar];g.fillStyle=col;g.globalAlpha=.25;g.fillRect(0,0,12*px,12*px);g.globalAlpha=1;
+  const P2=(x,y,w,h,cl)=>{g.fillStyle=cl;g.fillRect(x*px,y*px,w*px,h*px)};
+  if(it.type==='sw'){P2(7,1,2,7,'#c89a5a');P2(5,8,6,1,'#6b4a2a');P2(7,9,2,2,'#6b4a2a')}else if(it.type==='bow'){P2(3,1,1,10,'#8a5a2a');P2(4,1,2,1,'#8a5a2a');P2(4,10,2,1,'#8a5a2a');P2(6,1,1,10,'#eee');P2(5,5,5,1,'#ddd')}
+  else if(it.type==='staff'){P2(6,3,1,8,'#7a4a2a');P2(5,1,3,2,'#c9a2ff')}else{P2(6,2,1,6,'#dfe6ee');P2(5,8,3,1,'#6b4a2a');P2(6,9,1,2,'#6b4a2a')}return c}
+function openBag(){const it=S.inv.map((w,i)=>`<button class="it ${i===S.eq?'on':''}" data-i="${i}"><span data-c="${i}"></span><span><b class="r${w.rar}">${itemName(w)}</b><br>${t('atk')} ${w.atk}${w.spd>1?' · '+t('spd')+' ↑':''}<br><span class="note">${i===S.eq?t('equipped'):t('equip')}</span></span></button>`).join('');
+  modal(`<h2>🎒 ${t('bag')}</h2><div class="row2" style="gap:14px;margin-bottom:8px"><span>🪙 ${S.coins}</span><span>💎 ${S.gems}</span><span>🧪 ${S.potions}</span><span>✨ ${totalCrystals()}</span></div><div class="grid">${it||t('empty')}</div>`);
+  document.querySelectorAll('.it').forEach(b=>{const i=+b.dataset.i;b.querySelector('[data-c]').append(wepIcon(S.inv[i],3));b.onclick=()=>{S.eq=i;hud();save();openBag()}})}
+function openWarp(){const list=S.stones.map(id=>`<button class="it" data-id="${id}" style="width:100%">✨ ${t(id)}</button>`).join('');modal(`<h2>🗺️ ${t('warp')}</h2><div class="grid">${list}</div><p class="note">${t('town')}</p>`);
+  document.querySelectorAll('[data-id]').forEach(b=>b.onclick=()=>{closeModal();fadeTo(()=>goMap(b.dataset.id,null,true))})}
+function openSettings(){modal(`<h2>⚙️ ${t('set')}</h2><div class="row2" style="margin-bottom:10px"><span>${t('lang')}</span><button id="lTh">ไทย</button><button id="lEn">English</button></div>
+  <div class="row2" style="margin-bottom:10px"><span>${t('sound')}</span><button id="sOn">${SND?'🔊 ON':'🔇 OFF'}</button></div><p class="note">${VERSION} · ${isKid()?t('kidSafe'):t('noHit')}</p><button id="rst" style="background:#8a2f2f">${t('reset')}</button>`);
+  $('sOn').onclick=()=>{SND=!SND;S.snd=SND;save();openSettings()};$('lTh').onclick=()=>{LANG='th';save();hud();openSettings()};$('lEn').onclick=()=>{LANG='en';save();hud();openSettings()};$('rst').onclick=()=>{if(confirm(t('resetQ'))){Store.clear();location.reload()}}}
+
+// ---- character creator ----
+const CR_STATE={kid:0,house:0,age:7,name:''};const CRC={};
+function crSheet(k,h){const kk=k+'-'+h;return CRC[kk]||(CRC[kk]=IMG['i_'+KIDS[k][0]]?recolorKey(IMG['i_'+KIDS[k][0]],HOUSES[h].h):fakeSheet(8,1))}
+function openCreator(){const el=$('cr');el.classList.remove('hide');
+  el.innerHTML=`<div class="l pn"><h1>${t('create')}</h1><canvas id="cpv"></canvas><div id="cnm" style="font-weight:800">—</div><div class="note" id="crole"></div><button class="go" id="cgo">${t('start')}</button></div>
+  <div class="r"><div class="pn"><h3>${t('pick')}</h3><div class="g6" id="ck"></div></div><div class="pn"><h3>${t('house')}</h3><div class="g4" id="ch"></div></div>
+  <div class="pn"><h3>${t('age')}</h3><div class="ages" id="ca"></div></div><div class="pn"><h3>${t('name')}</h3><div class="row2"><input id="cname" maxlength="12" placeholder="${t('namePh')}"><button id="crnd">${t('rnd')}</button><button id="cLang">${LANG==='th'?'EN':'ไทย'}</button></div></div></div>`;
+  KIDS.forEach(([k,th,en],i)=>{const b=document.createElement('button');b.className='opt';const c=document.createElement('canvas');c.width=c.height=48;const cs=innerHeight<440?36:48;c.style.width=c.style.height=cs+'px';b.append(c,document.createTextNode(LANG==='en'?en:th));b.onclick=()=>{CR_STATE.kid=i;crRefresh()};$('ck').append(b)});
+  HOUSES.forEach((h,i)=>{const b=document.createElement('button');b.className='opt hs';b.style.background=h.col;const e=embC(h.id,'#1b1330',3);e.style.width=e.style.height='22px';b.append(e,document.createTextNode(h[LANG]||h.th));b.onclick=()=>{CR_STATE.house=i;crRefresh()};$('ch').append(b)});
+  [6,7,8,9,10,11,12,30].forEach(a=>{const b=document.createElement('button');b.textContent=a===30?(LANG==='en'?'Adult':'ผู้ใหญ่'):a===12?'12+':a;b.dataset.a=a;b.onclick=()=>{CR_STATE.age=a;crRefresh()};$('ca').append(b)});
+  const nm=$('cname');nm.value=CR_STATE.name;nm.oninput=()=>{CR_STATE.name=nm.value.trim();crRefresh()};
+  const NAMES=['มะปราง','ข้าวปั้น','ต้นกล้า','ใบเตย','ภูผา','น้ำใส','แสงดาว','ทองคำ','ปุยฝ้าย','เมฆ'];
+  $('crnd').onclick=()=>{CR_STATE.kid=Math.floor(Math.random()*KIDS.length);if(!CR_STATE.name){CR_STATE.name=NAMES[Math.floor(Math.random()*NAMES.length)];nm.value=CR_STATE.name}crRefresh()};
+  $('cLang').onclick=()=>{LANG=LANG==='th'?'en':'th';openCreator()};
+  $('cgo').onclick=()=>{S=newSave({name:CR_STATE.name||(LANG==='en'?'Keeper':'ผู้พิทักษ์'),kid:CR_STATE.kid,house:CR_STATE.house,age:CR_STATE.age});S.hp=hpMax();Store.save(S);el.classList.add('hide');startGame()};
+  crRefresh();requestAnimationFrame(crLoop)}
+function crRefresh(){document.querySelectorAll('#ck .opt').forEach((b,i)=>{b.classList.toggle('on',i===CR_STATE.kid);const g=b.querySelector('canvas').getContext('2d');g.imageSmoothingEnabled=false;g.clearRect(0,0,48,48);g.drawImage(crSheet(i,CR_STATE.house),0,0,64,64,-8,-8,64,64)});
+  document.querySelectorAll('#ch .opt').forEach((b,i)=>b.classList.toggle('on',i===CR_STATE.house));document.querySelectorAll('#ca button').forEach(b=>b.classList.toggle('on',+b.dataset.a===CR_STATE.age));
+  $('cnm').textContent=CR_STATE.name||'—';$('crole').innerHTML=(CR_STATE.age<12?t('kidNote'):t('adultNote'))+(CR_STATE.age>=12?'<br>'+t('adultArt'):'')}
+let crDir=0,crT=0;function crLoop(tm){if($('cr').classList.contains('hide'))return;requestAnimationFrame(crLoop);const c=$('cpv');if(!c)return;const box=c.parentElement,s=Math.max(2,Math.floor(Math.min(box.clientWidth-24,box.clientHeight-170)/100)),dpr=devicePixelRatio||1;
+  if(c.width!==100*s*dpr){c.width=c.height=100*s*dpr;c.style.width=c.style.height=100*s+'px'}const g=c.getContext('2d');g.setTransform(1,0,0,1,0,0);g.clearRect(0,0,c.width,c.height);g.imageSmoothingEnabled=false;g.setTransform(s*dpr,0,0,s*dpr,0,0);
+  if(tm-crT>650){crDir=(crDir+1)%8;crT=tm}const H=HOUSES[CR_STATE.house];g.fillStyle='#3f7d3a';g.beginPath();g.ellipse(50,84,36,11,0,0,7);g.fill();g.fillStyle='#5aa04a';g.beginPath();g.ellipse(50,82,34,9,0,0,7);g.fill();
+  g.fillStyle='#6b4a2a';g.fillRect(74,20,2,62);g.fillStyle=H.col;g.beginPath();g.moveTo(76,22);g.lineTo(94,22);g.lineTo(94,46);g.lineTo(85,41);g.lineTo(76,46);g.fill();g.drawImage(embC(H.id,'#1b1330',1),81,27);
+  g.drawImage(crSheet(CR_STATE.kid,CR_STATE.house),crDir*64,0,64,64,18,20,64,64)}
+
+// ---- input ----
+const keys={};addEventListener('keydown',e=>{keys[e.key]=1;if(e.key==='Escape')closeModal();if(PAUSE||!S)return;if(e.key==='i')openBag();if(e.key==='m')openWarp();if(e.key===' '||e.key==='Enter'){e.preventDefault();autoAct()}});addEventListener('keyup',e=>keys[e.key]=0);
+let tapMark=null;
+cv.addEventListener('pointerdown',e=>{if(PAUSE||!S||!M||P.dead)return;const dpr=devicePixelRatio||1,wx=e.clientX*dpr/SC+camX,wy=e.clientY*dpr/SC+camY;tapMark={x:wx,y:wy,t:0};
+  const mo=MONS.find(o=>!o.happy&&Math.abs(o.x-wx)<(o.w||26)/2+8&&wy>o.y-(o.h||22)-8&&wy<o.y+8);if(mo){attackTarget(mo);return}
+  const np=(M.npcs||[]).find(n=>Math.abs(n.x-wx)<16&&wy>n.y-56&&wy<n.y+6);if(np){say(t('n_'+np.npc)+': '+t('s_'+np.npc));msgT=5;P.path=findPath(M,P.x,P.y,np.x,np.y+22);return}
+  const c=(M.crystals||[]).find(c=>!c.awake&&Math.hypot(c.x-wx,c.y-10-wy)<22&&lit(c.x,c.y));if(c){P.act={k:'crystal',o:c};P.target=null;P.path=findPath(M,P.x,P.y,c.x,c.y+14);return}
+  const d=(M.digs||[]).find(d=>!d.done&&Math.hypot(d.x-wx,d.y-wy)<20);if(d){P.act={k:'dig',o:d};P.target=null;P.path=findPath(M,P.x,P.y,d.x,d.y);return}
+  P.target=null;P.act=null;P.path=findPath(M,P.x,P.y,wx,wy)});
+function lit(x,y){return M.kind!=='cave'||Math.hypot(x-P.x,y-P.y)<140}
+function autoAct(){const mo=MONS.filter(o=>!o.happy).sort((a,b)=>Math.hypot(a.x-P.x,a.y-P.y)-Math.hypot(b.x-P.x,b.y-P.y))[0];if(mo&&Math.hypot(mo.x-P.x,mo.y-P.y)<170){attackTarget(mo);return}say(t('noHit'))}
+$('bCmp').onclick=()=>{if(!S||M.kind!=='cave')return;compassT=4;say('🧭 '+t('compass'))};
+$('bBag').onclick=()=>S&&openBag();$('bMap').onclick=()=>S&&openWarp();$('mmw').onclick=()=>S&&openWarp();$('bSet').onclick=()=>S&&openSettings();$('bAtk').onclick=()=>S&&autoAct();$('bPot').onclick=()=>S&&usePotion();
+
+// ===== update =====
+let exitCool=0,blockSaid=null,quizCool=0,last=0,saveT=0,goalT=0,compassT=0;
+function floorStats(){const c=M.crystals||[];return{aw:c.filter(x=>x.awake).length,n:c.length,mon:MONS.filter(o=>!o.happy&&!o.boss).length}}
+function updateGoal(){if(!S||!M)return;let g='';if(S.boss)g=t('goalDone');else if(M.id==='plaza')g=t('goalPlaza');else if(M.id==='mountain')g=t('goalMountain');else{const f=floorStats();
+  if(isKid())g=f.aw<f.n?t('goalKid')+' '+f.aw+'/'+f.n:(M.id==='cave3'?t('floorDone'):t('goalDown'));else g=M.id==='cave3'?t('goalBoss'):(f.mon?t('goalAdult')+' · '+t('goalDown'):t('goalDown'))}$('goal').textContent=g}
+function update(dt){if(!M||!S)return;if(msgT>0){msgT-=dt;if(msgT<=0)$('msg').style.opacity=0}
+  P.cd-=dt;P.hurt=Math.max(0,P.hurt-dt);P.atkAnim=Math.max(0,P.atkAnim-dt);exitCool-=dt;quizCool-=dt;
+  if(!PAUSE&&!P.dead){let mx=0,my=0;if(keys.ArrowLeft||keys.a)mx--;if(keys.ArrowRight||keys.d)mx++;if(keys.ArrowUp||keys.w)my--;if(keys.ArrowDown||keys.s)my++;
+    if(mx||my){P.path=null;P.target=null;P.act=null}
+    else if(P.target){const o=P.target;if(o.happy||!MONS.includes(o))P.target=null;else{const d=Math.hypot(o.x-P.x,o.y-P.y),R=WEP[weapon().type].range;
+      if(d>R){P.retarget=(P.retarget||0)-dt;if(!P.path||P.retarget<=0){P.path=findPath(M,P.x,P.y,o.x,o.y);P.retarget=.35}}else{P.path=null;P.row=rowFor(o.x-P.x,o.y-P.y);if(P.cd<=0)doAttack(o)}}}
+    if(!mx&&!my&&P.path&&P.path.length){const [tx,ty]=P.path[0],dx=tx-P.x,dy=ty-P.y,d=Math.hypot(dx,dy);if(d<3){P.path.shift()}else{mx=dx/d;my=dy/d}}
+    P.moving=!!(mx||my);if(P.moving){const n=Math.hypot(mx,my);mx/=n;my/=n;const sp=(isKid()?78:82)*dt,nx=P.x+mx*sp,ny=P.y+my*sp;if(!blockedAt(M,nx,P.y))P.x=nx;if(!blockedAt(M,P.x,ny))P.y=ny;P.dist+=sp;P.row=rowFor(mx,my)}
+    if(P.act&&(!P.path||!P.path.length)){const o=P.act.o;if(Math.hypot(o.x-P.x,o.y+14-P.y)<30){if(P.act.k==='crystal')openQuiz(o);else if(!o.done)doDig(o)}P.act=null}}
+  // things you walk into
+  if(!PAUSE&&!P.dead){for(const e of M.exits)if(exitCool<=0&&Math.hypot(P.x-e.x,P.y-e.y)<13){exitCool=1.2;if(e.locked){say(t('soon'));const dx=M.w*T/2-e.x,dy=M.h*T/2-e.y,d=Math.hypot(dx,dy);P.x+=dx/d*18;P.y+=dy/d*18;P.path=null}else useExit(e);break}
+    for(const s of M.stones){if(Math.hypot(P.x-s.x,P.y-s.y-10)<70){if(!S.stones.includes(s.id)){S.stones.push(s.id);s.awake=true;s.t=performance.now()/1000;say(t('stoneOn'));save()}S.lastStone=s.id}}
+    for(const b of M.blocks){const d=Math.hypot(P.x-b.x,P.y-b.y);if(d<60&&blockSaid!==b){blockSaid=b;say(t(b.msg))}else if(d>110&&blockSaid===b)blockSaid=null}
+    if(isKid())for(const c of M.crystals||[])if(!c.awake&&quizCool<=0&&Math.hypot(c.x-P.x,c.y+12-P.y)<18){quizCool=2;P.path=null;openQuiz(c)}
+    for(const n of M.npcs||[]){const d=Math.hypot(P.x-n.x,P.y-n.y);if(d<80)n.sx=rowFor(P.x-n.x,P.y-n.y)*64;else n.sx=n.face*64}
+    goalT-=dt;if(goalT<=0){goalT=.5;updateGoal()}
+    for(const d of M.digs||[])if(!d.done&&Math.hypot(d.x-P.x,d.y-P.y)<14)doDig(d);
+    for(const d of DROPS)if(!d.taken&&Math.hypot(d.x-P.x,d.y-P.y)<18)pickUp(d);DROPS=DROPS.filter(d=>!d.taken)}
+  if(M.seen){const tx=Math.floor(P.x/T),ty=Math.floor(P.y/T);for(let y=-4;y<=4;y++)for(let x=-4;x<=4;x++)if(x*x+y*y<=18)M.seen.add(key(tx+x,ty+y))}
+  if(!PAUSE)updateMonsters(dt);
+  for(const s of SHOTS)updShot(s,dt);SHOTS=SHOTS.filter(s=>!s.done);
+  for(const f of FX){f.t+=dt;if(f.vx!==undefined){f.x+=f.vx*dt;f.y+=f.vy*dt;f.vy+=(f.k==='dirt'?160:f.k==='dust'?-10:40)*dt}}FX=FX.filter(f=>f.t<f.life);for(const x of TXT)x.t+=dt;TXT=TXT.filter(x=>x.t<1.1);
+  saveT+=dt;if(saveT>15){saveT=0;save()}}
+function moveMon(mo,tx,ty,sp,dt){const dx=tx-mo.x,dy=ty-mo.y,d=Math.hypot(dx,dy);if(d<2)return true;const nx=mo.x+dx/d*sp*dt,ny=mo.y+dy/d*sp*dt;if(mo.fly||!blockedAt(M,nx,mo.y))mo.x=nx;if(mo.fly||!blockedAt(M,mo.x,ny))mo.y=ny;if(mo.fly&&blockedAt(M,mo.x,mo.y)){mo.x-=dx/d*sp*dt;mo.y-=dy/d*sp*dt;return true}return false}
+function updateMonsters(dt){const fighter=!isKid()&&!P.dead;
+  for(const mo of MONS){mo.t+=dt;mo.flash=Math.max(0,mo.flash-dt);mo.cd-=dt;if(mo.happy){mo.gone-=dt;mo.y-=8*dt;continue}
+    if(Math.random()<dt*2.5)FX.push({k:'dust',x:mo.x+(rnd()-.5)*(mo.w||24),y:mo.y-(mo.h||20)*rnd(),vx:(rnd()-.5)*8,vy:-6,t:0,life:1.1});
+    if(mo.boss){updBoss(mo,dt,fighter);continue}
+    const d=Math.hypot(P.x-mo.x,P.y-mo.y);
+    if(fighter&&mo.st!=='chase'&&d<95)mo.st='chase';if(mo.st==='chase'&&(!fighter||d>230))mo.st='wander';
+    if(mo.st==='chase'){if(d>17)moveMon(mo,P.x,P.y,mo.spd,dt);else if(mo.cd<=0){mo.cd=1.25;hurtPlayer(mo.atk);FX.push({k:'bonk',x:P.x,y:P.y-30,t:0,life:.3})}}
+    else{if(moveMon(mo,mo.tx,mo.ty,mo.spd*.45,dt)||Math.random()<dt*.3){const a=rnd()*6.28,r=20+rnd()*60;mo.tx=mo.hx+Math.cos(a)*r;mo.ty=mo.hy+Math.sin(a)*r}}}
+  MONS=MONS.filter(o=>!(o.happy&&o.gone<=0))}
+function inRoom(x,y,o){return o&&x>o.x*T&&x<(o.x+o.w)*T&&y>o.y*T&&y<(o.y+o.h)*T}
+function updBoss(b,dt,fighter){const active=fighter&&inRoom(P.x,P.y,M.bossRoom);b.active=active;if(!active){moveMon(b,b.hx,b.hy,b.spd,dt);return}
+  const d=Math.hypot(P.x-b.x,P.y-b.y);if(d>44)moveMon(b,P.x,P.y,b.spd,dt);b.nextAtk-=dt;
+  if(b.nextAtk<=0){b.nextAtk=2.3;if(Math.random()<.55){FX.push({k:'tele',x:P.x,y:P.y,r:44,t:0,life:.95,dmg:Math.round(b.atk*1.6)})}else{const a=Math.atan2(P.y-b.y,P.x-b.x);SHOTS.push({k:'rock',from:'b',x:b.x,y:b.y-40,vx:Math.cos(a)*130,vy:Math.sin(a)*130,dmg:b.atk,life:2.2})}}
+  if(!b.summoned&&b.hp<b.max/2){b.summoned=1;for(let i=0;i<2;i++){const m2=mkMon('slime',b.x+(i?-40:40),b.y+20,2.3);m2.st='chase';MONS.push(m2)}say('🪨 '+t('boss')+'!')}}
+function updShot(s,dt){if(s.from==='p'){const o=s.tx;if(!o||o.happy){s.done=1;return}const dx=o.x-s.x,dy=o.y-14-s.y,d=Math.hypot(dx,dy);if(d<8){s.done=1;monHit(o,s.dmg);if(s.k==='staff'){for(const m2 of MONS)if(m2!==o&&!m2.happy&&Math.hypot(m2.x-o.x,m2.y-o.y)<WEP.staff.splash)monHit(m2,Math.round(s.dmg*.5));FX.push({k:'boom',x:o.x,y:o.y-12,t:0,life:.35})}return}s.x+=dx/d*s.sp*dt;s.y+=dy/d*s.sp*dt;s.a=Math.atan2(dy,dx)}
+  else{s.life-=dt;s.x+=s.vx*dt;s.y+=s.vy*dt;if(s.life<=0||blockedAt(M,s.x,s.y+40))s.done=1;else if(Math.hypot(P.x-s.x,P.y-30-s.y)<14){s.done=1;hurtPlayer(s.dmg)}}}
+
+// ===== render =====
+let dark=null,darkG=null;
+function render(tm){if(!M||!S)return;
+  const pad=M.kind==='cave'?90:0;camX=Math.round(Math.max(Math.min(P.x-VW/2,M.w*T-VW+pad),-pad));camY=Math.round(Math.max(Math.min(P.y-VH/2-10,M.h*T-VH+pad),-pad));if(M.w*T<VW)camX=Math.round((M.w*T-VW)/2);if(M.h*T<VH)camY=Math.round((M.h*T-VH)/2);
+  if(M.shadowSC!==SC){bakeShadows(M);PS.shS=blurSheet(PS.silS);PS.shW=blurSheet(PS.silW);PS.sc=SC}
+  ctx.setTransform(1,0,0,1,0,0);ctx.fillStyle=M.kind==='cave'?'#120c1c':'#16301f';ctx.fillRect(0,0,cv.width,cv.height);ctx.drawImage(M.shadow,-camX*SC,-camY*SC);ctx.setTransform(SC,0,0,SC,0,0);ctx.imageSmoothingEnabled=false;
+  // water shimmer
+  if(M.WATER.size){let s=3;const r=()=>(s=(s*16807)%2147483647)/2147483647;M.WATER.forEach(k=>{const [x,y]=k.split(',').map(Number);if(x*T>camX+VW||x*T+T<camX||y*T>camY+VH||y*T+T<camY)return;for(let i=0;i<2;i++){const px=x*T+4+Math.floor(r()*24),py=y*T+((Math.floor(r()*32)+tm*14)%32);if(Math.sin(tm*3+px)>.2){ctx.fillStyle='rgba(235,255,255,.75)';ctx.fillRect(px-camX,Math.round(py-camY),2,1)}}})}
+  for(const f of M.anims)f(tm);
+  for(const d of M.decks){const im=IMG[d.img];if(im)ctx.drawImage(im,Math.round(d.x-64-camX),Math.round(d.y-d.oy-camY))}
+  for(const e of M.exits){const near=Math.hypot(P.x-e.x,P.y-e.y)<90;if(e.locked){if(near)ring(e.x-camX,e.y-camY,tm,.3,'255,150,150')}else ring(e.x-camX,e.y-camY,tm,near?1:.5)}
+  for(const s of M.stones){const aw=S.stones.includes(s.id);ring(s.x-camX,s.y-camY+2,tm*(aw?1:.3),aw?.9:.05)}
+  for(const d of M.digs||[])if(!d.done){for(let i=0;i<3;i++){const a=tm*2+i*2.1,v=(Math.sin(tm*4+i)+1)/2;ctx.fillStyle=`rgba(255,240,170,${.4+.6*v})`;const x=Math.round(d.x-camX+Math.cos(a)*6),y=Math.round(d.y-camY-2+Math.sin(a)*3);ctx.fillRect(x,y,1,1);if(v>.8){ctx.fillRect(x-1,y,3,1);ctx.fillRect(x,y-1,1,3)}}ctx.fillStyle='rgba(90,60,30,.35)';ctx.fillRect(Math.round(d.x-camX-5),Math.round(d.y-camY),10,2)}
+  for(const f of FX)if(f.k==='tele'){const p=f.t/f.life;ctx.save();ctx.globalAlpha=.35+.4*p;ctx.strokeStyle='#ff6b8a';ctx.fillStyle=`rgba(255,90,120,${.12+.25*p})`;ctx.beginPath();ctx.ellipse(f.x-camX,f.y-camY,f.r,f.r*.45,0,0,7);ctx.fill();ctx.stroke();ctx.restore();if(f.t+1/60>=f.life&&!f.hit){f.hit=1;if(Math.hypot((P.x-f.x),(P.y-f.y)/.45)<f.r)hurtPlayer(f.dmg);for(let i=0;i<10;i++)FX.push({k:'dirt',x:f.x,y:f.y,vx:(rnd()-.5)*90,vy:-50-rnd()*40,t:0,life:.6})}}
+  // fade tall things when the player walks behind them
+  for(const o of M.objs){let tg=1;if(o.tall&&P.y<o.y-2){const X=o.x-o.sw/2,Y=o.y-(o.cb||o.sh);if(P.x+12>X+8&&P.x-12<X+o.sw-8&&P.y>Y+6&&P.y-50<o.y)tg=.42}o.a+=(tg-o.a)*.2}
+  // player shadow
+  const lf=P.moving?Math.floor(P.dist/10)%6:0,sx=P.moving?lf*64:P.row*64,sy=P.moving?P.row*64:0;
+  {const sh=P.moving?PS.shW:PS.shS,X=Math.round(P.x-32-camX),Y=Math.round(P.y-camY);ctx.save();ctx.imageSmoothingEnabled=true;ctx.globalCompositeOperation='multiply';ctx.globalAlpha=.55;softAO(ctx,P.x-camX,P.y-camY,24,1);
+    if(sh){ctx.globalAlpha=M.kind==='cave'?.3:.4;ctx.setTransform(1,0,0,.5,SC*(X+.55*62),SC*(Y-.5*62));ctx.transform(1,0,-.55,1,0,0);ctx.drawImage(sh,sx*SC,sy*SC,64*SC,62*SC,0,0,64*SC,62*SC)}ctx.restore()}
+  // y-sorted world
+  const list=[];for(const o of M.objs)list.push([o.y,0,o]);for(const m of MONS)list.push([m.y,1,m]);for(const c of M.crystals||[])list.push([c.y,2,c]);for(const d of DROPS)list.push([d.y-2,3,d]);list.push([P.y,4,P]);list.sort((a,b)=>a[0]-b[0]);
+  for(const [,k,o] of list){if(k===0)drawObj(o,tm);else if(k===1)drawMon(o,tm);else if(k===2)drawCrystal(o,tm);else if(k===3)drawDrop(o,tm);else drawPlayer(sx,sy)}
+  for(const s of SHOTS){if(s.k==='bow'){ctx.save();ctx.translate(s.x-camX,s.y-camY);ctx.rotate(s.a||0);ctx.fillStyle='#fff6d0';ctx.fillRect(-6,-.5,9,1);ctx.fillStyle='#ffe36b';ctx.fillRect(3,-1,2,2);ctx.restore()}else if(s.k==='staff'){ctx.save();ctx.globalCompositeOperation='lighter';glow(s.x-camX,s.y-camY,9,'200,160,255',.9);ctx.restore();ctx.fillStyle='#fff';ctx.fillRect(Math.round(s.x-camX)-1,Math.round(s.y-camY)-1,2,2)}else{ctx.fillStyle='#6d6488';ctx.fillRect(Math.round(s.x-camX)-4,Math.round(s.y-camY)-4,8,8);ctx.fillStyle='#8f86a8';ctx.fillRect(Math.round(s.x-camX)-3,Math.round(s.y-camY)-4,5,4)}}
+  for(const f of FX){const p=f.t/f.life,x=Math.round(f.x-camX),y=Math.round(f.y-camY);
+    if(f.k==='slash'){ctx.save();ctx.globalCompositeOperation='lighter';ctx.strokeStyle=`rgba(255,245,200,${1-p})`;ctx.lineWidth=2;ctx.beginPath();ctx.arc(x,y,10+p*6,f.a-1.1,f.a+1.1);ctx.stroke();ctx.restore()}
+    else if(f.k==='boom'){ctx.save();ctx.globalCompositeOperation='lighter';glow(x,y,10+p*18,'200,160,255',.8*(1-p));ctx.restore()}
+    else if(f.k==='bonk'){ctx.fillStyle=`rgba(255,120,120,${1-p})`;ctx.fillRect(x-1,y-4,2,8);ctx.fillRect(x-4,y-1,8,2)}
+    else if(f.k==='dust'){ctx.fillStyle=`rgba(150,135,180,${.55*(1-p)})`;ctx.fillRect(x,y,2+Math.round(p*2),2+Math.round(p*2))}
+    else if(f.k==='dirt'){ctx.fillStyle=`rgba(120,80,45,${1-p})`;ctx.fillRect(x,y,2,2)}
+    else if(f.k==='spark'||f.k==='star'){ctx.fillStyle=f.k==='spark'?`rgba(170,245,255,${1-p})`:`rgba(255,236,150,${1-p})`;ctx.fillRect(x,y,1,1);if(p<.5){ctx.fillRect(x-1,y,3,1);ctx.fillRect(x,y-1,1,3)}}}
+  // light: dim town until crystals wake it; caves are dark except near light
+  const k=1-LIGHT;if(M.kind!=='cave'&&k>.01){ctx.globalCompositeOperation='multiply';ctx.fillStyle=`rgb(${Math.round(255-k*110)},${Math.round(255-k*85)},${Math.round(255-k*55)})`;ctx.fillRect(0,0,VW,VH);ctx.globalCompositeOperation='source-over'}
+  if(M.kind==='cave')drawDark(tm);
+  ctx.globalCompositeOperation='lighter';
+  for(const o of M.objs)if(o.lamp)glow(o.x+22-camX,o.y-44-camY,16,'255,200,120',.22+.4*k);
+  for(const [x,y] of M.glows)glow(x-camX,y-camY,M.kind==='cave'?26:16,'255,190,110',M.kind==='cave'?.35:.22+.4*k);
+  if(M.fountain)glow(M.fountain.x-camX,M.fountain.y-104-camY,26,'120,230,255',.25+.2*LIGHT+.08*Math.sin(tm*2));
+  for(const c of M.crystals||[])if(c.awake)glow(c.x-camX,c.y-14-camY,22,'95,224,255',.35+.1*Math.sin(tm*3+c.x));
+  for(const s of M.stones)if(S.stones.includes(s.id)){glow(s.x-camX,s.y-50-camY,18,'140,235,255',.3);ctx.fillStyle='rgba(140,235,255,.18)';ctx.fillRect(Math.round(s.x-camX)-4,Math.round(s.y-camY)-110,8,70)}
+  ctx.globalCompositeOperation='source-over';
+  // labels
+  for(const e of M.exits)if(Math.hypot(P.x-e.x,P.y-e.y)<90)label(e.x-camX,e.y-camY-26,e.locked?t('soon').split(' (')[0]:t(e.label==='down'?'down':e.label==='up'?'up':e.label));
+  for(const m of MONS)if(!m.happy&&m.hp<m.max){const w=m.boss?40:18,x=Math.round(m.x-camX-w/2),y=Math.round(m.y-camY-(m.h||22)-6);ctx.fillStyle='#120b22';ctx.fillRect(x-1,y-1,w+2,4);ctx.fillStyle='#b9a6ff';ctx.fillRect(x,y,Math.round(w*m.hp/m.max),2)}
+  label(P.x-camX,P.y-camY-66,S.name,HOUSES[S.house].col);
+  for(const x of TXT){ctx.save();ctx.font='bold 8px system-ui,sans-serif';ctx.textAlign='center';ctx.globalAlpha=1-x.t/1.1;ctx.fillStyle='#1b1330';ctx.fillText(x.s,x.x-camX+1,x.y-camY-x.t*18+1);ctx.fillStyle=x.c;ctx.fillText(x.s,x.x-camX,x.y-camY-x.t*18);ctx.restore()}
+  if(M.boss&&M.boss.active&&!M.boss.happy){const w=Math.min(220,VW-120),x=Math.round(VW/2-w/2);label(VW/2,26,t('boss'),'#ff6b8a');ctx.fillStyle='#120b22';ctx.fillRect(x-1,30,w+2,6);ctx.fillStyle='#ff6b8a';ctx.fillRect(x,31,Math.round(w*M.boss.hp/M.boss.max),4)}
+  if(tapMark){tapMark.t+=1/60;const p=tapMark.t/.45;if(p<1){ctx.strokeStyle=`rgba(255,246,210,${1-p})`;ctx.lineWidth=1;ctx.beginPath();ctx.ellipse(tapMark.x-camX,tapMark.y-camY,4+p*8,2+p*4,0,0,7);ctx.stroke()}else tapMark=null}
+  if(P.hurt>0){ctx.fillStyle=`rgba(255,60,60,${P.hurt*.5})`;ctx.fillRect(0,0,VW,VH)}
+  vig.style.opacity=M.kind==='cave'?1.3:(1.25-.35*LIGHT).toFixed(2);drawMinimap(tm)}
+function drawPlayer(sx,sy){const im=P.moving?PS.walk:PS.stand;const a=DIR_ANG[P.row],l=P.atkAnim>0?Math.round(Math.sin(P.atkAnim/.25*Math.PI)*3):0;if(im)ctx.drawImage(im,sx,sy,64,64,Math.round(P.x-32-camX+Math.cos(a)*l),Math.round(P.y-62-camY+Math.sin(a)*l),64,64)
+  if(compassT>0&&M.crystals){const c=M.crystals.filter(x=>!x.awake).sort((a,b)=>Math.hypot(a.x-P.x,a.y-P.y)-Math.hypot(b.x-P.x,b.y-P.y))[0];if(c){const an=Math.atan2(c.y-P.y,c.x-P.x),r=28,x=P.x-camX+Math.cos(an)*r,y=P.y-26-camY+Math.sin(an)*r*.7;ctx.save();ctx.translate(x,y);ctx.rotate(an);ctx.fillStyle=`rgba(140,240,255,${Math.min(1,compassT)})`;ctx.beginPath();ctx.moveTo(8,0);ctx.lineTo(-4,-5);ctx.lineTo(-1,0);ctx.lineTo(-4,5);ctx.fill();ctx.restore()}}}
+function drawMon(m,tm){const art=MON_ART[m.kind+(m.happy?1:0)];if(!art)return;const f=Math.floor(m.t*(m.fly?8:4))%2,im=art[f],w=im.width,h=im.height,X=Math.round(m.x-w/2-camX),Y=Math.round(m.y-h-camY-(m.fly?8+Math.sin(m.t*5)*2:0));
+  ctx.save();ctx.imageSmoothingEnabled=true;ctx.globalCompositeOperation='multiply';softAO(ctx,m.x-camX,m.y-camY,w*.8,.8);ctx.restore();
+  ctx.globalAlpha=m.happy?Math.max(0,m.gone/1.6):1;ctx.drawImage(im,X,Y);if(m.flash>0){ctx.globalCompositeOperation='lighter';ctx.globalAlpha=.6;ctx.drawImage(im,X,Y);ctx.globalCompositeOperation='source-over'}ctx.globalAlpha=1;
+  if(m.happy&&m.gone>1.2){ctx.fillStyle='#ff8fbf';ctx.fillRect(Math.round(m.x-camX)-1,Y-6,3,2);ctx.fillRect(Math.round(m.x-camX)-2,Y-7,2,1);ctx.fillRect(Math.round(m.x-camX)+1,Y-7,2,1)}}
+function drawCrystal(c,tm){const r=CR.crystal,X=Math.round(c.x-16-camX),Y=Math.round(c.y-30-camY);if(!IMG.cprops){ctx.fillStyle=c.awake?'#5fe0ff':'#6a7f8a';ctx.fillRect(X+12,Y+10,8,16);return}
+  if(c.awake){ctx.drawImage(IMG.cprops,r[0],r[1],r[2],r[3],X,Y-Math.round(Math.sin(tm*2+c.x)*1.5),32,32)}
+  else{ctx.globalAlpha=.55;ctx.drawImage(IMG.cprops,r[0],r[1],r[2],r[3],X,Y,32,32);ctx.globalAlpha=1;ctx.globalCompositeOperation='multiply';ctx.fillStyle='rgba(120,110,140,.85)';ctx.fillRect(X+8,Y+6,16,24);ctx.globalCompositeOperation='source-over';
+    if(Math.sin(tm*2.3+c.x)>.85){ctx.fillStyle='rgba(200,250,255,.9)';ctx.fillRect(X+17,Y+10,1,3);ctx.fillRect(X+16,Y+11,3,1)}}}
+function drawDrop(d,tm){const x=Math.round(d.x-camX),y=Math.round(d.y-camY-3-Math.abs(Math.sin(tm*3+d.x))*2);
+  if(d.k==='coin'){ctx.fillStyle='#7a5a10';ctx.fillRect(x-3,y-3,6,6);ctx.fillStyle='#ffd23f';ctx.fillRect(x-2,y-2,4,4);ctx.fillStyle='#fff3b0';ctx.fillRect(x-1,y-2,1,1)}
+  else if(d.k==='potion'){ctx.fillStyle='#5a2a44';ctx.fillRect(x-3,y-5,6,8);ctx.fillStyle='#ff8fbf';ctx.fillRect(x-2,y-2,4,4);ctx.fillStyle='#ddd';ctx.fillRect(x-1,y-6,2,2)}
+  else if(d.k==='gem'){ctx.fillStyle='#2a3a6a';ctx.fillRect(x-3,y-3,6,6);ctx.fillStyle='#9fd8ff';ctx.fillRect(x-2,y-2,4,3);ctx.fillStyle='#fff';ctx.fillRect(x-1,y-2,1,1)}
+  else{ctx.save();ctx.globalCompositeOperation='lighter';glow(x,y-4,10,d.item.rar>=2?'255,210,90':d.item.rar?'120,170,255':'255,255,255',.5);ctx.restore();ctx.drawImage(wepIcon(d.item,1),x-6,y-10)}}
+function drawDark(tm){if(!dark||dark.width!==VW||dark.height!==VH){dark=document.createElement('canvas');dark.width=VW;dark.height=VH;darkG=dark.getContext('2d')}const g=darkG;g.globalCompositeOperation='source-over';g.clearRect(0,0,VW,VH);g.fillStyle=S.boss?'rgba(8,5,18,.5)':'rgba(8,5,18,.84)';g.fillRect(0,0,VW,VH);g.globalCompositeOperation='destination-out';
+  const hole=(x,y,r,a=1)=>{const gr=g.createRadialGradient(x,y,0,x,y,r);gr.addColorStop(0,`rgba(0,0,0,${a})`);gr.addColorStop(.55,`rgba(0,0,0,${a*.8})`);gr.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=gr;g.fillRect(x-r,y-r,r*2,r*2)};
+  hole(P.x-camX,P.y-26-camY,132+Math.sin(tm*6)*2);for(const c of M.crystals)if(c.awake)hole(c.x-camX,c.y-14-camY,70,.9);for(const s of M.stones)hole(s.x-camX,s.y-30-camY,S.stones.includes(s.id)?70:34,.8);for(const [x,y] of M.glows)hole(x-camX,y-camY,50,.8);for(const e of M.exits)hole(e.x-camX,e.y-camY,34,.7);
+  ctx.drawImage(dark,0,0)}
+
+// ===== start =====
+function loop(now){requestAnimationFrame(loop);const tm=now/1000,dt=Math.min(.05,(now-last)/1000||0);last=now;compassT=Math.max(0,compassT-dt);update(dt);render(tm)}
+function startGame(){LANG=S.lang||LANG;SND=S.snd!==false;setTimeout(()=>{say(t('tipStart'));msgT=6},2300);buildPlayerSheets();['hud','topR','act'].forEach(i=>$(i).classList.remove('hide'));const id=MAPS[S.pos?.map]?S.pos.map:'plaza';goMap(id);if(S.pos&&S.pos.map===id&&!blockedAt(M,S.pos.x,S.pos.y)){P.x=S.pos.x;P.y=S.pos.y}
+  showCard(t('welcome')+' '+S.name,t(M.nameKey));hud()}
+async function boot(){resize();await loadImages();if(IMG.cave)IMG.caveCalm=calmCyan(IMG.cave);monArt();loadQuestions();S=Store.load();if(S&&S.v===1){LANG=S.lang||'th';startGame()}else{S=null;openCreator()}requestAnimationFrame(loop)}
+if('serviceWorker' in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('sw.js').catch(()=>{});
+window.GAME={get M(){return M},P,get S(){return S},get MONS(){return MONS},goMap,findPath,getMap,openQuiz,T};
+boot();
+
+</script></body></html>
