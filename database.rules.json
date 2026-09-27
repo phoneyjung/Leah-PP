@@ -11,9 +11,12 @@
         },
         "emotes": {
           "$id": {
-            ".write": "auth != null && !data.exists()",
-            ".validate": "newData.child('u').val() === auth.uid && newData.child('e').isString() && newData.child('e').val().length <= 4"
-          }
+            ".write": "auth != null && (!data.exists() || (!newData.exists() && data.child('t').val() < now - 30000))",
+            ".validate": "!newData.exists() || (newData.child('u').val() === auth.uid && newData.child('e').isString() && newData.child('e').val().length <= 4)"
+          },
+          ".indexOn": [
+            "t"
+          ]
         },
         "points": {
           "$house": {
@@ -29,22 +32,31 @@
             "hits": {
               ".write": "auth != null && !newData.exists()",
               "$id": {
-                ".write": "auth != null && !data.exists()",
-                ".validate": "newData.child('u').val() === auth.uid && newData.child('d').isNumber() && newData.child('d').val() <= 500"
-              }
+                ".write": "auth != null && (!data.exists() || (!newData.exists() && data.child('t').val() < now - 30000))",
+                ".validate": "!newData.exists() || (newData.child('u').val() === auth.uid && newData.child('d').isNumber() && newData.child('d').val() <= 500)"
+              },
+              ".indexOn": [
+                "t"
+              ]
             },
             "dmg": {
               ".write": "auth != null && !newData.exists()",
               "$id": {
-                ".write": "auth != null && !data.exists()",
-                ".validate": "newData.child('n').isNumber() && newData.child('n').val() <= 200"
-              }
+                ".write": "auth != null && (!data.exists() || (!newData.exists() && data.child('t').val() < now - 30000))",
+                ".validate": "!newData.exists() || (newData.child('n').isNumber() && newData.child('n').val() <= 200)"
+              },
+              ".indexOn": [
+                "t"
+              ]
             },
             "fx": {
               ".write": "auth != null && !newData.exists()",
               "$id": {
-                ".write": "auth != null && !data.exists()"
-              }
+                ".write": "auth != null && (!data.exists() || (!newData.exists() && data.child('t').val() < now - 30000))"
+              },
+              ".indexOn": [
+                "t"
+              ]
             }
           }
         },
@@ -57,9 +69,12 @@
         "knock": {
           "$uid": {
             "$id": {
-              ".write": "auth != null && !data.exists()",
-              ".validate": "newData.child('n').isString() && newData.child('n').val().length <= 12"
-            }
+              ".write": "auth != null && (!data.exists() || (!newData.exists() && auth.uid === $uid))",
+              ".validate": "!newData.exists() || (newData.child('n').isString() && newData.child('n').val().length <= 12)"
+            },
+            ".indexOn": [
+              "t"
+            ]
           }
         }
       }
