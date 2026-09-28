@@ -113,7 +113,7 @@ const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
   stone:'obj-lightstone.png',stonePlaza:'obj-lightstone-plaza.png',caveDoor:'obj-cave-crystal.png',rock:'obj-rockfall.png',
-  bridgeRope:'obj-bridge-rope.png',bld:'buildings-village.png',house:'tiles-house.png',furn:'furniture.png',pier:'obj-pier.png',npc_leah:'leah-idle.png',npc_nuan:'nuan-idle.png',npc_mom:'mom-idle.png',npc_dad:'dad-idle.png',npc_peb:'peb-idle.png',bridgeStone:'obj-bridge-stone.png',fountBig:'obj-fountain-big.png',fountOld:'obj-fountain-old.png',t_forest:'tiles-forest.png',t_desert:'tiles-desert.png',t_ulake:'tiles-ulake.png',t_sky:'tiles-sky.png',bldAcademy:'bld-academy.png',bldLanna:'bld-lanna-house.png',bldLanna2:'bld-lanna-house2.png',bldStall:'bld-market-stall.png',objShrine:'obj-lantern-shrine.png',objBridgeArch:'obj-bridge-arch.png',objStairs:'obj-stairs-stone.png',objPier:'obj-pier-teak.png'};
+  bridgeRope:'obj-bridge-rope.png',bld:'buildings-village.png',house:'tiles-house.png',furn:'furniture.png',pier:'obj-pier.png',npc_leah:'leah-idle.png',npc_nuan:'nuan-idle.png',npc_mom:'mom-idle.png',npc_dad:'dad-idle.png',npc_peb:'peb-idle.png',bridgeStone:'obj-bridge-stone.png',fountBig:'obj-fountain-big.png',fountOld:'obj-fountain-old.png',t_forest:'tiles-forest.png',t_desert:'tiles-desert.png',t_ulake:'tiles-ulake.png',t_sky:'tiles-sky.png',bldAcademy:'bld-academy.png',bldLanna:'bld-lanna-house.png',bldLanna2:'bld-lanna-house2.png',bldStall:'bld-market-stall.png',objShrine:'obj-lantern-shrine.png',objBridgeArch:'obj-bridge-arch.png',objStairs:'obj-stairs-stone.png',objPier:'obj-pier-teak.png',bgPlaza:'map-plaza.jpg'};
 const KIDS=[['kid-braids','ผมเปีย','Braids'],['kid-ponytail','หางม้า','Ponytail'],['kid-bob','ผมบ็อบ','Bob'],['kid-curly2','ผมหยิก','Curly',1],['kid-blond','ผมยุ่ง','Messy'],['kid-spiky','ผมตั้ง','Spiky']];
 KIDS.forEach(([k])=>{FILES['i_'+k]=k+'-idle.png';FILES['s_'+k]=k+'-stand.png';FILES['w_'+k]=k+'-walk.png'});
 const EMBED=window.EMBED_ASSETS||null;  // the single-file preview build puts every image here
@@ -2396,5 +2396,39 @@ const rect=(x0,y0,x1,y1)=>{const a=[];for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;
 {const _bh=MAPS.home;MAPS.home=function(){const m=_bh();try{const o=m.objs.find(o=>o.img==='bld'&&o.sx===1);if(o&&IMG.bldLanna2)Object.assign(o,{img:'bldLanna2',sx:0,sy:0})}catch(e){}return m}}
 {const _bk=MAPS.market;MAPS.market=function(){const m=_bk();try{if(IMG.bldStall){clearTiles(m,(x,y)=>((x>=15&&x<=19)||(x>=25&&x<=29))&&y>=14&&y<=15);addBig(m,'bldStall',17*T+16,15*T+28,128,128,rect(16,14,18,15));addBig(m,'bldStall',27*T+16,15*T+28,128,128,rect(26,14,28,15))}}catch(e){}return m}}
 for(const id of ['lake','beach']){const _b=MAPS[id];if(!_b)continue;MAPS[id]=function(){const m=_b();try{if(IMG.objPier)m.decks.forEach(d=>{if(d.img==='pier')d.img='objPier'})}catch(e){}return m}}
+
+// ================= hand-painted maps (Trickster style): one painting per fixed map + invisible collision + see-through behind tall things =================
+// Plaza pilot (map-plaza.jpg, 1152x768 = 36x24 tiles). If the painting is missing, the tile-built plaza is used.
+const PAINTED={plaza:{img:'bgPlaza',road:11,
+  solid:[[3,7,6,8],[3,14,6,15],[23,7,25,8],[29,7,32,8],[13,8,14,8],[15,7,16,7],[20,7,21,7],[16,10,19,12],[22,14,22,14],
+         [11,6,11,6],[14,4,14,4],[21,4,21,4],[24,5,24,5],[8,14,8,14],[11,13,11,13],[25,15,25,15],[33,13,33,13],[33,16,33,16],[28,15,28,15],[6,19,6,19],[12,21,12,21],[24,21,24,21],[32,21,32,21]],
+  // tall things the player can walk behind: [x0,y0,x1,y1] in tiles, y1 = their base line
+  occ:[[2.6,4,7.4,8.9],[2.6,11.4,7.4,15.8],[21.8,4.6,26.2,8.9],[28.4,5,32.8,8.9],[12.6,6.6,15.4,8.8],[15.6,9,20.4,12.7],
+       [10.2,4.6,12.4,6.9],[13.2,3,15,4.9],[20.2,2.4,22.2,4.9],[23.2,3.6,25.4,5.9],[7.2,12.6,9.4,14.9],[10.2,11.4,12.4,13.9],[23.6,12.4,26.8,15.9],[32.2,11.6,34,13.9],[32,14.6,34.2,16.9],[5,17.4,7.4,19.9],[11,19.6,13.4,21.9],[23,19.4,25.4,21.9],[31,19.6,33.4,21.9]],
+  stone:[24,9],board:[14,8],fountain:[18,12]}};
+function paintMap(m,cfg){const im=IMG[cfg.img];if(!im)return false;
+  // collision from the painting: water by colour, terrace wall across the top (stairs open), plus buildings, trees and props
+  const c=document.createElement('canvas');c.width=m.w*T;c.height=m.h*T;const g=c.getContext('2d');g.drawImage(im,0,0,c.width,c.height);const d=g.getImageData(0,0,c.width,c.height).data;
+  const px=(x,y)=>{const i=(y*c.width+x)*4;return[d[i],d[i+1],d[i+2]]};m.SOLID=new Set();m.WATER=new Set();m.CLIFF=new Set();m.PATH=new Set();m.COBBLE=new Set();
+  for(let ty=0;ty<m.h;ty++)for(let tx=0;tx<m.w;tx++){let blue=0;for(const [ox,oy] of [[8,8],[16,16],[24,24],[24,8],[8,24]]){const [r,gg,b]=px(tx*T+ox,ty*T+oy);if(b>r+35&&b>gg+15&&b>90)blue++}if(blue>=3){m.WATER.add(key(tx,ty));m.SOLID.add(key(tx,ty))}}
+  for(let y=0;y<=3;y++)for(let x=0;x<m.w;x++)if(!(x>=17&&x<=18))m.SOLID.add(key(x,y));
+  for(const [x0,y0,x1,y1] of cfg.solid)for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++)m.SOLID.add(key(x,y));
+  // the bridge on the west road is walkable
+  for(let x=0;x<m.w;x++)for(const y of [cfg.road-1,cfg.road])if(m.WATER.has(key(x,y))){m.SOLID.delete(key(x,y))}
+  m.objs=m.objs.filter(o=>o.npc);m.decks=[];m.painted=cfg.img;m.occ=cfg.occ;
+  for(const n of m.npcs||[]){m.SOLID.add(key(Math.floor(n.x/T),Math.floor((n.y-2)/T)))}
+  const st=m.stones[0];if(st){st.x=cfg.stone[0]*T;st.y=cfg.stone[1]*T+20;if(st.obj){st.obj.x=st.x;st.obj.y=st.y}}
+  if(m.board){m.board.x=cfg.board[0]*T;m.board.y=cfg.board[1]*T+28}if(m.fountain){m.fountain.x=cfg.fountain[0]*T;m.fountain.y=cfg.fountain[1]*T}
+  for(const e of m.exits){if(e.id==='w'||e.id==='e')e.y=cfg.road*T}
+  return true}
+{const _bp2=MAPS.plaza;MAPS.plaza=function(){const m=_bp2();try{paintMap(m,PAINTED.plaza)}catch(e){console.warn('paint',e)}return m}}
+{const _bg=buildGround;buildGround=function(m){if(m&&m.painted&&IMG[m.painted]){const c=document.createElement('canvas');c.width=m.w*T;c.height=m.h*T;const g=c.getContext('2d');g.drawImage(IMG[m.painted],0,0,c.width,c.height);m.ground=c;return}return _bg.apply(this,arguments)}}
+// see-through: people and pets behind a tall painted thing are drawn half transparent
+function behindOcc(x,y){if(!M||!M.occ)return false;return M.occ.some(r=>x>r[0]*T&&x<r[2]*T&&y<r[3]*T&&y>r[1]*T)}
+{const _dp=drawPlayer;drawPlayer=function(){if(behindOcc(P.x,P.y)){ctx.save();ctx.globalAlpha=.5;try{return _dp.apply(this,arguments)}finally{ctx.restore()}}return _dp.apply(this,arguments)}}
+{const _dpb=drawPeb;drawPeb=function(){if(behindOcc(PEB.x,PEB.y)){ctx.save();ctx.globalAlpha=.5;try{return _dpb.apply(this,arguments)}finally{ctx.restore()}}return _dpb.apply(this,arguments)}}
+{const _dot=drawOther;drawOther=function(o){const p=o&&(o.p||o);if(p&&behindOcc(p.x,p.y)){ctx.save();ctx.globalAlpha=.5;try{return _dot.apply(this,arguments)}finally{ctx.restore()}}return _dot.apply(this,arguments)}}
+// in the painted plaza the old sealed door sits in the terrace wall (reachable from the grass below it)
+{const _ds=doorSpawn;doorSpawn=function(){const r=_ds.apply(this,arguments);try{if(M&&M.id==='plaza'&&M.painted&&M.door){M.door.x=27*T+16;M.door.y=4*T+4}}catch(e){}return r}}
 
 </script></body></html>
