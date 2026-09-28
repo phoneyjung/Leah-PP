@@ -1,3 +1,5 @@
+# ชื่อเกม: **Lantern Academy (LA)** (ตั้งแต่ 28 ก.ย. 2569 · เดิม "Leah พาเพลิน") · ตัวเกมคือ `index.html` (build.py สร้างให้) · `play.html` เป็นแค่ทางลัดไปหน้าแรก · เกม 2.5D เดิมย้ายไป `old-2.5d.html` · ห้ามเปลี่ยนชื่อ localStorage key `leahpp2d-slots` (เซฟผู้เล่นอยู่ในนั้น)
+
 # Leah พาเพลิน (Leah-PP) · คำสั่งประจำโปรเจกต์สำหรับ AI ที่เขียนโค้ด (AGENTS.md สำหรับ Codex · เนื้อหาเดียวกับ CLAUDE.md)
 
 ไฟล์นี้ให้ Claude Code (และ Codex ผ่าน AGENTS.md) อ่านก่อนเริ่มงานทุกครั้ง
