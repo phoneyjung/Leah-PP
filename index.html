@@ -113,7 +113,7 @@ const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
   stone:'obj-lightstone.png',stonePlaza:'obj-lightstone-plaza.png',caveDoor:'obj-cave-crystal.png',rock:'obj-rockfall.png',
-  bridgeRope:'obj-bridge-rope.png',bld:'buildings-village.png',house:'tiles-house.png',furn:'furniture.png',pier:'obj-pier.png',npc_leah:'leah-idle.png',npc_nuan:'nuan-idle.png',npc_mom:'mom-idle.png',npc_dad:'dad-idle.png',npc_peb:'peb-idle.png',bridgeStone:'obj-bridge-stone.png',fountBig:'obj-fountain-big.png',fountOld:'obj-fountain-old.png'};
+  bridgeRope:'obj-bridge-rope.png',bld:'buildings-village.png',house:'tiles-house.png',furn:'furniture.png',pier:'obj-pier.png',npc_leah:'leah-idle.png',npc_nuan:'nuan-idle.png',npc_mom:'mom-idle.png',npc_dad:'dad-idle.png',npc_peb:'peb-idle.png',bridgeStone:'obj-bridge-stone.png',fountBig:'obj-fountain-big.png',fountOld:'obj-fountain-old.png',t_forest:'tiles-forest.png',t_desert:'tiles-desert.png',t_ulake:'tiles-ulake.png',t_sky:'tiles-sky.png'};
 const KIDS=[['kid-braids','ผมเปีย','Braids'],['kid-ponytail','หางม้า','Ponytail'],['kid-bob','ผมบ็อบ','Bob'],['kid-curly2','ผมหยิก','Curly',1],['kid-blond','ผมยุ่ง','Messy'],['kid-spiky','ผมตั้ง','Spiky']];
 KIDS.forEach(([k])=>{FILES['i_'+k]=k+'-idle.png';FILES['s_'+k]=k+'-stand.png';FILES['w_'+k]=k+'-walk.png'});
 const EMBED=window.EMBED_ASSETS||null;  // the single-file preview build puts every image here
@@ -2348,5 +2348,16 @@ let TPUB=0;{const _up14=update;update=function(dt){const r=_up14.apply(this,argu
 {const _up15=update;update=function(dt){if(TRIAL&&M&&M.id==='trial'&&Net.online&&Net.coop()&&!Net.isHost()){if(TRIAL.shineCd>0&&!PAUSE)TRIAL.shineCd-=dt;const keep=TRIAL.phase;const saved=TRIAL;TRIAL=null;try{return _up15.apply(this,arguments)}finally{TRIAL=saved;TRIAL.phase=keep}}return _up15.apply(this,arguments)}}
 {const _wc2=wakeCrystal;wakeCrystal=function(c){const r=_wc2.apply(this,arguments);try{if(c&&c.trial&&Net.online&&Net.coop()&&!Net.isHost())netEv({k:'tc',i:M.crystals.indexOf(c)})}catch(e){}return r}}
 {const _ts=trialShine;trialShine=function(){if(TRIAL&&Net.online&&Net.coop()&&!Net.isHost()){if(TRIAL.shineCd>0)return true;TRIAL.shineCd=isKid()?4:5;const L=TRIAL.lantern;for(let i=0;i<3;i++)fx({k:'ring2',x:L.x,y:L.y-16,life:.4+i*.12,c:'255,230,150',r:60+i*40});sfx('lvl');netEv({k:'ts',c:isKid()?1:0});return true}return _ts.apply(this,arguments)}}
+
+// ================= land tilesets (PixelLab, 28 Sep 2026): each land gets its own floor + wall tiles instead of recoloured cave tiles =================
+// missing file -> the old recoloured cave tiles are used (the game never breaks)
+function landAtlas(th){const k='t_'+th;if(!IMG[k])return null;if(IMG[k]._ok)return IMG[k];let c=IMG[k];
+  if(th==='desert'){c=toCanvas(c);const g=c.getContext('2d'),d=g.getImageData(0,0,c.width,c.height),p=d.data;for(let i=0;i<p.length;i+=4){if(p[i+3]<10)continue;const [h,s2,l]=hslOf(p[i]/255,p[i+1]/255,p[i+2]/255);if(h>160&&h<210&&s2>.35){const [r,g2,b]=rgbOf(176,.45,Math.min(.42,l*.75));p[i]=r*255;p[i+1]=g2*255;p[i+2]=b*255}}g.putImageData(d,0,0)}  // turquoise inlays darker (cyan is the crystal signal)
+  c._ok=1;IMG[k]=c;return c}
+{const _gm13=getMap;getMap=function(id){const had=!!CACHE[id];const m=_gm13.apply(this,arguments);try{if(!had&&m&&m.kind==='cave'&&m.theme&&!m._tiled){const a=landAtlas(m.theme);if(a){const keep=IMG.caveCalm;IMG.caveCalm=a;try{buildGround(m)}finally{IMG.caveCalm=keep}m._tiled=1;landWallShade(m)}}}catch(e){}return m}}
+
+// the new land tiles draw walls as a thin edge around ground that looks walkable; shade the wall masses in LA indigo so kids can see where they cannot walk
+function landWallShade(m){try{const g=m.ground.getContext('2d');g.fillStyle='rgba(27,19,48,.42)';for(let y=0;y<m.h;y++)for(let x=0;x<m.w;x++){if(m.FLOOR.has(x+','+y))continue;
+  const n=[[1,0],[-1,0],[0,1],[0,-1]].filter(([dx,dy])=>m.FLOOR.has((x+dx)+','+(y+dy))).length;g.globalAlpha=n?0.55:1;g.fillRect(x*T,y*T,T,T)}g.globalAlpha=1}catch(e){}}
 
 </script></body></html>
