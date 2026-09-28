@@ -113,7 +113,7 @@ const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
   stone:'obj-lightstone.png',stonePlaza:'obj-lightstone-plaza.png',caveDoor:'obj-cave-crystal.png',rock:'obj-rockfall.png',
-  bridgeRope:'obj-bridge-rope.png',bld:'buildings-village.png',house:'tiles-house.png',furn:'furniture.png',pier:'obj-pier.png',npc_leah:'leah-idle.png',npc_nuan:'nuan-idle.png',npc_mom:'mom-idle.png',npc_dad:'dad-idle.png',npc_peb:'peb-idle.png',bridgeStone:'obj-bridge-stone.png',fountBig:'obj-fountain-big.png',fountOld:'obj-fountain-old.png',t_forest:'tiles-forest.png',t_desert:'tiles-desert.png',t_ulake:'tiles-ulake.png',t_sky:'tiles-sky.png'};
+  bridgeRope:'obj-bridge-rope.png',bld:'buildings-village.png',house:'tiles-house.png',furn:'furniture.png',pier:'obj-pier.png',npc_leah:'leah-idle.png',npc_nuan:'nuan-idle.png',npc_mom:'mom-idle.png',npc_dad:'dad-idle.png',npc_peb:'peb-idle.png',bridgeStone:'obj-bridge-stone.png',fountBig:'obj-fountain-big.png',fountOld:'obj-fountain-old.png',t_forest:'tiles-forest.png',t_desert:'tiles-desert.png',t_ulake:'tiles-ulake.png',t_sky:'tiles-sky.png',bldAcademy:'bld-academy.png',bldLanna:'bld-lanna-house.png',bldLanna2:'bld-lanna-house2.png',bldStall:'bld-market-stall.png',objShrine:'obj-lantern-shrine.png',objBridgeArch:'obj-bridge-arch.png',objStairs:'obj-stairs-stone.png',objPier:'obj-pier-teak.png'};
 const KIDS=[['kid-braids','ผมเปีย','Braids'],['kid-ponytail','หางม้า','Ponytail'],['kid-bob','ผมบ็อบ','Bob'],['kid-curly2','ผมหยิก','Curly',1],['kid-blond','ผมยุ่ง','Messy'],['kid-spiky','ผมตั้ง','Spiky']];
 KIDS.forEach(([k])=>{FILES['i_'+k]=k+'-idle.png';FILES['s_'+k]=k+'-stand.png';FILES['w_'+k]=k+'-walk.png'});
 const EMBED=window.EMBED_ASSETS||null;  // the single-file preview build puts every image here
@@ -2359,5 +2359,42 @@ function landAtlas(th){const k='t_'+th;if(!IMG[k])return null;if(IMG[k]._ok)retu
 // the new land tiles draw walls as a thin edge around ground that looks walkable; shade the wall masses in LA indigo so kids can see where they cannot walk
 function landWallShade(m){try{const g=m.ground.getContext('2d');g.fillStyle='rgba(27,19,48,.42)';for(let y=0;y<m.h;y++)for(let x=0;x<m.w;x++){if(m.FLOOR.has(x+','+y))continue;
   const n=[[1,0],[-1,0],[0,1],[0,-1]].filter(([dx,dy])=>m.FLOOR.has((x+dx)+','+(y+dy))).length;g.globalAlpha=n?0.55:1;g.fillRect(x*T,y*T,T,T)}g.globalAlpha=1}catch(e){}}
+
+// ================= Paphloen Town rebuilt from the approved town plan (concept-town-plan.jpg) =================
+// Lanna houses, a canal with an arched stone bridge, a raised north terrace with stairs, the lantern shrine as the plaza's light stone,
+// the Lantern Academy on the hill above the mountain path, Lanna market stalls and a teak pier. Every picture is optional: if a file is missing the old piece stays.
+const tileOf=o=>[Math.floor(o.x/T),Math.floor((o.y-2)/T)];
+function clearTiles(m,test){m.objs=m.objs.filter(o=>{const [x,y]=tileOf(o);if(test(x,y,o)){m.SOLID.delete(key(x,y));return false}return true})}
+function addBig(m,img,cx,cy,w,h,solid,extra){if(!IMG[img])return null;const o=Object.assign({img,sx:0,sy:0,sw:w,sh:h,x:cx,y:cy,tall:1,cs:.45},extra||{});m.objs.push(o);(solid||[]).forEach(k=>m.SOLID.add(k));return o}
+const rect=(x0,y0,x1,y1)=>{const a=[];for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++)a.push(key(x,y));return a};
+{const _bp=MAPS.plaza;MAPS.plaza=function(){const m=_bp();try{
+  // 1) the old river on the east side goes; a canal winds down the west side, under the west road, then east below the fountain to the lake
+  for(const k of [...m.WATER]){const [x]=k.split(',').map(Number);if(x>=24){m.WATER.delete(k);m.SOLID.delete(k)}}m.decks=m.decks.filter(d=>d.img!=='bridgeStone');
+  const canal=new Set(),cxA=y=>9+Math.round(1.2*Math.sin(y*.4));for(let y=-1;y<=17;y++){canal.add(key(cxA(y),y));canal.add(key(cxA(y)+1,y))}
+  for(const y of [18,19])for(let x=cxA(17);x<=30;x++)canal.add(key(x,y));for(let y=20;y<=m.h;y++){const c=29+Math.round(.8*Math.sin(y*.5));canal.add(key(c,y));canal.add(key(c+1,y))}
+  clearTiles(m,(x,y)=>canal.has(key(x,y)));for(const k of canal){m.WATER.add(k);m.SOLID.add(k);m.COBBLE.delete(k)}
+  for(let y=20;y<m.h;y++)for(const x of [17,18])m.COBBLE.delete(key(x,y)); // the south road now ends at the canal (the south gate is still closed)
+  const br=[];for(const y of [11,12])for(let x=0;x<m.w;x++)if(canal.has(key(x,y))){m.SOLID.delete(key(x,y));br.push(x)}
+  const bx=(Math.min(...br)+Math.max(...br)+1)/2*T;m.decks.push(IMG.objBridgeArch?{img:'objBridgeArch',x:bx,y:12*T+20,oy:84}:{img:'bridgeStone',x:bx,y:12*T,oy:64});
+  // 2) raised north terrace (towards the Academy) with stone stairs on the road
+  const terr=rect(0,0,m.w-1,3).filter(k=>{const [x]=k.split(',').map(Number);return (x<16||x>19)&&!canal.has(k)});clearTiles(m,(x,y)=>y<=3&&(x<16||x>19));terr.forEach(k=>{m.CLIFF.add(k);m.SOLID.add(k)});
+  if(IMG.objStairs)m.objs.push({img:'objStairs',sx:0,sy:0,sw:128,sh:128,x:18*T,y:5*T+6,flat:1,tall:0,cs:0});
+  // 3) the lantern shrine becomes the plaza's light stone (it can be touched, so its crystal may be cyan)
+  clearTiles(m,(x,y,o)=>(x>=22&&x<=26&&y>=7&&y<=9&&!o.stoneId));const st=m.stones.find(s=>s.id==='plaza');
+  if(st&&IMG.objShrine){const o=st.obj;m.SOLID.delete(key(Math.floor(o.x/T),Math.floor((o.y-2)/T)));Object.assign(o,{img:'objShrine',sw:128,sh:128,x:24*T,y:9*T+30});st.x=o.x;st.y=o.y;rect(23,8,24,9).forEach(k=>m.SOLID.add(k))}
+  // 4) Lanna houses and a market stall around the square
+  clearTiles(m,(x,y)=>x>=2&&x<=7&&y>=5&&y<=9);addBig(m,'bldLanna2',5*T,9*T+28,128,128,rect(3,7,6,9));
+  clearTiles(m,(x,y)=>x>=2&&x<=7&&y>=13&&y<=17);addBig(m,'bldLanna',5*T,16*T+28,128,128,rect(3,15,6,16));
+  clearTiles(m,(x,y)=>x>=27&&x<=33&&y>=6&&y<=9);addBig(m,'bldStall',30*T,9*T+28,128,128,rect(29,8,31,9));
+  // 5) lamps along the canal (the Lanna lantern strings hang between lamps at dusk)
+  [[12,16],[23,17],[26,16]].forEach(([x,y])=>{if(!m.SOLID.has(key(x,y))&&!canal.has(key(x,y)))addProp(m,'lamp',x,y)});
+  m.rebuilt=1}catch(e){console.warn('plaza rebuild',e)}return m}}
+// the Academy stands on the grass east of the cave, above the east road (the top of the map is too close to the edge for a building this tall)
+{const _bm=MAPS.mountain;MAPS.mountain=function(){const m=_bm();try{if(IMG.bldAcademy){clearTiles(m,(x,y,o)=>x>=20&&x<=27&&y>=5&&y<=11&&!o.stoneId&&!m.WATER.has(key(x,y)));
+    const st=m.stones.find(s=>s.id==='mountain');if(st){const o=st.obj;m.SOLID.delete(key(Math.floor(o.x/T),Math.floor((o.y-2)/T)));o.x=18*T+16;o.y=11*T+28;st.x=o.x;st.y=o.y;m.SOLID.add(key(18,11))}
+    m.objs.push({img:'bldAcademy',sx:0,sy:0,sw:256,sh:256,x:23.5*T,y:10*T+30,tall:1,cs:.4,academy:1});rect(21,9,26,10).forEach(k=>m.SOLID.add(k))}}catch(e){}return m}}
+{const _bh=MAPS.home;MAPS.home=function(){const m=_bh();try{const o=m.objs.find(o=>o.img==='bld'&&o.sx===1);if(o&&IMG.bldLanna2)Object.assign(o,{img:'bldLanna2',sx:0,sy:0})}catch(e){}return m}}
+{const _bk=MAPS.market;MAPS.market=function(){const m=_bk();try{if(IMG.bldStall){clearTiles(m,(x,y)=>((x>=15&&x<=19)||(x>=25&&x<=29))&&y>=14&&y<=15);addBig(m,'bldStall',17*T+16,15*T+28,128,128,rect(16,14,18,15));addBig(m,'bldStall',27*T+16,15*T+28,128,128,rect(26,14,28,15))}}catch(e){}return m}}
+for(const id of ['lake','beach']){const _b=MAPS[id];if(!_b)continue;MAPS[id]=function(){const m=_b();try{if(IMG.objPier)m.decks.forEach(d=>{if(d.img==='pier')d.img='objPier'})}catch(e){}return m}}
 
 </script></body></html>
