@@ -994,7 +994,7 @@ Object.assign(Net,{mref:null,lastPub:0,lastClean:0,
     this.mref.child('fx').limitToLast(20).on('child_added',s=>{const f=s.val();if(!f||f.t<t0-2000||this.isHost())return;if(f.k==='tele')FX.push({k:'tele',x:f.x,y:f.y,r:f.r,t:0,life:.95,vis:1});else if(f.k==='rock')SHOTS.push({k:'rock',from:'b',x:f.x,y:f.y,vx:f.vx,vy:f.vy,life:2.2,vis:1})})},
   publish(){if(!this.coop()||!this.isHost()||!this.mref)return;const now=performance.now();if(now-this.lastPub<200)return;this.lastPub=now;
     this.mref.child('mons').set(MONS.map(o=>[Math.round(o.x),Math.round(o.y),Math.max(0,Math.round(o.hp)),o.happy?1:0,KCODE[o.kind],o.boss?1:0]));
-    if(now-this.lastClean>30000){this.lastClean=now;['hits','dmg','fx'].forEach(k=>this.mref.child(k).set(null))}},
+    if(now-this.lastClean>30000){this.lastClean=now;['hits','dmg','fx','ev'].forEach(k=>this.mref.child(k).set(null))}},
   publishHome(){if(!this.online)return;const h=HOME.get();this.ref.child('homes/'+this.uid).set({lv:houseLv(h),rooms:h.rooms||{1:h.room||[]}})},
   async getHome(uid){try{const s=await this.ref.child('homes/'+uid).once('value');const v=s.val();if(Array.isArray(v))return{lv:1,rooms:{1:v}};return v||{lv:1,rooms:{}}}catch(e){return{lv:1,rooms:{}}}},
   knock(uid){if(this.online)this.ref.child('knock/'+uid).push({n:S.name,t:Date.now()})},
@@ -1682,7 +1682,7 @@ function openFishSell(){const b=S.fishBag||[],cnt={};b.forEach(i=>cnt[i]=(cnt[i]
 MAPS.cave3=()=>buildCave('cave3');for(const [ch,[th]] of Object.entries(LANDS)){const b=th+'2';MAPS[b]=()=>buildCave(b)}
 {const _oq=openQuiz;openQuiz=function(c){if(c&&c.kidOnly&&!isKid()){say('💎 '+t('kidCrystal'));return}return _oq.apply(this,arguments)}}
 function kidCrystals(){return (M&&M.crystals||[]).filter(c=>c.kidOnly)}
-{const _up4=update;update=function(dt){const r=_up4.apply(this,arguments);try{if(M&&M.boss&&!M.boss.happy&&M.bossRoom){const kc=kidCrystals();if(kc.length&&kc.every(c=>c.awake)){const b=M.boss;if(Net&&Net.coop&&Net.coop()&&!Net.isHost()){try{Net.hit(b.idx,b.hp+9999,'sw')}catch(e){}}b.happy=1;b.gone=1.6;b.hitByMe=1;sfx('kill');say('✨ '+t('bossCalmed'));LIGHT=1;
+{const _up4=update;update=function(dt){const r=_up4.apply(this,arguments);try{if(M&&M.boss&&!M.boss.happy&&M.bossRoom){const kc=kidCrystals();if(kc.length&&kc.every(c=>c.awake)){const b=M.boss;if(Net&&Net.coop&&Net.coop()&&!Net.isHost()){try{netEv({k:'kc'})}catch(e){}}b.happy=1;b.gone=1.6;b.hitByMe=1;sfx('kill');say('✨ '+t('bossCalmed'));LIGHT=1;
     for(let i=0;i<50;i++)FX.push({k:'star',x:b.x+(rnd()-.5)*70,y:b.y-40+(rnd()-.5)*50,vx:(rnd()-.5)*90,vy:-40-rnd()*70,t:0,life:1.4});
     if(M.id==='cave3'&&!S.boss){S.boss=true;S.pts=(S.pts||0)+10;save();bossWin()}}}}catch(e){}return r}}
 // goal line for kids on a boss floor
@@ -1798,10 +1798,10 @@ function showTitle(next){try{if(typeof plumAll==='function')plumAll();if(navigat
 // 1 questions wake 3 trial crystals · 2 two light plates must glow at the same time (each glows 12 s) · 3 guard the Great Lantern for 40 s
 CAVE_CFG.trial={gw:2,gh:2,branch:0,seed:9001,crystals:0,digs:0,mons:[],up:'plaza',upExit:'x',mul:1,theme:'sky',trial:1};MAPS.trial=()=>buildCave('trial');
 let TRIAL=null;
-{const _cp=Net.coop.bind(Net);Net.coop=function(){return M&&M.id==='trial'?false:_cp()}} // private instance for now
+// (the trial used to be private; v0.52 syncs it for families)
 function freeTilesFrom(tx,ty,maxD){const seen=new Map([[tx+','+ty,0]]),q=[[tx,ty]];while(q.length){const [x,y]=q.shift(),d=seen.get(x+','+y);if(d>=maxD)continue;for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){const k=(x+dx)+','+(y+dy);if(seen.has(k)||(M.kind==='cave'&&M.FLOOR?!M.FLOOR.has(k):(x+dx<1||y+dy<1||x+dx>=M.w-1||y+dy>=M.h-1||(M.WATER&&M.WATER.has(k))))||M.SOLID.has(k))continue;seen.set(k,d+1);q.push([x+dx,y+dy])}}return [...seen].map(([k,d])=>{const [x,y]=k.split(',').map(Number);return{x,y,d}})}
-function trialSetup(){const sx=Math.floor(P.x/T),sy=Math.floor(P.y/T),tiles=freeTilesFrom(sx,sy,9);const px=t=>({x:t.x*T+16,y:t.y*T+20});
-  const ring=(d0,d1)=>tiles.filter(t=>t.d>=d0&&t.d<=d1);const far=(list,from,n)=>{const out=[];for(const t of list.sort(()=>Math.random()-.5)){if(out.every(o=>Math.hypot(o.x-t.x,o.y-t.y)>=3)&&(!from||from.every(o=>Math.hypot(o.x-t.x,o.y-t.y)>=2)))out.push(t);if(out.length>=n)break}return out};
+function trialSetup(){const sp=M.spawnDefault||[P.x,P.y],sx=Math.floor(sp[0]/T),sy=Math.floor(sp[1]/T),tiles=freeTilesFrom(sx,sy,9);const TR=faSeed('trial-layout');const px=t=>({x:t.x*T+16,y:t.y*T+20});
+  const ring=(d0,d1)=>tiles.filter(t=>t.d>=d0&&t.d<=d1);const far=(list,from,n)=>{const out=[];for(const t of list.slice().sort((a,b)=>(a.x*31+a.y*17)%7-(b.x*31+b.y*17)%7||a.x-b.x||a.y-b.y)){if(out.every(o=>Math.hypot(o.x-t.x,o.y-t.y)>=3)&&(!from||from.every(o=>Math.hypot(o.x-t.x,o.y-t.y)>=2)))out.push(t);if(out.length>=n)break}return out};
   const lt=(ring(3,4)[0])||tiles[1],lan=px(lt);const cr=far(ring(2,4).filter(t=>!(t.x===lt.x&&t.y===lt.y)),[lt],3);
   const pl=far(ring(5,7),[lt,...cr],2);let spawns=ring(7,9);if(spawns.length<3)spawns=ring(5,9);
   M.crystals=cr.map((t,i)=>({id:'trial-c'+i,tx:t.x,ty:t.y,x:t.x*T+16,y:t.y*T+22,awake:false,trial:1}));
@@ -2324,5 +2324,29 @@ function placeLandmark(){if(!M||!M.land||M.floor!==1||M._lm)return;const th=M.th
 // a CSS layer over the canvas: the browser composites it for free (painting it on the canvas every frame cost ~15 fps on phones)
 const VIGEL=(()=>{const d=document.createElement('div');d.id='laVig';d.style.cssText='position:fixed;inset:0;pointer-events:none;z-index:1;opacity:0;transition:opacity .8s;background:radial-gradient(ellipse at 50% 55%,rgba(75,63,114,0) 40%,rgba(75,63,114,.42) 100%)';try{const c=document.getElementById('c');c.parentNode.insertBefore(d,c.nextSibling)}catch(e){document.body.append(d)}return d})();
 let VIG_T=0;{const _up13=update;update=function(dt){const r=_up13.apply(this,arguments);VIG_T-=dt;if(VIG_T<=0){VIG_T=1;try{VIGEL.style.opacity=(M&&M.kind==='town'&&!duskish())?'1':'0'}catch(e){}}return r}}
+
+// ================= online: family events channel + synced Lantern Trial (v0.52) =================
+// zone monster kinds travel with their own codes (old devices fall back to slime)
+Object.assign(KCODE,{moth:4,scarab:5,crab:6,puff:7});KNAME.push('moth','scarab','crab','puff');
+// small events from any player to the host of the floor: {k:'kc'} kid crystals calmed the guardian · {k:'tc',i} trial crystal woken · {k:'ts',c:1} shine at the lantern
+function netEv(o){if(Net&&Net.online&&Net.mref)Net.mref.child('ev').push(Object.assign({u:Net.uid,t:Date.now()},o))}
+let EVREF=null,TSREF=null;
+function hostEvent(e){if(!M)return;if(e.k==='kc'&&M.boss&&!M.boss.happy){const b=M.boss;b.happy=1;b.gone=1.6;sfx('kill');LIGHT=1;if(M.id==='cave3'&&!S.boss){S.boss=true;save();bossWin()}}
+  else if(e.k==='tc'&&TRIAL&&M.id==='trial'){const c=M.crystals[e.i];if(c)c.awake=true}
+  else if(e.k==='ts'&&TRIAL&&TRIAL.phase===3){const L=TRIAL.lantern;for(const m of MONS){if(m.happy||!m.trial)continue;const dx=m.x-L.x,dy=m.y-L.y,d=Math.hypot(dx,dy)||1;if(d<(e.c?150:130)){if(e.c){m.happy=1;m.gone=1.2}else{m.x+=dx/d*50;m.y+=dy/d*50}}}}}
+function netSubscribe(){try{if(EVREF){EVREF.off();EVREF=null}if(TSREF){TSREF.off();TSREF=null}if(!Net.online||!Net.mref)return;const t0=Date.now();
+  EVREF=Net.mref.child('ev').limitToLast(30);EVREF.on('child_added',s=>{const e=s.val();if(!e||e.t<t0-2000||e.u===Net.uid||!Net.isHost())return;hostEvent(e)});
+  if(M&&M.id==='trial'){TSREF=Net.mref.child('trial');TSREF.on('value',s=>{const v=s.val();if(!v||!TRIAL||Net.isHost())return;applyTrial(v)})}}catch(e){}}
+{const _gm12=goMap;goMap=function(){const r=_gm12.apply(this,arguments);setTimeout(netSubscribe,60);return r}}
+// client side of the trial: mirror the host's state
+function applyTrial(v){const T2=TRIAL;if(!T2)return;const was=T2.phase;T2.left=v.l;T2.lantern.hp=v.h;(v.g||[]).forEach((g,i)=>{if(T2.plates[i])T2.plates[i].glow=g});(v.a||[]).forEach((a,i)=>{if(M.crystals[i]&&a)M.crystals[i].awake=true});
+  if(v.p!==was){T2.phase=v.p;if(v.p===2)say('✨ '+t('tr2'));else if(v.p===3)say('🛡️ '+t('tr3'));else if(v.p===4&&was<4)trialWin()}}
+// host side: publish the state a few times a second
+let TPUB=0;{const _up14=update;update=function(dt){const r=_up14.apply(this,arguments);try{if(TRIAL&&M&&M.id==='trial'&&Net.online&&Net.coop()&&Net.isHost()&&Net.mref){TPUB-=dt;if(TPUB<=0){TPUB=.3;
+  Net.mref.child('trial').set({p:TRIAL.phase,l:Math.round(TRIAL.left*10)/10,h:Math.round(TRIAL.lantern.hp),g:TRIAL.plates.map(p=>Math.round(p.glow*10)/10),a:M.crystals.map(c=>c.awake?1:0),t:Date.now()})}}}catch(e){}return r}}
+// clients do not run the trial simulation themselves (the host does); they send their actions
+{const _up15=update;update=function(dt){if(TRIAL&&M&&M.id==='trial'&&Net.online&&Net.coop()&&!Net.isHost()){if(TRIAL.shineCd>0&&!PAUSE)TRIAL.shineCd-=dt;const keep=TRIAL.phase;const saved=TRIAL;TRIAL=null;try{return _up15.apply(this,arguments)}finally{TRIAL=saved;TRIAL.phase=keep}}return _up15.apply(this,arguments)}}
+{const _wc2=wakeCrystal;wakeCrystal=function(c){const r=_wc2.apply(this,arguments);try{if(c&&c.trial&&Net.online&&Net.coop()&&!Net.isHost())netEv({k:'tc',i:M.crystals.indexOf(c)})}catch(e){}return r}}
+{const _ts=trialShine;trialShine=function(){if(TRIAL&&Net.online&&Net.coop()&&!Net.isHost()){if(TRIAL.shineCd>0)return true;TRIAL.shineCd=isKid()?4:5;const L=TRIAL.lantern;for(let i=0;i<3;i++)fx({k:'ring2',x:L.x,y:L.y-16,life:.4+i*.12,c:'255,230,150',r:60+i*40});sfx('lvl');netEv({k:'ts',c:isKid()?1:0});return true}return _ts.apply(this,arguments)}}
 
 </script></body></html>

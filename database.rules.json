@@ -57,6 +57,20 @@
               ".indexOn": [
                 "t"
               ]
+            },
+            "trial": {
+              ".write": "auth != null",
+              ".validate": "!newData.exists() || (newData.hasChildren(['p','t']) && newData.child('p').isNumber())"
+            },
+            "ev": {
+              ".write": "auth != null && !newData.exists()",
+              "$id": {
+                ".write": "auth != null && (!data.exists() || (!newData.exists() && data.child('t').val() < now - 30000))",
+                ".validate": "!newData.exists() || (newData.child('u').val() === auth.uid && newData.child('k').isString() && newData.child('k').val().length <= 4)"
+              },
+              ".indexOn": [
+                "t"
+              ]
             }
           }
         },
