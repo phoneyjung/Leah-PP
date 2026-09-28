@@ -108,7 +108,7 @@ button:disabled{opacity:.45}
 <script>
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='play-2d-0.1';
+const VERSION='Lantern Academy 0.59';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -2490,5 +2490,9 @@ MAPS.capital=function(){const m=newMap('capital','town',96,64,97);m.nameKey='cap
 {const _bg2=buildGround;buildGround=function(m){if(m&&m.painted&&IMG[m.painted]&&IMG[m.painted].width<m.w*T){const c=document.createElement('canvas');c.width=m.w*T;c.height=m.h*T;const g=c.getContext('2d');g.imageSmoothingEnabled=false;g.drawImage(IMG[m.painted],0,0,c.width,c.height);m.ground=c;return}return _bg2.apply(this,arguments)}}
 {const _st6=openSettings;openSettings=function(){const r=_st6.apply(this,arguments);try{const zr=$('zoomRow')||document.querySelector('#modal h2');if(zr&&!$('capRow')){const d=document.createElement('div');d.id='capRow';d.className='row2';d.style.margin='6px 0';
   d.innerHTML=`<button id="capGo" style="flex:1">🧪 ${t('capTry')}</button>`;zr.after(d);$('capGo').onclick=()=>{if(!IMG.bgCapGrey){say(t('capMissing'));return}closeModal();fadeTo(()=>goMap('capital'))}}}catch(e){}return r}}
+
+// direct link into the greybox capital for testing: .../Leah-PP/?capital (or #capital)
+{const _sg=startGame;startGame=function(){try{if(S&&S.pos&&S.pos.map==='capital'&&!/[?#&]capital\b/.test(location.search+location.hash))S.pos=null}catch(e){}  /* the greybox is only for testing: never resume there on a normal visit */
+  const r=_sg.apply(this,arguments);try{if(/[?#&]capital\b/.test(location.search+location.hash)&&IMG.bgCapGrey&&!window._capJumped){window._capJumped=1;setTimeout(()=>{DLG=null;PAUSE=false;const d=$('dlg');if(d)d.classList.add('hide');fadeTo(()=>goMap('capital'))},900)}}catch(e){}return r}}
 
 </script></body></html>
