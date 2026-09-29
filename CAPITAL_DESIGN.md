@@ -195,3 +195,68 @@ Also paint the four open event areas exactly where the blueprint shows them: a l
 | มุมเมือง | หญ้าว่าง | **สวนผลไม้** (ข้างถนนเหนือ) · **ศาลาริมน้ำ** (ซ้ายล่าง) · **สนามเด็กเล่น** มีชิงช้า+สไลเดอร์ (ขวาล่าง) |
 | Academy | กว้าง 18 | กว้าง 16 (ถนนกลางผ่านข้าง ๆ พอดี) ยังอยู่บนเส้นทอง 61.8% |
 **ผล:** เดินได้ 3,845 ช่อง ถึงทุกช่อง · ถนนเฉียง 4 สาย สะพาน 3 จุด มุมใหม่ 3 จุด เดินถึงหมด · ภาพตรงกับตารางชนทุกช่อง
+
+
+---
+# 🔒 ผังล็อกแล้ว · v4.1 (29 ก.ย. 2569)
+ผ่านการเดินทดสอบในผังเปล่า (เกม 0.61) · **ห้ามย้ายทาง อาคาร ประตู หลังจากนี้** (ตาม PIPELINE ขั้น 3)
+ขั้นต่อไป: วาดภาพจริง (ขั้น 4) → ปรับสี LA + วัด 60-30-10 → ประกอบเข้าเกม (ขั้น 5)
+
+## ชุดวาดภาพ (แนบ 4 รูปตามลำดับ)
+1. `capital-blueprint-v41-clean.png` ผังล็อก ไม่มีป้าย
+2. `scale-guide-v3.png` สัดส่วน (1 ช่อง = 16 px)
+3. `concept-town-plan.png` สไตล์ที่ชอบ
+4. `la-style-sheet.jpg` สีและตัวตน LA
+
+## พรอมป์วาด v4.1
+```
+Paint the first attached image, a locked game map blueprint, as one finished background painting of the capital city "Paphloen" for the 2D pixel art game "Lantern Academy". Output landscape 1536x1024 with exactly the same layout. The map is 96 x 64 tiles, so one tile is 16 pixels in the output.
+Follow the second attached image, the scale guide, for the size of everything: a child is 32 px tall and an adult 40 px, lamp posts 42 px tall, doors 38 px tall, houses about 112 x 99 px, market stalls 80 x 64 px, trees about 51 x 67 px, benches 38 x 21 px, the fountain 96 px wide, cobblestones about 8 px each, main streets 80 px wide and side paths 64 px wide. Do not draw the example figures from the scale guide.
+Use the style, colours and mood of the third image and the attached style sheet, but keep it calm and spacious: fewer and larger elements, wide open cobblestone streets and plazas, soft lawns, decorations only in flower beds and along building fronts, never in the middle of a street.
+Keep exactly: three terraces separated by low cream stone retaining walls, with wide stone stairs exactly where the blueprint shows gaps in the walls; the round fountain plaza in the centre; one straight main avenue from the pier in the south, through the plaza, up the stairs to the north gate at the top edge; the straight avenue from the west edge to the east edge; four diagonal avenues from the plaza; the canal from the top left down to the lake with exactly three arched cream stone bridges; the lake along the bottom with the wooden pier.
+Every building exactly on its footprint, with its front door where the blueprint shows the gold door mark, facing the street: Lantern Academy with a tall lantern tower (top, right of the main avenue), Temple of the First Lantern with an old sealed door (top left), guild hall (top right), small lantern shrine with a light-blue crystal (right of the plaza), notice board (left of the plaza), Lanna-style wooden houses and a restaurant (west), a market with purple and cream stalls, a blacksmith, a post office with storage and a Lanna house (east), a flower garden with a pavilion and a training yard with wooden practice dummies (lower terrace), a small lakeside pavilion (bottom left), a children's playground with a swing and a slide (bottom right), an orchard of fruit trees in neat rows (top, left of the main avenue).
+Also paint the open event areas exactly where the blueprint shows them: a lantern festival square by the lake with a small wooden stage and strings of paper lanterns above it; a market street along the east avenue with sixteen empty wooden stall frames; a flower arch photo spot on the terrace in front of the Lantern Academy; a meeting spot just south of the fountain with a small wooden meeting board. Keep all these areas open, flat and easy to walk on.
+Colour: 60% cream stone, terracotta roofs, teak and garden greens; 30% dusk violet shadows, plum outlines and warm cream light; 10% lantern gold only on doors, signs and lanterns, crystal cyan only on the shrine crystal. Early dusk with soft violet shadows, not a golden afternoon. Crisp pixel art, top-down with a slight three-quarter tilt. No characters, no people, no animals, no text, no labels, no UI.
+```
+
+
+---
+# v5 · เมืองบนเนิน (ออกแบบจากภูมิประเทศก่อน) · 29 ก.ย. 2569
+**ทำไมต้องเปลี่ยน:** ภาพวาดตามผัง v4.1 สีผ่าน (63/31/6) แต่ **ดูแบน เป็นระเบียบเกินไป ไม่เป็นธรรมชาติ** เพราะผังเองเป็นตาราง: กำแพงขั้นบันไดตรงยาวทั้งแผนที่ · คลองไหลผ่านกำแพงแบบไม่มีน้ำตก · ถนนเฉียง 45° ตัดข้ามขั้นบันได · ต้นน้ำโผล่จากขอบภาพเฉย ๆ · ประตูเหนือไม่มีภูเขา
+**หลักใหม่:** ภูมิประเทศมาก่อน แล้วเมืองค่อยตั้งตามพื้นที่
+| ส่วน | ออกแบบยังไง |
+|---|---|
+| **ภูเขา (บนสุด)** | หน้าผาหินยาวตลอดขอบบน · **น้ำตก** ตกลงสระน้ำพุร้อนข้างวิหาร · **ช่องเขา** = ประตูเหนือไปตีนเขา/ถ้ำ |
+| **ชั้น 3 เนินบน** | Academy (จุดเด่น) · **วิหารตะเกียงแรกอยู่ต้นน้ำ** (เข้ากับเรื่อง: ตะเกียงแรกจุดที่ต้นน้ำ) · หอสมาคม · สวนผลไม้ · ลานถ่ายรูป |
+| **ชั้น 2 ลานน้ำพุ** | ลานน้ำพุ · ศาลโคม · กระดาน · ย่านบ้าน (ตะวันตก) · ตลาด+ถนนตั้งแผง (ตะวันออก) |
+| **ชั้น 1 ริมทะเลสาบ** | ทางเลียบน้ำ · ลานเทศกาล · ท่าเรือ · สวนศาลา · ลานฝึก · สนามเด็กเล่น · ศาลาริมน้ำ |
+| **ขอบชั้น** | **โค้งตามเส้นระดับ** ไม่ตรง · มีผนังหินให้เห็นว่าลดระดับ |
+| **ลำธาร** | ไหลคดเคี้ยวลงเขา · **น้ำตกเล็กทุกครั้งที่ตกขอบชั้น** · สะพานโค้ง 3 จุดตรงถนนข้าม |
+| **ถนน** | แกนหลักตรง ท่าเรือ → ลานน้ำพุ → ช่องเขา · ถนนบนเนินโค้งตามเนิน · **บันไดทุกจุดที่ถนนข้ามขอบชั้น** · เลิกถนนเฉียง 45° |
+ผัง: `capital-blueprint-v5.png` (มีป้าย) · `capital-blueprint-v5-clean.png`
+ขั้นต่อไป: อนุมัติแนวคิด → **ผังเปล่า v5 เดินได้** (มีสีแยกความสูง 3 ชั้น) → ล็อก → วาด
+
+
+---
+# v5.1 · เมืองบนเนิน ฉบับสมบูรณ์ (คะแนนผัง 9.5) · 29 ก.ย. 2569
+| หมวด | คะแนน | สิ่งที่ทำ |
+|---|---|---|
+| ภูมิประเทศ / เนิน | 9.6 | ภูเขามีสันซ้อน · 3 ชั้นสีต่างกัน · ขอบชั้นโค้งตามเส้นระดับ · ผนังหินม่วง 1.7 ช่อง + เงาพลัม · **ไม่มีอาคารคร่อมขอบชั้น** (เช็กด้วยโค้ด) |
+| น้ำ | 9.5 | น้ำตก → สระต้นน้ำ → ลำธารตัว S · แอ่งพัก 2 แห่ง · น้ำตกเล็กกว้าง 2 ช่องทุกขอบชั้น · ปากลำธารบาน · สะพาน 3 จุดตรงถนนข้ามเท่านั้น |
+| ถนน | 9.5 | แกนหลักท่าเรือ → ช่องเขา · ถนนตะวันออก-ตะวันตกโค้งตามเนิน · ทางบนเนินแยก 2 กิ่ง · ทางเลียบน้ำตามชายฝั่ง · ทางลาดซิกแซกฝั่งตะวันตก · บันได 6 จุดทุกจุดข้ามชั้น · เลิกถนนเฉียง 45° |
+| อาคาร / ย่าน | 9.4 | 17 หลังอยู่ในชั้นของตัวเองทั้งหมด ไม่ชนกัน · ประตูทองหันหาถนน · ฝั่งตะวันตก 6 หลัง (+ร้านน้ำชาริมลำธาร) · Academy อยู่บนเส้นทอง 61.8% |
+| เสน่ห์ / จุดจำ | 9.5 | **โคมใหญ่บนหอ Academy** · **ต้นไทรใหญ่จุดนัดพบ** · บันไดโคมสองข้าง · **ซุ้มประตูเมืองที่ท่าเรือ** · วิหารต้นน้ำกับน้ำตก · ลานชมวิวหน้า Academy |
+| ครบฟังก์ชันเมืองหลวง | 9.7 | Academy ครูพ่อมด หอฝึก · วิหาร/ประตูปริศนา · หอสมาคม · ศาลโคมวาร์ป · กระดาน · บ้าน ร้านอาหาร ร้านน้ำชา · ตลาด ถนนตั้งแผง ตีเหล็ก · ไปรษณีย์+คลัง · สวนศาลา ลานฝึก ลานเทศกาล สนามเด็กเล่น ศาลาริมน้ำ สวนผลไม้ · ท่าเรือ · ประตู 4 ทิศ |
+| 60-30-10 พื้นที่ | 9.6 | โล่ง 62.2 · มวล 27.3 · น้ำ 10.5 |
+| 60-30-10 สี (ในผัง) | 9.3 | ตัวตนเมือง 64 · สายเลือด LA 29 · สัญญาณ 7 → ภาพวาดจริงจะวัดและปรับสีอีกรอบ |
+| เล่นได้จริง | 9.4 | ต้องยืนยันในผังเปล่า (ขั้นถัดไป) |
+| **รวม** | **9.5** | |
+ผัง: `capital-blueprint-v51.png`
+
+
+---
+# v5.2 · ผังเปล่าเดินได้ในเกม (0.62 · 29 ก.ย. 2569)
+- ย่านตะวันตก = **ย่านประตูฟาร์ม** (ร้านเมล็ดพันธุ์+เครื่องมือ · ร้านหุ่นยนต์+คอกมอนผู้ช่วย) · ถนนตะวันตกต่อกับฟาร์มที่ความสูงเดียวกัน
+- ผังเปล่าสร้างจากผังสีจริงทีละช่อง: พื้น ถนน บันได สะพาน ท่าเรือ ช่องเขา = เดินได้ · อาคาร ผนังหิน ภูเขา ต้นไม้ แปลงดอก แผง = ชน · ลำธาร น้ำตก ทะเลสาบ = น้ำ
+**บั๊กที่เจอระหว่างวิจารณ์และแก้แล้ว:** เงาและแสงโคมบนพื้นถูกวาดเป็นก้อนสีเข้ม/เหลืองดูเหมือนสิ่งกีดขวาง · สีของช่องมาจากสีที่พบมากสุดโดยไม่ดูประเภท (ช่องเขาที่เดินได้ถูกทาสีเป็นภูเขา) · เงาต้นไม้ที่ชนได้ถูกวาดเป็นรูดำ
+**ผลตรวจ:** ภาพเทียบตารางชน 5,800 ช่อง **ไม่ตรงกัน 0** · เดินถึงทุกช่อง 3,889/3,889 · ประตู 4 ทิศ · ประตูอาคาร 14/14 · กระดาน · ชาวเมือง 10/10 เส้นทาง ไม่เดินทะลุ · ข้ามชั้นต้องอ้อมผ่านบันไดจริง · 59–61 เฟรม · **คะแนนผังเปล่า 9.5**
