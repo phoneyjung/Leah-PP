@@ -109,7 +109,7 @@ button:disabled{opacity:.45}
 <script>
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 0.69';
+const VERSION='Lantern Academy 0.70';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -2597,7 +2597,8 @@ const CAPA={solid:["111111111111111111111110000111111111111111111111", "11111111
   m.exits.push({id:'n',x:25*T,y:12,to:'scn_north',toExit:'s',label:'scn_north'},{id:'w',x:14,y:14.5*T,to:'farm',toExit:'e',label:'farm'},
     {id:'e',x:m.w*T-14,y:15*T,to:'scn_east',toExit:'w',label:'scn_east'},{id:'s',x:25.5*T,y:m.h*T-10,to:'scn_south',toExit:'n',label:'scn_south'});
   m.spawnDefault=[CAPA.spawn[0]*T,CAPA.spawn[1]*T];
-  if(IMG.fountCapA){const I=IMG.fountCapA;m.objs.push({img:'fountCapA',sx:0,sy:0,sw:I.width,sh:I.height,x:CAPA.fountain[0],y:CAPA.fountain[1],tall:1,cs:0})}  /* obj-fountain-capa.png if uploaded; else the painted stone circle stays */
+  if(IMG.fountCapA){const I=IMG.fountCapA;m.objs.push({img:'fountCapA',sx:0,sy:0,sw:I.width,sh:I.height,x:CAPA.fountain[0],y:CAPA.fountain[1],tall:1,cs:0,flat:1,capFade:1});
+    for(let y=12;y<=15;y++)for(let x=26;x<=28;x++)m.SOLID.add(key(x,y));for(const x of [25,29])for(let y=13;y<=14;y++)m.SOLID.add(key(x,y))}  /* obj-fountain-capa.png if uploaded; else the painted stone circle stays */
   // trees: the canopy is cut from the painting itself and drawn over the player when you walk behind it (only the trunk blocks)
   CAPA.trees.forEach(([cx,cy,rx,ry,base,tw],i)=>{try{const k='capTree'+i;if(!IMG[k]){const w=rx*2+4,h=base-(cy-ry)+2,c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d');
       g.beginPath();g.ellipse(w/2,ry+1,rx,ry,0,0,Math.PI*2);g.rect(w/2-tw/2,ry,tw,h-ry);g.fill();g.globalCompositeOperation='source-in';g.drawImage(IMG.mapCapA,cx-w/2,cy-ry-1,w,h,0,0,w,h);IMG[k]=c}
@@ -2616,7 +2617,7 @@ const CAPA={solid:["111111111111111111111110000111111111111111111111", "11111111
   addEventListener('touchend',e=>{if(e.touches.length<2)pd=0},{passive:true})}
 
 // walking behind a tree: the whole tree fades so the child always sees their character in its own colours
-{const _upT=update;update=function(dt){const r=_upT.apply(this,arguments);try{if(M&&M.capA&&typeof P!=='undefined'&&P)for(const o of M.objs)if(o.capTree){
+{const _upT=update;update=function(dt){const r=_upT.apply(this,arguments);try{if(M&&M.capA&&typeof P!=='undefined'&&P)for(const o of M.objs)if(o.capTree||o.capFade){
   const behind=Math.abs(P.x-o.x)<o.sw/2-4&&P.y<o.y-2&&P.y>o.y-o.sh+6,tgt=behind?.3:1;o.a+=(tgt-o.a)*Math.min(1,dt*10)}}catch(e){}return r}}
 
 // under each tree canopy the ground picture gets plain lawn (sampled from around the tree), so a faded tree really shows the child behind it
