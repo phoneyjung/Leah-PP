@@ -109,7 +109,7 @@ button:disabled{opacity:.45}
 <script>
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 0.65';
+const VERSION='Lantern Academy 0.66';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -2583,4 +2583,29 @@ for(const [id,S0] of Object.entries(SCN))MAPS[id]=function(){const m=newMap(id,'
 // the minimap of painted/greybox maps was blank green (it only knew tile maps): draw the map's own picture into it
 {const _mk=makeMinimap;makeMinimap=function(m){const r=_mk.apply(this,arguments);try{const I=m&&m.painted&&IMG[m.painted];if(I&&mmBase){const g=mmBase.getContext('2d');g.imageSmoothingEnabled=true;g.drawImage(I,0,0,mmBase.width,mmBase.height)}}catch(e){}return r}}
 
+
+// ================= 0.66 capital scene A (painted 48x32, collision traced from the picture): map-capital-a.jpg =================
+// Missing picture -> the old greybox capital (nothing changes). Exits keep the same ids (n/e/s/w) so farm and the 3 test scenes still connect.
+try{TX.th.capA='เมืองพาเพลิน · ลานน้ำพุ';TX.en&&(TX.en.capA='Paphloen · Fountain Square')}catch(e){}
+const CAPA={solid:["111111111111111111111110000111111111111111111111", "111111111111111111111110000111111111111111111111", "111111111111111111111110000111111111111111111111", "111111111111111111111110000111111111111111111111", "111111111111111111111110000111111111111111111111", "111111111111111111111110000011111111111111111111", "111111111111111111111110000011111111111111111111", "111111111111111111111110000000011111111111111111", "111111111111111111111110000000011111111111111111", "111111111111111111111110000000011111111111111111", "111111111111111111111110000000011111111111111111", "000000011110000000000000000000000000000111111111", "000000011110000000000000000000000000000000000000", "000000000000000000000000001110000000000000000000", "000000000000000000000000001110000000000000000000", "000000000000000000000000000000000000000000000000", "000000011110000000000000000000000000000000000000", "100011111110000000000000000000000111000000000001", "100011111110011111100000000000000111111111111111", "111111111110011111100000000000000111111111111111", "111111111110011111100000000001111100111111111111", "111111111110011111100000000001111100111111111111", "111111111110000000000000000001111100111111111111", "000000000000000000000000000000000000000000000000", "000000000000000000000000000000000000000000000000", "000000000000000000000000000000000000000000000000", "000000011110000000000000000000000000000000000000", "111111111111111111111111000111111111111111111111", "111111111111111111111111000111111111111111111111", "111111111111111111111111000111111111111111111111", "111111111111111111111111000111111111111111111111", "111111111111111111111111000111111111111111111111"],spawn:[27.5,17.5],board:[31,16],leah:[22,16],fountain:[877,492]};
+{const im=new Image();im.onload=()=>{IMG.mapCapA=im;try{delete CACHE.capital}catch(e){}};im.onerror=()=>{};im.src=(window.EMBED_ASSETS&&window.EMBED_ASSETS['map-capital-a.jpg'])||'map-capital-a.jpg'}
+{const _capPrev=MAPS.capital;MAPS.capital=function(){if(!IMG.mapCapA)return _capPrev.apply(this,arguments);
+  const m=newMap('capital','town',48,32,98);m.nameKey='capA';m.painted='mapCapA';m.capA=1;m.capDoors={};
+  CAPA.solid.forEach((row,y)=>{for(let x=0;x<48;x++)if(row[x]==='1')m.SOLID.add(key(x,y))});
+  m.exits.push({id:'n',x:25*T,y:12,to:'scn_north',toExit:'s',label:'scn_north'},{id:'w',x:14,y:14.5*T,to:'farm',toExit:'e',label:'farm'},
+    {id:'e',x:m.w*T-14,y:15*T,to:'scn_east',toExit:'w',label:'scn_east'},{id:'s',x:25.5*T,y:m.h*T-10,to:'scn_south',toExit:'n',label:'scn_south'});
+  m.spawnDefault=[CAPA.spawn[0]*T,CAPA.spawn[1]*T];
+  if(IMG.fountBig){const F={img:'fountBig',sx:0,sy:0,sw:128,sh:128,x:CAPA.fountain[0],y:CAPA.fountain[1],tall:1,cs:.35,pick:()=>(typeof LIGHT!=='undefined'&&LIGHT<.6&&IMG.fountOld)||IMG.fountBig};m.objs.push(F);m.fountain=F}
+  try{addProp(m,'board',CAPA.board[0],CAPA.board[1]);m.board=m.objs[m.objs.length-1];m.SOLID.add(key(CAPA.board[0],CAPA.board[1]))}catch(e){}
+  try{addNpc(m,'leah',CAPA.leah[0],CAPA.leah[1],0)}catch(e){}
+  return m}}
+// first visit to the new capital with no zoom chosen yet: start at a Sea-of-Stars-like distance (about 16 tiles tall)
+{const _gm=goMap;goMap=function(id){const r=_gm.apply(this,arguments);try{if(id==='capital'&&M&&M.capA&&localStorage.getItem('la-zoom')===null)setZoom(.75,true)}catch(e){}return r}}
+// zoom with the mouse wheel or two fingers (pinch); the ⚙️ zoom buttons still work
+{let pd=0;const open=()=>{const md=$('modal');return md&&!md.classList.contains('hide')};
+  addEventListener('wheel',e=>{if(!M||open())return;setZoom(ZOOM+(e.deltaY<0?.05:-.05),true)},{passive:true});
+  const dist=e=>Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
+  addEventListener('touchstart',e=>{if(e.touches.length===2)pd=dist(e)},{passive:true});
+  addEventListener('touchmove',e=>{if(e.touches.length===2&&pd&&!open()){const d=dist(e);if(Math.abs(d-pd)>24){setZoom(ZOOM*d/pd,true);pd=d}}},{passive:true});
+  addEventListener('touchend',e=>{if(e.touches.length<2)pd=0},{passive:true})}
 </script></body></html>
