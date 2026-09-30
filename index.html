@@ -109,7 +109,7 @@ button:disabled{opacity:.45}
 <script>
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 0.70';
+const VERSION='Lantern Academy 0.71';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -2617,7 +2617,7 @@ const CAPA={solid:["111111111111111111111110000111111111111111111111", "11111111
   addEventListener('touchend',e=>{if(e.touches.length<2)pd=0},{passive:true})}
 
 // walking behind a tree: the whole tree fades so the child always sees their character in its own colours
-{const _upT=update;update=function(dt){const r=_upT.apply(this,arguments);try{if(M&&M.capA&&typeof P!=='undefined'&&P)for(const o of M.objs)if(o.capTree||o.capFade){
+{const _upT=update;update=function(dt){const r=_upT.apply(this,arguments);try{if(M&&(M.capA||M.royal)&&typeof P!=='undefined'&&P)for(const o of M.objs)if(o.capTree||o.capFade){
   const behind=Math.abs(P.x-o.x)<o.sw/2-4&&P.y<o.y-2&&P.y>o.y-o.sh+6,tgt=behind?.3:1;o.a+=(tgt-o.a)*Math.min(1,dt*10)}}catch(e){}return r}}
 
 // under each tree canopy the ground picture gets plain lawn (sampled from around the tree), so a faded tree really shows the child behind it
@@ -2643,4 +2643,25 @@ const CAPA_TREES=[{"wx": 363, "wy": 468, "w": 284, "h": 252, "ux": 350, "uy": 43
     for(const t of CAPA_TREES){const U=document.createElement('canvas');U.width=t.uw;U.height=t.uh;const u=U.getContext('2d'),ox=t.wx-t.ux,oy=t.wy-t.uy;
       for(const [dx,dy] of [[0,0],[3,0],[-3,0],[0,3],[0,-3],[2,2],[-2,2],[2,-2],[-2,-2]])u.drawImage(IMG.capaMask,t.sx,t.sy,t.w,t.h,ox+dx,oy+dy,t.w,t.h);  // mask grown 3px
       u.globalCompositeOperation='source-in';u.drawImage(IMG.capaUnder,t.usx,t.usy,t.uw,t.uh,0,0,t.uw,t.uh);g.drawImage(U,t.ux,t.uy)}}catch(e){}return r}}
+
+// ================= 0.71 the royal capital (painted 48x32 "D4"): map-capital-royal.jpg + statue + shop signs =================
+// Missing picture -> the royal capital is simply not linked; the opening town's north stairs keep going to the north scene.
+try{TX.th.royal='นครหลวง · ลานรูปปั้น';TX.en&&(TX.en.royal='Royal Capital · Statue Square')}catch(e){}
+const ROYAL={solid:["111111111111111111111111111111111111111111111001", "111111111111111111111111111111111111111111111001", "111111111111111111111111111111111111111111111001", "111111111111111111111111111111111111111111111001", "111111111111111111111111111111111111111111111001", "111111111111111111111111111111111111111111111001", "111111111111000000000000000000000001111111111001", "100000000000000000000000000000000000000000000001", "100000000000000000000000000000000000000000000001", "111111111111111111110000000111111111111111111111", "111111111111111111110000000111111111111111111111", "111111111111111111110000000111111111111111111111", "111111111111111111110000000011111111111111111111", "111111111111111000000000000000000111111111111111", "111100111110000000000000000000000000111111100111", "000000000000000000000011111000000000000000000000", "000000000000000000000011111000000000000000000000", "111111111111100000000000000000000000111111111111", "111111111111111111111000000011111111111111111111", "111111111111111111111100000111111111111111111111", "111111111111111111111100000111111111111111111111", "111111111111111111111100000111111111111111111111", "111111111111111111111100000111111111111111111111", "111110011111100111111100000111111001111110011111", "000000000000000000000000000000000000000000000000", "000000000000000000000000000000000000000000000000", "111111111111111111111100000111111111111111111111", "111111111111111111111100000111111111111111111111", "111111111111111111111100000111111111111111111111", "111111111111111111111100000111111111111111111111", "111111111111111111111100000111111111111111111111", "111111111111111111111100000111111111111111111111"],signs:[{"n": "academy", "sx": 0, "sw": 84, "sh": 103, "cx": 768, "cy": 100}, {"n": "temple", "sx": 86, "sw": 84, "sh": 103, "cx": 266, "cy": 174}, {"n": "library", "sx": 172, "sw": 84, "sh": 103, "cx": 1316, "cy": 172}, {"n": "guild", "sx": 258, "sw": 84, "sh": 103, "cx": 199, "cy": 428}, {"n": "inn", "sx": 344, "sw": 124, "sh": 101, "cx": 423, "cy": 420}, {"n": "bank", "sx": 470, "sw": 84, "sh": 103, "cx": 1179, "cy": 428}, {"n": "weapons", "sx": 556, "sw": 124, "sh": 101, "cx": 1436, "cy": 420}, {"n": "market", "sx": 682, "sw": 124, "sh": 101, "cx": 235, "cy": 694}, {"n": "armor", "sx": 808, "sw": 124, "sh": 101, "cx": 480, "cy": 694}, {"n": "magic", "sx": 934, "sw": 124, "sh": 101, "cx": 1121, "cy": 694}, {"n": "tailor", "sx": 1060, "sw": 124, "sh": 101, "cx": 1378, "cy": 694}],statue:[767,556],spawn:[24,26]};
+{const ld=(src,cb)=>{const i=new Image();i.onload=()=>cb(i);i.onerror=()=>{};i.src=(window.EMBED_ASSETS&&window.EMBED_ASSETS[src])||src};
+  const clear=()=>{try{delete CACHE.royal;delete CACHE.capital;delete CACHE.scn_north}catch(e){}};
+  ld('map-capital-royal.jpg',i=>{IMG.mapRoyal=i;clear()});
+  ld('obj-statue-capital.png',f=>{const c=document.createElement('canvas');c.width=Math.round(f.width/2);c.height=Math.round(f.height/2);const g=c.getContext('2d');g.imageSmoothingQuality='high';g.drawImage(f,0,0,c.width,c.height);IMG.statueRoyal=c;clear()});
+  ld('signs-capital.png',sh=>{ROYAL.signs.forEach((s,i)=>{const c=document.createElement('canvas');c.width=Math.round(s.sw/2);c.height=Math.round(s.sh/2);const g=c.getContext('2d');g.imageSmoothingQuality='high';g.drawImage(sh,s.sx,0,s.sw,s.sh,0,0,c.width,c.height);IMG['royalSign'+i]=c});IMG.royalSigns=1;clear()})}
+MAPS.royal=function(){const m=newMap('royal','town',48,32,98);m.nameKey='royal';m.painted='mapRoyal';m.royal=1;m.capDoors={};
+  ROYAL.solid.forEach((row,y)=>{for(let x=0;x<48;x++)if(row[x]==='1')m.SOLID.add(key(x,y))});
+  m.exits.push({id:'n',x:45.5*T,y:12,to:'scn_north',toExit:'s',label:'scn_north'},{id:'s',x:24*T,y:m.h*T-10,to:'capital',toExit:'n',label:'capital'});
+  m.spawnDefault=[ROYAL.spawn[0]*T,ROYAL.spawn[1]*T];
+  if(IMG.statueRoyal){const I=IMG.statueRoyal;m.objs.push({img:'statueRoyal',sx:0,sy:0,sw:I.width,sh:I.height,x:ROYAL.statue[0],y:ROYAL.statue[1],tall:1,cs:0,flat:1,capFade:1})}
+  if(IMG.royalSigns)ROYAL.signs.forEach((s,i)=>{const I=IMG['royalSign'+i];if(I)m.objs.push({img:'royalSign'+i,sx:0,sy:0,sw:I.width,sh:I.height,x:s.cx,y:Math.round(s.cy+I.height/2),tall:1,cs:0,flat:1,sign:s.n})});
+  return m};
+// link it in only when the picture is there
+{const _capR=MAPS.capital;MAPS.capital=function(){const m=_capR.apply(this,arguments);try{if(IMG.mapRoyal&&m&&m.capA)for(const e of m.exits)if(e.id==='n'){e.to='royal';e.toExit='s';e.label='royal'}}catch(e){}return m}}
+{const _scnN=MAPS.scn_north;if(_scnN)MAPS.scn_north=function(){const m=_scnN.apply(this,arguments);try{if(IMG.mapRoyal)for(const e of m.exits)if(e.to==='capital'&&e.toExit==='n'){e.to='royal';e.toExit='n';e.label='royal'}}catch(e){}return m}}
+{const _sgR=startGame;startGame=function(){const r=_sgR.apply(this,arguments);try{if(/[?#&]royal\b/.test(location.search+location.hash))setTimeout(()=>{if(IMG.mapRoyal){DLG=null;PAUSE=false;goMap('royal','s')}},1300)}catch(e){}return r}}
 </script></body></html>
