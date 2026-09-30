@@ -109,7 +109,7 @@ button:disabled{opacity:.45}
 <script>
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 0.71';
+const VERSION='Lantern Academy 0.72';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -2618,7 +2618,7 @@ const CAPA={solid:["111111111111111111111110000111111111111111111111", "11111111
 
 // walking behind a tree: the whole tree fades so the child always sees their character in its own colours
 {const _upT=update;update=function(dt){const r=_upT.apply(this,arguments);try{if(M&&(M.capA||M.royal)&&typeof P!=='undefined'&&P)for(const o of M.objs)if(o.capTree||o.capFade){
-  const behind=Math.abs(P.x-o.x)<o.sw/2-4&&P.y<o.y-2&&P.y>o.y-o.sh+6,tgt=behind?.3:1;o.a+=(tgt-o.a)*Math.min(1,dt*10)}}catch(e){}return r}}
+  const hid=P.y<o.y-2&&P.x+12>o.x-o.sw/2+6&&P.x-12<o.x+o.sw/2-6&&P.y>o.y-o.sh+4&&P.y-48<o.y,tgt=hid?.3:1;o.a+=(tgt-o.a)*Math.min(1,dt*10)}}catch(e){}return r}}
 
 // under each tree canopy the ground picture gets plain lawn (sampled from around the tree), so a faded tree really shows the child behind it
 {const _bgT=buildGround;buildGround=function(m){const r=_bgT.apply(this,arguments);try{if(m&&m.capA&&m.ground){let G=m.ground;if(!(G instanceof HTMLCanvasElement)){const c=document.createElement('canvas');c.width=m.w*T;c.height=m.h*T;c.getContext('2d').drawImage(G,0,0);m.ground=G=c}
