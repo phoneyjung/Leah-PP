@@ -109,7 +109,7 @@ button:disabled{opacity:.45}
 <script>
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 0.79';
+const VERSION='Lantern Academy 0.80';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -2748,4 +2748,20 @@ MAPS.hunt1=function(){const m=newMap('hunt1','cave',96,64,55);m.nameKey='hunt1';
    for(let y=0;y<64;y++)for(let x=0;x<96;x++){const rx=Math.min(1,Math.max(0,(x-46)/5)),ry=Math.min(1,Math.max(0,(y-30)/5)),a=.42*rx*ry;const i=(y*96+x)*4;d.data[i]=14;d.data[i+1]=8;d.data[i+2]=26;d.data[i+3]=Math.round(a*255)}
    g.putImageData(d,0,0);return c};
  const _rH=render;render=function(tm){const r=_rH.apply(this,arguments);try{if(M&&M.huntFloor){if(!shade)shade=mk();ctx.save();ctx.imageSmoothingEnabled=true;ctx.drawImage(shade,camX/T,camY/T,VW/T,VH/T,0,0,VW*SC,VH*SC);ctx.restore()}}catch(e){}return r}}
+
+// 0.80 treasure nook in the deep wing: one reward chest per day for whoever walks all the way in
+{const _h1C=MAPS.hunt1;MAPS.hunt1=function(){const m=_h1C.apply(this,arguments);try{m.chests=[{x:57*T+16,y:57*T+24,open:false,id:'hunt1-nook-'+today()}]}catch(e){}return m}}
+// 0.80 never stuck on an old version: the game asks the server for its newest version and offers a one-tap update (clears saved copies, reloads fresh)
+{const verNum=v=>{const m=String(v||'').match(/(\d+)\.(\d+)/);return m?(+m[1])*1000+(+m[2]):0};
+ const hardReload=v=>{const go=()=>{const u=new URL(location.href);u.searchParams.delete('fresh');u.searchParams.set('v',String(v||Date.now()).replace(/[^0-9.]/g,''));location.replace(u.toString())};
+   const jobs=[];try{if(window.caches)jobs.push(caches.keys().then(ks=>Promise.all(ks.map(k=>caches.delete(k)))))}catch(e){}
+   try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations)jobs.push(navigator.serviceWorker.getRegistrations().then(rs=>Promise.all(rs.map(r=>r.unregister()))))}catch(e){}
+   Promise.all(jobs).then(go,go);setTimeout(go,2500)};
+ window.forceUpdate=hardReload;
+ if(/[?&]fresh\b/.test(location.search))hardReload(Date.now());
+ const banner=v=>{if(document.getElementById('updBar'))return;const b=document.createElement('div');b.id='updBar';
+   b.style.cssText='position:fixed;left:50%;top:max(8px,env(safe-area-inset-top));transform:translateX(-50%);z-index:99999;background:#3b2a5c;color:#fff4d6;border:2px solid #d8b56a;border-radius:14px;padding:10px 16px;font:600 15px system-ui,sans-serif;box-shadow:0 4px 16px rgba(0,0,0,.45);cursor:pointer;white-space:nowrap';
+   b.textContent='✨ มีเวอร์ชันใหม่ '+v+' · แตะเพื่ออัปเดต';b.onclick=()=>{b.textContent='กำลังอัปเดต…';hardReload(v)};document.body.appendChild(b)};
+ const check=()=>{try{fetch('index.html?check='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.text():'').then(tx=>{const m=tx.match(/const VERSION='[^']*?(\d+\.\d+)'/);if(m&&verNum(m[1])>verNum(VERSION))banner(m[1])}).catch(()=>{})}catch(e){}};
+ if(location.protocol.startsWith('http')){setTimeout(check,4000);setInterval(check,10*60000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)check()})}}
 </script></body></html>
