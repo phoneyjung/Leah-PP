@@ -109,7 +109,7 @@ button:disabled{opacity:.45}
 <script>
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 0.75';
+const VERSION='Lantern Academy 0.76';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -2682,4 +2682,18 @@ MAPS.royal=function(){const m=newMap('royal','town',48,32,98);m.nameKey='royal';
  const _blit=blitMap;blitMap=function(img){try{if(M&&M.edgePad&&(img===M.ground||img===M.shadow)&&(camX<0||camY<0||camX+VW>M.w*T||camY+VH>M.h*T)){if(!M.surround&&M.ground)M.surround=mkSur(M);
      if(M.surround){const EP=M.edgePad;ctx.imageSmoothingEnabled=true;ctx.drawImage(M.surround,camX+EP,camY+EP,VW,VH,0,0,VW*SC,VH*SC)}}}catch(e){}return _blit.apply(this,arguments)}}
 try{const L={scn_north:['ภูเขาทางเหนือ','North Mountains'],scn_east:['ทุ่งตะวันออก','East Fields'],scn_south:['ทางลงใต้','South Road'],royalGo:['นครหลวง','Royal Capital']};for(const k in L){if(!TX.th[k])TX.th[k]=L[k][0];if(TX.en&&!TX.en[k])TX.en[k]=L[k][1]}}catch(e){}
+
+// 0.76 monsters come back: the grey fog slowly settles again on calmed monsters (caves). Never in view, never near exits or question crystals.
+const RESPAWN={delay:40,kidMul:1.5,cap:20,safe:5*T,margin:48};
+{const _sm=spawnMonsters;spawnMonsters=function(){const r=_sm.apply(this,arguments);try{if(M&&M.kind==='cave'&&M.spawns){MONS.forEach((m,i)=>{if(!m.boss&&i<M.spawns.length){m.nest=i;m.nestT=0}})}}catch(e){}return r}
+ const safeAt=(x,y)=>{for(const e of (M.exits||[]))if(Math.hypot(e.x-x,e.y-y)<RESPAWN.safe)return true;for(const st of (M.stones||[]))if(Math.hypot(st.x-x,st.y-y)<RESPAWN.safe)return true;return false};
+ const inView=(x,y)=>x>camX-RESPAWN.margin&&x<camX+VW+RESPAWN.margin&&y>camY-RESPAWN.margin&&y<camY+VH+RESPAWN.margin;
+ const _upR=update;update=function(dt){const r=_upR.apply(this,arguments);try{
+   if(!M||M.kind!=='cave'||PAUSE||!MONS.length)return r;if(Net.coop&&Net.coop()&&!Net.isHost())return r;
+   const wait=RESPAWN.delay*(isKid()?RESPAWN.kidMul:1);let alive=MONS.filter(m=>!m.happy).length;
+   for(const m of MONS){if(m.nest===undefined||!m.happy||m.gone>0)continue;m.nestT=(m.nestT||0)+dt;
+     if(m.nestT<wait||alive>=RESPAWN.cap||safeAt(m.hx,m.hy)||inView(m.hx,m.hy))continue;
+     m.x=m.hx;m.y=m.hy;m.hp=m.max;m.happy=0;m.gone=0;m.st='wander';m.tx=m.hx;m.ty=m.hy;m.flash=0;m.cd=1;m.nestT=0;m.back=(m.back||0)+1;alive++;
+     for(let i=0;i<8;i++)FX.push({k:'dust',x:m.x+(rnd()-.5)*22,y:m.y-8+(rnd()-.5)*12,vx:(rnd()-.5)*24,vy:-14-rnd()*16,t:0,life:.9})}
+ }catch(e){}return r}}
 </script></body></html>
