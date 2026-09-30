@@ -109,7 +109,7 @@ button:disabled{opacity:.45}
 <script>
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 0.76';
+const VERSION='Lantern Academy 0.77';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -2690,10 +2690,25 @@ const RESPAWN={delay:40,kidMul:1.5,cap:20,safe:5*T,margin:48};
  const inView=(x,y)=>x>camX-RESPAWN.margin&&x<camX+VW+RESPAWN.margin&&y>camY-RESPAWN.margin&&y<camY+VH+RESPAWN.margin;
  const _upR=update;update=function(dt){const r=_upR.apply(this,arguments);try{
    if(!M||M.kind!=='cave'||PAUSE||!MONS.length)return r;if(Net.coop&&Net.coop()&&!Net.isHost())return r;
-   const wait=RESPAWN.delay*(isKid()?RESPAWN.kidMul:1);let alive=MONS.filter(m=>!m.happy).length;
+   const wait=RESPAWN.delay*(isKid()?RESPAWN.kidMul:1)*(RESPAWN.famMul||1);let alive=MONS.filter(m=>!m.happy).length;
    for(const m of MONS){if(m.nest===undefined||!m.happy||m.gone>0)continue;m.nestT=(m.nestT||0)+dt;
-     if(m.nestT<wait||alive>=RESPAWN.cap||safeAt(m.hx,m.hy)||inView(m.hx,m.hy))continue;
+     if(m.nestT<wait||alive>=(RESPAWN.capNow||RESPAWN.cap)||safeAt(m.hx,m.hy)||inView(m.hx,m.hy))continue;
      m.x=m.hx;m.y=m.hy;m.hp=m.max;m.happy=0;m.gone=0;m.st='wander';m.tx=m.hx;m.ty=m.hy;m.flash=0;m.cd=1;m.nestT=0;m.back=(m.back||0)+1;alive++;
      for(let i=0;i<8;i++)FX.push({k:'dust',x:m.x+(rnd()-.5)*22,y:m.y-8+(rnd()-.5)*12,vx:(rnd()-.5)*24,vy:-14-rnd()*16,t:0,life:.9})}
  }catch(e){}return r}}
+
+// 0.77 levelling balance for grown-ups + battery care
+// monster level from kind x floor strength; EXP shrinks when the monster is far below you (go deeper to level)
+const MON_LV={slime:2,bat:3,mushbug:4,golem:10};
+function monLevel(m,mul){return Math.max(1,Math.round((MON_LV[m.kind]||2)*(mul||1)))}
+function expFor(m){const d=(S&&S.lv||1)-(m.lvl||1);const f=d>5?Math.max(.1,1-.15*(d-5)):1;return Math.max(1,Math.round((m.exp0||m.exp)*f))}
+{const _mk=mkMon;mkMon=function(kind,x,y,mul){const m=_mk.apply(this,arguments);try{m.exp0=m.exp;m.lvl=monLevel(m,mul);m.exp=expFor(m)}catch(e){}return m}}
+// family in the same cave: the fog returns faster and a few more monsters may be around
+function famHere(){try{return (Net&&Net.online&&Net.inMap)?Math.max(0,Net.inMap().length):0}catch(e){return 0}}
+{const _upF=update;update=function(dt){const r=_upF.apply(this,arguments);try{if(M&&M.kind==='cave'){const n=famHere();RESPAWN.famMul=1/(1+.5*n);RESPAWN.capNow=Math.min(30,RESPAWN.cap+5*n);
+   for(const m of MONS)if(m.back&&m.backSeen!==m.back){m.backSeen=m.back;m.exp=expFor(m)}}}catch(e){}return r}}
+// monsters more than ~1.5 screens away sleep (no thinking, no moving) until the player comes closer
+{const _um=updateMonsters;updateMonsters=function(dt){if(!M||M.kind!=='cave'||!P)return _um.apply(this,arguments);
+   const k=RESPAWN.sleepAt||1.5,fx=VW*k,fy=VH*k,all=MONS,awake=[];let slept=0;for(const m of all){if(m.happy||m.boss||(Math.abs(m.x-P.x)<fx&&Math.abs(m.y-P.y)<fy))awake.push(m);else slept++}
+   RESPAWN.asleep=slept;if(!slept)return _um.apply(this,arguments);MONS=awake;try{return _um.apply(this,arguments)}finally{MONS=all}}}
 </script></body></html>
