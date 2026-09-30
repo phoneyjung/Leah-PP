@@ -109,7 +109,7 @@ button:disabled{opacity:.45}
 <script>
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 0.77';
+const VERSION='Lantern Academy 0.78';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -2711,4 +2711,20 @@ function famHere(){try{return (Net&&Net.online&&Net.inMap)?Math.max(0,Net.inMap(
 {const _um=updateMonsters;updateMonsters=function(dt){if(!M||M.kind!=='cave'||!P)return _um.apply(this,arguments);
    const k=RESPAWN.sleepAt||1.5,fx=VW*k,fy=VH*k,all=MONS,awake=[];let slept=0;for(const m of all){if(m.happy||m.boss||(Math.abs(m.x-P.x)<fx&&Math.abs(m.y-P.y)<fy))awake.push(m);else slept++}
    RESPAWN.asleep=slept;if(!slept)return _um.apply(this,arguments);MONS=awake;try{return _um.apply(this,arguments)}finally{MONS=all}}}
+
+// ================= 0.78 the Amethyst Cave entrance (painted 48x32): capital cave arch -> here -> Crystal Cave floor 1 =================
+// Missing picture -> nothing changes: the capital's arch keeps going to the north scene and floor 1's ladder to the mountain foot.
+try{TX.th.cavemouth='ถ้ำอเมทิสต์ · ปากถ้ำ';TX.th.cavemouthGo='ปากถ้ำอเมทิสต์';if(TX.en){TX.en.cavemouth='Amethyst Cave · Entrance';TX.en.cavemouthGo='Amethyst Cave'}}catch(e){}
+const CAVEM={solid:["111111111111111111111110000111111111111111111111", "111111111111111111111110000111111111111111111111", "111111111111111111111110000111111111111111111111", "111111111111111111111110000111111111111111111111", "111111100011111111100000000011111111111111111111", "111111100000011100000000000000011111111111111111", "111001110000000000000000000000000000001111111111", "111000010011100000100000000000000000001111111111", "111100000011110001111111111111100000011111111111", "111110000011110001111111111111110000001111111111", "111111110011110001111111111111111000001111111111", "111111100000000011111111111111111100100001111111", "111111100000000111111111111111111111100001111111", "111111100000111111111111111111111111100001111111", "111111100001111111111111111111111111100011111111", "111111110000111111110000001111111111000011111111", "111111110000011111000000000011111110000011111111", "111111111000001100000000000000000100000111111111", "111111111000000000000000000000000000001111111111", "111111111100000000000000000000000000011111111111", "111110001100000000000000000000000000011111111111", "111100000000000000000000000000000000000000001111", "111000000000000000100000000000000000000000001111", "111000000000000001100000000000011000000000001111", "111110000110000000000000000000011000011100001111", "111111111111100000000000000000001001111111111111", "111111111111111110000000000000001111111111111111", "111111111111111111111000000111111111111111111111", "111111111111111111111100000111111111111111111111", "111111111111111111111100000111111111111111111111", "111111111111111111111100000111111111111111111111", "111111111111111111111100000111111111111111111111"],nests:[[21, 21], [29, 21], [9, 9], [33, 6], [6, 22], [40, 21]],kinds:['slime','bat','slime','bat','slime','slime']};
+{const i=new Image();i.onload=()=>{IMG.mapCaveMouth=i;try{delete CACHE.cavemouth;delete CACHE.royal;delete CACHE.cave1}catch(e){}};i.src=(window.EMBED_ASSETS&&window.EMBED_ASSETS['map-cave-mouth.jpg'])||'map-cave-mouth.jpg'}
+MAPS.cavemouth=function(){const m=newMap('cavemouth','cave',48,32,77);m.nameKey='cavemouth';m.painted='mapCaveMouth';m.bright=1;m.mul=1;m.cavemouth=1;
+  CAVEM.solid.forEach((row,y)=>{for(let x=0;x<48;x++){const k=key(x,y);if(row[x]==='1')m.SOLID.add(k);else m.FLOOR.add(k)}});
+  CAVEM.nests.forEach((p,i)=>m.spawns.push({kind:CAVEM.kinds[i%CAVEM.kinds.length],x:p[0]*T+16,y:p[1]*T+16}));
+  m.exits.push({id:'s',x:23.5*T,y:m.h*T-10,to:'royal',toExit:'n',label:'royalGo'},{id:'n',x:24.5*T,y:1.2*T,to:'cave1',toExit:'up',label:'cave1'});
+  m.spawnDefault=[23.5*T,28*T];return m};
+{const _rc=MAPS.royal;MAPS.royal=function(){const m=_rc.apply(this,arguments);try{if(IMG.mapCaveMouth)for(const e of m.exits)if(e.id==='n'){e.to='cavemouth';e.toExit='s';e.label='cavemouthGo'}}catch(e){}return m}}
+{const _c1=MAPS.cave1;if(_c1)MAPS.cave1=function(){const m=_c1.apply(this,arguments);try{if(IMG.mapCaveMouth)for(const e of m.exits)if(e.id==='up'&&e.to==='mountain'){e.to='cavemouth';e.toExit='n';e.label='cavemouthGo'}}catch(e){}return m}}
+
+// cave maps normally drop you just below an exit; the cave entrance has exits at the top and bottom edges, so place the player inside instead
+{const _gmC=goMap;goMap=function(id,exitId){const r=_gmC.apply(this,arguments);try{if(M&&M.cavemouth&&exitId){const p=exitId==='s'?[23.5*T,27.5*T]:exitId==='n'?[24.5*T,4.5*T]:null;if(p){P.x=p[0];P.y=p[1];P.path=null;P.target=null;exitCool=Math.max(exitCool||0,.8)}}}catch(e){}return r}}
 </script></body></html>
