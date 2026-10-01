@@ -109,7 +109,7 @@ button:disabled{opacity:.45}
 <script>
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 0.86';
+const VERSION='Lantern Academy 0.88';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -191,13 +191,13 @@ const TX={th:{bag:'กระเป๋า',map:'แผนที่',set:'ตั�
   ds_salad:'สลัดผักสด',ds_curry:'แกงแครอทใส่ปลา',ds_soup:'ซุปมะเขือเทศ',ds_pie:'พายสตรอว์เบอร์รี',ds_pum:'ฟักทองนึ่ง',ds_fish:'ปลาย่างเกลือ',
   bf_salad:'เลือดสูงสุด +12% 10 นาที',bf_curry:'พลังโจมตี +12% 10 นาที',bf_soup:'ท่าพิเศษเร็วขึ้น 15% 10 นาที',bf_pie:'EXP +15% 10 นาที',bf_pum:'ป้องกัน +12 10 นาที',bf_fish:'ฟื้นเลือดเต็ม',
   pets:'สัตว์เลี้ยง',petJoin:'อยากเป็นเพื่อนด้วย! ตามมาเป็นสัตว์เลี้ยงแล้ว',petActive:'กำลังพาไป',petPick:'พาไปด้วย',petRest:'ให้พักที่บ้าน',feed:'ให้ขนม',treats:'ขนมสัตว์เลี้ยง',aff:'ความผูกพัน',petFound:'พบเหรียญ!',noTreat:'ไม่มีขนม ซื้อได้ที่ร้านยายนวล',it_treat:'ขนมสัตว์เลี้ยง ×3',noPet:'ปัดฝุ่นให้มอนสเตอร์ บางตัวจะขอตามมาเป็นเพื่อน',
-  pb_slime:'เลือดสูงสุด +5%',pb_bat:'ดูดของรอบตัวไกลขึ้น',pb_mushbug:'EXP +5%',n_slime:'สไลม์',n_bat:'ค้างคาว',n_mushbug:'ด้วงเห็ด',
+  pb_slime:'เลือดสูงสุด +5%',pb_bat:'ดูดของรอบตัวไกลขึ้น',pb_mushbug:'EXP +5%',n_slime:'สไลม์',n_bat:'ค้างคาว',n_mushbug:'เห็ดน้อย',
   fishBtn:'ตกปลา',castTip:'แตะ 🎣 เพื่อเหวี่ยงเบ็ด',wait:'รอปลากิน…',bite:'ปลากิน! แตะเลย!',lost:'ปลาหลุดไปแล้ว ลองใหม่นะ',reelTip:'กดค้างให้แถบเขียวทับปลาไว้',caught:'ได้ปลา!',newFish:'ปลาใหม่!',record:'ตัวใหญ่สุดใหม่!',fishBook:'ปลา',unknown:'???',sellFish:'ขายปลาทั้งหมด',m_fish:'ตกปลา',cm:'ซม.',
   f0:'ปลาซิวแสง',f1:'ปลานิลลาย',f2:'ปลาตะเพียนทอง',f3:'ปลาดุกหนวดยาว',f4:'กุ้งฝอยใส',f5:'ปูนาเปลือกน้ำตาล',f6:'ปลาช่อนเงา',f7:'ปลาปักเป้าน้ำจืด',f8:'กระเบนน้ำจืดน้อย',f9:'เต่าน้อยหลงทาง',f10:'ปลาคริสตัล',f11:'ราชาปลาแสงจันทร์',
   stats:'ค่าพลัง',pts:'แต้มเหลือ',cost:'ใช้',auto:'✨ แนะนำ (แจกแต้มให้)',st_str:'พลัง',st_agi:'ว่องไว',st_vit:'อึด',st_int:'ปัญญา',st_dex:'เฉียบ',
   d_hp:'เลือด',d_atk:'พลังโจมตี',d_aspd:'ความเร็วตี',d_crit:'คริติคอล',d_flee:'หลบ',d_def:'ป้องกัน',d_cdr:'ท่าพิเศษเร็วขึ้น',crit:'คริ!',miss:'หลบ!',expLoss:'เสีย EXP',
   cards:'การ์ด',cardBook:'สมุดการ์ด',slots:'ช่องการ์ด',insert:'ใส่การ์ดลงอาวุธที่ใส่อยู่',noSlot:'อาวุธนี้ไม่มีช่องว่าง',insertQ:'ใส่การ์ดแล้วถอดไม่ได้ ใส่เลยไหม?',gotCard:'ได้การ์ด!',cardDone:'สะสมการ์ดถ้ำคริสตัลครบ! EXP +3% ตลอด',
-  c_slime:'สไลม์ · เลือดสูงสุด +8%',c_bat:'ค้างคาว · ตีเร็ว +5%',c_mushbug:'ด้วงเห็ด · 10% ทำมอนมึน',c_golem:'ผู้พิทักษ์หิน · อึด +5 · ป้องกัน +15',
+  c_slime:'สไลม์ · เลือดสูงสุด +8%',c_bat:'ค้างคาว · ตีเร็ว +5%',c_mushbug:'เห็ดน้อย · 10% ทำมอนมึน',c_golem:'ผู้พิทักษ์หิน · อึด +5 · ป้องกัน +15',
   a_str:'พลัง',a_agi:'ว่องไว',a_vit:'อึด',a_int:'ปัญญา',a_dex:'เฉียบ',a_hpP:'เลือด %',a_crit:'คริ %',a_aspd:'ตีเร็ว %',
   joy:'จอยเสมือน',online:'เล่นออนไลน์ (ห้องเดียวกันเห็นกัน)',roomPh:'รหัสห้อง เช่น LEAH01',join:'เข้าห้อง',leave:'ออกจากห้อง',noFb:'ยังไม่ได้ตั้งค่า Firebase (ดู FIREBASE_SETUP.md) · ตอนนี้เล่นคนเดียวได้ตามปกติ',inRoom:'อยู่ในห้อง',joinFail:'เข้าห้องไม่ได้ ลองตรวจอินเทอร์เน็ตหรือรหัสห้อง',players:'คนในห้อง',roomPts:'คะแนนบ้าน (ทั้งห้อง)',
   home:'ย่านบ้าน',market:'ถนนตลาด',lake:'ริมทะเลสาบ',forestSoon:'ป่าต้นไม้ยักษ์ (เร็ว ๆ นี้)',forestMsg:'ต้นไม้ล้มขวางทางเข้าป่าลึก… ได้ยินว่าข้างในมีเห็ดเรืองแสงยักษ์',coralSoon:'ถ้ำปะการัง (บทที่ 5)',coralMsg:'น้ำยังท่วมปากถ้ำปะการัง… สฟิงซ์ในทะเลทรายรู้วิธีเปิดทาง (บทที่ 5)',pierMsg:'ท่าเรือ: เรือยังไม่กล้าออก เพราะปลากลัวแสงที่ยังหรี่',housePts:'คะแนนบ้าน (ผู้เล่นในเครื่องนี้)',goalHome:'🎯 ไปถ้ำคริสตัล: กลับลานน้ำพุแล้วขึ้นเหนือ',who:'ใครจะเล่น?',newChar:'➕ สร้างตัวละครใหม่',switchP:'👥 เปลี่ยนผู้เล่น',delQ:'ลบตัวละครนี้?',
@@ -272,13 +272,13 @@ const TX={th:{bag:'กระเป๋า',map:'แผนที่',set:'ตั�
   ds_salad:'Fresh salad',ds_curry:'Carrot fish curry',ds_soup:'Tomato soup',ds_pie:'Strawberry pie',ds_pum:'Steamed pumpkin',ds_fish:'Salt-grilled fish',
   bf_salad:'Max HP +12% for 10 min',bf_curry:'Attack +12% for 10 min',bf_soup:'Specials 15% faster for 10 min',bf_pie:'EXP +15% for 10 min',bf_pum:'Defence +12 for 10 min',bf_fish:'Full heal',
   pets:'Pets',petJoin:'wants to be friends! It follows you now',petActive:'With you',petPick:'Take along',petRest:'Rest at home',feed:'Give a treat',treats:'Pet treats',aff:'Bond',petFound:'Found a coin!',noTreat:'No treats, buy some at Granny\'s',it_treat:'Pet treats ×3',noPet:'Clear the dust off monsters, some will ask to come along',
-  pb_slime:'Max HP +5%',pb_bat:'Picks up items from further away',pb_mushbug:'EXP +5%',n_slime:'Slime',n_bat:'Bat',n_mushbug:'Mushbug',
+  pb_slime:'Max HP +5%',pb_bat:'Picks up items from further away',pb_mushbug:'EXP +5%',n_slime:'Slime',n_bat:'Bat',n_mushbug:'Mushling',
   fishBtn:'Fish',castTip:'Tap 🎣 to cast',wait:'Waiting for a bite…',bite:'A bite! Tap now!',lost:'It got away, try again',reelTip:'Hold to keep the green bar on the fish',caught:'Caught!',newFish:'New fish!',record:'New biggest!',fishBook:'Fish',unknown:'???',sellFish:'Sell all fish',m_fish:'Catch fish',cm:'cm',
   f0:'Glow minnow',f1:'Striped tilapia',f2:'Golden barb',f3:'Whisker catfish',f4:'Glass shrimp',f5:'Brown paddy crab',f6:'Shadow snakehead',f7:'River puffer',f8:'Little river ray',f9:'Lost baby turtle',f10:'Crystal fish',f11:'Moonlight King Fish',
   stats:'Stats',pts:'Points left',cost:'cost',auto:'✨ Suggest (auto)',st_str:'STR',st_agi:'AGI',st_vit:'VIT',st_int:'INT',st_dex:'DEX',
   d_hp:'HP',d_atk:'Attack',d_aspd:'Attack speed',d_crit:'Critical',d_flee:'Dodge',d_def:'Defence',d_cdr:'Special cooldown',crit:'CRIT!',miss:'MISS!',expLoss:'EXP lost',
   cards:'Cards',cardBook:'Card book',slots:'Card slots',insert:'Put into the weapon you hold',noSlot:'No empty slot on this weapon',insertQ:'Cards cannot be removed. Insert now?',gotCard:'Got a card!',cardDone:'Crystal Cave card set complete! EXP +3% forever',
-  c_slime:'Slime · Max HP +8%',c_bat:'Bat · Attack speed +5%',c_mushbug:'Mushbug · 10% stun',c_golem:'Stone Guardian · VIT +5 · DEF +15',
+  c_slime:'Slime · Max HP +8%',c_bat:'Bat · Attack speed +5%',c_mushbug:'Mushling · 10% stun',c_golem:'Stone Guardian · VIT +5 · DEF +15',
   a_str:'STR',a_agi:'AGI',a_vit:'VIT',a_int:'INT',a_dex:'DEX',a_hpP:'HP %',a_crit:'Crit %',a_aspd:'ASPD %',
   joy:'Joystick',online:'Play online (same room sees each other)',roomPh:'Room code e.g. LEAH01',join:'Join',leave:'Leave',noFb:'Firebase is not set up yet (see FIREBASE_SETUP.md) · single player works as usual',inRoom:'In room',joinFail:'Could not join, check the internet or the room code',players:'Players in room',roomPts:'House points (whole room)',
   home:'Home Quarter',market:'Market Street',lake:'Lakeside',forestSoon:'Giant Tree Forest (soon)',forestMsg:'A fallen tree blocks the deep forest… they say giant glowing mushrooms grow inside',coralSoon:'Coral Grotto (Chapter 5)',coralMsg:'Water still covers the Coral Grotto… the desert sphinx knows the way in (Chapter 5)',pierMsg:'Pier: the boats stay home while the fish are scared of the dim light',housePts:'House points (players on this device)',goalHome:'🎯 Crystal Cave: go back to the plaza, then north',who:'Who is playing?',newChar:'➕ New character',switchP:'👥 Switch player',delQ:'Delete this character?',
@@ -2982,7 +2982,7 @@ MAP_RECIPES.town2.buildings2=[{spr:'restaurant',x:9,base:12},{spr:'clock',x:16,b
   n=0;for(let k=0;k<800&&n<34;k++){const x=ix0+Math.floor(r()*(ix1-ix0+1)),y=iy0+Math.floor(r()*(iy1-iy0+1));if(!grass(x,y)||!free(x,y,0)||doors.some(([dx,dy])=>Math.abs(dx-x)<1.5&&Math.abs(dy-y)<2))continue;addKit2(m,r()<.55?'flowers':'grassTall',x,y,Math.round((r()-.5)*10));used.add(K(x,y));n++}
   {const lamps=[];for(let y=iy0;y<=iy1;y++)for(let x=ix0;x<=ix1;x++){if(!grass(x,y)||!(m.COBBLE.has(K(x,y-1))||m.COBBLE.has(K(x,y+1))))continue;if(doors.some(([dx,dy])=>Math.abs(dx-x)<2&&Math.abs(dy-y)<2))continue;if(lamps.some(([lx,ly])=>Math.hypot(lx-x,ly-y)<7))continue;lamps.push([x,y]);addKit2(m,'lamp',x,y);used.add(K(x,y))}}
   for(const [x,y] of [[18,14],[30,14],[18,18],[30,18]])if(grass(x,y)&&free(x,y,0)){addProp(m,'bench',x,y,{tall:0,cs:.3});used.add(K(x,y))}
-  m.kitStats={objs:m.objs.length,bytesRecipe:JSON.stringify(R).length,kit:'town-v1'};return m}}
+  m.kitStats={objs:m.objs.length,bytesRecipe:R._bytes||JSON.stringify(R).length,kit:'town-v1'};return m}}
 // the old PixelLab ground tiles are brighter and more saturated than our painted towns: re-tone each ground type to the painted town's own colours
 const GROUND_TONE={grass:[[104,142,62],[40,35,22]],path:[[206,176,132],[22,22,22]],cobble:[[226,204,168],[22,22,24]],water:[[42.3,124.1,179.2],[29.3,37.3,40.5]]};
 function gradeGround(m){try{const c=m.ground,g=c.getContext('2d'),W=c.width,H=c.height,id=g.getImageData(0,0,W,H),d=id.data;
@@ -2995,4 +2995,32 @@ function gradeGround(m){try{const c=m.ground,g=c.getContext('2d'),W=c.width,H=c.
 {const _bgK=buildGround;buildGround=function(m){const r=_bgK.apply(this,arguments);if(m&&m.recipe&&kit2Ready())gradeGround(m);return r}}
 // the pilot uses the painted town's own fountain when it is loaded
 {const _brF=buildRecipe;buildRecipe=function(id){const m=_brF.apply(this,arguments);try{if(kit2Ready()&&IMG.fountCapA&&m.fountain){const I=IMG.fountCapA,F=m.fountain;F.img='fountCapA';F.pick=null;F.sx=0;F.sy=0;F.sw=I.width;F.sh=I.height;F.cb=I.height-1}}catch(e){}return m}}
+
+// ================= 0.87 natural curved roads in recipes + time-of-day light for recipe towns =================
+// 1) recipe lines can be curves: points are smoothed (Catmull-Rom) before painting, so roads bend like a painted town
+{const _br0=buildRecipe;buildRecipe=function(id){const R=MAP_RECIPES[id];if(R&&!R._curved){R._curved=1;R._bytes=JSON.stringify(R).length;const cr=(p,n=8)=>{if(p.length<3)return p;const o=[];const P=i=>p[Math.max(0,Math.min(p.length-1,i))];
+    for(let i=0;i<p.length-1;i++)for(let k=0;k<n;k++){const t=k/n,p0=P(i-1),p1=P(i),p2=P(i+1),p3=P(i+2),f=(a,b,c,d)=>.5*((2*b)+(-a+c)*t+(2*a-5*b+4*c-d)*t*t+(-a+3*b-3*c+d)*t*t*t);o.push([f(p0[0],p1[0],p2[0],p3[0]),f(p0[1],p1[1],p2[1],p3[1])])}o.push(p[p.length-1]);return o};
+  for(const list of [R.path,R.cobble,R.water])for(const s of (list||[]))if(s.line&&s.curve)s.line=cr(s.line)}return _br0.apply(this,arguments)}}
+Object.assign(MAP_RECIPES.town2,{
+  cobble:[{oval:[24,16.3,7.2,3.6]},{line:[[9.2,13.4],[16,12.8],[24,13.1],[32,12.8],[41.5,13.3]],w:2.8,curve:1},{line:[[9.2,23.6],[16,24.1],[24,23.8],[32,24.1],[41.5,23.6]],w:2.4,curve:1}],
+  path:[{line:[[24,13],[23.3,9],[24.7,5],[24,0]],w:4,curve:1},{line:[[0,16.9],[4.5,16.2],[10,16.8],[17,16.3]],w:2.8,curve:1},{line:[[31,16.3],[37,16.9],[42,16.1],[48,16.6]],w:2.8,curve:1},{line:[[24,19.5],[24.9,24],[23.3,28],[24,32]],w:3.6,curve:1}],
+  water:[{line:[[7.6,0],[6.9,5],[7.9,10],[7.2,16.4],[8.1,22],[7.2,27],[7.8,32]],w:1.8,curve:1}],bridges:[16.5]});
+// 2) time of day for recipe towns (on top of the game's own tint): dawn pink-orange, dusk gold with light shafts, night blue
+//    with lamp halos and warm windows in every kit house; a soft vignette that is a little stronger at night.
+//    Everything is pre-drawn once into small sprites (cheap on phones): one glow sprite, one vignette per screen size, one shaft layer.
+function phaseK(){const d=new Date(),h=d.getHours()+d.getMinutes()/60;return h<5?'night':h<7?'dawn':h<17?'day':h<19?'dusk':'night'}
+const TOD={glow:null,vig:{},shaft:{}};
+function todGlow(){if(TOD.glow)return TOD.glow;const c=document.createElement('canvas');c.width=c.height=64;const g=c.getContext('2d'),r=g.createRadialGradient(32,32,0,32,32,32);r.addColorStop(0,'rgba(255,205,130,1)');r.addColorStop(.45,'rgba(255,190,110,.45)');r.addColorStop(1,'rgba(255,190,110,0)');g.fillStyle=r;g.fillRect(0,0,64,64);return TOD.glow=c}
+function todVig(W,H,a){const k=W+'x'+H+'@'+a;if(TOD.vig[k])return TOD.vig[k];const c=document.createElement('canvas');c.width=Math.ceil(W/4);c.height=Math.ceil(H/4);const g=c.getContext('2d'),w=c.width,h=c.height,r=g.createRadialGradient(w/2,h/2,Math.min(w,h)*.45,w/2,h/2,Math.max(w,h)*.75);r.addColorStop(0,'rgba(20,12,40,0)');r.addColorStop(1,`rgba(20,12,40,${a})`);g.fillStyle=r;g.fillRect(0,0,w,h);return TOD.vig[k]=c}
+function todShaft(W,H){const k=W+'x'+H;if(TOD.shaft[k])return TOD.shaft[k];const c=document.createElement('canvas');c.width=Math.ceil(W/4);c.height=Math.ceil(H/4);const g=c.getContext('2d'),w=c.width,h=c.height;
+  for(let i=0;i<4;i++){const x=(i*.28+.05)*w,gr=g.createLinearGradient(x,0,x+w*.25,h);gr.addColorStop(0,'rgba(255,190,110,.12)');gr.addColorStop(1,'rgba(255,190,110,0)');g.fillStyle=gr;g.beginPath();g.moveTo(x,0);g.lineTo(x+w*.06,0);g.lineTo(x+w*.32,h);g.lineTo(x+w*.22,h);g.closePath();g.fill()}return TOD.shaft[k]=c}
+{const _rT=render;render=function(tm){const r=_rT.apply(this,arguments);try{if(!M||!M.recipe||(typeof PERF!=='undefined'&&PERF.lite))return r;const ph=(window.FORCE_PHASE||phaseK()),W=VW*SC,H=VH*SC,t=(tm||0);
+   ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.imageSmoothingEnabled=true;
+   if(ph==='dusk'&&!window.NO_SHAFT&&(typeof PERF==='undefined'||PERF.fps>=55)){ctx.globalCompositeOperation='lighter';ctx.globalAlpha=.8+.2*Math.sin(t*.3);ctx.drawImage(todShaft(W,H),0,0,W,H);ctx.globalAlpha=1}
+   if(ph==='night'||ph==='dusk'){ctx.globalCompositeOperation='lighter';const k=ph==='night'?1:.55,G=todGlow();
+     ctx.globalAlpha=.42*k;for(const o of M.objs){if(o.kit!=='house')continue;const X=(o.x-camX)*SC,Y=(o.y-camY)*SC;if(X<-200||X>W+200||Y<-200||Y>H+300)continue;
+       for(const dx of [-.24,.24]){const wx=X+dx*o.sw*SC,wy=Y-o.sh*.36*SC,R=18*SC;ctx.drawImage(G,wx-R,wy-R,2*R,2*R)}}
+     ctx.globalAlpha=.32*k;for(const [gx,gy] of M.glows){const X=(gx-camX)*SC,Y=(gy-camY)*SC;if(X<-120||X>W+120||Y<-120||Y>H+120)continue;const R=(40+6*Math.sin(t*2+gx))*SC;ctx.drawImage(G,X-R,Y-R,2*R,2*R)}ctx.globalAlpha=1}
+   ctx.globalCompositeOperation='source-over';ctx.drawImage(todVig(W,H,ph==='night'?.38:ph==='dusk'?.24:.14),0,0,W,H);
+   ctx.restore()}catch(e){}return r}}
 </script></body></html>
