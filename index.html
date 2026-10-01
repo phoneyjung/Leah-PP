@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 0.99';
+const VERSION='Lantern Academy 1.00';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -3253,4 +3253,11 @@ for(const L of ['th','en']){try{const base=TX[L]&&TX[L].goalHome;if(!base)contin
 // 0.98 the way up from Crystal Cave floor 1 leads back to where you came in (mountain path or the hunting floor), not always to the hunting floor
 {const _gmC=goMap;goMap=function(id){try{if(id==='cave1'&&S&&M&&(M.id==='mountain'||M.id==='hunt1')){S.cave1From=M.id}}catch(e){}return _gmC.apply(this,arguments)}}
 {const _ue=useExit;useExit=function(e){try{if(M&&M.id==='cave1'&&e&&e.id==='up'&&S&&S.cave1From==='mountain'&&MAPS.mountain){const back=(MAPS.mountain().exits||[]).find(x=>x.to==='cave1');if(back){sfx('warp');fadeTo(()=>goMap('mountain',back.id));return}}}catch(err){}return _ue.apply(this,arguments)}}
+
+// 1.00 the town's west road (farm) and east road (valley field) lead to unfinished grey test layouts: closed ("coming soon")
+// until their painted/kit versions exist. Test links ?farm still open the farm for development.
+{const _cpL=MAPS.capital;MAPS.capital=function(){const m=_cpL.apply(this,arguments);try{for(const e of m.exits){
+   if(e.id==='w'&&e.to==='farm'&&!IMG.bgFarm){e.locked=1;e.msg='soon'}
+   if(e.id==='e'&&e.to==='scn_east'&&!IMG.mapEast){e.locked=1;e.msg='soon'}}}catch(e){}return m}}
+try{delete CACHE.capital}catch(e){}
 </script></body></html>
