@@ -1,0 +1,683 @@
+{
+ "kit": "town",
+ "version": 2,
+ "tile": 32,
+ "atlas": "kit-town.png",
+ "size": [
+  1024,
+  455
+ ],
+ "tiles": {
+  "ground": "tiles-town-meadow.png",
+  "water": "tiles-water.png"
+ },
+ "tone": {
+  "grass": [
+   [
+    112,
+    150,
+    66
+   ],
+   [
+    38,
+    36,
+    22
+   ]
+  ],
+  "road": [
+   [
+    226,
+    204,
+    168
+   ],
+   [
+    22,
+    22,
+    24
+   ]
+  ],
+  "water": [
+   [
+    42,
+    124,
+    179
+   ],
+   [
+    29,
+    37,
+    40
+   ]
+  ],
+  "calm": 0.1
+ },
+ "tags": {
+  "house": {
+   "solid": "foot",
+   "occlude": 1,
+   "night": "windows"
+  },
+  "tree": {
+   "solid": "foot",
+   "occlude": 1,
+   "sway": 1
+  },
+  "bush": {
+   "solid": "foot"
+  },
+  "rock": {
+   "solid": "foot"
+  },
+  "low": {
+   "solid": 0
+  },
+  "lamp": {
+   "solid": "foot",
+   "occlude": 1,
+   "light": 1
+  },
+  "wall": {
+   "solid": "foot"
+  },
+  "prop": {
+   "solid": "foot"
+  },
+  "deck": {
+   "solid": 0,
+   "flat": 1
+  }
+ },
+ "pieces": {
+  "bush.flower": {
+   "rect": [
+    426,
+    338,
+    76,
+    54
+   ],
+   "tag": "bush",
+   "foot": [
+    1,
+    1
+   ],
+   "review": {
+    "score": 9.3,
+    "from": "nature N2#8"
+   }
+  },
+  "bush.round": {
+   "rect": [
+    590,
+    338,
+    65,
+    52
+   ],
+   "tag": "bush",
+   "foot": [
+    1,
+    1
+   ],
+   "review": {
+    "score": 9.2,
+    "from": "nature N2#7"
+   }
+  },
+  "deck.bridge": {
+   "rect": [
+    134,
+    338,
+    136,
+    75
+   ],
+   "tag": "deck",
+   "foot": [
+    4,
+    2
+   ],
+   "review": {
+    "score": 9.2,
+    "from": "details K3#4"
+   }
+  },
+  "deck.stairs": {
+   "rect": [
+    0,
+    338,
+    132,
+    75
+   ],
+   "tag": "deck",
+   "foot": [
+    4,
+    2
+   ],
+   "review": {
+    "score": 9.2,
+    "from": "details K3#3"
+   }
+  },
+  "fence.picket": {
+   "rect": [
+    943,
+    338,
+    66,
+    42
+   ],
+   "tag": "wall",
+   "foot": [
+    2,
+    1
+   ],
+   "review": {
+    "score": 9.1,
+    "from": "details K2#6"
+   }
+  },
+  "house.clock": {
+   "rect": [
+    0,
+    0,
+    128,
+    194
+   ],
+   "tag": "house",
+   "foot": [
+    4,
+    3
+   ],
+   "review": {
+    "score": 9.3,
+    "from": "buildings B2#2"
+   },
+   "door": 2.0,
+   "windows": [
+    [
+     -0.24,
+     -0.36
+    ],
+    [
+     0.24,
+     -0.36
+    ]
+   ]
+  },
+  "house.navy": {
+   "rect": [
+    0,
+    196,
+    168,
+    140
+   ],
+   "tag": "house",
+   "foot": [
+    5,
+    3
+   ],
+   "review": {
+    "score": 9.2,
+    "from": "buildings B2#6"
+   },
+   "door": 2.62,
+   "windows": [
+    [
+     -0.24,
+     -0.36
+    ],
+    [
+     0.24,
+     -0.36
+    ]
+   ]
+  },
+  "house.post": {
+   "rect": [
+    130,
+    0,
+    176,
+    188
+   ],
+   "tag": "house",
+   "foot": [
+    6,
+    3
+   ],
+   "review": {
+    "score": 9.3,
+    "from": "buildings B2#3"
+   },
+   "door": 2.75,
+   "windows": [
+    [
+     -0.24,
+     -0.36
+    ],
+    [
+     0.24,
+     -0.36
+    ]
+   ]
+  },
+  "house.red": {
+   "rect": [
+    688,
+    0,
+    168,
+    167
+   ],
+   "tag": "house",
+   "foot": [
+    5,
+    3
+   ],
+   "review": {
+    "score": 9.2,
+    "from": "buildings B2#5"
+   },
+   "door": 2.62,
+   "windows": [
+    [
+     -0.24,
+     -0.36
+    ],
+    [
+     0.24,
+     -0.36
+    ]
+   ]
+  },
+  "house.restaurant": {
+   "rect": [
+    308,
+    0,
+    184,
+    182
+   ],
+   "tag": "house",
+   "foot": [
+    6,
+    3
+   ],
+   "review": {
+    "score": 9.3,
+    "from": "buildings B2#1"
+   },
+   "door": 2.88,
+   "windows": [
+    [
+     -0.24,
+     -0.36
+    ],
+    [
+     0.24,
+     -0.36
+    ]
+   ]
+  },
+  "house.smith": {
+   "rect": [
+    494,
+    0,
+    192,
+    171
+   ],
+   "tag": "house",
+   "foot": [
+    6,
+    3
+   ],
+   "review": {
+    "score": 9.3,
+    "from": "buildings B4#4"
+   },
+   "door": 3.0,
+   "windows": [
+    [
+     -0.24,
+     -0.36
+    ],
+    [
+     0.24,
+     -0.36
+    ]
+   ]
+  },
+  "house.stall": {
+   "rect": [
+    778,
+    196,
+    116,
+    89
+   ],
+   "tag": "house",
+   "foot": [
+    4,
+    3
+   ],
+   "review": {
+    "score": 9.3,
+    "from": "details K2#10"
+   },
+   "door": 1.81,
+   "windows": [
+    [
+     -0.24,
+     -0.36
+    ],
+    [
+     0.24,
+     -0.36
+    ]
+   ]
+  },
+  "lamp.street": {
+   "rect": [
+    272,
+    338,
+    26,
+    74
+   ],
+   "tag": "lamp",
+   "foot": [
+    1,
+    1
+   ],
+   "review": {
+    "score": 9.2,
+    "from": "nature N2#12"
+   },
+   "light": [
+    0,
+    -64,
+    40
+   ]
+  },
+  "low.flowers": {
+   "rect": [
+    145,
+    415,
+    69,
+    38
+   ],
+   "tag": "low",
+   "foot": [
+    0,
+    0
+   ],
+   "review": {
+    "score": 9.2,
+    "from": "nature N2#9"
+   }
+  },
+  "low.grass": {
+   "rect": [
+    0,
+    415,
+    47,
+    40
+   ],
+   "tag": "low",
+   "foot": [
+    0,
+    0
+   ],
+   "review": {
+    "score": 9.1,
+    "from": "nature N2#10"
+   }
+  },
+  "pine.small": {
+   "rect": [
+    368,
+    338,
+    56,
+    70
+   ],
+   "tag": "tree",
+   "foot": [
+    1,
+    1
+   ],
+   "review": {
+    "score": 9.1,
+    "from": "nature N2#6"
+   }
+  },
+  "pine.tall": {
+   "rect": [
+    462,
+    196,
+    96,
+    112
+   ],
+   "tag": "tree",
+   "foot": [
+    1,
+    1
+   ],
+   "review": {
+    "score": 9.2,
+    "from": "nature N1#5"
+   }
+  },
+  "prop.barrels": {
+   "rect": [
+    733,
+    338,
+    58,
+    48
+   ],
+   "tag": "prop",
+   "foot": [
+    2,
+    1
+   ],
+   "review": {
+    "score": 9.2,
+    "from": "details K2#9"
+   }
+  },
+  "prop.bench": {
+   "rect": [
+    77,
+    415,
+    66,
+    40
+   ],
+   "tag": "prop",
+   "foot": [
+    2,
+    1
+   ],
+   "review": {
+    "score": 9.1,
+    "from": "details K1#11"
+   }
+  },
+  "prop.flowerbed": {
+   "rect": [
+    504,
+    338,
+    84,
+    53
+   ],
+   "tag": "prop",
+   "foot": [
+    3,
+    1
+   ],
+   "review": {
+    "score": 9.3,
+    "from": "details K5#7"
+   }
+  },
+  "prop.sign": {
+   "rect": [
+    793,
+    338,
+    46,
+    46
+   ],
+   "tag": "prop",
+   "foot": [
+    1,
+    1
+   ],
+   "review": {
+    "score": 9.2,
+    "from": "details K2#12"
+   }
+  },
+  "prop.well": {
+   "rect": [
+    300,
+    338,
+    66,
+    71
+   ],
+   "tag": "prop",
+   "foot": [
+    2,
+    1
+   ],
+   "review": {
+    "score": 9.3,
+    "from": "details K2#8"
+   }
+  },
+  "rock.moss": {
+   "rect": [
+    657,
+    338,
+    74,
+    52
+   ],
+   "tag": "rock",
+   "foot": [
+    2,
+    1
+   ],
+   "review": {
+    "score": 9.2,
+    "from": "nature N2#11"
+   }
+  },
+  "tree.blossom": {
+   "rect": [
+    335,
+    196,
+    125,
+    116
+   ],
+   "tag": "tree",
+   "foot": [
+    1,
+    1
+   ],
+   "review": {
+    "score": 9.4,
+    "from": "nature N2#3"
+   }
+  },
+  "tree.mango": {
+   "rect": [
+    667,
+    196,
+    109,
+    104
+   ],
+   "tag": "tree",
+   "foot": [
+    1,
+    1
+   ],
+   "review": {
+    "score": 9.3,
+    "from": "nature N2#4"
+   }
+  },
+  "tree.oak": {
+   "rect": [
+    170,
+    196,
+    163,
+    136
+   ],
+   "tag": "tree",
+   "foot": [
+    1,
+    1
+   ],
+   "review": {
+    "score": 9.3,
+    "from": "nature N3#2"
+   }
+  },
+  "tree.round": {
+   "rect": [
+    560,
+    196,
+    105,
+    104
+   ],
+   "tag": "tree",
+   "foot": [
+    1,
+    1
+   ],
+   "review": {
+    "score": 9.2,
+    "from": "nature N2#1"
+   }
+  },
+  "wall.low": {
+   "rect": [
+    841,
+    338,
+    100,
+    45
+   ],
+   "tag": "wall",
+   "foot": [
+    3,
+    1
+   ],
+   "review": {
+    "score": 9.2,
+    "from": "details K2#1"
+   }
+  },
+  "wall.post": {
+   "rect": [
+    49,
+    415,
+    26,
+    40
+   ],
+   "tag": "wall",
+   "foot": [
+    1,
+    1
+   ],
+   "review": {
+    "score": 9.1,
+    "from": "details K2#2"
+   }
+  },
+  "water.fall": {
+   "rect": [
+    896,
+    196,
+    104,
+    87
+   ],
+   "tag": "prop",
+   "foot": [
+    3,
+    1
+   ],
+   "review": {
+    "score": 9.2,
+    "from": "details K2#5"
+   }
+  }
+ }
+}
