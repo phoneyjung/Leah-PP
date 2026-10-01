@@ -109,7 +109,7 @@ button:disabled{opacity:.45}
 <script>
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 0.82';
+const VERSION='Lantern Academy 0.83';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -2817,4 +2817,13 @@ const SHEET_ART={};{const _ma=monArt;monArt=function(){const r=_ma.apply(this,ar
 // soft violet motes drifting in the painted caves
 {const motes=[];const _rM=render;render=function(tm){const r=_rM.apply(this,arguments);try{if(M&&(M.cavemouth||M.huntFloor)){while(motes.length<26)motes.push({x:Math.random(),y:Math.random(),v:.004+Math.random()*.01,p:Math.random()*6});
    ctx.save();ctx.globalCompositeOperation='lighter';const t=(tm||0);for(const o of motes){o.y-=o.v*.016;if(o.y<-.05){o.y=1.05;o.x=Math.random()}const X=o.x*VW*SC+Math.sin(t*.8+o.p)*8*SC,Y=o.y*VH*SC,a=.25+.2*Math.sin(t*2+o.p);ctx.fillStyle='rgba(200,150,255,'+a+')';ctx.fillRect(X,Y,2*SC,2*SC)}ctx.restore()}}catch(e){}return r}}
+
+// ================= 0.83 drop icons (ChatGPT icon set, same style as the shop icons). Missing file -> the old little squares stay.
+const DROP_ICONS={"coin":[0,0,64,64,64,64],"coin3":[64,0,64,64,64,48],"coinheap":[128,0,64,64,64,53],"potion":[192,0,64,64,47,64],"card-old":[256,0,64,64,56,64],"gearbag":[320,0,64,64,58,64],"chest":[384,0,64,64,64,56],"chest-open":[448,0,64,64,59,64],"amethyst":[0,64,64,64,58,64],"ore":[64,64,64,64,64,62],"fossil-shell":[128,64,64,64,64,60],"fossil-bone":[192,64,64,64,64,59],"lanternfish":[256,64,64,64,64,48],"key":[320,64,64,64,60,64],"star":[384,64,64,64,64,58],"mushroom":[448,64,64,64,64,64]};
+{const i=new Image();i.onload=()=>{IMG.dropIcons=i};i.src=(window.EMBED_ASSETS&&window.EMBED_ASSETS['icons-drops.png'])||'icons-drops.png'}
+function dropIcon(name,cx,by,h){const r=DROP_ICONS[name];if(!IMG.dropIcons||!r)return false;const k=h/64,w=r[4]*k,hh=r[5]*k;ctx.drawImage(IMG.dropIcons,r[0]+(64-r[4])/2|0,r[1]+64-r[5],r[4],r[5],Math.round(cx-w/2),Math.round(by-hh),Math.round(w),Math.round(hh));return true}
+{const _dd=drawDrop;drawDrop=function(d,tm){try{if(IMG.dropIcons&&(d.k==='coin'||d.k==='potion')){const x=Math.round(d.x-camX),y=Math.round(d.y-camY-Math.abs(Math.sin(tm*3+d.x))*2);
+   ctx.fillStyle='rgba(30,20,40,.25)';ctx.beginPath();ctx.ellipse(x,d.y-camY+1,6,2,0,0,6.283);ctx.fill();
+   if(d.k==='coin'){const nm=d.n>=10?'coinheap':d.n>=3?'coin3':'coin';ctx.save();ctx.globalCompositeOperation='lighter';glow(x,y-6,9,'255,220,120',.35);ctx.restore();if(dropIcon(nm,x,y+1,nm==='coin'?14:18))return}
+   else if(dropIcon('potion',x,y+1,17))return}}catch(e){}return _dd.apply(this,arguments)}}
 </script></body></html>
