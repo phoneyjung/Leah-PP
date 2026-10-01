@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.00';
+const VERSION='Lantern Academy 1.01';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -3260,4 +3260,17 @@ for(const L of ['th','en']){try{const base=TX[L]&&TX[L].goalHome;if(!base)contin
    if(e.id==='w'&&e.to==='farm'&&!IMG.bgFarm){e.locked=1;e.msg='soon'}
    if(e.id==='e'&&e.to==='scn_east'&&!IMG.mapEast){e.locked=1;e.msg='soon'}}}catch(e){}return m}}
 try{delete CACHE.capital}catch(e){}
+
+// ================= 1.01 faces on the letters, a different stamp every day, deep-blue water for kit maps =================
+const ART_OK={};for(const [k,f] of [['portraits','portraits-town.png'],['stamps','stamps.png']]){const i=new Image();i.onload=()=>{ART_OK[k]=1};i.onerror=()=>{};i.src=f}
+const MAIL_FACE={restaurant:0,clock_shop:1,blacksmith:2,house_w1:3,house_w2:4,stall:5,house_e1:6,house_e2:7};
+const faceHtml=(k,sz)=>ART_OK.portraits&&MAIL_FACE[k]!=null?`<div style="width:${sz}px;height:${sz}px;margin:0 auto;background:url(portraits-town.png) ${-MAIL_FACE[k]*sz}px 0/${8*sz}px ${sz}px no-repeat;image-rendering:pixelated"></div>`:`<div style="font-size:${Math.round(sz*.45)}px;line-height:1.1">${MAIL_TO[k][2]}</div>`;
+mailShow=function(){const mb=mailToday();modal('<h2>'+t('mailGet')+'</h2><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:6px">'+mb.letters.map(l=>'<div style="background:#fffaf0;color:#3a2410;border:3px solid #c9a46a;border-radius:10px;padding:8px 6px;text-align:center">'+faceHtml(l.to,84)+'<div style="font-size:12px;color:#8a6a3a;margin-top:4px">'+t('mailTo')+'</div><div style="font-size:22px;font-weight:bold">'+mailName(l.to)+'</div><div style="font-size:13px">'+mailWhere(l.to)+'</div></div>').join('')+'</div>')};
+// the stamp book: stamp n shows picture n (fountain, lantern, slime, bat, mushling, crystal, clock tower, post office, blossom tree, star)
+{const _osb=openStampBook;openStampBook=function(){const r=_osb.apply(this,arguments);try{if(!ART_OK.stamps)return r;const n=Math.min(STAMP_MAX,S.stamps||0);const cells=[...document.querySelectorAll('#mBody div[style*="aspect-ratio:1"]')];
+   cells.forEach((c,i)=>{if(i<n){c.style.background=`url(stamps.png) ${i/9*100}% 0/1000% 100% no-repeat`;c.style.imageRendering='pixelated';c.style.borderRadius='6px';c.style.border='none';c.style.boxShadow='0 0 10px rgba(255,210,110,.6)';c.style.aspectRatio='1';c.firstChild&&c.firstChild.nodeType===3&&(c.firstChild.textContent='')}})}catch(e){}return r}}
+// kit maps: their own water tiles when the manifest names them
+{const _kl=kitLoad;kitLoad=function(name){_kl.apply(this,arguments);fetch('kit-'+name+'.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(man=>{if(!man||!man.tiles||!man.tiles.water||man.tiles.water==='tiles-water.png')return;const w=new Image();w.onload=()=>{IMG['kitWater:'+name]=w;for(const id in KIT_MAPS)if(KIT_MAPS[id].kit===name)try{delete CACHE[id]}catch(e){}};w.src=man.tiles.water}).catch(()=>{})}}
+kitLoad('town');
+{const _wl=wangLayer;wangLayer=function(g,im,...rest){if(im===IMG.water&&M&&M.kitMap&&IMG['kitWater:'+M.kitMap])im=IMG['kitWater:'+M.kitMap];return _wl.call(this,g,im,...rest)}}
 </script></body></html>

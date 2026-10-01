@@ -1,6 +1,6 @@
 {
  "kit": "town",
- "version": 2,
+ "version": 3,
  "tile": 32,
  "atlas": "kit-town.png",
  "size": [
@@ -9,7 +9,7 @@
  ],
  "tiles": {
   "ground": "tiles-town-meadow.png",
-  "water": "tiles-water.png"
+  "water": "tiles-town-water.png"
  },
  "tone": {
   "grass": [
