@@ -109,7 +109,7 @@ button:disabled{opacity:.45}
 <script>
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 0.88';
+const VERSION='Lantern Academy 0.89';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -2937,9 +2937,9 @@ try{TX.th.townPilot='เมืองพาเพลิน · ลานน้ำ�
 // open the pilot with ?town2
 {const _sg=startGame;startGame=function(){const r=_sg.apply(this,arguments);try{if(/[?&]town2\b/.test(location.search))setTimeout(()=>goMap('town2'),300)}catch(e){}return r}}
 // ---- performance meter + light mode (rule 8): frame time is measured all the time; ?perf shows it on screen ----
-const PERF={ms:16.7,fps:60,low:0,lite:false};
+const PERF={ms:16.7,fps:60,low:0};Object.defineProperty(PERF,'lite',{get:()=>LITE});
 {let last=0;const _rP=render;render=function(tm){const t0=performance.now();const r=_rP.apply(this,arguments);const t1=performance.now();PERF.draw=(PERF.draw||0)*.9+(t1-t0)*.1;
-  if(last){const dt=t1-last;PERF.ms=PERF.ms*.95+dt*.05;PERF.fps=Math.round(1000/PERF.ms);if(PERF.fps<45){PERF.low+=dt;if(PERF.low>5000&&!PERF.lite){PERF.lite=true;try{say('🔋 '+(LANG==='en'?'Light mode on for a smoother game':'เปิดโหมดเบาให้เกมลื่นขึ้น'))}catch(e){}}}else PERF.low=Math.max(0,PERF.low-dt)}last=t1;
+  if(last){const dt=t1-last;PERF.ms=PERF.ms*.95+dt*.05;PERF.fps=Math.round(1000/PERF.ms);/* the game's own smooth mode (LITE) decides; this meter only measures */}last=t1;
   if(/[?&]perf\b/.test(location.search)){ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.fillStyle='rgba(0,0,0,.55)';ctx.fillRect(4,innerHeight*0+4,150,22);ctx.fillStyle='#9f9';ctx.font='12px monospace';ctx.fillText(PERF.fps+' fps · draw '+PERF.draw.toFixed(1)+' ms'+(PERF.lite?' · lite':''),10,19);ctx.restore()}
   return r}}
 
@@ -3023,4 +3023,19 @@ function todShaft(W,H){const k=W+'x'+H;if(TOD.shaft[k])return TOD.shaft[k];const
      ctx.globalAlpha=.32*k;for(const [gx,gy] of M.glows){const X=(gx-camX)*SC,Y=(gy-camY)*SC;if(X<-120||X>W+120||Y<-120||Y>H+120)continue;const R=(40+6*Math.sin(t*2+gx))*SC;ctx.drawImage(G,X-R,Y-R,2*R,2*R)}ctx.globalAlpha=1}
    ctx.globalCompositeOperation='source-over';ctx.drawImage(todVig(W,H,ph==='night'?.38:ph==='dusk'?.24:.14),0,0,W,H);
    ctx.restore()}catch(e){}return r}}
+
+// ================= 0.89 readability (lesson from Under the Island): quiet ground, things you can talk to stand out =================
+// 1) recipe-town ground a little less saturated so buildings, people and items read first
+{const _gg=gradeGround;gradeGround=function(m){_gg.apply(this,arguments);try{const c=m.ground,g=c.getContext('2d'),W=c.width,H=c.height,id=g.getImageData(0,0,W,H),d=id.data,k=.18;
+  for(let y=0;y<H;y++){const ty=Math.floor(y/T);for(let x=0;x<W;x++){const kk=key(Math.floor(x/T),ty);if(m.WATER.has(kk))continue;const p=(y*W+x)*4,L=.3*d[p]+.59*d[p+1]+.11*d[p+2];d[p]=d[p]*(1-k)+L*k;d[p+1]=d[p+1]*(1-k)+L*k;d[p+2]=d[p+2]*(1-k)+L*k}}
+  g.putImageData(id,0,0);m.groundCalm=k}catch(e){}}}
+// 2) people you can talk to and light stones get a soft warm rim, everywhere, so a child spots them at once
+const RIM={};
+function rimOf(o){const im=o.pick?o.pick():IMG[o.img];if(!im)return null;const k=o.img+'|'+o.sx+'|'+o.sy+'|'+o.sw+'|'+o.sh;if(RIM[k])return RIM[k];
+  const c=document.createElement('canvas');c.width=o.sw+4;c.height=o.sh+4;const g=c.getContext('2d');
+  const s=document.createElement('canvas');s.width=o.sw;s.height=o.sh;const sg=s.getContext('2d');sg.drawImage(im,o.sx,o.sy,o.sw,o.sh,0,0,o.sw,o.sh);sg.globalCompositeOperation='source-in';sg.fillStyle='#ffc93c';sg.fillRect(0,0,o.sw,o.sh);
+  for(const [dx,dy] of [[-1,0],[1,0],[0,-1],[0,1],[-1,-1],[1,1],[-1,1],[1,-1],[-2,0],[2,0],[0,-2],[0,2]])g.drawImage(s,2+dx,2+dy);
+  g.globalCompositeOperation='destination-out';g.drawImage(im,o.sx,o.sy,o.sw,o.sh,2,2,o.sw,o.sh);return RIM[k]=c}
+{const _dO=drawObj;drawObj=function(o,tm){try{if((o.npc||o.stoneId)&&!(typeof PERF!=='undefined'&&PERF.lite)&&o.cb!=null){const r=rimOf(o);if(r){const X=Math.round(o.x-o.sw/2-camX),Y=Math.round(o.y-(o.cb+1)-camY);
+   ctx.save();ctx.globalAlpha=(o.a==null?1:o.a)*(.75+.2*Math.sin((tm||0)*2.2+o.x*.01));ctx.imageSmoothingEnabled=false;ctx.drawImage(r,X-2,Y-2);ctx.restore()}}}catch(e){}return _dO.apply(this,arguments)}}
 </script></body></html>
