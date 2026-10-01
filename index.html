@@ -121,12 +121,12 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.01';
+const VERSION='Lantern Academy 1.02';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
   stone:'obj-lightstone.png',stonePlaza:'obj-lightstone-plaza.png',caveDoor:'obj-cave-crystal.png',rock:'obj-rockfall.png',
-  bridgeRope:'obj-bridge-rope.png',bld:'buildings-village.png',house:'tiles-house.png',furn:'furniture.png',pier:'obj-pier.png',npc_leah:'leah-idle.png',npc_nuan:'nuan-idle.png',npc_mom:'mom-idle.png',npc_dad:'dad-idle.png',npc_peb:'peb-idle.png',bridgeStone:'obj-bridge-stone.png',fountBig:'obj-fountain-big.png',fountOld:'obj-fountain-old.png',t_forest:'tiles-forest.png',t_desert:'tiles-desert.png',t_ulake:'tiles-ulake.png',t_sky:'tiles-sky.png',bldAcademy:'bld-academy.png',bldLanna:'bld-lanna-house.png',bldLanna2:'bld-lanna-house2.png',bldStall:'bld-market-stall.png',objShrine:'obj-lantern-shrine.png',objBridgeArch:'obj-bridge-arch.png',objStairs:'obj-stairs-stone.png',objPier:'obj-pier-teak.png',bgPlaza:'map-plaza.jpg',bgCapGrey:'capital-greybox.png',bgFarmGrey:'farm-greybox.png',bgFarm:'map-farm.jpg',bgNorthGrey:'north-greybox.png',bgEastGrey:'east-greybox.png',bgSouthGrey:'south-greybox.png',mapNorth:'map-north.jpg',mapEast:'map-east.jpg',mapSouth:'map-south.jpg',mapCapital:'map-capital.jpg',house1:'farm-house-1.png',house2:'farm-house-2.png',house3:'farm-house-3.png',robotSheet:'robot-helper.png',wildBush:'wild-bush.png',wildRock:'wild-rock.png',wildStump:'wild-stump.png'};
+  bridgeRope:'obj-bridge-rope.png',bld:'buildings-village.png',house:'tiles-house.png',furn:'furniture.png',pier:'obj-pier.png',npc_leah:'leah-idle.png',npc_nuan:'nuan-idle.png',npc_mom:'mom-idle.png',npc_dad:'dad-idle.png',npc_peb:'peb-idle.png',bridgeStone:'obj-bridge-stone.png',fountBig:'obj-fountain-big.png',fountOld:'obj-fountain-old.png',bldAcademy:'bld-academy.png',bldLanna:'bld-lanna-house.png',bldLanna2:'bld-lanna-house2.png',bldStall:'bld-market-stall.png',objShrine:'obj-lantern-shrine.png',objBridgeArch:'obj-bridge-arch.png',objStairs:'obj-stairs-stone.png',objPier:'obj-pier-teak.png',bgCapGrey:'capital-greybox.png',bgFarmGrey:'farm-greybox.png',bgFarm:'map-farm.jpg',mapNorth:'map-north.jpg',mapEast:'map-east.jpg',mapSouth:'map-south.jpg',mapCapital:'map-capital.jpg',house1:'farm-house-1.png',house2:'farm-house-2.png',house3:'farm-house-3.png',robotSheet:'robot-helper.png',wildBush:'wild-bush.png',wildRock:'wild-rock.png',wildStump:'wild-stump.png'};
 const KIDS=[['kid-braids','ผมเปีย','Braids'],['kid-ponytail','หางม้า','Ponytail'],['kid-bob','ผมบ็อบ','Bob'],['kid-curly2','ผมหยิก','Curly',1],['kid-blond','ผมยุ่ง','Messy'],['kid-spiky','ผมตั้ง','Spiky']];
 KIDS.forEach(([k])=>{FILES['i_'+k]=k+'-idle.png';FILES['s_'+k]=k+'-stand.png';FILES['w_'+k]=k+'-walk.png'});
 const EMBED=window.EMBED_ASSETS||null;  // the single-file preview build puts every image here
@@ -3273,4 +3273,30 @@ mailShow=function(){const mb=mailToday();modal('<h2>'+t('mailGet')+'</h2><div st
 {const _kl=kitLoad;kitLoad=function(name){_kl.apply(this,arguments);fetch('kit-'+name+'.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(man=>{if(!man||!man.tiles||!man.tiles.water||man.tiles.water==='tiles-water.png')return;const w=new Image();w.onload=()=>{IMG['kitWater:'+name]=w;for(const id in KIT_MAPS)if(KIT_MAPS[id].kit===name)try{delete CACHE[id]}catch(e){}};w.src=man.tiles.water}).catch(()=>{})}}
 kitLoad('town');
 {const _wl=wangLayer;wangLayer=function(g,im,...rest){if(im===IMG.water&&M&&M.kitMap&&IMG['kitWater:'+M.kitMap])im=IMG['kitWater:'+M.kitMap];return _wl.call(this,g,im,...rest)}}
+
+// ================= 1.02 WORLD v2: one world built around Paplern Town; the old tile world is taken out of play =================
+// Kept (code stays, can be reused): NPCs, shop, the player's home and furniture, daily board, crystals and quiz, cards, pets, fishing.
+// Taken out of play: the old village, foothill, home street, market, lake, beach, falls, old crystal caves 1-3, dream gate, warp lands, grey test scenes.
+// Test links (?oldworld) still open the old maps for development.
+const OLD_WORLD=id=>['plaza','mountain','home','market','lake','cave1','cave2','cave3','beach','falls','trial','scn_north','scn_south','scn_east'].includes(id)||/^(dream|forest|desert|ulake|sky)\d*$/.test(id||'');
+const OLD_OK=()=>/[?&]oldworld\b/.test(location.search);
+try{Object.assign(TX.th,{building:'ทางนี้กำลังสร้าง (เร็ว ๆ นี้)',ourHome:'บ้านของเรา'});if(TX.en)Object.assign(TX.en,{building:'This way is being built (coming soon)',ourHome:'Our home'})}catch(e){}
+// every way into the old world now lands in Paplern Town (old saves, fainting at an old light stone, warps)
+{const _gmW=goMap;goMap=function(id,...rest){try{if(OLD_WORLD(id)&&!OLD_OK()){return _gmW.call(this,'capital')}}catch(e){}return _gmW.call(this,id,...rest)}}
+// the town: south road and the way down from the hunting floor are closed until the new places exist; our home door; the family moves in
+{const _cpV=MAPS.capital;MAPS.capital=function(){const m=_cpV.apply(this,arguments);try{if(!m.capA)return m;
+  for(const e of m.exits)if(e.id==='s'){e.locked=1;e.msg='building'}
+  const d=MAIL_DOORS.house_e2;m.exits.push({id:'home',x:(d[0]+.5)*T,y:(d[1]+.35)*T,to:'room',toExit:'door',label:'ourHome'});
+  const place=(who,tx,ty,face)=>{if((m.npcs||[]).some(n=>n.npc===who))return;const p=stoneSpot(m,tx,ty);if(p)addNpc(m,who,p[0],p[1],face||0)};
+  place('nuan',31,25.5);place('mom',37,25.5);place('dad',41,14.5);
+ }catch(e){}return m}}
+{const _rm=MAPS.room;if(_rm)MAPS.room=function(){const m=_rm.apply(this,arguments);try{for(const e of m.exits)if(e.id==='door'&&e.to==='home'){e.to='capital';e.toExit='home'}}catch(e){}return m}}
+{const _hv=MAPS.hunt1;MAPS.hunt1=function(){const m=_hv.apply(this,arguments);try{if(!OLD_OK())for(const e of m.exits)if(e.id==='n'){e.locked=1;e.msg='building'}}catch(e){}return m}}
+// arriving home from the house: stand on the path just below the door, not inside it
+{const _gmH=goMap;goMap=function(id,ex){const r=_gmH.apply(this,arguments);try{if(id==='capital'&&ex==='home'){const d=MAIL_DOORS.house_e2;P.x=(d[0]+.5)*T;P.y=(d[1]+1.6)*T;P.path=null;exitCool=Math.max(exitCool||0,1.2)}}catch(e){}return r}}
+// our home is no longer on the letter route
+try{delete MAIL_TO.house_e2}catch(e){}
+// the 🗺️ warp menu lists only places of the new world
+{const _owV=openWarp;openWarp=function(){const r=_owV.apply(this,arguments);try{if(OLD_OK())return r;document.querySelectorAll('#mBody [data-id]').forEach(b=>{if(OLD_WORLD(b.dataset.id))b.remove()});document.querySelectorAll('#mBody [data-land]').forEach(b=>b.remove())}catch(e){}return r}}
+try{for(const k of Object.keys(CACHE))delete CACHE[k]}catch(e){}
 </script></body></html>
