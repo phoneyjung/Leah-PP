@@ -109,7 +109,7 @@ button:disabled{opacity:.45}
 <script>
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 0.83';
+const VERSION='Lantern Academy 0.84';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -2826,4 +2826,50 @@ function dropIcon(name,cx,by,h){const r=DROP_ICONS[name];if(!IMG.dropIcons||!r)r
    ctx.fillStyle='rgba(30,20,40,.25)';ctx.beginPath();ctx.ellipse(x,d.y-camY+1,6,2,0,0,6.283);ctx.fill();
    if(d.k==='coin'){const nm=d.n>=10?'coinheap':d.n>=3?'coin3':'coin';ctx.save();ctx.globalCompositeOperation='lighter';glow(x,y-6,9,'255,220,120',.35);ctx.restore();if(dropIcon(nm,x,y+1,nm==='coin'?14:18))return}
    else if(dropIcon('potion',x,y+1,17))return}}catch(e){}return _dd.apply(this,arguments)}}
+
+// ================= 0.84 monster cards like Ragnarok Online: one frame for every card, the monster art, name and effect are filled in by the game.
+// on the ground every card shows the same card back; picking one up flips it over; the bag has a card book.
+const CARD_META={"w":462,"h":670,"win":[53,130,409,454],"plate":[49,489,412,610],"banner":[98,70,362,99],"back":[462,670]};
+{for(const [k,f] of [['cardFront','card-front.png'],['cardBack','card-back.png']]){const i=new Image();i.onload=()=>{IMG[k]=i};i.src=(window.EMBED_ASSETS&&window.EMBED_ASSETS[f])||f}}
+try{TX.th.cardSetCave='การ์ดชุดถ้ำคริสตัล';if(TX.en)TX.en.cardSetCave='Crystal Cave card'}catch(e){}
+const CARD_ZONE={slime:'cave',bat:'cave',mushbug:'cave',golem:'cave'};
+function cardCanvas(kind,W){if(!IMG.cardFront)return null;const m=CARD_META,s=W/m.w,H=Math.round(m.h*s),c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d');
+  const x0=m.win[0]*s,y0=m.win[1]*s,ww=(m.win[2]-m.win[0])*s,wh=(m.win[3]-m.win[1])*s;
+  g.save();g.beginPath();if(g.roundRect)g.roundRect(x0-2,y0-2,ww+4,wh+4,6*s);else g.rect(x0-2,y0-2,ww+4,wh+4);g.clip();
+  if(IMG.mapCaveMouth&&CARD_ZONE[kind]==='cave'){g.imageSmoothingEnabled=true;g.drawImage(IMG.mapCaveMouth,420,440,620,520,x0-2,y0-2,ww+4,wh+4)}else{const gr=g.createLinearGradient(0,y0,0,y0+wh);gr.addColorStop(0,'#5a3c8c');gr.addColorStop(1,'#2a1a48');g.fillStyle=gr;g.fillRect(x0-2,y0-2,ww+4,wh+4)}
+  g.fillStyle='rgba(36,18,64,.35)';g.fillRect(x0-2,y0-2,ww+4,wh+4);
+  const rg=g.createRadialGradient(x0+ww/2,y0+wh*.62,0,x0+ww/2,y0+wh*.62,ww*.55);rg.addColorStop(0,'rgba(255,236,190,.55)');rg.addColorStop(1,'rgba(255,236,190,0)');g.fillStyle=rg;g.fillRect(x0,y0,ww,wh);
+  const art=(MON_ART[kind+'1']||MON_ART[kind+'0']||[])[0];if(art){const k=Math.max(1,Math.min(ww*.72/art.width,wh*.62/art.height));const aw=art.width*k,ah=art.height*k,bx=x0+(ww-aw)/2,by=y0+wh*.88;
+    g.fillStyle='rgba(20,10,40,.35)';g.beginPath();g.ellipse(x0+ww/2,by,aw*.38,aw*.09,0,0,6.283);g.fill();g.imageSmoothingEnabled=false;g.drawImage(art,Math.round(bx),Math.round(by-ah),Math.round(aw),Math.round(ah))}
+  g.restore();g.imageSmoothingEnabled=true;g.drawImage(IMG.cardFront,0,0,W,H);
+  const parts=String(t('c_'+kind)).split(' · '),name=parts[0],eff=parts.slice(1).join(' · ');
+  const bx0=m.banner[0]*s,by0=m.banner[1]*s,bw=(m.banner[2]-m.banner[0])*s,bh=(m.banner[3]-m.banner[1])*s;
+  g.textAlign='center';g.textBaseline='middle';g.font='bold '+Math.round(bh*.72)+"px 'Itim',system-ui,sans-serif";g.lineWidth=Math.max(2,bh*.12);g.strokeStyle='rgba(255,246,214,.9)';g.strokeText(name,bx0+bw/2,by0+bh/2+1,bw*.92);g.fillStyle='#4a2608';g.fillText(name,bx0+bw/2,by0+bh/2+1,bw*.92);
+  const px0=m.plate[0]*s,py0=m.plate[1]*s,pw=(m.plate[2]-m.plate[0])*s,ph=(m.plate[3]-m.plate[1])*s;
+  g.font=Math.round(ph*.13)+"px 'Itim',system-ui,sans-serif";g.fillStyle='#7a5a30';g.fillText(t('cardSetCave'),px0+pw/2,py0+ph*.22,pw*.9);
+  g.font='bold '+Math.round(ph*.2)+"px 'Itim',system-ui,sans-serif";g.fillStyle='#3d2410';g.fillText(eff,px0+pw/2,py0+ph*.58,pw*.9);
+  return c}
+{const _ddC=drawDrop;drawDrop=function(d,tm){try{if(d.k==='card'&&IMG.cardBack){const x=Math.round(d.x-camX),y=Math.round(d.y-camY-3-Math.abs(Math.sin(tm*3+d.x))*2);
+   ctx.save();ctx.globalCompositeOperation='lighter';glow(x,y-8,13,'255,220,120',.55+.15*Math.sin(tm*4));ctx.restore();
+   ctx.fillStyle='rgba(30,20,40,.25)';ctx.beginPath();ctx.ellipse(x,d.y-camY+1,6,2,0,0,6.283);ctx.fill();
+   const w=13,h=Math.round(13*CARD_META.h/CARD_META.w),tilt=Math.sin(tm*2+d.x)*.12;ctx.save();ctx.translate(x,y-h/2);ctx.rotate(tilt);ctx.imageSmoothingEnabled=true;ctx.drawImage(IMG.cardBack,-w/2,-h/2,w,h);ctx.restore();return}}catch(e){}return _ddC.apply(this,arguments)}}
+function cardBackEl(W){const H=Math.round(W*CARD_META.h/CARD_META.w),c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d');g.imageSmoothingEnabled=true;g.drawImage(IMG.cardBack,0,0,W,H);return c}
+function cardFlip(kind){try{if(!IMG.cardBack||!IMG.cardFront)return;const old=document.getElementById('cardPop');if(old)old.remove();const W=Math.min(260,Math.round(innerWidth*.42)),dpr=Math.min(2,devicePixelRatio||1);
+   const front=cardCanvas(kind,Math.round(W*dpr));if(!front)return;const H=Math.round(W*CARD_META.h/CARD_META.w);
+   const box=document.createElement('div');box.id='cardPop';box.style.cssText='position:fixed;inset:0;z-index:9998;display:flex;align-items:center;justify-content:center;background:rgba(20,10,40,.45);perspective:900px';
+   const card=document.createElement('div');card.style.cssText='position:relative;width:'+W+'px;height:'+H+'px;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.3,1.4,.5,1);transform:rotateY(180deg) scale(.6)';
+   const back=cardBackEl(Math.round(W*dpr));back.style.cssText='position:absolute;inset:0;width:100%;height:100%;backface-visibility:hidden;transform:rotateY(180deg)';
+   front.style.cssText='position:absolute;inset:0;width:100%;height:100%;backface-visibility:hidden;filter:drop-shadow(0 0 18px rgba(255,220,140,.8))';
+   card.append(front,back);box.append(card);document.body.append(box);requestAnimationFrame(()=>requestAnimationFrame(()=>{card.style.transform='rotateY(0deg) scale(1)'}));
+   const close=()=>{box.style.transition='opacity .3s';box.style.opacity='0';setTimeout(()=>box.remove(),300)};box.onclick=close;setTimeout(close,2800)}catch(e){}}
+{const _puC=pickUp;pickUp=function(d){const isCard=d&&d.k==='card'&&!(S&&(S.cards||[]).length>=(typeof CARD_MAX!=='undefined'?CARD_MAX:999));const r=_puC.apply(this,arguments);if(isCard)cardFlip(d.mon);return r}}
+function openCardBook(){const set=CAVE1_SET,cnt={};(S.cards||[]).forEach(c=>cnt[c]=(cnt[c]||0)+1);
+  modal('<h2>🃏 '+t('cardBook')+' '+(S.cardBook||[]).length+'/'+set.length+'</h2><div id="cbGrid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px"></div><p class="note" style="margin-top:6px">'+(set.every(c=>(S.cardBook||[]).includes(c))?'✨ '+t('cardDone'):'')+'</p>');
+  const grid=document.getElementById('cbGrid'),dpr=Math.min(2,devicePixelRatio||1);
+  for(const k of set){const has=(S.cardBook||[]).includes(k),cell=document.createElement('div');cell.style.cssText='position:relative;text-align:center';
+    let el;if(has){el=cardCanvas(k,Math.round(150*dpr))}else if(IMG.cardBack){el=cardBackEl(Math.round(150*dpr));el.style.filter='grayscale(.5) brightness(.75)'}
+    if(el){el.style.width='100%';el.style.height='auto';el.style.display='block';el.style.borderRadius='6px';cell.append(el)}
+    const tag=document.createElement('div');tag.style.cssText='font-size:12px;margin-top:2px';tag.textContent=has?('×'+(cnt[k]||0)):'?';cell.append(tag);
+    if(has)cell.onclick=()=>cardFlip(k);grid.append(cell)}}
+{const _ob=openBag;openBag=function(){const r=_ob.apply(this,arguments);try{if(IMG.cardFront&&!document.getElementById('bCardBook')){const b=document.createElement('button');b.id='bCardBook';b.textContent='🃏 '+t('cardBook')+' '+(S.cardBook||[]).length+'/'+CAVE1_SET.length;b.style.cssText='margin:0 0 6px 8px;vertical-align:middle';b.onclick=openCardBook;const h=document.querySelector('#mBody h2');if(h){h.style.display='inline-block';h.after(b)}else document.getElementById('mBody').prepend(b)}}catch(e){}return r}}
 </script></body></html>
