@@ -109,7 +109,7 @@ button:disabled{opacity:.45}
 <script>
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 0.84';
+const VERSION='Lantern Academy 0.85';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -2872,4 +2872,74 @@ function openCardBook(){const set=CAVE1_SET,cnt={};(S.cards||[]).forEach(c=>cnt[
     const tag=document.createElement('div');tag.style.cssText='font-size:12px;margin-top:2px';tag.textContent=has?('×'+(cnt[k]||0)):'?';cell.append(tag);
     if(has)cell.onclick=()=>cardFlip(k);grid.append(cell)}}
 {const _ob=openBag;openBag=function(){const r=_ob.apply(this,arguments);try{if(IMG.cardFront&&!document.getElementById('bCardBook')){const b=document.createElement('button');b.id='bCardBook';b.textContent='🃏 '+t('cardBook')+' '+(S.cardBook||[]).length+'/'+CAVE1_SET.length;b.style.cssText='margin:0 0 6px 8px;vertical-align:middle';b.onclick=openCardBook;const h=document.querySelector('#mBody h2');if(h){h.style.display='inline-block';h.after(b)}else document.getElementById('mBody').prepend(b)}}catch(e){}return r}}
+
+// ================= 0.85 MAP MAP_RECIPES (WORLD_BUILD_RULES): kit of parts + a short recipe + placement rules + seed =================
+// A map is a recipe, not a picture: ground from Wang tiles, every object is a tagged kit piece the game understands
+// (tree = sways, fades when you walk behind, trunk blocks · house = footprint blocks, roof fades · lamp = light · low = walk over).
+const KIT={
+  tree:[['props','roundA'],['props','roundB'],['props','mango'],['props','pink'],['props','frangi']],
+  pine:[['mprops','pine'],['mprops','pine2'],['mprops','pineThick'],['mprops','pineTwin'],['mprops','pineYoung']],
+  bush:['bush','berry'],low:['flowers','grass','fern'],rock:['boulder','rocks','mossRock'],
+  bld:{house:{img:'bld',sx:1,sy:1,sw:128,sh:128},shop:{img:'bld',sx:131,sy:1,sw:128,sh:128},lanna:{img:'bldLanna',sx:0,sy:0,sw:128,sh:128},lanna2:{img:'bldLanna2',sx:0,sy:0,sw:128,sh:128},stall:{img:'bldStall',sx:0,sy:0,sw:128,sh:128}}};
+const MAP_RECIPES={town2:{name:'townPilot',w:48,h:32,seed:23,inner:[5,6,41,27],
+  cobble:[{oval:[24,16.3,7.2,3.6]},{line:[[9.2,13.1],[41.5,13.1]],w:2.8},{line:[[9.2,23.8],[41.5,23.8]],w:2.4}],
+  path:[{line:[[24,13],[24,0]],w:4},{line:[[0,16.4],[17,16.3]],w:2.8},{line:[[31,16.3],[48,16.4]],w:2.8},{line:[[24,19.5],[24,32]],w:3.6}],
+  water:[{line:[[7.6,0],[7.2,8],[7.9,16.4],[7.3,24],[7.8,32]],w:1.8}],bridges:[16.4],
+  buildings:[{n:'restaurant',spr:'shop',x:11,y:7},{n:'clock_shop',spr:'house',x:16,y:7},{n:'post_office',spr:'lanna2',x:27,y:7},{n:'blacksmith',spr:'lanna',x:33,y:7},
+    {n:'house_w1',spr:'house',x:10,y:18},{n:'house_w2',spr:'lanna',x:15,y:18},{n:'stall',spr:'stall',x:28,y:18},{n:'house_e1',spr:'lanna2',x:32,y:18},{n:'house_e2',spr:'house',x:36,y:18}],
+  fountain:[24,16],warps:{n:[24,0],w:[0,16.4],e:[48,16.4],s:[24,32]},copyWarpsFrom:'capital',
+  decor:{lampsEvery:7,trees:8,low:30,benches:4},spawn:[24,20.5]}};
+function buildRecipe(id){const R=MAP_RECIPES[id];SEED=R.seed;const r=seeded(R.seed),m=newMap(id,'town',R.w,R.h,R.seed);m.nameKey=R.name;m.recipe=id;
+  const ins=(x,y)=>x>=0&&y>=0&&x<R.w&&y<R.h,K=(x,y)=>key(x,y);
+  const paint=(set,sh)=>{if(sh.oval){const [cx,cy,rx,ry]=sh.oval;for(let y=0;y<R.h;y++)for(let x=0;x<R.w;x++)if(((x+.5-cx)/rx)**2+((y+.5-cy)/ry)**2<=1)set.add(K(x,y))}
+    if(sh.line){const p=sh.line,h=sh.w/2;for(let i=0;i<p.length-1;i++){const [ax,ay]=p[i],[bx,by]=p[i+1],L=Math.hypot(bx-ax,by-ay),n=Math.ceil(L*4);for(let j=0;j<=n;j++){const px=ax+(bx-ax)*j/n,py=ay+(by-ay)*j/n;
+      for(let y=Math.floor(py-h);y<=Math.ceil(py+h);y++)for(let x=Math.floor(px-h);x<=Math.ceil(px+h);x++)if(ins(x,y)&&Math.hypot(x+.5-px,y+.5-py)<=h+.15)set.add(K(x,y))}}}};
+  (R.path||[]).forEach(s=>paint(m.PATH,s));(R.cobble||[]).forEach(s=>paint(m.COBBLE,s));(R.water||[]).forEach(s=>paint(m.WATER,s));
+  for(const k of m.WATER)m.SOLID.add(k);
+  for(const by of (R.bridges||[])){const rows=[Math.floor(by)-1,Math.floor(by)],xs=[];for(const y of rows)for(let x=0;x<R.w;x++)if(m.WATER.has(K(x,y))&&(m.PATH.has(K(x,y))||m.COBBLE.has(K(x,y)))){m.SOLID.delete(K(x,y));xs.push(x)}
+    if(xs.length)m.decks.push({img:'bridgeStone',x:(Math.min(...xs)+Math.max(...xs)+1)/2*T,y:Math.floor(by)*T,oy:64})}
+  const [ix0,iy0,ix1,iy1]=R.inner,inner=(x,y)=>x>=ix0&&x<=ix1&&y>=iy0&&y<=iy1,road=(x,y)=>m.PATH.has(K(x,y))||m.COBBLE.has(K(x,y));
+  // scenery frame: every tile outside the town is blocked except the roads that leave it; a forest is grown there by rule
+  for(let y=0;y<R.h;y++)for(let x=0;x<R.w;x++)if(!inner(x,y)&&!road(x,y))m.SOLID.add(K(x,y));
+  const nearRoad=(x,y,d)=>{for(let j=-d;j<=d;j++)for(let i=-d;i<=d;i++)if(road(x+i,y+j))return true;return false};
+  const used=new Set(),free=(x,y,d)=>{for(let j=-d;j<=d;j++)for(let i=-d;i<=d;i++)if(used.has(K(x+i,y+j)))return false;return true};
+  // buildings: 4x4 sprite; the bottom three rows block, the roof row can be walked behind (it fades)
+  const doors=[];for(const b of (R.buildings||[])){const sp=KIT.bld[b.spr];if(!sp)continue;m.objs.push({...sp,x:(b.x+2)*T,y:(b.y+4)*T-2,tall:1,cs:.45,kit:'house',name:b.n});
+    for(let y=b.y+1;y<=b.y+3;y++)for(let x=b.x;x<=b.x+3;x++){m.SOLID.add(K(x,y));used.add(K(x,y))}doors.push([b.x+2,b.y+4]);for(let y=b.y;y<=b.y+5;y++)for(let x=b.x;x<=b.x+3;x++)used.add(K(x,y))}
+  m.doorsKit=doors;
+  if(R.fountain&&IMG.fountBig){const [fx,fy]=R.fountain;const F={img:'fountBig',sx:0,sy:0,sw:128,sh:128,x:fx*T,y:(fy+1)*T+14,tall:1,cs:.35,kit:'landmark',pick:()=>(LIGHT<.6&&IMG.fountOld)||IMG.fountBig};m.objs.push(F);m.fountain=F;
+    for(let x=fx-2;x<=fx+1;x++)for(let y=fy-1;y<=fy;y++){m.SOLID.add(K(x,y));used.add(K(x,y))}}
+  // the forest frame: dense trees, never on a road, a little gap kept around each exit road
+  if(R.hill){const [hy0,hy1]=R.hill;for(let y=hy0;y<=hy1;y++)for(let x=0;x<R.w;x++)if(!road(x,y)&&!m.WATER.has(K(x,y))){m.CLIFF.add(K(x,y));m.SOLID.add(K(x,y))}
+    if(R.stairs&&IMG.objStairs){const [sx,sy]=R.stairs;m.objs.push({img:'objStairs',sx:0,sy:0,sw:128,sh:128,x:sx*T,y:sy*T+6,flat:1,tall:0,cs:0,kit:'landmark'})}}
+  for(let y=0;y<R.h;y++)for(let x=0;x<R.w;x++){if(!ins(x,y)||inner(x,y)||nearRoad(x,y,1)||m.WATER.has(K(x,y))||m.CLIFF.has(K(x,y))||!free(x,y,1)||r()<.18)continue;
+    const pool=y<iy0+2?KIT.pine:r()<.55?KIT.pine:KIT.tree,pick=pool[Math.floor(r()*pool.length)];addTree(m,pick[1],x,y,true);used.add(K(x,y))}
+  for(let y=0;y<R.h;y++)for(let x=0;x<R.w;x++){if(!ins(x,y)||inner(x,y)||road(x,y)||m.WATER.has(K(x,y))||m.CLIFF.has(K(x,y))||used.has(K(x,y))||r()<.45)continue;
+    addDeco(m,r()<.6?KIT.bush[Math.floor(r()*KIT.bush.length)]:KIT.low[Math.floor(r()*KIT.low.length)],x,y,false,Math.round((r()-.5)*12));used.add(K(x,y))}
+  // town decor by rule
+  const grass=(x,y)=>inner(x,y)&&!road(x,y)&&!m.WATER.has(K(x,y))&&!m.SOLID.has(K(x,y));
+  let n=0;for(let k=0;k<400&&n<R.decor.trees;k++){const x=ix0+Math.floor(r()*(ix1-ix0+1)),y=iy0+Math.floor(r()*(iy1-iy0+1));if(!grass(x,y)||nearRoad(x,y,2)||!free(x,y,2)||doors.some(([dx,dy])=>Math.hypot(dx-x,dy-y)<3))continue;
+    const pick=KIT.tree[Math.floor(r()*KIT.tree.length)];addTree(m,pick[1],x,y,true);used.add(K(x,y));n++}
+  n=0;for(let k=0;k<600&&n<R.decor.low;k++){const x=ix0+Math.floor(r()*(ix1-ix0+1)),y=iy0+Math.floor(r()*(iy1-iy0+1));if(!grass(x,y)||!free(x,y,0))continue;addDeco(m,KIT.low[Math.floor(r()*KIT.low.length)],x,y,false,Math.round((r()-.5)*10));used.add(K(x,y));n++}
+  // lamps along both streets every few tiles, on the grass edge, never in front of a door
+  {const L=R.decor.lampsEvery,lamps=[];for(let y=iy0;y<=iy1;y++)for(let x=ix0;x<=ix1;x++){if(!grass(x,y)||m.SOLID.has(K(x,y))||!(m.COBBLE.has(K(x,y-1))||m.COBBLE.has(K(x,y+1))))continue;if(doors.some(([dx,dy])=>Math.abs(dx-x)<2&&Math.abs(dy-y)<2))continue;if(nearRoad(x,y,0)&&m.PATH.has(K(x,y)))continue;
+    if(lamps.some(([lx,ly])=>Math.hypot(lx-x,ly-y)<L))continue;lamps.push([x,y]);addProp(m,'lamp',x,y);m.glows.push([x*T+16,y*T-30]);used.add(K(x,y))}}
+  // benches facing the fountain plaza
+  for(const [x,y] of [[18,14],[30,14],[18,18],[30,18]].slice(0,R.decor.benches))if(grass(x,y)&&free(x,y,0)){addProp(m,'bench',x,y,{tall:0,cs:.3});used.add(K(x,y))}
+  // warps: same destinations as the town this pilot stands in for
+  let src=null;try{src=MAPS[R.copyWarpsFrom]&&MAPS[R.copyWarpsFrom]()}catch(e){}
+  for(const [id,[wx,wy]] of Object.entries(R.warps)){const s=src&&src.exits.find(e=>e.id===id);if(!s)continue;m.exits.push({id,x:Math.min(R.w*T-10,Math.max(10,wx*T)),y:Math.min(R.h*T-10,Math.max(10,wy*T)),to:s.to,toExit:s.toExit,label:s.label})}
+  m.spawnDefault=[R.spawn[0]*T,R.spawn[1]*T];m.kitStats={objs:m.objs.length,bytesRecipe:JSON.stringify(R).length};return m}
+MAPS.town2=function(){return buildRecipe('town2')};
+try{TX.th.townPilot='เมืองพาเพลิน · ลานน้ำพุ (แบบชิ้นส่วน)';if(TX.en)TX.en.townPilot='Paplern Town · Fountain Square (kit)'}catch(e){}
+// arriving through an edge exit: step a little inside so the exit does not fire again
+{const _gmR=goMap;goMap=function(id,exitId){const r=_gmR.apply(this,arguments);try{if(M&&M.recipe&&exitId){const e=M.exits.find(x=>x.id===exitId);if(e){const R=MAP_RECIPES[M.recipe],cx=R.w*T/2,cy=R.h*T/2;P.x=e.x+(cx-e.x)*(e.id==='n'||e.id==='s'?0:.12);P.y=e.y+(cy-e.y)*(e.id==='n'||e.id==='s'?.16:0);if(e.id==='w')P.x=e.x+3*T;if(e.id==='e')P.x=e.x-3*T;if(e.id==='n')P.y=e.y+3*T;if(e.id==='s')P.y=e.y-3*T;P.path=null;exitCool=Math.max(exitCool||0,.8)}}}catch(e){}return r}}
+// open the pilot with ?town2
+{const _sg=startGame;startGame=function(){const r=_sg.apply(this,arguments);try{if(/[?&]town2\b/.test(location.search))setTimeout(()=>goMap('town2'),300)}catch(e){}return r}}
+// ---- performance meter + light mode (rule 8): frame time is measured all the time; ?perf shows it on screen ----
+const PERF={ms:16.7,fps:60,low:0,lite:false};
+{let last=0;const _rP=render;render=function(tm){const t0=performance.now();const r=_rP.apply(this,arguments);const t1=performance.now();PERF.draw=(PERF.draw||0)*.9+(t1-t0)*.1;
+  if(last){const dt=t1-last;PERF.ms=PERF.ms*.95+dt*.05;PERF.fps=Math.round(1000/PERF.ms);if(PERF.fps<45){PERF.low+=dt;if(PERF.low>5000&&!PERF.lite){PERF.lite=true;try{say('🔋 '+(LANG==='en'?'Light mode on for a smoother game':'เปิดโหมดเบาให้เกมลื่นขึ้น'))}catch(e){}}}else PERF.low=Math.max(0,PERF.low-dt)}last=t1;
+  if(/[?&]perf\b/.test(location.search)){ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.fillStyle='rgba(0,0,0,.55)';ctx.fillRect(4,innerHeight*0+4,150,22);ctx.fillStyle='#9f9';ctx.font='12px monospace';ctx.fillText(PERF.fps+' fps · draw '+PERF.draw.toFixed(1)+' ms'+(PERF.lite?' · lite':''),10,19);ctx.restore()}
+  return r}}
 </script></body></html>
