@@ -109,7 +109,7 @@ button:disabled{opacity:.45}
 <script>
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 0.89';
+const VERSION='Lantern Academy 0.90';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -2792,8 +2792,8 @@ for(const id of ['cavemouth','hunt1']){const _qm=MAPS[id];MAPS[id]=function(){co
 // a visible weapon swing (melee) and a digging motion
 {const _rS=render;render=function(tm){const r=_rS.apply(this,arguments);try{if(!M||!P)return r;
    if(P.atkAnim>0&&typeof weapon==='function'&&!['bow','staff'].includes(weapon().type)){const a=DIR_ANG[P.row],p=1-P.atkAnim/.25,X=(P.x-camX)*SC,Y=(P.y-22-camY)*SC,R=30*SC,s=a-1.2+p*2.4;
-     ctx.save();ctx.lineCap='round';ctx.globalCompositeOperation='lighter';for(let i=0;i<5;i++){const aa=s-i*.18;ctx.strokeStyle='rgba(255,236,190,'+(.55-i*.1)*(1-p*.5)+')';ctx.lineWidth=(5-i)*SC;ctx.beginPath();ctx.arc(X,Y,R,aa-.14,aa);ctx.stroke()}ctx.restore()}
-   if(typeof DIG!=='undefined'&&DIG&&!DIG.done){const X=(P.x-camX)*SC,Y=(P.y-66-camY+Math.abs(Math.sin(performance.now()/90))*-6)*SC;ctx.save();ctx.font=(16*SC)+'px sans-serif';ctx.textAlign='center';ctx.fillText('⛏️',X+14*SC,Y);ctx.restore()}
+     ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.lineCap='round';ctx.globalCompositeOperation='lighter';for(let i=0;i<5;i++){const aa=s-i*.18;ctx.strokeStyle='rgba(255,236,190,'+(.55-i*.1)*(1-p*.5)+')';ctx.lineWidth=(5-i)*SC;ctx.beginPath();ctx.arc(X,Y,R,aa-.14,aa);ctx.stroke()}ctx.restore()}
+   if(typeof DIG!=='undefined'&&DIG&&!DIG.done){const X=(P.x-camX)*SC,Y=(P.y-66-camY+Math.abs(Math.sin(performance.now()/90))*-6)*SC;ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.font=(16*SC)+'px sans-serif';ctx.textAlign='center';ctx.fillText('⛏️',X+14*SC,Y);ctx.restore()}
  }catch(e){}return r}}
 {const _uD=update;update=function(dt){const r=_uD.apply(this,arguments);try{if(typeof DIG!=='undefined'&&DIG&&!DIG.done&&Math.random()<dt*14)FX.push({k:'dust',x:DIG.d.x+(Math.random()-.5)*14,y:DIG.d.y-4,vx:(Math.random()-.5)*50,vy:-30-Math.random()*40,t:0,life:.6})}catch(e){}return r}}
 // dig spots move every day; fishing at the cave pools
@@ -2816,7 +2816,7 @@ const SHEET_ART={};{const _ma=monArt;monArt=function(){const r=_ma.apply(this,ar
    SHEET_ART[kind+'0']=[0,1,2,3].map(i=>frame(i,true));SHEET_ART[kind+'1']=[0,1,2,3].map(i=>frame(i,false));Object.assign(MON_ART,SHEET_ART)}catch(e){}};im.src=(window.EMBED_ASSETS&&window.EMBED_ASSETS[file])||file}}
 // soft violet motes drifting in the painted caves
 {const motes=[];const _rM=render;render=function(tm){const r=_rM.apply(this,arguments);try{if(M&&(M.cavemouth||M.huntFloor)){while(motes.length<26)motes.push({x:Math.random(),y:Math.random(),v:.004+Math.random()*.01,p:Math.random()*6});
-   ctx.save();ctx.globalCompositeOperation='lighter';const t=(tm||0);for(const o of motes){o.y-=o.v*.016;if(o.y<-.05){o.y=1.05;o.x=Math.random()}const X=o.x*VW*SC+Math.sin(t*.8+o.p)*8*SC,Y=o.y*VH*SC,a=.25+.2*Math.sin(t*2+o.p);ctx.fillStyle='rgba(200,150,255,'+a+')';ctx.fillRect(X,Y,2*SC,2*SC)}ctx.restore()}}catch(e){}return r}}
+   ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalCompositeOperation='lighter';const t=(tm||0);for(const o of motes){o.y-=o.v*.016;if(o.y<-.05){o.y=1.05;o.x=Math.random()}const X=o.x*VW*SC+Math.sin(t*.8+o.p)*8*SC,Y=o.y*VH*SC,a=.25+.2*Math.sin(t*2+o.p);ctx.fillStyle='rgba(200,150,255,'+a+')';ctx.fillRect(X,Y,2*SC,2*SC)}ctx.restore()}}catch(e){}return r}}
 
 // ================= 0.83 drop icons (ChatGPT icon set, same style as the shop icons). Missing file -> the old little squares stay.
 const DROP_ICONS={"coin":[0,0,64,64,64,64],"coin3":[64,0,64,64,64,48],"coinheap":[128,0,64,64,64,53],"potion":[192,0,64,64,47,64],"card-old":[256,0,64,64,56,64],"gearbag":[320,0,64,64,58,64],"chest":[384,0,64,64,64,56],"chest-open":[448,0,64,64,59,64],"amethyst":[0,64,64,64,58,64],"ore":[64,64,64,64,64,62],"fossil-shell":[128,64,64,64,64,60],"fossil-bone":[192,64,64,64,64,59],"lanternfish":[256,64,64,64,64,48],"key":[320,64,64,64,60,64],"star":[384,64,64,64,64,58],"mushroom":[448,64,64,64,64,64]};
@@ -3038,4 +3038,36 @@ function rimOf(o){const im=o.pick?o.pick():IMG[o.img];if(!im)return null;const k
   g.globalCompositeOperation='destination-out';g.drawImage(im,o.sx,o.sy,o.sw,o.sh,2,2,o.sw,o.sh);return RIM[k]=c}
 {const _dO=drawObj;drawObj=function(o,tm){try{if((o.npc||o.stoneId)&&!(typeof PERF!=='undefined'&&PERF.lite)&&o.cb!=null){const r=rimOf(o);if(r){const X=Math.round(o.x-o.sw/2-camX),Y=Math.round(o.y-(o.cb+1)-camY);
    ctx.save();ctx.globalAlpha=(o.a==null?1:o.a)*(.75+.2*Math.sin((tm||0)*2.2+o.x*.01));ctx.imageSmoothingEnabled=false;ctx.drawImage(r,X-2,Y-2);ctx.restore()}}}catch(e){}return _dO.apply(this,arguments)}}
+
+// ================= 0.90 LETTER DELIVERY (idea from Under the Island): the post office gives 3 letters a day, walk them to the right doors =================
+// For children: short names + a picture on every envelope (reading practice), a bobbing envelope above each door that still waits, no fighting.
+const MAIL_DOORS={house_w1:[3,11],restaurant:[14,11],clock_shop:[20,11],post_office:[34,11],blacksmith:[43,12],house_w2:[3,23],stall:[31,23],house_e1:[38,23],house_e2:[44,23]};
+const MAIL_TO={restaurant:['ป้าหอม','ร้านอาหาร','🍲','Aunt Hom','the restaurant'],clock_shop:['ลุงติ๊ก','ร้านนาฬิกา','🕰️','Uncle Tick','the clock shop'],blacksmith:['ลุงค้อน','ช่างตีเหล็ก','🔨','Uncle Hammer','the smithy'],
+  house_w1:['ยายแดง','บ้านหลังคาแดง','🏡','Granny Daeng','the red-roof house'],house_w2:['น้องฝน','บ้านริมลำธาร','🌧️','Little Fon','the house by the stream'],stall:['แม่ค้าผลไม้','แผงผลไม้','🍎','the fruit seller','the fruit stall'],
+  house_e1:['พี่ดาว','บ้านใกล้แผงผลไม้','⭐','Big sister Dao','the house near the fruit stall'],house_e2:['ตาเมฆ','บ้านหลังสุดท้าย','☁️','Grandpa Mek','the last house']};
+try{Object.assign(TX.th,{mailGet:'📮 ได้จดหมาย 3 ฉบับ! อ่านชื่อบนซองแล้วไปส่งนะ',mailTo:'ถึง',mailDone:'✉️ ส่งถึง {n} แล้ว!',mailAll:'🎉 ส่งครบแล้ว! กลับไปรับรางวัลที่ไปรษณีย์',mailPrize:'🎁 เก่งมาก! ได้แสตมป์ 1 ดวง',mailCome:'📮 พรุ่งนี้มีจดหมายใหม่นะ',mailHud:'📮 จดหมาย'});
+  if(TX.en)Object.assign(TX.en,{mailGet:'📮 3 letters for you! Read the names and deliver them',mailTo:'To',mailDone:'✉️ Delivered to {n}!',mailAll:'🎉 All delivered! Back to the post office for a prize',mailPrize:'🎁 Well done! You got 1 stamp',mailCome:'📮 New letters tomorrow',mailHud:'📮 Letters'})}catch(e){}
+const mailName=k=>{const a=MAIL_TO[k];return LANG==='en'?a[3]:a[0]},mailWhere=k=>{const a=MAIL_TO[k];return LANG==='en'?a[4]:a[1]};
+function mailToday(){S.mail=S.mail||{};if(S.mail.day!==today())S.mail={day:today(),got:false,letters:[],claimed:false};return S.mail}
+function mailDoorPt(k){const d=MAIL_DOORS[k];return [(d[0]+.5)*T,(d[1]+.7)*T]}
+function mailPick(){const keys=Object.keys(MAIL_TO),r=seeded([...today()].reduce((a,c)=>a*31+c.charCodeAt(0),7)%2147483646+1),out=[];while(out.length<3){const k=keys[Math.floor(r()*keys.length)];if(!out.includes(k))out.push(k)}return out}
+function mailShow(){const mb=mailToday();modal('<h2>'+t('mailGet')+'</h2><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:6px">'+mb.letters.map(l=>'<div style="background:#fffaf0;color:#3a2410;border:3px solid #c9a46a;border-radius:10px;padding:10px 6px;text-align:center"><div style="font-size:40px;line-height:1.1">'+MAIL_TO[l.to][2]+'</div><div style="font-size:12px;color:#8a6a3a">'+t('mailTo')+'</div><div style="font-size:22px;font-weight:bold">'+mailName(l.to)+'</div><div style="font-size:13px">'+mailWhere(l.to)+'</div></div>').join('')+'</div>')}
+let mailCool=0;
+{const _uM=update;update=function(dt){const r=_uM.apply(this,arguments);try{if(!S||!M||!M.capA||PAUSE)return r;mailCool=Math.max(0,mailCool-dt);if(mailCool>0)return r;const mb=mailToday(),near=k=>{const [x,y]=mailDoorPt(k);return Math.hypot(P.x-x,P.y-y)<T*1.05};
+  if(near('post_office')){
+    if(!mb.got){mb.got=true;mb.letters=mailPick().map(k=>({to:k,done:false}));save();sfx('pick');mailShow();mailCool=2.5;hud();return r}
+    if(mb.letters.length&&mb.letters.every(l=>l.done)&&!mb.claimed){mb.claimed=true;S.stamps=(S.stamps||0)+1;S.coins+=20;gainExp(15);sfx('lvl');for(let i=0;i<18;i++)FX.push({k:'star',x:P.x,y:P.y-30,vx:Math.cos(i/18*6.28)*60,vy:Math.sin(i/18*6.28)*60-30,t:0,life:1});say(t('mailPrize')+' · +20🪙');save();hud();mailCool=2.5;return r}}
+  for(const l of mb.letters||[]){if(l.done||!near(l.to))continue;l.done=true;S.coins+=5;gainExp(5);sfx('coin');TXT.push({x:P.x,y:P.y-70,s:'✉️ +5🪙',c:'#ffe36b',t:0});say(t('mailDone').replace('{n}',mailName(l.to))+(mb.letters.every(q=>q.done)?'\n'+t('mailAll'):''));save();hud();mailCool=2;break}
+ }catch(e){}return r}}
+// envelopes over the doors that still wait (and a mailbox sign over the post office when there is something to collect)
+{const _rM2=render;render=function(tm){const r=_rM2.apply(this,arguments);try{if(!S||!M||!M.capA)return r;const mb=mailToday(),t2=(tm||0);ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.textAlign='center';ctx.textBaseline='middle';
+  const mark=(k,ch)=>{const [x,y]=mailDoorPt(k),X=(x-camX)*SC,Y=(y-58-camY+Math.sin(t2*3+x)*3)*SC,u=SC;if(X<-40||Y<-40||X>VW*SC+40||Y>VH*SC+40)return;
+    ctx.globalCompositeOperation='lighter';const g=ctx.createRadialGradient(X,Y,0,X,Y,18*u);g.addColorStop(0,'rgba(255,214,110,.55)');g.addColorStop(1,'rgba(255,214,110,0)');ctx.fillStyle=g;ctx.fillRect(X-18*u,Y-18*u,36*u,36*u);ctx.globalCompositeOperation='source-over';
+    const env=(ex,ey)=>{ctx.fillStyle='#4a2f17';ctx.fillRect(ex-11*u,ey-8*u,22*u,16*u);ctx.fillStyle='#fffaf0';ctx.fillRect(ex-10*u,ey-7*u,20*u,14*u);ctx.strokeStyle='#c9a46a';ctx.lineWidth=1.4*u;ctx.beginPath();ctx.moveTo(ex-10*u,ey-7*u);ctx.lineTo(ex,ey+1*u);ctx.lineTo(ex+10*u,ey-7*u);ctx.stroke();ctx.fillStyle='#e0435a';ctx.beginPath();ctx.arc(ex,ey+1*u,2.4*u,0,6.283);ctx.fill()};
+    if(ch==='box'){env(X-3*u,Y+3*u);env(X+3*u,Y-3*u);ctx.fillStyle='#ffd23f';ctx.font='bold '+(11*u)+'px sans-serif';ctx.fillText('!',X+13*u,Y-11*u)}else env(X,Y)};
+  if(!mb.got||(mb.letters.length&&mb.letters.every(l=>l.done)&&!mb.claimed))mark('post_office','box');
+  for(const l of mb.letters||[])if(!l.done)mark(l.to,'env');ctx.restore()}catch(e){}return r}}
+// small counter in the status panel while letters are being delivered
+{const _hM=hud;hud=function(){const r=_hM.apply(this,arguments);try{let el=document.getElementById('hMail');if(!el){el=document.createElement('span');el.id='hMail';const row=document.querySelector('#hud .row');if(row)row.appendChild(el)}
+  const mb=S&&S.mail&&S.mail.day===today()?S.mail:null;el.textContent=mb&&mb.got&&!mb.claimed?' 📮 '+mb.letters.filter(l=>l.done).length+'/'+mb.letters.length:''}catch(e){}return r}}
 </script></body></html>
