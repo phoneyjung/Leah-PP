@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ลองแต่งห้อง · Lantern Academy</title>
+<style>
+  :root { --plum:#3A1E3F; --dusk:#4B3F72; --cream:#F3E3C3; --gold:#F2B84B; --wood:#C99A62; --wood2:#B98850; --ink:#2A1730; }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; background: var(--plum); color: var(--cream); font-family: "Noto Sans Thai", "Sarabun", "Leelawadee UI", Tahoma, sans-serif; }
+  main { max-width: 560px; margin: 0 auto; padding: 14px 12px calc(20px + env(safe-area-inset-bottom, 0px)); }
+  h1 { font-size: 1.25rem; margin: 2px 0 2px; font-weight: 700; }
+  p.lead { margin: 0 0 10px; font-size: .9rem; line-height: 1.5; opacity: .85; }
+  canvas { width: 100%; display: block; border-radius: 10px; touch-action: manipulation; background: var(--dusk); }
+  #msg { min-height: 2.6em; margin: 8px 2px; font-size: .95rem; line-height: 1.3; }
+  #msg.bad { color: #FFB4A8; }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+  button { font: inherit; font-size: .95rem; padding: 10px 12px; min-height: 44px; border-radius: 22px; border: 2px solid transparent; background: var(--dusk); color: var(--cream); }
+  button.pick[aria-pressed="true"] { background: var(--cream); color: var(--ink); border-color: var(--gold); }
+  button.act { background: var(--gold); color: var(--ink); font-weight: 700; }
+  button.act:disabled { opacity: .35; }
+  button.quiet { background: transparent; border-color: var(--dusk); }
+  button:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+  #missing { padding: 18px; background: var(--dusk); border-radius: 10px; line-height: 1.6; }
+</style>
+</head>
+<body>
+<main>
+  <h1>ลองแต่งห้อง</h1>
+  <p class="lead">เลือกของด้านล่าง แล้วแตะพื้นห้องเพื่อวาง ของจะหันให้เอง แตะของที่วางแล้วเพื่อหมุน ย้าย หรือเก็บ</p>
+  <div id="missing" hidden>ไม่พบไฟล์ <b>decor.js</b> ต้องอัปไฟล์นี้ไว้ที่เดียวกับหน้านี้ แล้วเปิดใหม่</div>
+  <div id="app" hidden>
+    <canvas id="cv" width="704" height="560" aria-label="ห้อง 8 คูณ 6 ช่อง"></canvas>
+    <div id="msg" role="status" aria-live="polite"></div>
+    <div class="row" id="acts">
+      <button class="act" id="bRot" disabled>หมุน</button>
+      <button class="act" id="bDel" disabled>เก็บออก</button>
+      <button class="quiet" id="bClr">ล้างห้อง</button>
+    </div>
+    <div class="row" id="picks"></div>
+  </div>
+</main>
+<script src="decor.js" onerror="window.DECOR_MISSING=true"></script>
+<script>
+(function () {
+  if (typeof Decor === 'undefined') { document.getElementById('missing').hidden = false; return; }
+  document.getElementById('app').hidden = false;
+  var D = Decor, W = 8, H = 6, T = 80, PADX = 32, PADT = 64, PADB = 16;
+  var room = D.newRoom(W, H), pick = 'bed', sel = null, flash = null;
+  var cv = document.getElementById('cv'), g = cv.getContext('2d'), msg = document.getElementById('msg');
+  var COL = { bed: '#E58FA6', wardrobe: '#8C6BB8', shelf: '#6FA3C9', table: '#D9A441', chair: '#7FB77E', sofa: '#E07A5F', plant: '#4E9F6B', lamp: '#F2D06B', rug: '#C7B8E6' };
+  var DIRTH = { front: 'หันหน้าออก', left: 'หันซ้าย', right: 'หันขวา', back: 'หันหลัง' };
+
+  var picks = document.getElementById('picks');
+  Object.keys(D.TYPES).forEach(function (k) {
+    var b = document.createElement('button'); b.className = 'pick'; b.textContent = D.TYPES[k].th; b.dataset.type = k;
+    b.onclick = function () { pick = k; sel = null; say('เลือก' + D.TYPES[k].th + 'แล้ว แตะพื้นห้องเพื่อวาง'); draw(); };
+    picks.appendChild(b);
+  });
+  function say(t, bad) { msg.textContent = t; msg.className = bad ? 'bad' : ''; }
+  function rr(x, y, w, h, r) { g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); }
+
+  function draw() {
+    g.clearRect(0, 0, cv.width, cv.height);
+    g.fillStyle = '#5A4A86'; g.fillRect(0, 0, cv.width, cv.height);                       // ผนัง
+    g.fillStyle = '#6B5A99'; g.fillRect(PADX, 10, W * T, PADT - 14);                      // ผนังหลัง
+    for (var y = 0; y < H; y++) for (var x = 0; x < W; x++) {                            // พื้นไม้
+      g.fillStyle = (x + y) % 2 ? '#C99A62' : '#B98850'; g.fillRect(PADX + x * T, PADT + y * T, T, T);
+    }
+    g.fillStyle = '#F3E3C3'; g.fillRect(PADX + room.door.x * T + 10, PADT + H * T, T - 20, PADB); // ประตู
+    g.font = '600 15px sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle';
+    g.fillStyle = 'rgba(58,30,63,.55)'; g.fillText('ประตู', PADX + room.door.x * T + T / 2, PADT + (H - 1) * T + T - 14);
+    var order = room.items.slice().sort(function (a, b) { return (D.TYPES[a.type].layer === 'floor' ? 0 : 1) - (D.TYPES[b.type].layer === 'floor' ? 0 : 1); });
+    order.forEach(function (it) {
+      var s = D.size(it.type, it.dir), x = PADX + it.x * T, y = PADT + it.y * T, w = s.w * T, h = s.h * T, floor = D.TYPES[it.type].layer === 'floor', m = floor ? 3 : 7;
+      rr(x + m, y + m, w - 2 * m, h - 2 * m, floor ? 6 : 14); g.fillStyle = COL[it.type]; g.globalAlpha = floor ? .75 : 1; g.fill(); g.globalAlpha = 1;
+      g.lineWidth = sel === it.id ? 6 : 3; g.strokeStyle = sel === it.id ? '#F2B84B' : '#3A1E3F'; g.stroke();
+      if (D.TYPES[it.type].dirs.length > 1) {                                             // แถบบอกด้านหน้า
+        g.fillStyle = '#3A1E3F'; var b = 9;
+        if (it.dir === 'front') g.fillRect(x + m + 12, y + h - m - b - 3, w - 2 * m - 24, b);
+        if (it.dir === 'back') g.fillRect(x + m + 12, y + m + 3, w - 2 * m - 24, b);
+        if (it.dir === 'left') g.fillRect(x + m + 3, y + m + 12, b, h - 2 * m - 24);
+        if (it.dir === 'right') g.fillRect(x + w - m - b - 3, y + m + 12, b, h - 2 * m - 24);
+      }
+      g.fillStyle = '#2A1730'; var fs = 16; g.font = '700 16px sans-serif';
+      while (fs > 9 && g.measureText(D.TYPES[it.type].th).width > w - 2 * m - 26) { fs--; g.font = '700 ' + fs + 'px sans-serif'; }
+      g.fillText(D.TYPES[it.type].th, x + w / 2, y + h / 2);
+    });
+    if (flash) { g.fillStyle = 'rgba(230,60,60,.55)'; g.fillRect(PADX + flash[0] * T, PADT + flash[1] * T, T, T); }
+    Array.prototype.forEach.call(picks.children, function (b) { b.setAttribute('aria-pressed', String(!sel && b.dataset.type === pick)); });
+    var it = sel && room.items.filter(function (i) { return i.id === sel; })[0];
+    document.getElementById('bRot').disabled = !it || D.TYPES[it.type].dirs.length < 2;
+    document.getElementById('bDel').disabled = !it;
+  }
+  function refuse(x, y, reason) { flash = [x, y]; say(reason, true); draw(); setTimeout(function () { flash = null; draw(); }, 450); }
+
+  cv.addEventListener('click', function (e) {
+    var r = cv.getBoundingClientRect(), k = cv.width / r.width;
+    var x = Math.floor(((e.clientX - r.left) * k - PADX) / T), y = Math.floor(((e.clientY - r.top) * k - PADT) / T);
+    if (x < 0 || y < 0 || x >= W || y >= H) return;
+    var hit = D.itemAt(room, x, y), res;
+    if (sel) {                                                                            // มีของที่เลือกอยู่: แตะที่ว่าง = ย้าย
+      if (hit && hit.id === sel) { sel = null; say('ยกเลิกการเลือก'); return draw(); }
+      if (hit && D.TYPES[hit.type].layer !== 'floor') { sel = hit.id; say('เลือก' + D.TYPES[hit.type].th + ' (' + DIRTH[hit.dir] + ')'); return draw(); }
+      res = D.move(room, sel, x, y);
+      if (!res.ok) return refuse(x, y, res.reason);
+      say('ย้ายแล้ว ' + DIRTH[res.dir]); return draw();
+    }
+    if (hit && (D.TYPES[hit.type].layer !== 'floor' || pick === 'rug')) { sel = hit.id; say('เลือก' + D.TYPES[hit.type].th + ' (' + DIRTH[hit.dir] + ') แตะที่ว่างเพื่อย้าย'); return draw(); }
+    res = D.place(room, pick, x, y);
+    if (!res.ok) return refuse(x, y, res.reason);
+    say('วาง' + D.TYPES[pick].th + 'แล้ว ' + (D.TYPES[pick].dirs.length > 1 ? DIRTH[res.dir] : '')); draw();
+  });
+  document.getElementById('bRot').onclick = function () { var r = D.rotate(room, sel); say(r.ok ? DIRTH[r.dir] : r.reason, !r.ok); draw(); };
+  document.getElementById('bDel').onclick = function () { D.remove(room, sel); sel = null; say('เก็บออกแล้ว'); draw(); };
+  document.getElementById('bClr').onclick = function () { room = D.newRoom(W, H); sel = null; say('ห้องว่างแล้ว'); draw(); };
+  window.DEMO = { room: function () { return room; } };                                  // สำหรับชุดทดสอบ
+  say('เริ่มจากวางเตียงชิดผนังดู'); draw();
+})();
+</script>
+</body>
+</html>
