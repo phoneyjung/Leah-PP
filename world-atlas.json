@@ -1,0 +1,12348 @@
+{
+"grid": [
+20,
+20
+],
+"tiles_per_map": [
+48,
+32
+],
+"towns": {
+"H9": [
+"หมู่บ้านพาเพลิน",
+"village",
+"กอผลึกอเมทิสต์เส้นใบไม้เขียว · กลาง",
+"ไลแลค",
+1
+],
+"H7": [
+"นครประทีป",
+"capital",
+"ยอดผลึกทองอำพันหลายชั้นทรงโคม งอกจากลานกลางเมือง · ใหญ่",
+"ทองอุ่น",
+2
+],
+"G7": [
+"Lantern Academy",
+"academy",
+"ผลึกมุกทรงกลมงอกจากแท่นราก มีห่วงทองครอบ · กลาง",
+"รุ้งอ่อน",
+2
+],
+"J9": [
+"หมู่บ้านเห็ด",
+"village",
+"ผลึกทรงหมวกเห็ด · กลาง",
+"ชมพูเรือง",
+2
+],
+"F19": [
+"เมืองปะการัง",
+"town",
+"กิ่งปะการังผลึก · ใหญ่",
+"ฟ้าน้ำทะเล",
+3
+],
+"J3": [
+"หมู่บ้านน้ำพุร้อน",
+"village",
+"จีโอดผ่าซีกไส้ส้ม · ใหญ่",
+"ส้ม",
+4
+],
+"D12": [
+"เมืองพีระมิด",
+"town",
+"บุษราคัมทรงพีระมิดคว่ำ · กลาง",
+"ทองแดด",
+5
+],
+"E4": [
+"หมู่บ้านหิมะ",
+"village",
+"ปริซึมน้ำแข็ง 3 แท่งงอกจากพื้นหิมะ · กลาง",
+"ฟ้าน้ำแข็ง",
+6
+],
+"C7": [
+"เมืองกลไก",
+"town",
+"ผลึกในกรงทองเหลืองมีเฟือง · กลาง",
+"เขียวทองแดง",
+7
+],
+"M5": [
+"เกาะลอยฟ้า",
+"sky",
+"ผลึกขาวรุ้งงอกจากเกาะ รากผลึกห้อยลงถึงพื้นดิน · ใหญ่",
+"ขาวรุ้ง",
+8
+],
+"M9": [
+"วิหารต้นไม้โบราณ",
+"sanctuary",
+"ผลึกรากต้นไม้โบราณ · ยักษ์",
+"ทองอ่อน",
+9
+],
+"O10": [
+"ป้อมตะเกียงสุดท้าย",
+"fort",
+"ผลึกทองงอกกลางป้อม จุดโคมยักษ์ตามแนว · ใหญ่",
+"ทอง",
+10
+],
+"S10": [
+"หอคอยผู้กลืนแสง",
+"tower",
+"ออบซิเดียน · ใหญ่",
+"ม่วงหม่น",
+10
+]
+},
+"dungeons": {
+"H9": [
+"ถ้ำอเมทิสต์ (เนินในหมู่บ้าน)",
+6,
+1,
+"มอนมืดสิงผู้พิทักษ์หิน · ชั้น 6 หลังลานบอสมีหินถล่มทางต่อ"
+],
+"H5": [
+"ถ้ำหน้าผา → ทางขึ้นหอสมุด",
+6,
+9,
+"ทางขึ้นหอสมุดคริสตัล"
+],
+"J10": [
+"ถ้ำรากเห็ด",
+6,
+2,
+"ราดำยักษ์"
+],
+"G18": [
+"ถ้ำแนวปะการัง",
+6,
+3,
+"ปลิงเงายักษ์"
+],
+"J4": [
+"ปล่องภูเขาไฟ",
+6,
+4,
+"ก้อนลาวาเงา"
+],
+"D13": [
+"พีระมิดใต้ทราย",
+6,
+5,
+"งูเงาทราย"
+],
+"E3": [
+"ถ้ำน้ำแข็ง",
+6,
+6,
+"หมาป่าน้ำแข็งเงา"
+],
+"C8": [
+"โรงงานเฟือง",
+6,
+7,
+"หุ่นเฟืองเงา"
+],
+"M4": [
+"วิหารลอยฟ้า",
+3,
+8,
+"เงาพายุ"
+],
+"M10": [
+"รากต้นไม้โบราณ",
+6,
+9,
+"เงาของผู้สร้าง (ไม่ต่อสู้ · ปริศนา)"
+],
+"P8": [
+"เหมืองแสงร้าง",
+9,
+10,
+"ผู้ใหญ่เท่านั้น"
+],
+"S11": [
+"ใต้หอคอย",
+9,
+10,
+"ผู้กลืนแสง (ตอนจบ · สมดุล)"
+]
+},
+"blocks": {
+"A1": {
+"id": "A1",
+"col": 0,
+"row": 0,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 0.66,
+"forest": 0.0,
+"stone": 0.25
+}
+},
+"B1": {
+"id": "B1",
+"col": 1,
+"row": 0,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 0.66,
+"forest": 0.0,
+"stone": 0.23
+}
+},
+"C1": {
+"id": "C1",
+"col": 2,
+"row": 0,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 0.96,
+"forest": 0.0,
+"stone": 0.03
+}
+},
+"D1": {
+"id": "D1",
+"col": 3,
+"row": 0,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 1.0,
+"forest": 0.0,
+"stone": 0.0
+}
+},
+"E1": {
+"id": "E1",
+"col": 4,
+"row": 0,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 0.99,
+"forest": 0.0,
+"stone": 0.0
+}
+},
+"F1": {
+"id": "F1",
+"col": 5,
+"row": 0,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 0.97,
+"forest": 0.0,
+"stone": 0.0
+}
+},
+"G1": {
+"id": "G1",
+"col": 6,
+"row": 0,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 0.67,
+"forest": 0.11,
+"stone": 0.0
+}
+},
+"H1": {
+"id": "H1",
+"col": 7,
+"row": 0,
+"biome": "sea",
+"realm": "sea",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.54,
+"forest": 0.21,
+"stone": 0.0
+}
+},
+"I1": {
+"id": "I1",
+"col": 8,
+"row": 0,
+"biome": "sea",
+"realm": "sea",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.09,
+"forest": 0.26,
+"stone": 0.01
+}
+},
+"J1": {
+"id": "J1",
+"col": 9,
+"row": 0,
+"biome": "sea",
+"realm": "sea",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.21,
+"forest": 0.13,
+"stone": 0.11
+}
+},
+"K1": {
+"id": "K1",
+"col": 10,
+"row": 0,
+"biome": "sea",
+"realm": "sea",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.6,
+"forest": 0.0,
+"stone": 0.0
+}
+},
+"L1": {
+"id": "L1",
+"col": 11,
+"row": 0,
+"biome": "sea",
+"realm": "sea",
+"features": [
+"grass",
+"mystery"
+],
+"f": {
+"water": 1.0,
+"forest": 0.0,
+"stone": 0.0
+}
+},
+"M1": {
+"id": "M1",
+"col": 12,
+"row": 0,
+"biome": "sea",
+"realm": "sea",
+"features": [
+"mystery"
+],
+"f": {
+"water": 1.0,
+"forest": 0.0,
+"stone": 0.0
+}
+},
+"N1": {
+"id": "N1",
+"col": 13,
+"row": 0,
+"biome": "mystery",
+"realm": "mystery",
+"features": [
+"sea"
+],
+"f": {
+"water": 1.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "S",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "สะพานเมฆ",
+"buildings": [],
+"road": false,
+"exits": [
+"s",
+"e"
+],
+"chapter": 8
+},
+"O1": {
+"id": "O1",
+"col": 14,
+"row": 0,
+"biome": "mystery",
+"realm": "mystery",
+"features": [
+"sea"
+],
+"f": {
+"water": 0.85,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"P1": {
+"id": "P1",
+"col": 15,
+"row": 0,
+"biome": "dark",
+"realm": "dark",
+"features": [
+"sea"
+],
+"f": {
+"water": 0.04,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ซากหมู่บ้าน",
+"buildings": [],
+"road": false,
+"exits": [
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"Q1": {
+"id": "Q1",
+"col": 16,
+"row": 0,
+"biome": "dark",
+"realm": "dark",
+"features": [
+"sea"
+],
+"f": {
+"water": 0.24,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ค่ายผู้พิทักษ์",
+"buildings": [],
+"road": false,
+"exits": [
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"R1": {
+"id": "R1",
+"col": 17,
+"row": 0,
+"biome": "dark",
+"realm": "dark",
+"features": [
+"sea"
+],
+"f": {
+"water": 0.2,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ซากหมู่บ้าน",
+"buildings": [],
+"road": false,
+"exits": [
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"S1": {
+"id": "S1",
+"col": 18,
+"row": 0,
+"biome": "dark",
+"realm": "dark",
+"features": [
+"sea"
+],
+"f": {
+"water": 0.02,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ซากหมู่บ้าน",
+"buildings": [],
+"road": false,
+"exits": [
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"T1": {
+"id": "T1",
+"col": 19,
+"row": 0,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.1,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"s",
+"w"
+],
+"chapter": 10
+},
+"A2": {
+"id": "A2",
+"col": 0,
+"row": 1,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 0.97,
+"forest": 0.0,
+"stone": 0.02
+}
+},
+"B2": {
+"id": "B2",
+"col": 1,
+"row": 1,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 0.97,
+"forest": 0.0,
+"stone": 0.01
+}
+},
+"C2": {
+"id": "C2",
+"col": 2,
+"row": 1,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 0.87,
+"forest": 0.0,
+"stone": 0.0
+}
+},
+"D2": {
+"id": "D2",
+"col": 3,
+"row": 1,
+"biome": "water",
+"realm": "light",
+"features": [
+"sea"
+],
+"f": {
+"water": 0.31,
+"forest": 0.12,
+"stone": 0.08
+},
+"role": "P",
+"monsters": {
+"light": [
+"กบบัว",
+"ปูน้อย"
+],
+"dark": [
+"ปลิงเงา"
+]
+},
+"decor": "กอบัว ดงกก ท่าน้ำ หินริมน้ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"s",
+"e"
+],
+"chapter": 6
+},
+"E2": {
+"id": "E2",
+"col": 4,
+"row": 1,
+"biome": "water",
+"realm": "light",
+"features": [
+"sea"
+],
+"f": {
+"water": 0.34,
+"forest": 0.1,
+"stone": 0.17
+},
+"role": "D",
+"monsters": {
+"light": [
+"กบบัว",
+"ปูน้อย"
+],
+"dark": [
+"ปลิงเงา"
+]
+},
+"decor": "กอบัว ดงกก ท่าน้ำ หินริมน้ำ",
+"purpose": "บึงจับกบ",
+"buildings": [],
+"road": false,
+"exits": [
+"s",
+"w",
+"e"
+],
+"chapter": 6
+},
+"F2": {
+"id": "F2",
+"col": 5,
+"row": 1,
+"biome": "mountain",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.25,
+"forest": 0.12,
+"stone": 0.23
+},
+"role": "P",
+"monsters": {
+"light": [
+"ค้างคาวอเมทิสต์",
+"โกเลมหินจิ๋ว",
+"แพะภูเขา"
+],
+"dark": [
+"ค้างคาวเงา"
+]
+},
+"decor": "หน้าผา ก้อนหินใหญ่ สนภูเขา ทางชัน น้ำตกเล็ก",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"s",
+"w",
+"e"
+],
+"chapter": 6
+},
+"G2": {
+"id": "G2",
+"col": 6,
+"row": 1,
+"biome": "forest",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.09,
+"forest": 0.39,
+"stone": 0.02
+},
+"role": "P",
+"monsters": {
+"light": [
+"เห็ดน้อย",
+"กระรอกลูกโอ๊ก",
+"นกฮูกโคม"
+],
+"dark": [
+"หมาป่าเงา"
+]
+},
+"decor": "ต้นโอ๊ก ต้นสน พุ่มเบอร์รี่ เห็ด ขอนไม้ ลำธารเล็ก",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"s",
+"w",
+"e"
+],
+"chapter": 4
+},
+"H2": {
+"id": "H2",
+"col": 7,
+"row": 1,
+"biome": "meadow",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.3,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"s",
+"w",
+"e"
+],
+"chapter": 4
+},
+"I2": {
+"id": "I2",
+"col": 8,
+"row": 1,
+"biome": "meadow",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.01,
+"forest": 0.09,
+"stone": 0.11
+},
+"role": "D",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "หมู่บ้านเล็ก",
+"buildings": [
+"กระท่อม 3–5 หลัง",
+"เครื่องแปลงพลังงาน"
+],
+"road": false,
+"exits": [
+"s",
+"w",
+"e"
+],
+"chapter": 4
+},
+"J2": {
+"id": "J2",
+"col": 9,
+"row": 1,
+"biome": "meadow",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.02
+},
+"role": "D",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้"
+],
+"dark": []
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "ค่ายพ่อค้าเร่",
+"buildings": [],
+"road": false,
+"exits": [
+"s",
+"w",
+"e"
+],
+"chapter": 4
+},
+"K2": {
+"id": "K2",
+"col": 10,
+"row": 1,
+"biome": "meadow",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.07,
+"forest": 0.12,
+"stone": 0.03
+},
+"role": "D",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "ฟาร์มแกะ",
+"buildings": [],
+"road": false,
+"exits": [
+"s",
+"w",
+"e"
+],
+"chapter": 4
+},
+"L2": {
+"id": "L2",
+"col": 11,
+"row": 1,
+"biome": "water",
+"realm": "light",
+"features": [
+"mystery"
+],
+"f": {
+"water": 0.79,
+"forest": 0.01,
+"stone": 0.03
+},
+"role": "S",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "กอบัว ดงกก ท่าน้ำ หินริมน้ำ",
+"purpose": "ริมน้ำพระอาทิตย์ตก",
+"buildings": [],
+"road": false,
+"exits": [
+"s",
+"w",
+"e"
+],
+"chapter": 4
+},
+"M2": {
+"id": "M2",
+"col": 12,
+"row": 1,
+"biome": "mystery",
+"realm": "mystery",
+"features": [],
+"f": {
+"water": 1.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "S",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "สะพานเมฆ",
+"buildings": [],
+"road": false,
+"exits": [
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"N2": {
+"id": "N2",
+"col": 13,
+"row": 1,
+"biome": "mystery",
+"realm": "mystery",
+"features": [],
+"f": {
+"water": 1.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "เกาะลอยมีหีบ",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"O2": {
+"id": "O2",
+"col": 14,
+"row": 1,
+"biome": "mystery",
+"realm": "mystery",
+"features": [],
+"f": {
+"water": 0.67,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ศิลาจารึกผู้สร้าง",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"P2": {
+"id": "P2",
+"col": 15,
+"row": 1,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ค่ายผู้พิทักษ์",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"Q2": {
+"id": "Q2",
+"col": 16,
+"row": 1,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.01,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ซากหมู่บ้าน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"R2": {
+"id": "R2",
+"col": 17,
+"row": 1,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.03,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ซากหมู่บ้าน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"S2": {
+"id": "S2",
+"col": 18,
+"row": 1,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ซากหมู่บ้าน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"T2": {
+"id": "T2",
+"col": 19,
+"row": 1,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ค่ายผู้พิทักษ์",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w"
+],
+"chapter": 10
+},
+"A3": {
+"id": "A3",
+"col": 0,
+"row": 2,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 0.99,
+"forest": 0.0,
+"stone": 0.01
+}
+},
+"B3": {
+"id": "B3",
+"col": 1,
+"row": 2,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 0.94,
+"forest": 0.0,
+"stone": 0.0
+}
+},
+"C3": {
+"id": "C3",
+"col": 2,
+"row": 2,
+"biome": "sea",
+"realm": "sea",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.27,
+"forest": 0.15,
+"stone": 0.04
+}
+},
+"D3": {
+"id": "D3",
+"col": 3,
+"row": 2,
+"biome": "snow",
+"realm": "light",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.31,
+"forest": 0.02,
+"stone": 0.39
+},
+"role": "S",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "กองหิมะ สนหิมะ น้ำแข็ง หินคริสตัลน้ำแข็ง",
+"purpose": "หน้าผาออโรร่า",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"e"
+],
+"chapter": 6
+},
+"E3": {
+"id": "E3",
+"col": 4,
+"row": 2,
+"biome": "snow",
+"realm": "light",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.32,
+"forest": 0.0,
+"stone": 0.4
+},
+"role": "D",
+"monsters": {
+"light": [
+"แมวน้ำหิมะ",
+"เพนกวินขนฟู"
+],
+"dark": []
+},
+"decor": "กองหิมะ สนหิมะ น้ำแข็ง หินคริสตัลน้ำแข็ง",
+"purpose": "กระท่อมนักเดินทาง",
+"buildings": [],
+"dungeon": {
+"name": "ถ้ำน้ำแข็ง",
+"floors": 6,
+"boss_every": 3,
+"chapter": 6,
+"note": "หมาป่าน้ำแข็งเงา",
+"built": false
+},
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 6
+},
+"F3": {
+"id": "F3",
+"col": 5,
+"row": 2,
+"biome": "snow",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.27,
+"forest": 0.0,
+"stone": 0.5
+},
+"role": "S",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "กองหิมะ สนหิมะ น้ำแข็ง หินคริสตัลน้ำแข็ง",
+"purpose": "หน้าผาออโรร่า",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 6
+},
+"G3": {
+"id": "G3",
+"col": 6,
+"row": 2,
+"biome": "water",
+"realm": "light",
+"features": [
+"snow"
+],
+"f": {
+"water": 0.41,
+"forest": 0.21,
+"stone": 0.1
+},
+"role": "P",
+"monsters": {
+"light": [
+"กบบัว",
+"ปูน้อย"
+],
+"dark": [
+"ปลิงเงา"
+]
+},
+"decor": "กอบัว ดงกก ท่าน้ำ หินริมน้ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 4
+},
+"H3": {
+"id": "H3",
+"col": 7,
+"row": 2,
+"biome": "forest",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.03,
+"forest": 0.45,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"เห็ดน้อย",
+"กระรอกลูกโอ๊ก",
+"นกฮูกโคม"
+],
+"dark": [
+"หมาป่าเงา"
+]
+},
+"decor": "ต้นโอ๊ก ต้นสน พุ่มเบอร์รี่ เห็ด ขอนไม้ ลำธารเล็ก",
+"purpose": "ลานแคมป์·กองไฟ",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 4
+},
+"I3": {
+"id": "I3",
+"col": 8,
+"row": 2,
+"biome": "meadow",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.04,
+"forest": 0.02,
+"stone": 0.01
+},
+"role": "D",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้"
+],
+"dark": []
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "ฟาร์มแกะ",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 4
+},
+"J3": {
+"id": "J3",
+"col": 9,
+"row": 2,
+"biome": "volcano",
+"realm": "light",
+"features": [
+"grass"
+],
+"name": "หมู่บ้านน้ำพุร้อน",
+"status": "future",
+"note": "",
+"f": {
+"water": 0.05,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "หินลาวาเย็น บ่อน้ำร้อน ไอน้ำ หินดำ",
+"kind": "village",
+"chapter": 4,
+"crystal": {
+"shape": "จีโอดผ่าซีกไส้ส้ม · ใหญ่",
+"glow": "ส้ม"
+},
+"buildings": [
+"ลานคริสตัลกลางเมือง + นักเวทประจำเมือง",
+"ร้านอาวุธ/อุปกรณ์",
+"ร้านของใช้",
+"โรงเตี๊ยม",
+"บ้านชาวบ้าน",
+"บอร์ดภารกิจ"
+],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+]
+},
+"K3": {
+"id": "K3",
+"col": 10,
+"row": 2,
+"biome": "volcano",
+"realm": "light",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.0,
+"forest": 0.01,
+"stone": 0.01
+},
+"role": "D",
+"monsters": {
+"light": [
+"ซาลาแมนเดอร์จิ๋ว",
+"ไก่ไฟ"
+],
+"dark": []
+},
+"decor": "หินลาวาเย็น บ่อน้ำร้อน ไอน้ำ หินดำ",
+"purpose": "เหมืองหินไฟ",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 4
+},
+"L3": {
+"id": "L3",
+"col": 11,
+"row": 2,
+"biome": "water",
+"realm": "light",
+"features": [
+"mystery"
+],
+"f": {
+"water": 0.61,
+"forest": 0.07,
+"stone": 0.02
+},
+"role": "D",
+"monsters": {
+"light": [
+"กบบัว",
+"ปูน้อย"
+],
+"dark": [
+"ปลิงเงา"
+]
+},
+"decor": "กอบัว ดงกก ท่าน้ำ หินริมน้ำ",
+"purpose": "ท่าตกปลา",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 4
+},
+"M3": {
+"id": "M3",
+"col": 12,
+"row": 2,
+"biome": "mystery",
+"realm": "mystery",
+"features": [],
+"f": {
+"water": 1.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "S",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "สะพานเมฆ",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"N3": {
+"id": "N3",
+"col": 13,
+"row": 2,
+"biome": "mystery",
+"realm": "mystery",
+"features": [],
+"f": {
+"water": 1.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "S",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "สะพานเมฆ",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"O3": {
+"id": "O3",
+"col": 14,
+"row": 2,
+"biome": "mystery",
+"realm": "mystery",
+"features": [
+"dark"
+],
+"f": {
+"water": 0.42,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ศิลาจารึกผู้สร้าง",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"P3": {
+"id": "P3",
+"col": 15,
+"row": 2,
+"biome": "dark",
+"realm": "dark",
+"features": [
+"thorn"
+],
+"f": {
+"water": 0.04,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ค่ายผู้พิทักษ์",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"Q3": {
+"id": "Q3",
+"col": 16,
+"row": 2,
+"biome": "dark",
+"realm": "dark",
+"features": [
+"thorn"
+],
+"f": {
+"water": 0.43,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "S",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "จุดชมดาวมืด",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"R3": {
+"id": "R3",
+"col": 17,
+"row": 2,
+"biome": "dark",
+"realm": "dark",
+"features": [
+"thorn"
+],
+"f": {
+"water": 0.26,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ค่ายผู้พิทักษ์",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"S3": {
+"id": "S3",
+"col": 18,
+"row": 2,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.02,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ซากหมู่บ้าน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"T3": {
+"id": "T3",
+"col": 19,
+"row": 2,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ค่ายผู้พิทักษ์",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w"
+],
+"chapter": 10
+},
+"A4": {
+"id": "A4",
+"col": 0,
+"row": 3,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 1.0,
+"forest": 0.0,
+"stone": 0.0
+}
+},
+"B4": {
+"id": "B4",
+"col": 1,
+"row": 3,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 0.82,
+"forest": 0.0,
+"stone": 0.01
+}
+},
+"C4": {
+"id": "C4",
+"col": 2,
+"row": 3,
+"biome": "meadow",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.01,
+"forest": 0.21,
+"stone": 0.03
+},
+"role": "D",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "ทุ่งดอกไม้·จับผีเสื้อ",
+"buildings": [],
+"road": false,
+"exits": [
+"s",
+"e"
+],
+"chapter": 6
+},
+"D4": {
+"id": "D4",
+"col": 3,
+"row": 3,
+"biome": "snow",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.2,
+"forest": 0.0,
+"stone": 0.48
+},
+"role": "D",
+"monsters": {
+"light": [
+"แมวน้ำหิมะ",
+"เพนกวินขนฟู"
+],
+"dark": []
+},
+"decor": "กองหิมะ สนหิมะ น้ำแข็ง หินคริสตัลน้ำแข็ง",
+"purpose": "กระท่อมนักเดินทาง",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 6
+},
+"E4": {
+"id": "E4",
+"col": 4,
+"row": 3,
+"biome": "snow",
+"realm": "light",
+"features": [],
+"name": "หมู่บ้านหิมะ",
+"status": "future",
+"note": "",
+"f": {
+"water": 0.27,
+"forest": 0.0,
+"stone": 0.41
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "กองหิมะ สนหิมะ น้ำแข็ง หินคริสตัลน้ำแข็ง",
+"kind": "village",
+"chapter": 6,
+"crystal": {
+"shape": "ปริซึมน้ำแข็ง 3 แท่งงอกจากพื้นหิมะ · กลาง",
+"glow": "ฟ้าน้ำแข็ง"
+},
+"buildings": [
+"ลานคริสตัลกลางเมือง + นักเวทประจำเมือง",
+"ร้านอาวุธ/อุปกรณ์",
+"ร้านของใช้",
+"โรงเตี๊ยม",
+"บ้านชาวบ้าน",
+"บอร์ดภารกิจ"
+],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+]
+},
+"F4": {
+"id": "F4",
+"col": 5,
+"row": 3,
+"biome": "snow",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.47,
+"forest": 0.0,
+"stone": 0.21
+},
+"role": "D",
+"monsters": {
+"light": [
+"แมวน้ำหิมะ",
+"เพนกวินขนฟู"
+],
+"dark": []
+},
+"decor": "กองหิมะ สนหิมะ น้ำแข็ง หินคริสตัลน้ำแข็ง",
+"purpose": "บ่อน้ำแข็งตกปลา",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 6
+},
+"G4": {
+"id": "G4",
+"col": 6,
+"row": 3,
+"biome": "snow",
+"realm": "light",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.12,
+"forest": 0.15,
+"stone": 0.16
+},
+"role": "D",
+"monsters": {
+"light": [
+"แมวน้ำหิมะ",
+"เพนกวินขนฟู"
+],
+"dark": [
+"หมาป่าน้ำแข็งเงา"
+]
+},
+"decor": "กองหิมะ สนหิมะ น้ำแข็ง หินคริสตัลน้ำแข็ง",
+"purpose": "กระท่อมนักเดินทาง",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 6
+},
+"H4": {
+"id": "H4",
+"col": 7,
+"row": 3,
+"biome": "mountain",
+"realm": "light",
+"features": [
+"snow"
+],
+"name": "หอสมุดคริสตัล (ยอดเขา)",
+"status": "future",
+"note": "ยอดเขา",
+"f": {
+"water": 0.09,
+"forest": 0.06,
+"stone": 0.26
+},
+"role": "D",
+"monsters": {
+"light": [
+"ค้างคาวอเมทิสต์",
+"โกเลมหินจิ๋ว",
+"แพะภูเขา"
+],
+"dark": [
+"ค้างคาวเงา"
+]
+},
+"decor": "หน้าผา ก้อนหินใหญ่ สนภูเขา ทางชัน น้ำตกเล็ก",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 2
+},
+"I4": {
+"id": "I4",
+"col": 8,
+"row": 3,
+"biome": "meadow",
+"realm": "light",
+"features": [
+"snow",
+"volcano"
+],
+"f": {
+"water": 0.14,
+"forest": 0.1,
+"stone": 0.15
+},
+"role": "D",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "บ่อตกปลา",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 4
+},
+"J4": {
+"id": "J4",
+"col": 9,
+"row": 3,
+"biome": "volcano",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.04,
+"forest": 0.03,
+"stone": 0.01
+},
+"role": "D",
+"monsters": {
+"light": [
+"ซาลาแมนเดอร์จิ๋ว",
+"ไก่ไฟ"
+],
+"dark": []
+},
+"decor": "หินลาวาเย็น บ่อน้ำร้อน ไอน้ำ หินดำ",
+"purpose": "บ่อน้ำพุร้อน",
+"buildings": [],
+"dungeon": {
+"name": "ปล่องภูเขาไฟ",
+"floors": 6,
+"boss_every": 3,
+"chapter": 4,
+"note": "ก้อนลาวาเงา",
+"built": false
+},
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 4
+},
+"K4": {
+"id": "K4",
+"col": 10,
+"row": 3,
+"biome": "volcano",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.04,
+"forest": 0.07,
+"stone": 0.02
+},
+"role": "D",
+"monsters": {
+"light": [
+"ซาลาแมนเดอร์จิ๋ว",
+"ไก่ไฟ"
+],
+"dark": [
+"ก้อนลาวาเงา"
+]
+},
+"decor": "หินลาวาเย็น บ่อน้ำร้อน ไอน้ำ หินดำ",
+"purpose": "เหมืองหินไฟ",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 4
+},
+"L4": {
+"id": "L4",
+"col": 11,
+"row": 3,
+"biome": "water",
+"realm": "light",
+"features": [
+"mystery"
+],
+"f": {
+"water": 0.52,
+"forest": 0.04,
+"stone": 0.01
+},
+"role": "D",
+"monsters": {
+"light": [
+"กบบัว",
+"ปูน้อย"
+],
+"dark": [
+"ปลิงเงา"
+]
+},
+"decor": "กอบัว ดงกก ท่าน้ำ หินริมน้ำ",
+"purpose": "บึงจับกบ",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"M4": {
+"id": "M4",
+"col": 12,
+"row": 3,
+"biome": "mystery",
+"realm": "mystery",
+"features": [],
+"f": {
+"water": 0.81,
+"forest": 0.0,
+"stone": 0.05
+},
+"role": "D",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ศิลาจารึกผู้สร้าง",
+"buildings": [],
+"dungeon": {
+"name": "วิหารลอยฟ้า",
+"floors": 3,
+"boss_every": 3,
+"chapter": 8,
+"note": "เงาพายุ",
+"built": false
+},
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"N4": {
+"id": "N4",
+"col": 13,
+"row": 3,
+"biome": "mystery",
+"realm": "mystery",
+"features": [],
+"f": {
+"water": 1.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "S",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "สะพานเมฆ",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"O4": {
+"id": "O4",
+"col": 14,
+"row": 3,
+"biome": "dark",
+"realm": "dark",
+"features": [
+"mystery"
+],
+"f": {
+"water": 0.23,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ค่ายผู้พิทักษ์",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"P4": {
+"id": "P4",
+"col": 15,
+"row": 3,
+"biome": "thorn",
+"realm": "dark",
+"features": [
+"dark"
+],
+"f": {
+"water": 0.1,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เถาหนามเงา",
+"หมาป่าเงาใหญ่"
+]
+},
+"decor": "ต้นหนามดำ เถาวัลย์ดำ",
+"purpose": "ค่ายผู้พิทักษ์",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"Q4": {
+"id": "Q4",
+"col": 16,
+"row": 3,
+"biome": "thorn",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.68,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "S",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "ต้นหนามดำ เถาวัลย์ดำ",
+"purpose": "จุดชมดาวมืด",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"R4": {
+"id": "R4",
+"col": 17,
+"row": 3,
+"biome": "thorn",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.46,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "S",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "ต้นหนามดำ เถาวัลย์ดำ",
+"purpose": "จุดชมดาวมืด",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"S4": {
+"id": "S4",
+"col": 18,
+"row": 3,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.09,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ซากหมู่บ้าน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"T4": {
+"id": "T4",
+"col": 19,
+"row": 3,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ซากหมู่บ้าน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w"
+],
+"chapter": 10
+},
+"A5": {
+"id": "A5",
+"col": 0,
+"row": 4,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 0.96,
+"forest": 0.01,
+"stone": 0.0
+}
+},
+"B5": {
+"id": "B5",
+"col": 1,
+"row": 4,
+"biome": "sea",
+"realm": "sea",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.63,
+"forest": 0.0,
+"stone": 0.01
+}
+},
+"C5": {
+"id": "C5",
+"col": 2,
+"row": 4,
+"biome": "meadow",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.25,
+"stone": 0.01
+},
+"role": "D",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "หมู่บ้านเล็ก",
+"buildings": [
+"กระท่อม 3–5 หลัง",
+"เครื่องแปลงพลังงาน"
+],
+"road": false,
+"exits": [
+"n",
+"s",
+"e"
+],
+"chapter": 7
+},
+"D5": {
+"id": "D5",
+"col": 3,
+"row": 4,
+"biome": "snow",
+"realm": "light",
+"features": [
+"grass",
+"mountain",
+"ridge"
+],
+"f": {
+"water": 0.11,
+"forest": 0.03,
+"stone": 0.2
+},
+"role": "D",
+"monsters": {
+"light": [
+"แมวน้ำหิมะ",
+"เพนกวินขนฟู"
+],
+"dark": [
+"หมาป่าน้ำแข็งเงา"
+]
+},
+"decor": "กองหิมะ สนหิมะ น้ำแข็ง หินคริสตัลน้ำแข็ง",
+"purpose": "กระท่อมนักเดินทาง",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 6
+},
+"E5": {
+"id": "E5",
+"col": 4,
+"row": 4,
+"biome": "snow",
+"realm": "light",
+"features": [
+"mountain",
+"ridge"
+],
+"f": {
+"water": 0.22,
+"forest": 0.01,
+"stone": 0.18
+},
+"role": "D",
+"monsters": {
+"light": [
+"แมวน้ำหิมะ",
+"เพนกวินขนฟู"
+],
+"dark": []
+},
+"decor": "กองหิมะ สนหิมะ น้ำแข็ง หินคริสตัลน้ำแข็ง",
+"purpose": "กระท่อมนักเดินทาง",
+"buildings": [],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 6
+},
+"F5": {
+"id": "F5",
+"col": 5,
+"row": 4,
+"biome": "snow",
+"realm": "light",
+"features": [
+"mountain",
+"ridge"
+],
+"f": {
+"water": 0.21,
+"forest": 0.03,
+"stone": 0.21
+},
+"role": "D",
+"monsters": {
+"light": [
+"แมวน้ำหิมะ",
+"เพนกวินขนฟู"
+],
+"dark": [
+"หมาป่าน้ำแข็งเงา"
+]
+},
+"decor": "กองหิมะ สนหิมะ น้ำแข็ง หินคริสตัลน้ำแข็ง",
+"purpose": "กระท่อมนักเดินทาง",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 6
+},
+"G5": {
+"id": "G5",
+"col": 6,
+"row": 4,
+"biome": "mountain",
+"realm": "light",
+"features": [
+"ridge",
+"snow"
+],
+"f": {
+"water": 0.06,
+"forest": 0.17,
+"stone": 0.09
+},
+"role": "D",
+"monsters": {
+"light": [
+"ค้างคาวอเมทิสต์",
+"โกเลมหินจิ๋ว",
+"แพะภูเขา"
+],
+"dark": [
+"ค้างคาวเงา"
+]
+},
+"decor": "หน้าผา ก้อนหินใหญ่ สนภูเขา ทางชัน น้ำตกเล็ก",
+"purpose": "เหมืองหินเล็ก·ขุดแร่",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 2
+},
+"H5": {
+"id": "H5",
+"col": 7,
+"row": 4,
+"biome": "snow",
+"realm": "light",
+"features": [
+"grass",
+"mist",
+"mountain",
+"ridge"
+],
+"name": "ภูเขา · หน้าผา",
+"status": "future",
+"note": "ทางขึ้นหอสมุด (อนาคต)",
+"f": {
+"water": 0.02,
+"forest": 0.1,
+"stone": 0.03
+},
+"role": "D",
+"monsters": {
+"light": [
+"แมวน้ำหิมะ",
+"เพนกวินขนฟู"
+],
+"dark": [
+"หมาป่าน้ำแข็งเงา"
+]
+},
+"decor": "กองหิมะ สนหิมะ น้ำแข็ง หินคริสตัลน้ำแข็ง",
+"purpose": "กระท่อมนักเดินทาง",
+"buildings": [],
+"dungeon": {
+"name": "ถ้ำหน้าผา → ทางขึ้นหอสมุด",
+"floors": 6,
+"boss_every": 3,
+"chapter": 9,
+"note": "ทางขึ้นหอสมุดคริสตัล",
+"built": false
+},
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 2
+},
+"I5": {
+"id": "I5",
+"col": 8,
+"row": 4,
+"biome": "snow",
+"realm": "light",
+"features": [
+"grass",
+"mountain",
+"ridge"
+],
+"f": {
+"water": 0.12,
+"forest": 0.12,
+"stone": 0.1
+},
+"role": "D",
+"monsters": {
+"light": [
+"แมวน้ำหิมะ",
+"เพนกวินขนฟู"
+],
+"dark": [
+"หมาป่าน้ำแข็งเงา"
+]
+},
+"decor": "กองหิมะ สนหิมะ น้ำแข็ง หินคริสตัลน้ำแข็ง",
+"purpose": "บ่อน้ำแข็งตกปลา",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 2
+},
+"J5": {
+"id": "J5",
+"col": 9,
+"row": 4,
+"biome": "volcano",
+"realm": "light",
+"features": [
+"grass",
+"mountain",
+"ridge",
+"snow"
+],
+"f": {
+"water": 0.13,
+"forest": 0.01,
+"stone": 0.18
+},
+"role": "D",
+"monsters": {
+"light": [
+"ซาลาแมนเดอร์จิ๋ว",
+"ไก่ไฟ"
+],
+"dark": [
+"ก้อนลาวาเงา"
+]
+},
+"decor": "หินลาวาเย็น บ่อน้ำร้อน ไอน้ำ หินดำ",
+"purpose": "บ่อน้ำพุร้อน",
+"buildings": [],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 4
+},
+"K5": {
+"id": "K5",
+"col": 10,
+"row": 4,
+"biome": "meadow",
+"realm": "light",
+"features": [
+"volcano"
+],
+"f": {
+"water": 0.11,
+"forest": 0.32,
+"stone": 0.08
+},
+"role": "D",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "สวนผลไม้·เก็บผล",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"L5": {
+"id": "L5",
+"col": 11,
+"row": 4,
+"biome": "water",
+"realm": "light",
+"features": [
+"mystery"
+],
+"name": "เกาะลอยฟ้า",
+"status": "future",
+"note": "",
+"f": {
+"water": 0.73,
+"forest": 0.02,
+"stone": 0.0
+},
+"role": "S",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "กอบัว ดงกก ท่าน้ำ หินริมน้ำ",
+"purpose": "ริมน้ำพระอาทิตย์ตก",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"M5": {
+"id": "M5",
+"col": 12,
+"row": 4,
+"biome": "mystery",
+"realm": "mystery",
+"features": [
+"mountain"
+],
+"f": {
+"water": 0.71,
+"forest": 0.0,
+"stone": 0.03
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"name": "เกาะลอยฟ้า",
+"kind": "sky",
+"chapter": 8,
+"crystal": {
+"shape": "ผลึกขาวรุ้งงอกจากเกาะ รากผลึกห้อยลงถึงพื้นดิน · ใหญ่",
+"glow": "ขาวรุ้ง"
+},
+"buildings": [
+"ลานคริสตัลกลางเมือง + นักเวทประจำเมือง",
+"ร้านอาวุธ/อุปกรณ์",
+"ร้านของใช้",
+"โรงเตี๊ยม",
+"บ้านชาวบ้าน",
+"บอร์ดภารกิจ"
+],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+]
+},
+"N5": {
+"id": "N5",
+"col": 13,
+"row": 4,
+"biome": "mystery",
+"realm": "mystery",
+"features": [
+"mountain"
+],
+"f": {
+"water": 0.86,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "เกาะลอยมีหีบ",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"O5": {
+"id": "O5",
+"col": 14,
+"row": 4,
+"biome": "dark",
+"realm": "dark",
+"features": [
+"mystery"
+],
+"f": {
+"water": 0.1,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ค่ายผู้พิทักษ์",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"P5": {
+"id": "P5",
+"col": 15,
+"row": 4,
+"biome": "thorn",
+"realm": "dark",
+"features": [
+"dark"
+],
+"name": "ป่าหนามดำ",
+"status": "future",
+"note": "ผู้ใหญ่",
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เถาหนามเงา"
+]
+},
+"decor": "ต้นหนามดำ เถาวัลย์ดำ",
+"purpose": "ค่ายผู้พิทักษ์",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"Q5": {
+"id": "Q5",
+"col": 16,
+"row": 4,
+"biome": "thorn",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.28,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เถาหนามเงา",
+"หมาป่าเงาใหญ่"
+]
+},
+"decor": "ต้นหนามดำ เถาวัลย์ดำ",
+"purpose": "ค่ายผู้พิทักษ์",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"R5": {
+"id": "R5",
+"col": 17,
+"row": 4,
+"biome": "thorn",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.39,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "S",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "ต้นหนามดำ เถาวัลย์ดำ",
+"purpose": "จุดชมดาวมืด",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"S5": {
+"id": "S5",
+"col": 18,
+"row": 4,
+"biome": "dark",
+"realm": "dark",
+"features": [
+"thorn"
+],
+"f": {
+"water": 0.08,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ค่ายผู้พิทักษ์",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"T5": {
+"id": "T5",
+"col": 19,
+"row": 4,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ค่ายผู้พิทักษ์",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w"
+],
+"chapter": 10
+},
+"A6": {
+"id": "A6",
+"col": 0,
+"row": 5,
+"biome": "sea",
+"realm": "sea",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.64,
+"forest": 0.06,
+"stone": 0.02
+}
+},
+"B6": {
+"id": "B6",
+"col": 1,
+"row": 5,
+"biome": "sea",
+"realm": "sea",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.62,
+"forest": 0.09,
+"stone": 0.01
+}
+},
+"C6": {
+"id": "C6",
+"col": 2,
+"row": 5,
+"biome": "meadow",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.22,
+"stone": 0.05
+},
+"role": "D",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้"
+],
+"dark": []
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "ทุ่งดอกไม้·จับผีเสื้อ",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"e"
+],
+"chapter": 7
+},
+"D6": {
+"id": "D6",
+"col": 3,
+"row": 5,
+"biome": "meadow",
+"realm": "light",
+"features": [
+"mountain",
+"plateau",
+"ridge",
+"snow"
+],
+"f": {
+"water": 0.0,
+"forest": 0.19,
+"stone": 0.11
+},
+"role": "D",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "ค่ายพ่อค้าเร่",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 7
+},
+"E6": {
+"id": "E6",
+"col": 4,
+"row": 5,
+"biome": "meadow",
+"realm": "light",
+"features": [
+"ridge"
+],
+"f": {
+"water": 0.0,
+"forest": 0.15,
+"stone": 0.17
+},
+"role": "D",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "บ่อตกปลา",
+"buildings": [],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 6
+},
+"F6": {
+"id": "F6",
+"col": 5,
+"row": 5,
+"biome": "forest",
+"realm": "light",
+"features": [
+"mountain",
+"ridge"
+],
+"f": {
+"water": 0.0,
+"forest": 0.33,
+"stone": 0.02
+},
+"role": "D",
+"monsters": {
+"light": [
+"เห็ดน้อย",
+"กระรอกลูกโอ๊ก",
+"นกฮูกโคม"
+],
+"dark": [
+"หมาป่าเงา"
+]
+},
+"decor": "ต้นโอ๊ก ต้นสน พุ่มเบอร์รี่ เห็ด ขอนไม้ ลำธารเล็ก",
+"purpose": "บ้านคนตัดไม้",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 2
+},
+"G6": {
+"id": "G6",
+"col": 6,
+"row": 5,
+"biome": "meadow",
+"realm": "light",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.0,
+"forest": 0.1,
+"stone": 0.01
+},
+"role": "D",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้"
+],
+"dark": []
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "บ่อตกปลา",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 2
+},
+"H6": {
+"id": "H6",
+"col": 7,
+"row": 5,
+"biome": "meadow",
+"realm": "light",
+"features": [],
+"name": "ลานพระราชวัง",
+"status": "built",
+"note": "ทางเชื่อมเมือง-หน้าผา · ซุ้มถ้ำภูเขา",
+"f": {
+"water": 0.03,
+"forest": 0.05,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้"
+],
+"dark": []
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "หมู่บ้านเล็ก",
+"buildings": [
+"กระท่อม 3–5 หลัง",
+"เครื่องแปลงพลังงาน"
+],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 2
+},
+"I6": {
+"id": "I6",
+"col": 8,
+"row": 5,
+"biome": "forest",
+"realm": "light",
+"features": [
+"valley",
+"water"
+],
+"f": {
+"water": 0.07,
+"forest": 0.35,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"เห็ดน้อย",
+"กระรอกลูกโอ๊ก",
+"นกฮูกโคม"
+],
+"dark": [
+"หมาป่าเงา"
+]
+},
+"decor": "ต้นโอ๊ก ต้นสน พุ่มเบอร์รี่ เห็ด ขอนไม้ ลำธารเล็ก",
+"purpose": "พุ่มเบอร์รี่·เก็บผล",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 2
+},
+"J6": {
+"id": "J6",
+"col": 9,
+"row": 5,
+"biome": "meadow",
+"realm": "light",
+"features": [
+"mountain",
+"ridge",
+"snow"
+],
+"f": {
+"water": 0.0,
+"forest": 0.3,
+"stone": 0.07
+},
+"role": "D",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "ค่ายพ่อค้าเร่",
+"buildings": [],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 2
+},
+"K6": {
+"id": "K6",
+"col": 10,
+"row": 5,
+"biome": "water",
+"realm": "light",
+"features": [
+"mountain",
+"ridge",
+"snow"
+],
+"f": {
+"water": 0.29,
+"forest": 0.01,
+"stone": 0.16
+},
+"role": "D",
+"monsters": {
+"light": [
+"กบบัว",
+"ปูน้อย"
+],
+"dark": [
+"ปลิงเงา"
+]
+},
+"decor": "กอบัว ดงกก ท่าน้ำ หินริมน้ำ",
+"purpose": "ท่าตกปลา",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"L6": {
+"id": "L6",
+"col": 11,
+"row": 5,
+"biome": "mystery",
+"realm": "mystery",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.9,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ศิลาจารึกผู้สร้าง",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"M6": {
+"id": "M6",
+"col": 12,
+"row": 5,
+"biome": "mystery",
+"realm": "mystery",
+"features": [],
+"f": {
+"water": 0.98,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ศิลาจารึกผู้สร้าง",
+"buildings": [],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"N6": {
+"id": "N6",
+"col": 13,
+"row": 5,
+"biome": "mystery",
+"realm": "mystery",
+"features": [],
+"f": {
+"water": 0.95,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ศิลาจารึกผู้สร้าง",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"O6": {
+"id": "O6",
+"col": 14,
+"row": 5,
+"biome": "dark",
+"realm": "dark",
+"features": [
+"mystery"
+],
+"f": {
+"water": 0.04,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ค่ายผู้พิทักษ์",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"P6": {
+"id": "P6",
+"col": 15,
+"row": 5,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ค่ายผู้พิทักษ์",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"Q6": {
+"id": "Q6",
+"col": 16,
+"row": 5,
+"biome": "thorn",
+"realm": "dark",
+"features": [
+"dark"
+],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เถาหนามเงา",
+"หมาป่าเงาใหญ่"
+]
+},
+"decor": "ต้นหนามดำ เถาวัลย์ดำ",
+"purpose": "ค่ายผู้พิทักษ์",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"R6": {
+"id": "R6",
+"col": 17,
+"row": 5,
+"biome": "dark",
+"realm": "dark",
+"features": [
+"thorn"
+],
+"f": {
+"water": 0.01,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ซากหมู่บ้าน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"S6": {
+"id": "S6",
+"col": 18,
+"row": 5,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ค่ายผู้พิทักษ์",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"T6": {
+"id": "T6",
+"col": 19,
+"row": 5,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ค่ายผู้พิทักษ์",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w"
+],
+"chapter": 10
+},
+"A7": {
+"id": "A7",
+"col": 0,
+"row": 6,
+"biome": "sea",
+"realm": "sea",
+"features": [
+"grass"
+],
+"f": {
+"water": 1.0,
+"forest": 0.0,
+"stone": 0.0
+}
+},
+"B7": {
+"id": "B7",
+"col": 1,
+"row": 6,
+"biome": "sea",
+"realm": "sea",
+"features": [
+"plateau"
+],
+"f": {
+"water": 0.58,
+"forest": 0.0,
+"stone": 0.01
+}
+},
+"C7": {
+"id": "C7",
+"col": 2,
+"row": 6,
+"biome": "plateau",
+"realm": "light",
+"features": [
+"grass"
+],
+"name": "เมืองกลไก",
+"status": "future",
+"note": "",
+"f": {
+"water": 0.0,
+"forest": 0.15,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "ที่ราบหิน เฟืองโบราณ ท่อทองเหลือง",
+"kind": "town",
+"chapter": 7,
+"crystal": {
+"shape": "ผลึกในกรงทองเหลืองมีเฟือง · กลาง",
+"glow": "เขียวทองแดง"
+},
+"buildings": [
+"ลานคริสตัลกลางเมือง + นักเวทประจำเมือง",
+"ร้านอาวุธ/อุปกรณ์",
+"ร้านของใช้",
+"โรงเตี๊ยม",
+"บ้านชาวบ้าน",
+"บอร์ดภารกิจ"
+],
+"road": true,
+"exits": [
+"n",
+"s",
+"e"
+]
+},
+"D7": {
+"id": "D7",
+"col": 3,
+"row": 6,
+"biome": "plateau",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.02,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"หุ่นเฟืองน้อย",
+"นกทองเหลือง"
+],
+"dark": []
+},
+"decor": "ที่ราบหิน เฟืองโบราณ ท่อทองเหลือง",
+"purpose": "ซากเครื่องจักร·ขุดเฟือง",
+"buildings": [],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 7
+},
+"E7": {
+"id": "E7",
+"col": 4,
+"row": 6,
+"biome": "forest",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.01,
+"forest": 0.42,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"เห็ดน้อย",
+"กระรอกลูกโอ๊ก",
+"นกฮูกโคม"
+],
+"dark": [
+"หมาป่าเงา"
+]
+},
+"decor": "ต้นโอ๊ก ต้นสน พุ่มเบอร์รี่ เห็ด ขอนไม้ ลำธารเล็ก",
+"purpose": "ซากศาลโคม",
+"buildings": [],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 2
+},
+"F7": {
+"id": "F7",
+"col": 5,
+"row": 6,
+"biome": "meadow",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.26,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้"
+],
+"dark": []
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "ฟาร์มแกะ",
+"buildings": [],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 2
+},
+"G7": {
+"id": "G7",
+"col": 6,
+"row": 6,
+"biome": "meadow",
+"realm": "light",
+"features": [],
+"name": "Lantern Academy",
+"status": "plan",
+"note": "โซนโรงเรียน",
+"f": {
+"water": 0.0,
+"forest": 0.01,
+"stone": 0.04
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"kind": "academy",
+"chapter": 2,
+"crystal": {
+"shape": "ผลึกมุกทรงกลมงอกจากแท่นราก มีห่วงทองครอบ · กลาง",
+"glow": "รุ้งอ่อน"
+},
+"buildings": [
+"ลานคริสตัลกลางเมือง + นักเวทประจำเมือง",
+"ร้านอาวุธ/อุปกรณ์",
+"ร้านของใช้",
+"โรงเตี๊ยม",
+"บ้านชาวบ้าน",
+"บอร์ดภารกิจ",
+"ห้องเรียน",
+"หอสมุด",
+"สนามฝึก"
+],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+]
+},
+"H7": {
+"id": "H7",
+"col": 7,
+"row": 6,
+"biome": "meadow",
+"realm": "light",
+"features": [
+"desert"
+],
+"name": "นครประทีป",
+"status": "plan",
+"note": "วาดใหม่",
+"f": {
+"water": 0.04,
+"forest": 0.07,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"kind": "capital",
+"chapter": 2,
+"crystal": {
+"shape": "ยอดผลึกทองอำพันหลายชั้นทรงโคม งอกจากลานกลางเมือง · ใหญ่",
+"glow": "ทองอุ่น"
+},
+"buildings": [
+"ลานคริสตัลกลางเมือง + นักเวทประจำเมือง",
+"ร้านอาวุธ/อุปกรณ์",
+"ร้านของใช้",
+"โรงเตี๊ยม",
+"บ้านชาวบ้าน",
+"บอร์ดภารกิจ",
+"ปราสาท/ลานพระราชวัง",
+"ตลาดใหญ่",
+"สมาคมอาชีพ (เปลี่ยนอาชีพ)"
+],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+]
+},
+"I7": {
+"id": "I7",
+"col": 8,
+"row": 6,
+"biome": "meadow",
+"realm": "light",
+"features": [
+"grass",
+"water"
+],
+"f": {
+"water": 0.06,
+"forest": 0.15,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้"
+],
+"dark": []
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "หมู่บ้านเล็ก",
+"buildings": [
+"กระท่อม 3–5 หลัง",
+"เครื่องแปลงพลังงาน"
+],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 2
+},
+"J7": {
+"id": "J7",
+"col": 9,
+"row": 6,
+"biome": "forest",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.41,
+"stone": 0.05
+},
+"role": "D",
+"monsters": {
+"light": [
+"เห็ดน้อย",
+"กระรอกลูกโอ๊ก",
+"นกฮูกโคม"
+],
+"dark": [
+"หมาป่าเงา"
+]
+},
+"decor": "ต้นโอ๊ก ต้นสน พุ่มเบอร์รี่ เห็ด ขอนไม้ ลำธารเล็ก",
+"purpose": "วงเห็ดนางฟ้า·ความลับ",
+"buildings": [],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 2
+},
+"K7": {
+"id": "K7",
+"col": 10,
+"row": 6,
+"biome": "meadow",
+"realm": "light",
+"features": [
+"mountain",
+"ridge",
+"snow"
+],
+"f": {
+"water": 0.15,
+"forest": 0.12,
+"stone": 0.01
+},
+"role": "D",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "ฟาร์มแกะ",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 2
+},
+"L7": {
+"id": "L7",
+"col": 11,
+"row": 6,
+"biome": "mystery",
+"realm": "mystery",
+"features": [],
+"f": {
+"water": 0.82,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "เกาะลอยมีหีบ",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"M7": {
+"id": "M7",
+"col": 12,
+"row": 6,
+"biome": "mystery",
+"realm": "mystery",
+"features": [
+"mist"
+],
+"f": {
+"water": 0.9,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "เกาะลอยมีหีบ",
+"buildings": [],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"N7": {
+"id": "N7",
+"col": 13,
+"row": 6,
+"biome": "mystery",
+"realm": "mystery",
+"features": [
+"mist"
+],
+"f": {
+"water": 0.81,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "เกาะลอยมีหีบ",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 8
+},
+"O7": {
+"id": "O7",
+"col": 14,
+"row": 6,
+"biome": "dark",
+"realm": "dark",
+"features": [
+"mystery"
+],
+"f": {
+"water": 0.26,
+"forest": 0.0,
+"stone": 0.01
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ค่ายผู้พิทักษ์",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"P7": {
+"id": "P7",
+"col": 15,
+"row": 6,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.02,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ซากหมู่บ้าน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"Q7": {
+"id": "Q7",
+"col": 16,
+"row": 6,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.01,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ค่ายผู้พิทักษ์",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"R7": {
+"id": "R7",
+"col": 17,
+"row": 6,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.01
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ค่ายผู้พิทักษ์",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"S7": {
+"id": "S7",
+"col": 18,
+"row": 6,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ซากหมู่บ้าน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"T7": {
+"id": "T7",
+"col": 19,
+"row": 6,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ซากหมู่บ้าน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w"
+],
+"chapter": 10
+},
+"A8": {
+"id": "A8",
+"col": 0,
+"row": 7,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 1.0,
+"forest": 0.0,
+"stone": 0.0
+}
+},
+"B8": {
+"id": "B8",
+"col": 1,
+"row": 7,
+"biome": "sea",
+"realm": "sea",
+"features": [
+"plateau"
+],
+"f": {
+"water": 0.58,
+"forest": 0.0,
+"stone": 0.01
+}
+},
+"C8": {
+"id": "C8",
+"col": 2,
+"row": 7,
+"biome": "plateau",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"หุ่นเฟืองน้อย",
+"นกทองเหลือง"
+],
+"dark": []
+},
+"decor": "ที่ราบหิน เฟืองโบราณ ท่อทองเหลือง",
+"purpose": "ซากเครื่องจักร·ขุดเฟือง",
+"buildings": [],
+"dungeon": {
+"name": "โรงงานเฟือง",
+"floors": 6,
+"boss_every": 3,
+"chapter": 7,
+"note": "หุ่นเฟืองเงา",
+"built": false
+},
+"road": false,
+"exits": [
+"n",
+"s",
+"e"
+],
+"chapter": 7
+},
+"D8": {
+"id": "D8",
+"col": 3,
+"row": 7,
+"biome": "plateau",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.1,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"หุ่นเฟืองน้อย",
+"นกทองเหลือง"
+],
+"dark": [
+"หุ่นเฟืองเงา"
+]
+},
+"decor": "ที่ราบหิน เฟืองโบราณ ท่อทองเหลือง",
+"purpose": "ซากเครื่องจักร·ขุดเฟือง",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 7
+},
+"E8": {
+"id": "E8",
+"col": 4,
+"row": 7,
+"biome": "forest",
+"realm": "light",
+"features": [
+"plateau"
+],
+"f": {
+"water": 0.01,
+"forest": 0.4,
+"stone": 0.05
+},
+"role": "D",
+"monsters": {
+"light": [
+"เห็ดน้อย",
+"กระรอกลูกโอ๊ก",
+"นกฮูกโคม"
+],
+"dark": [
+"หมาป่าเงา"
+]
+},
+"decor": "ต้นโอ๊ก ต้นสน พุ่มเบอร์รี่ เห็ด ขอนไม้ ลำธารเล็ก",
+"purpose": "ซากศาลโคม",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 2
+},
+"F8": {
+"id": "F8",
+"col": 5,
+"row": 7,
+"biome": "forest",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.37,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"เห็ดน้อย",
+"กระรอกลูกโอ๊ก",
+"นกฮูกโคม"
+],
+"dark": [
+"หมาป่าเงา"
+]
+},
+"decor": "ต้นโอ๊ก ต้นสน พุ่มเบอร์รี่ เห็ด ขอนไม้ ลำธารเล็ก",
+"purpose": "ลานแคมป์·กองไฟ",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 2
+},
+"G8": {
+"id": "G8",
+"col": 6,
+"row": 7,
+"biome": "meadow",
+"realm": "light",
+"features": [
+"valley"
+],
+"f": {
+"water": 0.0,
+"forest": 0.22,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้"
+],
+"dark": []
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "ทุ่งดอกไม้·จับผีเสื้อ",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 2
+},
+"H8": {
+"id": "H8",
+"col": 7,
+"row": 7,
+"biome": "meadow",
+"realm": "light",
+"features": [
+"valley",
+"water"
+],
+"name": "ทางเชื่อม·ทุ่งนา",
+"status": "plan",
+"note": "ชุดของ",
+"f": {
+"water": 0.12,
+"forest": 0.22,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้"
+],
+"dark": []
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "หมู่บ้านเล็ก",
+"buildings": [
+"กระท่อม 3–5 หลัง",
+"เครื่องแปลงพลังงาน"
+],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 1
+},
+"I8": {
+"id": "I8",
+"col": 8,
+"row": 7,
+"biome": "meadow",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.1,
+"forest": 0.3,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "หมู่บ้านเล็ก",
+"buildings": [
+"กระท่อม 3–5 หลัง",
+"เครื่องแปลงพลังงาน"
+],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 1
+},
+"J8": {
+"id": "J8",
+"col": 9,
+"row": 7,
+"biome": "water",
+"realm": "light",
+"features": [
+"mushroom"
+],
+"f": {
+"water": 0.31,
+"forest": 0.11,
+"stone": 0.01
+},
+"role": "D",
+"monsters": {
+"light": [
+"กบบัว",
+"ปูน้อย"
+],
+"dark": []
+},
+"decor": "กอบัว ดงกก ท่าน้ำ หินริมน้ำ",
+"purpose": "ท่าตกปลา",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 2
+},
+"K8": {
+"id": "K8",
+"col": 10,
+"row": 7,
+"biome": "water",
+"realm": "light",
+"features": [
+"mushroom",
+"mystery"
+],
+"f": {
+"water": 0.64,
+"forest": 0.04,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"กบบัว",
+"ปูน้อย"
+],
+"dark": [
+"ปลิงเงา"
+]
+},
+"decor": "กอบัว ดงกก ท่าน้ำ หินริมน้ำ",
+"purpose": "บึงจับกบ",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 2
+},
+"L8": {
+"id": "L8",
+"col": 11,
+"row": 7,
+"biome": "mystery",
+"realm": "mystery",
+"features": [],
+"name": "ต้นไม้โบราณ",
+"status": "future",
+"note": "ความลับผู้สร้างโลก",
+"f": {
+"water": 0.78,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ศิลาจารึกผู้สร้าง",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 9
+},
+"M8": {
+"id": "M8",
+"col": 12,
+"row": 7,
+"biome": "mystery",
+"realm": "mystery",
+"features": [
+"water"
+],
+"f": {
+"water": 0.58,
+"forest": 0.0,
+"stone": 0.01
+},
+"role": "D",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ศิลาจารึกผู้สร้าง",
+"buildings": [],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 9
+},
+"N8": {
+"id": "N8",
+"col": 13,
+"row": 7,
+"biome": "mystery",
+"realm": "mystery",
+"features": [
+"mystery",
+"water"
+],
+"f": {
+"water": 0.94,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "เกาะลอยมีหีบ",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 9
+},
+"O8": {
+"id": "O8",
+"col": 14,
+"row": 7,
+"biome": "mystery",
+"realm": "mystery",
+"features": [
+"dark"
+],
+"f": {
+"water": 0.33,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ศิลาจารึกผู้สร้าง",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"P8": {
+"id": "P8",
+"col": 15,
+"row": 7,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"name": "เหมืองแสงร้าง",
+"status": "future",
+"note": "ผู้ใหญ่",
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ค่ายผู้พิทักษ์",
+"buildings": [],
+"dungeon": {
+"name": "เหมืองแสงร้าง",
+"floors": 9,
+"boss_every": 3,
+"chapter": 10,
+"note": "ผู้ใหญ่เท่านั้น",
+"built": false
+},
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"Q8": {
+"id": "Q8",
+"col": 16,
+"row": 7,
+"biome": "dark",
+"realm": "dark",
+"features": [
+"thorn"
+],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ซากหมู่บ้าน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"R8": {
+"id": "R8",
+"col": 17,
+"row": 7,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ซากหมู่บ้าน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"S8": {
+"id": "S8",
+"col": 18,
+"row": 7,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.01,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ซากหมู่บ้าน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"T8": {
+"id": "T8",
+"col": 19,
+"row": 7,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.14,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ซากหมู่บ้าน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w"
+],
+"chapter": 10
+},
+"A9": {
+"id": "A9",
+"col": 0,
+"row": 8,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 0.71,
+"forest": 0.0,
+"stone": 0.19
+}
+},
+"B9": {
+"id": "B9",
+"col": 1,
+"row": 8,
+"biome": "sea",
+"realm": "sea",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.35,
+"forest": 0.02,
+"stone": 0.01
+}
+},
+"C9": {
+"id": "C9",
+"col": 2,
+"row": 8,
+"biome": "plateau",
+"realm": "light",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.01,
+"forest": 0.19,
+"stone": 0.01
+},
+"role": "D",
+"monsters": {
+"light": [
+"หุ่นเฟืองน้อย",
+"นกทองเหลือง"
+],
+"dark": [
+"หุ่นเฟืองเงา"
+]
+},
+"decor": "ที่ราบหิน เฟืองโบราณ ท่อทองเหลือง",
+"purpose": "ซากเครื่องจักร·ขุดเฟือง",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"e"
+],
+"chapter": 7
+},
+"D9": {
+"id": "D9",
+"col": 3,
+"row": 8,
+"biome": "plateau",
+"realm": "light",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.0,
+"forest": 0.44,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"หุ่นเฟืองน้อย",
+"นกทองเหลือง"
+],
+"dark": [
+"หุ่นเฟืองเงา"
+]
+},
+"decor": "ที่ราบหิน เฟืองโบราณ ท่อทองเหลือง",
+"purpose": "ซากเครื่องจักร·ขุดเฟือง",
+"buildings": [],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 5
+},
+"E9": {
+"id": "E9",
+"col": 4,
+"row": 8,
+"biome": "forest",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.41,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"เห็ดน้อย",
+"กระรอกลูกโอ๊ก",
+"นกฮูกโคม"
+],
+"dark": [
+"หมาป่าเงา"
+]
+},
+"decor": "ต้นโอ๊ก ต้นสน พุ่มเบอร์รี่ เห็ด ขอนไม้ ลำธารเล็ก",
+"purpose": "บ้านคนตัดไม้",
+"buildings": [],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 1
+},
+"F9": {
+"id": "F9",
+"col": 5,
+"row": 8,
+"biome": "meadow",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.16,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "ทุ่งดอกไม้·จับผีเสื้อ",
+"buildings": [],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 1
+},
+"G9": {
+"id": "G9",
+"col": 6,
+"row": 8,
+"biome": "forest",
+"realm": "light",
+"features": [],
+"name": "บ้านเรา · ฟาร์ม",
+"status": "plan",
+"note": "ผัง + ภาพฉากผ่านแล้ว (MAP_SPEC_G9 v1.5) · ถนนตะวันออกต่อ H9 ที่ y 16",
+"f": {
+"water": 0.0,
+"forest": 0.44,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"เห็ดน้อย",
+"กระรอกลูกโอ๊ก"
+],
+"dark": []
+},
+"decor": "ต้นโอ๊ก ต้นสน พุ่มเบอร์รี่ เห็ด ขอนไม้ ลำธารเล็ก",
+"purpose": "ลานแคมป์·กองไฟ",
+"buildings": [
+"บ้านเรา (ขยายได้ 9 ขั้น)",
+"โรงเก็บของ",
+"บ้านเพื่อนมอน"
+],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 1
+},
+"H9": {
+"id": "H9",
+"col": 7,
+"row": 8,
+"biome": "meadow",
+"realm": "light",
+"features": [
+"water"
+],
+"name": "หมู่บ้านพาเพลิน",
+"status": "built",
+"note": "จุดเริ่มเกม · เนินมีปากถ้ำ",
+"f": {
+"water": 0.08,
+"forest": 0.09,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"kind": "village",
+"chapter": 1,
+"crystal": {
+"shape": "กอผลึกอเมทิสต์เส้นใบไม้เขียว · กลาง",
+"glow": "ไลแลค"
+},
+"buildings": [
+"ลานคริสตัลกลางเมือง + นักเวทประจำเมือง",
+"ร้านอาวุธ/อุปกรณ์",
+"ร้านของใช้",
+"โรงเตี๊ยม",
+"บ้านชาวบ้าน",
+"บอร์ดภารกิจ",
+"ไปรษณีย์",
+"ร้านยายนวล"
+],
+"dungeon": {
+"name": "ถ้ำอเมทิสต์ (เนินในหมู่บ้าน)",
+"floors": 6,
+"boss_every": 3,
+"chapter": 1,
+"note": "มอนมืดสิงผู้พิทักษ์หิน · ชั้น 6 หลังลานบอสมีหินถล่มทางต่อ",
+"built": true
+},
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+]
+},
+"I9": {
+"id": "I9",
+"col": 8,
+"row": 8,
+"biome": "mushroom",
+"realm": "light",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.41,
+"forest": 0.07,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"เห็ดเรืองแสง",
+"ผีเสื้อสปอร์"
+],
+"dark": []
+},
+"decor": "เห็ดยักษ์เรืองแสง เถาวัลย์ สปอร์ลอย",
+"purpose": "บ้านต้นเห็ด",
+"buildings": [],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 1
+},
+"J9": {
+"id": "J9",
+"col": 9,
+"row": 8,
+"biome": "mushroom",
+"realm": "light",
+"features": [],
+"name": "หมู่บ้านเห็ด",
+"status": "future",
+"note": "ดินแดน บท 2",
+"f": {
+"water": 0.39,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "เห็ดยักษ์เรืองแสง เถาวัลย์ สปอร์ลอย",
+"kind": "village",
+"chapter": 2,
+"crystal": {
+"shape": "ผลึกทรงหมวกเห็ด · กลาง",
+"glow": "ชมพูเรือง"
+},
+"buildings": [
+"ลานคริสตัลกลางเมือง + นักเวทประจำเมือง",
+"ร้านอาวุธ/อุปกรณ์",
+"ร้านของใช้",
+"โรงเตี๊ยม",
+"บ้านชาวบ้าน",
+"บอร์ดภารกิจ"
+],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+]
+},
+"K9": {
+"id": "K9",
+"col": 10,
+"row": 8,
+"biome": "mushroom",
+"realm": "light",
+"features": [
+"mystery"
+],
+"f": {
+"water": 0.89,
+"forest": 0.01,
+"stone": 0.0
+},
+"role": "S",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "เห็ดยักษ์เรืองแสง เถาวัลย์ สปอร์ลอย",
+"purpose": "สระสะท้อนเห็ดเรืองแสง",
+"buildings": [],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 2
+},
+"L9": {
+"id": "L9",
+"col": 11,
+"row": 8,
+"biome": "mystery",
+"realm": "mystery",
+"features": [
+"mist"
+],
+"f": {
+"water": 0.94,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "เกาะลอยมีหีบ",
+"buildings": [],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 9
+},
+"M9": {
+"id": "M9",
+"col": 12,
+"row": 8,
+"biome": "water",
+"realm": "light",
+"features": [
+"mist",
+"valley"
+],
+"f": {
+"water": 0.42,
+"forest": 0.01,
+"stone": 0.02
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "กอบัว ดงกก ท่าน้ำ หินริมน้ำ",
+"name": "วิหารต้นไม้โบราณ",
+"kind": "sanctuary",
+"chapter": 9,
+"crystal": {
+"shape": "ผลึกรากต้นไม้โบราณ · ยักษ์",
+"glow": "ทองอ่อน"
+},
+"buildings": [
+"ลานคริสตัลกลางเมือง + นักเวทประจำเมือง",
+"ร้านอาวุธ/อุปกรณ์",
+"ร้านของใช้",
+"โรงเตี๊ยม",
+"บ้านชาวบ้าน",
+"บอร์ดภารกิจ"
+],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+]
+},
+"N9": {
+"id": "N9",
+"col": 13,
+"row": 8,
+"biome": "mystery",
+"realm": "mystery",
+"features": [
+"water"
+],
+"f": {
+"water": 0.77,
+"forest": 0.02,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ศิลาจารึกผู้สร้าง",
+"buildings": [],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 9
+},
+"O9": {
+"id": "O9",
+"col": 14,
+"row": 8,
+"biome": "mystery",
+"realm": "mystery",
+"features": [
+"mist"
+],
+"f": {
+"water": 0.66,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ศิลาจารึกผู้สร้าง",
+"buildings": [],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"P9": {
+"id": "P9",
+"col": 15,
+"row": 8,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ซากหมู่บ้าน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"Q9": {
+"id": "Q9",
+"col": 16,
+"row": 8,
+"biome": "dark",
+"realm": "dark",
+"features": [
+"thorn"
+],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ค่ายผู้พิทักษ์",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"R9": {
+"id": "R9",
+"col": 17,
+"row": 8,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ซากหมู่บ้าน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"S9": {
+"id": "S9",
+"col": 18,
+"row": 8,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ซากหมู่บ้าน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"T9": {
+"id": "T9",
+"col": 19,
+"row": 8,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ค่ายผู้พิทักษ์",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w"
+],
+"chapter": 10
+},
+"A10": {
+"id": "A10",
+"col": 0,
+"row": 9,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 1.0,
+"forest": 0.0,
+"stone": 0.0
+}
+},
+"B10": {
+"id": "B10",
+"col": 1,
+"row": 9,
+"biome": "sea",
+"realm": "sea",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.81,
+"forest": 0.0,
+"stone": 0.01
+}
+},
+"C10": {
+"id": "C10",
+"col": 2,
+"row": 9,
+"biome": "meadow",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.02,
+"forest": 0.32,
+"stone": 0.01
+},
+"role": "D",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "หมู่บ้านเล็ก",
+"buildings": [
+"กระท่อม 3–5 หลัง",
+"เครื่องแปลงพลังงาน"
+],
+"road": false,
+"exits": [
+"n",
+"s",
+"e"
+],
+"chapter": 5
+},
+"D10": {
+"id": "D10",
+"col": 3,
+"row": 9,
+"biome": "meadow",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.22,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "บ่อตกปลา",
+"buildings": [],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 5
+},
+"E10": {
+"id": "E10",
+"col": 4,
+"row": 9,
+"biome": "meadow",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.14,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 5
+},
+"F10": {
+"id": "F10",
+"col": 5,
+"row": 9,
+"biome": "meadow",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.09,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "สวนผลไม้·เก็บผล",
+"buildings": [],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 1
+},
+"G10": {
+"id": "G10",
+"col": 6,
+"row": 9,
+"biome": "forest",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.53,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"เห็ดน้อย",
+"กระรอกลูกโอ๊ก",
+"นกฮูกโคม"
+],
+"dark": [
+"หมาป่าเงา"
+]
+},
+"decor": "ต้นโอ๊ก ต้นสน พุ่มเบอร์รี่ เห็ด ขอนไม้ ลำธารเล็ก",
+"purpose": "ลานแคมป์·กองไฟ",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 1
+},
+"H10": {
+"id": "H10",
+"col": 7,
+"row": 9,
+"biome": "meadow",
+"realm": "light",
+"features": [
+"water"
+],
+"name": "ป่า·ทางเดิน",
+"status": "plan",
+"note": "ชุดของ",
+"f": {
+"water": 0.14,
+"forest": 0.3,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้"
+],
+"dark": []
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "สวนผลไม้·เก็บผล",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 1
+},
+"I10": {
+"id": "I10",
+"col": 8,
+"row": 9,
+"biome": "mushroom",
+"realm": "light",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.63,
+"forest": 0.05,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"เห็ดเรืองแสง",
+"ผีเสื้อสปอร์"
+],
+"dark": [
+"ราดำ"
+]
+},
+"decor": "เห็ดยักษ์เรืองแสง เถาวัลย์ สปอร์ลอย",
+"purpose": "บ้านต้นเห็ด",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 1
+},
+"J10": {
+"id": "J10",
+"col": 9,
+"row": 9,
+"biome": "mushroom",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.82,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"เห็ดเรืองแสง",
+"ผีเสื้อสปอร์"
+],
+"dark": []
+},
+"decor": "เห็ดยักษ์เรืองแสง เถาวัลย์ สปอร์ลอย",
+"purpose": "บ้านต้นเห็ด",
+"buildings": [],
+"dungeon": {
+"name": "ถ้ำรากเห็ด",
+"floors": 6,
+"boss_every": 3,
+"chapter": 2,
+"note": "ราดำยักษ์",
+"built": false
+},
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 2
+},
+"K10": {
+"id": "K10",
+"col": 10,
+"row": 9,
+"biome": "mushroom",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.75,
+"forest": 0.03,
+"stone": 0.0
+},
+"role": "S",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "เห็ดยักษ์เรืองแสง เถาวัลย์ สปอร์ลอย",
+"purpose": "สระสะท้อนเห็ดเรืองแสง",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 2
+},
+"L10": {
+"id": "L10",
+"col": 11,
+"row": 9,
+"biome": "mystery",
+"realm": "mystery",
+"features": [
+"mist",
+"mushroom"
+],
+"f": {
+"water": 0.95,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "เกาะลอยมีหีบ",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 9
+},
+"M10": {
+"id": "M10",
+"col": 12,
+"row": 9,
+"biome": "mystery",
+"realm": "mystery",
+"features": [
+"water"
+],
+"f": {
+"water": 0.51,
+"forest": 0.0,
+"stone": 0.02
+},
+"role": "D",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "เกาะลอยมีหีบ",
+"buildings": [],
+"dungeon": {
+"name": "รากต้นไม้โบราณ",
+"floors": 6,
+"boss_every": 3,
+"chapter": 9,
+"note": "เงาของผู้สร้าง (ไม่ต่อสู้ · ปริศนา)",
+"built": false
+},
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 9
+},
+"N10": {
+"id": "N10",
+"col": 13,
+"row": 9,
+"biome": "mystery",
+"realm": "mystery",
+"features": [
+"water"
+],
+"f": {
+"water": 0.79,
+"forest": 0.03,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "เกาะลอยมีหีบ",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"O10": {
+"id": "O10",
+"col": 14,
+"row": 9,
+"biome": "mystery",
+"realm": "mystery",
+"features": [],
+"f": {
+"water": 0.57,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"name": "ป้อมตะเกียงสุดท้าย",
+"kind": "fort",
+"chapter": 10,
+"crystal": {
+"shape": "ผลึกทองงอกกลางป้อม จุดโคมยักษ์ตามแนว · ใหญ่",
+"glow": "ทอง"
+},
+"buildings": [
+"ลานคริสตัลกลางเมือง + นักเวทประจำเมือง",
+"ร้านอาวุธ/อุปกรณ์",
+"ร้านของใช้",
+"โรงเตี๊ยม",
+"บ้านชาวบ้าน",
+"บอร์ดภารกิจ"
+],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+]
+},
+"P10": {
+"id": "P10",
+"col": 15,
+"row": 9,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.01
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ค่ายผู้พิทักษ์",
+"buildings": [],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"Q10": {
+"id": "Q10",
+"col": 16,
+"row": 9,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ซากหมู่บ้าน",
+"buildings": [],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"R10": {
+"id": "R10",
+"col": 17,
+"row": 9,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ซากหมู่บ้าน",
+"buildings": [],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"S10": {
+"id": "S10",
+"col": 18,
+"row": 9,
+"biome": "dark",
+"realm": "dark",
+"features": [
+"thorn"
+],
+"name": "หอคอยผู้กลืนแสง",
+"status": "future",
+"note": "ผู้ใหญ่",
+"f": {
+"water": 0.01,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"kind": "tower",
+"chapter": 10,
+"crystal": {
+"shape": "ออบซิเดียน · ใหญ่",
+"glow": "ม่วงหม่น"
+},
+"buildings": [
+"ลานคริสตัลกลางเมือง + นักเวทประจำเมือง",
+"ร้านอาวุธ/อุปกรณ์",
+"ร้านของใช้",
+"โรงเตี๊ยม",
+"บ้านชาวบ้าน",
+"บอร์ดภารกิจ"
+],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+]
+},
+"T10": {
+"id": "T10",
+"col": 19,
+"row": 9,
+"biome": "dark",
+"realm": "dark",
+"features": [
+"thorn"
+],
+"f": {
+"water": 0.12,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ค่ายผู้พิทักษ์",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w"
+],
+"chapter": 10
+},
+"A11": {
+"id": "A11",
+"col": 0,
+"row": 10,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 1.0,
+"forest": 0.0,
+"stone": 0.0
+}
+},
+"B11": {
+"id": "B11",
+"col": 1,
+"row": 10,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 0.9,
+"forest": 0.0,
+"stone": 0.0
+}
+},
+"C11": {
+"id": "C11",
+"col": 2,
+"row": 10,
+"biome": "meadow",
+"realm": "light",
+"features": [
+"sea"
+],
+"f": {
+"water": 0.06,
+"forest": 0.1,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "ฟาร์มแกะ",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"e"
+],
+"chapter": 5
+},
+"D11": {
+"id": "D11",
+"col": 3,
+"row": 10,
+"biome": "meadow",
+"realm": "light",
+"features": [
+"desert"
+],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้"
+],
+"dark": []
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "หมู่บ้านเล็ก",
+"buildings": [
+"กระท่อม 3–5 หลัง",
+"เครื่องแปลงพลังงาน"
+],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 5
+},
+"E11": {
+"id": "E11",
+"col": 4,
+"row": 10,
+"biome": "desert",
+"realm": "light",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"กิ้งก่าทราย",
+"แมงป่องจิ๋ว"
+],
+"dark": [
+"งูเงาทราย"
+]
+},
+"decor": "เนินทราย กระบองเพชร ซากเสาหิน ต้นปาล์ม",
+"purpose": "กองคาราวาน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 5
+},
+"F11": {
+"id": "F11",
+"col": 5,
+"row": 10,
+"biome": "desert",
+"realm": "light",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"กิ้งก่าทราย",
+"แมงป่องจิ๋ว"
+],
+"dark": [
+"งูเงาทราย"
+]
+},
+"decor": "เนินทราย กระบองเพชร ซากเสาหิน ต้นปาล์ม",
+"purpose": "กองคาราวาน",
+"buildings": [],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 5
+},
+"G11": {
+"id": "G11",
+"col": 6,
+"row": 10,
+"biome": "meadow",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.22,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 1
+},
+"H11": {
+"id": "H11",
+"col": 7,
+"row": 10,
+"biome": "forest",
+"realm": "light",
+"features": [
+"water"
+],
+"name": "สระบัว·ตกปลา",
+"status": "plan",
+"note": "ชุดของ",
+"f": {
+"water": 0.13,
+"forest": 0.38,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"เห็ดน้อย",
+"กระรอกลูกโอ๊ก",
+"นกฮูกโคม"
+],
+"dark": [
+"หมาป่าเงา"
+]
+},
+"decor": "ต้นโอ๊ก ต้นสน พุ่มเบอร์รี่ เห็ด ขอนไม้ ลำธารเล็ก",
+"purpose": "วงเห็ดนางฟ้า·ความลับ",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 1
+},
+"I11": {
+"id": "I11",
+"col": 8,
+"row": 10,
+"biome": "mushroom",
+"realm": "light",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.08,
+"forest": 0.24,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"เห็ดเรืองแสง",
+"ผีเสื้อสปอร์"
+],
+"dark": [
+"ราดำ"
+]
+},
+"decor": "เห็ดยักษ์เรืองแสง เถาวัลย์ สปอร์ลอย",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 1
+},
+"J11": {
+"id": "J11",
+"col": 9,
+"row": 10,
+"biome": "mushroom",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.69,
+"forest": 0.11,
+"stone": 0.0
+},
+"role": "S",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "เห็ดยักษ์เรืองแสง เถาวัลย์ สปอร์ลอย",
+"purpose": "สระสะท้อนเห็ดเรืองแสง",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 2
+},
+"K11": {
+"id": "K11",
+"col": 10,
+"row": 10,
+"biome": "mushroom",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.67,
+"forest": 0.0,
+"stone": 0.01
+},
+"role": "S",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "เห็ดยักษ์เรืองแสง เถาวัลย์ สปอร์ลอย",
+"purpose": "สระสะท้อนเห็ดเรืองแสง",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 2
+},
+"L11": {
+"id": "L11",
+"col": 11,
+"row": 10,
+"biome": "mystery",
+"realm": "mystery",
+"features": [
+"mushroom"
+],
+"f": {
+"water": 0.93,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ศิลาจารึกผู้สร้าง",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 9
+},
+"M11": {
+"id": "M11",
+"col": 12,
+"row": 10,
+"biome": "mystery",
+"realm": "mystery",
+"features": [
+"mystery"
+],
+"f": {
+"water": 0.89,
+"forest": 0.0,
+"stone": 0.01
+},
+"role": "D",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "เกาะลอยมีหีบ",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 9
+},
+"N11": {
+"id": "N11",
+"col": 13,
+"row": 10,
+"biome": "mystery",
+"realm": "mystery",
+"features": [
+"mystery"
+],
+"f": {
+"water": 0.88,
+"forest": 0.0,
+"stone": 0.01
+},
+"role": "D",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "เกาะลอยมีหีบ",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"O11": {
+"id": "O11",
+"col": 14,
+"row": 10,
+"biome": "mystery",
+"realm": "mystery",
+"features": [
+"dark"
+],
+"f": {
+"water": 0.42,
+"forest": 0.0,
+"stone": 0.01
+},
+"role": "D",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ศิลาจารึกผู้สร้าง",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"P11": {
+"id": "P11",
+"col": 15,
+"row": 10,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ค่ายผู้พิทักษ์",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"Q11": {
+"id": "Q11",
+"col": 16,
+"row": 10,
+"biome": "dark",
+"realm": "dark",
+"features": [
+"mirror"
+],
+"f": {
+"water": 0.08,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ซากหมู่บ้าน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"R11": {
+"id": "R11",
+"col": 17,
+"row": 10,
+"biome": "dark",
+"realm": "dark",
+"features": [
+"mirror"
+],
+"f": {
+"water": 0.04,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ค่ายผู้พิทักษ์",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"S11": {
+"id": "S11",
+"col": 18,
+"row": 10,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ซากหมู่บ้าน",
+"buildings": [],
+"dungeon": {
+"name": "ใต้หอคอย",
+"floors": 9,
+"boss_every": 3,
+"chapter": 10,
+"note": "ผู้กลืนแสง (ตอนจบ · สมดุล)",
+"built": false
+},
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"T11": {
+"id": "T11",
+"col": 19,
+"row": 10,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.03
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ซากหมู่บ้าน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w"
+],
+"chapter": 10
+},
+"A12": {
+"id": "A12",
+"col": 0,
+"row": 11,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 1.0,
+"forest": 0.0,
+"stone": 0.0
+}
+},
+"B12": {
+"id": "B12",
+"col": 1,
+"row": 11,
+"biome": "sea",
+"realm": "sea",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.51,
+"forest": 0.0,
+"stone": 0.01
+}
+},
+"C12": {
+"id": "C12",
+"col": 2,
+"row": 11,
+"biome": "desert",
+"realm": "light",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"กิ้งก่าทราย",
+"แมงป่องจิ๋ว"
+],
+"dark": []
+},
+"decor": "เนินทราย กระบองเพชร ซากเสาหิน ต้นปาล์ม",
+"purpose": "ซากเมืองเก่า·ขุด",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"e"
+],
+"chapter": 5
+},
+"D12": {
+"id": "D12",
+"col": 3,
+"row": 11,
+"biome": "desert",
+"realm": "light",
+"features": [],
+"name": "เมืองพีระมิด",
+"status": "future",
+"note": "",
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "เนินทราย กระบองเพชร ซากเสาหิน ต้นปาล์ม",
+"kind": "town",
+"chapter": 5,
+"crystal": {
+"shape": "บุษราคัมทรงพีระมิดคว่ำ · กลาง",
+"glow": "ทองแดด"
+},
+"buildings": [
+"ลานคริสตัลกลางเมือง + นักเวทประจำเมือง",
+"ร้านอาวุธ/อุปกรณ์",
+"ร้านของใช้",
+"โรงเตี๊ยม",
+"บ้านชาวบ้าน",
+"บอร์ดภารกิจ"
+],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+]
+},
+"E12": {
+"id": "E12",
+"col": 4,
+"row": 11,
+"biome": "desert",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"กิ้งก่าทราย",
+"แมงป่องจิ๋ว"
+],
+"dark": []
+},
+"decor": "เนินทราย กระบองเพชร ซากเสาหิน ต้นปาล์ม",
+"purpose": "กองคาราวาน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 5
+},
+"F12": {
+"id": "F12",
+"col": 5,
+"row": 11,
+"biome": "desert",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"กิ้งก่าทราย",
+"แมงป่องจิ๋ว"
+],
+"dark": [
+"งูเงาทราย"
+]
+},
+"decor": "เนินทราย กระบองเพชร ซากเสาหิน ต้นปาล์ม",
+"purpose": "กองคาราวาน",
+"buildings": [],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 5
+},
+"G12": {
+"id": "G12",
+"col": 6,
+"row": 11,
+"biome": "meadow",
+"realm": "light",
+"features": [
+"desert"
+],
+"f": {
+"water": 0.02,
+"forest": 0.1,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 5
+},
+"H12": {
+"id": "H12",
+"col": 7,
+"row": 11,
+"biome": "water",
+"realm": "light",
+"features": [
+"water"
+],
+"f": {
+"water": 0.44,
+"forest": 0.03,
+"stone": 0.01
+},
+"role": "D",
+"monsters": {
+"light": [
+"กบบัว",
+"ปูน้อย"
+],
+"dark": [
+"ปลิงเงา"
+]
+},
+"decor": "กอบัว ดงกก ท่าน้ำ หินริมน้ำ",
+"purpose": "บึงจับกบ",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 1
+},
+"I12": {
+"id": "I12",
+"col": 8,
+"row": 11,
+"biome": "mushroom",
+"realm": "light",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.0,
+"forest": 0.13,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"เห็ดเรืองแสง",
+"ผีเสื้อสปอร์"
+],
+"dark": [
+"ราดำ"
+]
+},
+"decor": "เห็ดยักษ์เรืองแสง เถาวัลย์ สปอร์ลอย",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 1
+},
+"J12": {
+"id": "J12",
+"col": 9,
+"row": 11,
+"biome": "mushroom",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.1,
+"forest": 0.26,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"เห็ดเรืองแสง",
+"ผีเสื้อสปอร์"
+],
+"dark": [
+"ราดำ"
+]
+},
+"decor": "เห็ดยักษ์เรืองแสง เถาวัลย์ สปอร์ลอย",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 2
+},
+"K12": {
+"id": "K12",
+"col": 10,
+"row": 11,
+"biome": "mushroom",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.24,
+"forest": 0.08,
+"stone": 0.01
+},
+"role": "P",
+"monsters": {
+"light": [
+"เห็ดเรืองแสง",
+"ผีเสื้อสปอร์"
+],
+"dark": [
+"ราดำ"
+]
+},
+"decor": "เห็ดยักษ์เรืองแสง เถาวัลย์ สปอร์ลอย",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 2
+},
+"L12": {
+"id": "L12",
+"col": 11,
+"row": 11,
+"biome": "mystery",
+"realm": "mystery",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.97,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ศิลาจารึกผู้สร้าง",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 9
+},
+"M12": {
+"id": "M12",
+"col": 12,
+"row": 11,
+"biome": "mystery",
+"realm": "mystery",
+"features": [],
+"f": {
+"water": 0.93,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ศิลาจารึกผู้สร้าง",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 9
+},
+"N12": {
+"id": "N12",
+"col": 13,
+"row": 11,
+"biome": "mystery",
+"realm": "mystery",
+"features": [],
+"f": {
+"water": 0.93,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ศิลาจารึกผู้สร้าง",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"O12": {
+"id": "O12",
+"col": 14,
+"row": 11,
+"biome": "mystery",
+"realm": "mystery",
+"features": [
+"dark"
+],
+"f": {
+"water": 0.16,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ศิลาจารึกผู้สร้าง",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"P12": {
+"id": "P12",
+"col": 15,
+"row": 11,
+"biome": "dark",
+"realm": "dark",
+"features": [
+"mirror"
+],
+"f": {
+"water": 0.08,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ซากหมู่บ้าน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"Q12": {
+"id": "Q12",
+"col": 16,
+"row": 11,
+"biome": "mirror",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.93,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "S",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "น้ำนิ่งสีดำ หินเงา",
+"purpose": "ทะเลสาบกระจก",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"R12": {
+"id": "R12",
+"col": 17,
+"row": 11,
+"biome": "mirror",
+"realm": "dark",
+"features": [
+"dark"
+],
+"f": {
+"water": 0.7,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "S",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "น้ำนิ่งสีดำ หินเงา",
+"purpose": "ทะเลสาบกระจก",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"S12": {
+"id": "S12",
+"col": 18,
+"row": 11,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.07,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ซากหมู่บ้าน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"T12": {
+"id": "T12",
+"col": 19,
+"row": 11,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.01,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w"
+],
+"chapter": 10
+},
+"A13": {
+"id": "A13",
+"col": 0,
+"row": 12,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 1.0,
+"forest": 0.0,
+"stone": 0.0
+}
+},
+"B13": {
+"id": "B13",
+"col": 1,
+"row": 12,
+"biome": "sea",
+"realm": "sea",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.49,
+"forest": 0.0,
+"stone": 0.01
+}
+},
+"C13": {
+"id": "C13",
+"col": 2,
+"row": 12,
+"biome": "desert",
+"realm": "light",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"กิ้งก่าทราย",
+"แมงป่องจิ๋ว"
+],
+"dark": [
+"งูเงาทราย"
+]
+},
+"decor": "เนินทราย กระบองเพชร ซากเสาหิน ต้นปาล์ม",
+"purpose": "ซากเมืองเก่า·ขุด",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"e"
+],
+"chapter": 5
+},
+"D13": {
+"id": "D13",
+"col": 3,
+"row": 12,
+"biome": "desert",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"กิ้งก่าทราย",
+"แมงป่องจิ๋ว"
+],
+"dark": []
+},
+"decor": "เนินทราย กระบองเพชร ซากเสาหิน ต้นปาล์ม",
+"purpose": "โอเอซิส",
+"buildings": [],
+"dungeon": {
+"name": "พีระมิดใต้ทราย",
+"floors": 6,
+"boss_every": 3,
+"chapter": 5,
+"note": "งูเงาทราย",
+"built": false
+},
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 5
+},
+"E13": {
+"id": "E13",
+"col": 4,
+"row": 12,
+"biome": "desert",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"กิ้งก่าทราย",
+"แมงป่องจิ๋ว"
+],
+"dark": [
+"งูเงาทราย"
+]
+},
+"decor": "เนินทราย กระบองเพชร ซากเสาหิน ต้นปาล์ม",
+"purpose": "โอเอซิส",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 5
+},
+"F13": {
+"id": "F13",
+"col": 5,
+"row": 12,
+"biome": "desert",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"กิ้งก่าทราย",
+"แมงป่องจิ๋ว"
+],
+"dark": [
+"งูเงาทราย"
+]
+},
+"decor": "เนินทราย กระบองเพชร ซากเสาหิน ต้นปาล์ม",
+"purpose": "กองคาราวาน",
+"buildings": [],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 5
+},
+"G13": {
+"id": "G13",
+"col": 6,
+"row": 12,
+"biome": "desert",
+"realm": "light",
+"features": [
+"grass",
+"water"
+],
+"f": {
+"water": 0.11,
+"forest": 0.16,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"กิ้งก่าทราย",
+"แมงป่องจิ๋ว"
+],
+"dark": [
+"งูเงาทราย"
+]
+},
+"decor": "เนินทราย กระบองเพชร ซากเสาหิน ต้นปาล์ม",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 5
+},
+"H13": {
+"id": "H13",
+"col": 7,
+"row": 12,
+"biome": "water",
+"realm": "light",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.77,
+"forest": 0.08,
+"stone": 0.01
+},
+"role": "S",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "กอบัว ดงกก ท่าน้ำ หินริมน้ำ",
+"purpose": "ริมน้ำพระอาทิตย์ตก",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 1
+},
+"I13": {
+"id": "I13",
+"col": 8,
+"row": 12,
+"biome": "meadow",
+"realm": "light",
+"features": [
+"mushroom"
+],
+"f": {
+"water": 0.03,
+"forest": 0.27,
+"stone": 0.01
+},
+"role": "P",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 1
+},
+"J13": {
+"id": "J13",
+"col": 9,
+"row": 12,
+"biome": "mushroom",
+"realm": "light",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.0,
+"forest": 0.28,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"เห็ดเรืองแสง",
+"ผีเสื้อสปอร์"
+],
+"dark": [
+"ราดำ"
+]
+},
+"decor": "เห็ดยักษ์เรืองแสง เถาวัลย์ สปอร์ลอย",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 2
+},
+"K13": {
+"id": "K13",
+"col": 10,
+"row": 12,
+"biome": "meadow",
+"realm": "light",
+"features": [
+"mushroom"
+],
+"f": {
+"water": 0.16,
+"forest": 0.33,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 2
+},
+"L13": {
+"id": "L13",
+"col": 11,
+"row": 12,
+"biome": "water",
+"realm": "light",
+"features": [
+"mystery"
+],
+"f": {
+"water": 0.88,
+"forest": 0.02,
+"stone": 0.01
+},
+"role": "S",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "กอบัว ดงกก ท่าน้ำ หินริมน้ำ",
+"purpose": "ริมน้ำพระอาทิตย์ตก",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 9
+},
+"M13": {
+"id": "M13",
+"col": 12,
+"row": 12,
+"biome": "mystery",
+"realm": "mystery",
+"features": [
+"mountain"
+],
+"f": {
+"water": 0.98,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "เกาะลอยมีหีบ",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 9
+},
+"N13": {
+"id": "N13",
+"col": 13,
+"row": 12,
+"biome": "mystery",
+"realm": "mystery",
+"features": [],
+"f": {
+"water": 0.89,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ศิลาจารึกผู้สร้าง",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"O13": {
+"id": "O13",
+"col": 14,
+"row": 12,
+"biome": "dark",
+"realm": "dark",
+"features": [
+"mystery"
+],
+"f": {
+"water": 0.1,
+"forest": 0.0,
+"stone": 0.01
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ค่ายผู้พิทักษ์",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"P13": {
+"id": "P13",
+"col": 15,
+"row": 12,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.12,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ค่ายผู้พิทักษ์",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"Q13": {
+"id": "Q13",
+"col": 16,
+"row": 12,
+"biome": "mirror",
+"realm": "dark",
+"features": [
+"dark"
+],
+"f": {
+"water": 0.96,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "S",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "น้ำนิ่งสีดำ หินเงา",
+"purpose": "ทะเลสาบกระจก",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"R13": {
+"id": "R13",
+"col": 17,
+"row": 12,
+"biome": "mirror",
+"realm": "dark",
+"features": [
+"dark"
+],
+"f": {
+"water": 0.89,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "S",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "น้ำนิ่งสีดำ หินเงา",
+"purpose": "ทะเลสาบกระจก",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"S13": {
+"id": "S13",
+"col": 18,
+"row": 12,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.02,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"T13": {
+"id": "T13",
+"col": 19,
+"row": 12,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w"
+],
+"chapter": 10
+},
+"A14": {
+"id": "A14",
+"col": 0,
+"row": 13,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 0.91,
+"forest": 0.0,
+"stone": 0.05
+}
+},
+"B14": {
+"id": "B14",
+"col": 1,
+"row": 13,
+"biome": "sea",
+"realm": "sea",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.58,
+"forest": 0.0,
+"stone": 0.01
+}
+},
+"C14": {
+"id": "C14",
+"col": 2,
+"row": 13,
+"biome": "desert",
+"realm": "light",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"กิ้งก่าทราย",
+"แมงป่องจิ๋ว"
+],
+"dark": [
+"งูเงาทราย"
+]
+},
+"decor": "เนินทราย กระบองเพชร ซากเสาหิน ต้นปาล์ม",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"e"
+],
+"chapter": 5
+},
+"D14": {
+"id": "D14",
+"col": 3,
+"row": 13,
+"biome": "desert",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"กิ้งก่าทราย",
+"แมงป่องจิ๋ว"
+],
+"dark": [
+"งูเงาทราย"
+]
+},
+"decor": "เนินทราย กระบองเพชร ซากเสาหิน ต้นปาล์ม",
+"purpose": "โอเอซิส",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 5
+},
+"E14": {
+"id": "E14",
+"col": 4,
+"row": 13,
+"biome": "desert",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"กิ้งก่าทราย",
+"แมงป่องจิ๋ว"
+],
+"dark": [
+"งูเงาทราย"
+]
+},
+"decor": "เนินทราย กระบองเพชร ซากเสาหิน ต้นปาล์ม",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 5
+},
+"F14": {
+"id": "F14",
+"col": 5,
+"row": 13,
+"biome": "desert",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"กิ้งก่าทราย",
+"แมงป่องจิ๋ว"
+],
+"dark": [
+"งูเงาทราย"
+]
+},
+"decor": "เนินทราย กระบองเพชร ซากเสาหิน ต้นปาล์ม",
+"purpose": "โอเอซิส",
+"buildings": [],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 5
+},
+"G14": {
+"id": "G14",
+"col": 6,
+"row": 13,
+"biome": "desert",
+"realm": "light",
+"features": [
+"grass"
+],
+"name": "ทะเลสาบใหญ่",
+"status": "future",
+"note": "ปลายแม่น้ำ",
+"f": {
+"water": 0.0,
+"forest": 0.07,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"กิ้งก่าทราย",
+"แมงป่องจิ๋ว"
+],
+"dark": [
+"งูเงาทราย"
+]
+},
+"decor": "เนินทราย กระบองเพชร ซากเสาหิน ต้นปาล์ม",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 5
+},
+"H14": {
+"id": "H14",
+"col": 7,
+"row": 13,
+"biome": "meadow",
+"realm": "light",
+"features": [
+"water"
+],
+"f": {
+"water": 0.14,
+"forest": 0.27,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 1
+},
+"I14": {
+"id": "I14",
+"col": 8,
+"row": 13,
+"biome": "meadow",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.2,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 1
+},
+"J14": {
+"id": "J14",
+"col": 9,
+"row": 13,
+"biome": "forest",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.01,
+"forest": 0.42,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"เห็ดน้อย",
+"กระรอกลูกโอ๊ก",
+"นกฮูกโคม"
+],
+"dark": [
+"หมาป่าเงา"
+]
+},
+"decor": "ต้นโอ๊ก ต้นสน พุ่มเบอร์รี่ เห็ด ขอนไม้ ลำธารเล็ก",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 2
+},
+"K14": {
+"id": "K14",
+"col": 10,
+"row": 13,
+"biome": "meadow",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.13,
+"forest": 0.23,
+"stone": 0.02
+},
+"role": "P",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 2
+},
+"L14": {
+"id": "L14",
+"col": 11,
+"row": 13,
+"biome": "water",
+"realm": "light",
+"features": [
+"mystery"
+],
+"f": {
+"water": 0.63,
+"forest": 0.02,
+"stone": 0.02
+},
+"role": "P",
+"monsters": {
+"light": [
+"กบบัว",
+"ปูน้อย"
+],
+"dark": [
+"ปลิงเงา"
+]
+},
+"decor": "กอบัว ดงกก ท่าน้ำ หินริมน้ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 9
+},
+"M14": {
+"id": "M14",
+"col": 12,
+"row": 13,
+"biome": "mystery",
+"realm": "mystery",
+"features": [],
+"f": {
+"water": 0.91,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ศิลาจารึกผู้สร้าง",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 9
+},
+"N14": {
+"id": "N14",
+"col": 13,
+"row": 13,
+"biome": "mystery",
+"realm": "mystery",
+"features": [],
+"f": {
+"water": 0.9,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"O14": {
+"id": "O14",
+"col": 14,
+"row": 13,
+"biome": "dark",
+"realm": "dark",
+"features": [
+"mystery"
+],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ซากหมู่บ้าน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"P14": {
+"id": "P14",
+"col": 15,
+"row": 13,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.02,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ซากหมู่บ้าน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"Q14": {
+"id": "Q14",
+"col": 16,
+"row": 13,
+"biome": "dark",
+"realm": "dark",
+"features": [
+"mirror"
+],
+"f": {
+"water": 0.28,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ค่ายผู้พิทักษ์",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"R14": {
+"id": "R14",
+"col": 17,
+"row": 13,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.12,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"S14": {
+"id": "S14",
+"col": 18,
+"row": 13,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"T14": {
+"id": "T14",
+"col": 19,
+"row": 13,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w"
+],
+"chapter": 10
+},
+"A15": {
+"id": "A15",
+"col": 0,
+"row": 14,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 0.98,
+"forest": 0.0,
+"stone": 0.01
+}
+},
+"B15": {
+"id": "B15",
+"col": 1,
+"row": 14,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 0.95,
+"forest": 0.0,
+"stone": 0.01
+}
+},
+"C15": {
+"id": "C15",
+"col": 2,
+"row": 14,
+"biome": "meadow",
+"realm": "light",
+"features": [
+"desert"
+],
+"f": {
+"water": 0.15,
+"forest": 0.0,
+"stone": 0.02
+},
+"role": "P",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"e"
+],
+"chapter": 5
+},
+"D15": {
+"id": "D15",
+"col": 3,
+"row": 14,
+"biome": "desert",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"กิ้งก่าทราย",
+"แมงป่องจิ๋ว"
+],
+"dark": [
+"งูเงาทราย"
+]
+},
+"decor": "เนินทราย กระบองเพชร ซากเสาหิน ต้นปาล์ม",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 5
+},
+"E15": {
+"id": "E15",
+"col": 4,
+"row": 14,
+"biome": "desert",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"กิ้งก่าทราย",
+"แมงป่องจิ๋ว"
+],
+"dark": [
+"งูเงาทราย"
+]
+},
+"decor": "เนินทราย กระบองเพชร ซากเสาหิน ต้นปาล์ม",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 5
+},
+"F15": {
+"id": "F15",
+"col": 5,
+"row": 14,
+"biome": "desert",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.01,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"กิ้งก่าทราย",
+"แมงป่องจิ๋ว"
+],
+"dark": [
+"งูเงาทราย"
+]
+},
+"decor": "เนินทราย กระบองเพชร ซากเสาหิน ต้นปาล์ม",
+"purpose": "โอเอซิส",
+"buildings": [],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 3
+},
+"G15": {
+"id": "G15",
+"col": 6,
+"row": 14,
+"biome": "meadow",
+"realm": "light",
+"features": [
+"desert"
+],
+"f": {
+"water": 0.0,
+"forest": 0.05,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 3
+},
+"H15": {
+"id": "H15",
+"col": 7,
+"row": 14,
+"biome": "meadow",
+"realm": "light",
+"features": [
+"water"
+],
+"f": {
+"water": 0.14,
+"forest": 0.23,
+"stone": 0.01
+},
+"role": "P",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 1
+},
+"I15": {
+"id": "I15",
+"col": 8,
+"row": 14,
+"biome": "meadow",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.13,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 1
+},
+"J15": {
+"id": "J15",
+"col": 9,
+"row": 14,
+"biome": "mountain",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.14,
+"stone": 0.24
+},
+"role": "P",
+"monsters": {
+"light": [
+"ค้างคาวอเมทิสต์",
+"โกเลมหินจิ๋ว",
+"แพะภูเขา"
+],
+"dark": [
+"ค้างคาวเงา",
+"ก้อนหินเงา"
+]
+},
+"decor": "หน้าผา ก้อนหินใหญ่ สนภูเขา ทางชัน น้ำตกเล็ก",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 2
+},
+"K15": {
+"id": "K15",
+"col": 10,
+"row": 14,
+"biome": "mountain",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.23,
+"forest": 0.01,
+"stone": 0.21
+},
+"role": "P",
+"monsters": {
+"light": [
+"ค้างคาวอเมทิสต์",
+"โกเลมหินจิ๋ว",
+"แพะภูเขา"
+],
+"dark": [
+"ค้างคาวเงา",
+"ก้อนหินเงา"
+]
+},
+"decor": "หน้าผา ก้อนหินใหญ่ สนภูเขา ทางชัน น้ำตกเล็ก",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 2
+},
+"L15": {
+"id": "L15",
+"col": 11,
+"row": 14,
+"biome": "water",
+"realm": "light",
+"features": [
+"mountain",
+"mystery"
+],
+"f": {
+"water": 1.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "S",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "กอบัว ดงกก ท่าน้ำ หินริมน้ำ",
+"purpose": "ริมน้ำพระอาทิตย์ตก",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 9
+},
+"M15": {
+"id": "M15",
+"col": 12,
+"row": 14,
+"biome": "mystery",
+"realm": "mystery",
+"features": [],
+"name": "เส้นตะเกียงสุดท้าย",
+"status": "future",
+"note": "",
+"f": {
+"water": 1.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 9
+},
+"N15": {
+"id": "N15",
+"col": 13,
+"row": 14,
+"biome": "mystery",
+"realm": "mystery",
+"features": [],
+"f": {
+"water": 1.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "S",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "สะพานเมฆ",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"O15": {
+"id": "O15",
+"col": 14,
+"row": 14,
+"biome": "dark",
+"realm": "dark",
+"features": [
+"mystery"
+],
+"f": {
+"water": 0.05,
+"forest": 0.0,
+"stone": 0.01
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ซากหมู่บ้าน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"P15": {
+"id": "P15",
+"col": 15,
+"row": 14,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.01,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ค่ายผู้พิทักษ์",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"Q15": {
+"id": "Q15",
+"col": 16,
+"row": 14,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.06,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"R15": {
+"id": "R15",
+"col": 17,
+"row": 14,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.01,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"S15": {
+"id": "S15",
+"col": 18,
+"row": 14,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"T15": {
+"id": "T15",
+"col": 19,
+"row": 14,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.04,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w"
+],
+"chapter": 10
+},
+"A16": {
+"id": "A16",
+"col": 0,
+"row": 15,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 1.0,
+"forest": 0.0,
+"stone": 0.0
+}
+},
+"B16": {
+"id": "B16",
+"col": 1,
+"row": 15,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 0.9,
+"forest": 0.05,
+"stone": 0.0
+}
+},
+"C16": {
+"id": "C16",
+"col": 2,
+"row": 15,
+"biome": "sea",
+"realm": "sea",
+"features": [
+"desert",
+"grass"
+],
+"f": {
+"water": 0.81,
+"forest": 0.0,
+"stone": 0.01
+}
+},
+"D16": {
+"id": "D16",
+"col": 3,
+"row": 15,
+"biome": "desert",
+"realm": "light",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.0,
+"forest": 0.01,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"กิ้งก่าทราย",
+"แมงป่องจิ๋ว"
+],
+"dark": [
+"งูเงาทราย"
+]
+},
+"decor": "เนินทราย กระบองเพชร ซากเสาหิน ต้นปาล์ม",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"e"
+],
+"chapter": 5
+},
+"E16": {
+"id": "E16",
+"col": 4,
+"row": 15,
+"biome": "desert",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.05,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"กิ้งก่าทราย",
+"แมงป่องจิ๋ว"
+],
+"dark": [
+"งูเงาทราย"
+]
+},
+"decor": "เนินทราย กระบองเพชร ซากเสาหิน ต้นปาล์ม",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 3
+},
+"F16": {
+"id": "F16",
+"col": 5,
+"row": 15,
+"biome": "desert",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.01,
+"forest": 0.07,
+"stone": 0.01
+},
+"role": "D",
+"monsters": {
+"light": [
+"กิ้งก่าทราย",
+"แมงป่องจิ๋ว"
+],
+"dark": [
+"งูเงาทราย"
+]
+},
+"decor": "เนินทราย กระบองเพชร ซากเสาหิน ต้นปาล์ม",
+"purpose": "ซากเมืองเก่า·ขุด",
+"buildings": [],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 3
+},
+"G16": {
+"id": "G16",
+"col": 6,
+"row": 15,
+"biome": "meadow",
+"realm": "light",
+"features": [
+"desert"
+],
+"f": {
+"water": 0.02,
+"forest": 0.07,
+"stone": 0.01
+},
+"role": "P",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 3
+},
+"H16": {
+"id": "H16",
+"col": 7,
+"row": 15,
+"biome": "meadow",
+"realm": "light",
+"features": [
+"water"
+],
+"f": {
+"water": 0.12,
+"forest": 0.18,
+"stone": 0.01
+},
+"role": "P",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 3
+},
+"I16": {
+"id": "I16",
+"col": 8,
+"row": 15,
+"biome": "meadow",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.01,
+"forest": 0.33,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 3
+},
+"J16": {
+"id": "J16",
+"col": 9,
+"row": 15,
+"biome": "meadow",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.14,
+"stone": 0.09
+},
+"role": "P",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 2
+},
+"K16": {
+"id": "K16",
+"col": 10,
+"row": 15,
+"biome": "water",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.34,
+"forest": 0.12,
+"stone": 0.02
+},
+"role": "P",
+"monsters": {
+"light": [
+"กบบัว",
+"ปูน้อย"
+],
+"dark": [
+"ปลิงเงา"
+]
+},
+"decor": "กอบัว ดงกก ท่าน้ำ หินริมน้ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 2
+},
+"L16": {
+"id": "L16",
+"col": 11,
+"row": 15,
+"biome": "water",
+"realm": "light",
+"features": [
+"mystery"
+],
+"f": {
+"water": 0.82,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "S",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "กอบัว ดงกก ท่าน้ำ หินริมน้ำ",
+"purpose": "ริมน้ำพระอาทิตย์ตก",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 9
+},
+"M16": {
+"id": "M16",
+"col": 12,
+"row": 15,
+"biome": "mystery",
+"realm": "mystery",
+"features": [],
+"f": {
+"water": 0.97,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 9
+},
+"N16": {
+"id": "N16",
+"col": 13,
+"row": 15,
+"biome": "mystery",
+"realm": "mystery",
+"features": [],
+"f": {
+"water": 0.99,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"O16": {
+"id": "O16",
+"col": 14,
+"row": 15,
+"biome": "mystery",
+"realm": "mystery",
+"features": [
+"dark"
+],
+"f": {
+"water": 0.32,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"P16": {
+"id": "P16",
+"col": 15,
+"row": 15,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ค่ายผู้พิทักษ์",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"Q16": {
+"id": "Q16",
+"col": 16,
+"row": 15,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"R16": {
+"id": "R16",
+"col": 17,
+"row": 15,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"S16": {
+"id": "S16",
+"col": 18,
+"row": 15,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"T16": {
+"id": "T16",
+"col": 19,
+"row": 15,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.01,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w"
+],
+"chapter": 10
+},
+"A17": {
+"id": "A17",
+"col": 0,
+"row": 16,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 0.9,
+"forest": 0.0,
+"stone": 0.02
+}
+},
+"B17": {
+"id": "B17",
+"col": 1,
+"row": 16,
+"biome": "sea",
+"realm": "sea",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.53,
+"forest": 0.11,
+"stone": 0.02
+}
+},
+"C17": {
+"id": "C17",
+"col": 2,
+"row": 16,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 0.9,
+"forest": 0.0,
+"stone": 0.01
+}
+},
+"D17": {
+"id": "D17",
+"col": 3,
+"row": 16,
+"biome": "meadow",
+"realm": "light",
+"features": [
+"desert",
+"sea"
+],
+"f": {
+"water": 0.22,
+"forest": 0.0,
+"stone": 0.02
+},
+"role": "P",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"e"
+],
+"chapter": 3
+},
+"E17": {
+"id": "E17",
+"col": 4,
+"row": 16,
+"biome": "desert",
+"realm": "light",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.14,
+"forest": 0.08,
+"stone": 0.01
+},
+"role": "P",
+"monsters": {
+"light": [
+"กิ้งก่าทราย",
+"แมงป่องจิ๋ว"
+],
+"dark": [
+"งูเงาทราย"
+]
+},
+"decor": "เนินทราย กระบองเพชร ซากเสาหิน ต้นปาล์ม",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 3
+},
+"F17": {
+"id": "F17",
+"col": 5,
+"row": 16,
+"biome": "water",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.67,
+"forest": 0.0,
+"stone": 0.02
+},
+"role": "S",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "กอบัว ดงกก ท่าน้ำ หินริมน้ำ",
+"purpose": "ริมน้ำพระอาทิตย์ตก",
+"buildings": [],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 3
+},
+"G17": {
+"id": "G17",
+"col": 6,
+"row": 16,
+"biome": "water",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.34,
+"forest": 0.0,
+"stone": 0.04
+},
+"role": "D",
+"monsters": {
+"light": [
+"กบบัว",
+"ปูน้อย"
+],
+"dark": [
+"ปลิงเงา"
+]
+},
+"decor": "กอบัว ดงกก ท่าน้ำ หินริมน้ำ",
+"purpose": "บึงจับกบ",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 3
+},
+"H17": {
+"id": "H17",
+"col": 7,
+"row": 16,
+"biome": "meadow",
+"realm": "light",
+"features": [
+"water"
+],
+"f": {
+"water": 0.13,
+"forest": 0.16,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 3
+},
+"I17": {
+"id": "I17",
+"col": 8,
+"row": 16,
+"biome": "meadow",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.19,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 3
+},
+"J17": {
+"id": "J17",
+"col": 9,
+"row": 16,
+"biome": "meadow",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.31,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 3
+},
+"K17": {
+"id": "K17",
+"col": 10,
+"row": 16,
+"biome": "water",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.28,
+"forest": 0.11,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"กบบัว",
+"ปูน้อย"
+],
+"dark": [
+"ปลิงเงา"
+]
+},
+"decor": "กอบัว ดงกก ท่าน้ำ หินริมน้ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 3
+},
+"L17": {
+"id": "L17",
+"col": 11,
+"row": 16,
+"biome": "mystery",
+"realm": "mystery",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.95,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 3
+},
+"M17": {
+"id": "M17",
+"col": 12,
+"row": 16,
+"biome": "mystery",
+"realm": "mystery",
+"features": [],
+"f": {
+"water": 0.93,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 9
+},
+"N17": {
+"id": "N17",
+"col": 13,
+"row": 16,
+"biome": "mystery",
+"realm": "mystery",
+"features": [],
+"f": {
+"water": 0.97,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"O17": {
+"id": "O17",
+"col": 14,
+"row": 16,
+"biome": "mystery",
+"realm": "mystery",
+"features": [
+"dark"
+],
+"f": {
+"water": 0.53,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"P17": {
+"id": "P17",
+"col": 15,
+"row": 16,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.01
+},
+"role": "P",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"Q17": {
+"id": "Q17",
+"col": 16,
+"row": 16,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"R17": {
+"id": "R17",
+"col": 17,
+"row": 16,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"S17": {
+"id": "S17",
+"col": 18,
+"row": 16,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"T17": {
+"id": "T17",
+"col": 19,
+"row": 16,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w"
+],
+"chapter": 10
+},
+"A18": {
+"id": "A18",
+"col": 0,
+"row": 17,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 0.6,
+"forest": 0.0,
+"stone": 0.3
+}
+},
+"B18": {
+"id": "B18",
+"col": 1,
+"row": 17,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 0.95,
+"forest": 0.0,
+"stone": 0.03
+}
+},
+"C18": {
+"id": "C18",
+"col": 2,
+"row": 17,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 1.0,
+"forest": 0.0,
+"stone": 0.0
+}
+},
+"D18": {
+"id": "D18",
+"col": 3,
+"row": 17,
+"biome": "sea",
+"realm": "sea",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.71,
+"forest": 0.0,
+"stone": 0.01
+}
+},
+"E18": {
+"id": "E18",
+"col": 4,
+"row": 17,
+"biome": "water",
+"realm": "light",
+"features": [
+"sea"
+],
+"f": {
+"water": 0.62,
+"forest": 0.01,
+"stone": 0.0
+},
+"role": "D",
+"monsters": {
+"light": [
+"กบบัว",
+"ปูน้อย"
+],
+"dark": [
+"ปลิงเงา"
+]
+},
+"decor": "กอบัว ดงกก ท่าน้ำ หินริมน้ำ",
+"purpose": "ท่าตกปลา",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"e"
+],
+"chapter": 3
+},
+"F18": {
+"id": "F18",
+"col": 5,
+"row": 17,
+"biome": "water",
+"realm": "light",
+"features": [
+"sea"
+],
+"f": {
+"water": 0.74,
+"forest": 0.04,
+"stone": 0.01
+},
+"role": "S",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "กอบัว ดงกก ท่าน้ำ หินริมน้ำ",
+"purpose": "ริมน้ำพระอาทิตย์ตก",
+"buildings": [],
+"road": true,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 3
+},
+"G18": {
+"id": "G18",
+"col": 6,
+"row": 17,
+"biome": "water",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.74,
+"forest": 0.0,
+"stone": 0.02
+},
+"role": "D",
+"monsters": {
+"light": [
+"กบบัว",
+"ปูน้อย"
+],
+"dark": [
+"ปลิงเงา"
+]
+},
+"decor": "กอบัว ดงกก ท่าน้ำ หินริมน้ำ",
+"purpose": "ท่าตกปลา",
+"buildings": [],
+"dungeon": {
+"name": "ถ้ำแนวปะการัง",
+"floors": 6,
+"boss_every": 3,
+"chapter": 3,
+"note": "ปลิงเงายักษ์",
+"built": false
+},
+"road": false,
+"exits": [
+"n",
+"w",
+"e"
+],
+"chapter": 3
+},
+"H18": {
+"id": "H18",
+"col": 7,
+"row": 17,
+"biome": "water",
+"realm": "light",
+"features": [
+"sea",
+"water"
+],
+"f": {
+"water": 0.63,
+"forest": 0.0,
+"stone": 0.03
+},
+"role": "D",
+"monsters": {
+"light": [
+"กบบัว",
+"ปูน้อย"
+],
+"dark": [
+"ปลิงเงา"
+]
+},
+"decor": "กอบัว ดงกก ท่าน้ำ หินริมน้ำ",
+"purpose": "บึงจับกบ",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"w",
+"e"
+],
+"chapter": 3
+},
+"I18": {
+"id": "I18",
+"col": 8,
+"row": 17,
+"biome": "water",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.7,
+"forest": 0.0,
+"stone": 0.01
+},
+"role": "S",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "กอบัว ดงกก ท่าน้ำ หินริมน้ำ",
+"purpose": "ริมน้ำพระอาทิตย์ตก",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"w",
+"e"
+],
+"chapter": 3
+},
+"J18": {
+"id": "J18",
+"col": 9,
+"row": 17,
+"biome": "meadow",
+"realm": "light",
+"features": [],
+"f": {
+"water": 0.09,
+"forest": 0.08,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"สไลม์อเมทิสต์",
+"กระต่ายใบไม้",
+"ผึ้งดอกไม้"
+],
+"dark": [
+"เงาหญ้า"
+]
+},
+"decor": "ทุ่งหญ้า ดอกไม้ป่า ก้อนหิน รั้วไม้ ทางดิน",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"w",
+"e"
+],
+"chapter": 3
+},
+"K18": {
+"id": "K18",
+"col": 10,
+"row": 17,
+"biome": "water",
+"realm": "light",
+"features": [
+"sea"
+],
+"f": {
+"water": 0.89,
+"forest": 0.01,
+"stone": 0.0
+},
+"role": "S",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "กอบัว ดงกก ท่าน้ำ หินริมน้ำ",
+"purpose": "ริมน้ำพระอาทิตย์ตก",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"w",
+"e"
+],
+"chapter": 3
+},
+"L18": {
+"id": "L18",
+"col": 11,
+"row": 17,
+"biome": "mystery",
+"realm": "mystery",
+"features": [
+"sea"
+],
+"f": {
+"water": 0.99,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"w",
+"e"
+],
+"chapter": 3
+},
+"M18": {
+"id": "M18",
+"col": 12,
+"row": 17,
+"biome": "mystery",
+"realm": "mystery",
+"features": [],
+"f": {
+"water": 0.99,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 3
+},
+"N18": {
+"id": "N18",
+"col": 13,
+"row": 17,
+"biome": "mystery",
+"realm": "mystery",
+"features": [],
+"f": {
+"water": 0.99,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 3
+},
+"O18": {
+"id": "O18",
+"col": 14,
+"row": 17,
+"biome": "mystery",
+"realm": "mystery",
+"features": [],
+"f": {
+"water": 0.74,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"P18": {
+"id": "P18",
+"col": 15,
+"row": 17,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.01
+},
+"role": "P",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"Q18": {
+"id": "Q18",
+"col": 16,
+"row": 17,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.01
+},
+"role": "P",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"R18": {
+"id": "R18",
+"col": 17,
+"row": 17,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"S18": {
+"id": "S18",
+"col": 18,
+"row": 17,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"T18": {
+"id": "T18",
+"col": 19,
+"row": 17,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.02,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w"
+],
+"chapter": 10
+},
+"A19": {
+"id": "A19",
+"col": 0,
+"row": 18,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 0.39,
+"forest": 0.0,
+"stone": 0.41
+}
+},
+"B19": {
+"id": "B19",
+"col": 1,
+"row": 18,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 0.77,
+"forest": 0.0,
+"stone": 0.15
+}
+},
+"C19": {
+"id": "C19",
+"col": 2,
+"row": 18,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 0.94,
+"forest": 0.0,
+"stone": 0.03
+}
+},
+"D19": {
+"id": "D19",
+"col": 3,
+"row": 18,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 1.0,
+"forest": 0.0,
+"stone": 0.0
+}
+},
+"E19": {
+"id": "E19",
+"col": 4,
+"row": 18,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 0.63,
+"forest": 0.01,
+"stone": 0.03
+}
+},
+"F19": {
+"id": "F19",
+"col": 5,
+"row": 18,
+"biome": "sea",
+"realm": "light",
+"features": [
+"desert"
+],
+"name": "เมืองปะการัง",
+"status": "future",
+"note": "",
+"f": {
+"water": 0.5,
+"forest": 0.01,
+"stone": 0.02
+},
+"role": "D",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "",
+"kind": "town",
+"chapter": 3,
+"crystal": {
+"shape": "กิ่งปะการังผลึก · ใหญ่",
+"glow": "ฟ้าน้ำทะเล"
+},
+"buildings": [
+"ลานคริสตัลกลางเมือง + นักเวทประจำเมือง",
+"ร้านอาวุธ/อุปกรณ์",
+"ร้านของใช้",
+"โรงเตี๊ยม",
+"บ้านชาวบ้าน",
+"บอร์ดภารกิจ"
+],
+"road": true,
+"exits": [
+"n"
+]
+},
+"G19": {
+"id": "G19",
+"col": 6,
+"row": 18,
+"biome": "sea",
+"realm": "sea",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.58,
+"forest": 0.07,
+"stone": 0.01
+}
+},
+"H19": {
+"id": "H19",
+"col": 7,
+"row": 18,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 1.0,
+"forest": 0.0,
+"stone": 0.0
+}
+},
+"I19": {
+"id": "I19",
+"col": 8,
+"row": 18,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 1.0,
+"forest": 0.0,
+"stone": 0.0
+}
+},
+"J19": {
+"id": "J19",
+"col": 9,
+"row": 18,
+"biome": "sea",
+"realm": "sea",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.86,
+"forest": 0.0,
+"stone": 0.01
+}
+},
+"K19": {
+"id": "K19",
+"col": 10,
+"row": 18,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 0.99,
+"forest": 0.0,
+"stone": 0.0
+}
+},
+"L19": {
+"id": "L19",
+"col": 11,
+"row": 18,
+"biome": "sea",
+"realm": "sea",
+"features": [
+"mystery"
+],
+"f": {
+"water": 0.96,
+"forest": 0.0,
+"stone": 0.0
+}
+},
+"M19": {
+"id": "M19",
+"col": 12,
+"row": 18,
+"biome": "mystery",
+"realm": "mystery",
+"features": [
+"sea"
+],
+"f": {
+"water": 1.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"e"
+],
+"chapter": 3
+},
+"N19": {
+"id": "N19",
+"col": 13,
+"row": 18,
+"biome": "mystery",
+"realm": "mystery",
+"features": [
+"sea"
+],
+"f": {
+"water": 1.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"w",
+"e"
+],
+"chapter": 3
+},
+"O19": {
+"id": "O19",
+"col": 14,
+"row": 18,
+"biome": "mystery",
+"realm": "mystery",
+"features": [
+"sea"
+],
+"f": {
+"water": 0.76,
+"forest": 0.0,
+"stone": 0.01
+},
+"role": "P",
+"monsters": {
+"light": [
+"วิญญาณดาว",
+"กวางแสง"
+],
+"dark": [
+"เงาหมอก"
+]
+},
+"decor": "หมอกม่วงเงิน เกาะลอย น้ำตกกลับหัว ออโรร่า",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"w",
+"e"
+],
+"chapter": 3
+},
+"P19": {
+"id": "P19",
+"col": 15,
+"row": 18,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.02,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 3
+},
+"Q19": {
+"id": "Q19",
+"col": 16,
+"row": 18,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.02
+},
+"role": "P",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 3
+},
+"R19": {
+"id": "R19",
+"col": 17,
+"row": 18,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.0,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"S19": {
+"id": "S19",
+"col": 18,
+"row": 18,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.02,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w",
+"e"
+],
+"chapter": 10
+},
+"T19": {
+"id": "T19",
+"col": 19,
+"row": 18,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.04,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"s",
+"w"
+],
+"chapter": 10
+},
+"A20": {
+"id": "A20",
+"col": 0,
+"row": 19,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 0.95,
+"forest": 0.0,
+"stone": 0.02
+}
+},
+"B20": {
+"id": "B20",
+"col": 1,
+"row": 19,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 0.73,
+"forest": 0.0,
+"stone": 0.15
+}
+},
+"C20": {
+"id": "C20",
+"col": 2,
+"row": 19,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 0.98,
+"forest": 0.0,
+"stone": 0.01
+}
+},
+"D20": {
+"id": "D20",
+"col": 3,
+"row": 19,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 1.0,
+"forest": 0.0,
+"stone": 0.0
+}
+},
+"E20": {
+"id": "E20",
+"col": 4,
+"row": 19,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 1.0,
+"forest": 0.0,
+"stone": 0.0
+}
+},
+"F20": {
+"id": "F20",
+"col": 5,
+"row": 19,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 0.99,
+"forest": 0.0,
+"stone": 0.0
+}
+},
+"G20": {
+"id": "G20",
+"col": 6,
+"row": 19,
+"biome": "sea",
+"realm": "sea",
+"features": [
+"grass"
+],
+"f": {
+"water": 0.95,
+"forest": 0.0,
+"stone": 0.01
+}
+},
+"H20": {
+"id": "H20",
+"col": 7,
+"row": 19,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 1.0,
+"forest": 0.0,
+"stone": 0.0
+}
+},
+"I20": {
+"id": "I20",
+"col": 8,
+"row": 19,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 1.0,
+"forest": 0.0,
+"stone": 0.0
+}
+},
+"J20": {
+"id": "J20",
+"col": 9,
+"row": 19,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 1.0,
+"forest": 0.0,
+"stone": 0.0
+}
+},
+"K20": {
+"id": "K20",
+"col": 10,
+"row": 19,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 1.0,
+"forest": 0.0,
+"stone": 0.0
+}
+},
+"L20": {
+"id": "L20",
+"col": 11,
+"row": 19,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 0.93,
+"forest": 0.0,
+"stone": 0.01
+}
+},
+"M20": {
+"id": "M20",
+"col": 12,
+"row": 19,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 0.91,
+"forest": 0.0,
+"stone": 0.01
+}
+},
+"N20": {
+"id": "N20",
+"col": 13,
+"row": 19,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 1.0,
+"forest": 0.0,
+"stone": 0.0
+}
+},
+"O20": {
+"id": "O20",
+"col": 14,
+"row": 19,
+"biome": "sea",
+"realm": "sea",
+"features": [],
+"f": {
+"water": 0.92,
+"forest": 0.0,
+"stone": 0.0
+}
+},
+"P20": {
+"id": "P20",
+"col": 15,
+"row": 19,
+"biome": "dark",
+"realm": "dark",
+"features": [
+"sea"
+],
+"f": {
+"water": 0.96,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "S",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "จุดชมดาวมืด",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"e"
+],
+"chapter": 3
+},
+"Q20": {
+"id": "Q20",
+"col": 16,
+"row": 19,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.29,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "S",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "จุดชมดาวมืด",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"w",
+"e"
+],
+"chapter": 3
+},
+"R20": {
+"id": "R20",
+"col": 17,
+"row": 19,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.03,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"w",
+"e"
+],
+"chapter": 10
+},
+"S20": {
+"id": "S20",
+"col": 18,
+"row": 19,
+"biome": "dark",
+"realm": "dark",
+"features": [],
+"f": {
+"water": 0.04,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "P",
+"monsters": {
+"light": [],
+"dark": [
+"เงาเถ้า",
+"อัศวินเงา"
+]
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "ทางผ่าน·มีมอน",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"w",
+"e"
+],
+"chapter": 10
+},
+"T20": {
+"id": "T20",
+"col": 19,
+"row": 19,
+"biome": "dark",
+"realm": "dark",
+"features": [
+"sea"
+],
+"f": {
+"water": 0.29,
+"forest": 0.0,
+"stone": 0.0
+},
+"role": "S",
+"monsters": {
+"light": [],
+"dark": []
+},
+"decor": "ทุ่งเถ้า ต้นไม้แห้ง หินดำ หมอกต่ำ",
+"purpose": "จุดชมดาวมืด",
+"buildings": [],
+"road": false,
+"exits": [
+"n",
+"w"
+],
+"chapter": 10
+}
+}
+}
