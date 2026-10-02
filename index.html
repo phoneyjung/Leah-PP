@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.04';
+const VERSION='Lantern Academy 1.05';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -1162,7 +1162,7 @@ function openPicker(d){const el=$('cr');el.classList.remove('hide');el.innerHTML
     b.onclick=e=>{if(e.target.dataset.del!==undefined){if(confirm(t('delQ'))){d.slots.splice(i,1);d.cur=-1;Store.put(d);openPicker(Store.all())}return}d.cur=i;Store.put(d);S=d.slots[i];el.classList.add('hide');startGame()};$('pk').append(b)});
   $('pNew').onclick=()=>{if(d.slots.length>=4)return;openCreator()}}
 
-function openShop(){const lamp=S.lamp||0,items=[['it_snack',20,()=>gainExp(15)],['it_lamp',60*(lamp+1),()=>{S.lamp=lamp+1},lamp>=3],['it_gem',0,()=>{S.gems-=3;S.coins+=25},false,()=>S.gems>=3]];if(!isKid())items.unshift(['it_pot',10,()=>{S.potions++}]);items.push(['it_treat',8,()=>{S.treats=(S.treats||0)+3}]);items.push(['fert',10,()=>{const H=HOME.get();H.fert=(H.fert||0)+3;HOME.put(H)}]);{const lv=houseLv();items.unshift(['up_house',HCOST[lv+1]||0,()=>{S.coins+=HCOST[lv+1];houseUpgrade()},lv>=9,null,null,lv+1])}for(const [k,f] of Object.entries(FU))items.push(['fu_'+k,f[2],()=>{const H=HOME.get();H.furn=H.furn||{};H.furn[k]=(H.furn[k]||0)+1;HOME.put(H)}]);for(const [k,c] of Object.entries(CROPS))items.push(['sd_'+k,c.price,()=>{const H=HOME.get();H.seeds[k]=(H.seeds[k]||0)+3;HOME.put(H)}]);const fv=(S.fishBag||[]).reduce((a,i)=>a+FISH[i][4],0);if(fv)items.push(['sellFish',0,()=>{S.coins+=fv;S.fishBag=[]},false,()=>true,fv]);
+function openShop(){const lamp=S.lampLv||0,items=[['it_snack',20,()=>gainExp(15)],['it_lamp',60*(lamp+1),()=>{S.lampLv=lamp+1},lamp>=3],['it_gem',0,()=>{S.gems-=3;S.coins+=25},false,()=>S.gems>=3]];if(!isKid())items.unshift(['it_pot',10,()=>{S.potions++}]);items.push(['it_treat',8,()=>{S.treats=(S.treats||0)+3}]);items.push(['fert',10,()=>{const H=HOME.get();H.fert=(H.fert||0)+3;HOME.put(H)}]);{const lv=houseLv();items.unshift(['up_house',HCOST[lv+1]||0,()=>{S.coins+=HCOST[lv+1];houseUpgrade()},lv>=9,null,null,lv+1])}for(const [k,f] of Object.entries(FU))items.push(['fu_'+k,f[2],()=>{const H=HOME.get();H.furn=H.furn||{};H.furn[k]=(H.furn[k]||0)+1;HOME.put(H)}]);for(const [k,c] of Object.entries(CROPS))items.push(['sd_'+k,c.price,()=>{const H=HOME.get();H.seeds[k]=(H.seeds[k]||0)+3;HOME.put(H)}]);const fv=(S.fishBag||[]).reduce((a,i)=>a+FISH[i][4],0);if(fv)items.push(['sellFish',0,()=>{S.coins+=fv;S.fishBag=[]},false,()=>true,fv]);
   modal(`<h2>🧺 ${t('shop')}</h2><p class="note">${t('s_nuan').split('…')[0]}</p><p><button id="bCook">${t('cook')}</button> <button id="bNuanReq">💝 ${t('req')}${reqBase().done.nuan?' ✅':''}</button></p><div class="grid">${items.map((it,i)=>`<button class="it" data-i="${i}"><span><b>${t(it[0])}${it[6]?' '+it[6]+'<br><span class="note">'+t('hl'+it[6])+'</span>':''}</b><br>${it[3]?t('maxed'):(it[5]?'+🪙 '+it[5]:it[1]?'🪙 '+it[1]:'💎 3')}</span></button>`).join('')}</div><p>🪙 ${S.coins} · 💎 ${S.gems}</p>`);
   $('bCook').onclick=openKitchen;$('bNuanReq').onclick=()=>openReq('nuan');document.querySelectorAll('.it').forEach(b=>b.onclick=()=>{const it=items[+b.dataset.i];if(it[3])return;const ok=it[4]?it[4]():S.coins>=it[1];if(!ok){say(t('noCoin'));return}S.coins-=it[1];it[2]();mission('shop');sfx('coin');say(t('bought'));hud();save();openShop()})}
 function inPool(){if(!M)return 0;const k=key(Math.floor(P.x/T),Math.floor(P.y/T));if(M.pool&&M.pool.has(k))return 'pool';const b=M.balls;if(b){const tx=Math.floor(P.x/T),ty=Math.floor(P.y/T);if(tx>=b.x0&&tx<=b.x1&&ty>=b.y0&&ty<=b.y1)return 'balls'}return 0}
@@ -1398,7 +1398,7 @@ function drawDrop(d,tm){const x=Math.round(d.x-camX),y=Math.round(d.y-camY-3-Mat
   else{ctx.save();ctx.globalCompositeOperation='lighter';glow(x,y-4,10,d.item.rar>=2?'255,210,90':d.item.rar?'120,170,255':'255,255,255',.5);ctx.restore();ctx.drawImage(wepIcon(d.item,1),x-6,y-10)}}
 function drawDark(tm){if(!dark||dark.width!==VW||dark.height!==VH){dark=document.createElement('canvas');dark.width=VW;dark.height=VH;darkG=dark.getContext('2d')}const g=darkG;g.globalCompositeOperation='source-over';g.clearRect(0,0,VW,VH);g.fillStyle=(M&&M.darkA!=null)?`rgba(27,19,48,${M.darkA})`:(S.boss?'rgba(27,19,48,.5)':'rgba(27,19,48,.82)');g.fillRect(0,0,VW,VH);g.globalCompositeOperation='destination-out';
   const hole=(x,y,r,a=1)=>{const gr=g.createRadialGradient(x,y,0,x,y,r);gr.addColorStop(0,`rgba(0,0,0,${a})`);gr.addColorStop(.55,`rgba(0,0,0,${a*.8})`);gr.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=gr;g.fillRect(x-r,y-r,r*2,r*2)};
-  hole(P.x-camX,P.y-26-camY,(M.darkFloor?70:132)+25*(S.lamp||0)+16*((typeof tool==='function'?tool('lantern'):1)-1)+Math.sin(tm*6)*2);if(PEB.on)hole(PEB.x-camX,PEB.y-20-camY,40,.6);for(const c of M.crystals)if(c.awake)hole(c.x-camX,c.y-14-camY,70,.9);for(const s of M.stones)hole(s.x-camX,s.y-30-camY,S.stones.includes(s.id)?70:34,.8);for(const [x,y] of M.glows)hole(x-camX,y-camY,50,.8);for(const e of M.exits)hole(e.x-camX,e.y-camY,34,.7);
+  hole(P.x-camX,P.y-26-camY,(M.darkFloor?70:132)+25*((S.lampLv||0)+Math.min(1,S.lamp||0))+16*((typeof tool==='function'?tool('lantern'):1)-1)+Math.sin(tm*6)*2);if(PEB.on)hole(PEB.x-camX,PEB.y-20-camY,40,.6);for(const c of M.crystals)if(c.awake)hole(c.x-camX,c.y-14-camY,70,.9);for(const s of M.stones)hole(s.x-camX,s.y-30-camY,S.stones.includes(s.id)?70:34,.8);for(const [x,y] of M.glows)hole(x-camX,y-camY,50,.8);for(const e of M.exits)hole(e.x-camX,e.y-camY,34,.7);
   ctx.drawImage(dark,0,0)}
 
 // ===== start =====
@@ -3390,4 +3390,88 @@ let lampOut=null,lampLastX=null,lampLastY=null;
     ctx.fillStyle=ready?'#b98cff':'#5e4a78';ctx.beginPath();ctx.moveTo(X,Y-34*u);ctx.lineTo(X+7*u,Y-22*u);ctx.lineTo(X,Y-10*u);ctx.lineTo(X-7*u,Y-22*u);ctx.closePath();ctx.fill();
     if(ready){ctx.globalCompositeOperation='lighter';const g=ctx.createRadialGradient(X,Y-22*u,0,X,Y-22*u,30*u);g.addColorStop(0,'rgba(200,160,255,.5)');g.addColorStop(1,'rgba(200,160,255,0)');ctx.fillStyle=g;ctx.fillRect(X-30*u,Y-52*u,60*u,60*u);ctx.globalCompositeOperation='source-over'}});
   ctx.restore()}catch(e){}return r}}
+// ================= 1.05 GM CHARACTER (test tool) =================
+// A separate save slot named "GM" with its OWN home/farm data (other characters are never touched): every item, every map, switches for testing.
+// Enter: add ?gm to the address -> ⚙️ settings -> 🛠 GM -> pick "GM" on the character screen. Inside the GM slot a 🛠 button stays on screen.
+const GM={god:false,ghost:false,open:false,fast:1,hour:null,pos:false,HOME_KEY:'leahpp2d-home-gm',HOME_MAIN:HOME.key,fps:60};
+const gmOn=()=>!!(S&&S.gm);
+function gmHomeKey(){try{HOME.key=gmOn()?GM.HOME_KEY:GM.HOME_MAIN}catch(e){}}
+function gmMakeSlot(){const d=Store.all();let i=d.slots.findIndex(s=>s&&s.gm);
+  if(i<0){const g=newSave({name:'GM',kid:0,house:0,age:30});g.gm=1;d.slots.push(g);i=d.slots.length-1}
+  d.cur=i;Store.put(d);return i}
+function gmDelete(){const d=Store.all();d.slots=d.slots.filter(s=>!(s&&s.gm));d.cur=-1;Store.put(d);try{localStorage.removeItem(GM.HOME_KEY)}catch(e){}}
+// everything at once; safe to press again (never duplicates)
+function gmGrant(){if(!gmOn())return null;gmHomeKey();fixSave();try{fixLife()}catch(e){}
+  S.coins=999999;S.gems=9999;S.potions=99;
+  S.inv=(S.inv||[]).filter(it=>!it.gm);
+  for(const ty of ['sw','bow','staff','dag'])for(let r=0;r<5;r++){const it=mkItem(ty,r);it.gm=1;S.inv.push(it)}
+  for(const sl of ['armor','acc'])for(let r=0;r<5;r++){const it=mkGear(sl,r);it.gm=1;S.inv.push(it)}
+  const kinds=Object.keys(CARDS);S.cards=S.cards||[];S.cardBook=S.cardBook||[];
+  for(const k of kinds){let n=S.cards.filter(c=>c===k).length;while(n<4){S.cards.push(k);n++}if(!S.cardBook.includes(k))S.cardBook.push(k)}
+  S.pets=S.pets||[];for(const k of Object.keys(PETB)){const p=S.pets.find(q=>q.kind===k);if(p)p.aff=100;else S.pets.push({kind:k,aff:100})}if(S.pet==null||S.pet<0)S.pet=0;
+  S.fish=S.fish||{};S.fishBag=S.fishBag||[];FISH.forEach((f,i)=>{S.fish[i]=Math.max(S.fish[i]||0,f[2]);let n=S.fishBag.filter(q=>q===i).length;while(n<3){S.fishBag.push(i);n++}});S.fishCaught=Math.max(S.fishCaught||0,FISH.length);
+  S.fossils=S.fossils||{};for(let i=0;i<FOSSIL_W.length;i++)S.fossils[i]=Math.max(1,S.fossils[i]||0);
+  S.tools=S.tools||{};for(const [k] of TOOLS)S.tools[k]=5;S.life=S.life||{};for(const [k] of LIFE)S.life[k]={lv:10,xp:0};
+  S.rank=10;S.lv=Math.max(S.lv||1,50);S.exp=0;for(const k of STATS)S.st[k]=Math.max(S.st[k]||1,30);
+  S.learn=Object.keys(SK);if(!S.job)S.job='sword';S.stamps=STAMP_MAX;S.lamp=1;S.conv={};S.hp=hpMax();
+  const h=HOME.get();h.seeds=h.seeds||{};h.pantry=h.pantry||{};h.dishes=h.dishes||{};h.furn=h.furn||{};h.plots=h.plots||{};
+  for(const k of Object.keys(CROPS)){h.seeds[k]=99;h.pantry[k]=99}for(const k of Object.keys(RECIPES))h.dishes[k]=9;for(const k of Object.keys(COMF))h.furn[k]=Math.max(5,h.furn[k]||0);
+  h.farm=h.farm||{cleared:[],robot:false,robotOn:true};HOME.put(h);S.gmInit=1;save();try{hud()}catch(e){}
+  return{coins:S.coins,gear:S.inv.filter(it=>it.gm).length,cards:kinds.length,pets:S.pets.length,fish:FISH.length,fossils:FOSSIL_W.length,tools:TOOLS.length,life:LIFE.length,seeds:Object.keys(CROPS).length,dishes:Object.keys(RECIPES).length,furn:Object.keys(COMF).length}}
+function gmLevel(n){if(!gmOn())return;S.lv=n;S.exp=0;S.hp=hpMax();save();try{hud()}catch(e){}}
+function gmReenter(){const x=P.x,y=P.y,id=M.id;try{delete CACHE[id]}catch(e){}goMap(id);P.x=x;P.y=y;P.path=null}
+function gmAge(a){if(!gmOn())return;S.age=a;save();try{for(const k of Object.keys(CACHE))delete CACHE[k]}catch(e){}gmReenter();try{hud()}catch(e){}}
+function gmJob(j){if(!gmOn()||!JOBS[j])return;S.job=j;S.learn=Object.keys(SK);save();try{hud()}catch(e){}}
+function gmHouse(n){if(!gmOn())return;gmHomeKey();const h=HOME.get();h.lv=Math.max(1,Math.min(9,n));HOME.put(h);try{for(const k of Object.keys(CACHE))if(/^room/.test(k))delete CACHE[k]}catch(e){}try{farmRefresh()}catch(e){}}
+function gmFarm(act){if(!gmOn())return 0;gmHomeKey();const h=HOME.get();h.plots=h.plots||{};h.farm=h.farm||{cleared:[],robot:false,robotOn:true};let n=0;
+  if(act==='grow'){for(const k of Object.keys(h.plots)){const q=h.plots[k];if(q&&q.st!=='ripe'){q.st='ripe';n++}}}
+  if(act==='plant'){const ks=Object.keys(CROPS);(M&&M.plots||[]).forEach((p,i)=>{if(!h.plots[p.i]){h.plots[p.i]={crop:ks[i%ks.length],st:'ripe',w:true,t:Date.now()};n++}})}
+  if(act==='clear'){h.farm.cleared=[...new Set([...(h.farm.cleared||[]),...Array.from({length:15},(_,i)=>i)])];n=h.farm.cleared.length}
+  if(act==='robot'){h.farm.robot=true;h.farm.robotOn=true;n=1}
+  HOME.put(h);if(act==='clear'&&M&&M.id==='farm')gmReenter();try{farmRefresh()}catch(e){}return n}
+function gmLamp(v){if(!gmOn())return;S.lamp=v;save()}
+function gmGhost(on){try{if(M&&M._gmSolid){M.SOLID=M._gmSolid;delete M._gmSolid}if(on&&M){M._gmSolid=M.SOLID;M.SOLID=new Set()}}catch(e){}GM.ghost=!!on}
+function gmWarp(id){if(!gmOn()||!MAPS[id])return false;closeModal();fadeTo(()=>goMap(id));return true}
+function gmMaps(){const first=['capital','farm','cavemouth','hunt1','room','royal','scn_north','scn_east','scn_south'].filter(k=>MAPS[k]);return first.concat(Object.keys(MAPS).filter(k=>!first.includes(k)))}
+// hooks: all of them do nothing unless the current character is the GM
+{const _sgG=startGame;startGame=function(){gmHomeKey();const r=_sgG.apply(this,arguments);try{GM.god=GM.open=false;GM.fast=1;GM.hour=null;GM.ghost=false;gmBtn();if(gmOn()&&!S.gmInit)gmGrant()}catch(e){}return r}}
+{const _gmG=goMap;goMap=function(){try{if(M&&M._gmSolid){M.SOLID=M._gmSolid;delete M._gmSolid}}catch(e){}const r=_gmG.apply(this,arguments);try{if(gmOn()&&GM.ghost)gmGhost(true)}catch(e){}return r}}
+{const _ueG=useExit;useExit=function(e){if(gmOn()&&GM.open&&e&&e.locked){if(MAPS[e.to]){sfx('warp');fadeTo(()=>goMap(e.to,e.toExit))}else say('GM: ยังไม่มีฉากปลายทาง '+e.to);return}return _ueG.apply(this,arguments)}}
+{const _upG=update;update=function(dt){const r=_upG.apply(this,arguments);try{if(gmOn()){if(GM.fast>1&&!GM._in){GM._in=1;try{for(let i=1;i<GM.fast;i++)_upG.call(this,dt)}finally{GM._in=0}}if(GM.god&&S){S.hp=hpMax();if(P)P.hurt=0}}}catch(e){GM._in=0}return r}}
+{const _dpG=dayPhase;dayPhase=function(h){return(h===undefined&&gmOn()&&GM.hour!=null)?_dpG(GM.hour):_dpG.apply(this,arguments)}}
+{const _pkG=phaseK;phaseK=function(){if(gmOn()&&GM.hour!=null){const h=GM.hour;return h<5?'night':h<7?'dawn':h<17?'day':h<19?'dusk':'night'}return _pkG.apply(this,arguments)}}
+{let last=0;const _rG=render;render=function(tm){const r=_rG.apply(this,arguments);try{if(tm&&last)GM.fps=GM.fps*.9+(1000/Math.max(1,tm-last))*.1;last=tm||0;
+  if(gmOn()&&GM.pos&&M&&P){ctx.save();ctx.setTransform(1,0,0,1,0,0);const u=devicePixelRatio||1,tx=(P.x/T).toFixed(1),ty=(P.y/T).toFixed(1),txt=`${M.id} · ช่อง ${tx}, ${ty} · ${Math.round(GM.fps)} fps`;
+    ctx.font=`bold ${13*u}px sans-serif`;const w=ctx.measureText(txt).width+16*u,x=(ctx.canvas.width-w)/2,y=6*u;ctx.fillStyle='rgba(20,16,30,.8)';ctx.fillRect(x,y,w,22*u);ctx.fillStyle='#ffe08a';ctx.textBaseline='middle';ctx.textAlign='left';ctx.fillText(txt,x+8*u,y+11*u);ctx.restore()}}catch(e){}return r}}
+function gmBtn(){let b=document.getElementById('gmBtn');if(!b){b=document.createElement('button');b.id='gmBtn';b.textContent='🛠 GM';
+    b.style.cssText='position:fixed;left:calc(14px + env(safe-area-inset-left,0px));top:calc(152px + env(safe-area-inset-top,0px));z-index:6;padding:8px 12px;min-height:40px;border-radius:10px;border:2px solid #e8c46a;background:#2a1d3a;color:#ffe08a;font-size:14px;font-weight:700';
+    b.onclick=()=>openGM();document.body.appendChild(b)}b.style.display=gmOn()?'block':'none'}
+function openGM(){if(!gmOn())return;const h=HOME.get(),B=(a,l,on)=>`<button data-gm="${a}" style="min-height:40px;${on?'background:#e8c46a;color:#1b1330;':''}">${l}</button>`,row=(t0,inner)=>`<div class="pn" style="margin:6px 0"><b>${t0}</b><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px">${inner}</div></div>`;
+  const maps=gmMaps(),hours=[['null','เวลาจริง'],['6','เช้ามืด'],['12','กลางวัน'],['18','เย็น'],['22','กลางคืน']];
+  modal(`<h2>🛠 แผง GM (ตัวละครทดสอบ)</h2><div style="max-height:62vh;overflow:auto">
+   ${row('ของ',B('grant','รับของทุกอย่าง')+B('coins','เหรียญ +100,000')+B('lv:1','เลเวล 1')+B('lv:30','เลเวล 30')+B('lv:50','เลเวล 50')+B('lv:99','เลเวล 99'))}
+   ${row('ตัวละคร · อายุ '+S.age+' · อาชีพ '+(S.job||'-'),[7,9,11,30].map(a=>B('age:'+a,a<12?a+' ขวบ':'ผู้ใหญ่',S.age===a)).join('')+Object.keys(JOBS).map(j=>B('job:'+j,t('j_'+j),S.job===j)).join(''))}
+   ${row('โหมดทดสอบ',B('god','อมตะ',GM.god)+B('ghost','เดินทะลุ',GM.ghost)+B('open','ผ่านทางที่ปิด',GM.open)+B('pos','โชว์พิกัด',GM.pos)+[1,2,4].map(f=>B('fast:'+f,'เร็ว ×'+f,GM.fast===f)).join(''))}
+   ${row('เวลาในเกม',hours.map(([v,l])=>B('hour:'+v,l,String(GM.hour)===v)).join(''))}
+   ${row('บ้าน ขั้น '+houseLv(h)+' · ฟาร์ม',[1,2,3,4,5,6,7,8,9].map(n=>B('house:'+n,'ขั้น '+n,houseLv(h)===n)).join('')+B('farm:plant','ปลูกเต็มแปลง (สุกเลย)')+B('farm:grow','พืชที่ปลูกไว้สุกทันที')+B('farm:clear','เคลียร์ที่รก 15')+B('farm:robot','ได้หุ่นช่วยงาน'))}
+   ${row('ตะเกียง '+Math.round((S.lamp||0)*100)+'% · คริสตัลหมู่บ้านขั้น '+(S.villageCrystal||1),B('lamp:1','เต็ม')+B('lamp:0.15','เหลือ 15%')+B('lamp:0.002','เกือบหมด')+B('conv','รีเซ็ตเครื่องแปลง')+[1,2,3,4].map(n=>B('cry:'+n,'คริสตัล '+n,(S.villageCrystal||1)===n)).join(''))}
+   ${row('วาร์ปไปฉาก ('+maps.length+')',maps.map(k=>B('warp:'+k,k,M&&M.id===k)).join(''))}
+   ${row('จัดการ',B('leave','กลับไปเลือกตัวละคร')+B('delete','ลบตัวละคร GM'))}</div>`);
+  document.querySelectorAll('[data-gm]').forEach(b=>b.onclick=()=>{const [a,v]=b.dataset.gm.split(':');let stay=true;try{
+    if(a==='grant'){const r=gmGrant();say('GM: ได้ของครบ · อาวุธ/ชุด '+r.gear+' ชิ้น')}
+    else if(a==='coins'){S.coins+=100000;save();hud()}
+    else if(a==='lv')gmLevel(+v);else if(a==='age')gmAge(+v);else if(a==='job')gmJob(v);
+    else if(a==='god')GM.god=!GM.god;else if(a==='ghost')gmGhost(!GM.ghost);else if(a==='open')GM.open=!GM.open;else if(a==='pos')GM.pos=!GM.pos;
+    else if(a==='fast')GM.fast=+v;else if(a==='hour')GM.hour=v==='null'?null:+v;
+    else if(a==='house')gmHouse(+v);else if(a==='farm'){const n=gmFarm(v);say('GM: ฟาร์ม '+v+' · '+n)}
+    else if(a==='lamp')gmLamp(+v);else if(a==='conv'){S.conv={};save()}else if(a==='cry'){S.villageCrystal=+v;save()}
+    else if(a==='warp'){stay=false;gmWarp(v)}
+    else if(a==='leave'){stay=false;save();location.reload()}
+    else if(a==='delete'){stay=false;if(confirm('ลบตัวละคร GM และข้อมูลบ้าน/ฟาร์มของ GM?')){S=null;gmDelete();location.reload()}}
+   }catch(e){say('GM: '+e.message)}if(stay)openGM()})}
+// ⚙️ settings: the GM row appears only with ?gm in the address (or while playing the GM)
+{const _stG=openSettings;openSettings=function(){const r=_stG.apply(this,arguments);try{if((gmOn()||/[?&#]gm\b/.test(location.search+location.hash))&&!$('gmRow')){const h2=document.querySelector('#modal h2');if(h2){const d=document.createElement('div');d.id='gmRow';d.className='row2';d.style.margin='6px 0';
+  d.innerHTML=`<button id="gmGo" style="flex:1">🛠 ${gmOn()?'เปิดแผง GM':'สร้าง/เข้าตัวละคร GM (ทดสอบ)'}</button>`;h2.after(d);$('gmGo').onclick=()=>{if(gmOn()){closeModal();openGM();return}try{save()}catch(e){}gmMakeSlot();location.reload()}}}}catch(e){}return r}}
+// 1.05 fix: the shop's lamp upgrade and the 1.04 lantern light both used S.lamp. The upgrade now lives in S.lampLv; S.lamp stays the lantern light 0..1.
+{const _sgL=startGame;startGame=function(){try{if(S&&S.lamp>1){S.lampLv=Math.min(3,(S.lampLv||0)+Math.round(S.lamp)-1);S.lamp=1}}catch(e){}return _sgL.apply(this,arguments)}}
 </script></body></html>
