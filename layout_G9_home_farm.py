@@ -41,14 +41,14 @@ TREE=(9.5,7.2)
 # ---------- buildings (x_centre, y_base=door row, w, depth) : standard sizes house 4x3 ----------
 B={'our_house':(19.5,10,4,3),'shed':(30.6,13.2,4,3),'friend_hut':(41.5,11.5,4,3)}
 HOUSE_LOT=(14.5,3.4,29,10.5)                                           # reserved for 9 upgrade levels; the door never moves
-STAGES={'lv1':(17.5,7,21.5,10),'lv2-4':(16.5,6.4,23.5,10),'lv5-6':(16,5,23.5,10),'lv7-9':(15.5,3.6,23.5,10)}   # picture envelope incl. roof (concept-house-levels.jpg): cottage / +wing+deck / 2 floors / 3 floors
-HOUSE_MAX=STAGES['lv7-9']; POOL=(24.3,6,28.3,9)                         # pool 4x3 BESIDE the house (behind a 3-floor house it would be hidden)
+STAGES={'lv1':(17.86,5.26,21.86,10),'lv2':(18.0,5.26,23.86,10),'lv3-4':(18.03,5.26,24.7,10),'lv5-6':(16,4.2,24.7,10),'lv7-9':(15.5,3.6,24.7,10)}   # lv1-3 = boxes of the real sprites farm-house-1/2/3.png (door at x 19.5); lv5+ = room kept for 2 and 3 floors
+HOUSE_MAX=STAGES['lv7-9']; POOL=(25.2,6,29,9)                         # pool 4x3 BESIDE the house (behind a 3-floor house it would be hidden)
 FORECOURT=(17,10,22,12)                                                # paved front yard 5x2 so visitors never block the door
 def build_solid(house_full=False,stage=None):
     s=Z()
-    for n,(x,yb,w,dp) in B.items(): s[t(yb-dp):t(yb),t(x-w/2):t(x+w/2)]=255
-    if house_full or stage:
-        for x0,y0,x1,y1 in ((HOUSE_MAX,POOL) if house_full else (STAGES[stage],)): s[t(y0):t(y1),t(x0):t(x1)]=255
+    for n,(x,yb,w,dp) in B.items():
+        if n!='our_house': s[t(yb-dp):t(yb),t(x-w/2):t(x+w/2)]=255
+    for x0,y0,x1,y1 in ((HOUSE_MAX,POOL) if house_full else (STAGES[stage or 'lv1'],)): s[t(y0):t(y1),t(x0):t(x1)]=255
     s[rock>0]=255
     cv2.circle(s,(t(TREE[0]),t(TREE[1])),t(1.0),255,-1)        # big tree trunk
     cv2.circle(s,(t(CAMP[0]),t(CAMP[1])),t(.5),255,-1)         # campfire
@@ -170,8 +170,9 @@ SYSTEMS={
    'never':['crops dying','seasons','quality stars','processing','orders'],'later':['friend monster waters for you','plots 2-4']},
  'house_upgrade':{'how':'tap the sign in front of the house -> picture of next level + price -> one button; coins only',
    'look':'concept-house-levels.jpg (9 exteriors, one per level; redraw top-down for the game)',
-   'levels':[{'lv':1,'adds':'กระท่อมห้องเดียว','envelope':'lv1','cost':0},{'lv':2,'adds':'ปีกครัว','envelope':'lv2-4','cost':200},{'lv':3,'adds':'ห้องกว้างขึ้น (ห้องนั่งเล่น)','envelope':'lv2-4','cost':500},
-             {'lv':4,'adds':'ระเบียงไม้ + สวนหน้าบ้าน','envelope':'lv2-4','cost':1000},{'lv':5,'adds':'ชั้น 2 + ห้องนอน + ห้องน้ำ','envelope':'lv5-6','cost':1500},{'lv':6,'adds':'ห้องกระจก','envelope':'lv5-6','cost':2500},
+   'sprites':{'scale':'64 screen px per plan tile (the scene picture is shown at 2x)','anchor':'door centre at x 19.5, sprite bottom at y 10.15','files':{'farm-house-1.png':[256,313],'farm-house-2.png':[375,313],'farm-house-3.png':[427,313]},'collision':'the whole sprite box (stages lv1 / lv2 / lv3-4)'},
+   'levels':[{'lv':1,'adds':'กระท่อมห้องเดียว','envelope':'lv1','sprite':'farm-house-1.png','cost':0},{'lv':2,'adds':'ปีกครัว','envelope':'lv2','sprite':'farm-house-2.png','cost':200},{'lv':3,'adds':'ห้องกว้างขึ้น (ห้องนั่งเล่น)','envelope':'lv3-4','sprite':'farm-house-3.png','cost':500},
+             {'lv':4,'adds':'ระเบียงไม้ + สวนหน้าบ้าน','envelope':'lv3-4','cost':1000},{'lv':5,'adds':'ชั้น 2 + ห้องนอน + ห้องน้ำ','envelope':'lv5-6','cost':1500},{'lv':6,'adds':'ห้องกระจก','envelope':'lv5-6','cost':2500},
              {'lv':7,'adds':'ชั้น 3 + หอดูดาว','envelope':'lv7-9','cost':4000},{'lv':8,'adds':'ห้องบ่อบอล + สไลเดอร์','envelope':'lv7-9','cost':6000},{'lv':9,'adds':'สระว่ายน้ำ + สไลเดอร์น้ำ','envelope':'lv7-9 + pool','cost':10000}],
    'rules':['new room arrives with basic furniture','house gives no combat power','only the current level picture is loaded'],'phase1':'lv 1-3'},
  'decor':{'room_grid':{'lv1':[8,6],'lv2':[10,7]},'place':'tap item -> tap floor cell; snaps to grid',
@@ -230,10 +231,10 @@ for k,(x0,y0,x1,y1) in PLOTS.items():                                    # game 
         for r in range(1,4): dl.line((t(x0)+6,t(y0+r),t(x1)-6,t(y0+r)),fill=(104,70,44),width=3)
     else: dl.rectangle((t(x0),t(y0),t(x1),t(y1)),fill=(150,128,70),outline=(96,70,44),width=3)
 x0,y0,x1,y1=HOUSE_LOT; dl.rectangle((t(x0),t(y0),t(x1),t(y1)),outline=(250,240,200),width=2)
-for k in ('lv7-9','lv5-6','lv2-4'):
+for k in ('lv7-9','lv5-6','lv3-4','lv2'):
     x0,y0,x1,y1=STAGES[k]; dl.rectangle((t(x0),t(y0),t(x1),t(y1)),outline=(255,200,190),width=2)
 x0,y0,x1,y1=POOL; dl.rectangle((t(x0),t(y0),t(x1),t(y1)),fill=(150,200,235),outline=(250,240,200),width=2)
-draw_building(dl,'our_house')
+x0,y0,x1,y1=STAGES['lv1']; dl.rectangle((t(x0),t(y0),t(x1),t(y1)),fill=ROOF['our_house'],outline=(60,40,30),width=3); dl.rectangle((t(19.5-.4),t(9.1),t(19.5+.4),t(10)),fill=(70,45,30))
 for x,y in DECOR.values(): dl.ellipse((t(x)-9,t(y)-9,t(x)+9,t(y)+9),fill=(240,150,190),outline=(120,60,90),width=2)
 dl.rectangle((t(BANNER[0])-4,t(BANNER[1])-14,t(BANNER[0])+4,t(BANNER[1])+6),fill=(255,214,90),outline=(60,40,30),width=2)
 dl.rectangle((t(30)-5,t(21)-12,t(30)+5,t(21)+10),fill=(230,200,120))                                        # scarecrow
@@ -246,8 +247,8 @@ def lab(x,y,s,sz=17):
             if dx or dy: dl.text((x+dx,y+dy),s,font=F(sz),fill=(20,16,30),anchor='mm')
     dl.text((x,y),s,font=F(sz),fill=(255,255,255),anchor='mm')
 NM={'our_house':'บ้านเรา','shed':'โรงเก็บของ','friend_hut':'บ้านเพื่อนมอน'}
-for n,(x,yb,w,dp) in B.items(): lab(t(x),t(yb-dp/2),NM[n],15)
-lab(t(26.4),t(4.3),'ที่ดินบ้าน (9 ขั้น)',12); lab(t(26.3),t(7.5),'สระ',13); lab(t(19.5),t(4.3),'ขั้น 7-9',11); lab(t(19.5),t(5.7),'ขั้น 5-6',11); lab(t(19.5),t(11),'ลานหน้าบ้าน',11); lab(t(TREE[0]),t(TREE[1]-1.6),'ต้นไม้ใหญ่',14); lab(t(CAMP[0]),t(CAMP[1]+1.3),'ลานแคมป์·กองไฟ',12)
+for n,(x,yb,w,dp) in B.items(): lab(t(x+(0.36 if n=='our_house' else 0)),t(yb-(4.74 if n=='our_house' else dp)/2),NM[n],15)
+lab(t(26.4),t(4.3),'ที่ดินบ้าน (9 ขั้น)',12); lab(t(27.1),t(7.5),'สระ',13); lab(t(16.9),t(3.95),'ขั้น 7-9',11); lab(t(17),t(4.6),'ขั้น 5-6',11); lab(t(23.4),t(5.7),'ขั้น 2 · 3',11); lab(t(19.5),t(11),'ลานหน้าบ้าน',11); lab(t(TREE[0]),t(TREE[1]-1.6),'ต้นไม้ใหญ่',14); lab(t(CAMP[0]),t(CAMP[1]+1.3),'ลานแคมป์·กองไฟ',12)
 lab(t(20.5),t(25.2),'สระปลา',15); lab(t(22.9),t(22.3),'ท่าตกปลา',12); lab(t(30),t(19.7),'แปลงเริ่มต้น',14)
 for k,s in (('plot2','แปลงขยาย 2'),('plot3','แปลงขยาย 3'),('plot4','แปลงขยาย 4')):
     a,b,c,e=PLOTS[k]; lab(t((a+c)/2),t((b+e)/2),s+' (รก)',13)
@@ -257,7 +258,7 @@ lab(t(45.4),t(17.9),'H9 >>',13); lab(t(6.4),t(20.4),'<< F9 ทุ่งดอก
 lab(t(43.5),t(13),'เสาหินประตูฟาร์ม',11); lab(t(3.2),t(19.2),'กองซุง',11); lab(t(38),t(4),'ประตูรั้ว',11); lab(t(12),t(28.6),'พุ่มเบอร์รี่รก',11)
 for (x0,y0,x1,y1) in CORNERS: lab(t((x0+x1)/2),t((y0+y1)/2),'มุมจอ',13)
 L.save(os.path.join(OUT,'map-G9-home-farm-layout-labeled.png'))
-spec={'block':'G9','name':'บ้านเรา · ฟาร์ม','version':'1.5','background':{'file':'map-G9-home-farm.jpg','picked':'run 2 picture 4 (3 Oct 2026)','tone':'bright (kid) = the one tone for the whole game','score':9.5},'size':[48,32],'instance':'per_player (แต่ละคนมีฟาร์มของตัวเอง · เพื่อนเข้าได้เมื่อเชิญ)',
+spec={'block':'G9','name':'บ้านเรา · ฟาร์ม','version':'1.6','background':{'file':'map-G9-home-farm.jpg','picked':'run 2 picture 4 (3 Oct 2026)','tone':'bright (kid) = the one tone for the whole game','score':9.5},'size':[48,32],'instance':'per_player (แต่ละคนมีฟาร์มของตัวเอง · เพื่อนเข้าได้เมื่อเชิญ)',
  'rule':'HUD corners: no door, exit, NPC, pickup or needed path inside them; every edge follows its neighbour block',
  'doors':{n:[x,yb] for n,(x,yb,w,dp) in B.items()},
  'house':{'lot':list(HOUSE_LOT),'door':[19.5,10],'door_fixed_all_levels':True,'levels':9,'stages':{k:list(v) for k,v in STAGES.items()},'pool_reserved':list(POOL),'forecourt':list(FORECOURT),

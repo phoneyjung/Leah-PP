@@ -1,7 +1,7 @@
 {
  "block": "G9",
  "name": "บ้านเรา · ฟาร์ม",
- "version": "1.5",
+ "version": "1.6",
  "background": {
   "file": "map-G9-home-farm.jpg",
   "picked": "run 2 picture 4 (3 Oct 2026)",
@@ -43,34 +43,40 @@
   "levels": 9,
   "stages": {
    "lv1": [
-    17.5,
-    7,
-    21.5,
+    17.86,
+    5.26,
+    21.86,
     10
    ],
-   "lv2-4": [
-    16.5,
-    6.4,
-    23.5,
+   "lv2": [
+    18.0,
+    5.26,
+    23.86,
+    10
+   ],
+   "lv3-4": [
+    18.03,
+    5.26,
+    24.7,
     10
    ],
    "lv5-6": [
     16,
-    5,
-    23.5,
+    4.2,
+    24.7,
     10
    ],
    "lv7-9": [
     15.5,
     3.6,
-    23.5,
+    24.7,
     10
    ]
   },
   "pool_reserved": [
-   24.3,
+   25.2,
    6,
-   28.3,
+   29,
    9
   ],
   "forecourt": [
@@ -568,29 +574,51 @@
   "house_upgrade": {
    "how": "tap the sign in front of the house -> picture of next level + price -> one button; coins only",
    "look": "concept-house-levels.jpg (9 exteriors, one per level; redraw top-down for the game)",
+   "sprites": {
+    "scale": "64 screen px per plan tile (the scene picture is shown at 2x)",
+    "anchor": "door centre at x 19.5, sprite bottom at y 10.15",
+    "files": {
+     "farm-house-1.png": [
+      256,
+      313
+     ],
+     "farm-house-2.png": [
+      375,
+      313
+     ],
+     "farm-house-3.png": [
+      427,
+      313
+     ]
+    },
+    "collision": "the whole sprite box (stages lv1 / lv2 / lv3-4)"
+   },
    "levels": [
     {
      "lv": 1,
      "adds": "กระท่อมห้องเดียว",
      "envelope": "lv1",
+     "sprite": "farm-house-1.png",
      "cost": 0
     },
     {
      "lv": 2,
      "adds": "ปีกครัว",
-     "envelope": "lv2-4",
+     "envelope": "lv2",
+     "sprite": "farm-house-2.png",
      "cost": 200
     },
     {
      "lv": 3,
      "adds": "ห้องกว้างขึ้น (ห้องนั่งเล่น)",
-     "envelope": "lv2-4",
+     "envelope": "lv3-4",
+     "sprite": "farm-house-3.png",
      "cost": 500
     },
     {
      "lv": 4,
      "adds": "ระเบียงไม้ + สวนหน้าบ้าน",
-     "envelope": "lv2-4",
+     "envelope": "lv3-4",
      "cost": 1000
     },
     {
@@ -686,11 +714,11 @@
   "points_checked": 27,
   "unreachable": [],
   "unreachable_house_max": [],
-  "walk_tiles": 1281,
+  "walk_tiles": 1270,
   "free_tiles": 1382,
-  "walk_pct": 92.7,
-  "open_ground_tiles": 868,
-  "open_pct_of_scene": 62.8,
+  "walk_pct": 91.9,
+  "open_ground_tiles": 857,
+  "open_pct_of_scene": 62.0,
   "field_tiles": 85,
   "woods_tiles": 328,
   "water_tiles": 57,
@@ -729,7 +757,8 @@
   "front_yard_depth": 5.6,
   "unreachable_by_house_stage": {
    "lv1": [],
-   "lv2-4": [],
+   "lv2": [],
+   "lv3-4": [],
    "lv5-6": [],
    "lv7-9": []
   },
