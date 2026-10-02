@@ -2,10 +2,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#1b1330">
 <title>Lantern Academy</title>
-<meta name="description" content="Lantern Academy · เกมผจญภัยเรียนรู้สำหรับครอบครัว ตอบคำถามปลุกคริสตัล ช่วยกันนำแสงกลับคืนสู่เมืองพาเพลิน">
+<meta name="description" content="Lantern Academy · เกมผจญภัยเรียนรู้สำหรับครอบครัว ตอบคำถามปลุกคริสตัล ช่วยกันนำแสงกลับคืนสู่หมู่บ้านพาเพลิน">
 <meta name="application-name" content="Lantern Academy">
 <meta property="og:title" content="Lantern Academy">
-<meta property="og:description" content="เกมผจญภัยเรียนรู้สำหรับครอบครัว · ตอบคำถามปลุกคริสตัล ช่วยกันนำแสงกลับคืนสู่เมืองพาเพลิน">
+<meta property="og:description" content="เกมผจญภัยเรียนรู้สำหรับครอบครัว · ตอบคำถามปลุกคริสตัล ช่วยกันนำแสงกลับคืนสู่หมู่บ้านพาเพลิน">
 <meta property="og:image" content="https://phoneyjung.github.io/Leah-PP/title-art.jpg">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
@@ -88,7 +88,7 @@ button:disabled{opacity:.45}
 @media (max-height:440px){#cr h3{margin-bottom:3px;font-size:12px}.opt{font-size:10px}#cr .pn{padding:5px 8px}#cr .r{gap:6px}.ages button{padding:5px 9px}#cr input{padding:6px}.hs{padding:4px 2px}}
 </style></head><body>
 <canvas id="c"></canvas><div id="vig"></div>
-<div id="load"><img src="logo.png" alt="🏮 Lantern Academy" style="width:min(60vw,360px);max-height:40vh;object-fit:contain" onerror="this.outerHTML='<b style=&quot;font-size:22px;color:#ffe7b0&quot;>🏮 Lantern Academy</b>'"><span class="note" style="margin-top:-4px">เมืองพาเพลิน</span><div class="bar"><i id="loadI" style="width:0%"></i></div><span class="note" id="loadT">กำลังเตรียมเมือง…</span></div>
+<div id="load"><img src="logo.png" alt="🏮 Lantern Academy" style="width:min(60vw,360px);max-height:40vh;object-fit:contain" onerror="this.outerHTML='<b style=&quot;font-size:22px;color:#ffe7b0&quot;>🏮 Lantern Academy</b>'"><span class="note" style="margin-top:-4px">หมู่บ้านพาเพลิน</span><div class="bar"><i id="loadI" style="width:0%"></i></div><span class="note" id="loadT">กำลังเตรียมเมือง…</span></div>
 <div id="hud" class="pn hide"><div class="nm"><span class="rib" id="hRib"></span><span id="hName"></span><span id="hLv"></span></div>
  <div id="hpw" class="bar"><i id="hpI"></i><b id="hpT"></b></div><div id="xpw" class="bar"><i id="xpI"></i><b id="xpT"></b></div>
  <div class="row"><span id="hCry">✨ 0</span><span id="hCoin">🪙 0</span><span id="hBuff"></span></div><div id="goal" style="margin-top:4px;font-size:11px;color:#ffe7b0;line-height:1.25"></div></div>
@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.02';
+const VERSION='Lantern Academy 1.04';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -145,7 +145,7 @@ const TX={th:{bag:'กระเป๋า',map:'แผนที่',set:'ตั�
   equip:'ใส่',equipped:'ใส่อยู่',potion:'ยาฟื้นพลัง',boss:'ผู้พิทักษ์หินงง',bossWin:'ผู้พิทักษ์หายงงแล้ว! ถ้ำคริสตัลสว่างทั้งถ้ำ',
   lang:'ภาษา',light:'ความสว่างของเมือง',reset:'ลบเซฟแล้วเริ่มใหม่',resetQ:'ลบตัวละครและความคืบหน้าทั้งหมด?',saved:'บันทึกแล้ว',
   kidSafe:'มอนสเตอร์ไม่ตีเด็ก',noHit:'แตะมอนสเตอร์เพื่อตี',rock:'หินถล่มปิดทางขึ้นเขา… ได้ยินว่าข้างบนมีดินแดนหิมะ',
-  plaza:'ลานน้ำพุ',mountain:'ตีนเขา',cave1:'ถ้ำคริสตัล · ชั้น 1',cave2:'ถ้ำคริสตัล · ชั้น 2',cave3:'ถ้ำคริสตัล · ชั้น 3',town:'เมืองพาเพลิน · บทที่ 1',
+  plaza:'ลานน้ำพุ',mountain:'ตีนเขา',cave1:'ถ้ำคริสตัล · ชั้น 1',cave2:'ถ้ำคริสตัล · ชั้น 2',cave3:'ถ้ำคริสตัล · ชั้น 3',town:'หมู่บ้านพาเพลิน · บทที่ 1',
   goalPlaza:'🎯 ไปถ้ำคริสตัล: เดินขึ้นทางเหนือ',goalMountain:'🎯 เข้าปากถ้ำตรงหน้าผา',goalKid:'🎯 ตามหาคริสตัลที่หลับอยู่',goalAdult:'🎯 ปัดฝุ่นให้มอนสเตอร์',goalDown:'🎯 ลงบันไดไปชั้นถัดไป',goalBoss:'🎯 ช่วยผู้พิทักษ์หินให้หายงง',goalDone:'🎉 ถ้ำคริสตัลสว่างแล้ว! ไปดินแดนต่อไปทาง 🗺️ แผนที่',floorDone:'✨ คริสตัลชั้นนี้ตื่นครบแล้ว!',compass:'เข็มทิศแสงชี้ไปทางคริสตัล',
   n_leah:'ลีอา',n_nuan:'ยายนวล',n_mom:'เจ้าหญิง',n_dad:'พ่อมด',n_peb:'เป๊บ',
   s_leah:'ถ้ำคริสตัลอยู่ทางเหนือ เดินตามทางหินไปเลย! เจอคริสตัลหลับอยู่ แตะแล้วตอบคำถามปลุกมันนะ',s_nuan:'มาแล้วเหรอหลาน ยายมีของดี ๆ ให้เลือกนะ… เหรียญได้จากการขุดตรงที่มีประกายในถ้ำ',s_dad:'ในถ้ำมืดนะ อยู่ใกล้แสงไว้ ผู้ใหญ่ช่วยปัดฝุ่นให้สัตว์ที่งง ๆ ด้วย',s_mom:'ศิลาแสงสีฟ้าคือจุดวาร์ป แตะแผนที่เล็กมุมขวาบนเพื่อวาร์ปกลับได้',s_peb:'ปิ๊บ ๆ! ชั้นล่างสุดมีผู้พิทักษ์หินที่งงมาก ๆ ช่วยเขาหน่อยนะ',
@@ -153,7 +153,7 @@ const TX={th:{bag:'กระเป๋า',map:'แผนที่',set:'ตั�
   skill:'ท่าพิเศษ',sk_sw:'ดาบหมุน',sk_bow:'ยิงสามดอก',sk_staff:'ลูกแสงใหญ่',sk_dag:'พุ่งเงา',skWait:'รอท่าพิเศษอีก',shop:'ร้านยายนวล',buy:'ซื้อ',noCoin:'เหรียญไม่พอ',bought:'ซื้อแล้ว!',
   it_pot:'ยาฟื้นพลัง (ผู้ใหญ่)',it_lamp:'ตะเกียงสว่างขึ้น (ในถ้ำเห็นไกลขึ้น)',it_snack:'ขนมยายนวล (+15 EXP)',it_gem:'แลกอัญมณี 3 เม็ด → 25 เหรียญ',maxed:'สูงสุดแล้ว',pebJoin:'เป๊บมาช่วยแล้ว! ถ้าเป๊บกระโดด แปลว่ามีคริสตัลอยู่ใกล้ ๆ',music:'เพลง',
   an_wake1:"แสงแรก",ad_wake1:"ปลุกคริสตัลเม็ดแรก",at_wake1:"ผู้จุดแสง",an_wake10:"แสงนำทาง",ad_wake10:"ปลุกคริสตัล 10 เม็ด",at_wake10:"ผู้พิทักษ์แสงฝึกหัด",an_wake18:"ถ้ำสว่างทั้งถ้ำ",ad_wake18:"ปลุกคริสตัลครบ 18 เม็ดในถ้ำคริสตัล",at_wake18:"ผู้พิทักษ์แสง",an_book10:"หนอนหนังสือ",ad_book10:"ความรู้ในสมุด 10 เรื่อง",at_book10:"หนอนหนังสือ",an_book50:"นักปราชญ์น้อย",ad_book50:"ความรู้ในสมุด 50 เรื่อง",at_book50:"นักปราชญ์น้อย",an_dig5:"มือขุดมือใหม่",ad_dig5:"ขุด 5 ครั้ง",at_dig5:"",an_dig25:"นักขุดสมบัติ",ad_dig25:"ขุด 25 ครั้ง",at_dig25:"นักขุดสมบัติ",an_help10:"ปัดฝุ่นให้เพื่อน",ad_help10:"ปัดฝุ่นให้มอน 10 ตัว",at_help10:"",an_help100:"ผู้ปกป้อง",ad_help100:"ปัดฝุ่นให้มอน 100 ตัว",at_help100:"ผู้ปกป้อง",an_help500:"ฮีโร่แห่งพาเพลิน",ad_help500:"ปัดฝุ่นให้มอน 500 ตัว",at_help500:"ฮีโร่แห่งพาเพลิน",an_boss:"มิตรของผู้พิทักษ์",ad_boss:"ช่วยผู้พิทักษ์หินให้หายงง",at_boss:"มิตรของผู้พิทักษ์หิน",an_fish1:"ปลาตัวแรก",ad_fish1:"ตกปลาได้ตัวแรก",at_fish1:"",an_fish5:"นักตกปลา",ad_fish5:"ปลาในสมุด 5 ชนิด",at_fish5:"นักตกปลา",an_fish12:"สมุดปลาครบเล่ม",ad_fish12:"ปลาในสมุดครบ 12 ชนิด",at_fish12:"นักตกปลาตำนาน",an_legend:"ผู้พิชิตราชาปลา",ad_legend:"ตกราชาปลาแสงจันทร์ได้",at_legend:"ผู้พิชิตราชาปลา",an_card1:"การ์ดใบแรก",ad_card1:"เก็บการ์ดใบแรก",at_card1:"",an_card4:"นักสะสมการ์ด",ad_card4:"การ์ดถ้ำคริสตัลครบ 4 ใบ",at_card4:"นักสะสมการ์ด",an_pet1:"เพื่อนใหม่",ad_pet1:"มีสัตว์เลี้ยงตัวแรก",at_pet1:"",an_bond:"เพื่อนรักสัตว์",ad_bond:"ความผูกพันสัตว์เลี้ยงเต็ม 100",at_bond:"เพื่อนรักสัตว์",an_harv1:"ผักจากสวนบ้าน",ad_harv1:"เก็บผักครั้งแรก",at_harv1:"",an_harv20:"ชาวสวนพาเพลิน",ad_harv20:"เก็บผัก 20 ครั้ง",at_harv20:"ชาวสวนพาเพลิน",an_cook5:"เชฟน้อย",ad_cook5:"ทำอาหาร 5 จาน",at_cook5:"เชฟน้อย",an_lv10:"ก้าวแรก",ad_lv10:"ถึงเลเวล 10",at_lv10:"",an_lv30:"นักผจญภัย",ad_lv30:"ถึงเลเวล 30",at_lv30:"นักผจญภัย",an_lv50:"ยอดนักผจญภัย",ad_lv50:"ถึงเลเวล 50",at_lv50:"ยอดนักผจญภัย",an_lv99:"ตำนาน",ad_lv99:"ถึงเลเวล 99",at_lv99:"ตำนานแห่งพาเพลิน",an_quest10:"ขยันทุกวัน",ad_quest10:"รับรางวัลภารกิจ 10 ครั้ง",at_quest10:"ขยันทุกวัน",an_online:"เพื่อนร่วมทาง",ad_online:"เล่นออนไลน์กับคนอื่นครั้งแรก",at_online:"เพื่อนร่วมทาง",ach:'ความสำเร็จ',achGot:'🏆 ความสำเร็จ',useTitle:'ใช้ฉายานี้',noTitle:'ไม่ใช้ฉายา',title:'ฉายา',
-  sc_i1:"สวัสดี! ฉันชื่อลีอา ยินดีต้อนรับสู่เมืองพาเพลินนะ",sc_i2:"เมืองเรามืดลง เพราะฝุ่นลืมไปบังคริสตัลแห่งแสงไว้หมด สัตว์ในถ้ำก็เลยงงไปหมดเลย",sc_i3k:"เธอคือผู้พิทักษ์แสงคนใหม่! ไปถ้ำคริสตัลทางเหนือ ตอบคำถามเพื่อปลุกคริสตัลกันนะ ตามลูกศรสีเหลืองไปได้เลย",sc_i3a:"ผู้ใหญ่ช่วยปัดฝุ่นให้สัตว์ที่งง และช่วยปกป้องเด็ก ๆ ด้วยนะ ถ้ำคริสตัลอยู่ทางเหนือ",sc_f1:"ปิ๊บ! ปิ๊บ! แสงนั่นปลุกเป๊บตื่นเลย! เป๊บจะช่วยหาคริสตัลนะ",sc_f2:"เก่งมาก! ถ้าเป๊บกระโดด แปลว่ามีคริสตัลอยู่ใกล้ ๆ",sc_d1:"ชั้นนี้สว่างทั้งชั้นแล้ว! ลงบันไดไปช่วยชั้นถัดไปกันเถอะ",sc_b1:"อ๊ะ... หัวโล่งแล้ว ขอบใจนะผู้พิทักษ์ ฝุ่นลืมทำให้ข้าจำอะไรไม่ได้เลย",sc_b2:"ข้าจะคืนแสงของหัวใจคริสตัลให้เมือง ดูสิ ถ้ำทั้งถ้ำสว่างแล้ว",sc_b3:"เย้! เมืองพาเพลินสว่างขึ้นแล้ว! แต่ยังมีถ้ำอีกสองแห่งรอเราอยู่นะ",ch1done:"บทที่ 2 จบแล้ว",ch1next:"ป่าเห็ดเรืองแสงเปิดแล้ว (🗺️ แผนที่ → ดินแดน) · ถ้ำแห่งความฝันอยู่ห้องผู้พิทักษ์ ชั้น 3",n_guardian:"ผู้พิทักษ์หิน",n_you:"เรา",tapNext:"แตะเพื่อไปต่อ ▶",dream:"ถ้ำแห่งความฝัน",dreamBest:"ลึกสุดที่เคยไป",dreamIn:"เข้าถ้ำแห่งความฝัน",an_dream10:"ผู้ฝันไกล",ad_dream10:"ถ้ำแห่งความฝันชั้น 10",at_dream10:"ผู้ฝันไกล",an_dream25:"นักเดินทางแห่งความฝัน",ad_dream25:"ถ้ำแห่งความฝันชั้น 25",at_dream25:"นักเดินทางแห่งความฝัน",
+  sc_i1:"สวัสดี! ฉันชื่อลีอา ยินดีต้อนรับสู่หมู่บ้านพาเพลินนะ",sc_i2:"เมืองเรามืดลง เพราะฝุ่นลืมไปบังคริสตัลแห่งแสงไว้หมด สัตว์ในถ้ำก็เลยงงไปหมดเลย",sc_i3k:"เธอคือผู้พิทักษ์แสงคนใหม่! ไปถ้ำคริสตัลทางเหนือ ตอบคำถามเพื่อปลุกคริสตัลกันนะ ตามลูกศรสีเหลืองไปได้เลย",sc_i3a:"ผู้ใหญ่ช่วยปัดฝุ่นให้สัตว์ที่งง และช่วยปกป้องเด็ก ๆ ด้วยนะ ถ้ำคริสตัลอยู่ทางเหนือ",sc_f1:"ปิ๊บ! ปิ๊บ! แสงนั่นปลุกเป๊บตื่นเลย! เป๊บจะช่วยหาคริสตัลนะ",sc_f2:"เก่งมาก! ถ้าเป๊บกระโดด แปลว่ามีคริสตัลอยู่ใกล้ ๆ",sc_d1:"ชั้นนี้สว่างทั้งชั้นแล้ว! ลงบันไดไปช่วยชั้นถัดไปกันเถอะ",sc_b1:"อ๊ะ... หัวโล่งแล้ว ขอบใจนะผู้พิทักษ์ ฝุ่นลืมทำให้ข้าจำอะไรไม่ได้เลย",sc_b2:"ข้าจะคืนแสงของหัวใจคริสตัลให้เมือง ดูสิ ถ้ำทั้งถ้ำสว่างแล้ว",sc_b3:"เย้! หมู่บ้านพาเพลินสว่างขึ้นแล้ว! แต่ยังมีถ้ำอีกสองแห่งรอเราอยู่นะ",ch1done:"บทที่ 2 จบแล้ว",ch1next:"ป่าเห็ดเรืองแสงเปิดแล้ว (🗺️ แผนที่ → ดินแดน) · ถ้ำแห่งความฝันอยู่ห้องผู้พิทักษ์ ชั้น 3",n_guardian:"ผู้พิทักษ์หิน",n_you:"เรา",tapNext:"แตะเพื่อไปต่อ ▶",dream:"ถ้ำแห่งความฝัน",dreamBest:"ลึกสุดที่เคยไป",dreamIn:"เข้าถ้ำแห่งความฝัน",an_dream10:"ผู้ฝันไกล",ad_dream10:"ถ้ำแห่งความฝันชั้น 10",at_dream10:"ผู้ฝันไกล",an_dream25:"นักเดินทางแห่งความฝัน",ad_dream25:"ถ้ำแห่งความฝันชั้น 25",at_dream25:"นักเดินทางแห่งความฝัน",
   jobs:"อาชีพ",jobNeed:"ถึงเลเวล 10 แล้วมาหาพ่อมดที่ตีนเขาเพื่อเลือกอาชีพนะ",jobPick:"เลือกอาชีพ",jobNow:"อาชีพตอนนี้",jp:"แต้มอาชีพ",learn:"เรียน",learned:"เรียนแล้ว",slot:"ใส่ช่อง",slotTip:"ใส่ท่าได้ 2 ช่อง ใช้ท่าจากอาชีพอื่นที่เคยเรียนได้ด้วย (แบบ FF Tactics)",passive:"ติดตัว",noJp:"แต้มอาชีพไม่พอ ปัดฝุ่นให้มอนเพื่อเก็บแต้ม",jobSet:"เปลี่ยนอาชีพเป็น",j_sword:"นักดาบ",j_archer:"นักธนู",j_mage:"นักเวท",j_hunter:"นักล่าสมบัติ",jp_sword:"เลือดสูงสุด +10%",jp_archer:"คริติคอล +5%",jp_mage:"ท่าพิเศษเร็วขึ้น 10%",jp_hunter:"เฉียบ +3 · ของดรอปดีขึ้น",k_bash:"ฟันแรง",k_guard:"ตั้งการ์ด",k_provoke:"ยั่วยุ (ดึงมอนมาหาตัว)",k_shower:"ฝนลูกธนู",k_evade:"ก้าวหลบ",k_hawk:"ตาเหยี่ยว",k_fire:"ลูกไฟ",k_ice:"น้ำแข็ง",k_bolt:"สายฟ้าโซ่",k_steal:"หยิบของ",k_dig2:"ขุดเก่ง",k_dash:"วิ่งเร็ว",kd_bash:"ตีแรง ×2.2 ตัวเดียว",kd_guard:"รับดาเมจน้อยลง 40% 5 วิ",kd_provoke:"มอนรอบตัวหันมาตีเรา 6 วิ ปกป้องน้อง ๆ",kd_shower:"ธนูตกเป็นวง ×1.3 ทุกตัว",kd_evade:"หลบ +30% 5 วิ",kd_hawk:"ติดตัว: ธนูยิงไกลขึ้น คริ +5%",kd_fire:"ไฟระเบิดเป็นวง ×1.8",kd_ice:"แช่แข็ง 2 วิ ×1.2",kd_bolt:"สายฟ้ากระโดด 3 ตัว ×1.4",kd_steal:"สุ่มของดรอปเพิ่มจากมอนตัวนั้น",kd_dig2:"ติดตัว: ขุดได้ของ 2 เท่า",kd_dash:"เดินเร็ว +30% 6 วิ",an_job:"มีอาชีพแล้ว",ad_job:"เลือกอาชีพแรก",at_job:"",an_skill8:"ปรมาจารย์หลายอาชีพ",ad_skill8:"เรียนท่า 8 ท่า",at_skill8:"ปรมาจารย์หลายอาชีพ",
   parent:"👨‍👩‍👧 ผู้ปกครอง",gate:"สำหรับผู้ปกครอง: ตอบโจทย์นี้",gateBad:"ยังไม่ถูก ลองใหม่นะ",report:"รายงานของ",today:"วันนี้",min:"นาที",last7:"7 วันล่าสุด",accuracy:"ตอบถูกครั้งแรก",answered:"ตอบแล้ว",limit:"จำกัดเวลาเล่นต่อวัน",off:"ไม่จำกัด",limitSoon:"อีก 5 นาทีจะครบเวลาเล่นวันนี้นะ",limitDone:"วันนี้เล่นครบเวลาแล้ว พักสายตากันนะ 👀 พรุ่งนี้มาเล่นต่อ",limitParent:"ผู้ปกครองให้เล่นต่อ",eco:"ประหยัดแบต",ecoTip:"ภาพ 30 เฟรม เอฟเฟกต์น้อยลง เหมาะกับมือถือรุ่นเก่า",noData:"ยังไม่มีข้อมูล",
   autoLite:'⚡ เครื่องนี้ช้าหน่อย เปิดโหมดลื่นให้อัตโนมัติแล้ว',rainDay:'🌧️ วันนี้ฝนตก ผักในสวนได้น้ำแล้ว ปลาบางชนิดชอบฝนนะ',review:'ทบทวน',toReview:'ข้อที่รอทบทวน',subjects:'วิชาที่ให้ถาม',
@@ -175,7 +175,7 @@ const TX={th:{bag:'กระเป๋า',map:'แผนที่',set:'ตั�
   kidCrystal:"คริสตัลนี้ตอบสนองกับผู้พิทักษ์ตัวน้อยเท่านั้น",bossCalmed:"แสงจากคริสตัลทำให้ผู้พิทักษ์สงบลงแล้ว!",goalKidBoss:"ปลุกคริสตัลรอบผู้พิทักษ์",
   forestN:"ป่าเห็ดเรืองแสง",desertN:"ทะเลทรายพีระมิด",ulakeN:"ทะเลสาบใต้ดิน",skyN:"ปราสาทลอยฟ้า",caveN:"ถ้ำคริสตัล",dreamN:"ถ้ำแห่งความฝัน · ลงได้ไม่สิ้นสุด",
   installT:"ติดตั้งเกม",installed:"ติดตั้งเกมแล้ว เปิดจากไอคอนบนหน้าจอได้เลย",installOk:"ติดตั้งแล้ว! ไอคอนตะเกียงอยู่บนหน้าจอ",installIOS:"iPhone / iPad: กดปุ่ม <b>แชร์</b> (สี่เหลี่ยมมีลูกศรขึ้น) ด้านล่างของ Safari → เลือก <b>เพิ่มไปยังหน้าจอโฮม</b> → กด <b>เพิ่ม</b>",installOther:"Chrome: กดเมนู <b>⋮</b> มุมขวาบน → <b>ติดตั้งแอป</b> หรือ <b>เพิ่มลงในหน้าจอหลัก</b>",updated:"อัปเดตเกมเป็นรุ่นล่าสุดแล้ว",
-  tapStart:"แตะเพื่อเริ่ม",titleSub:"เมืองพาเพลิน · เรียนรู้ ผจญภัย แบ่งแสงให้กัน",
+  tapStart:"แตะเพื่อเริ่ม",titleSub:"หมู่บ้านพาเพลิน · เรียนรู้ ผจญภัย แบ่งแสงให้กัน",
   trName:"หอฝึกแห่งแสง",tr1:"ตอบคำถามปลุกคริสตัลฝึก 3 เม็ด",tr1s:"คริสตัล",tr2:"เหยียบแผ่นแสงทั้ง 2 แผ่นให้สว่างพร้อมกัน (แต่ละแผ่นสว่าง 12 วินาที)",tr2s:"แผ่นแสง",tr3:"ปกป้องตะเกียงใหญ่ 40 วินาที! ยืนข้างตะเกียงแล้วกดปุ่มตีเพื่อส่องแสง",tr3s:"ปกป้องตะเกียง",trFail:"ตะเกียงดับ ลองใหม่อีกครั้งนะ!",trWin:"ผ่านหอฝึกแล้ว!",trBest:"สถิติใหม่!",trFirst:"รางวัลครั้งแรกของวัน ×2",trAgain:"ผ่านแล้ว! กลับทางบันไดหรือเล่นอีกรอบพรุ่งนี้ได้รางวัล ×2",
   trial:"หอฝึกแห่งแสง",trSub:"Lantern Academy · เควสครอบครัว",
   lev_forest:"หิ่งห้อยออกมาเล่น! เดินไปเก็บให้ครบ",lev_desert:"ด้วงทองวิ่งหนี! ไล่จับให้ได้",lev_ulake:"ปลาเรืองแสงกระโดด! เดินไปรับตอนมันกระโดด",lev_sky:"ลูกโป่งเมฆลอยมา! เดินไปแตะให้ครบ",levWin:"เก็บครบ!",levEnd:"หมดเวลา",
@@ -1642,7 +1642,7 @@ Object.assign(SCENES,{L3in:[['leah','s3a'],['peb','s3b']],L3boss:[['mushking','s
   ending:[['peb','e1'],['leah','e2'],['guardian','e3'],['leah','e4']]});
 {const _sl=showLine;showLine=function(){const [who]=DLG.lines[DLG.i];if(LAND_BOSS[who]){DLG.lines[DLG.i]=DLG.lines[DLG.i];const r=_sl.apply(this,arguments);const c=$('dlgP'),g=c.getContext('2d');const a=MON_ART.golem1&&MON_ART.golem1[0];if(a){g.clearRect(0,0,64,64);const th=THEME[{mushking:'forest',sphinx:'desert',turtle:'ulake',mist:'sky'}[who]];if(th&&th.tint)g.filter=th.tint;g.drawImage(a,4,6,56,56);g.filter='none'}return r}return _sl.apply(this,arguments)}}
 function chap(){return S?(S.chap||(S.boss?3:1)):1}
-function setChap(n){if(!S)return;S.chap=Math.max(chap(),n);TX.th.town='เมืองพาเพลิน · บทที่ '+Math.min(6,S.chap);TX.en.town='Paphloen Town · Chapter '+Math.min(6,S.chap);save()}
+function setChap(n){if(!S)return;S.chap=Math.max(chap(),n);TX.th.town='หมู่บ้านพาเพลิน · บทที่ '+Math.min(6,S.chap);TX.en.town='Paphloen Town · Chapter '+Math.min(6,S.chap);save()}
 {const _bw=bossWin;bossWin=function(){const r=_bw.apply(this,arguments);setChap(3);setTimeout(()=>{try{celebrate()}catch(e){}},1700);setTimeout(()=>say('🌀 '+t('landOpen')+' '+t('forest1')),9000);return r}}
 // entering land floors: scenes; lake's coral cave opens at chapter 5
 {const _gm3=goMap;goMap=function(){const r=_gm3.apply(this,arguments);try{if(S)setChap(chap());if(S&&M&&/^cave[123]$/.test(M.id)&&chap()<2)setChap(2);if(M&&M.id==='lake'){const e=M.exits.find(x=>x.id==='cave');if(e&&chap()>=5){e.locked=0;e.to='ulake1';e.toExit='up';e.label='ulake1'}}
@@ -2598,7 +2598,7 @@ for(const [id,S0] of Object.entries(SCN))MAPS[id]=function(){const m=newMap(id,'
 
 // ================= 0.66 capital scene A (painted 48x32, collision traced from the picture): map-capital-a.jpg =================
 // Missing picture -> the old greybox capital (nothing changes). Exits keep the same ids (n/e/s/w) so farm and the 3 test scenes still connect.
-try{TX.th.capA='เมืองพาเพลิน · ลานน้ำพุ';TX.en&&(TX.en.capA='Paphloen · Fountain Square')}catch(e){}
+try{TX.th.capA='หมู่บ้านพาเพลิน · ลานน้ำพุ';TX.en&&(TX.en.capA='Paphloen · Fountain Square')}catch(e){}
 const CAPA={solid:["111111111111111111111110000111111111111111111111", "111111111111111111111110000111111111111111111111", "111111111111111111111110000111111111111111111111", "111111111111111111111110000111111111111111111111", "111111111111111111111110000111111111111111111111", "111111111111111111111110000000011111111111111111", "111111111111111111111110000000011111111111111111", "111111111111111111111110000001111111111111111111", "111111111111111111111110000000011111111111111111", "111111111111111111111110000000011111111111111111", "111111111111111111111110000000011111111111111111", "000000011110000000000000000000000000000111111111", "000000011110000000000000000000000000000000000000", "000000000000000000000000001110000000000000000000", "000000000000000000000000001110000000000000000000", "000000000000000000000000000000000000000000000000", "000000011110000000000000000000000000000000000000", "100011111110000000000100000000000000000000000001", "100011111110000000000000000000000000111111111111", "111111111110000000000000000000000011111111111111", "111111111110001110000000000001111100111111111111", "111111111110001110000010000001111100111111111111", "111111111110000000000000000001111100111111111111", "000000000000000000000000000000000000000000000000", "000000000000000000000000000000000000000000000000", "000000000000000000000000000000000000000000000000", "000000011110000000000000000000000000000000000000", "111111111111111111111111000111111111111111111111", "111111111111111111111111000111111111111111111111", "111111111111111111111111000111111111111111111111", "111111111111111111111111000111111111111111111111", "111111111111111111111111000111111111111111111111"],spawn:[27.5,17.5],board:[31,16],leah:[23,15],fountain:[877,492],
   trees:[[517,575,128,105,712,52],[688,530,40,42,575,14],[725,655,56,52,712,18],[1090,583,48,45,630,16],[945,185,52,52,240,16]]};
 {const f=new Image();f.onload=()=>{const W=150,c=document.createElement('canvas');c.width=W;c.height=Math.round(f.height*W/f.width);const g=c.getContext('2d');g.imageSmoothingQuality='high';g.drawImage(f,0,0,c.width,c.height);IMG.fountCapA=c;try{delete CACHE.capital}catch(e){}};f.onerror=()=>{};f.src=(window.EMBED_ASSETS&&window.EMBED_ASSETS['obj-fountain-capa.png'])||'obj-fountain-capa.png'}
@@ -2943,7 +2943,7 @@ function buildRecipe(id){const R=MAP_RECIPES[id];SEED=R.seed;const r=seeded(R.se
   for(const [id,[wx,wy]] of Object.entries(R.warps)){const s=src&&src.exits.find(e=>e.id===id);if(!s)continue;m.exits.push({id,x:Math.min(R.w*T-10,Math.max(10,wx*T)),y:Math.min(R.h*T-10,Math.max(10,wy*T)),to:s.to,toExit:s.toExit,label:s.label})}
   m.spawnDefault=[R.spawn[0]*T,R.spawn[1]*T];m.kitStats={objs:m.objs.length,bytesRecipe:JSON.stringify(R).length};return m}
 MAPS.town2=function(){return buildRecipe('town2')};
-try{TX.th.townPilot='เมืองพาเพลิน · ลานน้ำพุ (แบบชิ้นส่วน)';if(TX.en)TX.en.townPilot='Paplern Town · Fountain Square (kit)'}catch(e){}
+try{TX.th.townPilot='หมู่บ้านพาเพลิน · ลานน้ำพุ (แบบชิ้นส่วน)';if(TX.en)TX.en.townPilot='Paplern Village · Fountain Square (kit)'}catch(e){}
 // arriving through an edge exit: step a little inside so the exit does not fire again
 {const _gmR=goMap;goMap=function(id,exitId){const r=_gmR.apply(this,arguments);try{if(M&&M.recipe&&exitId){const e=M.exits.find(x=>x.id===exitId);if(e){const R=MAP_RECIPES[M.recipe],cx=R.w*T/2,cy=R.h*T/2;P.x=e.x+(cx-e.x)*(e.id==='n'||e.id==='s'?0:.12);P.y=e.y+(cy-e.y)*(e.id==='n'||e.id==='s'?.16:0);if(e.id==='w')P.x=e.x+3*T;if(e.id==='e')P.x=e.x-3*T;if(e.id==='n')P.y=e.y+3*T;if(e.id==='s')P.y=e.y-3*T;P.path=null;exitCool=Math.max(exitCool||0,.8)}}}catch(e){}return r}}
 // open the pilot with ?town2
@@ -3221,10 +3221,10 @@ function kitValidate(m=M){const sx=m.spawnDefault[0],sy=m.spawnDefault[1],res={d
 window.kitValidate=kitValidate;
 
 // ================= 0.96 ONE WORLD: the old village and the new town are joined by road =================
-// village (old fountain plaza) south gate  <->  Paplern Town (painted capital) south road. Players can now walk into the new world
+// village (old fountain plaza) south gate  <->  Paplern Village (painted capital) south road. Players can now walk into the new world
 // (letters, stamp book, royal plaza, amethyst cave, hunting floor) and the game remembers where they were.
-try{TX.th.plaza='หมู่บ้านพาเพลิน';TX.th.goalHome='🎯 ไปถ้ำคริสตัล: กลับหมู่บ้านพาเพลินแล้วขึ้นเหนือ';TX.th.toTown='ทางไปเมืองพาเพลิน';
-  if(TX.en){TX.en.plaza='Paplern Village';TX.en.toTown='Road to Paplern Town'}}catch(e){}
+try{TX.th.plaza='หมู่บ้านพาเพลิน';TX.th.goalHome='🎯 ไปถ้ำคริสตัล: กลับหมู่บ้านพาเพลินแล้วขึ้นเหนือ';TX.th.toTown='ทางไปหมู่บ้านพาเพลิน';
+  if(TX.en){TX.en.plaza='Paplern Village';TX.en.toTown='Road to Paplern Village'}}catch(e){}
 {const _pl=MAPS.plaza;MAPS.plaza=function(){const m=_pl.apply(this,arguments);try{const e=m.exits.find(x=>x.id==='s');if(e){delete e.locked;e.to='capital';e.toExit='s';e.label='capA'}}catch(e){}return m}}
 {const _cp=MAPS.capital;MAPS.capital=function(){const m=_cp.apply(this,arguments);try{const e=m.exits.find(x=>x.id==='s');if(e){e.to='plaza';e.toExit='s';e.label='plaza';delete e.locked}}catch(e){}return m}}
 try{delete CACHE.plaza;delete CACHE.capital}catch(e){}
@@ -3233,14 +3233,14 @@ try{delete CACHE.plaza;delete CACHE.capital}catch(e){}
   const r=_sgW.apply(this,arguments);try{if(keep&&M&&M.id!=='capital'&&!/[?#&](royal|town2|capital|farm)\b/.test(location.search+location.hash)){goMap('capital');if(!blockedAt(M,keep.x,keep.y)){P.x=keep.x;P.y=keep.y}}}catch(e){}return r}}
 
 // first visit to the village after the road opened: tell the child where the new town is (once)
-try{TX.th.roadOpen='🛤️ ถนนทางใต้ของหมู่บ้านเปิดแล้ว! เดินลงใต้ไปเมืองพาเพลิน มีจดหมายรอส่งที่ไปรษณีย์';if(TX.en)TX.en.roadOpen='🛤️ The south road is open! Walk south to Paplern Town, letters are waiting at the post office'}catch(e){}
+try{TX.th.roadOpen='🛤️ ถนนทางใต้ของหมู่บ้านเปิดแล้ว! เดินลงใต้ไปหมู่บ้านพาเพลิน มีจดหมายรอส่งที่ไปรษณีย์';if(TX.en)TX.en.roadOpen='🛤️ The south road is open! Walk south to Paplern Village, letters are waiting at the post office'}catch(e){}
 {const _gmR2=goMap;goMap=function(id){const r=_gmR2.apply(this,arguments);try{if(S&&M&&M.id==='plaza'&&!S.seenTownRoad){
    // brand-new players are in the middle of the intro and the first tips: tell them later, when they come back to the village; old players hear it once, when the screen is quiet
    if(!(S.seen&&S.seen.intro)){S.seenTownRoad=0}else{S.seenTownRoad=1;save();let tries=0;const tell=()=>{if(++tries>20)return;const busy=PAUSE||DLG||document.querySelector('#modal:not(.hide)')||(document.getElementById('scene')&&!document.getElementById('scene').classList.contains('hide'));if(busy||!M||M.id!=='plaza'){setTimeout(tell,1500);return}say(t('roadOpen'));msgT=7};setTimeout(tell,6000)}}}catch(e){}return r}}
 
-// ================= 0.97 light stones in the new world: Paplern Town and the Amethyst Cave mouth =================
+// ================= 0.97 light stones in the new world: Paplern Village and the Amethyst Cave mouth =================
 // A light stone wakes when you walk past it, becomes a warp point in the 🗺️ menu and the place you get up again after fainting.
-try{TX.th.capital='เมืองพาเพลิน';TX.th.cavemouth='ปากถ้ำอเมทิสต์';if(TX.en){TX.en.capital='Paplern Town';TX.en.cavemouth='Amethyst Cave mouth'}}catch(e){}
+try{TX.th.capital='หมู่บ้านพาเพลิน';TX.th.cavemouth='ปากถ้ำอเมทิสต์';if(TX.en){TX.en.capital='Paplern Village';TX.en.cavemouth='Amethyst Cave mouth'}}catch(e){}
 function stoneSpot(m,tx,ty){const K=key,free=(x,y)=>{for(let j=-1;j<=1;j++)for(let i=-1;i<=1;i++)if(m.SOLID.has(K(x+i,y+j)))return false;return true},farExit=(x,y)=>m.exits.every(e=>Math.hypot(e.x/T-x,e.y/T-y)>5);
   let best=null;for(let y=1;y<m.h-1;y++)for(let x=1;x<m.w-1;x++){if(!free(x,y)||!farExit(x,y))continue;const d=Math.hypot(x-tx,y-ty);if(!best||d<best[0])best=[d,x,y]}return best?[best[1],best[2]]:null}
 for(const [id,want] of [['capital',[31.5,19.5]],['cavemouth',[24,24]]]){const _bm=MAPS[id];MAPS[id]=function(){const m=_bm.apply(this,arguments);try{if((id==='capital'&&m.capA)||(id==='cavemouth'&&m.cavemouth)){if(!m.stones.some(s=>s.id===id)){const p=stoneSpot(m,want[0],want[1]);if(p)addStone(m,id,p[0],p[1])}}}catch(e){}return m}}
@@ -3274,14 +3274,14 @@ mailShow=function(){const mb=mailToday();modal('<h2>'+t('mailGet')+'</h2><div st
 kitLoad('town');
 {const _wl=wangLayer;wangLayer=function(g,im,...rest){if(im===IMG.water&&M&&M.kitMap&&IMG['kitWater:'+M.kitMap])im=IMG['kitWater:'+M.kitMap];return _wl.call(this,g,im,...rest)}}
 
-// ================= 1.02 WORLD v2: one world built around Paplern Town; the old tile world is taken out of play =================
+// ================= 1.02 WORLD v2: one world built around Paplern Village; the old tile world is taken out of play =================
 // Kept (code stays, can be reused): NPCs, shop, the player's home and furniture, daily board, crystals and quiz, cards, pets, fishing.
 // Taken out of play: the old village, foothill, home street, market, lake, beach, falls, old crystal caves 1-3, dream gate, warp lands, grey test scenes.
 // Test links (?oldworld) still open the old maps for development.
 const OLD_WORLD=id=>['plaza','mountain','home','market','lake','cave1','cave2','cave3','beach','falls','trial','scn_north','scn_south','scn_east'].includes(id)||/^(dream|forest|desert|ulake|sky)\d*$/.test(id||'');
 const OLD_OK=()=>/[?&]oldworld\b/.test(location.search);
 try{Object.assign(TX.th,{building:'ทางนี้กำลังสร้าง (เร็ว ๆ นี้)',ourHome:'บ้านของเรา'});if(TX.en)Object.assign(TX.en,{building:'This way is being built (coming soon)',ourHome:'Our home'})}catch(e){}
-// every way into the old world now lands in Paplern Town (old saves, fainting at an old light stone, warps)
+// every way into the old world now lands in Paplern Village (old saves, fainting at an old light stone, warps)
 {const _gmW=goMap;goMap=function(id,...rest){try{if(OLD_WORLD(id)&&!OLD_OK()){return _gmW.call(this,'capital')}}catch(e){}return _gmW.call(this,id,...rest)}}
 // the town: south road and the way down from the hunting floor are closed until the new places exist; our home door; the family moves in
 {const _cpV=MAPS.capital;MAPS.capital=function(){const m=_cpV.apply(this,arguments);try{if(!m.capA)return m;
@@ -3299,4 +3299,95 @@ try{delete MAIL_TO.house_e2}catch(e){}
 // the 🗺️ warp menu lists only places of the new world
 {const _owV=openWarp;openWarp=function(){const r=_owV.apply(this,arguments);try{if(OLD_OK())return r;document.querySelectorAll('#mBody [data-id]').forEach(b=>{if(OLD_WORLD(b.dataset.id))b.remove()});document.querySelectorAll('#mBody [data-land]').forEach(b=>b.remove())}catch(e){}return r}}
 try{for(const k of Object.keys(CACHE))delete CACHE[k]}catch(e){}
+
+// ================= 1.03 PHASE 1 · Paplern Village + its crystal + safety net =================
+// The town map becomes Paplern Village (STORY v2.7). Its heart is the village crystal (CRYSTAL_BIBLE 1.3), the north path climbs the hill to the cave,
+// the other roads are closed with story reasons. Saves are backed up automatically; an error never freezes the game.
+try{Object.assign(TX.th,{capA:'หมู่บ้านพาเพลิน',capital:'หมู่บ้านพาเพลิน',toCave:'ทางขึ้นเนินไปถ้ำ',goalTown:'🎯 ไปถ้ำคริสตัล: เดินขึ้นเนินทางเหนือ',lockN:'สะพานไปเมืองหลวงกำลังซ่อมอยู่นะ',lockW:'ทางไปบ้านและฟาร์มกำลังทำรั้วอยู่ เร็ว ๆ นี้',lockE:'ทางไปหมู่บ้านเห็ดหมอกยังหนาอยู่ เร็ว ๆ นี้',lockS:'สะพานข้ามไปป่ากำลังซ่อม เร็ว ๆ นี้',errSoft:'มีอะไรสะดุดนิดหน่อย เกมบันทึกให้แล้ว เล่นต่อได้เลยนะ',restored:'กู้เซฟจากชุดสำรองให้แล้ว',errMany:'เกมสะดุดหลายครั้ง แตะเพื่อรีเฟรช (เซฟอยู่ครบ)'});
+  if(TX.en)Object.assign(TX.en,{capA:'Paplern Village',capital:'Paplern Village',toCave:'Hill path to the cave',goalTown:'🎯 To the Crystal Cave: walk up the hill to the north',lockN:'The bridge to the capital is being repaired',lockW:'The fence to our home and farm is being built, soon',lockE:'The mist on the way to the mushroom village is still thick, soon',lockS:'The bridge to the forest is being repaired, soon',errSoft:'Something hiccuped, your game is saved, keep playing',restored:'Your save was restored from a backup',errMany:'The game hiccuped several times, tap to refresh (your save is safe)'})}catch(e){}
+// 1) the village crystal replaces the fountain (fountain stays if the picture is missing)
+{const cr=new Image();cr.onload=()=>{IMG.crystalVillage=cr;try{delete CACHE.capital}catch(e){}};cr.onerror=()=>{};cr.src='crystal-paplern.png'}
+{const _cpC=MAPS.capital;MAPS.capital=function(){const m=_cpC.apply(this,arguments);try{if(!m.capA)return m;
+  if(IMG.crystalVillage){const I=IMG.crystalVillage,o=m.objs.find(o=>o.img==='fountCapA');const fx=o?o.x:CAPA.fountain[0],fy=o?o.y:CAPA.fountain[1];
+    if(o)m.objs.splice(m.objs.indexOf(o),1);m.objs.push({img:'crystalVillage',sx:0,sy:0,sw:I.width,sh:I.height,x:fx,y:fy+6,tall:1,cs:.5,capFade:1,crystal:1});m.crystalAt=[fx,fy-I.height*.45]}
+  for(const e of m.exits){
+    if(e.id==='n'){e.to='cavemouth';e.toExit='s';e.label='toCave';delete e.locked}
+    if(e.id==='w'){e.locked=1;e.msg='lockW'}if(e.id==='e'){e.locked=1;e.msg='lockE'}if(e.id==='s'){e.locked=1;e.msg='lockS'}}
+ }catch(e){}return m}}
+{const _cmC=MAPS.cavemouth;if(_cmC)MAPS.cavemouth=function(){const m=_cmC.apply(this,arguments);try{for(const e of m.exits)if(e.id==='s'){e.to='capital';e.toExit='n'}}catch(e){}return m}}
+{const _ueL=useExit;useExit=function(e){if(e&&e.locked&&e.msg){say(t(e.msg));return}return _ueL.apply(this,arguments)}}
+try{delete CACHE.capital;delete CACHE.cavemouth}catch(e){}
+// crystal light: lilac core glow that breathes, star sparkles rising (CRYSTAL_BIBLE 2) · brightness 0..4 (stages come with the shard system in 1.04)
+const CRYSTAL_GLOW='200,160,255';
+{const _rC=render;render=function(tm){const r=_rC.apply(this,arguments);try{if(!M||!M.crystalAt||!S)return r;const [wx,wy]=M.crystalAt,X=(wx-camX)*SC,Y=(wy-camY)*SC,t2=(tm||0)/1000;
+  if(X<-300||Y<-300||X>VW*SC+300||Y>VH*SC+300)return r;const stage=Math.max(1,Math.min(4,S.villageCrystal||1)),k=.45+.14*stage,pulse=.85+.15*Math.sin(t2*2.1);
+  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalCompositeOperation='lighter';const R=110*SC*(.8+.1*stage),g=ctx.createRadialGradient(X,Y,0,X,Y,R);
+  g.addColorStop(0,`rgba(${CRYSTAL_GLOW},${(.42*k*pulse).toFixed(3)})`);g.addColorStop(.45,`rgba(${CRYSTAL_GLOW},${(.16*k*pulse).toFixed(3)})`);g.addColorStop(1,`rgba(${CRYSTAL_GLOW},0)`);ctx.fillStyle=g;ctx.fillRect(X-R,Y-R,2*R,2*R);
+  if(!LITE)for(let i=0;i<6+stage*3;i++){const ph=(t2*.35+i*.173)%1,sx=X+Math.sin(i*2.4+t2*.7)*40*SC,sy=Y+40*SC-ph*150*SC,a=Math.sin(ph*Math.PI)*.9,s2=(2+(i%3))*SC;
+    ctx.fillStyle=`rgba(255,245,255,${a.toFixed(3)})`;ctx.fillRect(sx-s2/2,sy-s2*1.6,s2,s2*3.2);ctx.fillRect(sx-s2*1.6,sy-s2/2,s2*3.2,s2)}
+  ctx.restore()}catch(e){}return r}}
+// 2) automatic save backups: 3 rotating copies, the newest every 2 minutes of play and on every map change; broken main save -> newest good backup
+const BAK=['leahpp2d-bak0','leahpp2d-bak1','leahpp2d-bak2'];
+function backupNow(){try{const raw=localStorage.getItem(Store.key);if(!raw)return;const d=JSON.parse(raw);if(!d||!d.slots||!d.slots.length)return;
+  const slots=BAK.map(k=>{try{return JSON.parse(localStorage.getItem(k)||'null')}catch(e){return null}});let oldest=0,ot=Infinity;slots.forEach((b,i)=>{const tt=b?b.t:0;if(tt<ot){ot=tt;oldest=i}});
+  localStorage.setItem(BAK[oldest],JSON.stringify({t:Date.now(),raw}))}catch(e){}}
+{const _all=Store.all.bind(Store);Store.all=function(){let ok=false;try{const raw=localStorage.getItem(this.key);if(raw===null)ok=true;else{const d=JSON.parse(raw);ok=!!(d&&Array.isArray(d.slots))}}catch(e){ok=false}
+  if(!ok){try{const best=BAK.map(k=>{try{return JSON.parse(localStorage.getItem(k)||'null')}catch(e){return null}}).filter(b=>b&&b.raw).sort((a,b)=>b.t-a.t)[0];
+     if(best){localStorage.setItem(this.key,best.raw);window._restoredSave=1}}catch(e){}}
+  return _all()}}
+setInterval(()=>{if(S&&!document.hidden)backupNow()},120000);
+{const _gmB=goMap;goMap=function(){const r=_gmB.apply(this,arguments);try{backupNow();if(window._restoredSave&&S){window._restoredSave=0;setTimeout(()=>say(t('restored')),1500)}}catch(e){}return r}}
+// 3) error guard: the loop already keeps running; tell the player kindly once, save, keep the last errors for a report; many errors -> offer a refresh
+{let errs=[],told=0;const onErr=(msg)=>{try{const now=Date.now();errs=errs.filter(x=>now-x<20000);errs.push(now);
+  const log=JSON.parse(localStorage.getItem('la-errors')||'[]');log.push({t:new Date().toISOString(),v:VERSION,m:String(msg).slice(0,200),map:(M&&M.id)||''});localStorage.setItem('la-errors',JSON.stringify(log.slice(-20)));
+  if(S)try{save()}catch(e){}
+  if(!told&&S){told=1;say(t('errSoft'))}
+  if(errs.length>=8&&!document.getElementById('errRefresh')){const b=document.createElement('button');b.id='errRefresh';b.textContent=t('errMany');b.style.cssText='position:fixed;left:50%;top:12px;transform:translateX(-50%);z-index:99;padding:10px 16px;border-radius:12px;border:2px solid #e8c46a;background:#2a1d3a;color:#fff;font-size:15px';b.onclick=()=>location.reload();document.body.appendChild(b)}}catch(e){}};
+ window.addEventListener('error',e=>onErr(e.message||e));window.addEventListener('unhandledrejection',e=>onErr((e.reason&&e.reason.message)||e.reason||'promise'))}
+
+// ================= 1.04 LANTERN LIGHT (STORY 1c + rules 7–8, PHASE1_PLAN 3c) =================
+// Children (age < 12) carry the apprentice lantern: monsters cannot see them. Its crystal light fades while they walk in dark places,
+// the village mage refills it to full, crystal energy converters on the way refill part of it and then rest (cooldown, per player).
+// Empty lantern: walk back by itself for 5 s -> the screen fades -> wake up beside the mage with a full lantern. Nothing is lost.
+const LKID=()=>!!(S&&S.age<12);
+const LAMP_CFG=age=>age<=7?{tiles:500,conv:.5,warn:.30}:age<=9?{tiles:400,conv:.4,warn:.25}:{tiles:320,conv:.35,warn:.20};
+const DARK=()=>!!(M&&(M.kind==='cave'||M.cavemouth||M.huntFloor||/^cave|^hunt/.test(M.id||'')));
+const CONV_CD=180000;   // 3 minutes, per converter, per player (kept in this player's save only)
+const CONVERTERS={cavemouth:[[24,22]],hunt1:[[24,52],[62,30]]};   // wished tile positions; snapped to the nearest open floor of the real map
+function convList(){if(!M)return [];if(M._convL)return M._convL;const want=CONVERTERS[M.id]||[];M._convL=want.map(([x,y])=>{for(let r=0;r<8;r++)for(let dy=-r;dy<=r;dy++)for(let dx=-r;dx<=r;dx++){const a=x+dx,b=y+dy;if(Math.max(Math.abs(dx),Math.abs(dy))!==r)continue;if(a>1&&b>1&&a<M.w-2&&b<M.h-2&&!M.SOLID.has(key(a,b))&&!M.SOLID.has(key(a,b-1)))return [a,b]}return [x,y]});return M._convL}
+try{Object.assign(TX.th,{lampLow:'แสงในตะเกียงเหลือน้อยแล้ว แวะเติมที่เครื่องแปลงพลังงานหรือกลับไปหาจอมเวทนะ',lampOut:'แสงหมดแล้ว… ลูมินพาหนูกลับมานะ พร้อมเมื่อไหร่ค่อยไปต่อ',lampFull:'จอมเวทลูมินเติมตะเกียงให้เต็มแล้ว ✨',convGot:'เติมแสงจากเครื่องแปลงพลังงานแล้ว',convRest:'เครื่องกำลังพักดึงพลัง อีกสักครู่นะ',lampTip:'ครั้งหน้าลองแวะเติมที่เครื่องแปลงพลังงานระหว่างทางนะ'});
+  if(TX.en)Object.assign(TX.en,{lampLow:'Your lantern is getting low. Refill at an energy converter or go back to the mage',lampOut:'Your light ran out… Lumin brought you back. Go on whenever you are ready',lampFull:'Mage Lumin filled your lantern ✨',convGot:'Lantern refilled from the energy converter',convRest:'The converter is resting, try again soon',lampTip:'Next time, stop at an energy converter on the way'})}catch(e){}
+// HUD: a lantern bar for children
+(function(){try{const b=document.createElement('div');b.id='lampBar';b.style.cssText='position:fixed;left:calc(14px + env(safe-area-inset-left,0px));top:calc(118px + env(safe-area-inset-top,0px));z-index:6;display:none;align-items:center;gap:6px;padding:4px 8px;border-radius:10px;background:rgba(30,20,45,.82);border:2px solid #c9a46a;font-size:13px;color:#fff';
+  b.innerHTML='<span>🏮</span><span style="width:110px;height:10px;border-radius:6px;background:#3a2e4f;overflow:hidden;display:inline-block"><i id="lampFill" style="display:block;height:100%;width:100%;background:linear-gradient(90deg,#b98cff,#e8d2ff)"></i></span>';document.body.appendChild(b)}catch(e){}})();
+function lampHud(){const b=document.getElementById('lampBar');if(!b)return;const on=LKID()&&!!M;b.style.display=on?'flex':'none';if(!on)return;const v=Math.max(0,Math.min(1,S.lamp??1)),f=document.getElementById('lampFill');
+  f.style.width=(v*100).toFixed(1)+'%';const warn=v<=LAMP_CFG(S.age).warn;f.style.opacity=warn?(.55+.45*Math.abs(Math.sin(performance.now()/260))):1}
+let lampOut=null,lampLastX=null,lampLastY=null;
+{const _upL=update;update=function(dt){const r=_upL.apply(this,arguments);try{if(!S||!M){return r}
+   if(S.lamp===undefined)S.lamp=1;
+   if(LKID()){
+     const cfg=LAMP_CFG(S.age);
+     if(lampOut){lampOut.t+=dt;PAUSE=false;if(lampOut.t<5){if(!P.path||!P.path.length){const back=M.exits.find(e=>e.id==='s')||M.exits[0];if(back){const pth=findPath(M,P.x,P.y,back.x,back.y-20);if(pth)P.path=pth}}}
+       else if(!lampOut.faded){lampOut.faded=1;fadeEl.style.transition='opacity 1.5s';fadeEl.style.opacity=1;setTimeout(()=>{goMap('capital');const c=M.crystalAt;if(c){P.x=c[0]+40;P.y=c[1]+150}P.path=null;S.lamp=1;save();
+          fadeEl.style.opacity=0;setTimeout(()=>{fadeEl.style.transition=''},1600);say(t('lampOut'));msgT=6;if(!S.lampTipShown){S.lampTipShown=1;setTimeout(()=>{say(t('lampTip'));msgT=6},6500)}lampOut=null},1600)}}
+     else if(DARK()){if(lampLastX!==null){const d=Math.hypot(P.x-lampLastX,P.y-lampLastY);if(d>0&&d<64){const before=S.lamp;S.lamp=Math.max(0,S.lamp-d/T/cfg.tiles);
+           if(before>cfg.warn&&S.lamp<=cfg.warn){say(t('lampLow'));msgT=5}
+           if(S.lamp<=0&&!lampOut){lampOut={t:0};P.path=null}}}}
+     // the village mage at the crystal fills the lantern
+     if(M.crystalAt&&S.lamp<1){const [cx,cy]=M.crystalAt;if(Math.hypot(P.x-cx,P.y-(cy+120))<170){S.lamp=1;say(t('lampFull'));save()}}
+     // energy converters on this map
+     const list=convList();S.conv=S.conv||{};list.forEach(([tx,ty],i)=>{const k=M.id+':'+i,x=tx*T+16,y=ty*T+16;if(Math.hypot(P.x-x,P.y-y)<44){const ready=(S.conv[k]||0)<=Date.now();
+        if(ready&&S.lamp<.98){S.lamp=Math.min(1,S.lamp+cfg.conv);S.conv[k]=Date.now()+CONV_CD;say(t('convGot'));save()}else if(!ready&&!M._convSaid){M._convSaid=1;say(t('convRest'));setTimeout(()=>{if(M)M._convSaid=0},4000)}}});
+   }
+   lampLastX=P.x;lampLastY=P.y;lampHud()}catch(e){}return r}}
+{const _gmL=goMap;goMap=function(){const r=_gmL.apply(this,arguments);lampLastX=null;lampLastY=null;return r}}
+// converters drawn in code until their picture arrives: a cream stone pedestal, a brass ring and a violet crystal core; the ring fills while it rests
+{const _rL=render;render=function(tm){const r=_rL.apply(this,arguments);try{if(!M||!S)return r;const list=convList();if(!list.length)return r;ctx.save();ctx.setTransform(1,0,0,1,0,0);
+  list.forEach(([tx,ty],i)=>{const x=tx*T+16,y=ty*T+16,X=(x-camX)*SC,Y=(y-camY)*SC,u=SC;if(X<-60||Y<-80||X>VW*SC+60||Y>VH*SC+80)return;const k=M.id+':'+i,left=Math.max(0,((S.conv||{})[k]||0)-Date.now()),ready=left<=0;
+    ctx.fillStyle='#d8c8a4';ctx.fillRect(X-12*u,Y-6*u,24*u,12*u);ctx.fillStyle='#a8916a';ctx.fillRect(X-12*u,Y+3*u,24*u,3*u);
+    ctx.strokeStyle='#c99a3e';ctx.lineWidth=3*u;ctx.beginPath();ctx.arc(X,Y-22*u,13*u,0,6.283);ctx.stroke();
+    if(!ready){ctx.strokeStyle='#ffe08a';ctx.beginPath();ctx.arc(X,Y-22*u,13*u,-1.571,-1.571+6.283*(1-left/CONV_CD));ctx.stroke()}
+    ctx.fillStyle=ready?'#b98cff':'#5e4a78';ctx.beginPath();ctx.moveTo(X,Y-34*u);ctx.lineTo(X+7*u,Y-22*u);ctx.lineTo(X,Y-10*u);ctx.lineTo(X-7*u,Y-22*u);ctx.closePath();ctx.fill();
+    if(ready){ctx.globalCompositeOperation='lighter';const g=ctx.createRadialGradient(X,Y-22*u,0,X,Y-22*u,30*u);g.addColorStop(0,'rgba(200,160,255,.5)');g.addColorStop(1,'rgba(200,160,255,0)');ctx.fillStyle=g;ctx.fillRect(X-30*u,Y-52*u,60*u,60*u);ctx.globalCompositeOperation='source-over'}});
+  ctx.restore()}catch(e){}return r}}
 </script></body></html>
