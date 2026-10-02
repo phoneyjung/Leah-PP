@@ -1,0 +1,752 @@
+{
+ "block": "G9",
+ "name": "บ้านเรา · ฟาร์ม",
+ "version": "1.5",
+ "background": {
+  "file": "map-G9-home-farm.jpg",
+  "picked": "run 2 picture 4 (3 Oct 2026)",
+  "tone": "bright (kid) = the one tone for the whole game",
+  "score": 9.5
+ },
+ "size": [
+  48,
+  32
+ ],
+ "instance": "per_player (แต่ละคนมีฟาร์มของตัวเอง · เพื่อนเข้าได้เมื่อเชิญ)",
+ "rule": "HUD corners: no door, exit, NPC, pickup or needed path inside them; every edge follows its neighbour block",
+ "doors": {
+  "our_house": [
+   19.5,
+   10
+  ],
+  "shed": [
+   30.6,
+   13.2
+  ],
+  "friend_hut": [
+   41.5,
+   11.5
+  ]
+ },
+ "house": {
+  "lot": [
+   14.5,
+   3.4,
+   29,
+   10.5
+  ],
+  "door": [
+   19.5,
+   10
+  ],
+  "door_fixed_all_levels": true,
+  "levels": 9,
+  "stages": {
+   "lv1": [
+    17.5,
+    7,
+    21.5,
+    10
+   ],
+   "lv2-4": [
+    16.5,
+    6.4,
+    23.5,
+    10
+   ],
+   "lv5-6": [
+    16,
+    5,
+    23.5,
+    10
+   ],
+   "lv7-9": [
+    15.5,
+    3.6,
+    23.5,
+    10
+   ]
+  },
+  "pool_reserved": [
+   24.3,
+   6,
+   28.3,
+   9
+  ],
+  "forecourt": [
+   17,
+   10,
+   22,
+   12
+  ],
+  "decor_slots": {
+   "slot1": [
+    24.6,
+    10.9
+   ],
+   "slot2": [
+    17.3,
+    14.2
+   ],
+   "slot3": [
+    22.7,
+    13.4
+   ],
+   "slot4": [
+    15.2,
+    11.4
+   ]
+  },
+  "banner_pole": [
+   23.6,
+   10.8
+  ],
+  "upgrade_sign": [
+   22.8,
+   14.4
+  ],
+  "grow_rule": "sideways + up only; never toward the road, never anything playable behind the house"
+ },
+ "exits": {
+  "e": {
+   "at": [
+    48,
+    16
+   ],
+   "to": "H9 หมู่บ้านพาเพลิน"
+  },
+  "w": {
+   "at": [
+    0,
+    17
+   ],
+   "to": "F9 ทุ่งดอกไม้",
+   "phase1": "locked: กองซุงขวางถนน คนตัดไม้ยังขนไม่เสร็จ",
+   "blocker": [
+    3,
+    17
+   ]
+  },
+  "n": {
+   "at": [
+    35,
+    0
+   ],
+   "to": "G8 ทุ่งหุบเขา",
+   "phase1": "locked: ประตูรั้วทุ่งหญ้าใส่กลอน เปิดเมื่อถึงบทที่ 2",
+   "blocker": [
+    35,
+    3.2
+   ]
+  },
+  "s": {
+   "at": [
+    12,
+    32
+   ],
+   "to": "G10 ป่าแคมป์",
+   "phase1": "locked: พุ่มเบอร์รี่ขึ้นรกปิดทาง ยังไม่มีกรรไกรตัดกิ่ง",
+   "blocker": [
+    12,
+    29.6
+   ]
+  }
+ },
+ "arrivals": {
+  "from_e": [
+   46,
+   16
+  ],
+  "from_w": [
+   2,
+   17
+  ],
+  "from_n": [
+   35,
+   2
+  ],
+  "from_s": [
+   12,
+   30
+  ],
+  "from_house": [
+   19.5,
+   11.2
+  ],
+  "warp_home": [
+   19.5,
+   13.4
+  ]
+ },
+ "plots": {
+  "plot1_start": {
+   "rect": [
+    27,
+    19,
+    33,
+    23
+   ],
+   "state": "cleared"
+  },
+  "plot2": {
+   "rect": [
+    28,
+    23.5,
+    33,
+    26.5
+   ],
+   "state": "overgrown (ซื้อเพื่อเปิด)"
+  },
+  "plot3": {
+   "rect": [
+    37,
+    19,
+    44,
+    22
+   ],
+   "state": "overgrown (ซื้อเพื่อเปิด)"
+  },
+  "plot4": {
+   "rect": [
+    37,
+    23,
+    42,
+    27
+   ],
+   "state": "overgrown (ซื้อเพื่อเปิด)"
+  }
+ },
+ "pond": {
+  "centre": [
+   20.5,
+   24.6
+  ],
+  "radius": [
+   3.6,
+   2.5
+  ]
+ },
+ "stream": "spring at the rock foot → pond (ไม่ข้ามขอบ)",
+ "footbridge": [
+  12,
+  24.8
+ ],
+ "fishing_dock": [
+  20.5,
+  22.6
+ ],
+ "well": [
+  17.4,
+  20.9
+ ],
+ "mailbox": [
+  21.3,
+  14.1
+ ],
+ "shipping_bin": [
+  26,
+  11.8
+ ],
+ "converter": [
+  24,
+  12.6
+ ],
+ "big_tree": [
+  9.5,
+  7.2
+ ],
+ "campfire": [
+  9.8,
+  11.0
+ ],
+ "friend_yard": [
+  37.2,
+  7,
+  46,
+  13
+ ],
+ "friend_yard_gate": [
+  41.5,
+  13
+ ],
+ "farm_gate": [
+  43.5,
+  16
+ ],
+ "lamps": [
+  [
+   38.9,
+   18.0
+  ],
+  [
+   36.7,
+   9.1
+  ],
+  [
+   23.2,
+   18.8
+  ],
+  [
+   16.2,
+   11.1
+  ],
+  [
+   8.8,
+   19.4
+  ],
+  [
+   4.2,
+   14.6
+  ],
+  [
+   22.6,
+   11.1
+  ],
+  [
+   13,
+   9.3
+  ],
+  [
+   29.6,
+   18.5
+  ]
+ ],
+ "lamps_painted": [
+  [
+   36.7,
+   9.1
+  ],
+  [
+   16.2,
+   11.1
+  ],
+  [
+   22.6,
+   11.1
+  ]
+ ],
+ "gate_pillars": [
+  [
+   43.3,
+   13.9
+  ],
+  [
+   43.4,
+   18.2
+  ]
+ ],
+ "signs": [
+  [
+   46.3,
+   13.9
+  ],
+  [
+   2.3,
+   14.3
+  ],
+  [
+   37,
+   2.4
+  ],
+  [
+   14.5,
+   29.8
+  ]
+ ],
+ "benches": [
+  [
+   6.6,
+   11.6
+  ],
+  [
+   13,
+   12
+  ],
+  [
+   22.6,
+   21.2
+  ]
+ ],
+ "npc_spots": {
+  "farm_guide": [
+   31.5,
+   18.4
+  ]
+ },
+ "npc": {
+  "farm_guide": "หุ่นช่วยงานที่จอมเวทลูมินสร้าง ใช้พลังจากเครื่องแปลง · สอนปลูกครั้งแรก"
+ },
+ "light_stone": null,
+ "layers": {
+  "painted_background": [
+   "roads & paths",
+   "knoll (empty) + forecourt",
+   "shed",
+   "friend hut + yard fence",
+   "plots as bare tilled soil",
+   "pond, stream, dock, footbridge, well",
+   "big tree, camp clearing, campfire stones (unlit), benches",
+   "3 lamp posts (unlit), signposts, mailbox, two stone gate pillars with lanterns, a signboard beside the shed",
+   "converter pad (empty)",
+   "woods, rocks, trees"
+  ],
+  "drawn_by_game": [
+   "6 more lamp posts",
+   "shipping bin",
+   "our house (9 levels)",
+   "pool (lv 9)",
+   "front-yard decorations x4",
+   "house banner",
+   "converter",
+   "crops, scarecrow",
+   "weeds on unbought plots",
+   "phase-1 blockers (logs, closed gate, berry thicket)",
+   "campfire flame, all lights",
+   "monsters, NPC"
+  ]
+ },
+ "safe_zone": "ทั้งฉากยกเว้น monster_zones · แสงตะเกียงไม่ลด (กลางแจ้ง)",
+ "monster_zones": {
+  "woods_nw": {
+   "rect": [
+    0.5,
+    4.5,
+    5,
+    14
+   ],
+   "light": [
+    "เห็ดน้อย",
+    "กระรอกลูกโอ๊ก"
+   ],
+   "dark": []
+  },
+  "woods_n": {
+   "rect": [
+    8.5,
+    0.5,
+    13.5,
+    3.2
+   ],
+   "light": [
+    "เห็ดน้อย",
+    "กระรอกลูกโอ๊ก"
+   ],
+   "dark": []
+  },
+  "woods_s": {
+   "rect": [
+    14,
+    29.6,
+    37,
+    31.5
+   ],
+   "light": [
+    "เห็ดน้อย",
+    "กระรอกลูกโอ๊ก"
+   ],
+   "dark": []
+  }
+ },
+ "hud_zones": {
+  "tl": [
+   0,
+   0,
+   8,
+   4
+  ],
+  "tr": [
+   39,
+   0,
+   48,
+   6
+  ],
+  "br": [
+   38,
+   28,
+   48,
+   32
+  ],
+  "bl": [
+   0,
+   28,
+   7,
+   32
+  ]
+ },
+ "edges": {
+  "e": {
+   "neighbour": "H9",
+   "road": 16,
+   "river": null,
+   "terrain": "lawns and a few trees (matches H9 west edge) · farm gate arch 4.5 tiles inside"
+  },
+  "w": {
+   "neighbour": "F9",
+   "road": 17,
+   "river": null,
+   "terrain": "woods thin out to meadow north of the road · rocky mountain foot in the south-west corner"
+  },
+  "n": {
+   "neighbour": "G8",
+   "road": 35,
+   "road_width": 2.2,
+   "river": null,
+   "terrain": "woods in the north-west, open lawn and knoll elsewhere (G8 is meadow valley)"
+  },
+  "s": {
+   "neighbour": "G10",
+   "road": 12,
+   "road_width": 2.2,
+   "river": null,
+   "terrain": "tree line along the whole edge (G10 is forest) · stream stays inside G9"
+  }
+ },
+ "systems": {
+  "farm": {
+   "loop": [
+    "buy seed at shed",
+    "tap plot to plant",
+    "water once",
+    "grows in real time (also offline)",
+    "harvest",
+    "put in shipping bin -> coins"
+   ],
+   "crops": [
+    {
+     "id": "carrot",
+     "th": "แครอท",
+     "grow_min": 5,
+     "seed": 5,
+     "sell": 9
+    },
+    {
+     "id": "lettuce",
+     "th": "ผักกาด",
+     "grow_min": 10,
+     "seed": 8,
+     "sell": 15
+    },
+    {
+     "id": "tomato",
+     "th": "มะเขือเทศ",
+     "grow_min": 30,
+     "seed": 15,
+     "sell": 32
+    },
+    {
+     "id": "corn",
+     "th": "ข้าวโพด",
+     "grow_min": 120,
+     "seed": 25,
+     "sell": 60
+    },
+    {
+     "id": "pumpkin",
+     "th": "ฟักทอง",
+     "grow_min": 480,
+     "seed": 40,
+     "sell": 120
+    }
+   ],
+   "crystal_crop": {
+    "chance": 0.05,
+    "sell_x": 5,
+    "use": "sell or show on a display shelf / front-yard slot"
+   },
+   "never": [
+    "crops dying",
+    "seasons",
+    "quality stars",
+    "processing",
+    "orders"
+   ],
+   "later": [
+    "friend monster waters for you",
+    "plots 2-4"
+   ]
+  },
+  "house_upgrade": {
+   "how": "tap the sign in front of the house -> picture of next level + price -> one button; coins only",
+   "look": "concept-house-levels.jpg (9 exteriors, one per level; redraw top-down for the game)",
+   "levels": [
+    {
+     "lv": 1,
+     "adds": "กระท่อมห้องเดียว",
+     "envelope": "lv1",
+     "cost": 0
+    },
+    {
+     "lv": 2,
+     "adds": "ปีกครัว",
+     "envelope": "lv2-4",
+     "cost": 200
+    },
+    {
+     "lv": 3,
+     "adds": "ห้องกว้างขึ้น (ห้องนั่งเล่น)",
+     "envelope": "lv2-4",
+     "cost": 500
+    },
+    {
+     "lv": 4,
+     "adds": "ระเบียงไม้ + สวนหน้าบ้าน",
+     "envelope": "lv2-4",
+     "cost": 1000
+    },
+    {
+     "lv": 5,
+     "adds": "ชั้น 2 + ห้องนอน + ห้องน้ำ",
+     "envelope": "lv5-6",
+     "cost": 1500
+    },
+    {
+     "lv": 6,
+     "adds": "ห้องกระจก",
+     "envelope": "lv5-6",
+     "cost": 2500
+    },
+    {
+     "lv": 7,
+     "adds": "ชั้น 3 + หอดูดาว",
+     "envelope": "lv7-9",
+     "cost": 4000
+    },
+    {
+     "lv": 8,
+     "adds": "ห้องบ่อบอล + สไลเดอร์",
+     "envelope": "lv7-9",
+     "cost": 6000
+    },
+    {
+     "lv": 9,
+     "adds": "สระว่ายน้ำ + สไลเดอร์น้ำ",
+     "envelope": "lv7-9 + pool",
+     "cost": 10000
+    }
+   ],
+   "rules": [
+    "new room arrives with basic furniture",
+    "house gives no combat power",
+    "only the current level picture is loaded"
+   ],
+   "phase1": "lv 1-3"
+  },
+  "decor": {
+   "room_grid": {
+    "lv1": [
+     8,
+     6
+    ],
+    "lv2": [
+     10,
+     7
+    ]
+   },
+   "place": "tap item -> tap floor cell; snaps to grid",
+   "auto_face": [
+    "chair/sofa next to a table -> face the table",
+    "against back wall -> face front",
+    "against left wall -> face right",
+    "against right wall -> face left",
+    "corner -> back wall wins",
+    "middle of room -> face front"
+   ],
+   "rotate": "tap placed item -> rotate button, 90 deg per tap; skip a direction that faces straight into a visible wall (back/left/right) or overlaps another item",
+   "guard": "cannot place where it closes the walk from the door to bed / wardrobe / stairs",
+   "auto_arrange_button": true,
+   "categories": [
+    "floor & wallpaper",
+    "main furniture",
+    "floor items",
+    "wall items",
+    "table-top items",
+    "collection displays",
+    "crystal-powered items"
+   ],
+   "sprites_per_item": {
+    "round/symmetric": 1,
+    "bed/cabinet/shelf/table": 2,
+    "chair/sofa": 3
+   },
+   "first_set": "~20 items ≈ 35 sprites",
+   "interactive": {
+    "wardrobe": "change outfit/hair/face",
+    "bed": "skip to morning/evening",
+    "display_shelf": "show stamps, monster book, crystal crops",
+    "pool & ball pit": "play with invited friends"
+   },
+   "sources": [
+    "ร้านยายนวล",
+    "รางวัลแสตมป์/สมุดประวัติมอน",
+    "ผลคริสตัลจากฟาร์ม"
+   ]
+  }
+ },
+ "checks": {
+  "points_checked": 27,
+  "unreachable": [],
+  "unreachable_house_max": [],
+  "walk_tiles": 1281,
+  "free_tiles": 1382,
+  "walk_pct": 92.7,
+  "open_ground_tiles": 868,
+  "open_pct_of_scene": 62.8,
+  "field_tiles": 85,
+  "woods_tiles": 328,
+  "water_tiles": 57,
+  "road_tiles": 446,
+  "corner_violations": [],
+  "door_to_corner_gap": {
+   "our_house": 13.0,
+   "shed": 11.1,
+   "friend_hut": 5.5
+  },
+  "door_linked": {
+   "our_house": true,
+   "shed": true,
+   "friend_hut": true
+  },
+  "arrivals_ok": {
+   "from_e": true,
+   "from_w": true,
+   "from_n": true,
+   "from_s": true,
+   "from_house": true,
+   "warp_home": true
+  },
+  "main_road_blocked_px": 0,
+  "props_on_walkway": [
+   "gatepost1"
+  ],
+  "props_too_close": [],
+  "props_inside_house_max_or_pool": [],
+  "monster_zone_conflicts": [],
+  "door_path_width": {
+   "our_house": 2.1,
+   "shed": 2.1,
+   "friend_hut": 2.1
+  },
+  "front_yard_depth": 5.6,
+  "unreachable_by_house_stage": {
+   "lv1": [],
+   "lv2-4": [],
+   "lv5-6": [],
+   "lv7-9": []
+  },
+  "field_under_path_px": 0,
+  "min_path_width": {
+   "main": 3.1,
+   "north": 2.3,
+   "south": 2.3,
+   "farm_lane": 2.1,
+   "loop": 2.1,
+   "dock": 2.1,
+   "camp": 2.3
+  },
+  "edge_H9": {
+   "h9_centre_y": 15.94,
+   "g9_centre_y": 15.94,
+   "overlap_iou": 1.0
+  }
+ }
+}
