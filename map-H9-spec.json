@@ -1,0 +1,216 @@
+{
+ "block": "H9",
+ "size": [
+  48,
+  32
+ ],
+ "rule": "HUD corners: no door, exit, NPC, pickup or needed path inside them (buildings, trees, water, hill are fine); every edge follows its neighbour block",
+ "doors": {
+  "post_office": [
+   14.4,
+   11.4
+  ],
+  "clock_shop": [
+   6.2,
+   9.6
+  ],
+  "mage_tower": [
+   26.6,
+   10.4
+  ],
+  "blacksmith": [
+   36.4,
+   12.2
+  ],
+  "restaurant": [
+   8.6,
+   22
+  ],
+  "item_shop_nuan": [
+   15.2,
+   21.8
+  ],
+  "inn": [
+   27.4,
+   22.6
+  ],
+  "fruit_stall": [
+   36,
+   20.6
+  ],
+  "house_daeng": [
+   6.6,
+   26.6
+  ],
+  "house_fon": [
+   13.8,
+   26.8
+  ],
+  "house_dao": [
+   37.4,
+   26.2
+  ],
+  "house_mek": [
+   43.4,
+   21.8
+  ]
+ },
+ "exits": {
+  "n": {
+   "at": [
+    22,
+    0
+   ],
+   "to": "H8 → H7 capital",
+   "phase1": "locked: ต้นไม้ล้มขวางทางไปเมืองหลวง ช่างกำลังเคลียร์"
+  },
+  "w": {
+   "at": [
+    0,
+    16
+   ],
+   "to": "G9 home+farm"
+  },
+  "e": {
+   "at": [
+    48,
+    15.6
+   ],
+   "to": "I9 (บ้านต้นเห็ด) → J9 mushroom village",
+   "phase1": "locked: หมอกยังหนาทางไปหมู่บ้านเห็ด"
+  },
+  "s": {
+   "at": [
+    22.3,
+    32
+   ],
+   "to": "H10 forest",
+   "phase1": "locked: ป่าทางใต้ยังรก ผู้พิทักษ์กำลังเปิดทาง"
+  }
+ },
+ "river": "north → south, east of the plaza; bridge on the east road",
+ "cave_mouth": [
+  40.4,
+  9.4
+ ],
+ "arrivals": {
+  "from_cave": [
+   40.4,
+   11.4
+  ],
+  "from_n": [
+   22,
+   2.5
+  ],
+  "from_w": [
+   2,
+   16
+  ],
+  "from_e": [
+   46,
+   15.6
+  ],
+  "from_s": [
+   22.3,
+   30
+  ],
+  "new_game": [
+   22,
+   19.8
+  ]
+ },
+ "crystal": [
+  22,
+  15.2
+ ],
+ "light_stone": [
+  18.2,
+  19.4
+ ],
+ "fishing_pier": [
+  30.6,
+  27.7
+ ],
+ "well": [
+  10.4,
+  13.4
+ ],
+ "notice_board": [
+  25.7,
+  18.6
+ ],
+ "npc_spots": {
+  "mage_lumin": [
+   26.6,
+   11.6
+  ],
+  "nuan": [
+   15.2,
+   23
+  ],
+  "mom": [
+   19.4,
+   18.6
+  ],
+  "dad": [
+   36.4,
+   13.4
+  ],
+  "leah": [
+   21,
+   20
+  ]
+ },
+ "hud_zones": {
+  "tl": [
+   0,
+   0,
+   8,
+   4
+  ],
+  "tr": [
+   39,
+   0,
+   48,
+   6
+  ],
+  "br": [
+   38,
+   28,
+   48,
+   32
+  ],
+  "bl": [
+   0,
+   28,
+   7,
+   32
+  ]
+ },
+ "edges": {
+  "n": {
+   "neighbour": "H8",
+   "road": 22,
+   "river": 31.4,
+   "terrain": "lawns and trees; the hill reaches the north-east corner"
+  },
+  "s": {
+   "neighbour": "H10",
+   "road": 22.3,
+   "river": 32,
+   "terrain": "lawns, houses and a few trees; the forest starts in H10"
+  },
+  "w": {
+   "neighbour": "G9",
+   "road": 16,
+   "river": null,
+   "terrain": "lawns and trees (G9 is woods + farm)"
+  },
+  "e": {
+   "neighbour": "I9",
+   "road": 15.6,
+   "river": null,
+   "terrain": "lawns, east bank of the river; I9 is the mushroom-forest edge with ponds"
+  }
+ }
+}
