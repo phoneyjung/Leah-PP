@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.24';
+const VERSION='Lantern Academy 1.25';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -3554,6 +3554,7 @@ let G9B=null;
   if(h.farm.robot){robotImg();const r={img:'_robot',sx:0,sy:0,sw:IMG.robotSheet?64:40,sh:IMG.robotSheet?64:48,x:m.shed.x,y:m.shed.y+18,tall:1,cs:0,robot:1};m.objs.push(r);m.robot={o:r,path:null,job:null,cool:1}}
   for(const [x,y] of G9B.lamps||[])m.glows.push([x,y]);
   if(IMG.farmArt&&FARM_ART.conv_on){const tx=G9.conv[0],ty=G9.conv[1],r=FARM_ART.conv_on,o={img:'farmArt',sx:r[0],sy:r[1],sw:r[2],sh:r[3],x:tx*T+16,y:ty*T+30,tall:1,cs:0,g9b:1,swA:0,ph:0,hz:0,shOn:1,f0:4,fw:r[2]-8};m._convL=[[tx,ty]];m.objs.push(o);m._convO=o;m.SOLID.add(key(tx,ty))}
+  try{for(const o of m.wild){const nm='_g9bWild_'+o.wk;if(!IMG[nm])g9bRingOf(IMG[o.img],o.sx,o.sy,o.sw,o.sh,nm);const c=IMG[nm];o.img=nm;o.ring=nm+'_ring';o.sx=0;o.sy=0;o.sw=c.width;o.sh=c.height;o.y+=2}}catch(e){}   // weeds, rocks and stumps on the beds can be tapped too
   return m}}
 // ================= 1.14 G9 · THE SCENE COMES ALIVE (moved in from water-demo.html, where every number below was tested) =================
 // Wind: low things never move; bushes lean 1 px at the top, small trees 2, big trees 3; the foot stays put; gusts travel left to right with calm spells.
@@ -3716,6 +3717,10 @@ function g9bSpots(tm){if(!P)return;if(!M._exitIn){M._exitIn=1;for(const e of M.e
   // things: the ring of light round each tappable picture
   for(const o of M.objs){if(!o.ring)continue;const rg=IMG[o.ring];if(!rg)continue;const X=Math.round(o.x-o.sw/2-camX),Y=Math.round(o.y-((o.cb===undefined?o.sh-3:o.cb)+1)-camY);if(X>VW||Y>VH||X+o.sw<0||Y+o.sh<0)continue;ctx.globalAlpha=pa;
     if(o.flip){ctx.save();ctx.translate(X+o.sw,Y);ctx.scale(-1,1);ctx.drawImage(rg,0,0);ctx.restore()}else ctx.drawImage(rg,X,Y)}
+  // planting cells: outlined while there is something to do on them (empty = plant, dry = water, ripe = pick); looked up 4 times a second, not every frame
+  {const now=performance.now();if(!M._cellAt||now-M._cellAt>250){M._cellAt=now;M._cellOn=(M.plots||[]).map(pl=>{try{const q=plotState(pl);return q.st==='empty'||q.st==='ripe'||!q.w}catch(e){return false}})}
+    ctx.globalAlpha=pa;ctx.strokeStyle='#ffe23a';ctx.lineWidth=2;(M.plots||[]).forEach((pl,i)=>{if(!M._cellOn[i])return;const x=Math.round(pl.x-camX)-25,y=Math.round(pl.y-camY)-16,w=50,h=34,r=6;if(x<-60||y<-50||x>VW+10||y>VH+10)return;
+      ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();ctx.stroke()})}
   // the house door: the same light, drawn round the door leaf
   const dx=G9.door[0]*T-camX,by=G9.houseBase*T-camY,D=G9DOOR;ctx.globalAlpha=pa;ctx.strokeStyle='#ffe23a';ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(dx-D.hw,by-D.b);ctx.lineTo(dx-D.hw,by-D.spring);ctx.ellipse(dx,by-D.spring,D.hw,D.t-D.spring,0,Math.PI,0);ctx.lineTo(dx+D.hw,by-D.b);ctx.closePath();ctx.stroke();
   // activity spots: fishing, and the two seats of every bench
