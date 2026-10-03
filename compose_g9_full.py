@@ -10,6 +10,17 @@ S = json.load(open('/home/claude/g9/map-G9-spec.json'))
 rs = np.random.RandomState(int(sys.argv[1]) if len(sys.argv) > 1 else 5)
 OUT = sys.argv[2] if len(sys.argv) > 2 else '/home/claude/gt/g9_full.png'
 ground = Image.open('/home/claude/gt/ground_full.png').convert('RGBA'); W, H = ground.size
+DX = S['doors']['our_house'][0]
+def extend_path_up(img, cx, from_y, to_y, src_h=44, half=44):
+    # copy a clean slice of the painted path (with its edges and a little grass each side) upward; every other copy is flipped so the rows meet exactly
+    g = np.asarray(img).astype(np.float32).copy(); strip = g[from_y:from_y + src_h, cx - half:cx + half].copy()
+    wgt = np.ones(2 * half, np.float32); wgt[:10] = np.linspace(0, 1, 10); wgt[-10:] = np.linspace(1, 0, 10); wgt = wgt[None, :, None]
+    y = from_y; k = 0
+    while y > to_y:
+        hh = min(src_h, y - to_y); piece = (strip[::-1] if k % 2 == 0 else strip)[-hh:]
+        g[y - hh:y, cx - half:cx + half] = g[y - hh:y, cx - half:cx + half] * (1 - wgt) + piece * wgt; y -= hh; k += 1
+    return Image.fromarray(g.astype(np.uint8), 'RGBA')
+ground = extend_path_up(ground, int(round(19.46 * U)), int(12.55 * U), int(10.0 * U))        # the painted path to the house ended 2 tiles short of the door
 LIBS = [(Image.open(p + '.png').convert('RGBA'), json.load(open(p + '.json'))) for p in
         ('/home/claude/lib3s/objects-3', '/home/claude/lib2/objects-2', '/home/claude/v108/objects-1')]
 
@@ -53,48 +64,64 @@ water = op((h_ > 88) & (h_ < 125) & (s_ > 90) & (v_ > 120), 5)
 rock = op((s_ < 50) & (v_ > 90) & (v_ < 215), 9)
 
 # ---------- buildings and yard pieces, from the spec ----------
-DX = S['doors']['our_house'][0]
 house = Image.open('/home/claude/hs/farm-house-1.png').convert('RGBA'); house = house.resize((245, round(313 * 245 / 256)), Image.LANCZOS)
 HX = DX * U - 105 * 245 / 256                                           # the door centre sits 105 px from the left of the 256-px picture
 OB.append((10.15 * U, HX + 245 / 2, house, 'house'))
-TW_, TH_ = 264, 86; FLAT.append((nine('terrace', TW_, TH_, 34), int(DX * U - TW_ / 2), int(10.05 * U), 'terrace'))
 for k_, v in S['plots'].items():
     x0, y0, x1, y1 = v['rect']; FLAT.append((nine('plot', int((x1 - x0) * U), int((y1 - y0) * U)), int(x0 * U), int(y0 * U), 'plot'))
-cx_, cy_ = S['converter']; pd = spr('pad'); FLAT.append((pd, int(cx_ * U - pd.width / 2), int(cy_ * U - pd.height / 2), 'pad'))
+# the round stone pad is the base of the energy converter; the machine has no picture yet, and a bare stone disc on the lawn explains nothing, so it is left out for now
 add('shed', *S['doors']['shed'], scale=0.85); add('hut', *S['doors']['friend_hut'])          # a shed is tapped, not entered: it may be smaller than a house
 bt = S['big_tree']; add('oak', bt[0], bt[1] + 1.7, h=274, tone='mid')
 # lanterns: the two that stood at the old, smaller forecourt move out to the corners of the terrace
 for x, y in S['lamps']:
-    if abs(y - 11.1) < 0.3 and 15 < x < 24: x = DX - 3.9 if x < DX else DX + 3.9; y = 12.1
+    if abs(y - 11.1) < 0.3 and 15 < x < 24: x = DX - 1.75 if x < DX else DX + 1.75; y = 11.7       # the pair at the door: one each side of the path
+    if abs(x - 36.7) < 0.2 and abs(y - 9.1) < 0.2: x, y = 36.2, 9.6                                # this one stood on the yard fence: moved onto the grass by the trail
     add('lamp', x, y, h=88)
-for x, y in S['gate_pillars']: add('pillar', x, y)
-add('mailbox', S['mailbox'][0], S['mailbox'][1] - 0.5); add('board', 23.7, 12.3)
-for x, y in S['signs']: add('sign', x, y)
+add('pillar', 47.0, 14.2); add('pillar', 47.0, 18.0)                 # one each side of the main road, at the east end
+add('mailbox', DX + 1.25, 13.95); add('board', 24.3, 10.7)
+for x, y in S['signs']:
+    if x > 45 and 13 < y < 15: x, y = 45.6, 18.1                       # the east sign stood on the fence corner: now south of the road, before the pillar
+    add('sign', x, y)
 for x, y in S['benches']: add('bench', x, y)
 add('well', S['well'][0], S['well'][1] + 0.3)
-fx, fy = S['campfire']; add('firepit', fx - 0.2, fy + 0.2); add('logSeatL', fx - 1.4, fy + 0.5); add('logSeatR', fx + 1.0, fy + 0.5)
-add('crate', S['shipping_bin'][0], S['shipping_bin'][1] + 0.6, h=34); add('scarecrow', 27.7, 20.4)
+fx, fy = S['campfire']
+_ys, _xs = np.where(sand[int(8.6 * U):int(12.4 * U), int(7.2 * U):int(12.2 * U)])
+ccx, ccy = (_xs.mean() + 7.2 * U) / U, (np.percentile(_ys, 30) + 8.6 * U) / U                   # centre of the round part of the clearing
+add('firepit', ccx, ccy + 0.55, scale=1.5); add('logSeatL', ccx - 1.15, ccy + 1.15, scale=1.55); add('logSeatR', ccx + 1.15, ccy + 1.15, scale=1.55)
+add('crate', 27.55, S['doors']['shed'][1] + 0.05, h=36); add('scarecrow', 27.7, 20.4)             # the shipping crate stands against the shed, left of its door
 # the friend's yard: fence all round, an open gate at the path
-fx0, fy0, fx1, fy1 = S['friend_yard']; gx = S['friend_yard_gate'][0]; seg = spr('fenceH').width / U
-x = fx0
-while x < fx1 - 0.3:
-    cxs = x + seg / 2; add('fenceH', cxs, fy0 + 0.2)
-    if not (gx - 1.5 < cxs < gx + 1.5): add('fenceH', cxs, fy1)
-    x += seg
-y = fy0 + 1.9
-while y < fy1 + 0.1: add('fenceV', fx0, y); add('fenceV', fx1, y); y += 1.75
-add('gate', gx - 0.9, fy1); add('gatePost', gx + 0.9, fy1)
+fx0, fy0, fx1, fy1 = S['friend_yard']; gx = S['friend_yard_gate'][0]
+FH = spr('fenceH'); HALF = FH.crop((0, 0, 53, FH.height)); STEP = 87
+def put(im, left, foot, name): OB.append((foot, left + im.width / 2, im, name))
+def run_h(left, foot, n):                                  # n whole sections in a row, sharing posts; returns the x where it ends
+    for k in range(n): put(FH, left + k * STEP, foot, 'fenceH')
+    return left + (n - 1) * STEP + FH.width
+def run_v(xc, top_foot, bottom_foot):                      # a side of the yard, from the bottom corner up to the top corner
+    fv = spr('fenceV'); y = bottom_foot
+    while y - fv.height > top_foot - 34: put(fv, xc - fv.width / 2, y, 'fenceV'); y -= 62
+    put(fv, xc - fv.width / 2, top_foot - 30 + fv.height, 'fenceV')
+YL, YT, YB = fx0 * U, (fy0 + 0.2) * U, fy1 * U; YR = run_h(YL, YT, 4)                              # top side: 4 sections = 358 px
+put(FH, YL, YB, 'fenceH'); put(HALF, YL + STEP, YB, 'fenceH')                                      # bottom side, left of the gate: 140 px
+put(HALF, YR - 140, YB, 'fenceH'); put(FH, YR - FH.width, YB, 'fenceH')                            # bottom side, right of the gate
+run_v(YL + 5, YT, YB); run_v(YR - 5, YT, YB)
+gt_ = spr('gate'); put(gt_, YL + 140 - 11, YB + 1, 'gate'); gp_ = spr('gatePost'); put(gp_, YR - 140 - 2, YB + 1, 'gatePost')   # the open gate hangs on the left fence end; its second post closes the right end
 # the three closed ways of this chapter
 add('logs', 3.2, 16.3, scale=0.85); add('logs', 2.8, 17.5, scale=0.85); add('thicket', 12, 30.4)
-lg = LIBS[2]; r_ = lg[1]['gate']; OB.append((3.9 * U, 34.3 * U, lg[0].crop((r_[0], r_[1], r_[0] + r_[2], r_[1] + r_[3])), 'lockgate'))
+lg = LIBS[2]; r_ = lg[1]['gate']; lk = lg[0].crop((r_[0], r_[1], r_[0] + r_[2], r_[1] + r_[3])); lk = lk.resize((round(lk.width * 0.62), round(lk.height * 0.62)), Image.LANCZOS)
+NGX, NGY = 34.3 * U, 3.9 * U; put(lk, NGX - lk.width / 2, NGY, 'lockgate')
+LEFT_END = NGX - lk.width / 2 + 6 - (FH.width + STEP); run_h(LEFT_END, NGY - 1, 2); run_h(NGX + lk.width / 2 - 6, NGY - 1, 3)
+# a fence that just stops on open grass can be walked round too: each end runs into a clump of trees
+add('clump', (LEFT_END - 62) / U, (NGY + 22) / U, tone='mid'); add('clump', (NGX + lk.width / 2 - 6 + FH.width + 2 * STEP + 50) / U, (NGY + 22) / U, tone='deep', flip=True)
 
 # ---------- where trees may not stand ----------
 keep = np.zeros((H, W), bool)
 def box(x0, y0, x1, y1): keep[max(0, int(y0 * U)):int(y1 * U), max(0, int(x0 * U)):int(x1 * U)] = True
 lot = S['house']['lot']; box(lot[0], lot[1], lot[2], lot[3] + 2.2)                # the house lot stays open for the bigger houses to come
 for v in S['plots'].values(): box(v['rect'][0] - 0.6, v['rect'][1] - 2.4, v['rect'][2] + 0.6, v['rect'][3] + 0.4)
-box(27.2, 8.0, 33.6, 13.6); box(fx0 + 0.3, fy0 + 0.3, fx1 - 0.3, fy1 + 0.6)       # shed · inside the friend's yard
+box(27.2, 8.0, 33.6, 13.6); box(fx0 - 0.4, fy0 - 0.9, fx1 + 0.8, fy1 + 0.9)       # shed · the friend's yard and its fence line
+box(DX - 4.4, 10.0, DX + 4.4, 14.1)                                               # nothing grows on the way to the front door
 box(bt[0] - 4.6, bt[1] - 5.5, bt[0] + 4.6, bt[1] + 2.6)                           # under the old oak
+box(27.0, 3.0, 41.6, 4.3)                                                         # along the north fence
 box(fx - 3, fy - 1.5, fx + 3, fy + 2)                                             # the camp
 trunk_block = dil(sand, 13) | dil(water, 27) | dil(rock, 17) | keep
 water_d = dil(water, 7)
