@@ -15,7 +15,7 @@ LIBS = [(Image.open(p + '.png').convert('RGBA'), json.load(open(p + '.json'))) f
         ((sys.argv[4] if len(sys.argv) > 4 else '/home/claude/lib3/objects-3'), '/home/claude/lib2/objects-2', '/home/claude/v108/objects-1')]
 
 # leaf tones, target = whole crowns of the AI reference: hue 63.9, brightness p10/50/90 = 58/127/195
-TONES = {'deep': (65.0, 64, 122, 190), 'mid': (63.5, 70, 134, 204), 'light': (61.5, 78, 146, 214)}
+TONES = {'deep': (65.0, 64, 122, 190), 'mid': (63.5, 70, 134, 204), 'light': (61.5, 78, 146, 214), 'tuft': (46.0, 132, 200, 228)}
 def regrade(im, tone):
     hue, lo, mid, hi = TONES[tone]
     a = np.asarray(im).copy(); al = a[..., 3] > 0
@@ -108,18 +108,56 @@ for x, y in S['signs']:
     if inside(x, y): add('sign', x, y)
 add('logs', 3.2, 16.7); add('logs', 2.8, 18.3); add('thicket', 12, 30.2)
 
-# shadows: light from the upper left of the painted ground -> cast shadow to the lower right + dark contact at the foot
-out = ground.copy(); cast = Image.new('L', (W, H), 0); contact = Image.new('L', (W, H), 0)
-dc, dk = ImageDraw.Draw(cast), ImageDraw.Draw(contact)
+# ---------- grounding: what makes a thing stand ON the ground instead of floating over it ----------
+# Copied from how the AI reference does it (looked at the crisp piece, 2x): (1) a dark, hard-edged patch of the ground's own colour
+# hugging the foot, a little wider than the foot and pushed to the lower right (light comes from the upper left); (2) under a tree,
+# a wider, lighter patch below the crown; (3) on grass, a few bright grass tufts growing up over the front of the foot.
+# No blur and no fixed shadow colour: the ground is multiplied, so a shadow on the road is dark orange and on grass dark green.
+SMALL = ('flowerW', 'flowerY', 'flowerR', 'grass', 'mushroom', 'tuft')
+def foot_of(im, nm):
+    a = np.asarray(im)[..., 3] > 0; hgt = a.shape[0]
+    rows = max(3, int(hgt * (0.08 if (nm.startswith('tree') or nm == 'clump') else 0.30)))
+    xs = np.where(a[hgt - rows:].any(0))[0]
+    return (int(xs.min()), int(xs.max()) + 1) if len(xs) else (0, im.width)
+core = np.zeros((H, W), np.uint8); rim = np.zeros((H, W), np.uint8); shade_c = np.zeros((H, W), np.uint8)
+_n = np.random.RandomState(77).uniform(-1, 1, (H // 2 + 2, W // 2 + 2)).astype(np.float32)
+NOISE = np.kron(_n, np.ones((2, 2), np.float32))[:H, :W]                    # 2-px blocks: edges break up in pixel-art steps
+def blob(mask, cx, cy, rw, rh, rag):
+    x0, x1 = max(0, int(cx - rw * 1.4) - 2), min(W, int(cx + rw * 1.4) + 3); y0, y1 = max(0, int(cy - rh * 1.5) - 2), min(H, int(cy + rh * 1.5) + 3)
+    if x1 <= x0 or y1 <= y0: return
+    yy, xx = np.mgrid[y0:y1, x0:x1]; d = ((xx - cx) / max(1.0, rw)) ** 2 + ((yy - cy) / max(1.0, rh)) ** 2
+    mask[y0:y1, x0:x1] |= (d < 1 + NOISE[y0:y1, x0:x1] * rag).astype(np.uint8)
+FEET = []
 for by, bx, im, nm in OB:
+    if nm in SMALL: continue
+    x0 = bx - im.width / 2; f0, f1 = foot_of(im, nm); fw = f1 - f0; cx = x0 + (f0 + f1) / 2
     tree = nm.startswith('tree') or nm == 'clump'
-    rw = im.width * (0.36 if tree else 0.42); rh = max(4, im.height * (0.10 if tree else 0.13)); off = im.height * (0.09 if tree else 0.05)
-    dc.ellipse((bx - rw + off, by - rh + off * 0.35, bx + rw + off, by + rh + off * 0.35), fill=115 if tree else 92)
-    dk.ellipse((bx - rw * 0.42, by - rh * 0.42, bx + rw * 0.42, by + rh * 0.42), fill=118)
-shade = np.maximum(np.asarray(cast.filter(ImageFilter.GaussianBlur(5)), np.float32), np.asarray(contact.filter(ImageFilter.GaussianBlur(2)), np.float32)) / 255.0
-gg = np.asarray(out).astype(np.float32); tint = np.array([28, 62, 46], np.float32)
-gg[..., :3] = gg[..., :3] * (1 - shade[..., None] * 0.6) + tint * (shade[..., None] * 0.6)
+    rw = fw * 0.5 + max(3, fw * 0.12); rh = float(np.clip(fw * 0.13, 3.0, 8.0))          # the patch shows 3-6 px below the foot, more to the right
+    blob(rim, cx + 2.5, by - rh * 0.30 + 1.5, rw + 2, rh + 1.5, 0.32)
+    blob(core, cx + 1.5, by - rh * 0.45 + 0.5, rw * 0.88, rh * 0.75, 0.22)
+    if tree:
+        cw = im.width * 0.40; ch = max(8, im.width * 0.15)
+        blob(shade_c, bx + 5, by - ch * 0.15 + 2, cw, ch, 0.38)
+    FEET.append((by, cx, fw, im, nm))
+mult = np.ones((H, W, 3), np.float32)
+tone = lambda f: np.array([f * 0.92, f * 0.98, min(1.0, f * 1.10)], np.float32)       # outdoor shadow: darker and a touch cooler
+mult[shade_c > 0] = tone(0.87); mult[rim > 0] = tone(0.76); mult[core > 0] = tone(0.58)
+mult[water > 0] = 1.0                                                                   # nothing casts a patch onto open water
+gg = np.asarray(ground).astype(np.float32); gg[..., :3] = np.clip(gg[..., :3] * mult, 0, 255)
 out = Image.fromarray(gg.astype(np.uint8), 'RGBA')
+# (3) grass tufts over the front of the foot, only where the ground there is grass
+grass_here = lambda x, y: 0 <= int(x) < W and 0 <= int(y) < H and (35 < h_[int(y), int(x)] < 75) and s_[int(y), int(x)] > 110 and not sand[int(y), int(x)] and not water[int(y), int(x)] and not rock[int(y), int(x)]
+tufts = 0
+for by, cx, fw, im, nm in FEET:
+    if nm in ('terrace', 'plot', 'pad', 'bridge', 'dock'): continue
+    n_t = 3 if (fw > 46 and im.height > 50) else 2 if fw > 12 else 1       # low things get tufts at the corners only, never across the front
+    t_sc = min([0.42, 0.55, 0.7, 0.82, 0.95], key=lambda q: abs(q - float(np.clip(0.30 * im.height / 24.0, 0.42, 0.95))))   # a tuft is at most ~30% as tall as the thing
+    spots = [cx - fw * 0.42, cx + fw * 0.42, cx + rs.uniform(-0.12, 0.12) * fw][:n_t] if n_t > 1 else [cx + rs.choice([-1, 1]) * (fw * 0.5 + 2)]
+    for tx in spots:
+        ty = by + rs.uniform(1.5, 4.0)
+        if not grass_here(tx, min(H - 1, ty)): continue
+        t_im = spr('grass', scale=t_sc if rs.rand() < 0.6 else max(0.42, t_sc - 0.13), flip=rs.rand() < 0.5, tone='tuft')   # a few fixed sizes: the same pictures are reused everywhere
+        OB.append((ty, tx + rs.uniform(-2, 2), t_im, 'tuft')); tufts += 1
 for by, bx, im, nm in sorted(OB, key=lambda o: o[0]): out.alpha_composite(im, (int(bx - im.width / 2), int(by - im.height)))
 out.convert('RGB').save(sys.argv[3] if len(sys.argv) > 3 else '/home/claude/gt/piece3_r3.png')
 # optional export of the layers, for anything that draws the scene itself (the demo page, later the game):
