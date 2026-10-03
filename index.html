@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.25';
+const VERSION='Lantern Academy 1.26';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -3608,7 +3608,7 @@ function g9WalkThen(x,y,fn){if(!P||!M)return;try{HOLD=null}catch(e){}   /* the t
 // the assembled scene brings its own soft shadows in the ground picture: the engine's leaning shadows are not added on top (they doubled every shadow and hid the moving water)
 {const _bs16=bakeShadows;bakeShadows=function(m){if(m&&m.g9b&&m.ground){m.shadow=m.ground;m.shadowSC=SC;return}return _bs16.apply(this,arguments)}}
 try{Object.assign(TX.th,{fishHow:'เหวี่ยงเบ็ดแล้ว รอจนเห็น ❗ แล้วกดปุ่มอีกครั้งทันที'});if(TX.en)Object.assign(TX.en,{fishHow:'Line is out. Wait for ❗ then press the button again right away'})}catch(e){}
-{const _dv14=drawVFX2;drawVFX2=function(tm){_dv14.apply(this,arguments);try{if(M&&M.g9b&&G9B){g9bGate();g9bCrate();g9bRobot();g9bSitTick();g9bConv(tm);g9bFire(tm);g9bMarks(tm);g9bSpots(tm);g9bShadows();if(!LITE){g9bWaterInit();g9bWater(tm)}}}catch(e){}}}
+{const _dv14=drawVFX2;drawVFX2=function(tm){_dv14.apply(this,arguments);try{if(M&&M.g9b&&G9B){g9bGate();g9bCrate();g9bRobot();g9bSitTick();g9bConv(tm);g9bFire(tm);g9bSpots(tm);g9bShadows();if(!LITE){g9bWaterInit();g9bWater(tm)}}}catch(e){}}}
 // ================= 1.15 FARM ART · crops that grow in four steps + the energy converter as a real picture (farm-art.png) =================
 // One small sheet. If it is missing, everything is drawn the old way (32-px crop tiles, the converter in code). Rows on the sheet: carrot, lettuce, tomato, corn, pumpkin;
 // for each: s1..s4 = sprout, young, half-grown, ripe · item = the picked vegetable · bag = its seed bag (item and bag are for menus later).
