@@ -10,7 +10,7 @@ sc = json.load(open(SRC + '/scene.json')); atlas = Image.open(SRC + '/sprites.pn
 Image.open(SRC + '/ground.png').convert('RGB').save(OUT + '/map-G9b-ground.jpg', quality=88, optimize=True, progressive=True)
 
 # ---------- sprites: drop the house (the game draws it by level), reuse one picture for a thing and its mirror image, outline the things you can tap ----------
-TAP = ('board', 'crate', 'mailbox')
+TAP = ()          # no outline baked into the pictures: at 255 colours it came out as a broken dotted line (owner, 3 Oct). The game marks tappable things itself.
 def outlined(im):
     a = np.asarray(im); pad = 2; hh, ww = a.shape[:2]; big = np.zeros((hh + 2 * pad, ww + 2 * pad, 4), np.uint8); big[pad:pad + hh, pad:pad + ww] = a
     al = (big[..., 3] > 0).astype(np.uint8); ring = (cv2.dilate(al, np.ones((3, 3), np.uint8)) > 0) & (al == 0); big[ring] = (255, 226, 120, 235); return Image.fromarray(big, 'RGBA')
@@ -57,7 +57,7 @@ water = op((hh_ > 88) & (hh_ < 125) & (ss_ > 90) & (vv_ > 120), 5); rock = op((s
 sand = op((hh_ >= 14) & (hh_ <= 31) & (ss_ > 55) & (ss_ < 200) & (vv_ > 175), 7)
 solid = np.zeros((GH, GW), bool)
 frac = lambda m: m[:GH * T, :GW * T].reshape(GH, T, GW, T).mean((1, 3))
-solid |= frac(water) >= 0.22; solid |= frac(rock) >= 0.40          # the stream is about one tile wide: a low share of water already closes a tile, or you could wade across
+solid |= frac(water) >= 0.08; solid |= frac(rock) >= 0.40          # any tile with water in it is closed: at 0.22 you could still step off the bridge onto the bank tiles and stand in the stream (owner, 3 Oct)
 def open_rect(x0, y0, x1, y1):                                     # wooden ways over water stay open
     for ty in range(int(y0 // T), int(y1 // T) + 1):
         for tx in range(int(x0 // T), int(x1 // T) + 1): solid[ty, tx] = False
@@ -105,13 +105,13 @@ bd = find('board')[0]; P['sign'] = [round(cxy(bd)[0] / T, 2), round((bd['by'] + 
 P['conv'] = [30, 16]
 # fishing: stand on the wooden dock, near its end
 dock_x = int(20.5 * 40); col = np.where(~water[820:1000, dock_x] )[0]; col = col[col < 120]; P['fish'] = [round(dock_x / T, 2), round((820 + col.max() - 16) / T, 2)]
-(p1x, p1y, p1w, p1h), (p2x, p2y, p2w, p2h), p3, p4 = sc['plots']; FP = sc['fper']; soil = lambda px, pw: (px + 12, pw - 24)
-sx0, sw_ = soil(p1x, p1w); P['plots'] = [[round((sx0 + (c + .5) * sw_ / 4) / T, 2), round((p1y + 22 + (2 * r + 1) * FP + 4) / T, 2)] for r in range(3) for c in range(4)]
-sx0, sw_ = soil(p2x, p2w); P['extra'] = [[round((sx0 + (c + .5) * sw_ / 4) / T, 2), round((p2y + 22 + (2 * r + 1) * FP + 4) / T, 2)] for r in range(2) for c in range(4)]
+(p1x, p1y, p1w, p1h), (p2x, p2y, p2w, p2h), p3, p4 = sc['plots']; FP = sc['fper']; PT = sc.get('ptop', 22); PSD = sc.get('pside', 12); soil = lambda px, pw: (px + PSD + 6, pw - 2 * PSD - 12)
+sx0, sw_ = soil(p1x, p1w); rows1 = max(3, (p1h - PT - 9) // FP); P['plots'] = [[round((sx0 + (c + .5) * sw_ / 4) / T, 2), round((p1y + PT + (r + .5) * (rows1 * FP) / 3 + 6) / T, 2)] for r in range(3) for c in range(4)]
+sx0, sw_ = soil(p2x, p2w); rows2 = max(2, (p2h - PT - 9) // FP); P['extra'] = [[round((sx0 + (c + .5) * sw_ / 4) / T, 2), round((p2y + PT + (r + .5) * (rows2 * FP) / 2 + 6) / T, 2)] for r in range(2) for c in range(4)]
 wl = []
 for (px, py, pw, ph) in (p3, p4):
-    for ty in range(int((py + 22) // T) + 1, int((py + ph - 26) // T) + 1):
-        for tx in range(int((px + 14) // T) + 1, int((px + pw - 14) // T)):
+    for ty in range(int((py + PT) // T) + 1, int((py + ph - 9) // T)):
+        for tx in range(int((px + PSD) // T) + 1, int((px + pw - PSD) // T)):
             wl.append([('bush', 'rock', 'stump')[(tx * 7 + ty * 3) % 3], tx + .5, ty + .5])
 P['wild'] = wl
 lg = find('logs'); lk = find('lockgate')[0]; th = find('thicket')[0]

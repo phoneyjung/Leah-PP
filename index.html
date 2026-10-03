@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.12';
+const VERSION='Lantern Academy 1.13';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -1302,9 +1302,10 @@ function render(tm){if(!M||!S)return;
   for(const e of M.exits){if(e.needBoss&&!S.boss||e.lockBoss&&M.boss&&!M.boss.happy)continue;const near=Math.hypot(P.x-e.x,P.y-e.y)<90;if(e.locked){if(near)ring(e.x-camX,e.y-camY,tm,.3,'255,150,150')}else ring(e.x-camX,e.y-camY,tm,near?1:.5)}
   for(const s of M.stones){const aw=S.stones.includes(s.id);ring(s.x-camX,s.y-camY+2,tm*(aw?1:.3),aw?.9:.05)}
   for(const s of M.stairs||[]){const x=Math.round(s.x-camX-18),y=Math.round(s.y-camY-26);for(let i=0;i<4;i++){const yy=s.up?y+i*7:y+21-i*7;ctx.fillStyle=['#7a4a26','#8a5a30','#9a6a3a','#aa7a44'][i];ctx.fillRect(x+i*2,yy,36-i*4,6);ctx.fillStyle='rgba(40,20,10,.5)';ctx.fillRect(x+i*2,yy+6,36-i*4,1)}ctx.fillStyle='#5a3418';ctx.fillRect(x-2,y-2,3,32);ctx.fillRect(x+35,y-2,3,32)}
-  for(const q of M.zones||[])label((q.x0+q.x1+1)/2*T-camX,(q.y0+q.y1)/2*T-camY,t(q.k));if(M.pool)label(8.5*T-camX,15*T-camY-6,t('pool'));if(M.mailbox&&Math.hypot(P.x-M.mailbox.x,P.y-M.mailbox.y)<90)label(M.mailbox.x-camX,M.mailbox.y-camY-30,t('mailbox'));
+  for(const q of M.zones||[])label((q.x0+q.x1+1)/2*T-camX,(q.y0+q.y1)/2*T-camY,t(q.k));if(M.pool)label(8.5*T-camX,15*T-camY-6,t('pool'));if(M.mailbox&&Math.hypot(P.x-M.mailbox.x,P.y-M.mailbox.y)<90)label(M.mailbox.x-camX,M.mailbox.y-camY-(M.g9b?58:30),t('mailbox'));
   if(M.bath)label((M.bath.x0+M.bath.x1+1)/2*T-camX,(M.bath.y0+M.bath.y1)/2*T-camY,'🛁 '+t('bathroom'));
-  for(const p of M.plots||[]){const q=plotState(p),x=Math.round(p.x-camX),y=Math.round(p.y-camY);ctx.fillStyle=q.w?'#4a3322':'#6b4a2e';ctx.fillRect(x-13,y-8,26,16);ctx.fillStyle=q.w?'#3a2618':'#5a3c24';for(let r=0;r<3;r++)ctx.fillRect(x-11,y-6+r*5,22,1);
+  for(const p of M.plots||[]){const q=plotState(p),x=Math.round(p.x-camX),y=Math.round(p.y-camY);if(M.g9b){if(q.w){ctx.fillStyle='rgba(34,20,9,.36)';ctx.beginPath();ctx.ellipse(x,y,14,6,0,0,7);ctx.fill()}if(q.st==='empty'){ctx.fillStyle='rgba(30,17,8,.6)';ctx.beginPath();ctx.ellipse(x,y,5,2.5,0,0,7);ctx.fill();ctx.fillStyle='rgba(190,140,90,.55)';ctx.fillRect(x-4,y+2,8,1)}}
+    else{ctx.fillStyle=q.w?'#4a3322':'#6b4a2e';ctx.fillRect(x-13,y-8,26,16);ctx.fillStyle=q.w?'#3a2618':'#5a3c24';for(let r=0;r<3;r++)ctx.fillRect(x-11,y-6+r*5,22,1)}
     if(q.st==='seed'){ctx.fillStyle='#e8d6a0';for(let i=0;i<4;i++)ctx.fillRect(x-8+i*5,y-2+(i%2),2,1)}else if(q.st==='sprout'||q.st==='ripe'){const r=FR[q.st==='ripe'?CROPS[q.crop].bed:'sproutBed'];if(IMG.farm)ctx.drawImage(IMG.farm,r[0],r[1],32,32,x-16,y-22,32,32)}
     if(q.st!=='empty'&&q.st!=='ripe'&&!q.w){ctx.fillStyle='#8fd8ff';ctx.fillRect(x-1,y-26+Math.round(Math.sin(tm*4)),3,4);ctx.fillRect(x,y-28+Math.round(Math.sin(tm*4)),1,2)}
     if(q.st==='ripe'&&Math.sin(tm*4+p.i)>.4){ctx.fillStyle='#fff6c0';ctx.fillRect(x+8,y-20,1,3);ctx.fillRect(x+7,y-19,3,1)}}
@@ -2094,7 +2095,7 @@ function duskish(){try{const p=dayPhase();return p==='dusk'||p==='night'}catch(e
     for(let i=1;i<=5;i++){const tt=i/6,x=(1-tt)*(1-tt)*x1+2*(1-tt)*tt*mx+tt*tt*x2,y=(1-tt)*(1-tt)*y1+2*(1-tt)*tt*my+tt*tt*y2+Math.sin(tm*2+i)*1.2;
       if(glow){ctx.save();ctx.globalCompositeOperation='lighter';ctx.fillStyle='rgba(255,170,90,.28)';ctx.beginPath();ctx.arc(x,y+5,8,0,6.283);ctx.fill();ctx.restore()}
       ctx.fillStyle=i%2?'#d9483b':'#f29a38';ctx.beginPath();ctx.ellipse(x,y+5,4,5,0,0,6.283);ctx.fill();ctx.fillStyle='#3a1e3f';ctx.fillRect(x-3,y,6,1);ctx.fillRect(x-3,y+9,6,1);ctx.fillStyle='#ffc857';ctx.fillRect(x,y+10,1,3)}}
-  if(glow){if(YIPENG.length<8&&Math.random()<.02)YIPENG.push({x:camX+Math.random()*VW,y:camY+VH+20,s:.6+Math.random()*.6,ph:Math.random()*6});
+  if(glow&&!M.g9b){if(YIPENG.length<8&&Math.random()<.02)YIPENG.push({x:camX+Math.random()*VW,y:camY+VH+20,s:.6+Math.random()*.6,ph:Math.random()*6});
     for(const L of YIPENG){L.y-=(8+6*L.s)*.016;L.ph+=.016;const x=L.x+Math.sin(L.ph*.8)*10-camX,y=L.y-camY,s=L.s;ctx.save();ctx.globalCompositeOperation='lighter';ctx.fillStyle='rgba(255,180,90,.3)';ctx.beginPath();ctx.arc(x,y,12*s,0,6.283);ctx.fill();ctx.restore();
       ctx.fillStyle='#f6a24a';ctx.beginPath();ctx.moveTo(x-5*s,y-7*s);ctx.lineTo(x+5*s,y-7*s);ctx.lineTo(x+4*s,y+5*s);ctx.lineTo(x-4*s,y+5*s);ctx.fill();ctx.fillStyle='#ffe08a';ctx.fillRect(x-2*s,y+2*s,4*s,2*s)}
     YIPENG=YIPENG.filter(L=>L.y>camY-60)}else YIPENG=[];

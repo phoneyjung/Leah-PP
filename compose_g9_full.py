@@ -79,22 +79,24 @@ def straight_plot_parts():
     per = int(round(np.median(np.diff(lows)))) if len(lows) > 2 else 19
     return im, lows[0], per
 PLOT_IM, FUR0, FPER = straight_plot_parts()
+PTOP, PSIDE = 7, 8                                           # soil starts this far inside the picture (room for the uneven edge)
 def make_plot(w, n_furrows):
-    PW_, PH_ = PLOT_IM.size; cw, top, bot, side = 20, 22, 26, 12          # corner width, top beam + posts, bottom beam + posts, side beam
-    soil_h = n_furrows * FPER; h = top + soil_h + bot; out = Image.new('RGBA', (w, h), (0, 0, 0, 0))
-    soil = PLOT_IM.crop((side + 6, FUR0, PW_ - side - 6, FUR0 + FPER)); sw = soil.width
+    PW_, PH_ = PLOT_IM.size; soil_h = n_furrows * FPER; h = PTOP + soil_h + 9; a = np.zeros((h, w, 4), np.uint8)
+    soil = np.asarray(PLOT_IM.crop((18, FUR0, PW_ - 18, FUR0 + FPER))); sw = soil.shape[1]
     for r in range(n_furrows):
-        x = side
-        while x < w - side: out.paste(soil if (x // sw) % 2 == 0 else soil.transpose(Image.FLIP_LEFT_RIGHT), (x, top + r * FPER)); x += sw
-    lb = PLOT_IM.crop((0, 44, side, 44 + FPER)); rb = PLOT_IM.crop((PW_ - side, 44, PW_, 44 + FPER))
-    for r in range(n_furrows): out.paste(lb, (0, top + r * FPER)); out.paste(rb, (w - side, top + r * FPER))
-    tb = PLOT_IM.crop((cw + 8, 0, PW_ - cw - 8, top)); bb = PLOT_IM.crop((cw + 8, PH_ - bot, PW_ - cw - 8, PH_)); x = cw
-    while x < w - cw: out.paste(tb.crop((0, 0, min(tb.width, w - cw - x), top)), (x, 0)); out.paste(bb.crop((0, 0, min(bb.width, w - cw - x), bot)), (x, h - bot)); x += tb.width
-    out.paste(PLOT_IM.crop((0, 0, cw, top)), (0, 0)); out.paste(PLOT_IM.crop((PW_ - cw, 0, PW_, top)), (w - cw, 0))
-    out.paste(PLOT_IM.crop((0, PH_ - bot, cw, PH_)), (0, h - bot)); out.paste(PLOT_IM.crop((PW_ - cw, PH_ - bot, PW_, PH_)), (w - cw, h - bot)); return out
+        x = 0
+        while x < w:
+            piece = soil if (x // sw) % 2 == 0 else soil[:, ::-1]; ww = min(sw, w - x); a[PTOP + r * FPER:PTOP + (r + 1) * FPER, x:x + ww] = piece[:, :ww]; x += sw
+    a[:PTOP] = a[PTOP:PTOP + 1]; a[PTOP + soil_h:] = a[PTOP + soil_h - 1:PTOP + soil_h]
+    # uneven edge: rounded corners + clumps of earth, in 3-px steps; then a darker rim, as freshly dug soil has
+    n = np.kron(np.random.RandomState(w * 7 + n_furrows).uniform(-1, 1, (h // 3 + 2, w // 3 + 2)), np.ones((3, 3)))[:h, :w]
+    yy, xx = np.mgrid[:h, :w]; dx = np.minimum(xx, w - 1 - xx).astype(np.float32); dy = np.minimum(yy, h - 1 - yy).astype(np.float32)
+    corner = np.where((dx < 12) & (dy < 12), 12 - np.hypot(12 - dx, 12 - dy), np.minimum(dx, dy)); keep_ = corner + n * 2.6 > 3.0
+    a[..., 3] = np.where(keep_, 255, 0); edge = keep_ & ~(cv2.erode(keep_.astype(np.uint8), np.ones((5, 5), np.uint8)) > 0)
+    a[..., :3] = np.where(edge[..., None], (a[..., :3] * 0.62).astype(np.uint8), a[..., :3]); return Image.fromarray(a, 'RGBA')
 PLOT_RECTS = []
 for k_, v in S['plots'].items():
-    x0, y0, x1, y1 = v['rect']; n_f = max(3, int(round(((y1 - y0) * U - 48) / FPER))); pim = make_plot(int((x1 - x0) * U), n_f)
+    x0, y0, x1, y1 = v['rect']; n_f = max(3, int(round(((y1 - y0) * U - 16) / FPER))); pim = make_plot(int((x1 - x0) * U), n_f)
     FLAT.append((pim, int(x0 * U), int(y0 * U), 'plot')); PLOT_RECTS.append((int(x0 * U), int(y0 * U), pim.width, pim.height))
 # the round stone pad is the base of the energy converter; the machine has no picture yet, and a bare stone disc on the lawn explains nothing, so it is left out for now
 add('shed', *S['doors']['shed'], scale=0.85); add('hut', *S['doors']['friend_hut'])          # a shed is tapped, not entered: it may be smaller than a house
@@ -115,7 +117,7 @@ fx, fy = S['campfire']
 _ys, _xs = np.where(sand[int(8.6 * U):int(12.4 * U), int(7.2 * U):int(12.2 * U)])
 ccx, ccy = (_xs.mean() + 7.2 * U) / U, (np.percentile(_ys, 30) + 8.6 * U) / U                   # centre of the round part of the clearing
 add('firepit', ccx, ccy + 0.55, scale=1.5); add('logSeatL', ccx - 1.15, ccy + 1.15, scale=1.55); add('logSeatR', ccx + 1.15, ccy + 1.15, scale=1.55)
-add('crate', 27.55, S['doors']['shed'][1] + 0.05, h=36); add('scarecrow', 27.7, 20.4)             # the shipping crate stands against the shed, left of its door
+add('crate', 27.55, S['doors']['shed'][1] + 0.05, h=36); add('scarecrow', 26.55, 20.6)             # the crate stands against the shed; the scarecrow stands beside the bed, not in it             # the shipping crate stands against the shed, left of its door
 # the friend's yard: fence all round, an open gate at the path
 fx0, fy0, fx1, fy1 = S['friend_yard']; gx = S['friend_yard_gate'][0]
 FH = spr('fenceH'); HALF = FH.crop((0, 0, 53, FH.height)); STEP = 87
@@ -231,6 +233,7 @@ for by, bx, im, nm in OB:
     w_, hgt = im.size; x0 = bx - w_ / 2; f0, f1 = foot_of(im, nm); fw = f1 - f0; cx = x0 + (f0 + f1) / 2
     if nm in LOW_H:
         dx_, dy_ = int(round(SUN_SX * LOW_H[nm])), int(round(SUN_SY * LOW_H[nm])) + 1; al_ = np.asarray(im)[..., 3].astype(np.float32) / 255.0
+        if nm in ('house', 'shed', 'hut'): dy_ = 1
         X0, Y0 = int(x0) + dx_, int(by - hgt) + dy_; ys0, xs0 = max(0, Y0), max(0, X0); ys1, xs1 = min(H, Y0 + hgt), min(W, X0 + w_)
         if ys1 > ys0 and xs1 > xs0: low[ys0:ys1, xs0:xs1] = np.maximum(low[ys0:ys1, xs0:xs1], al_[ys0 - Y0:ys1 - Y0, xs0 - X0:xs1 - X0])
         FEET.append((by, cx, fw, im, nm)); continue
@@ -311,5 +314,5 @@ if len(sys.argv) > 3:
     level = lambda nm: 'high' if nm in ('treeA', 'treeB', 'treeC', 'clump', 'oak') else 'small' if nm in ('treeD', 'treeE', 'treeF') else 'mid' if nm.startswith('bush') or nm == 'thicket' else 'low'
     inst = [{'n': nm, 'lv': level(nm), 'r': rect[id(im)], 'x': int(bx - im.width / 2), 'y': int(by - im.height), 'by': int(by), 'f': [int(foot_of(im, nm)[0]), int(foot_of(im, nm)[1] - foot_of(im, nm)[0])], 'sh': 0 if nm in SMALL else 1, 'hz': LOW_H.get(nm, 0)}
             for by, bx, im, nm in sorted(OB, key=lambda o: o[0])]
-    json.dump({'w': W, 'h': H, 'inst': inst, 'plots': PLOT_RECTS, 'fper': FPER, 'door_x': DX * U, 'house_base': 10.15 * U}, open(ex + '/scene.json', 'w'))
+    json.dump({'w': W, 'h': H, 'inst': inst, 'plots': PLOT_RECTS, 'fper': FPER, 'ptop': PTOP, 'pside': PSIDE, 'door_x': DX * U, 'house_base': 10.15 * U}, open(ex + '/scene.json', 'w'))
     print(json.dumps({'export': ex, 'unique_sprites': len(order), 'instances': len(inst), 'atlas': list(atlas.size)}))
