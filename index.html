@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.14';
+const VERSION='Lantern Academy 1.15';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -1307,7 +1307,7 @@ function render(tm){if(!M||!S)return;
   if(M.bath)label((M.bath.x0+M.bath.x1+1)/2*T-camX,(M.bath.y0+M.bath.y1)/2*T-camY,'🛁 '+t('bathroom'));
   for(const p of M.plots||[]){const q=plotState(p),x=Math.round(p.x-camX),y=Math.round(p.y-camY);if(M.g9b){if(q.w){ctx.fillStyle='rgba(34,20,9,.36)';ctx.beginPath();ctx.ellipse(x,y,14,6,0,0,7);ctx.fill()}if(q.st==='empty'){ctx.fillStyle='rgba(30,17,8,.6)';ctx.beginPath();ctx.ellipse(x,y,5,2.5,0,0,7);ctx.fill();ctx.fillStyle='rgba(190,140,90,.55)';ctx.fillRect(x-4,y+2,8,1)}}
     else{ctx.fillStyle=q.w?'#4a3322':'#6b4a2e';ctx.fillRect(x-13,y-8,26,16);ctx.fillStyle=q.w?'#3a2618':'#5a3c24';for(let r=0;r<3;r++)ctx.fillRect(x-11,y-6+r*5,22,1)}
-    if(q.st==='seed'){ctx.fillStyle='#e8d6a0';for(let i=0;i<4;i++)ctx.fillRect(x-8+i*5,y-2+(i%2),2,1)}else if(q.st==='sprout'||q.st==='ripe'){const r=FR[q.st==='ripe'?CROPS[q.crop].bed:'sproutBed'];if(IMG.farm)ctx.drawImage(IMG.farm,r[0],r[1],32,32,x-16,y-22,32,32)}
+    if(q.st!=='empty'&&drawCropArt(q,x,y)){}else if(q.st==='seed'){ctx.fillStyle='#e8d6a0';for(let i=0;i<4;i++)ctx.fillRect(x-8+i*5,y-2+(i%2),2,1)}else if(q.st==='sprout'||q.st==='ripe'){const r=FR[q.st==='ripe'?CROPS[q.crop].bed:'sproutBed'];if(IMG.farm)ctx.drawImage(IMG.farm,r[0],r[1],32,32,x-16,y-22,32,32)}
     if(q.st!=='empty'&&q.st!=='ripe'&&!q.w){ctx.fillStyle='#8fd8ff';ctx.fillRect(x-1,y-26+Math.round(Math.sin(tm*4)),3,4);ctx.fillRect(x,y-28+Math.round(Math.sin(tm*4)),1,2)}
     if(q.st==='ripe'&&Math.sin(tm*4+p.i)>.4){ctx.fillStyle='#fff6c0';ctx.fillRect(x+8,y-20,1,3);ctx.fillRect(x+7,y-19,3,1)}}
   for(const c of M.chests||[]){const dk=(c.big?'bchest':'chest')+(c.open?'O':'C'),dr=DR[dk],r=CR.crate,X=Math.round(c.x-16-camX),Y=Math.round(c.y-28-camY);if(!c.open){ctx.save();ctx.globalCompositeOperation='lighter';glow(c.x-camX,c.y-12-camY,c.big?26:18,'255,215,120',.45+.15*Math.sin(tm*3));ctx.restore()}if(IMG.dprops&&dr){ctx.globalAlpha=c.open?.8:1;ctx.drawImage(IMG.dprops,dr[0],dr[1],64,64,Math.round(c.x-32-camX),Math.round(c.y-54-camY),64,64)}else{ctx.globalAlpha=c.open?.45:1;if(IMG.cprops)ctx.drawImage(IMG.cprops,r[0],r[1],32,32,X,Y,32,32)}ctx.globalAlpha=1;if(!c.open&&Math.hypot(P.x-c.x,P.y-c.y)<90)label(c.x-camX,Y-4,'🎁 '+t('chest'))}
@@ -3384,7 +3384,7 @@ let lampOut=null,lampLastX=null,lampLastY=null;
    lampLastX=P.x;lampLastY=P.y;lampHud()}catch(e){}return r}}
 {const _gmL=goMap;goMap=function(){const r=_gmL.apply(this,arguments);lampLastX=null;lampLastY=null;return r}}
 // converters drawn in code until their picture arrives: a cream stone pedestal, a brass ring and a violet crystal core; the ring fills while it rests
-{const _rL=render;render=function(tm){const r=_rL.apply(this,arguments);try{if(!M||!S)return r;const list=convList();if(!list.length)return r;ctx.save();ctx.setTransform(1,0,0,1,0,0);
+{const _rL=render;render=function(tm){const r=_rL.apply(this,arguments);try{if(!M||!S)return r;const list=convList();if(!list.length||M._convO)return r;ctx.save();ctx.setTransform(1,0,0,1,0,0);
   list.forEach(([tx,ty],i)=>{const x=tx*T+16,y=ty*T+16,X=(x-camX)*SC,Y=(y-camY)*SC,u=SC;if(X<-60||Y<-80||X>VW*SC+60||Y>VH*SC+80)return;const k=M.id+':'+i,left=Math.max(0,((S.conv||{})[k]||0)-Date.now()),ready=left<=0;
     ctx.fillStyle='#d8c8a4';ctx.fillRect(X-12*u,Y-6*u,24*u,12*u);ctx.fillStyle='#a8916a';ctx.fillRect(X-12*u,Y+3*u,24*u,3*u);
     ctx.strokeStyle='#c99a3e';ctx.lineWidth=3*u;ctx.beginPath();ctx.arc(X,Y-22*u,13*u,0,6.283);ctx.stroke();
@@ -3551,6 +3551,7 @@ let G9B=null;
     const o={img:SH[r[4]],sx:r[0],sy:r[1],sw:r[2],sh:r[3],x:(tx+.5)*T,y:(ty+.9)*T,tx,ty,tall:1,cs:0,wildId:i,wk:k,hp:(k==='bush'||isKid())?1:2};m.objs.push(o);m.wild.push(o);m.SOLID.add(key(tx,ty))});
   if(h.farm.robot){robotImg();const r={img:'_robot',sx:0,sy:0,sw:IMG.robotSheet?64:40,sh:IMG.robotSheet?64:48,x:m.shed.x,y:m.shed.y+18,tall:1,cs:0,robot:1};m.objs.push(r);m.robot={o:r,path:null,job:null,cool:1}}
   for(const [x,y] of G9B.lamps||[])m.glows.push([x,y]);
+  if(IMG.farmArt&&FARM_ART.conv_on){const tx=G9.conv[0],ty=G9.conv[1],r=FARM_ART.conv_on,o={img:'farmArt',sx:r[0],sy:r[1],sw:r[2],sh:r[3],x:tx*T+16,y:ty*T+30,tall:1,cs:0,g9b:1,swA:0,ph:0};m._convL=[[tx,ty]];m.objs.push(o);m._convO=o;m.SOLID.add(key(tx,ty))}
   return m}}
 // ================= 1.14 G9 · THE SCENE COMES ALIVE (moved in from water-demo.html, where every number below was tested) =================
 // Wind: low things never move; bushes lean 1 px at the top, small trees 2, big trees 3; the foot stays put; gusts travel left to right with calm spells.
@@ -3593,7 +3594,20 @@ function g9bMarks(tm){const A=M._taps||(M._taps=[M.crate&&{x:M.crate.x,y:M.crate
     for(let s2=0;s2<2;s2++){const al=Math.pow(Math.max(0,Math.sin(tm*2.6+i*1.9+s2*2.4)),2);if(al<.05)continue;const sx=Math.round(x+(s2?11:-12)),sy=Math.round(y+(s2?-6:3)),rr=s2?2:3;ctx.fillStyle='rgba(255,226,120,'+al.toFixed(2)+')';ctx.fillRect(sx-rr,sy,rr*2+1,1);ctx.fillRect(sx,sy-rr,1,rr*2+1);ctx.fillStyle='rgba(255,255,255,'+al.toFixed(2)+')';ctx.fillRect(sx,sy,1,1)}
     if(a.ic&&P&&Math.hypot(P.x-a.x,P.y-a.by)<84){const yy=Math.round(y-16+Math.sin(tm*3)*1.5);ctx.fillStyle='rgba(27,19,48,.92)';ctx.fillRect(Math.round(x)-9,yy-9,18,17);ctx.fillStyle='#e8c46a';ctx.fillRect(Math.round(x)-9,yy+8,18,1);ctx.fillRect(Math.round(x)-9,yy-10,18,1);
       ctx.save();ctx.font='11px system-ui,sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(a.ic,Math.round(x),yy);ctx.restore()}}}
-{const _dv14=drawVFX2;drawVFX2=function(tm){_dv14.apply(this,arguments);try{if(M&&M.g9b&&G9B){g9bGate();g9bMarks(tm);if(!LITE){g9bWaterInit();g9bWater(tm)}}}catch(e){}}}
+{const _dv14=drawVFX2;drawVFX2=function(tm){_dv14.apply(this,arguments);try{if(M&&M.g9b&&G9B){g9bGate();g9bConv(tm);g9bMarks(tm);if(!LITE){g9bWaterInit();g9bWater(tm)}}}catch(e){}}}
+// ================= 1.15 FARM ART · crops that grow in four steps + the energy converter as a real picture (farm-art.png) =================
+// One small sheet. If it is missing, everything is drawn the old way (32-px crop tiles, the converter in code). Rows on the sheet: carrot, lettuce, tomato, corn, pumpkin;
+// for each: s1..s4 = sprout, young, half-grown, ripe · item = the picked vegetable · bag = its seed bag (item and bag are for menus later).
+// Strawberry has no row yet, so it keeps its old tile; the corn row waits for corn to join the crop list.
+const FARM_ART={"conv_on":[0,0,49,78],"conv_off":[50,0,48,78],"corn_s4":[99,0,52,49],"corn_s3":[152,0,42,44],"tom_s4":[195,0,50,43],"pum_s4":[246,0,70,43],"corn_item":[317,0,33,40],"car_s4":[0,79,47,39],"cab_s4":[48,79,50,38],"tom_s3":[99,79,44,38],"pum_s3":[144,79,51,38],"corn_s2":[196,79,39,37],"car_bag":[236,79,33,36],"cab_bag":[270,79,33,36],"tom_bag":[304,79,33,36],"corn_bag":[338,79,33,36],"pum_bag":[0,119,33,36],"car_s3":[34,119,36,35],"pum_item":[71,119,36,34],"car_item":[108,119,44,33],"cab_item":[153,119,36,32],"tom_s2":[190,119,34,32],"cab_s3":[225,119,47,31],"pum_s2":[273,119,44,30],"car_s2":[318,119,32,26],"cab_s2":[0,156,36,24],"tom_item":[37,156,24,24],"corn_s1":[62,156,35,22],"tom_s1":[98,156,29,21],"cab_s1":[128,156,25,18],"pum_s1":[154,156,34,18],"car_s1":[189,156,21,13]};
+{const i=new Image();i.onload=()=>{IMG.farmArt=i;try{delete CACHE.farm}catch(e){}};i.onerror=()=>{};i.src=(window.EMBED_ASSETS&&window.EMBED_ASSETS['farm-art.png'])||'farm-art.png'}
+const CROP_ART={cab:'cab',car:'car',tom:'tom',pum:'pum'};
+// 0 = just sown (seed dots) · 1 sprout · 2 young · 3 half-grown · 4 ripe. A plant only grows while it is watered, as before; each of the game's two growing halves is shown in two steps.
+function cropStage(q){if(!q||q.st==='empty')return 0;if(q.st==='ripe')return 4;const c=CROPS[q.crop];if(!c)return 0;const half=c.min*60000/2*(typeof farmMul==='function'?farmMul():1),pr=q.w?Math.min(1,(Date.now()-q.t)/half):0;return q.st==='seed'?(pr>=.5?1:0):(pr>=.5?3:2)}
+function drawCropArt(q,x,y){const k=CROP_ART[q.crop];if(!k||!IMG.farmArt)return false;const st=cropStage(q);if(!st)return false;const r=FARM_ART[k+'_s'+st];if(!r)return false;ctx.drawImage(IMG.farmArt,r[0],r[1],r[2],r[3],Math.round(x-r[2]/2),y+7-r[3],r[2],r[3]);return true}
+// the converter on the assembled farm: a standing thing you walk around, bright crystal when it can refill a lantern, dull while it rests
+function g9bConv(tm){const o=M._convO;if(!o)return;const ready=(((S&&S.conv)||{})[M.id+':0']||0)<=Date.now(),r=FARM_ART[ready?'conv_on':'conv_off'];o.sx=r[0];o.sy=r[1];o.sw=r[2];o.sh=r[3];
+  if(ready&&!LITE){ctx.save();ctx.globalCompositeOperation='lighter';glow(o.x-camX,o.y-54-camY,15,'120,220,255',.28+.1*Math.sin(tm*2.4));ctx.restore()}}
 // ================= 1.07 H9 · PAPLERN VILLAGE, NEW SCENE (painted, MAP_SPEC_H9 v1.4) =================
 // A separate map "h9" for now, reached by the GM (warp) and from the G9 farm's east road; the village players use (map "capital") is untouched.
 // Needs map-H9-village.jpg (a sharper map-H9-village-hi.jpg replaces it once uploaded); missing picture -> this map is not offered at all.
