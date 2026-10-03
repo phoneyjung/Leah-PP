@@ -17,6 +17,16 @@ const R=await pg.evaluate(async()=>{const o={};const sleep=ms=>new Promise(r=>se
  let samples=0,inWater=0,seen=0;for(let k=0;k<12;k++){A.spawnFish();for(let i=0;i<24;i++){await sleep(120);for(const [x,y] of window.__dbg.fish){if(x===undefined)continue;samples++;if(A.clipAt(x,y))inWater++}seen=Math.max(seen,window.__dbg.fish.length)}}
  o.fish={samples,inWater,pct:+(100*inWater/samples).toFixed(1),mostAtOnce:seen};
  await sleep(9000);o.fishGoneAfter=window.__dbg.fish.length;o.fps=Math.round(window.__dbg.fps);
+ // 5) the water surface itself moves, only the water, and only a little
+ const A2=window.__api;let lo=9,hi=-9;for(let y=D.waveBox[1];y<D.waveBox[3];y+=2)for(let t=0;t<20;t+=0.1){const v=A2.rowShift(y,t);lo=Math.min(lo,v);hi=Math.max(hi,v)}
+ o.wave={rowShiftPx:[lo,hi]};
+ A2.OPT.pads=false;A2.OPT.glint=false;await sleep(9500);                       // no fish, pads and glints off: anything that changes now is the water surface
+ const wpts=D.deep.filter((p,i)=>i%3===0),land=[];for(let i=0;i<220;i++){const x=6+((i*53)%(D.w-12)),y=(i%2)?4+((i*17)%80):D.h-4-((i*29)%70);if(!A2.clipAt(x,y))land.push([x,y])}
+ const snap=pts=>pts.map(([x,y])=>A2.px(x,y).join());
+ const count=async(pts)=>{let ch=new Set();const s0=snap(pts);for(let k=0;k<6;k++){await sleep(350);const s1=snap(pts);s1.forEach((v,i)=>{if(v!==s0[i])ch.add(i)})}return ch.size};
+ A2.OPT.wave=true;await sleep(300);o.wave.fishDuring=window.__dbg.fish.length;o.wave.waterPointsChanged=[await count(wpts),wpts.length];o.wave.landPointsChanged=[await count(land),land.length];
+ A2.OPT.wave=false;await sleep(300);o.wave.waterChangedWhenOff=[await count(wpts),wpts.length];
+ A2.OPT.wave=true;A2.OPT.pads=true;A2.OPT.glint=true;A2.spawnFish();await sleep(700);o.wave.ringWithFish=A2.rings.length>0;await sleep(2500);o.fpsAllOn=Math.round(window.__dbg.fps);
  // 4) buttons: big enough to tap, and the switches work
  const bs=[...document.querySelectorAll('button')];o.buttons={n:bs.length,minH:Math.min(...bs.map(x=>x.getBoundingClientRect().height))};
  document.getElementById('bPads').click();await sleep(150);const q0=window.__dbg.pad0.slice();await sleep(500);const q1=window.__dbg.pad0.slice();o.padsOffStill=q0[0]===0&&q0[1]===0&&q1[0]===0&&q1[1]===0;document.getElementById('bPads').click();
