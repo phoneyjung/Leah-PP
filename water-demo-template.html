@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ลองดูฉากมีชีวิต · Lantern Academy</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html,body{margin:0;background:#1b1330;color:#f4ecd8;font-family:system-ui,"Noto Sans Thai",sans-serif}
+.wrap{max-width:1200px;margin:0 auto;padding:10px}
+h1{font-size:18px;margin:6px 0;color:#ffe08a}
+p{font-size:14px;line-height:1.5;margin:6px 0;opacity:.9}
+canvas{display:block;width:100%;height:auto;image-rendering:pixelated;border:2px solid #e8c46a;border-radius:8px;background:#234}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+button{min-height:48px;padding:10px 14px;font-size:16px;border-radius:10px;border:2px solid #e8c46a;background:#2a1d3a;color:#ffe08a;font-weight:700}
+button.on{background:#e8c46a;color:#1b1330}
+#msg{font-size:14px;min-height:20px;color:#bfe3ff}
+table{border-collapse:collapse;font-size:14px;margin:8px 0}td,th{border:1px solid #6b5a8a;padding:5px 8px;text-align:left}
+</style></head><body><div class="wrap">
+<h1>ลองดูฉากมีชีวิต: ลมพัดต้นไม้ · น้ำขยับ · ใบบัว · เงาปลา</h1>
+<canvas id="c" width="__W2__" height="__H2__"></canvas>
+<div class="row">
+ <button id="bTree" class="on">ต้นไม้ไหว</button>
+ <button id="bWind">ลม: กลาง</button>
+ <button id="bWave" class="on">น้ำขยับ</button>
+ <button id="bPads" class="on">ใบบัวขยับ</button>
+ <button id="bGlint" class="on">ประกายน้ำ</button>
+ <button id="bFish">เรียกปลามาเลย</button>
+</div>
+<div id="msg">กำลังโหลดภาพ…</div>
+<table>
+ <tr><th>ระดับ</th><th>ของ</th><th>การขยับ</th></tr>
+ <tr><td>ต่ำ ติดพื้น</td><td>พื้นหญ้า ถนน หิน ตอไม้ ท่อนซุง บ่อน้ำ ม้านั่ง โคม ป้าย</td><td>นิ่ง</td></tr>
+ <tr><td>กลาง</td><td>พุ่มไม้</td><td>ไหวเบา ราว 1 พิกเซล</td></tr>
+ <tr><td>สูง</td><td>ต้นไม้เล็ก · ต้นไม้ใหญ่</td><td>ยอดไหว 2 · 3 พิกเซล โคนนิ่ง</td></tr>
+</table>
+<p>ลมพัดเป็นระลอกจากซ้ายไปขวา มีช่วงแรงและช่วงสงบ ต้นไม้จึงไม่ไหวพร้อมกัน · เงาปลามาเองราวทุก 15–40 วินาที</p>
+</div>
+<script>
+// ---- a living scene from layers: painted ground, water life, and standing things that the wind moves by height. One file, no other downloads. ----
+const D=__DATA__;
+const Z=2, cv=document.getElementById('c'), ctx=cv.getContext('2d'), msg=document.getElementById('msg');
+const FAST=new URLSearchParams(location.search).has('fast');
+const OPT={pads:true,glint:true,wave:true,tree:true};
+const img=src=>new Promise((ok,bad)=>{const i=new Image();i.onload=()=>ok(i);i.onerror=()=>bad(new Error('img'));i.src='data:image/png;base64,'+src});
+
+// ================= WIND =================
+// How far the TOP of a thing leans, in world pixels, by height class. Low things and anything rigid never move.
+const AMP={low:0,mid:1,small:2,high:3};
+const WIND={str:1,levels:[['เบา',0.6],['กลาง',1],['แรง',1.5]],at:1};
+// gusts: the wind comes and goes (0.35 = a calm spell, 1 = a full gust), slowly.
+// Tuned by numbers: a big tree is still about 30% of the time, leans 2 px or more about 23%, and reaches its full 3 px only in a gust (5%).
+function gust(t){const g=Math.sin(t*0.42)*0.55+Math.sin(t*0.17+1.1)*0.45,s=(g+1)/2;return 0.35+0.65*s*s*(3-2*s)}
+// the gust front travels left -> right, so a thing further right answers later; each thing also has its own small phase
+function lean(i,t){const a=AMP[i.lv];if(!a||!OPT.tree)return 0;const tt=t-(i.x+i.r[2]/2)*0.0045;return a*WIND.str*gust(tt)*(0.3+0.7*Math.sin(tt*1.7+i.ph))}
+// a sprite leaning k pixels at the top: every row slides sideways, more the higher it is; the foot does not move at all
+function rowSlide(k,hgt,y){return Math.round(k*Math.pow((hgt-1-y)/Math.max(1,hgt-1),1.7))}
+const FRAMES=new Map();
+function frameOf(sheet,r,k){const key=r.join()+':'+k;let f=FRAMES.get(key);if(f)return f;const K=Math.abs(k);f=document.createElement('canvas');f.width=r[2]+2*K;f.height=r[3];
+  const x=f.getContext('2d');for(let y=0;y<r[3];y++)x.drawImage(sheet,r[0],r[1]+y,r[2],1,K+rowSlide(k,r[3],y),y,r[2],1);f.K=K;FRAMES.set(key,f);return f}
+D.inst.forEach((i,n)=>{i.ph=(n*2.399)%6.283});
+
+// ================= WATER =================
+const PADS=D.pads.map((p,i)=>({sx:p[0],sy:p[1],w:p[2],h:p[3],x:p[4],y:p[5],ph:i*1.7+0.4,sp:0.75+((i*37)%10)/22,amp:0.7+((i*13)%7)/10}));
+function padOffset(p,t){return OPT.pads?[Math.cos(t*p.sp*0.62+p.ph)*0.6*p.amp,Math.sin(t*p.sp+p.ph)*1.1*p.amp]:[0,0]}
+const waveLayer=document.createElement('canvas');waveLayer.width=D.w;waveLayer.height=D.h;const wx=waveLayer.getContext('2d');let waveAt=-1;
+function rowShift(y,t){return Math.round(Math.sin(t*1.5+y*0.23)*1.0+Math.sin(t*0.8+y*0.071+1.3)*0.7)}
+function drawWave(t,bg,mask){if(t-waveAt<0.08)return;waveAt=t;const [x0,y0,x1,y1]=D.waveBox;wx.globalCompositeOperation='source-over';wx.clearRect(0,0,D.w,D.h);
+  for(let y=y0;y<y1;y+=2)wx.drawImage(bg,x0-3,y,x1-x0+6,2,x0-3+rowShift(y,t),y,x1-x0+6,2);
+  wx.globalCompositeOperation='destination-in';wx.drawImage(mask,0,0);wx.globalCompositeOperation='source-over'}
+const FISH=[],RINGS=[];let nextFish=FAST?0.5:6+Math.random()*10,inWater=null;
+function fishDelay(){return FAST?1.5+Math.random()*1.5:15+Math.random()*25}
+function spawnFish(t){const P=D.deep;let a,b,c,ok=false;for(let n=0;n<60&&!ok;n++){a=P[(Math.random()*P.length)|0];b=P[(Math.random()*P.length)|0];if(Math.hypot(a[0]-b[0],a[1]-b[1])<90)continue;
+    c=[(a[0]+b[0])/2+(Math.random()-.5)*60,(a[1]+b[1])/2+(Math.random()-.5)*40];ok=true;
+    if(inWater)for(let u=0.1;u<0.95;u+=0.1){const q=fishPos({a,b,c},u);if(!inWater(q[0],q[1])){ok=false;break}}}
+  if(!ok)return false;
+  FISH.push({a,b,c,t0:t,dur:5.5+Math.random()*3,size:0.85+Math.random()*0.5,wob:Math.random()*6});RINGS.push({x:a[0],y:a[1],t0:t+0.5});return true}
+function fishPos(f,u){const v=1-u;return[v*v*f.a[0]+2*v*u*f.c[0]+u*u*f.b[0],v*v*f.a[1]+2*v*u*f.c[1]+u*u*f.b[1]]}
+const fishLayer=document.createElement('canvas');fishLayer.width=D.w;fishLayer.height=D.h;const fx=fishLayer.getContext('2d');
+function drawFish(t,clip){fx.clearRect(0,0,D.w,D.h);
+  for(let i=FISH.length-1;i>=0;i--){const f=FISH[i],u=(t-f.t0)/f.dur;if(u>=1){FISH.splice(i,1);continue}
+    const [x,y]=fishPos(f,u),[x2,y2]=fishPos(f,Math.min(1,u+0.02)),ang=Math.atan2(y2-y,x2-x),al=Math.min(1,u/0.14,(1-u)/0.14)*0.30,L=13*f.size,Wd=4.6*f.size,tail=Math.sin(t*7+f.wob)*0.45;
+    f.x=x;f.y=y;fx.save();fx.translate(x,y);fx.rotate(ang);fx.fillStyle='rgba(14,40,92,'+al.toFixed(3)+')';
+    fx.beginPath();fx.ellipse(0,0,L,Wd,0,0,6.283);fx.fill();fx.beginPath();fx.moveTo(-L*0.8,0);fx.lineTo(-L*1.55,-Wd*1.1+tail*4);fx.lineTo(-L*1.55,Wd*1.1+tail*4);fx.closePath();fx.fill();fx.restore()}
+  fx.globalCompositeOperation='destination-in';fx.drawImage(clip,0,0);fx.globalCompositeOperation='source-over'}
+function drawRings(t){for(let i=RINGS.length-1;i>=0;i--){const r=RINGS[i],u=(t-r.t0)/1.4;if(u>=1){RINGS.splice(i,1);continue}if(u<0)continue;
+    ctx.strokeStyle='rgba(235,248,255,'+((1-u)*0.55).toFixed(3)+')';ctx.lineWidth=1;ctx.beginPath();ctx.ellipse(r.x,r.y,3+u*13,(3+u*13)*0.5,0,0,6.283);ctx.stroke()}}
+const GL=[];for(let i=0;i<16;i++){const p=D.deep[(i*37+11)%D.deep.length];GL.push({x:p[0]+((i*29)%17)-8,y:p[1]+((i*17)%11)-5,ph:i*2.1,sp:0.5+((i*7)%5)/7})}
+
+// ================= FRAME =================
+let T0=null,frames=0,lastFps=0,fps=0;
+async function start(){let bg,pads,clip,wv,sheet;
+  try{[bg,pads,clip,wv,sheet]=await Promise.all([img(D.bg),img(D.padsImg),img(D.clip),img(D.wave),img(D.sprites)])}catch(e){msg.textContent='โหลดภาพไม่สำเร็จ ลองรีเฟรชหน้า';return}
+  const alphaOf=im=>{const c=document.createElement('canvas');c.width=D.w;c.height=D.h;const x=c.getContext('2d',{willReadFrequently:true});x.drawImage(im,0,0);const d=x.getImageData(0,0,D.w,D.h);for(let i=0;i<d.data.length;i+=4)d.data[i+3]=d.data[i];x.putImageData(d,0,0);return c};
+  const cm=alphaOf(clip),wm=alphaOf(wv),cmx=cm.getContext('2d',{willReadFrequently:true});
+  {const d=cmx.getImageData(0,0,D.w,D.h).data;inWater=(x,y)=>{x=Math.round(x);y=Math.round(y);return x>=0&&y>=0&&x<D.w&&y<D.h&&d[(y*D.w+x)*4+3]>0}}
+  msg.textContent='พร้อมแล้ว · ดูยอดไม้กับผิวน้ำ แล้วลองกดปุ่ม "ลม" เพื่อเปลี่ยนความแรง';
+  function frame(ms){const t=ms/1000;if(T0===null)T0=t;const tt=t-T0;frames++;if(t-lastFps>=1){fps=frames/(t-lastFps);frames=0;lastFps=t}
+    if(tt>=nextFish){spawnFish(tt);nextFish=tt+fishDelay()}
+    ctx.imageSmoothingEnabled=false;ctx.setTransform(Z,0,0,Z,0,0);ctx.drawImage(bg,0,0);
+    if(OPT.wave){drawWave(tt,bg,wm);ctx.drawImage(waveLayer,0,0)}
+    drawFish(tt,cm);ctx.drawImage(fishLayer,0,0);drawRings(tt);
+    if(OPT.glint)for(const g of GL){const a=Math.pow(Math.max(0,Math.sin(tt*g.sp+g.ph)),3)*0.75;if(a>0.02){ctx.fillStyle='rgba(255,255,255,'+a.toFixed(3)+')';ctx.fillRect(Math.round(g.x+Math.sin(tt*0.3+g.ph)*2),Math.round(g.y),3,1)}}
+    for(const p of PADS){const [dx,dy]=padOffset(p,tt);ctx.drawImage(pads,p.sx,p.sy,p.w,p.h,Math.round((p.x+dx)*Z)/Z,Math.round((p.y+dy)*Z)/Z,p.w,p.h)}
+    // standing things, back to front; anything with a height class leans with the wind
+    for(const i of D.inst){const k=Math.round(lean(i,tt));i.k=k;if(k===0)ctx.drawImage(sheet,i.r[0],i.r[1],i.r[2],i.r[3],i.x,i.y,i.r[2],i.r[3]);else{const f=frameOf(sheet,i.r,k);ctx.drawImage(f,i.x-f.K,i.y)}}
+    window.__dbg={t:tt,pad0:padOffset(PADS[0],tt),fish:FISH.map(f=>[f.x,f.y]),fps,ks:D.inst.map(i=>i.k)};
+    requestAnimationFrame(frame)}
+  requestAnimationFrame(frame);
+  document.getElementById('bFish').onclick=()=>{spawnFish((performance.now()/1000)-T0);msg.textContent='ปลามาแล้ว ดูเงาใต้น้ำ'};
+  const tog=(id,k)=>{const b=document.getElementById(id);b.onclick=()=>{OPT[k]=!OPT[k];b.classList.toggle('on',OPT[k])}};tog('bPads','pads');tog('bGlint','glint');tog('bWave','wave');tog('bTree','tree');
+  const bw=document.getElementById('bWind');bw.onclick=()=>{WIND.at=(WIND.at+1)%WIND.levels.length;WIND.str=WIND.levels[WIND.at][1];bw.textContent='ลม: '+WIND.levels[WIND.at][0]};
+  window.__api={OPT,AMP,WIND,D,PADS,RINGS,lean,gust,rowSlide,rowShift,padOffset,fishDelay,frames:FRAMES,spawnFish:()=>spawnFish((performance.now()/1000)-T0),
+    clipAt:(x,y)=>cmx.getImageData(Math.round(x),Math.round(y),1,1).data[3]>0,px:(x,y)=>Array.from(ctx.getImageData(Math.round(x*Z),Math.round(y*Z),1,1).data)}}
+start();
+</script></body></html>

@@ -1,6 +1,6 @@
 # compose_piece2.py — ชิ้นล่างซ้ายของ G9 รอบ 3: พื้นที่ AI วาด + ต้นไม้ชุดใหม่ (objects-3) + ของแยกชิ้น (objects-1/2)
 # ใช้: python3 compose_piece2.py [seed]
-import numpy as np, cv2, json, sys
+import numpy as np, cv2, json, sys, collections
 from PIL import Image, ImageDraw, ImageFilter
 
 U = 40                                   # world px per plan tile
@@ -122,7 +122,27 @@ gg[..., :3] = gg[..., :3] * (1 - shade[..., None] * 0.6) + tint * (shade[..., No
 out = Image.fromarray(gg.astype(np.uint8), 'RGBA')
 for by, bx, im, nm in sorted(OB, key=lambda o: o[0]): out.alpha_composite(im, (int(bx - im.width / 2), int(by - im.height)))
 out.convert('RGB').save(sys.argv[3] if len(sys.argv) > 3 else '/home/claude/gt/piece3_r3.png')
-import collections
+# optional export of the layers, for anything that draws the scene itself (the demo page, later the game):
+#   ground.png = painted ground + shadows, nothing standing on it · sprites.png + scene.json = every standing thing as its own piece
+if len(sys.argv) > 5:
+    import os
+    ex = sys.argv[5]; os.makedirs(ex, exist_ok=True)
+    Image.fromarray(gg.astype(np.uint8), 'RGBA').convert('RGB').save(ex + '/ground.png')
+    uniq = {}; order = []
+    for by, bx, im, nm in OB:
+        if id(im) not in uniq: uniq[id(im)] = len(order); order.append((im, nm))
+    aw = 1024; x = y = rowh = 0; pos = []
+    for im, nm in sorted(order, key=lambda o: -o[0].height):
+        if x + im.width + 1 > aw: x = 0; y += rowh + 1; rowh = 0
+        pos.append((id(im), x, y)); x += im.width + 1; rowh = max(rowh, im.height)
+    atlas = Image.new('RGBA', (aw, y + rowh), (0, 0, 0, 0)); rect = {}
+    for (i, x0, y0) in pos:
+        im = next(o[0] for o in order if id(o[0]) == i); atlas.paste(im, (x0, y0)); rect[i] = [x0, y0, im.width, im.height]
+    atlas.save(ex + '/sprites.png', optimize=True)
+    def level(nm): return 'high' if nm in ('treeA', 'treeB', 'treeC', 'clump') else 'small' if nm in ('treeD', 'treeE', 'treeF') else 'mid' if nm.startswith('bush') or nm == 'thicket' else 'low'
+    inst = [{'n': nm, 'lv': level(nm), 'r': rect[id(im)], 'x': int(bx - im.width / 2), 'y': int(by - im.height), 'by': int(by)} for by, bx, im, nm in sorted(OB, key=lambda o: o[0])]
+    json.dump({'w': W, 'h': H, 'inst': inst}, open(ex + '/scene.json', 'w'))
+    print(json.dumps({'export': ex, 'unique_sprites': len(order), 'instances': len(inst), 'atlas': list(atlas.size), 'levels': dict(collections.Counter(i['lv'] for i in inst))}))
 kinds = collections.Counter(o[3] for o in OB)
 print(json.dumps({'reference_points': len(ref_trees), 'trees': sum(v for k, v in kinds.items() if k.startswith('tree')), 'tree_shapes_used': sorted(k for k in kinds if k.startswith('tree')),
                   'nudged': nudged, 'no_room': lost, 'bushes': sum(v for k, v in kinds.items() if k.startswith('bush')), 'objects': len(OB)}))
