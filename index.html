@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.18';
+const VERSION='Lantern Academy 1.19';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -3552,7 +3552,7 @@ let G9B=null;
     const o={img:SH[r[4]],sx:r[0],sy:r[1],sw:r[2],sh:r[3],x:(tx+.5)*T,y:(ty+.9)*T,tx,ty,tall:1,cs:0,wildId:i,wk:k,hp:(k==='bush'||isKid())?1:2,hz:6,shOn:1};m.objs.push(o);m.wild.push(o);m.SOLID.add(key(tx,ty))});
   if(h.farm.robot){robotImg();const r={img:'_robot',sx:0,sy:0,sw:IMG.robotSheet?64:40,sh:IMG.robotSheet?64:48,x:m.shed.x,y:m.shed.y+18,tall:1,cs:0,robot:1};m.objs.push(r);m.robot={o:r,path:null,job:null,cool:1}}
   for(const [x,y] of G9B.lamps||[])m.glows.push([x,y]);
-  if(IMG.farmArt&&FARM_ART.conv_on){const tx=G9.conv[0],ty=G9.conv[1],r=FARM_ART.conv_on,o={img:'farmArt',sx:r[0],sy:r[1],sw:r[2],sh:r[3],x:tx*T+16,y:ty*T+30,tall:1,cs:0,g9b:1,swA:0,ph:0,hz:10,shOn:1};m._convL=[[tx,ty]];m.objs.push(o);m._convO=o;m.SOLID.add(key(tx,ty))}
+  if(IMG.farmArt&&FARM_ART.conv_on){const tx=G9.conv[0],ty=G9.conv[1],r=FARM_ART.conv_on,o={img:'farmArt',sx:r[0],sy:r[1],sw:r[2],sh:r[3],x:tx*T+16,y:ty*T+30,tall:1,cs:0,g9b:1,swA:0,ph:0,hz:0,shOn:1,f0:4,fw:r[2]-8};m._convL=[[tx,ty]];m.objs.push(o);m._convO=o;m.SOLID.add(key(tx,ty))}
   return m}}
 // ================= 1.14 G9 · THE SCENE COMES ALIVE (moved in from water-demo.html, where every number below was tested) =================
 // Wind: low things never move; bushes lean 1 px at the top, small trees 2, big trees 3; the foot stays put; gusts travel left to right with calm spells.
@@ -3670,6 +3670,20 @@ function g9bShadows(){if(!G9B||!G9B.liveShadow||!M.ground)return;const h=g9bHour
   G9SH.now={cast:Math.min(.44,s.a*(rain?.12:1)),foot:s.moon?.24:(rain?.28:.36),sx:s.sx,sy:s.sy,moon:s.moon};
   const g=M.ground.getContext('2d');g.setTransform(1,0,0,1,0,0);g.globalAlpha=1;g.imageSmoothingEnabled=false;g.drawImage(M._base,0,0);g.imageSmoothingEnabled=true;g.globalAlpha=G9SH.now.cast;g.drawImage(G9SH.cast,0,0,GW,GH);g.globalAlpha=G9SH.now.foot;g.drawImage(G9SH.foot,0,0,GW,GH);g.globalAlpha=1;g.imageSmoothingEnabled=false;
   if(W){W.src.getContext('2d').drawImage(M.ground,W.box[0],W.box[1],W.w,W.h,0,0,W.w,W.h);W.at=-1}}
+// ================= 1.19 FARM MUSIC · two recorded classical-guitar tracks (bgm-farm.mp3 by day, bgm-farm-night.mp3 at dusk and night) =================
+// Played only on the assembled farm, with the game's own music and sound switches. The game's synthesized tune is silent while a track plays.
+// A file that is missing or cannot play: the old synthesized music goes on as before. The files are fetched only when the farm is first entered.
+const FARM_BGM={src:{day:'bgm-farm.mp3',night:'bgm-farm-night.mp3'},el:{},bad:{},cur:null,vol:.5};
+function farmBgmWant(){try{if(!S||!M||M.id!=='farm'||!M.g9b||!MUS||!SND||document.hidden)return null;const ph=dayPhase();const k=(ph==='night'||ph==='dusk')?'night':'day';return FARM_BGM.bad[k]?(FARM_BGM.bad[k==='day'?'night':'day']?null:(k==='day'?'night':'day')):k}catch(e){return null}}
+function farmBgmEl(k){let a=FARM_BGM.el[k];if(a)return a;a=new Audio();a.loop=true;a.preload='auto';a.volume=0;a.addEventListener('error',()=>{FARM_BGM.bad[k]=1});a.src=(window.EMBED_ASSETS&&window.EMBED_ASSETS[FARM_BGM.src[k]])||FARM_BGM.src[k];FARM_BGM.el[k]=a;return a}
+function farmBgmTick(){const want=farmBgmWant();FARM_BGM.cur=want;
+  for(const k of ['day','night']){const a=FARM_BGM.el[k];if(!a&&k!==want)continue;const el=a||farmBgmEl(k);
+    if(k===want){if(el.paused){const pr=el.play();if(pr&&pr.catch)pr.catch(()=>{})}else{el.volume=Math.min(FARM_BGM.vol,el.volume+.05);FARM_BGM.wasOn=1;if(BGM.timer)stopMusic()}}
+    else if(!el.paused){el.volume=Math.max(0,el.volume-.07);if(el.volume<=.01)el.pause()}}
+  // away from the farm again: the game's own tune was silenced by us, so we start it again (the game itself only sets its music now and then)
+  if(!want&&FARM_BGM.wasOn&&S&&M&&M.id!=='farm'&&MUS&&SND&&!BGM.timer){FARM_BGM.wasOn=0;setMusic(M.kind!=='cave'?'town':(M.boss&&M.boss.active&&!M.boss.happy?'boss':'cave'))}}
+setInterval(()=>{try{farmBgmTick()}catch(e){}},200);
+{const _sm19=setMusic;setMusic=function(mode){try{if(farmBgmWant()){stopMusic();return}}catch(e){}return _sm19.apply(this,arguments)}}   // asked live: the moment the player leaves the farm the game's own tune may start again
 // ================= 1.07 H9 · PAPLERN VILLAGE, NEW SCENE (painted, MAP_SPEC_H9 v1.4) =================
 // A separate map "h9" for now, reached by the GM (warp) and from the G9 farm's east road; the village players use (map "capital") is untouched.
 // Needs map-H9-village.jpg (a sharper map-H9-village-hi.jpg replaces it once uploaded); missing picture -> this map is not offered at all.
