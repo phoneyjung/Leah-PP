@@ -28,7 +28,7 @@ const R=await pg.evaluate(async(NOPIC)=>{const o={};const sleep=ms=>new Promise(
  const c=M.exits.find(q2=>q2.id==='cave');const pth=findPath(M,P.x,P.y,c.x,c.y+10);o.pathToCave=pth?pth.length:0;P.path=pth;GM.fast=4;PAUSE=false;for(let i=0;i<160&&M.id==='h9';i++)await sleep(250);GM.fast=1;await sleep(900);o.inCave=[M.id,S.caveFrom];
  const s2=M.exits.find(q2=>q2.id==='s');useExit(s2);await sleep(1900);o.outOfCave=[M.id,+(Math.hypot(P.x-H9.cave[0]*T,P.y-H9.cave[1]*T)/T).toFixed(1)];
  // light stone wakes, child lantern refills at the crystal
- P.x=H9.stone[0]*T+16;P.y=(H9.stone[1]+1.6)*T;await sleep(400);o.stoneAwake=S.stones.includes('h9');
+ try{closeModal()}catch(e){}PAUSE=false;P.path=null;P.x=H9.stone[0]*T+16;P.y=(H9.stone[1]+1.6)*T;await sleep(800);o.stoneAwake=S.stones.includes('h9');o.stoneDbg=[PAUSE,M.id,M.stones.length];
  gmAge(7);await sleep(400);S.lamp=.2;P.x=M.crystalAt[0];P.y=M.crystalAt[1]+130;await sleep(400);o.lampAtCrystal=S.lamp;gmAge(30);await sleep(300);
  P.x=H9.fish[0]*T;P.y=H9.fish[1]*T;await sleep(200);o.fish=fishNear();
  return o},NOPIC);
