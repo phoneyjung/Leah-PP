@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.19';
+const VERSION='Lantern Academy 1.20';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -1300,7 +1300,7 @@ function render(tm){if(!M||!S)return;
   if(M.WATER.size){let s=3;const r=()=>(s=(s*16807)%2147483647)/2147483647;M.WATER.forEach(k=>{const [x,y]=k.split(',').map(Number);if(x*T>camX+VW||x*T+T<camX||y*T>camY+VH||y*T+T<camY)return;for(let i=0;i<2;i++){const px=x*T+4+Math.floor(r()*24),py=y*T+((Math.floor(r()*32)+tm*14)%32);if(Math.sin(tm*3+px)>.2){ctx.fillStyle='rgba(235,255,255,.75)';ctx.fillRect(px-camX,Math.round(py-camY),2,1)}}})}
   for(const f of M.anims)f(tm);
   for(const d of M.decks){const im=IMG[d.img];if(im)ctx.drawImage(im,Math.round(d.x-64-camX),Math.round(d.y-d.oy-camY))}
-  for(const e of M.exits){if(e.needBoss&&!S.boss||e.lockBoss&&M.boss&&!M.boss.happy)continue;const near=Math.hypot(P.x-e.x,P.y-e.y)<90;if(e.locked){if(near)ring(e.x-camX,e.y-camY,tm,.3,'255,150,150')}else ring(e.x-camX,e.y-camY,tm,near?1:.5)}
+  for(const e of M.exits){if(e.needBoss&&!S.boss||e.lockBoss&&M.boss&&!M.boss.happy)continue;const near=Math.hypot(P.x-e.x,P.y-e.y)<90;if(e.locked){if(near&&!M.g9b)ring(e.x-camX,e.y-camY,tm,.3,'255,150,150')}else if(!warpDraw(e,tm,near))ring(e.x-camX,e.y-camY,tm,near?1:.5)}
   for(const s of M.stones){const aw=S.stones.includes(s.id);ring(s.x-camX,s.y-camY+2,tm*(aw?1:.3),aw?.9:.05)}
   for(const s of M.stairs||[]){const x=Math.round(s.x-camX-18),y=Math.round(s.y-camY-26);for(let i=0;i<4;i++){const yy=s.up?y+i*7:y+21-i*7;ctx.fillStyle=['#7a4a26','#8a5a30','#9a6a3a','#aa7a44'][i];ctx.fillRect(x+i*2,yy,36-i*4,6);ctx.fillStyle='rgba(40,20,10,.5)';ctx.fillRect(x+i*2,yy+6,36-i*4,1)}ctx.fillStyle='#5a3418';ctx.fillRect(x-2,y-2,3,32);ctx.fillRect(x+35,y-2,3,32)}
   for(const q of M.zones||[])label((q.x0+q.x1+1)/2*T-camX,(q.y0+q.y1)/2*T-camY,t(q.k));if(M.pool)label(8.5*T-camX,15*T-camY-6,t('pool'));if(M.mailbox&&Math.hypot(P.x-M.mailbox.x,P.y-M.mailbox.y)<90)label(M.mailbox.x-camX,M.mailbox.y-camY-(M.g9b?58:30),t('mailbox'));
@@ -3684,6 +3684,14 @@ function farmBgmTick(){const want=farmBgmWant();FARM_BGM.cur=want;
   if(!want&&FARM_BGM.wasOn&&S&&M&&M.id!=='farm'&&MUS&&SND&&!BGM.timer){FARM_BGM.wasOn=0;setMusic(M.kind!=='cave'?'town':(M.boss&&M.boss.active&&!M.boss.happy?'boss':'cave'))}}
 setInterval(()=>{try{farmBgmTick()}catch(e){}},200);
 {const _sm19=setMusic;setMusic=function(mode){try{if(farmBgmWant()){stopMusic();return}}catch(e){}return _sm19.apply(this,arguments)}}   // asked live: the moment the player leaves the farm the game's own tune may start again
+// ================= 1.20 WAY-OUT MARKERS as pictures (warp-art.png): a turning ring of pale-blue tiles on the ground where a scene leads to another,
+// a golden doorstep mat with a bobbing arrow where a door leads indoors. Outdoor scenes only; caves and rooms keep the drawn ring. Missing file: the drawn ring everywhere, as before.
+// On the assembled farm the three closed ways show no marker at all: the log pile, the bolted gate and the thicket say it themselves.
+const WARP_ART={"ring0":[0,0,63,39],"ring1":[64,0,63,39],"ring2":[128,0,63,39],"ring3":[192,0,63,39],"mat0":[256,0,65,36],"mat1":[322,0,65,36],"mat2":[388,0,65,36]};
+{const i=new Image();i.onload=()=>{IMG.warpArt=i};i.onerror=()=>{};i.src=(window.EMBED_ASSETS&&window.EMBED_ASSETS['warp-art.png'])||'warp-art.png'}
+function warpDraw(e,tm,near){const im=IMG.warpArt;if(!im||!M||M.kind!=='town')return false;const door=e.id==='home'||/^room/.test(e.to||''),f=door?[0,1,2,1][Math.floor(tm*4)%4]:Math.floor(tm*5)%4,r=WARP_ART[(door?'mat':'ring')+f];if(!r)return false;
+  const W2=M.w*T,H2=M.h*T,x=Math.max(r[2]/2+2,Math.min(W2-r[2]/2-2,e.x)),y=Math.max(r[3]/2+2,Math.min(H2-r[3]/2-2,e.y+(door?6:0)));
+  ctx.globalAlpha=near?1:.86;ctx.drawImage(im,r[0],r[1],r[2],r[3],Math.round(x-r[2]/2-camX),Math.round(y-r[3]/2-camY),r[2],r[3]);ctx.globalAlpha=1;return true}
 // ================= 1.07 H9 · PAPLERN VILLAGE, NEW SCENE (painted, MAP_SPEC_H9 v1.4) =================
 // A separate map "h9" for now, reached by the GM (warp) and from the G9 farm's east road; the village players use (map "capital") is untouched.
 // Needs map-H9-village.jpg (a sharper map-H9-village-hi.jpg replaces it once uploaded); missing picture -> this map is not offered at all.
