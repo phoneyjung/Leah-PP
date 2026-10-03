@@ -2,6 +2,7 @@
 <html lang="th"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ลองดูฉากมีชีวิต · Lantern Academy</title>
+<link rel="icon" href="data:,">
 <style>
 :root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 html,body{margin:0;background:#1b1330;color:#f4ecd8;font-family:system-ui,"Noto Sans Thai",sans-serif}
@@ -89,18 +90,21 @@ function skyTint(h){const N=[78,92,158],W=[255,255,255],Dn=[255,206,170],K=[255,
   if(h<5||h>=19.5)return N;if(h<6)return mix(N,Dn,h-5);if(h<7.5)return mix(Dn,W,(h-6)/1.5);if(h<16.5)return W;if(h<18)return mix(W,K,(h-16.5)/1.5);return mix(K,N,(h-18)/1.5)}
 function tintNow(){const a=skyTint(SKY.hour),b=SKY.list[SKY.w].tint;return a.map((v,i)=>Math.round(v*b[i]/255))}
 const SHADE='rgb(18,28,58)';                       // cool dark blue, not black
-const shCast=document.createElement('canvas'),shFoot=document.createElement('canvas');let shSoft=0,shNow={cast:0,foot:0},shAt=-1,shW=-1,shH=-9;
-function drawShadows(sil,waterMask,tt){const Wt=SKY.list[SKY.w],s=sun(SKY.hour);
-  if(SKY.w===shW&&Math.abs(SKY.hour-shH)<0.2&&tt-shAt<0.05)return;shW=SKY.w;shH=SKY.hour;shAt=tt;      // rebuilt ~20 times a second; at once when the weather or the slider changes
+const shCast=document.createElement('canvas'),shFoot=document.createElement('canvas'),bgS=document.createElement('canvas');bgS.width=D.w;bgS.height=D.h;let shSoft=0,shNow={cast:0,foot:0},shAt=-1,shW=-1,shH=-9;
+function drawShadows(sil,waterMask,tt,bg){const Wt=SKY.list[SKY.w],s=sun(SKY.hour);
+  if(SKY.w===shW&&Math.abs(SKY.hour-shH)<0.05&&tt-shAt<0.25)return;shW=SKY.w;shH=SKY.hour;shAt=tt;     // rebuilt 4 times a second (a shadow swaying with its tree needs no more); at once when the weather or the hour changes
   if(Wt.soft!==shSoft){shSoft=Wt.soft;for(const c of[shCast,shFoot]){c.width=Math.ceil(D.w/shSoft);c.height=Math.ceil(D.h/shSoft)}}
   const k=1/shSoft,c=shCast.getContext('2d'),f=shFoot.getContext('2d');
   for(const x of[c,f]){x.setTransform(1,0,0,1,0,0);x.globalCompositeOperation='source-over';x.clearRect(0,0,shCast.width,shCast.height);x.imageSmoothingEnabled=true}
   f.fillStyle=SHADE;
-  for(const i of D.inst){if(!i.sh)continue;const w=i.r[2],h=i.r[3],SX=s.sx+(i.k||0)/h,SY=s.sy;   // a tree that leans k px at the top drags its shadow with it
+  for(const i of D.inst){if(!i.sh)continue;const w=i.r[2],h=i.r[3];
+    if(i.hz){f.setTransform(k,0,0,k,(i.x+s.sx*i.hz)*k,(i.y+s.sy*i.hz+1)*k);f.drawImage(sil,i.r[0],i.r[1],w,h,0,0,w,h);continue}
+    const SX=s.sx+(i.k||0)/h,SY=s.sy;   // a tree that leans k px at the top drags its shadow with it
     c.setTransform(k,0,-SX*k,-SY*k,(i.x+SX*h)*k,(i.by+SY*h)*k);c.drawImage(sil,i.r[0],i.r[1],w,h,0,0,w,h);
     const fw=i.f[1],fx=i.x+i.f[0]+fw/2;f.setTransform(k,0,0,k,0,0);f.beginPath();f.ellipse(fx+1.5,i.by-1,fw*0.5+Math.max(3,fw*0.12),Math.min(8,Math.max(3,fw*0.13))+1,0,0,6.283);f.fill()}
   for(const x of[c,f]){x.setTransform(k,0,0,k,0,0);x.globalCompositeOperation='destination-out';x.drawImage(waterMask,0,0);x.globalCompositeOperation='source-over'}   // nothing darkens open water
-  shNow={cast:Math.min(0.44,s.a*Wt.cast),foot:s.moon?0.20:(Wt.fall==='rain'?0.24:0.30)}}
+  shNow={cast:Math.min(0.44,s.a*Wt.cast),foot:s.moon?0.24:(Wt.fall==='rain'?0.28:0.36)};
+  const g=bgS.getContext('2d');g.globalAlpha=1;g.imageSmoothingEnabled=false;g.drawImage(bg,0,0);g.imageSmoothingEnabled=true;g.globalAlpha=shNow.cast;g.drawImage(shCast,0,0,D.w,D.h);g.globalAlpha=shNow.foot;g.drawImage(shFoot,0,0,D.w,D.h);g.globalAlpha=1}
 // rain and snow
 const DROPS=[];for(let i=0;i<120;i++)DROPS.push({x:Math.random(),y:Math.random(),s:0.7+Math.random()*0.6});let fallN=0,lastDrop=0;
 function drawFall(tt){const Wt=SKY.list[SKY.w];fallN=0;if(!Wt.fall)return;
@@ -149,12 +153,12 @@ async function start(){let bg,pads,clip,wv,sheet;
   function frame(ms){const t=ms/1000;if(T0===null)T0=t;const tt=t-T0;frames++;if(t-lastFps>=1){fps=frames/(t-lastFps);frames=0;lastFps=t}
     const dt=lastMs===null?0:Math.min(0.1,(ms-lastMs)/1000);lastMs=ms;if(SKY.run){SKY.hour=(SKY.hour+dt*0.5)%24;tS.value=SKY.hour;tL.textContent='เวลา '+hhmm(SKY.hour)}
     if(tt>=nextFish){spawnFish(tt);nextFish=tt+fishDelay()}
-    ctx.imageSmoothingEnabled=false;ctx.setTransform(Z,0,0,Z,0,0);ctx.drawImage(bg,0,0);
+    if(OPT.shadow)drawShadows(sil,cm,tt,bg);
+    ctx.imageSmoothingEnabled=false;ctx.setTransform(Z,0,0,Z,0,0);ctx.drawImage(OPT.shadow?bgS:bg,0,0);
     if(OPT.wave){drawWave(tt,bg,wm);ctx.drawImage(waveLayer,0,0)}
     drawFish(tt,cm);ctx.drawImage(fishLayer,0,0);drawRings(tt);
     if(OPT.glint)for(const g of GL){const a=Math.pow(Math.max(0,Math.sin(tt*g.sp+g.ph)),3)*0.75;if(a>0.02){ctx.fillStyle='rgba(255,255,255,'+a.toFixed(3)+')';ctx.fillRect(Math.round(g.x+Math.sin(tt*0.3+g.ph)*2),Math.round(g.y),3,1)}}
     for(const p of PADS){const [dx,dy]=padOffset(p,tt);ctx.drawImage(pads,p.sx,p.sy,p.w,p.h,Math.round((p.x+dx)*Z)/Z,Math.round((p.y+dy)*Z)/Z,p.w,p.h)}
-    if(OPT.shadow){drawShadows(sil,cm,tt);ctx.imageSmoothingEnabled=true;ctx.globalAlpha=shNow.cast;ctx.drawImage(shCast,0,0,D.w,D.h);ctx.globalAlpha=shNow.foot;ctx.drawImage(shFoot,0,0,D.w,D.h);ctx.globalAlpha=1;ctx.imageSmoothingEnabled=false}
     // standing things, back to front; anything with a height class leans with the wind
     for(const i of D.inst){const k=Math.round(lean(i,tt));i.k=k;if(k===0)ctx.drawImage(sheet,i.r[0],i.r[1],i.r[2],i.r[3],i.x,i.y,i.r[2],i.r[3]);else{const f=frameOf(sheet,i.r,k);ctx.drawImage(f,i.x-f.K,i.y)}}
     {const c=tintNow();if(c[0]<255||c[1]<255||c[2]<255){ctx.globalCompositeOperation='multiply';ctx.fillStyle='rgb('+c.join()+')';ctx.fillRect(0,0,D.w,D.h);ctx.globalCompositeOperation='source-over'}}
@@ -168,7 +172,7 @@ async function start(){let bg,pads,clip,wv,sheet;
   const br=document.getElementById('bRun');br.onclick=()=>{SKY.run=!SKY.run;br.classList.toggle('on',SKY.run)};
   const bs=document.getElementById('bSky');bs.onclick=()=>{SKY.w=(SKY.w+1)%SKY.list.length;bs.textContent='อากาศ: '+SKY.list[SKY.w].n};
   const bw=document.getElementById('bWind');bw.onclick=()=>{WIND.at=(WIND.at+1)%WIND.levels.length;WIND.str=WIND.levels[WIND.at][1];bw.textContent='ลม: '+WIND.levels[WIND.at][0]};
-  window.__api={holdFish:v=>{nextFish=v?1e9:((performance.now()/1000)-T0)+fishDelay()},SKY,sun,skyTint,tintNow,shadowAlphaAt:(x,y)=>shCast.getContext('2d').getImageData(Math.floor(x/shSoft),Math.floor(y/shSoft),1,1).data[3],
+  window.__api={footAlphaAt:(x,y)=>shFoot.getContext('2d').getImageData(Math.floor(x/shSoft),Math.floor(y/shSoft),1,1).data[3],holdFish:v=>{nextFish=v?1e9:((performance.now()/1000)-T0)+fishDelay()},SKY,sun,skyTint,tintNow,shadowAlphaAt:(x,y)=>shCast.getContext('2d').getImageData(Math.floor(x/shSoft),Math.floor(y/shSoft),1,1).data[3],
     shadowArea:()=>{const d=shCast.getContext('2d').getImageData(0,0,shCast.width,shCast.height).data;let n=0;for(let i=3;i<d.length;i+=4)if(d[i]>128)n++;return n*shSoft*shSoft},
     lumBox:(x,y,w,h)=>{const d=ctx.getImageData(Math.round(x*Z),Math.round(y*Z),Math.round(w*Z),Math.round(h*Z)).data;let s=0;for(let i=0;i<d.length;i+=4)s+=d[i]*0.3+d[i+1]*0.59+d[i+2]*0.11;return s/(d.length/4)},
     OPT,AMP,WIND,D,PADS,RINGS,lean,gust,rowSlide,rowShift,padOffset,fishDelay,frames:FRAMES,spawnFish:()=>spawnFish((performance.now()/1000)-T0),

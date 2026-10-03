@@ -3,7 +3,7 @@
 const p=require('/home/claude/.npm-global/lib/node_modules/@mermaid-js/mermaid-cli/node_modules/puppeteer');
 (async()=>{const b=await p.launch({executablePath:'/home/claude/.cache/puppeteer/chrome/linux-131.0.6778.204/chrome-linux64/chrome',args:['--no-sandbox']});
 const pg=await b.newPage();await pg.setViewport({width:390,height:844,isMobile:true,hasTouch:true,deviceScaleFactor:2});const errs=[];pg.on('pageerror',e=>errs.push(e.message));
-await pg.goto('http://localhost:'+(process.env.PORT||8777)+'/water-demo.html',{waitUntil:'networkidle0'});await new Promise(r=>setTimeout(r,1500));
+await pg.goto('http://localhost:'+(process.env.PORT||8777)+'/water-demo.html',{waitUntil:'load'});await new Promise(r=>setTimeout(r,2000));
 const R=await pg.evaluate(async()=>{const o={};const sleep=ms=>new Promise(r=>setTimeout(r,ms));const A=window.__api,D=A.D;
  o.ready=!!A&&!!window.__dbg;
  A.holdFish(true);                                    // no fish swims in by itself while pixels are being compared; the fish checks below call fish on purpose
@@ -53,6 +53,10 @@ const R=await pg.evaluate(async()=>{const o={};const sleep=ms=>new Promise(r=>se
  o.groundRightOfWell={};for(const [name,h,w] of [['07:00',7,0],['12:00',12,0],['17:00',17,0],['22:00',22,0],['12:00 cloudy',12,1],['13:00 heat',13,4]]){const x=await lum(h,w,true),y=await lum(h,w,false);o.groundRightOfWell[name]=+(x/y).toFixed(3)}
  A.OPT.shadow=true;o.byWeatherAtNoon={};for(let w=0;w<A.SKY.list.length;w++){A.SKY.hour=12;A.SKY.w=w;await sleep(220);o.byWeatherAtNoon['w'+w]=[+window.__dbg.sh.cast.toFixed(2),+window.__dbg.sh.foot.toFixed(2),window.__dbg.fall]}
  A.SKY.w=0;o.shadowAreaPx={};for(const h of [7,12,17]){A.SKY.hour=h;await sleep(220);o.shadowAreaPx[h]=A.shadowArea()}
+ // low things (logs, rocks, bushes, bench, well): the shadow touches the thing all along its lower edge and does not stray far below it
+ {A.SKY.hour=10;A.SKY.w=0;await sleep(260);const lows=D.inst.filter(i=>i.hz>0&&i.sh&&i.x>8&&i.x+i.r[2]<D.w-8&&i.by>i.r[3]+4&&i.by<D.h-30);let touch=0,stray=0;
+  for(const i of lows){const fx=i.x+i.f[0]+i.f[1]/2;if(A.footAlphaAt(fx+3,i.by+1)>40||A.clipAt(fx+3,i.by+1))touch++;if(A.footAlphaAt(fx,i.by+i.hz*0.36+12)>40)stray++}
+  o.lowThingShadows={things:lows.length,shadowTouchesTheFoot:touch,shadowStraysBelow:stray}}
  let onWater=0,wn=0;for(const q of D.deep.filter((q,i)=>i%5===0)){wn++;if(A.shadowAlphaAt(q[0],q[1])>8)onWater++}o.shadowOnOpenWater=[onWater,wn];
  A.SKY.hour=6;A.SKY.run=true;await sleep(2000);o.clockMovedHoursIn2s=+(A.SKY.hour-6).toFixed(2);A.SKY.run=false;o.sliderFollows=Math.abs(+document.getElementById('tSlider').value-A.SKY.hour)<0.3;
  o.tint={noon:A.skyTint(12),dusk:A.skyTint(17.5).map(Math.round),night:A.skyTint(22)};

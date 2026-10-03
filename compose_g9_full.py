@@ -217,12 +217,23 @@ def foot_of(im, nm):
     a = np.asarray(im)[..., 3] > 0; hgt = a.shape[0]; rows = max(3, int(hgt * (0.08 if (nm.startswith('tree') or nm in ('clump', 'oak')) else 0.30)))
     xs = np.where(a[hgt - rows:].any(0))[0]; return (int(xs.min()), int(xs.max()) + 1) if len(xs) else (0, im.width)
 SUN_SX, SUN_SY, CAST_A, FOOT_A = 0.43, 0.36, 0.34, 0.30          # 10:00 on a sunny day, the values of sun(10) in the demo
+# real height above the ground, in px, of everything that lies or squats (anything not listed stands upright and casts a tipped-over shadow)
+LOW_H = {'logSeatL': 9, 'logSeatR': 9, 'log': 7, 'logs': 15, 'firepit': 7, 'rockS': 6, 'rockM': 10, 'stump': 10, 'pad': 4,
+         'bush': 13, 'bushFlower': 13, 'bushBig': 13, 'bushLow': 9, 'bushBloom': 11, 'thicket': 16,
+         'crate': 13, 'bench': 12, 'well': 16, 'house': 26, 'shed': 22, 'hut': 22}
+LOW_A = 0.40
+low = np.zeros((H, W), np.float32)
 SHADE = np.array([18, 28, 58], np.float32)
 cast = np.zeros((H, W), np.float32); footm = np.zeros((H, W), np.float32)
 FEET = []
 for by, bx, im, nm in OB:
     if nm in SMALL: continue
     w_, hgt = im.size; x0 = bx - w_ / 2; f0, f1 = foot_of(im, nm); fw = f1 - f0; cx = x0 + (f0 + f1) / 2
+    if nm in LOW_H:
+        dx_, dy_ = int(round(SUN_SX * LOW_H[nm])), int(round(SUN_SY * LOW_H[nm])) + 1; al_ = np.asarray(im)[..., 3].astype(np.float32) / 255.0
+        X0, Y0 = int(x0) + dx_, int(by - hgt) + dy_; ys0, xs0 = max(0, Y0), max(0, X0); ys1, xs1 = min(H, Y0 + hgt), min(W, X0 + w_)
+        if ys1 > ys0 and xs1 > xs0: low[ys0:ys1, xs0:xs1] = np.maximum(low[ys0:ys1, xs0:xs1], al_[ys0 - Y0:ys1 - Y0, xs0 - X0:xs1 - X0])
+        FEET.append((by, cx, fw, im, nm)); continue
     # cast shadow: output (X, Y) -> sprite (u, v):  v = (by + SY*h - Y) / SY ,  u = X - x0 - SX*(h - v)
     ow, oh = int(w_ + SUN_SX * hgt) + 3, int(SUN_SY * hgt) + 3; X0, Y0 = int(x0) - 1, int(by) - 1
     a_ = Image.fromarray(np.asarray(im)[..., 3], 'L')
@@ -233,10 +244,10 @@ for by, bx, im, nm in OB:
     rw = fw * 0.5 + max(3, fw * 0.12); rh2 = min(8.0, max(3.0, fw * 0.13)) + 1
     cv2.ellipse(footm, (int(round(cx + 1.5)), int(round(by - 1))), (int(round(rw)), int(round(rh2))), 0, 0, 360, 1.0, -1)
     FEET.append((by, cx, fw, im, nm))
-cast = cv2.GaussianBlur(cast, (0, 0), 2.2); footm = cv2.GaussianBlur(footm, (0, 0), 1.8)
-cast[water > 0] = 0; footm[water > 0] = 0                                # nothing darkens open water
+cast = cv2.GaussianBlur(cast, (0, 0), 2.2); footm = cv2.GaussianBlur(footm, (0, 0), 1.8); low = cv2.GaussianBlur(low, (0, 0), 1.5)
+cast[water > 0] = 0; footm[water > 0] = 0; low[water > 0] = 0            # nothing darkens open water
 gg = np.asarray(base).astype(np.float32)
-for layer, alpha in ((cast, CAST_A), (footm, FOOT_A)):
+for layer, alpha in ((cast, CAST_A), (footm, FOOT_A), (low, LOW_A)):
     k_ = (layer * alpha)[..., None]; gg[..., :3] = gg[..., :3] * (1 - k_) + SHADE * k_
 out = Image.fromarray(np.clip(gg, 0, 255).astype(np.uint8), 'RGBA')
 grass_here = lambda x, y: 0 <= int(x) < W and 0 <= int(y) < H and (35 < h_[int(y), int(x)] < 75) and s_[int(y), int(x)] > 110 and not sand[int(y), int(x)] and not water[int(y), int(x)] and not rock[int(y), int(x)] and not flat_mask[int(y), int(x)]
@@ -298,7 +309,7 @@ if len(sys.argv) > 3:
     for im, nm in order: atlas.paste(im, tuple(rect[id(im)][:2]))
     atlas.save(ex + '/sprites.png', optimize=True)
     level = lambda nm: 'high' if nm in ('treeA', 'treeB', 'treeC', 'clump', 'oak') else 'small' if nm in ('treeD', 'treeE', 'treeF') else 'mid' if nm.startswith('bush') or nm == 'thicket' else 'low'
-    inst = [{'n': nm, 'lv': level(nm), 'r': rect[id(im)], 'x': int(bx - im.width / 2), 'y': int(by - im.height), 'by': int(by), 'f': [int(foot_of(im, nm)[0]), int(foot_of(im, nm)[1] - foot_of(im, nm)[0])], 'sh': 0 if nm in SMALL else 1}
+    inst = [{'n': nm, 'lv': level(nm), 'r': rect[id(im)], 'x': int(bx - im.width / 2), 'y': int(by - im.height), 'by': int(by), 'f': [int(foot_of(im, nm)[0]), int(foot_of(im, nm)[1] - foot_of(im, nm)[0])], 'sh': 0 if nm in SMALL else 1, 'hz': LOW_H.get(nm, 0)}
             for by, bx, im, nm in sorted(OB, key=lambda o: o[0])]
     json.dump({'w': W, 'h': H, 'inst': inst}, open(ex + '/scene.json', 'w'))
     print(json.dumps({'export': ex, 'unique_sprites': len(order), 'instances': len(inst), 'atlas': list(atlas.size)}))
