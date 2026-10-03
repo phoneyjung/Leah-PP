@@ -158,7 +158,14 @@ for x, y in S['lamps']:
     if abs(x - 36.7) < 0.2 and abs(y - 9.1) < 0.2: x, y = 36.2, 9.6                                # this one stood on the yard fence: moved onto the grass by the trail
     add('lamp', x, y, h=88)
 add('pillar', 47.0, 14.2); add('pillar', 47.0, 18.0)                 # one each side of the main road, at the east end
-add('mailbox', DX + 1.25, 13.95); add('board', DX - 3.15, 12.75)          # the house grows to the right (256 -> 427 px wide): the sign stands on the front lawn left of the door path, clear of every size of the house
+# ---------- the front garden (owner, 4 Oct: the things round the house lay scattered and it did not feel cosy) ----------
+# One idea per place: a low fence closes the garden toward the road and leaves the path open; the letter box and the lantern machine stand left and right of the
+# path mouth like gate posts; flowers line the path and the fence; blooming bushes sit against the house. The work things (crate, robot) stay by the shed.
+add('mailbox', DX - 1.2, 15.15); add('bushBloom', DX - 2.95, 10.6, tone='mid'); add('bushBloom', DX + 2.35, 10.55, tone='mid', flip=True); add('bushLow', DX + 3.75, 10.6, tone='mid')
+for _i, _y in enumerate((11.95, 12.8, 13.65, 14.5)):
+    for _sd in (-1, 1): add(('flowerW', 'flowerY', 'flowerR')[(_i + (_sd > 0)) % 3], DX + _sd * 1.08, _y + (0.12 if _sd > 0 else 0), flip=_sd > 0)
+for _k, _x in enumerate(list(np.arange(13.5, 17.3, 0.62)) + list(np.arange(22.5, 26.3, 0.62))): add(('flowerY', 'flowerW', 'flowerR', 'flowerW')[_k % 4], float(_x), 14.95 + 0.06 * (_k % 2), flip=_k % 2 == 0)
+add('board', DX - 3.15, 12.75)          # the house grows to the right (256 -> 427 px wide): the sign stands on the front lawn left of the door path, clear of every size of the house
 for x, y in S['signs']:
     if x > 45 and 13 < y < 15: x, y = 45.6, 18.1                       # the east sign stood on the fence corner: now south of the road, before the pillar
     add('sign', x, y)
@@ -192,6 +199,7 @@ def gate_shut(width):                                   # hinge post + a leaf sw
     out.paste(lf, (13, gs.shape[0] - lf.height - 2)); out.alpha_composite(Image.fromarray(post, 'RGBA'), (0, 0)); return out
 GATE_L, GATE_R = YL + 140 - 11, YR - 140 + 11                     # hinge posts cover the two fence ends
 half_w = int(round((GATE_R - GATE_L) / 2)); gl = gate_shut(half_w); put(gl, GATE_L, YB + 1, 'gateShut'); put(gl.transpose(Image.FLIP_LEFT_RIGHT), GATE_R - half_w, YB + 1, 'gateShut')
+run_h(524, 612, 2); run_h(884, 612, 2)                               # the front-garden fence along the road, left and right of the path mouth
 # the three closed ways of this chapter
 add('logs', 3.2, 16.3, scale=0.85); add('logs', 2.8, 17.5, scale=0.85); add('thicket', 12, 30.4)
 lg = LIBS[2]; r_ = lg[1]['gate']; lk = lg[0].crop((r_[0], r_[1], r_[0] + r_[2], r_[1] + r_[3])); lk = lk.resize((round(lk.width * 0.62), round(lk.height * 0.62)), Image.LANCZOS)

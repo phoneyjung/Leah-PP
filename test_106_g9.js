@@ -32,7 +32,7 @@ const R=await pg.evaluate(async(NOPIC)=>{const o={};const sleep=ms=>new Promise(
  // farming on the starter plot, clearing wild land, extra beds, robot
  const n=gmFarm('plant');const hp0=HOME.get().pantry[HOME.get().plots[M.plots[0].i].crop]||0;const crop=HOME.get().plots[M.plots[0].i].crop;plotAct(M.plots[0]);await sleep(200);closeModal();
  o.farm={planted:n,harvest:(HOME.get().pantry[crop]||0)-hp0};const h0=HOME.get();h0.farm.cleared=[];HOME.put(h0);delete CACHE.farm;goMap('farm');await sleep(500);
- const wl=M.wild.slice(0,15);for(const q of wl){q.hp=1;clearWild(q)}o.farm.cleared=farmSave().farm.cleared.length;o.farm.plotsAfter=M.plots.length;o.farm.extraAt=M.plots.filter(q=>q.i>=220).every((q,k)=>Math.abs(q.x/T-G9.extra[q.i-220][0])<.01);o.farm.wildLeft=M.wild.length;
+ const wl=M.wild.slice(0,15);for(const q of wl){q.hp=1;clearWild(q)}o.farm.cleared=farmSave().farm.cleared.length;o.farm.plotsAfter=M.plots.length;o.farm.extraAt=M.plots.filter(q=>q.i>=220&&q.i<240).every((q,k)=>Math.abs(q.x/T-G9.extra[q.i-220][0])<.01);o.farm.wildLeft=M.wild.length;
  gmFarm('robot');await sleep(300);o.farm.robot=!!M.robot;
  // converter (child) and fishing spot
  gmAge(7);await sleep(400);const [cx,cy]=convList()[0];o.convTileFree=!M.SOLID.has(key(cx,cy));S.conv={};S.lamp=.3;P.x=cx*T+16;P.y=cy*T+16;await sleep(400);o.convRefill=+S.lamp.toFixed(2);gmAge(30);await sleep(300);

@@ -132,7 +132,7 @@ sh = find('shed')[0]; P['shed'] = [round(cxy(sh)[0] / T, 2), round((sh['by'] + 1
 cr = find('crate')[0]; P['crate'] = [round(cxy(cr)[0] / T, 2), round(cr['by'] / T, 2)]
 fp = find('firepit')[0]; P['camp'] = [round(cxy(fp)[0] / T, 2), round((fp['by'] + 26) / T, 2)]
 bd = find('board')[0]; P['sign'] = [round(cxy(bd)[0] / T, 2), round((bd['by'] + 6) / T, 2)]
-P['conv'] = [30, 16]
+P['conv'] = [26, 18]                                              # right of the path mouth, across from the letter box
 # fishing: stand on the wooden dock, near its end
 dock_x = int(20.5 * 40); col = np.where(~water[820:1000, dock_x] )[0]; col = col[col < 120]; P['fish'] = [round(dock_x / T, 2), round((820 + col.max() - 16) / T, 2)]
 (p1x, p1y, p1w, p1h), (p2x, p2y, p2w, p2h), p3, p4 = sc['plots']; FP = sc['fper']; PT = sc.get('ptop', 9); PSD = sc.get('pside', 9); CL = sc['cells']
