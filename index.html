@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.08';
+const VERSION='Lantern Academy 1.10';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -3059,20 +3059,20 @@ const MAIL_TO={restaurant:['ป้าหอม','ร้านอาหาร','�
   house_e1:['พี่ดาว','บ้านใกล้แผงผลไม้','⭐','Big sister Dao','the house near the fruit stall'],house_e2:['ตาเมฆ','บ้านหลังสุดท้าย','☁️','Grandpa Mek','the last house']};
 try{Object.assign(TX.th,{mailGet:'📮 ได้จดหมาย 3 ฉบับ! อ่านชื่อบนซองแล้วไปส่งนะ',mailTo:'ถึง',mailDone:'✉️ ส่งถึง {n} แล้ว!',mailAll:'🎉 ส่งครบแล้ว! กลับไปรับรางวัลที่ไปรษณีย์',mailPrize:'🎁 เก่งมาก! ได้แสตมป์ 1 ดวง',mailCome:'📮 พรุ่งนี้มีจดหมายใหม่นะ',mailHud:'📮 จดหมาย'});
   if(TX.en)Object.assign(TX.en,{mailGet:'📮 3 letters for you! Read the names and deliver them',mailTo:'To',mailDone:'✉️ Delivered to {n}!',mailAll:'🎉 All delivered! Back to the post office for a prize',mailPrize:'🎁 Well done! You got 1 stamp',mailCome:'📮 New letters tomorrow',mailHud:'📮 Letters'})}catch(e){}
-const mailName=k=>{const a=MAIL_TO[k];return LANG==='en'?a[3]:a[0]},mailWhere=k=>{const a=MAIL_TO[k];return LANG==='en'?a[4]:a[1]};
+const mailName=k=>{const a=MAIL_TO[k];return LANG==='en'?a[3]:a[0]},mailWhere=k=>{try{if(M&&M.h9&&H9_WHERE[k])return H9_WHERE[k][LANG==='en'?1:0]}catch(e){}const a=MAIL_TO[k];return LANG==='en'?a[4]:a[1]};
 function mailToday(){S.mail=S.mail||{};if(S.mail.day!==today())S.mail={day:today(),got:false,letters:[],claimed:false};return S.mail}
-function mailDoorPt(k){const d=MAIL_DOORS[k];return [(d[0]+.5)*T,(d[1]+.7)*T]}
+function mailDoorPt(k){try{if(M&&M.h9){const d=H9.doors[H9_MAIL[k]];return [d[0]*T,(d[1]+1)*T]}}catch(e){}const d=MAIL_DOORS[k];return [(d[0]+.5)*T,(d[1]+.7)*T]}
 function mailPick(){const keys=Object.keys(MAIL_TO),r=seeded([...today()].reduce((a,c)=>a*31+c.charCodeAt(0),7)%2147483646+1),out=[];while(out.length<3){const k=keys[Math.floor(r()*keys.length)];if(!out.includes(k))out.push(k)}return out}
 function mailShow(){const mb=mailToday();modal('<h2>'+t('mailGet')+'</h2><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:6px">'+mb.letters.map(l=>'<div style="background:#fffaf0;color:#3a2410;border:3px solid #c9a46a;border-radius:10px;padding:10px 6px;text-align:center"><div style="font-size:40px;line-height:1.1">'+MAIL_TO[l.to][2]+'</div><div style="font-size:12px;color:#8a6a3a">'+t('mailTo')+'</div><div style="font-size:22px;font-weight:bold">'+mailName(l.to)+'</div><div style="font-size:13px">'+mailWhere(l.to)+'</div></div>').join('')+'</div>')}
 let mailCool=0;
-{const _uM=update;update=function(dt){const r=_uM.apply(this,arguments);try{if(!S||!M||!M.capA||PAUSE)return r;mailCool=Math.max(0,mailCool-dt);if(mailCool>0)return r;const mb=mailToday(),near=k=>{const [x,y]=mailDoorPt(k);return Math.hypot(P.x-x,P.y-y)<T*1.05};
+{const _uM=update;update=function(dt){const r=_uM.apply(this,arguments);try{if(!S||!M||!(M.capA||M.h9)||PAUSE)return r;mailCool=Math.max(0,mailCool-dt);if(mailCool>0)return r;const mb=mailToday(),near=k=>{const [x,y]=mailDoorPt(k);return Math.hypot(P.x-x,P.y-y)<T*(M.h9?1.7:1.05)};
   if(near('post_office')){
     if(!mb.got){mb.got=true;mb.letters=mailPick().map(k=>({to:k,done:false}));save();sfx('pick');mailShow();mailCool=2.5;hud();return r}
     if(mb.letters.length&&mb.letters.every(l=>l.done)&&!mb.claimed){mb.claimed=true;S.stamps=(S.stamps||0)+1;S.coins+=20;gainExp(15);sfx('lvl');for(let i=0;i<18;i++)FX.push({k:'star',x:P.x,y:P.y-30,vx:Math.cos(i/18*6.28)*60,vy:Math.sin(i/18*6.28)*60-30,t:0,life:1});say(t('mailPrize')+' · +20🪙');save();hud();mailCool=2.5;try{stampRewards();setTimeout(()=>{if(!document.querySelector('#modal:not(.hide)'))openStampBook()},2600)}catch(e){}return r}}
   for(const l of mb.letters||[]){if(l.done||!near(l.to))continue;l.done=true;S.coins+=5;gainExp(5);sfx('coin');TXT.push({x:P.x,y:P.y-70,s:'✉️ +5🪙',c:'#ffe36b',t:0});say(t('mailDone').replace('{n}',mailName(l.to))+(mb.letters.every(q=>q.done)?'\n'+t('mailAll'):''));save();hud();mailCool=2;break}
  }catch(e){}return r}}
 // envelopes over the doors that still wait (and a mailbox sign over the post office when there is something to collect)
-{const _rM2=render;render=function(tm){const r=_rM2.apply(this,arguments);try{if(!S||!M||!M.capA)return r;const mb=mailToday(),t2=(tm||0);ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.textAlign='center';ctx.textBaseline='middle';
+{const _rM2=render;render=function(tm){const r=_rM2.apply(this,arguments);try{if(!S||!M||!(M.capA||M.h9))return r;const mb=mailToday(),t2=(tm||0);ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.textAlign='center';ctx.textBaseline='middle';
   const mark=(k,ch)=>{const [x,y]=mailDoorPt(k),X=(x-camX)*SC,Y=(y-58-camY+Math.sin(t2*3+x)*3)*SC,u=SC;if(X<-40||Y<-40||X>VW*SC+40||Y>VH*SC+40)return;
     ctx.globalCompositeOperation='lighter';const g=ctx.createRadialGradient(X,Y,0,X,Y,18*u);g.addColorStop(0,'rgba(255,214,110,.55)');g.addColorStop(1,'rgba(255,214,110,0)');ctx.fillStyle=g;ctx.fillRect(X-18*u,Y-18*u,36*u,36*u);ctx.globalCompositeOperation='source-over';
     const env=(ex,ey)=>{ctx.fillStyle='#4a2f17';ctx.fillRect(ex-11*u,ey-8*u,22*u,16*u);ctx.fillStyle='#fffaf0';ctx.fillRect(ex-10*u,ey-7*u,20*u,14*u);ctx.strokeStyle='#c9a46a';ctx.lineWidth=1.4*u;ctx.beginPath();ctx.moveTo(ex-10*u,ey-7*u);ctx.lineTo(ex,ey+1*u);ctx.lineTo(ex+10*u,ey-7*u);ctx.stroke();ctx.fillStyle='#e0435a';ctx.beginPath();ctx.arc(ex,ey+1*u,2.4*u,0,6.283);ctx.fill()};
@@ -3444,8 +3444,8 @@ function gmMaps(){const first=['capital','farm','cavemouth','hunt1','room','roya
   if(gmOn()&&GM.pos&&M&&P){ctx.save();ctx.setTransform(1,0,0,1,0,0);const u=devicePixelRatio||1,tx=(P.x/T).toFixed(1),ty=(P.y/T).toFixed(1),txt=`${M.id} · ช่อง ${tx}, ${ty} · ${Math.round(GM.fps)} fps`;
     ctx.font=`bold ${13*u}px sans-serif`;const w=ctx.measureText(txt).width+16*u,x=(ctx.canvas.width-w)/2,y=6*u;ctx.fillStyle='rgba(20,16,30,.8)';ctx.fillRect(x,y,w,22*u);ctx.fillStyle='#ffe08a';ctx.textBaseline='middle';ctx.textAlign='left';ctx.fillText(txt,x+8*u,y+11*u);ctx.restore()}}catch(e){}return r}}
 function gmBtn(){let b=document.getElementById('gmBtn');if(!b){b=document.createElement('button');b.id='gmBtn';b.textContent='🛠 GM';
-    b.style.cssText='position:fixed;left:calc(14px + env(safe-area-inset-left,0px));top:calc(152px + env(safe-area-inset-top,0px));z-index:6;padding:8px 12px;min-height:40px;border-radius:10px;border:2px solid #e8c46a;background:#2a1d3a;color:#ffe08a;font-size:14px;font-weight:700';
-    b.onclick=()=>openGM();document.body.appendChild(b)}b.style.display=gmOn()?'block':'none'}
+    b.style.cssText='position:fixed;left:calc(14px + env(safe-area-inset-left,0px));top:calc(152px + env(safe-area-inset-top,0px));padding:8px 12px;min-height:40px;border-radius:10px;border:2px solid #e8c46a;background:#2a1d3a;color:#ffe08a;font-size:14px;font-weight:700';
+    b.onclick=()=>openGM();const md=document.getElementById('modal');if(md&&md.parentNode===document.body)document.body.insertBefore(b,md);else document.body.appendChild(b)}b.style.display=gmOn()?'block':'none'}
 function openGM(){if(!gmOn())return;const h=HOME.get(),B=(a,l,on)=>`<button data-gm="${a}" style="min-height:40px;${on?'background:#e8c46a;color:#1b1330;':''}">${l}</button>`,row=(t0,inner)=>`<div class="pn" style="margin:6px 0"><b>${t0}</b><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px">${inner}</div></div>`;
   const maps=gmMaps(),hours=[['null','เวลาจริง'],['6','เช้ามืด'],['12','กลางวัน'],['18','เย็น'],['22','กลางคืน']];
   modal(`<h2>🛠 แผง GM (ตัวละครทดสอบ)</h2><div style="max-height:62vh;overflow:auto">
@@ -3570,4 +3570,41 @@ const G9_LAMPS=[[77.8,36],[46.4,37.6],[17.6,38.8],[8.4,29.2],[26,18.6],[59.2,37]
     [-2.2,0,2.2].forEach((o,i)=>{m.exits.push({id:'n'+(i===1?'':i),x:(E.n+o)*T,y:9.4*T,to:'h9',toExit:'w',locked:1,msg:'h9LockN',label:'h9LockN'});m.exits.push({id:'s'+(i===1?'':i),x:(E.s+o)*T,y:55.4*T,to:'h9',toExit:'w',locked:1,msg:'h9LockS',label:'h9LockS'})});
     for(const [x,y] of [[22.6,21.8],[36.2,21.8],[47.2,11.4],[48.2,20.6],[79.8,18],[78.6,23.4],[20.8,40.8],[34.8,38.4],[17.6,50],[32.2,50.8],[47.4,41.6],[69.6,35.2],[81.4,39.8],[70,48]])m.glows.push([x*T,(y-2.4)*T]);
   }}catch(e){}return m}}
+// ================= 1.09 LETTERS ON THE NEW VILLAGE (H9): post office + 8 homes =================
+// Same letter game as the old village (3 letters a day, stamp at the post office). On H9 Grandpa Mek has his own house again, so 8 people can get mail there.
+const H9_MAIL={post_office:'post_office',restaurant:'restaurant',clock_shop:'clock_shop',blacksmith:'blacksmith',house_w1:'house_daeng',house_w2:'house_fon',stall:'fruit_stall',house_e1:'house_dao',house_e2:'house_mek'};
+const H9_WHERE={house_w2:['บ้านข้างบ้านยายแดง','the house next to Granny Daeng'],house_e1:['บ้านฝั่งตะวันออก ใกล้แผงผลไม้','the house east of the river, near the fruit stall'],house_e2:['บ้านหลังสุดท้ายทางตะวันออก','the last house in the east']};
+try{if(!MAIL_TO.house_e2)MAIL_TO.house_e2=['ตาเมฆ','บ้านหลังสุดท้าย','☁️','Grandpa Mek','the last house']}catch(e){}
+// the old village has no house for Grandpa Mek (it became our home there): letters picked in the old village never go to him
+{const _mpH=mailPick;mailPick=function(){if(M&&M.h9)return _mpH.apply(this,arguments);const keep=MAIL_TO.house_e2;try{delete MAIL_TO.house_e2;return _mpH.apply(this,arguments)}finally{MAIL_TO.house_e2=keep}}}
+// ================= 1.10 NEW-WORLD SWITCH · SHIPPING CRATE · CRYSTAL CROPS =================
+// NEW-WORLD SWITCH: when on, the village everyone knows becomes the new H9 scene and home is at the G9 farm (start there, wake there, the cave leads back there).
+// It is OFF for players (OPEN_NEW=false). The GM can turn it on for the GM character only, to play exactly what players will get. Opening it for everyone later = OPEN_NEW=true.
+const OPEN_NEW=false;
+const NEWW=()=>h9On()&&(OPEN_NEW||!!(S&&S.gm&&S.gmNew));
+try{Object.assign(TX.th,{goalTownNew:'🎯 ไปถ้ำคริสตัล: ข้ามสะพานหิน แล้วขึ้นเนินทางขวาบน',crate:'กล่องส่งขาย',crateEmpty:'ยังไม่มีผลผลิตให้ขาย ไปเก็บผักที่แปลงก่อนนะ',crateSold:'ขายแล้ว',cryCrop:'คริสตัล',cryGot:'✨ ว้าว! ได้{n}คริสตัลเรืองแสง 1 ลูก ขายได้ 5 เท่า',crateTip:'ผลคริสตัลเรืองแสงขายได้ 5 เท่า'});
+  if(TX.en)Object.assign(TX.en,{goalTownNew:'🎯 To the crystal cave: cross the stone bridge, then up the hill at the top right',crate:'Shipping crate',crateEmpty:'Nothing to sell yet. Harvest something first',crateSold:'Sold',cryCrop:'crystal',cryGot:'✨ Wow! A glowing crystal {n}. It sells for 5 times as much',crateTip:'Glowing crystal crops sell for 5 times as much'})}catch(e){}
+const _goalTownOld={th:TX.th.goalTown,en:TX.en&&TX.en.goalTown};
+function newwApply(){try{const on=NEWW();TX.th.goalTown=on?TX.th.goalTownNew:_goalTownOld.th;if(TX.en)TX.en.goalTown=on?TX.en.goalTownNew:_goalTownOld.en}catch(e){}}
+{const _gmN=goMap;goMap=function(id,exitId,atStone){try{if(NEWW()&&(id==='capital'||(OLD_WORLD(id)&&!OLD_OK()))){
+    if(exitId==='home'&&g9On()){id='farm'}else{exitId=exitId==='n'?'cave':exitId==='w'?'w':null;id='h9';atStone=false}
+    return _gmN.call(this,id,exitId,atStone)}}catch(e){}return _gmN.apply(this,arguments)}}
+{const _sgN=startGame;startGame=function(){try{newwApply();if(NEWW()&&S&&S.pos&&(S.pos.map==='capital'||OLD_WORLD(S.pos.map)))S.pos=null}catch(e){}return _sgN.apply(this,arguments)}}
+// SHIPPING CRATE on the farm: tap it to sell what you grew (crystal crops sell for 5x)
+function crateRows(h){const out=[];for(const k of Object.keys(CROPS)){const n=(h.pantry&&h.pantry[k])||0,c=(h.cry&&h.cry[k])||0;if(n>0)out.push({k,n,p:CROPS[k].price,cry:0});if(c>0)out.push({k,n:c,p:CROPS[k].price*5,cry:1})}return out}
+function crateSell(k,cry,all){const h=HOME.get(),bag=cry?(h.cry=h.cry||{}):h.pantry,have=bag[k]||0;if(have<=0)return 0;const n=all?have:1,gain=n*CROPS[k].price*(cry?5:1);bag[k]=have-n;HOME.put(h);S.coins+=gain;save();try{hud()}catch(e){}sfx('coin');return gain}
+function openCrate(){const h=HOME.get(),rows=crateRows(h);
+  modal('<h2>📦 '+t('crate')+'</h2>'+(rows.length?'<div style="max-height:56vh;overflow:auto">'+rows.map(r=>'<div class="pn" style="display:flex;align-items:center;gap:8px;margin:6px 0"><div style="flex:1;font-size:16px">'+(r.cry?'✨ ':'🧺 ')+t('cr_'+r.k)+(r.cry?t('cryCrop'):'')+' ×'+r.n+' <span style="opacity:.8">· '+r.p+' 🪙</span></div><button data-cs="'+r.k+':'+r.cry+':0" style="min-height:40px">'+t('sell1')+'</button><button data-cs="'+r.k+':'+r.cry+':1" style="min-height:40px">'+t('sellAll')+' +'+(r.n*r.p)+'</button></div>').join('')+'</div><p class="note" style="font-size:14px">'+t('crateTip')+'</p>':'<p class="note" style="font-size:16px">'+t('crateEmpty')+'</p>'));
+  document.querySelectorAll('[data-cs]').forEach(b=>b.onclick=()=>{const [k,c,a]=b.dataset.cs.split(':');const g=crateSell(k,c==='1',a==='1');if(g)say('📦 '+t('crateSold')+' +'+g+' 🪙');openCrate()})}
+{const cv=document.getElementById('c');if(cv)cv.addEventListener('pointerup',ev=>{try{if(!M||!M.crate||PAUSE||DLG)return;const r=cv.getBoundingClientRect(),dpr=devicePixelRatio||1,wx=(ev.clientX-r.left)*dpr/SC+camX,wy=(ev.clientY-r.top)*dpr/SC+camY;
+    if(Math.abs(M.crate.x-wx)<40&&wy>M.crate.y-64&&wy<M.crate.y+8){ev.stopImmediatePropagation();window._farmTapT=performance.now();openCrate()}}catch(e){}},true)}
+// CRYSTAL CROPS: a harvest by hand has a small chance to also give one glowing crystal crop
+const CRY_CHANCE=.05;
+{const _paC=plotAct;plotAct=function(p){let crop=null;try{const q=plotState(p),Q=HOME.get().plots[p.i];if(Q&&q.st==='ripe')crop=Q.crop}catch(e){}const r=_paC.apply(this,arguments);
+  try{if(crop&&!HOME.get().plots[p.i]&&Math.random()<((gmOn()&&GM.luck)?1:CRY_CHANCE)){const h=HOME.get();h.cry=h.cry||{};h.cry[crop]=(h.cry[crop]||0)+1;HOME.put(h);sfx('lvl');
+    for(let i=0;i<20;i++)FX.push({k:'star',x:p.x,y:p.y-14,vx:Math.cos(i/20*6.28)*70,vy:Math.sin(i/20*6.28)*70-30,t:0,life:1.1});setTimeout(()=>say(t('cryGot').replace('{n}',t('cr_'+crop))),900)}}catch(e){}return r}}
+// GM panel: the two new switches
+{const _ogN=openGM;openGM=function(){const r=_ogN.apply(this,arguments);try{const h2=document.querySelector('#modal h2');if(h2&&gmOn()){const d=document.createElement('div');d.className='pn';d.style.margin='6px 0';const on='background:#e8c46a;color:#1b1330;';
+    d.innerHTML='<b>โลกใหม่</b><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px"><button id="gmNeww" style="min-height:40px;'+(S.gmNew?on:'')+'">เล่นแบบผู้เล่นจริงในโลกใหม่ (H9 + G9)</button><button id="gmLuck" style="min-height:40px;'+(GM.luck?on:'')+'">ผลคริสตัล 100%</button></div>';h2.after(d);
+    $('gmNeww').onclick=()=>{S.gmNew=!S.gmNew;save();newwApply();closeModal();try{for(const k of Object.keys(CACHE))delete CACHE[k]}catch(e){}fadeTo(()=>goMap('capital'))};$('gmLuck').onclick=()=>{GM.luck=!GM.luck;openGM()}}}catch(e){}return r}}
 </script></body></html>
