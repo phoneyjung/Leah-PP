@@ -8,7 +8,7 @@ import os; os.makedirs(OUT, exist_ok=True)
 T = 32; GW, GH = 60, 40
 sc = json.load(open(SRC + '/scene.json')); atlas = Image.open(SRC + '/sprites.png').convert('RGBA'); W, H = sc['w'], sc['h']
 import base64, io
-gnd = np.asarray(Image.open(SRC + '/ground.png').convert('RGB')).copy()
+gnd = np.asarray(Image.open(SRC + '/ground_plain.png').convert('RGB')).copy()      # no shadows in the picture: the game lays them itself, by the hour and the weather
 _h = cv2.cvtColor(gnd, cv2.COLOR_RGB2HSV); _hh, _ss, _vv = _h[..., 0].astype(int), _h[..., 1].astype(int), _h[..., 2].astype(int)
 wat = cv2.morphologyEx(((_hh > 88) & (_hh < 125) & (_ss > 90) & (_vv > 120)).astype(np.uint8), cv2.MORPH_OPEN, np.ones((3, 3)))
 _n, _lab, _st, _c = cv2.connectedComponentsWithStats(wat, connectivity=8); comps = [i for i in range(1, _n) if _st[i][4] > 400]
@@ -50,7 +50,7 @@ for i in sc['inst']:
     if i['n'] in TAP: im = outlined(im); x -= 2; by += 2
     pid, fl = pic_id(im)
     if pid == len(pic_name): pic_name.append(i['n'])
-    inst.append({'n': i['n'], 'p': pid, 'x': x, 'by': by, 'w': im.width, 'h': im.height, 'fl': fl, 'f': i['f'], 'lv': i['lv'], 'sw': {'mid': 1, 'small': 2, 'high': 3}.get(i['lv'], 0) if i['n'] not in ('thicket',) else 0})
+    inst.append({'n': i['n'], 'p': pid, 'x': x, 'by': by, 'w': im.width, 'h': im.height, 'fl': fl, 'f': i['f'], 'lv': i['lv'], 'hz': (-22 if i['n'] in ('shed', 'hut') else i.get('hz', 0)), 'sh': i.get('sh', 0), 'sw': {'mid': 1, 'small': 2, 'high': 3}.get(i['lv'], 0) if i['n'] not in ('thicket',) else 0})
 for (px_, py_, pim) in PADS: pad_list.append([len(pics), px_, py_]); pics.append(pim); pic_name.append('pad')
 # the yard gate swung open (the two leaves use this picture, the right one mirrored)
 _O2 = Image.open('/home/claude/lib2/objects-2.png').convert('RGBA'); _P2 = json.load(open('/home/claude/lib2/objects-2.json')); _r = _P2['gate']; GATE_OPEN = len(pics); pics.append(_O2.crop((_r[0], _r[1], _r[0] + _r[2], _r[1] + _r[3]))); pic_name.append('gateOpen')
@@ -151,7 +151,7 @@ P['locks'] = {'w': {'at': [round((max(cxy(l)[0] + l['w'] / 2 for l in lg) + 26) 
 P['lamps'] = [[round(cxy(l)[0]), round(l['by'] - l['h'] + 12)] for l in find('lamp') + find('pillar')]
 P['wildPic'] = wild
 P['grid'] = ''.join('1' if v else '0' for v in solid.reshape(-1))
-P['rects'] = rects; P['inst'] = [[i['p'], i['x'], i['by'], i['fl'], i['sw']] for i in inst]
+P['rects'] = rects; P['inst'] = [[i['p'], i['x'], i['by'], i['fl'], i['sw'], i['hz'], i['sh'], i['f'][0], i['f'][1]] for i in inst]; P['liveShadow'] = 1
 gi = [k for k, i in enumerate(inst) if i['n'] == 'gateShut']; gl = [inst[k] for k in gi]
 P['gate'] = {'inst': gi, 'open': GATE_OPEN, 'tiles': GATE_TILES, 'x0': min(i['x'] for i in gl), 'x1': max(i['x'] + i['w'] for i in gl), 'y': gl[0]['by']}
 P['cellPic'] = CELLS; P['tapInst'] = {n_: next((k for k, i in enumerate(inst) if i['n'] == n_), -1) for n_ in ('crate', 'mailbox', 'shed', 'board')}

@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.17';
+const VERSION='Lantern Academy 1.18';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -3538,7 +3538,7 @@ let G9B=null;
   const m=newMap('farm','town',G9.w,G9.h,79);m.nameKey='g9';m.g9=1;m.g9b=1;m._obj1=1;m.painted='mapG9b';const h=farmSave(),cl=new Set(h.farm.cleared||[]),SH=['g9bA','g9bB'];
   for(let y=0;y<G9.h;y++)for(let x=0;x<G9.w;x++)if(G9.grid[y*G9.w+x]==='1')m.SOLID.add(key(x,y));
   // every standing thing: its own picture, drawn in walking order with the player (cs:0 = no engine shadow, the soft shadows are already in the ground picture)
-  for(const [p,x,by,fl,sw] of G9B.inst){const r=G9B.rects[p];m.objs.push({img:SH[r[4]],sx:r[0],sy:r[1],sw:r[2],sh:r[3],x:x+r[2]/2,y:by,tall:1,cs:0,flip:fl?1:0,g9b:1,swA:sw|0,ph:(x*.37+by*.11)%6.283})}
+  for(const [p,x,by,fl,sw,hz,shd,f0,fw] of G9B.inst){const r=G9B.rects[p];m.objs.push({img:SH[r[4]],sx:r[0],sy:r[1],sw:r[2],sh:r[3],x:x+r[2]/2,y:by,tall:1,cs:0,flip:fl?1:0,g9b:1,swA:sw|0,ph:(x*.37+by*.11)%6.283,hz:hz|0,shOn:shd?1:0,f0:f0|0,fw:fw|0})}
   if(G9B.gate&&G9B.gate.inst&&G9B.gate.inst.length===2){const Gt=G9B.gate,Lf=m.objs[Gt.inst[0]],Rt=m.objs[Gt.inst[1]];for(const [x,y] of Gt.tiles)m.SOLID.delete(key(x,y));   // the gate is never a wall: it swings open as you come up to it
     m._gate={L:Lf,R:Rt,xl:Lf.x-Lf.sw/2,xr:Rt.x+Rt.sw/2,shut:[Lf.sx,Lf.sy,Lf.sw,Lf.sh,Lf.img],open:false,cx:(Gt.x0+Gt.x1)/2,cy:Gt.y}}
   try{for(const [nm,ix] of Object.entries(G9B.tapInst||{}))if(ix>=0&&m.objs[ix])g9bOutlined(m.objs[ix],'_g9bTap_'+nm)}catch(e){}
@@ -3549,10 +3549,10 @@ let G9B=null;
   m.spawnDefault=[G9.spawn[0]*T,G9.spawn[1]*T];m.mailbox={x:G9.mailbox[0]*T,y:G9.mailbox[1]*T};m.shed={x:G9.shed[0]*T,y:G9.shed[1]*T};m.fishSpot={x:G9.fish[0]*T,y:G9.fish[1]*T};m.crate={x:G9B.crate[0]*T,y:G9B.crate[1]*T};m.sign={x:G9.sign[0]*T,y:G9.sign[1]*T-6};
   m.plots=G9.plots.map(([x,y],k)=>({i:200+k,x:x*T,y:y*T}));if(farmUnlocked())G9.extra.forEach(([x,y],k)=>m.plots.push({i:220+k,x:x*T,y:y*T}));
   m.wild=[];G9.wild.forEach(([k,x,y],i)=>{if(cl.has(i))return;const tx=Math.floor(x),ty=Math.floor(y),r=G9B.rects[G9B.wildPic[k]];if(!r||m.SOLID.has(key(tx,ty)))return;
-    const o={img:SH[r[4]],sx:r[0],sy:r[1],sw:r[2],sh:r[3],x:(tx+.5)*T,y:(ty+.9)*T,tx,ty,tall:1,cs:0,wildId:i,wk:k,hp:(k==='bush'||isKid())?1:2};m.objs.push(o);m.wild.push(o);m.SOLID.add(key(tx,ty))});
+    const o={img:SH[r[4]],sx:r[0],sy:r[1],sw:r[2],sh:r[3],x:(tx+.5)*T,y:(ty+.9)*T,tx,ty,tall:1,cs:0,wildId:i,wk:k,hp:(k==='bush'||isKid())?1:2,hz:6,shOn:1};m.objs.push(o);m.wild.push(o);m.SOLID.add(key(tx,ty))});
   if(h.farm.robot){robotImg();const r={img:'_robot',sx:0,sy:0,sw:IMG.robotSheet?64:40,sh:IMG.robotSheet?64:48,x:m.shed.x,y:m.shed.y+18,tall:1,cs:0,robot:1};m.objs.push(r);m.robot={o:r,path:null,job:null,cool:1}}
   for(const [x,y] of G9B.lamps||[])m.glows.push([x,y]);
-  if(IMG.farmArt&&FARM_ART.conv_on){const tx=G9.conv[0],ty=G9.conv[1],r=FARM_ART.conv_on,o={img:'farmArt',sx:r[0],sy:r[1],sw:r[2],sh:r[3],x:tx*T+16,y:ty*T+30,tall:1,cs:0,g9b:1,swA:0,ph:0};m._convL=[[tx,ty]];m.objs.push(o);m._convO=o;m.SOLID.add(key(tx,ty))}
+  if(IMG.farmArt&&FARM_ART.conv_on){const tx=G9.conv[0],ty=G9.conv[1],r=FARM_ART.conv_on,o={img:'farmArt',sx:r[0],sy:r[1],sw:r[2],sh:r[3],x:tx*T+16,y:ty*T+30,tall:1,cs:0,g9b:1,swA:0,ph:0,hz:10,shOn:1};m._convL=[[tx,ty]];m.objs.push(o);m._convO=o;m.SOLID.add(key(tx,ty))}
   return m}}
 // ================= 1.14 G9 · THE SCENE COMES ALIVE (moved in from water-demo.html, where every number below was tested) =================
 // Wind: low things never move; bushes lean 1 px at the top, small trees 2, big trees 3; the foot stays put; gusts travel left to right with calm spells.
@@ -3604,7 +3604,7 @@ function g9WalkThen(x,y,fn){if(!P||!M)return;try{HOLD=null}catch(e){}   /* the t
 // the assembled scene brings its own soft shadows in the ground picture: the engine's leaning shadows are not added on top (they doubled every shadow and hid the moving water)
 {const _bs16=bakeShadows;bakeShadows=function(m){if(m&&m.g9b&&m.ground){m.shadow=m.ground;m.shadowSC=SC;return}return _bs16.apply(this,arguments)}}
 try{Object.assign(TX.th,{fishHow:'เหวี่ยงเบ็ดแล้ว รอจนเห็น ❗ แล้วกดปุ่มอีกครั้งทันที'});if(TX.en)Object.assign(TX.en,{fishHow:'Line is out. Wait for ❗ then press the button again right away'})}catch(e){}
-{const _dv14=drawVFX2;drawVFX2=function(tm){_dv14.apply(this,arguments);try{if(M&&M.g9b&&G9B){g9bGate();g9bConv(tm);g9bMarks(tm);if(!LITE){g9bWaterInit();g9bWater(tm)}}}catch(e){}}}
+{const _dv14=drawVFX2;drawVFX2=function(tm){_dv14.apply(this,arguments);try{if(M&&M.g9b&&G9B){g9bGate();g9bConv(tm);g9bMarks(tm);g9bShadows();if(!LITE){g9bWaterInit();g9bWater(tm)}}}catch(e){}}}
 // ================= 1.15 FARM ART · crops that grow in four steps + the energy converter as a real picture (farm-art.png) =================
 // One small sheet. If it is missing, everything is drawn the old way (32-px crop tiles, the converter in code). Rows on the sheet: carrot, lettuce, tomato, corn, pumpkin;
 // for each: s1..s4 = sprout, young, half-grown, ripe · item = the picked vegetable · bag = its seed bag (item and bag are for menus later).
@@ -3646,6 +3646,30 @@ function openHouseSign(){const h=HOME.get(),lv=houseLv(h);if(lv>=9){modal(`<h2>\
   const u=document.getElementById('hsUp');if(u)u.onclick=()=>{if(houseUpgrade()){closeModal();say('\u{1F3E0} '+t('g9SignDone'));try{farmRefresh()}catch(e){}}}}
 {const cv=document.getElementById('c');if(cv)cv.addEventListener('pointerup',ev=>{try{if(!M||!M.g9b||!M.sign||PAUSE||DLG)return;const r=cv.getBoundingClientRect(),dpr=devicePixelRatio||1,wx=(ev.clientX-r.left)*dpr/SC+camX,wy=(ev.clientY-r.top)*dpr/SC+camY;
     if(Math.abs(M.sign.x-wx)<34&&wy>M.sign.y-54&&wy<M.sign.y+8){ev.stopImmediatePropagation();window._farmTapT=performance.now();g9WalkThen(M.sign.x,M.sign.y+22,openHouseSign)}}catch(e){}},true)}
+// ================= 1.18 G9 · LIVE SHADOWS BY THE HOUR AND THE WEATHER (moved in from water-demo.html) =================
+// The ground picture carries no shadows any more. The game lays them: long in the morning and evening, short at noon, a faint moon shadow at night, weak in rain.
+// Upright things (trees, posts, signs, fences) cast a shadow tipped over from the foot toward the lower right; things that lie or squat (logs, rocks, bushes, crates, buildings)
+// get their own outline slid a few pixels by their real height (MAP_PIPELINE rules 12-14). They are painted onto the map's ground only when something changes
+// (the hour by ten minutes, rain, a thing added or removed), never per frame.
+const G9SH={cast:null,foot:null,sil:{},builds:0};
+function g9bSun(h){const p=(h-6)/12;if(p<=0||p>=1){const d=h>=18?h-18:6-h;return{sx:.5,sy:.36,a:.12*Math.min(1,d),moon:true}}
+  const e=Math.sin(Math.PI*p),L=.45+.65*Math.pow(1-e,1.5),ang=(12+43*p)*Math.PI/180,edge=Math.min(1,p/.08,(1-p)/.08);return{sx:L*Math.cos(ang),sy:Math.max(.36,L*Math.sin(ang)*.6),a:.34*edge,moon:false}}
+function g9bHour(){try{if(typeof GM!=='undefined'&&GM&&GM.hour!=null)return +GM.hour}catch(e){}const d=new Date();return d.getHours()+d.getMinutes()/60}
+function g9bSil(k){const im=IMG[k];if(!im)return null;let c=G9SH.sil[k];if(c&&c._of===im)return c;c=document.createElement('canvas');c.width=im.width;c.height=im.height;c._of=im;const g=c.getContext('2d');g.drawImage(im,0,0);g.globalCompositeOperation='source-in';g.fillStyle='rgb(18,28,58)';g.fillRect(0,0,c.width,c.height);G9SH.sil[k]=c;return c}
+function g9bShadows(){if(!G9B||!G9B.liveShadow||!M.ground)return;const h=g9bHour();let rain=false;try{rain=!!isRainy()}catch(e){}const ho=M.objs.find(o=>o.farmHouse),W=M._w;
+  if(M._baseFor!==M.ground){M._base=document.createElement('canvas');M._base.width=M.ground.width;M._base.height=M.ground.height;M._base.getContext('2d').drawImage(M.ground,0,0);M._baseFor=M.ground;M._shKey=''}
+  const key=[Math.round(h*6),rain?1:0,M.objs.length,ho?ho.img:'',W&&W.ready?1:0].join('|');if(key===M._shKey)return;M._shKey=key;G9SH.builds++;
+  const s=g9bSun(h),k=.5,GW=M.ground.width,GH=M.ground.height,cw=Math.ceil(GW*k),ch=Math.ceil(GH*k);
+  for(const n of ['cast','foot']){if(!G9SH[n])G9SH[n]=document.createElement('canvas');if(G9SH[n].width!==cw||G9SH[n].height!==ch){G9SH[n].width=cw;G9SH[n].height=ch}}
+  const c=G9SH.cast.getContext('2d'),f=G9SH.foot.getContext('2d');for(const x of [c,f]){x.setTransform(1,0,0,1,0,0);x.globalCompositeOperation='source-over';x.clearRect(0,0,cw,ch);x.imageSmoothingEnabled=true}f.fillStyle='rgb(18,28,58)';
+  for(const o of M.objs){let hz=Math.abs(o.hz|0),on=o.shOn,bld=(o.hz|0)<0;if(o.farmHouse){hz=26;on=1;bld=true}if(!on)continue;const sil=g9bSil(o.img);if(!sil)continue;const w=o.sw,hh=o.sh,x0=o.x-w/2,by=o.y;
+    if(hz){const dx=s.sx*hz,dy=bld?1:s.sy*hz+1;if(o.flip)f.setTransform(-k,0,0,k,(x0+dx+w)*k,(by-hh+dy)*k);else f.setTransform(k,0,0,k,(x0+dx)*k,(by-hh+dy)*k);f.drawImage(sil,o.sx,o.sy,w,hh,0,0,w,hh);continue}
+    const SX=s.sx,SY=s.sy;if(o.flip)c.setTransform(-k,0,-SX*k,-SY*k,(x0+w+SX*hh)*k,(by+SY*hh)*k);else c.setTransform(k,0,-SX*k,-SY*k,(x0+SX*hh)*k,(by+SY*hh)*k);c.drawImage(sil,o.sx,o.sy,w,hh,0,0,w,hh);
+    const fw=o.fw||w*.5,fx=x0+(o.f0||0)+fw/2;f.setTransform(k,0,0,k,0,0);f.beginPath();f.ellipse(fx+1.5,by-1,fw*.5+Math.max(3,fw*.12),Math.min(8,Math.max(3,fw*.13))+1,0,0,6.283);f.fill()}
+  if(W&&W.ready)for(const x of [c,f]){x.setTransform(k,0,0,k,0,0);x.globalCompositeOperation='destination-out';x.drawImage(W.clip,W.box[0],W.box[1]);x.globalCompositeOperation='source-over'}   // nothing darkens open water
+  G9SH.now={cast:Math.min(.44,s.a*(rain?.12:1)),foot:s.moon?.24:(rain?.28:.36),sx:s.sx,sy:s.sy,moon:s.moon};
+  const g=M.ground.getContext('2d');g.setTransform(1,0,0,1,0,0);g.globalAlpha=1;g.imageSmoothingEnabled=false;g.drawImage(M._base,0,0);g.imageSmoothingEnabled=true;g.globalAlpha=G9SH.now.cast;g.drawImage(G9SH.cast,0,0,GW,GH);g.globalAlpha=G9SH.now.foot;g.drawImage(G9SH.foot,0,0,GW,GH);g.globalAlpha=1;g.imageSmoothingEnabled=false;
+  if(W){W.src.getContext('2d').drawImage(M.ground,W.box[0],W.box[1],W.w,W.h,0,0,W.w,W.h);W.at=-1}}
 // ================= 1.07 H9 · PAPLERN VILLAGE, NEW SCENE (painted, MAP_SPEC_H9 v1.4) =================
 // A separate map "h9" for now, reached by the GM (warp) and from the G9 farm's east road; the village players use (map "capital") is untouched.
 // Needs map-H9-village.jpg (a sharper map-H9-village-hi.jpg replaces it once uploaded); missing picture -> this map is not offered at all.
