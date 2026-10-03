@@ -64,6 +64,24 @@ water = op((h_ > 88) & (h_ < 125) & (s_ > 90) & (v_ > 120), 5)
 # grass tufts take their colour from the lawn of this ground picture (a little darker, so they still read as tufts)
 _hsv = cv2.cvtColor(np.asarray(ground.convert('RGB')), cv2.COLOR_RGB2HSV); _lawn = (_hsv[..., 0] > 30) & (_hsv[..., 0] < 80) & (_hsv[..., 1] > 100) & ~(np.asarray(sand) > 0) & ~(np.asarray(water) > 0)
 _v = np.percentile(_hsv[..., 2][_lawn], [10, 50, 90]); TONES['tuft'] = (float(np.median(_hsv[..., 0][_lawn])), float(_v[0] * 0.70), float(_v[1] * 0.84), float(_v[2] * 0.96)); LAWN = (float(np.median(_hsv[..., 0][_lawn])), [float(x) for x in _v])
+# the ground picture still carries the beds the AI painted at the old size: lay lawn over them (cloned from the cleanest stretch of this same lawn); our beds go on top
+_ga = np.asarray(ground.convert('RGB')).copy(); _int = cv2.integral(_lawn.astype(np.uint8)); _best = None
+for _y in range(0, H - 160, 20):
+    for _x in range(0, W - 160, 20):
+        _f = (_int[_y + 160, _x + 160] - _int[_y, _x + 160] - _int[_y + 160, _x] + _int[_y, _x]) / 25600.0
+        if _best is None or _f > _best[0]: _best = (_f, _x, _y)
+_smp = _ga[_best[2]:_best[2] + 160, _best[1]:_best[1] + 160]; _tile = np.vstack([np.hstack([_smp, _smp[:, ::-1]]), np.hstack([_smp[::-1], _smp[::-1, ::-1]])])
+for _v in S['plots'].values():
+    _x0, _y0, _x1, _y1 = [int(t_ * U) for t_ in _v['rect']]; _x0 -= 16; _y0 -= 16; _x1 += 16; _y1 += 16
+    _hb = cv2.cvtColor(_ga[_y0:_y1, _x0:_x1], cv2.COLOR_RGB2HSV); _soil = ((_hb[..., 0] < 28) & (_hb[..., 2] < 175)) | (_hb[..., 2] < 80)
+    _n, _lb, _st, _ = cv2.connectedComponentsWithStats(cv2.morphologyEx(_soil.astype(np.uint8), cv2.MORPH_OPEN, np.ones((5, 5))), connectivity=8)
+    _keep = np.zeros_like(_soil, np.uint8)                     # only the bed itself (the big dark block in the middle), never the brown rim of a road that passes nearby
+    for _i in range(1, _n):
+        if _st[_i][4] > 3000 and _st[_i][0] > 2 and _st[_i][1] > 2 and _st[_i][0] + _st[_i][2] < _soil.shape[1] - 2 and _st[_i][1] + _st[_i][3] < _soil.shape[0] - 2: _keep[_lb == _i] = 1
+    _m = cv2.GaussianBlur(cv2.dilate(_keep, np.ones((13, 13))).astype(np.float32), (0, 0), 2)[..., None]
+    _fill = np.tile(_tile, ((_y1 - _y0) // 320 + 1, (_x1 - _x0) // 320 + 1, 1))[:_y1 - _y0, :_x1 - _x0]
+    _ga[_y0:_y1, _x0:_x1] = (_ga[_y0:_y1, _x0:_x1] * (1 - _m) + _fill * _m).astype(np.uint8)
+ground = Image.fromarray(_ga).convert('RGBA')
 rock = op((s_ < 50) & (v_ > 90) & (v_ < 215), 9)
 
 # ---------- buildings and yard pieces, from the spec ----------
@@ -104,10 +122,26 @@ def make_cell(w, h, wet):
     hi = (c > 2.2) & (c <= 3.4) & (yy < h // 2); soil[..., :3] = np.where(hi[..., None], np.minimum(255, soil[..., :3] * 1.18), soil[..., :3])
     return Image.fromarray(np.clip(soil, 0, 255).astype(np.uint8), 'RGBA')
 CELL_W, CELL_H = 50, 34
-PLOT_RECTS = []
+# Beds are built around their planting cells, so the blocks the game waters always sit exactly on the blocks painted here:
+# a dark earth patch with the dry cells laid on it in a grid; the bed is as big as its grid plus an even margin.
+GAPX, GAPY, MARG = 4, 4, 9
+GRID = {'plot1_start': (4, 3), 'plot2': (4, 2), 'plot3': (5, 2), 'plot4': (3, 3)}
+def make_bed(cols, rows):
+    w = cols * CELL_W + (cols - 1) * GAPX + 2 * MARG; h = rows * CELL_H + (rows - 1) * GAPY + 2 * MARG; PW_ = PLOT_IM.size[0]
+    a = np.zeros((h, w, 4), np.float32); soil = np.asarray(PLOT_IM.crop((18, FUR0, PW_ - 18, FUR0 + FPER))).astype(np.float32); sw = soil.shape[1]
+    for y in range(0, h, FPER):
+        for x in range(0, w, sw): hh_, ww_ = min(FPER, h - y), min(sw, w - x); a[y:y + hh_, x:x + ww_] = soil[:hh_, :ww_]
+    a[..., :3] *= 0.56; a[..., 3] = 255
+    yy, xx = np.mgrid[:h, :w]; dx = np.minimum(xx, w - 1 - xx).astype(np.float32); dy = np.minimum(yy, h - 1 - yy).astype(np.float32); r = 11
+    c = np.where((dx < r) & (dy < r), r - np.hypot(r - dx, r - dy), np.minimum(dx, dy)); a[..., 3] = np.where(c > 0.5, 255, 0); a[..., :3] = np.where(((c <= 2.4) & (c > 0.5))[..., None], a[..., :3] * 0.7, a[..., :3])
+    im = Image.fromarray(np.clip(a, 0, 255).astype(np.uint8), 'RGBA'); cell = make_cell(CELL_W, CELL_H, False); cells = []
+    for r_ in range(rows):
+        for c_ in range(cols): x = MARG + c_ * (CELL_W + GAPX); y = MARG + r_ * (CELL_H + GAPY); im.alpha_composite(cell, (x, y)); cells.append((x + CELL_W // 2, y + CELL_H // 2))
+    return im, cells
+PLOT_RECTS = []; PLOT_CELLS = {}
 for k_, v in S['plots'].items():
-    x0, y0, x1, y1 = v['rect']; n_f = max(3, int(round(((y1 - y0) * U - 16) / FPER))); pim = make_plot(int((x1 - x0) * U), n_f)
-    FLAT.append((pim, int(x0 * U), int(y0 * U), 'plot')); PLOT_RECTS.append((int(x0 * U), int(y0 * U), pim.width, pim.height))
+    x0, y0, x1, y1 = v['rect']; cols_, rows_ = GRID.get(k_, (4, 2)); pim, cells_ = make_bed(cols_, rows_); bx_ = int((x0 + x1) / 2 * U - pim.width / 2); by_ = int((y0 + y1) / 2 * U - pim.height / 2)
+    FLAT.append((pim, bx_, by_, 'plot')); PLOT_RECTS.append((bx_, by_, pim.width, pim.height)); PLOT_CELLS[k_] = [[bx_ + cx_, by_ + cy_] for cx_, cy_ in cells_]
     _px, _py, _pw, _ph = PLOT_RECTS[-1]; _r = np.random.RandomState(_px + _py)
     tx_ = _px + 10
     while tx_ < _px + _pw - 8: OB.append((_py + _ph + _r.uniform(1, 4), tx_, spr('grass', scale=float(_r.choice([0.55, 0.7, 0.82])), flip=_r.rand() < 0.5, tone='tuft'), 'tuft')); tx_ += _r.uniform(26, 52)
@@ -124,7 +158,7 @@ for x, y in S['lamps']:
     if abs(x - 36.7) < 0.2 and abs(y - 9.1) < 0.2: x, y = 36.2, 9.6                                # this one stood on the yard fence: moved onto the grass by the trail
     add('lamp', x, y, h=88)
 add('pillar', 47.0, 14.2); add('pillar', 47.0, 18.0)                 # one each side of the main road, at the east end
-add('mailbox', DX + 1.25, 13.95); add('board', 24.3, 10.7)
+add('mailbox', DX + 1.25, 13.95); add('board', DX - 3.15, 12.75)          # the house grows to the right (256 -> 427 px wide): the sign stands on the front lawn left of the door path, clear of every size of the house
 for x, y in S['signs']:
     if x > 45 and 13 < y < 15: x, y = 45.6, 18.1                       # the east sign stood on the fence corner: now south of the road, before the pillar
     add('sign', x, y)
@@ -349,5 +383,5 @@ if len(sys.argv) > 3:
     inst = [{'n': nm, 'lv': level(nm), 'r': rect[id(im)], 'x': int(bx - im.width / 2), 'y': int(by - im.height), 'by': int(by), 'f': [int(foot_of(im, nm)[0]), int(foot_of(im, nm)[1] - foot_of(im, nm)[0])], 'sh': 0 if nm in SMALL else 1, 'hz': LOW_H.get(nm, 0)}
             for by, bx, im, nm in sorted(OB, key=lambda o: o[0])]
     make_cell(CELL_W, CELL_H, False).save(ex + '/cell.png'); make_cell(CELL_W, CELL_H, True).save(ex + '/cell_wet.png')
-    json.dump({'w': W, 'h': H, 'inst': inst, 'plots': PLOT_RECTS, 'fper': FPER, 'ptop': PTOP, 'pside': PSIDE, 'door_x': DX * U, 'house_base': 10.15 * U}, open(ex + '/scene.json', 'w'))
+    json.dump({'w': W, 'h': H, 'inst': inst, 'plots': PLOT_RECTS, 'cells': PLOT_CELLS, 'fper': FPER, 'ptop': MARG, 'pside': MARG, 'door_x': DX * U, 'house_base': 10.15 * U}, open(ex + '/scene.json', 'w'))
     print(json.dumps({'export': ex, 'unique_sprites': len(order), 'instances': len(inst), 'atlas': list(atlas.size)}))

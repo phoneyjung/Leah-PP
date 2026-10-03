@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.20';
+const VERSION='Lantern Academy 1.21';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -1305,7 +1305,7 @@ function render(tm){if(!M||!S)return;
   for(const s of M.stairs||[]){const x=Math.round(s.x-camX-18),y=Math.round(s.y-camY-26);for(let i=0;i<4;i++){const yy=s.up?y+i*7:y+21-i*7;ctx.fillStyle=['#7a4a26','#8a5a30','#9a6a3a','#aa7a44'][i];ctx.fillRect(x+i*2,yy,36-i*4,6);ctx.fillStyle='rgba(40,20,10,.5)';ctx.fillRect(x+i*2,yy+6,36-i*4,1)}ctx.fillStyle='#5a3418';ctx.fillRect(x-2,y-2,3,32);ctx.fillRect(x+35,y-2,3,32)}
   for(const q of M.zones||[])label((q.x0+q.x1+1)/2*T-camX,(q.y0+q.y1)/2*T-camY,t(q.k));if(M.pool)label(8.5*T-camX,15*T-camY-6,t('pool'));if(M.mailbox&&Math.hypot(P.x-M.mailbox.x,P.y-M.mailbox.y)<90)label(M.mailbox.x-camX,M.mailbox.y-camY-(M.g9b?58:30),t('mailbox'));
   if(M.bath)label((M.bath.x0+M.bath.x1+1)/2*T-camX,(M.bath.y0+M.bath.y1)/2*T-camY,'🛁 '+t('bathroom'));
-  for(const p of M.plots||[]){const q=plotState(p),x=Math.round(p.x-camX),y=Math.round(p.y-camY);if(M.g9b){const cp=G9B&&G9B.cellPic,cr=cp&&G9B.rects[cp[q.w?1:0]];if(cr&&IMG.g9bA)ctx.drawImage(IMG.g9bA,cr[0],cr[1],cr[2],cr[3],x-(cr[2]>>1),y-(cr[3]>>1)+1,cr[2],cr[3]);else if(q.w){ctx.fillStyle='rgba(34,20,9,.36)';ctx.beginPath();ctx.ellipse(x,y,14,6,0,0,7);ctx.fill()}}
+  for(const p of M.plots||[]){const q=plotState(p),x=Math.round(p.x-camX),y=Math.round(p.y-camY);if(M.g9b){const cp=G9B&&G9B.cellPic,cr=cp&&q.w&&G9B.rects[cp[1]];if(cr&&IMG.g9bA)ctx.drawImage(IMG.g9bA,cr[0],cr[1],cr[2],cr[3],x-(cr[2]>>1),y-(cr[3]>>1)+1,cr[2],cr[3]);else if(q.w&&!cp){ctx.fillStyle='rgba(34,20,9,.36)';ctx.beginPath();ctx.ellipse(x,y,14,6,0,0,7);ctx.fill()}}
     else{ctx.fillStyle=q.w?'#4a3322':'#6b4a2e';ctx.fillRect(x-13,y-8,26,16);ctx.fillStyle=q.w?'#3a2618':'#5a3c24';for(let r=0;r<3;r++)ctx.fillRect(x-11,y-6+r*5,22,1)}
     if(q.st!=='empty'&&drawCropArt(q,x,y)){}else if(q.st==='seed'){ctx.fillStyle='#e8d6a0';for(let i=0;i<4;i++)ctx.fillRect(x-8+i*5,y-2+(i%2),2,1)}else if(q.st==='sprout'||q.st==='ripe'){const r=FR[q.st==='ripe'?CROPS[q.crop].bed:'sproutBed'];if(IMG.farm)ctx.drawImage(IMG.farm,r[0],r[1],32,32,x-16,y-22,32,32)}
     if(q.st!=='empty'&&q.st!=='ripe'&&!q.w){ctx.fillStyle='#8fd8ff';ctx.fillRect(x-1,y-26+Math.round(Math.sin(tm*4)),3,4);ctx.fillRect(x,y-28+Math.round(Math.sin(tm*4)),1,2)}
@@ -3547,7 +3547,7 @@ let G9B=null;
   const ho=g9HouseObj();if(ho)m.objs.push(ho);g9HouseSolid(m);
   m.exits.push({id:'home',x:G9.door[0]*T,y:G9.door[1]*T,to:'room',toExit:'door',label:'ourHome'});
   m.spawnDefault=[G9.spawn[0]*T,G9.spawn[1]*T];m.mailbox={x:G9.mailbox[0]*T,y:G9.mailbox[1]*T};m.shed={x:G9.shed[0]*T,y:G9.shed[1]*T};m.fishSpot={x:G9.fish[0]*T,y:G9.fish[1]*T};m.crate={x:G9B.crate[0]*T,y:G9B.crate[1]*T};m.sign={x:G9.sign[0]*T,y:G9.sign[1]*T-6};
-  m.plots=G9.plots.map(([x,y],k)=>({i:200+k,x:x*T,y:y*T}));if(farmUnlocked())G9.extra.forEach(([x,y],k)=>m.plots.push({i:220+k,x:x*T,y:y*T}));
+  m.plots=[];g9bPlots(m,cl);
   m.wild=[];G9.wild.forEach(([k,x,y],i)=>{if(cl.has(i))return;const tx=Math.floor(x),ty=Math.floor(y),r=G9B.rects[G9B.wildPic[k]];if(!r||m.SOLID.has(key(tx,ty)))return;
     const o={img:SH[r[4]],sx:r[0],sy:r[1],sw:r[2],sh:r[3],x:(tx+.5)*T,y:(ty+.9)*T,tx,ty,tall:1,cs:0,wildId:i,wk:k,hp:(k==='bush'||isKid())?1:2,hz:6,shOn:1};m.objs.push(o);m.wild.push(o);m.SOLID.add(key(tx,ty))});
   if(h.farm.robot){robotImg();const r={img:'_robot',sx:0,sy:0,sw:IMG.robotSheet?64:40,sh:IMG.robotSheet?64:48,x:m.shed.x,y:m.shed.y+18,tall:1,cs:0,robot:1};m.objs.push(r);m.robot={o:r,path:null,job:null,cool:1}}
@@ -3604,7 +3604,7 @@ function g9WalkThen(x,y,fn){if(!P||!M)return;try{HOLD=null}catch(e){}   /* the t
 // the assembled scene brings its own soft shadows in the ground picture: the engine's leaning shadows are not added on top (they doubled every shadow and hid the moving water)
 {const _bs16=bakeShadows;bakeShadows=function(m){if(m&&m.g9b&&m.ground){m.shadow=m.ground;m.shadowSC=SC;return}return _bs16.apply(this,arguments)}}
 try{Object.assign(TX.th,{fishHow:'เหวี่ยงเบ็ดแล้ว รอจนเห็น ❗ แล้วกดปุ่มอีกครั้งทันที'});if(TX.en)Object.assign(TX.en,{fishHow:'Line is out. Wait for ❗ then press the button again right away'})}catch(e){}
-{const _dv14=drawVFX2;drawVFX2=function(tm){_dv14.apply(this,arguments);try{if(M&&M.g9b&&G9B){g9bGate();g9bConv(tm);g9bMarks(tm);g9bShadows();if(!LITE){g9bWaterInit();g9bWater(tm)}}}catch(e){}}}
+{const _dv14=drawVFX2;drawVFX2=function(tm){_dv14.apply(this,arguments);try{if(M&&M.g9b&&G9B){g9bGate();g9bConv(tm);g9bFire(tm);g9bMarks(tm);g9bShadows();if(!LITE){g9bWaterInit();g9bWater(tm)}}}catch(e){}}}
 // ================= 1.15 FARM ART · crops that grow in four steps + the energy converter as a real picture (farm-art.png) =================
 // One small sheet. If it is missing, everything is drawn the old way (32-px crop tiles, the converter in code). Rows on the sheet: carrot, lettuce, tomato, corn, pumpkin;
 // for each: s1..s4 = sprout, young, half-grown, ripe · item = the picked vegetable · bag = its seed bag (item and bag are for menus later).
@@ -3692,6 +3692,19 @@ const WARP_ART={"ring0":[0,0,63,39],"ring1":[64,0,63,39],"ring2":[128,0,63,39],"
 function warpDraw(e,tm,near){const im=IMG.warpArt;if(!im||!M||M.kind!=='town')return false;const door=e.id==='home'||/^room/.test(e.to||''),f=door?[0,1,2,1][Math.floor(tm*4)%4]:Math.floor(tm*5)%4,r=WARP_ART[(door?'mat':'ring')+f];if(!r)return false;
   const W2=M.w*T,H2=M.h*T,x=Math.max(r[2]/2+2,Math.min(W2-r[2]/2-2,e.x)),y=Math.max(r[3]/2+2,Math.min(H2-r[3]/2-2,e.y+(door?6:0)));
   ctx.globalAlpha=near?1:.86;ctx.drawImage(im,r[0],r[1],r[2],r[3],Math.round(x-r[2]/2-camX),Math.round(y-r[3]/2-camY),r[2],r[3]);ctx.globalAlpha=1;return true}
+// ================= 1.21 G9 · EVERY BED CAN BE PLANTED · THE CAMPFIRE LIGHTS ITSELF AT DUSK =================
+// Beds 1 and 2 (20 blocks) are ready from the start. Beds 3 and 4 (10 + 9 blocks) are overgrown: clear every weed, rock and stump on a bed and it can be planted.
+function g9bPlots(m,cl){const keep=[],add=(arr,base)=>(arr||[]).forEach(([x,y],k)=>keep.push({i:base+k,x:x*T,y:y*T}));add(G9.plots,200);add(G9.extra,220);
+  const left=n=>(G9.wild||[]).some((w,i)=>w[3]===n&&!cl.has(i));if(G9B&&G9B.extra3&&!left(3))add(G9B.extra3,240);if(G9B&&G9B.extra4&&!left(4))add(G9B.extra4,260);m.plots=keep}
+{const _cw21=clearWild;clearWild=function(o){const r=_cw21.apply(this,arguments);try{if(M&&M.g9b)g9bPlots(M,new Set(farmSave().farm.cleared||[]))}catch(e){}return r}}
+{const _fr21=farmRefresh;farmRefresh=function(){const r=_fr21.apply(this,arguments);try{if(M&&M.g9b)g9bPlots(M,new Set(farmSave().farm.cleared||[]))}catch(e){}return r}}
+// the fire in the ring of stones: lit from dusk to dawn (not in rain), small pixel flames, a few sparks and a warm light on the ground
+function g9bFire(tm){if(!G9.camp||!M)return;const h=g9bHour();let rain=false;try{rain=!!isRainy()}catch(e){}const on=(h>=17.5||h<6)&&!rain;M._fireOn=on;if(!on)return;
+  const x=G9.camp[0]*T-camX,y=G9.camp[1]*T-56-camY;if(x<-80||y<-80||x>VW+80||y>VH+80)return;
+  for(let i=0;i<5;i++){const ox=(i-2)*4+Math.sin(tm*7+i*1.9)*1.2,hh=10+(i===2?9:(i%2?6:2))+Math.sin(tm*9+i*2.3)*2.5;
+    ctx.fillStyle='#ff7a1a';ctx.fillRect(Math.round(x+ox-3),Math.round(y-hh),6,Math.round(hh));ctx.fillStyle='#ffb52e';ctx.fillRect(Math.round(x+ox-2),Math.round(y-hh*.72),4,Math.round(hh*.72));ctx.fillStyle='#fff1a8';ctx.fillRect(Math.round(x+ox-1),Math.round(y-hh*.4),2,Math.round(hh*.4))}
+  for(let i=0;i<3;i++){const u=((tm*.9+i*.37)%1),sx=x+Math.sin(tm*3+i*2.1)*6+(i-1)*4;ctx.fillStyle='rgba(255,214,120,'+(1-u).toFixed(2)+')';ctx.fillRect(Math.round(sx),Math.round(y-18-u*24),1,1)}
+  if(!LITE){ctx.save();ctx.globalCompositeOperation='lighter';glow(x,y-6,46+Math.sin(tm*6)*3,'255,170,80',.28+.06*Math.sin(tm*11));ctx.restore()}}
 // ================= 1.07 H9 · PAPLERN VILLAGE, NEW SCENE (painted, MAP_SPEC_H9 v1.4) =================
 // A separate map "h9" for now, reached by the GM (warp) and from the G9 farm's east road; the village players use (map "capital") is untouched.
 // Needs map-H9-village.jpg (a sharper map-H9-village-hi.jpg replaces it once uploaded); missing picture -> this map is not offered at all.

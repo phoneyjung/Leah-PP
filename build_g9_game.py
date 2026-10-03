@@ -135,14 +135,14 @@ bd = find('board')[0]; P['sign'] = [round(cxy(bd)[0] / T, 2), round((bd['by'] + 
 P['conv'] = [30, 16]
 # fishing: stand on the wooden dock, near its end
 dock_x = int(20.5 * 40); col = np.where(~water[820:1000, dock_x] )[0]; col = col[col < 120]; P['fish'] = [round(dock_x / T, 2), round((820 + col.max() - 16) / T, 2)]
-(p1x, p1y, p1w, p1h), (p2x, p2y, p2w, p2h), p3, p4 = sc['plots']; FP = sc['fper']; PT = sc.get('ptop', 22); PSD = sc.get('pside', 12); soil = lambda px, pw: (px + PSD + 6, pw - 2 * PSD - 12)
-sx0, sw_ = soil(p1x, p1w); rows1 = max(3, (p1h - PT - 9) // FP); P['plots'] = [[round((sx0 + (c + .5) * sw_ / 4) / T, 2), round((p1y + PT + (r + .5) * (rows1 * FP) / 3 + 6) / T, 2)] for r in range(3) for c in range(4)]
-sx0, sw_ = soil(p2x, p2w); rows2 = max(2, (p2h - PT - 9) // FP); P['extra'] = [[round((sx0 + (c + .5) * sw_ / 4) / T, 2), round((p2y + PT + (r + .5) * (rows2 * FP) / 2 + 6) / T, 2)] for r in range(2) for c in range(4)]
+(p1x, p1y, p1w, p1h), (p2x, p2y, p2w, p2h), p3, p4 = sc['plots']; FP = sc['fper']; PT = sc.get('ptop', 9); PSD = sc.get('pside', 9); CL = sc['cells']
+spot = lambda c: [round(c[0] / T, 3), round((c[1] - 1) / T, 3)]                       # the planting spots ARE the cells painted into the beds
+P['plots'] = [spot(c) for c in CL['plot1_start']]; P['extra'] = [spot(c) for c in CL['plot2']]; P['extra3'] = [spot(c) for c in CL['plot3']]; P['extra4'] = [spot(c) for c in CL['plot4']]
 wl = []
 for (px, py, pw, ph) in (p3, p4):
     for ty in range(int((py + PT) // T) + 1, int((py + ph - 9) // T)):
         for tx in range(int((px + PSD) // T) + 1, int((px + pw - PSD) // T)):
-            wl.append([('bush', 'rock', 'stump')[(tx * 7 + ty * 3) % 3], tx + .5, ty + .5])
+            wl.append([('bush', 'rock', 'stump')[(tx * 7 + ty * 3) % 3], tx + .5, ty + .5, 3 if (px, py, pw, ph) == tuple(p3) else 4])
 P['wild'] = wl
 lg = find('logs'); lk = find('lockgate')[0]; th = find('thicket')[0]
 P['locks'] = {'w': {'at': [round((max(cxy(l)[0] + l['w'] / 2 for l in lg) + 26) / T, 2), round(np.mean([l['by'] - l['h'] / 2 for l in lg]) / T, 2)], 'msg': 'g9LockW'},
@@ -169,7 +169,7 @@ while st:
 near = lambda tx, ty: any(seen[min(GH - 1, max(0, int(ty) + dy)), min(GW - 1, max(0, int(tx) + dx))] for dy in (-1, 0, 1) for dx in (-1, 0, 1))
 targets = {'front door': P['door'], 'shed': P['shed'], 'crate': P['crate'], 'mailbox': P['mailbox'], 'fishing spot': P['fish'], 'camp': P['camp'], 'house sign': P['sign'], 'converter': P['conv'],
            'lock west': P['locks']['w']['at'], 'lock north': P['locks']['n']['at'], 'lock south': P['locks']['s']['at'], 'exit east': [GW - 1, P['exitE'][1]]}
-for k_, v in enumerate(P['plots'] + P['extra']): targets['plot %d' % k_] = v
+for k_, v in enumerate(P['plots'] + P['extra'] + P['extra3'] + P['extra4']): targets['plot %d' % k_] = v
 bx_ = int(BRIDGE[0] // T); col = ''.join('#' if solid[ty, bx_] else '.' for ty in range(26, 36)); print('bridge column, tiles y26..35 (# = closed):', col, '| stream tiles left and right of the bridge closed:', bool(solid[int(BRIDGE[1] // T), bx_ - 2]), bool(solid[int(BRIDGE[1] // T), bx_ + 2]))
 bad = [k for k, v in targets.items() if not near(*v)]
 print(json.dumps({'ground_KB': os.path.getsize(OUT + '/map-G9b-ground.jpg') // 1024, 'sheets [size, KB, pictures]': sizes, 'mean colour error after 255 colours': errs, 'scene_KB': os.path.getsize(OUT + '/g9b-scene.json') // 1024,
