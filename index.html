@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.21';
+const VERSION='Lantern Academy 1.22';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -3604,7 +3604,7 @@ function g9WalkThen(x,y,fn){if(!P||!M)return;try{HOLD=null}catch(e){}   /* the t
 // the assembled scene brings its own soft shadows in the ground picture: the engine's leaning shadows are not added on top (they doubled every shadow and hid the moving water)
 {const _bs16=bakeShadows;bakeShadows=function(m){if(m&&m.g9b&&m.ground){m.shadow=m.ground;m.shadowSC=SC;return}return _bs16.apply(this,arguments)}}
 try{Object.assign(TX.th,{fishHow:'เหวี่ยงเบ็ดแล้ว รอจนเห็น ❗ แล้วกดปุ่มอีกครั้งทันที'});if(TX.en)Object.assign(TX.en,{fishHow:'Line is out. Wait for ❗ then press the button again right away'})}catch(e){}
-{const _dv14=drawVFX2;drawVFX2=function(tm){_dv14.apply(this,arguments);try{if(M&&M.g9b&&G9B){g9bGate();g9bConv(tm);g9bFire(tm);g9bMarks(tm);g9bShadows();if(!LITE){g9bWaterInit();g9bWater(tm)}}}catch(e){}}}
+{const _dv14=drawVFX2;drawVFX2=function(tm){_dv14.apply(this,arguments);try{if(M&&M.g9b&&G9B){g9bGate();g9bConv(tm);g9bFire(tm);g9bMarks(tm);g9bSpots(tm);g9bShadows();if(!LITE){g9bWaterInit();g9bWater(tm)}}}catch(e){}}}
 // ================= 1.15 FARM ART · crops that grow in four steps + the energy converter as a real picture (farm-art.png) =================
 // One small sheet. If it is missing, everything is drawn the old way (32-px crop tiles, the converter in code). Rows on the sheet: carrot, lettuce, tomato, corn, pumpkin;
 // for each: s1..s4 = sprout, young, half-grown, ripe · item = the picked vegetable · bag = its seed bag (item and bag are for menus later).
@@ -3684,14 +3684,38 @@ function farmBgmTick(){const want=farmBgmWant();FARM_BGM.cur=want;
   if(!want&&FARM_BGM.wasOn&&S&&M&&M.id!=='farm'&&MUS&&SND&&!BGM.timer){FARM_BGM.wasOn=0;setMusic(M.kind!=='cave'?'town':(M.boss&&M.boss.active&&!M.boss.happy?'boss':'cave'))}}
 setInterval(()=>{try{farmBgmTick()}catch(e){}},200);
 {const _sm19=setMusic;setMusic=function(mode){try{if(farmBgmWant()){stopMusic();return}}catch(e){}return _sm19.apply(this,arguments)}}   // asked live: the moment the player leaves the farm the game's own tune may start again
-// ================= 1.20 WAY-OUT MARKERS as pictures (warp-art.png): a turning ring of pale-blue tiles on the ground where a scene leads to another,
-// a golden doorstep mat with a bobbing arrow where a door leads indoors. Outdoor scenes only; caves and rooms keep the drawn ring. Missing file: the drawn ring everywhere, as before.
-// On the assembled farm the three closed ways show no marker at all: the log pile, the bolted gate and the thicket say it themselves.
-const WARP_ART={"ring0":[0,0,63,39],"ring1":[64,0,63,39],"ring2":[128,0,63,39],"ring3":[192,0,63,39],"mat0":[256,0,65,36],"mat1":[322,0,65,36],"mat2":[388,0,65,36]};
-{const i=new Image();i.onload=()=>{IMG.warpArt=i};i.onerror=()=>{};i.src=(window.EMBED_ASSETS&&window.EMBED_ASSETS['warp-art.png'])||'warp-art.png'}
-function warpDraw(e,tm,near){const im=IMG.warpArt;if(!im||!M||M.kind!=='town')return false;const door=e.id==='home'||/^room/.test(e.to||''),f=door?[0,1,2,1][Math.floor(tm*4)%4]:Math.floor(tm*5)%4,r=WARP_ART[(door?'mat':'ring')+f];if(!r)return false;
-  const W2=M.w*T,H2=M.h*T,x=Math.max(r[2]/2+2,Math.min(W2-r[2]/2-2,e.x)),y=Math.max(r[3]/2+2,Math.min(H2-r[3]/2-2,e.y+(door?6:0)));
-  ctx.globalAlpha=near?1:.86;ctx.drawImage(im,r[0],r[1],r[2],r[3],Math.round(x-r[2]/2-camX),Math.round(y-r[3]/2-camY),r[2],r[3]);ctx.globalAlpha=1;return true}
+// ================= 1.22 WAYS OUT, DOORS AND ACTIVITY SPOTS that read at a glance (owner, 4 Oct: clear first, pretty second) =================
+// A way to another scene: a warp like the ones in Ragnarok Online: a pool of pale-blue light on the ground with rings spreading out, a turning swirl and sparks rising.
+// A house door: the door itself can be tapped and wears a yellow outline; three yellow arrows walk up the path to it.
+// An activity spot (fishing): a dashed yellow ring on the ground with a bobbing arrow over it; tap it and the player walks there and starts.
+// All drawn in code (no picture file to miss). Outdoor scenes only; caves and rooms keep the old ring.
+function warpDraw(e,tm,near){if(!M||M.kind!=='town')return false;const door=e.id==='home'||/^room/.test(e.to||''),W2=M.w*T,H2=M.h*T;
+  if(door){const x=Math.round(e.x-camX),y0=e.y-camY;ctx.save();ctx.globalCompositeOperation='source-over';ctx.lineJoin='miter';ctx.lineCap='butt';
+    for(let i=0;i<3;i++){const u=((tm*1.1+i/3)%1),y=Math.round(y0+46-u*34),a=Math.min(1,u/.12,(1-u)/.12);ctx.globalAlpha=a;   /* fully solid except while appearing and vanishing: half-transparent yellow over its dark edge turned olive */
+      for(const [col,lw] of [['#3a2400',9],['#ffe23a',5]]){ctx.strokeStyle=col;ctx.lineWidth=lw;ctx.beginPath();ctx.moveTo(x-13,y+8);ctx.lineTo(x,y-3);ctx.lineTo(x+13,y+8);ctx.stroke()}}
+    ctx.restore();return true}
+  const x=Math.max(46,Math.min(W2-46,e.x))-camX,y=Math.max(24,Math.min(H2-24,e.y))-camY,pul=.5+.5*Math.sin(tm*3);ctx.save();
+  ctx.fillStyle='rgba(40,90,170,.30)';ctx.beginPath();ctx.ellipse(x,y+2,40,17,0,0,6.283);ctx.fill();                                   // a cool shade under it: light alone vanishes on a sunlit road
+  ctx.fillStyle='rgba(120,190,255,'+(.62+.12*pul).toFixed(2)+')';ctx.beginPath();ctx.ellipse(x,y,30,13,0,0,6.283);ctx.fill();
+  ctx.fillStyle='rgba(235,248,255,'+(.75+.2*pul).toFixed(2)+')';ctx.beginPath();ctx.ellipse(x,y,15,6.5,0,0,6.283);ctx.fill();
+  for(let i=0;i<3;i++){const u=((tm*.8+i/3)%1),r=10+u*32;ctx.strokeStyle='rgba(255,255,255,'+((1-u)*.95).toFixed(2)+')';ctx.lineWidth=2.5;ctx.beginPath();ctx.ellipse(x,y,r,r*.43,0,0,6.283);ctx.stroke()}
+  ctx.globalCompositeOperation='lighter';const g=ctx.createLinearGradient(0,y-58,0,y);g.addColorStop(0,'rgba(140,200,255,0)');g.addColorStop(1,'rgba(170,220,255,'+(.34+.12*pul).toFixed(2)+')');ctx.fillStyle=g;ctx.fillRect(x-24,y-58,48,58);
+  glow(x,y,40,'150,210,255',.4+.15*pul);
+  if(!LITE){for(let i=0;i<4;i++){const a=tm*2.4+i*1.571;ctx.strokeStyle='rgba(255,255,255,.9)';ctx.lineWidth=2.5;ctx.beginPath();ctx.ellipse(x,y,26,11,0,a,a+.8);ctx.stroke()}
+    for(let i=0;i<7;i++){const u=((tm*.7+i*.149)%1);ctx.fillStyle='rgba(255,255,255,'+(1-u).toFixed(2)+')';ctx.fillRect(Math.round(x+Math.sin(i*2.4+tm)*18),Math.round(y-4-u*50),2,2)}}
+  ctx.restore();return true}
+// on the assembled farm: the house door wears a yellow outline and can be tapped; the fishing spot is an activity spot
+function g9bSpots(tm){if(!P)return;if(!M._exitIn){M._exitIn=1;for(const e of M.exits)if(e.id==='e'&&!e.locked)e.x=M.w*T-58}const dx=G9.door[0]*T-camX,by=G9.houseBase*T-camY,pa=.55+.45*Math.sin(tm*4);
+  ctx.save();ctx.lineWidth=2.5;ctx.strokeStyle='rgba(74,47,0,.9)';for(const [c,lw] of [['rgba(58,36,0,.85)',6],['rgba(255,226,58,'+(.75+.25*pa).toFixed(2)+')',3.5]]){ctx.strokeStyle=c;ctx.lineWidth=lw;ctx.beginPath();ctx.moveTo(dx-G9DOOR.w/2,by-G9DOOR.b);ctx.lineTo(dx-G9DOOR.w/2,by-G9DOOR.t+G9DOOR.w/2);ctx.arc(dx,by-G9DOOR.t+G9DOOR.w/2,G9DOOR.w/2,Math.PI,0);ctx.lineTo(dx+G9DOOR.w/2,by-G9DOOR.b);ctx.closePath();ctx.stroke()}
+  if(M.fishSpot&&!(FISHING&&FISHING.on)){const x=M.fishSpot.x-camX,y=M.fishSpot.y-camY,bob=Math.sin(tm*4)*3;ctx.setLineDash([5,4]);ctx.lineDashOffset=-tm*10;
+    for(const [c,lw] of [['rgba(74,47,0,.75)',4],['rgba(255,216,58,.95)',2]]){ctx.strokeStyle=c;ctx.lineWidth=lw;ctx.beginPath();ctx.ellipse(x,y,20,9,0,0,6.283);ctx.stroke()}ctx.setLineDash([]);
+    const ay=Math.round(y-40+bob);for(const [c,gr] of [['#4a2f00',2],['#ffd83a',0]]){ctx.fillStyle=c;ctx.beginPath();ctx.moveTo(x-8-gr,ay-gr);ctx.lineTo(x+8+gr,ay-gr);ctx.lineTo(x,ay+11+gr*1.4);ctx.closePath();ctx.fill();ctx.fillRect(Math.round(x-3-gr),ay-10-gr,6+gr*2,11+gr)}}
+  ctx.restore()}
+const G9DOOR={w:62,t:98,b:16};   // the door on the house picture: width, top and bottom above the foot of the house (px)
+{const cv=document.getElementById('c');if(cv)cv.addEventListener('pointerup',ev=>{try{if(!M||!M.g9b||PAUSE||DLG)return;const r=cv.getBoundingClientRect(),dpr=devicePixelRatio||1,wx=(ev.clientX-r.left)*dpr/SC+camX,wy=(ev.clientY-r.top)*dpr/SC+camY;
+    const dx=G9.door[0]*T,by=G9.houseBase*T;
+    if(Math.abs(wx-dx)<G9DOOR.w/2+4&&wy>by-G9DOOR.t-4&&wy<by-G9DOOR.b+10){ev.stopImmediatePropagation();window._farmTapT=performance.now();const e=M.exits.find(q=>q.id==='home');if(e)g9WalkThen(e.x,e.y+4,()=>{try{useExit(e)}catch(x){}});return}
+    if(M.fishSpot&&!(FISHING&&FISHING.on)&&Math.hypot(wx-M.fishSpot.x,(wy-M.fishSpot.y)*1.6)<30){ev.stopImmediatePropagation();window._farmTapT=performance.now();g9WalkThen(M.fishSpot.x,M.fishSpot.y,()=>{try{if(!FISHING.on||FISHING.st==='idle')fishAct()}catch(x){}})}}catch(e){}},true)}
 // ================= 1.21 G9 · EVERY BED CAN BE PLANTED · THE CAMPFIRE LIGHTS ITSELF AT DUSK =================
 // Beds 1 and 2 (20 blocks) are ready from the start. Beds 3 and 4 (10 + 9 blocks) are overgrown: clear every weed, rock and stump on a bed and it can be planted.
 function g9bPlots(m,cl){const keep=[],add=(arr,base)=>(arr||[]).forEach(([x,y],k)=>keep.push({i:base+k,x:x*T,y:y*T}));add(G9.plots,200);add(G9.extra,220);
