@@ -89,15 +89,29 @@ def make_plot(w, n_furrows):
             piece = soil if (x // sw) % 2 == 0 else soil[:, ::-1]; ww = min(sw, w - x); a[PTOP + r * FPER:PTOP + (r + 1) * FPER, x:x + ww] = piece[:, :ww]; x += sw
     a[:PTOP] = a[PTOP:PTOP + 1]; a[PTOP + soil_h:] = a[PTOP + soil_h - 1:PTOP + soil_h]
     # uneven edge: rounded corners + clumps of earth, in 3-px steps; then a darker rim, as freshly dug soil has
-    n = np.kron(np.random.RandomState(w * 7 + n_furrows).uniform(-1, 1, (h // 3 + 2, w // 3 + 2)), np.ones((3, 3)))[:h, :w]
     yy, xx = np.mgrid[:h, :w]; dx = np.minimum(xx, w - 1 - xx).astype(np.float32); dy = np.minimum(yy, h - 1 - yy).astype(np.float32)
-    corner = np.where((dx < 12) & (dy < 12), 12 - np.hypot(12 - dx, 12 - dy), np.minimum(dx, dy)); keep_ = corner + n * 2.6 > 3.0
+    corner = np.where((dx < 12) & (dy < 12), 12 - np.hypot(12 - dx, 12 - dy), np.minimum(dx, dy)); keep_ = corner > 1.5                      # smooth rounded edge
     a[..., 3] = np.where(keep_, 255, 0); edge = keep_ & ~(cv2.erode(keep_.astype(np.uint8), np.ones((5, 5), np.uint8)) > 0)
     a[..., :3] = np.where(edge[..., None], (a[..., :3] * 0.62).astype(np.uint8), a[..., :3]); return Image.fromarray(a, 'RGBA')
+def make_cell(w, h, wet):
+    soil = np.asarray(PLOT_IM.crop((30, FUR0, 30 + w, FUR0 + h))).astype(np.float32).copy(); soil[..., :3] *= (0.70 if wet else 1.16)
+    yy, xx = np.mgrid[:h, :w]; dx = np.minimum(xx, w - 1 - xx).astype(np.float32); dy = np.minimum(yy, h - 1 - yy).astype(np.float32); r = 6
+    c = np.where((dx < r) & (dy < r), r - np.hypot(r - dx, r - dy), np.minimum(dx, dy)); soil[..., 3] = np.where(c > 0.3, 255, 0)
+    rim = (c <= 2.2) & (c > 0.3); soil[..., :3] = np.where(rim[..., None], soil[..., :3] * 0.55, soil[..., :3])
+    hi = (c > 2.2) & (c <= 3.4) & (yy < h // 2); soil[..., :3] = np.where(hi[..., None], np.minimum(255, soil[..., :3] * 1.18), soil[..., :3])
+    return Image.fromarray(np.clip(soil, 0, 255).astype(np.uint8), 'RGBA')
+CELL_W, CELL_H = 50, 34
 PLOT_RECTS = []
 for k_, v in S['plots'].items():
     x0, y0, x1, y1 = v['rect']; n_f = max(3, int(round(((y1 - y0) * U - 16) / FPER))); pim = make_plot(int((x1 - x0) * U), n_f)
     FLAT.append((pim, int(x0 * U), int(y0 * U), 'plot')); PLOT_RECTS.append((int(x0 * U), int(y0 * U), pim.width, pim.height))
+    _px, _py, _pw, _ph = PLOT_RECTS[-1]; _r = np.random.RandomState(_px + _py)
+    tx_ = _px + 10
+    while tx_ < _px + _pw - 8: OB.append((_py + _ph + _r.uniform(1, 4), tx_, spr('grass', scale=float(_r.choice([0.55, 0.7, 0.82])), flip=_r.rand() < 0.5, tone='tuft'), 'tuft')); tx_ += _r.uniform(26, 52)
+    ty_ = _py + 26
+    while ty_ < _py + _ph - 4:
+        for sx_ in (_px + 1, _px + _pw - 1): OB.append((ty_ + _r.uniform(-4, 4), sx_ + _r.uniform(-2, 2), spr('grass', scale=float(_r.choice([0.55, 0.7])), flip=_r.rand() < 0.5, tone='tuft'), 'tuft'))
+        ty_ += _r.uniform(30, 48)
 # the round stone pad is the base of the energy converter; the machine has no picture yet, and a bare stone disc on the lawn explains nothing, so it is left out for now
 add('shed', *S['doors']['shed'], scale=0.85); add('hut', *S['doors']['friend_hut'])          # a shed is tapped, not entered: it may be smaller than a house
 bt = S['big_tree']; add('oak', bt[0], bt[1] + 1.7, h=274, tone='mid')
@@ -314,5 +328,6 @@ if len(sys.argv) > 3:
     level = lambda nm: 'high' if nm in ('treeA', 'treeB', 'treeC', 'clump', 'oak') else 'small' if nm in ('treeD', 'treeE', 'treeF') else 'mid' if nm.startswith('bush') or nm == 'thicket' else 'low'
     inst = [{'n': nm, 'lv': level(nm), 'r': rect[id(im)], 'x': int(bx - im.width / 2), 'y': int(by - im.height), 'by': int(by), 'f': [int(foot_of(im, nm)[0]), int(foot_of(im, nm)[1] - foot_of(im, nm)[0])], 'sh': 0 if nm in SMALL else 1, 'hz': LOW_H.get(nm, 0)}
             for by, bx, im, nm in sorted(OB, key=lambda o: o[0])]
+    make_cell(CELL_W, CELL_H, False).save(ex + '/cell.png'); make_cell(CELL_W, CELL_H, True).save(ex + '/cell_wet.png')
     json.dump({'w': W, 'h': H, 'inst': inst, 'plots': PLOT_RECTS, 'fper': FPER, 'ptop': PTOP, 'pside': PSIDE, 'door_x': DX * U, 'house_base': 10.15 * U}, open(ex + '/scene.json', 'w'))
     print(json.dumps({'export': ex, 'unique_sprites': len(order), 'instances': len(inst), 'atlas': list(atlas.size)}))

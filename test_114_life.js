@@ -19,8 +19,19 @@ const R=await pg.evaluate(async()=>{const o={version:VERSION,newScene:!!G9B,lite
   o.water.waterPointsChanged=[ch.size,pts.length];o.water.bankPointsInsideBoxChanged=[chL.size,land.length];
   let ok=0,smp=0,inw=0;for(let k=0;k<8;k++){if(g9bFish(W,performance.now()/1000))ok++}o.water.fishSpawned=[ok,8];
   const ds=[];for(let i=0;i<1;i++)ds.push(0);await sleep(1200);for(const f of W.fish){if(f.x===undefined)continue;smp++;if(g9bInWater(W,f.x,f.y))inw++}o.water.fishInWater=[inw,smp]}
+ // ---- is the moving water really on the SCREEN (not only in the map's ground picture)? and does a tapped thing wait until the player has walked up to it? ----
+ {const cvs=document.getElementById('c'),sx=cvs.getContext('2d');P.x=G9.fish[0]*T+10;P.y=(G9.fish[1]-2.6)*T;P.path=null;if(M._w){M._w.next=1e9;M._w.fish.length=0}await sleep(2500);
+  const pts=G9B.water.deep.filter((q,i)=>i%3===0).map(([x,y])=>[Math.round((x-camX)*SC),Math.round((y-camY)*SC)]).filter(([x,y])=>x>4&&y>4&&x<cvs.width-4&&y<cvs.height-4);
+  const snap=()=>pts.map(([x,y])=>Array.from(sx.getImageData(x,y,1,1).data).join());const s0=snap(),ch=new Set();for(let k=0;k<6;k++){await sleep(300);snap().forEach((v,i)=>{if(v!==s0[i])ch.add(i)})}
+  o.onScreen={waterPointsOnScreen:pts.length,changed:ch.size,groundIsWhatIsDrawn:M.shadow===M.ground};
+  try{DLG=null;PAUSE=false}catch(e){}                                  // the welcome talk pauses walking: close it first
+  let opened=0;P.x=M.crate.x+220;P.y=M.crate.y+60;P.path=null;await sleep(300);g9WalkThen(M.crate.x,M.crate.y+22,()=>{opened=performance.now()});const t0=performance.now();o.walkFirst={openedAtOnceFromFar:opened>0,walking:!!(P.path&&P.path.length)};
+  for(let k=0;k<40&&!opened;k++)await sleep(250);o.walkFirst.openedAfterMs=opened?Math.round(opened-t0):null;o.walkFirst.distanceWhenOpened=opened?Math.round(Math.hypot(P.x-M.crate.x,P.y-(M.crate.y+22))):null;
+  let near=0;g9WalkThen(M.crate.x,M.crate.y+22,()=>{near=1});o.walkFirst.opensAtOnceWhenNear=!!near;
+  o.outlined=Object.entries(G9B.tapInst||{}).map(([k,ix])=>k+':'+(M.objs[ix]&&/^_g9bTap_/.test(M.objs[ix].img)));
+  o.cells=!!(G9B.cellPic&&G9B.rects[G9B.cellPic[0]]);FISHING.on=false;P.x=M.fishSpot.x;P.y=M.fishSpot.y;await sleep(300);fishAct();const st1=FISHING.st;FISHING.t=0;await sleep(400);const st2=FISHING.st;fishAct();o.fishing={afterCast:st1,thenBite:st2,afterSecondPress:FISHING.st,reelGame:FISHING.st==='reel'}}   // 'idle' after the second press = the fish is caught (the bag itself is capped, so its length cannot be compared)
  // ---- yard gate ----
- const G=M._gate;if(G){o.gate={tilesSolid:G9B.gate.tiles.map(([x,y])=>M.SOLID.has(key(x,y))),shutAtStart:!G.open};P.x=G.cx;P.y=G.cy+120;await sleep(500);o.gate.farAway=G.open;P.x=G.cx;P.y=G.cy+40;await sleep(500);o.gate.near=G.open;o.gate.leafPicWhenOpen=[G.L.sw,G.L.sh];
+ const G=M._gate;if(G){o.gate={tilesSolid:G9B.gate.tiles.map(([x,y])=>M.SOLID.has(key(x,y))),shutAtStart:!G.open};P.x=G.cx;P.y=G.cy+120;await sleep(500);o.gate.farAway=G.open;P.x=G.cx;P.y=G.cy+40;await sleep(500);o.gate.near=G.open;o.gate.leafPicWhenOpen=[G.L.sw,G.L.sh];o.gate.leavesCross=(G.L.x+G.L.sw/2)>(G.R.x-G.R.sw/2);
   try{const pa=findPath(M,G.cx,G.cy+60,G.cx,G.cy-50);o.gate.pathIntoYard=pa?pa.length:0}catch(e){o.gate.pathIntoYard='err'}
   P.x=G.cx;P.y=G.cy-60;await sleep(500);o.gate.insideYardNear=G.open;P.x=G.cx-10;P.y=G.cy-150;await sleep(500);o.gate.insideYardFar=G.open;P.x=G.cx;P.y=G.cy+160;await sleep(500);o.gate.backOutFar=G.open}
  // ---- tappable marks ----

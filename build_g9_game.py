@@ -54,6 +54,8 @@ for i in sc['inst']:
 for (px_, py_, pim) in PADS: pad_list.append([len(pics), px_, py_]); pics.append(pim); pic_name.append('pad')
 # the yard gate swung open (the two leaves use this picture, the right one mirrored)
 _O2 = Image.open('/home/claude/lib2/objects-2.png').convert('RGBA'); _P2 = json.load(open('/home/claude/lib2/objects-2.json')); _r = _P2['gate']; GATE_OPEN = len(pics); pics.append(_O2.crop((_r[0], _r[1], _r[0] + _r[2], _r[1] + _r[3]))); pic_name.append('gateOpen')
+CELLS = []
+for fn_ in ('cell.png', 'cell_wet.png'): CELLS.append(len(pics)); pics.append(Image.open(SRC + '/' + fn_).convert('RGBA')); pic_name.append('cell')
 # cleared-by-hand things on the wild plots, half size (the world is smaller than the old scene)
 O1 = Image.open('/home/claude/v108/objects-1.png').convert('RGBA'); P1 = json.load(open('/home/claude/v108/objects-1.json')); wild = {}
 for k in ('bush', 'rock', 'stump'):
@@ -152,6 +154,7 @@ P['grid'] = ''.join('1' if v else '0' for v in solid.reshape(-1))
 P['rects'] = rects; P['inst'] = [[i['p'], i['x'], i['by'], i['fl'], i['sw']] for i in inst]
 gi = [k for k, i in enumerate(inst) if i['n'] == 'gateShut']; gl = [inst[k] for k in gi]
 P['gate'] = {'inst': gi, 'open': GATE_OPEN, 'tiles': GATE_TILES, 'x0': min(i['x'] for i in gl), 'x1': max(i['x'] + i['w'] for i in gl), 'y': gl[0]['by']}
+P['cellPic'] = CELLS; P['tapInst'] = {n_: next((k for k, i in enumerate(inst) if i['n'] == n_), -1) for n_ in ('crate', 'mailbox', 'shed')}
 P['pads'] = pad_list; P['water'] = {'box': WBOX, 'clip': b64mask(clipm), 'wave': b64mask(wavem), 'deep': DEEP}
 json.dump(P, open(OUT + '/g9b-scene.json', 'w'), separators=(',', ':'))
 

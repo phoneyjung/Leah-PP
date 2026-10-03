@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.15';
+const VERSION='Lantern Academy 1.16';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -901,11 +901,11 @@ const FISHING={on:false,st:'idle',t:0,fish:0,hold:false,zy:40,zv:0,fy:60,fv:0,ft
 function fishArt(i){const c=FISH[i][6];return pix(20,12,g=>{g.fillStyle=c;g.fillRect(3,3,12,6);g.fillRect(5,2,8,8);g.fillRect(15,2,3,8);g.fillStyle='rgba(255,255,255,.5)';g.fillRect(5,3,6,1);g.fillStyle='#1b1330';g.fillRect(5,5,1,1)})}
 function fishNear(){return M&&M.fishSpot&&Math.hypot(P.x-M.fishSpot.x,P.y-M.fishSpot.y)<30}
 function fishAct(){if(!FISHING.on){if(!fishNear())return;FISHING.on=true;FISHING.st='idle'}const F=FISHING;
-  if(F.st==='idle'){F.st='wait';F.t=(1.5+Math.random()*3.5)*(typeof fishWaitMul==='function'?fishWaitMul():1);F.fish=rollFish();sfx('shoot');say(t('wait'))}
-  else if(F.st==='bite'){if(isKid())catchFish();else{F.st='reel';F.prog=.25;F.zy=50;F.zv=0;F.fy=60;F.fv=0;say(t('reelTip'))}}
+  if(F.st==='idle'){F.st='wait';F.t=(1.5+Math.random()*3.5)*(typeof fishWaitMul==='function'?fishWaitMul():1);F.fish=rollFish();sfx('shoot');say(t('fishHow'))}
+  else if(F.st==='bite'){if(isKid()||!S.reelFish)catchFish();else{F.st='reel';F.prog=.25;F.zy=50;F.zv=0;F.fy=60;F.fv=0;say(t('reelTip'))}}
   else if(F.st==='wait'){F.st='idle';say(t('lost'))}}
 function fishUpdate(dt){const F=FISHING;if(!F.on)return;if(!fishNear()){F.on=false;F.st='idle';return}F.t-=dt;
-  if(F.st==='wait'&&F.t<=0){F.st='bite';F.t=(isKid()?1.4:.9)*(typeof fishBiteMul==='function'?fishBiteMul():1);sfx('warp');say('❗ '+t('bite'))}
+  if(F.st==='wait'&&F.t<=0){F.st='bite';F.t=(isKid()?2:1.5)*(typeof fishBiteMul==='function'?fishBiteMul():1);sfx('warp');say('❗ '+t('bite'))}
   else if(F.st==='bite'&&F.t<=0){F.st='idle';say(t('lost'))}
   else if(F.st==='reel'){const H=120,zh=36-FISH[F.fish][0]*3,diff=1+FISH[F.fish][0]*.6;F.zv+=(F.hold?-300:240)*dt;F.zy+=F.zv*dt;if(F.zy<0){F.zy=0;F.zv*=-.3}if(F.zy>H-zh){F.zy=H-zh;F.zv*=-.3}
     F.ft-=dt;if(F.ft<=0){F.ft=.35+Math.random()*(1.1-FISH[F.fish][0]*.15);F.ftg=4+Math.random()*H*.72}const want=(F.ftg??60)-F.fy;F.fv+=(Math.sign(want)*90*diff-F.fv*1.5)*dt;F.fy+=F.fv*dt;if(F.fy<4){F.fy=4;F.fv=Math.abs(F.fv)}if(F.fy>H-4){F.fy=H-4;F.fv=-Math.abs(F.fv)}
@@ -1208,9 +1208,9 @@ cv.addEventListener('pointerdown',e=>{if(DIG&&!DIG.done){digHit();return}if(PAUS
   const mo=MONS.find(o=>!o.happy&&Math.abs(o.x-wx)<(o.w||26)/2+8&&wy>o.y-(o.h||22)-8&&wy<o.y+8);if(mo){attackTarget(mo);return}
   if(M.board&&Math.abs(M.board.x-wx)<24&&wy>M.board.y-60&&wy<M.board.y+8){openBoard();return}
   if(M.kind==='room'&&!M.visiting&&!DEC.on){const f=M.objs.find(o=>o.fu&&FURN_ACT[o.fu.k]&&Math.abs(o.x-wx)<26&&wy>o.y-56&&wy<o.y+8);if(f){furnAct(f.fu.k);return}}
-  if(M.mailbox&&Math.hypot(M.mailbox.x-wx,M.mailbox.y-10-wy)<20){if(Net.online)openVisit();else say(t('nobody'));return}
+  if(M.mailbox&&Math.hypot(M.mailbox.x-wx,M.mailbox.y-10-wy)<20){g9WalkThen(M.mailbox.x,M.mailbox.y+22,()=>{if(Net.online)openVisit();else say(t('nobody'))});return}
   const pl=(M.plots||[]).find(p=>Math.abs(p.x-wx)<16&&Math.abs(p.y-8-wy)<16);if(pl){P.act={k:'plot',o:pl};P.target=null;P.path=findPath(M,P.x,P.y,pl.x,pl.y+18);return}
-  const np=(M.npcs||[]).find(n=>Math.abs(n.x-wx)<16&&wy>n.y-56&&wy<n.y+6);if(np){if(np.npc==='dad'&&!isKid()&&S.lv>=10&&!(reqBase().done.dad===undefined&&reqInfo('dad').got>=10)){if(!reqBase().done.dad){openReq('dad');const x=$('mBody');if(x)x.insertAdjacentHTML('beforeend',`<p><button id="toJobs">⚔️ ${t('jobs')}</button></p>`);if($('toJobs'))$('toJobs').onclick=openJobs;return}openJobs();return}if(np.npc==='nuan'){openShop();speak(t('s_nuan').split('…')[0]);return}if(['leah','dad','mom'].includes(np.npc)&&openReq(np.npc))return;say(t('n_'+np.npc)+': '+t('s_'+np.npc));speak(t('s_'+np.npc));msgT=5;P.path=findPath(M,P.x,P.y,np.x,np.y+22);return}
+  const np=(M.npcs||[]).find(n=>Math.abs(n.x-wx)<16&&wy>n.y-56&&wy<n.y+6);if(np){if(Math.hypot(P.x-np.x,P.y-(np.y+22))>50&&performance.now()-(window._g9Retap||0)>400){const nx=np.x,ny=np.y;g9WalkThen(nx,ny+22,()=>{window._g9Retap=performance.now();const rr=cv.getBoundingClientRect(),dq=devicePixelRatio||1;cv.dispatchEvent(new PointerEvent('pointerdown',{clientX:(nx-camX)*SC/dq+rr.left,clientY:(ny-20-camY)*SC/dq+rr.top,pointerId:1,bubbles:true}))});return}if(np.npc==='dad'&&!isKid()&&S.lv>=10&&!(reqBase().done.dad===undefined&&reqInfo('dad').got>=10)){if(!reqBase().done.dad){openReq('dad');const x=$('mBody');if(x)x.insertAdjacentHTML('beforeend',`<p><button id="toJobs">⚔️ ${t('jobs')}</button></p>`);if($('toJobs'))$('toJobs').onclick=openJobs;return}openJobs();return}if(np.npc==='nuan'){openShop();speak(t('s_nuan').split('…')[0]);return}if(['leah','dad','mom'].includes(np.npc)&&openReq(np.npc))return;say(t('n_'+np.npc)+': '+t('s_'+np.npc));speak(t('s_'+np.npc));msgT=5;P.path=findPath(M,P.x,P.y,np.x,np.y+22);return}
   const c=(M.crystals||[]).find(c=>!c.awake&&Math.hypot(c.x-wx,c.y-10-wy)<22&&lit(c.x,c.y));if(c){P.act={k:'crystal',o:c};P.target=null;P.path=findPath(M,P.x,P.y,c.x,c.y+14);return}
   const d=(M.digs||[]).find(d=>!d.done&&Math.hypot(d.x-wx,d.y-wy)<20);if(d){P.act={k:'dig',o:d};P.target=null;P.path=findPath(M,P.x,P.y,d.x,d.y);return}
   P.target=null;P.act=null;P.path=findPath(M,P.x,P.y,wx,wy);HOLD={id:e.pointerId,cx:e.clientX,cy:e.clientY,t:performance.now()}});
@@ -1240,7 +1240,7 @@ function update(dt){if(!M||!S)return;if(msgT>0){msgT-=dt;if(msgT<=0)$('msg').sty
       if(d>R){P.retarget=(P.retarget||0)-dt;if(!P.path||P.retarget<=0){P.path=findPath(M,P.x,P.y,o.x,o.y);P.retarget=.35}}else{P.path=null;P.row=rowFor(o.x-P.x,o.y-P.y);if(P.cd<=0)doAttack(o)}}}
     if(!mx&&!my&&P.path&&P.path.length){const [tx,ty]=P.path[0],dx=tx-P.x,dy=ty-P.y,d=Math.hypot(dx,dy);if(d<3){P.path.shift()}else{mx=dx/d;my=dy/d}}
     P.moving=!!(mx||my);if(P.moving){const n=Math.hypot(mx,my);mx/=n;my/=n;const wet=inPool(),sp=(isKid()?106:111)*dt*(wet?.65:1)*(effOn('dash')?1.3:1)*(effOn('frozen')?.5:1)*(1+buffV('spd')/100),nx=P.x+mx*sp,ny=P.y+my*sp;if(!blockedAt(M,nx,P.y))P.x=nx;if(!blockedAt(M,P.x,ny))P.y=ny;P.dist+=sp;P.row=rowFor(mx,my)}
-    if(P.act&&(!P.path||!P.path.length)){const o=P.act.o;if(Math.hypot(o.x-P.x,o.y+14-P.y)<30){if(P.act.k==='crystal')openQuiz(o);else if(P.act.k==='plot')plotAct(o);else if(!o.done)doDig(o)}P.act=null}}
+    if(P.act&&(!P.path||!P.path.length)){const o=P.act.o;if(Math.hypot(o.x-P.x,o.y+14-P.y)<(P.act.k==='tap'?72:30)){if(P.act.k==='crystal')openQuiz(o);else if(P.act.k==='plot')plotAct(o);else if(P.act.k==='tap'){try{o.fn()}catch(e){}}else if(!o.done)doDig(o)}P.act=null}}
   // things you walk into
   if(!PAUSE&&!P.dead){for(const e of M.exits)if(exitCool<=0&&Math.hypot(P.x-e.x,P.y-e.y)<13&&!(e.needBoss&&!S.boss)&&!(e.lockBoss&&M.boss&&!M.boss.happy)){exitCool=1.2;if(e.locked){say(t(e.msg||'soon'));const dx=M.w*T/2-e.x,dy=M.h*T/2-e.y,d=Math.hypot(dx,dy);P.x+=dx/d*18;P.y+=dy/d*18;P.path=null}else useExit(e);break}
     for(const s of M.stones){if(Math.hypot(P.x-s.x,P.y-s.y-10)<70){if(!S.stones.includes(s.id)){S.stones.push(s.id);s.awake=true;s.t=performance.now()/1000;say(t('stoneOn'));save()}S.lastStone=s.id}}
@@ -1305,7 +1305,7 @@ function render(tm){if(!M||!S)return;
   for(const s of M.stairs||[]){const x=Math.round(s.x-camX-18),y=Math.round(s.y-camY-26);for(let i=0;i<4;i++){const yy=s.up?y+i*7:y+21-i*7;ctx.fillStyle=['#7a4a26','#8a5a30','#9a6a3a','#aa7a44'][i];ctx.fillRect(x+i*2,yy,36-i*4,6);ctx.fillStyle='rgba(40,20,10,.5)';ctx.fillRect(x+i*2,yy+6,36-i*4,1)}ctx.fillStyle='#5a3418';ctx.fillRect(x-2,y-2,3,32);ctx.fillRect(x+35,y-2,3,32)}
   for(const q of M.zones||[])label((q.x0+q.x1+1)/2*T-camX,(q.y0+q.y1)/2*T-camY,t(q.k));if(M.pool)label(8.5*T-camX,15*T-camY-6,t('pool'));if(M.mailbox&&Math.hypot(P.x-M.mailbox.x,P.y-M.mailbox.y)<90)label(M.mailbox.x-camX,M.mailbox.y-camY-(M.g9b?58:30),t('mailbox'));
   if(M.bath)label((M.bath.x0+M.bath.x1+1)/2*T-camX,(M.bath.y0+M.bath.y1)/2*T-camY,'🛁 '+t('bathroom'));
-  for(const p of M.plots||[]){const q=plotState(p),x=Math.round(p.x-camX),y=Math.round(p.y-camY);if(M.g9b){if(q.w){ctx.fillStyle='rgba(34,20,9,.36)';ctx.beginPath();ctx.ellipse(x,y,14,6,0,0,7);ctx.fill()}if(q.st==='empty'){ctx.fillStyle='rgba(30,17,8,.6)';ctx.beginPath();ctx.ellipse(x,y,5,2.5,0,0,7);ctx.fill();ctx.fillStyle='rgba(190,140,90,.55)';ctx.fillRect(x-4,y+2,8,1)}}
+  for(const p of M.plots||[]){const q=plotState(p),x=Math.round(p.x-camX),y=Math.round(p.y-camY);if(M.g9b){const cp=G9B&&G9B.cellPic,cr=cp&&G9B.rects[cp[q.w?1:0]];if(cr&&IMG.g9bA)ctx.drawImage(IMG.g9bA,cr[0],cr[1],cr[2],cr[3],x-(cr[2]>>1),y-(cr[3]>>1)+1,cr[2],cr[3]);else if(q.w){ctx.fillStyle='rgba(34,20,9,.36)';ctx.beginPath();ctx.ellipse(x,y,14,6,0,0,7);ctx.fill()}}
     else{ctx.fillStyle=q.w?'#4a3322':'#6b4a2e';ctx.fillRect(x-13,y-8,26,16);ctx.fillStyle=q.w?'#3a2618':'#5a3c24';for(let r=0;r<3;r++)ctx.fillRect(x-11,y-6+r*5,22,1)}
     if(q.st!=='empty'&&drawCropArt(q,x,y)){}else if(q.st==='seed'){ctx.fillStyle='#e8d6a0';for(let i=0;i<4;i++)ctx.fillRect(x-8+i*5,y-2+(i%2),2,1)}else if(q.st==='sprout'||q.st==='ripe'){const r=FR[q.st==='ripe'?CROPS[q.crop].bed:'sproutBed'];if(IMG.farm)ctx.drawImage(IMG.farm,r[0],r[1],32,32,x-16,y-22,32,32)}
     if(q.st!=='empty'&&q.st!=='ripe'&&!q.w){ctx.fillStyle='#8fd8ff';ctx.fillRect(x-1,y-26+Math.round(Math.sin(tm*4)),3,4);ctx.fillRect(x,y-28+Math.round(Math.sin(tm*4)),1,2)}
@@ -2562,7 +2562,7 @@ let FARM_ACT=null;{const _up18=update;update=function(dt){const r=_up18.apply(th
 // taps on the farm: wild land, the robot shed (farm panel)
 function ensureFarmTap(){if(window._farmTap)return;const cv=document.getElementById('c');if(!cv)return;window._farmTap=1;cv.addEventListener('pointerup',ev=>{try{if(!M||M.id!=='farm'||PAUSE||DLG)return;const r=cv.getBoundingClientRect(),dpr=devicePixelRatio||1,wx=(ev.clientX-r.left)*dpr/SC+camX,wy=(ev.clientY-r.top)*dpr/SC+camY;
   const w=(M.wild||[]).find(o=>Math.abs(o.x-wx)<18&&wy>o.y-30&&wy<o.y+6);if(w){ev.stopImmediatePropagation();window._farmTapT=performance.now();P.act=null;FARM_ACT=w;w._retry=0;P.target=null;const best=farmAdj(w);P.path=best?findPath(M,P.x,P.y,best[0],best[1]):null;return}
-  if(M.shed&&Math.abs(M.shed.x-wx)<60&&wy>M.shed.y-80&&wy<M.shed.y+10){ev.stopImmediatePropagation();window._farmTapT=performance.now();openFarmPanel()}}catch(e){}},true);
+  if(M.shed&&Math.abs(M.shed.x-wx)<60&&wy>M.shed.y-80&&wy<M.shed.y+10){ev.stopImmediatePropagation();window._farmTapT=performance.now();g9WalkThen(M.shed.x,M.shed.y+12,openFarmPanel)}}catch(e){}},true);
   // the same tap also arrives as a click: keep the game from treating it as "walk here"
   cv.addEventListener('click',ev=>{if(window._farmTapT&&performance.now()-window._farmTapT<600){ev.stopImmediatePropagation();ev.preventDefault()}},true)}
 // the free tile next to a wild object that is closest to the player
@@ -3541,6 +3541,7 @@ let G9B=null;
   for(const [p,x,by,fl,sw] of G9B.inst){const r=G9B.rects[p];m.objs.push({img:SH[r[4]],sx:r[0],sy:r[1],sw:r[2],sh:r[3],x:x+r[2]/2,y:by,tall:1,cs:0,flip:fl?1:0,g9b:1,swA:sw|0,ph:(x*.37+by*.11)%6.283})}
   if(G9B.gate&&G9B.gate.inst&&G9B.gate.inst.length===2){const Gt=G9B.gate,Lf=m.objs[Gt.inst[0]],Rt=m.objs[Gt.inst[1]];for(const [x,y] of Gt.tiles)m.SOLID.delete(key(x,y));   // the gate is never a wall: it swings open as you come up to it
     m._gate={L:Lf,R:Rt,xl:Lf.x-Lf.sw/2,xr:Rt.x+Rt.sw/2,shut:[Lf.sx,Lf.sy,Lf.sw,Lf.sh,Lf.img],open:false,cx:(Gt.x0+Gt.x1)/2,cy:Gt.y}}
+  try{for(const [nm,ix] of Object.entries(G9B.tapInst||{}))if(ix>=0&&m.objs[ix])g9bOutlined(m.objs[ix],'_g9bTap_'+nm)}catch(e){}
   m.exits.push({id:'e',x:m.w*T-14,y:G9.exitE[1]*T,to:'capital',toExit:'w',label:'capital'});
   for(const [id,L] of Object.entries(G9.locks)){const side=id==='w';[-1.2,0,1.2].forEach((o,i)=>m.exits.push({id:id+(i===1?'':i),x:(L.at[0]+(side?0:o))*T,y:(L.at[1]+(side?o:0))*T,to:'farm',toExit:'e',locked:1,msg:L.msg,label:L.msg}))}
   const ho=g9HouseObj();if(ho)m.objs.push(ho);g9HouseSolid(m);
@@ -3585,15 +3586,24 @@ function g9bWater(tm){const W=M._w;if(!W||!W.ready||tm-W.at<.08)return;W.at=tm;c
   for(const q of W.gl){const a=Math.pow(Math.max(0,Math.sin(tm*q.sp+q.ph)),3)*.75;if(a>.02){g.fillStyle='rgba(255,255,255,'+a.toFixed(3)+')';g.fillRect(Math.round(q.x+Math.sin(tm*.3+q.ph)*2),Math.round(q.y),3,1)}}
   const sheet=IMG.g9bA;if(sheet)for(const p of W.pads)g.drawImage(sheet,p.r[0],p.r[1],p.r[2],p.r[3],Math.round(p.x+Math.cos(tm*p.sp*.62+p.ph)*.6*p.amp),Math.round(p.y+Math.sin(tm*p.sp+p.ph)*1.1*p.amp),p.r[2],p.r[3])}
 // the yard gate: shut from afar, both leaves swing open as someone walks up, and shut again behind them
-function g9bGate(){const G=M._gate;if(!G||!P)return;const d=Math.hypot(P.x-G.cx,P.y-8-G.cy),want=G.open?d<96:d<70;if(want===G.open)return;G.open=want;const r=want?G9B.rects[G9B.gate.open]:null,SH=['g9bA','g9bB'];
-  for(const o of [G.L,G.R]){if(want){o.sx=r[0];o.sy=r[1];o.sw=r[2];o.sh=r[3];o.img=SH[r[4]]}else{o.sx=G.shut[0];o.sy=G.shut[1];o.sw=G.shut[2];o.sh=G.shut[3];o.img=G.shut[4]}o.cb=o.sh-1}
+function g9bGate(){const G=M._gate;if(!G||!P)return;const d=Math.hypot(P.x-G.cx,P.y-8-G.cy),want=G.open?d<96:d<70;if(want===G.open)return;G.open=want;const gc=want?g9bGateOpenPic():null;
+  for(const o of [G.L,G.R]){if(want){o.sx=0;o.sy=0;o.sw=gc.width;o.sh=gc.height;o.img='_g9bGateO'}else{o.sx=G.shut[0];o.sy=G.shut[1];o.sw=G.shut[2];o.sh=G.shut[3];o.img=G.shut[4]}o.cb=o.sh-1}
   G.L.x=G.xl+G.L.sw/2;G.R.x=G.xr-G.R.sw/2;try{sfx('pick')}catch(e){}}
 // things you can tap twinkle; walk up to one and a small sign with its picture pops up above it
-function g9bMarks(tm){const A=M._taps||(M._taps=[M.crate&&{x:M.crate.x,y:M.crate.y-42,by:M.crate.y,ic:'\u{1FA99}'},M.shed&&{x:M.shed.x,y:M.shed.y-96,by:M.shed.y,ic:'\u{1F9F0}'},M.mailbox&&{x:M.mailbox.x,y:M.mailbox.y-50,by:M.mailbox.y,ic:''},M.fishSpot&&{x:M.fishSpot.x,y:M.fishSpot.y-40,by:M.fishSpot.y,ic:'\u{1F3A3}'}].filter(Boolean));
-  for(let i=0;i<A.length;i++){const a=A[i],x=a.x-camX,y=a.y-camY;if(x<-30||y<-30||x>VW+30||y>VH+30)continue;
-    for(let s2=0;s2<2;s2++){const al=Math.pow(Math.max(0,Math.sin(tm*2.6+i*1.9+s2*2.4)),2);if(al<.05)continue;const sx=Math.round(x+(s2?11:-12)),sy=Math.round(y+(s2?-6:3)),rr=s2?2:3;ctx.fillStyle='rgba(255,226,120,'+al.toFixed(2)+')';ctx.fillRect(sx-rr,sy,rr*2+1,1);ctx.fillRect(sx,sy-rr,1,rr*2+1);ctx.fillStyle='rgba(255,255,255,'+al.toFixed(2)+')';ctx.fillRect(sx,sy,1,1)}
-    if(a.ic&&P&&Math.hypot(P.x-a.x,P.y-a.by)<84){const yy=Math.round(y-16+Math.sin(tm*3)*1.5);ctx.fillStyle='rgba(27,19,48,.92)';ctx.fillRect(Math.round(x)-9,yy-9,18,17);ctx.fillStyle='#e8c46a';ctx.fillRect(Math.round(x)-9,yy+8,18,1);ctx.fillRect(Math.round(x)-9,yy-10,18,1);
-      ctx.save();ctx.font='11px system-ui,sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(a.ic,Math.round(x),yy);ctx.restore()}}}
+function g9bMarks(tm){const A=M._taps||(M._taps=[M.crate&&{x:M.crate.x,y:M.crate.y-46,by:M.crate.y,ic:'\u{1FA99}'},M.shed&&{x:M.shed.x,y:M.shed.y-172,by:M.shed.y,ic:'\u{1F9F0}'}].filter(Boolean));
+  for(const a of A){if(!P||Math.hypot(P.x-a.x,P.y-a.by)>=84)continue;const x=a.x-camX,yy=Math.round(a.y-camY-8+Math.sin(tm*3)*1.5);ctx.fillStyle='rgba(27,19,48,.92)';ctx.fillRect(Math.round(x)-9,yy-9,18,17);ctx.fillStyle='#e8c46a';ctx.fillRect(Math.round(x)-9,yy+8,18,1);ctx.fillRect(Math.round(x)-9,yy-10,18,1);
+    ctx.save();ctx.font='11px system-ui,sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(a.ic,Math.round(x),yy);ctx.restore()}}
+function g9bOutlined(o,name){const im=IMG[o.img];if(!im)return;const pad=2,c=document.createElement('canvas');c.width=o.sw+pad*2;c.height=o.sh+pad*2;const g=c.getContext('2d'),m=document.createElement('canvas');m.width=o.sw;m.height=o.sh;const mg=m.getContext('2d');
+  mg.drawImage(im,o.sx,o.sy,o.sw,o.sh,0,0,o.sw,o.sh);mg.globalCompositeOperation='source-in';mg.fillStyle='#ffe27a';mg.fillRect(0,0,o.sw,o.sh);
+  for(const [dx,dy] of [[-2,0],[2,0],[0,-2],[0,2],[-1,-1],[1,-1],[-1,1],[1,1],[-2,-1],[2,-1],[-2,1],[2,1],[-1,-2],[1,-2],[-1,2],[1,2]])g.drawImage(m,pad+dx,pad+dy);
+  g.drawImage(im,o.sx,o.sy,o.sw,o.sh,pad,pad,o.sw,o.sh);IMG[name]=c;o.img=name;o.sx=0;o.sy=0;o.sw+=pad*2;o.sh+=pad*2;o.y+=pad}
+function g9bGateOpenPic(){if(IMG._g9bGateO)return IMG._g9bGateO;const r=G9B.rects[G9B.gate.open],im=IMG.g9bA,c=document.createElement('canvas');c.width=30;c.height=r[3];const g=c.getContext('2d');g.imageSmoothingEnabled=false;g.drawImage(im,r[0],r[1],13,r[3],0,0,13,r[3]);g.drawImage(im,r[0]+13,r[1],r[2]-13,r[3],13,0,17,r[3]);IMG._g9bGateO=c;return c}
+// walk up to a thing first; what it does (a panel, a talk) opens only on arrival. Already next to it, or no way there: it opens at once.
+function g9WalkThen(x,y,fn){if(!P||!M)return;try{HOLD=null}catch(e){}   /* the tap that got us here never reaches the window's pointerup (the farm handlers stop it), so 'finger still down' must be cleared here or the player is dragged to the finger and the walk is dropped */
+  if(Math.hypot(P.x-x,P.y-y)<46){fn();return}let pa=null;try{pa=findPath(M,P.x,P.y,x,y)}catch(e){}if(!pa||!pa.length){fn();return}P.act={k:'tap',o:{x,y:y-14,fn}};P.target=null;P.path=pa}
+// the assembled scene brings its own soft shadows in the ground picture: the engine's leaning shadows are not added on top (they doubled every shadow and hid the moving water)
+{const _bs16=bakeShadows;bakeShadows=function(m){if(m&&m.g9b&&m.ground){m.shadow=m.ground;m.shadowSC=SC;return}return _bs16.apply(this,arguments)}}
+try{Object.assign(TX.th,{fishHow:'เหวี่ยงเบ็ดแล้ว รอจนเห็น ❗ แล้วกดปุ่มอีกครั้งทันที'});if(TX.en)Object.assign(TX.en,{fishHow:'Line is out. Wait for ❗ then press the button again right away'})}catch(e){}
 {const _dv14=drawVFX2;drawVFX2=function(tm){_dv14.apply(this,arguments);try{if(M&&M.g9b&&G9B){g9bGate();g9bConv(tm);g9bMarks(tm);if(!LITE){g9bWaterInit();g9bWater(tm)}}}catch(e){}}}
 // ================= 1.15 FARM ART · crops that grow in four steps + the energy converter as a real picture (farm-art.png) =================
 // One small sheet. If it is missing, everything is drawn the old way (32-px crop tiles, the converter in code). Rows on the sheet: carrot, lettuce, tomato, corn, pumpkin;
@@ -3687,7 +3697,7 @@ function openCrate(){const h=HOME.get(),rows=crateRows(h);
   modal('<h2>📦 '+t('crate')+'</h2>'+(rows.length?'<div style="max-height:56vh;overflow:auto">'+rows.map(r=>'<div class="pn" style="display:flex;align-items:center;gap:8px;margin:6px 0"><div style="flex:1;font-size:16px">'+(r.cry?'✨ ':'🧺 ')+t('cr_'+r.k)+(r.cry?t('cryCrop'):'')+' ×'+r.n+' <span style="opacity:.8">· '+r.p+' 🪙</span></div><button data-cs="'+r.k+':'+r.cry+':0" style="min-height:40px">'+t('sell1')+'</button><button data-cs="'+r.k+':'+r.cry+':1" style="min-height:40px">'+t('sellAll')+' +'+(r.n*r.p)+'</button></div>').join('')+'</div><p class="note" style="font-size:14px">'+t('crateTip')+'</p>':'<p class="note" style="font-size:16px">'+t('crateEmpty')+'</p>'));
   document.querySelectorAll('[data-cs]').forEach(b=>b.onclick=()=>{const [k,c,a]=b.dataset.cs.split(':');const g=crateSell(k,c==='1',a==='1');if(g)say('📦 '+t('crateSold')+' +'+g+' 🪙');openCrate()})}
 {const cv=document.getElementById('c');if(cv)cv.addEventListener('pointerup',ev=>{try{if(!M||!M.crate||PAUSE||DLG)return;const r=cv.getBoundingClientRect(),dpr=devicePixelRatio||1,wx=(ev.clientX-r.left)*dpr/SC+camX,wy=(ev.clientY-r.top)*dpr/SC+camY;
-    if(Math.abs(M.crate.x-wx)<40&&wy>M.crate.y-64&&wy<M.crate.y+8){ev.stopImmediatePropagation();window._farmTapT=performance.now();openCrate()}}catch(e){}},true)}
+    if(Math.abs(M.crate.x-wx)<40&&wy>M.crate.y-64&&wy<M.crate.y+8){ev.stopImmediatePropagation();window._farmTapT=performance.now();g9WalkThen(M.crate.x,M.crate.y+22,openCrate)}}catch(e){}},true)}
 // CRYSTAL CROPS: a harvest by hand has a small chance to also give one glowing crystal crop
 const CRY_CHANCE=.05;
 {const _paC=plotAct;plotAct=function(p){let crop=null;try{const q=plotState(p),Q=HOME.get().plots[p.i];if(Q&&q.st==='ripe')crop=Q.crop}catch(e){}const r=_paC.apply(this,arguments);
