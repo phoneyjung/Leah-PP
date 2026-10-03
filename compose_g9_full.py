@@ -67,8 +67,35 @@ rock = op((s_ < 50) & (v_ > 90) & (v_ < 215), 9)
 house = Image.open('/home/claude/hs/farm-house-1.png').convert('RGBA'); house = house.resize((245, round(313 * 245 / 256)), Image.LANCZOS)
 HX = DX * U - 105 * 245 / 256                                           # the door centre sits 105 px from the left of the 256-px picture
 OB.append((10.15 * U, HX + 245 / 2, house, 'house'))
+def straight_plot_parts():
+    a = np.asarray(spr('plot')).copy(); hh, ww = a.shape[:2]; al = a[..., 3] > 0; out = np.zeros_like(a)
+    for y in range(hh):                                   # stretch every row to the full width: the trapezoid becomes a rectangle
+        xs = np.where(al[y])[0]
+        if len(xs) < 4: continue
+        row = a[y:y + 1, xs.min():xs.max() + 1]; out[y] = cv2.resize(row, (ww, 1), interpolation=cv2.INTER_NEAREST)[0]
+    im = Image.fromarray(out, 'RGBA'); g_ = out[..., :3].astype(int).sum(-1)
+    # furrows: dark lines between the ridges of soil, found on the middle of the picture
+    prof = g_[26:118, 60:190].mean(1); lows = [i + 26 for i in range(2, len(prof) - 2) if prof[i] == prof[max(0, i - 6):i + 7].min()]
+    per = int(round(np.median(np.diff(lows)))) if len(lows) > 2 else 19
+    return im, lows[0], per
+PLOT_IM, FUR0, FPER = straight_plot_parts()
+def make_plot(w, n_furrows):
+    PW_, PH_ = PLOT_IM.size; cw, top, bot, side = 20, 22, 26, 12          # corner width, top beam + posts, bottom beam + posts, side beam
+    soil_h = n_furrows * FPER; h = top + soil_h + bot; out = Image.new('RGBA', (w, h), (0, 0, 0, 0))
+    soil = PLOT_IM.crop((side + 6, FUR0, PW_ - side - 6, FUR0 + FPER)); sw = soil.width
+    for r in range(n_furrows):
+        x = side
+        while x < w - side: out.paste(soil if (x // sw) % 2 == 0 else soil.transpose(Image.FLIP_LEFT_RIGHT), (x, top + r * FPER)); x += sw
+    lb = PLOT_IM.crop((0, 44, side, 44 + FPER)); rb = PLOT_IM.crop((PW_ - side, 44, PW_, 44 + FPER))
+    for r in range(n_furrows): out.paste(lb, (0, top + r * FPER)); out.paste(rb, (w - side, top + r * FPER))
+    tb = PLOT_IM.crop((cw + 8, 0, PW_ - cw - 8, top)); bb = PLOT_IM.crop((cw + 8, PH_ - bot, PW_ - cw - 8, PH_)); x = cw
+    while x < w - cw: out.paste(tb.crop((0, 0, min(tb.width, w - cw - x), top)), (x, 0)); out.paste(bb.crop((0, 0, min(bb.width, w - cw - x), bot)), (x, h - bot)); x += tb.width
+    out.paste(PLOT_IM.crop((0, 0, cw, top)), (0, 0)); out.paste(PLOT_IM.crop((PW_ - cw, 0, PW_, top)), (w - cw, 0))
+    out.paste(PLOT_IM.crop((0, PH_ - bot, cw, PH_)), (0, h - bot)); out.paste(PLOT_IM.crop((PW_ - cw, PH_ - bot, PW_, PH_)), (w - cw, h - bot)); return out
+PLOT_RECTS = []
 for k_, v in S['plots'].items():
-    x0, y0, x1, y1 = v['rect']; FLAT.append((nine('plot', int((x1 - x0) * U), int((y1 - y0) * U)), int(x0 * U), int(y0 * U), 'plot'))
+    x0, y0, x1, y1 = v['rect']; n_f = max(3, int(round(((y1 - y0) * U - 48) / FPER))); pim = make_plot(int((x1 - x0) * U), n_f)
+    FLAT.append((pim, int(x0 * U), int(y0 * U), 'plot')); PLOT_RECTS.append((int(x0 * U), int(y0 * U), pim.width, pim.height))
 # the round stone pad is the base of the energy converter; the machine has no picture yet, and a bare stone disc on the lawn explains nothing, so it is left out for now
 add('shed', *S['doors']['shed'], scale=0.85); add('hut', *S['doors']['friend_hut'])          # a shed is tapped, not entered: it may be smaller than a house
 bt = S['big_tree']; add('oak', bt[0], bt[1] + 1.7, h=274, tone='mid')
@@ -104,11 +131,18 @@ YL, YT, YB = fx0 * U, (fy0 + 0.2) * U, fy1 * U; YR = run_h(YL, YT, 4)           
 put(FH, YL, YB, 'fenceH'); put(HALF, YL + STEP, YB, 'fenceH')                                      # bottom side, left of the gate: 140 px
 put(HALF, YR - 140, YB, 'fenceH'); put(FH, YR - FH.width, YB, 'fenceH')                            # bottom side, right of the gate
 run_v(YL + 5, YT, YB); run_v(YR - 5, YT, YB)
-gt_ = spr('gate'); put(gt_, YL + 140 - 11, YB + 1, 'gate'); gp_ = spr('gatePost'); put(gp_, YR - 140 - 2, YB + 1, 'gatePost')   # the open gate hangs on the left fence end; its second post closes the right end
+def gate_shut(width):                                   # hinge post + a leaf swung shut, made from the open-gate picture by sliding its columns back level
+    gs = np.asarray(spr('gate')); post = gs[:, :13]; leaf = gs[:, 13:]; lw = leaf.shape[1]; drop = 11; flat = np.zeros((gs.shape[0] + drop, lw, 4), np.uint8)
+    for x in range(lw): d_ = int(round(drop * x / (lw - 1))); flat[d_:d_ + gs.shape[0], x] = leaf[:, x]
+    ys = np.where(flat[..., 3].any(1))[0]; flat = flat[ys.min():ys.max() + 1]
+    lf = Image.fromarray(flat, 'RGBA').resize((width - 13, flat.shape[0]), Image.NEAREST); out = Image.new('RGBA', (width, gs.shape[0]), (0, 0, 0, 0))
+    out.paste(lf, (13, gs.shape[0] - lf.height - 2)); out.alpha_composite(Image.fromarray(post, 'RGBA'), (0, 0)); return out
+GATE_L, GATE_R = YL + 140 - 11, YR - 140 + 11                     # hinge posts cover the two fence ends
+half_w = int(round((GATE_R - GATE_L) / 2)); gl = gate_shut(half_w); put(gl, GATE_L, YB + 1, 'gateShut'); put(gl.transpose(Image.FLIP_LEFT_RIGHT), GATE_R - half_w, YB + 1, 'gateShut')
 # the three closed ways of this chapter
 add('logs', 3.2, 16.3, scale=0.85); add('logs', 2.8, 17.5, scale=0.85); add('thicket', 12, 30.4)
 lg = LIBS[2]; r_ = lg[1]['gate']; lk = lg[0].crop((r_[0], r_[1], r_[0] + r_[2], r_[1] + r_[3])); lk = lk.resize((round(lk.width * 0.62), round(lk.height * 0.62)), Image.LANCZOS)
-NGX, NGY = 34.3 * U, 3.9 * U; put(lk, NGX - lk.width / 2, NGY, 'lockgate')
+_r = np.where(sand[int(3.9 * U), 1200:1600])[0] + 1200; NGX, NGY = (_r.min() + _r.max() + 1) / 2.0, 3.9 * U; put(lk, NGX - lk.width / 2, NGY, 'lockgate')      # measured on the painted road at the fence line
 LEFT_END = NGX - lk.width / 2 + 6 - (FH.width + STEP); run_h(LEFT_END, NGY - 1, 2); run_h(NGX + lk.width / 2 - 6, NGY - 1, 3)
 # a fence that just stops on open grass can be walked round too: each end runs into a clump of trees
 add('clump', (LEFT_END - 62) / U, (NGY + 22) / U, tone='mid'); add('clump', (NGX + lk.width / 2 - 6 + FH.width + 2 * STEP + 50) / U, (NGY + 22) / U, tone='deep', flip=True)
@@ -121,7 +155,7 @@ for v in S['plots'].values(): box(v['rect'][0] - 0.6, v['rect'][1] - 2.4, v['rec
 box(27.2, 8.0, 33.6, 13.6); box(fx0 - 0.4, fy0 - 0.9, fx1 + 0.8, fy1 + 0.9)       # shed · the friend's yard and its fence line
 box(DX - 4.4, 10.0, DX + 4.4, 14.1)                                               # nothing grows on the way to the front door
 box(bt[0] - 4.6, bt[1] - 5.5, bt[0] + 4.6, bt[1] + 2.6)                           # under the old oak
-box(27.0, 3.0, 41.6, 4.3)                                                         # along the north fence
+box(28.0, 3.0, 43.0, 4.3)                                                         # along the north fence
 box(fx - 3, fy - 1.5, fx + 3, fy + 2)                                             # the camp
 trunk_block = dil(sand, 13) | dil(water, 27) | dil(rock, 17) | keep
 water_d = dil(water, 7)
@@ -182,24 +216,29 @@ SMALL = ('flowerW', 'flowerY', 'flowerR', 'grass', 'mushroom', 'tuft')
 def foot_of(im, nm):
     a = np.asarray(im)[..., 3] > 0; hgt = a.shape[0]; rows = max(3, int(hgt * (0.08 if (nm.startswith('tree') or nm in ('clump', 'oak')) else 0.30)))
     xs = np.where(a[hgt - rows:].any(0))[0]; return (int(xs.min()), int(xs.max()) + 1) if len(xs) else (0, im.width)
-core = np.zeros((H, W), np.uint8); rim = np.zeros((H, W), np.uint8); shade_c = np.zeros((H, W), np.uint8)
-NOISE = np.kron(np.random.RandomState(77).uniform(-1, 1, (H // 2 + 2, W // 2 + 2)).astype(np.float32), np.ones((2, 2), np.float32))[:H, :W]
-def blob(mask, cx, cy, rw, rh, rag):
-    x0, x1 = max(0, int(cx - rw * 1.4) - 2), min(W, int(cx + rw * 1.4) + 3); y0, y1 = max(0, int(cy - rh * 1.5) - 2), min(H, int(cy + rh * 1.5) + 3)
-    if x1 <= x0 or y1 <= y0: return
-    yy, xx = np.mgrid[y0:y1, x0:x1]; d = ((xx - cx) / max(1.0, rw)) ** 2 + ((yy - cy) / max(1.0, rh)) ** 2
-    mask[y0:y1, x0:x1] |= (d < 1 + NOISE[y0:y1, x0:x1] * rag).astype(np.uint8)
+SUN_SX, SUN_SY, CAST_A, FOOT_A = 0.43, 0.36, 0.34, 0.30          # 10:00 on a sunny day, the values of sun(10) in the demo
+SHADE = np.array([18, 28, 58], np.float32)
+cast = np.zeros((H, W), np.float32); footm = np.zeros((H, W), np.float32)
 FEET = []
 for by, bx, im, nm in OB:
     if nm in SMALL: continue
-    x0 = bx - im.width / 2; f0, f1 = foot_of(im, nm); fw = f1 - f0; cx = x0 + (f0 + f1) / 2; tree = nm.startswith('tree') or nm in ('clump', 'oak')
-    rw = fw * 0.5 + max(3, fw * 0.12); rh2 = float(np.clip(fw * 0.13, 3.0, 8.0))
-    blob(rim, cx + 2.5, by - rh2 * 0.30 + 1.5, rw + 2, rh2 + 1.5, 0.32); blob(core, cx + 1.5, by - rh2 * 0.45 + 0.5, rw * 0.88, rh2 * 0.75, 0.22)
-    if tree: cw = im.width * 0.40; ch = max(8, im.width * 0.15); blob(shade_c, bx + 5, by - ch * 0.15 + 2, cw, ch, 0.38)
+    w_, hgt = im.size; x0 = bx - w_ / 2; f0, f1 = foot_of(im, nm); fw = f1 - f0; cx = x0 + (f0 + f1) / 2
+    # cast shadow: output (X, Y) -> sprite (u, v):  v = (by + SY*h - Y) / SY ,  u = X - x0 - SX*(h - v)
+    ow, oh = int(w_ + SUN_SX * hgt) + 3, int(SUN_SY * hgt) + 3; X0, Y0 = int(x0) - 1, int(by) - 1
+    a_ = Image.fromarray(np.asarray(im)[..., 3], 'L')
+    coef = (1, -SUN_SX / SUN_SY, -x0 + SUN_SX * by / SUN_SY + X0 - (SUN_SX / SUN_SY) * Y0, 0, -1 / SUN_SY, by / SUN_SY + hgt - Y0 / SUN_SY)
+    sh_ = np.asarray(a_.transform((ow, oh), Image.AFFINE, coef, resample=Image.BILINEAR), np.float32) / 255.0
+    ys0, xs0 = max(0, Y0), max(0, X0); ys1, xs1 = min(H, Y0 + oh), min(W, X0 + ow)
+    if ys1 > ys0 and xs1 > xs0: cast[ys0:ys1, xs0:xs1] = np.maximum(cast[ys0:ys1, xs0:xs1], sh_[ys0 - Y0:ys1 - Y0, xs0 - X0:xs1 - X0])
+    rw = fw * 0.5 + max(3, fw * 0.12); rh2 = min(8.0, max(3.0, fw * 0.13)) + 1
+    cv2.ellipse(footm, (int(round(cx + 1.5)), int(round(by - 1))), (int(round(rw)), int(round(rh2))), 0, 0, 360, 1.0, -1)
     FEET.append((by, cx, fw, im, nm))
-mult = np.ones((H, W, 3), np.float32); tone_ = lambda f: np.array([f * 0.92, f * 0.98, min(1.0, f * 1.10)], np.float32)
-mult[shade_c > 0] = tone_(0.87); mult[rim > 0] = tone_(0.76); mult[core > 0] = tone_(0.58); mult[water > 0] = 1.0
-gg = np.asarray(base).astype(np.float32); gg[..., :3] = np.clip(gg[..., :3] * mult, 0, 255); out = Image.fromarray(gg.astype(np.uint8), 'RGBA')
+cast = cv2.GaussianBlur(cast, (0, 0), 2.2); footm = cv2.GaussianBlur(footm, (0, 0), 1.8)
+cast[water > 0] = 0; footm[water > 0] = 0                                # nothing darkens open water
+gg = np.asarray(base).astype(np.float32)
+for layer, alpha in ((cast, CAST_A), (footm, FOOT_A)):
+    k_ = (layer * alpha)[..., None]; gg[..., :3] = gg[..., :3] * (1 - k_) + SHADE * k_
+out = Image.fromarray(np.clip(gg, 0, 255).astype(np.uint8), 'RGBA')
 grass_here = lambda x, y: 0 <= int(x) < W and 0 <= int(y) < H and (35 < h_[int(y), int(x)] < 75) and s_[int(y), int(x)] > 110 and not sand[int(y), int(x)] and not water[int(y), int(x)] and not rock[int(y), int(x)] and not flat_mask[int(y), int(x)]
 for by, cx, fw, im, nm in FEET:
     n_t = 3 if (fw > 46 and im.height > 50) else 2 if fw > 12 else 1
@@ -209,7 +248,24 @@ for by, cx, fw, im, nm in FEET:
         ty = by + rs.uniform(1.5, 4.0)
         if not grass_here(tx, min(H - 1, ty)): continue
         OB.append((ty, tx + rs.uniform(-2, 2), spr('grass', scale=t_sc if rs.rand() < 0.6 else max(0.42, t_sc - 0.13), flip=rs.rand() < 0.5, tone='tuft'), 'tuft'))
-for by, bx, im, nm in sorted(OB, key=lambda o: o[0]): out.alpha_composite(im, (int(bx - im.width / 2), int(by - im.height)))
+TAP = ('board', 'crate', 'mailbox')
+def with_marker(im):
+    a = np.asarray(im); pad = 2; hh, ww = a.shape[:2]; big = np.zeros((hh + 2 * pad, ww + 2 * pad, 4), np.uint8); big[pad:pad + hh, pad:pad + ww] = a
+    al = (big[..., 3] > 0).astype(np.uint8); ring = (cv2.dilate(al, np.ones((3, 3), np.uint8)) > 0) & (al == 0)
+    big[ring] = (255, 226, 120, 235); return Image.fromarray(big, 'RGBA'), pad
+def sparkle(img, x, y, r=3):
+    px = img.load()
+    for d_ in range(-r, r + 1):
+        for (xx, yy) in ((x + d_, y), (x, y + d_)):
+            if 0 <= xx < W and 0 <= yy < H: px[xx, yy] = (255, 250, 214, 255) if abs(d_) < r else (255, 226, 120, 255)
+    px[x, y] = (255, 255, 255, 255)
+SPARK = []
+for by, bx, im, nm in sorted(OB, key=lambda o: o[0]):
+    if nm in TAP:
+        im2, pad = with_marker(im); out.alpha_composite(im2, (int(bx - im.width / 2) - pad, int(by - im.height) - pad))
+        SPARK += [(int(bx - im.width / 2) - 5, int(by - im.height) + 3, 3), (int(bx + im.width / 2) + 4, int(by - im.height) - 4, 2)]
+    else: out.alpha_composite(im, (int(bx - im.width / 2), int(by - im.height)))
+for x_, y_, r_ in SPARK: sparkle(out, x_, y_, r_)
 out.convert('RGB').save(OUT)
 
 kinds = collections.Counter(o[3] for o in OB)
