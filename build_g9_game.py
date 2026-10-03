@@ -7,14 +7,37 @@ SRC = '/home/claude/g9full'; OUT = sys.argv[1] if len(sys.argv) > 1 else '/home/
 import os; os.makedirs(OUT, exist_ok=True)
 T = 32; GW, GH = 60, 40
 sc = json.load(open(SRC + '/scene.json')); atlas = Image.open(SRC + '/sprites.png').convert('RGBA'); W, H = sc['w'], sc['h']
-Image.open(SRC + '/ground.png').convert('RGB').save(OUT + '/map-G9b-ground.jpg', quality=88, optimize=True, progressive=True)
+import base64, io
+gnd = np.asarray(Image.open(SRC + '/ground.png').convert('RGB')).copy()
+_h = cv2.cvtColor(gnd, cv2.COLOR_RGB2HSV); _hh, _ss, _vv = _h[..., 0].astype(int), _h[..., 1].astype(int), _h[..., 2].astype(int)
+wat = cv2.morphologyEx(((_hh > 88) & (_hh < 125) & (_ss > 90) & (_vv > 120)).astype(np.uint8), cv2.MORPH_OPEN, np.ones((3, 3)))
+_n, _lab, _st, _c = cv2.connectedComponentsWithStats(wat, connectivity=8); comps = [i for i in range(1, _n) if _st[i][4] > 400]
+allw = np.isin(_lab, comps).astype(np.uint8); pond = (_lab == max(comps, key=lambda i: _st[i][4])).astype(np.uint8)
+_cn, _ = cv2.findContours(allw, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE); filled = np.zeros_like(allw); cv2.drawContours(filled, _cn, -1, 1, -1)
+holes = ((filled == 1) & (allw == 0)).astype(np.uint8); _n2, _lab2, _st2, _ = cv2.connectedComponentsWithStats(holes, connectivity=8)
+PADS = []; padmask = np.zeros_like(allw)
+for i in range(1, _n2):
+    x_, y_, w_, h_, ar = _st2[i]
+    if ar < 40 or ar > 2600 or w_ > 80 or h_ > 60: continue                      # ripples are too small; the dock posts, rocks and reed islands too big or the wrong colour
+    m_ = (_lab2 == i).astype(np.uint8); px_ = gnd[m_ > 0]; hs_ = cv2.cvtColor(px_[None], cv2.COLOR_RGB2HSV)[0]
+    if ((hs_[:, 0] > 30) & (hs_[:, 0] < 90) & (hs_[:, 1] > 70)).mean() < 0.45: continue      # a lily pad is mostly green
+    m_ = cv2.dilate(m_, np.ones((3, 3))) & filled; ys_, xs_ = np.where(m_ > 0); x0_, x1_, y0_, y1_ = xs_.min(), xs_.max() + 1, ys_.min(), ys_.max() + 1
+    PADS.append((int(x0_), int(y0_), Image.fromarray(np.dstack([gnd[y0_:y1_, x0_:x1_], (m_[y0_:y1_, x0_:x1_] * 255).astype(np.uint8)]), 'RGBA'))); padmask |= m_
+gnd = cv2.cvtColor(cv2.inpaint(cv2.cvtColor(gnd, cv2.COLOR_RGB2BGR), cv2.dilate(padmask, np.ones((3, 3))), 4, cv2.INPAINT_TELEA), cv2.COLOR_BGR2RGB)
+Image.fromarray(gnd).save(OUT + '/map-G9b-ground.jpg', quality=88, optimize=True, progressive=True)
+clipm = ((allw > 0) | (padmask > 0)).astype(np.uint8); wavem = cv2.erode(clipm, np.ones((5, 5), np.uint8))
+_ys, _xs = np.where(clipm > 0); WBOX = [int(_xs.min()) - 4, int(_ys.min()) - 4, int(_xs.max()) + 5, int(_ys.max()) + 5]
+def b64mask(m):
+    bio = io.BytesIO(); Image.fromarray((m[WBOX[1]:WBOX[3], WBOX[0]:WBOX[2]] * 255).astype(np.uint8)).convert('1').save(bio, 'PNG', optimize=True); return base64.b64encode(bio.getvalue()).decode()
+deepm = cv2.distanceTransform(((pond > 0) | ((padmask > 0) & (cv2.dilate(pond, np.ones((9, 9))) > 0))).astype(np.uint8), cv2.DIST_L2, 5) >= 13
+_dy, _dx = np.where(deepm); DEEP = [[int(a), int(b)] for a, b in zip(_dx[::41], _dy[::41])]
 
 # ---------- sprites: drop the house (the game draws it by level), reuse one picture for a thing and its mirror image, outline the things you can tap ----------
 TAP = ()          # no outline baked into the pictures: at 255 colours it came out as a broken dotted line (owner, 3 Oct). The game marks tappable things itself.
 def outlined(im):
     a = np.asarray(im); pad = 2; hh, ww = a.shape[:2]; big = np.zeros((hh + 2 * pad, ww + 2 * pad, 4), np.uint8); big[pad:pad + hh, pad:pad + ww] = a
     al = (big[..., 3] > 0).astype(np.uint8); ring = (cv2.dilate(al, np.ones((3, 3), np.uint8)) > 0) & (al == 0); big[ring] = (255, 226, 120, 235); return Image.fromarray(big, 'RGBA')
-pics = []; pic_name = []; by_hash = {}; inst = []
+pics = []; pic_name = []; by_hash = {}; inst = []; pad_list = []
 def pic_id(im):
     b = im.tobytes() + bytes(str(im.size), 'ascii'); h = hashlib.md5(b).hexdigest()
     if h in by_hash: return by_hash[h], 0
@@ -27,7 +50,10 @@ for i in sc['inst']:
     if i['n'] in TAP: im = outlined(im); x -= 2; by += 2
     pid, fl = pic_id(im)
     if pid == len(pic_name): pic_name.append(i['n'])
-    inst.append({'n': i['n'], 'p': pid, 'x': x, 'by': by, 'w': im.width, 'h': im.height, 'fl': fl, 'f': i['f'], 'lv': i['lv']})
+    inst.append({'n': i['n'], 'p': pid, 'x': x, 'by': by, 'w': im.width, 'h': im.height, 'fl': fl, 'f': i['f'], 'lv': i['lv'], 'sw': {'mid': 1, 'small': 2, 'high': 3}.get(i['lv'], 0) if i['n'] not in ('thicket',) else 0})
+for (px_, py_, pim) in PADS: pad_list.append([len(pics), px_, py_]); pics.append(pim); pic_name.append('pad')
+# the yard gate swung open (the two leaves use this picture, the right one mirrored)
+_O2 = Image.open('/home/claude/lib2/objects-2.png').convert('RGBA'); _P2 = json.load(open('/home/claude/lib2/objects-2.json')); _r = _P2['gate']; GATE_OPEN = len(pics); pics.append(_O2.crop((_r[0], _r[1], _r[0] + _r[2], _r[1] + _r[3]))); pic_name.append('gateOpen')
 # cleared-by-hand things on the wild plots, half size (the world is smaller than the old scene)
 O1 = Image.open('/home/claude/v108/objects-1.png').convert('RGBA'); P1 = json.load(open('/home/claude/v108/objects-1.json')); wild = {}
 for k in ('bush', 'rock', 'stump'):
@@ -83,7 +109,9 @@ for i in inst:
     elif n in ('logSeatL', 'logSeatR', 'log', 'stump', 'rockM'): block(x + 3, by - h * 0.5, x + w - 3, by)
     elif n == 'logs': block(x, by - h * 0.7, x + w, by)
     elif n == 'crate': block(x + 2, by - 14, x + w - 2, by)
-    elif n in ('fenceH', 'gateShut', 'lockgate'): block(x, by - 10, x + w, by)
+    elif n == 'gateShut':
+        before = solid.copy(); block(x, by - 10, x + w, by); GATE_TILES = globals().get('GATE_TILES', []) + [[int(b_), int(a_)] for a_, b_ in zip(*np.where(solid & ~before))]
+    elif n in ('fenceH', 'lockgate'): block(x, by - 10, x + w, by)
     elif n == 'fenceV': block(x, by - h, x + w, by)
     elif n in ('shed', 'hut'): block(x + 4, by - h * 0.5, x + w - 4, by)
     else: block(cx - 6, by - 8, cx + 6, by)
@@ -121,7 +149,10 @@ P['locks'] = {'w': {'at': [round((max(cxy(l)[0] + l['w'] / 2 for l in lg) + 26) 
 P['lamps'] = [[round(cxy(l)[0]), round(l['by'] - l['h'] + 12)] for l in find('lamp') + find('pillar')]
 P['wildPic'] = wild
 P['grid'] = ''.join('1' if v else '0' for v in solid.reshape(-1))
-P['rects'] = rects; P['inst'] = [[i['p'], i['x'], i['by'], i['fl']] for i in inst]
+P['rects'] = rects; P['inst'] = [[i['p'], i['x'], i['by'], i['fl'], i['sw']] for i in inst]
+gi = [k for k, i in enumerate(inst) if i['n'] == 'gateShut']; gl = [inst[k] for k in gi]
+P['gate'] = {'inst': gi, 'open': GATE_OPEN, 'tiles': GATE_TILES, 'x0': min(i['x'] for i in gl), 'x1': max(i['x'] + i['w'] for i in gl), 'y': gl[0]['by']}
+P['pads'] = pad_list; P['water'] = {'box': WBOX, 'clip': b64mask(clipm), 'wave': b64mask(wavem), 'deep': DEEP}
 json.dump(P, open(OUT + '/g9b-scene.json', 'w'), separators=(',', ':'))
 
 # ---------- can you walk to everything? ----------
@@ -140,7 +171,7 @@ bx_ = int(BRIDGE[0] // T); col = ''.join('#' if solid[ty, bx_] else '.' for ty i
 bad = [k for k, v in targets.items() if not near(*v)]
 print(json.dumps({'ground_KB': os.path.getsize(OUT + '/map-G9b-ground.jpg') // 1024, 'sheets [size, KB, pictures]': sizes, 'mean colour error after 255 colours': errs, 'scene_KB': os.path.getsize(OUT + '/g9b-scene.json') // 1024,
                   'pictures': len(pics), 'things': len(inst), 'mirrored_reused': sum(i['fl'] for i in inst), 'solid_tiles': int(solid.sum()), 'open_tiles': int((~solid).sum()),
-                  'reachable_open_tiles': int(seen.sum()), 'targets': len(targets), 'not_reachable': bad, 'wild': len(wl), 'lamps': len(P['lamps'])}))
+                  'reachable_open_tiles': int(seen.sum()), 'targets': len(targets), 'not_reachable': bad, 'wild': len(wl), 'lamps': len(P['lamps']), 'lily_pads': len(pad_list), 'water_box': WBOX, 'deep_points': len(DEEP), 'gate_tiles': GATE_TILES, 'sway': dict(collections.Counter(i['sw'] for i in inst))}))
 print({k: P[k] for k in ('spawn', 'exitE', 'door', 'houseBase', 'houseBox', 'mailbox', 'shed', 'crate', 'fish', 'camp', 'sign', 'locks')})
 # picture for the eye: solid tiles red, reachable green dots, targets
 ov = Image.open(SRC + '/ground.png').convert('RGBA'); full = Image.open('/home/claude/gt/g9_full.png').convert('RGBA'); a = np.asarray(full).copy()
