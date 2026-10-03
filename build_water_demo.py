@@ -6,7 +6,7 @@ from PIL import Image
 
 EX = '/home/claude/wd2'
 X, Y, W, H = 470, 232, 600, 440                      # the part of the piece shown on the page (world px)
-ground = np.asarray(Image.open(EX + '/ground.png').convert('RGB'))[Y:Y+H, X:X+W].copy()
+ground = np.asarray(Image.open(EX + '/ground_plain.png').convert('RGB'))[Y:Y+H, X:X+W].copy()      # bare ground: shadows are drawn live by the page
 scene = json.load(open(EX + '/scene.json'))
 atlas = Image.open(EX + '/sprites.png').convert('RGBA')
 
@@ -41,7 +41,7 @@ for r in rects:
     newpos[r] = (x, y); x += r[2] + 1; rowh = max(rowh, r[3])
 sa = Image.new('RGBA', (aw, y + rowh), (0, 0, 0, 0))
 for r, (nx, ny) in newpos.items(): sa.paste(atlas.crop((r[0], r[1], r[0] + r[2], r[1] + r[3])), (nx, ny))
-out_inst = [{'lv': i['lv'], 'n': i['n'], 'r': [newpos[tuple(i['r'])][0], newpos[tuple(i['r'])][1], i['r'][2], i['r'][3]], 'x': i['x'] - X, 'y': i['y'] - Y, 'by': i['by'] - Y} for i in inst]
+out_inst = [{'lv': i['lv'], 'n': i['n'], 'r': [newpos[tuple(i['r'])][0], newpos[tuple(i['r'])][1], i['r'][2], i['r'][3]], 'x': i['x'] - X, 'y': i['y'] - Y, 'by': i['by'] - Y, 'f': i['f'], 'sh': i['sh']} for i in inst]
 
 def b64(img, fmt='PNG'):
     b = io.BytesIO(); img.save(b, fmt, optimize=True); return base64.b64encode(b.getvalue()).decode()

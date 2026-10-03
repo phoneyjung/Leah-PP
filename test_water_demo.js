@@ -6,6 +6,7 @@ const pg=await b.newPage();await pg.setViewport({width:390,height:844,isMobile:t
 await pg.goto('http://localhost:'+(process.env.PORT||8777)+'/water-demo.html',{waitUntil:'networkidle0'});await new Promise(r=>setTimeout(r,1500));
 const R=await pg.evaluate(async()=>{const o={};const sleep=ms=>new Promise(r=>setTimeout(r,ms));const A=window.__api,D=A.D;
  o.ready=!!A&&!!window.__dbg;
+ A.holdFish(true);                                    // no fish swims in by itself while pixels are being compared; the fish checks below call fish on purpose
  // ---------- WIND: three height levels ----------
  const by={low:[],mid:[],small:[],high:[]};D.inst.forEach(i=>by[i.lv].push(i));o.count={low:by.low.length,mid:by.mid.length,small:by.small.length,high:by.high.length};
  // lean of the top of each thing over 120 s of wind, at each wind strength
@@ -42,6 +43,21 @@ const R=await pg.evaluate(async()=>{const o={};const sleep=ms=>new Promise(r=>se
  let samples=0,inWater=0;for(let k=0;k<10;k++){A.spawnFish();for(let i=0;i<22;i++){await sleep(120);for(const [x,y] of window.__dbg.fish){if(x===undefined)continue;samples++;if(A.clipAt(x,y))inWater++}}}
  o.fish={samples,inWater,pct:+(100*inWater/samples).toFixed(1)};
  await sleep(2500);o.fpsAllOn=Math.round(window.__dbg.fps);o.swayFramesMade=A.frames.size;
+ // ---------- SUN · SHADOWS · WEATHER ----------
+ A.OPT.tree=false;A.OPT.pads=false;A.OPT.glint=false;A.OPT.wave=false;A.SKY.w=0;A.SKY.run=false;               // hold everything else still: only the sun and the sky change
+ o.sun=[3,6,7,9,12,15,17,18,21].map(h=>{const s=A.sun(h);return [h,+s.sx.toFixed(2),+s.sy.toFixed(2),+s.a.toFixed(2)]});
+ o.tipOf134pxTree=[7,12,17].map(h=>{const s=A.sun(h);return [h,Math.round(s.sx*134),Math.round(s.sy*134)]});
+ let jump=0,prev=null;for(let h=0;h<=24;h+=0.25){const s=A.sun(h%24);if(prev!==null)jump=Math.max(jump,Math.abs(s.a-prev));prev=s.a}o.biggestStrengthJumpPerQuarterHour=+jump.toFixed(3);
+ const well=D.inst.find(i=>i.n==='well');const box=[well.x+well.r[2]+2,well.by-14,46,26];
+ const lum=async(h,w,sh)=>{A.SKY.hour=h;A.SKY.w=w;A.OPT.shadow=sh;await sleep(260);return A.lumBox(...box)};
+ o.groundRightOfWell={};for(const [name,h,w] of [['07:00',7,0],['12:00',12,0],['17:00',17,0],['22:00',22,0],['12:00 cloudy',12,1],['13:00 heat',13,4]]){const x=await lum(h,w,true),y=await lum(h,w,false);o.groundRightOfWell[name]=+(x/y).toFixed(3)}
+ A.OPT.shadow=true;o.byWeatherAtNoon={};for(let w=0;w<A.SKY.list.length;w++){A.SKY.hour=12;A.SKY.w=w;await sleep(220);o.byWeatherAtNoon['w'+w]=[+window.__dbg.sh.cast.toFixed(2),+window.__dbg.sh.foot.toFixed(2),window.__dbg.fall]}
+ A.SKY.w=0;o.shadowAreaPx={};for(const h of [7,12,17]){A.SKY.hour=h;await sleep(220);o.shadowAreaPx[h]=A.shadowArea()}
+ let onWater=0,wn=0;for(const q of D.deep.filter((q,i)=>i%5===0)){wn++;if(A.shadowAlphaAt(q[0],q[1])>8)onWater++}o.shadowOnOpenWater=[onWater,wn];
+ A.SKY.hour=6;A.SKY.run=true;await sleep(2000);o.clockMovedHoursIn2s=+(A.SKY.hour-6).toFixed(2);A.SKY.run=false;o.sliderFollows=Math.abs(+document.getElementById('tSlider').value-A.SKY.hour)<0.3;
+ o.tint={noon:A.skyTint(12),dusk:A.skyTint(17.5).map(Math.round),night:A.skyTint(22)};
+ A.OPT.tree=true;A.OPT.pads=true;A.OPT.glint=true;A.OPT.wave=true;A.SKY.hour=10;A.SKY.w=2;A.SKY.run=true;await sleep(3300);o.fpsRainClockAllOn=Math.round(window.__dbg.fps);A.SKY.run=false;A.SKY.w=0;A.SKY.hour=10;
+ const bk=document.getElementById('bSky');const names=[];for(let i=0;i<5;i++){bk.click();names.push(A.SKY.w)}o.skyButtonCycles=names;
  const bs=[...document.querySelectorAll('button')];o.buttons={n:bs.length,minH:Math.round(Math.min(...bs.map(x=>x.getBoundingClientRect().height)))};
  const bw=document.getElementById('bWind');const w0=A.WIND.str;bw.click();const w1=A.WIND.str;bw.click();bw.click();o.windButton=[w0,w1,A.WIND.str,bw.textContent];
  o.noSideScroll=document.documentElement.scrollWidth<=window.innerWidth+1;return o});

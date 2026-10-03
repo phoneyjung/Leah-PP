@@ -165,7 +165,8 @@ out.convert('RGB').save(sys.argv[3] if len(sys.argv) > 3 else '/home/claude/gt/p
 if len(sys.argv) > 5:
     import os
     ex = sys.argv[5]; os.makedirs(ex, exist_ok=True)
-    Image.fromarray(gg.astype(np.uint8), 'RGBA').convert('RGB').save(ex + '/ground.png')
+    Image.fromarray(gg.astype(np.uint8), 'RGBA').convert('RGB').save(ex + '/ground.png')          # ground + baked shadows (for still pictures)
+    ground.convert('RGB').save(ex + '/ground_plain.png')                                           # bare ground (the game draws shadows itself)
     uniq = {}; order = []
     for by, bx, im, nm in OB:
         if id(im) not in uniq: uniq[id(im)] = len(order); order.append((im, nm))
@@ -178,7 +179,10 @@ if len(sys.argv) > 5:
         im = next(o[0] for o in order if id(o[0]) == i); atlas.paste(im, (x0, y0)); rect[i] = [x0, y0, im.width, im.height]
     atlas.save(ex + '/sprites.png', optimize=True)
     def level(nm): return 'high' if nm in ('treeA', 'treeB', 'treeC', 'clump') else 'small' if nm in ('treeD', 'treeE', 'treeF') else 'mid' if nm.startswith('bush') or nm == 'thicket' else 'low'
-    inst = [{'n': nm, 'lv': level(nm), 'r': rect[id(im)], 'x': int(bx - im.width / 2), 'y': int(by - im.height), 'by': int(by)} for by, bx, im, nm in sorted(OB, key=lambda o: o[0])]
+    def foot(im, nm):
+        f0, f1 = foot_of(im, nm); return [int(f0), int(f1 - f0)]
+    inst = [{'n': nm, 'lv': level(nm), 'r': rect[id(im)], 'x': int(bx - im.width / 2), 'y': int(by - im.height), 'by': int(by), 'f': foot(im, nm), 'sh': 0 if nm in SMALL else 1}
+            for by, bx, im, nm in sorted(OB, key=lambda o: o[0])]
     json.dump({'w': W, 'h': H, 'inst': inst}, open(ex + '/scene.json', 'w'))
     print(json.dumps({'export': ex, 'unique_sprites': len(order), 'instances': len(inst), 'atlas': list(atlas.size), 'levels': dict(collections.Counter(i['lv'] for i in inst))}))
 kinds = collections.Counter(o[3] for o in OB)
