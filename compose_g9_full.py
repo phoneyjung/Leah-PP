@@ -311,5 +311,5 @@ if len(sys.argv) > 3:
     level = lambda nm: 'high' if nm in ('treeA', 'treeB', 'treeC', 'clump', 'oak') else 'small' if nm in ('treeD', 'treeE', 'treeF') else 'mid' if nm.startswith('bush') or nm == 'thicket' else 'low'
     inst = [{'n': nm, 'lv': level(nm), 'r': rect[id(im)], 'x': int(bx - im.width / 2), 'y': int(by - im.height), 'by': int(by), 'f': [int(foot_of(im, nm)[0]), int(foot_of(im, nm)[1] - foot_of(im, nm)[0])], 'sh': 0 if nm in SMALL else 1, 'hz': LOW_H.get(nm, 0)}
             for by, bx, im, nm in sorted(OB, key=lambda o: o[0])]
-    json.dump({'w': W, 'h': H, 'inst': inst}, open(ex + '/scene.json', 'w'))
+    json.dump({'w': W, 'h': H, 'inst': inst, 'plots': PLOT_RECTS, 'fper': FPER, 'door_x': DX * U, 'house_base': 10.15 * U}, open(ex + '/scene.json', 'w'))
     print(json.dumps({'export': ex, 'unique_sprites': len(order), 'instances': len(inst), 'atlas': list(atlas.size)}))

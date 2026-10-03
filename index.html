@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.11';
+const VERSION='Lantern Academy 1.12';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -3518,6 +3518,36 @@ function g9Blocker(kind){const k='_g9b_'+kind;if(IMG[k])return IMG[k];const c=do
 // our front door: into the house and back out to the farm
 {const _gmR=goMap;goMap=function(id){try{if(S&&/^room/.test(id||'')&&M&&!/^room/.test(M.id))S.homeFrom=M.g9?'farm':'capital'}catch(e){}return _gmR.apply(this,arguments)}}
 {const _ueR=useExit;useExit=function(e){try{if(e&&e.id==='door'&&M&&M.kind==='room'&&S&&S.homeFrom==='farm'&&g9On()){sfx('warp');fadeTo(()=>goMap('farm','home'));return}}catch(e2){}return _ueR.apply(this,arguments)}}
+// ================= 1.12 G9 · THE ASSEMBLED SCENE (ground painted on its own + every standing thing a separate picture · MAP_PIPELINE "วิธีที่ใช้จริง รุ่น 2") =================
+// Used only when all four files arrive: map-G9b-ground.jpg (ground with soft shadows), g9b-sprites.png + g9b-plants.png (the things), g9b-scene.json (where they stand,
+// what is solid, where the door / plots / crate ... are). If any one is missing the 1.06 painted scene above stays exactly as it was.
+// The world here is 60x40 tiles (1920x1280 px, 1 px of the painting = 1 px of the world). The numbers in G9 are replaced by the ones from the json, so the house,
+// the beds, the robot and the rest of the 1.06-1.11 code keep working on the new places. Round 1: everything stands still (water, wind, live shadows, the yard gate come next).
+let G9B=null;
+{const need={mapG9b:'map-G9b-ground.jpg',g9bA:'g9b-sprites.png',g9bB:'g9b-plants.png'};let left=4,bad=false,raw=null;
+  const done=()=>{if(--left>0||bad||!raw)return;try{const J=raw,L=J.locks;
+      if(!(J.w>0&&J.h>0&&typeof J.grid==='string'&&J.grid.length===J.w*J.h&&Array.isArray(J.inst)&&Array.isArray(J.rects)))return;
+      Object.assign(G9,{w:J.w,h:J.h,grid:J.grid,spawn:J.spawn,exitE:J.exitE,door:J.door,houseBase:J.houseBase,houseBox:J.houseBox,mailbox:J.mailbox,shed:J.shed,plots:J.plots,extra:J.extra,wild:J.wild,fish:J.fish,conv:J.conv,camp:J.camp,sign:J.sign,
+        locks:{w:{at:L.w.at,msg:L.w.msg,block:L.w.at},n:{at:L.n.at,msg:L.n.msg,block:L.n.at},s:{at:L.s.at,msg:L.s.msg,block:L.s.at}}});
+      if(!IMG.mapG9)IMG.mapG9=IMG.mapG9b;G9B=J;CONVERTERS.farm=[G9.conv];delete CACHE.farm}catch(e){G9B=null}};
+  for(const [k,src] of Object.entries(need)){const i=new Image();i.onload=()=>{IMG[k]=i;done()};i.onerror=()=>{bad=true};i.src=(window.EMBED_ASSETS&&window.EMBED_ASSETS[src])||src}
+  try{fetch('g9b-scene.json').then(r=>r.ok?r.json():Promise.reject(0)).then(j=>{raw=j;done()}).catch(()=>{bad=true})}catch(e){bad=true}}
+{const _f12=MAPS.farm;MAPS.farm=function(){if(!G9B)return _f12.apply(this,arguments);ensureFarmTap();
+  const m=newMap('farm','town',G9.w,G9.h,79);m.nameKey='g9';m.g9=1;m.g9b=1;m._obj1=1;m.painted='mapG9b';const h=farmSave(),cl=new Set(h.farm.cleared||[]),SH=['g9bA','g9bB'];
+  for(let y=0;y<G9.h;y++)for(let x=0;x<G9.w;x++)if(G9.grid[y*G9.w+x]==='1')m.SOLID.add(key(x,y));
+  // every standing thing: its own picture, drawn in walking order with the player (cs:0 = no engine shadow, the soft shadows are already in the ground picture)
+  for(const [p,x,by,fl] of G9B.inst){const r=G9B.rects[p];m.objs.push({img:SH[r[4]],sx:r[0],sy:r[1],sw:r[2],sh:r[3],x:x+r[2]/2,y:by,tall:1,cs:0,flip:fl?1:0,g9b:1})}
+  m.exits.push({id:'e',x:m.w*T-14,y:G9.exitE[1]*T,to:'capital',toExit:'w',label:'capital'});
+  for(const [id,L] of Object.entries(G9.locks)){const side=id==='w';[-1.2,0,1.2].forEach((o,i)=>m.exits.push({id:id+(i===1?'':i),x:(L.at[0]+(side?0:o))*T,y:(L.at[1]+(side?o:0))*T,to:'farm',toExit:'e',locked:1,msg:L.msg,label:L.msg}))}
+  const ho=g9HouseObj();if(ho)m.objs.push(ho);g9HouseSolid(m);
+  m.exits.push({id:'home',x:G9.door[0]*T,y:G9.door[1]*T,to:'room',toExit:'door',label:'ourHome'});
+  m.spawnDefault=[G9.spawn[0]*T,G9.spawn[1]*T];m.mailbox={x:G9.mailbox[0]*T,y:G9.mailbox[1]*T};m.shed={x:G9.shed[0]*T,y:G9.shed[1]*T};m.fishSpot={x:G9.fish[0]*T,y:G9.fish[1]*T};m.crate={x:G9B.crate[0]*T,y:G9B.crate[1]*T};
+  m.plots=G9.plots.map(([x,y],k)=>({i:200+k,x:x*T,y:y*T}));if(farmUnlocked())G9.extra.forEach(([x,y],k)=>m.plots.push({i:220+k,x:x*T,y:y*T}));
+  m.wild=[];G9.wild.forEach(([k,x,y],i)=>{if(cl.has(i))return;const tx=Math.floor(x),ty=Math.floor(y),r=G9B.rects[G9B.wildPic[k]];if(!r||m.SOLID.has(key(tx,ty)))return;
+    const o={img:SH[r[4]],sx:r[0],sy:r[1],sw:r[2],sh:r[3],x:(tx+.5)*T,y:(ty+.9)*T,tx,ty,tall:1,cs:0,wildId:i,wk:k,hp:(k==='bush'||isKid())?1:2};m.objs.push(o);m.wild.push(o);m.SOLID.add(key(tx,ty))});
+  if(h.farm.robot){robotImg();const r={img:'_robot',sx:0,sy:0,sw:IMG.robotSheet?64:40,sh:IMG.robotSheet?64:48,x:m.shed.x,y:m.shed.y+18,tall:1,cs:0,robot:1};m.objs.push(r);m.robot={o:r,path:null,job:null,cool:1}}
+  for(const [x,y] of G9B.lamps||[])m.glows.push([x,y]);
+  return m}}
 // ================= 1.07 H9 · PAPLERN VILLAGE, NEW SCENE (painted, MAP_SPEC_H9 v1.4) =================
 // A separate map "h9" for now, reached by the GM (warp) and from the G9 farm's east road; the village players use (map "capital") is untouched.
 // Needs map-H9-village.jpg (a sharper map-H9-village-hi.jpg replaces it once uploaded); missing picture -> this map is not offered at all.
