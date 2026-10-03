@@ -61,6 +61,9 @@ op = lambda m, k: cv2.morphologyEx(m.astype(np.uint8), cv2.MORPH_OPEN, np.ones((
 dil = lambda m, k: cv2.dilate(m.astype(np.uint8), np.ones((k, k))) > 0
 sand = op((h_ >= 14) & (h_ <= 31) & (s_ > 55) & (s_ < 200) & (v_ > 175), 7)
 water = op((h_ > 88) & (h_ < 125) & (s_ > 90) & (v_ > 120), 5)
+# grass tufts take their colour from the lawn of this ground picture (a little darker, so they still read as tufts)
+_hsv = cv2.cvtColor(np.asarray(ground.convert('RGB')), cv2.COLOR_RGB2HSV); _lawn = (_hsv[..., 0] > 30) & (_hsv[..., 0] < 80) & (_hsv[..., 1] > 100) & ~(np.asarray(sand) > 0) & ~(np.asarray(water) > 0)
+_v = np.percentile(_hsv[..., 2][_lawn], [10, 50, 90]); TONES['tuft'] = (float(np.median(_hsv[..., 0][_lawn])), float(_v[0] * 0.70), float(_v[1] * 0.84), float(_v[2] * 0.96)); LAWN = (float(np.median(_hsv[..., 0][_lawn])), [float(x) for x in _v])
 rock = op((s_ < 50) & (v_ > 90) & (v_ < 215), 9)
 
 # ---------- buildings and yard pieces, from the spec ----------
@@ -87,7 +90,7 @@ def make_plot(w, n_furrows):
         x = 0
         while x < w:
             piece = soil if (x // sw) % 2 == 0 else soil[:, ::-1]; ww = min(sw, w - x); a[PTOP + r * FPER:PTOP + (r + 1) * FPER, x:x + ww] = piece[:, :ww]; x += sw
-    a[:PTOP] = a[PTOP:PTOP + 1]; a[PTOP + soil_h:] = a[PTOP + soil_h - 1:PTOP + soil_h]
+    a[:PTOP] = a[PTOP + FPER - PTOP:PTOP + FPER]; a[PTOP + soil_h:] = a[PTOP:PTOP + (h - PTOP - soil_h)]      # real soil rows, not one row smeared
     # uneven edge: rounded corners + clumps of earth, in 3-px steps; then a darker rim, as freshly dug soil has
     yy, xx = np.mgrid[:h, :w]; dx = np.minimum(xx, w - 1 - xx).astype(np.float32); dy = np.minimum(yy, h - 1 - yy).astype(np.float32)
     corner = np.where((dx < 12) & (dy < 12), 12 - np.hypot(12 - dx, 12 - dy), np.minimum(dx, dy)); keep_ = corner > 1.5                      # smooth rounded edge
@@ -221,6 +224,23 @@ for x, y, hw in placed:
             kind = rs.choice(['bushLow', 'bushBloom', 'mushroom', 'rockS', 'log', 'stump', 'flowerW', 'flowerR', 'grass'])
             add(kind, bx2, by2, flip=rs.rand() < 0.5, tone='mid' if kind.startswith('bush') else None, scale=0.7 if kind in ('stump', 'log') else 1.0)
 
+# ---------- flowers: none are painted into the ground any more (they were 20-31 px across, far too big beside a 64-px character),
+#            so small flower pieces are scattered by rule: in little groups, mostly beside trees, bushes, fences and things, a few in the open lawn
+fl_rs = np.random.RandomState(77); clusters = []; tries = 0; n_fl = 0
+anchors = [(o[1] / U, o[0] / U) for o in OB if o[3] != 'tuft']
+def lawn_ok(x, y):
+    px, py = int(x * U), int(y * U); return 8 <= px < W - 8 and 8 <= py < H - 8 and free_small(x, y) and not sand[py, px] and not water[py, px] and not cv2.dilate(sand[max(0, py - 6):py + 7, max(0, px - 6):px + 7].astype(np.uint8), np.ones((3, 3))).any()
+while len(clusters) < 60 and tries < 8000:
+    tries += 1
+    if fl_rs.rand() < 0.72: ax, ay = anchors[fl_rs.randint(len(anchors))]; x = ax + fl_rs.uniform(-1.6, 1.6); y = ay + fl_rs.uniform(-0.1, 1.2)
+    else: x = fl_rs.uniform(1, W / U - 1); y = fl_rs.uniform(1, H / U - 1)
+    if not lawn_ok(x, y) or any((x - cx) ** 2 + (y - cy) ** 2 < 1.7 ** 2 for cx, cy in clusters): continue
+    clusters.append((x, y)); kind = str(fl_rs.choice(['flowerW', 'flowerY', 'flowerR'], p=[0.45, 0.35, 0.20]))
+    for _ in range(fl_rs.randint(2, 5)):
+        fx, fy = x + fl_rs.uniform(-0.45, 0.45), y + fl_rs.uniform(-0.3, 0.3)
+        if lawn_ok(fx, fy): add(kind if fl_rs.rand() < 0.8 else str(fl_rs.choice(['flowerW', 'flowerY', 'flowerR'])), fx, fy, flip=fl_rs.rand() < 0.5, scale=float(fl_rs.choice([0.8, 1.0]))); n_fl += 1
+FLOWER_STATS = {'groups': len(clusters), 'flowers': n_fl}
+
 # ---------- flat pieces onto the ground ----------
 base = ground.copy()
 for im, x, y, nm in FLAT: base.alpha_composite(im, (x, y))
@@ -307,7 +327,7 @@ for by, bx, im, nm in OB:
     tgt[ys[okk], xs[okk]] = True
 for im, x, y, nm in FLAT: act[y:y + im.height, x:x + im.width] |= np.asarray(im)[..., 3] > 0
 scen |= water | rock; scen &= ~act
-print(json.dumps({'size': [W, H], 'reference_tree_points': len(ref_trees), 'trees': sum(v for k, v in kinds.items() if k.startswith('tree')), 'nudged': nudged, 'no_room': lost,
+print(json.dumps({'lawn_hue_and_brightness': LAWN, 'tuft_tone': TONES['tuft'], 'flowers': FLOWER_STATS, 'size': [W, H], 'reference_tree_points': len(ref_trees), 'trees': sum(v for k, v in kinds.items() if k.startswith('tree')), 'nudged': nudged, 'no_room': lost,
                   'bushes': sum(v for k, v in kinds.items() if k.startswith('bush')), 'tufts': kinds['tuft'], 'pieces': len(OB), 'flat': len(FLAT),
                   'area_%': {'open ground': round(100 * float((~scen & ~act).mean()), 1), 'scenery': round(100 * float(scen.mean()), 1), 'activity places': round(100 * float(act.mean()), 1)}}))
 
