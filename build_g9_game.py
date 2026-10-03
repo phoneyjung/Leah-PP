@@ -154,7 +154,7 @@ P['grid'] = ''.join('1' if v else '0' for v in solid.reshape(-1))
 P['rects'] = rects; P['inst'] = [[i['p'], i['x'], i['by'], i['fl'], i['sw']] for i in inst]
 gi = [k for k, i in enumerate(inst) if i['n'] == 'gateShut']; gl = [inst[k] for k in gi]
 P['gate'] = {'inst': gi, 'open': GATE_OPEN, 'tiles': GATE_TILES, 'x0': min(i['x'] for i in gl), 'x1': max(i['x'] + i['w'] for i in gl), 'y': gl[0]['by']}
-P['cellPic'] = CELLS; P['tapInst'] = {n_: next((k for k, i in enumerate(inst) if i['n'] == n_), -1) for n_ in ('crate', 'mailbox', 'shed')}
+P['cellPic'] = CELLS; P['tapInst'] = {n_: next((k for k, i in enumerate(inst) if i['n'] == n_), -1) for n_ in ('crate', 'mailbox', 'shed', 'board')}
 P['pads'] = pad_list; P['water'] = {'box': WBOX, 'clip': b64mask(clipm), 'wave': b64mask(wavem), 'deep': DEEP}
 json.dump(P, open(OUT + '/g9b-scene.json', 'w'), separators=(',', ':'))
 

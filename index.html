@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.16';
+const VERSION='Lantern Academy 1.17';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -1216,7 +1216,7 @@ cv.addEventListener('pointerdown',e=>{if(DIG&&!DIG.done){digHit();return}if(PAUS
   P.target=null;P.act=null;P.path=findPath(M,P.x,P.y,wx,wy);HOLD={id:e.pointerId,cx:e.clientX,cy:e.clientY,t:performance.now()}});
 let HOLD=null;cv.addEventListener('pointermove',e=>{if(HOLD&&e.pointerId===HOLD.id){HOLD.cx=e.clientX;HOLD.cy=e.clientY}});addEventListener('pointerup',e=>{if(HOLD&&e.pointerId===HOLD.id)HOLD=null});addEventListener('pointercancel',()=>HOLD=null);
 function lit(x,y){return M.kind!=='cave'||M.bright||Math.hypot(x-P.x,y-P.y)<140+16*((typeof tool==='function'?tool('lantern'):1)-1)}
-function autoAct(){const mo=MONS.filter(o=>!o.happy).sort((a,b)=>Math.hypot(a.x-P.x,a.y-P.y)-Math.hypot(b.x-P.x,b.y-P.y))[0];if(mo&&Math.hypot(mo.x-P.x,mo.y-P.y)<170){attackTarget(mo);return}say(t('noHit'))}
+function autoAct(){try{if(M&&M.g9b){const c=g9bNear();if(c){c.fn();return}}}catch(e){}const mo=MONS.filter(o=>!o.happy).sort((a,b)=>Math.hypot(a.x-P.x,a.y-P.y)-Math.hypot(b.x-P.x,b.y-P.y))[0];if(mo&&Math.hypot(mo.x-P.x,mo.y-P.y)<170){attackTarget(mo);return}say(t('noHit'))}
 $('bCmp').onclick=()=>{if(!S||M.kind!=='cave')return;compassT=(buffV('luck')?8:4)*(1+.2*((typeof tool==='function'?tool('glass'):1)-1));say('🧭 '+t('compass'))};
 $('bSk').onclick=()=>useSkill();$('bJ1').onclick=()=>useJob((S.slots||[])[0]);$('bJ2').onclick=()=>useJob((S.slots||[])[1]);
 $('bFish').onclick=e=>{e.stopPropagation();fishAct()};$('bFish').addEventListener('pointerdown',e=>{if(FISHING.st==='reel')FISHING.hold=true});$('bDeco').onclick=openDeco;document.querySelectorAll('#decoBar [data-tool]').forEach(b=>b.onclick=()=>{DEC.tool=b.dataset.tool;DEC.sel=null});$('decoDone').onclick=()=>{DEC.on=false;DEC.sel=null;say('✅ '+t('decoDone'))};$('bVisit').onclick=openVisit;$('bStat').onclick=()=>S&&openStats();$('bBook').onclick=()=>S&&openBook();$('bEmo').onclick=()=>$('emo').classList.toggle('hide');document.querySelectorAll('#emo button').forEach(b=>b.onclick=()=>{sendEmote(b.textContent);$('emo').classList.add('hide')});
@@ -1318,7 +1318,7 @@ function render(tm){if(!M||!S)return;
   // player shadow
   const F=PS.F||64,lf=P.moving?Math.floor(P.dist/10)%6:0,sx=P.moving?lf*F:P.row*F,sy=P.moving?P.row*F:0;
   {const sh=P.moving?PS.shW:PS.shS,X=Math.round(P.x-F/2-camX),Y=Math.round(P.y-camY);ctx.save();ctx.imageSmoothingEnabled=true;ctx.globalCompositeOperation='multiply';ctx.globalAlpha=.55;softAO(ctx,P.x-camX,P.y-camY,24,1);
-    if(sh){ctx.globalAlpha=M.kind==='cave'?.3:.4;ctx.setTransform(1,0,0,.5,SC*(X+.55*(F-2)),SC*(Y-.5*(F-2)));ctx.transform(1,0,-.55,1,0,0);ctx.drawImage(sh,sx*SC,sy*SC,F*SC,(F-2)*SC,0,0,F*SC,(F-2)*SC)}ctx.restore()}
+    if(M.g9b){softAO(ctx,P.x-camX+5,P.y-camY+2,26,.9)}else if(sh){ctx.globalAlpha=M.kind==='cave'?.3:.4;ctx.setTransform(1,0,0,.5,SC*(X+.55*(F-2)),SC*(Y-.5*(F-2)));ctx.transform(1,0,-.55,1,0,0);ctx.drawImage(sh,sx*SC,sy*SC,F*SC,(F-2)*SC,0,0,F*SC,(F-2)*SC)}ctx.restore()}
   // y-sorted world
   const list=[];for(const o of M.objs)list.push([o.y,0,o]);for(const m of MONS)list.push([m.y,1,m]);for(const c of M.crystals||[])list.push([c.y,2,c]);for(const d of DROPS)list.push([d.y-2,3,d]);list.push([P.y,4,P]);if(PEB.on)list.push([PEB.y,5,PEB]);if(petNow())list.push([PET.y,7,PET]);for(const o of Object.values(Net.others))if(o.p&&o.p.m===mapKey())list.push([o.y,6,o]);list.sort((a,b)=>a[0]-b[0]);
   for(const [,k,o] of list){if(k===0)drawObj(o,tm);else if(k===1)drawMon(o,tm);else if(k===2)drawCrystal(o,tm);else if(k===3)drawDrop(o,tm);else if(k===5)drawPeb();else if(k===6)drawOther(o);else if(k===7)drawPet(tm);else drawPlayer(sx,sy)}
@@ -3546,7 +3546,7 @@ let G9B=null;
   for(const [id,L] of Object.entries(G9.locks)){const side=id==='w';[-1.2,0,1.2].forEach((o,i)=>m.exits.push({id:id+(i===1?'':i),x:(L.at[0]+(side?0:o))*T,y:(L.at[1]+(side?o:0))*T,to:'farm',toExit:'e',locked:1,msg:L.msg,label:L.msg}))}
   const ho=g9HouseObj();if(ho)m.objs.push(ho);g9HouseSolid(m);
   m.exits.push({id:'home',x:G9.door[0]*T,y:G9.door[1]*T,to:'room',toExit:'door',label:'ourHome'});
-  m.spawnDefault=[G9.spawn[0]*T,G9.spawn[1]*T];m.mailbox={x:G9.mailbox[0]*T,y:G9.mailbox[1]*T};m.shed={x:G9.shed[0]*T,y:G9.shed[1]*T};m.fishSpot={x:G9.fish[0]*T,y:G9.fish[1]*T};m.crate={x:G9B.crate[0]*T,y:G9B.crate[1]*T};
+  m.spawnDefault=[G9.spawn[0]*T,G9.spawn[1]*T];m.mailbox={x:G9.mailbox[0]*T,y:G9.mailbox[1]*T};m.shed={x:G9.shed[0]*T,y:G9.shed[1]*T};m.fishSpot={x:G9.fish[0]*T,y:G9.fish[1]*T};m.crate={x:G9B.crate[0]*T,y:G9B.crate[1]*T};m.sign={x:G9.sign[0]*T,y:G9.sign[1]*T-6};
   m.plots=G9.plots.map(([x,y],k)=>({i:200+k,x:x*T,y:y*T}));if(farmUnlocked())G9.extra.forEach(([x,y],k)=>m.plots.push({i:220+k,x:x*T,y:y*T}));
   m.wild=[];G9.wild.forEach(([k,x,y],i)=>{if(cl.has(i))return;const tx=Math.floor(x),ty=Math.floor(y),r=G9B.rects[G9B.wildPic[k]];if(!r||m.SOLID.has(key(tx,ty)))return;
     const o={img:SH[r[4]],sx:r[0],sy:r[1],sw:r[2],sh:r[3],x:(tx+.5)*T,y:(ty+.9)*T,tx,ty,tall:1,cs:0,wildId:i,wk:k,hp:(k==='bush'||isKid())?1:2};m.objs.push(o);m.wild.push(o);m.SOLID.add(key(tx,ty))});
@@ -3618,6 +3618,34 @@ function drawCropArt(q,x,y){const k=CROP_ART[q.crop];if(!k||!IMG.farmArt)return 
 // the converter on the assembled farm: a standing thing you walk around, bright crystal when it can refill a lantern, dull while it rests
 function g9bConv(tm){const o=M._convO;if(!o)return;const ready=(((S&&S.conv)||{})[M.id+':0']||0)<=Date.now(),r=FARM_ART[ready?'conv_on':'conv_off'];o.sx=r[0];o.sy=r[1];o.sw=r[2];o.sh=r[3];
   if(ready&&!LITE){ctx.save();ctx.globalCompositeOperation='lighter';glow(o.x-camX,o.y-54-camY,15,'120,220,255',.28+.1*Math.sin(tm*2.4));ctx.restore()}}
+// ================= 1.17 G9 · ONE BUTTON FOR WHAT IS NEAR + THE HOUSE SIGN =================
+// The attack button (and Space / Enter) does the thing you are standing next to, and shows it: its picture and one word change as you walk about the farm.
+try{Object.assign(TX.th,{actPlant:'ปลูก',actWater:'รดน้ำ',actPick:'เก็บ',actClear:'ถาง',actSell:'ขาย',actShed:'ร้านฟาร์ม',actMail:'จดหมาย',actFish:'ตกปลา',actHouse:'บ้าน',g9Sign:'ขยายบ้าน · ขั้น',g9SignCost:'ราคา',g9SignHave:'มีอยู่',g9SignMax:'บ้านขยายครบทุกขั้นแล้ว',g9SignDone:'บ้านใหญ่ขึ้นแล้ว!'});
+  if(TX.en)Object.assign(TX.en,{actPlant:'Plant',actWater:'Water',actPick:'Pick',actClear:'Clear',actSell:'Sell',actShed:'Farm shop',actMail:'Mail',actFish:'Fish',actHouse:'House',g9Sign:'Bigger house · step',g9SignCost:'Price',g9SignHave:'you have',g9SignMax:'The house is as big as it gets',g9SignDone:'The house grew!'})}catch(e){}
+function g9bNear(){if(!M||!M.g9b||!P)return null;let best=null,bd=1e9;const put=(d,ic,k,fn)=>{if(d<bd){bd=d;best={ic,k,fn}}};
+  for(const pl of M.plots||[]){const d=Math.hypot(pl.x-P.x,pl.y+10-P.y);if(d<34){const q=plotState(pl);if(q.st==='empty')put(d,'\u{1F331}','actPlant',()=>plotAct(pl));else if(q.st==='ripe')put(d,'\u{1F9FA}','actPick',()=>plotAct(pl));else if(!q.w)put(d,'\u{1F4A7}','actWater',()=>plotAct(pl))}}
+  for(const w of M.wild||[]){const d=Math.hypot(w.x-P.x,w.y-P.y);if(d<52)put(d+6,'\u{1FA93}','actClear',()=>{window._farmTapT=performance.now();FARM_ACT=w;w._retry=0;P.path=null})}
+  if(M.crate){const d=Math.hypot(M.crate.x-P.x,M.crate.y+10-P.y);if(d<52)put(d,'\u{1FA99}','actSell',openCrate)}
+  if(M.shed){const d=Math.hypot(M.shed.x-P.x,M.shed.y-P.y);if(d<46)put(d,'\u{1F9F0}','actShed',openFarmPanel)}
+  if(M.mailbox){const d=Math.hypot(M.mailbox.x-P.x,M.mailbox.y+10-P.y);if(d<48)put(d,'\u{2709}\u{FE0F}','actMail',()=>{if(Net.online)openVisit();else say(t('nobody'))})}
+  if(M.sign){const d=Math.hypot(M.sign.x-P.x,M.sign.y+10-P.y);if(d<52)put(d,'\u{1F3E0}','actHouse',openHouseSign)}
+  if(M.fishSpot&&Math.hypot(M.fishSpot.x-P.x,M.fishSpot.y-P.y)<30)put(0,'\u{1F3A3}','actFish',fishAct);
+  return best}
+let _g9Btn=null,_g9BtnAt=0;
+function g9bButton(){const now=performance.now();if(now-_g9BtnAt<200)return;_g9BtnAt=now;const b=document.getElementById('bAtk'),l=document.getElementById('atkL');if(!b||!l)return;
+  const c=(M&&M.g9b)?g9bNear():null,key=c?c.k:'';if(key===(_g9Btn?_g9Btn.key:''))return;
+  let sp=b.querySelector('.ctxIc');const others=[...b.childNodes].filter(n=>n!==l&&n!==sp);   // the button's own picture (a text sign or an image, whichever the game put there)
+  if(c){if(!_g9Btn)_g9Btn={tx:l.textContent,key:'',keep:others.map(n=>[n,n.nodeType===1?n.style.display:n.nodeValue])};_g9Btn.key=key;
+    if(!sp){sp=document.createElement('span');sp.className='ctxIc';sp.style.cssText='font-size:20px;line-height:1.1;display:block';b.insertBefore(sp,b.firstChild)}
+    for(const [n] of _g9Btn.keep){if(n.nodeType===1)n.style.display='none';else n.nodeValue=''}sp.style.display='block';sp.textContent=c.ic;l.textContent=t(c.k)}
+  else if(_g9Btn){for(const [n,v] of _g9Btn.keep){if(n.nodeType===1)n.style.display=v;else n.nodeValue=v}if(sp)sp.style.display='none';l.textContent=_g9Btn.tx;_g9Btn=null}}
+{const _iv=setInterval(()=>{try{g9bButton()}catch(e){}},220)}
+// the sign by the house: walk up, see the next step and its price, one button to build it
+function openHouseSign(){const h=HOME.get(),lv=houseLv(h);if(lv>=9){modal(`<h2>\u{1F3E0} ${t('g9SignMax')}</h2>`);return}const c=HCOST[lv+1];
+  modal(`<h2>\u{1F3E0} ${t('g9Sign')} ${lv} \u2192 ${lv+1}</h2><p>${t('g9SignCost')}: <b>${c}</b> \u{1FA99} · ${t('g9SignHave')} ${S.coins} \u{1FA99}</p><p><button id="hsUp">\u{1F3E0} ${t('houseUp')}</button></p>`);
+  const u=document.getElementById('hsUp');if(u)u.onclick=()=>{if(houseUpgrade()){closeModal();say('\u{1F3E0} '+t('g9SignDone'));try{farmRefresh()}catch(e){}}}}
+{const cv=document.getElementById('c');if(cv)cv.addEventListener('pointerup',ev=>{try{if(!M||!M.g9b||!M.sign||PAUSE||DLG)return;const r=cv.getBoundingClientRect(),dpr=devicePixelRatio||1,wx=(ev.clientX-r.left)*dpr/SC+camX,wy=(ev.clientY-r.top)*dpr/SC+camY;
+    if(Math.abs(M.sign.x-wx)<34&&wy>M.sign.y-54&&wy<M.sign.y+8){ev.stopImmediatePropagation();window._farmTapT=performance.now();g9WalkThen(M.sign.x,M.sign.y+22,openHouseSign)}}catch(e){}},true)}
 // ================= 1.07 H9 · PAPLERN VILLAGE, NEW SCENE (painted, MAP_SPEC_H9 v1.4) =================
 // A separate map "h9" for now, reached by the GM (warp) and from the G9 farm's east road; the village players use (map "capital") is untouched.
 // Needs map-H9-village.jpg (a sharper map-H9-village-hi.jpg replaces it once uploaded); missing picture -> this map is not offered at all.
