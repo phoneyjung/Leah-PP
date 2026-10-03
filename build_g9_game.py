@@ -126,7 +126,7 @@ find = lambda name: [i for i in inst if i['n'] == name]
 cxy = lambda i: (i['x'] + i['w'] / 2, i['by'])
 DX, HB = sc['door_x'], sc['house_base']; hb_t = HB / T
 P = {'w': GW, 'h': GH, 'spawn': [GW - 3.5, round(ey, 2)], 'exitE': [GW - 0.4, round(ey, 2)], 'door': [round(DX / T, 2), round(hb_t + 0.2, 2)], 'houseBase': round(hb_t, 2),
-     'houseBox': {k: [round((DX - off) / T, 2), round(hb_t - 313 / T, 2), round((DX - off + wd) / T, 2)] for k, (off, wd) in {'1': (105, 256), '2': (96, 375), '3': (94, 427)}.items()}}
+     'houseBox': {k: [round((DX - off) / T, 2), round(hb_t - 313 / T, 2), round((DX - off + wd) / T, 2)] for k, (off, wd) in {'1': (97.5, 256), '2': (88.5, 375), '3': (86.5, 427)}.items()}}
 mb = find('mailbox')[0]; P['mailbox'] = [round(cxy(mb)[0] / T, 2), round(cxy(mb)[1] / T, 2)]
 sh = find('shed')[0]; P['shed'] = [round(cxy(sh)[0] / T, 2), round((sh['by'] + 10) / T, 2)]
 cr = find('crate')[0]; P['crate'] = [round(cxy(cr)[0] / T, 2), round(cr['by'] / T, 2)]
@@ -155,6 +155,7 @@ P['rects'] = rects; P['inst'] = [[i['p'], i['x'], i['by'], i['fl'], i['sw'], i['
 gi = [k for k, i in enumerate(inst) if i['n'] == 'gateShut']; gl = [inst[k] for k in gi]
 P['gate'] = {'inst': gi, 'open': GATE_OPEN, 'tiles': GATE_TILES, 'x0': min(i['x'] for i in gl), 'x1': max(i['x'] + i['w'] for i in gl), 'y': gl[0]['by']}
 P['cellPic'] = CELLS; P['tapInst'] = {n_: next((k for k, i in enumerate(inst) if i['n'] == n_), -1) for n_ in ('crate', 'mailbox', 'shed', 'board')}
+P['benches'] = [[round(i['x'] + i['w'] / 2), i['by'], i['w']] for i in inst if i['n'] == 'bench']
 P['pads'] = pad_list; P['water'] = {'box': WBOX, 'clip': b64mask(clipm), 'wave': b64mask(wavem), 'deep': DEEP}
 json.dump(P, open(OUT + '/g9b-scene.json', 'w'), separators=(',', ':'))
 
