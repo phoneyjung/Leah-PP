@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.33';
+const VERSION='Lantern Academy 1.34';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -1216,7 +1216,7 @@ cv.addEventListener('pointerdown',e=>{if(DIG&&!DIG.done){digHit();return}if(PAUS
   P.target=null;P.act=null;P.path=findPath(M,P.x,P.y,wx,wy);HOLD={id:e.pointerId,cx:e.clientX,cy:e.clientY,t:performance.now()}});
 let HOLD=null;cv.addEventListener('pointermove',e=>{if(HOLD&&e.pointerId===HOLD.id){HOLD.cx=e.clientX;HOLD.cy=e.clientY}});addEventListener('pointerup',e=>{if(HOLD&&e.pointerId===HOLD.id)HOLD=null});addEventListener('pointercancel',()=>HOLD=null);
 function lit(x,y){return M.kind!=='cave'||M.bright||Math.hypot(x-P.x,y-P.y)<140+16*((typeof tool==='function'?tool('lantern'):1)-1)}
-function autoAct(){try{if(M&&M.g9b){const c=g9bNear();if(c){c.fn();return}}}catch(e){}const mo=MONS.filter(o=>!o.happy).sort((a,b)=>Math.hypot(a.x-P.x,a.y-P.y)-Math.hypot(b.x-P.x,b.y-P.y))[0];if(mo&&Math.hypot(mo.x-P.x,mo.y-P.y)<170){attackTarget(mo);return}say(t('noHit'))}
+function autoAct(){try{const c=anyNear();if(c){c.fn();return}}catch(e){}const mo=MONS.filter(o=>!o.happy).sort((a,b)=>Math.hypot(a.x-P.x,a.y-P.y)-Math.hypot(b.x-P.x,b.y-P.y))[0];if(mo&&Math.hypot(mo.x-P.x,mo.y-P.y)<170){attackTarget(mo);return}say(t('noHit'))}
 $('bCmp').onclick=()=>{if(!S||M.kind!=='cave')return;compassT=(buffV('luck')?8:4)*(1+.2*((typeof tool==='function'?tool('glass'):1)-1));say('🧭 '+t('compass'))};
 $('bSk').onclick=()=>useSkill();$('bJ1').onclick=()=>useJob((S.slots||[])[0]);$('bJ2').onclick=()=>useJob((S.slots||[])[1]);
 $('bFish').onclick=e=>{e.stopPropagation();fishAct()};$('bFish').addEventListener('pointerdown',e=>{if(FISHING.st==='reel')FISHING.hold=true});$('bDeco').onclick=openDeco;document.querySelectorAll('#decoBar [data-tool]').forEach(b=>b.onclick=()=>{DEC.tool=b.dataset.tool;DEC.sel=null});$('decoDone').onclick=()=>{DEC.on=false;DEC.sel=null;say('✅ '+t('decoDone'))};$('bVisit').onclick=openVisit;$('bStat').onclick=()=>S&&openStats();$('bBook').onclick=()=>S&&openBook();$('bEmo').onclick=()=>$('emo').classList.toggle('hide');document.querySelectorAll('#emo button').forEach(b=>b.onclick=()=>{sendEmote(b.textContent);$('emo').classList.add('hide')});
@@ -3638,7 +3638,7 @@ function g9bNear(){if(!M||!M.g9b||!P)return null;let best=null,bd=1e9;const put=
   return best}
 let _g9Btn=null,_g9BtnAt=0;
 function g9bButton(){const now=performance.now();if(now-_g9BtnAt<200)return;_g9BtnAt=now;const b=document.getElementById('bAtk'),l=document.getElementById('atkL');if(!b||!l)return;
-  const c=(M&&M.g9b)?g9bNear():null,key=c?c.k:'';if(key===(_g9Btn?_g9Btn.key:''))return;
+  const c=anyNear(),key=c?c.k:'';if(key===(_g9Btn?_g9Btn.key:''))return;
   let sp=b.querySelector('.ctxIc');const others=[...b.childNodes].filter(n=>n!==l&&n!==sp);   // the button's own picture (a text sign or an image, whichever the game put there)
   if(c){if(!_g9Btn)_g9Btn={tx:l.textContent,key:'',keep:others.map(n=>[n,n.nodeType===1?n.style.display:n.nodeValue])};_g9Btn.key=key;
     if(!sp){sp=document.createElement('span');sp.className='ctxIc';sp.style.cssText='font-size:20px;line-height:1.1;display:block';b.insertBefore(sp,b.firstChild)}
@@ -3769,9 +3769,9 @@ const G9SIT={drop:8};
 try{Object.assign(TX.th,{actSit:'นั่ง'});if(TX.en)Object.assign(TX.en,{actSit:'Sit'})}catch(e){}
 function g9bSeats(){return ((G9B&&G9B.benches)||[]).flatMap(([cx,by,w])=>[{x:Math.round(cx-w*.23),by,cx,w,side:'L'},{x:Math.round(cx+w*.23),by,cx,w,side:'R'}])}
 function g9bSit(seat){if(!P)return;P.x=seat.x;P.y=seat.by+16;P.sit={x:P.x,y:P.y,seatY:seat.by+1,side:seat.side,t0:performance.now()};P.path=null;P.act=null;P.target=null;P.moving=false;try{P.row=rowFor(0,1)}catch(e){}}
-function g9bSitTick(){const s=P&&P.sit;if(!s)return;if(!M||!M.g9b){P.sit=null;return}const fresh=performance.now()-s.t0<300;   // the step that brought the player here still counts as 'moving' for a moment
+function g9bSitTick(){const s=P&&P.sit;if(!s||typeof s!=='object')return;if(!M||!M.g9b){P.sit=null;return}const fresh=performance.now()-s.t0<300;   // the step that brought the player here still counts as 'moving' for a moment
   if((P.path&&P.path.length)||(!fresh&&(P.moving||Math.hypot(P.x-s.x,P.y-s.y)>.6)))P.sit=null;else{P.x=s.x;P.y=s.y}}
-{const _dpS=drawPlayer;drawPlayer=function(){let s=P&&P.sit;if(s&&s.free&&((P.path&&P.path.length)||(performance.now()-s.t0>300&&P.moving)||Math.hypot(P.x-s.x,P.y-s.y)>6)){P.sit=null;s=null}if(s){ctx.save();ctx.beginPath();ctx.rect(P.x-44-camX,s.seatY-92-camY,88,89);ctx.clip();ctx.translate(0,s.seatY-P.y+G9SIT.drop);try{return _dpS.apply(this,arguments)}finally{ctx.restore()}}return _dpS.apply(this,arguments)}}
+{const _dpS=drawPlayer;drawPlayer=function(){let s=P&&P.sit;if(typeof s!=='object')s=null;if(s&&s.free&&((P.path&&P.path.length)||(performance.now()-s.t0>300&&P.moving)||Math.hypot(P.x-s.x,P.y-s.y)>6)){P.sit=null;s=null}if(s){ctx.save();ctx.beginPath();ctx.rect(P.x-44-camX,s.seatY-92-camY,88,89);ctx.clip();ctx.translate(0,s.seatY-P.y+G9SIT.drop);try{return _dpS.apply(this,arguments)}finally{ctx.restore()}}return _dpS.apply(this,arguments)}}
 {const cv=document.getElementById('c');if(cv)cv.addEventListener('pointerup',ev=>{try{if(!M||!M.g9b||PAUSE||DLG)return;const r=cv.getBoundingClientRect(),dpr=devicePixelRatio||1,wx=(ev.clientX-r.left)*dpr/SC+camX,wy=(ev.clientY-r.top)*dpr/SC+camY;
     for(const [cx,by,w] of (G9B.benches||[])){if(Math.abs(wx-cx)<w/2+4&&wy>by-42&&wy<by+6){ev.stopImmediatePropagation();window._farmTapT=performance.now();const seat=g9bSeats().find(q=>q.cx===cx&&q.by===by&&q.side===(wx<cx?'L':'R'));g9WalkThen(seat.x,seat.by+16,()=>g9bSit(seat));return}}}catch(e){}},true)}
 // ================= 1.28 THUMB CONTROLS like the phone games Thai players know (RoV): stick on the left, round buttons on the right, map top right =================
@@ -3792,6 +3792,7 @@ body.thumbs #act #bJ2,body.thumbs #act #bSlot3{right:calc(102px + env(safe-area-
 body.thumbs #act #bSlot2,body.thumbs #act #bSlot3{background:rgba(58,42,88,.45);box-shadow:0 0 0 2px rgba(201,164,90,.5);color:rgba(253,246,232,.55)}
 body.thumbs #act #bDash{right:calc(152px + env(safe-area-inset-right,0px));bottom:calc(120px + env(safe-area-inset-bottom,0px));box-shadow:0 0 0 2px #7fd0ff,0 3px 0 2px #120b22}
 body.thumbs #act #bAuto{display:none!important}
+#act #bSit{display:none!important}
 #act #bSlot2,#act #bSlot3{display:none}
 body.thumbs #joy{width:112px;height:112px;left:calc(26px + env(safe-area-inset-left,0px));bottom:calc(22px + env(safe-area-inset-bottom,0px));background:rgba(27,19,48,.38);box-shadow:0 0 0 3px rgba(201,164,90,.75),inset 0 0 0 14px rgba(253,246,232,.06)}
 body.thumbs #joyK{background:rgba(253,246,232,.9);box-shadow:0 2px 0 #7a5a2a,0 0 0 2px rgba(201,164,90,.9)}`;document.head.appendChild(st)}
@@ -3800,12 +3801,12 @@ try{Object.assign(TX.th,{actRest:'นั่งพัก',noSkillYet:'ช่อ�
   for(const [L,nw] of [['th','บลิ๊ง'],['en','Blink']])if(TX[L])for(const k in TX[L])if(TX[L][k]==='ตัวเบา'||TX[L][k]==='Light step'||TX[L][k]==='Dash')TX[L][k]=nw}catch(e){}   // the dash is called Blink now (owner, 4 Oct)
 {const act=document.getElementById('act');if(act)for(const id of ['bSlot2','bSlot3'])if(!document.getElementById(id)){const b=document.createElement('button');b.id=id;b.textContent='\uFF0B';b.onclick=()=>{try{say(t('noSkillYet'))}catch(e){}};act.appendChild(b)}}
 {const act=document.getElementById('act');if(act&&!document.getElementById('bRest')){const b=document.createElement('button');b.id='bRest';b.innerHTML='\u{1FA91}<small id="restL">\u0e19\u0e31\u0e48\u0e07\u0e1e\u0e31\u0e01</small>';act.insertBefore(b,document.getElementById('bPot'));
-  b.onclick=()=>{try{if(!S||!P||PAUSE)return;if(P.sit){P.sit=null;return}P.path=null;P.act=null;P.target=null;P.moving=false;try{P.row=rowFor(0,1)}catch(e){}P.sit={x:P.x,y:P.y,seatY:P.y-2,side:'ground',t0:performance.now(),free:1}}catch(e){}}}}
+  b.onclick=()=>{try{if(!S||!P||PAUSE)return;if(!isKid()){toggleSit();return}if(P.sit){P.sit=null;return}P.path=null;P.act=null;P.target=null;P.moving=false;try{P.row=rowFor(0,1)}catch(e){}P.sit={x:P.x,y:P.y,seatY:P.y-2,side:'ground',t0:performance.now(),free:1}}catch(e){}}}}
 // the small buttons line up from the skills leftward, whichever of them are showing; the rest button gets its picture once the icons are there
 function thumbLayout(){const act=document.getElementById('act');if(!act)return;const on=document.body.classList.contains('thumbs');
   // three skill slots round the big button: the class skill and the two job skills; a slot with no skill yet shows as an empty ring
   for(const [slot,real] of [['bSlot2','bJ1'],['bSlot3','bJ2']]){const a=document.getElementById(slot),b=document.getElementById(real);if(a)a.style.display=(on&&b&&b.classList.contains('hide'))?'flex':'none'}
-  if(on){const big={bAtk:1,bSk:1,bJ1:1,bJ2:1,bSlot2:1,bSlot3:1,bDash:1,bAuto:1};let k=0;const kids=[...act.children].filter(b=>!big[b.id]&&!b.classList.contains('hide'));
+  if(on){const big={bAtk:1,bSk:1,bJ1:1,bJ2:1,bSlot2:1,bSlot3:1,bDash:1,bAuto:1,bSit:1};let k=0;const kids=[...act.children].filter(b=>!big[b.id]&&!b.classList.contains('hide'));
     for(let i=kids.length-1;i>=0;i--){const b=kids[i];b.style.right='calc('+(170+k*54)+'px + env(safe-area-inset-right,0px))';b.style.bottom='calc(12px + env(safe-area-inset-bottom,0px))';k++}}
   const r=document.getElementById('bRest');if(r&&IMG.uiIcons&&!r.dataset.pic){r.dataset.pic=1;const cv=document.createElement('canvas');cv.width=32;cv.height=32;cv.style.cssText='width:24px;height:24px;image-rendering:pixelated;display:block';uiIconDraw(cv.getContext('2d'),'bench',0,0,32);r.replaceChild(cv,r.firstChild)}
   const l=document.getElementById('restL');if(l){try{l.textContent=P&&P.sit?(typeof LANG!=='undefined'&&LANG==='en'?'Stand':'\u0e25\u0e38\u0e01'):t('actRest')}catch(e){}}}
@@ -3838,6 +3839,23 @@ installGame=function(){try{if(isStandalone()){installHelp(typeof LANG!=='undefin
       Promise.resolve(ev.userChoice).then(c=>{if(c&&c.outcome==='accepted'){try{say('\u{1F3EE} '+t('installOk'))}catch(e){}INSTALL_EVT=null}}).catch(()=>{});return}
     installHelp('')}catch(e){try{installHelp('error: '+e.message)}catch(_){}}};
 {const b=document.getElementById('instTitle');if(b){b.onclick=()=>installGame();b.style.zIndex='2147483500'}}
+// ================= 1.34 THE BIG BUTTON DOES WHAT IS NEAR, IN EVERY SCENE (owner, 4 Oct) · ONE REST BUTTON =================
+// Beside a person it says Talk, at the notice board Quests, at a sleeping crystal Wake, at a dig spot Dig, at furniture Use; on the farm it keeps its farm jobs.
+// With an unfriendly monster close by it stays the attack button. Pressing it does exactly what tapping that thing does (it sends the same tap).
+try{Object.assign(TX.th,{actTalk:'คุย',actBoard:'ภารกิจ',actWake:'ปลุก',actDig:'ขุด',actUse:'ใช้'});if(TX.en)Object.assign(TX.en,{actTalk:'Talk',actBoard:'Quests',actWake:'Wake',actDig:'Dig',actUse:'Use'});
+  Object.assign(ICON_OF,{actTalk:'talk',actBoard:'letter',actWake:'crystal',actDig:'hammer',actUse:'house'})}catch(e){}
+function tapWorld(wx,wy){try{const cv=document.getElementById('c'),rr=cv.getBoundingClientRect(),dq=devicePixelRatio||1;window._g9Retap=performance.now();
+  cv.dispatchEvent(new PointerEvent('pointerdown',{clientX:(wx-camX)*SC/dq+rr.left,clientY:(wy-camY)*SC/dq+rr.top,pointerId:1,bubbles:true}));HOLD=null}catch(e){}}
+function anyNear(){if(!S||!M||!P||PAUSE||DLG)return null;if(M.g9b){const c=g9bNear();if(c)return c}
+  if(MONS.some(o=>!o.happy&&Math.hypot(o.x-P.x,o.y-P.y)<120))return null;
+  let best=null,bd=1e9;const put=(d,ic,k,fn)=>{if(d<bd){bd=d;best={ic,k,fn}}};
+  for(const n of M.npcs||[]){const d=Math.hypot(n.x-P.x,n.y+14-P.y);if(d<58)put(d,'\u{1F4AC}','actTalk',()=>tapWorld(n.x,n.y-20))}
+  if(M.board){const d=Math.hypot(M.board.x-P.x,M.board.y+12-P.y);if(d<60)put(d,'\u{1F4DC}','actBoard',()=>{try{openBoard()}catch(e){}})}
+  for(const c of M.crystals||[]){if(c.awake)continue;const d=Math.hypot(c.x-P.x,c.y+8-P.y);if(d<64)put(d,'\u{1F48E}','actWake',()=>tapWorld(c.x,c.y-10))}
+  for(const g of M.digs||[]){if(g.done)continue;const d=Math.hypot(g.x-P.x,g.y-P.y);if(d<70)put(d,'\u26CF\uFE0F','actDig',()=>tapWorld(g.x,g.y))}
+  if(M.kind==='room'&&!M.visiting&&!(typeof DEC!=='undefined'&&DEC.on))for(const o of M.objs){if(!o.fu||!FURN_ACT[o.fu.k])continue;const d=Math.hypot(o.x-P.x,o.y-P.y);if(d<52)put(d,'\u{1F3E0}','actUse',()=>{try{furnAct(o.fu.k)}catch(e){}})}
+  if(!M.g9b&&M.fishSpot&&Math.hypot(M.fishSpot.x-P.x,M.fishSpot.y-P.y)<30)put(0,'\u{1F3A3}','actFish',fishAct);
+  return best}
 // ================= 1.07 H9 · PAPLERN VILLAGE, NEW SCENE (painted, MAP_SPEC_H9 v1.4) =================
 // A separate map "h9" for now, reached by the GM (warp) and from the G9 farm's east road; the village players use (map "capital") is untouched.
 // Needs map-H9-village.jpg (a sharper map-H9-village-hi.jpg replaces it once uploaded); missing picture -> this map is not offered at all.
