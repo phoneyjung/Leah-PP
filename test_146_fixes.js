@@ -7,7 +7,7 @@ await pg.evaluate(async()=>{const sleep=ms=>new Promise(r=>setTimeout(r,ms));gmM
  window._clear=async()=>{try{closeModal()}catch(e){}try{for(let i=0;i<12&&DLG;i++){if(typeof dlgNext==='function')dlgNext();else DLG=null;await sleep(120)}}catch(e){}DLG=null;PAUSE=false;HOLD=null};
  const h=HOME.get();h.lv=3;if(h.house)h.house.lv=3;HOME.put(h);delete CACHE.farm;goMap('farm');await sleep(1300);await window._clear()});
 const scr=(wx,wy)=>pg.evaluate((wx,wy)=>{const cv=document.getElementById('c'),r=cv.getBoundingClientRect(),dq=devicePixelRatio||1;return [(wx-camX)*SC/dq+r.left,(wy-camY)*SC/dq+r.top]},wx,wy);
-const click=async(wx,wy)=>{const xy=await scr(wx,wy);await pg.mouse.click(xy[0],xy[1])};const wait=ms=>new Promise(r=>setTimeout(r,ms));const out={};
+let P0;const click=async(wx,wy)=>{const xy=await scr(wx,wy);await pg.mouse.click(xy[0],xy[1])};const wait=ms=>new Promise(r=>setTimeout(r,ms));const out={};
 // the bench: sit, then click the ground
 out.bench=await pg.evaluate(async()=>{const sleep=ms=>new Promise(r=>setTimeout(r,ms));const s=g9bSeats()[0];if(!s)return{noBench:true};P.x=s.x;P.y=s.by+40;P.path=null;await sleep(400);g9bSit(s);await sleep(600);return{sitting:!!(P.sit&&typeof P.sit==='object'),at:[Math.round(P.x),Math.round(P.y)],seatTileIsSolid:!walkable(M,Math.floor(P.x/T),Math.floor(P.y/T))}});
 if(!out.bench.noBench){const a=out.bench.at;await click(a[0]+30,a[1]+120);await wait(1500);Object.assign(out.bench,await pg.evaluate(a=>({stoodUp:!P.sit,walkedPx:Math.round(Math.hypot(P.x-a[0],P.y-a[1]))}),a))}
@@ -19,7 +19,13 @@ out.enter=await pg.evaluate(async()=>{const sleep=ms=>new Promise(r=>setTimeout(
 // the real decorating button
 out.decoButton=await pg.evaluate(async()=>{const sleep=ms=>new Promise(r=>setTimeout(r,ms));const bd=document.getElementById('bDeco');const vis=!!bd&&getComputedStyle(bd).display!=='none';bd.click();await sleep(250);const o={buttonShown:vis,newArrangingOn:DECO2.on,oldScreenOpened:!!document.querySelector('#modal:not(.hide)'),shopButton:!!document.querySelector('#deco2 button[data-a="shop"]')};bd.click();await sleep(150);try{closeModal()}catch(e){}PAUSE=false;o.offAgain=!DECO2.on;return o});
 // the rug is under the feet
-out.rug=await pg.evaluate(async()=>{const sleep=ms=>new Promise(r=>setTimeout(r,ms));const it=M.layout2.find(a=>a[0]==='rug'),v=ROOM2.pieces.rug[it[1]],ob=M.objs.find(q=>q.room2===it);P.x=(it[2]+v[6]/2)*T;P.y=(it[3]+ROOM2.rowsAbovePlan+v[7]/2)*T;P.path=null;await sleep(300);const shadows=M.objs.filter(q=>q.shadow2);return{rugDrawnBeforePlayer:ob.y<P.y,shadows:shadows.length}});
+out.rug=await pg.evaluate(async()=>{const sleep=ms=>new Promise(r=>setTimeout(r,ms));const dy=ROOM2.rowsAbovePlan,i=M.layout2.findIndex(a=>a[0]==='rug'),sf=M.layout2.find(a=>a[0]==='sofa');
+ // put the rug half under the sofa, the way the owner had it, and look at the floor picture
+ M.layout2[i][2]=sf[2]-.2;M.layout2[i][3]=sf[3]+.4;room2Place(M);await sleep(300);const it=M.layout2[i],v=ROOM2.pieces.rug[it[1]];const g=M.ground.getContext('2d');const px=(x,y)=>[...g.getImageData(Math.round(x*T),Math.round((y+dy)*T),1,1).data].slice(0,3);
+ const c=document.createElement('canvas');c.width=M.w*T;c.height=M.h*T;c.getContext('2d').drawImage(IMG[M.painted],0,0,c.width,c.height);const bare=(x,y)=>[...c.getContext('2d').getImageData(Math.round(x*T),Math.round((y+dy)*T),1,1).data].slice(0,3);
+ const mid=[it[2]+v[6]/2,it[3]+v[7]-.5];window._rugSpot=[mid[0]*T,(mid[1]+dy)*T];
+ return{rugIsPartOfTheFloorPicture:JSON.stringify(px(...mid))!==JSON.stringify(bare(...mid)),rugObjectsAboveTheFloor:M.objs.filter(q=>q.flat||q.shadow2||(q.room2&&q.room2[0]==='rug')).length,floorThings:M._floorThings,spotOnRugIsFree:walkable(M,Math.floor(mid[0]),Math.floor(mid[1]+dy))}});
+{P0=await pg.evaluate(()=>{P.x=13*T;P.y=10.5*T;P.path=null;return [P.x,P.y]});await wait(400);const sp=await pg.evaluate(()=>window._rugSpot);await click(sp[0],sp[1]);await wait(2600);out.rug.clickOnRugWalksOntoIt=await pg.evaluate(()=>Math.round(Math.hypot(P.x-window._rugSpot[0],P.y-window._rugSpot[1])))<24}
 // the piano: record three notes, stop, play them back
 out.piano=await pg.evaluate(async()=>{const sleep=ms=>new Promise(r=>setTimeout(r,ms));pianoOpen();await sleep(100);const k=document.querySelectorAll('#pianoKeys button');const press=i=>k[i].dispatchEvent(new PointerEvent('pointerdown',{bubbles:true,cancelable:true}));
  document.getElementById('pianoRec').click();await sleep(60);press(0);await sleep(150);press(2);await sleep(150);press(4);await sleep(80);document.getElementById('pianoStop').click();const kept=(PIANO.tune||[]).map(n=>n[0]);const n0=window._pianoPlayed;document.getElementById('pianoPlay').click();await sleep(900);const played=window._pianoPlayed-n0;

@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.46';
+const VERSION='Lantern Academy 1.47';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -1207,7 +1207,7 @@ let tapMark=null;addEventListener('pointerup',()=>FISHING.hold=false);addEventLi
 cv.addEventListener('pointerdown',e=>{if(DIG&&!DIG.done){digHit();return}if(PAUSE||!S||!M||P.dead)return;if(DEC.on&&M.kind==='room'&&!M.visiting){const dpr=devicePixelRatio||1;decoTap(e.clientX*dpr/SC+camX,e.clientY*dpr/SC+camY);return}if(FISHING.on&&FISHING.st!=='idle'){if(FISHING.st==='reel')FISHING.hold=true;else fishAct();return}const dpr=devicePixelRatio||1,wx=e.clientX*dpr/SC+camX,wy=e.clientY*dpr/SC+camY;tapMark={x:wx,y:wy,t:0};
   const mo=MONS.find(o=>!o.happy&&Math.abs(o.x-wx)<(o.w||26)/2+8&&wy>o.y-(o.h||22)-8&&wy<o.y+8);if(mo){attackTarget(mo);return}
   if(M.board&&Math.abs(M.board.x-wx)<24&&wy>M.board.y-60&&wy<M.board.y+8){openBoard();return}
-  if(M.kind==='room'&&!M.visiting&&!DEC.on){const f=M.objs.find(o=>o.fu&&FURN_ACT[o.fu.k]&&Math.abs(o.x-wx)<26&&wy>o.y-56&&wy<o.y+8);if(f){furnAct(f.fu.k);return}}
+  if(M.kind==='room'&&!M.room2&&!M.visiting&&!DEC.on){const f=M.objs.find(o=>o.fu&&FURN_ACT[o.fu.k]&&Math.abs(o.x-wx)<26&&wy>o.y-56&&wy<o.y+8);if(f){furnAct(f.fu.k);return}}
   if(M.mailbox&&Math.hypot(M.mailbox.x-wx,M.mailbox.y-10-wy)<20){g9WalkThen(M.mailbox.x,M.mailbox.y+22,()=>{if(Net.online)openVisit();else say(t('nobody'))});return}
   const pl=(M.plots||[]).find(p=>Math.abs(p.x-wx)<16&&Math.abs(p.y-8-wy)<16);if(pl){P.act={k:'plot',o:pl};P.target=null;P.path=findPath(M,P.x,P.y,pl.x,pl.y+18);return}
   const np=(M.npcs||[]).find(n=>Math.abs(n.x-wx)<16&&wy>n.y-56&&wy<n.y+6);if(np){if(Math.hypot(P.x-np.x,P.y-(np.y+22))>50&&performance.now()-(window._g9Retap||0)>400){const nx=np.x,ny=np.y;g9WalkThen(nx,ny+22,()=>{window._g9Retap=performance.now();const rr=cv.getBoundingClientRect(),dq=devicePixelRatio||1;cv.dispatchEvent(new PointerEvent('pointerdown',{clientX:(nx-camX)*SC/dq+rr.left,clientY:(ny-20-camY)*SC/dq+rr.top,pointerId:1,bubbles:true}))});return}if(np.npc==='dad'&&!isKid()&&S.lv>=10&&!(reqBase().done.dad===undefined&&reqInfo('dad').got>=10)){if(!reqBase().done.dad){openReq('dad');const x=$('mBody');if(x)x.insertAdjacentHTML('beforeend',`<p><button id="toJobs">⚔️ ${t('jobs')}</button></p>`);if($('toJobs'))$('toJobs').onclick=openJobs;return}openJobs();return}if(np.npc==='nuan'){openShop();speak(t('s_nuan').split('…')[0]);return}if(['leah','dad','mom'].includes(np.npc)&&openReq(np.npc))return;say(t('n_'+np.npc)+': '+t('s_'+np.npc));speak(t('s_'+np.npc));msgT=5;P.path=findPath(M,P.x,P.y,np.x,np.y+22);return}
@@ -3893,15 +3893,16 @@ function f2Shadow(w,h,round){const k='_sh'+w+'x'+h+(round?'o':'');if(IMG[k])retu
   IMG[k]=c;return k}
 function room2Place(m){m.objs.length=m.fixed;for(const k of m._fs||[])m.SOLID.delete(k);m._fs=[];const D=m.r2,dy=ROOM2.rowsAbovePlan,ACT={sleep:'bed',cuddle:'sofa',piano:'piano',cook:'stove',read:'shelf',bath:'bath',toilet:'toilet',wash:'wash'};
   const put=(it,fixed)=>{const [k,r,tx,ty0]=it,vs=ROOM2.pieces[k];if(!vs)return;const [sx,sy,sw,sh,ox,oy,fw,fd]=vs[r%vs.length],ty=ty0+dy,flat=ROOM2.solid[k]===0,sheet=(ROOM2.sheet&&ROOM2.sheet[k])||'furnPlain';if(!IMG[sheet])return;if(tx+fw>D.w+.01||ty0+fd>D.grid.length+.01)return;   // a piece of a bigger house: kept in the save, not shown here
-    const o={img:sheet,sx,sy,sw,sh,x:tx*T-ox+sw/2,y:flat?ty*T:(ty+fd)*T,tall:flat?0:1,flat:flat,cs:0,cb:flat?Math.round(oy):Math.round(oy+fd*T),foot:16,fx:0,a:1,fu:{k:(k==='slide'||k==='slideL')?'slide':(ACT[ROOM2.act[k]]||'_'+k)},room2:fixed?null:it,fixed2:fixed?1:0};m.objs.push(o);if(!flat)o.useRect=[tx*T,ty*T,(tx+fw)*T,(ty+fd)*T];   // "beside this piece" is measured to its floor footprint, so in a small room the piece you stand next to is the one you use
+    if(flat){floor.push([IMG[sheet],sx,sy,sw,sh,Math.round(tx*T-ox),Math.round(ty*T-oy)]);return}
+    const o={img:sheet,sx,sy,sw,sh,x:tx*T-ox+sw/2,y:(ty+fd)*T,tall:1,flat:false,cs:0,cb:Math.round(oy+fd*T),foot:16,fx:0,a:1,fu:{k:(k==='slide'||k==='slideL')?'slide':(ACT[ROOM2.act[k]]||'_'+k)},room2:fixed?null:it,fixed2:fixed?1:0};m.objs.push(o);if(!flat)o.useRect=[tx*T,ty*T,(tx+fw)*T,(ty+fd)*T];   // "beside this piece" is measured to its floor footprint, so in a small room the piece you stand next to is the one you use
     if(!flat){const rd=(k==='roundtable'||k==='plant'||k==='washtub'),sc=k==='roundtable'?.74:rd?.9:1,w=Math.round(fw*T*sc),h=Math.round(fd*T*sc*(rd?.8:1)),sk=f2Shadow(w,h,rd);   // a soft shadow the size of the foot of the piece, a little down and to the right (light from the upper left)
-      sh2.push({img:sk,sx:0,sy:0,sw:w+12,sh:h+12,x:(tx+fw/2)*T+2,y:(ty+fd)*T+8-(fd*T-h)/2-(h+11)+1,tall:0,flat:true,cs:0,cb:1,foot:8,fx:0,a:1,shadow2:1})}
+      sh2.push([IMG[sk],0,0,w+12,h+12,Math.round((tx+fw/2)*T+2-(w+12)/2),Math.round((ty+fd)*T+8-(fd*T-h)/2-(h+11))])}
     if(k==='slideL'){const cy=(ty+fd/2)*T;o.usePt=[(tx+fw-.66)*T,(ty-.3)*T];   // the way in: on the far side of the tower, on the open floor of the play room
       o.ride=[(tx+fw-.66)*T,cy-1.49*T+12,(tx+.35)*T,cy-.31*T+12,(tx-.4)*T,cy+8]}   // from the platform, down the slide to its low end, then a small hop into the ball pit
     if(!flat)for(let j=Math.floor(ty);j<=Math.floor(ty+fd-.01);j++)for(let i=Math.floor(tx);i<=Math.floor(tx+fw-.01);i++){const ax=Math.min(i+1,tx+fw)-Math.max(i,tx),ay=Math.min(j+1,ty+fd)-Math.max(j,ty);
       if(ax*ay>=.4){const kk=key(i,j);if(!m.SOLID.has(kk)){m.SOLID.add(kk);m._fs.push(kk)}}}};
-  const sh2=[];for(const it of m.layout2)if(ROOM2.solid[it[0]]===0)put(it,0);const nFlat=m.objs.length;for(const f of D.fixed||[])put(f,1);for(const it of m.layout2)if(ROOM2.solid[it[0]]!==0)put(it,0);
-  m.objs.splice(nFlat,0,...sh2)}   // order on the floor: rugs first, then the shadows, then the pieces themselves
+  const sh2=[],floor=[];for(const it of m.layout2)if(ROOM2.solid[it[0]]===0)put(it,0);for(const f of D.fixed||[])put(f,1);for(const it of m.layout2)if(ROOM2.solid[it[0]]!==0)put(it,0);
+  try{buildGround(m);const g=m.ground.getContext('2d');for(const q of floor.concat(sh2))g.drawImage(q[0],q[1],q[2],q[3],q[4],q[5],q[6],q[3],q[4]);m.shadowSC=0;m._floorThings=[floor.length,sh2.length]}catch(e){}}   // order on the floor: rugs first, then the shadows, then the pieces themselves
 function room2Build(id,D){const dy=ROOM2.rowsAbovePlan,m=newMap(id,'room',D.w,D.h,61);m.nameKey='room';m.floor=id==='room'?1:2;m.indoor=true;m.painted=D.key;m.room2=1;m.r2=D;m.r2tier=room2Tier();m.stairs=[];m.layout=[];
   for(let y=0;y<D.h;y++)for(let x=0;x<D.w;x++){const c=y>=dy?((D.grid[y-dy]||'')[x]||' '):'#';if(c!=='#'&&c!==' '&&c!=='P')m.FLOOR.add(key(x,y));else m.SOLID.add(key(x,y))}
   if(D.hole)for(let y=D.hole[1];y<D.hole[3];y++)for(let x=D.hole[0];x<D.hole[2];x++)m.SOLID.add(key(x,y+dy));
