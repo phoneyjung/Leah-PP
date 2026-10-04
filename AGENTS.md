@@ -46,6 +46,9 @@ Write a new `test_NNN_name.js` for each release; drive the game the way a player
   so each piece shows its whole top and the one side facing the viewer. Plain two-tone boxes did NOT work; a guide must already look like the real thing.
 - His pass mark for art is **9.5 / 10** on: camera angle matches the scene · the four views agree · looks good and real · other. Below that: write a new prompt. Measure (overlap with the guide), then look.
 
+## Bugs waiting to be fixed
+- `BUG_REPORT.md`: bugs found by Claude's checks, each with steps to reproduce, measured evidence, a suggested fix and a pass criterion. Fix from there; update the status table in that file; write what you did at the top of the list in `HANDOFF_S13.md`.
+
 ## Where the history is
 - `HANDOFF_S13.md`: everything decided and built, newest entries first in its "done" list, with measurements. Read the top entries before changing the house or farm.
 - `GDD.md`, `STORY.md`, `ART_DIRECTION.md`, `MAP_PIPELINE.md`, `MAP_SPEC_G9.md`, `MAP_SPEC_H9.md`, `WORLD_ATLAS.md`, `GM_GUIDE.md`, `DEV_GUIDE.md`, `CLAUDE.md`: design and rules written earlier.
