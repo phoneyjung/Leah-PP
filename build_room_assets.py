@@ -26,6 +26,8 @@ for r, p in enumerate(['toilet', 'washstand']): w, d, parts = PIECES[p]; sprites
 for i, (p, (w, d, parts)) in enumerate(ONE.items()):
     path, px = f'{ART}/art-furniture-plain-D2.png', 108; g, sz = render(parts, w, d, 'S', px); a = np.asarray(Image.open(path).convert('RGB')); cx = (i % 2) * 768 + 384; base = (i // 2) * 512 + 512 - 40; x = cx - g.width // 2; y = base - g.height; m2 = 26 if p in ('plant', 'rug') else M
     x0, y0, x1, y1 = max(0, x - m2), max(0, y - m2), min(1536, x + g.width + m2), min(1024, base + m2); k = T / px; sprites[p] = [(shrink(key_out(a[y0:y1, x0:x1]), k), {'ox': round((sz[2] + (x - x0)) * k, 1), 'oy': round((sz[3] + (y - y0)) * k, 1), 'fw': w, 'fd': d})]
+# the rug lies flat and is seen from straight above, so its second view is simply the same picture turned a quarter
+imR, mR = sprites['rug'][0]; im2 = imR.rotate(90, expand=True); sprites['rug'].append((im2, {'ox': mR['oy'], 'oy': round(imR.width - mR['ox'] - mR['fw'] * T, 1), 'fw': mR['fd'], 'fd': mR['fw']}))
 for r, (p, (w, d, parts)) in enumerate(NEW.items()): sprites[p] = [take(f'{ART}/art-furniture-plain-E.png', 72, 384, 341, c, r, parts, w, d, v, 8) for c, v in enumerate(VIEWS)]
 # sheet F: the painter drew the two objects a little larger than the guide; each is cut by its own outline and brought to its floor size
 aF = np.asarray(Image.open(f'{ART}/art-furniture-plain-F.png').convert('RGB'))
