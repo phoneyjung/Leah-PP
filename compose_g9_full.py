@@ -161,7 +161,7 @@ add('pillar', 47.0, 14.2); add('pillar', 47.0, 18.0)                 # one each 
 # ---------- the front garden (owner, 4 Oct: the things round the house lay scattered and it did not feel cosy) ----------
 # One idea per place: a low fence closes the garden toward the road and leaves the path open; the letter box and the lantern machine stand left and right of the
 # path mouth like gate posts; flowers line the path and the fence; blooming bushes sit against the house. The work things (crate, robot) stay by the shed.
-add('mailbox', DX - 1.2, 15.15); add('bushBloom', DX - 2.95, 10.6, tone='mid'); add('bushBloom', DX + 2.35, 10.55, tone='mid', flip=True); add('bushLow', DX + 3.75, 10.6, tone='mid')
+add('mailbox', DX - 1.2, 15.15); add('bushBloom', DX - 2.3, 10.6, tone='mid'); add('bushBloom', DX + 2.35, 10.55, tone='mid', flip=True); add('bushLow', DX + 3.75, 10.6, tone='mid')
 for _i, _y in enumerate((11.95, 12.8, 13.65, 14.5)):
     for _sd in (-1, 1): add(('flowerW', 'flowerY', 'flowerR')[(_i + (_sd > 0)) % 3], DX + _sd * 1.08, _y + (0.12 if _sd > 0 else 0), flip=_sd > 0)
 for _k, _x in enumerate(list(np.arange(13.5, 17.3, 0.62)) + list(np.arange(22.5, 26.3, 0.62))): add(('flowerY', 'flowerW', 'flowerR', 'flowerW')[_k % 4], float(_x), 14.95 + 0.06 * (_k % 2), flip=_k % 2 == 0)

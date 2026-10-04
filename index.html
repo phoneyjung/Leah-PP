@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.35';
+const VERSION='Lantern Academy 1.36';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -3728,7 +3728,7 @@ function g9bSpots(tm){if(!P)return;if(!M._exitIn){M._exitIn=1;for(const e of M.e
   if(M.fishSpot&&!(FISHING&&FISHING.on)){const x=M.fishSpot.x-camX,y=M.fishSpot.y-camY;spot(x,y,20);g9bArrowDown(x,Math.round(y-40+Math.sin(tm*2.2)*3))}
   if(!P.sit)for(const q of g9bSeats())if(Math.hypot(q.x-P.x,q.by-P.y)<150)spot(q.x-camX,q.by+3-camY,11);
   ctx.restore()}
-const G9DOOR={hw:30,b:18,spring:75,t:101};   // the door leaf on the house pictures, measured: half width, bottom, where the arch begins and its top, in px above the foot of the house
+const G9DOOR={hw:25,b:34,spring:80,t:98};   // the door leaf on the house pictures, measured: half width, bottom, where the arch begins and its top, in px above the foot of the house
 {const cv=document.getElementById('c');if(cv)cv.addEventListener('pointerup',ev=>{try{if(!M||!M.g9b||PAUSE||DLG)return;const r=cv.getBoundingClientRect(),dpr=devicePixelRatio||1,wx=(ev.clientX-r.left)*dpr/SC+camX,wy=(ev.clientY-r.top)*dpr/SC+camY;
     const dx=G9.door[0]*T,by=G9.houseBase*T;
     if(Math.abs(wx-dx)<G9DOOR.hw+4&&wy>by-G9DOOR.t-4&&wy<by-G9DOOR.b+10){ev.stopImmediatePropagation();window._farmTapT=performance.now();const e=M.exits.find(q=>q.id==='home');if(e)g9WalkThen(e.x,e.y+4,()=>{try{useExit(e)}catch(x){}});return}

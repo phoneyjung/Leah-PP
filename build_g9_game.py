@@ -126,7 +126,7 @@ find = lambda name: [i for i in inst if i['n'] == name]
 cxy = lambda i: (i['x'] + i['w'] / 2, i['by'])
 DX, HB = sc['door_x'], sc['house_base']; hb_t = HB / T
 P = {'w': GW, 'h': GH, 'spawn': [GW - 3.5, round(ey, 2)], 'exitE': [GW - 0.4, round(ey, 2)], 'door': [round(DX / T, 2), round(hb_t + 0.2, 2)], 'houseBase': round(hb_t, 2),
-     'houseBox': {k: [round((DX - off) / T, 2), round(hb_t - 313 / T, 2), round((DX - off + wd) / T, 2)] for k, (off, wd) in {'1': (97.5, 256), '2': (88.5, 375), '3': (86.5, 427)}.items()}}
+     'houseBox': {k: [round((DX - off) / T, 2), round(hb_t - ht / T, 2), round((DX - off + wd) / T, 2)] for k, (off, wd, ht) in {'1': (75.5, 265, 254), '2': (76, 388, 254), '3': (65.5, 394, 331)}.items()}}   # the new houses (4 Oct): middle of the door leaf from the left edge, width, height of each picture
 mb = find('mailbox')[0]; P['mailbox'] = [round(cxy(mb)[0] / T, 2), round(cxy(mb)[1] / T, 2)]
 sh = find('shed')[0]; P['shed'] = [round(cxy(sh)[0] / T, 2), round((sh['by'] + 10) / T, 2)]
 cr = find('crate')[0]; P['crate'] = [round(cxy(cr)[0] / T, 2), round(cr['by'] / T, 2)]
