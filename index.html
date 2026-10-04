@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.45';
+const VERSION='Lantern Academy 1.46';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -1314,7 +1314,7 @@ function render(tm){if(!M||!S)return;
   for(const d of M.digs||[])if(!d.done){if(IMG.dprops){const dr=DR.digSpot;ctx.drawImage(IMG.dprops,dr[0],dr[1],64,64,Math.round(d.x-32-camX),Math.round(d.y-40-camY),64,64)}for(let i=0;i<3;i++){const a=tm*2+i*2.1,v=(Math.sin(tm*4+i)+1)/2;ctx.fillStyle=`rgba(255,240,170,${.4+.6*v})`;const x=Math.round(d.x-camX+Math.cos(a)*6),y=Math.round(d.y-camY-2+Math.sin(a)*3);ctx.fillRect(x,y,1,1);if(v>.8){ctx.fillRect(x-1,y,3,1);ctx.fillRect(x,y-1,1,3)}}ctx.fillStyle='rgba(90,60,30,.35)';ctx.fillRect(Math.round(d.x-camX-5),Math.round(d.y-camY),10,2)}
   for(const f of FX)if(f.k==='tele'){const p=f.t/f.life;ctx.save();ctx.globalAlpha=.35+.4*p;ctx.strokeStyle=f.bolt?'#ffe36b':f.el==='ice'?'#8fd8ff':f.el==='fire'?'#ff8a5a':'#ff6b8a';ctx.fillStyle=`rgba(255,90,120,${.12+.25*p})`;ctx.beginPath();ctx.ellipse(f.x-camX,f.y-camY,f.r,f.r*.45,0,0,7);ctx.fill();ctx.stroke();ctx.restore();if(f.t+1/60>=f.life&&!f.hit){f.hit=1;if(!f.vis){for(const g of fighters())if(Math.hypot((g.x-f.x),(g.y-f.y)/.45)<f.r){hitFighter(g,f.dmg);if(f.el==='ice'&&g.me){S.eff=S.eff||{};S.eff.frozen=performance.now()+2000;say('❄️ '+t('frozen'))}}if(f.el==='fire')FX.push({k:'burn',x:f.x,y:f.y,t:0,life:4,dmg:Math.round(f.dmg*.35)})}for(let i=0;i<10;i++)FX.push({k:'dirt',x:f.x,y:f.y,vx:(rnd()-.5)*90,vy:-50-rnd()*40,t:0,life:.6})}}
   // fade tall things when the player walks behind them
-  for(const o of M.objs){let tg=1;if(o.tall&&P.y<o.y-2){const X=o.x-o.sw/2,Y=o.y-(o.cb||o.sh);if(P.x+12>X+8&&P.x-12<X+o.sw-8&&P.y>Y+6&&P.y-50<o.y)tg=.42}o.a+=(tg-o.a)*.2}
+  for(const o of M.objs){let tg=1;if(o.tall&&!o.farmHouse&&P.y<o.y-2){const X=o.x-o.sw/2,Y=o.y-(o.cb||o.sh);if(P.x+12>X+8&&P.x-12<X+o.sw-8&&P.y>Y+6&&P.y-50<o.y)tg=.42}o.a+=(tg-o.a)*.2}
   // player shadow
   const F=PS.F||64,lf=P.moving?Math.floor(P.dist/10)%6:0,sx=P.moving?lf*F:P.row*F,sy=P.moving?P.row*F:0;
   {const sh=P.moving?PS.shW:PS.shS,X=Math.round(P.x-F/2-camX),Y=Math.round(P.y-camY);ctx.save();ctx.imageSmoothingEnabled=true;ctx.globalCompositeOperation='multiply';ctx.globalAlpha=.55;softAO(ctx,P.x-camX,P.y-camY,24,1);
@@ -3713,18 +3713,18 @@ function warpDraw(e,tm,near){if(!M||M.kind!=='town')return false;const door=e.id
 function g9bPulse(tm){return .55+.45*(.5+.5*Math.sin(tm*2.1))}                    // one slow breath (3 s) for every tappable thing
 function g9bArrowDown(x,y){for(const [c,gr] of [['#4a2f00',2],['#ffd83a',0]]){ctx.fillStyle=c;ctx.beginPath();ctx.moveTo(x-8-gr,y-gr);ctx.lineTo(x+8+gr,y-gr);ctx.lineTo(x,y+11+gr*1.4);ctx.closePath();ctx.fill();ctx.fillRect(Math.round(x-3-gr),y-10-gr,6+gr*2,11+gr)}}
 function g9bSpots(tm){if(!P)return;if(!M._exitIn){M._exitIn=1;for(const e of M.exits)if(e.id==='e'&&!e.locked)e.x=M.w*T-58}
-  const pa=g9bPulse(tm);ctx.save();
+  const pa=g9bPulse(tm)*.62;ctx.save();charClip();   // 1.46: softer, and cut out round every character so a line never lies over one
   // things: the ring of light round each tappable picture
   for(const o of M.objs){if(!o.ring)continue;const rg=IMG[o.ring];if(!rg)continue;const X=Math.round(o.x-o.sw/2-camX),Y=Math.round(o.y-((o.cb===undefined?o.sh-3:o.cb)+1)-camY);if(X>VW||Y>VH||X+o.sw<0||Y+o.sh<0)continue;ctx.globalAlpha=pa;
     if(o.flip){ctx.save();ctx.translate(X+o.sw,Y);ctx.scale(-1,1);ctx.drawImage(rg,0,0);ctx.restore()}else ctx.drawImage(rg,X,Y)}
   // planting cells: outlined while there is something to do on them (empty = plant, dry = water, ripe = pick); looked up 4 times a second, not every frame
   {const now=performance.now();if(!M._cellAt||now-M._cellAt>250){M._cellAt=now;M._cellOn=(M.plots||[]).map(pl=>{try{const q=plotState(pl);return q.st==='empty'||q.st==='ripe'||!q.w}catch(e){return false}})}
-    ctx.globalAlpha=pa;ctx.strokeStyle='#ffe23a';ctx.lineWidth=2;ctx.setLineDash([5,4]);ctx.lineDashOffset=-tm*5;(M.plots||[]).forEach((pl,i)=>{if(!M._cellOn[i])return;const x=Math.round(pl.x-camX)-25,y=Math.round(pl.y-camY)-16,w=50,h=34,r=6;if(x<-60||y<-50||x>VW+10||y>VH+10)return;
+    ctx.globalAlpha=pa;ctx.strokeStyle='#fff3b0';ctx.lineWidth=2;ctx.setLineDash([5,4]);ctx.lineDashOffset=-tm*5;(M.plots||[]).forEach((pl,i)=>{if(!M._cellOn[i])return;const x=Math.round(pl.x-camX)-25,y=Math.round(pl.y-camY)-16,w=50,h=34,r=6;if(x<-60||y<-50||x>VW+10||y>VH+10)return;
       ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();ctx.stroke()});ctx.setLineDash([])}
   // the house door: the same light, drawn round the door leaf
-  const dx=G9.door[0]*T-camX,by=G9.houseBase*T-camY,D=G9DOOR;ctx.globalAlpha=pa;ctx.strokeStyle='#ffe23a';ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(dx-D.hw,by-D.b);ctx.lineTo(dx-D.hw,by-D.spring);ctx.ellipse(dx,by-D.spring,D.hw,D.t-D.spring,0,Math.PI,0);ctx.lineTo(dx+D.hw,by-D.b);ctx.closePath();ctx.stroke();
+  const dx=G9.door[0]*T-camX,by=G9.houseBase*T-camY,D=G9DOOR;ctx.globalAlpha=pa;ctx.strokeStyle='#fff3b0';ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(dx-D.hw,by-D.b);ctx.lineTo(dx-D.hw,by-D.spring);ctx.ellipse(dx,by-D.spring,D.hw,D.t-D.spring,0,Math.PI,0);ctx.lineTo(dx+D.hw,by-D.b);ctx.closePath();ctx.stroke();
   // activity spots: fishing, and the two seats of every bench
-  ctx.globalAlpha=1;const spot=(x,y,rx)=>{ctx.setLineDash([5,4]);ctx.lineDashOffset=-tm*5;ctx.globalAlpha=pa;ctx.strokeStyle='#ffe23a';ctx.lineWidth=2;ctx.beginPath();ctx.ellipse(x,y,rx,rx*.45,0,0,6.283);ctx.stroke();ctx.setLineDash([]);ctx.globalAlpha=1};
+  ctx.globalAlpha=1;const spot=(x,y,rx)=>{ctx.setLineDash([5,4]);ctx.lineDashOffset=-tm*5;ctx.globalAlpha=pa;ctx.strokeStyle='#fff3b0';ctx.lineWidth=2;ctx.beginPath();ctx.ellipse(x,y,rx,rx*.45,0,0,6.283);ctx.stroke();ctx.setLineDash([]);ctx.globalAlpha=1};
   if(M.fishSpot&&!(FISHING&&FISHING.on)){const x=M.fishSpot.x-camX,y=M.fishSpot.y-camY;spot(x,y,20);g9bArrowDown(x,Math.round(y-40+Math.sin(tm*2.2)*3))}
   if(!P.sit)for(const q of g9bSeats())if(Math.hypot(q.x-P.x,q.by-P.y)<150)spot(q.x-camX,q.by+3-camY,11);
   ctx.restore()}
@@ -3893,9 +3893,9 @@ function f2Shadow(w,h,round){const k='_sh'+w+'x'+h+(round?'o':'');if(IMG[k])retu
   IMG[k]=c;return k}
 function room2Place(m){m.objs.length=m.fixed;for(const k of m._fs||[])m.SOLID.delete(k);m._fs=[];const D=m.r2,dy=ROOM2.rowsAbovePlan,ACT={sleep:'bed',cuddle:'sofa',piano:'piano',cook:'stove',read:'shelf',bath:'bath',toilet:'toilet',wash:'wash'};
   const put=(it,fixed)=>{const [k,r,tx,ty0]=it,vs=ROOM2.pieces[k];if(!vs)return;const [sx,sy,sw,sh,ox,oy,fw,fd]=vs[r%vs.length],ty=ty0+dy,flat=ROOM2.solid[k]===0,sheet=(ROOM2.sheet&&ROOM2.sheet[k])||'furnPlain';if(!IMG[sheet])return;if(tx+fw>D.w+.01||ty0+fd>D.grid.length+.01)return;   // a piece of a bigger house: kept in the save, not shown here
-    const o={img:sheet,sx,sy,sw,sh,x:tx*T-ox+sw/2,y:(ty+fd)*T,tall:flat?0:1,flat:flat,cs:0,cb:Math.round(oy+fd*T),foot:16,fx:0,a:1,fu:{k:(k==='slide'||k==='slideL')?'slide':(ACT[ROOM2.act[k]]||'_'+k)},room2:fixed?null:it,fixed2:fixed?1:0};m.objs.push(o);if(!flat)o.useRect=[tx*T,ty*T,(tx+fw)*T,(ty+fd)*T];   // "beside this piece" is measured to its floor footprint, so in a small room the piece you stand next to is the one you use
+    const o={img:sheet,sx,sy,sw,sh,x:tx*T-ox+sw/2,y:flat?ty*T:(ty+fd)*T,tall:flat?0:1,flat:flat,cs:0,cb:flat?Math.round(oy):Math.round(oy+fd*T),foot:16,fx:0,a:1,fu:{k:(k==='slide'||k==='slideL')?'slide':(ACT[ROOM2.act[k]]||'_'+k)},room2:fixed?null:it,fixed2:fixed?1:0};m.objs.push(o);if(!flat)o.useRect=[tx*T,ty*T,(tx+fw)*T,(ty+fd)*T];   // "beside this piece" is measured to its floor footprint, so in a small room the piece you stand next to is the one you use
     if(!flat){const rd=(k==='roundtable'||k==='plant'||k==='washtub'),sc=k==='roundtable'?.74:rd?.9:1,w=Math.round(fw*T*sc),h=Math.round(fd*T*sc*(rd?.8:1)),sk=f2Shadow(w,h,rd);   // a soft shadow the size of the foot of the piece, a little down and to the right (light from the upper left)
-      sh2.push({img:sk,sx:0,sy:0,sw:w+12,sh:h+12,x:(tx+fw/2)*T+2,y:(ty+fd)*T+8-(fd*T-h)/2,tall:0,flat:true,cs:0,cb:h+11,foot:8,fx:0,a:1,shadow2:1})}
+      sh2.push({img:sk,sx:0,sy:0,sw:w+12,sh:h+12,x:(tx+fw/2)*T+2,y:(ty+fd)*T+8-(fd*T-h)/2-(h+11)+1,tall:0,flat:true,cs:0,cb:1,foot:8,fx:0,a:1,shadow2:1})}
     if(k==='slideL'){const cy=(ty+fd/2)*T;o.usePt=[(tx+fw-.66)*T,(ty-.3)*T];   // the way in: on the far side of the tower, on the open floor of the play room
       o.ride=[(tx+fw-.66)*T,cy-1.49*T+12,(tx+.35)*T,cy-.31*T+12,(tx-.4)*T,cy+8]}   // from the platform, down the slide to its low end, then a small hop into the ball pit
     if(!flat)for(let j=Math.floor(ty);j<=Math.floor(ty+fd-.01);j++)for(let i=Math.floor(tx);i<=Math.floor(tx+fw-.01);i++){const ax=Math.min(i+1,tx+fw)-Math.max(i,tx),ay=Math.min(j+1,ty+fd)-Math.max(j,ty);
@@ -3921,7 +3921,10 @@ function pitInit(m){const D=m.r2;if(!D.pit)return;const dy=ROOM2.rowsAbovePlan,[
 let _pitT=0;
 function pitTick(){const m=M;if(!m||!m._balls||!P)return;const now=performance.now(),dt=Math.min(.05,(now-(_pitT||now))/1000);_pitT=now;const [L,Tp,Rr,Bt]=m._pitBox;
   for(const b of m._balls){const dx=b.x-P.x,dy=b.y-(P.y-2),d=Math.hypot(dx,dy);if(d<18){const u=d>.01?[dx/d,dy/d]:[1,0],f=(18-d)*26;b.vx+=u[0]*f*dt*10;b.vy+=u[1]*f*dt*10}
-    b.x+=b.vx*dt;b.y+=b.vy*dt;const k=Math.pow(.03,dt);b.vx*=k;b.vy*=k;if(b.x<L){b.x=L;b.vx=Math.abs(b.vx)*.6}if(b.x>Rr){b.x=Rr;b.vx=-Math.abs(b.vx)*.6}if(b.y<Tp){b.y=Tp;b.vy=Math.abs(b.vy)*.6}if(b.y>Bt){b.y=Bt;b.vy=-Math.abs(b.vy)*.6}}}
+    b.x+=b.vx*dt;b.y+=b.vy*dt;const k=Math.pow(.03,dt);b.vx*=k;b.vy*=k;if(b.x<L){b.x=L;b.vx=Math.abs(b.vx)*.6}if(b.x>Rr){b.x=Rr;b.vx=-Math.abs(b.vx)*.6}if(b.y<Tp){b.y=Tp;b.vy=Math.abs(b.vy)*.6}if(b.y>Bt){b.y=Bt;b.vy=-Math.abs(b.vy)*.6}}
+  const A=m._balls,n=A.length,D0=11;for(let i=0;i<n;i++)for(let j=i+1;j<n;j++){const a=A[i],c=A[j];let dx=c.x-a.x,dy=c.y-a.y,d=Math.hypot(dx,dy);if(d>=D0)continue;if(d<.01){dx=((i*7+j)%5-2)||1;dy=((i+j*3)%5-2);d=Math.hypot(dx,dy)}
+    const nx=dx/d,ny=dy/d,ov=(D0-d)/2;a.x-=nx*ov;a.y-=ny*ov;c.x+=nx*ov;c.y+=ny*ov;const vn=(c.vx-a.vx)*nx+(c.vy-a.vy)*ny;if(vn<0){const k=-(1+.35)*vn/2;a.vx-=k*nx;a.vy-=k*ny;c.vx+=k*nx;c.vy+=k*ny}}   // balls do not sit inside one another: they push apart and bounce softly
+  for(const b of A){if(b.x<L)b.x=L;if(b.x>Rr)b.x=Rr;if(b.y<Tp)b.y=Tp;if(b.y>Bt)b.y=Bt}}
 // ---- the slide: stand by it, press the big button, ride down into the balls
 try{Object.assign(TX.th,{actSlide:'เล่นสไลเดอร์'});if(TX.en)Object.assign(TX.en,{actSlide:'Slide'});FURN_ACT.slide='slide'}catch(e){}
 function slideGo(){const m=M,o=m&&m.objs.find(q=>q.fu&&q.fu.k==='slide');if(!o||P.slide)return;P.path=null;P.act=null;
@@ -3936,15 +3939,22 @@ function slideTick(){const s=P&&P.slide;if(!s)return;const now=performance.now()
 {const _dv39=drawVFX2;drawVFX2=function(tm){_dv39.apply(this,arguments);try{if(M&&M.room2){slideTick();pitTick()}}catch(e){}}}
 // the piano: eight keys, do to high do, the game's own sound (no file)
 let _pianoAC=null;
-function pianoOpen(){let d=document.getElementById('pianoBox');if(d)d.remove();d=document.createElement('div');d.id='pianoBox';PAUSE=true;
+const PIANO={rec:null,tune:null,timers:[]};
+function pianoOpen(){let d=document.getElementById('pianoBox');if(d)d.remove();d=document.createElement('div');d.id='pianoBox';PAUSE=true;try{PIANO.tune=PIANO.tune||HOME.get().pianoTune||null}catch(e){}
   d.style.cssText='position:fixed;inset:0;z-index:60;background:rgba(20,13,36,.82);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px';
-  const N=[['โด','Do',261.63,'#e0413b'],['เร','Re',293.66,'#f08a2c'],['มี','Mi',329.63,'#f0c92c'],['ฟา','Fa',349.23,'#5bbf4a'],['ซอล','Sol',392,'#3fb6c9'],['ลา','La',440,'#4a78e0'],['ที','Ti',493.88,'#8a5be0'],['โด','Do',523.25,'#e05ba6']],en=(typeof LANG!=='undefined'&&LANG==='en');
-  d.innerHTML='<div style="color:#ffe27a;font-weight:700;font-size:18px">\u{1F3B9} '+t('pianoT')+' <span style="font-weight:400;font-size:12px;color:#fdf6e8">'+t('pianoHint')+'</span></div><div id="pianoKeys" style="display:flex;gap:4px"></div><button id="pianoX" style="font-size:15px;padding:8px 22px;background:#c9a45a;color:#1b1330;font-weight:700">'+(en?'Close':'ปิด')+'</button>';
-  document.body.appendChild(d);const row=d.querySelector('#pianoKeys');
-  N.forEach(([th,e2,f,c])=>{const b=document.createElement('button');b.textContent=en?e2:th;b.style.cssText='width:11vw;max-width:74px;min-width:38px;height:42vh;max-height:170px;background:#fdf6e8;color:#1b1330;font-weight:700;font-size:14px;border-radius:0 0 10px 10px;box-shadow:inset 0 -14px 0 '+c+',0 0 0 2px #1b1330;display:flex;align-items:flex-end;justify-content:center;padding:0 0 18px';
-    const play=ev=>{try{ev.preventDefault();_pianoAC=_pianoAC||new (window.AudioContext||window.webkitAudioContext)();const a=_pianoAC,o=a.createOscillator(),g=a.createGain();o.type='triangle';o.frequency.value=f;g.gain.setValueAtTime(.0001,a.currentTime);g.gain.exponentialRampToValueAtTime(.35,a.currentTime+.015);g.gain.exponentialRampToValueAtTime(.0001,a.currentTime+.9);o.connect(g);g.connect(a.destination);o.start();o.stop(a.currentTime+.95);window._pianoPlayed=(window._pianoPlayed||0)+1;b.style.transform='translateY(3px)';setTimeout(()=>{b.style.transform=''},120)}catch(e){}};
-    b.addEventListener('pointerdown',play);row.appendChild(b)});
-  d.querySelector('#pianoX').onclick=()=>{d.remove();PAUSE=false}}
+  const N=[['โด','Do',261.63,'#e0413b'],['เร','Re',293.66,'#f08a2c'],['มี','Mi',329.63,'#f0c92c'],['ฟา','Fa',349.23,'#5bbf4a'],['ซอล','Sol',392,'#3fb6c9'],['ลา','La',440,'#4a78e0'],['ที','Ti',493.88,'#8a5be0'],['โด','Do',523.25,'#e05ba6']],en=(typeof LANG!=='undefined'&&LANG==='en'),B='font-size:14px;padding:8px 14px;font-weight:700;';
+  d.innerHTML='<div style="color:#ffe27a;font-weight:700;font-size:18px">\u{1F3B9} '+t('pianoT')+' <span id="pianoMsg" style="font-weight:400;font-size:12px;color:#fdf6e8">'+t('pianoHint')+'</span></div><div id="pianoKeys" style="display:flex;gap:4px"></div>'+
+    '<div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center"><button id="pianoRec" style="'+B+'background:#b23a48;color:#fff">\u23FA '+(en?'Record':'บันทึก')+'</button><button id="pianoStop" style="'+B+'background:#3a2a58;color:#fdf6e8">\u23F9 '+(en?'Stop':'หยุด')+'</button><button id="pianoPlay" style="'+B+'background:#3f8f5a;color:#fff">\u25B6 '+(en?'Play':'เล่นเพลง')+'</button><button id="pianoX" style="'+B+'background:#c9a45a;color:#1b1330">'+(en?'Close':'ปิด')+'</button></div>';
+  document.body.appendChild(d);const row=d.querySelector('#pianoKeys'),msg=d.querySelector('#pianoMsg'),keys=[];
+  const sound=i=>{try{_pianoAC=_pianoAC||new (window.AudioContext||window.webkitAudioContext)();const a=_pianoAC,o=a.createOscillator(),g=a.createGain();o.type='triangle';o.frequency.value=N[i][2];g.gain.setValueAtTime(.0001,a.currentTime);g.gain.exponentialRampToValueAtTime(.35,a.currentTime+.015);g.gain.exponentialRampToValueAtTime(.0001,a.currentTime+.9);o.connect(g);g.connect(a.destination);o.start();o.stop(a.currentTime+.95)}catch(e){}
+    window._pianoPlayed=(window._pianoPlayed||0)+1;const b=keys[i];if(b){b.style.transform='translateY(3px)';setTimeout(()=>{b.style.transform=''},120)}};
+  const stop=()=>{PIANO.timers.forEach(clearTimeout);PIANO.timers=[];if(PIANO.rec){if(PIANO.rec.notes.length){PIANO.tune=PIANO.rec.notes.slice(0,200);try{const h=HOME.get();h.pianoTune=PIANO.tune;HOME.put(h)}catch(e){}}PIANO.rec=null}d.querySelector('#pianoRec').style.boxShadow='';msg.textContent=PIANO.tune?(en?'A tune of '+PIANO.tune.length+' notes is kept':'เก็บเพลงไว้แล้ว '+PIANO.tune.length+' โน้ต'):t('pianoHint')};
+  N.forEach(([th,e2,f,c],i)=>{const b=document.createElement('button');keys.push(b);b.textContent=en?e2:th;b.style.cssText='width:11vw;max-width:74px;min-width:38px;height:38vh;max-height:160px;background:#fdf6e8;color:#1b1330;font-weight:700;font-size:14px;border-radius:0 0 10px 10px;box-shadow:inset 0 -14px 0 '+c+',0 0 0 2px #1b1330;display:flex;align-items:flex-end;justify-content:center;padding:0 0 18px';
+    b.addEventListener('pointerdown',ev=>{ev.preventDefault();if(PIANO.rec)PIANO.rec.notes.push([i,Math.round(performance.now()-PIANO.rec.t0)]);sound(i)});row.appendChild(b)});
+  d.querySelector('#pianoRec').onclick=()=>{stop();PIANO.rec={t0:performance.now(),notes:[]};d.querySelector('#pianoRec').style.boxShadow='0 0 0 3px #ffe27a';msg.textContent=en?'Recording: play your tune, then press Stop':'กำลังบันทึก: เล่นเพลงแล้วกดหยุด'};
+  d.querySelector('#pianoStop').onclick=stop;
+  d.querySelector('#pianoPlay').onclick=()=>{stop();const tn=PIANO.tune;if(!tn||!tn.length){msg.textContent=en?'Nothing recorded yet':'ยังไม่มีเพลงที่บันทึกไว้';return}msg.textContent=en?'Playing':'กำลังเล่นเพลง';const t0=tn[0][1];for(const [i,tt] of tn)PIANO.timers.push(setTimeout(()=>sound(i),Math.max(0,tt-t0)));PIANO.timers.push(setTimeout(()=>{PIANO.timers=[];msg.textContent=t('pianoHint')},tn[tn.length-1][1]-t0+900))};
+  d.querySelector('#pianoX').onclick=()=>{stop();d.remove();PAUSE=false}}
 {const _fa37=furnAct;furnAct=function(k){if(k==='piano'){pianoOpen();return true}if(k==='slide'){slideGo();return true}if(k==='stove'){try{openKitchen()}catch(e){}return true}if(k==='bath'||k==='toilet'||k==='wash'){bathAct(k);return true}return _fa37.apply(this,arguments)}}
 try{FURN_ACT.stove='cook';Object.assign(TX.th,{actCook:'ทำอาหาร',actRead:'อ่านหนังสือ'});if(TX.en)Object.assign(TX.en,{actCook:'Cook',actRead:'Read'})}catch(e){}
 // 1.45 (owner, 4 Oct: the bath and the toilet can be used, with a small effect): a bath gives back half of your health and a few bubbles;
@@ -3999,7 +4009,7 @@ addEventListener('pointerdown',e=>{try{if(!DECO2.on||!M||!M.room2)return;const c
 {const _gm38=goMap;goMap=function(){if(DECO2.on){DECO2.on=false;DECO2.sel=null;DECO2.hold=null;try{deco2UI()}catch(e){}}return _gm38.apply(this,arguments)}}
 // the chosen piece: a dashed yellow frame round its floor footprint; in store-taking mode nothing is framed
 function deco2Draw(){if(!DECO2.on||!M||!M.room2||DECO2.sel==null)return;const it=M.layout2[DECO2.sel];if(!it)return;const [x0,y0,x1,y1]=f2Rect(it),dy=ROOM2.rowsAbovePlan,tm=performance.now()/1000;
-  ctx.save();ctx.strokeStyle='#ffe23a';ctx.lineWidth=2;ctx.setLineDash([5,4]);ctx.lineDashOffset=-tm*6;ctx.globalAlpha=.65+.3*Math.sin(tm*2.1);ctx.strokeRect(Math.round(x0*T-camX)+.5,Math.round((y0+dy)*T-camY)+.5,Math.round((x1-x0)*T),Math.round((y1-y0)*T));ctx.restore()}
+  ctx.save();charClip();ctx.strokeStyle='#fff3b0';ctx.lineWidth=2;ctx.setLineDash([5,4]);ctx.lineDashOffset=-tm*6;ctx.globalAlpha=.5+.25*Math.sin(tm*2.1);ctx.strokeRect(Math.round(x0*T-camX)+.5,Math.round((y0+dy)*T-camY)+.5,Math.round((x1-x0)*T),Math.round((y1-y0)*T));ctx.restore()}
 {const _dv38=drawVFX2;drawVFX2=function(tm){_dv38.apply(this,arguments);try{deco2Draw()}catch(e){}}}
 // ================= 1.44 THE FURNITURE SHOP (the fine set): bought with coins, lands in the house store, then placed like any piece =================
 // Prices follow the game's own scale (owner, 4 Oct: "set them from the prices already in the game"): the old furniture cost 15-70 coins, a house upgrade 150-300,
@@ -4014,6 +4024,20 @@ function openFurnShop(){if(!ROOM2||!IMG.furnFine)return;{const d2=document.getEl
   document.querySelectorAll('canvas[data-ic]').forEach(c=>{const v=ROOM2.pieces[c.dataset.ic][0],g=c.getContext('2d'),sc=Math.min(72/v[2],72/v[3],1.4);g.imageSmoothingEnabled=false;g.drawImage(IMG.furnFine,v[0],v[1],v[2],v[3],Math.round((72-v[2]*sc)/2),Math.round((72-v[3]*sc)/2),Math.round(v[2]*sc),Math.round(v[3]*sc))});
   document.querySelectorAll('[data-buy]').forEach(b=>b.onclick=()=>{if(f2Buy(b.dataset.buy)){openFurnShop();try{deco2UI()}catch(e){}}})}
 {const _cm44=closeModal;closeModal=function(){const r=_cm44.apply(this,arguments);try{const d2=document.getElementById('deco2');if(d2)d2.style.display=''}catch(e){}return r}}
+// ================= 1.46 fixes from the owner's play test (4 Oct, evening) =================
+function charClip(){try{const B=[],add=(x,y,w,h)=>B.push([x-camX,y-camY,w,h]);if(P)add(P.x-20,P.y-64,40,68);try{if(typeof PET!=='undefined'&&PET&&isFinite(PET.x))add(PET.x-18,PET.y-36,36,38)}catch(e){}
+  try{const R=M.robot&&M.robot.o;if(R&&isFinite(R.x))add(R.x-24,R.y-62,48,66)}catch(e){}for(const o of M.objs)if(o.npc)add(o.x-20,o.y-64,40,68);
+  for(const b of B){ctx.beginPath();ctx.rect(-9999,-9999,29999,29999);ctx.rect(b[0],b[1],b[2],b[3]);ctx.clip('evenodd')}}catch(e){}}
+try{document.getElementById('bDeco').onclick=()=>openDeco()}catch(e){}   // the button kept a pointer to the old furniture screen: in the new house it showed the old list instead of the arranging bar and the shop
+{const _gm46=goMap;goMap=function(id,exitId){const r=_gm46.apply(this,arguments);try{if(M&&M.room2){const D=M.r2,dy=ROOM2.rowsAbovePlan;
+  // the game puts a newcomer 30 px from the door toward the middle of the map; in the narrow doorway that was inside the wall and you could not move. Stand in the middle of the way in instead.
+  if(exitId==='door'&&D.door){P.x=M.spawnDefault[0];P.y=M.spawnDefault[1];P.path=null}
+  else if(D.stair&&exitId===D.stair.id){const ex=M.exits.find(q=>q.id===exitId);let best=null,bd=1e9;   // beside the stairs: the nearest free tile to the foot (or head) of the stairs that is not the stair tile itself
+    for(let ty=Math.floor(ex.y/T)-3;ty<=Math.floor(ex.y/T)+3;ty++)for(let tx=Math.floor(ex.x/T)-3;tx<=Math.floor(ex.x/T)+3;tx++){if(!walkable(M,tx,ty))continue;const d=Math.hypot(tx*T+16-ex.x,ty*T+16-ex.y);if(d>=26&&d<bd){bd=d;best=[tx*T+16,ty*T+16]}}
+    if(best){P.x=best[0];P.y=best[1];P.path=null}}}}catch(e){}return r}}
+addEventListener('pointerdown',e=>{try{const s=P&&P.sit;if(!s||typeof s!=='object'||s.free||!M||!M.g9b||PAUSE||DLG)return;if(e.target!==document.getElementById('c'))return;
+  // sitting on a bench you are on the bench's own (solid) tile, so a tap to walk found no way out. Stand up in front of the bench first; the tap then walks as usual.
+  for(const dy of [20,28,36,44]){if(walkable(M,Math.floor(s.x/T),Math.floor((s.y+dy)/T))){P.x=s.x;P.y=s.y+dy;break}}P.sit=null}catch(_){}} ,true);
 // ================= 1.07 H9 · PAPLERN VILLAGE, NEW SCENE (painted, MAP_SPEC_H9 v1.4) =================
 // A separate map "h9" for now, reached by the GM (warp) and from the G9 farm's east road; the village players use (map "capital") is untouched.
 // Needs map-H9-village.jpg (a sharper map-H9-village-hi.jpg replaces it once uploaded); missing picture -> this map is not offered at all.
