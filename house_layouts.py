@@ -1,98 +1,136 @@
 # -*- coding: utf-8 -*-
-# House interior layouts, three steps (owner brief, 4 Oct). Units: game tiles (32 px). Rows 0-2 = back wall, floor = rows 3..H-2, cols 1..W-2.
-# Room sizes come from the game (HSZ): 14x10, 18x11, 22x12.
+# House interior layouts, draft 2 (owner, 4 Oct: draft 1 was too small, hardly any room to walk).
+# Bigger houses built round one rule: a HALL two tiles wide runs through the middle, rooms open onto it through doors two tiles wide,
+# and the big furniture is drawn at its real size so the free walking room can be counted, not guessed.
+# Units: game tiles (32 px). Rows 0-2 = back wall. The game's room sizes (HSZ) are numbers in the code and will be changed to these.
 import json
 from PIL import Image, ImageDraw, ImageFont
-C = 46                                   # drawing size of one tile in the plan picture
+C = 34
 FB = '/usr/share/fonts/opentype/tlwg/Loma-Bold.otf'; FR = '/usr/share/fonts/opentype/tlwg/Loma.otf'
-f_room = ImageFont.truetype(FB, 21, layout_engine=ImageFont.Layout.RAQM); f_small = ImageFont.truetype(FR, 16, layout_engine=ImageFont.Layout.RAQM); f_title = ImageFont.truetype(FB, 30, layout_engine=ImageFont.Layout.RAQM)
-COL = {'bath': (176, 214, 228), 'bed': (236, 190, 196), 'living': (214, 170, 110), 'kitchen': (238, 214, 150), 'book': (190, 172, 220), 'ball': (150, 220, 190), 'work': (176, 200, 160), 'hall': (224, 196, 150)}
-NAME = {'bath': 'ห้องน้ำ', 'bed': 'ห้องนอน', 'living': 'ห้องนั่งเล่น', 'kitchen': 'ครัว', 'book': 'ห้องหนังสือ', 'ball': 'บ้านบอล', 'work': 'ห้องทำงาน', 'hall': 'ส่วนกลางนั่งเล่น'}
-WALL = (66, 58, 70); BACK = (226, 212, 184); LOW = (150, 110, 70)
+L = ImageFont.Layout.RAQM
+f_room = ImageFont.truetype(FB, 19, layout_engine=L); f_small = ImageFont.truetype(FR, 14, layout_engine=L); f_title = ImageFont.truetype(FB, 27, layout_engine=L); f_tiny = ImageFont.truetype(FR, 12, layout_engine=L)
+COL = {'bath': (176, 214, 228), 'bed': (236, 190, 196), 'living': (222, 184, 128), 'kitchen': (240, 218, 156), 'book': (196, 180, 226), 'ball': (156, 224, 196), 'work': (182, 206, 166), 'hall': (240, 228, 204)}
+NAME = {'bath': 'ห้องน้ำ', 'bed': 'ห้องนอน', 'living': 'ห้องนั่งเล่น', 'kitchen': 'ครัว', 'book': 'ห้องหนังสือ', 'ball': 'บ้านบอล', 'work': 'ห้องทำงาน', 'hall': 'โถงทางเดิน'}
+WALL = (66, 58, 70); BACK = (226, 212, 184); LOW = (150, 110, 70); THING = (120, 92, 70)
 
-# every plan: rooms = [kind, x0, y0, x1, y1] inclusive tiles · walls = full walls (solid) · low = half walls / play-pen fence (solid, see over) ·
-# doors = gaps in a wall line · things = [label, x, y] where the big fixed things go · stairs = [x0, y0, x1, y1]
+def base(W, H, upper, lower, extra_walls=(), low=(), things=(), stairs=None, door=None, title='', pid=''):
+    # upper = [(kind, x0, x1, open)] rooms along the back wall, rows 3..6; a wall column stands between neighbours; open=True means no wall toward the hall
+    rooms = []; walls = []; x_prev_end = None
+    for k, x0, x1, opn, doorx in upper:
+        rooms.append([k, x0, 3, x1, 6 if not opn else 7])
+        if not opn:
+            for x in range(x0, x1 + 1):
+                if doorx is None or x not in (doorx, doorx + 1): walls.append([x, 7, x, 7])
+                else: rooms.append(['hall', x, 7, x, 7])
+    xs = sorted((x0, x1) for _, x0, x1, _, _ in upper)
+    for (a0, a1), (b0, b1) in zip(xs, xs[1:]):
+        for x in range(a1 + 1, b0): walls.append([x, 3, x, 7])
+    rooms.append(['hall', 1, 8, W - 2, 9])
+    for k, x0, y0, x1, y1 in lower: rooms.append([k, x0, y0, x1, y1])
+    return {'id': pid, 'title': title, 'W': W, 'H': H, 'door': door, 'rooms': rooms, 'walls': walls + [list(w) for w in extra_walls], 'low': [list(l) for l in low], 'things': [list(t) for t in things], 'stairs': stairs}
+
 PLANS = [
- {'id': 'L1', 'title': 'ขั้น 1 · บ้านชั้นเดียว (14×10 ช่อง)', 'W': 14, 'H': 10, 'door': 7,
-  'rooms': [['bath', 1, 3, 3, 5], ['bed', 5, 3, 8, 5], ['kitchen', 10, 3, 12, 5], ['living', 4, 6, 12, 8], ['living', 1, 7, 3, 8], ['living', 9, 5, 9, 5], ['living', 4, 5, 4, 5]],
-  'walls': [[4, 3, 4, 4], [1, 6, 3, 6]], 'low': [[9, 3, 9, 4]],
-  'things': [['อ่าง', 1, 3], ['เตียง', 5, 3], ['เตา', 11, 3], ['โซฟา', 8, 6], ['โต๊ะ', 11, 7]], 'stairs': None, 'windows': [2, 6.5, 11]},
- {'id': 'L2', 'title': 'ขั้น 2 · บ้านชั้นเดียว ขยาย (18×11 ช่อง)', 'W': 18, 'H': 11, 'door': 9,
-  'rooms': [['bath', 1, 3, 3, 5], ['book', 1, 7, 4, 9], ['bed', 5, 3, 7, 5], ['kitchen', 9, 3, 11, 5], ['living', 5, 6, 11, 9], ['living', 8, 5, 8, 5], ['living', 4, 5, 4, 6], ['living', 12, 7, 12, 7], ['ball', 13, 3, 16, 9]],
-  'walls': [[4, 3, 4, 4], [1, 6, 3, 6]], 'low': [[8, 3, 8, 4], [12, 3, 12, 6], [12, 8, 12, 9]],
-  'things': [['อ่าง', 1, 3], ['ชั้นหนังสือ', 1, 7], ['เตียง', 5, 3], ['เตา', 10, 3], ['โซฟา', 8, 7], ['สไลเดอร์', 15, 3], ['บอลหลายสี', 13, 8]], 'stairs': None, 'windows': [2, 6, 10, 14.5]},
- {'id': 'L3a', 'title': 'ขั้น 3 · บ้านสองชั้น · ชั้นล่าง (22×12 ช่อง)', 'W': 22, 'H': 12, 'door': 11,
-  'rooms': [['bath', 1, 3, 3, 5], ['book', 1, 7, 4, 10], ['bed', 5, 3, 8, 5], ['kitchen', 10, 3, 12, 5], ['living', 5, 6, 14, 10], ['living', 9, 5, 9, 5], ['living', 4, 5, 4, 6], ['living', 13, 5, 14, 5], ['living', 15, 8, 15, 8], ['ball', 16, 3, 20, 10]],
-  'walls': [[4, 3, 4, 4], [1, 6, 3, 6]], 'low': [[9, 3, 9, 4], [15, 3, 15, 7], [15, 9, 15, 10]],
-  'things': [['อ่าง', 1, 3], ['ชั้นหนังสือ', 1, 7], ['เตียง', 5, 3], ['เตา', 11, 3], ['โซฟา', 9, 8], ['สไลเดอร์', 19, 3], ['บอลหลายสี', 16, 9]], 'stairs': [13, 3, 14, 4], 'windows': [2, 6.5, 11, 18]},
- {'id': 'L3b', 'title': 'ขั้น 3 · บ้านสองชั้น · ชั้นบน (22×12 ช่อง)', 'W': 22, 'H': 12, 'door': None,
-  'rooms': [['bed', 1, 3, 6, 6], ['bath', 1, 8, 3, 10], ['work', 16, 3, 20, 6], ['hall', 8, 3, 14, 7], ['hall', 5, 8, 20, 10], ['hall', 15, 6, 15, 7], ['hall', 16, 7, 20, 7], ['hall', 7, 6, 7, 6], ['hall', 4, 9, 4, 9]],
-  'walls': [[7, 3, 7, 5], [1, 7, 7, 7], [4, 8, 4, 8], [4, 10, 4, 10], [15, 3, 15, 5]], 'low': [],
-  'things': [['เตียงคู่', 2, 3], ['อ่าง', 1, 8], ['โต๊ะทำงาน', 18, 3], ['โซฟา', 10, 9], ['พรม', 10, 5]], 'stairs': [13, 3, 14, 4], 'windows': [3.5, 10, 18]},
+ base(22, 15, pid='L1', title='ขั้น 1 · บ้านชั้นเดียว (22×15 ช่อง)', door=(10, 11),
+   upper=[('bath', 1, 4, False, 2), ('bed', 6, 12, False, 8), ('kitchen', 14, 20, True, None)],
+   lower=[('living', 1, 10, 20, 13)],
+   things=[('อ่าง', 1, 3, 2, 3), ('อ่างล้างหน้า', 4, 3, 4, 3), ('เตียง', 6, 3, 7, 4), ('ตู้', 11, 3, 12, 3), ('เตา', 14, 3, 15, 3), ('เคาน์เตอร์', 16, 3, 19, 3), ('โต๊ะกินข้าว', 14, 5, 15, 6),
+           ('ชั้น', 1, 10, 1, 11), ('โซฟา', 3, 11, 5, 11), ('พรม+โต๊ะ', 3, 13, 5, 13), ('ต้นไม้', 20, 13, 20, 13), ('ของเล่น', 17, 12, 18, 13)]),
+ base(30, 16, pid='L2', title='ขั้น 2 · ชั้นเดียว ขยาย (30×16 ช่อง)', door=(10, 11),
+   upper=[('bath', 1, 4, False, 2), ('bed', 6, 12, False, 8), ('kitchen', 14, 20, True, None), ('book', 22, 28, False, 24)],
+   lower=[('living', 1, 10, 16, 14), ('ball', 19, 11, 28, 14), ('hall', 17, 10, 17, 14), ('hall', 22, 10, 23, 10)],
+   low=[(18, 10, 18, 14), (19, 10, 21, 10), (24, 10, 28, 10)],
+   things=[('อ่าง', 1, 3, 2, 3), ('อ่างล้างหน้า', 4, 3, 4, 3), ('เตียง', 6, 3, 7, 4), ('ตู้', 11, 3, 12, 3), ('เตา', 14, 3, 15, 3), ('เคาน์เตอร์', 16, 3, 19, 3), ('โต๊ะกินข้าว', 14, 5, 15, 6),
+           ('ชั้นหนังสือ', 22, 3, 27, 3), ('เก้าอี้อ่าน', 27, 5, 28, 6), ('ชั้น', 1, 10, 1, 11), ('โซฟา', 3, 11, 5, 11), ('พรม+โต๊ะ', 3, 13, 5, 13), ('ของเล่น', 13, 13, 14, 14), ('สไลเดอร์', 26, 11, 28, 12)]),
+ base(30, 16, pid='L3a', title='ขั้น 3 · สองชั้น · ชั้นล่าง (30×16 ช่อง)', door=(10, 11), stairs=[19, 3, 20, 5],
+   upper=[('bath', 1, 4, False, 2), ('bed', 6, 12, False, 8), ('kitchen', 14, 20, True, None), ('book', 22, 28, False, 24)],
+   lower=[('living', 1, 10, 16, 14), ('ball', 19, 11, 28, 14), ('hall', 17, 10, 17, 14), ('hall', 22, 10, 23, 10)],
+   low=[(18, 10, 18, 14), (19, 10, 21, 10), (24, 10, 28, 10)],
+   things=[('อ่าง', 1, 3, 2, 3), ('อ่างล้างหน้า', 4, 3, 4, 3), ('เตียง', 6, 3, 7, 4), ('ตู้', 11, 3, 12, 3), ('เตา', 14, 3, 15, 3), ('เคาน์เตอร์', 16, 3, 18, 3), ('โต๊ะกินข้าว', 14, 5, 15, 6),
+           ('ชั้นหนังสือ', 22, 3, 27, 3), ('เก้าอี้อ่าน', 27, 5, 28, 6), ('ชั้น', 1, 10, 1, 11), ('โซฟา', 3, 11, 5, 11), ('พรม+โต๊ะ', 3, 13, 5, 13), ('ของเล่น', 13, 13, 14, 14), ('สไลเดอร์', 26, 11, 28, 12)]),
+ base(30, 16, pid='L3b', title='ขั้น 3 · สองชั้น · ชั้นบน (30×16 ช่อง)', door=None, stairs=[19, 3, 20, 5],
+   upper=[('bed', 1, 9, False, 4), ('bath', 11, 14, False, 12), ('hall', 16, 20, True, None), ('work', 22, 28, False, 24)],
+   lower=[('living', 1, 10, 28, 14)],
+   things=[('เตียงคู่', 1, 3, 3, 4), ('ตู้เสื้อผ้า', 7, 3, 9, 3), ('โต๊ะข้างเตียง', 4, 3, 4, 3), ('อ่าง', 11, 3, 12, 3), ('อ่างล้างหน้า', 14, 3, 14, 3), ('โต๊ะทำงาน', 22, 3, 24, 3), ('ชั้น', 27, 3, 28, 3), ('เก้าอี้', 23, 5, 23, 5),
+           ('โซฟาใหญ่', 4, 11, 7, 11), ('พรม+โต๊ะ', 4, 13, 7, 13), ('โต๊ะเกม', 10, 12, 11, 13), ('ชั้น', 28, 10, 28, 12), ('ต้นไม้', 1, 14, 1, 14), ('เบาะนั่ง', 21, 13, 23, 14)]),
 ]
+NAME_UP = {'L3b': {'living': 'ส่วนกลางนั่งเล่น'}}
 
-def draw(pl):
-    W, H = pl['W'], pl['H']; im = Image.new('RGB', (W * C + 2, H * C + 2 + 50), (250, 247, 240)); d = ImageDraw.Draw(im); oy = 50
-    d.text((4, 4), pl['title'], font=f_title, fill=(40, 30, 60))
-    R = lambda x0, y0, x1, y1, c: d.rectangle((x0 * C, oy + y0 * C, (x1 + 1) * C - 1, oy + (y1 + 1) * C - 1), fill=c)
-    R(0, 0, W - 1, H - 1, WALL); R(1, 0, W - 2, 2, BACK)
-    R(1, 3, W - 2, H - 2, (205, 190, 170))                       # any floor not given to a room
-    for k, x0, y0, x1, y1 in pl['rooms']: R(x0, y0, x1, y1, COL[k])
-    for x0, y0, x1, y1 in pl['walls']: R(x0, y0, x1, y1, WALL)
-    for x0, y0, x1, y1 in pl['low']:
-        R(x0, y0, x1, y1, LOW)
-        for yy in range(y0, y1 + 1):
-            for xx in range(x0, x1 + 1): d.line((xx * C + 6, oy + yy * C + C // 2, (xx + 1) * C - 6, oy + yy * C + C // 2), fill=(240, 220, 180), width=4)
-    for wx in pl['windows']: d.rectangle((wx * C - 26, oy + 1.0 * C, wx * C + 26, oy + 2.4 * C), fill=(150, 200, 236), outline=(110, 80, 50), width=3)
-    if pl['stairs']:
-        x0, y0, x1, y1 = pl['stairs']; R(x0, y0, x1, y1, (170, 130, 90))
-        for i in range(6): yy = oy + y0 * C + i * ((y1 - y0 + 1) * C) / 6; d.line((x0 * C + 3, yy, (x1 + 1) * C - 3, yy), fill=(110, 80, 50), width=2)
-        d.text((x0 * C + 6, oy + (y1 + 1) * C - 26), 'บันได', font=f_small, fill=(60, 40, 20))
-    if pl['door'] is not None:
-        R(pl['door'], H - 1, pl['door'], H - 1, (150, 104, 60)); d.text((pl['door'] * C - 14, oy + (H - 1) * C + 10), 'ประตูบ้าน', font=f_small, fill=(255, 255, 255))
-    for x in range(W + 1): d.line((x * C, oy, x * C, oy + H * C), fill=(0, 0, 0, 40) if False else (120, 110, 110), width=1)
-    for y in range(H + 1): d.line((0, oy + y * C, W * C, oy + y * C), fill=(120, 110, 110), width=1)
-    big = {}; tot = {}                                            # one label per room, on its biggest rectangle; the size shown is the whole room
-    for k, x0, y0, x1, y1 in pl['rooms']:
-        a = (x1 - x0 + 1) * (y1 - y0 + 1); tot[k] = tot.get(k, 0) + a
-        if k not in big or a > big[k][0]: big[k] = (a, x0, y0, x1, y1)
-    for k, (a, x0, y0, x1, y1) in big.items():
-        t = NAME[k]; w = d.textlength(t, font=f_room); cx = (x0 + x1 + 1) / 2 * C; cy = oy + (y0 + y1 + 1) / 2 * C + 6
-        s2 = '%d ช่อง' % tot[k]; w2 = d.textlength(s2, font=f_small); ww = max(w, w2)
-        d.rectangle((cx - ww / 2 - 6, cy - 4, cx + ww / 2 + 6, cy + 44), fill=(255, 255, 255)); d.text((cx - w / 2, cy - 4), t, font=f_room, fill=(40, 30, 60)); d.text((cx - w2 / 2, cy + 21), s2, font=f_small, fill=(90, 80, 100))
-    for lab, x, y in pl['things']:
-        w = d.textlength(lab, font=f_small); d.rounded_rectangle((x * C + 3, oy + y * C + 5, x * C + 11 + w, oy + y * C + 30), 5, fill=(70, 50, 90)); d.text((x * C + 7, oy + y * C + 6), lab, font=f_small, fill=(255, 240, 200))
-    return im
-
-ims = [draw(p) for p in PLANS]; Wm = max(i.width for i in ims) + 20; Hs = sum(i.height + 24 for i in ims) + 110
-S = Image.new('RGB', (Wm, Hs), (250, 247, 240)); d = ImageDraw.Draw(S); y = 10
-for i in ims: S.paste(i, (10, y)); y += i.height + 24
-lx = 10
-for k in ('bath', 'bed', 'living', 'kitchen', 'book', 'ball', 'work', 'hall'):
-    d.rectangle((lx, y, lx + 26, y + 26), fill=COL[k], outline=(90, 80, 90)); d.text((lx + 32, y - 2), NAME[k], font=f_small, fill=(40, 30, 60)); lx += 46 + d.textlength(NAME[k], font=f_small)
-y += 40; d.rectangle((10, y, 36, y + 26), fill=WALL); d.text((42, y - 2), 'ผนังเต็ม (มองไม่เห็นข้าม)', font=f_small, fill=(40, 30, 60))
-d.rectangle((300, y, 326, y + 26), fill=LOW); d.line((304, y + 13, 322, y + 13), fill=(240, 220, 180), width=4); d.text((332, y - 2), 'ผนังเตี้ย / รั้วคอกบอล (เดินผ่านไม่ได้ มองข้ามได้)', font=f_small, fill=(40, 30, 60))
-S.save('house-layouts.png'); json.dump(PLANS, open('layouts.json', 'w', encoding='utf8'), ensure_ascii=False); print(S.size)
-# checks a picture cannot show: can every room be walked to from the front door / the stairs?
-for p in PLANS:
+def cells(r): return [(x, y) for x in range(r[0], r[2] + 1) for y in range(r[1], r[3] + 1)]
+def analyse(p):
     W, H = p['W'], p['H']; solid = set()
-    for x0, y0, x1, y1 in p['walls'] + p['low']:
-        for yy in range(y0, y1 + 1):
-            for xx in range(x0, x1 + 1): solid.add((xx, yy))
-    if p['stairs']:
-        x0, y0, x1, y1 = p['stairs']
-        for yy in range(y0, y1 + 1):
-            for xx in range(x0, x1 + 1): solid.add((xx, yy))
+    for r in p['walls'] + p['low']: solid.update(cells(r))
+    if p['stairs']: solid.update(cells(p['stairs']))
+    furn = set()
+    for t in p['things']: furn.update(cells(t[1:]))
     floor = {(x, y) for x in range(1, W - 1) for y in range(3, H - 1)} - solid
-    start = (p['door'], H - 2) if p['door'] is not None else (p['stairs'][0], p['stairs'][3] + 1)
-    seen = {start}; q = [start]
+    free = floor - furn
+    start = (p['door'][0], H - 2) if p['door'] else (p['stairs'][0], p['stairs'][3] + 1)
+    seen = {start} if start in free else set(); q = list(seen)
     while q:
         x, y = q.pop()
         for n in ((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)):
-            if n in floor and n not in seen: seen.add(n); q.append(n)
-    cut = {}
+            if n in free and n not in seen: seen.add(n); q.append(n)
+    wide = {c for c in free if any(all((c[0] + dx + i, c[1] + dy + j) in free for i in (0, 1) for j in (0, 1)) for dx in (-1, 0) for dy in (-1, 0))}
+    kind = {}
     for k, x0, y0, x1, y1 in p['rooms']:
-        t = [(x, y) for x in range(x0, x1 + 1) for y in range(y0, y1 + 1) if (x, y) in floor]; r = sum(1 for c in t if c in seen)
-        cut[k] = cut.get(k, [0, 0]); cut[k][0] += r; cut[k][1] += len(t)
-    area = {k: v[1] for k, v in cut.items()}
-    print(p['id'], 'floor tiles', len(floor), '| reachable', len(seen), '| unreachable', len(floor) - len(seen), '| room tiles', area, '| stairs foot free' if p['stairs'] and (p['stairs'][0], p['stairs'][3] + 1) in floor else '')
+        for c in cells((x0, y0, x1, y1)): kind[c] = k
+    hall = {c for c in free if kind.get(c) == 'hall'}
+    area = {}
+    for c in floor: area[kind.get(c, '?')] = area.get(kind.get(c, '?'), 0) + 1
+    doors = []                                                    # runs of open tiles in the wall row (y=7) that have wall on both sides
+    x = 1
+    while x < W - 1:
+        if (x, 7) in floor and (x - 1, 7) in solid:
+            x1 = x
+            while (x1 + 1, 7) in floor: x1 += 1
+            if (x1 + 1, 7) in solid: doors.append(x1 - x + 1)
+            x = x1 + 1
+        else: x += 1
+    return {'floor': len(floor), 'furniture': len(furn & floor), 'free': len(free), 'reach': len(seen), 'two_wide': len(wide), 'hall': len(hall), 'hall_two_wide': len(hall & wide), 'doors': doors, 'area': area}
+
+def draw(p, st):
+    W, H = p['W'], p['H']; im = Image.new('RGB', (W * C + 2, H * C + 2 + 44), (250, 247, 240)); d = ImageDraw.Draw(im); oy = 44
+    d.text((4, 2), p['title'], font=f_title, fill=(40, 30, 60))
+    R = lambda r, c: d.rectangle((r[0] * C, oy + r[1] * C, (r[2] + 1) * C - 1, oy + (r[3] + 1) * C - 1), fill=c)
+    R((0, 0, W - 1, H - 1), WALL); R((1, 0, W - 2, 2), BACK); R((1, 3, W - 2, H - 2), COL['hall'])
+    for k, x0, y0, x1, y1 in p['rooms']: R((x0, y0, x1, y1), COL[k])
+    for r in p['walls']: R(r, WALL)
+    for r in p['low']:
+        R(r, LOW)
+        for (x, y) in cells(r): d.line((x * C + 5, oy + y * C + C // 2, (x + 1) * C - 5, oy + y * C + C // 2), fill=(240, 220, 180), width=3)
+    if p['stairs']:
+        x0, y0, x1, y1 = p['stairs']; R(p['stairs'], (170, 130, 90))
+        for i in range(8): yy = oy + y0 * C + i * ((y1 - y0 + 1) * C) / 8; d.line((x0 * C + 3, yy, (x1 + 1) * C - 3, yy), fill=(110, 80, 50), width=2)
+        d.text((x0 * C + 12, oy + (y1 + 1) * C - 20), 'บันได', font=f_small, fill=(50, 30, 10))
+    if p['door']:
+        R((p['door'][0], H - 1, p['door'][1], H - 1), (150, 104, 60)); d.text((p['door'][0] * C + 4, oy + (H - 1) * C + 8), 'ประตูบ้าน', font=f_small, fill=(255, 255, 255))
+    for x in range(W + 1): d.line((x * C, oy, x * C, oy + H * C), fill=(150, 140, 140), width=1)
+    for y in range(H + 1): d.line((0, oy + y * C, W * C, oy + y * C), fill=(150, 140, 140), width=1)
+    for t in p['things']:
+        lab, x0, y0, x1, y1 = t; d.rounded_rectangle((x0 * C + 3, oy + y0 * C + 3, (x1 + 1) * C - 3, oy + (y1 + 1) * C - 3), 5, fill=THING, outline=(60, 40, 30), width=2)
+        w = d.textlength(lab, font=f_tiny); cx = (x0 + x1 + 1) / 2 * C; cy = oy + (y0 + y1 + 1) / 2 * C
+        if w < (x1 - x0 + 1) * C - 4: d.text((cx - w / 2, cy - 9), lab, font=f_tiny, fill=(255, 240, 210))
+        else: d.rectangle((cx - w / 2 - 2, cy + C / 2 - 2, cx + w / 2 + 2, cy + C / 2 + 14), fill=(255, 255, 255)); d.text((cx - w / 2, cy + C / 2 - 3), lab, font=f_tiny, fill=(60, 40, 30))
+    big = {}
+    for k, x0, y0, x1, y1 in p['rooms']:
+        a = (x1 - x0 + 1) * (y1 - y0 + 1)
+        if k != 'hall' and (k not in big or a > big[k][0]): big[k] = (a, x0, y0, x1, y1)
+    for k, (a, x0, y0, x1, y1) in big.items():
+        t = NAME_UP.get(p['id'], {}).get(k, NAME[k]); s2 = '%d ช่อง' % st['area'].get(k, 0); w = d.textlength(t, font=f_room); w2 = d.textlength(s2, font=f_small); ww = max(w, w2)
+        cx = (x0 + x1 + 1) / 2 * C; cy = oy + (y0 + y1 + 1) / 2 * C + 4
+        d.rectangle((cx - ww / 2 - 5, cy - 3, cx + ww / 2 + 5, cy + 38), fill=(255, 255, 255)); d.text((cx - w / 2, cy - 4), t, font=f_room, fill=(40, 30, 60)); d.text((cx - w2 / 2, cy + 18), s2, font=f_small, fill=(90, 80, 100))
+    hx = (W // 2 + 4) * C; d.text((hx, oy + 8 * C + 14), 'โถงทางเดิน กว้าง 2 ช่อง', font=f_small, fill=(110, 90, 60))
+    return im
+
+stats = [analyse(p) for p in PLANS]; ims = [draw(p, s) for p, s in zip(PLANS, stats)]
+Wm = max(i.width for i in ims) + 20; S = Image.new('RGB', (Wm, sum(i.height + 20 for i in ims) + 84), (250, 247, 240)); d = ImageDraw.Draw(S); y = 10
+for i in ims: S.paste(i, (10, y)); y += i.height + 20
+lx = 10
+for k in ('bath', 'bed', 'living', 'kitchen', 'book', 'ball', 'work', 'hall'):
+    d.rectangle((lx, y, lx + 22, y + 22), fill=COL[k], outline=(90, 80, 90)); d.text((lx + 27, y - 1), NAME[k], font=f_small, fill=(40, 30, 60)); lx += 40 + d.textlength(NAME[k], font=f_small)
+y += 32; d.rectangle((10, y, 32, y + 22), fill=WALL); d.text((38, y - 1), 'ผนังเต็ม', font=f_small, fill=(40, 30, 60)); d.rectangle((130, y, 152, y + 22), fill=LOW); d.text((158, y - 1), 'รั้วคอกบอลเตี้ย', font=f_small, fill=(40, 30, 60))
+d.rounded_rectangle((300, y, 322, y + 22), 4, fill=THING); d.text((328, y - 1), 'ของชิ้นใหญ่ วาดตามขนาดจริง (เดินทับไม่ได้)', font=f_small, fill=(40, 30, 60))
+S.save('house-layouts-2.png'); json.dump(PLANS, open('layouts2.json', 'w', encoding='utf8'), ensure_ascii=False); print(S.size)
+for p, s in zip(PLANS, stats):
+    print(p['id'], '| floor', s['floor'], '| furniture', s['furniture'], '| free to walk', s['free'], '(%d%%)' % round(100 * s['free'] / s['floor']), '| reachable', s['reach'], '| free tiles that sit in a 2x2 clear patch', s['two_wide'], '(%d%%)' % round(100 * s['two_wide'] / s['free']),
+          '| hall', s['hall'], 'of which 2 wide', s['hall_two_wide'], '| door widths', s['doors'], '| rooms', {k: v for k, v in s['area'].items() if k != 'hall'})
