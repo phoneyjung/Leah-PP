@@ -1,5 +1,5 @@
 // test_decor_demo.js — เปิดหน้าลองแต่งห้องบนจอมือถือ แตะจริง แล้วนับผล · ต้องเปิดเซิร์ฟเวอร์ที่โฟลเดอร์นี้ก่อน (python3 -m http.server 8791)
-const p=require('/home/claude/.npm-global/lib/node_modules/@mermaid-js/mermaid-cli/node_modules/puppeteer');
+const p=(()=>{try{return require('puppeteer')}catch(e){return require('/home/claude/.npm-global/lib/node_modules/@mermaid-js/mermaid-cli/node_modules/puppeteer')}})();
 (async()=>{const b=await p.launch({executablePath:'/home/claude/.cache/puppeteer/chrome/linux-131.0.6778.204/chrome-linux64/chrome',args:['--no-sandbox']});
 const pg=await b.newPage();await pg.setViewport({width:390,height:844,isMobile:true,hasTouch:true,deviceScaleFactor:2});const errs=[];pg.on('pageerror',e=>errs.push(e.message));
 await pg.goto('http://localhost:8791/decor-demo.html',{waitUntil:'networkidle0'});

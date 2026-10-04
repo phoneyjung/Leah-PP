@@ -1,6 +1,6 @@
 // test_138_deco.js — รุ่น 1.38: จัดบ้านแบบใหม่ · เลือก ย้าย หมุน 4 ทิศ เก็บ หยิบออก · กติกากันวางผิดที่ · จำหลังโหลดใหม่ · PORT=... CHROME_EXE=...
-const p=require('/home/claude/.npm-global/lib/node_modules/@mermaid-js/mermaid-cli/node_modules/puppeteer');
-(async()=>{const b=await p.launch({executablePath:process.env.CHROME_EXE||'/home/claude/.cache/puppeteer/chrome/linux-131.0.6778.204/chrome-linux64/chrome',args:['--no-sandbox']});
+const p=(()=>{try{return require('puppeteer')}catch(e){return require('/home/claude/.npm-global/lib/node_modules/@mermaid-js/mermaid-cli/node_modules/puppeteer')}})();
+(async()=>{const b=await p.launch({executablePath:process.env.CHROME_EXE||undefined,args:['--no-sandbox']});
 const pg=await b.newPage();await pg.setViewport({width:1000,height:640,isMobile:true,hasTouch:true,deviceScaleFactor:1});const errs=[];pg.on('pageerror',e=>errs.push(e.message));
 const boot=async(clear)=>{await pg.goto('http://localhost:'+(process.env.PORT||8775)+'/?gm',{waitUntil:'load'});if(clear){await pg.evaluate(()=>localStorage.clear());await pg.reload({waitUntil:'load'})}await new Promise(r=>setTimeout(r,6000));
  await pg.evaluate(async(clear)=>{const sleep=ms=>new Promise(r=>setTimeout(r,ms));gmMakeSlot();const d=Store.all();S=d.slots[d.cur];startGame();await sleep(1500);document.querySelectorAll('#cr,#title,#picker').forEach(e=>e.classList.add('hide'));fpsChecks=6;goMap('room');await sleep(1200);try{closeModal()}catch(e){}DLG=null;PAUSE=false;HOLD=null;P.x=13*T;P.y=10.5*T;P.path=null;await sleep(400)},clear)};

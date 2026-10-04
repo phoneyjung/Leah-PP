@@ -1,5 +1,5 @@
 // test_129_layout.js — รุ่น 1.29: ปุ่มกลมเฉพาะจอสัมผัส · บลิ๊งเหนือสกิล · ช่องสกิล 3 ช่อง · สมาธิแทนออโต้ · ลุกจากม้านั่งด้วยจอย · คอมพิวเตอร์ใช้แถบปุ่มเดิม · PORT=... CHROME_EXE=...
-const p=require('/home/claude/.npm-global/lib/node_modules/@mermaid-js/mermaid-cli/node_modules/puppeteer');
+const p=(()=>{try{return require('puppeteer')}catch(e){return require('/home/claude/.npm-global/lib/node_modules/@mermaid-js/mermaid-cli/node_modules/puppeteer')}})();
 const boot=async(pg)=>{await pg.goto('http://localhost:'+(process.env.PORT||8775)+'/?gm',{waitUntil:'load'});await pg.evaluate(()=>localStorage.clear());await pg.reload({waitUntil:'load'});await new Promise(r=>setTimeout(r,6000));
  return pg.evaluate(async()=>{const sleep=ms=>new Promise(r=>setTimeout(r,ms));gmMakeSlot();const d=Store.all();S=d.slots[d.cur];delete S.joy;startGame();await sleep(1500);document.querySelectorAll('#cr,#title,#picker').forEach(e=>e.classList.add('hide'));fpsChecks=6;GM.hour=10;goMap('farm');await sleep(1500);
   try{for(let i=0;i<12&&DLG;i++){if(typeof dlgNext==='function')dlgNext();else DLG=null;await sleep(150)}DLG=null;PAUSE=false}catch(e){}document.querySelectorAll('#dlg').forEach(e=>e.classList.add('hide'));await sleep(800);
@@ -7,7 +7,7 @@ const boot=async(pg)=>{await pg.goto('http://localhost:'+(process.env.PORT||8775
   let ov=[];for(let i=0;i<B.length;i++)for(let j=i+1;j<B.length;j++){const a=B[i],c=B[j];if(a.x<c.x+c.w&&c.x<a.x+a.w&&a.y<c.y+c.h&&c.y<a.y+a.h&&Math.hypot(a.x+a.w/2-c.x-c.w/2,a.y+a.h/2-c.y-c.h/2)<(a.w+c.w)/2-1)ov.push(a.id+'/'+c.id)}
   const mm=document.getElementById('mmw'),mr=mm?mm.getBoundingClientRect():null,j=document.getElementById('joy'),jr=j.getBoundingClientRect();window._jc=[jr.left+56,jr.top+56];
   return{version:VERSION,thumbs:document.body.classList.contains('thumbs'),buttons:B.map(q=>q.id+'('+q.word+') '+q.w+' @'+q.x+','+q.y+(q.round?' round':' square')),overlapping:ov,allOnScreen:B.every(q=>q.x>=0&&q.y>=0&&q.x+q.w<=innerWidth&&q.y+q.h<=innerHeight),underMinimap:mr?B.filter(q=>q.y<mr.bottom&&q.x+q.w>mr.left&&q.y+q.h>mr.top).map(q=>q.id):[],stickShowing:!j.classList.contains('hide')&&jr.width>0}})};
-(async()=>{const b=await p.launch({executablePath:process.env.CHROME_EXE||'/home/claude/.cache/puppeteer/chrome/linux-131.0.6778.204/chrome-linux64/chrome',args:['--no-sandbox']});const out={};const errs=[];
+(async()=>{const b=await p.launch({executablePath:process.env.CHROME_EXE||undefined,args:['--no-sandbox']});const out={};const errs=[];
 // a phone
 let pg=await b.newPage();await pg.setViewport({width:812,height:330,isMobile:true,hasTouch:true,deviceScaleFactor:2.6});pg.on('pageerror',e=>errs.push(e.message));out.phone=await boot(pg);
 // sit on a bench by tapping it, then push the stick: the player must stand up and walk

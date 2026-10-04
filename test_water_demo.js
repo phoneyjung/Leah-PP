@@ -1,6 +1,6 @@
 // test_water_demo.js — ทดสอบ water-demo.html (ลมพัดต้นไม้ 3 ระดับ · น้ำขยับ · ใบบัว · เงาปลา) ด้วยเบราว์เซอร์จริงขนาดมือถือ
 // เปิดเซิร์ฟเวอร์ที่โฟลเดอร์ที่มีไฟล์ก่อน: python3 -m http.server 8777   (PORT=... เปลี่ยนพอร์ต)
-const p=require('/home/claude/.npm-global/lib/node_modules/@mermaid-js/mermaid-cli/node_modules/puppeteer');
+const p=(()=>{try{return require('puppeteer')}catch(e){return require('/home/claude/.npm-global/lib/node_modules/@mermaid-js/mermaid-cli/node_modules/puppeteer')}})();
 (async()=>{const b=await p.launch({executablePath:'/home/claude/.cache/puppeteer/chrome/linux-131.0.6778.204/chrome-linux64/chrome',args:['--no-sandbox']});
 const pg=await b.newPage();await pg.setViewport({width:390,height:844,isMobile:true,hasTouch:true,deviceScaleFactor:2});const errs=[];pg.on('pageerror',e=>errs.push(e.message));
 await pg.goto('http://localhost:'+(process.env.PORT||8777)+'/water-demo.html',{waitUntil:'load'});await new Promise(r=>setTimeout(r,2000));

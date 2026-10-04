@@ -1,6 +1,6 @@
 // test_132_install.js — รุ่น 1.32: กดปุ่มติดตั้งตอนถือเครื่องแนวตั้งแล้วต้องเห็นแผ่นวิธีติดตั้ง (อยู่เหนือหน้าจอ "หมุนจอ") · PORT=... CHROME_EXE=...
-const p=require('/home/claude/.npm-global/lib/node_modules/@mermaid-js/mermaid-cli/node_modules/puppeteer');
-(async()=>{const b=await p.launch({executablePath:process.env.CHROME_EXE||'/home/claude/.cache/puppeteer/chrome/linux-131.0.6778.204/chrome-linux64/chrome',args:['--no-sandbox']});const errs=[],out={};
+const p=(()=>{try{return require('puppeteer')}catch(e){return require('/home/claude/.npm-global/lib/node_modules/@mermaid-js/mermaid-cli/node_modules/puppeteer')}})();
+(async()=>{const b=await p.launch({executablePath:process.env.CHROME_EXE||undefined,args:['--no-sandbox']});const errs=[],out={};
 for(const [name,w,h] of [['upright',360,760],['sideways',812,330]]){const pg=await b.newPage();await pg.setViewport({width:w,height:h,isMobile:true,hasTouch:true,deviceScaleFactor:3});pg.on('pageerror',e=>errs.push(e.message));
  await pg.goto('http://localhost:'+(process.env.PORT||8775)+'/',{waitUntil:'load'});await pg.evaluate(()=>localStorage.clear());await pg.reload({waitUntil:'load'});await new Promise(r=>setTimeout(r,4500));
  const o=await pg.evaluate(()=>{const rot=document.getElementById('rot'),btn=document.getElementById('instTitle'),r=btn.getBoundingClientRect();INSTALL_EVT=null;   // as on the owner's phone: Chrome offered no install window

@@ -1,5 +1,5 @@
 // test_107_h9.js — ทดสอบฉาก H9 หมู่บ้านพาเพลิน (ฉากใหม่) ในเกมจริง · เปิดเซิร์ฟเวอร์ก่อน: python3 -m http.server 8775 · PORT=... เปลี่ยนพอร์ต · อาร์กิวเมนต์ nopic = ทดสอบโฟลเดอร์ที่ไม่มีภาพ H9
-const p=require('/home/claude/.npm-global/lib/node_modules/@mermaid-js/mermaid-cli/node_modules/puppeteer');const NOPIC=process.argv.includes('nopic');
+const p=(()=>{try{return require('puppeteer')}catch(e){return require('/home/claude/.npm-global/lib/node_modules/@mermaid-js/mermaid-cli/node_modules/puppeteer')}})();const NOPIC=process.argv.includes('nopic');
 (async()=>{const b=await p.launch({executablePath:'/home/claude/.cache/puppeteer/chrome/linux-131.0.6778.204/chrome-linux64/chrome',args:['--no-sandbox']});
 const pg=await b.newPage();await pg.setViewport({width:844,height:390,isMobile:true,hasTouch:true,deviceScaleFactor:2});const errs=[];pg.on('pageerror',e=>errs.push(e.message));
 await pg.goto('http://localhost:'+(process.env.PORT||8775)+'/?gm',{waitUntil:'networkidle0'});await pg.evaluate(()=>localStorage.clear());await pg.reload({waitUntil:'networkidle0'});await new Promise(r=>setTimeout(r,4500));

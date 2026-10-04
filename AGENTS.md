@@ -1,67 +1,63 @@
-# ชื่อเกม: **Lantern Academy (LA)** (ตั้งแต่ 28 ก.ย. 2569 · เดิม "Leah พาเพลิน") · ตัวเกมคือ `index.html` (build.py สร้างให้) · `play.html` เป็นแค่ทางลัดไปหน้าแรก · เกม 2.5D เดิมย้ายไป `old-2.5d.html` · ห้ามเปลี่ยนชื่อ localStorage key `leahpp2d-slots` (เซฟผู้เล่นอยู่ในนั้น)
+# AGENTS.md — Lantern Academy (repo: Leah-PP)
 
-# Leah พาเพลิน (Leah-PP) · คำสั่งประจำโปรเจกต์สำหรับ AI ที่เขียนโค้ด (AGENTS.md สำหรับ Codex · เนื้อหาเดียวกับ CLAUDE.md)
+A 2D pixel-art RPG / farm / home game for the owner's 7-year-old daughter Leah (and adults who like Ragnarok-style games).
+Live: https://phoneyjung.github.io/Leah-PP/ (add `?gm` for the game-master mode used in every test). GitHub Pages serves the `main` branch root.
 
-ไฟล์นี้ให้ Claude Code (และ Codex ผ่าน AGENTS.md) อ่านก่อนเริ่มงานทุกครั้ง
+## The owner, and how to talk to him
+- Reply in **Thai**. He is not a programmer and works mostly from an Android phone; he also play-tests on a Windows PC with a mouse.
+- When something is unclear or a decision is his (design, prices, what a thing should do): **ask before doing**. Offer 2-3 short options.
+- Report with numbers, not adjectives ("walked to 38 of 38 spots", not "should work"). Say plainly what you did not check.
+- Say which files changed. Never rename a file (no `index(1).html`): the game asks for files by exact name.
+- Warn him when: the total download grows a lot (it is about 19 MB now), a feature is too complex for a 7-year-old, or more is being added while Leah has still not play-tested.
 
-## เจ้าของและวิธีคุย
-- เจ้าของใช้มือถือ Android + Chrome · **คุยภาษาไทย** อธิบายง่าย ๆ ไม่ใช้ศัพท์เทคนิคเกินจำเป็น
-- ผู้เล่นหลัก: เด็กนักเรียน 6–12 ปี (ต่อไป 13–18) · เล็งรสนิยมเด็ก 10 ขวบ · เกมไม่มีโฆษณา ไม่มีเงินจริง
-- ทุกครั้งที่ทำเสร็จ: บอกสั้น ๆ ว่าเปลี่ยนอะไร ผลทดสอบเป็นตัวเลข และขั้นต่อไป
+## What the code is
+- **One file: `index.html`** (about 935 KB, vanilla JS + canvas, no build step, no framework). `sw.js` is the offline cache.
+- New work is appended as blocks headed `// ================= 1.NN ...`. Later blocks often **wrap earlier functions** (`const _old=fn; fn=function(){...}`).
+  Consequence, learned the hard way: a handler bound early (`el.onclick=fn`) keeps the OLD function. Bind through an arrow (`el.onclick=()=>fn()`), and test through the real button.
+- Change surgically. Do not refactor or reorder working code.
+- **Every feature that loads a file must have a fallback**: with the file missing the game must still run (no white screen). The suites test this.
+- Release checklist: bump `VERSION` in `index.html`; in `sw.js` bump the cache name (`lantern-vNNN`) and the version text; add every new file name to the list in `sw.js`.
 
-## โครงสร้าง
-- เกมทั้งเกมอยู่ใน `index.html` ไฟล์เดียว (HTML + CSS + JS) · ไม่มี build step · three.js r128 จาก cdnjs
-- ภาพ/ไฟล์ประกอบอยู่ที่ root ทั้งหมด (เจ้าของอัปโฟลเดอร์จากมือถือไม่ได้) · `sw.js` = PWA cache
-- เล่นจริงที่ GitHub Pages จาก branch `main`: https://phoneyjung.github.io/Leah-PP/
-- ไอคอนพิกเซล 17 ชิ้น (A-16) อยู่ใน `icons.png` ตำแหน่งแต่ละชิ้นใน `icons.json` · ยังไม่ได้ใส่ในเกม ใช้แทนอีโมจิในปุ่ม ตัวนับ กระเป๋า ร้าน
-- **ก่อนสร้างหรือแก้ฉากใด ๆ ต้องอ่าน `SCENE_GUIDE.md` และผ่านเช็กลิสต์ข้อ 10** (การวางของให้สมเหตุผล ทางเข้าฝังในภูมิประเทศ ฐานสิ่งก่อสร้าง ของจางเมื่อเดินหลัง เงา จุดวาร์ปแบบ RO/Trickster)
-- ภาพต้นแบบฉาก `concept-*.jpg` (เมือง ถ้ำ 3 แห่ง แห่งละ 3 ชั้น) ดูคำอธิบายใน `SCENE_GUIDE.md` ข้อ 11 · เปิดดูภาพก่อนสร้างฉากนั้น
-- โลกเป็นหลายแผนที่ต่อกัน (เปลี่ยนแมพแบบ RO) มีแผนที่เล็กมุมขวาบน และทางที่ยังปิดไว้ขยายอนาคต ดู `SCENE_GUIDE.md` ข้อ 12–15 (ข้อ 15 = แผนที่โลก เดินเองหรือวาร์ปไปจุดที่เคยไป · พื้นหลัง `map-world.jpg` `map-paphloen.jpg` พร้อมพิกัดจุด) · 3 ถ้ำ = บทที่ 1 ยังไม่จบเกม
-- **ผู้เล่นเล่นเป็นตัวละครของตัวเอง ไม่ใช่ลีอา** (ลีอาและครอบครัวเป็น NPC ผู้ช่วย) · ระบบสร้างตัวละคร (ตัวพื้นฐาน 6 แบบ + เปลี่ยนสีผม/ชุด + หมวกวางทับ) ดู `GDD.md` ข้อ 5.1 และมาตรฐานภาพตัวละครใน `ART_GUIDE.md` · โค้ดวาดตัวละครต้องรองรับเปลี่ยนสีและวางของทับตั้งแต่แรก
-- **เอกลักษณ์ของเกม "เมืองของพวกเรา"** (ทั้งโรงเรียนช่วยกันฟื้นเมือง · 4 บ้าน 4 สี เหลืองทอง/ฟ้า/เขียว/แดง ตราของเราเอง) ดู `GDD.md` ข้อ 1b และ `concept-identity-our-town.jpg`
-- **โครงสร้างฐานข้อมูลออนไลน์และระบบกันล่มอยู่ใน `DATABASE.md`** · แก้โครงสร้างต้องแก้ 3 ที่พร้อมกัน: `DATABASE.md` · `database.rules.json` · `45_net.js`
-- **ก่อนส่งงานที่แตะระบบออนไลน์หรือตัวเลขการต่อสู้ และทุกเดือน: เปิด `RISK_CHECKLIST.md` แล้วตรวจให้ผ่านทุกข้อ** (พับจอ · เมตาสายเดียว ≤15% · ข้อมูลส่วนตัว · กระตุก · บั๊กสุ่ม · P2W · โกง) · บันทึกผลตรวจท้ายไฟล์
-- **ต้นฉบับของเกม 2D อยู่ใน `play-src.zip`** → `unzip play-src.zip` แล้วแก้ที่ `play-src/src/` จากนั้น `python3 play-src/build.py` เพื่อประกอบ `play.html` · **ห้ามแก้ `play.html` ตรง ๆ** · ทดสอบด้วย `python3 play-src/tests/regression.py` (ต้อง errors [])
-- **เกม 2D อยู่ใน `play.html`** (ไฟล์เดียว) · `index.html` คือเกม 3D เดิม ห้ามแก้จนกว่า 2D จะครบ · ส่วนในไฟล์เรียง: รูปและคำ (FILES, TX) → engine (Wang, เงา, A*, แผนที่เล็ก) → แผนที่ (plaza, mountain, cave1–3) → เกม (ผู้เล่น เซฟ มอน ต่อสู้ ของดรอป คริสตัล คำถาม ขุด) → UI (HUD กระเป๋า วาร์ป ตั้งค่า สร้างตัวละคร) → วาดภาพ · เด็ก < 12 ไม่มีเลือด มอนไม่ตี · ผู้ใหญ่มีเลือด ล้มแล้วฟื้นที่ศิลาแสง · เซฟ localStorage `leahpp2d-slots` (หลายผู้เล่นต่อเครื่อง สูงสุด 4 · ย้ายจาก `leahpp2d-v1` อัตโนมัติ) · แผนที่ home (ย่านบ้าน) · กระดานภารกิจรายวัน · สมุดความรู้ · ร้านยายนวล · เป๊บเดินตาม · ท่าพิเศษอาวุธ · เพลง/เสียงสร้างด้วยโค้ด · จอยเสมือน · **ออนไลน์:** `Net` (Firebase Realtime Database, เข้าแบบ Anonymous) เปิดเมื่อ `firebase-config.js` มีค่า · ไม่มีแชทพิมพ์ มีแค่ตำแหน่ง อีโม คะแนนบ้าน · กติกา `database.rules.json` · วิธีตั้งค่า `FIREBASE_SETUP.md` · `Net` คือจุดต่อ Firebase · ทดสอบ: หาเส้นทาง 60/60 ทุกแผนที่ · 60 เฟรม · ไฟล์หายต้องยังเล่นได้
-- **ภาพทุกชิ้นต้องวิจารณ์ก่อนใช้** ตามเกณฑ์ผ่านงานภาพใน `ART_GUIDE.md` (หน้า/ผม/ของบนหัว 9.5+ · ชุด/อุปกรณ์ 8.5+ · ของที่โต้ตอบได้ 8+ · ฉาก 7.5+ · ฉากไกล 7+)
-- เอกสารอ่านประกอบ: `DEV_GUIDE.md` `ART_GUIDE.md` `ART_PLAN_05.md` `PIXELLAB_GUIDE.md` `V1_PLAN.md` `WORLD.md` `GDD.md`
+## Main globals (search for these)
+`M` current map · `P` player · `S` save slot · `HOME` farm+house save (`localStorage['leahpp2d-home']`) · `IMG` loaded pictures · `T`=32 px tile ·
+`MAPS` builders · `CACHE` built maps · `goMap(id,exitId)` · `walkable(m,tx,ty)` · `anyNear()` + `g9bButton()` the big context button ·
+farm: `G9`, `g9b*` functions · house inside: `ROOM2` (data from `furn-plain.json`), `room2Build`, `room2Place`, `DECO2` (arranging), `F2PRICE` (shop), `pitTick` (ball pit), `slideGo`, `pianoOpen`, `bathAct`.
 
-## กติกาที่ต้องทำทุกครั้ง
-1. แก้แบบเจาะจง ไม่รื้อของที่ทำงานอยู่ (ยกเว้นงานที่สั่งให้รื้อ)
-2. ทุกไฟล์ภายนอกต้องมีสำรอง ไฟล์หายเกมต้องเล่นต่อได้ ไม่จอขาว
-3. เพิ่มไฟล์ใหม่ → ใส่ชื่อใน `sw.js` · แก้เกมทุกครั้ง → เปลี่ยนเลข `leahpp-vXX` ใน `sw.js`
-4. ข้อความใหม่ต้องมีทั้งไทย (`T.th`) และอังกฤษ (`T.en`)
-5. ทดสอบก่อนส่งทุกครั้ง: syntax + ชุดทดสอบ Playwright (ดูหัวข้อทดสอบ) รายงานเป็นตัวเลข · เทียบเฟรมเรตกับเวอร์ชันก่อน ห้ามตกเกิน 10%
-6. ดูภาพจริง: ถ่ายภาพหน้าจอขนาดมือถือแนวนอน (844×390) และ iPad (1180×820) ดูเองก่อนบอกว่าเสร็จ
-7. ทำงานใน branch แล้วเปิด PR · อย่า push เข้า `main` ตรง ๆ (เจ้าของกด merge เอง)
+## Running and testing
+```
+npm install            # only for puppeteer
+python3 -m http.server 8775 &
+PORT=8775 node test_148_rings.js      # every suite prints one JSON line, then "errors N"
+npm run test:house     # the house suites        npm run test:farm   # the farm suites
+```
+Set `CHROME_EXE` if puppeteer should use a specific Chrome. The suites from `test_112` on are portable; 11 older ones still name paths of the machine they were written on. A change is not done until the suites it touches print `errors 0` and you have looked at a screenshot.
+Write a new `test_NNN_name.js` for each release; drive the game the way a player does (real clicks/taps), because calling functions directly has hidden bugs before.
 
-## แนวภาพ (ตัดสินแล้ว)
-- แนว 2 "ผู้พิทักษ์แสง": โลกเริ่มสีหม่นอมฟ้า แล้วสว่าง/สีสดขึ้นตามคริสตัลที่ปลุก (ผ่านถ้ำ 3 ครั้ง = สว่างเต็ม)
-- **60-30-10 ทุกเรื่อง** (สี แสง เวลาเล่น หน้าจอ) · จานสีใน `ART_GUIDE.md`
-- แสงฟ้าเรืองใช้กับ "ของที่เก็บได้" (คริสตัลความรู้) เท่านั้น · ของประดับเรืองต้องเป็นเหลือง/ส้ม
-- มอนสเตอร์เท่แต่ไม่น่ากลัว · ห้ามคำ scary evil demonic blood ในพรอมป์ภาพ
-- ภาพทั้งหมดมาจาก PixelLab (ขนาด 32 px = 1 ช่อง) · ถ้าโค้ดวาดได้สวยพอให้โค้ดทำเอง
+## Pictures and the asset pipeline
+- Game pictures are **built by scripts from the `art-*.png` sources. Do not hand-edit the built files.**
+  - House inside: `python3 build_room_assets.py <folder with art-*.png> <folder with the guide scripts and json> <out>` writes
+    `room-L1.jpg room-L2.jpg room-L3b.jpg furn-plain.png furn-plain.json furn-fine.png`. Needs pillow, numpy, opencv-python.
+  - Farm scene: `compose_g9_full.py`, `build_g9_game.py` (see `MAP_PIPELINE.md`).
+- The owner generates pictures himself in ChatGPT. Give him copy-paste prompts, each starting
+  `Make 5 separate images, one after another. Each one must be a brand-new painting, not an edit or a copy of the previous image.`
+  with the files to attach listed above the prompt. Never use the words scary, evil, demonic, blood. Enemies may look strong, never frightening.
+- What worked for house furniture: a **paint-over guide**. Model the piece from small blocks, draw it in the room's own projection
+  (`furniture_guides.py`, `house_step23_guides.py`), have the painter repaint the shapes. The floor is seen from straight above and upright sides at full height,
+  so each piece shows its whole top and the one side facing the viewer. Plain two-tone boxes did NOT work; a guide must already look like the real thing.
+- His pass mark for art is **9.5 / 10** on: camera angle matches the scene · the four views agree · looks good and real · other. Below that: write a new prompt. Measure (overlap with the guide), then look.
 
-## สถานะตอนนี้ (26 ก.ย. 2569)
-- เกม v23 วาดด้วย three.js (ฉาก 3D + ภาพ 2D ตั้งเป็นแผ่น) · เจ้าของเห็นว่า "ดูเป็นกระดาษ" ไม่สวยเท่าเกมที่ชอบ
-- **ตัดสินใจเปลี่ยนเป็น 2D ล้วนแบบ Stardew Valley** (ไม่หมุนกล้อง) ต้นแบบคือ `proto2d.html` (หมู่บ้านฉากเดียว เจ้าของชอบ)
-- จุดสำคัญของต้นแบบที่ต้องรักษา:
-  - วาดที่ความละเอียดต่ำ แล้วขยายเป็นจำนวนเต็มเท่า (`image-rendering: pixelated`) พิกเซลเท่ากันทั้งจอ
-  - เรียงวาดตามตำแหน่งเท้า (y-sort) · วางภาพที่จุดแตะพื้นจริงที่วัดจากภาพ
-  - **เงาแบบ Trickster (เจ้าของเลือก):** เงาทอดไปข้างหลัง (ขึ้นด้านบนจอ) เอียงไปทางขวา ขอบนุ่มเนียน ใช้รูปทรงของภาพเอง + เงาเข้มนุ่มใต้โคน
-  - วิธีทำเงาให้เนียน (ตาม proto2d.html): canvas ความละเอียดเต็มจอ · ภาพพิกเซลขยายจำนวนเต็มเท่าแบบคม · เงาของทุกชิ้นรวมเป็นชั้นเดียว (ไม่ซ้อนจนดำ) เข้มที่โคนแล้วจางไปทางปลาย · เบลอที่ความละเอียดจอ · ย้อมสีฟ้าอมม่วงแบบ multiply · วาดลงพื้นครั้งเดียว
-  - ห้ามใช้ ctx.filter ทุกเฟรม (ช้ามาก) · เงาตัวละครให้เบลอแผ่นภาพไว้ล่วงหน้าครั้งเดียว
-  - พื้นหญ้ามีกอหญ้า/ดอกไม้ · ต้นไม้โยกทีละแถบ · กลีบดอกไม้ ผีเสื้อ ประกายน้ำพุ · แสงอุ่น/ฟ้า ลำแดด ขอบจอมืด
-- เจ้าของบอกว่าต้นแบบ "ดีขึ้นแต่ยังต้องเนียนกว่านี้" → งานต่อไปต้องเน้นความเนียนของการวางของบนพื้น
+## Where the history is
+- `HANDOFF_S13.md`: everything decided and built, newest entries first in its "done" list, with measurements. Read the top entries before changing the house or farm.
+- `GDD.md`, `STORY.md`, `ART_DIRECTION.md`, `MAP_PIPELINE.md`, `MAP_SPEC_G9.md`, `MAP_SPEC_H9.md`, `WORLD_ATLAS.md`, `GM_GUIDE.md`, `DEV_GUIDE.md`, `CLAUDE.md`: design and rules written earlier.
 
-## งานถัดไป
-เปลี่ยนส่วนวาดภาพ (VIEW) ของ `index.html` เป็น 2D canvas ตามแนว `proto2d.html` ทีละฉาก: หมู่บ้าน → ถ้ำ → ในบ้าน
-- ใช้ระบบเกมเดิมทั้งหมด: `Store` เซฟ · `command()` · คำถาม · บทพูด · สมุดความรู้ · ร้าน · จัดบ้าน
-- ถ้ำแบบ 2D: ผนังหินสูงจากไทล์ `tiles-cave.png` · ความมืดกับวงแสงตะเกียงรอบตัว · คริสตัลเรือง
-- รักษา `window.PP` ให้ชุดทดสอบใช้ได้มากที่สุด ส่วนที่ต้องเปลี่ยนให้แก้ชุดทดสอบตามและบอกเจ้าของ
+## Open items (4 Oct 2026, version 1.48)
+- Waiting for the owner's answer: remove the Auto (auto-attack) button entirely or keep it on desktop only · what house levels 4-9 give.
+- Fine furniture exists for 9 pieces; toilet, washstand, plant, round table, rug, wash tub, bookshelf, armchair, double bed have no fine version yet.
+- Skill-slot screen (3 slots round the big button): needs a design first; today there is one weapon skill and two job-skill slots, no pool to choose from.
+- Sitting pose on the slide and on benches, fishing cast pose (PixelLab art). Robot helper: the north-east walk frames are a mirrored stand-in.
+- Village H9 scene, strawberry and corn crops, game icons (5 style prompts sent, no choice yet), 5 world-map pictures (purpose not decided).
+- Not cleaned: 11 requests for optional pictures that do not exist yet (6 are slots for future scene art), a duplicate `rollFish`.
+- **Leah has not play-tested.** That is the most useful next step.
 
-## ทดสอบ
-- ชุดทดสอบอยู่ใน `Leah-PP-tests.zip` (ถ้ายังไม่มีโฟลเดอร์ `tests/` ให้แตกไฟล์ใส่ `tests/` แล้ว commit)
-- เตรียม: `npm pack three@0.128.0 && tar xzf three-0.128.0.tgz` · เปิด `python3 -m http.server <พอร์ต>` ที่ root · แก้ path/พอร์ตในไฟล์ทดสอบให้ตรง
-- ไฟล์: `test_walk.py` (เดินจริงทุกฉาก) `test12.py` (วงจรหลัก) `test14.py` (ที่ซ่อน) `test15.py` (บทพูด) `test16.py` (สมุด) `test18.py` (จอย/ปุ่ม) `test19.py` (เพลง)
-- ปิดบทพูดตอนทดสอบ: `while(PP.dlgOpen)PP.nextLine();PP.S.seen=['intro','cave1','shop1','house1','half','gate','clear1','book1']`
+## Never
+- Never commit tokens or passwords. Never delete `art-*.png` sources or the guide scripts. Never ship without running the suites.
