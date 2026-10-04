@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.28';
+const VERSION='Lantern Academy 1.29';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -3711,7 +3711,7 @@ function warpDraw(e,tm,near){if(!M||M.kind!=='town')return false;const door=e.id
   ctx.restore();return true}
 // on the assembled farm: the house door wears a yellow outline and can be tapped; the fishing spot is an activity spot
 function g9bPulse(tm){return .55+.45*(.5+.5*Math.sin(tm*2.1))}                    // one slow breath (3 s) for every tappable thing
-function g9bArrowDown(x,y){for(const [c,gr] of [['#4a0d08',2],['#ff3b30',0]]){ctx.fillStyle=c;ctx.beginPath();ctx.moveTo(x-8-gr,y-gr);ctx.lineTo(x+8+gr,y-gr);ctx.lineTo(x,y+11+gr*1.4);ctx.closePath();ctx.fill();ctx.fillRect(Math.round(x-3-gr),y-10-gr,6+gr*2,11+gr)}}
+function g9bArrowDown(x,y){for(const [c,gr] of [['#4a2f00',2],['#ffd83a',0]]){ctx.fillStyle=c;ctx.beginPath();ctx.moveTo(x-8-gr,y-gr);ctx.lineTo(x+8+gr,y-gr);ctx.lineTo(x,y+11+gr*1.4);ctx.closePath();ctx.fill();ctx.fillRect(Math.round(x-3-gr),y-10-gr,6+gr*2,11+gr)}}
 function g9bSpots(tm){if(!P)return;if(!M._exitIn){M._exitIn=1;for(const e of M.exits)if(e.id==='e'&&!e.locked)e.x=M.w*T-58}
   const pa=g9bPulse(tm);ctx.save();
   // things: the ring of light round each tappable picture
@@ -3719,8 +3719,8 @@ function g9bSpots(tm){if(!P)return;if(!M._exitIn){M._exitIn=1;for(const e of M.e
     if(o.flip){ctx.save();ctx.translate(X+o.sw,Y);ctx.scale(-1,1);ctx.drawImage(rg,0,0);ctx.restore()}else ctx.drawImage(rg,X,Y)}
   // planting cells: outlined while there is something to do on them (empty = plant, dry = water, ripe = pick); looked up 4 times a second, not every frame
   {const now=performance.now();if(!M._cellAt||now-M._cellAt>250){M._cellAt=now;M._cellOn=(M.plots||[]).map(pl=>{try{const q=plotState(pl);return q.st==='empty'||q.st==='ripe'||!q.w}catch(e){return false}})}
-    ctx.globalAlpha=pa;ctx.strokeStyle='#ffe23a';ctx.lineWidth=2;(M.plots||[]).forEach((pl,i)=>{if(!M._cellOn[i])return;const x=Math.round(pl.x-camX)-25,y=Math.round(pl.y-camY)-16,w=50,h=34,r=6;if(x<-60||y<-50||x>VW+10||y>VH+10)return;
-      ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();ctx.stroke()})}
+    ctx.globalAlpha=pa;ctx.strokeStyle='#ffe23a';ctx.lineWidth=2;ctx.setLineDash([5,4]);ctx.lineDashOffset=-tm*5;(M.plots||[]).forEach((pl,i)=>{if(!M._cellOn[i])return;const x=Math.round(pl.x-camX)-25,y=Math.round(pl.y-camY)-16,w=50,h=34,r=6;if(x<-60||y<-50||x>VW+10||y>VH+10)return;
+      ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();ctx.stroke()});ctx.setLineDash([])}
   // the house door: the same light, drawn round the door leaf
   const dx=G9.door[0]*T-camX,by=G9.houseBase*T-camY,D=G9DOOR;ctx.globalAlpha=pa;ctx.strokeStyle='#ffe23a';ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(dx-D.hw,by-D.b);ctx.lineTo(dx-D.hw,by-D.spring);ctx.ellipse(dx,by-D.spring,D.hw,D.t-D.spring,0,Math.PI,0);ctx.lineTo(dx+D.hw,by-D.b);ctx.closePath();ctx.stroke();
   // activity spots: fishing, and the two seats of every bench
@@ -3770,7 +3770,7 @@ try{Object.assign(TX.th,{actSit:'นั่ง'});if(TX.en)Object.assign(TX.en,{a
 function g9bSeats(){return ((G9B&&G9B.benches)||[]).flatMap(([cx,by,w])=>[{x:Math.round(cx-w*.23),by,cx,w,side:'L'},{x:Math.round(cx+w*.23),by,cx,w,side:'R'}])}
 function g9bSit(seat){if(!P)return;P.x=seat.x;P.y=seat.by+16;P.sit={x:P.x,y:P.y,seatY:seat.by+1,side:seat.side,t0:performance.now()};P.path=null;P.act=null;P.target=null;P.moving=false;try{P.row=rowFor(0,1)}catch(e){}}
 function g9bSitTick(){const s=P&&P.sit;if(!s)return;if(!M||!M.g9b){P.sit=null;return}const fresh=performance.now()-s.t0<300;   // the step that brought the player here still counts as 'moving' for a moment
-  if((P.path&&P.path.length)||(!fresh&&P.moving))P.sit=null;else{P.x=s.x;P.y=s.y}}
+  if((P.path&&P.path.length)||(!fresh&&(P.moving||Math.hypot(P.x-s.x,P.y-s.y)>.6)))P.sit=null;else{P.x=s.x;P.y=s.y}}
 {const _dpS=drawPlayer;drawPlayer=function(){let s=P&&P.sit;if(s&&s.free&&((P.path&&P.path.length)||(performance.now()-s.t0>300&&P.moving)||Math.hypot(P.x-s.x,P.y-s.y)>6)){P.sit=null;s=null}if(s){ctx.save();ctx.beginPath();ctx.rect(P.x-44-camX,s.seatY-92-camY,88,89);ctx.clip();ctx.translate(0,s.seatY-P.y+G9SIT.drop);try{return _dpS.apply(this,arguments)}finally{ctx.restore()}}return _dpS.apply(this,arguments)}}
 {const cv=document.getElementById('c');if(cv)cv.addEventListener('pointerup',ev=>{try{if(!M||!M.g9b||PAUSE||DLG)return;const r=cv.getBoundingClientRect(),dpr=devicePixelRatio||1,wx=(ev.clientX-r.left)*dpr/SC+camX,wy=(ev.clientY-r.top)*dpr/SC+camY;
     for(const [cx,by,w] of (G9B.benches||[])){if(Math.abs(wx-cx)<w/2+4&&wy>by-42&&wy<by+6){ev.stopImmediatePropagation();window._farmTapT=performance.now();const seat=g9bSeats().find(q=>q.cx===cx&&q.by===by&&q.side===(wx<cx?'L':'R'));g9WalkThen(seat.x,seat.by+16,()=>g9bSit(seat));return}}}catch(e){}},true)}
@@ -3779,24 +3779,34 @@ function g9bSitTick(){const s=P&&P.sit;if(!s)return;if(!M||!M.g9b){P.sit=null;re
 // and a row of small round buttons beside them (potion, auto, rest, plus the ones that come and go: fishing, compass, visit, decorate).
 // Left hand: the on-screen stick, switched on by itself the first time on a touch screen (Settings still turns it off). Tapping the ground to walk still works.
 {const st=document.createElement('style');st.textContent=`
-#act{display:block;right:0;bottom:0;width:0;height:0}
-#act button{position:fixed;border-radius:50%;padding:0;min-width:0;min-height:0;width:46px;height:46px;font-size:18px;line-height:1.05;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(58,42,88,.93);box-shadow:0 0 0 2px #c9a45a,0 3px 0 2px #120b22;overflow:hidden}
-#act button small{font-size:8px;max-width:44px;white-space:nowrap;overflow:hidden}
-#act button:active{transform:scale(.94)}
-#act #bAtk{width:76px;height:76px;font-size:27px;right:calc(14px + env(safe-area-inset-right,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));box-shadow:0 0 0 3px #ffe27a,0 4px 0 3px #120b22}
-#act #bAtk small{font-size:10px;max-width:70px}
-#act #bSk,#act #bDash,#act #bSit{width:54px;height:54px;font-size:20px}
-#act #bSk{right:calc(25px + env(safe-area-inset-right,0px));bottom:calc(100px + env(safe-area-inset-bottom,0px))}
-#act #bSit{right:calc(92px + env(safe-area-inset-right,0px));bottom:calc(76px + env(safe-area-inset-bottom,0px))}
-#act #bDash{right:calc(102px + env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px))}
-#joy{width:112px;height:112px;left:calc(26px + env(safe-area-inset-left,0px));bottom:calc(22px + env(safe-area-inset-bottom,0px));background:rgba(27,19,48,.38);box-shadow:0 0 0 3px rgba(201,164,90,.75),inset 0 0 0 14px rgba(253,246,232,.06)}
-#joyK{background:rgba(253,246,232,.9);box-shadow:0 2px 0 #7a5a2a,0 0 0 2px rgba(201,164,90,.9)}`;document.head.appendChild(st)}
-try{Object.assign(TX.th,{actRest:'นั่งพัก'});if(TX.en)Object.assign(TX.en,{actRest:'Rest'})}catch(e){}
+body.thumbs #act{display:block;right:0;bottom:0;width:0;height:0}
+body.thumbs #act button{position:fixed;border-radius:50%;padding:0;min-width:0;min-height:0;width:46px;height:46px;font-size:18px;line-height:1.05;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(58,42,88,.93);box-shadow:0 0 0 2px #c9a45a,0 3px 0 2px #120b22;overflow:hidden}
+body.thumbs #act button small{font-size:8px;max-width:44px;white-space:nowrap;overflow:hidden}
+body.thumbs #act button:active{transform:scale(.94)}
+body.thumbs #act #bAtk{width:76px;height:76px;font-size:27px;right:calc(14px + env(safe-area-inset-right,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));box-shadow:0 0 0 3px #ffe27a,0 4px 0 3px #120b22}
+body.thumbs #act #bAtk small{font-size:10px;max-width:70px}
+body.thumbs #act #bSk,body.thumbs #act #bJ1,body.thumbs #act #bJ2,body.thumbs #act #bSlot2,body.thumbs #act #bSlot3{width:54px;height:54px;font-size:20px}
+body.thumbs #act #bSk{right:calc(25px + env(safe-area-inset-right,0px));bottom:calc(100px + env(safe-area-inset-bottom,0px))}
+body.thumbs #act #bJ1,body.thumbs #act #bSlot2{right:calc(92px + env(safe-area-inset-right,0px));bottom:calc(76px + env(safe-area-inset-bottom,0px))}
+body.thumbs #act #bJ2,body.thumbs #act #bSlot3{right:calc(102px + env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px))}
+body.thumbs #act #bSlot2,body.thumbs #act #bSlot3{background:rgba(58,42,88,.45);box-shadow:0 0 0 2px rgba(201,164,90,.5);color:rgba(253,246,232,.55)}
+body.thumbs #act #bDash{right:calc(152px + env(safe-area-inset-right,0px));bottom:calc(120px + env(safe-area-inset-bottom,0px));box-shadow:0 0 0 2px #7fd0ff,0 3px 0 2px #120b22}
+body.thumbs #act #bAuto{display:none!important}
+#act #bSlot2,#act #bSlot3{display:none}
+body.thumbs #joy{width:112px;height:112px;left:calc(26px + env(safe-area-inset-left,0px));bottom:calc(22px + env(safe-area-inset-bottom,0px));background:rgba(27,19,48,.38);box-shadow:0 0 0 3px rgba(201,164,90,.75),inset 0 0 0 14px rgba(253,246,232,.06)}
+body.thumbs #joyK{background:rgba(253,246,232,.9);box-shadow:0 2px 0 #7a5a2a,0 0 0 2px rgba(201,164,90,.9)}`;document.head.appendChild(st)}
+try{if(('ontouchstart' in window)||navigator.maxTouchPoints>0)document.body.classList.add('thumbs')}catch(e){}
+try{Object.assign(TX.th,{actRest:'นั่งพัก',noSkillYet:'ช่องสกิลว่าง: ยังไม่มีสกิลให้ใส่'});if(TX.en)Object.assign(TX.en,{actRest:'Rest',noSkillYet:'Empty skill slot: no skill to put here yet'});
+  for(const [L,nw] of [['th','บลิ๊ง'],['en','Blink']])if(TX[L])for(const k in TX[L])if(TX[L][k]==='ตัวเบา'||TX[L][k]==='Light step'||TX[L][k]==='Dash')TX[L][k]=nw}catch(e){}   // the dash is called Blink now (owner, 4 Oct)
+{const act=document.getElementById('act');if(act)for(const id of ['bSlot2','bSlot3'])if(!document.getElementById(id)){const b=document.createElement('button');b.id=id;b.textContent='\uFF0B';b.onclick=()=>{try{say(t('noSkillYet'))}catch(e){}};act.appendChild(b)}}
 {const act=document.getElementById('act');if(act&&!document.getElementById('bRest')){const b=document.createElement('button');b.id='bRest';b.innerHTML='\u{1FA91}<small id="restL">\u0e19\u0e31\u0e48\u0e07\u0e1e\u0e31\u0e01</small>';act.insertBefore(b,document.getElementById('bPot'));
   b.onclick=()=>{try{if(!S||!P||PAUSE)return;if(P.sit){P.sit=null;return}P.path=null;P.act=null;P.target=null;P.moving=false;try{P.row=rowFor(0,1)}catch(e){}P.sit={x:P.x,y:P.y,seatY:P.y-2,side:'ground',t0:performance.now(),free:1}}catch(e){}}}}
 // the small buttons line up from the skills leftward, whichever of them are showing; the rest button gets its picture once the icons are there
-function thumbLayout(){const act=document.getElementById('act');if(!act)return;const big={bAtk:1,bSk:1,bDash:1,bSit:1};let k=0;const kids=[...act.children].filter(b=>!big[b.id]&&!b.classList.contains('hide'));
-  for(let i=kids.length-1;i>=0;i--){const b=kids[i];b.style.right='calc('+(170+k*54)+'px + env(safe-area-inset-right,0px))';b.style.bottom='calc(12px + env(safe-area-inset-bottom,0px))';k++}
+function thumbLayout(){const act=document.getElementById('act');if(!act)return;const on=document.body.classList.contains('thumbs');
+  // three skill slots round the big button: the class skill and the two job skills; a slot with no skill yet shows as an empty ring
+  for(const [slot,real] of [['bSlot2','bJ1'],['bSlot3','bJ2']]){const a=document.getElementById(slot),b=document.getElementById(real);if(a)a.style.display=(on&&b&&b.classList.contains('hide'))?'flex':'none'}
+  if(on){const big={bAtk:1,bSk:1,bJ1:1,bJ2:1,bSlot2:1,bSlot3:1,bDash:1,bAuto:1};let k=0;const kids=[...act.children].filter(b=>!big[b.id]&&!b.classList.contains('hide'));
+    for(let i=kids.length-1;i>=0;i--){const b=kids[i];b.style.right='calc('+(170+k*54)+'px + env(safe-area-inset-right,0px))';b.style.bottom='calc(12px + env(safe-area-inset-bottom,0px))';k++}}
   const r=document.getElementById('bRest');if(r&&IMG.uiIcons&&!r.dataset.pic){r.dataset.pic=1;const cv=document.createElement('canvas');cv.width=32;cv.height=32;cv.style.cssText='width:24px;height:24px;image-rendering:pixelated;display:block';uiIconDraw(cv.getContext('2d'),'bench',0,0,32);r.replaceChild(cv,r.firstChild)}
   const l=document.getElementById('restL');if(l){try{l.textContent=P&&P.sit?(typeof LANG!=='undefined'&&LANG==='en'?'Stand':'\u0e25\u0e38\u0e01'):t('actRest')}catch(e){}}}
 setInterval(()=>{try{thumbLayout()}catch(e){}},300);
