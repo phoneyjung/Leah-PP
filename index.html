@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.43';
+const VERSION='Lantern Academy 1.44';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -3982,8 +3982,9 @@ function deco2UI(){let d=document.getElementById('deco2');if(!DECO2.on||!M||!M.r
   let h='<div class="d2t">'+(DECO2.hold?t('d2Place')+': '+f2name(DECO2.hold):sel?f2name(sel[0]):t('d2Pick'))+'</div><div class="d2r">';
   if(sel&&!DECO2.hold)h+='<button data-a="turn">\u21BB '+t('d2Turn')+'</button><button data-a="store">\u{1F4E6} '+t('d2Store')+'</button>';
   for(const k in inv)if(inv[k]>0)h+='<button data-k="'+k+'"'+(DECO2.hold===k?' class="on"':'')+'>'+f2name(k)+' \u00D7'+inv[k]+'</button>';
+  if(IMG.furnFine&&ROOM2.fine&&ROOM2.fine.length)h+='<button data-a="shop">\u{1F6D2} '+t('d2Shop')+'</button>';
   h+='<button data-a="done" class="ok">\u2714 '+t('d2Done')+'</button></div>';d.innerHTML=h;
-  d.querySelectorAll('button').forEach(b=>{b.onclick=ev=>{ev.stopPropagation();const a=b.dataset.a,k=b.dataset.k;if(a==='turn')deco2Turn();else if(a==='store')deco2Store();else if(a==='done'){DECO2.on=false;DECO2.sel=null;DECO2.hold=null;deco2UI()}else if(k){DECO2.hold=DECO2.hold===k?null:k;DECO2.sel=null;deco2UI()}}})}
+  d.querySelectorAll('button').forEach(b=>{b.onclick=ev=>{ev.stopPropagation();const a=b.dataset.a,k=b.dataset.k;if(a==='turn')deco2Turn();else if(a==='store')deco2Store();else if(a==='shop')openFurnShop();else if(a==='done'){DECO2.on=false;DECO2.sel=null;DECO2.hold=null;deco2UI()}else if(k){DECO2.hold=DECO2.hold===k?null:k;DECO2.sel=null;deco2UI()}}})}
 {const st=document.createElement('style');st.textContent='#deco2{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(8px + env(safe-area-inset-bottom,0px));z-index:26;background:rgba(27,19,48,.94);box-shadow:0 0 0 2px #c9a45a;border-radius:10px;padding:6px 8px;max-width:64vw;color:#fdf6e8}#deco2 .d2t{font-size:12px;text-align:center;margin-bottom:4px;color:#ffe27a}#deco2 .d2r{display:flex;flex-wrap:wrap;gap:5px;justify-content:center}#deco2 button{font-size:13px;padding:6px 10px;min-height:0;background:#3a2a58;color:#fdf6e8}#deco2 button.on{box-shadow:0 0 0 2px #ffe27a}#deco2 button.ok{background:#c9a45a;color:#1b1330;font-weight:700}body.deco2 #act{display:none!important}';document.head.appendChild(st)}
 openDeco=(od=>function(){if(M&&M.room2){DECO2.on=!DECO2.on;DECO2.sel=null;DECO2.hold=null;try{P.path=null}catch(e){}deco2UI();return}return od.apply(this,arguments)})(openDeco);
 addEventListener('pointerdown',e=>{try{if(!DECO2.on||!M||!M.room2)return;const cv=document.getElementById('c');if(e.target!==cv)return;const r=cv.getBoundingClientRect(),dq=devicePixelRatio||1;e.stopImmediatePropagation();e.preventDefault();deco2Tap((e.clientX-r.left)*dq/SC+camX,(e.clientY-r.top)*dq/SC+camY)}catch(_){}} ,true);
@@ -3992,6 +3993,19 @@ addEventListener('pointerdown',e=>{try{if(!DECO2.on||!M||!M.room2)return;const c
 function deco2Draw(){if(!DECO2.on||!M||!M.room2||DECO2.sel==null)return;const it=M.layout2[DECO2.sel];if(!it)return;const [x0,y0,x1,y1]=f2Rect(it),dy=ROOM2.rowsAbovePlan,tm=performance.now()/1000;
   ctx.save();ctx.strokeStyle='#ffe23a';ctx.lineWidth=2;ctx.setLineDash([5,4]);ctx.lineDashOffset=-tm*6;ctx.globalAlpha=.65+.3*Math.sin(tm*2.1);ctx.strokeRect(Math.round(x0*T-camX)+.5,Math.round((y0+dy)*T-camY)+.5,Math.round((x1-x0)*T),Math.round((y1-y0)*T));ctx.restore()}
 {const _dv38=drawVFX2;drawVFX2=function(tm){_dv38.apply(this,arguments);try{deco2Draw()}catch(e){}}}
+// ================= 1.44 THE FURNITURE SHOP (the fine set): bought with coins, lands in the house store, then placed like any piece =================
+// Prices follow the game's own scale (owner, 4 Oct: "set them from the prices already in the game"): the old furniture cost 15-70 coins, a house upgrade 150-300,
+// one crop sells for 5-14. A fine piece costs 110-300: a goal a child reaches in a few harvests, the piano the dearest.
+const F2PRICE={bed_f:150,wardrobe_f:140,desk_f:110,piano_f:300,counter_f:180,stove_f:130,shelf_f:110,sofa_f:160,bathtub_f:200};
+try{Object.assign(TX.th,{d2Shop:'ร้านของแต่งบ้าน',d2Buy:'ซื้อ',d2Have:'ในคลัง',d2Bought:'ซื้อแล้ว อยู่ในคลัง: แตะชื่อของ แล้วแตะพื้นที่จะวาง',d2ShopNote:'ของสวยใช้แทนของธรรมดาได้พอดี ซื้อแล้วเก็บของเก่าเข้าคลัง แล้ววางของใหม่'});
+  if(TX.en)Object.assign(TX.en,{d2Shop:'Furniture shop',d2Buy:'Buy',d2Have:'In store',d2Bought:'Bought. It is in the store: tap its name, then tap the floor',d2ShopNote:'A fine piece fits exactly where the plain one stood. Store the old one, then put the new one down'})}catch(e){}
+function f2Buy(k){const pr=F2PRICE[k];if(!pr||!S)return false;if((S.coins||0)<pr){say(t('noCoin'));return false}S.coins-=pr;const h=HOME.get();h.furn2=h.furn2||{};h.furn2[k]=(h.furn2[k]||0)+1;HOME.put(h);try{sfx('coin')}catch(e){}try{hud();save()}catch(e){}say('\u2728 '+t('d2Bought'));return true}
+function openFurnShop(){if(!ROOM2||!IMG.furnFine)return;{const d2=document.getElementById('deco2');if(d2)d2.style.display='none'}   // the arranging bar steps aside while the shop is open
+ const inv=HOME.get().furn2||{},ks=(ROOM2.fine||[]).filter(k=>F2PRICE[k]).sort((a,b)=>F2PRICE[a]-F2PRICE[b]);
+  modal('<h2>\u{1F6D2} '+t('d2Shop')+'</h2><p class="note">'+t('d2ShopNote')+'</p><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:8px">'+ks.map(k=>'<div style="background:rgba(58,42,88,.6);border-radius:10px;padding:8px;text-align:center"><canvas data-ic="'+k+'" width="72" height="72" style="width:72px;height:72px;image-rendering:pixelated"></canvas><div style="font-size:13px;margin:2px 0">'+f2name(k)+'</div><div class="note" style="margin:0 0 4px">'+t('d2Have')+': '+(inv[k]||0)+'</div><button data-buy="'+k+'" style="font-size:13px;padding:6px 10px'+((S.coins||0)<F2PRICE[k]?';opacity:.5':'')+'">\u{1FA99} '+F2PRICE[k]+' \u00B7 '+t('d2Buy')+'</button></div>').join('')+'</div><p>\u{1FA99} '+(S.coins||0)+'</p>');
+  document.querySelectorAll('canvas[data-ic]').forEach(c=>{const v=ROOM2.pieces[c.dataset.ic][0],g=c.getContext('2d'),sc=Math.min(72/v[2],72/v[3],1.4);g.imageSmoothingEnabled=false;g.drawImage(IMG.furnFine,v[0],v[1],v[2],v[3],Math.round((72-v[2]*sc)/2),Math.round((72-v[3]*sc)/2),Math.round(v[2]*sc),Math.round(v[3]*sc))});
+  document.querySelectorAll('[data-buy]').forEach(b=>b.onclick=()=>{if(f2Buy(b.dataset.buy)){openFurnShop();try{deco2UI()}catch(e){}}})}
+{const _cm44=closeModal;closeModal=function(){const r=_cm44.apply(this,arguments);try{const d2=document.getElementById('deco2');if(d2)d2.style.display=''}catch(e){}return r}}
 // ================= 1.07 H9 · PAPLERN VILLAGE, NEW SCENE (painted, MAP_SPEC_H9 v1.4) =================
 // A separate map "h9" for now, reached by the GM (warp) and from the G9 farm's east road; the village players use (map "capital") is untouched.
 // Needs map-H9-village.jpg (a sharper map-H9-village-hi.jpg replaces it once uploaded); missing picture -> this map is not offered at all.
