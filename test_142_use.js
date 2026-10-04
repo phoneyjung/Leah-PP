@@ -1,4 +1,4 @@
-// test_142_use.js — รุ่น 1.42: ของในบ้านที่กดใช้ได้ · เตา = ทำอาหาร · ชั้นหนังสือ = อ่านหนังสือ · เตียง โซฟา เปียโน ยังใช้ได้ · PORT=... CHROME_EXE=...
+// test_142_use.js — รุ่น 1.42–1.45: ของในบ้านที่กดใช้ได้ · เตา = ทำอาหาร · ชั้นหนังสือ = อ่านหนังสือ · อ่าง = อาบน้ำ · โถ = เข้าห้องน้ำ · อ่างล้างหน้า = ล้างมือ · เตียง โซฟา เปียโน ยังใช้ได้ · PORT=... CHROME_EXE=...
 const p=require('/home/claude/.npm-global/lib/node_modules/@mermaid-js/mermaid-cli/node_modules/puppeteer');
 (async()=>{const b=await p.launch({executablePath:process.env.CHROME_EXE||'/home/claude/.cache/puppeteer/chrome/linux-131.0.6778.204/chrome-linux64/chrome',args:['--no-sandbox']});
 const pg=await b.newPage();await pg.setViewport({width:1000,height:640,isMobile:true,hasTouch:true,deviceScaleFactor:1});const errs=[];pg.on('pageerror',e=>errs.push(e.message));
@@ -7,9 +7,14 @@ const R=await pg.evaluate(async()=>{const o={version:VERSION};const sleep=ms=>ne
  const clear=async()=>{try{closeModal()}catch(e){}try{for(let i=0;i<12&&DLG;i++){if(typeof dlgNext==='function')dlgNext();else DLG=null;await sleep(120)}}catch(e){}DLG=null;PAUSE=false;HOLD=null};
  const h=HOME.get();h.lv=2;if(h.house)h.house.lv=2;HOME.put(h);delete CACHE.farm;goMap('farm');await sleep(1100);await clear();goMap('room');await sleep(1000);await clear();
  const st=M.reach0,seen=new Set([key(st[0],st[1])]),q=[st.slice()];while(q.length){const [x,y]=q.pop();for(const [a,c] of [[x+1,y],[x-1,y],[x,y+1],[x,y-1]]){const k=key(a,c);if(!seen.has(k)&&walkable(M,a,c)){seen.add(k);q.push([a,c])}}}
- const beside=async name=>{const ob=M.objs.find(z=>z.room2&&z.room2[0]===name);if(!ob)return{missing:true};let best=null,bd=1e9;for(let ty=Math.floor(ob.y/T)-1;ty<=Math.floor(ob.y/T)+2;ty++)for(let tx=Math.floor(ob.x/T)-3;tx<=Math.floor(ob.x/T)+3;tx++){const dd=Math.hypot(tx*T+16-ob.x,ty*T+16-ob.y);if(walkable(M,tx,ty)&&seen.has(key(tx,ty))&&dd<50&&dd<bd){bd=dd;best=[tx*T+16,ty*T+16]}}
-   if(!best)return{noFreeTileBeside:true};P.x=best[0];P.y=best[1];P.path=null;await sleep(600);const c=anyNear();return{button:c&&c.k,word:document.getElementById('atkL').textContent}};
+ const beside=async name=>{const ob=M.objs.find(z=>z.room2&&z.room2[0]===name);if(!ob)return{missing:true};const R4=ob.useRect;let best=null,bd=1e9;const rd=(z,px,py)=>Math.hypot(Math.max(z[0]-px,0,px-z[2]),Math.max(z[1]-py,0,py-z[3]));
+   for(let ty=Math.floor(R4[1]/T)-1;ty<=Math.floor((R4[3]-1)/T)+1;ty++)for(let tx=Math.floor(R4[0]/T)-1;tx<=Math.floor((R4[2]-1)/T)+1;tx++){if(!walkable(M,tx,ty)||!seen.has(key(tx,ty)))continue;const px=tx*T+16,py=ty*T+16,dd=rd(R4,px,py);
+     const other=M.objs.some(z=>z!==ob&&z.useRect&&z.fu&&FURN_ACT[z.fu.k]&&rd(z.useRect,px,py)<=dd);if(!other&&dd<bd){bd=dd;best=[px,py]}}      // a free tile next to this piece that is not as close to another usable piece
+   if(!best)return{noFreeTileBeside:true};P.x=best[0];P.y=best[1];P.path=null;await sleep(500);let c=anyNear();for(let i=0;i<6&&c&&document.getElementById('atkL').textContent!==t(c.k);i++)await sleep(150);c=anyNear();return{button:c&&c.k,word:document.getElementById('atkL').textContent}};
  o.stove=await beside('stove');autoAct();await sleep(500);const md=document.querySelector('#modal:not(.hide)');o.stove.kitchenScreenOpened=!!md&&/\u{1F373}/u.test(md.textContent);await clear();
  o.bookshelf=await beside('bookshelf');let said=null;const _say=say;say=function(x){said=x;return _say.apply(this,arguments)};const exp0=S.exp,lv0=S.lv;autoAct();await sleep(500);say=_say;o.bookshelf.somethingHappened=!!said||S.exp!==exp0||S.lv!==lv0||!!DLG||!!document.querySelector('#modal:not(.hide)');await clear();
+ {let said=null;const _s=say;say=function(x){said=x;return _s.apply(this,arguments)};
+  o.bathtub=await beside('bathtub');S.hp=Math.max(1,Math.round(hpMax()*.2));const h0=S.hp;autoAct();await sleep(300);o.bathtub.healthBefore=h0;o.bathtub.healthAfter=S.hp;o.bathtub.ofMax=hpMax();const h1=S.hp;autoAct();await sleep(300);o.bathtub.secondBathRightAwayRefused=S.hp===h1;
+  o.toilet=await beside('toilet');said=null;autoAct();await sleep(300);o.toilet.said=said;o.washstand=await beside('washstand');said=null;const fx0=FX.length;autoAct();await sleep(100);o.washstand.said=said;o.washstand.sparkleAfterToilet=FX.length>fx0;say=_s}
  o.bed=await beside('bed');o.sofa=await beside('sofa');o.piano=await beside('piano');o.jarShelfHasNoButton=(await beside('shelf')).button!=='actRead';return o});
 console.log(JSON.stringify(R));console.log('errors',errs.length,errs.slice(0,4));await b.close()})();

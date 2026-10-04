@@ -86,7 +86,7 @@ rooms = {'L1': {'img': 'room-L1.jpg', 'key': 'roomL1', 'w': 26, 'h': 16, 'grid':
          'L2': {'img': 'room-L2.jpg', 'key': 'roomL2', 'w': 37, 'h': 18, 'grid': G2, 'door': [3, 10], 'start': START1, 'add': WING, 'fixed': [['slideL', 0, 31.63, 12.2]], 'noPlace': [[26, 12, 33, 15]], 'pit': [26, 12, 33, 15], 'save': 'room2'},
          'L3a': {'img': 'room-L2.jpg', 'key': 'roomL2', 'w': 37, 'h': 18, 'grid': G3a, 'door': [3, 10], 'start': START1, 'add': WING, 'fixed': [['slideL', 0, 31.63, 12.2], ['stairs', 0, 23.6, 10.0]], 'noPlace': [[26, 12, 33, 15], [23, 10, 25, 13]], 'pit': [26, 12, 33, 15], 'stair': {'at': [24.27, 12.35], 'to': 'room2', 'id': 'up', 'toExit': 'down'}, 'save': 'room2'},
          'L3b': {'img': 'room-L3b.jpg', 'key': 'roomL3b', 'w': 26, 'h': 16, 'grid': G3b, 'door': None, 'start': UPPER, 'add': [], 'fixed': [], 'noPlace': [[23, 10, 25, 13], [0, 10, 7, 14]], 'hole': [23, 11, 25, 13], 'stair': {'at': [24.0, 10.45], 'to': 'room', 'id': 'down', 'toExit': 'up'}, 'spawn': [22.5, 9.5], 'save': 'room2U'}}
-ACTS = {'bed': 'sleep', 'bedbig': 'sleep', 'sofa': 'cuddle', 'armchair': 'cuddle', 'piano': 'piano', 'stove': 'cook', 'bookshelf': 'read'}
+ACTS = {'bed': 'sleep', 'bedbig': 'sleep', 'sofa': 'cuddle', 'armchair': 'cuddle', 'piano': 'piano', 'stove': 'cook', 'bookshelf': 'read', 'bathtub': 'bath', 'toilet': 'toilet', 'washstand': 'wash'}
 if fine:
     J.update(FJ); ACTS.update({k: ACTS[k[:-2]] for k in FJ if k[:-2] in ACTS})
 json.dump({'rowsAbovePlan': 2, 'pieces': J, 'solid': {'rug': 0}, 'act': ACTS, 'sheet': {k: 'furnFine' for k in (FJ if fine else {})}, 'fine': sorted(FJ) if fine else [], 'rooms': rooms}, open(OUT + '/furn-plain.json', 'w'), separators=(',', ':'), ensure_ascii=False)
