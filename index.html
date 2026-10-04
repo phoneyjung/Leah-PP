@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.47';
+const VERSION='Lantern Academy 1.48';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -3902,6 +3902,13 @@ function room2Place(m){m.objs.length=m.fixed;for(const k of m._fs||[])m.SOLID.de
     if(!flat)for(let j=Math.floor(ty);j<=Math.floor(ty+fd-.01);j++)for(let i=Math.floor(tx);i<=Math.floor(tx+fw-.01);i++){const ax=Math.min(i+1,tx+fw)-Math.max(i,tx),ay=Math.min(j+1,ty+fd)-Math.max(j,ty);
       if(ax*ay>=.4){const kk=key(i,j);if(!m.SOLID.has(kk)){m.SOLID.add(kk);m._fs.push(kk)}}}};
   const sh2=[],floor=[];for(const it of m.layout2)if(ROOM2.solid[it[0]]===0)put(it,0);for(const f of D.fixed||[])put(f,1);for(const it of m.layout2)if(ROOM2.solid[it[0]]!==0)put(it,0);
+  // the "stand here" rings: one for every piece that does something, on a free tile beside it (in front first). They are things in the scene, drawn in walking order,
+  // so a ring is under your feet and behind any furniture that stands in front of it.
+  if(!IMG._useRing){const c=document.createElement('canvas');c.width=44*4;c.height=22;const g=c.getContext('2d');for(let f=0;f<4;f++){g.save();g.translate(f*44+22,11);g.strokeStyle='#fff3b0';g.lineWidth=2;g.setLineDash([5,4]);g.lineDashOffset=-f*2.25;g.beginPath();g.ellipse(0,0,19,8.5,0,0,6.283);g.stroke();g.restore()}IMG._useRing=c}
+  m._rings=[];for(const o of m.objs.slice(m.fixed)){if(!o.fu||!FURN_ACT[o.fu.k])continue;let sp=null;
+    if(o.usePt)sp=o.usePt;else if(o.useRect){const [x0,y0,x1,y1]=o.useRect,cx=(x0+x1)/2,cy=(y0+y1)/2;const C=[[cx,y1+18],[x1+20,cy],[cx,y0-16],[x0-20,cy]],r0=o.room2?o.room2[1]%4:0;   // the side the piece faces comes first: facing the viewer = in front, facing right = on its right, and so on
+      for(const [x,y] of C.slice(r0).concat(C.slice(0,r0),[[x0+16,y1+18],[x1-16,y1+18]])){if(walkable(m,Math.floor(x/T),Math.floor(y/T))){sp=[x,y];break}}}
+    if(sp){const r={img:'_useRing',sx:0,sy:0,sw:44,sh:22,x:sp[0],y:sp[1]-9,tall:0,flat:false,cs:0,cb:2,foot:8,fx:0,a:.7,useRing:1,spot:sp,of:o.fu.k};m.objs.push(r);m._rings.push(r)}}
   try{buildGround(m);const g=m.ground.getContext('2d');for(const q of floor.concat(sh2))g.drawImage(q[0],q[1],q[2],q[3],q[4],q[5],q[6],q[3],q[4]);m.shadowSC=0;m._floorThings=[floor.length,sh2.length]}catch(e){}}   // order on the floor: rugs first, then the shadows, then the pieces themselves
 function room2Build(id,D){const dy=ROOM2.rowsAbovePlan,m=newMap(id,'room',D.w,D.h,61);m.nameKey='room';m.floor=id==='room'?1:2;m.indoor=true;m.painted=D.key;m.room2=1;m.r2=D;m.r2tier=room2Tier();m.stairs=[];m.layout=[];
   for(let y=0;y<D.h;y++)for(let x=0;x<D.w;x++){const c=y>=dy?((D.grid[y-dy]||'')[x]||' '):'#';if(c!=='#'&&c!==' '&&c!=='P')m.FLOOR.add(key(x,y));else m.SOLID.add(key(x,y))}
@@ -3937,7 +3944,7 @@ function slideTick(){const s=P&&P.slide;if(!s)return;const now=performance.now()
     if(e>=1){s.o.y=s.oy;s.o.cb=s.ocb}}
   else{s.t+=dt/1.1;const e=Math.min(1,s.t),k=e*e;P.x=s.x;P.y=s.y0+(s.y1-s.y0)*k;P.row=0}
   if(s.t>=1){P.slide=null;window._slides=(window._slides||0)+1;try{sfx('pick')}catch(_){}if(M._balls)for(const b of M._balls){const dx=b.x-P.x,dy=b.y-P.y,d=Math.hypot(dx,dy);if(d<46){b.vx+=(dx/(d||1))*160;b.vy+=(dy/(d||1))*160}}}}
-{const _dv39=drawVFX2;drawVFX2=function(tm){_dv39.apply(this,arguments);try{if(M&&M.room2){slideTick();pitTick()}}catch(e){}}}
+{const _dv39=drawVFX2;drawVFX2=function(tm){_dv39.apply(this,arguments);try{if(M&&M.room2){slideTick();pitTick();const now=performance.now(),f=Math.floor(now/170)%4,a=(typeof DECO2!=='undefined'&&DECO2.on)?0:.6+.3*Math.sin(now/480);for(const r of M._rings||[]){r.sx=f*44;r.a=a}}}catch(e){}}}
 // the piano: eight keys, do to high do, the game's own sound (no file)
 let _pianoAC=null;
 const PIANO={rec:null,tune:null,timers:[]};
