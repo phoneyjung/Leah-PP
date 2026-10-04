@@ -10,13 +10,14 @@ PINE = (226, 186, 124); PINE2 = (204, 160, 100); DARKW = (124, 76, 50); BLUE = (
 BEIGE = (214, 196, 160); BEIGE2 = (196, 176, 140); STONE = (160, 160, 158); BOOK = (150, 70, 60); INK = (40, 40, 52); CLAY = (190, 110, 70); LEAF = (90, 160, 80); RUG = (150, 110, 80); RUG2 = (176, 138, 100); TUBIN = (150, 112, 70); JAR = (200, 190, 170); JAR2 = (120, 150, 110)
 B = lambda u0, u1, v0, v1, z0, z1, c: ('box', u0, u1, v0, v1, z0, z1, c)          # u across the front, v from the back (0) to the front, z up
 CYL = lambda u, v, r, z0, z1, c: ('cyl', u, v, r, z0, z1, c)
+STOOL = lambda u, v: [B(u - 0.18, u - 0.11, v - 0.15, v - 0.08, 0, 0.48, PINE2), B(u + 0.11, u + 0.18, v - 0.15, v - 0.08, 0, 0.48, PINE2), B(u - 0.035, u + 0.035, v + 0.1, v + 0.17, 0, 0.48, PINE2), CYL(u, v, 0.27, 0.48, 0.56, PINE)]   # the same stool everywhere: a round seat on three legs
 PIECES = {
  'bed': (1.6, 3.0, [B(0, 1.6, 0.15, 2.85, 0, 0.45, PINE), B(0.08, 1.52, 0.2, 2.8, 0.45, 0.7, BLUE), B(0.08, 1.52, 0.2, 1.0, 0.7, 0.72, WHITE), B(0.3, 1.3, 0.3, 0.85, 0.72, 0.86, WHITE),
                     B(0, 1.6, 0, 0.15, 0, 1.3, PINE2), B(0, 1.6, 2.85, 3.0, 0, 0.8, PINE2)]),
  'wardrobe': (2.0, 0.9, [B(0, 2.0, 0, 0.86, 0, 2.3, PINE), B(-0.05, 2.05, -0.03, 0.9, 2.3, 2.4, PINE2), B(0.08, 0.98, 0.86, 0.9, 0.15, 2.2, PINE2), B(1.02, 1.92, 0.86, 0.9, 0.15, 2.2, PINE2),
                          B(0.86, 0.94, 0.9, 0.93, 1.1, 1.25, IRON), B(1.06, 1.14, 0.9, 0.93, 1.1, 1.25, IRON)]),
  'desk': (1.8, 0.9, [B(0, 1.8, 0, 0.9, 0.9, 1.0, PINE), B(0.05, 0.17, 0.05, 0.85, 0, 0.9, PINE2), B(1.15, 1.75, 0.05, 0.85, 0.35, 0.9, PINE2), B(1.63, 1.75, 0.05, 0.85, 0, 0.35, PINE2),
-                     B(0.25, 0.75, 0.2, 0.65, 1.0, 1.08, BOOK), B(1.25, 1.45, 0.2, 0.4, 1.0, 1.16, INK), CYL(0.72, 1.2, 0.27, 0, 0.55, PINE2)]),
+                     B(0.25, 0.75, 0.2, 0.65, 1.0, 1.08, BOOK), B(1.25, 1.45, 0.2, 0.4, 1.0, 1.16, INK)] + STOOL(0.73, 1.2)),
  'piano': (2.2, 0.9, [B(0, 2.2, 0, 0.5, 0, 1.6, DARKW), B(0, 2.2, 0.5, 0.9, 0, 0.92, DARKW), B(0.12, 2.08, 0.55, 0.86, 0.92, 0.95, WHITE), B(0.12, 2.08, 0.55, 0.66, 0.95, 0.98, INK),
                       B(0.75, 1.45, 1.05, 1.5, 0, 0.6, DARKW)]),
  'counter': (3.0, 0.9, [B(0, 3.0, 0.02, 0.86, 0, 1.0, PINE2), B(-0.04, 3.04, 0, 0.9, 1.0, 1.1, PINE), B(0.2, 1.0, 0.18, 0.72, 1.1, 1.12, STONE), B(0.5, 0.7, 0.04, 0.16, 1.1, 1.4, IRON2),
@@ -28,13 +29,14 @@ PIECES = {
  'sofa': (2.6, 1.1, [B(0, 2.6, 0, 0.32, 0, 1.0, BEIGE2), B(0, 0.3, 0.32, 1.1, 0, 0.75, BEIGE2), B(2.3, 2.6, 0.32, 1.1, 0, 0.75, BEIGE2), B(0.3, 2.3, 0.32, 1.1, 0, 0.42, BEIGE2), B(0.33, 1.28, 0.34, 1.08, 0.42, 0.52, BEIGE), B(1.32, 2.27, 0.34, 1.08, 0.42, 0.52, BEIGE)]),
  'bathtub': (2.4, 1.1, [B(0, 2.4, 0, 1.1, 0, 0.8, PINE2), B(0.14, 2.26, 0.14, 0.96, 0.8, 0.81, TUBIN), B(0, 2.4, 1.1, 1.13, 0.2, 0.28, IRON), B(0, 2.4, 1.1, 1.13, 0.55, 0.63, IRON), B(-0.03, 0, 0, 1.1, 0.2, 0.28, IRON), B(-0.03, 0, 0, 1.1, 0.55, 0.63, IRON), B(2.4, 2.43, 0, 1.1, 0.2, 0.28, IRON), B(2.4, 2.43, 0, 1.1, 0.55, 0.63, IRON), B(0, 2.4, -0.03, 0, 0.2, 0.28, IRON), B(0, 2.4, -0.03, 0, 0.55, 0.63, IRON)]),
  'toilet': (0.8, 1.1, [B(0.08, 0.72, 0, 0.34, 0, 0.9, WHITE), B(0.05, 0.75, 0, 0.36, 0.9, 0.95, STONE), B(0.2, 0.6, 0.34, 0.6, 0, 0.42, WHITE), CYL(0.4, 0.72, 0.3, 0.2, 0.45, WHITE), CYL(0.4, 0.72, 0.2, 0.45, 0.46, STONE)]),
+ 'bedside': (0.9, 0.7, [B(0.04, 0.86, 0.03, 0.66, 0, 0.82, PINE2), B(0, 0.9, 0, 0.7, 0.82, 0.9, PINE), B(0.12, 0.78, 0.66, 0.7, 0.45, 0.75, PINE), B(0.41, 0.49, 0.7, 0.73, 0.57, 0.64, IRON), CYL(0.3, 0.3, 0.1, 0.9, 1.25, WHITE)]),
  'washstand': (1.2, 0.7, [B(0.04, 1.16, 0.03, 0.66, 0, 1.0, PINE2), B(0, 1.2, 0, 0.7, 1.0, 1.08, PINE), CYL(0.6, 0.35, 0.28, 1.08, 1.2, WHITE), CYL(0.6, 0.35, 0.2, 1.2, 1.21, STONE), B(0.12, 0.62, 0.66, 0.7, 0.15, 0.85, PINE), B(0.72, 1.08, 0.7, 0.76, 0.3, 0.9, WHITE)]),
 }
 ONE = {'plant': (0.8, 0.8, [CYL(0.4, 0.4, 0.3, 0, 0.5, CLAY), CYL(0.4, 0.4, 0.4, 0.5, 1.1, LEAF)]),
-       'roundtable': (2.4, 2.4, [CYL(1.2, 0.3, 0.26, 0, 0.5, PINE2), CYL(0.3, 1.2, 0.26, 0, 0.5, PINE2), CYL(2.1, 1.2, 0.26, 0, 0.5, PINE2), CYL(1.2, 1.2, 0.16, 0, 0.82, PINE2), CYL(1.2, 1.2, 0.7, 0.82, 0.9, PINE), CYL(1.2, 2.1, 0.26, 0, 0.5, PINE2)]),
+       'roundtable': (2.4, 2.4, STOOL(1.2, 0.3) + STOOL(0.3, 1.2) + STOOL(2.1, 1.2) + [CYL(1.2, 1.2, 0.16, 0, 0.82, PINE2), CYL(1.2, 1.2, 0.7, 0.82, 0.9, PINE)] + STOOL(1.2, 2.1)),
        'rug': (3.0, 2.0, [B(0, 3.0, 0, 2.0, 0, 0, RUG), B(0.2, 2.8, 0.2, 1.8, 0, 0.01, RUG2), B(0.4, 2.6, 0.4, 1.6, 0.01, 0.02, RUG)]),
        'washtub': (1.2, 1.2, [CYL(0.6, 0.6, 0.6, 0, 0.65, PINE2), CYL(0.6, 0.6, 0.5, 0.65, 0.66, TUBIN), B(0.5, 1.0, 0.25, 0.33, 0.3, 1.15, STONE)])}
-SHEETS = {'A': ['bed', 'wardrobe', 'desk'], 'B': ['piano', 'counter', 'stove'], 'C': ['shelf', 'sofa', 'bathtub'], 'D': ['toilet', 'washstand', '*']}
+SHEETS = {'A': ['bed', 'wardrobe', 'desk'], 'B': ['piano', 'counter', 'stove'], 'C': ['shelf', 'sofa', 'bathtub'], 'D': ['toilet', 'washstand', 'bedside', '*']}   # D has four rows: a sparse sheet made the painter enlarge the pieces
 VIEWS = ['S', 'E', 'N', 'W']
 def tr(view, w, d, u, v):                                            # piece coordinates -> (across, depth toward the viewer)
     return {'S': (u, v), 'E': (v, w - u), 'N': (w - u, d - v), 'W': (d - v, u)}[view]
@@ -68,7 +70,7 @@ def render(parts, w, d, view):
     return Image.fromarray(np.dstack([col, a]), 'RGBA'), [round(xs1 - xs0, 2), round(ys1 - ys0, 2)]
 meta = {}
 for name, rows in SHEETS.items():
-    im = Image.new('RGBA', (W, H), MAG + (255,)); meta[name] = {}
+    CH = H // len(rows); im = Image.new('RGBA', (W, H), MAG + (255,)); meta[name] = {'rows': len(rows)}
     for r, piece in enumerate(rows):
         base = r * CH + CH - 8
         if piece == '*':
@@ -79,7 +81,7 @@ for name, rows in SHEETS.items():
         for c, v in enumerate(VIEWS):
             s, sz = render(parts, w, d, v); x = c * CW + (CW - s.width) // 2; assert s.height <= CH - 4, (piece, v, s.height); im.alpha_composite(s, (x, base - s.height)); meta[name][piece]['boxes'].append([x, base - s.height, x + s.width, base]); meta[name][piece]['tiles'].append(sz)
     im.convert('RGB').save(f'2_guide-{name}.png')
-json.dump({'px_per_tile': PX, 'cell': [CW, CH], 'columns': ['facing viewer', 'facing right', 'facing away', 'facing left'], 'sheets': meta}, open('furniture_guides.json', 'w'))
+json.dump({'px_per_tile': PX, 'cell_w': CW, 'columns': ['facing viewer', 'facing right', 'facing away', 'facing left'], 'sheets': meta}, open('furniture_guides.json', 'w'))
 S = Image.new('RGB', (W + 10, H * 2 + 10), (20, 20, 20))
 for i, n in enumerate('AB'): S.paste(Image.open(f'2_guide-{n}.png'), (0, i * (H + 10)))
 S.resize((1152, int((H * 2 + 10) * 1152 / (W + 10)))).save('_AB.png')
