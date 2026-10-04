@@ -29,9 +29,12 @@ for i, (p, (w, d, parts)) in enumerate(ONE.items()):
 for r, (p, (w, d, parts)) in enumerate(NEW.items()): sprites[p] = [take(f'{ART}/art-furniture-plain-E.png', 72, 384, 341, c, r, parts, w, d, v, 8) for c, v in enumerate(VIEWS)]
 # sheet F: the painter drew the two objects a little larger than the guide; each is cut by its own outline and brought to its floor size
 aF = np.asarray(Image.open(f'{ART}/art-furniture-plain-F.png').convert('RGB'))
-for i, (p, (w, d, parts), fit) in enumerate((('slide', SLIDE, 1.0), ('stairs', STAIRS, 2.0 / 3.0))):
+for i, (p, (w, d, parts), fit) in ((1, ('stairs', STAIRS, 2.0 / 3.0)),):      # the first slide (coming toward the viewer) is no longer used: the owner asked for one that runs right to left
     g, sz = render(parts, w, d, 'S', 108); rgba = key_out(aF[:, i * 768:(i + 1) * 768]); ys, xs = np.where(rgba[..., 3] > 0); rgba = rgba[ys.min():ys.max() + 1, xs.min():xs.max() + 1]
     k = (g.width - 6) / rgba.shape[1] * T / 108 * fit; im = shrink(rgba, k); fw, fd = w * fit, d * fit; sprites[p] = [(im, {'ox': round((im.width - fw * T) / 2, 1), 'oy': round(im.height - fd * T - 1, 1), 'fw': round(fw, 2), 'fd': round(fd, 2)})]
+# the play slide seen from its side (tower on the right, sliding to the left), shown 1.2 times the size of its guide
+SS = json.load(open(SRC + '/house_slide_side.json')); aG = np.asarray(Image.open(f'{ART}/art-furniture-plain-G.png').convert('RGB')); bx = SS['box']; mg = 12; kS = T / SS['px_per_tile'] * 1.2
+imS = shrink(key_out(aG[max(0, bx[1] - mg):bx[3] + mg, max(0, bx[0] - mg):bx[2] + mg]), kS); sprites['slideL'] = [(imS, {'ox': round((SS['tiles'][2] + mg) * kS, 1), 'oy': round((SS['tiles'][3] + mg) * kS, 1), 'fw': round(SS['foot_w_d'][0] * 1.2, 2), 'fd': round(SS['foot_w_d'][1] * 1.2, 2)})]
 items = [(p, i, im, mt) for p, L in sprites.items() for i, (im, mt) in enumerate(L)]; items.sort(key=lambda t: -t[2].height); AW = 640; x = y = rowh = 0; pos = []
 for p, i, im, mt in items:
     if x + im.width + 2 > AW: x = 0; y += rowh + 2; rowh = 0
@@ -54,9 +57,9 @@ WING = [['bookshelf', 0, 26.1, 1.05], ['bookshelf', 0, 28.3, 1.05], ['bookshelf'
 UPPER = [['bedbig', 0, 1.1, 1.02], ['wardrobe', 0, 6.8, 1.02], ['bathtub', 0, 11.2, 1.02], ['toilet', 0, 14.1, 1.02], ['washstand', 1, 11.0, 3.0], ['desk', 0, 16.2, 1.02], ['bookshelf', 0, 19.2, 1.05], ['armchair', 3, 23.6, 3.2], ['plant', 0, 24.1, 1.1],
          ['sofa', 0, 9.0, 7.2], ['rug', 0, 8.8, 8.8], ['roundtable', 0, 14.4, 9.5], ['plant', 0, 1.1, 7.1]]
 rooms = {'L1': {'img': 'room-L1.jpg', 'key': 'roomL1', 'w': 26, 'h': 16, 'grid': G1, 'door': [3, 10], 'start': START1, 'add': [], 'fixed': [], 'noPlace': [], 'save': 'room2'},
-         'L2': {'img': 'room-L2.jpg', 'key': 'roomL2', 'w': 37, 'h': 18, 'grid': G2, 'door': [3, 10], 'start': START1, 'add': WING, 'fixed': [['slide', 0, 31.0, 9.9]], 'noPlace': [[26, 12, 33, 15]], 'pit': [26, 12, 33, 15], 'save': 'room2'},
-         'L3a': {'img': 'room-L2.jpg', 'key': 'roomL2', 'w': 37, 'h': 18, 'grid': G3a, 'door': [3, 10], 'start': START1, 'add': WING, 'fixed': [['slide', 0, 31.0, 9.9], ['stairs', 0, 23.6, 10.0]], 'noPlace': [[26, 12, 33, 15], [23, 10, 25, 13]], 'pit': [26, 12, 33, 15], 'stair': {'at': [24.27, 12.35], 'to': 'room2', 'id': 'up', 'toExit': 'down'}, 'save': 'room2'},
+         'L2': {'img': 'room-L2.jpg', 'key': 'roomL2', 'w': 37, 'h': 18, 'grid': G2, 'door': [3, 10], 'start': START1, 'add': WING, 'fixed': [['slideL', 0, 31.63, 12.2]], 'noPlace': [[26, 12, 33, 15]], 'pit': [26, 12, 33, 15], 'save': 'room2'},
+         'L3a': {'img': 'room-L2.jpg', 'key': 'roomL2', 'w': 37, 'h': 18, 'grid': G3a, 'door': [3, 10], 'start': START1, 'add': WING, 'fixed': [['slideL', 0, 31.63, 12.2], ['stairs', 0, 23.6, 10.0]], 'noPlace': [[26, 12, 33, 15], [23, 10, 25, 13]], 'pit': [26, 12, 33, 15], 'stair': {'at': [24.27, 12.35], 'to': 'room2', 'id': 'up', 'toExit': 'down'}, 'save': 'room2'},
          'L3b': {'img': 'room-L3b.jpg', 'key': 'roomL3b', 'w': 26, 'h': 16, 'grid': G3b, 'door': None, 'start': UPPER, 'add': [], 'fixed': [], 'noPlace': [[23, 10, 25, 13], [0, 10, 7, 14]], 'hole': [23, 11, 25, 13], 'stair': {'at': [24.0, 10.45], 'to': 'room', 'id': 'down', 'toExit': 'up'}, 'spawn': [22.5, 9.5], 'save': 'room2U'}}
 json.dump({'rowsAbovePlan': 2, 'pieces': J, 'solid': {'rug': 0}, 'act': {'bed': 'sleep', 'bedbig': 'sleep', 'sofa': 'cuddle', 'armchair': 'cuddle', 'piano': 'piano'}, 'rooms': rooms}, open(OUT + '/furn-plain.json', 'w'), separators=(',', ':'), ensure_ascii=False)
 for f in ('furn-plain.png', 'furn-plain.json', 'room-L1.jpg', 'room-L2.jpg', 'room-L3b.jpg'): print(f, os.path.getsize(OUT + '/' + f) // 1024, 'KB')
-print('atlas', atlas.size, 'sprites', len(items), '| corridor colour old', [round(v) for v in cor1], 'wing', [round(v) for v in corw], '| slide', J['slide'][0], '| stairs', J['stairs'][0])
+print('atlas', atlas.size, 'sprites', len(items), '| corridor colour old', [round(v) for v in cor1], 'wing', [round(v) for v in corw], '| slide', J['slideL'][0], '| stairs', J['stairs'][0])

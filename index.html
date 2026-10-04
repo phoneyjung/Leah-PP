@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.39';
+const VERSION='Lantern Academy 1.40';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -3853,7 +3853,7 @@ function anyNear(){if(!S||!M||!P||PAUSE||DLG)return null;if(M.g9b){const c=g9bNe
   if(M.board){const d=Math.hypot(M.board.x-P.x,M.board.y+12-P.y);if(d<60)put(d,'\u{1F4DC}','actBoard',()=>{try{openBoard()}catch(e){}})}
   for(const c of M.crystals||[]){if(c.awake)continue;const d=Math.hypot(c.x-P.x,c.y+8-P.y);if(d<64)put(d,'\u{1F48E}','actWake',()=>tapWorld(c.x,c.y-10))}
   for(const g of M.digs||[]){if(g.done)continue;const d=Math.hypot(g.x-P.x,g.y-P.y);if(d<70)put(d,'\u26CF\uFE0F','actDig',()=>tapWorld(g.x,g.y))}
-  if(M.kind==='room'&&!M.visiting&&!(typeof DEC!=='undefined'&&DEC.on))for(const o of M.objs){if(!o.fu||!FURN_ACT[o.fu.k])continue;const d=Math.hypot(o.x-P.x,o.y-P.y);if(d<(o.fu.k==='slide'?76:52))put(d,o.fu.k==='piano'?'\u{1F3B9}':o.fu.k==='slide'?'\u{1F6DD}':'\u{1F3E0}',o.fu.k==='piano'?'actPiano':o.fu.k==='slide'?'actSlide':'actUse',()=>{try{furnAct(o.fu.k)}catch(e){}})}
+  if(M.kind==='room'&&!M.visiting&&!(typeof DEC!=='undefined'&&DEC.on))for(const o of M.objs){if(!o.fu||!FURN_ACT[o.fu.k])continue;const d=o.usePt?Math.hypot(o.usePt[0]-P.x,o.usePt[1]-P.y):Math.hypot(o.x-P.x,o.y-P.y);if(d<(o.usePt?48:o.fu.k==='slide'?76:52))put(d,o.fu.k==='piano'?'\u{1F3B9}':o.fu.k==='slide'?'\u{1F6DD}':'\u{1F3E0}',o.fu.k==='piano'?'actPiano':o.fu.k==='slide'?'actSlide':'actUse',()=>{try{furnAct(o.fu.k)}catch(e){}})}
   if(!M.g9b&&M.fishSpot&&Math.hypot(M.fishSpot.x-P.x,M.fishSpot.y-P.y)<30)put(0,'\u{1F3A3}','actFish',fishAct);
   return best}
 // ================= 1.35 THE HELPER ROBOT FROM PIXELLAB: eight directions, standing + six walking frames (robot-walk.png, 7 x 8 cells of 64 px) =================
@@ -3887,7 +3887,9 @@ function room2Layout(D){const h=HOME.get();let lay=h[D.save];const cp=L=>L.map(a
   h[D.save]=lay;HOME.put(h);return lay}
 function room2Place(m){m.objs.length=m.fixed;for(const k of m._fs||[])m.SOLID.delete(k);m._fs=[];const D=m.r2,dy=ROOM2.rowsAbovePlan,ACT={sleep:'bed',cuddle:'sofa',piano:'piano'};
   const put=(it,fixed)=>{const [k,r,tx,ty0]=it,vs=ROOM2.pieces[k];if(!vs)return;const [sx,sy,sw,sh,ox,oy,fw,fd]=vs[r%vs.length],ty=ty0+dy,flat=ROOM2.solid[k]===0;if(tx+fw>D.w+.01||ty0+fd>D.grid.length+.01)return;   // a piece of a bigger house: kept in the save, not shown here
-    m.objs.push({img:'furnPlain',sx,sy,sw,sh,x:tx*T-ox+sw/2,y:(ty+fd)*T,tall:flat?0:1,flat:flat,cs:0,cb:Math.round(oy+fd*T),foot:16,fx:0,a:1,fu:{k:k==='slide'?'slide':(ACT[ROOM2.act[k]]||'_'+k)},room2:fixed?null:it,fixed2:fixed?1:0});
+    const o={img:'furnPlain',sx,sy,sw,sh,x:tx*T-ox+sw/2,y:(ty+fd)*T,tall:flat?0:1,flat:flat,cs:0,cb:Math.round(oy+fd*T),foot:16,fx:0,a:1,fu:{k:(k==='slide'||k==='slideL')?'slide':(ACT[ROOM2.act[k]]||'_'+k)},room2:fixed?null:it,fixed2:fixed?1:0};m.objs.push(o);
+    if(k==='slideL'){const cy=(ty+fd/2)*T;o.usePt=[(tx+fw-.66)*T,(ty-.3)*T];   // the way in: on the far side of the tower, on the open floor of the play room
+      o.ride=[(tx+fw-.66)*T,cy-1.49*T+12,(tx+.35)*T,cy-.31*T+12,(tx-.4)*T,cy+8]}   // from the platform, down the slide to its low end, then a small hop into the ball pit
     if(!flat)for(let j=Math.floor(ty);j<=Math.floor(ty+fd-.01);j++)for(let i=Math.floor(tx);i<=Math.floor(tx+fw-.01);i++){const ax=Math.min(i+1,tx+fw)-Math.max(i,tx),ay=Math.min(j+1,ty+fd)-Math.max(j,ty);
       if(ax*ay>=.4){const kk=key(i,j);if(!m.SOLID.has(kk)){m.SOLID.add(kk);m._fs.push(kk)}}}};
   for(const f of D.fixed||[])put(f,1);for(const it of m.layout2)put(it,0)}
@@ -3913,9 +3915,15 @@ function pitTick(){const m=M;if(!m||!m._balls||!P)return;const now=performance.n
     b.x+=b.vx*dt;b.y+=b.vy*dt;const k=Math.pow(.03,dt);b.vx*=k;b.vy*=k;if(b.x<L){b.x=L;b.vx=Math.abs(b.vx)*.6}if(b.x>Rr){b.x=Rr;b.vx=-Math.abs(b.vx)*.6}if(b.y<Tp){b.y=Tp;b.vy=Math.abs(b.vy)*.6}if(b.y>Bt){b.y=Bt;b.vy=-Math.abs(b.vy)*.6}}}
 // ---- the slide: stand by it, press the big button, ride down into the balls
 try{Object.assign(TX.th,{actSlide:'เล่นสไลเดอร์'});if(TX.en)Object.assign(TX.en,{actSlide:'Slide'});FURN_ACT.slide='slide'}catch(e){}
-function slideGo(){const m=M,o=m&&m.objs.find(q=>q.fu&&q.fu.k==='slide');if(!o||P.slide)return;P.path=null;P.act=null;P.slide={t:0,x:o.x,y0:o.y-o.cb+34,y1:o.y+14};try{sfx('warp')}catch(e){}}
-function slideTick(){const s=P&&P.slide;if(!s)return;const now=performance.now(),dt=Math.min(.05,(now-(s.last||now))/1000);s.last=now;s.t+=dt/1.1;const e=Math.min(1,s.t),k=e*e;P.x=s.x;P.y=s.y0+(s.y1-s.y0)*k;P.path=null;P.row=0;P.moving=false;
-  if(e>=1){P.slide=null;window._slides=(window._slides||0)+1;try{sfx('pick')}catch(_){}if(M._balls)for(const b of M._balls){const dx=b.x-P.x,dy=b.y-P.y,d=Math.hypot(dx,dy);if(d<46){b.vx+=(dx/(d||1))*160;b.vy+=(dy/(d||1))*160}}}}
+function slideGo(){const m=M,o=m&&m.objs.find(q=>q.fu&&q.fu.k==='slide');if(!o||P.slide)return;P.path=null;P.act=null;
+  P.slide=o.ride?{t:0,side:1,o,oy:o.y,ocb:o.cb,r:o.ride}:{t:0,x:o.x,y0:o.y-o.cb+34,y1:o.y+14};try{sfx('warp')}catch(e){}}
+function slideTick(){const s=P&&P.slide;if(!s)return;const now=performance.now(),dt=Math.min(.05,(now-(s.last||now))/1000);s.last=now;P.path=null;P.moving=false;
+  if(s.side){s.t+=dt/1.4;const e=Math.min(1,s.t),r=s.r;P.row=6;   // looking left, the way the slide runs
+    if(e<.75){const k=(e/.75)*(e/.75);P.x=r[0]+(r[2]-r[0])*k;P.y=r[1]+(r[3]-r[1])*k}else{const k=(e-.75)/.25;P.x=r[2]+(r[4]-r[2])*k;P.y=r[3]+(r[5]-r[3])*k-Math.sin(k*Math.PI)*9}
+    const ny=Math.min(s.oy,P.y-2);s.o.cb=s.ocb-(s.oy-ny);s.o.y=ny;   // while riding, the rider is drawn in front of the slide: the slide's place in the drawing order moves up, its picture stays where it is
+    if(e>=1){s.o.y=s.oy;s.o.cb=s.ocb}}
+  else{s.t+=dt/1.1;const e=Math.min(1,s.t),k=e*e;P.x=s.x;P.y=s.y0+(s.y1-s.y0)*k;P.row=0}
+  if(s.t>=1){P.slide=null;window._slides=(window._slides||0)+1;try{sfx('pick')}catch(_){}if(M._balls)for(const b of M._balls){const dx=b.x-P.x,dy=b.y-P.y,d=Math.hypot(dx,dy);if(d<46){b.vx+=(dx/(d||1))*160;b.vy+=(dy/(d||1))*160}}}}
 {const _dv39=drawVFX2;drawVFX2=function(tm){_dv39.apply(this,arguments);try{if(M&&M.room2){slideTick();pitTick()}}catch(e){}}}
 // the piano: eight keys, do to high do, the game's own sound (no file)
 let _pianoAC=null;
