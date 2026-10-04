@@ -1,0 +1,13 @@
+// test_135_robot.js — รุ่น 1.35: หุ่นช่วยงาน 8 ทิศ + ท่าเดิน 6 เฟรม · PORT=... CHROME_EXE=... · MISSING=1 ทดสอบตอนไม่มีไฟล์ robot-walk.png
+const p=require('/home/claude/.npm-global/lib/node_modules/@mermaid-js/mermaid-cli/node_modules/puppeteer');
+(async()=>{const b=await p.launch({executablePath:process.env.CHROME_EXE||'/home/claude/.cache/puppeteer/chrome/linux-131.0.6778.204/chrome-linux64/chrome',args:['--no-sandbox']});
+const pg=await b.newPage();await pg.setViewport({width:812,height:330,isMobile:true,hasTouch:true,deviceScaleFactor:2.6});const errs=[];pg.on('pageerror',e=>errs.push(e.message));
+await pg.goto('http://localhost:'+(process.env.PORT||8775)+'/?gm',{waitUntil:'load'});await pg.evaluate(()=>localStorage.clear());await pg.reload({waitUntil:'load'});await new Promise(r=>setTimeout(r,6000));
+const R=await pg.evaluate(async()=>{const o={version:VERSION,sheet:!!IMG.robotWalk,sheetSize:IMG.robotWalk?[IMG.robotWalk.width,IMG.robotWalk.height]:null};const sleep=ms=>new Promise(r=>setTimeout(r,ms));gmMakeSlot();const d=Store.all();S=d.slots[d.cur];startGame();await sleep(1500);document.querySelectorAll('#cr,#title,#picker').forEach(e=>e.classList.add('hide'));fpsChecks=6;GM.hour=10;
+ const h=farmSave();h.farm.robot=true;h.farm.robotOn=false;HOME.put(h);delete CACHE.farm;goMap('farm');await sleep(1500);try{for(let i=0;i<12&&DLG;i++){if(typeof dlgNext==='function')dlgNext();else DLG=null;await sleep(150)}DLG=null;PAUSE=false}catch(e){}document.querySelectorAll('#hud,#dlg,#act').forEach(e=>e.classList.add('hide'));
+ const rb=M.robot&&M.robot.o;if(!rb)return Object.assign(o,{robot:false});P.x=rb.x-60;P.y=rb.y+50;await sleep(600);
+ o.robot={size:[rb.sw,rb.sh],canvas:[IMG._robot.width,IMG._robot.height]};const names=['S','SE','E','NE','N','NW','W','SW'],step={S:[0,1],SE:[1,1],E:[1,0],NE:[1,-1],N:[0,-1],NW:[-1,-1],W:[-1,0],SW:[-1,1]};o.rowWhenMoving={};const x0=rb.x,y0=rb.y;const frames=new Set();
+ for(const n of names){const [sx,sy]=step[n];for(let i=0;i<14;i++){rb.x+=sx*1.2;rb.y+=sy*1.2;await sleep(34);frames.add(rb._drawnK%8)}o.rowWhenMoving[n]=names[rb._row];rb.x=x0;rb.y=y0;rb._px=x0;rb._py=y0;await sleep(60)}
+ o.walkFramesSeen=[...frames].sort();await sleep(500);o.standingWhenStill=rb._drawnK%8===0;rb.x=x0;rb.y=y0;await sleep(300);return o});
+if(R.robot){await pg.evaluate(async()=>{const rb=M.robot.o;window._iv=setInterval(()=>{rb.x-=1.1;rb.y+=1.1},33);await new Promise(r=>setTimeout(r,700))});await pg.screenshot({path:'r_robot.png'});await pg.evaluate(()=>clearInterval(window._iv))}
+console.log(JSON.stringify(R));console.log('errors',errs.length,errs.slice(0,4));await b.close()})();

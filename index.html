@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.34';
+const VERSION='Lantern Academy 1.35';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -3608,7 +3608,7 @@ function g9WalkThen(x,y,fn){if(!P||!M)return;try{HOLD=null}catch(e){}   /* the t
 // the assembled scene brings its own soft shadows in the ground picture: the engine's leaning shadows are not added on top (they doubled every shadow and hid the moving water)
 {const _bs16=bakeShadows;bakeShadows=function(m){if(m&&m.g9b&&m.ground){m.shadow=m.ground;m.shadowSC=SC;return}return _bs16.apply(this,arguments)}}
 try{Object.assign(TX.th,{fishHow:'เหวี่ยงเบ็ดแล้ว รอจนเห็น ❗ แล้วกดปุ่มอีกครั้งทันที'});if(TX.en)Object.assign(TX.en,{fishHow:'Line is out. Wait for ❗ then press the button again right away'})}catch(e){}
-{const _dv14=drawVFX2;drawVFX2=function(tm){_dv14.apply(this,arguments);try{if(M&&M.g9b&&G9B){g9bGate();g9bCrate();g9bRobot();g9bSitTick();g9bConv(tm);g9bFire(tm);g9bSpots(tm);g9bShadows();if(!LITE){g9bWaterInit();g9bWater(tm)}}}catch(e){}}}
+{const _dv14=drawVFX2;drawVFX2=function(tm){_dv14.apply(this,arguments);try{if(M&&M.g9b&&G9B){g9bGate();g9bCrate();g9bRobot8();g9bSitTick();g9bConv(tm);g9bFire(tm);g9bSpots(tm);g9bShadows();if(!LITE){g9bWaterInit();g9bWater(tm)}}}catch(e){}}}
 // ================= 1.15 FARM ART · crops that grow in four steps + the energy converter as a real picture (farm-art.png) =================
 // One small sheet. If it is missing, everything is drawn the old way (32-px crop tiles, the converter in code). Rows on the sheet: carrot, lettuce, tomato, corn, pumpkin;
 // for each: s1..s4 = sprout, young, half-grown, ripe · item = the picked vegetable · bag = its seed bag (item and bag are for menus later).
@@ -3856,6 +3856,15 @@ function anyNear(){if(!S||!M||!P||PAUSE||DLG)return null;if(M.g9b){const c=g9bNe
   if(M.kind==='room'&&!M.visiting&&!(typeof DEC!=='undefined'&&DEC.on))for(const o of M.objs){if(!o.fu||!FURN_ACT[o.fu.k])continue;const d=Math.hypot(o.x-P.x,o.y-P.y);if(d<52)put(d,'\u{1F3E0}','actUse',()=>{try{furnAct(o.fu.k)}catch(e){}})}
   if(!M.g9b&&M.fishSpot&&Math.hypot(M.fishSpot.x-P.x,M.fishSpot.y-P.y)<30)put(0,'\u{1F3A3}','actFish',fishAct);
   return best}
+// ================= 1.35 THE HELPER ROBOT FROM PIXELLAB: eight directions, standing + six walking frames (robot-walk.png, 7 x 8 cells of 64 px) =================
+// Rows in the game's own direction order (S, SE, E, NE, N, NW, W, SW), column 0 = standing, 1-6 = walking. Nothing is mirrored in the game: the can on its back
+// shows differently from the left and from the right. File missing: the four still pictures of 1.23, and without those the old drawn robot.
+{const i=new Image();i.onload=()=>{IMG.robotWalk=i};i.onerror=()=>{};i.src=(window.EMBED_ASSETS&&window.EMBED_ASSETS['robot-walk.png'])||'robot-walk.png'}
+function g9bRobot8(){const R=M.robot&&M.robot.o,c=IMG._robot,im=IMG.robotWalk;if(!im){g9bRobot();return}if(!R||!c||!c.getContext)return;
+  const dx=R.x-(R._px===undefined?R.x:R._px),dy=R.y-(R._py===undefined?R.y:R._py);R._px=R.x;R._py=R.y;const moving=Math.abs(dx)+Math.abs(dy)>.15;
+  if(moving){R._row=rowFor(dx,dy);R._still=0}else R._still=(R._still||0)+1;
+  const row=R._row||0,fr=(moving||R._still<4)&&R._row!==undefined?1+Math.floor(performance.now()/110)%6:0,k=row*8+fr;if(k===R._drawnK&&c.width===64)return;R._drawnK=k;
+  if(c.width!==64||c.height!==64){c.width=64;c.height=64}const g=c.getContext('2d');g.clearRect(0,0,64,64);g.imageSmoothingEnabled=false;g.drawImage(im,fr*64,row*64,64,64,0,0,64,64);R.sx=0;R.sy=0;R.sw=64;R.sh=64;R.cb=61}
 // ================= 1.07 H9 · PAPLERN VILLAGE, NEW SCENE (painted, MAP_SPEC_H9 v1.4) =================
 // A separate map "h9" for now, reached by the GM (warp) and from the G9 farm's east road; the village players use (map "capital") is untouched.
 // Needs map-H9-village.jpg (a sharper map-H9-village-hi.jpg replaces it once uploaded); missing picture -> this map is not offered at all.
