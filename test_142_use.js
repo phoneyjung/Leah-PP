@@ -1,0 +1,15 @@
+// test_142_use.js — รุ่น 1.42: ของในบ้านที่กดใช้ได้ · เตา = ทำอาหาร · ชั้นหนังสือ = อ่านหนังสือ · เตียง โซฟา เปียโน ยังใช้ได้ · PORT=... CHROME_EXE=...
+const p=require('/home/claude/.npm-global/lib/node_modules/@mermaid-js/mermaid-cli/node_modules/puppeteer');
+(async()=>{const b=await p.launch({executablePath:process.env.CHROME_EXE||'/home/claude/.cache/puppeteer/chrome/linux-131.0.6778.204/chrome-linux64/chrome',args:['--no-sandbox']});
+const pg=await b.newPage();await pg.setViewport({width:1000,height:640,isMobile:true,hasTouch:true,deviceScaleFactor:1});const errs=[];pg.on('pageerror',e=>errs.push(e.message));
+await pg.goto('http://localhost:'+(process.env.PORT||8775)+'/?gm',{waitUntil:'load'});await pg.evaluate(()=>localStorage.clear());await pg.reload({waitUntil:'load'});await new Promise(r=>setTimeout(r,6500));
+const R=await pg.evaluate(async()=>{const o={version:VERSION};const sleep=ms=>new Promise(r=>setTimeout(r,ms));gmMakeSlot();const d=Store.all();S=d.slots[d.cur];startGame();await sleep(1500);document.querySelectorAll('#cr,#title,#picker').forEach(e=>e.classList.add('hide'));fpsChecks=6;
+ const clear=async()=>{try{closeModal()}catch(e){}try{for(let i=0;i<12&&DLG;i++){if(typeof dlgNext==='function')dlgNext();else DLG=null;await sleep(120)}}catch(e){}DLG=null;PAUSE=false;HOLD=null};
+ const h=HOME.get();h.lv=2;if(h.house)h.house.lv=2;HOME.put(h);delete CACHE.farm;goMap('farm');await sleep(1100);await clear();goMap('room');await sleep(1000);await clear();
+ const st=M.reach0,seen=new Set([key(st[0],st[1])]),q=[st.slice()];while(q.length){const [x,y]=q.pop();for(const [a,c] of [[x+1,y],[x-1,y],[x,y+1],[x,y-1]]){const k=key(a,c);if(!seen.has(k)&&walkable(M,a,c)){seen.add(k);q.push([a,c])}}}
+ const beside=async name=>{const ob=M.objs.find(z=>z.room2&&z.room2[0]===name);if(!ob)return{missing:true};let best=null,bd=1e9;for(let ty=Math.floor(ob.y/T)-1;ty<=Math.floor(ob.y/T)+2;ty++)for(let tx=Math.floor(ob.x/T)-3;tx<=Math.floor(ob.x/T)+3;tx++){const dd=Math.hypot(tx*T+16-ob.x,ty*T+16-ob.y);if(walkable(M,tx,ty)&&seen.has(key(tx,ty))&&dd<50&&dd<bd){bd=dd;best=[tx*T+16,ty*T+16]}}
+   if(!best)return{noFreeTileBeside:true};P.x=best[0];P.y=best[1];P.path=null;await sleep(600);const c=anyNear();return{button:c&&c.k,word:document.getElementById('atkL').textContent}};
+ o.stove=await beside('stove');autoAct();await sleep(500);const md=document.querySelector('#modal:not(.hide)');o.stove.kitchenScreenOpened=!!md&&/\u{1F373}/u.test(md.textContent);await clear();
+ o.bookshelf=await beside('bookshelf');let said=null;const _say=say;say=function(x){said=x;return _say.apply(this,arguments)};const exp0=S.exp,lv0=S.lv;autoAct();await sleep(500);say=_say;o.bookshelf.somethingHappened=!!said||S.exp!==exp0||S.lv!==lv0||!!DLG||!!document.querySelector('#modal:not(.hide)');await clear();
+ o.bed=await beside('bed');o.sofa=await beside('sofa');o.piano=await beside('piano');o.jarShelfHasNoButton=(await beside('shelf')).button!=='actRead';return o});
+console.log(JSON.stringify(R));console.log('errors',errs.length,errs.slice(0,4));await b.close()})();

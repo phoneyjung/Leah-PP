@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.41';
+const VERSION='Lantern Academy 1.42';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -3853,7 +3853,7 @@ function anyNear(){if(!S||!M||!P||PAUSE||DLG)return null;if(M.g9b){const c=g9bNe
   if(M.board){const d=Math.hypot(M.board.x-P.x,M.board.y+12-P.y);if(d<60)put(d,'\u{1F4DC}','actBoard',()=>{try{openBoard()}catch(e){}})}
   for(const c of M.crystals||[]){if(c.awake)continue;const d=Math.hypot(c.x-P.x,c.y+8-P.y);if(d<64)put(d,'\u{1F48E}','actWake',()=>tapWorld(c.x,c.y-10))}
   for(const g of M.digs||[]){if(g.done)continue;const d=Math.hypot(g.x-P.x,g.y-P.y);if(d<70)put(d,'\u26CF\uFE0F','actDig',()=>tapWorld(g.x,g.y))}
-  if(M.kind==='room'&&!M.visiting&&!(typeof DEC!=='undefined'&&DEC.on))for(const o of M.objs){if(!o.fu||!FURN_ACT[o.fu.k])continue;const d=o.usePt?Math.hypot(o.usePt[0]-P.x,o.usePt[1]-P.y):Math.hypot(o.x-P.x,o.y-P.y);if(d<(o.usePt?48:o.fu.k==='slide'?76:52))put(d,o.fu.k==='piano'?'\u{1F3B9}':o.fu.k==='slide'?'\u{1F6DD}':'\u{1F3E0}',o.fu.k==='piano'?'actPiano':o.fu.k==='slide'?'actSlide':'actUse',()=>{try{furnAct(o.fu.k)}catch(e){}})}
+  if(M.kind==='room'&&!M.visiting&&!(typeof DEC!=='undefined'&&DEC.on))for(const o of M.objs){if(!o.fu||!FURN_ACT[o.fu.k])continue;const d=o.usePt?Math.hypot(o.usePt[0]-P.x,o.usePt[1]-P.y):Math.hypot(o.x-P.x,o.y-P.y);if(d<(o.usePt?48:o.fu.k==='slide'?76:52)){const K=o.fu.k,W2=M.room2?{piano:['\u{1F3B9}','actPiano'],slide:['\u{1F6DD}','actSlide'],stove:['\u{1F373}','actCook'],shelf:['\u{1F4DA}','actRead']}[K]:(K==='piano'?['\u{1F3B9}','actPiano']:null);put(d,W2?W2[0]:'\u{1F3E0}',W2?W2[1]:'actUse',()=>{try{furnAct(K)}catch(e){}})}}
   if(!M.g9b&&M.fishSpot&&Math.hypot(M.fishSpot.x-P.x,M.fishSpot.y-P.y)<30)put(0,'\u{1F3A3}','actFish',fishAct);
   return best}
 // ================= 1.35 THE HELPER ROBOT FROM PIXELLAB: eight directions, standing + six walking frames (robot-walk.png, 7 x 8 cells of 64 px) =================
@@ -3889,7 +3889,7 @@ function f2Shadow(w,h,round){const k='_sh'+w+'x'+h+(round?'o':'');if(IMG[k])retu
   for(let i=0;i<6;i++){const q=i*1.1,x=q,y=q,ww=w+12-2*q,hh=h+12-2*q,r=Math.max(2,7-q);g.fillStyle='rgba(34,18,10,.042)';g.beginPath();
     if(round)g.ellipse(x+ww/2,y+hh/2,ww/2,hh/2,0,0,7);else{g.moveTo(x+r,y);g.lineTo(x+ww-r,y);g.quadraticCurveTo(x+ww,y,x+ww,y+r);g.lineTo(x+ww,y+hh-r);g.quadraticCurveTo(x+ww,y+hh,x+ww-r,y+hh);g.lineTo(x+r,y+hh);g.quadraticCurveTo(x,y+hh,x,y+hh-r);g.lineTo(x,y+r);g.quadraticCurveTo(x,y,x+r,y);g.closePath()}g.fill()}
   IMG[k]=c;return k}
-function room2Place(m){m.objs.length=m.fixed;for(const k of m._fs||[])m.SOLID.delete(k);m._fs=[];const D=m.r2,dy=ROOM2.rowsAbovePlan,ACT={sleep:'bed',cuddle:'sofa',piano:'piano'};
+function room2Place(m){m.objs.length=m.fixed;for(const k of m._fs||[])m.SOLID.delete(k);m._fs=[];const D=m.r2,dy=ROOM2.rowsAbovePlan,ACT={sleep:'bed',cuddle:'sofa',piano:'piano',cook:'stove',read:'shelf'};
   const put=(it,fixed)=>{const [k,r,tx,ty0]=it,vs=ROOM2.pieces[k];if(!vs)return;const [sx,sy,sw,sh,ox,oy,fw,fd]=vs[r%vs.length],ty=ty0+dy,flat=ROOM2.solid[k]===0;if(tx+fw>D.w+.01||ty0+fd>D.grid.length+.01)return;   // a piece of a bigger house: kept in the save, not shown here
     const o={img:'furnPlain',sx,sy,sw,sh,x:tx*T-ox+sw/2,y:(ty+fd)*T,tall:flat?0:1,flat:flat,cs:0,cb:Math.round(oy+fd*T),foot:16,fx:0,a:1,fu:{k:(k==='slide'||k==='slideL')?'slide':(ACT[ROOM2.act[k]]||'_'+k)},room2:fixed?null:it,fixed2:fixed?1:0};m.objs.push(o);
     if(!flat){const rd=(k==='roundtable'||k==='plant'||k==='washtub'),sc=k==='roundtable'?.74:rd?.9:1,w=Math.round(fw*T*sc),h=Math.round(fd*T*sc*(rd?.8:1)),sk=f2Shadow(w,h,rd);   // a soft shadow the size of the foot of the piece, a little down and to the right (light from the upper left)
@@ -3943,7 +3943,8 @@ function pianoOpen(){let d=document.getElementById('pianoBox');if(d)d.remove();d
     const play=ev=>{try{ev.preventDefault();_pianoAC=_pianoAC||new (window.AudioContext||window.webkitAudioContext)();const a=_pianoAC,o=a.createOscillator(),g=a.createGain();o.type='triangle';o.frequency.value=f;g.gain.setValueAtTime(.0001,a.currentTime);g.gain.exponentialRampToValueAtTime(.35,a.currentTime+.015);g.gain.exponentialRampToValueAtTime(.0001,a.currentTime+.9);o.connect(g);g.connect(a.destination);o.start();o.stop(a.currentTime+.95);window._pianoPlayed=(window._pianoPlayed||0)+1;b.style.transform='translateY(3px)';setTimeout(()=>{b.style.transform=''},120)}catch(e){}};
     b.addEventListener('pointerdown',play);row.appendChild(b)});
   d.querySelector('#pianoX').onclick=()=>{d.remove();PAUSE=false}}
-{const _fa37=furnAct;furnAct=function(k){if(k==='piano'){pianoOpen();return true}if(k==='slide'){slideGo();return true}return _fa37.apply(this,arguments)}}
+{const _fa37=furnAct;furnAct=function(k){if(k==='piano'){pianoOpen();return true}if(k==='slide'){slideGo();return true}if(k==='stove'){try{openKitchen()}catch(e){}return true}return _fa37.apply(this,arguments)}}
+try{FURN_ACT.stove='cook';Object.assign(TX.th,{actCook:'ทำอาหาร',actRead:'อ่านหนังสือ'});if(TX.en)Object.assign(TX.en,{actCook:'Cook',actRead:'Read'})}catch(e){}
 
 // ================= 1.38 ARRANGING THE NEW HOUSE: move, turn four ways, put away, take out again =================
 // Tap a piece to choose it, tap the floor to move it there, Turn turns it a quarter, Store puts it in the house store, a stored piece is taken out by tapping
