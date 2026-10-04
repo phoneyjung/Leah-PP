@@ -40,7 +40,7 @@ SHEETS = {'A': ['bed', 'wardrobe', 'desk'], 'B': ['piano', 'counter', 'stove'], 
 VIEWS = ['S', 'E', 'N', 'W']
 def tr(view, w, d, u, v):                                            # piece coordinates -> (across, depth toward the viewer)
     return {'S': (u, v), 'E': (v, w - u), 'N': (w - u, d - v), 'W': (d - v, u)}[view]
-def render(parts, w, d, view):
+def render(parts, w, d, view, PX=PX):
     prim = []
     for p in parts:
         if p[0] == 'box':
@@ -82,6 +82,21 @@ for name, rows in SHEETS.items():
             s, sz = render(parts, w, d, v); x = c * CW + (CW - s.width) // 2; assert s.height <= CH - 4, (piece, v, s.height); im.alpha_composite(s, (x, base - s.height)); meta[name][piece]['boxes'].append([x, base - s.height, x + s.width, base]); meta[name][piece]['tiles'].append(sz)
     im.convert('RGB').save(f'2_guide-{name}.png')
 json.dump({'px_per_tile': PX, 'cell_w': CW, 'columns': ['facing viewer', 'facing right', 'facing away', 'facing left'], 'sheets': meta}, open('furniture_guides.json', 'w'))
+# ---- sheet D again, larger (4 Oct): at 72 px a tile the toilet was only 57 px wide, and the painter blew the small pieces up by 1.2-1.65 times and flattened the round table top.
+# Two sheets at 108 px a tile, so every shape is big enough to be painted inside: D1 = toilet and washstand (2 rows x 4 views), D2 = the four single pieces (2 x 2).
+P2 = 108; meta['D1'] = {'px_per_tile': P2}; meta['D2'] = {'px_per_tile': P2}
+im = Image.new('RGBA', (W, H), MAG + (255,))
+for r, piece in enumerate(['toilet', 'washstand']):
+    w, d, parts = PIECES[piece]; base = r * 512 + 512 - 40; meta['D1'][piece] = {'views': 4, 'foot_w_d': [w, d], 'boxes': []}
+    for c, v in enumerate(VIEWS):
+        s_, sz = render(parts, w, d, v, P2); x = c * 384 + (384 - s_.width) // 2; assert s_.height <= 500 and s_.width <= 380, (piece, v, s_.size); im.alpha_composite(s_, (x, base - s_.height)); meta['D1'][piece]['boxes'].append([x, base - s_.height, x + s_.width, base])
+im.convert('RGB').save('2_guide-D1.png')
+im = Image.new('RGBA', (W, H), MAG + (255,))
+for i_, (k, (w, d, parts)) in enumerate(ONE.items()):
+    s_, sz = render(parts, w, d, 'S', P2); cx = (i_ % 2) * 768 + 384; base = (i_ // 2) * 512 + 512 - 40; assert s_.height <= 470, (k, s_.size); x = cx - s_.width // 2; im.alpha_composite(s_, (x, base - s_.height)); meta['D2'][k] = {'views': 1, 'box': [x, base - s_.height, x + s_.width, base], 'foot': [w, d]}
+im.convert('RGB').save('2_guide-D2.png')
+json.dump({'px_per_tile': PX, 'cell': [CW, CH], 'columns': ['facing viewer', 'facing right', 'facing away', 'facing left'], 'sheets': meta}, open('furniture_guides.json', 'w'))
+S2 = Image.new('RGB', (W * 2 + 10, H), (20, 20, 20)); S2.paste(Image.open('2_guide-D1.png'), (0, 0)); S2.paste(Image.open('2_guide-D2.png'), (W + 10, 0)); S2.resize((1540, 512)).save('_D12.png')
 S = Image.new('RGB', (W + 10, H * 2 + 10), (20, 20, 20))
 for i, n in enumerate('AB'): S.paste(Image.open(f'2_guide-{n}.png'), (0, i * (H + 10)))
 S.resize((1152, int((H * 2 + 10) * 1152 / (W + 10)))).save('_AB.png')
