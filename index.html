@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.36';
+const VERSION='Lantern Academy 1.37';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -3606,7 +3606,7 @@ function g9bGateOpenPic(){if(IMG._g9bGateO)return IMG._g9bGateO;const r=G9B.rect
 function g9WalkThen(x,y,fn){if(!P||!M)return;try{HOLD=null}catch(e){}   /* the tap that got us here never reaches the window's pointerup (the farm handlers stop it), so 'finger still down' must be cleared here or the player is dragged to the finger and the walk is dropped */
   if(Math.hypot(P.x-x,P.y-y)<46){fn();return}let pa=null;try{pa=findPath(M,P.x,P.y,x,y)}catch(e){}if(!pa||!pa.length){fn();return}P.act={k:'tap',o:{x,y:y-14,fn}};P.target=null;P.path=pa}
 // the assembled scene brings its own soft shadows in the ground picture: the engine's leaning shadows are not added on top (they doubled every shadow and hid the moving water)
-{const _bs16=bakeShadows;bakeShadows=function(m){if(m&&m.g9b&&m.ground){m.shadow=m.ground;m.shadowSC=SC;return}return _bs16.apply(this,arguments)}}
+{const _bs16=bakeShadows;bakeShadows=function(m){if(m&&(m.g9b||m.room2)&&m.ground){m.shadow=m.ground;m.shadowSC=SC;return}return _bs16.apply(this,arguments)}}   // 1.37: the new house inside is a painted scene too: no long outdoor shadows indoors
 try{Object.assign(TX.th,{fishHow:'เหวี่ยงเบ็ดแล้ว รอจนเห็น ❗ แล้วกดปุ่มอีกครั้งทันที'});if(TX.en)Object.assign(TX.en,{fishHow:'Line is out. Wait for ❗ then press the button again right away'})}catch(e){}
 {const _dv14=drawVFX2;drawVFX2=function(tm){_dv14.apply(this,arguments);try{if(M&&M.g9b&&G9B){g9bGate();g9bCrate();g9bRobot8();g9bSitTick();g9bConv(tm);g9bFire(tm);g9bSpots(tm);g9bShadows();if(!LITE){g9bWaterInit();g9bWater(tm)}}}catch(e){}}}
 // ================= 1.15 FARM ART · crops that grow in four steps + the energy converter as a real picture (farm-art.png) =================
@@ -3853,7 +3853,7 @@ function anyNear(){if(!S||!M||!P||PAUSE||DLG)return null;if(M.g9b){const c=g9bNe
   if(M.board){const d=Math.hypot(M.board.x-P.x,M.board.y+12-P.y);if(d<60)put(d,'\u{1F4DC}','actBoard',()=>{try{openBoard()}catch(e){}})}
   for(const c of M.crystals||[]){if(c.awake)continue;const d=Math.hypot(c.x-P.x,c.y+8-P.y);if(d<64)put(d,'\u{1F48E}','actWake',()=>tapWorld(c.x,c.y-10))}
   for(const g of M.digs||[]){if(g.done)continue;const d=Math.hypot(g.x-P.x,g.y-P.y);if(d<70)put(d,'\u26CF\uFE0F','actDig',()=>tapWorld(g.x,g.y))}
-  if(M.kind==='room'&&!M.visiting&&!(typeof DEC!=='undefined'&&DEC.on))for(const o of M.objs){if(!o.fu||!FURN_ACT[o.fu.k])continue;const d=Math.hypot(o.x-P.x,o.y-P.y);if(d<52)put(d,'\u{1F3E0}','actUse',()=>{try{furnAct(o.fu.k)}catch(e){}})}
+  if(M.kind==='room'&&!M.visiting&&!(typeof DEC!=='undefined'&&DEC.on))for(const o of M.objs){if(!o.fu||!FURN_ACT[o.fu.k])continue;const d=Math.hypot(o.x-P.x,o.y-P.y);if(d<52)put(d,o.fu.k==='piano'?'\u{1F3B9}':'\u{1F3E0}',o.fu.k==='piano'?'actPiano':'actUse',()=>{try{furnAct(o.fu.k)}catch(e){}})}
   if(!M.g9b&&M.fishSpot&&Math.hypot(M.fishSpot.x-P.x,M.fishSpot.y-P.y)<30)put(0,'\u{1F3A3}','actFish',fishAct);
   return best}
 // ================= 1.35 THE HELPER ROBOT FROM PIXELLAB: eight directions, standing + six walking frames (robot-walk.png, 7 x 8 cells of 64 px) =================
@@ -3865,6 +3865,39 @@ function g9bRobot8(){const R=M.robot&&M.robot.o,c=IMG._robot,im=IMG.robotWalk;if
   if(moving){R._row=rowFor(dx,dy);R._still=0}else R._still=(R._still||0)+1;
   const row=R._row||0,fr=(moving||R._still<4)&&R._row!==undefined?1+Math.floor(performance.now()/110)%6:0,k=row*8+fr;if(k===R._drawnK&&c.width===64)return;R._drawnK=k;
   if(c.width!==64||c.height!==64){c.width=64;c.height=64}const g=c.getContext('2d');g.clearRect(0,0,64,64);g.imageSmoothingEnabled=false;g.drawImage(im,fr*64,row*64,64,64,0,0,64,64);R.sx=0;R.sy=0;R.sw=64;R.sh=64;R.cb=61}
+// ================= 1.37 THE HOUSE INSIDE, NEW: step 1 of the approved plan (26 x 14 tiles, tall back wall, inner walls cut low) =================
+// room-L1.jpg = the painted empty rooms · furn-plain.png + furn-plain.json = the plain furniture that comes with the house, every piece in four views,
+// each picture with the place of its floor footprint. Any file missing: the old room, exactly as before.
+// This first version shows the house furnished as in the plan. Moving and turning the pieces is the next step; the old decorating mode is switched off in here.
+let ROOM2=null;
+{let left=3,bad=false,raw=null;const done=()=>{if(--left===0&&!bad)ROOM2=raw};
+  const img=(k,src)=>{const i=new Image();i.onload=()=>{IMG[k]=i;done()};i.onerror=()=>{bad=true};i.src=(window.EMBED_ASSETS&&window.EMBED_ASSETS[src])||src};img('roomL1','room-L1.jpg');img('furnPlain','furn-plain.png');
+  try{fetch('furn-plain.json').then(r=>r.ok?r.json():Promise.reject(0)).then(j=>{raw=j;done()}).catch(()=>{bad=true})}catch(e){bad=true}}
+try{Object.assign(TX.th,{actPiano:'เล่นเปียโน',decoSoon:'จัดบ้านแบบใหม่ (ย้ายและหมุนของ) กำลังทำ',pianoT:'เปียโน',pianoHint:'แตะคีย์เพื่อเล่น'});if(TX.en)Object.assign(TX.en,{actPiano:'Play piano',decoSoon:'The new decorating (moving and turning things) is being built',pianoT:'Piano',pianoHint:'Tap a key to play'});FURN_ACT.piano='piano'}catch(e){}
+function room2Layout(){const h=HOME.get();if(!h.room2){h.room2=ROOM2.start.map(a=>a.slice());h.rooms={};h.room=[];HOME.put(h)}return h.room2}   // owner, 4 Oct: things placed in the old house are dropped, the new house starts fresh
+function room2Place(m){m.objs.length=m.fixed;for(const k of m._fs||[])m.SOLID.delete(k);m._fs=[];const dy=ROOM2.rowsAbovePlan,ACT={sleep:'bed',cuddle:'sofa',piano:'piano'};
+  for(const it of m.layout2){const [k,r,tx,ty0]=it,vs=ROOM2.pieces[k];if(!vs)continue;const [sx,sy,sw,sh,ox,oy,fw,fd]=vs[r%vs.length],ty=ty0+dy,flat=ROOM2.solid[k]===0;
+    m.objs.push({img:'furnPlain',sx,sy,sw,sh,x:tx*T-ox+sw/2,y:(ty+fd)*T,tall:flat?0:1,flat:flat,cs:0,cb:Math.round(oy+fd*T),foot:16,fx:0,a:1,fu:{k:ACT[ROOM2.act[k]]||'_'+k},room2:it});
+    if(!flat)for(let j=Math.floor(ty);j<=Math.floor(ty+fd-.01);j++)for(let i=Math.floor(tx);i<=Math.floor(tx+fw-.01);i++){const ax=Math.min(i+1,tx+fw)-Math.max(i,tx),ay=Math.min(j+1,ty+fd)-Math.max(j,ty);
+      if(ax*ay>=.4){const kk=key(i,j);if(!m.SOLID.has(kk)){m.SOLID.add(kk);m._fs.push(kk)}}}}}
+{const _r37=MAPS.room;MAPS.room=function(){if(!ROOM2||!IMG.roomL1||!IMG.furnPlain)return _r37.apply(this,arguments);
+  const R=ROOM2,dy=R.rowsAbovePlan,m=newMap('room','room',R.w,R.h,61);m.nameKey='room';m.floor=1;m.indoor=true;m.painted='roomL1';m.room2=1;m.stairs=[];m.layout=[];
+  for(let y=0;y<R.h;y++)for(let x=0;x<R.w;x++){const c=y>=dy?((R.grid[y-dy]||'')[x]||'#'):'#';if(c!=='#'&&c!==' '&&c!=='P')m.FLOOR.add(key(x,y));else m.SOLID.add(key(x,y))}
+  const dx=R.door[0],dr=R.door[1]+dy;m.exits.push({id:'door',x:(dx+1)*T,y:dr*T+18,to:'capital',toExit:'home',label:'home'});m.spawnDefault=[(dx+1)*T,(dr-1)*T+16];   // the door leads back to where you came in from: the farm (handled by useExit) or the town
+  m.fixed=m.objs.length;m.layout2=room2Layout();room2Place(m);return m}}
+// the piano: eight keys, do to high do, the game's own sound (no file)
+let _pianoAC=null;
+function pianoOpen(){let d=document.getElementById('pianoBox');if(d)d.remove();d=document.createElement('div');d.id='pianoBox';PAUSE=true;
+  d.style.cssText='position:fixed;inset:0;z-index:60;background:rgba(20,13,36,.82);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px';
+  const N=[['โด','Do',261.63,'#e0413b'],['เร','Re',293.66,'#f08a2c'],['มี','Mi',329.63,'#f0c92c'],['ฟา','Fa',349.23,'#5bbf4a'],['ซอล','Sol',392,'#3fb6c9'],['ลา','La',440,'#4a78e0'],['ที','Ti',493.88,'#8a5be0'],['โด','Do',523.25,'#e05ba6']],en=(typeof LANG!=='undefined'&&LANG==='en');
+  d.innerHTML='<div style="color:#ffe27a;font-weight:700;font-size:18px">\u{1F3B9} '+t('pianoT')+' <span style="font-weight:400;font-size:12px;color:#fdf6e8">'+t('pianoHint')+'</span></div><div id="pianoKeys" style="display:flex;gap:4px"></div><button id="pianoX" style="font-size:15px;padding:8px 22px;background:#c9a45a;color:#1b1330;font-weight:700">'+(en?'Close':'ปิด')+'</button>';
+  document.body.appendChild(d);const row=d.querySelector('#pianoKeys');
+  N.forEach(([th,e2,f,c])=>{const b=document.createElement('button');b.textContent=en?e2:th;b.style.cssText='width:11vw;max-width:74px;min-width:38px;height:42vh;max-height:170px;background:#fdf6e8;color:#1b1330;font-weight:700;font-size:14px;border-radius:0 0 10px 10px;box-shadow:inset 0 -14px 0 '+c+',0 0 0 2px #1b1330;display:flex;align-items:flex-end;justify-content:center;padding:0 0 18px';
+    const play=ev=>{try{ev.preventDefault();_pianoAC=_pianoAC||new (window.AudioContext||window.webkitAudioContext)();const a=_pianoAC,o=a.createOscillator(),g=a.createGain();o.type='triangle';o.frequency.value=f;g.gain.setValueAtTime(.0001,a.currentTime);g.gain.exponentialRampToValueAtTime(.35,a.currentTime+.015);g.gain.exponentialRampToValueAtTime(.0001,a.currentTime+.9);o.connect(g);g.connect(a.destination);o.start();o.stop(a.currentTime+.95);window._pianoPlayed=(window._pianoPlayed||0)+1;b.style.transform='translateY(3px)';setTimeout(()=>{b.style.transform=''},120)}catch(e){}};
+    b.addEventListener('pointerdown',play);row.appendChild(b)});
+  d.querySelector('#pianoX').onclick=()=>{d.remove();PAUSE=false}}
+{const _fa37=furnAct;furnAct=function(k){if(k==='piano'){pianoOpen();return true}return _fa37.apply(this,arguments)}}
+{const _od37=openDeco;openDeco=function(){if(M&&M.room2){try{say(t('decoSoon'))}catch(e){}return}return _od37.apply(this,arguments)}}
 // ================= 1.07 H9 · PAPLERN VILLAGE, NEW SCENE (painted, MAP_SPEC_H9 v1.4) =================
 // A separate map "h9" for now, reached by the GM (warp) and from the G9 farm's east road; the village players use (map "capital") is untouched.
 // Needs map-H9-village.jpg (a sharper map-H9-village-hi.jpg replaces it once uploaded); missing picture -> this map is not offered at all.

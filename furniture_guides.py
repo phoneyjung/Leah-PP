@@ -67,7 +67,7 @@ def render(parts, w, d, view, PX=PX):
     edge = np.zeros((Hp, Wp), bool); edge[:, 1:] |= fid[:, 1:] != fid[:, :-1]; edge[1:, :] |= fid[1:, :] != fid[:-1, :]
     edge2 = edge.copy(); edge2[:, :-1] |= edge[:, 1:]; edge2[:-1, :] |= edge[1:, :]
     a = np.where(fid > 0, 255, 0).astype(np.uint8); col[edge2 & (fid > 0)] = (70, 52, 40); a[edge2] = 255; col[edge2 & (fid == 0)] = (70, 52, 40)
-    return Image.fromarray(np.dstack([col, a]), 'RGBA'), [round(xs1 - xs0, 2), round(ys1 - ys0, 2)]
+    return Image.fromarray(np.dstack([col, a]), 'RGBA'), [round(xs1 - xs0, 2), round(ys1 - ys0, 2), round(3 - xs0 * PX, 1), round(3 - ys0 * PX, 1)]      # size in tiles, then where the back-left corner of the floor footprint sits inside the picture (px)
 meta = {}
 for name, rows in SHEETS.items():
     CH = H // len(rows); im = Image.new('RGBA', (W, H), MAG + (255,)); meta[name] = {'rows': len(rows)}
