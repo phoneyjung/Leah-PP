@@ -1,0 +1,13 @@
+// test_132_install.js — รุ่น 1.32: กดปุ่มติดตั้งตอนถือเครื่องแนวตั้งแล้วต้องเห็นแผ่นวิธีติดตั้ง (อยู่เหนือหน้าจอ "หมุนจอ") · PORT=... CHROME_EXE=...
+const p=require('/home/claude/.npm-global/lib/node_modules/@mermaid-js/mermaid-cli/node_modules/puppeteer');
+(async()=>{const b=await p.launch({executablePath:process.env.CHROME_EXE||'/home/claude/.cache/puppeteer/chrome/linux-131.0.6778.204/chrome-linux64/chrome',args:['--no-sandbox']});const errs=[],out={};
+for(const [name,w,h] of [['upright',360,760],['sideways',812,330]]){const pg=await b.newPage();await pg.setViewport({width:w,height:h,isMobile:true,hasTouch:true,deviceScaleFactor:3});pg.on('pageerror',e=>errs.push(e.message));
+ await pg.goto('http://localhost:'+(process.env.PORT||8775)+'/',{waitUntil:'load'});await pg.evaluate(()=>localStorage.clear());await pg.reload({waitUntil:'load'});await new Promise(r=>setTimeout(r,4500));
+ const o=await pg.evaluate(()=>{const rot=document.getElementById('rot'),btn=document.getElementById('instTitle'),r=btn.getBoundingClientRect();INSTALL_EVT=null;   // as on the owner's phone: Chrome offered no install window
+  return{turnYourPhoneScreenShowing:!rot.classList.contains('hide'),button:[Math.round(r.left),Math.round(r.top),Math.round(r.width),Math.round(r.height)],buttonOnTop:document.elementFromPoint(r.left+r.width/2,r.top+r.height/2)===btn}});
+ const c=await pg.evaluate(()=>{const r=document.getElementById('instTitle').getBoundingClientRect();return [r.left+r.width/2,r.top+r.height/2]});await pg.touchscreen.tap(c[0],c[1]);await new Promise(r=>setTimeout(r,500));
+ Object.assign(o,await pg.evaluate(()=>{const d=document.getElementById('instHelp');if(!d)return{sheetShown:false};const e=document.elementFromPoint(innerWidth/2,innerHeight/2);const x=document.getElementById('instHelpX'),xr=x.getBoundingClientRect();
+  return{sheetShown:true,sheetIsWhatYouSee:d.contains(e),steps:d.querySelectorAll('li').length,closeButtonOnScreen:xr.top>=0&&xr.bottom<=innerHeight&&xr.left>=0&&xr.right<=innerWidth,report:d.querySelector('div div:nth-of-type(2)')?d.querySelector('div div:nth-of-type(2)').textContent.slice(0,140):''}}));
+ if(o.sheetShown){const x=await pg.evaluate(()=>{const r=document.getElementById('instHelpX').getBoundingClientRect();return [r.left+r.width/2,r.top+r.height/2]});await pg.screenshot({path:'h_'+name+'.png'});await pg.touchscreen.tap(x[0],x[1]);await new Promise(r=>setTimeout(r,300));o.closes=await pg.evaluate(()=>!document.getElementById('instHelp'))}
+ out[name]=o;await pg.close()}
+console.log(JSON.stringify(out));console.log('errors',errs.length,errs.slice(0,3));await b.close()})();

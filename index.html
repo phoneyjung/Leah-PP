@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.31';
+const VERSION='Lantern Academy 1.32';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -1791,9 +1791,9 @@ function cardSub(m){try{if(m.id==='trial')return t('trSub');const C=CAVE_CFG[m.i
 let INSTALL_EVT=null;addEventListener('beforeinstallprompt',e=>{e.preventDefault();INSTALL_EVT=e});
 const isStandalone=()=>matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches||navigator.standalone===true;
 const isIOS=()=>/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
-function installGame(){if(isStandalone()){say('✅ '+t('installed'));return}if(INSTALL_EVT){INSTALL_EVT.prompt();INSTALL_EVT.userChoice.then(c=>{if(c&&c.outcome==='accepted')say('🏮 '+t('installOk'));INSTALL_EVT=null});return}
+var installGame=function(){if(isStandalone()){say('✅ '+t('installed'));return}if(INSTALL_EVT){INSTALL_EVT.prompt();INSTALL_EVT.userChoice.then(c=>{if(c&&c.outcome==='accepted')say('🏮 '+t('installOk'));INSTALL_EVT=null});return}
   modal(`<h2>📲 ${t('installT')}</h2><div class="pn">${isIOS()?t('installIOS'):t('installOther')}</div>`)}
-{const _st=openSettings;openSettings=function(){const r=_st.apply(this,arguments);try{const h=document.querySelector('#modal h2')||document.querySelector('.modal h2');if(h&&!$('instBtn')&&!isStandalone()){const b=document.createElement('button');b.id='instBtn';b.textContent='📲 '+t('installT');b.style.marginLeft='8px';b.onclick=installGame;h.after(b)}}catch(e){}return r}}
+{const _st=openSettings;openSettings=function(){const r=_st.apply(this,arguments);try{const h=document.querySelector('#modal h2')||document.querySelector('.modal h2');if(h&&!$('instBtn')&&!isStandalone()){const b=document.createElement('button');b.id='instBtn';b.textContent='📲 '+t('installT');b.style.marginLeft='8px';b.onclick=()=>installGame();h.after(b)}}catch(e){}return r}}
 if('serviceWorker' in navigator&&location.protocol.startsWith('http')){let reloaded=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloaded)return;reloaded=true;try{say('✨ '+t('updated'))}catch(e){}});
   navigator.serviceWorker.getRegistration&&navigator.serviceWorker.getRegistration().then(reg=>{if(reg)setInterval(()=>reg.update().catch(()=>{}),30*60000)}).catch(()=>{})}
 
@@ -3815,10 +3815,29 @@ setInterval(()=>{try{thumbLayout()}catch(e){}},300);
 // ================= 1.30 INSTALL BUTTON ON THE FIRST SCREEN (owner, 4 Oct: opening the link must offer the install at once, not hide it in Settings) =================
 {const mk=()=>{try{if(isStandalone()||document.getElementById('instTitle'))return;const host=document.getElementById('title')||document.body;const b=document.createElement('button');b.id='instTitle';
     b.textContent='\u{1F4F2} '+t('installT');b.style.cssText='position:fixed;right:calc(12px + env(safe-area-inset-right,0px));top:calc(4px + env(safe-area-inset-top,0px));z-index:30;font-size:12px;line-height:1;padding:6px 10px;background:#c9a45a;color:#1b1330;font-weight:700;box-shadow:0 0 0 2px #fdf6e8,0 3px 0 2px #120b22';
-    b.onclick=installGame;host.appendChild(b);addEventListener('appinstalled',()=>{try{b.remove()}catch(e){}})}catch(e){}};
+    b.onclick=()=>installGame();host.appendChild(b);addEventListener('appinstalled',()=>{try{b.remove()}catch(e){}})}catch(e){}};
   if(document.readyState==='loading')addEventListener('DOMContentLoaded',mk);else mk();
   // once the game itself is on screen the button leaves; it stays reachable in Settings
   const _sg30=startGame;startGame=function(){const r=_sg30.apply(this,arguments);try{const b=document.getElementById('instTitle');if(b)b.remove()}catch(e){}return r}}
+// ================= 1.32 INSTALL: a help sheet that always shows (owner, 4 Oct: pressed the button on a phone held upright and nothing happened) =================
+// What went wrong: when Chrome has not offered its own install window, the game opened a small note, but that note lay underneath the "turn your phone" screen.
+// Now the note is a full sheet above everything, it says exactly where to tap in Chrome, and it shows what the phone reports so the cause can be found.
+function installHelp(why){let d=document.getElementById('instHelp');if(d)d.remove();d=document.createElement('div');d.id='instHelp';
+  d.style.cssText='position:fixed;inset:0;z-index:2147483600;background:rgba(20,13,36,.97);color:#fdf6e8;display:flex;align-items:center;justify-content:center;padding:18px;overflow:auto;font-size:15px;line-height:1.5';
+  const ios=isIOS(),sw=!!(navigator.serviceWorker&&navigator.serviceWorker.controller),en=(typeof LANG!=='undefined'&&LANG==='en');
+  const steps=ios?(en?['Tap the Share button at the bottom of Safari','Choose "Add to Home Screen"','Tap "Add"']:['แตะปุ่มแชร์ด้านล่างของ Safari','เลือก "เพิ่มไปยังหน้าจอโฮม"','แตะ "เพิ่ม"'])
+    :(en?['Tap the three dots \u22ee at the top right of Chrome','Choose "Add to Home screen" (or "Install app")','Tap "Install"']:['แตะจุดสามจุด \u22ee มุมขวาบนของ Chrome','เลือก "เพิ่มลงในหน้าจอหลัก" (หรือ "ติดตั้งแอป")','แตะ "ติดตั้ง"']);
+  d.innerHTML='<div style="max-width:420px;width:100%"><div style="font-size:20px;font-weight:700;color:#ffe27a;margin-bottom:10px">\u{1F4F2} '+(en?'Install the game':'ติดตั้งเกมลงเครื่อง')+'</div>'+
+    '<ol style="margin:0 0 12px 20px;padding:0">'+steps.map(x=>'<li style="margin:6px 0">'+x+'</li>').join('')+'</ol>'+
+    '<div style="font-size:12px;opacity:.8;border-top:1px solid rgba(253,246,232,.25);padding-top:8px">'+(en?'What this phone reports':'สิ่งที่เครื่องนี้รายงาน')+': '+
+      (why||'')+' \u00b7 '+(en?'install window from Chrome: ':'หน้าต่างติดตั้งจาก Chrome: ')+(INSTALL_EVT?(en?'ready':'พร้อม'):(en?'not offered':'ไม่ได้เสนอมา'))+' \u00b7 '+(en?'offline files: ':'ไฟล์ออฟไลน์: ')+(sw?(en?'ready':'พร้อม'):(en?'not yet (reload once)':'ยังไม่พร้อม (โหลดหน้าใหม่ 1 ครั้ง)'))+' \u00b7 '+VERSION+'</div>'+
+    '<button id="instHelpX" style="margin-top:14px;font-size:16px;padding:10px 22px;background:#c9a45a;color:#1b1330;font-weight:700">'+(en?'Close':'ปิด')+'</button></div>';
+  document.body.appendChild(d);document.getElementById('instHelpX').onclick=()=>d.remove()}
+installGame=function(){try{if(isStandalone()){installHelp(typeof LANG!=='undefined'&&LANG==='en'?'already running as an installed app':'กำลังเปิดจากแอปที่ติดตั้งแล้ว');return}
+    if(INSTALL_EVT){const ev=INSTALL_EVT;let p;try{p=ev.prompt()}catch(e){installHelp('prompt failed: '+e.message);return}
+      Promise.resolve(ev.userChoice).then(c=>{if(c&&c.outcome==='accepted'){try{say('\u{1F3EE} '+t('installOk'))}catch(e){}INSTALL_EVT=null}}).catch(()=>{});return}
+    installHelp('')}catch(e){try{installHelp('error: '+e.message)}catch(_){}}};
+{const b=document.getElementById('instTitle');if(b){b.onclick=()=>installGame();b.style.zIndex='2147483500'}}
 // ================= 1.07 H9 · PAPLERN VILLAGE, NEW SCENE (painted, MAP_SPEC_H9 v1.4) =================
 // A separate map "h9" for now, reached by the GM (warp) and from the G9 farm's east road; the village players use (map "capital") is untouched.
 // Needs map-H9-village.jpg (a sharper map-H9-village-hi.jpg replaces it once uploaded); missing picture -> this map is not offered at all.
