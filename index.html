@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.42';
+const VERSION='Lantern Academy 1.43';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -3874,6 +3874,8 @@ let ROOM2=null;
     // a house built before these files arrived (the game reopened inside the house) is the old room: drop it so the new one is built
     try{for(const k of ['room','room2','room3'])delete CACHE[k];if(typeof M!=='undefined'&&M&&/^room/.test(M.id||'')&&!M.room2&&typeof S!=='undefined'&&S)goMap('room')}catch(e){}}};
   const img=(k,src)=>{const i=new Image();i.onload=()=>{IMG[k]=i;done()};i.onerror=()=>{bad=true};i.src=(window.EMBED_ASSETS&&window.EMBED_ASSETS[src])||src};img('roomL1','room-L1.jpg');img('roomL2','room-L2.jpg');img('roomL3b','room-L3b.jpg');img('furnPlain','furn-plain.png');
+  // the fine furniture set has its own picture file. Without it the fine pieces are simply not shown and everything else works.
+  {const i=new Image();i.onload=()=>{IMG.furnFine=i;try{if(typeof M!=='undefined'&&M&&M.room2)room2Place(M)}catch(e){}};i.onerror=()=>{};i.src=(window.EMBED_ASSETS&&window.EMBED_ASSETS['furn-fine.png'])||'furn-fine.png'}
   try{fetch('furn-plain.json').then(r=>r.ok?r.json():Promise.reject(0)).then(j=>{raw=j;done()}).catch(()=>{bad=true})}catch(e){bad=true}}
 try{Object.assign(TX.th,{actPiano:'เล่นเปียโน',decoSoon:'จัดบ้านแบบใหม่ (ย้ายและหมุนของ) กำลังทำ',pianoT:'เปียโน',pianoHint:'แตะคีย์เพื่อเล่น'});if(TX.en)Object.assign(TX.en,{actPiano:'Play piano',decoSoon:'The new decorating (moving and turning things) is being built',pianoT:'Piano',pianoHint:'Tap a key to play'});FURN_ACT.piano='piano'}catch(e){}
 const f2RectOf=it=>{const vs=ROOM2.pieces[it[0]],v=vs[it[1]%vs.length];return [it[2],it[3],it[2]+v[6],it[3]+v[7]]},f2Hits=(r,q)=>r[0]<q[2]-.05&&q[0]<r[2]-.05&&r[1]<q[3]-.05&&q[1]<r[3]-.05;
@@ -3890,8 +3892,8 @@ function f2Shadow(w,h,round){const k='_sh'+w+'x'+h+(round?'o':'');if(IMG[k])retu
     if(round)g.ellipse(x+ww/2,y+hh/2,ww/2,hh/2,0,0,7);else{g.moveTo(x+r,y);g.lineTo(x+ww-r,y);g.quadraticCurveTo(x+ww,y,x+ww,y+r);g.lineTo(x+ww,y+hh-r);g.quadraticCurveTo(x+ww,y+hh,x+ww-r,y+hh);g.lineTo(x+r,y+hh);g.quadraticCurveTo(x,y+hh,x,y+hh-r);g.lineTo(x,y+r);g.quadraticCurveTo(x,y,x+r,y);g.closePath()}g.fill()}
   IMG[k]=c;return k}
 function room2Place(m){m.objs.length=m.fixed;for(const k of m._fs||[])m.SOLID.delete(k);m._fs=[];const D=m.r2,dy=ROOM2.rowsAbovePlan,ACT={sleep:'bed',cuddle:'sofa',piano:'piano',cook:'stove',read:'shelf'};
-  const put=(it,fixed)=>{const [k,r,tx,ty0]=it,vs=ROOM2.pieces[k];if(!vs)return;const [sx,sy,sw,sh,ox,oy,fw,fd]=vs[r%vs.length],ty=ty0+dy,flat=ROOM2.solid[k]===0;if(tx+fw>D.w+.01||ty0+fd>D.grid.length+.01)return;   // a piece of a bigger house: kept in the save, not shown here
-    const o={img:'furnPlain',sx,sy,sw,sh,x:tx*T-ox+sw/2,y:(ty+fd)*T,tall:flat?0:1,flat:flat,cs:0,cb:Math.round(oy+fd*T),foot:16,fx:0,a:1,fu:{k:(k==='slide'||k==='slideL')?'slide':(ACT[ROOM2.act[k]]||'_'+k)},room2:fixed?null:it,fixed2:fixed?1:0};m.objs.push(o);
+  const put=(it,fixed)=>{const [k,r,tx,ty0]=it,vs=ROOM2.pieces[k];if(!vs)return;const [sx,sy,sw,sh,ox,oy,fw,fd]=vs[r%vs.length],ty=ty0+dy,flat=ROOM2.solid[k]===0,sheet=(ROOM2.sheet&&ROOM2.sheet[k])||'furnPlain';if(!IMG[sheet])return;if(tx+fw>D.w+.01||ty0+fd>D.grid.length+.01)return;   // a piece of a bigger house: kept in the save, not shown here
+    const o={img:sheet,sx,sy,sw,sh,x:tx*T-ox+sw/2,y:(ty+fd)*T,tall:flat?0:1,flat:flat,cs:0,cb:Math.round(oy+fd*T),foot:16,fx:0,a:1,fu:{k:(k==='slide'||k==='slideL')?'slide':(ACT[ROOM2.act[k]]||'_'+k)},room2:fixed?null:it,fixed2:fixed?1:0};m.objs.push(o);
     if(!flat){const rd=(k==='roundtable'||k==='plant'||k==='washtub'),sc=k==='roundtable'?.74:rd?.9:1,w=Math.round(fw*T*sc),h=Math.round(fd*T*sc*(rd?.8:1)),sk=f2Shadow(w,h,rd);   // a soft shadow the size of the foot of the piece, a little down and to the right (light from the upper left)
       sh2.push({img:sk,sx:0,sy:0,sw:w+12,sh:h+12,x:(tx+fw/2)*T+2,y:(ty+fd)*T+8-(fd*T-h)/2,tall:0,flat:true,cs:0,cb:h+11,foot:8,fx:0,a:1,shadow2:1})}
     if(k==='slideL'){const cy=(ty+fd/2)*T;o.usePt=[(tx+fw-.66)*T,(ty-.3)*T];   // the way in: on the far side of the tower, on the open floor of the play room
@@ -3953,7 +3955,7 @@ const DECO2={on:false,sel:null,hold:null},F2N={th:{bed:'เตียง',wardrob
   en:{bed:'Bed',wardrobe:'Wardrobe',desk:'Desk',piano:'Piano',counter:'Kitchen counter',stove:'Stove',shelf:'Shelf',sofa:'Sofa',bathtub:'Bathtub',toilet:'Toilet',washstand:'Washstand',plant:'Plant',roundtable:'Round table',rug:'Rug',washtub:'Wash tub'}};
 try{Object.assign(TX.th,{d2Pick:'แตะของที่จะจัด แล้วแตะพื้นที่จะย้ายไป',d2Turn:'หมุน',d2Store:'เก็บ',d2Done:'เสร็จ',d2Place:'แตะพื้นที่จะวาง',d2Wall:'วางตรงนี้ไม่ได้: ชนผนังหรือประตู',d2Over:'วางตรงนี้ไม่ได้: ทับของอื่น',d2Block:'วางตรงนี้ไม่ได้: บังทางเดินหรือทับตัวเรา',d2TurnNo:'หมุนตรงนี้ไม่ได้ ลองย้ายออกมาก่อน'});
   if(TX.en)Object.assign(TX.en,{d2Pick:'Tap a piece, then tap the floor to move it',d2Turn:'Turn',d2Store:'Store',d2Done:'Done',d2Place:'Tap the floor to put it down',d2Wall:'Not here: a wall or a doorway',d2Over:'Not here: another piece is in the way',d2Block:'Not here: it would block the way',d2TurnNo:'It cannot turn here. Move it out first'})}catch(e){}
-const f2name=k=>((F2N[typeof LANG!=='undefined'?LANG:'th']||F2N.th)[k]||k),f2View=(k,r)=>{const vs=ROOM2.pieces[k];return vs[r%vs.length]},f2Rect=it=>{const v=f2View(it[0],it[1]);return [it[2],it[3],it[2]+v[6],it[3]+v[7]]},f2Snap=v=>Math.round(v*2)/2;
+const f2name=k=>{const L=F2N[typeof LANG!=='undefined'?LANG:'th']||F2N.th;return /_f$/.test(k)?(L[k.slice(0,-2)]||k)+' \u2728':(L[k]||k)},f2View=(k,r)=>{const vs=ROOM2.pieces[k];return vs[r%vs.length]},f2Rect=it=>{const v=f2View(it[0],it[1]);return [it[2],it[3],it[2]+v[6],it[3]+v[7]]},f2Snap=v=>Math.round(v*2)/2;
 function f2Valid(it,skip){const [x0,y0,x1,y1]=f2Rect(it),D=M.r2,G=D.grid;if((D.noPlace||[]).some(q=>f2Hits([x0,y0,x1,y1],q)))return 'd2Wall';if(ROOM2.solid[it[0]]!==0&&(D.fixed||[]).some(f=>f2Hits([x0,y0,x1,y1],f2RectOf(f))))return 'd2Over';
   for(let j=Math.floor(y0+.1);j<=Math.floor(y1-.1);j++)for(let i=Math.floor(x0+.1);i<=Math.floor(x1-.1);i++){const c=(G[j]||'')[i];if(!c||'# PE+'.includes(c))return 'd2Wall'}
   if(ROOM2.solid[it[0]]!==0)for(const o of M.layout2){if(o===skip||ROOM2.solid[o[0]]===0)continue;const [a0,b0,a1,b1]=f2Rect(o);if(x0<a1-.08&&a0<x1-.08&&y0<b1-.08&&b0<y1-.08)return 'd2Over'}

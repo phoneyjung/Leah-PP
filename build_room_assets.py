@@ -37,6 +37,30 @@ for i, (p, (w, d, parts), fit) in ((1, ('stairs', STAIRS, 2.0 / 3.0)),):      # 
 # the play slide seen from its side (tower on the right, sliding to the left), shown 1.2 times the size of its guide
 SS = json.load(open(SRC + '/house_slide_side.json')); aG = np.asarray(Image.open(f'{ART}/art-furniture-plain-G.png').convert('RGB')); bx = SS['box']; mg = 12; kS = T / SS['px_per_tile'] * 1.2
 imS = shrink(key_out(aG[max(0, bx[1] - mg):bx[3] + mg, max(0, bx[0] - mg):bx[2] + mg]), kS); sprites['slideL'] = [(imS, {'ox': round((SS['tiles'][2] + mg) * kS, 1), 'oy': round((SS['tiles'][3] + mg) * kS, 1), 'fw': round(SS['foot_w_d'][0] * 1.2, 2), 'fd': round(SS['foot_w_d'][1] * 1.2, 2)})]
+# ---- the FINE set (bought to replace the plain pieces): same shapes and footprints, its own atlas so the game still runs without it.
+# The painter drew some fine pieces a little outside the guide shape (a desk on open legs, a claw-foot bath), so each one is cut from its whole cell
+# by its own outline, and the place of its floor footprint is taken from the guide.
+def take_cell(path, px, cw, ch, cellx, celly, parts, w, d, view, basepad):
+    g, sz = render(parts, w, d, view, px); a = np.asarray(Image.open(path).convert('RGB')); base = celly * ch + ch - basepad; x = cellx * cw + (cw - g.width) // 2; y = base - g.height
+    cell = key_out(a[celly * ch:(celly + 1) * ch, cellx * cw:(cellx + 1) * cw]).copy(); n, lab, st, _ = cv2.connectedComponentsWithStats((cell[..., 3] > 0).astype(np.uint8), connectivity=8); keep = np.zeros(cell.shape[:2], np.uint8)
+    for i in range(1, n):
+        if st[i][4] > 150: keep[lab == i] = 1
+    cell[..., 3] = keep * 255; ys, xs = np.where(keep > 0); bx0, by0 = int(xs.min()), int(ys.min()); k = T / px; fw, fd = (w, d) if view in ('S', 'N') else (d, w)
+    pw, ph = int(xs.max()) + 1 - bx0, int(ys.max()) + 1 - by0
+    # the painter moved some rows up or down a little, so a piece is lined up by its own bottom edge and its own middle, the way the guide shape sits on its footprint
+    return shrink(cell[by0:by0 + ph, bx0:bx0 + pw], k), {'ox': round((pw / 2 - (g.width / 2 - sz[2])) * k, 1), 'oy': round((ph - (g.height - sz[3])) * k, 1), 'fw': fw, 'fd': fd, 'shift': [round(cellx * cw + bx0 + pw / 2 - (x + g.width / 2)), round(celly * ch + by0 + ph - base)]}
+fine = {}
+if os.path.exists(f'{ART}/art-furniture-fine-A.png'):
+    for sheet, rows in {'A': ['bed', 'wardrobe', 'desk'], 'B': ['piano', 'counter', 'stove'], 'C': ['shelf', 'sofa', 'bathtub']}.items():
+        for r, p in enumerate(rows): w, d, parts = PIECES[p]; fine[p + '_f'] = [take_cell(f'{ART}/art-furniture-fine-{sheet}.png', 72, 384, 341, c, r, parts, w, d, v, 8) for c, v in enumerate(VIEWS)]
+    fitems = [(p, i, im, mt) for p, L in fine.items() for i, (im, mt) in enumerate(L)]; fitems.sort(key=lambda t: -t[2].height); x = y = rowh = 0; fpos = []
+    for p, i, im, mt in fitems:
+        if x + im.width + 2 > 640: x = 0; y += rowh + 2; rowh = 0
+        fpos.append((p, i, im, mt, x, y)); x += im.width + 2; rowh = max(rowh, im.height)
+    fat = Image.new('RGBA', (640, y + rowh), (0, 0, 0, 0)); FJ = {}
+    for p, i, im, mt, x, y in fpos: fat.alpha_composite(im, (x, y)); FJ.setdefault(p, [None] * 4)[i] = [x, y, im.width, im.height, mt['ox'], mt['oy'], mt['fw'], mt['fd']]
+    print('fine pieces, how far each was painted from its guide place (px across, px down), facing viewer:', {p: L[0][1]['shift'] for p, L in fine.items()})
+    fat.save(OUT + '/furn-fine.png', optimize=True); print('furn-fine.png', os.path.getsize(OUT + '/furn-fine.png') // 1024, 'KB', fat.size, len(fitems), 'sprites')
 items = [(p, i, im, mt) for p, L in sprites.items() for i, (im, mt) in enumerate(L)]; items.sort(key=lambda t: -t[2].height); AW = 640; x = y = rowh = 0; pos = []
 for p, i, im, mt in items:
     if x + im.width + 2 > AW: x = 0; y += rowh + 2; rowh = 0
@@ -62,6 +86,9 @@ rooms = {'L1': {'img': 'room-L1.jpg', 'key': 'roomL1', 'w': 26, 'h': 16, 'grid':
          'L2': {'img': 'room-L2.jpg', 'key': 'roomL2', 'w': 37, 'h': 18, 'grid': G2, 'door': [3, 10], 'start': START1, 'add': WING, 'fixed': [['slideL', 0, 31.63, 12.2]], 'noPlace': [[26, 12, 33, 15]], 'pit': [26, 12, 33, 15], 'save': 'room2'},
          'L3a': {'img': 'room-L2.jpg', 'key': 'roomL2', 'w': 37, 'h': 18, 'grid': G3a, 'door': [3, 10], 'start': START1, 'add': WING, 'fixed': [['slideL', 0, 31.63, 12.2], ['stairs', 0, 23.6, 10.0]], 'noPlace': [[26, 12, 33, 15], [23, 10, 25, 13]], 'pit': [26, 12, 33, 15], 'stair': {'at': [24.27, 12.35], 'to': 'room2', 'id': 'up', 'toExit': 'down'}, 'save': 'room2'},
          'L3b': {'img': 'room-L3b.jpg', 'key': 'roomL3b', 'w': 26, 'h': 16, 'grid': G3b, 'door': None, 'start': UPPER, 'add': [], 'fixed': [], 'noPlace': [[23, 10, 25, 13], [0, 10, 7, 14]], 'hole': [23, 11, 25, 13], 'stair': {'at': [24.0, 10.45], 'to': 'room', 'id': 'down', 'toExit': 'up'}, 'spawn': [22.5, 9.5], 'save': 'room2U'}}
-json.dump({'rowsAbovePlan': 2, 'pieces': J, 'solid': {'rug': 0}, 'act': {'bed': 'sleep', 'bedbig': 'sleep', 'sofa': 'cuddle', 'armchair': 'cuddle', 'piano': 'piano', 'stove': 'cook', 'bookshelf': 'read'}, 'rooms': rooms}, open(OUT + '/furn-plain.json', 'w'), separators=(',', ':'), ensure_ascii=False)
+ACTS = {'bed': 'sleep', 'bedbig': 'sleep', 'sofa': 'cuddle', 'armchair': 'cuddle', 'piano': 'piano', 'stove': 'cook', 'bookshelf': 'read'}
+if fine:
+    J.update(FJ); ACTS.update({k: ACTS[k[:-2]] for k in FJ if k[:-2] in ACTS})
+json.dump({'rowsAbovePlan': 2, 'pieces': J, 'solid': {'rug': 0}, 'act': ACTS, 'sheet': {k: 'furnFine' for k in (FJ if fine else {})}, 'fine': sorted(FJ) if fine else [], 'rooms': rooms}, open(OUT + '/furn-plain.json', 'w'), separators=(',', ':'), ensure_ascii=False)
 for f in ('furn-plain.png', 'furn-plain.json', 'room-L1.jpg', 'room-L2.jpg', 'room-L3b.jpg'): print(f, os.path.getsize(OUT + '/' + f) // 1024, 'KB')
 print('atlas', atlas.size, 'sprites', len(items), '| corridor colour old', [round(v) for v in cor1], 'wing', [round(v) for v in corw], '| slide', J['slideL'][0], '| stairs', J['stairs'][0])
