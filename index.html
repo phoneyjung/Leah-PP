@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.29';
+const VERSION='Lantern Academy 1.30';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -3812,6 +3812,13 @@ function thumbLayout(){const act=document.getElementById('act');if(!act)return;c
 setInterval(()=>{try{thumbLayout()}catch(e){}},300);
 // the stick: on by itself the first time on a touch screen
 {const _sg28=startGame;startGame=function(){const r=_sg28.apply(this,arguments);try{if(S&&S.joy===undefined&&(('ontouchstart' in window)||navigator.maxTouchPoints>0)){S.joy=true;save()}const j=document.getElementById('joy');if(j&&S)j.classList.toggle('hide',!S.joy)}catch(e){}return r}}
+// ================= 1.30 INSTALL BUTTON ON THE FIRST SCREEN (owner, 4 Oct: opening the link must offer the install at once, not hide it in Settings) =================
+{const mk=()=>{try{if(isStandalone()||document.getElementById('instTitle'))return;const host=document.getElementById('title')||document.body;const b=document.createElement('button');b.id='instTitle';
+    b.textContent='\u{1F4F2} '+t('installT');b.style.cssText='position:fixed;right:calc(12px + env(safe-area-inset-right,0px));top:calc(4px + env(safe-area-inset-top,0px));z-index:30;font-size:12px;line-height:1;padding:6px 10px;background:#c9a45a;color:#1b1330;font-weight:700;box-shadow:0 0 0 2px #fdf6e8,0 3px 0 2px #120b22';
+    b.onclick=installGame;host.appendChild(b);addEventListener('appinstalled',()=>{try{b.remove()}catch(e){}})}catch(e){}};
+  if(document.readyState==='loading')addEventListener('DOMContentLoaded',mk);else mk();
+  // once the game itself is on screen the button leaves; it stays reachable in Settings
+  const _sg30=startGame;startGame=function(){const r=_sg30.apply(this,arguments);try{const b=document.getElementById('instTitle');if(b)b.remove()}catch(e){}return r}}
 // ================= 1.07 H9 · PAPLERN VILLAGE, NEW SCENE (painted, MAP_SPEC_H9 v1.4) =================
 // A separate map "h9" for now, reached by the GM (warp) and from the G9 farm's east road; the village players use (map "capital") is untouched.
 // Needs map-H9-village.jpg (a sharper map-H9-village-hi.jpg replaces it once uploaded); missing picture -> this map is not offered at all.
