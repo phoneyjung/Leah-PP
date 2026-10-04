@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.38';
+const VERSION='Lantern Academy 1.39';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -3853,7 +3853,7 @@ function anyNear(){if(!S||!M||!P||PAUSE||DLG)return null;if(M.g9b){const c=g9bNe
   if(M.board){const d=Math.hypot(M.board.x-P.x,M.board.y+12-P.y);if(d<60)put(d,'\u{1F4DC}','actBoard',()=>{try{openBoard()}catch(e){}})}
   for(const c of M.crystals||[]){if(c.awake)continue;const d=Math.hypot(c.x-P.x,c.y+8-P.y);if(d<64)put(d,'\u{1F48E}','actWake',()=>tapWorld(c.x,c.y-10))}
   for(const g of M.digs||[]){if(g.done)continue;const d=Math.hypot(g.x-P.x,g.y-P.y);if(d<70)put(d,'\u26CF\uFE0F','actDig',()=>tapWorld(g.x,g.y))}
-  if(M.kind==='room'&&!M.visiting&&!(typeof DEC!=='undefined'&&DEC.on))for(const o of M.objs){if(!o.fu||!FURN_ACT[o.fu.k])continue;const d=Math.hypot(o.x-P.x,o.y-P.y);if(d<52)put(d,o.fu.k==='piano'?'\u{1F3B9}':'\u{1F3E0}',o.fu.k==='piano'?'actPiano':'actUse',()=>{try{furnAct(o.fu.k)}catch(e){}})}
+  if(M.kind==='room'&&!M.visiting&&!(typeof DEC!=='undefined'&&DEC.on))for(const o of M.objs){if(!o.fu||!FURN_ACT[o.fu.k])continue;const d=Math.hypot(o.x-P.x,o.y-P.y);if(d<(o.fu.k==='slide'?76:52))put(d,o.fu.k==='piano'?'\u{1F3B9}':o.fu.k==='slide'?'\u{1F6DD}':'\u{1F3E0}',o.fu.k==='piano'?'actPiano':o.fu.k==='slide'?'actSlide':'actUse',()=>{try{furnAct(o.fu.k)}catch(e){}})}
   if(!M.g9b&&M.fishSpot&&Math.hypot(M.fishSpot.x-P.x,M.fishSpot.y-P.y)<30)put(0,'\u{1F3A3}','actFish',fishAct);
   return best}
 // ================= 1.35 THE HELPER ROBOT FROM PIXELLAB: eight directions, standing + six walking frames (robot-walk.png, 7 x 8 cells of 64 px) =================
@@ -3870,23 +3870,53 @@ function g9bRobot8(){const R=M.robot&&M.robot.o,c=IMG._robot,im=IMG.robotWalk;if
 // each picture with the place of its floor footprint. Any file missing: the old room, exactly as before.
 // This first version shows the house furnished as in the plan. Moving and turning the pieces is the next step; the old decorating mode is switched off in here.
 let ROOM2=null;
-{let left=3,bad=false,raw=null;const done=()=>{if(--left===0&&!bad){ROOM2=raw;
+{let left=5,bad=false,raw=null;const done=()=>{if(--left===0&&!bad){ROOM2=raw;
     // a house built before these files arrived (the game reopened inside the house) is the old room: drop it so the new one is built
     try{for(const k of ['room','room2','room3'])delete CACHE[k];if(typeof M!=='undefined'&&M&&/^room/.test(M.id||'')&&!M.room2&&typeof S!=='undefined'&&S)goMap('room')}catch(e){}}};
-  const img=(k,src)=>{const i=new Image();i.onload=()=>{IMG[k]=i;done()};i.onerror=()=>{bad=true};i.src=(window.EMBED_ASSETS&&window.EMBED_ASSETS[src])||src};img('roomL1','room-L1.jpg');img('furnPlain','furn-plain.png');
+  const img=(k,src)=>{const i=new Image();i.onload=()=>{IMG[k]=i;done()};i.onerror=()=>{bad=true};i.src=(window.EMBED_ASSETS&&window.EMBED_ASSETS[src])||src};img('roomL1','room-L1.jpg');img('roomL2','room-L2.jpg');img('roomL3b','room-L3b.jpg');img('furnPlain','furn-plain.png');
   try{fetch('furn-plain.json').then(r=>r.ok?r.json():Promise.reject(0)).then(j=>{raw=j;done()}).catch(()=>{bad=true})}catch(e){bad=true}}
 try{Object.assign(TX.th,{actPiano:'เล่นเปียโน',decoSoon:'จัดบ้านแบบใหม่ (ย้ายและหมุนของ) กำลังทำ',pianoT:'เปียโน',pianoHint:'แตะคีย์เพื่อเล่น'});if(TX.en)Object.assign(TX.en,{actPiano:'Play piano',decoSoon:'The new decorating (moving and turning things) is being built',pianoT:'Piano',pianoHint:'Tap a key to play'});FURN_ACT.piano='piano'}catch(e){}
-function room2Layout(){const h=HOME.get();if(!h.room2){h.room2=ROOM2.start.map(a=>a.slice());h.rooms={};h.room=[];HOME.put(h)}return h.room2}   // owner, 4 Oct: things placed in the old house are dropped, the new house starts fresh
-function room2Place(m){m.objs.length=m.fixed;for(const k of m._fs||[])m.SOLID.delete(k);m._fs=[];const dy=ROOM2.rowsAbovePlan,ACT={sleep:'bed',cuddle:'sofa',piano:'piano'};
-  for(const it of m.layout2){const [k,r,tx,ty0]=it,vs=ROOM2.pieces[k];if(!vs)continue;const [sx,sy,sw,sh,ox,oy,fw,fd]=vs[r%vs.length],ty=ty0+dy,flat=ROOM2.solid[k]===0;
-    m.objs.push({img:'furnPlain',sx,sy,sw,sh,x:tx*T-ox+sw/2,y:(ty+fd)*T,tall:flat?0:1,flat:flat,cs:0,cb:Math.round(oy+fd*T),foot:16,fx:0,a:1,fu:{k:ACT[ROOM2.act[k]]||'_'+k},room2:it});
+const f2RectOf=it=>{const vs=ROOM2.pieces[it[0]],v=vs[it[1]%vs.length];return [it[2],it[3],it[2]+v[6],it[3]+v[7]]},f2Hits=(r,q)=>r[0]<q[2]-.05&&q[0]<r[2]-.05&&r[1]<q[3]-.05&&q[1]<r[3]-.05;
+function room2Ready(){return !!(ROOM2&&ROOM2.rooms&&IMG.roomL1&&IMG.roomL2&&IMG.roomL3b&&IMG.furnPlain)}
+function room2Tier(){try{return g9HouseK()}catch(e){return 1}}
+function room2Layout(D){const h=HOME.get();let lay=h[D.save];const cp=L=>L.map(a=>a.slice());
+  if(!Array.isArray(lay)){lay=cp(D.start);if(D.save==='room2'){h.rooms={};h.room=[]}}          // owner, 4 Oct: things placed in the old house are dropped, the new house starts fresh
+  if(D.add&&D.add.length&&!h.room2Wing){lay.push(...cp(D.add));h.room2Wing=1}                      // the wing brings its own first furniture, once
+  h.furn2=h.furn2||{};for(let i=lay.length-1;i>=0;i--){const it=lay[i];if(!ROOM2.pieces[it[0]]){lay.splice(i,1);continue}if(ROOM2.solid[it[0]]===0)continue;
+    if((D.noPlace||[]).some(q=>f2Hits(f2RectOf(it),q))||(D.fixed||[]).some(f=>f2Hits(f2RectOf(it),f2RectOf(f)))){h.furn2[it[0]]=(h.furn2[it[0]]||0)+1;lay.splice(i,1)}}   // a piece standing where the stairs or the ball pit now are goes to the store
+  h[D.save]=lay;HOME.put(h);return lay}
+function room2Place(m){m.objs.length=m.fixed;for(const k of m._fs||[])m.SOLID.delete(k);m._fs=[];const D=m.r2,dy=ROOM2.rowsAbovePlan,ACT={sleep:'bed',cuddle:'sofa',piano:'piano'};
+  const put=(it,fixed)=>{const [k,r,tx,ty0]=it,vs=ROOM2.pieces[k];if(!vs)return;const [sx,sy,sw,sh,ox,oy,fw,fd]=vs[r%vs.length],ty=ty0+dy,flat=ROOM2.solid[k]===0;if(tx+fw>D.w+.01||ty0+fd>D.grid.length+.01)return;   // a piece of a bigger house: kept in the save, not shown here
+    m.objs.push({img:'furnPlain',sx,sy,sw,sh,x:tx*T-ox+sw/2,y:(ty+fd)*T,tall:flat?0:1,flat:flat,cs:0,cb:Math.round(oy+fd*T),foot:16,fx:0,a:1,fu:{k:k==='slide'?'slide':(ACT[ROOM2.act[k]]||'_'+k)},room2:fixed?null:it,fixed2:fixed?1:0});
     if(!flat)for(let j=Math.floor(ty);j<=Math.floor(ty+fd-.01);j++)for(let i=Math.floor(tx);i<=Math.floor(tx+fw-.01);i++){const ax=Math.min(i+1,tx+fw)-Math.max(i,tx),ay=Math.min(j+1,ty+fd)-Math.max(j,ty);
-      if(ax*ay>=.4){const kk=key(i,j);if(!m.SOLID.has(kk)){m.SOLID.add(kk);m._fs.push(kk)}}}}}
-{const _r37=MAPS.room;MAPS.room=function(){if(!ROOM2||!IMG.roomL1||!IMG.furnPlain)return _r37.apply(this,arguments);
-  const R=ROOM2,dy=R.rowsAbovePlan,m=newMap('room','room',R.w,R.h,61);m.nameKey='room';m.floor=1;m.indoor=true;m.painted='roomL1';m.room2=1;m.stairs=[];m.layout=[];
-  for(let y=0;y<R.h;y++)for(let x=0;x<R.w;x++){const c=y>=dy?((R.grid[y-dy]||'')[x]||'#'):'#';if(c!=='#'&&c!==' '&&c!=='P')m.FLOOR.add(key(x,y));else m.SOLID.add(key(x,y))}
-  const dx=R.door[0],dr=R.door[1]+dy;m.exits.push({id:'door',x:(dx+1)*T,y:dr*T+18,to:'capital',toExit:'home',label:'home'});m.spawnDefault=[(dx+1)*T,(dr-1)*T+16];   // the door leads back to where you came in from: the farm (handled by useExit) or the town
-  m.fixed=m.objs.length;m.layout2=room2Layout();room2Place(m);return m}}
+      if(ax*ay>=.4){const kk=key(i,j);if(!m.SOLID.has(kk)){m.SOLID.add(kk);m._fs.push(kk)}}}};
+  for(const f of D.fixed||[])put(f,1);for(const it of m.layout2)put(it,0)}
+function room2Build(id,D){const dy=ROOM2.rowsAbovePlan,m=newMap(id,'room',D.w,D.h,61);m.nameKey='room';m.floor=id==='room'?1:2;m.indoor=true;m.painted=D.key;m.room2=1;m.r2=D;m.r2tier=room2Tier();m.stairs=[];m.layout=[];
+  for(let y=0;y<D.h;y++)for(let x=0;x<D.w;x++){const c=y>=dy?((D.grid[y-dy]||'')[x]||' '):'#';if(c!=='#'&&c!==' '&&c!=='P')m.FLOOR.add(key(x,y));else m.SOLID.add(key(x,y))}
+  if(D.hole)for(let y=D.hole[1];y<D.hole[3];y++)for(let x=D.hole[0];x<D.hole[2];x++)m.SOLID.add(key(x,y+dy));
+  if(D.door){const dx=D.door[0],dr=D.door[1]+dy;m.exits.push({id:'door',x:(dx+1)*T,y:dr*T+18,to:'capital',toExit:'home',label:'home'});m.spawnDefault=[(dx+1)*T,(dr-1)*T+16];m.reach0=[dx,dr]}   // the door leads back to where you came in from: the farm (useExit) or the town
+  if(D.stair){const [ax,ay]=D.stair.at;m.exits.push({id:D.stair.id,x:ax*T,y:(ay+dy)*T,to:D.stair.to,toExit:D.stair.toExit,label:D.stair.id});if(!D.door){m.spawnDefault=[D.spawn[0]*T,(D.spawn[1]+dy)*T];m.reach0=[Math.floor(ax),Math.floor(ay+dy)]}}
+  pitInit(m);m.fixed=m.objs.length;m.layKey=D.save;m.layout2=room2Layout(D);room2Place(m);return m}
+{const _r39=MAPS.room,_u39=MAPS.room2;
+  MAPS.room=function(){if(!room2Ready())return _r39.apply(this,arguments);const k=room2Tier();return room2Build('room',ROOM2.rooms[k>=3?'L3a':k===2?'L2':'L1'])};
+  MAPS.room2=function(){if(!room2Ready()||room2Tier()<3)return _u39.apply(this,arguments);return room2Build('room2',ROOM2.rooms.L3b)}}
+{const _gm39=goMap;goMap=function(id){try{if((id==='room'||id==='room2')&&CACHE[id]&&CACHE[id].room2&&CACHE[id].r2tier!==room2Tier())delete CACHE[id]}catch(e){}return _gm39.apply(this,arguments)}}   // the house was made bigger: build its inside again
+// ---- the ball pit: balls of six colours that roll away from your feet. Drawn by the game, no picture file.
+function pitInit(m){const D=m.r2;if(!D.pit)return;const dy=ROOM2.rowsAbovePlan,[x0,y0,x1,y1]=D.pit,C=['#e0413b','#f0c92c','#4a78e0','#5bbf4a','#b05be0','#f08a2c'];m._balls=[];
+  C.forEach((c,i)=>{if(IMG['ball'+i])return;const cv=document.createElement('canvas');cv.width=12;cv.height=12;const g=cv.getContext('2d');g.fillStyle='#1b1330';g.beginPath();g.arc(6,6,6,0,7);g.fill();g.fillStyle=c;g.beginPath();g.arc(6,6,5,0,7);g.fill();g.fillStyle='rgba(255,255,255,.65)';g.beginPath();g.arc(4.2,4,1.6,0,7);g.fill();IMG['ball'+i]=cv});
+  const n=(typeof LITE!=='undefined'&&LITE)?24:44;let sd=7;const rnd2=()=>{sd=(sd*16807)%2147483647;return sd/2147483647};
+  for(let i=0;i<n;i++){const o={img:'ball'+(i%6),sx:0,sy:0,sw:12,sh:12,x:(x0+.5+rnd2()*(x1-x0-1))*T,y:(y0+dy+.6+rnd2()*(y1-y0-1))*T,tall:1,cs:0,cb:11,foot:6,fx:0,a:1,ball:1,vx:0,vy:0};m.objs.push(o);m._balls.push(o)}
+  m._pitBox=[(x0+.4)*T,(y0+dy+.5)*T,(x1-.4)*T,(y1+dy-.3)*T]}
+let _pitT=0;
+function pitTick(){const m=M;if(!m||!m._balls||!P)return;const now=performance.now(),dt=Math.min(.05,(now-(_pitT||now))/1000);_pitT=now;const [L,Tp,Rr,Bt]=m._pitBox;
+  for(const b of m._balls){const dx=b.x-P.x,dy=b.y-(P.y-2),d=Math.hypot(dx,dy);if(d<18){const u=d>.01?[dx/d,dy/d]:[1,0],f=(18-d)*26;b.vx+=u[0]*f*dt*10;b.vy+=u[1]*f*dt*10}
+    b.x+=b.vx*dt;b.y+=b.vy*dt;const k=Math.pow(.03,dt);b.vx*=k;b.vy*=k;if(b.x<L){b.x=L;b.vx=Math.abs(b.vx)*.6}if(b.x>Rr){b.x=Rr;b.vx=-Math.abs(b.vx)*.6}if(b.y<Tp){b.y=Tp;b.vy=Math.abs(b.vy)*.6}if(b.y>Bt){b.y=Bt;b.vy=-Math.abs(b.vy)*.6}}}
+// ---- the slide: stand by it, press the big button, ride down into the balls
+try{Object.assign(TX.th,{actSlide:'เล่นสไลเดอร์'});if(TX.en)Object.assign(TX.en,{actSlide:'Slide'});FURN_ACT.slide='slide'}catch(e){}
+function slideGo(){const m=M,o=m&&m.objs.find(q=>q.fu&&q.fu.k==='slide');if(!o||P.slide)return;P.path=null;P.act=null;P.slide={t:0,x:o.x,y0:o.y-o.cb+34,y1:o.y+14};try{sfx('warp')}catch(e){}}
+function slideTick(){const s=P&&P.slide;if(!s)return;const now=performance.now(),dt=Math.min(.05,(now-(s.last||now))/1000);s.last=now;s.t+=dt/1.1;const e=Math.min(1,s.t),k=e*e;P.x=s.x;P.y=s.y0+(s.y1-s.y0)*k;P.path=null;P.row=0;P.moving=false;
+  if(e>=1){P.slide=null;window._slides=(window._slides||0)+1;try{sfx('pick')}catch(_){}if(M._balls)for(const b of M._balls){const dx=b.x-P.x,dy=b.y-P.y,d=Math.hypot(dx,dy);if(d<46){b.vx+=(dx/(d||1))*160;b.vy+=(dy/(d||1))*160}}}}
+{const _dv39=drawVFX2;drawVFX2=function(tm){_dv39.apply(this,arguments);try{if(M&&M.room2){slideTick();pitTick()}}catch(e){}}}
 // the piano: eight keys, do to high do, the game's own sound (no file)
 let _pianoAC=null;
 function pianoOpen(){let d=document.getElementById('pianoBox');if(d)d.remove();d=document.createElement('div');d.id='pianoBox';PAUSE=true;
@@ -3898,7 +3928,7 @@ function pianoOpen(){let d=document.getElementById('pianoBox');if(d)d.remove();d
     const play=ev=>{try{ev.preventDefault();_pianoAC=_pianoAC||new (window.AudioContext||window.webkitAudioContext)();const a=_pianoAC,o=a.createOscillator(),g=a.createGain();o.type='triangle';o.frequency.value=f;g.gain.setValueAtTime(.0001,a.currentTime);g.gain.exponentialRampToValueAtTime(.35,a.currentTime+.015);g.gain.exponentialRampToValueAtTime(.0001,a.currentTime+.9);o.connect(g);g.connect(a.destination);o.start();o.stop(a.currentTime+.95);window._pianoPlayed=(window._pianoPlayed||0)+1;b.style.transform='translateY(3px)';setTimeout(()=>{b.style.transform=''},120)}catch(e){}};
     b.addEventListener('pointerdown',play);row.appendChild(b)});
   d.querySelector('#pianoX').onclick=()=>{d.remove();PAUSE=false}}
-{const _fa37=furnAct;furnAct=function(k){if(k==='piano'){pianoOpen();return true}return _fa37.apply(this,arguments)}}
+{const _fa37=furnAct;furnAct=function(k){if(k==='piano'){pianoOpen();return true}if(k==='slide'){slideGo();return true}return _fa37.apply(this,arguments)}}
 
 // ================= 1.38 ARRANGING THE NEW HOUSE: move, turn four ways, put away, take out again =================
 // Tap a piece to choose it, tap the floor to move it there, Turn turns it a quarter, Store puts it in the house store, a stored piece is taken out by tapping
@@ -3908,16 +3938,16 @@ const DECO2={on:false,sel:null,hold:null},F2N={th:{bed:'เตียง',wardrob
 try{Object.assign(TX.th,{d2Pick:'แตะของที่จะจัด แล้วแตะพื้นที่จะย้ายไป',d2Turn:'หมุน',d2Store:'เก็บ',d2Done:'เสร็จ',d2Place:'แตะพื้นที่จะวาง',d2Wall:'วางตรงนี้ไม่ได้: ชนผนังหรือประตู',d2Over:'วางตรงนี้ไม่ได้: ทับของอื่น',d2Block:'วางตรงนี้ไม่ได้: บังทางเดินหรือทับตัวเรา',d2TurnNo:'หมุนตรงนี้ไม่ได้ ลองย้ายออกมาก่อน'});
   if(TX.en)Object.assign(TX.en,{d2Pick:'Tap a piece, then tap the floor to move it',d2Turn:'Turn',d2Store:'Store',d2Done:'Done',d2Place:'Tap the floor to put it down',d2Wall:'Not here: a wall or a doorway',d2Over:'Not here: another piece is in the way',d2Block:'Not here: it would block the way',d2TurnNo:'It cannot turn here. Move it out first'})}catch(e){}
 const f2name=k=>((F2N[typeof LANG!=='undefined'?LANG:'th']||F2N.th)[k]||k),f2View=(k,r)=>{const vs=ROOM2.pieces[k];return vs[r%vs.length]},f2Rect=it=>{const v=f2View(it[0],it[1]);return [it[2],it[3],it[2]+v[6],it[3]+v[7]]},f2Snap=v=>Math.round(v*2)/2;
-function f2Valid(it,skip){const [x0,y0,x1,y1]=f2Rect(it),G=ROOM2.grid;
+function f2Valid(it,skip){const [x0,y0,x1,y1]=f2Rect(it),D=M.r2,G=D.grid;if((D.noPlace||[]).some(q=>f2Hits([x0,y0,x1,y1],q)))return 'd2Wall';if(ROOM2.solid[it[0]]!==0&&(D.fixed||[]).some(f=>f2Hits([x0,y0,x1,y1],f2RectOf(f))))return 'd2Over';
   for(let j=Math.floor(y0+.1);j<=Math.floor(y1-.1);j++)for(let i=Math.floor(x0+.1);i<=Math.floor(x1-.1);i++){const c=(G[j]||'')[i];if(!c||'# PE+'.includes(c))return 'd2Wall'}
   if(ROOM2.solid[it[0]]!==0)for(const o of M.layout2){if(o===skip||ROOM2.solid[o[0]]===0)continue;const [a0,b0,a1,b1]=f2Rect(o);if(x0<a1-.08&&a0<x1-.08&&y0<b1-.08&&b0<y1-.08)return 'd2Over'}
   return ''}
-function f2Reach(){const dy=ROOM2.rowsAbovePlan,st=[ROOM2.door[0],ROOM2.door[1]+dy],seen=new Set([key(st[0],st[1])]),q=[st];
+function f2Reach(){const st=M.reach0.slice(),seen=new Set([key(st[0],st[1])]),q=[st];
   while(q.length){const [x,y]=q.pop();for(const [a,c] of [[x+1,y],[x-1,y],[x,y+1],[x,y-1]]){const k=key(a,c);if(!seen.has(k)&&walkable(M,a,c)){seen.add(k);q.push([a,c])}}}
   for(let y=0;y<M.h;y++)for(let x=0;x<M.w;x++)if(walkable(M,x,y)&&!seen.has(key(x,y)))return false;return true}
 function f2Apply(fn){const h=HOME.get(),lay=M.layout2,snap=JSON.stringify(lay);h.furn2=h.furn2||{};fn(lay,h);room2Place(M);
   if(!f2Reach()||!walkable(M,Math.floor(P.x/T),Math.floor(P.y/T))){const old=JSON.parse(snap);lay.length=0;old.forEach(a=>lay.push(a));room2Place(M);return false}
-  h.room2=lay;HOME.put(h);M.shadowSC=0;return true}
+  h[M.layKey]=lay;HOME.put(h);M.shadowSC=0;return true}
 function deco2Hit(px,py){let hit=-1,by=-1e9;M.layout2.forEach((it,i)=>{const v=f2View(it[0],it[1]),l=it[2]-v[4]/T,tp=it[3]-v[5]/T,flat=ROOM2.solid[it[0]]===0;if(px>=l&&px<=l+v[2]/T&&py>=tp&&py<=tp+v[3]/T){const sc=(flat?-100:0)+it[3]+v[7];if(sc>by){by=sc;hit=i}}});return hit}
 function deco2Tap(wx,wy){const px=wx/T,py=wy/T-ROOM2.rowsAbovePlan;
   if(DECO2.hold){const k=DECO2.hold,v=f2View(k,0),it=[k,0,f2Snap(px-v[6]/2),f2Snap(py-v[7]/2)],er=f2Valid(it,null);if(er){say(t(er));return}
