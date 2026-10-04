@@ -1,4 +1,4 @@
-const p=require('/home/claude/.npm-global/lib/node_modules/@mermaid-js/mermaid-cli/node_modules/puppeteer');
+const p=(()=>{try{return require('puppeteer')}catch(e){return require('/home/claude/.npm-global/lib/node_modules/@mermaid-js/mermaid-cli/node_modules/puppeteer')}})();
 (async()=>{const b=await p.launch({executablePath:'/home/claude/.cache/puppeteer/chrome/linux-131.0.6778.204/chrome-linux64/chrome',args:['--no-sandbox']});
 const pg=await b.newPage(); await pg.setViewport({width:844,height:390,isMobile:true,hasTouch:true,deviceScaleFactor:2}); const errs=[]; pg.on('pageerror',e=>errs.push(e.message)); pg.on('console',m=>{if(m.type()==='error')errs.push('console: '+m.text())});
 await pg.goto('http://localhost:8775/',{waitUntil:'networkidle0'}); await pg.evaluate(()=>localStorage.clear()); await pg.reload({waitUntil:'networkidle0'}); await new Promise(r=>setTimeout(r,4000));
