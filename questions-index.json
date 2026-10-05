@@ -1,10 +1,11 @@
 {
  "version": 1,
- "generated": "2026-09-25",
+ "generated": "2026-10-05",
  "ages": [
   6,
   7,
-  8
+  8,
+  9
  ],
  "subjects": {
   "math": {
@@ -48,6 +49,12 @@
    "count": 165
   },
   {
+   "file": "q-math-9.json",
+   "subject": "math",
+   "age": 9,
+   "count": 165
+  },
+  {
    "file": "q-english-6.json",
    "subject": "english",
    "age": 6,
@@ -64,6 +71,12 @@
    "subject": "english",
    "age": 8,
    "count": 160
+  },
+  {
+   "file": "q-english-9.json",
+   "subject": "english",
+   "age": 9,
+   "count": 165
   },
   {
    "file": "q-thai-6.json",
@@ -84,6 +97,12 @@
    "count": 160
   },
   {
+   "file": "q-thai-9.json",
+   "subject": "thai",
+   "age": 9,
+   "count": 165
+  },
+  {
    "file": "q-chinese-6.json",
    "subject": "chinese",
    "age": 6,
@@ -102,6 +121,12 @@
    "count": 160
   },
   {
+   "file": "q-chinese-9.json",
+   "subject": "chinese",
+   "age": 9,
+   "count": 165
+  },
+  {
    "file": "q-general-6.json",
    "subject": "general",
    "age": 6,
@@ -111,7 +136,7 @@
    "file": "q-general-7.json",
    "subject": "general",
    "age": 7,
-   "count": 170
+   "count": 168
   },
   {
    "file": "q-general-8.json",
