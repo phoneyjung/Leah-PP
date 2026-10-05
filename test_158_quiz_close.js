@@ -1,13 +1,14 @@
 // Wrong twice: read for ten real seconds, then close with a mouse/touch.
 const assert=require('node:assert/strict'), fs=require('node:fs'), path=require('node:path');
 const puppeteer=require('puppeteer'), sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const fixture=JSON.parse(fs.readFileSync(path.join(__dirname,'q-thai-9.json'),'utf8')).questions.sort((a,b)=>b.th.explain.length-a.th.explain.length)[0];
 const out=process.env.OUT_DIR||'/tmp/leah-questions-158';fs.mkdirSync(out,{recursive:true});
 (async()=>{const browser=await puppeteer.launch({executablePath:process.env.CHROME_EXE,args:['--no-sandbox']});const results=[];
  try{for(const vp of [{width:1366,height:768},{width:780,height:360,isMobile:true,hasTouch:true},{width:667,height:375,isMobile:true,hasTouch:true}]){
   const pg=await browser.newPage(),errors=[];await pg.setViewport(vp);pg.on('pageerror',e=>errors.push(e.message));
   await pg.goto('http://localhost:'+(process.env.PORT||8775)+'/?gm',{waitUntil:'load'});
   await pg.waitForFunction(()=>!document.getElementById('load')&&QBANK.length>50);
-  await pg.evaluate(()=>{gmMakeSlot();S=Store.all().slots[Store.all().cur];S.age=7;S.mus=false;S.snd=false;S.seen={intro:1};startGame();document.querySelectorAll('#cr,#title,#picker').forEach(e=>e.classList.add('hide'));DLG=null;$('dlg').classList.add('hide');closeModal();goMap('cavemouth');MONS=[];const c=M.crystals[0];S.crystals[M.id]=[];c.awake=false;P.x=c.x;P.y=c.y+40;P.path=null;P.act=null;window.test158Crystal=c;window.test158Question=QBANK.filter(q=>q.age===9).sort((a,b)=>b.th.explain.length-a.th.explain.length)[0];window.pick158=pickQuestion;window.pickQuestion=()=>window.test158Question;});
+  await pg.evaluate(q=>{gmMakeSlot();S=Store.all().slots[Store.all().cur];S.age=7;S.mus=false;S.snd=false;S.seen={intro:1};startGame();document.querySelectorAll('#cr,#title,#picker').forEach(e=>e.classList.add('hide'));DLG=null;$('dlg').classList.add('hide');closeModal();goMap('cavemouth');MONS=[];const c=M.crystals[0];S.crystals[M.id]=[];c.awake=false;P.x=c.x;P.y=c.y+40;P.path=null;P.act=null;window.test158Crystal=c;window.test158Question=q;window.pick158=pickQuestion;window.pickQuestion=()=>window.test158Question;},fixture);
   await pg.waitForFunction(()=>{const a=anyNear();return a&&a.k==='actWake'||$('bAtk').textContent.includes('ปลุก')});
   const click=async sel=>vp.hasTouch?pg.tap(sel):pg.click(sel);
   await click('#bAtk');await pg.waitForSelector('.ch button',{visible:true,timeout:10000});

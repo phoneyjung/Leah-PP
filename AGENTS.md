@@ -107,5 +107,7 @@ Question bank status: **paused at age 9 by the owner (5 Oct 2026)**. Age 9 has a
 
 - Version 1.58 keeps the explanation open after two wrong answers until the player presses the full-width 52 px Close button. Disable all four choices when finished to prevent duplicate rewards; crystal waking and rewards retain their original timing. `npm run test:questions` includes `test_158_quiz_close.js` (real ten-second waits and mouse/touch closing) and `test_questions_9.js`. The three original whitespace errors remain for the next requested data-only fix.
 
+- Draft 1.59 loads question files only for the selected age ±1; boot without a selected player uses the existing 60 embedded questions. Start/save reload on age or slot changes; QUESTION_LOAD can be awaited and loadQuestions(age,true) forces a refresh. Out-of-order loads cannot replace the latest bank. Missing/corrupt files use embedded fallback groups, including legacy ages 6–8 outside the loaded band, while pickQuestion remains unchanged. sw.js lists every question file but excludes them from installation prefetch and caches them on demand. test_159_question_loading.js counts actual HTTP requests from both browser and worker and exercises age/slot buttons and file failures. The owner chose Claude to revise test_questions_9.js: do not edit that suite or publish this draft to main until its updated suite passes.
+
 ## Never
 - Never commit tokens or passwords. Never delete `art-*.png` sources or the guide scripts. Never ship without running the suites.
