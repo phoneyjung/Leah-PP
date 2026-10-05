@@ -53,6 +53,7 @@ async function play(c,touch){const {pg}=c;
    const played=await play(c,touch);await c.pg.screenshot({path:path.join(out,name+'.png')});
    return {futureRequests:network.length,future404:bad.length,retiredRequests:0,...state,...played};
   }catch(e){await c.pg.screenshot({path:path.join(out,name+'-failure.png')});throw e}finally{await c.context.close()}
- });}finally{await browser.close()}
+ });
  console.log(JSON.stringify(results));console.log('errors',errors.length,errors);if(errors.length)process.exitCode=1;
+ }finally{await browser.close()}
 })().catch(e=>{console.error(e);process.exitCode=1});

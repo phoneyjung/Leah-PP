@@ -41,7 +41,8 @@ async function check(name,fn){try{results[name]=await fn()}catch(e){errors.push(
  await check('icons',async()=>{await pg.evaluate(()=>{goMap('farm');hud()});await sleep(350);
   const icons=await pg.evaluate(()=>Object.entries(UI150.labels).map(([id,names])=>{const b=document.getElementById(id),im=b.querySelector('img.pxi');return {id,label:b.querySelector('small').textContent,aria:b.getAttribute('aria-label'),width:im.naturalWidth,src:im.src,expected:names[0]}}));
   assert.equal(new Set(icons.map(a=>a.src)).size,6,'six distinct navigation pictures');
-  for(const a of icons){assert.equal(a.width,32,'new original 32px artwork');assert.equal(a.label,a.expected);assert.equal(a.aria,a.expected)}
+  const iconSize=await pg.evaluate(()=>typeof UI156!=='undefined'&&UI156.icons?64:32);
+  for(const a of icons){assert.equal(a.width,iconSize,'painted icons 64px or procedural fallback 32px');assert.equal(a.label,a.expected);assert.equal(a.aria,a.expected)}
   await press(pg,'#bBag');assert.equal(await pg.evaluate(()=>document.getElementById('modal').classList.contains('hide')),false,'new bag picture still opens real bag menu');await press(pg,'#mX');
   await pg.screenshot({path:path.join(out,'icons-pc.png')});return icons.map(({src,...a})=>a);
  });
