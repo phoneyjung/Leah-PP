@@ -29,7 +29,7 @@ npm install            # only for puppeteer
 python3 -m http.server 8775 &
 PORT=8775 node test_148_rings.js      # every suite prints one JSON line, then "errors N"
 npm run test:house     # the house suites        npm run test:farm   # the farm suites
-npm run test:ui        # PC/touch layouts, purple-gold menus, inventory scrolling, sounds, missing icons and BUG-11 book tabs
+npm run test:ui        # PC/touch layouts, purple-gold menus, inventory scrolling, sounds, missing icons and BUG-11 book tabs, equipment previews and consumables
 npm run test:bugs      # BUG-1–6 regressions: entrance, resize, requests/fallbacks, fishing, sitting and portable launch settings
 ```
 Set `CHROME_EXE` if puppeteer should use a specific Chrome. All browser suites use the installed puppeteer package, and the 11 older Chrome paths now use CHROME_EXE. All URLs honor PORT; demo suites keep their original default ports. Older suites may still describe earlier scene behavior; checking their launch configuration does not check all their gameplay expectations. A change is not done until the suites it touches print `errors 0` and you have looked at a screenshot.
@@ -55,7 +55,7 @@ Write a new `test_NNN_name.js` for each release; drive the game the way a player
 - `HANDOFF_S13.md`: everything decided and built, newest entries first in its "done" list, with measurements. Read the top entries before changing the house or farm.
 - `GDD.md`, `STORY.md`, `ART_DIRECTION.md`, `MAP_PIPELINE.md`, `MAP_SPEC_G9.md`, `MAP_SPEC_H9.md`, `WORLD_ATLAS.md`, `GM_GUIDE.md`, `DEV_GUIDE.md`, `CLAUDE.md`: design and rules written earlier.
 
-## Open items (5 Oct 2026, version 1.53)
+## Open items (5 Oct 2026, version 1.54)
 - Waiting for the owner's answer: remove the Auto (auto-attack) button entirely or keep it on desktop only · what house levels 4-9 give.
 - Fine furniture exists for 9 pieces; toilet, washstand, plant, round table, rug, wash tub, bookshelf, armchair, double bed have no fine version yet.
 - Skill-slot screen (3 slots round the big button): needs a design first; today there is one weapon skill and two job-skill slots, no pool to choose from.
@@ -65,6 +65,8 @@ Write a new `test_NNN_name.js` for each release; drive the game the way a player
 - Farm report round 2 on main adds BUG-7–10: house-sign wording, upgrades above level 3, upgrade messages and shed level summary. Their original statuses are retained; BUG-8 requires the owner's decision. The menu-tab bug is BUG-11.
 - **Leah has not play-tested.** That is the most useful next step.
 - The owner chose the purple-and-gold UI. Version 1.53 has been checked in desktop/touch Chromium at 1366×768, 812×330 and 667×375; the 9.5+ visual/sound target still needs the owner's review and a real-phone play test. BUG-11 (book tabs disappearing after grid-bag actions) is fixed and covered by test_153_menu_icons.js in test:ui.
+
+- Version 1.54 adds the adult equipment wardrobe: the existing 3 slots, a front-facing character with locally drawn type/rarity gear, equipment/consumables/collections tabs and 48 px touch grid cells. The world sprite and child tools bag retain their existing behavior. `test_154_equipment.js` checks real equip taps/clicks, a mouse drag, rendered pixel changes, inventory/save preservation, a touch scroll slider, potions, books and missing character sheets. The wardrobe can be viewed in portrait; gameplay still uses its existing rotation prompt.
 
 ## Never
 - Never commit tokens or passwords. Never delete `art-*.png` sources or the guide scripts. Never ship without running the suites.

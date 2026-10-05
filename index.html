@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.53';
+const VERSION='Lantern Academy 1.54';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -2171,7 +2171,7 @@ function gridFix(){if(!S||isKid())return;S.store=S.store||[];const L=S.inv;L.for
     const r=_pk2.call(this,d);const it=S.inv[S.inv.length-1];if(it===d.item){it.gx=p[0];it.gy=p[1]}return r}}catch(e){}return _pk2.apply(this,arguments)}}
 bagMax=()=>9999; // the grid decides now (kept for older code paths)
 let GB={sel:null,store:false};
-function openGridBag(){if(!S)return;gridFix();const inTown=M&&M.kind!=='cave';GB.store=GB.store&&inTown;const avail=GB.cw||Math.min(innerWidth*.8,900)-40;const C=Math.max(18,Math.min(32,Math.floor((avail-30)/(GB.store?22:12)),Math.floor((innerHeight*.9-190)/Math.max(bagRows(),GB.store?storeRows():0))));
+function openGridBag(){if(!S)return;gridFix();const inTown=M&&M.kind!=='cave';GB.store=GB.store&&inTown;const avail=GB.cw||Math.min(innerWidth*.8,900)-40;const C=GB.cell154||Math.max(18,Math.min(32,Math.floor((avail-30)/(GB.store?22:12)),Math.floor((innerHeight*.9-190)/Math.max(bagRows(),GB.store?storeRows():0))));
   const cellsHTML=(list,rows,name)=>{let h=`<div class="gbGrid" data-grid="${name}" style="position:relative;width:${GCOLS*C}px;height:${rows*C}px;background-image:linear-gradient(#3a2e52 1px,transparent 1px),linear-gradient(90deg,#3a2e52 1px,transparent 1px);background-size:${C}px ${C}px;background-color:#1b1330;border:2px solid #6b5d82;border-radius:6px;touch-action:none">`;
     list.forEach((w,i)=>{if(!w||w.gx==null)return;const [sw,sh]=ISIZE(w);h+=`<div class="gbIt" data-src="${name}" data-i="${i}" style="position:absolute;left:${w.gx*C+1}px;top:${w.gy*C+1}px;width:${sw*C-2}px;height:${sh*C-2}px;background:${RBG[w.rar]};border:2px solid ${RBD[w.rar]};border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:${Math.round(C*.7)}px;${GB.sel&&GB.sel.src===name&&GB.sel.i===i?'box-shadow:0 0 0 2px #fff':''}">${gbIcon(w)}</div>`});return h+'</div>'};
   const eqBox=(k,label,idx)=>{const w=typeof idx==='number'?S.inv[idx]:null;return `<div class="gbEq" data-eqslot="${k}" style="width:${2*C}px;height:${(k==='acc'?1.4:2.4)*C}px;border:2px dashed #b48cff;border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:${w?RBG[w.rar]:'#241b38'}"><span style="font-size:${Math.round(C*.8)}px">${w?gbIcon(w):''}</span><small style="font-size:10px;color:#cbbfe6">${label}</small></div>`};
@@ -4405,4 +4405,88 @@ function ui153BookTabs(){if(!S)return;const host=document.getElementById('mBody'
  #mBody .ui153-control[aria-pressed="false"]{color:#d5c9e4;background:linear-gradient(#43304f,#281d35)}
  #mBody img.ui153-icon[hidden]{display:none}
  `;document.head.append(st)}
+// ================= 1.54 Equipment wardrobe: keep the existing inventory transactions and drag grid =================
+const UI154={tab:'equipment',cell:()=>matchMedia('(pointer:coarse)').matches?48:40};
+function ui154Text(th,en){return LANG==='en'?en:th}
+function ui154Palette(it){return [
+ ['#c89565','#73503c','#f2d5a0'],['#aeb8cc','#586477','#edf2ed'],['#85d9eb','#426da7','#e4ffff'],['#e9bb59','#9c672f','#fff1a3'],['#aee3ba','#487966','#f2ffe0']
+][Math.max(0,Math.min(4,it?.rar||0))]}
+// Pixel illustrations are built locally, including when the character sheet is unavailable.
+// These describe the existing type/rarity; they do not introduce equipment slots or world-sprite assets.
+function ui154DrawGear(g,it,x,y,scale=1){if(!it)return;const [main,shade,light]=ui154Palette(it);g.save();g.translate(x,y);g.scale(scale,scale);
+ const r=(x,y,w,h,c)=>{g.fillStyle=c;g.fillRect(x,y,w,h)},line='#231c35';
+ if(it.slot==='armor'){
+  r(4,4,16,18,line);r(1,5,5,7,line);r(18,5,5,7,line);r(5,5,14,16,shade);r(6,6,11,12,main);r(2,6,4,5,main);r(18,6,4,5,shade);
+  r(9,4,6,4,line);r(10,4,4,3,light);r(11,9,2,9,light);r(5,18,14,2,line);r(10,18,4,2,'#e9bb59');
+  if(it.rar>=2){r(6,9,4,1,light);r(15,9,3,1,light);r(6,14,4,1,shade);r(15,14,3,1,shade)}
+ }else if(it.slot==='acc'){
+  if(it.rar===3){r(3,10,18,9,line);r(4,11,16,6,main);r(4,5,3,7,main);r(10,3,4,9,main);r(17,5,3,7,main);r(11,11,2,3,'#bb9bea');r(5,15,14,1,light)}
+  else if(it.rar===1){r(7,7,10,12,line);r(5,9,14,8,line);r(8,8,8,10,main);r(6,10,12,6,main);r(8,10,8,6,'#28213d');r(10,4,4,5,light);r(11,5,2,3,'#89dcdd')}
+  else {r(5,3,2,10,main);r(17,3,2,10,shade);r(7,12,10,2,main);r(9,13,6,8,line);r(10,14,4,6,main);r(11,14,2,3,light);if(it.rar===4){r(7,15,10,2,main);r(11,11,2,12,light)}}
+ }else if(it.type==='bow'){
+  r(6,2,5,2,line);r(10,4,4,3,line);r(13,7,4,10,line);r(10,17,4,3,line);r(6,20,5,2,line);r(7,3,3,2,light);r(10,5,3,3,main);r(13,8,3,8,main);r(10,16,3,3,shade);r(7,19,3,2,main);r(6,4,1,16,'#f3e4c1');r(4,11,17,1,light);r(18,9,2,5,main)
+ }else if(it.type==='staff'){
+  r(10,7,4,17,line);r(11,8,2,15,shade);r(7,3,10,7,line);r(9,1,6,10,line);r(8,4,8,5,main);r(10,2,4,7,main);r(10,3,2,3,light);r(9,11,6,2,'#e9bb59')
+ }else {
+  const short=it.type==='dag',top=short?7:1;r(10,top,4,16-top,line);r(9,top+3,6,12-top,line);r(11,top+1,2,14-top,light);r(10,top+4,2,10-top,main);r(6,15,12,3,line);r(7,16,10,1,'#e9bb59');r(10,18,4,5,line);r(11,18,2,4,'#9c672f');r(10,23,4,1,'#e9bb59')
+ }g.restore()}
+function ui154GearCanvas(it){const c=document.createElement('canvas');c.width=c.height=32;c.className='gear154';c.setAttribute('aria-hidden','true');ui154DrawGear(c.getContext('2d'),it,4,4);return c}
+function ui154Portrait(){const c=document.createElement('canvas');c.id='equipPortrait';c.width=96;c.height=88;c.setAttribute('role','img');
+ c.setAttribute('aria-label',[S.name,weapon(),armorIt(),accIt()].map(a=>typeof a==='string'?a:a?itemName(a):'').filter(Boolean).join(' · '));
+ const g=c.getContext('2d');g.imageSmoothingEnabled=false;
+ try{const sh=crSheet(S.kid||0,S.house||0,S.hc,S.ec),f=sh.height;g.drawImage(sh,0,0,f,f,16,8,64,64)}catch(e){g.fillStyle='#dfcba7';g.fillRect(40,16,16,16);g.fillStyle='#8e70b6';g.fillRect(38,34,20,21);g.fillStyle='#47364d';g.fillRect(39,55,7,15);g.fillRect(51,55,7,15)}
+ const armor=armorIt(),acc=accIt();if(armor)ui154DrawGear(g,armor,36,32,.95);
+ const w=weapon();ui154DrawGear(g,w,w.type==='bow'?51:45,w.type==='bow'?26:20,1.3);
+ // Restore a small hand over the grip so the weapon reads as held, rather than floating.
+ g.fillStyle='#c98768';g.fillRect(59,43,3,3);g.fillStyle='#f2c393';g.fillRect(59,42,2,2);
+ if(acc){if(acc.rar===3)ui154DrawGear(g,acc,36,3,1);else if(acc.rar===1)ui154DrawGear(g,acc,61,44,.38);else ui154DrawGear(g,acc,39,32,.7)}return c}
+function ui154Node(tag,cls,text){const el=document.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=text;return el}
+function ui154Mount(){const host=$('mBody'),grid=host.querySelector('[data-grid="bag"]');if(!grid||host.querySelector('.wardrobe154'))return;
+ const h=host.querySelector('h2'),close=host.querySelector('#mX'),info=host.querySelector('#gbInfo'),actions=host.querySelector('#gbSort').parentNode;
+ const boxes=[...host.querySelectorAll('[data-eqslot]')],sell=host.querySelector('[data-sellzone]'),store=host.querySelector('[data-grid="store"]');
+ const books=['bCardBook','bStampBook'].map(id=>host.querySelector('#'+id)).filter(Boolean);
+ const root=ui154Node('div','wardrobe154'),header=ui154Node('header','wardrobe154-head'),title=ui154Node('div');title.append(h,ui154Node('small','',ui154Text('สวมใส่ • กระเป๋า • ของสะสม','Equipment • Inventory • Collections')));header.append(title,close);root.append(header);
+ const layout=ui154Node('div','wardrobe154-layout'),hero=ui154Node('section','wardrobe154-hero'),name=ui154Node('div','wardrobe154-name');name.append(ui154Node('strong','',S.name),ui154Node('span','', 'Lv '+S.lv));hero.append(name);
+ const stage=ui154Node('div','wardrobe154-stage'),figure=ui154Node('div','wardrobe154-figure');figure.append(ui154Portrait());stage.append(figure);
+ for(const box of boxes){const slot=box.dataset.eqslot,k={weapon:'eq',armor:'eqA',acc:'eqC'}[slot],it=S.inv[S[k]],label={weapon:t('weaponT'),armor:t('armor'),acc:t('acc')}[slot];
+  box.removeAttribute('style');box.classList.add('slot154',slot);box.setAttribute('role','button');box.tabIndex=0;box.setAttribute('aria-label',label+': '+(it?itemName(it):ui154Text('ว่าง','Empty')));box.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();box.click()}};
+  box.replaceChildren(ui154GearCanvas(it||{type:slot==='weapon'?'sw':slot,slot:slot==='weapon'?undefined:slot,rar:0}),ui154Node('small','',label),ui154Node('span','slot154-name',it?itemName(it):ui154Text('ว่าง','Empty')));if(!it)box.classList.add('empty');stage.append(box)
+ }hero.append(stage);
+ const stats=ui154Node('div','wardrobe154-stats');for(const [label,value] of [[ui154Text('พลังโจมตี','Attack'),atkPow()],[ui154Text('ป้องกัน','Defense'),Math.round(defVal()*10)/10],[ui154Text('พลังชีวิต','Life'),S.hp+'/'+hpMax()]]){const row=ui154Node('div');row.append(ui154Node('span','',label),ui154Node('strong','',String(value)));stats.append(row)}hero.append(stats,ui154Node('small','wardrobe154-hint',ui154Text('แตะช่องสวมใส่เพื่อดูรายละเอียด','Tap an equipment slot for details')));
+ const inventory=ui154Node('section','wardrobe154-inventory'),tabs=ui154Node('nav','wardrobe154-tabs');tabs.setAttribute('aria-label',ui154Text('หมวดของ','Item categories'));
+ const gear=ui154Node('div','wardrobe154-page'),usable=ui154Node('div','wardrobe154-page'),collection=ui154Node('div','wardrobe154-page');gear.id='equip154Page';usable.id='usable154Page';collection.id='collection154Page';
+ for(const [key,th,en,page,icon] of [['equipment','อุปกรณ์','Equipment',gear,'sword'],['usable','ของใช้','Consumables',usable,'potion'],['collection','ของสะสม','Collections',collection,'card']]){const b=ui154Node('button','',ui154Text(th,en));b.id='tab154-'+key;b.dataset.tab154=key;ui153Button(b,icon);b.onclick=()=>{UI154.tab=key;ui154Tabs()};tabs.append(b)}
+ const caption=ui154Node('div','wardrobe154-caption');caption.append(ui154Node('strong','',t('bagT')),ui154Node('span','',S.coins+' '+ui154Text('เหรียญ','coins')));gear.append(caption);
+ const scroll=ui154Node('div','wardrobe154-grid-scroll');scroll.append(grid);gear.append(scroll,ui154ScrollControl(scroll,'bag'),actions);if(store){gear.append(ui154Node('strong','wardrobe154-caption',t('storeT')));const sc=ui154Node('div','wardrobe154-grid-scroll');sc.append(store);gear.append(sc,ui154ScrollControl(sc,'store'))}
+ sell.removeAttribute('style');sell.classList.add('wardrobe154-sell');sell.textContent=ui154Text('ลากของมาที่นี่เพื่อขาย','Drop an item here to sell');gear.append(sell,info);
+ for(const el of gear.querySelectorAll('.gbIt')){const it=(el.dataset.src==='store'?S.store:S.inv)[+el.dataset.i];el.replaceChildren(ui154GearCanvas(it));el.setAttribute('aria-label',itemName(it));el.title=itemName(it)}
+ const potion=ui154Node('div','wardrobe154-consumable');potion.append(ui153Image('potion'),ui154Node('strong','',ui154Text('ยาฟื้นพลังชีวิต','Healing potion')),ui154Node('span','', '× '+(S.potions||0)));
+ const use=ui154Node('button','',ui154Text('ใช้ยา','Use potion'));use.id='use154Potion';use.disabled=!S.potions||S.hp>=hpMax();use.onclick=()=>{usePotion();openGridBag()};potion.append(use);usable.append(potion,ui154Node('p','note',ui154Text('ฟื้น 60% ของพลังชีวิตสูงสุด','Restores 60% of maximum life')));
+ collection.append(ui154Node('p','note',ui154Text('เปิดสมุดเพื่อดูสิ่งที่สะสมได้','Open a book to see your collection')),...books);books.forEach(b=>b.style.cssText='');
+ inventory.append(tabs,gear,usable,collection);layout.append(hero,inventory);root.append(layout);host.replaceChildren(root);host.classList.add('bag154');$('modal').classList.add('bag154');host.scrollTop=0;ui154Tabs();ui154ScrollRanges()}
+function ui154ScrollControl(sc,key){const label=ui154Node('label','wardrobe154-scroll-control',ui154Text('เลื่อนดูช่องของ','Scroll inventory'));const input=document.createElement('input');input.type='range';input.min=0;input.step=1;input.id='scroll154'+key;input.value=0;input.setAttribute('aria-label',ui154Text('เลื่อนกระเป๋าแนวนอน','Scroll inventory horizontally'));input.oninput=()=>{sc.scrollLeft=+input.value};sc.onscroll=()=>{input.value=sc.scrollLeft};label.append(input);return label}
+function ui154ScrollRanges(){for(const sc of document.querySelectorAll('.wardrobe154-grid-scroll')){const label=sc.nextElementSibling,input=label?.querySelector('input[type=range]');if(input){input.max=Math.max(0,sc.scrollWidth-sc.clientWidth);input.value=sc.scrollLeft;label.hidden=+input.max===0}}}
+addEventListener('resize',()=>{if($('mBody').classList.contains('bag154'))ui154ScrollRanges()});
+function ui154Tabs(){for(const key of ['equipment','usable','collection']){const page=$(key==='equipment'?'equip154Page':key==='usable'?'usable154Page':'collection154Page'),b=$('tab154-'+key);if(page)page.hidden=UI154.tab!==key;if(b)b.setAttribute('aria-pressed',String(UI154.tab===key))}}
+{const old=modal;modal=function(){ $('mBody').classList.remove('bag154');$('modal').classList.remove('bag154');return old.apply(this,arguments)}}
+{const old=openGridBag;openGridBag=function(){GB.cell154=UI154.cell();const r=old.apply(this,arguments);ui154Mount();return r}}
+// Book shortcuts remain available while using equipment, including after sort/store/sell redraws.
+{const old=ui154Tabs;ui154Tabs=function(){old();const books=$('collection154Page');if(books&&UI154.tab==='equipment'){let bar=$('books154');if(!bar){bar=ui154Node('div','wardrobe154-books');bar.id='books154';$('equip154Page').append(bar)}for(const id of ['bCardBook','bStampBook']){const b=$(id);if(b)bar.append(b)}}else if(books){for(const id of ['bCardBook','bStampBook']){const b=$(id);if(b)books.append(b)}}}}
+{const old=openBag;openBag=function(){if(!$('mBody').classList.contains('bag154'))UI154.tab='equipment';return old.apply(this,arguments)}}
+{const old=closeModal;closeModal=function(){const r=old.apply(this,arguments);$('mBody').classList.remove('bag154');$('modal').classList.remove('bag154');return r}}
+{const st=document.createElement('style');st.id='ui154';st.textContent=`
+ #modal.bag154{z-index:40}#modal>.pn.bag154{max-width:1040px;width:100%;padding:16px;max-height:94dvh;background:linear-gradient(135deg,#302240,#1a1428);border:2px solid #bf9959;box-shadow:0 14px 60px #090611cc}
+ .wardrobe154-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:12px;border-bottom:1px solid #a5814b66}.wardrobe154-head h2{font-size:23px!important;margin:0!important}.wardrobe154-head small{color:#b9abc9}.wardrobe154-head #mX{flex:none}
+ .wardrobe154-layout{display:grid;grid-template-columns:minmax(270px,.9fr) minmax(0,1.25fr);gap:18px;margin-top:14px}.wardrobe154-hero{border:1px solid #a5814b77;border-radius:12px;background:radial-gradient(ellipse at 50% 34%,#67507155,#20172e 72%);padding:12px;min-width:0;align-self:start}
+ .wardrobe154-name{display:flex;justify-content:space-between;color:#ffe5a2;font-size:19px}.wardrobe154-name span{font-size:14px;color:#cebadf}.wardrobe154-stage{position:relative;height:285px;isolation:isolate}.wardrobe154-figure{position:absolute;inset:5px 45px 0;display:flex;align-items:center;justify-content:center}.wardrobe154-figure:after{content:'';position:absolute;bottom:22px;width:80%;height:24px;border-radius:50%;background:#110c1ca6;border:1px solid #8f724956;z-index:-1}
+ #equipPortrait{width:288px;height:264px;max-width:100%;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(0 4px 0 #100a1966)}
+ .slot154{position:absolute;width:86px;min-height:90px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:5px;border:1px solid #c49c5f;border-radius:8px;background:linear-gradient(#443151ee,#241a32ee);box-shadow:inset 0 0 0 2px #c49c5f18;cursor:pointer;text-align:center}.slot154.weapon{right:0;top:113px}.slot154.armor{left:0;top:102px}.slot154.acc{left:0;top:0}.slot154 small{color:#ffe5a2;font-size:12px}.slot154-name{font-size:10px;color:#c4b4d2}.slot154.empty{border-style:dashed}.slot154.empty canvas{opacity:.35}
+ canvas.gear154{width:40px;height:40px;object-fit:contain;image-rendering:pixelated;pointer-events:none;flex:none}.gbIt canvas.gear154{width:100%;height:auto;max-height:80%;object-fit:contain}
+ .wardrobe154-stats{border-top:1px solid #a5814b55;padding-top:8px;display:grid;gap:5px;font-size:13px}.wardrobe154-stats>div{display:flex;justify-content:space-between;gap:8px}.wardrobe154-stats span{color:#b9abc9}.wardrobe154-stats strong{color:#ffe5a2}.wardrobe154-hint{display:block;font-size:11px;color:#b9abc9;margin-top:9px;text-align:center}
+ .wardrobe154-inventory{min-width:0}.wardrobe154-tabs{display:flex;gap:5px;margin-bottom:12px}.wardrobe154-tabs button{flex:1;font-size:13px;padding:8px 5px;min-width:0}.wardrobe154-tabs button[aria-pressed=true]{background:linear-gradient(#725146,#493137);border-color:#f2cf86;color:#fff0bc}.wardrobe154-caption{display:flex;justify-content:space-between;gap:10px;margin:8px 0;font-size:13px}.wardrobe154-caption span{color:#edcf85}
+ .wardrobe154-scroll-control{font-size:11px;color:#c4b4d2;display:flex;align-items:center;gap:10px}.wardrobe154-scroll-control[hidden]{display:none}.wardrobe154-scroll-control input{min-height:44px;min-width:0;flex:1;accent-color:#e6c47b}.wardrobe154-grid-scroll .gbGrid{touch-action:pan-x!important}.wardrobe154-grid-scroll .gbIt{touch-action:none} .wardrobe154-grid-scroll{max-width:100%;overflow:auto;padding:3px 3px 9px;overscroll-behavior:contain}.wardrobe154-page[hidden]{display:none!important}.wardrobe154-page>.row2{justify-content:flex-start;margin:7px 0!important}.wardrobe154-page #gbInfo{font-size:14px!important;margin:10px 0!important;overflow-wrap:anywhere}.wardrobe154-sell{border:1px dashed #a5814b;border-radius:7px;padding:12px;color:#c4b4d2;text-align:center;font-size:12px}.wardrobe154-books{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.wardrobe154-consumable{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:#382941;border:1px solid #8d7259;border-radius:10px;padding:14px}.wardrobe154-consumable>img{width:40px;height:40px;image-rendering:pixelated}.wardrobe154-consumable button{margin-left:auto}#collection154Page button{margin:6px}
+ @media(max-height:500px) and (min-width:600px){#modal>.pn.bag154{padding:10px}.wardrobe154-layout{grid-template-columns:235px minmax(0,1fr);gap:12px;margin-top:10px}.wardrobe154-stage{height:195px}.wardrobe154-figure{inset:0 30px}#equipPortrait{width:210px;height:193px;max-width:none}.wardrobe154-head small{display:none}.wardrobe154-head{padding-bottom:8px}.slot154{width:65px;min-height:70px}.slot154 canvas{width:30px;height:30px}.slot154-name{display:none}.slot154.weapon{top:86px}.slot154.armor{top:90px}.wardrobe154-stats{font-size:12px}.wardrobe154-head h2{font-size:19px!important}.wardrobe154-tabs button{font-size:12px}.wardrobe154-tabs img.ui153-icon{width:20px!important;height:20px!important}}
+ @media(max-width:599px){#modal>.pn.bag154{padding:12px}.wardrobe154-layout{grid-template-columns:1fr;gap:14px}.wardrobe154-stage{height:230px}.wardrobe154-figure{inset:0 45px}#equipPortrait{width:250px;height:229px}.slot154{width:72px;min-height:84px}.slot154.weapon{top:100px}.slot154.armor{top:90px}.wardrobe154-stats{grid-template-columns:repeat(3,1fr);font-size:11px}.wardrobe154-stats>div{flex-direction:column;text-align:center}.wardrobe154-head h2{font-size:20px!important}}
+ `;document.head.append(st)}
+
 </script></body></html>
