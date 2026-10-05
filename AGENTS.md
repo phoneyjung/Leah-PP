@@ -37,6 +37,7 @@ Write a new `test_NNN_name.js` for each release; drive the game the way a player
 
 ## Pictures and the asset pipeline
 - Game pictures are **built by scripts from the `art-*.png` sources. Do not hand-edit the built files.**
+  - Quiet Gold UI: `python3 build_quietgold_art.py` builds `ui-quietgold-icons.webp`, `ui-quietgold-frames.webp` and `ui-quietgold-art.json` from `art-ui-quietgold-icons.png` / `art-ui-quietgold-frames.png`. Requires Pillow. Measured crop windows preserve the painter's uneven rows. These three runtime files total 179,580 bytes; original paintings are not downloaded by the game. Missing or invalid art keeps the procedural icons/CSS skin.
   - House inside: `python3 build_room_assets.py <folder with art-*.png> <folder with the guide scripts and json> <out>` writes
     `room-L1.jpg room-L2.jpg room-L3b.jpg furn-plain.png furn-plain.json furn-fine.png`. Needs pillow, numpy, opencv-python.
   - Farm scene: `compose_g9_full.py`, `build_g9_game.py` (see `MAP_PIPELINE.md`).
@@ -55,7 +56,7 @@ Write a new `test_NNN_name.js` for each release; drive the game the way a player
 - `HANDOFF_S13.md`: everything decided and built, newest entries first in its "done" list, with measurements. Read the top entries before changing the house or farm.
 - `GDD.md`, `STORY.md`, `ART_DIRECTION.md`, `MAP_PIPELINE.md`, `MAP_SPEC_G9.md`, `MAP_SPEC_H9.md`, `WORLD_ATLAS.md`, `GM_GUIDE.md`, `DEV_GUIDE.md`, `CLAUDE.md`: design and rules written earlier.
 
-## Open items (5 Oct 2026, version 1.55)
+## Open items (5 Oct 2026, version 1.56)
 - Waiting for the owner's answer: remove the Auto (auto-attack) button entirely or keep it on desktop only · what house levels 4-9 give.
 - Fine furniture exists for 9 pieces; toilet, washstand, plant, round table, rug, wash tub, bookshelf, armchair, double bed have no fine version yet.
 - Skill-slot screen (3 slots round the big button): needs a design first; today there is one weapon skill and two job-skill slots, no pool to choose from.
@@ -69,6 +70,8 @@ Write a new `test_NNN_name.js` for each release; drive the game the way a player
 - Version 1.54 adds the adult equipment wardrobe: the existing 3 slots, a front-facing character with locally drawn type/rarity gear, equipment/consumables/collections tabs and 48 px touch grid cells. The world sprite and child tools bag retain their existing behavior. `test_154_equipment.js` checks real equip taps/clicks, a mouse drag, rendered pixel changes, inventory/save preservation, a touch scroll slider, potions, books and missing character sheets. The wardrobe can be viewed in portrait; gameplay still uses its existing rotation prompt.
 
 - The owner selected proposal **05 Quiet Gold**. Version 1.55 uses thin gold frames and calmer plum surfaces across the HUD, menus, wardrobe and decorating/shop panels. Settings move the original seven toggle buttons into labeled cards; furniture-shop cards keep F2PRICE and f2Buy. Larger type-specific weapon pictures are generated locally; dragged canvas items copy their bitmap into the drag preview. `test_155_quiet_gold.js` covers real clicks/taps, settings redraws, English, nine original shop prices and a purchase, wardrobe illustrations, a visible drag preview/drop and portrait inventory. Keep gameplay behavior and the existing sounds when extending this theme.
+
+- Version 1.56 adds original painted UI art: 24 icons plus four reusable frame/button skins. UI art loads asynchronously and keeps the existing menu nodes, equipment illustrations and sounds; missing icons and frames fall back independently. `test_156_art.js` checks PC/touch, missing assets, corrupt image bytes, invalid crop metadata and art arriving while a muted settings panel is open. Painted icons are 64px; procedural fallback icons remain 32px. `test:ui` now includes six suites. Real-phone play testing and the owner's 9.5+ art assessment are still pending.
 
 ## Never
 - Never commit tokens or passwords. Never delete `art-*.png` sources or the guide scripts. Never ship without running the suites.

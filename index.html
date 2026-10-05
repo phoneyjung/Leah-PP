@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.55';
+const VERSION='Lantern Academy 1.56';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -4592,6 +4592,47 @@ function ui155Bag(){const host=$('mBody');if(!host.querySelector('.wardrobe154')
  @media(max-height:440px){#hud{width:224px;padding:7px 9px;gap:3px 7px}#hudPortrait{width:40px;height:42px}#hud .nm{font-size:11px}}
  @media(max-width:599px){#modal>.pn,#modal>.pn.bag154{padding:12px}.wardrobe154-layout{grid-template-columns:1fr;gap:15px}.settings155-group.primary,.settings155-group.secondary{grid-template-columns:1fr}.setting155-card{flex-direction:row;align-items:center}.setting155-card label{flex:1;min-width:0}.setting155-card button.ui153-control{width:144px;flex:none}.shop155-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}.shop155-card{padding:10px!important}}
  @media(prefers-reduced-motion:reduce){button{transition:none}}
+ `;document.head.append(st)}
+
+// ================= 1.56 PAINTED QUIET GOLD UI ART =================
+// Optional paintings enhance the existing controls; no asset is required to start/play.
+const UI156={icons:false,frames:false,done:false,painted:{},fallback:{...UI153.art}};
+function ui156Tile(image,meta,name,max){const tile=meta.tiles?.[name],r=tile?.rect;
+ if(!Array.isArray(r)||r.length!==4||!r.every(Number.isInteger)||r[0]<0||r[1]<0||r[2]<1||r[3]<1||r[0]+r[2]>image.naturalWidth||r[1]+r[3]>image.naturalHeight)throw Error('Invalid art tile');
+ const c=document.createElement('canvas'),icon=max===64,scale=Math.min((icon?58:max)/r[2],(icon?58:max)/r[3],icon?Infinity:1);
+ c.width=icon?64:Math.ceil(r[2]*scale);c.height=icon?64:Math.ceil(r[3]*scale);const g=c.getContext('2d');
+ g.drawImage(image,...r,(c.width-r[2]*scale)/2,(c.height-r[3]*scale)/2,r[2]*scale,r[3]*scale);
+ if(!g.getImageData(0,0,c.width,c.height).data.some((v,i)=>i%4===3&&v>24))throw Error('Empty art tile');return c.toDataURL('image/png')}
+async function ui156Atlas(meta,file,names,max){if(!meta||meta.file!==file||meta.width!==768||meta.height!==512)throw Error('Invalid art atlas');
+ const im=await new Promise((resolve,reject)=>{const image=new Image(),timer=setTimeout(()=>{image.onload=image.onerror=null;reject(Error('Art timeout'))},8000);
+ image.onload=()=>{clearTimeout(timer);resolve(image)};image.onerror=()=>{clearTimeout(timer);reject(Error('Art unavailable'))};image.src=file});
+ if(im.naturalWidth!==meta.width||im.naturalHeight!==meta.height)throw Error('Art dimensions');return Object.fromEntries(names.map(k=>[k,ui156Tile(im,meta,k,max)]))}
+function ui156Refresh(painted){const old={...UI153.art};Object.assign(UI156.painted,painted);Object.assign(UI150.art,painted);Object.assign(UI153.art,painted);
+ for(const [id,key] of Object.entries(UI150_BUTTONS)){if(!painted[key])continue;ICO[id]=painted[key];const im=document.querySelector('#'+id+' img.pxi');if(im){im.src=painted[key];im.onerror=()=>{im.onerror=null;im.src=UI156.fallback[key]}}}
+ // Refresh art in an already open panel without replacing its button nodes/handlers.
+ for(const im of document.querySelectorAll('img.ui153-icon,img.ui150-tool')){const key=Object.keys(painted).find(k=>old[k]===im.src);if(key){im.src=painted[key];im.hidden=false}}
+ if(S)ui153Menus();UI156.icons=true;document.body.classList.add('art156-icons')}
+(async()=>{let timer;try{const controller=new AbortController();timer=setTimeout(()=>controller.abort(),8000);
+ const response=await fetch('ui-quietgold-art.json',{cache:'no-cache',signal:controller.signal});if(!response.ok)throw Error('Art manifest unavailable');const meta=await response.json();clearTimeout(timer);if(meta.schema!==1)throw Error('Art schema');
+ await Promise.allSettled([
+  ui156Atlas(meta.icons,'ui-quietgold-icons.webp',['bag','map','smile','stats','book','settings','sword','star','potion','bench','boot','sofa','speaker','mute','music','joystick','coin','close','armor','acc','card','stamp','store','sort'],64).then(ui156Refresh),
+  ui156Atlas(meta.frames,'ui-quietgold-frames.webp',['panel','button','active','circle'],384).then(art=>{for(const [k,src] of Object.entries(art))document.documentElement.style.setProperty('--art156-'+k,'url("'+src+'")');UI156.frames=true;document.body.classList.add('art156-frames')})
+ ]);
+ }catch(e){/* Keep the complete procedural Quiet Gold UI when paintings are unavailable. */}finally{clearTimeout(timer);UI156.done=true}})();
+{const st=document.createElement('style');st.id='ui156';st.textContent=`
+ body.art156-icons img.pxi,body.art156-icons img.ui153-icon,body.art156-icons .ui150-tool{image-rendering:auto;filter:drop-shadow(0 1px 1px #08051280)}
+ body.art156-icons #btns img.pxi{width:28px;height:28px}
+ body.art156-frames #hud,body.art156-frames #modal>.pn,body.art156-frames #deco2{border-image-source:var(--art156-panel);border-image-slice:25 fill;border-image-width:10px;border-image-outset:0;border-image-repeat:stretch;background:#211a2ceb}
+ body.art156-frames button{border-image-source:var(--art156-button);border-image-slice:22 fill;border-image-width:7px;border-image-outset:0;border-image-repeat:stretch}
+ body.art156-frames button[aria-pressed=true],body.art156-frames button.on{border-image-source:var(--art156-active)}
+ body.art156-frames .slot154,body.art156-frames .wardrobe154-hero{border-image-source:var(--art156-panel);border-image-slice:25 fill;border-image-width:6px;border-image-outset:0;background:#211a2d}
+ body.art156-frames .slot154.empty{border-image-source:none}
+ body.art156-frames .panel155-header{background:#251e30}
+ body.art156-frames #mBody.settings155 #rst{border-image:none}
+ body.art156-frames.thumbs #act button{border-image:none;background:var(--art156-circle) center/100% 100% no-repeat;border-color:transparent;box-shadow:0 3px 8px #08061055}
+ body.art156-frames.thumbs #act #bAtk{border-image:none;background:var(--art156-circle) center/100% 100% no-repeat;border-color:transparent;box-shadow:0 4px 10px #08061077}
+ body.art156-frames.thumbs #act #bSlot2,body.art156-frames.thumbs #act #bSlot3{border-image:none;background:#211a2d55;border-color:#bca47466;box-shadow:none}
+ body.art156-frames #btns button{border-image-width:6px}
  `;document.head.append(st)}
 
 </script></body></html>

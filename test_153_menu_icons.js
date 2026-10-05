@@ -12,7 +12,8 @@ async function boot(browser,width,height,touch){const context=await browser.crea
  await pg.evaluate(()=>{gmMakeSlot();const d=Store.all();S=d.slots[d.cur];S.seen=S.seen||{};S.seen.intro=true;S.mus=false;S.snd=true;S.joy=true;S.coins=1000;save();startGame();
   document.querySelectorAll('#cr,#title,#picker').forEach(e=>e.classList.add('hide'));fpsChecks=6;GM.hour=10;goMap('farm')});await sleep(1700);
  await pg.evaluate(()=>{closeModal();DLG=null;PAUSE=false;HOLD=null;S.inv.push({...S.inv[S.eq],rar:0,gx:null,gy:null});gridFix();save()});return {context,pg};}
-async function icons(pg,ids){await pg.waitForFunction(ids=>ids.every(id=>{const i=document.getElementById(id)?.querySelector('img.ui153-icon');return i&&i.complete&&i.naturalWidth===32}),{timeout:4000},ids);
+// 1.56 paintings are 64px; the original procedural fallback remains 32px.
+async function icons(pg,ids){await pg.waitForFunction(ids=>ids.every(id=>{const i=document.getElementById(id)?.querySelector('img.ui153-icon');return i&&i.complete&&(i.naturalWidth===32||i.naturalWidth===64)}),{timeout:4000},ids);
  return pg.evaluate(ids=>ids.map(id=>{const b=document.getElementById(id),i=b.querySelector('img.ui153-icon');return {id,width:i.naturalWidth,label:b.querySelector('.ui153-label').textContent,aria:b.getAttribute('aria-label'),pressed:b.getAttribute('aria-pressed'),src:i.src}}),ids);}
 async function check(name,fn){try{results[name]=await fn()}catch(e){errors.push(name+': '+e.message)}}
 (async()=>{const browser=await puppeteer.launch({executablePath:process.env.CHROME_EXE||undefined,args:['--no-sandbox']});
