@@ -1,12 +1,13 @@
 // ระบบคริสตัล ขั้น 1: บาเรีย + ปุ่มสำรวจ (DESIGN_CRYSTAL_JOB.md ข้อ 4.1 และตารางข้อ 6)
 // เขียนโดย Claude "ก่อน" ลงมือทำ · Codex แก้ index.html จนชุดนี้ได้ errors 0 · ห้ามแก้ไฟล์นี้ (ถ้าเห็นว่าชุดทดสอบผิด ให้แจ้งเจ้าของ)
 //
-//   PORT=8775 node test_crystal_step1_barrier.js            รุ่น 1.58 (ยังไม่มีบาเรีย) ได้ errors 8
+//   PORT=8775 node test_crystal_step1_barrier.js            รุ่น 1.58 (ยังไม่มีบาเรีย) ได้ errors 6
 //   SHIM=1 PORT=8775 node test_crystal_step1_barrier.js     ใส่บาเรียจำลองจากชุดทดสอบเอง เพื่อพิสูจน์ว่าชุดทดสอบผ่านได้จริง
-//                                                           (ตัวจำลองไม่ใช่โค้ดที่ต้องนำไปใช้ และไม่แก้ผังฉาก จึงเหลือ errors 1 คือข้อ "ผังฉาก")
+//                                                           (ตัวจำลองไม่ใช่โค้ดที่ต้องนำไปใช้ · ได้ errors 0)
+// เจ้าของตัดสิน 5 ต.ค.: รัศมีบาเรีย 48 px ไม่ย้ายคริสตัล (ที่ 96 px บาเรียตัดทางเดินในถ้ำ)
 //
 // ข้อตกลงที่ชุดทดสอบใช้ (มีแค่ 3 อย่าง นอกนั้นวัดจากพฤติกรรม):
-//   1. รัศมีบาเรีย: ถ้าเกมประกาศค่าคงที่ CRYSTAL_BARRIER_R ชุดทดสอบใช้ค่านั้น ไม่งั้นใช้ 96 px ตามสเปก · ศูนย์กลาง = (c.x, c.y) ของ M.crystals
+//   1. รัศมีบาเรีย: ถ้าเกมประกาศค่าคงที่ CRYSTAL_BARRIER_R ชุดทดสอบใช้ค่านั้น ไม่งั้นใช้ 48 px ตามสเปก · ศูนย์กลาง = (c.x, c.y) ของ M.crystals
 //   2. คำบนปุ่มใหญ่เมื่ออยู่ในบาเรีย = t('actExplore') และต้องมีคำนี้ทั้งไทยและอังกฤษ
 //   3. ผู้เล่นเสียเลือดผ่านค่า S.hp (ของเดิม)
 const assert=require('node:assert/strict'),puppeteer=require('puppeteer');
@@ -23,9 +24,9 @@ const MAPS_WITH_CRYSTALS=['cavemouth','hunt1'];
   await start(false);
 
   if(process.env.SHIM)await pg.evaluate(()=>{   // ---- บาเรียจำลอง: ใช้พิสูจน์ชุดทดสอบเท่านั้น ----
-   window.CRYSTAL_BARRIER_R=96;TX.th.actExplore='สำรวจ';TX.en.actExplore='Explore';
-   const inB=(x,y)=>((M&&M.crystals)||[]).find(c=>Math.hypot(c.x-x,c.y-y)<96);
-   const _u=update;update=function(){const r=_u.apply(this,arguments);try{for(const mo of MONS){const c=inB(mo.x,mo.y);if(c){const a=Math.atan2(mo.y-c.y,mo.x-c.x);mo.x=c.x+Math.cos(a)*96;mo.y=c.y+Math.sin(a)*96}}if(P&&inB(P.x,P.y))P.target=null}catch(e){}return r};
+   window.CRYSTAL_BARRIER_R=48;TX.th.actExplore='สำรวจ';TX.en.actExplore='Explore';
+   const inB=(x,y)=>((M&&M.crystals)||[]).find(c=>Math.hypot(c.x-x,c.y-y)<48);
+   const _u=update;update=function(){const r=_u.apply(this,arguments);try{for(const mo of MONS){const c=inB(mo.x,mo.y);if(c){const a=Math.atan2(mo.y-c.y,mo.x-c.x);mo.x=c.x+Math.cos(a)*48;mo.y=c.y+Math.sin(a)*48}}if(P&&inB(P.x,P.y))P.target=null}catch(e){}return r};
    const _h=hurtPlayer;hurtPlayer=function(){if(P&&inB(P.x,P.y))return;return _h.apply(this,arguments)};
    const go=()=>{const c=inB(P.x,P.y);P.target=null;if(c&&!c.awake)tapWorld(c.x,c.y-10)};
    const _n=anyNear;anyNear=function(){if(S&&M&&P&&!PAUSE&&!DLG&&inB(P.x,P.y))return {ic:'\u{1F48E}',k:'actExplore',fn:go};return _n.apply(this,arguments)};
@@ -34,10 +35,10 @@ const MAPS_WITH_CRYSTALS=['cavemouth','hunt1'];
    const _j=useJob;useJob=function(){if(P&&inB(P.x,P.y))return;return _j.apply(this,arguments)}});
 
   // ---- ตัวช่วยฝั่งหน้าเกม ----
-  const install=()=>pg.evaluate(()=>{const BR=typeof CRYSTAL_BARRIER_R==='number'?CRYSTAL_BARRIER_R:96,cs=()=>M.crystals||[];
+  const install=()=>pg.evaluate(()=>{const BR=typeof CRYSTAL_BARRIER_R==='number'?CRYSTAL_BARRIER_R:48,cs=()=>M.crystals||[];
    const dC=(x,y)=>Math.min(...cs().map(c=>Math.hypot(c.x-x,c.y-y)));
    const spot=(c,dist,only)=>{const out=[];for(let a=0;a<24;a++){const x=c.x+Math.cos(a*Math.PI/12)*dist,y=c.y+Math.sin(a*Math.PI/12)*dist;if(!blockedAt(M,x,y)&&cs().every(o=>o===c||Math.hypot(o.x-x,o.y-y)>BR+30))out.push([x,y])}return only?out[0]||null:out};
-   const best=()=>cs().map((c,i)=>({i,n:spot(c,BR+70).length,inside:!!spot(c,80,1)&&!!spot(c,40,1)})).filter(o=>o.inside).sort((a,b)=>b.n-a.n)[0];
+   const best=()=>cs().map((c,i)=>({i,n:spot(c,BR+70).length,inside:!!spot(c,BR*.85,1)&&!!spot(c,BR*.6,1)})).filter(o=>o.inside).sort((a,b)=>b.n-a.n)[0];
    window._bt={BR,dC,spot,best,clear(){closeModal();DLG=null;PAUSE=false;P.path=null;P.target=null;P.act=null;P.sit=null},
     put(x,y){this.clear();P.x=x;P.y=y},
     pack(c,dist,n){const ps=spot(c,dist),ms=MONS.filter(m=>!m.happy&&!m.boss).slice(0,n),used=[];ms.forEach((m,k)=>{const p=ps[Math.floor(k*ps.length/ms.length)];if(!p)return;m.x=p[0];m.y=p[1];m.hp=m.max=1e6;m.st='chase';m.stun=0;used.push(m)});return used}}});
@@ -54,20 +55,20 @@ const MAPS_WITH_CRYSTALS=['cavemouth','hunt1'];
 
   await enter('hunt1');
   const pick=await pg.evaluate(()=>_bt.best());assert(pick&&pick.n>=3,'หาคริสตัลที่มีที่ว่างรอบ ๆ พอสำหรับทดสอบได้');
-  const geo=await pg.evaluate(i=>{const c=M.crystals[i];return {BR:_bt.BR,in40:_bt.spot(c,40,1),in80:_bt.spot(c,80,1),out:_bt.spot(c,_bt.BR+60,1),c:[c.x,c.y]}},pick.i);
+  const geo=await pg.evaluate(i=>{const c=M.crystals[i];return {BR:_bt.BR,in40:_bt.spot(c,_bt.BR*.6,1),in80:_bt.spot(c,_bt.BR*.85,1),out:_bt.spot(c,_bt.BR+60,1),c:[c.x,c.y]}},pick.i);
   results.setup={map:'hunt1',crystal:pick.i,ring:pick.n,BR:geo.BR};
 
   await check('1 คำว่า สำรวจ มีทั้งไทยและอังกฤษ',async()=>{const w=await pg.evaluate(()=>({th:TX.th.actExplore,en:TX.en.actExplore}));
    assert(w.th&&w.en,'ต้องมีคำ actExplore ทั้งไทยและอังกฤษ พบ '+JSON.stringify(w));return w});
 
   await check('2 ปุ่มใหญ่เป็น สำรวจ เมื่ออยู่ในบาเรีย',async()=>{const want=await pg.evaluate(()=>t('actExplore')),out={want};
-   for(const [nm,p] of [['ห่างคริสตัล 40 px',geo.in40],['ห่างคริสตัล 80 px',geo.in80]]){await pg.evaluate(p=>_bt.put(p[0],p[1]),p);await sleep(500);out[nm]=await label();
+   for(const [nm,p] of [['ในบาเรีย ใกล้คริสตัล',geo.in40],['ในบาเรีย ใกล้ขอบ',geo.in80]]){await pg.evaluate(p=>_bt.put(p[0],p[1]),p);await sleep(500);out[nm]=await label();
     assert.notEqual(want,'actExplore','ยังไม่มีคำ actExplore');assert.equal(out[nm],want,nm+': ปุ่มต้องเขียนว่า '+want)}
    await pg.evaluate(p=>_bt.put(p[0],p[1]),geo.out);await sleep(500);out['นอกบาเรีย 60 px']=await label();assert.notEqual(out['นอกบาเรีย 60 px'],want,'นอกบาเรียปุ่มต้องไม่ใช่ สำรวจ');return out});
 
   await check('3 กด สำรวจ จากในบาเรีย แล้วเดินไปเปิดกิจกรรมของคริสตัล',async()=>{await pg.evaluate(p=>_bt.put(p[0],p[1]),geo.in80);await sleep(400);await pressBig();
    let open=false;for(let k=0;k<30&&!open;k++){await sleep(200);open=await quizOpen()}const d=await pg.evaluate(c=>Math.round(Math.hypot(P.x-c[0],P.y-c[1])),geo.c);await pg.evaluate(()=>_bt.clear());
-   assert(open,'กดปุ่มใหญ่ที่ระยะ 80 px แล้ว 6 วินาทีต้องเห็นหน้าคำถาม 4 ตัวเลือก (ตัวละครอยู่ห่างคริสตัล '+d+' px)');return {opened:open,endDist:d}});
+   assert(open,'กดปุ่มใหญ่จากใกล้ขอบบาเรีย แล้ว 6 วินาทีต้องเห็นหน้าคำถาม 4 ตัวเลือก (ตัวละครอยู่ห่างคริสตัล '+d+' px)');return {opened:open,endDist:d}});
 
   await check('4 ในบาเรียโจมตีและใช้สกิลไม่ได้',async()=>{const out={};
    const prep=()=>pg.evaluate((ci,p)=>{const c=M.crystals[ci];_bt.put(p[0],p[1]);const a=Math.atan2(p[1]-c.y,p[0]-c.x),m=MONS.find(m=>!m.happy&&!m.boss);m.x=c.x+Math.cos(a)*(_bt.BR+24);m.y=c.y+Math.sin(a)*(_bt.BR+24);m.hp=m.max=5000;m.st='wander';m.stun=99;
