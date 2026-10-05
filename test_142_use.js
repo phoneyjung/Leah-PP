@@ -1,5 +1,5 @@
 // test_142_use.js — รุ่น 1.42–1.45: ของในบ้านที่กดใช้ได้ · เตา = ทำอาหาร · ชั้นหนังสือ = อ่านหนังสือ · อ่าง = อาบน้ำ · โถ = เข้าห้องน้ำ · อ่างล้างหน้า = ล้างมือ · เตียง โซฟา เปียโน ยังใช้ได้ · PORT=... CHROME_EXE=...
-const p=(()=>{try{return require('puppeteer')}catch(e){return require('/home/claude/.npm-global/lib/node_modules/@mermaid-js/mermaid-cli/node_modules/puppeteer')}})();
+const p=require('puppeteer');
 (async()=>{const b=await p.launch({executablePath:process.env.CHROME_EXE||undefined,args:['--no-sandbox']});
 const pg=await b.newPage();await pg.setViewport({width:1000,height:640,isMobile:true,hasTouch:true,deviceScaleFactor:1});const errs=[];pg.on('pageerror',e=>errs.push(e.message));
 await pg.goto('http://localhost:'+(process.env.PORT||8775)+'/?gm',{waitUntil:'load'});await pg.evaluate(()=>localStorage.clear());await pg.reload({waitUntil:'load'});await new Promise(r=>setTimeout(r,6500));

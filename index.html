@@ -121,17 +121,23 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.48';
+const VERSION='Lantern Academy 1.53';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
   stone:'obj-lightstone.png',stonePlaza:'obj-lightstone-plaza.png',caveDoor:'obj-cave-crystal.png',rock:'obj-rockfall.png',
-  bridgeRope:'obj-bridge-rope.png',bld:'buildings-village.png',house:'tiles-house.png',furn:'furniture.png',pier:'obj-pier.png',npc_leah:'leah-idle.png',npc_nuan:'nuan-idle.png',npc_mom:'mom-idle.png',npc_dad:'dad-idle.png',npc_peb:'peb-idle.png',bridgeStone:'obj-bridge-stone.png',fountBig:'obj-fountain-big.png',fountOld:'obj-fountain-old.png',bldAcademy:'bld-academy.png',bldLanna:'bld-lanna-house.png',bldLanna2:'bld-lanna-house2.png',bldStall:'bld-market-stall.png',objShrine:'obj-lantern-shrine.png',objBridgeArch:'obj-bridge-arch.png',objStairs:'obj-stairs-stone.png',objPier:'obj-pier-teak.png',bgCapGrey:'capital-greybox.png',bgFarmGrey:'farm-greybox.png',bgFarm:'map-farm.jpg',mapNorth:'map-north.jpg',mapEast:'map-east.jpg',mapSouth:'map-south.jpg',mapCapital:'map-capital.jpg',house1:'farm-house-1.png',house2:'farm-house-2.png',house3:'farm-house-3.png',robotSheet:'robot-helper.png',wildBush:'wild-bush.png',wildRock:'wild-rock.png',wildStump:'wild-stump.png'};
+  bridgeRope:'obj-bridge-rope.png',bld:'buildings-village.png',house:'tiles-house.png',furn:'furniture.png',pier:'obj-pier.png',npc_leah:'leah-idle.png',npc_nuan:'nuan-idle.png',npc_mom:'mom-idle.png',npc_dad:'dad-idle.png',npc_peb:'peb-idle.png',bridgeStone:'obj-bridge-stone.png',fountBig:'obj-fountain-big.png',fountOld:'obj-fountain-old.png',bldAcademy:'bld-academy.png',bldLanna:'bld-lanna-house.png',bldLanna2:'bld-lanna-house2.png',bldStall:'bld-market-stall.png',objShrine:'obj-lantern-shrine.png',objBridgeArch:'obj-bridge-arch.png',objStairs:'obj-stairs-stone.png',objPier:'obj-pier-teak.png',bgCapGrey:'capital-greybox.png',bgFarmGrey:'farm-greybox.png',mapNorth:'map-north.jpg',mapEast:'map-east.jpg',mapSouth:'map-south.jpg',mapCapital:'map-capital.jpg',house1:'farm-house-1.png',house2:'farm-house-2.png',house3:'farm-house-3.png'};
 const KIDS=[['kid-braids','ผมเปีย','Braids'],['kid-ponytail','หางม้า','Ponytail'],['kid-bob','ผมบ็อบ','Bob'],['kid-curly2','ผมหยิก','Curly',1],['kid-blond','ผมยุ่ง','Messy'],['kid-spiky','ผมตั้ง','Spiky']];
 KIDS.forEach(([k])=>{FILES['i_'+k]=k+'-idle.png';FILES['s_'+k]=k+'-stand.png';FILES['w_'+k]=k+'-walk.png'});
 const EMBED=window.EMBED_ASSETS||null;  // the single-file preview build puts every image here
+// ================= 1.52 FUTURE SCENE ART =================
+// Keep the six slots, but request them only after their files are supplied and explicitly enabled.
+// Set window.ENABLED_FUTURE_ART=[file names] before this script; embedded images need no opt-in.
+const FUTURE_ART=new Set(['map-north.jpg','map-east.jpg','map-south.jpg','map-capital.jpg','map-G9-home-farm-hi.jpg','map-H9-village-hi.jpg']);
+function artSource(f){if(EMBED&&EMBED[f])return EMBED[f];
+  if(FUTURE_ART.has(f)&&!(Array.isArray(window.ENABLED_FUTURE_ART)&&window.ENABLED_FUTURE_ART.includes(f)))return null;return f}
 const IMG={},MISSING=new Set();
-function loadImages(){const all=Object.entries(FILES);let n=0;const tick=()=>{n++;const el=document.getElementById('loadI');if(el)el.style.width=Math.round(100*n/all.length)+'%'};return Promise.all(all.map(([k,f])=>new Promise(res=>{const im=new Image();im.onload=()=>{IMG[k]=im;tick();res()};im.onerror=()=>{MISSING.add(k);tick();res()};im.src=EMBED&&EMBED[f]?EMBED[f]:f})))}
+function loadImages(){const all=Object.entries(FILES).map(([k,f])=>[k,artSource(f)]).filter(([,src])=>src);let n=0;const tick=()=>{n++;const el=document.getElementById('loadI');if(el)el.style.width=Math.round(100*n/all.length)+'%'};return Promise.all(all.map(([k,src])=>new Promise(res=>{const im=new Image();im.onload=()=>{IMG[k]=im;tick();res()};im.onerror=()=>{MISSING.add(k);tick();res()};im.src=src})))}
 const has=k=>!!IMG[k];
 
 // ---- words (Thai / English) ----
@@ -392,7 +398,7 @@ const cv=document.getElementById('c'),ctx=cv.getContext('2d'),vig=document.getEl
 let VW=0,VH=0,SC=1,camX=0,camY=0,LITE=false;
 const key=(x,y)=>x+','+y;
 function resize(){const dpr=devicePixelRatio||1,dw=Math.round(innerWidth*dpr),dh=Math.round(innerHeight*dpr);SC=Math.max(1,Math.round(dh/384));VW=Math.ceil(dw/SC);VH=Math.ceil(dh/SC);cv.width=VW*SC;cv.height=VH*SC;cv.style.width=(VW*SC/dpr)+'px';cv.style.height=(VH*SC/dpr)+'px';if(M)M.shadowSC=0}
-addEventListener('resize',resize);
+addEventListener('resize',()=>resize());
 function checkRot(){const el=document.getElementById('rot');if(!el)return;const port=innerHeight>innerWidth*1.1&&Math.min(innerWidth,innerHeight)<820;el.classList.toggle('hide',!port)}addEventListener('resize',checkRot);addEventListener('orientationchange',checkRot);
 let SEED=1;const rnd=()=>(SEED=(SEED*16807)%2147483647)/2147483647;
 function seeded(s){let v=s%2147483647||1;return()=>(v=(v*16807)%2147483647)/2147483647}
@@ -896,7 +902,6 @@ const FISH=[[0,5,9,null,3,4,'#bfe8ff'],[0,18,32,[6,18],5,5,'#8aa0b8'],[1,12,24,[
   [2,40,80,[17,20],20,16,'#3a4a5a'],[2,10,20,[12,17],18,15,'#e0c060'],[2,25,50,[20,4],22,18,'#8a7a9a'],[2,12,20,[6,10],25,20,'#6fae5a'],[3,15,30,'light',45,35,'#5fe0ff'],[4,60,120,[22,4],120,80,'#fff3c0']];
 const FW=[[0,4],[1,5],[4,4],[2,2],[3,2],[5,2],[6,1],[7,1],[8,1],[9,.7],[10,.6],[11,.15]];const fwNow=()=>isRainy()?FW.map(([i,w])=>[i,[3,6,8].includes(i)?w*2.5:w]):FW;
 const hourOk=(h,r)=>!r?true:r==='light'?LIGHT>=.7:r[0]<r[1]?h>=r[0]&&h<r[1]:h>=r[0]||h<r[1];
-function rollFish(){const h=new Date().getHours(),pool=fwNow().filter(([i])=>hourOk(h,FISH[i][3]));const tot=pool.reduce((a,[,w])=>a+w,0);let r=Math.random()*tot;for(const [i,w] of pool){if((r-=w)<=0)return i}return 0}
 const FISHING={on:false,st:'idle',t:0,fish:0,hold:false,zy:40,zv:0,fy:60,fv:0,ft:0,prog:.3};
 function fishArt(i){const c=FISH[i][6];return pix(20,12,g=>{g.fillStyle=c;g.fillRect(3,3,12,6);g.fillRect(5,2,8,8);g.fillRect(15,2,3,8);g.fillStyle='rgba(255,255,255,.5)';g.fillRect(5,3,6,1);g.fillStyle='#1b1330';g.fillRect(5,5,1,1)})}
 function fishNear(){return M&&M.fishSpot&&Math.hypot(P.x-M.fishSpot.x,P.y-M.fishSpot.y)<30}
@@ -3477,12 +3482,12 @@ function openGM(){if(!gmOn())return;const h=HOME.get(),B=(a,l,on)=>`<button data
 // 1.05 fix: the shop's lamp upgrade and the 1.04 lantern light both used S.lamp. The upgrade now lives in S.lampLv; S.lamp stays the lantern light 0..1.
 {const _sgL=startGame;startGame=function(){try{if(S&&S.lamp>1){S.lampLv=Math.min(3,(S.lampLv||0)+Math.round(S.lamp)-1);S.lamp=1}}catch(e){}return _sgL.apply(this,arguments)}}
 // ================= 1.06 G9 · OUR HOME + FARM (painted scene, MAP_SPEC_G9 v1.6) =================
-// The farm map uses the G9 painting when map-G9-home-farm.jpg is there (a sharper map-G9-home-farm-hi.jpg replaces it once uploaded).
+// The farm map uses the G9 painting when map-G9-home-farm.jpg is there (the sharper -hi image replaces it when supplied and enabled).
 // Missing picture -> the old greybox farm, nothing changes. One plan tile of the spec = 2 game tiles. For now the way in is the GM (the village's west road stays closed for players).
 const G9={"w":96,"h":64,"grid":"000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001111000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001111000000000000000000000000000000000000000000000000000001000000000000000010000000000000000000001111000000000000000000000000000000000000000000000000000001000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000001000011111111000010000000000000000000000000000000000000000000000000000000000000000000000000000001000011111111000010000000000000000000000000000000000000000000000000000000000000000000000000000001000011111111000010000000000000000000000000000000000000000000000000000000000000000000000000000001000011111111000010000000000000000000000000000000000000000000000000000000000000111111110000000001000011111111000010000000000000000000000010000000000000000000000000000000000000111111110000000001000011111111000010000000000000000000000010000000000000000000000000000000000000111111110000000001000011111111000010000000000000000000000000000000000000000000000000000000000000111111110000000001000000000000000010000000000000000000000000000000000000000000000000000000000000111111110000000001000000000000000010000000000000000000000000000000000000000000000000000000000000111111110000000000111111000001111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000111100111100000000000000000000000000000000000000000000000000000000000000000000000000000000000001111100111110000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111111111000000000000000000000000000000000000000000000000000011111100000000111000000000000111111111111111000000000000000000000000000000000000000000000000011111111111100111111100001111111111111111111111000000000000000000000000000000000000000000000000111111111111111111000000000111111111111111111111000000000000000000000000000000000000000000000000111111111111111100000000000000000001111111111110000000000000000000000000000000000000000000000000111111111111111110000000000000000000111111111100000000000000000000000000000000000000000000000000111111111111111111000000000000000000011111111000000000000000000000000000000000000000000000000000111111111111111111100000000000000000000000000000000000000000000000000000000000000000000000000000111111111111111111100000000000000000000000000000000000000000000000000000000000000000000000000000111111111111111111100000000000000000000000000000000000000000000000000000000000000000000000000000111111111111111111100000000000000000000000000000000000000000000000000000000000000000000000000000111111111111111111100000000000000000000000000000000000000000000000000000000000000000000000000000111111111111111111100000000000000000000000000000000000000000000000000000000000000000000000000000111111111111111111000000000000000000000000000000000000000000000000000000000000000000000000000000111111111111111110000000000000000000000000000000000000000000000000000000000000000000000000000000111111111111111100000000000000000000000000000000000000000000000000000000000000000000000000000000111111111111111000000000000000000000000000000000000000000000000000000000000000000000000000000000","spawn":[92,31.7],"exitE":[95.6,31.7],"locks":{"w":{"at":[8.6,33.9],"msg":"g9LockW","block":[6,34]},"n":{"at":[69.8,8.6],"msg":"g9LockN","block":[69.8,6.4]},"s":{"at":[23.8,57.0],"msg":"g9LockS","block":[23.8,59.2]}},"door":[39,20.4],"houseBase":20.3,"houseBox":{"1":[35.72,10.52,43.72],"2":[36.0,10.52,47.72],"3":[36.06,10.52,49.4]},"mailbox":[42.6,28.2],"shed":[61.0,26.3],"plots":[[55.5,39.5],[58.5,39.5],[61.5,39.5],[64.5,39.5],[55.5,42.0],[58.5,42.0],[61.5,42.0],[64.5,42.0],[55.5,44.5],[58.5,44.5],[61.5,44.5],[64.5,44.5]],"extra":[[57.4,48.4],[59.8,48.4],[62.2,48.4],[64.6,48.4],[57.4,51.6],[59.8,51.6],[62.2,51.6],[64.6,51.6]],"wild":[["bush",74.91,39.2],["rock",77.52,39.05],["stump",79.63,39.09],["bush",82.11,39.1],["bush",84.23,39.14],["stump",86.6,39.35],["rock",75.47,40.82],["bush",77.64,41.03],["bush",80.08,41.07],["rock",82.19,41.08],["stump",84.41,41.08],["bush",86.99,40.99],["bush",75.46,42.92],["stump",77.81,42.67],["rock",79.85,42.98],["bush",82.25,42.94],["bush",84.76,42.67],["rock",86.65,42.95],["stump",75.44,47.3],["bush",77.64,47.19],["bush",80.34,47.2],["stump",82.79,47.17],["rock",75.42,48.94],["bush",77.84,49.15],["bush",80.53,48.89],["rock",82.89,49.13],["stump",75.18,50.75],["bush",77.45,50.8],["bush",80.45,50.8],["stump",82.58,50.87],["rock",75.19,52.88],["bush",77.91,52.71],["bush",80.52,52.61],["rock",82.73,52.68]],"fish":[41,45.4],"conv":[48,25],"camp":[19.6,24.6],"sign":[45.6,28.8]};
 try{Object.assign(TX.th,{g9:'บ้านเรา · ฟาร์ม',g9LockW:'กองซุงขวางถนนอยู่ คนตัดไม้ยังขนไม่เสร็จ',g9LockN:'ประตูรั้วทุ่งหญ้าใส่กลอนอยู่ เปิดเมื่อถึงบทที่ 2',g9LockS:'พุ่มเบอร์รี่ขึ้นรกปิดทาง ต้องมีกรรไกรตัดกิ่งก่อน'});
   if(TX.en)Object.assign(TX.en,{g9:'Our Home · Farm',g9LockW:'A pile of logs blocks the road, the woodcutters are still hauling',g9LockN:'The meadow gate is bolted. It opens in chapter 2',g9LockS:'Berry bushes have overgrown the path. You need pruning shears first'})}catch(e){}
-{const ld=(src,k)=>{const i=new Image();i.onload=()=>{IMG[k]=i;try{CONVERTERS.farm=[G9.conv];delete CACHE.farm}catch(e){}};i.onerror=()=>{};i.src=(window.EMBED_ASSETS&&window.EMBED_ASSETS[src])||src};ld('map-G9-home-farm.jpg','mapG9');ld('map-G9-home-farm-hi.jpg','mapG9hi')}
+{const ld=(src,k)=>{src=artSource(src);if(!src)return;const i=new Image();i.onload=()=>{IMG[k]=i;try{CONVERTERS.farm=[G9.conv];delete CACHE.farm}catch(e){}};i.onerror=()=>{};i.src=src};ld('map-G9-home-farm.jpg','mapG9');ld('map-G9-home-farm-hi.jpg','mapG9hi')}
 const g9On=()=>!!(IMG.mapG9||IMG.mapG9hi);
 const g9HouseK=()=>{try{const l=houseLv();return l>=3?3:l>=2?2:1}catch(e){return 1}};
 function g9HouseObj(){const k=g9HouseK(),key2=IMG['house'+k]?'house'+k:IMG.house1?'house1':IMG.bldLanna?'bldLanna':null;if(!key2)return null;const I=IMG[key2],[x0,,x1]=G9.houseBox[k];
@@ -3982,7 +3987,10 @@ const DECO2={on:false,sel:null,hold:null},F2N={th:{bed:'เตียง',wardrob
 try{Object.assign(TX.th,{d2Pick:'แตะของที่จะจัด แล้วแตะพื้นที่จะย้ายไป',d2Turn:'หมุน',d2Store:'เก็บ',d2Done:'เสร็จ',d2Place:'แตะพื้นที่จะวาง',d2Wall:'วางตรงนี้ไม่ได้: ชนผนังหรือประตู',d2Over:'วางตรงนี้ไม่ได้: ทับของอื่น',d2Block:'วางตรงนี้ไม่ได้: บังทางเดินหรือทับตัวเรา',d2TurnNo:'หมุนตรงนี้ไม่ได้ ลองย้ายออกมาก่อน'});
   if(TX.en)Object.assign(TX.en,{d2Pick:'Tap a piece, then tap the floor to move it',d2Turn:'Turn',d2Store:'Store',d2Done:'Done',d2Place:'Tap the floor to put it down',d2Wall:'Not here: a wall or a doorway',d2Over:'Not here: another piece is in the way',d2Block:'Not here: it would block the way',d2TurnNo:'It cannot turn here. Move it out first'})}catch(e){}
 const f2name=k=>{const L=F2N[typeof LANG!=='undefined'?LANG:'th']||F2N.th;return /_f$/.test(k)?(L[k.slice(0,-2)]||k)+' \u2728':(L[k]||k)},f2View=(k,r)=>{const vs=ROOM2.pieces[k];return vs[r%vs.length]},f2Rect=it=>{const v=f2View(it[0],it[1]);return [it[2],it[3],it[2]+v[6],it[3]+v[7]]},f2Snap=v=>Math.round(v*2)/2;
-function f2Valid(it,skip){const [x0,y0,x1,y1]=f2Rect(it),D=M.r2,G=D.grid;if((D.noPlace||[]).some(q=>f2Hits([x0,y0,x1,y1],q)))return 'd2Wall';if(ROOM2.solid[it[0]]!==0&&(D.fixed||[]).some(f=>f2Hits([x0,y0,x1,y1],f2RectOf(f))))return 'd2Over';
+function f2Valid(it,skip){const [x0,y0,x1,y1]=f2Rect(it),D=M.r2,G=D.grid;
+  // Keep both tiles above the entrance walkable; floor rugs remain safe to walk on.
+  if(ROOM2.solid[it[0]]!==0&&D.door&&f2Hits([x0,y0,x1,y1],[D.door[0],D.door[1]-1,D.door[0]+2,D.door[1]]))return 'd2Block';
+  if((D.noPlace||[]).some(q=>f2Hits([x0,y0,x1,y1],q)))return 'd2Wall';if(ROOM2.solid[it[0]]!==0&&(D.fixed||[]).some(f=>f2Hits([x0,y0,x1,y1],f2RectOf(f))))return 'd2Over';
   for(let j=Math.floor(y0+.1);j<=Math.floor(y1-.1);j++)for(let i=Math.floor(x0+.1);i<=Math.floor(x1-.1);i++){const c=(G[j]||'')[i];if(!c||'# PE+'.includes(c))return 'd2Wall'}
   if(ROOM2.solid[it[0]]!==0)for(const o of M.layout2){if(o===skip||ROOM2.solid[o[0]]===0)continue;const [a0,b0,a1,b1]=f2Rect(o);if(x0<a1-.08&&a0<x1-.08&&y0<b1-.08&&b0<y1-.08)return 'd2Over'}
   return ''}
@@ -4039,7 +4047,12 @@ function charClip(){try{const B=[],add=(x,y,w,h)=>B.push([x-camX,y-camY,w,h]);if
 try{document.getElementById('bDeco').onclick=()=>openDeco()}catch(e){}   // the button kept a pointer to the old furniture screen: in the new house it showed the old list instead of the arranging bar and the shop
 {const _gm46=goMap;goMap=function(id,exitId){const r=_gm46.apply(this,arguments);try{if(M&&M.room2){const D=M.r2,dy=ROOM2.rowsAbovePlan;
   // the game puts a newcomer 30 px from the door toward the middle of the map; in the narrow doorway that was inside the wall and you could not move. Stand in the middle of the way in instead.
-  if(exitId==='door'&&D.door){P.x=M.spawnDefault[0];P.y=M.spawnDefault[1];P.path=null}
+  if(exitId==='door'&&D.door){P.x=M.spawnDefault[0];P.y=M.spawnDefault[1];P.path=null;
+    // Older saves may already have furniture here. Find the nearest free floor without moving their furniture.
+    if(!walkable(M,Math.floor(P.x/T),Math.floor(P.y/T))){let best=null,bd=Infinity;
+      for(let ty=0;ty<M.h;ty++)for(let tx=0;tx<M.w;tx++){if(!walkable(M,tx,ty))continue;const x=tx*T+16,y=ty*T+16;
+        if(M.exits.some(e=>Math.hypot(x-e.x,y-e.y)<26))continue;const d=Math.hypot(x-P.x,y-P.y);if(d<bd){bd=d;best=[x,y]}}
+      if(best){P.x=best[0];P.y=best[1]}}}
   else if(D.stair&&exitId===D.stair.id){const ex=M.exits.find(q=>q.id===exitId);let best=null,bd=1e9;   // beside the stairs: the nearest free tile to the foot (or head) of the stairs that is not the stair tile itself
     for(let ty=Math.floor(ex.y/T)-3;ty<=Math.floor(ex.y/T)+3;ty++)for(let tx=Math.floor(ex.x/T)-3;tx<=Math.floor(ex.x/T)+3;tx++){if(!walkable(M,tx,ty))continue;const d=Math.hypot(tx*T+16-ex.x,ty*T+16-ex.y);if(d>=26&&d<bd){bd=d;best=[tx*T+16,ty*T+16]}}
     if(best){P.x=best[0];P.y=best[1];P.path=null}}}}catch(e){}return r}}
@@ -4048,11 +4061,11 @@ addEventListener('pointerdown',e=>{try{const s=P&&P.sit;if(!s||typeof s!=='objec
   for(const dy of [20,28,36,44]){if(walkable(M,Math.floor(s.x/T),Math.floor((s.y+dy)/T))){P.x=s.x;P.y=s.y+dy;break}}P.sit=null}catch(_){}} ,true);
 // ================= 1.07 H9 · PAPLERN VILLAGE, NEW SCENE (painted, MAP_SPEC_H9 v1.4) =================
 // A separate map "h9" for now, reached by the GM (warp) and from the G9 farm's east road; the village players use (map "capital") is untouched.
-// Needs map-H9-village.jpg (a sharper map-H9-village-hi.jpg replaces it once uploaded); missing picture -> this map is not offered at all.
+// Needs map-H9-village.jpg (the sharper -hi image replaces it when supplied and enabled); missing picture -> this map is not offered at all.
 const H9={"w":96,"h":64,"grid":"000000000000000000000000000000000000000000000000000000000001111110110000000011111111111111111000000000000000000000000000000000000000000000000000000000000000111110000000000111111111111111111100000000000000000000000000000000000000000000000000000000000000111111000000001111111111111111111110000000000000000000000000000000000000000000000000000000000000111111100000011111111111111111111111000000000000000000000000000000000000000000000000000000000000111111100000111111111111111111111111000000000000000000000000000000000000000000000000000000000000011111100000111111111111111111111111000000000000000000000000000000000000000000000000000000000000000111100000111111111111111111111111000000000000000000000000000000000000000000000000000000000000000111100000111111111111111111111111000000000000000000000000000000000000000000000000000000000000000111100000111111111111111111111111000000000000000000000000000000000000000000000000011111111000000111110000111111111111111111111111000000000000000000000000000000000000000000000000011111111000000111100000011111111111111111111111000000001111111110000000000000000000000000000000011111111000001111100000011111111111111111111111000000001111111110000000000000000000000000000000011111111000001111100000001111111111111111111110000000001111111110000000111111111100000000000000011111111000001111100000000011111100011111111100000000001111111110000000111111111100000000000000011111111000011111100000000001111100011111110000000000001111111110000000111111111100000000000000011111111000011111000000000000001000011110000000000000001111111110000000111111111100000000000000011111111000111111001111111110000000000000000000000000001111111110000000111111111100000000000000011111111000011111001111111110000000000000000000000000001111111110000000111111111100000000000000011111111000111110001111111110000000000000000000000000000111111110000000111111111100000000000000011111111000111110001111111110000000000000000000000000000000000000000000111111111100000000000000011111111000111110001111111110000000000000000000000000000000000000010000111111111100000000000000000000000000111110001111111110000000000000000000000000000000000000110000000000000000000000000000000000000001111110001111111110000000000000000000000000000000000000110000000000000000000000000000000000000000011110001111111110000000000000000000000000000000000000000000000000000000000000000000000000000000111110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001111110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111000100000000000000000000000000000000000000000000000000000000000000000000000000000100000000011111000000000000000000000000000000000000000001111111110000011111111100000000000000000000000000001111100111111000000001111111000000000000000001111111110000011111111100000000000000011111111110001111100111111000000001111111000000000000000001111111110000011111111100000000000000011111111110001111100111111000000001111111000000000000000001111111110000011111111100000000000000011111111110000111100111111000000001111111000000000000000001111111110000011111111100000000000000011111111110000111100011111000000001111111000000000000000001111111110000011111111100000000000000011111111110000111100000000000000001111111000000000000000001111111110000011111111100000000000000011111111110001111100000000000000001111111000000000000000000000000000000000000000000000000000000011111111110001111110000000000000000000000000000000000000000000000000000000000000000000000000000011111111110011111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111100000000000000000000000000000000000001111111100000001111111100000000000000000000000000000011111100011111111000000000000000000000000001111111100000001111111100000000000000000000000000000111111100001111111000000000000000000000000001111111100000001111111100000000000000000000000000000011111000001111111000000000000000000000000001111111100000001111111100000000000000000000000000000111111000001111111000000000000000000000000001111111100000001111111100000000000000000000000000000111111000001111111000000000000000000000000001111111100000001111111100000000000000000000000000000000111000001111111000000000000000000000000001111111100000001111111100000000000000000000000000000000111000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000111111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000111111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000111111111000000000000000000000000000000000000000000000000000000000000000000000000000000000000000111111111000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001111111000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001111111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111110000000000000000000000000","spawn":[43.6,37.2],"exits":{"w":30.0,"e":30.0,"n":43.0,"s":43.6},"cave":[83.4,15.4],"crystal":[43.6,29.5],"stone":[36,37],"board":[51.4,34.4],"fish":[60.4,52.4],"npc":{"leah":[42,38],"nuan":[29,44],"mom":[39,35],"dad":[73,26]},"doors":{"clock_shop":[12.6,19.5],"post_office":[28.8,21.6],"mage_tower":[53.1,21.0],"blacksmith":[72.6,23.6],"restaurant":[15.4,42.0],"item_shop_nuan":[29.4,42.0],"inn":[54.1,44.0],"fruit_stall":[72.1,39.7],"house_daeng":[12.2,52.0],"house_fon":[27.0,52.0],"house_dao":[74.8,50.8],"house_mek":[86.4,42.0]}};
 try{Object.assign(TX.th,{h9:'หมู่บ้านพาเพลิน (ฉากใหม่)',h9LockN:'ต้นไม้ล้มขวางทางไปเมืองหลวง ช่างกำลังเคลียร์อยู่',h9LockS:'ป่าทางใต้ยังรก ผู้พิทักษ์กำลังเปิดทางอยู่'});
   if(TX.en)Object.assign(TX.en,{h9:'Paplern Village (new scene)',h9LockN:'A fallen tree blocks the road to the capital, workers are clearing it',h9LockS:'The southern forest is still overgrown, the keepers are opening a way'})}catch(e){}
-{const ld=(src,k)=>{const i=new Image();i.onload=()=>{IMG[k]=i;try{delete CACHE.h9;delete CACHE.farm}catch(e){}};i.onerror=()=>{};i.src=(window.EMBED_ASSETS&&window.EMBED_ASSETS[src])||src};ld('map-H9-village.jpg','mapH9');ld('map-H9-village-hi.jpg','mapH9hi')}
+{const ld=(src,k)=>{src=artSource(src);if(!src)return;const i=new Image();i.onload=()=>{IMG[k]=i;try{delete CACHE.h9;delete CACHE.farm}catch(e){}};i.onerror=()=>{};i.src=src};ld('map-H9-village.jpg','mapH9');ld('map-H9-village-hi.jpg','mapH9hi')}
 const h9On=()=>!!(IMG.mapH9||IMG.mapH9hi);
 MAPS.h9=function(){if(!h9On())return MAPS.capital.apply(this,arguments);
   const m=newMap('h9','town',H9.w,H9.h,81);m.nameKey='h9';m.h9=1;m.painted=IMG.mapH9hi?'mapH9hi':'mapH9';
@@ -4135,4 +4148,261 @@ const CRY_CHANCE=.05;
 {const _ogN=openGM;openGM=function(){const r=_ogN.apply(this,arguments);try{const h2=document.querySelector('#modal h2');if(h2&&gmOn()){const d=document.createElement('div');d.className='pn';d.style.margin='6px 0';const on='background:#e8c46a;color:#1b1330;';
     d.innerHTML='<b>โลกใหม่</b><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px"><button id="gmNeww" style="min-height:40px;'+(S.gmNew?on:'')+'">เล่นแบบผู้เล่นจริงในโลกใหม่ (H9 + G9)</button><button id="gmLuck" style="min-height:40px;'+(GM.luck?on:'')+'">ผลคริสตัล 100%</button></div>';h2.after(d);
     $('gmNeww').onclick=()=>{S.gmNew=!S.gmNew;save();newwApply();closeModal();try{for(const k of Object.keys(CACHE))delete CACHE[k]}catch(e){}fadeTo(()=>goMap('capital'))};$('gmLuck').onclick=()=>{GM.luck=!GM.luck;openGM()}}}catch(e){}return r}}
+// ================= 1.49 PURPLE AND GOLD: one crafted interface, readable touch controls, soft sound =================
+// A presentation layer only: original buttons, saves, actions and asset fallbacks remain the source of truth.
+const UI149={sounds:0,portraitKey:''};
+{const st=document.createElement('style');st.id='ui149';st.textContent=`
+:root{--ui-plum:#291b3a;--ui-ink:#1b1226;--ui-gold:#bd9655;--ui-light:#f4d896;--ui-text:#fff3db;--ui-edge:#775531}
+body{color:var(--ui-text)}html,body{touch-action:manipulation}canvas#c,#joy{touch-action:none}
+.pn,#deco2{background:
+ linear-gradient(90deg,#e4c381 9px,transparent 9px) left top/18px 2px no-repeat,
+ linear-gradient(90deg,transparent 9px,#e4c381 9px) right top/18px 2px no-repeat,
+ linear-gradient(90deg,#b18a50 9px,transparent 9px) left bottom/18px 2px no-repeat,
+ linear-gradient(90deg,transparent 9px,#b18a50 9px) right bottom/18px 2px no-repeat,
+ linear-gradient(145deg,rgba(57,37,73,.97),rgba(26,17,38,.97));
+ border:1px solid var(--ui-gold);border-radius:8px;
+ box-shadow:0 0 0 2px #211526,inset 0 0 0 3px rgba(210,165,85,.12),0 5px 12px #0c071c66;padding:10px 12px}
+button{border:1px solid #a88752;border-top-color:#dfbf7c;border-bottom-color:#705031;border-radius:7px;
+ background:linear-gradient(180deg,#58406b,#30213f);color:var(--ui-text);
+ box-shadow:inset 0 1px 0 #e6cead22,inset 0 -2px 0 #150d2466,0 2px 0 #160e22;
+ min-height:44px;padding:9px 13px;line-height:1.3;text-shadow:0 1px 1px #160e22;
+ transition:filter .12s,box-shadow .12s,transform .08s}
+button:active{transform:translateY(1px);filter:brightness(1.15);box-shadow:inset 0 2px 4px #140d2580}
+button:focus-visible,input:focus-visible{outline:2px solid #ffe1a0;outline-offset:3px}
+button:disabled{opacity:.5;cursor:default}
+@media(hover:hover){button:not(:disabled):hover{filter:brightness(1.13);border-color:#efce89}}
+.go,#deco2 button.ok{background:linear-gradient(#f1d598,#ba8d49)!important;color:#271830!important;
+ border-color:#ffe4ad;border-bottom-color:#79572d;text-shadow:0 1px #ffecc666}
+.opt.on,.it.on,button.on{outline:2px solid #e6c27d;outline-offset:1px}
+input:not([type=range]){border:1px solid #ad8852;border-radius:6px;background:#fff0d9;color:#291c33;padding:9px}
+.note{opacity:.9;color:#d9c7dd;line-height:1.5}
+#hud{display:grid;grid-template-columns:46px minmax(0,1fr);gap:5px 9px;width:256px;min-width:0;max-width:36vw;padding:10px 12px;
+ left:calc(12px + env(safe-area-inset-left,0px));top:calc(10px + env(safe-area-inset-top,0px));font-size:12px}
+#hud .nm,#hud .bar{grid-column:2;min-width:0;margin:0}
+#hud .nm{font-size:13px;gap:4px;white-space:nowrap;overflow:hidden}
+#hud #hName{overflow:hidden;text-overflow:ellipsis}#hud #hLv{flex:none;color:#e6c584}
+#hud .rib{width:6px;height:12px;flex:none}
+#hud .row,#hud #goal{grid-column:1/-1;margin:0!important}
+#hud .row{gap:8px;flex-wrap:wrap;padding-top:4px;border-top:1px solid #a4834c44}
+#hud #goal{font-size:11px!important;line-height:1.45!important;color:#e9d6aa!important}
+#hudPortrait{grid-column:1;grid-row:1/4;width:46px;height:50px;image-rendering:pixelated;
+ background:linear-gradient(#523763,#261930);border:1px solid #caa061;border-radius:6px;box-shadow:inset 0 0 0 2px #1e152b}
+#hud .bar{height:12px;border:1px solid #100a19;border-radius:3px;background:#130c20;box-shadow:0 1px 0 #85664c55;overflow:hidden}
+#hud .bar i{border-radius:2px;box-shadow:inset 0 1px 0 #ffffff55}
+#hud #hpI{background:linear-gradient(#ed767d,#b72f56)}#hud #xpI{background:linear-gradient(#f5da83,#bd8837)}
+#hud .bar b{font-size:9px;top:-1px;right:4px;text-shadow:0 1px 2px #140b20}
+#hud.mini{display:flex;width:auto}#hud.mini #hudPortrait{display:none}
+#topR{top:calc(10px + env(safe-area-inset-top,0px));right:calc(12px + env(safe-area-inset-right,0px));gap:8px}
+#btns{gap:6px}#btns button{width:48px;min-width:48px;height:48px;min-height:48px;padding:6px;font-size:20px;border-radius:8px}
+#btns button.dot::after{background:#f7d977;right:4px;top:4px;box-shadow:0 0 0 2px #281a36,0 0 6px #edc96866}
+#mmw{padding:7px;gap:5px;border-radius:8px}#mm{width:auto!important;height:auto!important;max-width:128px;max-height:86px;border:1px solid #0f0919;border-radius:3px}
+#mmn{font-size:11px;color:#edd8ac;max-width:130px;line-height:1.3}
+#act{gap:9px;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+#act button{min-width:58px;min-height:60px;border-radius:9px;font-size:22px;padding:5px 8px;gap:3px}
+#act small{font-size:11px;color:#f6e7ce;line-height:1.3}
+#act #bAtk{border:2px solid #f1d68f;background:radial-gradient(ellipse at 40% 12%,#735078,#322041 72%);box-shadow:inset 0 0 0 3px #e6bd6b22,0 3px 0 #140c20,0 0 10px #d2ab5633}
+body.thumbs #act button{width:48px;height:48px;font-size:19px;border:1px solid #caab6d;
+ background:radial-gradient(ellipse at 38% 8%,#624575,#30203f 75%);
+ box-shadow:inset 0 0 0 2px #140d2633,inset 0 2px 0 #edd2a52a,0 0 0 1px #24172f,0 3px 0 1px #130c20}
+body.thumbs #act button small{font-size:9px;max-width:46px;line-height:1.25}
+body.thumbs #act #bAtk{width:80px;height:80px;border:2px solid #f1d68f;font-size:29px;
+ background:radial-gradient(ellipse at 38% 15%,#735078,#322041 75%);
+ box-shadow:inset 0 0 0 3px #e6bd6b22,0 0 0 2px #35243c,0 4px 0 2px #130c20,0 0 12px #d2ab5633}
+body.thumbs #act #bAtk small{font-size:11px;max-width:70px}
+body.thumbs #act #bSk{bottom:calc(106px + env(safe-area-inset-bottom,0px))}
+body.thumbs #act #bSk,body.thumbs #act #bJ1,body.thumbs #act #bJ2,body.thumbs #act #bSlot2,body.thumbs #act #bSlot3{width:54px;height:54px}
+body.thumbs #act #bSlot2,body.thumbs #act #bSlot3{background:radial-gradient(ellipse at 35% 10%,#3b2d4844,#22182f88);border-color:#b49b6866;box-shadow:inset 0 0 0 2px #160e2544;color:#ddc8a480}
+body.thumbs #act #bDash{border-color:#c3d4ec;box-shadow:inset 0 2px 0 #edf6ff33,0 0 0 1px #24172f,0 3px 0 #130c20}
+body.thumbs #joy,#joy{background:radial-gradient(circle,#5b3d6444 0 44%,#291b3a55 45% 68%,#c7a76522 69%);
+ box-shadow:0 0 0 2px #d7b576aa,0 0 0 5px #21152d44,inset 0 0 0 12px #c7a7650a}
+#joyK,body.thumbs #joyK{background:radial-gradient(circle at 34% 25%,#fff3d4,#c8b395);border:1px solid #f5dfad;box-shadow:0 2px 4px #1d122988,0 0 0 2px #9e7a4f}
+#modal{background:rgba(12,7,22,.66);z-index:27}
+#modal>.pn{max-width:min(720px,94vw);max-height:calc(100dvh - 24px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));padding:18px;overscroll-behavior:contain;touch-action:pan-y;scrollbar-color:#b79962 #281b38;scrollbar-width:thin}
+#modal .row2{flex-wrap:wrap;gap:8px}#modal h2{font-size:19px;color:#f0d28c;padding-bottom:10px;border-bottom:1px solid #bb945a55}
+#modal .pn{box-shadow:inset 0 0 0 2px #c09a5610;border-color:#a1845144;border-radius:7px}
+#modal .grid{gap:10px}#modal .it{background:linear-gradient(145deg,#432d55,#271b37);border:1px solid #a4834b55;border-radius:7px}
+#modal .note{font-size:13px}#modal #mX{min-width:90px;background:linear-gradient(#665078,#382947)}
+#msg{border-radius:8px;padding:8px 14px;font-size:13px;bottom:calc(92px + env(safe-area-inset-bottom,0px));max-width:64vw}
+#dlg{padding:12px 14px;border-radius:9px}#dlgP{border:1px solid #ad8d57;border-radius:6px;background:#34223f!important}
+#dlgN{color:#f3d99a!important}#dlgT{color:#fff0d8}#card b{font-size:26px}#card i{color:#f5e3c5}
+#cr .pn{border-radius:9px}#cr .opt{border-radius:6px;min-height:44px}#cr .r{gap:12px}
+#deco2{width:max-content;max-width:min(720px,calc(100vw - 40px));max-height:52dvh;padding:10px 12px;display:flex;flex-direction:column;gap:8px}
+#deco2 .d2t{font-size:13px;line-height:1.4;margin:0;color:#f2d893;flex:none}
+#deco2 .d2r{display:flex;flex-direction:column;flex-wrap:nowrap;gap:8px;min-height:0}
+#deco2 .d2tools{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;flex:none}
+#deco2 button{min-height:48px;padding:8px 12px;font-size:13px;background:linear-gradient(#58406b,#30213f);border:1px solid #ba985f}
+#deco2 .d2inventory{display:grid;grid-template-columns:repeat(auto-fit,minmax(124px,1fr));gap:8px;width:min(560px,calc(100vw - 72px));
+ min-height:0;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;padding:4px;scrollbar-color:#b79962 #281b38;scrollbar-width:thin}
+#deco2 .d2inventory button{display:flex;align-items:center;gap:8px;text-align:left;min-width:0;min-height:54px;padding:7px}
+#deco2 .d2inventory span{font-size:12px;line-height:1.3}#deco2 .d2inventory canvas{width:36px;height:36px;image-rendering:pixelated;flex:none}
+#deco2 button.on{outline:2px solid #f5d790;outline-offset:-2px;box-shadow:inset 0 0 12px #e5bd6825}
+body.deco2 #joy{visibility:hidden}
+@media(max-height:440px){
+ #hud{width:240px;padding:8px 10px;gap:4px 8px;font-size:11px;top:calc(8px + env(safe-area-inset-top,0px))}
+ #hud .row{padding-top:3px}#hud #goal{font-size:10px!important}#hudPortrait{height:46px}
+ #topR{top:calc(8px + env(safe-area-inset-top,0px));gap:6px}#mm{max-height:62px;max-width:114px}#mmw{padding:5px 7px;gap:3px}
+ #modal>.pn{padding:12px 14px}#modal h2{font-size:17px;padding-bottom:6px}
+ #deco2{max-height:48dvh;padding:8px 10px;gap:6px}#deco2 .d2r{gap:6px}#deco2 .d2t{font-size:12px}
+ #msg{max-width:58vw;font-size:12px}#dlgT{font-size:14px!important}
+ #cr .r{gap:8px}#cr .pn{padding:7px 9px}#cr .opt{min-height:36px}#cr .ages button{min-height:36px}
+}
+@media(prefers-reduced-motion:reduce){button{transition:none}}
+`;document.head.appendChild(st)}
+// The same player artwork used by the character picker; redraw only when appearance changes.
+function ui149Portrait(){if(!S)return;const host=document.getElementById('hud');let c=document.getElementById('hudPortrait');
+ if(!c){c=document.createElement('canvas');c.id='hudPortrait';c.width=c.height=64;c.setAttribute('aria-hidden','true');host.prepend(c)}
+ const k=[S.kid,S.house,S.hc||0,S.ec||0].join(':');if(k===UI149.portraitKey)return;
+ const g=c.getContext('2d');g.clearRect(0,0,64,64);g.imageSmoothingEnabled=false;g.drawImage(crSheet(S.kid,S.house,S.hc||0,S.ec||0),0,0,64,64,0,0,64,64);UI149.portraitKey=k}
+{const old=hud;hud=function(){const r=old.apply(this,arguments);try{ui149Portrait()}catch(e){}return r}}
+// Separate the fixed commands from a scrollable picture inventory, preserving the original button handlers.
+Object.assign(F2N.th,{bedbig:'เตียงคู่',bookshelf:'ชั้นหนังสือ',armchair:'เก้าอี้นวม'});
+Object.assign(F2N.en,{bedbig:'Double bed',bookshelf:'Bookshelf',armchair:'Armchair'});
+{const old=deco2UI;deco2UI=function(){const r=old.apply(this,arguments),d=document.getElementById('deco2');if(!d)return r;
+ const row=d.querySelector('.d2r'),tools=document.createElement('div'),inventory=document.createElement('div');tools.className='d2tools';inventory.className='d2inventory';
+ for(const b of [...row.children]){if(b.dataset.a){tools.append(b);continue}const k=b.dataset.k,text=document.createElement('span');text.textContent=b.textContent;b.textContent='';
+  const v=ROOM2&&ROOM2.pieces[k]&&ROOM2.pieces[k][0],im=ROOM2&&IMG[(ROOM2.sheet||{})[k]||'furnPlain'];
+  if(v&&im){const c=document.createElement('canvas');c.width=c.height=48;c.setAttribute('aria-hidden','true');const g=c.getContext('2d'),s=Math.min(42/v[2],42/v[3]);g.imageSmoothingEnabled=false;
+   g.drawImage(im,v[0],v[1],v[2],v[3],Math.round((48-v[2]*s)/2),Math.round((48-v[3]*s)/2),Math.round(v[2]*s),Math.round(v[3]*s));b.append(c)}
+  b.append(text);inventory.append(b)}row.append(tools);if(inventory.childElementCount)row.append(inventory);return r}}
+// Gentle envelopes avoid hard clicks; bell overtones and a low wooden note give distinct, short feedback.
+// No external audio files, no new download, and the original sound/music switches still control playback.
+function ui149Sound(name){if(!SND)return false;const notes={
+ uiTap:[[420,0,.075,.026],[840,0,.045,.006]],uiOpen:[[523,0,.15,.025],[784,.05,.2,.018]],uiClose:[[587,0,.10,.022],[392,.045,.12,.014]],
+ pick:[[659,0,.12,.025],[988,.04,.14,.015]],coin:[[1175,0,.14,.023],[1568,.055,.18,.014]],
+ right:[[659,0,.18,.03],[988,.07,.23,.022]],wrong:[[349,0,.13,.023],[294,.07,.16,.018]],
+ lvl:[[523,0,.22,.028],[659,.065,.24,.024],[784,.13,.25,.023],[1047,.20,.36,.018]],
+ wake:[[784,0,.25,.027],[988,.09,.28,.022],[1319,.18,.34,.016]],warp:[[392,0,.15,.025],[523,.065,.2,.02],[784,.13,.25,.016]],
+ dig:[[150,0,.10,.034],[225,.035,.075,.012]],hit:[[196,0,.06,.035],[294,.012,.04,.012]],
+ hurt:[[175,0,.12,.03],[147,.045,.10,.018]],shoot:[[880,0,.075,.018],[587,.018,.055,.01]],kill:[[523,0,.12,.027],[784,.06,.18,.018]]
+ }[name];if(!notes)return false;
+ try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended'&&AC.resume)AC.resume().catch(()=>{});
+  const start=AC.currentTime+.004;for(const [f,offset,d,v] of notes){const at=start+offset,o=AC.createOscillator(),gain=AC.createGain();o.type='sine';o.frequency.setValueAtTime(f,at);
+   if(name==='uiTap'||name==='dig'||name==='hit')o.frequency.exponentialRampToValueAtTime(f*.75,at+d);
+   gain.gain.setValueAtTime(0,at);gain.gain.linearRampToValueAtTime(v,at+.006);gain.gain.exponentialRampToValueAtTime(.0001,at+d);gain.gain.linearRampToValueAtTime(0,at+d+.015);
+   o.connect(gain).connect(AC.destination);o.start(at);o.stop(at+d+.02);o.onended=()=>{o.disconnect();gain.disconnect()}}
+  UI149.sounds++;return true}catch(e){return false}}
+{const old=sfx;sfx=function(n){if(!SND)return;if(!ui149Sound(n))return old.apply(this,arguments)}}
+{const old=modal;modal=function(){const opening=document.getElementById('modal').classList.contains('hide');const r=old.apply(this,arguments);if(opening)sfx('uiOpen');return r}}
+{const old=closeModal;closeModal=function(){const visible=!document.getElementById('modal').classList.contains('hide');const r=old.apply(this,arguments);if(visible)sfx('uiClose');return r}}
+// Run after the real handler, including buttons that stop propagation; actions with their own sound don't get a second click sound.
+addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('button');if(!b||b.disabled)return;const n=UI149.sounds;
+ setTimeout(()=>{if(UI149.sounds===n)sfx('uiTap')},0)},true);
+// Scrolling the furniture shelf must not trigger the world's mouse-wheel zoom listener.
+document.addEventListener('wheel',e=>{if(e.target.closest&&e.target.closest('.d2inventory'))e.stopPropagation()},{capture:true,passive:true});
+// ================= 1.50 ENTRANCE / RESIZE FIXES + READABLE PURPLE-GOLD ICONS =================
+// Original UI artwork drawn here, independent of optional image files. Keep the real button nodes and handlers.
+const UI150={art:{},labels:{bBag:['กระเป๋า','Bag'],bMap:['แผนที่','Map'],bEmo:['อารมณ์','Emotes'],bStat:['พลัง','Stats'],bBook:['สมุด','Book'],bSet:['ตั้งค่า','Settings']}};
+function ui150Make(draw){const c=document.createElement('canvas');c.width=c.height=32;const g=c.getContext('2d');
+ const C={ink:'#25182f',gold:'#d3a55a',light:'#ffdfa0',shade:'#906136',wood:'#ac7042',cream:'#fff0cd',paper:'#ddcea9',teal:'#83c8c0',blue:'#547f97',pink:'#e687a3',purple:'#a48ab9',silver:'#dbe4e4'};
+ const r=(x,y,w,h,col)=>{g.fillStyle=C[col]||col;g.fillRect(x,y,w,h)},p=(points,col)=>{g.fillStyle=C[col]||col;g.beginPath();points.forEach(([x,y],i)=>i?g.lineTo(x,y):g.moveTo(x,y));g.closePath();g.fill()};
+ draw(r,p,C,g);const data=g.getImageData(0,0,32,32),a=data.data,src=new Uint8ClampedArray(a);
+ for(let y=0;y<32;y++)for(let x=0;x<32;x++){const i=(y*32+x)*4;if(src[i+3]){a[i+3]=255;continue}
+  if([[1,0],[-1,0],[0,1],[0,-1]].some(([dx,dy])=>{const X=x+dx,Y=y+dy;return X>=0&&Y>=0&&X<32&&Y<32&&src[(Y*32+X)*4+3]>100})){a[i]=37;a[i+1]=24;a[i+2]=47;a[i+3]=255}}
+ g.putImageData(data,0,0);return c.toDataURL()}
+const UI150_DRAW={
+ bag:(r,p)=>{r(11,3,10,4,'shade');r(13,3,6,2,'light');r(6,10,3,16,'shade');r(23,10,3,16,'shade');r(8,7,16,21,'wood');r(9,7,14,6,'gold');r(10,8,12,2,'light');r(10,17,12,9,'shade');r(11,17,10,7,'gold');r(14,12,4,6,'shade');r(15,12,2,3,'cream');r(11,18,10,1,'light')},
+ map:(r,p)=>{p([[3,7],[11,4],[21,7],[29,4],[29,25],[21,28],[11,25],[3,28]],'cream');p([[11,4],[21,7],[21,28],[11,25]],'paper');r(7,14,3,2,'teal');r(10,16,4,2,'teal');r(14,14,5,2,'teal');r(18,12,3,3,'teal');r(22,11,2,7,'pink');r(19,13,8,2,'pink');r(4,8,1,17,'light')},
+ smile:(r,p)=>{p([[9,4],[23,4],[28,9],[28,23],[23,28],[9,28],[4,23],[4,9]],'gold');r(9,5,14,3,'light');r(9,12,3,4,'ink');r(20,12,3,4,'ink');r(10,21,12,2,'ink');r(8,18,2,3,'ink');r(22,18,2,3,'ink');r(6,17,3,2,'pink');r(24,17,3,2,'pink')},
+ stats:(r,p)=>{p([[5,5],[16,2],[27,5],[27,18],[23,24],[16,29],[9,24],[5,18]],'gold');p([[8,7],[16,5],[24,7],[24,17],[20,22],[16,25],[12,22],[8,17]],'purple');p([[10,11],[14,9],[16,12],[18,9],[22,11],[22,15],[16,21],[10,15]],'pink');r(11,11,3,2,'cream')},
+ book:(r,p)=>{p([[3,7],[11,5],[16,7],[21,5],[29,7],[29,27],[21,25],[16,27],[11,25],[3,27]],'shade');p([[4,5],[11,3],[15,5],[15,24],[11,22],[4,24]],'cream');p([[17,5],[21,3],[28,5],[28,24],[21,22],[17,24]],'paper');r(15,5,2,21,'gold');for(const y of [9,13,17]){r(6,y,6,1,'shade');r(20,y,6,1,'shade')}r(23,4,3,7,'pink')},
+ settings:(r,p)=>{for(const [x,y,w,h] of [[13,2,6,5],[13,25,6,5],[2,13,5,6],[25,13,5,6],[5,5,6,6],[21,5,6,6],[5,21,6,6],[21,21,6,6]])r(x,y,w,h,'gold');p([[10,6],[22,6],[26,10],[26,22],[22,26],[10,26],[6,22],[6,10]],'gold');p([[12,10],[20,10],[22,12],[22,20],[20,22],[12,22],[10,20],[10,12]],'shade');r(12,12,8,8,'ink');r(12,7,9,2,'light');r(3,13,2,5,'light')},
+ sword:(r,p)=>{p([[24,3],[29,3],[29,8],[13,24],[8,19]],'silver');p([[24,4],[27,4],[10,21],[9,19]],'cream');p([[26,8],[28,7],[13,22],[12,20]],'blue');p([[6,15],[17,26],[15,28],[4,17]],'gold');p([[7,21],[11,25],[7,29],[3,25]],'wood');r(4,24,2,2,'light')},
+ star:(r,p)=>{p([[16,3],[19,11],[29,14],[21,20],[22,29],[16,24],[8,28],[10,19],[3,14],[12,11]],'gold');p([[16,6],[17,13],[24,15],[18,18],[16,24],[14,18],[8,15],[14,13]],'light');r(15,14,3,3,'cream')},
+ potion:(r,p)=>{r(12,2,8,4,'wood');r(11,6,10,5,'silver');p([[11,10],[21,10],[25,16],[25,26],[22,29],[10,29],[7,26],[7,16]],'silver');r(9,18,14,8,'pink');r(12,26,8,2,'pink');r(10,12,2,7,'cream');r(10,20,2,3,'cream');r(15,20,2,5,'cream');r(13,22,6,1,'cream')},
+ compass:(r,p)=>{p([[10,4],[22,4],[28,10],[28,22],[22,28],[10,28],[4,22],[4,10]],'gold');p([[11,7],[21,7],[25,11],[25,21],[21,25],[11,25],[7,21],[7,11]],'cream');p([[19,9],[18,18],[11,23],[13,14]],'blue');p([[19,9],[18,18],[13,14]],'pink');r(15,15,2,2,'gold')},
+ rod:(r,p)=>{p([[5,27],[3,25],[21,4],[23,6]],'wood');r(21,6,1,14,'paper');p([[14,21],[19,19],[25,20],[27,23],[24,26],[18,26],[14,24],[11,27],[11,20]],'teal');r(23,21,2,2,'ink');r(19,23,4,1,'cream');r(3,24,3,3,'gold')},
+ boot:(r,p)=>{p([[14,4],[23,4],[23,18],[28,22],[28,27],[12,27],[10,23],[13,18]],'wood');r(15,5,7,4,'gold');r(15,10,5,2,'light');r(14,14,6,2,'light');r(12,25,16,3,'shade');r(2,12,8,2,'teal');r(4,17,5,2,'teal');r(2,22,6,2,'teal')},
+ bench:(r,p)=>{r(5,8,22,7,'wood');r(6,8,20,2,'gold');r(4,18,24,5,'wood');r(4,18,24,2,'light');r(6,23,3,6,'shade');r(23,23,3,6,'shade');r(7,15,2,3,'shade');r(23,15,2,3,'shade')},
+ robot:(r,p)=>{r(15,3,2,4,'gold');r(13,2,6,3,'light');r(6,7,20,16,'silver');r(7,8,18,3,'cream');r(9,13,5,4,'teal');r(18,13,5,4,'teal');r(11,14,2,2,'ink');r(19,14,2,2,'ink');r(12,20,8,2,'shade');r(10,24,12,4,'purple');r(3,12,2,7,'gold');r(27,12,2,7,'gold')},
+ feet:(r,p)=>{p([[8,14],[13,14],[15,21],[13,28],[7,28],[5,23]],'cream');p([[21,5],[26,5],[28,12],[26,19],[20,19],[18,14]],'gold');r(5,7,3,4,'cream');r(9,6,3,5,'cream');r(13,8,2,4,'cream');r(18,2,3,3,'gold');r(22,1,3,3,'gold');r(26,2,2,3,'gold')},
+ paw:(r,p)=>{p([[10,16],[16,12],[22,16],[26,24],[22,28],[16,26],[10,28],[6,24]],'gold');for(const [x,y] of [[3,10],[9,4],[20,4],[26,10]]){r(x,y,4,6,'gold');r(x+1,y,2,2,'light')}r(12,18,7,3,'light')},
+ wheel:(r,p)=>{p([[10,4],[22,4],[28,10],[28,22],[22,28],[10,28],[4,22],[4,10]],'gold');p([[16,6],[25,11],[16,16]],'pink');p([[25,11],[25,22],[16,16]],'teal');p([[25,22],[16,26],[16,16]],'purple');p([[16,26],[7,22],[16,16]],'pink');p([[7,22],[7,11],[16,16]],'teal');p([[7,11],[16,6],[16,16]],'cream');r(13,13,6,6,'gold');p([[13,2],[19,2],[16,8]],'cream')},
+ house:(r,p)=>{p([[3,14],[16,3],[29,14]],'wood');p([[6,14],[26,14],[26,28],[6,28]],'cream');r(8,15,16,2,'paper');r(14,19,7,9,'shade');r(9,19,4,4,'teal');r(18,23,1,1,'gold');r(23,5,3,6,'gold')},
+ sofa:(r,p)=>{r(6,8,20,13,'wood');r(8,9,7,9,'purple');r(17,9,7,9,'purple');r(8,10,7,2,'cream');r(17,10,7,2,'cream');r(6,19,20,6,'purple');r(7,19,18,2,'cream');r(3,15,5,10,'wood');r(24,15,5,10,'wood');r(3,15,5,3,'gold');r(24,15,5,3,'gold');r(6,25,3,4,'shade');r(23,25,3,4,'shade')},
+ turn:(r,p)=>{p([[8,5],[22,5],[27,10],[27,18],[24,18],[24,11],[21,8],[9,8],[6,11],[6,17],[9,21],[15,21],[15,24],[8,24],[3,18],[3,10]],'gold');p([[20,17],[30,17],[25,25]],'light');r(10,11,8,6,'purple');r(10,17,8,3,'wood')},
+ store:(r,p)=>{r(5,13,22,15,'wood');r(6,14,20,3,'gold');r(6,25,20,2,'shade');r(14,17,4,4,'light');p([[3,10],[13,7],[16,13],[6,16]],'gold');p([[19,7],[29,10],[26,16],[16,13]],'light');r(15,2,2,5,'teal');p([[11,5],[21,5],[16,10]],'teal')},
+ shop:(r,p)=>{r(6,13,20,15,'cream');r(9,18,7,10,'shade');r(19,18,5,5,'teal');p([[5,4],[27,4],[29,12],[3,12]],'cream');r(5,5,4,8,'pink');r(14,5,4,8,'pink');r(23,5,4,8,'pink');r(3,13,26,2,'shade');r(6,26,20,2,'gold')},
+ done:(r,p)=>{p([[4,15],[8,11],[13,17],[24,5],[28,9],[13,26]],'gold');p([[6,15],[8,13],[13,20],[25,7],[26,9],[13,23]],'light')}
+};
+for(const [k,draw] of Object.entries(UI150_DRAW))UI150.art[k]=ui150Make(draw);
+const UI150_BUTTONS={bBag:'bag',bMap:'map',bEmo:'smile',bStat:'stats',bBook:'book',bSet:'settings',bAtk:'sword',bSk:'star',bPot:'potion',bCmp:'compass',bFish:'rod',bDash:'boot',bSit:'bench',bAuto:'robot',bFollow:'feet',bPets:'paw',bWheel:'wheel',bDeco:'sofa',bVisit:'house',bRest:'bench'};
+for(const [id,k] of Object.entries(UI150_BUTTONS)){ICO[id]=UI150.art[k];if(!ICON_DRAW[id])ICON_DRAW[id]=()=>{};const im=document.querySelector('#'+id+' img.pxi');if(im)im.src=ICO[id]}
+{const old=iconize;iconize=function(){const r=old.apply(this,arguments);for(const [id,names] of Object.entries(UI150.labels)){const b=document.getElementById(id);if(!b)continue;
+ const text=names[LANG==='en'?1:0];let label=b.querySelector('.ui150-label');if(!label){label=document.createElement('small');label.className='ui150-label';b.append(label)}
+ label.textContent=text;b.title=text;b.setAttribute('aria-label',text)}return r}}
+{const old=deco2UI;deco2UI=function(){const r=old.apply(this,arguments),d=document.getElementById('deco2');if(!d)return r;
+ for(const b of d.querySelectorAll('[data-a]')){const k=b.dataset.a,src=UI150.art[k];if(!src)continue;const text=t({turn:'d2Turn',store:'d2Store',shop:'d2Shop',done:'d2Done'}[k]);
+  const im=document.createElement('img');im.className='ui150-tool';im.src=src;im.alt='';const label=document.createElement('span');label.textContent=text;b.replaceChildren(im,label);b.setAttribute('aria-label',text)}return r}}
+{const st=document.createElement('style');st.textContent=`
+ #btns button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:3px}
+ #btns img.pxi{width:25px;height:25px;margin:0;flex:none}#btns .ui150-label{font-size:9px;line-height:1.1;white-space:nowrap}
+ img.pxi{width:28px;height:28px}body.thumbs #bAtk>img.pxi{width:34px;height:34px}
+ #deco2 .d2tools button{display:flex;align-items:center;justify-content:center;gap:6px}
+ .ui150-tool{width:24px;height:24px;image-rendering:pixelated;pointer-events:none}
+ `;document.head.append(st)}
+// ================= 1.51 BENCH STAND-UP FOR KEYBOARD / STICK =================
+// Bench feet can sit on a tile edge where the player's collision radius overlaps the solid seat.
+// Move onto the floor before the first keyboard/stick step, as the mouse stand-up already does.
+{const old=update;update=function(){const s=P&&P.sit;
+ if(M&&M.g9b&&s&&typeof s==='object'&&!s.free&&!PAUSE&&!DLG&&!P.dead&&
+   (keys.ArrowLeft||keys.ArrowRight||keys.ArrowUp||keys.ArrowDown||keys.a||keys.d||keys.w||keys.s||
+    (JOY.id!==null&&Math.hypot(JOY.x,JOY.y)>.2))){
+  for(const dy of [20,28,36,44]){const x=s.x,y=s.y+dy;
+   if(walkable(M,Math.floor(x/T),Math.floor(y/T))&&!blockedAt(M,x,y)){P.x=x;P.y=y;P.sit=null;P.path=null;break}}
+ }return old.apply(this,arguments)}}
+// ================= 1.53 MATCHING MENU ICONS / CLEAR SWITCH STATES =================
+// Draw original menu pictures in the HUD palette. Labels remain usable if a picture fails.
+const UI153={art:{...UI150.art}};
+function ui153Speaker(r,p,muted){r(3,12,6,9,'wood');r(4,13,4,6,'gold');p([[9,12],[18,5],[18,27],[9,21]],'gold');p([[11,13],[16,9],[16,23],[11,20]],'light');
+ if(muted){p([[22,10],[25,13],[28,10],[30,12],[27,16],[30,20],[28,22],[25,19],[22,22],[20,20],[23,16],[20,12]],'pink')}
+ else{r(22,11,2,11,'teal');r(26,8,2,17,'teal');r(22,10,2,2,'cream');r(26,7,2,2,'cream')}}
+const UI153_DRAW={
+ speaker:(r,p)=>ui153Speaker(r,p,false),mute:(r,p)=>ui153Speaker(r,p,true),
+ music:(r,p)=>{r(13,6,3,20,'gold');r(25,3,3,19,'gold');p([[13,6],[28,3],[28,8],[13,11]],'wood');p([[5,22],[9,19],[16,20],[16,26],[12,29],[5,28]],'teal');p([[18,18],[22,15],[28,16],[28,22],[24,25],[18,24]],'teal');r(6,22,6,2,'cream');r(19,18,5,2,'cream');r(15,7,10,1,'light')},
+ joystick:(r,p)=>{p([[5,20],[23,17],[29,22],[29,27],[6,29],[2,25]],'wood');p([[5,20],[23,17],[29,22],[10,25]],'gold');r(13,8,3,13,'silver');p([[11,3],[19,3],[22,6],[22,12],[19,15],[11,15],[8,12],[8,6]],'purple');r(11,4,7,3,'cream');r(22,20,4,3,'pink');r(8,25,19,2,'shade')},
+ battery:(r,p)=>{r(28,12,3,9,'shade');r(2,7,26,19,'gold');r(3,8,24,2,'light');r(5,11,20,11,'ink');for(const x of [7,13,19]){r(x,13,4,7,'teal');r(x,13,4,2,'cream')}},
+ sort:(r,p)=>{r(11,7,17,5,'paper');r(11,15,12,5,'paper');r(11,23,7,5,'paper');for(const y of [7,15,23])r(12,y,4,1,'cream');r(4,10,3,13,'gold');p([[1,12],[10,12],[5,5]],'light');p([[23,21],[30,21],[27,28]],'teal');r(26,15,2,7,'teal')},
+ coin:(r,p)=>{p([[10,4],[22,4],[28,10],[28,22],[22,28],[10,28],[4,22],[4,10]],'shade');p([[11,5],[21,5],[27,11],[27,21],[21,27],[11,27],[5,21],[5,11]],'gold');p([[12,8],[20,8],[24,12],[24,20],[20,24],[12,24],[8,20],[8,12]],'light');r(14,10,3,11,'shade');r(14,20,7,2,'shade');r(7,10,2,6,'cream')},
+ card:(r,p)=>{r(6,3,21,26,'shade');r(4,2,20,26,'cream');r(6,4,16,22,'paper');r(7,5,14,2,'light');p([[14,9],[17,13],[20,15],[17,18],[14,22],[11,18],[8,15],[11,13]],'purple');r(13,12,3,5,'teal');r(6,4,3,3,'gold');r(19,23,3,3,'gold')},
+ stamp:(r,p)=>{r(5,4,23,25,'cream');for(const x of [5,11,17,23]){r(x,2,3,2,'cream');r(x,29,3,2,'cream')}for(const y of [5,11,17,23]){r(3,y,2,3,'cream');r(28,y,2,3,'cream')}r(8,7,17,19,'purple');r(9,8,15,3,'teal');p([[10,19],[16,13],[23,19]],'gold');r(12,19,10,5,'paper');r(16,20,3,4,'wood');r(10,26,13,1,'shade')},
+ backup:(r,p)=>{r(4,20,24,8,'wood');r(5,20,22,3,'gold');r(8,17,3,6,'gold');r(21,17,3,6,'gold');r(13,3,6,13,'teal');p([[7,12],[25,12],[16,22]],'teal');r(14,4,2,9,'cream');r(6,26,20,2,'shade')},
+ list:(r,p)=>{r(5,3,23,26,'shade');r(4,2,22,26,'cream');r(6,4,18,3,'paper');for(const y of [10,16,22]){r(7,y,3,3,'gold');r(12,y,10,2,'wood')}r(24,4,1,21,'paper')},
+ close:(r,p)=>{p([[6,4],[16,14],[26,4],[29,7],[19,17],[29,27],[26,30],[16,20],[6,30],[3,27],[13,17],[3,7]],'gold');p([[6,6],[16,16],[26,6],[27,7],[17,17],[27,27],[26,28],[16,18],[6,28],[5,27],[15,17],[5,7]],'light')}
+};
+for(const [k,draw] of Object.entries(UI153_DRAW))try{UI153.art[k]=ui150Make(draw)}catch(e){}
+Object.assign(TX.th,{ui153On:'เปิด',ui153Off:'ปิด'});Object.assign(TX.en,{ui153On:'On',ui153Off:'Off'});
+function ui153Image(k){const src=UI153.art[k];if(!src)return null;const im=document.createElement('img');im.className='ui153-icon';im.alt='';im.src=src;im.onerror=()=>{im.hidden=true};return im}
+function ui153Button(b,k,label,pressed,name){if(!b)return;
+ const text=label===undefined?b.textContent.replace(/^[^\p{L}\p{N}]+/u,'').replace(/\u{1FA99}/gu,'').trim():label;
+ const im=ui153Image(k),span=document.createElement('span');span.className='ui153-label';span.textContent=text;
+ b.replaceChildren(...(im?[im,span]:[span]));b.classList.add('ui153-control');b.dataset.ui153=k;
+ b.setAttribute('aria-label',name?name+': '+text:text);if(pressed!==undefined)b.setAttribute('aria-pressed',String(pressed))}
+function ui153Menus(){const host=document.getElementById('mBody');if(!host)return;
+ const buttons={gbSort:'sort',bbSort:'sort',gbJunk:'coin',bbJunk:'coin',gbStore:'store',bbStore:'store',gbOld:'list',gbEqB:'sword',gbSellB:'coin',bCardBook:'card',bStampBook:'stamp',bkUp:'backup',parB:'stats',swP:'smile',mX:'close'};
+ for(const [id,k] of Object.entries(buttons))ui153Button(host.querySelector('#'+id),k);
+ for(const b of host.querySelectorAll('[data-buy]'))ui153Button(b,'coin');
+ if(S){const switches={sOn:[SND,SND?'speaker':'mute','sound'],mOn:[MUS,'music','music'],jOn:[!!S.joy,'joystick','joy'],kOn:[kidUI(),'smile','kidMode'],tOn:[ttsOn(),'speaker','tts'],gOn:[S.guide!==false,'compass','guide'],ecoB:[!!S.eco,'battery','eco']};
+  for(const [id,[on,k,name]] of Object.entries(switches))ui153Button(host.querySelector('#'+id),k,t(on?'ui153On':'ui153Off'),!!on,t(name))}
+ const h=host.querySelector('h2'),node=h&&h.firstChild;
+ if(node&&node.nodeType===3){const str=node.textContent.trimStart(),pair=[['🎒','bag'],['⚙️','settings'],['🛒','shop'],['🃏','card'],['📮','stamp']].find(([prefix])=>str.startsWith(prefix));
+  if(pair){const im=ui153Image(pair[1]);if(im){node.textContent=' '+str.slice(pair[0].length).trimStart();h.insertBefore(im,node)}}}}
+// Grid actions rebuild their own menu, bypassing the older openBag wrappers that add book tabs.
+function ui153BookTabs(){if(!S)return;const host=document.getElementById('mBody'),h=host&&host.querySelector('h2');if(!h)return;
+ const tabs=[['bCardBook','cardBook',(S.cardBook||[]).length+'/'+CAVE1_SET.length,!!IMG.cardFront,()=>openCardBook()],['bStampBook','stampBook',Math.min(STAMP_MAX,S.stamps||0)+'/'+STAMP_MAX,true,()=>openStampBook()]];
+ for(const [id,key,count,show,open] of tabs){if(!show||host.querySelector('#'+id))continue;const b=document.createElement('button');b.id=id;b.textContent=t(key)+' '+count;
+  b.style.cssText='margin:0 0 6px 8px;vertical-align:middle';b.onclick=open;const anchor=id==='bStampBook'?host.querySelector('#bCardBook')||h:h;anchor.after(b)}}
+// Preserve button nodes and their original handlers; decorate again after later wrappers add book tabs.
+{const old=modal;modal=function(){const r=old.apply(this,arguments);try{ui153Menus()}catch(e){}return r}}
+{const old=openGridBag;openGridBag=function(){const r=old.apply(this,arguments);try{ui153BookTabs();ui153Menus()}catch(e){}return r}}
+{const old=openBag;openBag=function(){const r=old.apply(this,arguments);try{ui153Menus()}catch(e){}return r}}
+{const old=openSettings;openSettings=function(){const r=old.apply(this,arguments);try{ui153Menus()}catch(e){}return r}}
+{const st=document.createElement('style');st.id='ui153';st.textContent=`
+ #mBody .ui153-control{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:48px;min-width:0;max-width:100%;vertical-align:middle}
+ #mBody .ui153-label{min-width:0;overflow-wrap:anywhere}
+ #mBody img.ui153-icon{width:24px;height:24px;image-rendering:pixelated;flex:none;vertical-align:middle;pointer-events:none}
+ #mBody h2>img.ui153-icon{width:28px;height:28px;margin-right:4px}
+ #mBody .ui153-control[aria-pressed="true"]{border-color:#e6c47b;box-shadow:inset 0 0 0 1px #e6c47b55}
+ #mBody .ui153-control[aria-pressed="false"]{color:#d5c9e4;background:linear-gradient(#43304f,#281d35)}
+ #mBody img.ui153-icon[hidden]{display:none}
+ `;document.head.append(st)}
 </script></body></html>

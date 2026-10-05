@@ -1,5 +1,5 @@
 // test_129_layout.js — รุ่น 1.29: ปุ่มกลมเฉพาะจอสัมผัส · บลิ๊งเหนือสกิล · ช่องสกิล 3 ช่อง · สมาธิแทนออโต้ · ลุกจากม้านั่งด้วยจอย · คอมพิวเตอร์ใช้แถบปุ่มเดิม · PORT=... CHROME_EXE=...
-const p=(()=>{try{return require('puppeteer')}catch(e){return require('/home/claude/.npm-global/lib/node_modules/@mermaid-js/mermaid-cli/node_modules/puppeteer')}})();
+const p=require('puppeteer');
 const boot=async(pg)=>{await pg.goto('http://localhost:'+(process.env.PORT||8775)+'/?gm',{waitUntil:'load'});await pg.evaluate(()=>localStorage.clear());await pg.reload({waitUntil:'load'});await new Promise(r=>setTimeout(r,6000));
  return pg.evaluate(async()=>{const sleep=ms=>new Promise(r=>setTimeout(r,ms));gmMakeSlot();const d=Store.all();S=d.slots[d.cur];delete S.joy;startGame();await sleep(1500);document.querySelectorAll('#cr,#title,#picker').forEach(e=>e.classList.add('hide'));fpsChecks=6;GM.hour=10;goMap('farm');await sleep(1500);
   try{for(let i=0;i<12&&DLG;i++){if(typeof dlgNext==='function')dlgNext();else DLG=null;await sleep(150)}DLG=null;PAUSE=false}catch(e){}document.querySelectorAll('#dlg').forEach(e=>e.classList.add('hide'));await sleep(800);

@@ -1,7 +1,7 @@
-const p=(()=>{try{return require('puppeteer')}catch(e){return require('/home/claude/.npm-global/lib/node_modules/@mermaid-js/mermaid-cli/node_modules/puppeteer')}})();
-(async()=>{const b=await p.launch({executablePath:'/home/claude/.cache/puppeteer/chrome/linux-131.0.6778.204/chrome-linux64/chrome',args:['--no-sandbox']});
+const p=require('puppeteer');
+(async()=>{const b=await p.launch({executablePath:process.env.CHROME_EXE||undefined,args:['--no-sandbox']});
 const pg=await b.newPage();await pg.setViewport({width:844,height:390,isMobile:true,hasTouch:true,deviceScaleFactor:2});const errs=[];pg.on('pageerror',e=>errs.push(e.message));
-await pg.goto('http://localhost:8775/',{waitUntil:'networkidle0'});await pg.evaluate(()=>localStorage.clear());await pg.reload({waitUntil:'networkidle0'});await new Promise(r=>setTimeout(r,5000));
+await pg.goto('http://localhost:'+(process.env.PORT||8775)+'/',{waitUntil:'networkidle0'});await pg.evaluate(()=>localStorage.clear());await pg.reload({waitUntil:'networkidle0'});await new Promise(r=>setTimeout(r,5000));
 const r=await pg.evaluate(async()=>{const o={};S=newSave({name:'ลีอา',kid:0,house:0,age:7});startGame();await new Promise(r=>setTimeout(r,1800));document.querySelectorAll('#cr,#title,#picker').forEach(e=>e.classList.add('hide'));
  setInterval(()=>{LITE=false;fpsChecks=99;DLG=null;PAUSE=false;document.querySelectorAll('#dlg').forEach(e=>e.classList.add('hide'))},50);
  o.start=M.id;o.name=t(M.nameKey);o.crystal=!!M.objs.find(x=>x.crystal);o.fountainGone=!M.objs.find(x=>x.img==='fountCapA');o.exits=M.exits.map(e=>e.id+'→'+e.to+(e.locked?'🔒':''));

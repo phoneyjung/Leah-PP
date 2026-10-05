@@ -1,6 +1,6 @@
 // test_112_g9b.js — ฉาก G9 แบบประกอบ (พื้น + ของแยกชิ้น) ในเกมรุ่น 1.12 · เปิดเซิร์ฟเวอร์ที่โฟลเดอร์เกมก่อน: python3 -m http.server 8775
 // BLOCK=g9b-scene.json node test_112_g9b.js  -> ทดสอบว่าไฟล์หายแล้วเกมกลับไปใช้ฉากเดิม
-const p=(()=>{try{return require('puppeteer')}catch(e){return require('/home/claude/.npm-global/lib/node_modules/@mermaid-js/mermaid-cli/node_modules/puppeteer')}})();
+const p=require('puppeteer');
 (async()=>{const b=await p.launch({executablePath:process.env.CHROME_EXE||undefined,args:['--no-sandbox']});
 const pg=await b.newPage();await pg.setViewport({width:844,height:390,isMobile:true,hasTouch:true,deviceScaleFactor:2});const errs=[];pg.on('pageerror',e=>errs.push(e.message));
 const BL=(process.env.BLOCK||'').split(',').filter(Boolean);if(BL.length){await pg.setRequestInterception(true);pg.on('request',r=>{if(BL.some(f=>r.url().includes(f)))r.abort();else r.continue()})}

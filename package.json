@@ -4,6 +4,8 @@
   "description": "Lantern Academy: a single-file HTML5 game. No build step. This file exists only so the test suites can find puppeteer.",
   "scripts": {
     "serve": "python3 -m http.server 8775",
+    "test:ui": "node test_129_layout.js && node test_149_ui.js && node test_153_menu_icons.js",
+    "test:bugs": "node test_150_bugs.js && node test_151_remaining.js && node test_152_future_art.js",
     "test:house": "node test_137_room.js && node test_138_deco.js && node test_139_levels.js && node test_142_use.js && node test_143_fine.js && node test_144_shop.js && node test_146_fixes.js && node test_148_rings.js",
     "test:farm": "node test_112_g9b.js && node test_114_life.js && node test_121_beds.js && node test_124_sit.js && node test_134_context.js && node test_135_robot.js && node test_136_house.js"
   },

@@ -1,5 +1,5 @@
 // test_148_rings.js — รุ่น 1.48: วงบอกจุดยืนของของที่ใช้ได้ในบ้าน (แบบจุดตกปลา) · ทุกวงอยู่บนพื้นที่เดินถึง · ยืนในวงแล้วปุ่มใหญ่เป็นของชิ้นนั้น · PORT=... CHROME_EXE=...
-const p=(()=>{try{return require('puppeteer')}catch(e){return require('/home/claude/.npm-global/lib/node_modules/@mermaid-js/mermaid-cli/node_modules/puppeteer')}})();
+const p=require('puppeteer');
 (async()=>{const b=await p.launch({executablePath:process.env.CHROME_EXE||undefined,args:['--no-sandbox']});
 const pg=await b.newPage();await pg.setViewport({width:1100,height:700});const errs=[];pg.on('pageerror',e=>errs.push(e.message));
 await pg.goto('http://localhost:'+(process.env.PORT||8775)+'/?gm',{waitUntil:'load'});await pg.evaluate(()=>localStorage.clear());await pg.reload({waitUntil:'load'});await new Promise(r=>setTimeout(r,6500));

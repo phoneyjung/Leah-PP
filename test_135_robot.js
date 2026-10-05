@@ -1,7 +1,8 @@
 // test_135_robot.js — รุ่น 1.35: หุ่นช่วยงาน 8 ทิศ + ท่าเดิน 6 เฟรม · PORT=... CHROME_EXE=... · MISSING=1 ทดสอบตอนไม่มีไฟล์ robot-walk.png
-const p=(()=>{try{return require('puppeteer')}catch(e){return require('/home/claude/.npm-global/lib/node_modules/@mermaid-js/mermaid-cli/node_modules/puppeteer')}})();
+const p=require('puppeteer');
 (async()=>{const b=await p.launch({executablePath:process.env.CHROME_EXE||undefined,args:['--no-sandbox']});
 const pg=await b.newPage();await pg.setViewport({width:812,height:330,isMobile:true,hasTouch:true,deviceScaleFactor:2.6});const errs=[];pg.on('pageerror',e=>errs.push(e.message));
+if(process.env.MISSING==='1'){await pg.setBypassServiceWorker(true);await pg.setRequestInterception(true);pg.on('request',r=>new URL(r.url()).pathname.endsWith('/robot-walk.png')?r.abort():r.continue())}
 await pg.goto('http://localhost:'+(process.env.PORT||8775)+'/?gm',{waitUntil:'load'});await pg.evaluate(()=>localStorage.clear());await pg.reload({waitUntil:'load'});await new Promise(r=>setTimeout(r,6000));
 const R=await pg.evaluate(async()=>{const o={version:VERSION,sheet:!!IMG.robotWalk,sheetSize:IMG.robotWalk?[IMG.robotWalk.width,IMG.robotWalk.height]:null};const sleep=ms=>new Promise(r=>setTimeout(r,ms));gmMakeSlot();const d=Store.all();S=d.slots[d.cur];startGame();await sleep(1500);document.querySelectorAll('#cr,#title,#picker').forEach(e=>e.classList.add('hide'));fpsChecks=6;GM.hour=10;
  const h=farmSave();h.farm.robot=true;h.farm.robotOn=false;HOME.put(h);delete CACHE.farm;goMap('farm');await sleep(1500);try{for(let i=0;i<12&&DLG;i++){if(typeof dlgNext==='function')dlgNext();else DLG=null;await sleep(150)}DLG=null;PAUSE=false}catch(e){}document.querySelectorAll('#hud,#dlg,#act').forEach(e=>e.classList.add('hide'));
@@ -10,4 +11,5 @@ const R=await pg.evaluate(async()=>{const o={version:VERSION,sheet:!!IMG.robotWa
  for(const n of names){const [sx,sy]=step[n];for(let i=0;i<14;i++){rb.x+=sx*1.2;rb.y+=sy*1.2;await sleep(34);frames.add(rb._drawnK%8)}o.rowWhenMoving[n]=names[rb._row];rb.x=x0;rb.y=y0;rb._px=x0;rb._py=y0;await sleep(60)}
  o.walkFramesSeen=[...frames].sort();await sleep(500);o.standingWhenStill=rb._drawnK%8===0;rb.x=x0;rb.y=y0;await sleep(300);return o});
 if(R.robot){await pg.evaluate(async()=>{const rb=M.robot.o;window._iv=setInterval(()=>{rb.x-=1.1;rb.y+=1.1},33);await new Promise(r=>setTimeout(r,700))});await pg.screenshot({path:'r_robot.png'});await pg.evaluate(()=>clearInterval(window._iv))}
+if(process.env.MISSING==='1'&&(R.sheet||!R.robot)){errs.push('missing robot-walk.png must use the fallback robot');process.exitCode=1}
 console.log(JSON.stringify(R));console.log('errors',errs.length,errs.slice(0,4));await b.close()})();

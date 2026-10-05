@@ -1,5 +1,5 @@
 // test_143_fine.js — รุ่น 1.43: เฟอร์นิเจอร์ชุดสวย · วางแทนชุดธรรมดาที่เดิมได้พอดีทุกชิ้นทุกทิศ · ใช้งานได้เหมือนกัน · ไฟล์หายเกมยังเล่นได้ · MISSING=1 · PORT=... CHROME_EXE=...
-const p=(()=>{try{return require('puppeteer')}catch(e){return require('/home/claude/.npm-global/lib/node_modules/@mermaid-js/mermaid-cli/node_modules/puppeteer')}})();
+const p=require('puppeteer');
 (async()=>{const b=await p.launch({executablePath:process.env.CHROME_EXE||undefined,args:['--no-sandbox']});
 const pg=await b.newPage();await pg.setViewport({width:1000,height:640,isMobile:true,hasTouch:true,deviceScaleFactor:1});const errs=[];pg.on('pageerror',e=>errs.push(e.message));
 await pg.goto('http://localhost:'+(process.env.PORT||8775)+'/?gm',{waitUntil:'load'});await pg.evaluate(()=>localStorage.clear());await pg.reload({waitUntil:'load'});await new Promise(r=>setTimeout(r,6500));

@@ -1,6 +1,6 @@
 // test_114_life.js — ฉาก G9 มีชีวิตในเกมรุ่น 1.14: ลม 3 ระดับ · น้ำขยับ · ใบบัว · เงาปลา · ประตูรั้วเปิดปิด · ประกายของที่กดได้
 // เปิดเซิร์ฟเวอร์ที่โฟลเดอร์เกมก่อน: python3 -m http.server 8775  (PORT=... เปลี่ยนพอร์ต · CHROME_EXE=... ที่อยู่ Chrome)
-const p=(()=>{try{return require('puppeteer')}catch(e){return require('/home/claude/.npm-global/lib/node_modules/@mermaid-js/mermaid-cli/node_modules/puppeteer')}})();
+const p=require('puppeteer');
 (async()=>{const b=await p.launch({executablePath:process.env.CHROME_EXE||undefined,args:['--no-sandbox']});
 const pg=await b.newPage();await pg.setViewport({width:844,height:390,isMobile:true,hasTouch:true,deviceScaleFactor:2});const errs=[];pg.on('pageerror',e=>errs.push(e.message));
 await pg.goto('http://localhost:'+(process.env.PORT||8775)+'/?gm',{waitUntil:'load'});await pg.evaluate(()=>localStorage.clear());await pg.reload({waitUntil:'load'});await new Promise(r=>setTimeout(r,6000));

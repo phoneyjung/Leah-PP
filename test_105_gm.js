@@ -1,8 +1,8 @@
 // test_105_gm.js — ทดสอบตัวละคร GM ของรุ่น 1.05 ด้วยเบราว์เซอร์จริง · เปิดเซิร์ฟเวอร์ที่โฟลเดอร์เกมก่อน: python3 -m http.server 8775
-const p=(()=>{try{return require('puppeteer')}catch(e){return require('/home/claude/.npm-global/lib/node_modules/@mermaid-js/mermaid-cli/node_modules/puppeteer')}})();
-(async()=>{const b=await p.launch({executablePath:'/home/claude/.cache/puppeteer/chrome/linux-131.0.6778.204/chrome-linux64/chrome',args:['--no-sandbox']});
+const p=require('puppeteer');
+(async()=>{const b=await p.launch({executablePath:process.env.CHROME_EXE||undefined,args:['--no-sandbox']});
 const pg=await b.newPage();await pg.setViewport({width:844,height:390,isMobile:true,hasTouch:true,deviceScaleFactor:2});const errs=[];pg.on('pageerror',e=>errs.push(e.message));
-const boot=async(q)=>{await pg.goto('http://localhost:8775/'+(q||''),{waitUntil:'networkidle0'});await new Promise(r=>setTimeout(r,4500))};
+const boot=async(q)=>{await pg.goto('http://localhost:'+(process.env.PORT||8775)+'/'+(q||''),{waitUntil:'networkidle0'});await new Promise(r=>setTimeout(r,4500))};
 await boot();await pg.evaluate(()=>localStorage.clear());await boot();
 const R={};
 // 1) a normal child character: no GM anywhere
