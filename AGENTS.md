@@ -37,6 +37,7 @@ Write a new `test_NNN_name.js` for each release; drive the game the way a player
 
 ## Pictures and the asset pipeline
 - Game pictures are **built by scripts from the `art-*.png` sources. Do not hand-edit the built files.**
+  - Expanded equipment 1.57: `python3 build_equipment_157.py` builds `equipment-157.webp`, `outfit-157.webp`, `equipment-157.json` from `art-equipment-157.png` and `art-outfit-157.png`. Requires Pillow. Connected alpha shapes are grouped by source cell and packed so diagonal weapons never pick up a neighbor. 36 paintings, 253,705 runtime bytes; independent local fallbacks.
   - Quiet Gold UI: `python3 build_quietgold_art.py` builds `ui-quietgold-icons.webp`, `ui-quietgold-frames.webp` and `ui-quietgold-art.json` from `art-ui-quietgold-icons.png` / `art-ui-quietgold-frames.png`. Requires Pillow. Measured crop windows preserve the painter's uneven rows. These three runtime files total 179,580 bytes; original paintings are not downloaded by the game. Missing or invalid art keeps the procedural icons/CSS skin.
   - House inside: `python3 build_room_assets.py <folder with art-*.png> <folder with the guide scripts and json> <out>` writes
     `room-L1.jpg room-L2.jpg room-L3b.jpg furn-plain.png furn-plain.json furn-fine.png`. Needs pillow, numpy, opencv-python.
@@ -56,7 +57,7 @@ Write a new `test_NNN_name.js` for each release; drive the game the way a player
 - `HANDOFF_S13.md`: everything decided and built, newest entries first in its "done" list, with measurements. Read the top entries before changing the house or farm.
 - `GDD.md`, `STORY.md`, `ART_DIRECTION.md`, `MAP_PIPELINE.md`, `MAP_SPEC_G9.md`, `MAP_SPEC_H9.md`, `WORLD_ATLAS.md`, `GM_GUIDE.md`, `DEV_GUIDE.md`, `CLAUDE.md`: design and rules written earlier.
 
-## Open items (5 Oct 2026, version 1.56)
+## Open items (5 Oct 2026, version 1.57)
 - Waiting for the owner's answer: remove the Auto (auto-attack) button entirely or keep it on desktop only · what house levels 4-9 give.
 - Fine furniture exists for 9 pieces; toilet, washstand, plant, round table, rug, wash tub, bookshelf, armchair, double bed have no fine version yet.
 - Skill-slot screen (3 slots round the big button): needs a design first; today there is one weapon skill and two job-skill slots, no pool to choose from.
@@ -72,6 +73,9 @@ Write a new `test_NNN_name.js` for each release; drive the game the way a player
 - The owner selected proposal **05 Quiet Gold**. Version 1.55 uses thin gold frames and calmer plum surfaces across the HUD, menus, wardrobe and decorating/shop panels. Settings move the original seven toggle buttons into labeled cards; furniture-shop cards keep F2PRICE and f2Buy. Larger type-specific weapon pictures are generated locally; dragged canvas items copy their bitmap into the drag preview. `test_155_quiet_gold.js` covers real clicks/taps, settings redraws, English, nine original shop prices and a purchase, wardrobe illustrations, a visible drag preview/drop and portrait inventory. Keep gameplay behavior and the existing sounds when extending this theme.
 
 - Version 1.56 adds original painted UI art: 24 icons plus four reusable frame/button skins. UI art loads asynchronously and keeps the existing menu nodes, equipment illustrations and sounds; missing icons and frames fall back independently. `test_156_art.js` checks PC/touch, missing assets, corrupt image bytes, invalid crop metadata and art arriving while a muted settings panel is open. Painted icons are 64px; procedural fallback icons remain 32px. `test:ui` now includes six suites. Real-phone play testing and the owner's 9.5+ art assessment are still pending.
+
+- Version 1.57 adds 12 equipment slots: original eq/eqA/eqC + offhand, necklace, two rings, boots, bottoms, gloves, glasses, mouth decor. New slots use stable item UIDs in S.equipment157. One-handed weapons can use either hand; two-handed weapons occupy both slots. Existing bows/staves are treated as two-handed when resolving offhand conflicts; original save/item identities remain intact. Equip/unequip transactions roll back if displaced items cannot fit, and worn items cannot be sold/deposited. S.outfit157 selects masculine/feminine cuts on the same shirt/bottoms/boots with unchanged names, identities and stats. Mouth decor contributes no stats or cards.
+- The owner chose **GM samples first**, with drops/prices/balance to decide later. `GM → อุปกรณ์ใหม่` / the bag header button opens 25 sample types and a full-outfit preset. Normal loot and prices are unchanged. Dual-weapon damage preview averages the weapon ATK; existing attacks/skills follow the right-hand type, or the left when the right is empty. This does not add simultaneous two-projectile attacks or walking-sprite outfits. Test the actual give/full-outfit/equip/style/deposit/withdraw buttons, both rings, full-bag rollback, reload and missing/delayed art. `test_157_equipment.js` joins test:ui (seven suites). Current wardrobe pictures are painted item icons plus locally drawn wearable overlays on the game's character. Real-phone testing and the owner's 9.5+ visual score remain pending.
 
 ## Never
 - Never commit tokens or passwords. Never delete `art-*.png` sources or the guide scripts. Never ship without running the suites.

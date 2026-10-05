@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.56';
+const VERSION='Lantern Academy 1.57';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -714,8 +714,8 @@ function mkItem(type,rar){const base={sw:6,bow:5,staff:7,dag:4}[type],mul=[1,1.2
   const slots=rar===0?0:rar===1?(Math.random()<.5?1:0):rar===2?1:2;return{u:Date.now().toString(36)+(UID++),type,rar,atk:Math.round(base*mul+(rar?Math.floor(Math.random()*3):0)),spd:rar===4?1.2:1,aff,slots,cards:[]}}
 const WEP={sw:{cd:.5,range:26,icon:'🗡️'},bow:{cd:.74,range:150,icon:'🏹'},staff:{cd:.8,range:120,icon:'🪄',splash:28},dag:{cd:.52,range:22,icon:'🔪'}};
 const RAR_COL=['#f3efe6','#7fb6ff','#ffe36b','#ffb347','#7df28a'];
-const weapon=()=>{const w=S.inv[S.eq];return w&&!w.slot?w:{type:'sw',rar:0,atk:4,spd:1}};const armorIt=()=>S.eqA>=0?S.inv[S.eqA]:null,accIt=()=>S.eqC>=0?S.inv[S.eqC]:null;
-const worn=()=>[weapon(),armorIt(),accIt()].filter(Boolean);
+let weapon=()=>{const w=S.inv[S.eq];return w&&!w.slot?w:{type:'sw',rar:0,atk:4,spd:1}};const armorIt=()=>S.eqA>=0?S.inv[S.eqA]:null,accIt=()=>S.eqC>=0?S.inv[S.eqC]:null;
+let worn=()=>[weapon(),armorIt(),accIt()].filter(Boolean);
 const STATS=['str','agi','vit','int','dex'];
 const CARDS={slime:{hpP:8},bat:{aspd:5},mushbug:{stun:10},golem:{vit:5,def:15,noKnock:1}},CAVE1_SET=['slime','bat','mushbug','golem'];
 const statCost=v=>1+Math.floor(v/10),costTo=v=>{let c=0;for(let k=1;k<v;k++)c+=statCost(k);return c};
@@ -780,7 +780,7 @@ function pickUp(d){if(d.k==='coin'&&buffV('luck'))d.n=Math.round(d.n*1.3);sfx(d.
 const WNAME={th:{sw:['ดาบไม้','ดาบเหล็ก','ดาบคริสตัล','ดาบทอง','ดาบชุดแสง'],bow:['ธนูไม้','ธนูล่าสัตว์','ธนูคริสตัล','ธนูทอง','ธนูชุดแสง'],staff:['คทาไม้','คทาเงิน','คทาจันทร์','คทาดาว','คทาชุดแสง'],dag:['มีดไม้','มีดเหล็ก','มีดคริสตัล','มีดทอง','มีดชุดแสง']},
   en:{sw:['Wooden sword','Iron sword','Crystal sword','Golden sword','Light-set sword'],bow:['Wooden bow','Hunting bow','Crystal bow','Golden bow','Light-set bow'],staff:['Wooden staff','Silver staff','Moon staff','Star staff','Light-set staff'],dag:['Wooden dagger','Iron dagger','Crystal dagger','Golden dagger','Light-set dagger']}};
 WNAME.th.armor=['เสื้อผ้าฝ้าย','เสื้อหนัง','เกราะเหล็ก','เกราะคริสตัล','เกราะชุดแสง'];WNAME.th.acc=['สร้อยไม้','แหวนเงิน','จี้คริสตัล','มงกุฎจิ๋วทอง','เข็มกลัดชุดแสง'];WNAME.en.armor=['Cotton shirt','Leather vest','Iron armor','Crystal armor','Light-set armor'];WNAME.en.acc=['Wooden necklace','Silver ring','Crystal pendant','Tiny gold crown','Light-set brooch'];
-const itemName=it=>(WNAME[LANG]||WNAME.th)[it.type][it.rar||0];const SELL=[5,15,40,120,80];
+let itemName=it=>(WNAME[LANG]||WNAME.th)[it.type][it.rar||0];const SELL=[5,15,40,120,80];
 function bossWin(){setTimeout(()=>playScene('boss',()=>{showCard(t('ch1done'),t('ch1next'));sfx('lvl')}),1600);say(t('bossWin'));LIGHT=1;for(let i=0;i<60;i++)FX.push({k:'star',x:M.boss.x+(rnd()-.5)*60,y:M.boss.y-40+(rnd()-.5)*40,vx:(rnd()-.5)*80,vy:-40-rnd()*60,t:0,life:1.4})}
 
 // ---- player actions ----
@@ -1063,7 +1063,7 @@ function wepIcon(it,px=2){const c=document.createElement('canvas');c.width=c.hei
 function itemIcon(it,px){if(WEP[it.type])return wepIcon(it,px);const c=document.createElement('canvas');c.width=c.height=12*px;const g=c.getContext('2d'),col=RAR_COL[it.rar];g.fillStyle=col;g.globalAlpha=.25;g.fillRect(0,0,12*px,12*px);g.globalAlpha=1;const P2=(x,y,w,h,cl)=>{g.fillStyle=cl;g.fillRect(x*px,y*px,w*px,h*px)};
   if(it.slot==='armor'){P2(3,2,6,8,'#8a6a4a');P2(2,3,8,3,'#a07a52');P2(5,3,2,6,'#d8c09a')}else{P2(4,2,4,1,'#e0c060');P2(3,3,1,3,'#e0c060');P2(8,3,1,3,'#e0c060');P2(5,6,2,3,'#c9a2ff')}return c}
 function itemLine(w){return`<b class="r${w.rar}">${itemName(w)}</b><br>${w.atk?t('atk')+' '+w.atk:''}${w.def?t('def')+' '+w.def:''}${w.spd>1?' · '+t('spd')+' ↑':''}${(w.aff||[]).map(a=>`<br><span class="r1">+${a.v} ${t('a_'+a.k)}</span>`).join('')}${w.slots?`<br>${'🃏'.repeat((w.cards||[]).length)}${'◇'.repeat(w.slots-(w.cards||[]).length)}`:''}`}
-function openBag(){const isW=i=>i===S.eq||i===S.eqA||i===S.eqC,slotOf=w=>w.slot||'weapon';const groups=[['weapon',t('weaponT')],['armor',t('armor')],['acc',t('acc')]];
+function openBag(){const isW=i=>isWorn(i),slotOf=w=>w.slot||'weapon';const groups=[['weapon',t('weaponT')],['armor',t('armor')],['acc',t('acc')]];
   const html=groups.map(([g,name])=>{const list=S.inv.map((w,i)=>[w,i]).filter(([w])=>slotOf(w)===g);if(!list.length)return'';return`<h3 style="margin:8px 0 4px;color:#ffe7b0;font-size:13px">${name}</h3><div class="grid">${list.map(([w,i])=>`<div class="it pn ${isW(i)?'on':''}" style="flex-direction:column;align-items:stretch"><div class="row2"><span data-c="${i}"></span><span>${itemLine(w)}</span></div><div class="row2"><button data-eq="${i}" ${isW(i)?'disabled':''}>${isW(i)?t('equipped'):t('equip')}</button><button data-sell="${i}" ${isW(i)?'disabled':''}>${t('sell')} 🪙${SELL[w.rar]}</button></div></div>`).join('')}</div>`}).join('');
   const cc={};(S.cards||[]).forEach(c=>cc[c]=(cc[c]||0)+1);const cardsHtml=Object.entries(cc).map(([c,n])=>`<button class="it" data-card="${c}"><span>🃏 <b>${t('c_'+c)}</b> ×${n}<br><span class="note">${t('insert')}</span></span></button>`).join('');
   const sets=worn().filter(w=>w.rar===4).length;
@@ -1463,7 +1463,7 @@ function hintBtn(q){if(!S||lifeLv('know')<3||!q)return;const day=new Date().toDa
 function kidGearMigrate(){if(!S||!isKid())return;S.inv=S.inv||[];
   // repair saves hit by the v0.36 bug (equipped weapon was moved out): give the starter brush-sword back
   if(!S.inv[S.eq]||S.inv[S.eq].slot){S.inv.unshift(mkItem('sw',0));S.eq=0;if(typeof S.eqA==='number')S.eqA++;if(typeof S.eqC==='number')S.eqC++;save()}
-  if(S.giftMig2)return;S.giftMig2=1;const keepIdx=[S.eq,S.eqA,S.eqC].filter(i=>typeof i==='number'&&S.inv[i]);const keep=keepIdx.map(i=>S.inv[i]);
+  if(S.giftMig2)return;S.giftMig2=1;const keepIdx=[...new Set([S.eq,S.eqA,S.eqC,...ui157Indices()])].filter(i=>typeof i==='number'&&S.inv[i]);const keep=keepIdx.map(i=>S.inv[i]);
   const move=S.inv.filter(i=>!keep.includes(i));if(move.length){move.forEach(i=>GIFT.add(i,S.name));S.inv=keep;const pos=it=>S.inv.indexOf(it);
     const w=S.inv.find(i=>!i.slot),a=S.inv.find(i=>i.slot==='armor'),c=S.inv.find(i=>i.slot==='acc');S.eq=w?pos(w):0;if(S.eqA!=null)S.eqA=a?pos(a):null;if(S.eqC!=null)S.eqC=c?pos(c):null;save()}}
 // ---- kid bag: life skills, tools, collections, gift box ----
@@ -2119,7 +2119,7 @@ function duskish(){try{const p=dayPhase();return p==='dusk'||p==='night'}catch(e
 const FISH_MAX=40,CARD_MAX=200,UP_COST=[300,800,2000];
 let bagMax=()=>30+(rank()>=5?10:0)+(rank()>=8?10:0)+10*(S.bagUp||0);
 const storeMax=()=>60+20*(S.storeUp||0);
-const isWorn=i=>i===S.eq||i===S.eqA||i===S.eqC;
+let isWorn=i=>i===S.eq||i===S.eqA||i===S.eqC;
 function invRemove(i){const it=S.inv.splice(i,1)[0];for(const k of ['eq','eqA','eqC'])if(typeof S[k]==='number'&&S[k]>i)S[k]--;return it}
 let FULL_T=0;
 {const _pk=pickUp;pickUp=function(d){try{if(S&&!isKid()&&d&&d.k==='item'&&(S.inv||[]).length>=bagMax()){
@@ -2155,7 +2155,7 @@ function saveKB(){try{let n=0;for(let i=0;i<localStorage.length;i++){const k=loc
 // Bag grid 10 columns × 4 rows (+1 row at class 5, +1 at class 8, +1 per upgrade ×3) · storage 10 × 6 (+2 rows per upgrade ×3)
 // Equipped items leave the grid (like Diablo). Tap an item to see it; drag it to move.
 const GCOLS=10;const bagRows=()=>4+(rank()>=5?1:0)+(rank()>=8?1:0)+(S.bagUp||0);const storeRows=()=>6+2*(S.storeUp||0);
-const ISIZE=w=>w.slot==='armor'?[2,3]:w.slot==='acc'?[1,1]:({sw:[1,3],dag:[1,2],bow:[2,3],staff:[1,4]}[w.type]||[1,2]);
+let ISIZE=w=>w.slot==='armor'?[2,3]:w.slot==='acc'?[1,1]:({sw:[1,3],dag:[1,2],bow:[2,3],staff:[1,4]}[w.type]||[1,2]);
 const RBG=['#3d3650','#23407a','#6a5a14','#7a4a14','#1e5a2a'],RBD=['#8a84a0','#7fb6ff','#ffe36b','#ffb347','#7df28a'];
 const gbIcon=w=>w.slot==='armor'?'🛡️':w.slot==='acc'?'💍':(WEP[w.type]&&WEP[w.type].icon)||'🗡️';
 function gridOcc(list,rows,skip){const occ=Array.from({length:rows},()=>Array(GCOLS).fill(-1));list.forEach((w,i)=>{if(i===skip||!w||w.gx==null)return;const [sw,sh]=ISIZE(w);for(let y=w.gy;y<w.gy+sh&&y<rows;y++)for(let x=w.gx;x<w.gx+sw&&x<GCOLS;x++)if(y>=0&&x>=0)occ[y][x]=i});return occ}
@@ -2203,7 +2203,7 @@ function gbWire(C){const q=s=>document.querySelector(s);const b=id=>document.get
         if(to===src){const L=src==='bag'?bagList():S.store,rows=src==='bag'?bagRows():storeRows();if(fits(L,rows,w,gx,gy,i)){w.gx=gx;w.gy=gy;done=true}}
         else if(to==='store'&&src==='bag'&&!isWorn(i)){if(fits(S.store,storeRows(),w,gx,gy)){const it=invRemove(i);it.gx=gx;it.gy=gy;S.store.push(it);done=true}}
         else if(to==='bag'&&src==='store'){if(fits(bagList(),bagRows(),w,gx,gy)){const it=S.store.splice(i,1)[0];it.gx=gx;it.gy=gy;S.inv.push(it);done=true}}}
-      else if(eq&&src==='bag'){const k=eq.dataset.eqslot,ok=(k==='armor'&&w.slot==='armor')||(k==='acc'&&w.slot==='acc')||(k==='weapon'&&!w.slot);if(ok){gbEquip(i);done=true}else say('❌ '+t('gbWrongSlot'))}
+      else if(eq&&src==='bag'){const k=eq.dataset.eqslot;if(ui157Equip(i,k)){done=true}else say('❌ '+t('gbWrongSlot'))}
       else if(sz&&src==='bag'){gbSell(i);done=true}
       if(done){GB.sel=null;sfx('pick');save()}else sfx('wrong');openGridBag()};
     addEventListener('pointermove',mv);addEventListener('pointerup',up)}})
@@ -4633,6 +4633,165 @@ function ui156Refresh(painted){const old={...UI153.art};Object.assign(UI156.pain
  body.art156-frames.thumbs #act #bAtk{border-image:none;background:var(--art156-circle) center/100% 100% no-repeat;border-color:transparent;box-shadow:0 4px 10px #08061077}
  body.art156-frames.thumbs #act #bSlot2,body.art156-frames.thumbs #act #bSlot3{border-image:none;background:#211a2d55;border-color:#bca47466;box-shadow:none}
  body.art156-frames #btns button{border-image-width:6px}
+ `;document.head.append(st)}
+
+// ================= 1.57 EXPANDED EQUIPMENT / TWO HANDS / OUTFIT STYLES =================
+// New GM sample gear is isolated from production loot/prices; old slots and item identities survive.
+const EQ157={
+ weapon:{field:'eq',th:'มือขวา',en:'Right hand',empty:'sword1'},offhand:{th:'มือซ้าย',en:'Left hand',empty:'shield'},
+ armor:{field:'eqA',th:'เสื้อ / เกราะ',en:'Shirt / armor',empty:'shirt_a'},acc:{field:'eqC',th:'เครื่องราง',en:'Charm',empty:'charm'},
+ neck:{th:'สร้อยคอ',en:'Necklace',empty:'neck'},ringLeft:{th:'แหวนซ้าย',en:'Left ring',empty:'ring_blue'},ringRight:{th:'แหวนขวา',en:'Right ring',empty:'ring_green'},
+ boots:{th:'รองเท้า',en:'Boots',empty:'boots_a'},bottom:{th:'ท่อนล่าง',en:'Bottoms',empty:'bottom_a'},gloves:{th:'ถุงมือ',en:'Gloves',empty:'gloves'},glasses:{th:'แว่น',en:'Glasses',empty:'glasses'},mouth:{th:'คาบปาก',en:'Mouth decor',empty:'mouth_leaf'}
+};
+const ITEMS157={
+ neck:['สร้อยคริสตัล','Crystal necklace','acc','neck','neck',1,[1,1]],ring_blue:['แหวนไพลิน','Sapphire ring','acc','ring','ring_blue',1,[1,1]],ring_green:['แหวนมรกต','Emerald ring','acc','ring','ring_green',1,[1,1]],
+ boots:['รองเท้านักผจญภัย','Adventure boots','armor','boots','boots_a',1,[2,2]],bottom:['ท่อนล่างนักผจญภัย','Adventure bottoms','armor','bottom','bottom_a',1,[2,2]],shirt:['เสื้อนักผจญภัย','Adventure shirt','armor','armor','shirt_a',1,[2,3]],
+ gloves:['ถุงมือนักผจญภัย','Adventure gloves','armor','gloves','gloves',1,[2,1]],glasses:['แว่นนักผจญภัย','Adventure glasses','acc','glasses','glasses',1,[2,1]],shield:['โล่คริสตัล','Crystal shield','armor','shield','shield',1,[2,3]],
+ sword1:['ดาบมือเดียว','One-handed sword','sw',null,'sword1',1,[1,3]],sword2:['ดาบสองมือ','Two-handed sword','sw',null,'sword2',2,[2,4]],
+ bow1:['หน้าไม้มือเดียว','Hand crossbow','bow',null,'bow1',1,[2,2]],bow2:['ธนูสองมือ','Two-handed bow','bow',null,'bow2',2,[2,4]],
+ staff1:['คทามือเดียว','One-handed wand','staff',null,'staff1',1,[1,2]],staff2:['คทาสองมือ','Two-handed staff','staff',null,'staff2',2,[1,4]],
+ dagger1:['มีดมือเดียว','One-handed dagger','dag',null,'dagger1',1,[1,2]],dagger2:['มีดยาวสองมือ','Two-handed long blade','dag',null,'dagger2',2,[2,3]],
+ axe1:['ขวานมือเดียว','One-handed axe','sw',null,'axe1',1,[2,2]],axe2:['ขวานสองมือ','Two-handed axe','sw',null,'axe2',2,[2,4]],hammer1:['ค้อนมือเดียว','One-handed hammer','sw',null,'hammer1',1,[2,2]],hammer2:['ค้อนสองมือ','Two-handed hammer','sw',null,'hammer2',2,[2,4]],
+ mouth_leaf:['ใบไม้คาบปาก','Leaf mouth decor','acc','mouth','mouth_leaf',1,[1,1]],mouth_rose:['ดอกไม้คาบปาก','Rose mouth decor','acc','mouth','mouth_rose',1,[1,1]],mouth_candy:['ลูกอมคาบปาก','Lollipop mouth decor','acc','mouth','mouth_candy',1,[1,1]],mouth_feather:['ขนนกคาบปาก','Feather mouth decor','acc','mouth','mouth_feather',1,[1,1]]
+};
+const UI157={art:{},ready:false,style:()=>S?.outfit157==='b'?'b':'a'};
+function ui157Label(k){return ui154Text(EQ157[k]?.th||k,EQ157[k]?.en||k)}
+function ui157Hands(it){return it?.hands===1||it?.hands===2?it.hands:(it?.type==='bow'||it?.type==='staff'?2:1)}
+function ui157Get(k){if(!S)return null;const d=EQ157[k];return d?.field?S.inv?.[S[d.field]]||null:S.inv?.find(it=>it.u===S.equipment157?.[k])||null}
+function ui157Indices(){return Object.keys(EQ157).map(k=>S?.inv?.indexOf(ui157Get(k))).filter(i=>i>=0)}
+function ui157Set(k,it){const d=EQ157[k];if(d.field)S[d.field]=it?S.inv.indexOf(it):-1;else S.equipment157[k]=it?.u||null}
+function ui157Allowed(it,k){if(!it||!EQ157[k])return false;if(k==='weapon')return !it.slot;
+ if(k==='offhand')return it.slot==='shield'||!it.slot&&ui157Hands(it)===1;
+ if(k==='ringLeft'||k==='ringRight')return it.slot==='ring';return it.slot===k}
+function ui157Normalize(){if(!S)return;S.inv=S.inv||[];S.equipment157=S.equipment157&&typeof S.equipment157==='object'&&!Array.isArray(S.equipment157)?S.equipment157:{};
+ const ids=new Set();for(const it of [...S.inv,...(S.store||[])]){if(!it.u||ids.has(it.u))it.u=Date.now().toString(36)+'e'+UID++;ids.add(it.u)}
+ const used=new Set(['weapon','armor','acc'].map(k=>ui157Get(k)?.u).filter(Boolean));for(const k of Object.keys(EQ157)){if(EQ157[k].field)continue;const it=ui157Get(k);if(!it||!ui157Allowed(it,k)||used.has(it.u))S.equipment157[k]=null;else used.add(it.u)}
+ const main=ui157Get('weapon');if(main&&ui157Hands(main)===2)S.equipment157.offhand=null;
+ if(S.outfit157!=='b')S.outfit157='a'}
+function mkEquipment157(kind,rar=2){const d=ITEMS157[kind];if(!d)return null;const it=d[3]?mkGear(d[2],rar):mkItem(d[2],rar);
+ it.kind157=kind;it.hands=d[5];it.demo157=true;if(d[3]){it.type=it.slot=d[3];if(['boots','bottom','gloves'].includes(d[3]))it.def=Math.max(1,Math.round(ARM_DEF[rar]/3))}
+ if(d[3]==='mouth'){delete it.def;it.aff=[];it.slots=0;it.cards=[]}return it}
+{const old=itemName;itemName=it=>ITEMS157[it?.kind157]?ui154Text(ITEMS157[it.kind157][0],ITEMS157[it.kind157][1]):old(it)}
+{const old=ISIZE;ISIZE=it=>ITEMS157[it?.kind157]?.[6]||old(it)}
+{const old=isWorn;isWorn=i=>old(i)||!!S?.inv?.[i]&&Object.values(S.equipment157||{}).includes(S.inv[i].u)}
+{const old=weapon;weapon=()=>{const main=ui157Get('weapon'),off=ui157Get('offhand'),w=main&&!main.slot?main:off&&!off.slot?off:old();
+ // Dual wield alternates equal contributions in the damage preview; weapon skill/range follows the right hand.
+ return main&&!main.slot&&off&&!off.slot?{...w,atk:Math.round(((main.atk||0)+(off.atk||0))/2)}:w}}
+{const old=worn;worn=()=>{const all=[...old(),...Object.keys(EQ157).filter(k=>!EQ157[k].field&&k!=='mouth').map(ui157Get).filter(Boolean)];return all.filter((it,i)=>all.findIndex(w=>w.u?w.u===it.u:w===it)===i)}}
+{const old=fixSave;fixSave=function(){const r=old.apply(this,arguments);ui157Normalize();return r}}
+{const old=save;save=function(){ui157Normalize();return old.apply(this,arguments)}}
+// Inventory transactions are atomic: a displaced item must fit before any equip/save changes commit.
+function ui157Change(k,it){ui157Normalize();const main=ui157Get('weapon');if(it&&!ui157Allowed(it,k)){say(ui154Text('ใส่ช่องนี้ไม่ได้','Cannot use this slot'));sfx('wrong');return false}
+ const fields={eq:S.eq,eqA:S.eqA,eqC:S.eqC},extra={...S.equipment157},positions=S.inv.map(w=>[w,w.gx,w.gy]),before=ui157Indices().map(i=>S.inv[i]),from=it?[it.gx,it.gy]:[null,null];
+ const rollback=()=>{Object.assign(S,fields);S.equipment157=extra;positions.forEach(([w,x,y])=>{w.gx=x;w.gy=y});say('🎒 '+t('bagFull'));sfx('wrong');return false};
+ if(it)for(const key of Object.keys(EQ157))if(ui157Get(key)===it)ui157Set(key,null);
+ if(k==='offhand'&&it&&main&&ui157Hands(main)===2)ui157Set('weapon',null);
+ ui157Set(k,it);if(k==='weapon'&&it&&ui157Hands(it)===2)ui157Set('offhand',null);
+ if(it)it.gx=it.gy=null;
+ for(const w of before){const i=S.inv.indexOf(w);if(isWorn(i))continue;w.gx=w.gy=null;let p=from[0]!=null&&fits(bagList(),bagRows(),w,from[0],from[1],i)?from:firstFit(bagList(),bagRows(),w,i);if(!p)return rollback();[w.gx,w.gy]=p}
+ if(S.hp>hpMax())S.hp=hpMax();GB.sel=null;sfx('pick');save();hud();return true}
+function ui157Equip(i,target){const it=S?.inv?.[i];if(!it)return false;let k=target;
+ if(!k){k=it.slot==='shield'?'offhand':it.slot==='ring'?(ui157Get('ringLeft')?'ringRight':'ringLeft'):it.slot||'weapon'}return ui157Change(k,it)}
+{const old=gbEquip;gbEquip=function(i,target){return ui157Equip(i,target)}}
+function ui157ArtKey(it){if(!it)return null;const style=UI157.style();if(it.kind157==='shirt')return 'shirt_'+style;if(it.slot==='bottom')return 'bottom_'+style;if(it.slot==='boots')return 'boots_'+style;
+ if(style==='b'&&it.slot==='gloves')return 'gloves_b';if(style==='b'&&it.slot==='glasses')return 'glasses_b';
+ return ITEMS157[it.kind157]?.[4]||(!it.slot?({sw:'sword1',bow:'bow2',staff:'staff2',dag:'dagger1'}[it.type]):it.slot==='armor'?(it.rar>=2?'armor_fine':'armor'):it.slot==='acc'?'charm':null)}
+// Local pixel illustrations also serve as fallback for either missing painting atlas.
+function ui157Shape(g,it,x,y,scale=1){const slot=it?.slot,kind=it?.kind157;
+ if(!slot&&kind&&(['bow1','staff1','dagger2','sword2'].includes(kind)||kind.startsWith('axe')||kind.startsWith('hammer'))){const [main,shade,light]=ui154Palette(it);g.save();g.translate(x,y);g.scale(scale,scale);const r=(x,y,w,h,c)=>{g.fillStyle=c;g.fillRect(x,y,w,h)},poly=(ps,c)=>{g.fillStyle=c;g.beginPath();ps.forEach(([x,y],i)=>i?g.lineTo(x,y):g.moveTo(x,y));g.closePath();g.fill()};
+  if(kind==='bow1'){r(10,5,4,17,'#75503c');r(3,6,18,3,'#d6b276');r(2,8,3,6,main);r(19,8,3,6,main);r(4,13,16,1,'#eee0be');r(11,2,1,15,light);r(8,19,7,4,shade)}
+  else if(kind.startsWith('axe')){r(10,8,3,17,'#916348');poly([[10,2],[2,4],[1,13],[8,12],[12,7]],main);poly([[14,2],[22,4],[23,13],[16,12],[12,7]],shade);r(10,3,4,6,'#d6b276');r(2,5,1,6,light)}
+  else if(kind.startsWith('hammer')){r(10,9,4,16,'#916348');r(2,2,21,10,'#d6b276');r(4,3,17,7,main);r(4,3,17,2,light);r(10,20,4,3,'#d6b276')}
+  else if(kind==='staff1'){r(10,12,3,12,'#79523d');poly([[11,2],[18,9],[11,15],[4,9]],main);r(10,4,2,6,light);r(7,13,9,2,'#d6b276')}
+  else{poly([[11,0],[16,5],[16,16],[11,19],[6,16],[6,5]],main);r(10,3,2,13,light);r(2,18,19,3,'#d6b276');r(9,21,5,9,'#79523d');r(8,29,7,2,'#d6b276')}g.restore();return}
+ if(!slot||slot==='armor'||slot==='acc'){ui154DrawGear(g,it,x,y,scale);if(!slot&&ui157Hands(it)===2){g.fillStyle='#cfac6e';g.fillRect(x+10*scale,y+21*scale,3*scale,5*scale)}return}
+ const [main,shade,light]=ui154Palette(it);g.save();g.translate(x,y);g.scale(scale,scale);const r=(x,y,w,h,col)=>{g.fillStyle=col;g.fillRect(x,y,w,h)},poly=(ps,col)=>{g.fillStyle=col;g.beginPath();ps.forEach(([a,b],i)=>i?g.lineTo(a,b):g.moveTo(a,b));g.closePath();g.fill()};
+ if(slot==='shield'){poly([[2,2],[12,0],[22,2],[20,17],[12,24],[4,17]],'#251c35');poly([[4,4],[12,2],[20,4],[18,16],[12,21],[6,16]],main);r(11,5,2,12,light);r(7,9,10,2,'#cfac6e')}
+ else if(slot==='neck'){r(4,2,2,12,'#d5b46a');r(18,2,2,12,'#d5b46a');r(6,13,12,2,'#d5b46a');poly([[12,13],[17,18],[12,24],[7,18]],main);r(11,16,2,4,light)}
+ else if(slot==='ring'){r(5,9,14,12,'#d5b46a');r(8,12,8,6,'#231b34');r(9,3,7,8,kind==='ring_green'?'#7ddd98':main);r(10,4,3,3,light)}
+ else if(slot==='boots'){for(const x of [1,13]){r(x,3,7,14,shade);r(x,15,10,6,main);r(x+1,7,5,2,'#d5b46a');r(x,21,10,2,'#231b34');r(x+1,3,5,1,light)}}
+ else if(slot==='bottom'){r(4,2,16,3,'#d5b46a');if(UI157.style()==='b'){poly([[5,5],[19,5],[23,22],[1,22]],main);r(2,21,20,2,'#d5b46a')}else{r(4,5,7,18,main);r(13,5,7,18,shade);r(5,6,2,15,light)}}
+ else if(slot==='gloves'){for(const x of [1,13]){r(x,4,8,7,'#d5b46a');r(x,11,10,9,main);r(x+1,20,7,3,shade);r(x+1,11,2,6,light)}}
+ else if(slot==='glasses'){r(1,7,9,9,'#d5b46a');r(14,7,9,9,'#d5b46a');r(3,9,5,5,'#93dce5');r(16,9,5,5,'#93dce5');r(10,10,4,2,'#d5b46a')}
+ else if(slot==='mouth'){r(11,14,2,9,'#a18157');if(kind==='mouth_leaf'){poly([[3,4],[20,6],[13,16],[4,13]],'#80c979');r(8,10,9,1,'#d9ec9c')}else if(kind==='mouth_feather'){poly([[3,2],[18,5],[15,16],[8,18]],'#b48de1');r(10,5,2,14,'#d5b46a')}else{poly([[7,2],[17,2],[22,7],[22,13],[17,18],[7,18],[2,13],[2,7]],'#ef9cae');r(9,6,7,7,light)}}g.restore()}
+function ui157Image(it){const key=ui157ArtKey(it),fallback={shirt_a:'armor',shirt_b:'armor_fine',bottom_a:'pants',bottom_b:'skirt',boots_a:'boots',boots_b:'boots',gloves_b:'gloves',glasses_b:'glasses'};return UI157.art[key]||UI157.art[fallback[key]]}
+function ui157Canvas(it,size=64){const c=document.createElement('canvas');c.width=c.height=size;c.className='gear157';c.setAttribute('aria-hidden','true');const g=c.getContext('2d'),im=ui157Image(it);
+ if(im){g.drawImage(im,0,0,size,size);c.dataset.painted157='true'}else{g.imageSmoothingEnabled=false;ui157Shape(g,it,6*size/32,4*size/32,size/32)}return c}
+{const old=ui155GridArt;ui155GridArt=function(it){if(!it.kind157)return old(it);return ui157Canvas(it)}}
+{const old=ui155SlotArt;ui155SlotArt=function(it){const c=it.kind157?ui157Canvas(it):old(it);c.className='slot155-art';return c}}
+{const old=itemIcon;itemIcon=function(it,px){return it.kind157?ui157Canvas(it,12*px):old(it,px)}}
+ui154Portrait=function(){const c=document.createElement('canvas');c.id='equipPortrait';c.width=96;c.height=96;c.setAttribute('role','img');c.setAttribute('aria-label',[S.name,...Object.keys(EQ157).map(ui157Get).filter(Boolean).map(itemName)].join(' · '));const g=c.getContext('2d');g.imageSmoothingEnabled=false;
+ try{const sh=crSheet(S.kid||0,S.house||0,S.hc,S.ec),f=sh.height;g.drawImage(sh,0,0,f,f,16,8,64,64)}catch(e){g.fillStyle='#e3cba3';g.fillRect(40,16,16,16);g.fillStyle='#8e70b6';g.fillRect(38,34,20,21);g.fillStyle='#47364d';g.fillRect(39,55,7,15);g.fillRect(51,55,7,15)}
+ const r=(x,y,w,h,col)=>{g.fillStyle=col;g.fillRect(x,y,w,h)},poly=(ps,col)=>{g.fillStyle=col;g.beginPath();ps.forEach(([x,y],i)=>i?g.lineTo(x,y):g.moveTo(x,y));g.closePath();g.fill()},style=UI157.style();
+ const bottom=ui157Get('bottom');if(bottom){const main='#81568e',shade='#533760';if(style==='b')poly([[40,51],[56,51],[62,66],[35,66]],main);else{r(40,53,7,15,main);r(51,53,7,15,shade)}r(39,51,19,2,'#d7b16b');if(style==='b'){r(40,57,1,7,'#b895c0');r(53,57,1,7,'#533760');r(37,64,23,1,'#d7b16b')}else{r(41,55,1,11,'#b895c0');r(55,55,1,11,'#3d2948')}}
+ const boots=ui157Get('boots');if(boots){r(39,65,8,9,'#7b523e');r(50,65,8,9,'#7b523e');r(37,71,10,4,'#b8865b');r(50,71,10,4,'#b8865b');r(40,67,5,1,'#ecd296');r(51,67,5,1,'#ecd296');if(style==='b'){r(39,65,8,2,'#745583');r(50,65,8,2,'#745583')}}
+ const armor=armorIt();if(armor){if(armor.kind157==='shirt'){r(38,34,19,19,'#6a497d');r(34,36,7,8,'#9573a7');r(55,36,7,8,'#9573a7');if(style==='b'){r(36,34,4,3,'#b190c0');r(56,34,4,3,'#b190c0');r(38,47,2,5,'#392744');r(55,47,2,5,'#392744')}r(46,36,2,17,'#d7b16b');r(44,37,6,3,'#8ed5df')}else ui154DrawGear(g,armor,36,32,.95)}
+ if(ui157Get('neck')){r(41,35,1,5,'#e3c17d');r(54,35,1,5,'#e3c17d');r(42,40,12,1,'#e3c17d');r(46,41,4,5,'#7ec6ec');r(46,41,1,3,'#e6f6ff')}
+ if(ui157Get('gloves')){r(32,44,5,7,style==='b'?'#765184':'#966747');r(59,42,5,7,style==='b'?'#765184':'#966747');r(32,44,5,2,'#d7b16b');r(59,42,5,2,'#d7b16b')}
+ const main=ui157Get('weapon'),off=ui157Get('offhand');if(off)ui157Shape(g,off,18,34,1.05);if(main)ui157Shape(g,main,main.type==='bow'?51:45,main.type==='bow'?26:20,ui157Hands(main)===2?1.5:1.3);
+ if(main){r(59,43,3,3,'#c98768');r(59,42,2,2,'#f2c393')}if(off){r(33,46,3,3,'#f2c393')}
+ const acc=accIt();if(acc){if(acc.rar===3)ui154DrawGear(g,acc,36,3,1);else if(acc.rar===1)ui154DrawGear(g,acc,61,44,.38);else ui154DrawGear(g,acc,39,32,.7)}
+ if(ui157Get('ringLeft'))r(33,48,3,2,ui157Get('ringLeft').kind157==='ring_green'?'#8bebae':'#8ce1f4');if(ui157Get('ringRight'))r(60,45,3,2,ui157Get('ringRight').kind157==='ring_green'?'#8bebae':'#8ce1f4');
+ if(ui157Get('glasses')){for(const x of [36,49]){r(x,27,10,1,'#dabf78');r(x,33,10,1,'#dabf78');r(x,28,1,5,'#dabf78');r(x+9,28,1,5,'#dabf78');g.globalAlpha=.2;r(x+1,28,8,5,'#81b9d0');g.globalAlpha=1}r(46,29,3,1,'#dabf78');if(style==='b'){r(35,26,3,2,'#dabf78');r(57,26,3,2,'#dabf78')}}
+ const mouth=ui157Get('mouth');if(mouth){const im=UI157.art[ui157ArtKey(mouth)];if(im)g.drawImage(im,46,33,15,15);else ui157Shape(g,mouth,46,33,.55)}return c};
+function ui157Details(k){const it=ui157Get(k),info=$('gbInfo');if(!info)return;info.innerHTML='<strong>'+ui157Label(k)+'</strong><br>'+(it?itemLine(it):ui154Text('ช่องว่าง','Empty slot'));
+ if(it){const b=ui154Node('button','',ui154Text('ถอดเข้ากระเป๋า','Unequip to bag'));b.id='unequip157';b.onclick=()=>{if(ui157Change(k,null))openGridBag()};info.append(b)}else if(k==='offhand'&&ui157Get('weapon')&&ui157Hands(ui157Get('weapon'))===2)info.append(ui154Node('p','note',ui154Text('อาวุธขวาใช้สองมือ เปลี่ยนเป็นมือเดียวเพื่อใช้ช่องซ้าย','The right-hand weapon uses both hands. Equip a one-handed weapon to use this slot.')))}
+function ui157Move(src,i){if(!S||M?.kind==='cave')return false;const from=src==='bag'?S.inv:S.store,to=src==='bag'?S.store:S.inv,it=from?.[i];if(!it||src==='bag'&&isWorn(i))return false;
+ const point=firstFit(src==='bag'?S.store:bagList(),src==='bag'?storeRows():bagRows(),it);if(!point){say('🎒 '+t('bagFull'));sfx('wrong');return false}const moved=src==='bag'?invRemove(i):S.store.splice(i,1)[0];[moved.gx,moved.gy]=point;to.push(moved);GB.sel=null;sfx('pick');save();openGridBag();return true}
+function ui157Options(){const src=GB.sel?.src,it=src?(src==='bag'?S.inv:S.store)[GB.sel.i]:null,info=$('gbInfo');if(!it||!info)return;for(const b of info.querySelectorAll('#deposit157,#withdraw157,#equip157-other,.note157'))b.remove();
+ if(M?.kind!=='cave'){const b=ui154Node('button','',src==='bag'?ui154Text('เก็บเข้าคลัง','Deposit to storage'):ui154Text('เอาเข้ากระเป๋า','Withdraw to bag'));b.id=src==='bag'?'deposit157':'withdraw157';b.disabled=src==='bag'&&isWorn(GB.sel.i);const i=GB.sel.i;b.onclick=()=>ui157Move(src,i);info.append(b)}if(src!=='bag')return;
+ const old=$('gbEqB');if(old){old.onclick=()=>{if(ui157Equip(GB.sel.i))openGridBag()};const im=old.querySelector('img.ui153-icon');if(im)im.src=ui157Canvas(it).toDataURL();old.setAttribute('aria-label',t('equip')+': '+itemName(it));if(!it.slot&&ui157Hands(it)===2){const label=old.querySelector('.ui153-label');if(label)label.textContent=ui154Text('สวมสองมือ','Equip both hands')}}
+ if(!it.slot&&ui157Hands(it)===1||it.slot==='ring'){const k=it.slot==='ring'?'ringLeft':'weapon',other=it.slot==='ring'?'ringRight':'offhand';if(old)old.querySelector('.ui153-label')?old.querySelector('.ui153-label').textContent=ui157Label(k):old.textContent=ui157Label(k);
+ if(old)old.onclick=()=>{if(ui157Equip(GB.sel.i,k))openGridBag()};const b=ui154Node('button','',ui157Label(other));b.id='equip157-other';b.onclick=()=>{if(ui157Equip(GB.sel.i,other))openGridBag()};old?.after(b)}
+ const label=ui154Node('p','note note157',it.slot==='mouth'?ui154Text('ตกแต่งเท่านั้น ไม่มีค่าพลัง','Decoration only. No stat bonus.'):!it.slot?ui157Hands(it)===2?ui154Text('ใช้สองมือ • ใช้ทั้งช่องซ้ายและขวา','Two-handed • occupies both hand slots'):ui154Text('มือเดียว • เลือกข้างที่จะถือได้','One-handed • choose either hand'):ui157Label(it.slot==='ring'?'ringLeft':it.slot));info.append(label)}
+function ui157Mount(){const host=$('mBody'),stage=host.querySelector('.wardrobe154-stage');if(!stage)return;host.classList.add('equipment157');const figure=stage.querySelector('.wardrobe154-figure'),positions={glasses:[0,0],mouth:[1,0],neck:[0,1],acc:[1,1],offhand:[0,2],weapon:[1,2],gloves:[0,3],armor:[1,3],ringLeft:[0,4],ringRight:[1,4],bottom:[0,5],boots:[1,5]};
+ for(const k of Object.keys(EQ157)){let box=stage.querySelector('[data-eqslot="'+k+'"]');if(!box){box=ui154Node('div','slot154 slot157');box.dataset.eqslot=k;stage.append(box)}const it=ui157Get(k),locked=k==='offhand'&&ui157Get('weapon')&&ui157Hands(ui157Get('weapon'))===2;
+ box.classList.add('slot157');box.classList.toggle('empty',!it);box.classList.toggle('locked157',!!locked);box.setAttribute('role','button');box.tabIndex=0;box.setAttribute('aria-label',ui157Label(k)+': '+(locked?ui154Text('ใช้สองมือ','Two-handed'):it?itemName(it):ui154Text('ว่าง','Empty')));
+ const [side,row]=positions[k];box.style.setProperty('--slot157-row',row);box.style.setProperty('--slot157-side',side);box.style.left=side?'auto':'0';box.style.right=side?'0':'auto';
+ const image=it?(EQ157[k].field?ui155SlotArt(it):ui157Canvas(it)):ui157Canvas({kind157:EQ157[k].empty,type:ITEMS157[EQ157[k].empty]?.[2]||k,slot:ITEMS157[EQ157[k].empty]?.[3]||k,rar:0});
+ // Empty-slot pictures are hints only; labels identify every category even without art.
+ if(!it&&UI157.art[EQ157[k].empty]){const g=image.getContext('2d');g.clearRect(0,0,64,64);g.drawImage(UI157.art[EQ157[k].empty],0,0,64,64)}
+ if(EQ157[k].field)image.className='slot155-art';box.replaceChildren(image,ui154Node('small','',ui157Label(k)),ui154Node('span','slot154-name',locked?ui154Text('ใช้สองมือ','Two-handed'):it?itemName(it):ui154Text('ว่าง','Empty')));
+ box.onclick=()=>ui157Details(k);box.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();box.click()}}}
+ const portrait=figure.querySelector('#equipPortrait');if(portrait)portrait.replaceWith(ui154Portrait());
+ let chooser=host.querySelector('.outfit157');if(!chooser){chooser=ui154Node('div','outfit157');chooser.append(ui154Node('span','',ui154Text('รูปแบบชุด','Outfit style')));for(const [key,th,en] of [['a','ทรงชาย','Masculine cut'],['b','ทรงหญิง','Feminine cut']]){const b=ui154Node('button','',ui154Text(th,en));b.id='style157-'+key;b.setAttribute('aria-pressed',String(UI157.style()===key));b.onclick=()=>{S.outfit157=key;save();openGridBag()};chooser.append(b)}stage.after(chooser)}
+ if(gmOn()&&!$('catalog157')){const b=ui154Node('button','',ui154Text('GM • อุปกรณ์ใหม่','GM • New gear'));b.id='catalog157';b.onclick=()=>openEquipment157();host.querySelector('.wardrobe154-head').insertBefore(b,host.querySelector('#mX'))}ui157Options()}
+{const old=openGridBag;openGridBag=function(){ui157Normalize();const r=old.apply(this,arguments);ui157Mount();return r}}
+{const old=modal;modal=function(){$('mBody').classList.remove('equipment157');return old.apply(this,arguments)}}
+function ui157List(){const host=$('mBody');if(!host.querySelector('[data-eq]')||host.querySelector('.wardrobe154'))return;
+ const extras=S.inv.map((it,i)=>[it,i]).filter(([it])=>it.kind157&&!['armor','acc'].includes(it.slot)&&!!it.slot);
+ if(extras.length){const group=ui154Node('section','extra157-list');group.append(ui154Node('h3','',ui154Text('อุปกรณ์เพิ่มเติม','Additional equipment')));for(const [it,i] of extras){const card=ui154Node('div','it pn');card.append(ui157Canvas(it));const name=ui154Node('div');name.innerHTML=itemLine(it);card.append(name);const eq=ui154Node('button','',isWorn(i)?t('equipped'):t('equip'));eq.dataset.eq=i;eq.disabled=isWorn(i);const sell=ui154Node('button','',t('sell'));sell.dataset.sell=i;sell.disabled=isWorn(i);sell.onclick=()=>{gbSell(i);openBag()};card.append(eq,sell);group.append(card)}host.append(group)}
+ for(const b of host.querySelectorAll('[data-eq]'))b.onclick=()=>{if(ui157Equip(+b.dataset.eq))openBag()};
+ if($('bbSort'))$('bbSort').onclick=()=>{const items={eq:S.inv[S.eq],eqA:S.inv[S.eqA],eqC:S.inv[S.eqC]};S.inv.sort((a,b)=>(String(a.slot||'weapon').localeCompare(String(b.slot||'weapon')))||(b.rar-a.rar));for(const k of Object.keys(items))if(items[k])S[k]=S.inv.indexOf(items[k]);save();openBag()}}
+{const old=openBag;openBag=function(){const r=old.apply(this,arguments);ui157List();return r}}
+function ui157Give(kind){if(!gmOn())return false;const it=mkEquipment157(kind);if(!it)return false;gridFix();let p=firstFit(bagList(),bagRows(),it),where='bag';if(p){[it.gx,it.gy]=p;S.inv.push(it)}else{S.store=S.store||[];p=firstFit(S.store,storeRows(),it);if(!p){say('🎒 '+t('bagFull'));return false}[it.gx,it.gy]=p;S.store.push(it);where='store'}save();say(ui154Text('เพิ่มใน'+(where==='bag'?'กระเป๋า':'คลัง')+': ','Added to '+where+': ')+itemName(it));return true}
+function ui157FullOutfit(){if(!gmOn())return false;ui157Normalize();const kinds={weapon:'sword1',offhand:'shield',armor:'shirt',neck:'neck',ringLeft:'ring_blue',ringRight:'ring_green',boots:'boots',bottom:'bottom',gloves:'gloves',glasses:'glasses',mouth:'mouth_leaf'};
+ // Keep every previous item. GM storage accepts overflow exactly as gridFix does elsewhere.
+ for(const [k,kind] of Object.entries(kinds)){let it=S.inv.find(w=>w.kind157===kind&&w.demo157);if(!it){const j=S.store?.findIndex(w=>w.kind157===kind&&w.demo157);if(j>=0)it=S.store.splice(j,1)[0];else it=mkEquipment157(kind);S.inv.push(it)}for(const key of Object.keys(EQ157))if(ui157Get(key)===it)ui157Set(key,null);ui157Set(k,it);it.gx=it.gy=null}
+ gridFix();S.hp=Math.min(S.hp,hpMax());save();hud();openGridBag();return true}
+function openEquipment157(){if(!gmOn())return;modal('<h2>'+ui154Text('GM • อุปกรณ์ใหม่','GM • New equipment')+'</h2><p class="note">'+ui154Text('ของทดลองสำหรับ GM • ยังไม่เพิ่มการดรอปหรือราคา • ค่าสาธิตยังไม่ใช่สมดุลเกมจริง','GM samples • no new loot or prices • sample stats are not final balance')+'</p><div class="row2"><button id="full157">'+ui154Text('ลองชุดครบ + ดาบและโล่','Try full outfit + sword & shield')+'</button><button id="back157">'+t('bagT')+'</button></div><div class="catalog157-grid"></div>');
+ const grid=$('mBody').querySelector('.catalog157-grid');for(const [kind,d] of Object.entries(ITEMS157)){const it=mkEquipment157(kind),card=ui154Node('article','catalog157-card');card.append(ui157Canvas(it),ui154Node('strong','',itemName(it)),ui154Node('small','',d[3]==='mouth'?ui154Text('ตกแต่ง','Decoration'):!d[3]?(d[5]===2?ui154Text('สองมือ','Two-handed'):ui154Text('มือเดียว','One-handed')):ui157Label(d[3]==='ring'?'ringLeft':d[3])));const b=ui154Node('button','',ui154Text('รับชิ้นนี้','Add item'));b.dataset.give157=kind;b.onclick=()=>ui157Give(kind);card.append(b);grid.append(card)}$('full157').onclick=()=>ui157FullOutfit();$('back157').onclick=()=>openGridBag()}
+{const old=openGM;openGM=function(){const r=old.apply(this,arguments);const b=ui154Node('button','',ui154Text('อุปกรณ์ใหม่ • ซ้าย/ขวา + ชุด','New equipment • hands + outfit'));b.id='gmEquip157';b.onclick=()=>openEquipment157();$('mBody').append(b);return r}}
+{const old=gmGrant;gmGrant=function(){if(!gmOn())return old.apply(this,arguments);const keep=ui157Indices().map(i=>S.inv[i]),flags=keep.map(it=>it.gm);keep.forEach(it=>delete it.gm);const refs={eq:ui157Get('weapon'),eqA:ui157Get('armor'),eqC:ui157Get('acc')};const r=old.apply(this,arguments);keep.forEach((it,i)=>{if(flags[i])it.gm=flags[i]});for(const k of Object.keys(refs))if(refs[k])S[k]=S.inv.indexOf(refs[k]);ui157Normalize();S.hp=hpMax();save();hud();return r}}
+// Art is optional and loads independently; delayed arrival refreshes canvases without changing selection.
+(async()=>{try{const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),8000);let meta;try{const r=await fetch('equipment-157.json',{signal:controller.signal,cache:'no-cache'});if(!r.ok)throw Error('Art unavailable');meta=await r.json()}finally{clearTimeout(timer)}if(meta.schema!==1)throw Error('Art schema');
+ await Promise.allSettled(['gear','outfit'].map(async group=>{const data=meta[group],file=group==='gear'?'equipment-157.webp':'outfit-157.webp';if(data?.file!==file)throw Error('Art file');
+ const im=await new Promise((resolve,reject)=>{const pic=new Image(),timer=setTimeout(()=>reject(Error('Art timeout')),8000);pic.onload=()=>{clearTimeout(timer);resolve(pic)};pic.onerror=()=>{clearTimeout(timer);reject(Error('Art unavailable'))};pic.src=file});if(im.naturalWidth!==data.width||im.naturalHeight!==data.height)throw Error('Art dimensions');
+ const bank={};for(const name of Object.keys(data.tiles)){const src=ui156Tile(im,data,name,64),tile=new Image();tile.src=src;await tile.decode();bank[name]=tile}Object.assign(UI157.art,bank);
+ if(S){const sel=GB.sel&&{...GB.sel};for(const c of document.querySelectorAll('.gear157')){const box=c.closest('[data-i]'),slot=c.closest('[data-eqslot]'),kind=c.closest('[data-give157]');const it=box?(box.dataset.src==='store'?S.store:S.inv)[+box.dataset.i]:slot?ui157Get(slot.dataset.eqslot):null;if(it)c.replaceWith(ui157Canvas(it))}if($('mBody').querySelector('.wardrobe154'))ui157Mount();GB.sel=sel}
+ }));}catch(e){/* The local pictures and all equip controls remain available. */}finally{UI157.ready=true}})();
+{const st=document.createElement('style');st.id='ui157';st.textContent=`
+ .equipment157 .wardrobe154-layout{grid-template-columns:minmax(360px,.9fr) minmax(0,1.2fr);gap:18px}
+ .equipment157 .wardrobe154-stage{height:360px}.equipment157 .wardrobe154-figure{inset:25px 65px 35px}.equipment157 #equipPortrait{width:250px;height:250px;max-width:100%}
+ .equipment157 .slot157{width:76px;min-height:54px;height:54px;top:calc(var(--slot157-row)*60px);padding:4px;gap:2px;z-index:1;cursor:pointer}
+ .equipment157 .slot157 canvas{width:32px;height:32px;object-fit:contain;pointer-events:none}.equipment157 .slot157 small{font-size:10px;line-height:1.2}.equipment157 .slot157 .slot154-name{display:none}
+ .equipment157 .slot157.empty canvas{opacity:.25}.equipment157 .slot157.locked157{background:#241d2b;border-style:dashed;opacity:.7}.equipment157 .slot157.locked157 canvas{opacity:.15}
+ .equipment157 .wardrobe154-figure:after{bottom:30px}.outfit157{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 14px}.outfit157 span{font-size:11px;color:#b9adbf;margin-right:auto}.outfit157 button{min-height:44px;padding:6px 9px;font-size:11px}
+ #unequip157,#equip157-other,#deposit157,#withdraw157{min-height:48px;margin:8px 4px 0 0}#catalog157{width:auto;min-height:48px;font-size:10px;margin:0;padding:6px 8px;flex:none}
+ .quiet155 .gbIt .gear157{width:calc(100% - 4px);height:calc(100% - 6px);object-fit:contain;pointer-events:none;image-rendering:auto}canvas[data-painted157=true]{image-rendering:auto!important}.gear157{width:44px;height:44px;object-fit:contain;pointer-events:none}
+ .catalog157-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px;margin-top:16px}.catalog157-card{display:flex;flex-direction:column;align-items:center;gap:8px;padding:12px;border:1px solid #a48b5c55;border-radius:10px;background:#282032;text-align:center}.catalog157-card canvas{width:76px;height:76px}.catalog157-card strong{font-size:13px}.catalog157-card small{font-size:11px;color:#c3b4ca}.catalog157-card button{width:100%;min-height:48px;margin-top:auto}.extra157-list .it{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+ @media(max-height:500px) and (min-width:600px){.equipment157 .wardrobe154-layout{grid-template-columns:235px minmax(0,1fr);gap:14px}.equipment157 .wardrobe154-stage{height:318px}.equipment157 .wardrobe154-figure{inset:30px 44px 55px}.equipment157 #equipPortrait{width:160px;height:160px;max-width:none}.equipment157 .slot157{width:55px;height:48px;min-height:48px;top:calc(var(--slot157-row)*53px);padding:2px}.equipment157 .slot157 canvas{width:26px;height:26px}.equipment157 .slot157 small{font-size:8px}.outfit157 button{font-size:10px;padding:4px 6px}.outfit157 span{width:100%}}
+ @media(max-width:599px){.equipment157 .wardrobe154-layout{grid-template-columns:1fr}.equipment157 .wardrobe154-stage{height:380px}.equipment157 .slot157{width:65px;height:58px;min-height:58px;top:calc(var(--slot157-row)*63px)}.equipment157 .wardrobe154-figure{inset:25px 55px 60px}.equipment157 #equipPortrait{width:220px;height:220px;max-width:100%}.catalog157-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
  `;document.head.append(st)}
 
 </script></body></html>

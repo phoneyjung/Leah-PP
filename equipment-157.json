@@ -1,0 +1,341 @@
+{
+  "schema": 1,
+  "gear": {
+    "file": "equipment-157.webp",
+    "width": 768,
+    "height": 512,
+    "tiles": {
+      "neck": {
+        "rect": [
+          0,
+          0,
+          128,
+          128
+        ],
+        "sourcePixels": 5399
+      },
+      "ring_blue": {
+        "rect": [
+          128,
+          0,
+          128,
+          128
+        ],
+        "sourcePixels": 5242
+      },
+      "ring_green": {
+        "rect": [
+          256,
+          0,
+          128,
+          128
+        ],
+        "sourcePixels": 5913
+      },
+      "boots": {
+        "rect": [
+          384,
+          0,
+          128,
+          128
+        ],
+        "sourcePixels": 8115
+      },
+      "pants": {
+        "rect": [
+          512,
+          0,
+          128,
+          128
+        ],
+        "sourcePixels": 7975
+      },
+      "skirt": {
+        "rect": [
+          640,
+          0,
+          128,
+          128
+        ],
+        "sourcePixels": 6945
+      },
+      "gloves": {
+        "rect": [
+          0,
+          128,
+          128,
+          128
+        ],
+        "sourcePixels": 6495
+      },
+      "glasses": {
+        "rect": [
+          128,
+          128,
+          128,
+          128
+        ],
+        "sourcePixels": 4752
+      },
+      "shield": {
+        "rect": [
+          256,
+          128,
+          128,
+          128
+        ],
+        "sourcePixels": 6768
+      },
+      "sword1": {
+        "rect": [
+          384,
+          128,
+          128,
+          128
+        ],
+        "sourcePixels": 3688
+      },
+      "sword2": {
+        "rect": [
+          512,
+          128,
+          128,
+          128
+        ],
+        "sourcePixels": 4311
+      },
+      "bow1": {
+        "rect": [
+          640,
+          128,
+          128,
+          128
+        ],
+        "sourcePixels": 5454
+      },
+      "bow2": {
+        "rect": [
+          0,
+          256,
+          128,
+          128
+        ],
+        "sourcePixels": 2878
+      },
+      "staff1": {
+        "rect": [
+          128,
+          256,
+          128,
+          128
+        ],
+        "sourcePixels": 2593
+      },
+      "staff2": {
+        "rect": [
+          256,
+          256,
+          128,
+          128
+        ],
+        "sourcePixels": 3342
+      },
+      "dagger1": {
+        "rect": [
+          384,
+          256,
+          128,
+          128
+        ],
+        "sourcePixels": 2962
+      },
+      "dagger2": {
+        "rect": [
+          512,
+          256,
+          128,
+          128
+        ],
+        "sourcePixels": 4892
+      },
+      "axe1": {
+        "rect": [
+          640,
+          256,
+          128,
+          128
+        ],
+        "sourcePixels": 4612
+      },
+      "axe2": {
+        "rect": [
+          0,
+          384,
+          128,
+          128
+        ],
+        "sourcePixels": 6311
+      },
+      "hammer1": {
+        "rect": [
+          128,
+          384,
+          128,
+          128
+        ],
+        "sourcePixels": 4303
+      },
+      "hammer2": {
+        "rect": [
+          256,
+          384,
+          128,
+          128
+        ],
+        "sourcePixels": 5162
+      },
+      "armor": {
+        "rect": [
+          384,
+          384,
+          128,
+          128
+        ],
+        "sourcePixels": 9160
+      },
+      "armor_fine": {
+        "rect": [
+          512,
+          384,
+          128,
+          128
+        ],
+        "sourcePixels": 9684
+      },
+      "charm": {
+        "rect": [
+          640,
+          384,
+          128,
+          128
+        ],
+        "sourcePixels": 4366
+      }
+    }
+  },
+  "outfit": {
+    "file": "outfit-157.webp",
+    "width": 768,
+    "height": 256,
+    "tiles": {
+      "shirt_a": {
+        "rect": [
+          0,
+          0,
+          128,
+          128
+        ],
+        "sourcePixels": 7192
+      },
+      "shirt_b": {
+        "rect": [
+          128,
+          0,
+          128,
+          128
+        ],
+        "sourcePixels": 7092
+      },
+      "bottom_a": {
+        "rect": [
+          256,
+          0,
+          128,
+          128
+        ],
+        "sourcePixels": 8081
+      },
+      "bottom_b": {
+        "rect": [
+          384,
+          0,
+          128,
+          128
+        ],
+        "sourcePixels": 7341
+      },
+      "boots_a": {
+        "rect": [
+          512,
+          0,
+          128,
+          128
+        ],
+        "sourcePixels": 7573
+      },
+      "boots_b": {
+        "rect": [
+          640,
+          0,
+          128,
+          128
+        ],
+        "sourcePixels": 6264
+      },
+      "mouth_leaf": {
+        "rect": [
+          0,
+          128,
+          128,
+          128
+        ],
+        "sourcePixels": 2828
+      },
+      "mouth_rose": {
+        "rect": [
+          128,
+          128,
+          128,
+          128
+        ],
+        "sourcePixels": 3725
+      },
+      "mouth_candy": {
+        "rect": [
+          256,
+          128,
+          128,
+          128
+        ],
+        "sourcePixels": 4337
+      },
+      "mouth_feather": {
+        "rect": [
+          384,
+          128,
+          128,
+          128
+        ],
+        "sourcePixels": 2965
+      },
+      "gloves_b": {
+        "rect": [
+          512,
+          128,
+          128,
+          128
+        ],
+        "sourcePixels": 5929
+      },
+      "glasses_b": {
+        "rect": [
+          640,
+          128,
+          128,
+          128
+        ],
+        "sourcePixels": 4358
+      }
+    }
+  }
+}
