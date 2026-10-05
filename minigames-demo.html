@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ลองเล่นมินิเกมคริสตัล · Lantern Academy</title>
+<style>
+ :root{color-scheme:dark}
+ body{margin:0;min-height:100vh;background:#1b1230;color:#f6e7c1;font-family:system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;gap:14px;padding:18px 12px;box-sizing:border-box}
+ h1{font-size:20px;margin:0;color:#f6e2ad;text-wrap:balance;text-align:center}
+ p{margin:0;max-width:640px;color:#d8cdea;font-size:14px;line-height:1.6;text-align:center}
+ .row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+ button,select{font:inherit;font-size:16px;min-height:48px;padding:8px 16px;border-radius:12px;border:2px solid #d9b56a;background:#2f2148;color:#f6e7c1;cursor:pointer}
+ button:focus-visible,select:focus-visible{outline:3px solid #8ff4ff;outline-offset:2px}
+ #out{min-height:24px;font-size:15px;color:#8ff4ff;text-align:center}
+</style></head>
+<body>
+ <h1>✨ ลองเล่นมินิเกมคริสตัล (สำหรับผู้เล่น 18 ปีขึ้นไป)</h1>
+ <p>หน้านี้เป็นหน้าทดลอง ยังไม่ได้อยู่ในตัวเกม เลือกระดับแล้วกดเกมที่อยากลอง</p>
+ <div class="row">
+  <select id="lv" aria-label="ระดับ"><option value="1">ง่าย (เลเวล 1–19)</option><option value="25">กลาง (เลเวล 20–39)</option><option value="50">ยาก (เลเวล 40 ขึ้นไป)</option></select>
+  <select id="lang" aria-label="ภาษา"><option value="th">ไทย</option><option value="en">English</option></select>
+ </div>
+ <div class="row">
+  <button data-g="memory">จำแสงคริสตัล</button><button data-g="odd">จับผิดผลึก</button><button data-g="pipes">ต่อเส้นพลัง</button><button data-g="random">สุ่มเกม</button>
+ </div>
+ <div id="out" role="status" aria-live="polite"></div>
+ <script src="minigames.js"></script>
+ <script>
+  const out=document.getElementById('out');
+  if(!window.CrystalGames)out.textContent='โหลด minigames.js ไม่ได้';
+  document.querySelectorAll('[data-g]').forEach(b=>b.onclick=async()=>{if(!window.CrystalGames)return;
+   const r=await CrystalGames.play({game:b.dataset.g,level:+document.getElementById('lv').value,lang:document.getElementById('lang').value});
+   window._last=r;const name=CrystalGames.TXT.th[r.game],why={win:'สำเร็จ',wrong:'กดผิด',timeout:'หมดเวลา',quit:'เลิกเล่น'}[r.reason];
+   out.textContent=name+': '+why+' · ใช้เวลา '+(r.ms/1000).toFixed(1)+' วินาที'});
+ </script>
+</body></html>
