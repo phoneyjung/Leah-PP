@@ -50,6 +50,31 @@ Write a new `test_NNN_name.js` for each release; drive the game the way a player
   so each piece shows its whole top and the one side facing the viewer. Plain two-tone boxes did NOT work; a guide must already look like the real thing.
 - His pass mark for art is **9.5 / 10** on: camera angle matches the scene · the four views agree · looks good and real · other. Below that: write a new prompt. Measure (overlap with the guide), then look.
 
+## Who owns which file (Claude and Codex work at the same time · owner's decision, 5 Oct 2026)
+The whole game is one file, so the split is by **file ownership**, not by feature. Two agents never edit the same file.
+
+| Files | Owner | The other agent may only |
+|---|---|---|
+| `index.html` | **Codex** | read it and test it |
+| `sw.js`, `questions-index.json` | **Codex** | ask for a change through a written instruction |
+| `q-*.json`, `qsrc_*.py`, `gen_math.py`, `build_questions.py`, `check_questions.py` | **Claude** | run them, never edit them |
+| a new `test_*.js` | whoever wrote it | run it, never edit it (report a wrong test to the owner) |
+| `BUG_REPORT.md`, `DESIGN_*.md`, `QUESTION_REVIEW_LOG.md` | **Claude** | read; Codex updates only the status table in `BUG_REPORT.md` |
+| pictures, picture prompts, map/layout scripts | **Claude** | use them |
+
+How the two work together:
+- **Claude writes the spec and a test suite first** (a new file, so it collides with nothing). **Codex changes `index.html` until that suite passes.** Claude then re-runs the suites as an independent check.
+- **Claude hunts bugs** by driving the game with puppeteer and writes them into `BUG_REPORT.md` with steps, measured evidence and a pass criterion. **Codex fixes them.**
+- New things that can live in their own file (for example the three 18+ mini-games) Claude builds as a standalone trial page first; Codex moves them into the game.
+
+Four rules that prevent collisions:
+1. Fetch the newest `main` before every push. Never force-push.
+2. Each agent pushes only files it owns. When Claude adds a data file, Codex adds its name to `sw.js` (for question files: `python3 check_questions.py --write-index`, then bump the cache name).
+3. Claude edits `index.html` only if the owner says so, while Codex has no task running or queued.
+4. Every task handed to Codex states a pass criterion as a number and names the suite to run.
+
+Question bank status: **paused at age 9 by the owner (5 Oct 2026)**. Age 9 has all 5 subjects (825 questions, automatic checks pass, human spot-check still pending); ages 10–17 are not written. The launch condition in `DESIGN_CRYSTAL_JOB.md` (all of ages 9–17 before the crystal/job system opens to players) still stands until the owner changes it.
+
 ## Planned system (not built yet)
 - `DESIGN_CRYSTAL_JOB.md`: the owner's plan for barriers round crystals, a second (job) experience value, and unlocking every activity with job points. Build it only when the owner says so, one step of its section 6 at a time. Its section 9 lists questions only the owner can answer.
 
