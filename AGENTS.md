@@ -50,6 +50,9 @@ Write a new `test_NNN_name.js` for each release; drive the game the way a player
   so each piece shows its whole top and the one side facing the viewer. Plain two-tone boxes did NOT work; a guide must already look like the real thing.
 - His pass mark for art is **9.5 / 10** on: camera angle matches the scene · the four views agree · looks good and real · other. Below that: write a new prompt. Measure (overlap with the guide), then look.
 
+## Planned system (not built yet)
+- `DESIGN_CRYSTAL_JOB.md`: the owner's plan for barriers round crystals, a second (job) experience value, and unlocking every activity with job points. Build it only when the owner says so, one step of its section 6 at a time. Its section 9 lists questions only the owner can answer.
+
 ## Bugs waiting to be fixed
 - `BUG_REPORT.md`: bugs found by Claude's checks, each with steps to reproduce, measured evidence, a suggested fix and a pass criterion. Fix from there; update the status table in that file; write what you did at the top of the list in `HANDOFF_S13.md`.
 
