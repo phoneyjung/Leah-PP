@@ -11,7 +11,8 @@
     "test:questions": "node test_158_quiz_close.js && node test_159_question_loading.js && node test_questions_9.js",
     "test:farm": "node test_112_g9b.js && node test_114_life.js && node test_121_beds.js && node test_124_sit.js && node test_134_context.js && node test_135_robot.js && node test_136_house.js",
     "test:farm-feedback": "node test_162_farm_feedback.js",
-    "test:crystal": "node test_crystal_step1_barrier.js && node test_163_crystal_boundary.js"
+    "test:crystal": "node test_crystal_step1_barrier.js && node test_163_crystal_boundary.js",
+    "test:context": "node test_167_context_bubble.js"
   },
   "devDependencies": { "puppeteer": "^23.0.0" }
 }
