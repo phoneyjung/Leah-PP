@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.67';
+const VERSION='Lantern Academy 1.68';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -5122,6 +5122,61 @@ addEventListener('keydown',e=>{if((e.code==='KeyE'||e.key==='e'||e.key==='E')&&!
  #context167 svg{display:block;width:40px;height:40px}#context167 .context167-label{font-size:12px;line-height:1.2;font-weight:700;text-align:center;max-width:100%;overflow-wrap:anywhere}
  #context167 kbd{position:absolute;right:-7px;top:-7px;background:#44304f;color:#ffe9af;border:1px solid #c7a667;border-radius:5px;min-width:20px;font:11px/18px system-ui;text-align:center}
  @media(pointer:coarse){#context167 kbd{display:none}}@media(max-height:440px){#context167{width:68px;min-height:68px;padding:5px 4px;border-radius:13px}#context167 svg{width:34px;height:34px}#context167 .context167-label{font-size:11px}}
+ `;document.head.append(st)}
+
+// ================= 1.68 COLOUR PIANO: held notes, captured glissando and independent fingers =================
+pianoOpen=function(){
+ if(PIANO.close)PIANO.close();else $('pianoBox')?.remove();
+ const en=LANG==='en',notes=[['โด','Do',261.63,'#ed858e','#ffe1df'],['เร','Re',293.66,'#eda563','#ffe9ce'],['มี','Mi',329.63,'#ddc452','#fff4bc'],['ฟา','Fa',349.23,'#7cbb91','#ddf5df'],['ซอล','Sol',392,'#66b7bd','#d6f3f3'],['ลา','La',440,'#829fe0','#e0eaff'],['ที','Ti',493.88,'#b195d8','#eee2ff'],['โดสูง','High Do',523.25,'#d98db4','#ffe0ef']];
+ const hint=en?'Hold and slide across the keys · try two fingers':'แตะค้างแล้วรูดคีย์ · เล่นพร้อมกันสองนิ้วได้';
+ const d=document.createElement('div');d.id='pianoBox';d.setAttribute('role','dialog');d.setAttribute('aria-modal','true');d.setAttribute('aria-labelledby','pianoTitle168');
+ d.innerHTML='<section class="piano168-case"><header><span class="piano168-mark" aria-hidden="true">♫</span><div><h2 id="pianoTitle168">'+t('pianoT')+'</h2><p>'+hint+'</p></div></header><div id="pianoKeys" role="group" aria-label="'+t('pianoT')+'"></div><div id="pianoMsg" role="status" aria-live="polite">'+(en?'Your little melody starts here':'เพลงเล็ก ๆ ของเรา เริ่มได้เลย')+'</div><footer><button id="pianoRec">● '+(en?'Record':'บันทึก')+'</button><button id="pianoStop">■ '+(en?'Stop':'หยุด')+'</button><button id="pianoPlay">▶ '+(en?'Play tune':'เล่นเพลง')+'</button><button id="pianoX">'+(en?'Close':'ปิด')+'</button></footer></section>';
+ document.body.append(d);PAUSE=true;try{PIANO.tune=HOME.get().pianoTune||null}catch(e){}
+ const row=$('pianoKeys'),msg=$('pianoMsg'),keys=[],pointers=new Map(),voices=new Set(),counts=Array(8).fill(0),events=new AbortController(),previousFocus=document.activeElement;
+ const pressed=(i,delta)=>{counts[i]=Math.max(0,counts[i]+delta);keys[i].classList.toggle('held168',counts[i]>0);keys[i].setAttribute('aria-pressed',String(counts[i]>0))};
+ const release=v=>{if(!v||!voices.delete(v))return;if(v.record)v.record[2]=Math.max(30,Math.round(performance.now()-v.at));pressed(v.i,-1);
+  if(v.osc)try{const a=_pianoAC,t=a.currentTime;v.g.gain.cancelScheduledValues(t);v.g.gain.setTargetAtTime(.0001,t,.045);v.osc.stop(t+.22);v.osc.onended=()=>{v.osc.disconnect();v.g.disconnect()}}catch(e){}};
+ const sound=(i,record=false)=>{const v={i,at:performance.now()};voices.add(v);pressed(i,1);window._pianoPlayed=(window._pianoPlayed||0)+1;
+  if(record&&PIANO.rec&&PIANO.rec.notes.length<200){v.record=[i,Math.round(v.at-PIANO.rec.t0),0];PIANO.rec.notes.push(v.record)}
+  try{_pianoAC=_pianoAC||new(window.AudioContext||window.webkitAudioContext)();const a=_pianoAC;if(a.state==='suspended')a.resume().catch(()=>{});v.osc=a.createOscillator();v.g=a.createGain();v.osc.type='triangle';v.osc.frequency.value=notes[i][2];const t=a.currentTime;v.g.gain.setValueAtTime(.0001,t);v.g.gain.exponentialRampToValueAtTime(.22,t+.012);v.g.gain.exponentialRampToValueAtTime(.04,t+1.3);v.osc.connect(v.g);v.g.connect(a.destination);v.osc.start()}catch(e){}
+  return v};
+ const releasePointers=()=>{for(const p of pointers.values())release(p.voice);pointers.clear()};
+ const stop=()=>{PIANO.timers.forEach(clearTimeout);PIANO.timers=[];releasePointers();for(const v of [...voices])release(v);
+  if(PIANO.rec){if(PIANO.rec.notes.length){PIANO.tune=PIANO.rec.notes.slice(0,200);try{const h=HOME.get();h.pianoTune=PIANO.tune;HOME.put(h)}catch(e){}}PIANO.rec=null}
+  $('pianoRec').setAttribute('aria-pressed','false');msg.textContent=PIANO.tune?(en?'Saved · '+PIANO.tune.length+' notes':'เก็บเพลงไว้แล้ว '+PIANO.tune.length+' โน้ต'):hint};
+ notes.forEach(([th,eng,f,c,tint],i)=>{const b=document.createElement('button');b.type='button';b.dataset.note=i;b.style.setProperty('--note',c);b.style.setProperty('--tint',tint);b.setAttribute('aria-label',en?eng:th);b.setAttribute('aria-pressed','false');b.innerHTML='<span class="piano168-dot" aria-hidden="true">♪</span><span class="piano168-name">'+(en?eng:th)+'</span><small aria-hidden="true">'+['C','D','E','F','G','A','B','C′'][i]+'</small>';keys.push(b);row.append(b);
+  // Keyboard / assistive clicks have no pointer gesture. Native pointer clicks must not double the note.
+  b.onclick=e=>{if(e.detail===0){const v=sound(i,true);PIANO.timers.push(setTimeout(()=>release(v),350))}}});
+ const keyAt=(x,y)=>{const r=row.getBoundingClientRect();return x>=r.left&&x<r.right&&y>=r.top&&y<=r.bottom?Math.min(7,Math.floor((x-r.left)*8/r.width)):-1};
+ const enter=(p,i)=>{if(p.i===i)return;release(p.voice);p.i=i;p.voice=i<0?null:sound(i,true)};
+ row.addEventListener('pointerdown',e=>{const b=e.target.closest('button[data-note]');if(!b||e.button>0)return;e.preventDefault();e.stopPropagation();const prior=pointers.get(e.pointerId);if(prior)release(prior.voice);const p={i:-1,x:e.clientX,y:e.clientY};pointers.set(e.pointerId,p);enter(p,+b.dataset.note);try{row.setPointerCapture(e.pointerId)}catch(err){}});
+ row.addEventListener('pointermove',e=>{const p=pointers.get(e.pointerId);if(!p)return;e.preventDefault();
+  // Sample the segment so a fast swipe still sounds the crossed keys between delivered pointer events.
+  const n=Math.min(512,Math.max(1,Math.ceil(Math.hypot(e.clientX-p.x,e.clientY-p.y)/8)));for(let j=1;j<=n;j++)enter(p,keyAt(p.x+(e.clientX-p.x)*j/n,p.y+(e.clientY-p.y)*j/n));p.x=e.clientX;p.y=e.clientY});
+ const end=e=>{const p=pointers.get(e.pointerId);if(p){release(p.voice);pointers.delete(e.pointerId)}};
+ for(const k of ['pointerup','pointercancel','lostpointercapture'])row.addEventListener(k,end);
+ row.addEventListener('contextmenu',e=>e.preventDefault());d.addEventListener('keydown',e=>e.stopPropagation());d.addEventListener('keyup',e=>e.stopPropagation());
+ $('pianoRec').onclick=()=>{stop();PIANO.rec={t0:performance.now(),notes:[]};$('pianoRec').setAttribute('aria-pressed','true');msg.textContent=en?'● Recording · press Stop to save':'● กำลังบันทึก · กดหยุดเพื่อเก็บเพลง'};
+ $('pianoStop').onclick=stop;
+ $('pianoPlay').onclick=()=>{stop();const tune=PIANO.tune;if(!tune?.length){msg.textContent=en?'Record a melody first':'ลองบันทึกเพลงก่อนนะ';return}msg.textContent=en?'♫ Playing your melody':'♫ กำลังเล่นเพลงของเรา';const t0=tune[0][1];let last=0;
+  for(const [i,tt,duration] of tune){if(!notes[i])continue;const at=Math.max(0,tt-t0),hold=Math.max(30,Math.min(60000,Number(duration)||650));last=Math.max(last,at+hold);PIANO.timers.push(setTimeout(()=>{const v=sound(i);PIANO.timers.push(setTimeout(()=>release(v),hold))},at))}
+  PIANO.timers.push(setTimeout(()=>{PIANO.timers=[];msg.textContent=hint},last+250))};
+ const close=()=>{stop();events.abort();d.remove();PIANO.close=null;PAUSE=false;if(previousFocus?.isConnected)previousFocus.focus()};PIANO.close=close;$('pianoX').onclick=close;
+ addEventListener('blur',stop,{signal:events.signal});document.addEventListener('visibilitychange',()=>{if(document.hidden)stop()},{signal:events.signal});$('pianoX').focus();
+};
+{const st=document.createElement('style');st.textContent=`
+ #pianoBox{position:fixed;inset:0;z-index:60;background:#140d24c9;display:flex;align-items:center;justify-content:center;padding:10px;box-sizing:border-box}
+ #pianoBox .piano168-case{width:min(760px,100%);max-height:100%;overflow:auto;box-sizing:border-box;padding:18px;border:2px solid #d9b979;border-radius:20px;background:radial-gradient(ellipse at 20% 0,#62415b,transparent 70%),linear-gradient(#362641,#211b31);box-shadow:inset 0 0 0 4px #ffffff08,0 12px 40px #09051088}
+ #pianoBox header{display:flex;align-items:center;gap:12px;margin-bottom:14px}#pianoBox h2{font-size:22px;margin:0;color:#ffe7af}#pianoBox p{margin:3px 0 0;font-size:13px;color:#f3e7ee}.piano168-mark{font-size:34px;color:#f5ce88;line-height:1}
+ #pianoKeys{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:5px;padding:0 0 7px;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+ #pianoBox button{border-image:none!important;text-shadow:none;touch-action:manipulation}
+ #pianoKeys button{min-width:0;height:clamp(100px,40vh,210px);padding:12px 2px 18px;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:5px;touch-action:none;border:1px solid #fff9dc;border-radius:8px 8px 12px 12px;background:linear-gradient(175deg,#fffdf1 15%,var(--tint) 80%);color:#32233e;box-shadow:inset 0 -11px var(--note),0 5px 0 #0f0b1d,0 7px 8px #0b061c55;transition:filter .06s,transform .06s}
+ #pianoKeys .piano168-name{font-size:clamp(13px,2.5vw,20px);font-weight:800;line-height:1.2}#pianoKeys small{font:12px system-ui;color:#58465e}#pianoKeys .piano168-dot{position:absolute;top:15%;width:26px;height:26px;border-radius:50%;background:var(--note);color:#32233e;display:grid;place-items:center;font-size:19px}
+ #pianoKeys button.held168{transform:translateY(5px);background:linear-gradient(#fffbe8,var(--note));box-shadow:inset 0 -5px var(--note),0 0 13px var(--note);filter:brightness(1.06)}
+ #pianoBox #pianoMsg{min-height:20px;text-align:center;margin:10px 0;color:#f9e3b3;font-size:13px}
+ #pianoBox footer{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}#pianoBox footer button{min-height:48px;min-width:90px;font-size:14px;font-weight:700;padding:8px 12px;border:1px solid #d3b480;border-radius:10px;color:#fff5e5;background:linear-gradient(#554368,#342640)}
+ #pianoBox #pianoRec{background:linear-gradient(#a94765,#74364f)}#pianoBox #pianoRec[aria-pressed=true]{outline:3px solid #ffc9be;outline-offset:2px}#pianoBox #pianoPlay{background:linear-gradient(#4c856f,#305f56)}#pianoBox #pianoX{background:linear-gradient(#f1d9a0,#cba76b);color:#30223e}
+ @media(max-height:440px){#pianoBox .piano168-case{padding:12px 16px;border-radius:15px}#pianoBox header{margin-bottom:9px;gap:9px}#pianoBox h2{font-size:19px}#pianoBox p{font-size:12px}#pianoBox #pianoMsg{margin:5px 0;font-size:12px}#pianoKeys button{padding-bottom:16px}#pianoBox footer{gap:7px}}
  `;document.head.append(st)}
 
 </script></body></html>
