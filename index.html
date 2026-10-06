@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.65';
+const VERSION='Lantern Academy 1.66';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -4907,10 +4907,10 @@ function deco160Begin(g){if(D160.gesture!==g||!deco160Ready())return;g.active=tr
  msgT=0;$('msg').textContent='';$('msg').style.opacity=0;document.body.classList.add('deco160-drag');deco160Preview(g.last,g)}
 function deco160Down(e,inventory){if(!deco160Ready()||e.button>0)return;if(D160.gesture){deco160Reset();return}
  const p=deco160Point(e),hit=inventory?-1:deco2Hit(p.x,p.y);let src,skip=null;
- if(inventory)src=[inventory.dataset.k,0,0,0];else if(DECO2.hold)src=[DECO2.hold,0,0,0];else if(hit>=0){DECO2.sel=hit;skip=M.layout2[hit];src=skip;deco2UI()}
+ if(inventory)src=[inventory.dataset.k,0,0,0];else if(DECO2.hold)src=[DECO2.hold,0,0,0];else if(hit>=0){DECO2.sel=hit;skip=M.layout2[hit];src=D164.rotation?.ref===skip?D164.rotation.it:skip;deco2UI()}
 
  if(!src)return;const v=f2View(src[0],src[1]),fromPiece=!inventory&&!DECO2.hold&&hit>=0;
- const g={id:e.pointerId,source:src.slice(),skip,inventory,startX:e.clientX,startY:e.clientY,last:e,touch:e.pointerType==='touch',active:false,
+ const g={id:e.pointerId,source:src.slice(),skip,rotation:!!(skip&&D164.rotation?.ref===skip),inventory,startX:e.clientX,startY:e.clientY,last:e,touch:e.pointerType==='touch',active:false,
   ox:fromPiece?p.x-src[2]:v[6]/2,oy:fromPiece?p.y-src[3]:v[7]/2,scrollStart:inventory?inventory.parentElement.scrollTop:0,cancelled:false,scrolling:false,moved:false};D160.gesture=g;D160.preview=null;D160.lastKey='';
  try{cv.setPointerCapture(e.pointerId)}catch(err){}if(g.touch)g.timer=setTimeout(()=>deco160Begin(g),240);
 }
@@ -4923,6 +4923,8 @@ function deco160Finish(e,cancel){const g=D160.gesture;if(!g||g.id!==e.pointerId)
  if(!preview||preview.er){say(t(preview&&preview.er||'drag160Floor'));deco2UI();return}
  const it=preview.it,i=g.skip?M.layout2.indexOf(g.skip):-1;
  if(g.skip&&i<0)return;
+ // 1.66: a rotated piece remains a draft through dragging; Confirm writes position and angle together.
+ if(g.rotation){D164.rotation={ref:g.skip,it:it.slice(),er:''};DECO2.sel=i;DECO2.hold=null;sfx('pick');deco2UI();return}
  if(!g.skip&&!((HOME.get().furn2||{})[it[0]]>0)){deco2UI();return}
  const okay=f2Apply((lay,h)=>{if(g.skip){lay[i][2]=it[2];lay[i][3]=it[3]}else{
   if(!(h.furn2[it[0]]>0))return;lay.push(it);h.furn2[it[0]]--;if(h.furn2[it[0]]<=0)delete h.furn2[it[0]]}});
@@ -4970,8 +4972,8 @@ Object.assign(TX.th,{d2Pick:'คลิกค้าง / แตะค้าง �
 Object.assign(TX.en,{d2Pick:'Hold a piece, then drag it',drag160Hint:'✓ Green: can place · × Red: blocked',angle164:'Confirm',cancel164:'Cancel angle',one164:'One view available',pending164:'Choose a view, then confirm'});
 function deco164Clear(){D164.rotation=null;D164.gridKey='';$('deco164')?.remove()}
 function deco164Turn(){const cur=M.layout2[DECO2.sel];if(!cur)return;const n=ROOM2.pieces[cur[0]].length;if(n<2)return;msgT=0;$('msg').textContent='';$('msg').style.opacity=0;
- const from=D164.rotation?.ref===cur?D164.rotation.it:cur,v=f2View(cur[0],cur[1]),r=(from[1]+1)%n,v2=f2View(cur[0],r);
- const it=[cur[0],r,f2Snap(cur[2]+v[6]/2-v2[6]/2),f2Snap(cur[3]+v[7]/2-v2[7]/2)];
+ const from=D164.rotation?.ref===cur?D164.rotation.it:cur,v=f2View(from[0],from[1]),r=(from[1]+1)%n,v2=f2View(cur[0],r);
+ const it=[cur[0],r,f2Snap(from[2]+v[6]/2-v2[6]/2),f2Snap(from[3]+v[7]/2-v2[7]/2)];
  D164.rotation={ref:cur,it,er:deco160Valid(it,cur)};D164.gridKey='';deco2UI();sfx('pick');
 }
 function deco164Confirm(){const draft=D164.rotation;if(!draft)return;const i=M.layout2.indexOf(draft.ref);if(i<0){deco164Clear();return}
@@ -4980,7 +4982,7 @@ function deco164Confirm(){const draft=D164.rotation;if(!draft)return;const i=M.l
 }
 function deco164Position(){const d=$('deco164');if(!d)return;
  if(!deco160Ready()||D160.gesture?.active){d.hidden=true;return}d.hidden=false;
- const it=M.layout2[DECO2.sel];if(!it){d.hidden=true;return}const v=f2View(it[0],it[1]),r=cv.getBoundingClientRect(),scale=SC/(devicePixelRatio||1),b=d.getBoundingClientRect();
+ const selected=M.layout2[DECO2.sel],it=D164.rotation?.ref===selected?D164.rotation.it:selected;if(!it){d.hidden=true;return}const v=f2View(it[0],it[1]),r=cv.getBoundingClientRect(),scale=SC/(devicePixelRatio||1),b=d.getBoundingClientRect();
  const x=((it[2]+v[6]/2)*T-camX)*scale+r.left,y=((it[3]+ROOM2.rowsAbovePlan)*T-v[5]-camY)*scale+r.top;
  const bar=$('deco2')?.getBoundingClientRect(),bottom=Math.min(innerHeight-8,bar?bar.top-8:innerHeight-8);
  d.style.left=Math.round(Math.max(8,Math.min(innerWidth-b.width-8,x-b.width/2)))+'px';
@@ -5000,8 +5002,9 @@ function deco164Position(){const d=$('deco164');if(!d)return;
  const no=document.createElement('button');no.id='cancel164';no.textContent='× '+t('cancel164');no.onclick=()=>{deco164Clear();deco2UI()};row.append(no);
  const hint=document.createElement('div');hint.className='angle164-status';hint.setAttribute('aria-live','polite');hint.textContent=pending.er?t(pending.er):t('pending164');hint.dataset.valid=pending.er?'no':'yes';d.append(hint)}
  document.body.append(d);deco164Position();return r}}
-// Moving or opening another panel discards an unconfirmed angle. A save is only written by Confirm.
-{const old=deco160Down;deco160Down=function(e,inv){if(!deco160Ready())return;deco164Clear();return old(e,inv)}}
+// Keep a pending angle while grabbing its preview; selecting a different piece discards it.
+{const old=deco160Down;deco160Down=function(e,inv){if(!deco160Ready())return;const p=deco160Point(e),hit=inv?-1:deco2Hit(p.x,p.y);
+ if(inv||hit>=0&&D164.rotation&&M.layout2[hit]!==D164.rotation.ref)deco164Clear();return old(e,inv)}}
 // Keep the legacy turn API for scripted callers; player controls use the preview above.
 {const old=openDeco;openDeco=function(){deco164Clear();return old.apply(this,arguments)}}
 {const old=goMap;goMap=function(){deco164Clear();return old.apply(this,arguments)}}
@@ -5033,5 +5036,12 @@ function deco165SpriteFrame(it){const [x,y,w,h]=deco165SpriteBounds(it),pad=2,le
  for(const [sx,sy,dx,dy] of [[x-pad,y-pad,1,1],[x+w+pad,y-pad,-1,1],[x-pad,y+h+pad,1,-1],[x+w+pad,y+h+pad,-1,-1]]){ctx.beginPath();ctx.moveTo(sx+dx*len,sy);ctx.lineTo(sx,sy);ctx.lineTo(sx,sy+dy*len);ctx.stroke()}ctx.restore()}
 Object.assign(TX.th,{drag160Hint:'ฐานเขียว ✓ วางได้ · ฐานแดง × วางไม่ได้'});
 Object.assign(TX.en,{drag160Hint:'Green base ✓ can place · Red base × blocked'});
+
+// ================= 1.66 ROTATE, DRAG THE PREVIEW, THEN CONFIRM BOTH =================
+// Hit testing follows the visible draft sprite, including parts outside the original stored rectangle.
+deco2Hit=function(px,py){let hit=-1,by=-1e9;M.layout2.forEach((saved,i)=>{const it=D164.rotation?.ref===saved?D164.rotation.it:saved,v=f2View(it[0],it[1]),l=it[2]-v[4]/T,tp=it[3]-v[5]/T,flat=ROOM2.solid[it[0]]===0;
+ if(px>=l&&px<=l+v[2]/T&&py>=tp&&py<=tp+v[3]/T){const sc=(it!==saved?1e9:0)+(flat?-100:0)+it[3]+v[7];if(sc>by){by=sc;hit=i}}});return hit};
+Object.assign(TX.th,{pending164:'กดยืนยันเพื่อวางตรงนี้',cancel164:'ยกเลิก'});
+Object.assign(TX.en,{pending164:'Confirm to place here',cancel164:'Cancel'});
 
 </script></body></html>
