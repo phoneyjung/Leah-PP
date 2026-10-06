@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.59';
+const VERSION='Lantern Academy 1.61';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -940,7 +940,7 @@ let QBANK=[],QUESTIONS_AGE=null,QUESTIONS_SLOT=null,QUESTION_LOAD=null,questionE
   if(Array.isArray(window.EMBED_Q)&&window.EMBED_Q.length){QBANK=window.EMBED_Q;QUESTION_LOAD=Promise.resolve(QBANK);return QUESTION_LOAD}
   QUESTION_LOAD=(async()=>{try{
     const response=await fetch('questions-index.json',{cache:'no-cache'});if(!response.ok)throw Error('question index unavailable');
-    const idx=await response.json(),files=idx.files.filter(f=>Math.abs(Number(f.age)-target)<=1);
+    const idx=await response.json(),files=idx.files.filter(f=>{const p=questionAgePolicy(target);return Number(f.age)>=p.minAge&&Number(f.age)<=p.maxAge});
     const parts=await Promise.all(files.map(async f=>{try{
       const u=f.file||f.f;if(!u)return [];const r=await fetch(u,{cache:'no-cache'});if(!r.ok)return [];
       const j=await r.json(),qs=j.questions||j;if(!Array.isArray(qs))return [];
@@ -949,15 +949,17 @@ let QBANK=[],QUESTIONS_AGE=null,QUESTIONS_SLOT=null,QUESTION_LOAD=null,questionE
     if(epoch!==questionEpoch)return QBANK;
     const loaded=parts.flat(),ids=new Set(),counts={};
     const unique=loaded.filter(q=>{if(ids.has(q.id))return false;ids.add(q.id);const k=q.age+':'+q.subject;counts[k]=(counts[k]||0)+1;return true});
-    // Retain the legacy age 6–8 fallback groups absent from this band. pickQuestion stays unchanged.
+    // Retain embedded questions for missing or corrupt groups; adaptive selection keeps its existing behavior.
     QBANK=unique.concat(fb.filter(q=>!ids.has(q.id)&&(counts[q.age+':'+q.subject]||0)<5));return QBANK;
   }catch(e){if(epoch===questionEpoch)QBANK=fb;return QBANK}})();
   return QUESTION_LOAD}
+// 1.61: one supported-age policy for loading and adaptive question selection.
+function questionAgePolicy(playerAge,acc=null){const minAge=6,maxAge=8,baseAge=Math.max(minAge,Math.min(maxAge,playerAge>=12?maxAge:playerAge||7));
+ return {minAge,maxAge,age:Math.max(minAge,Math.min(maxAge,baseAge+(acc!==null&&acc>=.8?1:acc!==null&&acc<.5?-1:0))),lvMax:acc===null?2:acc>=.8?3:acc<.5?1:2}}
 // adaptive questions: wrong ones come back (Leitner boxes), weak subjects more often, difficulty follows recent results, parents choose subjects
 const BOX_MIN=[2,10,1440,4320,10080];let lastQ=null;
 function recentAcc(){const r=(S.recent||[]).slice(-10);return r.length<5?null:r.filter(Boolean).length/r.length}
-function pickQuestion(){const baseAge=Math.max(6,Math.min(8,S.age>=12?8:S.age||7)),acc=recentAcc(),off=S.subOff||{};
-  const age=Math.max(6,Math.min(8,baseAge+(acc!==null&&acc>=.8?1:acc!==null&&acc<.5?-1:0))),lvMax=acc===null?2:acc>=.8?3:acc<.5?1:2;
+function pickQuestion(){const acc=recentAcc(),off=S.subOff||{},{age,lvMax}=questionAgePolicy(S.age,acc);
   const okQ=q=>q[LANG]&&!(LANG==='en'&&q.subject==='thai')&&!off[q.subject];
   const now=Date.now(),QR=S.qr||{};const due=QBANK.filter(q=>{const r=QR[q.id];return r&&r.box<3&&now>=r.due&&okQ(q)});
   if(due.length&&Math.random()<.4){const q=due[Math.floor(Math.random()*due.length)];q._review=1;lastQ=q.id;return q}

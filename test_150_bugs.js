@@ -18,7 +18,7 @@ async function check(name,fn){try{results[name]=await fn()}catch(e){errors.push(
  try{const pg=await browser.newPage();await pg.setViewport({width:1366,height:768});pg.on('pageerror',e=>errors.push(e.message));
  await pg.goto('http://localhost:'+(process.env.PORT||8775)+'/?gm',{waitUntil:'load'});
  await pg.waitForFunction(()=>!document.getElementById('load')&&typeof ROOM2!=='undefined'&&ROOM2,{timeout:30000});
- await pg.evaluate(()=>{gmMakeSlot();const d=Store.all();S=d.slots[d.cur];S.seen=S.seen||{};S.seen.intro=true;S.mus=false;save();startGame();document.querySelectorAll('#cr,#title,#picker').forEach(e=>e.classList.add('hide'));fpsChecks=6});await sleep(1800);await clear(pg);
+ await pg.evaluate(()=>{gmMakeSlot();const d=Store.all();S=d.slots[d.cur];S.seen=S.seen||{};S.seen.intro=true;S.mus=false;save();startGame();document.querySelectorAll('#cr,#title,#picker').forEach(e=>e.classList.add('hide'));fpsChecks=6});await sleep(1800);await clear(pg);await pg.evaluate(()=>{window.refusal150=[];const original=say;window.say=function(message){const r=original.apply(this,arguments);window.refusal150.push({message:String(message),shown:$('msg').textContent});return r}});
  for(const lv of [1,2,3])await check('entrance-L'+lv,async()=>{
   await pg.evaluate(lv=>{const h=HOME.get();h.lv=lv;if(h.house)h.house.lv=lv;delete h.room2;delete h.room2b;h.furn2={plant:2};HOME.put(h);delete CACHE.room;delete CACHE.room2;delete CACHE.farm},lv);
   await enter(pg);const probe=await pg.evaluate(()=>{const sp=M.spawnDefault,dy=ROOM2.rowsAbovePlan,i=M.layout2.findIndex(a=>a[0]==='plant'),d=M.r2.door;
@@ -26,9 +26,9 @@ async function check(name,fn){try{results[name]=await fn()}catch(e){errors.push(
   assert.equal(probe.exact,'d2Block','reported fractional placement rejected');assert.deepEqual(probe.both,['d2Block','d2Block'],'both entrance tiles reserved');assert.equal(probe.defaultRug,'','walkable default rug stays valid');assert(probe.normalSpawn,'normal entrance stays walkable');
   await pg.evaluate(()=>{for(let y=4;y<M.h-4;y++)for(let x=6;x<M.w-3;x++)if(walkable(M,x,y)){P.x=x*T+16;P.y=y*T+16;P.path=null;return}});await sleep(400);
   await press(pg,'#bDeco');await press(pg,'#deco2 [data-k="plant"]');
-  const target=await pg.evaluate(()=>{const d=M.r2.door,v=f2View('plant',0);window._before=JSON.stringify(M.layout2);return [(d[0]+1+v[6]/2)*T,(d[1]-1+ROOM2.rowsAbovePlan+v[7]/2)*T]});
+  const target=await pg.evaluate(()=>{const d=M.r2.door,v=f2View('plant',0);window._before=JSON.stringify(M.layout2);window.refusal150=[];return [(d[0]+1+v[6]/2)*T,(d[1]-1+ROOM2.rowsAbovePlan+v[7]/2)*T]});
   await ground(pg,...target);assert.equal(await pg.evaluate(()=>JSON.stringify(M.layout2)===window._before&&DECO2.hold==='plant'),true,'real placement click refused without consuming inventory');
-  assert.equal(await pg.evaluate(()=>document.getElementById('msg').textContent),await pg.evaluate(()=>t('d2Block')),'real tap explains refusal');
+  assert(await pg.evaluate(()=>window.refusal150.some(x=>x.message===t('d2Block')&&x.shown===t('d2Block'))),'real tap displays the refusal even when later achievement notices replace the toast');
   await press(pg,'#deco2 [data-a="done"]');
   await pg.evaluate(()=>{const h=HOME.get(),lay=JSON.parse(JSON.stringify(M.layout2)),i=lay.findIndex(a=>a[0]==='plant'),sp=M.spawnDefault;
    lay[i][2]=Math.floor(sp[0]/T)+.1;lay[i][3]=Math.floor(sp[1]/T)-ROOM2.rowsAbovePlan+.1;window._legacy=JSON.stringify(lay);h[M.layKey]=lay;HOME.put(h);delete CACHE.room});
