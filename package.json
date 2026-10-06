@@ -13,7 +13,8 @@
     "test:farm-feedback": "node test_162_farm_feedback.js",
     "test:crystal": "node test_crystal_step1_barrier.js && node test_163_crystal_boundary.js",
     "test:context": "node test_167_context_bubble.js",
-    "test:piano": "node test_168_piano_glide.js"
+    "test:piano": "node test_168_piano_glide.js",
+    "test:appearance": "node test_169_character_studio.js"
   },
   "devDependencies": { "puppeteer": "^23.0.0" }
 }
