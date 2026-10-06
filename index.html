@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.63';
+const VERSION='Lantern Academy 1.64';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -4018,9 +4018,9 @@ function f2Valid(it,skip){const [x0,y0,x1,y1]=f2Rect(it),D=M.r2,G=D.grid;
   for(let j=Math.floor(y0+.1);j<=Math.floor(y1-.1);j++)for(let i=Math.floor(x0+.1);i<=Math.floor(x1-.1);i++){const c=(G[j]||'')[i];if(!c||'# PE+'.includes(c))return 'd2Wall'}
   if(ROOM2.solid[it[0]]!==0)for(const o of M.layout2){if(o===skip||ROOM2.solid[o[0]]===0)continue;const [a0,b0,a1,b1]=f2Rect(o);if(x0<a1-.08&&a0<x1-.08&&y0<b1-.08&&b0<y1-.08)return 'd2Over'}
   return ''}
-function f2Reach(){const st=M.reach0.slice(),seen=new Set([key(st[0],st[1])]),q=[st];
-  while(q.length){const [x,y]=q.pop();for(const [a,c] of [[x+1,y],[x-1,y],[x,y+1],[x,y-1]]){const k=key(a,c);if(!seen.has(k)&&walkable(M,a,c)){seen.add(k);q.push([a,c])}}}
-  for(let y=0;y<M.h;y++)for(let x=0;x<M.w;x++)if(walkable(M,x,y)&&!seen.has(key(x,y)))return false;return true}
+function f2Reach(m=M){const st=m.reach0.slice(),seen=new Set([key(st[0],st[1])]),q=[st];
+  while(q.length){const [x,y]=q.pop();for(const [a,c] of [[x+1,y],[x-1,y],[x,y+1],[x,y-1]]){const k=key(a,c);if(!seen.has(k)&&walkable(m,a,c)){seen.add(k);q.push([a,c])}}}
+  for(let y=0;y<m.h;y++)for(let x=0;x<m.w;x++)if(walkable(m,x,y)&&!seen.has(key(x,y)))return false;return true}
 function f2Apply(fn){const h=HOME.get(),lay=M.layout2,snap=JSON.stringify(lay);h.furn2=h.furn2||{};fn(lay,h);room2Place(M);
   if(!f2Reach()||!walkable(M,Math.floor(P.x/T),Math.floor(P.y/T))){const old=JSON.parse(snap);lay.length=0;old.forEach(a=>lay.push(a));room2Place(M);return false}
   h[M.layKey]=lay;HOME.put(h);M.shadowSC=0;return true}
@@ -4045,7 +4045,7 @@ function deco2UI(){let d=document.getElementById('deco2');if(!DECO2.on||!M||!M.r
   d.querySelectorAll('button').forEach(b=>{b.onclick=ev=>{ev.stopPropagation();const a=b.dataset.a,k=b.dataset.k;if(a==='turn')deco2Turn();else if(a==='store')deco2Store();else if(a==='shop')openFurnShop();else if(a==='done'){DECO2.on=false;DECO2.sel=null;DECO2.hold=null;deco2UI()}else if(k){DECO2.hold=DECO2.hold===k?null:k;DECO2.sel=null;deco2UI()}}})}
 {const st=document.createElement('style');st.textContent='#deco2{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(8px + env(safe-area-inset-bottom,0px));z-index:26;background:rgba(27,19,48,.94);box-shadow:0 0 0 2px #c9a45a;border-radius:10px;padding:6px 8px;max-width:64vw;color:#fdf6e8}#deco2 .d2t{font-size:12px;text-align:center;margin-bottom:4px;color:#ffe27a}#deco2 .d2r{display:flex;flex-wrap:wrap;gap:5px;justify-content:center}#deco2 button{font-size:13px;padding:6px 10px;min-height:0;background:#3a2a58;color:#fdf6e8}#deco2 button.on{box-shadow:0 0 0 2px #ffe27a}#deco2 button.ok{background:#c9a45a;color:#1b1330;font-weight:700}body.deco2 #act{display:none!important}';document.head.appendChild(st)}
 openDeco=(od=>function(){if(M&&M.room2){DECO2.on=!DECO2.on;DECO2.sel=null;DECO2.hold=null;try{P.path=null}catch(e){}deco2UI();return}return od.apply(this,arguments)})(openDeco);
-addEventListener('pointerdown',e=>{try{if(!DECO2.on||!M||!M.room2)return;const cv=document.getElementById('c');if(e.target!==cv)return;const r=cv.getBoundingClientRect(),dq=devicePixelRatio||1;e.stopImmediatePropagation();e.preventDefault();deco2Tap((e.clientX-r.left)*dq/SC+camX,(e.clientY-r.top)*dq/SC+camY)}catch(_){}} ,true);
+addEventListener('pointerdown',e=>{try{if(!DECO2.on||!M||!M.room2)return;const cv=document.getElementById('c');if(e.target!==cv)return;const r=cv.getBoundingClientRect(),dq=devicePixelRatio||1;e.stopImmediatePropagation();e.preventDefault();if(typeof deco160Down==='function')deco160Down(e,null);else deco2Tap((e.clientX-r.left)*dq/SC+camX,(e.clientY-r.top)*dq/SC+camY)}catch(_){}} ,true);
 {const _gm38=goMap;goMap=function(){if(DECO2.on){DECO2.on=false;DECO2.sel=null;DECO2.hold=null;try{deco2UI()}catch(e){}}return _gm38.apply(this,arguments)}}
 // the chosen piece: a dashed yellow frame round its floor footprint; in store-taking mode nothing is framed
 function deco2Draw(){if(!DECO2.on||!M||!M.room2||DECO2.sel==null)return;const it=M.layout2[DECO2.sel];if(!it)return;const [x0,y0,x1,y1]=f2Rect(it),dy=ROOM2.rowsAbovePlan,tm=performance.now()/1000;
@@ -4881,4 +4881,161 @@ function crystalBarrierDome163(tm){if(!M||(M.crystals||[]).length===0)return;ctx
   ctx.save();ctx.beginPath();ctx.rect(x-R-2,y-R*1.7,R*2+4,R*1.7+2);ctx.clip();const g=ctx.createLinearGradient(x,y-R*1.6,x,y);g.addColorStop(0,'rgba(165,239,250,.055)');g.addColorStop(.7,'rgba(165,239,250,.025)');g.addColorStop(1,'rgba(165,239,250,0)');ctx.fillStyle=g;ctx.strokeStyle='rgba(174,242,255,.11)';ctx.lineWidth=.8;ctx.beginPath();ctx.ellipse(x,y-14,R,R*1.35,0,Math.PI,Math.PI*2);ctx.lineTo(x+R,y);ctx.lineTo(x-R,y);ctx.closePath();ctx.fill();ctx.stroke();ctx.restore()}
  ctx.restore()}
 {const old=render;render=function(tm){const r=old.apply(this,arguments);crystalBarrierDome163(tm);return r}}
+// ================= 1.60 ROOM GRID / MOUSE AND LONG-PRESS DRAG =================
+const D160={gesture:null,preview:null,lastKey:'',skipClick:0,pauseOwned:false};
+Object.assign(TX.th,{drag160Pick:'แตะค้างหรือคลิกค้าง แล้วลากวาง',drag160Hint:'เขียว: วางได้ · แดง: วางไม่ได้',drag160Cancel:'ยกเลิก',drag160Floor:'ลากกลับมาที่พื้น',drag160Yes:'วางได้',drag160No:'วางไม่ได้'});
+Object.assign(TX.en,{drag160Pick:'Hold a piece and drag to place it',drag160Hint:'Green: can place · Red: cannot place',drag160Cancel:'Cancel',drag160Floor:'Drag back onto the floor',drag160Yes:'Can place',drag160No:'Cannot place'});
+function deco160Ready(){return !!(DECO2.on&&M&&M.room2&&$('modal').classList.contains('hide'))}
+function deco160Point(e){const r=cv.getBoundingClientRect(),q=(devicePixelRatio||1)/SC;return {x:(e.clientX-r.left)*q/T+camX/T,y:(e.clientY-r.top)*q/T+camY/T-ROOM2.rowsAbovePlan,q}}
+function deco160Valid(it,skip){const er=f2Valid(it,skip);if(er)return er;
+ const solid=new Set(M.SOLID);for(const k of M._fs||[])solid.delete(k);
+ const add=a=>{if(ROOM2.solid[a[0]]===0)return;const v=f2View(a[0],a[1]),x=a[2],y=a[3]+ROOM2.rowsAbovePlan;
+  for(let j=Math.floor(y);j<=Math.floor(y+v[7]-.01);j++)for(let i=Math.floor(x);i<=Math.floor(x+v[6]-.01);i++){
+   const ax=Math.min(i+1,x+v[6])-Math.max(i,x),ay=Math.min(j+1,y+v[7])-Math.max(j,y);if(ax*ay>=.4)solid.add(key(i,j))}};
+ for(const f of M.r2.fixed||[])add(f);for(const a of M.layout2)if(a!==skip)add(a);add(it);
+ const sim={...M,SOLID:solid};return !walkable(sim,Math.floor(P.x/T),Math.floor(P.y/T))||!f2Reach(sim)?'d2Block':''}
+function deco160Preview(e,g){const p=deco160Point(e),src=g?g.source:(DECO2.hold?[DECO2.hold,0,0,0]:M.layout2[DECO2.sel]);if(!src)return;
+ const v=f2View(src[0],src[1]),ox=g?g.ox:v[6]/2,oy=g?g.oy:v[7]/2,lift=g&&g.touch&&g.active?54*p.q/T:0;
+ const it=[src[0],src[1],f2Snap(p.x-ox),f2Snap(p.y-oy-lift)],skip=g?g.skip:(DECO2.hold?null:M.layout2[DECO2.sel]);
+ const over=document.elementFromPoint(e.clientX,e.clientY)===cv,k=[M.id,it.join(','),M.layout2.indexOf(skip),Math.floor(P.x/T),Math.floor(P.y/T),over].join('|');
+ if(k!==D160.lastKey){D160.lastKey=k;D160.preview={it,skip,er:over?deco160Valid(it,skip):'drag160Floor'};const s=$('deco160Status');if(s){s.textContent=t(D160.preview.er?'drag160No':'drag160Yes');s.dataset.valid=D160.preview.er?'no':'yes'}}
+}
+function deco160Reset(){const g=D160.gesture;if(g){clearTimeout(g.timer);try{if(cv.hasPointerCapture(g.id))cv.releasePointerCapture(g.id)}catch(e){}}
+ D160.gesture=null;D160.preview=null;D160.lastKey='';document.body.classList.remove('deco160-drag');
+ if(D160.pauseOwned){PAUSE=D160.wasPause;D160.pauseOwned=false}const s=$('deco160Status');if(s){s.textContent='';delete s.dataset.valid}}
+function deco160Begin(g){if(D160.gesture!==g||!deco160Ready())return;g.active=true;D160.wasPause=PAUSE;D160.pauseOwned=true;PAUSE=true;P.path=null;
+ document.body.classList.add('deco160-drag');deco160Preview(g.last,g)}
+function deco160Down(e,inventory){if(!deco160Ready()||e.button>0)return;if(D160.gesture){deco160Reset();return}
+ const p=deco160Point(e),hit=inventory?-1:deco2Hit(p.x,p.y);let src,skip=null;
+ if(inventory)src=[inventory.dataset.k,0,0,0];else if(DECO2.hold)src=[DECO2.hold,0,0,0];else if(hit>=0){DECO2.sel=hit;skip=M.layout2[hit];src=skip;deco2UI()}
+
+ if(!src)return;const v=f2View(src[0],src[1]),fromPiece=!inventory&&!DECO2.hold&&hit>=0;
+ const g={id:e.pointerId,source:src.slice(),skip,inventory,startX:e.clientX,startY:e.clientY,last:e,touch:e.pointerType==='touch',active:false,
+  ox:fromPiece?p.x-src[2]:v[6]/2,oy:fromPiece?p.y-src[3]:v[7]/2,scrollStart:inventory?inventory.parentElement.scrollTop:0,cancelled:false,scrolling:false,moved:false};D160.gesture=g;D160.preview=null;D160.lastKey='';
+ try{cv.setPointerCapture(e.pointerId)}catch(err){}if(g.touch)g.timer=setTimeout(()=>deco160Begin(g),240);
+}
+function deco160Finish(e,cancel){const g=D160.gesture;if(!g||g.id!==e.pointerId)return;
+ e.stopImmediatePropagation();e.preventDefault();clearTimeout(g.timer);let preview=null;
+ if(g.active&&!cancel){deco160Preview(e,g);preview=D160.preview}
+ const active=g.active&&(!g.touch||g.moved);deco160Reset();D160.skipClick=performance.now()+400;
+ if(cancel||g.cancelled)return;
+ if(!active){if(g.touch&&Math.hypot(e.clientX-g.startX,e.clientY-g.startY)>8)return;if(g.inventory&&g.inventory.isConnected)g.inventory.click();else {const p=deco160Point(e);if(DECO2.hold||deco2Hit(p.x,p.y)>=0)deco2Tap(p.x*T,(p.y+ROOM2.rowsAbovePlan)*T)}return}
+ if(!preview||preview.er){say(t(preview&&preview.er||'drag160Floor'));deco2UI();return}
+ const it=preview.it,i=g.skip?M.layout2.indexOf(g.skip):-1;
+ if(g.skip&&i<0)return;
+ if(!g.skip&&!((HOME.get().furn2||{})[it[0]]>0)){deco2UI();return}
+ const okay=f2Apply((lay,h)=>{if(g.skip){lay[i][2]=it[2];lay[i][3]=it[3]}else{
+  if(!(h.furn2[it[0]]>0))return;lay.push(it);h.furn2[it[0]]--;if(h.furn2[it[0]]<=0)delete h.furn2[it[0]]}});
+ if(okay){DECO2.sel=g.skip?i:M.layout2.length-1;DECO2.hold=null;sfx('pick')}else say(t('d2Block'));deco2UI();
+}
+addEventListener('pointerdown',e=>{if(!deco160Ready())return;const b=e.target.closest&&e.target.closest('#deco2 [data-k]');if(!b)return;
+ e.stopImmediatePropagation();e.preventDefault();deco160Down(e,b)},true);
+addEventListener('pointermove',e=>{if(!deco160Ready())return;const g=D160.gesture;
+ if(g){if(e.pointerId!==g.id)return;e.stopImmediatePropagation();e.preventDefault();g.last=e;
+  if(g.touch&&!g.active&&(g.scrolling||Math.hypot(e.clientX-g.startX,e.clientY-g.startY)>8)){clearTimeout(g.timer);g.cancelled=true;if(g.inventory){g.scrolling=true;g.inventory.parentElement.scrollTop=g.scrollStart-(e.clientY-g.startY)}return}
+  if(!g.active&&!g.touch&&Math.hypot(e.clientX-g.startX,e.clientY-g.startY)>6)deco160Begin(g);
+  if(g.active){if(Math.hypot(e.clientX-g.startX,e.clientY-g.startY)>8)g.moved=true;deco160Preview(e,g)}
+ }}, {capture:true,passive:false});
+addEventListener('pointerup',e=>deco160Finish(e,false),{capture:true,passive:false});
+addEventListener('pointercancel',e=>deco160Finish(e,true),{capture:true,passive:false});
+addEventListener('click',e=>{if(e.isTrusted&&performance.now()<D160.skipClick&&(e.target===cv||e.target.closest&&e.target.closest('#deco2 [data-k]'))){e.stopImmediatePropagation();e.preventDefault()}},true);
+addEventListener('keydown',e=>{if(!D160.gesture)return;if(e.key==='Escape'){e.stopImmediatePropagation();e.preventDefault();deco160Reset();deco2UI()}},true);
+addEventListener('lostpointercapture',e=>{if(D160.gesture&&D160.gesture.id===e.pointerId)deco160Reset()},true);
+addEventListener('contextmenu',e=>{if(deco160Ready())e.preventDefault()});
+addEventListener('blur',()=>deco160Reset());addEventListener('resize',()=>deco160Reset());
+document.addEventListener('visibilitychange',()=>{if(document.hidden)deco160Reset()});
+{const old=openDeco;openDeco=function(){deco160Reset();return old.apply(this,arguments)}}
+{const old=goMap;goMap=function(){deco160Reset();return old.apply(this,arguments)}}
+{const old=modal;modal=function(){deco160Reset();return old.apply(this,arguments)}}
+{const old=deco2UI;deco2UI=function(){if(!DECO2.on)deco160Reset();const r=old.apply(this,arguments),d=$('deco2');if(!d)return r;
+ const hint=document.createElement('div');hint.className='deco160-hint';hint.innerHTML='<span>'+t('drag160Hint')+'</span><b id="deco160Status" aria-live="polite"></b>';d.append(hint);
+ if(DECO2.sel!=null||DECO2.hold){const b=document.createElement('button');b.dataset.a='cancel160';b.textContent=t('drag160Cancel');b.onclick=()=>{deco160Reset();DECO2.sel=null;DECO2.hold=null;deco2UI()};d.querySelector('.d2tools').append(b)}
+ return r}}
+deco2Draw=function(){if(!deco160Ready())return;ctx.save();charClip();const dy=ROOM2.rowsAbovePlan;
+ // A quiet floor grid, clipped to actual floor tiles rather than the walls.
+ ctx.strokeStyle='#ffedc126';ctx.lineWidth=.7;for(const k of M.FLOOR){const [x,y]=k.split(',').map(Number);ctx.strokeRect(x*T-camX+.5,y*T-camY+.5,T,T)}
+ const pr=D160.preview,it=pr?pr.it:DECO2.sel!=null?M.layout2[DECO2.sel]:null;if(!it){ctx.restore();return}
+ const v=f2View(it[0],it[1]),[x0,y0,x1,y1]=f2Rect(it),col=pr&&pr.er?'#f56e79':'#65dfa0';ctx.fillStyle=col;ctx.strokeStyle=col;ctx.lineWidth=1.3;
+ for(let y=y0;y<y1-.01;y+=1)for(let x=x0;x<x1-.01;x+=1){const w=Math.min(1,x1-x)*T,h=Math.min(1,y1-y)*T,sx=x*T-camX,sy=(y+dy)*T-camY;
+  ctx.globalAlpha=.25;ctx.fillRect(sx+1,sy+1,w-2,h-2);ctx.globalAlpha=.95;ctx.strokeRect(sx+.5,sy+.5,w-1,h-1);
+  if(pr&&pr.er){ctx.beginPath();ctx.moveTo(sx+4,sy+4);ctx.lineTo(sx+w-4,sy+h-4);ctx.moveTo(sx+w-4,sy+4);ctx.lineTo(sx+4,sy+h-4);ctx.stroke()}}
+ if(pr){const im=IMG[(ROOM2.sheet||{})[it[0]]||'furnPlain'];if(im){ctx.globalAlpha=D164.rotation?.85:.68;ctx.imageSmoothingEnabled=false;ctx.drawImage(im,v[0],v[1],v[2],v[3],Math.round(it[2]*T-v[4]-camX),Math.round((it[3]+dy)*T-v[5]-camY),v[2],v[3])}}
+ ctx.globalAlpha=1;ctx.strokeStyle=col;ctx.lineWidth=2;ctx.strokeRect(x0*T-camX,(y0+dy)*T-camY,(x1-x0)*T,(y1-y0)*T);ctx.restore();
+}
+{const st=document.createElement('style');st.textContent=`body.deco2 #c{touch-action:none;cursor:grab}body.deco160-drag #c{cursor:grabbing}body.deco160-drag #deco2 .d2inventory{display:none}body.deco2 #deco2 [data-k]{touch-action:none}
+ .deco160-hint{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;font-size:12px;line-height:1.4;color:#e5d8bb}.deco160-hint b[data-valid=yes]{color:#65dfa0}.deco160-hint b[data-valid=no]{color:#f56e79}`;document.head.append(st)}
+
+
+// ================= 1.64 HOUSE GRID: floating rotation preview / explicit confirmation =================
+const D164={rotation:null,gridKey:'',cells:[]};
+Object.assign(TX.th,{d2Pick:'คลิกค้าง / แตะค้าง แล้วลากของ',drag160Hint:'✓ เขียว วางได้ · × แดง วางไม่ได้',angle164:'ยืนยัน',cancel164:'ยกเลิกมุม',one164:'ชิ้นนี้มีมุมเดียว',pending164:'เลือกมุมแล้วกดยืนยัน'});
+Object.assign(TX.en,{d2Pick:'Hold a piece, then drag it',drag160Hint:'✓ Green: can place · × Red: blocked',angle164:'Confirm',cancel164:'Cancel angle',one164:'One view available',pending164:'Choose a view, then confirm'});
+function deco164Clear(){D164.rotation=null;D164.gridKey='';$('deco164')?.remove()}
+function deco164Turn(){const cur=M.layout2[DECO2.sel];if(!cur)return;const n=ROOM2.pieces[cur[0]].length;if(n<2)return;
+ const from=D164.rotation?.ref===cur?D164.rotation.it:cur,v=f2View(cur[0],cur[1]),r=(from[1]+1)%n,v2=f2View(cur[0],r);
+ const it=[cur[0],r,f2Snap(cur[2]+v[6]/2-v2[6]/2),f2Snap(cur[3]+v[7]/2-v2[7]/2)];
+ D164.rotation={ref:cur,it,er:deco160Valid(it,cur)};D164.gridKey='';deco2UI();sfx('pick');
+}
+function deco164Confirm(){const draft=D164.rotation;if(!draft)return;const i=M.layout2.indexOf(draft.ref);if(i<0){deco164Clear();return}
+ const er=deco160Valid(draft.it,draft.ref);if(er){say(t(er));return}
+ const it=draft.it;if(f2Apply(lay=>{lay[i][1]=it[1];lay[i][2]=it[2];lay[i][3]=it[3]})){deco164Clear();sfx('pick')}else{deco164Clear();say(t('d2TurnNo'))}deco2UI();
+}
+function deco164Position(){const d=$('deco164');if(!d)return;
+ if(!deco160Ready()||D160.gesture?.active){d.hidden=true;return}d.hidden=false;
+ const it=M.layout2[DECO2.sel];if(!it){d.hidden=true;return}const v=f2View(it[0],it[1]),r=cv.getBoundingClientRect(),scale=SC/(devicePixelRatio||1),b=d.getBoundingClientRect();
+ const x=((it[2]+v[6]/2)*T-camX)*scale+r.left,y=((it[3]+ROOM2.rowsAbovePlan)*T-v[5]-camY)*scale+r.top;
+ const bar=$('deco2')?.getBoundingClientRect(),bottom=Math.min(innerHeight-8,bar?bar.top-8:innerHeight-8);
+ d.style.left=Math.round(Math.max(8,Math.min(innerWidth-b.width-8,x-b.width/2)))+'px';
+ const above=y-b.height-10,below=((it[3]+ROOM2.rowsAbovePlan+v[7])*T-camY)*scale+r.top+10;
+ d.style.top=Math.round(Math.max(8,Math.min(bottom-b.height,above>=8?above:below)))+'px';
+}
+{const old=deco2UI;deco2UI=function(){const ref=M?.layout2?.[DECO2.sel];if(!DECO2.on||D164.rotation&&D164.rotation.ref!==ref)deco164Clear();$('deco164')?.remove();const r=old.apply(this,arguments);
+ const bar=$('deco2');if(!bar||!ref||DECO2.hold)return r;
+ const d=document.createElement('div');d.id='deco164';d.setAttribute('role','group');d.setAttribute('aria-label',f2name(ref[0]));
+ const title=document.createElement('div');title.className='angle164-title';title.textContent=f2name(ref[0]);d.append(title);
+ const row=document.createElement('div');row.className='angle164-buttons';d.append(row);
+ const turn=bar.querySelector('[data-a=turn]'),store=bar.querySelector('[data-a=store]');
+ if(turn){turn.onclick=deco164Turn;turn.disabled=ROOM2.pieces[ref[0]].length<2;turn.title=turn.disabled?t('one164'):t('d2Turn');row.append(turn)}
+ if(store){store.onclick=()=>{deco164Clear();deco2Store()};row.append(store)}
+ const pending=D164.rotation;
+ if(pending){const ok=document.createElement('button');ok.id='confirm164';ok.className='ok';ok.textContent='✓ '+t('angle164');ok.disabled=!!pending.er;ok.onclick=deco164Confirm;row.append(ok);
+ const no=document.createElement('button');no.id='cancel164';no.textContent='× '+t('cancel164');no.onclick=()=>{deco164Clear();deco2UI()};row.append(no);
+ const hint=document.createElement('div');hint.className='angle164-status';hint.setAttribute('aria-live','polite');hint.textContent=pending.er?t(pending.er):t('pending164');hint.dataset.valid=pending.er?'no':'yes';d.append(hint)}
+ document.body.append(d);deco164Position();return r}}
+// Moving or opening another panel discards an unconfirmed angle. A save is only written by Confirm.
+{const old=deco160Down;deco160Down=function(e,inv){if(!deco160Ready())return;deco164Clear();return old(e,inv)}}
+// Keep the legacy turn API for scripted callers; player controls use the preview above.
+{const old=openDeco;openDeco=function(){deco164Clear();return old.apply(this,arguments)}}
+{const old=goMap;goMap=function(){deco164Clear();return old.apply(this,arguments)}}
+{const old=modal;modal=function(){deco164Clear();return old.apply(this,arguments)}}
+addEventListener('keydown',e=>{if(e.key==='Escape'&&D164.rotation){e.preventDefault();deco164Clear();deco2UI()}},true);
+function deco164Grid(){const chosen=D164.rotation?.it||(DECO2.hold?[DECO2.hold,0,0,0]:M.layout2[DECO2.sel]),skip=DECO2.hold?null:M.layout2[DECO2.sel];
+ const signature=[M.id,JSON.stringify(M.layout2),chosen?.slice(0,2),DECO2.sel,Math.floor(P.x/T),Math.floor(P.y/T)].join('|');
+ if(signature!==D164.gridKey){D164.gridKey=signature;D164.cells=[];
+  // A cell marks a candidate footprint's top-left corner. Recompute only when layout/selection changes.
+  for(let y=0;y<M.r2.grid.length;y++)for(let x=0;x<M.w;x++){
+   if(!M.FLOOR.has(key(x,y+ROOM2.rowsAbovePlan)))continue;
+   let blocked;if(chosen)blocked=!!deco160Valid([chosen[0],chosen[1],x,y],skip);
+   else blocked=!walkable(M,x,y+ROOM2.rowsAbovePlan)||(M.r2.noPlace||[]).some(a=>f2Hits([x,y,x+1,y+1],a))||'# PE+'.includes((M.r2.grid[y]||'')[x]||'#');
+   D164.cells.push([x,y,blocked]);
+  }
+ }
+ for(const [x,y,no] of D164.cells){const sx=x*T-camX,sy=(y+ROOM2.rowsAbovePlan)*T-camY;if(sx+T<0||sy+T<0||sx>cv.width/SC||sy>cv.height/SC)continue;
+ ctx.fillStyle=no?'#ed6675':'#65dfa0';ctx.strokeStyle=ctx.fillStyle;ctx.globalAlpha=no?.16:.10;ctx.fillRect(sx+1,sy+1,T-2,T-2);ctx.globalAlpha=.43;ctx.lineWidth=.7;ctx.strokeRect(sx+.5,sy+.5,T-1,T-1);
+ if(no){ctx.globalAlpha=.5;ctx.beginPath();ctx.moveTo(sx+T/2-3,sy+T/2-3);ctx.lineTo(sx+T/2+3,sy+T/2+3);ctx.moveTo(sx+T/2+3,sy+T/2-3);ctx.lineTo(sx+T/2-3,sy+T/2+3);ctx.stroke()}}
+ ctx.globalAlpha=1;
+}
+{const old=deco2Draw;deco2Draw=function(){deco164Position();if(!deco160Ready())return;ctx.save();charClip();deco164Grid();ctx.restore();
+ const saved=D160.preview;if(!saved&&D164.rotation)D160.preview={...D164.rotation,skip:D164.rotation.ref};try{old()}finally{D160.preview=saved}}}
+{const st=document.createElement('style');st.textContent=`
+ #deco164{position:fixed;z-index:27;max-width:calc(100vw - 16px);width:max-content;padding:7px 9px;background:linear-gradient(145deg,#392840f5,#20172cf5);border:1px solid #c6a05f;border-radius:9px;box-shadow:0 4px 18px #0008;color:#faedce;box-sizing:border-box}
+ #deco164[hidden]{display:none}#deco164 .angle164-title{text-align:center;font-size:12px;margin-bottom:5px;color:#efd391}
+ #deco164 .angle164-buttons{display:flex;justify-content:center;gap:6px;flex-wrap:wrap}#deco164 button{min-width:64px;min-height:48px;padding:7px 10px;font-size:13px;border:1px solid #a98a58;border-radius:6px;background:#443052;color:#fff2d9;display:flex;align-items:center;justify-content:center;gap:5px}
+ #deco164 button.ok{background:#d2b478;color:#21172d;font-weight:700}#deco164 button:disabled{opacity:.45}#deco164 canvas{width:22px;height:22px}#deco164 .angle164-status{font-size:11px;text-align:center;margin-top:5px;max-width:300px}#deco164 [data-valid=no]{color:#ff9b9f}#deco164 [data-valid=yes]{color:#8fe5b5}
+ body.deco2 #deco2{max-height:62dvh}body.deco2 #deco2 .d2inventory:has(button){min-height:58px}body.deco2 #deco2 .d2t{max-width:100%;white-space:normal}body.deco160-drag #deco164,body.deco160-drag #deco2 .d2t,body.deco160-drag #deco2 [data-a=shop]{display:none}
+ `;document.head.append(st)}
+
+// Only the candidate sprite is drawn while previewing; collision and saved layout stay untouched.
+{const old=drawObj;drawObj=function(o,tm){if(deco160Ready()&&o.room2&&(D164.rotation?.ref===o.room2||D160.gesture?.active&&D160.gesture.skip===o.room2))return;return old.apply(this,arguments)}}
+
 </script></body></html>

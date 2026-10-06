@@ -28,6 +28,7 @@ farm: `G9`, `g9b*` functions · house inside: `ROOM2` (data from `furn-plain.jso
 npm install            # only for puppeteer
 python3 -m http.server 8775 &
 PORT=8775 node test_148_rings.js      # every suite prints one JSON line, then "errors N"
+npm run test:house-grid # Codex160 drag + Codex164 floating rotation (real mouse/touch)
 npm run test:house     # the house suites        npm run test:farm   # the farm suites
 npm run test:ui        # PC/touch layouts, purple-gold menus, inventory scrolling, sounds, missing icons and BUG-11 book tabs, equipment previews and consumables
 npm run test:bugs      # BUG-1–6 regressions: entrance, resize, requests/fallbacks, fishing, sitting and portable launch settings
@@ -115,3 +116,5 @@ Question bank status: **paused at age 9 by the owner (5 Oct 2026)**. Age 9 has a
 
 ## Never
 - Never commit tokens or passwords. Never delete `art-*.png` sources or the guide scripts. Never ship without running the suites.
+
+- Version 1.64 house arranging: D160 handles mouse drag / 240ms touch hold, a 54 CSS px lifted touch preview, inventory scrolling, cancellation and transactional drops. D164 draws cached green/red candidate cells and floats rotate/store controls near the selected piece (48px targets). Rotation is a separate draft; Confirm validates and saves, Cancel/Done/map or modal transitions discard the draft. The original sprite is suppressed only while drawing a candidate; no save/map collision mutation during previews. `deco2Turn` remains the legacy immediate API; actual player buttons use `deco164Turn` + `deco164Confirm`. Grid cells mark candidate footprint top-left positions when a piece is selected; the moving footprint is the exact placement verdict. Existing half-tile snapping and saves remain compatible. `test_160_room_drag.js` and `test_164_house_grid.js` belong to Codex. Mobile gameplay remains landscape; portrait shows the existing rotate-phone screen.

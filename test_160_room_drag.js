@@ -1,0 +1,65 @@
+// Real mouse holds and CDP touch holds: preview colours, transactional drops and cancellation.
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),puppeteer=require('puppeteer');
+const sleep=ms=>new Promise(r=>setTimeout(r,ms)),out=process.env.OUT_DIR||'/tmp/leah-room-drag-160';fs.mkdirSync(out,{recursive:true});
+async function state(pg){return pg.evaluate(()=>({layout:JSON.stringify(M.layout2),saved:JSON.stringify(HOME.get()[M.layKey]),stock:JSON.stringify(HOME.get().furn2||{}),preview:D160.preview&&{it:D160.preview.it,er:D160.preview.er},active:!!D160.gesture?.active,paused:PAUSE,hold:DECO2.hold}))}
+async function scr(pg,wx,wy){return pg.evaluate(([x,y])=>{const r=cv.getBoundingClientRect(),d=devicePixelRatio||1;return [(x*T-camX)*SC/d+r.left,((y+ROOM2.rowsAbovePlan)*T-camY)*SC/d+r.top]},[wx,wy])}
+async function points(pg,touch,condition,index){return pg.evaluate(({touch,condition,index})=>{
+ const ix=index??M.layout2.findIndex(a=>a[0]==='plant'),a=M.layout2[ix],v=f2View(a[0],a[1]),r=cv.getBoundingClientRect(),d=devicePixelRatio||1;
+ const xy=(x,y,lift)=>[(x*T-camX)*SC/d+r.left,((y+ROOM2.rowsAbovePlan)*T-camY)*SC/d+r.top+(lift?54:0)];
+ const visible=p=>p[0]>6&&p[1]>6&&p[0]<innerWidth-6&&p[1]<innerHeight-6&&document.elementFromPoint(...p)===cv;
+ let from=null;for(const oy of [v[7]/2,.2,-.4,-.8]){const p=xy(a[2]+v[6]/2,a[3]+oy,false);if(visible(p)&&deco2Hit(a[2]+v[6]/2,a[3]+oy)===ix){from={p,ox:v[6]/2,oy};break}}if(!from)return {error:'source not visible',a};
+ for(let y=0;y<M.r2.grid.length;y+=.5)for(let x=0;x<M.w;x+=.5){const it=[a[0],a[1],x,y],p=xy(x+from.ox,y+from.oy,touch);if(!visible(p)||Math.hypot(x-a[2],y-a[3])<1)continue;
+  const quick=f2Valid(it,a),er=quick||deco160Valid(it,a),px=P.x/T,py=P.y/T-ROOM2.rowsAbovePlan;
+  const ok=condition==='valid'?!er:condition==='player'?er==='d2Block'&&x<=px&&px<x+v[6]&&y<=py&&py<y+v[7]:condition==='path'?quick===''&&er==='d2Block'&&Math.hypot(x-px,y-py)>3:er===condition;
+  if(ok)return {index:ix,from:from.p,to:p,it,ox:from.ox,oy:from.oy};
+ }return {error:'no visible '+condition,a,from,player:[P.x/T,P.y/T-ROOM2.rowsAbovePlan],probe:[6,6.5].map(y=>{const p=xy(P.x/T+from.ox,y+from.oy,touch);return {y,p,top:document.elementFromPoint(...p)?.outerHTML.slice(0,150),er:deco160Valid([a[0],a[1],P.x/T,y],a)}})};
+ },{touch,condition,index})}
+async function press(pg,sel,touch){const e=await pg.$(sel);assert(e,sel);await e.scrollIntoView();if(touch)await pg.tap(sel);else await pg.click(sel);await sleep(120)}
+async function down(pg,cdp,p,touch){if(touch)await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:p[0],y:p[1],id:1}]});else{await pg.mouse.move(...p);await pg.mouse.down()}}
+async function move(pg,cdp,a,b,touch){if(touch){for(let i=1;i<=10;i++){await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:a[0]+(b[0]-a[0])*i/10,y:a[1]+(b[1]-a[1])*i/10,id:1}]});await sleep(15)}}else await pg.mouse.move(...b,{steps:12});await sleep(180)}
+async function up(pg,cdp,touch,cancel=false){if(touch)await cdp.send('Input.dispatchTouchEvent',{type:cancel?'touchCancel':'touchEnd',touchPoints:[]});else await pg.mouse.up();await sleep(150)}
+async function colour(pg){return pg.evaluate(()=>{const p=D160.preview;if(!p)return {green:0,red:0};const a=p.it,v=f2View(a[0],a[1]),x=Math.max(0,Math.floor((a[2]*T-camX)*SC)),y=Math.max(0,Math.floor(((a[3]+ROOM2.rowsAbovePlan)*T-camY)*SC));
+ const w=Math.min(cv.width-x,Math.ceil(v[6]*T*SC)),h=Math.min(cv.height-y,Math.ceil(v[7]*T*SC));if(w<=0||h<=0)return {green:0,red:0};const data=ctx.getImageData(x,y,w,h).data;let green=0,red=0;
+ for(let i=0;i<data.length;i+=4){if(data[i+1]>data[i]+45&&data[i+1]>data[i+2]+25)green++;if(data[i]>data[i+1]+75&&data[i]>data[i+2]+65)red++}return {green,red};})}
+(async()=>{const browser=await puppeteer.launch({executablePath:process.env.CHROME_EXE,args:['--no-sandbox']}),results={};
+ let lastPg=null;try{for(const [tag,width,height,touch] of [['pc',1366,768,false],['phone',812,375,true],['small',667,375,true]]){
+  const ctx=await browser.createBrowserContext(),pg=await ctx.newPage(),errors=[];lastPg=pg;await pg.setViewport({width,height,isMobile:touch,hasTouch:touch,deviceScaleFactor:touch?2:1});pg.on('pageerror',e=>errors.push(e.message));const cdp=await pg.target().createCDPSession();
+  await pg.goto('http://localhost:'+(process.env.PORT||8775)+'/?gm',{waitUntil:'load'});await pg.waitForFunction(()=>!$('load')&&ROOM2,{timeout:40000});
+  await pg.evaluate(()=>{gmMakeSlot();S=Store.all().slots[Store.all().cur];S.gmInit=1;S.seen={intro:1};S.snd=S.mus=false;startGame();document.querySelectorAll('#cr,#title,#picker').forEach(e=>e.classList.add('hide'));DLG=null;$('dlg').classList.add('hide');closeModal();goMap('room');const h=HOME.get();h.furn2={plant:2};HOME.put(h);P.x=11*T;P.y=8.5*T;P.path=null;fpsChecks=6;});await sleep(650);
+  await pg.evaluate(()=>{const i=M.layout2.findIndex(a=>a[0]==='plant'),a=M.layout2[i];for(let y=6;y<11;y+=.5)for(let x=8;x<14;x+=.5){const it=[a[0],a[1],x,y];if(!f2Valid(it,a)&&f2Apply(lay=>{lay[i][2]=x;lay[i][3]=y}))return}throw Error('prepare visible movable plant')});await sleep(250);await press(pg,'#bDeco',touch);
+  const r={};let p=await points(pg,touch,'valid');assert(!p.error,JSON.stringify(p));const base=await state(pg);await down(pg,cdp,p.from,touch);await sleep(touch?280:40);if(touch)await pg.waitForFunction(()=>D160.gesture?.active,{timeout:3000});await move(pg,cdp,p.from,p.to,touch);
+  const before=await state(pg),pixels=await colour(pg);assert(before.active);assert.equal(before.preview.er,'');assert.deepEqual(before.preview.it,p.it);assert.equal(before.layout,base.layout);assert.equal(before.saved,base.saved);assert(pixels.green>5,'visible green footprint');await pg.screenshot({path:path.join(out,tag+'-green.png')});await up(pg,cdp,touch);
+  const placed=await state(pg);assert.notEqual(placed.layout,base.layout);assert.equal(placed.layout,placed.saved);assert.equal(placed.stock,base.stock);assert.equal(placed.paused,false);r.greenDrop={greenPixels:pixels.green,saved:true};
+  if(touch){const still=await points(pg,true,'valid',p.index);assert(!still.error,JSON.stringify(still));const held=await state(pg);await down(pg,cdp,still.from,true);await sleep(360);assert((await state(pg)).active);await up(pg,cdp,true);assert.equal((await state(pg)).layout,held.layout);assert.equal((await state(pg)).saved,held.saved);r.holdWithoutMove=true;}
+  for(const reason of ['d2Wall','d2Over','player']){const source=await points(pg,touch,'valid',p.index);assert(!source.error,JSON.stringify(source));const keep=await state(pg);await down(pg,cdp,source.from,touch);await sleep(touch?280:40);if(touch)await pg.waitForFunction(()=>D160.gesture?.active,{timeout:3000});if(!touch)await pg.mouse.move(source.from[0]+7,source.from[1]);p=await points(pg,touch,reason,p.index);assert(!p.error,JSON.stringify(p));await move(pg,cdp,source.from,p.to,touch);const q=await state(pg);assert(q.preview.er);const c=await colour(pg);assert(c.red>5,'visible red footprint '+reason);assert.equal(q.layout,keep.layout);if(reason==='d2Wall')await pg.screenshot({path:path.join(out,tag+'-red.png')});await up(pg,cdp,touch);const after=await state(pg);assert.equal(after.layout,keep.layout);assert.equal(after.saved,keep.saved);assert.equal(after.stock,keep.stock);r[reason]={refused:true,redPixels:c.red};}
+  if(!touch){
+   // A bed can fit on floor tiles while cutting off a room: its preview must still be red.
+   const bedIndex=await pg.evaluate(()=>M.layout2.findIndex(a=>a[0]==='bed'));const source=await points(pg,false,'valid',bedIndex);assert(!source.error,JSON.stringify(source));const keep=await state(pg);
+   await down(pg,cdp,source.from,false);await pg.mouse.move(source.from[0]+7,source.from[1]);const blocked=await points(pg,false,'path',bedIndex);assert(!blocked.error,JSON.stringify(blocked));await move(pg,cdp,source.from,blocked.to,false);
+   assert.equal((await state(pg)).preview.er,'d2Block');const pixels=await colour(pg);assert(pixels.red>5);await up(pg,cdp,false);assert.equal((await state(pg)).layout,keep.layout);assert.equal((await state(pg)).saved,keep.saved);r.pathBlocked={redPixels:pixels.red};
+  }
+  // A cancel must preserve both the piece and its saved position.
+  p=await points(pg,touch,'valid',p.index);assert(!p.error,JSON.stringify(p));let keep=await state(pg);await down(pg,cdp,p.from,touch);await sleep(touch?280:40);if(touch)await pg.waitForFunction(()=>D160.gesture?.active,{timeout:3000});await move(pg,cdp,p.from,p.to,touch);
+  if(touch)await up(pg,cdp,true,true);else{await pg.keyboard.press('Escape');await up(pg,cdp,false)}assert.equal((await state(pg)).layout,keep.layout);assert.equal((await state(pg)).saved,keep.saved);assert.equal((await state(pg)).paused,false);r.cancel=true;
+  // Inventory can be dragged directly into the room; it is consumed only on a valid drop.
+  await press(pg,'#deco2 [data-a="cancel160"]',touch);await pg.evaluate(()=>{P.x=11*T;P.y=8.5*T});await sleep(300);
+  // Releasing an inventory piece over the toolbar must not consume it or press Done.
+  const invReject=await pg.$('#deco2 [data-k="plant"]');await invReject.scrollIntoView();const rb=await invReject.boundingBox(),rf=[rb.x+rb.width/2,rb.y+rb.height/2];keep=await state(pg);
+  await down(pg,cdp,rf,touch);await sleep(touch?280:40);if(touch)await pg.waitForFunction(()=>D160.gesture?.active,{timeout:3000});if(!touch)await pg.mouse.move(rf[0]+7,rf[1]);
+  const doneBox=await (await pg.$('#deco2 [data-a="done"]')).boundingBox();await move(pg,cdp,rf,[doneBox.x+doneBox.width/2,doneBox.y+doneBox.height/2],touch);
+  assert.equal((await state(pg)).preview.er,'drag160Floor');await up(pg,cdp,touch);assert.equal((await state(pg)).layout,keep.layout);assert.equal((await state(pg)).saved,keep.saved);assert.equal((await state(pg)).stock,keep.stock);assert(await pg.evaluate(()=>DECO2.on));r.inventoryRejected=true;
+  const inv=await pg.$('#deco2 [data-k="plant"]');await inv.scrollIntoView();const box=await inv.boundingBox(),from=[box.x+box.width/2,box.y+box.height/2];
+  const dest=await pg.evaluate(touch=>{const v=f2View('plant',0),r=cv.getBoundingClientRect(),d=devicePixelRatio||1;for(let y=1;y<M.r2.grid.length;y+=.5)for(let x=1;x<M.w;x+=.5){const it=['plant',0,x,y],p=[((x+v[6]/2)*T-camX)*SC/d+r.left,((y+v[7]/2+ROOM2.rowsAbovePlan)*T-camY)*SC/d+r.top+(touch?54:0)];if(p[0]>5&&p[1]>5&&p[0]<innerWidth-5&&p[1]<innerHeight-5&&document.elementFromPoint(...p)===cv&&!deco160Valid(it,null))return {it,to:p}}},touch);assert(dest,'visible inventory drop');keep=await state(pg);await down(pg,cdp,from,touch);await sleep(touch?280:40);if(touch)await pg.waitForFunction(()=>D160.gesture?.active,{timeout:3000});await move(pg,cdp,from,dest.to,touch);assert.equal((await state(pg)).stock,keep.stock);assert.equal((await state(pg)).preview.er,'');await up(pg,cdp,touch);const afterInv=await state(pg);assert.equal(JSON.parse(afterInv.layout).length,JSON.parse(keep.layout).length+1);assert.equal(JSON.parse(afterInv.stock).plant,JSON.parse(keep.stock).plant-1);assert.equal(afterInv.layout,afterInv.saved);r.inventoryDrag=true;
+  // The normal tap path still selects a piece and supports rotate/store controls.
+  await press(pg,'#deco164 [data-a="store"]',touch);assert.equal(JSON.parse((await state(pg)).stock).plant,2);r.store=true;
+  if(touch){
+   // A quick swipe scrolls a long inventory instead of moving/consuming its first piece.
+   await pg.evaluate(()=>{const h=HOME.get();for(const k of Object.keys(F2N.th))h.furn2[k]=2;HOME.put(h);deco2UI()});await sleep(100);
+   const item=await pg.$('#deco2 [data-k]');const ib=await item.boundingBox(),ip=[ib.x+ib.width/2,ib.y+ib.height/2];keep=await state(pg);await down(pg,cdp,ip,true);
+   await move(pg,cdp,ip,[ip[0],ip[1]-50],true);await up(pg,cdp,true);const scrolled=await pg.evaluate(()=>document.querySelector('#deco2 .d2inventory').scrollTop);
+   assert(scrolled>20,'inventory scroll survived touch gesture');assert.equal((await state(pg)).layout,keep.layout);assert.equal((await state(pg)).stock,keep.stock);assert.equal((await state(pg)).saved,keep.saved);r.quickSwipe={scrollTop:scrolled};
+  }
+  await press(pg,'#deco2 [data-a="done"]',touch);const saved=await pg.evaluate(()=>JSON.stringify(HOME.get().room2));await pg.reload({waitUntil:'load'});await pg.waitForFunction(()=>!$('load'),{timeout:40000});assert.equal(await pg.evaluate(()=>JSON.stringify(HOME.get().room2)),saved);assert.deepEqual(errors,[]);r.reload=true;r.errors=0;results[tag]=r;await ctx.close();
+ }console.log(JSON.stringify(results));console.log('errors 0');
+ }catch(e){console.error(e);if(lastPg){console.log(await lastPg.evaluate(()=>({player:[P.x/T,P.y/T-ROOM2.rowsAbovePlan],size:[innerWidth,innerHeight],cam:[camX,camY],plant:M.layout2.find(a=>a[0]==='plant'),plantView:f2View('plant',0),layout:M.layout2,preview:D160.preview&&D160.preview.it})));await lastPg.screenshot({path:path.join(out,'failure.png')})}process.exitCode=1}finally{await browser.close()}
+})();
