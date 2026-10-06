@@ -86,7 +86,7 @@ Question bank status: **paused at age 9 by the owner (5 Oct 2026)**. Age 9 has a
 - `GDD.md`, `STORY.md`, `ART_DIRECTION.md`, `MAP_PIPELINE.md`, `MAP_SPEC_G9.md`, `MAP_SPEC_H9.md`, `WORLD_ATLAS.md`, `GM_GUIDE.md`, `DEV_GUIDE.md`, `CLAUDE.md`: design and rules written earlier.
 
 ## Open items (5 Oct 2026, version 1.57)
-- Waiting for the owner's answer: remove the Auto (auto-attack) button entirely or keep it on desktop only · what house levels 4-9 give.
+- Waiting for the owner's answer: remove the Auto (auto-attack) button entirely or keep it on desktop only · what house levels 4-9 give. The owner decided on 5 Oct that the house sign must stop selling at level 3; do not refund old higher-level saves yet.
 - Fine furniture exists for 9 pieces; toilet, washstand, plant, round table, rug, wash tub, bookshelf, armchair, double bed have no fine version yet.
 - Skill-slot screen (3 slots round the big button): needs a design first; today there is one weapon skill and two job-skill slots, no pool to choose from.
 - Sitting pose on the slide and on benches, fishing cast pose (PixelLab art). Robot helper: the north-east walk frames are a mirrored stand-in.
@@ -108,6 +108,8 @@ Question bank status: **paused at age 9 by the owner (5 Oct 2026)**. Age 9 has a
 - Version 1.58 keeps the explanation open after two wrong answers until the player presses the full-width 52 px Close button. Disable all four choices when finished to prevent duplicate rewards; crystal waking and rewards retain their original timing. `npm run test:questions` includes `test_158_quiz_close.js` (real ten-second waits and mouse/touch closing) and `test_questions_9.js`. Claude fixed the original whitespace errors; check_questions.py reports ERROR 0 / WARN 92.
 
 - Version 1.61 fixes BUG-16: load only the question-age range supported by questionAgePolicy (currently 6–8 for every player, 15 files). pickQuestion uses that same policy with its original accuracy/level formulas. Boot before player selection uses the existing 60 embedded questions; start/save reload on age or slot changes, with epoch guards against stale results. Missing/corrupt files retain embedded fallback groups. Service-worker installation excludes q-*.json; files are cached when actually requested. test_159_question_loading.js counts real page/worker requests for all seven player ages, changes age/save through buttons, and tests a delayed missing-file response racing a complete newer load. Claude's test_questions_9.js loads its own age-9 fixtures and must not be edited. The three whitespace errors were fixed by Claude; check_questions.py now reports ERROR 0 / WARN 92.
+
+- Version 1.62 fixes farm BUG-7/8/9/10/12/13/14: house sign sells only L2/L3 (rechecks the current level on purchase), displays the price and grants one accurate expansion toast; shed shows g9HouseK()/3. The final plotAct wrapper measures actual pantry gain after skill bonuses. The final clearWild wrapper reports new bed sizes only when clearing changes the plot count. Fish selling labels describe the existing per-type menu and mention only reachable farm/village fishing spots. `npm run test:farm-feedback` adds mouse/touch Thai/English transactions, insufficient funds, L3/4/9 limits, stale offers, produce with existing stock and per-fish selling. Do not refund legacy L4+ saves without an owner decision.
 
 ## Never
 - Never commit tokens or passwords. Never delete `art-*.png` sources or the guide scripts. Never ship without running the suites.

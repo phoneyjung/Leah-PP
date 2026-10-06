@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.61';
+const VERSION='Lantern Academy 1.62';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -872,7 +872,7 @@ function plotState(p){const h=HOME.get(),q=h.plots[p.i];if(!q)return{st:'empty'}
 function plotAct(p){const h=HOME.get(),q=plotState(p);
   if(q.st==='empty'){const own=Object.entries(h.seeds).filter(([,n])=>n>0);if(!own.length){say(t('noSeed'));return}modal(`<h2>🌱 ${t('pickSeed')}</h2><div class="grid">${own.map(([k,n])=>`<button class="it" data-sd="${k}">🌱 ${t('cr_'+k)} ×${n}</button>`).join('')}</div>`);
     document.querySelectorAll('[data-sd]').forEach(b=>b.onclick=()=>{const k=b.dataset.sd,H=HOME.get();H.seeds[k]--;H.plots[p.i]={crop:k,st:'seed',w:false,t:Date.now()};HOME.put(H);closeModal();sfx('dig');say('🌱 '+t('planted'));mission('plant')});return}
-  const Q=h.plots[p.i];if(Q.st==='ripe'){delete h.plots[p.i];h.pantry[Q.crop]=(h.pantry[Q.crop]||0)+(Q.star?3:2);HOME.put(h);bump('harv');mission('harvest');sfx('coin');say('🧺 '+t('got')+' '+t('cr_'+Q.crop)+' ×2');for(let i=0;i<12;i++)FX.push({k:'star',x:p.x,y:p.y-10,vx:(rnd()-.5)*60,vy:-30-rnd()*40,t:0,life:.8});gainExp(6);return}
+  const Q=h.plots[p.i];if(Q.st==='ripe'){delete h.plots[p.i];h.pantry[Q.crop]=(h.pantry[Q.crop]||0)+(Q.star?3:2);HOME.put(h);bump('harv');mission('harvest');sfx('coin');/* 1.62: final plotAct wrapper reports the actual pantry increase. */for(let i=0;i<12;i++)FX.push({k:'star',x:p.x,y:p.y-10,vx:(rnd()-.5)*60,vy:-30-rnd()*40,t:0,life:.8});gainExp(6);return}
   if(!Q.w){Q.w=true;Q.t=Date.now();if(Q.st==='sprout'&&(h.fert||0)>0&&!Q.star){h.fert--;Q.star=1;say('🌟 '+t('fertUsed'))}HOME.put(h);sfx('pick');say('💧 '+t('watered'));for(let i=0;i<10;i++)FX.push({k:'spark',x:p.x+(rnd()-.5)*18,y:p.y-14,vx:(rnd()-.5)*10,vy:30+rnd()*20,t:0,life:.5});return}
   const left=Math.ceil((CROPS[Q.crop].min*60000/2-(Date.now()-Q.t))/60000);say('🌿 '+t('growing')+' ~'+Math.max(1,left)+' '+t('minLeft'))}
 function buffNow(){return S.buff&&S.buff.until>Date.now()?S.buff:null}
@@ -2602,7 +2602,7 @@ function farmRefresh(){if(!M||M.id!=='farm')return;const h=farmSave(),D=FARM_DAT
   if(h.farm.robot&&!M.robot){robotImg();const r={img:'_robot',sx:0,sy:0,sw:IMG.robotSheet?64:40,sh:IMG.robotSheet?64:48,x:M.shed.x,y:M.shed.y+18,tall:1,cs:0,robot:1};M.objs.push(r);M.robot={o:r,path:null,job:null,cool:1}}}
 {const _gm4=goMap;goMap=function(){const r=_gm4.apply(this,arguments);try{farmRefresh()}catch(e){}return r}}
 function openFarmPanel(){const h=farmSave(),f=h.farm,n=(f.cleared||[]).length,used=Object.keys(h.plots||{}).filter(k=>+k>=200).length,total=(M.plots||[]).length,price=300;
-  modal(`<h2>🌾 ${t('farmPanel')}</h2><div style="line-height:1.9">🟫 ${t('farmPlots')} ${used}/${total}<br>🪓 ${t('farmCleared')} ${n}/15 ${n>=15?'✅':''}<br>🏠 ${t('farmHouse')} ${houseTier()}/3</div>
+  modal(`<h2>🌾 ${t('farmPanel')}</h2><div style="line-height:1.9">🟫 ${t('farmPlots')} ${used}/${total}<br>🪓 ${t('farmCleared')} ${n}/15 ${n>=15?'✅':''}<br>🏠 ${t('farmHouse')} ${g9HouseK()}/3</div>
    <div class="row2" style="margin-top:10px">${f.robot?`<button id="fpRobot">🤖 ${f.robotOn===false?t('robotOff'):t('robotOn')}</button>`:`<button id="fpBuy">🤖 ${t('robotBuy')} 🪙${price}</button>`}</div>`);
   const b=$('fpBuy');if(b)b.onclick=()=>{if((S.coins||0)<price){say(t('needCoins'));return}S.coins-=price;const H=farmSave();H.farm.robot=true;H.farm.robotOn=true;HOME.put(H);closeModal();say('🤖 '+t('robotHi'));farmRefresh()};
   const r=$('fpRobot');if(r)r.onclick=()=>{const H=farmSave();H.farm.robotOn=H.farm.robotOn===false;HOME.put(H);closeModal();say(H.farm.robotOn?'🤖 '+t('robotOn'):'💤 '+t('robotOff'))}}
@@ -3674,9 +3674,9 @@ function g9bButton(){const now=performance.now();if(now-_g9BtnAt<200)return;_g9B
   else if(_g9Btn){for(const [n,v] of _g9Btn.keep){if(n.nodeType===1)n.style.display=v;else n.nodeValue=v}if(sp)sp.style.display='none';l.textContent=_g9Btn.tx;_g9Btn=null}}
 {const _iv=setInterval(()=>{try{g9bButton()}catch(e){}},220)}
 // the sign by the house: walk up, see the next step and its price, one button to build it
-function openHouseSign(){const h=HOME.get(),lv=houseLv(h);if(lv>=9){modal(`<h2>\u{1F3E0} ${t('g9SignMax')}</h2>`);return}const c=HCOST[lv+1];
-  modal(`<h2>\u{1F3E0} ${t('g9Sign')} ${lv} \u2192 ${lv+1}</h2><p>${t('g9SignCost')}: <b>${c}</b> \u{1FA99} · ${t('g9SignHave')} ${S.coins} \u{1FA99}</p><p><button id="hsUp">\u{1F3E0} ${t('houseUp')}</button></p>`);
-  const u=document.getElementById('hsUp');if(u)u.onclick=()=>{if(houseUpgrade()){closeModal();say('\u{1F3E0} '+t('g9SignDone'));try{farmRefresh()}catch(e){}}}}
+function openHouseSign(){const h=HOME.get(),lv=houseLv(h);if(lv>=3){modal(`<h2>\u{1F3E0} ${t('g9SignMax')}</h2>`);return}const c=HCOST[lv+1];
+  modal(`<h2>\u{1F3E0} ${t('g9Sign')} ${lv} \u2192 ${lv+1}</h2><p>${t('g9SignCost')}: <b>${c}</b> \u{1FA99} · ${t('g9SignHave')} ${S.coins} \u{1FA99}</p><p><button id="hsUp">\u{1F3E0} ${t('houseBuy162')} · ${c} 🪙</button></p>`);
+  const u=document.getElementById('hsUp');if(u)u.onclick=()=>{if(houseLv()>=3){openHouseSign();return}if(houseUpgrade()){closeModal();try{farmRefresh()}catch(e){}}}}
 {const cv=document.getElementById('c');if(cv)cv.addEventListener('pointerup',ev=>{try{if(!M||!M.g9b||!M.sign||PAUSE||DLG)return;const r=cv.getBoundingClientRect(),dpr=devicePixelRatio||1,wx=(ev.clientX-r.left)*dpr/SC+camX,wy=(ev.clientY-r.top)*dpr/SC+camY;
     if(Math.abs(M.sign.x-wx)<34&&wy>M.sign.y-54&&wy<M.sign.y+8){ev.stopImmediatePropagation();window._farmTapT=performance.now();g9WalkThen(M.sign.x,M.sign.y+22,openHouseSign)}}catch(e){}},true)}
 // ================= 1.18 G9 · LIVE SHADOWS BY THE HOUR AND THE WEATHER (moved in from water-demo.html) =================
@@ -4817,4 +4817,13 @@ function openEquipment157(){if(!gmOn())return;modal('<h2>'+ui154Text('GM • อ
  @media(max-width:599px){.equipment157 .wardrobe154-layout{grid-template-columns:1fr}.equipment157 .wardrobe154-stage{height:380px}.equipment157 .slot157{width:65px;height:58px;min-height:58px;top:calc(var(--slot157-row)*63px)}.equipment157 .wardrobe154-figure{inset:25px 55px 60px}.equipment157 #equipPortrait{width:220px;height:220px;max-width:100%}.catalog157-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
  `;document.head.append(st)}
 
+// ================= 1.62 FARM BUGS 7–14: truthful action labels and actual rewards =================
+Object.assign(TX.th,{houseBuy162:'ขยายบ้าน',hl1:'บ้านเล็ก · ห้องนั่งเล่น ครัว ห้องนอน ห้องน้ำ',hl2:'เพิ่มมุมหนังสือ บอล และสไลเดอร์',hl3:'เพิ่มชั้นบน · ห้องนอน ห้องน้ำ และห้องทำงาน',wildUnlock:'ถางครบ 15 จุดแล้ว!',plotsAdded162:'เปิดแปลงผักเพิ่ม',sellFish:'ขายปลา',noFish:'ยังไม่มีปลา · ลองตกปลาที่ฟาร์มหรือหมู่บ้าน'});
+Object.assign(TX.en,{houseBuy162:'Expand house',hl1:'Cottage · living room, kitchen, bedroom and bathroom',hl2:'Adds books, balls and a slide',hl3:'Adds an upper floor · bedroom, bathroom and study',wildUnlock:'All 15 spots cleared!',plotsAdded162:'New vegetable plots',sellFish:'Sell fish',noFish:'No fish yet · try fishing at the farm or village'});
+// Report after all existing gardening-level wrappers have granted their extra produce.
+{const old=plotAct;plotAct=function(p){const h=HOME.get(),q=plotState(p),crop=q&&q.st==='ripe'?q.crop:null,before=crop?(h.pantry[crop]||0):0;
+ const r=old.apply(this,arguments);if(crop){const added=(HOME.get().pantry[crop]||0)-before;if(added>0)say('🧺 '+t('got')+' '+t('cr_'+crop)+' ×'+added)}return r}}
+// Notify only on clearing actions that actually open a bed, never on scene rebuild/reload.
+{const old=clearWild;clearWild=function(o){const map=M,before=map&&map.g9b?(map.plots||[]).length:null,r=old.apply(this,arguments);
+ if(before!==null&&M===map){const added=(map.plots||[]).length-before;if(added>0)say('🌱 '+t('plotsAdded162')+' '+added+(LANG==='th'?' แปลง':' plots'))}return r}}
 </script></body></html>
