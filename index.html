@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.64';
+const VERSION='Lantern Academy 1.65';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -4904,7 +4904,7 @@ function deco160Reset(){const g=D160.gesture;if(g){clearTimeout(g.timer);try{if(
  D160.gesture=null;D160.preview=null;D160.lastKey='';document.body.classList.remove('deco160-drag');
  if(D160.pauseOwned){PAUSE=D160.wasPause;D160.pauseOwned=false}const s=$('deco160Status');if(s){s.textContent='';delete s.dataset.valid}}
 function deco160Begin(g){if(D160.gesture!==g||!deco160Ready())return;g.active=true;D160.wasPause=PAUSE;D160.pauseOwned=true;PAUSE=true;P.path=null;
- document.body.classList.add('deco160-drag');deco160Preview(g.last,g)}
+ msgT=0;$('msg').textContent='';$('msg').style.opacity=0;document.body.classList.add('deco160-drag');deco160Preview(g.last,g)}
 function deco160Down(e,inventory){if(!deco160Ready()||e.button>0)return;if(D160.gesture){deco160Reset();return}
  const p=deco160Point(e),hit=inventory?-1:deco2Hit(p.x,p.y);let src,skip=null;
  if(inventory)src=[inventory.dataset.k,0,0,0];else if(DECO2.hold)src=[DECO2.hold,0,0,0];else if(hit>=0){DECO2.sel=hit;skip=M.layout2[hit];src=skip;deco2UI()}
@@ -4952,15 +4952,13 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)deco160Rese
  if(DECO2.sel!=null||DECO2.hold){const b=document.createElement('button');b.dataset.a='cancel160';b.textContent=t('drag160Cancel');b.onclick=()=>{deco160Reset();DECO2.sel=null;DECO2.hold=null;deco2UI()};d.querySelector('.d2tools').append(b)}
  return r}}
 deco2Draw=function(){if(!deco160Ready())return;ctx.save();charClip();const dy=ROOM2.rowsAbovePlan;
- // A quiet floor grid, clipped to actual floor tiles rather than the walls.
- ctx.strokeStyle='#ffedc126';ctx.lineWidth=.7;for(const k of M.FLOOR){const [x,y]=k.split(',').map(Number);ctx.strokeRect(x*T-camX+.5,y*T-camY+.5,T,T)}
  const pr=D160.preview,it=pr?pr.it:DECO2.sel!=null?M.layout2[DECO2.sel]:null;if(!it){ctx.restore();return}
- const v=f2View(it[0],it[1]),[x0,y0,x1,y1]=f2Rect(it),col=pr&&pr.er?'#f56e79':'#65dfa0';ctx.fillStyle=col;ctx.strokeStyle=col;ctx.lineWidth=1.3;
+ const v=f2View(it[0],it[1]),[x0,y0,x1,y1]=f2Rect(it),col=pr?(pr.er?'#f56e79':'#65dfa0'):'#e9cb8c';ctx.fillStyle=col;ctx.strokeStyle=col;ctx.lineWidth=1.3;
  for(let y=y0;y<y1-.01;y+=1)for(let x=x0;x<x1-.01;x+=1){const w=Math.min(1,x1-x)*T,h=Math.min(1,y1-y)*T,sx=x*T-camX,sy=(y+dy)*T-camY;
   ctx.globalAlpha=.25;ctx.fillRect(sx+1,sy+1,w-2,h-2);ctx.globalAlpha=.95;ctx.strokeRect(sx+.5,sy+.5,w-1,h-1);
   if(pr&&pr.er){ctx.beginPath();ctx.moveTo(sx+4,sy+4);ctx.lineTo(sx+w-4,sy+h-4);ctx.moveTo(sx+w-4,sy+4);ctx.lineTo(sx+4,sy+h-4);ctx.stroke()}}
  if(pr){const im=IMG[(ROOM2.sheet||{})[it[0]]||'furnPlain'];if(im){ctx.globalAlpha=D164.rotation?.85:.68;ctx.imageSmoothingEnabled=false;ctx.drawImage(im,v[0],v[1],v[2],v[3],Math.round(it[2]*T-v[4]-camX),Math.round((it[3]+dy)*T-v[5]-camY),v[2],v[3])}}
- ctx.globalAlpha=1;ctx.strokeStyle=col;ctx.lineWidth=2;ctx.strokeRect(x0*T-camX,(y0+dy)*T-camY,(x1-x0)*T,(y1-y0)*T);ctx.restore();
+ ctx.globalAlpha=1;ctx.strokeStyle=col;ctx.lineWidth=2;ctx.strokeRect(x0*T-camX,(y0+dy)*T-camY,(x1-x0)*T,(y1-y0)*T);deco165SpriteFrame(it);ctx.restore();
 }
 {const st=document.createElement('style');st.textContent=`body.deco2 #c{touch-action:none;cursor:grab}body.deco160-drag #c{cursor:grabbing}body.deco160-drag #deco2 .d2inventory{display:none}body.deco2 #deco2 [data-k]{touch-action:none}
  .deco160-hint{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;font-size:12px;line-height:1.4;color:#e5d8bb}.deco160-hint b[data-valid=yes]{color:#65dfa0}.deco160-hint b[data-valid=no]{color:#f56e79}`;document.head.append(st)}
@@ -4971,7 +4969,7 @@ const D164={rotation:null,gridKey:'',cells:[]};
 Object.assign(TX.th,{d2Pick:'คลิกค้าง / แตะค้าง แล้วลากของ',drag160Hint:'✓ เขียว วางได้ · × แดง วางไม่ได้',angle164:'ยืนยัน',cancel164:'ยกเลิกมุม',one164:'ชิ้นนี้มีมุมเดียว',pending164:'เลือกมุมแล้วกดยืนยัน'});
 Object.assign(TX.en,{d2Pick:'Hold a piece, then drag it',drag160Hint:'✓ Green: can place · × Red: blocked',angle164:'Confirm',cancel164:'Cancel angle',one164:'One view available',pending164:'Choose a view, then confirm'});
 function deco164Clear(){D164.rotation=null;D164.gridKey='';$('deco164')?.remove()}
-function deco164Turn(){const cur=M.layout2[DECO2.sel];if(!cur)return;const n=ROOM2.pieces[cur[0]].length;if(n<2)return;
+function deco164Turn(){const cur=M.layout2[DECO2.sel];if(!cur)return;const n=ROOM2.pieces[cur[0]].length;if(n<2)return;msgT=0;$('msg').textContent='';$('msg').style.opacity=0;
  const from=D164.rotation?.ref===cur?D164.rotation.it:cur,v=f2View(cur[0],cur[1]),r=(from[1]+1)%n,v2=f2View(cur[0],r);
  const it=[cur[0],r,f2Snap(cur[2]+v[6]/2-v2[6]/2),f2Snap(cur[3]+v[7]/2-v2[7]/2)];
  D164.rotation={ref:cur,it,er:deco160Valid(it,cur)};D164.gridKey='';deco2UI();sfx('pick');
@@ -5009,21 +5007,11 @@ function deco164Position(){const d=$('deco164');if(!d)return;
 {const old=goMap;goMap=function(){deco164Clear();return old.apply(this,arguments)}}
 {const old=modal;modal=function(){deco164Clear();return old.apply(this,arguments)}}
 addEventListener('keydown',e=>{if(e.key==='Escape'&&D164.rotation){e.preventDefault();deco164Clear();deco2UI()}},true);
-function deco164Grid(){const chosen=D164.rotation?.it||(DECO2.hold?[DECO2.hold,0,0,0]:M.layout2[DECO2.sel]),skip=DECO2.hold?null:M.layout2[DECO2.sel];
- const signature=[M.id,JSON.stringify(M.layout2),chosen?.slice(0,2),DECO2.sel,Math.floor(P.x/T),Math.floor(P.y/T)].join('|');
- if(signature!==D164.gridKey){D164.gridKey=signature;D164.cells=[];
-  // A cell marks a candidate footprint's top-left corner. Recompute only when layout/selection changes.
-  for(let y=0;y<M.r2.grid.length;y++)for(let x=0;x<M.w;x++){
-   if(!M.FLOOR.has(key(x,y+ROOM2.rowsAbovePlan)))continue;
-   let blocked;if(chosen)blocked=!!deco160Valid([chosen[0],chosen[1],x,y],skip);
-   else blocked=!walkable(M,x,y+ROOM2.rowsAbovePlan)||(M.r2.noPlace||[]).some(a=>f2Hits([x,y,x+1,y+1],a))||'# PE+'.includes((M.r2.grid[y]||'')[x]||'#');
-   D164.cells.push([x,y,blocked]);
-  }
- }
- for(const [x,y,no] of D164.cells){const sx=x*T-camX,sy=(y+ROOM2.rowsAbovePlan)*T-camY;if(sx+T<0||sy+T<0||sx>cv.width/SC||sy>cv.height/SC)continue;
- ctx.fillStyle=no?'#ed6675':'#65dfa0';ctx.strokeStyle=ctx.fillStyle;ctx.globalAlpha=no?.16:.10;ctx.fillRect(sx+1,sy+1,T-2,T-2);ctx.globalAlpha=.43;ctx.lineWidth=.7;ctx.strokeRect(sx+.5,sy+.5,T-1,T-1);
- if(no){ctx.globalAlpha=.5;ctx.beginPath();ctx.moveTo(sx+T/2-3,sy+T/2-3);ctx.lineTo(sx+T/2+3,sy+T/2+3);ctx.moveTo(sx+T/2+3,sy+T/2-3);ctx.lineTo(sx+T/2-3,sy+T/2+3);ctx.stroke()}}
- ctx.globalAlpha=1;
+// 1.65: floor lines are a neutral ruler, never a second placement verdict.
+function deco164Grid(){ctx.save();ctx.strokeStyle='#ffe7b42c';ctx.lineWidth=.6;
+ for(const k of M.FLOOR){const [x,y]=k.split(',').map(Number),sx=x*T-camX,sy=y*T-camY;if(sx+T<0||sy+T<0||sx>cv.width/SC||sy>cv.height/SC)continue;
+  for(let j=0;j<2;j++)for(let i=0;i<2;i++)ctx.strokeRect(sx+i*T/2+.5,sy+j*T/2+.5,T/2,T/2)}
+ ctx.restore();
 }
 {const old=deco2Draw;deco2Draw=function(){deco164Position();if(!deco160Ready())return;ctx.save();charClip();deco164Grid();ctx.restore();
  const saved=D160.preview;if(!saved&&D164.rotation)D160.preview={...D164.rotation,skip:D164.rotation.ref};try{old()}finally{D160.preview=saved}}}
@@ -5037,5 +5025,13 @@ function deco164Grid(){const chosen=D164.rotation?.it||(DECO2.hold?[DECO2.hold,0
 
 // Only the candidate sprite is drawn while previewing; collision and saved layout stay untouched.
 {const old=drawObj;drawObj=function(o,tm){if(deco160Ready()&&o.room2&&(D164.rotation?.ref===o.room2||D160.gesture?.active&&D160.gesture.skip===o.room2))return;return old.apply(this,arguments)}}
+
+// ================= 1.65 DISTINCT SPRITE BOUNDS AND PLACEMENT FOOTPRINT =================
+// Sprite bounds include height above the floor; they must never become the collision footprint.
+function deco165SpriteBounds(it){const v=f2View(it[0],it[1]);return [Math.round(it[2]*T-v[4]-camX),Math.round((it[3]+ROOM2.rowsAbovePlan)*T-v[5]-camY),v[2],v[3]]}
+function deco165SpriteFrame(it){const [x,y,w,h]=deco165SpriteBounds(it),pad=2,len=Math.min(8,w/3,h/3);ctx.save();ctx.globalAlpha=.95;ctx.strokeStyle='#ffe1a0';ctx.lineWidth=1.3;
+ for(const [sx,sy,dx,dy] of [[x-pad,y-pad,1,1],[x+w+pad,y-pad,-1,1],[x-pad,y+h+pad,1,-1],[x+w+pad,y+h+pad,-1,-1]]){ctx.beginPath();ctx.moveTo(sx+dx*len,sy);ctx.lineTo(sx,sy);ctx.lineTo(sx,sy+dy*len);ctx.stroke()}ctx.restore()}
+Object.assign(TX.th,{drag160Hint:'ฐานเขียว ✓ วางได้ · ฐานแดง × วางไม่ได้'});
+Object.assign(TX.en,{drag160Hint:'Green base ✓ can place · Red base × blocked'});
 
 </script></body></html>
