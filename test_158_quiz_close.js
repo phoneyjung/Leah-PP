@@ -9,7 +9,7 @@ const out=process.env.OUT_DIR||'/tmp/leah-questions-158';fs.mkdirSync(out,{recur
   await pg.goto('http://localhost:'+(process.env.PORT||8775)+'/?gm',{waitUntil:'load'});
   await pg.waitForFunction(()=>!document.getElementById('load')&&QBANK.length>50);
   await pg.evaluate(q=>{gmMakeSlot();S=Store.all().slots[Store.all().cur];S.age=7;S.mus=false;S.snd=false;S.seen={intro:1};startGame();document.querySelectorAll('#cr,#title,#picker').forEach(e=>e.classList.add('hide'));DLG=null;$('dlg').classList.add('hide');closeModal();goMap('cavemouth');MONS=[];const c=M.crystals[0];S.crystals[M.id]=[];c.awake=false;P.x=c.x;P.y=c.y+40;P.path=null;P.act=null;window.test158Crystal=c;window.test158Question=q;window.pick158=pickQuestion;window.pickQuestion=()=>window.test158Question;},fixture);
-  await pg.waitForFunction(()=>{const a=anyNear();return a&&a.k==='actWake'||$('bAtk').textContent.includes('ปลุก')});
+  await pg.waitForFunction(()=>{const a=anyNear();return a&&a.k==='actExplore'});
   const click=async sel=>vp.hasTouch?pg.tap(sel):pg.click(sel);
   await click('#bAtk');await pg.waitForSelector('.ch button',{visible:true,timeout:10000});
   const answer=await pg.evaluate(()=>window.test158Question.answer),wrong=[0,1,2,3].filter(i=>i!==answer);

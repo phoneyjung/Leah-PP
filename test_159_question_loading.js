@@ -30,9 +30,9 @@ async function press(pg,sel,touch){const e=await pg.$(sel);assert(e,sel);await e
   return {ctx,pg,errors};
  }
  async function playQuiz(pg,touch){await pg.evaluate(()=>{DLG=null;$('dlg').classList.add('hide');closeModal();goMap('cavemouth');MONS=[];const c=M.crystals[0];c.awake=false;S.crystals[M.id]=[];P.x=c.x;P.y=c.y+40;P.path=P.act=null;window.fixture159=c});
-  await pg.waitForFunction(()=>$('bAtk').textContent.includes('ปลุก'));await press(pg,'#bAtk',touch);await pg.waitForSelector('.ch button',{visible:true});
+  await pg.waitForFunction(()=>$('atkL').textContent===t('actExplore'));await press(pg,'#bAtk',touch);await pg.waitForSelector('.ch button',{visible:true});
   const a=await pg.evaluate(()=>QBANK.find(q=>q.id===lastQ).answer),wrong=[0,1,2,3].filter(i=>i!==a);
-  await press(pg,'.ch button[data-i="'+wrong[0]+'"]',touch);await press(pg,'.ch button[data-i="'+wrong[1]+'"]',touch);await press(pg,'#qClose',touch);
+  await press(pg,'.ch button[data-i="'+wrong[0]+'"]',touch);await press(pg,'.ch button[data-i="'+wrong[1]+'"]',touch);await press(pg,'#qClose',touch);await sleep(400);
   assert(await pg.evaluate(()=>$('modal').classList.contains('hide')&&window.fixture159.awake));
  }
  try{
