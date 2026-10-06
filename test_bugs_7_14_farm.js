@@ -1,5 +1,5 @@
-// BUG-7, 9, 10, 12, 13, 14 (ฟาร์ม): เขียนโดย Claude ก่อนแก้ · รุ่น 1.57 ต้องได้ errors 6 · แก้ครบแล้วต้องได้ errors 0
-// BUG-8 (ขายขั้น 4 ขึ้นไป) ไม่อยู่ในชุดนี้ เพราะรอเจ้าของตัดสิน · ดูรายละเอียดทุกข้อใน BUG_REPORT.md
+// BUG-7, 8, 9, 10, 12, 13, 14 (ฟาร์ม): เขียนโดย Claude ก่อนแก้ · รุ่น 1.58 ได้ errors 7 · แก้ครบแล้วต้องได้ errors 0
+// BUG-8 เพิ่มเข้าชุดนี้ 5 ต.ค. หลังเจ้าของตัดสินว่า "ป้ายบ้านหยุดขายที่ขั้น 3" · ดูรายละเอียดทุกข้อใน BUG_REPORT.md
 // PORT=8775 node test_bugs_7_14_farm.js
 const assert=require('node:assert/strict'),puppeteer=require('puppeteer');
 const sleep=ms=>new Promise(r=>setTimeout(r,ms)),errors=[],results={};
@@ -22,6 +22,13 @@ async function check(name,fn){try{results[name]=await fn()}catch(e){errors.push(
   await check('BUG-7 ปุ่มซื้อบนป้ายบ้าน',async()=>{await setLv(1);await at(...sign);await press();
    const b=await pg.evaluate(()=>document.querySelector('#mBody button').textContent.trim());await clear();
    assert(!b.includes('แล้ว'),'ปุ่มซื้อต้องไม่มีคำว่า "แล้ว": '+b);assert(b.includes('150'),'ปุ่มซื้อต้องบอกราคา 150: '+b);return b});
+
+  await check('BUG-8 ป้ายบ้านหยุดขายที่ขั้น 3',async()=>{await setLv(3);await pg.evaluate(()=>{S.coins=5000;save()});await at(...sign);await press();
+   const m=await pg.evaluate(()=>document.getElementById('modal').classList.contains('hide')?null:{text:document.getElementById('mBody').innerText,buttons:[...document.querySelectorAll('#mBody button')].length});
+   if(m){const bs=await pg.$$('#mBody button');for(const b of bs){const r=await b.boundingBox();if(r){await pg.mouse.click(r.x+r.width/2,r.y+r.height/2);await sleep(500)}if(await pg.evaluate(()=>document.getElementById('modal').classList.contains('hide')))break}}
+   const after=await pg.evaluate(()=>({lv:HOME.get().lv,coins:S.coins}));await clear();await setLv(1);
+   assert.equal(after.lv,3,'บ้านขั้น 3 แล้วกดทุกปุ่มบนป้าย ระดับต้องยังเป็น 3 (ได้ '+after.lv+')');assert.equal(after.coins,5000,'บ้านขั้น 3 แล้วกดปุ่มบนป้าย เหรียญต้องไม่ลด (เหลือ '+after.coins+')');
+   assert(!m||!/3\s*→\s*4/.test(m.text),'ป้ายต้องไม่เสนอขาย "ขั้น 3 → 4"');return {after,sign:m&&m.text.replace(/\n/g,' ').slice(0,80)}});
 
   await check('BUG-9 ข้อความหลังขยายบ้าน',async()=>{const out={};
    for(const [lv,want,old] of [[2,/หนังสือ|บอล/,'ห้องครัว'],[3,/ชั้นบน|ชั้น 2|สองชั้น/,'บ้านกว้างขึ้น']]){await setLv(lv-1);await at(...sign);await says();await press();await clickFirst();
