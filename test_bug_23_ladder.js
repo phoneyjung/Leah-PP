@@ -38,17 +38,25 @@ async function settle(pg, ms) { const end = Date.now() + ms; while (Date.now() <
       r.world = await pg.evaluate(async () => { const wait = ms => new Promise(r => setTimeout(r, ms)), seen = {}, queue = [M.id];
         while (queue.length) { const id = queue.shift(); if (seen[id]) continue; goMap(id); await wait(1400); DLG = null; PAUSE = false; try { closeModal(); } catch (e) { }
           if (M.id !== id) { seen[id] = { redirectedTo: M.id }; if (!seen[M.id]) queue.push(M.id); continue; }
-          seen[id] = { crystals: (M.crystals || []).length, plots: (M.plots || []).length, fishSpot: M.fishSpot ? 1 : 0, boss: M.boss ? 1 : 0 };
+          seen[id] = { crystals: (M.crystals || []).length, digs: (M.digs || []).length, plots: (M.plots || []).length, fishSpot: M.fishSpot ? 1 : 0, boss: M.boss ? 1 : 0 };
           for (const e of M.exits || []) if (!e.locked && e.to && !seen[e.to]) queue.push(e.to); }
         return seen; });
       const places = Object.entries(r.world).filter(([, v]) => !v.redirectedTo);
       const canPlant = places.some(([, v]) => v.plots > 0), canFish = places.some(([, v]) => v.fishSpot > 0);
-      // 2) do everything that world offers: every crystal (the same call the quiz makes on a right answer), a high level, a planted bed and fish only where possible
+      // 2) do everything that world offers, through the game's own functions:
+      //    every crystal (the call the quiz makes on a right answer), every dig spot, a high level, a planted bed only if a bed can be reached, three fish only if fishing is open
       for (const [id, v] of places) if (v.crystals) { await pg.evaluate(id => goMap(id), id); await settle(pg, 1600);
         for (let i = 0; i < v.crystals; i++) { await pg.evaluate(i => { const c = M.crystals[i]; if (!c.awake) wakeCrystal(c, true); }, i); await settle(pg, 1900); } }
-      r.crystals = await pg.evaluate(() => totalCrystals());
+      r.crystals = await pg.evaluate(() => totalCrystals()); await settle(pg, 4000);
+      r.digs = 0;
+      for (const [id, v] of places) if (v.digs) { await pg.evaluate(id => goMap(id), id); await settle(pg, 1600);
+        for (let i = 0; i < v.digs; i++) { const dug = await pg.evaluate(async i => { const d = M.digs[i]; if (!d || d.done) return 0; DIG = null; PAUSE = false; doDig(d); if (!d.done) return 0; await new Promise(r => setTimeout(r, 250)); try { digHit(); } catch (e) { } return 1; }, i); r.digs += dug; await settle(pg, 900); await pg.evaluate(() => { DIG = null; }); } }
+      await settle(pg, 4000);
       await pg.evaluate(canPlant => { S.lv = 100; if (canPlant) S.planted = 1; save(); }, canPlant); await settle(pg, 7000);
-      await pg.evaluate(canFish => { if (canFish && rHas('fish')) S.fishCaught = 9; save(); }, canFish); await settle(pg, 9000);
+      r.fish = 0;
+      if (canFish && await pg.evaluate(() => rHas('fish'))) { const spot = places.find(([, v]) => v.fishSpot)[0]; await pg.evaluate(id => goMap(id), spot); await settle(pg, 1600);
+        for (let i = 0; i < 3; i++) { r.fish += await pg.evaluate(() => { try { P.x = M.fishSpot.x; P.y = M.fishSpot.y; FISHING.fish = 0; catchFish(); return 1; } catch (e) { return 0; } }); await settle(pg, 700); } }
+      await settle(pg, 9000);
       r.canPlant = canPlant; r.canFish = canFish;
       r.finalClass = await pg.evaluate(() => rank());
       r.nextTask = await pg.evaluate(() => { const n = rank() + 1; return n <= 10 ? { n, progress: rankProg(n), text: rankTask(n) } : null; });
