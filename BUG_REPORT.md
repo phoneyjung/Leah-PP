@@ -395,7 +395,7 @@ f2Apply(lay=>{lay[i][2]=stx+.1; lay[i][3]=sty-dy+.1});          // true
 ```css
 #mBody>div:has(>#mX){position:sticky;bottom:-1px;z-index:5;pointer-events:none;margin-top:10px}#mBody>div:has(>#mX)>#mX{pointer-events:auto;box-shadow:0 0 0 6px #231c2dcc}
 ```
-ผล: `test_bug_24_close.js` จาก `errors 88` เป็น `errors 0` · ปุ่มปิดของกระเป๋าเด็กอยู่ที่ y = 318–366 และแตะแล้วปิดได้จริง
+ผล: `test_bug_24_close.js` จาก `errors 88` เป็น `errors 0` · ปุ่มปิดของกระเป๋าเด็กอยู่ที่ y = 318–366 และแตะแล้วปิดได้จริง · ใส่รวมกับ CSS 6 บรรทัดของ BUG-17 ถึง 22 แล้วรันชุดทดสอบเดิมครบ: ผ่าน 39 จาก 39 และ `test_bugs_17_20_ui.js` ยังได้ `errors 0`
 **เกณฑ์ผ่าน:** `test_bug_24_close.js` → `errors 0` คือ ทุกหน้าต่าง (เด็ก 29 · ผู้ใหญ่ 34) บนจอ 3 ขนาด เปิดแล้วมีปุ่มปิดที่แตะได้ทันทีโดยไม่เลื่อน และแตะแล้วหน้าต่างปิด
 
 ### BUG-22 · ช่องพิมพ์ชื่อบนมือถือกว้าง 12 px (กลาง)
