@@ -57,28 +57,28 @@ Two fingers: send CDP `Input.dispatchTouchEvent`. To lift ONE finger while anoth
   so each piece shows its whole top and the one side facing the viewer. Plain two-tone boxes did NOT work; a guide must already look like the real thing.
 - His pass mark for art is **9.5 / 10** on: camera angle matches the scene · the four views agree · looks good and real · other. Below that: write a new prompt. Measure (overlap with the guide), then look.
 
-## Who owns which file (Claude and Codex work at the same time · owner's decision, 5 Oct 2026)
-The whole game is one file, so the split is by **file ownership**, not by feature. Two agents never edit the same file.
+## Who does what (owner's new split, 9 Oct 2026 — replaces the 5 Oct file-ownership split)
+**Codex = art. Claude = code.** The owner relayed this through Codex on 9 Oct 2026 at 01:28:
+- **Codex** paints and builds the **asset sets** (sprites, tiles, props, UI icons, scene art) and delivers them as files, each set to a spec Claude sent first. Codex does not edit `index.html`, `sw.js` or the tests.
+- **Claude** owns the **code, the systems, the tests, the question bank, the design docs, and merging to `main`**: `index.html`, `sw.js`, `questions-index.json`, `q-*.json` and their scripts, every `test_*.js`, `BUG_REPORT.md`, `DESIGN_*.md`, `HANDOFF_*.md`. Claude wires each delivered set into the game, writes its fallback, bumps the version and pushes.
 
 | Files | Owner | The other agent may only |
 |---|---|---|
-| `index.html` | **Codex** | read it and test it |
-| `sw.js`, `questions-index.json` | **Codex** | ask for a change through a written instruction |
-| `q-*.json`, `qsrc_*.py`, `gen_math.py`, `build_questions.py`, `check_questions.py` | **Claude** | run them, never edit them |
-| a new `test_*.js` | whoever wrote it | run it, never edit it (report a wrong test to the owner) |
-| `BUG_REPORT.md`, `DESIGN_*.md`, `QUESTION_REVIEW_LOG.md` | **Claude** | read; Codex updates only the status table in `BUG_REPORT.md` |
-| pictures, picture prompts, map/layout scripts | **Claude** | use them |
+| `index.html`, `sw.js`, `questions-index.json`, `q-*.json` + question scripts, `test_*.js`, `BUG_REPORT.md`, `DESIGN_*.md`, `HANDOFF_*.md`, `ASSET_SPEC_*.md` | **Claude** | read and test; Codex reports a wrong test or a bug in writing |
+| picture files of a delivered set (`*.png` `*.webp` `*.jpg`), their frame/anchor `*.json`, the `art-*.png` sources, build scripts for art, `CODEX_STATUS.md`, `ART_*.md` notes Codex writes | **Codex** | use them; Claude never repaints, resizes, crops or re-proportions a delivered picture on its own |
+| prompts for the owner's generator, map/layout scripts, docs listed above | **Claude** | use them |
 
-How the two work together:
-- **Claude writes the spec and a test suite first** (a new file, so it collides with nothing). **Codex changes `index.html` until that suite passes.** Claude then re-runs the suites as an independent check.
-- **Claude hunts bugs** by driving the game with puppeteer and writes them into `BUG_REPORT.md` with steps, measured evidence and a pass criterion. **Codex fixes them.**
-- New things that can live in their own file (for example the three 18+ mini-games) Claude builds as a standalone trial page first; Codex moves them into the game.
+**The asset handoff, every set, in this order** (the owner's rule: spec first, no silent design changes):
+1. **Before Codex starts a set, Claude sends the spec** as `ASSET_SPEC_NN_<name>.md` (template: `ASSET_SPEC_TEMPLATE.md`): file names · pixel size of each picture or frame · frame count, order and timing · the **anchor** (foot point / base point, in pixels from the frame's top-left) · scale (32 px = 1 tile) · transparent background · palette and style refs from `ART_GUIDE.md` · the fallback the game draws when the file is missing · and the acceptance numbers Claude will measure (alpha bounding box, anchor row, frame count, file size).
+2. **Codex delivers** the files at the repo root plus the `*.json` the spec asks for, and a line in `CODEX_STATUS.md` naming the set, the files and anything that differs from the spec. Codex does not change a size, frame count, anchor or the design's proportions on its own: if the spec is wrong or the picture needs another size, Codex writes that in `CODEX_STATUS.md` and waits for Claude's revised spec (`ASSET_SPEC_NN` with a new revision line).
+3. **Claude wires it in**: measures the delivery against the spec (a script, numbers in the handoff), adds every new file name to `sw.js`, writes the fallback, bumps `VERSION` and the cache name, runs the suites, pushes `main`, gives the owner the game link. Claude never alters the design or proportions of Codex's picture in code (no stretching, no cropping, no recolouring) without first agreeing it with Codex through a spec revision; a picture that does not fit goes back as a revision request, not a code-side resize.
+4. The owner judges the art (pass mark in `ART_GUIDE.md`, 9.5 / 10 for faces); Claude's checks are only the numbers.
 
-Four rules that prevent collisions:
+Collision rules that still stand:
 1. Fetch the newest `main` before every push. Never force-push.
-2. Each agent pushes only files it owns. When Claude adds a data file, Codex adds its name to `sw.js` (for question files: `python3 check_questions.py --write-index`, then bump the cache name).
-3. Claude edits `index.html` only if the owner says so, while Codex has no task running or queued.
-4. Every task handed to Codex states a pass criterion as a number and names the suite to run.
+2. Each agent pushes only the files it owns. Claude adds new file names to `sw.js` (it owns that file now); Codex only lists the files in `CODEX_STATUS.md`.
+3. Every task handed to either agent states a pass criterion as a number (a suite name for code, the spec's measurements for art).
+4. Neither agent edits the other's files, not even "a small fix": write it down for the owner instead.
 
 Question bank status: **paused at age 9 by the owner (5 Oct 2026)**. Age 9 has all 5 subjects (825 questions, automatic checks pass, human spot-check still pending); ages 10–17 are not written. The launch condition in `DESIGN_CRYSTAL_JOB.md` (all of ages 9–17 before the crystal/job system opens to players) still stands until the owner changes it.
 
@@ -122,6 +122,7 @@ Question bank status: **paused at age 9 by the owner (5 Oct 2026)**. Age 9 has a
 
 ## Never
 - Never commit tokens or passwords. Never delete `art-*.png` sources or the guide scripts. Never ship without running the suites.
+- Never change the design, size or proportions of a picture Codex delivered without a spec revision agreed with Codex (owner, 9 Oct 2026).
 
 - Version 1.64 house arranging: D160 handles mouse drag / 240ms touch hold, a 54 CSS px lifted touch preview, inventory scrolling, cancellation and transactional drops. D164 draws cached green/red candidate cells and floats rotate/store controls near the selected piece (48px targets). Rotation is a separate draft; Confirm validates and saves, Cancel/Done/map or modal transitions discard the draft. The original sprite is suppressed only while drawing a candidate; no save/map collision mutation during previews. `deco2Turn` remains the legacy immediate API; actual player buttons use `deco164Turn` + `deco164Confirm`. Grid cells mark candidate footprint top-left positions when a piece is selected; the moving footprint is the exact placement verdict. Existing half-tile snapping and saves remain compatible. `test_160_room_drag.js` and `test_164_house_grid.js` belong to Codex. Mobile gameplay remains landscape; portrait shows the existing rotate-phone screen.
 
