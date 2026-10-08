@@ -1,6 +1,6 @@
 // Version 1.80 (Claude, owner's order of 9 Oct with an RoV settings screenshot): the button cluster for players 12+ laid out the RoV way —
 // bottom row from the left: buff slot (one support skill) · potion · blink · skill 1; skill 2 up-left of the attack button; skill 3 (the ultimate) above it;
-// above the cluster the bot button (one tap on/off, hold for its settings) and above that the guide button that walks to the goal on this map.
+// above the cluster the bot button (one tap on/off, hold for its settings) and, flush right beside it, the guide button (1.83: dim until a destination is picked from its list; a tap then walks there).
 // Measured through the screen (phone 844×390 with real taps, computer 1180×820 with clicks and keys): where every button sits and that none overlap,
 // what each press DOES (buff effect and cooldown, bot on/off and its settings on a hold, the bot walking to a drop, the guide walking to a sleeping crystal,
 // to the way down, and to an NPC whose request is ready), and that a child's screen has none of it.
@@ -60,7 +60,8 @@ const waitFor = async (pg, fn, ms) => { const t0 = Date.now(); while (Date.now()
           for (let i = 1; i < row.length; i++) if (!(row[i].cx > row[i - 1].cx + 30)) fail(dev + ': bottom row out of order at ' + i + ': ' + A.rowX.join(','));
           const bottoms = row.map(r => Math.round(r.y + r.h)); A.rowBottom = bottoms; if (Math.max(...bottoms) - Math.min(...bottoms) > 6) fail(dev + ': bottom row not level: ' + bottoms.join(','));
           if (!(o.bJ2.cy < o.bAtk.cy - 30 && o.bJ2.cx < o.bAtk.cx - 30)) fail(dev + ': skill 2 not up-left of the attack button'); if (!(o.bSk.cy < o.bAtk.cy - 50 && Math.abs(o.bSk.cx - o.bAtk.cx) < 30)) fail(dev + ': skill 3 not above the attack button');
-          if (!(o.bAuto.cy < o.bDash.cy - 60)) fail(dev + ': bot button not above the cluster'); if (!(o.bQuest.cy < o.bAuto.cy - 40 && Math.abs(o.bQuest.cx - o.bAuto.cx) < 10)) fail(dev + ': guide button not above the bot button'); }
+          if (!(o.bAuto.cy < o.bDash.cy - 60)) fail(dev + ': bot button not above the cluster'); if (!(Math.abs(o.bQuest.cy - o.bAuto.cy) < 4 && o.bQuest.x > o.bAuto.x + o.bAuto.w - 2)) fail(dev + ': guide button not beside (right of) the bot button');
+          if (!(o.bQuest.x + o.bQuest.w >= o.bAtk.x + o.bAtk.w - 4)) fail(dev + ': guide button not flush right (' + Math.round(o.bQuest.x + o.bQuest.w) + ' vs ' + Math.round(o.bAtk.x + o.bAtk.w) + ')'); if (o.mm && o.mm.shown && !(o.bQuest.y > o.mm.y + o.mm.h + 4)) fail(dev + ': guide button not below the minimap'); }
         else { const row = ['bQuest', 'bAuto', 'bBuff', 'bPot', 'bDash', 'bJ1', 'bJ2', 'bSk', 'bAtk'].map(id => o[id]); A.rowX = row.map(r => Math.round(r.cx)); for (let i = 1; i < row.length; i++) if (!(row[i].cx > row[i - 1].cx + 30)) fail(dev + ': computer row out of order at ' + i); }
         const ids = ['bAtk', 'bSk', 'bJ1', 'bJ2', 'bDash', 'bPot', 'bBuff', 'bAuto', 'bQuest', 'bCmp', 'bRest', 'mm']; A.overlaps = [];
         for (let i = 0; i < ids.length; i++) for (let j = i + 1; j < ids.length; j++) if (overlap(o[ids[i]], o[ids[j]])) A.overlaps.push(ids[i] + '+' + ids[j]); if (A.overlaps.length) fail(dev + ': overlapping buttons ' + A.overlaps.join(' '));
@@ -87,26 +88,34 @@ const waitFor = async (pg, fn, ms) => { const t0 = Date.now(); while (Date.now()
         await hold('bAuto', 800); await sleep(400); const s4 = await T(pg, 'state'); C.holdSettings = s4.modalAuto; C.holdKeptOff = !s4.auto; if (!s4.modalAuto) fail(dev + ': holding the bot button did not open its settings'); if (s4.auto) fail(dev + ': the hold toggled the bot');
         await pg.evaluate(() => window.__t180.calm()); await sleep(300); }
 
-      // D · the guide: walks to the nearest sleeping crystal; with every crystal awake, to the way to the next floor; in town, to an NPC whose request is ready
+      // D · the guide (1.83): dim until a destination is chosen — a tap opens the picker; choosing walks there; arriving clears it. Destinations: a sleeping crystal, the way to the next map, Leah with a ready request, the post office for the mail
       { const D = R.guide = {}; await pg.evaluate(() => { for (const m of MONS) m.x += 6000; P.path = null; }); const c = await T(pg, 'nearestSleeping'); D.crystalDist = c ? c.d : null;
-        await tap('bQuest'); await sleep(120); const s1 = await T(pg, 'state'); D.msg1 = s1.msg; D.pathSet = s1.path; if (!s1.path) fail(dev + ': guide press set no path (' + s1.msg + ')');
+        const q0 = await T(pg, 'rect', 'bQuest'); D.dimBefore = /dim183/.test(q0.cls); if (!D.dimBefore) fail(dev + ': guide button not dim before a destination is chosen');
+        const pick = async (match, label) => { await tap('bQuest'); await sleep(350); const items = await pg.evaluate(() => [...document.querySelectorAll('[data-gd]')].map(b => b.textContent)); if (!items.length) { fail(dev + ': ' + label + ': the picker did not open'); return null; }
+          const i = items.findIndex(x => x.includes(match)); if (i < 0) { fail(dev + ': ' + label + ': no entry "' + match + '" in ' + items.join(' | ')); await pg.evaluate(() => closeModal()); return null; } const el = await pg.$('[data-gd="' + i + '"]'); try { await el.scrollIntoView(); await el.click(); } catch (e) { await pg.evaluate(i => document.querySelector('[data-gd="' + i + '"]').click(), i); } await sleep(150); return items; };
+        D.items1 = await pick(await T(pg, 'tx', 'gdCry'), 'crystal'); const s1 = await T(pg, 'state'); D.msg1 = s1.msg; D.pathSet = s1.path; if (!s1.path) fail(dev + ': choosing the crystal set no path (' + s1.msg + ')');
+        const q1 = await T(pg, 'rect', 'bQuest'); D.labelWhileSet = q1.label; if (/dim183/.test(q1.cls)) fail(dev + ': guide button still dim with a destination set');
         const arrived = await waitFor(pg, () => { const c = window.__t180.nearestSleeping(); return !c || c.d < 70 || (!P.path || !P.path.length); }, 12000); const c2 = await T(pg, 'nearestSleeping'); D.crystalAfter = c2 ? c2.d : null; D.arriveMs = arrived;
         if (!(c2 && c2.d < 70)) fail(dev + ': guide did not reach a sleeping crystal (' + (c2 ? c2.d : 'none') + ' px after ' + arrived + ' ms)');
-        await pg.evaluate(() => { for (const c of M.crystals || []) c.awake = true; P.path = null; P.target = null; try { closeModal(); } catch (e) { } PAUSE = false; }); await sleep(300); const ex = await T(pg, 'exitN'); D.exit = ex;
-        await tap('bQuest'); await sleep(120); const s2 = await T(pg, 'state'); D.msg2 = s2.msg; if (!s2.path) fail(dev + ': guide set no path to the way down (' + s2.msg + ')');
+        await sleep(400); const q2 = await T(pg, 'rect', 'bQuest'); D.dimAfterArrive = /dim183/.test(q2.cls); if (!D.dimAfterArrive) fail(dev + ': guide button not dim again after arriving');
+        await pg.evaluate(() => { P.path = null; P.target = null; try { closeModal(); } catch (e) { } PAUSE = false; }); await sleep(300); const ex = await T(pg, 'exitN'); D.exit = ex;
+        D.items2 = await pick(await T(pg, 'tx', 'gdMap'), 'exit'); const s2 = await T(pg, 'state'); D.msg2 = s2.msg; if (!s2.path) fail(dev + ': choosing the next map set no path (' + s2.msg + ')');
         const far = await pg.evaluate(() => { const e = window.__t180.exitN(); return e ? Math.hypot(e.x - P.x, e.y - P.y) : 0; }); const left = await waitFor(pg, () => { const e = window.__t180.exitN(); return !e || M.id !== 'cavemouth' || Math.hypot(e.x - P.x, e.y - P.y) < 40; }, 15000); const s3 = await T(pg, 'state'); D.exitResult = { from: Math.round(far), ms: left, map: s3.map };
-        if (left < 0) fail(dev + ': guide did not reach the way down');
-        // in town: a request that is ready to hand in leads to that NPC
+        if (left < 0) fail(dev + ': guide did not reach the way to the next map');
+        // in town: a request that is ready to hand in leads to that NPC, and the mail entry leads to the post office
         await T(pg, 'go', 'capital'); await pg.evaluate(() => { S.days = S.days || {}; const r = reqBase(); S.days[today()] = Object.assign(S.days[today()] || {}, { q: r.base.q + 5 }); updateGoal(); }); await sleep(700);
         const npc = await pg.evaluate(() => { const n = (M.npcs || []).find(n => n.npc === 'leah'); return n ? { x: n.x, y: n.y, mark: REQMARK[n.npc], d: Math.round(Math.hypot(n.x - P.x, n.y - P.y)) } : null; }); D.npc = npc;
-        if (!npc) D.npcNote = 'no Leah on this map, skipped'; else if (npc.mark !== 'ready') fail(dev + ': Leah\'s request not marked ready (' + npc.mark + ')'); else { await tap('bQuest'); await sleep(120); const s4 = await T(pg, 'state'); D.msg3 = s4.msg; if (!s4.path) fail(dev + ': guide set no path to Leah');
-          const near = await waitFor(pg, () => { const n = (M.npcs || []).find(n => n.npc === 'leah'); return n && Math.hypot(n.x - P.x, n.y - P.y) < 60; }, 15000); D.npcMs = near; if (near < 0) fail(dev + ': guide did not reach Leah'); if (!s4.msg.includes(await T(pg, 'tx', 'gdNpc'))) fail(dev + ': NPC guide message "' + s4.msg + '"'); }
+        if (!npc) D.npcNote = 'no Leah on this map, skipped'; else if (npc.mark !== 'ready') fail(dev + ': Leah\'s request not marked ready (' + npc.mark + ')'); else { D.items3 = await pick(await T(pg, 'tx', 'gdNpc'), 'npc'); const s4 = await T(pg, 'state'); D.msg3 = s4.msg; if (!s4.path) fail(dev + ': choosing Leah set no path');
+          const near = await waitFor(pg, () => { const n = (M.npcs || []).find(n => n.npc === 'leah'); return n && Math.hypot(n.x - P.x, n.y - P.y) < 60; }, 15000); D.npcMs = near; if (near < 0) fail(dev + ': guide did not reach Leah'); }
+        await pg.evaluate(() => { P.path = null; try { closeModal(); } catch (e) { } PAUSE = false; }); const mailOk = await pg.evaluate(() => !!(M.capA || M.h9) && !mailToday().got); D.mailMap = mailOk;
+        if (mailOk) { D.items4 = await pick(await T(pg, 'tx', 'gdMailGet'), 'mail'); const s5 = await T(pg, 'state'); if (!s5.path) fail(dev + ': choosing the post office set no path'); const d0 = await pg.evaluate(() => { const [x, y] = mailDoorPt('post_office'); return Math.hypot(x - P.x, y - P.y); });
+          const got = await waitFor(pg, () => { const [x, y] = mailDoorPt('post_office'); return Math.hypot(x - P.x, y - P.y) < 40 || !(P.path && P.path.length); }, 25000); const d1 = await pg.evaluate(() => { const [x, y] = mailDoorPt('post_office'); return Math.hypot(x - P.x, y - P.y); }); D.mail = { from: Math.round(d0), to: Math.round(d1), ms: got }; if (!(d1 < 40)) fail(dev + ': guide did not reach the post office (' + Math.round(d1) + ' px left)'); }
         await pg.evaluate(() => window.__t180.calm()); }
 
       // E · keys on a computer: 5 casts the buff, G guides, B toggles the bot
       if (!touch) { const E = R.keys = {}; await T(pg, 'go', 'cavemouth'); await pg.evaluate(() => { S.eff = {}; JCD.guard = 0; S.cleared = S.cleared || {}; S.cleared[M.id] = 1; P.path = null; });
         await pg.keyboard.press('5'); await sleep(150); E.guard = (await T(pg, 'state')).guard; if (!E.guard) fail('computer: key 5 did not cast the buff');
-        await pg.keyboard.press('KeyG'); await sleep(150); E.guide = (await T(pg, 'state')).path; if (!E.guide) fail('computer: key G did not guide');
+        await pg.keyboard.press('KeyG'); await sleep(300); E.guidePicker = await pg.evaluate(() => document.querySelectorAll('[data-gd]').length); if (!E.guidePicker) fail('computer: key G did not open the destination picker'); await pg.evaluate(() => closeModal()); await sleep(100);
         await pg.keyboard.press('KeyB'); await sleep(150); E.bot = (await T(pg, 'state')).auto; if (!E.bot) fail('computer: key B did not start the bot'); await pg.keyboard.press('KeyB'); await sleep(150); E.botOff = !(await T(pg, 'state')).auto; if (!E.botOff) fail('computer: key B did not stop the bot'); }
       await ctx.close(); }
 
