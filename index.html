@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.75';
+const VERSION='Lantern Academy 1.76';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -2505,8 +2505,8 @@ function setZoom(z,quiet){ZOOM=Math.max(.4,Math.min(1,Math.round(z*100)/100));tr
 // pinch on the game view
 (()=>{const pts=new Map();let d0=0,z0=1;const dist=()=>{const a=[...pts.values()];return a.length<2?0:Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y)};
   cv.addEventListener('pointerdown',e=>{if(e.pointerType!=='touch')return;pts.set(e.pointerId,{x:e.clientX,y:e.clientY});if(pts.size===2){d0=dist();z0=ZOOM}});
-  addEventListener('pointermove',e=>{if(!pts.has(e.pointerId))return;pts.set(e.pointerId,{x:e.clientX,y:e.clientY});if(pts.size===2&&d0>20){const z=z0*dist()/d0;if(Math.abs(z-ZOOM)>.03){setZoom(z,true);if(P)P.path=null}}});
-  const up=e=>{if(pts.delete(e.pointerId)&&pts.size<2&&d0){d0=0;say('🔍 '+Math.round(ZOOM*100)+'%')}};addEventListener('pointerup',up);addEventListener('pointercancel',up);
+  addEventListener('pointermove',e=>{if(!pts.has(e.pointerId))return;pts.set(e.pointerId,{x:e.clientX,y:e.clientY});if(pts.size===2&&d0>20&&!(typeof cmdNoZoom176==='function'&&cmdNoZoom176())){const z=z0*dist()/d0;if(Math.abs(z-ZOOM)>.03){setZoom(z,true);if(P)P.path=null}}});
+  const up=e=>{if(pts.delete(e.pointerId)&&pts.size<2&&d0){d0=0;if(Math.abs(ZOOM-z0)>.005)say('🔍 '+Math.round(ZOOM*100)+'%')}};addEventListener('pointerup',up);addEventListener('pointercancel',up);
   cv.addEventListener('wheel',e=>{e.preventDefault();setZoom(ZOOM*(e.deltaY>0?.92:1.08))},{passive:false})})();
 {const _st5=openSettings;openSettings=function(){const r=_st5.apply(this,arguments);try{const h=document.querySelector('#modal h2')||document.querySelector('.modal h2');if(h&&!$('zoomRow')){const d=document.createElement('div');d.id='zoomRow';d.className='row2';d.style.margin='6px 0';
   d.innerHTML=`<span>🔍 ${t('zoomT')}</span>`+[[1,'zoom1'],[.75,'zoom2'],[.55,'zoom3'],[.4,'zoom4']].map(([z,k])=>`<button data-zoom="${z}" ${Math.abs(ZOOM-z)<.03?'class="on"':''}>${t(k)}</button>`).join('');h.after(d);
@@ -2660,7 +2660,7 @@ const CAPA={solid:["111111111111111111111110000111111111111111111111", "11111111
   addEventListener('wheel',e=>{if(!M||open())return;setZoom(ZOOM+(e.deltaY<0?.05:-.05),true)},{passive:true});
   const dist=e=>Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
   addEventListener('touchstart',e=>{if(e.touches.length===2)pd=dist(e)},{passive:true});
-  addEventListener('touchmove',e=>{if(e.touches.length===2&&pd&&!open()){const d=dist(e);if(Math.abs(d-pd)>24){setZoom(ZOOM*d/pd,true);pd=d}}},{passive:true});
+  addEventListener('touchmove',e=>{if(e.touches.length===2&&pd&&!open()&&!(typeof cmdNoZoom176==='function'&&cmdNoZoom176())){const d=dist(e);if(Math.abs(d-pd)>24){setZoom(ZOOM*d/pd,true);pd=d}}},{passive:true});
   addEventListener('touchend',e=>{if(e.touches.length<2)pd=0},{passive:true})}
 
 // walking behind a tree: the whole tree fades so the child always sees their character in its own colours
@@ -5334,7 +5334,7 @@ function fjKnob172(cx,cy){const j=$('joy'),k=$('joyK');if(!j||!k)return;let dx=c
 function fjEnd172(){const had=FJ172.on||FJ172.shown;FJ172.id=null;FJ172.on=false;FJ172.shown=false;FJ172.snap=null;document.body.classList.remove('fjOn172');if(!had)return;
  if(typeof JOY!=='undefined'&&JOY.id!=='pad'){JOY.id=null;JOY.x=JOY.y=0}const j=$('joy'),k=$('joyK');if(j){j.style.left='';j.style.top='';j.style.bottom=''}if(k){k.style.left='36px';k.style.top='36px'}}
 cv.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse')return;FJ172.touches.add(e.pointerId);
- if(FJ172.touches.size>1){fjEnd172();return}                                                       // two fingers = zoom, never a stick
+ if(FJ172.touches.size>1){if(!FJ172.on)fjEnd172();return}                                         // two fingers = zoom, never a second stick; 1.76: a stick that is steering stays
  if(!fjAllowed172()||(JOY.id!==null&&JOY.id!==e.pointerId)||!fjZone172(e.clientX,e.clientY))return;
  // the tap handler has already set a walk; keep it aside in case this is a quick tap, and keep the player still meanwhile
  FJ172.snap={path:P.path,act:P.act,target:P.target,mark:tapMark};try{HOLD=null;tapMark=null;P.path=null;P.act=null;P.target=null}catch(err){}
@@ -5432,4 +5432,68 @@ function sysDraw175(){const el=SYS175.el;if(!el)return;const on=!!(S&&M&&documen
 {const old=update;update=function(dt){const r=old.apply(this,arguments);try{SYS175.frames++;const now=performance.now();if(now-SYS175.t0>=1000){SYS175.fps=Math.round(SYS175.frames*1000/(now-SYS175.t0));SYS175.frames=0;SYS175.t0=now;sysDraw175()}}catch(e){}return r}}
 setInterval(()=>{try{sysDraw175()}catch(e){}},1000);setInterval(()=>{try{sysPing175()}catch(e){}},15000);setTimeout(()=>{try{sysPing175()}catch(e){}},2500);
 addEventListener('online',()=>{try{sysPing175();sysDraw175()}catch(e){}});addEventListener('offline',()=>{try{SYS175.ping=null;sysDraw175()}catch(e){}});
+// ================= 1.76 A BUTTON PRESSED WHILE STEERING IS CARRIED OUT (DIABLO-STYLE ATTACK) · NO ZOOM WHILE STEERING =================
+// Owner, 8 Oct (Leah's play test of 1.75): "while I steer I cannot press anything else". Measured: the press did arrive, but the walking
+// code wipes P.target / P.act / P.path on every frame that has steering input, so the attack, "explore", dig or talk was erased one frame
+// later (monster HP lost in 2.5 s: 85 standing still, 0 while steering; a child's "explore" beside a crystal: no question).
+// Rules now (the owner chose the Diablo way for attacks):
+//  · attack pressed while steering: the character stops for the swing and hits the monster in weapon reach (stepping in for at most 0.45 s),
+//    then walks on with the stick by itself. Holding the attack button (or Space) keeps it standing there and attacking; a second press
+//    during a swing gives a second swing. A monster farther than reach + 48 px: no stop, a hint says to step closer.
+//  · any other command given while steering (big button, balloon, tapping a person / crystal / dig spot, sit): it is carried out and the
+//    stick rests meanwhile. Steering a clearly new way cancels it, the way moving always cancelled.
+//  · steering that starts AFTER a command (the old case) is unchanged: moving cancels. Auto-play is unchanged: the stick wins.
+//  · no pinch zoom while a stick is held or a finger is on a button, and a second finger on the scene no longer ends the floating stick.
+// How: this last wrapper of update() hides the steering input (keys, stick, hold-to-lead) from everything inside for the frames a command
+// is being carried out, and gives it back afterwards. Nothing in the walking code changed.
+const CMD176={on:false,kind:null,sig:null,was:false,t0:0,swing:0,again:false,zero:false,hint:0,btn:null,REACH:48,WAIT:450,ROOT:250,TURN:.6,GIVEUP:6000};window.CMD176=CMD176;
+const MOVEK176=['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','a','d','w','s'],TCH176=new Map();
+{const st=document.createElement('style');st.textContent='body.cmd176 #joy{opacity:.5!important}';document.head.append(st)}
+try{Object.assign(TX.th,{far176:'ยังไม่ถึงระยะ เข้าไปใกล้มอนอีกนิดแล้วกดตี'});if(TX.en)Object.assign(TX.en,{far176:'Out of reach: step closer, then attack'})}catch(e){}
+function cmdPad176(){try{return (navigator.getGamepads?[...navigator.getGamepads()]:[]).find(g=>g&&g.connected)||null}catch(e){return null}}
+// the steering input right now, read the way the walking code reads it (stick, then hold-to-lead, then keys); null = none
+function cmdVec176(){if(JOY.id!==null&&JOY.id!=='pad'&&Math.hypot(JOY.x,JOY.y)>.2)return{k:'s',x:JOY.x,y:JOY.y};
+ const gp=cmdPad176();if(gp){const ax=gp.axes[0]||0,ay=gp.axes[1]||0;if(Math.hypot(ax,ay)>.25)return{k:'s',x:ax,y:ay}}
+ if(HOLD&&performance.now()-HOLD.t>220){const dpr=devicePixelRatio||1;if(Math.hypot(HOLD.cx*dpr/SC+camX-P.x,HOLD.cy*dpr/SC+camY-P.y)>10)return{k:'h',x:HOLD.cx/40,y:HOLD.cy/40}}
+ let x=0,y=0;if(keys.ArrowLeft||keys.a)x--;if(keys.ArrowRight||keys.d)x++;if(keys.ArrowUp||keys.w)y--;if(keys.ArrowDown||keys.s)y++;return x||y?{k:'s',x,y}:null}
+const cmdKind176=()=>P.target?'atk':(P.act||P.sit||P.faGo)?'do':null;
+const cmdReach176=()=>{const w=weapon();return WEP[w.type].range+(hasSk('hawk')&&w.type==='bow'?40:0)};
+function cmdAtkHeld176(){if(CMD176.btn!==null||keys[' ']||keys.Enter)return true;const gp=cmdPad176();return !!(gp&&gp.buttons&&gp.buttons[0]&&gp.buttons[0].pressed)}
+function cmdHint176(){const n=performance.now();if(n-CMD176.hint>3000){CMD176.hint=n;try{say(t('far176'))}catch(e){}}}
+function cmdEnd176(){CMD176.on=false;CMD176.kind=null;CMD176.sig=null;document.body.classList.remove('cmd176')}
+function cmdArm176(kind,v){const C=CMD176;
+ if(kind==='atk'){const o=P.target;if(Math.hypot(o.x-P.x,o.y-P.y)>cmdReach176()+C.REACH){P.target=null;cmdHint176();return false}}   // too far: keep walking and say so
+ C.on=true;C.kind=kind;C.sig=v;C.t0=performance.now();C.swing=0;C.again=false;document.body.classList.add('cmd176');return true}
+// once per frame, before anything moves: is a command being carried out (true = hide the steering input for this frame)?
+function cmdStep176(){const C=CMD176,live=!!(S&&P&&M&&!PAUSE&&!DLG&&!P.dead),v=live?cmdVec176():null;
+ if(!v){if(C.on)cmdEnd176();C.was=false;return false}                     // not steering: commands run the way they always did
+ const now=performance.now();let skip=false;
+ if(C.on&&C.kind==='atk'){
+  if(!P.target||P.target.happy||!MONS.includes(P.target)){                 // this monster is done: a held button goes on to the next one in reach
+   const R=cmdReach176()+C.REACH,mo=cmdAtkHeld176()?MONS.filter(o=>!o.happy&&Math.hypot(o.x-P.x,o.y-P.y)<=R).sort((a,b)=>Math.hypot(a.x-P.x,a.y-P.y)-Math.hypot(b.x-P.x,b.y-P.y))[0]:null;
+   P.target=null;cmdEnd176();if(mo){attackTarget(mo);if(P.target)cmdArm176('atk',v)}}
+  else if(!C.swing){if(Math.hypot(P.target.x-P.x,P.target.y-P.y)<=cmdReach176())C.t0=now;     // in reach: the swing comes as soon as the weapon is ready
+   else if(now-C.t0>C.WAIT){P.target=null;cmdHint176();cmdEnd176()}}                         // could not step into reach in time: walk on
+  else if(now-C.swing>=C.ROOT&&!cmdAtkHeld176()){if(C.again){C.again=false;C.swing=0;C.t0=now}   // pressed again during the swing: one more swing first
+   else{P.target=null;cmdEnd176()}}}                                                         // the swing is over and the button is up: walk on
+ else if(C.on){const k=cmdKind176();
+  if(k!=='do')cmdEnd176();                                                                  // carried out (an attack pressed meanwhile is armed below)
+  else if(v.k!==C.sig.k||Math.hypot(v.x-C.sig.x,v.y-C.sig.y)>C.TURN||((P.act||P.faGo)&&now-C.t0>C.GIVEUP)){cmdEnd176();skip=true}}   // steered a new way (or stuck): moving cancels it
+ if(!C.on&&!skip&&C.was&&!AUTO.on){const k=cmdKind176();if(k)cmdArm176(k,v)}                 // given while already steering: carry it out
+ C.was=true;return C.on}
+{const old=update;update=function(dt){let z=null;
+  try{if(cmdStep176()){z={k:MOVEK176.map(k=>keys[k]),id:JOY.id,x:JOY.x,y:JOY.y,h:HOLD};for(const k of MOVEK176)keys[k]=0;if(JOY.id!==null){JOY.x=0;JOY.y=0}HOLD=null;CMD176.zero=true}}catch(e){}
+  try{return old.apply(this,arguments)}
+  finally{CMD176.zero=false;if(z){try{MOVEK176.forEach((k,i)=>{keys[k]=z.k[i]});if(JOY.id===z.id&&JOY.id!==null&&JOY.id!=='pad'){JOY.x=z.x;JOY.y=z.y}if(HOLD===null&&z.h)HOLD=z.h}catch(e){}}}}}
+// a swing made while a command is on starts the short stand-still; attack pressed again during that swing is remembered (one press, one swing)
+{const old=attackTarget;attackTarget=function(){try{if(CMD176.on&&CMD176.kind==='atk'&&CMD176.swing)CMD176.again=true}catch(e){}return old.apply(this,arguments)}}
+{const old=doAttack;doAttack=function(){const c0=P.cd,r=old.apply(this,arguments);try{if(CMD176.on&&CMD176.kind==='atk'&&!CMD176.swing&&P.cd>c0+.05)CMD176.swing=performance.now()}catch(e){}return r}}
+// gamepad: its stick and buttons are read inside update(), so the same rules are applied right after they are read
+{const old=padPoll;padPoll=function(){const C=CMD176;let before=null;try{before=S&&P?cmdKind176():null}catch(e){}const r=old.apply(this,arguments);
+  try{if(JOY.id==='pad'&&S&&P&&M&&!PAUSE&&!DLG&&!P.dead){if(!C.on&&!before&&C.was&&!AUTO.on){const k=cmdKind176();if(k&&cmdArm176(k,{k:'s',x:JOY.x,y:JOY.y}))C.zero=true}if(C.zero){JOY.x=0;JOY.y=0}}}catch(e){}return r}}
+// fingers on the screen (for the zoom rule) and the finger that holds the attack button
+addEventListener('pointerdown',e=>{try{if(e.pointerType==='touch')TCH176.set(e.pointerId,e.target===cv);if(e.target&&e.target.closest&&e.target.closest('#bAtk'))CMD176.btn=e.pointerId}catch(err){}},true);
+{const up=e=>{TCH176.delete(e.pointerId);if(e.pointerId===CMD176.btn)CMD176.btn=null};addEventListener('pointerup',up,true);addEventListener('pointercancel',up,true);addEventListener('blur',()=>{TCH176.clear();CMD176.btn=null})}
+// pinch zoom only when both fingers are on the game view and no stick is held
+function cmdNoZoom176(){if(JOY.id!==null&&JOY.id!=='pad')return true;if(typeof FJ172!=='undefined'&&FJ172.on)return true;for(const onView of TCH176.values())if(!onView)return true;return false}
 </script></body></html>
