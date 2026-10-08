@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.77';
+const VERSION='Lantern Academy 1.79';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -5530,4 +5530,38 @@ pickQuestion=function(){const QD=qDone177(),QR=S.qr||{},off=S.subOff||{},now=Dat
 // a right first choice finishes the question for good; a wrong one makes it wait 10 minutes (it was 2) and un-finishes it if it had come round again
 {const old=qResult;qResult=function(q,firstOk){try{const QD=qDone177(),ids=Object.keys(S.qr||{});if(ids.length>500)for(const id of ids)if(QD[id])delete S.qr[id]}catch(err){}   // finished ones leave S.qr, so its 600 limit never drops one that is still waiting
   const r=old.apply(this,arguments);try{if(q&&q.id){if(firstOk)S.qd[q.id]=1;else{delete S.qd[q.id];if(S.qr&&S.qr[q.id])S.qr[q.id].due=Date.now()+Q177.WAIT_MIN*60000}}}catch(err){}return r}}
+// ================= 1.78 · while digging, the big button is the dig button; monsters keep moving, and a hit while digging stops the dig, which must be started again (owner, 8 Oct) =================
+try{Object.assign(TX.th,{digNow:'ขุด!',digStop:'โดนตีเลยขุดไม่ทัน! กดขุดใหม่นะ'});if(TX.en)Object.assign(TX.en,{digNow:'Dig!',digStop:'Got hit, the dig stopped! Press dig again'});Object.assign(ICON_OF,{digNow:'hammer'})}catch(e){}
+const DIG178={btn:0,stops:0,ctx:{ic:'⛏️',k:'digNow',d:0,fn:()=>{try{digHit()}catch(e){}}}};
+function digOn178(){return !!(typeof DIG!=='undefined'&&DIG&&!DIG.done)}
+// the big button reads "Dig!" with the pickaxe while the needle runs (g9bButton draws whatever anyNear says), and pressing it is the dig tap
+{const old=anyNear;anyNear=function(){if(digOn178()&&S&&M&&P&&!P.dead)return DIG178.ctx;return old.apply(this,arguments)}}
+{const old=autoAct;autoAct=function(){if(digOn178()){DIG178.btn++;try{digHit()}catch(e){}return}return old.apply(this,arguments)}}
+// the word changes the moment the dig starts, not up to 0.4 s later
+{const old=doDig;doDig=function(d){if(d&&d.wait178){if(!(P&&P.act&&P.act.o===d))return;delete d.wait178}const r=old.apply(this,arguments);if(digOn178()){try{_g9BtnAt=0;g9bButton()}catch(e){}}return r}}
+// monsters keep walking and striking during a dig (the dig pauses the player, not the cave)
+{const old=update;update=function(dt){const r=old.apply(this,arguments);try{if(digOn178()&&PAUSE&&P&&!P.dead&&!DLG&&$('modal').classList.contains('hide'))updateMonsters(dt)}catch(e){}return r}}
+// a strike that lands (not a MISS) ends the dig: the spot is whole again and waits for the dig button or a tap on it; walking onto it does not restart it
+function digStop178(){const d=DIG.d;DIG=null;PAUSE=false;d.done=false;d.wait178=1;try{const L=S.digs&&S.digs[M.id];if(L){const i=L.lastIndexOf(d.id);if(i>=0)L.splice(i,1)}}catch(e){}if(P)P.act=null;DIG178.stops++;if(!P.dead)say('⛏️ '+t('digStop'));try{_g9BtnAt=0;g9bButton()}catch(e){}save()}
+{const old=hurtPlayer;hurtPlayer=function(n){const h0=S?S.hp:0,r=old.apply(this,arguments);try{if(digOn178()&&S&&S.hp<h0)digStop178()}catch(e){}return r}}
+// ================= 1.79 · cooldowns the RoV way: a dark cover that clears clockwise like a clock hand with the seconds in the middle, on the dash button too (owner, 8 Oct) =================
+{const st=document.createElement('style');st.textContent=`.cd179{position:absolute;left:0;top:0;right:0;bottom:0;border-radius:inherit;pointer-events:none;display:none;z-index:2}
+.cd179 b{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:700 20px/1 system-ui,sans-serif;color:#fff6dc;text-shadow:0 1px 2px #000,0 0 6px #000,0 0 2px #000}
+#act button.cd179on>small{visibility:hidden}
+body:not(.thumbs) #act button.cd179on{position:relative}`;document.head.appendChild(st)}
+const CD179={max:{},dash:0,sk:0,els:{}};
+// remember how long each cooldown was when it started, so the sweep knows the whole circle
+{const old=doDash;doDash=function(){const c0=DASH.cd,r=old.apply(this,arguments);try{if(DASH.cd>c0)CD179.dash=DASH.cd}catch(e){}return r}}
+{const old=useSkill;useSkill=function(){const c0=P?P.skCd||0:0,r=old.apply(this,arguments);try{if(P&&(P.skCd||0)>c0)CD179.sk=P.skCd}catch(e){}return r}}
+{const old=useJob;useJob=function(k){const c0=JCD[k]||0,r=old.apply(this,arguments);try{if((JCD[k]||0)>c0)CD179.max[k]=(JCD[k]-performance.now())/1000}catch(e){}return r}}
+function cdEl179(id){let e=CD179.els[id];if(e&&e.isConnected)return e;const b=document.getElementById(id);if(!b)return null;e=document.createElement('span');e.className='cd179';e.appendChild(document.createElement('b'));b.appendChild(e);CD179.els[id]=e;return e}
+function cdShow179(id,left,max){const b=document.getElementById(id);if(!b)return;if(!(left>0&&max>0)){if(b.classList.contains('cd179on')){b.classList.remove('cd179on');const e=CD179.els[id];if(e)e.style.display='none'}return}
+  const e=cdEl179(id);if(!e)return;if(!b.classList.contains('cd179on'))b.classList.add('cd179on');
+  const deg=Math.round(Math.max(0,Math.min(1,1-left/max))*180)*2,edge=Math.min(360,deg+4);   // the clear part grows clockwise from the top; a thin bright line is the clock hand
+  if(e._deg!==deg){e._deg=deg;e.style.display='block';e.style.background='conic-gradient(from 0deg,rgba(0,0,0,0) 0deg '+deg+'deg,rgba(255,236,170,.8) '+deg+'deg '+edge+'deg,rgba(9,5,18,.66) '+edge+'deg 360deg)'}
+  const n=String(Math.ceil(left));if(e.firstChild.textContent!==n)e.firstChild.textContent=n}
+{const old=update;update=function(dt){const r=old.apply(this,arguments);try{if(S&&P){
+  cdShow179('bDash',DASH.cd>0?DASH.cd:0,CD179.dash||(isKid()?1.8:2.6));
+  const w=weapon();cdShow179('bSk',P.skCd>0?P.skCd:0,CD179.sk||(SKILL[w.type]?SKILL[w.type].cd*cdrMul():6));
+  for(const [i,id] of [[0,'bJ1'],[1,'bJ2']]){const k=(S.slots||[])[i],left=k?((JCD[k]||0)-performance.now())/1000:0;cdShow179(id,left>0?left:0,k?(CD179.max[k]||(SK[k]?SK[k][1]*cdrMul():0)):0)}}}catch(e){}return r}}
 </script></body></html>
