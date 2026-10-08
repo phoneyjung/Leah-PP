@@ -57,28 +57,40 @@ Two fingers: send CDP `Input.dispatchTouchEvent`. To lift ONE finger while anoth
   so each piece shows its whole top and the one side facing the viewer. Plain two-tone boxes did NOT work; a guide must already look like the real thing.
 - His pass mark for art is **9.5 / 10** on: camera angle matches the scene · the four views agree · looks good and real · other. Below that: write a new prompt. Measure (overlap with the guide), then look.
 
-## Who does what (owner's new split, 9 Oct 2026 — replaces the 5 Oct file-ownership split)
-**Codex = art. Claude = code.** The owner relayed this through Codex on 9 Oct 2026 at 01:28:
-- **Codex** paints and builds the **asset sets** (sprites, tiles, props, UI icons, scene art) and delivers them as files, each set to a spec Claude sent first. Codex does not edit `index.html`, `sw.js` or the tests.
-- **Claude** owns the **code, the systems, the tests, the question bank, the design docs, and merging to `main`**: `index.html`, `sw.js`, `questions-index.json`, `q-*.json` and their scripts, every `test_*.js`, `BUG_REPORT.md`, `DESIGN_*.md`, `HANDOFF_*.md`. Claude wires each delivered set into the game, writes its fallback, bumps the version and pushes.
+## Who does what — the owner's agreement of 9 Oct 2026 (replaces the 5 Oct file-ownership split)
+The owner's words (9 Oct 2026, 01:34), recorded as given:
 
-| Files | Owner | The other agent may only |
+**Codex**
+- looks after the pictures: characters, scenes, equipment, colours, and the UI designs
+- prepares the PixelLab work and checks picture quality
+- delivers assets as **numbered sets**, each with its size, frame and foot-point data
+- does not edit the game code and does not push to `main`
+
+**Claude**
+- looks after the game systems, the UI code, saves, controls, and the test suites
+- sends Codex the picture file requirements **before** production
+- is responsible for bringing pictures into the game (GM mode first), bumping `VERSION`/`CACHE`, and merging into `main`
+- does not change a picture's proportions or design without coordinating
+
+Shared files such as `AGENTS.md` and the merge records (`HANDOFF_*.md`) are edited by Claude. Neither side edits the other's files; send a written proposal instead.
+
+| Files | Owner | The other side may only |
 |---|---|---|
-| `index.html`, `sw.js`, `questions-index.json`, `q-*.json` + question scripts, `test_*.js`, `BUG_REPORT.md`, `DESIGN_*.md`, `HANDOFF_*.md`, `ASSET_SPEC_*.md` | **Claude** | read and test; Codex reports a wrong test or a bug in writing |
-| picture files of a delivered set (`*.png` `*.webp` `*.jpg`), their frame/anchor `*.json`, the `art-*.png` sources, build scripts for art, `CODEX_STATUS.md`, `ART_*.md` notes Codex writes | **Codex** | use them; Claude never repaints, resizes, crops or re-proportions a delivered picture on its own |
-| prompts for the owner's generator, map/layout scripts, docs listed above | **Claude** | use them |
+| `index.html`, `sw.js`, `questions-index.json`, `q-*.json` + question scripts, `test_*.js`, `BUG_REPORT.md`, `DESIGN_*.md`, `HANDOFF_*.md`, `ASSET_SPEC_*.md`, `AGENTS.md`, `CLAUDE.md` | **Claude** | read and test; propose a change in writing |
+| delivered picture files (`*.png` `*.webp` `*.jpg`), their frame/foot-point `*.json`, `art-*.png` sources, art build scripts, PixelLab notes, `CODEX_STATUS.md`, `ART_*.md` notes Codex writes | **Codex** | use them; never repaint, resize, crop or re-proportion one |
+| prompts for the owner's generator, map/layout scripts | **Claude** | use them |
 
-**The asset handoff, every set, in this order** (the owner's rule: spec first, no silent design changes):
-1. **Before Codex starts a set, Claude sends the spec** as `ASSET_SPEC_NN_<name>.md` (template: `ASSET_SPEC_TEMPLATE.md`): file names · pixel size of each picture or frame · frame count, order and timing · the **anchor** (foot point / base point, in pixels from the frame's top-left) · scale (32 px = 1 tile) · transparent background · palette and style refs from `ART_GUIDE.md` · the fallback the game draws when the file is missing · and the acceptance numbers Claude will measure (alpha bounding box, anchor row, frame count, file size).
-2. **Codex delivers** the files at the repo root plus the `*.json` the spec asks for, and a line in `CODEX_STATUS.md` naming the set, the files and anything that differs from the spec. Codex does not change a size, frame count, anchor or the design's proportions on its own: if the spec is wrong or the picture needs another size, Codex writes that in `CODEX_STATUS.md` and waits for Claude's revised spec (`ASSET_SPEC_NN` with a new revision line).
-3. **Claude wires it in**: measures the delivery against the spec (a script, numbers in the handoff), adds every new file name to `sw.js`, writes the fallback, bumps `VERSION` and the cache name, runs the suites, pushes `main`, gives the owner the game link. Claude never alters the design or proportions of Codex's picture in code (no stretching, no cropping, no recolouring) without first agreeing it with Codex through a spec revision; a picture that does not fit goes back as a revision request, not a code-side resize.
-4. The owner judges the art (pass mark in `ART_GUIDE.md`, 9.5 / 10 for faces); Claude's checks are only the numbers.
+**The asset handoff, every set, in this order** (spec first; no silent design changes on either side):
+1. **Before Codex starts a set, Claude sends the spec** as `ASSET_SPEC_NN_<name>.md` (template: `ASSET_SPEC_TEMPLATE.md`): file names · pixel size of each picture or frame · frame count, order and timing · the **foot point / anchor** in pixels from the frame's top-left · scale (32 px = 1 tile) · transparent background · palette and style refs from `ART_GUIDE.md` · the fallback the game draws when the file is missing · the acceptance numbers Claude will measure. A set whose size or frame count is not yet known (see the adult prototype below) gets a spec only after the real file has been checked.
+2. **Codex delivers the numbered set** — the files plus the `*.json` the spec asks for, and a line in `CODEX_STATUS.md` naming the set, its version, the files, and anything that differs from the spec. Codex does not push to `main`: it delivers on a branch `codex/asset-NN-<name>` (or a ZIP handed through the owner). If the spec is wrong or the picture needs another size, Codex says so in `CODEX_STATUS.md` and waits for a revised spec rather than changing it alone.
+3. **Claude wires it in**: measures the delivery against the spec (a script; the numbers go in the handoff), merges the branch, adds every new file name to `sw.js`, writes the fallback, shows it **in GM mode first** (`?gm`) until the owner approves it for players, bumps `VERSION` and the cache name, runs the suites, pushes `main`, gives the owner the game link. Claude never stretches, crops or recolours a delivered picture in code; a picture that does not fit goes back as a spec revision.
+4. The owner judges the art (pass marks in `ART_GUIDE.md`, 9.5 / 10 for faces); Claude's checks are the numbers only.
 
-Collision rules that still stand:
-1. Fetch the newest `main` before every push. Never force-push.
-2. Each agent pushes only the files it owns. Claude adds new file names to `sw.js` (it owns that file now); Codex only lists the files in `CODEX_STATUS.md`.
-3. Every task handed to either agent states a pass criterion as a number (a suite name for code, the spec's measurements for art).
-4. Neither agent edits the other's files, not even "a small fix": write it down for the owner instead.
+Rules that still stand: fetch the newest `main` before every push and never force-push · each side pushes only its own files · every task states a pass criterion as a number · no "small fixes" in the other side's files.
+
+**Current art work (9 Oct 2026):**
+- `ASSET_SPEC_01_ui_buttons.md` — new button icons (guide, buff slot, sit) and the compass-stick art; ready for Codex.
+- **The new adult prototype:** the owner chose the ZIP `adult_male_swordsman_front_view_standing_idle_empt.zip` as the main reference. First step: check the **front view at real play size** (in the game, GM mode) before any other direction or animation is produced. **No size or frame count is set until that real file has been checked** — so no spec for it yet. The ZIP has not reached Claude's clone; when it does, Claude puts the front view in GM at play scale (84 px adult standard in `ART_GUIDE.md` is the starting point, not a decision) and gives the owner a screenshot at 844×390 and 1180×820.
 
 Question bank status: **paused at age 9 by the owner (5 Oct 2026)**. Age 9 has all 5 subjects (825 questions, automatic checks pass, human spot-check still pending); ages 10–17 are not written. The launch condition in `DESIGN_CRYSTAL_JOB.md` (all of ages 9–17 before the crystal/job system opens to players) still stands until the owner changes it.
 
