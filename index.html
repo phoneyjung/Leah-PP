@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.70';
+const VERSION='Lantern Academy 1.71';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -1976,14 +1976,18 @@ addEventListener('pointerdown',e=>{try{if(!S||!M||!M.fa||!M.fa.length||PAUSE||e.
 // ================= Academy class ranks (RO "Basic Skill" idea): features open one class at a time =================
 // Every player is a student starting in class 1. Each class unlocks 1–3 things with a short scene from the wizard teacher.
 // Progress is per player. Places opened by a class can still be visited together online (RO style: nobody is walled off from friends).
-const RANK_FEAT={compass:2,market:2,dig:2,home:3,book:3,fish:4,lake:4,dash:4,warp:5,cave2:5,tools:5,wheel:5,pets:6,emote:6,visit:6,cave3:6,trial:7,gift:7,lands:8,events:8,fa:8,auto:8,beach:9,falls:9,sell:9,dream:10};
+const RANK_FEAT={compass:2,market:2,dig:2,home:3,book:3,fish:4,lake:4,dash:4,warp:5,cave2:5,tools:5,wheel:5,pets:6,emote:6,visit:6,cave3:6,trial:7,gift:6,lands:8,events:8,fa:6,auto:6,beach:9,falls:9,sell:6,dream:10};
+// 1.71 BUG-23: the tasks of classes 3, 4 and 6 asked for places that left the game in 1.02, so nobody could pass class 2 (child) or 3 (adult).
+// They now use what today's world has. Classes above RANK_NOW have no reachable task yet and show as "coming soon".
+const RANK_NOW=6,cry171=id=>(((S&&S.crystals)||{})[id]||[]).length,caveN171=()=>{try{const m=CACHE.cavemouth;return(m&&m.crystals&&m.crystals.length)||4}catch(e){return 4}},
+ farm171=()=>{try{return typeof NEWW==='function'&&!!NEWW()}catch(e){return false}},dig171=()=>Math.min(3,(S&&S.cnt&&S.cnt.dig)||0);
 const RANK_PLACE={market:'market',home:'home',room:'home',lake:'lake',cave2:'cave2',cave3:'cave3',trial:'trial',beach:'beach',falls:'falls'};
 const cave1Need=()=>(CAVE_CFG.cave1&&CAVE_CFG.cave1.crystals)||8;
 const RANK_REQ={2:{k:()=>[totalCrystals(),3],a:()=>[Math.max(totalCrystals()>=1?1:0,S.lv>=3?1:0),1]},
-  3:{k:()=>[((S.crystals||{}).cave1||[]).length,cave1Need()],a:()=>[S.lv>=5||((S.crystals||{}).cave1||[]).length>=cave1Need()?1:0,1]},
-  4:{k:()=>[S.planted?1:0,1],a:()=>[S.planted?1:0,1]},
+  3:{k:()=>[Math.min(caveN171(),cry171('cavemouth')),caveN171()],a:()=>[S.lv>=5||cry171('cavemouth')>=caveN171()?1:0,1]},
+  4:{k:()=>farm171()?[S.planted?1:0,1]:[dig171(),3],a:()=>farm171()?[S.planted?1:0,1]:[dig171(),3]},
   5:{k:()=>[S.fishCaught||0,2],a:()=>[S.fishCaught||0,1]},
-  6:{k:()=>[((S.crystals||{}).cave2||[]).length,3],a:()=>[S.lv>=12||((S.crystals||{}).cave2||[]).length>=3?1:0,1]},
+  6:{k:()=>[Math.min(3,cry171('hunt1')),3],a:()=>[S.lv>=12||cry171('hunt1')>=3?1:0,1]},
   7:{k:()=>[S.boss?1:0,1],a:()=>[S.boss?1:0,1]},
   8:{k:()=>[S.trialN?1:0,1],a:()=>[S.trialN?1:0,1]},
   9:{k:()=>[chap()>=4?1:0,1],a:()=>[chap()>=4?1:0,1]},
@@ -2000,7 +2004,7 @@ for(let n=2;n<=10;n++)SCENES['rank'+n]=[['dad','rkUp'+n],['dad','rkGet'+n]];
 let RANK_T=0;
 function rankUp(){const n=(S.rank||1)+1;if(n>10)return;S.rank=n;save();hud();S.seen=S.seen||{};delete S.seen['rank'+n];
   playScene('rank'+n,()=>{celebrate();sfx('lvl');rankGlow(n);say('🎓 '+t('rkNow')+' '+n)})}
-function rankGlow(n){const ids={2:['bCmp'],3:['bBook'],4:['bDash'],5:['bMap','bWheel'],6:['bPets','bEmo','bVisit'],8:['bAuto']}[n]||[];ids.forEach(id=>{const b=$(id);if(b){b.classList.add('laNew');setTimeout(()=>b.classList.remove('laNew'),12000)}})}
+function rankGlow(n){const ids={2:['bCmp'],3:['bBook'],4:['bDash'],5:['bMap','mmw','bWheel'],6:['bPets','bEmo','bVisit','bAuto']}[n]||[];ids.forEach(id=>{const b=$(id);if(b){b.classList.add('laNew');setTimeout(()=>b.classList.remove('laNew'),12000)}})}
 {const _up9=update;update=function(dt){const r=_up9.apply(this,arguments);try{if(S&&!PAUSE&&!DLG&&!TEST_ALL()){RANK_T-=dt;if(RANK_T<=0){RANK_T=1;rankMigrate();const n=(S.rank||1)+1;if(n<=10){const [a,b]=rankProg(n);if(a>=b)rankUp()}}}}catch(e){}return r}}
 // hide what is not open yet (never un-hides something the game hid for other reasons)
 const RANK_BTN={bCmp:'compass',bBook:'book',bDash:'dash',bMap:'warp',bWheel:'wheel',bPets:'pets',bEmo:'emote',bVisit:'visit',bAuto:'auto'};
@@ -2021,13 +2025,13 @@ function withFamily(){return Net&&Net.online&&Net.others&&Object.keys(Net.others
 {const _sh2=openShop;openShop=function(){const r=_sh2.apply(this,arguments);try{if(!rHas('sell')){const b=$('fsBtn');if(b)b.remove()}}catch(e){}return r}}
 {const _ow3=openWarp;openWarp=function(){const r=_ow3.apply(this,arguments);try{document.querySelectorAll('[data-land]').forEach(b=>{const id=b.dataset.land,need=id==='trial'?RANK_FEAT.trial:(id==='beach'||id==='falls')?RANK_FEAT[id]:RANK_FEAT.lands;if(rank()<need&&!withFamily()){b.disabled=true;b.textContent='🎓 '+t('rkNeed')+' '+need+' · '+b.textContent.replace(/^\S+\s/,'')}})}catch(e){}return r}}
 // the class panel: done classes, the next task with progress, and "???" for what is further ahead
-function rankTask(n){return t('rkTask'+n+(isKid()?'k':'a'))}
-function openRank(){const cur=rank(),n=cur+1;const rows=[];for(let i=1;i<=10;i++){const done=i<=cur,next=i===n;const [a,b]=next?rankProg(i):[0,0];
-    rows.push(`<div class="pn" style="margin:3px 0;opacity:${done||next?1:.55}"><b>${done?'✅':next?'🎯':'🔒'} ${t('rkClass')} ${i}</b> · ${done||next?t('rkGet'+i+'s'):'???'}${next?`<br><small>${rankTask(i)} (${Math.min(a,b)}/${b})</small>`:''}</div>`)}
+function rankTask(n){return t('rkTask'+n+(n===4&&!farm171()?'d':'')+(isKid()?'k':'a'))}
+function openRank(){const cur=rank(),n=cur+1;const rows=[];for(let i=1;i<=10;i++){const done=i<=cur,soon=!done&&i>RANK_NOW,next=i===n&&!soon;const [a,b]=next?rankProg(i):[0,0];
+    rows.push(`<div class="pn" style="margin:3px 0;opacity:${done||next?1:.55}"><b>${done?'✅':next?'🎯':'🔒'} ${t('rkClass')} ${i}</b> · ${soon?t('rkSoon'):done||next?t('rkGet'+i+'s'+(isKid()&&TX.th['rkGet'+i+'sk']?'k':'')):'???'}${next?`<br><small>${rankTask(i)} (${Math.min(a,b)}/${b})</small>`:''}</div>`)}
   modal(`<h2>🎓 ${t('rkTitle')} · ${t('rkClass')} ${cur}</h2><p class="note">${t('rkHow')}</p>${rows.join('')}`)}
 function addRankBtn(){const h=document.querySelector('#modal h2')||document.querySelector('.modal h2');if(!h||$('rkBtn'))return;const b=document.createElement('button');b.id='rkBtn';b.textContent='🎓 '+t('rkClass')+' '+rank();b.style.marginLeft='8px';b.onclick=openRank;h.after(b)}
 // goal line in town: the next class task
-{const _ug4=updateGoal;updateGoal=function(){const r=_ug4.apply(this,arguments);try{if(S&&M&&M.kind!=='cave'&&!TEST_ALL()&&rank()<10){const n=rank()+1,[a,b]=rankProg(n);const el=$('goal');if(el&&a<b)el.textContent='🎓 '+t('rkClass')+' '+n+': '+rankTask(n)+(b>1?' '+a+'/'+b:'')}}catch(e){}return r}}
+{const _ug4=updateGoal;updateGoal=function(){const r=_ug4.apply(this,arguments);try{if(S&&M&&M.kind!=='cave'&&!TEST_ALL()&&rank()<RANK_NOW){const n=rank()+1,[a,b]=rankProg(n);const el=$('goal');if(el&&a<b)el.textContent='🎓 '+t('rkClass')+' '+n+': '+rankTask(n)+(b>1?' '+a+'/'+b:'')}}catch(e){}return r}}
 addEventListener('click',e=>{try{if(e.target&&e.target.id==='goal'&&S)openRank()}catch(err){}});
 (()=>{const st=document.createElement('style');st.textContent='@keyframes laGlow{0%,100%{box-shadow:0 0 0 0 rgba(255,215,110,.0)}50%{box-shadow:0 0 16px 6px rgba(255,215,110,.9)}}.laNew{animation:laGlow 1.2s ease-in-out infinite}#goal{cursor:pointer}';document.head.append(st)})();
 
@@ -5262,4 +5266,52 @@ function openSwordsman170(){if(!gmOn())return;const owner=S,txt=(a,b)=>LANG==='e
 {const old=modal;modal=function(){document.querySelector('#modal>.pn')?.classList.remove('sw170-panel');return old.apply(this,arguments)}}
 {const st=document.createElement('style');st.textContent=`body #modal>.pn.sw170-panel{max-width:650px;width:94vw;max-height:94vh;padding:16px;border-image:none!important;border:2px solid #c9ab70;border-radius:16px;background:#292137;color:#fff0d6}#sw170 h2{font-size:21px;margin:0 0 10px;color:#ffe2a2}.sw170-body{display:flex;gap:18px;align-items:center}.sw170-body>div{flex:1;min-width:0}.sw170-body p{margin:6px 0}#sw170-preview{width:160px;height:160px;flex-shrink:0;image-rendering:pixelated;background:#3b4239;border-radius:12px}.sw170-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}#sw170 button{min-height:48px;border-image:none!important;font-size:15px}#sw170-status{font-size:13px;color:#f5d590}@media(max-height:400px){body #modal>.pn.sw170-panel{padding:10px 14px}#sw170 h2{font-size:18px;margin-bottom:4px}#sw170-preview{width:104px;height:104px}.sw170-body p{font-size:12px}.sw170-actions{margin-top:8px}}@media(max-width:460px){.sw170-body{gap:10px}#sw170-preview{width:100px;height:100px}#sw170 button{font-size:13px;padding:6px 10px}}`;document.head.append(st)}
 
+// ================= 1.71 SCREEN FIXES (BUG-17..24) · FEWEST BUTTONS FOR CHILDREN =================
+// Owner, 8 Oct: fix now; under 12 the main screen keeps only what is needed, everything else is tucked away (nothing is removed).
+{const st=document.createElement('style');st.textContent=`
+ /* BUG-17: a control brought into view must clear the sticky window header */
+ #modal>.pn{scroll-padding-top:96px}
+ /* BUG-18: gold and house-colour buttons keep their own surface; the dark painted button art made their dark letters unreadable */
+ body.art156-frames button.go,body.art156-frames button.hs,body.art156-frames #instTitle{border-image:none!important}
+ .hs{color:#120a20!important}
+ /* BUG-19: on a very short screen the start button stays whole on the first screen */
+ @media(max-height:360px){#cr .l{justify-content:flex-start!important;gap:3px!important;padding-top:5px!important;padding-bottom:5px!important}#cr #cpv{height:40vh!important;width:auto!important}#cr .l h1{font-size:14px!important}#cr #crole{font-size:11px!important;line-height:1.25!important}}
+ /* BUG-20: age buttons a child's finger can hit */
+ #cr .ages button{min-width:44px!important;min-height:44px!important}
+ /* BUG-22: the name box keeps a readable width; the privacy note goes on its own line */
+ #cr .row2{flex-wrap:wrap}#cr #cname{flex:1 1 120px!important;min-width:120px!important}#cr #cname+.note{flex:1 1 100%!important;order:9}
+ /* BUG-24: the close button of every window stays on screen instead of sitting below a long list */
+ .mxRow171,#mBody>div:has(>#mX){position:sticky;bottom:-1px;z-index:5;pointer-events:none;margin-top:10px}
+ .mxRow171>#mX,#mBody>div:has(>#mX)>#mX{pointer-events:auto;box-shadow:0 0 0 6px #231c2dcc}
+ /* children (kid mode on): no map button (the small map opens it), no book button (it is in the bag), no empty skill rings */
+ body.kidmin171 #btns #bMap,body.kidmin171 #btns #bBook,body.kidmin171 #act #bSlot2,body.kidmin171 #act #bSlot3{display:none!important}
+ #bKidBook171,#bKidMap171{margin:0 0 6px 8px;vertical-align:middle}`;document.head.append(st)}
+// BUG-24 for browsers without :has(): mark the close row when a window is built
+{const old=modal;modal=function(){const r=old.apply(this,arguments);try{const x=$('mX');if(x&&x.parentElement&&x.parentElement.parentElement===$('mBody'))x.parentElement.classList.add('mxRow171')}catch(e){}return r}}
+// class texts for today's world (BUG-23)
+try{Object.assign(TX.th,{rkSoon:'เร็ว ๆ นี้',rkTask3k:'ปลุกคริสตัลที่ปากถ้ำอเมทิสต์ให้ครบ',rkTask3a:'ถึง Lv5 หรือปลุกคริสตัลที่ปากถ้ำให้ครบ',rkTask4dk:'ขุดดินที่จุดขุดในถ้ำ',rkTask4da:'ขุดดินที่จุดขุดในถ้ำ',
+  rkTask5k:'ตกปลาที่จุดตกปลา 🎣',rkTask5a:'ตกปลาที่จุดตกปลา 🎣',rkTask6k:'ปลุกคริสตัลในถ้ำอเมทิสต์ชั้น 1',rkTask6a:'ถึง Lv12 หรือปลุกคริสตัลในถ้ำอเมทิสต์ชั้น 1 ให้ได้ 3 เม็ด',
+  rkUp3:'ปากถ้ำสว่างทั้งหมดแล้ว ขึ้นชั้น 3!',rkUp4:'ทำได้แล้ว เก่งมาก ขึ้นชั้น 4!',rkUp6:'ถ้ำอเมทิสต์เริ่มสว่างแล้ว ขึ้นชั้น 6!',
+  rkGet2:'ครูให้เข็มทิศชี้คริสตัล และตอนนี้ขุดหาของที่จุดขุดในถ้ำได้แล้ว',rkGet3:'บ้านของเธอพร้อมแล้ว เข้าไปทำอาหารและแต่งบ้านได้ สมุดความรู้ก็เปิดแล้ว',
+  rkGet4:'ตกปลาได้แล้ว มองหาจุดตกปลา 🎣 ริมน้ำนะ',rkGet5:'แผนที่วาร์ปใช้ได้แล้ว แตะแผนที่เล็กที่มุมจอเพื่อเปิด อัปเครื่องมือในกระเป๋าได้ และมีวงล้อนำโชคที่กระดานภารกิจ',
+  rkGet6:'มีเพื่อนสัตว์เลี้ยงได้ ส่งอีโมต ไปเยี่ยมบ้านเพื่อน มีกล่องของขวัญ จุดพิเศษในถ้ำ และขายปลาที่ร้านยายนวลได้แล้ว',
+  rkGet1s:'เดิน · คุย · ถ้ำคริสตัล',rkGet2s:'เข็มทิศ · ขุด',rkGet3s:'บ้าน · ครัว · สมุด',rkGet4s:'ตกปลา · บลิ๊ง',rkGet5s:'แผนที่วาร์ป · เครื่องมือ · วงล้อ',rkGet6s:'สัตว์เลี้ยง · อีโมต · เยี่ยมบ้าน · ของขวัญ · จุดพิเศษ · ขายปลา · ออโต้',
+  rkGet4sk:'ตกปลา',rkGet6sk:'สัตว์เลี้ยง · เยี่ยมบ้าน · ของขวัญ · จุดพิเศษ · ขายปลา',kb171Book:'สมุดความรู้',kb171Map:'แผนที่'});
+ if(TX.en)Object.assign(TX.en,{rkSoon:'Coming soon',rkTask3k:'Wake every crystal at the Amethyst Cave mouth',rkTask3a:'Reach Lv5 or wake every crystal at the cave mouth',rkTask4dk:'Dig at the dig spots in the cave',rkTask4da:'Dig at the dig spots in the cave',
+  rkTask5k:'Catch fish at a fishing spot 🎣',rkTask5a:'Catch fish at a fishing spot 🎣',rkTask6k:'Wake crystals on Amethyst Cave floor 1',rkTask6a:'Reach Lv12 or wake 3 crystals on Amethyst Cave floor 1',
+  rkUp3:'The cave mouth is all lit. Class 3!',rkUp4:'You did it. Class 4!',rkUp6:'The Amethyst Cave is waking. Class 6!',
+  rkGet2:'Here is a compass that points to crystals, and you can now dig at the dig spots in the cave',rkGet3:'Your home is ready: go in to cook and decorate. The book is open too',
+  rkGet4:'You can fish now. Look for a fishing spot 🎣 by the water',rkGet5:'Light-stone warps work now: tap the small map in the corner. Tools can be upgraded in the bag, and the lucky wheel is at the mission board',
+  rkGet6:'Pets, emotes, visiting friends, the gift box, special spots in the cave and selling fish at Grandma Nuan\'s are open',
+  rkGet1s:'Walk · talk · crystal cave',rkGet2s:'Compass · digging',rkGet3s:'Home · kitchen · book',rkGet4s:'Fishing · blink',rkGet5s:'Warp map · tools · wheel',rkGet6s:'Pets · emotes · visits · gifts · special spots · sell fish · auto',
+  rkGet4sk:'Fishing',rkGet6sk:'Pets \u00b7 visits \u00b7 gifts \u00b7 special spots \u00b7 sell fish',kb171Book:'Knowledge book',kb171Map:'Map'})}catch(e){}
+// Children: the main screen keeps the stick, the big button, the bag and settings (plus buttons that belong to the place: compass in a cave, arrange at home).
+// Follows the existing "kid mode" switch in settings, so a parent can bring every button back.
+function kidMin171(){const on=!!(S&&isKid()&&kidUI());document.body.classList.toggle('kidmin171',on);const b=document.getElementById('bRest');if(b)b.classList.toggle('hide',on);return on}
+{const old=hud;hud=function(){const r=old.apply(this,arguments);try{kidMin171()}catch(e){}return r}}
+// what left the main screen is one tap away inside the child's bag
+{const old=openBag;openBag=function(){const r=old.apply(this,arguments);try{if(S&&isKid()){const host=document.getElementById('mBody'),h=host&&host.querySelector('h2');
+  if(h&&host.querySelector('#kbOther')){let anchor=host.querySelector('#rkBtn')||host.querySelector('#bStampBook')||host.querySelector('#bCardBook')||h;
+   for(const [id,ic,key,ok,open] of [['bKidBook171','\u{1F4D6}','kb171Book',rHas('book'),()=>openBook()],['bKidMap171','\u{1F5FA}️','kb171Map',rHas('warp'),()=>openWarp()]]){
+    if(!ok||host.querySelector('#'+id))continue;const b=document.createElement('button');b.id=id;b.textContent=ic+' '+t(key);b.onclick=()=>{closeModal();open()};anchor.after(b);anchor=b}}}}catch(e){}return r}}
 </script></body></html>

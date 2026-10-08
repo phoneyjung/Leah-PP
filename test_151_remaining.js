@@ -67,7 +67,8 @@ async function portableLaunches(){const files=fs.readdirSync(root).filter(n=>/^(
   await check('sit-investigation',async()=>{const pc=await boot(browser),phone=await boot(browser,[],true),report=[];
    try{for(const age of [30,7])for(const seat of ['ground','bench'])for(const input of ['click','arrow','stick']){
     const touch=input==='stick',c=touch?phone:pc;
-    await c.pg.evaluate((age,seat)=>{closeModal();DLG=null;PAUSE=false;HOLD=null;P.sit=null;P.path=null;P.act=null;P.target=null;FISHING.on=false;S.age=age;hud();
+    // 1.71 (owner, 8 Oct; edited by Claude): in kid mode a child's main screen has no rest button, so the child's ground seat runs with kid mode switched off in settings.
+    await c.pg.evaluate((age,seat)=>{closeModal();DLG=null;PAUSE=false;HOLD=null;P.sit=null;P.path=null;P.act=null;P.target=null;FISHING.on=false;S.age=age;if(age<12)S.kidUI=false;else delete S.kidUI;hud();
      if(seat==='ground'){P.x=M.spawnDefault[0];P.y=M.spawnDefault[1];return}const q=g9bSeats()[0];
      for(let radius=0;radius<5;radius++)for(let dy=-radius;dy<=radius;dy++)for(let dx=-radius;dx<=radius;dx++){
       const tx=Math.floor(q.x/T)+dx,ty=Math.floor((q.by+50)/T)+dy;if(walkable(M,tx,ty)){P.x=tx*T+16;P.y=ty*T+16;return}}
