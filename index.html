@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.76';
+const VERSION='Lantern Academy 1.77';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -840,7 +840,7 @@ function openParent(){const d=S.days||{},td=(d[today()]||{}).sec||0,qs=S.qs||{};
   const subj=Object.entries(qs);modal(`<h2>${t('parent')} · ${t('report')} ${S.name}</h2><p><b>${t('today')}: ${Math.round(td/60)} ${t('min')}</b></p>
   <p class="note">${t('last7')}</p><div style="display:flex;gap:6px;align-items:flex-end;height:70px;margin-bottom:10px">${days.map(k=>{const v=(d[k]||{}).sec||0;return`<div style="flex:1;text-align:center;font-size:10px"><div style="background:#e0a92e;height:${Math.round(50*v/mx)}px"></div>${k.slice(8)}</div>`}).join('')}</div>
   <p class="note">${t('accuracy')}</p>${subj.length?subj.map(([s,v])=>{const n=v.ok+v.no,p=n?Math.round(100*v.ok/n):0;return`<div class="row2" style="margin-bottom:4px"><span style="width:90px">${t('sub_'+s)}</span><div class="bar" style="flex:1;margin:0"><i style="width:${p}%;background:#7df28a"></i><b>${p}% · ${n}</b></div></div>`}).join(''):`<p class="note">${t('noData')}</p>`}
-  <p class="note">🔁 ${t('toReview')}: ${Object.values(S.qr||{}).filter(r=>r.box<3).length}</p><p style="margin-top:10px"><b>${t('subjects')}</b></p><div class="row2" style="flex-wrap:wrap">${['math','english','thai','chinese','general'].map(s2=>`<button data-sub="${s2}" style="${(S.subOff||{})[s2]?'opacity:.45':'background:#2f7d3a'}">${(S.subOff||{})[s2]?'⬜':'✅'} ${t('sub_'+s2)}</button>`).join('')}</div>
+  <p class="note">🔁 ${t('toReview')}: ${Object.values(S.qr||{}).filter(r=>r.box<1).length}</p><p style="margin-top:10px"><b>${t('subjects')}</b></p><div class="row2" style="flex-wrap:wrap">${['math','english','thai','chinese','general'].map(s2=>`<button data-sub="${s2}" style="${(S.subOff||{})[s2]?'opacity:.45':'background:#2f7d3a'}">${(S.subOff||{})[s2]?'⬜':'✅'} ${t('sub_'+s2)}</button>`).join('')}</div>
   <p style="margin-top:10px"><b>${t('limit')}</b></p><div class="row2">${[0,30,45,60,90].map(m=>`<button data-lim="${m}" style="${(S.limit||0)===m?'background:#5a4690':''}">${m?m+' '+t('min'):t('off')}</button>`).join('')}</div>`);
   document.querySelectorAll('[data-sub]').forEach(b=>b.onclick=()=>{S.subOff=S.subOff||{};const k=b.dataset.sub;const on=['math','english','thai','chinese','general'].filter(x=>!S.subOff[x]);if(!S.subOff[k]&&on.length<=1)return;S.subOff[k]=!S.subOff[k];save();openParent()});
   document.querySelectorAll('[data-lim]').forEach(b=>b.onclick=()=>{S.limit=+b.dataset.lim;S.limitOk=null;limitWarned=limitShown=false;save();openParent()})}
@@ -5496,4 +5496,38 @@ addEventListener('pointerdown',e=>{try{if(e.pointerType==='touch')TCH176.set(e.p
 {const up=e=>{TCH176.delete(e.pointerId);if(e.pointerId===CMD176.btn)CMD176.btn=null};addEventListener('pointerup',up,true);addEventListener('pointercancel',up,true);addEventListener('blur',()=>{TCH176.clear();CMD176.btn=null})}
 // pinch zoom only when both fingers are on the game view and no stick is held
 function cmdNoZoom176(){if(JOY.id!==null&&JOY.id!=='pad')return true;if(typeof FJ172!=='undefined'&&FJ172.on)return true;for(const onView of TCH176.values())if(!onView)return true;return false}
+// ================= 1.77 QUESTIONS: FINISH YOUR OWN AGE FIRST · NEVER REPEAT WHAT WAS ANSWERED RIGHT =================
+// Owner, 8 Oct: a child may go on to the next age's questions only after the questions of their own age are finished, and questions are
+// not repeated; one answered wrong comes back later until it is answered right (DESIGN_QUESTION_ORDER.md).
+// Before: the pool mixed the player's age with one year below and above (so a 7-year-old who answered 8 of 10 right got age-8 maths:
+// numbers above 100, tables beyond 2-5), every right answer was asked once more a day later, and a small pool fell back to any question.
+// Now, per subject: the youngest age from the player's own upwards that still has a question not yet answered right. "Answered right"
+// means right at the first choice; those are never chosen again. One answered wrong waits 10 minutes and is never the very next
+// question. A child with under half of the last answers right gets the easiest level of that age first.
+// When every age from the player's own up is finished in every subject: the ages below; only after those, questions come round again.
+// Subject switches, the no-Thai-subject-in-English rule, weak subjects coming more often, and the ages that are loaded are unchanged.
+// S.qr keeps at most 600 records (it drops the oldest), which cannot remember a whole age (843 questions), so the finished ones are
+// kept in S.qd {id:1} (about 13 bytes each in the save). An older save is carried over the first time a question is chosen.
+const Q177={WAIT_MIN:10,recent:[]};
+function qDone177(){if(!S.qd){S.qd={};const QR=S.qr||{};for(const id of Object.keys(QR))if(QR[id]&&QR[id].box>=1)S.qd[id]=1}return S.qd}
+pickQuestion=function(){const QD=qDone177(),QR=S.qr||{},off=S.subOff||{},now=Date.now(),pol=questionAgePolicy(S.age),acc=recentAcc(),weak=acc!==null&&acc<.5;
+ const okQ=q=>q&&q[LANG]&&!(LANG==='en'&&q.subject==='thai')&&!off[q.subject],right=q=>!!QD[q.id]||!!(QR[q.id]&&QR[q.id].box>=1);
+ const pick=a=>a[Math.floor(Math.random()*a.length)],give=(q,again)=>{q._review=again?1:0;lastQ=q.id;Q177.recent.push(q.id);if(Q177.recent.length>40)Q177.recent.shift();return q};
+ const ages=[];for(let a=pol.age;a<=pol.maxAge;a++)ages.push(a);for(let a=pol.age-1;a>=pol.minAge;a--)ages.push(a);     // own age up, then the ages below
+ const subs={};for(const q of QBANK){if(okQ(q)&&ages.includes(q.age))(subs[q.subject||'general']=subs[q.subject||'general']||[]).push(q)}
+ const open=[];for(const k of Object.keys(subs)){const age=ages.find(a=>subs[k].some(q=>q.age===a&&!right(q)));if(age===undefined)continue;
+  const left=subs[k].filter(q=>q.age===age&&!right(q)),fresh=left.filter(q=>!QR[q.id]),back=left.filter(q=>QR[q.id]&&q.id!==lastQ);
+  open.push({k,fresh,back,due:back.filter(q=>now>=(QR[q.id].due||0))})}
+ const st=S.qs||{},w=o=>{const v=st[o.k];return !v||v.ok+v.no<3?1:1+2*(1-v.ok/(v.ok+v.no))};
+ const ready=open.filter(o=>o.fresh.length||o.due.length);
+ if(ready.length){let tot=0;for(const o of ready)tot+=w(o);let r=Math.random()*tot,o=ready[0];for(const x of ready){r-=w(x);if(r<=0){o=x;break}}
+  if(o.due.length&&(!o.fresh.length||Math.random()<.4))return give(pick(o.due),true);
+  let pool=o.fresh;if(weak){const lo=Math.min(...pool.map(q=>q.level||1));pool=pool.filter(q=>(q.level||1)===lo)}return give(pick(pool),false)}
+ const waiting=[].concat(...open.map(o=>o.back)).sort((a,b)=>(QR[a.id].due||0)-(QR[b.id].due||0));if(waiting.length)return give(waiting[0],true);   // only ones answered wrong minutes ago are left
+ const all=[].concat(...Object.values(subs)),far=all.filter(q=>!Q177.recent.includes(q.id));
+ if(all.length)return give(pick(far.length?far:all.filter(q=>q.id!==lastQ).concat(all.length<2?all:[])),true);          // everything is finished: round again, not the last 40 asked
+ const any=QBANK.filter(q=>q[LANG]&&q.id!==lastQ);return give(pick(any.length?any:QBANK),false)};                        // no bank for these settings: anything, as before
+// a right first choice finishes the question for good; a wrong one makes it wait 10 minutes (it was 2) and un-finishes it if it had come round again
+{const old=qResult;qResult=function(q,firstOk){try{const QD=qDone177(),ids=Object.keys(S.qr||{});if(ids.length>500)for(const id of ids)if(QD[id])delete S.qr[id]}catch(err){}   // finished ones leave S.qr, so its 600 limit never drops one that is still waiting
+  const r=old.apply(this,arguments);try{if(q&&q.id){if(firstOk)S.qd[q.id]=1;else{delete S.qd[q.id];if(S.qr&&S.qr[q.id])S.qr[q.id].due=Date.now()+Q177.WAIT_MIN*60000}}}catch(err){}return r}}
 </script></body></html>

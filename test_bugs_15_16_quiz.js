@@ -18,7 +18,10 @@ const shut=async c=>{try{for(const p of await c.pages())await p.close()}catch(e)
   await play(age);return {ctx,pg,req,play}}
  // สุ่มคำถามแบบที่เกมสุ่มจริง 3 สภาพ (ยังไม่มีสถิติ · ตอบเก่ง · ตอบพลาดบ่อย) แล้วดูว่าได้ข้อไม่ซ้ำกี่ข้อ และเป็นของอายุใดบ้าง
  const sample=pg=>pg.evaluate(()=>{const run=(recent,n)=>{S.qr={};S.recent=recent;const ids=new Set(),ages=new Set();for(let i=0;i<n;i++){const q=pickQuestion();ids.add(q.id);ages.add(q.age)}return {distinct:ids.size,ages:[...ages]}};
-   const a=run([],400),b=run([1,1,1,1,1,1,1,1,1,1],300),c=run([0,0,0,0,0,0,0,0,0,0],300);S.qr={};S.recent=[];return {distinct:a.distinct,served:[...new Set([...a.ages,...b.ages,...c.ages])].sort((x,y)=>x-y),bank:QBANK.length}});
+   const a=run([],400),b=run([1,1,1,1,1,1,1,1,1,1],300),c=run([0,0,0,0,0,0,0,0,0,0],300);
+   // 1.77 (เจ้าของสั่ง 8 ต.ค.): ต้องตอบข้อของอายุตัวเองถูกครบก่อนจึงได้ข้ออายุอื่น การสุ่มเฉย ๆ จึงได้อายุเดียว · ข้อ "ไฟล์ที่โหลดต้องมีทางถูกถาม" วัดด้วยผู้เล่นที่ตอบถูกต่อเนื่อง 2,700 ข้อ
+   S.qr={};S.qd={};S.recent=[];const walked=new Set();for(let i=0;i<2700;i++){const q=pickQuestion();walked.add(q.age);qResult(q,true)}
+   S.qr={};S.qd={};S.recent=[];return {distinct:a.distinct,served:[...new Set([...a.ages,...b.ages,...c.ages,...walked])].sort((x,y)=>x-y),bank:QBANK.length}});
  try{
   await check('BUG-15 ปุ่มปิดคำอธิบายเฉลยอยู่ในจอมือถือ',async()=>{const out={};
    for(const [w,h] of PHONES){const {ctx,pg}=await open(7,{width:w,height:h,isMobile:true,hasTouch:true,deviceScaleFactor:2});
@@ -39,7 +42,7 @@ const shut=async c=>{try{for(const p of await c.pages())await p.close()}catch(e)
   for(const age of AGES){const {ctx,pg,req}=await open(age);per[age]={...(await sample(pg)),fileAges:[...new Set(req)].sort((a,b)=>a-b),files:req.length};await shut(ctx)}
   results.perAge=per;
   await check('BUG-16ก ทุกอายุมีคำถามให้สุ่มหลากหลาย',async()=>{for(const [age,r] of Object.entries(per))assert(r.distinct>=250,'อายุ '+age+': สุ่ม 400 ครั้งได้คำถามไม่ซ้ำแค่ '+r.distinct+' ข้อ (ต้องอย่างน้อย 250) · คลังที่โหลด '+r.bank+' ข้อ · ไฟล์อายุ ['+r.fileAges+']');return Object.fromEntries(Object.entries(per).map(([a,r])=>[a,r.distinct]))});
-  await check('BUG-16ข ไม่โหลดไฟล์ของอายุที่เกมไม่มีทางถาม',async()=>{for(const [age,r] of Object.entries(per)){const waste=r.fileAges.filter(a=>!r.served.includes(a));assert.deepEqual(waste,[],'อายุ '+age+': โหลดไฟล์อายุ ['+waste+'] แต่สุ่ม 1,000 ครั้งไม่เคยได้ข้อของอายุนั้น (ถามได้จริงแค่อายุ ['+r.served+'])')}
+  await check('BUG-16ข ไม่โหลดไฟล์ของอายุที่เกมไม่มีทางถาม',async()=>{for(const [age,r] of Object.entries(per)){const waste=r.fileAges.filter(a=>!r.served.includes(a));assert.deepEqual(waste,[],'อายุ '+age+': โหลดไฟล์อายุ ['+waste+'] แต่สุ่ม 1,000 ครั้งและตอบถูกต่อเนื่อง 2,700 ข้อ ไม่เคยได้ข้อของอายุนั้น (ถามได้จริงแค่อายุ ['+r.served+'])')}
    return Object.fromEntries(Object.entries(per).map(([a,r])=>[a,r.files+' ไฟล์ อายุ '+r.fileAges.join(',')]))});
   await check('BUG-16ค เปลี่ยนช่องเซฟจากเด็ก 7 ขวบเป็นผู้ใหญ่ 30 แล้วยังมีคำถามหลากหลาย',async()=>{const {ctx,pg,play}=await open(7);const a=await sample(pg);await play(30);const b=await sample(pg);await shut(ctx);
    assert(a.distinct>=250,'เด็ก 7 ขวบ: ไม่ซ้ำ '+a.distinct);assert(b.distinct>=250,'ผู้ใหญ่ 30 หลังเปลี่ยนช่องเซฟ: ไม่ซ้ำแค่ '+b.distinct+' ข้อ (คลัง '+b.bank+')');return {kid7:a.distinct,adult30:b.distinct}});
