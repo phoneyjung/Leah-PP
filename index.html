@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.74';
+const VERSION='Lantern Academy 1.75';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -5405,4 +5405,31 @@ addEventListener('keydown',e=>{if(e.code!=='KeyR'||e.repeat||!S||PAUSE||DLG)retu
 {const old=update;update=function(dt){const r=old.apply(this,arguments);try{if(NT174&&JOY.id===null&&!(typeof FJ172!=='undefined'&&FJ172.on)){const k=$('joyK');if(k){let x=0,y=0;
   if(keys.a||keys.ArrowLeft)x--;if(keys.d||keys.ArrowRight)x++;if(keys.w||keys.ArrowUp)y--;if(keys.s||keys.ArrowDown)y++;const d=Math.hypot(x,y)||1,ox=Math.round(36+x/d*12),oy=Math.round(36+y/d*12);
   const L=ox+'px',T=oy+'px';if(k.style.left!==L)k.style.left=L;if(k.style.top!==T)k.style.top=T}}}catch(e){}return r}}
+
+// ================= 1.75 DEVICE STATUS LINE, TOP LEFT =================
+// Owner, 8 Oct: time, battery, Wi-Fi, FPS, ping and the like go at the top left. One small line above the player card; it touches nothing.
+// Battery shows where the browser can read it (Chrome on Android, computers), ping is the round trip to the game's own server every 15 s.
+const SYS175={el:null,frames:0,fps:0,t0:performance.now(),bat:null,ping:null,pingBusy:false};
+{const st=document.createElement('style');st.textContent=`
+ #sys175{position:fixed;top:calc(3px + env(safe-area-inset-top,0px));left:calc(12px + env(safe-area-inset-left,0px));z-index:7;display:none;gap:7px;align-items:center;
+   height:17px;padding:0 8px;border-radius:9px;background:#1b1330b3;box-shadow:0 0 0 1px #d9bc7c55;color:#f1dfb4;font:600 10.5px/17px system-ui,sans-serif;white-space:nowrap;pointer-events:none}
+ #sys175 b{font-weight:700;color:#fff3d0} #sys175 .off{color:#ffb38a}
+ body.sys175 #hud{top:calc(26px + env(safe-area-inset-top,0px))!important} body.sys175 #lampBar{top:calc(141px + env(safe-area-inset-top,0px))!important}`;document.head.append(st)}
+{const el=document.createElement('div');el.id='sys175';el.setAttribute('aria-hidden','true');document.body.append(el);SYS175.el=el}
+try{if(navigator.getBattery)navigator.getBattery().then(b=>{SYS175.bat=b}).catch(()=>{})}catch(e){}
+try{Object.assign(TX.th,{sysOff175:'ออฟไลน์',sysOn175:'ออนไลน์'});if(TX.en)Object.assign(TX.en,{sysOff175:'Offline',sysOn175:'Online'})}catch(e){}
+function sysPing175(){if(SYS175.pingBusy||!navigator.onLine||document.visibilityState!=='visible'||!location.protocol.startsWith('http'))return;SYS175.pingBusy=true;const t0=performance.now();
+ fetch('manifest.json?ping='+Date.now(),{method:'HEAD',cache:'no-store'}).then(()=>{SYS175.ping=Math.round(performance.now()-t0)}).catch(()=>{SYS175.ping=null}).finally(()=>{SYS175.pingBusy=false})}
+function sysDraw175(){const el=SYS175.el;if(!el)return;const on=!!(S&&M&&document.getElementById('cr')?.classList.contains('hide')!==false&&!document.getElementById('title'));
+ document.body.classList.toggle('sys175',on);el.style.display=on?'flex':'none';if(!on)return;
+ const d=new Date(),hm=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0'),parts=['<b>'+hm+'</b>'];
+ const b=SYS175.bat;if(b&&typeof b.level==='number')parts.push((b.charging?'⚡':'🔋')+Math.round(b.level*100)+'%');
+ const c=navigator.connection||{};if(!navigator.onLine)parts.push('<span class="off">📵 '+t('sysOff175')+'</span>');
+ else parts.push('📶 '+(c.type==='wifi'?'Wi-Fi':c.type==='cellular'?(c.effectiveType||'').toUpperCase()||'4G':c.effectiveType?c.effectiveType.toUpperCase():t('sysOn175')));
+ parts.push('FPS <b>'+SYS175.fps+'</b>');if(navigator.onLine)parts.push('Ping <b>'+(SYS175.ping===null?'…':SYS175.ping+' ms')+'</b>');
+ try{if(Net&&Net.online)parts.push('👥 '+(1+Object.keys(Net.others||{}).length))}catch(e){}
+ const html='<span>'+parts.join(' · ')+'</span>';if(el.innerHTML!==html)el.innerHTML=html}
+{const old=update;update=function(dt){const r=old.apply(this,arguments);try{SYS175.frames++;const now=performance.now();if(now-SYS175.t0>=1000){SYS175.fps=Math.round(SYS175.frames*1000/(now-SYS175.t0));SYS175.frames=0;SYS175.t0=now;sysDraw175()}}catch(e){}return r}}
+setInterval(()=>{try{sysDraw175()}catch(e){}},1000);setInterval(()=>{try{sysPing175()}catch(e){}},15000);setTimeout(()=>{try{sysPing175()}catch(e){}},2500);
+addEventListener('online',()=>{try{sysPing175();sysDraw175()}catch(e){}});addEventListener('offline',()=>{try{SYS175.ping=null;sysDraw175()}catch(e){}});
 </script></body></html>
