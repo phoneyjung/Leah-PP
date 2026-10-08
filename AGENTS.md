@@ -52,6 +52,7 @@ Two fingers: send CDP `Input.dispatchTouchEvent`. To lift ONE finger while anoth
 - The owner generates pictures himself in ChatGPT. Give him copy-paste prompts, each starting
   `Make 5 separate images, one after another. Each one must be a brand-new painting, not an edit or a copy of the previous image.`
   with the files to attach listed above the prompt. Never use the words scary, evil, demonic, blood. Enemies may look strong, never frightening.
+  Exception (S16, 9 Oct): when several states of ONE creature must share a shape (a boss's hot/cold form, a turtle before/after), the follow-up prompt may ask for the chosen picture edited in named spots instead of a new painting.
 - What worked for house furniture: a **paint-over guide**. Model the piece from small blocks, draw it in the room's own projection
   (`furniture_guides.py`, `house_step23_guides.py`), have the painter repaint the shapes. The floor is seen from straight above and upright sides at full height,
   so each piece shows its whole top and the one side facing the viewer. Plain two-tone boxes did NOT work; a guide must already look like the real thing.
