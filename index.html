@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.72';
+const VERSION='Lantern Academy 1.73';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -1823,7 +1823,7 @@ const isIOS=()=>/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platfo
 var installGame=function(){if(isStandalone()){say('✅ '+t('installed'));return}if(INSTALL_EVT){INSTALL_EVT.prompt();INSTALL_EVT.userChoice.then(c=>{if(c&&c.outcome==='accepted')say('🏮 '+t('installOk'));INSTALL_EVT=null});return}
   modal(`<h2>📲 ${t('installT')}</h2><div class="pn">${isIOS()?t('installIOS'):t('installOther')}</div>`)}
 {const _st=openSettings;openSettings=function(){const r=_st.apply(this,arguments);try{const h=document.querySelector('#modal h2')||document.querySelector('.modal h2');if(h&&!$('instBtn')&&!isStandalone()){const b=document.createElement('button');b.id='instBtn';b.textContent='📲 '+t('installT');b.style.marginLeft='8px';b.onclick=()=>installGame();h.after(b)}}catch(e){}return r}}
-if('serviceWorker' in navigator&&location.protocol.startsWith('http')){let reloaded=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloaded)return;reloaded=true;try{say('✨ '+t('updated'))}catch(e){}});
+if('serviceWorker' in navigator&&location.protocol.startsWith('http')){let reloaded=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloaded)return;reloaded=true;try{say('✨ '+t('updated')+' · '+VERSION.replace(/^Lantern Academy /,'v'))}catch(e){}});
   navigator.serviceWorker.getRegistration&&navigator.serviceWorker.getRegistration().then(reg=>{if(reg)setInterval(()=>reg.update().catch(()=>{}),30*60000)}).catch(()=>{})}
 
 // ================= start screen: key art + logo + "tap to start" (falls back to the old flow if the pictures are missing) =================
@@ -1837,7 +1837,7 @@ function showTitle(next){try{if(typeof plumAll==='function')plumAll();if(navigat
     // the art has the girls on the left and the academy on the right: logo sits in the calm sky, button right of the girls
     el.innerHTML=`<img src="${logo.src}" alt="Lantern Academy" style="position:absolute;top:3vh;left:59%;transform:translateX(-50%);width:min(33vw,440px);max-height:40vh;object-fit:contain;filter:drop-shadow(0 6px 14px rgba(0,0,0,.6));animation:laFloat 3.2s ease-in-out infinite">
       <div style="position:absolute;bottom:5vh;left:66%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px"><button id="tGo" style="font-size:clamp(16px,2.6vw,24px);padding:.6em 1.8em;border-radius:999px;border:2px solid #ffd98a;background:linear-gradient(#ffcf6b,#e89a2c);color:#3a1d05;font-weight:800;box-shadow:0 0 24px rgba(255,200,110,.7);animation:laPulse 1.6s ease-in-out infinite">▶ ${t('tapStart')}</button>
-      <span style="color:#ffe7b0;font-size:12px;text-shadow:0 1px 3px #000">${t('titleSub')}</span></div>`;
+      <span style="color:#ffe7b0;font-size:12px;text-shadow:0 1px 3px #000">${t('titleSub')} · ${VERSION.replace(/^Lantern Academy /,'v')}</span></div>`;
     document.body.append(el);requestAnimationFrame(()=>el.style.opacity=1);
     const start=e=>{e&&e.stopPropagation();el.style.opacity=0;setTimeout(()=>el.remove(),600);try{sfx('lvl')}catch(e2){}next()};el.onclick=start};
   const done=()=>{if(ok===2)go();else if(ok+fail===2){next()}};
@@ -5320,32 +5320,41 @@ function kidMin171(){const on=!!(S&&isKid()&&kidUI());document.body.classList.to
 // Touch: a quick tap still walks to that spot (and talks, digs, wakes as before). Touch and slide: the stick appears under the finger,
 // steers while the finger moves, follows the finger when it goes past the rim, and goes back to its corner when the finger lifts.
 // The stick in the corner still works and shows where it lives. Computer: no stick; W A S D or the arrow keys, and click to walk.
-const FJ172={id:null,x0:0,y0:0,on:false,bx:0,by:0,touches:new Set(),R:40,START:14};
+// 1.73 (owner, 8 Oct: "like RoV"): the stick lives in the lower-left zone only. A finger that lands there gets the stick under it at once;
+// sliding steers; resting the thumb without sliding keeps the player still; a quick tap there (under 0.3 s, no slide) still walks or acts.
+// Outside the zone nothing changed: tap to walk, tap people to talk, hold to lead.
+const FJ172={id:null,x0:0,y0:0,t0:0,on:false,shown:false,bx:0,by:0,snap:null,touches:new Set(),R:40,START:14,ZX:.45,ZY:.35,TAP:300};
 {const st=document.createElement('style');st.textContent=`body.fjIdle172 #joy{opacity:.6}body.fjOn172 #joy{opacity:1!important;transition:none!important;box-shadow:0 0 0 3px #f5dfaddd,0 0 0 7px #1b133066!important;background:radial-gradient(circle,#241c3166 0 47%,#241c3144 49% 70%,#f5dfad22 72%)!important}`;document.head.append(st)}
 function fjAllowed172(){return !!(S&&S.joy&&M&&!PAUSE&&!DLG&&P&&!P.dead&&!(typeof DIG!=='undefined'&&DIG&&!DIG.done)&&!(FISHING&&FISHING.on)&&!(typeof DEC!=='undefined'&&DEC.on)&&!document.body.classList.contains('deco2'))}
+function fjZone172(x,y){return x<innerWidth*FJ172.ZX&&y>innerHeight*FJ172.ZY}
 function fjKnob172(cx,cy){const j=$('joy'),k=$('joyK');if(!j||!k)return;let dx=cx-FJ172.bx,dy=cy-FJ172.by,d=Math.hypot(dx,dy);const R=FJ172.R;
  if(d>R){FJ172.bx=cx-dx*R/d;FJ172.by=cy-dy*R/d;dx=cx-FJ172.bx;dy=cy-FJ172.by;d=R}            // past the rim: the stick follows the finger
- const bx=Math.max(56,Math.min(innerWidth-56,FJ172.bx)),by=Math.max(56,Math.min(innerHeight-56,FJ172.by));
- j.style.left=(bx-56)+'px';j.style.top=(by-56)+'px';j.style.bottom='auto';k.style.left=(36+dx)+'px';k.style.top=(36+dy)+'px';JOY.x=dx/R;JOY.y=dy/R}
-function fjEnd172(){const was=FJ172.on;FJ172.id=null;FJ172.on=false;document.body.classList.remove('fjOn172');if(!was)return;
+ j.style.left=(FJ172.bx-56)+'px';j.style.top=(FJ172.by-56)+'px';j.style.bottom='auto';k.style.left=(36+dx)+'px';k.style.top=(36+dy)+'px';
+ if(FJ172.on){JOY.x=dx/R;JOY.y=dy/R}}
+function fjEnd172(){const had=FJ172.on||FJ172.shown;FJ172.id=null;FJ172.on=false;FJ172.shown=false;FJ172.snap=null;document.body.classList.remove('fjOn172');if(!had)return;
  if(typeof JOY!=='undefined'&&JOY.id!=='pad'){JOY.id=null;JOY.x=JOY.y=0}const j=$('joy'),k=$('joyK');if(j){j.style.left='';j.style.top='';j.style.bottom=''}if(k){k.style.left='36px';k.style.top='36px'}}
 cv.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse')return;FJ172.touches.add(e.pointerId);
  if(FJ172.touches.size>1){fjEnd172();return}                                                       // two fingers = zoom, never a stick
- if(!fjAllowed172()||(JOY.id!==null&&JOY.id!==e.pointerId))return;FJ172.id=e.pointerId;FJ172.x0=e.clientX;FJ172.y0=e.clientY;FJ172.on=false});
+ if(!fjAllowed172()||(JOY.id!==null&&JOY.id!==e.pointerId)||!fjZone172(e.clientX,e.clientY))return;
+ // the tap handler has already set a walk; keep it aside in case this is a quick tap, and keep the player still meanwhile
+ FJ172.snap={path:P.path,act:P.act,target:P.target,mark:tapMark};try{HOLD=null;tapMark=null;P.path=null;P.act=null;P.target=null}catch(err){}
+ FJ172.id=e.pointerId;FJ172.x0=e.clientX;FJ172.y0=e.clientY;FJ172.t0=performance.now();FJ172.on=false;FJ172.shown=true;
+ FJ172.bx=Math.max(44,Math.min(innerWidth-44,e.clientX));FJ172.by=Math.max(44,Math.min(innerHeight-44,e.clientY));document.body.classList.add('fjOn172');fjKnob172(e.clientX,e.clientY)});
 addEventListener('pointermove',e=>{if(e.pointerId!==FJ172.id)return;
- if(!FJ172.on){if(Math.hypot(e.clientX-FJ172.x0,e.clientY-FJ172.y0)<FJ172.START)return;if(!fjAllowed172()){FJ172.id=null;return}
-  FJ172.on=true;FJ172.bx=FJ172.x0;FJ172.by=FJ172.y0;JOY.id=e.pointerId;document.body.classList.add('fjOn172');
-  try{HOLD=null;tapMark=null;P.path=null;P.target=null;P.act=null}catch(err){}}                // a slide is steering, not a tap: drop the walk the tap started
+ if(!FJ172.on){if(Math.hypot(e.clientX-FJ172.x0,e.clientY-FJ172.y0)<FJ172.START)return;if(!fjAllowed172()){fjEnd172();return}
+  FJ172.on=true;FJ172.snap=null;JOY.id=e.pointerId;try{HOLD=null;tapMark=null;P.path=null;P.target=null;P.act=null}catch(err){}}
  fjKnob172(e.clientX,e.clientY)},true);
-const fjUp172=e=>{FJ172.touches.delete(e.pointerId);if(e.pointerId===FJ172.id)fjEnd172()};
+const fjUp172=e=>{FJ172.touches.delete(e.pointerId);if(e.pointerId!==FJ172.id)return;
+ const sn=FJ172.snap,quick=!FJ172.on&&sn&&performance.now()-FJ172.t0<FJ172.TAP;fjEnd172();
+ if(quick&&fjAllowed172()){try{P.path=sn.path;P.act=sn.act;P.target=sn.target;tapMark=sn.mark}catch(err){}}};   // a quick tap in the zone walks as before
 addEventListener('pointerup',fjUp172,true);addEventListener('pointercancel',fjUp172,true);
 // a window or dialogue opening mid-slide ends the slide
-{const old=update;update=function(dt){const r=old.apply(this,arguments);try{if(FJ172.on&&(PAUSE||DLG||!S||!S.joy))fjEnd172();document.body.classList.toggle('fjIdle172',!FJ172.on)}catch(e){}return r}}
+{const old=update;update=function(dt){const r=old.apply(this,arguments);try{if((FJ172.on||FJ172.shown)&&(PAUSE||DLG||!S||!S.joy))fjEnd172();document.body.classList.toggle('fjIdle172',!(FJ172.on||FJ172.shown))}catch(e){}return r}}
 // computer: no stick on screen, W A S D work with any keyboard layout (a Thai layout types ไ ฟ ห ก) and with Caps Lock
 const NOTOUCH172=!(('ontouchstart' in window)||navigator.maxTouchPoints>0);
 {const map={KeyW:'w',KeyA:'a',KeyS:'s',KeyD:'d'};addEventListener('keydown',e=>{const k=map[e.code];if(k&&!(e.target&&e.target.closest&&e.target.closest('input,textarea')))keys[k]=1},true);
  addEventListener('keyup',e=>{const k=map[e.code];if(k)keys[k]=0},true);addEventListener('blur',()=>{for(const k of ['w','a','s','d','ArrowLeft','ArrowRight','ArrowUp','ArrowDown'])keys[k]=0})}
-try{if(!NOTOUCH172){TX.th.tipStart='แตะพื้นเพื่อเดิน · แตะค้างแล้วลากนิ้ว จอยจะมาอยู่ใต้นิ้ว · แตะคนเพื่อคุย';if(TX.en)TX.en.tipStart='Tap the ground to walk · touch and slide and the stick comes under your finger · tap people to talk'}}catch(e){}
+try{if(!NOTOUCH172){TX.th.tipStart='นิ้วโป้งซ้ายแตะจอด้านซ้ายล่าง จอยจะมาอยู่ใต้นิ้ว ลากเพื่อเดิน · แตะพื้นหรือแตะคนก็ได้';if(TX.en)TX.en.tipStart='Put your left thumb on the lower-left of the screen and the stick comes under it; slide to walk · or tap the ground or people'}}catch(e){}
 try{Object.assign(TX.th,{keysHint172:'⌨️ เดินด้วย W A S D หรือปุ่มลูกศร · คลิกที่พื้นก็เดินได้'});if(TX.en)Object.assign(TX.en,{keysHint172:'⌨️ Walk with W A S D or the arrow keys · or click the ground'})}catch(e){}
 {const old=startGame;startGame=function(){const r=old.apply(this,arguments);try{if(NOTOUCH172){const j=$('joy');if(j)j.classList.add('hide');if(!window._keysHint172){window._keysHint172=1;setTimeout(()=>{try{if(!DLG)say(t('keysHint172'))}catch(e){}},2500)}}}catch(e){}return r}}
 </script></body></html>
