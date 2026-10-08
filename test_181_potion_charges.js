@@ -4,7 +4,7 @@
 // later works), the refill clock (charges climb at 1 per 30 s of play, paused while a window is open), the sweep with the seconds left when the bottle is empty,
 // a pickup at full charges, and a child (age 7) whose game has no potions at all.
 // Prints one JSON line, then `errors N`.  Run: PORT=8777 CHROME_EXE=/path/to/chromium node test_181_potion_charges.js   (serve the repo root first)
-// Versions up to 1.80 give errors 30 (no charge cap, no refill, no pause, no empty-bottle sweep); 1.81 gives errors 0.
+// Versions up to 1.80 give errors 30 (no charge cap, no refill, no pause, no empty-bottle sweep); 1.81 gives errors 0. Part F (1.82): the cap grows with class 7–9 and every 10 levels.
 const fs = require('node:fs'), puppeteer = require('puppeteer');
 const out = process.env.OUT_DIR || '/tmp/leah-181-potion'; fs.mkdirSync(out, { recursive: true });
 const base = 'http://localhost:' + (process.env.PORT || 8777) + '/';
@@ -65,6 +65,12 @@ const waitFor = async (pg, fn, ms) => { const t0 = Date.now(); while (Date.now()
       { const D = R.pickup = {}; await T(pg, 'set', 2, 1); await pg.evaluate(() => { DROPS.push({ k: 'potion', x: P.x, y: P.y }); }); await sleep(300); const s1 = await T(pg, 'state'); D.from2 = s1.pot; if (s1.pot !== 3) fail(dev + ': pickup at 2 charges gave ' + s1.pot);
         await T(pg, 'set', 4, 1); await pg.evaluate(() => { DROPS.push({ k: 'potion', x: P.x, y: P.y }); }); await sleep(300); const s2 = await T(pg, 'state'); D.from4 = s2.pot; if (s2.pot !== 4) fail(dev + ': pickup at full charges gave ' + s2.pot);
         await pg.screenshot({ path: out + '/' + dev + '_end.png' }); }
+
+      // F · (1.82) the charge cap grows: +1 at each of classes 7, 8, 9 and +1 every 10 levels, and the button shows the new cap
+      { const F = R.cap = {}; const cap = async (lv, rk) => { await pg.evaluate((lv, rk) => { S.lv = lv; S.rank = rk; S.potions = 0; hud(); }, lv, rk); await sleep(150); const s = await T(pg, 'state'); return { max: s.max, label: s.label }; };
+        const want = [[1, 4, 4], [9, 4, 4], [10, 4, 5], [20, 4, 6], [10, 7, 6], [10, 8, 7], [10, 9, 8], [10, 10, 8], [30, 9, 10]]; F.rows = [];
+        for (const [lv, rk, m] of want) { const r = await cap(lv, rk); F.rows.push([lv, rk, r.max, r.label]); if (r.max !== m) fail(dev + ': cap at lv ' + lv + ' class ' + rk + ' is ' + r.max + ' (want ' + m + ')'); if (r.label !== '0/' + m) fail(dev + ': button at lv ' + lv + ' class ' + rk + ' reads "' + r.label + '"'); }
+        await pg.evaluate(() => { S.lv = 1; S.rank = 4; S.potions = 4; hud(); }); }
       await ctx.close(); }
 
     // E · a child: no potion button, no charges, no clock

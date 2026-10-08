@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.81';
+const VERSION='Lantern Academy 1.82';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -5629,4 +5629,6 @@ function potMax181(){return POT181.max+((S&&S.potUp)||0)}
   if(S.potions<max){if(!PAUSE&&!P.dead){S.potT=(S.potT||0)+dt;if(S.potT>=POT181.refill){S.potT-=POT181.refill;S.potions++;TXT.push({x:P.x,y:P.y-66,s:'+1 \u{1F9EA}',c:'#ffb3d9',t:0});hud()}}}else S.potT=0;
   const empty=!(S.potions>0);cdShow179('bPot',empty?POT181.refill-(S.potT||0):(P.potCd>0?P.potCd:0),empty?POT181.refill:(CD179.pot||POT181.cd));
   let l=POT181.el;if(!l||!l.isConnected)l=POT181.el=document.querySelector('#bPot small');const v=S.potions+'/'+max;if(l&&l.textContent!==v)l.textContent=v}}catch(e){}return r}}
+// ================= 1.82 · potion charges grow the Renown way (owner, 9 Oct): +1 charge at each of classes 7, 8 and 9, and +1 every 10 levels; no money involved =================
+potMax181=function(){if(!S)return POT181.max;return POT181.max+Math.min(3,Math.max(0,rank()-6))+Math.floor((S.lv||1)/10)+((S.potUp)||0)};
 </script></body></html>
