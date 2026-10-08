@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.79';
+const VERSION='Lantern Academy 1.81';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -5549,13 +5549,13 @@ function digStop178(){const d=DIG.d;DIG=null;PAUSE=false;d.done=false;d.wait178=
 .cd179 b{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:700 20px/1 system-ui,sans-serif;color:#fff6dc;text-shadow:0 1px 2px #000,0 0 6px #000,0 0 2px #000}
 #act button.cd179on>small{visibility:hidden}
 body:not(.thumbs) #act button.cd179on{position:relative}`;document.head.appendChild(st)}
-const CD179={max:{},dash:0,sk:0,els:{}};
+const CD179={max:{},dash:0,sk:0,els:{},btn:{}};
 // remember how long each cooldown was when it started, so the sweep knows the whole circle
 {const old=doDash;doDash=function(){const c0=DASH.cd,r=old.apply(this,arguments);try{if(DASH.cd>c0)CD179.dash=DASH.cd}catch(e){}return r}}
 {const old=useSkill;useSkill=function(){const c0=P?P.skCd||0:0,r=old.apply(this,arguments);try{if(P&&(P.skCd||0)>c0)CD179.sk=P.skCd}catch(e){}return r}}
 {const old=useJob;useJob=function(k){const c0=JCD[k]||0,r=old.apply(this,arguments);try{if((JCD[k]||0)>c0)CD179.max[k]=(JCD[k]-performance.now())/1000}catch(e){}return r}}
 function cdEl179(id){let e=CD179.els[id];if(e&&e.isConnected)return e;const b=document.getElementById(id);if(!b)return null;e=document.createElement('span');e.className='cd179';e.appendChild(document.createElement('b'));b.appendChild(e);CD179.els[id]=e;return e}
-function cdShow179(id,left,max){const b=document.getElementById(id);if(!b)return;if(!(left>0&&max>0)){if(b.classList.contains('cd179on')){b.classList.remove('cd179on');const e=CD179.els[id];if(e)e.style.display='none'}return}
+function cdShow179(id,left,max){let b=CD179.btn[id];if(!b||!b.isConnected){b=CD179.btn[id]=document.getElementById(id)}if(!b)return;if(!(left>0&&max>0)){if(b.classList.contains('cd179on')){b.classList.remove('cd179on');const e=CD179.els[id];if(e)e.style.display='none'}return}
   const e=cdEl179(id);if(!e)return;if(!b.classList.contains('cd179on'))b.classList.add('cd179on');
   const deg=Math.round(Math.max(0,Math.min(1,1-left/max))*180)*2,edge=Math.min(360,deg+4);   // the clear part grows clockwise from the top; a thin bright line is the clock hand
   if(e._deg!==deg){e._deg=deg;e.style.display='block';e.style.background='conic-gradient(from 0deg,rgba(0,0,0,0) 0deg '+deg+'deg,rgba(255,236,170,.8) '+deg+'deg '+edge+'deg,rgba(9,5,18,.66) '+edge+'deg 360deg)'}
@@ -5564,4 +5564,69 @@ function cdShow179(id,left,max){const b=document.getElementById(id);if(!b)return
   cdShow179('bDash',DASH.cd>0?DASH.cd:0,CD179.dash||(isKid()?1.8:2.6));
   const w=weapon();cdShow179('bSk',P.skCd>0?P.skCd:0,CD179.sk||(SKILL[w.type]?SKILL[w.type].cd*cdrMul():6));
   for(const [i,id] of [[0,'bJ1'],[1,'bJ2']]){const k=(S.slots||[])[i],left=k?((JCD[k]||0)-performance.now())/1000:0;cdShow179(id,left>0?left:0,k?(CD179.max[k]||(SK[k]?SK[k][1]*cdrMul():0)):0)}}}catch(e){}return r}}
+// ================= 1.80 · the RoV button cluster for players 12+ (owner, 9 Oct): bottom row from the left — buff slot · potion · blink · skill 1; skill 2 up-left of the attack button; skill 3 (the ultimate) above it; the bot button above the cluster is one tap on/off (hold for its settings); the guide button above the bot walks to the goal on this map. Children's screen unchanged. =================
+try{Object.assign(TX.th,{slotBuff:'เสริมพลัง',buffTip:'ช่องเสริมพลัง: ใส่ท่าเสริมได้ 1 ท่า (การ์ด หลบ เร่ง ยั่ว)',buffEmpty:'ยังไม่มีท่าเสริมพลัง ใส่ได้ในหน้าอาชีพ',guideBtn:'พาเดิน',guideNone:'ยังไม่มีที่ต้องไปในแผนที่นี้',guideGo:'พาเดินไป',gdNpc:'ส่งของให้',gdCry:'คริสตัลที่ยังหลับ',gdExit:'ทางไปชั้นถัดไป',gdBoard:'กระดานภารกิจ',autoHold:'กดค้างที่ปุ่มบอทเพื่อตั้งค่า'});
+ if(TX.en)Object.assign(TX.en,{slotBuff:'Buff',buffTip:'Buff slot: one support skill (guard, evade, dash, provoke)',buffEmpty:'No buff skill yet — set one in the Jobs window',guideBtn:'Guide',guideNone:'Nothing to walk to on this map yet',guideGo:'Walking to',gdNpc:'hand in to',gdCry:'a sleeping crystal',gdExit:'the way to the next floor',gdBoard:'the quest board',autoHold:'Hold the bot button for its settings'})}catch(e){}
+const BUFF180=['guard','evade','dash','provoke'],ROV180={made:false,holdT:null,held:false};
+{const st=document.createElement('style');st.textContent=`
+body.thumbs.rov180 #act #bSk{right:calc(27px + env(safe-area-inset-right,0px));bottom:calc(108px + env(safe-area-inset-bottom,0px))}
+body.thumbs.rov180 #act #bJ2,body.thumbs.rov180 #act #bSlot3{right:calc(94px + env(safe-area-inset-right,0px));bottom:calc(80px + env(safe-area-inset-bottom,0px))}
+body.thumbs.rov180 #act #bJ1,body.thumbs.rov180 #act #bSlot2{right:calc(104px + env(safe-area-inset-right,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px))}
+body.thumbs.rov180 #act #bDash{right:calc(164px + env(safe-area-inset-right,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px))}
+body.thumbs.rov180 #act #bPot{right:calc(218px + env(safe-area-inset-right,0px))!important;bottom:calc(14px + env(safe-area-inset-bottom,0px))!important}
+body.thumbs.rov180 #act #bBuff{right:calc(272px + env(safe-area-inset-right,0px))!important;bottom:calc(14px + env(safe-area-inset-bottom,0px))!important}
+body.thumbs.rov180 #act #bAuto{right:calc(160px + env(safe-area-inset-right,0px));bottom:calc(118px + env(safe-area-inset-bottom,0px))}
+body.thumbs.rov180 #act #bAuto.show180{display:flex!important}
+body.thumbs.rov180 #act #bQuest{right:calc(160px + env(safe-area-inset-right,0px))!important;bottom:calc(172px + env(safe-area-inset-bottom,0px))!important}
+body.thumbs.rov180 #act #bBuff.empty180{background:radial-gradient(ellipse at 35% 10%,#3b2d4844,#22182f88);border-color:#b49b6866;box-shadow:inset 0 0 0 2px #160e2544;color:#ddc8a480}
+#act #bAuto.on180{outline:2px solid #7fffa0}`;document.head.appendChild(st)}
+function buffKey180(){const k=S&&S.slotBuff;return k&&BUFF180.includes(k)&&hasSk(k)&&SK[k]&&SK[k][1]?k:null}
+function rovMake180(){if(ROV180.made)return;const act=document.getElementById('act'),sk=document.getElementById('bSk'),auto=document.getElementById('bAuto');if(!act||!sk||!auto)return;ROV180.made=true;
+  const mk=id=>{const b=sk.cloneNode(false);b.id=id;b.className='';b.removeAttribute('style');return b};
+  const bf=mk('bBuff');bf.innerHTML='＋<small>'+t('slotBuff')+'</small>';bf.onclick=()=>{try{if(!S||isKid())return;const k=buffKey180();if(k)useJob(k);else{say(t('buffEmpty'));if(S.lv>=10)openJobs()}}catch(e){}};
+  const bq=mk('bQuest');bq.innerHTML='\u{1F9ED}<small>'+t('guideBtn')+'</small>';bq.onclick=()=>{try{guideGo180()}catch(e){}};
+  // the bot button: a tap turns the bot on or off; holding it 0.6 s opens its settings (the old window)
+  auto.onclick=()=>{try{if(ROV180.held){ROV180.held=false;return}autoToggle180()}catch(e){}};
+  auto.addEventListener('pointerdown',()=>{ROV180.held=false;clearTimeout(ROV180.holdT);ROV180.holdT=setTimeout(()=>{ROV180.held=true;try{openAuto()}catch(e){}},600)});
+  for(const ev of ['pointerup','pointercancel','pointerleave'])auto.addEventListener(ev,()=>clearTimeout(ROV180.holdT));
+  // DOM order = the row on a computer: … guide · bot · buff · potion · blink · skill 1 · skill 2 · skill 3 · attack
+  for(const id of ['bQuest','bAuto','bBuff','bPot','bDash','bJ1','bSlot2','bJ2','bSlot3','bSk','bAtk']){const b=id==='bQuest'?bq:id==='bBuff'?bf:document.getElementById(id);if(b)act.appendChild(b)}}
+function autoToggle180(){if(!S||isKid())return;if(AUTO.on){AUTO.on=false;say('⏹️ '+t('autoStop'))}else if(S.lv<10){say(t('jobNeed'));return}else if(!mapCleared()){say(t('autoNo'));return}else{AUTO.on=true;say('\u{1F916} '+t('autoStart')+' · '+t('autoHold'))}try{hud()}catch(e){}}
+// where the guide walks: a request ready to hand in → a sleeping crystal → the way to the next floor → the quest board
+function guideTarget180(){if(!S||!M||!P)return null;const path=(x,y)=>{try{const p=findPath(M,P.x,P.y,x,y);return p&&p.length?p:null}catch(e){return null}};
+  for(const n of M.npcs||[])if(typeof REQMARK!=='undefined'&&REQMARK&&REQMARK[n.npc]==='ready'){const p=path(n.x,n.y+22);if(p)return{k:'gdNpc',name:t('n_'+n.npc),p}}
+  if(M.kind==='cave'){const cs=(M.crystals||[]).filter(c=>!c.awake&&!(c.kidOnly&&!isKid())).sort((a,b)=>Math.hypot(a.x-P.x,a.y-P.y)-Math.hypot(b.x-P.x,b.y-P.y));for(const c of cs){const p=path(c.x,c.y+14);if(p)return{k:'gdCry',p}}
+    const ex=(M.exits||[]).filter(e=>!e.locked&&!(e.needBoss&&!S.boss)&&!(e.lockBoss&&M.boss&&!M.boss.happy)).sort((a,b)=>(/^(down|n)$/.test(b.id)?1:0)-(/^(down|n)$/.test(a.id)?1:0));for(const e of ex){const p=path(e.x,e.y);if(p)return{k:'gdExit',p}}}
+  if(M.board){const p=path(M.board.x,M.board.y+16);if(p)return{k:'gdBoard',p}}return null}
+function guideGo180(){if(!S||!M||!P||PAUSE||DLG||P.dead||isKid())return;const g=guideTarget180();if(!g){say('\u{1F9ED} '+t('guideNone'));return}P.target=null;P.act=null;P.sit=0;try{HOLD=null}catch(e){}P.path=g.p;ROV180.guide=g.k;say('\u{1F9ED} '+t('guideGo')+' '+t(g.k)+(g.name?' '+g.name:''))}
+// the bot also walks to the things monsters dropped when nothing is left to fight nearby
+{const old=autoTick;autoTick=function(dt){try{if(AUTO.on&&S&&M&&!PAUSE&&!DLG&&!P.dead&&!P.sit&&!MONS.some(o=>!o.happy&&!o.boss&&Math.hypot(o.x-P.x,o.y-P.y)<220)){
+  const d=DROPS.filter(d=>!d.taken).sort((a,b)=>Math.hypot(a.x-P.x,a.y-P.y)-Math.hypot(b.x-P.x,b.y-P.y))[0];
+  if(d&&Math.hypot(d.x-P.x,d.y-P.y)<320){if(ROV180.drop!==d||!P.path||!P.path.length){const p=findPath(M,P.x,P.y,d.x,d.y);if(p&&p.length){ROV180.drop=d;P.path=p;P.target=null;return}}else return}}}catch(e){}return old.apply(this,arguments)}}
+// the jobs window gets a "Buff" slot button on every buff skill learned
+{const old=openJobs;openJobs=function(){const r=old.apply(this,arguments);try{if(!S||S.lv<10)return r;document.querySelectorAll('[data-sl="0"]').forEach(b=>{const k=b.dataset.k;if(!BUFF180.includes(k)||b.parentNode.querySelector('[data-slb]'))return;const x=document.createElement('button');x.dataset.slb=k;x.textContent=t('slot')+' '+t('slotBuff');if(S.slotBuff===k)x.disabled=true;x.onclick=()=>{S.slotBuff=k;sfx('pick');hud();save();openJobs()};b.parentNode.appendChild(x)});
+  const tip=document.querySelector('#modal p.note');if(tip&&!tip.dataset.b180){tip.dataset.b180=1;tip.textContent+=' · '+t('buffTip')}}catch(e){}return r}}
+function rovShow180(){const on=!!(S&&!isKid());document.body.classList.toggle('rov180',on);const bf=document.getElementById('bBuff'),bq=document.getElementById('bQuest'),auto=document.getElementById('bAuto');if(!bf)return;
+  bf.classList.toggle('hide',!(on&&S.lv>=10));bq.classList.toggle('hide',!on);const k=buffKey180();/* the hide class, not an inline style: the old thumbLayout counts an inline-hidden button as a place in the row */bf.classList.toggle('empty180',!k);
+  const ic=k?SK[k][2]:'＋';if(bf.firstChild&&bf.firstChild.nodeType===3){if(bf.firstChild.nodeValue!==ic)bf.firstChild.nodeValue=ic}else bf.insertBefore(document.createTextNode(ic),bf.firstChild);
+  const l=bf.querySelector('small'),lv=k?t('k_'+k).split(' ')[0]:t('slotBuff');if(l&&l.textContent!==lv)l.textContent=lv;
+  const ql=bq.querySelector('small');if(ql&&ql.textContent!==t('guideBtn'))ql.textContent=t('guideBtn');if(auto){auto.classList.toggle('show180',on&&S.lv>=10&&rHas('auto'));auto.classList.toggle('on180',!!AUTO.on)}}
+{const old=hud;hud=function(){const r=old.apply(this,arguments);try{rovMake180();rovShow180()}catch(e){}return r}}
+// the small helper buttons (rest, compass, fishing…) line up to the left of the buff slot instead of the old potion spot
+{const old=thumbLayout;thumbLayout=function(){const r=old.apply(this,arguments);try{if(!document.body.classList.contains('thumbs')||!document.body.classList.contains('rov180'))return r;const act=document.getElementById('act');const big={bAtk:1,bSk:1,bJ1:1,bJ2:1,bSlot2:1,bSlot3:1,bDash:1,bAuto:1,bSit:1,bRest:1,bPot:1,bBuff:1,bQuest:1};let k=0;const kids=[...act.children].filter(b=>!big[b.id]&&!b.classList.contains('hide')&&b.style.display!=='none');
+  for(let i=kids.length-1;i>=0;i--){const b=kids[i];b.style.right='calc('+(326+k*54)+'px + env(safe-area-inset-right,0px))';b.style.bottom='calc(14px + env(safe-area-inset-bottom,0px))';k++}}catch(e){}return r}}
+// the buff slot's cooldown sweep, and keys: 5 = buff, G = guide, B = bot on/off
+{const old=update;update=function(dt){const r=old.apply(this,arguments);try{if(S&&P){const k=buffKey180(),left=k?((JCD[k]||0)-performance.now())/1000:0;cdShow179('bBuff',left>0?left:0,k?(CD179.max[k]||(SK[k][1]*cdrMul())):0)}}catch(e){}return r}}
+addEventListener('keydown',e=>{try{if(!S||PAUSE||DLG||isKid())return;if(e.key==='5'){const k=buffKey180();if(k)useJob(k)}else if(e.code==='KeyG')guideGo180();else if(e.code==='KeyB')autoToggle180()}catch(err){}});
+// ================= 1.81 · potion charges the Diablo 4 way (owner, 9 Oct): 4 charges, one comes back every 30 s of play, a potion picked up fills one, a 1 s pause between gulps; children unchanged (they have no potions) =================
+try{Object.assign(TX.th,{potEmpty:'ขวดเลือดหมด รอเติม'});if(TX.en)Object.assign(TX.en,{potEmpty:'No charges left, refilling'})}catch(e){}
+const POT181={max:4,refill:30,cd:1};
+function potMax181(){return POT181.max+((S&&S.potUp)||0)}
+{const old=usePotion;usePotion=function(){if(!S||isKid())return old.apply(this,arguments);if((P.potCd||0)>0)return;if(!(S.potions>0)){say('\u{1F9EA} '+t('potEmpty')+' '+Math.ceil(POT181.refill-(S.potT||0))+'s');return}
+  const n0=S.potions,r=old.apply(this,arguments);try{if(S.potions<n0){P.potCd=POT181.cd*(1-((S.potCdr||0)/100));CD179.pot=P.potCd}}catch(e){}return r}}
+{const old=pickUp;pickUp=function(d){const n0=S?S.potions:0,max=potMax181(),r=old.apply(this,arguments);try{if(d&&d.k==='potion'&&S&&!isKid()&&n0>=max&&S.potions>n0)S.potions=n0}catch(e){}return r}}   // at full charges a picked-up potion fills nothing (as in Diablo 4)
+{const old=update;update=function(dt){const r=old.apply(this,arguments);try{if(S&&P&&!isKid()){if(P.potCd>0)P.potCd=Math.max(0,P.potCd-dt);const max=potMax181();
+  if(S.potions<max){if(!PAUSE&&!P.dead){S.potT=(S.potT||0)+dt;if(S.potT>=POT181.refill){S.potT-=POT181.refill;S.potions++;TXT.push({x:P.x,y:P.y-66,s:'+1 \u{1F9EA}',c:'#ffb3d9',t:0});hud()}}}else S.potT=0;
+  const empty=!(S.potions>0);cdShow179('bPot',empty?POT181.refill-(S.potT||0):(P.potCd>0?P.potCd:0),empty?POT181.refill:(CD179.pot||POT181.cd));
+  let l=POT181.el;if(!l||!l.isConnected)l=POT181.el=document.querySelector('#bPot small');const v=S.potions+'/'+max;if(l&&l.textContent!==v)l.textContent=v}}catch(e){}return r}}
 </script></body></html>
