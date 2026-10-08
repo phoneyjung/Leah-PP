@@ -99,7 +99,8 @@ const state = pg => pg.evaluate(() => { const j = document.getElementById('joy')
       results.pinch = o; if (o.joyId !== null || o.on) fail('two fingers made a stick'); await ctx.close(); }
     // 8. computer: no stick, W A S D (also with a Thai keyboard layout and Caps Lock), arrows, click to walk
     { const { ctx, pg } = await child(browser, 1366, 768, false), r = {};
-      r.stickShown = (await state(pg)).shown; if (r.stickShown) fail('computer: the stick is on the screen');
+      // 1.74: on a computer the stick is shown as the W A S D compass
+      r.stickShown = (await state(pg)).shown; r.letters = await pg.evaluate(() => document.body.classList.contains('nt174')); if (!r.stickShown || !r.letters) fail('computer: the W A S D compass is not on the screen (shown ' + r.stickShown + ', letters ' + r.letters + ')');
       for (const [label, key, code] of [['d', 'd', 'KeyD'], ['Thai ก (D key)', 'ก', 'KeyD'], ['Caps D', 'D', 'KeyD'], ['ArrowLeft', 'ArrowLeft', 'ArrowLeft']]) {
         const before = await state(pg); await pg.evaluate((key, code) => dispatchEvent(new KeyboardEvent('keydown', { key, code, bubbles: true })), key, code); await sleep(600);
         await pg.evaluate((key, code) => dispatchEvent(new KeyboardEvent('keyup', { key, code, bubbles: true })), key, code); await sleep(250); const after = await state(pg);

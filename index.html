@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.73';
+const VERSION='Lantern Academy 1.74';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -3839,7 +3839,7 @@ try{Object.assign(TX.th,{actRest:'นั่งพัก',noSkillYet:'ช่อ�
 function thumbLayout(){const act=document.getElementById('act');if(!act)return;const on=document.body.classList.contains('thumbs');
   // three skill slots round the big button: the class skill and the two job skills; a slot with no skill yet shows as an empty ring
   for(const [slot,real] of [['bSlot2','bJ1'],['bSlot3','bJ2']]){const a=document.getElementById(slot),b=document.getElementById(real);if(a)a.style.display=(on&&b&&b.classList.contains('hide'))?'flex':'none'}
-  if(on){const big={bAtk:1,bSk:1,bJ1:1,bJ2:1,bSlot2:1,bSlot3:1,bDash:1,bAuto:1,bSit:1};let k=0;const kids=[...act.children].filter(b=>!big[b.id]&&!b.classList.contains('hide'));
+  if(on){const big={bAtk:1,bSk:1,bJ1:1,bJ2:1,bSlot2:1,bSlot3:1,bDash:1,bAuto:1,bSit:1,bRest:1};let k=0;const kids=[...act.children].filter(b=>!big[b.id]&&!b.classList.contains('hide'));
     for(let i=kids.length-1;i>=0;i--){const b=kids[i];b.style.right='calc('+(170+k*54)+'px + env(safe-area-inset-right,0px))';b.style.bottom='calc(12px + env(safe-area-inset-bottom,0px))';k++}}
   const r=document.getElementById('bRest');if(r&&IMG.uiIcons&&!r.dataset.pic){r.dataset.pic=1;const cv=document.createElement('canvas');cv.width=32;cv.height=32;cv.style.cssText='width:24px;height:24px;image-rendering:pixelated;display:block';uiIconDraw(cv.getContext('2d'),'bench',0,0,32);r.replaceChild(cv,r.firstChild)}
   const l=document.getElementById('restL');if(l){try{l.textContent=P&&P.sit?(typeof LANG!=='undefined'&&LANG==='en'?'Stand':'\u0e25\u0e38\u0e01'):t('actRest')}catch(e){}}}
@@ -5307,7 +5307,7 @@ try{Object.assign(TX.th,{rkSoon:'เร็ว ๆ นี้',rkTask3k:'ปลุ
   rkGet4sk:'Fishing',rkGet6sk:'Pets \u00b7 visits \u00b7 gifts \u00b7 special spots \u00b7 sell fish',kb171Book:'Knowledge book',kb171Map:'Map'})}catch(e){}
 // Children: the main screen keeps the stick, the big button, the bag and settings (plus buttons that belong to the place: compass in a cave, arrange at home).
 // Follows the existing "kid mode" switch in settings, so a parent can bring every button back.
-function kidMin171(){const on=!!(S&&isKid()&&kidUI());document.body.classList.toggle('kidmin171',on);const b=document.getElementById('bRest');if(b)b.classList.toggle('hide',on);return on}
+function kidMin171(){const on=!!(S&&isKid()&&kidUI());document.body.classList.toggle('kidmin171',on);const b=document.getElementById('bRest');if(b)b.classList.remove('hide');return on}   // 1.74: the sit button stays for children (owner)
 {const old=hud;hud=function(){const r=old.apply(this,arguments);try{kidMin171()}catch(e){}return r}}
 // what left the main screen is one tap away inside the child's bag
 {const old=openBag;openBag=function(){const r=old.apply(this,arguments);try{if(S&&isKid()){const host=document.getElementById('mBody'),h=host&&host.querySelector('h2');
@@ -5355,6 +5355,54 @@ const NOTOUCH172=!(('ontouchstart' in window)||navigator.maxTouchPoints>0);
 {const map={KeyW:'w',KeyA:'a',KeyS:'s',KeyD:'d'};addEventListener('keydown',e=>{const k=map[e.code];if(k&&!(e.target&&e.target.closest&&e.target.closest('input,textarea')))keys[k]=1},true);
  addEventListener('keyup',e=>{const k=map[e.code];if(k)keys[k]=0},true);addEventListener('blur',()=>{for(const k of ['w','a','s','d','ArrowLeft','ArrowRight','ArrowUp','ArrowDown'])keys[k]=0})}
 try{if(!NOTOUCH172){TX.th.tipStart='นิ้วโป้งซ้ายแตะจอด้านซ้ายล่าง จอยจะมาอยู่ใต้นิ้ว ลากเพื่อเดิน · แตะพื้นหรือแตะคนก็ได้';if(TX.en)TX.en.tipStart='Put your left thumb on the lower-left of the screen and the stick comes under it; slide to walk · or tap the ground or people'}}catch(e){}
-try{Object.assign(TX.th,{keysHint172:'⌨️ เดินด้วย W A S D หรือปุ่มลูกศร · คลิกที่พื้นก็เดินได้'});if(TX.en)Object.assign(TX.en,{keysHint172:'⌨️ Walk with W A S D or the arrow keys · or click the ground'})}catch(e){}
-{const old=startGame;startGame=function(){const r=old.apply(this,arguments);try{if(NOTOUCH172){const j=$('joy');if(j)j.classList.add('hide');if(!window._keysHint172){window._keysHint172=1;setTimeout(()=>{try{if(!DLG)say(t('keysHint172'))}catch(e){}},2500)}}}catch(e){}return r}}
+try{Object.assign(TX.th,{keysHint172:'⌨️ เดินด้วย W A S D หรือปุ่มลูกศร · นั่งกด R · คลิกที่พื้นก็เดินได้'});if(TX.en)Object.assign(TX.en,{keysHint172:'⌨️ Walk with W A S D or the arrow keys · R to sit · or click the ground'})}catch(e){}
+{const old=startGame;startGame=function(){const r=old.apply(this,arguments);try{if(NOTOUCH172){const j=$('joy');if(S&&S.joy===undefined){S.joy=true;save()}if(j)j.classList.toggle('hide',!(S&&S.joy));if(!window._keysHint172){window._keysHint172=1;setTimeout(()=>{try{if(!DLG)say(t('keysHint172'))}catch(e){}},2500)}}}catch(e){}return r}}
+
+// ================= 1.74 COMPASS STICK · SIT BUTTON BY THE STICK · R TO SIT =================
+// Owner, 8 Oct (sent a reference picture): the stick looks like a compass with W A S D around it, and the sit button sits beside it with R.
+// Drawn by code for now; Codex replaces the icons with painted art later. Glow is gold, not blue: blue glow is kept for things you collect (ART_GUIDE).
+const NT174=typeof NOTOUCH172!=='undefined'?NOTOUCH172:!(('ontouchstart' in window)||navigator.maxTouchPoints>0);
+{const ring=(letters)=>{const g='#d9bc7c',L=letters?[['W',60,17],['A',17,60],['D',103,60],['S',60,103]]:[];
+  const tip=(r)=>`<path d="M60 1.5 L65.5 7.5 L54.5 7.5 Z" fill="#fff3d0" stroke="#7a5a2a" stroke-width=".8" transform="rotate(${r} 60 60)"/>`;
+  const gem=(r)=>`<path d="M60 5 L63.5 8.5 L60 12 L56.5 8.5 Z" fill="${g}" stroke="#7a5a2a" stroke-width=".6" transform="rotate(${r} 60 60)"/>`;
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><defs><radialGradient id="b" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#4a3d63" stop-opacity=".82"/><stop offset=".7" stop-color="#2a2140" stop-opacity=".84"/><stop offset="1" stop-color="#17112a" stop-opacity=".9"/></radialGradient></defs>`+
+   `<circle cx="60" cy="60" r="56" fill="url(#b)" stroke="${g}" stroke-width="3"/><circle cx="60" cy="60" r="51" fill="none" stroke="${g}" stroke-opacity=".5" stroke-width="1"/>`+
+   `<circle cx="60" cy="60" r="28" fill="#ffffff" fill-opacity=".05" stroke="${g}" stroke-opacity=".7" stroke-width="1.6"/>`+[0,90,180,270].map(tip).join('')+[45,135,225,315].map(gem).join('')+
+   L.map(([c,x,y])=>`<circle cx="${x}" cy="${y}" r="8.5" fill="#1b1330" stroke="${g}" stroke-width="1.3"/><text x="${x}" y="${y+3.5}" font-family="Arial,sans-serif" font-size="10" font-weight="700" text-anchor="middle" fill="#f6e2b0">${c}</text>`).join('')+`</svg>`;
+  return 'url("data:image/svg+xml,'+encodeURIComponent(svg)+'")'};
+ const star='url("data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><path d="M20 4 L23 17 L36 20 L23 23 L20 36 L17 23 L4 20 L17 17 Z" fill="#fffaf0" fill-opacity=".95"/><circle cx="20" cy="20" r="3" fill="#fff"/></svg>')+'")';
+ const st=document.createElement('style');st.textContent=`
+ #joy,body.thumbs #joy{left:calc(52px + env(safe-area-inset-left,0px));bottom:calc(40px + env(safe-area-inset-bottom,0px));width:112px;height:112px;border-radius:50%;
+   background:${ring(false)} center/100% 100% no-repeat!important;box-shadow:0 2px 8px #0d081888!important}
+ body.nt174 #joy{background-image:${ring(true)}!important}
+ #joyK,body.thumbs #joyK{width:40px;height:40px;border-radius:50%;border:1.5px solid #fff1c4!important;
+   background:${star} center/30px 30px no-repeat,radial-gradient(circle at 42% 36%,#fff6d8 0,#f3cd6e 38%,#c08a35 72%,#7d5323 100%)!important;
+   box-shadow:0 0 12px 3px #ffd27a99,0 2px 4px #1b1330aa!important}
+ body.fjOn172 #joy{box-shadow:0 0 0 2px #f5dfaddd,0 0 14px #ffd27a66!important}
+ /* the sit button: round, by the stick, with R on a computer */
+ #act #bRest,body.thumbs #act #bRest{position:fixed!important;left:calc(8px + env(safe-area-inset-left,0px))!important;right:auto!important;bottom:calc(8px + env(safe-area-inset-bottom,0px))!important;
+   width:50px!important;height:50px!important;min-width:0!important;min-height:0!important;border-radius:50%!important;padding:0!important;display:flex;flex-direction:column;align-items:center;justify-content:center;
+   background:radial-gradient(circle at 45% 35%,#3d3150,#1b1330 75%)!important;border:2px solid #d9bc7c!important;border-image:none!important;box-shadow:0 2px 6px #0d0818aa!important;color:#f6e2b0}
+ #bRest small{font-size:8px!important;line-height:1;margin-top:1px}
+ #bRest .kb174{display:none;position:absolute;top:-6px;left:-4px;width:18px;height:18px;border-radius:50%;background:#241a35;border:1.3px solid #d9bc7c;color:#f6e2b0;font:700 10px/16px Arial,sans-serif;text-align:center}
+ body.nt174 #bRest .kb174{display:block}
+ body.fjIdle172 #joy{opacity:.82} body.nt174.fjIdle172 #joy{opacity:.95}
+ .jk174{display:none}`;document.head.append(st);
+ document.body.classList.toggle('nt174',NT174)}
+function rTag174(){const b=document.getElementById('bRest');if(b&&!b.querySelector('.kb174')){const k=document.createElement('span');k.className='kb174';k.textContent='R';b.append(k)}}rTag174();setInterval(()=>{try{rTag174()}catch(e){}},500);
+// Owner, 8 Oct: "while holding the stick I must be able to press other buttons". A phone gives no 'click' to a second finger, so a button
+// touched while another finger is down answers the touch itself; a real click that may still follow on some phones is ignored for 0.6 s.
+const TOUCH2_174={down:new Set(),fired:new WeakMap()};
+addEventListener('pointerdown',e=>{if(e.pointerType!=='touch')return;const others=TOUCH2_174.down.size;TOUCH2_174.down.add(e.pointerId);if(!others)return;
+ const b=e.target&&e.target.closest&&e.target.closest('#act button,#btns button,button#context167,#mmw');if(!b||b.disabled||(b.offsetParent===null&&getComputedStyle(b).position!=='fixed'))return;
+ TOUCH2_174.fired.set(b,performance.now());try{b.click()}catch(err){}},true);
+const up174=e=>{if(e.pointerType==='touch')TOUCH2_174.down.delete(e.pointerId)};addEventListener('pointerup',up174,true);addEventListener('pointercancel',up174,true);
+addEventListener('click',e=>{if(!e.isTrusted)return;const b=e.target&&e.target.closest&&e.target.closest('#act button,#btns button,button#context167,#mmw');if(!b)return;const t=TOUCH2_174.fired.get(b);
+ if(t&&performance.now()-t<600){e.stopImmediatePropagation();e.preventDefault()}},true);
+// R sits and stands up again (any keyboard layout), the same as tapping the sit button
+addEventListener('keydown',e=>{if(e.code!=='KeyR'||e.repeat||!S||PAUSE||DLG)return;if(e.target&&e.target.closest&&e.target.closest('input,textarea'))return;const b=document.getElementById('bRest');if(b&&b.onclick){e.preventDefault();b.onclick()}},true);
+// computer: the compass knob leans the way the keys walk
+{const old=update;update=function(dt){const r=old.apply(this,arguments);try{if(NT174&&JOY.id===null&&!(typeof FJ172!=='undefined'&&FJ172.on)){const k=$('joyK');if(k){let x=0,y=0;
+  if(keys.a||keys.ArrowLeft)x--;if(keys.d||keys.ArrowRight)x++;if(keys.w||keys.ArrowUp)y--;if(keys.s||keys.ArrowDown)y++;const d=Math.hypot(x,y)||1,ox=Math.round(36+x/d*12),oy=Math.round(36+y/d*12);
+  const L=ox+'px',T=oy+'px';if(k.style.left!==L)k.style.left=L;if(k.style.top!==T)k.style.top=T}}}catch(e){}return r}}
 </script></body></html>
