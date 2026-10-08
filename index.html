@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.83';
+const VERSION='Lantern Academy 1.84';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -5665,4 +5665,13 @@ function guideBind183(){const bq=document.getElementById('bQuest');if(!bq||bq.da
 {const old=update;update=function(dt){const r=old.apply(this,arguments);try{const d=ROV180.dest;if(d&&S&&M&&P){if(M.id!==d.map)guideSet183(null);else if(Math.hypot(d.x-P.x,d.y-P.y)<36){guideSet183(null);say('\u{1F9ED} '+t('gdArrive'))}}}catch(e){}return r}}
 {const old=rovShow180;rovShow180=function(){const r=old.apply(this,arguments);try{const bq=document.getElementById('bQuest');if(!bq)return r;const d=ROV180.dest;bq.classList.toggle('dim183',!d);const l=bq.querySelector('small'),v=d?d.label.replace(/^\S+\s/,'').slice(0,8):t('guideBtn');if(l&&l.textContent!==v)l.textContent=v}catch(e){}return r}}
 {const old=goMap;goMap=function(){try{if(ROV180.dest)ROV180.dest=null}catch(e){}return old.apply(this,arguments)}}
+// ================= 1.84 · a computer gets the phone's button layout, every button carrying a small tag with its key (owner, 9 Oct 02:41) =================
+{try{if(typeof NT174!=='undefined'&&NT174&&!document.body.classList.contains('thumbs'))document.body.classList.add('thumbs')}catch(e){}
+ const st=document.createElement('style');st.textContent=`.kb184{display:none;position:absolute;top:-6px;left:-4px;min-width:18px;height:18px;padding:0 4px;box-sizing:border-box;border-radius:9px;background:#241a35;border:1.3px solid #d9bc7c;color:#f6e2b0;font:700 10px/15px Arial,sans-serif;text-align:center;pointer-events:none;z-index:3}
+body.nt174 .kb184{display:block!important}body.nt174.thumbs #act button{overflow:visible}body.nt174 #btns button .kb184{top:-5px;left:-5px}.kb184::after{content:attr(data-k)}`;document.head.appendChild(st);   /* !important: g9bButton hides every other child of the big button while a context word shows · the key is CSS content, not text: iconize() reads each button's textContent for the potion count */
+ const KEYS184={bAtk:'Space',bSk:'3',bJ1:'1',bJ2:'2',bPot:'4',bBuff:'5',bDash:'Shift',bAuto:'B',bQuest:'G',bFish:'F',bBag:'I',bMap:'M'};
+ function kbTags184(){for(const [id,k] of Object.entries(KEYS184)){const b=document.getElementById(id);if(!b||b.querySelector('.kb184'))continue;const t2=document.createElement('span');t2.className='kb184';t2.dataset.k=k;b.appendChild(t2)}}
+ kbTags184();setInterval(()=>{try{kbTags184()}catch(e){}},700)
+ // keys follow the RoV numbering now: 1 = skill 1, 2 = skill 2, 3 = skill 3 (the weapon skill, which was key 1 before)
+ addEventListener('keydown',e=>{try{if(!S||PAUSE||DLG||isKid()||e.repeat)return;const k=e.key;if(k==='1'||k==='2'||k==='3'){e.stopImmediatePropagation();e.preventDefault();if(k==='3')useSkill();else useJob((S.slots||[])[k==='1'?0:1])}}catch(err){}},true)}
 </script></body></html>

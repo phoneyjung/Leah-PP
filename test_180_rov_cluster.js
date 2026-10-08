@@ -56,13 +56,16 @@ const waitFor = async (pg, fn, ms) => { const t0 = Date.now(); while (Date.now()
       // A · the layout
       { const A = R.layout = {}; const o = await T(pg, 'all'); A.shown = Object.fromEntries(Object.entries(o).map(([k, v]) => [k, !!(v && v.shown)]));
         for (const id of ['bAtk', 'bSk', 'bJ1', 'bJ2', 'bDash', 'bPot', 'bBuff', 'bAuto', 'bQuest']) if (!o[id] || !o[id].shown) fail(dev + ': ' + id + ' not shown');
-        if (touch) { const row = ['bBuff', 'bPot', 'bDash', 'bJ1', 'bAtk'].map(id => o[id]).filter(Boolean); A.rowX = row.map(r => Math.round(r.cx));
+        { const row = ['bBuff', 'bPot', 'bDash', 'bJ1', 'bAtk'].map(id => o[id]).filter(Boolean); A.rowX = row.map(r => Math.round(r.cx));   // 1.84: the computer has the phone layout too
           for (let i = 1; i < row.length; i++) if (!(row[i].cx > row[i - 1].cx + 30)) fail(dev + ': bottom row out of order at ' + i + ': ' + A.rowX.join(','));
           const bottoms = row.map(r => Math.round(r.y + r.h)); A.rowBottom = bottoms; if (Math.max(...bottoms) - Math.min(...bottoms) > 6) fail(dev + ': bottom row not level: ' + bottoms.join(','));
           if (!(o.bJ2.cy < o.bAtk.cy - 30 && o.bJ2.cx < o.bAtk.cx - 30)) fail(dev + ': skill 2 not up-left of the attack button'); if (!(o.bSk.cy < o.bAtk.cy - 50 && Math.abs(o.bSk.cx - o.bAtk.cx) < 30)) fail(dev + ': skill 3 not above the attack button');
           if (!(o.bAuto.cy < o.bDash.cy - 60)) fail(dev + ': bot button not above the cluster'); if (!(Math.abs(o.bQuest.cy - o.bAuto.cy) < 4 && o.bQuest.x > o.bAuto.x + o.bAuto.w - 2)) fail(dev + ': guide button not beside (right of) the bot button');
           if (!(o.bQuest.x + o.bQuest.w >= o.bAtk.x + o.bAtk.w - 4)) fail(dev + ': guide button not flush right (' + Math.round(o.bQuest.x + o.bQuest.w) + ' vs ' + Math.round(o.bAtk.x + o.bAtk.w) + ')'); if (o.mm && o.mm.shown && !(o.bQuest.y > o.mm.y + o.mm.h + 4)) fail(dev + ': guide button not below the minimap'); }
-        else { const row = ['bQuest', 'bAuto', 'bBuff', 'bPot', 'bDash', 'bJ1', 'bJ2', 'bSk', 'bAtk'].map(id => o[id]); A.rowX = row.map(r => Math.round(r.cx)); for (let i = 1; i < row.length; i++) if (!(row[i].cx > row[i - 1].cx + 30)) fail(dev + ': computer row out of order at ' + i); }
+        // 1.84: on a computer every cluster button carries a small key tag; on a phone the tags stay hidden
+        A.tags = await pg.evaluate(() => { const o = {}; for (const id of ['bAtk', 'bSk', 'bJ1', 'bJ2', 'bPot', 'bBuff', 'bDash', 'bAuto', 'bQuest']) { const t = document.querySelector('#' + id + ' .kb184'); o[id] = t ? [t.dataset.k, getComputedStyle(t).display] : null; } return o; });
+        const wantKeys = { bAtk: 'Space', bSk: '3', bJ1: '1', bJ2: '2', bPot: '4', bBuff: '5', bDash: 'Shift', bAuto: 'B', bQuest: 'G' };
+        for (const [id, k] of Object.entries(wantKeys)) { const t = A.tags[id]; if (!touch) { if (!t || t[0] !== k || t[1] === 'none') fail(dev + ': key tag on ' + id + ' is ' + JSON.stringify(t) + ' (want ' + k + ', shown)'); } else if (t && t[1] !== 'none') fail(dev + ': key tag shown on a phone (' + id + ')'); }
         const ids = ['bAtk', 'bSk', 'bJ1', 'bJ2', 'bDash', 'bPot', 'bBuff', 'bAuto', 'bQuest', 'bCmp', 'bRest', 'mm']; A.overlaps = [];
         for (let i = 0; i < ids.length; i++) for (let j = i + 1; j < ids.length; j++) if (overlap(o[ids[i]], o[ids[j]])) A.overlaps.push(ids[i] + '+' + ids[j]); if (A.overlaps.length) fail(dev + ': overlapping buttons ' + A.overlaps.join(' '));
         for (const id of ids) { const r = o[id]; if (r && r.shown && (r.x < 0 || r.y < 0 || r.x + r.w > w + 1 || r.y + r.h > h + 1)) fail(dev + ': ' + id + ' outside the screen'); }
@@ -115,6 +118,11 @@ const waitFor = async (pg, fn, ms) => { const t0 = Date.now(); while (Date.now()
       // E · keys on a computer: 5 casts the buff, G guides, B toggles the bot
       if (!touch) { const E = R.keys = {}; await T(pg, 'go', 'cavemouth'); await pg.evaluate(() => { S.eff = {}; JCD.guard = 0; S.cleared = S.cleared || {}; S.cleared[M.id] = 1; P.path = null; });
         await pg.keyboard.press('5'); await sleep(150); E.guard = (await T(pg, 'state')).guard; if (!E.guard) fail('computer: key 5 did not cast the buff');
+        // 1.84 numbering: 1 = skill 1 (slot 1), 2 = skill 2 (slot 2), 3 = skill 3 (the weapon skill)
+        await pg.evaluate(() => { S.learn = ['bash', 'guard', 'provoke', 'evade']; S.slots = ['evade', 'provoke']; S.slotBuff = 'guard'; S.eff = {}; JCD.evade = 0; JCD.provoke = 0; P.skCd = 0; hud(); }); await sleep(200);
+        await pg.keyboard.press('1'); await sleep(150); E.key1 = await pg.evaluate(() => !!(S.eff.evade > performance.now())); if (!E.key1) fail('computer: key 1 did not cast skill 1 (evade)');
+        await pg.keyboard.press('2'); await sleep(150); E.key2 = await pg.evaluate(() => (JCD.provoke || 0) > performance.now()); if (!E.key2) fail('computer: key 2 did not cast skill 2 (provoke)');
+        await pg.keyboard.press('3'); await sleep(150); E.key3 = await pg.evaluate(() => (P.skCd || 0) > 0); if (!E.key3) fail('computer: key 3 did not cast the weapon skill');
         await pg.keyboard.press('KeyG'); await sleep(300); E.guidePicker = await pg.evaluate(() => document.querySelectorAll('[data-gd]').length); if (!E.guidePicker) fail('computer: key G did not open the destination picker'); await pg.evaluate(() => closeModal()); await sleep(100);
         await pg.keyboard.press('KeyB'); await sleep(150); E.bot = (await T(pg, 'state')).auto; if (!E.bot) fail('computer: key B did not start the bot'); await pg.keyboard.press('KeyB'); await sleep(150); E.botOff = !(await T(pg, 'state')).auto; if (!E.botOff) fail('computer: key B did not stop the bot'); }
       await ctx.close(); }

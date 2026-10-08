@@ -41,7 +41,7 @@ async function soundSamples(page){return page.evaluate(async()=>{
 (async()=>{const browser=await puppeteer.launch({executablePath:process.env.CHROME_EXE||undefined,args:['--no-sandbox']});
  try{for(const [name,width,height,touch,dpr] of [['pc',1366,768,false,1],['phone',812,330,true,2.6],['small',667,375,true,2]]){
   const {context,page}=await boot(browser,{width,height,isMobile:touch,hasTouch:touch,deviceScaleFactor:dpr});
-  const layout=await inspect(page);assert(layout.portraitPixels>50,'player artwork visible');assert.equal(layout.thumbs,touch);
+  const layout=await inspect(page);assert(layout.portraitPixels>50,'player artwork visible');assert(layout.thumbs,'phone layout on every device (owner, 9 Oct 2026, version 1.84)');
   for(const b of layout.buttons){assert(b.w>=44&&b.h>=44,b.id+' touch area');assert(b.x>=0&&b.y>=0&&b.x+b.w<=width+.1&&b.y+b.h<=height+.1,b.id+' fits viewport')}
   assert(layout.hud.x+layout.hud.w<width-318,'HUD leaves room for top buttons');
   for(const b of layout.buttons.filter(b=>b.id.startsWith('b')&&!['bBag','bMap','bEmo','bStat','bBook','bSet'].includes(b.id)))
