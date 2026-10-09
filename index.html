@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.87';
+const VERSION='Lantern Academy 1.88';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -5767,7 +5767,7 @@ function wmDraw186(){const w=wmEl186();if(!WM186.open)return;const st=wmState186
   const stage=w.querySelector('#wmStage'),cv=w.querySelector('#wmC'),cells=w.querySelector('#wmCells'),pins=w.querySelector('#wmPins'),hint=w.querySelector('#wmHint'),crumb=w.querySelector('#wmCrumb');
   w.querySelectorAll('.pan').forEach(b=>b.style.display=(D&&WM186.view==='near')?'':'none');
   if(!D){stage.style.display='none';crumb.textContent=t('wmNoData');wmPanel186(null);return}
-  stage.style.display='';{const mr=w.querySelector('.main').getBoundingClientRect();const sh=Math.max(60,Math.min(mr.height,(mr.width-8)*.62/1.5)),sw=sh*1.5;stage.style.width=sw+'px';stage.style.height=sh+'px';cells.style.fontSize=Math.max(10,Math.min(16,sw/5*.11))+'px'}   /* 3:2, as tall as the row allows, at most 62% of the width */
+  stage.style.display='';{const col=stage.parentElement,lg=w.querySelector('#wmLegend'),mr=w.querySelector('.main').getBoundingClientRect();const pr=w.querySelector('.panrow'),cw=col&&col.classList.contains('col')?col.clientWidth:(mr.width-8)*.62,ch=mr.height-(pr?pr.offsetHeight+6:(lg?lg.offsetHeight+6:0));const sh=Math.max(60,Math.min(ch,cw/1.5)),sw=sh*1.5;stage.style.width=sw+'px';stage.style.height=sh+'px';cells.style.fontSize=Math.max(10,Math.min(16,sw/5*.11))+'px'}   /* 3:2, as wide as its column (1.88: the left 40%), as tall as the row allows */
   const [gc,gr]=D.grid,r=stage.getBoundingClientRect(),dpr=Math.min(2,devicePixelRatio||1),W=Math.max(2,Math.round(r.width*dpr)),H=Math.max(2,Math.round(r.height*dpr));if(cv.width!==W||cv.height!==H){cv.width=W;cv.height=H}
   const g=cv.getContext('2d'),im=WM186.img,iw=im?im.naturalWidth:1536,ih=im?im.naturalHeight:1024,bw=iw/gc,bh=ih/gr,op=wmOpened186(),cur=wmBlockOf186(M.id);
   g.clearRect(0,0,W,H);cells.innerHTML='';pins.innerHTML='';
@@ -5910,4 +5910,133 @@ body.thumbs #sys175{top:calc(1px + env(safe-area-inset-top,0px));left:calc(6px +
 body.thumbs.sys175 #lampBar{top:calc(110px + env(safe-area-inset-top,0px))!important}body.thumbs:not(.sys175) #lampBar{top:calc(96px + env(safe-area-inset-top,0px))!important}
 body.thumbs #gmBtn{top:calc(146px + env(safe-area-inset-top,0px))!important}
 body.thumbs #hud #goal{font-size:15px!important;line-height:1.3!important}body.thumbs #hud .nm,body.thumbs #hud #hName{font-size:14px!important}body.thumbs #hud .row{font-size:13px}body.thumbs #hud #hLv{font-size:13px}`;document.head.appendChild(st)}   /* the card is scaled to .7, so the words that matter (the goal, the name) are set larger to stay readable */
+// ================= 1.88 · owner's play test of 9 Oct 13:19 (with a reference game's world map): the map page in three columns 40·40·20 — blocks · the map with pins · the list of places and monsters on the right, pick one then press "navigate"; the quest window beside the top-left card; the stick 20% when idle; potions never above the limit =================
+try{Object.assign(TX.th,{wmNpc:'ตัวละคร',wmMons:'มอนสเตอร์ในแผนที่นี้',wmPick:'แตะชื่อแล้วกดนำทาง',wmGoBtn:'นำทางไป',wmHp:'เลือด',wmAtk:'โจมตี',wmDark:'ตีก่อน',wmLightMon:'ไม่ตีก่อน',qlTitle:'เควส',qlNav:'นำทาง',qlNone:'ยังไม่มีเควสค้าง ลองดูบอร์ดภารกิจที่หมู่บ้านนะ',qlMain:'เควสหลัก',qlDaily:'ภารกิจวันนี้',qlMail:'จดหมาย',qlReq:'ของฝาก',qlWeekly:'ภารกิจสัปดาห์',qlClaim:'รับรางวัลที่บอร์ด',qlBtn:'เควส'});
+ if(TX.en)Object.assign(TX.en,{wmNpc:'People',wmMons:'Monsters on this map',wmPick:'Tap a name, then Navigate',wmGoBtn:'Navigate to',wmHp:'HP',wmAtk:'ATK',wmDark:'strikes first',wmLightMon:'never strikes first',qlTitle:'Quests',qlNav:'Navigate',qlNone:'No open quests — see the mission board in the village',qlMain:'Main quest',qlDaily:'Today\'s missions',qlMail:'Mail',qlReq:'Requests',qlWeekly:'Weekly mission',qlClaim:'Claim at the board',qlBtn:'Quests'})}catch(e){}
+// ---------- 1. the stick: 20% when idle on a phone (the owner, 13:19) ----------
+{const st=document.createElement('style');st.textContent='body.fjIdle172:not(.nt174) #joy{opacity:.2!important}';document.head.appendChild(st)}
+// ---------- 2. potions: the count can never pass the limit (the owner: "12/12 at most") ----------
+{const old=update;update=function(dt){const r=old.apply(this,arguments);try{if(S&&typeof potMax181==='function'){const mx=potMax181();if(S.potions>mx){S.potions=mx;try{hud()}catch(e){}}}}catch(e){}return r}}
+// ---------- 3. the map page in three columns ----------
+{const st=document.createElement('style');st.textContent=`
+#wm186 .main{display:flex;gap:8px;flex:1;min-height:0;align-items:stretch}
+#wm186 .col{min-width:0;min-height:0;display:flex;flex-direction:column;gap:5px}#wm186 .c1{flex:4 1 0}#wm186 .c2{flex:4 1 0}#wm186 .c3{flex:2 1 0}
+#wm186 .c1 .stage{flex:none;align-self:flex-start}#wm186 .legend{font-size:11px;color:#b8a88f;line-height:1.25;flex:1;min-width:0}
+#wm186 .panrow{display:flex;align-items:center;gap:4px;flex:none}#wm186 .panrow .pan{position:static;transform:none;width:34px;height:34px;flex:none}   /* 1.88: the arrows sit under the blocks, not over the cells */
+#wm186 .c2{border:1px solid #775531;border-radius:10px;background:#1d1430;padding:7px 8px;overflow:hidden}
+#wm186 .c2 h3{margin:0;font-size:16px;font-weight:400;color:#f4d896;display:flex;align-items:center;gap:6px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#wm186 .c2 .thumb{flex:none;align-self:center;position:relative;border:1px solid #4a3763;border-radius:8px;overflow:hidden;background:#17131f}#wm186 .c2 .thumb canvas{display:block;width:100%;height:100%}
+#wm186 .thumb .tp{position:absolute;transform:translate(-50%,-50%);font-size:12px;line-height:1;pointer-events:auto;cursor:pointer;text-shadow:0 0 3px #000,0 0 3px #000;display:flex;flex-direction:column;align-items:center;gap:1px}
+#wm186 .thumb .tp i{font-style:normal;font-size:9px;line-height:1;background:#17131fcc;color:#fff3db;padding:1px 4px;border-radius:5px;white-space:nowrap;max-width:76px;overflow:hidden;text-overflow:ellipsis}
+#wm186 .thumb .tp.me{font-size:15px}#wm186 .thumb .tp.sel{font-size:17px;z-index:2}#wm186 .thumb .tp.sel i{background:#f4d896;color:#2a1a08}
+#wm186 .c3{border:1px solid #775531;border-radius:10px;background:#1d1430;padding:6px;gap:5px}
+#wm186 .c3 .panel{flex:1;min-height:0;overflow:auto;border:0;border-radius:0;background:transparent;padding:0 2px 0 0;display:flex;flex-direction:column;gap:4px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:#775531 transparent}
+#wm186 .c3 .panel::-webkit-scrollbar{width:6px}#wm186 .c3 .panel::-webkit-scrollbar-thumb{background:#775531;border-radius:3px}
+#wm186 .c3 .sec{font-size:11px;color:#b8a88f;margin:3px 0 0;border-top:1px solid #4a376355;padding-top:4px}
+#wm186 .c3 .row{display:flex;align-items:center;gap:5px;text-align:left;border:1px solid #4a3763;background:#291b3a;border-radius:8px;padding:4px 7px;min-height:38px;font-size:12px;width:100%;box-shadow:none;min-width:0;line-height:1.2}
+#wm186 .c3 .row>span:nth-child(2){flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}#wm186 .c3 .row .sub{font-size:10px;color:#b8a88f;white-space:nowrap}
+#wm186 .c3 .row.on{background:#f4d896;color:#2a1a08;border-color:#f4d896}#wm186 .c3 .row.on .sub{color:#5a4320}#wm186 .c3 .row.lock{opacity:.7}
+#wm186 .c3 .mon{display:flex;align-items:center;gap:6px;font-size:12px;padding:3px 4px;border-radius:7px;background:#17131f88}#wm186 .c3 .mon canvas{width:22px;height:18px;image-rendering:pixelated;flex:none}#wm186 .c3 .mon .sub{margin-left:auto;font-size:10px;color:#b8a88f;white-space:nowrap}
+#wm186 #wmGo{flex:none;width:100%;justify-content:center;min-height:40px;font-size:14px}#wm186 #wmGo[disabled]{opacity:.5;background:#291b3a;color:#b8a88f;border-color:#4a3763}
+#wm186 .qs187{padding:5px 7px;gap:2px}#wm186 .qs187 .qx{font-size:12px}#wm186 .qs187 .btn{min-height:30px;font-size:12px;padding:0 10px}
+@media (max-height:420px){#wm186 .c2 h3{font-size:14px}#wm186 .c3 .row{min-height:34px;font-size:11px}}`;document.head.appendChild(st)}
+wmEl186=function(){let w=document.getElementById('wm186');if(w)return w;w=document.createElement('div');w.id='wm186';w.className='hide';
+  w.innerHTML='<div class="bar" style="position:relative"><button class="btn gold" id="wmWorld"></button><h2 id="wmTitle"></h2><div class="crumb" id="wmCrumb"></div><button class="btn" id="wmX">✕ <span></span></button><div class="tip hide" id="wmTip"></div></div>'+
+   '<div class="main"><div class="col c1"><div class="stage" id="wmStage"><canvas id="wmC"></canvas><div class="pins" id="wmPins"></div><div class="cells" id="wmCells"></div>'+
+   '<div class="hint" id="wmHint"></div></div><div class="panrow"><button class="pan w" data-pan="-2,0">◀</button><button class="pan n" data-pan="0,-2">▲</button><button class="pan s" data-pan="0,2">▼</button><button class="pan e" data-pan="2,0">▶</button><div class="legend" id="wmLegend"></div></div></div>'+
+   '<div class="col c2" id="wmMid"></div><div class="col c3"><div class="panel" id="wmPanel"></div><button class="btn gold" id="wmGo" disabled></button></div></div>';
+  document.body.appendChild(w);
+  w.querySelector('#wmX').onclick=()=>closeWorldMap186();
+  w.querySelector('#wmWorld').onclick=()=>{const st=wmState186();st.world=1;st.tip=1;if(WM186.view==='world'){wmNearAt186(WM186.cx,WM186.cy)}else{WM186.view='world';wmDraw186()}};
+  w.querySelectorAll('[data-pan]').forEach(b=>b.onclick=()=>{const [dx,dy]=b.dataset.pan.split(',').map(Number);wmNearAt186(WM186.cx+dx,WM186.cy+dy)});
+  w.querySelector('#wmStage').addEventListener('click',ev=>{if(WM186.view!=='world'||!WM186.data)return;const r=ev.currentTarget.getBoundingClientRect(),[gc,gr]=WM186.data.grid;const c=Math.floor((ev.clientX-r.left)/r.width*gc),rr=Math.floor((ev.clientY-r.top)/r.height*gr);wmNearAt186(c,rr);const id=wmIdOf186(Math.max(0,Math.min(gc-1,c)),Math.max(0,Math.min(gr-1,rr)));if(WM186.data.blocks[id])wmSelect186(id)});
+  w.querySelector('#wmGo').onclick=()=>{const p=WM186.pick;if(!p)return;wmWalk186(p.map,p.x,p.y,p.label)};
+  return w};
+// the quest strip at the top of the right column (every age)
+function wmQuestStrip188(){try{const q=questStep187();if(!q)return '';const p=questPlace187();return '<div class="qs187"><div class="qt">🎯 '+t('qGoal')+'</div><div class="qx">'+questText187()+'</div>'+(p?'<button class="btn gold" data-qgo="1">🧭 '+t('qlNav')+(p.map!==M.id?' · '+wmName186(p.map):'')+'</button>':'')+'</div>'}catch(e){return ''}}
+// the monsters a map holds (its spawn list), grouped by kind
+function wmMons188(m){const out={};for(const s of m.spawns||[]){if(!s||!s.kind)continue;out[s.kind]=(out[s.kind]||0)+1}return Object.entries(out)}
+function wmPanel186(bid){const w=wmEl186(),mid=w.querySelector('#wmMid'),pn=w.querySelector('#wmPanel'),D=WM186.data,kid=isKid(),cur=wmBlockOf186(M.id);WM186.pick=null;
+  const mapsOf=b=>(WM_MAPS186[b]||[]).filter(id=>MAPS[id]).map(id=>id==='capital'&&M.id==='h9'?'h9':id);
+  let mh='',m=null;
+  if(!D||!bid){mh='<h3>🗺️ '+t('wmThisMap')+'</h3>';m=M}
+  else{const b=D.blocks[bid],k=b?wmKnown186(bid):'sea';
+    if(!b)mh='<p class="note">'+t('wmSea')+'</p>';
+    else{const name=k==='far'?t('wmUnknown'):(b.n||wmBiome186(b.b));
+      mh='<h3>'+(bid===cur?'⭐ ':k==='open'?'📍 ':'🔒 ')+name+'</h3><div class="chips"><span class="chip'+(bid===cur?' me':'')+'">'+t('wmBlock')+' '+bid+'</span>';
+      if(k!=='far'){mh+='<span class="chip">'+wmBiome186(b.b)+'</span><span class="chip">'+wmRealm186(b.rl)+'</span>';if(b.ch&&!kid)mh+='<span class="chip">'+t('wmChapter')+' '+b.ch+'</span>'}mh+='</div>';
+      if(k==='open'){const ms=mapsOf(bid);const tab=WM186.tab&&ms.includes(WM186.tab)?WM186.tab:(ms.includes(M.id)?M.id:ms[0]);
+        if(ms.length>1)mh+='<div class="tabs">'+ms.map(id=>'<button data-tab="'+id+'" class="'+(id===tab?'on':'')+'">'+(id===M.id?'⭐ ':'')+wmName186(id)+'</button>').join('')+'</div>';
+        if(tab){try{m=tab===M.id?M:getMap(tab)}catch(e){m=null}}
+        if(b.d&&!kid)mh+='<p class="note">🕳️ '+b.d[0]+' · '+b.d[1]+' '+t('wmFloors')+'</p>';
+        try{if(rHas('warp')&&(S.stones||[]).length)mh+='<button class="btn" data-warp="1">✨ '+t('wmStones')+'</button>'}catch(e){}}
+      else if(k==='next'){let why='';try{const em=mapsOf(cur)[0];const mm=em===M.id?M:getMap(em);const a=D.blocks[cur];const dir=b.c>a.c?'e':b.c<a.c?'w':b.r>a.r?'s':'n';const e=(mm.exits||[]).find(x=>x.id===dir);if(e&&e.locked)why=t(e.msg||'soon')}catch(e){}
+        mh+='<p class="note">🔒 '+t('wmLocked')+(why?' · '+why:'')+'</p>';if(b.d&&!kid)mh+='<p class="note">🕳️ '+b.d[0]+'</p>';
+        const em=(WM_MAPS186[bid]||[])[0];if(em&&MAPS[em])mh+='<button class="btn" data-go="'+em+'">🧭 '+t('wmWalk')+'</button>'}
+      else mh+='<p class="note">'+t('wmMore')+'</p>'}}
+  let P2=[];if(m){P2=wmPlaces186(m);WM186.places=WM186.places||{};WM186.places[m.id]=P2;const c=wmThumb186(m);
+    mh+='<div class="thumb" data-thumb="'+m.id+'" data-ratio="'+(m.w/m.h)+'"><canvas width="'+c.width+'" height="'+c.height+'"></canvas>'+P2.map((p,i)=>{if(p.k==='door')return '';const lab=(p.k==='npc'||p.k==='exit'||p.k==='lock'||p.k==='post')?'<i>'+p.label+'</i>':'';return '<span class="tp'+(p.k==='you'?' me':'')+'" data-pin="'+i+'" style="left:'+(p.x/(m.w*T)*100).toFixed(1)+'%;top:'+(p.y/(m.h*T)*100).toFixed(1)+'%">'+p.ic+lab+'</span>'}).join('')+'</div>'}
+  mid.innerHTML=mh;
+  // the right column: the goal, then the people and places (tap = pick), then the monsters
+  let ph=wmQuestStrip188();
+  if(m){const groups=[['npc',t('wmNpc')],['exit',t('wmPlaces')]];const rows=(pred)=>P2.map((p,i)=>pred(p)?'<button class="row'+(p.k==='lock'?' lock':'')+'" data-pl="'+i+'" data-map="'+m.id+'"><span>'+p.ic+'</span><span>'+p.label+'</span>'+(p.sub?'<span class="sub">'+p.sub+'</span>':'')+'</button>':'').join('');
+    const npc=rows(p=>p.k==='npc'),rest=rows(p=>p.k!=='npc'&&p.k!=='you');
+    if(npc)ph+='<p class="sec">🧑 '+t('wmNpc')+'</p>'+npc;if(rest)ph+='<p class="sec">📍 '+t('wmPlaces')+'</p>'+rest;
+    const mons=wmMons188(m);if(mons.length){ph+='<p class="sec">👾 '+t('wmMons')+'</p>'+mons.map(([k,n])=>{let nm='';try{nm=t('n_'+k)}catch(e){}if(!nm||nm==='n_'+k)nm=k;const st=(typeof MON_STAT!=='undefined'&&MON_STAT[k])||null;return '<div class="mon" data-mon="'+k+'"><canvas width="26" height="22"></canvas><span>'+nm+'</span><span class="sub">×'+n+(st&&!kid?' · '+t('wmHp')+' '+st.hp:'')+'</span></div>'}).join('')}}
+  pn.innerHTML=ph;pn.scrollTop=0;
+  // bindings
+  mid.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{WM186.tab=b.dataset.tab;wmPanel186(WM186.sel||wmBlockOf186(M.id))});
+  const th=mid.querySelector('[data-thumb]');if(th){const c=WM186.thumbs[th.dataset.thumb];const cv=th.querySelector('canvas');if(c&&cv)cv.getContext('2d').drawImage(c,0,0)}
+  const pick=i=>{const p=P2[i];if(!p||p.k==='you'||!m)return;WM186.pick={map:m.id,x:p.x,y:p.y,label:p.ic+' '+p.label};pn.querySelectorAll('[data-pl]').forEach(b=>b.classList.toggle('on',+b.dataset.pl===i));mid.querySelectorAll('[data-pin]').forEach(s=>s.classList.toggle('sel',+s.dataset.pin===i));wmGoBtn188();
+    const row=pn.querySelector('[data-pl="'+i+'"]');if(row&&row.scrollIntoView)try{row.scrollIntoView({block:'nearest'})}catch(e){}};
+  pn.querySelectorAll('[data-pl]').forEach(b=>b.onclick=()=>pick(+b.dataset.pl));mid.querySelectorAll('[data-pin]').forEach(s=>s.onclick=ev=>{ev.stopPropagation();pick(+s.dataset.pin)});
+  mid.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{let mm=null;try{mm=getMap(b.dataset.go)}catch(e){}if(!mm)return;const p=mm.spawnDefault||[mm.w*T/2,mm.h*T/2];wmWalk186(mm.id,p[0],p[1],'📍 '+wmName186(mm.id))});
+  const wp=mid.querySelector('[data-warp]');if(wp)wp.onclick=()=>{closeWorldMap186();try{wmOldWarp186()}catch(e){}};
+  const qg=pn.querySelector('[data-qgo]');if(qg)qg.onclick=()=>questGo187();
+  pn.querySelectorAll('.mon canvas').forEach(cv=>{try{const k=cv.parentNode.dataset.mon,a=MON_ART&&MON_ART[k+'0'];if(a&&a[0]){const g=cv.getContext('2d');g.imageSmoothingEnabled=false;g.drawImage(a[0],0,0,a[0].width,a[0].height,0,0,26,22)}}catch(e){}});
+  wmGoBtn188();wmFit188()}
+function wmGoBtn188(){const b=document.getElementById('wmGo');if(!b)return;const p=WM186.pick;b.disabled=!p;b.textContent=p?'🧭 '+t('wmGoBtn')+' '+p.label.replace(/^\S+\s/,'').slice(0,14):t('wmPick')}
+// the map thumbnail fills what is left of the middle column, keeping its own proportions
+function wmFit188(){const w=document.getElementById('wm186');if(!w||!WM186.open)return;const mid=w.querySelector('#wmMid'),th=mid&&mid.querySelector('.thumb');if(!th)return;const ratio=+th.dataset.ratio||1.5;
+  let used=0;for(const el of mid.children){if(el===th)continue;used+=el.getBoundingClientRect().height+5}const cs=getComputedStyle(mid),avail=mid.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom)-used-2,cw=mid.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);
+  let h=Math.max(40,Math.min(avail,cw/ratio)),ww=h*ratio;if(ww>cw){ww=cw;h=ww/ratio}th.style.width=ww+'px';th.style.height=h+'px';
+  const lg=w.querySelector('#wmLegend');if(lg)lg.textContent=t('wmLegend')}
+addEventListener('resize',()=>{try{if(WM186.open)wmFit188()}catch(e){}});
+// ---------- 4. the quest window beside the top-left card: a count, the open quests, "navigate" on each ----------
+function questList188(){const L=[];if(!S||!M)return L;
+  try{const q=questStep187();if(q){const p=questPlace187();L.push({ic:'🎯',g:t('qlMain'),text:questText187(),go:p?()=>questGo187():null})}}catch(e){}
+  try{const vil=M.id==='h9'?'h9':'capital';const door=k=>{if(vil==='h9'){const d=H9.doors[H9_MAIL[k]];return [d[0]*T,(d[1]+1)*T]}const d=MAIL_DOORS[k];return [(d[0]+.5)*T,(d[1]+.7)*T]};const mb=mailToday();
+    if(!mb.got){const [x,y]=door('post_office');L.push({ic:'📮',g:t('qlMail'),text:t('gdMailGet'),go:()=>wmWalk186(vil,x,y,'📮 '+t('gdMailGet'))})}
+    else for(const l of mb.letters||[]){if(l.done)continue;const [x,y]=door(l.to);L.push({ic:'✉️',g:t('qlMail'),text:t('gdMail')+' '+mailName(l.to),go:()=>wmWalk186(vil,x,y,'✉️ '+mailName(l.to))})}}catch(e){}
+  try{for(const n of M.npcs||[])if(typeof REQMARK!=='undefined'&&REQMARK[n.npc]==='ready'){const nm=t('n_'+n.npc);L.push({ic:'🎁',g:t('qlReq'),text:t('gdNpc')+' '+nm,go:()=>wmWalk186(M.id,n.x,n.y+22,'🎁 '+nm)})}}catch(e){}
+  try{ensureDaily();const bm=M.board?M:(MAPS.capital?getMap(M.id==='h9'?'h9':'capital'):null);const goB=bm&&bm.board?()=>wmWalk186(bm.id,bm.board.x,bm.board.y+16,'📜 '+t('wmBoard')):null;
+    const goK=(k,done)=>{if(done)return goB;const p=missionPlace188(k);return p?()=>wmWalk186(p.map,p.x,p.y,p.ic+' '+t('m_'+k)):goB};
+    for(const d of (S.daily&&S.daily.list)||[]){if(d.claimed)continue;const done=d.got>=d.n;L.push({ic:done?'✅':'📜',g:t('qlDaily'),text:t('m_'+d.k)+' '+Math.min(d.got,d.n)+'/'+d.n+(done?' · '+t('qlClaim'):''),go:goK(d.k,done)})}
+    const W=S.weekly;if(W&&!W.claimed)L.push({ic:'🏆',g:t('qlWeekly'),text:t('m_'+W.k)+' '+Math.min(W.got,W.n)+'/'+W.n+(W.got>=W.n?' · '+t('qlClaim'):''),go:goK(W.k,W.got>=W.n)})}catch(e){}
+  return L}
+// where a mission of a kind is done: crystals, dig spots, fishing spots, monsters (the first map that has one, this map first); anything else → the board
+function missionPlace188(k){if(!M||!P)return null;const mp=id=>{try{return id===M.id?M:(MAPS[id]?getMap(id):null)}catch(e){return null}};const order=[M.id,'cavemouth','hunt1','h9','capital'].filter((v,i,a)=>a.indexOf(v)===i);
+  for(const id of order){const m=mp(id);if(!m)continue;let c=null;
+    if(k==='wake'||k==='quiz'){const aw=((S.crystals||{})[id])||[];c=(m.crystals||[]).find(x=>!(x.kidOnly&&!isKid())&&!(id===M.id?x.awake:aw.includes(x.id)));if(c)return{map:id,x:c.x,y:c.y+14,ic:'💎'}}
+    else if(k==='dig'){const dn=((S.digs||{})[id])||[];c=(m.digs||[]).find(d=>!(id===M.id?d.done:dn.includes(d.id)));if(c)return{map:id,x:c.x,y:c.y,ic:'⛏️'}}
+    else if(k==='fish'){if(m.fishSpot)return{map:id,x:m.fishSpot.x,y:m.fishSpot.y,ic:'🎣'}}
+    else if(k==='help'||k==='hunt'||k==='mon'){c=(m.spawns||[])[0];if(c)return{map:id,x:c.x,y:c.y,ic:'👾'}}
+    else return null}
+  return null}
+function openQuestLog188(){if(!S||!M)return;const L=questList188();QL188.list=L;
+  modal('<h2>📜 '+t('qlTitle')+(L.length?' <span class="chip" style="font-size:12px;border:1px solid #d3a55a;border-radius:99px;padding:0 8px;vertical-align:middle">'+L.length+'</span>':'')+'</h2>'+(L.length?'<div class="list188">'+L.map((q,i)=>'<div class="ql188"><span class="qi">'+q.ic+'</span><span class="qt"><small>'+q.g+'</small>'+q.text+'</span>'+(q.go?'<button class="btn188" data-ql="'+i+'">🧭 '+t('qlNav')+'</button>':'')+'</div>').join('')+'</div>':'<p class="note">'+t('qlNone')+'</p>'));
+  document.querySelectorAll('[data-ql]').forEach(b=>b.onclick=()=>{const q=QL188.list[+b.dataset.ql];closeModal();if(q&&q.go)q.go()})}
+const QL188={list:[],el:null,n:-1};
+{const st=document.createElement('style');st.textContent=`#bQLog188{position:fixed;z-index:7;width:44px;height:44px;border-radius:12px;border:1.5px solid #d3a55a;background:linear-gradient(140deg,#3a2d48,#241a35);color:#f6e2b0;font-size:19px;padding:0;display:none;align-items:center;justify-content:center;box-shadow:0 3px 8px #0a0612aa;min-width:0;min-height:0}
+#bQLog188.on{display:flex}#bQLog188 b{position:absolute;top:-6px;right:-6px;min-width:18px;height:18px;padding:0 4px;box-sizing:border-box;border-radius:9px;background:#e0493c;color:#fff;font:700 11px/16px Arial,sans-serif;text-align:center;border:1px solid #ffd7c2}#bQLog188 b:empty{display:none}
+.list188{display:flex;flex-direction:column;gap:6px;margin-top:6px}.ql188{display:flex;align-items:center;gap:8px;border:1px solid #8f795044;border-radius:10px;background:#211a2c;padding:7px 9px}.ql188 .qi{font-size:20px;flex:none}.ql188 .qt{flex:1;min-width:0;font-size:14px;line-height:1.25}.ql188 .qt small{display:block;font-size:11px;color:#b9adbf}
+.ql188 .btn188{flex:none;min-height:40px;padding:0 12px;border-radius:99px;border:1px solid #f4d896;background:linear-gradient(#e6c784,#c39a52);color:#2a1a08;font-weight:700;font-size:13px}`;document.head.appendChild(st)}
+function qlPlace188(){let b=QL188.el;if(!b){b=document.createElement('button');b.id='bQLog188';b.innerHTML='📜<b></b>';b.title='Quests';b.onclick=()=>{if(S&&M&&!DLG)openQuestLog188()};document.body.appendChild(b);QL188.el=b}
+  const hud=document.getElementById('hud');const on=!!(S&&M&&hud&&!hud.classList.contains('hide'));b.classList.toggle('on',on);if(!on)return;
+  const r=hud.getBoundingClientRect();b.style.left=Math.round(r.right+6)+'px';b.style.top=Math.round(r.top)+'px';
+  let n=0;try{n=questList188().length}catch(e){}if(n!==QL188.n){QL188.n=n;b.querySelector('b').textContent=n?String(n):''}}
+{const old=hud;hud=function(){const r=old.apply(this,arguments);try{qlPlace188()}catch(e){}return r}}
+{const old=goMap;goMap=function(){const r=old.apply(this,arguments);try{setTimeout(qlPlace188,50)}catch(e){}return r}}
+setInterval(()=>{try{if(S&&M)qlPlace188()}catch(e){}},2000);
+{const old=closeModal;closeModal=function(){const r=old.apply(this,arguments);try{if(S&&M)setTimeout(qlPlace188,30)}catch(e){}return r}}
 </script></body></html>

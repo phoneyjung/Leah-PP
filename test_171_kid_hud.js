@@ -50,13 +50,13 @@ async function fullPlayer(browser, w, h, age) {
     for (const [name, w, h] of [['phone', 844, 390], ['ipad', 1180, 820]]) {
       const { ctx, pg } = await newPlayer(browser, w, h, 7); const b = await mainButtons(pg);
       results['newChild-' + name] = b; await pg.screenshot({ path: path.join(out, 'new-child-' + name + '.png') });
-      if (!same(b, ['bAtk', 'bBag', 'bRest', 'bSet'])) fail('new child ' + name + ': main screen shows ' + b.join(' ') + ', expected only bAtk bBag bRest bSet');
+      if (!same(b, ['bAtk', 'bBag', 'bQLog188', 'bRest', 'bSet'])) fail('new child ' + name + ': main screen shows ' + b.join(' ') + ', expected only bAtk bBag bQLog188 bRest bSet');   /* 1.88: the quest button beside the card (owner, 9 Oct 13:19) is the one addition to the child's screen */
       if (!(await pg.$('#joy'))) fail('new child ' + name + ': the walking stick is missing');
       await ctx.close();
     }
     // ---- 2. a child with every class open: only buttons that belong to the place are added, and they sit next to the big button with no gap
     { const { ctx, pg } = await fullPlayer(browser, 844, 390, 7), seen = {};
-      for (const [id, want] of [['capital', ['bAtk', 'bBag', 'bRest', 'bSet']], ['cavemouth', ['bAtk', 'bBag', 'bCmp', 'bRest', 'bSet']], ['room', ['bAtk', 'bBag', 'bDeco', 'bRest', 'bSet']]]) {
+      for (const [id, want] of [['capital', ['bAtk', 'bBag', 'bQLog188', 'bRest', 'bSet']], ['cavemouth', ['bAtk', 'bBag', 'bCmp', 'bQLog188', 'bRest', 'bSet']], ['room', ['bAtk', 'bBag', 'bDeco', 'bQLog188', 'bRest', 'bSet']]]) {
         await pg.evaluate(id => goMap(id), id); await sleep(1900); await quiet(pg); await pg.evaluate(() => hud()); await sleep(700);
         const b = await mainButtons(pg); seen[id] = b; await pg.screenshot({ path: path.join(out, 'child-' + id + '.png') });
         if (!same(b, want)) fail('child with everything open, ' + id + ': shows ' + b.join(' ') + ', expected ' + want.join(' ')); }
@@ -78,7 +78,7 @@ async function fullPlayer(browser, w, h, age) {
       await tap(pg, '#bSet'); await tap(pg, '#kOn'); await quiet(pg); await sleep(500); const on = await mainButtons(pg);
       seen.kidModeOff = off; seen.kidModeOnAgain = on;
       for (const id of ['bMap', 'bBook', 'bRest']) if (!off.includes(id)) fail('kid mode off: ' + id + ' did not come back (' + off.join(' ') + ')');
-      if (!same(on, ['bAtk', 'bBag', 'bRest', 'bSet'])) fail('kid mode on again: shows ' + on.join(' '));
+      if (!same(on, ['bAtk', 'bBag', 'bQLog188', 'bRest', 'bSet'])) fail('kid mode on again: shows ' + on.join(' '));
       results.childFull = seen; await ctx.close(); }
     // ---- 6. grown-ups keep their screen
     { const { ctx, pg } = await fullPlayer(browser, 844, 390, 30), b = await mainButtons(pg); results.adult = b;
@@ -105,7 +105,7 @@ async function fullPlayer(browser, w, h, age) {
     { const { ctx, pg } = await newPlayer(browser, 844, 390, 7, { noArt: true }), b = await mainButtons(pg);
       await tap(pg, '#bBag'); const t = await windowTitle(pg); const closeOk = await pg.evaluate(() => { const x = document.getElementById('mX'); if (!x) return false; const q = x.getBoundingClientRect(), e = document.elementFromPoint(q.left + q.width / 2, Math.min(innerHeight - 2, q.top + q.height / 2)); return q.top < innerHeight - 24 && !!e && (e === x || x.contains(e)); });
       results.noArt = { buttons: b, bag: t, closeOnScreen: closeOk };
-      if (!same(b, ['bAtk', 'bBag', 'bRest', 'bSet'])) fail('no art: main screen shows ' + b.join(' ')); if (!t) fail('no art: the bag did not open'); if (!closeOk) fail('no art: the bag close button is not on screen');
+      if (!same(b, ['bAtk', 'bBag', 'bQLog188', 'bRest', 'bSet'])) fail('no art: main screen shows ' + b.join(' ')); if (!t) fail('no art: the bag did not open'); if (!closeOk) fail('no art: the bag close button is not on screen');
       await ctx.close(); }
   } catch (e) { fail('test crashed: ' + (e && e.stack || e)); }
   finally { await browser.close(); }
