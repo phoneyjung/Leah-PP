@@ -23,13 +23,13 @@ const tall=(c,F,col)=>{let top=-1,bot=-1;const d=c.getContext('2d').getImageData
   await p.evaluate(()=>{const b=document.getElementById('mBody');if(b)b.scrollTop=0});
   R.buttons=await p.$$eval('#ad201 .ad202v button,#ad201 .ad203z button,#ad201use,#ad201back,#ad201x',bs=>bs.map(b=>{const r=b.getBoundingClientRect();return{id:b.dataset.v||b.dataset.z||b.id,inside:r.left>=0&&r.top>=0&&r.right<=innerWidth+.5&&r.bottom<=innerHeight+.5,h:Math.round(r.height)}}));
   assert(R.buttons.every(b=>b.inside&&b.h>=44),'buttons inside and 44 px+: '+JSON.stringify(R.buttons));await p.screenshot({path:path.join(out,name+'-window.png')});
-  await press(p,'#ad201use');R.applied=await p.evaluate(()=>({F:PS.F,v:S.gmAdult202}));assert.deepEqual(R.applied,{F:72,v:'m72a'});
-  R.identicalA=await identical(p,'m72a');assert.equal(R.identicalA,8,'72 A pixel-identical');
+  await press(p,'#ad201use');R.applied=await p.evaluate(()=>({F:PS.F,v:S.gmAdult202}));assert(R.applied.v==='m72a'&&(R.applied.F===72||R.applied.F===112),'72 A in use: '+JSON.stringify(R.applied));
+  R.identicalA=await p.evaluate(()=>AD201.sheets.walkReal)?'walk sheet (test_206)':await identical(p,'m72a');if(R.identicalA!=='walk sheet (test_206)')assert.equal(R.identicalA,8,'72 A pixel-identical');   /* 2.06: with its walk the model is laid out in 112 cells, checked in test_206 */
   // next to the NPC adults: 68–71 px against their 61–62 px
   R.vsNpc=await p.evaluate(()=>{const h=(im,F)=>{const c=toCanvas(im),d=c.getContext('2d').getImageData(0,0,F,F).data;let top=-1,bot=-1;for(let y=0;y<F;y++)for(let x=0;x<F;x++)if(d[(y*F+x)*4+3]>80){if(top<0)top=y;bot=y;break}return bot-top+1};
-   const me=h(PS.stand,72),nuan=IMG.npc_nuan?h(IMG.npc_nuan,64):0,mom=IMG.npc_mom?h(IMG.npc_mom,64):0,leah=IMG.npc_leah?h(IMG.npc_leah,64):0;return {me,nuan,mom,leah,toNuan:nuan?+(me/nuan).toFixed(2):0,toLeah:leah?+(me/leah).toFixed(2):0}});
+   const me=h(PS.stand,PS.F),nuan=IMG.npc_nuan?h(IMG.npc_nuan,64):0,mom=IMG.npc_mom?h(IMG.npc_mom,64):0,leah=IMG.npc_leah?h(IMG.npc_leah,64):0;return {me,nuan,mom,leah,toNuan:nuan?+(me/nuan).toFixed(2):0,toLeah:leah?+(me/leah).toFixed(2):0}});
   assert(R.vsNpc.me>=66&&R.vsNpc.me<=72);if(R.vsNpc.nuan)assert(R.vsNpc.toNuan>=1.05&&R.vsNpc.toNuan<=1.2,'a little taller than grandma Nuan: '+R.vsNpc.toNuan);
-  R.label=await p.evaluate(async()=>{let got=null;const o=label;label=function(x,y,s,c){if(s&&String(s).includes(S.name))got=Math.round(P.y-camY-y);return o.apply(this,arguments)};await new Promise(r=>setTimeout(r,300));label=o;return got});
+  R.label=await p.evaluate(async()=>{let got=null;const o=label;label=function(x,y,s,c){if(s&&String(s).includes(S.name))got=Math.round(P.y-camY-y);return o.apply(this,arguments)};await new Promise(r=>setTimeout(r,300));label=o;return got-ad201Lift()});   /* the hook sits outside the lift wrapper (2.06: the 112-cell walk version is lifted by 40) */
   assert(R.label>=70&&R.label<=78,'name just above the head: '+R.label);
   await p.evaluate(()=>{const n=(M.npcs||[]).find(n=>/nuan/.test(n.img||''));if(n){P.x=n.x+34;P.y=n.y+2;P.row=6}P.path=null});await sleep(800);await p.screenshot({path:path.join(out,name+'-nuan.png')});
   // the other 72 run, then back to the own character
