@@ -10,7 +10,9 @@ async function check(name,fn){try{results[name]=await fn()}catch(e){errors.push(
 async function press(pg,id,touch){const e=await pg.$(id);assert(e,'button '+id);await e.scrollIntoView();const r=await e.boundingBox();assert(r,'visible '+id);
  assert(r.x>=0&&r.y>=0&&r.x+r.width<=pg.viewport().width&&r.y+r.height<=pg.viewport().height,'button on screen '+id);
  if(touch)await pg.touchscreen.tap(r.x+r.width/2,r.y+r.height/2);else await pg.mouse.click(r.x+r.width/2,r.y+r.height/2);await sleep(150)}
-async function ground(pg,wx,wy,touch){const xy=await pg.evaluate((wx,wy)=>{const r=document.getElementById('c').getBoundingClientRect(),d=devicePixelRatio||1;return [(wx-camX)*SC/d+r.left,(wy-camY)*SC/d+r.top]},wx,wy);
+// 2.00: the RoV button arc can cover a door at the screen edge, so the tap goes to the nearest uncovered point within 10 world px (inside the 13 px exit ring), as a player would
+async function ground(pg,wx,wy,touch){const xy=await pg.evaluate((wx,wy)=>{const r=document.getElementById('c').getBoundingClientRect(),d=devicePixelRatio||1,at=(x,y)=>[(x-camX)*SC/d+r.left,(y-camY)*SC/d+r.top];
+  for(const k of [0,5,10])for(let a=0;a<(k?8:1);a++){const p=at(wx+Math.cos(a*Math.PI/4)*k,wy+Math.sin(a*Math.PI/4)*k);if(document.elementFromPoint(p[0],p[1])?.id==='c')return p}return at(wx,wy)},wx,wy);
  assert.equal(await pg.evaluate(([x,y])=>document.elementFromPoint(x,y)?.id,xy),'c','input reaches canvas '+JSON.stringify({world:[wx,wy],screen:xy}));
  if(touch)await pg.touchscreen.tap(...xy);else await pg.mouse.click(...xy)}
 async function boot(browser,mode='default',touch=false){const context=await browser.createBrowserContext(),pg=await context.newPage(),requests=[],notFound=[];
