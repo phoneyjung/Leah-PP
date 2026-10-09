@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.95';
+const VERSION='Lantern Academy 1.96';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -6339,4 +6339,27 @@ function feet195(k,c,fx,fy){const r=c.getBoundingClientRect(),sx=r.width/c.width
 {const og=openGender194;openGender194=function(){const r=og.apply(this,arguments);try{deco195()}catch(e){}return r}}
 {const op=openPicker;openPicker=function(){const r=op.apply(this,arguments);try{deco195()}catch(e){}return r}}
 addEventListener('resize',()=>{try{fit195()}catch(e){}});
+// ---- 1.96 (owner 9 Oct 16:18 "the_secret_of_the_grotto.mp3" and 16:28 "march_of_the_colossus.mp3"): recorded music for the first cave ----
+// the first cave = the cave mouth and floor 1 of today's world (plus the old Crystal Cave floors 1–3 behind ?oldworld)
+// soft underneath while playing · almost silent while a question is on screen · its own boss recording during a boss fight there · a missing file → the game's own tune
+const CAVE_BGM={src:{cave:'bgm-cave1.mp3',boss:'bgm-cave1-boss.mp3'},maps:['cavemouth','hunt1','cave1','cave2','cave3'],el:{},bad:{},vol:{cave:.3,boss:.42},up:{cave:.02,boss:.05},duck:.03,cur:null,wasOn:0};
+function caveBgmBoss(){return !!(M&&M.boss&&M.boss.active&&!M.boss.happy)}
+function caveBgmHere(){try{return !!(S&&M&&CAVE_BGM.maps.includes(M.id))}catch(e){return false}}
+function caveBgmWant(){try{if(!caveBgmHere()||!MUS||!SND||document.hidden)return null;const k=caveBgmBoss()?'boss':'cave';return CAVE_BGM.bad[k]?null:k}catch(e){return null}}
+function caveBgmQuiz(){const m=$('modal');return !!(m&&!m.classList.contains('hide')&&m.querySelector('.qz'))}
+function caveBgmQuiet(){return ['cave','boss'].every(k=>!CAVE_BGM.el[k]||CAVE_BGM.el[k].paused)}
+function caveBgmGame(){try{if(S&&M&&MUS&&SND&&!BGM.timer&&!(typeof farmBgmWant==='function'&&farmBgmWant()))setMusic(M.kind!=='cave'?'town':(caveBgmBoss()?'boss':'cave'))}catch(e){}}
+function caveBgmEl(k){let a=CAVE_BGM.el[k];if(a)return a;a=CAVE_BGM.el[k]=new Audio();a.loop=true;a.preload='auto';a.volume=0;a.addEventListener('error',()=>{CAVE_BGM.bad[k]=true;try{a.pause()}catch(e){}caveBgmGame()});a.src=(window.EMBED_ASSETS&&window.EMBED_ASSETS[CAVE_BGM.src[k]])||CAVE_BGM.src[k];return a}
+function caveBgmTick(){const want=caveBgmWant();CAVE_BGM.cur=want;if(want)caveBgmEl(want);
+  for(const k of ['cave','boss']){const a=CAVE_BGM.el[k];if(!a)continue;
+    if(k===want){const target=caveBgmQuiz()?CAVE_BGM.duck:CAVE_BGM.vol[k];if(a.paused){const pr=a.play();if(pr&&pr.catch)pr.catch(()=>{})}else{CAVE_BGM.wasOn=1;if(BGM.timer)stopMusic()}
+      const v=a.volume;a.volume=v>target?Math.max(target,v-.08):Math.min(target,v+CAVE_BGM.up[k])}
+    else if(!a.paused){a.volume=Math.max(0,a.volume-.06);if(a.volume<=.01){a.pause();if(k==='boss')try{a.currentTime=0}catch(e){}}}}   /* the next fight starts its music from the beginning */
+  // a boss fight whose recording is missing: the game's boss tune
+  if(!want&&caveBgmHere()&&caveBgmBoss()&&MUS&&SND&&caveBgmQuiet()&&BGM.mode!=='boss'){try{setMusic('boss')}catch(e){}}
+  // the recordings stopped (left the cave, sound settings, a file missing): the game's own tune again
+  if(!want&&CAVE_BGM.wasOn&&caveBgmQuiet()){CAVE_BGM.wasOn=0;caveBgmGame()}}
+setInterval(()=>{try{caveBgmTick()}catch(e){}},150);
+{const _sm=setMusic;setMusic=function(mode){try{if(caveBgmWant()){stopMusic();return}}catch(e){}return _sm.apply(this,arguments)}}
+addEventListener('pointerdown',()=>{try{const k=caveBgmWant(),a=k&&CAVE_BGM.el[k];if(a&&a.paused){const pr=a.play();if(pr&&pr.catch)pr.catch(()=>{})}}catch(e){}},{capture:true,passive:true});   /* phones start sound only from a tap */
 </script></body></html>
