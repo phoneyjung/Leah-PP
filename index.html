@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.07';
+const VERSION='Lantern Academy 2.08';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -6685,7 +6685,7 @@ function ad207Row(sh,standIm,wIm){const F=112,S=72,r=6,sc=toCanvas(standIm),wc=t
   const wo=sh.walk.getContext('2d'),so=sh.stand.getContext('2d');wo.imageSmoothingEnabled=so.imageSmoothingEnabled=false;wo.clearRect(0,r*F,6*F,F);so.clearRect(r*F,0,F,F);
   for(let f=0;f<6;f++)wo.drawImage(cell,f*F,0,F,F,f*F,r*F,F,F);so.drawImage(cell,6*F,0,F,F,r*F,0,F,F);
   sh.off[r]={r,wr:0,mir:false,wdy,sdx,sdy,real:true,sc:6};sh.west=wIm;return true}
-{const o=ad206Build;ad206Build=function(standIm){const sh=o.apply(this,arguments);try{if(AD207.wim)ad207Row(sh,standIm,AD207.wim)}catch(e){}return sh}}
+{const o=ad206Build;ad206Build=function(standIm){const sh=o.apply(this,arguments);try{const w=AD207.wOverride!==undefined?AD207.wOverride:AD207.wim;if(w)ad207Row(sh,standIm,w)}catch(e){}return sh}}   /* 2.08: a toned build passes its own west walk (or null = mirror) in AD207.wOverride */
 {const o=ad206Walk;ad206Walk=function(){if(AD206.done||AD206.failed)return o.apply(this,arguments);const a=arguments,th=this;return ad207West().then(()=>o.apply(th,a))}}
 // the stage C characters: the owner's PixelLab runs from the ASSET_SPEC_02 v3 prompts (01:42 ZIP), 8 standing views each in the game's order S SE E NE N NW W SW, pixels untouched
 // gm-c207-f1…f3.png 576×72 (adult woman, 67–71 px) · gm-c207-b1…b3.png and -g1…g2.png 512×64 (boy, girl, 60–62 px like Leah 61) · in the trial they walk the way 2.01 did (standing frame, 1 px bob)
@@ -6742,4 +6742,56 @@ function openStageC207(){if(!gmOn())return;const owner=S;let closed=false;
 @media (max-height:520px){#ad207{display:grid;grid-template-columns:auto 1fr;column-gap:12px;align-items:center;text-align:left}#ad207 h2{grid-column:1/3;margin:0 0 4px;font-size:18px}
 #ad207cv{grid-column:1;grid-row:2/4;width:min(44vw,400px);margin:0}#ad207 .ad207g{grid-column:2;grid-row:2;margin:0;gap:5px}#ad207 .ad207g button canvas{width:40px;height:35px}
 #ad207>#ad207st{grid-column:1;grid-row:4;font-size:12px;margin:2px 0}#ad207 .ad207b{grid-column:2;grid-row:3;margin-top:6px;gap:6px}#ad207 .ad207b button{flex:1 1 30%;min-width:0;padding:6px 8px}}`;document.head.appendChild(st)}
+// ---- 2.08 (owner 10 Oct 02:05: Codex set 03 A1 on codex/asset-03-skin-palette, "ช่วยตรวจรับและนำเข้า GM mode ก่อน"): skin tones on 72 ก in the GM trial ----
+// gm-adult-204a.palette.json (Codex, ASSET_SPEC_03 v1.1): 23 skin colours light→dark, four tones mapped by index (medium = the file exactly), and the exact places of skin and mouth
+// as runs [y,x,length] in the source files (gm-adult-204a.png stand, gm-adult-206w.png walk) · a pixel changes only when it is inside those places AND its colour is one of the 23,
+// so the same colours on leather and coat stay as drawn · the files are never changed: the sheets are rebuilt from recoloured copies (2.06 layout), then the 2.05 colours go on top
+// the 2.07 west walk has no places yet → while a tone is picked the west row is the 2.06 mirror of the east row, so the face never changes colour on turning · file missing → no skin button
+const AD208={data:null,tried:false,pending:null,cache:new Map(),built:new WeakMap(),order:['light','medium','tan','deep'],cycle:[-1,0,2,3]};
+try{Object.assign(TX.th,{ad208Skin:'ผิว',ad208light:'ผิวขาว',ad208medium:'ผิวกลาง',ad208tan:'ผิวแทน',ad208deep:'ผิวเข้ม'});
+ if(TX.en)Object.assign(TX.en,{ad208Skin:'Skin',ad208light:'Light skin',ad208medium:'Medium skin',ad208tan:'Tan skin',ad208deep:'Deep skin'})}catch(e){}
+// Codex's check found no skin colour in the 2.05 hair · eye · coat groups; the one pixel that disagreed was the near-black outline #0E0007 (lightness .03, hue 330),
+// which 2.05 took for coat (56 stand + 12 walk pixels went house-coloured) · the coat now needs some light, like the eyes do
+AD205.rules.m72a.coat=[318,347,.55,.12];
+ad205Class=function(r,g,b,R){const [h,s,l]=hslOf(r/255,g/255,b/255);if(h>=R.eye[0]&&h<=R.eye[1]&&s>=R.eye[2]&&l>=R.eye[3])return 2;if(h>=R.hair[0]&&h<=R.hair[1]&&s>=R.hair[2])return 1;if(h>=R.coat[0]&&h<=R.coat[1]&&s>=R.coat[2]&&(R.coat[3]==null||l>=R.coat[3]))return 3;return 0};
+function ad208Tone(){return AD208.order.indexOf(S&&S.gmAdultSkin)}   /* −1 = as drawn · picks kept per GM slot in S.gmAdultSkin ('light' · 'tan' · 'deep') */
+function ad208Load(){if(AD208.data||AD208.tried)return Promise.resolve(!!AD208.data);if(AD208.pending)return AD208.pending;
+  AD208.pending=new Promise(res=>{let fin=false;const end=v=>{if(fin)return;fin=true;clearTimeout(tm);AD208.tried=true;AD208.data=v;res(!!v)},tm=setTimeout(()=>end(null),10000);
+    const ok=d=>{try{const n=d.skin.length;if(d.schema!==1||!n||!AD208.order.every(k=>Array.isArray(d.tones[k])&&d.tones[k].length===n)||!d.regions||!d.regions['gm-adult-204a.png']||!d.regions['gm-adult-206w.png'])return null;return d}catch(e){return null}};
+    fetch('gm-adult-204a.palette.json').then(r=>r.ok?r.json():null).then(d=>end(d?ok(d):null)).catch(()=>end(null))}).finally(()=>{AD208.pending=null});return AD208.pending}
+const hex208=s=>[parseInt(s.slice(1,3),16),parseInt(s.slice(3,5),16),parseInt(s.slice(5,7),16)];
+// one source file recoloured to a tone, only inside Codex's skin and mouth places (cached per file and tone)
+function ad208Paint(src,file,tn){const d=AD208.data,R=d&&d.regions&&d.regions[file];if(!R||!src||!d.tones[tn])return null;const key=file+'|'+tn;if(AD208.cache.has(key))return AD208.cache.get(key);
+  const out=toCanvas(src),g=out.getContext('2d'),W=out.width,H=out.height,img=g.getImageData(0,0,W,H),p=img.data,idx=new Map(),to=d.tones[tn].map(hex208);d.skin.forEach((c,i)=>{const [r,g2,b]=hex208(c);idx.set((r<<16)|(g2<<8)|b,i)});
+  for(const kind of ['skin','mouth'])for(const [y,x,n] of (R[kind]||[]))for(let k=0;k<n;k++){const xx=x+k;if(y<0||y>=H||xx<0||xx>=W)continue;const i=(y*W+xx)*4;if(!p[i+3])continue;const j=idx.get((p[i]<<16)|(p[i+1]<<8)|p[i+2]);if(j==null)continue;const c=to[j];p[i]=c[0];p[i+1]=c[1];p[i+2]=c[2]}
+  g.putImageData(img,0,0);AD208.cache.set(key,out);return out}
+// the sheets of 72 ก in a tone: with its walk the 2.06 layout (and the 2.07 west row only when the west walk has places), without it the 2.01 layout
+function ad208Build(sh,tn){const V=AD201.V.m72a;
+  if(sh.walkReal){const sRe=ad208Paint(sh.im,'gm-adult-204a.png',tn),wRe=ad208Paint(sh.wim,'gm-adult-206w.png',tn);if(!sRe||!wRe)return null;
+    AD207.wOverride=sh.west?ad208Paint(sh.west,'gm-adult-207w.png',tn):null;try{const b=ad206Build(sRe,wRe);b.tone=tn;return b}finally{AD207.wOverride=undefined}}
+  const im=ad208Paint(sh.im,'gm-adult-204a.png',tn);if(!im)return null;const F=V.F,dy=(F-2)-V.foot,stand=document.createElement('canvas'),walk=document.createElement('canvas');stand.width=8*F;stand.height=F;walk.width=6*F;walk.height=8*F;
+  const sg=stand.getContext('2d'),wg=walk.getContext('2d');sg.imageSmoothingEnabled=wg.imageSmoothingEnabled=false;
+  for(let r=0;r<8;r++){sg.drawImage(im,r*F,0,F,F,r*F,dy,F,F);for(let f=0;f<6;f++)wg.drawImage(im,r*F,0,F,F,f*F,r*F+dy+AD201.bob[f],F,F)}return {stand,walk,im,tone:tn}}
+function ad208For(sh){try{if(!sh||AD201.v!=='m72a'||!AD208.data)return sh;const t0=ad208Tone();if(t0<0||AD208.order[t0]==='medium')return sh;const tn=AD208.order[t0];
+  let m=AD208.built.get(sh);if(!m){m={};AD208.built.set(sh,m)}if(m[tn]===undefined)m[tn]=ad208Build(sh,tn)||null;return m[tn]||sh}catch(e){return sh}}
+// in the world (outermost): the toned sheets, then hair · eyes · coat, and the shadow from the sheet in use
+{const old=buildPlayerSheets;buildPlayerSheets=function(){const r=old.apply(this,arguments);try{if(ad201Selected()&&PS.gmSprite170&&AD201.v==='m72a'&&AD201.sheets&&ad208Tone()>=0){
+  if(!AD208.data){const owner=S;if(!AD208.tried)ad208Load().then(ok=>{if(ok&&S===owner&&ad201Selected())buildPlayerSheets()});return r}
+  const b=ad208For(AD201.sheets);if(b!==AD201.sheets){const c=ad205Col();PS.stand=ad205Paint(b.stand,'m72a',c);PS.walk=ad205Paint(b.walk,'m72a',c);PS.silS=silOf(PS.stand);PS.silW=silOf(PS.walk);PS.sc=0;PS.shS=blurSheet(PS.silS);PS.shW=blurSheet(PS.silW)}}}catch(e){}return r}}
+// the trial window's picture follows the tone
+ad205Stand=function(sh){try{const b=ad208For(sh);return AD205.rules[AD201.v]?ad205Paint(b.stand,AD201.v,ad205Col()):b.stand}catch(e){return sh.stand}};
+ad206Preview=function(sh){try{const b=ad208For(sh);return AD205.rules[AD201.v]?ad205Paint(b.walk,AD201.v,ad205Col()):b.walk}catch(e){return sh.walk}};
+// the colour row gets a fourth button, skin: as drawn → light → tan → deep (medium is the file itself) · off until the palette file is in
+ad205Row=function(){const root=$('ad201');if(!root||root.querySelector('.ad205c'))return;const row=document.createElement('div');row.className='ad205c';
+  row.innerHTML=['h','e','b','s'].map(k=>`<button type="button" data-k="${k}"><i></i><span>${t(k==='h'?'ad205Hair':k==='e'?'ad205Eye':k==='b'?'ad205Coat':'ad208Skin')}</span></button>`).join('')+`<small>${t('ad205Only')}</small>`;
+  const n={h:HAIRC.length,e:EYEC.length,b:HOUSES.length},cur=k=>k==='s'?ad208Tone():ad205Col()[k],
+    css=(k,i)=>i<0?'':k==='h'?HAIRC[i][2]:k==='e'?EYEC[i][2]:k==='b'?HOUSES[i].col:(AD208.data?AD208.data.tones[AD208.order[i]][8]:''),tip=(k,i)=>i<0?t('ad205Orig'):k==='s'?t('ad208'+AD208.order[i]):'';
+  const mark=()=>{const on=!!AD205.rules[AD201.v];row.classList.toggle('off',!on);row.querySelectorAll('button').forEach(b=>{const k=b.dataset.k,i=cur(k),dot=b.querySelector('i');b.disabled=!on||(k==='s'&&!AD208.data);
+    dot.style.background=i<0?'repeating-linear-gradient(45deg,#ddd 0 3px,#999 3px 6px)':css(k,i);b.title=tip(k,i)})};
+  row.querySelectorAll('button').forEach(b=>b.onclick=()=>{if(!S||!AD205.rules[AD201.v])return;const k=b.dataset.k;
+    if(k==='s'){if(!AD208.data)return;const cy=AD208.cycle,nx=cy[(cy.indexOf(ad208Tone())+1)%cy.length];if(nx<0)delete S.gmAdultSkin;else S.gmAdultSkin=AD208.order[nx]}
+    else{const c=ad205Col();c[k]=c[k]+1>=n[k]?-1:c[k]+1;S.gmAdultCol=c}
+    try{save()}catch(e){}if(S.gmSprite170==='adult201'&&S.gmAdult202===AD201.v)try{buildPlayerSheets()}catch(e){}mark()});
+  const v=root.querySelector('.ad203z')||root.querySelector('.ad202v')||$('ad201cv');v.after(row);mark();const vr=root.querySelector('.ad202v');if(vr)vr.addEventListener('click',()=>setTimeout(mark,0));
+  if(!AD208.data){AD208.tried=false;ad208Load().then(()=>{if(row.isConnected)mark()})}};
 </script></body></html>
