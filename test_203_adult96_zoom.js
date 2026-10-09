@@ -11,10 +11,10 @@ const bounds=p=>p.$$eval('#ad201 .ad202v button,#ad201 .ad203z button,#ad201use,
   const bc=await browser.createBrowserContext();p=await bc.newPage();const errors=[];p.on('pageerror',e=>errors.push(e.message));await p.setViewport({width,height,deviceScaleFactor:dpr,isMobile:true,hasTouch:true});
   if(fail){await p.setBypassServiceWorker(true);await p.setRequestInterception(true);p.on('request',r=>r.url().includes('gm-adult-203a.png')?r.abort():r.continue())}
   await p.goto(url,{waitUntil:'load'});await enter(p);const original=await p.evaluate(()=>PS.stand.toDataURL());await open(p,true);const R={name};
-  R.models=await p.$$eval('#ad201 .ad202v button',bs=>bs.map(b=>b.dataset.v));assert.deepEqual(R.models,['green','a128','r3','r5']);
+  R.models=await p.$$eval('#ad201 .ad202v button',bs=>bs.map(b=>b.dataset.v));assert.deepEqual(R.models,['green','a128','r3','m72a','m72b']);   /* 2.04: 96 B left the row, the two 72 runs joined */
   await press(p,'#ad201 .ad202v [data-v="r3"]',true);
   if(fail){await p.waitForFunction(()=>AD201.error&&!AD201.pending&&$('ad201st').textContent!=='…',{timeout:15000});R.useOff=await p.$eval('#ad201use',b=>b.disabled);assert(R.useOff,'missing 96 file: use stays off');
-   await press(p,'#ad201 .ad202v [data-v="r5"]',true);await p.waitForFunction(()=>AD201.v==='r5'&&AD201.sheets&&!$('ad201use').disabled,{timeout:15000});R.otherStillWorks=true;
+   await press(p,'#ad201 .ad202v [data-v="green"]',true);await p.waitForFunction(()=>AD201.v==='green'&&AD201.sheets&&!$('ad201use').disabled,{timeout:15000});R.otherStillWorks=true;
    await press(p,'#ad201x',true);assert.equal(await p.evaluate(()=>PS.stand.toDataURL()),original);assert.deepEqual(errors,[]);R.errors=0;results.push(R);await bc.close();continue}
   await p.waitForFunction(()=>AD201.v==='r3'&&AD201.sheets&&!$('ad201use').disabled,{timeout:15000});await sleep(300);
   R.windowHeight=await p.evaluate(()=>AD201.h.a);assert(R.windowHeight>=90&&R.windowHeight<=95,'96 model measured: '+R.windowHeight);

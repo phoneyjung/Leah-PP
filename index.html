@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.03';
+const VERSION='Lantern Academy 2.04';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -6510,7 +6510,7 @@ body.thumbs.rov180 #act #bQuest{right:${R(14)}!important;bottom:${B(186)}!import
 // the owner's PixelLab file (adult_male_swordsman…zip, 8 standing views 128×128, no walk yet) packed as gm-adult-201.png 1024×128 in the game's order
 // S SE E NE N NW W SW · pixels untouched: the code only sets its foot line (y 111 in the file) on the game's foot line (frame bottom − 2) and bobs it 1 px while walking
 // GM slot only, like the 1.70 swordsman trial (S.gmSprite170='adult201'); the HUD portrait, other players and the bag keep the character of the slot
-const AD201={sheets:null,pending:null,error:false,foot:111,h:{},bob:[0,-1,-1,0,-1,-1],kid:null,v:'green',byV:{},V:{green:{src:'gm-adult-201.png',foot:111,lift:34,F:128},a128:{src:'gm-adult-202a.png',foot:125,lift:0,F:128},r3:{src:'gm-adult-203a.png',foot:94,lift:0,F:96},r5:{src:'gm-adult-203b.png',foot:93,lift:0,F:96}}};
+const AD201={sheets:null,pending:null,error:false,foot:111,h:{},bob:[0,-1,-1,0,-1,-1],kid:null,v:'green',byV:{},V:{green:{src:'gm-adult-201.png',foot:111,lift:34,F:128},a128:{src:'gm-adult-202a.png',foot:125,lift:0,F:128},r3:{src:'gm-adult-203a.png',foot:94,lift:0,F:96},r5:{src:'gm-adult-203b.png',foot:93,lift:0,F:96},m72a:{src:'gm-adult-204a.png',foot:70,lift:0,F:72},m72b:{src:'gm-adult-204b.png',foot:70,lift:0,F:72}}};
 function ad201F(){return (AD201.V[AD201.v]||AD201.V.green).F||128}   /* 2.03: models come in 128 and 96 frames */   /* 2.02: two models to compare (V), the shown one is v */
 try{Object.assign(TX.th,{ad201Btn:'ลองต้นแบบผู้ใหญ่ใหม่ (9 ต.ค.)',ad201T:'ต้นแบบผู้ใหญ่ใหม่ · ขนาดจริง',ad201P:'ภาพจากไฟล์ PixelLab ที่คุณเลือก ขนาดเท่าไฟล์ (1 พิกเซลภาพ = 1 พิกเซลเกม) · ยังไม่มีท่าเดิน ตัวจะเลื่อนไปเฉย ๆ · เฉพาะเซฟ GM',
   ad201Use:'ใช้ในฉาก ลองเดินดู',ad201Back:'กลับเป็นตัวเดิม',ad201Close:'ปิด',ad201Ok:'ภาพพร้อม · กดใช้ในฉาก แล้วเดินไปเทียบกับเด็ก NPC และบ้าน',ad201Bad:'โหลดภาพไม่ได้ ตัวเดิมยังใช้ได้ · ปิดแล้วเปิดใหม่เพื่อลองอีกครั้ง',
@@ -6570,7 +6570,7 @@ function ad202Load(){const v=AD201.v;return ad201Load().then(ok=>{if(AD201.v!==v
 {const old=buildPlayerSheets;buildPlayerSheets=function(){try{if(S&&S.gmSprite170==='adult201')ad202Set(S.gmAdult202||'green')}catch(e){}return old.apply(this,arguments)}}
 {const old=openAdult201;openAdult201=function(){try{if(S)ad202Set(S.gmAdult202||'green')}catch(e){}const r=old.apply(this,arguments);try{ad202Deco()}catch(e){}return r}}
 function ad202Deco(){const root=$('ad201');if(!root||root.querySelector('.ad202v'))return;const row=document.createElement('div');row.className='ad202v';row.setAttribute('role','group');row.setAttribute('aria-label',t('ad202Pick'));
- row.innerHTML=`<button type="button" data-v="green">${t('ad202Green')}</button><button type="button" data-v="a128">${t('ad202A')}</button><button type="button" data-v="r3">${t('ad203A')}</button><button type="button" data-v="r5">${t('ad203B')}</button>`;
+ row.innerHTML=`<button type="button" data-v="green">${t('ad202Green')}</button><button type="button" data-v="a128">${t('ad202A')}</button><button type="button" data-v="r3">${t('ad203A')}</button><button type="button" data-v="m72a">${t('ad204A')}</button><button type="button" data-v="m72b">${t('ad204B')}</button>`;   /* 2.04: 96 B left out of the row (still loadable), the two 72 runs added */
  const cv=$('ad201cv');cv.after(row);const mark=()=>row.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.v===AD201.v));mark();
  const st=$('ad201st'),use=$('ad201use'),refresh=()=>{use.disabled=true;st.textContent='…';const v=AD201.v;ad202Load().then(ok=>{if(AD201.v!==v||!$('ad201'))return;use.disabled=!ok;st.textContent=ok?t('ad201Ok'):t('ad201Bad')})};
  row.querySelectorAll('button').forEach(b=>b.onclick=()=>{if(ad202Set(b.dataset.v)){mark();refresh()}});
@@ -6599,4 +6599,9 @@ function ad203Zoom(){const root=$('ad201');if(!root||root.querySelector('.ad203z
 #ad201 .ad203z button.on{opacity:1;outline:2px solid #f2c45a;box-shadow:0 0 0 4px #f2c45a33}#ad201 .ad202v{flex-wrap:wrap}
 @media (max-height:520px){#ad201 .ad203z{grid-column:2;grid-row:4;justify-content:flex-start;margin:0}#ad201 .ad202v button{padding:4px 8px}
 #ad201>p:first-of-type{display:none}#ad201>#ad201st{grid-row:2;align-self:end}#ad201>.ad201b{grid-row:3;flex-direction:row;flex-wrap:wrap}#ad201>.ad201b button{flex:1 1 30%;min-width:0;padding:6px 8px}#ad201 #ad201cv{width:min(40vw,360px)}}`;document.head.appendChild(st)}
+// ---- 2.04 (owner 9 Oct 22:21 "สัดส่วนดีกับลีอา แต่กับยายนวลไม่ ok กับเจ้าหญิง และของในบ้าน" → 72 frame, chibi like the NPCs): the owner's two best 72 runs in the GM trial ----
+// gm-adult-204a.png (run 2: clearest cyan eyes) and -204b.png (run 3: smiling, hair in the key range) 576×72, 68–71 px tall like the 61–62 px NPCs, pixels untouched
+// the trial row: green coat · 128 · 96 · 72 A · 72 B (short names, the heights are drawn under the picture)
+try{Object.assign(TX.th,{ad202Green:'เขียว',ad202A:'128',ad203A:'96',ad204A:'72 ก',ad204B:'72 ข'});if(TX.en)Object.assign(TX.en,{ad202Green:'Green',ad202A:'128',ad203A:'96',ad204A:'72 A',ad204B:'72 B'})}catch(e){}
+{const st=document.createElement('style');st.textContent=`#ad201 .ad202v button{min-width:52px}@media (max-height:520px){#ad201 .ad202v{gap:5px}#ad201 .ad202v button{padding:4px 6px;font-size:12px}}`;document.head.appendChild(st)}
 </script></body></html>
