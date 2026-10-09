@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.08';
+const VERSION='Lantern Academy 2.09';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -6794,4 +6794,10 @@ ad205Row=function(){const root=$('ad201');if(!root||root.querySelector('.ad205c'
     try{save()}catch(e){}if(S.gmSprite170==='adult201'&&S.gmAdult202===AD201.v)try{buildPlayerSheets()}catch(e){}mark()});
   const v=root.querySelector('.ad203z')||root.querySelector('.ad202v')||$('ad201cv');v.after(row);mark();const vr=root.querySelector('.ad202v');if(vr)vr.addEventListener('click',()=>setTimeout(mark,0));
   if(!AD208.data){AD208.tried=false;ad208Load().then(()=>{if(row.isConnected)mark()})}};
+// ---- 2.09 (night of 10 Oct, owner asleep: "ทำเหมือนทุกคืน" · the night check of 2.00–2.08) ----
+// 1) a trial window that shows another model (woman 2, 72 ข, …) and is closed without "use" left that model as the shown one, so the 2.01 rule for the name and emote
+//    no longer matched the model in use: over 72 ก the name floated 40 px above the head · now any close, or another window opening over it, brings back the model in use
+function ad209Back(){if(S&&S.gmSprite170==='adult201'&&S.gmAdult202&&AD201.V[S.gmAdult202]&&AD201.v!==S.gmAdult202){ad202Set(S.gmAdult202);if(!AD201.sheets)ad202Load()}}
+{const old=closeModal;closeModal=function(){const r=old.apply(this,arguments);try{ad209Back()}catch(e){}return r}}
+{const old=modal;modal=function(){try{ad209Back()}catch(e){}return old.apply(this,arguments)}}
 </script></body></html>
