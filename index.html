@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.89';
+const VERSION='Lantern Academy 1.90';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -5767,7 +5767,7 @@ function wmDraw186(){const w=wmEl186();if(!WM186.open)return;const st=wmState186
   const stage=w.querySelector('#wmStage'),cv=w.querySelector('#wmC'),cells=w.querySelector('#wmCells'),pins=w.querySelector('#wmPins'),hint=w.querySelector('#wmHint'),crumb=w.querySelector('#wmCrumb');
   w.querySelectorAll('.pan').forEach(b=>b.style.display=(D&&WM186.view==='near')?'':'none');
   if(!D){stage.style.display='none';crumb.textContent=t('wmNoData');wmPanel186(null);return}
-  stage.style.display='';{const col=stage.parentElement,lg=w.querySelector('#wmLegend'),mr=w.querySelector('.main').getBoundingClientRect();const pr=w.querySelector('.panrow'),cw=col&&col.classList.contains('col')?col.clientWidth:(mr.width-8)*.62,ch=mr.height-(pr?pr.offsetHeight+6:(lg?lg.offsetHeight+6:0));const sh=Math.max(60,Math.min(ch,cw/1.5)),sw=sh*1.5;stage.style.width=sw+'px';stage.style.height=sh+'px';cells.style.fontSize=Math.max(10,Math.min(16,sw/5*.11))+'px'}   /* 3:2, as wide as its column (1.88: the left 40%), as tall as the row allows */
+  stage.style.display='';w.classList.toggle('world',WM186.view==='world');{const col=stage.parentElement,lg=w.querySelector('#wmLegend'),mr=w.querySelector('.main').getBoundingClientRect();const pr=w.querySelector('.panrow'),cw=col&&col.classList.contains('col')?col.clientWidth:(mr.width-8)*.62,ch=mr.height-(WM186.view==='world'?4:(pr?pr.offsetHeight+6:(lg?lg.offsetHeight+6:0)));const sh=Math.max(60,Math.min(ch,cw/1.5)),sw=sh*1.5;stage.style.width=sw+'px';stage.style.height=sh+'px';cells.style.fontSize=Math.max(10,Math.min(16,sw/5*.11))+'px'}   /* 3:2, as wide as its column (1.88: the left 40%), as tall as the row allows */
   const [gc,gr]=D.grid,r=stage.getBoundingClientRect(),dpr=Math.min(2,devicePixelRatio||1),W=Math.max(2,Math.round(r.width*dpr)),H=Math.max(2,Math.round(r.height*dpr));if(cv.width!==W||cv.height!==H){cv.width=W;cv.height=H}
   const g=cv.getContext('2d'),im=WM186.img,iw=im?im.naturalWidth:1536,ih=im?im.naturalHeight:1024,bw=iw/gc,bh=ih/gr,op=wmOpened186(),cur=wmBlockOf186(M.id);
   g.clearRect(0,0,W,H);cells.innerHTML='';pins.innerHTML='';
@@ -5924,6 +5924,7 @@ try{Object.assign(TX.th,{wmNpc:'ตัวละคร',wmMons:'มอนสเ�
 #wm186 .col{min-width:0;min-height:0;display:flex;flex-direction:column;gap:5px}#wm186 .c1{flex:4 1 0}#wm186 .c2{flex:4 1 0}#wm186 .c3{flex:2 1 0}
 #wm186 .c1 .stage{flex:none;align-self:flex-start}#wm186 .legend{font-size:11px;color:#b8a88f;line-height:1.25;flex:1;min-width:0}
 #wm186 .panrow{display:flex;align-items:center;gap:4px;flex:none}
+#wm186.world .c2,#wm186.world .c3,#wm186.world .panrow,#wm186.world .ov{display:none!important}#wm186.world .c1{flex:1 1 auto;align-items:center;justify-content:center}#wm186.world .c1 .stage{align-self:center;border-color:#c9aa6b}   /* 1.90: the whole world fills the page (owner, 14:19) */
 #wm186 .ov{flex:1;min-height:0;display:none;gap:8px;align-items:stretch;cursor:pointer}#wm186 .ov.on{display:flex}#wm186 .ov canvas{flex:none;border:1px solid #775531;border-radius:7px;background:#17131f;display:block}
 #wm186 .ovt{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:4px}#wm186 .ovt b{font-weight:400;color:#f4d896;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#wm186 .ovt small{font-size:11px;color:#b8a88f}
 #wm186 .ovt .bar{height:8px;border-radius:99px;background:#17131f;border:1px solid #4a3763;overflow:hidden}#wm186 .ovt .bar i{display:block;height:100%;background:linear-gradient(90deg,#c39a52,#f4d896);border-radius:99px;min-width:3px}#wm186 .panrow .pan{position:static;transform:none;width:34px;height:34px;flex:none}   /* 1.88: the arrows sit under the blocks, not over the cells */
