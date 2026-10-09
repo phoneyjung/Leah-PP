@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.91';
+const VERSION='Lantern Academy 1.92';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -6089,5 +6089,17 @@ function wmGestures191(stage){if(!stage||stage.dataset.g191)return;stage.dataset
 // the close button of every plain window at the top right (the owner, 14:25: at the bottom it covered the Navigate buttons of the quest list)
 {const st=document.createElement('style');st.textContent=`.mxTop191{position:sticky!important;top:-1px;bottom:auto!important;z-index:6;display:flex;justify-content:flex-end;margin:0 0 -48px 0!important;pointer-events:none}
 .mxTop191>#mX{pointer-events:auto;min-height:44px;min-width:72px;padding:0 14px;box-shadow:0 0 0 5px #231c2dcc}#mBody>.mxTop191+h2,#mBody>.mxTop191+div>h2:first-child{padding-right:96px}`;document.head.appendChild(st)}
-{const old=modal;modal=function(){const r=old.apply(this,arguments);try{const x=$('mX'),row=x&&x.parentElement,body=$('mBody');if(row&&row.parentElement===body&&row.classList.contains('mxRow171')){row.classList.add('mxTop191');body.prepend(row);body.scrollTop=0}}catch(e){}return r}}
+/* 1.92 replaces this: the top bar is built after the window's own code has finished (see mhBuild192) */
+// ---- 1.92 · a locked, slim top bar for plain windows: the title and the close button stay on top and the list scrolls under them, nothing covers a row (owner, 9 Oct 14:41) ----
+{const st=document.createElement('style');st.textContent=`#mBody>.mh192{position:sticky;top:0;z-index:7;display:flex;align-items:center;gap:10px;background:#241c2f;border-bottom:1px solid #9f86584d;box-shadow:0 4px 8px -6px #07050dcc;pointer-events:auto}
+#mBody>.mh192>h2{flex:1;min-width:0;margin:0!important;padding:0!important;border:0!important;font-size:17px!important;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#mBody>.mh192>#mX{flex:none;min-height:40px!important;min-width:0!important;padding:0 12px!important;font-size:14px;box-shadow:none!important}
+@media (max-height:440px){#mBody>.mh192>h2{font-size:15px!important}}`;document.head.appendChild(st)}
+function mhFit192(){const body=$('mBody'),row=body&&body.querySelector(':scope>.mh192');if(!row)return;const cs=getComputedStyle(body),pt=parseFloat(cs.paddingTop)||0,pl=parseFloat(cs.paddingLeft)||0,pr=parseFloat(cs.paddingRight)||0;
+  row.style.margin=(-pt)+'px '+(-pr)+'px 10px '+(-pl)+'px';row.style.padding='6px '+pr+'px 6px '+pl+'px';row.style.top=(-pt)+'px';row.style.borderRadius='14px 14px 0 0'}
+// built in a microtask: every wrapper of the opener (settings, bag, shop…) has finished by then; a window that moved its close button into its own header is left alone
+function mhBuild192(){const body=$('mBody'),x=$('mX');if(!body||!x||$('modal').classList.contains('hide'))return;const row=x.parentElement;if(!row||row.parentElement!==body||row.classList.contains('mh192')||!row.classList.contains('mxRow171'))return;
+  row.classList.remove('mxRow171');row.classList.add('mh192');row.removeAttribute('style');body.prepend(row);const h=body.querySelector(':scope>h2');if(h)row.prepend(h);mhFit192();body.scrollTop=0}
+{const old=modal;modal=function(){const r=old.apply(this,arguments);try{Promise.resolve().then(()=>{try{mhBuild192()}catch(e){}})}catch(e){}return r}}
+addEventListener('resize',()=>{try{mhFit192()}catch(e){}});
 </script></body></html>
