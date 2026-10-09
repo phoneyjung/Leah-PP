@@ -46,7 +46,9 @@ async function cooldownRun(pg, id, tapFn, label, R) {
   const r1 = await T(pg, 'read', id); if (!(r1.left > 0)) { fail(label + ': the tap did not start a cooldown'); return; }
   const total = r1.left + .06; R.total = +total.toFixed(2); const S = [r1]; let pix = null, again = null; const t0 = Date.now();
   while (true) { await sleep(70); const r = await T(pg, 'read', id); S.push(r);
-    if (!pix && r.left < total * .5 && r.left > total * .3) { const b = await T(pg, 'rect', id); const q = { w: b.w / 2 - 4, h: b.h / 2 - 4 }; pix = { tr: await brightness(pg, { x: b.x + b.w / 2 + 2, y: b.y + 2, ...q }), tl: await brightness(pg, { x: b.x + 2, y: b.y + 2, ...q }) }; await pg.screenshot({ path: out + '/' + label.replace(/\W+/g, '_') + '_mid.png' }); }
+    /* pixel reading while 50–70% of the cooldown is left: the cleared part (clockwise from the top) then covers the top-right quarter and the bottom-left
+       quarter is still dark. The bottom-left is compared, not the top-left, because since 1.84 the key tag (Shift, 3) sits on the top-left corner on a computer */
+    if (!pix && r.left < total * .7 && r.left > total * .5) { const b = await T(pg, 'rect', id); const q = { w: b.w / 2 - 4, h: b.h / 2 - 4 }; pix = { tr: await brightness(pg, { x: b.x + b.w / 2 + 2, y: b.y + 2, ...q }), bl: await brightness(pg, { x: b.x + 2, y: b.y + b.h / 2 + 2, ...q }), tl: await brightness(pg, { x: b.x + 2, y: b.y + 2, ...q }) }; await pg.screenshot({ path: out + '/' + label.replace(/\W+/g, '_') + '_mid.png' }); }
     if (again === null && r.left < total * .6 && r.left > total * .2) { const lf = r.left; await tapFn(); await sleep(30); const r2 = await T(pg, 'read', id); again = { before: lf, after: r2.left, reset: r2.left > lf + .2 }; }
     if (r.left <= 0 || Date.now() - t0 > (total + 2) * 1000) break; }
   await sleep(120); const rEnd = await T(pg, 'read', id);
@@ -60,7 +62,7 @@ async function cooldownRun(pg, id, tapFn, label, R) {
   if (!(degs[0] <= 40)) fail(label + ': sweep starts at ' + degs[0] + '° (want ≤ 40)'); if (!(R.degLast >= 300)) fail(label + ': sweep ends at ' + R.degLast + '° (want ≥ 300)');
   if (R.degSteps < 8) fail(label + ': only ' + R.degSteps + ' different angles (no sweep)');
   if (R.numOk < on.length) fail(label + ': number wrong in ' + (on.length - R.numOk) + ' samples'); if (R.wordHidden < on.length) fail(label + ': word visible during cooldown in ' + (on.length - R.wordHidden) + ' samples');
-  if (!pix) fail(label + ': no mid-cooldown pixel reading'); else if (!(pix.tr > pix.tl + 6)) fail(label + ': cleared quarter not brighter: top-right ' + pix.tr + ' vs top-left ' + pix.tl);
+  if (!pix) fail(label + ': no mid-cooldown pixel reading'); else if (!(pix.tr > pix.bl + 6)) fail(label + ': cleared quarter not brighter: top-right ' + pix.tr + ' vs bottom-left ' + pix.bl);
   if (!again) fail(label + ': no second tap'); else if (again.reset) fail(label + ': a second tap during the cooldown reset it (' + again.before + ' → ' + again.after + ')');
   if (rEnd.shown || rEnd.on) fail(label + ': cover still shown after the cooldown'); if (rEnd.word !== 'visible') fail(label + ': word not back after the cooldown (' + rEnd.word + ')');
 }

@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.84';
+const VERSION='Lantern Academy 1.85';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -143,7 +143,7 @@ const has=k=>!!IMG[k];
 // ---- words (Thai / English) ----
 const TX={th:{bag:'กระเป๋า',map:'แผนที่',set:'ตั้งค่า',hit:'ตี',lv:'Lv',crystal:'คริสตัล',coin:'เหรียญ',
   create:'สร้างผู้พิทักษ์แสง',pick:'1 · เลือกตัวละคร',house:'2 · เลือกบ้าน',age:'3 · อายุ',name:'4 · ชื่อเล่น',namePh:'ชื่อเล่นของเรา',rnd:'🎲 สุ่ม',start:'✨ เริ่มผจญภัย',
-  kidNote:'อายุต่ำกว่า 12: ไม่มีเลือด มอนไม่ตี ตอบคำถามปลุกคริสตัล',adultNote:'12 ปีขึ้นไป: มีเลือด เก็บเลเวล ปกป้องน้อง ๆ',
+  kidNote:'อายุต่ำกว่า 10: ไม่มีเลือด มอนไม่ตี ตอบคำถามปลุกคริสตัล',adultNote:'10 ปีขึ้นไป: มีเลือด เก็บเลเวล ปกป้องน้อง ๆ',
   adultArt:'(ภาพตัวละครผู้ใหญ่ยังเป็นภาพชั่วคราว)',welcome:'ยินดีต้อนรับ',
   wake:'✨ ปลุกคริสตัลด้วยความรู้',right:'ถูกต้อง! คริสตัลตื่นแล้ว',wrong:'ยังไม่ใช่ ลองอีกครั้งนะ',answer:'คำตอบคือ',ok:'ตกลง',close:'ปิด',
   dig:'ขุดเจอ',found:'เจอคริสตัลหลับอยู่! แตะเพื่อปลุก',stoneOn:'✨ ศิลาแสงตื่นแล้ว · บันทึกจุดวาร์ป',warp:'วาร์ปไปจุดที่เคยไป',
@@ -224,7 +224,7 @@ const TX={th:{bag:'กระเป๋า',map:'แผนที่',set:'ตั�
   sw:'ดาบไม้',bow:'ธนู',staff:'คทา',dag:'มีดสั้น',atk:'พลังโจมตี',spd:'ความเร็ว',rng:'ระยะ',empty:'ยังไม่มีของ',gems:'อัญมณี'},
  en:{bag:'Bag',map:'Map',set:'Settings',hit:'Hit',lv:'Lv',crystal:'Crystals',coin:'Coins',
   create:'Create your Light Keeper',pick:'1 · Pick a character',house:'2 · Pick your house',age:'3 · Age',name:'4 · Nickname',namePh:'Your nickname',rnd:'🎲 Random',start:'✨ Start adventure',
-  kidNote:'Under 12: no health, monsters never attack, answer questions to wake crystals',adultNote:'12 and over: health, levels, protect the younger ones',
+  kidNote:'Under 10: no health, monsters never attack, answer questions to wake crystals',adultNote:'10 and over: health, levels, protect the younger ones',
   adultArt:'(adult artwork is temporary)',welcome:'Welcome',
   wake:'✨ Wake the crystal with knowledge',right:'Correct! The crystal is awake',wrong:'Not quite, try again',answer:'The answer is',ok:'OK',close:'Close',
   dig:'You dug up',found:'A sleeping crystal! Tap to wake it',stoneOn:'✨ Light Stone awake · warp point saved',warp:'Warp to a place you have visited',
@@ -328,7 +328,7 @@ addEventListener('pointerdown',()=>{try{AC=AC||new (window.AudioContext||window.
 let VOICES=[];try{const lv=()=>{VOICES=speechSynthesis.getVoices()};lv();speechSynthesis.onvoiceschanged=lv}catch(e){}
 function speak(text,force){try{if(!window.speechSynthesis||!S||(!force&&!ttsOn()))return;const clean=String(text).replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}🎯✨🪙💎🧪⭐❗📜🔔🏆▶]/gu,'').replace(/[«»·]/g,' ').trim();if(!clean)return;speechSynthesis.cancel();
   const base=LANG==='en'?'en':'th',parts=clean.split(/([\u3400-\u9FFF]+)/).filter(x=>x.trim());for(const part of parts){const zh=/[\u3400-\u9FFF]/.test(part),want=zh?'zh':base,u=new SpeechSynthesisUtterance(part);const v=VOICES.find(v=>v.lang&&v.lang.toLowerCase().startsWith(want));if(v)u.voice=v;u.lang=want==='th'?'th-TH':want==='zh'?'zh-CN':'en-GB';u.rate=.9;speechSynthesis.speak(u)}}catch(e){}}
-const ttsOn=()=>S&&(S.tts!==undefined?S.tts:S.age<12);const kidUI=()=>S&&(S.kidUI!==undefined?S.kidUI:S.age<12);
+const ttsOn=()=>S&&(S.tts!==undefined?S.tts:S.age<10);const kidUI=()=>S&&(S.kidUI!==undefined?S.kidUI:S.age<10);   // 1.85: the child line is 10 (owner, 8–9 Oct)
 let LANG='th';const t=k=>(TX[LANG]&&TX[LANG][k])||TX.th[k]||k;
 
 // ---- houses: the purple cape is keyed to exact magenta in the sprite files; only that is recoloured ----
@@ -704,7 +704,7 @@ function ensureDaily(){if(!S.weekly||S.weekly.wk!==weekKey()){const W=isKid()?[[
   if(isKid()&&!L.some(q=>q[0]==='wake'))L[0]=['wake',2];S.daily={date:today(),seen:false,list:L.map(([k,n])=>({k,n,got:0,claimed:false}))};save()}
 function mission(k,n=1){if(!S||!S.daily)return;let done=false;const W=S.weekly;if(W&&W.k===k&&W.got<W.n){W.got=Math.min(W.n,W.got+n);if(W.got>=W.n){sfx('lvl');say('📜 '+t('weekly')+' ✓')}}for(const q of S.daily.list)if(q.k===k&&q.got<q.n){q.got=Math.min(q.n,q.got+n);if(q.got>=q.n)done=true}if(done){sfx('right');say('📜 '+t('m_'+k)+' ✓')}}
 function bookAdd(q){const L=q[LANG]||q.th;S.book=S.book||[];if(S.book.some(b=>b.id===q.id))return;S.book.unshift({id:q.id,sub:q.subject,lang:LANG,q:L.q,a:L.choices[q.answer],ex:L.explain||''});if(S.book.length>300)S.book.pop()}
-const isKid=()=>S&&S.age<12;
+const isKid=()=>S&&S.age<10;   // 1.85: under 10 = child (no HP, monsters never strike); 10 and over fight (owner, 8–9 Oct; was 12)
 function newSave(p){return{v:1,snd:true,st:{str:1,agi:1,vit:1,int:1,dex:1},cards:[],cardBook:[],name:p.name,kid:p.kid,house:p.house,age:p.age,lang:LANG,lv:1,exp:0,hp:40,coins:0,gems:0,potions:1,
   inv:[mkItem('sw',0)],eq:0,crystals:{},digs:{},stones:['plaza'],lastStone:'plaza',boss:false,pos:{map:'plaza',x:18*T,y:7*T},asked:[]}}
 let UID=1;const AFF=['str','agi','vit','int','dex','hpP','crit','aspd'];
@@ -1028,7 +1028,7 @@ const Net={online:false,ready:false,room:null,uid:null,db:null,me:null,others:{}
     r.child('points').on('value',snap=>{this.roomPts=snap.val()||{}});this.online=true;S.room=code;save();this.send(true);if(M)this.enterMap(M.id);this.publishHome();const t1=Date.now();r.child('knock/'+this.uid).limitToLast(5).on('child_added',s=>{const k=s.val();if(k&&k.t>t1-3000){say('🔔 '+k.n+' '+t('knock'));msgT=5;sfx('warp')}});return true},
   leave(){if(this.ref){this.ref.child('players').off();this.ref.child('emotes').off();this.ref.child('points').off();if(this.me)this.me.remove()}this.ref=null;this.me=null;this.others={};this.online=false;this.room=null},
   send(force){if(!this.online||!S||!M)return;const now=performance.now();const k=[mapKey(),Math.round(P.x/4),Math.round(P.y/4),P.row,P.moving?1:0].join();if(!force&&(k===this.lastKey||now-this.last<180))return;this.last=now;this.lastKey=k;
-    this.me.set({appearance169:look169Valid(S.appearance169)?{v:1,hair:S.appearance169.hair,face:S.appearance169.face,hc:S.appearance169.hc,ec:S.appearance169.ec}:null,hc:S.hc||0,ec:S.ec||0,z:document.hidden?1:0,ti:titleOf(S.title),n:S.name,k:S.kid,h:S.house,a:S.age<12?1:0,m:mapKey(),x:Math.round(P.x),y:Math.round(P.y),r:P.row,w:P.moving?1:0,lv:S.lv,t:firebase.database.ServerValue.TIMESTAMP})},
+    this.me.set({appearance169:look169Valid(S.appearance169)?{v:1,hair:S.appearance169.hair,face:S.appearance169.face,hc:S.appearance169.hc,ec:S.appearance169.ec}:null,hc:S.hc||0,ec:S.ec||0,z:document.hidden?1:0,ti:titleOf(S.title),n:S.name,k:S.kid,h:S.house,a:S.age<10?1:0,m:mapKey(),x:Math.round(P.x),y:Math.round(P.y),r:P.row,w:P.moving?1:0,lv:S.lv,t:firebase.database.ServerValue.TIMESTAMP})},
   emote(e){if(this.online)this.ref.child('emotes').push({u:this.uid,e,t:Date.now()})},
   addPoints(n){if(!this.online||!n)return;this.ref.child('points/'+HOUSES[S.house].id).transaction(v=>(v||0)+n)},
   tick(dt){if(!this.online)return;this.send(false);this.swT=(this.swT||0)-dt;if(this.swT<=0){this.swT=60;this.sweep()}for(const o of Object.values(this.others)){const d=Math.hypot(o.tx-o.x,o.ty-o.y);if(d>200){o.x=o.tx;o.y=o.ty}else{o.x+=(o.tx-o.x)*Math.min(1,dt*10);o.y+=(o.ty-o.y)*Math.min(1,dt*10)}o.dist=(o.dist||0)+d*.5;if(o.emoteT>0)o.emoteT-=dt}}};
@@ -1187,7 +1187,7 @@ function openFishBook(){const got=S.fish||{},n=Object.keys(got).length;modal(`<h
   document.querySelectorAll('[data-f]').forEach(el=>{const i=+el.dataset.f,c=fishArt(i);c.style.cssText='width:40px;height:24px;image-rendering:pixelated'+(got[i]?'':';filter:brightness(0) opacity(.5)');el.append(c)});$('fbBack').onclick=()=>{bookSub='all';openBook()}}
 function openPicker(d){const el=$('cr');el.classList.remove('hide');el.innerHTML=`<div class="r" style="align-items:center;justify-content:center"><h1>${t('who')}</h1><div class="g4" id="pk" style="width:min(640px,96vw)"></div><button class="go" id="pNew" ${d.slots.length>=4?'disabled':''}>${t('newChar')}</button></div>`;
   d.slots.forEach((s,i)=>{const b=document.createElement('div');b.className='pn';b.style.cssText='display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer';const c=document.createElement('canvas');c.width=c.height=64;c.style.cssText='width:64px;height:64px;image-rendering:pixelated';c.getContext('2d').drawImage(crSheet(s.kid,s.house,s.hc||0,s.ec||0,s.appearance169),0,0,64,64,0,0,64,64);
-    const H=HOUSES[s.house];b.append(c);b.insertAdjacentHTML('beforeend',`<b>${s.name}</b><span class="note" style="color:${H.col}">${H[LANG]||H.th}</span><span class="note">Lv ${s.lv} · ${s.age<12?(LANG==='en'?'kid':'เด็ก'):(LANG==='en'?'grown-up':'ผู้ใหญ่')}</span><button data-del="${i}" style="font-size:11px;padding:3px 8px">🗑</button>`);
+    const H=HOUSES[s.house];b.append(c);b.insertAdjacentHTML('beforeend',`<b>${s.name}</b><span class="note" style="color:${H.col}">${H[LANG]||H.th}</span><span class="note">Lv ${s.lv} · ${s.age<10?(LANG==='en'?'kid':'เด็ก'):(LANG==='en'?'grown-up':'ผู้ใหญ่')}</span><button data-del="${i}" style="font-size:11px;padding:3px 8px">🗑</button>`);
     b.onclick=e=>{if(e.target.dataset.del!==undefined){if(confirm(t('delQ'))){d.slots.splice(i,1);d.cur=-1;Store.put(d);openPicker(Store.all())}return}d.cur=i;Store.put(d);S=d.slots[i];el.classList.add('hide');startGame()};$('pk').append(b)});
   $('pNew').onclick=()=>{if(d.slots.length>=4)return;openCreator()}}
 
@@ -1219,7 +1219,7 @@ function openCreator(){const el=$('cr');el.classList.remove('hide');
 function crRefresh(){document.querySelectorAll('#ck .opt').forEach((b,i)=>{b.classList.toggle('on',i===CR_STATE.kid);const g=b.querySelector('canvas').getContext('2d');g.imageSmoothingEnabled=false;g.clearRect(0,0,48,48);g.drawImage(crSheet(i,CR_STATE.house),0,0,64,64,-8,-8,64,64)});
   $('ckey').classList.toggle('hide',!KIDS[CR_STATE.kid][3]);document.querySelectorAll('#chc .sw').forEach((b,i)=>b.style.borderColor=i===CR_STATE.hc?'#ffe7b0':'#1b1330');document.querySelectorAll('#cec .sw').forEach((b,i)=>b.style.borderColor=i===CR_STATE.ec?'#ffe7b0':'#1b1330');
   document.querySelectorAll('#ch .opt').forEach((b,i)=>b.classList.toggle('on',i===CR_STATE.house));document.querySelectorAll('#ca button').forEach(b=>b.classList.toggle('on',+b.dataset.a===CR_STATE.age));
-  $('cnm').textContent=CR_STATE.name||'—';$('crole').innerHTML=(CR_STATE.age<12?t('kidNote'):t('adultNote'))+(CR_STATE.age>=12?'<br>'+t('adultArt'):'')}
+  $('cnm').textContent=CR_STATE.name||'—';$('crole').innerHTML=(CR_STATE.age<10?t('kidNote'):t('adultNote'))+(CR_STATE.age>=10?'<br>'+t('adultArt'):'')}
 let crDir=0,crT=0;function crLoop(tm){if($('cr').classList.contains('hide'))return;requestAnimationFrame(crLoop);const c=$('cpv');if(!c)return;const box=c.parentElement,s=Math.max(2,Math.floor(Math.min(box.clientWidth-24,box.clientHeight-170)/100)),dpr=devicePixelRatio||1;
   if(c.width!==100*s*dpr){c.width=c.height=100*s*dpr;c.style.width=c.style.height=100*s+'px'}const g=c.getContext('2d');g.setTransform(1,0,0,1,0,0);g.clearRect(0,0,c.width,c.height);g.imageSmoothingEnabled=false;g.setTransform(s*dpr,0,0,s*dpr,0,0);
   if(tm-crT>650){crDir=(crDir+1)%8;crT=tm}const H=HOUSES[CR_STATE.house];g.fillStyle='#3f7d3a';g.beginPath();g.ellipse(50,84,36,11,0,0,7);g.fill();g.fillStyle='#5aa04a';g.beginPath();g.ellipse(50,82,34,9,0,0,7);g.fill();
@@ -3384,7 +3384,7 @@ setInterval(()=>{if(S&&!document.hidden)backupNow()},120000);
 // Children (age < 12) carry the apprentice lantern: monsters cannot see them. Its crystal light fades while they walk in dark places,
 // the village mage refills it to full, crystal energy converters on the way refill part of it and then rest (cooldown, per player).
 // Empty lantern: walk back by itself for 5 s -> the screen fades -> wake up beside the mage with a full lantern. Nothing is lost.
-const LKID=()=>!!(S&&S.age<12);
+const LKID=()=>!!(S&&S.age<10);
 const LAMP_CFG=age=>age<=7?{tiles:500,conv:.5,warn:.30}:age<=9?{tiles:400,conv:.4,warn:.25}:{tiles:320,conv:.35,warn:.20};
 const DARK=()=>!!(M&&(M.kind==='cave'||M.cavemouth||M.huntFloor||/^cave|^hunt/.test(M.id||'')));
 const CONV_CD=180000;   // 3 minutes, per converter, per player (kept in this player's save only)
@@ -5674,4 +5674,10 @@ body.nt174 .kb184{display:block!important}body.nt174.thumbs #act button{overflow
  kbTags184();setInterval(()=>{try{kbTags184()}catch(e){}},700)
  // keys follow the RoV numbering now: 1 = skill 1, 2 = skill 2, 3 = skill 3 (the weapon skill, which was key 1 before)
  addEventListener('keydown',e=>{try{if(!S||PAUSE||DLG||isKid()||e.repeat)return;const k=e.key;if(k==='1'||k==='2'||k==='3'){e.stopImmediatePropagation();e.preventDefault();if(k==='3')useSkill();else useJob((S.slots||[])[k==='1'?0:1])}}catch(err){}},true)}
+// ================= 1.85 · the age lines the owner set on 8–9 Oct: fighting opens at 10 (isKid is now under 10), the bot at 10, chat at 12, the dark lands at 18 =================
+const AGE185={fight:10,bot:10,chat:12,dark:18};
+function ageOk185(k){return !!(S&&(S.age||0)>=(AGE185[k]||0))}
+// the bot: age 10 and over (today the same as not being a child), kept as its own gate so the chat and the dark lands can use theirs later
+{const old=autoToggle180;autoToggle180=function(){if(S&&!ageOk185('bot')){say(t('jobNeed'));return}return old.apply(this,arguments)}}
+{const old=openAuto;openAuto=function(){if(S&&!ageOk185('bot'))return;return old.apply(this,arguments)}}
 </script></body></html>
