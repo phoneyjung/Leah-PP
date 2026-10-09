@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.90';
+const VERSION='Lantern Academy 1.91';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -5767,15 +5767,11 @@ function wmDraw186(){const w=wmEl186();if(!WM186.open)return;const st=wmState186
   const stage=w.querySelector('#wmStage'),cv=w.querySelector('#wmC'),cells=w.querySelector('#wmCells'),pins=w.querySelector('#wmPins'),hint=w.querySelector('#wmHint'),crumb=w.querySelector('#wmCrumb');
   w.querySelectorAll('.pan').forEach(b=>b.style.display=(D&&WM186.view==='near')?'':'none');
   if(!D){stage.style.display='none';crumb.textContent=t('wmNoData');wmPanel186(null);return}
-  stage.style.display='';w.classList.toggle('world',WM186.view==='world');{const col=stage.parentElement,lg=w.querySelector('#wmLegend'),mr=w.querySelector('.main').getBoundingClientRect();const pr=w.querySelector('.panrow'),cw=col&&col.classList.contains('col')?col.clientWidth:(mr.width-8)*.62,ch=mr.height-(WM186.view==='world'?4:(pr?pr.offsetHeight+6:(lg?lg.offsetHeight+6:0)));const sh=Math.max(60,Math.min(ch,cw/1.5)),sw=sh*1.5;stage.style.width=sw+'px';stage.style.height=sh+'px';cells.style.fontSize=Math.max(10,Math.min(16,sw/5*.11))+'px'}   /* 3:2, as wide as its column (1.88: the left 40%), as tall as the row allows */
+  stage.style.display='';w.classList.toggle('world',WM186.view==='world');{const col=stage.parentElement,lg=w.querySelector('#wmLegend'),mr=w.querySelector('.main').getBoundingClientRect();const pr=w.querySelector('.panrow'),cw=col&&col.classList.contains('col')?col.clientWidth:(mr.width-8)*.62,ch=mr.height-(WM186.view==='world'?4:(pr?pr.offsetHeight+6:(lg?lg.offsetHeight+6:0)));let sh=Math.max(60,Math.min(ch,cw/1.5)),sw=sh*1.5;if(WM186.view==='world'){sw=cw;sh=Math.max(60,ch)}stage.style.width=sw+'px';stage.style.height=sh+'px';cells.style.fontSize=Math.max(10,Math.min(16,sw/5*.11))+'px'}   /* 3:2, as wide as its column (1.88: the left 40%), as tall as the row allows */
   const [gc,gr]=D.grid,r=stage.getBoundingClientRect(),dpr=Math.min(2,devicePixelRatio||1),W=Math.max(2,Math.round(r.width*dpr)),H=Math.max(2,Math.round(r.height*dpr));if(cv.width!==W||cv.height!==H){cv.width=W;cv.height=H}
   const g=cv.getContext('2d'),im=WM186.img,iw=im?im.naturalWidth:1536,ih=im?im.naturalHeight:1024,bw=iw/gc,bh=ih/gr,op=wmOpened186(),cur=wmBlockOf186(M.id);
   g.clearRect(0,0,W,H);cells.innerHTML='';pins.innerHTML='';
-  if(WM186.view==='world'){if(im)g.drawImage(im,0,0,W,H);const cw=W/gc,ch=H/gr;
-    const far=new Path2D(),nxt=new Path2D();for(let rr=0;rr<gr;rr++)for(let c=0;c<gc;c++){const id=wmIdOf186(c,rr),b=D.blocks[id];if(!im){g.fillStyle=WM_COL186[b?b.b:'sea']||'#444';g.fillRect(c*cw,rr*ch,cw+1,ch+1)}const k=b?wmKnown186(id):'sea';if(k==='open')continue;(k==='next'?nxt:far).rect(c*cw,rr*ch,cw,ch)}g.fillStyle='rgba(22,15,40,.62)';g.fill(far);g.fillStyle='rgba(22,15,40,.34)';g.fill(nxt);
-    for(const [id,b] of Object.entries(D.blocks)){if(!(b.k||b.d)||op.includes(id))continue;const p=document.createElement('div');p.className='pin lk';p.style.left=((b.c+.5)/gc*100)+'%';p.style.top=((b.r+.5)/gr*100)+'%';p.innerHTML='<b></b>';pins.appendChild(p)}   /* towns and caves not reached yet: a grey dot, no name */
-    for(const id of op){const b=D.blocks[id];if(!b)continue;const me=id===cur;const p=document.createElement('div');p.className='pin'+(me?' me':'');p.style.left=((b.c+.5)/gc*100)+'%';p.style.top=((b.r+.5)/gr*100)+'%';p.innerHTML='<b></b><i>'+(me?'⭐ ':'')+(b.n||id)+'</i>';pins.appendChild(p)}
-    crumb.textContent=t('wmOpened')+' '+op.length;hint.textContent=t('wmTapWorld')}
+  if(WM186.view==='world'){wmWorldPaint191(true);crumb.textContent=t('wmOpened')+' '+op.length;hint.textContent=t('wmTapWorld')}
   else{const x0=WM186.cx-2,y0=WM186.cy-2;if(im)g.drawImage(im,x0*bw,y0*bh,5*bw,5*bh,0,0,W,H);
     for(let j=0;j<5;j++)for(let i=0;i<5;i++){const c=x0+i,rr=y0+j,id=wmIdOf186(c,rr),b=D.blocks[id],k=b?wmKnown186(id):'sea';
       if(!im){g.fillStyle=WM_COL186[b?b.b:'sea']||'#444';g.fillRect(i*W/5,j*H/5,W/5+1,H/5+1)}
@@ -5954,7 +5950,7 @@ wmEl186=function(){let w=document.getElementById('wm186');if(w)return w;w=docume
   w.querySelector('#wmX').onclick=()=>closeWorldMap186();
   w.querySelector('#wmWorld').onclick=()=>{const st=wmState186();st.world=1;st.tip=1;if(WM186.view==='world'){wmNearAt186(WM186.cx,WM186.cy)}else{WM186.view='world';wmDraw186()}};
   w.querySelectorAll('[data-pan]').forEach(b=>b.onclick=()=>{const [dx,dy]=b.dataset.pan.split(',').map(Number);wmNearAt186(WM186.cx+dx,WM186.cy+dy)});
-  w.querySelector('#wmStage').addEventListener('click',ev=>{if(WM186.view!=='world'||!WM186.data)return;const r=ev.currentTarget.getBoundingClientRect(),[gc,gr]=WM186.data.grid;const c=Math.floor((ev.clientX-r.left)/r.width*gc),rr=Math.floor((ev.clientY-r.top)/r.height*gr);wmNearAt186(c,rr);const id=wmIdOf186(Math.max(0,Math.min(gc-1,c)),Math.max(0,Math.min(gr-1,rr)));if(WM186.data.blocks[id])wmSelect186(id)});
+  wmGestures191(w.querySelector('#wmStage'));
   w.querySelector('#wmGo').onclick=()=>{const p=WM186.pick;if(!p)return;wmWalk186(p.map,p.x,p.y,p.label)};
   return w};
 // the quest strip at the top of the right column (every age)
@@ -6055,4 +6051,43 @@ function qlPlace188(){let b=QL188.el;if(!b){b=document.createElement('button');b
 {const old=goMap;goMap=function(){const r=old.apply(this,arguments);try{setTimeout(qlPlace188,50)}catch(e){}return r}}
 setInterval(()=>{try{if(S&&M)qlPlace188()}catch(e){}},2000);
 {const old=closeModal;closeModal=function(){const r=old.apply(this,arguments);try{if(S&&M)setTimeout(qlPlace188,30)}catch(e){}return r}}
+// ================= 1.91 · the whole world is a phone map: pinch to zoom, drag to pan, + − buttons, a tap picks the block (owner chose this on 9 Oct 14:26); the close button of plain windows at the top right (14:25) =================
+try{Object.assign(TX.th,{wmZoomTip:'ถ่าง 2 นิ้วเพื่อซูม ลากเพื่อเลื่อน แตะช่องที่อยากดู'});if(TX.en)Object.assign(TX.en,{wmZoomTip:'Pinch to zoom, drag to move, tap a block to see it'})}catch(e){}
+const WZ191={s:1,x:0,y:0,min:1,max:1,init:'',ptr:new Map(),drag:false,start:null};
+{const st=document.createElement('style');st.textContent=`#wm186.world #wmStage{touch-action:none;cursor:grab}#wm186.world #wmStage.drag{cursor:grabbing}#wm186 .zb{position:absolute;right:6px;z-index:4;width:36px;height:36px;border-radius:99px;border:1px solid #775531;background:#291b3ae0;color:#fff3db;font-size:20px;line-height:1;padding:0;display:none;align-items:center;justify-content:center;min-width:0;min-height:0;box-shadow:none}
+#wm186.world .zb{display:flex}#wm186 .zb.in{bottom:48px}#wm186 .zb.out{bottom:6px}#wm186.world .pins .pin{transition:none}`;document.head.appendChild(st)}
+function wmWorldGeom191(){const w=document.getElementById('wm186'),cv=w.querySelector('#wmC'),D=WM186.data,[gc,gr]=D.grid,im=WM186.img,iw=im?im.naturalWidth:1536,ih=im?im.naturalHeight:1024;return{cv,W:cv.width,H:cv.height,iw,ih,gc,gr,cw:iw/gc,ch:ih/gr,dpr:cv.width/Math.max(1,cv.getBoundingClientRect().width)}}
+function wmZoomClamp191(G){const Z=WZ191;Z.s=Math.max(Z.min,Math.min(Z.max,Z.s));const sw=G.iw*Z.s,sh=G.ih*Z.s;Z.x=sw<=G.W?(G.W-sw)/2:Math.max(G.W-sw,Math.min(0,Z.x));Z.y=sh<=G.H?(G.H-sh)/2:Math.max(G.H-sh,Math.min(0,Z.y))}
+// paints the world at the current zoom/pan and puts the pins where the blocks are; reset=true recomputes the fit for the stage size (cover, so it fills)
+function wmWorldPaint191(reset){const w=document.getElementById('wm186');if(!w||!WM186.data)return;const G=wmWorldGeom191(),Z=WZ191,g=G.cv.getContext('2d'),D=WM186.data,op=wmOpened186(),cur=wmBlockOf186(M.id),pins=w.querySelector('#wmPins');
+  const key=G.W+'x'+G.H;if(reset||Z.init!==key){const contain=Math.min(G.W/G.iw,G.H/G.ih),cover=Math.max(G.W/G.iw,G.H/G.ih);Z.min=contain;Z.max=cover*4;if(Z.init!==key){Z.s=cover;Z.x=(G.W-G.iw*cover)/2;Z.y=(G.H-G.ih*cover)/2;const b=cur&&D.blocks[cur];if(b){Z.y=G.H/2-(b.r+.5)*G.ch*cover}}Z.init=key}
+  wmZoomClamp191(G);g.clearRect(0,0,G.W,G.H);g.fillStyle='#17131f';g.fillRect(0,0,G.W,G.H);const s=Z.s,cw=G.cw*s,ch=G.ch*s;
+  if(WM186.img)g.drawImage(WM186.img,0,0,G.iw,G.ih,Z.x,Z.y,G.iw*s,G.ih*s);
+  const far=new Path2D(),nxt=new Path2D();for(let rr=0;rr<G.gr;rr++)for(let c=0;c<G.gc;c++){const id=wmIdOf186(c,rr),b=D.blocks[id];if(!WM186.img){g.fillStyle=WM_COL186[b?b.b:'sea']||'#444';g.fillRect(Z.x+c*cw,Z.y+rr*ch,cw+1,ch+1)}const k=b?wmKnown186(id):'sea';if(k==='open')continue;(k==='next'?nxt:far).rect(Z.x+c*cw,Z.y+rr*ch,cw,ch)}
+  g.fillStyle='rgba(22,15,40,.62)';g.fill(far);g.fillStyle='rgba(22,15,40,.34)';g.fill(nxt);
+  if(s>Z.min*1.6){g.strokeStyle='rgba(255,243,219,.14)';g.lineWidth=1;g.beginPath();for(let c=0;c<=G.gc;c++){g.moveTo(Z.x+c*cw,Z.y);g.lineTo(Z.x+c*cw,Z.y+G.gr*ch)}for(let rr=0;rr<=G.gr;rr++){g.moveTo(Z.x,Z.y+rr*ch);g.lineTo(Z.x+G.gc*cw,Z.y+rr*ch)}g.stroke()}   /* zoomed in: a faint grid so the blocks read */
+  const px=(c,rr)=>[(Z.x+(c+.5)*cw)/G.dpr,(Z.y+(rr+.5)*ch)/G.dpr];let html='';
+  for(const [id,b] of Object.entries(D.blocks)){if(!(b.k||b.d)||op.includes(id))continue;const [x,y]=px(b.c,b.r);if(x<-20||y<-20||x>G.W/G.dpr+20||y>G.H/G.dpr+20)continue;html+='<div class="pin lk" style="left:'+x.toFixed(1)+'px;top:'+y.toFixed(1)+'px"><b></b></div>'}
+  for(const id of op){const b=D.blocks[id];if(!b)continue;const me=id===cur,[x,y]=px(b.c,b.r);html+='<div class="pin'+(me?' me':'')+'" style="left:'+x.toFixed(1)+'px;top:'+y.toFixed(1)+'px"><b></b><i>'+(me?'⭐ ':'')+(b.n||id)+'</i></div>'}
+  if(s>Z.min*2.2)for(const [id,b] of Object.entries(D.blocks)){if(op.includes(id)||wmKnown186(id)!=='next')continue;const [x,y]=px(b.c,b.r);html+='<div class="pin lk" style="left:'+x.toFixed(1)+'px;top:'+(y+10).toFixed(1)+'px"><i>'+(b.n||wmBiome186(b.b))+'</i></div>'}   /* zoomed in: the names of the blocks next to opened ones */
+  pins.innerHTML=html;const hint=w.querySelector('#wmHint');if(hint)hint.textContent=t('wmZoomTip')}
+function wmZoomAt191(f,cx,cy){const G=wmWorldGeom191(),Z=WZ191,s0=Z.s,s1=Math.max(Z.min,Math.min(Z.max,s0*f));const k=s1/s0;Z.x=cx-(cx-Z.x)*k;Z.y=cy-(cy-Z.y)*k;Z.s=s1;wmWorldPaint191(false)}
+function wmGestures191(stage){if(!stage||stage.dataset.g191)return;stage.dataset.g191=1;const Z=WZ191;
+  const zb=(cls,txt,f)=>{const b=document.createElement('button');b.className='zb '+cls;b.textContent=txt;b.onclick=ev=>{ev.stopPropagation();const G=wmWorldGeom191();wmZoomAt191(f,G.W/2,G.H/2)};stage.appendChild(b)};zb('in','+',1.6);zb('out','−',1/1.6);
+  const pos=ev=>{const r=stage.getBoundingClientRect(),G=wmWorldGeom191();return[(ev.clientX-r.left)*G.dpr,(ev.clientY-r.top)*G.dpr]};
+  stage.addEventListener('pointerdown',ev=>{if(WM186.view!=='world'||!WM186.data||ev.target.closest('.zb'))return;ev.preventDefault();try{stage.setPointerCapture(ev.pointerId)}catch(e){}Z.ptr.set(ev.pointerId,pos(ev));
+    if(Z.ptr.size===1){Z.drag=false;Z.start={p:pos(ev),x:Z.x,y:Z.y,t:performance.now()}}else if(Z.ptr.size===2){const [a,b]=[...Z.ptr.values()];Z.pinch={d:Math.hypot(a[0]-b[0],a[1]-b[1]),s:Z.s,mx:(a[0]+b[0])/2,my:(a[1]+b[1])/2,x:Z.x,y:Z.y};Z.drag=true}});
+  stage.addEventListener('pointermove',ev=>{if(!Z.ptr.has(ev.pointerId))return;ev.preventDefault();const p=pos(ev);Z.ptr.set(ev.pointerId,p);
+    if(Z.ptr.size>=2&&Z.pinch){const [a,b]=[...Z.ptr.values()],d=Math.hypot(a[0]-b[0],a[1]-b[1]),mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2,s1=Math.max(Z.min,Math.min(Z.max,Z.pinch.s*d/Math.max(1,Z.pinch.d))),k=s1/Z.pinch.s;Z.x=mx-(Z.pinch.mx-Z.pinch.x)*k;Z.y=my-(Z.pinch.my-Z.pinch.y)*k;Z.s=s1;wmWorldPaint191(false);return}
+    if(Z.ptr.size===1&&Z.start){const dx=p[0]-Z.start.p[0],dy=p[1]-Z.start.p[1];if(!Z.drag&&Math.hypot(dx,dy)>6*wmWorldGeom191().dpr){Z.drag=true;stage.classList.add('drag')}if(Z.drag){Z.x=Z.start.x+dx;Z.y=Z.start.y+dy;wmWorldPaint191(false)}}});
+  const up=ev=>{if(!Z.ptr.has(ev.pointerId))return;const p=Z.ptr.get(ev.pointerId);Z.ptr.delete(ev.pointerId);try{stage.releasePointerCapture(ev.pointerId)}catch(e){}
+    if(Z.ptr.size===0){stage.classList.remove('drag');const wasDrag=Z.drag;Z.drag=false;Z.pinch=null;if(!wasDrag&&Z.start&&ev.type==='pointerup'){const G=wmWorldGeom191(),c=Math.floor((p[0]-Z.x)/(G.cw*Z.s)),rr=Math.floor((p[1]-Z.y)/(G.ch*Z.s));if(c>=0&&rr>=0&&c<G.gc&&rr<G.gr){setTimeout(()=>{wmNearAt186(c,rr);const id=wmIdOf186(c,rr);if(WM186.data.blocks[id])wmSelect186(id)},30)}}Z.start=null}   /* after the click that follows this pointerup, so the click cannot land on what the new layout puts under the finger */
+    else if(Z.ptr.size===1){const [q]=[...Z.ptr.values()];Z.start={p:q,x:Z.x,y:Z.y,t:performance.now()};Z.pinch=null;Z.drag=true}};
+  stage.addEventListener('pointerup',up);stage.addEventListener('pointercancel',up);
+  stage.addEventListener('wheel',ev=>{if(WM186.view!=='world')return;ev.preventDefault();const [cx,cy]=pos(ev);wmZoomAt191(ev.deltaY<0?1.25:.8,cx,cy)},{passive:false});
+  stage.addEventListener('dblclick',ev=>{if(WM186.view!=='world')return;ev.preventDefault();const [cx,cy]=pos(ev);wmZoomAt191(1.8,cx,cy)})}
+// the close button of every plain window at the top right (the owner, 14:25: at the bottom it covered the Navigate buttons of the quest list)
+{const st=document.createElement('style');st.textContent=`.mxTop191{position:sticky!important;top:-1px;bottom:auto!important;z-index:6;display:flex;justify-content:flex-end;margin:0 0 -48px 0!important;pointer-events:none}
+.mxTop191>#mX{pointer-events:auto;min-height:44px;min-width:72px;padding:0 14px;box-shadow:0 0 0 5px #231c2dcc}#mBody>.mxTop191+h2,#mBody>.mxTop191+div>h2:first-child{padding-right:96px}`;document.head.appendChild(st)}
+{const old=modal;modal=function(){const r=old.apply(this,arguments);try{const x=$('mX'),row=x&&x.parentElement,body=$('mBody');if(row&&row.parentElement===body&&row.classList.contains('mxRow171')){row.classList.add('mxTop191');body.prepend(row);body.scrollTop=0}}catch(e){}return r}}
 </script></body></html>
