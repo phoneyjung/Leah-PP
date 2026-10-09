@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.06';
+const VERSION='Lantern Academy 2.07';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -6668,4 +6668,78 @@ function ad206Walk(){const V=AD201.V.m72a;if(AD206.done||AD206.failed||!V.walk)r
 {const o=ad201Load;ad201Load=function(){const v=AD201.v;return o.apply(this,arguments).then(ok=>{if(!ok||v!=='m72a')return ok;return ad206Walk().then(()=>ok)})}}
 // the trial window shows the walk cycle when there is one
 function ad206Preview(sh){try{return AD205.rules[AD201.v]?ad205Paint(sh.walk,AD201.v,ad205Col()):sh.walk}catch(e){return sh.walk}}
+// ---- 2.07 (owner 10 Oct 01:42–01:45): the real west walk of 72 ก, and the stage C characters (adult woman 72 · boy 64 · girl 64) in the GM trial ----
+// gm-adult-207w.png = the owner's west GIF (PixelLab "Walking (6 frames)", 112, 200 ms) packed 6×1, pixels untouched, palette 0 new colours · it replaces the mirrored east row,
+// and the standing west frame is the file's own (col 6), so the shoulder plate sits where PixelLab drew it · north-west and south-west stay mirrored until they are made · file missing → 2.06 mirror
+AD201.V.m72a.west={src:'gm-adult-207w.png',C:112};
+const AD207={wim:null,wtried:false,wpending:null,img:{},ip:{},anc:new Map(),C:[]};
+function ad207West(){if(AD207.wtried)return Promise.resolve(AD207.wim);if(AD207.wpending)return AD207.wpending;const V=AD201.V.m72a.west;
+  AD207.wpending=new Promise(res=>{const im=new Image();let fin=false;const end=v=>{if(fin)return;fin=true;clearTimeout(tm);AD207.wtried=true;AD207.wim=v;res(v)},tm=setTimeout(()=>end(null),10000);
+    im.onerror=()=>end(null);im.onload=()=>end(im.naturalWidth===6*V.C&&im.naturalHeight===V.C?im:null);im.src=(window.EMBED_ASSETS&&window.EMBED_ASSETS[V.src])||V.src}).finally(()=>{AD207.wpending=null});return AD207.wpending}
+// row 6 (west) of a built 112 sheet from the real west walk and the real standing west frame, placed the 2.06 way (lowest foot on the foot line, standing frame on the walk's head centre)
+function ad207Row(sh,standIm,wIm){const F=112,S=72,r=6,sc=toCanvas(standIm),wc=toCanvas(wIm),sg=sc.getContext('2d'),wg=wc.getContext('2d'),A=[];
+  for(let f=0;f<6;f++){const a=ad206Anchor(wg,f*F,0,F);if(!a)return false;A.push(a)}
+  const foot=Math.max(...A.map(a=>a.foot)),cxs=A.map(a=>a.cx).sort((a,b)=>a-b),cx=(cxs[2]+cxs[3])/2,sa=ad206Anchor(sg,6*S,0,S);if(!sa)return false;
+  const wdy=(F-2)-foot,sdx=Math.round(cx-sa.cx),sdy=(F-2)-sa.foot,cell=document.createElement('canvas');cell.width=7*F;cell.height=F;const cg=cell.getContext('2d');cg.imageSmoothingEnabled=false;
+  for(let f=0;f<6;f++)cg.drawImage(wc,f*F,0,F,F,f*F,wdy,F,F);cg.drawImage(sc,6*S,0,S,S,6*F+sdx,sdy,S,S);
+  const wo=sh.walk.getContext('2d'),so=sh.stand.getContext('2d');wo.imageSmoothingEnabled=so.imageSmoothingEnabled=false;wo.clearRect(0,r*F,6*F,F);so.clearRect(r*F,0,F,F);
+  for(let f=0;f<6;f++)wo.drawImage(cell,f*F,0,F,F,f*F,r*F,F,F);so.drawImage(cell,6*F,0,F,F,r*F,0,F,F);
+  sh.off[r]={r,wr:0,mir:false,wdy,sdx,sdy,real:true,sc:6};sh.west=wIm;return true}
+{const o=ad206Build;ad206Build=function(standIm){const sh=o.apply(this,arguments);try{if(AD207.wim)ad207Row(sh,standIm,AD207.wim)}catch(e){}return sh}}
+{const o=ad206Walk;ad206Walk=function(){if(AD206.done||AD206.failed)return o.apply(this,arguments);const a=arguments,th=this;return ad207West().then(()=>o.apply(th,a))}}
+// the stage C characters: the owner's PixelLab runs from the ASSET_SPEC_02 v3 prompts (01:42 ZIP), 8 standing views each in the game's order S SE E NE N NW W SW, pixels untouched
+// gm-c207-f1…f3.png 576×72 (adult woman, 67–71 px) · gm-c207-b1…b3.png and -g1…g2.png 512×64 (boy, girl, 60–62 px like Leah 61) · in the trial they walk the way 2.01 did (standing frame, 1 px bob)
+AD207.C=[['cf1','f1',72,70,'W',1],['cf2','f2',72,69,'W',2],['cf3','f3',72,70,'W',3],['cb1','b1',64,61,'B',1],['cb2','b2',64,61,'B',2],['cb3','b3',64,61,'B',3],['cg1','g1',64,61,'G',1],['cg2','g2',64,62,'G',2]].map(([k,f,F,foot,kind,n])=>({k,f,F,foot,kind,n}));
+AD207.C.forEach(c=>{AD201.V[c.k]={src:'gm-c207-'+c.f+'.png',foot:c.foot,lift:0,F:c.F}});
+try{Object.assign(TX.th,{ad207Btn:'ลองตัวละครชุดใหม่ ผู้หญิง เด็กชาย เด็กหญิง (10 ต.ค.)',ad207T:'ตัวละครชุดใหม่ · ขนาดจริง',ad207Pick:'เลือกตัวที่จะลอง',ad207W:'หญิง',ad207B:'ด.ช.',ad207G:'ด.ญ.',
+  ad207Ok:'ภาพพร้อม · กดใช้ในฉาก แล้วเดินไปเทียบกับลีอาและยายนวล',ad207Used:'ใช้ตัวละครชุดใหม่แล้ว ลองเดินดู',ad207Leah:'ลีอา',ad207Nuan:'ยายนวล',ad207Ref:'72 ก'});
+ if(TX.en)Object.assign(TX.en,{ad207Btn:'Try the new characters: woman, boy, girl (10 Oct)',ad207T:'New characters · real size',ad207Pick:'Pick the one to try',ad207W:'Woman',ad207B:'Boy',ad207G:'Girl',
+  ad207Ok:'Ready · use it, then walk next to Leah and Grandma Nuan',ad207Used:'New character on · try walking',ad207Leah:'Leah',ad207Nuan:'Nuan',ad207Ref:'72 A'})}catch(e){}
+// the raw sheets for the picture (loaded once each; a failed one is tried again the next time the window opens)
+function ad207Img(k){const V=AD201.V[k];if(!V)return Promise.resolve(null);if(AD207.img[k])return Promise.resolve(AD207.img[k]);if(AD207.ip[k])return AD207.ip[k];
+  return AD207.ip[k]=new Promise(res=>{const im=new Image();let fin=false;const end=v=>{if(fin)return;fin=true;clearTimeout(tm);if(v)AD207.img[k]=v;delete AD207.ip[k];res(v)},tm=setTimeout(()=>end(null),10000);
+    im.onerror=()=>end(null);im.onload=()=>end(im.naturalWidth===8*V.F&&im.naturalHeight===V.F?im:null);im.src=(window.EMBED_ASSETS&&window.EMBED_ASSETS[V.src])||V.src})}
+// foot row, top row and head centre of one view (cached per picture and column)
+function ad207Anc(im,F,col){let m=AD207.anc.get(im);if(!m){m={};AD207.anc.set(im,m)}if(m[col]!==undefined)return m[col];let a=null;try{const c=toCanvas(im);a=ad206Anchor(c.getContext('2d'),col*F,0,F)}catch(e){}return m[col]=a}
+function openStageC207(){if(!gmOn())return;const owner=S;let closed=false;
+ let sel=AD207.C.some(c=>c.k===(S&&S.gmAdult202))?S.gmAdult202:'cf1';
+ modal(`<div id="ad207"><h2>${t('ad207T')}</h2><canvas id="ad207cv" width="320" height="100"></canvas><p id="ad207st" class="ad201p"></p>
+  <div class="ad207g" role="group" aria-label="${t('ad207Pick')}">${AD207.C.map(c=>`<button type="button" data-v="${c.k}"><canvas width="32" height="28"></canvas><span>${t('ad207'+c.kind)} ${c.n}</span></button>`).join('')}</div>
+  <div class="ad207b"><button id="ad207use" disabled>${t('ad201Use')}</button><button id="ad207back">${t('ad201Back')}</button><button id="ad207x">${t('ad201Close')}</button></div></div>`);
+ document.querySelector('#modal>.pn')?.classList.add('ad207-panel');
+ const live=()=>!closed&&$('ad207')&&$('ad207').isConnected&&!$('modal').classList.contains('hide')&&S===owner&&gmOn();
+ $('ad207x').onclick=()=>{closed=true;closeModal()};
+ $('ad207back').onclick=()=>{if(!live())return;delete S.gmSprite170;buildPlayerSheets();save();closed=true;closeModal();say(t('ad201Gone'))};
+ $('ad207use').onclick=()=>{if(!live()||AD201.v!==sel||!AD201.sheets)return;S.gmSprite170='adult201';S.gmAdult202=sel;buildPlayerSheets();save();closed=true;closeModal();say(t('ad207Used'))};
+ const tiles=[...$('ad207').querySelectorAll('.ad207g button')],mark=()=>tiles.forEach(b=>b.classList.toggle('on',b.dataset.v===sel));
+ const pick=v=>{sel=v;mark();ad202Set(v);const use=$('ad207use'),st=$('ad207st');use.disabled=true;st.textContent='…';
+   ad202Load().then(ok=>{if(!live()||sel!==v)return;use.disabled=!ok;st.textContent=ok?t('ad207Ok'):t('ad201Bad')})};
+ tiles.forEach(b=>b.onclick=()=>pick(b.dataset.v));
+ // each button shows the face of its character (front view, 32×28: brow, eyes, mouth)
+ tiles.forEach(b=>{const k=b.dataset.v,V=AD201.V[k];ad207Img(k).then(im=>{if(!live())return;const g=b.querySelector('canvas').getContext('2d');g.imageSmoothingEnabled=false;g.clearRect(0,0,32,28);
+   if(!im){b.classList.add('bad');g.fillStyle='#f6e2b0';g.font='bold 16px sans-serif';g.textAlign='center';g.fillText('?',16,20);return}
+   const a=ad207Anc(im,V.F,0);if(!a)return;const x0=Math.max(0,Math.min(V.F-32,Math.round(a.cx-16)));g.drawImage(im,x0,Math.min(V.F-28,a.top+7),32,28,0,0,32,28)})});   /* from 7 rows under the top of the hair: eyes and mouth in the middle of the button */
+ ad207Img('m72a');pick(sel);
+ // the line-up at game size: Leah · 72 ก · the picked one · Grandma Nuan, feet on one line, the two new adults turning through the 8 views together
+ const hOf=(im,F)=>{const a=ad207Anc(im,F,0);return a?a.foot-a.top+1:0};   /* the front view's height, as in the windows before */
+ const draw=tm=>{if(!live())return;const c=$('ad207cv'),g=c.getContext('2d');g.clearRect(0,0,c.width,c.height);g.imageSmoothingEnabled=false;const base=c.height-14;g.fillStyle='#3a2f4f';g.fillRect(0,base,c.width,14);
+  const col=Math.floor(tm/1400)%8,lab=[];
+  const put=(im,F,cl,x,name)=>{if(!im)return;const a=ad207Anc(im,F,cl);if(!a)return;g.drawImage(im,cl*F,0,F,F,Math.round(x-F/2),base-1-a.foot,F,F);lab.push([x,name+' '+hOf(im,F)])};
+  try{put(IMG.npc_leah,64,0,40,t('ad207Leah'))}catch(e){}
+  put(AD207.img.m72a,72,col,120,t('ad207Ref'));
+  const c0=AD207.C.find(c=>c.k===sel);if(c0)put(AD207.img[sel],c0.F,col,200,t('ad207'+c0.kind)+' '+c0.n);
+  try{put(IMG.npc_nuan,64,0,282,t('ad207Nuan'))}catch(e){}
+  g.font='bold 10px sans-serif';g.fillStyle='#f6e2b0';g.textAlign='center';lab.forEach(([x,s])=>g.fillText(s,x,c.height-3));
+  requestAnimationFrame(draw)};requestAnimationFrame(draw)}
+{const old=openGM;openGM=function(){const r=old.apply(this,arguments);try{if(gmOn()&&!$('gmStageC207')){const b=document.createElement('button');b.id='gmStageC207';b.textContent=t('ad207Btn');b.style.minHeight='48px';b.onclick=()=>openStageC207();
+  const a=$('gmAdult201');if(a)a.after(b);else $('mBody').prepend(b)}}catch(e){}return r}}
+{const old=modal;modal=function(){document.querySelector('#modal>.pn')?.classList.remove('ad207-panel');return old.apply(this,arguments)}}
+{const st=document.createElement('style');st.textContent=`#ad207{text-align:center}#ad207cv{width:min(560px,86vw);height:auto;aspect-ratio:16/5;image-rendering:pixelated;background:#1d1729;border-radius:10px;border:2px solid #d9bc7c55;display:block;margin:6px auto}
+#ad207 .ad201p{font-size:13px;margin:6px 0;opacity:.9}#ad207 .ad207g{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:6px auto 0;max-width:440px}
+#ad207 .ad207g button{min-height:44px;padding:3px 2px;display:flex;flex-direction:column;align-items:center;gap:1px;font-size:12px;opacity:.75;border-radius:10px;white-space:nowrap}
+#ad207 .ad207g button canvas{width:48px;height:42px;image-rendering:pixelated;display:block}#ad207 .ad207g button.on{opacity:1;outline:2px solid #f2c45a;box-shadow:0 0 0 4px #f2c45a33}#ad207 .ad207g button.bad{opacity:.45}
+#ad207 .ad207b{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:8px}#ad207 .ad207b button{min-height:44px;padding:8px 14px}
+@media (max-height:520px){#ad207{display:grid;grid-template-columns:auto 1fr;column-gap:12px;align-items:center;text-align:left}#ad207 h2{grid-column:1/3;margin:0 0 4px;font-size:18px}
+#ad207cv{grid-column:1;grid-row:2/4;width:min(44vw,400px);margin:0}#ad207 .ad207g{grid-column:2;grid-row:2;margin:0;gap:5px}#ad207 .ad207g button canvas{width:40px;height:35px}
+#ad207>#ad207st{grid-column:1;grid-row:4;font-size:12px;margin:2px 0}#ad207 .ad207b{grid-column:2;grid-row:3;margin-top:6px;gap:6px}#ad207 .ad207b button{flex:1 1 30%;min-width:0;padding:6px 8px}}`;document.head.appendChild(st)}
 </script></body></html>
