@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.98';
+const VERSION='Lantern Academy 1.99';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -6400,4 +6400,63 @@ function name197(){const el=$('cr'),n=$('cnm');if(!el||!n||!el.classList.contain
 #cr.art195.c193 #chc,#cr.art195.c193 #cec{gap:10px}#cr.art195.c193 .sw{width:40px!important;height:40px!important}`;document.head.appendChild(st)}
 // ---- 1.98 (owner 9 Oct 17:04 "ปุ่มควบคุม อยากให้ชัดตอนไม่กด พอกดแล้วจาง ตอนนี้มันสลับกัน"): the stick is clear while untouched and faint under the thumb (1.88 had it the other way) ----
 {const st=document.createElement('style');st.textContent='body.fjIdle172:not(.nt174) #joy{opacity:.95!important}body.fjOn172 #joy,body.fjOn172.cmd176 #joy{opacity:.2!important}';document.head.appendChild(st)}
+// ---- 1.99 (owner 9 Oct 17:07 "แผนที่ซ้ายบน อยากให้เป็นแบบที่คุยไว้อีกแชท"): the 5×5 block grid of the map page in the style of the other chat's world-map mockup ----
+// each block shows its own drawn plan (the mockup's 16 code-drawn chunks, halved: wm-draft-X-Y.webp) · open blocks bright with a level badge coloured by difficulty
+// (kids: stars · towns: "safe") · not-yet-open blocks dimmed with a lock, the chapter and "???" · marks for you / town / cave entrance · arrows on the grid's edges · a legend under it
+// a missing chunk keeps the world painting of 1.86 under that block
+try{Object.assign(TX.th,{wm9Safe:'ปลอดภัย',wm9Town:'เมือง',wm9Cave:'ทางเข้าถ้ำ',wm9Lock:'ยังไม่เปิด',wm9You:'คุณ',wm9Ok:'เหมาะ',wm9Warn:'ยากขึ้น',wm9Bad:'ยากเกิน',wm9Grey:'ง่ายเกิน',wm9Diff:'ความยาก',wm9Ch:'บท'});
+ if(TX.en)Object.assign(TX.en,{wm9Safe:'Safe',wm9Town:'Town',wm9Cave:'Cave entrance',wm9Lock:'Not open yet',wm9You:'You',wm9Ok:'Right for you',wm9Warn:'Harder',wm9Bad:'Too hard',wm9Grey:'Too easy',wm9Diff:'Difficulty',wm9Ch:'Ch.'})}catch(e){}
+const WM199={ok:{},real:{H9:'map-H9-village.jpg',G9:'map-G9-home-farm.jpg'},ico:{
+  town:'<svg viewBox="0 0 24 24"><path d="M12 2 6 9l6 13 6-13zM8.6 9 12 5l3.4 4L12 17z"/></svg>',
+  cave:'<svg viewBox="0 0 24 24"><path d="M2 21c0-9 3-17 10-17s10 8 10 17h-6c0-5-1-9-4-9s-4 4-4 9z"/></svg>',
+  lock:'<svg viewBox="0 0 24 24"><path d="M7 10V7a5 5 0 0 1 10 0v3h1.5v11h-13V10zm2 0h6V7a3 3 0 0 0-6 0z"/></svg>'}};
+// the 16 chunks are checked one by one; only a chunk that loaded is used
+for(let y=0;y<4;y++)for(let x=0;x<4;x++){const k=x+'-'+y,im=new Image();im.onload=()=>{WM199.ok[k]=1;try{if(WM186.open&&WM186.view!=='world')wmDeco199()}catch(e){}};im.src='wm-draft-'+k+'.webp'}
+// level range of a block (the mockup's rule, accepted "10 levels per chapter, adjust later" on 8 Oct): towns are safe; others by distance to that chapter's towns
+function wmLv199(id){const B=WM186.data.blocks,b=B[id];if(!b||b.k)return null;const ch=b.ch||1;let d=9;for(const t in B){const tb=B[t];if(!tb.k||(tb.ch||1)!==ch)continue;d=Math.min(d,Math.max(Math.abs(tb.c-b.c),Math.abs(tb.r-b.r)))}
+  const base=(ch-1)*10+1;return d<=1?[base,base+2]:d===2?[base+2,base+5]:[base+5,base+9]}
+function wmDiff199(rg){const lv=(S&&S.lv)||1;if(!rg)return 'safe';if(lv>rg[1]+10)return 'grey';if(rg[0]<=lv+2)return 'ok';if(rg[0]<=lv+8)return 'warn';return 'bad'}
+function wmPic199(b,id,op){const lay=[],size=[],pos=[];const k=Math.floor(b.c/5)+'-'+Math.floor(b.r/5);
+  if(!op){lay.push(WM186.knownCache199&&WM186.knownCache199[id]==='next'?'linear-gradient(#140e2470,#140e2470)':'linear-gradient(#140e24b8,#140e24b8)');size.push('100% 100%');pos.push('0 0')}
+  if(op&&WM199.real[id]){lay.push('url('+WM199.real[id]+')');size.push('100% 100%');pos.push('center')}
+  if(WM199.ok[k]){lay.push('url(wm-draft-'+k+'.webp)');size.push('500% 500%');pos.push((b.c%5)*25+'% '+(b.r%5)*25+'%')}
+  return lay.length?{backgroundImage:lay.join(','),backgroundSize:size.join(','),backgroundPosition:pos.join(','),backgroundRepeat:'no-repeat'}:null}
+function wmLegend199(){const kid=isKid(),I=WM199.ico;return '<span><i class="k199">'+I.town+'</i>'+t('wm9Town')+'</span><span><i class="k199 cv">'+I.cave+'</i>'+t('wm9Cave')+'</span><span><i class="k199">'+I.lock+'</i>'+t('wm9Lock')+'</span><span><b class="d-you">●</b>'+t('wm9You')+'</span>'+
+  (kid?'<span><b class="d-safe">★</b>'+t('wm9Diff')+'</span>':'<span><b class="d-ok">■</b>'+t('wm9Ok')+'</span><span><b class="d-warn">■</b>'+t('wm9Warn')+'</span><span><b class="d-bad">■</b>'+t('wm9Bad')+'</span><span><b class="d-grey">■</b>'+t('wm9Grey')+'</span>')}
+function wmDeco199(){const w=document.getElementById('wm186');if(!w||!WM186.open||!WM186.data)return;const near=WM186.view!=='world',stage=w.querySelector('#wmStage');if(!stage)return;w.classList.add('v199');
+  if(!stage.querySelector('.pe199'))for(const [d,txt,dx,dy] of [['n','▲',0,-2],['s','▼',0,2],['w','◀',-2,0],['e','▶',2,0]]){const b=document.createElement('button');b.className='pe199 '+d;b.textContent=txt;b.setAttribute('aria-label',d);b.onclick=ev=>{ev.stopPropagation();wmNearAt186(WM186.cx+dx,WM186.cy+dy)};stage.appendChild(b)}
+  const [gc,gr]=WM186.data.grid;stage.querySelectorAll('.pe199').forEach(b=>{const d=b.classList[1],edge=(d==='n'&&WM186.cy<=2)||(d==='s'&&WM186.cy>=gr-3)||(d==='w'&&WM186.cx<=2)||(d==='e'&&WM186.cx>=gc-3);b.style.display=near&&!edge?'':'none'});
+  const lg=w.querySelector('#wmLegend');if(lg&&lg.dataset.k199!==(isKid()?'k':'a')+LANG){lg.innerHTML=wmLegend199();lg.dataset.k199=(isKid()?'k':'a')+LANG}
+  if(!near)return;const B=WM186.data.blocks,kid=isKid(),cur=wmBlockOf186(M&&M.id),I=WM199.ico;WM186.knownCache199={};
+  w.querySelectorAll('#wmCells .cell[data-wm]').forEach(el=>{const id=el.dataset.wm,b=B[id];if(!b)return;const k=wmKnown186(id),op=k==='open';WM186.knownCache199[id]=k;el.classList.add('c199');
+    const bg=wmPic199(b,id,op);if(bg)Object.assign(el.style,bg);
+    let h='<span class="id">'+id+'</span>';
+    if(op){const rg=wmLv199(id);if(kid){if(!b.k)h+='<span class="lv199 d-safe">'+'★'.repeat(Math.min(5,Math.ceil((b.ch||1)/2)))+'</span>'}else h+=rg?'<span class="lv199 d-'+wmDiff199(rg)+'">Lv.'+rg[0]+'–'+rg[1]+'</span>':'<span class="lv199 d-safe">'+t('wm9Safe')+'</span>'}
+    const mk=[];if(id===cur)mk.push(['you','●']);if(op&&b.k)mk.push(['town',I.town]);if(op&&b.d)mk.push(['cave',I.cave]);
+    mk.forEach(([c,ic],i)=>{h+='<span class="'+(c==='you'?'you ':'')+'mk199 '+c+'" style="left:calc(50% + '+((i-(mk.length-1)/2)*1.55).toFixed(2)+'em)">'+ic+'</span>'});
+    if(!op)h+='<span class="lock199">'+I.lock+'<small>'+t('wm9Ch')+' '+(b.ch||'?')+'</small></span>';
+    const nm=op?(b.n||wmBiome186(b.b)):'???';h+='<span class="nm">'+String(nm).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))+'</span>';
+    el.innerHTML=h})}
+{const o=wmDraw186;wmDraw186=function(){const r=o.apply(this,arguments);try{wmDeco199()}catch(e){}return r}}
+{const o=wmPanel186;wmPanel186=function(){const r=o.apply(this,arguments);try{const lg=document.getElementById('wmLegend');if(lg){lg.innerHTML=wmLegend199();lg.dataset.k199=(isKid()?'k':'a')+LANG}}catch(e){}return r}}
+{const st=document.createElement('style');st.textContent=`
+#wm186.v199 .panrow .pan{display:none!important}#wm186.v199:not(.world) #wmHint{display:none}#wm186.v199 .legend{display:flex;flex-wrap:wrap;gap:1px 9px;font-size:11px}#wm186.v199 .legend span{display:inline-flex;align-items:center;gap:3px;white-space:nowrap}
+#wm186 .k199{display:inline-flex;width:12px;height:12px;color:#f4d896}#wm186 .k199 svg{width:100%;height:100%;fill:currentColor}#wm186 .k199.cv{color:#e7c98c}
+#wm186 .d-ok{color:#4fbf5a}#wm186 .d-warn{color:#f2c230}#wm186 .d-bad{color:#e0493c}#wm186 .d-grey{color:#8f879c}#wm186 .d-safe{color:#f4d896}#wm186 .d-you{color:#f2c230}
+#wm186 .cell.c199{padding:0;border:0;border-right:1px solid #f4d89640;border-bottom:1px solid #f4d89640;background-color:#140e24}
+#wm186 .cell.c199.far,#wm186 .cell.c199.next{background-color:#140e24}
+#wm186 .cell.c199 .id{position:absolute;left:3px;top:2px;font-size:.72em;color:#fff;opacity:.9;text-shadow:0 1px 2px #000,0 0 3px #000;line-height:1}
+#wm186 .cell.c199 .lv199{position:absolute;right:2px;top:2px;font-size:.7em;line-height:1.1;padding:0 4px;border-radius:99px;background:#0f091cdd;border:1px solid currentColor;white-space:nowrap;font-variant-numeric:tabular-nums}
+#wm186 .cell.c199 .nm{position:absolute;left:0;right:0;bottom:0;margin:0;padding:.9em 3px 2px;font-size:.82em;line-height:1.12;background:linear-gradient(transparent,#0f091ce6 62%);color:#fff3db;-webkit-line-clamp:1;text-shadow:0 1px 2px #000}
+#wm186 .cell.c199:not(.open) .nm{color:#c9c1d8}
+#wm186 .cell.c199 .mk199{position:absolute;top:44%;transform:translate(-50%,-50%);width:1.35em;height:1.35em;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#1b1330e8;border:1.5px solid #c9aa6b;color:#f4d896;font-size:1em;padding:0;box-shadow:0 1px 3px #000a}
+#wm186 .cell.c199 .mk199 svg{width:62%;height:62%;fill:currentColor}#wm186 .cell.c199 .mk199.cave{background:#231a12;border-color:#a78655;color:#e7c98c}
+#wm186 .cell.c199 .mk199.you{background:#f2c230;border-color:#fff;color:#3a2a00;font-size:1em;line-height:1;animation:wmPulse199 1.8s infinite}
+@keyframes wmPulse199{70%{box-shadow:0 0 0 .6em #f2c23000}100%{box-shadow:0 0 0 0 #f2c23000}0%{box-shadow:0 0 0 0 #f2c230b0}}
+#wm186 .cell.c199 .lock199{position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;color:#d8d0e6;line-height:1}#wm186 .cell.c199 .lock199 svg{width:1.15em;height:1.15em;fill:currentColor}#wm186 .cell.c199 .lock199 small{font-size:.62em;margin-top:1px}
+#wm186 .cell.c199.sel{outline:2px dashed #f4d896;outline-offset:-3px;box-shadow:inset 0 0 0 1px #0008,0 0 10px #f4d89666}
+#wm186 .pe199{position:absolute;z-index:4;border:0;background:#160f28a8;color:#f4d896;padding:0;min-width:0;min-height:0;border-radius:6px;font-size:12px;line-height:1;display:flex;align-items:center;justify-content:center;box-shadow:none}
+#wm186 .pe199.n{top:0;left:50%;transform:translateX(-50%);width:44px;height:18px;border-radius:0 0 8px 8px}#wm186 .pe199.s{bottom:0;left:50%;transform:translateX(-50%);width:44px;height:18px;border-radius:8px 8px 0 0}
+#wm186 .pe199.w{left:0;top:50%;transform:translateY(-50%);width:18px;height:44px;border-radius:0 8px 8px 0}#wm186 .pe199.e{right:0;top:50%;transform:translateY(-50%);width:18px;height:44px;border-radius:8px 0 0 8px}
+@media (max-height:420px){#wm186 .cell.c199 .lock199 small{display:none}#wm186 .cell.c199 .nm{font-size:.78em}}`;document.head.appendChild(st)}
 </script></body></html>
