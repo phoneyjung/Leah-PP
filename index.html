@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.94';
+const VERSION='Lantern Academy 1.95';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -6285,4 +6285,58 @@ openPicker=function(d){const el=$('cr');el.classList.remove('hide','c193','g194'
   $('pGo').onclick=()=>{const i=C193.pick;if(!d.slots[i])return;d.cur=i;d.last193=i;Store.put(d);S=d.slots[i];el.classList.add('hide');el.classList.remove('p193');startGame()};   /* the list it was opened with, as before 1.93 */
   pkDraw193()};
 addEventListener('resize',()=>{try{if($('cr').classList.contains('p193'))pkDraw193()}catch(e){}});
+// ---- 1.95 (owner's art of 9 Oct 15:40–15:54, made from Claude's prompts): a painted backdrop, a stone stand under the character and gold icons on the gender, create and select screens ----
+// GM first: the owner (a player with GM, or ?gm in the link) sees it; everyone else keeps 1.94 until the owner approves (then ART195.live=true). Each file is checked on its own: a missing file keeps the 1.94 look for that part.
+try{Object.assign(TX.th,{c5Del:'ลบ'});if(TX.en)Object.assign(TX.en,{c5Del:'Delete'})}catch(e){}
+const ART195={live:false,bgC:false,bgS:false,ic:false,stC:null,stS:null,clear:{c:[.40,.72],s:[.38,.72]}};
+function art195(){try{return ART195.live||/[?&#]gm\b/.test(location.search+location.hash)||(Store.all().slots||[]).some(s=>s&&s.gm)}catch(e){return false}}
+{const L=(src,ok)=>{const im=new Image();im.onload=()=>{ok(im);try{deco195()}catch(e){}};im.src=src};L('bg-create.jpg',()=>ART195.bgC=true);L('bg-select.jpg',()=>ART195.bgS=true);L('ui-icons-3.png',()=>ART195.ic=true);L('stand-create.png',im=>ART195.stC=im);L('stand-select.png',im=>ART195.stS=im)}
+{const st=document.createElement('style');st.textContent=`
+#cr.bgc195.c193::before,#cr.bgc195.g194::before{background:url(bg-create.jpg) var(--bgx,38%) var(--bgy,66%)/var(--bgs,cover) no-repeat;filter:none}
+#cr.bgs195.p193::before{background:url(bg-select.jpg) var(--bgx,40%) var(--bgy,66%)/var(--bgs,cover) no-repeat;filter:none}
+#cr.art195 .top h1{background:#1b1330b8;padding:3px 12px;border-radius:99px;font-size:16px}#cr.art195 .hint4{background:#1b1330b8;padding:3px 12px;border-radius:99px}
+#cr.art195.c193 .rail button.on{background:#6b4a8e;color:#fff;border-color:#f2c45a;box-shadow:0 0 0 3px #f2c45a55,0 3px 8px #0007}
+#cr.art195.c193 .side .hd{background:linear-gradient(#7a5599,#5a3b78);color:#ffe7b0}#cr.art195.c193 .side .sub4 button.on{background:#6b4a8e}
+#cr.art195.c193 #ca button.on{background:#6b4a8e;border-color:#6b4a8e;box-shadow:0 0 0 3px #f2c45a66}#cr.art195.c193 #ck .opt.on{border-color:#c99a2e;box-shadow:0 0 0 3px #f2c45a66;background:#fff6e0}
+#cr.art195 #cgo,#cr.art195 #pGo{background:linear-gradient(#ffd877,#e7a83a)!important;color:#2b1640!important;border:2px solid #fff8e0!important}
+#cr.art195.p193 #pk .pn.on{background:#6b4a8eee!important;border-color:#f2c45a!important}
+.ic195{display:inline-block;flex:none;background-image:url(ui-icons-3.png);background-repeat:no-repeat;pointer-events:none}
+#cr.art195.c193 .rail button .ic195{margin-bottom:1px}#cr.art195 #pDel{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;font-size:10px;font-weight:800;line-height:1}
+#cr.art195 #pNew{gap:6px}#cr.art195 .bk{display:inline-flex;align-items:center;gap:2px}`;document.head.appendChild(st)}
+function ic195(i,px){const s=document.createElement('span');s.className='ic195';s.dataset.i=i;s.style.cssText=`width:${px}px;height:${px}px;background-size:${6*px}px ${4*px}px;background-position:${-(i%6)*px}px ${-Math.floor(i/6)*px}px`;return s}
+// put an icon in place of a button's emoji (the first text of the button), once
+function icSet195(b,i,px){if(!b||b.querySelector('.ic195'))return;const tn=[...b.childNodes].find(n=>n.nodeType===3&&n.textContent.trim());if(tn)tn.remove();b.prepend(ic195(i,px))}
+function deco195(){const el=$('cr');if(!el||!art195())return;el.classList.add('art195');el.classList.toggle('bgc195',ART195.bgC);el.classList.toggle('bgs195',ART195.bgS);
+  if(ART195.ic){const small=innerHeight<440;
+    if(el.classList.contains('c193')){const I={age:0,hair:1,face:2,house:3,hat:4};el.querySelectorAll('.rail [data-tab]').forEach(b=>icSet195(b,I[b.dataset.tab],small?26:30));icSet195($('c3Turn'),5,28);icSet195($('c3Rand'),6,28);icSet195($('crnd'),6,24)}
+    const bk=$('c3Back');if(bk&&!bk.querySelector('.ic195')){bk.textContent=bk.textContent.replace(/^‹\s*/,'');bk.prepend(ic195(7,18))}
+    if(el.classList.contains('p193')){const nw=$('pNew');if(nw&&!nw.querySelector('.ic195')){nw.textContent=nw.textContent.replace(/^＋\s*/,'');nw.prepend(ic195(9,26))}const dl=$('pDel');if(dl&&!dl.querySelector('.ic195')){dl.textContent='';dl.append(ic195(8,26),document.createTextNode(t('c5Del')))}}}
+  fit195()}
+// the painted clearing lands under the character's feet (the picture grows past "cover" when it has to; the stand covers what is left)
+function fit195(){const el=$('cr');if(!el||!el.classList.contains('art195'))return;const sel=el.classList.contains('p193')?'s':'c',feet=ART195.feet&&ART195.feet[el.classList.contains('p193')?'p':el.classList.contains('g194')?'g':'c'];
+  const bw=innerWidth+12,bh=innerHeight+12,A=1.5,[px,py]=ART195.clear[sel];let fx,fy;if(feet){fx=feet[0]+6;fy=feet[1]+6}else{fx=bw*.4;fy=bh*.72}
+  const cover=Math.max(bw,A*bh);let w=Math.max(cover,fx/px,(bw-fx)/(1-px),A*fy/py,A*(bh-fy)/(1-py));w=Math.min(w,cover*2.2);const h=w/A;
+  const x=Math.max(bw-w,Math.min(0,fx-px*w)),y=Math.max(bh-h,Math.min(0,fy-py*h));el.style.setProperty('--bgs',Math.round(w)+'px '+Math.round(h)+'px');el.style.setProperty('--bgx',Math.round(x)+'px');el.style.setProperty('--bgy',Math.round(y)+'px');ART195.fit=[Math.round(x+px*w-6),Math.round(y+py*h-6)]}
+function feet195(k,c,fx,fy){const r=c.getBoundingClientRect(),sx=r.width/c.width,sy=r.height/c.height,p=[Math.round(r.left+fx*sx),Math.round(r.top+fy*sy)];ART195.feet=ART195.feet||{};const o=ART195.feet[k];ART195.feet[k]=p;if(!o||Math.abs(o[0]-p[0])+Math.abs(o[1]-p[1])>2)fit195()}
+// the create screen: the character on its stand
+{const old=crDraw193;crDraw193=function(){if(!(art195()&&ART195.stC))return old.apply(this,arguments);const c=$('cpv');if(!c)return;const box=c.getBoundingClientRect(),dpr=Math.min(2,devicePixelRatio||1),W=Math.max(10,Math.round(box.width*dpr)),H=Math.max(10,Math.round(box.height*dpr));if(c.width!==W||c.height!==H){c.width=W;c.height=H}
+  const g=c.getContext('2d');g.setTransform(1,0,0,1,0,0);g.clearRect(0,0,W,H);g.imageSmoothingEnabled=false;const s=Math.max(1,Math.floor(Math.min(W/80,H/86)));const ox=Math.round(W/2-32*s),oy=Math.round(H-2*s-83*s);
+  g.drawImage(ART195.stC,0,0,64,64,ox,oy+20*s,64*s,64*s);
+  const H0=HOUSES[CR_STATE.house];g.fillStyle='#6b4a2a';g.fillRect(ox+58*s,oy+6*s,2*s,58*s);g.fillStyle=H0.col;g.beginPath();g.moveTo(ox+60*s,oy+8*s);g.lineTo(ox+76*s,oy+8*s);g.lineTo(ox+76*s,oy+28*s);g.lineTo(ox+68*s,oy+24*s);g.lineTo(ox+60*s,oy+28*s);g.fill();try{g.drawImage(embC(H0.id,'#1b1330',1),ox+64*s,oy+12*s,8*s,8*s)}catch(e){}
+  try{g.drawImage(crSheetNow194(CR_STATE.kid),C193.dir*64,0,64,64,ox,oy,64*s,64*s)}catch(e){}feet195('c',c,ox+32*s,oy+60*s)}}
+// the gender screen: both on stands
+{const old=gDraw194;gDraw194=function(){if(!(art195()&&ART195.stC))return old.apply(this,arguments);const box=$('cg194');if(!box)return;const sc=Math.max(2,Math.floor(Math.min(innerWidth*.34,innerHeight*.7)/84)),dpr=Math.min(2,devicePixelRatio||1);let fx=0,fy=0,n=0;
+  box.querySelectorAll('.gc').forEach(b=>{const c=b.querySelector('canvas'),k=GDEF194[b.dataset.g];if(c.width!==64*sc*dpr||c.height!==84*sc*dpr){c.width=64*sc*dpr;c.height=84*sc*dpr;c.style.width=64*sc+'px';c.style.height=84*sc+'px'}const u=sc*dpr,g=c.getContext('2d');g.imageSmoothingEnabled=false;g.clearRect(0,0,c.width,c.height);
+    g.drawImage(ART195.stC,0,0,64,64,0,20*u,64*u,64*u);try{g.drawImage(crSheet(k,CR_STATE.house,0,0,null,null),0,0,64,64,0,0,64*u,64*u)}catch(e){}const r=c.getBoundingClientRect();fx+=r.left+r.width/2;fy+=r.top+60*sc;n++});
+  if(n){const o=ART195.feet&&ART195.feet.g,p=[Math.round(fx/n),Math.round(fy/n)];ART195.feet=ART195.feet||{};ART195.feet.g=p;if(!o||Math.abs(o[0]-p[0])+Math.abs(o[1]-p[1])>2)fit195()}}}
+// the select screen: the picked player on the night stand
+{const old=pkDraw193;pkDraw193=function(){const st=ART195.stS||ART195.stC;if(!(art195()&&st))return old.apply(this,arguments);const el=$('cr'),c=$('pkv'),d=Store.all(),s0=d.slots[C193.pick];if(!c||!s0)return;
+  const sc=Math.max(2,Math.floor(Math.min(innerWidth*.34,innerHeight*.66)/84)),dpr=Math.min(2,devicePixelRatio||1),u=sc*dpr;c.width=64*u;c.height=84*u;c.style.width=64*sc+'px';c.style.height=84*sc+'px';
+  const g=c.getContext('2d');g.imageSmoothingEnabled=false;g.clearRect(0,0,c.width,c.height);g.drawImage(st,0,0,64,64,0,20*u,64*u,64*u);try{g.drawImage(crSheet(s0.kid,s0.house,s0.hc||0,s0.ec||0,s0.appearance169,{hcol:s0.hcol??null,ecol:s0.ecol??null}),0,0,64,64,0,0,64*u,64*u)}catch(e){}
+  const nmEl=el.querySelector('.pnm');if(nmEl){const H=HOUSES[s0.house];nmEl.innerHTML=s0.name+' <span style="color:'+H.col+'">· '+(H[LANG]||H.th)+'</span>';const r=c.getBoundingClientRect();nmEl.style.top=Math.round(Math.min(innerHeight-46,r.bottom-r.height*.01))+'px';nmEl.style.bottom='auto'}   /* under the stand; it sits between the bin and the start button */
+  el.querySelectorAll('#pk .pn').forEach((b,i)=>b.classList.toggle('on',i===C193.pick));feet195('p',c,32*u,60*u)}}
+{const oc=openCreator;openCreator=function(){const r=oc.apply(this,arguments);try{deco195()}catch(e){}return r}}
+{const og=openGender194;openGender194=function(){const r=og.apply(this,arguments);try{deco195()}catch(e){}return r}}
+{const op=openPicker;openPicker=function(){const r=op.apply(this,arguments);try{deco195()}catch(e){}return r}}
+addEventListener('resize',()=>{try{fit195()}catch(e){}});
 </script></body></html>
