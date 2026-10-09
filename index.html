@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.86';
+const VERSION='Lantern Academy 1.87';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -5852,4 +5852,62 @@ try{delete RANK_BTN.bMap}catch(e){}
 {const old=goMap;goMap=function(){const r=old.apply(this,arguments);try{if(S&&M)wmOpened186()}catch(e){}return r}}
 addEventListener('keydown',e=>{try{if(WM186.open&&(e.key==='Escape'||e.key==='m')){e.stopImmediatePropagation();closeWorldMap186()}}catch(err){}},true);
 addEventListener('resize',()=>{try{if(WM186.open)wmDraw186()}catch(e){}});
+// ================= 1.87 · the main quest (owner's order of 9 Oct 08:04, item ③): one goal at a time — the class ladder's next task — with a place in the world, so the goal line, the guide button, the map page and a gold marker all lead there, across maps when needed =================
+// No new story content yet (the owner's rule after Leah's test: polish what everyone uses). The steps are RANK_REQ 2..6 (crystals at the cave mouth · dig spots · a fishing spot · crystals on floor 1); steps 7+ have no place in today's world and open the class panel as before.
+try{Object.assign(TX.th,{qGoal:'เป้าหมายตอนนี้',qWalk:'พาเดินไป',qNoPlace:'เป้าหมายนี้ยังไม่มีที่ให้พาไป',qAllDone:'ครบทุกเป้าหมายของตอนนี้แล้ว',qStep:'ขั้น',qTapWalk:'แตะแล้วพาเดินไป'});
+ if(TX.en)Object.assign(TX.en,{qGoal:'Current goal',qWalk:'Walk me there',qNoPlace:'This goal has no place to walk to yet',qAllDone:'Every goal for now is done',qStep:'Step',qTapWalk:'Tap to walk there'})}catch(e){}
+const Q187={place:null,at:0};
+function questStep187(){if(!S||typeof rank!=='function')return null;const n=rank()+1;if(n>RANK_NOW)return null;let a=0,b=1;try{[a,b]=rankProg(n)}catch(e){}let text='';try{text=rankTask(n)}catch(e){text=''}return{n,a,b,text}}
+// the place of a step: the nearest thing still to do, this map first; every map it looks at is built once and cached by getMap
+function questPlace187(){const q=questStep187();if(!q||!M||!P)return null;const mp=id=>{try{return id===M.id?M:(MAPS[id]?getMap(id):null)}catch(e){return null}};
+  const sleepers=id=>{const m=mp(id);if(!m)return[];const aw=((S.crystals||{})[id])||[];return(m.crystals||[]).filter(c=>!(c.kidOnly&&!isKid())&&!(id===M.id?c.awake:aw.includes(c.id))).map(c=>({map:id,x:c.x,y:c.y+14,ic:'\u{1F48E}'}))};
+  const digs=id=>{const m=mp(id);if(!m)return[];const dn=((S.digs||{})[id])||[];return(m.digs||[]).filter(d=>!(id===M.id?d.done:dn.includes(d.id))).map(d=>({map:id,x:d.x,y:d.y,ic:'⛏️'}))};
+  const fish=id=>{const m=mp(id);return m&&m.fishSpot?[{map:id,x:m.fishSpot.x,y:m.fishSpot.y,ic:'\u{1F3A3}'}]:[]};
+  let c=[];const n=q.n;
+  if(n===2||n===3){c=sleepers('cavemouth');if(!c.length&&n===2)c=sleepers('hunt1')}
+  else if(n===4){if(farm171()){const m=mp('farm');if(m){const p=(m.plots&&m.plots[0])||null;c=[{map:'farm',x:p?p.x:m.spawnDefault[0],y:p?p.y:m.spawnDefault[1],ic:'\u{1F331}'}]}}else c=digs('cavemouth').concat(digs('hunt1'))}
+  else if(n===5){c=fish(M.id);if(!c.length)c=fish('cavemouth').concat(fish('h9'),fish('hunt1'))}
+  else if(n===6)c=sleepers('hunt1');
+  if(!c.length)return null;
+  c.sort((u,v)=>((u.map===M.id?0:1)-(v.map===M.id?0:1))||(u.map===M.id?Math.hypot(u.x-P.x,u.y-P.y)-Math.hypot(v.x-P.x,v.y-P.y):0));
+  const p=c[0];return{map:p.map,x:p.x,y:p.y,ic:p.ic,label:p.ic+' '+q.text,step:q}}
+function questCached187(){const now=performance.now();if(now-Q187.at>400){Q187.at=now;try{Q187.place=questPlace187()}catch(e){Q187.place=null}}return Q187.place}
+function questText187(){const q=questStep187();if(!q)return '';return q.text+(q.b>1?' '+q.a+'/'+q.b:'')}
+// walking to the goal: this map, or across maps through the open exits (1.86); no place → the class panel, as before
+function questGo187(){if(!S||!M||!P)return false;const p=questPlace187();if(!p){try{if(questStep187())say('\u{1F3AF} '+t('qNoPlace'))}catch(e){}try{openRank()}catch(e){}return false}
+  if(p.map===M.id&&Math.hypot(p.x-P.x,p.y-P.y)<40){say('\u{1F3AF} '+t('gdArrive'));return true}wmWalk186(p.map,p.x,p.y,p.label);return true}
+// the goal line at the top left: a tap walks there (it used to walk only on the old maps and otherwise open the class panel)
+walkToGoal=function(){try{if(questPlace187()){questGo187();return}}catch(e){}try{const g=guideTarget();if(g){const p=findPath(M,P.x,P.y,g.x,g.y+8);if(p&&p.length){P.path=p;P.target=null;FOLLOW=null;say('\u{1F6B6} '+t('walkGoal'));return}}}catch(e){}try{openRank()}catch(e){}};
+// the guide picker (hold the guide button, 10+): the goal is the first choice
+{const old=guidePick183;guidePick183=function(){const busy=PAUSE||DLG;const r=old.apply(this,arguments);try{if(busy||!S||!M||!P||P.dead||isKid())return r;const p=questPlace187();if(!p)return r;const host=document.getElementById('mBody'),md=document.getElementById('modal');
+  if(!md||md.classList.contains('hide')){modal('<h2>\u{1F9ED} '+t('gdPick')+'</h2><div class="grid" style="margin-top:6px"></div>')}
+  const grid=document.querySelector('#mBody .grid');if(!grid||grid.querySelector('[data-gq]'))return r;const b=document.createElement('button');b.className='it';b.dataset.gq='1';b.style.cssText='justify-content:flex-start;text-align:left;border-color:#e2c583;background:linear-gradient(135deg,#4a3a2a,#2a2030)';
+  b.textContent='\u{1F3AF} '+t('qGoal')+': '+questText187();b.onclick=()=>{closeModal();questGo187()};grid.prepend(b)}catch(e){}return r}}
+// the map page: a goal strip at the top of the panel, for every age
+{const old=wmPanel186;wmPanel186=function(){const r=old.apply(this,arguments);try{const pn=document.getElementById('wmPanel');if(!pn||pn.querySelector('.qs187'))return r;const q=questStep187();if(!q)return r;const p=questPlace187();
+  pn.insertAdjacentHTML('afterbegin','<div class="qs187"><div class="qt">\u{1F3AF} '+t('qGoal')+'</div><div class="qx">'+questText187()+'</div>'+(p?'<button class="btn gold" data-qgo="1">\u{1F9ED} '+t('qWalk')+(p.map!==M.id?' · '+wmName186(p.map):'')+'</button>':'')+'</div>');
+  const b=pn.querySelector('[data-qgo]');if(b)b.onclick=()=>questGo187()}catch(e){}return r}}
+{const st=document.createElement('style');st.textContent=`#wm186 .qs187{border:1px solid #e2c583;border-radius:9px;background:linear-gradient(135deg,#3a2f2a,#241c30);padding:6px 9px;display:flex;flex-direction:column;gap:3px;flex:none}
+#wm186 .qs187 .qt{font-size:11px;color:#f4d896}#wm186 .qs187 .qx{font-size:13px;color:#fff3db;line-height:1.25}#wm186 .qs187 .btn{align-self:flex-start;min-height:34px;margin-top:2px}`;document.head.appendChild(st)}
+// a gold "!" bobbing over the place when it is on this map (the same mark the NPC requests use, in gold)
+{const old=render;render=function(tm){const r=old.apply(this,arguments);try{if(!M||!S||PAUSE)return r;const p=questCached187();if(!p||p.map!==M.id)return r;const t2=(tm||0)/1000;
+  if(Math.hypot(p.x-P.x,p.y-P.y)<40)return r;const X=Math.round((p.x-camX)*SC),Y=Math.round((p.y-camY-78+Math.sin(t2*4)*3)*SC);if(X<-40||Y<-40||X>VW*SC+40||Y>VH*SC+40)return r;
+  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.fillStyle='#1b1330';ctx.fillRect(X-4,Y-2,8,22);ctx.fillStyle='#ffd45e';ctx.fillRect(X-2,Y,4,12);ctx.fillRect(X-2,Y+14,4,4);ctx.restore()}catch(e){}return r}}   /* screen pixels, not world ones: the same size on every zoom, above the sprite (crystals are ~48 px tall) */
+// the goal line in a cave says the same step as outside (it used to say "dust the monsters · go down" even when the way down is closed)
+{const old=updateGoal;updateGoal=function(){const r=old.apply(this,arguments);try{if(!S||!M||M.kind!=='cave'||TEST_ALL())return r;const q=questStep187(),p=questCached187();if(!q||!p||p.map!==M.id)return r;const el=$('goal');if(el)el.textContent='\u{1F393} '+t('rkClass')+' '+q.n+': '+questText187()}catch(e){}return r}}
+// ---- owner's play test of 9 Oct 11:22 (version 1.86 on a real phone): "the stick does not move like before" and "the top-left still is not tight" ----
+// 1. The stick in the corner now behaves like the floating one: a finger that starts ON the stick steers at once, the stick follows the finger past the rim (RoV), and it goes home on release.
+//    Before, only a slide that started on empty ground floated; a thumb that landed on the stick itself (its natural place) got the old fixed stick, which never moves.
+{const j=document.getElementById('joy');if(j&&typeof FJ172!=='undefined'){
+  j.addEventListener('pointerdown',e=>{try{if(e.pointerType==='mouse'||!fjAllowed172()||(JOY.id!==null&&JOY.id!==e.pointerId))return;e.stopImmediatePropagation();FJ172.touches.add(e.pointerId);
+    const r=j.getBoundingClientRect();FJ172.id=e.pointerId;FJ172.x0=e.clientX;FJ172.y0=e.clientY;FJ172.t0=performance.now();FJ172.snap=null;FJ172.on=true;FJ172.shown=true;FJ172.bx=r.left+r.width/2;FJ172.by=r.top+r.height/2;JOY.id=e.pointerId;
+    try{HOLD=null;tapMark=null;P.path=null;P.target=null;P.act=null}catch(err){}document.body.classList.add('fjOn172');fjKnob172(e.clientX,e.clientY)}catch(err){}},true);
+  for(const ev of ['pointermove','pointerup','pointercancel'])j.addEventListener(ev,e=>{if(e.pointerId===FJ172.id)e.stopImmediatePropagation()},true)}}   /* the window-level 1.72 handlers already ran (capture); the old fixed-stick ones must not run twice */
+// 2. The top-left card sits tighter in the corner and smaller (scale .7, 4 px from the edges, the status line above it 10 px); the child's lamp bar follows it down.
+{const st=document.createElement('style');st.textContent=`body.thumbs #hud{transform:scale(.7)!important;transform-origin:top left;left:calc(4px + env(safe-area-inset-left,0px))!important}
+body.thumbs.sys175 #hud{top:calc(18px + env(safe-area-inset-top,0px))!important}body.thumbs:not(.sys175) #hud{top:calc(4px + env(safe-area-inset-top,0px))!important}
+body.thumbs #sys175{top:calc(1px + env(safe-area-inset-top,0px));left:calc(6px + env(safe-area-inset-left,0px));font-size:10px;gap:5px}
+body.thumbs.sys175 #lampBar{top:calc(110px + env(safe-area-inset-top,0px))!important}body.thumbs:not(.sys175) #lampBar{top:calc(96px + env(safe-area-inset-top,0px))!important}
+body.thumbs #gmBtn{top:calc(146px + env(safe-area-inset-top,0px))!important}
+body.thumbs #hud #goal{font-size:15px!important;line-height:1.3!important}body.thumbs #hud .nm,body.thumbs #hud #hName{font-size:14px!important}body.thumbs #hud .row{font-size:13px}body.thumbs #hud #hLv{font-size:13px}`;document.head.appendChild(st)}   /* the card is scaled to .7, so the words that matter (the goal, the name) are set larger to stay readable */
 </script></body></html>
