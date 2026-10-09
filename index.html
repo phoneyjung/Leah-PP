@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.88';
+const VERSION='Lantern Academy 1.89';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -5783,6 +5783,7 @@ function wmDraw186(){const w=wmEl186();if(!WM186.open)return;const st=wmState186
       el.innerHTML='<span class="id">'+id+'</span>'+(k==='open'||k==='next'?'<span class="nm">'+(b.n||wmBiome186(b.b))+'</span>':'')+(k==='next'||k==='far'?'<span class="lk">🔒</span>':'')+(id===cur?'<span class="you">⭐ '+t('wmHere')+'</span>':'');
       if(k!=='sea')el.onclick=()=>wmSelect186(id);cells.appendChild(el)}
     crumb.textContent=t('wmArea')+' '+wmIdOf186(x0,y0)+' '+t('wmTo')+' '+wmIdOf186(x0+4,y0+4);hint.textContent=t('wmTapCell')}
+  try{wmOverview188()}catch(e){}
   wmPanel186(WM186.sel||cur)}
 // ---------- the panel: the block, its real maps, their places ----------
 function wmPlaces186(m){const out=[],en=LANG==='en';const add=(k,ic,label,x,y,sub)=>{out.push({k,ic,label,x,y,sub})};
@@ -5922,7 +5923,10 @@ try{Object.assign(TX.th,{wmNpc:'ตัวละคร',wmMons:'มอนสเ�
 #wm186 .main{display:flex;gap:8px;flex:1;min-height:0;align-items:stretch}
 #wm186 .col{min-width:0;min-height:0;display:flex;flex-direction:column;gap:5px}#wm186 .c1{flex:4 1 0}#wm186 .c2{flex:4 1 0}#wm186 .c3{flex:2 1 0}
 #wm186 .c1 .stage{flex:none;align-self:flex-start}#wm186 .legend{font-size:11px;color:#b8a88f;line-height:1.25;flex:1;min-width:0}
-#wm186 .panrow{display:flex;align-items:center;gap:4px;flex:none}#wm186 .panrow .pan{position:static;transform:none;width:34px;height:34px;flex:none}   /* 1.88: the arrows sit under the blocks, not over the cells */
+#wm186 .panrow{display:flex;align-items:center;gap:4px;flex:none}
+#wm186 .ov{flex:1;min-height:0;display:none;gap:8px;align-items:stretch;cursor:pointer}#wm186 .ov.on{display:flex}#wm186 .ov canvas{flex:none;border:1px solid #775531;border-radius:7px;background:#17131f;display:block}
+#wm186 .ovt{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:4px}#wm186 .ovt b{font-weight:400;color:#f4d896;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#wm186 .ovt small{font-size:11px;color:#b8a88f}
+#wm186 .ovt .bar{height:8px;border-radius:99px;background:#17131f;border:1px solid #4a3763;overflow:hidden}#wm186 .ovt .bar i{display:block;height:100%;background:linear-gradient(90deg,#c39a52,#f4d896);border-radius:99px;min-width:3px}#wm186 .panrow .pan{position:static;transform:none;width:34px;height:34px;flex:none}   /* 1.88: the arrows sit under the blocks, not over the cells */
 #wm186 .c2{border:1px solid #775531;border-radius:10px;background:#1d1430;padding:7px 8px;overflow:hidden}
 #wm186 .c2 h3{margin:0;font-size:16px;font-weight:400;color:#f4d896;display:flex;align-items:center;gap:6px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #wm186 .c2 .thumb{flex:none;align-self:center;position:relative;border:1px solid #4a3763;border-radius:8px;overflow:hidden;background:#17131f}#wm186 .c2 .thumb canvas{display:block;width:100%;height:100%}
@@ -5943,7 +5947,7 @@ try{Object.assign(TX.th,{wmNpc:'ตัวละคร',wmMons:'มอนสเ�
 wmEl186=function(){let w=document.getElementById('wm186');if(w)return w;w=document.createElement('div');w.id='wm186';w.className='hide';
   w.innerHTML='<div class="bar" style="position:relative"><button class="btn gold" id="wmWorld"></button><h2 id="wmTitle"></h2><div class="crumb" id="wmCrumb"></div><button class="btn" id="wmX">✕ <span></span></button><div class="tip hide" id="wmTip"></div></div>'+
    '<div class="main"><div class="col c1"><div class="stage" id="wmStage"><canvas id="wmC"></canvas><div class="pins" id="wmPins"></div><div class="cells" id="wmCells"></div>'+
-   '<div class="hint" id="wmHint"></div></div><div class="panrow"><button class="pan w" data-pan="-2,0">◀</button><button class="pan n" data-pan="0,-2">▲</button><button class="pan s" data-pan="0,2">▼</button><button class="pan e" data-pan="2,0">▶</button><div class="legend" id="wmLegend"></div></div></div>'+
+   '<div class="hint" id="wmHint"></div></div><div class="panrow"><button class="pan w" data-pan="-2,0">◀</button><button class="pan n" data-pan="0,-2">▲</button><button class="pan s" data-pan="0,2">▼</button><button class="pan e" data-pan="2,0">▶</button><div class="legend" id="wmLegend"></div></div><div class="ov" id="wmOv"><canvas id="wmOvC"></canvas><div class="ovt"><b id="wmOvName"></b><div class="bar"><i id="wmOvBar"></i></div><small id="wmOvN"></small></div></div></div>'+
    '<div class="col c2" id="wmMid"></div><div class="col c3"><div class="panel" id="wmPanel"></div><button class="btn gold" id="wmGo" disabled></button></div></div>';
   document.body.appendChild(w);
   w.querySelector('#wmX').onclick=()=>closeWorldMap186();
@@ -6002,6 +6006,17 @@ function wmFit188(){const w=document.getElementById('wm186');if(!w||!WM186.open)
   let h=Math.max(40,Math.min(avail,cw/ratio)),ww=h*ratio;if(ww>cw){ww=cw;h=ww/ratio}th.style.width=ww+'px';th.style.height=h+'px';
   const lg=w.querySelector('#wmLegend');if(lg)lg.textContent=t('wmLegend')}
 addEventListener('resize',()=>{try{if(WM186.open)wmFit188()}catch(e){}});
+// the space under the blocks (owner, 14:07 "the lower left of the map page is empty"): a small picture of the whole world with the 5×5 window drawn on it
+// and your dot, beside it the block you stand in and how much of the world is open (a bar). A tap on it swaps world ↔ blocks.
+function wmOverview188(){const w=document.getElementById('wm186');if(!w||!WM186.data)return;const ov=w.querySelector('#wmOv'),col=w.querySelector('.c1'),stage=w.querySelector('#wmStage'),pr=w.querySelector('.panrow');if(!ov||!col)return;
+  const D=WM186.data,[gc,gr]=D.grid;let rem=col.clientHeight-stage.offsetHeight-(pr?pr.offsetHeight:0)-12;if(rem<40){ov.classList.remove('on');return}ov.classList.add('on');
+  const cv=ov.querySelector('canvas'),h=Math.min(rem,Math.round(col.clientWidth*.55/1.5)),ww=Math.round(h*1.5);cv.style.width=ww+'px';cv.style.height=h+'px';const dpr=Math.min(2,devicePixelRatio||1);if(cv.width!==ww*dpr||cv.height!==h*dpr){cv.width=ww*dpr;cv.height=h*dpr}
+  const g=cv.getContext('2d'),W=cv.width,H=cv.height,im=WM186.img,op=wmOpened186(),cur=wmBlockOf186(M.id);g.clearRect(0,0,W,H);if(im)g.drawImage(im,0,0,W,H);else{g.fillStyle='#2f6aa0';g.fillRect(0,0,W,H)}
+  const cw=W/gc,ch=H/gr,far=new Path2D();for(let r=0;r<gr;r++)for(let c=0;c<gc;c++){const id=wmIdOf186(c,r);if(!D.blocks[id]||wmKnown186(id)==='open')continue;far.rect(c*cw,r*ch,cw,ch)}g.fillStyle='rgba(22,15,40,.55)';g.fill(far);
+  if(WM186.view==='near'){g.strokeStyle='#f4d896';g.lineWidth=Math.max(1,1.5*dpr);g.strokeRect((WM186.cx-2)*cw+1,(WM186.cy-2)*ch+1,5*cw-2,5*ch-2)}
+  const b=cur&&D.blocks[cur];if(b){g.fillStyle='#f2c230';g.strokeStyle='#2a1a08';g.lineWidth=dpr;g.beginPath();g.arc((b.c+.5)*cw,(b.r+.5)*ch,Math.max(2.5,2.2*dpr),0,6.283);g.fill();g.stroke()}
+  const land=Object.keys(D.blocks).length,n=op.length;w.querySelector('#wmOvName').textContent='⭐ '+(b?(b.n||cur):wmName186(M.id))+' · '+wmName186(M.id);w.querySelector('#wmOvBar').style.width=Math.max(1,Math.round(n/land*100))+'%';w.querySelector('#wmOvN').textContent=t('wmOpened')+' '+n+' / '+land+' '+t('wmBlock');
+  if(!ov.dataset.bound){ov.dataset.bound=1;ov.onclick=()=>{const st=wmState186();st.world=1;st.tip=1;if(WM186.view==='world')wmNearAt186(WM186.cx,WM186.cy);else{WM186.view='world';wmDraw186()}}}}
 // ---------- 4. the quest window beside the top-left card: a count, the open quests, "navigate" on each ----------
 function questList188(){const L=[];if(!S||!M)return L;
   try{const q=questStep187();if(q){const p=questPlace187();L.push({ic:'🎯',g:t('qlMain'),text:questText187(),go:p?()=>questGo187():null})}}catch(e){}
