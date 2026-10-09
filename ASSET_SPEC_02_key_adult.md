@@ -68,3 +68,19 @@
 - ส่ง ZIP ผ่านเจ้าของมาที่แชท Claude (หรือ branch `codex/asset-02-key-adult` ถ้า Codex ทำ) · ไม่ push เข้า `main`
 - ถ้า Codex ทำ เพิ่ม 1 บรรทัดใน `CODEX_STATUS.md`: `ชุด 02 ฉบับ 3 · รุ่น A1 · วันที่ · ไฟล์ … · ต่างจากสเปก: ไม่มี/ระบุ`
 - ถ้าข้อใดทำไม่ได้ (เช่น PixelLab ไม่มีท่าเดินแบบ 8 ทิศ) ให้บอก แล้วรอฉบับแก้
+
+## 10. พรอมป์ขั้น C (Claude · 10 ต.ค. 00:55 · ทำคู่กับขั้น A ได้เลย)
+ตั้งค่าทุกตัว: Create from Text · Humanoid · Standard (โหมดเดียวกับ 72 ก) · Low Top-Down · Highly detailed · Outline Default · ใช้คำบรรยายหน้าและสีกุญแจชุดเดียวกับ 72 ก เพื่อให้หน้าตาเป็นครอบครัวเดียวกันและเกมเปลี่ยนสีได้
+- **ผู้ใหญ่หญิง · ช่อง 72×72**
+```
+adult female swordswoman, front view, standing idle, empty hands, no weapon, nothing on her back, cute chibi proportions with a big head about one third of her height, big round bright cyan eyes with a dark upper lash line and a white shine, small friendly smile, long bright grass-green hair in a high ponytail that does not cover the eyes, long bright magenta coat with gold trim, white blouse, brown leather straps and belt with gold buckle, steel shoulder armor on her right shoulder only, ruby red collar clasps, brown leather gloves with gold cuffs, dark brown leggings, brown leather boots with gold knee guards, fantasy magic academy style, clean dark outline
+```
+- **เด็กชาย · ช่อง 64×64**
+```
+young boy student about 10 years old, front view, standing idle, empty hands, no weapon, nothing on his back, cute chibi proportions with a big head, big round bright cyan eyes with a dark upper lash line and a white shine, cheerful smile, short messy bright grass-green hair that does not cover the eyes, short bright magenta cape with gold trim, white shirt, brown leather belt with gold buckle, dark brown shorts, brown leather boots, fantasy magic academy style, clean dark outline
+```
+- **เด็กหญิง · ช่อง 64×64**
+```
+young girl student about 10 years old, front view, standing idle, empty hands, no weapon, nothing on her back, cute chibi proportions with a big head, big round bright cyan eyes with a dark upper lash line and a white shine, cheerful smile, bright grass-green hair in two short braids that do not cover the eyes, short bright magenta cape with gold trim, white blouse, brown leather belt with gold buckle, dark brown skirt over leggings, brown leather boots, fantasy magic academy style, clean dark outline
+```
+- เกณฑ์รับ: ผู้ใหญ่หญิงสูง 66–72 px · เด็กสูง 58–63 px (เท่าลีอา 61) · ผมเขียว ตาฟ้า ผ้าคลุม/เสื้อบานเย็น · ไม่มีอาวุธหรือของสะพายหลัง · หน้า ≥ 9.5 เมื่อเจ้าของดูใน GM
