@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.01';
+const VERSION='Lantern Academy 2.02';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -6510,7 +6510,7 @@ body.thumbs.rov180 #act #bQuest{right:${R(14)}!important;bottom:${B(186)}!import
 // the owner's PixelLab file (adult_male_swordsman…zip, 8 standing views 128×128, no walk yet) packed as gm-adult-201.png 1024×128 in the game's order
 // S SE E NE N NW W SW · pixels untouched: the code only sets its foot line (y 111 in the file) on the game's foot line (frame bottom − 2) and bobs it 1 px while walking
 // GM slot only, like the 1.70 swordsman trial (S.gmSprite170='adult201'); the HUD portrait, other players and the bag keep the character of the slot
-const AD201={sheets:null,pending:null,error:false,foot:111,h:{},bob:[0,-1,-1,0,-1,-1],kid:null};
+const AD201={sheets:null,pending:null,error:false,foot:111,h:{},bob:[0,-1,-1,0,-1,-1],kid:null,v:'green',byV:{},V:{green:{src:'gm-adult-201.png',foot:111,lift:34},a128:{src:'gm-adult-202a.png',foot:125,lift:0}}};   /* 2.02: two models to compare (V), the shown one is v */
 try{Object.assign(TX.th,{ad201Btn:'ลองต้นแบบผู้ใหญ่ใหม่ (9 ต.ค.)',ad201T:'ต้นแบบผู้ใหญ่ใหม่ · ขนาดจริง',ad201P:'ภาพจากไฟล์ PixelLab ที่คุณเลือก ขนาดเท่าไฟล์ (1 พิกเซลภาพ = 1 พิกเซลเกม) · ยังไม่มีท่าเดิน ตัวจะเลื่อนไปเฉย ๆ · เฉพาะเซฟ GM',
   ad201Use:'ใช้ในฉาก ลองเดินดู',ad201Back:'กลับเป็นตัวเดิม',ad201Close:'ปิด',ad201Ok:'ภาพพร้อม · กดใช้ในฉาก แล้วเดินไปเทียบกับเด็ก NPC และบ้าน',ad201Bad:'โหลดภาพไม่ได้ ตัวเดิมยังใช้ได้ · ปิดแล้วเปิดใหม่เพื่อลองอีกครั้ง',
   ad201Used:'ใช้ต้นแบบผู้ใหญ่แล้ว ลองเดินดู',ad201Gone:'กลับเป็นตัวเดิมแล้ว',ad201Kid:'เด็ก',ad201Adult:'ผู้ใหญ่ใหม่',ad201Tall:'สูงกว่า'});
@@ -6518,21 +6518,21 @@ try{Object.assign(TX.th,{ad201Btn:'ลองต้นแบบผู้ใหญ
   ad201Use:'Use in the world',ad201Back:'Back to my character',ad201Close:'Close',ad201Ok:'Ready · use it, then walk next to the NPC children and the houses',ad201Bad:'Artwork unavailable · your character is safe. Reopen to retry.',
   ad201Used:'New adult model on · try walking',ad201Gone:'Your character is back',ad201Kid:'Child',ad201Adult:'New adult',ad201Tall:'taller'})}catch(e){}
 function ad201Selected(){try{return gmOn()&&S&&S.gmSprite170==='adult201'}catch(e){return false}}
-function ad201Load(){if(AD201.sheets)return Promise.resolve(true);if(AD201.pending)return AD201.pending;AD201.error=false;
+function ad201Load(){if(AD201.sheets)return Promise.resolve(true);if(AD201.pending)return AD201.pending;AD201.error=false;const v0=AD201.v,V0=AD201.V[v0]||AD201.V.green;
  AD201.pending=new Promise(resolve=>{const im=new Image();let fin=false;const done=ok=>{if(fin)return;fin=true;clearTimeout(tm);AD201.error=!ok;resolve(ok)},tm=setTimeout(()=>done(false),10000);
   im.onerror=()=>done(false);im.onload=()=>{if(fin)return;try{if(im.naturalWidth!==1024||im.naturalHeight!==128)throw Error('size');
-   const F=128,dy=(F-2)-AD201.foot,chk=document.createElement('canvas');chk.width=1024;chk.height=128;const cg=chk.getContext('2d');cg.drawImage(im,0,0);const px=cg.getImageData(0,0,1024,128).data;
+   const F=128,dy=(F-2)-V0.foot,chk=document.createElement('canvas');chk.width=1024;chk.height=128;const cg=chk.getContext('2d');cg.drawImage(im,0,0);const px=cg.getImageData(0,0,1024,128).data;
    for(let r=0;r<8;r++){let n=0;for(let y=0;y<F;y++)for(let x=0;x<F;x++)if(px[(y*1024+r*F+x)*4+3]>80)n++;if(n<300)throw Error('empty')}
    const stand=document.createElement('canvas'),walk=document.createElement('canvas');stand.width=8*F;stand.height=F;walk.width=6*F;walk.height=8*F;const sg=stand.getContext('2d'),wg=walk.getContext('2d');sg.imageSmoothingEnabled=wg.imageSmoothingEnabled=false;
    for(let r=0;r<8;r++){sg.drawImage(im,r*F,0,F,F,r*F,dy,F,F);for(let f=0;f<6;f++)wg.drawImage(im,r*F,0,F,F,f*F,r*F+dy+AD201.bob[f],F,F)}
-   AD201.sheets={stand,walk,im};done(true)}catch(e){done(false)}};
-  im.src=(window.EMBED_ASSETS&&window.EMBED_ASSETS['gm-adult-201.png'])||'gm-adult-201.png'}).finally(()=>{AD201.pending=null});return AD201.pending}
+   AD201.byV[v0]={stand,walk,im};if(AD201.v===v0)AD201.sheets=AD201.byV[v0];done(true)}catch(e){done(false)}};
+  im.src=(window.EMBED_ASSETS&&window.EMBED_ASSETS[V0.src])||V0.src}).finally(()=>{AD201.pending=null});return AD201.pending}
 {const old=buildPlayerSheets;buildPlayerSheets=function(){const r=old.apply(this,arguments);try{if(!ad201Selected())return r;const sh=AD201.sheets;
   if(sh){PS.stand=sh.stand;PS.walk=sh.walk;PS.F=128;PS.silS=silOf(PS.stand);PS.silW=silOf(PS.walk);PS.sc=0;PS.shS=blurSheet(PS.silS);PS.shW=blurSheet(PS.silW);PS.gmSprite170=true}
   else{const owner=S;ad201Load().then(ok=>{if(ok&&S===owner&&ad201Selected())buildPlayerSheets()})}}catch(e){}return r}}
 // the name (and an emote) sit just above the head the way they do over the children (the old rule put them 128 px up, 40 px over this head)
-{const o=label;label=function(x,y,s,col){try{if(PS.F===128&&ad201Selected()&&Math.abs(x-(P.x-camX))<.5&&Math.abs(y-(P.y-camY-130))<.5)y+=34}catch(e){}return o.apply(this,[x,y,s,col])}}
-{const o=emoteBubble;emoteBubble=function(x,y,e,tt){try{if(PS.F===128&&ad201Selected()&&Math.abs(x-(P.x-camX))<.5&&Math.abs(y-(P.y-camY-144))<.5)y+=34}catch(err){}return o.apply(this,[x,y,e,tt])}}
+{const o=label;label=function(x,y,s,col){try{if(PS.F===128&&ad201Selected()&&Math.abs(x-(P.x-camX))<.5&&Math.abs(y-(P.y-camY-130))<.5)y+=(AD201.V[AD201.v]||AD201.V.green).lift}catch(e){}return o.apply(this,[x,y,s,col])}}
+{const o=emoteBubble;emoteBubble=function(x,y,e,tt){try{if(PS.F===128&&ad201Selected()&&Math.abs(x-(P.x-camX))<.5&&Math.abs(y-(P.y-camY-144))<.5)y+=(AD201.V[AD201.v]||AD201.V.green).lift}catch(err){}return o.apply(this,[x,y,e,tt])}}
 // the trial window: the 8 views turning, beside the slot's own child at the same pixel size, with both heights measured from the pictures
 function ad201Height(c,F,col){try{const d=c.getContext('2d').getImageData(col*F,0,F,F).data;let top=-1,bot=-1;for(let y=0;y<F;y++)for(let x=0;x<F;x++)if(d[(y*F+x)*4+3]>80){if(top<0)top=y;bot=y;break}return top<0?0:bot-top+1}catch(e){return 0}}
 function openAdult201(){if(!gmOn())return;const owner=S;let closed=false;
@@ -6557,4 +6557,25 @@ function openAdult201(){if(!gmOn())return;const owner=S;let closed=false;
 {const st=document.createElement('style');st.textContent=`#ad201{text-align:center}#ad201cv{width:min(600px,86vw);height:auto;aspect-ratio:2/1;image-rendering:pixelated;background:#1d1729;border-radius:10px;border:2px solid #d9bc7c55;display:block;margin:6px auto}
 #ad201 .ad201p{font-size:13px;margin:6px 0;opacity:.9}#ad201 .ad201b{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:8px}#ad201 .ad201b button{min-height:44px;padding:8px 14px}
 @media (max-height:520px){#ad201{display:grid;grid-template-columns:auto 1fr;column-gap:14px;align-items:center;text-align:left}#ad201 h2{grid-column:1/3;margin:0 0 4px;font-size:18px}#ad201cv{grid-column:1;grid-row:2/5;width:min(48vw,440px);margin:0}#ad201>p,#ad201>.ad201b{grid-column:2}#ad201 .ad201p{font-size:12px;margin:2px 0}#ad201 .ad201b{flex-direction:column;align-items:stretch;margin-top:4px;gap:6px}}`;document.head.appendChild(st)}
+// ---- 2.02 (owner 9 Oct 21:11 "96 ดูหน้าไม่ค่อยออกเลย ต้องเป็น 128 รึป่าว แล้วสงสัยต้องทำฉากใหม่ อย่างอื่นใหม่หมด"): a second model in the GM trial ----
+// the owner's PixelLab run "adult_male_swordsman_front_view" (prompt 1 of 9 Oct 20:14: green hair, cyan eyes, magenta coat · 128 canvas · the figure fills it, 121 px)
+// packed as gm-adult-202a.png 1024×128 (S SE E NE N NW W SW, pixels untouched) · the trial window gets two buttons to switch, so the owner walks either size in the real scenes
+try{Object.assign(TX.th,{ad202Green:'เสื้อเขียว · สูง 88',ad202A:'แบบ 1 ผมเขียว · สูง 121',ad202Pick:'เลือกแบบที่จะลอง'});
+ if(TX.en)Object.assign(TX.en,{ad202Green:'Green coat · 88 tall',ad202A:'Run 1 green hair · 121 tall',ad202Pick:'Pick the model to try'})}catch(e){}
+function ad202Set(v){if(!AD201.V[v])v='green';if(AD201.v===v)return false;AD201.v=v;AD201.sheets=AD201.byV[v]||null;AD201.error=false;AD201.h.a=null;return true}
+// load the model now shown, waiting out a load of the other one that was still on its way
+function ad202Load(){const v=AD201.v;return ad201Load().then(ok=>{if(AD201.v!==v)return false;if(ok&&!AD201.sheets)return ad202Load();return ok&&!!AD201.sheets})}
+// the save remembers which model the GM slot walks with
+{const old=buildPlayerSheets;buildPlayerSheets=function(){try{if(S&&S.gmSprite170==='adult201')ad202Set(S.gmAdult202||'green')}catch(e){}return old.apply(this,arguments)}}
+{const old=openAdult201;openAdult201=function(){try{if(S)ad202Set(S.gmAdult202||'green')}catch(e){}const r=old.apply(this,arguments);try{ad202Deco()}catch(e){}return r}}
+function ad202Deco(){const root=$('ad201');if(!root||root.querySelector('.ad202v'))return;const row=document.createElement('div');row.className='ad202v';row.setAttribute('role','group');row.setAttribute('aria-label',t('ad202Pick'));
+ row.innerHTML=`<button type="button" data-v="green">${t('ad202Green')}</button><button type="button" data-v="a128">${t('ad202A')}</button>`;
+ const cv=$('ad201cv');cv.after(row);const mark=()=>row.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.v===AD201.v));mark();
+ const st=$('ad201st'),use=$('ad201use'),refresh=()=>{use.disabled=true;st.textContent='…';const v=AD201.v;ad202Load().then(ok=>{if(AD201.v!==v||!$('ad201'))return;use.disabled=!ok;st.textContent=ok?t('ad201Ok'):t('ad201Bad')})};
+ row.querySelectorAll('button').forEach(b=>b.onclick=()=>{if(ad202Set(b.dataset.v)){mark();refresh()}});
+ const f=use.onclick;use.onclick=e=>{if(S)S.gmAdult202=AD201.v;return f&&f(e)};
+ if(!AD201.sheets)refresh()}
+{const st=document.createElement('style');st.textContent=`#ad201 .ad202v{display:flex;gap:6px;justify-content:center;margin:6px 0 0}#ad201 .ad202v button{min-height:44px;padding:6px 12px;font-size:13px;opacity:.75;border-radius:10px}
+#ad201 .ad202v button.on{opacity:1;outline:2px solid #f2c45a;box-shadow:0 0 0 4px #f2c45a33}
+@media (max-height:520px){#ad201 .ad202v{grid-column:1;grid-row:5;justify-content:flex-start}#ad201 .ad202v button{font-size:12px;padding:4px 10px}#ad201>p:first-of-type{grid-row:2}#ad201>#ad201st{grid-row:3}#ad201>.ad201b{grid-row:4}#ad201 #ad201cv{width:min(44vw,420px)}}`;document.head.appendChild(st)}
 </script></body></html>
