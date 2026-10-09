@@ -21,7 +21,7 @@ async function player(browser, w, h, touch, age) {
   await pg.waitForFunction(() => !document.getElementById('load'), { timeout: 90000 }); await sleep(2500);
   const tapAt = async (x, y) => { if (touch) await pg.touchscreen.tap(x, y); else await pg.mouse.click(x, y); await sleep(320); };
   const press = async el => { const r = await el.boundingBox(); await tapAt(r.x + r.width / 2, r.y + r.height / 2); };
-  const ages = await pg.$$('#ca button'); await press(ages[age - 6]); await press(await pg.$('#cgo')); await sleep(2300);
+  { const gb = await pg.$('#cg194 [data-g="f"]'); if (gb) { await press(gb); await sleep(400); } } const ages = await pg.$$('#ca button'); await press(ages[age - 6]); await press(await pg.$('#cgo')); await sleep(2300);
   for (let k = 0; k < 4; k++) { for (let i = 0; i < 15 && await pg.evaluate(() => !!DLG); i++) await press(await pg.$('#dlg')); await pg.evaluate(() => { try { closeModal(); } catch (e) { } PAUSE = false; }); await sleep(400); }
   await pg.evaluate(() => { S.hp = 9999; if (S.st) S.st.agi = 0; }); await sleep(600);
   return { ctx, pg, press, tapAt };

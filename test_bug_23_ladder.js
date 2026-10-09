@@ -21,7 +21,7 @@ async function newPlayer(browser, age) {
   await pg.goto(base + '?rank=1', { waitUntil: 'load' });
   await pg.waitForFunction(() => !document.getElementById('load'), { timeout: 60000 }); await sleep(2500);
   const tap = async h => { const r = await h.boundingBox(); await pg.touchscreen.tap(r.x + r.width / 2, r.y + r.height / 2); await sleep(300); };
-  const ages = await pg.$$('#ca button'); await tap(ages[age >= 18 ? ages.length - 1 : age - 6]);   // the real creator: tap the age, tap start
+  { const gb = await pg.$('#cg194 [data-g="f"]'); if (gb) { await tap(gb); await sleep(400); } } const ages = await pg.$$('#ca button'); await tap(ages[age >= 18 ? ages.length - 1 : age - 6]);   // the real creator: tap the age, tap start
   await tap(await pg.$('#cgo')); await sleep(2200);
   return { ctx, pg };
 }

@@ -30,7 +30,7 @@ const windowTitle = pg => pg.evaluate(() => { const w = document.getElementById(
 // a player made by hand in the creator: tap the age, tap start, tap through the opening lines
 async function newPlayer(browser, w, h, age, opts) {
   const { ctx, pg } = await open(browser, w, h, '?rank=1', opts); await sleep(2500);
-  const ages = await pg.$$('#ca button'), a = ages[age >= 18 ? ages.length - 1 : age - 6], r = await a.boundingBox(); await tapXY(pg, r.x + r.width / 2, r.y + r.height / 2);
+  { const gb = await pg.$('#cg194 [data-g="f"]'); if (gb) { const gr = await gb.boundingBox(); await tapXY(pg, gr.x + gr.width / 2, gr.y + gr.height / 2); await sleep(400); } } const ages = await pg.$$('#ca button'), a = ages[age >= 18 ? ages.length - 1 : age - 6], r = await a.boundingBox(); await tapXY(pg, r.x + r.width / 2, r.y + r.height / 2);
   await tap(pg, '#cgo'); await sleep(2300);
   for (let i = 0; i < 15 && await pg.evaluate(() => !!DLG); i++) { const d = await (await pg.$('#dlg')).boundingBox(); await tapXY(pg, d.x + d.width / 2, d.y + d.height / 2); }
   await quiet(pg); await sleep(300); return { ctx, pg };

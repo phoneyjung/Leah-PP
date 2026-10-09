@@ -19,7 +19,7 @@ async function player(browser, w, h, touch, age) {
   await pg.goto(base + '?rank=1', { waitUntil: 'load' });
   await pg.waitForFunction(() => !document.getElementById('load'), { timeout: 90000 }); await sleep(2500);
   const press = async el => { const r = await el.boundingBox(); if (touch) await pg.touchscreen.tap(r.x + r.width / 2, r.y + r.height / 2); else await pg.mouse.click(r.x + r.width / 2, r.y + r.height / 2); await sleep(320); };
-  const ages = await pg.$$('#ca button'); await press(ages[age - 6]); await press(await pg.$('#cgo')); await sleep(2300);
+  { const gb = await pg.$('#cg194 [data-g="f"]'); if (gb) { await press(gb); await sleep(400); } } const ages = await pg.$$('#ca button'); await press(ages[age - 6]); await press(await pg.$('#cgo')); await sleep(2300);
   for (let k = 0; k < 4; k++) { for (let i = 0; i < 15 && await pg.evaluate(() => !!DLG); i++) await press(await pg.$('#dlg')); await pg.evaluate(() => { try { closeModal(); } catch (e) { } PAUSE = false; }); await sleep(400); }
   await sleep(1200); return { ctx, pg, press };
 }
@@ -55,7 +55,7 @@ const overlap = (a, b) => a && b && a.x < b.r && b.x < a.r && a.y < b.b && b.y <
     // the GM button: a GM save, phone
     { const ctx = await browser.createBrowserContext(), pg = await ctx.newPage(); await pg.setViewport({ width: 844, height: 390, isMobile: true, hasTouch: true, deviceScaleFactor: 2 }); await pg.setBypassServiceWorker(true);
       await pg.goto(base + '?rank=1', { waitUntil: 'load' }); await pg.waitForFunction(() => !document.getElementById('load'), { timeout: 90000 }); await sleep(2500);
-      const press = async el => { const r = await el.boundingBox(); await pg.touchscreen.tap(r.x + r.width / 2, r.y + r.height / 2); await sleep(320); }; const ages = await pg.$$('#ca button'); await press(ages[6]); await press(await pg.$('#cgo')); await sleep(2300);
+      const press = async el => { const r = await el.boundingBox(); await pg.touchscreen.tap(r.x + r.width / 2, r.y + r.height / 2); await sleep(320); }; { const gb = await pg.$('#cg194 [data-g="f"]'); if (gb) { await press(gb); await sleep(400); } } const ages = await pg.$$('#ca button'); await press(ages[6]); await press(await pg.$('#cgo')); await sleep(2300);
       for (let k = 0; k < 4; k++) { for (let i = 0; i < 15 && await pg.evaluate(() => !!DLG); i++) await press(await pg.$('#dlg')); await pg.evaluate(() => { try { closeModal(); } catch (e) { } PAUSE = false; }); await sleep(400); }
       await pg.evaluate(() => { S.gm = 1; try { gmBtn(); } catch (e) { } hud(); }); await sleep(600); const hud2 = await box(pg, 'hud'), gm = await box(pg, 'gmBtn'); results.gm = { hud: hud2, gm };
       if (gm && hud2 && (overlap(gm, hud2) || gm.y < hud2.b)) fail('GM: the GM button overlaps or sits above the card ' + JSON.stringify(results.gm)); await ctx.close(); }

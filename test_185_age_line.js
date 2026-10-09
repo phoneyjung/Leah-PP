@@ -18,7 +18,7 @@ async function player(browser, age) {
   await pg.goto(base + '?rank=1', { waitUntil: 'load' });
   await pg.waitForFunction(() => !document.getElementById('load'), { timeout: 90000 }); await sleep(2500);
   const press = async el => { await el.scrollIntoView(); const r = await el.boundingBox(); await pg.touchscreen.tap(r.x + r.width / 2, r.y + r.height / 2); await sleep(320); };
-  const ages = await pg.$$('#ca button'); await press(age >= 18 ? ages[ages.length - 1] : ages[age - 6]); await sleep(300);
+  { const gb = await pg.$('#cg194 [data-g="f"]'); if (gb) { await press(gb); await sleep(400); } } const ages = await pg.$$('#ca button'); await press(age >= 18 ? ages[ages.length - 1] : ages[age - 6]); await sleep(300);
   const note = await pg.evaluate(() => (document.getElementById('crole') || {}).textContent || '');
   await press(await pg.$('#cgo')); await sleep(2300);
   for (let k = 0; k < 4; k++) { for (let i = 0; i < 15 && await pg.evaluate(() => !!DLG); i++) await press(await pg.$('#dlg')); await pg.evaluate(() => { try { closeModal(); } catch (e) { } PAUSE = false; }); await sleep(500); }

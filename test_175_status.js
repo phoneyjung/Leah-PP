@@ -24,7 +24,7 @@ const line = pg => pg.evaluate(() => { const e = document.getElementById('sys175
       await pg.goto(base + '?rank=1', { waitUntil: 'load' }); await pg.waitForFunction(() => !document.getElementById('load'), { timeout: 90000 }); await sleep(2500);
       r.inCreator = (await line(pg)).shown; if (r.inCreator) fail(name + ': the status line shows in the character creator');
       const press = async el => { await el.scrollIntoView(); const q = await el.boundingBox(); if (touch) await pg.touchscreen.tap(q.x + q.width / 2, q.y + q.height / 2); else await pg.mouse.click(q.x + q.width / 2, q.y + q.height / 2); await sleep(320); };
-      const ages = await pg.$$('#ca button'); await press(age >= 18 ? ages[ages.length - 1] : ages[age - 6]); await press(await pg.$('#cgo')); await sleep(2300);
+      { const gb = await pg.$('#cg194 [data-g="f"]'); if (gb) { await press(gb); await sleep(400); } } const ages = await pg.$$('#ca button'); await press(age >= 18 ? ages[ages.length - 1] : ages[age - 6]); await press(await pg.$('#cgo')); await sleep(2300);
       for (let k = 0; k < 4; k++) { for (let i = 0; i < 15 && await pg.evaluate(() => !!DLG); i++) await press(await pg.$('#dlg')); await pg.evaluate(() => { try { closeModal(); } catch (e) { } PAUSE = false; }); await sleep(400); }
       await sleep(3500); const a = await line(pg); r.online = a;
       if (!a.shown) fail(name + ': no status line in the game');

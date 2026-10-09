@@ -18,7 +18,7 @@ async function child(browser, w, h, touch) {
   await pg.goto(base + '?rank=1', { waitUntil: 'load' });
   await pg.waitForFunction(() => !document.getElementById('load'), { timeout: 90000 }); await sleep(2500);
   const press = async el => { const r = await el.boundingBox(); if (touch) await pg.touchscreen.tap(r.x + r.width / 2, r.y + r.height / 2); else await pg.mouse.click(r.x + r.width / 2, r.y + r.height / 2); await sleep(320); };
-  await press((await pg.$$('#ca button'))[1]); await press(await pg.$('#cgo')); await sleep(2300);
+  { const gb = await pg.$('#cg194 [data-g="f"]'); if (gb) { await press(gb); await sleep(400); } } await press((await pg.$$('#ca button'))[1]); await press(await pg.$('#cgo')); await sleep(2300);
   for (let i = 0; i < 15 && await pg.evaluate(() => !!DLG); i++) await press(await pg.$('#dlg'));
   await pg.evaluate(() => { try { closeModal(); } catch (e) { } PAUSE = false; }); await sleep(2800);   // let the start-up hint pass
   return { ctx, pg };

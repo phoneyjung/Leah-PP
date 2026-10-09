@@ -75,6 +75,7 @@ async function contrasts(pg, selectors, shot) {
     results.creator = [];
     for (const [name, w, h] of [['phone', 812, 330], ['small', 667, 375], ['phone844', 844, 390]]) {
       const { ctx, pg } = await page(browser, w, h, '?rank=1'); await sleep(2500);
+      if (await pg.$('#cg194 [data-g="f"]')) { await tap(pg, '#cg194 [data-g="f"]'); await sleep(400); }   /* 1.94: the gender screen comes first */
       // The start button is the one button every new player must find: it has to be whole on the first screen, with no scrolling.
       const start = await pg.$eval('#cgo', e => { const r = e.getBoundingClientRect(), hit = document.elementFromPoint(r.left + r.width / 2, Math.min(innerHeight - 1, r.top + r.height / 2));
         return { top: Math.round(r.top), bottom: Math.round(r.bottom), viewport: innerHeight, reachable: !!hit && (hit === e || e.contains(hit)) }; });
