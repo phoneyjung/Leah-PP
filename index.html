@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.97';
+const VERSION='Lantern Academy 1.98';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -6398,4 +6398,6 @@ function name197(){const el=$('cr'),n=$('cnm');if(!el||!n||!el.classList.contain
 #cr.art195.c193 #cnm{border-color:#f2c45a99}
 #cr.art195.c193 .side .tp[data-tp="age"].on{flex:1}#cr.art195.c193 #ca{grid-auto-rows:minmax(44px,72px);flex:0 0 auto}#cr.art195.c193 #crole{font-size:13px;padding:8px 10px}
 #cr.art195.c193 #chc,#cr.art195.c193 #cec{gap:10px}#cr.art195.c193 .sw{width:40px!important;height:40px!important}`;document.head.appendChild(st)}
+// ---- 1.98 (owner 9 Oct 17:04 "ปุ่มควบคุม อยากให้ชัดตอนไม่กด พอกดแล้วจาง ตอนนี้มันสลับกัน"): the stick is clear while untouched and faint under the thumb (1.88 had it the other way) ----
+{const st=document.createElement('style');st.textContent='body.fjIdle172:not(.nt174) #joy{opacity:.95!important}body.fjOn172 #joy,body.fjOn172.cmd176 #joy{opacity:.2!important}';document.head.appendChild(st)}
 </script></body></html>

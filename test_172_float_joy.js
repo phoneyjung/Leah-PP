@@ -57,7 +57,7 @@ const state = pg => pg.evaluate(() => { const j = document.getElementById('joy')
       await pg.touchscreen.touchStart(s.x, s.y); await sleep(600); const rest = await state(pg);
       r.rest = { stickCentre: [rest.jx, rest.jy], movedPx: Math.round(Math.hypot(rest.px - a0.px, rest.py - a0.py)), opacity: rest.op };
       if (!near(rest.jx, s.x, 3) || !near(rest.jy, s.y, 3)) fail(name + ': on touching the zone the stick is at ' + rest.jx + ',' + rest.jy + ', the thumb at ' + s.x + ',' + s.y);
-      if (r.rest.movedPx > 4) fail(name + ': a resting thumb moved the player ' + r.rest.movedPx + ' px'); if (rest.op < .95) fail(name + ': the stick under the thumb is faded (' + rest.op + ')');
+      if (r.rest.movedPx > 4) fail(name + ': a resting thumb moved the player ' + r.rest.movedPx + ' px'); if (rest.op > .25) fail(name + ': the stick under the thumb should be faint on a phone (1.98: owner 17:04) · ' + rest.op);
       //    sliding steers
       await pg.touchscreen.touchMove(s.x + 10, s.y); await pg.touchscreen.touchMove(s.x + 30, s.y); await sleep(900);
       const a1 = await state(pg); await pg.screenshot({ path: path.join(out, name + '-sliding.png') });
@@ -72,7 +72,7 @@ const state = pg => pg.evaluate(() => { const j = document.getElementById('joy')
       if (!near(r.follow.fingerToCentre, 40, 3)) fail(name + ': past the rim the finger is ' + r.follow.fingerToCentre + ' px from the stick centre, expected 40');
       // 4. lift the finger: the player stops and the stick goes back to its corner
       await pg.touchscreen.touchEnd(); await sleep(300); const a3 = await state(pg); await sleep(500); const a4 = await state(pg);
-      r.release = { stickBackHome: near(a4.jx, home.jx, 2) && near(a4.jy, home.jy, 2), joyId: a4.joyId, driftPx: Math.round(Math.hypot(a4.px - a3.px, a4.py - a3.py)), opacity: a4.op };
+      r.release = { stickBackHome: near(a4.jx, home.jx, 2) && near(a4.jy, home.jy, 2), joyId: a4.joyId, driftPx: Math.round(Math.hypot(a4.px - a3.px, a4.py - a3.py)), opacity: a4.op }; if (!(home.op >= .9 && a4.op >= .9)) fail(name + ': the untouched stick should be clear (1.98) · home ' + home.op + ' · after release ' + a4.op);
       if (!r.release.stickBackHome) fail(name + ': after lifting, the stick is at ' + a4.jx + ',' + a4.jy + ', its corner is ' + home.jx + ',' + home.jy);
       if (a4.joyId !== null) fail(name + ': the stick still holds the finger after lifting'); if (r.release.driftPx > 4) fail(name + ': the player kept moving ' + r.release.driftPx + ' px after lifting');
       // 5. the stick in its corner still works by itself (steer toward a side with room to walk)
