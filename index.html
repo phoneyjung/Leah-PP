@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.96';
+const VERSION='Lantern Academy 1.97';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -6308,9 +6308,9 @@ function ic195(i,px){const s=document.createElement('span');s.className='ic195';
 function icSet195(b,i,px){if(!b||b.querySelector('.ic195'))return;const tn=[...b.childNodes].find(n=>n.nodeType===3&&n.textContent.trim());if(tn)tn.remove();b.prepend(ic195(i,px))}
 function deco195(){const el=$('cr');if(!el||!art195())return;el.classList.add('art195');el.classList.toggle('bgc195',ART195.bgC);el.classList.toggle('bgs195',ART195.bgS);
   if(ART195.ic){const small=innerHeight<440;
-    if(el.classList.contains('c193')){const I={age:0,hair:1,face:2,house:3,hat:4};el.querySelectorAll('.rail [data-tab]').forEach(b=>icSet195(b,I[b.dataset.tab],small?26:30));icSet195($('c3Turn'),5,28);icSet195($('c3Rand'),6,28);icSet195($('crnd'),6,24)}
+    if(el.classList.contains('c193')){const I={age:0,hair:2,face:1,house:3,hat:4};el.querySelectorAll('.rail [data-tab]').forEach(b=>icSet195(b,I[b.dataset.tab],small?26:30));icSet195($('c3Turn'),5,28);icSet195($('c3Rand'),6,28);icSet195($('crnd'),6,24)}
     const bk=$('c3Back');if(bk&&!bk.querySelector('.ic195')){bk.textContent=bk.textContent.replace(/^‹\s*/,'');bk.prepend(ic195(7,18))}
-    if(el.classList.contains('p193')){const nw=$('pNew');if(nw&&!nw.querySelector('.ic195')){nw.textContent=nw.textContent.replace(/^＋\s*/,'');nw.prepend(ic195(9,26))}const dl=$('pDel');if(dl&&!dl.querySelector('.ic195')){dl.textContent='';dl.append(ic195(8,26),document.createTextNode(t('c5Del')))}}}
+    if(el.classList.contains('p193')){const nw=$('pNew');if(nw&&!nw.querySelector('.ic195')){nw.textContent=nw.textContent.replace(/^＋\s*/,'');nw.prepend(ic195(9,26))}const dl=$('pDel');if(dl&&!dl.querySelector('.ic195')){dl.textContent='';const e=document.createElement('span');e.textContent='🗑';e.style.cssText='font-size:20px;line-height:1';dl.append(e,document.createTextNode(t('c5Del')))}}}
   fit195()}
 // the painted clearing lands under the character's feet (the picture grows past "cover" when it has to; the stand covers what is left)
 function fit195(){const el=$('cr');if(!el||!el.classList.contains('art195'))return;const sel=el.classList.contains('p193')?'s':'c',feet=ART195.feet&&ART195.feet[el.classList.contains('p193')?'p':el.classList.contains('g194')?'g':'c'];
@@ -6321,18 +6321,17 @@ function feet195(k,c,fx,fy){const r=c.getBoundingClientRect(),sx=r.width/c.width
 // the create screen: the character on its stand
 {const old=crDraw193;crDraw193=function(){if(!(art195()&&ART195.stC))return old.apply(this,arguments);const c=$('cpv');if(!c)return;const box=c.getBoundingClientRect(),dpr=Math.min(2,devicePixelRatio||1),W=Math.max(10,Math.round(box.width*dpr)),H=Math.max(10,Math.round(box.height*dpr));if(c.width!==W||c.height!==H){c.width=W;c.height=H}
   const g=c.getContext('2d');g.setTransform(1,0,0,1,0,0);g.clearRect(0,0,W,H);g.imageSmoothingEnabled=false;const s=Math.max(1,Math.floor(Math.min(W/80,H/86)));const ox=Math.round(W/2-32*s),oy=Math.round(H-2*s-83*s);
-  g.drawImage(ART195.stC,0,0,64,64,ox,oy+20*s,64*s,64*s);
-  const H0=HOUSES[CR_STATE.house];g.fillStyle='#6b4a2a';g.fillRect(ox+58*s,oy+6*s,2*s,58*s);g.fillStyle=H0.col;g.beginPath();g.moveTo(ox+60*s,oy+8*s);g.lineTo(ox+76*s,oy+8*s);g.lineTo(ox+76*s,oy+28*s);g.lineTo(ox+68*s,oy+24*s);g.lineTo(ox+60*s,oy+28*s);g.fill();try{g.drawImage(embC(H0.id,'#1b1330',1),ox+64*s,oy+12*s,8*s,8*s)}catch(e){}
+  glow197(g,ox+32*s,oy+34*s,44*s);g.drawImage(stand197(ART195.stC,CR_STATE.house),0,0,64,64,ox,oy+20*s,64*s,64*s);   /* 1.97: the house shows in the ring (the code-drawn flag is gone) */
   try{g.drawImage(crSheetNow194(CR_STATE.kid),C193.dir*64,0,64,64,ox,oy,64*s,64*s)}catch(e){}feet195('c',c,ox+32*s,oy+60*s)}}
 // the gender screen: both on stands
 {const old=gDraw194;gDraw194=function(){if(!(art195()&&ART195.stC))return old.apply(this,arguments);const box=$('cg194');if(!box)return;const sc=Math.max(2,Math.floor(Math.min(innerWidth*.34,innerHeight*.7)/84)),dpr=Math.min(2,devicePixelRatio||1);let fx=0,fy=0,n=0;
   box.querySelectorAll('.gc').forEach(b=>{const c=b.querySelector('canvas'),k=GDEF194[b.dataset.g];if(c.width!==64*sc*dpr||c.height!==84*sc*dpr){c.width=64*sc*dpr;c.height=84*sc*dpr;c.style.width=64*sc+'px';c.style.height=84*sc+'px'}const u=sc*dpr,g=c.getContext('2d');g.imageSmoothingEnabled=false;g.clearRect(0,0,c.width,c.height);
-    g.drawImage(ART195.stC,0,0,64,64,0,20*u,64*u,64*u);try{g.drawImage(crSheet(k,CR_STATE.house,0,0,null,null),0,0,64,64,0,0,64*u,64*u)}catch(e){}const r=c.getBoundingClientRect();fx+=r.left+r.width/2;fy+=r.top+60*sc;n++});
+    glow197(g,32*u,34*u,40*u);g.drawImage(stand197(ART195.stC,CR_STATE.house),0,0,64,64,0,20*u,64*u,64*u);try{g.drawImage(crSheet(k,CR_STATE.house,0,0,null,null),0,0,64,64,0,0,64*u,64*u)}catch(e){}const r=c.getBoundingClientRect();fx+=r.left+r.width/2;fy+=r.top+60*sc;n++});
   if(n){const o=ART195.feet&&ART195.feet.g,p=[Math.round(fx/n),Math.round(fy/n)];ART195.feet=ART195.feet||{};ART195.feet.g=p;if(!o||Math.abs(o[0]-p[0])+Math.abs(o[1]-p[1])>2)fit195()}}}
 // the select screen: the picked player on the night stand
-{const old=pkDraw193;pkDraw193=function(){const st=ART195.stS||ART195.stC;if(!(art195()&&st))return old.apply(this,arguments);const el=$('cr'),c=$('pkv'),d=Store.all(),s0=d.slots[C193.pick];if(!c||!s0)return;
+{const old=pkDraw193;pkDraw193=function(){const st=ART195.stC||ART195.stS;   /* 1.97: the night stand waits for the dusk backdrop */if(!(art195()&&st))return old.apply(this,arguments);const el=$('cr'),c=$('pkv'),d=Store.all(),s0=d.slots[C193.pick];if(!c||!s0)return;
   const sc=Math.max(2,Math.floor(Math.min(innerWidth*.34,innerHeight*.66)/84)),dpr=Math.min(2,devicePixelRatio||1),u=sc*dpr;c.width=64*u;c.height=84*u;c.style.width=64*sc+'px';c.style.height=84*sc+'px';
-  const g=c.getContext('2d');g.imageSmoothingEnabled=false;g.clearRect(0,0,c.width,c.height);g.drawImage(st,0,0,64,64,0,20*u,64*u,64*u);try{g.drawImage(crSheet(s0.kid,s0.house,s0.hc||0,s0.ec||0,s0.appearance169,{hcol:s0.hcol??null,ecol:s0.ecol??null}),0,0,64,64,0,0,64*u,64*u)}catch(e){}
+  const g=c.getContext('2d');g.imageSmoothingEnabled=false;g.clearRect(0,0,c.width,c.height);glow197(g,32*u,34*u,40*u);g.drawImage(st===ART195.stC?stand197(st,s0.house):st,0,0,64,64,0,20*u,64*u,64*u);try{g.drawImage(crSheet(s0.kid,s0.house,s0.hc||0,s0.ec||0,s0.appearance169,{hcol:s0.hcol??null,ecol:s0.ecol??null}),0,0,64,64,0,0,64*u,64*u)}catch(e){}
   const nmEl=el.querySelector('.pnm');if(nmEl){const H=HOUSES[s0.house];nmEl.innerHTML=s0.name+' <span style="color:'+H.col+'">· '+(H[LANG]||H.th)+'</span>';const r=c.getBoundingClientRect();nmEl.style.top=Math.round(Math.min(innerHeight-46,r.bottom-r.height*.01))+'px';nmEl.style.bottom='auto'}   /* under the stand; it sits between the bin and the start button */
   el.querySelectorAll('#pk .pn').forEach((b,i)=>b.classList.toggle('on',i===C193.pick));feet195('p',c,32*u,60*u)}}
 {const oc=openCreator;openCreator=function(){const r=oc.apply(this,arguments);try{deco195()}catch(e){}return r}}
@@ -6362,4 +6361,41 @@ function caveBgmTick(){const want=caveBgmWant();CAVE_BGM.cur=want;if(want)caveBg
 setInterval(()=>{try{caveBgmTick()}catch(e){}},150);
 {const _sm=setMusic;setMusic=function(mode){try{if(caveBgmWant()){stopMusic();return}}catch(e){}return _sm.apply(this,arguments)}}
 addEventListener('pointerdown',()=>{try{const k=caveBgmWant(),a=k&&CAVE_BGM.el[k];if(a&&a.paused){const pr=a.play();if(pr&&pr.catch)pr.catch(()=>{})}}catch(e){}},{capture:true,passive:true});   /* phones start sound only from a tap */
+// ---- 1.97 (owner 9 Oct 16:36 "วิจารหน่อย อยากให้ 9.5+ เน้นมีเอกลักษณ์ เข้าใจง่าย สวย"): polish of the GM art screens of 1.95 ----
+// one pixel size for picture and character (the painted backdrop is redrawn on the character's pixel grid) · the stand's ring in the house colour instead of the code-drawn flag
+// · a warm lantern glow behind the character · gender cards that answer a tap · the face tab shows a face · the house name above the character · a fuller side panel
+const ART197={img:{},key:'',st:{}};
+function hsl2rgb197(h,s,l){const c=(1-Math.abs(2*l-1))*s,x=c*(1-Math.abs((h/60)%2-1)),m=l-c/2;const [r,g,b]=h<60?[c,x,0]:h<120?[x,c,0]:h<180?[0,c,x]:h<240?[0,x,c]:h<300?[x,0,c]:[c,0,x];return [Math.round((r+m)*255),Math.round((g+m)*255),Math.round((b+m)*255)]}
+// the gold ring (and the few gold flecks) of a stand in a house's colour; the stone, grass and shadow stay
+function stand197(st,h){const k=(st===ART195.stS?'n':'d')+h;if(ART197.st[k])return ART197.st[k];let c=st;try{c=toCanvas(st);const g=c.getContext('2d'),d=g.getImageData(0,0,c.width,c.height),p=d.data,H=HOUSES[h]||HOUSES[0],hue=H.h[0];
+  for(let i=0;i<p.length;i+=4){if(p[i+3]<100)continue;const [hh,ss,ll]=hslOf(p[i]/255,p[i+1]/255,p[i+2]/255);if(hh<25||hh>61||ss<.35||ll<.35||ll>.88)continue;const [r,g2,b]=hsl2rgb197(hue,Math.max(ss,.5),ll);p[i]=r;p[i+1]=g2;p[i+2]=b}g.putImageData(d,0,0)}catch(e){c=st}return ART197.st[k]=c}
+// a soft warm light, gently breathing on the screens drawn every frame
+function glow197(g,cx,cy,r){const a=.2+.05*Math.sin(performance.now()/480),gr=g.createRadialGradient(cx,cy,0,cx,cy,r);gr.addColorStop(0,`rgba(255,214,140,${a})`);gr.addColorStop(.55,`rgba(255,190,110,${a*.45})`);gr.addColorStop(1,'rgba(255,180,100,0)');g.save();g.globalCompositeOperation='lighter';g.fillStyle=gr;g.fillRect(cx-r,cy-r,2*r,2*r);g.restore()}
+// the character's pixel size in CSS px on the screen shown now (same formulas as the drawings of 1.95)
+function px197(){const el=$('cr'),dpr=Math.min(2,devicePixelRatio||1);if(!el)return 2;if(el.classList.contains('c193')){const c=$('cpv');if(c){const b=c.getBoundingClientRect(),W=Math.round(b.width*dpr),H=Math.round(b.height*dpr);return Math.max(1,Math.floor(Math.min(W/80,H/86)))/dpr}}
+  if(el.classList.contains('g194'))return Math.max(2,Math.floor(Math.min(innerWidth*.34,innerHeight*.7)/84));if(el.classList.contains('p193'))return Math.max(2,Math.floor(Math.min(innerWidth*.34,innerHeight*.66)/84));return 2}
+// the painted backdrop on that pixel grid: drawn small with smoothing, shown big without (once per change, never per frame)
+function bgDraw197(){const el=$('cr');if(!el||!el.classList.contains('art195'))return;const sel=el.classList.contains('p193')?'s':'c',ok=sel==='s'?ART195.bgS:ART195.bgC;if(!ok)return;
+  let im=ART197.img[sel];if(!im){im=ART197.img[sel]=new Image();im.onload=()=>{try{bgDraw197()}catch(e){}};im.src=sel==='s'?'bg-select.jpg':'bg-create.jpg';return}if(!im.complete||!im.naturalWidth)return;
+  const v=k=>parseFloat(el.style.getPropertyValue(k))||0,bs=(el.style.getPropertyValue('--bgs')||'').trim().split(/\s+/).map(parseFloat);if(!(bs[0]>0&&bs[1]>0))return;
+  const px=Math.max(1,px197()),W=Math.ceil(innerWidth/px),H=Math.ceil(innerHeight/px),key=[sel,px,W,H,bs[0],v('--bgx'),v('--bgy')].join('|');let c=$('bg197');if(c&&ART197.key===key)return;
+  if(!c){c=document.createElement('canvas');c.id='bg197';el.prepend(c)}ART197.key=key;c.width=W;c.height=H;c.style.width=W*px+'px';c.style.height=H*px+'px';ART197.px=px;
+  const g=c.getContext('2d');g.imageSmoothingEnabled=true;g.imageSmoothingQuality='high';g.clearRect(0,0,W,H);g.drawImage(im,(v('--bgx')-6)/px,(v('--bgy')-6)/px,bs[0]/px,bs[1]/px);el.classList.add('pix197')}
+{const f=fit195;fit195=function(){const r=f.apply(this,arguments);try{bgDraw197()}catch(e){}return r}}
+function deco197(){const el=$('cr');if(!el||!el.classList.contains('art195'))return;
+  if(el.classList.contains('g194'))el.querySelectorAll('#cg194 .gc').forEach(b=>{if(b._d197)return;b._d197=1;const sm=b.querySelector('small'),g=b.dataset.g;if(sm)sm.innerHTML=`<b class="sy">${g==='f'?'♀':'♂'}</b>${t(g==='f'?'c4Girl':'c4Boy')}`;
+    const fn=b.onclick;b.onclick=()=>{if(b._p)return;b._p=1;b.classList.add('pick197');setTimeout(()=>{try{fn&&fn()}catch(e){}},170)}});   /* the chosen child steps forward and glows before the next screen */
+  if(el.classList.contains('c193'))name197()}
+{const d=deco195;deco195=function(){const el=$('cr');if(el&&!$('bg197'))el.classList.remove('pix197');ART197.key='';const r=d.apply(this,arguments);try{deco197()}catch(e){}return r}}
+// the house name (in its colour) above the character, after the name when one is typed
+function name197(){const el=$('cr'),n=$('cnm');if(!el||!n||!el.classList.contains('art195')||!el.classList.contains('c193'))return;const H=HOUSES[CR_STATE.house]||HOUSES[0];n.textContent=CR_STATE.name?CR_STATE.name+' · ':'';const sp=document.createElement('span');sp.style.color=H.col;sp.textContent=H[LANG]||H.th;n.append(sp);n.style.visibility='visible'}
+{const r0=crRefresh;crRefresh=function(){const r=r0.apply(this,arguments);try{name197()}catch(e){}return r}}
+{const st=document.createElement('style');st.textContent=`
+#cr #bg197{position:absolute;left:0;top:0;z-index:-1;image-rendering:pixelated;pointer-events:none}#cr.pix197.c193::before,#cr.pix197.g194::before,#cr.pix197.p193::before{display:none}
+#cr.art195.g194 #cg194 .gc{transition:transform .16s ease}#cr.art195.g194 #cg194 .gc:active{transform:scale(.97)}#cr.art195.g194 #cg194 .gc.pick197{transform:scale(1.07)}#cr.art195.g194 #cg194 .gc.pick197 canvas{filter:drop-shadow(0 0 12px #ffe39a)}
+#cr.art195.g194 #cg194 .gc .sg{display:none}#cr.art195.g194 #cg194 .gc small{display:flex;align-items:center;gap:6px;font-size:17px;padding:6px 20px;margin-top:-4px;border-radius:99px;background:#fff8ec;color:#2b1640;box-shadow:0 3px 10px #0007;text-shadow:none;border:2px solid #f2c45a}
+#cr.art195.g194 #cg194 .gc small .sy{font-size:19px}#cr.art195.g194 #cg194 .gc[data-g="f"] small .sy{color:#d0507a}#cr.art195.g194 #cg194 .gc[data-g="m"] small .sy{color:#3a49b8}
+#cr.art195.c193 #cnm{border-color:#f2c45a99}
+#cr.art195.c193 .side .tp[data-tp="age"].on{flex:1}#cr.art195.c193 #ca{grid-auto-rows:minmax(44px,72px);flex:0 0 auto}#cr.art195.c193 #crole{font-size:13px;padding:8px 10px}
+#cr.art195.c193 #chc,#cr.art195.c193 #cec{gap:10px}#cr.art195.c193 .sw{width:40px!important;height:40px!important}`;document.head.appendChild(st)}
 </script></body></html>

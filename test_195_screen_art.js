@@ -6,7 +6,10 @@
 //   no GM — none of the new look (no .art195, no icons), exactly the 1.94 screens;
 //   files missing — no page error, the screens work and fall back to the 1.94 look part by part.
 // Prints one JSON line, then `errors N`.  Run: PORT=8777 CHROME_EXE=/path/to/chromium node test_195_screen_art.js   (serve the repo root first)
-// Version 1.94 gives errors ≥ 8 here; 1.95 gives errors 0.
+// Version 1.97 (owner 16:36 "วิจารหน่อย อยากให้ 9.5+"): GM screens also draw the backdrop on the character's pixel grid (#bg197 canvas, its CSS pixel = the character's pixel ±0.01),
+//   the stand ring takes the house colour (a tinted stand per house), gender cards carry a ♀/♂ pill, the face tab shows a face and the hair tab the palette, the house name sits above
+//   the character, the delete button is 🗑 with its word; a player without GM and a page with the files missing get none of it.
+// Version 1.94 gives errors ≥ 8 here; 1.95 errors 0 on its own checks; 1.97 gives errors 0.
 const fs = require('node:fs'), puppeteer = require('puppeteer');
 const out = process.env.OUT_DIR || '/tmp/leah-195-art'; fs.mkdirSync(out, { recursive: true });
 const base = 'http://localhost:' + (process.env.PORT || 8777) + '/';
@@ -26,16 +29,18 @@ const ratio = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) +
       if (block) { await pg.setRequestInterception(true); pg.on('request', r => { if (NEW.some(f => r.url().includes(f))) r.abort(); else r.continue(); }); }
       await pg.goto(base + '?rank=1' + (gm ? '&gm' : ''), { waitUntil: 'load' }); await pg.waitForFunction(() => !document.getElementById('load'), { timeout: 90000 }); await sleep(2500);
       const press = async el => { const r = await el.boundingBox(); await pg.touchscreen.tap(r.x + r.width / 2, r.y + r.height / 2); await sleep(300); };
-      const look = () => pg.evaluate(() => { const el = document.getElementById('cr'), bf = getComputedStyle(el, '::before'); return { art: el.classList.contains('art195'), bg: /bg-(create|select)\.jpg/.test(bf.backgroundImage), filter: bf.filter, icons: el.querySelectorAll('.ic195').length, fit: ART195.fit || null, feet: ART195.feet || null }; });
+      const look = () => pg.evaluate(() => { const el = document.getElementById('cr'), bf = getComputedStyle(el, '::before'), c = document.getElementById('bg197'); return { art: el.classList.contains('art195'), bg: /bg-(create|select)\.jpg/.test(bf.backgroundImage), filter: bf.filter, icons: el.querySelectorAll('.ic195').length, fit: ART195.fit || null, feet: ART195.feet || null, pix: c ? { on: el.classList.contains('pix197'), before: bf.display, cssW: parseFloat(c.style.width), w: c.width, grid: +(parseFloat(c.style.width) / c.width).toFixed(3), want: +px197().toFixed(3), cover: parseFloat(c.style.width) >= innerWidth && parseFloat(c.style.height) >= innerHeight } : null }; });
       // A. gender screen
-      R.gender = await look(); R.gender.standPx = await pg.evaluate(() => { const c = document.querySelector('#cg194 .gc canvas'); const d = c.getContext('2d').getImageData(0, Math.round(c.height * .80), c.width, Math.round(c.height * .12)).data; let n = 0; for (let i = 3; i < d.length; i += 4) if (d[i] > 200) n++; return n; });
+      await sleep(400); R.gender = await look(); R.gender.pill = await pg.evaluate(() => ({ sy: document.querySelectorAll('#cg194 .gc small .sy').length, sign: [...document.querySelectorAll('#cg194 .gc .sg')].filter(e => getComputedStyle(e).display !== 'none').length })); R.gender.standPx = await pg.evaluate(() => { const c = document.querySelector('#cg194 .gc canvas'); const d = c.getContext('2d').getImageData(0, Math.round(c.height * .80), c.width, Math.round(c.height * .12)).data; let n = 0; for (let i = 3; i < d.length; i += 4) if (d[i] > 200) n++; return n; });
       await pg.screenshot({ path: out + '/' + dev + '_gender.png' });
       await press(await pg.$('#cg194 [data-g="f"]')); await sleep(600);
       // B. create screen
-      R.create = await look();
+      await sleep(300); R.create = await look(); R.create.tabs = await pg.evaluate(() => [...document.querySelectorAll('#cr .rail [data-tab]')].map(b => { const i = b.querySelector('.ic195'); return b.dataset.tab + ':' + (i ? i.dataset.i : '-'); }).join(' ')); R.create.cnm = await pg.evaluate(() => document.getElementById('cnm').textContent);
       R.create.stand = await pg.evaluate(() => { const c = document.getElementById('cpv'), f = ART195.feet && ART195.feet.c; if (!f) return -1; const r = c.getBoundingClientRect(), sx = c.width / r.width, g = c.getContext('2d'); const y = Math.round((f[1] - r.top + 10) * sx), d = g.getImageData(0, y, c.width, 2).data; let n = 0; for (let i = 0; i < d.length; i += 4) if (d[i + 3] > 200 && d[i] > 150 && d[i + 2] > 150) n++; return n; });
       R.create.gold = await pg.evaluate(() => { const s = getComputedStyle(document.getElementById('cgo')); return { bg: s.backgroundImage, color: s.color }; });
       await pg.screenshot({ path: out + '/' + dev + '_create.png' });
+      // the ring takes the house colour: a tinted stand for house 0, then house 1 after a real tap
+      R.create.st0 = await pg.evaluate(() => Object.keys(ART197.st).join()); await press(await pg.$('#cr .rail [data-tab="house"]')); await press((await pg.$$('#ch .opt'))[1]); await sleep(300); R.create.st1 = await pg.evaluate(() => Object.keys(ART197.st).join()); R.create.cnm1 = await pg.evaluate(() => document.getElementById('cnm').textContent);
       // a choice still works with the icons in place
       await press(await pg.$('#cr .rail [data-tab="hair"]')); await press(await pg.$('#ck .opt[data-k="1"]')); R.kid = await pg.evaluate(() => CR_STATE.kid);
       await press(await pg.$('#c3Turn')); R.dir = await pg.evaluate(() => C193.dir);
@@ -56,12 +61,18 @@ const ratio = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) +
         if (!(R.create.stand > 20)) fail(dev + ': no stand under the feet on the create screen (' + R.create.stand + ' px)');
         if (!R.create.fit || !R.create.feet || Math.abs(R.create.fit[0] - R.create.feet.c[0]) > 40 || Math.abs(R.create.fit[1] - R.create.feet.c[1]) > 40) fail(dev + ': the painted clearing is not under the feet ' + JSON.stringify({ fit: R.create.fit, feet: R.create.feet }));
         { const m = R.create.gold.bg.match(/rgb\((\d+), (\d+), (\d+)\)/g) || [], c = R.create.gold.color.match(/\d+/g).map(Number); const worst = Math.min(...m.map(s => ratio(s.match(/\d+/g).map(Number), c))); R.create.goldContrast = +worst.toFixed(2); if (!/gradient/.test(R.create.gold.bg) || !(worst >= 4.5)) fail(dev + ': create button gold/contrast ' + JSON.stringify(R.create.gold) + ' ' + worst); }
-        if (!R.select.bg || R.select.icons < 2 || R.select.pkv[1] <= R.select.pkv[0] || !/ลบ|Delete/.test(R.select.del)) fail(dev + ': select screen ' + JSON.stringify(R.select));
+        if (!R.select.bg || R.select.icons < 1 || R.select.pkv[1] <= R.select.pkv[0] || !/🗑/.test(R.select.del) || !/ลบ|Delete/.test(R.select.del)) fail(dev + ': select screen ' + JSON.stringify(R.select));
+        for (const [k, L] of [['gender', R.gender], ['create', R.create], ['select', R.select]]) { const q = L.pix; if (!q || !q.on || q.before !== 'none' || Math.abs(q.grid - q.want) > .01 || !q.cover) fail(dev + ': ' + k + ' backdrop not on the character pixel grid ' + JSON.stringify(q)); }
+        if (R.gender.pill.sy !== 2 || R.gender.pill.sign !== 0) fail(dev + ': gender pills ' + JSON.stringify(R.gender.pill));
+        if (!/hair:2/.test(R.create.tabs) || !/face:1/.test(R.create.tabs)) fail(dev + ': hair/face icons ' + R.create.tabs);
+        if (!/บ้านดวงอาทิตย์|Sun House/.test(R.create.cnm) || !/บ้านปีกฟ้า|Wing House/.test(R.create.cnm1)) fail(dev + ': the house name above the character ' + R.create.cnm + ' → ' + R.create.cnm1);
+        if (!/d0/.test(R.create.st0) || !/d1/.test(R.create.st1)) fail(dev + ': the ring did not take the house colour ' + R.create.st0 + ' → ' + R.create.st1);
       } else if (dev === 'player') {
         if (R.gender.art || R.create.art || R.select.art || R.gender.icons || R.create.icons || R.select.icons || R.gender.bg || R.create.bg) fail('player: the GM-only look shows to a player ' + JSON.stringify({ g: R.gender, c: R.create, s: R.select }));
         if (R.select.pkv[1] !== R.select.pkv[0]) fail('player: the select preview changed shape ' + R.select.pkv);
+        if (R.gender.pix || R.create.pix || R.select.pix) fail('player: the GM pixel backdrop shows to a player');
       } else {
-        if (R.gender.bg || R.create.bg || R.create.icons || R.select.icons) fail('missing: a missing file still shows ' + JSON.stringify({ g: R.gender, c: R.create, s: R.select }));
+        if (R.gender.bg || R.create.bg || R.create.icons || R.select.icons || R.gender.pix || R.create.pix || R.select.pix) fail('missing: a missing file still shows ' + JSON.stringify({ g: R.gender, c: R.create, s: R.select }));
       }
       await ctx.close(); }
   } catch (e) { fail('crash: ' + (e.stack || e)); }
