@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.85';
+const VERSION='Lantern Academy 1.86';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -5680,4 +5680,176 @@ function ageOk185(k){return !!(S&&(S.age||0)>=(AGE185[k]||0))}
 // the bot: age 10 and over (today the same as not being a child), kept as its own gate so the chat and the dark lands can use theirs later
 {const old=autoToggle180;autoToggle180=function(){if(S&&!ageOk185('bot')){say(t('jobNeed'));return}return old.apply(this,arguments)}}
 {const old=openAuto;openAuto=function(){if(S&&!ageOk185('bot'))return;return old.apply(this,arguments)}}
+// ================= 1.86 · navigation (owner's order of 9 Oct 08:04, item ②; the S16 map mockup is the model): the map page — the 5×5 blocks round you first, "see the whole world" one tap away, the right panel with the places of the block, a tap on a place walks there, across maps when needed =================
+// Files: world-map.json (block names, cut from world-atlas.json by build_world_map.py) and world-map.jpg (the world painting). Either missing → the page still opens with the block list only; both missing → the places of this map and the next maps, as a list.
+try{Object.assign(TX.th,{wmTitle:'แผนที่',wmWorld:'ดูทั้งโลก',wmNear:'รอบตัวฉัน',wmYou:'คุณอยู่ที่นี่',wmHere:'คุณ',wmLocked:'ยังไปไม่ได้',wmUnknown:'ยังไม่รู้จัก ไปสำรวจก่อนนะ',wmWalk:'พาเดินไปที่นี่',wmPlaces:'สถานที่ในแผนที่นี้',wmTapWorld:'แตะบริเวณที่อยากดู',wmTapCell:'แตะช่องเพื่อดู · แตะชื่อสถานที่เพื่อพาเดิน',
+ wmTipWorld:'กดปุ่มนี้ดูทั้งโลกได้นะ',wmOpened:'เปิดแล้ว',wmArea:'บริเวณ',wmTo:'ถึง',wmCave:'ถ้ำ',wmFloor:'ชั้น',wmFloors:'ชั้น',wmCrystal:'คริสตัล',wmAwake:'ตื่นแล้ว',wmDig:'จุดขุด',wmStone:'ศิลาแสง',wmFish:'จุดตกปลา',wmBoard:'บอร์ดภารกิจ',wmPost:'ไปรษณีย์',wmWarp:'วาร์ป',wmStones:'วาร์ปด้วยศิลาแสง',wmNoData:'ภาพแผนที่โลกยังโหลดไม่ได้ ใช้รายชื่อแทน',
+ wmGoing:'กำลังพาเดินไป',wmRouteNone:'ยังไม่มีทางเดินไปที่นั่น',wmHome:'บ้านของเรา',wmThisMap:'แผนที่นี้',wmBlock:'ช่อง',wmChapter:'บท',wmLight:'ดินแดนแห่งแสง',wmMystery:'หมอกปริศนา',wmDark:'แดนมืด',wmDarkAge:'แดนมืด · 18 ปีขึ้นไป',wmSea:'ทะเล',wmVillage:'หมู่บ้าน',wmTown:'เมือง',wmCapital:'เมืองหลวง',wmAcademy:'โรงเรียน',wmLegend:'🚪 ทางออก · 🔒 ยังไม่เปิด · ⭐ คุณ · 💎 คริสตัล',
+ wmMaps:'แผนที่ในช่องนี้',wmClose:'ปิด',wmNextMap:'ทางไป',wmWalkMsg:'พาเดินไป',wmYouMap:'แผนที่ที่คุณอยู่',wmFar:'ไกล',wmKid:'โหมดเด็ก',wmMore:'ยังมีอีกหลายที่รอให้ไปถึง'});
+ if(TX.en)Object.assign(TX.en,{wmTitle:'Map',wmWorld:'See the whole world',wmNear:'Around me',wmYou:'You are here',wmHere:'You',wmLocked:'Not open yet',wmUnknown:'Unknown — go and explore first',wmWalk:'Walk me there',wmPlaces:'Places on this map',wmTapWorld:'Tap the area you want to see',wmTapCell:'Tap a block to see it · tap a place to walk there',
+ wmTipWorld:'Press this to see the whole world',wmOpened:'opened',wmArea:'Area',wmTo:'to',wmCave:'Cave',wmFloor:'Floor',wmFloors:'floors',wmCrystal:'Crystal',wmAwake:'awake',wmDig:'Dig spot',wmStone:'Light stone',wmFish:'Fishing spot',wmBoard:'Mission board',wmPost:'Post office',wmWarp:'Warp',wmStones:'Warp by light stone',wmNoData:'The world picture did not load; here is the list instead',
+ wmGoing:'Walking to',wmRouteNone:'No way to walk there yet',wmHome:'Our home',wmThisMap:'This map',wmBlock:'Block',wmChapter:'Chapter',wmLight:'Land of Light',wmMystery:'Mystery Mist',wmDark:'Dark Land',wmDarkAge:'Dark Land · 18+',wmSea:'Sea',wmVillage:'Village',wmTown:'Town',wmCapital:'Capital',wmAcademy:'Academy',wmLegend:'🚪 exit · 🔒 closed · ⭐ you · 💎 crystal',
+ wmMaps:'Maps in this block',wmClose:'Close',wmNextMap:'Way to',wmWalkMsg:'Walking to',wmYouMap:'The map you are on',wmFar:'far',wmKid:'Child mode',wmMore:'Many more places are waiting'})}catch(e){}
+const WM186={data:null,img:null,fail:false,loading:false,view:'near',sel:null,cx:7,cy:8,open:false,thumbs:{},tab:null};
+const WM_BLOCK186={capital:'H9',h9:'H9',cavemouth:'H9',hunt1:'H9',room:'H9',room2:'H9',room3:'H9',town2:'H9',farm:'G9',royal:'H6',scn_north:'H8',scn_east:'I9',scn_south:'H10'};   /* which block of the world each real map sits in */
+const WM_MAPS186={H9:['capital','cavemouth','hunt1','room'],G9:['farm'],H6:['royal']};   /* the real maps of a block, first = the way in */
+const WM_LABEL186={capital:['หมู่บ้าน','Village'],h9:['หมู่บ้าน','Village'],cavemouth:['ปากถ้ำ','Cave mouth'],hunt1:['ถ้ำ ชั้น 1','Cave floor 1'],room:['บ้านของเรา','Our home'],farm:['ฟาร์ม','Farm'],royal:['ลานพระราชวัง','Palace square']};
+function wmBlockOf186(id){return WM_BLOCK186[id]||null}
+function wmName186(id){const L=WM_LABEL186[id];if(L)return LANG==='en'?L[1]:L[0];let n='';try{n=t(id)}catch(e){}return n&&n!==id?n:id}
+function wmState186(){if(!S.wm186)S.wm186={seen:[]};return S.wm186}
+function wmOpened186(){const st=wmState186();const cur=wmBlockOf186(M&&M.id);if(cur&&!st.seen.includes(cur))st.seen.push(cur);return st.seen}
+function wmLoad186(cb){if(WM186.data||WM186.fail){cb();return}if(WM186.loading){WM186.loading.push(cb);return}WM186.loading=[cb];const done=()=>{const l=WM186.loading||[];WM186.loading=false;for(const f of l)try{f()}catch(e){}};
+  fetch('world-map.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(d=>{if(!d||!d.blocks)throw 0;WM186.data=d;const im=new Image();im.onload=()=>{WM186.img=im;done()};im.onerror=()=>{WM186.img=null;done()};im.src=d.img||'world-map.jpg'}).catch(()=>{WM186.fail=true;done()})}
+function wmKnown186(id){const B=WM186.data.blocks,b=B[id];if(!b)return 'sea';const op=wmOpened186();if(op.includes(id))return 'open';for(const o of op){const a=B[o];if(a&&Math.abs(a.c-b.c)+Math.abs(a.r-b.r)===1)return 'next'}return 'far'}
+const WM_COL186={meadow:'#5f9a4a',forest:'#3f7a3c',mushroom:'#8a5aa0',water:'#3f8fb8',desert:'#d5b36a',snow:'#dfe7ef',thorn:'#5a4a3a',plateau:'#9a8a6a',mountain:'#8a8498',volcano:'#8a4a3a',mirror:'#9ab8c8',mystery:'#7a6aa8',dark:'#3a3048',sea:'#2f6aa0'};
+function wmBiome186(b){const d=WM186.data;const m=LANG==='en'?(d.biomeEn||{}):(d.biomeTh||{});return m[b]||b}
+function wmRealm186(r){return r==='light'?t('wmLight'):r==='mystery'?t('wmMystery'):r==='dark'?(isKid()?t('wmDark'):t('wmDarkAge')):t('wmSea')}
+function wmIdOf186(c,r){return String.fromCharCode(65+c)+(r+1)}
+// ---------- the page ----------
+{const st=document.createElement('style');st.textContent=`
+#wm186{position:fixed;inset:0;z-index:28;background:#140e22;color:#fff3db;font-family:Itim,system-ui,sans-serif;display:flex;flex-direction:column;gap:5px;padding:calc(5px + env(safe-area-inset-top,0px)) calc(10px + env(safe-area-inset-right,0px)) calc(5px + env(safe-area-inset-bottom,0px)) calc(10px + env(safe-area-inset-left,0px));box-sizing:border-box;touch-action:manipulation;user-select:none}
+#wm186.hide{display:none}#wm186 *{box-sizing:border-box}
+#wm186 .bar{display:flex;align-items:center;gap:8px;min-height:36px;flex:none}#wm186 .bar h2{margin:0;font-size:19px;font-weight:400;color:#f4d896;white-space:nowrap;border:0;padding:0}
+#wm186 .crumb{color:#b8a88f;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0}
+#wm186 button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+#wm186 .btn{display:inline-flex;align-items:center;gap:5px;border:1px solid #775531;background:#291b3a;border-radius:99px;padding:0 13px;min-height:36px;font-size:14px;white-space:nowrap;box-shadow:none;width:auto;min-width:0}
+#wm186 .btn.gold{background:linear-gradient(#e6c784,#c39a52);color:#2a1a08;border-color:#f4d896;font-weight:700}
+#wm186 .btn.pulse{animation:wmPulse186 1.3s ease-in-out infinite}@keyframes wmPulse186{0%,100%{box-shadow:0 0 0 0 #f4d89699}50%{box-shadow:0 0 0 7px #f4d89600}}
+#wm186 .tip{position:absolute;left:0;top:40px;background:#fff0cd;color:#2a1a08;border-radius:9px;padding:4px 9px;font-size:13px;z-index:3;white-space:nowrap;box-shadow:0 3px 9px #0008}#wm186 .tip:before{content:'';position:absolute;left:18px;top:-6px;border:6px solid transparent;border-top:0;border-bottom-color:#fff0cd}
+#wm186 .main{display:flex;gap:8px;flex:1;min-height:0}
+#wm186 .stage{position:relative;flex:none;border:2px solid #775531;border-radius:10px;overflow:hidden;background:#17131f}
+#wm186 .stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+#wm186 .cells{position:absolute;inset:0;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(5,1fr)}
+#wm186 .cell{position:relative;border:1px solid #fff3db22;background:transparent;padding:2px 3px;text-align:left;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;overflow:hidden;min-width:0;border-radius:0;box-shadow:none;min-height:0}
+#wm186 .cell.far{background:#120c20a8}#wm186 .cell.next{background:#120c2060}#wm186 .cell.sel{outline:2px solid #f4d896;outline-offset:-2px;z-index:2}#wm186 .cell.sea{pointer-events:none}
+#wm186 .cell .id{font-size:.8em;color:#fff3db99;line-height:1}#wm186 .cell .nm{font-size:1em;line-height:1.15;color:#fff3db;text-shadow:0 1px 2px #000,0 0 4px #000;margin-top:1px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+#wm186 .cell .lk{position:absolute;right:3px;top:2px;font-size:1em;opacity:.9}#wm186 .cell .you{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#f2c230;color:#2a1a08;border-radius:99px;padding:1px 7px;font-size:1em;font-weight:700;box-shadow:0 2px 5px #0009}
+#wm186 .pins{position:absolute;inset:0;pointer-events:none}#wm186 .pin{position:absolute;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;pointer-events:none}
+#wm186 .pin b{display:block;width:10px;height:10px;border-radius:99px;background:#f4d896;border:2px solid #2a1a08;box-shadow:0 0 6px #f4d896}#wm186 .pin.me b{background:#f2c230;width:14px;height:14px}
+#wm186 .pin i{font-style:normal;font-size:11px;background:#17131fd0;padding:1px 6px;border-radius:7px;white-space:nowrap;margin-top:2px;color:#fff3db}#wm186 .pin.lk b{background:#8f879c;box-shadow:none}
+#wm186 .pan{position:absolute;z-index:3;width:30px;height:30px;border-radius:99px;border:1px solid #775531;background:#291b3ae0;padding:0;font-size:13px;display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;box-shadow:none}
+#wm186 .pan.n{left:50%;top:3px;transform:translateX(-50%)}#wm186 .pan.s{left:50%;bottom:3px;transform:translateX(-50%)}#wm186 .pan.w{left:3px;top:50%;transform:translateY(-50%)}#wm186 .pan.e{right:3px;top:50%;transform:translateY(-50%)}
+#wm186 .hint{position:absolute;left:6px;bottom:6px;background:#17131fd9;color:#fff3db;border-radius:99px;padding:3px 10px;font-size:11px;pointer-events:none;z-index:3;max-width:70%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#wm186 .panel{flex:1;min-width:0;border:1px solid #775531;border-radius:10px;background:#1d1430;overflow:auto;padding:8px 9px;display:flex;flex-direction:column;gap:7px;-webkit-overflow-scrolling:touch}
+#wm186 .panel h3{margin:0;font-size:17px;font-weight:400;color:#f4d896;display:flex;align-items:center;gap:6px;line-height:1.2}
+#wm186 .chips{display:flex;flex-wrap:wrap;gap:4px}#wm186 .chip{font-size:11px;border:1px solid #4a3763;border-radius:99px;padding:1px 8px;color:#b8a88f;white-space:nowrap}#wm186 .chip.me{border-color:#f2c230;color:#f2c230}
+#wm186 .tabs{display:flex;gap:4px;flex-wrap:wrap}#wm186 .tabs button{border:1px solid #4a3763;background:#291b3a;border-radius:8px;padding:4px 9px;font-size:12px;min-height:30px;min-width:0;box-shadow:none}#wm186 .tabs button.on{background:#f4d896;color:#2a1a08;border-color:#f4d896}
+#wm186 .thumb{position:relative;width:100%;border:1px solid #4a3763;border-radius:8px;overflow:hidden;background:#17131f;flex:none}#wm186 .thumb canvas{display:block;width:100%;height:auto}
+#wm186 .thumb .tp{position:absolute;transform:translate(-50%,-50%);font-size:12px;line-height:1;pointer-events:none;text-shadow:0 0 3px #000,0 0 3px #000}#wm186 .thumb .tp.me{font-size:15px}
+#wm186 .list{display:flex;flex-direction:column;gap:4px}#wm186 .list button{display:flex;align-items:center;gap:6px;text-align:left;border:1px solid #4a3763;background:#291b3a;border-radius:8px;padding:5px 9px;min-height:40px;font-size:13px;width:100%;box-shadow:none;min-width:0}
+#wm186 .list button.lock{opacity:.7}#wm186 .list button .sub{margin-left:auto;font-size:11px;color:#b8a88f;white-space:nowrap}
+#wm186 .note{font-size:12px;color:#b8a88f;margin:0}#wm186 .sec{font-size:12px;color:#b8a88f;margin:2px 0 0;border-top:1px solid #4a376355;padding-top:5px}
+#wm186 .foot{margin-top:auto;font-size:11px;color:#b8a88f}
+@media (max-height:420px){#wm186 .bar{min-height:32px}#wm186 .bar h2{font-size:16px}#wm186 .panel{padding:6px 7px}#wm186 .list button{min-height:36px;font-size:12px}}`;document.head.appendChild(st)}
+function wmEl186(){let w=document.getElementById('wm186');if(w)return w;w=document.createElement('div');w.id='wm186';w.className='hide';
+  w.innerHTML='<div class="bar" style="position:relative"><button class="btn gold" id="wmWorld"></button><h2 id="wmTitle"></h2><div class="crumb" id="wmCrumb"></div><button class="btn" id="wmX">✕ <span></span></button><div class="tip hide" id="wmTip"></div></div>'+
+   '<div class="main"><div class="stage" id="wmStage"><canvas id="wmC"></canvas><div class="pins" id="wmPins"></div><div class="cells" id="wmCells"></div>'+
+   '<button class="pan n" data-pan="0,-2">▲</button><button class="pan s" data-pan="0,2">▼</button><button class="pan w" data-pan="-2,0">◀</button><button class="pan e" data-pan="2,0">▶</button><div class="hint" id="wmHint"></div></div><div class="panel" id="wmPanel"></div></div>';
+  document.body.appendChild(w);
+  w.querySelector('#wmX').onclick=()=>closeWorldMap186();
+  w.querySelector('#wmWorld').onclick=()=>{const st=wmState186();st.world=1;st.tip=1;if(WM186.view==='world'){wmNearAt186(WM186.cx,WM186.cy)}else{WM186.view='world';wmDraw186()}};
+  w.querySelectorAll('[data-pan]').forEach(b=>b.onclick=()=>{const [dx,dy]=b.dataset.pan.split(',').map(Number);wmNearAt186(WM186.cx+dx,WM186.cy+dy)});
+  w.querySelector('#wmStage').addEventListener('click',ev=>{if(WM186.view!=='world'||!WM186.data)return;const r=ev.currentTarget.getBoundingClientRect(),[gc,gr]=WM186.data.grid;const c=Math.floor((ev.clientX-r.left)/r.width*gc),rr=Math.floor((ev.clientY-r.top)/r.height*gr);wmNearAt186(c,rr);const id=wmIdOf186(Math.max(0,Math.min(gc-1,c)),Math.max(0,Math.min(gr-1,rr)));if(WM186.data.blocks[id])wmSelect186(id)});
+  return w}
+function openWorldMap186(){if(!S||!M)return;try{closeModal()}catch(e){}const w=wmEl186();WM186.open=true;w.classList.remove('hide');PAUSE=true;try{P.target=null;P.act=null}catch(e){}
+  const b=WM186.data?wmBlockOf186(M.id):null;WM186.sel=null;WM186.tab=M.id;
+  wmLoad186(()=>{if(!WM186.open)return;const cur=wmBlockOf186(M.id);if(WM186.data&&cur){const bb=WM186.data.blocks[cur];WM186.view='near';WM186.cx=bb.c;WM186.cy=bb.r;WM186.sel=cur}else WM186.view='list';wmDraw186()});
+  if(!WM186.data)wmDraw186()}
+function closeWorldMap186(){const w=document.getElementById('wm186');if(w)w.classList.add('hide');if(WM186.open){WM186.open=false;PAUSE=false}}
+{const old=closeModal;closeModal=function(){if(WM186.open){closeWorldMap186();return}return old.apply(this,arguments)}}
+function wmNearAt186(c,r){if(!WM186.data)return;const [gc,gr]=WM186.data.grid;WM186.cx=Math.max(2,Math.min(gc-3,c));WM186.cy=Math.max(2,Math.min(gr-3,r));WM186.view='near';wmDraw186()}
+function wmSelect186(id){WM186.sel=id;WM186.tab=null;wmDraw186()}
+// what the stage shows: the whole painting with the unknown blocks in mist, or the 5×5 window round the centre block
+function wmDraw186(){const w=wmEl186();if(!WM186.open)return;const st=wmState186(),D=WM186.data,kid=isKid();
+  w.querySelector('#wmTitle').textContent='🗺️ '+t('wmTitle');w.querySelector('#wmX').querySelector('span').textContent=t('wmClose');
+  const wb=w.querySelector('#wmWorld');wb.textContent=(WM186.view==='world'?'📍 '+t('wmNear'):'🌍 '+t('wmWorld'));wb.classList.toggle('pulse',!st.world&&WM186.view!=='world');wb.style.display=D?'':'none';
+  const tip=w.querySelector('#wmTip');tip.textContent=t('wmTipWorld');tip.classList.toggle('hide',!!st.tip||!D||WM186.view==='world');
+  const stage=w.querySelector('#wmStage'),cv=w.querySelector('#wmC'),cells=w.querySelector('#wmCells'),pins=w.querySelector('#wmPins'),hint=w.querySelector('#wmHint'),crumb=w.querySelector('#wmCrumb');
+  w.querySelectorAll('.pan').forEach(b=>b.style.display=(D&&WM186.view==='near')?'':'none');
+  if(!D){stage.style.display='none';crumb.textContent=t('wmNoData');wmPanel186(null);return}
+  stage.style.display='';{const mr=w.querySelector('.main').getBoundingClientRect();const sh=Math.max(60,Math.min(mr.height,(mr.width-8)*.62/1.5)),sw=sh*1.5;stage.style.width=sw+'px';stage.style.height=sh+'px';cells.style.fontSize=Math.max(10,Math.min(16,sw/5*.11))+'px'}   /* 3:2, as tall as the row allows, at most 62% of the width */
+  const [gc,gr]=D.grid,r=stage.getBoundingClientRect(),dpr=Math.min(2,devicePixelRatio||1),W=Math.max(2,Math.round(r.width*dpr)),H=Math.max(2,Math.round(r.height*dpr));if(cv.width!==W||cv.height!==H){cv.width=W;cv.height=H}
+  const g=cv.getContext('2d'),im=WM186.img,iw=im?im.naturalWidth:1536,ih=im?im.naturalHeight:1024,bw=iw/gc,bh=ih/gr,op=wmOpened186(),cur=wmBlockOf186(M.id);
+  g.clearRect(0,0,W,H);cells.innerHTML='';pins.innerHTML='';
+  if(WM186.view==='world'){if(im)g.drawImage(im,0,0,W,H);const cw=W/gc,ch=H/gr;
+    const far=new Path2D(),nxt=new Path2D();for(let rr=0;rr<gr;rr++)for(let c=0;c<gc;c++){const id=wmIdOf186(c,rr),b=D.blocks[id];if(!im){g.fillStyle=WM_COL186[b?b.b:'sea']||'#444';g.fillRect(c*cw,rr*ch,cw+1,ch+1)}const k=b?wmKnown186(id):'sea';if(k==='open')continue;(k==='next'?nxt:far).rect(c*cw,rr*ch,cw,ch)}g.fillStyle='rgba(22,15,40,.62)';g.fill(far);g.fillStyle='rgba(22,15,40,.34)';g.fill(nxt);
+    for(const [id,b] of Object.entries(D.blocks)){if(!(b.k||b.d)||op.includes(id))continue;const p=document.createElement('div');p.className='pin lk';p.style.left=((b.c+.5)/gc*100)+'%';p.style.top=((b.r+.5)/gr*100)+'%';p.innerHTML='<b></b>';pins.appendChild(p)}   /* towns and caves not reached yet: a grey dot, no name */
+    for(const id of op){const b=D.blocks[id];if(!b)continue;const me=id===cur;const p=document.createElement('div');p.className='pin'+(me?' me':'');p.style.left=((b.c+.5)/gc*100)+'%';p.style.top=((b.r+.5)/gr*100)+'%';p.innerHTML='<b></b><i>'+(me?'⭐ ':'')+(b.n||id)+'</i>';pins.appendChild(p)}
+    crumb.textContent=t('wmOpened')+' '+op.length;hint.textContent=t('wmTapWorld')}
+  else{const x0=WM186.cx-2,y0=WM186.cy-2;if(im)g.drawImage(im,x0*bw,y0*bh,5*bw,5*bh,0,0,W,H);
+    for(let j=0;j<5;j++)for(let i=0;i<5;i++){const c=x0+i,rr=y0+j,id=wmIdOf186(c,rr),b=D.blocks[id],k=b?wmKnown186(id):'sea';
+      if(!im){g.fillStyle=WM_COL186[b?b.b:'sea']||'#444';g.fillRect(i*W/5,j*H/5,W/5+1,H/5+1)}
+      const el=document.createElement('button');el.className='cell '+k+(id===WM186.sel?' sel':'');el.dataset.wm=id;
+      el.innerHTML='<span class="id">'+id+'</span>'+(k==='open'||k==='next'?'<span class="nm">'+(b.n||wmBiome186(b.b))+'</span>':'')+(k==='next'||k==='far'?'<span class="lk">🔒</span>':'')+(id===cur?'<span class="you">⭐ '+t('wmHere')+'</span>':'');
+      if(k!=='sea')el.onclick=()=>wmSelect186(id);cells.appendChild(el)}
+    crumb.textContent=t('wmArea')+' '+wmIdOf186(x0,y0)+' '+t('wmTo')+' '+wmIdOf186(x0+4,y0+4);hint.textContent=t('wmTapCell')}
+  wmPanel186(WM186.sel||cur)}
+// ---------- the panel: the block, its real maps, their places ----------
+function wmPlaces186(m){const out=[],en=LANG==='en';const add=(k,ic,label,x,y,sub)=>{out.push({k,ic,label,x,y,sub})};
+  try{if(m.id===M.id)add('you','⭐',t('wmYou'),P.x,P.y);
+   for(const e of m.exits||[]){if(e.to===m.id&&e.locked)continue;const lk=e.locked||(e.needBoss&&!S.boss)||(e.lockBoss&&m.boss&&!m.boss.happy);const DIR={n:['ทางเหนือ','North way'],s:['ทางใต้','South way'],e:['ทางตะวันออก','East way'],w:['ทางตะวันตก','West way']}[e.id];
+    if(lk)add('lock','🔒',DIR?(en?DIR[1]:DIR[0]):wmName186(e.to),e.x,e.y,t(e.msg||'soon'));else add('exit','🚪',t('wmNextMap')+' '+wmName186(e.to),e.x,e.y)}
+   for(const s of m.stones||[])add('stone','✨',t('wmStone')+(s.awake||S.stones.includes(s.id)?'':' ·'+' '+t('wmLocked')),s.x,s.y+10);
+   if(m.board)add('board','📜',t('wmBoard'),m.board.x,m.board.y+16);if(m.fishSpot)add('fish','🎣',t('wmFish'),m.fishSpot.x,m.fishSpot.y);
+   if(m.capA||m.h9){try{const [px,py]=m.id===M.id?mailDoorPt('post_office'):(m.h9?[H9.doors.post_office[0]*T,(H9.doors.post_office[1]+1)*T]:[(MAIL_DOORS.post_office[0]+.5)*T,(MAIL_DOORS.post_office[1]+.7)*T]);add('post','📮',t('wmPost'),px,py)}catch(e){}
+    try{const doors=m.h9?H9.doors:MAIL_DOORS;for(const k of Object.keys(doors)){if(k==='post_office')continue;const a=MAIL_TO[k];if(!a)continue;const d=doors[k];const [px,py]=m.h9?[d[0]*T,(d[1]+1)*T]:[(d[0]+.5)*T,(d[1]+.7)*T];add('door',a[2]||'🏠',en?a[4]:a[1],px,py,en?a[3]:a[0])}}catch(e){}}
+   for(const n of m.npcs||[]){let nm='';try{nm=t('n_'+n.npc)}catch(e){}if(nm&&nm!=='n_'+n.npc)add('npc','🧑',nm,n.x,n.y+22)}
+   const aw=(S.crystals&&S.crystals[m.id])||[],dg=(S.digs&&S.digs[m.id])||[];const cs=(m.crystals||[]).filter(c=>!(c.kidOnly&&!isKid()));cs.forEach((c,i)=>{const on=m.id===M.id?c.awake:aw.includes(c.id);add('cry',on?'💠':'💎',t('wmCrystal')+' '+(i+1),c.x,c.y+14,on?t('wmAwake'):'')});
+   (m.digs||[]).forEach((d,i)=>{if(!(m.id===M.id?d.done:dg.includes(d.id)))add('dig','⛏️',t('wmDig')+' '+(i+1),d.x,d.y)})}catch(e){}
+  return out}
+function wmThumb186(m){let c=WM186.thumbs[m.id];const pm=IMG[m.painted];if(c&&c._src===(pm||'tiles')&&(m.kind!=='cave'))return c;const tw=320,th=Math.round(tw*m.h/m.w);c=document.createElement('canvas');c.width=tw;c.height=th;const g=c.getContext('2d');
+  if(pm){g.drawImage(pm,0,0,tw,th)}else{const sx=tw/m.w,sy=th/m.h;for(let y=0;y<m.h;y++)for(let x=0;x<m.w;x++){const k=key(x,y);g.fillStyle=m.kind==='cave'?(m.FLOOR.has(k)?'#8a6a4a':'#3b3050'):m.kind==='room'?(m.FLOOR.has(k)?'#c98a4a':'#e8dcc0'):m.CLIFF.has(k)?'#6b6384':m.WATER.has(k)?'#3aa7c2':m.COBBLE.has(k)?'#cfc2a8':m.PATH.has(k)?'#d8b879':'#4c8a3e';g.fillRect(x*sx,y*sy,sx+.5,sy+.5)}}
+  if(m.kind==='cave'&&m.seen){const sx=tw/m.w,sy=th/m.h;g.fillStyle='rgba(12,8,22,.9)';for(let y=0;y<m.h;y++)for(let x=0;x<m.w;x++)if(!m.seen.has(key(x,y)))g.fillRect(x*sx,y*sy,sx+.5,sy+.5)}
+  c._src=pm||'tiles';WM186.thumbs[m.id]=c;return c}
+function wmPanel186(bid){const w=wmEl186(),pn=w.querySelector('#wmPanel'),D=WM186.data,kid=isKid(),cur=wmBlockOf186(M.id);let h='';
+  const mapsOf=(b)=>(WM_MAPS186[b]||[]).filter(id=>MAPS[id]).map(id=>id==='capital'&&M.id==='h9'?'h9':id);   /* the village is the h9 scene only while you stand in it */
+  if(!D||!bid){h='<h3>🗺️ '+t('wmThisMap')+'</h3>';h+=wmMapSection186(M);pn.innerHTML=h+wmFoot186();wmBindPanel186(pn);pn.scrollTop=0;return}
+  const b=D.blocks[bid],k=wmKnown186(bid);if(!b){pn.innerHTML='<p class="note">'+t('wmSea')+'</p>';return}
+  const name=k==='far'?t('wmUnknown'):(b.n||wmBiome186(b.b));
+  h+='<h3>'+(bid===cur?'⭐ ':k==='open'?'📍 ':'🔒 ')+name+'</h3><div class="chips"><span class="chip'+(bid===cur?' me':'')+'">'+t('wmBlock')+' '+bid+'</span>';
+  if(k!=='far'){h+='<span class="chip">'+wmBiome186(b.b)+'</span><span class="chip">'+wmRealm186(b.rl)+'</span>';if(b.ch&&!kid)h+='<span class="chip">'+t('wmChapter')+' '+b.ch+'</span>'}h+='</div>';
+  if(k==='open'){const ms=mapsOf(bid);let tab=WM186.tab&&ms.includes(WM186.tab)?WM186.tab:(ms.includes(M.id)?M.id:ms[0]);
+    if(ms.length>1)h+='<div class="tabs">'+ms.map(id=>'<button data-tab="'+id+'" class="'+(id===tab?'on':'')+'">'+(id===M.id?'⭐ ':'')+wmName186(id)+'</button>').join('')+'</div>';
+    if(tab){let m=null;try{m=tab===M.id?M:getMap(tab)}catch(e){}if(m)h+=wmMapSection186(m);else h+='<p class="note">'+t('soon')+'</p>'}
+    if(b.d&&!kid){let fl=0;for(const id of ms)if(/^hunt|cave|mouth/.test(id))fl++;h+='<p class="sec">🕳️ '+b.d[0]+' · '+b.d[1]+' '+t('wmFloors')+'</p>'}
+    try{if(rHas('warp')&&(S.stones||[]).length)h+='<button class="btn" data-warp="1" style="margin-top:4px">✨ '+t('wmStones')+'</button>'}catch(e){}}
+  else if(k==='next'){let why='';try{const em=mapsOf(cur)[0];const m=em===M.id?M:getMap(em);const a=D.blocks[cur];const dir=b.c>a.c?'e':b.c<a.c?'w':b.r>a.r?'s':'n';const e=(m.exits||[]).find(x=>x.id===dir);if(e&&e.locked)why=t(e.msg||'soon');else if(e)why=''}catch(e){}
+    h+='<p class="note">🔒 '+t('wmLocked')+(why?' · '+why:'')+'</p>';if(b.d&&!kid)h+='<p class="sec">🕳️ '+b.d[0]+'</p>';
+    const em=(WM_MAPS186[bid]||[])[0];if(em&&MAPS[em])h+='<button class="btn" data-go="'+em+'" style="margin-top:4px">🧭 '+t('wmWalk')+'</button>'}
+  else h+='<p class="note">'+t('wmMore')+'</p>';
+  pn.innerHTML=h+wmFoot186();wmBindPanel186(pn);pn.scrollTop=0}
+function wmFoot186(){return '<p class="foot">'+t('wmLegend')+'</p>'}
+function wmMapSection186(m){const P2=wmPlaces186(m),c=wmThumb186(m);let h='<div class="thumb" data-thumb="'+m.id+'"><canvas width="'+c.width+'" height="'+c.height+'"></canvas>';
+  for(const p of P2){if(p.k==='door')continue;h+='<span class="tp'+(p.k==='you'?' me':'')+'" style="left:'+(p.x/(m.w*T)*100).toFixed(1)+'%;top:'+(p.y/(m.h*T)*100).toFixed(1)+'%">'+p.ic+'</span>'}
+  h+='</div><p class="sec">'+t('wmPlaces')+'</p><div class="list">';
+  P2.forEach((p,i)=>{if(p.k==='you')return;h+='<button data-pl="'+i+'" data-map="'+m.id+'" class="'+(p.k==='lock'?'lock':'')+'"><span>'+p.ic+'</span><span>'+p.label+'</span>'+(p.sub?'<span class="sub">'+p.sub+'</span>':'')+'</button>'});
+  h+='</div>';WM186.places=WM186.places||{};WM186.places[m.id]=P2;return h}
+function wmBindPanel186(pn){pn.querySelectorAll('[data-thumb]').forEach(d=>{const c=WM186.thumbs[d.dataset.thumb];const cv=d.querySelector('canvas');if(c&&cv)cv.getContext('2d').drawImage(c,0,0)});
+  pn.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{WM186.tab=b.dataset.tab;wmPanel186(WM186.sel||wmBlockOf186(M.id))});
+  pn.querySelectorAll('[data-pl]').forEach(b=>b.onclick=()=>{const p=(WM186.places[b.dataset.map]||[])[+b.dataset.pl];if(p)wmWalk186(b.dataset.map,p.x,p.y,p.ic+' '+p.label)});
+  pn.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{let m=null;try{m=getMap(b.dataset.go)}catch(e){}if(!m)return;const p=m.spawnDefault||[m.w*T/2,m.h*T/2];wmWalk186(m.id,p[0],p[1],'📍 '+wmName186(m.id))});
+  const wp=pn.querySelector('[data-warp]');if(wp)wp.onclick=()=>{closeWorldMap186();try{wmOldWarp186()}catch(e){}}}
+// ---------- walking: this map now, another map through the exits in between ----------
+function wmRoute186(from,to){if(from===to)return [from];const prev=new Map([[from,null]]);const q=[from];let n=0;
+  while(q.length&&n++<40){const id=q.shift();let m=null;try{m=id===M.id?M:getMap(id)}catch(e){continue}
+    for(const e of m.exits||[]){const nx=e.to;if(!nx||nx===id||prev.has(nx)||!MAPS[nx]||e.locked||(e.needBoss&&!S.boss)||(e.lockBoss&&m.boss&&!m.boss.happy))continue;prev.set(nx,id);if(nx===to){const out=[to];let c=id;while(c){out.unshift(c);c=prev.get(c)}return out}q.push(nx)}}
+  return null}
+function wmWalk186(mapId,x,y,label){closeWorldMap186();if(!S||!M||!P||P.dead)return;
+  if(mapId===M.id){ROV180.route=null;guideSet183({k:'wm',label,x,y});guideWalk183();return}
+  const hops=wmRoute186(M.id,mapId);if(!hops){say('🧭 '+t('wmRouteNone'));return}ROV180.route={dest:{map:mapId,x,y,label},hops};say('🧭 '+t('wmGoing')+' '+label.replace(/^\S+\s/,''));wmHop186();try{hud()}catch(e){}}
+function wmHop186(){const R=ROV180.route;if(!R||!M||!P)return false;const i=R.hops.indexOf(M.id);if(i<0){ROV180.route=null;try{hud()}catch(e){}return false}
+  if(M.id===R.dest.map){ROV180.route=null;guideSet183({k:'wm',label:R.dest.label,x:R.dest.x,y:R.dest.y});return guideWalk183()}
+  const nx=R.hops[i+1],e=(M.exits||[]).find(q=>q.to===nx&&!q.locked);if(!e){ROV180.route=null;say('🧭 '+t('wmRouteNone'));return false}
+  const p=findPath(M,P.x,P.y,e.x,e.y);if(!p||!p.length){ROV180.route=null;say('🧭 '+t('wmRouteNone'));return false}P.target=null;P.act=null;P.sit=0;try{HOLD=null}catch(x){}P.path=p;return true}
+{const old=goMap;goMap=function(){const R=ROV180.route;const r=old.apply(this,arguments);try{if(R){ROV180.route=R;setTimeout(()=>{try{if(ROV180.route===R)wmHop186()}catch(e){}},60)}}catch(e){}return r}}
+{const old=guideGo180;guideGo180=function(){if(ROV180.route&&S&&M&&P&&!PAUSE&&!DLG&&!P.dead){if(!wmHop186())return;return}return old.apply(this,arguments)}}
+{const old=rovShow180;rovShow180=function(){const r=old.apply(this,arguments);try{const R=ROV180.route,bq=document.getElementById('bQuest');if(R&&bq){bq.classList.remove('dim183');const l=bq.querySelector('small'),v=R.dest.label.replace(/^\S+\s/,'').slice(0,8);if(l&&l.textContent!==v)l.textContent=v}}catch(e){}return r}}
+// ---------- the way in: the map button for everyone (the stone warp list moved inside), the minimap, the child's bag, key M ----------
+const wmOldWarp186=openWarp;openWarp=function(){openWorldMap186()};
+try{delete RANK_BTN.bMap}catch(e){}
+{const old=hud;hud=function(){const r=old.apply(this,arguments);try{const b=document.getElementById('bMap');if(b&&b.style.display==='none'){b.style.display='';b.dataset.rk='1'}}catch(e){}return r}}
+{const old=openBag;openBag=function(){const r=old.apply(this,arguments);try{if(S&&isKid()){const host=document.getElementById('mBody');if(host&&!host.querySelector('#bKidMap171')&&!host.querySelector('#bKidMap186')){const anchor=host.querySelector('#bKidBook171')||host.querySelector('#rkBtn')||host.querySelector('h2');if(anchor){const b=document.createElement('button');b.id='bKidMap186';b.textContent='🗺️ '+t('wmTitle');b.onclick=()=>{closeModal();openWorldMap186()};anchor.after(b)}}}}catch(e){}return r}}
+{const old=goMap;goMap=function(){const r=old.apply(this,arguments);try{if(S&&M)wmOpened186()}catch(e){}return r}}
+addEventListener('keydown',e=>{try{if(WM186.open&&(e.key==='Escape'||e.key==='m')){e.stopImmediatePropagation();closeWorldMap186()}}catch(err){}},true);
+addEventListener('resize',()=>{try{if(WM186.open)wmDraw186()}catch(e){}});
 </script></body></html>

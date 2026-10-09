@@ -25,7 +25,8 @@ const quiet = pg => pg.evaluate(() => { try { closeModal(); } catch (e) { } if (
 // buttons a player can see and touch on the main screen (not inside a window)
 const mainButtons = pg => pg.evaluate(() => [...document.querySelectorAll('button')].filter(b => { const r = b.getBoundingClientRect(), s = getComputedStyle(b);
   return r.width > 4 && r.height > 4 && s.display !== 'none' && s.visibility !== 'hidden' && +s.opacity > .05 && !b.closest('#modal') && !b.closest('#cr') && !b.closest('#title') && !b.closest('#picker'); }).map(b => b.id || '?').filter(id => !/^context/.test(id)).sort());
-const windowTitle = pg => pg.evaluate(() => { const m = document.getElementById('modal'); return m && !m.classList.contains('hide') ? ((m.querySelector('h2') || {}).textContent || '(no title)').trim() : null; });
+const windowTitle = pg => pg.evaluate(() => { const w = document.getElementById('wm186'); if (w && !w.classList.contains('hide')) return ((w.querySelector('#wmTitle') || {}).textContent || '(map page)').trim();   /* 1.86: the map is a full page, not a modal */
+  const m = document.getElementById('modal'); return m && !m.classList.contains('hide') ? ((m.querySelector('h2') || {}).textContent || '(no title)').trim() : null; });
 // a player made by hand in the creator: tap the age, tap start, tap through the opening lines
 async function newPlayer(browser, w, h, age, opts) {
   const { ctx, pg } = await open(browser, w, h, '?rank=1', opts); await sleep(2500);
