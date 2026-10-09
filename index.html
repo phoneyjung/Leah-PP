@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.04';
+const VERSION='Lantern Academy 2.05';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -6549,7 +6549,7 @@ function openAdult201(){if(!gmOn())return;const owner=S;let closed=false;
  const draw=tm=>{if(!live())return;const c=$('ad201cv'),g=c.getContext('2d');g.clearRect(0,0,c.width,c.height);g.imageSmoothingEnabled=false;g.fillStyle='#3a2f4f';g.fillRect(0,c.height-14,c.width,14);
   const k=AD201.kid,sh=AD201.sheets,base=c.height-14,H=AD201.h;if(k&&H.k==null)H.k=ad201Height(k.im,k.F,0);if(sh&&H.a==null)H.a=ad201Height(sh.stand,ad201F(),0);const hk=k?H.k:0,ha=sh?H.a:0;
   if(k){g.drawImage(k.im,0,0,k.F,k.F,40-k.F/2,base-(k.F-2),k.F,k.F)}   /* the slot's own child, front view, same scale */
-  if(sh){const col=Math.floor(tm/1400)%8,F=sh.stand.height;g.drawImage(sh.stand,col*F,0,F,F,150-F/2,base-(F-2),F,F)}
+  if(sh){const col=Math.floor(tm/1400)%8,F=sh.stand.height,im=(typeof ad205Stand==='function'&&ad205Stand(sh))||sh.stand;g.drawImage(im,col*F,0,F,F,150-F/2,base-(F-2),F,F)}   /* 2.05: the chosen colours on the preview */
   g.font='bold 11px sans-serif';g.fillStyle='#f6e2b0';g.textAlign='center';if(k)g.fillText(t('ad201Kid')+' '+hk+' px',40,c.height-3);if(sh)g.fillText(t('ad201Adult')+' '+ha+' px',150,c.height-3);
   if(hk&&ha){g.textAlign='left';g.fillText(t('ad201Tall')+' '+(ha/hk).toFixed(2)+'×',220,24)}
   requestAnimationFrame(draw)};requestAnimationFrame(draw)}
@@ -6604,4 +6604,40 @@ function ad203Zoom(){const root=$('ad201');if(!root||root.querySelector('.ad203z
 // the trial row: green coat · 128 · 96 · 72 A · 72 B (short names, the heights are drawn under the picture)
 try{Object.assign(TX.th,{ad202Green:'เขียว',ad202A:'128',ad203A:'96',ad204A:'72 ก',ad204B:'72 ข'});if(TX.en)Object.assign(TX.en,{ad202Green:'Green',ad202A:'128',ad203A:'96',ad204A:'72 A',ad204B:'72 B'})}catch(e){}
 {const st=document.createElement('style');st.textContent=`#ad201 .ad202v button{min-width:52px}@media (max-height:520px){#ad201 .ad202v{gap:5px}#ad201 .ad202v button{padding:4px 6px;font-size:12px}}`;document.head.appendChild(st)}
+// ---- 2.05 (owner 9 Oct 23:14 "ต่อเลย" while the walk is made in PixelLab): hair · eye · coat colours on the chosen adult "72 ก" in the GM trial ----
+// the chosen run already carries the key colours (green hair, cyan eyes, crimson-magenta coat), so the game recolours it at run time, like keyFix/recolorKey do for the children;
+// the file is never changed · the colour classes come from this sheet's own palette (measured 9 Oct): hair hue 60–190°, eyes hue 183–202° and saturated, coat hue 318–347° and saturated;
+// steel (blue-grey, pale), gold, skin, leather and outlines stay as drawn · picks are kept per GM slot in S.gmAdultCol {h: hair −1/0–7, e: eye −1/0–4, b: house −1/0–3}, −1 = as drawn
+try{Object.assign(TX.th,{ad205Hair:'ผม',ad205Eye:'ตา',ad205Coat:'เสื้อ',ad205Orig:'เดิม',ad205Only:'เปลี่ยนสีได้กับ 72 ก'});if(TX.en)Object.assign(TX.en,{ad205Hair:'Hair',ad205Eye:'Eyes',ad205Coat:'Coat',ad205Orig:'As drawn',ad205Only:'Colours work on 72 A'})}catch(e){}
+const AD205={rules:{m72a:{hair:[60,190,.15],eye:[183,202,.55,.22],coat:[318,347,.55]}},cache:new Map(),n:0};
+function ad205Col(){const c=(S&&S.gmAdultCol)||{};return {h:c.h==null?-1:c.h,e:c.e==null?-1:c.e,b:c.b==null?-1:c.b}}
+function ad205Class(r,g,b,R){const [h,s,l]=hslOf(r/255,g/255,b/255);if(h>=R.eye[0]&&h<=R.eye[1]&&s>=R.eye[2]&&l>=R.eye[3])return 2;if(h>=R.hair[0]&&h<=R.hair[1]&&s>=R.hair[2])return 1;if(h>=R.coat[0]&&h<=R.coat[1]&&s>=R.coat[2])return 3;return 0}
+// one sheet recoloured (cached): hair and eyes by brightness rank onto the game's colour ramps, the coat onto the house colour's light range
+function ad205Paint(src,v,c){const R=AD205.rules[v];if(!R||!src||(c.h<0&&c.e<0&&c.b<0))return src;if(!src._id205)src._id205=++AD205.n;const key=src._id205+'|'+v+'|'+c.h+'|'+c.e+'|'+c.b;if(AD205.cache.has(key))return AD205.cache.get(key);
+  const out=toCanvas(src),g=out.getContext('2d'),d=g.getImageData(0,0,out.width,out.height),p=d.data,N=p.length/4,cls=new Uint8Array(N),lum=new Float32Array(N),idx=[[],[],[],[]];
+  for(let j=0;j<N;j++){const i=j*4;if(p[i+3]<60)continue;const k=ad205Class(p[i],p[i+1],p[i+2],R);if(!k)continue;cls[j]=k;lum[j]=.3*p[i]+.59*p[i+1]+.11*p[i+2];idx[k].push(j)}
+  const ramp=(list,cols)=>{if(!list.length||!cols)return;const vals=list.map(j=>lum[j]).sort((a,b)=>a-b),dark=cols[0].map(x=>Math.round(x*.55)),all=[dark].concat(cols);
+    const rank=v=>{let lo=0,hi=vals.length-1;while(lo<hi){const m=(lo+hi)>>1;if(vals[m]<v)lo=m+1;else hi=m}return lo/Math.max(1,vals.length-1)};
+    for(const j of list){const col=all[Math.min(all.length-1,Math.floor(rank(lum[j])*all.length))],i=j*4;p[i]=col[0];p[i+1]=col[1];p[i+2]=col[2]}};
+  if(c.h>=0&&HAIRC[c.h])ramp(idx[1],HAIRC[c.h][3]);
+  // eyes keep their own light and sparkle (a darker ramp made them dull at 72 px): the hue and saturation move to the chosen colour, the brightness stays (a little lower for dark colours), the near-white shine is kept
+  if(c.e>=0&&EYEC[c.e]){const m=EYEC[c.e][3][1],[th,ts,tl]=hslOf(m[0]/255,m[1]/255,m[2]/255),k=Math.min(1,.6+.8*tl);for(const j of idx[2]){const i=j*4,[h,s,l]=hslOf(p[i]/255,p[i+1]/255,p[i+2]/255);if(l>.8)continue;const [r,g2,b2]=rgbOf(th,ts<.25?ts:Math.max(ts,.45),Math.min(.95,l*k));p[i]=Math.round(r*255);p[i+1]=Math.round(g2*255);p[i+2]=Math.round(b2*255)}}
+  if(c.b>=0&&HOUSES[c.b]&&idx[3].length){const Ls=idx[3].map(j=>{const i=j*4;return hslOf(p[i]/255,p[i+1]/255,p[i+2]/255)[2]}),st=[...Ls].sort((a,b)=>a-b),lo=st[Math.floor(st.length*.03)],hi=st[Math.floor(st.length*.97)],[hh,a,bb,sat]=HOUSES[c.b].h;
+    idx[3].forEach((j,k)=>{const tt=Math.min(1,Math.max(0,(Ls[k]-lo)/(hi-lo+1e-6))),[r,g2,b2]=rgbOf(hh,sat,a+tt*(bb-a)),i=j*4;p[i]=Math.round(r*255);p[i+1]=Math.round(g2*255);p[i+2]=Math.round(b2*255)})}
+  g.putImageData(d,0,0);if(AD205.cache.size>24)AD205.cache.clear();AD205.cache.set(key,out);return out}
+function ad205Stand(sh){try{return AD205.rules[AD201.v]?ad205Paint(sh.stand,AD201.v,ad205Col()):sh.stand}catch(e){return sh.stand}}
+// in the world: the trial sprite is recoloured after it is built (the shape and its shadow do not change)
+{const old=buildPlayerSheets;buildPlayerSheets=function(){const r=old.apply(this,arguments);try{if(ad201Selected()&&PS.gmSprite170&&AD205.rules[AD201.v]&&AD201.sheets){const c=ad205Col();PS.stand=ad205Paint(AD201.sheets.stand,AD201.v,c);PS.walk=ad205Paint(AD201.sheets.walk,AD201.v,c)}}catch(e){}return r}}
+// the trial window: three buttons that step through the colours (as drawn → the game's list), live on the preview and, when this model is in use, on the character
+function ad205Row(){const root=$('ad201');if(!root||root.querySelector('.ad205c'))return;const row=document.createElement('div');row.className='ad205c';
+  row.innerHTML=['h','e','b'].map(k=>`<button type="button" data-k="${k}"><i></i><span>${t(k==='h'?'ad205Hair':k==='e'?'ad205Eye':'ad205Coat')}</span></button>`).join('')+`<small>${t('ad205Only')}</small>`;
+  const n={h:HAIRC.length,e:EYEC.length,b:HOUSES.length},css=(k,i)=>i<0?'':k==='h'?HAIRC[i][2]:k==='e'?EYEC[i][2]:HOUSES[i].col;
+  const mark=()=>{const on=!!AD205.rules[AD201.v],c=ad205Col();row.classList.toggle('off',!on);row.querySelectorAll('button').forEach(b=>{b.disabled=!on;const k=b.dataset.k,i=c[k],dot=b.querySelector('i');dot.style.background=i<0?'repeating-linear-gradient(45deg,#ddd 0 3px,#999 3px 6px)':css(k,i);b.title=i<0?t('ad205Orig'):''})};
+  row.querySelectorAll('button').forEach(b=>b.onclick=()=>{if(!S||!AD205.rules[AD201.v])return;const k=b.dataset.k,c=ad205Col();c[k]=c[k]+1>=n[k]?-1:c[k]+1;S.gmAdultCol=c;try{save()}catch(e){}
+    if(S.gmSprite170==='adult201'&&S.gmAdult202===AD201.v)try{buildPlayerSheets()}catch(e){}mark()});
+  const v=root.querySelector('.ad203z')||root.querySelector('.ad202v')||$('ad201cv');v.after(row);mark();const vr=root.querySelector('.ad202v');if(vr)vr.addEventListener('click',()=>setTimeout(mark,0))}
+{const old=openAdult201;openAdult201=function(){const r=old.apply(this,arguments);try{ad205Row()}catch(e){}return r}}
+{const st=document.createElement('style');st.textContent=`#ad201 .ad205c{display:flex;gap:6px;align-items:center;justify-content:center;flex-wrap:wrap;margin:6px 0 0}#ad201 .ad205c button{min-height:44px;padding:4px 10px;display:flex;gap:6px;align-items:center;font-size:13px;border-radius:10px}
+#ad201 .ad205c button i{display:inline-block;width:16px;height:16px;border-radius:50%;border:2px solid #fff8;box-sizing:border-box}#ad201 .ad205c small{display:none;font-size:11px;opacity:.75}#ad201 .ad205c.off small{display:inline}#ad201 .ad205c.off button{opacity:.4}
+@media (max-height:520px){#ad201 .ad205c{grid-column:2;grid-row:5;justify-content:flex-start;margin:0}#ad201 .ad205c button{padding:4px 8px;font-size:12px}}`;document.head.appendChild(st)}
 </script></body></html>
