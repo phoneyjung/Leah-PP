@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.00';
+const VERSION='Lantern Academy 2.01';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -6506,4 +6506,55 @@ body.thumbs.rov180 #act #bQuest{right:${R(14)}!important;bottom:${B(186)}!import
 #act #bCtx200.hide{display:none!important}#act #bCtx200 .ic200{font-size:18px;line-height:1;display:block}#act #bCtx200 .w200{font-size:8.5px;line-height:1;margin-top:1px;font-weight:700;white-space:nowrap;max-width:40px;overflow:hidden}
 #act #bCtx200:active{transform:scale(.92)}
 @keyframes ctxIn200{from{transform:scale(.4);opacity:0}to{transform:none;opacity:1}}`;document.head.appendChild(st)}
+// ---- 2.01 (owner 9 Oct 17:25 "อยากเปลี่ยนโมเดลต้นแบบเป็นแบบนี้ สร้างใหม่หมดก็ได้"): the new adult model in GM at its real size, before any spec ----
+// the owner's PixelLab file (adult_male_swordsman…zip, 8 standing views 128×128, no walk yet) packed as gm-adult-201.png 1024×128 in the game's order
+// S SE E NE N NW W SW · pixels untouched: the code only sets its foot line (y 111 in the file) on the game's foot line (frame bottom − 2) and bobs it 1 px while walking
+// GM slot only, like the 1.70 swordsman trial (S.gmSprite170='adult201'); the HUD portrait, other players and the bag keep the character of the slot
+const AD201={sheets:null,pending:null,error:false,foot:111,h:{},bob:[0,-1,-1,0,-1,-1],kid:null};
+try{Object.assign(TX.th,{ad201Btn:'ลองต้นแบบผู้ใหญ่ใหม่ (9 ต.ค.)',ad201T:'ต้นแบบผู้ใหญ่ใหม่ · ขนาดจริง',ad201P:'ภาพจากไฟล์ PixelLab ที่คุณเลือก ขนาดเท่าไฟล์ (1 พิกเซลภาพ = 1 พิกเซลเกม) · ยังไม่มีท่าเดิน ตัวจะเลื่อนไปเฉย ๆ · เฉพาะเซฟ GM',
+  ad201Use:'ใช้ในฉาก ลองเดินดู',ad201Back:'กลับเป็นตัวเดิม',ad201Close:'ปิด',ad201Ok:'ภาพพร้อม · กดใช้ในฉาก แล้วเดินไปเทียบกับเด็ก NPC และบ้าน',ad201Bad:'โหลดภาพไม่ได้ ตัวเดิมยังใช้ได้ · ปิดแล้วเปิดใหม่เพื่อลองอีกครั้ง',
+  ad201Used:'ใช้ต้นแบบผู้ใหญ่แล้ว ลองเดินดู',ad201Gone:'กลับเป็นตัวเดิมแล้ว',ad201Kid:'เด็ก',ad201Adult:'ผู้ใหญ่ใหม่',ad201Tall:'สูงกว่า'});
+ if(TX.en)Object.assign(TX.en,{ad201Btn:'Try the new adult model (9 Oct)',ad201T:'New adult model · real size',ad201P:'Your chosen PixelLab file at its own size (1 art pixel = 1 game pixel) · no walk yet, it glides · GM slot only',
+  ad201Use:'Use in the world',ad201Back:'Back to my character',ad201Close:'Close',ad201Ok:'Ready · use it, then walk next to the NPC children and the houses',ad201Bad:'Artwork unavailable · your character is safe. Reopen to retry.',
+  ad201Used:'New adult model on · try walking',ad201Gone:'Your character is back',ad201Kid:'Child',ad201Adult:'New adult',ad201Tall:'taller'})}catch(e){}
+function ad201Selected(){try{return gmOn()&&S&&S.gmSprite170==='adult201'}catch(e){return false}}
+function ad201Load(){if(AD201.sheets)return Promise.resolve(true);if(AD201.pending)return AD201.pending;AD201.error=false;
+ AD201.pending=new Promise(resolve=>{const im=new Image();let fin=false;const done=ok=>{if(fin)return;fin=true;clearTimeout(tm);AD201.error=!ok;resolve(ok)},tm=setTimeout(()=>done(false),10000);
+  im.onerror=()=>done(false);im.onload=()=>{if(fin)return;try{if(im.naturalWidth!==1024||im.naturalHeight!==128)throw Error('size');
+   const F=128,dy=(F-2)-AD201.foot,chk=document.createElement('canvas');chk.width=1024;chk.height=128;const cg=chk.getContext('2d');cg.drawImage(im,0,0);const px=cg.getImageData(0,0,1024,128).data;
+   for(let r=0;r<8;r++){let n=0;for(let y=0;y<F;y++)for(let x=0;x<F;x++)if(px[(y*1024+r*F+x)*4+3]>80)n++;if(n<300)throw Error('empty')}
+   const stand=document.createElement('canvas'),walk=document.createElement('canvas');stand.width=8*F;stand.height=F;walk.width=6*F;walk.height=8*F;const sg=stand.getContext('2d'),wg=walk.getContext('2d');sg.imageSmoothingEnabled=wg.imageSmoothingEnabled=false;
+   for(let r=0;r<8;r++){sg.drawImage(im,r*F,0,F,F,r*F,dy,F,F);for(let f=0;f<6;f++)wg.drawImage(im,r*F,0,F,F,f*F,r*F+dy+AD201.bob[f],F,F)}
+   AD201.sheets={stand,walk,im};done(true)}catch(e){done(false)}};
+  im.src=(window.EMBED_ASSETS&&window.EMBED_ASSETS['gm-adult-201.png'])||'gm-adult-201.png'}).finally(()=>{AD201.pending=null});return AD201.pending}
+{const old=buildPlayerSheets;buildPlayerSheets=function(){const r=old.apply(this,arguments);try{if(!ad201Selected())return r;const sh=AD201.sheets;
+  if(sh){PS.stand=sh.stand;PS.walk=sh.walk;PS.F=128;PS.silS=silOf(PS.stand);PS.silW=silOf(PS.walk);PS.sc=0;PS.shS=blurSheet(PS.silS);PS.shW=blurSheet(PS.silW);PS.gmSprite170=true}
+  else{const owner=S;ad201Load().then(ok=>{if(ok&&S===owner&&ad201Selected())buildPlayerSheets()})}}catch(e){}return r}}
+// the name (and an emote) sit just above the head the way they do over the children (the old rule put them 128 px up, 40 px over this head)
+{const o=label;label=function(x,y,s,col){try{if(PS.F===128&&ad201Selected()&&Math.abs(x-(P.x-camX))<.5&&Math.abs(y-(P.y-camY-130))<.5)y+=34}catch(e){}return o.apply(this,[x,y,s,col])}}
+{const o=emoteBubble;emoteBubble=function(x,y,e,tt){try{if(PS.F===128&&ad201Selected()&&Math.abs(x-(P.x-camX))<.5&&Math.abs(y-(P.y-camY-144))<.5)y+=34}catch(err){}return o.apply(this,[x,y,e,tt])}}
+// the trial window: the 8 views turning, beside the slot's own child at the same pixel size, with both heights measured from the pictures
+function ad201Height(c,F,col){try{const d=c.getContext('2d').getImageData(col*F,0,F,F).data;let top=-1,bot=-1;for(let y=0;y<F;y++)for(let x=0;x<F;x++)if(d[(y*F+x)*4+3]>80){if(top<0)top=y;bot=y;break}return top<0?0:bot-top+1}catch(e){return 0}}
+function openAdult201(){if(!gmOn())return;const owner=S;let closed=false;
+ if(!PS.gmSprite170&&PS.stand){try{AD201.kid={im:toCanvas(PS.stand),F:PS.F||64};AD201.h.k=null}catch(e){}}
+ modal(`<div id="ad201"><h2>${t('ad201T')}</h2><canvas id="ad201cv" width="300" height="150"></canvas><p class="ad201p">${t('ad201P')}</p><p id="ad201st" class="ad201p"></p>
+  <div class="ad201b"><button id="ad201use" disabled>${t('ad201Use')}</button><button id="ad201back">${t('ad201Back')}</button><button id="ad201x">${t('ad201Close')}</button></div></div>`);
+ document.querySelector('#modal>.pn')?.classList.add('ad201-panel');
+ const live=()=>!closed&&$('ad201')&&$('ad201').isConnected&&!$('modal').classList.contains('hide')&&S===owner&&gmOn();
+ $('ad201x').onclick=()=>{closed=true;closeModal()};
+ $('ad201back').onclick=()=>{if(!live())return;delete S.gmSprite170;buildPlayerSheets();save();closed=true;closeModal();say(t('ad201Gone'))};
+ $('ad201use').onclick=()=>{if(!live()||!AD201.sheets)return;S.gmSprite170='adult201';buildPlayerSheets();save();closed=true;closeModal();say(t('ad201Used'))};
+ ad201Load().then(ok=>{if(!live())return;$('ad201use').disabled=!ok;$('ad201st').textContent=ok?t('ad201Ok'):t('ad201Bad')});
+ const draw=tm=>{if(!live())return;const c=$('ad201cv'),g=c.getContext('2d');g.clearRect(0,0,c.width,c.height);g.imageSmoothingEnabled=false;g.fillStyle='#3a2f4f';g.fillRect(0,c.height-14,c.width,14);
+  const k=AD201.kid,sh=AD201.sheets,base=c.height-14,H=AD201.h;if(k&&H.k==null)H.k=ad201Height(k.im,k.F,0);if(sh&&H.a==null)H.a=ad201Height(sh.stand,128,0);const hk=k?H.k:0,ha=sh?H.a:0;
+  if(k){g.drawImage(k.im,0,0,k.F,k.F,40-k.F/2,base-(k.F-2),k.F,k.F)}   /* the slot's own child, front view, same scale */
+  if(sh){const col=Math.floor(tm/1400)%8;g.drawImage(sh.stand,col*128,0,128,128,150-64,base-126,128,128)}
+  g.font='bold 11px sans-serif';g.fillStyle='#f6e2b0';g.textAlign='center';if(k)g.fillText(t('ad201Kid')+' '+hk+' px',40,c.height-3);if(sh)g.fillText(t('ad201Adult')+' '+ha+' px',150,c.height-3);
+  if(hk&&ha){g.textAlign='left';g.fillText(t('ad201Tall')+' '+(ha/hk).toFixed(2)+'×',220,24)}
+  requestAnimationFrame(draw)};requestAnimationFrame(draw)}
+{const old=openGM;openGM=function(){const r=old.apply(this,arguments);try{if(gmOn()&&!$('gmAdult201')){const b=document.createElement('button');b.id='gmAdult201';b.textContent=t('ad201Btn');b.style.minHeight='48px';b.onclick=()=>openAdult201();$('mBody').prepend(b)}}catch(e){}return r}}
+{const old=modal;modal=function(){document.querySelector('#modal>.pn')?.classList.remove('ad201-panel');return old.apply(this,arguments)}}
+{const st=document.createElement('style');st.textContent=`#ad201{text-align:center}#ad201cv{width:min(600px,86vw);height:auto;aspect-ratio:2/1;image-rendering:pixelated;background:#1d1729;border-radius:10px;border:2px solid #d9bc7c55;display:block;margin:6px auto}
+#ad201 .ad201p{font-size:13px;margin:6px 0;opacity:.9}#ad201 .ad201b{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:8px}#ad201 .ad201b button{min-height:44px;padding:8px 14px}
+@media (max-height:520px){#ad201{display:grid;grid-template-columns:auto 1fr;column-gap:14px;align-items:center;text-align:left}#ad201 h2{grid-column:1/3;margin:0 0 4px;font-size:18px}#ad201cv{grid-column:1;grid-row:2/5;width:min(48vw,440px);margin:0}#ad201>p,#ad201>.ad201b{grid-column:2}#ad201 .ad201p{font-size:12px;margin:2px 0}#ad201 .ad201b{flex-direction:column;align-items:stretch;margin-top:4px;gap:6px}}`;document.head.appendChild(st)}
 </script></body></html>
