@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.09';
+const VERSION='Lantern Academy 2.10';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -6281,7 +6281,7 @@ openPicker=function(d){const el=$('cr');el.classList.remove('hide','c193','g194'
   d.slots.forEach((s,i)=>{const b=document.createElement('div');b.className='pn';const c=document.createElement('canvas');c.width=c.height=64;c.getContext('2d').drawImage(crSheet(s.kid,s.house,s.hc||0,s.ec||0,s.appearance169,{hcol:s.hcol??null,ecol:s.ecol??null}),0,0,64,64,-8,-4,80,80);
     b.append(c);b.insertAdjacentHTML('beforeend',`<div class="tx"><b>${s.name}</b><span class="note">Lv ${s.lv} · ${s.age<10?t('p3Kid'):t('p3Adult')}</span></div>`);b.onclick=()=>{C193.pick=i;pkDraw193()};$('pk').append(b)});
   if(d.slots.length<4){const a=document.createElement('button');a.className='add';a.id='pNew';a.innerHTML='＋ '+t('p3Add');a.onclick=()=>{if(Store.all().slots.length>=4)return;CR_STATE.gender=null;openCreator()};$('pk').append(a)}
-  $('pDel').onclick=()=>{if(!d.slots[C193.pick])return;if(confirm(t('delQ'))){d.slots.splice(C193.pick,1);d.cur=-1;Store.put(d);C193.pick=0;const nd=Store.all();if(nd.slots.length)openPicker(nd);else{CR_STATE.gender=null;openCreator()}}};
+  {const me=$('pDel');me.onclick=()=>{if(!me.isConnected||!d.slots[C193.pick])return;if(confirm(t('delQ'))){d.slots.splice(C193.pick,1);d.cur=-1;Store.put(d);C193.pick=0;const nd=Store.all();if(nd.slots.length)openPicker(nd);else{CR_STATE.gender=null;openCreator()}}};}   /* 2.10 BUG-27: a click still queued for the old button after the list was redrawn does nothing */
   $('pGo').onclick=()=>{const i=C193.pick;if(!d.slots[i])return;d.cur=i;d.last193=i;Store.put(d);S=d.slots[i];el.classList.add('hide');el.classList.remove('p193');startGame()};   /* the list it was opened with, as before 1.93 */
   pkDraw193()};
 addEventListener('resize',()=>{try{if($('cr').classList.contains('p193'))pkDraw193()}catch(e){}});
@@ -6800,4 +6800,16 @@ ad205Row=function(){const root=$('ad201');if(!root||root.querySelector('.ad205c'
 function ad209Back(){if(S&&S.gmSprite170==='adult201'&&S.gmAdult202&&AD201.V[S.gmAdult202]&&AD201.v!==S.gmAdult202){ad202Set(S.gmAdult202);if(!AD201.sheets)ad202Load()}}
 {const old=closeModal;closeModal=function(){const r=old.apply(this,arguments);try{ad209Back()}catch(e){}return r}}
 {const old=modal;modal=function(){try{ad209Back()}catch(e){}return old.apply(this,arguments)}}
+// ---- 2.10 (night of 10 Oct · the screen audit of 2.09 night check, BUG_REPORT round 7): tap targets a 7-year-old uses every day reach 44 px · BUG-27 one tap = one player ----
+// measured as a real player on 844×390 · 915×412 · iPad: the window's close button 75×40 (bag, stats, board…), the creator's ♀ ♂ 🎲 EN 40×36 on short screens, the loot filter 100×19
+// the world map's own controls (adults only, the owner's mockup) are left as they are and listed for the owner
+{const st=document.createElement('style');st.textContent=`#mBody>.mh192>#mX{min-height:44px!important}
+#cr.c193 .namebar button,#cr.c193 .namebar .gb{min-height:44px!important;height:44px!important;min-width:44px!important}#cr.c193 .namebar{padding-top:2px;padding-bottom:2px}
+#lootMin{min-height:44px;padding:4px 8px;font-size:14px;border-radius:10px}`;document.head.appendChild(st)}
+// one tap = one action where a player is made, started or deleted: two clicks reaching "สร้างตัวละครเสร็จ" before the game starts made two identical players
+// (seen once in a full test run under load; two quick clicks reproduce it every time) · a second delete right after the first is held back the same way
+const DT210={del:false};
+addEventListener('click',e=>{const b=e.target&&e.target.closest&&e.target.closest('#cgo,#pGo,#pDel');if(!b)return;const cr=$('cr'),stop=()=>{e.stopImmediatePropagation();e.preventDefault()};
+  if(!cr||cr.classList.contains('hide')||!cr.contains(b))return stop();
+  if(b.id==='pDel'){if(DT210.del)return stop();DT210.del=true;setTimeout(()=>{DT210.del=false},600)}},true);
 </script></body></html>
