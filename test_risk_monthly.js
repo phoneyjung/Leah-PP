@@ -1,5 +1,5 @@
 // Claude 2.10 (10 Oct, monthly RISK_CHECKLIST): the numbers of items 2 and 7, measured on the game as it is now (the old play-src tools ran on the 2D preview).
-// asserts: meta spread ≤ 15 % at Lv 30 and 60 · 55+ frames a second · no frame over 50 ms in 4 s of walking · every map change under 120 ms
+// asserts: meta spread ≤ 15 % at Lv 30 and 60 (mean of 8 fixed item rolls) · run it alone, not in the parallel full run (frame and map-change times) · 55+ frames a second · no frame over 50 ms in 4 s of walking · every map change under 120 ms
 // reports only (the owner decides the fix): pictures held in memory (limit 60 MB) — printed as "imgMB" with a warning line
 const assert=require('node:assert/strict'),puppeteer=require('puppeteer');const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const url='http://localhost:'+(process.env.PORT||8775)+'/?rank=1';
@@ -23,7 +23,11 @@ const SIM=(lv)=>{const S=GAME.S,res={};const plan={sw:['str','str','vit'],dag:['
      await new Promise(res=>{const f=()=>{const t=performance.now(),d=t-last;last=t;n++;if(d>50)hitch++;if(d>worst)worst=d;if(t-t0<ms)requestAnimationFrame(f);else res()};requestAnimationFrame(f)});clearInterval(iv);return {fps:+(n/(ms/1000)).toFixed(1),hitch,worst:Math.round(worst)}};
    res.walkStart=await walk(4000);res.mapMs={};for(const m of ['farm','cavemouth','h9','room','capital']){const a=performance.now();goMap(m);P.path=P.act=null;res.mapMs[m]=Math.round(performance.now()-a);await new Promise(r=>setTimeout(r,600))}
    res.walkFarm=await walk(4000);let img=0;for(const v of Object.values(IMG)){if(v&&(v.naturalWidth||v.width))img+=(v.naturalWidth||v.width)*(v.naturalHeight||v.height)*4}res.imgMB=+(img/1048576).toFixed(1);return res});
-  if(who==='adult'){r.lv30=await pg.evaluate(SIM,30);r.lv60=await pg.evaluate(SIM,60)}
+  // the item rolls are random (one roll gave 17 %, another 13 %): the mean of 8 fixed rolls per job, so the number only moves when the game's numbers move
+  if(who==='adult')for(const lv of [30,60])r['lv'+lv]=await pg.evaluate((src,lv)=>{const SIM=eval('('+src+')'),orig=Math.random,acc={},one=[];
+    for(let k=1;k<=8;k++){let x=k*7919;Math.random=()=>{x=(x*9301+49297)%233280;return x/233280};const q=SIM(lv);one.push(q.spreadSingle);for(const j of ['sword','archer','mage','hunter'])(acc[j]=acc[j]||[]).push(q[j].single)}
+    Math.random=orig;const mean=Object.fromEntries(Object.entries(acc).map(([j,a])=>[j,Math.round(a.reduce((x,y)=>x+y,0)/a.length)])),v=Object.values(mean);
+    return {mean,spreadSingle:Math.round(100*(Math.max(...v)/Math.min(...v)-1)),rollSpread:[Math.min(...one),Math.max(...one)]}},SIM.toString(),lv);
   r.errors=errors.length;r.firstErrors=[...new Set(errors)].slice(0,3);R[who]=r;await pg.close()}
   console.log(JSON.stringify(R));
   for(const [who,r] of Object.entries(R)){for(const w of [r.walkStart,r.walkFarm]){assert(w.fps>=55,who+' frames '+w.fps);assert.equal(w.hitch,0,who+' frames over 50 ms')}
