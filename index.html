@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.92';
+const VERSION='Lantern Academy 1.93';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -6044,7 +6044,7 @@ const QL188={list:[],el:null,n:-1};
 .list188{display:flex;flex-direction:column;gap:6px;margin-top:6px}.ql188{display:flex;align-items:center;gap:8px;border:1px solid #8f795044;border-radius:10px;background:#211a2c;padding:7px 9px}.ql188 .qi{font-size:20px;flex:none}.ql188 .qt{flex:1;min-width:0;font-size:14px;line-height:1.25}.ql188 .qt small{display:block;font-size:11px;color:#b9adbf}
 .ql188 .btn188{flex:none;min-height:40px;padding:0 12px;border-radius:99px;border:1px solid #f4d896;background:linear-gradient(#e6c784,#c39a52);color:#2a1a08;font-weight:700;font-size:13px}`;document.head.appendChild(st)}
 function qlPlace188(){let b=QL188.el;if(!b){b=document.createElement('button');b.id='bQLog188';b.innerHTML='📜<b></b>';b.title='Quests';b.onclick=()=>{if(S&&M&&!DLG)openQuestLog188()};document.body.appendChild(b);QL188.el=b}
-  const hud=document.getElementById('hud');const on=!!(S&&M&&hud&&!hud.classList.contains('hide'));b.classList.toggle('on',on);if(!on)return;
+  const hud=document.getElementById('hud'),crEl=document.getElementById('cr');const on=!!(S&&M&&hud&&!hud.classList.contains('hide')&&(!crEl||crEl.classList.contains('hide')));b.classList.toggle('on',on);if(!on)return;
   const r=hud.getBoundingClientRect();b.style.left=Math.round(r.right+6)+'px';b.style.top=Math.round(r.top)+'px';
   let n=0;try{n=questList188().length}catch(e){}if(n!==QL188.n){QL188.n=n;b.querySelector('b').textContent=n?String(n):''}}
 {const old=hud;hud=function(){const r=old.apply(this,arguments);try{qlPlace188()}catch(e){}return r}}
@@ -6102,4 +6102,117 @@ function mhBuild192(){const body=$('mBody'),x=$('mX');if(!body||!x||$('modal').c
   row.classList.remove('mxRow171');row.classList.add('mh192');row.removeAttribute('style');body.prepend(row);const h=body.querySelector(':scope>h2');if(h)row.prepend(h);mhFit192();body.scrollTop=0}
 {const old=modal;modal=function(){const r=old.apply(this,arguments);try{Promise.resolve().then(()=>{try{mhBuild192()}catch(e){}})}catch(e){}return r}}
 addEventListener('resize',()=>{try{mhFit192()}catch(e){}});
+// ================= 1.93 · item ④: the character select and create screens in the style of the owner's reference game (9 Oct 14:40) =================
+// Create: the character big in the middle on the village picture, round category buttons down the left (age · look · colours · house · hat later),
+// the options of the chosen category on the right with "create" at its bottom right, the name box under the character with a dice, rotate and random beside the character.
+// Select: the chosen player big in the middle, the players listed top left (round face, name, level) with + to add, the bin bottom left, "adventure on" bottom right.
+// Every id the game and the tests use stays (#cpv #cnm #crole #cgo #ck #ckey #chc #cec #ch #ca #cname #crnd #cLang #pk #pNew); age stays the first category, open at the start.
+try{Object.assign(TX.th,{c3Title:'สร้างตัวละคร',c3Age:'อายุ',c3Look:'ตัวละคร',c3Col:'สี',c3House:'บ้าน',c3Hat:'หมวก',c3Soon:'เร็ว ๆ นี้',c3AgeQ:'อายุเท่าไหร่',c3LookQ:'เลือกตัวละคร',c3ColQ:'สีผมและสีตา',c3ColOnly:'เปลี่ยนสีผมและสีตาได้กับแบบ "ผมหยิก" · แบบอื่นจะมีในรุ่นถัดไป',c3HouseQ:'เลือกบ้าน',c3HatQ:'หมวกและของบนหัว',c3HatSoon:'ของบนหัวกำลังวาดอยู่ จะมาในรุ่นถัดไป',c3Done:'สร้างตัวละครเสร็จ',c3Turn:'หมุน',c3Rand:'สุ่ม',c3Name:'ใส่ชื่อเล่น',
+  p3Title:'เลือกตัวละคร',p3Go:'ผจญภัยต่อ',p3Add:'สร้างตัวใหม่',p3Kid:'เด็ก',p3Adult:'นักสู้',p3Del:'ลบตัวละครนี้',p3Back:'เลือกตัวละคร'});
+ if(TX.en)Object.assign(TX.en,{c3Title:'Create a character',c3Age:'Age',c3Look:'Look',c3Col:'Colours',c3House:'House',c3Hat:'Hat',c3Soon:'soon',c3AgeQ:'How old are you?',c3LookQ:'Choose a look',c3ColQ:'Hair and eye colour',c3ColOnly:'Hair and eye colours change on the "Curly" look · more looks in a later version',c3HouseQ:'Choose a house',c3HatQ:'Hats',c3HatSoon:'Hats are being drawn and come in a later version',c3Done:'Create character',c3Turn:'Turn',c3Rand:'Random',c3Name:'Nickname',
+  p3Title:'Choose a character',p3Go:'Adventure on',p3Add:'New character',p3Kid:'child',p3Adult:'fighter',p3Del:'Delete this character',p3Back:'Characters'})}catch(e){}
+const C193={tab:'age',dir:0,drag:null,pick:0};
+{const st=document.createElement('style');st.textContent=`
+#cr.c193{display:grid!important;grid-template-columns:60px minmax(0,1fr) minmax(250px,36%);grid-template-rows:auto minmax(0,1fr);gap:6px 10px;padding:calc(8px + env(safe-area-inset-top,0px)) calc(12px + env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) calc(10px + env(safe-area-inset-left,0px));
+ background:linear-gradient(90deg,#140d24cc,#140d2433 30%,#140d2400 55%,#140d24aa 75%),url(map-H9-village.jpg) 30% 60%/cover,radial-gradient(ellipse at 30% 40%,#2c3f5a,#140d24 70%);overflow:hidden}
+#cr.c193 .top{grid-column:1/-1;display:flex;align-items:center;gap:8px;min-height:30px}#cr.c193 .top h1{font-size:17px;margin:0;color:#ffe7b0;text-shadow:0 2px 4px #000}#cr.c193 .top .bk{min-height:34px;min-width:0;padding:0 10px;border-radius:99px;font-size:13px}
+#cr.c193 .rail{display:flex;flex-direction:column;gap:6px;align-items:center;justify-content:flex-start;min-height:0}
+#cr.c193 .rail button{width:52px;height:52px;min-width:0;min-height:0;border-radius:50%;padding:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;font-size:20px;line-height:1;background:#fff6e4;color:#3b2a5a;border:2px solid #d9bc7c;box-shadow:0 3px 8px #0007}
+#cr.c193 .rail button small{font-size:9px;font-weight:700;margin-top:1px}#cr.c193 .rail button.on{background:#4252c4;color:#fff;border-color:#fff;box-shadow:0 0 0 3px #5b6fd855,0 3px 8px #0007}#cr.c193 .rail button.dim{opacity:.55}
+#cr.c193 .mid{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;min-height:0;min-width:0}
+#cr.c193 #cpv{flex:1;min-height:0;width:100%!important;height:auto!important;touch-action:none;cursor:grab}
+#cr.c193 #cnm{position:absolute;top:2px;left:50%;transform:translateX(-50%);font-weight:800;color:#fff3db;background:#1b1330b0;border:1px solid #d9bc7c88;border-radius:99px;padding:1px 12px;font-size:13px;white-space:nowrap;max-width:90%;overflow:hidden;text-overflow:ellipsis}
+#cr.c193 .tools{position:absolute;right:0;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:8px}
+#cr.c193 .tools button{width:44px;height:44px;min-width:0;min-height:0;border-radius:50%;padding:0;font-size:19px;background:#ffffffd9;color:#3b2a5a;border:1px solid #c8b9e8;box-shadow:0 2px 6px #0006}
+#cr.c193 .namebar{display:flex;align-items:center;gap:6px;width:min(100%,360px);background:#1b1330c8;border:1px solid #d9bc7c99;border-radius:99px;padding:3px 4px 3px 12px;flex:none}
+#cr.c193 .namebar #cname{flex:1 1 120px!important;min-width:120px!important;background:transparent;color:#fff3db;border:0;padding:6px 2px;font-size:15px;text-align:center;outline:none}
+#cr.c193 .namebar #cname::placeholder{color:#d8c9b8}#cr.c193 .namebar button{flex:none;min-width:0;min-height:40px;height:40px;padding:0 10px;border-radius:99px;font-size:13px}
+#cr.c193 .namebar+.note{display:none}#cr.c193 .nr{font-size:10px;color:#ffd9a0;margin:2px 0 0;text-align:center;text-shadow:0 1px 2px #000}
+#cr.c193 .side{display:flex;flex-direction:column;gap:6px;min-height:0;background:#fff8ecee;border-radius:14px;padding:8px 10px;box-shadow:0 6px 18px #0008;color:#2b2140}
+#cr.c193 .side .hd{display:flex;align-items:center;justify-content:center;background:#4252c4;color:#fff;font-weight:800;border-radius:99px;min-height:30px;font-size:14px;flex:none}
+#cr.c193 .side .body{flex:1;min-height:0;overflow:auto;display:flex;flex-direction:column;gap:6px}
+#cr.c193 .side .tp{display:none}#cr.c193 .side .tp.on{display:flex;flex-direction:column;gap:6px}
+#cr.c193 .side .pn{background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important}#cr.c193 .side h3{color:#5b4fa8;font-size:12px;margin:0}
+#cr.c193 #ca{display:grid!important;grid-template-columns:repeat(4,1fr);gap:6px}#cr.c193 #ca button{min-width:44px!important;min-height:44px!important;padding:0;font-size:16px;font-weight:700;background:#fff;color:#2b2140;border:2px solid #d8cdf0;border-radius:10px;box-shadow:none}
+#cr.c193 #ca button.on{background:#4252c4;color:#fff;border-color:#4252c4;box-shadow:0 0 0 3px #5b6fd855}
+#cr.c193 #crole{font-size:11px;line-height:1.35;color:#4a3d63;background:#efe6ff;border-radius:9px;padding:5px 8px}
+#cr.c193 #ck{display:grid!important;grid-template-columns:repeat(3,1fr);gap:6px}#cr.c193 #ck .opt{background:#fff;color:#2b2140;border:2px solid #d8cdf0;border-radius:10px;min-height:44px;font-size:11px;box-shadow:none;padding:2px}
+#cr.c193 #ck .opt.on{border-color:#5b6fd8;box-shadow:0 0 0 3px #5b6fd855;background:#eef0ff}
+#cr.c193 #ch{display:grid!important;grid-template-columns:repeat(2,1fr);gap:6px}#cr.c193 #ch .hs{min-height:48px;border-radius:10px;font-size:13px;color:#1b1330;border:2px solid #0002}
+#cr.c193 #chc,#cr.c193 #cec{display:flex;flex-wrap:wrap;gap:8px}#cr.c193 .sw{width:34px!important;height:34px!important;min-width:0;min-height:0}
+#cr.c193 .soon{font-size:12px;color:#6a5d80;background:#f3eefc;border-radius:9px;padding:8px}
+#cr.c193 #cgo{flex:none;min-height:46px;border-radius:99px!important;background:linear-gradient(#4d5dcc,#3a49b8)!important;color:#fff!important;border:2px solid #fff!important;font-size:15px;font-weight:800;box-shadow:0 4px 10px #0006}
+@media (max-height:400px){#cr.c193{grid-template-rows:auto minmax(0,1fr);gap:4px 8px}#cr.c193 .rail button{width:46px;height:46px;font-size:18px}#cr.c193 .rail{gap:5px}#cr.c193 .top{min-height:26px}#cr.c193 .top h1{font-size:15px}#cr.c193 .side{padding:6px 8px;gap:4px}#cr.c193 #cgo{min-height:44px}#cr.c193 .namebar button{min-height:36px;height:36px}#cr.c193 .side .hd{min-height:26px;font-size:13px}}
+/* the select screen */
+#cr.p193{display:block!important;padding:0;overflow:hidden;background:linear-gradient(90deg,#140d24dd,#140d2433 32%,#140d2400 60%,#140d2466),url(map-H9-village.jpg) 55% 55%/cover,radial-gradient(ellipse at 30% 40%,#2c3f5a,#140d24 70%)}
+#cr.p193 .top{position:absolute;left:calc(12px + env(safe-area-inset-left,0px));top:calc(8px + env(safe-area-inset-top,0px));display:flex;align-items:center;gap:8px}#cr.p193 .top h1{font-size:17px;margin:0;color:#ffe7b0;text-shadow:0 2px 4px #000}
+#cr.p193 #pk{position:absolute;left:calc(12px + env(safe-area-inset-left,0px));top:calc(44px + env(safe-area-inset-top,0px));display:flex!important;flex-direction:column;gap:6px;width:min(250px,34vw);max-height:calc(100% - 120px);overflow:auto}
+#cr.p193 #pk .pn{display:flex!important;flex-direction:row!important;align-items:center;gap:8px;padding:5px 8px 5px 5px!important;background:#1b1330b8!important;border:1px solid #d9bc7c66!important;border-radius:99px!important;cursor:pointer;min-height:52px;box-shadow:none}
+#cr.p193 #pk .pn.on{background:#4252c4ee!important;border-color:#fff!important}#cr.p193 #pk .pn canvas{width:44px!important;height:44px!important;border-radius:50%;background:#fff6e4;border:2px solid #d9bc7c;flex:none}
+#cr.p193 #pk .pn .tx{display:flex;flex-direction:column;min-width:0;line-height:1.2}#cr.p193 #pk .pn b{color:#fff3db;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#cr.p193 #pk .pn .note{font-size:11px;color:#e8dcff;margin:0}
+#cr.p193 #pk .add{display:flex;align-items:center;justify-content:center;gap:6px;min-height:46px;border-radius:99px;background:#1b1330c8;border:1.5px dashed #ffe7b0cc;color:#ffe7b0;font-size:14px;font-weight:700}
+#cr.p193 #pkv{position:absolute;left:50%;top:50%;transform:translate(-50%,-52%);image-rendering:pixelated;pointer-events:none}
+#cr.p193 .pnm{position:absolute;left:50%;bottom:calc(64px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);color:#fff3db;font-weight:800;font-size:15px;background:#1b1330b0;border:1px solid #d9bc7c88;border-radius:99px;padding:2px 14px;white-space:nowrap}
+#cr.p193 #pDel{position:absolute;left:calc(14px + env(safe-area-inset-left,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));width:48px;height:48px;min-width:0;border-radius:50%;padding:0;font-size:20px;background:#1b1330b8;border:1px solid #fff6}
+#cr.c193.hide,#cr.p193.hide{display:none!important}   /* the screen classes must never beat .hide (the game hides #cr in many places) */
+#cr.c193::before,#cr.p193::before{content:'';position:absolute;inset:-6px;z-index:-1;background:url(map-H9-village.jpg) 40% 58%/cover;filter:blur(2px) saturate(.9) brightness(.82);pointer-events:none}#cr.c193,#cr.p193{isolation:isolate;background-color:#140d24!important}
+#cr.c193{background-image:linear-gradient(90deg,#140d24cc,#140d2422 26%,#140d2400 52%,#140d2488 72%)!important}#cr.p193{background-image:linear-gradient(90deg,#140d24dd,#140d2422 34%,#140d2400 62%,#140d2455)!important}   /* the village behind, softly out of focus so the pixel character stands out; missing picture → plain night colour */
+body:has(#cr.c193:not(.hide)) #instTitle,body:has(#cr.p193:not(.hide)) #instTitle{right:auto!important;left:50%!important;transform:translateX(-50%);top:calc(3px + env(safe-area-inset-top,0px))!important}
+#cr.p193 #pGo{position:absolute;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));min-height:48px;min-width:170px;padding:0 22px;border-radius:99px;background:linear-gradient(#4d5dcc,#3a49b8);color:#fff;border:2px solid #fff;font-size:16px;font-weight:800;box-shadow:0 4px 10px #0006}`;document.head.appendChild(st)}
+function crDraw193(){const c=$('cpv');if(!c)return;const box=c.getBoundingClientRect(),dpr=Math.min(2,devicePixelRatio||1),W=Math.max(10,Math.round(box.width*dpr)),H=Math.max(10,Math.round(box.height*dpr));if(c.width!==W||c.height!==H){c.width=W;c.height=H}
+  const g=c.getContext('2d');g.setTransform(1,0,0,1,0,0);g.clearRect(0,0,W,H);g.imageSmoothingEnabled=false;const s=Math.max(1,Math.floor(Math.min(W/80,H/86)));const ox=Math.round(W/2-32*s),oy=Math.round(H-6*s-64*s);
+  g.fillStyle='#00000040';g.beginPath();g.ellipse(W/2,oy+60*s,24*s,6*s,0,0,7);g.fill();
+  const H0=HOUSES[CR_STATE.house];g.fillStyle='#6b4a2a';g.fillRect(ox+58*s,oy+6*s,2*s,56*s);g.fillStyle=H0.col;g.beginPath();g.moveTo(ox+60*s,oy+8*s);g.lineTo(ox+76*s,oy+8*s);g.lineTo(ox+76*s,oy+28*s);g.lineTo(ox+68*s,oy+24*s);g.lineTo(ox+60*s,oy+28*s);g.fill();try{g.drawImage(embC(H0.id,'#1b1330',1),ox+64*s,oy+12*s,8*s,8*s)}catch(e){}
+  try{g.drawImage(crSheet(CR_STATE.kid,CR_STATE.house),C193.dir*64,0,64,64,ox,oy,64*s,64*s)}catch(e){}}
+crLoop=function(tm){if($('cr').classList.contains('hide')||!$('cr').classList.contains('c193'))return;requestAnimationFrame(crLoop);crDraw193()};
+openCreator=function(){const el=$('cr');el.classList.remove('hide','p193');el.classList.add('c193');const hasSlots=(Store.all().slots||[]).length>0;
+  el.innerHTML=`<div class="top">${hasSlots?`<button class="bk" id="c3Back">‹ ${t('p3Back')}</button>`:''}<h1>✨ ${t('c3Title')}</h1></div>
+  <div class="rail">${[['age','🎂','c3Age'],['look','🙂','c3Look'],['col','🎨','c3Col'],['house','🏠','c3House'],['hat','🎩','c3Hat']].map(([k,ic,lb])=>`<button data-tab="${k}"${k==='hat'?' class="dim"':''}>${ic}<small>${t(lb)}</small></button>`).join('')}</div>
+  <div class="mid"><div id="cnm">—</div><canvas id="cpv"></canvas><div class="tools"><button id="c3Turn" title="${t('c3Turn')}">🔄</button><button id="c3Rand" title="${t('c3Rand')}">🎲</button></div>
+   <div class="namebar"><input id="cname" maxlength="12" placeholder="${t('c3Name')}"><button id="crnd">🎲</button><button id="cLang">${LANG==='th'?'EN':'ไทย'}</button></div><p class="nr">🔒 ${t('nameRule')}</p></div>
+  <div class="side"><div class="hd" id="c3Hd"></div><div class="body">
+   <div class="tp" data-tp="age"><div class="ages" id="ca"></div><div id="crole"></div></div>
+   <div class="tp" data-tp="look"><div id="ck"></div></div>
+   <div class="tp" data-tp="col"><div class="pn" id="ckey"><h3>${t('hairC')}</h3><div id="chc"></div><h3 style="margin-top:6px">${t('eyeC')}</h3><div id="cec"></div></div><div class="soon" id="c3ColNo">${t('c3ColOnly')}</div></div>
+   <div class="tp" data-tp="house"><div id="ch"></div></div>
+   <div class="tp" data-tp="hat"><div class="soon">🎩 ${t('c3HatSoon')}</div></div>
+  </div><button class="go" id="cgo">✨ ${t('c3Done')}</button></div>`;
+  KIDS.forEach(([k,th,en],i)=>{const b=document.createElement('button');b.className='opt';const c=document.createElement('canvas');c.width=c.height=48;c.style.width=c.style.height=(innerHeight<440?36:44)+'px';b.append(c,document.createTextNode(LANG==='en'?en:th));b.onclick=()=>{CR_STATE.kid=i;crRefresh()};$('ck').append(b)});
+  HOUSES.forEach((h,i)=>{const b=document.createElement('button');b.className='opt hs';b.style.background=h.col;const e=embC(h.id,'#1b1330',3);e.style.width=e.style.height='22px';b.append(e,document.createTextNode(h[LANG]||h.th));b.onclick=()=>{CR_STATE.house=i;crRefresh()};$('ch').append(b)});
+  HAIRC.forEach((c,i)=>{const b=document.createElement('button');b.className='sw';b.title=LANG==='en'?c[1]:c[0];b.style.cssText=`width:34px;height:34px;border-radius:50%;background:${c[2]};border:3px solid #1b1330;padding:0`;b.onclick=()=>{CR_STATE.hc=i;crRefresh()};$('chc').append(b)});
+  EYEC.forEach((c,i)=>{const b=document.createElement('button');b.className='sw';b.title=LANG==='en'?c[1]:c[0];b.style.cssText=`width:34px;height:34px;border-radius:50%;background:${c[2]};border:3px solid #1b1330;padding:0`;b.onclick=()=>{CR_STATE.ec=i;crRefresh()};$('cec').append(b)});
+  [6,7,8,9,10,11,12,30].forEach(a=>{const b=document.createElement('button');b.textContent=a===30?(LANG==='en'?'Adult':'ผู้ใหญ่'):a===12?'12+':a;b.dataset.a=a;b.onclick=()=>{CR_STATE.age=a;crRefresh()};$('ca').append(b)});
+  const nm=$('cname');nm.value=CR_STATE.name;nm.oninput=()=>{const v=nm.value.replace(/\d{4,}/g,'');if(v!==nm.value)nm.value=v;CR_STATE.name=v.trim();crRefresh()};
+  const NAMES=['มะปราง','ข้าวปั้น','ต้นกล้า','ใบเตย','ภูผา','น้ำใส','แสงดาว','ทองคำ','ปุยฝ้าย','เมฆ'],NAMES_EN=['Mango','Rice Ball','Sprout','Pandan','Rocky','Clear','Stardust','Goldie','Cotton','Cloud'];
+  $('crnd').onclick=()=>{const L=LANG==='en'?NAMES_EN:NAMES;CR_STATE.name=L[Math.floor(Math.random()*L.length)];nm.value=CR_STATE.name;crRefresh()};
+  $('c3Rand').onclick=()=>{CR_STATE.kid=Math.floor(Math.random()*KIDS.length);CR_STATE.house=Math.floor(Math.random()*HOUSES.length);CR_STATE.hc=Math.floor(Math.random()*HAIRC.length);CR_STATE.ec=Math.floor(Math.random()*EYEC.length);crRefresh()};
+  $('c3Turn').onclick=()=>{C193.dir=(C193.dir+1)%8};
+  const cv=$('cpv');cv.addEventListener('pointerdown',e=>{C193.drag={x:e.clientX,d:C193.dir};try{cv.setPointerCapture(e.pointerId)}catch(x){}});cv.addEventListener('pointermove',e=>{if(!C193.drag)return;const k=Math.round((e.clientX-C193.drag.x)/28);C193.dir=((C193.drag.d-k)%8+8)%8});['pointerup','pointercancel'].forEach(n=>cv.addEventListener(n,()=>C193.drag=null));
+  /* right after a drag on the preview a touch browser sometimes drops the next tap's click: the three small buttons beside it act on the finger's release */
+  for(const id of ['crnd','c3Turn','c3Rand']){const b=$(id),fn=b.onclick;b.onclick=null;b.addEventListener('pointerup',e=>{if(e.button>0)return;b._t193=performance.now();fn()});b.addEventListener('click',()=>{if(performance.now()-(b._t193||0)<600)return;fn()})}
+  $('cLang').onclick=()=>{LANG=LANG==='th'?'en':'th';openCreator()};
+  el.querySelectorAll('.rail [data-tab]').forEach(b=>b.onclick=()=>{C193.tab=b.dataset.tab;crRefresh()});
+  if($('c3Back'))$('c3Back').onclick=()=>openPicker(Store.all());
+  $('cgo').onclick=()=>{const dd=Store.all();dd.cur=-1;Store.put(dd);S=newSave({name:CR_STATE.name||(LANG==='en'?'Keeper':'ผู้พิทักษ์'),kid:CR_STATE.kid,house:CR_STATE.house,age:CR_STATE.age});S.hc=CR_STATE.hc;S.ec=CR_STATE.ec;S.hp=hpMax();Store.save(S);el.classList.add('hide');el.classList.remove('c193');startGame()};
+  C193.tab='age';C193.dir=0;crRefresh();requestAnimationFrame(crLoop)};
+crRefresh=function(){if(!$('ck'))return;const L={age:'c3AgeQ',look:'c3LookQ',col:'c3ColQ',house:'c3HouseQ',hat:'c3HatQ'};
+  document.querySelectorAll('#cr .rail [data-tab]').forEach(b=>b.classList.toggle('on',b.dataset.tab===C193.tab));document.querySelectorAll('#cr .tp').forEach(p=>p.classList.toggle('on',p.dataset.tp===C193.tab));if($('c3Hd'))$('c3Hd').textContent=t(L[C193.tab]);
+  document.querySelectorAll('#ck .opt').forEach((b,i)=>{b.classList.toggle('on',i===CR_STATE.kid);const g=b.querySelector('canvas').getContext('2d');g.imageSmoothingEnabled=false;g.clearRect(0,0,48,48);g.drawImage(crSheet(i,CR_STATE.house),0,0,64,64,-8,-8,64,64)});
+  const keyOk=!!KIDS[CR_STATE.kid][3];$('ckey').classList.toggle('hide',!keyOk);if($('c3ColNo'))$('c3ColNo').classList.toggle('hide',keyOk);const cb=document.querySelector('#cr .rail [data-tab="col"]');if(cb)cb.classList.toggle('dim',!keyOk);
+  document.querySelectorAll('#chc .sw').forEach((b,i)=>b.style.borderColor=i===CR_STATE.hc?'#5b6fd8':'#1b1330');document.querySelectorAll('#cec .sw').forEach((b,i)=>b.style.borderColor=i===CR_STATE.ec?'#5b6fd8':'#1b1330');
+  document.querySelectorAll('#ch .opt').forEach((b,i)=>b.classList.toggle('on',i===CR_STATE.house));document.querySelectorAll('#ca button').forEach(b=>b.classList.toggle('on',+b.dataset.a===CR_STATE.age));
+  $('cnm').textContent=CR_STATE.name||'—';$('cnm').style.visibility=CR_STATE.name?'visible':'hidden';$('crole').innerHTML=(CR_STATE.age<10?t('kidNote'):t('adultNote'))+(CR_STATE.age>=10?'<br>'+t('adultArt'):'')};
+// the select screen
+function pkDraw193(){const el=$('cr'),c=$('pkv'),d=Store.all(),s0=d.slots[C193.pick];if(!c||!s0)return;const sc=Math.max(2,Math.floor(Math.min(innerWidth*.34,innerHeight*.62)/64)),dpr=Math.min(2,devicePixelRatio||1);c.width=64*sc*dpr;c.height=64*sc*dpr;c.style.width=c.style.height=64*sc+'px';
+  const g=c.getContext('2d');g.imageSmoothingEnabled=false;g.clearRect(0,0,c.width,c.height);g.fillStyle='#00000045';g.beginPath();g.ellipse(c.width/2,c.height*.93,c.width*.26,c.height*.05,0,0,7);g.fill();try{g.drawImage(crSheet(s0.kid,s0.house,s0.hc||0,s0.ec||0,s0.appearance169),0,0,64,64,0,0,c.width,c.height)}catch(e){}
+  const nmEl=el.querySelector('.pnm');if(nmEl){const H=HOUSES[s0.house];nmEl.innerHTML=s0.name+' <span style="color:'+H.col+'">· '+(H[LANG]||H.th)+'</span>';const r=c.getBoundingClientRect();nmEl.style.top=Math.round(Math.min(innerHeight-110,r.bottom-r.height*.04))+'px';nmEl.style.bottom='auto'}   /* the name plate right under the feet */el.querySelectorAll('#pk .pn').forEach((b,i)=>b.classList.toggle('on',i===C193.pick))}
+openPicker=function(d){const el=$('cr');el.classList.remove('hide','c193');el.classList.add('p193');if(!(C193.pick>=0&&C193.pick<d.slots.length))C193.pick=Math.max(0,Math.min(d.slots.length-1,d.last193||0));
+  el.innerHTML=`<div class="top"><h1>👥 ${t('p3Title')}</h1></div><div id="pk"></div><canvas id="pkv"></canvas><div class="pnm"></div><button id="pDel" title="${t('p3Del')}">🗑</button><button id="pGo">${t('p3Go')} ›</button>`;
+  d.slots.forEach((s,i)=>{const b=document.createElement('div');b.className='pn';const c=document.createElement('canvas');c.width=c.height=64;c.getContext('2d').drawImage(crSheet(s.kid,s.house,s.hc||0,s.ec||0,s.appearance169),0,0,64,64,-8,-4,80,80);
+    b.append(c);b.insertAdjacentHTML('beforeend',`<div class="tx"><b>${s.name}</b><span class="note">Lv ${s.lv} · ${s.age<10?t('p3Kid'):t('p3Adult')}</span></div>`);b.onclick=()=>{C193.pick=i;pkDraw193()};$('pk').append(b)});
+  if(d.slots.length<4){const a=document.createElement('button');a.className='add';a.id='pNew';a.innerHTML='＋ '+t('p3Add');a.onclick=()=>{if(Store.all().slots.length>=4)return;openCreator()};$('pk').append(a)}
+  $('pDel').onclick=()=>{if(!d.slots[C193.pick])return;if(confirm(t('delQ'))){d.slots.splice(C193.pick,1);d.cur=-1;Store.put(d);C193.pick=0;const nd=Store.all();if(nd.slots.length)openPicker(nd);else openCreator()}};
+  $('pGo').onclick=()=>{const i=C193.pick;if(!d.slots[i])return;d.cur=i;d.last193=i;Store.put(d);S=d.slots[i];el.classList.add('hide');el.classList.remove('p193');startGame()};   /* the list it was opened with, as before 1.93 */
+  pkDraw193()};
+addEventListener('resize',()=>{try{if($('cr').classList.contains('p193'))pkDraw193()}catch(e){}});
 </script></body></html>
