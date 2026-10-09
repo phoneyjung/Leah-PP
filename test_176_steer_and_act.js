@@ -62,6 +62,8 @@ function fingers(cdp) { const pts = {}; let next = 20; const list = () => Object
     move: async (id, x, y) => { pts[id] = [x, y]; await cdp.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: list() }); },
     up: async id => { const p = pts[id]; if (!p) return; delete pts[id]; await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [{ x: Math.round(p[0]), y: Math.round(p[1]), id: +id }] }); },
     clear: async () => { for (const id of Object.keys(pts)) { const p = pts[id]; delete pts[id]; await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [{ x: Math.round(p[0]), y: Math.round(p[1]), id: +id }] }); } } }; }
+// 2.00: for age 10+ the thing in front (explore, dig, talk…) is on the small button beside the attack button (#bCtx200) and the E key; a child keeps the big button and Space
+const actSel = pg => pg.evaluate(() => { try { ctxShow200(); } catch (e) { } const b = document.getElementById('bCtx200'); return !isKid() && b && !b.classList.contains('hide') ? '#bCtx200' : '#bAtk'; });
 const centre = (pg, sel) => pg.evaluate(sel => { const q = document.querySelector(sel).getBoundingClientRect(); return [Math.round(q.left + q.width / 2), Math.round(q.top + q.height / 2)]; }, sel);
 const T = (pg, fn, ...a) => pg.evaluate((fn, a) => window.__t176[fn](...a), fn, a);
 // reading the samples [time, x, y, attack cooldown, monster HP, stick held, command on]
@@ -120,7 +122,7 @@ const allHeld = (s, t0, t1) => s.filter(r => r[0] >= t0 && r[0] <= t1).every(r =
               if (!/ระยะ/.test(r.hint)) fail(dev + ', ' + mode + ' stick: no out-of-reach hint (message: "' + r.hint + '")'); if (r.target) fail(dev + ', ' + mode + ' stick: the far monster stayed targeted'); await F.clear(); await sleep(300); } }
           // --- "explore" on the big button beside a crystal, with the stick held: the question opens ---
           { const r = R['explore, ' + mode + ' stick'] = {}, c = await T(pg, 'crystal', 38, 200); if (!c) { fail(dev + ': no crystal with open ground beside it'); } else {
-              const st = await steer(mode, c.d); await T(pg, 'place'); const b = await centre(pg, '#bAtk'), f2 = await F.down(b[0], b[1]); await sleep(80); await F.up(f2); await sleep(150); const mid = await T(pg, 'state'); await sleep(2300); const e = await T(pg, 'state');
+              const st = await steer(mode, c.d); await T(pg, 'place'); const b = await centre(pg, await actSel(pg)), f2 = await F.down(b[0], b[1]); await sleep(80); await F.up(f2); await sleep(150); const mid = await T(pg, 'state'); await sleep(2300); const e = await T(pg, 'state');
               r.stickHeldUntilQuestion = mid.stick || mid.modal; r.question = e.modal; if (!e.modal) fail(dev + ', ' + mode + ' stick: "explore" pressed while steering did not open the question');
               if (!mid.stick && !mid.modal) fail(dev + ', ' + mode + ' stick: the stick let go when the big button was pressed');   // an opening window ends the floating stick, as before
               await F.clear(); await T(pg, 'calm'); await sleep(300); } }
@@ -182,7 +184,7 @@ const allHeld = (s, t0, t1) => s.filter(r => r[0] >= t0 && r[0] <= t1).every(r =
       { const r = R['Space held while a key walks'] = {}, m = await T(pg, 'mon', 20, 260), k = key(m.d); await pg.keyboard.down(k); await sleep(200); await T(pg, 'place'); await T(pg, 'start'); const t0 = await T(pg, 'now'); await pg.keyboard.down(' '); await sleep(1700); const t1 = await T(pg, 'now'); await pg.keyboard.up(' '); await sleep(1100);
         const s = await T(pg, 'stop'), sw = swingTimes(s, t0, t1); await pg.keyboard.up(k); r.swingsWhileHeld = sw.length; r.movedWhileHeld = sw.length ? moved(s, sw[0], t1) : -1; r.walkedAfterRelease = moved(s, t1 + 300, t1 + 1000);
         if (sw.length < 2) fail('computer: holding Space 1.7 s made ' + sw.length + ' swings, expected 2 or more'); if (r.movedWhileHeld > 8) fail('computer: moved ' + r.movedWhileHeld + ' px while Space was held'); if (r.walkedAfterRelease < 45) fail('computer: after letting go of Space the held key walked only ' + r.walkedAfterRelease + ' px'); await sleep(300); }
-      { const r = R['Space explores while a key walks'] = {}, c = await T(pg, 'crystal', 38, 200), k = key(c.d); await pg.keyboard.down(k); await sleep(200); await T(pg, 'place'); await pg.keyboard.press(' '); await sleep(2500); const e = await T(pg, 'state'); await pg.keyboard.up(k);
+      { const r = R['Space explores while a key walks'] = {}, c = await T(pg, 'crystal', 38, 200), k = key(c.d); await pg.keyboard.down(k); await sleep(200); await T(pg, 'place'); await pg.keyboard.press((await actSel(pg)) === '#bCtx200' ? 'e' : ' '); await sleep(2500); const e = await T(pg, 'state'); await pg.keyboard.up(k);
         r.question = e.modal; if (!e.modal) fail('computer: Space beside a crystal did not open the question while a key was held'); await T(pg, 'calm'); await sleep(300); }
       // a stand-in gamepad (not a real one): the stick axes and button 0, read by the game's own gamepad code
       { await pg.evaluate(() => { window.__pad = { connected: true, axes: [0, 0], buttons: Array.from({ length: 12 }, () => ({ pressed: false })) }; Object.defineProperty(navigator, 'getGamepads', { value: () => [window.__pad], configurable: true }); });

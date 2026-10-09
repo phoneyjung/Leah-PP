@@ -14,13 +14,14 @@ async function check(name,fn){try{results[name]=await fn()}catch(e){errors.push(
    await pg.evaluate(()=>{if(!window._says){window._says=[];const o=window.say;window.say=function(s){window._says.push(String(s));return o.apply(this,arguments)}}})};
   const says=()=>pg.evaluate(()=>{const a=window._says.slice();window._says.length=0;return a});
   const at=async(x,y)=>{await pg.evaluate((x,y)=>{closeModal();DLG=null;PAUSE=false;P.x=x;P.y=y;P.path=null;P.sit=null},x,y);await sleep(350)};
-  const press=async()=>{const e=await pg.$('#bAtk');const r=await e.boundingBox();await pg.mouse.click(r.x+r.width/2,r.y+r.height/2);await sleep(350)};   // ปุ่มใหญ่จริง
-  const clickFirst=async()=>{const b=await pg.$('#mBody button');const r=await b.boundingBox();await pg.mouse.click(r.x+r.width/2,r.y+r.height/2);await sleep(900)};
+  // 2.00: อายุ 10+ สิ่งที่ทำตรงหน้าอยู่บนปุ่มเล็กข้างปุ่มตี (#bCtx200) · เด็กใช้ปุ่มใหญ่
+  const press=async()=>{const id=await pg.evaluate(()=>{try{ctxShow200()}catch(e){}const b=document.getElementById('bCtx200');return !isKid()&&b&&!b.classList.contains('hide')?'#bCtx200':'#bAtk'});const e=await pg.$(id);const r=await e.boundingBox();await pg.mouse.click(r.x+r.width/2,r.y+r.height/2);await sleep(350)};   // ปุ่มจริง
+  const clickFirst=async()=>{const b=await pg.$('#mBody button:not(#mX)');   /* 1.92 put the close button (#mX) first in a slim top bar */const r=await b.boundingBox();await pg.mouse.click(r.x+r.width/2,r.y+r.height/2);await sleep(900)};
   const setLv=lv=>pg.evaluate(lv=>{const h=HOME.get();h.lv=lv;if(h.house)h.house.lv=lv;HOME.put(h)},lv);
   await farm();const sign=await pg.evaluate(()=>[M.sign.x,M.sign.y+30]),shed=await pg.evaluate(()=>[M.shed.x,M.shed.y+30]);
 
   await check('BUG-7 ปุ่มซื้อบนป้ายบ้าน',async()=>{await setLv(1);await at(...sign);await press();
-   const b=await pg.evaluate(()=>document.querySelector('#mBody button').textContent.trim());await clear();
+   const b=await pg.evaluate(()=>document.querySelector('#mBody button:not(#mX)').textContent.trim());await clear();
    assert(!b.includes('แล้ว'),'ปุ่มซื้อต้องไม่มีคำว่า "แล้ว": '+b);assert(b.includes('150'),'ปุ่มซื้อต้องบอกราคา 150: '+b);return b});
 
   await check('BUG-8 ป้ายบ้านหยุดขายที่ขั้น 3',async()=>{await setLv(3);await pg.evaluate(()=>{S.coins=5000;save()});await at(...sign);await press();

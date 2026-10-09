@@ -43,7 +43,7 @@ async function portableLaunches(){const files=fs.readdirSync(root).filter(n=>/^(
   await check('fish-real-button',async()=>{await pg.evaluate(()=>{P.sit=null;P.x=M.fishSpot.x;P.y=M.fishSpot.y;P.path=null;FISHING.on=false;FISHING.st='idle';S.reelFish=false;S.fishBag=[];S.life.fish={lv:1,xp:0};
    window._getHours=Date.prototype.getHours;Date.prototype.getHours=()=>10;window._roll=rollFish;window._sample=0;
    rollFish=function(){const old=Math.random;Math.random=()=>window._sample;try{return window._roll()}finally{Math.random=old}}});await sleep(400);
-   const samples=[];try{for(const seed of [.01,.5,.99]){await pg.evaluate(seed=>{window._sample=seed;FISHING.st='idle'},seed);await press(pg,'#bAtk');
+   const samples=[];try{for(const seed of [.01,.5,.99]){await pg.evaluate(seed=>{window._sample=seed;FISHING.st='idle'},seed);await press(pg,await pg.evaluate(()=>{try{ctxShow200()}catch(e){}const b=document.getElementById('bCtx200');return !isKid()&&b&&!b.classList.contains('hide')?'#bCtx200':'#bAtk'}));   /* 2.00: 10+ casts with the small button; a bite is reeled with either */
     const a=await pg.evaluate(()=>({state:FISHING.st,fish:FISHING.fish,eligible:hourOk(10,FISH[FISHING.fish][3]),lake:FLOC.lake.includes(FISHING.fish)}));assert.equal(a.state,'wait');assert(a.eligible&&a.lake,'fish matches place and time');samples.push(a.fish);
    }const before=await pg.evaluate(()=>({n:(S.fishBag||[]).length,index:FISHING.fish}));
    await pg.waitForFunction(()=>FISHING.st==='bite',{timeout:8000});await press(pg,'#bAtk');

@@ -1,4 +1,5 @@
 // Version 1.78 (Claude, owner's request of 8 Oct with a screenshot of a child digging beside monsters):
+// 2.00 (owner 9 Oct 17:22): standing on a spot no longer digs (checked in A); a dig starts from the action button — 10+: the small #bCtx200 at the attack button's lower left, the big button keeps attacking; a child: the big button.
 // "while digging, the attack button becomes the dig button (one button, many uses); monsters can hit you while you dig, and a hit cancels the dig, so you must start digging again".
 // Measured through the screen on a phone (844×390, real touch taps on the big button) and a keyboard: the button's word, what a press DOES (the dig ends, the monster is
 // not attacked), whether a monster strikes during a dig and what that strike does (dig gone, spot whole again, no restart by standing there, restart by the button),
@@ -42,7 +43,7 @@ async function player(browser, w, h, touch, age) {
       T.pin = setInterval(() => { o.x = X; o.y = Y; o.spd = 0; if (o.hp < 5e5) o.hp = 1e6; }, 8); return { kind: o.kind, atk: o.atk, dist: Math.round(Math.hypot(X - P.x, Y - P.y)) }; };
     T.needleInGold = () => !!(DIG && !DIG.done && Math.abs(digNeedle() - DIG.c) <= DIG.g / 2);
     T.state = () => ({ dig: !!(DIG && !DIG.done), digDone: !!(DIG && DIG.done), hp: S.hp, target: !!P.target, act: P.act ? P.act.k : null, pause: PAUSE, btn: typeof DIG178 !== 'undefined' ? DIG178.btn : -1, stops: typeof DIG178 !== 'undefined' ? DIG178.stops : -1,
-      label: document.getElementById('atkL').textContent, icon: (document.querySelector('#bAtk .ctxIc') || {}).dataset ? document.querySelector('#bAtk .ctxIc').dataset.icon || document.querySelector('#bAtk .ctxIc').textContent : '',
+      label: document.getElementById('atkL').textContent, ctxOn: !!document.getElementById('bCtx200') && !document.getElementById('bCtx200').classList.contains('hide'), ctxW: (document.querySelector('#bCtx200 .w200') || {}).textContent || '', icon: (document.querySelector('#bAtk .ctxIc') || {}).dataset ? document.querySelector('#bAtk .ctxIc').dataset.icon || document.querySelector('#bAtk .ctxIc').textContent : '',
       drops: DROPS.length, coins: S.coins, msg: +document.getElementById('msg').style.opacity > 0 ? document.getElementById('msg').textContent : '', moHp: T.mo ? T.mo.hp : 0,
       digT: DIG ? +DIG.t.toFixed(2) : null, spotDone: T.d ? !!T.d.done : null, spotWait: T.d ? !!T.d.wait178 : null, saved: T.d ? (S.digs[M.id] || []).includes(T.d.id) : null, kid: isKid(), map: M.id });
     T.tx = k => t(k);
@@ -51,6 +52,7 @@ async function player(browser, w, h, touch, age) {
 }
 const T = (pg, fn, ...a) => pg.evaluate((fn, a) => window.__t178[fn](...a), fn, a);
 const tapBig = async pg => { const r = await pg.evaluate(() => { const q = document.getElementById('bAtk').getBoundingClientRect(); return [q.left + q.width / 2, q.top + q.height / 2]; }); await pg.touchscreen.tap(r[0], r[1]); };
+const startDig = async (pg, kid) => { const sel = kid ? '#bAtk' : '#bCtx200'; for (let i = 0; i < 12; i++) { const ok = await pg.evaluate(q => { const b = document.querySelector(q); return !!b && !b.classList.contains('hide') && b.getBoundingClientRect().width > 0; }, sel); if (ok) break; await sleep(100); } const r = await pg.evaluate(q => { const b = document.querySelector(q); if (!b || b.classList.contains('hide')) return null; const z = b.getBoundingClientRect(); return [z.left + z.width / 2, z.top + z.height / 2]; }, sel); if (!r) return false; await pg.touchscreen.tap(r[0], r[1]); return true; };
 const waitFor = async (pg, fn, ms) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (await pg.evaluate(fn)) return Date.now() - t0; await sleep(10); } return -1; };
 
 (async () => {
@@ -65,7 +67,8 @@ const waitFor = async (pg, fn, ms) => { const t0 = Date.now(); while (Date.now()
       // A · the big button says "Dig!" while the needle runs, and pressing it is the dig tap (10 digs)
       { const A = R.buttonDig = { n: 0, labelOk: 0, iconOk: 0, ended: 0, ms: [], noAttack: 0, labelBack: 0, gold: 0 };
         for (let i = 0; i < 10; i++) { await T(pg, 'trial', i);
-          const started = await waitFor(pg, () => DIG && !DIG.done, 1500); if (started < 0) { fail('A' + i + ': standing on the spot did not start the dig'); continue; } A.n++;
+          if (await waitFor(pg, () => DIG && !DIG.done, 700) >= 0) fail('A' + i + ': standing on the spot started a dig by itself (2.00: only a press digs)'); else A.noSelfStart = (A.noSelfStart || 0) + 1;
+          if (!(await startDig(pg, false))) { fail('A' + i + ': no small action button beside the attack button'); continue; } const started = await waitFor(pg, () => DIG && !DIG.done, 1500); if (started < 0) { fail('A' + i + ': the action button did not start the dig'); continue; } A.n++;
           await sleep(120); const s1 = await T(pg, 'state'); if (s1.label === tx.now) A.labelOk++; else fail('A' + i + ': label during dig "' + s1.label + '" (want "' + tx.now + '") ' + JSON.stringify(s1)); if (s1.icon === 'hammer' || s1.icon === '⛏️') A.iconOk++; else fail('A' + i + ': icon during dig "' + s1.icon + '"');
           const gold = await waitFor(pg, () => window.__t178.needleInGold(), 2500); if (gold >= 0) A.gold++;
           const t0 = Date.now(); await tapBig(pg); const ended = await waitFor(pg, () => !DIG || DIG.done, 400); const s2 = await T(pg, 'state');
@@ -78,7 +81,7 @@ const waitFor = async (pg, fn, ms) => { const t0 = Date.now(); while (Date.now()
       // B · a slime beside the spot strikes during the dig: the dig is gone, the spot is whole, standing there does not restart it, the button attacks the slime, and after it leaves the button digs again (5 trials)
       { const B = R.monsterCancel = { n: 0, struck: 0, cancelled: 0, spotWhole: 0, notSaved: 0, noRestart: 0, msg: 0, buttonAttacks: 0, restartByButton: 0, strikeMs: [] };
         for (let i = 0; i < 5; i++) { await T(pg, 'trial', i);
-          const started = await waitFor(pg, () => DIG && !DIG.done, 1500); if (started < 0) { fail('B' + i + ': dig did not start'); continue; } B.n++;
+          await startDig(pg, false); const started = await waitFor(pg, () => DIG && !DIG.done, 1500); if (started < 0) { fail('B' + i + ': dig did not start'); continue; } B.n++;
           const mo = await pg.evaluate(() => window.__t178.mon(window.__t178.d, 12)); if (!mo) { fail('B' + i + ': no monster to place'); continue; }
           const t0 = Date.now(); const hit = await waitFor(pg, () => S.hp < 400, 2600); const s1 = await T(pg, 'state');
           if (hit >= 0) { B.struck++; B.strikeMs.push(hit); } else fail('B' + i + ': the slime did not strike during the dig (hp ' + s1.hp + ', dig ' + s1.dig + ')');
@@ -91,8 +94,8 @@ const waitFor = async (pg, fn, ms) => { const t0 = Date.now(); while (Date.now()
           await tapBig(pg); await sleep(250); const s3 = await T(pg, 'state'); if (s3.target && !s3.dig) B.buttonAttacks++; else fail('B' + i + ': button beside the slime: target ' + s3.target + ', dig ' + s3.dig + ', label "' + s3.label + '"');
           // the slime leaves; the button says Dig and a press starts the dig again
           await T(pg, 'away'); await pg.evaluate(() => { P.target = null; P.path = null; }); await sleep(600); const s4 = await T(pg, 'state');
-          if (s4.label !== tx.dig) fail('B' + i + ': label after the slime left "' + s4.label + '" (want "' + tx.dig + '")');
-          await tapBig(pg); const re = await waitFor(pg, () => DIG && !DIG.done, 1500); if (re >= 0) B.restartByButton++; else fail('B' + i + ': the dig button did not restart the dig (label "' + s4.label + '")');
+          if (!s4.ctxOn || s4.ctxW !== tx.dig) fail('B' + i + ': small button after the slime left: shown ' + s4.ctxOn + ' "' + s4.ctxW + '" (want "' + tx.dig + '")'); if (s4.label === tx.dig) fail('B' + i + ': the big button turned into dig (2.00: it keeps attacking)');
+          await startDig(pg, false); const re = await waitFor(pg, () => DIG && !DIG.done, 1500); if (re >= 0) B.restartByButton++; else fail('B' + i + ': the dig button did not restart the dig (label "' + s4.label + '")');
           if (i === 0) await pg.screenshot({ path: out + '/b_adult_cancelled.png' }); await T(pg, 'fresh'); }
         B.strikeMsMax = B.strikeMs.length ? Math.max(...B.strikeMs) : null; }
 
@@ -100,7 +103,7 @@ const waitFor = async (pg, fn, ms) => { const t0 = Date.now(); while (Date.now()
       { const C = R.missKeeps = { n: 0, kept: 0, finished: 0 };
         await pg.evaluate(() => { window.__fc178 = fleeCh; fleeCh = () => 1; });
         for (let i = 0; i < 3; i++) { await T(pg, 'trial', i);
-          if (await waitFor(pg, () => DIG && !DIG.done, 1500) < 0) { fail('C' + i + ': dig did not start'); continue; } C.n++;
+          await startDig(pg, false); if (await waitFor(pg, () => DIG && !DIG.done, 1500) < 0) { fail('C' + i + ': dig did not start'); continue; } C.n++;
           await pg.evaluate(() => window.__t178.mon(window.__t178.d, 12)); await sleep(1800); const s1 = await T(pg, 'state');
           if (s1.dig && s1.hp === 400 && s1.stops === 5) C.kept++; else fail('C' + i + ': dig ' + s1.dig + ' hp ' + s1.hp + ' stops ' + s1.stops + ' after a missed strike');
           const fin = await waitFor(pg, () => !DIG, 3000); if (fin >= 0) C.finished++; else fail('C' + i + ': dig never finished'); await T(pg, 'fresh'); }
@@ -109,7 +112,7 @@ const waitFor = async (pg, fn, ms) => { const t0 = Date.now(); while (Date.now()
       // D · keyboard still digs (Space) and the attack key still attacks when not digging
       { const D = R.keys = { space: 0 };
         for (let i = 0; i < 3; i++) { await T(pg, 'trial', i);
-          if (await waitFor(pg, () => DIG && !DIG.done, 1500) < 0) { fail('D' + i + ': dig did not start'); continue; } await sleep(200);
+          await startDig(pg, false); if (await waitFor(pg, () => DIG && !DIG.done, 1500) < 0) { fail('D' + i + ': dig did not start'); continue; } await sleep(200);
           await pg.keyboard.press('Space'); if (await waitFor(pg, () => !DIG || DIG.done, 300) >= 0) D.space++; else fail('D' + i + ': Space did not dig'); await sleep(600); } }
       await pg.screenshot({ path: out + '/adult_end.png' }); await ctx.close(); }
 
@@ -119,7 +122,7 @@ const waitFor = async (pg, fn, ms) => { const t0 = Date.now(); while (Date.now()
       const tx = { now: await T(pg, 'tx', 'digNow') };
       const A = K.besideSlime = { n: 0, labelOk: 0, unhurt: 0, ended: 0, noAttack: 0 };
       for (let i = 0; i < 5; i++) { await T(pg, 'trial', i);
-        if (await waitFor(pg, () => DIG && !DIG.done, 1500) < 0) { fail('K' + i + ': dig did not start'); continue; } A.n++;
+        await sleep(400); await startDig(pg, true); if (await waitFor(pg, () => DIG && !DIG.done, 1500) < 0) { fail('K' + i + ': dig did not start'); continue; } A.n++;
         await pg.evaluate(() => window.__t178.mon(window.__t178.d, 12)); await sleep(1500); const s1 = await T(pg, 'state');
         if (s1.label === tx.now) A.labelOk++; else fail('K' + i + ': label "' + s1.label + '"'); if (s1.dig && s1.hp === 400 && s1.stops === 0) A.unhurt++; else fail('K' + i + ': child hurt or dig cancelled: hp ' + s1.hp + ' dig ' + s1.dig + ' stops ' + s1.stops);
         await tapBig(pg); const ended = await waitFor(pg, () => !DIG || DIG.done, 400); const s2 = await T(pg, 'state'); if (ended >= 0) A.ended++; else fail('K' + i + ': press did not end the dig'); if (!s2.target) A.noAttack++; else fail('K' + i + ': press attacked');

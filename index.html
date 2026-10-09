@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 1.99';
+const VERSION='Lantern Academy 2.00';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -1276,7 +1276,7 @@ function update(dt){if(!M||!S)return;if(msgT>0){msgT-=dt;if(msgT<=0)$('msg').sty
     if(isKid())for(const c of M.crystals||[])if(!c.awake&&quizCool<=0&&Math.hypot(c.x-P.x,c.y+12-P.y)<18){quizCool=2;P.path=null;openQuiz(c)}
     for(const n of M.npcs||[]){const d=Math.hypot(P.x-n.x,P.y-n.y);if(d<80)n.sx=rowFor(P.x-n.x,P.y-n.y)*64;else n.sx=n.face*64}
     goalT-=dt;if(goalT<=0){goalT=.5;updateGoal()}
-    for(const d of M.digs||[])if(!d.done&&Math.hypot(d.x-P.x,d.y-P.y)<14)doDig(d);
+    /* 2.00: walking over a dig spot no longer digs (owner 9 Oct 17:22) · a dig starts from a button, the balloon or a tap on the spot (P.act) */
     for(const c of M.chests||[])if(!c.open&&Math.hypot(c.x-P.x,c.y-P.y)<20)openChest(c);
     for(const sh of M.shrines||[])if(!sh.used&&Math.hypot(sh.x-P.x,sh.y-P.y)<40){sh.used=true;S.eff=S.eff||{};const until=performance.now()+30000;
       if(isKid()){S.coins+=15;say('✨ '+t('shrineKid'))}else if(sh.kind==='C'){S.eff.dash=until;S.eff.quick=until;say('💠 '+t('shrineC'))}else if(sh.kind==='G'){S.eff.power=until;say('🌟 '+t('shrineG'))}else{S.hp=hpMax();S.eff.guard=until;say('💗 '+t('shrineP'))}
@@ -6459,4 +6459,51 @@ function wmDeco199(){const w=document.getElementById('wm186');if(!w||!WM186.open
 #wm186 .pe199.n{top:0;left:50%;transform:translateX(-50%);width:44px;height:18px;border-radius:0 0 8px 8px}#wm186 .pe199.s{bottom:0;left:50%;transform:translateX(-50%);width:44px;height:18px;border-radius:8px 8px 0 0}
 #wm186 .pe199.w{left:0;top:50%;transform:translateY(-50%);width:18px;height:44px;border-radius:0 8px 8px 0}#wm186 .pe199.e{right:0;top:50%;transform:translateY(-50%);width:18px;height:44px;border-radius:8px 0 0 8px}
 @media (max-height:420px){#wm186 .cell.c199 .lock199 small{display:none}#wm186 .cell.c199 .nm{font-size:.78em}}`;document.head.appendChild(st)}
+// ---- 2.00 (owner 9 Oct 17:22 with an RoV screenshot): dig only when asked · the big button attacks only (10+) · a small action button beside it · the cluster re-proportioned like RoV ----
+// "ควรกดปุ่มขุดก่อน ถึงจะขุด … เมื่อเข้าไปใกล้ ข้าง ๆ ปุ่มตีจะมีปุ่มเล็ก ๆ เพิ่มเข้ามาทางซ้าย เป็นปุ่มขุด จะแตะที่ไอคอนกลางจอก็ได้ หรือจะกดปุ่มนี้ก็ได้ … ปรับขนาดสัดส่วนปุ่มใหม่ ให้เหมือน rov เลย"
+// · every age: walking over a dig spot no longer starts a dig; a dig starts from the action button, the balloon or a tap on the spot (all three go through P.act)
+// · 10+ (the RoV cluster): the big button keeps its sword face and only attacks; whatever can be done nearby (dig, talk, fish, a door…) shows on #bCtx200 at its lower left;
+//   during a dig's needle both the big button (as in 1.78) and the small one are the dig tap · children keep their one big button for everything
+const CTX200={mode:null,mute:false,last:''};
+try{Object.assign(TX.th,{ctx200:'ทำ'});if(TX.en)Object.assign(TX.en,{ctx200:'Do'})}catch(e){}
+function ctxSplit200(){try{return !!(S&&P&&!isKid()&&document.body.classList.contains('rov180')&&!digOn178()&&!(FISHING.on&&FISHING.st!=='idle'))}catch(e){return false}}   /* a dig's needle and a fish on the line: both buttons are the tap */
+// 1) no dig without asking for it: the walk-over dig in the main loop is gone (one line, marked 2.00)
+// 2) the big button: attack only while the cluster is split
+{const o=anyNear;anyNear=function(){if(CTX200.mute)return null;return o.apply(this,arguments)}}
+{const o=g9bButton;g9bButton=function(){CTX200.mute=ctxSplit200();try{return o.apply(this,arguments)}finally{CTX200.mute=false}}}
+{const o=autoAct;autoAct=function(){if(CTX200.mode!=='ctx'&&ctxSplit200()){if(!S||!P||P.dead)return;const mo=MONS.filter(m=>!m.happy).sort((a,b)=>Math.hypot(a.x-P.x,a.y-P.y)-Math.hypot(b.x-P.x,b.y-P.y))[0];if(mo&&Math.hypot(mo.x-P.x,mo.y-P.y)<170){attackTarget(mo);return}say(t('noHit'));return}
+  return o.apply(this,arguments)}}
+// 3) the small action button
+function ctxAct200(){if(!S||!P||PAUSE&&!digOn178())return;CTX200.mode='ctx';try{autoAct()}finally{CTX200.mode=null}}
+function ctxMake200(){let b=document.getElementById('bCtx200');if(b)return b;const act=document.getElementById('act');if(!act)return null;b=document.createElement('button');b.id='bCtx200';b.className='hide';b.type='button';
+  b.innerHTML='<span class="ic200"></span><small class="w200"></small><span class="kb184" data-k="E"></span>';b.addEventListener('click',e=>{e.stopPropagation();ctxAct200()});act.appendChild(b);return b}
+function ctxShow200(){const b=ctxMake200();if(!b)return;let c=null;try{if(S&&P&&!P.dead&&!isKid()&&document.body.classList.contains('rov180')&&(!PAUSE||digOn178())&&!DLG)c=anyNear()}catch(e){c=null}
+  const on=!!c;if(b.classList.contains('hide')===on){b.classList.toggle('hide',!on);try{thumbLayout()}catch(e){}}if(!c){CTX200.last='';return}
+  const key=c.k+'|'+LANG;if(key===CTX200.last)return;CTX200.last=key;const ic=b.querySelector('.ic200'),w=b.querySelector('.w200');w.textContent=t(c.k);ic.textContent='';const ik=(typeof ICON_OF!=='undefined')&&ICON_OF[c.k];
+  if(ik&&IMG.uiIcons){const cv=document.createElement('canvas');cv.width=cv.height=32;cv.style.cssText='width:22px;height:22px;image-rendering:pixelated;display:block';try{uiIconDraw(cv.getContext('2d'),ik,0,0,32)}catch(e){}ic.appendChild(cv)}else ic.textContent=c.ic||'✋'}
+setInterval(()=>{try{ctxShow200()}catch(e){}},200);
+// the E key is the small button for 10+ (Space stays the attack): through the 1.67 balloon's E when it is up, on its own when it is not
+function ctxOn200(){const b=document.getElementById('bCtx200');try{ctxShow200()}catch(e){}return !!(b&&!b.classList.contains('hide')&&ctxSplit200())}
+{const o=ctx167Use;ctx167Use=function(){const ev=window.event;if(ev&&ev.type==='keydown'&&ctxOn200()){ctxAct200();return}return o.apply(this,arguments)}}
+addEventListener('keydown',e=>{if((e.code==='KeyE'||e.key==='e'||e.key==='E')&&!e.repeat&&!e.target.closest?.('input,textarea,[contenteditable=true]')&&ctxOn200()){e.preventDefault();ctxAct200()}},true);
+// the helper buttons line up left of the new bottom row (the 1.80 rule started at 326 px and did not know the small button)
+{const old=thumbLayout;thumbLayout=function(){const r=old.apply(this,arguments);try{if(!document.body.classList.contains('thumbs')||!document.body.classList.contains('rov180'))return r;const act=document.getElementById('act');const big={bAtk:1,bSk:1,bJ1:1,bJ2:1,bSlot2:1,bSlot3:1,bDash:1,bAuto:1,bSit:1,bRest:1,bPot:1,bBuff:1,bQuest:1,bCtx200:1};let k=0;const ks=[...act.children].filter(b=>!big[b.id]&&!b.classList.contains('hide')&&b.style.display!=='none');
+  for(let i=ks.length-1;i>=0;i--){const b=ks[i];b.style.right='calc('+(374+k*54)+'px + env(safe-area-inset-right,0px))';b.style.bottom='calc(12px + env(safe-area-inset-bottom,0px))';k++}}catch(e){}return r}}
+// 4) the RoV proportions: attack 80 · skills 60 in an arc (1 left · 2 up-left · 3 top) · the small action button 42 at the attack's lower left · buff/potion/blink 50 on the bottom row
+{const st=document.createElement('style');const R=v=>'calc('+v+'px + env(safe-area-inset-right,0px))',B=v=>'calc('+v+'px + env(safe-area-inset-bottom,0px))';
+ st.textContent=`
+body.thumbs.rov180 #act #bAtk{width:80px!important;height:80px!important;right:${R(14)}!important;bottom:${B(14)}!important}
+body.thumbs.rov180 #act #bSk{width:60px!important;height:60px!important;right:${R(30)}!important;bottom:${B(120)}!important}
+body.thumbs.rov180 #act #bJ2,body.thumbs.rov180 #act #bSlot3{width:60px!important;height:60px!important;right:${R(110)}!important;bottom:${B(102)}!important}
+body.thumbs.rov180 #act #bJ1,body.thumbs.rov180 #act #bSlot2{width:60px!important;height:60px!important;right:${R(146)}!important;bottom:${B(36)}!important}
+body.thumbs.rov180 #act #bDash{width:50px!important;height:50px!important;right:${R(211)}!important;bottom:${B(12)}!important}
+body.thumbs.rov180 #act #bPot{width:50px!important;height:50px!important;right:${R(265)}!important;bottom:${B(12)}!important}
+body.thumbs.rov180 #act #bBuff{width:50px!important;height:50px!important;right:${R(319)}!important;bottom:${B(12)}!important}
+body.thumbs.rov180 #act #bQuest{right:${R(14)}!important;bottom:${B(186)}!important}body.thumbs.rov180 #act #bAuto{right:${R(68)}!important;bottom:${B(186)}!important}
+@media (max-height:387px){body.thumbs.rov180 #act #bQuest{right:${R(150)}!important;bottom:${B(172)}!important}body.thumbs.rov180 #act #bAuto{right:${R(204)}!important;bottom:${B(172)}!important}}
+#act #bCtx200{position:absolute;right:${R(97)}!important;bottom:${B(8)}!important;width:44px;height:44px;min-width:0;min-height:0;padding:0;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;
+  background:radial-gradient(ellipse at 40% 10%,#4d3f63,#221a32 78%);border:2px solid #e2c583;color:#fff3db;box-shadow:0 3px 8px #08061088;z-index:6;animation:ctxIn200 .18s ease-out}
+#act #bCtx200.hide{display:none!important}#act #bCtx200 .ic200{font-size:18px;line-height:1;display:block}#act #bCtx200 .w200{font-size:8.5px;line-height:1;margin-top:1px;font-weight:700;white-space:nowrap;max-width:40px;overflow:hidden}
+#act #bCtx200:active{transform:scale(.92)}
+@keyframes ctxIn200{from{transform:scale(.4);opacity:0}to{transform:none;opacity:1}}`;document.head.appendChild(st)}
 </script></body></html>

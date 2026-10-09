@@ -8,8 +8,10 @@ try{for(const touch of [false,true])for(const lang of ['th','en']){
  await pg.goto('http://localhost:'+(process.env.PORT||8775)+'/?gm',{waitUntil:'load'});await pg.waitForFunction(()=>!document.getElementById('load')&&typeof ROOM2!=='undefined');
  await pg.evaluate(()=>{gmMakeSlot();S=Store.all().slots[Store.all().cur];S.mus=S.snd=false;S.seen={intro:1};startGame();document.querySelectorAll('#cr,#title,#picker').forEach(e=>e.classList.add('hide'));goMap('farm')});await sleep(2200);
  const press=async sel=>{await pg.waitForSelector(sel,{visible:true});const e=await pg.$(sel);await e.scrollIntoView();if(touch)await pg.tap(sel);else await pg.click(sel);await sleep(300)};
+ // 2.00: age 10+ does the thing in front with the small button beside the attack button (#bCtx200); a child with the big one
+ const pressAct=async()=>press(await pg.evaluate(()=>{try{ctxShow200()}catch(e){}const b=document.getElementById('bCtx200');return !isKid()&&b&&!b.classList.contains('hide')?'#bCtx200':'#bAtk'}));
  await pg.evaluate(()=>{closeModal();DLG=null;PAUSE=false});await press('#bSet');await press(lang==='en'?'#lEn':'#lTh');await press('#mX');assert.equal(await pg.evaluate(()=>LANG),lang);
- const sign=async lv=>{await pg.evaluate(lv=>{closeModal();DLG=null;PAUSE=false;const h=HOME.get();h.lv=lv;HOME.put(h);P.x=M.sign.x;P.y=M.sign.y+30;P.path=null;P.sit=null},lv);await sleep(350);await press('#bAtk')};
+ const sign=async lv=>{await pg.evaluate(lv=>{closeModal();DLG=null;PAUSE=false;const h=HOME.get();h.lv=lv;HOME.put(h);P.x=M.sign.x;P.y=M.sign.y+30;P.path=null;P.sit=null},lv);await sleep(350);await pressAct()};
  await pg.evaluate(()=>{window.feedback162=[];const old=say;window.say=function(s){feedback162.push(String(s));return old.apply(this,arguments)}});
  await sign(1);const offer=await pg.$eval('#hsUp',e=>e.textContent);assert(offer.includes('150'));assert(offer.includes(lang==='en'?'Expand house':'ขยายบ้าน'));
  await pg.evaluate(()=>{S.coins=10});await press('#hsUp');assert.deepEqual(await pg.evaluate(()=>[houseLv(),S.coins]),[1,10]);
@@ -22,7 +24,7 @@ try{for(const touch of [false,true])for(const lang of ['th','en']){
  await pg.screenshot({path:out+'/'+lang+'-'+(touch?'touch':'pc')+'-max.png'});
  // Existing produce is nonzero: feedback must report the increase, not the total.
  const yields=[];for(const star of [0,1]){
-  await pg.evaluate(star=>{closeModal();DLG=null;PAUSE=false;const h=HOME.get(),p=M.plots[0];h.plots={};h.plots[p.i]={crop:'cab',st:'ripe',star,t:Date.now()};h.pantry.cab=20;HOME.put(h);P.x=p.x;P.y=p.y+18;P.path=null;feedback162=[]},star);await sleep(350);await press('#bAtk');
+  await pg.evaluate(star=>{closeModal();DLG=null;PAUSE=false;const h=HOME.get(),p=M.plots[0];h.plots={};h.plots[p.i]={crop:'cab',st:'ripe',star,t:Date.now()};h.pantry.cab=20;HOME.put(h);P.x=p.x;P.y=p.y+18;P.path=null;feedback162=[]},star);await sleep(350);await pressAct();
   const r=await pg.evaluate(()=>({added:HOME.get().pantry.cab-20,messages:feedback162.filter(x=>x.includes('🧺'))}));assert.equal(r.added,3+star);assert.equal(r.messages.length,1);assert(r.messages[0].endsWith('×'+r.added));yields.push(r);
  }
  // Use the existing shop button, then sell exactly one fish and the remainder by type.

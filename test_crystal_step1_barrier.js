@@ -44,8 +44,10 @@ const MAPS_WITH_CRYSTALS=['cavemouth','hunt1'];
     pack(c,dist,n){const ps=spot(c,dist),ms=MONS.filter(m=>!m.happy&&!m.boss).slice(0,n),used=[];ms.forEach((m,k)=>{const p=ps[Math.floor(k*ps.length/ms.length)];if(!p)return;m.x=p[0];m.y=p[1];m.hp=m.max=1e6;m.st='chase';m.stun=0;used.push(m)});return used}}});
   const enter=async id=>{await pg.evaluate(id=>{try{delete CACHE[id]}catch(e){}goMap(id)},id);await sleep(1300);await install();await pg.evaluate(()=>_bt.clear());
    assert.equal(await pg.evaluate(()=>M.id),id,'เปิดฉาก '+id+' ได้');assert(await pg.evaluate(()=>(M.crystals||[]).length>0),'ฉาก '+id+' มีคริสตัล')};
-  const label=()=>pg.evaluate(()=>document.getElementById('atkL').textContent.trim());
+  // 2.00: อายุ 10+ ปุ่มใหญ่เป็นปุ่มตีอย่างเดียว คำว่า สำรวจ อยู่บนปุ่มเล็กข้างปุ่มตี (#bCtx200) · เด็กยังใช้ปุ่มใหญ่ปุ่มเดียว
+  const label=()=>pg.evaluate(()=>{const b=document.getElementById('bCtx200');return (!isKid()&&b&&!b.classList.contains('hide')?b.querySelector('.w200').textContent:document.getElementById('atkL').textContent).trim()});
   const pressBig=async()=>{const e=await pg.$('#bAtk');const r=await e.boundingBox();await pg.mouse.click(r.x+r.width/2,r.y+r.height/2)};   // ปุ่มใหญ่จริง
+  const pressAct=async()=>{const id=await pg.evaluate(()=>{const b=document.getElementById('bCtx200');return !isKid()&&b&&!b.classList.contains('hide')?'#bCtx200':'#bAtk'});const e=await pg.$(id);const r=await e.boundingBox();await pg.mouse.click(r.x+r.width/2,r.y+r.height/2)};   // ปุ่มที่ทำสิ่งตรงหน้า (ปุ่มเล็กของ 10+ · ปุ่มใหญ่ของเด็ก)
   const quizOpen=()=>pg.evaluate(()=>!document.getElementById('modal').classList.contains('hide')&&document.querySelectorAll('#mBody .ch button').length===4);
   // ยืนที่จุด [x,y] แล้วปล่อยฝูงมอนสเตอร์ที่ถูกสั่งให้ไล่ตลอดเวลา (กรณีแย่ที่สุด เช่นโดนสกิลยั่ว) · คืนเลือดก่อน/หลัง และระยะใกล้คริสตัลที่สุดที่มอนสเตอร์เข้าไปถึง
   const siege=(ci,stand,sec,dist)=>pg.evaluate(async(ci,stand,sec,dist)=>{const c=M.crystals[ci];_bt.put(stand[0],stand[1]);const ms=_bt.pack(c,dist,6),hp0=S.hp;let minC=1e9,minP=1e9;
@@ -66,7 +68,7 @@ const MAPS_WITH_CRYSTALS=['cavemouth','hunt1'];
     assert.notEqual(want,'actExplore','ยังไม่มีคำ actExplore');assert.equal(out[nm],want,nm+': ปุ่มต้องเขียนว่า '+want)}
    await pg.evaluate(p=>_bt.put(p[0],p[1]),geo.out);await sleep(500);out['นอกบาเรีย 60 px']=await label();assert.notEqual(out['นอกบาเรีย 60 px'],want,'นอกบาเรียปุ่มต้องไม่ใช่ สำรวจ');return out});
 
-  await check('3 กด สำรวจ จากในบาเรีย แล้วเดินไปเปิดกิจกรรมของคริสตัล',async()=>{await pg.evaluate(p=>_bt.put(p[0],p[1]),geo.in80);await sleep(400);await pressBig();
+  await check('3 กด สำรวจ จากในบาเรีย แล้วเดินไปเปิดกิจกรรมของคริสตัล',async()=>{await pg.evaluate(p=>_bt.put(p[0],p[1]),geo.in80);await sleep(400);await pressAct();
    let open=false;for(let k=0;k<30&&!open;k++){await sleep(200);open=await quizOpen()}const d=await pg.evaluate(c=>Math.round(Math.hypot(P.x-c[0],P.y-c[1])),geo.c);await pg.evaluate(()=>_bt.clear());
    assert(open,'กดปุ่มใหญ่จากใกล้ขอบบาเรีย แล้ว 6 วินาทีต้องเห็นหน้าคำถาม 4 ตัวเลือก (ตัวละครอยู่ห่างคริสตัล '+d+' px)');return {opened:open,endDist:d}});
 

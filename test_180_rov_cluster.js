@@ -1,4 +1,6 @@
 // Version 1.80 (Claude, owner's order of 9 Oct with an RoV settings screenshot): the button cluster for players 12+ laid out the RoV way —
+// 2.00 (owner 9 Oct 17:22, RoV screenshot): skills in an arc around the attack button — skill 1 left (between the bottom row and the attack), skill 2 up-left, skill 3 on top;
+//   the bottom row is buff · potion · blink; standing by a dig spot shows the small action button #bCtx200 at the attack button's lower left, the big button keeps "attack".
 // bottom row from the left: buff slot (one support skill) · potion · blink · skill 1; skill 2 up-left of the attack button; skill 3 (the ultimate) above it;
 // above the cluster the bot button (one tap on/off, hold for its settings) and, flush right beside it, the guide button (1.83: dim until a destination is picked from its list; a tap then walks there).
 // Measured through the screen (phone 844×390 with real taps, computer 1180×820 with clicks and keys): where every button sits and that none overlap,
@@ -30,7 +32,7 @@ async function player(browser, w, h, touch, age) {
     T.calm = () => { try { closeModal(); } catch (e) { } PAUSE = false; P.sit = null; P.target = null; P.act = null; P.path = null; P.dead = 0; AUTO.on = false; try { HOLD = null; } catch (e) { } S.hp = hpMax(); hud(); };
     T.go = async id => { if (M.id !== id) { goMap(id); await new Promise(r => setTimeout(r, 1500)); } T.calm(); for (const m of MONS) m.x += 6000; };
     T.rect = id => { const b = document.getElementById(id); if (!b) return null; const r = b.getBoundingClientRect(), cs = getComputedStyle(b); return { x: r.left, y: r.top, w: r.width, h: r.height, cx: r.left + r.width / 2, cy: r.top + r.height / 2, shown: cs.display !== 'none' && r.width > 0, label: (b.querySelector('small') || {}).textContent || '', cls: b.className }; };
-    T.all = () => { const o = {}; for (const id of ['bAtk', 'bSk', 'bJ1', 'bJ2', 'bDash', 'bPot', 'bBuff', 'bAuto', 'bQuest', 'bRest', 'bCmp', 'mm']) o[id] = T.rect(id); return o; };
+    T.all = () => { const o = {}; for (const id of ['bAtk', 'bSk', 'bJ1', 'bJ2', 'bDash', 'bPot', 'bBuff', 'bAuto', 'bQuest', 'bRest', 'bCmp', 'mm', 'bCtx200']) o[id] = T.rect(id); return o; };
     T.state = () => ({ map: M.id, x: P.x, y: P.y, path: !!(P.path && P.path.length), pathLen: P.path ? P.path.length : 0, auto: !!AUTO.on, guard: !!(S.eff && S.eff.guard > performance.now()), guardCd: ((JCD.guard || 0) - performance.now()) / 1000,
       modal: !document.getElementById('modal').classList.contains('hide'), modalAuto: !!document.getElementById('aGo'), modalJobs: !!document.querySelector('[data-slb]'), msg: +document.getElementById('msg').style.opacity > 0 ? document.getElementById('msg').textContent : '',
       rov: document.body.classList.contains('rov180'), slotBuff: S.slotBuff || null, coins: S.coins, drops: DROPS.filter(d => !d.taken).length, buffOn: document.getElementById('bBuff') ? document.getElementById('bBuff').classList.contains('cd179on') : null });
@@ -56,21 +58,27 @@ const waitFor = async (pg, fn, ms) => { const t0 = Date.now(); while (Date.now()
       // A · the layout
       { const A = R.layout = {}; const o = await T(pg, 'all'); A.shown = Object.fromEntries(Object.entries(o).map(([k, v]) => [k, !!(v && v.shown)]));
         for (const id of ['bAtk', 'bSk', 'bJ1', 'bJ2', 'bDash', 'bPot', 'bBuff', 'bAuto', 'bQuest']) if (!o[id] || !o[id].shown) fail(dev + ': ' + id + ' not shown');
-        { const row = ['bBuff', 'bPot', 'bDash', 'bJ1', 'bAtk'].map(id => o[id]).filter(Boolean); A.rowX = row.map(r => Math.round(r.cx));   // 1.84: the computer has the phone layout too
+        { const row = ['bBuff', 'bPot', 'bDash', 'bAtk'].map(id => o[id]).filter(Boolean); A.rowX = row.map(r => Math.round(r.cx));   // 1.84: the computer has the phone layout too
           for (let i = 1; i < row.length; i++) if (!(row[i].cx > row[i - 1].cx + 30)) fail(dev + ': bottom row out of order at ' + i + ': ' + A.rowX.join(','));
           const bottoms = row.map(r => Math.round(r.y + r.h)); A.rowBottom = bottoms; if (Math.max(...bottoms) - Math.min(...bottoms) > 6) fail(dev + ': bottom row not level: ' + bottoms.join(','));
-          if (!(o.bJ2.cy < o.bAtk.cy - 30 && o.bJ2.cx < o.bAtk.cx - 30)) fail(dev + ': skill 2 not up-left of the attack button'); if (!(o.bSk.cy < o.bAtk.cy - 50 && Math.abs(o.bSk.cx - o.bAtk.cx) < 30)) fail(dev + ': skill 3 not above the attack button');
+          if (!(o.bJ1.cx > o.bDash.cx + 30 && o.bJ1.cx < o.bAtk.cx - 60 && o.bJ1.cy < o.bAtk.cy && o.bJ1.cy > o.bJ2.cy + 30)) fail(dev + ': skill 1 not left of the attack button between the bottom row and skill 2'); if (!(o.bJ2.cy < o.bAtk.cy - 30 && o.bJ2.cx < o.bAtk.cx - 30)) fail(dev + ': skill 2 not up-left of the attack button'); if (!(o.bSk.cy < o.bAtk.cy - 50 && Math.abs(o.bSk.cx - o.bAtk.cx) < 30)) fail(dev + ': skill 3 not above the attack button');
           if (!(o.bAuto.cy < o.bDash.cy - 60)) fail(dev + ': bot button not above the cluster'); if (!(Math.abs(o.bQuest.cy - o.bAuto.cy) < 4 && o.bQuest.x > o.bAuto.x + o.bAuto.w - 2)) fail(dev + ': guide button not beside (right of) the bot button');
           if (!(o.bQuest.x + o.bQuest.w >= o.bAtk.x + o.bAtk.w - 4)) fail(dev + ': guide button not flush right (' + Math.round(o.bQuest.x + o.bQuest.w) + ' vs ' + Math.round(o.bAtk.x + o.bAtk.w) + ')'); if (o.mm && o.mm.shown && !(o.bQuest.y > o.mm.y + o.mm.h + 4)) fail(dev + ': guide button not below the minimap'); }
         // 1.84: on a computer every cluster button carries a small key tag; on a phone the tags stay hidden
         A.tags = await pg.evaluate(() => { const o = {}; for (const id of ['bAtk', 'bSk', 'bJ1', 'bJ2', 'bPot', 'bBuff', 'bDash', 'bAuto', 'bQuest']) { const t = document.querySelector('#' + id + ' .kb184'); o[id] = t ? [t.dataset.k, getComputedStyle(t).display] : null; } return o; });
         const wantKeys = { bAtk: 'Space', bSk: '3', bJ1: '1', bJ2: '2', bPot: '4', bBuff: '5', bDash: 'Shift', bAuto: 'B', bQuest: 'G' };
         for (const [id, k] of Object.entries(wantKeys)) { const t = A.tags[id]; if (!touch) { if (!t || t[0] !== k || t[1] === 'none') fail(dev + ': key tag on ' + id + ' is ' + JSON.stringify(t) + ' (want ' + k + ', shown)'); } else if (t && t[1] !== 'none') fail(dev + ': key tag shown on a phone (' + id + ')'); }
-        const ids = ['bAtk', 'bSk', 'bJ1', 'bJ2', 'bDash', 'bPot', 'bBuff', 'bAuto', 'bQuest', 'bCmp', 'bRest', 'mm']; A.overlaps = [];
+        const ids = ['bAtk', 'bSk', 'bJ1', 'bJ2', 'bDash', 'bPot', 'bBuff', 'bAuto', 'bQuest', 'bCmp', 'bRest', 'mm', 'bCtx200']; A.overlaps = [];
         for (let i = 0; i < ids.length; i++) for (let j = i + 1; j < ids.length; j++) if (overlap(o[ids[i]], o[ids[j]])) A.overlaps.push(ids[i] + '+' + ids[j]); if (A.overlaps.length) fail(dev + ': overlapping buttons ' + A.overlaps.join(' '));
         for (const id of ids) { const r = o[id]; if (r && r.shown && (r.x < 0 || r.y < 0 || r.x + r.w > w + 1 || r.y + r.h > h + 1)) fail(dev + ': ' + id + ' outside the screen'); }
         A.labels = { buff: o.bBuff.label, quest: o.bQuest.label }; if (o.bBuff.label !== (await T(pg, 'tx', 'k_guard')).split(' ')[0]) fail(dev + ': buff slot label "' + o.bBuff.label + '"'); if (o.bQuest.label !== await T(pg, 'tx', 'guideBtn')) fail(dev + ': guide label "' + o.bQuest.label + '"');
         await pg.screenshot({ path: out + '/' + dev + '_layout.png' }); }
+      // A2 · 2.00: beside a dig spot the small action button sits at the attack button's lower left, smaller than it, overlapping nothing
+      { const back = await pg.evaluate(() => { const d = (M.digs || []).find(x => !x.done); if (!d) return null; const b = [P.x, P.y]; P.x = d.x; P.y = d.y; P.path = null; P.act = null; P.target = null; return b; }); await sleep(800); const o = await T(pg, 'all'), c = o.bCtx200;
+        R.ctx = c ? { cx: Math.round(c.cx), cy: Math.round(c.cy), w: Math.round(c.w), shown: c.shown } : null;
+        if (!back) fail(dev + ': no dig spot to stand by'); else if (!c || !c.shown || !(c.cx < o.bAtk.cx - 30 && c.cy > o.bAtk.cy - 4 && c.w < o.bAtk.w * .7)) fail(dev + ': small action button ' + JSON.stringify(R.ctx));
+        else { const ov = ['bAtk', 'bSk', 'bJ1', 'bJ2', 'bDash', 'bPot', 'bBuff', 'bCmp', 'bRest'].filter(id => overlap(c, o[id])); if (ov.length) fail(dev + ': small action button overlaps ' + ov.join(' ')); }
+        if (back) await pg.evaluate(b => { P.x = b[0]; P.y = b[1]; P.path = null; P.act = null; }, back); await sleep(400); }
 
       // B · the buff slot: a press casts the buff, the sweep shows; an empty slot says so and opens the jobs window; the jobs window has a Buff slot button
       { const B = R.buff = {}; await tap('bBuff'); await sleep(150); const s1 = await T(pg, 'state'); B.guard = s1.guard; B.cd = +s1.guardCd.toFixed(1); B.sweep = s1.buffOn;
