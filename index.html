@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.10';
+const VERSION='Lantern Academy 2.11';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -6812,4 +6812,13 @@ const DT210={del:false};
 addEventListener('click',e=>{const b=e.target&&e.target.closest&&e.target.closest('#cgo,#pGo,#pDel');if(!b)return;const cr=$('cr'),stop=()=>{e.stopImmediatePropagation();e.preventDefault()};
   if(!cr||cr.classList.contains('hide')||!cr.contains(b))return stop();
   if(b.id==='pDel'){if(DT210.del)return stop();DT210.del=true;setTimeout(()=>{DT210.del=false},600)}},true);
+// ---- 2.11 (owner 10 Oct 09:10–09:25 · night-check questions answered with taps): the new village for GM only · thicker arrows on the map page ----
+// 1) the painted village h9 ("หมู่บ้านพาเพลิน (ฉากใหม่)") was reachable by every player from the farm's east road (1.07), next to the start village of the same name;
+//    the 1.10 new-world switch already keeps it for the GM (OPEN_NEW=false) · now the farm road, a saved place and any jump into h9 follow that switch: GM or new world on → h9, others → the start village
+function h9Open211(){try{return NEWW()||(typeof gmOn==='function'&&gmOn())}catch(e){return false}}
+{const _f=MAPS.farm;MAPS.farm=function(){const m=_f.apply(this,arguments);try{if(m&&m.g9&&!h9Open211())for(const e of m.exits)if(e.id==='e'&&e.to==='h9'){e.to='capital';e.toExit='w';e.label='capital'}}catch(e){}return m}}
+{const _sg=startGame;startGame=function(){try{if(S&&S.pos&&S.pos.map==='h9'&&!h9Open211())S.pos=null}catch(e){}return _sg.apply(this,arguments)}}
+{const _g=goMap;goMap=function(id){try{if(id==='h9'&&!h9Open211()){const a=[].slice.call(arguments);a[0]='capital';return _g.apply(this,a)}}catch(e){}return _g.apply(this,arguments)}}
+// 2) the map page's edge arrows were 18 px thick (owner: "ขยายเฉพาะลูกศรให้หนาขึ้น") → 30 px, a little wider too; the rest of the page stays as the 1.99 mockup
+{const st=document.createElement('style');st.textContent=`.pe199.pe199{font-size:15px}.pe199.pe199.n,.pe199.pe199.s{width:56px!important;height:30px!important}.pe199.pe199.w,.pe199.pe199.e{width:30px!important;height:56px!important}`;document.head.appendChild(st)}   /* the map page adds its own style when it opens, so these win by weight */
 </script></body></html>
