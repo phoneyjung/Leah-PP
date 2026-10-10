@@ -16,7 +16,8 @@ async function walk(p,cdp,vec){const res=[];for(const [x,y] of vec){const a=awai
 (async()=>{const browser=await puppeteer.launch({executablePath:process.env.CHROME_EXE,args:['--no-sandbox']}),results=[];let p;
  try{for(const [name,width,height,dpr,fail] of [['phone',915,412,2.625,''],['phone844',844,390,3,''],['ipad',1180,820,2,''],['missing',915,412,2.625,'missing']]){
   const bc=await browser.createBrowserContext();p=await bc.newPage();const errors=[];p.on('pageerror',e=>errors.push(e.message));await p.setViewport({width,height,deviceScaleFactor:dpr,isMobile:true,hasTouch:true});
-  if(fail){await p.setBypassServiceWorker(true);await p.setRequestInterception(true);p.on('request',r=>r.url().includes('gm-c213-g3.png')?r.abort():r.continue())}
+  // 2.14: the walk files are kept away here (standing file checks); test_214_walks.js checks her walk
+  await p.setBypassServiceWorker(true);await p.setRequestInterception(true);p.on('request',r=>(r.url().includes('gm-c214-')||(fail&&r.url().includes('gm-c213-g3.png')))?r.abort():r.continue());
   await p.goto(url,{waitUntil:'load'});await enter(p);await open(p);const R={name};
   R.tiles=await p.$$eval('#ad207 .ad207g button',bs=>bs.map(b=>b.dataset.v+':'+b.textContent.trim()));assert.equal(R.tiles.length,9);assert.match(R.tiles[8],/^cg3:/);
   await p.waitForFunction(()=>[...document.querySelectorAll('#ad207 .ad207g button')].every(b=>b.classList.contains('bad')||(()=>{const d=b.querySelector('canvas').getContext('2d').getImageData(0,0,32,28).data;let n=0;for(let i=3;i<d.length;i+=4)if(d[i]>80)n++;return n>300})()),{timeout:20000});

@@ -17,7 +17,8 @@ const nextTo=(p,who)=>p.evaluate(who=>{const n=(M.npcs||[]).find(n=>new RegExp(w
 (async()=>{const browser=await puppeteer.launch({executablePath:process.env.CHROME_EXE,args:['--no-sandbox']}),results=[];let p;
  try{for(const [name,width,height,dpr,fail] of [['phone',915,412,2.625,''],['phone844',844,390,3,''],['ipad',1180,820,2,''],['missing',915,412,2.625,'missing']]){
   const bc=await browser.createBrowserContext();p=await bc.newPage();const errors=[];p.on('pageerror',e=>errors.push(e.message));await p.setViewport({width,height,deviceScaleFactor:dpr,isMobile:true,hasTouch:true});
-  if(fail){await p.setBypassServiceWorker(true);await p.setRequestInterception(true);p.on('request',r=>r.url().includes('gm-c207-g2.png')?r.abort():r.continue())}
+  // 2.14: their walk files are kept away here, so this checks the standing files as placed by 2.07 (test_214_walks.js checks the walks)
+  await p.setBypassServiceWorker(true);await p.setRequestInterception(true);p.on('request',r=>(r.url().includes('gm-c214-')||(fail&&r.url().includes('gm-c207-g2.png')))?r.abort():r.continue());
   await p.goto(url,{waitUntil:'load'});await enter(p);const original=await p.evaluate(()=>PS.stand.toDataURL());await open(p);const R={name};
   R.tiles=await p.$$eval('#ad207 .ad207g button',bs=>bs.map(b=>b.dataset.v));assert.deepEqual(R.tiles,KEYS);
   // every button shows its face (or a "?" when its file is missing)
