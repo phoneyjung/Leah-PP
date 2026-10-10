@@ -1,3 +1,5 @@
 
 node_modules/
 *.png.tmp
+v_pc.png
+v_phone.png
