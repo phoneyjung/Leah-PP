@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "assetSet": 5,
-  "revision": "A1",
+  "revision": "A2",
   "spec": "ASSET_SPEC_05_ui_labels.md v1",
   "baseCommit": "e7f68346697ecb9e808f108c75b6f67dd6116d2c",
   "baseGameVersion": "2.11",
@@ -1101,5 +1101,744 @@
     "The proposal changes label presentation and button/EXP-row space only; Claude owns integration and post-integration testing.",
     "Main-scene button tests are for the requested child rank=1 workflow. Adult top-row labels use the same style; full adult action-cluster gameplay was not tested.",
     "No index.html, sw.js, test_*.js or original game image was edited. Owner visual acceptance remains pending."
+  ],
+  "adultSpec": "ASSET_SPEC_05_ui_labels.md ฉบับ 2",
+  "adultBaseCommit": "fbaceb3c4a62da93c6b268b7e4012b2bdbd23edf",
+  "adultBaseGameVersion": "2.13",
+  "adultStatus": "พร้อมให้ Claude ตรวจตัวเลขและเจ้าของตรวจภาพ ≥8.5/10; A1 ของเด็กและหน้าสร้างตัวละครคงเดิม",
+  "cssProposalAdult": "/* Asset 05 A2 — adult labels. Static CSS; the child/creator A1 sheet stays separate. */\nbody:not(.kidmin171) #btns .ui150-label,\nbody:not(.kidmin171) #bRest #restL,\nbody:not(.kidmin171) #act #atkL,\nbody:not(.kidmin171) #act #skL,\nbody:not(.kidmin171) #act #bSlot2 small,\nbody:not(.kidmin171) #act #bSlot3 small,\nbody:not(.kidmin171) #act #bBuff small,\nbody:not(.kidmin171) #act #bPot small,\nbody:not(.kidmin171) #act #bQuest small,\nbody:not(.kidmin171) #act #bAuto small,\nbody:not(.kidmin171) #mmn {\n font-family:Itim,system-ui,sans-serif!important;font-size:12px!important;font-weight:700!important;\n color:#FFF3DB!important;line-height:1.5!important;text-shadow:0 1px 2px #1B1330,-1px 0 #1B1330,1px 0 #1B1330;\n -webkit-text-stroke:0.6px #1B1330;paint-order:stroke fill;white-space:nowrap;display:block;flex-shrink:0;\n}\nbody:not(.kidmin171) #topR{top:calc(8px + env(safe-area-inset-top,0px))!important;right:calc(12px + env(safe-area-inset-right,0px))!important;gap:4px!important;}\nbody:not(.kidmin171) #btns{gap:4px!important;}\nbody:not(.kidmin171) #btns button{box-sizing:border-box;width:48px!important;min-width:48px!important;height:48px!important;min-height:48px!important;padding:2px!important;gap:0!important;}\nbody:not(.kidmin171) #btns img.pxi{width:22px!important;height:22px!important;}\nbody:not(.kidmin171) #btns .ui150-label{max-width:42px!important;margin:0!important;}\nbody:not(.kidmin171) #act #bRest{width:56px!important;height:56px!important;line-height:1!important;}\nbody:not(.kidmin171) #bRest #restL{max-width:48px!important;margin:0!important;}\nbody:not(.kidmin171) #hud #xpT{font:700 18px/1.35 system-ui,sans-serif!important;color:#FFF3DB!important;top:0!important;right:3px!important;text-shadow:0 1px 2px #1B1330;-webkit-text-stroke:1.5px #1B1330;paint-order:stroke fill;}\nbody:not(.kidmin171) #hud #xpw{height:26px!important;min-height:26px!important;margin-top:5px!important;}\nbody:not(.kidmin171).thumbs.sys175 #lampBar{top:calc(130px + env(safe-area-inset-top,0px))!important;}\nbody:not(.kidmin171).thumbs:not(.sys175) #lampBar{top:calc(116px + env(safe-area-inset-top,0px))!important;}\nbody:not(.kidmin171) #act #atkL{font-size:14px!important;margin-top:0!important;}\nbody:not(.kidmin171) #act #skL,\nbody:not(.kidmin171) #act #bSlot2 small,\nbody:not(.kidmin171) #act #bSlot3 small{max-width:56px!important;margin:0!important;}\nbody:not(.kidmin171) #act #bBuff small,\nbody:not(.kidmin171) #act #bPot small,\nbody:not(.kidmin171) #act #bQuest small,\nbody:not(.kidmin171) #act #bAuto small{max-width:44px!important;margin:0!important;}\nbody:not(.kidmin171) #act #bQuest,\nbody:not(.kidmin171) #act #bAuto{width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;padding:0!important;gap:0!important;}\nbody:not(.kidmin171) #act #bQuest img.pxi,\nbody:not(.kidmin171) #act #bAuto img.pxi{width:20px!important;height:20px!important;}\n/* A horizontal minimap card leaves space for guide → skill → attack even at 330 px high. */\nbody:not(.kidmin171) #mmw{box-sizing:border-box;display:grid!important;grid-template-columns:62px minmax(0,1fr);align-items:center;gap:4px!important;width:168px!important;min-width:168px!important;height:54px!important;padding:4px!important;}\nbody:not(.kidmin171) #mm{box-sizing:border-box;width:62px!important;height:42px!important;max-width:62px!important;max-height:42px!important;object-fit:contain;}\nbody:not(.kidmin171) #mmn{width:auto!important;max-width:none!important;white-space:normal!important;overflow-wrap:normal;line-height:1.5!important;text-align:center;}\n/* Specificity also wins over the 2.13 g213 guide relocation. No per-frame layout writes. */\nbody:not(.kidmin171).thumbs.rov180 #act #bQuest{right:calc(12px + env(safe-area-inset-right,0px))!important;top:calc(118px + env(safe-area-inset-top,0px))!important;bottom:auto!important;}\nbody:not(.kidmin171).thumbs.rov180 #act #bAuto{right:calc(62px + env(safe-area-inset-right,0px))!important;top:calc(118px + env(safe-area-inset-top,0px))!important;bottom:auto!important;}\n@media(max-height:350px){body:not(.kidmin171).thumbs.rov180 #act #bSk{bottom:calc(102px + env(safe-area-inset-bottom,0px))!important;}}\n@media(min-height:600px){\n body:not(.kidmin171) #btns button{width:56px!important;min-width:56px!important;height:56px!important;min-height:56px!important;}\n body:not(.kidmin171) #btns .ui150-label,body:not(.kidmin171) #bRest #restL,body:not(.kidmin171) #mmn{font-size:14px!important;max-width:50px!important;}\n body:not(.kidmin171) #btns img.pxi{width:26px!important;height:26px!important;}\n body:not(.kidmin171) #hud #xpT{font-size:20px!important;}\n body:not(.kidmin171) #hud #xpw{height:29px!important;}\n body:not(.kidmin171) #mmw{display:flex!important;flex-direction:column;width:168px!important;height:142px!important;gap:4px!important;}\n body:not(.kidmin171) #mm{width:128px!important;height:86px!important;max-width:128px!important;max-height:86px!important;}\n body:not(.kidmin171) #mmn{width:154px!important;max-width:154px!important;}\n body:not(.kidmin171).thumbs.rov180 #act #bQuest,body:not(.kidmin171).thumbs.rov180 #act #bAuto{top:calc(214px + env(safe-area-inset-top,0px))!important;}\n}\n\nbody:not(.kidmin171) #act #bPot img.pxi{width:22px!important;height:22px!important;}\n/* Give the fallback Thai font room for เสริมพลัง without shrinking the text. */\nbody:not(.kidmin171) #act #bBuff small{max-width:48px!important;}\n/* A child with kid mode switched off keeps the child's controls; clear the attack edge. */\nbody:not(.kidmin171).thumbs:not(.rov180) #act #bSlot2,\nbody:not(.kidmin171).thumbs:not(.rov180) #act #bJ1{right:calc(98px + env(safe-area-inset-right,0px))!important;}\n",
+  "labelsAdult": [
+    {
+      "id": 1,
+      "selector": "body:not(.kidmin171) #btns .ui150-label",
+      "fontSizePx": 12,
+      "ipadFontSizePx": 14,
+      "weight": 700,
+      "color": "#FFF3DB",
+      "lineHeight": 1.5,
+      "maxWidthPx": 42,
+      "ipadMaxWidthPx": 50,
+      "stroke": "0.6px #1B1330",
+      "notes": "5 required buttons plus อารมณ์ when rank unlocks it. Phone buttons48×48, tablet56×56."
+    },
+    {
+      "id": 2,
+      "selector": "body:not(.kidmin171) #bRest #restL",
+      "fontSizePx": 12,
+      "ipadFontSizePx": 14,
+      "weight": 700,
+      "color": "#FFF3DB",
+      "lineHeight": 1.5,
+      "maxWidthPx": 48,
+      "notes": "56×56 button; actual Thai mark spacing retained."
+    },
+    {
+      "id": 3,
+      "selector": "body:not(.kidmin171) #hud #xpT",
+      "fontSizePx": 18,
+      "ipadFontSizePx": 20,
+      "effectivePhoneFontPx": 12.6,
+      "effectiveIpadFontPx": 14,
+      "weight": 700,
+      "color": "#FFF3DB",
+      "lineHeight": 1.35,
+      "stroke": "1.5px #1B1330",
+      "notes": "HUD transform0.7 included. Bar height26/29. Age<10 still hides EXP via existing kid213 rule, including kid mode off."
+    },
+    {
+      "id": 4,
+      "selector": "body:not(.kidmin171) #act #atkL",
+      "fontSizePx": 14,
+      "weight": 700,
+      "color": "#FFF3DB",
+      "lineHeight": 1.5,
+      "notes": "Other listed skill/helper small labels12px; skill slots max56, buff48, potion/guide/auto44. Empty slots currently have no small child: synthetic ท่า 1/ท่า 2 contract also checked."
+    },
+    {
+      "id": 5,
+      "selector": "body:not(.kidmin171) #mmn",
+      "fontSizePx": 12,
+      "ipadFontSizePx": 14,
+      "weight": 700,
+      "color": "#FFF3DB",
+      "lineHeight": 1.5,
+      "notes": "Phone: 2-line name beside aspect-preserved minimap canvas in168×54 card. Tablet: name below map in168×142 card. Actual capital and royal names checked."
+    }
+  ],
+  "layoutAdult": {
+    "scope": "Every selector starts body:not(.kidmin171). Keep A1 scoped exactly as in2.13; do not apply its unscoped JSON CSS to adults. Append cssProposalAdult after current game styles. No runtime JS is proposed.",
+    "phone": {
+      "topRightInsetPx": 12,
+      "topInsetPx": 8,
+      "topButtonSizePx": 48,
+      "topButtonGapPx": 4,
+      "topRowMapGapPx": 4,
+      "mapCardPx": [
+        168,
+        54
+      ],
+      "mapCardTopPx": 60,
+      "mapCanvasBoxPx": [
+        62,
+        42
+      ],
+      "mapObjectFit": "contain",
+      "guidePx": [
+        44,
+        44
+      ],
+      "guideTopPx": 118,
+      "guideRightPx": 12,
+      "autoRightPx": 62,
+      "mapGuideGapPx": 4
+    },
+    "ipadMinHeight600": {
+      "topButtonPx": 56,
+      "mapCardPx": [
+        168,
+        142
+      ],
+      "mapCardTopPx": 68,
+      "mapCanvasBoxPx": [
+        128,
+        86
+      ],
+      "guideTopPx": 214,
+      "mapGuideGapPx": 4
+    },
+    "shortScreenMaxHeight350": {
+      "skillBottomPx": 102,
+      "skillSizePx": 60,
+      "note": "Only top skill is18px lower than current bottom120; guide bottom162 → skill top168 → bottom228 → attack top236 at812×330. Remaining RoV arc unchanged."
+    },
+    "childWithKidModeOff": {
+      "firstSkillSlotRightPx": 98,
+      "changePx": 6,
+      "note": "Clears existing2px overlap with attack in non-rov180 child layout. Preserves age gating and EXP hiding."
+    },
+    "guidePlan": "1.80: right-aligned with map and at least4px below it. No alternative guide arrangement needs choosing.",
+    "specificity": "body:not(.kidmin171).thumbs.rov180 has the same3 class specificity as body.g213.g213.g213; append the sheet after2.13 so the static guide positions win. Map no longer overlaps guide, so guide213 does not activate."
+  },
+  "mockupsAdult": [
+    {
+      "file": "ui-labels-05-mock-adult-844.png",
+      "sizePx": [
+        844,
+        390
+      ],
+      "deviceScaleFactor": 1,
+      "method": "Real Chromium screenshot at native viewport size with cssProposalAdult injected; no image painting, crop or scaling.",
+      "sha256": "522481d06f8977b47ae210c22b93d05d6c4f400e293533d8609546521de11266"
+    },
+    {
+      "file": "ui-labels-05-mock-adult-812x330.png",
+      "sizePx": [
+        812,
+        330
+      ],
+      "deviceScaleFactor": 1,
+      "method": "Real Chromium screenshot at native viewport size with cssProposalAdult injected; no image painting, crop or scaling.",
+      "sha256": "c66bf0bdd4145c0028087a1418f85bda59db86d2732648ab2e7e416eb97ebc66"
+    },
+    {
+      "file": "ui-labels-05-mock-adult-royal-844.png",
+      "sizePx": [
+        844,
+        390
+      ],
+      "deviceScaleFactor": 1,
+      "method": "Real Chromium screenshot at native viewport size with cssProposalAdult injected; no image painting, crop or scaling.",
+      "sha256": "e8cba314da77670fb93c977b26d92e44e2032a58c2db0a4b60e80ac9ac7108c2"
+    }
+  ],
+  "validationAdult": {
+    "fixture": {
+      "age": 30,
+      "level": 12,
+      "rank": 6,
+      "urlQuery": "?rank=1",
+      "note": "rank=1 disables automated unlock; S.rank6 is set only in temporary browser save to expose auto/dash/emote. Rank1 alone hides auto. No source files changed.",
+      "font": "Official Google Fonts Itim-Regular.ttf, SHA2569164d7eb92ca717b53b07193e3445c96782222d24215151b8d2851b576b17645; temporary browser font face. Font not added to repo."
+    },
+    "method": "Computed font × ancestor scale; scroll/client sizes; element and text-range bounds; ALL visible buttons plus mmw, pairwise rectangles and center hit tests. 4 sizes ×2 real maps. Extra system-ui fallback, live resize and age9/kidUIfalse checks.",
+    "viewports": {
+      "812": {
+        "capital": {
+          "viewportCssPx": [
+            812,
+            330
+          ],
+          "labelsMeasured": 15,
+          "minimumEffectiveFontPx": 12,
+          "expEffectiveFontPx": 12.6,
+          "clippedLabels": 0,
+          "outsideParentLabels": 0,
+          "outsideScreenLabels": 0,
+          "buttonsAndMapMeasured": 18,
+          "minimumTargetWidthPx": 44,
+          "minimumTargetHeightPx": 44,
+          "targetsUnder44Px": 0,
+          "coveredCenters": 0,
+          "targetsOutsideScreen": 0,
+          "overlappingPairs": 0,
+          "guideGapBelowMapPx": 4,
+          "guideRightOffsetPx": 0
+        },
+        "royal": {
+          "viewportCssPx": [
+            812,
+            330
+          ],
+          "labelsMeasured": 15,
+          "minimumEffectiveFontPx": 12,
+          "expEffectiveFontPx": 12.6,
+          "clippedLabels": 0,
+          "outsideParentLabels": 0,
+          "outsideScreenLabels": 0,
+          "buttonsAndMapMeasured": 18,
+          "minimumTargetWidthPx": 44,
+          "minimumTargetHeightPx": 44,
+          "targetsUnder44Px": 0,
+          "coveredCenters": 0,
+          "targetsOutsideScreen": 0,
+          "overlappingPairs": 0,
+          "guideGapBelowMapPx": 4,
+          "guideRightOffsetPx": 0
+        }
+      },
+      "844": {
+        "capital": {
+          "viewportCssPx": [
+            844,
+            390
+          ],
+          "labelsMeasured": 15,
+          "minimumEffectiveFontPx": 12,
+          "expEffectiveFontPx": 12.6,
+          "clippedLabels": 0,
+          "outsideParentLabels": 0,
+          "outsideScreenLabels": 0,
+          "buttonsAndMapMeasured": 18,
+          "minimumTargetWidthPx": 44,
+          "minimumTargetHeightPx": 44,
+          "targetsUnder44Px": 0,
+          "coveredCenters": 0,
+          "targetsOutsideScreen": 0,
+          "overlappingPairs": 0,
+          "guideGapBelowMapPx": 4,
+          "guideRightOffsetPx": 0
+        },
+        "royal": {
+          "viewportCssPx": [
+            844,
+            390
+          ],
+          "labelsMeasured": 15,
+          "minimumEffectiveFontPx": 12,
+          "expEffectiveFontPx": 12.6,
+          "clippedLabels": 0,
+          "outsideParentLabels": 0,
+          "outsideScreenLabels": 0,
+          "buttonsAndMapMeasured": 18,
+          "minimumTargetWidthPx": 44,
+          "minimumTargetHeightPx": 44,
+          "targetsUnder44Px": 0,
+          "coveredCenters": 0,
+          "targetsOutsideScreen": 0,
+          "overlappingPairs": 0,
+          "guideGapBelowMapPx": 4,
+          "guideRightOffsetPx": 0
+        }
+      },
+      "915": {
+        "capital": {
+          "viewportCssPx": [
+            915,
+            412
+          ],
+          "labelsMeasured": 15,
+          "minimumEffectiveFontPx": 12,
+          "expEffectiveFontPx": 12.6,
+          "clippedLabels": 0,
+          "outsideParentLabels": 0,
+          "outsideScreenLabels": 0,
+          "buttonsAndMapMeasured": 18,
+          "minimumTargetWidthPx": 44,
+          "minimumTargetHeightPx": 44,
+          "targetsUnder44Px": 0,
+          "coveredCenters": 0,
+          "targetsOutsideScreen": 0,
+          "overlappingPairs": 0,
+          "guideGapBelowMapPx": 4,
+          "guideRightOffsetPx": 0
+        },
+        "royal": {
+          "viewportCssPx": [
+            915,
+            412
+          ],
+          "labelsMeasured": 15,
+          "minimumEffectiveFontPx": 12,
+          "expEffectiveFontPx": 12.6,
+          "clippedLabels": 0,
+          "outsideParentLabels": 0,
+          "outsideScreenLabels": 0,
+          "buttonsAndMapMeasured": 18,
+          "minimumTargetWidthPx": 44,
+          "minimumTargetHeightPx": 44,
+          "targetsUnder44Px": 0,
+          "coveredCenters": 0,
+          "targetsOutsideScreen": 0,
+          "overlappingPairs": 0,
+          "guideGapBelowMapPx": 4,
+          "guideRightOffsetPx": 0
+        }
+      },
+      "1180": {
+        "capital": {
+          "viewportCssPx": [
+            1180,
+            820
+          ],
+          "labelsMeasured": 15,
+          "minimumEffectiveFontPx": 12,
+          "expEffectiveFontPx": 14,
+          "clippedLabels": 0,
+          "outsideParentLabels": 0,
+          "outsideScreenLabels": 0,
+          "buttonsAndMapMeasured": 18,
+          "minimumTargetWidthPx": 44,
+          "minimumTargetHeightPx": 44,
+          "targetsUnder44Px": 0,
+          "coveredCenters": 0,
+          "targetsOutsideScreen": 0,
+          "overlappingPairs": 0,
+          "guideGapBelowMapPx": 4,
+          "guideRightOffsetPx": 0
+        },
+        "royal": {
+          "viewportCssPx": [
+            1180,
+            820
+          ],
+          "labelsMeasured": 15,
+          "minimumEffectiveFontPx": 12,
+          "expEffectiveFontPx": 14,
+          "clippedLabels": 0,
+          "outsideParentLabels": 0,
+          "outsideScreenLabels": 0,
+          "buttonsAndMapMeasured": 18,
+          "minimumTargetWidthPx": 44,
+          "minimumTargetHeightPx": 44,
+          "targetsUnder44Px": 0,
+          "coveredCenters": 0,
+          "targetsOutsideScreen": 0,
+          "overlappingPairs": 0,
+          "guideGapBelowMapPx": 4,
+          "guideRightOffsetPx": 0
+        }
+      }
+    },
+    "fallbackSystemUiRoyal": {
+      "812": {
+        "viewportCssPx": [
+          812,
+          330
+        ],
+        "labelsMeasured": 15,
+        "minimumEffectiveFontPx": 12,
+        "expEffectiveFontPx": 12.6,
+        "clippedLabels": 0,
+        "outsideParentLabels": 0,
+        "outsideScreenLabels": 0,
+        "buttonsAndMapMeasured": 18,
+        "minimumTargetWidthPx": 44,
+        "minimumTargetHeightPx": 44,
+        "targetsUnder44Px": 0,
+        "coveredCenters": 0,
+        "targetsOutsideScreen": 0,
+        "overlappingPairs": 0,
+        "guideGapBelowMapPx": 4,
+        "guideRightOffsetPx": 0
+      },
+      "844": {
+        "viewportCssPx": [
+          844,
+          390
+        ],
+        "labelsMeasured": 15,
+        "minimumEffectiveFontPx": 12,
+        "expEffectiveFontPx": 12.6,
+        "clippedLabels": 0,
+        "outsideParentLabels": 0,
+        "outsideScreenLabels": 0,
+        "buttonsAndMapMeasured": 18,
+        "minimumTargetWidthPx": 44,
+        "minimumTargetHeightPx": 44,
+        "targetsUnder44Px": 0,
+        "coveredCenters": 0,
+        "targetsOutsideScreen": 0,
+        "overlappingPairs": 0,
+        "guideGapBelowMapPx": 4,
+        "guideRightOffsetPx": 0
+      },
+      "915": {
+        "viewportCssPx": [
+          915,
+          412
+        ],
+        "labelsMeasured": 15,
+        "minimumEffectiveFontPx": 12,
+        "expEffectiveFontPx": 12.6,
+        "clippedLabels": 0,
+        "outsideParentLabels": 0,
+        "outsideScreenLabels": 0,
+        "buttonsAndMapMeasured": 18,
+        "minimumTargetWidthPx": 44,
+        "minimumTargetHeightPx": 44,
+        "targetsUnder44Px": 0,
+        "coveredCenters": 0,
+        "targetsOutsideScreen": 0,
+        "overlappingPairs": 0,
+        "guideGapBelowMapPx": 4,
+        "guideRightOffsetPx": 0
+      },
+      "1180": {
+        "viewportCssPx": [
+          1180,
+          820
+        ],
+        "labelsMeasured": 15,
+        "minimumEffectiveFontPx": 12,
+        "expEffectiveFontPx": 14,
+        "clippedLabels": 0,
+        "outsideParentLabels": 0,
+        "outsideScreenLabels": 0,
+        "buttonsAndMapMeasured": 18,
+        "minimumTargetWidthPx": 44,
+        "minimumTargetHeightPx": 44,
+        "targetsUnder44Px": 0,
+        "coveredCenters": 0,
+        "targetsOutsideScreen": 0,
+        "overlappingPairs": 0,
+        "guideGapBelowMapPx": 4,
+        "guideRightOffsetPx": 0
+      }
+    },
+    "childAge9KidModeOffRoyal": {
+      "812": {
+        "viewportCssPx": [
+          812,
+          330
+        ],
+        "labelsMeasured": 10,
+        "minimumEffectiveFontPx": 12,
+        "expEffectiveFontPx": null,
+        "clippedLabels": 0,
+        "outsideParentLabels": 0,
+        "outsideScreenLabels": 0,
+        "buttonsAndMapMeasured": 14,
+        "minimumTargetWidthPx": 44,
+        "minimumTargetHeightPx": 44,
+        "targetsUnder44Px": 0,
+        "coveredCenters": 0,
+        "targetsOutsideScreen": 0,
+        "overlappingPairs": 0,
+        "guideGapBelowMapPx": -114,
+        "guideRightOffsetPx": -800
+      },
+      "844": {
+        "viewportCssPx": [
+          844,
+          390
+        ],
+        "labelsMeasured": 10,
+        "minimumEffectiveFontPx": 12,
+        "expEffectiveFontPx": null,
+        "clippedLabels": 0,
+        "outsideParentLabels": 0,
+        "outsideScreenLabels": 0,
+        "buttonsAndMapMeasured": 14,
+        "minimumTargetWidthPx": 44,
+        "minimumTargetHeightPx": 44,
+        "targetsUnder44Px": 0,
+        "coveredCenters": 0,
+        "targetsOutsideScreen": 0,
+        "overlappingPairs": 0,
+        "guideGapBelowMapPx": -114,
+        "guideRightOffsetPx": -832
+      },
+      "915": {
+        "viewportCssPx": [
+          915,
+          412
+        ],
+        "labelsMeasured": 10,
+        "minimumEffectiveFontPx": 12,
+        "expEffectiveFontPx": null,
+        "clippedLabels": 0,
+        "outsideParentLabels": 0,
+        "outsideScreenLabels": 0,
+        "buttonsAndMapMeasured": 14,
+        "minimumTargetWidthPx": 44,
+        "minimumTargetHeightPx": 44,
+        "targetsUnder44Px": 0,
+        "coveredCenters": 0,
+        "targetsOutsideScreen": 0,
+        "overlappingPairs": 0,
+        "guideGapBelowMapPx": -114,
+        "guideRightOffsetPx": -903
+      },
+      "1180": {
+        "viewportCssPx": [
+          1180,
+          820
+        ],
+        "labelsMeasured": 10,
+        "minimumEffectiveFontPx": 12,
+        "expEffectiveFontPx": null,
+        "clippedLabels": 0,
+        "outsideParentLabels": 0,
+        "outsideScreenLabels": 0,
+        "buttonsAndMapMeasured": 14,
+        "minimumTargetWidthPx": 44,
+        "minimumTargetHeightPx": 44,
+        "targetsUnder44Px": 0,
+        "coveredCenters": 0,
+        "targetsOutsideScreen": 0,
+        "overlappingPairs": 0,
+        "guideGapBelowMapPx": -210,
+        "guideRightOffsetPx": -1168
+      }
+    },
+    "emptySlotLabelContract": [
+      {
+        "id": "bSlot2 small",
+        "text": "ท่า 1",
+        "fontPx": 12,
+        "rect": {
+          "x": 657.625,
+          "y": 327,
+          "width": 20.75,
+          "height": 18,
+          "right": 678.375,
+          "bottom": 345
+        },
+        "parent": {
+          "x": 638,
+          "y": 294,
+          "width": 60,
+          "height": 60,
+          "right": 698,
+          "bottom": 354
+        },
+        "cut": false,
+        "outside": false,
+        "outsideParent": false,
+        "textOutside": false
+      },
+      {
+        "id": "bSlot3 small",
+        "text": "ท่า 2",
+        "fontPx": 12,
+        "rect": {
+          "x": 693.25,
+          "y": 261,
+          "width": 21.484375,
+          "height": 18,
+          "right": 714.734375,
+          "bottom": 279
+        },
+        "parent": {
+          "x": 674,
+          "y": 228,
+          "width": 60,
+          "height": 60,
+          "right": 734,
+          "bottom": 288
+        },
+        "cut": false,
+        "outside": false,
+        "outsideParent": false,
+        "textOutside": false
+      }
+    ],
+    "touchResults": {
+      "rest": 1,
+      "bBag": 1,
+      "bSet": 1,
+      "bBook": 1,
+      "mmw": 1
+    },
+    "performance": {
+      "viewport": [
+        844,
+        390
+      ],
+      "runs": [
+        {
+          "proposal": false,
+          "frames": 181,
+          "elapsedMs": 3006.7999999970198,
+          "fps": 60.19688705606605,
+          "p95Ms": 16.700000000000728,
+          "hitches50Ms": 0
+        },
+        {
+          "proposal": true,
+          "frames": 181,
+          "elapsedMs": 3011.5999999999985,
+          "fps": 60.10094302032145,
+          "p95Ms": 16.799999999999272,
+          "hitches50Ms": 0
+        },
+        {
+          "proposal": true,
+          "frames": 181,
+          "elapsedMs": 3012.0999999940395,
+          "fps": 60.09096643549622,
+          "p95Ms": 16.700000000000728,
+          "hitches50Ms": 0
+        },
+        {
+          "proposal": false,
+          "frames": 181,
+          "elapsedMs": 3012.39999999851,
+          "fps": 60.08498207412347,
+          "p95Ms": 16.700000000000728,
+          "hitches50Ms": 0
+        }
+      ],
+      "order": "disabled, enabled, enabled, disabled; same loaded capital scene,3seconds each",
+      "beforeMeanFps": 60.141,
+      "afterMeanFps": 60.096,
+      "changePercent": -0.075,
+      "maxP95FrameMs": 16.8,
+      "hitchesAbove50Ms": 0,
+      "addedPerFrameUpdates": 0,
+      "interpretation": "Paired short browser benchmark; small differences are run-to-run noise, not a device-wide performance guarantee."
+    },
+    "acceptance": {
+      "1": {
+        "minimumEffectivePx": 12,
+        "phoneExpPx": 12.6,
+        "ipadExpPx": 14
+      },
+      "2": {
+        "clipped": 0,
+        "outsideParent": 0,
+        "outsideScreen": 0
+      },
+      "3": {
+        "sizes": 4,
+        "mapsPerSize": 2,
+        "overlappingPairs": 0,
+        "minimumTargetPx": 44
+      },
+      "4": {
+        "guidePlanVersion": 1.8,
+        "minimumGapPx": 4,
+        "rightOffsetPx": 0
+      },
+      "5": {
+        "beforeFps": 60.14,
+        "afterFps": 60.1,
+        "addedPerFrameUpdates": 0
+      },
+      "6": {
+        "ownerReviewsReceived": 0,
+        "score": null,
+        "requiredScore": 8.5
+      }
+    },
+    "pageErrors": 0,
+    "limits": [
+      "Desktop keyboard mode, browser safe-area insets other than0, other languages and all possible map/skill names are not part of the4-size acceptance matrix.",
+      "Existing index.html,sw.js and test_*.js unchanged. Full gameplay regression is for Claude when integrating; the temporary browser audit tests this design overlay."
+    ],
+    "contextButtonActive": {
+      "812": {
+        "buttonCount": 20,
+        "context": {
+          "id": "bCtx200",
+          "rect": {
+            "x": 671,
+            "y": 278,
+            "width": 44,
+            "height": 44,
+            "right": 715,
+            "bottom": 322
+          },
+          "small": false,
+          "covered": false,
+          "outside": false
+        },
+        "overlap": [],
+        "covered": []
+      },
+      "844": {
+        "buttonCount": 20,
+        "context": {
+          "id": "bCtx200",
+          "rect": {
+            "x": 703,
+            "y": 338,
+            "width": 44,
+            "height": 44,
+            "right": 747,
+            "bottom": 382
+          },
+          "small": false,
+          "covered": false,
+          "outside": false
+        },
+        "overlap": [],
+        "covered": []
+      },
+      "915": {
+        "buttonCount": 20,
+        "context": {
+          "id": "bCtx200",
+          "rect": {
+            "x": 774,
+            "y": 360,
+            "width": 44,
+            "height": 44,
+            "right": 818,
+            "bottom": 404
+          },
+          "small": false,
+          "covered": false,
+          "outside": false
+        },
+        "overlap": [],
+        "covered": []
+      },
+      "1180": {
+        "buttonCount": 20,
+        "context": {
+          "id": "bCtx200",
+          "rect": {
+            "x": 1039,
+            "y": 768,
+            "width": 44,
+            "height": 44,
+            "right": 1083,
+            "bottom": 812
+          },
+          "small": false,
+          "covered": false,
+          "outside": false
+        },
+        "overlap": [],
+        "covered": []
+      }
+    }
+  },
+  "handoffNotesAdult": [
+    "Preserve A1 child/creator CSS and age<10 EXP hiding. A2 is a separate static adult sheet only.",
+    "No gameplay release or version/cache bump in this asset branch. Claude integrates and runs game regression suites.",
+    "Preview needs owner score≥8.5; no score is invented. All numeric acceptance results are included.",
+    "The small-screen minimap keeps its canvas content aspect ratio with object-fit:contain; only the UI presentation box is compact. No source image is edited."
   ]
 }

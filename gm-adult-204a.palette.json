@@ -161,15 +161,17 @@
       "#311D21"
     ]
   },
-  "revision": "A1",
-  "spec": "ASSET_SPEC_03_skin_palette.md v1.1",
+  "revision": "A2",
+  "spec": "ASSET_SPEC_03_skin_palette.md v1.2",
   "applies_to": [
     "gm-adult-204a.png",
-    "gm-adult-206w.png"
+    "gm-adult-206w.png",
+    "gm-adult-207w.png"
   ],
   "source_sha256": {
     "gm-adult-204a.png": "f3d15f2bb2a2ccd9f55327148d6ac246c041d31dd27ba4d451f30f448c8d3175",
-    "gm-adult-206w.png": "a33a10e90142f52d9f0508625d21c32c73d06001711187abdc1eb30b31de0376"
+    "gm-adult-206w.png": "a33a10e90142f52d9f0508625d21c32c73d06001711187abdc1eb30b31de0376",
+    "gm-adult-207w.png": "9dd5fe3ff0d04626ddbc7ecaeca1f795bd8130e9de3537f6b5ec7cecd450397d"
   },
   "mask_encoding": {
     "skin": "#FFFFFF",
@@ -390,6 +392,51 @@
           0,
           0
         ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    "gm-adult-207w.png": {
+      "file": "gm-adult-207w.skinmask.png",
+      "size": [
+        672,
+        112
+      ],
+      "cell": [
+        112,
+        112
+      ],
+      "directions": [
+        "W"
+      ],
+      "frames_per_direction": 6,
+      "skin_pixels": [
+        [
+          82,
+          82,
+          82,
+          82,
+          88,
+          83
+        ]
+      ],
+      "mouth_pixels": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "cheek_pixels": [
         [
           0,
           0,
@@ -1400,6 +1447,174 @@
         [269, 623, 2]
       ],
       "cheek": []
+    },
+    "gm-adult-207w.png": {
+      "skin": [
+        [34, 45, 3],
+        [34, 157, 3],
+        [34, 269, 3],
+        [34, 381, 3],
+        [34, 492, 3],
+        [34, 605, 3],
+        [35, 45, 4],
+        [35, 157, 4],
+        [35, 269, 4],
+        [35, 381, 4],
+        [35, 492, 4],
+        [35, 605, 4],
+        [36, 44, 3],
+        [36, 156, 3],
+        [36, 268, 3],
+        [36, 380, 3],
+        [36, 491, 3],
+        [36, 604, 3],
+        [37, 43, 2],
+        [37, 48, 2],
+        [37, 155, 2],
+        [37, 160, 2],
+        [37, 267, 2],
+        [37, 272, 2],
+        [37, 379, 2],
+        [37, 384, 2],
+        [37, 490, 2],
+        [37, 495, 2],
+        [37, 603, 2],
+        [37, 608, 2],
+        [38, 43, 1],
+        [38, 45, 1],
+        [38, 48, 2],
+        [38, 155, 1],
+        [38, 157, 1],
+        [38, 160, 2],
+        [38, 267, 1],
+        [38, 269, 1],
+        [38, 272, 2],
+        [38, 379, 1],
+        [38, 381, 1],
+        [38, 384, 2],
+        [38, 490, 1],
+        [38, 492, 1],
+        [38, 495, 2],
+        [38, 603, 1],
+        [38, 605, 1],
+        [38, 608, 2],
+        [39, 43, 2],
+        [39, 49, 2],
+        [39, 56, 2],
+        [39, 155, 2],
+        [39, 161, 2],
+        [39, 168, 2],
+        [39, 267, 2],
+        [39, 273, 2],
+        [39, 280, 2],
+        [39, 379, 2],
+        [39, 385, 2],
+        [39, 392, 2],
+        [39, 490, 2],
+        [39, 496, 2],
+        [39, 503, 2],
+        [39, 603, 2],
+        [39, 609, 2],
+        [39, 616, 2],
+        [40, 43, 3],
+        [40, 50, 1],
+        [40, 56, 2],
+        [40, 155, 3],
+        [40, 162, 1],
+        [40, 168, 2],
+        [40, 267, 3],
+        [40, 274, 1],
+        [40, 280, 2],
+        [40, 379, 3],
+        [40, 386, 1],
+        [40, 392, 2],
+        [40, 490, 3],
+        [40, 497, 1],
+        [40, 503, 2],
+        [40, 603, 3],
+        [40, 610, 1],
+        [40, 616, 2],
+        [41, 43, 3],
+        [41, 50, 1],
+        [41, 55, 3],
+        [41, 155, 3],
+        [41, 162, 1],
+        [41, 167, 3],
+        [41, 267, 3],
+        [41, 274, 1],
+        [41, 279, 3],
+        [41, 379, 3],
+        [41, 386, 1],
+        [41, 391, 3],
+        [41, 490, 3],
+        [41, 497, 1],
+        [41, 502, 3],
+        [41, 603, 3],
+        [41, 610, 1],
+        [41, 615, 3],
+        [42, 43, 3],
+        [42, 49, 2],
+        [42, 55, 3],
+        [42, 155, 3],
+        [42, 161, 2],
+        [42, 167, 3],
+        [42, 267, 3],
+        [42, 273, 2],
+        [42, 279, 3],
+        [42, 379, 3],
+        [42, 385, 2],
+        [42, 391, 3],
+        [42, 490, 3],
+        [42, 496, 2],
+        [42, 502, 3],
+        [42, 603, 3],
+        [42, 609, 2],
+        [42, 615, 3],
+        [43, 42, 8],
+        [43, 53, 4],
+        [43, 154, 8],
+        [43, 165, 4],
+        [43, 266, 8],
+        [43, 277, 4],
+        [43, 378, 8],
+        [43, 389, 4],
+        [43, 489, 8],
+        [43, 500, 4],
+        [43, 602, 8],
+        [43, 613, 4],
+        [44, 42, 8],
+        [44, 51, 3],
+        [44, 154, 8],
+        [44, 163, 3],
+        [44, 266, 8],
+        [44, 275, 3],
+        [44, 378, 8],
+        [44, 387, 3],
+        [44, 489, 8],
+        [44, 498, 3],
+        [44, 602, 8],
+        [44, 611, 3],
+        [45, 44, 7],
+        [45, 156, 7],
+        [45, 268, 7],
+        [45, 380, 7],
+        [45, 491, 10],
+        [45, 604, 7],
+        [46, 43, 5],
+        [46, 155, 5],
+        [46, 267, 5],
+        [46, 379, 5],
+        [46, 490, 8],
+        [46, 603, 6],
+        [47, 44, 2],
+        [47, 156, 2],
+        [47, 268, 2],
+        [47, 380, 2],
+        [47, 491, 2],
+        [47, 604, 2]
+      ],
+      "mouth": [],
+      "cheek": []
     }
   },
   "preview": {
@@ -1444,7 +1659,8 @@
     "score": null,
     "required_minimum": 9.5,
     "scale_maximum": 10,
-    "reviews_received": 0
+    "reviews_received": 1,
+    "status": "A1 tones accepted per spec v1.2 on 2026-10-10"
   },
   "notes": [
     "Exact RGB plus position is required. Never replace these RGBs globally: shared records observed colours also used outside the labelled face/ear/neck/mouth regions. Both hands are gloved; bare-hand pixels = 0.",
@@ -1453,7 +1669,8 @@
     "Masks label white skin, red mouth, pink cheek (unused), transparent everything else. Black outlines, green hair, cyan eyes, metal, gold collar, leather and magenta coat remain unlabelled except the two deliberately marked existing profile mouth strokes. Original source PNG files and their alpha are unchanged.",
     "regions uses zero-based source-sheet pixel coordinates and runs [y,x,length]. These embedded runs exactly reconstruct the masks and permit future runtime spatial gating without loading review PNGs. They describe raw source frames before the game aligns/mirrors them. No game code is changed.",
     "All tones map by skin array index. Apply only inside labelled skin or mouth regions; preserve the extra mouth-stroke colours. medium equals the original RGBs exactly. The preview uses this policy at exactly 4x nearest neighbour.",
-    "Criterion 8.7 is not self-scored: owner review has not occurred; required score is at least 9.5/10."
+    "A1 skin tones were accepted by the owner on 2026-10-10 09:10 per spec v1.2; no new score is invented.",
+    "A2 adds only real west-walk source regions. Golden collar, lower coat, gloves and dark profile outline remain excluded. The black profile lip outline has no dedicated eligible A1 RGB, so mouth runs are empty; skin and tones are unchanged."
   ],
   "acceptance": {
     "1": {
@@ -1517,5 +1734,37 @@
       "required_score": 9.5,
       "maximum_score": 10
     }
+  },
+  "acceptance_A2": {
+    "skin_pixels_per_frame": [
+      82,
+      82,
+      82,
+      82,
+      88,
+      83
+    ],
+    "hair_top_y": [
+      21,
+      21,
+      21,
+      21,
+      21,
+      21
+    ],
+    "max_selected_y": [
+      47,
+      47,
+      47,
+      47,
+      47,
+      47
+    ],
+    "pixels_outside_first_30_rows_from_hair": 0,
+    "pixels_without_palette_match": 0,
+    "game_208_hair_eye_coat_conflicts": 0,
+    "mask_region_mismatch_pixels": 0,
+    "source_changed_bytes": 0,
+    "old_skin_tones_regions_changed": 0
   }
 }

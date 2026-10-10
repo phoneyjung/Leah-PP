@@ -1,4 +1,4 @@
-// Claude 2.08: skin tones on 72 ก from Codex set 03 A1 (gm-adult-204a.palette.json) in the GM trial — real taps, only Codex's skin/mouth places change, hair · eyes · coat keep working on top, the choice kept, missing file.
+// Claude 2.08 (+2.15: set 03 A2 adds the west walk's places, so the west row is toned for real): skin tones on 72 ก from Codex set 03 A1 (gm-adult-204a.palette.json) in the GM trial — real taps, only Codex's skin/mouth places change, hair · eyes · coat keep working on top, the choice kept, missing file.
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),puppeteer=require('puppeteer');
 const sleep=ms=>new Promise(r=>setTimeout(r,ms)),out=process.env.OUT_DIR||'/tmp/leah-skin-208';fs.mkdirSync(out,{recursive:true});
 const url='http://localhost:'+(process.env.PORT||8775)+'/?gm';
@@ -8,7 +8,7 @@ async function open(p){await press(p,'#gmBtn');await press(p,'#gmAdult201');awai
 async function pick72(p){await press(p,'#ad201 .ad202v [data-v="m72a"]');await p.waitForFunction(()=>AD201.v==='m72a'&&AD201.sheets&&AD201.sheets.walkReal&&!$('ad201use').disabled,{timeout:20000});await sleep(200)}
 // the source files in a tone against the files: what changed, where, and how light
 const source=p=>p.evaluate(()=>{const d=AD208.data,sh=AD201.sheets,res={};
-  for(const [file,src,C] of [['gm-adult-204a.png',sh.im,72],['gm-adult-206w.png',sh.wim,112]]){const set=new Set(),skin=new Set(d.skin.map(c=>parseInt(c.slice(1),16)));for(const kind of ['skin','mouth'])for(const [y,x,n] of d.regions[file][kind])for(let k=0;k<n;k++)set.add(y*100000+x+k);
+  for(const [file,src,C] of [['gm-adult-204a.png',sh.im,72],['gm-adult-206w.png',sh.wim,112],['gm-adult-207w.png',sh.west,112]]){if(!src||!d.regions[file])continue;const set=new Set(),skin=new Set(d.skin.map(c=>parseInt(c.slice(1),16)));for(const kind of ['skin','mouth'])for(const [y,x,n] of d.regions[file][kind])for(let k=0;k<n;k++)set.add(y*100000+x+k);
     const a=toCanvas(src),A=a.getContext('2d').getImageData(0,0,a.width,a.height).data,W=a.width;res[file]={};
     for(const tn of ['light','medium','tan','deep']){const b=ad208Paint(src,file,tn),B=b.getContext('2d').getImageData(0,0,W,a.height).data;let changed=0,outside=0,alpha=0,expect=0,lumA=0,lumB=0;const perCell={};
       for(let i=0;i<A.length;i+=4){const j=i/4,x=j%W,y=(j-x)/W,inside=set.has(y*100000+x);if(A[i+3]!==B[i+3])alpha++;const same=A[i]===B[i]&&A[i+1]===B[i+1]&&A[i+2]===B[i+2];
@@ -32,15 +32,17 @@ const diffRows=(p,tn)=>p.evaluate(tn=>{const base=AD201.sheets,b=AD208.built.get
   R.buttons=await p.$$eval('#ad201 .ad202v button,#ad201 .ad203z button,#ad201 .ad205c button,#ad201use,#ad201back,#ad201x',bs=>bs.map(b=>{const r=b.getBoundingClientRect();return{id:b.dataset.v||b.dataset.z||b.dataset.k||b.id,inside:r.left>=0&&r.top>=0&&r.right<=innerWidth+.5&&r.bottom<=innerHeight+.5,h:Math.round(r.height)}}));
   assert(R.buttons.some(b=>b.id==='s')&&R.buttons.every(b=>b.inside&&b.h>=44),'all buttons (with skin) inside and 44 px+: '+JSON.stringify(R.buttons));
   // the files in each tone: medium = the file; light/tan/deep change exactly the skin-coloured pixels in Codex's places, nothing outside, no alpha; light is lighter, deep darker
-  R.src=await source(p);for(const f of ['gm-adult-204a.png','gm-adult-206w.png']){const s=R.src[f];assert.equal(s.medium.changed,0,f+' medium = as drawn');
+  R.src=await source(p);assert(R.src['gm-adult-207w.png'],'2.15: the west walk has Codex places (set 03 A2)');for(const f of ['gm-adult-204a.png','gm-adult-206w.png','gm-adult-207w.png']){const s=R.src[f];assert.equal(s.medium.changed,0,f+' medium = as drawn');
    for(const tn of ['light','tan','deep']){assert.equal(s[tn].outside,0,f+' '+tn+' outside the places');assert.equal(s[tn].alpha,0);assert.equal(s[tn].changed,s[tn].expect,f+' '+tn+' every skin pixel in the places: '+s[tn].changed+'/'+s[tn].expect)}
    assert(s.light.lumTo>s.light.lumFrom&&s.deep.lumTo<s.deep.lumFrom-40,f+' light lighter, deep darker: '+JSON.stringify([s.light.lumFrom,s.light.lumTo,s.deep.lumTo]))}
   R.front=R.src['gm-adult-204a.png'].light.perCell['0,0'];assert(R.front>=120,'front face pixels '+R.front);
-  // light in the world: the sheet in use is the toned one; per row the same pixels as in the file's view; the west row is the mirror while the west walk has no places
+  // light in the world: the sheet in use is the toned one; per row the same pixels as in the file's view; 2.15: the west row is the real west walk, toned in its own places
   await press(p,'#ad201 .ad205c [data-k="s"]');R.s1=await p.evaluate(()=>S.gmAdultSkin);assert.equal(R.s1,'light');await press(p,'#ad201use');
   R.rows=await diffRows(p,'light');const sc=R.src['gm-adult-204a.png'].light.perCell,wc=R.src['gm-adult-206w.png'].light.perCell;
-  for(let r=0;r<8;r++){if(r===6)continue;const wr=R.rows.wr[r];assert.equal(R.rows.stand[r],sc['0,'+wr]||0,'stand row '+r);let w=0;for(let f=0;f<6;f++)w+=wc[wr+','+f]||0;assert.equal(R.rows.walk[r],w,'walk row '+r)}
-  assert.deepEqual(R.rows.off6,{mir:true,real:false});assert.deepEqual(R.rows.baseOff6,{mir:false,real:true});
+  const ec=R.src['gm-adult-207w.png'].light.perCell;
+  for(let r=0;r<8;r++){const wr=R.rows.wr[r];if(r===6){assert.equal(R.rows.stand[6],sc['0,6']||0,'stand row 6 (the file\'s own west view)');let w=0;for(let f=0;f<6;f++)w+=ec['0,'+f]||0;assert.equal(R.rows.walk[6],w,'walk row 6 (the real west walk)');continue}
+    assert.equal(R.rows.stand[r],sc['0,'+wr]||0,'stand row '+r);let w=0;for(let f=0;f<6;f++)w+=wc[wr+','+f]||0;assert.equal(R.rows.walk[r],w,'walk row '+r)}
+  assert.deepEqual(R.rows.off6,{mir:false,real:true});assert.deepEqual(R.rows.baseOff6,{mir:false,real:true});
   R.inUse=await p.evaluate(()=>PS.stand===AD208.built.get(AD201.sheets).light.stand||PS.stand.toDataURL()===AD208.built.get(AD201.sheets).light.stand.toDataURL());assert(R.inUse,'the toned sheet is in use');
   // deep + hair colour: hair changes on top, the skin stays the deep tone
   await open(p);await press(p,'#ad201 .ad205c [data-k="s"]');await press(p,'#ad201 .ad205c [data-k="s"]');await press(p,'#ad201 .ad205c [data-k="h"]');R.col=await p.evaluate(()=>({s:S.gmAdultSkin,c:S.gmAdultCol}));assert.deepEqual(R.col,{s:'deep',c:{h:0,e:-1,b:-1}});
