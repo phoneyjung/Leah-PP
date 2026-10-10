@@ -1,0 +1,1105 @@
+{
+  "schema": 1,
+  "assetSet": 5,
+  "revision": "A1",
+  "spec": "ASSET_SPEC_05_ui_labels.md v1",
+  "baseCommit": "e7f68346697ecb9e808f108c75b6f67dd6116d2c",
+  "baseGameVersion": "2.11",
+  "date": "2026-10-10",
+  "status": "Design proposal; not integrated; owner score pending",
+  "units": "CSS px. fontSizePx is the authored CSS size; effectiveFontSizePx includes the 0.7 HUD transform. PNGs use deviceScaleFactor=1, not device-pixel screenshots.",
+  "breakpoints": {
+    "phone": "height < 600 CSS px; verified at 844x390 and 915x412",
+    "ipad": "height >= 600 CSS px; verified at 1180x820"
+  },
+  "labels": [
+    {
+      "id": 1,
+      "selector": ".ui150-label",
+      "fontFamily": "Itim, system-ui, sans-serif",
+      "weight": 400,
+      "color": "#FFF3DB",
+      "stroke": "#1B1330 1.5px",
+      "strokeWidthPx": 1.5,
+      "paintOrder": "stroke fill",
+      "shadow": "0 1px 2px #1B1330",
+      "lineHeight": 1.5,
+      "letterSpacingPx": 0,
+      "fontSizePx": 13,
+      "maxWidthPx": 46,
+      "notes": "Stack below existing icon inside its button. Keep full words; no ellipsis, no extra opaque label box. This proposal also sizes the existing adult top-row buttons consistently.",
+      "phone": {
+        "fontSizePx": 13,
+        "lineHeightPx": 19.5,
+        "maxWidthPx": 46
+      },
+      "ipad": {
+        "fontSizePx": 14,
+        "lineHeightPx": 21,
+        "maxWidthPx": 50
+      },
+      "placement": {
+        "layout": "vertical flex inside button",
+        "gapAfterIconPx": 2,
+        "labelMarginPx": 0,
+        "alignment": "center"
+      }
+    },
+    {
+      "id": 2,
+      "selector": "#restL",
+      "fontFamily": "Itim, system-ui, sans-serif",
+      "weight": 400,
+      "color": "#FFF3DB",
+      "stroke": "#1B1330 1.5px",
+      "strokeWidthPx": 1.5,
+      "paintOrder": "stroke fill",
+      "shadow": "0 1px 2px #1B1330",
+      "lineHeight": 1.5,
+      "letterSpacingPx": 0,
+      "fontSizePx": 13,
+      "maxWidthPx": 48,
+      "notes": "The existing #bRest small rule is !important. Use #bRest #restL in the override. Keep both dynamic captions นั่งพัก and ลุก. Do not use an external floating caption.",
+      "phone": {
+        "fontSizePx": 13,
+        "lineHeightPx": 19.5
+      },
+      "ipad": {
+        "fontSizePx": 14,
+        "lineHeightPx": 21
+      },
+      "placement": {
+        "layout": "inside the existing circular rest button",
+        "marginTopPx": 1,
+        "alignment": "center"
+      }
+    },
+    {
+      "id": 3,
+      "selector": "#xpT",
+      "fontFamily": "system-ui, sans-serif",
+      "weight": 700,
+      "color": "#FFF3DB",
+      "stroke": "#1B1330 1.5px",
+      "strokeWidthPx": 1.5,
+      "paintOrder": "stroke fill",
+      "shadow": "0 1px 2px #1B1330",
+      "lineHeight": 1.35,
+      "letterSpacingPx": 0,
+      "fontSizePx": 18,
+      "maxWidthPx": null,
+      "notes": "Keep EXP numbers for this proposal. On these touch layouts #hud scales to 0.7: 18 CSS px becomes 12.6 visible CSS px. Do not set this to 12 inside the scaled HUD. If the HUD scale changes, preserve a visible minimum of 12 px and remeasure.",
+      "phone": {
+        "fontSizePx": 18,
+        "hudScale": 0.7,
+        "effectiveFontSizePx": 12.6,
+        "barHeightCssPx": 26,
+        "barHeightVisiblePx": 18.2
+      },
+      "ipad": {
+        "fontSizePx": 20,
+        "hudScale": 0.7,
+        "effectiveFontSizePx": 14,
+        "barHeightCssPx": 29,
+        "barHeightVisiblePx": 20.3
+      },
+      "placement": {
+        "rightCssPx": 6,
+        "topCssPx": 0,
+        "maxWidthCss": "calc(100% - 12px)",
+        "fontVariantNumeric": "tabular-nums"
+      }
+    },
+    {
+      "id": 4,
+      "selector": "#cr.c193 .rail button small",
+      "fontFamily": "Itim, system-ui, sans-serif",
+      "weight": 400,
+      "color": "#FFF3DB",
+      "stroke": "#1B1330 1.5px",
+      "strokeWidthPx": 1.5,
+      "paintOrder": "stroke fill",
+      "shadow": "0 1px 2px #1B1330",
+      "lineHeight": 1.5,
+      "letterSpacingPx": 0,
+      "fontSizePx": 13,
+      "maxWidthPx": 48,
+      "notes": "Retain the original five icons, captions, tab functions and character art. Use the existing circular button as a plum surface; keep gold for the selected rim. Dim/coming-soon state must not reduce the whole label to opacity 0.55.",
+      "phone": {
+        "fontSizePx": 13,
+        "lineHeightPx": 19.5,
+        "maxWidthPx": 48
+      },
+      "ipad": {
+        "fontSizePx": 14,
+        "lineHeightPx": 21,
+        "maxWidthPx": 52
+      },
+      "placement": {
+        "alignment": "center",
+        "iconLabelGapPx": 1,
+        "labelMarginTopPx": 0
+      },
+      "states": {
+        "normal": {
+          "surface": "#2C213D",
+          "border": "#BDA06A",
+          "text": "#FFF3DB",
+          "opacity": 1
+        },
+        "selected": {
+          "surface": "#4B355F",
+          "border": "#FFD27A",
+          "ring": "0 0 0 2px #FFD27A55",
+          "text": "#FFF3DB"
+        },
+        "comingSoon": {
+          "text": "#D5CBB7",
+          "opacity": 1,
+          "note": "Existing action/availability remains unchanged; icon and label retain legibility."
+        }
+      }
+    },
+    {
+      "id": 5,
+      "selector": "#atkL",
+      "fontFamily": "Itim, system-ui, sans-serif",
+      "weight": 400,
+      "color": "#FFF3DB",
+      "stroke": "#1B1330 1.5px",
+      "strokeWidthPx": 1.5,
+      "paintOrder": "stroke fill",
+      "shadow": "0 1px 2px #1B1330",
+      "lineHeight": 1.5,
+      "letterSpacingPx": 0,
+      "fontSizePx": 14,
+      "maxWidthPx": 70,
+      "notes": "Keep existing dynamic action words and the 80 px main action button. New label styles must not override game visibility changes or add hit interception.",
+      "phone": {
+        "fontSizePx": 14,
+        "lineHeightPx": 21
+      },
+      "ipad": {
+        "fontSizePx": 15,
+        "lineHeightPx": 22.5
+      },
+      "placement": {
+        "alignment": "center",
+        "marginTopPx": 2,
+        "insideButton": true
+      }
+    },
+    {
+      "id": 6,
+      "selector": "#mmn",
+      "fontFamily": "Itim, system-ui, sans-serif",
+      "weight": 400,
+      "color": "#FFF3DB",
+      "stroke": "#1B1330 1.5px",
+      "strokeWidthPx": 1.5,
+      "paintOrder": "stroke fill",
+      "shadow": "0 1px 2px #1B1330",
+      "lineHeight": 1.5,
+      "letterSpacingPx": 0,
+      "fontSizePx": 13,
+      "maxWidthPx": 144,
+      "notes": "Center beneath the existing minimap. Allow Thai word wrapping; do not shrink the text or truncate the name. The long village-name check wraps to two lines. Do not add a separate solid label panel.",
+      "phone": {
+        "fontSizePx": 13,
+        "lineHeightPx": 19.5
+      },
+      "ipad": {
+        "fontSizePx": 14,
+        "lineHeightPx": 21
+      },
+      "placement": {
+        "widthPx": 144,
+        "alignment": "center",
+        "whiteSpace": "normal",
+        "overflowWrap": "break-word",
+        "maxLines": null,
+        "minimapGapPx": 4
+      }
+    }
+  ],
+  "layout": {
+    "topButtons": {
+      "selectors": [
+        "#btns button",
+        "body.thumbs #btns button"
+      ],
+      "phone": {
+        "widthPx": 56,
+        "heightPx": 56,
+        "paddingPx": 4,
+        "iconSizePx": 24,
+        "gapPx": 6
+      },
+      "ipad": {
+        "widthPx": 60,
+        "heightPx": 60,
+        "paddingPx": 4,
+        "iconSizePx": 24,
+        "gapPx": 6
+      }
+    },
+    "restButton": {
+      "selectors": [
+        "#act #bRest",
+        "body.thumbs #act #bRest"
+      ],
+      "phone": {
+        "widthPx": 56,
+        "heightPx": 56
+      },
+      "ipad": {
+        "widthPx": 60,
+        "heightPx": 60
+      },
+      "leftPx": 8,
+      "bottomPx": 8,
+      "preserveSafeAreaInsets": true
+    },
+    "creatorRail": {
+      "selector": "#cr.c193 .rail button",
+      "phone": {
+        "widthPx": 56,
+        "heightPx": 56
+      },
+      "ipad": {
+        "widthPx": 60,
+        "heightPx": 60
+      },
+      "gapPx": 6,
+      "flexShrink": 0
+    },
+    "xpBar": {
+      "selector": "#hud #xpw",
+      "phone": {
+        "heightCssPx": 26
+      },
+      "ipad": {
+        "heightCssPx": 29
+      },
+      "marginTopCssPx": 5
+    },
+    "lampClearance": {
+      "selector": "#lampBar",
+      "touchWithStatusTopPx": 130,
+      "touchWithoutStatusTopPx": 116,
+      "addSafeAreaInsetTop": true,
+      "reason": "Clear the taller EXP row; retain the existing lamp art and width."
+    },
+    "minimap": {
+      "selector": "#mmw",
+      "minWidthPx": 156,
+      "observedOuterWidthPx": 160,
+      "gapPx": 4,
+      "reason": "144 px text area with existing padding and border. Do not scale the minimap canvas."
+    }
+  },
+  "font": {
+    "labels": "Itim Regular (400), then system-ui/sans-serif",
+    "reason": "Use the designed Thai glyphs without synthetic bold at small sizes; separate 1.5 px plum stroke is painted underneath the fill. EXP uses system-ui bold and tabular digits.",
+    "previewSource": "https://raw.githubusercontent.com/google/fonts/main/ofl/itim/Itim-Regular.ttf",
+    "sha256": "9164d7eb92ca717b53b07193e3445c96782222d24215151b8d2851b576b17645",
+    "previewNote": "The existing Google Fonts CSS request was blocked in this cloud. The same official Itim font was loaded from Google Fonts GitHub for the temporary browser mock-ups. No font is added to the repository; existing game font loading remains unchanged. System-font fallback was measured separately."
+  },
+  "rendering": {
+    "method": "Real Chromium game screenshots at ?rank=1 after real gender/age/name/create taps (age 7). Only the proposed static CSS is injected in memory. The intro is dismissed with real taps; screenshots retain original game art and game text.",
+    "runtimeScriptRequired": false,
+    "additionalAnimationLoops": 0,
+    "additionalPerFrameLabelWrites": 0,
+    "application": "Apply one static stylesheet after the existing UI rules. Preserve existing text updates, translations, actions and visibility. Do not add text polling or replace label elements.",
+    "outlineFillContrastRatio": 16.15,
+    "fallback": "If this JSON is absent, leave current UI styles unchanged."
+  },
+  "cssProposal": "/* Asset 05 A1: static design overlay only, injected for mock-ups. */\n#btns .ui150-label, #restL, #atkL, #mmn, #cr.c193 .rail button small {\n font-family:Itim,system-ui,sans-serif!important;font-weight:400!important;\n color:#FFF3DB!important;line-height:1.5!important;letter-spacing:0!important;\n -webkit-text-stroke:1.5px #1B1330;paint-order:stroke fill;\n text-shadow:0 1px 2px #1B1330;overflow:visible!important;\n white-space:nowrap;flex-shrink:0;\n}\n#btns .ui150-label {font-size:13px!important;max-width:46px;margin:0!important;}\n#btns button, body.thumbs #btns button {width:56px;min-width:56px;height:56px;min-height:56px;padding:4px;gap:2px;}\n#btns, body.thumbs #btns {gap:6px;}\n#btns img.pxi,body.thumbs #btns img.pxi {width:24px;height:24px;}\n#bRest #restL {font-size:13px!important;max-width:48px;margin-top:1px!important;}\n#act #bRest,body.thumbs #act #bRest {width:56px!important;height:56px!important;font-size:21px!important;line-height:1!important;}\n#hud #xpT {font:700 18px/1.35 system-ui,sans-serif!important;color:#FFF3DB!important;\n right:6px!important;top:0!important;max-width:calc(100% - 12px);white-space:nowrap;\n font-variant-numeric:tabular-nums;text-shadow:0 1px 2px #1B1330;\n -webkit-text-stroke:1.5px #1B1330;paint-order:stroke fill;}\n#hud #xpw {height:26px!important;min-height:26px;margin-top:5px;}\nbody.thumbs.sys175 #lampBar {top:calc(130px + env(safe-area-inset-top,0px))!important;}\nbody.thumbs:not(.sys175) #lampBar {top:calc(116px + env(safe-area-inset-top,0px))!important;}\n#cr.c193 .rail {gap:6px!important;}\n#cr.c193 .rail button {width:56px!important;height:56px!important;min-width:56px!important;min-height:56px!important;flex-shrink:0;gap:1px;background:#2C213D!important;border-color:#BDA06A!important;color:#FFF3DB!important;opacity:1!important;}\n#cr.c193 .rail button.on {background:#4B355F!important;border-color:#FFD27A!important;box-shadow:0 0 0 2px #FFD27A55,0 3px 8px #0007!important;}\n#cr.c193 .rail button small {font-size:13px!important;max-width:48px!important;margin-top:0!important;}\n#cr.c193 .rail button.dim small {color:#D5CBB7!important;}\n#atkL {font-size:14px!important;max-width:70px!important;margin-top:2px;}\n#mmn {font-size:13px!important;max-width:144px!important;width:144px;white-space:normal;overflow-wrap:break-word;text-align:center;}\n#mmw {min-width:156px;gap:4px!important;}\n@media (min-height:600px) {\n #btns .ui150-label,#bRest #restL,#cr.c193 .rail button small,#mmn {font-size:14px!important;}\n #btns button,body.thumbs #btns button {width:60px;min-width:60px;height:60px;min-height:60px;}\n #btns .ui150-label {max-width:50px;}\n #act #bRest,body.thumbs #act #bRest {width:60px!important;height:60px!important;}\n #cr.c193 .rail button {width:60px!important;height:60px!important;min-width:60px!important;min-height:60px!important;}\n #cr.c193 .rail button small {max-width:52px!important;}\n #hud #xpT {font-size:20px!important;}\n #hud #xpw {height:29px!important;min-height:29px;}\n #atkL {font-size:15px!important;}\n}\n",
+  "mockups": [
+    {
+      "file": "ui-labels-05-mock-915.png",
+      "size": [
+        915,
+        412
+      ],
+      "scene": "capital, child age 7, rank=1"
+    },
+    {
+      "file": "ui-labels-05-mock-844.png",
+      "size": [
+        844,
+        390
+      ],
+      "scene": "capital, child age 7, rank=1"
+    },
+    {
+      "file": "ui-labels-05-mock-creator.png",
+      "size": [
+        844,
+        390
+      ],
+      "scene": "creator, age 7 selected, five rail labels"
+    }
+  ],
+  "validation": {
+    "method": "Chromium getComputedStyle + ancestor transform scale, scrollWidth/clientWidth and height, bounding rectangles, elementFromPoint button centers, real touch actions, screenshot inspection. No repository test files are changed.",
+    "viewports": {
+      "844": {
+        "viewportCssPx": [
+          844,
+          390
+        ],
+        "childAge": 7,
+        "fontLoaded": true,
+        "labelObservations": 11,
+        "minimumEffectiveFontPx": 12.6,
+        "clippedLabels": 0,
+        "outsideParentLabels": 0,
+        "outsideScreenLabels": 0,
+        "mainButtonsMeasured": 5,
+        "mainMinimumButtonWidthPx": 44,
+        "mainMinimumButtonHeightPx": 44,
+        "creatorButtonsMeasured": 21,
+        "overlappingButtonPairs": 0,
+        "coveredButtonCenters": 0,
+        "buttonsUnder44Px": 0,
+        "touchChecks": {
+          "restChanged": true,
+          "bBag": true,
+          "bSet": true,
+          "bQLog188": true
+        },
+        "longMapName": {
+          "text": "🌙 หมู่บ้านพาเพลิน (ฉากใหม่)",
+          "scrollWidth": 144,
+          "clientWidth": 144,
+          "height": 39,
+          "insideParent": true,
+          "insideScreen": true
+        },
+        "fallbackSystemFontGameLabelsMeasured": 6,
+        "fallbackGameClippedLabels": 0,
+        "pageErrors": 0,
+        "labelMeasurements": [
+          {
+            "selector": "[data-tab=age] small",
+            "text": "อายุ",
+            "fontSizeCssPx": 13,
+            "effectiveFontPx": 13,
+            "lineHeightPx": 19.5,
+            "clientWidthPx": 20,
+            "scrollWidthPx": 20,
+            "bounds": {
+              "x": 30.140625,
+              "y": 65.75,
+              "width": 19.703125,
+              "height": 19.5,
+              "right": 49.84375,
+              "bottom": 85.25
+            }
+          },
+          {
+            "selector": "[data-tab=hair] small",
+            "text": "ทรงผม",
+            "fontSizeCssPx": 13,
+            "effectiveFontPx": 13,
+            "lineHeightPx": 19.5,
+            "clientWidthPx": 36,
+            "scrollWidthPx": 36,
+            "bounds": {
+              "x": 22.15625,
+              "y": 127.75,
+              "width": 35.6875,
+              "height": 19.5,
+              "right": 57.84375,
+              "bottom": 147.25
+            }
+          },
+          {
+            "selector": "[data-tab=face] small",
+            "text": "หน้า",
+            "fontSizeCssPx": 13,
+            "effectiveFontPx": 13,
+            "lineHeightPx": 19.5,
+            "clientWidthPx": 22,
+            "scrollWidthPx": 22,
+            "bounds": {
+              "x": 29.03125,
+              "y": 189.75,
+              "width": 21.921875,
+              "height": 19.5,
+              "right": 50.953125,
+              "bottom": 209.25
+            }
+          },
+          {
+            "selector": "[data-tab=house] small",
+            "text": "บ้าน",
+            "fontSizeCssPx": 13,
+            "effectiveFontPx": 13,
+            "lineHeightPx": 19.5,
+            "clientWidthPx": 22,
+            "scrollWidthPx": 22,
+            "bounds": {
+              "x": 29.125,
+              "y": 251.75,
+              "width": 21.75,
+              "height": 19.5,
+              "right": 50.875,
+              "bottom": 271.25
+            }
+          },
+          {
+            "selector": "[data-tab=hat] small",
+            "text": "หมวก",
+            "fontSizeCssPx": 13,
+            "effectiveFontPx": 13,
+            "lineHeightPx": 19.5,
+            "clientWidthPx": 29,
+            "scrollWidthPx": 29,
+            "bounds": {
+              "x": 25.40625,
+              "y": 313.75,
+              "width": 29.171875,
+              "height": 19.5,
+              "right": 54.578125,
+              "bottom": 333.25
+            }
+          },
+          {
+            "selector": "#xpT",
+            "text": "EXP 0/18",
+            "fontSizeCssPx": 18,
+            "effectiveFontPx": 12.6,
+            "lineHeightPx": 17.009999999999998,
+            "clientWidthPx": 76,
+            "scrollWidthPx": 76,
+            "bounds": {
+              "x": 95.4156265258789,
+              "y": 44.599998474121094,
+              "width": 53.48436737060547,
+              "height": 17.0078125,
+              "right": 148.89999389648438,
+              "bottom": 61.607810974121094
+            }
+          },
+          {
+            "selector": "#bBag .ui150-label",
+            "text": "กระเป๋า",
+            "fontSizeCssPx": 13,
+            "effectiveFontPx": 13,
+            "lineHeightPx": 19.5,
+            "clientWidthPx": 36,
+            "scrollWidthPx": 36,
+            "bounds": {
+              "x": 723.828125,
+              "y": 39.25,
+              "width": 36.328125,
+              "height": 19.5,
+              "right": 760.15625,
+              "bottom": 58.75
+            }
+          },
+          {
+            "selector": "#bSet .ui150-label",
+            "text": "ตั้งค่า",
+            "fontSizeCssPx": 13,
+            "effectiveFontPx": 13,
+            "lineHeightPx": 19.5,
+            "clientWidthPx": 28,
+            "scrollWidthPx": 28,
+            "bounds": {
+              "x": 789.96875,
+              "y": 39.25,
+              "width": 28.046875,
+              "height": 19.5,
+              "right": 818.015625,
+              "bottom": 58.75
+            }
+          },
+          {
+            "selector": "#mmn",
+            "text": "🌙 หมู่บ้านพาเพลิน",
+            "fontSizeCssPx": 13,
+            "effectiveFontPx": 13,
+            "lineHeightPx": 19.5,
+            "clientWidthPx": 144,
+            "scrollWidthPx": 144,
+            "bounds": {
+              "x": 680,
+              "y": 142,
+              "width": 144,
+              "height": 19.5,
+              "right": 824,
+              "bottom": 161.5
+            }
+          },
+          {
+            "selector": "#restL",
+            "text": "นั่งพัก",
+            "fontSizeCssPx": 13,
+            "effectiveFontPx": 13,
+            "lineHeightPx": 19.5,
+            "clientWidthPx": 30,
+            "scrollWidthPx": 30,
+            "bounds": {
+              "x": 20.90625,
+              "y": 360.25,
+              "width": 30.1875,
+              "height": 19.5,
+              "right": 51.09375,
+              "bottom": 379.75
+            }
+          },
+          {
+            "selector": "#atkL",
+            "text": "ตี",
+            "fontSizeCssPx": 14,
+            "effectiveFontPx": 14,
+            "lineHeightPx": 21,
+            "clientWidthPx": 10,
+            "scrollWidthPx": 10,
+            "bounds": {
+              "x": 785.21875,
+              "y": 345,
+              "width": 9.5625,
+              "height": 21,
+              "right": 794.78125,
+              "bottom": 366
+            }
+          }
+        ]
+      },
+      "915": {
+        "viewportCssPx": [
+          915,
+          412
+        ],
+        "childAge": 7,
+        "fontLoaded": true,
+        "labelObservations": 11,
+        "minimumEffectiveFontPx": 12.6,
+        "clippedLabels": 0,
+        "outsideParentLabels": 0,
+        "outsideScreenLabels": 0,
+        "mainButtonsMeasured": 5,
+        "mainMinimumButtonWidthPx": 44,
+        "mainMinimumButtonHeightPx": 44,
+        "creatorButtonsMeasured": 21,
+        "overlappingButtonPairs": 0,
+        "coveredButtonCenters": 0,
+        "buttonsUnder44Px": 0,
+        "touchChecks": {
+          "restChanged": true,
+          "bBag": true,
+          "bSet": true,
+          "bQLog188": true
+        },
+        "longMapName": {
+          "text": "🌙 หมู่บ้านพาเพลิน (ฉากใหม่)",
+          "scrollWidth": 144,
+          "clientWidth": 144,
+          "height": 39,
+          "insideParent": true,
+          "insideScreen": true
+        },
+        "fallbackSystemFontGameLabelsMeasured": 6,
+        "fallbackGameClippedLabels": 0,
+        "pageErrors": 0,
+        "labelMeasurements": [
+          {
+            "selector": "[data-tab=age] small",
+            "text": "อายุ",
+            "fontSizeCssPx": 13,
+            "effectiveFontPx": 13,
+            "lineHeightPx": 19.5,
+            "clientWidthPx": 20,
+            "scrollWidthPx": 20,
+            "bounds": {
+              "x": 30.140625,
+              "y": 72.75,
+              "width": 19.703125,
+              "height": 19.5,
+              "right": 49.84375,
+              "bottom": 92.25
+            }
+          },
+          {
+            "selector": "[data-tab=hair] small",
+            "text": "ทรงผม",
+            "fontSizeCssPx": 13,
+            "effectiveFontPx": 13,
+            "lineHeightPx": 19.5,
+            "clientWidthPx": 36,
+            "scrollWidthPx": 36,
+            "bounds": {
+              "x": 22.15625,
+              "y": 134.75,
+              "width": 35.6875,
+              "height": 19.5,
+              "right": 57.84375,
+              "bottom": 154.25
+            }
+          },
+          {
+            "selector": "[data-tab=face] small",
+            "text": "หน้า",
+            "fontSizeCssPx": 13,
+            "effectiveFontPx": 13,
+            "lineHeightPx": 19.5,
+            "clientWidthPx": 22,
+            "scrollWidthPx": 22,
+            "bounds": {
+              "x": 29.03125,
+              "y": 196.75,
+              "width": 21.921875,
+              "height": 19.5,
+              "right": 50.953125,
+              "bottom": 216.25
+            }
+          },
+          {
+            "selector": "[data-tab=house] small",
+            "text": "บ้าน",
+            "fontSizeCssPx": 13,
+            "effectiveFontPx": 13,
+            "lineHeightPx": 19.5,
+            "clientWidthPx": 22,
+            "scrollWidthPx": 22,
+            "bounds": {
+              "x": 29.125,
+              "y": 258.75,
+              "width": 21.75,
+              "height": 19.5,
+              "right": 50.875,
+              "bottom": 278.25
+            }
+          },
+          {
+            "selector": "[data-tab=hat] small",
+            "text": "หมวก",
+            "fontSizeCssPx": 13,
+            "effectiveFontPx": 13,
+            "lineHeightPx": 19.5,
+            "clientWidthPx": 29,
+            "scrollWidthPx": 29,
+            "bounds": {
+              "x": 25.40625,
+              "y": 320.75,
+              "width": 29.171875,
+              "height": 19.5,
+              "right": 54.578125,
+              "bottom": 340.25
+            }
+          },
+          {
+            "selector": "#xpT",
+            "text": "EXP 0/18",
+            "fontSizeCssPx": 18,
+            "effectiveFontPx": 12.6,
+            "lineHeightPx": 17.009999999999998,
+            "clientWidthPx": 76,
+            "scrollWidthPx": 76,
+            "bounds": {
+              "x": 95.4156265258789,
+              "y": 44.599998474121094,
+              "width": 53.48436737060547,
+              "height": 17.0078125,
+              "right": 148.89999389648438,
+              "bottom": 61.607810974121094
+            }
+          },
+          {
+            "selector": "#bBag .ui150-label",
+            "text": "กระเป๋า",
+            "fontSizeCssPx": 13,
+            "effectiveFontPx": 13,
+            "lineHeightPx": 19.5,
+            "clientWidthPx": 36,
+            "scrollWidthPx": 36,
+            "bounds": {
+              "x": 794.828125,
+              "y": 39.25,
+              "width": 36.328125,
+              "height": 19.5,
+              "right": 831.15625,
+              "bottom": 58.75
+            }
+          },
+          {
+            "selector": "#bSet .ui150-label",
+            "text": "ตั้งค่า",
+            "fontSizeCssPx": 13,
+            "effectiveFontPx": 13,
+            "lineHeightPx": 19.5,
+            "clientWidthPx": 28,
+            "scrollWidthPx": 28,
+            "bounds": {
+              "x": 860.96875,
+              "y": 39.25,
+              "width": 28.046875,
+              "height": 19.5,
+              "right": 889.015625,
+              "bottom": 58.75
+            }
+          },
+          {
+            "selector": "#mmn",
+            "text": "🌙 หมู่บ้านพาเพลิน",
+            "fontSizeCssPx": 13,
+            "effectiveFontPx": 13,
+            "lineHeightPx": 19.5,
+            "clientWidthPx": 144,
+            "scrollWidthPx": 144,
+            "bounds": {
+              "x": 751,
+              "y": 142,
+              "width": 144,
+              "height": 19.5,
+              "right": 895,
+              "bottom": 161.5
+            }
+          },
+          {
+            "selector": "#restL",
+            "text": "นั่งพัก",
+            "fontSizeCssPx": 13,
+            "effectiveFontPx": 13,
+            "lineHeightPx": 19.5,
+            "clientWidthPx": 30,
+            "scrollWidthPx": 30,
+            "bounds": {
+              "x": 20.90625,
+              "y": 382.25,
+              "width": 30.1875,
+              "height": 19.5,
+              "right": 51.09375,
+              "bottom": 401.75
+            }
+          },
+          {
+            "selector": "#atkL",
+            "text": "ตี",
+            "fontSizeCssPx": 14,
+            "effectiveFontPx": 14,
+            "lineHeightPx": 21,
+            "clientWidthPx": 10,
+            "scrollWidthPx": 10,
+            "bounds": {
+              "x": 856.21875,
+              "y": 367,
+              "width": 9.5625,
+              "height": 21,
+              "right": 865.78125,
+              "bottom": 388
+            }
+          }
+        ]
+      },
+      "1180": {
+        "viewportCssPx": [
+          1180,
+          820
+        ],
+        "childAge": 7,
+        "fontLoaded": true,
+        "labelObservations": 11,
+        "minimumEffectiveFontPx": 14,
+        "clippedLabels": 0,
+        "outsideParentLabels": 0,
+        "outsideScreenLabels": 0,
+        "mainButtonsMeasured": 5,
+        "mainMinimumButtonWidthPx": 44,
+        "mainMinimumButtonHeightPx": 44,
+        "creatorButtonsMeasured": 21,
+        "overlappingButtonPairs": 0,
+        "coveredButtonCenters": 0,
+        "buttonsUnder44Px": 0,
+        "touchChecks": {
+          "restChanged": true,
+          "bBag": true,
+          "bSet": true,
+          "bQLog188": true
+        },
+        "longMapName": {
+          "text": "🌙 หมู่บ้านพาเพลิน (ฉากใหม่)",
+          "scrollWidth": 144,
+          "clientWidth": 144,
+          "height": 42,
+          "insideParent": true,
+          "insideScreen": true
+        },
+        "fallbackSystemFontGameLabelsMeasured": 6,
+        "fallbackGameClippedLabels": 0,
+        "pageErrors": 0,
+        "labelMeasurements": [
+          {
+            "selector": "[data-tab=age] small",
+            "text": "อายุ",
+            "fontSizeCssPx": 14,
+            "effectiveFontPx": 14,
+            "lineHeightPx": 21,
+            "clientWidthPx": 21,
+            "scrollWidthPx": 21,
+            "bounds": {
+              "x": 29.390625,
+              "y": 74,
+              "width": 21.21875,
+              "height": 21,
+              "right": 50.609375,
+              "bottom": 95
+            }
+          },
+          {
+            "selector": "[data-tab=hair] small",
+            "text": "ทรงผม",
+            "fontSizeCssPx": 14,
+            "effectiveFontPx": 14,
+            "lineHeightPx": 21,
+            "clientWidthPx": 38,
+            "scrollWidthPx": 38,
+            "bounds": {
+              "x": 20.78125,
+              "y": 140,
+              "width": 38.4375,
+              "height": 21,
+              "right": 59.21875,
+              "bottom": 161
+            }
+          },
+          {
+            "selector": "[data-tab=face] small",
+            "text": "หน้า",
+            "fontSizeCssPx": 14,
+            "effectiveFontPx": 14,
+            "lineHeightPx": 21,
+            "clientWidthPx": 24,
+            "scrollWidthPx": 24,
+            "bounds": {
+              "x": 28.1875,
+              "y": 206,
+              "width": 23.609375,
+              "height": 21,
+              "right": 51.796875,
+              "bottom": 227
+            }
+          },
+          {
+            "selector": "[data-tab=house] small",
+            "text": "บ้าน",
+            "fontSizeCssPx": 14,
+            "effectiveFontPx": 14,
+            "lineHeightPx": 21,
+            "clientWidthPx": 23,
+            "scrollWidthPx": 23,
+            "bounds": {
+              "x": 28.28125,
+              "y": 272,
+              "width": 23.421875,
+              "height": 21,
+              "right": 51.703125,
+              "bottom": 293
+            }
+          },
+          {
+            "selector": "[data-tab=hat] small",
+            "text": "หมวก",
+            "fontSizeCssPx": 14,
+            "effectiveFontPx": 14,
+            "lineHeightPx": 21,
+            "clientWidthPx": 31,
+            "scrollWidthPx": 31,
+            "bounds": {
+              "x": 24.296875,
+              "y": 338,
+              "width": 31.40625,
+              "height": 21,
+              "right": 55.703125,
+              "bottom": 359
+            }
+          },
+          {
+            "selector": "#xpT",
+            "text": "EXP 0/18",
+            "fontSizeCssPx": 20,
+            "effectiveFontPx": 14,
+            "lineHeightPx": 18.9,
+            "clientWidthPx": 85,
+            "scrollWidthPx": 85,
+            "bounds": {
+              "x": 99.9765625,
+              "y": 46.69999694824219,
+              "width": 59.423431396484375,
+              "height": 18.900001525878906,
+              "right": 159.39999389648438,
+              "bottom": 65.5999984741211
+            }
+          },
+          {
+            "selector": "#bBag .ui150-label",
+            "text": "กระเป๋า",
+            "fontSizeCssPx": 14,
+            "effectiveFontPx": 14,
+            "lineHeightPx": 21,
+            "clientWidthPx": 39,
+            "scrollWidthPx": 39,
+            "bounds": {
+              "x": 1052.4375,
+              "y": 42.5,
+              "width": 39.125,
+              "height": 21,
+              "right": 1091.5625,
+              "bottom": 63.5
+            }
+          },
+          {
+            "selector": "#bSet .ui150-label",
+            "text": "ตั้งค่า",
+            "fontSizeCssPx": 14,
+            "effectiveFontPx": 14,
+            "lineHeightPx": 21,
+            "clientWidthPx": 30,
+            "scrollWidthPx": 30,
+            "bounds": {
+              "x": 1122.890625,
+              "y": 42.5,
+              "width": 30.203125,
+              "height": 21,
+              "right": 1153.09375,
+              "bottom": 63.5
+            }
+          },
+          {
+            "selector": "#mmn",
+            "text": "🌙 หมู่บ้านพาเพลิน",
+            "fontSizeCssPx": 14,
+            "effectiveFontPx": 14,
+            "lineHeightPx": 21,
+            "clientWidthPx": 144,
+            "scrollWidthPx": 144,
+            "bounds": {
+              "x": 1016,
+              "y": 156,
+              "width": 144,
+              "height": 21,
+              "right": 1160,
+              "bottom": 177
+            }
+          },
+          {
+            "selector": "#restL",
+            "text": "นั่งพัก",
+            "fontSizeCssPx": 14,
+            "effectiveFontPx": 14,
+            "lineHeightPx": 21,
+            "clientWidthPx": 33,
+            "scrollWidthPx": 33,
+            "bounds": {
+              "x": 21.75,
+              "y": 787.5,
+              "width": 32.5,
+              "height": 21,
+              "right": 54.25,
+              "bottom": 808.5
+            }
+          },
+          {
+            "selector": "#atkL",
+            "text": "ตี",
+            "fontSizeCssPx": 15,
+            "effectiveFontPx": 15,
+            "lineHeightPx": 22.5,
+            "clientWidthPx": 10,
+            "scrollWidthPx": 10,
+            "bounds": {
+              "x": 1120.875,
+              "y": 774.25,
+              "width": 10.234375,
+              "height": 22.5,
+              "right": 1131.109375,
+              "bottom": 796.75
+            }
+          }
+        ]
+      }
+    },
+    "fallbackCreator844": {
+      "labelsMeasured": 5,
+      "minimumFontPx": 13,
+      "clippedLabels": 0
+    },
+    "performance": {
+      "scope": "Same cloud Chromium scene 844x390; ABBA 4 samples of about 2.4 seconds, same loaded font. An environment smoke measurement, not a physical-phone benchmark.",
+      "baselineAverageFps": 60.13,
+      "proposalAverageFps": 60.14,
+      "samples": [
+        {
+          "proposal": false,
+          "frames": 145,
+          "elapsedMs": 2410.2999999970198,
+          "fps": 60.15848649553138,
+          "p95FrameMs": 16.799999999999272
+        },
+        {
+          "proposal": true,
+          "frames": 145,
+          "elapsedMs": 2409.89999999851,
+          "fps": 60.16847172085549,
+          "p95FrameMs": 16.700000000000728
+        },
+        {
+          "proposal": true,
+          "frames": 145,
+          "elapsedMs": 2412.2999999970198,
+          "fps": 60.108610040284844,
+          "p95FrameMs": 16.700000000000728
+        },
+        {
+          "proposal": false,
+          "frames": 145,
+          "elapsedMs": 2412.5999999999985,
+          "fps": 60.10113570421955,
+          "p95FrameMs": 16.700000000000728
+        }
+      ]
+    },
+    "acceptance": {
+      "1": {
+        "requiredMinimumPx": 11,
+        "observedMinimumPx": 12.6
+      },
+      "2": {
+        "ItimLabelObservations": 33,
+        "clipped": 0,
+        "outsideParent": 0,
+        "outsideScreen": 0
+      },
+      "3": {
+        "mainButtonObservations": 15,
+        "overlappingPairs": 0,
+        "under44Px": 0,
+        "coveredCenters": 0,
+        "successfulTouchChecks": 12,
+        "touchChecks": 12
+      },
+      "4": {
+        "additionalPerFrameWrites": 0,
+        "additionalAnimationLoops": 0,
+        "baselineAverageFps": 60.13,
+        "proposalAverageFps": 60.14
+      },
+      "5": {
+        "reviewsReceived": 0,
+        "score": null,
+        "requiredMinimum": 8.5,
+        "scaleMaximum": 10
+      }
+    }
+  },
+  "handoffNotes": [
+    "The minimum applies to the six requested label categories; other legacy text (status line, player name, quest goal) is outside this set.",
+    "The proposal changes label presentation and button/EXP-row space only; Claude owns integration and post-integration testing.",
+    "Main-scene button tests are for the requested child rank=1 workflow. Adult top-row labels use the same style; full adult action-cluster gameplay was not tested.",
+    "No index.html, sw.js, test_*.js or original game image was edited. Owner visual acceptance remains pending."
+  ]
+}
