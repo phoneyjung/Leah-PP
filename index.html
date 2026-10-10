@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.19';
+const VERSION='Lantern Academy 2.20';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -7408,4 +7408,85 @@ function pd219Refresh(){const el=$('cr'),gd=CR_STATE.gender==='m'?'m':'f';if(!CR
 @media (max-height:400px){#cr.c193 .side .pd219g .opt{min-height:66px}#cr.c193 .pd219g .opt canvas{width:42px;height:42px}#cr.c193 .side .pd219g.row .opt{min-height:50px}#cr.c193 .pd219g.row .opt canvas{width:38px;height:38px}#cr.c193 #pd219tone{gap:8px;padding:2px 4px}#cr.c193 #pd219body .opt canvas{width:56px;height:56px}}
 @media (max-height:340px){#cr.c193 .side h3.pd219h{display:none}}`;document.head.appendChild(st)}
 try{if(pd219On())pd219Load()}catch(e){}
+// ================= 2.20 Claude: GM trial · a ready-made character from a picture file kept on THIS device (owner 11 Oct 01:47: "try whether fixed characters are better")
+// The picture is never uploaded and never written into the save: it stays in this browser (IndexedDB 'la-local220'; memory only when the browser refuses).
+// Sheet: 7 columns (stand + 6 walk frames) × 8 rows in the game's order S SE E NE N NW W SW · square frames F = width/7 (32–192) · feet on row F-2 · drawn 1 art pixel = 1 game pixel.
+// GM slot only, like the 1.70/2.01 trials (S.gmSprite170='local220', S.gmLocal220 = file name); other players, the bag and the HUD portrait keep the slot's own character.
+const LC220={dec:{},mem:null,name:'',sheets:null,pending:null,h:{}};
+try{Object.assign(TX.th,{lc220Btn:'ลองตัวละครสำเร็จรูป (ไฟล์ในเครื่อง)',lc220T:'ตัวละครสำเร็จรูป · จากไฟล์ในเครื่องนี้',
+  lc220P:'เลือกไฟล์ภาพตัวละคร 7 ช่อง × 8 แถว จากมือถือ · ภาพเก็บในเครื่องนี้เท่านั้น ไม่ขึ้นเว็บ ไม่อยู่ในเซฟ · เฉพาะเซฟ GM',lc220Pick:'เลือกไฟล์ภาพ…',
+  lc220Use:'ใช้ตัวนี้ · ไปเดิน',lc220Back:'กลับตัวเดิม',lc220Del:'ลบไฟล์ในเครื่อง',lc220Close:'ปิด',lc220None:'ยังไม่มีไฟล์ · กด "เลือกไฟล์ภาพ" ก่อน',
+  lc220Bad:'ใช้ไม่ได้ (ต้องเป็นภาพ 7 ช่อง × 8 แถว ช่องจัตุรัส):',lc220Ok:'พร้อม · เลือกตัวแล้วกด "ใช้ตัวนี้"',lc220Used:'ใช้ตัวละครสำเร็จรูปแล้ว ลองเดินดู',
+  lc220Gone:'กลับเป็นตัวเดิมแล้ว',lc220Mem:'เครื่องนี้ไม่ยอมเก็บไฟล์ · ใช้ได้จนปิดเกม',lc220Kid:'ตัวเดิม',lc220New:'สำเร็จรูป',lc220Deleted:'ลบไฟล์ในเครื่องแล้ว'});
+ if(TX.en)Object.assign(TX.en,{lc220Btn:'Try a ready-made character (file on this device)',lc220T:'Ready-made character · from a file on this device',
+  lc220P:'Pick a character picture, 7 columns × 8 rows, from this phone · it stays on this device only: not uploaded, not in the save · GM slot only',lc220Pick:'Pick picture files…',
+  lc220Use:'Use this one · walk',lc220Back:'Back to my character',lc220Del:'Delete files on this device',lc220Close:'Close',lc220None:'No file yet · tap "Pick picture files" first',
+  lc220Bad:'Not usable (needs 7 columns × 8 rows of square frames):',lc220Ok:'Ready · pick one, then tap "Use this one"',lc220Used:'Ready-made character on · try walking',
+  lc220Gone:'Your character is back',lc220Mem:'This browser will not keep files · usable until the game closes',lc220Kid:'Mine',lc220New:'Ready-made',lc220Deleted:'Files on this device deleted'})}catch(e){}
+function lc220Selected(){try{return gmOn()&&S&&S.gmSprite170==='local220'&&!!S.gmLocal220}catch(e){return false}}
+function lc220DB(){return new Promise((res,rej)=>{try{const r=indexedDB.open('la-local220',1);r.onupgradeneeded=()=>{try{r.result.createObjectStore('s')}catch(e){}};r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);r.onblocked=()=>rej(Error('blocked'))}catch(e){rej(e)}})}
+function lc220List(){if(LC220.mem)return Promise.resolve(LC220.mem.slice());return lc220DB().then(db=>new Promise(res=>{try{const q=db.transaction('s').objectStore('s').get('list');q.onsuccess=()=>res(Array.isArray(q.result)?q.result:[]);q.onerror=()=>res([])}catch(e){res([])}})).catch(()=>[])}
+function lc220Keep(list){return lc220DB().then(db=>new Promise(res=>{try{const tx=db.transaction('s','readwrite');tx.objectStore('s').put(list,'list');tx.oncomplete=()=>res(true);tx.onerror=tx.onabort=()=>res(false)}catch(e){res(false)}})).catch(()=>false).then(ok=>{if(!ok)LC220.mem=list.slice();return ok})}
+// a picture (Blob) -> the game's stand (8F×F) and walk (6F×8F) sheets, or null when it is not a usable sheet
+function lc220Build(blob){return new Promise(resolve=>{let url='';try{url=URL.createObjectURL(blob)}catch(e){return resolve(null)}const im=new Image();let fin=false;const done=v=>{if(fin)return;fin=true;clearTimeout(tm);try{URL.revokeObjectURL(url)}catch(e){}resolve(v)},tm=setTimeout(()=>done(null),10000);
+ im.onerror=()=>done(null);im.onload=()=>{try{const W=im.naturalWidth,H=im.naturalHeight,F=W/7;if(!Number.isInteger(F)||F<32||F>192||H!==8*F)return done(null);
+  const chk=document.createElement('canvas');chk.width=W;chk.height=H;const cg=chk.getContext('2d');cg.drawImage(im,0,0);const px=cg.getImageData(0,0,W,H).data;let top=F;
+  for(let r=0;r<8;r++){let n=0;for(let y=0;y<F;y++)for(let x=0;x<F;x++)if(px[((r*F+y)*W+x)*4+3]>80){n++;if(r===0&&y<top)top=y}if(n<F*F*.02)return done(null)}
+  const stand=document.createElement('canvas'),walk=document.createElement('canvas');stand.width=8*F;stand.height=F;walk.width=6*F;walk.height=8*F;const sg=stand.getContext('2d'),wg=walk.getContext('2d');sg.imageSmoothingEnabled=wg.imageSmoothingEnabled=false;
+  for(let r=0;r<8;r++){sg.drawImage(chk,0,r*F,F,F,r*F,0,F,F);wg.drawImage(chk,F,r*F,6*F,F,0,r*F,6*F,F)}
+  done({stand,walk,F,h:(F-2)-top})}catch(e){done(null)}};im.src=url})}
+function lc220Load(name){if(LC220.sheets&&LC220.name===name)return Promise.resolve(true);if(LC220.dec[name]){LC220.sheets=LC220.dec[name];LC220.name=name;return Promise.resolve(true)}
+ if(LC220.pending)return LC220.pending;LC220.pending=lc220List().then(list=>{const it=list.find(x=>x&&x.name===name);return it?lc220Build(it.blob):null}).then(sh=>{if(!sh)return false;LC220.dec[name]=sh;LC220.sheets=sh;LC220.name=name;return true}).catch(()=>false).finally(()=>{LC220.pending=null});return LC220.pending}
+{const old=buildPlayerSheets;buildPlayerSheets=function(){const r=old.apply(this,arguments);try{if(!lc220Selected())return r;const sh=LC220.sheets;
+  if(sh&&LC220.name===S.gmLocal220){PS.stand=sh.stand;PS.walk=sh.walk;PS.F=sh.F;PS.pd219=false;PS.silS=silOf(PS.stand);PS.silW=silOf(PS.walk);PS.sc=0;PS.shS=blurSheet(PS.silS);PS.shW=blurSheet(PS.silW);PS.gmSprite170=true;PS.local220=true}
+  else{const owner=S,nm=S.gmLocal220;lc220Load(nm).then(ok=>{if(ok&&S===owner&&lc220Selected()&&S.gmLocal220===nm)buildPlayerSheets()})}}catch(e){}return r}}
+{const old=buildPlayerSheets;buildPlayerSheets=function(){PS.local220=false;return old.apply(this,arguments)}}
+// the name and an emote sit just above the head (the frame can be taller than the figure)
+function lc220Lift(){try{return PS.local220&&LC220.sheets?Math.max(0,LC220.sheets.F-LC220.sheets.h-4):0}catch(e){return 0}}
+{const o=label;label=function(x,y,s,col){try{if(PS.local220&&Math.abs(x-(P.x-camX))<.5&&Math.abs(y-(P.y-camY-PS.F-2))<.5)y+=lc220Lift()}catch(e){}return o.apply(this,[x,y,s,col])}}
+{const o=emoteBubble;emoteBubble=function(x,y,e,tt){try{if(PS.local220&&Math.abs(x-(P.x-camX))<.5&&Math.abs(y-(P.y-camY-PS.F-16))<.5)y+=lc220Lift()}catch(err){}return o.apply(this,[x,y,e,tt])}}
+function openLocal220(){if(!gmOn())return;const owner=S;let closed=false,sel=(S.gmSprite170==='local220'&&S.gmLocal220)||'',names=[];
+ const kid=!PS.gmSprite170&&PS.stand?{im:toCanvas(PS.stand),F:PS.F||64}:(LC220.kid||null);if(kid)LC220.kid=kid;
+ modal(`<div id="lc220"><h2>${t('lc220T')}</h2><p class="lc220p">${t('lc220P')}</p>
+  <div class="lc220top"><label id="lc220pick" class="lc220pick" role="button" tabindex="0">${t('lc220Pick')}<input type="file" id="lc220file" accept="image/png,image/webp,image/gif" multiple></label><div id="lc220list" class="lc220list"></div></div>
+  <canvas id="lc220cv" width="300" height="150"></canvas><p id="lc220st" class="lc220p" role="status"></p>
+  <div class="lc220b"><button id="lc220use" disabled>${t('lc220Use')}</button><button id="lc220back">${t('lc220Back')}</button><button id="lc220del">${t('lc220Del')}</button><button id="lc220x">${t('lc220Close')}</button></div></div>`,false);
+ document.querySelector('#modal>.pn')?.classList.add('lc220-panel');
+ const live=()=>!closed&&$('lc220')&&$('lc220').isConnected&&!$('modal').classList.contains('hide')&&S===owner&&gmOn();
+ const status=s=>{if(live())$('lc220st').textContent=s};
+ const paint=()=>{if(!live())return;const box=$('lc220list');box.innerHTML='';for(const n of names){const sh=LC220.dec[n];if(!sh)continue;const b=document.createElement('button');b.className='lc220opt'+(n===sel?' on':'');b.dataset.n=n;
+   const c=document.createElement('canvas');c.width=sh.F;c.height=sh.F;const g=c.getContext('2d');g.imageSmoothingEnabled=false;g.drawImage(sh.stand,0,0,sh.F,sh.F,0,0,sh.F,sh.F);b.appendChild(c);const s=document.createElement('span');s.textContent=n.replace(/\.[a-z]+$/i,'');b.appendChild(s);
+   b.onclick=()=>{if(!live())return;sel=n;LC220.h.a=null;paint()};box.appendChild(b)}
+  $('lc220use').disabled=!(sel&&LC220.dec[sel]);if(!names.length)status(t('lc220None'))};
+ const refresh=()=>lc220List().then(list=>Promise.all(list.map(it=>LC220.dec[it.name]?true:lc220Build(it.blob).then(sh=>{if(sh)LC220.dec[it.name]=sh;return !!sh}))).then(()=>{names=list.map(it=>it.name).filter(n=>LC220.dec[n]);if(sel&&!LC220.dec[sel])sel='';if(!sel&&names.length)sel=names[names.length-1];paint();if(names.length)status(LC220.mem?t('lc220Mem'):t('lc220Ok'))}));
+ $('lc220x').onclick=()=>{closed=true;closeModal()};
+ $('lc220back').onclick=()=>{if(!live())return;delete S.gmSprite170;delete S.gmLocal220;buildPlayerSheets();save();closed=true;closeModal();say(t('lc220Gone'))};
+ $('lc220use').onclick=()=>{if(!live()||!sel||!LC220.dec[sel])return;LC220.sheets=LC220.dec[sel];LC220.name=sel;S.gmSprite170='local220';S.gmLocal220=sel;buildPlayerSheets();save();closed=true;closeModal();say(t('lc220Used'))};
+ $('lc220del').onclick=()=>{if(!live())return;const using=S.gmSprite170==='local220';LC220.dec={};LC220.sheets=null;LC220.name='';LC220.mem=null;sel='';names=[];lc220Keep([]).then(()=>{if(using&&S===owner){delete S.gmSprite170;delete S.gmLocal220;buildPlayerSheets();save()}paint();status(t('lc220Deleted'))})};
+ $('lc220pick').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();$('lc220file').click()}};
+ $('lc220file').onchange=e=>{const files=[...(e.target.files||[])].slice(0,40);e.target.value='';if(!files.length||!live())return;
+  Promise.all(files.map(f=>lc220Build(f).then(sh=>({f,sh})))).then(res=>{const bad=res.filter(x=>!x.sh).map(x=>x.f.name),good=res.filter(x=>x.sh);
+   return lc220List().then(list=>{for(const {f,sh} of good){LC220.dec[f.name]=sh;list=list.filter(it=>it.name!==f.name);list.push({name:f.name,blob:f})}if(LC220.name&&good.some(x=>x.f.name===LC220.name))LC220.sheets=LC220.dec[LC220.name];
+    return (good.length?lc220Keep(list):Promise.resolve(true)).then(()=>{if(good.length)sel=good[good.length-1].f.name;names=list.map(it=>it.name).filter(n=>LC220.dec[n]);LC220.h.a=null;paint();
+     status(bad.length?t('lc220Bad')+' '+bad.join(', '):(LC220.mem?t('lc220Mem'):t('lc220Ok')))})})})};
+ refresh();
+ const draw=tm=>{if(!live())return;const c=$('lc220cv'),g=c.getContext('2d');g.clearRect(0,0,c.width,c.height);g.imageSmoothingEnabled=false;g.fillStyle='#3a2f4f';g.fillRect(0,c.height-14,c.width,14);
+  const base=c.height-14,k=LC220.kid,sh=sel&&LC220.dec[sel],H=LC220.h;if(k&&H.k==null)H.k=ad201Height(k.im,k.F,0);if(sh&&H.a==null)H.a=ad201Height(sh.stand,sh.F,0);
+  if(k)g.drawImage(k.im,0,0,k.F,k.F,50-k.F/2,base-(k.F-2),k.F,k.F);
+  if(sh){const row=Math.floor(tm/1600)%8,f=Math.floor(tm/140)%6;g.drawImage(sh.walk,f*sh.F,row*sh.F,sh.F,sh.F,170-sh.F/2,base-(sh.F-2),sh.F,sh.F)}
+  g.font='bold 11px sans-serif';g.fillStyle='#f6e2b0';g.textAlign='center';if(k)g.fillText(t('lc220Kid')+' '+H.k+' px',50,c.height-3);if(sh)g.fillText(t('lc220New')+' '+H.a+' px',170,c.height-3);
+  if(k&&sh&&H.k&&H.a){g.textAlign='left';g.fillText((H.a/H.k).toFixed(2)+'×',240,24)}
+  requestAnimationFrame(draw)};requestAnimationFrame(draw)}
+{const old=openGM;openGM=function(){const r=old.apply(this,arguments);try{if(gmOn()&&!$('gmLocal220')){const b=document.createElement('button');b.id='gmLocal220';b.textContent=t('lc220Btn');b.style.minHeight='48px';b.onclick=()=>openLocal220();$('mBody').prepend(b)}}catch(e){}return r}}
+{const old=modal;modal=function(){document.querySelector('#modal>.pn')?.classList.remove('lc220-panel');return old.apply(this,arguments)}}
+{const st=document.createElement('style');st.textContent=`#lc220{text-align:center}#lc220cv{width:min(600px,86vw);height:auto;aspect-ratio:2/1;image-rendering:pixelated;background:#1d1729;border-radius:10px;border:2px solid #d9bc7c55;display:block;margin:6px auto}
+#lc220 .lc220p{font-size:13px;margin:6px 0;opacity:.92}#lc220 .lc220top{display:flex;gap:8px;align-items:stretch;justify-content:center}
+#lc220 .lc220pick{display:flex;align-items:center;justify-content:center;min-height:48px;min-width:120px;padding:6px 12px;border-radius:10px;border:2px solid #ffdfa0;background:#594263;color:#ffefc8;font-weight:700;cursor:pointer;flex:none;position:relative;overflow:hidden}
+#lc220 .lc220pick input{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer}
+#lc220 .lc220list{display:flex;gap:6px;overflow-x:auto;max-width:min(560px,70vw);padding:2px}#lc220 .lc220opt{flex:none;display:flex;flex-direction:column;align-items:center;gap:2px;min-width:64px;min-height:48px;padding:3px;border-radius:8px;border:2px solid #ffffff22;background:#2c2340}
+#lc220 .lc220opt.on{border-color:#ffdfa0;box-shadow:inset 0 -3px 0 #ffdfa0}#lc220 .lc220opt canvas{width:48px;height:48px;image-rendering:pixelated;pointer-events:none}#lc220 .lc220opt span{font-size:11px;pointer-events:none;white-space:nowrap}
+#lc220 .lc220b{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:8px}#lc220 .lc220b button{min-height:44px;padding:8px 14px}
+@media (max-height:520px){#lc220{display:grid;grid-template-columns:auto 1fr;column-gap:12px;align-items:center;text-align:left}#lc220 h2{grid-column:1/3;margin:0 0 2px;font-size:17px}#lc220>.lc220p:first-of-type{grid-column:1/3;font-size:12px;margin:0 0 4px}
+ #lc220 .lc220top{grid-column:1/3;justify-content:flex-start}#lc220 .lc220list{max-width:none;flex:1}#lc220cv{grid-column:1;grid-row:4/6;width:min(40vw,320px);margin:4px 0}#lc220 #lc220st{grid-column:2;grid-row:4;font-size:12px;margin:2px 0}
+ #lc220 .lc220b{grid-column:2;grid-row:5;display:grid;grid-template-columns:1fr 1fr;margin-top:2px;gap:6px}#lc220 .lc220b button{padding:6px 8px}}`;document.head.appendChild(st)}
 </script></body></html>
