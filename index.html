@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.12';
+const VERSION='Lantern Academy 2.13';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -6888,4 +6888,42 @@ function hunt1Warm212(){try{if(!HUNT1L.got||HUNT1L.c||HUNT1L.busy||typeof create
 const MEAS212=new WeakMap();
 {const _ms=measure;measure=function(o){let im=null;try{im=IMG[o.img]}catch(e){}if(!im||typeof im!=='object')return _ms(o);let t=MEAS212.get(im);if(!t){t=new Map();MEAS212.set(im,t)}
   const k=o.sx+','+o.sy+','+o.sw+','+o.sh,r=t.get(k);if(r){o.cb=r.cb;o.foot=r.foot;o.fx=r.fx;o.sil=r.sil;o.a=1;return}_ms(o);if(o.sil)t.set(k,{cb:o.cb,foot:o.foot,fx:o.fx,sil:o.sil})}}
+// ================= 2.13 (owner 10 Oct 11:10, tap answers): the remade girl "ใหม่ 3" in the GM trial, next to woman 1 and boy 2 =================
+// the owner's PixelLab run "young girl student about 10" (ZIP 10:42, 4 versions; he picked version 3: two braids, sky-blue eyes, 37 px wide like boy 2, 62 tall)
+// gm-c213-g3.png 512×64 = that run's 8 standing views in the game's order S SE E NE N NW W SW, pixels untouched (checked cell by cell), feet on row 62
+// her button is "ด.ญ. 3" in the "try the new characters" window; with 9 buttons the grid takes 5 a row so the window keeps 2 rows of faces
+try{if(!AD207.C.some(c=>c.k==='cg3')){AD207.C.push({k:'cg3',f:'g3',F:64,foot:62,kind:'G',n:3});AD201.V.cg3={src:'gm-c213-g3.png',foot:62,lift:0,F:64}}
+  const st=document.createElement('style');st.textContent='#ad207 .ad207g.ad207g{grid-template-columns:repeat(5,minmax(0,1fr))}';document.head.appendChild(st)}catch(e){}
+// ================= 2.13 · Codex set 05 A1 (UI_LABELS_05.json, branch codex/asset-05-ui-labels ad5a436): the labels a child reads every day =================
+// owner 10 Oct: passed (Claude 8.8 ≥ 8.5) with "children don't see the EXP numbers" · the stylesheet below is Codex's cssProposal, one static sheet, scoped to the
+// child screen it was drawn and checked for (body.kidmin171: under 10 with kid mode on) and the creator (everyone): on the grown-up screen its 160 px map box covered
+// the skill button by 18 px at 812×330 (2.11: 1 px clear) and pushed the guide button off its place, so grown-ups keep the 2.12 sizes until Codex's A2 (ASSET_SPEC_05 v2)
+// after the game's own rules (no per-frame writes) · labels 8–11 → 13–14 px, EXP 18 px in the 0.7 HUD = 12.6 seen, buttons 56/60 px · under 10: EXP bar only
+try{const st=document.createElement('style');st.id='ui213';st.textContent=`/* Asset 05 A1: static design overlay only, injected for mock-ups. */body.kidmin171 #btns .ui150-label,body.kidmin171 #restL,body.kidmin171 #atkL,body.kidmin171 #mmn,#cr.c193 .rail button small{
+ font-family:Itim,system-ui,sans-serif!important;font-weight:400!important;
+ color:#FFF3DB!important;line-height:1.5!important;letter-spacing:0!important;
+ -webkit-text-stroke:1.5px #1B1330;paint-order:stroke fill;
+ text-shadow:0 1px 2px #1B1330;overflow:visible!important;
+ white-space:nowrap;flex-shrink:0;
+}body.kidmin171 #btns .ui150-label{font-size:13px!important;max-width:46px;margin:0!important;}body.kidmin171 #btns button,body.kidmin171.thumbs #btns button{width:56px;min-width:56px;height:56px;min-height:56px;padding:4px;gap:2px;}body.kidmin171 #btns,body.kidmin171.thumbs #btns{gap:6px;}body.kidmin171 #btns img.pxi,body.kidmin171.thumbs #btns img.pxi{width:24px;height:24px;}body.kidmin171 #bRest #restL{font-size:13px!important;max-width:48px;margin-top:1px!important;}body.kidmin171 #act #bRest,body.kidmin171.thumbs #act #bRest{width:56px!important;height:56px!important;font-size:21px!important;line-height:1!important;}body.kidmin171 #hud #xpT{font:700 18px/1.35 system-ui,sans-serif!important;color:#FFF3DB!important;
+ right:6px!important;top:0!important;max-width:calc(100% - 12px);white-space:nowrap;
+ font-variant-numeric:tabular-nums;text-shadow:0 1px 2px #1B1330;
+ -webkit-text-stroke:1.5px #1B1330;paint-order:stroke fill;}body.kidmin171 #hud #xpw{height:26px!important;min-height:26px;margin-top:5px;}body.kidmin171.thumbs.sys175 #lampBar{top:calc(130px + env(safe-area-inset-top,0px))!important;}body.kidmin171.thumbs:not(.sys175) #lampBar{top:calc(116px + env(safe-area-inset-top,0px))!important;}#cr.c193 .rail{gap:6px!important;}#cr.c193 .rail button{width:56px!important;height:56px!important;min-width:56px!important;min-height:56px!important;flex-shrink:0;gap:1px;background:#2C213D!important;border-color:#BDA06A!important;color:#FFF3DB!important;opacity:1!important;}#cr.c193 .rail button.on{background:#4B355F!important;border-color:#FFD27A!important;box-shadow:0 0 0 2px #FFD27A55,0 3px 8px #0007!important;}#cr.c193 .rail button small{font-size:13px!important;max-width:48px!important;margin-top:0!important;}#cr.c193 .rail button.dim small{color:#D5CBB7!important;}body.kidmin171 #atkL{font-size:14px!important;max-width:70px!important;margin-top:2px;}body.kidmin171 #mmn{font-size:13px!important;max-width:144px!important;width:144px;white-space:normal;overflow-wrap:break-word;text-align:center;}body.kidmin171 #mmw{min-width:156px;gap:4px!important;}
+@media (min-height:600px) {body.kidmin171 #btns .ui150-label,body.kidmin171 #bRest #restL,#cr.c193 .rail button small,body.kidmin171 #mmn{font-size:14px!important;}body.kidmin171 #btns button,body.kidmin171.thumbs #btns button{width:60px;min-width:60px;height:60px;min-height:60px;}body.kidmin171 #btns .ui150-label{max-width:50px;}body.kidmin171 #act #bRest,body.kidmin171.thumbs #act #bRest{width:60px!important;height:60px!important;}#cr.c193 .rail button{width:60px!important;height:60px!important;min-width:60px!important;min-height:60px!important;}#cr.c193 .rail button small{max-width:52px!important;}body.kidmin171 #hud #xpT{font-size:20px!important;}body.kidmin171 #hud #xpw{height:29px!important;min-height:29px;}body.kidmin171 #atkL{font-size:15px!important;}
+}
+
+body.kid213 #hud #xpT{visibility:hidden!important}`;document.head.appendChild(st)}catch(e){}
+{const old=hud;hud=function(){const r=old.apply(this,arguments);try{document.body.classList.toggle('kid213',!!(S&&isKid()))}catch(e){}return r}}
+// the taller top row and map name push the map box down 12 px (844 phone): it covered the grown-ups' "guide" and "bot" buttons (and on 2.11 already by 8 px when a
+// map name takes two lines: "นครหลวง · ลานพระราชวัง") · moving them down would hit the skill button 6 px below, so when the box covers them they slide to its left
+// side (same height) · measured only when the box changes size, the map changes, the screen turns, or the buttons are made · children never have these buttons
+function guide213(){try{const mm=$('mmw'),q=$('bQuest'),a=$('bAuto'),B=document.body;if(!mm||!q)return;B.classList.remove('g213');
+  const A=mm.getBoundingClientRect(),Q=q.getBoundingClientRect();if(!A.width||!Q.width)return;
+  if(!(Math.min(A.right,Q.right)-Math.max(A.left,Q.left)>1&&Math.min(A.bottom,Q.bottom)-Math.max(A.top,Q.top)>1))return;
+  const d=Q.right-(A.left-6);B.style.setProperty('--g213q',((parseFloat(getComputedStyle(q).right)||0)+d)+'px');if(a)B.style.setProperty('--g213a',((parseFloat(getComputedStyle(a).right)||0)+d)+'px');B.classList.add('g213')}catch(e){}}
+// a stylesheet rule (the button-row layout rewrites these buttons' inline right/bottom on every pass, so an inline value would not stay)
+try{const st=document.createElement('style');st.textContent='body.g213.g213.g213 #act #bQuest{right:var(--g213q)!important}body.g213.g213.g213 #act #bAuto{right:var(--g213a)!important}';document.head.appendChild(st)}catch(e){}
+try{addEventListener('resize',()=>setTimeout(guide213,60));const mm=$('mmw');if(mm&&typeof ResizeObserver==='function')new ResizeObserver(()=>guide213()).observe(mm)}catch(e){}
+{const o=goMap;goMap=function(){const r=o.apply(this,arguments);try{setTimeout(guide213,0)}catch(e){}return r}}
+{const o=rovMake180;rovMake180=function(){const r=o.apply(this,arguments);try{setTimeout(guide213,0)}catch(e){}return r}}
 </script></body></html>

@@ -2,7 +2,7 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),puppeteer=require('puppeteer');
 const sleep=ms=>new Promise(r=>setTimeout(r,ms)),out=process.env.OUT_DIR||'/tmp/leah-stagec-207';fs.mkdirSync(out,{recursive:true});
 const url='http://localhost:'+(process.env.PORT||8775)+'/?gm';
-const KEYS=['cf1','cf2','cf3','cb1','cb2','cb3','cg1','cg2'];
+const KEYS=['cf1','cf2','cf3','cb1','cb2','cb3','cg1','cg2','cg3'];   // 2.13: the remade girl 3 joins (test_213_girl3.js checks her on her own)
 async function press(p,s){await p.waitForSelector(s,{visible:true});await (await p.$(s)).scrollIntoView();await p.tap(s);await sleep(150)}
 async function enter(p){await p.waitForFunction(()=>!$('load')&&ROOM2,{timeout:45000});await p.evaluate(()=>{if(!Store.all().slots.length)gmMakeSlot();S=Store.all().slots[Store.all().cur];S.gmInit=1;S.snd=S.mus=false;S.joy=true;S.seen={intro:1};ensureDaily();S.daily.seen=1;delete S.gmSprite170;delete S.gmAdult202;delete S.gmAdultCol;startGame();document.querySelectorAll('#cr,#title,#picker').forEach(e=>e.classList.add('hide'));DLG=null;$('dlg').classList.add('hide');closeModal();goMap('h9');P.path=P.act=null});await sleep(2500)}
 async function open(p){await press(p,'#gmBtn');await press(p,'#gmStageC207');await p.waitForSelector('#ad207 .ad207g',{visible:true})}
@@ -23,7 +23,7 @@ const nextTo=(p,who)=>p.evaluate(who=>{const n=(M.npcs||[]).find(n=>new RegExp(w
   // every button shows its face (or a "?" when its file is missing)
   await p.waitForFunction(()=>[...document.querySelectorAll('#ad207 .ad207g button')].every(b=>b.classList.contains('bad')||(()=>{const d=b.querySelector('canvas').getContext('2d').getImageData(0,0,32,28).data;let n=0;for(let i=3;i<d.length;i+=4)if(d[i]>80)n++;return n>300})()),{timeout:20000});
   R.faces=await p.$$eval('#ad207 .ad207g button',bs=>bs.map(b=>b.classList.contains('bad')?'?':(()=>{const d=b.querySelector('canvas').getContext('2d').getImageData(0,0,32,28).data;let n=0;for(let i=3;i<d.length;i+=4)if(d[i]>80)n++;return n})()));
-  if(fail)assert.deepEqual(R.faces.map(f=>f==='?'),[false,false,false,false,false,false,false,true],'only the missing girl 2 shows "?"');else assert(R.faces.every(n=>n>300),'8 faces drawn: '+R.faces);
+  if(fail)assert.deepEqual(R.faces.map(f=>f==='?'),KEYS.map(k=>k==='cg2'),'only the missing girl 2 shows "?"');else assert(R.faces.every(n=>n>300),'all faces drawn: '+R.faces);
   await p.evaluate(()=>{const b=document.getElementById('mBody');if(b)b.scrollTop=0});
   R.buttons=await p.$$eval('#ad207 .ad207g button,#ad207use,#ad207back,#ad207x',bs=>bs.map(b=>{const r=b.getBoundingClientRect();return{id:b.dataset.v||b.id,inside:r.left>=0&&r.top>=0&&r.right<=innerWidth+.5&&r.bottom<=innerHeight+.5,h:Math.round(r.height)}}));
   assert(R.buttons.every(b=>b.inside&&b.h>=44),'all buttons inside and 44 px+: '+JSON.stringify(R.buttons));
@@ -35,7 +35,7 @@ const nextTo=(p,who)=>p.evaluate(who=>{const n=(M.npcs||[]).find(n=>new RegExp(w
    R.same[k]=await identical(p,k);R.h[k]=await p.evaluate(k=>ad201Height(AD201.sheets.stand,AD201.V[k].F,0),k)}
   assert(KEYS.every(k=>R.same[k]===8),'pixel-identical: '+JSON.stringify(R.same));
   assert(KEYS.every(k=>k[1]==='f'?R.h[k]>=66&&R.h[k]<=72:R.h[k]>=58&&R.h[k]<=63),'heights: '+JSON.stringify(R.h));
-  R.on=await p.$$eval('#ad207 .ad207g button.on',bs=>bs.map(b=>b.dataset.v));assert.deepEqual(R.on,['cg2']);
+  R.on=await p.$$eval('#ad207 .ad207g button.on',bs=>bs.map(b=>b.dataset.v));assert.deepEqual(R.on,[KEYS[KEYS.length-1]]);
   // the line-up shows four figures (Leah · 72 ก · the picked one · Nuan) standing on one line
   R.lineup=await p.evaluate(()=>{const c=$('ad207cv'),d=c.getContext('2d').getImageData(0,0,c.width,c.height-14).data,W=c.width,cnt=x0=>{let n=0;for(let y=0;y<c.height-14;y++)for(let x=x0-24;x<x0+24;x++)if(d[(y*W+x)*4+3]>200)n++;return n};return [40,120,200,282].map(cnt)});
   assert(R.lineup.every(n=>n>500),'four figures in the line-up: '+R.lineup);await p.screenshot({path:path.join(out,name+'-window.png')});
