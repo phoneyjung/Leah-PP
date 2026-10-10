@@ -39,10 +39,10 @@ const fps=p=>p.evaluate(async()=>{let last=performance.now(),n=0,hitch=0;const t
   // a tap on the bag still opens it
   {const b=await (await p.$('#bBag')).boundingBox();await p.touchscreen.tap(b.x+b.width/2,b.y+b.height/2);await sleep(600);R.bagOpens=await p.evaluate(()=>!$('modal').classList.contains('hide'));assert(R.bagOpens);await p.evaluate(()=>closeModal());await sleep(300)}
   // a grown-up: the EXP numbers show and are big enough
-  // a grown-up keeps the 2.12 screen (the sheet is scoped to the child screen: on the grown-up cluster the bigger map box covered the skill button) · EXP numbers show
-  await start(p,30);await sleep(2000);R.adult=await LABELS(p);const ex=R.adult.find(l=>l.name==='exp');assert(ex&&!ex.cut,'grown-up EXP numbers: '+JSON.stringify(ex));
+  // a grown-up: 2.15 Codex set 05 A2 (its own sheet ui215, selectors body:not(.kidmin171)) · every label ≥ 12 px seen, EXP numbers ≥ 12 · nothing cut, no button over another or the map box
+  await start(p,30);await sleep(2000);R.adult=await LABELS(p);const ex=R.adult.find(l=>l.name==='exp');assert(ex&&ex.px>=12&&!ex.cut,'grown-up EXP numbers: '+JSON.stringify(ex));
   R.adultSheet=await p.evaluate(()=>document.body.classList.contains('kidmin171'));assert.equal(R.adultSheet,false);
-  assert(R.adult.every(l=>!l.cut&&l.inScreen),'adult labels: '+JSON.stringify(R.adult));R.adultBtn=await BUTTONS(p);assert(R.adultBtn.small.length===0&&R.adultBtn.over.length===0,'adult buttons: '+JSON.stringify(R.adultBtn));
+  assert(R.adult.every(l=>l.px>=12&&!l.cut&&l.inScreen),'adult labels: '+JSON.stringify(R.adult));R.adultBtn=await BUTTONS(p);assert(R.adultBtn.small.length===0&&R.adultBtn.over.length===0,'adult buttons: '+JSON.stringify(R.adultBtn));
   // the grown-ups' guide (and bot) buttons are never under the map box, also with a two-line map name (2.11 overlapped by 8 px there)
   R.guide=await p.evaluate(async()=>{const res={};for(const m of ['capital','royal','hunt1']){if(!MAPS[m])continue;goMap(m);P.path=P.act=null;await new Promise(r=>setTimeout(r,500));const mm=$('mmw').getBoundingClientRect(),o={lines:Math.round($('mmn').getBoundingClientRect().height/parseFloat(getComputedStyle($('mmn')).lineHeight))};
     for(const id of ['bQuest','bAuto']){const b=$(id);if(!b)continue;{let q=b,hid=false;while(q){const t=getComputedStyle(q);if(t.display==='none'||t.visibility==='hidden'){hid=true;break}q=q.parentElement}if(hid||!b.getBoundingClientRect().width)continue}const c=b.getBoundingClientRect(),ox=Math.min(mm.right,c.right)-Math.max(mm.left,c.left),oy=Math.min(mm.bottom,c.bottom)-Math.max(mm.top,c.top);o[id]={over:ox>1&&oy>1,inScreen:c.left>=0&&c.right<=innerWidth+.5&&c.top>=0}}res[m]=o}goMap('capital');P.path=P.act=null;return res});
