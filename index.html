@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.14';
+const VERSION='Lantern Academy 2.15';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -6953,4 +6953,135 @@ function ad214Walk(v){const V=AD201.V[v];if(!V||!V.walk)return Promise.resolve(f
       if(AD201.v===v){AD201.sheets=sh;AD201.h.a=null}end(true);try{if(ad201Selected()&&S.gmAdult202===v)buildPlayerSheets()}catch(e){}}catch(e){st.failed=true;end(false)}});
     im.src=(window.EMBED_ASSETS&&window.EMBED_ASSETS[V.walk.src])||V.walk.src}).finally(()=>{st.pending=null});return st.pending}
 {const o=ad201Load;ad201Load=function(){const v=AD201.v;return o.apply(this,arguments).then(ok=>{if(!ok||v==='m72a'||!AD201.V[v]||!AD201.V[v].walk)return ok;return ad214Walk(v).then(()=>ok)})}}
+// ================= 2.15 (owner 10 Oct 14:3x, tap answers): Codex set 04 f1 (colours of woman 1) · set 03 A2 (72 ก's west walk toned) · set 05 A2 (grown-up labels) =================
+// set 03 A2 needs no code: gm-adult-204a.palette.json now has regions for gm-adult-207w.png, and the 2.08 tone build already paints the west walk when they exist
+// ---- colours for the stage C characters: hair · eyes · coat (the 2.05 colour lists and house colours) and skin (the 4 tones), from Codex's palette files (ASSET_SPEC_04)
+// a pixel changes only when it lies in Codex's region for that group in that file AND has one of that group's colours (Codex: never by hue) · the source files are
+// coloured first and the sheets rebuilt (the 2.14 walk build), so stand, walk and shadow agree · a file without regions yet (her walk sheets until Codex adds them)
+// uses each colour's group as counted in the standing file's regions (most pixels wins) · the choice is the 72 ก one (S.gmAdultCol · S.gmAdultSkin) · no palette file → no buttons
+const AD215={file:{cf1:'gm-c207-f1.palette.json',cb2:'gm-c207-b2.palette.json',cg3:'gm-c213-g3.palette.json'},src:{cf1:'gm-c207-f1.png',cb2:'gm-c207-b2.png',cg3:'gm-c213-g3.png'},
+  data:{},tried:{},pending:{},major:{},cache:new Map(),built:new Map(),G:['hair','eye','coat','skin','mouth']};
+function ad215Load(v){if(!AD215.file[v])return Promise.resolve(false);if(AD215.data[v]||AD215.tried[v])return Promise.resolve(!!AD215.data[v]);if(AD215.pending[v])return AD215.pending[v];
+  return AD215.pending[v]=fetch(AD215.file[v]).then(r=>r.ok?r.json():null).then(d=>{try{const n=d.groups.skin.length,f=AD215.src[v];
+      if(d.schema!==2||!AD215.G.every(g=>Array.isArray(d.groups[g]))||!AD208.order.every(k=>Array.isArray(d.tones[k])&&d.tones[k].length===n)||!d.regions||!d.regions[f])return false;AD215.data[v]=d;return true}catch(e){return false}})
+    .catch(()=>false).then(ok=>{AD215.tried[v]=true;delete AD215.pending[v];return ok})}
+// per colour, the group it belongs to in the standing file's regions (for files without regions)
+function ad215Major(v){if(AD215.major[v])return AD215.major[v];const d=AD215.data[v],R=d.regions[AD215.src[v]],im=(AD201.byV[v]&&AD201.byV[v].im)||AD207.img[v],m=new Map();if(!im)return m;
+  const c=toCanvas(im),W=c.width,H=c.height,p=c.getContext('2d').getImageData(0,0,W,H).data,cnt=new Map();
+  AD215.G.forEach((g,gi)=>{for(const [y,x,n] of (R[g]||[]))for(let k=0;k<n;k++){const xx=x+k;if(y<0||y>=H||xx<0||xx>=W)continue;const i=(y*W+xx)*4;if(!p[i+3])continue;const key=(p[i]<<16)|(p[i+1]<<8)|p[i+2],a=cnt.get(key)||[0,0,0,0,0];a[gi]++;cnt.set(key,a)}});
+  for(const [key,a] of cnt){let b=0;for(let i=1;i<5;i++)if(a[i]>a[b])b=i;m.set(key,b+1)}return AD215.major[v]=m}
+function ad215Paint(img,file,v,c,tn){const d=AD215.data[v];if(!d||!img)return img;const key=v+'|'+file+'|'+c.h+'|'+c.e+'|'+c.b+'|'+tn;if(AD215.cache.has(key))return AD215.cache.get(key);
+  const out=toCanvas(img),g=out.getContext('2d'),W=out.width,H=out.height,D=g.getImageData(0,0,W,H),p=D.data,N=W*H,cls=new Uint8Array(N),hx=x=>parseInt(x.slice(1),16),sets=AD215.G.map(k=>new Set(d.groups[k].map(hx))),R=d.regions[file];
+  if(R)AD215.G.forEach((k,gi)=>{for(const [y,x,n] of (R[k]||[]))for(let q=0;q<n;q++){const xx=x+q;if(y<0||y>=H||xx<0||xx>=W)continue;const j=y*W+xx,i=j*4;if(p[i+3]&&sets[gi].has((p[i]<<16)|(p[i+1]<<8)|p[i+2]))cls[j]=gi+1}});
+  else{const M=ad215Major(v);for(let j=0;j<N;j++){const i=j*4;if(p[i+3]<60)continue;const k=M.get((p[i]<<16)|(p[i+1]<<8)|p[i+2]);if(k)cls[j]=k}}
+  const lum=j=>.3*p[j*4]+.59*p[j*4+1]+.11*p[j*4+2],idx=[[],[],[],[],[],[]];for(let j=0;j<N;j++)if(cls[j])idx[cls[j]].push(j);
+  // hair: the 2.05 ramp (rank of brightness → the chosen colour's shades) · eyes: the 2.05 hue move keeping light and shine · coat: the 2.05 house colour over the coat's own light
+  if(c.h>=0&&HAIRC[c.h]&&idx[1].length){const cols=HAIRC[c.h][3],vals=idx[1].map(lum).sort((a,b)=>a-b),all=[cols[0].map(x=>Math.round(x*.55))].concat(cols);
+    const rank=x=>{let lo=0,hi=vals.length-1;while(lo<hi){const m=(lo+hi)>>1;if(vals[m]<x)lo=m+1;else hi=m}return lo/Math.max(1,vals.length-1)};
+    for(const j of idx[1]){const col=all[Math.min(all.length-1,Math.floor(rank(lum(j))*all.length))],i=j*4;p[i]=col[0];p[i+1]=col[1];p[i+2]=col[2]}}
+  if(c.e>=0&&EYEC[c.e]){const m=EYEC[c.e][3][1],[th,ts,tl]=hslOf(m[0]/255,m[1]/255,m[2]/255),k=Math.min(1,.6+.8*tl);for(const j of idx[2]){const i=j*4,[h,s0,l]=hslOf(p[i]/255,p[i+1]/255,p[i+2]/255);if(l>.8)continue;const [r,g2,b2]=rgbOf(th,ts<.25?ts:Math.max(ts,.45),Math.min(.95,l*k));p[i]=Math.round(r*255);p[i+1]=Math.round(g2*255);p[i+2]=Math.round(b2*255)}}
+  if(c.b>=0&&HOUSES[c.b]&&idx[3].length){const Ls=idx[3].map(j=>{const i=j*4;return hslOf(p[i]/255,p[i+1]/255,p[i+2]/255)[2]}),st=[...Ls].sort((a,b)=>a-b),lo=st[Math.floor(st.length*.03)],hi=st[Math.floor(st.length*.97)],[hh,a,bb,sat]=HOUSES[c.b].h;
+    idx[3].forEach((j,k)=>{const tt=Math.min(1,Math.max(0,(Ls[k]-lo)/(hi-lo+1e-6))),[r,g2,b2]=rgbOf(hh,sat,a+tt*(bb-a)),i=j*4;p[i]=Math.round(r*255);p[i+1]=Math.round(g2*255);p[i+2]=Math.round(b2*255)})}
+  // skin (and the mouth's skin-coloured shades): the same place in Codex's tone list
+  if(tn&&tn!=='medium'&&d.tones[tn]){const at=new Map();d.groups.skin.forEach((x,i)=>at.set(hx(x),i));const to=d.tones[tn].map(x=>[parseInt(x.slice(1,3),16),parseInt(x.slice(3,5),16),parseInt(x.slice(5,7),16)]);
+    for(const j of idx[4].concat(idx[5])){const i=j*4,n=at.get((p[i]<<16)|(p[i+1]<<8)|p[i+2]);if(n==null)continue;const q=to[n];p[i]=q[0];p[i+1]=q[1];p[i+2]=q[2]}}
+  g.putImageData(D,0,0);if(AD215.cache.size>40)AD215.cache.clear();AD215.cache.set(key,out);return out}
+function ad215Choice(){const c=ad205Col(),t0=ad208Tone();return {c,tn:t0<0?null:AD208.order[t0]}}
+function ad215Plain(c,tn){return c.h<0&&c.e<0&&c.b<0&&(!tn||tn==='medium')}
+// the sheets of one character in the chosen colours (the 2.14 walk build, or the 2.07 standing layout without a walk)
+function ad215Build(v,sh){const {c,tn}=ad215Choice();if(ad215Plain(c,tn)||!AD215.data[v]||!sh)return sh;const key=v+'|'+(sh.walkReal?1:0)+'|'+c.h+'|'+c.e+'|'+c.b+'|'+tn;if(AD215.built.has(key))return AD215.built.get(key);
+  const V=AD201.V[v],P=(im,f)=>ad215Paint(im,f,v,c,tn);let out=sh;
+  try{if(sh.walkReal){out=ad214Build(P(sh.im,AD215.src[v]),P(sh.wim,V.walk.src),V.walk.C,V.F,sh.west?P(sh.west,V.walk.west):null)}
+    else{const im=P(sh.im,AD215.src[v]),F=V.F,dy=(F-2)-V.foot,stand=document.createElement('canvas'),walk=document.createElement('canvas');stand.width=8*F;stand.height=F;walk.width=6*F;walk.height=8*F;
+      const sg=stand.getContext('2d'),wg=walk.getContext('2d');sg.imageSmoothingEnabled=wg.imageSmoothingEnabled=false;for(let r=0;r<8;r++){sg.drawImage(im,r*F,0,F,F,r*F,dy,F,F);for(let f=0;f<6;f++)wg.drawImage(im,r*F,0,F,F,f*F,r*F+dy+AD201.bob[f],F,F)}out={stand,walk,im,F}}}catch(e){out=sh}
+  if(AD215.built.size>12)AD215.built.clear();AD215.built.set(key,out);return out}
+// in the world (outermost wrapper): the coloured sheets and their shadow
+{const old=buildPlayerSheets;buildPlayerSheets=function(){const r=old.apply(this,arguments);try{const v=AD201.v;if(ad201Selected()&&PS.gmSprite170&&AD215.file[v]&&AD201.sheets){
+  if(!AD215.data[v]){const owner=S;if(!AD215.tried[v])ad215Load(v).then(ok=>{if(ok&&S===owner&&ad201Selected())buildPlayerSheets()});return r}
+  const b=ad215Build(v,AD201.sheets);if(b&&b!==AD201.sheets){PS.stand=b.stand;PS.walk=b.walk;PS.silS=silOf(PS.stand);PS.silW=silOf(PS.walk);PS.sc=0;PS.shS=blurSheet(PS.silS);PS.shW=blurSheet(PS.silW)}}}catch(e){}return r}}
+try{Object.assign(TX.th,{ad215Only:'เปลี่ยนสีได้กับตัวที่มีไฟล์สีจาก Codex (ตอนนี้ หญิง 1)'});if(TX.en)Object.assign(TX.en,{ad215Only:'Colours work for characters with a Codex colour file (now: woman 1)'})}catch(e){}
+// the stage C window: the same four buttons as 72 ก's (hair · eyes · coat · skin), live on the line-up picture and, when this character is in use, on the character
+{const old=openStageC207;openStageC207=function(){const r=old.apply(this,arguments);try{const root=$('ad207');if(!root||root.querySelector('.ad215c'))return r;
+  const row=document.createElement('div');row.className='ad215c';row.innerHTML=['h','e','b','s'].map(k=>`<button type="button" data-k="${k}"><i></i><span>${t(k==='h'?'ad205Hair':k==='e'?'ad205Eye':k==='b'?'ad205Coat':'ad208Skin')}</span></button>`).join('')+`<small>${t('ad215Only')}</small>`;
+  const n={h:HAIRC.length,e:EYEC.length,b:HOUSES.length},cur=k=>k==='s'?ad208Tone():ad205Col()[k],v=()=>AD201.v;
+  const css=(k,i)=>{if(i<0)return 'repeating-linear-gradient(45deg,#ddd 0 3px,#999 3px 6px)';if(k==='h')return HAIRC[i][2];if(k==='e')return EYEC[i][2];if(k==='b')return HOUSES[i].col;const d=AD215.data[v()];return d?d.tones[AD208.order[i]][Math.min(8,d.tones[AD208.order[i]].length-1)]:''};
+  const mark=()=>{const on=!!AD215.data[v()];row.classList.toggle('off',!on);row.querySelectorAll('button').forEach(b=>{const k=b.dataset.k,i=cur(k);b.disabled=!on;b.querySelector('i').style.background=css(k,i);b.title=i<0?t('ad205Orig'):(k==='s'?t('ad208'+AD208.order[i]):'')})};
+  const check=()=>{const k0=v();ad215Load(k0).then(()=>{if(v()===k0&&row.isConnected)mark()});mark()};
+  row.querySelectorAll('button').forEach(b=>b.onclick=()=>{if(!S||!AD215.data[v()])return;const k=b.dataset.k;
+    if(k==='s'){const t0=ad208Tone(),nx=AD208.cycle[(AD208.cycle.indexOf(t0)+1)%AD208.cycle.length];if(nx<0)delete S.gmAdultSkin;else S.gmAdultSkin=AD208.order[nx]}
+    else{const c=ad205Col();c[k]=c[k]+1>=n[k]?-1:c[k]+1;S.gmAdultCol=c}
+    try{save()}catch(e){}if(S.gmSprite170==='adult201'&&S.gmAdult202===v())try{buildPlayerSheets()}catch(e){}mark()});
+  const anchor=root.querySelector('.ad207b');anchor.before(row);root.querySelectorAll('.ad207g button').forEach(b=>b.addEventListener('click',()=>setTimeout(check,0)));check()}catch(e){}return r}}
+// the line-up picture shows the chosen colours on the picked character (its standing file in colour)
+{const old=openStageC207;openStageC207=function(){const r=old.apply(this,arguments);try{const cv=$('ad207cv');if(cv&&!cv._ad215){cv._ad215=1;const g=cv.getContext('2d'),di=g.drawImage;
+    g.drawImage=function(im,...a){try{const v=AD201.v;if(im&&AD215.data[v]&&im===AD207.img[v]){const {c,tn}=ad215Choice();if(!ad215Plain(c,tn))im=ad215Paint(im,AD215.src[v],v,c,tn)}}catch(e){}return di.call(this,im,...a)}}}catch(e){}return r}}
+{const st=document.createElement('style');st.textContent=`#ad207 .ad215c{display:flex;gap:5px;align-items:center;flex-wrap:wrap;margin:4px 0 0;grid-column:2}#ad207 .ad215c button{min-height:44px;min-width:44px;padding:4px 8px;display:flex;gap:5px;align-items:center;font-size:12px;border-radius:10px}
+#ad207 .ad215c button i{display:inline-block;width:14px;height:14px;border-radius:50%;border:2px solid #fff8;box-sizing:border-box}#ad207 .ad215c small{display:none;font-size:11px;opacity:.75;flex-basis:100%}#ad207 .ad215c.off small{display:block}#ad207 .ad215c.off button{opacity:.4}`;document.head.appendChild(st)}
+// ---- Codex set 05 A2 (owner passed, Claude 8.6): the grown-up labels — Codex's cssProposalAdult as delivered (selectors begin body:not(.kidmin171)); the child sheet ui213 stays
+try{const st=document.createElement('style');st.id='ui215';st.textContent=`/* Asset 05 A2 — adult labels. Static CSS; the child/creator A1 sheet stays separate. */
+body:not(.kidmin171) #btns .ui150-label,
+body:not(.kidmin171) #bRest #restL,
+body:not(.kidmin171) #act #atkL,
+body:not(.kidmin171) #act #skL,
+body:not(.kidmin171) #act #bSlot2 small,
+body:not(.kidmin171) #act #bSlot3 small,
+body:not(.kidmin171) #act #bBuff small,
+body:not(.kidmin171) #act #bPot small,
+body:not(.kidmin171) #act #bQuest small,
+body:not(.kidmin171) #act #bAuto small,
+body:not(.kidmin171) #mmn {
+ font-family:Itim,system-ui,sans-serif!important;font-size:12px!important;font-weight:700!important;
+ color:#FFF3DB!important;line-height:1.5!important;text-shadow:0 1px 2px #1B1330,-1px 0 #1B1330,1px 0 #1B1330;
+ -webkit-text-stroke:0.6px #1B1330;paint-order:stroke fill;white-space:nowrap;display:block;flex-shrink:0;
+}
+body:not(.kidmin171) #topR{top:calc(8px + env(safe-area-inset-top,0px))!important;right:calc(12px + env(safe-area-inset-right,0px))!important;gap:4px!important;}
+body:not(.kidmin171) #btns{gap:4px!important;}
+body:not(.kidmin171) #btns button{box-sizing:border-box;width:48px!important;min-width:48px!important;height:48px!important;min-height:48px!important;padding:2px!important;gap:0!important;}
+body:not(.kidmin171) #btns img.pxi{width:22px!important;height:22px!important;}
+body:not(.kidmin171) #btns .ui150-label{max-width:42px!important;margin:0!important;}
+body:not(.kidmin171) #act #bRest{width:56px!important;height:56px!important;line-height:1!important;}
+body:not(.kidmin171) #bRest #restL{max-width:48px!important;margin:0!important;}
+body:not(.kidmin171) #hud #xpT{font:700 18px/1.35 system-ui,sans-serif!important;color:#FFF3DB!important;top:0!important;right:3px!important;text-shadow:0 1px 2px #1B1330;-webkit-text-stroke:1.5px #1B1330;paint-order:stroke fill;}
+body:not(.kidmin171) #hud #xpw{height:26px!important;min-height:26px!important;margin-top:5px!important;}
+body:not(.kidmin171).thumbs.sys175 #lampBar{top:calc(130px + env(safe-area-inset-top,0px))!important;}
+body:not(.kidmin171).thumbs:not(.sys175) #lampBar{top:calc(116px + env(safe-area-inset-top,0px))!important;}
+body:not(.kidmin171) #act #atkL{font-size:14px!important;margin-top:0!important;}
+body:not(.kidmin171) #act #skL,
+body:not(.kidmin171) #act #bSlot2 small,
+body:not(.kidmin171) #act #bSlot3 small{max-width:56px!important;margin:0!important;}
+body:not(.kidmin171) #act #bBuff small,
+body:not(.kidmin171) #act #bPot small,
+body:not(.kidmin171) #act #bQuest small,
+body:not(.kidmin171) #act #bAuto small{max-width:44px!important;margin:0!important;}
+body:not(.kidmin171) #act #bQuest,
+body:not(.kidmin171) #act #bAuto{width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;padding:0!important;gap:0!important;}
+body:not(.kidmin171) #act #bQuest img.pxi,
+body:not(.kidmin171) #act #bAuto img.pxi{width:20px!important;height:20px!important;}
+/* A horizontal minimap card leaves space for guide → skill → attack even at 330 px high. */
+body:not(.kidmin171) #mmw{box-sizing:border-box;display:grid!important;grid-template-columns:62px minmax(0,1fr);align-items:center;gap:4px!important;width:168px!important;min-width:168px!important;height:54px!important;padding:4px!important;}
+body:not(.kidmin171) #mm{box-sizing:border-box;width:62px!important;height:42px!important;max-width:62px!important;max-height:42px!important;object-fit:contain;}
+body:not(.kidmin171) #mmn{width:auto!important;max-width:none!important;white-space:normal!important;overflow-wrap:normal;line-height:1.5!important;text-align:center;}
+/* Specificity also wins over the 2.13 g213 guide relocation. No per-frame layout writes. */
+body:not(.kidmin171).thumbs.rov180 #act #bQuest{right:calc(12px + env(safe-area-inset-right,0px))!important;top:calc(118px + env(safe-area-inset-top,0px))!important;bottom:auto!important;}
+body:not(.kidmin171).thumbs.rov180 #act #bAuto{right:calc(62px + env(safe-area-inset-right,0px))!important;top:calc(118px + env(safe-area-inset-top,0px))!important;bottom:auto!important;}
+@media(max-height:350px){body:not(.kidmin171).thumbs.rov180 #act #bSk{bottom:calc(102px + env(safe-area-inset-bottom,0px))!important;}}
+@media(min-height:600px){
+ body:not(.kidmin171) #btns button{width:56px!important;min-width:56px!important;height:56px!important;min-height:56px!important;}
+ body:not(.kidmin171) #btns .ui150-label,body:not(.kidmin171) #bRest #restL,body:not(.kidmin171) #mmn{font-size:14px!important;max-width:50px!important;}
+ body:not(.kidmin171) #btns img.pxi{width:26px!important;height:26px!important;}
+ body:not(.kidmin171) #hud #xpT{font-size:20px!important;}
+ body:not(.kidmin171) #hud #xpw{height:29px!important;}
+ body:not(.kidmin171) #mmw{display:flex!important;flex-direction:column;width:168px!important;height:142px!important;gap:4px!important;}
+ body:not(.kidmin171) #mm{width:128px!important;height:86px!important;max-width:128px!important;max-height:86px!important;}
+ body:not(.kidmin171) #mmn{width:154px!important;max-width:154px!important;}
+ body:not(.kidmin171).thumbs.rov180 #act #bQuest,body:not(.kidmin171).thumbs.rov180 #act #bAuto{top:calc(214px + env(safe-area-inset-top,0px))!important;}
+}
+
+body:not(.kidmin171) #act #bPot img.pxi{width:22px!important;height:22px!important;}
+/* Give the fallback Thai font room for เสริมพลัง without shrinking the text. */
+body:not(.kidmin171) #act #bBuff small{max-width:48px!important;}
+/* A child with kid mode switched off keeps the child's controls; clear the attack edge. */
+body:not(.kidmin171).thumbs:not(.rov180) #act #bSlot2,
+body:not(.kidmin171).thumbs:not(.rov180) #act #bJ1{right:calc(98px + env(safe-area-inset-right,0px))!important;}
+`;document.head.appendChild(st)}catch(e){}
 </script></body></html>
