@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.18';
+const VERSION='Lantern Academy 2.19';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -7267,4 +7267,145 @@ try{const st=document.createElement('style');st.id='ui218';st.textContent=`/* As
 #cr.art195.c193 #cgo{min-height:52px;font-size:18px;}
 }
 `;document.head.appendChild(st)}catch(e){}
+// ================= 2.19 (owner 11 Oct 00:2x "ผ่าน ใส่ GM + Codex ทำขั้น B คู่กัน", 00:5x "ใส่ GM เลย + Codex เกลาทิศซ้าย"): Codex set 07 stages A + B1 — the paperdoll child (ASSET_SPEC_07 v4/v5 · ec17508 · 11d6ce1) =================
+// the owner (10 Oct 21:50, 22:18): "ผม หน้า ตา ปาก ตัว แยกกันเปลี่ยนได้" — hair · face · eyes · mouth · body each its own choice, with the hair colour, eye colour, skin tone and the house cape
+// GM first (art195(), like the 1.95 screens) until the owner approves (then PD219.live=true) · Codex's pieces are drawn as delivered at drawOffset (0,0) in his layer order — never moved,
+// scaled, cut or redrawn · colours: a pixel changes only inside Codex's region for its group AND in that group's colours (the 2.15 rule) · walking: stage B's walking pieces (B1 11d6ce1,
+// 8 directions × 6 frames); a look whose walking pieces are missing walks south with stage A's frames and glides the other ways · json or any first option missing → the 1.94 creator and the child's old sprite, as before · a save made here keeps
+// S.kid (the gender's own sprite, in the same hair and eye colours) so a device without GM still shows a child
+const PD219={live:false,json:'pd-kid.json',d:null,G:null,tried:false,pending:null,ok:false,img:{},cls:{},has:{},avail:{},hair:null,coat:null,skinAt:null,face:0,paint:new Map(),full:new Map(),
+  P:['hair','face','eyes','mouth','body'],def:{f:{hair:1,face:1,eyes:1,mouth:1,body:1,tn:1},m:{hair:2,face:1,eyes:1,mouth:1,body:2,tn:1}},slot:null,gen:false,
+  crop:{hair:[10,0,42],face:[15,6,32],eyes:[20,12,22],mouth:[20,12,22],body:[12,24,40]}};
+try{Object.assign(TX.th,{pd219Body:'ตัว',pd219BodyQ:'ตัว · เลือกชุด',pd219Face:'หน้า',pd219Eyes:'ตา',pd219EyeCol:'สีตา',pd219Skin:'สีผิว',pd219hair1:'เปียคู่',pd219hair2:'ผมสั้น',pd219hair3:'มวยคู่',pd219face1:'หน้าใส',pd219face2:'มีกระ',
+  pd219eyes1:'ตากลม',pd219eyes2:'ตายิ้ม',pd219eyes3:'ตาง่วง',pd219mouth1:'ยิ้มเล็ก',pd219mouth2:'อ้าปาก',pd219mouth3:'ยิ้มกว้าง',pd219body1:'กระโปรง',pd219body2:'ขาสั้น'});
+ if(TX.en)Object.assign(TX.en,{pd219Body:'Body',pd219BodyQ:'Body · clothes',pd219Face:'Face',pd219Eyes:'Eyes',pd219EyeCol:'Colour',pd219Skin:'Skin',pd219hair1:'Braids',pd219hair2:'Short',pd219hair3:'Buns',pd219face1:'Plain',pd219face2:'Freckles',
+  pd219eyes1:'Round',pd219eyes2:'Smiley',pd219eyes3:'Sleepy',pd219mouth1:'Smile',pd219mouth2:'Open',pd219mouth3:'Grin',pd219body1:'Skirt',pd219body2:'Shorts'})}catch(e){}
+function pd219On(){try{return PD219.live||art195()}catch(e){return false}}
+function pd219File(part,n){const p=PD219.d&&PD219.d.parts.find(q=>q.part===part&&q.option===n);return p?p.file:null}
+function pd219Look(o){return !!(o&&o.v===1&&PD219.P.every(k=>Number.isInteger(o[k])&&o[k]>=1&&(!PD219.ok||PD219.avail[k].includes(o[k]))))}
+function pd219Load(){if(PD219.ok||PD219.tried)return Promise.resolve(PD219.ok);if(PD219.pending)return PD219.pending;const G=['hair','eye','skin','mouth','coat'];
+  const img=(f,w,h)=>new Promise(ok=>{const im=new Image(),tm=setTimeout(()=>ok(null),15000);im.onload=()=>{clearTimeout(tm);ok(im.naturalWidth===w&&im.naturalHeight===h?im:null)};im.onerror=()=>{clearTimeout(tm);ok(null)};im.src=(window.EMBED_ASSETS&&window.EMBED_ASSETS[f])||f}).then(im=>{if(im)PD219.img[f]=im});
+  return PD219.pending=fetch(PD219.json).then(r=>r.ok?r.json():null).then(d=>{
+      if(!d||d.cell!==64||!Array.isArray(d.size)||d.size[0]!==896||d.size[1]!==64||!Array.isArray(d.parts)||!Array.isArray(d.layerOrder)||!d.regions||!d.groups||!d.tones||!G.every(g=>Array.isArray(d.groups[g]))||!AD208.order.every(k=>Array.isArray(d.tones[k])&&d.tones[k].length===d.groups.skin.length))return false;
+      PD219.d=d;PD219.G=G;const w=d.walk,wok=w&&Array.isArray(w.parts)&&Array.isArray(w.size)&&w.size[0]===384&&w.size[1]===512&&w.columns===6&&w.rows===8;if(!wok)delete d.walk;
+      return Promise.all(d.parts.map(p=>img(p.file,896,64)).concat(wok?w.parts.filter(p=>(p.availableRows||[]).length===8).map(p=>img(p.file,384,512)):[])).then(()=>pd219Prep())})
+    .catch(()=>false).then(ok=>{PD219.ok=!!ok;PD219.tried=true;PD219.pending=null;return PD219.ok})}
+// which group each pixel of one piece is in (Codex's regions, and only that group's colours; later groups win, as in 2.15) · the walking pieces on first use
+function pd219Cls(f){if(PD219.cls[f])return null;const im=PD219.img[f],W=im.naturalWidth||im.width,H=im.naturalHeight||im.height,p=toCanvas(im).getContext('2d').getImageData(0,0,W,H).data,cls=new Uint8Array(W*H),R=PD219.d.regions[f]||{},has=new Set(),hx=x=>parseInt(x.slice(1),16);
+  PD219.G.forEach((g,gi)=>{const set=new Set(PD219.d.groups[g].map(hx));for(const [y,x,n] of (R[g]||[]))for(let q=0;q<n;q++){const xx=x+q;if(y<0||y>=H||xx<0||xx>=W)continue;const j=y*W+xx,i=j*4;if(p[i+3]&&set.has((p[i]<<16)|(p[i+1]<<8)|p[i+2])){cls[j]=gi+1;has.add(gi+1)}}});
+  PD219.cls[f]=cls;PD219.has[f]=has;return {p,W}}
+// once: the hair shades in order of brightness (all hairstyles together, so every style takes a colour the same way), the cape's light range, the face's own skin shade
+function pd219Prep(){const d=PD219.d,hx=x=>parseInt(x.slice(1),16);
+  for(const part of PD219.P)PD219.avail[part]=d.parts.filter(p=>p.part===part&&PD219.img[p.file]&&(part!=='hair'||PD219.img[pd219File('hairback',p.option)])).map(p=>p.option).sort((a,b)=>a-b);
+  if(!PD219.P.every(k=>PD219.avail[k].includes(1)))return false;
+  const hairN=new Map(),coatL=[],skinN=new Map();PD219.skinAt=new Map();d.groups.skin.forEach((x,i)=>{if(!PD219.skinAt.has(hx(x)))PD219.skinAt.set(hx(x),i)});
+  for(const q of d.parts){const f=q.file;if(!PD219.img[f])continue;const r=pd219Cls(f);if(!r)continue;const {p}=r,cls=PD219.cls[f],hairF=q.part==='hair'||q.part==='hairback',bodyF=q.part==='body',faceF=q.part==='face'&&q.option===1;
+    if(hairF||bodyF||faceF)for(let j=0;j<cls.length;j++){const k=cls[j];if(!k)continue;const i=j*4,key=(p[i]<<16)|(p[i+1]<<8)|p[i+2];
+      if(k===1&&hairF)hairN.set(key,(hairN.get(key)||0)+1);else if(k===5&&bodyF)coatL.push(hslOf(p[i]/255,p[i+1]/255,p[i+2]/255)[2]);else if(k===3&&faceF&&j%896<512)skinN.set(key,(skinN.get(key)||0)+1)}}
+  const lum=k=>.3*(k>>16)+.59*((k>>8)&255)+.11*(k&255),keys=[...hairN.keys()].sort((a,b)=>lum(a)-lum(b)),tot=[...hairN.values()].reduce((a,b)=>a+b,0);let acc=0;PD219.hair=new Map();
+  for(const k of keys){const n=hairN.get(k);PD219.hair.set(k,(acc+n/2)/Math.max(1,tot));acc+=n}
+  for(const x of d.groups.hair){const k=hx(x);if(PD219.hair.has(k)||!keys.length)continue;let bk=keys[0];for(const kk of keys)if(Math.abs(lum(kk)-lum(k))<Math.abs(lum(bk)-lum(k)))bk=kk;PD219.hair.set(k,PD219.hair.get(bk))}   /* a hair shade only the walking pieces use: the place of the nearest standing shade */
+  coatL.sort((a,b)=>a-b);PD219.coat=coatL.length?[coatL[Math.floor(coatL.length*.03)],coatL[Math.floor(coatL.length*.97)]]:[.2,.8];
+  let best=-1,bn=0;for(const [k,n] of skinN)if(n>bn&&PD219.skinAt.has(k)){bn=n;best=PD219.skinAt.get(k)}PD219.face=Math.max(0,best);return true}
+function pd219Ch(o,house){return {hc:Number.isInteger(o.hc)&&o.hc>=0&&o.hc<HAIRC.length?o.hc:-1,ec:Number.isInteger(o.ec)&&o.ec>=0&&o.ec<EYEC.length?o.ec:-1,b:Number.isInteger(house)&&HOUSES[house]?house:0,tn:Number.isInteger(o.tn)&&o.tn>=0&&o.tn<AD208.order.length?o.tn:1}}
+// one piece in the chosen colours: hair → the 2.05 ramp by brightness · eyes → the 2.05 hue move keeping the shine · cape → the house colour over its own light · skin (and the mouth's skin shades) → the same place in Codex's tone list
+function pd219Paint(f,ch){const im=PD219.img[f];if(!im)return null;pd219Cls(f);const has=PD219.has[f]||new Set(),key=f+'|'+(has.has(1)?ch.hc:'')+'|'+(has.has(2)?ch.ec:'')+'|'+(has.has(5)?ch.b:'')+'|'+(has.has(3)||has.has(4)?ch.tn:'');
+  if(PD219.paint.has(key))return PD219.paint.get(key);let out=im;
+  const dH=has.has(1)&&ch.hc>=0,dE=has.has(2)&&ch.ec>=0,dC=has.has(5)&&!!HOUSES[ch.b],dS=(has.has(3)||has.has(4))&&ch.tn!==1;
+  if(dH||dE||dC||dS){const c=toCanvas(im),g=c.getContext('2d'),D=g.getImageData(0,0,c.width,c.height),p=D.data,cls=PD219.cls[f];
+    const ramp=dH?[HAIRC[ch.hc][3][0].map(x=>Math.round(x*.55))].concat(HAIRC[ch.hc][3]):null;let eye=null;if(dE){const m=EYEC[ch.ec][3][1];eye=hslOf(m[0]/255,m[1]/255,m[2]/255)}
+    const [lo,hi]=PD219.coat,hh=dC?HOUSES[ch.b].h:null,to=dS?PD219.d.tones[AD208.order[ch.tn]].map(x=>[parseInt(x.slice(1,3),16),parseInt(x.slice(3,5),16),parseInt(x.slice(5,7),16)]):null;
+    for(let j=0;j<cls.length;j++){const k=cls[j];if(!k)continue;const i=j*4;
+      if(k===1&&ramp){const r=PD219.hair.get((p[i]<<16)|(p[i+1]<<8)|p[i+2]);if(r==null)continue;const q=ramp[Math.min(ramp.length-1,Math.floor(r*ramp.length))];p[i]=q[0];p[i+1]=q[1];p[i+2]=q[2]}
+      else if(k===2&&eye){const [,,l]=hslOf(p[i]/255,p[i+1]/255,p[i+2]/255);if(l>.8)continue;const [r,g2,b2]=rgbOf(eye[0],eye[1]<.25?eye[1]:Math.max(eye[1],.45),Math.min(.95,l*Math.min(1,.6+.8*eye[2])));p[i]=Math.round(r*255);p[i+1]=Math.round(g2*255);p[i+2]=Math.round(b2*255)}
+      else if(k===5&&hh){const l=hslOf(p[i]/255,p[i+1]/255,p[i+2]/255)[2],tt=Math.min(1,Math.max(0,(l-lo)/(hi-lo+1e-6))),[r,g2,b2]=rgbOf(hh[0],hh[3],hh[1]+tt*(hh[2]-hh[1]));p[i]=Math.round(r*255);p[i+1]=Math.round(g2*255);p[i+2]=Math.round(b2*255)}
+      else if((k===3||k===4)&&to){const n=PD219.skinAt.get((p[i]<<16)|(p[i+1]<<8)|p[i+2]);if(n==null)continue;const q=to[n];p[i]=q[0];p[i+1]=q[1];p[i+2]=q[2]}}
+    g.putImageData(D,0,0);out=c}
+  if(PD219.paint.size>160)PD219.paint.clear();PD219.paint.set(key,out);return out}
+function pd219Layers(o){return PD219.d.layerOrder.map(l=>pd219File(l,l==='hairback'?o.hair:o[l]))}
+// the whole character: the 14 cells as delivered (8 standing views, then the south walk) and the 8 standing views alone (what the creator, the picker and the portraits draw)
+function pd219Full(o,house){const ch=pd219Ch(o,house),key=PD219.P.map(k=>o[k]).join('')+'|'+ch.hc+'|'+ch.ec+'|'+ch.b+'|'+ch.tn;if(PD219.full.has(key))return PD219.full.get(key);
+  const c=document.createElement('canvas');c.width=896;c.height=64;const g=c.getContext('2d'),off=PD219.d.drawOffset||[0,0];g.imageSmoothingEnabled=false;
+  for(const f of pd219Layers(o)){const im=f&&pd219Paint(f,ch);if(im)g.drawImage(im,off[0]|0,off[1]|0)}
+  const s=document.createElement('canvas');s.width=512;s.height=64;s.getContext('2d').drawImage(c,0,0,512,64,0,0,512,64);const r={full:c,stand:s};if(PD219.full.size>16)PD219.full.clear();PD219.full.set(key,r);return r}
+// stage B (Codex B1, owner 11 Oct 00:5x "ใส่ GM เลย + Codex เกลาทิศซ้าย"): the walking pieces, 6 frames × 8 directions (S SE E NE N NW W SW, the game's own row order), stacked at (0,0) as delivered
+function pd219WFile(part,n){const w=PD219.d&&PD219.d.walk,p=w&&w.parts.find(q=>q.part===part&&q.option===n);return p?p.file:null}
+function pd219WLayers(o){const w=PD219.d&&PD219.d.walk;if(!w)return null;const L=(w.layerOrder||PD219.d.layerOrder).map(l=>pd219WFile(l,l==='hairback'?o.hair:o[l]));return L.every(f=>f&&PD219.img[f])?L:null}
+function pd219Walk(o,house){const L=pd219WLayers(o);if(!L)return null;const ch=pd219Ch(o,house),c=document.createElement('canvas');c.width=384;c.height=512;const g=c.getContext('2d'),off=PD219.d.walk.drawOffset||[0,0];g.imageSmoothingEnabled=false;
+  for(const f of L){const im=pd219Paint(f,ch);if(im)g.drawImage(im,off[0]|0,off[1]|0)}return c}
+// in the world (F 64, feet on row 62 as delivered): Codex's walking sheet when every piece of this look has one · otherwise row 0 = the real south walk and rows 1–7 glide on their standing view with the 2.01 bob
+function pd219World(o,house){const F=64,{full,stand}=pd219Full(o,house);let walk=null;try{walk=pd219Walk(o,house)}catch(e){walk=null}if(walk)return {stand,walk,real:true};
+  walk=document.createElement('canvas');walk.width=6*F;walk.height=8*F;const g=walk.getContext('2d');g.imageSmoothingEnabled=false;
+  const av=PD219.d.availableFrames||[],real=[8,9,10,11,12,13].every(i=>av.includes(i));
+  for(let r=0;r<8;r++)for(let f=0;f<6;f++){if(r===0&&real)g.drawImage(full,(8+f)*F,0,F,F,f*F,0,F,F);else g.drawImage(stand,r*F,0,F,F,f*F,r*F+AD201.bob[f],F,F)}return {stand,walk,real:false}}
+{const old=buildPlayerSheets;buildPlayerSheets=function(){const r=old.apply(this,arguments);PS.pd219=false;try{if(!S||!S.pd219||PS.gmSprite170||(typeof look169Valid==='function'&&look169Valid(S.appearance169))||!pd219On())return r;
+  if(!PD219.ok){const owner=S;if(!PD219.tried)pd219Load().then(ok=>{if(ok&&S===owner)try{buildPlayerSheets()}catch(e){}});return r}if(!pd219Look(S.pd219))return r;
+  const w=pd219World(S.pd219,S.house);PS.stand=w.stand;PS.walk=w.walk;PS.pdWalk219=w.real;PS.F=64;PS.silS=silOf(PS.stand);PS.silW=silOf(PS.walk);PS.sc=0;PS.shS=blurSheet(PS.silS);PS.shW=blurSheet(PS.silW);PS.pd219=true}catch(e){}return r}}
+// the HUD portrait (1.49) redraws when its key changes: the pieces join the key
+{const o=ui149Portrait;ui149Portrait=function(){try{const k=S&&S.pd219&&PD219.ok&&pd219On()?JSON.stringify(S.pd219):'';if(k!==PD219.hud){PD219.hud=k;UI149.portraitKey=null}}catch(e){}return o.apply(this,arguments)}}
+// portraits: the select screen's slot (pkDraw193 marks it), the gender screen's two children (their defaults), the player's own (a call without colours, like 1.94)
+{const o=crSheet;crSheet=function(k,h,hc,ec,ap,dye){try{if(PD219.ok&&pd219On()){if(PD219.slot)return pd219Full(PD219.slot.pd219,h).stand;
+  if(PD219.gen)return pd219Full(Object.assign({v:1},PD219.def[genderOf194(k)]),h).stand;
+  if(dye===undefined&&S&&pd219Look(S.pd219)&&k===S.kid&&h===S.house&&!(typeof look169Valid==='function'&&look169Valid(ap)))return pd219Full(S.pd219,h).stand}}catch(e){}return o.apply(this,arguments)}}
+{const o=pkDraw193;pkDraw193=function(){try{const s0=Store.all().slots[C193.pick];PD219.slot=PD219.ok&&pd219On()&&s0&&pd219Look(s0.pd219)?s0:null}catch(e){PD219.slot=null}try{return o.apply(this,arguments)}finally{PD219.slot=null}}}
+function pd219PickList(d){if(!pd219On())return;const sl=((d&&d.slots)||Store.all().slots||[]);if(!sl.some(s=>s&&s.pd219))return;
+  if(!PD219.ok){if(!PD219.tried)pd219Load().then(ok=>{const el=$('cr');if(ok&&el&&el.classList.contains('p193')&&!el.classList.contains('hide')){pd219PickList(d);try{pkDraw193()}catch(e){}}});return}
+  document.querySelectorAll('#pk .pn').forEach((b,i)=>{const s=sl[i],c=b.querySelector('canvas');if(!s||!c||!pd219Look(s.pd219))return;const g=c.getContext('2d');g.clearRect(0,0,c.width,c.height);g.imageSmoothingEnabled=false;g.drawImage(pd219Full(s.pd219,s.house).stand,0,0,64,64,-8,-4,80,80)})}
+{const o=openPicker;openPicker=function(d){try{$('cr').classList.remove('pd219')}catch(e){}const r=o.apply(this,arguments);try{pd219PickList(d)}catch(e){}return r}}
+{const o=gDraw194;gDraw194=function(){PD219.gen=!!(PD219.ok&&pd219On());try{return o.apply(this,arguments)}finally{PD219.gen=false}}}
+{const o=openGender194;openGender194=function(){CR_STATE.pd=null;try{$('cr').classList.remove('pd219')}catch(e){}const r=o.apply(this,arguments);try{if(pd219On()&&!PD219.tried)pd219Load().then(ok=>{const el=$('cr');if(ok&&el&&el.classList.contains('g194')&&!el.classList.contains('hide'))gDraw194()})}catch(e){}return r}}
+// ---- the create screen ----
+function pd219Mode(){const el=$('cr');return !!(PD219.ok&&pd219On()&&el&&el.classList.contains('pd219')&&el.classList.contains('c193')&&CR_STATE.pd)}
+function pd219Cur(){const p=CR_STATE.pd;return {v:1,hair:p.hair,face:p.face,eyes:p.eyes,mouth:p.mouth,body:p.body,hc:CR_STATE.hcol??-1,ec:CR_STATE.ecol??-1,tn:p.tn}}
+function pd219Name(part,n){const k='pd219'+part+n;if(TX.th[k])return t(k);const p=PD219.d.parts.find(q=>q.part===part&&q.option===n);return p?(LANG==='en'?p.nameEn:p.nameTh):String(n)}
+function pd219Thumb(cv,o,house,part){if(!cv)return;const [x0,y0,n]=PD219.crop[part],dpr=Math.min(3,devicePixelRatio||1),css=cv.clientWidth||52,k=Math.max(1,Math.ceil(css*dpr/n));if(cv.width!==n*k){cv.width=cv.height=n*k}
+  const g=cv.getContext('2d'),ch=pd219Ch(o,house);g.imageSmoothingEnabled=false;g.clearRect(0,0,cv.width,cv.height);for(const f of pd219Layers(o)){const im=f&&pd219Paint(f,ch);if(im)g.drawImage(im,x0,y0,n,n,0,0,n*k,n*k)}}
+function pd219Opts(host,part){host.innerHTML='';for(const n of PD219.avail[part]){const b=document.createElement('button');b.type='button';b.className='opt';b.dataset.pd=part;b.dataset.n=n;const c=document.createElement('canvas');c.width=c.height=52;
+  const s=document.createElement('span');s.textContent=pd219Name(part,n);b.append(c,s);b.onclick=()=>{if(!CR_STATE.pd)return;CR_STATE.pd[part]=n;crRefresh()};host.append(b)}}
+function pd219Tap(b,fn){b.addEventListener('pointerup',e=>{if(e.button>0)return;b._t219=performance.now();fn()});b.addEventListener('click',()=>{if(performance.now()-(b._t219||0)<600)return;fn()})}
+function pd219Build(){const el=$('cr');if(!el||!el.classList.contains('c193')||!$('ck'))return;const on=!!(PD219.ok&&pd219On());el.classList.toggle('pd219',on);if(!on||$('pd219hair'))return;
+  const mk=(id,part,cls)=>{const d=document.createElement('div');d.id=id;d.className='pd219g'+(cls?' '+cls:'');pd219Opts(d,part);return d},h3=k=>{const h=document.createElement('h3');h.className='pd219h';h.textContent=t(k);return h};
+  $('ck').after(mk('pd219hair','hair'));
+  // the face: four small tabs — face (with the skin tone) · eyes · eye colour (the 1.94 swatches as they were) · mouth
+  const ftp=el.querySelector('.tp[data-tp="face"]'),sub=ftp.querySelector('.sub4'),be=sub.querySelector('[data-sub="face:eye"]'),bf=document.createElement('button');
+  bf.dataset.sub='face:face';bf.textContent=t('pd219Face');bf.onclick=()=>{C193.sub.face='face';crRefresh()};const bs=document.createElement('button');bs.dataset.sub='face:eyes';bs.textContent=t('pd219Eyes');bs.onclick=()=>{C193.sub.face='eyes';crRefresh()};sub.prepend(bf,bs);if(be)be.textContent=t('pd219EyeCol');
+  const spf=document.createElement('div');spf.className='sp';spf.dataset.sp='face:face';const tone=document.createElement('div');tone.id='pd219tone';
+  AD208.order.forEach((k,i)=>{const b=document.createElement('button');b.type='button';b.className='sw';b.dataset.v=i;b.title=t('ad208'+k);b.style.cssText=`width:34px;height:34px;border-radius:50%;background:${PD219.d.tones[k][PD219.face]};border:3px solid #1b1330;padding:0`;b.onclick=()=>{if(!CR_STATE.pd)return;CR_STATE.pd.tn=i;crRefresh()};tone.append(b)});
+  spf.append(mk('pd219face','face','row'),h3('pd219Skin'),tone);const sps=document.createElement('div');sps.className='sp';sps.dataset.sp='face:eyes';sps.append(mk('pd219eyes','eyes'));const spe=ftp.querySelector('[data-sp="face:eye"]');spe.before(spf,sps);ftp.querySelector('[data-sp="face:mouth"]').prepend(mk('pd219mouth','mouth'));
+  // the body, next to the face, in place of the hat (no hat art yet)
+  const rail=el.querySelector('.rail'),rb=rail&&rail.querySelector('[data-tab="hat"]');if(rb){rb.dataset.tab='body';rb.classList.remove('dim');rb.innerHTML='👕<small>'+t('pd219Body')+'</small>';const hb=rail.querySelector('[data-tab="house"]');if(hb)rail.insertBefore(rb,hb)}
+  const tb=document.createElement('div');tb.className='tp';tb.dataset.tp='body';tb.append(mk('pd219body','body','n2'));el.querySelector('.side .body').insertBefore(tb,$('ckey'));const ht=el.querySelector('.tp[data-tp="hat"]');if(ht)ht.remove();
+  if(C193.sub.face==='eye')C193.sub.face='face';
+  // the dice: every piece, the tone, both colours (or their original) and the house
+  const rd=$('c3Rand');if(rd){const nb=rd.cloneNode(true);rd.replaceWith(nb);pd219Tap(nb,()=>{if(!CR_STATE.pd)return;const R=a=>a[Math.floor(Math.random()*a.length)];for(const k of PD219.P)CR_STATE.pd[k]=R(PD219.avail[k]);CR_STATE.pd.tn=Math.floor(Math.random()*AD208.order.length);
+    const hc=Math.floor(Math.random()*(HAIRC.length+1))-1,ec=Math.floor(Math.random()*(EYEC.length+1))-1;CR_STATE.hcol=hc<0?null:hc;CR_STATE.ecol=ec<0?null:ec;CR_STATE.house=Math.floor(Math.random()*HOUSES.length);crRefresh()})}}
+function pd219Refresh(){const el=$('cr'),gd=CR_STATE.gender==='m'?'m':'f';if(!CR_STATE.pd)CR_STATE.pd=Object.assign({g:CR_STATE.gender},PD219.def[gd]);
+  if(CR_STATE.pd.g!==CR_STATE.gender){CR_STATE.pd.hair=PD219.def[gd].hair;CR_STATE.pd.body=PD219.def[gd].body;CR_STATE.pd.g=CR_STATE.gender}   /* the ♀/♂ buttons bring that gender's hair and clothes */
+  for(const k of PD219.P)if(!PD219.avail[k].includes(CR_STATE.pd[k]))CR_STATE.pd[k]=PD219.avail[k][0];
+  const cur=pd219Cur();el.querySelectorAll('.pd219g .opt').forEach(b=>{const part=b.dataset.pd,n=+b.dataset.n,on=CR_STATE.pd[part]===n;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on?'true':'false');pd219Thumb(b.querySelector('canvas'),Object.assign({},cur,{[part]:n}),CR_STATE.house,part)});
+  el.querySelectorAll('#pd219tone .sw').forEach(b=>{b.style.borderColor=+b.dataset.v===CR_STATE.pd.tn?'#4252c4':'#1b1330'});
+  for(const id of ['chc','cec']){const e=$(id);if(e)e.classList.remove('hide')}for(const id of ['c4NoHair','c4NoEye']){const e=$(id);if(e)e.classList.add('hide')}
+  if(C193.tab==='body'&&$('c3Hd'))$('c3Hd').textContent=t('pd219BodyQ')}
+{const o=crSheetNow194;crSheetNow194=function(k){try{if(pd219Mode())return pd219Full(pd219Cur(),CR_STATE.house).stand}catch(e){}return o.apply(this,arguments)}}
+{const o=crRefresh;crRefresh=function(){const r=o.apply(this,arguments);try{const el=$('cr');if(el&&el.classList.contains('pd219')&&el.classList.contains('c193')&&PD219.ok)pd219Refresh()}catch(e){}return r}}
+{const o=openCreator;openCreator=function(){const r=o.apply(this,arguments);try{const el=$('cr');if(el&&el.classList.contains('c193')){if(PD219.ok||!pd219On()){pd219Build();if(PD219.ok)crRefresh()}
+  else pd219Load().then(ok=>{const e2=$('cr');if(ok&&e2&&e2.classList.contains('c193')&&!e2.classList.contains('hide')){pd219Build();crRefresh()}})}}catch(e){}return r}}
+// a new save made on the paperdoll screen keeps its pieces (S.kid stays the gender's own sprite for a device without GM)
+{const o=newSave;newSave=function(){const s=o.apply(this,arguments);try{if(s&&pd219Mode()){const c=pd219Cur();if(pd219Look(c))s.pd219=c}}catch(e){}return s}}
+// the gold icons (1.95) have none for the body yet: the button keeps its 👕
+{const o=icSet195;icSet195=function(b,i,px){if(i==null||Number.isNaN(i))return;return o.apply(this,arguments)}}
+{const st=document.createElement('style');st.id='ui219';st.textContent=`#cr.c193.pd219 #ck,#cr.c193.pd219 #c4NoHair,#cr.c193.pd219 #c4NoEye,#cr.c193.pd219 .sp[data-sp="face:mouth"] .soon{display:none!important}
+#cr.c193 .pd219g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}#cr.c193 .pd219g.n2,#cr.c193 .pd219g.row{grid-template-columns:repeat(2,minmax(0,1fr))}
+#cr.c193 .side .pd219g .opt{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-width:44px;min-height:78px;padding:4px 2px;background:#3b2b49;color:#fff0cd;border:2px solid #806485;border-radius:10px;font:13px/1.3 Itim,system-ui,sans-serif;box-shadow:none;position:relative}
+#cr.c193 .side .pd219g.row .opt{flex-direction:row;gap:6px;min-height:56px}
+#cr.c193 .pd219g .opt canvas{width:52px;height:52px;image-rendering:pixelated;border-radius:8px;background:#ffffff12;flex:none;pointer-events:none}#cr.c193 .pd219g.row .opt canvas{width:44px;height:44px}
+#cr.c193 .pd219g .opt span{pointer-events:none;white-space:nowrap}
+#cr.c193 .side .pd219g .opt.on{background:#594263;border-color:#ffdfa0;box-shadow:inset 0 -3px 0 #ffdfa0}
+#cr.c193 .pd219g .opt.on::after{content:'✓';position:absolute;right:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#ffdfa0;color:#25182f;font:700 12px/18px sans-serif;text-align:center}
+#cr.c193 .side h3.pd219h{margin:2px 0 0;font-size:13px;line-height:1.3}#cr.c193 #pd219tone{display:flex;flex-wrap:wrap;gap:10px;padding:4px}
+#cr.c193.pd219 .tp[data-tp="face"] .sub4 button{padding:4px 2px}#cr.c193 #pd219body .opt canvas{width:64px;height:64px}
+@media (min-height:600px){#cr.c193 .pd219g .opt canvas{width:64px;height:64px}#cr.c193 .pd219g.row .opt canvas{width:56px;height:56px}#cr.c193 #pd219body .opt canvas{width:96px;height:96px}#cr.c193 .side .pd219g .opt{font-size:14px}}
+@media (max-height:400px){#cr.c193 .side .pd219g .opt{min-height:66px}#cr.c193 .pd219g .opt canvas{width:42px;height:42px}#cr.c193 .side .pd219g.row .opt{min-height:50px}#cr.c193 .pd219g.row .opt canvas{width:38px;height:38px}#cr.c193 #pd219tone{gap:8px;padding:2px 4px}#cr.c193 #pd219body .opt canvas{width:56px;height:56px}}
+@media (max-height:340px){#cr.c193 .side h3.pd219h{display:none}}`;document.head.appendChild(st)}
+try{if(pd219On())pd219Load()}catch(e){}
 </script></body></html>

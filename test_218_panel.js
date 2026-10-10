@@ -2,7 +2,7 @@
 // 4 screens (812×330 · 844×390 · 915×412 · 1180×820), every tab and sub-tab, real taps: every target 44×44 px+, no two over each other, inside the screen; text ≥ 12 px, none cut,
 // contrast ≥ 4.5:1 against the solid colour behind it; the chosen age / sub-tab / hairstyle / colour / house differs by a frame or mark, not only its fill; the panel never covers
 // the character; the create button on screen; the frames not lower (within 10 %) than the same page without the sheet · then a character made with real taps keeps every choice
-// · a player without GM keeps the 2.17 panel
+// · a player without GM keeps the 2.17 panel · 2.19: the tabs are read from the rail (GM: age · hair · face · body · house)
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),puppeteer=require('puppeteer');
 const sleep=ms=>new Promise(r=>setTimeout(r,ms)),out=process.env.OUT_DIR||'/tmp/leah-panel-218';fs.mkdirSync(out,{recursive:true});
 const base='http://localhost:'+(process.env.PORT||8775)+'/';
@@ -26,7 +26,7 @@ const fps=p=>p.evaluate(async()=>{let n=0,last=performance.now(),hitch=0;const t
   const bc=await browser.createBrowserContext();p=await bc.newPage();const errors=[];p.on('pageerror',e=>errors.push(e.message));await p.setViewport({width,height,deviceScaleFactor:dpr,isMobile:true,hasTouch:true});await p.setBypassServiceWorker(true);
   await p.goto(base+'?rank=1'+(gm?'&gm':''),{waitUntil:'load'});await p.waitForFunction(()=>!document.getElementById('load'),{timeout:90000});await sleep(2000);await tap(p,'#cg194 [data-g="f"]');await sleep(1200);const R={name,tabs:{}};
   if(!gm){R.look=await audit(p);assert.equal(R.look.cream,'rgba(255, 248, 236, 0.933)','a player keeps the 2.17 panel');assert.deepEqual(errors,[]);R.errors=0;results.push({name,errors:0});await bc.close();continue}
-  for(const tb of ['age','hair','face','house','hat']){await tap(p,`#cr .rail [data-tab="${tb}"]`);const subs=(await p.$$('#cr .side .tp.on .sub4 button')).length;
+  for(const tb of await p.evaluate(()=>[...document.querySelectorAll('#cr .rail [data-tab]')].map(b=>b.dataset.tab))){   /* 2.19: GM gets the paperdoll tabs (the body in place of the hat) */await tap(p,`#cr .rail [data-tab="${tb}"]`);const subs=(await p.$$('#cr .side .tp.on .sub4 button')).length;
    for(let si=0;si<Math.max(1,subs);si++){if(subs)await tap(p,(await p.$$('#cr .side .tp.on .sub4 button'))[si]);const k=tb+(subs?si:''),A=await audit(p);R.tabs[k]=A;
     assert(A.small.length===0&&A.over.length===0&&A.outScreen.length===0,name+' '+k+' targets: '+JSON.stringify(A));assert(A.minPx>=12&&A.cut===0,name+' '+k+' text: '+JSON.stringify(A));
     assert(A.checked>0&&A.minContrast>=4.5,name+' '+k+' contrast: '+A.minContrast+' '+A.worst);assert(!A.cover,name+' '+k+' covers the character');assert(Object.values(A.marks).every(v=>v),name+' '+k+' chosen mark: '+JSON.stringify(A.marks));

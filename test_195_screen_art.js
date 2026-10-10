@@ -42,10 +42,12 @@ const ratio = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) +
       // the ring takes the house colour: a tinted stand for house 0, then house 1 after a real tap
       R.create.st0 = await pg.evaluate(() => Object.keys(ART197.st).join()); await press(await pg.$('#cr .rail [data-tab="house"]')); await press((await pg.$$('#ch .opt'))[1]); await sleep(300); R.create.st1 = await pg.evaluate(() => Object.keys(ART197.st).join()); R.create.cnm1 = await pg.evaluate(() => document.getElementById('cnm').textContent);
       // a choice still works with the icons in place
-      await press(await pg.$('#cr .rail [data-tab="hair"]')); await press(await pg.$('#ck .opt[data-k="1"]')); R.kid = await pg.evaluate(() => CR_STATE.kid);
+      // 2.19: with the paperdoll files (GM) the hairstyles are the paperdoll's own (#pd219hair); without them the 1.94 looks (#ck)
+      R.pd = await pg.evaluate(() => document.getElementById('cr').classList.contains('pd219'));
+      await press(await pg.$('#cr .rail [data-tab="hair"]')); await press(await pg.$(R.pd ? '#pd219hair .opt[data-n="2"]' : '#ck .opt[data-k="1"]')); R.kid = await pg.evaluate(pd => pd ? CR_STATE.pd.hair : CR_STATE.kid, R.pd);
       await press(await pg.$('#c3Turn')); R.dir = await pg.evaluate(() => C193.dir);
-      await press(await pg.$('#crnd')); await press(await pg.$('#cgo')); await sleep(1800); R.made = await pg.evaluate(() => S && { kid: S.kid, name: S.name });
-      if (!R.made || R.made.kid !== 1 || R.kid !== 1 || R.dir !== 1) fail(dev + ': creating with the new look ' + JSON.stringify({ kid: R.kid, dir: R.dir, made: R.made }));
+      await press(await pg.$('#crnd')); await press(await pg.$('#cgo')); await sleep(1800); R.made = await pg.evaluate(() => S && { kid: S.kid, name: S.name, hair: S.pd219 && S.pd219.hair });
+      if (!R.made || (R.pd ? R.made.hair !== 2 || R.kid !== 2 || R.made.kid !== 0 : R.made.kid !== 1 || R.kid !== 1) || R.dir !== 1) fail(dev + ': creating with the new look ' + JSON.stringify({ pd: R.pd, kid: R.kid, dir: R.dir, made: R.made }));
       // C. select screen
       await pg.evaluate(() => { const d = Store.all(); d.slots.push(newSave({ name: 'Mango', kid: 2, house: 2, age: 9 })); d.cur = -1; Store.put(d); });
       await pg.reload({ waitUntil: 'load' }); await pg.waitForFunction(() => !document.getElementById('load'), { timeout: 90000 }); await sleep(2500);
@@ -57,7 +59,7 @@ const ratio = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) +
       if (dev === 'phone' || dev === 'ipad') {
         if (!R.gender.art || !R.gender.bg || R.gender.filter !== 'none') fail(dev + ': gender screen backdrop ' + JSON.stringify(R.gender));
         if (R.gender.standPx < 300) fail(dev + ': no stand under the gender screen children (' + R.gender.standPx + ' px)');
-        if (!R.create.bg || R.create.icons < 8) fail(dev + ': create screen backdrop/icons ' + JSON.stringify(R.create));
+        /* 2.19: the paperdoll's body tab keeps its 👕 until a gold icon exists */ if (!R.create.bg || R.create.icons < (R.pd ? 7 : 8)) fail(dev + ': create screen backdrop/icons ' + JSON.stringify(R.create));
         if (!(R.create.stand > 20)) fail(dev + ': no stand under the feet on the create screen (' + R.create.stand + ' px)');
         if (!R.create.fit || !R.create.feet || Math.abs(R.create.fit[0] - R.create.feet.c[0]) > 40 || Math.abs(R.create.fit[1] - R.create.feet.c[1]) > 40) fail(dev + ': the painted clearing is not under the feet ' + JSON.stringify({ fit: R.create.fit, feet: R.create.feet }));
         { const m = R.create.gold.bg.match(/rgb\((\d+), (\d+), (\d+)\)/g) || [], c = R.create.gold.color.match(/\d+/g).map(Number); const worst = Math.min(...m.map(s => ratio(s.match(/\d+/g).map(Number), c))); R.create.goldContrast = +worst.toFixed(2); if (!/gradient/.test(R.create.gold.bg) || !(worst >= 4.5)) fail(dev + ': create button gold/contrast ' + JSON.stringify(R.create.gold) + ' ' + worst); }
