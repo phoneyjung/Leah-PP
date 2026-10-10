@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.16';
+const VERSION='Lantern Academy 2.17';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -7116,4 +7116,96 @@ body:not(.kidmin171) #mmw {
  body:not(.kidmin171) #mmw{min-width:168px!important;}
 }
 `;document.head.appendChild(st)}catch(e){}
+// ================= 2.17 (owner 10 Oct 18:31 "อยากให้สวยกว่านี้ … ภาพนิ่ง หรือ gif กลับไปกลับมา" → tap "ลองดูตามแนะนำก่อน"): the backdrop of the gender, create and select screens comes alive =================
+// drawn by code over the 1.97 picture on the same pixel grid (the character's pixel size), no new file: the lantern flickers, the sun and the crystals breathe, the crystals twinkle,
+// the river glints, chimney smoke rises (day), leaves fall from the big tree, petals, pollen and butterflies over the meadow, cloud shadows by day, golden motes and fireflies in the shade at dusk · it runs only while that screen shows,
+// stops when the page is hidden, holds still for "reduce motion", and like the 1.95 picture the owner (GM) sees it first (ART195.live opens it for everyone)
+const FX217={raf:0,c:null,g:null,T:null,sel:'',P:{},last:0,water:null,
+  A:{c:{lantern:[359,238],sun:[711,256],crys:[[486,386,1],[43,446,.8]],smoke:[[410,312],[580,336]],canopy:[20,10,640,200],meadow:[0,560,1280,800],leaf:['#9fd24e','#c8e46a','#e9d35c','#79b442'],day:1,shade:1,ff:0},
+     s:{lantern:[267,240],sun:[419,336],crys:[[549,450,1.2]],smoke:[],canopy:[20,10,700,215],meadow:[0,580,1280,800],leaf:['#f0c45a','#e0963e','#b8c85a','#f3d77a'],day:1,warm:1,shade:0,ff:8}}};
+function fxOn217(){const el=$('cr');return !!(el&&!el.classList.contains('hide')&&el.classList.contains('art195')&&el.classList.contains('pix197')&&$('bg197')&&document.visibilityState!=='hidden')}
+function fxCalm217(){try{return matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){return false}}
+// the grid of the picture as drawn by bgDraw197: picture point → grid point
+function fxLayout217(){const el=$('cr'),bg=$('bg197');if(!el||!bg)return false;const sel=el.classList.contains('p193')?'s':'c',im=ART197.img[sel];if(!im||!im.naturalWidth)return false;
+  const v=k=>parseFloat(el.style.getPropertyValue(k))||0,bs=(el.style.getPropertyValue('--bgs')||'').trim().split(/\s+/).map(parseFloat),px=ART197.px||1;if(!(bs[0]>0))return false;
+  const T={ox:(v('--bgx')-6)/px,oy:(v('--bgy')-6)/px,sx:bs[0]/px/im.naturalWidth,sy:bs[1]/px/im.naturalHeight,W:bg.width,H:bg.height,px},key=[sel,T.W,T.H,T.ox,T.oy,T.sx].join('|');
+  let c=$('fx217');if(!c){c=document.createElement('canvas');c.id='fx217'}if(c.previousSibling!==bg)bg.after(c);
+  if(FX217.key!==key){FX217.key=key;c.width=T.W;c.height=T.H;c.style.width=bg.style.width;c.style.height=bg.style.height;FX217.P={};FX217.water=null;try{const d=bg.getContext('2d').getImageData(0,0,T.W,T.H).data,w=[];   /* river glints only on water */
+      for(let y=0;y<T.H;y++){const iy=(y-T.oy)/T.sy;if(iy<440||iy>600)continue;for(let x=0;x<T.W;x++){const i=(y*T.W+x)*4,r=d[i],g=d[i+1],b=d[i+2];if(b>150&&b>r+45&&b>g+15&&g>90)w.push(x,y)}}FX217.water=w}catch(e){FX217.water=[]}}
+  FX217.c=c;FX217.g=c.getContext('2d');FX217.T=T;FX217.sel=sel;return true}
+const fxP217=(ix,iy)=>{const T=FX217.T;return [T.ox+ix*T.sx,T.oy+iy*T.sy]};
+const rnd217=(a,b)=>a+Math.random()*(b-a);
+function fxGlow217(g,x,y,r,rgb,a){if(r<1||a<=0)return;const gr=g.createRadialGradient(x,y,0,x,y,r);gr.addColorStop(0,`rgba(${rgb},${a})`);gr.addColorStop(.5,`rgba(${rgb},${a*.4})`);gr.addColorStop(1,`rgba(${rgb},0)`);g.fillStyle=gr;g.fillRect(x-r,y-r,2*r,2*r)}
+function fxDraw217(t,dt){const g=FX217.g,T=FX217.T,A=FX217.A[FX217.sel],P=FX217.P,s=T.sx,W=T.W,H=T.H;g.clearRect(0,0,W,H);g.imageSmoothingEnabled=false;
+  // light: lantern flicker, the low sun's breath and slow rays, the crystals' glow
+  g.globalCompositeOperation='lighter';
+  {const [x,y]=fxP217(...A.lantern),f=.5+.3*Math.sin(t*7.3)+.2*Math.sin(t*11.7+1)+.15*Math.sin(t*2.3);fxGlow217(g,x,y,70*s,'255,200,110',.13+.07*f)}
+  {const [x,y]=fxP217(...A.sun);fxGlow217(g,x,y,150*s,'255,214,150',.09+.035*Math.sin(t*.55));
+    for(let k=0;k<7;k++){const a=t*.025+k*Math.PI*2/7,L=330*s,w=.055,gr=g.createLinearGradient(x,y,x+Math.cos(a)*L,y+Math.sin(a)*L);gr.addColorStop(0,'rgba(255,226,170,.075)');gr.addColorStop(1,'rgba(255,226,170,0)');
+      g.fillStyle=gr;g.beginPath();g.moveTo(x,y);g.lineTo(x+Math.cos(a-w)*L,y+Math.sin(a-w)*L);g.lineTo(x+Math.cos(a+w)*L,y+Math.sin(a+w)*L);g.closePath();g.fill()}}
+  A.crys.forEach(([ix,iy,k],i)=>{const [x,y]=fxP217(ix,iy);fxGlow217(g,x,y,42*s*k,'200,140,255',.1+.07*Math.sin(t*1.7+i*2))});
+  // twinkles on the crystals and glints on the river
+  P.tw=P.tw||[];A.crys.forEach(([ix,iy,k])=>{if(Math.random()<dt*4.5*k){const [x,y]=fxP217(ix+rnd217(-26,26)*k,iy+rnd217(-34,22)*k);P.tw.push({x,y,u:0,d:rnd217(.7,1.1),c:Math.random()<.5?'255,255,255':'230,200,255'})}});
+  if(FX217.water&&FX217.water.length&&Math.random()<dt*4){const j=2*Math.floor(Math.random()*FX217.water.length/2);P.tw.push({x:FX217.water[j],y:FX217.water[j+1],u:0,d:rnd217(.4,.7),c:'255,255,255',dot:1})}
+  P.tw=P.tw.filter(p=>(p.u+=dt/p.d)<1);for(const p of P.tw){const a=Math.sin(Math.PI*p.u),x=Math.round(p.x),y=Math.round(p.y);g.fillStyle=`rgba(${p.c},${a})`;g.fillRect(x,y,1,1);if(!p.dot&&a>.35){g.fillStyle=`rgba(${p.c},${a*.6})`;g.fillRect(x-1,y,1,1);g.fillRect(x+1,y,1,1);g.fillRect(x,y-1,1,1);g.fillRect(x,y+1,1,1);if(a>.8){g.fillStyle=`rgba(${p.c},${a*.3})`;g.fillRect(x-2,y,1,1);g.fillRect(x+2,y,1,1);g.fillRect(x,y-2,1,1);g.fillRect(x,y+2,1,1)}}}
+  // fireflies at dusk, in the shade of the tree and over the village (they glow)
+  if(A.ff){P.ff=P.ff||[];while(P.ff.length<A.ff){const k=P.ff.length%3,[x,y]=k===2?fxP217(rnd217(150,1100),rnd217(400,540)):fxP217(rnd217(0,330),rnd217(330,620));P.ff.push({x0:x,y0:y,ph:rnd217(0,9),w:rnd217(.6,1.4),r:rnd217(15,35)*s,big:k===0&&Math.random()<.5})}
+    for(const f of P.ff){const x=f.x0+Math.sin(t*.37*f.w+f.ph)*f.r*1.6,y=f.y0+Math.sin(t*.53*f.w+f.ph*1.3)*f.r,b=Math.pow(Math.max(0,Math.sin(t*f.w*1.3+f.ph)),2);if(b<.02)continue;fxGlow217(g,x,y,f.big?8:6,'255,220,110',.55*b);g.fillStyle=`rgba(255,248,190,${b})`;const n=f.big?2:1;g.fillRect(Math.round(x),Math.round(y),n,n)}}
+  // wind brushing the meadow: a soft bright band sweeping across every 7 s
+  {const u=(t%7)/7,x0=fxP217(-300+u*1900,0)[0],y0=fxP217(0,A.meadow[1]-60)[1],bw=170*s,gr=g.createLinearGradient(x0-bw,0,x0+bw,0);const c=A.warm?'255,206,150':'255,250,214';
+    gr.addColorStop(0,`rgba(${c},0)`);gr.addColorStop(.5,`rgba(${c},${A.warm?.07:.075})`);gr.addColorStop(1,`rgba(${c},0)`);g.fillStyle=gr;g.beginPath();g.moveTo(x0-bw,H);g.lineTo(x0-bw+(H-y0)*.35,y0);g.lineTo(x0+bw+(H-y0)*.35,y0);g.lineTo(x0+bw,H);g.closePath();g.fill()}
+  g.globalCompositeOperation='source-over';
+  // cloud shadows drifting over the village and the meadow (day)
+  if(A.shade)for(let k=0;k<2;k++){const ix=((t*11+k*820)%1900)-300,iy=k?640:470,[x,y]=fxP217(ix,iy),rx=210*s,ry=70*s;g.save();g.translate(x,y);g.scale(1,ry/rx);const gr=g.createRadialGradient(0,0,0,0,0,rx);gr.addColorStop(0,'rgba(30,40,80,.11)');gr.addColorStop(.6,'rgba(30,40,80,.06)');gr.addColorStop(1,'rgba(30,40,80,0)');g.fillStyle=gr;g.fillRect(-rx,-rx,2*rx,2*rx);g.restore()}
+  // petals on the wind (day)
+  if(A.day){P.pt=P.pt||[];while(P.pt.length<12){const fresh=P.pt.length<12&&FX217.frames>2,[x,y]=fxP217(fresh?rnd217(-80,-10):rnd217(0,1280),rnd217(300,820));P.pt.push({x,y,vx:rnd217(22,40)*s,vy:rnd217(4,10)*s,ph:rnd217(0,6),c:A.warm?(Math.random()<.6?'#ffc9a8':'#ffe6cc'):(Math.random()<.6?'#ffd6e6':'#fff6f0')})}
+    P.pt=P.pt.filter(p=>{p.x+=p.vx*dt;p.y+=p.vy*dt+Math.sin(t*2+p.ph)*.05;return p.x<W+2&&p.y<H+2});for(const p of P.pt){const x=Math.round(p.x),y=Math.round(p.y+Math.sin(t*1.7+p.ph)*2);g.fillStyle=p.c;if(Math.sin(t*4+p.ph)>0)g.fillRect(x,y,2,1);else g.fillRect(x,y,1,1)}}
+  // chimney smoke (day)
+  P.sm=P.sm||[];A.smoke.forEach(([ix,iy])=>{if(Math.random()<dt*1.6){const [x,y]=fxP217(ix,iy);P.sm.push({x,y,u:0,d:rnd217(3.2,4.4)})}});
+  P.sm=P.sm.filter(p=>(p.u+=dt/p.d)<1);for(const p of P.sm){const r=Math.max(.6,(3+p.u*11)*s),a=.32*(1-p.u)*Math.min(1,p.u*6);g.fillStyle=`rgba(236,236,242,${a})`;g.beginPath();g.arc(p.x+(p.u*25+Math.sin(p.u*6)*4)*s,p.y-p.u*60*s,r,0,6.283);g.fill()}
+  // leaves falling from the big tree
+  P.lf=P.lf||[];if(P.lf.length<(A.day?7:6)&&Math.random()<dt*1.2){const z=A.canopy,[x,y]=fxP217(rnd217(z[0],z[2]),rnd217(z[1]+60,z[3]));P.lf.push({x,y,vy:rnd217(40,70)*s,vx:rnd217(10,30)*s,ph:rnd217(0,6),c:A.leaf[Math.floor(Math.random()*A.leaf.length)]})}
+  P.lf=P.lf.filter(p=>{p.y+=p.vy*dt;p.x+=p.vx*dt;return p.y<H+2&&p.x<W+2});for(const p of P.lf){const sw=Math.sin(t*1.6+p.ph),x=Math.round(p.x+sw*3),y=Math.round(p.y);g.fillStyle=p.c;if(Math.sin(t*3.1+p.ph)>0)g.fillRect(x,y,2,1);else g.fillRect(x,y,1,2)}
+  // pollen (golden at dusk) rising and three butterflies over the meadow
+  if(A.day){P.po=P.po||[];while(P.po.length<12){const z=A.meadow,[x,y]=fxP217(rnd217(z[0],z[2]),rnd217(z[1],z[3]));P.po.push({x,y,u:Math.random(),d:rnd217(3,5)})}
+    for(const p of P.po){p.u+=dt/p.d;if(p.u>=1){const z=A.meadow,[x,y]=fxP217(rnd217(z[0],z[2]),rnd217(z[1],z[3]));p.x=x;p.y=y;p.u=0}const a=Math.sin(Math.PI*p.u)*.8;g.fillStyle=A.warm?`rgba(255,214,140,${a})`:`rgba(255,246,190,${a})`;g.fillRect(Math.round(p.x+Math.sin(p.u*5)*2),Math.round(p.y-p.u*40*s),1,1)}
+    P.bf=P.bf||[0,1,2].map(i=>{const z=A.meadow,[x,y]=fxP217(rnd217(z[0]+150,z[2]-150),rnd217(z[1]-40,z[1]+160));return {x0:x,y0:y,ph:i*2.1,c:['#fff8ec','#ffe27a','#ffc6e0'][i]}});
+    for(const b of P.bf){const x=Math.round(b.x0+(Math.sin(t*.31+b.ph)*120+Math.sin(t*.9+b.ph)*25)*s),y=Math.round(b.y0+Math.sin(t*.47+b.ph*1.7)*40*s+Math.sin(t*3.3+b.ph)*1.5),open=Math.sin(t*14+b.ph)>0;
+      g.fillStyle='#4a3a2a';g.fillRect(x,y-1,1,2);g.fillStyle=b.c;if(open){g.fillRect(x-2,y-2,2,2);g.fillRect(x+1,y-2,2,2);g.fillRect(x-1,y,1,1);g.fillRect(x+1,y,1,1)}else{g.fillRect(x-1,y-2,1,2);g.fillRect(x+1,y-2,1,2)}}}}
+function fxTick217(now){FX217.raf=0;if(FX217.off||!(art195()&&fxOn217()&&fxLayout217()))return;const t=now/1000,dt=Math.min(.1,FX217.last?t-FX217.last:0);
+  if(dt>0&&dt<.03){FX217.raf=requestAnimationFrame(fxTick217);return}   /* about 30 frames a second: enough for drifting pixels, kinder to the battery */
+  FX217.last=t;FX217.frames=(FX217.frames||0)+1;try{fxDraw217(t,dt)}catch(e){}if(!fxCalm217())FX217.raf=requestAnimationFrame(fxTick217)}
+function fxStart217(){if(FX217.raf)return;FX217.last=0;FX217.raf=requestAnimationFrame(fxTick217)}
+{const b=bgDraw197;bgDraw197=function(){const r=b.apply(this,arguments);try{fxStart217()}catch(e){}return r}}
+{const d=deco195;deco195=function(){const r=d.apply(this,arguments);try{fxStart217()}catch(e){}return r}}
+document.addEventListener('visibilitychange',()=>{try{if(document.visibilityState==='visible')fxStart217()}catch(e){}});
+{const st=document.createElement('style');st.textContent='#cr #fx217{position:absolute;left:0;top:0;z-index:-1;image-rendering:pixelated;pointer-events:none}#cr:not(.pix197) #fx217{display:none}';document.head.appendChild(st)}
+// ================= 2.17 · Codex set 01 A1 (ASSET_SPEC_01 ฉบับ 2 · branch codex/asset-01-ui-buttons 0df2471): the guide · buff · sit icons and the compass stick =================
+// GM first (art195(), like the 1.95 screens) until the owner approves (then ART217.live=true) · each file on its own: a missing file keeps the old look (🧭 · ＋ · the bench · the 1.74 SVG stick)
+// the icons sit 24 px in their buttons (the size the spec gave Codex) · the emoji hide by the button's font size, never by rewriting the text the 1.80 code keeps up to date
+const ART217={live:false,url:{},ring:false,knob:false};
+function art217(){try{return ART217.live||art195()}catch(e){return false}}
+{const im=new Image();im.onload=()=>{try{['guide','buff','sit'].forEach((k,i)=>{const c=document.createElement('canvas');c.width=c.height=32;c.getContext('2d').drawImage(im,i*32,0,32,32,0,0,32,32);ART217.url[k]=c.toDataURL()})}catch(e){}ic217()};im.src='ui-icons-2.png'}
+{const im=new Image();im.onload=()=>{ART217.ring=true;ic217()};im.src='joy-ring.png'}
+{const im=new Image();im.onload=()=>{ART217.knob=true;ic217()};im.src='joy-knob.png'}
+function icImg217(b,k){let e=b.querySelector('img.ic217');if(!e){e=document.createElement('img');e.className='ic217';e.alt='';e.draggable=false;b.insertBefore(e,b.querySelector('small'))}if(e.dataset.k!==k){e.src=ART217.url[k];e.dataset.k=k}return e}
+function ic217(){try{const on=art217(),B=document.body;B.classList.toggle('ring217',!!(on&&ART217.ring));B.classList.toggle('knob217',!!(on&&ART217.knob));B.classList.toggle('ic217',!!(on&&ART217.url.guide));if(!on||!ART217.url.guide)return;
+  const q=$('bQuest');if(q)icImg217(q,'guide');const f=$('bBuff');if(f)icImg217(f,'buff');
+  const r=$('bRest'),im=r&&r.querySelector('img:not(.ic217)');if(im&&im.dataset.k217!=='sit'){im.src=ART217.url.sit;im.dataset.k217='sit'}}catch(e){}}
+{const old=rovShow180;rovShow180=function(){const r=old.apply(this,arguments);ic217();return r}}
+{const old=kidMin171;kidMin171=function(){const r=old.apply(this,arguments);ic217();return r}}
+{const g='#d9bc7c',L=[['W',60,17],['A',17,60],['D',103,60],['S',60,103]],letters='url("data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">'+
+  L.map(([c,x,y])=>`<circle cx="${x}" cy="${y}" r="8.5" fill="#1b1330" stroke="${g}" stroke-width="1.3"/><text x="${x}" y="${y+3.5}" font-family="Arial,sans-serif" font-size="10" font-weight="700" text-anchor="middle" fill="#f6e2b0">${c}</text>`).join('')+'</svg>')+'")',
+  ring='image-set(url(joy-ring.png) 1x,url(joy-ring@2x.png) 2x) center/112px 112px no-repeat',knob='image-set(url(joy-knob.png) 1x,url(joy-knob@2x.png) 2x) center/40px 40px no-repeat';
+ const st=document.createElement('style');st.id='ui217';st.textContent=`
+body.ic217 #act #bQuest,body.ic217 #act #bBuff.empty180{font-size:0!important}
+#act img.ic217{width:24px;height:24px;image-rendering:pixelated;display:block;margin:0 auto;pointer-events:none;flex:none}
+#act #bBuff:not(.empty180) img.ic217{display:none}
+body.ring217 #joy,body.ring217.thumbs #joy{background:url(joy-ring@2x.png) center/112px 112px no-repeat!important;background:${ring}!important;box-shadow:none!important}
+body.ring217.nt174 #joy{background:${letters} center/100% 100% no-repeat,url(joy-ring@2x.png) center/112px 112px no-repeat!important;background:${letters} center/100% 100% no-repeat,${ring}!important}
+body.ring217.fjOn172 #joy{box-shadow:0 0 0 2px #f5dfaddd,0 0 14px #ffd27a66!important}
+/* BUG-32 (found while checking set 01): the round buff button clipped its own label ("เสริมพลัง" showed as "สริมพลั") since the 2.15 grown-up labels — the label may now pass the circle's edge */
+body:not(.kidmin171) #act #bBuff{overflow:visible!important}
+body.ic217 #act #bQuest{overflow:visible!important}
+body.knob217 #joyK,body.knob217.thumbs #joyK{background:url(joy-knob@2x.png) center/40px 40px no-repeat!important;background:${knob}!important;border:none!important;box-shadow:0 0 10px 2px #ffd27a55!important}`;document.head.appendChild(st)}
 </script></body></html>

@@ -47,7 +47,7 @@ const overlap = (a, b) => a && b && a.x < b.r && b.x < a.r && a.y < b.b && b.y <
       // 2. the top-left card
       const hud = await box(pg, 'hud'), sys = await box(pg, 'sys175'), lamp = await box(pg, 'lampBar'), gm = await box(pg, 'gmBtn'); R.hud = hud; R.sys = sys; R.lamp = lamp; R.gm = gm;
       R.goalFont = await pg.evaluate(() => { const g = document.getElementById('goal'); const r = g.getBoundingClientRect(); const lines = Math.max(1, Math.round(r.height / (parseFloat(getComputedStyle(g).fontSize) * 1.3 * .7))); return { px: +(parseFloat(getComputedStyle(g).fontSize) * .7).toFixed(1), h: r.height, lines }; });
-      if (touch) { if (!hud || hud.x > 6 || hud.y > 20 || hud.w > 170 || hud.h > 95) fail(dev + ': the card is not tight/small: ' + JSON.stringify(hud)); if (R.goalFont.px < 10) fail(dev + ': goal line only ' + R.goalFont.px + ' px'); }
+      if (touch) { if (!hud || hud.x > 6 || hud.y > 20 || hud.w > 170 || hud.h > (dev === 'phone12' ? 110 : 95))   /* 2.15: Codex set 05 A2 grown-up labels (owner passed 10 Oct) — EXP 14 px makes a grown-up's card 106 px; a child's card stays ≤ 95 */ fail(dev + ': the card is not tight/small: ' + JSON.stringify(hud)); if (R.goalFont.px < 10) fail(dev + ': goal line only ' + R.goalFont.px + ' px'); }
       if (sys && hud && overlap(sys, hud)) fail(dev + ': the status line overlaps the card'); if (lamp && hud && overlap(lamp, hud)) fail(dev + ': the lamp bar overlaps the card (' + JSON.stringify(lamp) + ' vs ' + JSON.stringify(hud) + ')');
       if (lamp && hud && lamp.y < hud.b) fail(dev + ': the lamp bar is not below the card');
       await pg.screenshot({ path: out + '/' + dev + '_card.png', clip: { x: 0, y: 0, width: 320, height: 170 } });
