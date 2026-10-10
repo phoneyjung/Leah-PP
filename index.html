@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.17';
+const VERSION='Lantern Academy 2.18';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -7208,4 +7208,63 @@ body.ring217.fjOn172 #joy{box-shadow:0 0 0 2px #f5dfaddd,0 0 14px #ffd27a66!impo
 body:not(.kidmin171) #act #bBuff{overflow:visible!important}
 body.ic217 #act #bQuest{overflow:visible!important}
 body.knob217 #joyK,body.knob217.thumbs #joyK{background:url(joy-knob@2x.png) center/40px 40px no-repeat!important;background:${knob}!important;border:none!important;box-shadow:0 0 10px 2px #ffd27a55!important}`;document.head.appendChild(st)}
+// ================= 2.18 (owner 10 Oct 21:1x, tap answers): Codex set 01 A2 — guide "B" (compass + dotted arrow), sit "A" (bench with a back), the clearer stick ring · set 06 A1 — the creator panel =================
+// set 01: the ring files are replaced in place (joy-ring.png, @2x); the chosen icons come from Codex's A2 choice sheet ui-buttons-01-a2-options.png (rows guide / sit × columns A B C,
+// 32 px cells, used as they are) over the atlas ui-icons-2.png (its guide and sit are the "A" examples, the buff is the passed one) · sheet missing → the atlas icons · still GM first
+const ART218={pick:{guide:[1,0],sit:[0,1]},url:null,fresh:false};
+{const im=new Image();im.onload=()=>{try{const u={};for(const [k,[cx,cy]] of Object.entries(ART218.pick)){const c=document.createElement('canvas');c.width=c.height=32;c.getContext('2d').drawImage(im,cx*32,cy*32,32,32,0,0,32,32);u[k]=c.toDataURL()}ART218.url=u;ART218.fresh=true;ic217()}catch(e){}};im.src='ui-buttons-01-a2-options.png'}
+{const o=ic217;ic217=function(){try{if(ART218.url&&ART217.url.guide){Object.assign(ART217.url,ART218.url);if(ART218.fresh){ART218.fresh=false;document.querySelectorAll('img.ic217').forEach(e=>{e.dataset.k=''});const r=$('bRest'),ri=r&&r.querySelector('img:not(.ic217)');if(ri)ri.dataset.k217=''}}}catch(e){}return o.apply(this,arguments)}}
+// set 06 A1 (UI_CREATOR_06.json cssProposalCreatorPanel, branch codex/asset-06-creator-panel a0b933a, owner passed): the create screen's right panel in Quiet Gold ink and gold,
+// every selector under #cr.art195.c193 (the GM-first art screens), after the 1.93/1.95/1.97/2.13 sheets · targets 44 px+, text 12 px+, the chosen one with a gold frame
+try{const st=document.createElement('style');st.id='ui218';st.textContent=`/* Asset 06 A1: Quiet Gold creator options; append after current creator styles. */
+#cr.art195.c193 .side{align-self:start;box-sizing:border-box;height:auto;max-height:100%;min-height:0;padding:10px;gap:8px;background:#25182f;border:2px solid #d3a55a;border-radius:16px;color:#fff0cd;box-shadow:inset 0 0 0 1px #594263,0 6px 16px #160f2480;}
+#cr.art195.c193 .side .hd{min-height:36px;padding:4px 12px;flex:none;background:#3b2b49;color:#ffdfa0;border:1px solid #806485;border-radius:10px;font:700 16px/1.4 Itim,system-ui,sans-serif;text-shadow:none;}
+#cr.art195.c193 .side .hd::before{content:'◆';margin-right:8px;font-size:12px;color:#d3a55a;}
+#cr.art195.c193 .side .body{flex:0 1 auto;min-height:0;overflow:auto;overscroll-behavior:contain;padding:4px;gap:8px;scrollbar-width:thin;scrollbar-color:#d3a55a #25182f;}
+#cr.art195.c193 .side .tp.on{flex:none;gap:10px;}
+#cr.art195.c193 .side .tp[data-tp="age"].on{flex:none;}
+#cr.art195.c193 .side button{box-sizing:border-box;position:relative;min-width:44px;min-height:44px;flex-shrink:0;-webkit-tap-highlight-color:transparent;font-family:Itim,system-ui,sans-serif;font-size:14px;line-height:1.35;text-shadow:none;border-image:none;}
+#cr.art195.c193 .side .sub4{padding:3px;gap:6px;background:#160f24;border:1px solid #806485;border-radius:12px;}
+#cr.art195.c193 .side .sub4 button{min-height:44px;padding:4px 8px;background:#3b2b49;color:#fff0cd;border:2px solid transparent;border-radius:8px;font-size:14px;}
+#cr.art195.c193 .side .sub4 button.on{background:#594263;color:#fff0cd;border-color:#ffdfa0;box-shadow:inset 0 -3px 0 #ffdfa0;}
+#cr.art195.c193 #ca{gap:8px;grid-auto-rows:52px;}
+#cr.art195.c193 #ca button{min-height:52px;background:#3b2b49;color:#fff0cd;border:2px solid #806485;border-radius:10px;font-size:16px;}
+#cr.art195.c193 #ca button.on{background:#594263;color:#fff0cd;border:2px solid #ffdfa0;box-shadow:inset 0 -4px 0 #ffdfa0;}
+#cr.art195.c193 #crole{margin:0;padding:8px 10px;background:#3b2b49;color:#fff0cd;border:1px solid #806485;border-radius:10px;font-size:13px;line-height:1.45;}
+#cr.art195.c193 #ck{gap:8px;}
+#cr.art195.c193 #ck .opt{min-width:44px;min-height:76px;padding:6px 3px;background:#3b2b49;color:#fff0cd;border:2px solid #806485;border-radius:10px;font-size:13px;line-height:1.4;}
+#cr.art195.c193 #ck .opt.on{background:#594263;color:#fff0cd;border:2px solid #ffdfa0;box-shadow:inset 0 -3px 0 #ffdfa0;}
+#cr.art195.c193 #chc,#cr.art195.c193 #cec{gap:10px;padding:4px;}
+#cr.art195.c193 .side .sw{width:48px!important;height:48px!important;min-width:48px!important;min-height:48px!important;flex:0 0 48px;position:relative;box-shadow:0 0 0 1px #806485;border-radius:50%;}
+#cr.art195.c193 .side .sw[style*="rgb(66, 82, 196)"]{border-color:#ffdfa0!important;outline:2px solid #ffdfa0;outline-offset:2px;}
+#cr.art195.c193 .side .sw[style*="rgb(66, 82, 196)"]::before{content:'✓';position:absolute;z-index:2;right:-4px;bottom:-4px;width:20px;height:20px;display:grid;place-items:center;background:#ffdfa0;color:#25182f;border:1px solid #25182f;border-radius:50%;font:700 14px/1 sans-serif;}
+#cr.art195.c193 .side .sw.orig::after{inset:8px;background:#25182f;border-radius:50%;color:#fff0cd;font-size:18px;text-shadow:none;}
+#cr.art195.c193 #ch{gap:10px;}
+#cr.art195.c193 #ch .hs{min-height:60px;padding:8px 4px;color:#160f24;border:2px solid #25182f;border-radius:10px;font-size:14px;font-weight:700;line-height:1.4;box-shadow:0 0 0 1px #806485;}
+#cr.art195.c193 #ch .hs.on{border:3px double #160f24;outline:2px solid #ffdfa0;outline-offset:2px;box-shadow:inset 0 -4px 0 #160f24;}
+#cr.art195.c193 .side .soon{padding:16px 12px;min-height:84px;background:#3b2b49;color:#fff0cd;border:1px dashed #d3a55a;border-radius:12px;font-size:14px;line-height:1.6;}
+#cr.art195.c193 .side h3{color:#ffdfa0;font-size:14px;line-height:1.4;}
+#cr.art195.c193 #cgo{min-height:48px;flex:none;background:linear-gradient(#ffdfa0,#d3a55a)!important;color:#25182f!important;border:2px solid #fff0cd!important;border-radius:12px!important;box-shadow:inset 0 -3px 0 #a8783e,0 3px 0 #160f24;font-size:16px;font-weight:700;line-height:1.4;}
+#cr.art195.c193 .side button:focus-visible{outline:3px solid #fff0cd;outline-offset:2px;}
+@media(max-height:400px){
+#cr.art195.c193 .side{padding:6px;gap:5px;border-radius:12px;}
+#cr.art195.c193 .side .hd{min-height:30px;font-size:14px;padding:2px 8px;}
+#cr.art195.c193 .side .body{padding:3px;}
+#cr.art195.c193 #ca{gap:6px;grid-auto-rows:44px;}
+#cr.art195.c193 #chc,#cr.art195.c193 #cec{gap:8px;}
+#cr.art195.c193 .side .sw{width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;flex-basis:44px;}
+#cr.art195.c193 #ca button{min-height:44px;font-size:14px;}
+#cr.art195.c193 #crole{font-size:12px!important;line-height:1.4!important;padding:6px 8px;}
+#cr.art195.c193 #cgo{min-height:44px;font-size:14px;}
+}
+@media(min-height:600px){
+#cr.art195.c193 .side{max-height:560px;padding:16px;gap:12px;}
+#cr.art195.c193 .side .hd{min-height:44px;font-size:18px;}
+#cr.art195.c193 #ca{grid-auto-rows:64px;gap:10px;}
+#cr.art195.c193 #ca button{min-height:64px;font-size:18px;}
+#cr.art195.c193 #ck .opt{min-height:92px;font-size:14px;}
+#cr.art195.c193 #ch .hs{min-height:72px;font-size:16px;}
+#cr.art195.c193 #cgo{min-height:52px;font-size:18px;}
+}
+`;document.head.appendChild(st)}catch(e){}
 </script></body></html>
