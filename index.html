@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.15';
+const VERSION='Lantern Academy 2.16';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -7083,5 +7083,37 @@ body:not(.kidmin171) #act #bBuff small{max-width:48px!important;}
 /* A child with kid mode switched off keeps the child's controls; clear the attack edge. */
 body:not(.kidmin171).thumbs:not(.rov180) #act #bSlot2,
 body:not(.kidmin171).thumbs:not(.rov180) #act #bJ1{right:calc(98px + env(safe-area-inset-right,0px))!important;}
+`;document.head.appendChild(st)}catch(e){}
+// ================= 2.16 (owner 10 Oct 15:50, Codex delivery): set 04 b2 + g3 colours (with their walks) and f1's walk regions · set 05 A3 map names on one line =================
+// set 04: no new code — AD215 already maps cb2 → gm-c207-b2.palette.json and cg3 → gm-c213-g3.palette.json, and ad215Paint uses regions[file] for any file it paints,
+// so the new walk regions (gm-c214-*-walk.png, gm-c214-f1-west.png) are used instead of the colour → group guess · only the note under the buttons changes
+try{Object.assign(TX.th,{ad215Only:'เปลี่ยนสีได้กับตัวที่มีไฟล์สีจาก Codex (ตอนนี้ หญิง 1 · ด.ช. 2 · ด.ญ. 3)'});if(TX.en)Object.assign(TX.en,{ad215Only:'Colours work for characters with a Codex colour file (now: woman 1, boy 2, girl 3)'})}catch(e){}
+// set 05 A3 (UI_LABELS_05.json cssProposalMapName, branch codex/asset-05-ui-labels-a2 bedd3c4): the whole map name on one line, the map card grows sideways · after ui213 and ui215
+try{const st=document.createElement('style');st.id='ui216';st.textContent=`/* Asset 05 A3: keep the complete map name on one line; widen only the card. */
+body.kidmin171 #mmn,
+body:not(.kidmin171) #mmn {
+ white-space:nowrap!important;
+ word-break:normal!important;
+ overflow-wrap:normal!important;
+ hyphens:none!important;
+ width:max-content!important;
+ max-width:none!important;
+ flex-shrink:0!important;
+}
+body.kidmin171 #mmw {
+ width:max-content!important;
+ min-width:156px!important;
+ max-width:none!important;
+}
+body:not(.kidmin171) #mmw {
+ width:max-content!important;
+ min-width:168px!important;
+ max-width:none!important;
+ grid-template-columns:62px max-content!important;
+}
+/* A2 uses a vertical map card on iPad; its height and guide position stay as tested. */
+@media(min-height:600px){
+ body:not(.kidmin171) #mmw{min-width:168px!important;}
+}
 `;document.head.appendChild(st)}catch(e){}
 </script></body></html>
