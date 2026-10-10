@@ -84,3 +84,12 @@ young boy student about 10 years old, front view, standing idle, empty hands, no
 young girl student about 10 years old, front view, standing idle, empty hands, no weapon, nothing on her back, cute chibi proportions with a big head, big round bright cyan eyes with a dark upper lash line and a white shine, cheerful smile, bright grass-green hair in two short braids that do not cover the eyes, short bright magenta cape with gold trim, white blouse, brown leather belt with gold buckle, dark brown skirt over leggings, brown leather boots, fantasy magic academy style, clean dark outline
 ```
 - เกณฑ์รับ: ผู้ใหญ่หญิงสูง 66–72 px · เด็กสูง 58–63 px (เท่าลีอา 61) · ผมเขียว ตาฟ้า ผ้าคลุม/เสื้อบานเย็น · ไม่มีอาวุธหรือของสะพายหลัง · หน้า ≥ 9.5 เมื่อเจ้าของดูใน GM
+
+## 11. ผลขั้น C (10 ต.ค.)
+- เจ้าของส่ง ZIP 01:42: ผู้ใหญ่หญิง 3 แบบ (72) · เด็กชาย 3 (64) · เด็กหญิง 2 (64) · เข้า GM รุ่น 2.07 (`gm-c207-*.png`)
+- **เจ้าของเลือก 09:10: หญิง 1 (`gm-c207-f1.png` สูง 71) · ด.ช. 2 (`gm-c207-b2.png` สูง 60)** · ด.ญ. ทั้ง 2 แบบตายังทึบ → ทำใหม่ด้วยพรอมป์ข้างล่าง
+- ด.ญ. พรอมป์ใหม่ (ตั้งค่าเดิม: Create from Text · Humanoid · Standard · Low Top-Down · Highly detailed · Outline Default · 64×64):
+```
+young girl student about 10 years old, front view, standing idle, empty hands, no weapon, nothing on her back, cute chibi proportions with a big head, very big round bright sky-blue eyes with a dark upper lash line and a large white shine in each eye, the eyes are the brightest part of the face, cheerful open smile, light skin with soft pink cheeks, bright grass-green hair in two short braids, short bangs above the eyebrows so the eyes are fully visible, short bright magenta cape with gold trim, white blouse, brown leather belt with gold buckle, dark brown skirt over leggings, brown leather boots, fantasy magic academy style, clean dark outline
+```
+- ท่าเดินของตัวที่เลือก (ทำใน PixelLab แบบ 72 ก: Animate · Skeleton v3 · Walking (6 frames)): **หญิง 1 ทำ 8 ทิศ** (หางม้าและเกราะไหล่อยู่ข้างเดียว กลับภาพแล้วสลับข้าง) · **ด.ช. 2 ทำ 5 ทิศ** ใต้ · ใต้-ขวา · ขวา · บน-ขวา · บน (ตัวสมมาตร เกมกลับภาพฝั่งซ้ายให้)
