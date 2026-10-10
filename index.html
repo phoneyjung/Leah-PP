@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.13';
+const VERSION='Lantern Academy 2.14';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -6926,4 +6926,31 @@ try{const st=document.createElement('style');st.textContent='body.g213.g213.g213
 try{addEventListener('resize',()=>setTimeout(guide213,60));const mm=$('mmw');if(mm&&typeof ResizeObserver==='function')new ResizeObserver(()=>guide213()).observe(mm)}catch(e){}
 {const o=goMap;goMap=function(){const r=o.apply(this,arguments);try{setTimeout(guide213,0)}catch(e){}return r}}
 {const o=rovMake180;rovMake180=function(){const r=o.apply(this,arguments);try{setTimeout(guide213,0)}catch(e){}return r}}
+// ================= 2.14 (owner 10 Oct 11:31, ZIP of PixelLab Skeleton v3 "Walking (6 frames)" GIFs, 5 directions each): woman 1, boy 2 and girl 3 walk for real in the GM trial =================
+// gm-c214-b2-walk.png · gm-c214-g3-walk.png 576×480 = 6 frames × 5 rows (S SE E NE N) in 96 cells, the GIFs' own canvas · gm-c214-f1-walk.png 672×560 in 112 cells (her NE and N GIFs
+// are 96: set bottom-centre, as 2.06 did) · pixels untouched, 0 new colours against the standing files · W NW SW are the E NE SE rows mirrored (boy 2 and girl 3 look the same
+// both ways; woman 1's shoulder plate swaps sides until the owner's 3 west GIFs come) · built the 2.06 way: each row's lowest foot on the game's foot line, the standing
+// frame placed on the walk's head centre · a missing walk file leaves the 2.07 standing glide
+AD201.V.cb2.walk={src:'gm-c214-b2-walk.png',C:96,rows:5};AD201.V.cg3.walk={src:'gm-c214-g3-walk.png',C:96,rows:5};AD201.V.cf1.walk={src:'gm-c214-f1-walk.png',C:112,rows:5,west:'gm-c214-f1-west.png'};
+// woman 1's own west side (owner 13:45, the 3 GIFs NW · W · SW made after the shoulder-plate note): gm-c214-f1-west.png 672×336, 6 frames × NW W SW in 112 cells (NW and W are 96,
+// set bottom-centre), 0 new colours · rows 5–7 then use these and the standing file's own NW · W · SW views, not the mirror · file missing → the mirror as before
+const AD214={};
+function ad214Build(standIm,walkIm,F,S,westIm){const sc=toCanvas(standIm),wc=toCanvas(walkIm),sg=sc.getContext('2d'),wg=wc.getContext('2d'),ec=westIm?toCanvas(westIm):null,eg=ec&&ec.getContext('2d');
+  const stand=document.createElement('canvas'),walk=document.createElement('canvas');stand.width=8*F;stand.height=F;walk.width=6*F;walk.height=8*F;const so=stand.getContext('2d'),wo=walk.getContext('2d');so.imageSmoothingEnabled=wo.imageSmoothingEnabled=false;
+  const src=[0,1,2,3,4,3,2,1],off=[];
+  for(let r=0;r<8;r++){const real=!!ec&&r>=5,wr=real?r-5:src[r],mir=r>=5&&!real,sc0=real?r:wr,G=real?eg:wg,SRC=real?ec:wc,A=[];for(let f=0;f<6;f++){const a=ad206Anchor(G,f*F,wr*F,F);if(!a)throw Error('empty walk '+wr+'/'+f);A.push(a)}
+    const foot=Math.max(...A.map(a=>a.foot)),cxs=A.map(a=>a.cx).sort((a,b)=>a-b),cx=(cxs[2]+cxs[3])/2,sa=ad206Anchor(sg,sc0*S,0,S);if(!sa)throw Error('empty stand '+sc0);
+    const wdy=(F-2)-foot,sdx=Math.round(cx-sa.cx),sdy=(F-2)-sa.foot;off.push({r,wr,mir,wdy,sdx,sdy,real,sc:sc0});
+    const cell=document.createElement('canvas');cell.width=7*F;cell.height=F;const cg=cell.getContext('2d');cg.imageSmoothingEnabled=false;
+    for(let f=0;f<6;f++)cg.drawImage(SRC,f*F,wr*F,F,F,f*F,wdy,F,F);cg.drawImage(sc,sc0*S,0,S,S,6*F+sdx,sdy,S,S);
+    for(let k=0;k<7;k++){const dst=k<6?wo:so,dx=k<6?k*F:r*F,dy=k<6?r*F:0;if(mir){dst.save();dst.translate(dx+F,dy);dst.scale(-1,1);dst.drawImage(cell,k*F,0,F,F,0,0,F,F);dst.restore()}else dst.drawImage(cell,k*F,0,F,F,dx,dy,F,F)}}
+  return {stand,walk,im:standIm,wim:walkIm,west:westIm||null,F,walkReal:true,off}}
+function ad214Walk(v){const V=AD201.V[v];if(!V||!V.walk)return Promise.resolve(false);const st=AD214[v]||(AD214[v]={done:false,failed:false,pending:null});
+  if(st.done||st.failed)return Promise.resolve(st.done);if(st.pending)return st.pending;const base=AD201.byV[v];if(!base||base.walkReal)return Promise.resolve(!!(base&&base.walkReal));
+  st.pending=new Promise(res=>{const im=new Image();let fin=false;const end=ok=>{if(fin)return;fin=true;clearTimeout(tm);res(ok)},tm=setTimeout(()=>{st.failed=true;end(false)},10000);
+    const west=()=>V.walk.west?new Promise(ok=>{const w=new Image();const t2=setTimeout(()=>ok(null),10000);w.onerror=()=>{clearTimeout(t2);ok(null)};w.onload=()=>{clearTimeout(t2);ok(w.naturalWidth===6*V.walk.C&&w.naturalHeight===3*V.walk.C?w:null)};w.src=(window.EMBED_ASSETS&&window.EMBED_ASSETS[V.walk.west])||V.walk.west}):Promise.resolve(null);
+    im.onerror=()=>{st.failed=true;end(false)};im.onload=()=>west().then(wIm=>{try{if(im.naturalWidth!==6*V.walk.C||im.naturalHeight!==V.walk.rows*V.walk.C)throw Error('size');const sh=ad214Build(base.im,im,V.walk.C,V.F,wIm);AD201.byV[v]=sh;st.done=true;
+      if(AD201.v===v){AD201.sheets=sh;AD201.h.a=null}end(true);try{if(ad201Selected()&&S.gmAdult202===v)buildPlayerSheets()}catch(e){}}catch(e){st.failed=true;end(false)}});
+    im.src=(window.EMBED_ASSETS&&window.EMBED_ASSETS[V.walk.src])||V.walk.src}).finally(()=>{st.pending=null});return st.pending}
+{const o=ad201Load;ad201Load=function(){const v=AD201.v;return o.apply(this,arguments).then(ok=>{if(!ok||v==='m72a'||!AD201.V[v]||!AD201.V[v].walk)return ok;return ad214Walk(v).then(()=>ok)})}}
 </script></body></html>
