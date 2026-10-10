@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.11';
+const VERSION='Lantern Academy 2.12';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -2781,14 +2781,14 @@ try{TX.th.hunt1='ถ้ำอเมทิสต์ · ชั้น 1';TX.th.hunt
 const HUNT1={solid:["111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111", "111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111", "111111111111111111111111111111111111111111111111111111111111111111111110000111111111111111111111", "111111111111111111111111111111111111111111111111111111111111111111111110000111111111111111111111", "111111111111111111111111111111111111111111111111111111111111111111111110000111111111111111111111", "111111111111100000111111111111111111111111111111111111111111111111111110000110011111111111111111", "111111111111000000011111111111000001111111111111111111111111111111100000000100011111111111111111", "111111111100000000000011111100000000001111111111111111111111111111100000000000011111111111111111", "111111110000000000000011111100000000000111111111111111111111111110000000000000000111111111111111", "111111100000000000000111111000000000000111111111111111111111110000000000000000000001111111111111", "111111100000000000000111110000000000000111111111111111111111000000000000000000000000011111111111", "111111110000000000000111100000000000000011111111111111111100000000000000000000000000001111111111", "111111111100000000000111100000000000000001111111111111111100000001000000000000010000000011111111", "111111111100000000000111000000000000000000000010000000000000000000000000000000000000000001111111", "111111111111111100000000000000000000000000000000000000000000000000000000000000000000000000011111", "111111111111110000000000000000111111000000000000000000000000000000000000000000000000000000011111", "111111111111000000000000000000011111110000000000000000000000000000000000000000000000000000011111", "111111111110000000000000000000000111111000000000010000000000000000000000000000000000000000111111", "111111111100000000000000000000000111111110000011111111111100000000000000000000000000000011111111", "111111111100000001000000000000000111111111111111111111111100000000100000000000100000001111111111", "111111111100000000000000000000001111111111111111111111111110000000000000000000000000111111111111", "111111111111000000000000000000001111111111111111111111111111100000000000000000000001111111111111", "111111111111000000000000000000011111111111111111111111111111111000000000000000111111111111111111", "111111111111100000000000000000111111111111111111111111111111111111111100000011111111111111111111", "111111111111111000000000000001111111111111111111111111111111111111111100000111111111111111111111", "111111111111111111110000000011111111111111111111111111111111111111111100000011111111111111111111", "111111111111111111111000000111111111111111111111111111111111111111111100000011111111111111111111", "111111111111111111111000000111111111111111111111111111111111111111111000000011111111111111111111", "111111111111111111111000000111111111111111111111111111111111111111111000000011111111111111111111", "111111111111111111111000000111111111111111111111111111111111111111111000000011111111111111111111", "111111111111111111111000000111111111111111111111111111111111111111111000000011111111111111111111", "111111111111111111111000000111111111111111111111111111111111111111111000000011111111111111111111", "111111111111111111111100001111111111111111111111111111111111111111111100000111111111111111111111", "111111111111111111111100001111111111111111111111111111111111111111111100000111111111111111111111", "111111111111111111111100001111111111111111111111111111111111111111111100000111111111111111111111", "111111111111111111111100001111111111111111111111111111111111111111111100001111111111111111111111", "111111111111111111111100001111111111111111111111111111111111111111111100000111111111111111111111", "111111111111111111111100001111111111111111111111111111111111111111111100000111111000001111111111", "111111111001111111111100001111111111111111111111111111111111111111111100000001000000000011111111", "111111110000011111111100001111111111111111111111111111111111111111111100000000000000010011111111", "111111100000000001111100001110000100011111111111111111111111111111111111100000000000000000111111", "111111000000000000111100001000000000011111111111111111111111111111111111111000000000000000111111", "111111000000000000111100000000000000011111111111111111111111111111111111111100000000000001111111", "111111100000000000111100000000000000011111111111111111111111000000001111111110000000000011111111", "111111100000000000111100001000000000000111111111111111111100000000000111111111100000111111111111", "111111110000000000011100001100000000000111000000110000110000000000000001111111110001111111111111", "111111111000110000001100001100000000000000000000000000000000000000000001111100000000111111111111", "111111111111111000000000000000000000000000000000000000000000000000000011100000000000111111111111", "111111111111111100000000000000010000000000000000000000000000000000000001000000000000011111111111", "111111111111110000000000000000001000000000000000000000010000000000000000000000000000001111111111", "111111111111100000000000000000000111111111111111111111111000000000010000000000000000001111111111", "111111111111100000000000000000000000111111111111111111111100000000000000000000000000011111111111", "111111111111110000000000000000000000011111111111111111111110000000000000000000000000001111111111", "111111111111110000100000000000000000011111111111111111111110001111110000000000000000000111111111", "111111111111100000000000000000000000011111111111111111111000001111111001100000000000000111111111", "111111111111100000000000000000000011111111111111111111100000001111111111110000000000001111111111", "111111111111100000000000000000001111111111111111111111100000000111111111110000000000111111111111", "111111111111111100000000000000011111111111111111111111100000000111111111111111111111111111111111", "111111111111111111111100001111111111111111111111111111100000001111111111111111111111111111111111", "111111111111111111111100001111111111111111111111111111110001111111111111111111111111111111111111", "111111111111111111111100001111111111111111111111111111111111111111111111111111111111111111111111", "111111111111111111111100001111111111111111111111111111111111111111111111111111111111111111111111", "111111111111111111111100001111111111111111111111111111111111111111111111111111111111111111111111", "111111111111111111111100001111111111111111111111111111111111111111111111111111111111111111111111"],nests:[[17, 9, "slime"], [33, 10, "bat"], [16, 21, "slime"], [29, 20, "bat"], [63, 17, "bat"], [81, 17, "mushbug"], [72, 21, "slime"], [68, 12, "mushbug"], [76, 12, "bat"], [9, 45, "slime"], [33, 45, "bat"], [30, 52, "slime"], [59, 47, "mushbug"], [66, 48, "bat"], [75, 52, "mushbug"], [81, 54, "slime"], [84, 41, "mushbug"], [79, 41, "bat"], [59, 57, "mushbug"], [77, 49, "bat"]]};
 {const parts={NW:[0,0],NE:[1,0],SW:[0,1],SE:[1,1]},got={};let n=0;
  const done=()=>{const c=document.createElement('canvas');c.width=3072;c.height=2048;const g=c.getContext('2d');for(const k in parts)g.drawImage(got[k],parts[k][0]*1536,parts[k][1]*1024,1536,1024);try{const B=12,seam=(vert)=>{if(vert){const x0=1536;for(let k=0;k<2*B;k++){const t=(k+.5)/(2*B);const lx=x0-2*B+Math.floor(k/2),rx=x0+B+Math.floor(k/2);g.globalAlpha=1;g.drawImage(c,lx,0,1,2048,x0-B+k,0,1,2048);g.globalAlpha=t;g.drawImage(c,rx,0,1,2048,x0-B+k,0,1,2048)}}else{const y0=1024;for(let k=0;k<2*B;k++){const t=(k+.5)/(2*B);const ly=y0-2*B+Math.floor(k/2),ry=y0+B+Math.floor(k/2);g.globalAlpha=1;g.drawImage(c,0,ly,3072,1,0,y0-B+k,3072,1);g.globalAlpha=t;g.drawImage(c,0,ry,3072,1,0,y0-B+k,3072,1)}}g.globalAlpha=1};const snap=document.createElement('canvas');snap.width=3072;snap.height=2048;snap.getContext('2d').drawImage(c,0,0);const src=c;{const c=snap;seam(true);seam(false)}}catch(e){}IMG.mapHunt1=c;try{delete CACHE.hunt1;delete CACHE.cavemouth;delete CACHE.cave1}catch(e){}};
- for(const k in parts){const i=new Image();i.onload=()=>{got[k]=i;if(++n===4)done()};i.src=(window.EMBED_ASSETS&&window.EMBED_ASSETS['hunt-'+k+'.jpg'])||('hunt-'+k+'.jpg')}}
+ for(const k in parts){const i=new Image();i.onload=()=>{got[k]=i;if(++n===4)hunt1Ready212(done,got)};i.src=(window.EMBED_ASSETS&&window.EMBED_ASSETS['hunt-'+k+'.jpg'])||('hunt-'+k+'.jpg')}}
 MAPS.hunt1=function(){const m=newMap('hunt1','cave',96,64,55);m.nameKey='hunt1';m.painted='mapHunt1';m.bright=1;m.mul=1.2;m.huntFloor=1;
   HUNT1.solid.forEach((row,y)=>{for(let x=0;x<96;x++){const k=key(x,y);if(row[x]==='1')m.SOLID.add(k);else m.FLOOR.add(k)}});
   HUNT1.nests.forEach(p=>m.spawns.push({kind:p[2],x:p[0]*T+16,y:p[1]*T+16}));
   m.exits.push({id:'s',x:23.5*T,y:m.h*T-10,to:'cavemouth',toExit:'n',label:'cavemouthGo'},{id:'n',x:73*T,y:2.4*T,to:'cave1',toExit:'up',label:'cave1'});
   m.spawnDefault=[23.5*T,59.5*T];return m};
-{const _cmH=MAPS.cavemouth;MAPS.cavemouth=function(){const m=_cmH.apply(this,arguments);try{if(IMG.mapHunt1)for(const e of m.exits)if(e.id==='n'){e.to='hunt1';e.toExit='s';e.label='hunt1Go'}}catch(e){}return m}}
-{const _c1H=MAPS.cave1;if(_c1H)MAPS.cave1=function(){const m=_c1H.apply(this,arguments);try{if(IMG.mapHunt1)for(const e of m.exits)if(e.id==='up'){e.to='hunt1';e.toExit='n';e.label='hunt1Go'}}catch(e){}return m}}
+{const _cmH=MAPS.cavemouth;MAPS.cavemouth=function(){const m=_cmH.apply(this,arguments);try{if(hunt1Has212())for(const e of m.exits)if(e.id==='n'){e.to='hunt1';e.toExit='s';e.label='hunt1Go'}}catch(e){}return m}}
+{const _c1H=MAPS.cave1;if(_c1H)MAPS.cave1=function(){const m=_c1H.apply(this,arguments);try{if(hunt1Has212())for(const e of m.exits)if(e.id==='up'){e.to='hunt1';e.toExit='n';e.label='hunt1Go'}}catch(e){}return m}}
 {const _gmH=goMap;goMap=function(id,exitId){const r=_gmH.apply(this,arguments);try{if(M&&M.huntFloor&&exitId){const p=exitId==='s'?[23.5*T,59.5*T]:exitId==='n'?[72.8*T,7.8*T]:null;if(p){P.x=p[0];P.y=p[1];P.path=null;P.target=null;exitCool=Math.max(exitCool||0,.8)}}}catch(e){}return r}}
 // the deep wing (south-east room) gets darker gradually: a soft shade that ramps in over 3 tiles past the seams
 {let shade=null;const mk=()=>{const c=document.createElement('canvas');c.width=96;c.height=64;const g=c.getContext('2d'),d=g.createImageData(96,64);
@@ -5824,11 +5824,11 @@ function wmMapSection186(m){const P2=wmPlaces186(m),c=wmThumb186(m);let h='<div 
 function wmBindPanel186(pn){pn.querySelectorAll('[data-thumb]').forEach(d=>{const c=WM186.thumbs[d.dataset.thumb];const cv=d.querySelector('canvas');if(c&&cv)cv.getContext('2d').drawImage(c,0,0)});
   pn.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{WM186.tab=b.dataset.tab;wmPanel186(WM186.sel||wmBlockOf186(M.id))});
   pn.querySelectorAll('[data-pl]').forEach(b=>b.onclick=()=>{const p=(WM186.places[b.dataset.map]||[])[+b.dataset.pl];if(p)wmWalk186(b.dataset.map,p.x,p.y,p.ic+' '+p.label)});
-  pn.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{let m=null;try{m=getMap(b.dataset.go)}catch(e){}if(!m)return;const p=m.spawnDefault||[m.w*T/2,m.h*T/2];wmWalk186(m.id,p[0],p[1],'📍 '+wmName186(m.id))});
+  pn.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{let m=null;try{m=mapInfo212(b.dataset.go)}catch(e){}if(!m)return;const p=m.spawnDefault||[m.w*T/2,m.h*T/2];wmWalk186(m.id,p[0],p[1],'📍 '+wmName186(m.id))});
   const wp=pn.querySelector('[data-warp]');if(wp)wp.onclick=()=>{closeWorldMap186();try{wmOldWarp186()}catch(e){}}}
 // ---------- walking: this map now, another map through the exits in between ----------
 function wmRoute186(from,to){if(from===to)return [from];const prev=new Map([[from,null]]);const q=[from];let n=0;
-  while(q.length&&n++<40){const id=q.shift();let m=null;try{m=id===M.id?M:getMap(id)}catch(e){continue}
+  while(q.length&&n++<40){const id=q.shift();let m=null;try{m=id===M.id?M:mapInfo212(id)}catch(e){continue}if(!m)continue;
     for(const e of m.exits||[]){const nx=e.to;if(!nx||nx===id||prev.has(nx)||!MAPS[nx]||e.locked||(e.needBoss&&!S.boss)||(e.lockBoss&&m.boss&&!m.boss.happy))continue;prev.set(nx,id);if(nx===to){const out=[to];let c=id;while(c){out.unshift(c);c=prev.get(c)}return out}q.push(nx)}}
   return null}
 function wmWalk186(mapId,x,y,label){closeWorldMap186();if(!S||!M||!P||P.dead)return;
@@ -5856,7 +5856,7 @@ try{Object.assign(TX.th,{qGoal:'เป้าหมายตอนนี้',qWal
 const Q187={place:null,at:0};
 function questStep187(){if(!S||typeof rank!=='function')return null;const n=rank()+1;if(n>RANK_NOW)return null;let a=0,b=1;try{[a,b]=rankProg(n)}catch(e){}let text='';try{text=rankTask(n)}catch(e){text=''}return{n,a,b,text}}
 // the place of a step: the nearest thing still to do, this map first; every map it looks at is built once and cached by getMap
-function questPlace187(){const q=questStep187();if(!q||!M||!P)return null;const mp=id=>{try{return id===M.id?M:(MAPS[id]?getMap(id):null)}catch(e){return null}};
+function questPlace187(){const q=questStep187();if(!q||!M||!P)return null;const mp=id=>{try{return id===M.id?M:(MAPS[id]?mapInfo212(id):null)}catch(e){return null}};
   const sleepers=id=>{const m=mp(id);if(!m)return[];const aw=((S.crystals||{})[id])||[];return(m.crystals||[]).filter(c=>!(c.kidOnly&&!isKid())&&!(id===M.id?c.awake:aw.includes(c.id))).map(c=>({map:id,x:c.x,y:c.y+14,ic:'\u{1F48E}'}))};
   const digs=id=>{const m=mp(id);if(!m)return[];const dn=((S.digs||{})[id])||[];return(m.digs||[]).filter(d=>!(id===M.id?d.done:dn.includes(d.id))).map(d=>({map:id,x:d.x,y:d.y,ic:'⛏️'}))};
   const fish=id=>{const m=mp(id);return m&&m.fishSpot?[{map:id,x:m.fishSpot.x,y:m.fishSpot.y,ic:'\u{1F3A3}'}]:[]};
@@ -6027,7 +6027,7 @@ function questList188(){const L=[];if(!S||!M)return L;
     const W=S.weekly;if(W&&!W.claimed)L.push({ic:'🏆',g:t('qlWeekly'),text:t('m_'+W.k)+' '+Math.min(W.got,W.n)+'/'+W.n+(W.got>=W.n?' · '+t('qlClaim'):''),go:goK(W.k,W.got>=W.n)})}catch(e){}
   return L}
 // where a mission of a kind is done: crystals, dig spots, fishing spots, monsters (the first map that has one, this map first); anything else → the board
-function missionPlace188(k){if(!M||!P)return null;const mp=id=>{try{return id===M.id?M:(MAPS[id]?getMap(id):null)}catch(e){return null}};const order=[M.id,'cavemouth','hunt1','h9','capital'].filter((v,i,a)=>a.indexOf(v)===i);
+function missionPlace188(k){if(!M||!P)return null;const mp=id=>{try{return id===M.id?M:(MAPS[id]?mapInfo212(id):null)}catch(e){return null}};const order=[M.id,'cavemouth','hunt1','h9','capital'].filter((v,i,a)=>a.indexOf(v)===i);
   for(const id of order){const m=mp(id);if(!m)continue;let c=null;
     if(k==='wake'||k==='quiz'){const aw=((S.crystals||{})[id])||[];c=(m.crystals||[]).find(x=>!(x.kidOnly&&!isKid())&&!(id===M.id?x.awake:aw.includes(x.id)));if(c)return{map:id,x:c.x,y:c.y+14,ic:'💎'}}
     else if(k==='dig'){const dn=((S.digs||{})[id])||[];c=(m.digs||[]).find(d=>!(id===M.id?d.done:dn.includes(d.id)));if(c)return{map:id,x:c.x,y:c.y,ic:'⛏️'}}
@@ -6821,4 +6821,71 @@ function h9Open211(){try{return NEWW()||(typeof gmOn==='function'&&gmOn())}catch
 {const _g=goMap;goMap=function(id){try{if(id==='h9'&&!h9Open211()){const a=[].slice.call(arguments);a[0]='capital';return _g.apply(this,a)}}catch(e){}return _g.apply(this,arguments)}}
 // 2) the map page's edge arrows were 18 px thick (owner: "ขยายเฉพาะลูกศรให้หนาขึ้น") → 30 px, a little wider too; the rest of the page stays as the 1.99 mockup
 {const st=document.createElement('style');st.textContent=`.pe199.pe199{font-size:15px}.pe199.pe199.n,.pe199.pe199.s{width:56px!important;height:30px!important}.pe199.pe199.w,.pe199.pe199.e{width:30px!important;height:56px!important}`;document.head.appendChild(st)}   /* the map page adds its own style when it opens, so these win by weight */
+// ---- 2.12 (owner 10 Oct: memory "ไม่มีความเห็น" → Claude's plan; measured first): the Amethyst Cave picture is put together only when it is needed ----
+// measured on 2.11 as a real player (915×412): canvases the game keeps = 84 MB right after start, 121 MB after visiting 5 maps; the biggest single one was the floor-1 cave
+// picture (four painted rooms joined into 3072×2048 = 24 MB) made at load for every player, kids included, plus a second 24 MB copy for a moment while it was made
+// (the scene pictures themselves cost little until drawn: blocking them all changed the browser's memory by under 25 MB) · now: the four room pictures load as before,
+// the 24 MB picture is made when floor 1 is entered (or its thumbnail drawn), and let go once floor 1 has its own ground; the cave entrance link still follows "the pictures are here"
+const HUNT1L={ready:false,make:null,c:null,timer:0,got:null,busy:0,warmT:0,near:['cavemouth','cave1']};
+function hunt1Has212(){return HUNT1L.ready||!!HUNT1L.c}
+// map data for the quest arrow (asked every 400 ms), the mission list and the world map's route finder: before 2.12 these built every map they looked at
+// in full, ground picture included, and kept it (a player done with the entrance crystals had floor 1's 24 MB ground built at start, never visited)
+// now: the map's own builder only, no picture · every builder is seeded (built twice, all 32 maps gave the same crystals, digs, fishing spot, exits,
+// stones, nests) so it matches the real map · dropped at every map change and after 10 s, so a map that changes (new day, a picture or the
+// floor-1 link arriving) is read fresh
+const LIGHT212={};
+function mapInfo212(id){try{if(CACHE[id])return CACHE[id];const now=performance.now(),l=LIGHT212[id];if(l&&now-l.at<10000)return l.m;if(!MAPS[id])return getMap(id);const m=MAPS[id]();LIGHT212[id]={m,at:now};return m}catch(e){return null}}
+function lightClear212(){for(const k in LIGHT212)delete LIGHT212[k]}
+// the same picture as the 0.79 joiner, made from snapshots instead of the canvas drawing onto itself 96 times (that took 2.6 s; the old code ran it once
+// at load, so the game froze for that long a little after start) · the seams read outside what they write, so the result is the same pixel for pixel
+function hunt1Base212(got){const c=document.createElement('canvas');c.width=3072;c.height=2048;const g=c.getContext('2d'),P4={NW:[0,0],NE:[1,0],SW:[0,1],SE:[1,1]};
+  for(const k in P4)g.drawImage(got[k],P4[k][0]*1536,P4[k][1]*1024,1536,1024);return c}
+// each seam reads 2B..B px on both sides of the join and writes the B px either side: a 4B-wide snapshot strip is enough (0.4 MB instead of a 24 MB copy)
+function hunt1Seams212(c,mk){const g=c.getContext('2d');
+  try{const B=12,W=4*B,s=mk?mk(W,2048):document.createElement('canvas');s.width=W;s.height=2048;const sg=s.getContext('2d');
+    const x0=1536;sg.drawImage(c,x0-2*B,0,W,2048,0,0,W,2048);
+    for(let k=0;k<2*B;k++){const t=(k+.5)/(2*B),lx=Math.floor(k/2),rx=3*B+Math.floor(k/2);g.globalAlpha=1;g.drawImage(s,lx,0,1,2048,x0-B+k,0,1,2048);g.globalAlpha=t;g.drawImage(s,rx,0,1,2048,x0-B+k,0,1,2048)}
+    g.globalAlpha=1;s.width=3072;s.height=W;sg.drawImage(c,0,1024-2*B,3072,W,0,0,3072,W);
+    const y0=1024;for(let k=0;k<2*B;k++){const t=(k+.5)/(2*B),ly=Math.floor(k/2),ry=3*B+Math.floor(k/2);g.globalAlpha=1;g.drawImage(s,0,ly,3072,1,0,y0-B+k,3072,1);g.globalAlpha=t;g.drawImage(s,0,ry,3072,1,0,y0-B+k,3072,1)}
+    g.globalAlpha=1;s.width=s.height=0}catch(e){g.globalAlpha=1}return c}
+function hunt1Compose212(got){return hunt1Seams212(hunt1Base212(got))}
+function hunt1Ready212(make,got){HUNT1L.make=got?()=>{HUNT1L.c=hunt1Compose212(got)}:make;HUNT1L.got=got||null;HUNT1L.ready=true;try{delete CACHE.cavemouth;delete CACHE.cave1;lightClear212()}catch(e){}try{if(typeof M!=='undefined'&&M&&HUNT1L.near.includes(M.id))hunt1Warm212()}catch(e){}}
+try{Object.defineProperty(IMG,'mapHunt1',{configurable:true,enumerable:false,
+  get(){if(HUNT1L.c)return HUNT1L.c;try{const cm=CACHE.hunt1;if(cm&&cm.ground&&cm.ground.width===3072)return cm.ground}catch(e){}
+    if(!HUNT1L.ready||!HUNT1L.make)return undefined;HUNT1L.make();clearTimeout(HUNT1L.timer);HUNT1L.timer=setTimeout(()=>{try{if(!(M&&(M.id==='hunt1'||HUNT1L.near.includes(M.id))))hunt1Drop212()}catch(e){}},8000);return HUNT1L.c},
+  set(v){HUNT1L.c=v||null}})}catch(e){}
+// floor 1 built: its ground holds the same picture, so the joined one is let go (the minimap and thumbnails read the ground from then on)
+{const _g=getMap;getMap=function(id){const r=_g.apply(this,arguments);try{if(id==='hunt1'&&CACHE.hunt1&&CACHE.hunt1.ground&&HUNT1L.c&&typeof hunt1Drop212==='function')hunt1Drop212()}catch(e){}return r}}
+// the two maps with a way into floor 1 (cave entrance, Crystal Cave floor 1): a second after arriving, the picture is made away from the game's drawing:
+// a small worker reads the four room files one at a time (a pause between, so a 2-core phone keeps a core for the game), decodes them and joins them
+// on an OffscreenCanvas with the same seam code, then hands back one picture
+// (ImageBitmap, nothing copied) · so stepping onto the stairs costs what it did in 2.11 (the floor's own build, ~60–100 ms) instead of 320 ms
+// no worker/OffscreenCanvas → the files are decoded off the main thread (blob → createImageBitmap; made from the <img> instead, Chrome decoded on the
+// main thread: one 170 ms frame) and joined half a room per frame · a read error → made on entry as above · leaving for anywhere else lets it go
+function hunt1Drop212(){const c=HUNT1L.c;HUNT1L.c=null;try{if(c&&c.close)c.close()}catch(e){}}
+const HUNT1W=`const SEAMS=${hunt1Seams212.toString()};onmessage=async e=>{try{const ks=['NW','NE','SW','SE'],P4={NW:[0,0],NE:[1,0],SW:[0,1],SE:[1,1]};
+  const c=new OffscreenCanvas(3072,2048),g=c.getContext('2d'),nap=()=>new Promise(r=>setTimeout(r,60));
+  for(let i=0;i<4;i++){const k=ks[i],r=await fetch(e.data[i]);if(!r.ok)throw 0;const b=await createImageBitmap(await r.blob());g.drawImage(b,P4[k][0]*1536,P4[k][1]*1024,1536,1024);b.close();await nap()}
+  SEAMS(c,(w,h)=>new OffscreenCanvas(w,h));const out=c.transferToImageBitmap();postMessage(out,[out])}catch(err){postMessage(null)}}`;
+function hunt1Warm212(){try{if(!HUNT1L.got||HUNT1L.c||HUNT1L.busy||typeof createImageBitmap!=='function'||typeof fetch!=='function')return;if(CACHE.hunt1&&CACHE.hunt1.ground)return}catch(e){return}
+  const ks=['NW','NE','SW','SE'],P4={NW:[0,0],NE:[1,0],SW:[0,1],SE:[1,1]},ok=()=>{try{return M&&HUNT1L.near.includes(M.id)&&!HUNT1L.c&&!(CACHE.hunt1&&CACHE.hunt1.ground)}catch(e){return false}};HUNT1L.busy=1;
+  const urls=ks.map(k=>{try{return new URL(HUNT1L.got[k].src,location.href).href}catch(e){return HUNT1L.got[k].src}});
+  const main=()=>{Promise.all(urls.map(u=>fetch(u).then(r=>{if(!r.ok)throw 0;return r.blob()}).then(b=>createImageBitmap(b)))).then(bs=>{
+    const end=()=>{bs.forEach(x=>{try{x.close()}catch(e){}});HUNT1L.busy=0};if(!ok())return end();
+    const c=document.createElement('canvas');c.width=3072;c.height=2048;const g=c.getContext('2d');let i=0;
+    const step=()=>{try{if(!ok()){c.width=c.height=0;return end()}if(i<8){const k=ks[i>>1],h=i&1;i++;g.drawImage(bs[ks.indexOf(k)],0,h*512,1536,512,P4[k][0]*1536,P4[k][1]*1024+h*512,1536,512);return requestAnimationFrame(step)}
+      HUNT1L.c=hunt1Seams212(c)}catch(e){}end()};requestAnimationFrame(step)}).catch(()=>{HUNT1L.busy=0})};
+  if(HUNT1L.noWorker||typeof Worker!=='function'||typeof OffscreenCanvas!=='function')return main();
+  let w=null,u=null;const quit=()=>{try{w&&w.terminate()}catch(e){}try{u&&URL.revokeObjectURL(u)}catch(e){}};
+  try{u=URL.createObjectURL(new Blob([HUNT1W],{type:'text/javascript'}));w=new Worker(u)}catch(e){quit();HUNT1L.noWorker=1;return main()}
+  w.onmessage=e=>{const bmp=e.data;quit();if(!bmp){HUNT1L.noWorker=1;HUNT1L.busy=0;return main()}HUNT1L.busy=0;if(ok())HUNT1L.c=bmp;else try{bmp.close()}catch(er){}};
+  w.onerror=()=>{quit();HUNT1L.noWorker=1;HUNT1L.busy=0;main()};w.postMessage(urls)}
+{const _gm=goMap;goMap=function(id){try{lightClear212()}catch(e){}const r=_gm.apply(this,arguments);try{clearTimeout(HUNT1L.warmT);const at=M&&M.id;
+  if(HUNT1L.near.includes(at))HUNT1L.warmT=setTimeout(hunt1Warm212,1000);else if(at!=='hunt1'&&HUNT1L.c&&HUNT1L.make)hunt1Drop212()}catch(e){}return r}}
+// the farm took 117–148 ms to enter on 2.11 (limit 120): 137 ms of it was measure() making one canvas + one pixel read + one shadow silhouette per object,
+// for every tree, fence and bush — most of them the same picture rectangle · now the first object of each rectangle is measured and the rest share its
+// numbers and silhouette (only read when shadows are drawn) · keyed by the picture itself, so a picture that arrives later is measured fresh
+const MEAS212=new WeakMap();
+{const _ms=measure;measure=function(o){let im=null;try{im=IMG[o.img]}catch(e){}if(!im||typeof im!=='object')return _ms(o);let t=MEAS212.get(im);if(!t){t=new Map();MEAS212.set(im,t)}
+  const k=o.sx+','+o.sy+','+o.sw+','+o.sh,r=t.get(k);if(r){o.cb=r.cb;o.foot=r.foot;o.fx=r.fx;o.sil=r.sil;o.a=1;return}_ms(o);if(o.sil)t.set(k,{cb:o.cb,foot:o.foot,fx:o.fx,sil:o.sil})}}
 </script></body></html>
