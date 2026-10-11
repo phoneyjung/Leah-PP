@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.25';
+const VERSION='Lantern Academy 2.26';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -7526,4 +7526,67 @@ function pd224Body(g){return (PD219.avail.body||[]).filter(n=>g!=='m'||!pd224Ski
 // ===== 2.25 (overnight bug round, owner 12 Oct 00:20 "หาบั๊ก > ซ่อม > ต่อยอด > ทดสอบ"): while decorating, the corner boxes (player card, lantern bar, minimap) fade and let touches through,
 // so a piece dragged under them can still be held and moved (before: on a phone 844×390 about 1 floor tile in 10 lay under them and could not be grabbed again · BUG-34)
 try{const st=document.createElement('style');st.id='deco225';st.textContent='body.deco2 #hud,body.deco2 #mmw,body.deco2 #lampBar{pointer-events:none!important;opacity:.38!important;transition:opacity .2s}body.deco2 #hud *,body.deco2 #mmw *,body.deco2 #lampBar *{pointer-events:none!important}';document.head.appendChild(st)}catch(e){}
+// ===== 2.26 แต่งตัว (overnight, owner 12 Oct 00:20 "ขัดเกลาส่วนเด็ก"; after Leah loved changing hair, face, eyes, mouth and clothes): a child under 10 opens the same
+// paperdoll screen again for the character they already have — from the bag ("👗 แต่งตัว") or at the wardrobe at home (the big button) — and keeps or changes the look.
+// Not on that screen: age, house, name (those are not clothes). A child made before 2.24 starts from that gender's pieces. Without the pieces (no file) nothing opens.
+try{Object.assign(TX.th,{dress226:'แต่งตัว',dress226Save:'✨ แต่งตัวเสร็จ',dress226Back:'ไม่เปลี่ยน',dress226Saved:'ชุดใหม่สวยมาก! ✨'});if(TX.en)Object.assign(TX.en,{dress226:'Dress up',dress226Save:'✨ Done',dress226Back:'Keep my look',dress226Saved:'Looking great! ✨'})}catch(e){}
+const DRESS226={on:false,prev:null,opened:0,saved:0};
+try{const st=document.createElement('style');st.id='dress226';st.textContent='body.dress226 #lampBar,body.dress226 #msg,#cr.dress226 .nr{visibility:hidden!important}#cr.c193.pd219 .sub4 button,#cr.c193 #c3Back{min-height:44px}#cr.c193.pd219 .side .sw{width:44px!important;height:44px!important}';   /* a child's taps: the paperdoll sub-tabs (30 px on the 1.94 panel) and the back button (34 px) to 44 px */document.head.appendChild(st)}catch(e){}
+function dress226Can(){try{return !!(S&&isKid()&&pd219On(S.age)&&!PS.gmSprite170&&!PS.local220&&!(typeof look169Valid==='function'&&look169Valid(S.appearance169)))}catch(e){return false}}
+function dress226Open(){if(!dress226Can()||DRESS226.on)return;
+  if(!PD219.ok){if(!PD219.tried)pd219Load().then(ok=>{if(ok)dress226Open()});return}
+  try{closeModal()}catch(e){}try{DLG=null}catch(e){}
+  const g=S.gender194==='m'||S.gender194==='f'?S.gender194:genderOf194(S.kid),p=pd219Look(S.pd219)?S.pd219:null;
+  DRESS226.prev={cr:Object.assign({},CR_STATE),tab:C193.tab,sub:Object.assign({},C193.sub||{}),dir:C193.dir,paused:PAUSE};
+  Object.assign(CR_STATE,{gender:g,kid:S.kid,house:S.house,age:S.age,name:S.name||'',hc:S.hc,ec:S.ec});
+  CR_STATE.pd=p?{g,hair:p.hair,face:p.face,eyes:p.eyes,mouth:p.mouth,body:p.body,tn:p.tn}:null;
+  CR_STATE.hcol=p?(p.hc>=0?p.hc:null):(S.hcol??null);CR_STATE.ecol=p?(p.ec>=0?p.ec:null):(S.ecol??null);
+  DRESS226.on=true;DRESS226.g0=g;DRESS226.opened++;C193.tab='hair';PAUSE=true;P.path=null;P.target=null;document.body.classList.add('dress226');
+  openCreator()}
+function dress226Adapt(){const el=$('cr');if(!DRESS226.on||!el||!el.classList.contains('c193'))return;el.classList.add('dress226');
+  const h1=el.querySelector('.top h1');if(h1)h1.textContent='👗 '+t('dress226');
+  let bk=$('c3Back');if(!bk){bk=document.createElement('button');bk.className='bk';bk.id='c3Back';const top=el.querySelector('.top');if(top)top.prepend(bk)}bk.textContent='‹ '+t('dress226Back');bk.onclick=()=>dress226Close(false);
+  el.querySelectorAll('.rail [data-tab="age"],.rail [data-tab="house"]').forEach(b=>b.style.display='none');
+  const nm=$('cname');if(nm){nm.readOnly=true;nm.value=S.name||'';nm.tabIndex=-1}const rn=$('crnd');if(rn)rn.style.display='none';
+  const go=$('cgo');if(go){go.textContent=t('dress226Save');go.onclick=()=>dress226Close(true)}
+  if(C193.tab==='age'||C193.tab==='house'){C193.tab='hair';crRefresh()}}
+function dress226Close(keep){if(!DRESS226.on)return;const el=$('cr'),pv=DRESS226.prev||{};let changed=false;
+  if(keep&&S){try{const c=pd219Cur();if(pd219Look(c)){changed=JSON.stringify(c)!==JSON.stringify(S.pd219||null);S.pd219=c;
+    if(CR_STATE.gender!==DRESS226.g0)S.kid=GDEF194[CR_STATE.gender];S.gender194=CR_STATE.gender;
+    if(!KIDS[S.kid][3]&&dyeOk194(S.kid)){S.hcol=c.hc>=0?c.hc:null;S.ecol=c.ec>=0?c.ec:null}DRESS226.saved++}}catch(e){}}
+  DRESS226.on=false;document.body.classList.remove('dress226');
+  if(pv.cr){for(const k of Object.keys(CR_STATE))if(!(k in pv.cr))delete CR_STATE[k];Object.assign(CR_STATE,pv.cr)}C193.tab=pv.tab||'age';C193.sub=pv.sub||C193.sub;
+  if(el){el.classList.add('hide');el.classList.remove('c193','dress226','pd219')}
+  PAUSE=false;try{buildPlayerSheets()}catch(e){}try{if(typeof UI149!=='undefined')UI149.portraitKey=null;PD219.hud=null}catch(e){}try{hud()}catch(e){}try{save()}catch(e){}
+  if(keep&&changed){try{sfx('pick')}catch(e){}try{say(t('dress226Saved'))}catch(e){}}}
+// the creator screen built while dressing keeps the dressing changes (also after the language button rebuilds it)
+{const o=openCreator;openCreator=function(){const r=o.apply(this,arguments);try{dress226Adapt()}catch(e){}return r}}
+// the dice never moves a child to another house while dressing
+{const o=crRefresh;crRefresh=function(){try{if(DRESS226.on&&S)CR_STATE.house=S.house}catch(e){}return o.apply(this,arguments)}}
+// the bag: a "👗 แต่งตัว" button beside the child's other bag buttons
+// (only once the pieces are here: the bag starts loading them, and the button joins an open bag when they arrive)
+function dress226BagBtn(){try{if(!dress226Can()||!PD219.ok)return;const host=$('mBody'),h=host&&host.querySelector('h2');if(!h||$('bDress226')||$('modal').classList.contains('hide')||!host.querySelector('#kbOther,#bStampBook,#bCardBook'))return;   /* only inside the open bag */
+  const anchor=host.querySelector('#bKidMap171')||host.querySelector('#bKidBook171')||host.querySelector('#rkBtn')||host.querySelector('#bStampBook')||host.querySelector('#bCardBook')||h;
+  const b=document.createElement('button');b.id='bDress226';b.textContent='👗 '+t('dress226');b.onclick=()=>{try{closeModal()}catch(e){}dress226Open()};anchor.after(b)}catch(e){}}
+{const o=openBag;openBag=function(){const r=o.apply(this,arguments);try{if(dress226Can()){if(PD219.ok)dress226BagBtn();else if(!PD219.tried){pd219Load().then(ok=>{if(ok)dress226BagBtn()})}}}catch(e){}return r}}
+// at home: standing by the wardrobe, the child's big button (and its 1.67 balloon) reads "👗 แต่งตัว"
+function dress226Wardrobe(){try{if(!M||!M.layout2||typeof ROOM2==='undefined'||(typeof DECO2!=='undefined'&&DECO2.on))return null;const px=P.x/T,py=P.y/T-ROOM2.rowsAbovePlan;
+  for(const a of M.layout2){if(a[0]!=='wardrobe')continue;const v=f2View(a[0],a[1]),dx=Math.max(a[2]-px,0,px-(a[2]+v[6])),dy=Math.max(a[3]-py,0,py-(a[3]+v[7]));if(Math.hypot(dx,dy)<1.4)return a}}catch(e){}return null}
+{const o=anyNear;anyNear=function(){const c=o.apply(this,arguments);if(c&&c.k!=='kidWave')return c;try{if(dress226Can()&&!PAUSE&&!DLG&&dress226Wardrobe()){if(PD219.ok)return {ic:'👗',k:'dress226',fn:()=>dress226Open(),d:0};if(!PD219.tried)pd219Load()}}catch(e){}return c}}
+// online: a child dressed in pieces looks the same to everyone in the room — the pieces travel as one short text (8 numbers, ~16 letters) in the player record,
+// which already takes extra fields (like appearance169 and tk); a device without the pieces loads them once when such a player shows up, and draws the usual sprite until then
+function pdEnc226(o){try{return o&&o.v===1&&PD219.P.every(k=>Number.isInteger(o[k]))?[o.hair,o.face,o.eyes,o.mouth,o.body,o.hc|0,o.ec|0,o.tn|0].join(','):null}catch(e){return null}}
+function pdDec226(s){if(typeof s!=='string'||s.length>40)return null;const a=s.split(',').map(Number);if(a.length!==8||a.some(n=>!Number.isInteger(n)||n<-1||n>99))return null;return {v:1,hair:a[0],face:a[1],eyes:a[2],mouth:a[3],body:a[4],hc:a[5],ec:a[6],tn:a[7]}}
+{const old=Net.send;Net.send=function(){const me=this.me;if(!me||typeof me.set!=='function')return old.apply(this,arguments);const set=me.set;
+  me.set=function(v){try{if(v&&typeof v==='object')v.pd=S&&S.pd219&&pd219On(S.age)&&!PS.gmSprite170&&!PS.local220?pdEnc226(S.pd219):null}catch(e){}return set.apply(this,arguments)};
+  try{return old.apply(this,arguments)}finally{me.set=set}}}
+const OTH226={pd:null,cache:new Map(),drawn:0};
+{const o=drawOther;drawOther=function(ob){OTH226.pd=ob&&ob.p&&ob.p.pd||null;try{return o.apply(this,arguments)}finally{OTH226.pd=null}}}
+{const o=othSheets;othSheets=function(k,h,hc,ec,a){try{const s=OTH226.pd,look=s&&pdDec226(s);if(look&&HOUSES[h]){if(!PD219.ok){if(!PD219.tried)pd219Load()}else if(pd219Look(look)){const key=s+'|'+h;let w=OTH226.cache.get(key);
+  if(!w){const r=pd219World(look,h);w={stand:r.stand,walk:r.walk};if(OTH226.cache.size>=40)OTH226.cache.clear();OTH226.cache.set(key,w)}OTH226.drawn++;return w}}}catch(e){}return o.apply(this,arguments)}}
+// BUG-36 (found overnight 12 Oct): "เปลี่ยนผู้เล่น" marks "no current player" and reloads; a save() in between (the 15 s autosave, any action) pushed the same player
+// again as a NEW slot, so the list showed them twice (also the select-screen test, 1–3 of 4 screens under load). Each save now carries its own id (sid): a save
+// of a player already in the list goes to that player's slot (the list stays on "no current player" while switching), and never overwrites another player's slot
+{const o=Store.save;Store.save=function(s){try{if(s&&typeof s==='object'){if(!s.sid)s.sid=Date.now().toString(36)+Math.random().toString(36).slice(2,8);const d=this.all(),own=d.slots.findIndex(x=>x&&x.sid===s.sid);
+  if(own>=0&&own!==d.cur){d.slots[own]=s;this.put(d);return}}}catch(e){}return o.apply(this,arguments)}}
 </script></body></html>
