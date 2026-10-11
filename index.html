@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.22';
+const VERSION='Lantern Academy 2.23';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -7489,6 +7489,30 @@ function openLocal220(){if(!gmOn())return;const owner=S;let closed=false,sel=(S.
 @media (max-height:520px){#lc220{display:grid;grid-template-columns:auto 1fr;column-gap:12px;align-items:center;text-align:left}#lc220 h2{grid-column:1/3;margin:0 0 2px;font-size:17px}#lc220>.lc220p:first-of-type{grid-column:1/3;font-size:12px;margin:0 0 4px}
  #lc220 .lc220top{grid-column:1/3;justify-content:flex-start}#lc220 .lc220list{max-width:none;flex:1}#lc220cv{grid-column:1;grid-row:4/6;width:min(40vw,320px);margin:4px 0}#lc220 #lc220st{grid-column:2;grid-row:4;font-size:12px;margin:2px 0}
  #lc220 .lc220b{grid-column:2;grid-row:5;display:grid;grid-template-columns:1fr 1fr;margin-top:2px;gap:6px}#lc220 .lc220b button{padding:6px 8px}}`;document.head.appendChild(st)}
+// ================= 2.23 Claude (owner 11 Oct 20:45 "Leah can press attack — the game must be buggy"): children under the fight age (AGE185.fight = 10) never attack =================
+// Rule 16 / DESIGN_KID_PLAY.md: children do not fight; the big button does what is near (talk, crystal, dig, fish…) and otherwise tells them where to go.
+// The v0.36 light-brush hit (kids "dusting" monsters until they left) had stayed on the big button as "ตี" + a sword, and a tap on a monster did the same.
+// Guards: attackTarget (big button, tap on a monster, hold-to-attack) · doAttack (anything that slips through) · useSkill. The 10+ players and the GM are untouched.
+try{Object.assign(TX.th,{kid223Mon:'น้องมอนมองไม่เห็นเรา เพราะเรามีตะเกียง ✨ ไปหาคริสตัลกันดีกว่า',kid223None:'เดินไปใกล้ ๆ คน คริสตัล หรือจุดขุด แล้วกดปุ่มนี้นะ'});
+ if(TX.en)Object.assign(TX.en,{kid223Mon:'Monsters can’t see you — you carry a lantern ✨ Let’s find crystals instead',kid223None:'Walk up to someone, a crystal or a dig spot, then press this'})}catch(e){}
+const kid223=()=>{try{return !!(S&&!ageOk185('fight'))}catch(e){return false}};
+// the big button's word: "คุย / Talk" for children (owner 4 Oct: talk instead of attack; near something it still turns into that thing's word), "ตี / Hit" for everyone else
+try{for(const [L,kid,hit,none] of [['th','คุย',TX.th.hit,TX.th.noHit],['en','Talk',TX.en&&TX.en.hit,TX.en&&TX.en.noHit]]){if(!TX[L])continue;
+ Object.defineProperty(TX[L],'hit',{configurable:true,enumerable:true,get(){return kid223()?kid:hit}});
+ Object.defineProperty(TX[L],'noHit',{configurable:true,enumerable:true,get(){return kid223()?TX[L].kid223None:none}})}}catch(e){}
+let kid223T=0;function kid223Say(k){const n=performance.now();if(n-kid223T<1500)return;kid223T=n;try{say(t(k))}catch(e){}}
+{const old=attackTarget;attackTarget=function(){if(kid223()){P.target=null;kid223Say('kid223Mon');return}return old.apply(this,arguments)}}
+{const old=doAttack;doAttack=function(){if(kid223()){P.target=null;return}return old.apply(this,arguments)}}
+{const old=useSkill;useSkill=function(){if(kid223())return;return old.apply(this,arguments)}}
+// the big button's picture: a speech bubble (the 1.67 "talk" symbol) instead of the sword for children
+const KID223_IC='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 46" fill="none" stroke="#f6e6bf" color="#f6e6bf" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">'+(CTX167_ICONS.talk||'')+'</svg>');
+function kid223Icon(){try{const im=document.querySelector('#bAtk>img.pxi');if(!im)return;const kid=kid223();if(kid&&im.dataset.kid223!=='1'){im.dataset.was223=im.getAttribute('src')||'';im.src=KID223_IC;im.dataset.kid223='1'}
+ else if(!kid&&im.dataset.kid223==='1'){im.src=(typeof ICO!=='undefined'&&ICO.bAtk)||im.dataset.was223||im.src;im.dataset.kid223=''}
+ else if(kid&&im.getAttribute('src')!==KID223_IC)im.src=KID223_IC}catch(e){}}
+{const old=hud;hud=function(){const r=old.apply(this,arguments);kid223Icon();return r}}
+// the light brush only made the dusting faster: hidden from a child's bag (kept in the save)
+{const old=openBag;openBag=function(){const r=old.apply(this,arguments);try{if(kid223())document.querySelectorAll('#modal [data-tool="brush"]').forEach(b=>{const row=b.closest('.pn');if(row)row.remove()});
+ if(kid223())document.querySelectorAll('#modal .pn').forEach(row=>{const ic=row.querySelector('span');if(ic&&ic.textContent.trim()==='🪶'&&row.textContent.includes('Lv'))row.remove()})}catch(e){}return r}}
 // ================= 2.21 Claude: Trickster test mode (owner 11 Oct 17:17) — all the code is in tk-test.js and is fetched ONLY with ?tk; it works on a GM slot only.
 // No Trickster picture is in this repo: the mode reads the owner's own character.zip from his device (IndexedDB 'la-tk221'). Without ?tk nothing changes and nothing extra is downloaded.
 // 2.22: tk-pack.bin = the same characters LOCKED (AES-256-GCM); only the owner's link (#tkk=<key>) opens it, so his family can play without picking a file. Players never fetch it.
