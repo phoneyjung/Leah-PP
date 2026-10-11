@@ -35,13 +35,19 @@ const world=p=>p.evaluate(()=>({pd:S.pd219,house:S.house,name:S.name,age:S.age,k
    await start(p,{age:7,pd:{v:1,hair:3,face:2,eyes:3,mouth:2,body:2,hc:4,ec:3,tn:2},g:'f'});await sleep(1800);
    R.sent=await p.evaluate(()=>{let got=null;const keep=[Net.online,Net.me],fb=window.firebase;if(!fb||!fb.database)window.firebase={database:{ServerValue:{TIMESTAMP:0}}};Net.online=true;Net.me={set(v){got=v}};try{Net.send(true)}finally{[Net.online,Net.me]=keep;if(window.firebase!==fb)window.firebase=fb}return got&&{pd:got.pd,k:got.k,n:got.n}});
    assert.equal(R.sent.pd,'3,2,3,2,2,4,3,2','the record carries the pieces');
-   await start(p,{age:30,kid:5,name:'Mom'});await sleep(1800);R.before=await p.evaluate(()=>({ok:PD219.ok,tried:PD219.tried}));
+   // the grown-up is another device: a fresh browser profile that never loaded the pieces
+   await bc.close();const bc2=await browser.createBrowserContext();p=await bc2.newPage();p.on('pageerror',e=>errors.push(e.message));await p.setViewport({width,height,deviceScaleFactor:dpr,isMobile:true,hasTouch:true});await p.setBypassServiceWorker(true);
+   await p.goto(base+'?rank=1',{waitUntil:'load'});await p.waitForFunction(()=>!document.getElementById('load'),{timeout:90000});await sleep(1200);
+   // (a new device opens on the gender screen, which already loads the pieces for a child; the grown-up's device here has its own save and reopens straight into the game)
+   await start(p,{age:30,kid:5,name:'Mom'});await sleep(800);await p.evaluate(()=>save());await p.reload({waitUntil:'load'});await p.waitForFunction(()=>!document.getElementById('load'),{timeout:90000});await sleep(1500);
+   await p.evaluate(()=>{document.querySelectorAll('#cr,#title,#picker').forEach(e=>e.classList.add('hide'));DLG=null;try{closeModal()}catch(e){}if(!M||!S)startGame()});await sleep(1500);
+   R.before=await p.evaluate(()=>({ok:PD219.ok,tried:PD219.tried,age:S&&S.age,map:M&&M.id}));
    R.other=await p.evaluate(async()=>{const mk=(pd,id)=>({p:{n:'Kid'+id,lv:1,h:2,k:0,a:1,r:0,w:0,m:mapKey(),x:P.x+60,y:P.y,pd},x:P.x+60,y:P.y,tx:P.x+60,ty:P.y,dist:0});
      Net.others={a:mk('3,2,3,2,2,4,3,2','a')};for(let i=0;i<60&&!PD219.ok;i++)await new Promise(r=>setTimeout(r,250));await new Promise(r=>setTimeout(r,500));const d0=OTH226.drawn;await new Promise(r=>setTimeout(r,400));const drawn=OTH226.drawn-d0;
      const w=OTH226.cache.get('3,2,3,2,2,4,3,2|2'),ref=pd219World(pdDec226('3,2,3,2,2,4,3,2'),2).stand,same=!!w&&w.stand.getContext('2d').getImageData(0,0,512,64).data.every((v,i)=>v===ref.getContext('2d').getImageData(0,0,512,64).data[i]);
      Net.others={b:mk(undefined,'b'),c:mk('x,1,2','c')};const d1=OTH226.drawn;await new Promise(r=>setTimeout(r,400));const plain=OTH226.drawn-d1;Net.others={};return {ok:PD219.ok,drawn,same,plain}});
    await p.screenshot({path:path.join(out,name+'-other.png')});
-   assert(!R.before.ok&&R.other.ok&&R.other.drawn>0&&R.other.same&&R.other.plain===0,'another player in pieces '+JSON.stringify(R));assert.deepEqual(errors,[]);R.errors=0;results.push(R);await bc.close();continue}
+   assert(!R.before.ok&&R.other.ok&&R.other.drawn>0&&R.other.same&&R.other.plain===0,'another player in pieces '+JSON.stringify(R));assert.deepEqual(errors,[]);R.errors=0;results.push(R);await bc2.close();continue}
   if(mode==='nojson'){await start(p,{age:7});await sleep(1500);await tap(p,'#bBag');await sleep(1500);R.bagBtn=!!(await p.$('#bDress226'));await p.evaluate(()=>{closeModal();dress226Open()});await sleep(1200);R.open=await p.evaluate(()=>({on:DRESS226.on,cr:$('cr').classList.contains('hide'),paused:PAUSE}));
    assert(!R.bagBtn&&!R.open.on&&R.open.cr&&!R.open.paused,'no pieces: nothing opens '+JSON.stringify(R));assert.deepEqual(errors,[]);R.errors=0;results.push(R);await bc.close();continue}
   if(mode==='old'){await start(p,{age:8,kid:3,house:2,name:'Tao'});await sleep(1800);await tap(p,'#bBag');await p.waitForSelector('#bDress226',{timeout:20000});await tap(p,'#bDress226');await sleep(900);R.screen=await look(p);
