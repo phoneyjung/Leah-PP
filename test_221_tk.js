@@ -31,7 +31,8 @@ async function press(p,s,touch=false){await p.waitForSelector(s,{visible:true});
 async function enter(p,mapId='h9'){await p.waitForFunction(()=>!$('load')&&ROOM2,{timeout:45000});await p.evaluate(m=>{if(!Store.all().slots.length)gmMakeSlot();S=Store.all().slots[Store.all().cur];S.gmInit=1;S.snd=S.mus=false;S.joy=true;S.seen={intro:1};S.age=12;ensureDaily();S.daily.seen=1;startGame();document.querySelectorAll('#cr,#title,#picker').forEach(e=>e.classList.add('hide'));DLG=null;$('dlg').classList.add('hide');closeModal();goMap(m);P.path=P.act=null;fpsChecks=6},mapId);await sleep(2500)}
 async function pick(p,touch,files){const [ch]=await Promise.all([p.waitForFileChooser({timeout:8000}),(async()=>{await p.waitForSelector('#tk221pick',{visible:true});touch?await p.tap('#tk221pick'):await p.click('#tk221pick')})()]);await ch.accept(files);await sleep(1200)}
 const shown=p=>p.evaluate(()=>TK221.shown&&TK221.shown.join('#'));
-(async()=>{const browser=await puppeteer.launch({executablePath:process.env.CHROME_EXE,args:['--no-sandbox']}),results=[];let p;
+module.exports={nori,zip,crc32};   // 2.22: test_222_tk_pack.js builds its locked set from the same tiny character
+if(require.main===module)(async()=>{const browser=await puppeteer.launch({executablePath:process.env.CHROME_EXE,args:['--no-sandbox']}),results=[];let p;
  try{for(const [name,width,height,touch,mode] of [['phone',844,390,true,''],['ipad',1180,820,true,''],['pc',1366,768,false,''],['plain',844,390,true,'plain'],['nojs',844,390,true,'nojs'],['nostore',812,375,true,'nostore']]){
   const bc=await browser.createBrowserContext();p=await bc.newPage();const errors=[];p.on('pageerror',e=>errors.push(e.message));await p.setViewport({width,height,isMobile:touch,hasTouch:touch});const R={name};
   const asked=[];p.on('request',r=>{if(r.url().includes('tk-test.js'))asked.push(r.url())});

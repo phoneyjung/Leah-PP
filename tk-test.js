@@ -4,6 +4,9 @@
 // Files: chrNNN.nri = one character, 167 animations "<action>_<direction>" (36 actions × 8 directions) · 8/16/24-bit frames (raw · row-RLE · LZ4 "CC FC A0 CC") · palette block "PAL_" · pal/job*.pal = 768-byte colour sets.
 // Drawing: the player keeps the game's drawPlayer chain (behind-roof fade, seats, pools); during the call PS.stand/PS.walk/PS.F point at one scratch frame of the current Trickster action.
 // Online: Net.send adds {tk:{c,a,n,p}} to the player record (rules accept extra fields); a device with the same zip draws that player as the Trickster character, others see the normal look.
+// 2.22 (owner 11 Oct 18:12 "can it work without loading a file, so my wife can open it and play"): tk-pack.bin on the site = the characters zip LOCKED with AES-256-GCM.
+//   The key is only in the owner's link (…/?gm&tk#tkk=<key>; the part after # never reaches any server) and is kept in that browser. Without the key the file is unreadable noise.
+//   A device that came from the link: a "play a Trickster character" button makes/enters its GM slot, the set downloads once (~6 MB) into IndexedDB, the window opens to pick.
 (function(){
 'use strict';
 const TK={files:[],ent:{},chars:{},cur:null,st:{a:'',t0:0,n:0},mem:null,err:'',busy:false,FA:0,scratch:null,last:{},idle0:0,pals:{}};
@@ -40,6 +43,31 @@ async function indexAll(list){TK.ent={};for(const f of list){try{if(/\.zip$/i.te
   else TK.ent[base(f.name).toLowerCase()]={name:f.name,loose:true,src:f.blob}}catch(err){TK.err=f.name+': '+err.message}}
  TK.ids=Object.keys(TK.ent).filter(n=>/^(chr|trs)\w*\.nri$/i.test(n)).map(n=>n.replace(/\.nri$/i,'')).sort();
  TK.palIds=Object.keys(TK.ent).filter(n=>/\.pal$/i.test(n)).map(n=>n.replace(/\.pal$/i,'')).sort();return TK.ids}
+
+// ---------- 2.22: the locked set on the site (tk-pack.bin = 'TKP1' + iv[12] + AES-256-GCM(zip)+tag, extra data 'TKP1') ----------
+const KEYK='la-tk222-key';
+function keyGet(){try{return localStorage.getItem(KEYK)||TK.key||''}catch(e){return TK.key||''}}
+function keySet(k){TK.key=k||'';try{if(k)localStorage.setItem(KEYK,k);else localStorage.removeItem(KEYK)}catch(e){}}
+TK.keyGet=keyGet;
+// the link's key: keep it, then take it out of the address bar (so a screenshot or a shared address does not carry it)
+try{const m=/(?:^#|&)tkk=([A-Za-z0-9_-]{20,})/.exec(location.hash);if(m){keySet(m[1]);const h=location.hash.replace(/(?:^#|&)tkk=[A-Za-z0-9_-]*/,'').replace(/^&/,'');history.replaceState(null,'',location.pathname+location.search+(h?'#'+h:''))}}catch(e){}
+function b64u(s){s=s.replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';const b=atob(s),u=new Uint8Array(b.length);for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u}
+function note(s){TK.note=s;try{say(s)}catch(e){}try{if(TK.setStatus)TK.setStatus(s)}catch(e){}}
+async function fetchPack(){const k=keyGet();if(!k){TK.packErr=tx('เครื่องนี้ไม่มีกุญแจ · เปิดจากลิงก์อีกครั้ง','No key on this device · open the link again');return false}if(TK.packing)return false;TK.packing=true;TK.packErr='';
+ try{if(!(window.crypto&&crypto.subtle))throw Error(tx('เบราว์เซอร์นี้เปิดชุดที่ล็อกไว้ไม่ได้ (ต้องเปิดผ่าน https)','This browser cannot open the locked set (https needed)'));
+  let r;try{r=await fetch('tk-pack.bin',{cache:'no-store'})}catch(e){throw Error(tx('โหลดไม่ได้ · ต่อเน็ตแล้วกด "โหลดจากเว็บ" อีกครั้ง','Could not download · go online and press "Load from the site"'))}
+  if(!r.ok)throw Error(r.status===404?tx('ยังไม่มีชุดตัวละครบนเว็บ','No character set on the site yet'):tx('โหลดไม่ได้ ','Could not download ')+'('+r.status+')');
+  const total=+(r.headers.get('content-length')||0);let buf;
+  if(r.body&&r.body.getReader&&total>0){const rd=r.body.getReader(),parts=[];let got=0,last=-1;for(;;){const x=await rd.read();if(x.done)break;parts.push(x.value);got+=x.value.length;const pct=Math.min(100,Math.floor(got*10/total)*10);if(pct!==last){last=pct;note(tx('กำลังโหลดตัวละคร Trickster ','Loading Trickster characters ')+pct+'%')}}
+   buf=new Uint8Array(got);let o=0;for(const v of parts){buf.set(v,o);o+=v.length}}
+  else buf=new Uint8Array(await r.arrayBuffer());
+  if(buf.length<33||String.fromCharCode(buf[0],buf[1],buf[2],buf[3])!=='TKP1')throw Error(tx('ไฟล์ชุดตัวละครบนเว็บเสีย','The character set on the site is damaged'));
+  let plain;try{const key=await crypto.subtle.importKey('raw',b64u(k),'AES-GCM',false,['decrypt']);plain=await crypto.subtle.decrypt({name:'AES-GCM',iv:buf.subarray(4,16),additionalData:buf.subarray(0,4)},key,buf.subarray(16))}
+  catch(e){throw Error(tx('กุญแจในลิงก์ไม่ตรงกับชุดตัวละคร · ขอลิงก์ใหม่','The link key does not match the set · ask for a new link'))}
+  const f={name:'tk-pack.zip',blob:new Blob([plain],{type:'application/zip'})};let list=(await keepGet()).filter(x=>x.name!==f.name);list.push(f);
+  const ok=await keepPut(list);TK.files=list;TK.chars={};TK.err='';await indexAll(list);if(!ok)TK.mem=list.slice();TK.packed=(TK.packed||0)+1;return !!(TK.ids&&TK.ids.length)}
+ catch(e){TK.packErr=e.message||String(e);return false}finally{TK.packing=false}}
+TK.fetchPack=fetchPack;
 
 // ---------- NORI ----------
 function lz4(src){const out=[];let i=0;while(i<src.length){const t=src[i++];let Ln=t>>4;if(Ln===15){let b;do{b=src[i++];Ln+=b}while(b===255)}for(let k=0;k<Ln;k++)out.push(src[i++]);if(i>=src.length)break;const off=src[i]|(src[i+1]<<8);i+=2;let M=t&15;if(M===15){let b;do{b=src[i++];M+=b}while(b===255)}M+=4;for(let k=0;k<M;k++)out.push(out[out.length-off])}return Uint8Array.from(out)}
@@ -147,16 +175,19 @@ async function thumbOf(id){TK.thumbs=TK.thumbs||{};if(TK.thumbs[id])return TK.th
  if(a[2]<a[0])return null;C.box=()=>a;C.foot=a[3];return TK.thumbs[id]=thumb(C)}
 function thumb(C){const s=comp(C,animFor(C,'서있기',0),0),c=document.createElement('canvas');c.width=c.height=72;const g=c.getContext('2d');g.imageSmoothingEnabled=false;if(s&&s.cv){const k=Math.min(1,68/Math.max(s.cv.width,s.cv.height));g.drawImage(s.cv,36-s.ax*k,70-(C.foot+1)*k-s.ay*k,s.cv.width*k,s.cv.height*k)}return c}
 function openTK(){if(!gmOn())return;const owner=S;let closed=false;const live=()=>!closed&&$('tk221')&&!$('modal').classList.contains('hide')&&S===owner;
- modal(`<div id="tk221"><h2>${tx('ทดสอบตัวละคร Trickster','Trickster test')}</h2><p class="tkp">${tx('เลือก character.zip (หรือไฟล์ .nri) จากมือถือ · ไฟล์อยู่ในเครื่องนี้เท่านั้น ไม่ขึ้นเว็บ ไม่อยู่ในเซฟ · เฉพาะเซฟ GM','Pick character.zip (or .nri files) from this phone · kept on this device only · GM slot only')}</p>
-  <div class="tkrow"><label id="tk221pick" class="tkpick" role="button" tabindex="0">${tx('เลือกไฟล์…','Pick files…')}<input type="file" id="tk221file" accept=".zip,.nri,.pal,application/zip" multiple></label><p id="tk221st" class="tkp" role="status"></p></div>
+ const hasKey=!!keyGet();
+ modal(`<div id="tk221"><h2>${tx('ทดสอบตัวละคร Trickster','Trickster test')}</h2><p class="tkp">${hasKey?tx('เครื่องนี้มีกุญแจจากลิงก์ · ตัวละครโหลดจากเว็บเอง (ชุดที่ล็อกไว้) · หรือเลือก character.zip จากมือถือก็ได้ · เฉพาะเซฟ GM','This device has the link key · characters come from the site (locked set) · or pick character.zip · GM slot only'):tx('เลือก character.zip (หรือไฟล์ .nri) จากมือถือ · ไฟล์อยู่ในเครื่องนี้เท่านั้น ไม่ขึ้นเว็บ ไม่อยู่ในเซฟ · เฉพาะเซฟ GM','Pick character.zip (or .nri files) from this phone · kept on this device only · GM slot only')}</p>
+  <div class="tkrow"><label id="tk221pick" class="tkpick" role="button" tabindex="0">${tx('เลือกไฟล์…','Pick files…')}<input type="file" id="tk221file" accept=".zip,.nri,.pal,application/zip" multiple></label>${hasKey?`<button id="tk222web" class="tkpick">☁ ${tx('โหลดจากเว็บ','Load from the site')}</button>`:''}<p id="tk221st" class="tkp" role="status"></p></div>
+  <div class="tkrow"><label class="tkp" for="tk222name">${tx('ชื่อที่คนอื่นเห็น','Name others see')}</label><input id="tk222name" maxlength="12" autocomplete="off"><button id="tk222nameok">${tx('ตั้งชื่อ','Set')}</button></div>
   <h3>${tx('ตัวละคร','Character')}</h3><div id="tk221chars" class="tkgrid"></div>
   <h3>${tx('สีชุด (บางชุดทำมาให้ตัวอื่น สีอาจเพี้ยน)','Colours (some sets belong to other characters)')}</h3><div id="tk221pals" class="tkgrid small"></div>
   <h3>${tx('ลองท่า (ทิศที่หันอยู่)','Play a move (current facing)')}</h3><div id="tk221acts" class="tkgrid small"></div>
   <div class="tkb"><button id="tk221turn">⟳ ${tx('หมุนตัว','Turn')}</button><button id="tk221back">${tx('กลับตัวเดิม','Back to my character')}</button><button id="tk221del">${tx('ลบไฟล์ในเครื่อง','Delete files')}</button><button id="tk221x">${tx('ปิด','Close')}</button></div></div>`,false);
  document.querySelector('#modal>.pn')?.classList.add('tk221-panel');
  const status=s=>{if(live())$('tk221st').textContent=s};
+ TK.setStatus=status;TK.repaint=()=>paint();
  const paint=async()=>{if(!live())return;const box=$('tk221chars');box.innerHTML='';const ids=TK.ids||[];
-  if(!ids.length){status(TK.err||tx('ยังไม่มีไฟล์ · กด "เลือกไฟล์" แล้วเลือก character.zip','No file yet · pick character.zip'));}else status(tx('ตัวละคร ','Characters ')+ids.length+(TK.mem?tx(' · เครื่องนี้ไม่ยอมเก็บ ใช้ได้จนปิดเกม',' · this browser will not keep them'):''));
+  if(!ids.length){status(TK.packing?(TK.note||tx('กำลังโหลด…','Loading…')):TK.packErr||TK.err||(hasKey?tx('ยังไม่มีตัวละคร · กด "โหลดจากเว็บ"','No characters yet · press "Load from the site"'):tx('ยังไม่มีไฟล์ · กด "เลือกไฟล์" แล้วเลือก character.zip','No file yet · pick character.zip')));}else status(tx('ตัวละคร ','Characters ')+ids.length+(TK.mem?tx(' · เครื่องนี้ไม่ยอมเก็บ ใช้ได้จนปิดเกม',' · this browser will not keep them'):''));
   for(const id of ids){const b=document.createElement('button');b.className='tkopt'+(S.tk221&&S.tk221.c===id?' on':'');b.dataset.id=id;const sp=document.createElement('span');sp.textContent=id;b.appendChild(sp);box.appendChild(b);
    b.onclick=async()=>{if(!live())return;status(tx('กำลังโหลด ','Loading ')+id+'…');const ok=await apply(id,'');await paint();status(ok?tx('ใช้ ','Using ')+id:tx('ไฟล์นี้ใช้ไม่ได้: ','Not usable: ')+id)};
    TK.tq=(TK.tq||Promise.resolve()).then(()=>thumbOf(id)).then(c=>{if(c&&b.isConnected){const k=document.createElement('canvas');k.width=k.height=72;k.getContext('2d').drawImage(c,0,0);b.prepend(k)}}).catch(()=>{})}
@@ -164,7 +195,10 @@ function openTK(){if(!gmOn())return;const owner=S;let closed=false;const live=()
   const ab=$('tk221acts');ab.innerHTML='';if(S.tk221)for(const a of ACT){const b=document.createElement('button');b.className='tkopt';b.dataset.act=a[0];b.textContent=tx(a[1],a[2]);b.onclick=()=>{if(!on())return;closed=true;closeModal();play(a[0])};ab.appendChild(b)}};
  $('tk221x').onclick=()=>{closed=true;closeModal()};$('tk221back').onclick=()=>{if(!live())return;restore();closed=true;closeModal();say(tx('กลับเป็นตัวเดิมแล้ว','Your character is back'))};
  $('tk221turn').onclick=()=>{if(!live())return;P.row=((P.row||0)+1)%8};
- $('tk221del').onclick=async()=>{if(!live())return;await keepPut([]);TK.mem=null;TK.files=[];TK.ent={};TK.ids=[];TK.palIds=[];TK.chars={};if(S.tk221)restore();paint()};
+ $('tk221del').onclick=async()=>{if(!live())return;await keepPut([]);TK.mem=null;TK.files=[];TK.ent={};TK.ids=[];TK.palIds=[];TK.chars={};keySet('');TK.packErr='';TK.packTried=true;if(S.tk221)restore();paint()};
+ if($('tk222web'))$('tk222web').onclick=async()=>{if(!live()||TK.packing)return;status(tx('กำลังโหลด…','Loading…'));const ok=await fetchPack();if(live()){await paint();if(!ok)status(TK.packErr)}};
+ $('tk222name').value=S.name||'';
+ $('tk222nameok').onclick=()=>{if(!live())return;const n=String($('tk222name').value||'').replace(/[<>]/g,'').trim().slice(0,12);if(!n)return;S.name=n;save();try{if(Net.online)Net.send(true)}catch(e){}status(tx('ชื่อ ','Name ')+n)};
  $('tk221pick').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();$('tk221file').click()}};
  $('tk221file').onchange=async e=>{const fs=[...(e.target.files||[])];e.target.value='';if(!fs.length||!live())return;status(tx('กำลังอ่านไฟล์…','Reading…'));let list=await keepGet();for(const f of fs){list=list.filter(x=>x.name!==f.name);list.push({name:f.name,blob:f})}
   TK.err='';const okKeep=await keepPut(list);TK.files=list;TK.chars={};await indexAll(list);if(!okKeep)TK.mem=list.slice();paint()};
@@ -176,6 +210,24 @@ TK.open=openTK;
 #tk221 .tkrow{display:flex;gap:8px;align-items:center}#tk221 .tkpick{flex:none;display:flex;align-items:center;justify-content:center;min-height:48px;min-width:110px;padding:6px 12px;border-radius:10px;border:2px solid #ffdfa0;background:#594263;color:#ffefc8;font-weight:700;position:relative;overflow:hidden;cursor:pointer}
 #tk221 .tkpick input{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer}#tk221 .tkgrid{display:flex;flex-wrap:wrap;gap:6px;max-height:34vh;overflow:auto}#tk221 .tkgrid.small{max-height:22vh}
 #tk221 .tkopt{display:flex;flex-direction:column;align-items:center;min-width:56px;min-height:44px;padding:4px 6px;border-radius:8px;border:2px solid #ffffff22;background:#2c2340;font-size:12px}#tk221 .tkopt.on{border-color:#ffdfa0;box-shadow:inset 0 -3px 0 #ffdfa0}
+#tk221 .tkrow input{flex:1;min-width:0;min-height:44px;padding:4px 8px;border-radius:8px;border:2px solid #ffffff33;background:#2c2340;color:#fff;font-size:16px}#tk221 .tkrow>button{min-height:44px;padding:6px 12px}
+#tk222go{position:fixed;left:50%;top:max(56px,env(safe-area-inset-top));transform:translateX(-50%);z-index:9999;display:flex;gap:6px;align-items:center}#tk222go button{min-height:48px;padding:8px 14px;border-radius:12px;border:2px solid #ffdfa0;background:#594263;color:#ffefc8;font-weight:700;font-size:15px;box-shadow:0 3px 10px #0008}#tk222go #tk222no{min-width:48px;padding:8px}
 #tk221 .tkopt canvas{width:56px;height:56px;image-rendering:pixelated;pointer-events:none}#tk221 .tkopt span{pointer-events:none}#tk221 .tkb{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}#tk221 .tkb button{min-height:44px;padding:8px 12px}`;document.head.appendChild(st)}
 TK.bootP=boot().catch(()=>{TK.booted=true});
+// 2.22: a device that came from the owner's link. Not in a GM slot -> a button that makes/enters it (other slots are not touched). In the GM slot with no characters -> download the locked set once, then open the window.
+function banner(){if($('tk222go')||TK.bannerOff)return;const d=document.createElement('div');d.id='tk222go';
+ d.innerHTML=`<button id="tk222play">🎭 ${tx('เล่นตัว Trickster (ทดสอบ)','Play a Trickster character (test)')}</button><button id="tk222no" aria-label="${tx('ปิด','Close')}">✕</button>`;document.body.appendChild(d);
+ $('tk222play').onclick=()=>{try{if(S)save()}catch(e){}try{gmMakeSlot()}catch(e){return}
+  // until the page reloads the running game must not write the player it is showing into the slot that is now current (the GM one)
+  try{Store.save=function(){}}catch(e){}try{sessionStorage.setItem('la-tk222-enter','1')}catch(e){}location.reload()};$('tk222no').onclick=()=>{TK.bannerOff=true;d.remove()}}
+function tick(){try{let gm=false;try{gm=gmOn()}catch(e){}
+  // right after the button on a phone with several players: the game shows "who is playing?" -> press the GM card and "play" for them (the game's own picker code)
+  try{if(sessionStorage.getItem('la-tk222-enter')){if(gm)sessionStorage.removeItem('la-tk222-enter');else if(!S&&$('pk')){const i=Store.all().slots.findIndex(s=>s&&s.gm),c=$('pk').children[i];sessionStorage.removeItem('la-tk222-enter');if(c){c.click();const go=$('pGo');if(go)go.click();return}}}}catch(e){}
+  if(!keyGet())return;
+  if(!gm){if(!$('load'))banner();return}const b=$('tk222go');if(b)b.remove();
+  if(TK.packTried||TK.packing||(TK.ids&&TK.ids.length))return;TK.packTried=true;note(tx('กำลังโหลดตัวละคร Trickster…','Loading Trickster characters…'));
+  fetchPack().then(ok=>{note(ok?tx('ตัวละคร Trickster พร้อมแล้ว ','Trickster characters ready: ')+TK.ids.length+tx(' ตัว',''):TK.packErr);try{if(TK.repaint)TK.repaint()}catch(e){}
+   if(ok)setTimeout(()=>{try{if(gmOn()&&S&&!S.tk221&&!$('tk221')&&$('modal').classList.contains('hide'))openTK()}catch(e){}},300)})}catch(e){}}
+TK.tick=tick;
+TK.bootP.then(()=>{tick();setInterval(tick,1000)});
 })();

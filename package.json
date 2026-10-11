@@ -17,7 +17,8 @@
     "test:appearance": "node test_169_character_studio.js",
     "test:swordsman": "node test_170_swordsman.js",
     "test:local-char": "node test_220_local_sprite.js",
-    "test:tk": "node test_221_tk.js"
+    "test:tk": "node test_221_tk.js",
+    "test:tk-pack": "node test_222_tk_pack.js"
   },
   "devDependencies": {
     "puppeteer": "^23.0.0"
