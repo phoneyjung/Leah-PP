@@ -1,0 +1,452 @@
+{
+  "schema": 1,
+  "set": 8,
+  "revision": "A0b",
+  "baseMain": "d739187",
+  "status": "concept-options-awaiting-owner-selection",
+  "conceptOnly": true,
+  "preview": {
+    "file": "kid-base-a0b.png",
+    "size": [
+      1440,
+      736
+    ],
+    "background": "#76A046",
+    "rows": [
+      [
+        "ก",
+        "ข",
+        "ค",
+        "ง",
+        "จ"
+      ],
+      [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ]
+    ],
+    "largeHeight": 244,
+    "gameHeight": 61,
+    "note": "Each large and small image is sampled from the same single generated design. These are concept references, not PixelLab production sprites."
+  },
+  "sharedStyle": "Original seven-to-eight-year-old chibi children, oversized rounded heads, front-facing low top-down view. Dark chestnut hair, kind sparkling eyes, white school shirts, navy skirts for girls or navy shorts for boys, short close-hanging sun-gold capes, white socks and brown school shoes. Dark continuous outlines, broad coherent hair highlights, no hair over eyes or cheeks. No profession or weapon.",
+  "options": [
+    {
+      "id": "f-a",
+      "label": "ก",
+      "gender": "f",
+      "name": "Low braids",
+      "hair": "Two neat low braids hanging just behind the shoulders, center-parted crown, both cheeks completely clear; small navy ties.",
+      "eyes": "Large round warm-brown eyes, both equally open, each with a matching white sparkle.",
+      "eyebrows": "Soft shallow curved brows, level and relaxed.",
+      "mouth": "Small closed upturned smile.",
+      "outfit": "White collared shirt, navy pleated skirt, narrow short gold cape, white ankle socks, brown Mary Jane shoes.",
+      "preview": {
+        "largeRect": [
+          65,
+          51,
+          118,
+          244
+        ],
+        "gameRect": [
+          245,
+          234,
+          30,
+          61
+        ]
+      },
+      "sourceSha256": "6408c60c22bc4a63aae9ccbb04515af3f57a37ab615ba799bdd6bc34a85b24c0"
+    },
+    {
+      "id": "f-b",
+      "label": "ข",
+      "gender": "f",
+      "name": "Straight hair and headband",
+      "hair": "Smooth straight shoulder-length hair tucked behind the ears, narrow navy headband, clear forehead and cheeks.",
+      "eyes": "Wide oval warm-brown eyes, equal size and openness, bright matching catchlights.",
+      "eyebrows": "Thin gently arched brows.",
+      "mouth": "Tiny friendly U-shaped smile.",
+      "outfit": "White collared shirt, navy A-line skirt with two front pleats, narrow short gold cape, white socks, rounded brown shoes.",
+      "preview": {
+        "largeRect": [
+          347,
+          51,
+          114,
+          244
+        ],
+        "gameRect": [
+          526,
+          234,
+          28,
+          61
+        ]
+      },
+      "sourceSha256": "0668f825d9d1e1bb83edc0c66662dfb2c25a4e6b6e5c3520a3e95b88a68049cd"
+    },
+    {
+      "id": "f-c",
+      "label": "ค",
+      "gender": "f",
+      "name": "Rounded bob and clip",
+      "hair": "Rounded chin-length bob with ends turned inward, fringe swept above the eyebrows, one small navy side clip; no hair over either eye or cheek.",
+      "eyes": "Round slightly drooping-at-the-outer-corner eyes, fully and equally open, white highlights in both.",
+      "eyebrows": "Low soft curved brows with no inward slant.",
+      "mouth": "Small sweet closed smile.",
+      "outfit": "White short-sleeve shirt, navy pleated skirt, narrow short gold cape, white ankle socks, brown strap shoes.",
+      "preview": {
+        "largeRect": [
+          620,
+          51,
+          129,
+          244
+        ],
+        "gameRect": [
+          804,
+          234,
+          32,
+          61
+        ]
+      },
+      "sourceSha256": "5f5584c28bbb6b3902c8055f33cb50829bac8757e6b36affe1de3c920dcdc505"
+    },
+    {
+      "id": "f-d",
+      "label": "ง",
+      "gender": "f",
+      "name": "High ponytail",
+      "hair": "Single high ponytail secured with a gold tie, smooth crown and short side locks framing the face; both eyes clear.",
+      "eyes": "Large rounded almond eyes with softly raised outer corners, equally open and sparkling, no sharp corners.",
+      "eyebrows": "Soft raised arches.",
+      "mouth": "Small cheerful smile with a tiny glimpse of teeth.",
+      "outfit": "White school shirt with a navy necktie, navy pleated skirt, short gold cape, white socks and rounded brown shoes.",
+      "preview": {
+        "largeRect": [
+          909,
+          51,
+          111,
+          244
+        ],
+        "gameRect": [
+          1086,
+          234,
+          28,
+          61
+        ]
+      },
+      "sourceSha256": "855b5df49d9eacb8ceb18bf9aac53a7817b336b59320ad83179fb07fa5fd27de"
+    },
+    {
+      "id": "f-e",
+      "label": "จ",
+      "gender": "f",
+      "name": "Twin compact buns",
+      "hair": "Two compact rounded buns high behind the crown, tidy center part, clear face with no hanging pigtails or cheek strands.",
+      "eyes": "Large round button-like brown eyes, identical size and openness, clear white catchlights.",
+      "eyebrows": "Short shallow round arches.",
+      "mouth": "Tiny relaxed upturned smile.",
+      "outfit": "White collared shirt, navy A-line pleated skirt, short narrow gold cape, white ankle socks, rounded brown strap shoes.",
+      "preview": {
+        "largeRect": [
+          1184,
+          51,
+          120,
+          244
+        ],
+        "gameRect": [
+          1365,
+          234,
+          30,
+          61
+        ]
+      },
+      "sourceSha256": "79c8e5c06d5f50b737f4ac42b545c080baf040e799e44e477f845ded3362f4e8"
+    },
+    {
+      "id": "m-1",
+      "label": "1",
+      "gender": "m",
+      "name": "Soft tousled crop",
+      "hair": "Short softly tousled dark-brown crop with three broad rounded crown locks, open forehead and clear eyes.",
+      "eyes": "Large round bright brown eyes, both equally open with white catchlights.",
+      "eyebrows": "Relaxed gently lifted brows.",
+      "mouth": "Small open happy smile.",
+      "outfit": "White collared short-sleeve shirt, navy tailored shorts with visible knees, short close-hanging gold cape, white socks, brown school shoes.",
+      "preview": {
+        "largeRect": [
+          68,
+          393,
+          112,
+          244
+        ],
+        "gameRect": [
+          246,
+          576,
+          28,
+          61
+        ]
+      },
+      "sourceSha256": "bb436a3e719f99a6578d02ce5159d4b84bb585542da3f6931560d324e40c8c9c"
+    },
+    {
+      "id": "m-2",
+      "label": "2",
+      "gender": "m",
+      "name": "Neat side part",
+      "hair": "Neat short side-parted hair combed into one broad smooth wave above the eyebrows, clean sides and ears.",
+      "eyes": "Friendly horizontal oval brown eyes, equally open with bright white catchlights.",
+      "eyebrows": "Soft even shallow arches.",
+      "mouth": "Small closed confident smile.",
+      "outfit": "White tucked-in school shirt, navy straight shorts, narrow short gold cape, white ankle socks, rounded brown shoes.",
+      "preview": {
+        "largeRect": [
+          348,
+          393,
+          112,
+          244
+        ],
+        "gameRect": [
+          526,
+          576,
+          28,
+          61
+        ]
+      },
+      "sourceSha256": "8d98790e5db8b553e57d73bbdd0e13c76f025e30830b46d3befbef4ed8724efa"
+    },
+    {
+      "id": "m-3",
+      "label": "3",
+      "gender": "m",
+      "name": "Upright spikes",
+      "hair": "Short upright dark-brown hair with thick pointed spikes, tidy close sides and an open forehead.",
+      "eyes": "Big round slightly upward-curving brown eyes, equal openness and paired white highlights.",
+      "eyebrows": "Raised rounded brows without a frown.",
+      "mouth": "Broad cheerful small tooth-showing grin.",
+      "outfit": "White short-sleeve shirt, navy shorts, short narrow sun-gold cape, white socks, simple brown school shoes.",
+      "preview": {
+        "largeRect": [
+          628,
+          393,
+          112,
+          244
+        ],
+        "gameRect": [
+          806,
+          576,
+          28,
+          61
+        ]
+      },
+      "sourceSha256": "da1c2d5e0b981b3263cf4097a6dfd640812713dcc384e537ce78c6e51ff61ce0"
+    },
+    {
+      "id": "m-4",
+      "label": "4",
+      "gender": "m",
+      "name": "Soft short curls",
+      "hair": "Short rounded curly hair made of large connected curl clusters with broad highlights; no stippling, forehead and eyes clear.",
+      "eyes": "Large soft oval brown eyes, both equally open, white sparkles.",
+      "eyebrows": "Gentle curved brows.",
+      "mouth": "Small warm U-shaped smile.",
+      "outfit": "White collared shirt, navy knee-revealing shorts, close-hanging short gold cape, white ankle socks, rounded brown shoes.",
+      "preview": {
+        "largeRect": [
+          908,
+          393,
+          113,
+          244
+        ],
+        "gameRect": [
+          1086,
+          576,
+          28,
+          61
+        ]
+      },
+      "sourceSha256": "da9a18c2eebe4d8b518eebfa2616bb4066716f96730cda615baaa8f4ea177d32"
+    },
+    {
+      "id": "m-5",
+      "label": "5",
+      "gender": "m",
+      "name": "Short cut and forelock",
+      "hair": "Short tidy hair with one rounded central forelock ending well above the eyebrows, softly curved side silhouette.",
+      "eyes": "Bright round almond-shaped brown eyes, equal size and openness, white catchlights.",
+      "eyebrows": "Soft playful raised brows.",
+      "mouth": "Small gentle closed smile.",
+      "outfit": "White school shirt tucked into navy shorts, short narrow gold cape, white ankle socks, brown shoes.",
+      "preview": {
+        "largeRect": [
+          1191,
+          393,
+          107,
+          244
+        ],
+        "gameRect": [
+          1367,
+          576,
+          27,
+          61
+        ]
+      },
+      "sourceSha256": "eb652a7421c9eceb630c123b9356a37e8df446bc4b65c01abfb95740cc662141"
+    }
+  ],
+  "production": {
+    "tool": "Codex image generation",
+    "generationRequests": 10,
+    "requestsPerOption": 1,
+    "regenerations": 0,
+    "pixelLabRequests": 0,
+    "pixelLabCredits": 0,
+    "directionsPerOption": 1,
+    "layerSheets": 0,
+    "walkingFrames": 0,
+    "regionsGenerated": 0
+  },
+  "validation": {
+    "optionCount": 10,
+    "uniqueSourceImages": 10,
+    "rows": 2,
+    "largeAndGamePairs": 10,
+    "semiTransparentPreviewPixels": 0,
+    "previewBytes": 112397,
+    "measurements": [
+      {
+        "id": "f-a",
+        "large": {
+          "height": 244,
+          "width": 118,
+          "opaquePixels": 19873
+        },
+        "game": {
+          "height": 61,
+          "width": 30,
+          "opaquePixels": 1270
+        }
+      },
+      {
+        "id": "f-b",
+        "large": {
+          "height": 244,
+          "width": 114,
+          "opaquePixels": 17781
+        },
+        "game": {
+          "height": 61,
+          "width": 28,
+          "opaquePixels": 1095
+        }
+      },
+      {
+        "id": "f-c",
+        "large": {
+          "height": 244,
+          "width": 129,
+          "opaquePixels": 18842
+        },
+        "game": {
+          "height": 61,
+          "width": 32,
+          "opaquePixels": 1175
+        }
+      },
+      {
+        "id": "f-d",
+        "large": {
+          "height": 244,
+          "width": 111,
+          "opaquePixels": 16311
+        },
+        "game": {
+          "height": 61,
+          "width": 28,
+          "opaquePixels": 1024
+        }
+      },
+      {
+        "id": "f-e",
+        "large": {
+          "height": 244,
+          "width": 120,
+          "opaquePixels": 18039
+        },
+        "game": {
+          "height": 61,
+          "width": 30,
+          "opaquePixels": 1129
+        }
+      },
+      {
+        "id": "m-1",
+        "large": {
+          "height": 244,
+          "width": 112,
+          "opaquePixels": 16535
+        },
+        "game": {
+          "height": 61,
+          "width": 28,
+          "opaquePixels": 1033
+        }
+      },
+      {
+        "id": "m-2",
+        "large": {
+          "height": 244,
+          "width": 112,
+          "opaquePixels": 18026
+        },
+        "game": {
+          "height": 61,
+          "width": 28,
+          "opaquePixels": 1128
+        }
+      },
+      {
+        "id": "m-3",
+        "large": {
+          "height": 244,
+          "width": 112,
+          "opaquePixels": 16639
+        },
+        "game": {
+          "height": 61,
+          "width": 28,
+          "opaquePixels": 1044
+        }
+      },
+      {
+        "id": "m-4",
+        "large": {
+          "height": 244,
+          "width": 113,
+          "opaquePixels": 16737
+        },
+        "game": {
+          "height": 61,
+          "width": 28,
+          "opaquePixels": 1045
+        }
+      },
+      {
+        "id": "m-5",
+        "large": {
+          "height": 244,
+          "width": 107,
+          "opaquePixels": 16664
+        },
+        "game": {
+          "height": 61,
+          "width": 27,
+          "opaquePixels": 1056
+        }
+      }
+    ],
+    "ownerRatings": null
+  },
+  "nextStep": "Owner selects one girl and one boy. Claude writes the selected PixelLab prompts. Owner generates production images using Pro Flash and style-kid.png. Codex then prepares head/body layers and later walking frames from the approved production images."
+}
