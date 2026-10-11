@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.27';
+const VERSION='Lantern Academy 2.28';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -7600,4 +7600,7 @@ const SWIPE227={n:0};
 {const o=deco160Preview;deco160Preview=function(e,g){try{if(g&&g.touch&&g.active&&g.inventory&&!g.chk227&&e&&Math.hypot(e.clientX-g.startX,e.clientY-g.startY)>8){g.chk227=1;if(g.down227!=null&&e.timeStamp-g.down227<240){swipe227(g,e);return}}}catch(err){}return o.apply(this,arguments)}}
 {const o=deco160Down;deco160Down=function(e,inv){const r=o.apply(this,arguments);try{const g=D160.gesture;if(g&&g.touch&&g.timer&&!g.active&&!g.wait227){g.wait227=1;g.down227=e.timeStamp;clearTimeout(g.timer);
   g.timer=setTimeout(()=>requestAnimationFrame(()=>requestAnimationFrame(()=>{if(D160.gesture===g&&!g.cancelled&&!g.scrolling&&Math.hypot(g.last.clientX-g.startX,g.last.clientY-g.startY)<=8)deco160Begin(g)})),240)}}catch(err){}return r}}
+// ===== 2.28 (overnight): on a short phone (812×330) the create screen's fifth round button ("บ้าน" since the paperdoll put "ตัว" before it) ended 12–17 px below
+// the screen, so a child could hardly pick a house. Short screens get 50 px round buttons 4 px apart (still ≥ 44 px): the five end at about 304 px
+try{const st=document.createElement('style');st.id='rail228';st.textContent='@media (max-height:350px){#cr.c193 .rail{gap:4px!important}#cr.c193 .rail button{width:50px!important;min-width:50px!important;max-width:50px!important;height:50px!important;min-height:50px!important}#cr.c193 .rail button small{font-size:12px!important}}';document.head.appendChild(st)}catch(e){}
 </script></body></html>
