@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.22';
+const VERSION='Lantern Academy 2.23';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -7493,4 +7493,20 @@ function openLocal220(){if(!gmOn())return;const owner=S;let closed=false,sel=(S.
 // No Trickster picture is in this repo: the mode reads the owner's own character.zip from his device (IndexedDB 'la-tk221'). Without ?tk nothing changes and nothing extra is downloaded.
 // 2.22: tk-pack.bin = the same characters LOCKED (AES-256-GCM); only the owner's link (#tkk=<key>) opens it, so his family can play without picking a file. Players never fetch it.
 try{if(/[?&]tk(=|&|$)/.test(location.search)){const s=document.createElement('script');s.src='tk-test.js?v=222';s.onerror=()=>{try{say(LANG==='en'?'Trickster test file missing · the game plays as usual':'ไม่พบไฟล์ทดสอบ Trickster · เกมเล่นได้ตามปกติ')}catch(e){}};document.body.appendChild(s)}}catch(e){}
+// ================= 2.23 Claude (owner 11 Oct 22:17 "ตอนนี้เด็กตีมอนเตอร์ได้ ซึ่งผิด"): a child (under 10) never fights =================
+// the rule (STORY rule 16 · DESIGN_KID_PLAY 1): children have no HP, monsters never strike them, and they do not fight · until now a tap on a monster, the big button,
+// the steer-and-act command and the weapon/job skills still hit one · now none of them does: with nothing else nearby the big button's word for a child is
+// 👋 "โบกมือ" (a wave everyone online sees) and a monster a child taps or waves at answers with a heart · grown-ups (10 and over) are unchanged
+try{Object.assign(TX.th,{kidWave:'โบกมือ',kidFriend:'มอนสเตอร์เป็นเพื่อนของเด็ก ๆ ไม่ต้องตี 💛'});if(TX.en)Object.assign(TX.en,{kidWave:'Wave',kidFriend:'Monsters are friends of young keepers, no need to fight 💛'})}catch(e){}
+const KID223={said:0,waves:0,hearts:0};
+function kidHeart223(mo){try{if(mo){TXT.push({x:mo.x,y:mo.y-(mo.h||20)-12,s:'❤',c:'#ff7aa8',t:0});KID223.hearts++}}catch(e){}}
+function kidWave223(mo){KID223.waves++;try{sendEmote('👋')}catch(e){}try{const list=mo?[mo]:MONS.filter(o=>!o.happy&&Math.hypot(o.x-P.x,o.y-P.y)<140);list.forEach(kidHeart223);if(list.length&&performance.now()-KID223.said>8000){KID223.said=performance.now();say(t('kidFriend'))}}catch(e){}}
+{const o=attackTarget;attackTarget=function(mo){try{if(isKid()){P.target=null;kidWave223(mo);return}}catch(e){}return o.apply(this,arguments)}}
+{const o=doAttack;doAttack=function(){try{if(isKid()){P.target=null;return}}catch(e){}return o.apply(this,arguments)}}
+{const o=useSkill;useSkill=function(){try{if(isKid())return}catch(e){}return o.apply(this,arguments)}}
+{const o=useJob;useJob=function(){try{if(isKid())return}catch(e){}return o.apply(this,arguments)}}
+// the wave is only the big button's word (its painter g9bButton and its press autoAct ask with KID223.btn set) — the 1.67 balloon, the doors and the E key never see it
+{const o=anyNear;anyNear=function(){const c=o.apply(this,arguments);if(c)return c;try{if(KID223.btn&&isKid()&&S&&M&&P&&!(typeof CTX200!=='undefined'&&CTX200.mute))return {ic:'👋',k:'kidWave',fn:()=>kidWave223(),d:0}}catch(e){}return null}}   /* also while a window or a talk is open, so a child's button never reads "ตี" */
+{const o=g9bButton;g9bButton=function(){KID223.btn=1;try{return o.apply(this,arguments)}finally{KID223.btn=0}}}
+{const o=autoAct;autoAct=function(){KID223.btn=1;try{return o.apply(this,arguments)}finally{KID223.btn=0}}}
 </script></body></html>
