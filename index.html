@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.24';
+const VERSION='Lantern Academy 2.25';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -7523,4 +7523,7 @@ function pd224Body(g){return (PD219.avail.body||[]).filter(n=>g!=='m'||!pd224Ski
 {const o=crRefresh;crRefresh=function(){const r=o.apply(this,arguments);try{const el=$('cr');if(!PD219.flip224&&el&&el.classList.contains('c193')&&!el.classList.contains('hide')&&$('ck')){const want=!!pd219On(CR_STATE.age),has=el.classList.contains('pd219');
   if(want&&!PD219.ok){if(!PD219.tried)pd219Load().then(ok=>{const e2=$('cr');if(ok&&e2&&e2.classList.contains('c193')&&!e2.classList.contains('hide')&&!e2.classList.contains('pd219')&&pd219On(CR_STATE.age))flip224()})}
   else if(PD219.ok&&want!==has)flip224()}}catch(e){}return r}}
+// ===== 2.25 (overnight bug round, owner 12 Oct 00:20 "หาบั๊ก > ซ่อม > ต่อยอด > ทดสอบ"): while decorating, the corner boxes (player card, lantern bar, minimap) fade and let touches through,
+// so a piece dragged under them can still be held and moved (before: on a phone 844×390 about 1 floor tile in 10 lay under them and could not be grabbed again · BUG-34)
+try{const st=document.createElement('style');st.id='deco225';st.textContent='body.deco2 #hud,body.deco2 #mmw,body.deco2 #lampBar{pointer-events:none!important;opacity:.38!important;transition:opacity .2s}body.deco2 #hud *,body.deco2 #mmw *,body.deco2 #lampBar *{pointer-events:none!important}';document.head.appendChild(st)}catch(e){}
 </script></body></html>
