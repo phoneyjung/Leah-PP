@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.26';
+const VERSION='Lantern Academy 2.27';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -7589,4 +7589,15 @@ const OTH226={pd:null,cache:new Map(),drawn:0};
 // of a player already in the list goes to that player's slot (the list stays on "no current player" while switching), and never overwrites another player's slot
 {const o=Store.save;Store.save=function(s){try{if(s&&typeof s==='object'){if(!s.sid)s.sid=Date.now().toString(36)+Math.random().toString(36).slice(2,8);const d=this.all(),own=d.slots.findIndex(x=>x&&x.sid===s.sid);
   if(own>=0&&own!==d.cur){d.slots[own]=s;this.put(d);return}}}catch(e){}return o.apply(this,arguments)}}
+// ===== 2.27 (overnight bug round): a quick swipe on the decorating list of a busy phone placed a piece on the floor instead of scrolling the list
+// (BUG-37: the 240 ms hold timer ran before the finger's moves were handled; measured 4/4 with the page busy 300 ms). The hold now waits two more frames,
+// so the moves already on their way are handled first; a finger that moved > 8 px by then scrolls as before
+// and when the moves still arrive after the hold began, their own time decides: a finger that moved > 8 px within 240 ms of landing was a swipe — the piece goes
+// back (nothing placed, nothing used) and the list scrolls with the finger
+function swipe227(g,e){g.active=false;g.cancelled=true;g.scrolling=true;D160.preview=null;D160.lastKey='';document.body.classList.remove('deco160-drag');if(D160.pauseOwned){PAUSE=D160.wasPause;D160.pauseOwned=false}
+  const st=$('deco160Status');if(st){st.textContent='';delete st.dataset.valid}try{g.inventory.parentElement.scrollTop=g.scrollStart-(e.clientY-g.startY)}catch(err){}SWIPE227.n++}
+const SWIPE227={n:0};
+{const o=deco160Preview;deco160Preview=function(e,g){try{if(g&&g.touch&&g.active&&g.inventory&&!g.chk227&&e&&Math.hypot(e.clientX-g.startX,e.clientY-g.startY)>8){g.chk227=1;if(g.down227!=null&&e.timeStamp-g.down227<240){swipe227(g,e);return}}}catch(err){}return o.apply(this,arguments)}}
+{const o=deco160Down;deco160Down=function(e,inv){const r=o.apply(this,arguments);try{const g=D160.gesture;if(g&&g.touch&&g.timer&&!g.active&&!g.wait227){g.wait227=1;g.down227=e.timeStamp;clearTimeout(g.timer);
+  g.timer=setTimeout(()=>requestAnimationFrame(()=>requestAnimationFrame(()=>{if(D160.gesture===g&&!g.cancelled&&!g.scrolling&&Math.hypot(g.last.clientX-g.startX,g.last.clientY-g.startY)<=8)deco160Begin(g)})),240)}}catch(err){}return r}}
 </script></body></html>
