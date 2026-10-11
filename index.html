@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.23';
+const VERSION='Lantern Academy 2.24';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -7280,7 +7280,7 @@ try{Object.assign(TX.th,{pd219Body:'ตัว',pd219BodyQ:'ตัว · เล�
   pd219eyes1:'ตากลม',pd219eyes2:'ตายิ้ม',pd219eyes3:'ตาง่วง',pd219mouth1:'ยิ้มเล็ก',pd219mouth2:'อ้าปาก',pd219mouth3:'ยิ้มกว้าง',pd219body1:'กระโปรง',pd219body2:'ขาสั้น'});
  if(TX.en)Object.assign(TX.en,{pd219Body:'Body',pd219BodyQ:'Body · clothes',pd219Face:'Face',pd219Eyes:'Eyes',pd219EyeCol:'Colour',pd219Skin:'Skin',pd219hair1:'Braids',pd219hair2:'Short',pd219hair3:'Buns',pd219face1:'Plain',pd219face2:'Freckles',
   pd219eyes1:'Round',pd219eyes2:'Smiley',pd219eyes3:'Sleepy',pd219mouth1:'Smile',pd219mouth2:'Open',pd219mouth3:'Grin',pd219body1:'Skirt',pd219body2:'Shorts'})}catch(e){}
-function pd219On(){try{return PD219.live||art195()}catch(e){return false}}
+function pd219On(age){try{return PD219.live||art195()||(PD219.kids&&age!=null&&+age<10)}catch(e){return false}}   /* 2.24: every child under 10 (owner 11 Oct 22:5x, after Leah played it); GM any age */
 function pd219File(part,n){const p=PD219.d&&PD219.d.parts.find(q=>q.part===part&&q.option===n);return p?p.file:null}
 function pd219Look(o){return !!(o&&o.v===1&&PD219.P.every(k=>Number.isInteger(o[k])&&o[k]>=1&&(!PD219.ok||PD219.avail[k].includes(o[k]))))}
 function pd219Load(){if(PD219.ok||PD219.tried)return Promise.resolve(PD219.ok);if(PD219.pending)return PD219.pending;const G=['hair','eye','skin','mouth','coat'];
@@ -7338,24 +7338,24 @@ function pd219World(o,house){const F=64,{full,stand}=pd219Full(o,house);let walk
   walk=document.createElement('canvas');walk.width=6*F;walk.height=8*F;const g=walk.getContext('2d');g.imageSmoothingEnabled=false;
   const av=PD219.d.availableFrames||[],real=[8,9,10,11,12,13].every(i=>av.includes(i));
   for(let r=0;r<8;r++)for(let f=0;f<6;f++){if(r===0&&real)g.drawImage(full,(8+f)*F,0,F,F,f*F,0,F,F);else g.drawImage(stand,r*F,0,F,F,f*F,r*F+AD201.bob[f],F,F)}return {stand,walk,real:false}}
-{const old=buildPlayerSheets;buildPlayerSheets=function(){const r=old.apply(this,arguments);PS.pd219=false;try{if(!S||!S.pd219||PS.gmSprite170||(typeof look169Valid==='function'&&look169Valid(S.appearance169))||!pd219On())return r;
+{const old=buildPlayerSheets;buildPlayerSheets=function(){const r=old.apply(this,arguments);PS.pd219=false;try{if(!S||!S.pd219||PS.gmSprite170||(typeof look169Valid==='function'&&look169Valid(S.appearance169))||!pd219On(S.age))return r;
   if(!PD219.ok){const owner=S;if(!PD219.tried)pd219Load().then(ok=>{if(ok&&S===owner)try{buildPlayerSheets()}catch(e){}});return r}if(!pd219Look(S.pd219))return r;
   const w=pd219World(S.pd219,S.house);PS.stand=w.stand;PS.walk=w.walk;PS.pdWalk219=w.real;PS.F=64;PS.silS=silOf(PS.stand);PS.silW=silOf(PS.walk);PS.sc=0;PS.shS=blurSheet(PS.silS);PS.shW=blurSheet(PS.silW);PS.pd219=true}catch(e){}return r}}
 // the HUD portrait (1.49) redraws when its key changes: the pieces join the key
-{const o=ui149Portrait;ui149Portrait=function(){try{const k=S&&S.pd219&&PD219.ok&&pd219On()?JSON.stringify(S.pd219):'';if(k!==PD219.hud){PD219.hud=k;UI149.portraitKey=null}}catch(e){}return o.apply(this,arguments)}}
+{const o=ui149Portrait;ui149Portrait=function(){try{const k=S&&S.pd219&&PD219.ok&&pd219On(S.age)?JSON.stringify(S.pd219):'';if(k!==PD219.hud){PD219.hud=k;UI149.portraitKey=null}}catch(e){}return o.apply(this,arguments)}}
 // portraits: the select screen's slot (pkDraw193 marks it), the gender screen's two children (their defaults), the player's own (a call without colours, like 1.94)
-{const o=crSheet;crSheet=function(k,h,hc,ec,ap,dye){try{if(PD219.ok&&pd219On()){if(PD219.slot)return pd219Full(PD219.slot.pd219,h).stand;
+{const o=crSheet;crSheet=function(k,h,hc,ec,ap,dye){try{if(PD219.ok){if(PD219.slot)return pd219Full(PD219.slot.pd219,h).stand;
   if(PD219.gen)return pd219Full(Object.assign({v:1},PD219.def[genderOf194(k)]),h).stand;
-  if(dye===undefined&&S&&pd219Look(S.pd219)&&k===S.kid&&h===S.house&&!(typeof look169Valid==='function'&&look169Valid(ap)))return pd219Full(S.pd219,h).stand}}catch(e){}return o.apply(this,arguments)}}
-{const o=pkDraw193;pkDraw193=function(){try{const s0=Store.all().slots[C193.pick];PD219.slot=PD219.ok&&pd219On()&&s0&&pd219Look(s0.pd219)?s0:null}catch(e){PD219.slot=null}try{return o.apply(this,arguments)}finally{PD219.slot=null}}}
-function pd219PickList(d){if(!pd219On())return;const sl=((d&&d.slots)||Store.all().slots||[]);if(!sl.some(s=>s&&s.pd219))return;
+  if(dye===undefined&&S&&pd219On(S.age)&&pd219Look(S.pd219)&&k===S.kid&&h===S.house&&!(typeof look169Valid==='function'&&look169Valid(ap)))return pd219Full(S.pd219,h).stand}}catch(e){}return o.apply(this,arguments)}}
+{const o=pkDraw193;pkDraw193=function(){try{const s0=Store.all().slots[C193.pick];PD219.slot=PD219.ok&&s0&&pd219On(s0.age)&&pd219Look(s0.pd219)?s0:null}catch(e){PD219.slot=null}try{return o.apply(this,arguments)}finally{PD219.slot=null}}}
+function pd219PickList(d){const sl=((d&&d.slots)||Store.all().slots||[]);if(!sl.some(s=>s&&s.pd219&&pd219On(s.age)))return;
   if(!PD219.ok){if(!PD219.tried)pd219Load().then(ok=>{const el=$('cr');if(ok&&el&&el.classList.contains('p193')&&!el.classList.contains('hide')){pd219PickList(d);try{pkDraw193()}catch(e){}}});return}
   document.querySelectorAll('#pk .pn').forEach((b,i)=>{const s=sl[i],c=b.querySelector('canvas');if(!s||!c||!pd219Look(s.pd219))return;const g=c.getContext('2d');g.clearRect(0,0,c.width,c.height);g.imageSmoothingEnabled=false;g.drawImage(pd219Full(s.pd219,s.house).stand,0,0,64,64,-8,-4,80,80)})}
 {const o=openPicker;openPicker=function(d){try{$('cr').classList.remove('pd219')}catch(e){}const r=o.apply(this,arguments);try{pd219PickList(d)}catch(e){}return r}}
-{const o=gDraw194;gDraw194=function(){PD219.gen=!!(PD219.ok&&pd219On());try{return o.apply(this,arguments)}finally{PD219.gen=false}}}
-{const o=openGender194;openGender194=function(){CR_STATE.pd=null;try{$('cr').classList.remove('pd219')}catch(e){}const r=o.apply(this,arguments);try{if(pd219On()&&!PD219.tried)pd219Load().then(ok=>{const el=$('cr');if(ok&&el&&el.classList.contains('g194')&&!el.classList.contains('hide'))gDraw194()})}catch(e){}return r}}
+{const o=gDraw194;gDraw194=function(){PD219.gen=!!(PD219.ok&&pd219On(CR_STATE.age));try{return o.apply(this,arguments)}finally{PD219.gen=false}}}
+{const o=openGender194;openGender194=function(){CR_STATE.pd=null;try{$('cr').classList.remove('pd219')}catch(e){}const r=o.apply(this,arguments);try{if(pd219On(CR_STATE.age)&&!PD219.tried)pd219Load().then(ok=>{const el=$('cr');if(ok&&el&&el.classList.contains('g194')&&!el.classList.contains('hide'))gDraw194()})}catch(e){}return r}}
 // ---- the create screen ----
-function pd219Mode(){const el=$('cr');return !!(PD219.ok&&pd219On()&&el&&el.classList.contains('pd219')&&el.classList.contains('c193')&&CR_STATE.pd)}
+function pd219Mode(){const el=$('cr');return !!(PD219.ok&&pd219On(CR_STATE.age)&&el&&el.classList.contains('pd219')&&el.classList.contains('c193')&&CR_STATE.pd)}
 function pd219Cur(){const p=CR_STATE.pd;return {v:1,hair:p.hair,face:p.face,eyes:p.eyes,mouth:p.mouth,body:p.body,hc:CR_STATE.hcol??-1,ec:CR_STATE.ecol??-1,tn:p.tn}}
 function pd219Name(part,n){const k='pd219'+part+n;if(TX.th[k])return t(k);const p=PD219.d.parts.find(q=>q.part===part&&q.option===n);return p?(LANG==='en'?p.nameEn:p.nameTh):String(n)}
 function pd219Thumb(cv,o,house,part){if(!cv)return;const [x0,y0,n]=PD219.crop[part],dpr=Math.min(3,devicePixelRatio||1),css=cv.clientWidth||52,k=Math.max(1,Math.ceil(css*dpr/n));if(cv.width!==n*k){cv.width=cv.height=n*k}
@@ -7363,7 +7363,7 @@ function pd219Thumb(cv,o,house,part){if(!cv)return;const [x0,y0,n]=PD219.crop[pa
 function pd219Opts(host,part){host.innerHTML='';for(const n of PD219.avail[part]){const b=document.createElement('button');b.type='button';b.className='opt';b.dataset.pd=part;b.dataset.n=n;const c=document.createElement('canvas');c.width=c.height=52;
   const s=document.createElement('span');s.textContent=pd219Name(part,n);b.append(c,s);b.onclick=()=>{if(!CR_STATE.pd)return;CR_STATE.pd[part]=n;crRefresh()};host.append(b)}}
 function pd219Tap(b,fn){b.addEventListener('pointerup',e=>{if(e.button>0)return;b._t219=performance.now();fn()});b.addEventListener('click',()=>{if(performance.now()-(b._t219||0)<600)return;fn()})}
-function pd219Build(){const el=$('cr');if(!el||!el.classList.contains('c193')||!$('ck'))return;const on=!!(PD219.ok&&pd219On());el.classList.toggle('pd219',on);if(!on||$('pd219hair'))return;
+function pd219Build(){const el=$('cr');if(!el||!el.classList.contains('c193')||!$('ck'))return;const on=!!(PD219.ok&&pd219On(CR_STATE.age));el.classList.toggle('pd219',on);if(!on||$('pd219hair'))return;
   const mk=(id,part,cls)=>{const d=document.createElement('div');d.id=id;d.className='pd219g'+(cls?' '+cls:'');pd219Opts(d,part);return d},h3=k=>{const h=document.createElement('h3');h.className='pd219h';h.textContent=t(k);return h};
   $('ck').after(mk('pd219hair','hair'));
   // the face: four small tabs — face (with the skin tone) · eyes · eye colour (the 1.94 swatches as they were) · mouth
@@ -7388,7 +7388,7 @@ function pd219Refresh(){const el=$('cr'),gd=CR_STATE.gender==='m'?'m':'f';if(!CR
   if(C193.tab==='body'&&$('c3Hd'))$('c3Hd').textContent=t('pd219BodyQ')}
 {const o=crSheetNow194;crSheetNow194=function(k){try{if(pd219Mode())return pd219Full(pd219Cur(),CR_STATE.house).stand}catch(e){}return o.apply(this,arguments)}}
 {const o=crRefresh;crRefresh=function(){const r=o.apply(this,arguments);try{const el=$('cr');if(el&&el.classList.contains('pd219')&&el.classList.contains('c193')&&PD219.ok)pd219Refresh()}catch(e){}return r}}
-{const o=openCreator;openCreator=function(){const r=o.apply(this,arguments);try{const el=$('cr');if(el&&el.classList.contains('c193')){if(PD219.ok||!pd219On()){pd219Build();if(PD219.ok)crRefresh()}
+{const o=openCreator;openCreator=function(){const r=o.apply(this,arguments);try{const el=$('cr');if(el&&el.classList.contains('c193')){if(PD219.ok||!pd219On(CR_STATE.age)){pd219Build();if(PD219.ok)crRefresh()}
   else pd219Load().then(ok=>{const e2=$('cr');if(ok&&e2&&e2.classList.contains('c193')&&!e2.classList.contains('hide')){pd219Build();crRefresh()}})}}catch(e){}return r}}
 // a new save made on the paperdoll screen keeps its pieces (S.kid stays the gender's own sprite for a device without GM)
 {const o=newSave;newSave=function(){const s=o.apply(this,arguments);try{if(s&&pd219Mode()){const c=pd219Cur();if(pd219Look(c))s.pd219=c}}catch(e){}return s}}
@@ -7509,4 +7509,18 @@ function kidWave223(mo){KID223.waves++;try{sendEmote('👋')}catch(e){}try{const
 {const o=anyNear;anyNear=function(){const c=o.apply(this,arguments);if(c)return c;try{if(KID223.btn&&isKid()&&S&&M&&P&&!(typeof CTX200!=='undefined'&&CTX200.mute))return {ic:'👋',k:'kidWave',fn:()=>kidWave223(),d:0}}catch(e){}return null}}   /* also while a window or a talk is open, so a child's button never reads "ตี" */
 {const o=g9bButton;g9bButton=function(){KID223.btn=1;try{return o.apply(this,arguments)}finally{KID223.btn=0}}}
 {const o=autoAct;autoAct=function(){KID223.btn=1;try{return o.apply(this,arguments)}finally{KID223.btn=0}}}
+// ===== 2.24 (owner 11 Oct 22:5x "เปิดให้เด็ก < 10 เลย", after Leah played the GM screen): the paperdoll create screen (set 07 pieces) for every child under 10, GM or not · 10+ and grown-ups keep the 1.93 screen
+PD219.kids=true;
+// choosing an age across 10 on the create screen swaps the screen (pieces under 10, the 1.93 sprites at 10+), loading the pieces the first time; a missing pd-kid.json leaves the 1.93 screen
+function flip224(){PD219.flip224=1;try{$('cr').classList.remove('pd219');openCreator()}finally{PD219.flip224=0}}
+// the 1.93 screen opens on its own tabs: the paperdoll's body tab and face/eyes sub-tabs go back to age and eye colour (the paperdoll screen moves them again when it builds)
+{const o=openCreator;openCreator=function(){try{if(!(PD219.ok&&pd219On(CR_STATE.age))){if(C193.tab==='body')C193.tab='age';if(C193.sub&&(C193.sub.face==='face'||C193.sub.face==='eyes'))C193.sub.face='eye'}else if(C193.tab==='hat')C193.tab='body'}catch(e){}return o.apply(this,arguments)}}
+// boys never wear the skirt (owner 11 Oct 23:39 "ชุดผู้ชายไม่ใส่กระโปรง และควรแตกต่างกับผู้หญิง" → "ชายเห็นแค่ขาสั้น หญิงเลือกได้ 2"): for ♂ the skirt button hides and a skirt (dice, a switch from ♀) becomes the first other body; girls keep every body
+function pd224Skirt(n){try{const p=PD219.d&&PD219.d.parts.find(q=>q.part==='body'&&q.option===+n);return !!(p&&/skirt/i.test(p.nameEn||''))}catch(e){return false}}
+function pd224Body(g){return (PD219.avail.body||[]).filter(n=>g!=='m'||!pd224Skirt(n))}
+{const o=pd219Refresh;pd219Refresh=function(){try{const p=CR_STATE.pd;if(p&&CR_STATE.gender==='m'&&pd224Skirt(p.body)){const b=pd224Body('m');if(b.length)p.body=b[0]}}catch(e){}const r=o.apply(this,arguments);
+  try{const m=CR_STATE.gender==='m';document.querySelectorAll('#pd219body .opt').forEach(b=>{b.style.display=m&&pd224Skirt(b.dataset.n)?'none':''})}catch(e){}return r}}
+{const o=crRefresh;crRefresh=function(){const r=o.apply(this,arguments);try{const el=$('cr');if(!PD219.flip224&&el&&el.classList.contains('c193')&&!el.classList.contains('hide')&&$('ck')){const want=!!pd219On(CR_STATE.age),has=el.classList.contains('pd219');
+  if(want&&!PD219.ok){if(!PD219.tried)pd219Load().then(ok=>{const e2=$('cr');if(ok&&e2&&e2.classList.contains('c193')&&!e2.classList.contains('hide')&&!e2.classList.contains('pd219')&&pd219On(CR_STATE.age))flip224()})}
+  else if(PD219.ok&&want!==has)flip224()}}catch(e){}return r}}
 </script></body></html>
