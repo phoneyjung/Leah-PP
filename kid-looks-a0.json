@@ -1,0 +1,1003 @@
+{
+  "schema": 1,
+  "set": 8,
+  "revision": "A0c",
+  "specRevision": 4,
+  "baseMain": "992e8cf",
+  "status": "concept-options-awaiting-owner-review-per-option",
+  "conceptOnly": true,
+  "preview": {
+    "file": "kid-looks-a0.png",
+    "size": [
+      2280,
+      736
+    ],
+    "background": "#76A046",
+    "rows": {
+      "top": "girls 1–8",
+      "bottom": "boys 1–8"
+    },
+    "largeHeight": 244,
+    "gameHeight": 61,
+    "note": "One generated source per design, sampled twice for comparison. Concept art only, not native PixelLab production sprites."
+  },
+  "sharedOutfit": {
+    "f": "White short-sleeve school shirt, navy pleated skirt, white socks, brown strap shoes.",
+    "m": "White short-sleeve school shirt, navy shorts, white socks, brown school shoes.",
+    "house": "Small gold neckerchief around the back of the neck, tied on the upper chest with short tails. No cape.",
+    "bodyReuse": "A0b girl ก / boy 1 supplied as shared body references in each request. These independently generated concept bodies are not yet shared pixel-identical body assets; exact body reuse belongs to the later layered production stage."
+  },
+  "options": [
+    {
+      "id": "f1",
+      "gender": "f",
+      "number": 1,
+      "name": "สดใส",
+      "personality": "Sunny",
+      "a0bBase": null,
+      "kind": "new",
+      "hair": "Two HIGH long flowing pigtails tied near the upper sides of the head, extending down behind the shoulders, open face. Not low braids.",
+      "hairColor": "auburn red-brown",
+      "skin": "medium warm peach",
+      "skinClass": "medium",
+      "eyes": "Large round sparkling eyes, equally wide open.",
+      "eyebrows": "Raised happy curved eyebrows.",
+      "mouth": "Wide joyful tooth-showing grin, clear white tooth band.",
+      "outfit": "White short-sleeve collared school shirt tucked into a navy pleated skirt, white ankle socks and rounded brown strap shoes.",
+      "scarf": "Small SUN-GOLD neckerchief wrapping around the back of the neck, tied in a small knot on the upper chest with TWO short pointed tails; narrow folded gold collar visible at the neck sides. Bare white shirt shoulders and sleeves. No cape, no cloak, no gold fabric behind the arms or legs.",
+      "pixelLabPrompt": "Original girl player character, age 7–8, oversized chibi head and small child body. Front-facing low top-down standing view. Two HIGH long flowing pigtails tied near the upper sides of the head, extending down behind the shoulders, open face. Not low braids. Hair color: auburn red-brown. Skin: medium warm peach. Large round sparkling eyes, equally wide open. Raised happy curved eyebrows. Wide joyful tooth-showing grin, clear white tooth band. White short-sleeve collared school shirt tucked into a navy pleated skirt, white ankle socks and rounded brown strap shoes. Small SUN-GOLD neckerchief wrapping around the back of the neck, tied in a small knot on the upper chest with TWO short pointed tails; narrow folded gold collar visible at the neck sides. Bare white shirt shoulders and sleeves. No cape, no cloak, no gold fabric behind the arms or legs. Gentle youthful face. Match style-kid.png: crisp pixel clusters, continuous dark outlines, upper-left light, simple coherent highlights. Native 64x64 transparent sprite, total painted height 60–62 pixels, soles on row 62, centered at x32, at least one transparent pixel around the silhouette. Both eyes have equal openness for this expression; hair never covers eyes. Original character, distinct from the village NPC family.",
+      "preview": {
+        "largeRect": [
+          45,
+          51,
+          159,
+          244
+        ],
+        "gameRect": [
+          240,
+          234,
+          40,
+          61
+        ],
+        "gameCellRect": [
+          228,
+          232,
+          64,
+          64
+        ],
+        "feetRowWithinGameCell": 62
+      },
+      "sourceSha256": "99df4e3480396873af8d209718b46097c4e47d35dc70eb6a860249682b554735",
+      "ownerApproval": null
+    },
+    {
+      "id": "f2",
+      "gender": "f",
+      "number": 2,
+      "name": "นักสำรวจ",
+      "personality": "Explorer",
+      "a0bBase": null,
+      "kind": "new",
+      "hair": "Short tousled jaw-length bob, uneven chunky outward tips and one clear upward cowlick at the crown.",
+      "hairColor": "warm light brown",
+      "skin": "warm tan caramel",
+      "skinClass": "tan",
+      "eyes": "Wide curious round eyes, both equally open.",
+      "eyebrows": "Both eyebrows visibly raised high in curiosity.",
+      "mouth": "Small open round O mouth, a surprised curious expression.",
+      "outfit": "White short-sleeve collared school shirt tucked into a navy pleated skirt, white ankle socks and rounded brown strap shoes.",
+      "scarf": "Small SUN-GOLD neckerchief wrapping around the back of the neck, tied in a small knot on the upper chest with TWO short pointed tails; narrow folded gold collar visible at the neck sides. Bare white shirt shoulders and sleeves. No cape, no cloak, no gold fabric behind the arms or legs.",
+      "pixelLabPrompt": "Original girl player character, age 7–8, oversized chibi head and small child body. Front-facing low top-down standing view. Short tousled jaw-length bob, uneven chunky outward tips and one clear upward cowlick at the crown. Hair color: warm light brown. Skin: warm tan caramel. Wide curious round eyes, both equally open. Both eyebrows visibly raised high in curiosity. Small open round O mouth, a surprised curious expression. White short-sleeve collared school shirt tucked into a navy pleated skirt, white ankle socks and rounded brown strap shoes. Small SUN-GOLD neckerchief wrapping around the back of the neck, tied in a small knot on the upper chest with TWO short pointed tails; narrow folded gold collar visible at the neck sides. Bare white shirt shoulders and sleeves. No cape, no cloak, no gold fabric behind the arms or legs. Gentle youthful face. Match style-kid.png: crisp pixel clusters, continuous dark outlines, upper-left light, simple coherent highlights. Native 64x64 transparent sprite, total painted height 60–62 pixels, soles on row 62, centered at x32, at least one transparent pixel around the silhouette. Both eyes have equal openness for this expression; hair never covers eyes. Original character, distinct from the village NPC family.",
+      "preview": {
+        "largeRect": [
+          335,
+          51,
+          138,
+          244
+        ],
+        "gameRect": [
+          523,
+          234,
+          34,
+          61
+        ],
+        "gameCellRect": [
+          508,
+          232,
+          64,
+          64
+        ],
+        "feetRowWithinGameCell": 62
+      },
+      "sourceSha256": "de27105a0745a4e9a7141a4d595a804e28f35e01800e2dae5813533036defe69",
+      "ownerApproval": null
+    },
+    {
+      "id": "f3",
+      "gender": "f",
+      "number": 3,
+      "name": "ใจดี",
+      "personality": "Kind",
+      "a0bBase": "ก",
+      "kind": "adaptation",
+      "hair": "Two tidy LOW BRAIDS beside the neck, broad coherent hair highlights, face fully clear.",
+      "hairColor": "dark chestnut brown",
+      "skin": "fair warm ivory",
+      "skinClass": "fair",
+      "eyes": "Matching upward-curved smiling crescent eyes, both gently closed to the same degree.",
+      "eyebrows": "Soft low rounded arches.",
+      "mouth": "Gentle closed U-shaped smile.",
+      "outfit": "White short-sleeve collared school shirt tucked into a navy pleated skirt, white ankle socks and rounded brown strap shoes.",
+      "scarf": "Small SUN-GOLD neckerchief wrapping around the back of the neck, tied in a small knot on the upper chest with TWO short pointed tails; narrow folded gold collar visible at the neck sides. Bare white shirt shoulders and sleeves. No cape, no cloak, no gold fabric behind the arms or legs.",
+      "pixelLabPrompt": "Original girl player character, age 7–8, oversized chibi head and small child body. Front-facing low top-down standing view. Two tidy LOW BRAIDS beside the neck, broad coherent hair highlights, face fully clear. Hair color: dark chestnut brown. Skin: fair warm ivory. Matching upward-curved smiling crescent eyes, both gently closed to the same degree. Soft low rounded arches. Gentle closed U-shaped smile. White short-sleeve collared school shirt tucked into a navy pleated skirt, white ankle socks and rounded brown strap shoes. Small SUN-GOLD neckerchief wrapping around the back of the neck, tied in a small knot on the upper chest with TWO short pointed tails; narrow folded gold collar visible at the neck sides. Bare white shirt shoulders and sleeves. No cape, no cloak, no gold fabric behind the arms or legs. Gentle youthful face. Match style-kid.png: crisp pixel clusters, continuous dark outlines, upper-left light, simple coherent highlights. Native 64x64 transparent sprite, total painted height 60–62 pixels, soles on row 62, centered at x32, at least one transparent pixel around the silhouette. Both eyes have equal openness for this expression; hair never covers eyes. Original character, distinct from the village NPC family.",
+      "preview": {
+        "largeRect": [
+          628,
+          51,
+          113,
+          244
+        ],
+        "gameRect": [
+          806,
+          234,
+          28,
+          61
+        ],
+        "gameCellRect": [
+          788,
+          232,
+          64,
+          64
+        ],
+        "feetRowWithinGameCell": 62
+      },
+      "sourceSha256": "b81f0a6b186c3ad533df29bf2ec5cce78ba8e241379fc5c5ffb0287ef43014c2",
+      "ownerApproval": null
+    },
+    {
+      "id": "f4",
+      "gender": "f",
+      "number": 4,
+      "name": "กล้าหาญ",
+      "personality": "Brave",
+      "a0bBase": null,
+      "kind": "new",
+      "hair": "Short side-swept pixie hair with ONE distinctly longer side lock beside the right cheek, ending at the shoulder; swept fringe stays above eyes.",
+      "hairColor": "soft near-black brown",
+      "skin": "warm tan caramel",
+      "skinClass": "tan",
+      "eyes": "Soft confident almond eyes, both equally open.",
+      "eyebrows": "Level relaxed confident brows, no inward frown.",
+      "mouth": "Closed asymmetric one-corner smile, kind and self-assured.",
+      "outfit": "White short-sleeve collared school shirt tucked into a navy pleated skirt, white ankle socks and rounded brown strap shoes.",
+      "scarf": "Small SUN-GOLD neckerchief wrapping around the back of the neck, tied in a small knot on the upper chest with TWO short pointed tails; narrow folded gold collar visible at the neck sides. Bare white shirt shoulders and sleeves. No cape, no cloak, no gold fabric behind the arms or legs.",
+      "pixelLabPrompt": "Original girl player character, age 7–8, oversized chibi head and small child body. Front-facing low top-down standing view. Short side-swept pixie hair with ONE distinctly longer side lock beside the right cheek, ending at the shoulder; swept fringe stays above eyes. Hair color: soft near-black brown. Skin: warm tan caramel. Soft confident almond eyes, both equally open. Level relaxed confident brows, no inward frown. Closed asymmetric one-corner smile, kind and self-assured. White short-sleeve collared school shirt tucked into a navy pleated skirt, white ankle socks and rounded brown strap shoes. Small SUN-GOLD neckerchief wrapping around the back of the neck, tied in a small knot on the upper chest with TWO short pointed tails; narrow folded gold collar visible at the neck sides. Bare white shirt shoulders and sleeves. No cape, no cloak, no gold fabric behind the arms or legs. Gentle youthful face. Match style-kid.png: crisp pixel clusters, continuous dark outlines, upper-left light, simple coherent highlights. Native 64x64 transparent sprite, total painted height 60–62 pixels, soles on row 62, centered at x32, at least one transparent pixel around the silhouette. Both eyes have equal openness for this expression; hair never covers eyes. Original character, distinct from the village NPC family.",
+      "preview": {
+        "largeRect": [
+          903,
+          51,
+          122,
+          244
+        ],
+        "gameRect": [
+          1085,
+          234,
+          31,
+          61
+        ],
+        "gameCellRect": [
+          1068,
+          232,
+          64,
+          64
+        ],
+        "feetRowWithinGameCell": 62
+      },
+      "sourceSha256": "86b9c9145545f0a94be373d279c2a210207f71ed5902728f45985f7a09de90db",
+      "ownerApproval": null
+    },
+    {
+      "id": "f5",
+      "gender": "f",
+      "number": 5,
+      "name": "นักคิด",
+      "personality": "Thinker",
+      "a0bBase": "ค",
+      "kind": "adaptation",
+      "hair": "Smooth rounded chin-length bob, a navy rectangular clip above the left temple, clear eye area; thin round navy glasses.",
+      "hairColor": "reddish chestnut brown",
+      "skin": "medium warm peach",
+      "skinClass": "medium",
+      "eyes": "Calm open oval eyes visible through two thin ROUND glasses lenses.",
+      "eyebrows": "Even gently arched eyebrows.",
+      "mouth": "Tiny centered peaceful closed smile.",
+      "outfit": "White short-sleeve collared school shirt tucked into a navy pleated skirt, white ankle socks and rounded brown strap shoes.",
+      "scarf": "Small SUN-GOLD neckerchief wrapping around the back of the neck, tied in a small knot on the upper chest with TWO short pointed tails; narrow folded gold collar visible at the neck sides. Bare white shirt shoulders and sleeves. No cape, no cloak, no gold fabric behind the arms or legs.",
+      "pixelLabPrompt": "Original girl player character, age 7–8, oversized chibi head and small child body. Front-facing low top-down standing view. Smooth rounded chin-length bob, a navy rectangular clip above the left temple, clear eye area; thin round navy glasses. Hair color: reddish chestnut brown. Skin: medium warm peach. Calm open oval eyes visible through two thin ROUND glasses lenses. Even gently arched eyebrows. Tiny centered peaceful closed smile. White short-sleeve collared school shirt tucked into a navy pleated skirt, white ankle socks and rounded brown strap shoes. Small SUN-GOLD neckerchief wrapping around the back of the neck, tied in a small knot on the upper chest with TWO short pointed tails; narrow folded gold collar visible at the neck sides. Bare white shirt shoulders and sleeves. No cape, no cloak, no gold fabric behind the arms or legs. Gentle youthful face. Match style-kid.png: crisp pixel clusters, continuous dark outlines, upper-left light, simple coherent highlights. Native 64x64 transparent sprite, total painted height 60–62 pixels, soles on row 62, centered at x32, at least one transparent pixel around the silhouette. Both eyes have equal openness for this expression; hair never covers eyes. Original character, distinct from the village NPC family.",
+      "preview": {
+        "largeRect": [
+          1183,
+          51,
+          122,
+          244
+        ],
+        "gameRect": [
+          1365,
+          234,
+          31,
+          61
+        ],
+        "gameCellRect": [
+          1348,
+          232,
+          64,
+          64
+        ],
+        "feetRowWithinGameCell": 62
+      },
+      "sourceSha256": "9af706ccc93ce78203e38b835286ab2be3cf38491b7d6c6b00fb6b1e51a67a70",
+      "ownerApproval": null
+    },
+    {
+      "id": "f6",
+      "gender": "f",
+      "number": 6,
+      "name": "ขี้เล่น",
+      "personality": "Playful",
+      "a0bBase": "จ",
+      "kind": "adaptation",
+      "hair": "Two compact rounded buns high on the crown with a tidy center part; clear face.",
+      "hairColor": "warm light brown",
+      "skin": "fair warm ivory",
+      "skinClass": "fair",
+      "eyes": "Bright mischievous round sparkling eyes, both equally open.",
+      "eyebrows": "Light playful raised arches.",
+      "mouth": "Very distinct double-curved cat mouth shaped like a rounded numeral 3 rotated sideways (omega smile).",
+      "outfit": "White short-sleeve collared school shirt tucked into a navy pleated skirt, white ankle socks and rounded brown strap shoes.",
+      "scarf": "Small SUN-GOLD neckerchief wrapping around the back of the neck, tied in a small knot on the upper chest with TWO short pointed tails; narrow folded gold collar visible at the neck sides. Bare white shirt shoulders and sleeves. No cape, no cloak, no gold fabric behind the arms or legs.",
+      "pixelLabPrompt": "Original girl player character, age 7–8, oversized chibi head and small child body. Front-facing low top-down standing view. Two compact rounded buns high on the crown with a tidy center part; clear face. Hair color: warm light brown. Skin: fair warm ivory. Bright mischievous round sparkling eyes, both equally open. Light playful raised arches. Very distinct double-curved cat mouth shaped like a rounded numeral 3 rotated sideways (omega smile). White short-sleeve collared school shirt tucked into a navy pleated skirt, white ankle socks and rounded brown strap shoes. Small SUN-GOLD neckerchief wrapping around the back of the neck, tied in a small knot on the upper chest with TWO short pointed tails; narrow folded gold collar visible at the neck sides. Bare white shirt shoulders and sleeves. No cape, no cloak, no gold fabric behind the arms or legs. Gentle youthful face. Match style-kid.png: crisp pixel clusters, continuous dark outlines, upper-left light, simple coherent highlights. Native 64x64 transparent sprite, total painted height 60–62 pixels, soles on row 62, centered at x32, at least one transparent pixel around the silhouette. Both eyes have equal openness for this expression; hair never covers eyes. Original character, distinct from the village NPC family.",
+      "preview": {
+        "largeRect": [
+          1464,
+          51,
+          121,
+          244
+        ],
+        "gameRect": [
+          1645,
+          234,
+          30,
+          61
+        ],
+        "gameCellRect": [
+          1628,
+          232,
+          64,
+          64
+        ],
+        "feetRowWithinGameCell": 62
+      },
+      "sourceSha256": "0931dd28e6e53b4a48372755a2db626732ec1c32918073dfc9c205cd0fe3b2b8",
+      "ownerApproval": null
+    },
+    {
+      "id": "f7",
+      "gender": "f",
+      "number": 7,
+      "name": "ขี้อาย",
+      "personality": "Shy",
+      "a0bBase": "ข",
+      "kind": "adaptation",
+      "hair": "Straight shoulder-length hair with a blunt straight fringe ending above both eyebrows; no hair crossing the eyes.",
+      "hairColor": "dark chocolate brown",
+      "skin": "fair rosy ivory",
+      "skinClass": "fair",
+      "eyes": "Both gentle eyes exactly HALF-OPEN, matching horizontal upper lids, with visible brown pupils; strong rosy blush on both cheeks.",
+      "eyebrows": "Soft slight upward brows.",
+      "mouth": "Tiny closed shy mouth.",
+      "outfit": "White short-sleeve collared school shirt tucked into a navy pleated skirt, white ankle socks and rounded brown strap shoes.",
+      "scarf": "Small SUN-GOLD neckerchief wrapping around the back of the neck, tied in a small knot on the upper chest with TWO short pointed tails; narrow folded gold collar visible at the neck sides. Bare white shirt shoulders and sleeves. No cape, no cloak, no gold fabric behind the arms or legs.",
+      "pixelLabPrompt": "Original girl player character, age 7–8, oversized chibi head and small child body. Front-facing low top-down standing view. Straight shoulder-length hair with a blunt straight fringe ending above both eyebrows; no hair crossing the eyes. Hair color: dark chocolate brown. Skin: fair rosy ivory. Both gentle eyes exactly HALF-OPEN, matching horizontal upper lids, with visible brown pupils; strong rosy blush on both cheeks. Soft slight upward brows. Tiny closed shy mouth. White short-sleeve collared school shirt tucked into a navy pleated skirt, white ankle socks and rounded brown strap shoes. Small SUN-GOLD neckerchief wrapping around the back of the neck, tied in a small knot on the upper chest with TWO short pointed tails; narrow folded gold collar visible at the neck sides. Bare white shirt shoulders and sleeves. No cape, no cloak, no gold fabric behind the arms or legs. Gentle youthful face. Match style-kid.png: crisp pixel clusters, continuous dark outlines, upper-left light, simple coherent highlights. Native 64x64 transparent sprite, total painted height 60–62 pixels, soles on row 62, centered at x32, at least one transparent pixel around the silhouette. Both eyes have equal openness for this expression; hair never covers eyes. Original character, distinct from the village NPC family.",
+      "preview": {
+        "largeRect": [
+          1742,
+          51,
+          125,
+          244
+        ],
+        "gameRect": [
+          1925,
+          234,
+          31,
+          61
+        ],
+        "gameCellRect": [
+          1908,
+          232,
+          64,
+          64
+        ],
+        "feetRowWithinGameCell": 62
+      },
+      "sourceSha256": "4ab1061472c76934292bbdab5fa36d11b622ae0c1d265b9daefbeb92459223d5",
+      "ownerApproval": null
+    },
+    {
+      "id": "f8",
+      "gender": "f",
+      "number": 8,
+      "name": "นักกีฬา",
+      "personality": "Athlete",
+      "a0bBase": "ง",
+      "kind": "adaptation",
+      "hair": "One high ponytail tied behind the crown with a broad navy sports headband visible across the forehead, eyes fully clear.",
+      "hairColor": "deep auburn brown",
+      "skin": "warm tan caramel",
+      "skinClass": "tan",
+      "eyes": "Focused energetic open eyes, both equally open, friendly determination.",
+      "eyebrows": "Confident gently lifted brows, never pinched together.",
+      "mouth": "Broad open athletic smile with a clear white tooth band.",
+      "outfit": "White short-sleeve collared school shirt tucked into a navy pleated skirt, white ankle socks and rounded brown strap shoes.",
+      "scarf": "Small SUN-GOLD neckerchief wrapping around the back of the neck, tied in a small knot on the upper chest with TWO short pointed tails; narrow folded gold collar visible at the neck sides. Bare white shirt shoulders and sleeves. No cape, no cloak, no gold fabric behind the arms or legs.",
+      "pixelLabPrompt": "Original girl player character, age 7–8, oversized chibi head and small child body. Front-facing low top-down standing view. One high ponytail tied behind the crown with a broad navy sports headband visible across the forehead, eyes fully clear. Hair color: deep auburn brown. Skin: warm tan caramel. Focused energetic open eyes, both equally open, friendly determination. Confident gently lifted brows, never pinched together. Broad open athletic smile with a clear white tooth band. White short-sleeve collared school shirt tucked into a navy pleated skirt, white ankle socks and rounded brown strap shoes. Small SUN-GOLD neckerchief wrapping around the back of the neck, tied in a small knot on the upper chest with TWO short pointed tails; narrow folded gold collar visible at the neck sides. Bare white shirt shoulders and sleeves. No cape, no cloak, no gold fabric behind the arms or legs. Gentle youthful face. Match style-kid.png: crisp pixel clusters, continuous dark outlines, upper-left light, simple coherent highlights. Native 64x64 transparent sprite, total painted height 60–62 pixels, soles on row 62, centered at x32, at least one transparent pixel around the silhouette. Both eyes have equal openness for this expression; hair never covers eyes. Original character, distinct from the village NPC family.",
+      "preview": {
+        "largeRect": [
+          2028,
+          51,
+          113,
+          244
+        ],
+        "gameRect": [
+          2206,
+          234,
+          28,
+          61
+        ],
+        "gameCellRect": [
+          2188,
+          232,
+          64,
+          64
+        ],
+        "feetRowWithinGameCell": 62
+      },
+      "sourceSha256": "7ec601b70e3b8da00615271a26bbb8fdd9a3316775cbb2d8b81c99c6fdedcee0",
+      "ownerApproval": null
+    },
+    {
+      "id": "m1",
+      "gender": "m",
+      "number": 1,
+      "name": "สดใส",
+      "personality": "Sunny",
+      "a0bBase": "3",
+      "kind": "adaptation",
+      "hair": "Short upright chunky spikes, the same spiky silhouette as A0b boy 3.",
+      "hairColor": "dark chestnut brown",
+      "skin": "medium warm peach",
+      "skinClass": "medium",
+      "eyes": "Large round sparkling eyes, equally wide open.",
+      "eyebrows": "Raised happy curved eyebrows.",
+      "mouth": "Wide joyful tooth-showing grin, clear white tooth band.",
+      "outfit": "White short-sleeve collared school shirt tucked into navy knee-revealing school shorts, white ankle socks and rounded brown school shoes.",
+      "scarf": "Small SUN-GOLD neckerchief wrapping around the back of the neck, tied in a small knot on the upper chest with TWO short pointed tails; narrow folded gold collar visible at the neck sides. Bare white shirt shoulders and sleeves. No cape, no cloak, no gold fabric behind the arms or legs.",
+      "pixelLabPrompt": "Original boy player character, age 7–8, oversized chibi head and small child body. Front-facing low top-down standing view. Short upright chunky spikes, the same spiky silhouette as A0b boy 3. Hair color: dark chestnut brown. Skin: medium warm peach. Large round sparkling eyes, equally wide open. Raised happy curved eyebrows. Wide joyful tooth-showing grin, clear white tooth band. White short-sleeve collared school shirt tucked into navy knee-revealing school shorts, white ankle socks and rounded brown school shoes. Small SUN-GOLD neckerchief wrapping around the back of the neck, tied in a small knot on the upper chest with TWO short pointed tails; narrow folded gold collar visible at the neck sides. Bare white shirt shoulders and sleeves. No cape, no cloak, no gold fabric behind the arms or legs. Gentle youthful face. Match style-kid.png: crisp pixel clusters, continuous dark outlines, upper-left light, simple coherent highlights. Native 64x64 transparent sprite, total painted height 60–62 pixels, soles on row 62, centered at x32, at least one transparent pixel around the silhouette. Both eyes have equal openness for this expression; hair never covers eyes. Original character, distinct from the village NPC family.",
+      "preview": {
+        "largeRect": [
+          66,
+          393,
+          116,
+          244
+        ],
+        "gameRect": [
+          246,
+          576,
+          29,
+          61
+        ],
+        "gameCellRect": [
+          228,
+          574,
+          64,
+          64
+        ],
+        "feetRowWithinGameCell": 62
+      },
+      "sourceSha256": "4a34d1a44f480bd1ed997bb88e3ae93b57a8afdf15212395caf7c3e646c21a53",
+      "ownerApproval": null
+    },
+    {
+      "id": "m2",
+      "gender": "m",
+      "number": 2,
+      "name": "นักสำรวจ",
+      "personality": "Explorer",
+      "a0bBase": "1",
+      "kind": "adaptation",
+      "hair": "Short softly tousled crop with broad irregular crown locks, the same silhouette as A0b boy 1.",
+      "hairColor": "auburn red-brown",
+      "skin": "warm tan caramel",
+      "skinClass": "tan",
+      "eyes": "Wide curious round eyes, both equally open.",
+      "eyebrows": "Both eyebrows visibly raised high in curiosity.",
+      "mouth": "Small open round O mouth, a surprised curious expression.",
+      "outfit": "White short-sleeve collared school shirt tucked into navy knee-revealing school shorts, white ankle socks and rounded brown school shoes.",
+      "scarf": "Small SUN-GOLD neckerchief wrapping around the back of the neck, tied in a small knot on the upper chest with TWO short pointed tails; narrow folded gold collar visible at the neck sides. Bare white shirt shoulders and sleeves. No cape, no cloak, no gold fabric behind the arms or legs.",
+      "pixelLabPrompt": "Original boy player character, age 7–8, oversized chibi head and small child body. Front-facing low top-down standing view. Short softly tousled crop with broad irregular crown locks, the same silhouette as A0b boy 1. Hair color: auburn red-brown. Skin: warm tan caramel. Wide curious round eyes, both equally open. Both eyebrows visibly raised high in curiosity. Small open round O mouth, a surprised curious expression. White short-sleeve collared school shirt tucked into navy knee-revealing school shorts, white ankle socks and rounded brown school shoes. Small SUN-GOLD neckerchief wrapping around the back of the neck, tied in a small knot on the upper chest with TWO short pointed tails; narrow folded gold collar visible at the neck sides. Bare white shirt shoulders and sleeves. No cape, no cloak, no gold fabric behind the arms or legs. Gentle youthful face. Match style-kid.png: crisp pixel clusters, continuous dark outlines, upper-left light, simple coherent highlights. Native 64x64 transparent sprite, total painted height 60–62 pixels, soles on row 62, centered at x32, at least one transparent pixel around the silhouette. Both eyes have equal openness for this expression; hair never covers eyes. Original character, distinct from the village NPC family.",
+      "preview": {
+        "largeRect": [
+          348,
+          393,
+          113,
+          244
+        ],
+        "gameRect": [
+          526,
+          576,
+          28,
+          61
+        ],
+        "gameCellRect": [
+          508,
+          574,
+          64,
+          64
+        ],
+        "feetRowWithinGameCell": 62
+      },
+      "sourceSha256": "cf83b8722ceaad75592ab1e2c1b0b426bc799256ff2a3d4d403e7444bd7e155c",
+      "ownerApproval": null
+    },
+    {
+      "id": "m3",
+      "gender": "m",
+      "number": 3,
+      "name": "ใจดี",
+      "personality": "Kind",
+      "a0bBase": null,
+      "kind": "new",
+      "hair": "Soft rounded mushroom bowl cut, smooth domed outline, curved fringe above the eyebrows and tidy sides.",
+      "hairColor": "warm light brown",
+      "skin": "fair warm ivory",
+      "skinClass": "fair",
+      "eyes": "Matching upward-curved smiling crescent eyes, both gently closed to the same degree.",
+      "eyebrows": "Soft low rounded arches.",
+      "mouth": "Gentle closed U-shaped smile.",
+      "outfit": "White short-sleeve collared school shirt tucked into navy knee-revealing school shorts, white ankle socks and rounded brown school shoes.",
+      "scarf": "Small SUN-GOLD neckerchief wrapping around the back of the neck, tied in a small knot on the upper chest with TWO short pointed tails; narrow folded gold collar visible at the neck sides. Bare white shirt shoulders and sleeves. No cape, no cloak, no gold fabric behind the arms or legs.",
+      "pixelLabPrompt": "Original boy player character, age 7–8, oversized chibi head and small child body. Front-facing low top-down standing view. Soft rounded mushroom bowl cut, smooth domed outline, curved fringe above the eyebrows and tidy sides. Hair color: warm light brown. Skin: fair warm ivory. Matching upward-curved smiling crescent eyes, both gently closed to the same degree. Soft low rounded arches. Gentle closed U-shaped smile. White short-sleeve collared school shirt tucked into navy knee-revealing school shorts, white ankle socks and rounded brown school shoes. Small SUN-GOLD neckerchief wrapping around the back of the neck, tied in a small knot on the upper chest with TWO short pointed tails; narrow folded gold collar visible at the neck sides. Bare white shirt shoulders and sleeves. No cape, no cloak, no gold fabric behind the arms or legs. Gentle youthful face. Match style-kid.png: crisp pixel clusters, continuous dark outlines, upper-left light, simple coherent highlights. Native 64x64 transparent sprite, total painted height 60–62 pixels, soles on row 62, centered at x32, at least one transparent pixel around the silhouette. Both eyes have equal openness for this expression; hair never covers eyes. Original character, distinct from the village NPC family.",
+      "preview": {
+        "largeRect": [
+          622,
+          393,
+          125,
+          244
+        ],
+        "gameRect": [
+          805,
+          576,
+          31,
+          61
+        ],
+        "gameCellRect": [
+          788,
+          574,
+          64,
+          64
+        ],
+        "feetRowWithinGameCell": 62
+      },
+      "sourceSha256": "60239154fabe3d2fdaffe8057761f2e70252d7cf77bdd8d6275b83c496e9aed9",
+      "ownerApproval": null
+    },
+    {
+      "id": "m4",
+      "gender": "m",
+      "number": 4,
+      "name": "กล้าหาญ",
+      "personality": "Brave",
+      "a0bBase": null,
+      "kind": "new",
+      "hair": "Short tall swept-back hair with a broad backward quiff and tidy ears; open forehead.",
+      "hairColor": "soft near-black brown",
+      "skin": "warm tan caramel",
+      "skinClass": "tan",
+      "eyes": "Soft confident almond eyes, both equally open.",
+      "eyebrows": "Level relaxed confident brows, no inward frown.",
+      "mouth": "Closed asymmetric one-corner smile, kind and self-assured.",
+      "outfit": "White short-sleeve collared school shirt tucked into navy knee-revealing school shorts, white ankle socks and rounded brown school shoes.",
+      "scarf": "Small SUN-GOLD neckerchief wrapping around the back of the neck, tied in a small knot on the upper chest with TWO short pointed tails; narrow folded gold collar visible at the neck sides. Bare white shirt shoulders and sleeves. No cape, no cloak, no gold fabric behind the arms or legs.",
+      "pixelLabPrompt": "Original boy player character, age 7–8, oversized chibi head and small child body. Front-facing low top-down standing view. Short tall swept-back hair with a broad backward quiff and tidy ears; open forehead. Hair color: soft near-black brown. Skin: warm tan caramel. Soft confident almond eyes, both equally open. Level relaxed confident brows, no inward frown. Closed asymmetric one-corner smile, kind and self-assured. White short-sleeve collared school shirt tucked into navy knee-revealing school shorts, white ankle socks and rounded brown school shoes. Small SUN-GOLD neckerchief wrapping around the back of the neck, tied in a small knot on the upper chest with TWO short pointed tails; narrow folded gold collar visible at the neck sides. Bare white shirt shoulders and sleeves. No cape, no cloak, no gold fabric behind the arms or legs. Gentle youthful face. Match style-kid.png: crisp pixel clusters, continuous dark outlines, upper-left light, simple coherent highlights. Native 64x64 transparent sprite, total painted height 60–62 pixels, soles on row 62, centered at x32, at least one transparent pixel around the silhouette. Both eyes have equal openness for this expression; hair never covers eyes. Original character, distinct from the village NPC family.",
+      "preview": {
+        "largeRect": [
+          906,
+          393,
+          116,
+          244
+        ],
+        "gameRect": [
+          1086,
+          576,
+          29,
+          61
+        ],
+        "gameCellRect": [
+          1068,
+          574,
+          64,
+          64
+        ],
+        "feetRowWithinGameCell": 62
+      },
+      "sourceSha256": "866bb33b5e45ade2618f3d1659b13e857f52f654667890ad8afc70ec0984d233",
+      "ownerApproval": null
+    },
+    {
+      "id": "m5",
+      "gender": "m",
+      "number": 5,
+      "name": "นักคิด",
+      "personality": "Thinker",
+      "a0bBase": "2",
+      "kind": "adaptation",
+      "hair": "Neat short side part with one broad smooth wave, the same silhouette as A0b boy 2; thin round navy glasses.",
+      "hairColor": "dark chocolate brown",
+      "skin": "medium warm peach",
+      "skinClass": "medium",
+      "eyes": "Calm open oval eyes visible through two thin ROUND glasses lenses.",
+      "eyebrows": "Even gently arched eyebrows.",
+      "mouth": "Tiny centered peaceful closed smile.",
+      "outfit": "White short-sleeve collared school shirt tucked into navy knee-revealing school shorts, white ankle socks and rounded brown school shoes.",
+      "scarf": "Small SUN-GOLD neckerchief wrapping around the back of the neck, tied in a small knot on the upper chest with TWO short pointed tails; narrow folded gold collar visible at the neck sides. Bare white shirt shoulders and sleeves. No cape, no cloak, no gold fabric behind the arms or legs.",
+      "pixelLabPrompt": "Original boy player character, age 7–8, oversized chibi head and small child body. Front-facing low top-down standing view. Neat short side part with one broad smooth wave, the same silhouette as A0b boy 2; thin round navy glasses. Hair color: dark chocolate brown. Skin: medium warm peach. Calm open oval eyes visible through two thin ROUND glasses lenses. Even gently arched eyebrows. Tiny centered peaceful closed smile. White short-sleeve collared school shirt tucked into navy knee-revealing school shorts, white ankle socks and rounded brown school shoes. Small SUN-GOLD neckerchief wrapping around the back of the neck, tied in a small knot on the upper chest with TWO short pointed tails; narrow folded gold collar visible at the neck sides. Bare white shirt shoulders and sleeves. No cape, no cloak, no gold fabric behind the arms or legs. Gentle youthful face. Match style-kid.png: crisp pixel clusters, continuous dark outlines, upper-left light, simple coherent highlights. Native 64x64 transparent sprite, total painted height 60–62 pixels, soles on row 62, centered at x32, at least one transparent pixel around the silhouette. Both eyes have equal openness for this expression; hair never covers eyes. Original character, distinct from the village NPC family.",
+      "preview": {
+        "largeRect": [
+          1189,
+          393,
+          110,
+          244
+        ],
+        "gameRect": [
+          1366,
+          576,
+          28,
+          61
+        ],
+        "gameCellRect": [
+          1348,
+          574,
+          64,
+          64
+        ],
+        "feetRowWithinGameCell": 62
+      },
+      "sourceSha256": "dbbfbfa2ec3003a07bccd505c4bd4e9e3b039f22c19c97ec7132c491d9a1a55f",
+      "ownerApproval": null
+    },
+    {
+      "id": "m6",
+      "gender": "m",
+      "number": 6,
+      "name": "ขี้เล่น",
+      "personality": "Playful",
+      "a0bBase": "4",
+      "kind": "adaptation",
+      "hair": "Fluffy short curls made of large connected curl clusters, the same silhouette as A0b boy 4.",
+      "hairColor": "warm light brown",
+      "skin": "fair warm ivory",
+      "skinClass": "fair",
+      "eyes": "Bright mischievous round sparkling eyes, both equally open.",
+      "eyebrows": "Light playful raised arches.",
+      "mouth": "Very distinct double-curved cat mouth shaped like a rounded numeral 3 rotated sideways (omega smile).",
+      "outfit": "White short-sleeve collared school shirt tucked into navy knee-revealing school shorts, white ankle socks and rounded brown school shoes.",
+      "scarf": "Small SUN-GOLD neckerchief wrapping around the back of the neck, tied in a small knot on the upper chest with TWO short pointed tails; narrow folded gold collar visible at the neck sides. Bare white shirt shoulders and sleeves. No cape, no cloak, no gold fabric behind the arms or legs.",
+      "pixelLabPrompt": "Original boy player character, age 7–8, oversized chibi head and small child body. Front-facing low top-down standing view. Fluffy short curls made of large connected curl clusters, the same silhouette as A0b boy 4. Hair color: warm light brown. Skin: fair warm ivory. Bright mischievous round sparkling eyes, both equally open. Light playful raised arches. Very distinct double-curved cat mouth shaped like a rounded numeral 3 rotated sideways (omega smile). White short-sleeve collared school shirt tucked into navy knee-revealing school shorts, white ankle socks and rounded brown school shoes. Small SUN-GOLD neckerchief wrapping around the back of the neck, tied in a small knot on the upper chest with TWO short pointed tails; narrow folded gold collar visible at the neck sides. Bare white shirt shoulders and sleeves. No cape, no cloak, no gold fabric behind the arms or legs. Gentle youthful face. Match style-kid.png: crisp pixel clusters, continuous dark outlines, upper-left light, simple coherent highlights. Native 64x64 transparent sprite, total painted height 60–62 pixels, soles on row 62, centered at x32, at least one transparent pixel around the silhouette. Both eyes have equal openness for this expression; hair never covers eyes. Original character, distinct from the village NPC family.",
+      "preview": {
+        "largeRect": [
+          1463,
+          393,
+          122,
+          244
+        ],
+        "gameRect": [
+          1645,
+          576,
+          30,
+          61
+        ],
+        "gameCellRect": [
+          1628,
+          574,
+          64,
+          64
+        ],
+        "feetRowWithinGameCell": 62
+      },
+      "sourceSha256": "862e078fd82934e9247bdb36bbf69fcf6eadd9ad342ced13ffc1661c40ed7556",
+      "ownerApproval": null
+    },
+    {
+      "id": "m7",
+      "gender": "m",
+      "number": 7,
+      "name": "ขี้อาย",
+      "personality": "Shy",
+      "a0bBase": "5",
+      "kind": "adaptation",
+      "hair": "Short tidy hair with one long rounded central forelock reaching the eyebrow line but never crossing an eye, based on A0b boy 5.",
+      "hairColor": "reddish chestnut brown",
+      "skin": "fair rosy ivory",
+      "skinClass": "fair",
+      "eyes": "Both gentle eyes exactly HALF-OPEN, matching horizontal upper lids, with visible brown pupils; strong rosy blush on both cheeks.",
+      "eyebrows": "Soft slight upward brows.",
+      "mouth": "Tiny closed shy mouth.",
+      "outfit": "White short-sleeve collared school shirt tucked into navy knee-revealing school shorts, white ankle socks and rounded brown school shoes.",
+      "scarf": "Small SUN-GOLD neckerchief wrapping around the back of the neck, tied in a small knot on the upper chest with TWO short pointed tails; narrow folded gold collar visible at the neck sides. Bare white shirt shoulders and sleeves. No cape, no cloak, no gold fabric behind the arms or legs.",
+      "pixelLabPrompt": "Original boy player character, age 7–8, oversized chibi head and small child body. Front-facing low top-down standing view. Short tidy hair with one long rounded central forelock reaching the eyebrow line but never crossing an eye, based on A0b boy 5. Hair color: reddish chestnut brown. Skin: fair rosy ivory. Both gentle eyes exactly HALF-OPEN, matching horizontal upper lids, with visible brown pupils; strong rosy blush on both cheeks. Soft slight upward brows. Tiny closed shy mouth. White short-sleeve collared school shirt tucked into navy knee-revealing school shorts, white ankle socks and rounded brown school shoes. Small SUN-GOLD neckerchief wrapping around the back of the neck, tied in a small knot on the upper chest with TWO short pointed tails; narrow folded gold collar visible at the neck sides. Bare white shirt shoulders and sleeves. No cape, no cloak, no gold fabric behind the arms or legs. Gentle youthful face. Match style-kid.png: crisp pixel clusters, continuous dark outlines, upper-left light, simple coherent highlights. Native 64x64 transparent sprite, total painted height 60–62 pixels, soles on row 62, centered at x32, at least one transparent pixel around the silhouette. Both eyes have equal openness for this expression; hair never covers eyes. Original character, distinct from the village NPC family.",
+      "preview": {
+        "largeRect": [
+          1746,
+          393,
+          116,
+          244
+        ],
+        "gameRect": [
+          1926,
+          576,
+          29,
+          61
+        ],
+        "gameCellRect": [
+          1908,
+          574,
+          64,
+          64
+        ],
+        "feetRowWithinGameCell": 62
+      },
+      "sourceSha256": "6e131667b017cfc35390b166891179b6c1b9eec06e8e57413f166604425ab255",
+      "ownerApproval": null
+    },
+    {
+      "id": "m8",
+      "gender": "m",
+      "number": 8,
+      "name": "นักกีฬา",
+      "personality": "Athlete",
+      "a0bBase": null,
+      "kind": "new",
+      "hair": "Very short close-cropped buzz cut with a broad navy sports headband across the forehead, no spikes or long fringe.",
+      "hairColor": "dark chestnut brown",
+      "skin": "warm tan caramel",
+      "skinClass": "tan",
+      "eyes": "Focused energetic open eyes, both equally open, friendly determination.",
+      "eyebrows": "Confident gently lifted brows, never pinched together.",
+      "mouth": "Broad open athletic smile with a clear white tooth band.",
+      "outfit": "White short-sleeve collared school shirt tucked into navy knee-revealing school shorts, white ankle socks and rounded brown school shoes.",
+      "scarf": "Small SUN-GOLD neckerchief wrapping around the back of the neck, tied in a small knot on the upper chest with TWO short pointed tails; narrow folded gold collar visible at the neck sides. Bare white shirt shoulders and sleeves. No cape, no cloak, no gold fabric behind the arms or legs.",
+      "pixelLabPrompt": "Original boy player character, age 7–8, oversized chibi head and small child body. Front-facing low top-down standing view. Very short close-cropped buzz cut with a broad navy sports headband across the forehead, no spikes or long fringe. Hair color: dark chestnut brown. Skin: warm tan caramel. Focused energetic open eyes, both equally open, friendly determination. Confident gently lifted brows, never pinched together. Broad open athletic smile with a clear white tooth band. White short-sleeve collared school shirt tucked into navy knee-revealing school shorts, white ankle socks and rounded brown school shoes. Small SUN-GOLD neckerchief wrapping around the back of the neck, tied in a small knot on the upper chest with TWO short pointed tails; narrow folded gold collar visible at the neck sides. Bare white shirt shoulders and sleeves. No cape, no cloak, no gold fabric behind the arms or legs. Gentle youthful face. Match style-kid.png: crisp pixel clusters, continuous dark outlines, upper-left light, simple coherent highlights. Native 64x64 transparent sprite, total painted height 60–62 pixels, soles on row 62, centered at x32, at least one transparent pixel around the silhouette. Both eyes have equal openness for this expression; hair never covers eyes. Original character, distinct from the village NPC family.",
+      "preview": {
+        "largeRect": [
+          2036,
+          393,
+          97,
+          244
+        ],
+        "gameRect": [
+          2208,
+          576,
+          24,
+          61
+        ],
+        "gameCellRect": [
+          2188,
+          574,
+          64,
+          64
+        ],
+        "feetRowWithinGameCell": 62
+      },
+      "sourceSha256": "ad28fae33f47adc9a8362c732d51ed77e0ed0e0da8142357282dd40727162c52",
+      "ownerApproval": null
+    }
+  ],
+  "production": {
+    "tool": "Codex image generation",
+    "generationRequests": 16,
+    "requestsPerOption": 1,
+    "newDesigns": 6,
+    "adaptedDesigns": 10,
+    "regenerations": 0,
+    "pixelLabGenerationRequests": 0,
+    "directionsPerOption": 1,
+    "layerSheets": 0,
+    "walkingFrames": 0,
+    "regionsGenerated": 0,
+    "previewPaletteColors": 32
+  },
+  "mcpCheck": {
+    "transport": "streamable_http",
+    "initializePassed": true,
+    "toolsListPassed": true,
+    "toolCount": 101,
+    "accountLookupPassed": true,
+    "runtimeSecretPresent": false,
+    "credentialPersistence": "Not stored in repository or files; authenticated using the previously supplied session credential in process memory.",
+    "nativeSessionToolsLoaded": false
+  },
+  "validation": {
+    "optionCount": 16,
+    "uniqueSourceImages": 16,
+    "rows": 2,
+    "largeAndGamePairs": 16,
+    "semiTransparentPreviewPixels": 0,
+    "gameCellFeetRows": [
+      62,
+      62,
+      62,
+      62,
+      62,
+      62,
+      62,
+      62,
+      62,
+      62,
+      62,
+      62,
+      62,
+      62,
+      62,
+      62
+    ],
+    "overlappingImageRects": 0,
+    "outOfBoundsImageRects": 0,
+    "tanSkinDesigns": {
+      "f": 3,
+      "m": 3
+    },
+    "previewBytes": 118206,
+    "measurements": [
+      {
+        "id": "f1",
+        "large": {
+          "height": 244,
+          "width": 159,
+          "pixels": 23414
+        },
+        "game": {
+          "height": 61,
+          "width": 40,
+          "pixels": 1482
+        }
+      },
+      {
+        "id": "f2",
+        "large": {
+          "height": 244,
+          "width": 138,
+          "pixels": 17676
+        },
+        "game": {
+          "height": 61,
+          "width": 34,
+          "pixels": 1088
+        }
+      },
+      {
+        "id": "f3",
+        "large": {
+          "height": 244,
+          "width": 113,
+          "pixels": 18735
+        },
+        "game": {
+          "height": 61,
+          "width": 28,
+          "pixels": 1157
+        }
+      },
+      {
+        "id": "f4",
+        "large": {
+          "height": 244,
+          "width": 122,
+          "pixels": 17259
+        },
+        "game": {
+          "height": 61,
+          "width": 30,
+          "pixels": 1098
+        }
+      },
+      {
+        "id": "f5",
+        "large": {
+          "height": 244,
+          "width": 122,
+          "pixels": 17749
+        },
+        "game": {
+          "height": 61,
+          "width": 31,
+          "pixels": 1133
+        }
+      },
+      {
+        "id": "f6",
+        "large": {
+          "height": 244,
+          "width": 121,
+          "pixels": 17683
+        },
+        "game": {
+          "height": 61,
+          "width": 30,
+          "pixels": 1095
+        }
+      },
+      {
+        "id": "f7",
+        "large": {
+          "height": 244,
+          "width": 125,
+          "pixels": 19009
+        },
+        "game": {
+          "height": 61,
+          "width": 31,
+          "pixels": 1179
+        }
+      },
+      {
+        "id": "f8",
+        "large": {
+          "height": 244,
+          "width": 113,
+          "pixels": 16257
+        },
+        "game": {
+          "height": 61,
+          "width": 28,
+          "pixels": 1011
+        }
+      },
+      {
+        "id": "m1",
+        "large": {
+          "height": 244,
+          "width": 116,
+          "pixels": 16716
+        },
+        "game": {
+          "height": 61,
+          "width": 29,
+          "pixels": 1048
+        }
+      },
+      {
+        "id": "m2",
+        "large": {
+          "height": 244,
+          "width": 113,
+          "pixels": 16653
+        },
+        "game": {
+          "height": 61,
+          "width": 28,
+          "pixels": 1039
+        }
+      },
+      {
+        "id": "m3",
+        "large": {
+          "height": 244,
+          "width": 125,
+          "pixels": 17982
+        },
+        "game": {
+          "height": 61,
+          "width": 31,
+          "pixels": 1110
+        }
+      },
+      {
+        "id": "m4",
+        "large": {
+          "height": 244,
+          "width": 116,
+          "pixels": 16899
+        },
+        "game": {
+          "height": 61,
+          "width": 29,
+          "pixels": 1054
+        }
+      },
+      {
+        "id": "m5",
+        "large": {
+          "height": 244,
+          "width": 110,
+          "pixels": 17075
+        },
+        "game": {
+          "height": 61,
+          "width": 28,
+          "pixels": 1090
+        }
+      },
+      {
+        "id": "m6",
+        "large": {
+          "height": 244,
+          "width": 122,
+          "pixels": 17369
+        },
+        "game": {
+          "height": 61,
+          "width": 30,
+          "pixels": 1068
+        }
+      },
+      {
+        "id": "m7",
+        "large": {
+          "height": 244,
+          "width": 115,
+          "pixels": 16671
+        },
+        "game": {
+          "height": 61,
+          "width": 28,
+          "pixels": 1046
+        }
+      },
+      {
+        "id": "m8",
+        "large": {
+          "height": 244,
+          "width": 97,
+          "pixels": 16552
+        },
+        "game": {
+          "height": 61,
+          "width": 24,
+          "pixels": 1030
+        }
+      }
+    ],
+    "framingNotes": {
+      "m6": {
+        "bbox": [
+          208,
+          264,
+          811,
+          1472
+        ],
+        "reason": "Frame the complete character; exclude detached duplicated curl fragments above it. Source image unchanged.",
+        "excludedDetachedPixels": 9825
+      }
+    },
+    "ownerRatings": null,
+    "rearScarfView": "Not rendered or verified: A0c is front view only. Neck wrap and rear continuity are specified for production.",
+    "bodyPixelEquality": "Not claimed for independently generated concept illustrations.",
+    "descriptionFieldsComplete": 112,
+    "visualReview": {
+      "reviewedOptions": 16,
+      "scarfFrontDesigns": 16,
+      "capeDesigns": 0,
+      "glassesDesigns": 2,
+      "sportsHeadbandDesigns": 2,
+      "closedSmilingEyeDesigns": [
+        "f3",
+        "m3"
+      ],
+      "halfOpenEyeDesigns": [
+        "f7",
+        "m7"
+      ],
+      "note": "Visual review of concept sheet and 61px images; no claim of pixel-perfect eye symmetry or owner acceptance. Hair and expressions follow the eight personalities; subtle expressions still require owner review at game size."
+    }
+  },
+  "nextStep": "Owner reviews all 16 designs individually. After approval, prepare kid-looks-prompts.md from the descriptions and obtain owner prompt approval. Only then generate each approved native front-facing sprite once in PixelLab with style-kid.png."
+}
