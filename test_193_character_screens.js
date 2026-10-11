@@ -11,6 +11,7 @@
 //   the bin removes the picked one (the browser question answered yes), "new" opens the gender screen and its back button returns.
 // Prints one JSON line, then `errors N`.  Run: PORT=8777 CHROME_EXE=/path/to/chromium node test_193_character_screens.js   (serve the repo root first)
 // Version 1.93 gives errors ≥ 10 here; 1.94 gives errors 0.
+// 2.24: the 1.94 screen is now the 10+ screen — the run starts as a child of 7 (the paperdoll screen, checked), then taps age 10.
 const fs = require('node:fs'), puppeteer = require('puppeteer');
 const out = process.env.OUT_DIR || '/tmp/leah-193-chars'; fs.mkdirSync(out, { recursive: true });
 const base = 'http://localhost:' + (process.env.PORT || 8777) + '/';
@@ -35,6 +36,12 @@ const sum = (pg, sel) => pg.evaluate(sel => { const c = document.querySelector(s
       if (!R.gender.g194 || R.gender.cards.length !== 2 || R.gender.cards.some(c => c.h < 80 || !c.in || c.px < 200)) fail(dev + ': gender screen ' + JSON.stringify(R.gender));
       await pg.screenshot({ path: out + '/' + dev + '_gender.png' });
       await press(await pg.$('#cg194 [data-g="m"]'));
+      // 2.24 (owner 11 Oct "เปิดให้เด็ก < 10 เลย"): a child under 10 (the default 7) gets the paperdoll screen; a real tap on age 10 brings back this 1.94 screen
+      await pg.waitForFunction(() => PD219.tried, { timeout: 30000 }).catch(() => {}); await sleep(500);
+      R.kidScreen = await pg.evaluate(() => ({ age: CR_STATE.age, pd: document.getElementById('cr').classList.contains('pd219'), rail: [...document.querySelectorAll('#cr .rail [data-tab]')].map(b => b.dataset.tab).join(','), hair: document.querySelectorAll('#pd219hair .opt').length }));
+      if (R.kidScreen.age !== 7 || !R.kidScreen.pd || R.kidScreen.rail !== 'age,hair,face,body,house' || R.kidScreen.hair < 2) fail(dev + ': a child of 7 gets the paperdoll screen ' + JSON.stringify(R.kidScreen));
+      await pg.screenshot({ path: out + '/' + dev + '_create7.png' });
+      await press((await pg.$$('#ca button'))[4]); await sleep(300);   /* age 10 */
       // B. the create screen, as a boy, age open, everything needed on screen
       R.first = await pg.evaluate(() => { const r = s => { const e = document.querySelector(s); const b = e.getBoundingClientRect(); return { x: b.x, y: b.y, w: b.width, h: b.height, b: b.bottom, r: b.right }; }; return { c193: document.getElementById('cr').classList.contains('c193'), gender: CR_STATE.gender, kid: CR_STATE.kid, boyOn: document.getElementById('cgM').classList.contains('on'), tab: C193.tab, cgo: r('#cgo'), name: r('#cname'), ages: [...document.querySelectorAll('#ca button')].map(b => { const q = b.getBoundingClientRect(); return [Math.round(q.width), Math.round(q.height)]; }), rail: [...document.querySelectorAll('#cr .rail [data-tab]')].map(b => b.dataset.tab).join(',') }; });
       if (!R.first.c193 || R.first.gender !== 'm' || R.first.kid !== 5 || !R.first.boyOn || R.first.tab !== 'age' || R.first.rail !== 'age,hair,face,house,hat') fail(dev + ': first create screen ' + JSON.stringify(R.first));

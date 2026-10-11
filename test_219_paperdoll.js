@@ -2,7 +2,9 @@
 // real taps on the owner's phone sizes and the iPad: hair · face · eyes · eye colour · mouth · body · skin tone each its own choice, every option and swatch 44 px+, none over another,
 // nothing to scroll, text 12 px+ · the pieces are drawn as delivered (only the cape, and the colours the child picks, change — and only inside Codex's regions for that group)
 // · the made child keeps every choice, walks with Codex's south walk, shows in the HUD and on the select screen after a reload · the frames do not drop (within 10 %)
-// · a device without GM gets the gender's own sprite · a player without GM keeps the 2.18 creator · json missing → the 2.18 creator · one piece missing → only that option goes
+// · json missing → the 2.18 creator · one piece missing → only that option goes
+// · 2.24 (owner 11 Oct "เปิดให้เด็ก < 10 เลย"): without GM a child under 10 gets the paperdoll screen too (real taps: age 10 → the 2.18 screen, back to 8 → the pieces; the child made keeps them after a reload);
+//   a boy sees only the shorts (no skirt, also by dice) and a girl both; a grown-up without GM keeps the 2.18 screen; the same child at 10+ is drawn as the gender's own sprite in the chosen hair and eye colours
 // · stage B (B1 11d6ce1): the 8-direction walking pieces, unmoved, coloured only in their regions · walking pieces missing → stage A's south walk and the glide
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),puppeteer=require('puppeteer');
 const sleep=ms=>new Promise(r=>setTimeout(r,ms)),out=process.env.OUT_DIR||'/tmp/leah-pd-219';fs.mkdirSync(out,{recursive:true});
@@ -24,12 +26,33 @@ const diff=(p,a,ha,b,hb)=>p.evaluate((a,ha,b,hb)=>{const px=c=>c.getContext('2d'
 const fps=p=>p.evaluate(async()=>{let n=0;const t0=performance.now();await new Promise(res=>{const f=()=>{n++;if(performance.now()-t0<2500)requestAnimationFrame(f);else res()};requestAnimationFrame(f)});return +(n/2.5).toFixed(1)});
 const avg=a=>+(a.reduce((x,y)=>x+y,0)/a.length).toFixed(1);
 (async()=>{const browser=await puppeteer.launch({executablePath:process.env.CHROME_EXE,args:['--no-sandbox']}),results=[];let p;
- try{for(const [name,width,height,dpr,mode] of [['gm844',844,390,3,'full'],['gm812',812,330,3,'look'],['gm915',915,412,2.625,'look'],['gm1180',1180,820,2,'look'],['gmEN844',844,390,3,'en'],['player844',844,390,3,'player'],['nojson844',844,390,3,'nojson'],['nohair3',844,390,3,'nohair3'],['noface1',844,390,3,'noface1'],['nowalk844',844,390,3,'nowalk']]){
+ try{for(const [name,width,height,dpr,mode] of [['gm844',844,390,3,'full'],['gm812',812,330,3,'look'],['gm915',915,412,2.625,'look'],['gm1180',1180,820,2,'look'],['gmEN844',844,390,3,'en'],['player844',844,390,3,'player'],['adult844',844,390,3,'adult'],['nojson844',844,390,3,'nojson'],['nohair3',844,390,3,'nohair3'],['noface1',844,390,3,'noface1'],['nowalk844',844,390,3,'nowalk']]){
   const bc=await browser.createBrowserContext();p=await bc.newPage();const errors=[];p.on('pageerror',e=>errors.push(e.message));await p.setViewport({width,height,deviceScaleFactor:dpr,isMobile:true,hasTouch:true});await p.setBypassServiceWorker(true);
   const block={nojson:/pd-kid\.json/,nohair3:/pd-kid-hair-3\.png/,noface1:/pd-kid-face-1\.png/,nowalk:/-walk\.png/}[mode];if(block){await p.setRequestInterception(true);p.on('request',r=>block.test(r.url())?r.abort():r.continue())}
-  await open(p,mode==='player'?'':'&gm');await tap(p,'#cg194 [data-g="f"]');await sleep(1200);const R={name};
+  await open(p,mode==='player'||mode==='adult'?'':'&gm');await tap(p,'#cg194 [data-g="f"]');await sleep(1200);const R={name};
+  if(mode==='player'||mode==='adult')await p.waitForFunction(()=>PD219.tried,{timeout:30000});
+  if(mode==='adult'){await tap(p,'#ca button[data-a="30"]');await sleep(500)}
   R.state=await p.evaluate(()=>({ok:PD219.ok,pd:$('cr').classList.contains('pd219'),tabs:[...document.querySelectorAll('#cr .rail [data-tab]')].map(b=>b.dataset.tab),hair:document.querySelectorAll('#pd219hair .opt').length,ck:getComputedStyle($('ck')).display}));
-  if(mode==='player'||mode==='nojson'||mode==='noface1'){assert(!R.state.pd&&R.state.tabs.join()==='age,hair,face,house,hat'&&R.state.hair===0,name+': the 2.18 creator '+JSON.stringify(R.state));
+  if(mode==='player'){const st=()=>p.evaluate(()=>({age:CR_STATE.age,pd:$('cr').classList.contains('pd219'),tabs:[...document.querySelectorAll('#cr .rail [data-tab]')].map(b=>b.dataset.tab).join(),hair:document.querySelectorAll('#pd219hair .opt').length,ck:getComputedStyle($('ck')).display}));
+   assert(R.state.ok&&R.state.pd&&R.state.tabs.join()==='age,hair,face,body,house'&&R.state.hair===3&&R.state.ck==='none','a child of 7 without GM: the paperdoll creator '+JSON.stringify(R.state));
+   await tap(p,'#ca button[data-a="10"]');await sleep(400);R.at10=await st();assert(!R.at10.pd&&R.at10.tabs==='age,hair,face,house,hat'&&R.at10.hair===0&&R.at10.ck!=='none','age 10: the 2.18 creator '+JSON.stringify(R.at10));await p.screenshot({path:path.join(out,name+'-age10.png')});
+   await tap(p,'#ca button[data-a="8"]');await sleep(400);R.at8=await st();assert(R.at8.pd&&R.at8.tabs==='age,hair,face,body,house'&&R.at8.hair===3,'back to 8: the pieces '+JSON.stringify(R.at8));
+   // boys never get the skirt (owner 23:39): ♂ shows only the shorts, ten dice never give the skirt; ♀ shows both again
+   const bodies=()=>p.evaluate(()=>[...document.querySelectorAll('#pd219body .opt')].filter(b=>b.offsetParent&&b.getBoundingClientRect().width>0).map(b=>+b.dataset.n).join());
+   await tap(p,'#cgM');await tap(p,'#cr .rail [data-tab="body"]');R.boy={opts:await bodies(),body:await p.evaluate(()=>CR_STATE.pd.body),dice:[]};
+   for(let i=0;i<10;i++){await tap(p,'#c3Rand');R.boy.dice.push(await p.evaluate(()=>CR_STATE.pd.body))}await p.screenshot({path:path.join(out,name+'-boy.png')});
+   assert(R.boy.opts==='2'&&R.boy.body===2&&R.boy.dice.every(b=>b===2),'a boy has no skirt '+JSON.stringify(R.boy));
+   await tap(p,'#cgF');R.girlOpts=await bodies();assert.equal(R.girlOpts,'1,2','a girl has both');
+   await tap(p,'#cr .rail [data-tab="hair"]');await tap(p,'#pd219hair .opt[data-n="3"]');await tap(p,'#cr .rail [data-tab="body"]');await tap(p,'#pd219body .opt[data-n="2"]');await p.screenshot({path:path.join(out,name+'-kid.png')});
+   const A=await audit(p);assert(!A.small.length&&!A.over.length&&!A.outS.length&&A.scroll<=1,'targets '+JSON.stringify(A));
+   await tap(p,'#cgo');await sleep(2200);R.made=await p.evaluate(()=>({age:S.age,pd:S.pd219,flag:PS.pd219,F:PS.F}));assert(R.made.age===8&&R.made.pd&&R.made.pd.hair===3&&R.made.pd.body===2&&R.made.flag&&R.made.F===64,'a child of 8 made without GM '+JSON.stringify(R.made));
+   await p.evaluate(()=>{save();const d=Store.all();d.cur=-1;Store.put(d)});await open(p,'');
+   R.pick=await p.evaluate(async()=>{for(let i=0;i<60&&!PD219.ok;i++)await new Promise(r=>setTimeout(r,250));await new Promise(r=>setTimeout(r,300));const s=Store.all().slots[0],c=document.querySelector('#pk .pn canvas'),e=document.createElement('canvas');e.width=e.height=64;const g=e.getContext('2d');g.imageSmoothingEnabled=false;g.drawImage(pd219Full(s.pd219,s.house).stand,0,0,64,64,-8,-4,80,80);
+     const a=c.getContext('2d').getImageData(0,0,64,64).data,b=g.getImageData(0,0,64,64).data;let d=0;for(let i=0;i<a.length;i++)if(a[i]!==b[i])d++;return {p193:$('cr').classList.contains('p193'),diff:d}});
+   assert(R.pick.p193&&R.pick.diff===0,'select list without GM '+JSON.stringify(R.pick));await tap(p,'#pGo');await sleep(2000);R.again=await p.evaluate(()=>({flag:PS.pd219,real:PS.pdWalk219}));assert(R.again.flag&&R.again.real,'after a reload without GM '+JSON.stringify(R.again));
+   R.at10world=await p.evaluate(()=>{S.age=10;buildPlayerSheets();const r={flag:PS.pd219,F:PS.F,kid:S.kid};S.age=8;buildPlayerSheets();r.back=PS.pd219;return r});assert(!R.at10world.flag&&R.at10world.F===64&&R.at10world.back,'the same child at 10 '+JSON.stringify(R.at10world));
+   assert.deepEqual(errors,[]);R.errors=0;results.push(R);await bc.close();continue}
+  if(mode==='adult'||mode==='nojson'||mode==='noface1'){if(mode==='adult')R.state=await p.evaluate(()=>({age:CR_STATE.age,ok:PD219.ok,pd:$('cr').classList.contains('pd219'),tabs:[...document.querySelectorAll('#cr .rail [data-tab]')].map(b=>b.dataset.tab),hair:document.querySelectorAll('#pd219hair .opt').length,ck:getComputedStyle($('ck')).display}));assert(!R.state.pd&&R.state.tabs.join()==='age,hair,face,house,hat'&&R.state.hair===0,name+': the 2.18 creator '+JSON.stringify(R.state));
    await tap(p,'#cgo');await sleep(1500);R.made=await p.evaluate(()=>({pd:'pd219' in S,kid:S.kid,F:PS.F,pdSheet:!!PS.pd219}));assert(!R.made.pd&&R.made.kid===0&&!R.made.pdSheet,name+': an old-style child '+JSON.stringify(R.made));
    assert.deepEqual(errors,[]);R.errors=0;results.push(R);await bc.close();continue}
   assert(R.state.ok&&R.state.pd&&R.state.tabs.join()==='age,hair,face,body,house'&&R.state.ck==='none',name+': the paperdoll creator '+JSON.stringify(R.state));
@@ -96,8 +119,9 @@ const avg=a=>+(a.reduce((x,y)=>x+y,0)/a.length).toFixed(1);
   assert(R.pick.p193&&R.pick.pd&&R.pick.diff===0,'select list: '+JSON.stringify(R.pick));await p.screenshot({path:path.join(out,name+'-select.png')});
   await tap(p,'#pGo');await sleep(2000);R.again=await p.evaluate(()=>{const {stand}=pd219Full(S.pd219,S.house),a=PS.stand.getContext('2d').getImageData(0,0,512,64).data,b=stand.getContext('2d').getImageData(0,0,512,64).data;return a.every((v,i)=>v===b[i])});assert(R.again,'after reload');
   // the same save on a device without GM: the gender's own sprite in the chosen hair and eye colours
-  await p.evaluate(()=>{save();const d=Store.all();d.cur=-1;Store.put(d)});await open(p,'');R.noGM=await p.evaluate(()=>({tried:PD219.tried,p193:$('cr').classList.contains('p193')}));await tap(p,'#pGo');await sleep(2000);
-  R.noGM=Object.assign(R.noGM,await p.evaluate(()=>({flag:PS.pd219,F:PS.F,kid:S.kid,hcol:S.hcol,ecol:S.ecol,pd:!!S.pd219})));assert(!R.noGM.tried&&!R.noGM.flag&&R.noGM.F===64&&R.noGM.kid===0&&R.noGM.hcol===4&&R.noGM.ecol===3&&R.noGM.pd,'without GM: '+JSON.stringify(R.noGM));
+  await p.evaluate(()=>{save();const d=Store.all();d.cur=-1;Store.put(d)});await open(p,'');await tap(p,'#pGo');await sleep(2500);
+  R.noGM=await p.evaluate(()=>({age:S.age,flag:PS.pd219,F:PS.F,pd:!!S.pd219}));assert(R.noGM.age<10&&R.noGM.flag&&R.noGM.F===64&&R.noGM.pd,'a child without GM keeps the pieces (2.24): '+JSON.stringify(R.noGM));
+  R.noGM10=await p.evaluate(()=>{S.age=10;buildPlayerSheets();return {flag:PS.pd219,F:PS.F,kid:S.kid,hcol:S.hcol,ecol:S.ecol,pd:!!S.pd219}});assert(!R.noGM10.flag&&R.noGM10.F===64&&R.noGM10.kid===0&&R.noGM10.hcol===4&&R.noGM10.ecol===3&&R.noGM10.pd,'at 10 without GM: '+JSON.stringify(R.noGM10));
   assert.deepEqual(errors,[]);R.errors=0;results.push(R);await bc.close()}
   console.log(JSON.stringify(results));console.log('errors 0')
  }catch(e){console.error(e);if(p&&!p.isClosed())await p.screenshot({path:path.join(out,'failure.png')}).catch(()=>{});console.log(JSON.stringify(results));console.log('errors 1');process.exitCode=1}finally{await browser.close()}})();
