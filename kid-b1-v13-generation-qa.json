@@ -1,0 +1,1285 @@
+{
+  "set": 8,
+  "spec_revision": 13,
+  "billing": {
+    "initial_balance": 3041,
+    "cap": 25,
+    "minimum_final_balance": 3016,
+    "jobs": [
+      {
+        "tag": "of2v2",
+        "tool": "create_character_pro_flash",
+        "prompt_characters": 1920,
+        "prompt_sha256": "13f0259b9ef602dafbdd12f8e0a9aee87d2298a5031ca876ddfc3d2218b0b3d1",
+        "style_sha256": "13952f324a7cda58916e6bc262482f108999190c7f0b54f180d869b55fb94326",
+        "style_source": "kid-outfits-b0b.png",
+        "crop": [
+          543,
+          252,
+          64,
+          64
+        ],
+        "style_lantern_edits": [
+          {
+            "destination": [
+              37,
+              36
+            ],
+            "source": [
+              33,
+              36
+            ],
+            "before_rgba": [
+              82,
+              43,
+              15,
+              255
+            ],
+            "after_rgba": [
+              135,
+              68,
+              39,
+              255
+            ]
+          },
+          {
+            "destination": [
+              38,
+              36
+            ],
+            "source": [
+              34,
+              36
+            ],
+            "before_rgba": [
+              117,
+              55,
+              29,
+              255
+            ],
+            "after_rgba": [
+              104,
+              51,
+              27,
+              255
+            ]
+          },
+          {
+            "destination": [
+              39,
+              36
+            ],
+            "source": [
+              35,
+              36
+            ],
+            "before_rgba": [
+              55,
+              22,
+              10,
+              255
+            ],
+            "after_rgba": [
+              98,
+              51,
+              35,
+              255
+            ]
+          },
+          {
+            "destination": [
+              37,
+              37
+            ],
+            "source": [
+              33,
+              37
+            ],
+            "before_rgba": [
+              142,
+              79,
+              16,
+              255
+            ],
+            "after_rgba": [
+              144,
+              84,
+              48,
+              255
+            ]
+          },
+          {
+            "destination": [
+              38,
+              37
+            ],
+            "source": [
+              34,
+              37
+            ],
+            "before_rgba": [
+              247,
+              180,
+              49,
+              255
+            ],
+            "after_rgba": [
+              173,
+              115,
+              77,
+              255
+            ]
+          },
+          {
+            "destination": [
+              39,
+              37
+            ],
+            "source": [
+              35,
+              37
+            ],
+            "before_rgba": [
+              177,
+              107,
+              16,
+              255
+            ],
+            "after_rgba": [
+              173,
+              115,
+              77,
+              255
+            ]
+          },
+          {
+            "destination": [
+              37,
+              38
+            ],
+            "source": [
+              33,
+              38
+            ],
+            "before_rgba": [
+              142,
+              79,
+              16,
+              255
+            ],
+            "after_rgba": [
+              180,
+              134,
+              87,
+              255
+            ]
+          },
+          {
+            "destination": [
+              38,
+              38
+            ],
+            "source": [
+              34,
+              38
+            ],
+            "before_rgba": [
+              203,
+              108,
+              25,
+              255
+            ],
+            "after_rgba": [
+              180,
+              134,
+              87,
+              255
+            ]
+          },
+          {
+            "destination": [
+              39,
+              38
+            ],
+            "source": [
+              35,
+              38
+            ],
+            "before_rgba": [
+              177,
+              107,
+              16,
+              255
+            ],
+            "after_rgba": [
+              173,
+              115,
+              77,
+              255
+            ]
+          },
+          {
+            "destination": [
+              37,
+              39
+            ],
+            "source": [
+              33,
+              39
+            ],
+            "before_rgba": [
+              177,
+              107,
+              16,
+              255
+            ],
+            "after_rgba": [
+              202,
+              141,
+              88,
+              255
+            ]
+          },
+          {
+            "destination": [
+              38,
+              39
+            ],
+            "source": [
+              34,
+              39
+            ],
+            "before_rgba": [
+              247,
+              180,
+              49,
+              255
+            ],
+            "after_rgba": [
+              173,
+              115,
+              77,
+              255
+            ]
+          },
+          {
+            "destination": [
+              39,
+              39
+            ],
+            "source": [
+              35,
+              39
+            ],
+            "before_rgba": [
+              213,
+              142,
+              35,
+              255
+            ],
+            "after_rgba": [
+              180,
+              134,
+              87,
+              255
+            ]
+          },
+          {
+            "destination": [
+              37,
+              40
+            ],
+            "source": [
+              33,
+              40
+            ],
+            "before_rgba": [
+              157,
+              96,
+              30,
+              255
+            ],
+            "after_rgba": [
+              202,
+              141,
+              88,
+              255
+            ]
+          },
+          {
+            "destination": [
+              38,
+              40
+            ],
+            "source": [
+              34,
+              40
+            ],
+            "before_rgba": [
+              247,
+              180,
+              49,
+              255
+            ],
+            "after_rgba": [
+              173,
+              115,
+              77,
+              255
+            ]
+          },
+          {
+            "destination": [
+              39,
+              40
+            ],
+            "source": [
+              35,
+              40
+            ],
+            "before_rgba": [
+              213,
+              142,
+              35,
+              255
+            ],
+            "after_rgba": [
+              202,
+              141,
+              88,
+              255
+            ]
+          },
+          {
+            "destination": [
+              37,
+              41
+            ],
+            "source": [
+              33,
+              41
+            ],
+            "before_rgba": [
+              117,
+              55,
+              29,
+              255
+            ],
+            "after_rgba": [
+              202,
+              141,
+              88,
+              255
+            ]
+          },
+          {
+            "destination": [
+              38,
+              41
+            ],
+            "source": [
+              34,
+              41
+            ],
+            "before_rgba": [
+              179,
+              136,
+              47,
+              255
+            ],
+            "after_rgba": [
+              173,
+              115,
+              77,
+              255
+            ]
+          },
+          {
+            "destination": [
+              39,
+              41
+            ],
+            "source": [
+              35,
+              41
+            ],
+            "before_rgba": [
+              213,
+              142,
+              35,
+              255
+            ],
+            "after_rgba": [
+              180,
+              134,
+              87,
+              255
+            ]
+          },
+          {
+            "destination": [
+              37,
+              42
+            ],
+            "source": [
+              33,
+              42
+            ],
+            "before_rgba": [
+              112,
+              77,
+              50,
+              255
+            ],
+            "after_rgba": [
+              180,
+              134,
+              87,
+              255
+            ]
+          },
+          {
+            "destination": [
+              38,
+              42
+            ],
+            "source": [
+              34,
+              42
+            ],
+            "before_rgba": [
+              117,
+              55,
+              29,
+              255
+            ],
+            "after_rgba": [
+              180,
+              134,
+              87,
+              255
+            ]
+          },
+          {
+            "destination": [
+              39,
+              42
+            ],
+            "source": [
+              35,
+              42
+            ],
+            "before_rgba": [
+              117,
+              55,
+              29,
+              255
+            ],
+            "after_rgba": [
+              173,
+              115,
+              77,
+              255
+            ]
+          }
+        ],
+        "balance_before": 3041,
+        "status": "completed",
+        "create_calls": 1,
+        "generation_retries": 0,
+        "submitted_utc": "2026-10-12T11:35:38.844777+00:00",
+        "job_id": "c62cfc07-6799-454c-a4b9-bbcfcfc9abd7",
+        "character_id": "0c09f525-38b5-479a-8a8a-697c415d2094",
+        "balance_after": 3035,
+        "balance_delta": 6,
+        "actual_generations": 6.0,
+        "billing_stages": [
+          {
+            "stage": "first_direction",
+            "usage": {
+              "usd": 0.0,
+              "type": "generations",
+              "generations": 5
+            },
+            "generation_id": "6491bd89-afdc-4f3f-af35-49c67d6d5300"
+          },
+          {
+            "stage": "rotations",
+            "usage": {
+              "usd": 0.0,
+              "type": "generations",
+              "generations": 1,
+              "cost_if_paid": 0.038079910642570915
+            },
+            "generation_id": "a54e73f5-6e72-4310-b199-6fb850c13ff8"
+          }
+        ],
+        "raw_file": "kid-b1-of2v2-raw.png",
+        "raw_rgba_sha256": [
+          "11f4a86c441cf3cd53e076c2dfb84b0b73778b8b8c8c9d78d6c60670c8929f42",
+          "c3e081bc1732896ac2a6578e8f3242aaa646a7a92f3cbc525001ef62add47644",
+          "18216bd4ee2b263d62698f67285f2334933217f38f76a3aaec176fcbdcd24b01",
+          "1bb6499e4f05092899dec7df68a463469a89caa70f75e86b608d036f01fa6213",
+          "473a4153359437af7cdfe7e9a6245f30c30ab4f74cb65c02b7b3be107e6d55b6",
+          "38606fa30297930825e012d95789bdfd7106643e9b103c80b067b2bf2275fb02",
+          "581ad788b1d1c09ee0094a5ed5a9c89f90186bc0aff894cdaf6f00a3fd5e7a12",
+          "2611fd97e67da10276dfa8e9f0e849b37ea7904589bbe7d700e322943c370c9b"
+        ],
+        "raw_bytes": 16904,
+        "prompt_matches": true
+      },
+      {
+        "tag": "l1",
+        "tool": "create_object_pro_flash",
+        "prompt_characters": 713,
+        "prompt_sha256": "5a36ead369dba69ae111615f459f0e600ad03f50c36f7a25fb98da720ef0c72e",
+        "style_sha256": "59cdd5489907f65fcefe70ad1a3e57fa55f640ef7381a91887ed01f589f510ba",
+        "style_source": "kid-lantern-l0-raw.png",
+        "crop": [
+          0,
+          0,
+          32,
+          32
+        ],
+        "style_lantern_edits": [],
+        "balance_before": 3035,
+        "status": "completed",
+        "create_calls": 1,
+        "generation_retries": 0,
+        "submitted_utc": "2026-10-12T11:39:49.769702+00:00",
+        "job_id": "592ef9d1-a21e-4c52-9a77-b7612ace5225",
+        "object_id": "691129dd-3cdb-4ed9-a7c2-addc23bede36",
+        "balance_after": 3029,
+        "balance_delta": 6,
+        "actual_generations": 6.0,
+        "billing_stages": [
+          {
+            "stage": "first_direction",
+            "usage": {
+              "usd": 0.0,
+              "type": "generations",
+              "generations": 5
+            },
+            "generation_id": "a4e89966-6488-4755-8865-771dc2068a56"
+          },
+          {
+            "stage": "rotations",
+            "usage": {
+              "usd": 0.0,
+              "type": "generations",
+              "generations": 1,
+              "cost_if_paid": 0.028382579214043087
+            },
+            "generation_id": "86ae8d3c-bdcf-45be-9dd9-36f99d2d2cff"
+          }
+        ],
+        "raw_file": "kid-lantern-l1-raw.png",
+        "raw_rgba_sha256": [
+          "c8fb34bc2fa771ecb1e6766399aed3276132a44742880c4d1dd37f04d80af241",
+          "408090625cc68102ba91b0089c130169c2415eb64ce19eaea85415f85becd1ee",
+          "0571fe8592994c9d33a61ca4f90864dbd0fe1fead6ae7823279ee6acd376a681",
+          "19a31bce770efefc5e7dc4590f978497d36bb30a6a4dde9a59d6e0e5eceded36",
+          "94d8ddb25169c324ad1662a5a0bafd21dcdc51c34489d9ac95e43bfe5b91ebe1",
+          "f93780b2049523c6e9fbc95588481e8ab82af9574916a91b768f7f50ff8962cb",
+          "1623e820f5b88cffe04cb670c8c2a24f45d6918fb102dd5df3abd7aaeb93e189",
+          "b71e61c7334709a9cb368ae57be02060cfd7b855603a2d1192444b143702caf7"
+        ],
+        "raw_bytes": 3676,
+        "prompt_matches": false
+      }
+    ],
+    "status": "stopped_l1_oversize",
+    "final_balance": 3029
+  },
+  "lantern": {
+    "set": 8,
+    "spec_revision": 13,
+    "frame_size": [
+      32,
+      32
+    ],
+    "sheet_size": [
+      256,
+      128
+    ],
+    "directions": [
+      "S",
+      "SE",
+      "E",
+      "NE",
+      "N",
+      "NW",
+      "W",
+      "SW"
+    ],
+    "level_order": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "level_variable": "S.lampLv",
+    "coordinate_origin": "top-left native cell, zero-based",
+    "grip_definition": "Top ring opaque pixel within x13..19 nearest x16; L1 East kept at original location to preserve outliers without clipping.",
+    "levels": [
+      {
+        "level": 0,
+        "max_opaque_size": [
+          13,
+          22
+        ],
+        "frames": [
+          {
+            "direction": "S",
+            "raw_grip_xy": [
+              16,
+              5
+            ],
+            "grip_xy": [
+              16,
+              4
+            ],
+            "raw_opaque_bbox_xyxy_exclusive": [
+              10,
+              5,
+              23,
+              27
+            ],
+            "opaque_bbox_xyxy_exclusive": [
+              10,
+              4,
+              23,
+              26
+            ],
+            "opaque_size": [
+              13,
+              22
+            ],
+            "size_pass": true,
+            "translation_xy": [
+              0,
+              -1
+            ],
+            "partial_alpha_pixels": 0,
+            "blue_cyan_pixels": 0,
+            "raw_rgba_sha256": "32b74eb98405130cf501f435cb7f764b59817a23ed1dd73d168ed5e28ee15f0f",
+            "glow_halo_visual_review": false
+          },
+          {
+            "direction": "SE",
+            "raw_grip_xy": [
+              16,
+              5
+            ],
+            "grip_xy": [
+              16,
+              4
+            ],
+            "raw_opaque_bbox_xyxy_exclusive": [
+              11,
+              5,
+              24,
+              27
+            ],
+            "opaque_bbox_xyxy_exclusive": [
+              11,
+              4,
+              24,
+              26
+            ],
+            "opaque_size": [
+              13,
+              22
+            ],
+            "size_pass": true,
+            "translation_xy": [
+              0,
+              -1
+            ],
+            "partial_alpha_pixels": 0,
+            "blue_cyan_pixels": 0,
+            "raw_rgba_sha256": "eba5bc866b2ea4e25f7754fefecd954cc356eb815803118362909261a5095850",
+            "glow_halo_visual_review": false
+          },
+          {
+            "direction": "E",
+            "raw_grip_xy": [
+              16,
+              5
+            ],
+            "grip_xy": [
+              16,
+              4
+            ],
+            "raw_opaque_bbox_xyxy_exclusive": [
+              10,
+              5,
+              23,
+              27
+            ],
+            "opaque_bbox_xyxy_exclusive": [
+              10,
+              4,
+              23,
+              26
+            ],
+            "opaque_size": [
+              13,
+              22
+            ],
+            "size_pass": true,
+            "translation_xy": [
+              0,
+              -1
+            ],
+            "partial_alpha_pixels": 0,
+            "blue_cyan_pixels": 0,
+            "raw_rgba_sha256": "b902e4d42584a004e4fd8505af6cbdfd23e187b815a8e3c97637b20403752a39",
+            "glow_halo_visual_review": false
+          },
+          {
+            "direction": "NE",
+            "raw_grip_xy": [
+              16,
+              5
+            ],
+            "grip_xy": [
+              16,
+              4
+            ],
+            "raw_opaque_bbox_xyxy_exclusive": [
+              10,
+              5,
+              23,
+              27
+            ],
+            "opaque_bbox_xyxy_exclusive": [
+              10,
+              4,
+              23,
+              26
+            ],
+            "opaque_size": [
+              13,
+              22
+            ],
+            "size_pass": true,
+            "translation_xy": [
+              0,
+              -1
+            ],
+            "partial_alpha_pixels": 0,
+            "blue_cyan_pixels": 0,
+            "raw_rgba_sha256": "8d503c9a7393dd9891dc4ce20fad0fd176b23737002dd0244f2f36a94911f913",
+            "glow_halo_visual_review": false
+          },
+          {
+            "direction": "N",
+            "raw_grip_xy": [
+              16,
+              5
+            ],
+            "grip_xy": [
+              16,
+              4
+            ],
+            "raw_opaque_bbox_xyxy_exclusive": [
+              10,
+              5,
+              23,
+              27
+            ],
+            "opaque_bbox_xyxy_exclusive": [
+              10,
+              4,
+              23,
+              26
+            ],
+            "opaque_size": [
+              13,
+              22
+            ],
+            "size_pass": true,
+            "translation_xy": [
+              0,
+              -1
+            ],
+            "partial_alpha_pixels": 0,
+            "blue_cyan_pixels": 0,
+            "raw_rgba_sha256": "574256bd0b0332b1cb85fc010eae32b77e8b5effa1937ed6e92c2dba3dc8607f",
+            "glow_halo_visual_review": false
+          },
+          {
+            "direction": "NW",
+            "raw_grip_xy": [
+              15,
+              5
+            ],
+            "grip_xy": [
+              16,
+              4
+            ],
+            "raw_opaque_bbox_xyxy_exclusive": [
+              9,
+              5,
+              22,
+              27
+            ],
+            "opaque_bbox_xyxy_exclusive": [
+              10,
+              4,
+              23,
+              26
+            ],
+            "opaque_size": [
+              13,
+              22
+            ],
+            "size_pass": true,
+            "translation_xy": [
+              1,
+              -1
+            ],
+            "partial_alpha_pixels": 0,
+            "blue_cyan_pixels": 0,
+            "raw_rgba_sha256": "a5afa43f4b2594862c9fc39c6091d26f80608658d8167aba7f713b6f8db3e181",
+            "glow_halo_visual_review": false
+          },
+          {
+            "direction": "W",
+            "raw_grip_xy": [
+              16,
+              5
+            ],
+            "grip_xy": [
+              16,
+              4
+            ],
+            "raw_opaque_bbox_xyxy_exclusive": [
+              9,
+              5,
+              22,
+              27
+            ],
+            "opaque_bbox_xyxy_exclusive": [
+              9,
+              4,
+              22,
+              26
+            ],
+            "opaque_size": [
+              13,
+              22
+            ],
+            "size_pass": true,
+            "translation_xy": [
+              0,
+              -1
+            ],
+            "partial_alpha_pixels": 0,
+            "blue_cyan_pixels": 0,
+            "raw_rgba_sha256": "777cd1400b0a82c9ae4614f93ec933be163f02dea72c1b27ea1534950742886c",
+            "glow_halo_visual_review": false
+          },
+          {
+            "direction": "SW",
+            "raw_grip_xy": [
+              16,
+              5
+            ],
+            "grip_xy": [
+              16,
+              4
+            ],
+            "raw_opaque_bbox_xyxy_exclusive": [
+              9,
+              5,
+              22,
+              27
+            ],
+            "opaque_bbox_xyxy_exclusive": [
+              9,
+              4,
+              22,
+              26
+            ],
+            "opaque_size": [
+              13,
+              22
+            ],
+            "size_pass": true,
+            "translation_xy": [
+              0,
+              -1
+            ],
+            "partial_alpha_pixels": 0,
+            "blue_cyan_pixels": 0,
+            "raw_rgba_sha256": "c9b002fe30c1ff620447ce18ed51570e7170be99672acc6b858af201a48997b2",
+            "glow_halo_visual_review": false
+          }
+        ],
+        "raw_file": "kid-lantern-l0-raw.png",
+        "status": "generated_for_review"
+      },
+      {
+        "level": 1,
+        "max_opaque_size": [
+          13,
+          22
+        ],
+        "frames": [
+          {
+            "direction": "S",
+            "raw_grip_xy": [
+              16,
+              5
+            ],
+            "grip_xy": [
+              16,
+              4
+            ],
+            "raw_opaque_bbox_xyxy_exclusive": [
+              10,
+              5,
+              23,
+              27
+            ],
+            "opaque_bbox_xyxy_exclusive": [
+              10,
+              4,
+              23,
+              26
+            ],
+            "opaque_size": [
+              13,
+              22
+            ],
+            "size_pass": true,
+            "translation_xy": [
+              0,
+              -1
+            ],
+            "partial_alpha_pixels": 0,
+            "blue_cyan_pixels": 0,
+            "raw_rgba_sha256": "c8fb34bc2fa771ecb1e6766399aed3276132a44742880c4d1dd37f04d80af241",
+            "glow_halo_visual_review": false
+          },
+          {
+            "direction": "SE",
+            "raw_grip_xy": [
+              16,
+              5
+            ],
+            "grip_xy": [
+              16,
+              4
+            ],
+            "raw_opaque_bbox_xyxy_exclusive": [
+              10,
+              5,
+              23,
+              27
+            ],
+            "opaque_bbox_xyxy_exclusive": [
+              10,
+              4,
+              23,
+              26
+            ],
+            "opaque_size": [
+              13,
+              22
+            ],
+            "size_pass": true,
+            "translation_xy": [
+              0,
+              -1
+            ],
+            "partial_alpha_pixels": 0,
+            "blue_cyan_pixels": 0,
+            "raw_rgba_sha256": "408090625cc68102ba91b0089c130169c2415eb64ce19eaea85415f85becd1ee",
+            "glow_halo_visual_review": false
+          },
+          {
+            "direction": "E",
+            "raw_grip_xy": [
+              16,
+              5
+            ],
+            "grip_xy": [
+              16,
+              5
+            ],
+            "raw_opaque_bbox_xyxy_exclusive": [
+              11,
+              0,
+              32,
+              27
+            ],
+            "opaque_bbox_xyxy_exclusive": [
+              11,
+              0,
+              32,
+              27
+            ],
+            "opaque_size": [
+              21,
+              27
+            ],
+            "size_pass": false,
+            "translation_xy": [
+              0,
+              0
+            ],
+            "partial_alpha_pixels": 0,
+            "blue_cyan_pixels": 0,
+            "raw_rgba_sha256": "0571fe8592994c9d33a61ca4f90864dbd0fe1fead6ae7823279ee6acd376a681",
+            "glow_halo_visual_review": false,
+            "stray_pixels_xy": [
+              [
+                30,
+                0
+              ],
+              [
+                31,
+                0
+              ]
+            ]
+          },
+          {
+            "direction": "NE",
+            "raw_grip_xy": [
+              16,
+              5
+            ],
+            "grip_xy": [
+              16,
+              4
+            ],
+            "raw_opaque_bbox_xyxy_exclusive": [
+              10,
+              5,
+              22,
+              27
+            ],
+            "opaque_bbox_xyxy_exclusive": [
+              10,
+              4,
+              22,
+              26
+            ],
+            "opaque_size": [
+              12,
+              22
+            ],
+            "size_pass": true,
+            "translation_xy": [
+              0,
+              -1
+            ],
+            "partial_alpha_pixels": 0,
+            "blue_cyan_pixels": 0,
+            "raw_rgba_sha256": "19a31bce770efefc5e7dc4590f978497d36bb30a6a4dde9a59d6e0e5eceded36",
+            "glow_halo_visual_review": false
+          },
+          {
+            "direction": "N",
+            "raw_grip_xy": [
+              16,
+              5
+            ],
+            "grip_xy": [
+              16,
+              4
+            ],
+            "raw_opaque_bbox_xyxy_exclusive": [
+              10,
+              5,
+              23,
+              27
+            ],
+            "opaque_bbox_xyxy_exclusive": [
+              10,
+              4,
+              23,
+              26
+            ],
+            "opaque_size": [
+              13,
+              22
+            ],
+            "size_pass": true,
+            "translation_xy": [
+              0,
+              -1
+            ],
+            "partial_alpha_pixels": 0,
+            "blue_cyan_pixels": 0,
+            "raw_rgba_sha256": "94d8ddb25169c324ad1662a5a0bafd21dcdc51c34489d9ac95e43bfe5b91ebe1",
+            "glow_halo_visual_review": false
+          },
+          {
+            "direction": "NW",
+            "raw_grip_xy": [
+              16,
+              5
+            ],
+            "grip_xy": [
+              16,
+              4
+            ],
+            "raw_opaque_bbox_xyxy_exclusive": [
+              11,
+              5,
+              23,
+              27
+            ],
+            "opaque_bbox_xyxy_exclusive": [
+              11,
+              4,
+              23,
+              26
+            ],
+            "opaque_size": [
+              12,
+              22
+            ],
+            "size_pass": true,
+            "translation_xy": [
+              0,
+              -1
+            ],
+            "partial_alpha_pixels": 0,
+            "blue_cyan_pixels": 0,
+            "raw_rgba_sha256": "f93780b2049523c6e9fbc95588481e8ab82af9574916a91b768f7f50ff8962cb",
+            "glow_halo_visual_review": false
+          },
+          {
+            "direction": "W",
+            "raw_grip_xy": [
+              16,
+              5
+            ],
+            "grip_xy": [
+              16,
+              4
+            ],
+            "raw_opaque_bbox_xyxy_exclusive": [
+              11,
+              5,
+              22,
+              27
+            ],
+            "opaque_bbox_xyxy_exclusive": [
+              11,
+              4,
+              22,
+              26
+            ],
+            "opaque_size": [
+              11,
+              22
+            ],
+            "size_pass": true,
+            "translation_xy": [
+              0,
+              -1
+            ],
+            "partial_alpha_pixels": 0,
+            "blue_cyan_pixels": 0,
+            "raw_rgba_sha256": "1623e820f5b88cffe04cb670c8c2a24f45d6918fb102dd5df3abd7aaeb93e189",
+            "glow_halo_visual_review": false
+          },
+          {
+            "direction": "SW",
+            "raw_grip_xy": [
+              16,
+              5
+            ],
+            "grip_xy": [
+              16,
+              4
+            ],
+            "raw_opaque_bbox_xyxy_exclusive": [
+              10,
+              5,
+              23,
+              27
+            ],
+            "opaque_bbox_xyxy_exclusive": [
+              10,
+              4,
+              23,
+              26
+            ],
+            "opaque_size": [
+              13,
+              22
+            ],
+            "size_pass": true,
+            "translation_xy": [
+              0,
+              -1
+            ],
+            "partial_alpha_pixels": 0,
+            "blue_cyan_pixels": 0,
+            "raw_rgba_sha256": "b71e61c7334709a9cb368ae57be02060cfd7b855603a2d1192444b143702caf7",
+            "glow_halo_visual_review": false
+          }
+        ],
+        "raw_file": "kid-lantern-l1-raw.png",
+        "status": "generated_for_review"
+      },
+      {
+        "level": 2,
+        "max_opaque_size": [
+          13,
+          22
+        ],
+        "frames": [],
+        "status": "not_generated_size_gate"
+      },
+      {
+        "level": 3,
+        "max_opaque_size": [
+          13,
+          22
+        ],
+        "frames": [],
+        "status": "not_generated_size_gate"
+      }
+    ],
+    "sprite_pixels_rescaled": false,
+    "sprites_repainted": false,
+    "production_complete": false,
+    "size_pass": false,
+    "unavailable_rows": "L2/L3 not submitted: L1 East contains two opaque gray pixels at (30,0),(31,0), expanding bbox to21x27. No raw pixel was removed."
+  },
+  "raw_unchanged": true,
+  "of2v2_visual_review": {
+    "ivory_blouse": true,
+    "warm_brown_vest": true,
+    "khaki_tan_skirt": true,
+    "blue_cyan_cloth_pixels_per_direction": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "lantern_pixels_per_direction": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "rear_scarf_needs_manual_polish": true
+  }
+}
