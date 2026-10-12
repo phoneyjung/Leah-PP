@@ -1,4 +1,4 @@
-# ASSET_SPEC_08_kid_base.md — ชุดที่ 8: ตัวหลักเด็ก หญิง/ชาย แบบแยกหัวกับตัว (Claude → Codex · 11 ต.ค. 2569 · ฉบับ 1 · **ฉบับ 18 ท้ายไฟล์ (ล่าสุด): ตาทั้ง 9 ไม่ผ่าน · ขอบตาบน/ขนตาเป็นสีดำคงที่ · region eye = ม่านตาเท่านั้น · ตา 7 ไม่มีสีตา · ทำรวมกับวาดตาหน้าตรงของฉบับ 17 · ฉบับ 17: รับงาน 1 (จุดใสเล็ก 0 · L3) · วาดตาหน้าตรงใหม่จากทิศเฉียงของแบบเดียวกัน (เจ้าของ 23:13) · ทดลอง 128 ครั้งที่ 2 ด้วยภาพอ้างอิงขยาย 2 เท่า เพดาน 10 · ฉบับ 16: รับช่องโหว่ 0 · ตา 9 ปาก 8 ผ่านตัวเลข (รอเจ้าของตัดสินภาพ) · รับ L2 และ L3 ขนาด 12×23 · อุดจุดใสเล็ก ≤3 จุด → 0 · ทดลองตัวละเอียด 2 เท่า 128 px 1 งาน เพดาน 30 · ฉบับ 15: ตา/ปากรอบ C ไม่ผ่านทั้ง 10 · ใช้ตา/ปากจากหัว PixelLab 16 หัวที่เจ้าของเลือก (ตา 9 ปาก 8 · 0 เครดิต) · ลำดับ ช่องโหว่+L1 → ตา/ปาก → L2 L3 · ฉบับ 14: รอบ C ผ่านตัวเลข ยกเว้นช่องโหว่ขมับ/หน้าผาก 3,521 → ต้อง 0 · รับ L1 (ลบจุดโดด 2 จุด) · เจน L2 L3 · Claude นำเข้า GM 2.30 · ฉบับ 13: ตะเกียงใช้ขนาด L0 เจน L1–L3 · O-F2 ใหม่ · เพดาน 25 · จากนั้นรอบเกลา C (แยกชิ้น regions ตา/ปาก 5 ผ้าพันคอหลัง) · ฉบับ 12: หัว 15 + ชุดรอบ 2 รับแล้ว · เจนใหม่ H-F3 H-F8 · ชุดอีก 7 · ตะเกียง 4 ขั้นด้วย PixelLab · เพดาน 85 · ผ้าพันคอหลังวาดเองตอนเกลา · ฉบับ 11: ผลทดลองผ่านหัว · ตะเกียงแยกจากชุด ถือตอนสำรวจ · เจนหัว 15 + ชุด O-F1 รอบ 2 เพดาน 100 · ฉบับ 10: เพดานทดลอง 20 ตามราคาจริง (10 ต่องานที่ 64 px) · โหมด concept ต้องรายงานก่อนใช้ · ฉบับ 9: ทดลอง 2 ชิ้นด้วย create_character_pro_flash · ภาพอ้างอิงเดียว = ภาพต้นแบบที่ผ่าน · แก้ 1 ประโยค · เจ้าของต้องบันทึก secret ก่อน · ฉบับ 8: พรอมป์ B1 ผ่าน · เจนทดลอง 2 ชิ้นก่อน (H-F1 + O-F1 เพดาน 16) · ฉบับ 7: B0b ผ่าน · ธีม 4 = ชาวประมงริมน้ำ · แก้ขอบทองชาย 1/2/4 ในพรอมป์ · เริ่ม B1 พรอมป์ 24 อัน · ฉบับ 6: B0 ผ่าน + เพิ่ม 3 จุด · ชุดหญิง 4 ชาย 4 ผู้ชายไม่มีกระโปรง · ฉบับ 5: เด็กแต่งเองแบบแยกชิ้นรุ่น 2 · ผม 16 จาก A0c · ตา 5 · ปาก 5 · ชุด 4 แนวศิษย์ตะเกียง (`concept-characters.jpg`) · ไม่ใช่ชุดนักเรียนไทย**)
+# ASSET_SPEC_08_kid_base.md — ชุดที่ 8: ตัวหลักเด็ก หญิง/ชาย แบบแยกหัวกับตัว (Claude → Codex · 11 ต.ค. 2569 · ฉบับ 1 · **ฉบับ 19 ท้ายไฟล์ (ล่าสุด): พักงานแก้ตา C2 (ฉบับ 17 A / 18 A2) · เจนต้นแบบตาหน้าตรง 20 แบบด้วย PixelLab บนหน้าแม่แบบ 64×64 เฉพาะพื้นที่ตา · เพดาน 200 · ด่านแรก 2 งาน · แล้วทดลอง 128 ครั้งที่ 2 · ฉบับ 18: ตาทั้ง 9 ไม่ผ่าน · ขอบตาบน/ขนตาเป็นสีดำคงที่ · region eye = ม่านตาเท่านั้น · ตา 7 ไม่มีสีตา · ทำรวมกับวาดตาหน้าตรงของฉบับ 17 · ฉบับ 17: รับงาน 1 (จุดใสเล็ก 0 · L3) · วาดตาหน้าตรงใหม่จากทิศเฉียงของแบบเดียวกัน (เจ้าของ 23:13) · ทดลอง 128 ครั้งที่ 2 ด้วยภาพอ้างอิงขยาย 2 เท่า เพดาน 10 · ฉบับ 16: รับช่องโหว่ 0 · ตา 9 ปาก 8 ผ่านตัวเลข (รอเจ้าของตัดสินภาพ) · รับ L2 และ L3 ขนาด 12×23 · อุดจุดใสเล็ก ≤3 จุด → 0 · ทดลองตัวละเอียด 2 เท่า 128 px 1 งาน เพดาน 30 · ฉบับ 15: ตา/ปากรอบ C ไม่ผ่านทั้ง 10 · ใช้ตา/ปากจากหัว PixelLab 16 หัวที่เจ้าของเลือก (ตา 9 ปาก 8 · 0 เครดิต) · ลำดับ ช่องโหว่+L1 → ตา/ปาก → L2 L3 · ฉบับ 14: รอบ C ผ่านตัวเลข ยกเว้นช่องโหว่ขมับ/หน้าผาก 3,521 → ต้อง 0 · รับ L1 (ลบจุดโดด 2 จุด) · เจน L2 L3 · Claude นำเข้า GM 2.30 · ฉบับ 13: ตะเกียงใช้ขนาด L0 เจน L1–L3 · O-F2 ใหม่ · เพดาน 25 · จากนั้นรอบเกลา C (แยกชิ้น regions ตา/ปาก 5 ผ้าพันคอหลัง) · ฉบับ 12: หัว 15 + ชุดรอบ 2 รับแล้ว · เจนใหม่ H-F3 H-F8 · ชุดอีก 7 · ตะเกียง 4 ขั้นด้วย PixelLab · เพดาน 85 · ผ้าพันคอหลังวาดเองตอนเกลา · ฉบับ 11: ผลทดลองผ่านหัว · ตะเกียงแยกจากชุด ถือตอนสำรวจ · เจนหัว 15 + ชุด O-F1 รอบ 2 เพดาน 100 · ฉบับ 10: เพดานทดลอง 20 ตามราคาจริง (10 ต่องานที่ 64 px) · โหมด concept ต้องรายงานก่อนใช้ · ฉบับ 9: ทดลอง 2 ชิ้นด้วย create_character_pro_flash · ภาพอ้างอิงเดียว = ภาพต้นแบบที่ผ่าน · แก้ 1 ประโยค · เจ้าของต้องบันทึก secret ก่อน · ฉบับ 8: พรอมป์ B1 ผ่าน · เจนทดลอง 2 ชิ้นก่อน (H-F1 + O-F1 เพดาน 16) · ฉบับ 7: B0b ผ่าน · ธีม 4 = ชาวประมงริมน้ำ · แก้ขอบทองชาย 1/2/4 ในพรอมป์ · เริ่ม B1 พรอมป์ 24 อัน · ฉบับ 6: B0 ผ่าน + เพิ่ม 3 จุด · ชุดหญิง 4 ชาย 4 ผู้ชายไม่มีกระโปรง · ฉบับ 5: เด็กแต่งเองแบบแยกชิ้นรุ่น 2 · ผม 16 จาก A0c · ตา 5 · ปาก 5 · ชุด 4 แนวศิษย์ตะเกียง (`concept-characters.jpg`) · ไม่ใช่ชุดนักเรียนไทย**)
 
 ## 0. หัวเรื่อง
 - **ใช้ที่ไหนในเกม:** ตัวผู้เล่นเด็ก (อายุต่ำกว่า 10) ในโลก หน้าสร้างตัว หน้าเลือกตัว รูปบน HUD · ช่อง 64 · เกมวาด `PS.stand` / `PS.walk` (เท้าแถว 62)
@@ -771,3 +771,141 @@ Original friendly child age 7-8, oversized chibi head, small body, standing idle
 
 ### ลำดับรวม
 งาน A + A2 (ตา) → งาน B (ทดลอง 128 ครั้งที่ 2) · commit แยก · ที่เหลือตามฉบับ 17
+
+## ฉบับ 19 (13 ต.ค. 2569 00:0x · Claude → Codex) · ต้นแบบตาหน้าตรง 20 แบบด้วย PixelLab
+
+### เจ้าของ 23:57–00:00
+- **"เราพรอมแต่ ลูกตาเลยดีกว่า ขอซัก 20 แบบ ความละเอียดเท่ากับที่เราทำอยู่ ผมจะเลือกเป็นต้นแบบ"** → Claude เขียนพรอมป์ 20 อัน · เจ้าของ **"ให้ codex ไปทำได้มั้ย"**
+- **พักงานแก้ตา C2** (ฉบับ 17 งาน A และฉบับ 18 งาน A2) ไม่ต้องทำ · กติกาของฉบับ 18 (ขอบตาบนดำคงที่ · region eye = ม่านตา) ใช้กับตาที่เจ้าของเลือกจากรอบนี้ตอนเกลา
+
+### งาน E20 · ต้นแบบตาหน้าตรง 20 แบบ (เพดานรวม **200 เครดิต**)
+- **ภาพตั้งต้น (Claude ทำ · อยู่ใน main):** `eye-base-64.png` = หน้าแม่แบบ kid8 ทิศ S + ผมมวยคู่ 6 + ชุด 1 + ปาก 4 ไม่มีตา (64×64 ขนาดเกม) · `eye-mask-64.png` = หน้ากาก ขาว = พื้นที่ตา x 23–41 y 15–23 (รวมขอบ 1 จุดรอบตาเดิมทั้ง 9 แบบ) ดำ = ห้ามแตะ
+- **เครื่องมือ:** การลงสีเฉพาะพื้นที่ (inpainting) ของ PixelLab API (ดูชื่อ endpoint และราคาใน `https://api.pixellab.ai/v2/llms.txt`) ขนาด 64×64 · ถ้า API ไม่มี inpainting ที่รับหน้ากาก ให้ใช้เครื่องมือแก้ภาพ (edit image) กับ `eye-base-64.png` แล้ว**รายงานก่อนเจน** ไม่เปลี่ยนเครื่องมือเอง
+- **ด่านแรก:** เจน E01 และ E04 ก่อน (2 งาน) · ถ้างานใดคิด > 10 เครดิต หรือภาพนอกหน้ากากเปลี่ยน > 0 จุด → หยุดและรายงาน · ผ่านแล้วทำ E02 … E20 ต่อ งานละ 1 ครั้ง ไม่สั่งซ้ำ
+- **เกณฑ์ (Claude วัด):** นอกหน้ากากเหมือน `eye-base-64.png` ทุกจุด (0 จุดต่าง) · กึ่งใส 0 · ขนาดภาพ 64×64 · รายงานต่อภาพ: ความกว้าง/สูงของตาแต่ละข้าง · สะท้อนแล้วต่างกี่จุด · แถวบนสุดของตาเป็นสีมืด (ความสว่าง ≤ .15) กี่ % (ข้อมูลให้เจ้าของเลือก ไม่ใช่เกณฑ์ตก)
+- **ส่ง:** `eye-proto-01.png` … `eye-proto-20.png` (64×64 ไม่แก้) · `eye-proto-sheet.png` ตาราง 4 คอลัมน์ × 5 แถว ครอบหน้า x 12–52 y 4–30 ขยาย 8 เท่า บนพื้นเทาเขียว `#96A096` มีเลข E01–E20 ตัวใหญ่ · `eye-proto-qa.json` (ตัวเลขข้างบน + เครดิต + job ID + ยอดก่อน–หลัง)
+- ยังไม่ทำทิศอื่น ไม่แยกชั้น ไม่เกลา (เจ้าของเลือกก่อน แล้ว Claude ส่งสเปกเกลา)
+
+### พรอมป์ 20 อัน (คัดลอกตรง ๆ · คำต้องห้าม 0)
+**E01 · ตาโตกลมประกาย**
+
+```text
+Pixel art front view chibi child eyes on the supplied 64x64 face, repaint only the masked eye area. Big round sparkling eyes, large dark iris, two white highlight dots, one big and one small. Each eye about 7 px wide and 6 px tall, 3 px apart. Solid black upper eyelid line across the top of each eye. Iris one brown hue in 3 shades. Both eyes identical and mirrored, white highlight on the upper-left of both. Keep skin, hair and mouth unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**E02 · ตากลมประกายเดียว**
+
+```text
+Pixel art front view chibi child eyes on the supplied 64x64 face, repaint only the masked eye area. Round eyes with one big square white highlight, warm brown iris, a small white sclera pixel at each outer corner. Each eye about 7 px wide and 6 px tall, 3 px apart. Solid black upper eyelid line across the top of each eye. Iris one brown hue in 3 shades. Both eyes identical and mirrored, highlight on the upper-left of both. Keep skin, hair and mouth unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**E03 · ตารีตั้ง**
+
+```text
+Pixel art front view chibi child eyes on the supplied 64x64 face, repaint only the masked eye area. Tall oval eyes, each 5 px wide and 7 px tall with a soft rounded bottom, one white highlight, 4 px apart. Solid black upper eyelid line across the top of each eye. Iris one brown hue in 3 shades. Both eyes identical and mirrored, highlight on the upper-left of both. Keep skin, hair and mouth unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**E04 · ตาหลับยิ้ม**
+
+```text
+Pixel art front view chibi child eyes on the supplied 64x64 face, repaint only the masked eye area. Happy closed eyes shaped like upside-down U curves, a solid black line 1 to 2 px thick, each curve 7 px wide and 3 px tall, 3 px apart, no iris and no highlight. Both curves identical and mirrored. Keep skin, hair and mouth unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**E05 · ตาโตตกใจ**
+
+```text
+Pixel art front view chibi child eyes on the supplied 64x64 face, repaint only the masked eye area. Wide open surprised eyes: a small round iris in the middle with white showing all around it, thin outline. Each eye about 7 px wide and 7 px tall, 3 px apart. Solid black upper eyelid line across the top of each eye. Iris one brown hue in 3 shades. Both eyes identical and mirrored, white highlight on the upper-left of both. Keep skin, hair and mouth unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**E06 · ตาง่วงอ่อนโยน**
+
+```text
+Pixel art front view chibi child eyes on the supplied 64x64 face, repaint only the masked eye area. Relaxed half-lidded eyes: a thick black upper lid line covers the top half of the iris, calm and kind. Each eye about 7 px wide and 4 px tall, 3 px apart. Iris one brown hue in 3 shades. Both eyes identical and mirrored, one small white highlight on the upper-left of both. Keep skin, hair and mouth unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**E07 · ตามุ่งมั่น**
+
+```text
+Pixel art front view chibi child eyes on the supplied 64x64 face, repaint only the masked eye area. Determined eyes: a flat straight black upper lid line with the iris touching it, a short thick brow just above each eye. Each eye about 7 px wide and 5 px tall, 3 px apart. Iris one brown hue in 3 shades. Both eyes identical and mirrored, white highlight on the upper-left of both. Keep skin, hair and mouth unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**E08 · ตาหางตกใจดี**
+
+```text
+Pixel art front view chibi child eyes on the supplied 64x64 face, repaint only the masked eye area. Gentle droopy eyes: the outer corners sit 1 px lower, soft and kind look. Each eye about 7 px wide and 6 px tall, 3 px apart. Solid black upper eyelid line across the top of each eye. Iris one brown hue in 3 shades. Both eyes identical and mirrored, white highlight on the upper-left of both. Keep skin, hair and mouth unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**E09 · ตาแมว**
+
+```text
+Pixel art front view chibi child eyes on the supplied 64x64 face, repaint only the masked eye area. Cat-like eyes: outer corners lifted 1 px with a small black flick at the outer end of the lid line. Each eye about 7 px wide and 5 px tall, 3 px apart. Solid black upper eyelid line across the top of each eye. Iris one brown hue in 3 shades. Both eyes identical and mirrored, white highlight on the upper-left of both. Keep skin, hair and mouth unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**E10 · ตาดาว**
+
+```text
+Pixel art front view chibi child eyes on the supplied 64x64 face, repaint only the masked eye area. Starry eyes: a tiny white 4-point star highlight inside each iris. Each eye about 7 px wide and 6 px tall, 3 px apart. Solid black upper eyelid line across the top of each eye. Iris one brown hue in 3 shades. Both eyes identical and mirrored, star on the upper-left of both. Keep skin, hair and mouth unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**E11 · ตาจุดน่ารัก**
+
+```text
+Pixel art front view chibi child eyes on the supplied 64x64 face, repaint only the masked eye area. Small simple dot eyes: each eye 3 px wide and 4 px tall, solid dark iris with one white highlight pixel, 7 px apart. Iris one brown hue in 2 shades. Both eyes identical and mirrored, highlight on the upper-left of both. Keep skin, hair and mouth unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**E12 · ตาขนตายาว**
+
+```text
+Pixel art front view chibi child eyes on the supplied 64x64 face, repaint only the masked eye area. Big eyes with long upper lashes: the black lid line extends 1 px past the outer corner with 2 tiny lashes pointing up and out. Each eye about 7 px wide and 6 px tall, 3 px apart. Iris one brown hue in 3 shades. Both eyes identical and mirrored, white highlight on the upper-left of both. Keep skin, hair and mouth unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**E13 · ตาสองโทน**
+
+```text
+Pixel art front view chibi child eyes on the supplied 64x64 face, repaint only the masked eye area. Glossy eyes with a two-tone iris: darker top half, lighter bottom half, one white highlight. Each eye about 7 px wide and 6 px tall, 3 px apart. Solid black upper eyelid line across the top of each eye. Iris one brown hue in 3 shades. Both eyes identical and mirrored, highlight on the upper-left of both. Keep skin, hair and mouth unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**E14 · ตาอยากรู้มองขึ้น**
+
+```text
+Pixel art front view chibi child eyes on the supplied 64x64 face, repaint only the masked eye area. Curious eyes looking up: the iris sits high, touching the black lid line, with white visible below it. Each eye about 7 px wide and 6 px tall, 3 px apart. Solid black upper eyelid line across the top of each eye. Iris one brown hue in 3 shades. Both eyes identical and mirrored, white highlight on the upper-left of both. Keep skin, hair and mouth unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**E15 · ตามั่นใจยิ้ม**
+
+```text
+Pixel art front view chibi child eyes on the supplied 64x64 face, repaint only the masked eye area. Confident smiling eyes: the lower lid is raised in a soft upward curve and covers the bottom of the iris. Each eye about 7 px wide and 5 px tall, 3 px apart. Solid black upper eyelid line across the top of each eye. Iris one brown hue in 3 shades. Both eyes identical and mirrored, white highlight on the upper-left of both. Keep skin, hair and mouth unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**E16 · ตาประกายหัวใจ**
+
+```text
+Pixel art front view chibi child eyes on the supplied 64x64 face, repaint only the masked eye area. Cheerful eyes with a tiny white heart-shaped highlight in each iris. Each eye about 7 px wide and 6 px tall, 3 px apart. Solid black upper eyelid line across the top of each eye. Iris one brown hue in 3 shades. Both eyes identical and mirrored, heart on the upper-left of both. Keep skin, hair and mouth unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**E17 · ตาอัลมอนด์สงบ**
+
+```text
+Pixel art front view chibi child eyes on the supplied 64x64 face, repaint only the masked eye area. Calm almond-shaped eyes, each 8 px wide and 5 px tall, pointed outer corners, 2 px apart. Solid black upper eyelid line across the top of each eye. Iris one brown hue in 3 shades. Both eyes identical and mirrored, white highlight on the upper-left of both. Keep skin, hair and mouth unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**E18 · ตาวงแหวน**
+
+```text
+Pixel art front view chibi child eyes on the supplied 64x64 face, repaint only the masked eye area. Excited eyes with a ring highlight: a thin light ring inside the iris around a dark pupil, plus one white highlight. Each eye about 7 px wide and 7 px tall, 3 px apart. Solid black upper eyelid line across the top of each eye. Iris one brown hue in 3 shades. Both eyes identical and mirrored, highlight on the upper-left of both. Keep skin, hair and mouth unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**E19 · ตายิ้มครึ่งพระจันทร์**
+
+```text
+Pixel art front view chibi child eyes on the supplied 64x64 face, repaint only the masked eye area. Smiling half-moon eyes: open eyes whose lower edge curves up like a smile, the iris showing as a half circle. Each eye about 7 px wide and 4 px tall, 3 px apart. Solid black upper eyelid line across the top of each eye. Iris one brown hue in 3 shades. Both eyes identical and mirrored, white highlight on the upper-left of both. Keep skin, hair and mouth unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**E20 · ตาโตพิเศษ**
+
+```text
+Pixel art front view chibi child eyes on the supplied 64x64 face, repaint only the masked eye area. Extra big round eyes, each 8 px wide and 8 px tall, large pupil, two white highlights, no lower outline, 2 px apart. Solid black upper eyelid line across the top of each eye. Iris one brown hue in 3 shades. Both eyes identical and mirrored, highlights on the upper-left of both. Keep skin, hair and mouth unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+### ลำดับ
+E20 (ด่านแรก 2 งาน → ที่เหลือ 18) → งาน B ทดลอง 128 ครั้งที่ 2 (ฉบับ 17 เพดาน 10) · commit แยก · branch `codex/asset-08-kid-base` (ดึง main ล่าสุดก่อน) · CODEX_STATUS 1 บรรทัดต่อ commit + กล่อง "ข้อความส่ง Claude" · ห้ามแตะ `index.html` `sw.js` `test_*.js` · ไม่ push `main` · token ห้ามอยู่ในไฟล์ใด
