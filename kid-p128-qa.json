@@ -1,0 +1,619 @@
+{
+  "set": 8,
+  "spec_revision": 16,
+  "prototype_only": true,
+  "in_game": false,
+  "tool": "create_character_pro_flash",
+  "job_id": "379a4db8-80bf-4901-b97a-c368847411c9",
+  "character_id": "31fb9e20-4bc3-410e-a1fd-29d5e6f95f93",
+  "create_calls": 1,
+  "generation_retries": 0,
+  "credits": {
+    "cap": 30,
+    "quoted": 8,
+    "actual_generations": 8.0,
+    "balance_before": 3017,
+    "balance_after": 3009,
+    "balance_delta": 8,
+    "billing_stages": [
+      {
+        "stage": "first_direction",
+        "usage": {
+          "usd": 0.0,
+          "type": "generations",
+          "generations": 6
+        },
+        "generation_id": "236fd8af-653b-4197-86fc-d15d69571485"
+      },
+      {
+        "stage": "rotations",
+        "usage": {
+          "usd": 0.0,
+          "type": "generations",
+          "generations": 2,
+          "cost_if_paid": 0.03328641150395075
+        },
+        "generation_id": "2b824d5b-709d-4524-af65-324008059a7f"
+      }
+    ],
+    "cap_pass": true
+  },
+  "prompt_sha256": "df8418e324925f5003954981afd1426d74861876a354ae85c78ad5ccd0f5b453",
+  "prompt_characters": 1284,
+  "prompt_matches_api_metadata": true,
+  "style": {
+    "style_file": "kid-p128-style.png",
+    "style_size": [
+      64,
+      64
+    ],
+    "style_sha256": "93c02c4ada250d1d6dfb200f4e83c192656fadb91e3181543fd9af7fad380790",
+    "style_source": "kid8 hair1/body1/face1/mouth1/eyes1 native S after spec16 repair",
+    "style_resized": false
+  },
+  "raw_frame_rgba_sha256": [
+    "96cbd9c50aad9a6bd4d1b896785c0afd694350cf6adc7bf54b65db8871c6b2b1",
+    "5219560a42ac17ade9ad5399267d02c6cd8d955b0b78184fc4af12e564ad4ac7",
+    "31dabdf7fbadeb6b70733c0a9e19ccc5481ab32b33ea141cd3011c5a06900356",
+    "aa1bed6cc9249b3404a36bcf71945449eb1384992319b9c22df17a3a5d810c3f",
+    "61a2076fc093972a270f20bd5ae6cb53c88226ff712885f49d43d5772f8393d1",
+    "098870e533bc595e1f466734ab2604011cbe487a8664d4842248a212621cd566",
+    "5e635627ee460ffb7337356953caf72a559ce066a7cad90ed7345e8bc2d08a71",
+    "b4e7f03c21df362ce0406996bb4486b20c6f54d41e3e9c6178a085727d2c8169"
+  ],
+  "detail_detector_control": {
+    "control": "same native64px sheet enlarged2x nearest",
+    "uniform_2x2_fractions": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "expected": 1.0
+  },
+  "frame_size": [
+    128,
+    128
+  ],
+  "raw_size": [
+    1024,
+    128
+  ],
+  "frame_order": [
+    "S",
+    "SE",
+    "E",
+    "NE",
+    "N",
+    "NW",
+    "W",
+    "SW"
+  ],
+  "frames": [
+    {
+      "direction": "S",
+      "bbox_xyxy_exclusive": [
+        45,
+        32,
+        82,
+        94
+      ],
+      "height": 62,
+      "foot_row": 93,
+      "center_x": 62.74766355140187,
+      "center_error": 1.252336448598129,
+      "opaque_pixels": 1605,
+      "partial_alpha_pixels": 0,
+      "tiny_enclosed_components": [
+        [
+          [
+            80,
+            47
+          ]
+        ],
+        [
+          [
+            47,
+            56
+          ]
+        ],
+        [
+          [
+            56,
+            59
+          ],
+          [
+            57,
+            59
+          ],
+          [
+            58,
+            59
+          ]
+        ],
+        [
+          [
+            67,
+            59
+          ],
+          [
+            68,
+            59
+          ],
+          [
+            69,
+            59
+          ]
+        ],
+        [
+          [
+            70,
+            60
+          ],
+          [
+            70,
+            61
+          ]
+        ],
+        [
+          [
+            57,
+            67
+          ]
+        ],
+        [
+          [
+            68,
+            67
+          ],
+          [
+            68,
+            68
+          ]
+        ]
+      ],
+      "tiny_enclosed_pixels": 13,
+      "uniform_2x2_opaque_pixels": 20,
+      "uniform_2x2_opaque_fraction": 0.012461059190031152,
+      "numeric_pass": {
+        "height": false,
+        "foot": false,
+        "center": true,
+        "partial_alpha": true,
+        "tiny_gaps": false,
+        "real_detail": true
+      }
+    },
+    {
+      "direction": "SE",
+      "bbox_xyxy_exclusive": [
+        46,
+        32,
+        80,
+        94
+      ],
+      "height": 62,
+      "foot_row": 93,
+      "center_x": 63.07397069085834,
+      "center_error": 0.9260293091416614,
+      "opaque_pixels": 1433,
+      "partial_alpha_pixels": 0,
+      "tiny_enclosed_components": [],
+      "tiny_enclosed_pixels": 0,
+      "uniform_2x2_opaque_pixels": 60,
+      "uniform_2x2_opaque_fraction": 0.0418702023726448,
+      "numeric_pass": {
+        "height": false,
+        "foot": false,
+        "center": true,
+        "partial_alpha": true,
+        "tiny_gaps": true,
+        "real_detail": true
+      }
+    },
+    {
+      "direction": "E",
+      "bbox_xyxy_exclusive": [
+        47,
+        33,
+        79,
+        94
+      ],
+      "height": 61,
+      "foot_row": 93,
+      "center_x": 63.30098684210526,
+      "center_error": 0.6990131578947398,
+      "opaque_pixels": 1216,
+      "partial_alpha_pixels": 0,
+      "tiny_enclosed_components": [],
+      "tiny_enclosed_pixels": 0,
+      "uniform_2x2_opaque_pixels": 92,
+      "uniform_2x2_opaque_fraction": 0.0756578947368421,
+      "numeric_pass": {
+        "height": false,
+        "foot": false,
+        "center": true,
+        "partial_alpha": true,
+        "tiny_gaps": true,
+        "real_detail": true
+      }
+    },
+    {
+      "direction": "NE",
+      "bbox_xyxy_exclusive": [
+        49,
+        32,
+        79,
+        94
+      ],
+      "height": 62,
+      "foot_row": 93,
+      "center_x": 63.453292496171514,
+      "center_error": 0.5467075038284861,
+      "opaque_pixels": 1306,
+      "partial_alpha_pixels": 0,
+      "tiny_enclosed_components": [],
+      "tiny_enclosed_pixels": 0,
+      "uniform_2x2_opaque_pixels": 124,
+      "uniform_2x2_opaque_fraction": 0.09494640122511486,
+      "numeric_pass": {
+        "height": false,
+        "foot": false,
+        "center": true,
+        "partial_alpha": true,
+        "tiny_gaps": true,
+        "real_detail": true
+      }
+    },
+    {
+      "direction": "N",
+      "bbox_xyxy_exclusive": [
+        46,
+        32,
+        82,
+        94
+      ],
+      "height": 62,
+      "foot_row": 93,
+      "center_x": 63.67348284960422,
+      "center_error": 0.3265171503957802,
+      "opaque_pixels": 1516,
+      "partial_alpha_pixels": 0,
+      "tiny_enclosed_components": [
+        [
+          [
+            78,
+            54
+          ],
+          [
+            78,
+            55
+          ]
+        ],
+        [
+          [
+            77,
+            56
+          ]
+        ],
+        [
+          [
+            57,
+            60
+          ]
+        ]
+      ],
+      "tiny_enclosed_pixels": 4,
+      "uniform_2x2_opaque_pixels": 136,
+      "uniform_2x2_opaque_fraction": 0.08970976253298153,
+      "numeric_pass": {
+        "height": false,
+        "foot": false,
+        "center": true,
+        "partial_alpha": true,
+        "tiny_gaps": false,
+        "real_detail": true
+      }
+    },
+    {
+      "direction": "NW",
+      "bbox_xyxy_exclusive": [
+        46,
+        32,
+        82,
+        94
+      ],
+      "height": 62,
+      "foot_row": 93,
+      "center_x": 63.29481286933684,
+      "center_error": 0.7051871306631625,
+      "opaque_pixels": 1523,
+      "partial_alpha_pixels": 0,
+      "tiny_enclosed_components": [],
+      "tiny_enclosed_pixels": 0,
+      "uniform_2x2_opaque_pixels": 148,
+      "uniform_2x2_opaque_fraction": 0.09717662508207485,
+      "numeric_pass": {
+        "height": false,
+        "foot": false,
+        "center": true,
+        "partial_alpha": true,
+        "tiny_gaps": true,
+        "real_detail": true
+      }
+    },
+    {
+      "direction": "W",
+      "bbox_xyxy_exclusive": [
+        49,
+        33,
+        79,
+        94
+      ],
+      "height": 61,
+      "foot_row": 93,
+      "center_x": 63.53981559094719,
+      "center_error": 0.46018440905280755,
+      "opaque_pixels": 1193,
+      "partial_alpha_pixels": 0,
+      "tiny_enclosed_components": [],
+      "tiny_enclosed_pixels": 0,
+      "uniform_2x2_opaque_pixels": 96,
+      "uniform_2x2_opaque_fraction": 0.08046940486169321,
+      "numeric_pass": {
+        "height": false,
+        "foot": false,
+        "center": true,
+        "partial_alpha": true,
+        "tiny_gaps": true,
+        "real_detail": true
+      }
+    },
+    {
+      "direction": "SW",
+      "bbox_xyxy_exclusive": [
+        48,
+        32,
+        79,
+        94
+      ],
+      "height": 62,
+      "foot_row": 93,
+      "center_x": 62.79340141398272,
+      "center_error": 1.2065985860172788,
+      "opaque_pixels": 1273,
+      "partial_alpha_pixels": 0,
+      "tiny_enclosed_components": [],
+      "tiny_enclosed_pixels": 0,
+      "uniform_2x2_opaque_pixels": 76,
+      "uniform_2x2_opaque_fraction": 0.05970149253731343,
+      "numeric_pass": {
+        "height": false,
+        "foot": false,
+        "center": true,
+        "partial_alpha": true,
+        "tiny_gaps": true,
+        "real_detail": true
+      }
+    }
+  ],
+  "uniform_block_method": "even-aligned2x2 grid; all4 RGBA pixels equal and opaque; numerator4 per block / all opaque pixels; transparent blocks excluded",
+  "numeric_acceptance_pass": false,
+  "raw_sha256": "f9807aaea0331a939b19f268931661a4af22d22e71820b1a89578f10f9156772",
+  "raw_modified": false,
+  "layers_extracted": false,
+  "comparison": {
+    "file": "kid-p128-compare.png",
+    "size": [
+      4096,
+      1024
+    ],
+    "top": "native64px hair1/body1/eyes1/mouth1 ×8",
+    "bottom": "native128px raw ×4",
+    "runtime_resampling": false,
+    "comparison_nearest_neighbour_only": true
+  },
+  "semantic_review": {
+    "front_scarf_yellow_pixels": 76,
+    "front_scarf_bbox_xyxy_exclusive": [
+      57,
+      60,
+      69,
+      72
+    ],
+    "front_scarf_bbox_area_upper_bound": 144,
+    "front_scarf_threshold": 240,
+    "front_scarf_pass": false,
+    "front_scarf_method": "Visually confirmed neck knot and two tails in bbox; HSV hue0.08..0.16, saturation>=0.5; hair ties and skirt gold trim excluded. Even the entire reviewed scarf bounding box has only144 pixels (<240).",
+    "front_scarf_mask_rle": [
+      [
+        60,
+        57,
+        4
+      ],
+      [
+        60,
+        65,
+        4
+      ],
+      [
+        61,
+        57,
+        4
+      ],
+      [
+        61,
+        65,
+        4
+      ],
+      [
+        62,
+        58,
+        4
+      ],
+      [
+        62,
+        64,
+        4
+      ],
+      [
+        63,
+        59,
+        8
+      ],
+      [
+        64,
+        59,
+        8
+      ],
+      [
+        65,
+        59,
+        3
+      ],
+      [
+        65,
+        64,
+        3
+      ],
+      [
+        66,
+        58,
+        4
+      ],
+      [
+        66,
+        65,
+        3
+      ],
+      [
+        67,
+        59,
+        3
+      ],
+      [
+        67,
+        65,
+        3
+      ],
+      [
+        68,
+        58,
+        4
+      ],
+      [
+        68,
+        65,
+        3
+      ],
+      [
+        69,
+        58,
+        4
+      ],
+      [
+        69,
+        65,
+        1
+      ],
+      [
+        69,
+        67,
+        1
+      ],
+      [
+        70,
+        59,
+        2
+      ],
+      [
+        70,
+        65,
+        2
+      ]
+    ],
+    "front_scarf_palette_rgb": [
+      [
+        129,
+        77,
+        14
+      ],
+      [
+        148,
+        90,
+        20
+      ],
+      [
+        158,
+        110,
+        63
+      ],
+      [
+        163,
+        100,
+        20
+      ],
+      [
+        178,
+        129,
+        69
+      ],
+      [
+        183,
+        116,
+        29
+      ],
+      [
+        200,
+        133,
+        31
+      ],
+      [
+        225,
+        156,
+        45
+      ],
+      [
+        240,
+        174,
+        57
+      ],
+      [
+        248,
+        198,
+        76
+      ]
+    ],
+    "rear_eyes_mouth_pixels": {
+      "NE": 0,
+      "N": 0,
+      "NW": 0
+    },
+    "rear_review_method": "Visual inspection of all three rear-facing heads; no eyes/mouth visible",
+    "rear_pass": true,
+    "actual_target_scale_detail_pass": false,
+    "target_scale_reason": "Opaque figure is only61–62px high; a128px canvas does not establish a120–124px detailed figure."
+  },
+  "all_acceptance_pass": false,
+  "failed_criteria": [
+    "height120–124 (all8 fail)",
+    "foot124 (all8 at93)",
+    "tiny enclosed1–3px groups (S13,N4 pixels)",
+    "front scarf yellow>=240 (below threshold)"
+  ],
+  "raw_zip_pixel_check": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "conclusion": "Single authorized trial delivered, not accepted as a2x-detail character. No raw edits, no second generation."
+}
