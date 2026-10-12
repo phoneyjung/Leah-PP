@@ -1,0 +1,562 @@
+{
+  "asset_set": "08",
+  "stage": "B1 pilot",
+  "date": "2026-10-12",
+  "spec": "ASSET_SPEC_08_kid_base.md revision10; exact revision9 prompts",
+  "base_commit": "1db9b91",
+  "main_fetched": "33ef503",
+  "branch": "codex/asset-08-kid-base",
+  "tool": "create_character_pro_flash",
+  "size": [
+    64,
+    64
+  ],
+  "directions": [
+    "S",
+    "SE",
+    "E",
+    "NE",
+    "N",
+    "NW",
+    "W",
+    "SW"
+  ],
+  "quote": {
+    "image": 5,
+    "rotations": 1,
+    "total": 6,
+    "provisional": true
+  },
+  "balance_before": 3209,
+  "balance_after": 3197,
+  "generations_spent": 12,
+  "authorized_cap": 20,
+  "usd_credits_before": 0,
+  "usd_credits_after": 0,
+  "concept_mode": {
+    "separate_concept_field_found": false,
+    "character_tool_with_concept_field_count": 0,
+    "price": null,
+    "mode_changed": false
+  },
+  "jobs": [
+    {
+      "part": "HF1",
+      "character_id": "d6d54e69-0c4d-493c-bd0f-d95297e9cf1e",
+      "job_id": "155d389b-70bc-4656-9d20-449b5f07857b",
+      "status": "completed",
+      "balance_before": 3209,
+      "balance_after": 3203,
+      "actual_generations": 6.0,
+      "billing_stages": [
+        {
+          "stage": "first_direction",
+          "usage": {
+            "usd": 0.0,
+            "type": "generations",
+            "generations": 5
+          },
+          "generation_id": "d9eb3a22-41a9-46da-8ac6-2dad9e89d6c7"
+        },
+        {
+          "stage": "rotations",
+          "usage": {
+            "usd": 0.0,
+            "type": "generations",
+            "generations": 1,
+            "cost_if_paid": 0.03003756980763541
+          },
+          "generation_id": "e675ac38-dc06-4b6f-89a1-f7ba14ad508e"
+        }
+      ],
+      "create_calls": 1,
+      "retries": 0,
+      "prompt_characters": 1797,
+      "prompt_sha256": "152883fddbe9a3f902de70dc2dc6d4362f89ed1998c13cd671d49a348e71f371",
+      "returned_prompt_matches_v9": true,
+      "style_opaque_pixels": 1482,
+      "raw_pixels_match_export": "8/8"
+    },
+    {
+      "part": "OF1",
+      "character_id": "c4ca44f8-2991-4a25-bb7c-ddd4c16818f5",
+      "job_id": "31ffbfeb-c5c7-4f11-a2c6-ece12ab9eb3d",
+      "status": "completed",
+      "balance_before": 3203,
+      "balance_after": 3197,
+      "actual_generations": 6.0,
+      "billing_stages": [
+        {
+          "stage": "first_direction",
+          "usage": {
+            "usd": 0.0,
+            "type": "generations",
+            "generations": 5
+          },
+          "generation_id": "172ef847-dca6-4cdc-a6ae-a79fdd1127f9"
+        },
+        {
+          "stage": "rotations",
+          "usage": {
+            "usd": 0.0,
+            "type": "generations",
+            "generations": 1,
+            "cost_if_paid": 0.023992952850129867
+          },
+          "generation_id": "8cb7dff9-353c-4f49-a2ef-e9001acf1b64"
+        }
+      ],
+      "create_calls": 1,
+      "retries": 0,
+      "prompt_characters": 1905,
+      "prompt_sha256": "eaa8988aafe2aff1f97a9e9362ee58195dc28a8791f3383bcfa47735a9c24248",
+      "returned_prompt_matches_v9": true,
+      "style_opaque_pixels": 1475,
+      "raw_pixels_match_export": "8/8"
+    }
+  ],
+  "measurements": {
+    "hf1": [
+      {
+        "direction": "S",
+        "bbox_xyxy_exclusive": [
+          10,
+          2,
+          53,
+          63
+        ],
+        "height": 61,
+        "bottom_row": 62,
+        "bbox_center_x": 31.0,
+        "partial_alpha_pixels": 0,
+        "rgba_sha256": "4225ccf89f23c9dae3aefcd9c86217256c125d21ddde727627511ddc17873ce3"
+      },
+      {
+        "direction": "SE",
+        "bbox_xyxy_exclusive": [
+          11,
+          2,
+          49,
+          63
+        ],
+        "height": 61,
+        "bottom_row": 62,
+        "bbox_center_x": 29.5,
+        "partial_alpha_pixels": 0,
+        "rgba_sha256": "d3f28cd78c107c1512ff5edbbd4c040765f834c6f3a00b2333eb0370657855a8"
+      },
+      {
+        "direction": "E",
+        "bbox_xyxy_exclusive": [
+          17,
+          2,
+          44,
+          63
+        ],
+        "height": 61,
+        "bottom_row": 62,
+        "bbox_center_x": 30.0,
+        "partial_alpha_pixels": 0,
+        "rgba_sha256": "0fb90dc67b3d935a14c0418d7a27deea7fee0d31b4585033459abe03a1203808"
+      },
+      {
+        "direction": "NE",
+        "bbox_xyxy_exclusive": [
+          12,
+          2,
+          48,
+          63
+        ],
+        "height": 61,
+        "bottom_row": 62,
+        "bbox_center_x": 29.5,
+        "partial_alpha_pixels": 0,
+        "rgba_sha256": "5dbc5049dffbf42afe891b9af9415d02cd21bdcabd188ca0bb46f3f36ef42313"
+      },
+      {
+        "direction": "N",
+        "bbox_xyxy_exclusive": [
+          10,
+          2,
+          53,
+          62
+        ],
+        "height": 60,
+        "bottom_row": 61,
+        "bbox_center_x": 31.0,
+        "partial_alpha_pixels": 0,
+        "rgba_sha256": "d8d851ef1707d49f498cd052f5666c5306a92e7d80d40d47eb9394962214b5c2"
+      },
+      {
+        "direction": "NW",
+        "bbox_xyxy_exclusive": [
+          17,
+          2,
+          51,
+          63
+        ],
+        "height": 61,
+        "bottom_row": 62,
+        "bbox_center_x": 33.5,
+        "partial_alpha_pixels": 0,
+        "rgba_sha256": "6cdf3718fc2930f523d0c3a33fdbdaa8f5898d5670c86a3445fc2a785a42d103"
+      },
+      {
+        "direction": "W",
+        "bbox_xyxy_exclusive": [
+          19,
+          2,
+          46,
+          63
+        ],
+        "height": 61,
+        "bottom_row": 62,
+        "bbox_center_x": 32.0,
+        "partial_alpha_pixels": 0,
+        "rgba_sha256": "2166e2ad69d38e66af34344d367141c5f146f96392067447f1eacb39692d7ffc"
+      },
+      {
+        "direction": "SW",
+        "bbox_xyxy_exclusive": [
+          14,
+          2,
+          53,
+          63
+        ],
+        "height": 61,
+        "bottom_row": 62,
+        "bbox_center_x": 33.0,
+        "partial_alpha_pixels": 0,
+        "rgba_sha256": "15f9084d2c75ccab7dde06935823971e70a18452ee14fc1bfce39aaf1ed3f111"
+      }
+    ],
+    "of1": [
+      {
+        "direction": "S",
+        "bbox_xyxy_exclusive": [
+          18,
+          3,
+          46,
+          63
+        ],
+        "height": 60,
+        "bottom_row": 62,
+        "bbox_center_x": 31.5,
+        "partial_alpha_pixels": 0,
+        "rgba_sha256": "f4b5b00d5acd22c4806893eb128ce6a1ccc595a99455119cc191034b07d4ce23"
+      },
+      {
+        "direction": "SE",
+        "bbox_xyxy_exclusive": [
+          18,
+          1,
+          47,
+          63
+        ],
+        "height": 62,
+        "bottom_row": 62,
+        "bbox_center_x": 32.0,
+        "partial_alpha_pixels": 0,
+        "rgba_sha256": "7628878b6421dfcf3da6946d57df319aa0c631863eaf56ba3c0caf2a51e6951e"
+      },
+      {
+        "direction": "E",
+        "bbox_xyxy_exclusive": [
+          18,
+          2,
+          44,
+          63
+        ],
+        "height": 61,
+        "bottom_row": 62,
+        "bbox_center_x": 30.5,
+        "partial_alpha_pixels": 0,
+        "rgba_sha256": "05d1408ab3dcb49fec79a2aa91727ee7801dd0a0992bd527c5a53e2a8cb3d410"
+      },
+      {
+        "direction": "NE",
+        "bbox_xyxy_exclusive": [
+          18,
+          2,
+          44,
+          62
+        ],
+        "height": 60,
+        "bottom_row": 61,
+        "bbox_center_x": 30.5,
+        "partial_alpha_pixels": 0,
+        "rgba_sha256": "c4b2f5f9da9353b3ea82d2509512e4c444ac50be2ddebd02a9c12abbfde9d7cc"
+      },
+      {
+        "direction": "N",
+        "bbox_xyxy_exclusive": [
+          17,
+          4,
+          47,
+          62
+        ],
+        "height": 58,
+        "bottom_row": 61,
+        "bbox_center_x": 31.5,
+        "partial_alpha_pixels": 0,
+        "rgba_sha256": "e7e8ab91e74b146e234048448276b896ce3d06a78e1efaa330daa2d49613350f"
+      },
+      {
+        "direction": "NW",
+        "bbox_xyxy_exclusive": [
+          17,
+          1,
+          46,
+          62
+        ],
+        "height": 61,
+        "bottom_row": 61,
+        "bbox_center_x": 31.0,
+        "partial_alpha_pixels": 0,
+        "rgba_sha256": "518723252cf31a7f2b603354c8d31842c2dbcba1dfc8fe68b5ef7d22eeae7377"
+      },
+      {
+        "direction": "W",
+        "bbox_xyxy_exclusive": [
+          21,
+          2,
+          46,
+          63
+        ],
+        "height": 61,
+        "bottom_row": 62,
+        "bbox_center_x": 33.0,
+        "partial_alpha_pixels": 0,
+        "rgba_sha256": "8e27bf5b23ec18601c4068f0d376239c3fa1abb290f3b9f5466966f419bee16b"
+      },
+      {
+        "direction": "SW",
+        "bbox_xyxy_exclusive": [
+          19,
+          2,
+          46,
+          63
+        ],
+        "height": 61,
+        "bottom_row": 62,
+        "bbox_center_x": 32.0,
+        "partial_alpha_pixels": 0,
+        "rgba_sha256": "dd3d6db4aa01a88820a9458069f46071743c23cc4dc4b54740a76a8f3292806a"
+      }
+    ],
+    "combo": [
+      {
+        "direction": "S",
+        "bbox_xyxy_exclusive": [
+          10,
+          2,
+          53,
+          63
+        ],
+        "height": 61,
+        "bottom_row": 62,
+        "bbox_center_x": 31.0,
+        "partial_alpha_pixels": 0,
+        "rgba_sha256": "b4884431525b5fc2cb613588f0006d8ca07e8d2050da968405b85e633de25d93"
+      },
+      {
+        "direction": "SE",
+        "bbox_xyxy_exclusive": [
+          11,
+          2,
+          49,
+          63
+        ],
+        "height": 61,
+        "bottom_row": 62,
+        "bbox_center_x": 29.5,
+        "partial_alpha_pixels": 0,
+        "rgba_sha256": "d44c47fd4083612f6d0278efe3beccec208010e1dc3bc1fe75eef99974fbcd76"
+      },
+      {
+        "direction": "E",
+        "bbox_xyxy_exclusive": [
+          17,
+          2,
+          44,
+          63
+        ],
+        "height": 61,
+        "bottom_row": 62,
+        "bbox_center_x": 30.0,
+        "partial_alpha_pixels": 0,
+        "rgba_sha256": "67351cfdf65586de50c771d3b348686fe23b192002a5319b84a1da4be3ff3d0b"
+      },
+      {
+        "direction": "NE",
+        "bbox_xyxy_exclusive": [
+          12,
+          2,
+          48,
+          63
+        ],
+        "height": 61,
+        "bottom_row": 62,
+        "bbox_center_x": 29.5,
+        "partial_alpha_pixels": 0,
+        "rgba_sha256": "8cbc21612d7de191cbc4ff52c13947caaee9399fb5bda788275eca18fe4d6619"
+      },
+      {
+        "direction": "N",
+        "bbox_xyxy_exclusive": [
+          10,
+          2,
+          53,
+          63
+        ],
+        "height": 61,
+        "bottom_row": 62,
+        "bbox_center_x": 31.0,
+        "partial_alpha_pixels": 0,
+        "rgba_sha256": "be16ce3a88c785ed633a7d225a88c5c6c0f2911470b0db43b0504008d08e98d2"
+      },
+      {
+        "direction": "NW",
+        "bbox_xyxy_exclusive": [
+          17,
+          2,
+          51,
+          63
+        ],
+        "height": 61,
+        "bottom_row": 62,
+        "bbox_center_x": 33.5,
+        "partial_alpha_pixels": 0,
+        "rgba_sha256": "b547d7302e0aea15e696d5c3f30568e200cc316c6a9355b273745fe97658fc17"
+      },
+      {
+        "direction": "W",
+        "bbox_xyxy_exclusive": [
+          19,
+          2,
+          46,
+          63
+        ],
+        "height": 61,
+        "bottom_row": 62,
+        "bbox_center_x": 32.0,
+        "partial_alpha_pixels": 0,
+        "rgba_sha256": "2bfdc4cbafbba3b5c40bbf6470e501517ea5a734d6fadbebf4901c5efa6bcfe8"
+      },
+      {
+        "direction": "SW",
+        "bbox_xyxy_exclusive": [
+          14,
+          2,
+          53,
+          63
+        ],
+        "height": 61,
+        "bottom_row": 62,
+        "bbox_center_x": 33.0,
+        "partial_alpha_pixels": 0,
+        "rgba_sha256": "3fcfee6f75063035955f4c70fda9f88aaf5e222cf6ff86b5dc343e5369600754"
+      }
+    ]
+  },
+  "combo_body_translation_xy": [
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      0
+    ]
+  ],
+  "combo_head_translation_xy": [
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      0
+    ]
+  ],
+  "source_pixel_rescaling": false,
+  "notes_th": [
+    "ผลทดลองสำหรับตรวจ ยังไม่รับรองผ่านเกณฑ์ทั้งหมด และยังไม่ใช่เลเยอร์พร้อมใช้ในเกม",
+    "raw ทั้งสองไฟล์คง RGBA ทุกจุดจาก ZIP ของ PixelLab; เรียงใหม่เป็นแผ่นอย่างเดียว ไม่ย่อ ขยาย เลื่อน หรือเกลา raw",
+    "combo คัดหัว/ผม H-F1 ด้วยมาสก์รายทิศ วางบนตัว O-F1; ไม่ย่อสัดส่วน ไม่วาดเพิ่ม ไม่แก้สี; เลื่อนตัว O-F1 เฉพาะ NE/N/NW ลง1px ให้เท้าแถว62",
+    "combo สูง61px เท้าแถว62 alpha0/255 ครบ8/8; bbox_center_x เป็นกึ่งกลางขอบรูปทั้งหมดรวมผม ไม่ใช่ข้อยืนยัน anchor x32; ต้องตรวจ/จัดแกนตัวและหัวร่วมกันก่อนใช้จริง",
+    "O-F1 raw ทิศNสูง58px และ NE/N/NW เท้าแถว61; H-F1 raw ทิศNเท้าแถว61",
+    "ต้องเพิ่มผ้าพันคอด้านหลัง NE/N/NW ให้มองเห็น wrap/ปลายพับ และวัดจำนวนพิกเซลใหม่ให้ถึง30ทุกทิศ",
+    "คอใน combo สัมผัสตัวครบ8ทิศจากการดูภาพ แต่หัวบังปมและส่วนบนของผ้าพันคอ; ต้องเกลารอยต่อคอและคืนปมกับชายผ้า2เส้น ไม่ถือว่าผ่านจำนวนพิกเซลผ้าพันคอ",
+    "สีทองผ้าพันคอ ตะเกียง และชายกระโปรงใช้ RGB ซ้ำกันอย่างน้อย4สี (205,120,42)/(229,147,51)/(245,168,59)/(251,190,77); ต้องแยก ramp/mask ก่อนเปลี่ยนสีบ้าน",
+    "ต้องเกลาหน้าให้ยิ้มกว้างเห็นแถบฟันชัดและตรวจตาสองข้างเปิดเท่ากัน; ไม่อ้างว่าผ่านคะแนนหน้า9.5หรือชุด8.5",
+    "จากการดูภาพ ทิศNE/N/NWไม่พบตาหรือปาก; ยังไม่มี semantic mask รับรองจำนวนตา/ปากหรือช่องโหว่ทั้งหมด",
+    "จำนวนพิกเซลผ้าพันคอ ขนาดกรอบทองตะเกียง และขอบทองต้องให้Claudeวัดด้วยมาสก์ชิ้นงาน; ไม่ใช้จำนวนในbboxแทนจำนวนพิกเซลวัสดุ"
+  ],
+  "files": {
+    "kid-b1-pilot-of1-raw.png": {
+      "size_bytes": 15783,
+      "sha256": "84b1a734bdc60befc3c9a2c69fe49ee740999941f42b8cb2f0410e3c9d98d4bf"
+    },
+    "kid-b1-pilot-combo.png": {
+      "size_bytes": 25125,
+      "sha256": "312c6df41947180008310254f2752cdca5f9164397af7756b15801b8c20c3cac"
+    },
+    "kid-b1-pilot-combo-4x.png": {
+      "size_bytes": 35543,
+      "sha256": "a98efe59151f799bc0ac4c431d8534197994894182f8e455ad705a83cade2823"
+    },
+    "kid-b1-pilot-hf1-raw.png": {
+      "size_bytes": 23917,
+      "sha256": "c20eda96807033c16986a8f96b2aa9546c0b31f3a378bad870371b16cc0f94a9"
+    }
+  }
+}
