@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.28';
+const VERSION='Lantern Academy 2.29';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -7603,4 +7603,63 @@ const SWIPE227={n:0};
 // ===== 2.28 (overnight): on a short phone (812×330) the create screen's fifth round button ("บ้าน" since the paperdoll put "ตัว" before it) ended 12–17 px below
 // the screen, so a child could hardly pick a house. Short screens get 50 px round buttons 4 px apart (still ≥ 44 px): the five end at about 304 px
 try{const st=document.createElement('style');st.id='rail228';st.textContent='@media (max-height:350px){#cr.c193 .rail{gap:4px!important}#cr.c193 .rail button{width:50px!important;min-width:50px!important;max-width:50px!important;height:50px!important;min-height:50px!important}#cr.c193 .rail button small{font-size:12px!important}}';document.head.appendChild(st)}catch(e){}
+// 2.29 (owner 12 Oct 16:26 with three pictures from the game: "หน้ายังแสดงผิด และผ้าคลุมด้วย ลองเชคหน้าอื่นๆ ให้ดีและแก้ไข") — the set 07 pieces children dress in
+// until set 08 replaces them. Nothing is repainted: Codex's own pixels are only moved or taken from his other piece, and the house colour reaches the whole cape.
+//  (1) the cape: crimson cape shades that pd-kid.json leaves out of the cape's colour list stayed red on a yellow/blue/green cape (dots along the hem and the back,
+//      a red lining at the neck seen from the side). Those shades, touching the cape, now take the house colour too. Skin shades, the gold trim, the brown
+//      skirt/shorts/boots and the dark low-saturation shading are never touched (they are not in the crimson family or are in the skin list).
+//  (2) the freckled face (face 2): seen from the front its freckles are fine, but turned (SE, E, W, SW) they are pink squares that read as plasters → in those
+//      four views it shows face 1, Codex's own frames (the freckles come back when the child faces the front again).
+//  (3) a mouth drawn on the face's outline (seen from the right: the open mouth 1 px a frame, the grin 3 px a frame, so the lips/teeth stuck out of the cheek)
+//      moves one pixel into the face, in exactly those frames; its colour regions move with it.
+const FIX229={on:false,face:{},mouth:{},cape:{}};
+function fix229Light(r,g,b){const [h,,l]=hslOf(r/255,g/255,b/255);return h>=5&&h<=30&&l>=.58}   /* the peach light of a hand (a red lip/cape shade is not) */
+function fix229Crimson(r,g,b){const [h,s,l]=hslOf(r/255,g/255,b/255);return (h>=320||h<=5)&&s>=.42&&l>=.08&&l<=.85}
+// runs [y,x,n] inside a box, cut to it
+function fix229Runs(runs,x0,y0,w,h,dx){const out=[];for(const [y,x,n] of runs||[]){if(y<y0||y>=y0+h)continue;let a=Math.max(x,x0),b=Math.min(x+n,x0+w);if(b<=a)continue;a+=dx;b+=dx;a=Math.max(a,x0);b=Math.min(b,x0+w);if(b>a)out.push([y,a,b-a])}return out}
+function fix229Drop(runs,x0,y0,w,h){const out=[];for(const [y,x,n] of runs||[]){if(y<y0||y>=y0+h){out.push([y,x,n]);continue}if(x<x0)out.push([y,x,Math.min(n,x0-x)]);if(x+n>x0+w){const s=Math.max(x,x0+w);out.push([y,s,x+n-s])}}return out}
+function fix229Cells(f){const walk=/-walk\.png$/.test(f);return walk?[1,2,6,7].map(r=>({x:0,y:r*64,w:384,h:64,frames:[0,1,2,3,4,5].map(c=>({x:c*64,y:r*64}))})):[1,2,6,7].map(i=>({x:i*64,y:0,w:64,h:64,frames:[{x:i*64,y:0}]}))}
+function fix229Prep(){const d=PD219.d;if(!d||!/ASSET_SPEC_07/.test(d.spec||''))return;FIX229.on=true;
+  const pd=(part,n,walk)=>{if(walk){const w=d.walk,p=w&&w.parts.find(q=>q.part===part&&q.option===n);return p?p.file:null}return pd219File(part,n)};
+  for(const walk of [false,true]){const f1=pd('face',1,walk);if(!f1||!PD219.img[f1])continue;const W=walk?384:896,H=walk?512:64,a1=toCanvas(PD219.img[f1]).getContext('2d').getImageData(0,0,W,H).data;
+    // (2) a face other than face 1: the four turned views are face 1's
+    for(const q of (walk?(d.walk.parts||[]):d.parts).filter(q=>q.part==='face'&&q.option!==1)){const f=q.file;if(!PD219.img[f])continue;const c=toCanvas(PD219.img[f]),g=c.getContext('2d');let n=0;
+      const before=g.getImageData(0,0,W,H).data;for(const b of fix229Cells(f)){g.clearRect(b.x,b.y,b.w,b.h);g.drawImage(PD219.img[f1],b.x,b.y,b.w,b.h,b.x,b.y,b.w,b.h)}
+      const after=g.getImageData(0,0,W,H).data;for(let i=0;i<after.length;i+=4)if(after[i]!==before[i]||after[i+1]!==before[i+1]||after[i+2]!==before[i+2]||after[i+3]!==before[i+3])n++;
+      const R=d.regions[f]=Object.assign({},d.regions[f]||{}),R1=d.regions[f1]||{};for(const gname of PD219.G){let runs=R[gname]||[];for(const b of fix229Cells(f)){runs=fix229Drop(runs,b.x,b.y,b.w,b.h).concat(fix229Runs(R1[gname],b.x,b.y,b.w,b.h,0))}R[gname]=runs}
+      PD219.img[f]=c;FIX229.face[f]=n}
+    // (3) a mouth on face 1's outline: that frame moves 1 px (then 2) the way that keeps every pixel inside the face
+    const edge=(x,y)=>{if(x<0||y<0||x>=W||y>=H)return true;if(!a1[(y*W+x)*4+3])return true;for(const [ex,ey] of [[1,0],[-1,0],[0,1],[0,-1]]){const X=x+ex,Y=y+ey;if(X<0||Y<0||X>=W||Y>=H||!a1[(Y*W+X)*4+3])return true}return false};
+    for(const q of (walk?(d.walk.parts||[]):d.parts).filter(q=>q.part==='mouth')){const f=q.file;if(!PD219.img[f])continue;const src=PD219.img[f],c=toCanvas(src),g=c.getContext('2d'),m=g.getImageData(0,0,W,H).data,moved=[];
+      const frames=walk?[...Array(48).keys()].map(k=>({x:(k%6)*64,y:Math.floor(k/6)*64})):[...Array(14).keys()].map(k=>({x:k*64,y:0}));
+      for(const fr of frames){const px=[];for(let y=fr.y;y<fr.y+64;y++)for(let x=fr.x;x<fr.x+64;x++)if(m[(y*W+x)*4+3])px.push([x,y]);const bad=dx=>px.filter(([x,y])=>edge(x+dx,y)).length;if(!px.length||!bad(0))continue;
+        let best=null;for(const dx of [-1,1,-2,2])if(!bad(dx)){best=dx;break}if(best===null)continue;
+        g.clearRect(fr.x,fr.y,64,64);g.save();g.beginPath();g.rect(fr.x,fr.y,64,64);g.clip();g.drawImage(src,fr.x,fr.y,64,64,fr.x+best,fr.y,64,64);g.restore();
+        const R=d.regions[f]=Object.assign({},d.regions[f]||{});for(const gname of PD219.G){const inside=fix229Runs(R[gname],fr.x,fr.y,64,64,best);R[gname]=fix229Drop(R[gname],fr.x,fr.y,64,64).concat(inside)}
+        moved.push([fr.x/64|0,fr.y/64|0,best,bad(0)])}
+      if(moved.length){PD219.img[f]=c;FIX229.mouth[f]=moved}}}}
+{const o=pd219Prep;pd219Prep=function(){try{fix229Prep()}catch(e){FIX229.err=String(e)}return o.apply(this,arguments)}}
+// (1) the cape: the house colour spreads from the cape into the touching crimson shades the colour list misses, then into the crimson/plum specks the cape surrounds
+//     (5 of their 8 neighbours are cape), and skin-coloured crimson patches that hold no light skin shade (a hand always does) · the cape's collar that Codex painted into the face and the
+//     back-hair layers (cape colours at the neck: seen from the side a red patch behind the neck) takes the house colour as well
+function fix229Part(f){const d=PD219.d,q=d.parts.concat((d.walk&&d.walk.parts)||[]).find(q=>q.file===f);return q?q.part:null}
+{const o=pd219Cls;pd219Cls=function(f){const r=o.apply(this,arguments);try{const part=r&&FIX229.on?fix229Part(f):null;if(part==='body'||part==='face'||part==='hairback'){
+  const {p,W}=r,cls=PD219.cls[f],H=cls.length/W,hx=x=>parseInt(x.slice(1),16),skin=new Set(PD219.d.groups.skin.map(hx)),coat=new Set(PD219.d.groups.coat.map(hx));let n=0;
+  if(part==='body'){const st=[];for(let j=0;j<cls.length;j++)if(cls[j]===5)st.push(j);
+    while(st.length){const j=st.pop(),x=j%W,y=(j/W)|0;for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){const X=x+dx,Y=y+dy;if(X<0||Y<0||X>=W||Y>=H)continue;const k=Y*W+X;if(cls[k])continue;const i=k*4;
+      if(!p[i+3]||skin.has((p[i]<<16)|(p[i+1]<<8)|p[i+2])||!fix229Crimson(p[i],p[i+1],p[i+2]))continue;cls[k]=5;n++;st.push(k)}}
+    const surround=()=>{for(let pass=0;pass<4;pass++){const add=[];for(let j=0;j<cls.length;j++){if(cls[j])continue;const i=j*4;if(!p[i+3]||skin.has((p[i]<<16)|(p[i+1]<<8)|p[i+2]))continue;const [h,s,l]=hslOf(p[i]/255,p[i+1]/255,p[i+2]/255);if(!((h>=300||h<=15)&&s>=.2&&l>=.08))continue;
+      const x=j%W,y=(j/W)|0;let c=0;for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){if(!dx&&!dy)continue;const X=x+dx,Y=y+dy;if(X>=0&&Y>=0&&X<W&&Y<H&&cls[Y*W+X]===5)c++}if(c>=5)add.push(j)}
+      for(const j of add)cls[j]=5;n+=add.length;if(!add.length)break}};surround();
+    // skin-coloured crimson that is not a hand: a patch of skin shades with no light skin in it (a hand always has its light shades), touching the cape
+    {const seen=new Uint8Array(cls.length),isSk=j=>{const i=j*4;return p[i+3]&&!cls[j]&&skin.has((p[i]<<16)|(p[i+1]<<8)|p[i+2])};
+     for(let j0=0;j0<cls.length;j0++){if(seen[j0]||!isSk(j0))continue;const comp=[j0],st=[j0];seen[j0]=1;let light=false,touch=false;
+       while(st.length){const j=st.pop(),x=j%W,y=(j/W)|0,i=j*4;if(fix229Light(p[i],p[i+1],p[i+2]))light=true;
+         for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){const X=x+dx,Y=y+dy;if(X<0||Y<0||X>=W||Y>=H)continue;const k=Y*W+X;if(cls[k]===5)touch=true;if(!seen[k]&&isSk(k)){seen[k]=1;comp.push(k);st.push(k)}}}
+       if(!light&&touch&&comp.length<=12){for(const j of comp)cls[j]=5;n+=comp.length}}}surround()}
+  else for(let j=0;j<cls.length;j++){if(cls[j])continue;const i=j*4;if(!p[i+3])continue;const v=(p[i]<<16)|(p[i+1]<<8)|p[i+2];if(coat.has(v)&&fix229Crimson(p[i],p[i+1],p[i+2])){cls[j]=5;n++}}
+  if(n)PD219.has[f].add(5);FIX229.cape[f]=n}}catch(e){FIX229.err=String(e)}return r}}
+// BUG-38 (2.29): standing by the wardrobe the 1.67 balloon showed the magnifier for "แต่งตัว" — it gets a dress on a hanger, drawn like the other symbols
+try{CTX167_ICONS.dress='<path d="M23 9a3 3 0 1 0-3-3"/><path d="M23 9v3M9 20l14-8 14 8z"/><path d="M17 20l-7 19h26l-7-19M17 20q6 6 12 0"/>'}catch(e){}
+{const o=ctx167Choice;ctx167Choice=function(){const r=o.apply(this,arguments);try{if(r&&r.k==='dress226'){r.icon='dress';r.label=t('dress226')}}catch(e){}return r}}
 </script></body></html>
