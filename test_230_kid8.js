@@ -1,3 +1,4 @@
+// 2.33: an eye colour changes the iris only (dark upper lid/lashes and light shades unchanged, every eye)
 // 2.31: counts of eyes/mouths from kid8.json (Codex C2: 9 and 8) and the new 07↔08 map
 // Claude 2.30 (owner 12 Oct "เสร็จแล้วเอาเข้าเกมใน GM ก่อน" + Codex 19:18 "ขอClaudeตรวจCและนำเข้าGMให้เจ้าของดู"): Codex set 08 (kid8.json, 51 layers) in the paperdoll, GM only
 // · GM loads set 08: 16 hair · 1 face · 5 eyes · 5 mouths · 8 outfits, 2.29 off · every hair × outfit × view stands on row 62 · the scarf takes each house colour and
@@ -34,6 +35,9 @@ const old07={v:1,hair:3,face:2,eyes:3,mouth:3,body:2,hc:-1,ec:-1,tn:1};   // set
          if(cls[j]===5){cnt++;const [h,s]=hslOf(q[i]/255,q[i+1]/255,q[i+2]/255),w=HOUSES[hb].h[0];if(s>.12&&Math.min(Math.abs(h-w),360-Math.abs(h-w))>16)off++}}r.scarfHue[b+'/'+hb]=[cnt,off]}}
      r.hairCol=diff(pd219File('hair',12),{hc:3});r.tone={};for(const tn of [0,2,3])r.tone[tn]=Object.assign(diff(pd219File('face',1),{tn}),{mouth:diff(pd219File('mouth',1),{tn})});r.tone1=diff(pd219File('face',1),{tn:1});
      r.eyeCol=diff(pd219File('eyes',1),{ec:2});
+     // 2.33: an eye colour changes the iris only — the dark upper lid/lashes (lightness < .18) and the white/light shades (> .66) stay as drawn, in every eye
+     r.iris={};for(const e of PD219.avail.eyes){const f=pd219File('eyes',e),a=px(toCanvas(PD219.img[f])),b=px(toCanvas(pd219Paint(f,{hc:-1,ec:2,b:0,tn:1})));let dark=0,light=0,iris=0;
+       for(let i=0;i<a.length;i+=4){if(!a[i+3])continue;const same=a[i]===b[i]&&a[i+1]===b[i+1]&&a[i+2]===b[i+2];const l=hslOf(a[i]/255,a[i+1]/255,a[i+2]/255)[2];if(same)continue;if(l<.18)dark++;else if(l>.66)light++;else iris++}r.iris[e]=[dark,light,iris]}
      // a set-07 look in GM
      const m=pd230Map({v:1,hair:3,face:2,eyes:3,mouth:3,body:2,hc:-1,ec:-1,tn:1});r.map=[m.hair,m.face,m.eyes,m.mouth,m.body,m.set];r.look07=pd219Look({v:1,hair:3,face:2,eyes:3,mouth:3,body:2,hc:-1,ec:-1,tn:1});
      r.enc=pdEnc226({v:1,set:8,hair:12,face:1,eyes:2,mouth:3,body:7,hc:-1,ec:2,tn:3});r.dec=pdDec226(r.enc);r.dec07=pdDec226('3,2,3,3,2,0,0,1');r.decBad=pdDec226('1,1,1,1,1,0,0,1,7');
@@ -42,7 +46,7 @@ const old07={v:1,hair:3,face:2,eyes:3,mouth:3,body:2,hc:-1,ec:-1,tn:1};   // set
    assert.deepEqual([R.def.f.hair,R.def.f.body,R.def.m.hair,R.def.m.body],[1,1,9,5]);assert.equal(R.frames,1024);assert.equal(R.badFeet,0,'feet on row 62');
    for(const [k,n] of Object.entries(R.house)){assert(n[5]>40,'the scarf changes '+k+' '+JSON.stringify(n));assert.deepEqual(Object.keys(n),['5'],'only the scarf changes '+k+' '+JSON.stringify(n))}
    for(const [k,[cnt,off]] of Object.entries(R.scarfHue))assert(cnt>40&&off===0,'scarf in the house hue '+k+' '+cnt+'/'+off);assert.equal(R.trimChanged,0,'the gold trim never changes');
-   assert(R.hairCol[1]>100&&Object.keys(R.hairCol).join()==='1','hair colour only in the hair '+JSON.stringify(R.hairCol));assert(R.eyeCol[2]>0&&Object.keys(R.eyeCol).join()==='2','eye colour '+JSON.stringify(R.eyeCol));
+   assert(R.hairCol[1]>100&&Object.keys(R.hairCol).join()==='1','hair colour only in the hair '+JSON.stringify(R.hairCol));assert(R.eyeCol[2]>0&&Object.keys(R.eyeCol).join()==='2','eye colour '+JSON.stringify(R.eyeCol));for(const [e,[dk,lt,ir]] of Object.entries(R.iris))assert(dk===0&&lt===0&&ir>0,'eye '+e+': only the iris takes the colour (dark lid '+dk+' light '+lt+' iris '+ir+')');
    for(const [tn,n] of Object.entries(R.tone)){assert(n[3]>300,'tone '+tn);assert(Object.keys(n).filter(k=>k!=='mouth').every(k=>k==='3'),'tone only in skin '+tn+' '+JSON.stringify(n));assert(Object.keys(n.mouth).every(k=>k==='3'||k==='4'),'mouth tone '+JSON.stringify(n.mouth))}
    assert.deepEqual(R.tone1,{});assert.deepEqual(R.map,[6,1,5,1,5,8]);assert(R.look07);
    assert.equal(R.enc,'12,1,2,3,7,-1,2,3,8');assert.deepEqual(R.dec,{v:1,hair:12,face:1,eyes:2,mouth:3,body:7,hc:-1,ec:2,tn:3,set:8});assert(R.dec07&&R.dec07.set===undefined);assert.equal(R.decBad,null);

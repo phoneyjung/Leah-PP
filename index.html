@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.32';
+const VERSION='Lantern Academy 2.33';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -7729,6 +7729,16 @@ try{const st=document.createElement('style');st.id='kid230';st.textContent=`#cr.
 // BUG-40 (found by the 2.30 test, set 07 too): closing "แต่งตัว" put back the create screen's sub-tabs as they were before it opened — an empty {} in a game started from a save —
 // so the next "แต่งตัว" in the same game opened on the hair tab with no hairstyles shown (the ทรงผม/สีผม buttons had nothing selected) · now the next one opens on ทรงผม again
 {const o=dress226Close;dress226Close=function(){const r=o.apply(this,arguments);try{if(!DRESS226.on&&(!C193.sub||!Object.keys(C193.sub).length))C193.sub={hair:'style',face:'face'}}catch(e){}return r}}
+// 2.33 (owner 12 Oct 23:51 with the eye picker in green: "ไม่มีอันไหนผ่าน เลย ผม คิด พอเปลี่ยนสีตาก็พัง ตัวขอบตาบน ต้องเป็น สีดำนะ"): Codex's set-08 eye region holds the whole eye
+// (213 shades: the near-black upper lid and lashes, the white and grey of the eye, the skin-toned lid shading as well as the iris), so an eye colour turned the lid line and the lid shading green.
+// Now only the iris takes the eye colour: in an eye piece of set 08, a pixel of the eye group changes only when it is a coloured mid shade (lightness .18–.66, saturation ≥ .22);
+// the dark upper lid and lashes stay as drawn (near-black), and so do the white, the greys and the light lid shading. Nothing is repainted; the colour list is Codex's.
+KID8.iris=true;KID8.irisMask={};
+function kid8Iris(r,g,b){const [,s,l]=hslOf(r/255,g/255,b/255);return l>=.18&&l<=.66&&s>=.22}
+{const o=pd219Paint;pd219Paint=function(f,ch){if(PD219.set!==8||!KID8.iris||!ch||!(ch.ec>=0))return o.apply(this,arguments);let mask=KID8.irisMask[f];
+  if(mask===undefined){mask=null;try{pd219Cls(f);const cls=PD219.cls[f],q=PD219.d.parts.find(x=>x.file===f);if(cls&&q&&q.part==='eyes'&&PD219.has[f]&&PD219.has[f].has(2)){const im=PD219.img[f],p=toCanvas(im).getContext('2d').getImageData(0,0,im.naturalWidth||im.width,im.naturalHeight||im.height).data,m=[];
+    for(let j=0;j<cls.length;j++){if(cls[j]!==2)continue;const i=j*4;if(!kid8Iris(p[i],p[i+1],p[i+2]))m.push(j)}mask=m.length?Int32Array.from(m):null}}catch(e){mask=null}KID8.irisMask[f]=mask}
+  if(!mask)return o.apply(this,arguments);const cls=PD219.cls[f];for(const j of mask)cls[j]=0;try{return o.apply(this,arguments)}finally{for(const j of mask)cls[j]=2}}}
 // online: a set-08 look travels with its set
 {const o=pdEnc226;pdEnc226=function(x){const s=o.apply(this,arguments);try{return s&&x&&x.set===8?s+',8':s}catch(e){return s}}}
 {const o=pdDec226;pdDec226=function(s){if(typeof s==='string'&&s.length<=40&&/^(-?\d+,){8}8$/.test(s)){const r=o.call(this,s.slice(0,s.lastIndexOf(',')));if(r)r.set=8;return r}return o.apply(this,arguments)}}
