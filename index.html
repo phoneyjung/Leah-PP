@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.29';
+const VERSION='Lantern Academy 2.30';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -7662,4 +7662,72 @@ function fix229Part(f){const d=PD219.d,q=d.parts.concat((d.walk&&d.walk.parts)||
 // BUG-38 (2.29): standing by the wardrobe the 1.67 balloon showed the magnifier for "แต่งตัว" — it gets a dress on a hanger, drawn like the other symbols
 try{CTX167_ICONS.dress='<path d="M23 9a3 3 0 1 0-3-3"/><path d="M23 9v3M9 20l14-8 14 8z"/><path d="M17 20l-7 19h26l-7-19M17 20q6 6 12 0"/>'}catch(e){}
 {const o=ctx167Choice;ctx167Choice=function(){const r=o.apply(this,arguments);try{if(r&&r.k==='dress226'){r.icon='dress';r.label=t('dress226')}}catch(e){}return r}}
+
+// ================= 2.30 (owner 12 Oct: "เสร็จแล้วเอาเข้าเกมใน GM ก่อน", and with Codex's 19:18 delivery "ขอClaudeตรวจCและนำเข้าGMให้เจ้าของดู"): Codex set 08 · the kid8 pieces
+// (ASSET_SPEC_08 v13 · 9640f20: one face, 5 eyes, 5 mouths, 16 hairstyles, 8 outfits with the house scarf, 8 standing views, no walking frames yet).
+// GM only (art195(); "&kid7" in the address keeps set 07 for a check) until the owner approves (then KID8.live=true) · players without GM keep set 07 exactly as before.
+// Codex's pieces are drawn as delivered: same layer order, (0,0), nothing moved, cut or repainted · the scarf (Codex's group 'house') takes the house colour the way set 07's cape did,
+// the gold trim (group 'trim') never changes · walking: the 8 standing views glide with the 2.01 bob (set 07 does the same where it has no walking frames).
+// A look remembers its set (look.set=8); a look from the other set shows as its nearest pieces (07 braids → 08 long braids, short → spiky, buns → buns · skirt → girl apprentice,
+// shorts → boy apprentice) without changing the save until the child saves a new look. Boys see the boys' outfits (5–8), girls all 8 (as set 07: girls could pick shorts).
+// kid8.json or its face/first pieces missing → set 07 as before (and its 2.29 fixes) · online: a set-08 look is sent with ",8" at the end, which a 2.29 device refuses (it draws its usual child)
+const KID8={json:'kid8.json',live:false,tried:false,ok:false,err:null,
+  to8:{hair:{1:1,2:9,3:6},eyes:{1:1,2:2,3:4},mouth:{1:2,2:3,3:1},body:{1:1,2:5}},
+  to7:{eyes:{1:1,2:2,4:3},mouth:{1:3,2:1,3:2}}};
+if(PD219.set!==8)PD219.set=7;
+function kid8Want(){try{return !!(KID8.live||(art195()&&!/[?&#]kid7\b/.test(location.search+location.hash)))}catch(e){return false}}
+// a look in the numbers of the set that is loaded (a new object; the save is never changed here)
+function pd230Map(o){if(!o||typeof o!=='object')return o;const from=o.set===8?8:7,to=PD219.set===8?8:7;if(from===to)return o;const r=Object.assign({},o);
+  if(to===8){const m=KID8.to8;r.hair=m.hair[o.hair]||1;r.face=1;r.eyes=m.eyes[o.eyes]||1;r.mouth=m.mouth[o.mouth]||2;r.body=m.body[o.body]||1;r.set=8}
+  else{r.hair=o.hair>=9?2:o.hair===6?3:1;r.face=1;r.eyes=KID8.to7.eyes[o.eyes]||1;r.mouth=KID8.to7.mouth[o.mouth]||1;r.body=o.body>=5?2:1;delete r.set}
+  return r}
+function kid8Img(f){return new Promise(ok=>{const im=new Image(),tm=setTimeout(()=>ok(null),15000);im.onload=()=>{clearTimeout(tm);ok(im.naturalWidth===512&&im.naturalHeight===64?im:null)};
+  im.onerror=()=>{clearTimeout(tm);ok(null)};im.src=(window.EMBED_ASSETS&&window.EMBED_ASSETS[f])||f}).then(im=>{if(im)PD219.img[f]=im})}
+// kid8.json in the shape the paperdoll code reads (set 07's pd-kid.json): 'house' is the cape group ('coat'), no walking pieces, every standing view there
+function kid8Fetch(){const need=['hair','eye','skin','mouth','house'];
+  return fetch(KID8.json).then(r=>r.ok?r.json():null).then(d=>{
+    if(!d||d.cell!==64||!Array.isArray(d.size)||d.size[0]!==512||d.size[1]!==64||!Array.isArray(d.parts)||!Array.isArray(d.layerOrder)||!d.regions||!d.groups||!d.tones||
+       !need.every(g=>Array.isArray(d.groups[g]))||!AD208.order.every(k=>Array.isArray(d.tones[k])&&d.tones[k].length===d.groups.skin.length))return null;
+    d.groups=Object.assign({},d.groups,{coat:d.groups.house});const R={};for(const f of Object.keys(d.regions)){const r=d.regions[f]||{};R[f]=r.house?Object.assign({},r,{coat:r.house}):r}d.regions=R;
+    delete d.walk;d.availableFrames=[0,1,2,3,4,5,6,7];d.drawOffset=[0,0];
+    return Promise.all(d.parts.map(p=>kid8Img(p.file))).then(()=>d)})}
+// after set 08 is ready: each gender's first look (Codex's defaults), the thumbnail crops of these pieces, the skin swatch from the face's own most-used shade
+function kid8After(){const d=PD219.d,av=PD219.avail,df=d.defaults||{},pick=(part,n,dv)=>av[part].includes(n)?n:av[part].includes(dv)?dv:av[part][0];
+  const one=(g,hd,bd)=>{const x=df[g]||{};return {hair:pick('hair',x.hair,hd),face:1,eyes:pick('eyes',x.eyes,1),mouth:pick('mouth',x.mouth,1),body:pick('body',x.body,bd),tn:1,set:8}};
+  KID8.def07=KID8.def07||PD219.def;KID8.crop07=KID8.crop07||PD219.crop;PD219.def={f:one('f',1,1),m:one('m',9,5)};
+  PD219.crop={hair:[10,0,45],face:[17,5,30],eyes:[21,9,22],mouth:[21,12,22],body:[12,23,41]};   /* measured on the S views: hair 11–54 × 2–37 · face 20–45 × 7–31 · eyes y 17–23 · mouth y 24–27 · body 19–47 × 22–63 */
+  try{const f1=pd219File('face',1),cls=PD219.cls[f1],p=toCanvas(PD219.img[f1]).getContext('2d').getImageData(0,0,512,64).data,n=new Map();
+    for(let j=0;j<cls.length;j++){if(cls[j]!==3)continue;const i=j*4,k=(p[i]<<16)|(p[i+1]<<8)|p[i+2];if(PD219.skinAt.has(k))n.set(k,(n.get(k)||0)+1)}
+    let best=-1,bn=0;for(const [k,c] of n)if(c>bn){bn=c;best=PD219.skinAt.get(k)}if(best>=0)PD219.face=best}catch(e){}}
+// the loader asks pd219Prep to get set 07 ready: in GM it gets set 08 ready instead (set 07 when set 08 cannot be used)
+{const o=pd219Prep;pd219Prep=function(){if(KID8.tried||!kid8Want())return o.apply(this,arguments);KID8.tried=true;const d7=PD219.d,self=this;
+  return kid8Fetch().then(d8=>{if(!d8)return false;PD219.d=d8;PD219.set=8;if(!o.apply(self,[])){PD219.set=7;return false}kid8After();return true})
+    .catch(e=>{KID8.err=String(e&&e.message||e);return false})
+    .then(ok=>{if(ok){KID8.ok=true;return true}PD219.d=d7;PD219.set=7;if(KID8.def07)PD219.def=KID8.def07;if(KID8.crop07)PD219.crop=KID8.crop07;return o.apply(self,[])})}}
+// every place that reads a saved look reads it in the loaded set's numbers
+{const o=pd219Look;pd219Look=function(x){return o.call(this,pd230Map(x))}}
+{const o=pd219Full;pd219Full=function(x,h){return o.call(this,pd230Map(x),h)}}
+{const o=pd219World;pd219World=function(x,h){return o.call(this,pd230Map(x),h)}}
+{const o=pd219Cur;pd219Cur=function(){const c=o.apply(this,arguments);if(c&&PD219.set===8)c.set=8;return c}}
+// dressing: the screen opens on the saved look in this set's numbers; "ไม่เปลี่ยน" leaves the save as it was
+{const o=dress226Open;dress226Open=function(){const keep=S&&S.pd219;if(!keep||!PD219.ok)return o.apply(this,arguments);try{S.pd219=pd230Map(keep)}catch(e){}try{return o.apply(this,arguments)}finally{if(S&&S.pd219!==keep)S.pd219=keep}}}
+{const o=dress226Close;dress226Close=function(keep){const was=S&&S.pd219;let m=was;try{if(keep&&was&&PD219.ok)m=S.pd219=pd230Map(was)}catch(e){}try{return o.apply(this,arguments)}finally{try{if(!keep&&S&&S.pd219===m&&m!==was)S.pd219=was}catch(e){}}}}
+// boys: the boys' outfits only (set 08's gender per outfit, where set 07 hid the skirt)
+{const o=pd224Skirt;pd224Skirt=function(n){if(PD219.set===8){const p=PD219.d&&PD219.d.parts.find(q=>q.part==='body'&&q.option===+n);return !!(p&&p.gender==='f')}return o.apply(this,arguments)}}
+// the names on the buttons: Codex's own Thai and English names
+{const o=pd219Name;pd219Name=function(part,n){try{if(PD219.set===8){const p=PD219.d.parts.find(q=>q.part===part&&q.option===n);if(p)return LANG==='en'?(p.nameEn||p.nameTh):(p.nameTh||p.nameEn)}}catch(e){}return o.apply(this,arguments)}}
+// the create screen: one face → the face tab is the skin tone (its button says so); longer names may take two lines
+{const o=pd219Build;pd219Build=function(){const r=o.apply(this,arguments);try{const el=$('cr'),k8=!!(el&&PD219.ok&&PD219.set===8&&el.classList.contains('pd219'));if(el)el.classList.toggle('k8',k8);
+  const bf=el&&el.querySelector('[data-sub="face:face"]');if(bf)bf.textContent=t(k8&&(PD219.avail.face||[]).length<2?'pd219Skin':'pd219Face')}catch(e){}return r}}
+{const o=pd219Refresh;pd219Refresh=function(){const r=o.apply(this,arguments);try{const el=$('cr');if(el)el.classList.toggle('k8',!!(PD219.set===8&&el.classList.contains('pd219')))}catch(e){}return r}}
+try{const st=document.createElement('style');st.id='kid230';st.textContent=`#cr.c193.k8 #pd219face{display:none}
+#cr.c193.k8 .pd219g .opt span{white-space:normal;text-align:center;line-height:1.15;font-size:12px;max-width:100%;overflow-wrap:anywhere}
+#cr.c193.k8 .side .pd219g .opt{min-height:84px}
+@media (max-height:400px){#cr.c193.k8 .side .pd219g .opt{min-height:70px}#cr.c193.k8 .pd219g .opt span{font-size:11px}}`;document.head.appendChild(st)}catch(e){}
+// BUG-40 (found by the 2.30 test, set 07 too): closing "แต่งตัว" put back the create screen's sub-tabs as they were before it opened — an empty {} in a game started from a save —
+// so the next "แต่งตัว" in the same game opened on the hair tab with no hairstyles shown (the ทรงผม/สีผม buttons had nothing selected) · now the next one opens on ทรงผม again
+{const o=dress226Close;dress226Close=function(){const r=o.apply(this,arguments);try{if(!DRESS226.on&&(!C193.sub||!Object.keys(C193.sub).length))C193.sub={hair:'style',face:'face'}}catch(e){}return r}}
+// online: a set-08 look travels with its set
+{const o=pdEnc226;pdEnc226=function(x){const s=o.apply(this,arguments);try{return s&&x&&x.set===8?s+',8':s}catch(e){return s}}}
+{const o=pdDec226;pdDec226=function(s){if(typeof s==='string'&&s.length<=40&&/^(-?\d+,){8}8$/.test(s)){const r=o.call(this,s.slice(0,s.lastIndexOf(',')));if(r)r.set=8;return r}return o.apply(this,arguments)}}
 </script></body></html>

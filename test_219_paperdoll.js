@@ -1,3 +1,4 @@
+// 2.30: set 07 is checked with &kid7 (GM shows set 08 since 2.30)
 // Claude 2.19 (Codex set 07 stage A, ASSET_SPEC_07 v4/v5, branch codex/asset-07-paperdoll-a ec17508 · owner 11 Oct "ผ่าน ใส่ GM + Codex ทำขั้น B คู่กัน"): the paperdoll creator — GM first
 // real taps on the owner's phone sizes and the iPad: hair · face · eyes · eye colour · mouth · body · skin tone each its own choice, every option and swatch 44 px+, none over another,
 // nothing to scroll, text 12 px+ · the pieces are drawn as delivered (only the cape, and the colours the child picks, change — and only inside Codex's regions for that group)
@@ -29,7 +30,7 @@ const avg=a=>+(a.reduce((x,y)=>x+y,0)/a.length).toFixed(1);
  try{for(const [name,width,height,dpr,mode] of [['gm844',844,390,3,'full'],['gm812',812,330,3,'look'],['gm915',915,412,2.625,'look'],['gm1180',1180,820,2,'look'],['gmEN844',844,390,3,'en'],['player844',844,390,3,'player'],['adult844',844,390,3,'adult'],['nojson844',844,390,3,'nojson'],['nohair3',844,390,3,'nohair3'],['noface1',844,390,3,'noface1'],['nowalk844',844,390,3,'nowalk']]){
   const bc=await browser.createBrowserContext();p=await bc.newPage();const errors=[];p.on('pageerror',e=>errors.push(e.message));await p.setViewport({width,height,deviceScaleFactor:dpr,isMobile:true,hasTouch:true});await p.setBypassServiceWorker(true);
   const block={nojson:/pd-kid\.json/,nohair3:/pd-kid-hair-3\.png/,noface1:/pd-kid-face-1\.png/,nowalk:/-walk\.png/}[mode];if(block){await p.setRequestInterception(true);p.on('request',r=>block.test(r.url())?r.abort():r.continue())}
-  await open(p,mode==='player'||mode==='adult'?'':'&gm');await tap(p,'#cg194 [data-g="f"]');await sleep(1200);const R={name};
+  await open(p,mode==='player'||mode==='adult'?'':'&gm&kid7');await tap(p,'#cg194 [data-g="f"]');await sleep(1200);const R={name};
   if(mode==='player'||mode==='adult')await p.waitForFunction(()=>PD219.tried,{timeout:30000});
   if(mode==='adult'){await tap(p,'#ca button[data-a="30"]');await sleep(500)}
   R.state=await p.evaluate(()=>({ok:PD219.ok,pd:$('cr').classList.contains('pd219'),tabs:[...document.querySelectorAll('#cr .rail [data-tab]')].map(b=>b.dataset.tab),hair:document.querySelectorAll('#pd219hair .opt').length,ck:getComputedStyle($('ck')).display}));
@@ -114,7 +115,7 @@ const avg=a=>+(a.reduce((x,y)=>x+y,0)/a.length).toFixed(1);
   {const on=[],off=[];for(let i=0;i<3;i++){on.push(await fps(p));await p.evaluate(()=>{window.__pd=S.pd219;delete S.pd219;buildPlayerSheets()});off.push(await fps(p));await p.evaluate(()=>{S.pd219=window.__pd;buildPlayerSheets()})}R.fpsWorld=[avg(on),avg(off)];assert(R.fpsWorld[0]>=.9*R.fpsWorld[1],'world frames '+JSON.stringify([on,off]))}
   await p.evaluate(()=>{save();const d=Store.all();d.cur=-1;Store.put(d)});   /* the select screen on the next open (else the game resumes this child) */
   // reload (GM): the select screen shows the paperdoll in the list and on the stand; starting keeps it
-  await open(p,'&gm');R.pick=await p.evaluate(()=>{const s=Store.all().slots[0],c=document.querySelector('#pk .pn canvas'),e=document.createElement('canvas');e.width=e.height=64;const g=e.getContext('2d');g.imageSmoothingEnabled=false;g.drawImage(pd219Full(s.pd219,s.house).stand,0,0,64,64,-8,-4,80,80);
+  await open(p,'&gm&kid7');R.pick=await p.evaluate(()=>{const s=Store.all().slots[0],c=document.querySelector('#pk .pn canvas'),e=document.createElement('canvas');e.width=e.height=64;const g=e.getContext('2d');g.imageSmoothingEnabled=false;g.drawImage(pd219Full(s.pd219,s.house).stand,0,0,64,64,-8,-4,80,80);
     const a=c.getContext('2d').getImageData(0,0,64,64).data,b=g.getImageData(0,0,64,64).data;let d=0;for(let i=0;i<a.length;i++)if(a[i]!==b[i])d++;return {p193:$('cr').classList.contains('p193'),diff:d,pd:!!s.pd219}});
   assert(R.pick.p193&&R.pick.pd&&R.pick.diff===0,'select list: '+JSON.stringify(R.pick));await p.screenshot({path:path.join(out,name+'-select.png')});
   await tap(p,'#pGo');await sleep(2000);R.again=await p.evaluate(()=>{const {stand}=pd219Full(S.pd219,S.house),a=PS.stand.getContext('2d').getImageData(0,0,512,64).data,b=stand.getContext('2d').getImageData(0,0,512,64).data;return a.every((v,i)=>v===b[i])});assert(R.again,'after reload');
