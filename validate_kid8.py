@@ -4,6 +4,7 @@ import json,hashlib,itertools
 import numpy as np
 from scipy import ndimage as ndi
 from PIL import Image
+from polish_kid8_head_holes import head_holes
 R=Path(__file__).resolve().parent
 J=json.loads((R/'kid8.json').read_text());Q=json.loads((R/'kid8-qa.json').read_text())
 A={p['file']:np.array(Image.open(R/p['file']).convert('RGBA')) for p in J['parts']}
@@ -56,6 +57,7 @@ def compose(h,b,e=1,m=1):
   n=h if p in ('hair','hairback') else b if p=='body' else e if p=='eyes' else m if p=='mouth' else 1
   out=Image.alpha_composite(out,Image.fromarray(A[f'kid8-{p}-{n}.png']))
  return np.array(out)
+head_hole_total=0
 measure=[];neck_fail=[];holes=[];all_centers=[];default=[];pair_scarf=[];visible_min=[999]*8;visible_max=[0]*8
 for h in range(1,17):
  for b in range(1,9):
@@ -64,7 +66,7 @@ for h in range(1,17):
    m=a[:,64*d:64*d+64,3]>0;ys,xs=np.where(m);bb=[int(xs.min()),int(ys.min()),int(xs.max())+1,int(ys.max())+1];item={'hair':h,'body':b,'direction':J['frameOrder'][d],'height':bb[3]-bb[1],'foot':bb[3]-1,'center_x':round(float(xs.mean()),4),'bbox':bb};measure.append(item);all_centers.append(abs(float(xs.mean())-32));check(60<=item['height']<=62 and item['foot']==62 and abs(item['center_x']-32)<=2,'pair geometry '+str(item))
    # The shared neck must overlap the body and be one connected component
    # in the central join area. Deliberate gaps between limbs are excluded.
-   fm=face[:,64*d:64*d+64];bm=body[:,64*d:64*d+64];contact=(fm&bm)[25:32,25:39]
+   fm=face[:,64*d:64*d+64];head_hole_total+=int(head_holes(m,fm).sum());bm=body[:,64*d:64*d+64];contact=(fm&bm)[25:32,25:39]
    if not contact.any():neck_fail.append([h,b,d])
    neck=m[25:32,27:37];filled=ndi.binary_fill_holes(neck)
    if np.any(filled&~neck):holes.append([h,b,d,int((filled&~neck).sum())])
@@ -85,13 +87,13 @@ for b in range(1,9):
    x,y=entry[side]['xy']
    if not (0<=x<64 and 0<=y<64 and a[y,x+64*i,3]):hand_fail.append([b,i,side,x,y])
  bodyqa.append({'body':b,'gender':'f' if b<=4 else 'm','scarf_pixels':counts['house'],'trim_pixels':counts['trim']})
-check(not hand_fail,'hand anchors '+str(hand_fail))
+check(not hand_fail,'hand anchors '+str(hand_fail));check(head_hole_total==0,'head holes '+str(head_hole_total))
 for f,sha in Q['source_sha256'].items():check(hashlib.sha256((R/f).read_bytes()).hexdigest()==sha,'source modified '+f)
 jsonbytes=(R/'kid8.json').stat().st_size;pngbytes=sum((R/f).stat().st_size for f in A);previewbytes=(R/'kid8-preview.png').stat().st_size
 check(jsonbytes<=300000,'JSON budget');check(pngbytes+previewbytes<=800000,'PNG budget including preview')
 # 4 skin tone mappings alter RGB only. Eye/mouth masks are inside the common
 # face, so all25 expression pairs preserve the tested1024 hair/body topologies.
-validation={'layer_count':len(A),'native_frames':len(A)*8,'zero_counts':{'partial_alpha':partial,'regions_overlap':overlap,'regions_off_palette':off_palette,'regions_transparent':transparent_region,'house_in_face_hair':house_other,'white_hair_candidates':white_hair,'mouth_on_face_edge':mouth_edge,'expression_outside_face':expr_out,'rear_expression_pixels':rear_expr,'scalp_exposed':scalp_exposed,'neck_join_failures':len(neck_fail),'neck_holes':len(holes),'hand_anchor_failures':len(hand_fail)},'default':default,'bodies':bodyqa,'expressions':expr_qa,'max_eye_occlusion_fraction':eye_cover_max,'hair_body_direction_cases':1024,'all_expression_tone_cases_covered':102400,'coverage_method':'1024 alpha topologies + independently contained25 expression pairs +4 RGB-only tones; equivalent exhaustive cross-product without redundant alpha recomposition','all_pairs_height_range':[min(v['height'] for v in measure),max(v['height'] for v in measure)],'all_pairs_foot_rows':sorted(set(v['foot'] for v in measure)),'max_center_error_all_pairs':max(all_centers),'minimum_visible_scarf_all_pairs':min(pair_scarf),'visible_scarf_all_pairs_min_per_direction':visible_min,'visible_scarf_all_pairs_max_per_direction':visible_max,'json_bytes':jsonbytes,'runtime_png_bytes':pngbytes,'preview_png_bytes':previewbytes,'png_bytes_including_preview':pngbytes+previewbytes,'errors':errors}
+validation={'layer_count':len(A),'native_frames':len(A)*8,'zero_counts':{'head_holes_spec14':head_hole_total,'partial_alpha':partial,'regions_overlap':overlap,'regions_off_palette':off_palette,'regions_transparent':transparent_region,'house_in_face_hair':house_other,'white_hair_candidates':white_hair,'mouth_on_face_edge':mouth_edge,'expression_outside_face':expr_out,'rear_expression_pixels':rear_expr,'scalp_exposed':scalp_exposed,'neck_join_failures':len(neck_fail),'neck_holes':len(holes),'hand_anchor_failures':len(hand_fail)},'default':default,'bodies':bodyqa,'expressions':expr_qa,'max_eye_occlusion_fraction':eye_cover_max,'hair_body_direction_cases':1024,'all_expression_tone_cases_covered':102400,'coverage_method':'1024 alpha topologies + independently contained25 expression pairs +4 RGB-only tones; equivalent exhaustive cross-product without redundant alpha recomposition','all_pairs_height_range':[min(v['height'] for v in measure),max(v['height'] for v in measure)],'all_pairs_foot_rows':sorted(set(v['foot'] for v in measure)),'max_center_error_all_pairs':max(all_centers),'minimum_visible_scarf_all_pairs':min(pair_scarf),'visible_scarf_all_pairs_min_per_direction':visible_min,'visible_scarf_all_pairs_max_per_direction':visible_max,'json_bytes':jsonbytes,'runtime_png_bytes':pngbytes,'preview_png_bytes':previewbytes,'png_bytes_including_preview':pngbytes+previewbytes,'errors':errors}
 Q['semantic_review']={'source_faces_removed_from_hair':'visually reviewed on isolated hair contact sheet; common face supplies ears, neck and face','front_braids':'H-F3 braids lying in front of shoulders stay in hair; portions behind torso remain hairback','lantern_pixels_in_bodies':[0]*64,'male_skirt_pixels':[0]*32,'method':'accepted native outfit silhouettes below waist preserved; visual review of all8 directions; no detector claims semantic labels automatically','owner_art_score':'pending; no numerical art score assigned'};Q['validation']=validation;Q['all_pair_geometry']=measure;Q['file_evidence']={f:{'bytes':(R/f).stat().st_size,'sha256':hashlib.sha256((R/f).read_bytes()).hexdigest()} for f in A}
 (R/'kid8-qa.json').write_text(json.dumps(Q,ensure_ascii=False,indent=2)+'\n')
 print(json.dumps({k:v for k,v in validation.items() if k not in ('default','bodies','expressions')},ensure_ascii=False,indent=2))

@@ -15,6 +15,8 @@ def build():
         raw=Image.open(ROOT/level['raw_file']).convert('RGBA')
         for i,frame in enumerate(level['frames']):
             source=raw.crop((32*i,0,32*i+32,32))
+            for x,y in frame.get('removed_stray_pixels_raw_xy',[]):
+                source.putpixel((x,y),(0,0,0,0))
             cell=Image.new('RGBA',(32,32))
             cell.paste(source,tuple(frame['translation_xy']))
             assert sum(p[3]>0 for p in cell.get_flattened_data())==sum(p[3]>0 for p in source.get_flattened_data())

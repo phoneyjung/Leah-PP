@@ -2051,6 +2051,7 @@
     "layer_count": 51,
     "native_frames": 408,
     "zero_counts": {
+      "head_holes_spec14": 0,
       "partial_alpha": 0,
       "regions_overlap": 0,
       "regions_off_palette": 0,
@@ -2072,7 +2073,7 @@
         "direction": "S",
         "height": 61,
         "foot": 62,
-        "center_x": 32.0538,
+        "center_x": 32.0524,
         "bbox": [
           11,
           2,
@@ -2086,7 +2087,7 @@
         "direction": "SE",
         "height": 61,
         "foot": 62,
-        "center_x": 31.0681,
+        "center_x": 31.0469,
         "bbox": [
           12,
           2,
@@ -2114,7 +2115,7 @@
         "direction": "NE",
         "height": 61,
         "foot": 62,
-        "center_x": 31.0645,
+        "center_x": 31.0478,
         "bbox": [
           13,
           2,
@@ -2128,7 +2129,7 @@
         "direction": "N",
         "height": 61,
         "foot": 62,
-        "center_x": 32.0212,
+        "center_x": 32.0177,
         "bbox": [
           11,
           2,
@@ -2142,7 +2143,7 @@
         "direction": "NW",
         "height": 61,
         "foot": 62,
-        "center_x": 32.6607,
+        "center_x": 32.67,
         "bbox": [
           17,
           2,
@@ -2170,7 +2171,7 @@
         "direction": "SW",
         "height": 61,
         "foot": 62,
-        "center_x": 32.2398,
+        "center_x": 32.2633,
         "bbox": [
           14,
           2,
@@ -2198,7 +2199,7 @@
         "direction": "SE",
         "height": 61,
         "foot": 62,
-        "center_x": 31.747,
+        "center_x": 31.6898,
         "bbox": [
           18,
           2,
@@ -2212,7 +2213,7 @@
         "direction": "E",
         "height": 61,
         "foot": 62,
-        "center_x": 32.6745,
+        "center_x": 32.6644,
         "bbox": [
           19,
           2,
@@ -2226,7 +2227,7 @@
         "direction": "NE",
         "height": 61,
         "foot": 62,
-        "center_x": 31.9211,
+        "center_x": 31.9427,
         "bbox": [
           19,
           2,
@@ -2240,7 +2241,7 @@
         "direction": "N",
         "height": 61,
         "foot": 62,
-        "center_x": 32.4548,
+        "center_x": 32.4943,
         "bbox": [
           19,
           2,
@@ -2254,7 +2255,7 @@
         "direction": "NW",
         "height": 60,
         "foot": 62,
-        "center_x": 31.9892,
+        "center_x": 31.9678,
         "bbox": [
           20,
           3,
@@ -2268,7 +2269,7 @@
         "direction": "W",
         "height": 61,
         "foot": 62,
-        "center_x": 32.1301,
+        "center_x": 32.1455,
         "bbox": [
           21,
           2,
@@ -2282,7 +2283,7 @@
         "direction": "SW",
         "height": 61,
         "foot": 62,
-        "center_x": 31.8487,
+        "center_x": 31.8594,
         "bbox": [
           19,
           2,
@@ -2638,7 +2639,7 @@
     "all_pairs_foot_rows": [
       62
     ],
-    "max_center_error_all_pairs": 1.8420467185761993,
+    "max_center_error_all_pairs": 1.7975929978118188,
     "minimum_visible_scarf_all_pairs": 27,
     "visible_scarf_all_pairs_min_per_direction": [
       67,
@@ -2660,10 +2661,10 @@
       55,
       59
     ],
-    "json_bytes": 101396,
-    "runtime_png_bytes": 178875,
-    "preview_png_bytes": 559763,
-    "png_bytes_including_preview": 738638,
+    "json_bytes": 105358,
+    "runtime_png_bytes": 179889,
+    "preview_png_bytes": 555726,
+    "png_bytes_including_preview": 735615,
     "errors": []
   },
   "all_pair_geometry": [
@@ -2673,7 +2674,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0538,
+      "center_x": 32.0524,
       "bbox": [
         11,
         2,
@@ -2687,7 +2688,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.0681,
+      "center_x": 31.0469,
       "bbox": [
         12,
         2,
@@ -2715,7 +2716,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.0645,
+      "center_x": 31.0478,
       "bbox": [
         13,
         2,
@@ -2729,7 +2730,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0212,
+      "center_x": 32.0177,
       "bbox": [
         11,
         2,
@@ -2743,7 +2744,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 32.6607,
+      "center_x": 32.67,
       "bbox": [
         17,
         2,
@@ -2771,7 +2772,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 32.2398,
+      "center_x": 32.2633,
       "bbox": [
         14,
         2,
@@ -2785,7 +2786,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0625,
+      "center_x": 32.0605,
       "bbox": [
         11,
         2,
@@ -2799,7 +2800,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.1963,
+      "center_x": 31.1824,
       "bbox": [
         12,
         2,
@@ -2827,7 +2828,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.1464,
+      "center_x": 31.1287,
       "bbox": [
         13,
         2,
@@ -2841,7 +2842,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0017,
+      "center_x": 31.9977,
       "bbox": [
         11,
         2,
@@ -2855,7 +2856,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 32.6552,
+      "center_x": 32.6623,
       "bbox": [
         17,
         2,
@@ -2883,7 +2884,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 32.4115,
+      "center_x": 32.4258,
       "bbox": [
         14,
         2,
@@ -2897,7 +2898,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.1664,
+      "center_x": 32.164,
       "bbox": [
         11,
         2,
@@ -2911,7 +2912,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.1716,
+      "center_x": 31.1545,
       "bbox": [
         12,
         2,
@@ -2939,7 +2940,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.2263,
+      "center_x": 31.2122,
       "bbox": [
         13,
         2,
@@ -2953,7 +2954,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0443,
+      "center_x": 32.0441,
       "bbox": [
         11,
         2,
@@ -2967,7 +2968,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 32.6703,
+      "center_x": 32.6741,
       "bbox": [
         17,
         2,
@@ -2995,7 +2996,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 32.4659,
+      "center_x": 32.4836,
       "bbox": [
         14,
         2,
@@ -3009,7 +3010,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0919,
+      "center_x": 32.0864,
       "bbox": [
         11,
         2,
@@ -3023,7 +3024,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.1703,
+      "center_x": 31.1487,
       "bbox": [
         12,
         2,
@@ -3051,7 +3052,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.1783,
+      "center_x": 31.1609,
       "bbox": [
         13,
         2,
@@ -3065,7 +3066,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0121,
+      "center_x": 32.0086,
       "bbox": [
         11,
         2,
@@ -3079,7 +3080,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 32.5298,
+      "center_x": 32.5393,
       "bbox": [
         17,
         2,
@@ -3107,7 +3108,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 32.1645,
+      "center_x": 32.1883,
       "bbox": [
         14,
         2,
@@ -3121,7 +3122,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.1999,
+      "center_x": 32.1977,
       "bbox": [
         11,
         2,
@@ -3135,7 +3136,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.0184,
+      "center_x": 30.9994,
       "bbox": [
         12,
         2,
@@ -3163,7 +3164,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.268,
+      "center_x": 31.2503,
       "bbox": [
         13,
         2,
@@ -3177,7 +3178,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.1109,
+      "center_x": 32.1062,
       "bbox": [
         11,
         2,
@@ -3191,7 +3192,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 32.7244,
+      "center_x": 32.7281,
       "bbox": [
         17,
         2,
@@ -3219,7 +3220,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 32.6052,
+      "center_x": 32.6252,
       "bbox": [
         14,
         2,
@@ -3233,7 +3234,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.1867,
+      "center_x": 32.1842,
       "bbox": [
         11,
         2,
@@ -3247,7 +3248,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.1099,
+      "center_x": 31.0901,
       "bbox": [
         12,
         2,
@@ -3275,7 +3276,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.1996,
+      "center_x": 31.182,
       "bbox": [
         13,
         2,
@@ -3289,7 +3290,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.1296,
+      "center_x": 32.1288,
       "bbox": [
         11,
         2,
@@ -3303,7 +3304,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 32.8162,
+      "center_x": 32.8252,
       "bbox": [
         17,
         2,
@@ -3331,7 +3332,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 32.5156,
+      "center_x": 32.5362,
       "bbox": [
         14,
         2,
@@ -3345,7 +3346,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.2657,
+      "center_x": 32.2594,
       "bbox": [
         11,
         2,
@@ -3359,7 +3360,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.3504,
+      "center_x": 31.3304,
       "bbox": [
         12,
         2,
@@ -3387,7 +3388,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.4494,
+      "center_x": 31.4288,
       "bbox": [
         13,
         2,
@@ -3401,7 +3402,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.1411,
+      "center_x": 32.1403,
       "bbox": [
         11,
         2,
@@ -3415,7 +3416,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 32.6195,
+      "center_x": 32.6287,
       "bbox": [
         17,
         2,
@@ -3443,7 +3444,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 32.4286,
+      "center_x": 32.4487,
       "bbox": [
         14,
         2,
@@ -3457,7 +3458,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.1389,
+      "center_x": 32.1366,
       "bbox": [
         11,
         2,
@@ -3471,7 +3472,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.0684,
+      "center_x": 31.0487,
       "bbox": [
         12,
         2,
@@ -3499,7 +3500,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.239,
+      "center_x": 31.2212,
       "bbox": [
         13,
         2,
@@ -3513,7 +3514,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0966,
+      "center_x": 32.092,
       "bbox": [
         11,
         2,
@@ -3527,7 +3528,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 32.7865,
+      "center_x": 32.7903,
       "bbox": [
         17,
         2,
@@ -3555,7 +3556,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 32.5413,
+      "center_x": 32.5619,
       "bbox": [
         14,
         2,
@@ -3569,7 +3570,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.2246,
+      "center_x": 32.2269,
       "bbox": [
         16,
         2,
@@ -3583,7 +3584,7 @@
       "direction": "SE",
       "height": 60,
       "foot": 62,
-      "center_x": 31.8297,
+      "center_x": 31.8262,
       "bbox": [
         16,
         3,
@@ -3597,7 +3598,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 32.5349,
+      "center_x": 32.5203,
       "bbox": [
         17,
         3,
@@ -3653,7 +3654,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 32.2777,
+      "center_x": 32.2878,
       "bbox": [
         19,
         3,
@@ -3667,7 +3668,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.66,
+      "center_x": 31.6889,
       "bbox": [
         17,
         2,
@@ -3681,7 +3682,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.2518,
+      "center_x": 32.2534,
       "bbox": [
         16,
         2,
@@ -3695,7 +3696,7 @@
       "direction": "SE",
       "height": 60,
       "foot": 62,
-      "center_x": 32.0295,
+      "center_x": 32.0312,
       "bbox": [
         16,
         3,
@@ -3709,7 +3710,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 32.3091,
+      "center_x": 32.3011,
       "bbox": [
         17,
         3,
@@ -3765,7 +3766,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 32.3689,
+      "center_x": 32.3727,
       "bbox": [
         19,
         3,
@@ -3779,7 +3780,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.8483,
+      "center_x": 31.8696,
       "bbox": [
         17,
         2,
@@ -3793,7 +3794,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.4698,
+      "center_x": 32.47,
       "bbox": [
         16,
         2,
@@ -3807,7 +3808,7 @@
       "direction": "SE",
       "height": 60,
       "foot": 62,
-      "center_x": 32.1072,
+      "center_x": 32.1034,
       "bbox": [
         16,
         3,
@@ -3821,7 +3822,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 32.3406,
+      "center_x": 32.3297,
       "bbox": [
         17,
         3,
@@ -3877,7 +3878,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 32.6836,
+      "center_x": 32.6872,
       "bbox": [
         19,
         3,
@@ -3891,7 +3892,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.8313,
+      "center_x": 31.8578,
       "bbox": [
         17,
         2,
@@ -3905,7 +3906,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.2722,
+      "center_x": 32.2686,
       "bbox": [
         16,
         2,
@@ -3919,7 +3920,7 @@
       "direction": "SE",
       "height": 60,
       "foot": 62,
-      "center_x": 32.0089,
+      "center_x": 32.0044,
       "bbox": [
         16,
         3,
@@ -3933,7 +3934,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 32.5843,
+      "center_x": 32.5704,
       "bbox": [
         17,
         3,
@@ -3989,7 +3990,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 32.2712,
+      "center_x": 32.2801,
       "bbox": [
         19,
         3,
@@ -4003,7 +4004,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.4696,
+      "center_x": 31.506,
       "bbox": [
         17,
         2,
@@ -4031,7 +4032,7 @@
       "direction": "SE",
       "height": 60,
       "foot": 62,
-      "center_x": 31.703,
+      "center_x": 31.7034,
       "bbox": [
         16,
         3,
@@ -4045,7 +4046,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 32.135,
+      "center_x": 32.1235,
       "bbox": [
         17,
         3,
@@ -4101,7 +4102,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 32.9056,
+      "center_x": 32.9126,
       "bbox": [
         19,
         3,
@@ -4115,7 +4116,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 32.1876,
+      "center_x": 32.2098,
       "bbox": [
         17,
         2,
@@ -4129,7 +4130,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.4817,
+      "center_x": 32.4818,
       "bbox": [
         16,
         2,
@@ -4143,7 +4144,7 @@
       "direction": "SE",
       "height": 60,
       "foot": 62,
-      "center_x": 31.8917,
+      "center_x": 31.8913,
       "bbox": [
         16,
         3,
@@ -4157,7 +4158,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 32.228,
+      "center_x": 32.2144,
       "bbox": [
         17,
         3,
@@ -4213,7 +4214,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 32.7813,
+      "center_x": 32.7892,
       "bbox": [
         19,
         3,
@@ -4227,7 +4228,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0515,
+      "center_x": 32.075,
       "bbox": [
         17,
         2,
@@ -4241,7 +4242,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.6036,
+      "center_x": 32.5976,
       "bbox": [
         16,
         2,
@@ -4255,7 +4256,7 @@
       "direction": "SE",
       "height": 60,
       "foot": 62,
-      "center_x": 32.1914,
+      "center_x": 32.1896,
       "bbox": [
         16,
         3,
@@ -4269,7 +4270,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 32.4228,
+      "center_x": 32.4085,
       "bbox": [
         17,
         3,
@@ -4325,7 +4326,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 32.6177,
+      "center_x": 32.6264,
       "bbox": [
         19,
         3,
@@ -4339,7 +4340,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.9542,
+      "center_x": 31.9772,
       "bbox": [
         17,
         2,
@@ -4353,7 +4354,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.4478,
+      "center_x": 32.4482,
       "bbox": [
         16,
         2,
@@ -4367,7 +4368,7 @@
       "direction": "SE",
       "height": 60,
       "foot": 62,
-      "center_x": 31.8608,
+      "center_x": 31.8605,
       "bbox": [
         16,
         3,
@@ -4381,7 +4382,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 32.1421,
+      "center_x": 32.1307,
       "bbox": [
         17,
         3,
@@ -4437,7 +4438,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 32.7928,
+      "center_x": 32.8002,
       "bbox": [
         19,
         3,
@@ -4451,7 +4452,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 32.05,
+      "center_x": 32.0738,
       "bbox": [
         17,
         2,
@@ -4465,7 +4466,7 @@
       "direction": "S",
       "height": 60,
       "foot": 62,
-      "center_x": 32.2593,
+      "center_x": 32.2728,
       "bbox": [
         19,
         3,
@@ -4507,7 +4508,7 @@
       "direction": "NE",
       "height": 60,
       "foot": 62,
-      "center_x": 32.2489,
+      "center_x": 32.2557,
       "bbox": [
         20,
         3,
@@ -4521,7 +4522,7 @@
       "direction": "N",
       "height": 60,
       "foot": 62,
-      "center_x": 32.283,
+      "center_x": 32.3118,
       "bbox": [
         19,
         3,
@@ -4535,7 +4536,7 @@
       "direction": "NW",
       "height": 60,
       "foot": 62,
-      "center_x": 31.265,
+      "center_x": 31.2431,
       "bbox": [
         19,
         3,
@@ -4577,7 +4578,7 @@
       "direction": "S",
       "height": 60,
       "foot": 62,
-      "center_x": 32.2797,
+      "center_x": 32.2932,
       "bbox": [
         19,
         3,
@@ -4619,7 +4620,7 @@
       "direction": "NE",
       "height": 60,
       "foot": 62,
-      "center_x": 32.3428,
+      "center_x": 32.3499,
       "bbox": [
         20,
         3,
@@ -4633,7 +4634,7 @@
       "direction": "N",
       "height": 60,
       "foot": 62,
-      "center_x": 32.2832,
+      "center_x": 32.3127,
       "bbox": [
         19,
         3,
@@ -4647,7 +4648,7 @@
       "direction": "NW",
       "height": 60,
       "foot": 62,
-      "center_x": 31.1367,
+      "center_x": 31.1148,
       "bbox": [
         19,
         3,
@@ -4689,7 +4690,7 @@
       "direction": "S",
       "height": 60,
       "foot": 62,
-      "center_x": 32.4656,
+      "center_x": 32.4789,
       "bbox": [
         19,
         3,
@@ -4731,7 +4732,7 @@
       "direction": "NE",
       "height": 60,
       "foot": 62,
-      "center_x": 32.4726,
+      "center_x": 32.4794,
       "bbox": [
         20,
         3,
@@ -4745,7 +4746,7 @@
       "direction": "N",
       "height": 60,
       "foot": 62,
-      "center_x": 32.3336,
+      "center_x": 32.3632,
       "bbox": [
         19,
         3,
@@ -4759,7 +4760,7 @@
       "direction": "NW",
       "height": 60,
       "foot": 62,
-      "center_x": 31.1593,
+      "center_x": 31.1377,
       "bbox": [
         19,
         3,
@@ -4801,7 +4802,7 @@
       "direction": "S",
       "height": 60,
       "foot": 62,
-      "center_x": 32.2918,
+      "center_x": 32.3053,
       "bbox": [
         19,
         3,
@@ -4843,7 +4844,7 @@
       "direction": "NE",
       "height": 60,
       "foot": 62,
-      "center_x": 32.4103,
+      "center_x": 32.417,
       "bbox": [
         20,
         3,
@@ -4857,7 +4858,7 @@
       "direction": "N",
       "height": 60,
       "foot": 62,
-      "center_x": 32.2818,
+      "center_x": 32.3109,
       "bbox": [
         20,
         3,
@@ -4871,7 +4872,7 @@
       "direction": "NW",
       "height": 60,
       "foot": 62,
-      "center_x": 30.9784,
+      "center_x": 30.9577,
       "bbox": [
         19,
         3,
@@ -4913,7 +4914,7 @@
       "direction": "S",
       "height": 60,
       "foot": 62,
-      "center_x": 32.4819,
+      "center_x": 32.4951,
       "bbox": [
         19,
         3,
@@ -4955,7 +4956,7 @@
       "direction": "NE",
       "height": 60,
       "foot": 62,
-      "center_x": 32.5203,
+      "center_x": 32.527,
       "bbox": [
         20,
         3,
@@ -4969,7 +4970,7 @@
       "direction": "N",
       "height": 60,
       "foot": 62,
-      "center_x": 32.4712,
+      "center_x": 32.5,
       "bbox": [
         19,
         3,
@@ -4983,7 +4984,7 @@
       "direction": "NW",
       "height": 60,
       "foot": 62,
-      "center_x": 31.2578,
+      "center_x": 31.2361,
       "bbox": [
         19,
         3,
@@ -5025,7 +5026,7 @@
       "direction": "S",
       "height": 60,
       "foot": 62,
-      "center_x": 32.4794,
+      "center_x": 32.4929,
       "bbox": [
         19,
         3,
@@ -5067,7 +5068,7 @@
       "direction": "NE",
       "height": 60,
       "foot": 62,
-      "center_x": 32.4238,
+      "center_x": 32.4306,
       "bbox": [
         20,
         3,
@@ -5081,7 +5082,7 @@
       "direction": "N",
       "height": 60,
       "foot": 62,
-      "center_x": 32.4625,
+      "center_x": 32.4919,
       "bbox": [
         19,
         3,
@@ -5095,7 +5096,7 @@
       "direction": "NW",
       "height": 60,
       "foot": 62,
-      "center_x": 31.405,
+      "center_x": 31.3828,
       "bbox": [
         19,
         3,
@@ -5137,7 +5138,7 @@
       "direction": "S",
       "height": 60,
       "foot": 62,
-      "center_x": 32.5629,
+      "center_x": 32.5759,
       "bbox": [
         19,
         3,
@@ -5179,7 +5180,7 @@
       "direction": "NE",
       "height": 60,
       "foot": 62,
-      "center_x": 32.6978,
+      "center_x": 32.7042,
       "bbox": [
         20,
         3,
@@ -5193,7 +5194,7 @@
       "direction": "N",
       "height": 60,
       "foot": 62,
-      "center_x": 32.482,
+      "center_x": 32.5102,
       "bbox": [
         19,
         3,
@@ -5207,7 +5208,7 @@
       "direction": "NW",
       "height": 60,
       "foot": 62,
-      "center_x": 31.2161,
+      "center_x": 31.1948,
       "bbox": [
         19,
         3,
@@ -5249,7 +5250,7 @@
       "direction": "S",
       "height": 60,
       "foot": 62,
-      "center_x": 32.4371,
+      "center_x": 32.4506,
       "bbox": [
         19,
         3,
@@ -5291,7 +5292,7 @@
       "direction": "NE",
       "height": 60,
       "foot": 62,
-      "center_x": 32.5073,
+      "center_x": 32.5141,
       "bbox": [
         20,
         3,
@@ -5305,7 +5306,7 @@
       "direction": "N",
       "height": 60,
       "foot": 62,
-      "center_x": 32.4587,
+      "center_x": 32.4881,
       "bbox": [
         19,
         3,
@@ -5319,7 +5320,7 @@
       "direction": "NW",
       "height": 60,
       "foot": 62,
-      "center_x": 31.3308,
+      "center_x": 31.3086,
       "bbox": [
         19,
         3,
@@ -5375,7 +5376,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.305,
+      "center_x": 32.2876,
       "bbox": [
         18,
         2,
@@ -5389,7 +5390,7 @@
       "direction": "E",
       "height": 61,
       "foot": 62,
-      "center_x": 33.3783,
+      "center_x": 33.3722,
       "bbox": [
         19,
         2,
@@ -5417,7 +5418,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.2213,
+      "center_x": 32.2498,
       "bbox": [
         18,
         2,
@@ -5431,7 +5432,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.4521,
+      "center_x": 31.4107,
       "bbox": [
         19,
         2,
@@ -5445,7 +5446,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 31.318,
+      "center_x": 31.3226,
       "bbox": [
         18,
         3,
@@ -5459,7 +5460,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.3827,
+      "center_x": 31.3969,
       "bbox": [
         17,
         2,
@@ -5487,7 +5488,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.4507,
+      "center_x": 32.4369,
       "bbox": [
         18,
         2,
@@ -5529,7 +5530,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.191,
+      "center_x": 32.2197,
       "bbox": [
         18,
         2,
@@ -5543,7 +5544,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.3228,
+      "center_x": 31.2824,
       "bbox": [
         19,
         2,
@@ -5571,7 +5572,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.6205,
+      "center_x": 31.6342,
       "bbox": [
         17,
         2,
@@ -5599,7 +5600,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.579,
+      "center_x": 32.565,
       "bbox": [
         18,
         2,
@@ -5613,7 +5614,7 @@
       "direction": "E",
       "height": 61,
       "foot": 62,
-      "center_x": 33.207,
+      "center_x": 33.2035,
       "bbox": [
         19,
         2,
@@ -5641,7 +5642,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.2711,
+      "center_x": 32.2997,
       "bbox": [
         18,
         2,
@@ -5655,7 +5656,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.3873,
+      "center_x": 31.3474,
       "bbox": [
         19,
         2,
@@ -5683,7 +5684,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.5646,
+      "center_x": 31.5784,
       "bbox": [
         17,
         2,
@@ -5711,7 +5712,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.4704,
+      "center_x": 32.4526,
       "bbox": [
         18,
         2,
@@ -5725,7 +5726,7 @@
       "direction": "E",
       "height": 61,
       "foot": 62,
-      "center_x": 33.3727,
+      "center_x": 33.367,
       "bbox": [
         19,
         2,
@@ -5753,7 +5754,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.2003,
+      "center_x": 32.229,
       "bbox": [
         18,
         2,
@@ -5767,7 +5768,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.0979,
+      "center_x": 31.0602,
       "bbox": [
         19,
         2,
@@ -5781,7 +5782,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 31.3483,
+      "center_x": 31.3526,
       "bbox": [
         18,
         3,
@@ -5795,7 +5796,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.1983,
+      "center_x": 31.2127,
       "bbox": [
         17,
         2,
@@ -5823,7 +5824,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.1675,
+      "center_x": 32.1542,
       "bbox": [
         18,
         2,
@@ -5837,7 +5838,7 @@
       "direction": "E",
       "height": 61,
       "foot": 62,
-      "center_x": 32.9978,
+      "center_x": 32.9923,
       "bbox": [
         19,
         2,
@@ -5865,7 +5866,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.4551,
+      "center_x": 32.483,
       "bbox": [
         18,
         2,
@@ -5879,7 +5880,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.5081,
+      "center_x": 31.4678,
       "bbox": [
         19,
         2,
@@ -5893,7 +5894,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 31.9181,
+      "center_x": 31.9215,
       "bbox": [
         18,
         3,
@@ -5907,7 +5908,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.9238,
+      "center_x": 31.9369,
       "bbox": [
         17,
         2,
@@ -5935,7 +5936,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.3568,
+      "center_x": 32.3428,
       "bbox": [
         18,
         2,
@@ -5949,7 +5950,7 @@
       "direction": "E",
       "height": 61,
       "foot": 62,
-      "center_x": 33.1206,
+      "center_x": 33.1147,
       "bbox": [
         19,
         2,
@@ -5977,7 +5978,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.4391,
+      "center_x": 32.4679,
       "bbox": [
         18,
         2,
@@ -5991,7 +5992,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.6943,
+      "center_x": 31.6525,
       "bbox": [
         19,
         2,
@@ -6005,7 +6006,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 31.7614,
+      "center_x": 31.7653,
       "bbox": [
         18,
         3,
@@ -6019,7 +6020,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.7813,
+      "center_x": 31.795,
       "bbox": [
         17,
         2,
@@ -6047,7 +6048,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.6566,
+      "center_x": 32.6425,
       "bbox": [
         18,
         2,
@@ -6061,7 +6062,7 @@
       "direction": "E",
       "height": 61,
       "foot": 62,
-      "center_x": 33.2888,
+      "center_x": 33.2828,
       "bbox": [
         19,
         2,
@@ -6089,7 +6090,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.4598,
+      "center_x": 32.4873,
       "bbox": [
         18,
         2,
@@ -6103,7 +6104,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.4539,
+      "center_x": 31.4137,
       "bbox": [
         19,
         2,
@@ -6117,7 +6118,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 31.6318,
+      "center_x": 31.6359,
       "bbox": [
         18,
         3,
@@ -6131,7 +6132,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.6961,
+      "center_x": 31.7093,
       "bbox": [
         17,
         2,
@@ -6159,7 +6160,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.3295,
+      "center_x": 32.3155,
       "bbox": [
         18,
         2,
@@ -6173,7 +6174,7 @@
       "direction": "E",
       "height": 61,
       "foot": 62,
-      "center_x": 33.0054,
+      "center_x": 33.0,
       "bbox": [
         19,
         2,
@@ -6201,7 +6202,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.4513,
+      "center_x": 32.4797,
       "bbox": [
         18,
         2,
@@ -6215,7 +6216,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.6378,
+      "center_x": 31.5958,
       "bbox": [
         19,
         2,
@@ -6229,7 +6230,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 31.8048,
+      "center_x": 31.8085,
       "bbox": [
         18,
         3,
@@ -6243,7 +6244,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.7862,
+      "center_x": 31.8,
       "bbox": [
         17,
         2,
@@ -6257,7 +6258,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 31.96,
+      "center_x": 31.9673,
       "bbox": [
         17,
         2,
@@ -6271,7 +6272,7 @@
       "direction": "SE",
       "height": 60,
       "foot": 62,
-      "center_x": 31.8772,
+      "center_x": 31.8301,
       "bbox": [
         16,
         3,
@@ -6285,7 +6286,7 @@
       "direction": "E",
       "height": 62,
       "foot": 62,
-      "center_x": 32.3508,
+      "center_x": 32.3603,
       "bbox": [
         16,
         1,
@@ -6299,7 +6300,7 @@
       "direction": "NE",
       "height": 60,
       "foot": 62,
-      "center_x": 31.3708,
+      "center_x": 31.3963,
       "bbox": [
         17,
         3,
@@ -6327,7 +6328,7 @@
       "direction": "NW",
       "height": 60,
       "foot": 62,
-      "center_x": 32.3775,
+      "center_x": 32.3511,
       "bbox": [
         21,
         3,
@@ -6341,7 +6342,7 @@
       "direction": "W",
       "height": 62,
       "foot": 62,
-      "center_x": 32.2398,
+      "center_x": 32.2312,
       "bbox": [
         21,
         1,
@@ -6355,7 +6356,7 @@
       "direction": "SW",
       "height": 60,
       "foot": 62,
-      "center_x": 31.2108,
+      "center_x": 31.2469,
       "bbox": [
         16,
         3,
@@ -6369,7 +6370,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 31.9897,
+      "center_x": 31.9968,
       "bbox": [
         17,
         2,
@@ -6383,7 +6384,7 @@
       "direction": "SE",
       "height": 60,
       "foot": 62,
-      "center_x": 32.044,
+      "center_x": 31.9992,
       "bbox": [
         16,
         3,
@@ -6397,7 +6398,7 @@
       "direction": "E",
       "height": 62,
       "foot": 62,
-      "center_x": 32.1448,
+      "center_x": 32.1555,
       "bbox": [
         16,
         1,
@@ -6411,7 +6412,7 @@
       "direction": "NE",
       "height": 60,
       "foot": 62,
-      "center_x": 31.3731,
+      "center_x": 31.4002,
       "bbox": [
         17,
         3,
@@ -6439,7 +6440,7 @@
       "direction": "NW",
       "height": 60,
       "foot": 62,
-      "center_x": 32.2441,
+      "center_x": 32.2182,
       "bbox": [
         21,
         3,
@@ -6453,7 +6454,7 @@
       "direction": "W",
       "height": 62,
       "foot": 62,
-      "center_x": 32.3195,
+      "center_x": 32.3106,
       "bbox": [
         21,
         1,
@@ -6467,7 +6468,7 @@
       "direction": "SW",
       "height": 60,
       "foot": 62,
-      "center_x": 31.4257,
+      "center_x": 31.4564,
       "bbox": [
         16,
         3,
@@ -6481,7 +6482,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.2152,
+      "center_x": 32.2221,
       "bbox": [
         17,
         2,
@@ -6495,7 +6496,7 @@
       "direction": "SE",
       "height": 60,
       "foot": 62,
-      "center_x": 32.1511,
+      "center_x": 32.106,
       "bbox": [
         16,
         3,
@@ -6509,7 +6510,7 @@
       "direction": "E",
       "height": 62,
       "foot": 62,
-      "center_x": 32.1757,
+      "center_x": 32.1866,
       "bbox": [
         16,
         1,
@@ -6523,7 +6524,7 @@
       "direction": "NE",
       "height": 60,
       "foot": 62,
-      "center_x": 31.51,
+      "center_x": 31.5357,
       "bbox": [
         17,
         3,
@@ -6551,7 +6552,7 @@
       "direction": "NW",
       "height": 60,
       "foot": 62,
-      "center_x": 32.284,
+      "center_x": 32.2585,
       "bbox": [
         20,
         3,
@@ -6565,7 +6566,7 @@
       "direction": "W",
       "height": 62,
       "foot": 62,
-      "center_x": 32.6209,
+      "center_x": 32.6098,
       "bbox": [
         21,
         1,
@@ -6579,7 +6580,7 @@
       "direction": "SW",
       "height": 60,
       "foot": 62,
-      "center_x": 31.3921,
+      "center_x": 31.4229,
       "bbox": [
         16,
         3,
@@ -6593,7 +6594,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 31.996,
+      "center_x": 32.0032,
       "bbox": [
         17,
         2,
@@ -6607,7 +6608,7 @@
       "direction": "SE",
       "height": 60,
       "foot": 62,
-      "center_x": 32.0396,
+      "center_x": 31.9916,
       "bbox": [
         16,
         3,
@@ -6621,7 +6622,7 @@
       "direction": "E",
       "height": 62,
       "foot": 62,
-      "center_x": 32.4085,
+      "center_x": 32.4171,
       "bbox": [
         16,
         1,
@@ -6635,7 +6636,7 @@
       "direction": "NE",
       "height": 60,
       "foot": 62,
-      "center_x": 31.5059,
+      "center_x": 31.5315,
       "bbox": [
         17,
         3,
@@ -6663,7 +6664,7 @@
       "direction": "NW",
       "height": 60,
       "foot": 62,
-      "center_x": 31.9856,
+      "center_x": 31.9613,
       "bbox": [
         19,
         3,
@@ -6677,7 +6678,7 @@
       "direction": "W",
       "height": 62,
       "foot": 62,
-      "center_x": 32.2308,
+      "center_x": 32.2227,
       "bbox": [
         20,
         1,
@@ -6691,7 +6692,7 @@
       "direction": "SW",
       "height": 60,
       "foot": 62,
-      "center_x": 31.0329,
+      "center_x": 31.0702,
       "bbox": [
         16,
         3,
@@ -6705,7 +6706,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.2389,
+      "center_x": 32.2458,
       "bbox": [
         17,
         2,
@@ -6719,7 +6720,7 @@
       "direction": "SE",
       "height": 60,
       "foot": 62,
-      "center_x": 31.7588,
+      "center_x": 31.716,
       "bbox": [
         16,
         3,
@@ -6733,7 +6734,7 @@
       "direction": "E",
       "height": 62,
       "foot": 62,
-      "center_x": 31.9723,
+      "center_x": 31.9847,
       "bbox": [
         16,
         1,
@@ -6747,7 +6748,7 @@
       "direction": "NE",
       "height": 60,
       "foot": 62,
-      "center_x": 31.5211,
+      "center_x": 31.547,
       "bbox": [
         17,
         3,
@@ -6775,7 +6776,7 @@
       "direction": "NW",
       "height": 60,
       "foot": 62,
-      "center_x": 32.406,
+      "center_x": 32.3803,
       "bbox": [
         21,
         3,
@@ -6789,7 +6790,7 @@
       "direction": "W",
       "height": 62,
       "foot": 62,
-      "center_x": 32.8504,
+      "center_x": 32.8377,
       "bbox": [
         21,
         1,
@@ -6803,7 +6804,7 @@
       "direction": "SW",
       "height": 60,
       "foot": 62,
-      "center_x": 31.7337,
+      "center_x": 31.7621,
       "bbox": [
         16,
         3,
@@ -6817,7 +6818,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.2146,
+      "center_x": 32.2217,
       "bbox": [
         17,
         2,
@@ -6831,7 +6832,7 @@
       "direction": "SE",
       "height": 60,
       "foot": 62,
-      "center_x": 31.932,
+      "center_x": 31.8871,
       "bbox": [
         16,
         3,
@@ -6845,7 +6846,7 @@
       "direction": "E",
       "height": 62,
       "foot": 62,
-      "center_x": 32.0601,
+      "center_x": 32.0722,
       "bbox": [
         16,
         1,
@@ -6859,7 +6860,7 @@
       "direction": "NE",
       "height": 60,
       "foot": 62,
-      "center_x": 31.4085,
+      "center_x": 31.435,
       "bbox": [
         17,
         3,
@@ -6887,7 +6888,7 @@
       "direction": "NW",
       "height": 60,
       "foot": 62,
-      "center_x": 32.5976,
+      "center_x": 32.5712,
       "bbox": [
         21,
         3,
@@ -6901,7 +6902,7 @@
       "direction": "W",
       "height": 62,
       "foot": 62,
-      "center_x": 32.7169,
+      "center_x": 32.7047,
       "bbox": [
         21,
         1,
@@ -6915,7 +6916,7 @@
       "direction": "SW",
       "height": 60,
       "foot": 62,
-      "center_x": 31.5847,
+      "center_x": 31.6149,
       "bbox": [
         16,
         3,
@@ -6929,7 +6930,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.3412,
+      "center_x": 32.3481,
       "bbox": [
         17,
         2,
@@ -6943,7 +6944,7 @@
       "direction": "SE",
       "height": 60,
       "foot": 62,
-      "center_x": 32.2276,
+      "center_x": 32.1822,
       "bbox": [
         16,
         3,
@@ -6957,7 +6958,7 @@
       "direction": "E",
       "height": 62,
       "foot": 62,
-      "center_x": 32.2469,
+      "center_x": 32.2574,
       "bbox": [
         16,
         1,
@@ -6971,7 +6972,7 @@
       "direction": "NE",
       "height": 60,
       "foot": 62,
-      "center_x": 31.807,
+      "center_x": 31.8313,
       "bbox": [
         17,
         3,
@@ -6999,7 +7000,7 @@
       "direction": "NW",
       "height": 60,
       "foot": 62,
-      "center_x": 32.3547,
+      "center_x": 32.3291,
       "bbox": [
         21,
         3,
@@ -7013,7 +7014,7 @@
       "direction": "W",
       "height": 62,
       "foot": 62,
-      "center_x": 32.5659,
+      "center_x": 32.555,
       "bbox": [
         21,
         1,
@@ -7027,7 +7028,7 @@
       "direction": "SW",
       "height": 60,
       "foot": 62,
-      "center_x": 31.5107,
+      "center_x": 31.54,
       "bbox": [
         16,
         3,
@@ -7041,7 +7042,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.1768,
+      "center_x": 32.1839,
       "bbox": [
         17,
         2,
@@ -7055,7 +7056,7 @@
       "direction": "SE",
       "height": 60,
       "foot": 62,
-      "center_x": 31.903,
+      "center_x": 31.858,
       "bbox": [
         16,
         3,
@@ -7069,7 +7070,7 @@
       "direction": "E",
       "height": 62,
       "foot": 62,
-      "center_x": 31.9888,
+      "center_x": 32.001,
       "bbox": [
         16,
         1,
@@ -7083,7 +7084,7 @@
       "direction": "NE",
       "height": 60,
       "foot": 62,
-      "center_x": 31.4926,
+      "center_x": 31.5189,
       "bbox": [
         17,
         3,
@@ -7111,7 +7112,7 @@
       "direction": "NW",
       "height": 60,
       "foot": 62,
-      "center_x": 32.5411,
+      "center_x": 32.5144,
       "bbox": [
         21,
         3,
@@ -7125,7 +7126,7 @@
       "direction": "W",
       "height": 62,
       "foot": 62,
-      "center_x": 32.7338,
+      "center_x": 32.722,
       "bbox": [
         21,
         1,
@@ -7139,7 +7140,7 @@
       "direction": "SW",
       "height": 60,
       "foot": 62,
-      "center_x": 31.5882,
+      "center_x": 31.6186,
       "bbox": [
         16,
         3,
@@ -7195,7 +7196,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.8759,
+      "center_x": 31.8952,
       "bbox": [
         18,
         2,
@@ -7209,7 +7210,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0987,
+      "center_x": 32.1099,
       "bbox": [
         18,
         2,
@@ -7223,7 +7224,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.7331,
+      "center_x": 31.7153,
       "bbox": [
         20,
         2,
@@ -7307,7 +7308,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.9087,
+      "center_x": 31.9242,
       "bbox": [
         18,
         2,
@@ -7321,7 +7322,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0621,
+      "center_x": 32.0736,
       "bbox": [
         18,
         2,
@@ -7335,7 +7336,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.6,
+      "center_x": 31.5841,
       "bbox": [
         20,
         2,
@@ -7419,7 +7420,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0287,
+      "center_x": 32.0434,
       "bbox": [
         18,
         2,
@@ -7433,7 +7434,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.1298,
+      "center_x": 32.1469,
       "bbox": [
         18,
         2,
@@ -7447,7 +7448,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.6603,
+      "center_x": 31.6395,
       "bbox": [
         20,
         2,
@@ -7531,7 +7532,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0185,
+      "center_x": 32.0378,
       "bbox": [
         18,
         2,
@@ -7545,7 +7546,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0772,
+      "center_x": 32.0886,
       "bbox": [
         18,
         2,
@@ -7559,7 +7560,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.3489,
+      "center_x": 31.3389,
       "bbox": [
         19,
         2,
@@ -7643,7 +7644,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0459,
+      "center_x": 32.0607,
       "bbox": [
         18,
         2,
@@ -7657,7 +7658,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.3278,
+      "center_x": 32.338,
       "bbox": [
         18,
         2,
@@ -7671,7 +7672,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.791,
+      "center_x": 31.77,
       "bbox": [
         20,
         2,
@@ -7755,7 +7756,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.9375,
+      "center_x": 31.9575,
       "bbox": [
         18,
         2,
@@ -7769,7 +7770,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.3084,
+      "center_x": 32.319,
       "bbox": [
         18,
         2,
@@ -7783,7 +7784,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.9809,
+      "center_x": 31.962,
       "bbox": [
         20,
         2,
@@ -7867,7 +7868,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.3433,
+      "center_x": 32.3564,
       "bbox": [
         18,
         2,
@@ -7881,7 +7882,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.335,
+      "center_x": 32.3451,
       "bbox": [
         18,
         2,
@@ -7895,7 +7896,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.7268,
+      "center_x": 31.7094,
       "bbox": [
         20,
         2,
@@ -7979,7 +7980,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0151,
+      "center_x": 32.0302,
       "bbox": [
         18,
         2,
@@ -7993,7 +7994,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.3217,
+      "center_x": 32.3322,
       "bbox": [
         18,
         2,
@@ -8007,7 +8008,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.9343,
+      "center_x": 31.9066,
       "bbox": [
         20,
         2,
@@ -8063,7 +8064,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.8992,
+      "center_x": 31.896,
       "bbox": [
         18,
         2,
@@ -8147,7 +8148,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.7022,
+      "center_x": 31.7214,
       "bbox": [
         19,
         2,
@@ -8259,7 +8260,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.8656,
+      "center_x": 31.8806,
       "bbox": [
         19,
         2,
@@ -8371,7 +8372,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.8758,
+      "center_x": 31.8907,
       "bbox": [
         19,
         2,
@@ -8399,7 +8400,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0668,
+      "center_x": 32.0634,
       "bbox": [
         18,
         2,
@@ -8483,7 +8484,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.5318,
+      "center_x": 31.552,
       "bbox": [
         19,
         2,
@@ -8595,7 +8596,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 32.1993,
+      "center_x": 32.2124,
       "bbox": [
         19,
         2,
@@ -8707,7 +8708,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0634,
+      "center_x": 32.0775,
       "bbox": [
         19,
         2,
@@ -8819,7 +8820,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.9689,
+      "center_x": 31.9829,
       "bbox": [
         19,
         2,
@@ -8931,7 +8932,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0621,
+      "center_x": 32.0763,
       "bbox": [
         19,
         2,
@@ -8945,7 +8946,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 31.8697,
+      "center_x": 31.8513,
       "bbox": [
         19,
         2,
@@ -8959,7 +8960,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.6759,
+      "center_x": 31.654,
       "bbox": [
         21,
         2,
@@ -8973,7 +8974,7 @@
       "direction": "E",
       "height": 62,
       "foot": 62,
-      "center_x": 31.1975,
+      "center_x": 31.1961,
       "bbox": [
         16,
         1,
@@ -9029,7 +9030,7 @@
       "direction": "W",
       "height": 62,
       "foot": 62,
-      "center_x": 33.0522,
+      "center_x": 33.0521,
       "bbox": [
         19,
         1,
@@ -9043,7 +9044,7 @@
       "direction": "SW",
       "height": 62,
       "foot": 62,
-      "center_x": 31.9343,
+      "center_x": 31.9121,
       "bbox": [
         17,
         1,
@@ -9057,7 +9058,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 31.9213,
+      "center_x": 31.9082,
       "bbox": [
         19,
         2,
@@ -9071,7 +9072,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.9246,
+      "center_x": 31.902,
       "bbox": [
         21,
         2,
@@ -9155,7 +9156,7 @@
       "direction": "SW",
       "height": 62,
       "foot": 62,
-      "center_x": 32.053,
+      "center_x": 32.0369,
       "bbox": [
         17,
         1,
@@ -9169,7 +9170,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.1714,
+      "center_x": 32.1578,
       "bbox": [
         19,
         2,
@@ -9183,7 +9184,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0047,
+      "center_x": 31.9821,
       "bbox": [
         21,
         2,
@@ -9197,7 +9198,7 @@
       "direction": "E",
       "height": 62,
       "foot": 62,
-      "center_x": 31.0147,
+      "center_x": 31.0138,
       "bbox": [
         16,
         1,
@@ -9267,7 +9268,7 @@
       "direction": "SW",
       "height": 62,
       "foot": 62,
-      "center_x": 32.0534,
+      "center_x": 32.0375,
       "bbox": [
         17,
         1,
@@ -9281,7 +9282,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 31.9303,
+      "center_x": 31.9118,
       "bbox": [
         19,
         2,
@@ -9295,7 +9296,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.8667,
+      "center_x": 31.8445,
       "bbox": [
         21,
         2,
@@ -9309,7 +9310,7 @@
       "direction": "E",
       "height": 62,
       "foot": 62,
-      "center_x": 31.3215,
+      "center_x": 31.32,
       "bbox": [
         16,
         1,
@@ -9379,7 +9380,7 @@
       "direction": "SW",
       "height": 62,
       "foot": 62,
-      "center_x": 31.7587,
+      "center_x": 31.7434,
       "bbox": [
         17,
         1,
@@ -9393,7 +9394,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.1897,
+      "center_x": 32.1705,
       "bbox": [
         19,
         2,
@@ -9407,7 +9408,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.5481,
+      "center_x": 31.5268,
       "bbox": [
         21,
         2,
@@ -9421,7 +9422,7 @@
       "direction": "E",
       "height": 62,
       "foot": 62,
-      "center_x": 30.8131,
+      "center_x": 30.8124,
       "bbox": [
         16,
         1,
@@ -9477,7 +9478,7 @@
       "direction": "W",
       "height": 62,
       "foot": 62,
-      "center_x": 33.6401,
+      "center_x": 33.6394,
       "bbox": [
         19,
         1,
@@ -9491,7 +9492,7 @@
       "direction": "SW",
       "height": 62,
       "foot": 62,
-      "center_x": 32.4045,
+      "center_x": 32.3811,
       "bbox": [
         17,
         1,
@@ -9505,7 +9506,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.1689,
+      "center_x": 32.155,
       "bbox": [
         19,
         2,
@@ -9519,7 +9520,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.7449,
+      "center_x": 31.7224,
       "bbox": [
         21,
         2,
@@ -9533,7 +9534,7 @@
       "direction": "E",
       "height": 62,
       "foot": 62,
-      "center_x": 30.8642,
+      "center_x": 30.8635,
       "bbox": [
         16,
         1,
@@ -9589,7 +9590,7 @@
       "direction": "W",
       "height": 62,
       "foot": 62,
-      "center_x": 33.5454,
+      "center_x": 33.5448,
       "bbox": [
         19,
         1,
@@ -9603,7 +9604,7 @@
       "direction": "SW",
       "height": 62,
       "foot": 62,
-      "center_x": 32.2671,
+      "center_x": 32.2434,
       "bbox": [
         17,
         1,
@@ -9617,7 +9618,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.3174,
+      "center_x": 32.2981,
       "bbox": [
         19,
         2,
@@ -9631,7 +9632,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0685,
+      "center_x": 32.0458,
       "bbox": [
         21,
         2,
@@ -9645,7 +9646,7 @@
       "direction": "E",
       "height": 62,
       "foot": 62,
-      "center_x": 31.0759,
+      "center_x": 31.0748,
       "bbox": [
         16,
         1,
@@ -9659,7 +9660,7 @@
       "direction": "NE",
       "height": 62,
       "foot": 62,
-      "center_x": 30.7424,
+      "center_x": 30.7394,
       "bbox": [
         15,
         1,
@@ -9701,7 +9702,7 @@
       "direction": "W",
       "height": 62,
       "foot": 62,
-      "center_x": 33.3774,
+      "center_x": 33.377,
       "bbox": [
         19,
         1,
@@ -9715,7 +9716,7 @@
       "direction": "SW",
       "height": 62,
       "foot": 62,
-      "center_x": 32.1641,
+      "center_x": 32.1417,
       "bbox": [
         17,
         1,
@@ -9729,7 +9730,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.127,
+      "center_x": 32.1133,
       "bbox": [
         19,
         2,
@@ -9743,7 +9744,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.7109,
+      "center_x": 31.6884,
       "bbox": [
         21,
         2,
@@ -9757,7 +9758,7 @@
       "direction": "E",
       "height": 62,
       "foot": 62,
-      "center_x": 30.8392,
+      "center_x": 30.8386,
       "bbox": [
         16,
         1,
@@ -9813,7 +9814,7 @@
       "direction": "W",
       "height": 62,
       "foot": 62,
-      "center_x": 33.5227,
+      "center_x": 33.5222,
       "bbox": [
         19,
         1,
@@ -9827,7 +9828,7 @@
       "direction": "SW",
       "height": 62,
       "foot": 62,
-      "center_x": 32.2672,
+      "center_x": 32.2434,
       "bbox": [
         17,
         1,
@@ -9855,7 +9856,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.8902,
+      "center_x": 31.8271,
       "bbox": [
         18,
         2,
@@ -9869,7 +9870,7 @@
       "direction": "E",
       "height": 61,
       "foot": 62,
-      "center_x": 33.0783,
+      "center_x": 33.0609,
       "bbox": [
         19,
         2,
@@ -9883,7 +9884,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.7427,
+      "center_x": 31.7749,
       "bbox": [
         19,
         2,
@@ -9897,7 +9898,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.2144,
+      "center_x": 32.2607,
       "bbox": [
         19,
         2,
@@ -9911,7 +9912,7 @@
       "direction": "NW",
       "height": 60,
       "foot": 62,
-      "center_x": 31.9504,
+      "center_x": 31.9223,
       "bbox": [
         20,
         3,
@@ -9925,7 +9926,7 @@
       "direction": "W",
       "height": 61,
       "foot": 62,
-      "center_x": 31.4899,
+      "center_x": 31.515,
       "bbox": [
         21,
         2,
@@ -9939,7 +9940,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.2577,
+      "center_x": 31.2708,
       "bbox": [
         19,
         2,
@@ -9967,7 +9968,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0545,
+      "center_x": 32.0037,
       "bbox": [
         18,
         2,
@@ -9981,7 +9982,7 @@
       "direction": "E",
       "height": 61,
       "foot": 62,
-      "center_x": 32.8271,
+      "center_x": 32.8205,
       "bbox": [
         19,
         2,
@@ -9995,7 +9996,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.7745,
+      "center_x": 31.7972,
       "bbox": [
         19,
         2,
@@ -10009,7 +10010,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.176,
+      "center_x": 32.2167,
       "bbox": [
         19,
         2,
@@ -10023,7 +10024,7 @@
       "direction": "NW",
       "height": 60,
       "foot": 62,
-      "center_x": 31.802,
+      "center_x": 31.7805,
       "bbox": [
         20,
         3,
@@ -10037,7 +10038,7 @@
       "direction": "W",
       "height": 61,
       "foot": 62,
-      "center_x": 31.5863,
+      "center_x": 31.6002,
       "bbox": [
         21,
         2,
@@ -10051,7 +10052,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.54,
+      "center_x": 31.5519,
       "bbox": [
         19,
         2,
@@ -10079,7 +10080,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.1936,
+      "center_x": 32.136,
       "bbox": [
         18,
         2,
@@ -10093,7 +10094,7 @@
       "direction": "E",
       "height": 61,
       "foot": 62,
-      "center_x": 32.8915,
+      "center_x": 32.8807,
       "bbox": [
         19,
         2,
@@ -10107,7 +10108,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.9046,
+      "center_x": 31.926,
       "bbox": [
         19,
         2,
@@ -10121,7 +10122,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.2392,
+      "center_x": 32.2797,
       "bbox": [
         19,
         2,
@@ -10135,7 +10136,7 @@
       "direction": "NW",
       "height": 60,
       "foot": 62,
-      "center_x": 31.8549,
+      "center_x": 31.8337,
       "bbox": [
         20,
         3,
@@ -10149,7 +10150,7 @@
       "direction": "W",
       "height": 61,
       "foot": 62,
-      "center_x": 31.8944,
+      "center_x": 31.9057,
       "bbox": [
         21,
         2,
@@ -10163,7 +10164,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.4745,
+      "center_x": 31.4866,
       "bbox": [
         19,
         2,
@@ -10191,7 +10192,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0715,
+      "center_x": 32.0065,
       "bbox": [
         18,
         2,
@@ -10205,7 +10206,7 @@
       "direction": "E",
       "height": 61,
       "foot": 62,
-      "center_x": 33.0926,
+      "center_x": 33.0761,
       "bbox": [
         19,
         2,
@@ -10219,7 +10220,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.8884,
+      "center_x": 31.9205,
       "bbox": [
         19,
         2,
@@ -10233,7 +10234,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.1922,
+      "center_x": 32.2388,
       "bbox": [
         19,
         2,
@@ -10247,7 +10248,7 @@
       "direction": "NW",
       "height": 60,
       "foot": 62,
-      "center_x": 31.5435,
+      "center_x": 31.5236,
       "bbox": [
         19,
         3,
@@ -10261,7 +10262,7 @@
       "direction": "W",
       "height": 61,
       "foot": 62,
-      "center_x": 31.517,
+      "center_x": 31.5389,
       "bbox": [
         20,
         2,
@@ -10275,7 +10276,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.0598,
+      "center_x": 31.0736,
       "bbox": [
         19,
         2,
@@ -10303,7 +10304,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.747,
+      "center_x": 31.6898,
       "bbox": [
         18,
         2,
@@ -10317,7 +10318,7 @@
       "direction": "E",
       "height": 61,
       "foot": 62,
-      "center_x": 32.6745,
+      "center_x": 32.6644,
       "bbox": [
         19,
         2,
@@ -10331,7 +10332,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.9211,
+      "center_x": 31.9427,
       "bbox": [
         19,
         2,
@@ -10345,7 +10346,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.4548,
+      "center_x": 32.4943,
       "bbox": [
         19,
         2,
@@ -10359,7 +10360,7 @@
       "direction": "NW",
       "height": 60,
       "foot": 62,
-      "center_x": 31.9892,
+      "center_x": 31.9678,
       "bbox": [
         20,
         3,
@@ -10373,7 +10374,7 @@
       "direction": "W",
       "height": 61,
       "foot": 62,
-      "center_x": 32.1301,
+      "center_x": 32.1455,
       "bbox": [
         21,
         2,
@@ -10387,7 +10388,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.8487,
+      "center_x": 31.8594,
       "bbox": [
         19,
         2,
@@ -10415,7 +10416,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.9403,
+      "center_x": 31.8793,
       "bbox": [
         18,
         2,
@@ -10429,7 +10430,7 @@
       "direction": "E",
       "height": 61,
       "foot": 62,
-      "center_x": 32.7967,
+      "center_x": 32.7826,
       "bbox": [
         19,
         2,
@@ -10443,7 +10444,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.8006,
+      "center_x": 31.834,
       "bbox": [
         19,
         2,
@@ -10457,7 +10458,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.4387,
+      "center_x": 32.4855,
       "bbox": [
         19,
         2,
@@ -10471,7 +10472,7 @@
       "direction": "NW",
       "height": 60,
       "foot": 62,
-      "center_x": 32.197,
+      "center_x": 32.1686,
       "bbox": [
         20,
         3,
@@ -10485,7 +10486,7 @@
       "direction": "W",
       "height": 61,
       "foot": 62,
-      "center_x": 31.9677,
+      "center_x": 31.987,
       "bbox": [
         21,
         2,
@@ -10499,7 +10500,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.6994,
+      "center_x": 31.711,
       "bbox": [
         19,
         2,
@@ -10527,7 +10528,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.2764,
+      "center_x": 32.2131,
       "bbox": [
         18,
         2,
@@ -10541,7 +10542,7 @@
       "direction": "E",
       "height": 61,
       "foot": 62,
-      "center_x": 32.9797,
+      "center_x": 32.9634,
       "bbox": [
         19,
         2,
@@ -10555,7 +10556,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.2122,
+      "center_x": 32.2421,
       "bbox": [
         19,
         2,
@@ -10569,7 +10570,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.4606,
+      "center_x": 32.5052,
       "bbox": [
         19,
         2,
@@ -10583,7 +10584,7 @@
       "direction": "NW",
       "height": 60,
       "foot": 62,
-      "center_x": 31.9322,
+      "center_x": 31.905,
       "bbox": [
         20,
         3,
@@ -10597,7 +10598,7 @@
       "direction": "W",
       "height": 61,
       "foot": 62,
-      "center_x": 31.819,
+      "center_x": 31.84,
       "bbox": [
         21,
         2,
@@ -10611,7 +10612,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.6122,
+      "center_x": 31.6235,
       "bbox": [
         19,
         2,
@@ -10639,7 +10640,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.9079,
+      "center_x": 31.8469,
       "bbox": [
         18,
         2,
@@ -10653,7 +10654,7 @@
       "direction": "E",
       "height": 61,
       "foot": 62,
-      "center_x": 32.6856,
+      "center_x": 32.6755,
       "bbox": [
         19,
         2,
@@ -10667,7 +10668,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.8947,
+      "center_x": 31.9166,
       "bbox": [
         19,
         2,
@@ -10681,7 +10682,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.4508,
+      "center_x": 32.4911,
       "bbox": [
         19,
         2,
@@ -10695,7 +10696,7 @@
       "direction": "NW",
       "height": 60,
       "foot": 62,
-      "center_x": 32.1367,
+      "center_x": 32.1081,
       "bbox": [
         20,
         3,
@@ -10709,7 +10710,7 @@
       "direction": "W",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0092,
+      "center_x": 32.0261,
       "bbox": [
         21,
         2,
@@ -10723,7 +10724,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.7041,
+      "center_x": 31.7158,
       "bbox": [
         19,
         2,
@@ -10751,7 +10752,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.7519,
+      "center_x": 31.7384,
       "bbox": [
         18,
         2,
@@ -10765,7 +10766,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 33.3031,
+      "center_x": 33.2969,
       "bbox": [
         20,
         3,
@@ -10779,7 +10780,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.9905,
+      "center_x": 31.9972,
       "bbox": [
         19,
         2,
@@ -10807,7 +10808,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.6473,
+      "center_x": 31.6317,
       "bbox": [
         20,
         2,
@@ -10821,7 +10822,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 31.0916,
+      "center_x": 31.0971,
       "bbox": [
         19,
         3,
@@ -10863,7 +10864,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.9276,
+      "center_x": 31.9138,
       "bbox": [
         18,
         2,
@@ -10891,7 +10892,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0272,
+      "center_x": 32.0343,
       "bbox": [
         19,
         2,
@@ -10919,7 +10920,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.5101,
+      "center_x": 31.4949,
       "bbox": [
         20,
         2,
@@ -10975,7 +10976,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.06,
+      "center_x": 32.0461,
       "bbox": [
         18,
         2,
@@ -10989,7 +10990,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 33.1229,
+      "center_x": 33.1193,
       "bbox": [
         20,
         3,
@@ -11003,7 +11004,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.1481,
+      "center_x": 32.1547,
       "bbox": [
         19,
         2,
@@ -11031,7 +11032,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.5699,
+      "center_x": 31.5549,
       "bbox": [
         20,
         2,
@@ -11087,7 +11088,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.9314,
+      "center_x": 31.9177,
       "bbox": [
         18,
         2,
@@ -11101,7 +11102,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 33.3024,
+      "center_x": 33.2966,
       "bbox": [
         20,
         3,
@@ -11115,7 +11116,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.1422,
+      "center_x": 32.1488,
       "bbox": [
         19,
         2,
@@ -11143,7 +11144,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.2566,
+      "center_x": 31.2425,
       "bbox": [
         19,
         2,
@@ -11157,7 +11158,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 31.1352,
+      "center_x": 31.1403,
       "bbox": [
         19,
         3,
@@ -11199,7 +11200,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.6146,
+      "center_x": 31.6015,
       "bbox": [
         18,
         2,
@@ -11213,7 +11214,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 32.9038,
+      "center_x": 32.8983,
       "bbox": [
         20,
         3,
@@ -11227,7 +11228,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.1678,
+      "center_x": 32.1745,
       "bbox": [
         19,
         2,
@@ -11255,7 +11256,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.707,
+      "center_x": 31.6919,
       "bbox": [
         20,
         2,
@@ -11269,7 +11270,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 31.7186,
+      "center_x": 31.7228,
       "bbox": [
         19,
         3,
@@ -11311,7 +11312,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.8017,
+      "center_x": 31.7879,
       "bbox": [
         18,
         2,
@@ -11325,7 +11326,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 33.0295,
+      "center_x": 33.0235,
       "bbox": [
         20,
         3,
@@ -11339,7 +11340,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0605,
+      "center_x": 32.0674,
       "bbox": [
         19,
         2,
@@ -11367,7 +11368,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.9075,
+      "center_x": 31.8918,
       "bbox": [
         20,
         2,
@@ -11381,7 +11382,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 31.547,
+      "center_x": 31.5517,
       "bbox": [
         19,
         3,
@@ -11423,7 +11424,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.1372,
+      "center_x": 32.1232,
       "bbox": [
         18,
         2,
@@ -11437,7 +11438,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 33.208,
+      "center_x": 33.2018,
       "bbox": [
         20,
         3,
@@ -11451,7 +11452,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.4736,
+      "center_x": 32.4797,
       "bbox": [
         19,
         2,
@@ -11479,7 +11480,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.6433,
+      "center_x": 31.6282,
       "bbox": [
         20,
         2,
@@ -11493,7 +11494,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 31.4166,
+      "center_x": 31.4214,
       "bbox": [
         19,
         3,
@@ -11535,7 +11536,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.7689,
+      "center_x": 31.755,
       "bbox": [
         18,
         2,
@@ -11549,7 +11550,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 32.9127,
+      "center_x": 32.9072,
       "bbox": [
         20,
         3,
@@ -11563,7 +11564,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.1366,
+      "center_x": 32.1434,
       "bbox": [
         19,
         2,
@@ -11591,7 +11592,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.8486,
+      "center_x": 31.8328,
       "bbox": [
         20,
         2,
@@ -11605,7 +11606,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 31.6009,
+      "center_x": 31.6053,
       "bbox": [
         19,
         3,
@@ -11633,7 +11634,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.4625,
+      "center_x": 32.5325,
       "bbox": [
         17,
         2,
@@ -11647,7 +11648,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.9917,
+      "center_x": 32.0296,
       "bbox": [
         16,
         2,
@@ -11661,7 +11662,7 @@
       "direction": "E",
       "height": 62,
       "foot": 62,
-      "center_x": 33.4051,
+      "center_x": 33.3974,
       "bbox": [
         18,
         1,
@@ -11689,7 +11690,7 @@
       "direction": "N",
       "height": 62,
       "foot": 62,
-      "center_x": 32.015,
+      "center_x": 31.9819,
       "bbox": [
         17,
         1,
@@ -11717,7 +11718,7 @@
       "direction": "W",
       "height": 62,
       "foot": 62,
-      "center_x": 31.4771,
+      "center_x": 31.49,
       "bbox": [
         17,
         1,
@@ -11731,7 +11732,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.5988,
+      "center_x": 31.594,
       "bbox": [
         17,
         2,
@@ -11745,7 +11746,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.4851,
+      "center_x": 32.5488,
       "bbox": [
         17,
         2,
@@ -11759,7 +11760,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.1363,
+      "center_x": 32.1849,
       "bbox": [
         16,
         2,
@@ -11801,7 +11802,7 @@
       "direction": "N",
       "height": 62,
       "foot": 62,
-      "center_x": 31.9793,
+      "center_x": 31.946,
       "bbox": [
         17,
         1,
@@ -11829,7 +11830,7 @@
       "direction": "W",
       "height": 62,
       "foot": 62,
-      "center_x": 31.555,
+      "center_x": 31.5592,
       "bbox": [
         17,
         1,
@@ -11843,7 +11844,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.8281,
+      "center_x": 31.8078,
       "bbox": [
         17,
         2,
@@ -11857,7 +11858,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.7223,
+      "center_x": 32.7844,
       "bbox": [
         17,
         2,
@@ -11871,7 +11872,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.2523,
+      "center_x": 32.2945,
       "bbox": [
         16,
         2,
@@ -11885,7 +11886,7 @@
       "direction": "E",
       "height": 62,
       "foot": 62,
-      "center_x": 33.2519,
+      "center_x": 33.2488,
       "bbox": [
         18,
         1,
@@ -11913,7 +11914,7 @@
       "direction": "N",
       "height": 62,
       "foot": 62,
-      "center_x": 32.043,
+      "center_x": 32.0095,
       "bbox": [
         17,
         1,
@@ -11941,7 +11942,7 @@
       "direction": "W",
       "height": 62,
       "foot": 62,
-      "center_x": 31.8186,
+      "center_x": 31.8227,
       "bbox": [
         17,
         1,
@@ -11955,7 +11956,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.7881,
+      "center_x": 31.7733,
       "bbox": [
         17,
         2,
@@ -11969,7 +11970,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.5135,
+      "center_x": 32.5777,
       "bbox": [
         17,
         2,
@@ -11983,7 +11984,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.1504,
+      "center_x": 32.1863,
       "bbox": [
         16,
         2,
@@ -11997,7 +11998,7 @@
       "direction": "E",
       "height": 62,
       "foot": 62,
-      "center_x": 33.3986,
+      "center_x": 33.3913,
       "bbox": [
         18,
         1,
@@ -12025,7 +12026,7 @@
       "direction": "N",
       "height": 62,
       "foot": 62,
-      "center_x": 31.9944,
+      "center_x": 31.9612,
       "bbox": [
         17,
         1,
@@ -12053,7 +12054,7 @@
       "direction": "W",
       "height": 62,
       "foot": 62,
-      "center_x": 31.5009,
+      "center_x": 31.5118,
       "bbox": [
         17,
         1,
@@ -12067,7 +12068,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.4247,
+      "center_x": 31.422,
       "bbox": [
         17,
         2,
@@ -12081,7 +12082,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.7486,
+      "center_x": 32.8159,
       "bbox": [
         17,
         2,
@@ -12095,7 +12096,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.8706,
+      "center_x": 31.9127,
       "bbox": [
         16,
         2,
@@ -12109,7 +12110,7 @@
       "direction": "E",
       "height": 62,
       "foot": 62,
-      "center_x": 33.0677,
+      "center_x": 33.0627,
       "bbox": [
         18,
         1,
@@ -12137,7 +12138,7 @@
       "direction": "N",
       "height": 62,
       "foot": 62,
-      "center_x": 32.232,
+      "center_x": 32.1981,
       "bbox": [
         17,
         1,
@@ -12165,7 +12166,7 @@
       "direction": "W",
       "height": 62,
       "foot": 62,
-      "center_x": 32.0167,
+      "center_x": 32.0263,
       "bbox": [
         17,
         1,
@@ -12179,7 +12180,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 32.1112,
+      "center_x": 32.097,
       "bbox": [
         17,
         2,
@@ -12193,7 +12194,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.7339,
+      "center_x": 32.7974,
       "bbox": [
         17,
         2,
@@ -12207,7 +12208,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.043,
+      "center_x": 32.0843,
       "bbox": [
         16,
         2,
@@ -12221,7 +12222,7 @@
       "direction": "E",
       "height": 62,
       "foot": 62,
-      "center_x": 33.1796,
+      "center_x": 33.1721,
       "bbox": [
         18,
         1,
@@ -12249,7 +12250,7 @@
       "direction": "N",
       "height": 62,
       "foot": 62,
-      "center_x": 32.2103,
+      "center_x": 32.1755,
       "bbox": [
         17,
         1,
@@ -12277,7 +12278,7 @@
       "direction": "W",
       "height": 62,
       "foot": 62,
-      "center_x": 31.8775,
+      "center_x": 31.8891,
       "bbox": [
         17,
         1,
@@ -12291,7 +12292,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.9807,
+      "center_x": 31.9677,
       "bbox": [
         17,
         2,
@@ -12305,7 +12306,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.8589,
+      "center_x": 32.9202,
       "bbox": [
         17,
         2,
@@ -12319,7 +12320,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.33,
+      "center_x": 32.3672,
       "bbox": [
         16,
         2,
@@ -12333,7 +12334,7 @@
       "direction": "E",
       "height": 62,
       "foot": 62,
-      "center_x": 33.3266,
+      "center_x": 33.3189,
       "bbox": [
         18,
         1,
@@ -12361,7 +12362,7 @@
       "direction": "N",
       "height": 62,
       "foot": 62,
-      "center_x": 32.2397,
+      "center_x": 32.2062,
       "bbox": [
         17,
         1,
@@ -12389,7 +12390,7 @@
       "direction": "W",
       "height": 62,
       "foot": 62,
-      "center_x": 31.7544,
+      "center_x": 31.7663,
       "bbox": [
         17,
         1,
@@ -12403,7 +12404,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.8917,
+      "center_x": 31.8802,
       "bbox": [
         17,
         2,
@@ -12417,7 +12418,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.6926,
+      "center_x": 32.756,
       "bbox": [
         17,
         2,
@@ -12431,7 +12432,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0153,
+      "center_x": 32.0571,
       "bbox": [
         16,
         2,
@@ -12445,7 +12446,7 @@
       "direction": "E",
       "height": 62,
       "foot": 62,
-      "center_x": 33.0738,
+      "center_x": 33.0689,
       "bbox": [
         18,
         1,
@@ -12473,7 +12474,7 @@
       "direction": "N",
       "height": 62,
       "foot": 62,
-      "center_x": 32.2246,
+      "center_x": 32.1902,
       "bbox": [
         17,
         1,
@@ -12501,7 +12502,7 @@
       "direction": "W",
       "height": 62,
       "foot": 62,
-      "center_x": 31.9155,
+      "center_x": 31.9255,
       "bbox": [
         17,
         1,
@@ -12515,7 +12516,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.9865,
+      "center_x": 31.9733,
       "bbox": [
         17,
         2,
@@ -12529,7 +12530,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.1079,
+      "center_x": 32.143,
       "bbox": [
         19,
         2,
@@ -12543,7 +12544,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.3805,
+      "center_x": 32.3324,
       "bbox": [
         19,
         2,
@@ -12557,7 +12558,7 @@
       "direction": "E",
       "height": 61,
       "foot": 62,
-      "center_x": 33.842,
+      "center_x": 33.7976,
       "bbox": [
         20,
         2,
@@ -12585,7 +12586,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.5311,
+      "center_x": 32.5119,
       "bbox": [
         19,
         2,
@@ -12599,7 +12600,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.6483,
+      "center_x": 31.6315,
       "bbox": [
         19,
         2,
@@ -12613,7 +12614,7 @@
       "direction": "W",
       "height": 61,
       "foot": 62,
-      "center_x": 31.27,
+      "center_x": 31.3027,
       "bbox": [
         21,
         2,
@@ -12627,7 +12628,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.1074,
+      "center_x": 31.1779,
       "bbox": [
         18,
         2,
@@ -12641,7 +12642,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.1386,
+      "center_x": 32.1729,
       "bbox": [
         19,
         2,
@@ -12655,7 +12656,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.5287,
+      "center_x": 32.4946,
       "bbox": [
         19,
         2,
@@ -12669,7 +12670,7 @@
       "direction": "E",
       "height": 61,
       "foot": 62,
-      "center_x": 33.5532,
+      "center_x": 33.5239,
       "bbox": [
         20,
         2,
@@ -12697,7 +12698,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.4966,
+      "center_x": 32.4829,
       "bbox": [
         19,
         2,
@@ -12711,7 +12712,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.5125,
+      "center_x": 31.4962,
       "bbox": [
         19,
         2,
@@ -12725,7 +12726,7 @@
       "direction": "W",
       "height": 61,
       "foot": 62,
-      "center_x": 31.3852,
+      "center_x": 31.4055,
       "bbox": [
         21,
         2,
@@ -12739,7 +12740,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.372,
+      "center_x": 31.4239,
       "bbox": [
         18,
         2,
@@ -12753,7 +12754,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.3964,
+      "center_x": 32.4297,
       "bbox": [
         19,
         2,
@@ -12767,7 +12768,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.6685,
+      "center_x": 32.6276,
       "bbox": [
         19,
         2,
@@ -12781,7 +12782,7 @@
       "direction": "E",
       "height": 61,
       "foot": 62,
-      "center_x": 33.6648,
+      "center_x": 33.6285,
       "bbox": [
         20,
         2,
@@ -12809,7 +12810,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.5582,
+      "center_x": 32.5509,
       "bbox": [
         19,
         2,
@@ -12823,7 +12824,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.5693,
+      "center_x": 31.5532,
       "bbox": [
         19,
         2,
@@ -12837,7 +12838,7 @@
       "direction": "W",
       "height": 61,
       "foot": 62,
-      "center_x": 31.6739,
+      "center_x": 31.692,
       "bbox": [
         21,
         2,
@@ -12851,7 +12852,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.3151,
+      "center_x": 31.3733,
       "bbox": [
         18,
         2,
@@ -12865,7 +12866,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.1654,
+      "center_x": 32.2,
       "bbox": [
         19,
         2,
@@ -12879,7 +12880,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.5534,
+      "center_x": 32.5041,
       "bbox": [
         19,
         2,
@@ -12893,7 +12894,7 @@
       "direction": "E",
       "height": 61,
       "foot": 62,
-      "center_x": 33.805,
+      "center_x": 33.764,
       "bbox": [
         20,
         2,
@@ -12921,7 +12922,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.5107,
+      "center_x": 32.4915,
       "bbox": [
         20,
         2,
@@ -12935,7 +12936,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.271,
+      "center_x": 31.2558,
       "bbox": [
         19,
         2,
@@ -12949,7 +12950,7 @@
       "direction": "W",
       "height": 61,
       "foot": 62,
-      "center_x": 31.3128,
+      "center_x": 31.3414,
       "bbox": [
         20,
         2,
@@ -12963,7 +12964,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 30.9139,
+      "center_x": 30.9864,
       "bbox": [
         18,
         2,
@@ -12977,7 +12978,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.4223,
+      "center_x": 32.4557,
       "bbox": [
         19,
         2,
@@ -12991,7 +12992,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.2357,
+      "center_x": 32.1931,
       "bbox": [
         19,
         2,
@@ -13005,7 +13006,7 @@
       "direction": "E",
       "height": 61,
       "foot": 62,
-      "center_x": 33.4511,
+      "center_x": 33.415,
       "bbox": [
         20,
         2,
@@ -13033,7 +13034,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.7587,
+      "center_x": 32.7447,
       "bbox": [
         19,
         2,
@@ -13047,7 +13048,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.6997,
+      "center_x": 31.6835,
       "bbox": [
         19,
         2,
@@ -13061,7 +13062,7 @@
       "direction": "W",
       "height": 61,
       "foot": 62,
-      "center_x": 31.9071,
+      "center_x": 31.9301,
       "bbox": [
         21,
         2,
@@ -13075,7 +13076,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.6879,
+      "center_x": 31.7471,
       "bbox": [
         18,
         2,
@@ -13089,7 +13090,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.4002,
+      "center_x": 32.4343,
       "bbox": [
         19,
         2,
@@ -13103,7 +13104,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.436,
+      "center_x": 32.3907,
       "bbox": [
         19,
         2,
@@ -13117,7 +13118,7 @@
       "direction": "E",
       "height": 61,
       "foot": 62,
-      "center_x": 33.5991,
+      "center_x": 33.5565,
       "bbox": [
         20,
         2,
@@ -13145,7 +13146,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.7583,
+      "center_x": 32.7439,
       "bbox": [
         19,
         2,
@@ -13159,7 +13160,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.8958,
+      "center_x": 31.879,
       "bbox": [
         19,
         2,
@@ -13173,7 +13174,7 @@
       "direction": "W",
       "height": 61,
       "foot": 62,
-      "center_x": 31.7341,
+      "center_x": 31.7618,
       "bbox": [
         21,
         2,
@@ -13187,7 +13188,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.5313,
+      "center_x": 31.5939,
       "bbox": [
         18,
         2,
@@ -13201,7 +13202,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.5446,
+      "center_x": 32.5773,
       "bbox": [
         19,
         2,
@@ -13215,7 +13216,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.748,
+      "center_x": 32.7014,
       "bbox": [
         19,
         2,
@@ -13229,7 +13230,7 @@
       "direction": "E",
       "height": 61,
       "foot": 62,
-      "center_x": 33.7591,
+      "center_x": 33.7151,
       "bbox": [
         20,
         2,
@@ -13257,7 +13258,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.7651,
+      "center_x": 32.7513,
       "bbox": [
         19,
         2,
@@ -13271,7 +13272,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.6444,
+      "center_x": 31.6282,
       "bbox": [
         19,
         2,
@@ -13285,7 +13286,7 @@
       "direction": "W",
       "height": 61,
       "foot": 62,
-      "center_x": 31.5923,
+      "center_x": 31.6213,
       "bbox": [
         21,
         2,
@@ -13299,7 +13300,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.4537,
+      "center_x": 31.5141,
       "bbox": [
         18,
         2,
@@ -13313,7 +13314,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.3578,
+      "center_x": 32.3918,
       "bbox": [
         19,
         2,
@@ -13327,7 +13328,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.4079,
+      "center_x": 32.3625,
       "bbox": [
         19,
         2,
@@ -13341,7 +13342,7 @@
       "direction": "E",
       "height": 61,
       "foot": 62,
-      "center_x": 33.4544,
+      "center_x": 33.4186,
       "bbox": [
         20,
         2,
@@ -13369,7 +13370,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.7604,
+      "center_x": 32.7461,
       "bbox": [
         19,
         2,
@@ -13383,7 +13384,7 @@
       "direction": "NW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.8397,
+      "center_x": 31.8228,
       "bbox": [
         19,
         2,
@@ -13397,7 +13398,7 @@
       "direction": "W",
       "height": 61,
       "foot": 62,
-      "center_x": 31.7885,
+      "center_x": 31.8129,
       "bbox": [
         21,
         2,
@@ -13411,7 +13412,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.5348,
+      "center_x": 31.5978,
       "bbox": [
         18,
         2,
@@ -13425,7 +13426,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.1553,
+      "center_x": 32.1934,
       "bbox": [
         19,
         2,
@@ -13439,7 +13440,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.2366,
+      "center_x": 32.2217,
       "bbox": [
         19,
         2,
@@ -13453,7 +13454,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 33.517,
+      "center_x": 33.4866,
       "bbox": [
         20,
         3,
@@ -13467,7 +13468,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0965,
+      "center_x": 32.089,
       "bbox": [
         20,
         2,
@@ -13509,7 +13510,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 31.0427,
+      "center_x": 31.0718,
       "bbox": [
         21,
         3,
@@ -13523,7 +13524,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.215,
+      "center_x": 31.2425,
       "bbox": [
         19,
         2,
@@ -13537,7 +13538,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.1846,
+      "center_x": 32.2219,
       "bbox": [
         19,
         2,
@@ -13551,7 +13552,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.376,
+      "center_x": 32.3607,
       "bbox": [
         19,
         2,
@@ -13565,7 +13566,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 33.2393,
+      "center_x": 33.2219,
       "bbox": [
         20,
         3,
@@ -13579,7 +13580,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.1504,
+      "center_x": 32.1423,
       "bbox": [
         20,
         2,
@@ -13621,7 +13622,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 31.1489,
+      "center_x": 31.1644,
       "bbox": [
         21,
         3,
@@ -13635,7 +13636,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.4909,
+      "center_x": 31.5162,
       "bbox": [
         19,
         2,
@@ -13649,7 +13650,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.4374,
+      "center_x": 32.4733,
       "bbox": [
         19,
         2,
@@ -13663,7 +13664,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.5169,
+      "center_x": 32.5009,
       "bbox": [
         19,
         2,
@@ -13677,7 +13678,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 33.3318,
+      "center_x": 33.3087,
       "bbox": [
         20,
         3,
@@ -13691,7 +13692,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.2529,
+      "center_x": 32.245,
       "bbox": [
         20,
         2,
@@ -13733,7 +13734,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 31.4486,
+      "center_x": 31.462,
       "bbox": [
         21,
         3,
@@ -13747,7 +13748,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.427,
+      "center_x": 31.4527,
       "bbox": [
         19,
         2,
@@ -13761,7 +13762,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.2114,
+      "center_x": 32.2489,
       "bbox": [
         19,
         2,
@@ -13775,7 +13776,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.4114,
+      "center_x": 32.3958,
       "bbox": [
         19,
         2,
@@ -13789,7 +13790,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 33.5016,
+      "center_x": 33.4735,
       "bbox": [
         20,
         3,
@@ -13803,7 +13804,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.2488,
+      "center_x": 32.2409,
       "bbox": [
         20,
         2,
@@ -13845,7 +13846,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 31.095,
+      "center_x": 31.1197,
       "bbox": [
         20,
         3,
@@ -13859,7 +13860,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.0219,
+      "center_x": 31.0507,
       "bbox": [
         19,
         2,
@@ -13873,7 +13874,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.4632,
+      "center_x": 32.4992,
       "bbox": [
         19,
         2,
@@ -13887,7 +13888,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0878,
+      "center_x": 32.0737,
       "bbox": [
         19,
         2,
@@ -13901,7 +13902,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 33.1121,
+      "center_x": 33.089,
       "bbox": [
         20,
         3,
@@ -13915,7 +13916,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.2798,
+      "center_x": 32.2718,
       "bbox": [
         20,
         2,
@@ -13957,7 +13958,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 31.6858,
+      "center_x": 31.7052,
       "bbox": [
         21,
         3,
@@ -13971,7 +13972,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.7924,
+      "center_x": 31.8155,
       "bbox": [
         19,
         2,
@@ -13985,7 +13986,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.4422,
+      "center_x": 32.479,
       "bbox": [
         19,
         2,
@@ -13999,7 +14000,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.2852,
+      "center_x": 32.2698,
       "bbox": [
         19,
         2,
@@ -14013,7 +14014,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 33.2518,
+      "center_x": 33.2235,
       "bbox": [
         20,
         3,
@@ -14027,7 +14028,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.1708,
+      "center_x": 32.1627,
       "bbox": [
         20,
         2,
@@ -14069,7 +14070,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 31.5049,
+      "center_x": 31.5291,
       "bbox": [
         21,
         3,
@@ -14083,7 +14084,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.6453,
+      "center_x": 31.6701,
       "bbox": [
         19,
         2,
@@ -14097,7 +14098,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.5828,
+      "center_x": 32.6179,
       "bbox": [
         19,
         2,
@@ -14111,7 +14112,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.6029,
+      "center_x": 32.5866,
       "bbox": [
         19,
         2,
@@ -14125,7 +14126,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 33.4254,
+      "center_x": 33.3957,
       "bbox": [
         20,
         3,
@@ -14139,7 +14140,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.5794,
+      "center_x": 32.5714,
       "bbox": [
         20,
         2,
@@ -14181,7 +14182,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 31.3731,
+      "center_x": 31.3984,
       "bbox": [
         21,
         3,
@@ -14195,7 +14196,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.5626,
+      "center_x": 31.5868,
       "bbox": [
         19,
         2,
@@ -14209,7 +14210,7 @@
       "direction": "S",
       "height": 61,
       "foot": 62,
-      "center_x": 32.4003,
+      "center_x": 32.4371,
       "bbox": [
         19,
         2,
@@ -14223,7 +14224,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.2559,
+      "center_x": 32.2406,
       "bbox": [
         19,
         2,
@@ -14237,7 +14238,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 33.119,
+      "center_x": 33.096,
       "bbox": [
         20,
         3,
@@ -14251,7 +14252,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.25,
+      "center_x": 32.242,
       "bbox": [
         20,
         2,
@@ -14293,7 +14294,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 31.5662,
+      "center_x": 31.5869,
       "bbox": [
         21,
         3,
@@ -14307,7 +14308,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.6495,
+      "center_x": 31.6744,
       "bbox": [
         19,
         2,
@@ -14335,7 +14336,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.648,
+      "center_x": 31.6104,
       "bbox": [
         16,
         2,
@@ -14349,7 +14350,7 @@
       "direction": "E",
       "height": 62,
       "foot": 62,
-      "center_x": 32.9181,
+      "center_x": 32.9268,
       "bbox": [
         17,
         1,
@@ -14363,7 +14364,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.9309,
+      "center_x": 31.937,
       "bbox": [
         16,
         2,
@@ -14377,7 +14378,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.3574,
+      "center_x": 32.3577,
       "bbox": [
         17,
         2,
@@ -14405,7 +14406,7 @@
       "direction": "W",
       "height": 62,
       "foot": 62,
-      "center_x": 31.8161,
+      "center_x": 31.8113,
       "bbox": [
         19,
         1,
@@ -14419,7 +14420,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.6198,
+      "center_x": 31.6318,
       "bbox": [
         18,
         2,
@@ -14447,7 +14448,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.8185,
+      "center_x": 31.7799,
       "bbox": [
         16,
         2,
@@ -14461,7 +14462,7 @@
       "direction": "E",
       "height": 62,
       "foot": 62,
-      "center_x": 32.6874,
+      "center_x": 32.6968,
       "bbox": [
         17,
         1,
@@ -14475,7 +14476,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.9607,
+      "center_x": 31.9671,
       "bbox": [
         16,
         2,
@@ -14489,7 +14490,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.3232,
+      "center_x": 32.3235,
       "bbox": [
         17,
         2,
@@ -14517,7 +14518,7 @@
       "direction": "W",
       "height": 62,
       "foot": 62,
-      "center_x": 31.8863,
+      "center_x": 31.8814,
       "bbox": [
         19,
         1,
@@ -14531,7 +14532,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.8431,
+      "center_x": 31.8541,
       "bbox": [
         18,
         2,
@@ -14559,7 +14560,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.9436,
+      "center_x": 31.9043,
       "bbox": [
         16,
         2,
@@ -14573,7 +14574,7 @@
       "direction": "E",
       "height": 62,
       "foot": 62,
-      "center_x": 32.7447,
+      "center_x": 32.7543,
       "bbox": [
         17,
         1,
@@ -14587,7 +14588,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0733,
+      "center_x": 32.0794,
       "bbox": [
         16,
         2,
@@ -14601,7 +14602,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.389,
+      "center_x": 32.3892,
       "bbox": [
         17,
         2,
@@ -14629,7 +14630,7 @@
       "direction": "W",
       "height": 62,
       "foot": 62,
-      "center_x": 32.1854,
+      "center_x": 32.1797,
       "bbox": [
         19,
         1,
@@ -14643,7 +14644,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.7931,
+      "center_x": 31.8043,
       "bbox": [
         18,
         2,
@@ -14671,7 +14672,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.8172,
+      "center_x": 31.7787,
       "bbox": [
         16,
         2,
@@ -14685,7 +14686,7 @@
       "direction": "E",
       "height": 62,
       "foot": 62,
-      "center_x": 32.942,
+      "center_x": 32.95,
       "bbox": [
         17,
         1,
@@ -14699,7 +14700,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0678,
+      "center_x": 32.0739,
       "bbox": [
         16,
         2,
@@ -14713,7 +14714,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.3374,
+      "center_x": 32.3377,
       "bbox": [
         17,
         2,
@@ -14741,7 +14742,7 @@
       "direction": "W",
       "height": 62,
       "foot": 62,
-      "center_x": 31.8219,
+      "center_x": 31.8173,
       "bbox": [
         19,
         1,
@@ -14755,7 +14756,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.4312,
+      "center_x": 31.4439,
       "bbox": [
         18,
         2,
@@ -14783,7 +14784,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.5248,
+      "center_x": 31.4884,
       "bbox": [
         16,
         2,
@@ -14797,7 +14798,7 @@
       "direction": "E",
       "height": 62,
       "foot": 62,
-      "center_x": 32.5349,
+      "center_x": 32.5455,
       "bbox": [
         17,
         1,
@@ -14811,7 +14812,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0901,
+      "center_x": 32.0963,
       "bbox": [
         16,
         2,
@@ -14825,7 +14826,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.5745,
+      "center_x": 32.5743,
       "bbox": [
         17,
         2,
@@ -14853,7 +14854,7 @@
       "direction": "W",
       "height": 62,
       "foot": 62,
-      "center_x": 32.4109,
+      "center_x": 32.4047,
       "bbox": [
         19,
         1,
@@ -14867,7 +14868,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 32.1482,
+      "center_x": 32.1578,
       "bbox": [
         18,
         2,
@@ -14895,7 +14896,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.6981,
+      "center_x": 31.6596,
       "bbox": [
         16,
         2,
@@ -14909,7 +14910,7 @@
       "direction": "E",
       "height": 62,
       "foot": 62,
-      "center_x": 32.6424,
+      "center_x": 32.6527,
       "bbox": [
         17,
         1,
@@ -14923,7 +14924,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.9919,
+      "center_x": 31.9982,
       "bbox": [
         16,
         2,
@@ -14937,7 +14938,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.5687,
+      "center_x": 32.5686,
       "bbox": [
         17,
         2,
@@ -14965,7 +14966,7 @@
       "direction": "W",
       "height": 62,
       "foot": 62,
-      "center_x": 32.2724,
+      "center_x": 32.2664,
       "bbox": [
         19,
         1,
@@ -14979,7 +14980,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0132,
+      "center_x": 32.0236,
       "bbox": [
         18,
         2,
@@ -15007,7 +15008,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0165,
+      "center_x": 31.9768,
       "bbox": [
         16,
         2,
@@ -15021,7 +15022,7 @@
       "direction": "E",
       "height": 62,
       "foot": 62,
-      "center_x": 32.821,
+      "center_x": 32.8303,
       "bbox": [
         17,
         1,
@@ -15035,7 +15036,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.3606,
+      "center_x": 32.3663,
       "bbox": [
         16,
         2,
@@ -15049,7 +15050,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.5833,
+      "center_x": 32.5832,
       "bbox": [
         17,
         2,
@@ -15077,7 +15078,7 @@
       "direction": "W",
       "height": 62,
       "foot": 62,
-      "center_x": 32.1328,
+      "center_x": 32.1273,
       "bbox": [
         19,
         1,
@@ -15091,7 +15092,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.9185,
+      "center_x": 31.9289,
       "bbox": [
         18,
         2,
@@ -15119,7 +15120,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.6667,
+      "center_x": 31.6281,
       "bbox": [
         16,
         2,
@@ -15133,7 +15134,7 @@
       "direction": "E",
       "height": 62,
       "foot": 62,
-      "center_x": 32.5468,
+      "center_x": 32.5572,
       "bbox": [
         17,
         1,
@@ -15147,7 +15148,7 @@
       "direction": "NE",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0675,
+      "center_x": 32.0737,
       "bbox": [
         16,
         2,
@@ -15161,7 +15162,7 @@
       "direction": "N",
       "height": 61,
       "foot": 62,
-      "center_x": 32.5728,
+      "center_x": 32.5727,
       "bbox": [
         17,
         2,
@@ -15189,7 +15190,7 @@
       "direction": "W",
       "height": 62,
       "foot": 62,
-      "center_x": 32.297,
+      "center_x": 32.2911,
       "bbox": [
         19,
         1,
@@ -15203,7 +15204,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0195,
+      "center_x": 32.03,
       "bbox": [
         18,
         2,
@@ -15231,7 +15232,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.5963,
+      "center_x": 31.5704,
       "bbox": [
         17,
         2,
@@ -15245,7 +15246,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 32.7665,
+      "center_x": 32.7558,
       "bbox": [
         19,
         3,
@@ -15259,7 +15260,7 @@
       "direction": "NE",
       "height": 60,
       "foot": 62,
-      "center_x": 31.8123,
+      "center_x": 31.8208,
       "bbox": [
         18,
         3,
@@ -15273,7 +15274,7 @@
       "direction": "N",
       "height": 60,
       "foot": 62,
-      "center_x": 32.2452,
+      "center_x": 32.2363,
       "bbox": [
         18,
         3,
@@ -15287,7 +15288,7 @@
       "direction": "NW",
       "height": 60,
       "foot": 62,
-      "center_x": 32.2176,
+      "center_x": 32.1943,
       "bbox": [
         19,
         3,
@@ -15301,7 +15302,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 32.0386,
+      "center_x": 32.0504,
       "bbox": [
         21,
         3,
@@ -15315,7 +15316,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.4626,
+      "center_x": 31.4855,
       "bbox": [
         18,
         2,
@@ -15343,7 +15344,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.759,
+      "center_x": 31.7456,
       "bbox": [
         17,
         2,
@@ -15357,7 +15358,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 32.5256,
+      "center_x": 32.5223,
       "bbox": [
         19,
         3,
@@ -15371,7 +15372,7 @@
       "direction": "NE",
       "height": 60,
       "foot": 62,
-      "center_x": 31.8433,
+      "center_x": 31.8523,
       "bbox": [
         18,
         3,
@@ -15385,7 +15386,7 @@
       "direction": "N",
       "height": 60,
       "foot": 62,
-      "center_x": 32.2014,
+      "center_x": 32.1925,
       "bbox": [
         18,
         3,
@@ -15399,7 +15400,7 @@
       "direction": "NW",
       "height": 60,
       "foot": 62,
-      "center_x": 32.0898,
+      "center_x": 32.0669,
       "bbox": [
         19,
         3,
@@ -15413,7 +15414,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 32.1281,
+      "center_x": 32.1322,
       "bbox": [
         21,
         3,
@@ -15427,7 +15428,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.7191,
+      "center_x": 31.7266,
       "bbox": [
         18,
         2,
@@ -15455,7 +15456,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.8971,
+      "center_x": 31.8781,
       "bbox": [
         17,
         2,
@@ -15469,7 +15470,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 32.5754,
+      "center_x": 32.569,
       "bbox": [
         19,
         3,
@@ -15483,7 +15484,7 @@
       "direction": "NE",
       "height": 60,
       "foot": 62,
-      "center_x": 31.9746,
+      "center_x": 31.9831,
       "bbox": [
         18,
         3,
@@ -15497,7 +15498,7 @@
       "direction": "N",
       "height": 60,
       "foot": 62,
-      "center_x": 32.2712,
+      "center_x": 32.2622,
       "bbox": [
         18,
         3,
@@ -15511,7 +15512,7 @@
       "direction": "NW",
       "height": 60,
       "foot": 62,
-      "center_x": 32.1351,
+      "center_x": 32.1126,
       "bbox": [
         19,
         3,
@@ -15525,7 +15526,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 32.4505,
+      "center_x": 32.4539,
       "bbox": [
         21,
         3,
@@ -15539,7 +15540,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.6612,
+      "center_x": 31.6745,
       "bbox": [
         18,
         2,
@@ -15567,7 +15568,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.7763,
+      "center_x": 31.7498,
       "bbox": [
         17,
         2,
@@ -15581,7 +15582,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 32.8016,
+      "center_x": 32.7914,
       "bbox": [
         19,
         3,
@@ -15595,7 +15596,7 @@
       "direction": "NE",
       "height": 60,
       "foot": 62,
-      "center_x": 31.9624,
+      "center_x": 31.9709,
       "bbox": [
         18,
         3,
@@ -15609,7 +15610,7 @@
       "direction": "N",
       "height": 60,
       "foot": 62,
-      "center_x": 32.2234,
+      "center_x": 32.2145,
       "bbox": [
         18,
         3,
@@ -15623,7 +15624,7 @@
       "direction": "NW",
       "height": 60,
       "foot": 62,
-      "center_x": 31.8191,
+      "center_x": 31.7979,
       "bbox": [
         19,
         3,
@@ -15637,7 +15638,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 32.0397,
+      "center_x": 32.0499,
       "bbox": [
         20,
         3,
@@ -15651,7 +15652,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.2693,
+      "center_x": 31.2928,
       "bbox": [
         18,
         2,
@@ -15679,7 +15680,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.4576,
+      "center_x": 31.4358,
       "bbox": [
         17,
         2,
@@ -15693,7 +15694,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 32.3566,
+      "center_x": 32.3494,
       "bbox": [
         19,
         3,
@@ -15707,7 +15708,7 @@
       "direction": "NE",
       "height": 60,
       "foot": 62,
-      "center_x": 31.9847,
+      "center_x": 31.9933,
       "bbox": [
         18,
         3,
@@ -15721,7 +15722,7 @@
       "direction": "N",
       "height": 60,
       "foot": 62,
-      "center_x": 32.4774,
+      "center_x": 32.4683,
       "bbox": [
         18,
         3,
@@ -15735,7 +15736,7 @@
       "direction": "NW",
       "height": 60,
       "foot": 62,
-      "center_x": 32.2644,
+      "center_x": 32.2416,
       "bbox": [
         19,
         3,
@@ -15749,7 +15750,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 32.6879,
+      "center_x": 32.6954,
       "bbox": [
         21,
         3,
@@ -15763,7 +15764,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 32.0317,
+      "center_x": 32.0487,
       "bbox": [
         18,
         2,
@@ -15791,7 +15792,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.6399,
+      "center_x": 31.6168,
       "bbox": [
         17,
         2,
@@ -15805,7 +15806,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 32.4687,
+      "center_x": 32.4591,
       "bbox": [
         19,
         3,
@@ -15819,7 +15820,7 @@
       "direction": "NE",
       "height": 60,
       "foot": 62,
-      "center_x": 31.872,
+      "center_x": 31.8808,
       "bbox": [
         18,
         3,
@@ -15833,7 +15834,7 @@
       "direction": "N",
       "height": 60,
       "foot": 62,
-      "center_x": 32.4681,
+      "center_x": 32.4587,
       "bbox": [
         18,
         3,
@@ -15847,7 +15848,7 @@
       "direction": "NW",
       "height": 60,
       "foot": 62,
-      "center_x": 32.4589,
+      "center_x": 32.4353,
       "bbox": [
         19,
         3,
@@ -15861,7 +15862,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 32.5423,
+      "center_x": 32.5513,
       "bbox": [
         21,
         3,
@@ -15875,7 +15876,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.8856,
+      "center_x": 31.9035,
       "bbox": [
         18,
         2,
@@ -15903,7 +15904,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.9789,
+      "center_x": 31.9552,
       "bbox": [
         17,
         2,
@@ -15917,7 +15918,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 32.6614,
+      "center_x": 32.651,
       "bbox": [
         19,
         3,
@@ -15931,7 +15932,7 @@
       "direction": "NE",
       "height": 60,
       "foot": 62,
-      "center_x": 32.2823,
+      "center_x": 32.2903,
       "bbox": [
         18,
         3,
@@ -15945,7 +15946,7 @@
       "direction": "N",
       "height": 60,
       "foot": 62,
-      "center_x": 32.4884,
+      "center_x": 32.4795,
       "bbox": [
         18,
         3,
@@ -15959,7 +15960,7 @@
       "direction": "NW",
       "height": 60,
       "foot": 62,
-      "center_x": 32.1981,
+      "center_x": 32.1755,
       "bbox": [
         19,
         3,
@@ -15973,7 +15974,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 32.3793,
+      "center_x": 32.3891,
       "bbox": [
         21,
         3,
@@ -15987,7 +15988,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.7917,
+      "center_x": 31.809,
       "bbox": [
         18,
         2,
@@ -16015,7 +16016,7 @@
       "direction": "SE",
       "height": 61,
       "foot": 62,
-      "center_x": 31.6061,
+      "center_x": 31.5829,
       "bbox": [
         17,
         2,
@@ -16029,7 +16030,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 32.3708,
+      "center_x": 32.3636,
       "bbox": [
         19,
         3,
@@ -16043,7 +16044,7 @@
       "direction": "NE",
       "height": 60,
       "foot": 62,
-      "center_x": 31.9596,
+      "center_x": 31.9683,
       "bbox": [
         18,
         3,
@@ -16057,7 +16058,7 @@
       "direction": "N",
       "height": 60,
       "foot": 62,
-      "center_x": 32.4739,
+      "center_x": 32.4646,
       "bbox": [
         18,
         3,
@@ -16071,7 +16072,7 @@
       "direction": "NW",
       "height": 60,
       "foot": 62,
-      "center_x": 32.4028,
+      "center_x": 32.379,
       "bbox": [
         19,
         3,
@@ -16085,7 +16086,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 32.5637,
+      "center_x": 32.5717,
       "bbox": [
         21,
         3,
@@ -16099,7 +16100,7 @@
       "direction": "SW",
       "height": 61,
       "foot": 62,
-      "center_x": 31.8914,
+      "center_x": 31.9094,
       "bbox": [
         18,
         2,
@@ -16113,7 +16114,7 @@
       "direction": "S",
       "height": 60,
       "foot": 62,
-      "center_x": 32.1191,
+      "center_x": 32.1228,
       "bbox": [
         19,
         3,
@@ -16127,7 +16128,7 @@
       "direction": "SE",
       "height": 60,
       "foot": 62,
-      "center_x": 32.1196,
+      "center_x": 32.0814,
       "bbox": [
         20,
         3,
@@ -16141,7 +16142,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 33.3942,
+      "center_x": 33.4014,
       "bbox": [
         21,
         3,
@@ -16197,7 +16198,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 31.1038,
+      "center_x": 31.0995,
       "bbox": [
         21,
         3,
@@ -16211,7 +16212,7 @@
       "direction": "SW",
       "height": 60,
       "foot": 62,
-      "center_x": 31.3311,
+      "center_x": 31.3641,
       "bbox": [
         20,
         3,
@@ -16225,7 +16226,7 @@
       "direction": "S",
       "height": 60,
       "foot": 62,
-      "center_x": 32.1507,
+      "center_x": 32.1538,
       "bbox": [
         19,
         3,
@@ -16239,7 +16240,7 @@
       "direction": "SE",
       "height": 60,
       "foot": 62,
-      "center_x": 32.2652,
+      "center_x": 32.2257,
       "bbox": [
         20,
         3,
@@ -16253,7 +16254,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 33.1096,
+      "center_x": 33.1188,
       "bbox": [
         21,
         3,
@@ -16309,7 +16310,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 31.2072,
+      "center_x": 31.2023,
       "bbox": [
         21,
         3,
@@ -16323,7 +16324,7 @@
       "direction": "SW",
       "height": 60,
       "foot": 62,
-      "center_x": 31.614,
+      "center_x": 31.6447,
       "bbox": [
         19,
         3,
@@ -16337,7 +16338,7 @@
       "direction": "S",
       "height": 60,
       "foot": 62,
-      "center_x": 32.4179,
+      "center_x": 32.4173,
       "bbox": [
         19,
         3,
@@ -16351,7 +16352,7 @@
       "direction": "SE",
       "height": 60,
       "foot": 62,
-      "center_x": 32.4113,
+      "center_x": 32.3703,
       "bbox": [
         20,
         3,
@@ -16365,7 +16366,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 33.206,
+      "center_x": 33.2149,
       "bbox": [
         21,
         3,
@@ -16421,7 +16422,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 31.5103,
+      "center_x": 31.503,
       "bbox": [
         21,
         3,
@@ -16435,7 +16436,7 @@
       "direction": "SW",
       "height": 60,
       "foot": 62,
-      "center_x": 31.548,
+      "center_x": 31.5791,
       "bbox": [
         20,
         3,
@@ -16449,7 +16450,7 @@
       "direction": "S",
       "height": 60,
       "foot": 62,
-      "center_x": 32.1786,
+      "center_x": 32.1814,
       "bbox": [
         20,
         3,
@@ -16463,7 +16464,7 @@
       "direction": "SE",
       "height": 60,
       "foot": 62,
-      "center_x": 32.3013,
+      "center_x": 32.2613,
       "bbox": [
         20,
         3,
@@ -16477,7 +16478,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 33.387,
+      "center_x": 33.3937,
       "bbox": [
         21,
         3,
@@ -16533,7 +16534,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 31.1527,
+      "center_x": 31.1484,
       "bbox": [
         20,
         3,
@@ -16547,7 +16548,7 @@
       "direction": "SW",
       "height": 60,
       "foot": 62,
-      "center_x": 31.1323,
+      "center_x": 31.1667,
       "bbox": [
         19,
         3,
@@ -16561,7 +16562,7 @@
       "direction": "S",
       "height": 60,
       "foot": 62,
-      "center_x": 32.4449,
+      "center_x": 32.444,
       "bbox": [
         19,
         3,
@@ -16575,7 +16576,7 @@
       "direction": "SE",
       "height": 60,
       "foot": 62,
-      "center_x": 31.9669,
+      "center_x": 31.9308,
       "bbox": [
         20,
         3,
@@ -16589,7 +16590,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 32.9749,
+      "center_x": 32.9857,
       "bbox": [
         21,
         3,
@@ -16645,7 +16646,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 31.768,
+      "center_x": 31.7588,
       "bbox": [
         21,
         3,
@@ -16659,7 +16660,7 @@
       "direction": "SW",
       "height": 60,
       "foot": 62,
-      "center_x": 31.9236,
+      "center_x": 31.9519,
       "bbox": [
         21,
         3,
@@ -16673,7 +16674,7 @@
       "direction": "S",
       "height": 60,
       "foot": 62,
-      "center_x": 32.4224,
+      "center_x": 32.4218,
       "bbox": [
         19,
         3,
@@ -16687,7 +16688,7 @@
       "direction": "SE",
       "height": 60,
       "foot": 62,
-      "center_x": 32.1681,
+      "center_x": 32.1287,
       "bbox": [
         20,
         3,
@@ -16701,7 +16702,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 33.1125,
+      "center_x": 33.1225,
       "bbox": [
         21,
         3,
@@ -16757,7 +16758,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 31.5806,
+      "center_x": 31.5725,
       "bbox": [
         21,
         3,
@@ -16771,7 +16772,7 @@
       "direction": "SW",
       "height": 60,
       "foot": 62,
-      "center_x": 31.7759,
+      "center_x": 31.8061,
       "bbox": [
         20,
         3,
@@ -16785,7 +16786,7 @@
       "direction": "S",
       "height": 60,
       "foot": 62,
-      "center_x": 32.5716,
+      "center_x": 32.5688,
       "bbox": [
         19,
         3,
@@ -16799,7 +16800,7 @@
       "direction": "SE",
       "height": 60,
       "foot": 62,
-      "center_x": 32.5005,
+      "center_x": 32.4585,
       "bbox": [
         20,
         3,
@@ -16813,7 +16814,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 33.2967,
+      "center_x": 33.3049,
       "bbox": [
         21,
         3,
@@ -16869,7 +16870,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 31.4434,
+      "center_x": 31.4365,
       "bbox": [
         21,
         3,
@@ -16883,7 +16884,7 @@
       "direction": "SW",
       "height": 60,
       "foot": 62,
-      "center_x": 31.6846,
+      "center_x": 31.714,
       "bbox": [
         20,
         3,
@@ -16897,7 +16898,7 @@
       "direction": "S",
       "height": 60,
       "foot": 62,
-      "center_x": 32.3783,
+      "center_x": 32.3782,
       "bbox": [
         19,
         3,
@@ -16911,7 +16912,7 @@
       "direction": "SE",
       "height": 60,
       "foot": 62,
-      "center_x": 32.137,
+      "center_x": 32.0977,
       "bbox": [
         20,
         3,
@@ -16925,7 +16926,7 @@
       "direction": "E",
       "height": 60,
       "foot": 62,
-      "center_x": 32.9834,
+      "center_x": 32.9941,
       "bbox": [
         21,
         3,
@@ -16981,7 +16982,7 @@
       "direction": "W",
       "height": 60,
       "foot": 62,
-      "center_x": 31.6449,
+      "center_x": 31.6367,
       "bbox": [
         21,
         3,
@@ -16995,7 +16996,7 @@
       "direction": "SW",
       "height": 60,
       "foot": 62,
-      "center_x": 31.7811,
+      "center_x": 31.8115,
       "bbox": [
         21,
         3,
@@ -17054,128 +17055,128 @@
       "sha256": "dfce62aeac7f0ba324a4044197a7ea374cf75de74758271ca1834fa6017a503e"
     },
     "kid8-hairback-1.png": {
-      "bytes": 4805,
-      "sha256": "ac82340dad8ec4a83fc9703b97b601cfcd8aa47ea20cbac0cca6c0a1d4c8fad1"
+      "bytes": 4868,
+      "sha256": "0042766af40561ef0bdc22a79b788704c9d02391a9b1cbc1464e1a3f58f57a8c"
     },
     "kid8-hair-2.png": {
       "bytes": 6808,
       "sha256": "0f08d80967129cbb6e8db0c0cdb625e0600851586fa904ba191972c0058dc394"
     },
     "kid8-hairback-2.png": {
-      "bytes": 872,
-      "sha256": "d63e8e888b2f5ff70bda672234e49b51898bb88af3a0217258260eadc73cc642"
+      "bytes": 940,
+      "sha256": "d499bd58707a8412b10a346dec814c5a1e4c026ec6e4867d276ea4ac634f4243"
     },
     "kid8-hair-3.png": {
       "bytes": 6612,
       "sha256": "83c57f4eb16ce8b89a18004a32ffa6d748687095d9a2fda1c18cdcbd9cda3d32"
     },
     "kid8-hairback-3.png": {
-      "bytes": 954,
-      "sha256": "ea5a42f1d68c887c6c8f2558d7155cc0d53637784f2b1c4d215c1990f1c5cca1"
+      "bytes": 979,
+      "sha256": "061b489319f285b19e824d3a8a25e6d42ed858e327de48f810f4fbb9dbca66af"
     },
     "kid8-hair-4.png": {
       "bytes": 4501,
       "sha256": "ba1cd0afb3f1f32b48bc3854613b857396a20154542cd25663ba1484b68f541c"
     },
     "kid8-hairback-4.png": {
-      "bytes": 306,
-      "sha256": "cc651e4f450f6fc3111cf1078c90864bded0e8b570f4dfff8dc234c6e91572e6"
+      "bytes": 341,
+      "sha256": "6428320140e7875bc26316bcf3266d5f0d03ee44771fab76db65586ab0a1993a"
     },
     "kid8-hair-5.png": {
       "bytes": 4177,
       "sha256": "d6160a10b670bacd8c3f7b98426d2b860052bc0d8ef802b31477c03cd94de235"
     },
     "kid8-hairback-5.png": {
-      "bytes": 309,
-      "sha256": "87a5866de73958cbcd3d716f333e6f5286489f8680b64a669314b4b4b155bb3e"
+      "bytes": 395,
+      "sha256": "1b26dacff8c249d85c0ca0b45b3bdc27696d239f4765b1f15854c67d6e37b6a3"
     },
     "kid8-hair-6.png": {
       "bytes": 7225,
       "sha256": "fa583ac58454fe2f1255fa9a3088c9eb28903d6ef1ae20c026573a1b4ec18277"
     },
     "kid8-hairback-6.png": {
-      "bytes": 207,
-      "sha256": "ff237e92a1de1428b1368d960bc2ce98195821af0d9838853344180bf29c45ed"
+      "bytes": 247,
+      "sha256": "3cccbe385f79844d738447d951b139fc60fa34331aebb163ecda53fe39c95ca8"
     },
     "kid8-hair-7.png": {
       "bytes": 4321,
       "sha256": "a6f1c6e4f234b8a7b554049ed53a7260ad7e7c153e5ef4fcb9048dcd54a35fd6"
     },
     "kid8-hairback-7.png": {
-      "bytes": 1132,
-      "sha256": "a415a170c94fe5a59a62878875649c2b1b78f61699ded771c667be2bc95c78f5"
+      "bytes": 1163,
+      "sha256": "6716c26f082a4586667fb9fec1398b5e56ed6a129cc14d0e5c73da3cae961564"
     },
     "kid8-hair-8.png": {
       "bytes": 4968,
       "sha256": "9fd2bec4aea9fcb55b01ab76eda54ac331f613581049d845750a94854d7a30e7"
     },
     "kid8-hairback-8.png": {
-      "bytes": 1080,
-      "sha256": "265ffb41bdccef69b2d3bf12efdb6520a67a1826690b50352c6ce6711b7928cf"
+      "bytes": 1099,
+      "sha256": "09cbba5deeff94313b69c496cd9f6d6e66b8ac39218c7eddd0829ec80e116896"
     },
     "kid8-hair-9.png": {
       "bytes": 6047,
       "sha256": "cf41d12da86bead76b68835b41d53dcb66bd9cdef87c26bc51c40df14ba66bbf"
     },
     "kid8-hairback-9.png": {
-      "bytes": 382,
-      "sha256": "1b6cc44934c1b73a022cb54495798f8713db2617e0e6c9c3021903084bf4704a"
+      "bytes": 489,
+      "sha256": "fefd408151723264081f1a1a8d5b10cd409633f8a5b98773ce49974ccfc49fe4"
     },
     "kid8-hair-10.png": {
       "bytes": 4343,
       "sha256": "b38468e6ce9d9cd7fa7ef18fb16070d519dd6bc3ec7308fc059fd32b4c697cd6"
     },
     "kid8-hairback-10.png": {
-      "bytes": 207,
-      "sha256": "ff237e92a1de1428b1368d960bc2ce98195821af0d9838853344180bf29c45ed"
+      "bytes": 236,
+      "sha256": "ee91d2ad12fb973ad48434820c940d0ebb884f3259c6b23d968c358157f0f783"
     },
     "kid8-hair-11.png": {
       "bytes": 4892,
       "sha256": "fb29f986da98c81b9e58e5cb606ddf04f685049b407e2eebd31de2d38de04652"
     },
     "kid8-hairback-11.png": {
-      "bytes": 310,
-      "sha256": "9a3aff0099401f7139d5701c82a18d0fa85fe0b4c247d04dc2a19a92e9361b5a"
+      "bytes": 390,
+      "sha256": "1a882f5b06ed083be0dde89c73ee394b56f8cd0498bb353650fdd377aad2a31c"
     },
     "kid8-hair-12.png": {
       "bytes": 5045,
       "sha256": "f0245d608848cb3d77e006424cce779f7d02cae6f387df10534c18bff20dc03f"
     },
     "kid8-hairback-12.png": {
-      "bytes": 237,
-      "sha256": "fd3f12210e73401d49e2d19f7aaf1c822d721fd89cf51dac9938368c8ef31d91"
+      "bytes": 350,
+      "sha256": "3db624712f00d716e30c6aca04cfa0903345cfdb98870e7c068f979044527f9f"
     },
     "kid8-hair-13.png": {
       "bytes": 5375,
       "sha256": "8d0e0406e95df8b0802fa4b385d46bc0b85e72fbf833ab654d747644d899bbe5"
     },
     "kid8-hairback-13.png": {
-      "bytes": 207,
-      "sha256": "ff237e92a1de1428b1368d960bc2ce98195821af0d9838853344180bf29c45ed"
+      "bytes": 309,
+      "sha256": "a488cfc89b6a434e66064194cc2f7bb6fe31ee5ec1308e25ca45c9b4af4fe1d9"
     },
     "kid8-hair-14.png": {
       "bytes": 7760,
       "sha256": "11193bb077cc7ef3d7f187eb4e76ee2d50b423c89f1a74087a6d373894ab2780"
     },
     "kid8-hairback-14.png": {
-      "bytes": 296,
-      "sha256": "9af1c0e97e73c4bf22c0b1302ab4cee692bd2d5d7f4bc79f567bae313dfbdd63"
+      "bytes": 361,
+      "sha256": "029eb67cd0a9bada80e5b5611c34c2e76acc1a028f6ece2efcc578c4c688b639"
     },
     "kid8-hair-15.png": {
       "bytes": 5542,
       "sha256": "f34ad5695a653bf3ba1e8982cc29ce64c9b6f554332ff7f619740aa361f111a0"
     },
     "kid8-hairback-15.png": {
-      "bytes": 307,
-      "sha256": "3d4de84be647677c41dadcf249f7ace0aa2a582a7fd8019c7b0deb3e418d2f56"
+      "bytes": 356,
+      "sha256": "8797194c43a0b707759a630d585aa8dac9f62a1835a47b150db6a3cdc31a39d3"
     },
     "kid8-hair-16.png": {
       "bytes": 3193,
       "sha256": "d97a0a425b6ea91c1b2984f70f007ff24a4faf1e7b7c9d33b98b32c7b6c9b91e"
     },
     "kid8-hairback-16.png": {
-      "bytes": 207,
-      "sha256": "ff237e92a1de1428b1368d960bc2ce98195821af0d9838853344180bf29c45ed"
+      "bytes": 309,
+      "sha256": "ff235f8a80d33e8fc3b37176a7515da20a7db31b465bf0fe9b00144511ee5991"
     },
     "kid8-body-1.png": {
       "bytes": 9863,
@@ -17209,5 +17210,2021 @@
       "bytes": 7955,
       "sha256": "86de010b341430167fdda6dfea46b60274892a4c321161941ac5602f1fda1a69"
     }
+  },
+  "head_hole_repair_v14": {
+    "definition": "4-connected enclosed transparent pixels, y<=27, 4-neighbour to common face",
+    "before_total": 3521,
+    "before_per_hair": [
+      260,
+      213,
+      72,
+      115,
+      284,
+      90,
+      52,
+      85,
+      421,
+      65,
+      366,
+      424,
+      342,
+      176,
+      164,
+      392
+    ],
+    "after_total": 0,
+    "patches": {
+      "kid8-hairback-1.png": {
+        "rgb": [
+          120,
+          52,
+          33
+        ],
+        "patch_rle": [
+          [
+            14,
+            26,
+            1
+          ],
+          [
+            22,
+            216,
+            1
+          ],
+          [
+            23,
+            87,
+            2
+          ],
+          [
+            23,
+            216,
+            1
+          ],
+          [
+            23,
+            277,
+            1
+          ],
+          [
+            23,
+            299,
+            1
+          ],
+          [
+            23,
+            488,
+            2
+          ],
+          [
+            24,
+            89,
+            1
+          ],
+          [
+            24,
+            217,
+            1
+          ],
+          [
+            24,
+            278,
+            2
+          ],
+          [
+            24,
+            297,
+            2
+          ],
+          [
+            24,
+            487,
+            1
+          ],
+          [
+            25,
+            23,
+            3
+          ],
+          [
+            25,
+            40,
+            3
+          ],
+          [
+            25,
+            90,
+            3
+          ],
+          [
+            25,
+            218,
+            1
+          ],
+          [
+            25,
+            280,
+            1
+          ],
+          [
+            25,
+            296,
+            1
+          ],
+          [
+            25,
+            358,
+            1
+          ],
+          [
+            25,
+            484,
+            3
+          ],
+          [
+            26,
+            26,
+            1
+          ],
+          [
+            26,
+            39,
+            1
+          ],
+          [
+            26,
+            219,
+            1
+          ],
+          [
+            26,
+            281,
+            1
+          ],
+          [
+            26,
+            295,
+            1
+          ],
+          [
+            26,
+            356,
+            2
+          ],
+          [
+            27,
+            282,
+            1
+          ]
+        ],
+        "unique_pixels": 40
+      },
+      "kid8-hairback-2.png": {
+        "rgb": [
+          61,
+          50,
+          54
+        ],
+        "patch_rle": [
+          [
+            23,
+            156,
+            1
+          ],
+          [
+            23,
+            420,
+            1
+          ],
+          [
+            23,
+            488,
+            2
+          ],
+          [
+            24,
+            22,
+            1
+          ],
+          [
+            24,
+            43,
+            1
+          ],
+          [
+            24,
+            89,
+            1
+          ],
+          [
+            24,
+            157,
+            3
+          ],
+          [
+            24,
+            417,
+            3
+          ],
+          [
+            24,
+            487,
+            1
+          ],
+          [
+            25,
+            23,
+            3
+          ],
+          [
+            25,
+            40,
+            3
+          ],
+          [
+            25,
+            90,
+            3
+          ],
+          [
+            25,
+            159,
+            1
+          ],
+          [
+            25,
+            417,
+            1
+          ],
+          [
+            25,
+            484,
+            3
+          ],
+          [
+            26,
+            26,
+            1
+          ],
+          [
+            26,
+            39,
+            1
+          ],
+          [
+            26,
+            105,
+            1
+          ],
+          [
+            27,
+            104,
+            1
+          ],
+          [
+            27,
+            472,
+            1
+          ]
+        ],
+        "unique_pixels": 33
+      },
+      "kid8-hairback-3.png": {
+        "rgb": [
+          86,
+          43,
+          31
+        ],
+        "patch_rle": [
+          [
+            16,
+            40,
+            1
+          ],
+          [
+            18,
+            41,
+            1
+          ],
+          [
+            20,
+            300,
+            1
+          ],
+          [
+            20,
+            343,
+            1
+          ],
+          [
+            21,
+            300,
+            1
+          ],
+          [
+            21,
+            343,
+            1
+          ],
+          [
+            22,
+            300,
+            1
+          ],
+          [
+            23,
+            232,
+            1
+          ],
+          [
+            23,
+            344,
+            1
+          ]
+        ],
+        "unique_pixels": 9
+      },
+      "kid8-hairback-4.png": {
+        "rgb": [
+          64,
+          39,
+          29
+        ],
+        "patch_rle": [
+          [
+            20,
+            343,
+            1
+          ],
+          [
+            21,
+            300,
+            1
+          ],
+          [
+            21,
+            343,
+            1
+          ],
+          [
+            22,
+            300,
+            1
+          ],
+          [
+            22,
+            344,
+            1
+          ],
+          [
+            23,
+            88,
+            1
+          ],
+          [
+            23,
+            299,
+            1
+          ],
+          [
+            23,
+            344,
+            1
+          ],
+          [
+            23,
+            488,
+            1
+          ],
+          [
+            24,
+            89,
+            1
+          ],
+          [
+            24,
+            158,
+            2
+          ],
+          [
+            24,
+            345,
+            1
+          ],
+          [
+            24,
+            417,
+            2
+          ],
+          [
+            24,
+            487,
+            1
+          ],
+          [
+            25,
+            92,
+            1
+          ],
+          [
+            25,
+            345,
+            1
+          ]
+        ],
+        "unique_pixels": 18
+      },
+      "kid8-hairback-5.png": {
+        "rgb": [
+          54,
+          63,
+          87
+        ],
+        "patch_rle": [
+          [
+            14,
+            163,
+            2
+          ],
+          [
+            14,
+            413,
+            2
+          ],
+          [
+            14,
+            481,
+            2
+          ],
+          [
+            15,
+            163,
+            1
+          ],
+          [
+            15,
+            414,
+            1
+          ],
+          [
+            15,
+            482,
+            1
+          ],
+          [
+            16,
+            162,
+            1
+          ],
+          [
+            16,
+            415,
+            1
+          ],
+          [
+            16,
+            483,
+            1
+          ],
+          [
+            17,
+            91,
+            2
+          ],
+          [
+            17,
+            159,
+            3
+          ],
+          [
+            17,
+            416,
+            2
+          ],
+          [
+            17,
+            484,
+            2
+          ],
+          [
+            18,
+            41,
+            1
+          ],
+          [
+            19,
+            233,
+            1
+          ],
+          [
+            19,
+            343,
+            1
+          ],
+          [
+            20,
+            233,
+            1
+          ],
+          [
+            20,
+            343,
+            1
+          ],
+          [
+            21,
+            86,
+            1
+          ],
+          [
+            21,
+            233,
+            1
+          ],
+          [
+            21,
+            343,
+            1
+          ],
+          [
+            22,
+            86,
+            1
+          ],
+          [
+            23,
+            87,
+            2
+          ],
+          [
+            23,
+            488,
+            1
+          ],
+          [
+            24,
+            89,
+            1
+          ],
+          [
+            24,
+            487,
+            1
+          ],
+          [
+            25,
+            92,
+            1
+          ],
+          [
+            25,
+            484,
+            1
+          ]
+        ],
+        "unique_pixels": 37
+      },
+      "kid8-hairback-6.png": {
+        "rgb": [
+          85,
+          58,
+          48
+        ],
+        "patch_rle": [
+          [
+            22,
+            232,
+            1
+          ],
+          [
+            22,
+            344,
+            1
+          ],
+          [
+            23,
+            232,
+            1
+          ],
+          [
+            23,
+            299,
+            1
+          ],
+          [
+            23,
+            344,
+            1
+          ],
+          [
+            24,
+            279,
+            1
+          ],
+          [
+            24,
+            297,
+            2
+          ],
+          [
+            25,
+            345,
+            1
+          ],
+          [
+            26,
+            219,
+            1
+          ],
+          [
+            26,
+            229,
+            1
+          ],
+          [
+            26,
+            281,
+            1
+          ],
+          [
+            26,
+            346,
+            1
+          ],
+          [
+            26,
+            356,
+            2
+          ]
+        ],
+        "unique_pixels": 15
+      },
+      "kid8-hairback-7.png": {
+        "rgb": [
+          54,
+          12,
+          22
+        ],
+        "patch_rle": [
+          [
+            14,
+            481,
+            2
+          ],
+          [
+            15,
+            482,
+            1
+          ],
+          [
+            16,
+            483,
+            1
+          ],
+          [
+            17,
+            484,
+            2
+          ],
+          [
+            25,
+            92,
+            1
+          ],
+          [
+            25,
+            484,
+            1
+          ]
+        ],
+        "unique_pixels": 8
+      },
+      "kid8-hairback-8.png": {
+        "rgb": [
+          91,
+          39,
+          30
+        ],
+        "patch_rle": [
+          [
+            23,
+            87,
+            2
+          ],
+          [
+            24,
+            89,
+            1
+          ],
+          [
+            24,
+            158,
+            2
+          ],
+          [
+            24,
+            417,
+            1
+          ],
+          [
+            25,
+            24,
+            2
+          ],
+          [
+            25,
+            470,
+            1
+          ],
+          [
+            26,
+            26,
+            1
+          ],
+          [
+            26,
+            219,
+            1
+          ],
+          [
+            26,
+            471,
+            1
+          ],
+          [
+            27,
+            472,
+            1
+          ]
+        ],
+        "unique_pixels": 13
+      },
+      "kid8-hairback-9.png": {
+        "rgb": [
+          35,
+          17,
+          12
+        ],
+        "patch_rle": [
+          [
+            14,
+            93,
+            3
+          ],
+          [
+            14,
+            161,
+            1
+          ],
+          [
+            14,
+            163,
+            2
+          ],
+          [
+            14,
+            413,
+            1
+          ],
+          [
+            14,
+            415,
+            1
+          ],
+          [
+            14,
+            482,
+            1
+          ],
+          [
+            15,
+            94,
+            1
+          ],
+          [
+            15,
+            163,
+            1
+          ],
+          [
+            15,
+            414,
+            1
+          ],
+          [
+            15,
+            482,
+            1
+          ],
+          [
+            16,
+            93,
+            1
+          ],
+          [
+            16,
+            162,
+            1
+          ],
+          [
+            16,
+            415,
+            1
+          ],
+          [
+            16,
+            483,
+            1
+          ],
+          [
+            17,
+            91,
+            2
+          ],
+          [
+            17,
+            160,
+            2
+          ],
+          [
+            17,
+            416,
+            2
+          ],
+          [
+            17,
+            484,
+            1
+          ],
+          [
+            20,
+            300,
+            1
+          ],
+          [
+            21,
+            300,
+            1
+          ],
+          [
+            21,
+            422,
+            1
+          ],
+          [
+            22,
+            86,
+            1
+          ],
+          [
+            22,
+            155,
+            1
+          ],
+          [
+            22,
+            300,
+            1
+          ],
+          [
+            22,
+            421,
+            1
+          ],
+          [
+            23,
+            87,
+            2
+          ],
+          [
+            23,
+            156,
+            1
+          ],
+          [
+            23,
+            232,
+            1
+          ],
+          [
+            23,
+            299,
+            1
+          ],
+          [
+            23,
+            344,
+            1
+          ],
+          [
+            23,
+            420,
+            1
+          ],
+          [
+            24,
+            89,
+            1
+          ],
+          [
+            24,
+            157,
+            3
+          ],
+          [
+            24,
+            231,
+            1
+          ],
+          [
+            24,
+            345,
+            1
+          ],
+          [
+            24,
+            417,
+            3
+          ],
+          [
+            25,
+            90,
+            3
+          ],
+          [
+            25,
+            159,
+            1
+          ],
+          [
+            25,
+            231,
+            1
+          ],
+          [
+            25,
+            345,
+            1
+          ],
+          [
+            25,
+            417,
+            1
+          ],
+          [
+            26,
+            229,
+            2
+          ],
+          [
+            26,
+            295,
+            1
+          ],
+          [
+            26,
+            346,
+            1
+          ]
+        ],
+        "unique_pixels": 58
+      },
+      "kid8-hairback-10.png": {
+        "rgb": [
+          104,
+          38,
+          23
+        ],
+        "patch_rle": [
+          [
+            22,
+            344,
+            1
+          ],
+          [
+            23,
+            88,
+            1
+          ],
+          [
+            23,
+            344,
+            1
+          ],
+          [
+            24,
+            89,
+            1
+          ],
+          [
+            24,
+            158,
+            2
+          ],
+          [
+            24,
+            231,
+            1
+          ],
+          [
+            24,
+            417,
+            2
+          ]
+        ],
+        "unique_pixels": 9
+      },
+      "kid8-hairback-11.png": {
+        "rgb": [
+          97,
+          57,
+          41
+        ],
+        "patch_rle": [
+          [
+            14,
+            39,
+            1
+          ],
+          [
+            14,
+            481,
+            1
+          ],
+          [
+            15,
+            40,
+            1
+          ],
+          [
+            15,
+            482,
+            1
+          ],
+          [
+            16,
+            40,
+            1
+          ],
+          [
+            16,
+            107,
+            1
+          ],
+          [
+            17,
+            469,
+            1
+          ],
+          [
+            18,
+            107,
+            1
+          ],
+          [
+            18,
+            468,
+            1
+          ],
+          [
+            19,
+            107,
+            1
+          ],
+          [
+            20,
+            107,
+            1
+          ],
+          [
+            22,
+            45,
+            1
+          ],
+          [
+            22,
+            276,
+            1
+          ],
+          [
+            22,
+            490,
+            1
+          ],
+          [
+            23,
+            44,
+            1
+          ],
+          [
+            23,
+            87,
+            2
+          ],
+          [
+            23,
+            107,
+            1
+          ],
+          [
+            23,
+            277,
+            1
+          ],
+          [
+            23,
+            420,
+            1
+          ],
+          [
+            23,
+            469,
+            1
+          ],
+          [
+            23,
+            488,
+            2
+          ],
+          [
+            24,
+            43,
+            1
+          ],
+          [
+            24,
+            89,
+            1
+          ],
+          [
+            24,
+            107,
+            1
+          ],
+          [
+            24,
+            158,
+            2
+          ],
+          [
+            24,
+            278,
+            2
+          ],
+          [
+            24,
+            417,
+            3
+          ],
+          [
+            24,
+            469,
+            1
+          ],
+          [
+            24,
+            487,
+            1
+          ],
+          [
+            25,
+            40,
+            3
+          ],
+          [
+            25,
+            90,
+            3
+          ],
+          [
+            25,
+            106,
+            1
+          ],
+          [
+            25,
+            159,
+            1
+          ],
+          [
+            25,
+            417,
+            1
+          ],
+          [
+            25,
+            470,
+            1
+          ],
+          [
+            25,
+            484,
+            3
+          ],
+          [
+            26,
+            39,
+            1
+          ],
+          [
+            26,
+            105,
+            1
+          ],
+          [
+            26,
+            471,
+            1
+          ]
+        ],
+        "unique_pixels": 51
+      },
+      "kid8-hairback-12.png": {
+        "rgb": [
+          60,
+          45,
+          38
+        ],
+        "patch_rle": [
+          [
+            14,
+            39,
+            1
+          ],
+          [
+            14,
+            95,
+            1
+          ],
+          [
+            14,
+            162,
+            3
+          ],
+          [
+            14,
+            413,
+            2
+          ],
+          [
+            14,
+            481,
+            2
+          ],
+          [
+            15,
+            40,
+            1
+          ],
+          [
+            15,
+            94,
+            1
+          ],
+          [
+            15,
+            163,
+            1
+          ],
+          [
+            15,
+            414,
+            1
+          ],
+          [
+            15,
+            482,
+            1
+          ],
+          [
+            16,
+            40,
+            1
+          ],
+          [
+            16,
+            93,
+            1
+          ],
+          [
+            16,
+            162,
+            1
+          ],
+          [
+            16,
+            415,
+            1
+          ],
+          [
+            16,
+            483,
+            1
+          ],
+          [
+            17,
+            41,
+            1
+          ],
+          [
+            17,
+            92,
+            1
+          ],
+          [
+            17,
+            160,
+            2
+          ],
+          [
+            17,
+            416,
+            1
+          ],
+          [
+            17,
+            484,
+            2
+          ],
+          [
+            18,
+            41,
+            1
+          ],
+          [
+            19,
+            343,
+            1
+          ],
+          [
+            20,
+            154,
+            1
+          ],
+          [
+            20,
+            343,
+            1
+          ],
+          [
+            20,
+            422,
+            1
+          ],
+          [
+            21,
+            154,
+            1
+          ],
+          [
+            21,
+            422,
+            1
+          ],
+          [
+            22,
+            155,
+            1
+          ],
+          [
+            22,
+            421,
+            1
+          ],
+          [
+            22,
+            490,
+            1
+          ],
+          [
+            23,
+            87,
+            2
+          ],
+          [
+            23,
+            156,
+            1
+          ],
+          [
+            23,
+            420,
+            1
+          ],
+          [
+            23,
+            488,
+            2
+          ],
+          [
+            24,
+            89,
+            1
+          ],
+          [
+            24,
+            157,
+            3
+          ],
+          [
+            24,
+            417,
+            3
+          ],
+          [
+            24,
+            487,
+            1
+          ],
+          [
+            25,
+            90,
+            3
+          ],
+          [
+            25,
+            159,
+            1
+          ],
+          [
+            25,
+            280,
+            1
+          ],
+          [
+            25,
+            417,
+            1
+          ],
+          [
+            25,
+            484,
+            3
+          ],
+          [
+            26,
+            281,
+            1
+          ],
+          [
+            27,
+            282,
+            1
+          ]
+        ],
+        "unique_pixels": 61
+      },
+      "kid8-hairback-13.png": {
+        "rgb": [
+          38,
+          16,
+          8
+        ],
+        "patch_rle": [
+          [
+            11,
+            216,
+            1
+          ],
+          [
+            14,
+            39,
+            1
+          ],
+          [
+            14,
+            94,
+            2
+          ],
+          [
+            14,
+            163,
+            2
+          ],
+          [
+            14,
+            413,
+            2
+          ],
+          [
+            14,
+            481,
+            4
+          ],
+          [
+            15,
+            25,
+            1
+          ],
+          [
+            15,
+            40,
+            1
+          ],
+          [
+            15,
+            163,
+            1
+          ],
+          [
+            15,
+            414,
+            1
+          ],
+          [
+            15,
+            482,
+            1
+          ],
+          [
+            16,
+            40,
+            1
+          ],
+          [
+            16,
+            93,
+            1
+          ],
+          [
+            16,
+            162,
+            1
+          ],
+          [
+            16,
+            415,
+            1
+          ],
+          [
+            16,
+            483,
+            1
+          ],
+          [
+            17,
+            41,
+            1
+          ],
+          [
+            17,
+            91,
+            2
+          ],
+          [
+            17,
+            161,
+            1
+          ],
+          [
+            17,
+            416,
+            1
+          ],
+          [
+            17,
+            484,
+            2
+          ],
+          [
+            18,
+            41,
+            1
+          ],
+          [
+            19,
+            44,
+            1
+          ],
+          [
+            21,
+            154,
+            1
+          ],
+          [
+            21,
+            422,
+            1
+          ],
+          [
+            22,
+            155,
+            1
+          ],
+          [
+            22,
+            421,
+            1
+          ],
+          [
+            23,
+            156,
+            1
+          ],
+          [
+            23,
+            420,
+            1
+          ],
+          [
+            24,
+            157,
+            3
+          ],
+          [
+            24,
+            417,
+            3
+          ],
+          [
+            25,
+            159,
+            1
+          ],
+          [
+            25,
+            417,
+            1
+          ]
+        ],
+        "unique_pixels": 45
+      },
+      "kid8-hairback-14.png": {
+        "rgb": [
+          102,
+          54,
+          38
+        ],
+        "patch_rle": [
+          [
+            10,
+            88,
+            1
+          ],
+          [
+            10,
+            231,
+            1
+          ],
+          [
+            10,
+            279,
+            1
+          ],
+          [
+            10,
+            298,
+            1
+          ],
+          [
+            14,
+            94,
+            2
+          ],
+          [
+            14,
+            163,
+            2
+          ],
+          [
+            14,
+            413,
+            1
+          ],
+          [
+            14,
+            481,
+            2
+          ],
+          [
+            15,
+            163,
+            1
+          ],
+          [
+            15,
+            414,
+            1
+          ],
+          [
+            15,
+            482,
+            1
+          ],
+          [
+            16,
+            93,
+            1
+          ],
+          [
+            16,
+            162,
+            1
+          ],
+          [
+            16,
+            483,
+            1
+          ],
+          [
+            17,
+            92,
+            1
+          ],
+          [
+            17,
+            484,
+            1
+          ],
+          [
+            20,
+            86,
+            1
+          ],
+          [
+            21,
+            86,
+            1
+          ],
+          [
+            23,
+            88,
+            1
+          ]
+        ],
+        "unique_pixels": 22
+      },
+      "kid8-hairback-15.png": {
+        "rgb": [
+          119,
+          73,
+          48
+        ],
+        "patch_rle": [
+          [
+            10,
+            345,
+            1
+          ],
+          [
+            14,
+            161,
+            1
+          ],
+          [
+            14,
+            416,
+            1
+          ],
+          [
+            21,
+            233,
+            1
+          ],
+          [
+            22,
+            344,
+            1
+          ],
+          [
+            23,
+            88,
+            1
+          ],
+          [
+            23,
+            344,
+            1
+          ],
+          [
+            23,
+            420,
+            1
+          ],
+          [
+            23,
+            488,
+            1
+          ],
+          [
+            24,
+            89,
+            1
+          ],
+          [
+            24,
+            157,
+            3
+          ],
+          [
+            24,
+            278,
+            1
+          ],
+          [
+            24,
+            417,
+            3
+          ],
+          [
+            25,
+            90,
+            3
+          ],
+          [
+            25,
+            159,
+            1
+          ],
+          [
+            25,
+            417,
+            1
+          ],
+          [
+            25,
+            484,
+            3
+          ]
+        ],
+        "unique_pixels": 25
+      },
+      "kid8-hairback-16.png": {
+        "rgb": [
+          85,
+          45,
+          29
+        ],
+        "patch_rle": [
+          [
+            11,
+            105,
+            1
+          ],
+          [
+            12,
+            24,
+            1
+          ],
+          [
+            12,
+            41,
+            1
+          ],
+          [
+            13,
+            24,
+            1
+          ],
+          [
+            13,
+            40,
+            1
+          ],
+          [
+            14,
+            25,
+            2
+          ],
+          [
+            14,
+            39,
+            1
+          ],
+          [
+            14,
+            92,
+            4
+          ],
+          [
+            14,
+            161,
+            4
+          ],
+          [
+            14,
+            413,
+            3
+          ],
+          [
+            14,
+            481,
+            3
+          ],
+          [
+            15,
+            25,
+            1
+          ],
+          [
+            15,
+            40,
+            1
+          ],
+          [
+            15,
+            94,
+            1
+          ],
+          [
+            15,
+            163,
+            1
+          ],
+          [
+            15,
+            414,
+            1
+          ],
+          [
+            15,
+            482,
+            1
+          ],
+          [
+            16,
+            24,
+            1
+          ],
+          [
+            16,
+            40,
+            1
+          ],
+          [
+            16,
+            93,
+            1
+          ],
+          [
+            16,
+            162,
+            1
+          ],
+          [
+            16,
+            415,
+            1
+          ],
+          [
+            16,
+            483,
+            1
+          ],
+          [
+            17,
+            23,
+            1
+          ],
+          [
+            17,
+            41,
+            1
+          ],
+          [
+            17,
+            91,
+            2
+          ],
+          [
+            17,
+            161,
+            1
+          ],
+          [
+            17,
+            416,
+            1
+          ],
+          [
+            17,
+            484,
+            1
+          ],
+          [
+            18,
+            23,
+            1
+          ],
+          [
+            18,
+            41,
+            2
+          ],
+          [
+            18,
+            87,
+            3
+          ],
+          [
+            18,
+            487,
+            2
+          ]
+        ],
+        "unique_pixels": 49
+      }
+    },
+    "skin_pixels_added": 0
   }
 }

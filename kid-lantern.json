@@ -1,6 +1,6 @@
 {
   "set": 8,
-  "spec_revision": 13,
+  "spec_revision": 14,
   "frame_size": [
     32,
     32
@@ -425,15 +425,15 @@
           ],
           "opaque_bbox_xyxy_exclusive": [
             11,
-            0,
-            32,
+            5,
+            22,
             27
           ],
           "opaque_size": [
-            21,
-            27
+            11,
+            22
           ],
-          "size_pass": false,
+          "size_pass": true,
           "translation_xy": [
             0,
             0
@@ -451,7 +451,18 @@
               31,
               0
             ]
-          ]
+          ],
+          "removed_stray_pixels_raw_xy": [
+            [
+              30,
+              0
+            ],
+            [
+              31,
+              0
+            ]
+          ],
+          "note": "removed 2 stray pixels E (30,0) (31,0)"
         },
         {
           "direction": "NE",
@@ -635,7 +646,7 @@
         }
       ],
       "raw_file": "kid-lantern-l1-raw.png",
-      "status": "generated_for_review"
+      "status": "accepted_v14_after_stray_cleanup"
     },
     {
       "level": 2,
@@ -659,6 +670,6 @@
   "sprite_pixels_rescaled": false,
   "sprites_repainted": false,
   "production_complete": false,
-  "size_pass": false,
-  "unavailable_rows": "L2/L3 not submitted: L1 East contains two opaque gray pixels at (30,0),(31,0), expanding bbox to21x27. No raw pixel was removed."
+  "size_pass": true,
+  "unavailable_rows": "L2/L3 authorized by v14, not yet submitted; reserved rows remain transparent."
 }
