@@ -1,4 +1,4 @@
-# ASSET_SPEC_08_kid_base.md — ชุดที่ 8: ตัวหลักเด็ก หญิง/ชาย แบบแยกหัวกับตัว (Claude → Codex · 11 ต.ค. 2569 · ฉบับ 1 · **ฉบับ 12 ท้ายไฟล์ (ล่าสุด): หัว 15 + ชุดรอบ 2 รับแล้ว · เจนใหม่ H-F3 H-F8 · ชุดอีก 7 · ตะเกียง 4 ขั้นด้วย PixelLab · เพดาน 85 · ผ้าพันคอหลังวาดเองตอนเกลา · ฉบับ 11: ผลทดลองผ่านหัว · ตะเกียงแยกจากชุด ถือตอนสำรวจ · เจนหัว 15 + ชุด O-F1 รอบ 2 เพดาน 100 · ฉบับ 10: เพดานทดลอง 20 ตามราคาจริง (10 ต่องานที่ 64 px) · โหมด concept ต้องรายงานก่อนใช้ · ฉบับ 9: ทดลอง 2 ชิ้นด้วย create_character_pro_flash · ภาพอ้างอิงเดียว = ภาพต้นแบบที่ผ่าน · แก้ 1 ประโยค · เจ้าของต้องบันทึก secret ก่อน · ฉบับ 8: พรอมป์ B1 ผ่าน · เจนทดลอง 2 ชิ้นก่อน (H-F1 + O-F1 เพดาน 16) · ฉบับ 7: B0b ผ่าน · ธีม 4 = ชาวประมงริมน้ำ · แก้ขอบทองชาย 1/2/4 ในพรอมป์ · เริ่ม B1 พรอมป์ 24 อัน · ฉบับ 6: B0 ผ่าน + เพิ่ม 3 จุด · ชุดหญิง 4 ชาย 4 ผู้ชายไม่มีกระโปรง · ฉบับ 5: เด็กแต่งเองแบบแยกชิ้นรุ่น 2 · ผม 16 จาก A0c · ตา 5 · ปาก 5 · ชุด 4 แนวศิษย์ตะเกียง (`concept-characters.jpg`) · ไม่ใช่ชุดนักเรียนไทย**)
+# ASSET_SPEC_08_kid_base.md — ชุดที่ 8: ตัวหลักเด็ก หญิง/ชาย แบบแยกหัวกับตัว (Claude → Codex · 11 ต.ค. 2569 · ฉบับ 1 · **ฉบับ 13 ท้ายไฟล์ (ล่าสุด): ตะเกียงใช้ขนาด L0 เจน L1–L3 · O-F2 ใหม่ · เพดาน 25 · จากนั้นรอบเกลา C (แยกชิ้น regions ตา/ปาก 5 ผ้าพันคอหลัง) · ฉบับ 12: หัว 15 + ชุดรอบ 2 รับแล้ว · เจนใหม่ H-F3 H-F8 · ชุดอีก 7 · ตะเกียง 4 ขั้นด้วย PixelLab · เพดาน 85 · ผ้าพันคอหลังวาดเองตอนเกลา · ฉบับ 11: ผลทดลองผ่านหัว · ตะเกียงแยกจากชุด ถือตอนสำรวจ · เจนหัว 15 + ชุด O-F1 รอบ 2 เพดาน 100 · ฉบับ 10: เพดานทดลอง 20 ตามราคาจริง (10 ต่องานที่ 64 px) · โหมด concept ต้องรายงานก่อนใช้ · ฉบับ 9: ทดลอง 2 ชิ้นด้วย create_character_pro_flash · ภาพอ้างอิงเดียว = ภาพต้นแบบที่ผ่าน · แก้ 1 ประโยค · เจ้าของต้องบันทึก secret ก่อน · ฉบับ 8: พรอมป์ B1 ผ่าน · เจนทดลอง 2 ชิ้นก่อน (H-F1 + O-F1 เพดาน 16) · ฉบับ 7: B0b ผ่าน · ธีม 4 = ชาวประมงริมน้ำ · แก้ขอบทองชาย 1/2/4 ในพรอมป์ · เริ่ม B1 พรอมป์ 24 อัน · ฉบับ 6: B0 ผ่าน + เพิ่ม 3 จุด · ชุดหญิง 4 ชาย 4 ผู้ชายไม่มีกระโปรง · ฉบับ 5: เด็กแต่งเองแบบแยกชิ้นรุ่น 2 · ผม 16 จาก A0c · ตา 5 · ปาก 5 · ชุด 4 แนวศิษย์ตะเกียง (`concept-characters.jpg`) · ไม่ใช่ชุดนักเรียนไทย**)
 
 ## 0. หัวเรื่อง
 - **ใช้ที่ไหนในเกม:** ตัวผู้เล่นเด็ก (อายุต่ำกว่า 10) ในโลก หน้าสร้างตัว หน้าเลือกตัว รูปบน HUD · ช่อง 64 · เกมวาด `PS.stand` / `PS.walk` (เท้าแถว 62)
@@ -557,3 +557,69 @@ Small warm gold-and-orange hand lantern for a child explorer, a game item held b
 - QA json: ต่อภาพ สูง/เท้า/กลาง/กึ่งใส · ชุด: ผ้าพันคอต่อทิศ · ขอบทอง · จุดตะเกียง 0 · จุดมือซ้าย/ขวาต่อทิศ (หน้า/หลังตัว) · ชาย: กระโปรง 0
 - 1 บรรทัด CODEX_STATUS + กล่อง "ข้อความส่ง Claude"
 - **รอบเกลา (ยังไม่ทำในรอบนี้):** เก็บจุดขาวที่ขอบผม · วาดผ้าพันคอด้านหลังเอง (ปม + ชาย 2 ชายผ้า ≥30 จุด NE N NW) ทุกชุด · แยกชั้นและ regions ตาม "บทเรียนจากชุด 07" · Claude ออกสเปกรอบเกลาหลังเจ้าของดูชุดครบ 8
+
+## ฉบับ 13 (12 ต.ค. 2569 18:4x · Claude → Codex) · รับรอบ 12 (8ff1713) · ตะเกียงขนาด L0 · O-F2 ใหม่ · แล้วรอบเกลา C
+
+### ผลตรวจ 8ff1713 (Claude)
+- เครดิต 60/85 (10 งาน × 6 · สั่งซ้ำ 0) · ยอด 3,101 → 3,041 · หยุด L1–L3 เองที่ด่านขนาด ✅ · ไม่แตะไฟล์เกม (commit ของ Codex แก้ 18 ไฟล์ของตัวเอง) ✅ · token ไม่อยู่ในไฟล์ ✅
+- ภาพประกอบ 80/80: สูง 60–62 · เท้า 62 · กลางคลาด ≤1.94 · กึ่งใส 0 ✅ · ตะเกียงในชุด 0/64 ✅ · กระโปรงชาย 0/32 ✅
+- หัว: H-F3 รอบ 2 เปียคู่ ✅ (8.8) · H-F8 รอบ 2 หางม้าสูง ✅ (9.0) · สีหน้าบางทิศไม่ตรงกัน → แก้ด้วยชั้นตาในรอบเกลา
+- ชุด (Claude · ผ้าพันคอหน้า/ขอบทอง): O-F1v2 8.3 (60/25) · O-F3 8.6 (61/14) · O-F4 8.4 (51/22) · O-M4 8.7 (84/16) · O-M1 8.2 (42/12) · O-M2 8.4 (55/0) · O-M3 8.4 (46/0) · **O-F2 6.5 สีผิดทั้งชุด** (เสื้อกั๊กกรมท่า กระโปรงเทา ผ้าพันคอ/ขอบฟ้า)
+- หัวชาย H-M1 หันข้าง: ปากแดงยื่นบนเส้นขอบหน้า (ปัญหาเดียวกับชุด 07) → เกณฑ์รอบเกลา
+- ตะเกียง L0: 8 ทิศเป็นใบเดียวกัน ห่วงกลาง 8/8 ไม่มีฟ้า ไม่มีแสงฟุ้ง ✅ · ขนาด 13×22 (เกินกรอบ 8×12 ที่ Claude ตั้ง)
+
+### เจ้าของ 18:3x
+- ตะเกียง: **"ใช้ขนาดนี้ เจนอีก 3 ขั้น"** → กรอบใหม่ทุกขั้น ≤ **13×22** (ขั้นสูงเพิ่มลวดลาย ไม่ขยาย) · O-F2: **"เจนใหม่"** · ผ้าพันคอเล็ก 3 ชุด + ขอบทองหาย 2 ชุด: **"Codex แก้เองตอนเกลา"** · **"เริ่มรอบเกลาเลยหลังเจนที่เหลือ"**
+
+### ขั้น 1 · เจนที่เหลือ · เพดาน **25** · ยอดหลังจบ ≥ 3,016
+ลำดับ O-F2 → L1 → L2 → L3 · งานละ 1 ครั้ง · งานใดคิดเกิน 6 หยุดก่อนงานถัดไป · timeout ตรวจ job ID เดิมก่อน
+
+**O-F2 รอบ 2** · style_image `[543, 252, 64, 64]` (ไม่มีตะเกียงในช่องนี้ก็ใช้ตามเดิม) · พรอมป์ฉบับ 12 + ประโยคสีที่ชัดขึ้น · ยาว 1920 ตัวอักษร
+
+```text
+Original friendly child age 7-8, oversized chibi head, small body, standing idle with empty hands. A girl explorer. Ivory blouse with puffed shoulders and folded cuffs, a fitted WARM BROWN leather vest, a flared KHAKI TAN skirt, leather map pouch, brown gloves and boots. Colours: ivory, warm brown, khaki tan, a golden-yellow scarf and gold trim only; no blue, navy, teal or gray cloth anywhere. One continuous warm-gold stripe along the skirt hem, at least 8 clearly gold pixels in the front 64x64 view. Keep the approved outfit concept and its proportions. Ivory cloth, warm brown leather and modest house-color accents. Add a large golden-yellow house scarf with a clear neck knot and TWO separate tails hanging down the chest: at least 60 house-color pixels in front, at least 30 in every other view; show a rear wrap and folded ends from behind. Scarf yellow must use a separate color ramp from fixed gold trim. No lantern: gloved hands hang empty at the sides; the belt carries only a small pouch. The trim stripe is separate from scarf and buckle. No cape, cloak or hat. Use a gentle smiling face with short neutral hair above the collar as a removable head guide; ears and neck visible. Low top-down camera, all eight standing directions in consistent 64x64 frames, centered at x32, soles on row 62, painted height 60-62 pixels. Preserve front, side and rear clothing construction; connect the neck fully, no holes. The supplied style image is also the approved outfit concept: follow its outfit design and proportions, continuous dark outlines, crisp pixel clusters, upper-left light, three to four shading steps and readable medium detail, adding the scarf and trim described above, but no lantern. Transparent background, no floor, shadow, text, weapons or extra objects. Clearly separated color groups for skin, cloth, leather, house scarf and fixed gold trim. Back-facing guide heads show no eyes or mouth.
+```
+
+**ตะเกียง L1–L3** · `create_object_pro_flash` 32×32 8 ทิศ · style_image = ภาพ S ของ L0 (ช่อง 32×32 จาก raw ไม่แก้) · เกณฑ์ขนาดใหม่ทุกขั้น ≤ 13×22 รวมห่วง · ถ้าขั้นใดเกิน หยุดและรายงาน ห้ามย่อ
+
+**L1** · ยาว 713 ตัวอักษร
+
+```text
+Small warm gold-and-orange hand lantern for a child explorer, a game item held by its top ring. Same lantern design, same size and same proportions as the supplied style image: 13 pixels wide and 22 pixels tall including the ring, centered at x16 in the 32x32 frame, the top of the ring at row 5; everything else transparent. Upgraded: it adds a gold crossbar band around the middle; keep the same ring, amber glass core, colours and outline. Low top-down camera, eight consistent directions. Continuous dark outline, crisp pixel clusters, upper-left light, three shading steps. Warm gold, orange and amber only; no blue, no cyan, no glow halo, no light rays, no background, no floor, no shadow, no text, no hand.
+```
+
+**L2** · ยาว 728 ตัวอักษร
+
+```text
+Small warm gold-and-orange hand lantern for a child explorer, a game item held by its top ring. Same lantern design, same size and same proportions as the supplied style image: 13 pixels wide and 22 pixels tall including the ring, centered at x16 in the 32x32 frame, the top of the ring at row 5; everything else transparent. Upgraded: it has double gold frame bars and a slightly taller domed cap; keep the same ring, amber glass core, colours and outline. Low top-down camera, eight consistent directions. Continuous dark outline, crisp pixel clusters, upper-left light, three shading steps. Warm gold, orange and amber only; no blue, no cyan, no glow halo, no light rays, no background, no floor, no shadow, no text, no hand.
+```
+
+**L3** · ยาว 738 ตัวอักษร
+
+```text
+Small warm gold-and-orange hand lantern for a child explorer, a game item held by its top ring. Same lantern design, same size and same proportions as the supplied style image: 13 pixels wide and 22 pixels tall including the ring, centered at x16 in the 32x32 frame, the top of the ring at row 5; everything else transparent. Upgraded: it has curved gold ribs and a bold pointed cap with a small gold finial; keep the same ring, amber glass core, colours and outline. Low top-down camera, eight consistent directions. Continuous dark outline, crisp pixel clusters, upper-left light, three shading steps. Warm gold, orange and amber only; no blue, no cyan, no glow halo, no light rays, no background, no floor, no shadow, no text, no hand.
+```
+
+- ส่ง: `kid-b1-of2v2-raw.png` (512×64) · `kid-lantern-l1-raw.png` … `l3` (256×32) · `kid-lantern.png` 256×128 ครบ 4 แถว (เลื่อนเต็มจุดให้จุดจับตรงกันได้อย่างเดียว) · `kid-lantern.json` ครบ 4 ขั้น · ภาพรวมตะเกียง 4 ขั้น 8 ทิศ ขยาย 6 เท่าให้เจ้าของดู
+
+### ขั้น 2 · รอบเกลา C (0 เครดิต · งานพิกเซลของ Codex · ห้ามย่อ/ขยายชิ้นใด)
+เป้าหมาย: ชิ้นแต่งตัวเด็กชุด 08 พร้อมเข้าเกมใน GM ก่อน (Claude ทำโค้ด) แทนชุด 07 · ท่ายืน 8 ทิศ (ท่าเดินแยกสเปกภายหลัง เกมเลื่อนตัวพร้อมเด้งไปก่อนแบบชุด 07)
+
+**ชั้นภาพ** (วาดจากหลังไปหน้า: `hairback` → `body` → `face` → `mouth` → `eyes` → `hair`) · ทุกไฟล์ 512×64 = 8 ช่อง 64×64 เรียง S SE E NE N NW W SW · จุดเท้า (32, 62) · วางทับกันที่ (0,0) ไม่มีระยะเลื่อน · alpha 0/255
+- `kid8-face-1.png` หน้าแม่แบบเดียวใช้ทุกหัว (รวมหู คอ หนังศีรษะใต้ผม) จากหน้าของ H-F1 · ห้ามมีตา/ปากในชั้นนี้
+- `kid8-eyes-1..5.png` ตา 5 แบบตามตารางใน `kid-paperdoll-b1-prompts.md` (กลมประกาย · ยิ้มโค้ง · โตตกใจ · ครึ่งปิดอ่อนโยน · มุ่งมั่น) · ทิศ NE N NW ว่าง · ตา 2 ข้างเปิดเท่ากันทุกทิศ
+- `kid8-mouth-1..5.png` ปาก 5 แบบตามตารางใน `kid-paperdoll-b1-prompts.md` · ทิศ NE N NW ว่าง · **ไม่มีจุดใดทับเส้นขอบหน้าหรืออยู่นอกหน้า**
+- `kid8-hair-1..16.png` + `kid8-hairback-1..16.png` ผม 16 ทรง (H-F1…H-F8 = 1–8 · H-M1…H-M8 = 9–16 · H-F3 H-F8 ใช้รอบ 2) · ผมด้านหลังตัว (เปีย หางม้า ปอยยาว) อยู่ `hairback` · ไม่มีส่วนหน้า/ผิวในชั้นผม · หนังศีรษะโผล่ 0 บนหน้าแม่แบบ · **จุดขาวโดดที่ขอบผม 0**
+- `kid8-body-1..8.png` ชุด 8 ชุด (1–4 หญิง O-F1v2 O-F2v2 O-F3 O-F4 · 5–8 ชาย O-M1…O-M4) ตั้งแต่คอลงไป ไม่มีหัวแนวทาง · **ผ้าพันคอหน้า ≥60 ทุกชุด · NE N NW ≥30 ทุกชุด (วาดปม + ชายผ้า 2 ชาย) · ขอบทองหน้า ≥8 ทุกชุด** · ชายไม่มีกระโปรง
+
+**`kid8.json`** (โครงเดียวกับ `pd-kid.json` ของชุด 07 ที่เกมใช้อยู่ ต่างตรงนี้): `size [512,64]` · `cell 64` · `frameOrder` 8 ทิศ · ไม่มี `walk` · `layerOrder` ตามข้างบน · `parts[]` {file, part, option, nameTh, nameEn, gender ("f"/"m" เฉพาะ body)} · `groups` hair / eye / skin / mouth / house / trim (สีครบทุกสีที่ใช้จริง) · `regions[file][group]` = RLE [y,x,len] กลุ่มไม่ทับกัน · `tones` สีผิว 4 ระดับ (light/medium/tan/deep) ยาวเท่า `groups.skin` · `hands[body]` 8 ทิศ {left,right,[x,y],layer front/behind} · `defaults` {f:{hair,eyes,mouth,body}, m:{...}} · `feet [32,62]`
+- **บทเรียนจากชุด 07 = เกณฑ์ 0 จุด:** พิกเซลผ้าพันคอทุกจุดอยู่ใน region `house` และสีอยู่ใน `groups.house` · สีบ้านในชั้นอื่น (หน้า ผม) 0 · ปากทับขอบหน้า 0 · รายละเอียดเล็ก (กระ แก้ม) ไม่เป็นสี่เหลี่ยมสีทุกทิศ
+- ขนาด: json ≤ 300 KB · PNG รวม ≤ 800 KB
+
+**ภาพให้เจ้าของดู:** `kid8-preview.png` ทุกทรงผมบนหน้าแม่แบบ × ตา 1 ปาก 1 ใส่ชุดเพศเดียวกัน 8 ทิศ + ชุด 8 ชุด × 8 ทิศ + ตา 5 / ปาก 5 ทิศหน้า · ขยาย 4 เท่า
+
+**เกณฑ์รับรอบเกลา (Claude วัดด้วยสคริปต์):** ภาพรวม default ทั้ง 2 เพศ สูง 60–62 · เท้า 62 · กลางคลาด ≤2 · กึ่งใส 0 · ทุกตัวเลขข้างบน · ทุกคู่ (ผม × ชุด) ไม่มีช่องโหว่ที่คอ · Claude นำเข้า GM (`?gm`) ให้เจ้าของดูก่อน ไม่ให้ผู้เล่นเห็นจนเจ้าของอนุมัติ
+
+### ไฟล์ส่งและวิธีส่ง
+- ขั้น 1 กับขั้น 2 ส่งแยก commit ได้ · branch `codex/asset-08-kid-base` (ดึง main ล่าสุดก่อน) · 1 บรรทัด CODEX_STATUS ต่อขั้น + กล่อง "ข้อความส่ง Claude"
+- ห้ามแตะ `index.html` `sw.js` `test_*.js` · ไม่ push `main` · token ห้ามอยู่ในไฟล์ใด
