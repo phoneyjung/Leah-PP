@@ -1,4 +1,4 @@
-# ASSET_SPEC_08_kid_base.md — ชุดที่ 8: ตัวหลักเด็ก หญิง/ชาย แบบแยกหัวกับตัว (Claude → Codex · 11 ต.ค. 2569 · ฉบับ 1 · **ฉบับ 10 ท้ายไฟล์ (ล่าสุด): เพดานทดลอง 20 ตามราคาจริง (10 ต่องานที่ 64 px) · โหมด concept ต้องรายงานก่อนใช้ · ฉบับ 9: ทดลอง 2 ชิ้นด้วย create_character_pro_flash · ภาพอ้างอิงเดียว = ภาพต้นแบบที่ผ่าน · แก้ 1 ประโยค · เจ้าของต้องบันทึก secret ก่อน · ฉบับ 8: พรอมป์ B1 ผ่าน · เจนทดลอง 2 ชิ้นก่อน (H-F1 + O-F1 เพดาน 16) · ฉบับ 7: B0b ผ่าน · ธีม 4 = ชาวประมงริมน้ำ · แก้ขอบทองชาย 1/2/4 ในพรอมป์ · เริ่ม B1 พรอมป์ 24 อัน · ฉบับ 6: B0 ผ่าน + เพิ่ม 3 จุด · ชุดหญิง 4 ชาย 4 ผู้ชายไม่มีกระโปรง · ฉบับ 5: เด็กแต่งเองแบบแยกชิ้นรุ่น 2 · ผม 16 จาก A0c · ตา 5 · ปาก 5 · ชุด 4 แนวศิษย์ตะเกียง (`concept-characters.jpg`) · ไม่ใช่ชุดนักเรียนไทย**)
+# ASSET_SPEC_08_kid_base.md — ชุดที่ 8: ตัวหลักเด็ก หญิง/ชาย แบบแยกหัวกับตัว (Claude → Codex · 11 ต.ค. 2569 · ฉบับ 1 · **ฉบับ 11 ท้ายไฟล์ (ล่าสุด): ผลทดลองผ่านหัว · ตะเกียงแยกจากชุด ถือตอนสำรวจ · เจนหัว 15 + ชุด O-F1 รอบ 2 เพดาน 100 · ฉบับ 10: เพดานทดลอง 20 ตามราคาจริง (10 ต่องานที่ 64 px) · โหมด concept ต้องรายงานก่อนใช้ · ฉบับ 9: ทดลอง 2 ชิ้นด้วย create_character_pro_flash · ภาพอ้างอิงเดียว = ภาพต้นแบบที่ผ่าน · แก้ 1 ประโยค · เจ้าของต้องบันทึก secret ก่อน · ฉบับ 8: พรอมป์ B1 ผ่าน · เจนทดลอง 2 ชิ้นก่อน (H-F1 + O-F1 เพดาน 16) · ฉบับ 7: B0b ผ่าน · ธีม 4 = ชาวประมงริมน้ำ · แก้ขอบทองชาย 1/2/4 ในพรอมป์ · เริ่ม B1 พรอมป์ 24 อัน · ฉบับ 6: B0 ผ่าน + เพิ่ม 3 จุด · ชุดหญิง 4 ชาย 4 ผู้ชายไม่มีกระโปรง · ฉบับ 5: เด็กแต่งเองแบบแยกชิ้นรุ่น 2 · ผม 16 จาก A0c · ตา 5 · ปาก 5 · ชุด 4 แนวศิษย์ตะเกียง (`concept-characters.jpg`) · ไม่ใช่ชุดนักเรียนไทย**)
 
 ## 0. หัวเรื่อง
 - **ใช้ที่ไหนในเกม:** ตัวผู้เล่นเด็ก (อายุต่ำกว่า 10) ในโลก หน้าสร้างตัว หน้าเลือกตัว รูปบน HUD · ช่อง 64 · เกมวาด `PS.stand` / `PS.walk` (เท้าแถว 62)
@@ -375,3 +375,69 @@ Original friendly child age 7-8, oversized chibi head, small body, standing idle
 
 ### งบทั้งชุด (ยังไม่อนุมัติ)
 - ราคาจริง: 24 ชิ้น × 10 = **240 generations** (ฉบับ 8 ประมาณ 144–192) ≈ 7.5% ของยอด 3,209 ในฉบับ 8 · ท่าเดิน/ท่าทางแยกงบภายหลัง · เจ้าของตัดสินหลังเห็นผลทดลอง
+
+## ฉบับ 11 (12 ต.ค. 2569 16:1x · Claude → Codex) · ผลทดลอง 17de103 · ตะเกียงแยกจากชุด · เจนหัว 15 + ชุด O-F1 รอบ 2
+
+### ผลวัดงานทดลอง (Claude วัดจากไฟล์ใน 17de103)
+- เครดิต: ใช้ 12 (H-F1 6 · O-F1 6) จากเพดาน 20 · ยอด 3,209 → 3,197 · ราคาจริง **6 ต่องาน** (5+1) · token ไม่อยู่ในไฟล์ใด ✅
+- ภาพประกอบ (combo): สูง 61 · เท้าแถว 62 · จุดกึ่งใส 0 → **8/8 ทิศ** ✅ · กลางตัว (center of mass) x 30.1–32.5 ห่างจาก 32 ไม่เกิน 2 ✅
+- O-F1 ผ้าพันคอ: หน้า 81 (≥60 ✅) · SE 84 · E 55 · W 52 · SW 81 ✅ · **NE 13 · N 9 · NW 23 (≥30 ❌)**
+- O-F1 ตะเกียงกรอบทอง 5×6 = 23 จุด ✅ · ขอบทอง หน้า 38 (≥8 ✅) ทุกทิศ 34–50
+- **ผ้าพันคอ ตะเกียง ขอบทอง และกิ๊บผม ใช้สีทองชุดเดียวกัน 5 สี (hue 26–39)** ❌ ไม่แยก ramp ตามที่สั่ง → ต้องใช้ `regions` (`house` / `trim`) ตามข้อ 7 ของไฟล์พรอมป์ B1 แทนการแทนสี
+- H-F1: **จุดขาวโดด ๆ ที่ขอบผม 62 จุด** (S 6 · SE 9 · E 6 · NE 6 · N 12 · NW 7 · W 5 · SW 11) → ต้องเก็บตอนเกลา
+- ช่องใสระหว่างผมเปียกับตัว 1–41 จุดต่อทิศ เป็นช่องว่างธรรมชาติระหว่างผมกับไหล่ ไม่ใช่รู ✅ · ทิศหลังไม่มีตา/ปาก ✅ · ตาเท่ากัน ✅ (ดูด้วยตา)
+- ใส่ผมเปียยาว ผ้าพันคอทิศหน้ามองเห็น 49 จุด ทิศหลัง 0 (ผมบัง)
+- คะแนน Claude: รวม 8.9 · หน้า/ผม 9.2 (เกลาจุดขาวแล้วน่าถึง 9.5) · ชุด 8.6 ✅ · ภาพประกอบ 8.8
+
+### เจ้าของ 15:5x–16:0x
+- **ตะเกียงแยกจากชุด:** "ตัวที่มีโคมผูกอยู่จะดูแปลก ๆ เด็กต้องถือโคมเกือบตลอด ไม่ถือเฉพาะในเมืองหรือแมพที่ไม่มีมอน เช่นในบ้าน" → เลือก **"ถือตอนสำรวจ · ในเมืองไม่ถือ"**
+  - ชุดเด็กทั้ง 8 **ไม่มีตะเกียง** · ตะเกียงเป็นภาพแยก เกมวาดที่มือตอนอยู่แผนที่สำรวจ ในเมืองและในบ้านมือว่าง (Claude เขียนโค้ดเลือกแผนที่)
+  - เกณฑ์ตะเกียง ≥4×6 ของฉบับ 7–10 **ยกเลิกสำหรับชุด** · ย้ายไปเป็นงานภาพตะเกียงแยก (ขั้น L ด้านล่าง)
+- **ผมเปียยาว:** เจ้าของไม่เลือก → ใช้ H-F1 ตามที่ได้ ไม่เจนใหม่
+- **ลำดับต่อ:** "หัว 15 ต่อเลย + ชุด O-F1 ลองใหม่ 1 ครั้ง"
+
+### งานรอบนี้ (เจ้าของอนุมัติแล้ว) · เพดานรวม **100 generations**
+1. **O-F1 รอบ 2 ก่อน** (1 งาน) · `create_character_pro_flash` 64×64 8 ทิศ · style_image = ช่องเดิม `kid-outfits-b0b.png [243, 252, 64, 64]` พื้น #76A046 เป็นโปร่งใส · ถ้าในช่องนั้นมีตะเกียงที่เอว ให้ลบออกในสำเนา style_image (ใช้พิกเซลกระโปรง/ถุงมือข้างเคียง) แล้วจดใน CODEX_STATUS · พรอมป์ด้านล่างทุกตัวอักษร (ยาว 1920 ตัวอักษร)
+2. **หัว 15 ชิ้น** เรียง H-F2 … H-F8 แล้ว H-M1 … H-M8 · งานละ 1 ครั้ง · พรอมป์ของ e203f09 แก้ **ประโยคเดียวเหมือน H-F1 ในฉบับ 9** (แทน "Match the supplied style image only for crisp pixel clusters, continuous dark outlines, upper-left light, three to four shading steps and readable medium detail." ด้วย "The supplied style image is also the approved head concept: follow its hairstyle, expression, crisp pixel clusters, continuous dark outlines, upper-left light, three to four shading steps and readable medium detail, not its clothing.") · ทุกหัวมีประโยคเดิม 1 ครั้ง ยาวหลังแก้ 1,695–1,832 ตัวอักษร · style_image = ช่องที่ผ่านของหัวนั้นใน `kid-looks-a0.png` พื้น #76A046 เป็นโปร่งใส:
+
+| หัว | ช่อง `[x, y, w, h]` |
+|---|---|
+| H-F2 | `[508, 232, 64, 64]` |
+| H-F3 | `[788, 232, 64, 64]` |
+| H-F4 | `[1068, 232, 64, 64]` |
+| H-F5 | `[1348, 232, 64, 64]` |
+| H-F6 | `[1628, 232, 64, 64]` |
+| H-F7 | `[1908, 232, 64, 64]` |
+| H-F8 | `[2188, 232, 64, 64]` |
+| H-M1 | `[228, 574, 64, 64]` |
+| H-M2 | `[508, 574, 64, 64]` |
+| H-M3 | `[788, 574, 64, 64]` |
+| H-M4 | `[1068, 574, 64, 64]` |
+| H-M5 | `[1348, 574, 64, 64]` |
+| H-M6 | `[1628, 574, 64, 64]` |
+| H-M7 | `[1908, 574, 64, 64]` |
+| H-M8 | `[2188, 574, 64, 64]` |
+
+3. ราคา: ถ้างานใดคิดเกิน **6** หยุดก่อนงานถัดไปแล้วรายงาน · จดยอดก่อน–หลังทุกงาน · timeout ตรวจ job ID เดิมก่อน ห้ามสั่งซ้ำ · ยอดหลังจบต้อง ≥ 3,097
+
+O-F1 รอบ 2 (แทนพรอมป์ O-F1 ของฉบับ 9: ตัดตะเกียง 3 จุด + เปลี่ยน "lantern apprentice" เป็น "academy apprentice" กันโมเดลวาดตะเกียง + ขยายประโยคผ้าพันคอด้านหลัง):
+
+```text
+Original friendly child age 7-8, oversized chibi head, small body, standing idle with empty hands. A girl academy apprentice. Ivory blouse with soft puff sleeves, a layered cream ruffled skirt, brown gloves and lace-up brown boots. Preserve the approved silhouette. One continuous warm-gold stripe along the lowest skirt hem, at least 8 clearly gold pixels in the front 64x64 view. Keep the approved outfit concept and its proportions. Ivory cloth, warm brown leather and modest house-color accents. Add a large golden-yellow house scarf with a clear neck knot and TWO separate tails hanging down the chest: at least 60 house-color pixels in front, at least 30 in every other view; from behind, a thick scarf band wraps the neck and both folded ends hang down the upper back over the shirt, clearly visible in the back, back-left and back-right views. Scarf yellow must use a separate color ramp from fixed gold trim. No lantern: gloved hands hang empty at the sides; the belt carries only a small pouch. The trim stripe is separate from scarf and buckle. No cape, cloak or hat. Use a gentle smiling face with short neutral hair above the collar as a removable head guide; ears and neck visible. Low top-down camera, all eight standing directions in consistent 64x64 frames, centered at x32, soles on row 62, painted height 60-62 pixels. Preserve front, side and rear clothing construction; connect the neck fully, no holes. The supplied style image is also the approved outfit concept: follow its outfit design and proportions, continuous dark outlines, crisp pixel clusters, upper-left light, three to four shading steps and readable medium detail, adding the scarf and trim described above, but no lantern. Transparent background, no floor, shadow, text, weapons or extra objects. Clearly separated color groups for skin, cloth, leather, house scarf and fixed gold trim. Back-facing guide heads show no eyes or mouth.
+```
+
+### ไฟล์ส่ง (branch `codex/asset-08-kid-base` ดึง main ล่าสุดก่อน)
+- ภาพดิบไม่แก้ 512×64 เรียง S SE E NE N NW W SW: `kid-b1-of1v2-raw.png` และ `kid-b1-hf2-raw.png` … `kid-b1-hf8-raw.png` `kid-b1-hm1-raw.png` … `kid-b1-hm8-raw.png`
+- ภาพประกอบให้เจ้าของดู: หัวทั้ง 16 (รวม H-F1) บนตัว O-F1 รอบ 2 ครบ 8 ทิศ แถวละหัว `kid-b1-combos.png` (512×1024) + `kid-b1-combos-4x.png` · เป็นภาพตรวจ ยังไม่ใช่ชิ้นสำเร็จ (หัวชายใส่ชุดหญิงไปก่อน เพราะยังไม่มีชุดชาย)
+- `kid-b1-qa.json`: ต่อภาพดิบ สูง / แถวเท้า / กลางตัว / จุดกึ่งใส / จุดขาวโดดที่ขอบผม · O-F1 รอบ 2: ผ้าพันคอต่อทิศ · ขอบทอง · จุดตะเกียง (ต้อง 0) · **จุดจับมือซ้าย/ขวาต่อทิศ `[x, y]`** และมืออยู่หน้าหรือหลังตัวในทิศนั้น (ใช้วางตะเกียงขั้น L)
+- 1 บรรทัด `CODEX_STATUS.md` + กล่อง "ข้อความส่ง Claude" ตาม `AGENTS.md`
+
+### เกณฑ์รับ (Claude วัด)
+- ภาพประกอบทุกหัว: สูง 60–62 · เท้าแถว 62 · กลางตัว (center of mass) ห่าง x=32 ไม่เกิน 2 · จุดกึ่งใส 0 · 8 ทิศเป็นคนเดียวกัน · ทิศหลังไม่มีตา/ปาก · ตาเท่ากัน
+- O-F1 รอบ 2: ไม่มีตะเกียง (จุดสีทองโดด ๆ ที่เอว 0) · ผ้าพันคอ หน้า ≥60 · **ทุกทิศอื่นรวม NE N NW ≥30** · ขอบทองหน้า ≥8 · มือว่าง
+- หน้า/ผมตรงช่องที่ผ่านของหัวนั้น · เจ้าของให้คะแนน (หน้า/ผม 9.5+ · ชุด 8.5+)
+- ยังไม่ต้องเกลา (จุดขาว แยกชั้น regions) จนกว่าเจ้าของให้ผ่านรอบนี้ · ชุดอีก 7 รอผล O-F1 รอบ 2
+
+### ขั้น L · ตะเกียงแยก (ยังไม่ผลิต ไม่ใช้เครดิต)
+- ภาพตะเกียงถือในมือ 8 ทิศ ขนาดเล็ก ทองอุ่น/ส้ม ไม่มีแสงฟ้า (แสงฟ้าใช้กับของที่เก็บได้เท่านั้น) · จุดจับ (grip) อยู่ที่ห่วงบน · วางตามจุดจับมือในข้อไฟล์ส่ง
+- ขอให้ Codex เสนอใน "ข้อความส่ง Claude": วาดเองหรือใช้ PixelLab · ขนาดภาพ · ราคาประมาณ · ทำแบบอัปเกรด 4 ขั้นตาม `S.lampLv` 0–3 ได้ไหม · Claude ออกสเปกเต็มหลังได้จุดจับมือจริง
