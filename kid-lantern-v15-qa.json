@@ -1,0 +1,528 @@
+{
+  "initial_balance": 3029,
+  "cumulative_initial_balance": 3041,
+  "prior_spend": 12,
+  "new_cap": 12,
+  "total_cap": 25,
+  "minimum_final_balance": 3016,
+  "jobs": [
+    {
+      "tag": "l2",
+      "tool": "create_object_pro_flash",
+      "prompt_characters": 728,
+      "prompt_sha256": "eb07a878abe6c65202fa73aecea5dd1eb8309b658b26f3348ef302c0100c6407",
+      "style_sha256": "59cdd5489907f65fcefe70ad1a3e57fa55f640ef7381a91887ed01f589f510ba",
+      "style_source": "kid-lantern-l0-raw.png",
+      "crop": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "style_lantern_edits": [],
+      "balance_before": 3029,
+      "status": "completed",
+      "create_calls": 1,
+      "generation_retries": 0,
+      "submitted_utc": "2026-10-12T13:39:12.104509+00:00",
+      "job_id": "11da5596-0d57-465c-87a8-d8dceb8d105f",
+      "object_id": "54d5d804-5824-4791-8e1a-2f93236385b0",
+      "balance_after": 3023,
+      "balance_delta": 6,
+      "actual_generations": 6.0,
+      "billing_stages": [
+        {
+          "stage": "first_direction",
+          "usage": {
+            "usd": 0.0,
+            "type": "generations",
+            "generations": 5
+          },
+          "generation_id": "f8bc5f3a-9295-44b4-9546-c0662fd034db"
+        },
+        {
+          "stage": "rotations",
+          "usage": {
+            "usd": 0.0,
+            "type": "generations",
+            "generations": 1,
+            "cost_if_paid": 0.02458651088343726
+          },
+          "generation_id": "a6ba8337-fa1f-43b4-9558-e82227eed811"
+        }
+      ],
+      "raw_file": "kid-lantern-l2-raw.png",
+      "raw_rgba_sha256": [
+        "cc67e1777c74220f6c02416ed91119f067e8d2863a8796c15d3396c894b66808",
+        "fda2ab8ac53554e569adf18215118c06110b99ac80f967ea757b43f15ac40e3e",
+        "5dcc45014f4f1a22219927a8c82c8fa762b36c4c3717d738b74af9d4ab5c093f",
+        "12c142d06fa3f939ae094cc76deb30af687828a2856055956e85ab7361844464",
+        "5320340ea6ce993c41fe403e778054e44c19543ffc37188c3a2e842cd13b0b3f",
+        "0d5689bf7e3003322d969ecf79d7613643a1a556a1cb949280ce642466f7c849",
+        "5af0c26a93037d945d7d131f6d79dfa68da798382b5253032884e2bb151da1ef",
+        "3def5cf9242f6de48831fc1b7ce42f78ff12d255b48a0ab1854da8dc12b77f17"
+      ]
+    },
+    {
+      "tag": "l3",
+      "tool": "create_object_pro_flash",
+      "prompt_characters": 738,
+      "prompt_sha256": "ebbdf5de9348d28016d955ca3d466e9c44c88588828c8d545cd7ff97636dd91e",
+      "style_sha256": "59cdd5489907f65fcefe70ad1a3e57fa55f640ef7381a91887ed01f589f510ba",
+      "style_source": "kid-lantern-l0-raw.png",
+      "crop": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "style_lantern_edits": [],
+      "balance_before": 3023,
+      "status": "completed",
+      "create_calls": 1,
+      "generation_retries": 0,
+      "submitted_utc": "2026-10-12T13:42:33.533513+00:00",
+      "job_id": "e77acfb1-f8a2-4b81-9c47-97cd98868122",
+      "object_id": "afc91924-cbdf-42a2-86eb-2c7b2b2e0bca",
+      "balance_after": 3017,
+      "balance_delta": 6,
+      "actual_generations": 6.0,
+      "billing_stages": [
+        {
+          "stage": "first_direction",
+          "usage": {
+            "usd": 0.0,
+            "type": "generations",
+            "generations": 5
+          },
+          "generation_id": "6cf063d0-86b4-46aa-a0fe-c6892b64486d"
+        },
+        {
+          "stage": "rotations",
+          "usage": {
+            "usd": 0.0,
+            "type": "generations",
+            "generations": 1,
+            "cost_if_paid": 0.024462380362881554
+          },
+          "generation_id": "bbc185e1-5784-487d-a24d-d1c84eead2b5"
+        }
+      ],
+      "raw_file": "kid-lantern-l3-raw.png",
+      "raw_rgba_sha256": [
+        "5c0a09ec884188401dc589593bd064b09f652f5b216b29cb152bb75d3fd0791c",
+        "14906d827de4efed43bee5284044f7d0fcf3d03cb647a101c0f89718b6e9c1d1",
+        "19685617e711f1673099ac03b5db85967286147303ee346910982c9ee7527562",
+        "549d3b0476a798595b3ee32ee1e569e466d9be6e61ace816d74ef63703cfbdf8",
+        "82b2c04a0d142f171d4d1d99ea0c4de71724f4402f3e4bceda02fb4425aaf533",
+        "5cd0b95b818be2a6242505e0fb3661175c8226a79fe73b7efbbbfd4743cdbd8c",
+        "5f70f1f6acb6c3d6d7297b4a9c789fc53c4774af9e0c8f843e85d1a5315ae954",
+        "fdc28306572ed97f10b08740db5e098f7964228b20523d069968e58c51c2e88c"
+      ]
+    }
+  ],
+  "status": "stopped_l3_gate",
+  "final_balance": 3017,
+  "cumulative_spend": 24,
+  "gates": {
+    "l2": {
+      "frames": [
+        {
+          "direction": "south",
+          "raw_bbox": [
+            9,
+            5,
+            22,
+            27
+          ],
+          "clean_bbox": [
+            9,
+            5,
+            22,
+            27
+          ],
+          "width": 13,
+          "height": 22,
+          "stray_pixels": [],
+          "partial_alpha": 0,
+          "blue_cyan_pixels": 0,
+          "pass": true
+        },
+        {
+          "direction": "south-east",
+          "raw_bbox": [
+            10,
+            5,
+            22,
+            27
+          ],
+          "clean_bbox": [
+            10,
+            5,
+            22,
+            27
+          ],
+          "width": 12,
+          "height": 22,
+          "stray_pixels": [],
+          "partial_alpha": 0,
+          "blue_cyan_pixels": 0,
+          "pass": true
+        },
+        {
+          "direction": "east",
+          "raw_bbox": [
+            10,
+            5,
+            22,
+            27
+          ],
+          "clean_bbox": [
+            10,
+            5,
+            22,
+            27
+          ],
+          "width": 12,
+          "height": 22,
+          "stray_pixels": [],
+          "partial_alpha": 0,
+          "blue_cyan_pixels": 0,
+          "pass": true
+        },
+        {
+          "direction": "north-east",
+          "raw_bbox": [
+            9,
+            5,
+            22,
+            27
+          ],
+          "clean_bbox": [
+            9,
+            5,
+            22,
+            27
+          ],
+          "width": 13,
+          "height": 22,
+          "stray_pixels": [],
+          "partial_alpha": 0,
+          "blue_cyan_pixels": 0,
+          "pass": true
+        },
+        {
+          "direction": "north",
+          "raw_bbox": [
+            9,
+            5,
+            22,
+            27
+          ],
+          "clean_bbox": [
+            9,
+            5,
+            22,
+            27
+          ],
+          "width": 13,
+          "height": 22,
+          "stray_pixels": [],
+          "partial_alpha": 0,
+          "blue_cyan_pixels": 0,
+          "pass": true
+        },
+        {
+          "direction": "north-west",
+          "raw_bbox": [
+            10,
+            5,
+            22,
+            27
+          ],
+          "clean_bbox": [
+            10,
+            5,
+            22,
+            27
+          ],
+          "width": 12,
+          "height": 22,
+          "stray_pixels": [],
+          "partial_alpha": 0,
+          "blue_cyan_pixels": 0,
+          "pass": true
+        },
+        {
+          "direction": "west",
+          "raw_bbox": [
+            10,
+            5,
+            22,
+            27
+          ],
+          "clean_bbox": [
+            10,
+            5,
+            22,
+            27
+          ],
+          "width": 12,
+          "height": 22,
+          "stray_pixels": [],
+          "partial_alpha": 0,
+          "blue_cyan_pixels": 0,
+          "pass": true
+        },
+        {
+          "direction": "south-west",
+          "raw_bbox": [
+            9,
+            5,
+            22,
+            27
+          ],
+          "clean_bbox": [
+            9,
+            5,
+            22,
+            27
+          ],
+          "width": 13,
+          "height": 22,
+          "stray_pixels": [],
+          "partial_alpha": 0,
+          "blue_cyan_pixels": 0,
+          "pass": true
+        }
+      ],
+      "all_directions_pass": true
+    },
+    "l3": {
+      "frames": [
+        {
+          "direction": "south",
+          "raw_bbox": [
+            10,
+            4,
+            22,
+            27
+          ],
+          "clean_bbox": [
+            10,
+            4,
+            22,
+            27
+          ],
+          "width": 12,
+          "height": 23,
+          "stray_pixels": [],
+          "partial_alpha": 0,
+          "blue_cyan_pixels": 0,
+          "pass": false
+        },
+        {
+          "direction": "south-east",
+          "raw_bbox": [
+            10,
+            4,
+            22,
+            27
+          ],
+          "clean_bbox": [
+            10,
+            4,
+            22,
+            27
+          ],
+          "width": 12,
+          "height": 23,
+          "stray_pixels": [],
+          "partial_alpha": 0,
+          "blue_cyan_pixels": 0,
+          "pass": false
+        },
+        {
+          "direction": "east",
+          "raw_bbox": [
+            10,
+            4,
+            22,
+            27
+          ],
+          "clean_bbox": [
+            10,
+            4,
+            22,
+            27
+          ],
+          "width": 12,
+          "height": 23,
+          "stray_pixels": [],
+          "partial_alpha": 0,
+          "blue_cyan_pixels": 0,
+          "pass": false
+        },
+        {
+          "direction": "north-east",
+          "raw_bbox": [
+            10,
+            4,
+            22,
+            27
+          ],
+          "clean_bbox": [
+            10,
+            4,
+            22,
+            27
+          ],
+          "width": 12,
+          "height": 23,
+          "stray_pixels": [],
+          "partial_alpha": 0,
+          "blue_cyan_pixels": 0,
+          "pass": false
+        },
+        {
+          "direction": "north",
+          "raw_bbox": [
+            10,
+            4,
+            22,
+            27
+          ],
+          "clean_bbox": [
+            10,
+            4,
+            22,
+            27
+          ],
+          "width": 12,
+          "height": 23,
+          "stray_pixels": [],
+          "partial_alpha": 0,
+          "blue_cyan_pixels": 0,
+          "pass": false
+        },
+        {
+          "direction": "north-west",
+          "raw_bbox": [
+            10,
+            4,
+            22,
+            27
+          ],
+          "clean_bbox": [
+            10,
+            4,
+            22,
+            27
+          ],
+          "width": 12,
+          "height": 23,
+          "stray_pixels": [],
+          "partial_alpha": 0,
+          "blue_cyan_pixels": 0,
+          "pass": false
+        },
+        {
+          "direction": "west",
+          "raw_bbox": [
+            10,
+            4,
+            22,
+            27
+          ],
+          "clean_bbox": [
+            10,
+            4,
+            22,
+            27
+          ],
+          "width": 12,
+          "height": 23,
+          "stray_pixels": [],
+          "partial_alpha": 0,
+          "blue_cyan_pixels": 0,
+          "pass": false
+        },
+        {
+          "direction": "south-west",
+          "raw_bbox": [
+            10,
+            4,
+            22,
+            27
+          ],
+          "clean_bbox": [
+            10,
+            4,
+            22,
+            27
+          ],
+          "width": 12,
+          "height": 23,
+          "stray_pixels": [],
+          "partial_alpha": 0,
+          "blue_cyan_pixels": 0,
+          "pass": false
+        }
+      ],
+      "all_directions_pass": false
+    }
+  },
+  "authorization": "Owner approved spec14/15 batch; one call per level, cost<=6, total with prior OF2v2/L1<=25, final>=3016",
+  "stopped_reason": "L3 main component 12x23 in all eight directions exceeds13x22. No stray pixels; no permitted deletion can reduce it. Raw preserved; no resize or repeat.",
+  "validation": {
+    "checked_frames": 24,
+    "removed_stray_pixels": 2,
+    "partial_alpha": 0,
+    "blue_cyan_pixels": 0,
+    "game_sheet_size": [
+      256,
+      128
+    ],
+    "preview_size": [
+      1536,
+      768
+    ],
+    "pixel_preservation": true,
+    "resampled_runtime_sprites": 0,
+    "delivery_integrity_pass": true,
+    "acceptance_complete": false,
+    "production_complete": false,
+    "unavailable_rows": [
+      3
+    ],
+    "raw_review_includes_rejected_level_3": true
+  },
+  "raw_zip_pixel_check": {
+    "l2": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "l3": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ]
+  },
+  "visual_review": {
+    "same_lantern_family": true,
+    "glow_halo_present": false,
+    "L2": "double bars visible; game-size gate passed",
+    "L3": "curved ribs and higher pointed cap; ring starts at raw y4, total height23, game-size gate failed; raw preserved"
+  }
+}
