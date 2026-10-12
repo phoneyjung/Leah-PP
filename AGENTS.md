@@ -89,6 +89,22 @@ Shared files such as `AGENTS.md` and the merge records (`HANDOFF_*.md`) are edit
 
 Rules that still stand: fetch the newest `main` before every push and never force-push · each side pushes only its own files · every task states a pass criterion as a number · no "small fixes" in the other side's files.
 
+## Codex ↔ Claude messages — every Codex task (owner, 12 Oct 2026 15:38)
+The owner carries messages between Codex and Claude by copy and paste. A new Codex chat remembers nothing, so this section is the standing order for every Codex task.
+
+1. **Start of every task:** fetch the newest `main`; read this file, the "Who does what" section above, the set's `ASSET_SPEC_NN_*.md` (the last "ฉบับ" at the end of the file is the current one) and `CODEX_STATUS.md`. Do Codex's side only: pictures, PixelLab, picture checks, numbered sets on `codex/asset-NN-<name>`. Never edit Claude's files, never push `main`.
+2. **End every reply to the owner** with one plain-text code block headed `ข้อความส่ง Claude` that he can copy in one tap — also when the task is blocked or nothing was made. In it, in Thai:
+   - set, spec version, branch and commit
+   - what was done and the numbers measured: generations used, balance before → after, picture sizes, and each acceptance number of the spec against what was measured
+   - what differs from the spec, what is blocked and why
+   - questions for Claude or for the owner
+3. **Claude's messages** (they name the spec file and version, the order of work, the branch and the pass numbers) are the work order. If the work order and the spec disagree, stop and ask Claude through the owner.
+4. **PixelLab token:** only from the Network secret `PIXELLAB_API_KEY` (the value is the token alone; send the header `Authorization: Bearer <value>`). Never print, log, commit or paste the token, and never ask the owner for it in chat.
+5. **Credits:** stay under the cap the spec names; record the balance before and after; one call per job; on a timeout check the old job ID before ever submitting again. The owner approves every paid batch before it starts.
+6. Talk to the owner in Thai, in simple words.
+
+Current set: **08 kid paperdoll** (`ASSET_SPEC_08_kid_base.md`). Pilot H-F1 + O-F1 delivered in 17de103 (12 generations); the next batch waits for Claude's review and the owner's decision.
+
 **Current art work (9 Oct 2026):**
 - `ASSET_SPEC_01_ui_buttons.md` — new button icons (guide, buff slot, sit) and the compass-stick art; ready for Codex.
 - **The new adult prototype:** the owner chose the ZIP `adult_male_swordsman_front_view_standing_idle_empt.zip` as the main reference. First step: check the **front view at real play size** (in the game, GM mode) before any other direction or animation is produced. **No size or frame count is set until that real file has been checked** — so no spec for it yet. The ZIP has not reached Claude's clone; when it does, Claude puts the front view in GM at play scale (84 px adult standard in `ART_GUIDE.md` is the starting point, not a decision) and gives the owner a screenshot at 844×390 and 1180×820.
