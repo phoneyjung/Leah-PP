@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.31';
+const VERSION='Lantern Academy 2.32';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -7663,6 +7663,7 @@ function fix229Part(f){const d=PD219.d,q=d.parts.concat((d.walk&&d.walk.parts)||
 try{CTX167_ICONS.dress='<path d="M23 9a3 3 0 1 0-3-3"/><path d="M23 9v3M9 20l14-8 14 8z"/><path d="M17 20l-7 19h26l-7-19M17 20q6 6 12 0"/>'}catch(e){}
 {const o=ctx167Choice;ctx167Choice=function(){const r=o.apply(this,arguments);try{if(r&&r.k==='dress226'){r.icon='dress';r.label=t('dress226')}}catch(e){}return r}}
 
+// 2.32: Codex eb60b77 seals the tiny see-through gaps (1–3 px: 3,128 → 0 over 1,024 frames) · the names on the piece buttons stay 12 px on a short phone (the full 2.31 run, test_218 at 812×330, found 11 px)
 // 2.31: Codex's C2 eyes (9) and mouths (8) from the PixelLab heads and the sealed head holes arrive in kid8.json (eacc5ba); the code reads any number of pieces, only the 07↔08 map changes
 // ================= 2.30 (owner 12 Oct: "เสร็จแล้วเอาเข้าเกมใน GM ก่อน", and with Codex's 19:18 delivery "ขอClaudeตรวจCและนำเข้าGMให้เจ้าของดู"): Codex set 08 · the kid8 pieces
 // (ASSET_SPEC_08 v13 · 9640f20: one face, 5 eyes, 5 mouths, 16 hairstyles, 8 outfits with the house scarf, 8 standing views, no walking frames yet).
@@ -7724,7 +7725,7 @@ function kid8After(){const d=PD219.d,av=PD219.avail,df=d.defaults||{},pick=(part
 try{const st=document.createElement('style');st.id='kid230';st.textContent=`#cr.c193.k8 #pd219face{display:none}
 #cr.c193.k8 .pd219g .opt span{white-space:normal;text-align:center;line-height:1.15;font-size:12px;max-width:100%;overflow-wrap:anywhere}
 #cr.c193.k8 .side .pd219g .opt{min-height:84px}
-@media (max-height:400px){#cr.c193.k8 .side .pd219g .opt{min-height:70px}#cr.c193.k8 .pd219g .opt span{font-size:11px}}`;document.head.appendChild(st)}catch(e){}
+@media (max-height:400px){#cr.c193.k8 .side .pd219g .opt{min-height:70px}}`;document.head.appendChild(st)}catch(e){}
 // BUG-40 (found by the 2.30 test, set 07 too): closing "แต่งตัว" put back the create screen's sub-tabs as they were before it opened — an empty {} in a game started from a save —
 // so the next "แต่งตัว" in the same game opened on the hair tab with no hairstyles shown (the ทรงผม/สีผม buttons had nothing selected) · now the next one opens on ทรงผม again
 {const o=dress226Close;dress226Close=function(){const r=o.apply(this,arguments);try{if(!DRESS226.on&&(!C193.sub||!Object.keys(C193.sub).length))C193.sub={hair:'style',face:'face'}}catch(e){}return r}}
