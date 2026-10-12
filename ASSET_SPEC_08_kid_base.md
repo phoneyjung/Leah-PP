@@ -322,29 +322,32 @@
 
 ## ฉบับ 9 (12 ต.ค. 2569 10:5x · Claude → Codex) · แก้ทางเจนของงานทดลอง 2 ชิ้น (ตอบ preflight ce46abe)
 ### ผล preflight (ce46abe) · Codex
--  ไม่มีโหมด Pro Flash ·  รองรับ 64×64 / 8 ทิศ แต่รับภาพอ้างอิงได้ 1 ภาพ (style_image) ไม่มีช่อง concept แยก
-- อ่านราคา/ยอด: 401 Missing Authorization header · secret  ใน environment ยังไม่ได้บันทึก (has_saved_binding=false) · เจน 0 · เครดิต 0
+- `create_character` ไม่มีโหมด Pro Flash · `create_character_pro_flash` รองรับ 64×64 / 8 ทิศ แต่รับภาพอ้างอิงได้ 1 ภาพ (style_image) ไม่มีช่อง concept แยก
+- อ่านราคา/ยอด: 401 Missing Authorization header · secret `PIXELLAB_API_KEY` ใน environment ยังไม่ได้บันทึก (has_saved_binding=false) · เจน 0 · เครดิต 0
 
 ### เจ้าของ 10:5x: "ภาพต้นแบบที่ผ่านแล้ว + แก้ 1 ประโยค"
-- เครื่องมือ: **** · 64×64 · 8 ทิศ · ค่ากลางอื่นตาม e203f09 เท่าที่เครื่องมือมีจริง (ช่องที่ไม่มีให้ข้าม ไม่ส่งฟิลด์สมมติ)
+- เครื่องมือ: **`create_character_pro_flash`** · 64×64 · 8 ทิศ · ค่ากลางอื่นตาม e203f09 เท่าที่เครื่องมือมีจริง (ช่องที่ไม่มีให้ข้าม ไม่ส่งฟิลด์สมมติ)
 - **style_image = ภาพต้นแบบที่เจ้าของให้ผ่านแล้ว ขนาด 64×64 จากช่องเกม** (ไม่ย่อ ไม่ขยาย แค่เปลี่ยนพื้น #76A046 เป็นโปร่งใส ส่วนอื่นพิกเซลเดิม):
-  - H-F1:  ช่อง 
-  - O-F1:  ช่อง 
+  - H-F1: `kid-looks-a0.png` ช่อง `[228, 232, 64, 64]`
+  - O-F1: `kid-outfits-b0b.png` ช่อง `[243, 252, 64, 64]`
 - **พรอมป์ = ของ e203f09 แก้ประโยคเดียว** (ภาพอ้างอิงเป็นทั้งแบบและลายเส้นแล้ว) ข้อความเต็มด้านล่าง ใช้ตามนี้ทุกตัวอักษร
 
-H-F1 · แทนประโยค 
-ด้วย  · ยาว 1797 ตัวอักษร
+H-F1 · แทนประโยค "Match the supplied style image only for crisp pixel clusters, continuous dark outlines, upper-left light, three to four shading steps and readable medium detail."
+ด้วย "The supplied style image is also the approved head concept: follow its hairstyle, expression, crisp pixel clusters, continuous dark outlines, upper-left light, three to four shading steps and readable medium detail, not its clothing." · ยาว 1797 ตัวอักษร
 
+```text
+Original friendly child, age 7-8, oversized chibi head on a small neutral standing carrier body. Main deliverable: the head and hair in eight consistent views. Hair: Two HIGH long flowing pigtails tied near the upper sides of the head, extending down behind the shoulders, open face. Not low braids. Hair color: auburn red-brown. Skin: medium warm peach. Eyes: Large round sparkling eyes, equally wide open. Brows: Raised happy curved eyebrows. Mouth: Wide joyful tooth-showing grin, clear white tooth band. Use the supplied head concept for the hairstyle and expression, not its clothing. Keep the same soft round face template and neck anchor across all hairstyles. Both eyes have matching openness; keep every fringe clear of the eyes. Preserve asymmetric locks in their actual position across views. Back, back-left and back-right views have no visible eyes or mouth. Hair must cover the entire scalp, including under the parting; long rear hair belongs behind the body. Neutral carrier: ivory shirt, brown shorts and boots, hands empty; its body will be discarded. No glasses, headband, hat or cape. Low top-down camera, full figure centered at x32, 60-62 pixels tall, soles on row 62 in each 64x64 frame. Front face target x23-41/y13-29; front eye centers (27,21) and (37,21), mouth (32,26), neck (32,30). The supplied style image is also the approved head concept: follow its hairstyle, expression, crisp pixel clusters, continuous dark outlines, upper-left light, three to four shading steps and readable medium detail, not its clothing. Transparent background, no floor, shadow, text or labels. Separate hair, iris and skin color ramps for later recoloring; clear opaque pixels. Sweet youthful expression, relaxed brows, never a frown. One consistent character, eight standing directions.
+```
 
+O-F1 · แทนประโยค "Match the supplied style image only for continuous dark outlines, crisp pixel clusters, upper-left light, three to four shading steps and readable medium detail."
+ด้วย "The supplied style image is also the approved outfit concept: follow its outfit design and proportions, continuous dark outlines, crisp pixel clusters, upper-left light, three to four shading steps and readable medium detail, adding the scarf, lantern and trim described above." · ยาว 1905 ตัวอักษร
 
-O-F1 · แทนประโยค 
-ด้วย  · ยาว 1905 ตัวอักษร
-
-
+```text
+Original friendly child age 7-8, oversized chibi head, small body, standing idle with empty hands. A girl lantern apprentice. Ivory blouse with soft puff sleeves, a layered cream ruffled skirt, brown gloves and lace-up brown boots. Preserve the approved silhouette. One continuous warm-gold stripe along the lowest skirt hem, at least 8 clearly gold pixels in the front 64x64 view. Keep the approved outfit concept and its proportions. Ivory cloth, warm brown leather and modest house-color accents. Add a large golden-yellow house scarf with a clear neck knot and TWO separate tails hanging down the chest: at least 60 house-color pixels in front, at least 30 in every other view; show a rear wrap and folded ends from behind. Scarf yellow must use a separate color ramp from fixed gold trim. A small warm gold-and-orange lantern hangs visibly from the leather belt beside a small pouch: its GOLD PIXELS must span at least 4x6 pixels and total at least 12 at native size; no blue light. The trim stripe is separate from scarf, lantern and buckle. No cape, cloak or hat. Use a gentle smiling face with short neutral hair above the collar as a removable head guide; ears and neck visible. Low top-down camera, all eight standing directions in consistent 64x64 frames, centered at x32, soles on row 62, painted height 60-62 pixels. Preserve front, side and rear clothing construction; connect the neck fully, no holes. The supplied style image is also the approved outfit concept: follow its outfit design and proportions, continuous dark outlines, crisp pixel clusters, upper-left light, three to four shading steps and readable medium detail, adding the scarf, lantern and trim described above. Transparent background, no floor, shadow, text, weapons or extra objects. Clearly separated color groups for skin, cloth, leather, house scarf and fixed gold trim. Back-facing guide heads show no eyes or mouth.
+```
 
 ### ก่อนเจน (เจ้าของทำ)
-- เจ้าของบันทึก  ในหน้า Secret ของ environment Codex เอง · **ไม่ส่ง token ในแชท ไม่ส่งให้ Claude ไม่ลง GitHub**
-- Codex เริ่มงานใหม่แล้วตรวจ:  และราคาของ  64×64 8 ทิศ (อ่านอย่างเดียว) · ถ้าราคาเกิน 8 ต่องาน หรือยอดอ่านไม่ได้ → หยุดรายงาน
+- เจ้าของบันทึก `PIXELLAB_API_KEY` ในหน้า Secret ของ environment Codex เอง · **ไม่ส่ง token ในแชท ไม่ส่งให้ Claude ไม่ลง GitHub**
+- Codex เริ่มงานใหม่แล้วตรวจ: `get_balance` และราคาของ `create_character_pro_flash` 64×64 8 ทิศ (อ่านอย่างเดียว) · ถ้าราคาเกิน 8 ต่องาน หรือยอดอ่านไม่ได้ → หยุดรายงาน
 - ที่เหลือตามฉบับ 8: งานละ 1 ครั้ง · เพดานรวม 16 · timeout ตรวจงานเดิมก่อน · ไฟล์ส่ง raw ×2 + combo + ภาพขยาย 4 เท่า + CODEX_STATUS (ยอดก่อน–หลัง · ที่ใช้จริง · ID งาน) · เกณฑ์รับเดิม
 - พรอมป์อีก 22 ชิ้นยังไม่แก้ · ตัดสินหลังผลทดลอง (ถ้าวิธีนี้ใช้ได้ จะใช้หลักเดียวกัน: ภาพต้นแบบเป็น style_image + แก้ประโยคเดียวกัน)
-
