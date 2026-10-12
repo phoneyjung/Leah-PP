@@ -350,5 +350,5 @@ print('built',len(LAYERS),'layers',qa['runtime_png_bytes'],'PNG bytes',qa['json_
 # Current delivery pipeline: repair shared-head gaps and replace the historical
 # C1 feature glyphs with native C2 extraction and owner-authorized corrections.
 import subprocess,sys
-for script in ('polish_kid8_head_holes.py','build_kid8_c2.py','preview_kid8.py'):
+for script in ('polish_kid8_head_holes.py','build_kid8_c2.py','polish_kid8_tiny_gaps.py','preview_kid8.py'):
  subprocess.run([sys.executable,str(R/script)],check=True)

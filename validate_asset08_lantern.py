@@ -22,7 +22,7 @@ for level in J['levels']:
   for x,y in stray:assert a[y,x,3]>0 and not main[y,x];frame.putpixel((x,y),(0,0,0,0));removed+=1
   expected=Image.new('RGBA',(32,32));expected.paste(frame,tuple(f['translation_xy']));actual=game.crop((32*d,32*level['level'],32*d+32,32*level['level']+32));assert actual.tobytes()==expected.tobytes()
   assert sum(p[3]>0 for p in frame.get_flattened_data())==sum(p[3]>0 for p in actual.get_flattened_data())
-  bb=actual.getbbox();assert list(bb)==f['opaque_bbox_xyxy_exclusive'];assert bb[2]-bb[0]<=13 and bb[3]-bb[1]<=22
+  bb=actual.getbbox();assert list(bb)==f['opaque_bbox_xyxy_exclusive'];limit=level['max_opaque_size'];assert bb[2]-bb[0]<=limit[0] and bb[3]-bb[1]<=limit[1]
   x,y=f['grip_xy'];assert actual.getpixel((x,y))[3]==255
   a=np.array(actual);partial+=int(((a[:,:,3]>0)&(a[:,:,3]<255)).sum());rgb=a[:,:,:3].astype(int);blue+=int(((a[:,:,3]>0)&(rgb[:,:,2]>rgb[:,:,0]+20)&((rgb[:,:,1]>rgb[:,:,0]+10)|(rgb[:,:,2]>rgb[:,:,1]+15))).sum())
 assert partial==0 and blue==0
