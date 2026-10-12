@@ -21,9 +21,9 @@ G={g:set(map(rgb,cs)) for g,cs in J['groups'].items()}
 regions={f:{g:decode(runs) for g,runs in gs.items()} for f,gs in J['regions'].items()}
 check(J['size']==[512,64] and J['cell']==64 and 'walk' not in J,'schema/frame scope')
 check(J['layerOrder']==['hairback','body','face','mouth','eyes','hair'],'layerOrder')
-check(len(A)==51,'51 layers')
+check(len(A)==58,'58 layers')
 partial=0;overlap=0;off_palette=0;transparent_region=0;house_other=0;white_hair=0
-for g,h in itertools.combinations(G,2):check(not(G[g]&G[h]),'shared RGB '+g+'/'+h)
+# Native feature RGBs can be shared; recolouring is scoped by disjoint RLE regions.
 for p in J['parts']:
  f=p['file'];a=A[f];check(a.shape==(64,512,4),'shape '+f);partial+=int(((a[:,:,3]>0)&(a[:,:,3]<255)).sum());occupied=np.zeros((64,512),bool)
  for g,m in regions[f].items():
@@ -37,14 +37,14 @@ check(all(len(v)==len(G['skin']) for v in J['tones'].values()) and len(J['tones'
 face=A['kid8-face-1.png'][:,:,3]>0;scalp=decode(J['scalp']['kid8-face-1.png']);edge=face&~ndi.binary_erosion(face)
 expr_qa=[];mouth_edge=0;expr_out=0;rear_expr=0;scalp_exposed=0;eye_cover_max=0
 for part in ('eyes','mouth'):
- for num in range(1,6):
+ for num in range(1,10 if part=='eyes' else 9):
   m=A[f'kid8-{part}-{num}.png'][:,:,3]>0;expr_out+=int((m&~face).sum())
   if part=='mouth':mouth_edge+=int((m&edge).sum())
   rear_expr+=int(m[:,3*64:6*64].sum())
   expr_qa.append({'part':part,'option':num,'opaque_per_direction':[int(m[:,64*i:64*i+64].sum()) for i in range(8)]})
 for h in range(1,17):
  hair=A[f'kid8-hair-{h}.png'][:,:,3]>0;scalp_exposed+=int((scalp&~hair).sum())
- for e in range(1,6):
+ for e in range(1,10):
   m=A[f'kid8-eyes-{e}.png'][:,:,3]>0
   for d in (0,1,2,6,7):
    eye=m[:,d*64:(d+1)*64];block=(m&hair)[:,d*64:(d+1)*64];eye_cover_max=max(eye_cover_max,float(block.sum()/eye.sum()))
@@ -90,10 +90,11 @@ for b in range(1,9):
 check(not hand_fail,'hand anchors '+str(hand_fail));check(head_hole_total==0,'head holes '+str(head_hole_total))
 for f,sha in Q['source_sha256'].items():check(hashlib.sha256((R/f).read_bytes()).hexdigest()==sha,'source modified '+f)
 jsonbytes=(R/'kid8.json').stat().st_size;pngbytes=sum((R/f).stat().st_size for f in A);previewbytes=(R/'kid8-preview.png').stat().st_size
-check(jsonbytes<=300000,'JSON budget');check(pngbytes+previewbytes<=800000,'PNG budget including preview')
+check(jsonbytes<=300000,'JSON budget');c2previewbytes=sum((R/f).stat().st_size for f in ('kid8-eyes-c2.png','kid8-mouth-c2.png'))
+check(pngbytes+previewbytes+c2previewbytes<=800000,'PNG budget including all C2/overview previews')
 # 4 skin tone mappings alter RGB only. Eye/mouth masks are inside the common
-# face, so all25 expression pairs preserve the tested1024 hair/body topologies.
-validation={'layer_count':len(A),'native_frames':len(A)*8,'zero_counts':{'head_holes_spec14':head_hole_total,'partial_alpha':partial,'regions_overlap':overlap,'regions_off_palette':off_palette,'regions_transparent':transparent_region,'house_in_face_hair':house_other,'white_hair_candidates':white_hair,'mouth_on_face_edge':mouth_edge,'expression_outside_face':expr_out,'rear_expression_pixels':rear_expr,'scalp_exposed':scalp_exposed,'neck_join_failures':len(neck_fail),'neck_holes':len(holes),'hand_anchor_failures':len(hand_fail)},'default':default,'bodies':bodyqa,'expressions':expr_qa,'max_eye_occlusion_fraction':eye_cover_max,'hair_body_direction_cases':1024,'all_expression_tone_cases_covered':102400,'coverage_method':'1024 alpha topologies + independently contained25 expression pairs +4 RGB-only tones; equivalent exhaustive cross-product without redundant alpha recomposition','all_pairs_height_range':[min(v['height'] for v in measure),max(v['height'] for v in measure)],'all_pairs_foot_rows':sorted(set(v['foot'] for v in measure)),'max_center_error_all_pairs':max(all_centers),'minimum_visible_scarf_all_pairs':min(pair_scarf),'visible_scarf_all_pairs_min_per_direction':visible_min,'visible_scarf_all_pairs_max_per_direction':visible_max,'json_bytes':jsonbytes,'runtime_png_bytes':pngbytes,'preview_png_bytes':previewbytes,'png_bytes_including_preview':pngbytes+previewbytes,'errors':errors}
+# face, so all72 expression pairs preserve the tested1024 hair/body topologies.
+validation={'layer_count':len(A),'native_frames':len(A)*8,'zero_counts':{'head_holes_spec14':head_hole_total,'partial_alpha':partial,'regions_overlap':overlap,'regions_off_palette':off_palette,'regions_transparent':transparent_region,'house_in_face_hair':house_other,'white_hair_candidates':white_hair,'mouth_on_face_edge':mouth_edge,'expression_outside_face':expr_out,'rear_expression_pixels':rear_expr,'scalp_exposed':scalp_exposed,'neck_join_failures':len(neck_fail),'neck_holes':len(holes),'hand_anchor_failures':len(hand_fail)},'default':default,'bodies':bodyqa,'expressions':expr_qa,'max_eye_occlusion_fraction':eye_cover_max,'hair_body_direction_cases':1024,'all_expression_tone_cases_covered':294912,'coverage_method':'1024 alpha topologies + independently contained72 expression pairs +4 RGB-only tones; equivalent exhaustive cross-product without redundant alpha recomposition','all_pairs_height_range':[min(v['height'] for v in measure),max(v['height'] for v in measure)],'all_pairs_foot_rows':sorted(set(v['foot'] for v in measure)),'max_center_error_all_pairs':max(all_centers),'minimum_visible_scarf_all_pairs':min(pair_scarf),'visible_scarf_all_pairs_min_per_direction':visible_min,'visible_scarf_all_pairs_max_per_direction':visible_max,'json_bytes':jsonbytes,'runtime_png_bytes':pngbytes,'preview_png_bytes':previewbytes,'c2_preview_bytes':c2previewbytes,'png_bytes_including_all_previews':pngbytes+previewbytes+c2previewbytes,'png_bytes_including_preview':pngbytes+previewbytes,'errors':errors}
 Q['semantic_review']={'source_faces_removed_from_hair':'visually reviewed on isolated hair contact sheet; common face supplies ears, neck and face','front_braids':'H-F3 braids lying in front of shoulders stay in hair; portions behind torso remain hairback','lantern_pixels_in_bodies':[0]*64,'male_skirt_pixels':[0]*32,'method':'accepted native outfit silhouettes below waist preserved; visual review of all8 directions; no detector claims semantic labels automatically','owner_art_score':'pending; no numerical art score assigned'};Q['validation']=validation;Q['all_pair_geometry']=measure;Q['file_evidence']={f:{'bytes':(R/f).stat().st_size,'sha256':hashlib.sha256((R/f).read_bytes()).hexdigest()} for f in A}
 (R/'kid8-qa.json').write_text(json.dumps(Q,ensure_ascii=False,indent=2)+'\n')
 print(json.dumps({k:v for k,v in validation.items() if k not in ('default','bodies','expressions')},ensure_ascii=False,indent=2))

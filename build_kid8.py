@@ -346,3 +346,9 @@ preview.convert('RGB').resize((2048,6656),Image.Resampling.NEAREST).save(R/'kid8
 qa={'set':8,'spec_revision':13,'production_credits':0,'source_sha256':source_evidence,'hair_edits':hairmetrics,'bodies':bodymetrics,'rescaled_pieces':0,'reflected_pieces':0,'runtime_png_bytes':sum((R/f).stat().st_size for f in LAYERS),'preview_bytes':(R/'kid8-preview.png').stat().st_size,'json_bytes':(R/'kid8.json').stat().st_size}
 (R/'kid8-qa.json').write_text(json.dumps(qa,ensure_ascii=False,indent=2)+'\n')
 print('built',len(LAYERS),'layers',qa['runtime_png_bytes'],'PNG bytes',qa['json_bytes'],'JSON bytes')
+
+# Current delivery pipeline: repair shared-head gaps and replace the historical
+# C1 feature glyphs with native C2 extraction and owner-authorized corrections.
+import subprocess,sys
+for script in ('polish_kid8_head_holes.py','build_kid8_c2.py','preview_kid8.py'):
+ subprocess.run([sys.executable,str(R/script)],check=True)

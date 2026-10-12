@@ -21,3 +21,5 @@ def rebuild():
     for k in range(mc):out.alpha_composite(comp(6,1,m=k+1).crop((0,0,64,64)),((k%8)*64,(24+er+k//8)*64))
     out.convert('RGB').resize((2048,out.height*4),Image.Resampling.NEAREST).save(R/'kid8-preview.png',optimize=True)
 if __name__=='__main__':rebuild()
+from asset_png_lossless import optimize
+optimize(R/'kid8-preview.png')
