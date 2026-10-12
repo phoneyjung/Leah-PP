@@ -1,3 +1,4 @@
+// 2.31: counts of eyes/mouths from kid8.json (Codex C2: 9 and 8) and the new 07↔08 map
 // Claude 2.30 (owner 12 Oct "เสร็จแล้วเอาเข้าเกมใน GM ก่อน" + Codex 19:18 "ขอClaudeตรวจCและนำเข้าGMให้เจ้าของดู"): Codex set 08 (kid8.json, 51 layers) in the paperdoll, GM only
 // · GM loads set 08: 16 hair · 1 face · 5 eyes · 5 mouths · 8 outfits, 2.29 off · every hair × outfit × view stands on row 62 · the scarf takes each house colour and
 //   nothing else changes (the gold trim never) · hair colour only in the hair · skin tone only in skin/mouth shades
@@ -37,24 +38,24 @@ const old07={v:1,hair:3,face:2,eyes:3,mouth:3,body:2,hc:-1,ec:-1,tn:1};   // set
      const m=pd230Map({v:1,hair:3,face:2,eyes:3,mouth:3,body:2,hc:-1,ec:-1,tn:1});r.map=[m.hair,m.face,m.eyes,m.mouth,m.body,m.set];r.look07=pd219Look({v:1,hair:3,face:2,eyes:3,mouth:3,body:2,hc:-1,ec:-1,tn:1});
      r.enc=pdEnc226({v:1,set:8,hair:12,face:1,eyes:2,mouth:3,body:7,hc:-1,ec:2,tn:3});r.dec=pdDec226(r.enc);r.dec07=pdDec226('3,2,3,3,2,0,0,1');r.decBad=pdDec226('1,1,1,1,1,0,0,1,7');
      return r});R.name='gm-load';
-   assert(R.set===8&&R.ok&&R.kid8&&!R.err&&!R.fix,'GM loads set 08 '+JSON.stringify(R));assert.deepEqual(R.avail,{hair:16,face:1,eyes:5,mouth:5,body:8});
+   assert(R.set===8&&R.ok&&R.kid8&&!R.err&&!R.fix,'GM loads set 08 '+JSON.stringify(R));const K8=JSON.parse(fs.readFileSync(path.join(__dirname,'kid8.json'),'utf8')),cnt=k=>K8.parts.filter(q=>q.part===k).length;assert.deepEqual(R.avail,{hair:16,face:1,eyes:cnt('eyes'),mouth:cnt('mouth'),body:8});
    assert.deepEqual([R.def.f.hair,R.def.f.body,R.def.m.hair,R.def.m.body],[1,1,9,5]);assert.equal(R.frames,1024);assert.equal(R.badFeet,0,'feet on row 62');
    for(const [k,n] of Object.entries(R.house)){assert(n[5]>40,'the scarf changes '+k+' '+JSON.stringify(n));assert.deepEqual(Object.keys(n),['5'],'only the scarf changes '+k+' '+JSON.stringify(n))}
    for(const [k,[cnt,off]] of Object.entries(R.scarfHue))assert(cnt>40&&off===0,'scarf in the house hue '+k+' '+cnt+'/'+off);assert.equal(R.trimChanged,0,'the gold trim never changes');
    assert(R.hairCol[1]>100&&Object.keys(R.hairCol).join()==='1','hair colour only in the hair '+JSON.stringify(R.hairCol));assert(R.eyeCol[2]>0&&Object.keys(R.eyeCol).join()==='2','eye colour '+JSON.stringify(R.eyeCol));
    for(const [tn,n] of Object.entries(R.tone)){assert(n[3]>300,'tone '+tn);assert(Object.keys(n).filter(k=>k!=='mouth').every(k=>k==='3'),'tone only in skin '+tn+' '+JSON.stringify(n));assert(Object.keys(n.mouth).every(k=>k==='3'||k==='4'),'mouth tone '+JSON.stringify(n.mouth))}
-   assert.deepEqual(R.tone1,{});assert.deepEqual(R.map,[6,1,4,1,5,8]);assert(R.look07);
+   assert.deepEqual(R.tone1,{});assert.deepEqual(R.map,[6,1,5,1,5,8]);assert(R.look07);
    assert.equal(R.enc,'12,1,2,3,7,-1,2,3,8');assert.deepEqual(R.dec,{v:1,hair:12,face:1,eyes:2,mouth:3,body:7,hc:-1,ec:2,tn:3,set:8});assert(R.dec07&&R.dec07.set===undefined);assert.equal(R.decBad,null);
    assert.deepEqual(errors,[]);R.errors=0;delete R.house;results.push(R);await bc.close()}
   // 2) GM: a child with a set-07 look → the world in set 08, the save untouched · dressing (cancel / new hair) · boys' outfits · names
   {const {bc,p,errors}=await ctx(browser);await open(p,'&gm');await p.evaluate(()=>pd219Load());await start(p,{age:7,g:'f',pd:old07,house:2});await sleep(2000);const R={name:'gm-dress'};
-   R.world=await p.evaluate(o=>{const a=PS.stand.getContext('2d').getImageData(0,0,512,64).data,b=pd219Full({v:1,set:8,hair:6,face:1,eyes:4,mouth:1,body:5,hc:-1,ec:-1,tn:1},S.house).stand.getContext('2d').getImageData(0,0,512,64).data;
+   R.world=await p.evaluate(o=>{const a=PS.stand.getContext('2d').getImageData(0,0,512,64).data,b=pd219Full({v:1,set:8,hair:6,face:1,eyes:5,mouth:1,body:5,hc:-1,ec:-1,tn:1},S.house).stand.getContext('2d').getImageData(0,0,512,64).data;
      return {flag:PS.pd219,same:a.every((v,i)=>v===b[i]),save:JSON.stringify(S.pd219)===JSON.stringify(o)}},old07);
    assert(R.world.flag&&R.world.same&&R.world.save,'set-07 look in set 08 '+JSON.stringify(R.world));
    await p.evaluate(()=>dress226Open());await sleep(1200);R.open=await p.evaluate(()=>({on:DRESS226.on,pd:CR_STATE.pd&&[CR_STATE.pd.hair,CR_STATE.pd.eyes,CR_STATE.pd.mouth,CR_STATE.pd.body],k8:$('cr').classList.contains('k8'),
      hairBtns:document.querySelectorAll('#pd219hair .opt').length,bodies:[...document.querySelectorAll('#pd219body .opt')].filter(b=>b.style.display!=='none').length,name7:(document.querySelector('#pd219hair .opt[data-n="7"] span')||{}).textContent,
      faceBtn:(document.querySelector('[data-sub="face:face"]')||{}).textContent,faceRow:getComputedStyle($('pd219face')).display}));
-   assert(R.open.on&&R.open.k8,'dressing open '+JSON.stringify(R.open));assert.deepEqual(R.open.pd,[6,4,1,5]);assert.equal(R.open.hairBtns,16);assert.equal(R.open.bodies,8);assert.equal(R.open.name7,'ผมตรงหน้าม้า');assert.equal(R.open.faceBtn,'สีผิว');assert.equal(R.open.faceRow,'none');
+   assert(R.open.on&&R.open.k8,'dressing open '+JSON.stringify(R.open));assert.deepEqual(R.open.pd,[6,5,1,5]);assert.equal(R.open.hairBtns,16);assert.equal(R.open.bodies,8);assert.equal(R.open.name7,'ผมตรงหน้าม้า');assert.equal(R.open.faceBtn,'สีผิว');assert.equal(R.open.faceRow,'none');
    await p.screenshot({path:path.join(out,'dress-hair-844.png')});
    await tap(p,'#c3Back');await sleep(600);R.cancel=await p.evaluate(o=>JSON.stringify(S.pd219)===JSON.stringify(o),old07);assert(R.cancel,'cancel keeps the save');
    await p.evaluate(()=>dress226Open());await sleep(1200);R.reopen=await p.evaluate(()=>({sub:C193.sub&&C193.sub.hair,shown:[...document.querySelectorAll('#pd219hair .opt')].filter(b=>b.getBoundingClientRect().width>0).length}));
@@ -71,7 +72,7 @@ const old07={v:1,hair:3,face:2,eyes:3,mouth:3,body:2,hc:-1,ec:-1,tn:1};   // set
   // 3) a player without GM: set 07, a set-08 look shows as set-07 pieces · &kid7 in GM: set 07
   for(const [name,q] of [['player',''],['gm-kid7','&gm&kid7']]){const {bc,p,errors}=await ctx(browser);await open(p,q);
    const look={v:1,set:8,hair:12,face:1,eyes:2,mouth:3,body:7,hc:-1,ec:-1,tn:1};await start(p,{age:7,g:'m',pd:look});await sleep(2500);
-   const R=await p.evaluate(o=>{const a=PS.stand.getContext('2d').getImageData(0,0,512,64).data,b=pd219Full({v:1,hair:2,face:1,eyes:2,mouth:2,body:2,hc:-1,ec:-1,tn:1},S.house).stand.getContext('2d').getImageData(0,0,512,64).data;
+   const R=await p.evaluate(o=>{const a=PS.stand.getContext('2d').getImageData(0,0,512,64).data,b=pd219Full({v:1,hair:2,face:1,eyes:1,mouth:1,body:2,hc:-1,ec:-1,tn:1},S.house).stand.getContext('2d').getImageData(0,0,512,64).data;
      return {set:PD219.set,ok:PD219.ok,kid8:KID8.ok,fix:FIX229.on,flag:PS.pd219,same:a.every((v,i)=>v===b[i]),save:JSON.stringify(S.pd219)===JSON.stringify(o),hair:PD219.avail.hair.length}},look);R.name=name;
    assert(R.set===7&&R.ok&&!R.kid8&&R.fix&&R.flag&&R.same&&R.save&&R.hair===3,name+' set 07 '+JSON.stringify(R));assert.deepEqual(errors,[]);R.errors=0;results.push(R);await bc.close()}
   // 4) files missing in GM: kid8.json → set 07 · the face → set 07 · one hairstyle → the other 15
