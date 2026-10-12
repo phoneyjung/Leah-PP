@@ -1,0 +1,498 @@
+{
+  "set": 8,
+  "spec_revision": 12,
+  "frame_size": [
+    32,
+    32
+  ],
+  "sheet_size": [
+    256,
+    128
+  ],
+  "directions": [
+    "S",
+    "SE",
+    "E",
+    "NE",
+    "N",
+    "NW",
+    "W",
+    "SW"
+  ],
+  "level_order": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "level_variable": "S.lampLv",
+  "coordinate_origin": "top-left of native cell, zero-based",
+  "grip_definition": "Opaque top of ring, horizontally nearest x16 on the top occupied row; visually reviewed",
+  "production_complete": false,
+  "L0_size_gate": {
+    "frames": [
+      {
+        "direction": "south",
+        "bbox_xyxy_exclusive": [
+          10,
+          5,
+          23,
+          27
+        ],
+        "width": 13,
+        "height": 22,
+        "pass": false
+      },
+      {
+        "direction": "south-east",
+        "bbox_xyxy_exclusive": [
+          11,
+          5,
+          24,
+          27
+        ],
+        "width": 13,
+        "height": 22,
+        "pass": false
+      },
+      {
+        "direction": "east",
+        "bbox_xyxy_exclusive": [
+          10,
+          5,
+          23,
+          27
+        ],
+        "width": 13,
+        "height": 22,
+        "pass": false
+      },
+      {
+        "direction": "north-east",
+        "bbox_xyxy_exclusive": [
+          10,
+          5,
+          23,
+          27
+        ],
+        "width": 13,
+        "height": 22,
+        "pass": false
+      },
+      {
+        "direction": "north",
+        "bbox_xyxy_exclusive": [
+          10,
+          5,
+          23,
+          27
+        ],
+        "width": 13,
+        "height": 22,
+        "pass": false
+      },
+      {
+        "direction": "north-west",
+        "bbox_xyxy_exclusive": [
+          9,
+          5,
+          22,
+          27
+        ],
+        "width": 13,
+        "height": 22,
+        "pass": false
+      },
+      {
+        "direction": "west",
+        "bbox_xyxy_exclusive": [
+          9,
+          5,
+          22,
+          27
+        ],
+        "width": 13,
+        "height": 22,
+        "pass": false
+      },
+      {
+        "direction": "south-west",
+        "bbox_xyxy_exclusive": [
+          9,
+          5,
+          22,
+          27
+        ],
+        "width": 13,
+        "height": 22,
+        "pass": false
+      }
+    ],
+    "all_directions_pass": false
+  },
+  "levels": [
+    {
+      "level": 0,
+      "max_opaque_size": [
+        8,
+        12
+      ],
+      "frames": [
+        {
+          "direction": "S",
+          "raw_grip_xy": [
+            16,
+            5
+          ],
+          "grip_xy": [
+            16,
+            4
+          ],
+          "raw_opaque_bbox_xyxy_exclusive": [
+            10,
+            5,
+            23,
+            27
+          ],
+          "opaque_bbox_xyxy_exclusive": [
+            10,
+            4,
+            23,
+            26
+          ],
+          "opaque_size": [
+            13,
+            22
+          ],
+          "size_pass": false,
+          "raw_ring_center_pass": true,
+          "ring_center_pass": true,
+          "translation_xy": [
+            0,
+            -1
+          ],
+          "partial_alpha_pixels": 0,
+          "blue_cyan_pixels": 0,
+          "blue_cyan_xy": [],
+          "raw_rgba_sha256": "32b74eb98405130cf501f435cb7f764b59817a23ed1dd73d168ed5e28ee15f0f",
+          "glow_halo_visual_review": false
+        },
+        {
+          "direction": "SE",
+          "raw_grip_xy": [
+            16,
+            5
+          ],
+          "grip_xy": [
+            16,
+            4
+          ],
+          "raw_opaque_bbox_xyxy_exclusive": [
+            11,
+            5,
+            24,
+            27
+          ],
+          "opaque_bbox_xyxy_exclusive": [
+            11,
+            4,
+            24,
+            26
+          ],
+          "opaque_size": [
+            13,
+            22
+          ],
+          "size_pass": false,
+          "raw_ring_center_pass": true,
+          "ring_center_pass": true,
+          "translation_xy": [
+            0,
+            -1
+          ],
+          "partial_alpha_pixels": 0,
+          "blue_cyan_pixels": 0,
+          "blue_cyan_xy": [],
+          "raw_rgba_sha256": "eba5bc866b2ea4e25f7754fefecd954cc356eb815803118362909261a5095850",
+          "glow_halo_visual_review": false
+        },
+        {
+          "direction": "E",
+          "raw_grip_xy": [
+            16,
+            5
+          ],
+          "grip_xy": [
+            16,
+            4
+          ],
+          "raw_opaque_bbox_xyxy_exclusive": [
+            10,
+            5,
+            23,
+            27
+          ],
+          "opaque_bbox_xyxy_exclusive": [
+            10,
+            4,
+            23,
+            26
+          ],
+          "opaque_size": [
+            13,
+            22
+          ],
+          "size_pass": false,
+          "raw_ring_center_pass": true,
+          "ring_center_pass": true,
+          "translation_xy": [
+            0,
+            -1
+          ],
+          "partial_alpha_pixels": 0,
+          "blue_cyan_pixels": 0,
+          "blue_cyan_xy": [],
+          "raw_rgba_sha256": "b902e4d42584a004e4fd8505af6cbdfd23e187b815a8e3c97637b20403752a39",
+          "glow_halo_visual_review": false
+        },
+        {
+          "direction": "NE",
+          "raw_grip_xy": [
+            16,
+            5
+          ],
+          "grip_xy": [
+            16,
+            4
+          ],
+          "raw_opaque_bbox_xyxy_exclusive": [
+            10,
+            5,
+            23,
+            27
+          ],
+          "opaque_bbox_xyxy_exclusive": [
+            10,
+            4,
+            23,
+            26
+          ],
+          "opaque_size": [
+            13,
+            22
+          ],
+          "size_pass": false,
+          "raw_ring_center_pass": true,
+          "ring_center_pass": true,
+          "translation_xy": [
+            0,
+            -1
+          ],
+          "partial_alpha_pixels": 0,
+          "blue_cyan_pixels": 0,
+          "blue_cyan_xy": [],
+          "raw_rgba_sha256": "8d503c9a7393dd9891dc4ce20fad0fd176b23737002dd0244f2f36a94911f913",
+          "glow_halo_visual_review": false
+        },
+        {
+          "direction": "N",
+          "raw_grip_xy": [
+            16,
+            5
+          ],
+          "grip_xy": [
+            16,
+            4
+          ],
+          "raw_opaque_bbox_xyxy_exclusive": [
+            10,
+            5,
+            23,
+            27
+          ],
+          "opaque_bbox_xyxy_exclusive": [
+            10,
+            4,
+            23,
+            26
+          ],
+          "opaque_size": [
+            13,
+            22
+          ],
+          "size_pass": false,
+          "raw_ring_center_pass": true,
+          "ring_center_pass": true,
+          "translation_xy": [
+            0,
+            -1
+          ],
+          "partial_alpha_pixels": 0,
+          "blue_cyan_pixels": 0,
+          "blue_cyan_xy": [],
+          "raw_rgba_sha256": "574256bd0b0332b1cb85fc010eae32b77e8b5effa1937ed6e92c2dba3dc8607f",
+          "glow_halo_visual_review": false
+        },
+        {
+          "direction": "NW",
+          "raw_grip_xy": [
+            15,
+            5
+          ],
+          "grip_xy": [
+            16,
+            4
+          ],
+          "raw_opaque_bbox_xyxy_exclusive": [
+            9,
+            5,
+            22,
+            27
+          ],
+          "opaque_bbox_xyxy_exclusive": [
+            10,
+            4,
+            23,
+            26
+          ],
+          "opaque_size": [
+            13,
+            22
+          ],
+          "size_pass": false,
+          "raw_ring_center_pass": true,
+          "ring_center_pass": true,
+          "translation_xy": [
+            1,
+            -1
+          ],
+          "partial_alpha_pixels": 0,
+          "blue_cyan_pixels": 0,
+          "blue_cyan_xy": [],
+          "raw_rgba_sha256": "a5afa43f4b2594862c9fc39c6091d26f80608658d8167aba7f713b6f8db3e181",
+          "glow_halo_visual_review": false
+        },
+        {
+          "direction": "W",
+          "raw_grip_xy": [
+            16,
+            5
+          ],
+          "grip_xy": [
+            16,
+            4
+          ],
+          "raw_opaque_bbox_xyxy_exclusive": [
+            9,
+            5,
+            22,
+            27
+          ],
+          "opaque_bbox_xyxy_exclusive": [
+            9,
+            4,
+            22,
+            26
+          ],
+          "opaque_size": [
+            13,
+            22
+          ],
+          "size_pass": false,
+          "raw_ring_center_pass": true,
+          "ring_center_pass": true,
+          "translation_xy": [
+            0,
+            -1
+          ],
+          "partial_alpha_pixels": 0,
+          "blue_cyan_pixels": 0,
+          "blue_cyan_xy": [],
+          "raw_rgba_sha256": "777cd1400b0a82c9ae4614f93ec933be163f02dea72c1b27ea1534950742886c",
+          "glow_halo_visual_review": false
+        },
+        {
+          "direction": "SW",
+          "raw_grip_xy": [
+            16,
+            5
+          ],
+          "grip_xy": [
+            16,
+            4
+          ],
+          "raw_opaque_bbox_xyxy_exclusive": [
+            9,
+            5,
+            22,
+            27
+          ],
+          "opaque_bbox_xyxy_exclusive": [
+            9,
+            4,
+            22,
+            26
+          ],
+          "opaque_size": [
+            13,
+            22
+          ],
+          "size_pass": false,
+          "raw_ring_center_pass": true,
+          "ring_center_pass": true,
+          "translation_xy": [
+            0,
+            -1
+          ],
+          "partial_alpha_pixels": 0,
+          "blue_cyan_pixels": 0,
+          "blue_cyan_xy": [],
+          "raw_rgba_sha256": "c9b002fe30c1ff620447ce18ed51570e7170be99672acc6b858af201a48997b2",
+          "glow_halo_visual_review": false
+        }
+      ],
+      "raw_file": "kid-lantern-l0-raw.png",
+      "status": "generated_for_review"
+    },
+    {
+      "level": 1,
+      "max_opaque_size": [
+        9,
+        14
+      ],
+      "frames": [],
+      "status": "not_generated_L0_size_gate"
+    },
+    {
+      "level": 2,
+      "max_opaque_size": [
+        10,
+        16
+      ],
+      "frames": [],
+      "status": "not_generated_L0_size_gate"
+    },
+    {
+      "level": 3,
+      "max_opaque_size": [
+        12,
+        18
+      ],
+      "frames": [],
+      "status": "not_generated_L0_size_gate"
+    }
+  ],
+  "unavailable_rows": "Fully transparent reserved rows are NOT produced or accepted lantern levels; check status before use.",
+  "blue_detector": "HSV hue160..260deg, saturation>=0.2, alpha>0; visual review additionally checks halo and shape",
+  "sprite_pixels_rescaled": false,
+  "sprites_repainted": false,
+  "visual_review": {
+    "has_top_ring": true,
+    "warm_gold_orange_only": true,
+    "glow_halo_present": false,
+    "four_level_identity_review": "not possible: L1–L3 intentionally not generated after L0 size failure",
+    "size_accepted": false,
+    "polished": false
+  },
+  "alignment_note": "Combined-sheet grip aligned to[16,4] by integer translation only; raw unchanged, 13×22 size failure remains."
+}
