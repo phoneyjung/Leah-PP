@@ -34,8 +34,10 @@ const fps=p=>p.evaluate(async()=>{let last=performance.now(),n=0,hitch=0;const t
   R.kidBtn=await BUTTONS(p);assert(R.kidBtn.small.length===0&&R.kidBtn.over.length===0,'kid buttons: '+JSON.stringify(R.kidBtn));
   // frames with the new sheet against the same page without it (CLAUDE.md rule 5: not more than 10 % lower)
   await fps(p);   // warm-up walk (the first 3 s after a start build the scene: measured 56 vs 59 later, with and without the sheet alike)
-  R.kidFps=await fps(p);await p.evaluate(()=>{$('ui213').disabled=true});R.fpsWithout=await fps(p);await p.evaluate(()=>{$('ui213').disabled=false});await sleep(300);
-  assert(R.kidFps.fps>=0.9*R.fpsWithout.fps&&R.kidFps.hitch===0,'frames with/without: '+JSON.stringify([R.kidFps,R.fpsWithout]));await p.screenshot({path:path.join(out,name+'-kid.png')});
+  // 2.28: with · without · with · without, compared as averages (one each in a row favoured the second: the scene still warms up — seen 41 vs 47 on 2.26–2.28 and 2.25 alike)
+  {const on=[],off=[],sw=d=>p.evaluate(d=>{$('ui213').disabled=d},d);for(let i=0;i<2;i++){on.push(await fps(p));await sw(true);off.push(await fps(p));await sw(false)}await sleep(300);
+   const avg=a=>({fps:+(a.reduce((s,x)=>s+x.fps,0)/a.length).toFixed(1),hitch:Math.max(...a.map(x=>x.hitch))});R.kidFps=avg(on);R.fpsWithout=avg(off);R.kidFpsRuns=[on,off]}
+  assert(R.kidFps.fps>=0.9*R.fpsWithout.fps&&R.kidFps.hitch===0,'frames with/without: '+JSON.stringify(R.kidFpsRuns));await p.screenshot({path:path.join(out,name+'-kid.png')});
   // a tap on the bag still opens it
   {const b=await (await p.$('#bBag')).boundingBox();await p.touchscreen.tap(b.x+b.width/2,b.y+b.height/2);await sleep(600);R.bagOpens=await p.evaluate(()=>!$('modal').classList.contains('hide'));assert(R.bagOpens);await p.evaluate(()=>closeModal());await sleep(300)}
   // a grown-up: the EXP numbers show and are big enough

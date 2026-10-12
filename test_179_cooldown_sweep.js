@@ -39,6 +39,11 @@ const T = (pg, fn, ...a) => pg.evaluate((fn, a) => window.__t179[fn](...a), fn, 
 async function brightness(pg, r) { const buf = await pg.screenshot({ clip: { x: Math.round(r.x), y: Math.round(r.y), width: Math.max(1, Math.round(r.w)), height: Math.max(1, Math.round(r.h)) }, encoding: 'base64' });
   return pg.evaluate(async b64 => { const im = new Image(); im.src = 'data:image/png;base64,' + b64; await im.decode(); const c = document.createElement('canvas'); c.width = im.width; c.height = im.height; const g = c.getContext('2d'); g.drawImage(im, 0, 0); const d = g.getImageData(0, 0, c.width, c.height).data; let s = 0; for (let i = 0; i < d.length; i += 4) s += (d[i] + d[i + 1] + d[i + 2]) / 3; return Math.round(s / (d.length / 4)); }, buf); }
 
+// the three quarters (top-right, bottom-left, top-left) of one screenshot of the button
+async function quarters(pg, b) { const buf = await pg.screenshot({ clip: { x: Math.round(b.x), y: Math.round(b.y), width: Math.max(2, Math.round(b.w)), height: Math.max(2, Math.round(b.h)) }, encoding: 'base64' });
+  return pg.evaluate(async b64 => { const im = new Image(); im.src = 'data:image/png;base64,' + b64; await im.decode(); const c = document.createElement('canvas'); c.width = im.width; c.height = im.height; const g = c.getContext('2d'); g.drawImage(im, 0, 0);
+    const W = c.width, H = c.height, q = (x0, y0) => { const d = g.getImageData(x0, y0, Math.max(1, Math.floor(W / 2) - 4), Math.max(1, Math.floor(H / 2) - 4)).data; let s = 0; for (let i = 0; i < d.length; i += 4) s += (d[i] + d[i + 1] + d[i + 2]) / 3; return Math.round(s / (d.length / 4)); };
+    return { tr: q(Math.floor(W / 2) + 2, 2), bl: q(2, Math.floor(H / 2) + 2), tl: q(2, 2) }; }, buf); }
 async function cooldownRun(pg, id, tapFn, label, R) {
   const r0 = await T(pg, 'read', id); if (!r0.visible) { fail(label + ': button not visible'); return; }
   if (r0.shown || r0.on) fail(label + ': cover shown before the cooldown');
@@ -48,7 +53,9 @@ async function cooldownRun(pg, id, tapFn, label, R) {
   while (true) { await sleep(70); const r = await T(pg, 'read', id); S.push(r);
     /* pixel reading while 50–70% of the cooldown is left: the cleared part (clockwise from the top) then covers the top-right quarter and the bottom-left
        quarter is still dark. The bottom-left is compared, not the top-left, because since 1.84 the key tag (Shift, 3) sits on the top-left corner on a computer */
-    if (!pix && r.left < total * .7 && r.left > total * .5) { const b = await T(pg, 'rect', id); const q = { w: b.w / 2 - 4, h: b.h / 2 - 4 }; pix = { tr: await brightness(pg, { x: b.x + b.w / 2 + 2, y: b.y + 2, ...q }), bl: await brightness(pg, { x: b.x + 2, y: b.y + b.h / 2 + 2, ...q }), tl: await brightness(pg, { x: b.x + 2, y: b.y + 2, ...q }) }; await pg.screenshot({ path: out + '/' + label.replace(/\W+/g, '_') + '_mid.png' }); }
+    /* 2.25 (BUG-35): one screenshot of the button for all three quarters (three screenshots plus a full-page one took longer than the 2.6 s dash, so the dash run
+       missed its second-tap window and its last readings); the full-page picture is taken after the run */
+    if (!pix && r.left < total * .7 && r.left > total * .5) { const b = await T(pg, 'rect', id); pix = await quarters(pg, b); }
     if (again === null && r.left < total * .6 && r.left > total * .2) { const lf = r.left; await tapFn(); await sleep(30); const r2 = await T(pg, 'read', id); again = { before: lf, after: r2.left, reset: r2.left > lf + .2 }; }
     if (r.left <= 0 || Date.now() - t0 > (total + 2) * 1000) break; }
   await sleep(120); const rEnd = await T(pg, 'read', id);
