@@ -1,4 +1,4 @@
-# ASSET_SPEC_08_kid_base.md — ชุดที่ 8: ตัวหลักเด็ก หญิง/ชาย แบบแยกหัวกับตัว (Claude → Codex · 11 ต.ค. 2569 · ฉบับ 1 · **ฉบับ 19 ท้ายไฟล์ (ล่าสุด): พักงานแก้ตา C2 (ฉบับ 17 A / 18 A2) · เจนต้นแบบตาหน้าตรง 20 แบบด้วย PixelLab บนหน้าแม่แบบ 64×64 เฉพาะพื้นที่ตา · เพดาน 200 · ด่านแรก 2 งาน · แล้วทดลอง 128 ครั้งที่ 2 · ฉบับ 18: ตาทั้ง 9 ไม่ผ่าน · ขอบตาบน/ขนตาเป็นสีดำคงที่ · region eye = ม่านตาเท่านั้น · ตา 7 ไม่มีสีตา · ทำรวมกับวาดตาหน้าตรงของฉบับ 17 · ฉบับ 17: รับงาน 1 (จุดใสเล็ก 0 · L3) · วาดตาหน้าตรงใหม่จากทิศเฉียงของแบบเดียวกัน (เจ้าของ 23:13) · ทดลอง 128 ครั้งที่ 2 ด้วยภาพอ้างอิงขยาย 2 เท่า เพดาน 10 · ฉบับ 16: รับช่องโหว่ 0 · ตา 9 ปาก 8 ผ่านตัวเลข (รอเจ้าของตัดสินภาพ) · รับ L2 และ L3 ขนาด 12×23 · อุดจุดใสเล็ก ≤3 จุด → 0 · ทดลองตัวละเอียด 2 เท่า 128 px 1 งาน เพดาน 30 · ฉบับ 15: ตา/ปากรอบ C ไม่ผ่านทั้ง 10 · ใช้ตา/ปากจากหัว PixelLab 16 หัวที่เจ้าของเลือก (ตา 9 ปาก 8 · 0 เครดิต) · ลำดับ ช่องโหว่+L1 → ตา/ปาก → L2 L3 · ฉบับ 14: รอบ C ผ่านตัวเลข ยกเว้นช่องโหว่ขมับ/หน้าผาก 3,521 → ต้อง 0 · รับ L1 (ลบจุดโดด 2 จุด) · เจน L2 L3 · Claude นำเข้า GM 2.30 · ฉบับ 13: ตะเกียงใช้ขนาด L0 เจน L1–L3 · O-F2 ใหม่ · เพดาน 25 · จากนั้นรอบเกลา C (แยกชิ้น regions ตา/ปาก 5 ผ้าพันคอหลัง) · ฉบับ 12: หัว 15 + ชุดรอบ 2 รับแล้ว · เจนใหม่ H-F3 H-F8 · ชุดอีก 7 · ตะเกียง 4 ขั้นด้วย PixelLab · เพดาน 85 · ผ้าพันคอหลังวาดเองตอนเกลา · ฉบับ 11: ผลทดลองผ่านหัว · ตะเกียงแยกจากชุด ถือตอนสำรวจ · เจนหัว 15 + ชุด O-F1 รอบ 2 เพดาน 100 · ฉบับ 10: เพดานทดลอง 20 ตามราคาจริง (10 ต่องานที่ 64 px) · โหมด concept ต้องรายงานก่อนใช้ · ฉบับ 9: ทดลอง 2 ชิ้นด้วย create_character_pro_flash · ภาพอ้างอิงเดียว = ภาพต้นแบบที่ผ่าน · แก้ 1 ประโยค · เจ้าของต้องบันทึก secret ก่อน · ฉบับ 8: พรอมป์ B1 ผ่าน · เจนทดลอง 2 ชิ้นก่อน (H-F1 + O-F1 เพดาน 16) · ฉบับ 7: B0b ผ่าน · ธีม 4 = ชาวประมงริมน้ำ · แก้ขอบทองชาย 1/2/4 ในพรอมป์ · เริ่ม B1 พรอมป์ 24 อัน · ฉบับ 6: B0 ผ่าน + เพิ่ม 3 จุด · ชุดหญิง 4 ชาย 4 ผู้ชายไม่มีกระโปรง · ฉบับ 5: เด็กแต่งเองแบบแยกชิ้นรุ่น 2 · ผม 16 จาก A0c · ตา 5 · ปาก 5 · ชุด 4 แนวศิษย์ตะเกียง (`concept-characters.jpg`) · ไม่ใช่ชุดนักเรียนไทย**)
+# ASSET_SPEC_08_kid_base.md — ชุดที่ 8: ตัวหลักเด็ก หญิง/ชาย แบบแยกหัวกับตัว (Claude → Codex · 11 ต.ค. 2569 · ฉบับ 1 · **ฉบับ 20 ท้ายไฟล์ (ล่าสุด): ต้นแบบปากหน้าตรง 20 แบบแบบเดียวกับตา (เพดาน 200 · ด่านแรก 2 งาน) · ลำดับ ตา E20 → ปาก M20 → ทดลอง 128 · ฉบับ 19: พักงานแก้ตา C2 (ฉบับ 17 A / 18 A2) · เจนต้นแบบตาหน้าตรง 20 แบบด้วย PixelLab บนหน้าแม่แบบ 64×64 เฉพาะพื้นที่ตา · เพดาน 200 · ด่านแรก 2 งาน · แล้วทดลอง 128 ครั้งที่ 2 · ฉบับ 18: ตาทั้ง 9 ไม่ผ่าน · ขอบตาบน/ขนตาเป็นสีดำคงที่ · region eye = ม่านตาเท่านั้น · ตา 7 ไม่มีสีตา · ทำรวมกับวาดตาหน้าตรงของฉบับ 17 · ฉบับ 17: รับงาน 1 (จุดใสเล็ก 0 · L3) · วาดตาหน้าตรงใหม่จากทิศเฉียงของแบบเดียวกัน (เจ้าของ 23:13) · ทดลอง 128 ครั้งที่ 2 ด้วยภาพอ้างอิงขยาย 2 เท่า เพดาน 10 · ฉบับ 16: รับช่องโหว่ 0 · ตา 9 ปาก 8 ผ่านตัวเลข (รอเจ้าของตัดสินภาพ) · รับ L2 และ L3 ขนาด 12×23 · อุดจุดใสเล็ก ≤3 จุด → 0 · ทดลองตัวละเอียด 2 เท่า 128 px 1 งาน เพดาน 30 · ฉบับ 15: ตา/ปากรอบ C ไม่ผ่านทั้ง 10 · ใช้ตา/ปากจากหัว PixelLab 16 หัวที่เจ้าของเลือก (ตา 9 ปาก 8 · 0 เครดิต) · ลำดับ ช่องโหว่+L1 → ตา/ปาก → L2 L3 · ฉบับ 14: รอบ C ผ่านตัวเลข ยกเว้นช่องโหว่ขมับ/หน้าผาก 3,521 → ต้อง 0 · รับ L1 (ลบจุดโดด 2 จุด) · เจน L2 L3 · Claude นำเข้า GM 2.30 · ฉบับ 13: ตะเกียงใช้ขนาด L0 เจน L1–L3 · O-F2 ใหม่ · เพดาน 25 · จากนั้นรอบเกลา C (แยกชิ้น regions ตา/ปาก 5 ผ้าพันคอหลัง) · ฉบับ 12: หัว 15 + ชุดรอบ 2 รับแล้ว · เจนใหม่ H-F3 H-F8 · ชุดอีก 7 · ตะเกียง 4 ขั้นด้วย PixelLab · เพดาน 85 · ผ้าพันคอหลังวาดเองตอนเกลา · ฉบับ 11: ผลทดลองผ่านหัว · ตะเกียงแยกจากชุด ถือตอนสำรวจ · เจนหัว 15 + ชุด O-F1 รอบ 2 เพดาน 100 · ฉบับ 10: เพดานทดลอง 20 ตามราคาจริง (10 ต่องานที่ 64 px) · โหมด concept ต้องรายงานก่อนใช้ · ฉบับ 9: ทดลอง 2 ชิ้นด้วย create_character_pro_flash · ภาพอ้างอิงเดียว = ภาพต้นแบบที่ผ่าน · แก้ 1 ประโยค · เจ้าของต้องบันทึก secret ก่อน · ฉบับ 8: พรอมป์ B1 ผ่าน · เจนทดลอง 2 ชิ้นก่อน (H-F1 + O-F1 เพดาน 16) · ฉบับ 7: B0b ผ่าน · ธีม 4 = ชาวประมงริมน้ำ · แก้ขอบทองชาย 1/2/4 ในพรอมป์ · เริ่ม B1 พรอมป์ 24 อัน · ฉบับ 6: B0 ผ่าน + เพิ่ม 3 จุด · ชุดหญิง 4 ชาย 4 ผู้ชายไม่มีกระโปรง · ฉบับ 5: เด็กแต่งเองแบบแยกชิ้นรุ่น 2 · ผม 16 จาก A0c · ตา 5 · ปาก 5 · ชุด 4 แนวศิษย์ตะเกียง (`concept-characters.jpg`) · ไม่ใช่ชุดนักเรียนไทย**)
 
 ## 0. หัวเรื่อง
 - **ใช้ที่ไหนในเกม:** ตัวผู้เล่นเด็ก (อายุต่ำกว่า 10) ในโลก หน้าสร้างตัว หน้าเลือกตัว รูปบน HUD · ช่อง 64 · เกมวาด `PS.stand` / `PS.walk` (เท้าแถว 62)
@@ -909,3 +909,140 @@ Pixel art front view chibi child eyes on the supplied 64x64 face, repaint only t
 
 ### ลำดับ
 E20 (ด่านแรก 2 งาน → ที่เหลือ 18) → งาน B ทดลอง 128 ครั้งที่ 2 (ฉบับ 17 เพดาน 10) · commit แยก · branch `codex/asset-08-kid-base` (ดึง main ล่าสุดก่อน) · CODEX_STATUS 1 บรรทัดต่อ commit + กล่อง "ข้อความส่ง Claude" · ห้ามแตะ `index.html` `sw.js` `test_*.js` · ไม่ push `main` · token ห้ามอยู่ในไฟล์ใด
+
+## ฉบับ 20 (13 ต.ค. 2569 00:2x · Claude → Codex) · ต้นแบบปากหน้าตรง 20 แบบ (แบบเดียวกับตา E20)
+
+### เจ้าของ 00:15: "ทำปากแบบเดียวกับตา"
+- ปาก C2 ทั้ง 8 แบบพักไว้ · เจนต้นแบบปากหน้าตรง 20 แบบ ให้เจ้าของเลือก
+
+### งาน M20 (เพดานรวม **200 เครดิต** แยกจากตา)
+- **ภาพตั้งต้น (Claude ทำ · อยู่ใน main):** `mouth-base-64.png` = หน้าแม่แบบ S + ผมมวยคู่ 6 + ชุด 1 + ตา 2 (ตาไว้ดูประกอบเท่านั้น) ไม่มีปาก · `mouth-mask-64.png` = หน้ากาก ขาว 38 จุด = พื้นที่ปาก x 27–37 y 24–28 (เฉพาะผิวด้านในหน้า ไม่รวมเส้นขอบหน้า) ดำ = ห้ามแตะ
+- **เครื่องมือ:** inpainting ของ PixelLab API แบบเดียวกับ E20 · ถ้า E20 ต้องเปลี่ยนเครื่องมือ ให้ใช้ทางเดียวกัน
+- **ด่านแรก:** M01 กับ M03 ก่อน · ถ้างานใดคิด > 10 เครดิต หรือนอกหน้ากากเปลี่ยน > 0 จุด → หยุดและรายงาน · ผ่านแล้ว M02 … M20 งานละ 1 ครั้ง
+- **เกณฑ์ (Claude วัด):** นอกหน้ากากเหมือน `mouth-base-64.png` ทุกจุด · กึ่งใส 0 · 64×64 · รายงานต่อภาพ: กว้าง/สูงของปาก · ปากแตะเส้นขอบหน้ากี่จุด (ต้อง 0 ตอนเกลา) · จุดทึบต่อกันเป็นกลุ่มเดียวไหม (ปากไม่ขาดเป็นท่อน)
+- **ส่ง:** `mouth-proto-01.png` … `mouth-proto-20.png` (ไม่แก้) · `mouth-proto-sheet.png` ตาราง 4 × 5 ครอบหน้า x 12–52 y 4–34 ขยาย 8 เท่า พื้น `#96A096` เลข M01–M20 ตัวใหญ่ · `mouth-proto-qa.json`
+- ยังไม่ทำทิศอื่น ไม่แยกชั้น ไม่เกลา
+
+### พรอมป์ 20 อัน (คัดลอกตรง ๆ · คำต้องห้าม 0)
+**M01 · ยิ้มเล็ก**
+
+```text
+Pixel art front view chibi child mouth on the supplied 64x64 face, repaint only the masked mouth area. A small gentle closed smile, a curved line 4 px wide and 1 px thick with the ends turned up. Mouth centered and fully inside the face, not touching the face outline. Dark reddish-brown lip line, dark red inside, white teeth, pink tongue. Left and right halves mirrored. Keep skin, hair and eyes unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**M02 · ยิ้มกว้างเห็นฟัน**
+
+```text
+Pixel art front view chibi child mouth on the supplied 64x64 face, repaint only the masked mouth area. A wide happy open smile showing a row of white top teeth, 6 px wide and 3 px tall. Mouth centered and fully inside the face, not touching the face outline. Dark reddish-brown lip line, dark red inside, white teeth, pink tongue. Left and right halves mirrored. Keep skin, hair and eyes unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**M03 · หัวเราะลิ้นชมพู**
+
+```text
+Pixel art front view chibi child mouth on the supplied 64x64 face, repaint only the masked mouth area. A big laughing D-shaped open mouth, 6 px wide and 4 px tall, dark red inside with a pink tongue at the bottom. Mouth centered and fully inside the face, not touching the face outline. Dark reddish-brown lip line, dark red inside, white teeth, pink tongue. Left and right halves mirrored. Keep skin, hair and eyes unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**M04 · ปากโอตกใจ**
+
+```text
+Pixel art front view chibi child mouth on the supplied 64x64 face, repaint only the masked mouth area. A tiny round surprised O mouth, open, 3 px wide and 3 px tall, dark red inside. Mouth centered and fully inside the face, not touching the face outline. Dark reddish-brown lip line, dark red inside, white teeth, pink tongue. Left and right halves mirrored. Keep skin, hair and eyes unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**M05 · ยิ้มแมว**
+
+```text
+Pixel art front view chibi child mouth on the supplied 64x64 face, repaint only the masked mouth area. A cat-like w-shaped smile, 5 px wide and 2 px tall, thin dark line. Mouth centered and fully inside the face, not touching the face outline. Dark reddish-brown lip line, dark red inside, white teeth, pink tongue. Left and right halves mirrored. Keep skin, hair and eyes unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**M06 · ยิ้มมุมปาก**
+
+```text
+Pixel art front view chibi child mouth on the supplied 64x64 face, repaint only the masked mouth area. A playful side smile: a short line 4 px wide whose right end curves up 1 px higher than the left, lopsided on purpose. Mouth centered and fully inside the face, not touching the face outline. Dark reddish-brown lip line. Keep skin, hair and eyes unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**M07 · ปากเรียบสงบ**
+
+```text
+Pixel art front view chibi child mouth on the supplied 64x64 face, repaint only the masked mouth area. A calm straight closed mouth, a flat line 4 px wide and 1 px thick. Mouth centered and fully inside the face, not touching the face outline. Dark reddish-brown lip line, dark red inside, white teeth, pink tongue. Left and right halves mirrored. Keep skin, hair and eyes unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**M08 · ยิ้มเห็นฟันบน**
+
+```text
+Pixel art front view chibi child mouth on the supplied 64x64 face, repaint only the masked mouth area. A cheerful grin showing only the top teeth as a white band, 5 px wide and 2 px tall, with a lip line above and below. Mouth centered and fully inside the face, not touching the face outline. Dark reddish-brown lip line, dark red inside, white teeth, pink tongue. Left and right halves mirrored. Keep skin, hair and eyes unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**M09 · ยิ้มฟันหลอ**
+
+```text
+Pixel art front view chibi child mouth on the supplied 64x64 face, repaint only the masked mouth area. A cute open smile with a tiny one-pixel gap in the front teeth, like a child's missing tooth, 6 px wide and 3 px tall. Mouth centered and fully inside the face, not touching the face outline. Dark reddish-brown lip line, dark red inside, white teeth, pink tongue. Left and right halves mirrored. Keep skin, hair and eyes unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**M10 · แลบลิ้น**
+
+```text
+Pixel art front view chibi child mouth on the supplied 64x64 face, repaint only the masked mouth area. A playful closed smile with a small pink tongue tip peeking out at the center, 5 px wide and 3 px tall. Mouth centered and fully inside the face, not touching the face outline. Dark reddish-brown lip line, dark red inside, white teeth, pink tongue. Left and right halves mirrored. Keep skin, hair and eyes unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**M11 · ปากสามเหลี่ยมตื่นเต้น**
+
+```text
+Pixel art front view chibi child mouth on the supplied 64x64 face, repaint only the masked mouth area. An excited open mouth shaped like an upside-down triangle, 5 px wide at the top and 3 px tall, dark red inside with a pink tongue. Mouth centered and fully inside the face, not touching the face outline. Dark reddish-brown lip line, dark red inside, white teeth, pink tongue. Left and right halves mirrored. Keep skin, hair and eyes unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**M12 · ยิ้มเขิน**
+
+```text
+Pixel art front view chibi child mouth on the supplied 64x64 face, repaint only the masked mouth area. A shy small wavy mouth, a soft wavy line 5 px wide and 1 px thick. Mouth centered and fully inside the face, not touching the face outline. Dark reddish-brown lip line, dark red inside, white teeth, pink tongue. Left and right halves mirrored. Keep skin, hair and eyes unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**M13 · ยิ้มตัวยู**
+
+```text
+Pixel art front view chibi child mouth on the supplied 64x64 face, repaint only the masked mouth area. A big U-shaped smile without teeth, 6 px wide and 3 px tall, dark red inside. Mouth centered and fully inside the face, not touching the face outline. Dark reddish-brown lip line, dark red inside, white teeth, pink tongue. Left and right halves mirrored. Keep skin, hair and eyes unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**M14 · ยิ้มฟันสองแถว**
+
+```text
+Pixel art front view chibi child mouth on the supplied 64x64 face, repaint only the masked mouth area. A happy clenched grin showing both rows of white teeth with a thin dark line between them, 6 px wide and 3 px tall. Mouth centered and fully inside the face, not touching the face outline. Dark reddish-brown lip line, dark red inside, white teeth, pink tongue. Left and right halves mirrored. Keep skin, hair and eyes unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**M15 · ยิ้มมุมงอน**
+
+```text
+Pixel art front view chibi child mouth on the supplied 64x64 face, repaint only the masked mouth area. A small mouth with both corners turned up like a caret, 5 px wide and 2 px tall. Mouth centered and fully inside the face, not touching the face outline. Dark reddish-brown lip line, dark red inside, white teeth, pink tongue. Left and right halves mirrored. Keep skin, hair and eyes unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**M16 · ปากพูดวงรี**
+
+```text
+Pixel art front view chibi child mouth on the supplied 64x64 face, repaint only the masked mouth area. A small open oval talking mouth, 4 px wide and 3 px tall, dark red inside with a pink tongue line. Mouth centered and fully inside the face, not touching the face outline. Dark reddish-brown lip line, dark red inside, white teeth, pink tongue. Left and right halves mirrored. Keep skin, hair and eyes unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**M17 · ยิ้มริมฝีปากเงา**
+
+```text
+Pixel art front view chibi child mouth on the supplied 64x64 face, repaint only the masked mouth area. A soft closed smile with one small light highlight pixel on the lower lip, 5 px wide and 2 px tall. Mouth centered and fully inside the face, not touching the face outline. Dark reddish-brown lip line, dark red inside, white teeth, pink tongue. Left and right halves mirrored. Keep skin, hair and eyes unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**M18 · ยิ้มเส้นยาว**
+
+```text
+Pixel art front view chibi child mouth on the supplied 64x64 face, repaint only the masked mouth area. A wide flat happy line 7 px wide with both ends turned up 1 px. Mouth centered and fully inside the face, not touching the face outline. Dark reddish-brown lip line, dark red inside, white teeth, pink tongue. Left and right halves mirrored. Keep skin, hair and eyes unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**M19 · อ้าปากอา**
+
+```text
+Pixel art front view chibi child mouth on the supplied 64x64 face, repaint only the masked mouth area. An open 'ah' mouth, 5 px wide and 4 px tall, a white band of top teeth, dark red inside and a pink tongue. Mouth centered and fully inside the face, not touching the face outline. Dark reddish-brown lip line, dark red inside, white teeth, pink tongue. Left and right halves mirrored. Keep skin, hair and eyes unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+**M20 · ยิ้มกว้างหุบปาก**
+
+```text
+Pixel art front view chibi child mouth on the supplied 64x64 face, repaint only the masked mouth area. A big closed smile, a curved line 7 px wide that dips 2 px in the middle. Mouth centered and fully inside the face, not touching the face outline. Dark reddish-brown lip line, dark red inside, white teeth, pink tongue. Left and right halves mirrored. Keep skin, hair and eyes unchanged. Crisp pixels, no blur, no anti-aliasing.
+```
+
+### ลำดับรวม
+ตา E20 (ฉบับ 19) → ปาก M20 → งาน B ทดลอง 128 ครั้งที่ 2 (ฉบับ 17) · commit แยก · ที่เหลือตามฉบับ 19
