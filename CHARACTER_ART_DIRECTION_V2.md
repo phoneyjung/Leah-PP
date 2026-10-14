@@ -1,6 +1,6 @@
 # Lantern Academy · Character Art Direction v2 "Soft Heroic Pixel" (G1.3)
 14 ต.ค. 2569 · Claude · **เจ้าของอนุมัติตามร่างทั้งหมด 14 ต.ค.** (ร่างนี้ + พรอมป์รอบ 2) · ไม่ใช้เครดิต · ไม่สร้างภาพ · ไม่แก้โค้ดเกม
-**ฉบับแก้ 14 ต.ค. (บ่าย):** แก้ 4 จุดตามผลตรวจ ChatGPT (ข้อ 8) · Art Direction ที่อนุมัติไม่เปลี่ยน · **พรอมป์ฉบับแก้รอเจ้าของอนุมัติก่อนตรวจราคาและกดสร้าง**
+**ฉบับแก้ 14 ต.ค. (บ่าย):** แก้ 4 จุดตาม G1.3 Final Prompt Correction (เจ้าของเลือกตัวเลือก A ของ ChatGPT) + ข้อ 5 ที่เจ้าของอนุมัติเพิ่มหลังเห็นผลรอบ 2 (ข้อ 8–9) · Art Direction ที่อนุมัติไม่เปลี่ยน · **พรอมป์ฉบับสุดท้ายรอเจ้าของและ ChatGPT ตรวจ ก่อนดูราคาและกดสร้าง**
 อ่านแล้ว: PR #6 `579edc0` (แผน v1.2 ข้อ 15 · Visual Bible v1.2 · Material Palette v1.2) · PR #5 สเปก v2 · CLAUDE.md · AGENTS.md · ผลวัดรอบแรก (G1.1/G1.2) · ภาพอ้างอิง RO The New World 31 ภาพ
 
 ## 1. แนวภาพ (สรุป)
@@ -37,24 +37,26 @@
 7. ข้อ 3–5: ปากไม่ใช่ชิ้นแต่งตัว → รวมปากเข้าชั้นหน้า · ตา ≤ 4 ทรง + สี 5 (EYEC) · แท็บหน้าสร้างตัว: ทรงผม ≤ 8 + สีผม · ตา ≤ 4 + สีตา · ผิว 4 · ของบนหัว (ไม่ใส่ + ≤ 5 ของเราเอง) · ชุด 2 + แบบที่ 1/2 · ไม่มีแท็บปาก
 8. ข้อ 8 Portrait: 256 → 384 (ตามที่ล็อกแล้ว)
 
-## 4. Prompt PixelLab รอบ 2 (1 ฉบับ · **ฉบับแก้ 4 จุดตามผลตรวจ ChatGPT รอเจ้าของอนุมัติ** · ยังไม่กด)
+## 4. Prompt PixelLab รอบถัดไป = รอบ 3 (1 ฉบับ · **ฉบับสุดท้าย 4 จุด + ข้อ 5 · รอตรวจ** · ยังไม่กด)
+รอบ 2 เจ้าของสร้างแล้วด้วยพรอมป์ฉบับก่อนแก้ (commit `8d1f9fd`) และไม่ผ่าน → ผลอยู่ข้อ 9
 ตั้งค่า (เหมือนรอบแรก): Create from Text · Humanoid · Generation Mode **v3** · Camera **Low Top-Down** · Sprite Size **88 × 88** · Detail **Highly detailed** · Outline **Default** · ไม่ใส่ภาพอ้างอิง · ไม่กด ✨
-ราคา: รอบแรกหน้าจอแสดง **2 generations** → **ต้องถ่ายบรรทัด "Costs N generations" ส่งมาก่อนกดทุกครั้ง** · ถ้าเป็น 2 → สะสม 4/65
+ราคา: รอบแรกหน้าจอแสดง **2 generations** → **ต้องถ่ายบรรทัด "Costs N generations" ส่งมาก่อนกดทุกครั้ง** · ถ้าเป็น 2 → สะสมประมาณ 6/65 (รอบแรก 2 + รอบ 2 คาด 2 + รอบ 3)
 
 ```text
-Original cute chibi female apprentice of a lantern academy, about 10 years old, friendly and brave, standing idle in a relaxed confident stance. Show the same character in all eight directions: S, SE, E, NE, N, NW, W, SW. Proportions: head about 38 percent of the total height, slim arms and legs that read clearly. Arms hang naturally a little away from the sides, both hands visible and not touching the body. Beautiful expressive face: large eyes with a thick solid black upper lash line and a tiny outer flick, a two-tone green iris with a darker pupil, one small white highlight at the upper left of each eye, thin soft eyebrows, a tiny nose, soft pink cheeks, and a small gentle closed smile that stays the same in every direction where the mouth is visible. In the back views N, NE and NW the face is hidden: no eyes and no mouth. Chestnut brown hair with soft bangs and side locks that frame the cheeks, drawn in chunky clean clusters. Ivory academy tunic with a short layered hem, warm brown leather belt, gloves and cuffed boots, small copper buttons. A medium blue short capelet over both shoulders, clearly visible from the front and the back, fastened at the chest with a round copper badge shaped like a small lantern. No bag, no pouch, no strap across the chest. Dark plum outlines, light from the upper left, three to four shading steps per material, crisp square pixels, a solid closed silhouette. Transparent background. No floor, no cast shadow, no hat, no wings, no weapon, no lantern in hand, no glow effects, no text.
+Original cute chibi female apprentice of a lantern academy, about 10 years old, friendly and brave, standing idle in a relaxed confident stance. Show the same character in all eight directions: S, SE, E, NE, N, NW, W, SW. The S view faces the viewer, SE and SW show the face turned naturally, and the back views N, NE and NW hide the face: no eyes and no mouth. Proportions: head about 38 percent of the total height, slim arms and legs that read clearly. Arms hang naturally a little away from the sides, both hands visible and not touching the body. Beautiful expressive face: large eyes with a thick solid black upper lash line and a tiny outer flick, a two-tone green iris with a darker pupil, one small white highlight at the upper left of each eye, thin soft eyebrows, a tiny nose, soft pink cheeks, and a small gentle closed smile that stays the same in every direction where the mouth is visible. Chestnut brown hair with soft bangs and side locks that frame the cheeks, drawn in chunky clean clusters. Ivory academy tunic with a short layered hem, warm brown leather belt, gloves and cuffed boots, small copper buttons. A medium blue short capelet over both shoulders, clearly visible from the front and the back, fastened at the chest with a round copper badge shaped like a small lantern. Nothing is worn across the chest or at the hips except the belt. Dark plum outlines, light from the upper left, three to four shading steps per material, crisp square pixels, a solid closed silhouette. Transparent background. Bare head showing the whole hairstyle, empty hands. No floor, no cast shadow, no glow effects, no text.
 ```
-- 1,539/2,000 ตัวอักษร · คำต้องห้าม 0 · ไม่มีชื่อเกมหรือตัวละครของคนอื่น
+- 1,629/2,000 ตัวอักษร · คำต้องห้าม 0 · ไม่มีชื่อเกมหรือตัวละครของคนอื่น · ไม่มีคำ hat / bag / pouch / strap / weapon / wings / adventurer
 - **"head about 38 percent" เป็นค่าทดลองชดเชย** เพราะรอบแรกสั่ง 40–45% แต่ได้จริง 49% (PixelLab ทำหัวโตเกินที่สั่ง) · **เกณฑ์รับภาพจริงยังเป็น 40–45%** (ข้อ 5.2) · ลบคำว่า "two and three-quarter heads" ออกแล้วเพราะขัดกับ 38% (2.75 หัว ≈ 36%)
-- ระบุ **female apprentice** ให้ตรงกับรอบแรก เพื่อเทียบกันได้ตรง
-- ระบุ 8 ทิศ `S SE E NE N NW W SW` เป็นตัวเดียวกัน · ทิศหลัง N / NE / NW ไม่มีตาและปาก · รอยยิ้มต้องเหมือนกันเฉพาะทิศที่เห็นปาก
+- ระบุ **female apprentice** ให้ตรงกับรอบแรก เพื่อเทียบกันได้ตรง · เป็นเพศของ **ตัวต้นแบบ** เท่านั้น ระบบสร้างตัวละครจริงยังเลือกชาย/หญิงได้ภายหลัง (สเปก v2 มีชุด `f`/`m`/`any`)
+- ระบุ 8 ทิศ `S SE E NE N NW W SW` เป็นตัวเดียวกัน · S หันหน้าหาผู้เล่น · SE/SW หันหน้าตามธรรมชาติ · ทิศหลัง N / NE / NW ไม่มีตาและปาก · รอยยิ้มต้องเหมือนกันเฉพาะทิศที่เห็นปาก
+- ข้อ 5 (เจ้าของอนุมัติเพิ่ม): ไม่เอ่ยชื่อของที่ไม่ต้องการ ใช้ประโยคบอกสิ่งที่ต้องการแทน "Nothing is worn across the chest or at the hips except the belt." และ "Bare head showing the whole hairstyle, empty hands." เพราะรอบ 2 เขียน "no hat / no bag" แล้วได้ทั้งหมวกและกระเป๋า
 
 ## 5. เกณฑ์ตรวจรับรอบ 2
 **Claude วัด (ตัวเลข)**
 1. ครบ 8 ทิศ `S SE E NE N NW W SW` เป็นตัวละครเดียวกัน · สูง 80–88 px · ต่างกันไม่เกิน 2 · ต้นทาง 88 ลงกรอบ 96 เท้าแถว 94 ได้โดยไม่ย่อ/ขยาย
 2. **สัดส่วนหัว 40–45%** (ทิศ S · วัดจากปลายผมบนถึงคาง) · พรอมป์สั่ง 38% เพื่อชดเชยเท่านั้น ไม่ใช่เกณฑ์รับ
-3. จุดกึ่งใส 0 · รูใส 1 px ที่ไม่ตั้งใจ: **Concept Review ≤ 1 จุด** (ภาพจาก PixelLab ก่อนเก็บงาน) · **Production Asset = 0 จุด** (ไฟล์ที่จะใส่เกม ต้องเก็บรูให้หมดก่อนส่ง)
-4. ตาหน้าตรง: ทรงเดียวกัน (ต่าง ≤ 2 px ไม่นับประกาย) · ขอบตาบนเข้มหนา ≥ 2 px · ม่านตาเขียว ≥ 3×3 px ต่อข้าง · ประกายบนซ้ายทั้ง 2 ข้าง · SE / SW เห็นตา 2 ข้าง · **ทิศหลัง N / NE / NW: ไม่มีตาและปาก** (สีม่านตา/ขนตา/ปาก = 0 px)
+3. จุดกึ่งใส 0 · รูใส 1 px ที่ไม่ตั้งใจ: **Concept Review ≤ 1 จุด** (ภาพจาก PixelLab · ต้องบันทึกตำแหน่งและสถานะ "รอแก้" · ห้ามแก้ภาพต้นฉบับในขั้นนี้) · **Production Asset = 0 จุด** (ไฟล์ที่จะใส่เกม ต้องเก็บรูให้หมดก่อนส่ง)
+4. ตาหน้าตรง: ทรงเดียวกัน (ต่าง ≤ 2 px ไม่นับประกาย) · ขอบตาบนเข้มหนา ≥ 2 px · ม่านตาเขียว ≥ 3×3 px ต่อข้าง · ประกายบนซ้ายทั้ง 2 ข้าง · S หันหาผู้เล่น · SE / SW หันหน้าตามธรรมชาติและเห็นตา 2 ข้าง · **ทิศหลัง N / NE / NW: ไม่มีตาและปาก** (สีม่านตา/ขนตา/ปาก = 0 px)
 5. ปาก: ยิ้มปิด กว้าง 3–5 px อยู่ในหน้า ไม่แตะขอบ · **ต้องสอดคล้องเฉพาะทิศที่เห็นปาก**: S / SE / SW ทรงเดียวกัน (ต่าง ≤ 1 px) · E / W ถ้าเห็นปาก ต้องเป็นยิ้มปิดแบบเดียวกัน ไม่อ้า
 6. คิ้วเห็นใน S / SE / SW
 7. ผ้าคลุมสีบ้านเห็นทั้ง 8 ทิศ (หน้า ≥ 200 px · หลัง ≥ 500 px) · เข็มกลัดทองแดงเห็นใน S / SE / SW
@@ -84,10 +86,29 @@ Original cute chibi female apprentice of a lantern academy, about 10 years old, 
 ## 7. สิ่งที่ยังไม่ทำ
 ไม่แก้ branch ของ PR #5/#6 โดยตรง (แก้ใน branch แผนงานแยกนี้ แล้วเปิด PR เข้า PR #6) · ยังไม่แก้สเปก v2 · ไม่เจนภาพ · ไม่ใช้เครดิต · ไม่เริ่ม Portrait · ไม่แตะโค้ด เซฟ Firebase · ไม่ push/merge main · ตัวรอบแรกยังเป็นตัวอ้างอิงด้านเทคนิค/สเกล
 
-## 8. แก้ตามผลตรวจ ChatGPT (14 ต.ค. · 4 จุด · Art Direction เดิมไม่เปลี่ยน)
-1. **สัดส่วนหัว:** พรอมป์คง "head about 38 percent" เป็นค่าทดลองชดเชย · ลบ "about two and three-quarter heads tall" ที่ขัดกัน · เกณฑ์รับภาพจริง = **40–45%** (เดิมเขียน 38–45%)
-2. **8 ทิศ:** พรอมป์ระบุตัวเดียวกันครบ `S SE E NE N NW W SW` (ลบ "facing the viewer straight on" ที่ขัดกับ 8 ทิศ) · ทิศหลัง N / NE / NW ไม่มีตาและปาก · ยิ้มต้องเหมือนกันเฉพาะทิศที่เห็นปาก (เกณฑ์ 5.4–5.5)
-3. **เพศ:** ระบุ "female apprentice" เหมือนรอบแรก เพื่อเทียบกันได้ (เดิม "adventurer student")
-4. **รูใส:** Concept Review ≤ 1 จุด · Production Asset = 0 จุด (เกณฑ์ 5.3)
+## 8. แก้ตาม G1.3 Final Prompt Correction (14 ต.ค. · Art Direction เดิมไม่เปลี่ยน)
+| จุด | เดิม (commit `8d1f9fd` = พรอมป์ที่ใช้สร้างรอบ 2) | ใหม่ |
+|---|---|---|
+| 1. สัดส่วนหัว | พรอมป์ "about two and three-quarter heads tall, head about 38 percent" · เกณฑ์รับ 38–45% | พรอมป์คง "head about 38 percent" เป็นค่าทดลองชดเชยอย่างเดียว · ลบ "two and three-quarter heads" ที่ขัดกัน (2.75 หัว ≈ 36%) · **เกณฑ์รับจริง 40–45%** แยกจากค่าที่สั่ง AI |
+| 2. ทิศใบหน้า | "facing the viewer straight on" · "the same small gentle closed smile in every direction" | ตัวเดียวกันครบ `S SE E NE N NW W SW` · S หันหาผู้เล่น · SE/SW หันหน้าตามธรรมชาติ · ทิศหลัง N/NE/NW ไม่มีตาและปาก · ยิ้มต้องเหมือนกันเฉพาะทิศที่เห็นปาก (เกณฑ์ 5.4–5.5) |
+| 3. เพศตัวต้นแบบ | "adventurer student" (ไม่ระบุเพศ) | "female apprentice" เหมือนรอบแรก · อายุดู 9–10 คงเดิม · ระบบสร้างตัวละครจริงยังเลือกชาย/หญิงได้ภายหลัง |
+| 4. รูใสผิดพลาด | "รูใส 1 px ≤ 1" เกณฑ์เดียว | Concept Review ≤ 1 จุด (บันทึกตำแหน่ง + สถานะรอแก้ · ห้ามแก้ภาพต้นฉบับ) · Production Asset = 0 จุด (เกณฑ์ 5.3) |
+| 5. (เจ้าของอนุมัติเพิ่มหลังเห็นผลรอบ 2) | "No bag, no pouch, no strap across the chest." · "no hat, no wings, no weapon, no lantern in hand" | "Nothing is worn across the chest or at the hips except the belt." · "Bare head showing the whole hairstyle, empty hands." (ไม่เอ่ยชื่อของที่ไม่ต้องการ) |
 
-คงเดิมทั้งหมด: Soft Heroic Pixel · อายุดู 9–10 · ผ้าคลุมสีบ้าน · เข็มกลัดโคมทองแดง · ไม่มีกระเป๋า/สายคาด · ปากไม่ใช่ตัวเลือกแต่งตัว · ต้นทาง 88 → เป้าหมาย 96 เท้า [48,94]
+คงเดิมทั้งหมด: Soft Heroic Pixel · Sprite 96×96 · ต้นทาง PixelLab 88×88 · ตัวสูง 80–88 · เท้า [48,94] · Portrait 384×384 · หัวเป้าหมาย 40–45% · ผ้าคลุมสีบ้าน · เข็มกลัดโคมทองแดง · แขนห้อยธรรมชาติ · ไม่มีกระเป๋า/สายคาด · ปากไม่ใช่ตัวเลือกแต่งตัว · ไม่ใช้ภาพ RO เป็นภาพอ้างอิงใน PixelLab · สีและธีมตาม Visual Bible · ระบบเกมเดิมทั้งหมด
+
+## 9. ผลรอบ 2 (เจ้าของกดเอง 14 ต.ค. 14:59 · พรอมป์ฉบับ `8d1f9fd` ก่อนแก้ · v3 88×88 · **ไม่ผ่าน**)
+Claude วัดจาก ZIP (ไฟล์ภาพไม่เก็บใน GitHub · ไม่แก้ภาพต้นฉบับ)
+| เกณฑ์ | ผล |
+|---|---|
+| 1. 8 ทิศ / สูง | ครบ 8 ทิศ · สูง 86–88 px ต่างกัน 2 ✓ · **แต่หมวกชนขอบบนทุกทิศ (แถวบนสุดมีสี 20–37 px · รอบแรก 0)** ✗ |
+| 2. สัดส่วนหัว | วัดตามนิยามไม่ได้ (หมวกบังปลายผม) · ยอดหมวกที่โดนตัดถึงคาง 40/86 px = 47% ✗ |
+| 3. กึ่งใส / รูใส | กึ่งใส 0 ✓ · รูใส 2 จุดใน NE ที่ขา (1 px ที่ (43,75) · 2 px ที่ (41–42,74)) สถานะ: รอแก้ ถ้าใช้ภาพนี้ |
+| 4. ตา | หน้าตรง 2 ข้างตำแหน่งสมมาตร (x 35–41 / 49–55 รอบแกน 45) ✓ · ขนตาดำหนา ✓ · ประกายบนซ้ายทั้ง 2 ข้าง ✓ · SE/SW เห็นตา 2 ข้าง ✓ · ทิศหลังสีม่านตา 0 px ✓ |
+| 5. ปาก | S ยิ้มปิดกว้าง 5 px ✓ · SE/SW เป็นจุดเล็ก ไม่ใช่ทรงเดียวกับ S ✗ |
+| 6. คิ้ว | เห็นบางส่วนใต้หน้าม้า (ก้ำกึ่ง) |
+| 7. ผ้าคลุม / เข็มกลัด | หน้า S 242 px ✓ · หลัง N 432 px (เกณฑ์ ≥ 500) ✗ · NE 571 / NW 514 ✓ · เข็มกลัดเห็นใน S/SE/SW ✓ |
+| 8. ของต้องห้าม / สี | **มีหมวกปีกกว้าง (148–566 px) และกระเป๋า + สายคาดอก** ✗ · ไม่มีอาวุธ/ตะเกียง/แสง/เงา/ตัวอักษร ✓ · SW มีสี `#F2B352` 23 px ห่างทองสัญญาณ ΔE 9.8 (< 10) ✗ · ฟ้าคริสตัล 0 ✓ |
+| 9. มือ | เห็น 2 ข้างใน S ✓ · แขนห้อยธรรมชาติ ✓ |
+
+สาเหตุที่น่าจะเป็น: คำ "adventurer" ชวนให้ใส่หมวกกับกระเป๋า และการเขียน "no hat / no bag / no strap" ทำให้ PixelLab ใส่ของนั้นเอง (รอบแรกไม่มี adventurer ก็ไม่มีหมวก) → แก้แล้วในข้อ 8 จุด 3 และ 5
