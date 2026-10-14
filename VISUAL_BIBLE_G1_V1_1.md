@@ -56,7 +56,7 @@ G1 คือการพิสูจน์ว่า **หน้าตาตั�
 **รูปร่าง:** Chibi ความสูงตัวในกรอบ 96x96 = **80–88 pixels**, หัว **40–45%** ของความสูงตัว วัดจากปลายผมบนถึงคาง (รอบแรกวัดได้ 49% = หัวโตเกิน), **แขนห้อยตามธรรมชาติ ห่างตัวเล็กน้อย เห็นมือทั้งสองข้าง** (ไม่กางแบบตัว T) เพื่อรองรับ hand grip, เท้าที่ [48,94] ทุก direction. ภาพเด็กไม่ติดหมวก ปีก ดาบ หรือเงาพื้น.
 **ใบหน้า:** ตาโตมีขนตาบนหนาสีดำคงที่และหางชี้เล็กที่หางตา, iris สองโทนแยก mask, sparkle คงที่มุมบนซ้าย, คิ้วบางนุ่ม, จมูกเล็ก, แก้มชมพู · **ปาก = ยิ้มปิดปากเล็ก ทรงเดียวกันทุกทิศที่เห็นปาก (ทิศหลัง N/NE/NW ไม่มีตาและปาก) และไม่ใช่ตัวเลือกแต่งตัว** (เจ้าของ 14 ต.ค. "ไม่ต้องเปลี่ยนปาก เพราะมันเล็กไป") · สีผิว/แก้ม 3–5 เฉด โดยไม่เผาสัดส่วนหน้า
 **ผม:** ผมเป็นกลุ่มใหญ่มีลอน/จังหวะชัด มีหน้าม้านุ่มและปอยข้างกรอบแก้ม (front/back เป็นคู่รหัสเดียวกัน), ไม่สร้างขนละเอียดกระจาย. ในตัวคอนเซปต์ใช้ทรงเดียวเพื่อวัดสัดส่วน
-**เครื่องแบบ:** เสื้อสีงาช้าง หนังน้ำตาลอุ่น (เข็มขัด ถุงมือ บูทพับขอบ), **ผ้าคลุมไหล่สั้นสีบ้าน** เห็นทั้งด้านหน้าและหลัง (สีตาม `S.house`), กระดุมทองแดง และ **เข็มกลัดทองแดงทรงกลมรูปโคมเล็ก ~4–6 px ที่อก** เป็นตรา Lantern Academy ที่อ่านออก · **ไม่มีกระเป๋า/สายคาดติดถาวร** (กระเป๋าเป็นอุปกรณ์ภายหลัง) · ไม่ใช้สีทองสัญญาณ; คอนเซปต์ตัวเปล่าไม่ถือโคม
+**เครื่องแบบ:** เสื้อสีงาช้าง หนังน้ำตาลอุ่น (เข็มขัด ถุงมือ บูทพับขอบ), **ผ้าคลุมยาวสีบ้าน = ชุดนักเรียนทางการของ Lantern Academy** (เจ้าของล็อก 14 ต.ค. · ยึดรูปทรงและความยาวจาก G1 รอบ 5 ไฟล์ _4 ไม่ออกแบบใหม่) เห็นทั้งด้านหน้าและหลัง (สีตาม `S.house` ด้วย Palette บ้านเดิม ไม่เปลี่ยนค่าที่บันทึกในเซฟ), กระดุมทองแดง และ **เข็มกลัดทองแดงทรงกลมรูปโคมเล็ก ~4–6 px ที่อก** เป็นตรา Lantern Academy ที่อ่านออก · **ไม่มีกระเป๋า/สายคาดติดถาวร** (กระเป๋าเป็นอุปกรณ์ภายหลัง) · ไม่ใช้สีทองสัญญาณ; คอนเซปต์ตัวเปล่าไม่ถือโคม
 **สีและเรื่องราว:** ความอบอุ่นของแสงโคม + เงาพลัมเย็นเล็กน้อย; ไม่มีความดุดันหรืออาวุธติดถาวรบน base
 **G1 5 View Sheet:** S front 3/4 top-down, SE front diagonal, E side, NE rear diagonal, N back, เว้นช่องและแสดงพื้นหลัง neutral/transparent; ตัวละครต้องเป็นคนเดิมในทุกภาพ ผม/ชุด/ตา/สัดส่วนตรงกัน
 **G1 vs G2:** 5-view sheet อาจเป็นภาพคอนเซปต์ ไม่ใช่ Sprite Sheet production. หลัง G1 อนุมัติจึงผลิต 8-direction idle/walk/hold พร้อม 96px grid/feet metadata
@@ -75,7 +75,7 @@ G1 คือการพิสูจน์ว่า **หน้าตาตั�
 
 ในมือถือแนวนอนเล็ก 740×360 / 844×390 / 915×412 **ให้ความสำคัญกับไม่บังหน้าต่าง/ปุ่มก่อน**; หากจำเป็นต้องย่อ ใช้ nearest-neighbor/pixelated หรือ render ไป canvas ที่มีขนาดพื้นผิวเหมาะสมและ **ทดสอบภาพจริง**. การสเกล CSS, device DPR, zoom และการปัด subpixel อาจทำให้ไม่ pixel-perfect แม้คำนวณสัดส่วนถูก
 
-**G1:** เพียงกำหนดกติกา, ภาพ Portrait Style Master 1 ภาพหลังอนุมัติราคา; **G4:** ทดสอบ Android จริง 740×360, 844×390, 915×412, iPad 1180×820 และ PC 1920×1080
+**G1:** เพียงกำหนดกติกา, ภาพ Portrait Style Master 1 ภาพหลังอนุมัติราคา (เตรียมพรอมป์ ค่าตั้ง และภาพอ้างอิงแล้วใน `CHARACTER_ART_DIRECTION_V2.md` ข้อ 15 · ยังไม่ Generate); **G4:** ทดสอบ Android จริง 740×360, 844×390, 915×412, iPad 1180×820 และ PC 1920×1080
 
 ## 5. Material Palette Sheet v1.2 — รักษาค่าสีจริงจากเกม
 
@@ -89,7 +89,7 @@ G1 คือการพิสูจน์ว่า **หน้าตาตั�
 - Silver clue **#B9B7CF** แทนตัวอย่างใหม่เก่า `#B8C3CC` ตาม ART_DIRECTION เดิม; แสงโคม **#FFB36B/#FFF0C9** ทดลองร่วมกับ Gold UI `#FFC857`
 - **ข้อยกเว้น ΔE00:** Sun บ้านเดิม vs Gold UI บาง shade≈3.5, Leaf vs Grass≈9.0, Black Hair vs Black Iris≈1.7; **ห้ามทำให้ทุกคู่ผ่านด้วยการเปลี่ยนสีที่ผูกกับเซฟ** ใช้ shape/outline/placement แทน
 
-**G1 selected materials สำหรับตัวละครต้นแบบ:** ผม **Brown**, ม่านตา **Green**, สีผิว **Medium**, ผ้าคลุมไหล่สีบ้าน **Wing Blue** (ทั้งผืนเป็นวัสดุ "บ้าน"), กระดุมและเข็มกลัดโคมเป็น **Copper Trim** (`#915B49` `#BB7A57` · วัสดุคงที่ ไม่เปลี่ยนสี) ในปริมาณน้อย. วัสดุนี้ใช้แยกชั้นสีและตรวจหน้าตาตอนซูม 75/100 ได้ชัด
+**G1 selected materials สำหรับตัวละครต้นแบบ:** ผม **Brown**, ม่านตา **Green**, สีผิว **Medium**, ผ้าคลุมยาวสีบ้าน **Wing Blue** (ทั้งผืนเป็นวัสดุ "บ้าน"), กระดุมและเข็มกลัดโคมเป็น **Copper Trim** (`#915B49` `#BB7A57` · วัสดุคงที่ ไม่เปลี่ยนสี) ในปริมาณน้อย. วัสดุนี้ใช้แยกชั้นสีและตรวจหน้าตาตอนซูม 75/100 ได้ชัด
 
 ## 6. Asset Contract และ Quality Gate G1
 
@@ -133,7 +133,7 @@ G1 คือการพิสูจน์ว่า **หน้าตาตั�
 3. **G1.1 PRICE GATE**: เจ้าของส่งภาพหน้า Account เฉพาะยอด, `Costs N generations` ของงาน v3, ราคา S-XL 384 (ไม่มี key); ChatGPT เทียบกับเพดาน 65 แล้ว **ขออนุมัติราคางานแรก**; ห้าม Generate ก่อน
 4. **G1.2 (AFTER PRICE APPROVAL)**: Generate รอบแรกเพียงงานเดียว; ส่ง ZIP/PNG ให้ ChatGPT ตรวจสไตล์และ Claude วัด 5 view/height/feet/alpha; เทียบ 75%/100%. ไม่เปิดงานอื่นเอง
 5. **G1.3 (14 ต.ค. อนุมัติ)**: Character Art Direction v2 + พรอมป์รอบ 2 (ข้อ 9) · ต้องส่งราคาจริงก่อนกดทุกครั้ง · รอบแรกเป็น Technical Reference · **ตัวต้นแบบที่เจ้าของเลือก = รอบ 5 ไฟล์ _4** (14 ต.ค. · ดู `CHARACTER_ART_DIRECTION_V2.md` ข้อ 13)
-6. **G1.4**: Portrait 384 ภายใต้ราคา/การอนุมัติใหม่ หลังรับตัวต้นแบบรอบ 2 แล้ว; ตรวจ detail จริงไม่ upscale
+6. **G1.4**: Portrait 384 ภายใต้ราคา/การอนุมัติใหม่ หลังรับตัวต้นแบบแล้ว (ตัวต้นแบบ = รอบ 5 ไฟล์ _4); ตรวจ detail จริงไม่ upscale · **เตรียมเอกสารแล้ว รอภาพหน้าจอราคาและการอนุมัติ**
 7. **G1.5**: 128px static comparator 1 ภาพ ภายใต้อนุมัติ; เปรียบเทียบที่ขนาดแสดงผลเดียวกัน; ไม่สร้าง 8-direction 128
 8. **G1.6**: เจ้าของลงมติ visual identity + ตัวละคร 96 + palette; ผ่านแล้วไป G2 Vertical Slice
 
@@ -150,6 +150,7 @@ G1 คือการพิสูจน์ว่า **หน้าตาตั�
 One original cute chibi female apprentice of a lantern academy, about 10 years old, friendly and brave, drawn as a single full-body figure standing idle in a relaxed confident stance. Proportions: head about 38 percent of the total height, slim arms and legs that read clearly. Arms hang naturally a little away from the sides, both hands visible and not touching the body. Beautiful expressive face: large eyes with a thick solid black upper lash line and a tiny outer flick, a two-tone green iris with a darker pupil, one small white highlight at the upper left of each eye, thin soft eyebrows, a tiny nose, soft pink cheeks and a small closed smile with both corners turned up. Chestnut brown hair with short soft bangs that stop above thin brown eyebrows, and side locks that frame the cheeks, drawn in chunky clean clusters. Ivory academy tunic with a short layered hem, warm brown leather belt, gloves and cuffed boots, small copper buttons. A medium blue short capelet that covers only the shoulders and upper chest and ends at the elbows, clearly visible from the front and the back, fastened at the chest with a small round muted copper badge shaped like a lantern. Nothing is worn across the chest or at the hips except the belt. Dark plum outlines, light from the upper left, three to four shading steps per material, crisp square pixels, a solid closed silhouette. Bare head showing the whole hairstyle, empty hands. Full body centered on a transparent background. No floor, no cast shadow, no glow effects, no text.
 ```
 - 1,528/2,000 ตัวอักษร · คำต้องห้าม 0 · ไม่มีชื่อเกมหรือตัวละครของคนอื่น · ไม่มีคำ hat / bag / pouch / strap / weapon / wings / adventurer / direction / view
+- **หมายเหตุ (14 ต.ค. ค่ำ):** พรอมป์นี้ใช้สร้างตัวต้นแบบ _4 แล้ว · ผ้าคลุมล็อกเป็น **แบบยาว** ตาม _4 → ถ้าจะเจน Sprite ใหม่ ต้องเปลี่ยนวลี "short capelet … ends at the elbows" ก่อน
 - "head about 38 percent" เป็นค่าทดลองชดเชย เพราะรอบแรกสั่ง 40–45% แต่ได้จริง 49% · **เกณฑ์รับจริง 40–45%** · ลบ "two and three-quarter heads" ที่ขัดกันออกแล้ว
 - ระบุ female apprentice เหมือนรอบแรกเพื่อเทียบได้ (เฉพาะตัวต้นแบบ ระบบสร้างตัวละครยังเลือกชาย/หญิงได้) · **ไม่เขียนเรื่องทิศในพรอมป์** (รอบ 3 เขียนแล้วได้แผ่นรวมหลายตัว) กติกาทิศใช้เป็นเกณฑ์ตรวจรับในข้อ 6 เท่านั้น · เข็มกลัด "muted copper"
 - ข้อ 5 (เจ้าของอนุมัติเพิ่มหลังเห็นผลรอบ 2): ไม่เอ่ยชื่อของที่ไม่ต้องการ (หมวก กระเป๋า สายคาด) ใช้ประโยคบอกสิ่งที่ต้องการแทน
