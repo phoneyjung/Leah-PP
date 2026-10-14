@@ -134,7 +134,7 @@ G1 คือการพิสูจน์ว่า **หน้าตาตั�
 4. **G1.2 (AFTER PRICE APPROVAL)**: Generate รอบแรกเพียงงานเดียว; ส่ง ZIP/PNG ให้ ChatGPT ตรวจสไตล์และ Claude วัด 5 view/height/feet/alpha; เทียบ 75%/100%. ไม่เปิดงานอื่นเอง
 5. **G1.3 (14 ต.ค. อนุมัติ)**: Character Art Direction v2 + พรอมป์รอบ 2 (ข้อ 9) · ต้องส่งราคาจริงก่อนกดทุกครั้ง · รอบแรกเป็น Technical Reference · **ตัวต้นแบบที่เจ้าของเลือก = รอบ 5 ไฟล์ _4** (14 ต.ค. · ดู `CHARACTER_ART_DIRECTION_V2.md` ข้อ 13)
 6. **G1.4**: Portrait 384 ภายใต้ราคา/การอนุมัติใหม่ หลังรับตัวต้นแบบแล้ว (ตัวต้นแบบ = รอบ 5 ไฟล์ _4); ตรวจ detail จริงไม่ upscale · **✅ 14 ต.ค. เจ้าของรับ Portrait รอบ 1 เป็น Style Master (สำเนาโปร่งใส · ผลวัดใน `CHARACTER_ART_DIRECTION_V2.md` ข้อ 16)**
-7. **G1.5**: 128px static comparator 1 ภาพ ภายใต้อนุมัติ; เปรียบเทียบที่ขนาดแสดงผลเดียวกัน; ไม่สร้าง 8-direction 128 · **ทำแล้ว 14 ต.ค.** (S-XL Pro 128 · 4 แบบ · 10 generations · เจ้าของเลือกแบบ 1 · ผลใน `CHARACTER_ART_DIRECTION_V2.md` ข้อ 18) · รอเจ้าของล็อกสเกล
+7. **G1.5**: 128px static comparator 1 ภาพ ภายใต้อนุมัติ; เปรียบเทียบที่ขนาดแสดงผลเดียวกัน; ไม่สร้าง 8-direction 128 · **ทำแล้ว 14 ต.ค.** (S-XL Pro 128 · 4 แบบ · 10 generations · เจ้าของเลือกแบบ 1 · ผลใน `CHARACTER_ART_DIRECTION_V2.md` ข้อ 18) · **เจ้าของล็อกสเกล 96 (14 ต.ค.)**
 8. **G1.6**: เจ้าของลงมติ visual identity + ตัวละคร 96 + palette; ผ่านแล้วไป G2 Vertical Slice
 
 ## 9. PixelLab — Prompt ตัวต้นแบบ
