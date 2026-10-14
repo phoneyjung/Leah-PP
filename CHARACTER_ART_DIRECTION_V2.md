@@ -1,5 +1,6 @@
 # Lantern Academy · Character Art Direction v2 "Soft Heroic Pixel" (G1.3)
 14 ต.ค. 2569 · Claude · **เจ้าของอนุมัติตามร่างทั้งหมด 14 ต.ค.** (ร่างนี้ + พรอมป์รอบ 2) · ไม่ใช้เครดิต · ไม่สร้างภาพ · ไม่แก้โค้ดเกม
+**ฉบับแก้ 14 ต.ค. (บ่าย):** แก้ 4 จุดตามผลตรวจ ChatGPT (ข้อ 8) · Art Direction ที่อนุมัติไม่เปลี่ยน · **พรอมป์ฉบับแก้รอเจ้าของอนุมัติก่อนตรวจราคาและกดสร้าง**
 อ่านแล้ว: PR #6 `579edc0` (แผน v1.2 ข้อ 15 · Visual Bible v1.2 · Material Palette v1.2) · PR #5 สเปก v2 · CLAUDE.md · AGENTS.md · ผลวัดรอบแรก (G1.1/G1.2) · ภาพอ้างอิง RO The New World 31 ภาพ
 
 ## 1. แนวภาพ (สรุป)
@@ -13,7 +14,7 @@
 | สัดส่วนหัว (ปลายผมบน → คาง) | **49%** (~2 หัว) | **40–45%** (~2.3–2.5 หัว) |
 | แขน | กางออกข้างเหมือนตัว T | ห้อยตามธรรมชาติ ห่างตัวเล็กน้อย เห็นมือ 2 ข้าง |
 | หน้า | ตาสวย ขอบตาดำ | + ขนตาบนหนามีหางชี้เล็ก · คิ้วบางนุ่ม · จมูกเล็ก · แก้มชมพู |
-| ปาก | หน้าตรงยิ้ม ทิศเฉียงเป็นขีด | **ยิ้มปิดปากเล็ก ทรงเดียวกันทุกทิศ** · ไม่ใช่ตัวเลือกแต่งตัว (เจ้าของ 14 ต.ค.) |
+| ปาก | หน้าตรงยิ้ม ทิศเฉียงเป็นขีด | **ยิ้มปิดปากเล็ก ทรงเดียวกันทุกทิศที่เห็นปาก** (ทิศหลัง N/NE/NW ไม่มีตาและปาก) · ไม่ใช่ตัวเลือกแต่งตัว (เจ้าของ 14 ต.ค.) |
 | ผม | ปอยก้อนสวย | + ปอยข้างกรอบแก้ม |
 | ผ้าสีบ้าน | หน้าเป็นผ้าพันคอ หลังกลายเป็นผ้าคลุม (ไม่ตรงกัน) | **ผ้าคลุมไหล่สั้นสีบ้าน** เห็นทั้งหน้าและหลัง |
 | ตรา Lantern Academy | มองไม่ออก | **เข็มกลัดทองแดงรูปโคมกลม ~4–6 px** ที่อกตรงที่กลัดผ้าคลุม |
@@ -27,7 +28,7 @@
 **VISUAL_BIBLE_G1_V1_1.md** — ข้อ 1–6 ด้านล่าง **แก้แล้วใน branch `plan/g1-3-character-art-direction-v2`** (พร้อมแก้ข้อ 7 ราคาจริง และข้อ 8 ลำดับขั้น G1.3–G1.6)
 1. ข้อ 1: เพิ่มชื่อแนวตัวละคร "Soft Heroic Pixel" 1 บรรทัด
 2. ข้อ 2: เพิ่มกติกาภาพอ้างอิง RO (แนวทางเท่านั้น · ไม่ใช้ใน PixelLab · ไม่ลง GitHub)
-3. ข้อ 3: อายุ ~9–10 · หัว 40–45% วัดจากปลายผมถึงคาง (รอบแรก 49% = หัวโตเกิน) · แขนธรรมชาติ · ไม่มีกระเป๋า · ผ้าคลุมไหล่สีบ้าน · เข็มกลัดโคมอ่านออก · ภาษาหน้า (ขนตามีหาง คิ้วบาง จมูกเล็ก) · ปากยิ้มปิดทรงเดียวทุกทิศและไม่ใช่ตัวเลือก
+3. ข้อ 3: อายุ ~9–10 · หัว 40–45% วัดจากปลายผมถึงคาง (รอบแรก 49% = หัวโตเกิน) · แขนธรรมชาติ · ไม่มีกระเป๋า · ผ้าคลุมไหล่สีบ้าน · เข็มกลัดโคมอ่านออก · ภาษาหน้า (ขนตามีหาง คิ้วบาง จมูกเล็ก) · ปากยิ้มปิดทรงเดียวทุกทิศที่เห็นปากและไม่ใช่ตัวเลือก
 4. ข้อ 5: เข็มกลัด/กระดุมใช้ทองแดง · ผ้าคลุมใช้ ramp สีบ้าน
 5. ข้อ 6: แก้ข้อความ "PixelLab v3 ตั้ง 96 ไม่ได้" → **มีปุ่ม 96 แต่เลือก 88 เพราะตัวสูงประมาณ 93–95% ของกรอบ** · เพิ่มเกณฑ์หน้าแบบตัวเลข (ข้อ 5 ของร่างนี้)
 6. ข้อ 9: เปลี่ยนพรอมป์เป็นรอบ 2 (ข้อ 4 ของร่างนี้)
@@ -36,23 +37,25 @@
 7. ข้อ 3–5: ปากไม่ใช่ชิ้นแต่งตัว → รวมปากเข้าชั้นหน้า · ตา ≤ 4 ทรง + สี 5 (EYEC) · แท็บหน้าสร้างตัว: ทรงผม ≤ 8 + สีผม · ตา ≤ 4 + สีตา · ผิว 4 · ของบนหัว (ไม่ใส่ + ≤ 5 ของเราเอง) · ชุด 2 + แบบที่ 1/2 · ไม่มีแท็บปาก
 8. ข้อ 8 Portrait: 256 → 384 (ตามที่ล็อกแล้ว)
 
-## 4. Prompt PixelLab รอบ 2 (1 ฉบับ · อนุมัติแล้ว · ยังไม่กด)
+## 4. Prompt PixelLab รอบ 2 (1 ฉบับ · **ฉบับแก้ 4 จุดตามผลตรวจ ChatGPT รอเจ้าของอนุมัติ** · ยังไม่กด)
 ตั้งค่า (เหมือนรอบแรก): Create from Text · Humanoid · Generation Mode **v3** · Camera **Low Top-Down** · Sprite Size **88 × 88** · Detail **Highly detailed** · Outline **Default** · ไม่ใส่ภาพอ้างอิง · ไม่กด ✨
 ราคา: รอบแรกหน้าจอแสดง **2 generations** → **ต้องถ่ายบรรทัด "Costs N generations" ส่งมาก่อนกดทุกครั้ง** · ถ้าเป็น 2 → สะสม 4/65
 
 ```text
-Original cute chibi adventurer student of a lantern academy, about 10 years old, friendly and brave, standing idle and facing the viewer straight on in a relaxed confident stance. Proportions: about two and three-quarter heads tall, head about 38 percent of the total height, slim arms and legs that read clearly. Arms hang naturally a little away from the sides, both hands visible and not touching the body. Beautiful expressive face: large eyes with a thick solid black upper lash line and a tiny outer flick, a two-tone green iris with a darker pupil, one small white highlight at the upper left of each eye, thin soft eyebrows, a tiny nose, soft pink cheeks, and the same small gentle closed smile in every direction. Chestnut brown hair with soft bangs and side locks that frame the cheeks, drawn in chunky clean clusters. Ivory academy tunic with a short layered hem, warm brown leather belt, gloves and cuffed boots, small copper buttons. A medium blue short capelet over both shoulders, clearly visible from the front and the back, fastened at the chest with a round copper badge shaped like a small lantern. No bag, no pouch, no strap across the chest. Dark plum outlines, light from the upper left, three to four shading steps per material, crisp square pixels, a solid closed silhouette. Transparent background. No floor, no cast shadow, no hat, no wings, no weapon, no lantern in hand, no glow effects, no text.
+Original cute chibi female apprentice of a lantern academy, about 10 years old, friendly and brave, standing idle in a relaxed confident stance. Show the same character in all eight directions: S, SE, E, NE, N, NW, W, SW. Proportions: head about 38 percent of the total height, slim arms and legs that read clearly. Arms hang naturally a little away from the sides, both hands visible and not touching the body. Beautiful expressive face: large eyes with a thick solid black upper lash line and a tiny outer flick, a two-tone green iris with a darker pupil, one small white highlight at the upper left of each eye, thin soft eyebrows, a tiny nose, soft pink cheeks, and a small gentle closed smile that stays the same in every direction where the mouth is visible. In the back views N, NE and NW the face is hidden: no eyes and no mouth. Chestnut brown hair with soft bangs and side locks that frame the cheeks, drawn in chunky clean clusters. Ivory academy tunic with a short layered hem, warm brown leather belt, gloves and cuffed boots, small copper buttons. A medium blue short capelet over both shoulders, clearly visible from the front and the back, fastened at the chest with a round copper badge shaped like a small lantern. No bag, no pouch, no strap across the chest. Dark plum outlines, light from the upper left, three to four shading steps per material, crisp square pixels, a solid closed silhouette. Transparent background. No floor, no cast shadow, no hat, no wings, no weapon, no lantern in hand, no glow effects, no text.
 ```
-- 1,424/2,000 ตัวอักษร · คำต้องห้าม 0 · ไม่มีชื่อเกมหรือตัวละครของคนอื่น
-- ตั้งใจเขียน "head about 38 percent / two and three-quarter heads" ต่ำกว่าเป้า เพราะรอบแรกเขียน 40–45% แต่ได้จริง 49% (PixelLab ทำหัวโตเกินที่สั่ง)
+- 1,539/2,000 ตัวอักษร · คำต้องห้าม 0 · ไม่มีชื่อเกมหรือตัวละครของคนอื่น
+- **"head about 38 percent" เป็นค่าทดลองชดเชย** เพราะรอบแรกสั่ง 40–45% แต่ได้จริง 49% (PixelLab ทำหัวโตเกินที่สั่ง) · **เกณฑ์รับภาพจริงยังเป็น 40–45%** (ข้อ 5.2) · ลบคำว่า "two and three-quarter heads" ออกแล้วเพราะขัดกับ 38% (2.75 หัว ≈ 36%)
+- ระบุ **female apprentice** ให้ตรงกับรอบแรก เพื่อเทียบกันได้ตรง
+- ระบุ 8 ทิศ `S SE E NE N NW W SW` เป็นตัวเดียวกัน · ทิศหลัง N / NE / NW ไม่มีตาและปาก · รอยยิ้มต้องเหมือนกันเฉพาะทิศที่เห็นปาก
 
 ## 5. เกณฑ์ตรวจรับรอบ 2
 **Claude วัด (ตัวเลข)**
-1. ครบ 8 ทิศ · สูง 80–88 px · ต่างกันไม่เกิน 2 · ลงกรอบ 96 เท้าแถว 94 ได้โดยไม่ย่อ/ขยาย
-2. **สัดส่วนหัว 38–45%** (ทิศ S)
-3. จุดกึ่งใส 0 · รูใส 1 px ที่ไม่ตั้งใจ ≤ 1
-4. ตาหน้าตรง: ทรงเดียวกัน (ต่าง ≤ 2 px ไม่นับประกาย) · ขอบตาบนเข้มหนา ≥ 2 px · ม่านตาเขียว ≥ 3×3 px ต่อข้าง · ประกายบนซ้ายทั้ง 2 ข้าง · ทิศเฉียงเห็นตา 2 ข้าง
-5. ปาก: ยิ้มปิด กว้าง 3–5 px อยู่ในหน้า ไม่แตะขอบ · S / SE / SW ทรงเดียวกัน (ต่าง ≤ 1 px)
+1. ครบ 8 ทิศ `S SE E NE N NW W SW` เป็นตัวละครเดียวกัน · สูง 80–88 px · ต่างกันไม่เกิน 2 · ต้นทาง 88 ลงกรอบ 96 เท้าแถว 94 ได้โดยไม่ย่อ/ขยาย
+2. **สัดส่วนหัว 40–45%** (ทิศ S · วัดจากปลายผมบนถึงคาง) · พรอมป์สั่ง 38% เพื่อชดเชยเท่านั้น ไม่ใช่เกณฑ์รับ
+3. จุดกึ่งใส 0 · รูใส 1 px ที่ไม่ตั้งใจ: **Concept Review ≤ 1 จุด** (ภาพจาก PixelLab ก่อนเก็บงาน) · **Production Asset = 0 จุด** (ไฟล์ที่จะใส่เกม ต้องเก็บรูให้หมดก่อนส่ง)
+4. ตาหน้าตรง: ทรงเดียวกัน (ต่าง ≤ 2 px ไม่นับประกาย) · ขอบตาบนเข้มหนา ≥ 2 px · ม่านตาเขียว ≥ 3×3 px ต่อข้าง · ประกายบนซ้ายทั้ง 2 ข้าง · SE / SW เห็นตา 2 ข้าง · **ทิศหลัง N / NE / NW: ไม่มีตาและปาก** (สีม่านตา/ขนตา/ปาก = 0 px)
+5. ปาก: ยิ้มปิด กว้าง 3–5 px อยู่ในหน้า ไม่แตะขอบ · **ต้องสอดคล้องเฉพาะทิศที่เห็นปาก**: S / SE / SW ทรงเดียวกัน (ต่าง ≤ 1 px) · E / W ถ้าเห็นปาก ต้องเป็นยิ้มปิดแบบเดียวกัน ไม่อ้า
 6. คิ้วเห็นใน S / SE / SW
 7. ผ้าคลุมสีบ้านเห็นทั้ง 8 ทิศ (หน้า ≥ 200 px · หลัง ≥ 500 px) · เข็มกลัดทองแดงเห็นใน S / SE / SW
 8. ไม่มีกระเป๋า/สายคาด/หมวก/อาวุธ/ตะเกียง/แสง/เงา/ตัวอักษร · ไม่มีสีที่ห่าง `#FFC857` หรือ `#5FE0FF` น้อยกว่า ΔE 10
@@ -80,3 +83,11 @@ Original cute chibi adventurer student of a lantern academy, about 10 years old,
 
 ## 7. สิ่งที่ยังไม่ทำ
 ไม่แก้ branch ของ PR #5/#6 โดยตรง (แก้ใน branch แผนงานแยกนี้ แล้วเปิด PR เข้า PR #6) · ยังไม่แก้สเปก v2 · ไม่เจนภาพ · ไม่ใช้เครดิต · ไม่เริ่ม Portrait · ไม่แตะโค้ด เซฟ Firebase · ไม่ push/merge main · ตัวรอบแรกยังเป็นตัวอ้างอิงด้านเทคนิค/สเกล
+
+## 8. แก้ตามผลตรวจ ChatGPT (14 ต.ค. · 4 จุด · Art Direction เดิมไม่เปลี่ยน)
+1. **สัดส่วนหัว:** พรอมป์คง "head about 38 percent" เป็นค่าทดลองชดเชย · ลบ "about two and three-quarter heads tall" ที่ขัดกัน · เกณฑ์รับภาพจริง = **40–45%** (เดิมเขียน 38–45%)
+2. **8 ทิศ:** พรอมป์ระบุตัวเดียวกันครบ `S SE E NE N NW W SW` (ลบ "facing the viewer straight on" ที่ขัดกับ 8 ทิศ) · ทิศหลัง N / NE / NW ไม่มีตาและปาก · ยิ้มต้องเหมือนกันเฉพาะทิศที่เห็นปาก (เกณฑ์ 5.4–5.5)
+3. **เพศ:** ระบุ "female apprentice" เหมือนรอบแรก เพื่อเทียบกันได้ (เดิม "adventurer student")
+4. **รูใส:** Concept Review ≤ 1 จุด · Production Asset = 0 จุด (เกณฑ์ 5.3)
+
+คงเดิมทั้งหมด: Soft Heroic Pixel · อายุดู 9–10 · ผ้าคลุมสีบ้าน · เข็มกลัดโคมทองแดง · ไม่มีกระเป๋า/สายคาด · ปากไม่ใช่ตัวเลือกแต่งตัว · ต้นทาง 88 → เป้าหมาย 96 เท้า [48,94]
