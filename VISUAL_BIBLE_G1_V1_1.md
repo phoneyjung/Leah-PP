@@ -132,7 +132,7 @@ G1 คือการพิสูจน์ว่า **หน้าตาตั�
 2. **G1.1 PREPARED (NO CREDIT)**: Bible v1.2 + Material Palette Sheet v1.2 + **PixelLab prompt เดียว** สำหรับตัวละคร 88px source/96 target ตามข้อ 9; เจ้าของตรวจสไตล์และยอดเครดิตก่อน
 3. **G1.1 PRICE GATE**: เจ้าของส่งภาพหน้า Account เฉพาะยอด, `Costs N generations` ของงาน v3, ราคา S-XL 384 (ไม่มี key); ChatGPT เทียบกับเพดาน 65 แล้ว **ขออนุมัติราคางานแรก**; ห้าม Generate ก่อน
 4. **G1.2 (AFTER PRICE APPROVAL)**: Generate รอบแรกเพียงงานเดียว; ส่ง ZIP/PNG ให้ ChatGPT ตรวจสไตล์และ Claude วัด 5 view/height/feet/alpha; เทียบ 75%/100%. ไม่เปิดงานอื่นเอง
-5. **G1.3 (14 ต.ค. อนุมัติ)**: Character Art Direction v2 + พรอมป์รอบ 2 (ข้อ 9) · ต้องส่งราคาจริงก่อนกดทุกครั้ง · รอบแรกเป็น Technical Reference
+5. **G1.3 (14 ต.ค. อนุมัติ)**: Character Art Direction v2 + พรอมป์รอบ 2 (ข้อ 9) · ต้องส่งราคาจริงก่อนกดทุกครั้ง · รอบแรกเป็น Technical Reference · **ตัวต้นแบบที่เจ้าของเลือก = รอบ 5 ไฟล์ _4** (14 ต.ค. · ดู `CHARACTER_ART_DIRECTION_V2.md` ข้อ 13)
 6. **G1.4**: Portrait 384 ภายใต้ราคา/การอนุมัติใหม่ หลังรับตัวต้นแบบรอบ 2 แล้ว; ตรวจ detail จริงไม่ upscale
 7. **G1.5**: 128px static comparator 1 ภาพ ภายใต้อนุมัติ; เปรียบเทียบที่ขนาดแสดงผลเดียวกัน; ไม่สร้าง 8-direction 128
 8. **G1.6**: เจ้าของลงมติ visual identity + ตัวละคร 96 + palette; ผ่านแล้วไป G2 Vertical Slice
