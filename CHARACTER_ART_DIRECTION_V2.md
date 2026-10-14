@@ -210,7 +210,8 @@ Claude วัดจาก ZIP (ไฟล์ภาพไม่เก็บใน 
 **เครื่องมือ (ตรวจจากคู่มือ PixelLab `docs/tools/create-sl-image-pro` · 14 ต.ค.):** **Create S-XL image (Pro)**
 - ขนาด 16–512 px (สี่เหลี่ยมจัตุรัสสูงสุด 512×512) · ตัวเลือก: Description · **No Background** · **Reference Images (สูงสุด 4)** · Style Image + Style Options (palette / outline / detail / shading) · Seed
 - ราคาตามขนาดผืน: **342–512 px = 1 ภาพ 25 generations** (257–341 = 15 · 171–256 = 10) · คู่มือ **ไม่ได้ระบุว่าใส่ภาพอ้างอิงแล้วคิดเพิ่ม** → ต้องดูบรรทัดราคาบนหน้าจอจริง
-- เครื่องมืออื่นใช้ไม่ได้: Pixflux (Tier 1 สูงสุด 320×320) · Create large image (สูงสุดพื้นที่ 200×200)
+- บัญชีเจ้าของเป็น **Tier 2 (Pixel Artisan)** · โควตาเดือน 4,700 generations รีเซ็ต 23 ต.ค. (ภาพหน้าจอ 20:35) → Pixflux ทำได้ถึง 400×400 แต่คู่มือไม่บอกราคา จึงยังใช้ S-XL Pro ตามแผน · Create large image สูงสุดพื้นที่ 200×200 (ใช้ไม่ได้)
+- ⚠️ 20:34 ภาพอ้างอิงถูกอัปผิดช่องเป็น **Style image** → ขนาดถูกบังคับเป็น 512 (ตัวเลือกเล็กกว่าเป็นสีเทา) และติ๊กลอก palette/outline/detail/shading อัตโนมัติ · ราคาที่เห็น 25 generations · ให้ย้ายไปช่อง Reference images ก่อนกด
 - แท็บ "Portrait & Vocal Animation (EXPERIMENTAL)" ในหน้าตัวละคร: คู่มือไม่มีข้อมูลขนาด/ราคา → ไม่ใช้ในรอบนี้
 
 **ใช้ _4 เป็นภาพอ้างอิงได้ไหม:** คู่มือบอกว่า S-XL รับ Reference Images ได้ 4 ภาพเพื่อ "guide generation" · ไม่ได้ระบุขนาดภาพอ้างอิง
