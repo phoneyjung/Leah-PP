@@ -1,6 +1,7 @@
-# LANTERN ACADEMY — VISUAL BIBLE G1 v1.1
+# LANTERN ACADEMY — VISUAL BIBLE G1 v1.2
 **วันที่จัดทำ:** 14 ต.ค. 2026
-**สถานะ:** G1 PREPARATION / เอกสารและ Prompt Spec เท่านั้น / ไม่มีภาพใหม่ ไม่มีโค้ดเกมใหม่ / ห้าม Generate ก่อนแจ้งราคาและเจ้าของอนุมัติ
+**สถานะ:** G1.0 preflight reviewed / G1.1 first Prompt prepared / ยังไม่สร้างภาพ ไม่ใช้เครดิต ไม่แก้โค้ดเกม / ห้าม Generate ก่อนแจ้งราคาจริงและเจ้าของอนุมัติ
+**สีวัสดุและตารางสีที่มีผล:** `G1_MATERIAL_PALETTE_V1_2.md` (ตารางอ้างอิงล่าสุด; คงลำดับสีเดิมทั้งหมด)  
 **ใช้คู่กับ:** `GAME_REBOOT_MASTER_PLAN_2026-10-13.md` (PR #6), `DESIGN_CHARACTER_SYSTEM_SPEC_V2.md` (PR #5), `ART_DIRECTION.md`, `ART_GUIDE.md`, `SCENE_GUIDE.md`, `CLAUDE.md`, `AGENTS.md`.
 
 ## 0. จุดมุ่งหมาย G1 และเงื่อนไขห้ามข้าม
@@ -26,20 +27,23 @@ G1 คือการพิสูจน์ว่า **หน้าตาตั�
 4. “Modular & mobile”: แยกชิ้นงานและ color regions ชัด มีหน้าจอ Portrait ขยาย; ยืนรวม 4 ตัวแล้วเด็กรู้ทันทีว่าตัวเองคือใคร
 5. “Performance measured”: ใช้ภาพเป็นช่วงโหลดเมื่อใช้และทดสอบที่ซูม 75% / 100%; ไม่บีบของทั้งหมดเป็น PWA initial download
 
-## 2. Common Visual Contract
+## 2. Common Visual Contract (G1.0 corrected)
 
-- Camera direction: `S SE E NE N NW W SW` ตามเกมปัจจุบัน. G1 ขอ **5 รูปมุมสำหรับตรวจ** (S, SE, E, NE, N) เพื่อเห็นรูปหน้า/โครงหน้า/หลัง. ชุด gameplay ใน G2–G5 ต้องมีภาพวาดทั้ง 8 ทิศสำหรับชิ้นที่ไม่สมมาตร; ไม่ปล่อยให้ mirroring ผิดด้าน
-- Pixel outline หลัก: `#3A1E3F` (พลัม) และน้ำหนักแนวเส้นคงที่ทั้งโลก; **upper eyelid / eyelashes = fixed black** (ตัวอย่าง `#101016`, ไม่เปลี่ยนเมื่อเปลี่ยนสีม่านตา)
-- Main light มาจากซ้ายบน; 3–4 shading steps ต่อวัสดุเท่าที่อ่านบนจอได้
-- 60% local body/nature/material identity; 30% Lantern Academy color DNA/shadows; 10% story/interactive accents
-- สีเขียวหม่น `#4F6E5E` และเขียวสด `#6FB96A` ใช้กับโลกแสงหรี่/แสงกลับ; ครีม `#F3E3C3`, น้ำตาลไม้ `#A8744A`, เงาม่วง `#4B3F72`
-- Semantic colors **ห้ามสับสน**:
-  - `#FFC857` ทอง = **แตะ/โต้ตอบได้** เท่านั้น
-  - `#5FE0FF` ฟ้าเรือง = **คริสตัลความรู้** เท่านั้น
-  - `#B8C3CC` เทาเงิน = **เบาะแส** (ค่า Hex ข้อเสนอ ต้องให้เจ้าของดู)
-  - **ไฟโคม:** แกนแสงสีแอปริคอต `#FFB36B`, ขอบแสงครีม `#FFF0C9` เป็น **ข้อเสนอ** และต้องพิสูจน์ในภาพ ไม่ใช้ทอง #FFC857 จนเหมือนจุดกด
-- Shadow: material cast shading อนุญาต แต่ **ห้าม baked ground cast shadow**; เล่นจริง engine สร้าง Trickster-style cast shadow โดยแยก FX
-- ทุกภาพต้องมี original design ไม่ยืมคาแรกเตอร์/อาคาร/ทรัพย์สินทางปัญญาของเกมอื่น
+- Camera direction: `S SE E NE N NW W SW` ตามเกมปัจจุบัน. G1 ขอ **5 มุมสำหรับตรวจ** (S, SE, E, NE, N); ภาพต้นแบบ 5 มุมยังไม่ใช่ production sprites; ชิ้นจริงที่ไม่สมมาตรต้องวาดครบ 8 ทิศ.
+- Pixel outline ภายนอก `#3A1E3F` พลัมคมชัด ไม่เบลอ; upper eyelid/eyelashes = **ดำคงที่ #101016**, ไม่เปลี่ยนเมื่อเปลี่ยนสีม่านตา
+- Main light บนซ้าย; 3–4 shading steps ต่อวัสดุ; 60/30/10 เป็นสัดส่วนภาพไม่ใช่โควตา pigment รายจุด
+- สถานะแสงหรี่ใช้เขียวหม่น `#4F6E5E`, แสงกลับใช้ `#6FB96A`; ครีม `#F3E3C3`, ไม้ `#A8744A`, เงาม่วง `#4B3F72`
+- Semantic palette **ห้ามใช้ปะปนกับวัสดุของตัวละครในภาพ G1**:
+  - **#FFC857** = ปุ่ม/จุดที่ผู้เล่นแตะโต้ตอบได้ (ห้ามใช้เป็น sparkle ชุดตัวละคร)
+  - **#5FE0FF** = คริสตัลความรู้เท่านั้น (ห้ามใช้เป็นสีเอฟเฟกต์ตัวเอกโดยไม่มีเหตุ)
+  - **#B9B7CF** = เบาะแส สีอ้างอิง ART_DIRECTION เดิม (ข้อเสนอให้เจ้าของรับรอง)
+  - **#FFB36B / #FFF0C9** = แสงโคมอุ่นแกน/ขอบ (ข้อเสนอ): ΔE00 จากทองโต้ตอบประมาณ 11.4 / 17.0
+- Copper Trim ที่เสนอสำหรับโลหะเครื่องแต่งกาย ใช้ `#3D292C #67413A #915B49 #BB7A57`, ค่าสีนี้เป็น **proposed art** ไม่ใช่ค่าโลหะเกมที่เปลี่ยนแล้ว
+- เทียบ `G1_MATERIAL_PALETTE_V1_2.md` เป็นหลัก: HAIRC/EYEC/HOUSES เดิมคงเลข/ลำดับและรหัส Hex. คู่สีที่มีหน้าที่ต่างกันและอยู่ติดกันใช้ ΔE00 ≥10 เมื่อทำได้; ถ้าเป็นสีบ้านเดิมที่ชน UI gold/หญ้า ให้แก้ด้วยเส้นขอบ รูปทรง การวาง และสัญลักษณ์ ไม่เปลี่ยนสีเดิม
+- Shadow: **เงาทอดลงพื้นแบบ Trickster วาดด้วย engine** ห้าม bake ลง PNG; วัสดุมี highlight/shading ตามปกติได้
+- **ห้ามหมุนภาพอาวุธหรือโคมไฟด้วยโค้ด**: ทุกทิศที่แสดงจริงใช้ภาพถือที่วาดตามทิศนั้นและ per-view grip/hand anchor
+- เด็กอายุ **ต่ำกว่า 10 ไม่ตีมอน**: แสดงท่าโบกมือ/ท่าถือตะเกียง; ภาพ/ท่าโจมตีดาบตรวจเฉพาะผู้ใหญ่หรือโหมดทดสอบ GM ไม่ปลดล็อกให้เด็ก
+- ภาพและโลกต้องเป็น original IP ของ Lantern Academy ไม่คัดลอก art จากเกมอื่น
 
 ## 3. Character — ตัวนำร่องหนึ่งตัว
 
@@ -53,89 +57,103 @@ G1 คือการพิสูจน์ว่า **หน้าตาตั�
 **G1 5 View Sheet:** S front 3/4 top-down, SE front diagonal, E side, NE rear diagonal, N back, เว้นช่องและแสดงพื้นหลัง neutral/transparent; ตัวละครต้องเป็นคนเดิมในทุกภาพ ผม/ชุด/ตา/สัดส่วนตรงกัน
 **G1 vs G2:** 5-view sheet อาจเป็นภาพคอนเซปต์ ไม่ใช่ Sprite Sheet production. หลัง G1 อนุมัติจึงผลิต 8-direction idle/walk/hold พร้อม 96px grid/feet metadata
 
-## 4. Portrait 384×384 — ห้ามใช้เพียง Upscale Sprite 96
+## 4. Portrait 384×384 — Quality + Display Pixel Contract
 
-**หน้าที่:** ใช้ในหน้าสร้างตัว/แก้หน้าตา/กล่องข้อมูล ให้เห็นตา/ปาก/แก้ม/ทรงผมชัดที่ผู้เล่นอายุ 7 ขวบเลือกได้
-- PNG 384×384 transparent, สไตล์ pixel art เดียวกับ sprite แต่ละเอียดกว่า มุมหน้าตรง/เฉียงหน้าเล็กน้อย, ครึ่งตัว, เสื้อ/ผม/ตา/ผิวเป็น material ที่แตกชั้นได้ในการผลิตจริง
-- **รอบ G1:** ทำ Portrait รูปเดียวเป็น Style Master; ยังไม่ต้องสร้างชุด layer ทุกตัวเลือก
-- **รอบ G3:** รหัส `hairId`, `eyeId`, `mouthId`, `outfitId`, `skinId` ของ Portrait ต้องตรงกับ sprite, ไม่ใช่ภาพหน้าใหญ่ที่ไม่ sync กับการแต่งตัว
-- **มือถือแนวนอนที่ต้องวัด:** 740×360, 844×390, Android 915×412 ใช้ข้อเสนอ initial preview ความกว้าง **128–160 CSS px** และรักษาปุ่มใหญ่ >=44 CSS px; เมื่อแผงเตี้ยให้ย่อลงโดยไม่บังปุ่ม/ตัวเลือก
-- iPad 1180×820: preview portrait ประมาณ **216–280 CSS px** ถ้ามีที่พอ; PC 1920×1080 ปรับ responsively ตาม UI. ไม่ fix ขนาด CSS จากสูตร `384 / devicePixelRatio` อย่างเดียว
-- ดูความคมที่ device DPR 2.625 จริง; ใช้การแสดง pixel art ที่คมและตรวจ sampling ไม่เปลี่ยนสี/ขอบดำ
+**ต้นฉบับ:** PNG transparent **384×384** ภาพครึ่งตัววาดละเอียดใหม่ แยกจาก Sprite 96×96 ไม่ใช้ upscale; ผม ตา ปาก ผิว ชุด ที่ผู้เล่นเลือกต้อง map ID ตรงกับในเกมเมื่อเข้าสู่ G3.
 
-## 5. Material Palette Sheet v1.1 (ต้นแบบสเปก ไม่ใช่สีอนุมัติหมดแล้ว)
+**ความคมบนจอ:** ขนาด CSS เป้าหมายแบบ **1 source pixel ≈ 1 physical display pixel** คือ `384 / devicePixelRatio` CSS px หาก layout รองรับ และไม่เกิด fractional resampling ที่ทำให้ภาพเบลอ. ไม่ใช่เพียงกำหนด CSS width เป็นจำนวนเต็มแล้วถือว่า pixel-perfect.
+| อุปกรณ์ทดสอบ | DPR จากรายงาน/ตัวอย่าง | เป้าหมาย CSS สำหรับ 1:1 | วิธีตรวจ |
+| --- | --- | --- | --- |
+| Android DPR 3 | 3 | **128 CSS px** | แสดง preview ราว 128 CSS, ตรวจรายละเอียดหน้าและปุ่ม 44 CSS |
+| Android DPR 2.625 | 2.625 | **146.286 CSS px** ทางคณิตศาสตร์ (`146px` เป็นการปัดใกล้เคียง **ไม่ใช่ 1:1 เป๊ะ**) | ตรวจ nearest-neighbor/pixelated กับ browser screenshot จริง รวมทั้ง 146 และ 146.286 CSS |
+| iPad DPR 2 | 2 | **192 CSS px** หรือ **384 CSS px** ที่ device scale 2 เท่า (ถ้ามีที่พอ) | แนะนำ 192 บนหน้าแต่งตัว, ดูว่าตัวเลือกไม่ถูกบัง |
+| PC DPR 1 ตัวอย่าง | 1 | **384 CSS px** หรือย่อ responsive อย่างระมัดระวัง | ตรวจความคมพร้อมพื้นที่ UI |
 
-**ก่อนสร้างภาพจริง** ให้ Claude เปรียบเทียบ `HAIRC`, `EYEC`, `HOUSES`, `AD208.order` จากเกมเดิม แล้วทำตารางจับคู่ Hex ที่ **ใช้งานจริง** กับข้อเสนอใน Bible นี้. ห้ามแทนค่าระบบเกมเดิมเพื่อให้คล้ายชีต
+ในมือถือแนวนอนเล็ก 740×360 / 844×390 / 915×412 **ให้ความสำคัญกับไม่บังหน้าต่าง/ปุ่มก่อน**; หากจำเป็นต้องย่อ ใช้ nearest-neighbor/pixelated หรือ render ไป canvas ที่มีขนาดพื้นผิวเหมาะสมและ **ทดสอบภาพจริง**. การสเกล CSS, device DPR, zoom และการปัด subpixel อาจทำให้ไม่ pixel-perfect แม้คำนวณสัดส่วนถูก
 
-| Material ramp | จำนวนเฉดต่อสี | ตัวเลือกเกมเดิม | ตัวอย่างค่าสี (ข้อเสนอเพื่อจัดภาพดู) |
-| --- | ---: | --- | --- |
-| Skin | 5 | ผิว 4 ระดับ | `#6E3E3C #A7614E #CF8F70 #EDBD93 #FFE0B8` (ตัวอย่าง medium) |
-| Hair | 5 | สีผม 8 สี | `#342A40 #654159 #956A62 #BB8C65 #DFB681` (ตัวอย่าง warm brown) |
-| Iris | 3 | สีตา 5 สี | `#604553 #9B6751 #D5A46E` (ตัวอย่าง amber eyes) |
-| House Scarf | 4 × 4 houses | `S.house`: ทอง ฟ้า เขียว แดง | ดู ramp 4 บ้านด้านล่าง |
-| Fixed Trim / Outlines | 4 | ขอบคงที่ | `#493141 #80604E #C49B67 #F1D5A2` (trim ตัวอย่าง ไม่แทนขอบพลัม/ขอบตาดำ) |
+**G1:** เพียงกำหนดกติกา, ภาพ Portrait Style Master 1 ภาพหลังอนุมัติราคา; **G4:** ทดสอบ Android จริง 740×360, 844×390, 915×412, iPad 1180×820 และ PC 1920×1080
 
-**House fabric ramps (4 เฉด × 4 บ้าน — ตัวอย่างก่อนเทียบ HOUSES เดิม):**
-- Gold house: `#6F4B35 #A7783B #C99C52 #E6C88A` (ไม่ใช้ #FFC857 เป็นสีหลักของผ้า)
-- Blue house: `#33446A #526E9C #86A8CC #BDD1E8` (ไม่ใช้ #5FE0FF ซึ่งสงวนให้คริสตัล)
-- Green house: `#2E5946 #4D8360 #80AE77 #B7D7A2`
-- Red house: `#693944 #A1515B #D47B7E #EDB3A6`
+## 5. Material Palette Sheet v1.2 — รักษาค่าสีจริงจากเกม
 
-**ต้องคงที่:** outline #3A1E3F, upper lid/eyelashes #101016 (fixed black), whites/highlight, brass trim ถาวร, lantern light source. **ห้ามสีเปลี่ยนไปทับ** ดวงตา/ขนตา/ขอบทรง/ผิวคนละวัสดุ. Palette Sheet ต้องแสดงค่าสี Hex แต่ละกลุ่มบนพื้น neutral รวมทั้งตัวอย่าง character เปลี่ยนสีแยกวัสดุ.
+**เอกสารหลักที่ต้องใช้แทนตัวอย่างเก่า:** [G1_MATERIAL_PALETTE_V1_2.md](G1_MATERIAL_PALETTE_V1_2.md).
 
-> หมายเหตุ: Hex ในตารางที่ระบุว่า “ตัวอย่าง” เป็น **proposal สำหรับชิ้นภาพ G1** ไม่ใช่การอนุมัติ palette gameplay ทั้งเกม; สีจริงต้องเทียบของเก่าและให้เจ้าของตรวจ.
+- HAIRC **8 สี × 5 เฉด** จากเกมจริง ห้ามเปลี่ยนลำดับ Index
+- EYEC **5 สี × 3 เฉด**; เปลี่ยนเฉพาะม่านตา ขอบตาบนและขนตาคงที่
+- HOUSES **4 บ้าน × 4 เฉด**; บ้านดูจาก `S.house`, ห้ามเปลี่ยนค่าหลัก/ลำดับ
+- Skin **4 ระดับ × 5 เฉด** ใหม่เป็น *ข้อเสนอเพื่อทดลองภาพ G1* (ค่ารหัสเดิมของ `AD208.order` และจำนวนตัวเลือกต้องคงเดิม)
+- Copper Trim **4 เฉดใหม่** เป็น *ข้อเสนอ* ลดการชนกับสีบ้าน Sun; copper มี ΔE00 ต่ำสุดกับ House Sun/Wing/Leaf/Flame ประมาณ **19.8/23.4/38.4/13.8**
+- Silver clue **#B9B7CF** แทนตัวอย่างใหม่เก่า `#B8C3CC` ตาม ART_DIRECTION เดิม; แสงโคม **#FFB36B/#FFF0C9** ทดลองร่วมกับ Gold UI `#FFC857`
+- **ข้อยกเว้น ΔE00:** Sun บ้านเดิม vs Gold UI บาง shade≈3.5, Leaf vs Grass≈9.0, Black Hair vs Black Iris≈1.7; **ห้ามทำให้ทุกคู่ผ่านด้วยการเปลี่ยนสีที่ผูกกับเซฟ** ใช้ shape/outline/placement แทน
+
+**G1 selected materials สำหรับตัวละครต้นแบบ:** ผม **Brown**, ม่านตา **Green**, สีผิว **Medium**, ผ้าพันคอ **Wing Blue**, trimmed metal copper ในปริมาณน้อย. วัสดุนี้ใช้แยกชั้นสีและตรวจหน้าตาตอนซูม 75/100 ได้ชัด
 
 ## 6. Asset Contract และ Quality Gate G1
 
-**Target concept output:** 1) 96px base style sheet 5 มุมโดยใช้ reference เดียวกัน, 2) half-body Portrait 384, 3) Material Palette Sheet พร้อม swatches Hex, 4) **128×128 static single comparator** 1 ภาพเพื่อดูความคุ้มของ detail ไม่ต้อง 8 directions
+**Concept deliverables ตามที่อนุมัติเมื่อทราบราคา:** 1) ตัวละคร 96px target (ดูเงื่อนไข PixelLab 88px) ตรวจ 5 มุม S/SE/E/NE/N; 2) Portrait 384 ครึ่งตัวหนึ่งภาพ; 3) Material Palette Sheet เชิงตัวเลข/hex; 4) ภาพนิ่ง 128px **หนึ่งภาพเท่านั้น** สำหรับเทียบ หลังเจ้าของอนุมัติราคา
 
-**Technical spec เมื่อทำ G2:** ตัวละคร PNG RGBA ด้วย alpha 0 หรือ 255, 96×96 frame, feet [48,94], 8 rows ordered S SE E NE N NW W SW, no baked floor shadow, no upscale/downscale generated pixels, scale/color/per-layer metadata; direction + action + frame metadata, no rotate-image weapon. G1 concept output อาจใช้แผ่นพรีวิวที่รวม 5 view ได้ แต่ต้องระบุว่า **ยังไม่ใช่ gameplay-ready**.
+**PixelLab v3 preflight constraint:** ในหน้าจอที่ Claude ตรวจ ท่านตั้ง **88 px ได้แต่ 96 px ไม่ได้**. งานแรกถ้า Generate 88 px ให้ระบุว่า **Source 88** ไม่ใช่เกม-ready 96; ต้อง **pad ผืนโปร่งใสเป็น 96×96 โดยไม่ resize pixels หรือหมุนภาพ** และ align feet [48,94] ภายหลังในขั้นทดสอบ asset. หาก 88px ขนาดตัวจริงสูงไม่ถึง 80–88 ให้ประเมินใหม่ก่อนสร้าง animation ห้ามย่อ/ยืดให้ถึงตัวเลขโดยพลการ
 
-**Scale comparison:** 96 vs 128 ต้องเทียบทั้งหน้าแต่งตัวและบนฉากเดียวกันภายใต้ zoom **75% และ 100%**. เนื่องจาก G1 ห้ามแก้ code ให้ใช้ screenshots/mock contact-sheet เปรียบเทียบแบบอ่านง่ายจากเอกสาร/ตัวช่วยภายนอก ไม่เปิด feature flag ในเกมจริงโดยไม่อนุมัติ.
+**Production ต่อใน G2:** PNG RGBA (pixel sprites alpha 0 หรือ 255), Frame 96×96, feet [48,94], 8 views `S SE E NE N NW W SW`, hand/head/back anchors ต่อทิศ/เฟรม, no baked floor shadow, no image rotation lantern/weapon, no nearest-neighbor violations; metadata manifest; portrait แยก 384.
 
-**Review thresholds:**
-- Owner score: Face Appeal/Identity **>=9.5/10**, all-world style coherence >=9/10, mobile face readability >=9/10
-- 5 view มีสัดส่วน/ชุด/ทรงผมเป็นตัวเดียวกัน, ไม่มี extra accessories หรืออาวุธติดถาวร, 0 accidental cropped limbs
-- ภาพ Portrait 384 มีรายละเอียดจริง ไม่ใช่ upscale sprite 96
-- แยกทองโต้ตอบ/ฟ้าคริสตัล/แสงโคมชัดเจน
-- Sample at 75% + 100% readable; เมื่อรวม 4 คนใน pilot ภายหลัง เจ้าของ/ลีอาชี้ตัวเองได้ภายใน 3 วินาที (G4)
-- FPS regression ตกไม่เกิน 10% และ memory/load bounds เป็นเกณฑ์ G4 **ยังไม่อ้างผ่านใน G1**
-- โปรเจกต์ 2.33 เดิมยังไม่เปลี่ยนไฟล์เกม เซฟ กฎฐานข้อมูล หรือ install cache
+**คุณภาพที่เจ้าของตัดสิน:** Face Appeal >=9.5/10; Visual Cohesion >=9/10; mobile readability ซูม **75% และ 100%** >=9/10; เห็นมือทั้งสองข้าง ผ้าบ้านไม่ขาด ไม่มีแสง/อาวุธ/โคมติดถาวร, ไม่มีสีที่ทำให้ทองโต้ตอบหรือฟ้าคริสตัลสับสน
 
-## 7. Credit Plan & PixelLab Preflight — ช่วงนี้ยังไม่ Generate
+**เทคนิคที่ต้องวัด:** ทิศทั้ง 8 เหมือนคนเดียว, รูปและเท้าแต่ละมุมลงกรอบถูก; กึ่งใส/รูใสโดยไม่ตั้งใจเป็น 0 ใน asset ที่ใช้จริง; ตาหน้าตรงไม่เอียงและไม่กินกรอบหน้า, ผมหน้า/หลังเป็นคู่; ค่าสีไม่ leak mask; ไม่ถือว่า "ผ่าน" ถ้ามีแค่ concept sheet
 
-**เพดาน G1:** ประมาณ **65 PixelLab credits** ตามที่เจ้าของอนุมัติเป็นกรอบ ไม่ใช่ค่าใช้จ่ายอัตโนมัติ.
+**Performance:** G1 ยังไม่แก้เกมและยังไม่อ้าง FPS ใหม่; G4 ต้องเทียบ baseline 2.33 ที่เดสก์ท็อปและทดสอบมือถือจริง, FPS regression ไม่เกิน 10%, lazy-load ชุดใหม่ (ไม่เพิ่ม 23.2MB PWA initial download)
 
-**ลำดับผลิตแบบใช้เครดิตคุ้ม:**
-1. ตรวจค่า `get_balance`, available tools, exact price UI/API read-only **โดยไม่เรียก generator**; ถ้า Codex MCP ยังเชื่อมไม่ได้ ให้เจ้าของส่ง screenshot เฉพาะหน้าตั้งค่า/ราคาโดยปิด API Key และข้อมูลลับ
-2. สร้างแผ่นสี (ข้อมูล Hex/ตัวอย่าง color swatch) ด้วยวิธีไม่เสีย PixelLab credits ก่อน
-3. เมื่อเจ้าของอนุมัติราคา **ต่อหนึ่งงาน** แล้ว จึงสร้าง 96px style/5-view concept ภายใต้ตัวเลือก PixelLab ที่ได้จริง (Character Pro 8-view อาจใช้เป็น source 5-view ได้ แต่ต้องไม่อ้างว่าภาพเหล่านั้นพร้อมใช้เป็น gameplay sprites)
-4. หลังตรวจ style ผ่าน ให้ขออนุมัติราคา Portrait 384 ก่อนสร้าง
-5. 128px ทำ **ภาพนิ่งหนึ่งภาพ** เพื่อเทียบเท่านั้น โดยขออนุมัติราคา และห้ามสร้างชุด 8 ทิศ/animation
-6. ทุกครั้งหลัง Generate: รายงานค่าใช้จริง + remaining budget, รายการไฟล์ output, สิ่งที่ผ่าน/ไม่ผ่าน และหยุดขออนุมัติรอบถัดไป
+## 7. Credit Plan — PixelLab Preflight (ไม่ Generate ใน G1.0)
 
-**ต้นทุนอ้างอิงจากรายงาน Claude ไม่ใช่ราคายืนยัน ณ ตอนกด:** PixelLab 8-direction Pro ที่ขนาด 86–113 px เคยระบุ 15 credits; Portrait 342–512 px เคยระบุ 25 credits; 128 static comparator ขึ้นกับเครื่องมือที่เลือก. ห้ามคำนวณเป็นราคาจริงจนอ่านหน้า UI/API ว่าคิดเท่าไร. หากรวมเกิน 65 ให้ **หยุด** และเสนอทางเลือกกับเจ้าของ ห้ามใช้ส่วนเกินเอง
+**เพดานงบประมาณ G1 = ~65 credits** (เจ้าของอนุมัติเป็นเพดานเตรียมงาน) แต่ **ราคาจริงยังไม่ทราบ**. Claude ตรวจครั้งล่าสุดไม่สามารถอ่านราคาจาก UI/API ได้ จึงไม่มีสิทธิ์เริ่ม Generate เอง
 
-**ความปลอดภัย:** หาก PixelLab API Key เคยปรากฏใน screenshot หรือตำแหน่งที่ไม่ปลอดภัย ให้เจ้าของ rotate/revoke และตั้งค่าลับใหม่ก่อน Generate. ห้ามคัดลอก API Key เข้าเอกสาร, GitHub, Prompt, screenshot ที่แชร์ หรือ Commit.
+| งาน | เครื่องมือเสนอ | คาดเพดานงานจากเอกสารเก่า | สะสมสูงสุด |
+|---|---|---:|---:|
+| ตัวละครรอบแรก **v3 88px** (target padded 96) | Create Character v3 / Low Top-Down | 9 | 9 |
+| เผื่อแก้ภาพ 1 รอบ (ไม่จำเป็นต้องใช้) | v3 | 9 | 18 |
+| Portrait 384×384 | Create S-XL Pro | 25 | 43 |
+| ภาพนิ่งเปรียบเทียบ 128px เพียง 1 ภาพ | v3 (ราคาไม่ยืนยัน) | 9 | 52 |
 
-## 8. G1 Workflow — ทีละขั้น ไม่ข้าม
+**ส่วนเผื่อเหลือจากเพดาน ≈13 credits** ภายใต้ราคาประเมินทั้งหมด. ถ้าราคาจริงต่างจากนี้ต้องปรับตารางและขออนุมัติใหม่ก่อนกด. ราคาทางเลือก Pro สำหรับ base อาจทำให้งบเกิน 65, จึงแนะนำ v3 รอบแรกเพื่อพิสูจน์รูปลักษณ์
 
-**Step G1.0 (ทำตอนนี้ / ไม่มีเครดิต):** Claude อ่าน Visual Bible นี้ + PR #6 + PR #5, ยืนยัน source code unchanged; ประเมินข้อขัดแย้ง (96 vs 128, Portrait 384 vs 256, T=32 vs tile proposal 48, RGB/alpha, no weapon rotation, appearance source), ตรวจ PixelLab pricing/balance read-only และรายงาน "G1 Preflight" ให้เจ้าของส่ง ChatGPT.
+**บัญชี PixelLab:** เครดิตคงเหลือไม่ทราบ; ห้ามอ้างยอดประมาณเดิม (เหลือ ~3009 ณ 13 ต.ค.) เป็นยอดปัจจุบัน. ถ้ามี API Key เคยติดภาพหน้าจอ ให้เจ้าของ rotate ก่อนใช้ใหม่. ห้ามแสดง API Key ในภาพและแชต
 
-**Step G1.1 (ยังไม่มี Generate):** ChatGPT สรุป palette/materials และ Asset Prompt 96px สำหรับ PixelLab เพียงงานเดียว พร้อม setting ค่าทุกช่องจากหน้าจอจริง และแจ้งราคาจริงจาก G1.0; เจ้าของอนุมัติจึงกด
+**ก่อนสั่ง Generate ครั้งแรก ต้องมีครบ:** (1) screenshot ยอดเครดิตแบบไม่ติด secret (2) screenshot ตรงบรรทัด `Costs N generations` ของตัว 88 หรือ 96 ถ้าตั้งได้จริง (3) screenshot ราคา S-XL 384 เพื่อวางงบ (4) เจ้าของตอบอนุมัติ **ราคาจริงสำหรับงานแรก**. ถ้า screenshot ไม่ชัด ให้ขอใหม่ก่อน ไม่เดาราคา
 
-**Step G1.2:** ตรวจภาพ 5 view บนหน้าจอมือถือซูม 75/100 และสไตล์ตรง Bible. ถ้าไม่ผ่าน ให้แก้ prompt ตามข้อบกพร่อง ไม่เติมจำนวนเครดิตโดยไม่อนุมัติ
+## 8. G1 Workflow — ทำทีละขั้น
 
-**Step G1.3:** Portrait 384 พร้อมแก้สี/หน้าคู่กันตาม approved style; ขอราคาก่อน Generate
+1. **G1.0 COMPLETE**: Claude G1.0 report 14 ต.ค. ชี้ 6 จุดต้องแก้ใน Bible, รายงานสีจริง HAIRC/EYEC/HOUSES/AD208 และต้นทุนจากเอกสารเก่า, ยังไม่ได้ราคา UI จริง
+2. **G1.1 PREPARED (NO CREDIT)**: Bible v1.2 + Material Palette Sheet v1.2 + **PixelLab prompt เดียว** สำหรับตัวละคร 88px source/96 target ตามข้อ 9; เจ้าของตรวจสไตล์และยอดเครดิตก่อน
+3. **G1.1 PRICE GATE**: เจ้าของส่งภาพหน้า Account เฉพาะยอด, `Costs N generations` ของงาน v3, ราคา S-XL 384 (ไม่มี key); ChatGPT เทียบกับเพดาน 65 แล้ว **ขออนุมัติราคางานแรก**; ห้าม Generate ก่อน
+4. **G1.2 (AFTER PRICE APPROVAL)**: Generate รอบแรกเพียงงานเดียว; ส่ง ZIP/PNG ให้ ChatGPT ตรวจสไตล์และ Claude วัด 5 view/height/feet/alpha; เทียบ 75%/100%. ไม่เปิดงานอื่นเอง
+5. **G1.3**: Portrait 384 ภายใต้ราคา/การอนุมัติใหม่; ตรวจ detail จริงไม่ upscale
+6. **G1.4**: 128px static comparator 1 ภาพ ภายใต้อนุมัติ; เปรียบเทียบที่ขนาดแสดงผลเดียวกัน; ไม่สร้าง 8-direction 128
+7. **G1.5**: เจ้าของลงมติ visual identity + ตัวละคร 96 + palette; ผ่านแล้วไป G2 Vertical Slice
 
-**Step G1.4:** Static 128 comparator หนึ่งภาพเท่านั้น พร้อมภาพเทียบ; ถ้า 96 + Portrait พอ ก็อาจไม่ต้องใช้เครดิต 128 (แต่การตัดสินว่าข้าม comparator ต้องให้เจ้าของอนุมัติ)
+## 9. PixelLab G1.1 — Prompt งานแรก (ฉบับตรวจแล้ว / ยังไม่ Generate)
 
-**Step G1.5:** ตัดสินใจล็อก Visual Bible, ชนิดตัวละคร, palette, scale และเทคนิคการบันทึก assets ก่อนเริ่ม G2 Vertical Slice.
+**ตั้งค่าที่ Claude รายงาน:** Characters → Create Character → Create from Text → Humanoid → **Generation Mode: v3** → Camera: **Low Top-Down** → Sprite Size: **88 px** (เพราะ 96 ไม่มีในเครื่องมือที่ตรวจ; 88px เป็น source, **ไม่ใช่ output ready-96**) → Detail: **Highly detailed** → Outline: **Default** → ไม่ใส่ Style Reference → ปิด Enhancer/ความสามารถอัตโนมัติที่เพิ่มรายละเอียดไม่คุม ถ้าหน้าจอมี. ถ้า label หน้าจอไม่ตรง ให้หยุดและขอ screenshot ก่อนกด
 
-## 9. Prompt Design Rules สำหรับ PixelLab ใน G1 (ก่อนเห็นหน้าจอจริงยังไม่ใช่คำสั่งกด Generate)
+**Final prompt English — paste เฉพาะข้อความในกรอบนี้ ลง Character Description** (ไม่มีคำสั่งให้ PixelLab ใส่ gold/cyan sparks; ความหมายสีอยู่ใน Bible ไม่ต้องยัดใน prompt ตัวละคร)
 
-**English brief / reference for the eventual first job:**
+```text
+Create one original young female apprentice from Lantern Academy, age appearance 8–9, for a cute modern pixel-art browser RPG.
 
-Original friendly young Lantern Academy apprentice, cute modern 2.5D low-top-down pixel-art game style. Chibi proportions with a large readable face, expressive symmetrical eyes with fixed black upper eyelashes, distinct iris colors and highlights, a gentle expressive mouth, rounded cheek silhouette, hair with clean chunky pixel clusters, ivory academy tunic, warm leather accessories, a subtle brass lantern-school insignia, and a house-color scarf. Deep-plum clean outlines, warm upper-left lighting, three or four material shading steps, subtle cool violet shadows. Full-body character, empty clearly separated hands for later modular equipment; no permanent weapon, wings, hat, cast floor shadow, scenery, UI, letters or watermark. Crisp square pixels, transparent background, same face, hair, outfit and feet positions across directional views. Expressive but not babyish, readable on a landscape mobile game screen. Preserve Lantern Academy visual semantics: clickable gold, knowledge-crystal cyan, lantern warm apricot glow distinct from gold UI cues.
+Camera: low top-down 3/4 view. Create consistent eight-direction character views. Chibi shape about 2.5 heads tall, a charming larger face, expressive big symmetrical eyes, a fixed very dark upper eyelid and eyelashes, small distinct irises, clear eyebrows, gentle natural smile and softly rounded cheeks. Rich detail made of crisp pixel clusters, not blurry or smooth.
 
-**Do not Generate yet.** Claude ต้องอ่านราคาจริงก่อน แยกสิ่งที่เป็น G1 concept กับ sprite gameplay และเชื่อม reference ที่เจ้าของเลือกไว้ให้ PixelLab เท่านั้น.
+Hair: shoulder-length warm chestnut brown, arranged in simple large locks, a clean forehead silhouette. Iris color: leafy green. Skin: natural medium warm tone. Outfit: ivory Lantern Academy apprentice tunic with subtle layered seams, soft warm leather boots and belt, a deep bright blue school-house scarf, small muted copper metal fasteners. The costume should suggest a thoughtful lantern scholar without holding any lantern.
+
+Make the entire body readable at a small size. Both arms slightly separated from the torso; both empty hands and fingers readable for future modular equipment. Proportions, hair, eyes, outfit and feet must remain consistent across every view. Warm light from the upper left, cool gentle plum shadows, clean deep-plum outlines. Full body centered on a transparent background.
+
+No hat, wings, weapons, held objects, permanent glow, floating sparks, crystals, scenery, cast floor shadow, labels or watermark. No blur or anti-aliased pixel edges. No extra characters.
+```
+
+**ผลที่ต้องได้หลัง Generate (ไม่ใช่คำมั่นว่า AI จะทำถูก):**
+- 8 ทิศ `S SE E NE N NW W SW` คนเดียวกัน; คอนเซปต์ใช้ตรวจ 5 มุมหลัก `S SE E NE N`
+- ตรวจความสูงใน **88px source** ว่าอยู่ในช่วง **80–88 px**; ถ้าได้ต่ำกว่า 80 หรือมือ/เท้าหายให้หยุดและทบทวน
+- **G1 concept / source**: ห้ามอ้าง frame 96×96 ก่อนทำ transparent padding + align [48,94] โดยไม่ resample; ห้ามเปลี่ยน T=32 หรือปรับซูมเกม
+- ห้ามมี pixel กึ่งใสที่ไม่ตั้งใจหรือรูบนหน้า/ตัว; ตาหน้าตรงสมดุล, ผ้าสีน้ำเงินเห็นชัด, มือทั้งสองไม่ติดลำตัว, ใบหน้าน่ารักได้คะแนนเจ้าของ >=9.5
+- ห้ามตัวละครมีโคมไฟ/อาวุธ/แสงเวท/ทองโต้ตอบ/ฟ้าคริสตัลติดถาวร; สีตัวละครวัดจริงเมื่อได้ภาพ
+- ให้ Claude ส่งราคา **ก่อน** และรายงาน actual credits **หลัง** โดยไม่เริ่มทำครั้งต่อไปเอง
+
+## 10. G1.0 Preflight corrections accepted
+Claude ตรวจและขอแก้ 6 จุด: (ก) prompt ไม่ชวนสร้างทอง/ฟ้าเรือง; (ข) responsive Portrait DPR 3/2.625/2 แบบ pixel mapping (ค) fixed trim copper แยกบ้านทอง (ง) House Colors เดิมทุกลำดับ + exceptions (จ) hair/iris วัสดุมี mask และ ΔE เฉพาะคู่สำคัญ (ฉ) ห้าม rotate lantern และเด็กต่ำกว่า10ไม่โจมตี. ทั้งหมดบรรจุใน Bible v1.2 นี้และ Material Palette Sheet ใหม่แล้ว
+
