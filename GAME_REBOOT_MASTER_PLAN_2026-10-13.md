@@ -238,3 +238,17 @@
 - Flaky regression ทั้ง 3 ชุดต้อง rerun แยกและ stress ก่อน G4 release; baseline เพื่อเทียบ FPS/frametime/memory บนอุปกรณ์เดียวกันและเงื่อนไขเดียวกัน
 
 **G1 Next:** ให้ Claude อ่าน `VISUAL_BIBLE_G1_V1_1.md` (เอกสารเตรียม) ประเมิน asset sizing/PixelLab UI ราคา **ก่อนกด Generate**; ห้ามแก้ `index.html`, `sw.js`, `test_*.js`, Firebase/security/save หรือ `main`
+
+## 14. G1.0 PixelLab/Palette Preflight — Claude report (14 ต.ค. 2026)
+
+**สถานะ:** G1.0 ผ่านแบบมีประเด็นให้แก้เอกสาร; ChatGPT แก้เสร็จใน Visual Bible เนื้อหา **v1.2** และ Material Palette Sheet v1.2 แล้ว (ชื่อไฟล์ Visual Bible เดิม V1_1 คงไว้เพื่อไม่ทำลิงก์งานเดิมหาย)
+- แหล่งอ้างอิงสไตล์: `VISUAL_BIBLE_G1_V1_1.md` (เนื้อหา **v1.2**) + `G1_MATERIAL_PALETTE_V1_2.md` — ทั้งสองเป็นเอกสาร ไม่ใช่เกม code/asset
+- คำเตือนเรื่องสี: HAIRC 8×5, EYEC 5×3, HOUSES 4×4 คงค่าและลำดับเดิม; Skin 4×5 และ Copper trim 4 shades เป็น proposal; CIEDE2000 ≥10 สำหรับคู่ที่มีหน้าที่ต่างกัน/ชิดกันเมื่อทำได้ โดยยกเว้นบ้าน Sun vs gold UI, บ้าน Leaf vs grass, hair black vs black iris (ใช้ icon/outline และรูปทรงแทน)
+- แสงโคมและสีสัญญาณแยกหน้าที่: `#FFC857` interactive, `#5FE0FF` knowledge crystal เท่านั้น, clue เสนอ `#B9B7CF`, lantern warm `#FFB36B/#FFF0C9`
+- PixelLab v3 ในหน้าจอที่ Claude ตรวจตั้ง Source frame **88 px ได้** แต่ไม่พบ 96: หากต้องใช้ผลจริงกับ Pilot 96 ให้จัดกรอบด้วย transparent padding/alignment แบบไม่ resize พิกเซล; **ต้องตรวจความสูงตัวจริง 80–88px** ก่อนถือว่าเป็น asset ใช้ได้
+- Portrait display 384 px: สำหรับ DPR=3 เป้าหมาย 128 CSS px, DPR=2.625 ค่าคณิตศาสตร์คือ 384/2.625≈146.286 CSS px (146 เป็นค่าใกล้เคียง ไม่เป๊ะ), DPR=2 เป้าหมาย 192 CSS px; ต้องตรวจ browser pixel sampling พร้อมพื้นที่ UI จริง
+- งาน G1.1 เริ่มจาก **ตัวละครเด็ก one character v3** (แนว brown hair, green iris, medium skin, Wing-blue house scarf) และตรวจ 5 มุม; **ภาพเทียบ 128 แค่ภาพนิ่ง 1 ภาพ**, Portrait 384 หลังตัวต้นแบบภาพผ่าน
+- เพดาน PixelLab ~65 เครดิต; จากเอกสารเก่าประมาณ 9+9+25+9=52 เผื่อ 13; **ไม่มีการยืนยันราคาจริง** และเครดิตปัจจุบัน ไม่อนุญาต Generate จนเจ้าของเห็น UI pricing และอนุมัติราคาแต่ละงาน
+- Secret ในภาพหน้าจอเก่าอาจรั่ว: ให้เจ้าของ rotate/revoke key ก่อนใช้ API อีก; แชร์ screenshots เฉพาะยอด/ราคาโดยปิด key
+
+**Gate ต่อไป:** ต้องได้ภาพหน้าจอ `Costs N generations` และยอดเครดิตที่ไม่ติดข้อมูลลับจาก PixelLab จากนั้นเจ้าของอนุมัติ **ราคาจริงของภาพแรก** ก่อน PixelLab Generate. **ห้ามแก้เกม, PR #5, หรือ main ณ ขั้นเตรียมนี้**
