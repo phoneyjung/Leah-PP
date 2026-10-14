@@ -269,3 +269,18 @@ Half-body portrait of one original cute girl apprentice of a lantern academy, ab
 **✅ เจ้าของรับเป็น Portrait Style Master ของ G1 (14 ต.ค. ~21:40) · ใช้สำเนาโปร่งใส `g14-portrait-v1-transparent-copy.png`** · ยังไม่ใช่ไฟล์ใส่เกม (ต้องทำหน้ากากสีและทดสอบแสดงผลก่อน) · ไม่เจนใหม่เพราะงบ G1 จะเกิน 65
 งานเก็บถ้ารับ (G3/G4): หน้ากากผม ตา ผิว สีบ้าน · ตรวจขอบ · ทดสอบแสดงผล 128 / 146 / 192 CSS px บนมือถือจริง
 
+## 17. G1.5 ภาพนิ่ง 128 (Comparator) — เตรียมแล้ว ยังไม่ Generate
+**จุดประสงค์ (แผนแม่บท ข้อ 4 / ตาราง Comparator):** ทำภาพนิ่ง 128×128 **1 งาน** ของตัวเดียวกับ _4 เพื่อเทียบกับ Sprite 96 **ที่ขนาดบนจอใกล้กัน** แล้วล็อกสเกล · ไม่ทำ 8 ทิศ · ไม่ทำท่าเดิน
+**ทำไมใช้ S-XL Pro ไม่ใช้ v3:** v3 ใส่ภาพอ้างอิงตัวเดิมไม่ได้ (เจนใหม่จะได้คนละหน้า เทียบไม่ยุติธรรม) และสร้าง 8 ทิศเกินแผน · S-XL Pro ที่ 128 ให้ **4 แบบในงานเดียว (2×2)** และใส่ _4 เป็น reference image 1 ได้ · ราคาบนหน้าจอ (ภาพหน้าจอเจ้าของ 20:17) = **10 generations**
+
+**ค่าที่ต้องตั้ง:** `pixellab.ai/create` → Create S-XL image (Pro) → แท็บ Pro · Mode Pro · Output size **128x128** (มีให้เลือกตรง ๆ) · ติ๊ก Remove background · Reference images: `g15-ref-r5-4-south-96.png` (= _4 ทิศ S ในกรอบ 96 เท้าแถว 94 · ไม่แก้ภาพ) · Style image ว่าง · Color palette None · ถ่ายบรรทัดราคาหลังอัปภาพอ้างอิงก่อนกด
+**งบ:** 45 + 10 = **55/65**
+
+**พรอมป์ (1 ฉบับ · 1,541 ตัวอักษร · คำต้องห้าม 0 · ไม่มีคำ hat/bag/strap/adventurer/ทิศ)**
+```text
+One original cute chibi female apprentice of a lantern academy, about 10 years old, the same character as reference image 1, drawn as a single full-body game sprite standing idle and facing the viewer, seen from slightly above, centered with her feet near the bottom edge and her body filling about 90 percent of the image height. Proportions: head about 42 percent of the total height, slim arms and legs that read clearly. Arms hang naturally a little away from the sides, both hands visible. Beautiful expressive face: large eyes with a thick solid black upper lash line and a tiny outer flick, two-tone green irises with darker pupils, one small white highlight at the upper left of each eye, thin soft brown eyebrows just above short soft bangs, a tiny nose, soft pink cheeks and a small closed smile with both corners turned up. Chestnut brown chin-length bob hair with side locks that frame the cheeks, drawn in chunky clean clusters. Ivory academy tunic with a short layered hem, warm brown leather belt, gloves and cuffed boots, small copper buttons. A long medium blue cape with a wide soft collar over both shoulders, fastened at the chest with a small round muted copper badge shaped like a lantern. Nothing is worn across the chest or at the hips except the belt. Bare head showing the whole hairstyle, empty hands. Dark plum outlines, light from the upper left, three to four shading steps per material, crisp square pixels, a solid closed silhouette. Transparent background. No floor, no cast shadow, no glow effects, no text.
+```
+
+**เกณฑ์รับ (Claude วัด):** เลือก 1 จาก 4 แบบ · ตัวเดียว · สูงตัว 108–120 px (≈ สัดส่วนกรอบเท่า 84/96) · เท้าอยู่ล่างไม่ถูกตัด · หัว 40–45% · คนเดียวกับ _4 (ผม ตา ยิ้ม ผ้าคลุมยาว เข็มกลัด) · ไม่มีของต้องห้าม · สีชนสัญญาณ 0
+**วิธีเทียบ (ภาพจำลองในเกม 844×390):** ตัว 96 ที่ซูม 100% (สเกล 3 = 288 px บนจอ) เทียบ 128 ที่สเกล 2.25 (= 288 px เท่ากัน · ตรงกับซูม 75%) และสเกล 2 (= 256 px พิกเซลเท่ากันทุกจุด) · ดูความละเอียดหน้า ความคม และพื้นที่ฉากที่เหลือ → เจ้าของล็อกสเกล 96 หรือ 128 (G1.6)
+
