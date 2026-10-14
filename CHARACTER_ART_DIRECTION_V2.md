@@ -225,16 +225,26 @@ Claude วัดจาก ZIP (ไฟล์ภาพไม่เก็บใน 
 4. ราคา 25 ต่อครั้ง และงบเหลือราว 45 → **ลองได้จริงครั้งเดียว** (ถ้าต้องเผื่อภาพนิ่ง 128 อีก ~10)
 5. ยิ้มกว้างหรือปากแบบอื่นไม่เหมือน _4 · ตาไม่สมมาตร
 
-**ค่าที่ต้องตั้ง (ให้เจ้าของตรวจป้ายบนหน้าจอก่อน ถ้าชื่อไม่ตรงให้ถ่ายส่งมา)**
-- เครื่องมือ: Create image → **S-XL (Pro)** · ขนาด **384 × 384** · **No Background = เปิด**
-- Reference Images: อัป `g1-ref-r5-4-bust-384.png` 1 ภาพ · Style Image: ว่าง · Seed: ปล่อยค่าเดิม
-- Description: พรอมป์ด้านล่าง (ไม่กดตัวช่วยเขียนพรอมป์)
-- **ก่อนกด:** ถ่ายภาพบรรทัดราคา (`Costs N generations` หรือ `Total: N generations`) + ยอดเครดิตคงเหลือ · ไม่ให้ติด API Key / Secret
-- ถ่ายเพิ่มอีกภาพหลังอัปภาพอ้างอิง: ดูว่าขนาดยังเป็น 384 และราคาเปลี่ยนไหม
+**หน้าจอจริง (ภาพหน้าจอเจ้าของ 14 ต.ค. 20:17 · `pixellab.ai/create`)**
+- หัวข้อ "Create S-XL image (Pro)" · แท็บ S-XL (New) 16–768 | **Pro** (Quality or speed) | M-XL (Best at 64+) · Mode **Pro** | Pro Flash (BETA)
+- **Output size** มีให้เลือก: 32 · 64 · 128 · 256 · 344×192 · **341×341** · 384×216 · **512×512** · 512×288 · 632×424 · 424×632 · 688×384 → **ไม่มี 384×384 สำเร็จรูป** ต้องติ๊ก **Custom size (Beta)**
+- ตัวเลือก **Remove background** ("Process frames through background removal") แทนคำว่า No Background ในคู่มือ
+- **Reference images:** สูงสุด 4 ภาพ · "Refer to them in your description as reference image 1…" · "Auto-scaled to max 1024x1024" → ภาพอ้างอิงไม่กำหนดขนาดผลลัพธ์
+- **Style image:** "Output size will be set based on the style image size" · Max 512×512 → ไม่ใส่ (จะทับขนาด 384)
+- Color palette (Beta): None · Max colours: ไม่จำกัด
+- ราคาที่เห็นตอนตั้ง 128×128: "This tool costs 10 generations" และปุ่ม "Generate · 10 generations" (ตรงกับคู่มือช่วง 86–128) · **ราคา 384 ยังไม่เห็น**
 
-**พรอมป์ Portrait 384 (1 ฉบับ · 1,300 ตัวอักษร · คำต้องห้าม 0)**
+**ค่าที่ต้องตั้ง (ให้เจ้าของตรวจป้ายบนหน้าจอก่อน ถ้าชื่อไม่ตรงให้ถ่ายส่งมา)**
+- เครื่องมือ: `pixellab.ai/create` → **Create S-XL image (Pro)** → แท็บ **Pro** · Mode **Pro**
+- Output size: ติ๊ก **Custom size (Beta)** แล้วตั้ง **384 × 384** (ถ้าตั้งไม่ได้ ทางสำรองคือ 341×341 แล้วเติมขอบโปร่งใสเป็น 384 โดยไม่ขยายภาพ)
+- **Remove background = ติ๊ก**
+- Reference images: อัป `g1-ref-r5-4-bust-384.png` 1 ภาพ (= reference image 1) · Style image: ว่าง · Color palette: None
+- Description: พรอมป์ด้านล่าง
+- **ก่อนกด:** ถ่ายบรรทัด "This tool costs N generations" / ปุ่ม "Generate · N generations" หลังตั้ง 384 และหลังอัปภาพอ้างอิง + ยอดเครดิตที่หน้า Account · ไม่ให้ติด API Key / Secret
+
+**พรอมป์ Portrait 384 (1 ฉบับ · 1,298 ตัวอักษร · คำต้องห้าม 0 · อ้างภาพด้วยคำ "reference image 1" ตามที่หน้าจอบอก)**
 ```text
-Half-body portrait of one original cute girl apprentice of a lantern academy, about 10 years old, the same character as the reference image, facing the viewer, framed from the top of her head to her waist and centered. Detailed modern pixel art with crisp square pixels, warm and gently brave. Beautiful expressive face with a soft rounded shape: large eyes with a thick solid black upper lash line and a tiny outer flick, two-tone green irises with darker pupils, one small white highlight at the upper left of each eye, thin soft brown eyebrows just above short soft bangs, a tiny nose, soft pink cheeks and a small closed smile with both corners turned up. Chestnut brown chin-length bob hair with soft bangs and side locks that frame the cheeks, drawn in clean chunky clusters. Ivory academy tunic with small copper buttons and a warm brown leather belt, brown leather gloves. A long medium blue cape with a wide soft collar over both shoulders, fastened at the chest with a small round muted copper badge shaped like a lantern. Bare head showing the whole hairstyle, relaxed empty hands. Each material in its own clean color ramp, dark plum outlines, light from the upper left, three to four shading steps per material. Transparent background. No floor, no cast shadow, no glow effects, no text.
+Half-body portrait of one original cute girl apprentice of a lantern academy, about 10 years old, the same character as reference image 1, facing the viewer, framed from the top of her head to her waist and centered. Detailed modern pixel art with crisp square pixels, warm and gently brave. Beautiful expressive face with a soft rounded shape: large eyes with a thick solid black upper lash line and a tiny outer flick, two-tone green irises with darker pupils, one small white highlight at the upper left of each eye, thin soft brown eyebrows just above short soft bangs, a tiny nose, soft pink cheeks and a small closed smile with both corners turned up. Chestnut brown chin-length bob hair with soft bangs and side locks that frame the cheeks, drawn in clean chunky clusters. Ivory academy tunic with small copper buttons and a warm brown leather belt, brown leather gloves. A long medium blue cape with a wide soft collar over both shoulders, fastened at the chest with a small round muted copper badge shaped like a lantern. Bare head showing the whole hairstyle, relaxed empty hands. Each material in its own clean color ramp, dark plum outlines, light from the upper left, three to four shading steps per material. Transparent background. No floor, no cast shadow, no glow effects, no text.
 ```
 
 **งบ (ถ้าเครดิต = generations ครั้งละที่เห็น):** ใช้ไปประมาณ 20/65 · Portrait 25 → สะสม **45/65** เหลือ **20** · ภาพนิ่ง 128 (ราคาเอกสาร ~10 สำหรับ 86–128 px) → สะสม ~55/65 · ถ้าราคาจริงต่างจากนี้จะคำนวณใหม่และขออนุมัติก่อน
