@@ -1,0 +1,992 @@
+# ชุดตรวจ: ภาษาจีน อายุ 9 (ป.3–ป.4) · 165 ข้อ · ไฟล์ q-chinese-9.json
+# ตัวเลือกนับ 1–4 · ไม่มีเฉลยในไฟล์นี้ (ให้แก้โจทย์เองก่อน)
+
+### zh-9-0001  (หัวข้อ: measure-words)
+TH: "โต๊ะหนึ่งตัว" ต้องเติมลักษณนามตัวไหน: 一___桌子
+   1) 本 (běn)  |  2) 杯 (bēi)  |  3) 张 (zhāng)  |  4) 只 (zhī)
+EN: Which counting word completes "one table": 一___桌子
+   (EN choices same as TH)
+
+### zh-9-0002  (หัวข้อ: pinyin)
+TH: พินอิน "xuéxí" เขียนเป็นตัวจีนว่าอะไร
+   1) 听  |  2) 学习  |  3) 开  |  4) 玩
+EN: Which characters are written "xuéxí" in pinyin?
+   (EN choices same as TH)
+
+### zh-9-0003  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 她 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) เธอ (ผู้หญิง)  |  2) เพื่อนร่วมชั้น  |  3) เขา (ผู้ชาย)  |  4) พวกเรา
+EN: What does 她 mean? (no pinyin)
+   1) she  |  2) classmate  |  3) he  |  4) we
+
+### zh-9-0004  (หัวข้อ: meaning)
+TH: คำว่า 快 (kuài) แปลว่าอะไร
+   1) สูง  |  2) ดีใจ  |  3) ช้า  |  4) เร็ว
+EN: What does 快 (kuài) mean?
+   1) tall  |  2) happy  |  3) slow  |  4) fast
+
+### zh-9-0005  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 走 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) มา  |  2) ซื้อ  |  3) เดิน  |  4) นั่ง
+EN: What does 走 mean? (no pinyin)
+   1) come  |  2) buy  |  3) walk  |  4) sit
+
+### zh-9-0006  (หัวข้อ: fill-blank)
+TH: เติมคำให้ประโยคแปลว่า "เขาเป็นใคร": 他是___？
+   1) 哪儿 (nǎr)  |  2) 谁 (shéi)  |  3) 几 (jǐ)  |  4) 吗 (ma)
+EN: Fill the gap so the sentence means "Who is he?": 他是___？
+   (EN choices same as TH)
+
+### zh-9-0007  (หัวข้อ: pinyin)
+TH: พินอิน "xiě" เขียนเป็นตัวจีนว่าอะไร
+   1) 走  |  2) 玩  |  3) 写  |  4) 吃
+EN: Which characters are written "xiě" in pinyin?
+   (EN choices same as TH)
+
+### zh-9-0008  (หัวข้อ: say-it)
+TH: คำว่า "นักเรียน" ภาษาจีนคือคำไหน
+   1) 孩子 (háizi)  |  2) 学生 (xuésheng)  |  3) 医生 (yīshēng)  |  4) 他 (tā)
+EN: Which Chinese word means "student"?
+   (EN choices same as TH)
+
+### zh-9-0009  (หัวข้อ: sentences)
+TH: 妈妈在家。 (Māma zài jiā.) แปลว่าอะไร
+   1) แม่ไม่อยู่บ้าน  |  2) แม่อยู่ที่บ้าน  |  3) แม่อยู่ที่โรงเรียน  |  4) พ่ออยู่ที่บ้าน
+EN: What does 妈妈在家。 (Māma zài jiā.) mean?
+   1) Mum is not at home.  |  2) Mum is at home.  |  3) Mum is at school.  |  4) Dad is at home.
+
+### zh-9-0010  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 中午 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) ตอนเที่ยง  |  2) ตอนนี้  |  3) ตอนกลางคืน  |  4) สัปดาห์
+EN: What does 中午 mean? (no pinyin)
+   1) noon  |  2) now  |  3) evening or night  |  4) week
+
+### zh-9-0011  (หัวข้อ: say-it)
+TH: คำว่า "โทรศัพท์" ภาษาจีนคือคำไหน
+   1) 商店 (shāngdiàn)  |  2) 名字 (míngzi)  |  3) 桌子 (zhuōzi)  |  4) 电话 (diànhuà)
+EN: Which Chinese word means "telephone"?
+   (EN choices same as TH)
+
+### zh-9-0012  (หัวข้อ: numbers)
+TH: เลข 11 ภาษาจีนเขียนว่าอย่างไร
+   1) 一十  |  2) 二十一  |  3) 十一  |  4) 一一
+EN: How do you write 11 in Chinese?
+   (EN choices same as TH)
+
+### zh-9-0013  (หัวข้อ: sentences)
+TH: 我们是同学。 (Wǒmen shì tóngxué.) แปลว่าอะไร
+   1) พวกเราเป็นเพื่อนร่วมชั้น  |  2) พวกเราเป็นครู  |  3) พวกเขาเป็นเพื่อนร่วมชั้น  |  4) พวกเราเป็นพี่น้อง
+EN: What does 我们是同学。 (Wǒmen shì tóngxué.) mean?
+   1) We are classmates.  |  2) We are teachers.  |  3) They are classmates.  |  4) We are brothers and sisters.
+
+### zh-9-0014  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 星期 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) ตอนเที่ยง  |  2) วันนี้  |  3) ปี  |  4) สัปดาห์
+EN: What does 星期 mean? (no pinyin)
+   1) noon  |  2) today  |  3) year  |  4) week
+
+### zh-9-0015  (หัวข้อ: measure-words)
+TH: "ปลาหนึ่งตัว" ต้องเติมลักษณนามตัวไหน: 一___鱼
+   1) 辆 (liàng)  |  2) 本 (běn)  |  3) 杯 (bēi)  |  4) 条 (tiáo)
+EN: Which counting word completes "one fish": 一___鱼
+   (EN choices same as TH)
+
+### zh-9-0016  (หัวข้อ: numbers)
+TH: 十二 คือเลขอะไร
+   1) 20  |  2) 21  |  3) 102  |  4) 12
+EN: Which number is 十二?
+   (EN choices same as TH)
+
+### zh-9-0017  (หัวข้อ: numbers)
+TH: 零 (líng) คือเลขอะไร
+   1) 0  |  2) 100  |  3) 10  |  4) 6
+EN: Which number is 零 (líng)?
+   (EN choices same as TH)
+
+### zh-9-0018  (หัวข้อ: fill-blank)
+TH: เติมคำให้ประโยคแปลว่า "ฉันไม่กินปลา": 我___吃鱼。
+   1) 也 (yě)  |  2) 不 (bù)  |  3) 和 (hé)  |  4) 很 (hěn)
+EN: Fill the gap so the sentence means "I do not eat fish.": 我___吃鱼。
+   (EN choices same as TH)
+
+### zh-9-0019  (หัวข้อ: meaning)
+TH: คำว่า 哪儿 (nǎr) แปลว่าอะไร
+   1) อะไร  |  2) นั่น  |  3) ที่ไหน  |  4) นี่
+EN: What does 哪儿 (nǎr) mean?
+   1) what  |  2) that  |  3) where  |  4) this
+
+### zh-9-0020  (หัวข้อ: meaning)
+TH: คำว่า 年 (nián) แปลว่าอะไร
+   1) ตอนเที่ยง  |  2) ปี  |  3) ตอนกลางคืน  |  4) เมื่อวาน
+EN: What does 年 (nián) mean?
+   1) noon  |  2) year  |  3) evening or night  |  4) yesterday
+
+### zh-9-0021  (หัวข้อ: numbers)
+TH: 三十 คือเลขอะไร
+   1) 30  |  2) 13  |  3) 3  |  4) 33
+EN: Which number is 三十?
+   (EN choices same as TH)
+
+### zh-9-0022  (หัวข้อ: say-it)
+TH: คำว่า "กิน" ภาษาจีนคือคำไหน
+   1) 学习 (xuéxí)  |  2) 吃 (chī)  |  3) 跑 (pǎo)  |  4) 来 (lái)
+EN: Which Chinese word means "eat"?
+   (EN choices same as TH)
+
+### zh-9-0023  (หัวข้อ: say-it)
+TH: คำว่า "วันนี้" ภาษาจีนคือคำไหน
+   1) 月 (yuè)  |  2) 昨天 (zuótiān)  |  3) 今天 (jīntiān)  |  4) 现在 (xiànzài)
+EN: Which Chinese word means "today"?
+   (EN choices same as TH)
+
+### zh-9-0024  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 慢 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) เยอะ  |  2) ดี  |  3) สูง  |  4) ช้า
+EN: What does 慢 mean? (no pinyin)
+   1) many  |  2) good  |  3) tall  |  4) slow
+
+### zh-9-0025  (หัวข้อ: sentences)
+TH: 我不喝茶。 (Wǒ bù hē chá.) แปลว่าอะไร
+   1) ฉันไม่ดื่มชา  |  2) ฉันไม่ดื่มนม  |  3) ฉันดื่มชา  |  4) ฉันชอบดื่มชา
+EN: What does 我不喝茶。 (Wǒ bù hē chá.) mean?
+   1) I do not drink tea.  |  2) I do not drink milk.  |  3) I drink tea.  |  4) I like drinking tea.
+
+### zh-9-0026  (หัวข้อ: days-months)
+TH: "วันเสาร์" ภาษาจีนคือคำไหน
+   1) 星期天  |  2) 星期五  |  3) 星期四  |  4) 星期六
+EN: Which is "Saturday" in Chinese?
+   (EN choices same as TH)
+
+### zh-9-0027  (หัวข้อ: say-it)
+TH: คำว่า "นี่" ภาษาจีนคือคำไหน
+   1) 几 (jǐ)  |  2) 哪儿 (nǎr)  |  3) 这 (zhè)  |  4) 谁 (shéi)
+EN: Which Chinese word means "this"?
+   (EN choices same as TH)
+
+### zh-9-0028  (หัวข้อ: numbers)
+TH: 一百 (yìbǎi) คือเลขอะไร
+   1) 10  |  2) 110  |  3) 100  |  4) 1,000
+EN: Which number is 一百 (yìbǎi)?
+   (EN choices same as TH)
+
+### zh-9-0029  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 来 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) เรียน  |  2) ฟัง  |  3) วิ่ง  |  4) มา
+EN: What does 来 mean? (no pinyin)
+   1) study  |  2) listen  |  3) run  |  4) come
+
+### zh-9-0030  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 跑 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) เปิด  |  2) ไป  |  3) เรียน  |  4) วิ่ง
+EN: What does 跑 mean? (no pinyin)
+   1) open  |  2) go  |  3) study  |  4) run
+
+### zh-9-0031  (หัวข้อ: pinyin)
+TH: พินอิน "jīntiān" เขียนเป็นตัวจีนว่าอะไร
+   1) 现在  |  2) 月  |  3) 今天  |  4) 昨天
+EN: Which characters are written "jīntiān" in pinyin?
+   (EN choices same as TH)
+
+### zh-9-0032  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 哪儿 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) อะไร  |  2) ที่ไหน  |  3) นี่  |  4) นั่น
+EN: What does 哪儿 mean? (no pinyin)
+   1) what  |  2) where  |  3) this  |  4) that
+
+### zh-9-0033  (หัวข้อ: fill-blank)
+TH: เติมคำให้ประโยคแปลว่า "คุณเป็นนักเรียนไหม": 你是学生___？
+   1) 哪儿 (nǎr)  |  2) 谁 (shéi)  |  3) 几 (jǐ)  |  4) 吗 (ma)
+EN: Fill the gap so the sentence means "Are you a student?": 你是学生___？
+   (EN choices same as TH)
+
+### zh-9-0034  (หัวข้อ: say-it)
+TH: คำว่า "เขา (ผู้ชาย)" ภาษาจีนคือคำไหน
+   1) 学生 (xuésheng)  |  2) 他 (tā)  |  3) 孩子 (háizi)  |  4) 她 (tā)
+EN: Which Chinese word means "he"?
+   (EN choices same as TH)
+
+### zh-9-0035  (หัวข้อ: numbers)
+TH: 五十六 คือเลขอะไร
+   1) 56  |  2) 65  |  3) 516  |  4) 50
+EN: Which number is 五十六?
+   (EN choices same as TH)
+
+### zh-9-0036  (หัวข้อ: fill-blank)
+TH: เติมคำให้ประโยคแปลว่า "คุณชื่ออะไร": 你叫___名字？
+   1) 什么 (shénme)  |  2) 哪儿 (nǎr)  |  3) 几 (jǐ)  |  4) 谁 (shéi)
+EN: Fill the gap so the sentence means "What is your name?": 你叫___名字？
+   (EN choices same as TH)
+
+### zh-9-0037  (หัวข้อ: sentences)
+TH: 我有一只猫。 (Wǒ yǒu yì zhī māo.) แปลว่าอะไร
+   1) ฉันมีแมวสองตัว  |  2) ฉันมีหมาหนึ่งตัว  |  3) ฉันมีแมวหนึ่งตัว  |  4) ฉันชอบแมว
+EN: What does 我有一只猫。 (Wǒ yǒu yì zhī māo.) mean?
+   1) I have two cats.  |  2) I have one dog.  |  3) I have one cat.  |  4) I like cats.
+
+### zh-9-0038  (หัวข้อ: sentences)
+TH: 我买水果。 (Wǒ mǎi shuǐguǒ.) แปลว่าอะไร
+   1) ฉันกินผลไม้  |  2) ฉันชอบผลไม้  |  3) ฉันซื้อเสื้อผ้า  |  4) ฉันซื้อผลไม้
+EN: What does 我买水果。 (Wǒ mǎi shuǐguǒ.) mean?
+   1) I eat fruit.  |  2) I like fruit.  |  3) I buy clothes.  |  4) I buy fruit.
+
+### zh-9-0039  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 钱 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) เงิน  |  2) อากาศ  |  3) คอมพิวเตอร์  |  4) โต๊ะ
+EN: What does 钱 mean? (no pinyin)
+   1) money  |  2) weather  |  3) computer  |  4) table
+
+### zh-9-0040  (หัวข้อ: say-it)
+TH: คำว่า "เขียน" ภาษาจีนคือคำไหน
+   1) 写 (xiě)  |  2) 玩 (wán)  |  3) 走 (zǒu)  |  4) 吃 (chī)
+EN: Which Chinese word means "write"?
+   (EN choices same as TH)
+
+### zh-9-0041  (หัวข้อ: pinyin)
+TH: พินอิน "chī" เขียนเป็นตัวจีนว่าอะไร
+   1) 来  |  2) 学习  |  3) 吃  |  4) 跑
+EN: Which characters are written "chī" in pinyin?
+   (EN choices same as TH)
+
+### zh-9-0042  (หัวข้อ: say-it)
+TH: คำว่า "ดู" ภาษาจีนคือคำไหน
+   1) 看 (kàn)  |  2) 走 (zǒu)  |  3) 叫 (jiào)  |  4) 喜欢 (xǐhuan)
+EN: Which Chinese word means "look"?
+   (EN choices same as TH)
+
+### zh-9-0043  (หัวข้อ: sentences)
+TH: 爸爸喝水。 (Bàba hē shuǐ.) แปลว่าอะไร
+   1) พ่อกินข้าว  |  2) พ่อดื่มชา  |  3) แม่ดื่มน้ำ  |  4) พ่อดื่มน้ำ
+EN: What does 爸爸喝水。 (Bàba hē shuǐ.) mean?
+   1) Dad eats rice.  |  2) Dad drinks tea.  |  3) Mum drinks water.  |  4) Dad drinks water.
+
+### zh-9-0044  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 天气 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) อากาศ  |  2) ร้านค้า  |  3) ชื่อ  |  4) แก้วน้ำ
+EN: What does 天气 mean? (no pinyin)
+   1) weather  |  2) shop  |  3) name  |  4) cup
+
+### zh-9-0045  (หัวข้อ: fill-blank)
+TH: เติมคำให้ประโยคแปลว่า "วันนี้หนาวมาก": 今天___冷。
+   1) 的 (de)  |  2) 吗 (ma)  |  3) 很 (hěn)  |  4) 和 (hé)
+EN: Fill the gap so the sentence means "It is very cold today.": 今天___冷。
+   (EN choices same as TH)
+
+### zh-9-0046  (หัวข้อ: pinyin)
+TH: พินอิน "diànhuà" เขียนเป็นตัวจีนว่าอะไร
+   1) 名字  |  2) 商店  |  3) 桌子  |  4) 电话
+EN: Which characters are written "diànhuà" in pinyin?
+   (EN choices same as TH)
+
+### zh-9-0047  (หัวข้อ: days-months)
+TH: 十二月 (shí'èryuè) คือเดือนอะไร
+   1) เดือนกุมภาพันธ์  |  2) เดือนตุลาคม  |  3) เดือนพฤศจิกายน  |  4) เดือนธันวาคม
+EN: Which month is 十二月 (shí'èryuè)?
+   1) February  |  2) October  |  3) November  |  4) December
+
+### zh-9-0048  (หัวข้อ: days-months)
+TH: 今天是星期五 (วันนี้วันศุกร์) 昨天 (เมื่อวาน) คือวันอะไร
+   1) 星期三  |  2) 星期六  |  3) 星期五  |  4) 星期四
+EN: If 今天是星期五 (today is Friday), which day was 昨天 (yesterday)?
+   (EN choices same as TH)
+
+### zh-9-0049  (หัวข้อ: pinyin)
+TH: พินอิน "wǒmen" เขียนเป็นตัวจีนว่าอะไร
+   1) 同学  |  2) 孩子  |  3) 我们  |  4) 医生
+EN: Which characters are written "wǒmen" in pinyin?
+   (EN choices same as TH)
+
+### zh-9-0050  (หัวข้อ: meaning)
+TH: คำว่า 天气 (tiānqì) แปลว่าอะไร
+   1) ร้านค้า  |  2) แก้วน้ำ  |  3) อากาศ  |  4) ชื่อ
+EN: What does 天气 (tiānqì) mean?
+   1) shop  |  2) cup  |  3) weather  |  4) name
+
+### zh-9-0051  (หัวข้อ: pinyin)
+TH: พินอิน "lěng" เขียนเป็นตัวจีนว่าอะไร
+   1) 高兴  |  2) 少  |  3) 好  |  4) 冷
+EN: Which characters are written "lěng" in pinyin?
+   (EN choices same as TH)
+
+### zh-9-0052  (หัวข้อ: meaning)
+TH: คำว่า 坐 (zuò) แปลว่าอะไร
+   1) นอนหลับ  |  2) นั่ง  |  3) อ่าน  |  4) เขียน
+EN: What does 坐 (zuò) mean?
+   1) sleep  |  2) sit  |  3) read  |  4) write
+
+### zh-9-0053  (หัวข้อ: meaning)
+TH: คำว่า 汉语 (Hànyǔ) แปลว่าอะไร
+   1) ภาษาจีน  |  2) แก้วน้ำ  |  3) ประเทศไทย  |  4) เสื้อผ้า
+EN: What does 汉语 (Hànyǔ) mean?
+   1) the Chinese language  |  2) cup  |  3) Thailand  |  4) clothes
+
+### zh-9-0054  (หัวข้อ: days-months)
+TH: 八月 (bāyuè) คือเดือนอะไร
+   1) เดือนกรกฎาคม  |  2) เดือนมิถุนายน  |  3) เดือนกันยายน  |  4) เดือนสิงหาคม
+EN: Which month is 八月 (bāyuè)?
+   1) July  |  2) June  |  3) September  |  4) August
+
+### zh-9-0055  (หัวข้อ: meaning)
+TH: คำว่า 好 (hǎo) แปลว่าอะไร
+   1) น้อย  |  2) ดี  |  3) ร้อน  |  4) สูง
+EN: What does 好 (hǎo) mean?
+   1) few  |  2) good  |  3) hot  |  4) tall
+
+### zh-9-0056  (หัวข้อ: days-months)
+TH: 今天是星期二 (วันนี้วันอังคาร) 明天 (พรุ่งนี้) คือวันอะไร
+   1) 星期一  |  2) 星期三  |  3) 星期二  |  4) 星期四
+EN: If 今天是星期二 (today is Tuesday), which day is 明天 (tomorrow)?
+   (EN choices same as TH)
+
+### zh-9-0057  (หัวข้อ: measure-words)
+TH: "น้ำหนึ่งแก้ว" ต้องเติมลักษณนามตัวไหน: 一___水
+   1) 辆 (liàng)  |  2) 本 (běn)  |  3) 杯 (bēi)  |  4) 只 (zhī)
+EN: Which counting word completes "one cup of water": 一___水
+   (EN choices same as TH)
+
+### zh-9-0058  (หัวข้อ: numbers)
+TH: เลข 15 ภาษาจีนเขียนว่าอย่างไร
+   1) 五十  |  2) 二十五  |  3) 一五  |  4) 十五
+EN: How do you write 15 in Chinese?
+   (EN choices same as TH)
+
+### zh-9-0059  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 商店 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) แก้วน้ำ  |  2) คอมพิวเตอร์  |  3) โทรศัพท์  |  4) ร้านค้า
+EN: What does 商店 mean? (no pinyin)
+   1) cup  |  2) computer  |  3) telephone  |  4) shop
+
+### zh-9-0060  (หัวข้อ: meaning)
+TH: คำว่า 有 (yǒu) แปลว่าอะไร
+   1) เขียน  |  2) มี  |  3) ไป  |  4) ชื่อว่า
+EN: What does 有 (yǒu) mean?
+   1) write  |  2) have  |  3) go  |  4) be called
+
+### zh-9-0061  (หัวข้อ: sentences)
+TH: 我去学校。 (Wǒ qù xuéxiào.) แปลว่าอะไร
+   1) ฉันไปโรงเรียน  |  2) ฉันไปร้านค้า  |  3) ฉันชอบโรงเรียน  |  4) ฉันอยู่ที่โรงเรียน
+EN: What does 我去学校。 (Wǒ qù xuéxiào.) mean?
+   1) I go to school.  |  2) I go to the shop.  |  3) I like school.  |  4) I am at school.
+
+### zh-9-0062  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 门 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) โรงพยาบาล  |  2) ประตู  |  3) โต๊ะ  |  4) เก้าอี้
+EN: What does 门 mean? (no pinyin)
+   1) hospital  |  2) door  |  3) table  |  4) chair
+
+### zh-9-0063  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 高 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) เร็ว  |  2) สวย  |  3) ช้า  |  4) สูง
+EN: What does 高 mean? (no pinyin)
+   1) fast  |  2) pretty  |  3) slow  |  4) tall
+
+### zh-9-0064  (หัวข้อ: days-months)
+TH: 星期天 (xīngqītiān) คือวันอะไร
+   1) วันอาทิตย์  |  2) วันศุกร์  |  3) วันเสาร์  |  4) วันจันทร์
+EN: Which day is 星期天 (xīngqītiān)?
+   1) Sunday  |  2) Friday  |  3) Saturday  |  4) Monday
+
+### zh-9-0065  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 长 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) สูง  |  2) ยาว  |  3) เร็ว  |  4) ช้า
+EN: What does 长 mean? (no pinyin)
+   1) tall  |  2) long  |  3) fast  |  4) slow
+
+### zh-9-0066  (หัวข้อ: numbers)
+TH: เลข 20 ภาษาจีนเขียนว่าอย่างไร
+   1) 二十  |  2) 二二  |  3) 十二  |  4) 二十二
+EN: How do you write 20 in Chinese?
+   (EN choices same as TH)
+
+### zh-9-0067  (หัวข้อ: sentences)
+TH: 她是老师。 (Tā shì lǎoshī.) แปลว่าอะไร
+   1) เธอเป็นครู  |  2) เธอเป็นนักเรียน  |  3) เธอเป็นหมอ  |  4) เธอไม่ใช่ครู
+EN: What does 她是老师。 (Tā shì lǎoshī.) mean?
+   1) She is a teacher.  |  2) She is a student.  |  3) She is a doctor.  |  4) She is not a teacher.
+
+### zh-9-0068  (หัวข้อ: fill-blank)
+TH: เติมคำให้ประโยคแปลว่า "ฉันมีพี่ชายหนึ่งคน": 我___一个哥哥。
+   1) 吃 (chī)  |  2) 去 (qù)  |  3) 叫 (jiào)  |  4) 有 (yǒu)
+EN: Fill the gap so the sentence means "I have one older brother.": 我___一个哥哥。
+   (EN choices same as TH)
+
+### zh-9-0069  (หัวข้อ: sentences)
+TH: 我喜欢吃苹果。 (Wǒ xǐhuan chī píngguǒ.) แปลว่าอะไร
+   1) ฉันชอบกินกล้วย  |  2) ฉันไม่ชอบกินแอปเปิล  |  3) ฉันชอบกินแอปเปิล  |  4) ฉันซื้อแอปเปิล
+EN: What does 我喜欢吃苹果。 (Wǒ xǐhuan chī píngguǒ.) mean?
+   1) I like eating bananas.  |  2) I do not like eating apples.  |  3) I like eating apples.  |  4) I buy apples.
+
+### zh-9-0070  (หัวข้อ: numbers)
+TH: เลข 25 ภาษาจีนเขียนว่าอย่างไร
+   1) 五十二  |  2) 二十五  |  3) 二五  |  4) 十二五
+EN: How do you write 25 in Chinese?
+   (EN choices same as TH)
+
+### zh-9-0071  (หัวข้อ: meaning)
+TH: คำว่า 玩 (wán) แปลว่าอะไร
+   1) นอนหลับ  |  2) นั่ง  |  3) กิน  |  4) เล่น
+EN: What does 玩 (wán) mean?
+   1) sleep  |  2) sit  |  3) eat  |  4) play
+
+### zh-9-0072  (หัวข้อ: numbers)
+TH: 九十 คือเลขอะไร
+   1) 9  |  2) 99  |  3) 90  |  4) 19
+EN: Which number is 九十?
+   (EN choices same as TH)
+
+### zh-9-0073  (หัวข้อ: pinyin)
+TH: พินอิน "xīn" เขียนเป็นตัวจีนว่าอะไร
+   1) 多  |  2) 热  |  3) 快  |  4) 新
+EN: Which characters are written "xīn" in pinyin?
+   (EN choices same as TH)
+
+### zh-9-0074  (หัวข้อ: numbers)
+TH: เลข 38 ภาษาจีนเขียนว่าอย่างไร
+   1) 十三八  |  2) 三八  |  3) 三十八  |  4) 八十三
+EN: How do you write 38 in Chinese?
+   (EN choices same as TH)
+
+### zh-9-0075  (หัวข้อ: meaning)
+TH: คำว่า 叫 (jiào) แปลว่าอะไร
+   1) มา  |  2) ชื่อว่า  |  3) พูด  |  4) ดู
+EN: What does 叫 (jiào) mean?
+   1) come  |  2) be called  |  3) speak  |  4) look
+
+### zh-9-0076  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 泰国 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) ประเทศไทย  |  2) โต๊ะ  |  3) ประตู  |  4) เงิน
+EN: What does 泰国 mean? (no pinyin)
+   1) Thailand  |  2) table  |  3) door  |  4) money
+
+### zh-9-0077  (หัวข้อ: meaning)
+TH: คำว่า 名字 (míngzi) แปลว่าอะไร
+   1) ชื่อ  |  2) ผลไม้  |  3) ภาษาจีน  |  4) ประเทศจีน
+EN: What does 名字 (míngzi) mean?
+   1) name  |  2) fruit  |  3) the Chinese language  |  4) China
+
+### zh-9-0078  (หัวข้อ: sentences)
+TH: 我很高兴。 (Wǒ hěn gāoxìng.) แปลว่าอะไร
+   1) ฉันดีใจมาก  |  2) เขาดีใจมาก  |  3) ฉันหิวมาก  |  4) ฉันเหนื่อยมาก
+EN: What does 我很高兴。 (Wǒ hěn gāoxìng.) mean?
+   1) I am very happy.  |  2) He is very happy.  |  3) I am very hungry.  |  4) I am very tired.
+
+### zh-9-0079  (หัวข้อ: sentences)
+TH: 弟弟在睡觉。 (Dìdi zài shuìjiào.) แปลว่าอะไร
+   1) น้องชายกำลังนอน  |  2) น้องชายกำลังเล่น  |  3) น้องชายกำลังกิน  |  4) น้องสาวกำลังนอน
+EN: What does 弟弟在睡觉。 (Dìdi zài shuìjiào.) mean?
+   1) My little brother is sleeping.  |  2) My little brother is playing.  |  3) My little brother is eating.  |  4) My little sister is sleeping.
+
+### zh-9-0080  (หัวข้อ: meaning)
+TH: คำว่า 孩子 (háizi) แปลว่าอะไร
+   1) หมอ  |  2) เด็ก  |  3) เธอ (ผู้หญิง)  |  4) เขา (ผู้ชาย)
+EN: What does 孩子 (háizi) mean?
+   1) doctor  |  2) child  |  3) she  |  4) he
+
+### zh-9-0081  (หัวข้อ: sentences)
+TH: 今天很热。 (Jīntiān hěn rè.) แปลว่าอะไร
+   1) พรุ่งนี้ร้อนมาก  |  2) วันนี้ร้อนมาก  |  3) วันนี้หนาวมาก  |  4) เมื่อวานร้อนมาก
+EN: What does 今天很热。 (Jīntiān hěn rè.) mean?
+   1) It will be very hot tomorrow.  |  2) It is very hot today.  |  3) It is very cold today.  |  4) It was very hot yesterday.
+
+### zh-9-0082  (หัวข้อ: fill-blank)
+TH: เติมคำให้ประโยคแปลว่า "นี่คือหนังสือของฉัน": 这是我___书。
+   1) 吗 (ma)  |  2) 很 (hěn)  |  3) 不 (bù)  |  4) 的 (de)
+EN: Fill the gap so the sentence means "This is my book.": 这是我___书。
+   (EN choices same as TH)
+
+### zh-9-0083  (หัวข้อ: measure-words)
+TH: "แมวหนึ่งตัว" ต้องเติมลักษณนามตัวไหน: 一___猫
+   1) 张 (zhāng)  |  2) 本 (běn)  |  3) 只 (zhī)  |  4) 杯 (bēi)
+EN: Which counting word completes "one cat": 一___猫
+   (EN choices same as TH)
+
+### zh-9-0084  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 那 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) ใคร  |  2) กี่  |  3) นั่น  |  4) นี่
+EN: What does 那 mean? (no pinyin)
+   1) who  |  2) how many  |  3) that  |  4) this
+
+### zh-9-0085  (หัวข้อ: fill-blank)
+TH: เติมคำให้ประโยคแปลว่า "ฉันอยู่ที่โรงเรียน": 我___学校。
+   1) 的 (de)  |  2) 在 (zài)  |  3) 吗 (ma)  |  4) 和 (hé)
+EN: Fill the gap so the sentence means "I am at school.": 我___学校。
+   (EN choices same as TH)
+
+### zh-9-0086  (หัวข้อ: pinyin)
+TH: พินอิน "shénme" เขียนเป็นตัวจีนว่าอะไร
+   1) 什么  |  2) 那  |  3) 几  |  4) 这
+EN: Which characters are written "shénme" in pinyin?
+   (EN choices same as TH)
+
+### zh-9-0087  (หัวข้อ: say-it)
+TH: คำว่า "หนาว" ภาษาจีนคือคำไหน
+   1) 少 (shǎo)  |  2) 高兴 (gāoxìng)  |  3) 冷 (lěng)  |  4) 好 (hǎo)
+EN: Which Chinese word means "cold"?
+   (EN choices same as TH)
+
+### zh-9-0088  (หัวข้อ: numbers)
+TH: เลข 60 ภาษาจีนเขียนว่าอย่างไร
+   1) 六十  |  2) 六六  |  3) 十六  |  4) 六十六
+EN: How do you write 60 in Chinese?
+   (EN choices same as TH)
+
+### zh-9-0089  (หัวข้อ: meaning)
+TH: คำว่า 听 (tīng) แปลว่าอะไร
+   1) ไป  |  2) พูด  |  3) เขียน  |  4) ฟัง
+EN: What does 听 (tīng) mean?
+   1) go  |  2) speak  |  3) write  |  4) listen
+
+### zh-9-0090  (หัวข้อ: meaning)
+TH: คำว่า 喜欢 (xǐhuan) แปลว่าอะไร
+   1) ชอบ  |  2) ฟัง  |  3) วิ่ง  |  4) เรียน
+EN: What does 喜欢 (xǐhuan) mean?
+   1) like  |  2) listen  |  3) run  |  4) study
+
+### zh-9-0091  (หัวข้อ: days-months)
+TH: 星期三 (xīngqīsān) คือวันอะไร
+   1) วันพฤหัสบดี  |  2) วันพุธ  |  3) วันศุกร์  |  4) วันจันทร์
+EN: Which day is 星期三 (xīngqīsān)?
+   1) Thursday  |  2) Wednesday  |  3) Friday  |  4) Monday
+
+### zh-9-0092  (หัวข้อ: sentences)
+TH: 我会说汉语。 (Wǒ huì shuō Hànyǔ.) แปลว่าอะไร
+   1) ฉันพูดภาษาจีนไม่ได้  |  2) ฉันพูดภาษาจีนได้  |  3) ฉันเรียนภาษาจีน  |  4) ฉันชอบภาษาจีน
+EN: What does 我会说汉语。 (Wǒ huì shuō Hànyǔ.) mean?
+   1) I cannot speak Chinese.  |  2) I can speak Chinese.  |  3) I study Chinese.  |  4) I like Chinese.
+
+### zh-9-0093  (หัวข้อ: meaning)
+TH: คำว่า 医院 (yīyuàn) แปลว่าอะไร
+   1) โทรศัพท์  |  2) ร้านค้า  |  3) โรงพยาบาล  |  4) ประตู
+EN: What does 医院 (yīyuàn) mean?
+   1) telephone  |  2) shop  |  3) hospital  |  4) door
+
+### zh-9-0094  (หัวข้อ: meaning)
+TH: คำว่า 医生 (yīshēng) แปลว่าอะไร
+   1) เพื่อนร่วมชั้น  |  2) หมอ  |  3) พวกเรา  |  4) เด็ก
+EN: What does 医生 (yīshēng) mean?
+   1) classmate  |  2) doctor  |  3) we  |  4) child
+
+### zh-9-0095  (หัวข้อ: days-months)
+TH: 星期五 (xīngqīwǔ) คือวันอะไร
+   1) วันพุธ  |  2) วันพฤหัสบดี  |  3) วันศุกร์  |  4) วันเสาร์
+EN: Which day is 星期五 (xīngqīwǔ)?
+   1) Wednesday  |  2) Thursday  |  3) Friday  |  4) Saturday
+
+### zh-9-0096  (หัวข้อ: say-it)
+TH: คำว่า "เรียน" ภาษาจีนคือคำไหน
+   1) 听 (tīng)  |  2) 开 (kāi)  |  3) 学习 (xuéxí)  |  4) 玩 (wán)
+EN: Which Chinese word means "study"?
+   (EN choices same as TH)
+
+### zh-9-0097  (หัวข้อ: fill-blank)
+TH: เติมคำให้ประโยคแปลว่า "คุณไปไหน": 你去___？
+   1) 吗 (ma)  |  2) 谁 (shéi)  |  3) 几 (jǐ)  |  4) 哪儿 (nǎr)
+EN: Fill the gap so the sentence means "Where are you going?": 你去___？
+   (EN choices same as TH)
+
+### zh-9-0098  (หัวข้อ: pinyin)
+TH: พินอิน "dú" เขียนเป็นตัวจีนว่าอะไร
+   1) 喝  |  2) 去  |  3) 读  |  4) 写
+EN: Which characters are written "dú" in pinyin?
+   (EN choices same as TH)
+
+### zh-9-0099  (หัวข้อ: pinyin)
+TH: พินอิน "míngtiān" เขียนเป็นตัวจีนว่าอะไร
+   1) 星期  |  2) 明天  |  3) 现在  |  4) 昨天
+EN: Which characters are written "míngtiān" in pinyin?
+   (EN choices same as TH)
+
+### zh-9-0100  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 多 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) ยาว  |  2) ใหม่  |  3) เยอะ  |  4) ช้า
+EN: What does 多 mean? (no pinyin)
+   1) long  |  2) new  |  3) many  |  4) slow
+
+### zh-9-0101  (หัวข้อ: meaning)
+TH: คำว่า 衣服 (yīfu) แปลว่าอะไร
+   1) ประเทศจีน  |  2) ภาษาจีน  |  3) โทรศัพท์  |  4) เสื้อผ้า
+EN: What does 衣服 (yīfu) mean?
+   1) China  |  2) the Chinese language  |  3) telephone  |  4) clothes
+
+### zh-9-0102  (หัวข้อ: say-it)
+TH: คำว่า "ตอนกลางคืน" ภาษาจีนคือคำไหน
+   1) 今天 (jīntiān)  |  2) 现在 (xiànzài)  |  3) 晚上 (wǎnshang)  |  4) 昨天 (zuótiān)
+EN: Which Chinese word means "evening or night"?
+   (EN choices same as TH)
+
+### zh-9-0103  (หัวข้อ: say-it)
+TH: คำว่า "เปิด" ภาษาจีนคือคำไหน
+   1) 开 (kāi)  |  2) 读 (dú)  |  3) 是 (shì)  |  4) 走 (zǒu)
+EN: Which Chinese word means "open"?
+   (EN choices same as TH)
+
+### zh-9-0104  (หัวข้อ: pinyin)
+TH: พินอิน "qù" เขียนเป็นตัวจีนว่าอะไร
+   1) 写  |  2) 去  |  3) 听  |  4) 喜欢
+EN: Which characters are written "qù" in pinyin?
+   (EN choices same as TH)
+
+### zh-9-0105  (หัวข้อ: say-it)
+TH: คำว่า "ใหม่" ภาษาจีนคือคำไหน
+   1) 热 (rè)  |  2) 新 (xīn)  |  3) 快 (kuài)  |  4) 多 (duō)
+EN: Which Chinese word means "new"?
+   (EN choices same as TH)
+
+### zh-9-0106  (หัวข้อ: sentences)
+TH: 我是泰国人。 (Wǒ shì Tàiguó rén.) แปลว่าอะไร
+   1) ฉันอยู่ที่ประเทศไทย  |  2) ฉันเป็นคนจีน  |  3) ฉันเป็นคนไทย  |  4) ฉันไปประเทศไทย
+EN: What does 我是泰国人。 (Wǒ shì Tàiguó rén.) mean?
+   1) I am in Thailand.  |  2) I am Chinese.  |  3) I am Thai.  |  4) I go to Thailand.
+
+### zh-9-0107  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 椅子 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) เก้าอี้  |  2) ชื่อ  |  3) ประเทศไทย  |  4) โทรศัพท์
+EN: What does 椅子 mean? (no pinyin)
+   1) chair  |  2) name  |  3) Thailand  |  4) telephone
+
+### zh-9-0108  (หัวข้อ: say-it)
+TH: คำว่า "อ่าน" ภาษาจีนคือคำไหน
+   1) 读 (dú)  |  2) 去 (qù)  |  3) 喝 (hē)  |  4) 写 (xiě)
+EN: Which Chinese word means "read"?
+   (EN choices same as TH)
+
+### zh-9-0109  (หัวข้อ: say-it)
+TH: คำว่า "พวกเรา" ภาษาจีนคือคำไหน
+   1) 我们 (wǒmen)  |  2) 同学 (tóngxué)  |  3) 医生 (yīshēng)  |  4) 孩子 (háizi)
+EN: Which Chinese word means "we"?
+   (EN choices same as TH)
+
+### zh-9-0110  (หัวข้อ: say-it)
+TH: คำว่า "ใคร" ภาษาจีนคือคำไหน
+   1) 那 (nà)  |  2) 几 (jǐ)  |  3) 谁 (shéi)  |  4) 什么 (shénme)
+EN: Which Chinese word means "who"?
+   (EN choices same as TH)
+
+### zh-9-0111  (หัวข้อ: meaning)
+TH: คำว่า 电脑 (diànnǎo) แปลว่าอะไร
+   1) ชื่อ  |  2) โทรศัพท์  |  3) คอมพิวเตอร์  |  4) เงิน
+EN: What does 电脑 (diànnǎo) mean?
+   1) name  |  2) telephone  |  3) computer  |  4) money
+
+### zh-9-0112  (หัวข้อ: pinyin)
+TH: พินอิน "zhè" เขียนเป็นตัวจีนว่าอะไร
+   1) 几  |  2) 这  |  3) 哪儿  |  4) 谁
+EN: Which characters are written "zhè" in pinyin?
+   (EN choices same as TH)
+
+### zh-9-0113  (หัวข้อ: measure-words)
+TH: "หนังสือหนึ่งเล่ม" ต้องเติมลักษณนามตัวไหน: 一___书
+   1) 本 (běn)  |  2) 只 (zhī)  |  3) 杯 (bēi)  |  4) 辆 (liàng)
+EN: Which counting word completes "one book": 一___书
+   (EN choices same as TH)
+
+### zh-9-0114  (หัวข้อ: meaning)
+TH: คำว่า 星期 (xīngqī) แปลว่าอะไร
+   1) ปี  |  2) สัปดาห์  |  3) วันนี้  |  4) ตอนเที่ยง
+EN: What does 星期 (xīngqī) mean?
+   1) year  |  2) week  |  3) today  |  4) noon
+
+### zh-9-0115  (หัวข้อ: meaning)
+TH: คำว่า 买 (mǎi) แปลว่าอะไร
+   1) เดิน  |  2) พูด  |  3) ซื้อ  |  4) ดู
+EN: What does 买 (mǎi) mean?
+   1) walk  |  2) speak  |  3) buy  |  4) look
+
+### zh-9-0116  (หัวข้อ: meaning)
+TH: คำว่า 商店 (shāngdiàn) แปลว่าอะไร
+   1) คอมพิวเตอร์  |  2) ร้านค้า  |  3) แก้วน้ำ  |  4) โทรศัพท์
+EN: What does 商店 (shāngdiàn) mean?
+   1) computer  |  2) shop  |  3) cup  |  4) telephone
+
+### zh-9-0117  (หัวข้อ: say-it)
+TH: คำว่า "ประเทศจีน" ภาษาจีนคือคำไหน
+   1) 中国 (Zhōngguó)  |  2) 商店 (shāngdiàn)  |  3) 医院 (yīyuàn)  |  4) 衣服 (yīfu)
+EN: Which Chinese word means "China"?
+   (EN choices same as TH)
+
+### zh-9-0118  (หัวข้อ: numbers)
+TH: 七十四 คือเลขอะไร
+   1) 704  |  2) 74  |  3) 14  |  4) 47
+EN: Which number is 七十四?
+   (EN choices same as TH)
+
+### zh-9-0119  (หัวข้อ: say-it)
+TH: คำว่า "อะไร" ภาษาจีนคือคำไหน
+   1) 那 (nà)  |  2) 什么 (shénme)  |  3) 这 (zhè)  |  4) 几 (jǐ)
+EN: Which Chinese word means "what"?
+   (EN choices same as TH)
+
+### zh-9-0120  (หัวข้อ: numbers)
+TH: 八十一 คือเลขอะไร
+   1) 80  |  2) 18  |  3) 81  |  4) 801
+EN: Which number is 八十一?
+   (EN choices same as TH)
+
+### zh-9-0121  (หัวข้อ: numbers)
+TH: เลข 47 ภาษาจีนเขียนว่าอย่างไร
+   1) 四十七  |  2) 七十四  |  3) 四七  |  4) 十四七
+EN: How do you write 47 in Chinese?
+   (EN choices same as TH)
+
+### zh-9-0122  (หัวข้อ: days-months)
+TH: 三月 (sānyuè) คือเดือนอะไร
+   1) เดือนมกราคม  |  2) เดือนพฤษภาคม  |  3) เดือนกุมภาพันธ์  |  4) เดือนมีนาคม
+EN: Which month is 三月 (sānyuè)?
+   1) January  |  2) May  |  3) February  |  4) March
+
+### zh-9-0123  (หัวข้อ: pinyin)
+TH: พินอิน "hē" เขียนเป็นตัวจีนว่าอะไร
+   1) 读  |  2) 写  |  3) 喝  |  4) 走
+EN: Which characters are written "hē" in pinyin?
+   (EN choices same as TH)
+
+### zh-9-0124  (หัวข้อ: measure-words)
+TH: "คนหนึ่งคน" ต้องเติมลักษณนามตัวไหน: 一___人
+   1) 个 (gè)  |  2) 只 (zhī)  |  3) 杯 (bēi)  |  4) 本 (běn)
+EN: Which counting word completes "one person": 一___人
+   (EN choices same as TH)
+
+### zh-9-0125  (หัวข้อ: pinyin)
+TH: พินอิน "shéi" เขียนเป็นตัวจีนว่าอะไร
+   1) 谁  |  2) 几  |  3) 那  |  4) 什么
+EN: Which characters are written "shéi" in pinyin?
+   (EN choices same as TH)
+
+### zh-9-0126  (หัวข้อ: say-it)
+TH: คำว่า "พรุ่งนี้" ภาษาจีนคือคำไหน
+   1) 昨天 (zuótiān)  |  2) 星期 (xīngqī)  |  3) 现在 (xiànzài)  |  4) 明天 (míngtiān)
+EN: Which Chinese word means "tomorrow"?
+   (EN choices same as TH)
+
+### zh-9-0127  (หัวข้อ: pinyin)
+TH: พินอิน "kàn" เขียนเป็นตัวจีนว่าอะไร
+   1) 叫  |  2) 喜欢  |  3) 走  |  4) 看
+EN: Which characters are written "kàn" in pinyin?
+   (EN choices same as TH)
+
+### zh-9-0128  (หัวข้อ: say-it)
+TH: คำว่า "ดื่ม" ภาษาจีนคือคำไหน
+   1) 走 (zǒu)  |  2) 读 (dú)  |  3) 写 (xiě)  |  4) 喝 (hē)
+EN: Which Chinese word means "drink"?
+   (EN choices same as TH)
+
+### zh-9-0129  (หัวข้อ: days-months)
+TH: 星期一 (xīngqīyī) คือวันอะไร
+   1) วันจันทร์  |  2) วันอาทิตย์  |  3) วันอังคาร  |  4) วันเสาร์
+EN: Which day is 星期一 (xīngqīyī)?
+   1) Monday  |  2) Sunday  |  3) Tuesday  |  4) Saturday
+
+### zh-9-0130  (หัวข้อ: sentences)
+TH: 这个苹果很大。 (Zhège píngguǒ hěn dà.) แปลว่าอะไร
+   1) แตงโมลูกนี้ใหญ่มาก  |  2) แอปเปิลลูกนี้ใหญ่มาก  |  3) แอปเปิลลูกนั้นใหญ่มาก  |  4) แอปเปิลลูกนี้เล็กมาก
+EN: What does 这个苹果很大。 (Zhège píngguǒ hěn dà.) mean?
+   1) This watermelon is very big.  |  2) This apple is very big.  |  3) That apple is very big.  |  4) This apple is very small.
+
+### zh-9-0131  (หัวข้อ: measure-words)
+TH: "รถหนึ่งคัน" ต้องเติมลักษณนามตัวไหน: 一___车
+   1) 只 (zhī)  |  2) 本 (běn)  |  3) 杯 (bēi)  |  4) 辆 (liàng)
+EN: Which counting word completes "one car": 一___车
+   (EN choices same as TH)
+
+### zh-9-0132  (หัวข้อ: measure-words)
+TH: "หมาหนึ่งตัว" ต้องเติมลักษณนามตัวไหน: 一___狗
+   1) 辆 (liàng)  |  2) 杯 (bēi)  |  3) 只 (zhī)  |  4) 本 (běn)
+EN: Which counting word completes "one dog": 一___狗
+   (EN choices same as TH)
+
+### zh-9-0133  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 热 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) เยอะ  |  2) ดีใจ  |  3) ร้อน  |  4) สูง
+EN: What does 热 mean? (no pinyin)
+   1) many  |  2) happy  |  3) hot  |  4) tall
+
+### zh-9-0134  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 杯子 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) อากาศ  |  2) แก้วน้ำ  |  3) ประเทศจีน  |  4) ร้านค้า
+EN: What does 杯子 mean? (no pinyin)
+   1) weather  |  2) cup  |  3) China  |  4) shop
+
+### zh-9-0135  (หัวข้อ: pinyin)
+TH: พินอิน "xuésheng" เขียนเป็นตัวจีนว่าอะไร
+   1) 孩子  |  2) 他  |  3) 学生  |  4) 医生
+EN: Which characters are written "xuésheng" in pinyin?
+   (EN choices same as TH)
+
+### zh-9-0136  (หัวข้อ: fill-blank)
+TH: เติมคำให้ประโยคแปลว่า "พวกเราทุกคนเป็นนักเรียน": 我们___是学生。
+   1) 吗 (ma)  |  2) 的 (de)  |  3) 和 (hé)  |  4) 都 (dōu)
+EN: Fill the gap so the sentence means "We are all students.": 我们___是学生。
+   (EN choices same as TH)
+
+### zh-9-0137  (หัวข้อ: numbers)
+TH: เลข 99 ภาษาจีนเขียนว่าอย่างไร
+   1) 九十九  |  2) 十九  |  3) 九十  |  4) 九九
+EN: How do you write 99 in Chinese?
+   (EN choices same as TH)
+
+### zh-9-0138  (หัวข้อ: say-it)
+TH: คำว่า "ไป" ภาษาจีนคือคำไหน
+   1) 去 (qù)  |  2) 喜欢 (xǐhuan)  |  3) 听 (tīng)  |  4) 写 (xiě)
+EN: Which Chinese word means "go"?
+   (EN choices same as TH)
+
+### zh-9-0139  (หัวข้อ: sentences)
+TH: 我是学生。 (Wǒ shì xuésheng.) แปลว่าอะไร
+   1) ฉันเป็นครู  |  2) เขาเป็นนักเรียน  |  3) ฉันไม่ใช่นักเรียน  |  4) ฉันเป็นนักเรียน
+EN: What does 我是学生。 (Wǒ shì xuésheng.) mean?
+   1) I am a teacher.  |  2) He is a student.  |  3) I am not a student.  |  4) I am a student.
+
+### zh-9-0140  (หัวข้อ: fill-blank)
+TH: เติมคำให้ประโยคแปลว่า "ฉันก็ชอบแมวเหมือนกัน": 我___喜欢猫。
+   1) 和 (hé)  |  2) 吗 (ma)  |  3) 的 (de)  |  4) 也 (yě)
+EN: Fill the gap so the sentence means "I like cats too.": 我___喜欢猫。
+   (EN choices same as TH)
+
+### zh-9-0141  (หัวข้อ: say-it)
+TH: คำว่า "ตอนนี้" ภาษาจีนคือคำไหน
+   1) 晚上 (wǎnshang)  |  2) 明天 (míngtiān)  |  3) 年 (nián)  |  4) 现在 (xiànzài)
+EN: Which Chinese word means "now"?
+   (EN choices same as TH)
+
+### zh-9-0142  (หัวข้อ: pinyin)
+TH: พินอิน "shuìjiào" เขียนเป็นตัวจีนว่าอะไร
+   1) 睡觉  |  2) 是  |  3) 学习  |  4) 喜欢
+EN: Which characters are written "shuìjiào" in pinyin?
+   (EN choices same as TH)
+
+### zh-9-0143  (หัวข้อ: sentences)
+TH: 你好吗？ (Nǐ hǎo ma?) แปลว่าอะไร
+   1) คุณสบายดีไหม  |  2) คุณชื่ออะไร  |  3) คุณเป็นใคร  |  4) คุณอยู่ที่ไหน
+EN: What does 你好吗？ (Nǐ hǎo ma?) mean?
+   1) How are you?  |  2) What is your name?  |  3) Who are you?  |  4) Where are you?
+
+### zh-9-0144  (หัวข้อ: fill-blank)
+TH: เติมคำให้ประโยคแปลว่า "พ่อและแม่": 爸爸___妈妈
+   1) 和 (hé)  |  2) 吗 (ma)  |  3) 的 (de)  |  4) 很 (hěn)
+EN: Fill the gap so the sentence means "Dad and Mum": 爸爸___妈妈
+   (EN choices same as TH)
+
+### zh-9-0145  (หัวข้อ: sentences)
+TH: 他是我的朋友。 (Tā shì wǒ de péngyou.) แปลว่าอะไร
+   1) เขาเป็นครูของฉัน  |  2) เขาเป็นพี่ชายของฉัน  |  3) เขาเป็นเพื่อนของฉัน  |  4) ฉันเป็นเพื่อนของเขา
+EN: What does 他是我的朋友。 (Tā shì wǒ de péngyou.) mean?
+   1) He is my teacher.  |  2) He is my older brother.  |  3) He is my friend.  |  4) I am his friend.
+
+### zh-9-0146  (หัวข้อ: meaning)
+TH: คำว่า 那 (nà) แปลว่าอะไร
+   1) นี่  |  2) นั่น  |  3) ใคร  |  4) กี่
+EN: What does 那 (nà) mean?
+   1) this  |  2) that  |  3) who  |  4) how many
+
+### zh-9-0147  (หัวข้อ: say-it)
+TH: คำว่า "สวย" ภาษาจีนคือคำไหน
+   1) 高兴 (gāoxìng)  |  2) 冷 (lěng)  |  3) 漂亮 (piàoliang)  |  4) 新 (xīn)
+EN: Which Chinese word means "pretty"?
+   (EN choices same as TH)
+
+### zh-9-0148  (หัวข้อ: meaning)
+TH: คำว่า 高兴 (gāoxìng) แปลว่าอะไร
+   1) ใหม่  |  2) ร้อน  |  3) ดีใจ  |  4) น้อย
+EN: What does 高兴 (gāoxìng) mean?
+   1) new  |  2) hot  |  3) happy  |  4) few
+
+### zh-9-0149  (หัวข้อ: meaning)
+TH: คำว่า 是 (shì) แปลว่าอะไร
+   1) เรียน  |  2) เป็น คือ  |  3) อ่าน  |  4) ชื่อว่า
+EN: What does 是 (shì) mean?
+   1) study  |  2) be (am, is, are)  |  3) read  |  4) be called
+
+### zh-9-0150  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 少 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) น้อย  |  2) เร็ว  |  3) ดี  |  4) ช้า
+EN: What does 少 mean? (no pinyin)
+   1) few  |  2) fast  |  3) good  |  4) slow
+
+### zh-9-0151  (หัวข้อ: say-it)
+TH: คำว่า "เมื่อวาน" ภาษาจีนคือคำไหน
+   1) 晚上 (wǎnshang)  |  2) 昨天 (zuótiān)  |  3) 今天 (jīntiān)  |  4) 明天 (míngtiān)
+EN: Which Chinese word means "yesterday"?
+   (EN choices same as TH)
+
+### zh-9-0152  (หัวข้อ: meaning)
+TH: คำว่า 杯子 (bēizi) แปลว่าอะไร
+   1) อากาศ  |  2) แก้วน้ำ  |  3) ประเทศจีน  |  4) ร้านค้า
+EN: What does 杯子 (bēizi) mean?
+   1) weather  |  2) cup  |  3) China  |  4) shop
+
+### zh-9-0153  (หัวข้อ: sentences)
+TH: 你叫什么名字？ (Nǐ jiào shénme míngzi?) แปลว่าอะไร
+   1) คุณอายุเท่าไร  |  2) คุณไปไหน  |  3) คุณชื่ออะไร  |  4) คุณเป็นใคร
+EN: What does 你叫什么名字？ (Nǐ jiào shénme míngzi?) mean?
+   1) How old are you?  |  2) Where are you going?  |  3) What is your name?  |  4) Who are you?
+
+### zh-9-0154  (หัวข้อ: meaning)
+TH: คำว่า 月 (yuè) แปลว่าอะไร
+   1) ตอนเที่ยง  |  2) เมื่อวาน  |  3) สัปดาห์  |  4) เดือน
+EN: What does 月 (yuè) mean?
+   1) noon  |  2) yesterday  |  3) week  |  4) month
+
+### zh-9-0155  (หัวข้อ: fill-blank)
+TH: เติมคำให้ประโยคแปลว่า "คุณอายุกี่ขวบ": 你___岁？
+   1) 几 (jǐ)  |  2) 哪儿 (nǎr)  |  3) 吗 (ma)  |  4) 谁 (shéi)
+EN: Fill the gap so the sentence means "How old are you?": 你___岁？
+   (EN choices same as TH)
+
+### zh-9-0156  (หัวข้อ: sentences)
+TH: 明天见！ (Míngtiān jiàn!) แปลว่าอะไร
+   1) สวัสดีตอนเช้า  |  2) ขอบคุณ  |  3) ราตรีสวัสดิ์  |  4) พบกันพรุ่งนี้
+EN: What does 明天见！ (Míngtiān jiàn!) mean?
+   1) Good morning!  |  2) Thank you!  |  3) Good night!  |  4) See you tomorrow!
+
+### zh-9-0157  (หัวข้อ: meaning)
+TH: คำว่า 泰国 (Tàiguó) แปลว่าอะไร
+   1) ประตู  |  2) ประเทศไทย  |  3) โต๊ะ  |  4) เงิน
+EN: What does 泰国 (Tàiguó) mean?
+   1) door  |  2) Thailand  |  3) table  |  4) money
+
+### zh-9-0158  (หัวข้อ: say-it)
+TH: คำว่า "นอนหลับ" ภาษาจีนคือคำไหน
+   1) 是 (shì)  |  2) 喜欢 (xǐhuan)  |  3) 学习 (xuéxí)  |  4) 睡觉 (shuìjiào)
+EN: Which Chinese word means "sleep"?
+   (EN choices same as TH)
+
+### zh-9-0159  (หัวข้อ: sentences)
+TH: 我家有五口人。 (Wǒ jiā yǒu wǔ kǒu rén.) แปลว่าอะไร
+   1) บ้านฉันมีแมวห้าตัว  |  2) บ้านฉันมีห้าคน  |  3) ฉันมีเพื่อนห้าคน  |  4) บ้านฉันมีสี่คน
+EN: What does 我家有五口人。 (Wǒ jiā yǒu wǔ kǒu rén.) mean?
+   1) There are five cats in my home.  |  2) There are five people in my family.  |  3) I have five friends.  |  4) There are four people in my family.
+
+### zh-9-0160  (หัวข้อ: meaning)
+TH: คำว่า 桌子 (zhuōzi) แปลว่าอะไร
+   1) โทรศัพท์  |  2) ร้านค้า  |  3) ผลไม้  |  4) โต๊ะ
+EN: What does 桌子 (zhuōzi) mean?
+   1) telephone  |  2) shop  |  3) fruit  |  4) table
+
+### zh-9-0161  (หัวข้อ: sentences)
+TH: 这是我的书。 (Zhè shì wǒ de shū.) แปลว่าอะไร
+   1) นั่นคือหนังสือของฉัน  |  2) นี่คือหนังสือของฉัน  |  3) นี่คือหนังสือของคุณ  |  4) นี่คือปากกาของฉัน
+EN: What does 这是我的书。 (Zhè shì wǒ de shū.) mean?
+   1) That is my book.  |  2) This is my book.  |  3) This is your book.  |  4) This is my pen.
+
+### zh-9-0162  (หัวข้อ: meaning)
+TH: คำว่า 水果 (shuǐguǒ) แปลว่าอะไร
+   1) ผลไม้  |  2) ประเทศไทย  |  3) เก้าอี้  |  4) ภาษาจีน
+EN: What does 水果 (shuǐguǒ) mean?
+   1) fruit  |  2) Thailand  |  3) chair  |  4) the Chinese language
+
+### zh-9-0163  (หัวข้อ: say-it)
+TH: คำว่า "เพื่อนร่วมชั้น" ภาษาจีนคือคำไหน
+   1) 她 (tā)  |  2) 医生 (yīshēng)  |  3) 孩子 (háizi)  |  4) 同学 (tóngxué)
+EN: Which Chinese word means "classmate"?
+   (EN choices same as TH)
+
+### zh-9-0164  (หัวข้อ: meaning)
+TH: คำว่า 说 (shuō) แปลว่าอะไร
+   1) ชื่อว่า  |  2) นั่ง  |  3) พูด  |  4) ชอบ
+EN: What does 说 (shuō) mean?
+   1) be called  |  2) sit  |  3) speak  |  4) like
+
+### zh-9-0165  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 几 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) ใคร  |  2) กี่  |  3) นี่  |  4) นั่น
+EN: What does 几 mean? (no pinyin)
+   1) who  |  2) how many  |  3) this  |  4) that

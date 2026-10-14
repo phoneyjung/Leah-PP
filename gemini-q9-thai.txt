@@ -1,0 +1,992 @@
+# ชุดตรวจ: ภาษาไทย อายุ 9 (ป.3–ป.4) · 165 ข้อ · ไฟล์ q-thai-9.json
+# ตัวเลือกนับ 1–4 · ไม่มีเฉลยในไฟล์นี้ (ให้แก้โจทย์เองก่อน)
+
+### th-9-0001  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "เพิ่ม" คือคำไหน
+   1) บวก  |  2) เติม  |  3) ลด  |  4) ขยาย
+EN: Which Thai word is the opposite of "เพิ่ม" (increase)?
+   (EN choices same as TH)
+
+### th-9-0002  (หัวข้อ: royal-words)
+TH: คำราชาศัพท์ "เสวย" หมายถึงอะไร
+   1) กิน  |  2) เดิน  |  3) พูด  |  4) นอน
+EN: What does the royal word "เสวย" mean?
+   (EN choices same as TH)
+
+### th-9-0003  (หัวข้อ: spelling)
+TH: คำไหนเขียนถูก
+   1) เครื่องสำอาง  |  2) เครื่องสัมอาง  |  3) เครื่องสำอางค์  |  4) เครื่องสำอางก์
+EN: Which Thai word is spelt correctly?
+   (EN choices same as TH)
+
+### th-9-0004  (หัวข้อ: marks)
+TH: เครื่องหมาย "ๆ" เรียกว่าอะไร
+   1) ปรัศนี  |  2) ไม้ยมก  |  3) ไปยาลน้อย  |  4) อัศเจรีย์
+EN: What is the mark "ๆ" called?
+   (EN choices same as TH)
+
+### th-9-0005  (หัวข้อ: letter-classes)
+TH: ตัวใดเป็นอักษรกลาง
+   1) ช  |  2) ซ  |  3) จ  |  4) ฉ
+EN: Which letter is a middle-class consonant (อักษรกลาง)?
+   (EN choices same as TH)
+
+### th-9-0006  (หัวข้อ: final-sounds)
+TH: คำว่า "อาจ" มีตัวสะกดอยู่ในมาตราใด
+   1) แม่กด  |  2) แม่กก  |  3) แม่กบ  |  4) แม่กน
+EN: Which final-sound group (มาตราตัวสะกด) does "อาจ" belong to?
+   (EN choices same as TH)
+
+### th-9-0007  (หัวข้อ: spelling)
+TH: คำไหนเขียนถูก
+   1) กตัญยู  |  2) กตันยู  |  3) กะตัญญู  |  4) กตัญญู
+EN: Which Thai word is spelt correctly?
+   (EN choices same as TH)
+
+### th-9-0008  (หัวข้อ: word-types)
+TH: คำชนิดใดใช้เรียกชื่อคน สัตว์ สิ่งของ และสถานที่
+   1) คำกริยา  |  2) คำนาม  |  3) คำวิเศษณ์  |  4) คำสันธาน
+EN: Which kind of word names people, animals, things and places?
+   (EN choices same as TH)
+
+### th-9-0009  (หัวข้อ: idioms)
+TH: สำนวน "น้ำนิ่งไหลลึก" หมายความว่าอย่างไร
+   1) ค่อย ๆ ทำอย่างรอบคอบจะได้ผลดี  |  2) ต่างฝ่ายต่างต้องพึ่งพากัน  |  3) คนเงียบ ๆ มักมีความคิดลึกซึ้ง  |  4) เกิดเรื่องเสียหายแล้วจึงคิดป้องกัน
+EN: What does the Thai saying "น้ำนิ่งไหลลึก" mean?
+   (EN choices same as TH)
+
+### th-9-0010  (หัวข้อ: sentences)
+TH: ในประโยค "พ่อล้างรถ" ส่วนใดเป็นกริยา
+   1) รถ  |  2) พ่อ  |  3) ล้าง  |  4) พ่อล้าง
+EN: In the sentence "พ่อล้างรถ", which part is the verb (กริยา)?
+   (EN choices same as TH)
+
+### th-9-0011  (หัวข้อ: royal-words)
+TH: คำราชาศัพท์ "ทอดพระเนตร" หมายถึงอะไร
+   1) เดิน  |  2) กิน  |  3) ดู  |  4) ฟัง
+EN: What does the royal word "ทอดพระเนตร" mean?
+   (EN choices same as TH)
+
+### th-9-0012  (หัวข้อ: royal-words)
+TH: คำราชาศัพท์ "ตรัส" หมายถึงอะไร
+   1) นอน  |  2) พูด  |  3) ให้  |  4) ดู
+EN: What does the royal word "ตรัส" mean?
+   (EN choices same as TH)
+
+### th-9-0013  (หัวข้อ: spelling)
+TH: คำไหนเขียนถูก
+   1) อร่อย  |  2) อะร่อย  |  3) อหร่อย  |  4) อร่อยย์
+EN: Which Thai word is spelt correctly?
+   (EN choices same as TH)
+
+### th-9-0014  (หัวข้อ: final-sounds)
+TH: คำว่า "ขาว" มีตัวสะกดอยู่ในมาตราใด
+   1) แม่เกย  |  2) แม่กน  |  3) แม่กง  |  4) แม่เกอว
+EN: Which final-sound group (มาตราตัวสะกด) does "ขาว" belong to?
+   (EN choices same as TH)
+
+### th-9-0015  (หัวข้อ: idioms)
+TH: สำนวน "วัวหายล้อมคอก" หมายความว่าอย่างไร
+   1) เกิดเรื่องเสียหายแล้วจึงคิดป้องกัน  |  2) มีโอกาสดีให้รีบทำ  |  3) รู้น้อยแต่คิดว่าตัวเองรู้มาก  |  4) คนเงียบ ๆ มักมีความคิดลึกซึ้ง
+EN: What does the Thai saying "วัวหายล้อมคอก" mean?
+   (EN choices same as TH)
+
+### th-9-0016  (หัวข้อ: synonyms)
+TH: คำไหนมีความหมายเหมือน "ลิง"
+   1) มัจฉา  |  2) วิหค  |  3) วานร  |  4) อาชา
+EN: Which Thai word means the same as "ลิง" (monkey)?
+   (EN choices same as TH)
+
+### th-9-0017  (หัวข้อ: final-sounds)
+TH: คำว่า "เมฆ" มีตัวสะกดอยู่ในมาตราใด
+   1) แม่กด  |  2) แม่กบ  |  3) แม่กก  |  4) แม่กง
+EN: Which final-sound group (มาตราตัวสะกด) does "เมฆ" belong to?
+   (EN choices same as TH)
+
+### th-9-0018  (หัวข้อ: idioms)
+TH: สำนวน "กบในกะลา" หมายความว่าอย่างไร
+   1) รู้น้อยแต่คิดว่าตัวเองรู้มาก  |  2) เกิดเรื่องเสียหายแล้วจึงคิดป้องกัน  |  3) เพียรพยายามอดทนจนสำเร็จ  |  4) ทำดีแค่ผิวหน้าให้ดูดี
+EN: What does the Thai saying "กบในกะลา" mean?
+   (EN choices same as TH)
+
+### th-9-0019  (หัวข้อ: marks)
+TH: เครื่องหมาย "ฯ" เรียกว่าอะไร
+   1) มหัพภาค  |  2) ไปยาลน้อย  |  3) ไปยาลใหญ่  |  4) ไม้ยมก
+EN: What is the mark "ฯ" called?
+   (EN choices same as TH)
+
+### th-9-0020  (หัวข้อ: word-types)
+TH: ในประโยค "พวกเราช่วยกันเก็บขยะ" คำว่า "พวกเรา" เป็นคำชนิดใด
+   1) คำสรรพนาม  |  2) คำกริยา  |  3) คำบุพบท  |  4) คำนาม
+EN: In the sentence "พวกเราช่วยกันเก็บขยะ", what kind of word is "พวกเรา"?
+   (EN choices same as TH)
+
+### th-9-0021  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "สามัคคี" คือคำไหน
+   1) พร้อมเพรียง  |  2) ร่วมมือ  |  3) แตกแยก  |  4) ช่วยเหลือ
+EN: Which Thai word is the opposite of "สามัคคี" (united)?
+   (EN choices same as TH)
+
+### th-9-0022  (หัวข้อ: idioms)
+TH: สำนวน "หนีเสือปะจระเข้" หมายความว่าอย่างไร
+   1) ลงทุนมากแต่ได้ผลน้อย  |  2) ไม่ช่วยแล้วยังทำให้งานช้าลง  |  3) พ้นอันตรายหนึ่งไปเจออีกอันตรายหนึ่ง  |  4) สอนคนที่เก่งเรื่องนั้นอยู่แล้ว
+EN: What does the Thai saying "หนีเสือปะจระเข้" mean?
+   (EN choices same as TH)
+
+### th-9-0023  (หัวข้อ: sentences)
+TH: ประโยคใดเป็นประโยคปฏิเสธ
+   1) กินเผ็ดกันเถอะ  |  2) ฉันชอบกินเผ็ด  |  3) ฉันไม่ชอบกินเผ็ด  |  4) เธอชอบกินเผ็ดไหม
+EN: Which sentence is a negative sentence?
+   (EN choices same as TH)
+
+### th-9-0024  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "เริ่มต้น" คือคำไหน
+   1) กลางทาง  |  2) ลงมือ  |  3) สิ้นสุด  |  4) ต่อเนื่อง
+EN: Which Thai word is the opposite of "เริ่มต้น" (begin)?
+   (EN choices same as TH)
+
+### th-9-0025  (หัวข้อ: word-types)
+TH: ในประโยค "ปลาว่ายอยู่ในน้ำ" คำว่า "ใน" เป็นคำชนิดใด
+   1) คำสันธาน  |  2) คำกริยา  |  3) คำนาม  |  4) คำบุพบท
+EN: In the sentence "ปลาว่ายอยู่ในน้ำ", what kind of word is "ใน"?
+   (EN choices same as TH)
+
+### th-9-0026  (หัวข้อ: spelling)
+TH: คำไหนเขียนถูก
+   1) อุบัติเหต  |  2) อุปัติเหตุ  |  3) อุบัดเหตุ  |  4) อุบัติเหตุ
+EN: Which Thai word is spelt correctly?
+   (EN choices same as TH)
+
+### th-9-0027  (หัวข้อ: letter-classes)
+TH: ตัวใดเป็นอักษรกลาง
+   1) ห  |  2) ฮ  |  3) ว  |  4) อ
+EN: Which letter is a middle-class consonant (อักษรกลาง)?
+   (EN choices same as TH)
+
+### th-9-0028  (หัวข้อ: spelling)
+TH: คำไหนเขียนถูก
+   1) บังเอิญ  |  2) บังเอิน  |  3) บังเอิณ  |  4) บังเอิล
+EN: Which Thai word is spelt correctly?
+   (EN choices same as TH)
+
+### th-9-0029  (หัวข้อ: spelling)
+TH: คำไหนเขียนถูก
+   1) สวัสดี  |  2) สะหวัดดี  |  3) สวัดดี  |  4) สวัสดีย์
+EN: Which Thai word is spelt correctly?
+   (EN choices same as TH)
+
+### th-9-0030  (หัวข้อ: word-types)
+TH: ในประโยค "คุณยายเล่านิทานสนุก" คำว่า "เล่า" เป็นคำชนิดใด
+   1) คำสรรพนาม  |  2) คำวิเศษณ์  |  3) คำกริยา  |  4) คำนาม
+EN: In the sentence "คุณยายเล่านิทานสนุก", what kind of word is "เล่า"?
+   (EN choices same as TH)
+
+### th-9-0031  (หัวข้อ: spelling)
+TH: คำไหนเขียนถูก
+   1) ทะเลศาบ  |  2) ทะเลสาป  |  3) ทะเลสาบ  |  4) ทเลสาบ
+EN: Which Thai word is spelt correctly?
+   (EN choices same as TH)
+
+### th-9-0032  (หัวข้อ: spelling)
+TH: คำไหนเขียนถูก
+   1) วันเสา  |  2) วันเสาร  |  3) วันเสาว์  |  4) วันเสาร์
+EN: Which Thai word is spelt correctly?
+   (EN choices same as TH)
+
+### th-9-0033  (หัวข้อ: letter-classes)
+TH: ตัวใดเป็นอักษรกลาง
+   1) ข  |  2) ก  |  3) ค  |  4) ง
+EN: Which letter is a middle-class consonant (อักษรกลาง)?
+   (EN choices same as TH)
+
+### th-9-0034  (หัวข้อ: blends)
+TH: คำว่า "ตลาด" อ่านออกเสียงอย่างไร
+   1) ตะ-หลาด  |  2) ตะ-ลาด  |  3) ตา-ลาด  |  4) ตลาด-ดะ
+EN: How do you read the word "ตลาด"?
+   (EN choices same as TH)
+
+### th-9-0035  (หัวข้อ: idioms)
+TH: สำนวน "ปิดทองหลังพระ" หมายความว่าอย่างไร
+   1) ทำดีแค่ผิวหน้าให้ดูดี  |  2) ทำความดีโดยไม่มีใครเห็น  |  3) ได้ของมีค่าแต่ไม่รู้คุณค่า  |  4) เพียรพยายามอดทนจนสำเร็จ
+EN: What does the Thai saying "ปิดทองหลังพระ" mean?
+   (EN choices same as TH)
+
+### th-9-0036  (หัวข้อ: final-sounds)
+TH: คำว่า "กาล" มีตัวสะกดอยู่ในมาตราใด
+   1) แม่กน  |  2) แม่กด  |  3) แม่กง  |  4) แม่กม
+EN: Which final-sound group (มาตราตัวสะกด) does "กาล" belong to?
+   (EN choices same as TH)
+
+### th-9-0037  (หัวข้อ: synonyms)
+TH: คำไหนมีความหมายเหมือน "ช้าง"
+   1) มัจฉา  |  2) คชสาร  |  3) อาชา  |  4) วิหค
+EN: Which Thai word means the same as "ช้าง" (elephant)?
+   (EN choices same as TH)
+
+### th-9-0038  (หัวข้อ: sentences)
+TH: ในประโยค "น้องเตะฟุตบอล" ส่วนใดเป็นกรรม
+   1) เตะ  |  2) น้อง  |  3) น้องเตะ  |  4) ฟุตบอล
+EN: In the sentence "น้องเตะฟุตบอล", which part is the object (กรรม)?
+   (EN choices same as TH)
+
+### th-9-0039  (หัวข้อ: spelling)
+TH: คำไหนเขียนถูก
+   1) ลายเซน  |  2) ลายเซ็ญ  |  3) ลายเซ็นต์  |  4) ลายเซ็น
+EN: Which Thai word is spelt correctly?
+   (EN choices same as TH)
+
+### th-9-0040  (หัวข้อ: final-sounds)
+TH: คำว่า "ลาภ" มีตัวสะกดอยู่ในมาตราใด
+   1) แม่กม  |  2) แม่กด  |  3) แม่กก  |  4) แม่กบ
+EN: Which final-sound group (มาตราตัวสะกด) does "ลาภ" belong to?
+   (EN choices same as TH)
+
+### th-9-0041  (หัวข้อ: word-types)
+TH: ในประโยค "น้องร้องไห้เพราะหกล้ม" คำว่า "เพราะ" เป็นคำชนิดใด
+   1) คำนาม  |  2) คำวิเศษณ์  |  3) คำสันธาน  |  4) คำบุพบท
+EN: In the sentence "น้องร้องไห้เพราะหกล้ม", what kind of word is "เพราะ"?
+   (EN choices same as TH)
+
+### th-9-0042  (หัวข้อ: word-types)
+TH: ในประโยค "ว้าย! งูเข้าบ้าน" คำว่า "ว้าย" เป็นคำชนิดใด
+   1) คำกริยา  |  2) คำสันธาน  |  3) คำอุทาน  |  4) คำนาม
+EN: In the sentence "ว้าย! งูเข้าบ้าน", what kind of word is "ว้าย"?
+   (EN choices same as TH)
+
+### th-9-0043  (หัวข้อ: blends)
+TH: คำว่า "ทราย" อ่านออกเสียงอย่างไร
+   1) ซาย  |  2) ทะ-ราย  |  3) ทาย  |  4) ซะ-ราย
+EN: How do you read the word "ทราย"?
+   (EN choices same as TH)
+
+### th-9-0044  (หัวข้อ: word-types)
+TH: ในประโยค "นกบินสูง" คำว่า "นก" เป็นคำชนิดใด
+   1) คำสรรพนาม  |  2) คำนาม  |  3) คำกริยา  |  4) คำวิเศษณ์
+EN: In the sentence "นกบินสูง", what kind of word is "นก"?
+   (EN choices same as TH)
+
+### th-9-0045  (หัวข้อ: word-types)
+TH: ในประโยค "โอ๊ย! เจ็บจัง" คำว่า "โอ๊ย" เป็นคำชนิดใด
+   1) คำอุทาน  |  2) คำกริยา  |  3) คำสันธาน  |  4) คำนาม
+EN: In the sentence "โอ๊ย! เจ็บจัง", what kind of word is "โอ๊ย"?
+   (EN choices same as TH)
+
+### th-9-0046  (หัวข้อ: sentences)
+TH: ในประโยค "ครูอ่านหนังสือ" ส่วนใดเป็นกริยา
+   1) ครู  |  2) อ่าน  |  3) ครูอ่าน  |  4) หนังสือ
+EN: In the sentence "ครูอ่านหนังสือ", which part is the verb (กริยา)?
+   (EN choices same as TH)
+
+### th-9-0047  (หัวข้อ: idioms)
+TH: สำนวน "ขี่ช้างจับตั๊กแตน" หมายความว่าอย่างไร
+   1) ทำผิดแล้วร้อนตัวจนมีพิรุธ  |  2) พ้นอันตรายหนึ่งไปเจออีกอันตรายหนึ่ง  |  3) ลงทุนมากแต่ได้ผลน้อย  |  4) ไปอยู่ที่ไหนให้ทำตามคนที่นั่น
+EN: What does the Thai saying "ขี่ช้างจับตั๊กแตน" mean?
+   (EN choices same as TH)
+
+### th-9-0048  (หัวข้อ: sentences)
+TH: ในประโยค "นกกินหนอน" ส่วนใดเป็นประธาน
+   1) กินหนอน  |  2) กิน  |  3) นก  |  4) หนอน
+EN: In the sentence "นกกินหนอน", which part is the subject (ประธาน)?
+   (EN choices same as TH)
+
+### th-9-0049  (หัวข้อ: royal-words)
+TH: คำราชาศัพท์ "บรรทม" หมายถึงอะไร
+   1) ไป  |  2) กิน  |  3) นั่ง  |  4) นอน
+EN: What does the royal word "บรรทม" mean?
+   (EN choices same as TH)
+
+### th-9-0050  (หัวข้อ: letter-classes)
+TH: ตัวใดเป็นอักษรสูง
+   1) ฮ  |  2) ร  |  3) ห  |  4) อ
+EN: Which letter is a high-class consonant (อักษรสูง)?
+   (EN choices same as TH)
+
+### th-9-0051  (หัวข้อ: classifiers)
+TH: ลักษณนามของ "ร่ม" คือคำไหน
+   1) ด้าม  |  2) คัน  |  3) เล่ม  |  4) แท่ง
+EN: Which classifier (ลักษณนาม) is used for "ร่ม" (an umbrella)?
+   (EN choices same as TH)
+
+### th-9-0052  (หัวข้อ: royal-words)
+TH: คำราชาศัพท์ "พระบาท" หมายถึงอะไร
+   1) มือ  |  2) หู  |  3) เท้า  |  4) จมูก
+EN: What does the royal word "พระบาท" mean?
+   (EN choices same as TH)
+
+### th-9-0053  (หัวข้อ: idioms)
+TH: สำนวน "เข้าเมืองตาหลิ่วต้องหลิ่วตาตาม" หมายความว่าอย่างไร
+   1) รักลูกต้องอบรมสั่งสอน  |  2) ไปอยู่ที่ไหนให้ทำตามคนที่นั่น  |  3) ลงทุนมากแต่ได้ผลน้อย  |  4) ไม่ช่วยแล้วยังทำให้งานช้าลง
+EN: What does the Thai saying "เข้าเมืองตาหลิ่วต้องหลิ่วตาตาม" mean?
+   (EN choices same as TH)
+
+### th-9-0054  (หัวข้อ: idioms)
+TH: สำนวน "มือไม่พาย เอาเท้าราน้ำ" หมายความว่าอย่างไร
+   1) ไม่ช่วยแล้วยังทำให้งานช้าลง  |  2) ไปอยู่ที่ไหนให้ทำตามคนที่นั่น  |  3) พ้นอันตรายหนึ่งไปเจออีกอันตรายหนึ่ง  |  4) ได้ของมีค่าแต่ไม่รู้คุณค่า
+EN: What does the Thai saying "มือไม่พาย เอาเท้าราน้ำ" mean?
+   (EN choices same as TH)
+
+### th-9-0055  (หัวข้อ: letter-classes)
+TH: ตัวใดเป็นอักษรสูง
+   1) ต  |  2) ถ  |  3) ท  |  4) ด
+EN: Which letter is a high-class consonant (อักษรสูง)?
+   (EN choices same as TH)
+
+### th-9-0056  (หัวข้อ: sentences)
+TH: ในประโยค "แม่ทำอาหาร" ส่วนใดเป็นประธาน
+   1) ทำอาหาร  |  2) แม่  |  3) อาหาร  |  4) ทำ
+EN: In the sentence "แม่ทำอาหาร", which part is the subject (ประธาน)?
+   (EN choices same as TH)
+
+### th-9-0057  (หัวข้อ: idioms)
+TH: สำนวน "น้ำขึ้นให้รีบตัก" หมายความว่าอย่างไร
+   1) เพียรพยายามอดทนจนสำเร็จ  |  2) ต่างฝ่ายต่างต้องพึ่งพากัน  |  3) เกิดเรื่องเสียหายแล้วจึงคิดป้องกัน  |  4) มีโอกาสดีให้รีบทำ
+EN: What does the Thai saying "น้ำขึ้นให้รีบตัก" mean?
+   (EN choices same as TH)
+
+### th-9-0058  (หัวข้อ: spelling)
+TH: คำไหนเขียนถูก
+   1) ประสบการ  |  2) ประสพการณ์  |  3) ประสบการณ์  |  4) ประสบกาล
+EN: Which Thai word is spelt correctly?
+   (EN choices same as TH)
+
+### th-9-0059  (หัวข้อ: classifiers)
+TH: ลักษณนามของ "แห" คือคำไหน
+   1) ซี่  |  2) เลา  |  3) ปาก  |  4) เรือน
+EN: Which classifier (ลักษณนาม) is used for "แห" (a fishing net)?
+   (EN choices same as TH)
+
+### th-9-0060  (หัวข้อ: spelling)
+TH: คำไหนเขียนถูก
+   1) พิพิธภัณ  |  2) พิพิทภัณฑ์  |  3) พิพิธภัณฑ์  |  4) พิพิธพันธ์
+EN: Which Thai word is spelt correctly?
+   (EN choices same as TH)
+
+### th-9-0061  (หัวข้อ: spelling)
+TH: คำไหนเขียนถูก
+   1) กระทันหัน  |  2) กระทันหันต์  |  3) กะทันหัน  |  4) กะทันหันต์
+EN: Which Thai word is spelt correctly?
+   (EN choices same as TH)
+
+### th-9-0062  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "อนุญาต" คือคำไหน
+   1) เชิญชวน  |  2) ยินยอม  |  3) ห้าม  |  4) ขอร้อง
+EN: Which Thai word is the opposite of "อนุญาต" (allow)?
+   (EN choices same as TH)
+
+### th-9-0063  (หัวข้อ: blends)
+TH: คำไหนมี อ นำ ย
+   1) อาย  |  2) ยาก  |  3) ยาย  |  4) อยาก
+EN: Which word has a leading อ before ย (อ นำ ย)?
+   (EN choices same as TH)
+
+### th-9-0064  (หัวข้อ: synonyms)
+TH: คำไหนมีความหมายเหมือน "ปลา"
+   1) มัจฉา  |  2) อาชา  |  3) วิหค  |  4) วานร
+EN: Which Thai word means the same as "ปลา" (fish)?
+   (EN choices same as TH)
+
+### th-9-0065  (หัวข้อ: idioms)
+TH: สำนวน "ฝนทั่งให้เป็นเข็ม" หมายความว่าอย่างไร
+   1) มีโอกาสดีให้รีบทำ  |  2) เพียรพยายามอดทนจนสำเร็จ  |  3) รู้น้อยแต่คิดว่าตัวเองรู้มาก  |  4) ทำความดีโดยไม่มีใครเห็น
+EN: What does the Thai saying "ฝนทั่งให้เป็นเข็ม" mean?
+   (EN choices same as TH)
+
+### th-9-0066  (หัวข้อ: letter-classes)
+TH: ตัวใดเป็นอักษรสูง
+   1) ฝ  |  2) ฟ  |  3) พ  |  4) บ
+EN: Which letter is a high-class consonant (อักษรสูง)?
+   (EN choices same as TH)
+
+### th-9-0067  (หัวข้อ: idioms)
+TH: สำนวน "สอนจระเข้ให้ว่ายน้ำ" หมายความว่าอย่างไร
+   1) ได้ของมีค่าแต่ไม่รู้คุณค่า  |  2) สอนคนที่เก่งเรื่องนั้นอยู่แล้ว  |  3) พ้นอันตรายหนึ่งไปเจออีกอันตรายหนึ่ง  |  4) ทำดีแค่ผิวหน้าให้ดูดี
+EN: What does the Thai saying "สอนจระเข้ให้ว่ายน้ำ" mean?
+   (EN choices same as TH)
+
+### th-9-0068  (หัวข้อ: blends)
+TH: คำไหนเป็นคำควบกล้ำแท้
+   1) เสร็จ  |  2) ทรัพย์  |  3) ความ  |  4) ไซร้
+EN: Which word has a true consonant blend (ควบกล้ำแท้)?
+   (EN choices same as TH)
+
+### th-9-0069  (หัวข้อ: word-types)
+TH: ในประโยค "ครูสอนหนังสือ" คำว่า "สอน" เป็นคำชนิดใด
+   1) คำนาม  |  2) คำวิเศษณ์  |  3) คำสรรพนาม  |  4) คำกริยา
+EN: In the sentence "ครูสอนหนังสือ", what kind of word is "สอน"?
+   (EN choices same as TH)
+
+### th-9-0070  (หัวข้อ: idioms)
+TH: สำนวน "น้ำพึ่งเรือ เสือพึ่งป่า" หมายความว่าอย่างไร
+   1) ต่างฝ่ายต่างต้องพึ่งพากัน  |  2) คนเงียบ ๆ มักมีความคิดลึกซึ้ง  |  3) มีโอกาสดีให้รีบทำ  |  4) อยากได้สองอย่างพร้อมกัน จนไม่ได้สักอย่าง
+EN: What does the Thai saying "น้ำพึ่งเรือ เสือพึ่งป่า" mean?
+   (EN choices same as TH)
+
+### th-9-0071  (หัวข้อ: synonyms)
+TH: คำไหนมีความหมายเหมือน "ดวงอาทิตย์"
+   1) ตะวัน  |  2) จันทรา  |  3) ดารา  |  4) เมฆา
+EN: Which Thai word means the same as "ดวงอาทิตย์" (sun)?
+   (EN choices same as TH)
+
+### th-9-0072  (หัวข้อ: blends)
+TH: คำไหนมี ห นำ
+   1) หมา  |  2) ห้า  |  3) หาม  |  4) มา
+EN: Which word has a leading ห (ห นำ)?
+   (EN choices same as TH)
+
+### th-9-0073  (หัวข้อ: final-sounds)
+TH: คำไหนไม่มีตัวสะกด
+   1) สวน  |  2) เสียง  |  3) สาย  |  4) เสือ
+EN: Which word has no final consonant?
+   (EN choices same as TH)
+
+### th-9-0074  (หัวข้อ: marks)
+TH: เครื่องหมาย "?" เรียกว่าอะไร
+   1) มหัพภาค  |  2) ไม้ยมก  |  3) ปรัศนี  |  4) อัศเจรีย์
+EN: What is the mark "?" called in Thai?
+   (EN choices same as TH)
+
+### th-9-0075  (หัวข้อ: idioms)
+TH: สำนวน "ไก่ได้พลอย" หมายความว่าอย่างไร
+   1) ได้ของมีค่าแต่ไม่รู้คุณค่า  |  2) ทำความดีโดยไม่มีใครเห็น  |  3) สอนคนที่เก่งเรื่องนั้นอยู่แล้ว  |  4) ไม่ช่วยแล้วยังทำให้งานช้าลง
+EN: What does the Thai saying "ไก่ได้พลอย" mean?
+   (EN choices same as TH)
+
+### th-9-0076  (หัวข้อ: live-dead-words)
+TH: คำไหนเป็นคำเป็น
+   1) ปู  |  2) ปะ  |  3) ปาก  |  4) ปิด
+EN: Which word is a live word (คำเป็น)?
+   (EN choices same as TH)
+
+### th-9-0077  (หัวข้อ: spelling)
+TH: คำไหนเขียนถูก
+   1) อณุญาต  |  2) อนุยาต  |  3) อนุญาติ  |  4) อนุญาต
+EN: Which Thai word is spelt correctly?
+   (EN choices same as TH)
+
+### th-9-0078  (หัวข้อ: letter-classes)
+TH: ตัวใดเป็นอักษรต่ำ
+   1) จ  |  2) ข  |  3) ค  |  4) ก
+EN: Which letter is a low-class consonant (อักษรต่ำ)?
+   (EN choices same as TH)
+
+### th-9-0079  (หัวข้อ: classifiers)
+TH: ลักษณนามของ "นาฬิกา" คือคำไหน
+   1) หลัง  |  2) เรือน  |  3) วง  |  4) คัน
+EN: Which classifier (ลักษณนาม) is used for "นาฬิกา" (a clock or watch)?
+   (EN choices same as TH)
+
+### th-9-0080  (หัวข้อ: final-sounds)
+TH: คำว่า "บาท" มีตัวสะกดอยู่ในมาตราใด
+   1) แม่กด  |  2) แม่กบ  |  3) แม่กก  |  4) แม่กน
+EN: Which final-sound group (มาตราตัวสะกด) does "บาท" belong to?
+   (EN choices same as TH)
+
+### th-9-0081  (หัวข้อ: letter-classes)
+TH: ตัวใดเป็นอักษรสูง
+   1) ข  |  2) ง  |  3) ค  |  4) ก
+EN: Which letter is a high-class consonant (อักษรสูง)?
+   (EN choices same as TH)
+
+### th-9-0082  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "กล้าหาญ" คือคำไหน
+   1) ดุร้าย  |  2) ขี้ขลาด  |  3) ใจดี  |  4) แข็งแรง
+EN: Which Thai word is the opposite of "กล้าหาญ" (brave)?
+   (EN choices same as TH)
+
+### th-9-0083  (หัวข้อ: synonyms)
+TH: คำไหนมีความหมายเหมือน "ดวงจันทร์"
+   1) ดารา  |  2) ตะวัน  |  3) นภา  |  4) จันทรา
+EN: Which Thai word means the same as "ดวงจันทร์" (moon)?
+   (EN choices same as TH)
+
+### th-9-0084  (หัวข้อ: final-sounds)
+TH: คำว่า "สุข" มีตัวสะกดอยู่ในมาตราใด
+   1) แม่กบ  |  2) แม่กด  |  3) แม่กง  |  4) แม่กก
+EN: Which final-sound group (มาตราตัวสะกด) does "สุข" belong to?
+   (EN choices same as TH)
+
+### th-9-0085  (หัวข้อ: idioms)
+TH: สำนวน "ผักชีโรยหน้า" หมายความว่าอย่างไร
+   1) ทำดีแค่ผิวหน้าให้ดูดี  |  2) ทำความดีโดยไม่มีใครเห็น  |  3) รู้น้อยแต่คิดว่าตัวเองรู้มาก  |  4) สอนคนที่เก่งเรื่องนั้นอยู่แล้ว
+EN: What does the Thai saying "ผักชีโรยหน้า" mean?
+   (EN choices same as TH)
+
+### th-9-0086  (หัวข้อ: final-sounds)
+TH: คำว่า "เลข" มีตัวสะกดอยู่ในมาตราใด
+   1) แม่กง  |  2) แม่กด  |  3) แม่กก  |  4) แม่กบ
+EN: Which final-sound group (มาตราตัวสะกด) does "เลข" belong to?
+   (EN choices same as TH)
+
+### th-9-0087  (หัวข้อ: synonyms)
+TH: คำไหนมีความหมายเหมือน "ม้า"
+   1) คชสาร  |  2) อาชา  |  3) วานร  |  4) มัจฉา
+EN: Which Thai word means the same as "ม้า" (horse)?
+   (EN choices same as TH)
+
+### th-9-0088  (หัวข้อ: classifiers)
+TH: ลักษณนามของ "พระพุทธรูป" คือคำไหน
+   1) เลา  |  2) เชือก  |  3) ตน  |  4) องค์
+EN: Which classifier (ลักษณนาม) is used for "พระพุทธรูป" (a Buddha image)?
+   (EN choices same as TH)
+
+### th-9-0089  (หัวข้อ: blends)
+TH: คำไหนเป็นคำควบกล้ำแท้
+   1) กลอง  |  2) สร้าง  |  3) ทราย  |  4) จริง
+EN: Which word has a true consonant blend (ควบกล้ำแท้)?
+   (EN choices same as TH)
+
+### th-9-0090  (หัวข้อ: synonyms)
+TH: คำไหนมีความหมายเหมือน "ป่า"
+   1) คีรี  |  2) พนา  |  3) วารี  |  4) นภา
+EN: Which Thai word means the same as "ป่า" (forest)?
+   (EN choices same as TH)
+
+### th-9-0091  (หัวข้อ: synonyms)
+TH: คำไหนมีความหมายเหมือน "นก"
+   1) มัจฉา  |  2) วิหค  |  3) คชสาร  |  4) อาชา
+EN: Which Thai word means the same as "นก" (bird)?
+   (EN choices same as TH)
+
+### th-9-0092  (หัวข้อ: synonyms)
+TH: คำไหนมีความหมายเหมือน "ไฟ"
+   1) วารี  |  2) ปฐพี  |  3) วายุ  |  4) อัคคี
+EN: Which Thai word means the same as "ไฟ" (fire)?
+   (EN choices same as TH)
+
+### th-9-0093  (หัวข้อ: final-sounds)
+TH: คำว่า "พิษ" มีตัวสะกดอยู่ในมาตราใด
+   1) แม่กบ  |  2) แม่กน  |  3) แม่กด  |  4) แม่กก
+EN: Which final-sound group (มาตราตัวสะกด) does "พิษ" belong to?
+   (EN choices same as TH)
+
+### th-9-0094  (หัวข้อ: word-types)
+TH: ในประโยค "แมววิ่งเร็ว" คำว่า "วิ่ง" เป็นคำชนิดใด
+   1) คำนาม  |  2) คำวิเศษณ์  |  3) คำกริยา  |  4) คำสรรพนาม
+EN: In the sentence "แมววิ่งเร็ว", what kind of word is "วิ่ง"?
+   (EN choices same as TH)
+
+### th-9-0095  (หัวข้อ: spelling)
+TH: คำไหนเขียนถูก
+   1) สังเกด  |  2) สังเกตร  |  3) สังเกต  |  4) สังเกตุ
+EN: Which Thai word is spelt correctly?
+   (EN choices same as TH)
+
+### th-9-0096  (หัวข้อ: letter-classes)
+TH: ตัวใดเป็นอักษรกลาง
+   1) ม  |  2) ผ  |  3) พ  |  4) บ
+EN: Which letter is a middle-class consonant (อักษรกลาง)?
+   (EN choices same as TH)
+
+### th-9-0097  (หัวข้อ: word-types)
+TH: ในประโยค "เต่าเดินช้า" คำว่า "ช้า" เป็นคำชนิดใด
+   1) คำกริยา  |  2) คำวิเศษณ์  |  3) คำสรรพนาม  |  4) คำนาม
+EN: In the sentence "เต่าเดินช้า", what kind of word is "ช้า"?
+   (EN choices same as TH)
+
+### th-9-0098  (หัวข้อ: idioms)
+TH: สำนวน "กินปูนร้อนท้อง" หมายความว่าอย่างไร
+   1) ลงทุนมากแต่ได้ผลน้อย  |  2) อยากได้สองอย่างพร้อมกัน จนไม่ได้สักอย่าง  |  3) รักลูกต้องอบรมสั่งสอน  |  4) ทำผิดแล้วร้อนตัวจนมีพิรุธ
+EN: What does the Thai saying "กินปูนร้อนท้อง" mean?
+   (EN choices same as TH)
+
+### th-9-0099  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "ซื่อสัตย์" คือคำไหน
+   1) ขี้อาย  |  2) จริงใจ  |  3) คดโกง  |  4) กตัญญู
+EN: Which Thai word is the opposite of "ซื่อสัตย์" (honest)?
+   (EN choices same as TH)
+
+### th-9-0100  (หัวข้อ: classifiers)
+TH: ลักษณนามของ "ช้างที่เลี้ยงไว้ใช้งาน" คือคำไหน
+   1) ตน  |  2) เล่ม  |  3) รูป  |  4) เชือก
+EN: Which classifier (ลักษณนาม) is used for "ช้างที่เลี้ยงไว้ใช้งาน" (a working elephant)?
+   (EN choices same as TH)
+
+### th-9-0101  (หัวข้อ: final-sounds)
+TH: คำว่า "ครุฑ" มีตัวสะกดอยู่ในมาตราใด
+   1) แม่กบ  |  2) แม่กก  |  3) แม่กน  |  4) แม่กด
+EN: Which final-sound group (มาตราตัวสะกด) does "ครุฑ" belong to?
+   (EN choices same as TH)
+
+### th-9-0102  (หัวข้อ: spelling)
+TH: คำไหนเขียนถูก
+   1) กระเพา  |  2) กะเพรา  |  3) กระเพรา  |  4) กะเพา
+EN: Which Thai word is spelt correctly?
+   (EN choices same as TH)
+
+### th-9-0103  (หัวข้อ: final-sounds)
+TH: คำว่า "รส" มีตัวสะกดอยู่ในมาตราใด
+   1) แม่กก  |  2) แม่กบ  |  3) แม่กน  |  4) แม่กด
+EN: Which final-sound group (มาตราตัวสะกด) does "รส" belong to?
+   (EN choices same as TH)
+
+### th-9-0104  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "ขยัน" คือคำไหน
+   1) ว่องไว  |  2) เกียจคร้าน  |  3) อดทน  |  4) ตั้งใจ
+EN: Which Thai word is the opposite of "ขยัน" (hard-working)?
+   (EN choices same as TH)
+
+### th-9-0105  (หัวข้อ: blends)
+TH: คำว่า "สนุก" อ่านออกเสียงอย่างไร
+   1) สะ-หนุก  |  2) สน-นุก  |  3) สอ-นุก  |  4) สะ-นุก
+EN: How do you read the word "สนุก"?
+   (EN choices same as TH)
+
+### th-9-0106  (หัวข้อ: sentences)
+TH: ประโยคใดเป็นประโยคคำสั่ง
+   1) แถวนี้ยาวมาก  |  2) จงเข้าแถวให้เรียบร้อย  |  3) ใครยังไม่เข้าแถว  |  4) นักเรียนเข้าแถวแล้ว
+EN: Which sentence is a command?
+   (EN choices same as TH)
+
+### th-9-0107  (หัวข้อ: word-types)
+TH: ในประโยค "บ้านหลังใหญ่อยู่ริมน้ำ" คำว่า "ใหญ่" เป็นคำชนิดใด
+   1) คำสรรพนาม  |  2) คำวิเศษณ์  |  3) คำกริยา  |  4) คำนาม
+EN: In the sentence "บ้านหลังใหญ่อยู่ริมน้ำ", what kind of word is "ใหญ่"?
+   (EN choices same as TH)
+
+### th-9-0108  (หัวข้อ: word-types)
+TH: ในประโยค "หนังสืออยู่บนโต๊ะ" คำว่า "บน" เป็นคำชนิดใด
+   1) คำสันธาน  |  2) คำนาม  |  3) คำกริยา  |  4) คำบุพบท
+EN: In the sentence "หนังสืออยู่บนโต๊ะ", what kind of word is "บน"?
+   (EN choices same as TH)
+
+### th-9-0109  (หัวข้อ: final-sounds)
+TH: คำว่า "บุญ" มีตัวสะกดอยู่ในมาตราใด
+   1) แม่กด  |  2) แม่กม  |  3) แม่กน  |  4) แม่กง
+EN: Which final-sound group (มาตราตัวสะกด) does "บุญ" belong to?
+   (EN choices same as TH)
+
+### th-9-0110  (หัวข้อ: sentences)
+TH: ในประโยค "แมวจับหนู" ส่วนใดเป็นกรรม
+   1) แมวจับ  |  2) แมว  |  3) จับ  |  4) หนู
+EN: In the sentence "แมวจับหนู", which part is the object (กรรม)?
+   (EN choices same as TH)
+
+### th-9-0111  (หัวข้อ: final-sounds)
+TH: คำไหนมีตัวสะกดอยู่ในแม่กน
+   1) หาด  |  2) หาร  |  3) หาบ  |  4) หาง
+EN: Which word ends with a แม่กน sound?
+   (EN choices same as TH)
+
+### th-9-0112  (หัวข้อ: word-types)
+TH: ในประโยค "ฉันชอบกินมะม่วง" คำว่า "ฉัน" เป็นคำชนิดใด
+   1) คำสรรพนาม  |  2) คำบุพบท  |  3) คำนาม  |  4) คำกริยา
+EN: In the sentence "ฉันชอบกินมะม่วง", what kind of word is "ฉัน"?
+   (EN choices same as TH)
+
+### th-9-0113  (หัวข้อ: spelling)
+TH: คำไหนเขียนถูก
+   1) คนิตศาสตร์  |  2) คณิตศาสตร์  |  3) คณิตศาสตร  |  4) คณิตสาสตร์
+EN: Which Thai word is spelt correctly?
+   (EN choices same as TH)
+
+### th-9-0114  (หัวข้อ: classifiers)
+TH: ลักษณนามของ "ฟัน" คือคำไหน
+   1) เลา  |  2) เรือน  |  3) ปาก  |  4) ซี่
+EN: Which classifier (ลักษณนาม) is used for "ฟัน" (a tooth)?
+   (EN choices same as TH)
+
+### th-9-0115  (หัวข้อ: final-sounds)
+TH: คำว่า "สวย" มีตัวสะกดอยู่ในมาตราใด
+   1) แม่เกอว  |  2) แม่กม  |  3) แม่เกย  |  4) แม่กน
+EN: Which final-sound group (มาตราตัวสะกด) does "สวย" belong to?
+   (EN choices same as TH)
+
+### th-9-0116  (หัวข้อ: live-dead-words)
+TH: คำไหนเป็นคำตาย
+   1) ใจ  |  2) จาน  |  3) จำ  |  4) จะ
+EN: Which word is a dead word (คำตาย)?
+   (EN choices same as TH)
+
+### th-9-0117  (หัวข้อ: marks)
+TH: เครื่องหมาย "!" เรียกว่าอะไร
+   1) ปรัศนี  |  2) อัญประกาศ  |  3) อัศเจรีย์  |  4) ไปยาลน้อย
+EN: What is the mark "!" called in Thai?
+   (EN choices same as TH)
+
+### th-9-0118  (หัวข้อ: royal-words)
+TH: คำราชาศัพท์ "พระกรรณ" หมายถึงอะไร
+   1) หู  |  2) ปาก  |  3) จมูก  |  4) ตา
+EN: What does the royal word "พระกรรณ" mean?
+   (EN choices same as TH)
+
+### th-9-0119  (หัวข้อ: spelling)
+TH: คำไหนเขียนถูก
+   1) มหัศจรรย์  |  2) มหัสจรรย์  |  3) มหัศจรรณ์  |  4) มหัศจรร
+EN: Which Thai word is spelt correctly?
+   (EN choices same as TH)
+
+### th-9-0120  (หัวข้อ: classifiers)
+TH: ลักษณนามของ "เข็ม" คือคำไหน
+   1) ซี่  |  2) แท่ง  |  3) เล่ม  |  4) ด้าม
+EN: Which classifier (ลักษณนาม) is used for "เข็ม" (a needle)?
+   (EN choices same as TH)
+
+### th-9-0121  (หัวข้อ: spelling)
+TH: คำไหนเขียนถูก
+   1) ศรีษะ  |  2) สีรษะ  |  3) ศีรสะ  |  4) ศีรษะ
+EN: Which Thai word is spelt correctly?
+   (EN choices same as TH)
+
+### th-9-0122  (หัวข้อ: spelling)
+TH: คำไหนเขียนถูก
+   1) ธรรมชาต  |  2) ธรรมชาด  |  3) ทำมะชาติ  |  4) ธรรมชาติ
+EN: Which Thai word is spelt correctly?
+   (EN choices same as TH)
+
+### th-9-0123  (หัวข้อ: letter-classes)
+TH: ตัวใดเป็นอักษรต่ำ
+   1) บ  |  2) ม  |  3) ผ  |  4) ป
+EN: Which letter is a low-class consonant (อักษรต่ำ)?
+   (EN choices same as TH)
+
+### th-9-0124  (หัวข้อ: final-sounds)
+TH: คำว่า "พร" มีตัวสะกดอยู่ในมาตราใด
+   1) แม่กด  |  2) แม่กง  |  3) แม่กม  |  4) แม่กน
+EN: Which final-sound group (มาตราตัวสะกด) does "พร" belong to?
+   (EN choices same as TH)
+
+### th-9-0125  (หัวข้อ: idioms)
+TH: สำนวน "ช้า ๆ ได้พร้าเล่มงาม" หมายความว่าอย่างไร
+   1) รักลูกต้องอบรมสั่งสอน  |  2) ค่อย ๆ ทำอย่างรอบคอบจะได้ผลดี  |  3) คนเงียบ ๆ มักมีความคิดลึกซึ้ง  |  4) อยากได้สองอย่างพร้อมกัน จนไม่ได้สักอย่าง
+EN: What does the Thai saying "ช้า ๆ ได้พร้าเล่มงาม" mean?
+   (EN choices same as TH)
+
+### th-9-0126  (หัวข้อ: classifiers)
+TH: ลักษณนามของ "พระภิกษุ" คือคำไหน
+   1) ตน  |  2) ฉบับ  |  3) รูป  |  4) เชือก
+EN: Which classifier (ลักษณนาม) is used for "พระภิกษุ" (a Buddhist monk)?
+   (EN choices same as TH)
+
+### th-9-0127  (หัวข้อ: live-dead-words)
+TH: คำไหนเป็นคำเป็น
+   1) ดุ  |  2) ดาบ  |  3) เด็ก  |  4) ดาว
+EN: Which word is a live word (คำเป็น)?
+   (EN choices same as TH)
+
+### th-9-0128  (หัวข้อ: live-dead-words)
+TH: คำไหนเป็นคำตาย
+   1) นา  |  2) นก  |  3) นาน  |  4) นาง
+EN: Which word is a dead word (คำตาย)?
+   (EN choices same as TH)
+
+### th-9-0129  (หัวข้อ: synonyms)
+TH: คำไหนมีความหมายเหมือน "ภูเขา"
+   1) นที  |  2) พนา  |  3) คีรี  |  4) ธานี
+EN: Which Thai word means the same as "ภูเขา" (mountain)?
+   (EN choices same as TH)
+
+### th-9-0130  (หัวข้อ: word-types)
+TH: ในประโยค "เขาไปโรงเรียน" คำว่า "เขา" เป็นคำชนิดใด
+   1) คำบุพบท  |  2) คำสรรพนาม  |  3) คำนาม  |  4) คำกริยา
+EN: In the sentence "เขาไปโรงเรียน", what kind of word is "เขา"?
+   (EN choices same as TH)
+
+### th-9-0131  (หัวข้อ: word-types)
+TH: ในประโยค "พ่อและแม่ไปตลาด" คำว่า "และ" เป็นคำชนิดใด
+   1) คำบุพบท  |  2) คำนาม  |  3) คำสันธาน  |  4) คำวิเศษณ์
+EN: In the sentence "พ่อและแม่ไปตลาด", what kind of word is "และ"?
+   (EN choices same as TH)
+
+### th-9-0132  (หัวข้อ: spelling)
+TH: คำไหนเขียนถูก
+   1) โอกาส  |  2) โอกาษ  |  3) โอกาศ  |  4) โอกาด
+EN: Which Thai word is spelt correctly?
+   (EN choices same as TH)
+
+### th-9-0133  (หัวข้อ: word-types)
+TH: ในประโยค "แมววิ่งเร็ว" คำว่า "เร็ว" เป็นคำชนิดใด
+   1) คำกริยา  |  2) คำวิเศษณ์  |  3) คำสรรพนาม  |  4) คำนาม
+EN: In the sentence "แมววิ่งเร็ว", what kind of word is "เร็ว"?
+   (EN choices same as TH)
+
+### th-9-0134  (หัวข้อ: idioms)
+TH: สำนวน "จับปลาสองมือ" หมายความว่าอย่างไร
+   1) อยากได้สองอย่างพร้อมกัน จนไม่ได้สักอย่าง  |  2) ค่อย ๆ ทำอย่างรอบคอบจะได้ผลดี  |  3) ทำผิดแล้วร้อนตัวจนมีพิรุธ  |  4) ต่างฝ่ายต่างต้องพึ่งพากัน
+EN: What does the Thai saying "จับปลาสองมือ" mean?
+   (EN choices same as TH)
+
+### th-9-0135  (หัวข้อ: royal-words)
+TH: คำราชาศัพท์ "พระเนตร" หมายถึงอะไร
+   1) หู  |  2) มือ  |  3) เท้า  |  4) ตา
+EN: What does the royal word "พระเนตร" mean?
+   (EN choices same as TH)
+
+### th-9-0136  (หัวข้อ: word-types)
+TH: คำชนิดใดใช้แทนคำนามเพื่อไม่ต้องเรียกชื่อซ้ำ
+   1) คำกริยา  |  2) คำสรรพนาม  |  3) คำอุทาน  |  4) คำบุพบท
+EN: Which kind of word stands in for a noun so we do not repeat the name?
+   (EN choices same as TH)
+
+### th-9-0137  (หัวข้อ: marks)
+TH: คำว่า "เด็ก ๆ" อ่านว่าอย่างไร
+   1) เด็กสอง  |  2) เด็กเด็ก  |  3) เด็กและเด็ก  |  4) เด็ก
+EN: How do you read "เด็ก ๆ"?
+   (EN choices same as TH)
+
+### th-9-0138  (หัวข้อ: synonyms)
+TH: คำไหนมีความหมายเหมือน "ดอกไม้"
+   1) นารี  |  2) วารี  |  3) พฤกษา  |  4) บุปผา
+EN: Which Thai word means the same as "ดอกไม้" (flower)?
+   (EN choices same as TH)
+
+### th-9-0139  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "สุภาพ" คือคำไหน
+   1) หยาบคาย  |  2) เรียบร้อย  |  3) อ่อนโยน  |  4) เงียบขรึม
+EN: Which Thai word is the opposite of "สุภาพ" (polite)?
+   (EN choices same as TH)
+
+### th-9-0140  (หัวข้อ: final-sounds)
+TH: คำไหนมีตัวสะกดอยู่ในแม่กด
+   1) โชค  |  2) ทิศ  |  3) เพลง  |  4) ลาภ
+EN: Which word ends with a แม่กด sound?
+   (EN choices same as TH)
+
+### th-9-0141  (หัวข้อ: letter-classes)
+TH: ตัวใดเป็นอักษรกลาง
+   1) ด  |  2) ท  |  3) น  |  4) ถ
+EN: Which letter is a middle-class consonant (อักษรกลาง)?
+   (EN choices same as TH)
+
+### th-9-0142  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "ประหยัด" คือคำไหน
+   1) ฟุ่มเฟือย  |  2) ขยัน  |  3) ยากจน  |  4) อดออม
+EN: Which Thai word is the opposite of "ประหยัด" (thrifty)?
+   (EN choices same as TH)
+
+### th-9-0143  (หัวข้อ: letter-classes)
+TH: อักษรกลางมีทั้งหมดกี่ตัว
+   1) 9 ตัว  |  2) 24 ตัว  |  3) 7 ตัว  |  4) 11 ตัว
+EN: How many middle-class consonants (อักษรกลาง) are there?
+   (EN choices same as TH)
+
+### th-9-0144  (หัวข้อ: blends)
+TH: คำไหนเป็นคำควบกล้ำไม่แท้
+   1) ทราบ  |  2) ปลา  |  3) ครู  |  4) กวาง
+EN: Which word has a false consonant blend (ควบกล้ำไม่แท้)?
+   (EN choices same as TH)
+
+### th-9-0145  (หัวข้อ: word-types)
+TH: ในประโยค "เราจะไปเที่ยวทะเล" คำว่า "ทะเล" เป็นคำชนิดใด
+   1) คำวิเศษณ์  |  2) คำนาม  |  3) คำกริยา  |  4) คำสรรพนาม
+EN: In the sentence "เราจะไปเที่ยวทะเล", what kind of word is "ทะเล"?
+   (EN choices same as TH)
+
+### th-9-0146  (หัวข้อ: letter-classes)
+TH: ตัวใดเป็นอักษรต่ำ
+   1) ห  |  2) ร  |  3) อ  |  4) ส
+EN: Which letter is a low-class consonant (อักษรต่ำ)?
+   (EN choices same as TH)
+
+### th-9-0147  (หัวข้อ: letter-classes)
+TH: ตัวใดเป็นอักษรสูง
+   1) ซ  |  2) ส  |  3) จ  |  4) ช
+EN: Which letter is a high-class consonant (อักษรสูง)?
+   (EN choices same as TH)
+
+### th-9-0148  (หัวข้อ: classifiers)
+TH: ลักษณนามของ "เลื่อย" คือคำไหน
+   1) ฉบับ  |  2) ปื้น  |  3) เรือน  |  4) เลา
+EN: Which classifier (ลักษณนาม) is used for "เลื่อย" (a saw)?
+   (EN choices same as TH)
+
+### th-9-0149  (หัวข้อ: blends)
+TH: คำไหนเป็นคำควบกล้ำแท้ที่ควบกับ ร
+   1) จริง  |  2) กลับ  |  3) กวาด  |  4) กราบ
+EN: Which word has a true blend with ร?
+   (EN choices same as TH)
+
+### th-9-0150  (หัวข้อ: classifiers)
+TH: ลักษณนามของ "ขลุ่ย" คือคำไหน
+   1) ซี่  |  2) คัน  |  3) เลา  |  4) ปื้น
+EN: Which classifier (ลักษณนาม) is used for "ขลุ่ย" (a flute)?
+   (EN choices same as TH)
+
+### th-9-0151  (หัวข้อ: sentences)
+TH: ประโยคใดเป็นประโยคขอร้อง
+   1) ไฟในห้องปิดแล้ว  |  2) กรุณาปิดไฟก่อนออกจากห้อง  |  3) ห้ามเปิดไฟ  |  4) ใครปิดไฟ
+EN: Which sentence is a polite request?
+   (EN choices same as TH)
+
+### th-9-0152  (หัวข้อ: classifiers)
+TH: ลักษณนามของ "ยักษ์" คือคำไหน
+   1) ตน  |  2) ฉบับ  |  3) เชือก  |  4) เรือน
+EN: Which classifier (ลักษณนาม) is used for "ยักษ์" (a giant)?
+   (EN choices same as TH)
+
+### th-9-0153  (หัวข้อ: synonyms)
+TH: คำไหนมีความหมายเหมือน "น้ำ"
+   1) อัคคี  |  2) วารี  |  3) ปฐพี  |  4) นภา
+EN: Which Thai word means the same as "น้ำ" (water)?
+   (EN choices same as TH)
+
+### th-9-0154  (หัวข้อ: live-dead-words)
+TH: คำไหนเป็นคำตาย
+   1) ราย  |  2) รู  |  3) รำ  |  4) รัก
+EN: Which word is a dead word (คำตาย)?
+   (EN choices same as TH)
+
+### th-9-0155  (หัวข้อ: classifiers)
+TH: ลักษณนามของ "จดหมาย" คือคำไหน
+   1) ฉบับ  |  2) เรือน  |  3) ซี่  |  4) เล่ม
+EN: Which classifier (ลักษณนาม) is used for "จดหมาย" (a letter)?
+   (EN choices same as TH)
+
+### th-9-0156  (หัวข้อ: final-sounds)
+TH: คำว่า "กราฟ" มีตัวสะกดอยู่ในมาตราใด
+   1) แม่กบ  |  2) แม่กด  |  3) แม่กก  |  4) แม่กม
+EN: Which final-sound group (มาตราตัวสะกด) does "กราฟ" belong to?
+   (EN choices same as TH)
+
+### th-9-0157  (หัวข้อ: word-types)
+TH: ในประโยค "ฉันอยากไปแต่ฝนตก" คำว่า "แต่" เป็นคำชนิดใด
+   1) คำบุพบท  |  2) คำนาม  |  3) คำวิเศษณ์  |  4) คำสันธาน
+EN: In the sentence "ฉันอยากไปแต่ฝนตก", what kind of word is "แต่"?
+   (EN choices same as TH)
+
+### th-9-0158  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "อดีต" คือคำไหน
+   1) เมื่อวาน  |  2) โบราณ  |  3) ปัจจุบัน  |  4) อนาคต
+EN: Which Thai word is the opposite of "อดีต" (the past)?
+   (EN choices same as TH)
+
+### th-9-0159  (หัวข้อ: synonyms)
+TH: คำไหนมีความหมายเหมือน "ท้องฟ้า"
+   1) พนา  |  2) วารี  |  3) ปฐพี  |  4) นภา
+EN: Which Thai word means the same as "ท้องฟ้า" (sky)?
+   (EN choices same as TH)
+
+### th-9-0160  (หัวข้อ: royal-words)
+TH: คำราชาศัพท์ "พระหัตถ์" หมายถึงอะไร
+   1) มือ  |  2) ปาก  |  3) ตา  |  4) เท้า
+EN: What does the royal word "พระหัตถ์" mean?
+   (EN choices same as TH)
+
+### th-9-0161  (หัวข้อ: live-dead-words)
+TH: คำไหนเป็นคำเป็น
+   1) นาบ  |  2) นัด  |  3) นะ  |  4) น้ำ
+EN: Which word is a live word (คำเป็น)?
+   (EN choices same as TH)
+
+### th-9-0162  (หัวข้อ: idioms)
+TH: สำนวน "รักวัวให้ผูก รักลูกให้ตี" หมายความว่าอย่างไร
+   1) รักลูกต้องอบรมสั่งสอน  |  2) ทำผิดแล้วร้อนตัวจนมีพิรุธ  |  3) ไปอยู่ที่ไหนให้ทำตามคนที่นั่น  |  4) ค่อย ๆ ทำอย่างรอบคอบจะได้ผลดี
+EN: What does the Thai saying "รักวัวให้ผูก รักลูกให้ตี" mean?
+   (EN choices same as TH)
+
+### th-9-0163  (หัวข้อ: blends)
+TH: คำว่า "ขนม" อ่านออกเสียงอย่างไร
+   1) ขะ-หนม  |  2) ขน-มะ  |  3) ขะ-นม  |  4) ขอ-นม
+EN: How do you read the word "ขนม"?
+   (EN choices same as TH)
+
+### th-9-0164  (หัวข้อ: sentences)
+TH: ประโยคใดเป็นประโยคคำถาม
+   1) ฉันไปตลาด  |  2) อย่าเดินลัดสนาม  |  3) วันนี้อากาศดี  |  4) เธอจะไปไหน
+EN: Which sentence is a question?
+   (EN choices same as TH)
+
+### th-9-0165  (หัวข้อ: synonyms)
+TH: คำไหนมีความหมายเหมือน "ผู้หญิง"
+   1) กุมาร  |  2) บุรุษ  |  3) นารี  |  4) ราชา
+EN: Which Thai word means the same as "ผู้หญิง" (woman)?
+   (EN choices same as TH)

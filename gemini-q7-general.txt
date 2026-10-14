@@ -1,0 +1,1010 @@
+# ชุดตรวจ: วิทยาศาสตร์และความรู้รอบตัว · เด็กอายุ 7 ปี (ป.1–ป.2) · 168 ข้อ · ไฟล์ q-general-7.json
+# ตัวเลือกนับ 1–4 · ไม่มีเฉลยในไฟล์นี้ (ให้แก้โจทย์เองก่อน)
+
+### gk-0171  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนเป็นปลา
+   1) เต่า 🐢  |  2) ฉลาม 🦈  |  3) เป็ด 🦆  |  4) ห่าน 🪿
+EN: Which one is a fish?
+   1) turtle 🐢  |  2) shark 🦈  |  3) duck 🦆  |  4) goose 🪿
+
+### gk-0172  (หัวข้อ: animal-legs)
+TH: สัตว์ตัวไหนมี 6 ขา
+   1) แมงมุม 🕷️  |  2) หมา 🐶  |  3) เต่าทอง 🐞  |  4) ฉลาม 🦈
+EN: Which animal has 6 legs?
+   1) spider 🕷️  |  2) dog 🐶  |  3) ladybird 🐞  |  4) shark 🦈
+
+### gk-0173  (หัวข้อ: animal-bodies)
+TH: ตัวของงู 🐍 ปกคลุมด้วยอะไร
+   1) ผิวเรียบลื่นชุ่มชื้น  |  2) ขนนก  |  3) ขน  |  4) เกล็ด
+EN: What covers a snake 🐍's body?
+   1) smooth, damp skin  |  2) feathers  |  3) fur  |  4) scales
+
+### gk-0174  (หัวข้อ: animal-homes)
+TH: หมี 🐻 อาศัยอยู่ที่ไหน
+   1) รังมดในดิน  |  2) รัง  |  3) คอกม้า  |  4) ถ้ำ
+EN: Where does a bear 🐻 live?
+   1) an anthill  |  2) a nest  |  3) a stable  |  4) a cave or den
+
+### gk-0175  (หัวข้อ: jobs)
+TH: ใครเดินทางไปอวกาศ
+   1) คนขายผลไม้  |  2) นักบินอวกาศ 🧑‍🚀  |  3) พนักงานขับรถบัส  |  4) ชาวประมง
+EN: Who travels into space?
+   1) a fruit seller  |  2) an astronaut 🧑‍🚀  |  3) a bus driver  |  4) a fisherman
+
+### gk-0176  (หัวข้อ: food)
+TH: ขนแกะนำมาทำอะไร
+   1) หนังสือ  |  2) กระจก  |  3) เสื้อกันหนาว 🧶  |  4) รองเท้าแตะพลาสติก
+EN: What is sheep's wool used to make?
+   1) books  |  2) glass  |  3) warm jumpers 🧶  |  4) plastic flip-flops
+
+### gk-0177  (หัวข้อ: light)
+TH: เงาเกิดขึ้นได้อย่างไร
+   1) มีของมาบังแสง  |  2) ตอนไม่มีแสงเลย  |  3) แสงสว่างมากขึ้น  |  4) ของนั้นเปียกน้ำ
+EN: How is a shadow made?
+   1) something blocks the light  |  2) when there is no light at all  |  3) the light gets brighter  |  4) the thing gets wet
+
+### gk-0178  (หัวข้อ: forces)
+TH: เปิดประตูเข้าหาตัว เป็นแรงแบบไหน
+   1) แรงดึง  |  2) แรงแม่เหล็ก  |  3) แรงลม  |  4) แรงผลัก
+EN: Opening a door towards you is which kind of force?
+   1) a pull  |  2) a magnetic force  |  3) wind  |  4) a push
+
+### gk-0179  (หัวข้อ: earth)
+TH: ช่วยประหยัดน้ำได้อย่างไร
+   1) ปิดก๊อกตอนแปรงฟัน 🚰  |  2) เทน้ำทิ้งเล่น  |  3) ล้างมือนาน ๆ แบบเปิดน้ำตลอด  |  4) เปิดน้ำทิ้งไว้ทั้งวัน
+EN: How can we save water?
+   1) turn off the tap while brushing 🚰  |  2) pour water away for fun  |  3) wash hands with the tap always running  |  4) leave the tap on all day
+
+### gk-0180  (หัวข้อ: space)
+TH: โลกโคจรรอบอะไร
+   1) ดวงจันทร์  |  2) ดวงอาทิตย์ ☀️  |  3) ดาวเสาร์  |  4) ดาวอังคาร
+EN: What does the Earth travel around?
+   1) the Moon  |  2) the Sun ☀️  |  3) Saturn  |  4) Mars
+
+### gk-0181  (หัวข้อ: body)
+TH: อาหารถูกย่อยที่ไหน
+   1) ปอด  |  2) หัวใจ  |  3) สมอง  |  4) กระเพาะอาหาร
+EN: Where is food broken down after we swallow it?
+   1) lungs  |  2) heart  |  3) brain  |  4) stomach
+
+### gk-0182  (หัวข้อ: health)
+TH: เด็กอายุ 7 ปีควรนอนประมาณกี่ชั่วโมงต่อคืน
+   1) 2 ชั่วโมง  |  2) 4 ชั่วโมง  |  3) 20 ชั่วโมง  |  4) 9–12 ชั่วโมง
+EN: About how many hours should a 7-year-old sleep each night?
+   1) 2 hours  |  2) 4 hours  |  3) 20 hours  |  4) 9–12 hours
+
+### gk-0183  (หัวข้อ: plants)
+TH: ดอกไม้ช่วยพืชทำอะไร
+   1) ยืนตรง  |  2) หายใจตอนกลางคืนเท่านั้น  |  3) ดูดน้ำ  |  4) สร้างเมล็ด
+EN: What do flowers help a plant do?
+   1) stand up  |  2) breathe only at night  |  3) drink water  |  4) make seeds
+
+### gk-0184  (หัวข้อ: materials)
+TH: แม่เหล็กดูดอะไรไม่ได้
+   1) ตะปูเหล็ก  |  2) น็อตเหล็ก  |  3) คลิปหนีบกระดาษเหล็ก  |  4) ขวดพลาสติก
+EN: What will a magnet NOT pick up?
+   1) an iron nail  |  2) an iron bolt  |  3) a steel paper clip  |  4) a plastic bottle
+
+### gk-0185  (หัวข้อ: water)
+TH: น้ำแข็งเป็นสถานะอะไร
+   1) แสง  |  2) ของแข็ง  |  3) ของเหลว  |  4) แก๊ส
+EN: What state is ice?
+   1) light  |  2) solid  |  3) liquid  |  4) gas
+
+### gk-0186  (หัวข้อ: weather)
+TH: รุ้งกินน้ำมีกี่สี
+   1) 10  |  2) 7  |  3) 5  |  4) 3
+EN: How many colours are in a rainbow?
+   (EN choices same as TH)
+
+### gk-0187  (หัวข้อ: colours)
+TH: สีดำผสมสีขาวได้สีอะไร
+   1) สีแดง  |  2) สีเทา  |  3) สีส้ม  |  4) สีเหลือง
+EN: Black mixed with white makes which colour?
+   1) red  |  2) grey  |  3) orange  |  4) yellow
+
+### gk-0188  (หัวข้อ: thailand)
+TH: สัตว์ประจำชาติไทยคืออะไร
+   1) แมว  |  2) สิงโต  |  3) ช้าง 🐘  |  4) แพนด้า
+EN: What is Thailand's national animal?
+   1) the cat  |  2) the lion  |  3) the elephant 🐘  |  4) the panda
+
+### gk-0189  (หัวข้อ: time)
+TH: 1 วันมีกี่ชั่วโมง
+   1) 12  |  2) 60  |  3) 7  |  4) 24
+EN: How many hours are in a day?
+   (EN choices same as TH)
+
+### gk-0190  (หัวข้อ: safety)
+TH: ขี่จักรยานควรใส่อะไร
+   1) มงกุฎ  |  2) แว่นกันแดดอย่างเดียว  |  3) ผ้าห่ม  |  4) หมวกกันน็อก ⛑️
+EN: What should you wear when riding a bike?
+   1) a crown  |  2) only sunglasses  |  3) a blanket  |  4) a helmet ⛑️
+
+### gk-0191  (หัวข้อ: records)
+TH: สัตว์บกตัวไหนสูงที่สุด
+   1) ช้าง  |  2) หมี  |  3) ม้า  |  4) ยีราฟ 🦒
+EN: Which land animal is the tallest?
+   1) the elephant  |  2) the bear  |  3) the horse  |  4) the giraffe 🦒
+
+### gk-0192  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนเป็นสัตว์เลี้ยงลูกด้วยนม
+   1) กบ 🐸  |  2) ปลาการ์ตูน 🐠  |  3) ยีราฟ 🦒  |  4) งู 🐍
+EN: Which animal is a mammal?
+   1) frog 🐸  |  2) clownfish 🐠  |  3) giraffe 🦒  |  4) snake 🐍
+
+### gk-0193  (หัวข้อ: animal-legs)
+TH: แมงป่อง 🦂 มีกี่ขา
+   1) 4  |  2) 0  |  3) 8  |  4) 2
+EN: How many legs does a scorpion 🦂 have?
+   (EN choices same as TH)
+
+### gk-0194  (หัวข้อ: animal-bodies)
+TH: ตัวของค้างคาว 🦇 ปกคลุมด้วยอะไร
+   1) เกล็ด  |  2) ขน  |  3) ขนนก  |  4) ผิวเรียบลื่นชุ่มชื้น
+EN: What covers a bat 🦇's body?
+   1) scales  |  2) fur  |  3) feathers  |  4) smooth, damp skin
+
+### gk-0195  (หัวข้อ: animal-homes)
+TH: มด 🐜 อาศัยอยู่ที่ไหน
+   1) รังมดในดิน  |  2) ถ้ำ  |  3) คอกม้า  |  4) รังผึ้ง
+EN: Where does an ant 🐜 live?
+   1) an anthill  |  2) a cave or den  |  3) a stable  |  4) a hive
+
+### gk-0196  (หัวข้อ: food)
+TH: ข้าวปลูกที่ไหน
+   1) ในนาข้าว 🌾  |  2) ในทะเลทราย  |  3) ในทะเล  |  4) บนหลังคา
+EN: Where does rice grow?
+   1) in rice fields 🌾  |  2) in the desert  |  3) in the sea  |  4) on roofs
+
+### gk-0197  (หัวข้อ: light)
+TH: ดวงอาทิตย์ขึ้นทางทิศไหน
+   1) ทิศตะวันตก  |  2) ทิศตะวันออก  |  3) ทิศเหนือ  |  4) ทิศใต้
+EN: Which direction does the Sun rise in?
+   1) the west  |  2) the east  |  3) the north  |  4) the south
+
+### gk-0198  (หัวข้อ: forces)
+TH: เตะลูกบอลออกไป เป็นแรงแบบไหน
+   1) แรงผลัก  |  2) แรงดึง  |  3) ไม่มีแรง  |  4) แรงแม่เหล็ก
+EN: Kicking a ball away is which kind of force?
+   1) a push  |  2) a pull  |  3) no force  |  4) a magnetic force
+
+### gk-0199  (หัวข้อ: earth)
+TH: ช่วยประหยัดไฟได้อย่างไร
+   1) เปิดตู้เย็นค้างไว้  |  2) เปิดทีวีทิ้งไว้  |  3) ปิดไฟเมื่อออกจากห้อง 💡  |  4) เปิดไฟตอนกลางวันทุกดวง
+EN: How can we save electricity?
+   1) leave the fridge door open  |  2) leave the TV on  |  3) switch off lights when leaving a room 💡  |  4) turn on every light in the daytime
+
+### gk-0200  (หัวข้อ: space)
+TH: ดาวเคราะห์ดวงไหนได้ชื่อว่าดาวสีแดง
+   1) ดาวเนปจูน  |  2) ดาวอังคาร  |  3) ดาวศุกร์  |  4) โลก
+EN: Which planet is called the Red Planet?
+   1) Neptune  |  2) Mars  |  3) Venus  |  4) Earth
+
+### gk-0201  (หัวข้อ: body)
+TH: อวัยวะไหนช่วยคิดและสั่งงานร่างกาย
+   1) กระเพาะ  |  2) หัวใจ ❤️  |  3) สมอง 🧠  |  4) ปอด 🫁
+EN: Which organ thinks and controls the body?
+   1) stomach  |  2) heart ❤️  |  3) brain 🧠  |  4) lungs 🫁
+
+### gk-0202  (หัวข้อ: plants)
+TH: ส่วนไหนของพืชสร้างอาหารจากแสงแดด
+   1) เปลือกไม้  |  2) เมล็ด  |  3) ใบ 🍃  |  4) ราก
+EN: Which part of a plant makes food from sunlight?
+   1) bark  |  2) seeds  |  3) leaves 🍃  |  4) roots
+
+### gk-0203  (หัวข้อ: materials)
+TH: ของอะไรจมน้ำ
+   1) ใบไม้ 🍃  |  2) ลูกบอลพลาสติก  |  3) ก้อนหิน 🪨  |  4) เป็ดยาง 🦆
+EN: Which one sinks in water?
+   1) a leaf 🍃  |  2) a plastic ball  |  3) a stone 🪨  |  4) a rubber duck 🦆
+
+### gk-0204  (หัวข้อ: water)
+TH: น้ำเดือดกลายเป็นอะไร
+   1) ก้อนหิน  |  2) ทราย  |  3) ไอน้ำ ♨️  |  4) น้ำแข็ง
+EN: When water boils, what does it turn into?
+   1) rock  |  2) sand  |  3) steam ♨️  |  4) ice
+
+### gk-0205  (หัวข้อ: weather)
+TH: ประเทศไทยมีกี่ฤดู
+   1) 1  |  2) 6  |  3) 3  |  4) 4
+EN: How many seasons does Thailand have?
+   (EN choices same as TH)
+
+### gk-0206  (หัวข้อ: colours)
+TH: สีแดงผสมสีขาวได้สีอะไร
+   1) สีดำ  |  2) สีเขียว  |  3) สีฟ้า  |  4) สีชมพู 🩷
+EN: Red mixed with white makes which colour?
+   1) black  |  2) green  |  3) blue  |  4) pink 🩷
+
+### gk-0207  (หัวข้อ: thailand)
+TH: วันลอยกระทงมักตรงกับเดือนอะไร
+   1) พฤศจิกายน  |  2) มิถุนายน  |  3) กุมภาพันธ์  |  4) เมษายน
+EN: Loy Krathong is usually in which month?
+   1) November  |  2) June  |  3) February  |  4) April
+
+### gk-0208  (หัวข้อ: time)
+TH: 1 ชั่วโมงมีกี่นาที
+   1) 30  |  2) 24  |  3) 100  |  4) 60
+EN: How many minutes are in an hour?
+   (EN choices same as TH)
+
+### gk-0209  (หัวข้อ: records)
+TH: สัตว์บกตัวไหนวิ่งเร็วที่สุด
+   1) ช้าง  |  2) เสือชีตาห์ 🐆  |  3) หมู  |  4) เต่า
+EN: Which land animal runs the fastest?
+   1) the elephant  |  2) the cheetah 🐆  |  3) the pig  |  4) the tortoise
+
+### gk-0210  (หัวข้อ: animal-groups)
+TH: แกะ 🐑 เป็นสัตว์กลุ่มไหน
+   1) ปลา  |  2) สัตว์เลี้ยงลูกด้วยนม  |  3) สัตว์ปีก (นก)  |  4) แมลง
+EN: What kind of animal is a sheep 🐑?
+   1) a fish  |  2) a mammal  |  3) a bird  |  4) an insect
+
+### gk-0211  (หัวข้อ: animal-legs)
+TH: สัตว์ตัวไหนมี 6 ขา
+   1) ปลาทอง 🐠  |  2) แพะ 🐐  |  3) สิงโต 🦁  |  4) ผีเสื้อ 🦋
+EN: Which animal has 6 legs?
+   1) goldfish 🐠  |  2) goat 🐐  |  3) lion 🦁  |  4) butterfly 🦋
+
+### gk-0212  (หัวข้อ: animal-bodies)
+TH: สัตว์ตัวไหนมีขนนก
+   1) แพะ 🐐  |  2) เป็ด 🦆  |  3) งู 🐍  |  4) โลมา 🐬
+EN: Which animal is covered with feathers?
+   1) goat 🐐  |  2) duck 🦆  |  3) snake 🐍  |  4) dolphin 🐬
+
+### gk-0213  (หัวข้อ: animal-homes)
+TH: กระต่าย 🐰 อาศัยอยู่ที่ไหน
+   1) โพรงใต้ดิน  |  2) คอกม้า  |  3) แม่น้ำหรือบ่อน้ำ  |  4) รังผึ้ง
+EN: Where does a rabbit 🐰 live?
+   1) a burrow  |  2) a stable  |  3) a pond or river  |  4) a hive
+
+### gk-0214  (หัวข้อ: earth)
+TH: โลกมีทวีปกี่ทวีป
+   1) 3  |  2) 7  |  3) 20  |  4) 12
+EN: How many continents are there?
+   (EN choices same as TH)
+
+### gk-0215  (หัวข้อ: space)
+TH: ดวงจันทร์โคจรรอบอะไร
+   1) ดาวอังคาร  |  2) โลก 🌍  |  3) ดาวหาง  |  4) ดวงอาทิตย์โดยตรง
+EN: What does the Moon travel around?
+   1) Mars  |  2) the Earth 🌍  |  3) a comet  |  4) the Sun only
+
+### gk-0216  (หัวข้อ: body)
+TH: กระดูกมีหน้าที่อะไร
+   1) ค้ำร่างกายให้ตั้งตรงและปกป้องอวัยวะ  |  2) ช่วยให้ได้กลิ่น  |  3) ทำให้ผมยาว  |  4) ย่อยอาหาร
+EN: What do bones do?
+   1) hold the body up and protect organs  |  2) help us smell  |  3) make hair grow  |  4) digest food
+
+### gk-0217  (หัวข้อ: plants)
+TH: รากของพืชทำหน้าที่อะไร
+   1) จับแมลง  |  2) ออกดอก  |  3) สร้างเมล็ด  |  4) ดูดน้ำจากดิน
+EN: What do roots do for a plant?
+   1) catch insects  |  2) make flowers  |  3) make seeds  |  4) take in water from the soil
+
+### gk-0218  (หัวข้อ: materials)
+TH: แม่เหล็กดูดอะไรได้
+   1) กระดาษ  |  2) ตะปูเหล็ก 🔩  |  3) ไม้บรรทัดไม้  |  4) ยางลบ
+EN: What will a magnet pick up?
+   1) paper  |  2) an iron nail 🔩  |  3) a wooden ruler  |  4) a rubber
+
+### gk-0219  (หัวข้อ: weather)
+TH: ฝนตกลงมาจากอะไร
+   1) ดวงอาทิตย์  |  2) เมฆ ☁️  |  3) ภูเขา  |  4) ต้นไม้
+EN: Where does rain fall from?
+   1) the Sun  |  2) clouds ☁️  |  3) mountains  |  4) trees
+
+### gk-0220  (หัวข้อ: animal-groups)
+TH: หมู 🐷 เป็นสัตว์กลุ่มไหน
+   1) สัตว์สะเทินน้ำสะเทินบก  |  2) ปลา  |  3) สัตว์เลื้อยคลาน  |  4) สัตว์เลี้ยงลูกด้วยนม
+EN: What kind of animal is a pig 🐷?
+   1) an amphibian  |  2) a fish  |  3) a reptile  |  4) a mammal
+
+### gk-0221  (หัวข้อ: animal-legs)
+TH: สัตว์ตัวไหนมี 2 ขา
+   1) ปลาการ์ตูน 🐠  |  2) หิ่งห้อย ✨  |  3) ช้าง 🐘  |  4) นกฟลามิงโก 🦩
+EN: Which animal has 2 legs?
+   1) clownfish 🐠  |  2) firefly ✨  |  3) elephant 🐘  |  4) flamingo 🦩
+
+### gk-0222  (หัวข้อ: animal-bodies)
+TH: สัตว์ตัวไหนมีขนนก
+   1) งู 🐍  |  2) หมา 🐶  |  3) ค้างคาว 🦇  |  4) นกฮูก 🦉
+EN: Which animal is covered with feathers?
+   1) snake 🐍  |  2) dog 🐶  |  3) bat 🦇  |  4) owl 🦉
+
+### gk-0223  (หัวข้อ: animal-homes)
+TH: ผึ้ง 🐝 อาศัยอยู่ที่ไหน
+   1) โพรงใต้ดิน  |  2) รังผึ้ง  |  3) แม่น้ำหรือบ่อน้ำ  |  4) รังมดในดิน
+EN: Where does a bee 🐝 live?
+   1) a burrow  |  2) a hive  |  3) a pond or river  |  4) an anthill
+
+### gk-0224  (หัวข้อ: earth)
+TH: ประเทศไทยอยู่ในทวีปอะไร
+   1) แอฟริกา  |  2) เอเชีย  |  3) อเมริกาใต้  |  4) ยุโรป
+EN: Which continent is Thailand in?
+   1) Africa  |  2) Asia  |  3) South America  |  4) Europe
+
+### gk-0225  (หัวข้อ: space)
+TH: เราเห็นดาวบนฟ้าได้ชัดตอนไหน
+   1) ตอนกลางคืน 🌃  |  2) ตอนเที่ยงวัน  |  3) ในห้องที่เปิดไฟ  |  4) ตอนฝนตกหนัก
+EN: When can we see stars most clearly?
+   1) at night 🌃  |  2) at midday  |  3) in a lit room  |  4) in heavy rain
+
+### gk-0226  (หัวข้อ: body)
+TH: หัวใจทำหน้าที่อะไร
+   1) สูบฉีดเลือดไปทั่วร่างกาย  |  2) ช่วยให้ได้ยิน  |  3) ช่วยให้มองเห็น  |  4) ย่อยอาหาร
+EN: What does the heart do?
+   1) pumps blood around the body  |  2) helps us hear  |  3) helps us see  |  4) digests food
+
+### gk-0227  (หัวข้อ: materials)
+TH: ของอะไรลอยน้ำได้
+   1) ก้อนหิน 🪨  |  2) ลูกแก้ว  |  3) ตะปูเหล็ก  |  4) ท่อนไม้ 🪵
+EN: Which one floats on water?
+   1) a stone 🪨  |  2) a glass marble  |  3) an iron nail  |  4) a piece of wood 🪵
+
+### gk-0228  (หัวข้อ: animal-groups)
+TH: เต่าทอง 🐞 เป็นสัตว์กลุ่มไหน
+   1) สัตว์เลื้อยคลาน  |  2) แมลง  |  3) ปลา  |  4) สัตว์เลี้ยงลูกด้วยนม
+EN: What kind of animal is a ladybird 🐞?
+   1) a reptile  |  2) an insect  |  3) a fish  |  4) a mammal
+
+### gk-0229  (หัวข้อ: animal-legs)
+TH: สัตว์ตัวไหนมี 2 ขา
+   1) นกอินทรี 🦅  |  2) ม้า 🐴  |  3) หมีขั้วโลก 🐻‍❄️  |  4) อูฐ 🐫
+EN: Which animal has 2 legs?
+   1) eagle 🦅  |  2) horse 🐴  |  3) polar bear 🐻‍❄️  |  4) camel 🐫
+
+### gk-0230  (หัวข้อ: animal-bodies)
+TH: ตัวของม้า 🐴 ปกคลุมด้วยอะไร
+   1) ผิวเรียบลื่นชุ่มชื้น  |  2) ขน  |  3) เกล็ด  |  4) ขนนก
+EN: What covers a horse 🐴's body?
+   1) smooth, damp skin  |  2) fur  |  3) scales  |  4) feathers
+
+### gk-0231  (หัวข้อ: earth)
+TH: ต้นไม้ช่วยโลกอย่างไร
+   1) ทำให้กลางคืนสว่าง  |  2) ทำให้ฝนหยุดตกตลอดไป  |  3) ให้ร่มเงาและออกซิเจน  |  4) ทำให้ทะเลเค็ม
+EN: How do trees help the Earth?
+   1) they light up the night  |  2) they stop rain forever  |  3) they give shade and oxygen  |  4) they make the sea salty
+
+### gk-0232  (หัวข้อ: body)
+TH: ปอดช่วยให้เราทำอะไร
+   1) เดิน  |  2) กินอาหาร  |  3) หายใจ  |  4) มองเห็น
+EN: What do our lungs help us do?
+   1) walk  |  2) eat  |  3) breathe  |  4) see
+
+### gk-0233  (หัวข้อ: animal-groups)
+TH: มด 🐜 เป็นสัตว์กลุ่มไหน
+   1) สัตว์เลี้ยงลูกด้วยนม  |  2) แมลง  |  3) สัตว์สะเทินน้ำสะเทินบก  |  4) ปลา
+EN: What kind of animal is an ant 🐜?
+   1) a mammal  |  2) an insect  |  3) an amphibian  |  4) a fish
+
+### gk-0234  (หัวข้อ: animal-legs)
+TH: สัตว์ตัวไหนมี 8 ขา
+   1) ห่าน 🪿  |  2) กวาง 🦌  |  3) แมงมุม 🕷️  |  4) หงส์ 🦢
+EN: Which animal has 8 legs?
+   1) goose 🪿  |  2) deer 🦌  |  3) spider 🕷️  |  4) swan 🦢
+
+### gk-0235  (หัวข้อ: animal-bodies)
+TH: ตัวของจระเข้ 🐊 ปกคลุมด้วยอะไร
+   1) ขนนก  |  2) เกล็ด  |  3) ผิวเรียบลื่นชุ่มชื้น  |  4) ขน
+EN: What covers a crocodile 🐊's body?
+   1) feathers  |  2) scales  |  3) smooth, damp skin  |  4) fur
+
+### gk-0236  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนเป็นสัตว์ปีก (นก)
+   1) ยีราฟ 🦒  |  2) ช้าง 🐘  |  3) ปลาการ์ตูน 🐠  |  4) ไก่ 🐔
+EN: Which one is a bird?
+   1) giraffe 🦒  |  2) elephant 🐘  |  3) clownfish 🐠  |  4) chicken 🐔
+
+### gk-0237  (หัวข้อ: animal-legs)
+TH: ฉลาม 🦈 มีกี่ขา
+   1) 0  |  2) 4  |  3) 6  |  4) 2
+EN: How many legs does a shark 🦈 have?
+   (EN choices same as TH)
+
+### gk-0238  (หัวข้อ: animal-bodies)
+TH: ตัวของแมว 🐱 ปกคลุมด้วยอะไร
+   1) ขนนก  |  2) เกล็ด  |  3) ขน  |  4) ผิวเรียบลื่นชุ่มชื้น
+EN: What covers a cat 🐱's body?
+   1) feathers  |  2) scales  |  3) fur  |  4) smooth, damp skin
+
+### gk-0239  (หัวข้อ: animal-groups)
+TH: แมลงวัน 🪰 เป็นสัตว์กลุ่มไหน
+   1) แมลง  |  2) สัตว์ปีก (นก)  |  3) สัตว์เลื้อยคลาน  |  4) ปลา
+EN: What kind of animal is a fly 🪰?
+   1) an insect  |  2) a bird  |  3) a reptile  |  4) a fish
+
+### gk-0240  (หัวข้อ: animal-legs)
+TH: ตั๊กแตน 🦗 มีกี่ขา
+   1) 2  |  2) 0  |  3) 6  |  4) 4
+EN: How many legs does a grasshopper 🦗 have?
+   (EN choices same as TH)
+
+### gk-0241  (หัวข้อ: animal-bodies)
+TH: ตัวของฮิปโป 🦛 ปกคลุมด้วยอะไร
+   1) ผิวหนัง ไม่มีขนเยอะ  |  2) ขน  |  3) ขนนก  |  4) เกล็ด
+EN: What covers a hippo 🦛's body?
+   1) bare skin  |  2) fur  |  3) feathers  |  4) scales
+
+### gk-0242  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนเป็นสัตว์ปีก (นก)
+   1) ค้างคาว 🦇  |  2) นกกระจอกเทศ 🪶  |  3) ปลาทอง 🐠  |  4) แมลงวัน 🪰
+EN: Which one is a bird?
+   1) bat 🦇  |  2) ostrich 🪶  |  3) goldfish 🐠  |  4) fly 🪰
+
+### gk-0243  (หัวข้อ: animal-legs)
+TH: ปลาทูน่า 🐟 มีกี่ขา
+   1) 4  |  2) 6  |  3) 0  |  4) 2
+EN: How many legs does a tuna 🐟 have?
+   (EN choices same as TH)
+
+### gk-0244  (หัวข้อ: animal-bodies)
+TH: ขนของสัตว์ตัวไหนนำไปทำไหมพรมถักเสื้อกันหนาว
+   1) งู 🐍  |  2) กระรอก 🐿️  |  3) หมู 🐷  |  4) แกะ 🐑
+EN: Whose wool is spun into yarn for warm sweaters?
+   1) snake 🐍  |  2) squirrel 🐿️  |  3) Pig 🐷  |  4) sheep 🐑
+
+### gk-0245  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนเป็นสัตว์เลี้ยงลูกด้วยนม
+   1) หงส์ 🦢  |  2) ช้าง 🐘  |  3) เต่า 🐢  |  4) จระเข้ 🐊
+EN: Which one is a mammal?
+   1) swan 🦢  |  2) elephant 🐘  |  3) turtle 🐢  |  4) crocodile 🐊
+
+### gk-0246  (หัวข้อ: animal-legs)
+TH: สัตว์ตัวไหนมี 6 ขา
+   1) ด้วง 🪲  |  2) เต่า 🐢  |  3) ควาย 🐃  |  4) ช้าง 🐘
+EN: Which animal has 6 legs?
+   1) beetle 🪲  |  2) turtle 🐢  |  3) buffalo 🐃  |  4) elephant 🐘
+
+### gk-0247  (หัวข้อ: animal-bodies)
+TH: ตัวของหมาป่า 🐺 ปกคลุมด้วยอะไร
+   1) เกล็ด  |  2) ผิวเรียบลื่นชุ่มชื้น  |  3) ขน  |  4) ขนนก
+EN: What covers a wolf 🐺's body?
+   1) scales  |  2) smooth, damp skin  |  3) fur  |  4) feathers
+
+### gk-0248  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนเป็นสัตว์เลี้ยงลูกด้วยนม
+   1) นกอินทรี 🦅  |  2) นกกระจอกเทศ 🪶  |  3) ควาย 🐃  |  4) เพนกวิน 🐧
+EN: Which animal is a mammal?
+   1) eagle 🦅  |  2) ostrich 🪶  |  3) buffalo 🐃  |  4) penguin 🐧
+
+### gk-0249  (หัวข้อ: animal-legs)
+TH: งู 🐍 มีกี่ขา
+   1) 4  |  2) 0  |  3) 2  |  4) 6
+EN: How many legs does a snake 🐍 have?
+   (EN choices same as TH)
+
+### gk-0250  (หัวข้อ: animal-bodies)
+TH: สัตว์ตัวไหนมีเกล็ด
+   1) สิงโต 🦁  |  2) นกยูง 🦚  |  3) ปลาทอง 🐠  |  4) กระรอก 🐿️
+EN: Which animal is covered with scales?
+   1) lion 🦁  |  2) peacock 🦚  |  3) goldfish 🐠  |  4) squirrel 🐿️
+
+### gk-0251  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนเป็นสัตว์เลี้ยงลูกด้วยนม
+   1) มด 🐜  |  2) ปลาการ์ตูน 🐠  |  3) ไก่ 🐔  |  4) กระต่าย 🐰
+EN: Which one is a mammal?
+   1) ant 🐜  |  2) clownfish 🐠  |  3) chicken 🐔  |  4) rabbit 🐰
+
+### gk-0252  (หัวข้อ: animal-legs)
+TH: สัตว์ตัวไหนมี 2 ขา
+   1) หมีขั้วโลก 🐻‍❄️  |  2) ปลาการ์ตูน 🐠  |  3) นกแก้ว 🦜  |  4) หมี 🐻
+EN: Which animal has 2 legs?
+   1) polar bear 🐻‍❄️  |  2) clownfish 🐠  |  3) parrot 🦜  |  4) bear 🐻
+
+### gk-0253  (หัวข้อ: animal-bodies)
+TH: ตัวของเป็ด 🦆 ปกคลุมด้วยอะไร
+   1) เกล็ด  |  2) ขน  |  3) ขนนก  |  4) ผิวเรียบลื่นชุ่มชื้น
+EN: What covers a duck 🦆's body?
+   1) scales  |  2) fur  |  3) feathers  |  4) smooth, damp skin
+
+### gk-0254  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนเป็นสัตว์เลี้ยงลูกด้วยนม
+   1) เต่า 🐢  |  2) จิ้งจก 🦎  |  3) อูฐ 🐫  |  4) นกฮูก 🦉
+EN: Which animal is a mammal?
+   1) turtle 🐢  |  2) lizard 🦎  |  3) camel 🐫  |  4) owl 🦉
+
+### gk-0255  (หัวข้อ: animal-legs)
+TH: สัตว์ตัวไหนมี 2 ขา
+   1) แพะ 🐐  |  2) วัว 🐄  |  3) กิ้งก่าคาเมเลียน 🦎  |  4) เป็ด 🦆
+EN: Which animal has 2 legs?
+   1) goat 🐐  |  2) cow 🐄  |  3) chameleon 🦎  |  4) duck 🦆
+
+### gk-0256  (หัวข้อ: animal-bodies)
+TH: ตัวของกิ้งก่าคาเมเลียน 🦎 ปกคลุมด้วยอะไร
+   1) ขน  |  2) ขนนก  |  3) เกล็ด  |  4) ผิวเรียบลื่นชุ่มชื้น
+EN: What covers a chameleon 🦎's body?
+   1) fur  |  2) feathers  |  3) scales  |  4) smooth, damp skin
+
+### gk-0258  (หัวข้อ: animal-legs)
+TH: สัตว์ตัวไหนมี 6 ขา
+   1) หงส์ 🦢  |  2) แมลงปอ  |  3) ม้าลาย 🦓  |  4) หมา 🐶
+EN: Which animal has 6 legs?
+   1) swan 🦢  |  2) dragonfly  |  3) zebra 🦓  |  4) dog 🐶
+
+### gk-0259  (หัวข้อ: animal-bodies)
+TH: ตัวของกระต่าย 🐰 ปกคลุมด้วยอะไร
+   1) ขนนก  |  2) เกล็ด  |  3) ผิวเรียบลื่นชุ่มชื้น  |  4) ขน
+EN: What covers a rabbit 🐰's body?
+   1) feathers  |  2) scales  |  3) smooth, damp skin  |  4) fur
+
+### gk-0260  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนเป็นสัตว์เลี้ยงลูกด้วยนม
+   1) เต่าทอง 🐞  |  2) ผึ้ง 🐝  |  3) นกอินทรี 🦅  |  4) ฮิปโป 🦛
+EN: Which one is a mammal?
+   1) ladybird 🐞  |  2) bee 🐝  |  3) eagle 🦅  |  4) hippo 🦛
+
+### gk-0261  (หัวข้อ: animal-legs)
+TH: สัตว์ตัวไหนมี 6 ขา
+   1) ตั๊กแตน 🦗  |  2) หงส์ 🦢  |  3) แมว 🐱  |  4) เสือ 🐯
+EN: Which animal has 6 legs?
+   1) grasshopper 🦗  |  2) swan 🦢  |  3) cat 🐱  |  4) tiger 🐯
+
+### gk-0262  (หัวข้อ: animal-bodies)
+TH: ตัวของนกอินทรี 🦅 ปกคลุมด้วยอะไร
+   1) ขนนก  |  2) เกล็ด  |  3) ผิวเรียบลื่นชุ่มชื้น  |  4) ขน
+EN: What covers an eagle 🦅's body?
+   1) feathers  |  2) scales  |  3) smooth, damp skin  |  4) fur
+
+### gk-0263  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนเป็นสัตว์เลี้ยงลูกด้วยนม
+   1) นกอินทรี 🦅  |  2) หงส์ 🦢  |  3) แกะ 🐑  |  4) นกแก้ว 🦜
+EN: Which animal is a mammal?
+   1) eagle 🦅  |  2) swan 🦢  |  3) sheep 🐑  |  4) parrot 🦜
+
+### gk-0264  (หัวข้อ: animal-legs)
+TH: สัตว์ตัวไหนมี 6 ขา
+   1) อูฐ 🐫  |  2) แมลงวัน 🪰  |  3) ฮิปโป 🦛  |  4) คางคก 🐸
+EN: Which animal has 6 legs?
+   1) camel 🐫  |  2) fly 🪰  |  3) hippo 🦛  |  4) toad 🐸
+
+### gk-0265  (หัวข้อ: animal-bodies)
+TH: ตัวของไก่ 🐔 ปกคลุมด้วยอะไร
+   1) ขนนก  |  2) ผิวเรียบลื่นชุ่มชื้น  |  3) ขน  |  4) เกล็ด
+EN: What covers a chicken 🐔's body?
+   1) feathers  |  2) smooth, damp skin  |  3) fur  |  4) scales
+
+### gk-0266  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนเป็นสัตว์เลี้ยงลูกด้วยนม
+   1) งู 🐍  |  2) โลมา 🐬  |  3) เป็ด 🦆  |  4) ผึ้ง 🐝
+EN: Which one is a mammal?
+   1) snake 🐍  |  2) dolphin 🐬  |  3) duck 🦆  |  4) bee 🐝
+
+### gk-0267  (หัวข้อ: animal-legs)
+TH: สัตว์ตัวไหนมี 2 ขา
+   1) ผีเสื้อ 🦋  |  2) ม้าลาย 🦓  |  3) ปลาทอง 🐠  |  4) นกฮูก 🦉
+EN: Which animal has 2 legs?
+   1) butterfly 🦋  |  2) zebra 🦓  |  3) goldfish 🐠  |  4) owl 🦉
+
+### gk-0268  (หัวข้อ: animal-bodies)
+TH: ตัวของปลาทูน่า 🐟 ปกคลุมด้วยอะไร
+   1) ผิวเรียบลื่นชุ่มชื้น  |  2) เกล็ด  |  3) ขน  |  4) ขนนก
+EN: What covers a tuna 🐟's body?
+   1) smooth, damp skin  |  2) scales  |  3) fur  |  4) feathers
+
+### gk-0269  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนเป็นสัตว์เลี้ยงลูกด้วยนม
+   1) นกยูง 🦚  |  2) เสือ 🐯  |  3) หงส์ 🦢  |  4) นกแก้ว 🦜
+EN: Which one is a mammal?
+   1) peacock 🦚  |  2) tiger 🐯  |  3) swan 🦢  |  4) parrot 🦜
+
+### gk-0270  (หัวข้อ: animal-legs)
+TH: แมงกะพรุน 🪼 มีกี่ขา
+   1) 2  |  2) 4  |  3) 0  |  4) 6
+EN: How many legs does a jellyfish 🪼 have?
+   (EN choices same as TH)
+
+### gk-0271  (หัวข้อ: animal-bodies)
+TH: ตัวของนกฮูก 🦉 ปกคลุมด้วยอะไร
+   1) ผิวเรียบลื่นชุ่มชื้น  |  2) ขน  |  3) เกล็ด  |  4) ขนนก
+EN: What covers an owl 🦉's body?
+   1) smooth, damp skin  |  2) fur  |  3) scales  |  4) feathers
+
+### gk-0272  (หัวข้อ: animal-groups)
+TH: ค้างคาว 🦇 เป็นสัตว์กลุ่มไหน
+   1) สัตว์เลี้ยงลูกด้วยนม  |  2) สัตว์เลื้อยคลาน  |  3) ปลา  |  4) แมลง
+EN: What kind of animal is a bat 🦇?
+   1) a mammal  |  2) a reptile  |  3) a fish  |  4) an insect
+
+### gk-0273  (หัวข้อ: animal-legs)
+TH: มด 🐜 มีกี่ขา
+   1) 4  |  2) 2  |  3) 0  |  4) 6
+EN: How many legs does an ant 🐜 have?
+   (EN choices same as TH)
+
+### gk-0274  (หัวข้อ: animal-bodies)
+TH: ตัวของเสือ 🐯 ปกคลุมด้วยอะไร
+   1) ขนนก  |  2) เกล็ด  |  3) ผิวเรียบลื่นชุ่มชื้น  |  4) ขน
+EN: What covers a tiger 🐯's body?
+   1) feathers  |  2) scales  |  3) smooth, damp skin  |  4) fur
+
+### gk-0275  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนเป็นสัตว์เลี้ยงลูกด้วยนม
+   1) กบ 🐸  |  2) ผีเสื้อ 🦋  |  3) นกยูง 🦚  |  4) หมีขั้วโลก 🐻‍❄️
+EN: Which one is a mammal?
+   1) frog 🐸  |  2) butterfly 🦋  |  3) peacock 🦚  |  4) polar bear 🐻‍❄️
+
+### gk-0276  (หัวข้อ: animal-legs)
+TH: ปลาการ์ตูน 🐠 มีกี่ขา
+   1) 6  |  2) 2  |  3) 4  |  4) 0
+EN: How many legs does a clownfish 🐠 have?
+   (EN choices same as TH)
+
+### gk-0277  (หัวข้อ: animal-bodies)
+TH: ตัวของแรด 🦏 ปกคลุมด้วยอะไร
+   1) ขน  |  2) ผิวหนัง ไม่มีขนเยอะ  |  3) ขนนก  |  4) เกล็ด
+EN: What covers a rhino 🦏's body?
+   1) fur  |  2) bare skin  |  3) feathers  |  4) scales
+
+### gk-0278  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนเป็นสัตว์เลี้ยงลูกด้วยนม
+   1) นกฟลามิงโก 🦩  |  2) ไก่ 🐔  |  3) วาฬ 🐋  |  4) แมลงวัน 🪰
+EN: Which one is a mammal?
+   1) flamingo 🦩  |  2) chicken 🐔  |  3) whale 🐋  |  4) fly 🪰
+
+### gk-0279  (หัวข้อ: animal-legs)
+TH: ด้วง 🪲 มีกี่ขา
+   1) 6  |  2) 0  |  3) 2  |  4) 4
+EN: How many legs does a beetle 🪲 have?
+   (EN choices same as TH)
+
+### gk-0280  (หัวข้อ: animal-bodies)
+TH: สัตว์ตัวไหนมีขนนก
+   1) งู 🐍  |  2) จระเข้ 🐊  |  3) จิ้งจก 🦎  |  4) ไก่ 🐔
+EN: Which animal is covered with feathers?
+   1) snake 🐍  |  2) crocodile 🐊  |  3) lizard 🦎  |  4) chicken 🐔
+
+### gk-0281  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนเป็นสัตว์เลี้ยงลูกด้วยนม
+   1) หนู 🐭  |  2) ตั๊กแตน 🦗  |  3) นกฮูก 🦉  |  4) หิ่งห้อย ✨
+EN: Which one is a mammal?
+   1) mouse 🐭  |  2) grasshopper 🦗  |  3) owl 🦉  |  4) firefly ✨
+
+### gk-0282  (หัวข้อ: animal-legs)
+TH: สัตว์ตัวไหนมี 6 ขา
+   1) ควาย 🐃  |  2) เป็ด 🦆  |  3) กบ 🐸  |  4) ยุง 🦟
+EN: Which animal has 6 legs?
+   1) buffalo 🐃  |  2) duck 🦆  |  3) frog 🐸  |  4) mosquito 🦟
+
+### gk-0283  (หัวข้อ: animal-bodies)
+TH: ตัวของโลมา 🐬 ปกคลุมด้วยอะไร
+   1) ขน  |  2) ขนนก  |  3) เกล็ด  |  4) ผิวหนัง ไม่มีขนเยอะ
+EN: What covers a dolphin 🐬's body?
+   1) fur  |  2) feathers  |  3) scales  |  4) bare skin
+
+### gk-0285  (หัวข้อ: animal-legs)
+TH: แมงมุม 🕷️ มีกี่ขา
+   1) 8  |  2) 0  |  3) 4  |  4) 2
+EN: How many legs does a spider 🕷️ have?
+   (EN choices same as TH)
+
+### gk-0286  (หัวข้อ: animal-bodies)
+TH: สัตว์ตัวไหนมีเกล็ด
+   1) งู 🐍  |  2) นกกระจอกเทศ 🪶  |  3) กวาง 🦌  |  4) กระต่าย 🐰
+EN: Which animal is covered with scales?
+   1) snake 🐍  |  2) ostrich 🪶  |  3) deer 🦌  |  4) rabbit 🐰
+
+### gk-0287  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนเป็นสัตว์เลี้ยงลูกด้วยนม
+   1) กระรอก 🐿️  |  2) กิ้งก่าคาเมเลียน 🦎  |  3) เป็ด 🦆  |  4) ตั๊กแตน 🦗
+EN: Which one is a mammal?
+   1) squirrel 🐿️  |  2) chameleon 🦎  |  3) duck 🦆  |  4) grasshopper 🦗
+
+### gk-0288  (หัวข้อ: animal-legs)
+TH: ผีเสื้อ 🦋 มีกี่ขา
+   1) 2  |  2) 4  |  3) 6  |  4) 0
+EN: How many legs does a butterfly 🦋 have?
+   (EN choices same as TH)
+
+### gk-0289  (หัวข้อ: animal-bodies)
+TH: ตัวของยีราฟ 🦒 ปกคลุมด้วยอะไร
+   1) ขน  |  2) ผิวเรียบลื่นชุ่มชื้น  |  3) ขนนก  |  4) เกล็ด
+EN: What covers a giraffe 🦒's body?
+   1) fur  |  2) smooth, damp skin  |  3) feathers  |  4) scales
+
+### gk-0290  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนเป็นสัตว์เลี้ยงลูกด้วยนม
+   1) ด้วง 🪲  |  2) หมาป่า 🐺  |  3) ตั๊กแตน 🦗  |  4) นกกระจอกเทศ 🪶
+EN: Which one is a mammal?
+   1) beetle 🪲  |  2) wolf 🐺  |  3) grasshopper 🦗  |  4) ostrich 🪶
+
+### gk-0291  (หัวข้อ: animal-legs)
+TH: เต่าทอง 🐞 มีกี่ขา
+   1) 2  |  2) 6  |  3) 4  |  4) 0
+EN: How many legs does a ladybird 🐞 have?
+   (EN choices same as TH)
+
+### gk-0292  (หัวข้อ: animal-bodies)
+TH: ตัวของช้าง 🐘 ปกคลุมด้วยอะไร
+   1) ขนนก  |  2) ผิวหนัง ไม่มีขนเยอะ  |  3) เกล็ด  |  4) ขน
+EN: What covers an elephant 🐘's body?
+   1) feathers  |  2) bare skin  |  3) scales  |  4) fur
+
+### gk-0293  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนเป็นสัตว์เลี้ยงลูกด้วยนม
+   1) เต่า 🐢  |  2) วัว 🐄  |  3) งู 🐍  |  4) คางคก 🐸
+EN: Which animal is a mammal?
+   1) turtle 🐢  |  2) cow 🐄  |  3) snake 🐍  |  4) toad 🐸
+
+### gk-0294  (หัวข้อ: animal-legs)
+TH: แมลงวัน 🪰 มีกี่ขา
+   1) 0  |  2) 4  |  3) 2  |  4) 6
+EN: How many legs does a fly 🪰 have?
+   (EN choices same as TH)
+
+### gk-0295  (หัวข้อ: animal-bodies)
+TH: สัตว์ตัวไหนมีขนนก
+   1) ฮิปโป 🦛  |  2) งู 🐍  |  3) นกแก้ว 🦜  |  4) จิ้งจก 🦎
+EN: Which animal is covered with feathers?
+   1) hippo 🦛  |  2) snake 🐍  |  3) parrot 🦜  |  4) lizard 🦎
+
+### gk-0296  (หัวข้อ: animal-groups)
+TH: ห่าน 🪿 เป็นสัตว์กลุ่มไหน
+   1) สัตว์เลื้อยคลาน  |  2) สัตว์เลี้ยงลูกด้วยนม  |  3) สัตว์ปีก (นก)  |  4) แมลง
+EN: What kind of animal is a goose 🪿?
+   1) a reptile  |  2) a mammal  |  3) a bird  |  4) an insect
+
+### gk-0297  (หัวข้อ: animal-legs)
+TH: ปลาทอง 🐠 มีกี่ขา
+   1) 4  |  2) 6  |  3) 2  |  4) 0
+EN: How many legs does a goldfish 🐠 have?
+   (EN choices same as TH)
+
+### gk-0298  (หัวข้อ: animal-bodies)
+TH: ตัวของหมา 🐶 ปกคลุมด้วยอะไร
+   1) ขนนก  |  2) เกล็ด  |  3) ผิวเรียบลื่นชุ่มชื้น  |  4) ขน
+EN: What covers a dog 🐶's body?
+   1) feathers  |  2) scales  |  3) smooth, damp skin  |  4) fur
+
+### gk-0299  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนเป็นแมลง
+   1) อูฐ 🐫  |  2) ไก่ 🐔  |  3) สิงโต 🦁  |  4) มด 🐜
+EN: Which one is an insect?
+   1) camel 🐫  |  2) chicken 🐔  |  3) lion 🦁  |  4) ant 🐜
+
+### gk-0300  (หัวข้อ: animal-legs)
+TH: สัตว์ตัวไหนมี 2 ขา
+   1) ยีราฟ 🦒  |  2) หนู 🐭  |  3) นกกระจอกเทศ 🪶  |  4) แรด 🦏
+EN: Which animal has 2 legs?
+   1) giraffe 🦒  |  2) mouse 🐭  |  3) ostrich 🪶  |  4) rhino 🦏
+
+### gk-0301  (หัวข้อ: animal-bodies)
+TH: ตัวของวัว 🐄 ปกคลุมด้วยอะไร
+   1) ขน  |  2) เกล็ด  |  3) ผิวเรียบลื่นชุ่มชื้น  |  4) ขนนก
+EN: What covers a cow 🐄's body?
+   1) fur  |  2) scales  |  3) smooth, damp skin  |  4) feathers
+
+### gk-0302  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนเป็นสัตว์เลี้ยงลูกด้วยนม
+   1) จิงโจ้ 🦘  |  2) หิ่งห้อย ✨  |  3) แมลงปอ  |  4) แมลงวัน 🪰
+EN: Which one is a mammal?
+   1) kangaroo 🦘  |  2) firefly ✨  |  3) dragonfly  |  4) fly 🪰
+
+### gk-0303  (หัวข้อ: animal-legs)
+TH: สัตว์ตัวไหนมี 6 ขา
+   1) กวาง 🦌  |  2) ห่าน 🪿  |  3) ผึ้ง 🐝  |  4) เสือ 🐯
+EN: Which animal has 6 legs?
+   1) deer 🦌  |  2) goose 🪿  |  3) bee 🐝  |  4) tiger 🐯
+
+### gk-0304  (หัวข้อ: animal-bodies)
+TH: ตัวของนกกระจอกเทศ 🪶 ปกคลุมด้วยอะไร
+   1) ขนนก  |  2) ขน  |  3) ผิวเรียบลื่นชุ่มชื้น  |  4) เกล็ด
+EN: What covers an ostrich 🪶's body?
+   1) feathers  |  2) fur  |  3) smooth, damp skin  |  4) scales
+
+### gk-0305  (หัวข้อ: animal-groups)
+TH: ฉลาม 🦈 เป็นสัตว์กลุ่มไหน
+   1) ปลา  |  2) สัตว์เลี้ยงลูกด้วยนม  |  3) สัตว์สะเทินน้ำสะเทินบก  |  4) แมลง
+EN: What kind of animal is a shark 🦈?
+   1) a fish  |  2) a mammal  |  3) an amphibian  |  4) an insect
+
+### gk-0306  (หัวข้อ: animal-legs)
+TH: สัตว์ตัวไหนมี 2 ขา
+   1) หงส์ 🦢  |  2) วัว 🐄  |  3) แพะ 🐐  |  4) หมู 🐷
+EN: Which animal has 2 legs?
+   1) swan 🦢  |  2) cow 🐄  |  3) goat 🐐  |  4) pig 🐷
+
+### gk-0307  (หัวข้อ: animal-bodies)
+TH: ตัวของจิ้งจก 🦎 ปกคลุมด้วยอะไร
+   1) เกล็ด  |  2) ผิวเรียบลื่นชุ่มชื้น  |  3) ขน  |  4) ขนนก
+EN: What covers a lizard 🦎's body?
+   1) scales  |  2) smooth, damp skin  |  3) fur  |  4) feathers
+
+### gk-0308  (หัวข้อ: animal-groups)
+TH: หมีขั้วโลก 🐻‍❄️ เป็นสัตว์กลุ่มไหน
+   1) ปลา  |  2) สัตว์สะเทินน้ำสะเทินบก  |  3) สัตว์เลี้ยงลูกด้วยนม  |  4) สัตว์เลื้อยคลาน
+EN: What kind of animal is a polar bear 🐻‍❄️?
+   1) a fish  |  2) an amphibian  |  3) a mammal  |  4) a reptile
+
+### gk-0309  (หัวข้อ: animal-legs)
+TH: สัตว์ตัวไหนมี 2 ขา
+   1) ห่าน 🪿  |  2) จิ้งจก 🦎  |  3) ยีราฟ 🦒  |  4) เต่า 🐢
+EN: Which animal has 2 legs?
+   1) goose 🪿  |  2) lizard 🦎  |  3) giraffe 🦒  |  4) turtle 🐢
+
+### gk-0310  (หัวข้อ: animal-bodies)
+TH: ตัวของอูฐ 🐫 ปกคลุมด้วยอะไร
+   1) เกล็ด  |  2) ขน  |  3) ขนนก  |  4) ผิวเรียบลื่นชุ่มชื้น
+EN: What covers a camel 🐫's body?
+   1) scales  |  2) fur  |  3) feathers  |  4) smooth, damp skin
+
+### gk-0311  (หัวข้อ: animal-groups)
+TH: ม้าลาย 🦓 เป็นสัตว์กลุ่มไหน
+   1) สัตว์เลี้ยงลูกด้วยนม  |  2) แมลง  |  3) สัตว์ปีก (นก)  |  4) ปลา
+EN: What kind of animal is a zebra 🦓?
+   1) a mammal  |  2) an insect  |  3) a bird  |  4) a fish
+
+### gk-0312  (หัวข้อ: animal-legs)
+TH: แมลงปอ มีกี่ขา
+   1) 2  |  2) 4  |  3) 0  |  4) 6
+EN: How many legs does a dragonfly have?
+   (EN choices same as TH)
+
+### gk-0313  (หัวข้อ: animal-bodies)
+TH: สัตว์ตัวไหนมีเกล็ด
+   1) กิ้งก่าคาเมเลียน 🦎  |  2) สิงโต 🦁  |  3) เสือ 🐯  |  4) ม้า 🐴
+EN: Which animal is covered with scales?
+   1) chameleon 🦎  |  2) lion 🦁  |  3) tiger 🐯  |  4) horse 🐴
+
+### gk-0314  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนเป็นสัตว์ปีก (นก)
+   1) ผีเสื้อ 🦋  |  2) หมาป่า 🐺  |  3) ห่าน 🪿  |  4) แมลงวัน 🪰
+EN: Which one is a bird?
+   1) butterfly 🦋  |  2) wolf 🐺  |  3) goose 🪿  |  4) fly 🪰
+
+### gk-0315  (หัวข้อ: animal-legs)
+TH: ยุง 🦟 มีกี่ขา
+   1) 0  |  2) 2  |  3) 6  |  4) 4
+EN: How many legs does a mosquito 🦟 have?
+   (EN choices same as TH)
+
+### gk-0316  (หัวข้อ: animal-bodies)
+TH: ตัวของหมีขั้วโลก 🐻‍❄️ ปกคลุมด้วยอะไร
+   1) เกล็ด  |  2) ขนนก  |  3) ขน  |  4) ผิวเรียบลื่นชุ่มชื้น
+EN: What covers a polar bear 🐻‍❄️'s body?
+   1) scales  |  2) feathers  |  3) fur  |  4) smooth, damp skin
+
+### gk-0317  (หัวข้อ: animal-groups)
+TH: ด้วง 🪲 เป็นสัตว์กลุ่มไหน
+   1) ปลา  |  2) สัตว์เลี้ยงลูกด้วยนม  |  3) แมลง  |  4) สัตว์สะเทินน้ำสะเทินบก
+EN: What kind of animal is a beetle 🪲?
+   1) a fish  |  2) a mammal  |  3) an insect  |  4) an amphibian
+
+### gk-0318  (หัวข้อ: animal-legs)
+TH: หิ่งห้อย ✨ มีกี่ขา
+   1) 2  |  2) 6  |  3) 4  |  4) 0
+EN: How many legs does a firefly ✨ have?
+   (EN choices same as TH)
+
+### gk-0319  (หัวข้อ: animal-bodies)
+TH: สัตว์ตัวไหนมีเกล็ด
+   1) กบ 🐸  |  2) กระต่าย 🐰  |  3) ปลาทูน่า 🐟  |  4) ยีราฟ 🦒
+EN: Which animal is covered with scales?
+   1) frog 🐸  |  2) rabbit 🐰  |  3) tuna 🐟  |  4) giraffe 🦒
+
+### gk-0320  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนเป็นสัตว์ปีก (นก)
+   1) ค้างคาว 🦇  |  2) สิงโต 🦁  |  3) นกยูง 🦚  |  4) เสือชีตาห์ 🐆
+EN: Which one is a bird?
+   1) bat 🦇  |  2) lion 🦁  |  3) peacock 🦚  |  4) cheetah 🐆
+
+### gk-0321  (หัวข้อ: animal-legs)
+TH: สัตว์ตัวไหนมี 6 ขา
+   1) เสือชีตาห์ 🐆  |  2) หิ่งห้อย ✨  |  3) สิงโต 🦁  |  4) อูฐ 🐫
+EN: Which animal has 6 legs?
+   1) cheetah 🐆  |  2) firefly ✨  |  3) lion 🦁  |  4) camel 🐫
+
+### gk-0322  (หัวข้อ: animal-bodies)
+TH: ตัวของสิงโต 🦁 ปกคลุมด้วยอะไร
+   1) ขนนก  |  2) ขน  |  3) เกล็ด  |  4) ผิวเรียบลื่นชุ่มชื้น
+EN: What covers a lion 🦁's body?
+   1) feathers  |  2) fur  |  3) scales  |  4) smooth, damp skin
+
+### gk-0323  (หัวข้อ: animal-groups)
+TH: นกยูง 🦚 เป็นสัตว์กลุ่มไหน
+   1) สัตว์สะเทินน้ำสะเทินบก  |  2) แมลง  |  3) สัตว์เลี้ยงลูกด้วยนม  |  4) สัตว์ปีก (นก)
+EN: What kind of animal is a peacock 🦚?
+   1) an amphibian  |  2) an insect  |  3) a mammal  |  4) a bird
+
+### gk-0324  (หัวข้อ: animal-legs)
+TH: สัตว์ตัวไหนมี 8 ขา
+   1) ฮิปโป 🦛  |  2) แมงป่อง 🦂  |  3) ม้า 🐴  |  4) เสือชีตาห์ 🐆
+EN: Which animal has 8 legs?
+   1) hippo 🦛  |  2) scorpion 🦂  |  3) horse 🐴  |  4) cheetah 🐆
+
+### gk-0325  (หัวข้อ: animal-bodies)
+TH: ตัวของแพะ 🐐 ปกคลุมด้วยอะไร
+   1) ขน  |  2) ขนนก  |  3) ผิวเรียบลื่นชุ่มชื้น  |  4) เกล็ด
+EN: What covers a goat 🐐's body?
+   1) fur  |  2) feathers  |  3) smooth, damp skin  |  4) scales
+
+### gk-0326  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนเป็นสัตว์เลี้ยงลูกด้วยนม
+   1) เต่าทอง 🐞  |  2) ยุง 🦟  |  3) ฉลาม 🦈  |  4) แพะ 🐐
+EN: Which one is a mammal?
+   1) ladybird 🐞  |  2) mosquito 🦟  |  3) shark 🦈  |  4) goat 🐐
+
+### gk-0327  (หัวข้อ: animal-legs)
+TH: สัตว์ตัวไหนมี 6 ขา
+   1) ม้า 🐴  |  2) กิ้งก่าคาเมเลียน 🦎  |  3) มด 🐜  |  4) นกแก้ว 🦜
+EN: Which animal has 6 legs?
+   1) horse 🐴  |  2) chameleon 🦎  |  3) ant 🐜  |  4) parrot 🦜
+
+### gk-0328  (หัวข้อ: animal-bodies)
+TH: สัตว์ตัวไหนมีขนนก
+   1) นกอินทรี 🦅  |  2) หนู 🐭  |  3) จระเข้ 🐊  |  4) ช้าง 🐘
+EN: Which animal is covered with feathers?
+   1) eagle 🦅  |  2) mouse 🐭  |  3) crocodile 🐊  |  4) elephant 🐘
+
+### gk-0329  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนเป็นแมลง
+   1) เต่าทอง 🐞  |  2) แรด 🦏  |  3) อูฐ 🐫  |  4) เต่า 🐢
+EN: Which one is an insect?
+   1) ladybird 🐞  |  2) rhino 🦏  |  3) camel 🐫  |  4) turtle 🐢
+
+### gk-0330  (หัวข้อ: animal-legs)
+TH: ผึ้ง 🐝 มีกี่ขา
+   1) 0  |  2) 4  |  3) 6  |  4) 2
+EN: How many legs does a bee 🐝 have?
+   (EN choices same as TH)
+
+### gk-0331  (หัวข้อ: animal-bodies)
+TH: ตัวของวาฬ 🐋 ปกคลุมด้วยอะไร
+   1) ผิวหนัง ไม่มีขนเยอะ  |  2) เกล็ด  |  3) ขน  |  4) ขนนก
+EN: What covers a whale 🐋's body?
+   1) bare skin  |  2) scales  |  3) fur  |  4) feathers
+
+### gk-0332  (หัวข้อ: animal-groups)
+TH: จิงโจ้ 🦘 เป็นสัตว์กลุ่มไหน
+   1) ปลา  |  2) สัตว์ปีก (นก)  |  3) สัตว์เลี้ยงลูกด้วยนม  |  4) สัตว์สะเทินน้ำสะเทินบก
+EN: What kind of animal is a kangaroo 🦘?
+   1) a fish  |  2) a bird  |  3) a mammal  |  4) an amphibian
+
+### gk-0333  (หัวข้อ: animal-legs)
+TH: สัตว์ตัวไหนมี 2 ขา
+   1) กิ้งก่าคาเมเลียน 🦎  |  2) แมงป่อง 🦂  |  3) ไก่ 🐔  |  4) แพะ 🐐
+EN: Which animal has 2 legs?
+   1) chameleon 🦎  |  2) scorpion 🦂  |  3) chicken 🐔  |  4) goat 🐐
+
+### gk-0334  (หัวข้อ: animal-bodies)
+TH: ตัวของแกะ 🐑 ปกคลุมด้วยอะไร
+   1) ขนนก  |  2) ผิวเรียบลื่นชุ่มชื้น  |  3) ขนแกะ (ขนฟู)  |  4) เกล็ด
+EN: What covers a sheep 🐑's body?
+   1) feathers  |  2) smooth, damp skin  |  3) wool  |  4) scales
+
+### gk-0335  (หัวข้อ: animal-groups)
+TH: ปลาการ์ตูน 🐠 เป็นสัตว์กลุ่มไหน
+   1) ปลา  |  2) สัตว์ปีก (นก)  |  3) สัตว์สะเทินน้ำสะเทินบก  |  4) แมลง
+EN: What kind of animal is a clownfish 🐠?
+   1) a fish  |  2) a bird  |  3) an amphibian  |  4) an insect
+
+### gk-0336  (หัวข้อ: animal-legs)
+TH: สัตว์ตัวไหนมี 2 ขา
+   1) หมีขั้วโลก 🐻‍❄️  |  2) เพนกวิน 🐧  |  3) ปลาทูน่า 🐟  |  4) คางคก 🐸
+EN: Which animal has 2 legs?
+   1) polar bear 🐻‍❄️  |  2) penguin 🐧  |  3) tuna 🐟  |  4) toad 🐸
+
+### gk-0337  (หัวข้อ: animal-bodies)
+TH: ตัวของเพนกวิน 🐧 ปกคลุมด้วยอะไร
+   1) เกล็ด  |  2) ผิวเรียบลื่นชุ่มชื้น  |  3) ขน  |  4) ขนนก
+EN: What covers a penguin 🐧's body?
+   1) scales  |  2) smooth, damp skin  |  3) fur  |  4) feathers
+
+### gk-0338  (หัวข้อ: animal-groups)
+TH: แมว 🐱 เป็นสัตว์กลุ่มไหน
+   1) สัตว์ปีก (นก)  |  2) สัตว์สะเทินน้ำสะเทินบก  |  3) สัตว์เลี้ยงลูกด้วยนม  |  4) แมลง
+EN: What kind of animal is a cat 🐱?
+   1) a bird  |  2) an amphibian  |  3) a mammal  |  4) an insect
+
+### gk-0339  (หัวข้อ: animal-legs)
+TH: สัตว์ตัวไหนมี 2 ขา
+   1) ตั๊กแตน 🦗  |  2) หมู 🐷  |  3) แมงป่อง 🦂  |  4) นกยูง 🦚
+EN: Which animal has 2 legs?
+   1) grasshopper 🦗  |  2) pig 🐷  |  3) scorpion 🦂  |  4) peacock 🦚
+
+### gk-0340  (หัวข้อ: animal-bodies)
+TH: สัตว์ตัวไหนมีขนนก
+   1) โลมา 🐬  |  2) หงส์ 🦢  |  3) สิงโต 🦁  |  4) แกะ 🐑
+EN: Which animal is covered with feathers?
+   1) dolphin 🐬  |  2) swan 🦢  |  3) lion 🦁  |  4) sheep 🐑

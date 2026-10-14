@@ -1,0 +1,1022 @@
+# ชุดตรวจ: วิทยาศาสตร์และความรู้รอบตัว · เด็กอายุ 6 ปี (อนุบาล 3–ป.1) · 170 ข้อ · ไฟล์ q-general-6.json
+# ตัวเลือกนับ 1–4 · ไม่มีเฉลยในไฟล์นี้ (ให้แก้โจทย์เองก่อน)
+
+### gk-0001  (หัวข้อ: animal-legs)
+TH: หนู 🐭 มีกี่ขา
+   1) 0  |  2) 6  |  3) 2  |  4) 4
+EN: How many legs does a mouse 🐭 have?
+   (EN choices same as TH)
+
+### gk-0002  (หัวข้อ: animal-eggs)
+TH: สัตว์ตัวไหนออกลูกเป็นไข่
+   1) หมีขั้วโลก 🐻‍❄️  |  2) หมู 🐷  |  3) จระเข้ 🐊  |  4) แกะ 🐑
+EN: Which animal lays eggs?
+   1) polar bear 🐻‍❄️  |  2) pig 🐷  |  3) crocodile 🐊  |  4) sheep 🐑
+
+### gk-0003  (หัวข้อ: animal-homes)
+TH: สัตว์ตัวไหนอาศัยอยู่ในน้ำ
+   1) ม้า 🐴  |  2) แมว 🐱  |  3) นกอินทรี 🦅  |  4) ปลาการ์ตูน 🐠
+EN: Which animal lives in water?
+   1) horse 🐴  |  2) cat 🐱  |  3) eagle 🦅  |  4) clownfish 🐠
+
+### gk-0004  (หัวข้อ: animal-sounds)
+TH: หมู 🐷 ร้องว่าอย่างไร
+   1) ฮูก  |  2) แบ๊  |  3) อ๊บ  |  4) อู๊ด
+EN: What sound does a pig 🐷 make?
+   1) hoot  |  2) baa  |  3) ribbit  |  4) oink
+
+### gk-0005  (หัวข้อ: animal-size)
+TH: สัตว์ตัวไหนตัวเล็กที่สุด
+   1) อูฐ 🐫  |  2) เต่าทอง 🐞  |  3) วาฬ 🐋  |  4) แกะ 🐑
+EN: Which animal is the smallest?
+   1) camel 🐫  |  2) ladybird 🐞  |  3) whale 🐋  |  4) sheep 🐑
+
+### gk-0006  (หัวข้อ: animal-abilities)
+TH: สัตว์ตัวไหนว่ายน้ำเก่ง
+   1) วาฬ 🐋  |  2) กระรอก 🐿️  |  3) ยีราฟ 🦒  |  4) ไก่ 🐔
+EN: Which animal is a good swimmer?
+   1) whale 🐋  |  2) squirrel 🐿️  |  3) giraffe 🦒  |  4) chicken 🐔
+
+### gk-0007  (หัวข้อ: jobs)
+TH: ใครดูแลฟันของเรา
+   1) นักร้อง  |  2) ช่างตัดผม  |  3) คนส่งจดหมาย  |  4) หมอฟัน 🦷
+EN: Who looks after our teeth?
+   1) a singer  |  2) a hairdresser  |  3) a postman  |  4) a dentist 🦷
+
+### gk-0008  (หัวข้อ: transport)
+TH: พาหนะไหนวิ่งบนราง
+   1) เรือ  |  2) รถไฟ 🚆  |  3) เครื่องบิน  |  4) ม้า
+EN: Which vehicle runs on rails?
+   1) a boat  |  2) a train 🚆  |  3) a plane  |  4) a horse
+
+### gk-0009  (หัวข้อ: food)
+TH: นมได้มาจากสัตว์อะไร
+   1) ไก่  |  2) ผึ้ง  |  3) วัว 🐄  |  4) ปลา
+EN: Which animal gives us milk?
+   1) the chicken  |  2) the bee  |  3) the cow 🐄  |  4) the fish
+
+### gk-0010  (หัวข้อ: safety)
+TH: ปลั๊กไฟควรทำอย่างไร
+   1) ปีนไปจับ  |  2) ห้ามเอานิ้วหรือของแหย่  |  3) เทน้ำใส่  |  4) เอาส้อมแหย่เล่น
+EN: What should you do with electric sockets?
+   1) climb up to touch  |  2) never poke fingers or things in  |  3) pour water on them  |  4) poke them with a fork
+
+### gk-0011  (หัวข้อ: senses)
+TH: เรามองเห็นด้วยอะไร
+   1) ลิ้น 👅  |  2) ตา 👀  |  3) หู 👂  |  4) จมูก 👃
+EN: What do we see with?
+   1) tongue 👅  |  2) eyes 👀  |  3) ears 👂  |  4) nose 👃
+
+### gk-0012  (หัวข้อ: health)
+TH: อาหารแบบไหนดีต่อสุขภาพ
+   1) น้ำอัดลมแทนน้ำ  |  2) ลูกอมทั้งวัน  |  3) ผักและผลไม้ 🥦  |  4) ขนมกรุบกรอบทุกมื้อ
+EN: Which food is healthy?
+   1) fizzy drinks instead of water  |  2) sweets all day  |  3) vegetables and fruit 🥦  |  4) crisps at every meal
+
+### gk-0013  (หัวข้อ: plants)
+TH: พืชต้องการอะไรเพื่อเติบโต
+   1) ความมืดตลอดเวลา  |  2) น้ำและแสงแดด  |  3) พลาสติก  |  4) ลูกอม
+EN: What do plants need to grow?
+   1) darkness all the time  |  2) water and sunlight  |  3) plastic  |  4) sweets
+
+### gk-0014  (หัวข้อ: water)
+TH: น้ำแข็งเกิดขึ้นเมื่อไร
+   1) เมื่อใส่น้ำตาล  |  2) เมื่อโดนลม  |  3) เมื่อเย็นจัด ❄️  |  4) เมื่อร้อนจัด
+EN: When does water turn into ice?
+   1) when we add sugar  |  2) when it is windy  |  3) when it gets very cold ❄️  |  4) when it gets very hot
+
+### gk-0015  (หัวข้อ: weather)
+TH: รุ้งกินน้ำเกิดตอนไหน
+   1) ตอนหิมะตกหนัก  |  2) ตอนกลางคืนมืดสนิท  |  3) มีแดดตอนฝนตก 🌦️  |  4) ตอนอยู่ในถ้ำ
+EN: When can we see a rainbow?
+   1) in a heavy snowstorm  |  2) in the dark night  |  3) when the sun shines while it rains 🌦️  |  4) inside a cave
+
+### gk-0016  (หัวข้อ: space)
+TH: ดวงอาทิตย์คืออะไร
+   1) ดาวเคราะห์  |  2) ดาวฤกษ์ ⭐  |  3) ดวงจันทร์  |  4) เมฆ
+EN: What is the Sun?
+   1) a planet  |  2) a star ⭐  |  3) a moon  |  4) a cloud
+
+### gk-0017  (หัวข้อ: colours)
+TH: สีน้ำเงินผสมสีเหลืองได้สีอะไร
+   1) สีเขียว 🟩  |  2) สีส้ม  |  3) สีชมพู  |  4) สีน้ำตาล
+EN: Blue mixed with yellow makes which colour?
+   1) green 🟩  |  2) orange  |  3) pink  |  4) brown
+
+### gk-0018  (หัวข้อ: thailand)
+TH: ธงชาติไทยมีสีอะไรบ้าง
+   1) ส้ม ม่วง  |  2) เขียว เหลือง  |  3) แดง ขาว น้ำเงิน  |  4) ดำ ขาว
+EN: What colours are on the Thai flag?
+   1) orange and purple  |  2) green and yellow  |  3) red, white and blue  |  4) black and white
+
+### gk-0019  (หัวข้อ: time)
+TH: 1 สัปดาห์มีกี่วัน
+   1) 12  |  2) 5  |  3) 10  |  4) 7
+EN: How many days are in a week?
+   (EN choices same as TH)
+
+### gk-0020  (หัวข้อ: animal-legs)
+TH: ม้า 🐴 มีกี่ขา
+   1) 4  |  2) 2  |  3) 6  |  4) 0
+EN: How many legs does a horse 🐴 have?
+   (EN choices same as TH)
+
+### gk-0021  (หัวข้อ: animal-eggs)
+TH: สัตว์ตัวไหนออกลูกเป็นไข่
+   1) หนู 🐭  |  2) วัว 🐄  |  3) เสือชีตาห์ 🐆  |  4) หงส์ 🦢
+EN: Which animal lays eggs?
+   1) mouse 🐭  |  2) cow 🐄  |  3) cheetah 🐆  |  4) swan 🦢
+
+### gk-0022  (หัวข้อ: animal-homes)
+TH: สัตว์ตัวไหนอาศัยอยู่ในน้ำ
+   1) ช้าง 🐘  |  2) ปลาหมึกยักษ์ 🐙  |  3) แมงป่อง 🦂  |  4) แมลงวัน 🪰
+EN: Which animal lives in water?
+   1) elephant 🐘  |  2) octopus 🐙  |  3) scorpion 🦂  |  4) fly 🪰
+
+### gk-0023  (หัวข้อ: animal-sounds)
+TH: เป็ด 🦆 ร้องว่าอย่างไร
+   1) อู๊ด  |  2) ก๊าบ  |  3) ฮี้ (ร้องฮี้ ๆ)  |  4) ฮูก
+EN: What sound does a duck 🦆 make?
+   1) oink  |  2) quack  |  3) neigh  |  4) hoot
+
+### gk-0024  (หัวข้อ: animal-size)
+TH: สัตว์ตัวไหนตัวเล็กที่สุด
+   1) ฮิปโป 🦛  |  2) มด 🐜  |  3) วาฬ 🐋  |  4) เป็ด 🦆
+EN: Which animal is the smallest?
+   1) hippo 🦛  |  2) ant 🐜  |  3) whale 🐋  |  4) duck 🦆
+
+### gk-0025  (หัวข้อ: animal-abilities)
+TH: สัตว์ตัวไหนบินได้
+   1) แกะ 🐑  |  2) ช้าง 🐘  |  3) ผีเสื้อ 🦋  |  4) แมว 🐱
+EN: Which animal can fly?
+   1) sheep 🐑  |  2) elephant 🐘  |  3) butterfly 🦋  |  4) cat 🐱
+
+### gk-0026  (หัวข้อ: jobs)
+TH: ใครขับเครื่องบิน
+   1) ครู  |  2) นักบิน 🧑‍✈️  |  3) ตำรวจ  |  4) หมอฟัน
+EN: Who flies a plane?
+   1) a teacher  |  2) a pilot 🧑‍✈️  |  3) a police officer  |  4) a dentist
+
+### gk-0027  (หัวข้อ: transport)
+TH: พาหนะไหนบินบนฟ้า
+   1) เครื่องบิน ✈️  |  2) เรือ  |  3) รถไฟ  |  4) รถยนต์
+EN: Which vehicle flies in the sky?
+   1) a plane ✈️  |  2) a boat  |  3) a train  |  4) a car
+
+### gk-0028  (หัวข้อ: food)
+TH: ไข่ที่เรากินส่วนใหญ่มาจากสัตว์อะไร
+   1) ไก่ 🐔  |  2) แมว  |  3) หมู  |  4) วัว
+EN: Most eggs we eat come from which animal?
+   1) the chicken 🐔  |  2) the cat  |  3) the pig  |  4) the cow
+
+### gk-0029  (หัวข้อ: safety)
+TH: ถ้าหลงทางในห้างควรทำอย่างไร
+   1) ซ่อนตัว  |  2) ไปกับคนแปลกหน้าที่ชวน  |  3) บอกพนักงานหรือตำรวจ  |  4) ออกไปข้างนอกคนเดียว
+EN: If you get lost in a shopping mall, what should you do?
+   1) hide  |  2) go with a stranger who asks  |  3) tell a staff member or police officer  |  4) go outside alone
+
+### gk-0030  (หัวข้อ: senses)
+TH: เรารับรสอาหารด้วยอะไร
+   1) ตา 👀  |  2) ผม 💇  |  3) ลิ้น 👅  |  4) หู 👂
+EN: What do we taste with?
+   1) eyes 👀  |  2) hair 💇  |  3) tongue 👅  |  4) ears 👂
+
+### gk-0031  (หัวข้อ: health)
+TH: ก่อนกินข้าวควรทำอะไร
+   1) เล่นดิน  |  2) ล้างมือ 🧼  |  3) วิ่งรอบบ้าน  |  4) ปิดไฟ
+EN: What should we do before eating?
+   1) play in the mud  |  2) wash our hands 🧼  |  3) run around the house  |  4) turn off the lights
+
+### gk-0032  (หัวข้อ: plants)
+TH: เมล็ดพืชโตขึ้นจะกลายเป็นอะไร
+   1) ปลา  |  2) ต้นไม้ 🌱  |  3) เมฆ  |  4) ก้อนหิน
+EN: What does a seed grow into?
+   1) a fish  |  2) a plant 🌱  |  3) a cloud  |  4) a rock
+
+### gk-0033  (หัวข้อ: colours)
+TH: สีแดงผสมสีเหลืองได้สีอะไร
+   1) สีเขียว  |  2) สีฟ้า  |  3) สีส้ม 🟧  |  4) สีม่วง
+EN: Red mixed with yellow makes which colour?
+   1) green  |  2) blue  |  3) orange 🟧  |  4) purple
+
+### gk-0034  (หัวข้อ: thailand)
+TH: วันสงกรานต์อยู่ในเดือนอะไร
+   1) มกราคม  |  2) ธันวาคม  |  3) เมษายน  |  4) ตุลาคม
+EN: Which month is Songkran in?
+   1) January  |  2) December  |  3) April  |  4) October
+
+### gk-0035  (หัวข้อ: time)
+TH: 1 ปีมีกี่เดือน
+   1) 24  |  2) 7  |  3) 12  |  4) 10
+EN: How many months are in a year?
+   (EN choices same as TH)
+
+### gk-0036  (หัวข้อ: animal-legs)
+TH: แรด 🦏 มีกี่ขา
+   1) 4  |  2) 2  |  3) 6  |  4) 0
+EN: How many legs does a rhino 🦏 have?
+   (EN choices same as TH)
+
+### gk-0037  (หัวข้อ: animal-eggs)
+TH: สัตว์ตัวไหนออกลูกเป็นไข่
+   1) วัว 🐄  |  2) คางคก 🐸  |  3) หมี 🐻  |  4) กระรอก 🐿️
+EN: Which animal lays eggs?
+   1) cow 🐄  |  2) toad 🐸  |  3) bear 🐻  |  4) squirrel 🐿️
+
+### gk-0038  (หัวข้อ: animal-homes)
+TH: ปลา 🐟 อาศัยอยู่ที่ไหน
+   1) รังผึ้ง  |  2) แม่น้ำหรือบ่อน้ำ  |  3) คอกม้า  |  4) โพรงใต้ดิน
+EN: Where does a fish 🐟 live?
+   1) a hive  |  2) a pond or river  |  3) a stable  |  4) a burrow
+
+### gk-0039  (หัวข้อ: animal-sounds)
+TH: สัตว์ตัวไหนร้อง "โฮก (คำราม)"
+   1) สิงโต 🦁  |  2) หมู 🐷  |  3) นกฮูก 🦉  |  4) ไก่ 🐔
+EN: Which animal says "roar"?
+   1) lion 🦁  |  2) pig 🐷  |  3) owl 🦉  |  4) chicken 🐔
+
+### gk-0040  (หัวข้อ: animal-size)
+TH: สัตว์ตัวไหนตัวเล็กที่สุด
+   1) เป็ด 🦆  |  2) ฮิปโป 🦛  |  3) หนู 🐭  |  4) ช้าง 🐘
+EN: Which animal is the smallest?
+   1) duck 🦆  |  2) hippo 🦛  |  3) mouse 🐭  |  4) elephant 🐘
+
+### gk-0041  (หัวข้อ: animal-abilities)
+TH: สัตว์ตัวไหนบินได้
+   1) ผึ้ง 🐝  |  2) ยีราฟ 🦒  |  3) กระต่าย 🐰  |  4) กบ 🐸
+EN: Which animal can fly?
+   1) bee 🐝  |  2) giraffe 🦒  |  3) rabbit 🐰  |  4) frog 🐸
+
+### gk-0042  (หัวข้อ: jobs)
+TH: ใครปลูกข้าวและผัก
+   1) ชาวนาและเกษตรกร 🧑‍🌾  |  2) นักบินอวกาศ  |  3) นักดับเพลิง  |  4) นักบิน
+EN: Who grows rice and vegetables?
+   1) a farmer 🧑‍🌾  |  2) an astronaut  |  3) a firefighter  |  4) a pilot
+
+### gk-0043  (หัวข้อ: transport)
+TH: พาหนะไหนแล่นในน้ำ
+   1) รถบัส  |  2) เรือ ⛵  |  3) รถไฟ  |  4) จักรยาน
+EN: Which vehicle travels on water?
+   1) a bus  |  2) a boat ⛵  |  3) a train  |  4) a bicycle
+
+### gk-0044  (หัวข้อ: food)
+TH: น้ำผึ้งมาจากไหน
+   1) วัว  |  2) ผึ้ง 🐝  |  3) ต้นมะพร้าว  |  4) ทะเล
+EN: Where does honey come from?
+   1) cows  |  2) bees 🐝  |  3) coconut trees  |  4) the sea
+
+### gk-0045  (หัวข้อ: safety)
+TH: ข้ามถนนควรข้ามที่ไหน
+   1) กลางถนนที่รถวิ่ง  |  2) ตรงทางโค้ง  |  3) ทางม้าลาย 🦓  |  4) หลังรถที่จอดอยู่
+EN: Where should we cross the road?
+   1) in the middle of busy traffic  |  2) on a bend  |  3) at a zebra crossing 🦓  |  4) behind a parked car
+
+### gk-0046  (หัวข้อ: senses)
+TH: เราได้ยินเสียงด้วยอะไร
+   1) ลิ้น 👅  |  2) มือ ✋  |  3) ตา 👀  |  4) หู 👂
+EN: What do we hear with?
+   1) tongue 👅  |  2) hands ✋  |  3) eyes 👀  |  4) ears 👂
+
+### gk-0047  (หัวข้อ: health)
+TH: ควรแปรงฟันวันละกี่ครั้ง
+   1) ไม่ต้องแปรง  |  2) 1 ครั้งต่อสัปดาห์  |  3) 10 ครั้ง  |  4) 2 ครั้ง
+EN: How many times a day should we brush our teeth?
+   1) never  |  2) once a week  |  3) 10 times  |  4) 2 times
+
+### gk-0048  (หัวข้อ: colours)
+TH: สีแดงผสมสีน้ำเงินได้สีอะไร
+   1) สีเขียว  |  2) สีม่วง 🟪  |  3) สีขาว  |  4) สีเหลือง
+EN: Red mixed with blue makes which colour?
+   1) green  |  2) purple 🟪  |  3) white  |  4) yellow
+
+### gk-0049  (หัวข้อ: thailand)
+TH: เมืองหลวงของประเทศไทยคือที่ไหน
+   1) เชียงใหม่  |  2) ขอนแก่น  |  3) ภูเก็ต  |  4) กรุงเทพฯ
+EN: What is the capital city of Thailand?
+   1) Chiang Mai  |  2) Khon Kaen  |  3) Phuket  |  4) Bangkok
+
+### gk-0050  (หัวข้อ: animal-legs)
+TH: แพะ 🐐 มีกี่ขา
+   1) 2  |  2) 4  |  3) 6  |  4) 0
+EN: How many legs does a goat 🐐 have?
+   (EN choices same as TH)
+
+### gk-0051  (หัวข้อ: animal-eggs)
+TH: สัตว์ตัวไหนออกลูกเป็นไข่
+   1) นกฟลามิงโก 🦩  |  2) ฮิปโป 🦛  |  3) กระต่าย 🐰  |  4) แรด 🦏
+EN: Which animal lays eggs?
+   1) flamingo 🦩  |  2) hippo 🦛  |  3) rabbit 🐰  |  4) rhino 🦏
+
+### gk-0052  (หัวข้อ: animal-homes)
+TH: สัตว์ตัวไหนอาศัยอยู่ในน้ำ
+   1) วาฬ 🐋  |  2) ม้า 🐴  |  3) หมู 🐷  |  4) เสือชีตาห์ 🐆
+EN: Which animal lives in water?
+   1) whale 🐋  |  2) horse 🐴  |  3) pig 🐷  |  4) cheetah 🐆
+
+### gk-0053  (หัวข้อ: animal-sounds)
+TH: สัตว์ตัวไหนร้อง "แบ๊"
+   1) หนู 🐭  |  2) วัว 🐄  |  3) นกฮูก 🦉  |  4) แกะ 🐑
+EN: Which animal says "baa"?
+   1) mouse 🐭  |  2) cow 🐄  |  3) owl 🦉  |  4) sheep 🐑
+
+### gk-0054  (หัวข้อ: animal-size)
+TH: สัตว์ตัวไหนตัวเล็กที่สุด
+   1) ไก่ 🐔  |  2) ช้าง 🐘  |  3) อูฐ 🐫  |  4) แกะ 🐑
+EN: Which animal is the smallest?
+   1) chicken 🐔  |  2) elephant 🐘  |  3) camel 🐫  |  4) sheep 🐑
+
+### gk-0055  (หัวข้อ: animal-abilities)
+TH: สัตว์ตัวไหนบินได้
+   1) ม้า 🐴  |  2) กบ 🐸  |  3) นกแก้ว 🦜  |  4) วัว 🐄
+EN: Which animal can fly?
+   1) horse 🐴  |  2) frog 🐸  |  3) parrot 🦜  |  4) cow 🐄
+
+### gk-0056  (หัวข้อ: jobs)
+TH: ใครช่วยรักษาเราเวลาไม่สบาย
+   1) ชาวนา  |  2) คุณหมอ 🧑‍⚕️  |  3) พ่อครัว  |  4) นักบิน
+EN: Who helps us when we are ill?
+   1) a farmer  |  2) a doctor 🧑‍⚕️  |  3) a chef  |  4) a pilot
+
+### gk-0057  (หัวข้อ: senses)
+TH: เรารู้ว่าของร้อนหรือเย็นด้วยอะไร
+   1) ผิวหนัง ✋  |  2) จมูก 👃  |  3) หู 👂  |  4) ตา 👀
+EN: What tells us if something is hot or cold when we touch it?
+   1) skin ✋  |  2) nose 👃  |  3) ears 👂  |  4) eyes 👀
+
+### gk-0058  (หัวข้อ: animal-legs)
+TH: กระต่าย 🐰 มีกี่ขา
+   1) 4  |  2) 6  |  3) 0  |  4) 2
+EN: How many legs does a rabbit 🐰 have?
+   (EN choices same as TH)
+
+### gk-0059  (หัวข้อ: animal-eggs)
+TH: สัตว์ตัวไหนออกลูกเป็นไข่
+   1) ปลาทูน่า 🐟  |  2) ฮิปโป 🦛  |  3) แพะ 🐐  |  4) วัว 🐄
+EN: Which animal lays eggs?
+   1) tuna 🐟  |  2) hippo 🦛  |  3) goat 🐐  |  4) cow 🐄
+
+### gk-0060  (หัวข้อ: animal-homes)
+TH: สัตว์ตัวไหนอาศัยอยู่ในน้ำ
+   1) หมาป่า 🐺  |  2) ปลาทอง 🐠  |  3) ผีเสื้อ 🦋  |  4) แมลงวัน 🪰
+EN: Which animal lives in water?
+   1) wolf 🐺  |  2) goldfish 🐠  |  3) butterfly 🦋  |  4) fly 🪰
+
+### gk-0061  (หัวข้อ: animal-sounds)
+TH: ผึ้ง 🐝 ร้องว่าอย่างไร
+   1) หึ่ง  |  2) ฮี้ (ร้องฮี้ ๆ)  |  3) อู๊ด  |  4) ฮูก
+EN: What sound does a bee 🐝 make?
+   1) buzz  |  2) neigh  |  3) oink  |  4) hoot
+
+### gk-0062  (หัวข้อ: animal-size)
+TH: สัตว์ตัวไหนตัวใหญ่ที่สุด
+   1) ไก่ 🐔  |  2) ม้า 🐴  |  3) ช้าง 🐘  |  4) เต่าทอง 🐞
+EN: Which animal is the biggest?
+   1) chicken 🐔  |  2) horse 🐴  |  3) elephant 🐘  |  4) ladybird 🐞
+
+### gk-0063  (หัวข้อ: animal-abilities)
+TH: สัตว์ตัวไหนว่ายน้ำเก่ง
+   1) มด 🐜  |  2) ยีราฟ 🦒  |  3) กบ 🐸  |  4) ไก่ 🐔
+EN: Which animal is a good swimmer?
+   1) ant 🐜  |  2) giraffe 🦒  |  3) frog 🐸  |  4) chicken 🐔
+
+### gk-0064  (หัวข้อ: jobs)
+TH: ใครช่วยดับไฟ
+   1) คนทำขนมปัง  |  2) นักดับเพลิง 🧑‍🚒  |  3) ครู  |  4) คุณหมอ
+EN: Who puts out fires?
+   1) a baker  |  2) a firefighter 🧑‍🚒  |  3) a teacher  |  4) a doctor
+
+### gk-0065  (หัวข้อ: senses)
+TH: มนุษย์มีประสาทสัมผัสกี่อย่าง
+   1) 3  |  2) 5  |  3) 10  |  4) 7
+EN: How many senses do people have?
+   (EN choices same as TH)
+
+### gk-0066  (หัวข้อ: animal-legs)
+TH: นกฮูก 🦉 มีกี่ขา
+   1) 4  |  2) 2  |  3) 0  |  4) 6
+EN: How many legs does an owl 🦉 have?
+   (EN choices same as TH)
+
+### gk-0067  (หัวข้อ: animal-eggs)
+TH: สัตว์ตัวไหนออกลูกเป็นไข่
+   1) อูฐ 🐫  |  2) แรด 🦏  |  3) เสือ 🐯  |  4) ปลาทอง 🐠
+EN: Which animal lays eggs?
+   1) camel 🐫  |  2) rhino 🦏  |  3) tiger 🐯  |  4) goldfish 🐠
+
+### gk-0068  (หัวข้อ: animal-homes)
+TH: นก 🐦 อาศัยอยู่ที่ไหน
+   1) แม่น้ำหรือบ่อน้ำ  |  2) ใยแมงมุม  |  3) คอกม้า  |  4) รัง
+EN: Where does a bird 🐦 live?
+   1) a pond or river  |  2) a web  |  3) a stable  |  4) a nest
+
+### gk-0069  (หัวข้อ: animal-sounds)
+TH: วัว 🐄 ร้องว่าอย่างไร
+   1) เหมียว  |  2) เอ้กอี๊เอ้กเอ้ก  |  3) มอ  |  4) ฮี้ (ร้องฮี้ ๆ)
+EN: What sound does a cow 🐄 make?
+   1) meow  |  2) cock-a-doodle-doo  |  3) moo  |  4) neigh
+
+### gk-0070  (หัวข้อ: animal-size)
+TH: สัตว์ตัวไหนตัวเล็กที่สุด
+   1) หมู 🐷  |  2) อูฐ 🐫  |  3) กระต่าย 🐰  |  4) วาฬ 🐋
+EN: Which animal is the smallest?
+   1) pig 🐷  |  2) camel 🐫  |  3) rabbit 🐰  |  4) whale 🐋
+
+### gk-0071  (หัวข้อ: animal-abilities)
+TH: สัตว์ตัวไหนบินได้
+   1) กระต่าย 🐰  |  2) ปลาทอง 🐠  |  3) เต่า 🐢  |  4) เต่าทอง 🐞
+EN: Which animal can fly?
+   1) rabbit 🐰  |  2) goldfish 🐠  |  3) turtle 🐢  |  4) ladybird 🐞
+
+### gk-0072  (หัวข้อ: senses)
+TH: เราได้กลิ่นด้วยอะไร
+   1) หู 👂  |  2) เท้า 🦶  |  3) ตา 👀  |  4) จมูก 👃
+EN: What do we smell with?
+   1) ears 👂  |  2) feet 🦶  |  3) eyes 👀  |  4) nose 👃
+
+### gk-0073  (หัวข้อ: animal-legs)
+TH: จระเข้ 🐊 มีกี่ขา
+   1) 2  |  2) 0  |  3) 6  |  4) 4
+EN: How many legs does a crocodile 🐊 have?
+   (EN choices same as TH)
+
+### gk-0074  (หัวข้อ: animal-eggs)
+TH: สัตว์ตัวไหนออกลูกเป็นไข่
+   1) สิงโต 🦁  |  2) นกยูง 🦚  |  3) ยีราฟ 🦒  |  4) หมาป่า 🐺
+EN: Which animal lays eggs?
+   1) lion 🦁  |  2) peacock 🦚  |  3) giraffe 🦒  |  4) wolf 🐺
+
+### gk-0075  (หัวข้อ: animal-homes)
+TH: แมงมุม 🕷️ อาศัยอยู่ที่ไหน
+   1) ถ้ำ  |  2) รัง  |  3) คอกม้า  |  4) ใยแมงมุม
+EN: Where does a spider 🕷️ live?
+   1) a cave or den  |  2) a nest  |  3) a stable  |  4) a web
+
+### gk-0076  (หัวข้อ: animal-sounds)
+TH: กบ 🐸 ร้องว่าอย่างไร
+   1) เหมียว  |  2) โฮก (คำราม)  |  3) อ๊บ  |  4) ฮี้ (ร้องฮี้ ๆ)
+EN: What sound does a frog 🐸 make?
+   1) meow  |  2) roar  |  3) ribbit  |  4) neigh
+
+### gk-0077  (หัวข้อ: animal-size)
+TH: สัตว์ตัวไหนตัวใหญ่ที่สุด
+   1) เป็ด 🦆  |  2) วาฬ 🐋  |  3) เต่าทอง 🐞  |  4) แกะ 🐑
+EN: Which animal is the biggest?
+   1) duck 🦆  |  2) whale 🐋  |  3) ladybird 🐞  |  4) sheep 🐑
+
+### gk-0078  (หัวข้อ: animal-abilities)
+TH: สัตว์ตัวไหนว่ายน้ำเก่ง
+   1) ยีราฟ 🦒  |  2) ปลาการ์ตูน 🐠  |  3) นกฮูก 🦉  |  4) ผีเสื้อ 🦋
+EN: Which animal is a good swimmer?
+   1) giraffe 🦒  |  2) clownfish 🐠  |  3) owl 🦉  |  4) butterfly 🦋
+
+### gk-0079  (หัวข้อ: animal-legs)
+TH: อูฐ 🐫 มีกี่ขา
+   1) 4  |  2) 0  |  3) 6  |  4) 2
+EN: How many legs does a camel 🐫 have?
+   (EN choices same as TH)
+
+### gk-0080  (หัวข้อ: animal-eggs)
+TH: สัตว์ตัวไหนออกลูกเป็นไข่
+   1) ช้าง 🐘  |  2) หมีขั้วโลก 🐻‍❄️  |  3) หนู 🐭  |  4) ปลาการ์ตูน 🐠
+EN: Which animal lays eggs?
+   1) elephant 🐘  |  2) polar bear 🐻‍❄️  |  3) mouse 🐭  |  4) clownfish 🐠
+
+### gk-0081  (หัวข้อ: animal-homes)
+TH: สัตว์ตัวไหนอาศัยอยู่ในน้ำ
+   1) เสือ 🐯  |  2) แมว 🐱  |  3) กวาง 🦌  |  4) โลมา 🐬
+EN: Which animal lives in water?
+   1) tiger 🐯  |  2) cat 🐱  |  3) deer 🦌  |  4) dolphin 🐬
+
+### gk-0082  (หัวข้อ: animal-sounds)
+TH: งู 🐍 ร้องว่าอย่างไร
+   1) จี๊ด  |  2) แบ๊  |  3) ฟ่อ  |  4) ฮี้ (ร้องฮี้ ๆ)
+EN: What sound does a snake 🐍 make?
+   1) squeak  |  2) baa  |  3) hiss  |  4) neigh
+
+### gk-0083  (หัวข้อ: animal-size)
+TH: สัตว์ตัวไหนตัวใหญ่ที่สุด
+   1) หมา 🐶  |  2) มด 🐜  |  3) กระต่าย 🐰  |  4) วัว 🐄
+EN: Which animal is the biggest?
+   1) dog 🐶  |  2) ant 🐜  |  3) rabbit 🐰  |  4) cow 🐄
+
+### gk-0084  (หัวข้อ: animal-abilities)
+TH: สัตว์ตัวไหนบินได้
+   1) หงส์ 🦢  |  2) ปลาทอง 🐠  |  3) แมว 🐱  |  4) กระต่าย 🐰
+EN: Which animal can fly?
+   1) swan 🦢  |  2) goldfish 🐠  |  3) cat 🐱  |  4) rabbit 🐰
+
+### gk-0085  (หัวข้อ: animal-legs)
+TH: แกะ 🐑 มีกี่ขา
+   1) 4  |  2) 2  |  3) 0  |  4) 6
+EN: How many legs does a sheep 🐑 have?
+   (EN choices same as TH)
+
+### gk-0086  (หัวข้อ: animal-eggs)
+TH: สัตว์ตัวไหนออกลูกเป็นไข่
+   1) ค้างคาว 🦇  |  2) แมว 🐱  |  3) วัว 🐄  |  4) นกฮูก 🦉
+EN: Which animal lays eggs?
+   1) bat 🦇  |  2) cat 🐱  |  3) cow 🐄  |  4) owl 🦉
+
+### gk-0087  (หัวข้อ: animal-homes)
+TH: สัตว์ตัวไหนอาศัยอยู่ในน้ำ
+   1) นกฟลามิงโก 🦩  |  2) ปลาทูน่า 🐟  |  3) หมาป่า 🐺  |  4) กวาง 🦌
+EN: Which animal lives in water?
+   1) flamingo 🦩  |  2) tuna 🐟  |  3) wolf 🐺  |  4) deer 🦌
+
+### gk-0088  (หัวข้อ: animal-sounds)
+TH: ม้า 🐴 ร้องว่าอย่างไร
+   1) โฮ่ง  |  2) ฮี้ (ร้องฮี้ ๆ)  |  3) แบ๊  |  4) อ๊บ
+EN: What sound does a horse 🐴 make?
+   1) woof  |  2) neigh  |  3) baa  |  4) ribbit
+
+### gk-0089  (หัวข้อ: animal-size)
+TH: สัตว์ตัวไหนตัวใหญ่ที่สุด
+   1) หมู 🐷  |  2) กระต่าย 🐰  |  3) ยีราฟ 🦒  |  4) ผึ้ง 🐝
+EN: Which animal is the biggest?
+   1) pig 🐷  |  2) rabbit 🐰  |  3) giraffe 🦒  |  4) bee 🐝
+
+### gk-0090  (หัวข้อ: animal-abilities)
+TH: สัตว์ตัวไหนบินได้
+   1) ยีราฟ 🦒  |  2) เต่า 🐢  |  3) นกฮูก 🦉  |  4) จระเข้ 🐊
+EN: Which animal can fly?
+   1) giraffe 🦒  |  2) turtle 🐢  |  3) owl 🦉  |  4) crocodile 🐊
+
+### gk-0091  (หัวข้อ: animal-legs)
+TH: ควาย 🐃 มีกี่ขา
+   1) 2  |  2) 4  |  3) 0  |  4) 6
+EN: How many legs does a buffalo 🐃 have?
+   (EN choices same as TH)
+
+### gk-0092  (หัวข้อ: animal-eggs)
+TH: สัตว์ตัวไหนออกลูกเป็นไข่
+   1) วาฬ 🐋  |  2) จิงโจ้ 🦘  |  3) นกกระจอกเทศ 🪶  |  4) ช้าง 🐘
+EN: Which animal lays eggs?
+   1) whale 🐋  |  2) kangaroo 🦘  |  3) ostrich 🪶  |  4) elephant 🐘
+
+### gk-0093  (หัวข้อ: animal-homes)
+TH: สัตว์ตัวไหนอาศัยอยู่ในน้ำ
+   1) เสือชีตาห์ 🐆  |  2) แมลงวัน 🪰  |  3) ฉลาม 🦈  |  4) นกฮูก 🦉
+EN: Which animal lives in water?
+   1) cheetah 🐆  |  2) fly 🪰  |  3) shark 🦈  |  4) owl 🦉
+
+### gk-0094  (หัวข้อ: animal-sounds)
+TH: สัตว์ตัวไหนร้อง "มอ"
+   1) ม้า 🐴  |  2) วัว 🐄  |  3) แมว 🐱  |  4) ไก่ 🐔
+EN: Which animal says "moo"?
+   1) horse 🐴  |  2) cow 🐄  |  3) cat 🐱  |  4) chicken 🐔
+
+### gk-0095  (หัวข้อ: animal-size)
+TH: สัตว์ตัวไหนตัวเล็กที่สุด
+   1) เป็ด 🦆  |  2) ช้าง 🐘  |  3) วัว 🐄  |  4) ม้า 🐴
+EN: Which animal is the smallest?
+   1) duck 🦆  |  2) elephant 🐘  |  3) cow 🐄  |  4) horse 🐶
+
+### gk-0096  (หัวข้อ: animal-abilities)
+TH: สัตว์ตัวไหนบินได้
+   1) หมู 🐷  |  2) ปลาทอง 🐠  |  3) หมา 🐶  |  4) แมลงปอ
+EN: Which animal can fly?
+   1) pig 🐷  |  2) goldfish 🐠  |  3) dog 🐶  |  4) dragonfly
+
+### gk-0097  (หัวข้อ: animal-legs)
+TH: เป็ด 🦆 มีกี่ขา
+   1) 2  |  2) 0  |  3) 6  |  4) 4
+EN: How many legs does a duck 🦆 have?
+   (EN choices same as TH)
+
+### gk-0098  (หัวข้อ: animal-eggs)
+TH: สัตว์ตัวไหนออกลูกเป็นไข่
+   1) ช้าง 🐘  |  2) ฉลาม 🦈  |  3) หมู 🐷  |  4) โลมา 🐬
+EN: Which animal lays eggs?
+   1) elephant 🐘  |  2) shark 🦈  |  3) pig 🐷  |  4) dolphin 🐬
+
+### gk-0099  (หัวข้อ: animal-homes)
+TH: สัตว์ตัวไหนอาศัยอยู่ในน้ำ
+   1) ไก่ 🐔  |  2) เสือชีตาห์ 🐆  |  3) แมงกะพรุน 🪼  |  4) แพะ 🐐
+EN: Which animal lives in water?
+   1) chicken 🐔  |  2) cheetah 🐆  |  3) jellyfish 🪼  |  4) goat 🐐
+
+### gk-0100  (หัวข้อ: animal-sounds)
+TH: หมา 🐶 ร้องว่าอย่างไร
+   1) จี๊ด  |  2) เอ้กอี๊เอ้กเอ้ก  |  3) โฮ่ง  |  4) แบ๊
+EN: What sound does a dog 🐶 make?
+   1) squeak  |  2) cock-a-doodle-doo  |  3) woof  |  4) baa
+
+### gk-0101  (หัวข้อ: animal-size)
+TH: สัตว์ตัวไหนตัวเล็กที่สุด
+   1) ฮิปโป 🦛  |  2) วาฬ 🐋  |  3) เป็ด 🦆  |  4) ผึ้ง 🐝
+EN: Which animal is the smallest?
+   1) hippo 🦛  |  2) whale 🐋  |  3) duck 🦆  |  4) bee 🐝
+
+### gk-0102  (หัวข้อ: animal-abilities)
+TH: สัตว์ตัวไหนบินได้
+   1) แกะ 🐑  |  2) นกฟลามิงโก 🦩  |  3) หมู 🐷  |  4) วัว 🐄
+EN: Which animal can fly?
+   1) sheep 🐑  |  2) flamingo 🦩  |  3) pig 🐷  |  4) cow 🐄
+
+### gk-0103  (หัวข้อ: animal-legs)
+TH: กบ 🐸 มีกี่ขา
+   1) 4  |  2) 6  |  3) 2  |  4) 0
+EN: How many legs does a frog 🐸 have?
+   (EN choices same as TH)
+
+### gk-0104  (หัวข้อ: animal-eggs)
+TH: สัตว์ตัวไหนออกลูกเป็นไข่
+   1) หมาป่า 🐺  |  2) ม้าลาย 🦓  |  3) นกอินทรี 🦅  |  4) ช้าง 🐘
+EN: Which animal lays eggs?
+   1) wolf 🐺  |  2) zebra 🦓  |  3) eagle 🦅  |  4) elephant 🐘
+
+### gk-0105  (หัวข้อ: animal-homes)
+TH: ม้า 🐴 อาศัยอยู่ที่ไหน
+   1) รังมดในดิน  |  2) คอกม้า  |  3) รัง  |  4) โพรงใต้ดิน
+EN: Where does a horse 🐴 live?
+   1) an anthill  |  2) a stable  |  3) a nest  |  4) a burrow
+
+### gk-0106  (หัวข้อ: animal-sounds)
+TH: นกฮูก 🦉 ร้องว่าอย่างไร
+   1) โฮก (คำราม)  |  2) หึ่ง  |  3) เหมียว  |  4) ฮูก
+EN: What sound does an owl 🦉 make?
+   1) roar  |  2) buzz  |  3) meow  |  4) hoot
+
+### gk-0107  (หัวข้อ: animal-size)
+TH: สัตว์ตัวไหนตัวใหญ่ที่สุด
+   1) ฮิปโป 🦛  |  2) แพะ 🐐  |  3) แมว 🐱  |  4) หนู 🐭
+EN: Which animal is the biggest?
+   1) hippo 🦛  |  2) goat 🐐  |  3) cat 🐱  |  4) mouse 🐭
+
+### gk-0108  (หัวข้อ: animal-abilities)
+TH: สัตว์ตัวไหนบินได้
+   1) ม้า 🐴  |  2) เป็ด 🦆  |  3) หมู 🐷  |  4) จระเข้ 🐊
+EN: Which animal can fly?
+   1) horse 🐴  |  2) duck 🦆  |  3) pig 🐷  |  4) crocodile 🐊
+
+### gk-0109  (หัวข้อ: animal-legs)
+TH: สิงโต 🦁 มีกี่ขา
+   1) 4  |  2) 0  |  3) 6  |  4) 2
+EN: How many legs does a lion 🦁 have?
+   (EN choices same as TH)
+
+### gk-0110  (หัวข้อ: animal-eggs)
+TH: สัตว์ตัวไหนออกลูกเป็นไข่
+   1) ควาย 🐃  |  2) งู 🐍  |  3) วาฬ 🐋  |  4) แพะ 🐐
+EN: Which animal lays eggs?
+   1) buffalo 🐃  |  2) snake 🐍  |  3) whale 🐋  |  4) goat 🐐
+
+### gk-0111  (หัวข้อ: animal-sounds)
+TH: สัตว์ตัวไหนร้อง "เอ้กอี๊เอ้กเอ้ก"
+   1) นกฮูก 🦉  |  2) ผึ้ง 🐝  |  3) ไก่ 🐔  |  4) แกะ 🐑
+EN: Which animal says "cock-a-doodle-doo"?
+   1) owl 🦉  |  2) bee 🐝  |  3) chicken 🐔  |  4) sheep 🐑
+
+### gk-0112  (หัวข้อ: animal-abilities)
+TH: สัตว์ตัวไหนบินได้
+   1) หมา 🐶  |  2) งู 🐍  |  3) นกยูง 🦚  |  4) ช้าง 🐘
+EN: Which animal can fly?
+   1) dog 🐶  |  2) snake 🐍  |  3) peacock 🦚  |  4) elephant 🐘
+
+### gk-0113  (หัวข้อ: animal-legs)
+TH: หมู 🐷 มีกี่ขา
+   1) 4  |  2) 0  |  3) 6  |  4) 2
+EN: How many legs does a pig 🐷 have?
+   (EN choices same as TH)
+
+### gk-0114  (หัวข้อ: animal-eggs)
+TH: สัตว์ตัวไหนออกลูกเป็นไข่
+   1) ฮิปโป 🦛  |  2) ค้างคาว 🦇  |  3) นกแก้ว 🦜  |  4) แกะ 🐑
+EN: Which animal lays eggs?
+   1) hippo 🦛  |  2) bat 🦇  |  3) parrot 🦜  |  4) sheep 🐑
+
+### gk-0115  (หัวข้อ: animal-sounds)
+TH: สัตว์ตัวไหนร้อง "เหมียว"
+   1) นกฮูก 🦉  |  2) แมว 🐱  |  3) หนู 🐭  |  4) แกะ 🐑
+EN: Which animal says "meow"?
+   1) owl 🦉  |  2) cat 🐱  |  3) mouse 🐭  |  4) sheep 🐑
+
+### gk-0116  (หัวข้อ: animal-abilities)
+TH: สัตว์ตัวไหนว่ายน้ำเก่ง
+   1) ไก่ 🐔  |  2) ปลาทูน่า 🐟  |  3) กระต่าย 🐰  |  4) แมงมุม 🕷️
+EN: Which animal is a good swimmer?
+   1) chicken 🐔  |  2) tuna 🐟  |  3) rabbit 🐰  |  4) spider 🕷️
+
+### gk-0117  (หัวข้อ: animal-legs)
+TH: คางคก 🐸 มีกี่ขา
+   1) 6  |  2) 4  |  3) 0  |  4) 2
+EN: How many legs does a toad 🐸 have?
+   (EN choices same as TH)
+
+### gk-0118  (หัวข้อ: animal-eggs)
+TH: สัตว์ตัวไหนออกลูกเป็นไข่
+   1) ไก่ 🐔  |  2) แพะ 🐐  |  3) วัว 🐄  |  4) หนู 🐭
+EN: Which animal lays eggs?
+   1) chicken 🐔  |  2) goat 🐐  |  3) cow 🐄  |  4) mouse 🐭
+
+### gk-0119  (หัวข้อ: animal-sounds)
+TH: หนู 🐭 ร้องว่าอย่างไร
+   1) ฟ่อ  |  2) จี๊ด  |  3) อ๊บ  |  4) ก๊าบ
+EN: What sound does a mouse 🐭 make?
+   1) hiss  |  2) squeak  |  3) ribbit  |  4) quack
+
+### gk-0120  (หัวข้อ: animal-abilities)
+TH: สัตว์ตัวไหนว่ายน้ำเก่ง
+   1) ปลาหมึกยักษ์ 🐙  |  2) กระรอก 🐿️  |  3) ยีราฟ 🦒  |  4) ผีเสื้อ 🦋
+EN: Which animal is a good swimmer?
+   1) octopus 🐙  |  2) squirrel 🐿️  |  3) giraffe 🦒  |  4) butterfly 🦋
+
+### gk-0121  (หัวข้อ: animal-legs)
+TH: กระรอก 🐿️ มีกี่ขา
+   1) 2  |  2) 4  |  3) 0  |  4) 6
+EN: How many legs does a squirrel 🐿️ have?
+   (EN choices same as TH)
+
+### gk-0122  (หัวข้อ: animal-eggs)
+TH: สัตว์ตัวไหนออกลูกเป็นไข่
+   1) จิ้งจก 🦎  |  2) สิงโต 🦁  |  3) แรด 🦏  |  4) อูฐ 🐫
+EN: Which animal lays eggs?
+   1) lizard 🦎  |  2) lion 🦁  |  3) rhino 🦏  |  4) camel 🐫
+
+### gk-0123  (หัวข้อ: animal-sounds)
+TH: สิงโต 🦁 ร้องว่าอย่างไร
+   1) โฮก (คำราม)  |  2) อู๊ด  |  3) เอ้กอี๊เอ้กเอ้ก  |  4) ฮูก
+EN: What sound does a lion 🦁 make?
+   1) roar  |  2) oink  |  3) cock-a-doodle-doo  |  4) hoot
+
+### gk-0124  (หัวข้อ: animal-abilities)
+TH: สัตว์ตัวไหนว่ายน้ำเก่ง
+   1) ไก่ 🐔  |  2) ปลาทอง 🐠  |  3) แมว 🐱  |  4) ผึ้ง 🐝
+EN: Which animal is a good swimmer?
+   1) chicken 🐔  |  2) goldfish 🐠  |  3) cat 🐱  |  4) bee 🐝
+
+### gk-0125  (หัวข้อ: animal-legs)
+TH: ยีราฟ 🦒 มีกี่ขา
+   1) 2  |  2) 6  |  3) 0  |  4) 4
+EN: How many legs does a giraffe 🦒 have?
+   (EN choices same as TH)
+
+### gk-0126  (หัวข้อ: animal-eggs)
+TH: สัตว์ตัวไหนออกลูกเป็นไข่
+   1) ห่าน 🪿  |  2) แพะ 🐐  |  3) วาฬ 🐋  |  4) หมี 🐻
+EN: Which animal lays eggs?
+   1) goose 🪿  |  2) goat 🐐  |  3) whale 🐋  |  4) bear 🐻
+
+### gk-0127  (หัวข้อ: animal-sounds)
+TH: สัตว์ตัวไหนร้อง "ฮี้ (ร้องฮี้ ๆ)"
+   1) หมา 🐶  |  2) กบ 🐸  |  3) ม้า 🐴  |  4) แกะ 🐑
+EN: Which animal says "neigh"?
+   1) dog 🐶  |  2) frog 🐸  |  3) horse 🐴  |  4) sheep 🐑
+
+### gk-0128  (หัวข้อ: animal-abilities)
+TH: สัตว์ตัวไหนว่ายน้ำเก่ง
+   1) จระเข้ 🐊  |  2) ยีราฟ 🦒  |  3) นกฮูก 🦉  |  4) กระรอก 🐿️
+EN: Which animal is a good swimmer?
+   1) crocodile 🐊  |  2) giraffe 🦒  |  3) owl 🦉  |  4) squirrel 🐿️
+
+### gk-0129  (หัวข้อ: animal-legs)
+TH: นกฟลามิงโก 🦩 มีกี่ขา
+   1) 2  |  2) 6  |  3) 0  |  4) 4
+EN: How many legs does a flamingo 🦩 have?
+   (EN choices same as TH)
+
+### gk-0130  (หัวข้อ: animal-eggs)
+TH: สัตว์ตัวไหนออกลูกเป็นไข่
+   1) แพะ 🐐  |  2) เสือ 🐯  |  3) เสือชีตาห์ 🐆  |  4) เพนกวิน 🐧
+EN: Which animal lays eggs?
+   1) goat 🐐  |  2) tiger 🐯  |  3) cheetah 🐆  |  4) penguin 🐧
+
+### gk-0131  (หัวข้อ: animal-sounds)
+TH: สัตว์ตัวไหนร้อง "ฟ่อ"
+   1) แกะ 🐑  |  2) งู 🐍  |  3) ม้า 🐴  |  4) หนู 🐭
+EN: Which animal says "hiss"?
+   1) sheep 🐑  |  2) snake 🐍  |  3) horse 🐴  |  4) mouse 🐭
+
+### gk-0132  (หัวข้อ: animal-abilities)
+TH: สัตว์ตัวไหนบินได้
+   1) แมว 🐱  |  2) หิ่งห้อย ✨  |  3) ยีราฟ 🦒  |  4) แกะ 🐑
+EN: Which animal can fly?
+   1) cat 🐱  |  2) firefly ✨  |  3) giraffe 🦒  |  4) sheep 🐑
+
+### gk-0133  (หัวข้อ: animal-legs)
+TH: เต่า 🐢 มีกี่ขา
+   1) 2  |  2) 0  |  3) 6  |  4) 4
+EN: How many legs does a turtle 🐢 have?
+   (EN choices same as TH)
+
+### gk-0134  (หัวข้อ: animal-eggs)
+TH: สัตว์ตัวไหนออกลูกเป็นไข่
+   1) สิงโต 🦁  |  2) แกะ 🐑  |  3) กิ้งก่าคาเมเลียน 🦎  |  4) กระต่าย 🐰
+EN: Which animal lays eggs?
+   1) lion 🦁  |  2) sheep 🐑  |  3) chameleon 🦎  |  4) rabbit 🐰
+
+### gk-0135  (หัวข้อ: animal-sounds)
+TH: สัตว์ตัวไหนร้อง "จี๊ด"
+   1) เป็ด 🦆  |  2) งู 🐍  |  3) กบ 🐸  |  4) หนู 🐭
+EN: Which animal says "squeak"?
+   1) duck 🦆  |  2) snake 🐍  |  3) frog 🐸  |  4) mouse 🐭
+
+### gk-0136  (หัวข้อ: animal-abilities)
+TH: สัตว์ตัวไหนว่ายน้ำเก่ง
+   1) เพนกวิน 🐧  |  2) กระต่าย 🐰  |  3) ยีราฟ 🦒  |  4) ผึ้ง 🐝
+EN: Which animal is a good swimmer?
+   1) penguin 🐧  |  2) rabbit 🐰  |  3) giraffe 🦒  |  4) bee 🐝
+
+### gk-0137  (หัวข้อ: animal-legs)
+TH: นกกระจอกเทศ 🪶 มีกี่ขา
+   1) 2  |  2) 4  |  3) 0  |  4) 6
+EN: How many legs does an ostrich 🪶 have?
+   (EN choices same as TH)
+
+### gk-0138  (หัวข้อ: animal-eggs)
+TH: สัตว์ตัวไหนออกลูกเป็นไข่
+   1) เป็ด 🦆  |  2) จิงโจ้ 🦘  |  3) ฮิปโป 🦛  |  4) สิงโต 🦁
+EN: Which animal lays eggs?
+   1) duck 🦆  |  2) kangaroo 🦘  |  3) hippo 🦛  |  4) lion 🦁
+
+### gk-0139  (หัวข้อ: animal-sounds)
+TH: แมว 🐱 ร้องว่าอย่างไร
+   1) แบ๊  |  2) ฮูก  |  3) เหมียว  |  4) จี๊ด
+EN: What sound does a cat 🐱 make?
+   1) baa  |  2) hoot  |  3) meow  |  4) squeak
+
+### gk-0140  (หัวข้อ: animal-abilities)
+TH: สัตว์ตัวไหนว่ายน้ำเก่ง
+   1) แมว 🐱  |  2) ฉลาม 🦈  |  3) ยีราฟ 🦒  |  4) กระรอก 🐿️
+EN: Which animal is a good swimmer?
+   1) cat 🐱  |  2) shark 🦈  |  3) giraffe 🦒  |  4) squirrel 🐿️
+
+### gk-0141  (หัวข้อ: animal-legs)
+TH: จิ้งจก 🦎 มีกี่ขา
+   1) 0  |  2) 4  |  3) 6  |  4) 2
+EN: How many legs does a lizard 🦎 have?
+   (EN choices same as TH)
+
+### gk-0142  (หัวข้อ: animal-eggs)
+TH: สัตว์ตัวไหนออกลูกเป็นไข่
+   1) กบ 🐸  |  2) ฮิปโป 🦛  |  3) แรด 🦏  |  4) หมาป่า 🐺
+EN: Which animal lays eggs?
+   1) frog 🐸  |  2) hippo 🦛  |  3) rhino 🦏  |  4) wolf 🐺
+
+### gk-0143  (หัวข้อ: animal-sounds)
+TH: ไก่ 🐔 ร้องว่าอย่างไร
+   1) ฮูก  |  2) แบ๊  |  3) หึ่ง  |  4) เอ้กอี๊เอ้กเอ้ก
+EN: What sound does a chicken 🐔 make?
+   1) hoot  |  2) baa  |  3) buzz  |  4) cock-a-doodle-doo
+
+### gk-0144  (หัวข้อ: animal-abilities)
+TH: สัตว์ตัวไหนว่ายน้ำเก่ง
+   1) โลมา 🐬  |  2) แมงมุม 🕷️  |  3) กระรอก 🐿️  |  4) แมว 🐱
+EN: Which animal is a good swimmer?
+   1) dolphin 🐬  |  2) spider 🕷️  |  3) squirrel 🐿️  |  4) cat 🐱
+
+### gk-0145  (หัวข้อ: animal-legs)
+TH: ม้าลาย 🦓 มีกี่ขา
+   1) 6  |  2) 4  |  3) 0  |  4) 2
+EN: How many legs does a zebra 🦓 have?
+   (EN choices same as TH)
+
+### gk-0146  (หัวข้อ: animal-eggs)
+TH: สัตว์ตัวไหนออกลูกเป็นไข่
+   1) หมีขั้วโลก 🐻‍❄️  |  2) วาฬ 🐋  |  3) เต่า 🐢  |  4) แมว 🐱
+EN: Which animal lays eggs?
+   1) polar bear 🐻‍❄️  |  2) whale 🐋  |  3) turtle 🐢  |  4) cat 🐱
+
+### gk-0147  (หัวข้อ: animal-sounds)
+TH: สัตว์ตัวไหนร้อง "โฮ่ง"
+   1) แกะ 🐑  |  2) ไก่ 🐔  |  3) หนู 🐭  |  4) หมา 🐶
+EN: Which animal says "woof"?
+   1) sheep 🐑  |  2) chicken 🐔  |  3) mouse 🐭  |  4) dog 🐶
+
+### gk-0148  (หัวข้อ: animal-abilities)
+TH: สัตว์ตัวไหนว่ายน้ำเก่ง
+   1) นกฮูก 🦉  |  2) กระต่าย 🐰  |  3) แมงกะพรุน 🪼  |  4) ผึ้ง 🐝
+EN: Which animal is a good swimmer?
+   1) owl 🦉  |  2) rabbit 🐰  |  3) jellyfish 🪼  |  4) bee 🐝
+
+### gk-0149  (หัวข้อ: animal-legs)
+TH: ช้าง 🐘 มีกี่ขา
+   1) 2  |  2) 4  |  3) 6  |  4) 0
+EN: How many legs does an elephant 🐘 have?
+   (EN choices same as TH)
+
+### gk-0150  (หัวข้อ: animal-sounds)
+TH: แกะ 🐑 ร้องว่าอย่างไร
+   1) แบ๊  |  2) มอ  |  3) จี๊ด  |  4) ฮูก
+EN: What sound does a sheep 🐑 make?
+   1) baa  |  2) moo  |  3) squeak  |  4) hoot
+
+### gk-0151  (หัวข้อ: animal-abilities)
+TH: สัตว์ตัวไหนว่ายน้ำเก่ง
+   1) เป็ด 🦆  |  2) กระรอก 🐿️  |  3) มด 🐜  |  4) อูฐ 🐫
+EN: Which animal is a good swimmer?
+   1) duck 🦆  |  2) squirrel 🐿️  |  3) ant 🐜  |  4) camel 🐫
+
+### gk-0152  (หัวข้อ: animal-legs)
+TH: หงส์ 🦢 มีกี่ขา
+   1) 4  |  2) 0  |  3) 2  |  4) 6
+EN: How many legs does a swan 🦢 have?
+   (EN choices same as TH)
+
+### gk-0153  (หัวข้อ: animal-sounds)
+TH: สัตว์ตัวไหนร้อง "ฮูก"
+   1) นกฮูก 🦉  |  2) ผึ้ง 🐝  |  3) แมว 🐱  |  4) สิงโต 🦁
+EN: Which animal says "hoot"?
+   1) owl 🦉  |  2) bee 🐝  |  3) cat 🐱  |  4) lion 🦁
+
+### gk-0154  (หัวข้อ: animal-abilities)
+TH: สัตว์ตัวไหนว่ายน้ำเก่ง
+   1) ยีราฟ 🦒  |  2) อูฐ 🐫  |  3) เต่า 🐢  |  4) กระต่าย 🐰
+EN: Which animal is a good swimmer?
+   1) giraffe 🦒  |  2) camel 🐫  |  3) turtle 🐢  |  4) rabbit 🐰
+
+### gk-0155  (หัวข้อ: animal-legs)
+TH: นกอินทรี 🦅 มีกี่ขา
+   1) 2  |  2) 6  |  3) 4  |  4) 0
+EN: How many legs does an eagle 🦅 have?
+   (EN choices same as TH)
+
+### gk-0156  (หัวข้อ: animal-sounds)
+TH: สัตว์ตัวไหนร้อง "ก๊าบ"
+   1) นกฮูก 🦉  |  2) หมู 🐷  |  3) เป็ด 🦆  |  4) ม้า 🐴
+EN: Which animal says "quack"?
+   1) owl 🦉  |  2) pig 🐷  |  3) duck 🦆  |  4) horse 🐴
+
+### gk-0157  (หัวข้อ: animal-abilities)
+TH: สัตว์ตัวไหนบินได้
+   1) ม้า 🐴  |  2) ยีราฟ 🦒  |  3) แกะ 🐑  |  4) ค้างคาว 🦇
+EN: Which animal can fly?
+   1) horse 🐴  |  2) giraffe 🦒  |  3) sheep 🐑  |  4) bat 🦇
+
+### gk-0158  (หัวข้อ: animal-legs)
+TH: ห่าน 🪿 มีกี่ขา
+   1) 2  |  2) 4  |  3) 0  |  4) 6
+EN: How many legs does a goose 🪿 have?
+   (EN choices same as TH)
+
+### gk-0159  (หัวข้อ: animal-sounds)
+TH: สัตว์ตัวไหนร้อง "อ๊บ"
+   1) ม้า 🐴  |  2) กบ 🐸  |  3) สิงโต 🦁  |  4) แมว 🐱
+EN: Which animal says "ribbit"?
+   1) horse 🐴  |  2) frog 🐸  |  3) lion 🦁  |  4) cat 🐱
+
+### gk-0160  (หัวข้อ: animal-abilities)
+TH: สัตว์ตัวไหนบินได้
+   1) กระต่าย 🐰  |  2) งู 🐍  |  3) นกอินทรี 🦅  |  4) จระเข้ 🐊
+EN: Which animal can fly?
+   1) rabbit 🐰  |  2) snake 🐍  |  3) eagle 🦅  |  4) crocodile 🐊
+
+### gk-0161  (หัวข้อ: animal-legs)
+TH: กิ้งก่าคาเมเลียน 🦎 มีกี่ขา
+   1) 0  |  2) 4  |  3) 2  |  4) 6
+EN: How many legs does a chameleon 🦎 have?
+   (EN choices same as TH)
+
+### gk-0162  (หัวข้อ: animal-sounds)
+TH: สัตว์ตัวไหนร้อง "หึ่ง"
+   1) นกฮูก 🦉  |  2) หมู 🐷  |  3) ผึ้ง 🐝  |  4) ม้า 🐴
+EN: Which animal says "buzz"?
+   1) owl 🦉  |  2) pig 🐷  |  3) bee 🐝  |  4) horse 🐴
+
+### gk-0163  (หัวข้อ: animal-abilities)
+TH: สัตว์ตัวไหนบินได้
+   1) แมว 🐱  |  2) แกะ 🐑  |  3) ห่าน 🪿  |  4) ยีราฟ 🦒
+EN: Which animal can fly?
+   1) cat 🐱  |  2) sheep 🐑  |  3) goose 🪿  |  4) giraffe 🦒
+
+### gk-0164  (หัวข้อ: animal-legs)
+TH: หมา 🐶 มีกี่ขา
+   1) 0  |  2) 2  |  3) 6  |  4) 4
+EN: How many legs does a dog 🐶 have?
+   (EN choices same as TH)
+
+### gk-0165  (หัวข้อ: animal-sounds)
+TH: สัตว์ตัวไหนร้อง "อู๊ด"
+   1) หมู 🐷  |  2) แกะ 🐑  |  3) กบ 🐸  |  4) นกฮูก 🦉
+EN: Which animal says "oink"?
+   1) pig 🐷  |  2) sheep 🐑  |  3) frog 🐸  |  4) owl 🦉
+
+### gk-0166  (หัวข้อ: animal-legs)
+TH: หมาป่า 🐺 มีกี่ขา
+   1) 0  |  2) 4  |  3) 2  |  4) 6
+EN: How many legs does a wolf 🐺 have?
+   (EN choices same as TH)
+
+### gk-0167  (หัวข้อ: animal-legs)
+TH: เสือ 🐯 มีกี่ขา
+   1) 2  |  2) 0  |  3) 6  |  4) 4
+EN: How many legs does a tiger 🐯 have?
+   (EN choices same as TH)
+
+### gk-0168  (หัวข้อ: animal-legs)
+TH: เสือชีตาห์ 🐆 มีกี่ขา
+   1) 0  |  2) 6  |  3) 4  |  4) 2
+EN: How many legs does a cheetah 🐆 have?
+   (EN choices same as TH)
+
+### gk-0169  (หัวข้อ: animal-legs)
+TH: นกแก้ว 🦜 มีกี่ขา
+   1) 6  |  2) 4  |  3) 0  |  4) 2
+EN: How many legs does a parrot 🦜 have?
+   (EN choices same as TH)
+
+### gk-0170  (หัวข้อ: animal-legs)
+TH: วัว 🐄 มีกี่ขา
+   1) 6  |  2) 2  |  3) 0  |  4) 4
+EN: How many legs does a cow 🐄 have?
+   (EN choices same as TH)

@@ -1,0 +1,962 @@
+# ชุดตรวจ: วิทยาศาสตร์และความรู้รอบตัว · เด็กอายุ 8 ปี (ป.2–ป.3) · 160 ข้อ · ไฟล์ q-general-8.json
+# ตัวเลือกนับ 1–4 · ไม่มีเฉลยในไฟล์นี้ (ให้แก้โจทย์เองก่อน)
+
+### gk-0341  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนไม่ใช่สัตว์เลี้ยงลูกด้วยนม
+   1) หนู 🐭  |  2) งู 🐍  |  3) สิงโต 🦁  |  4) วัว 🐄
+EN: Which one is NOT a mammal?
+   1) mouse 🐭  |  2) snake 🐍  |  3) lion 🦁  |  4) cow 🐄
+
+### gk-0342  (หัวข้อ: animal-babies)
+TH: ลูกสัตว์ที่เรียกว่า "kitten" คือลูกของสัตว์อะไร
+   1) แมว 🐱  |  2) ม้าลาย 🦓  |  3) ผีเสื้อ 🦋  |  4) ช้าง 🐘
+EN: A "kitten" is a baby what?
+   1) cat 🐱  |  2) zebra 🦓  |  3) butterfly 🦋  |  4) elephant 🐘
+
+### gk-0343  (หัวข้อ: animal-food)
+TH: สัตว์ตัวไหนกินเนื้อเป็นอาหาร
+   1) หมีขั้วโลก 🐻‍❄️  |  2) แกะ 🐑  |  3) แรด 🦏  |  4) จิงโจ้ 🦘
+EN: Which animal eats meat?
+   1) polar bear 🐻‍❄️  |  2) sheep 🐑  |  3) rhino 🦏  |  4) kangaroo 🦘
+
+### gk-0344  (หัวข้อ: animal-abilities)
+TH: นกตัวไหนบินไม่ได้
+   1) นกแก้ว 🦜  |  2) นกกระจอกเทศ 🪶  |  3) นกฮูก 🦉  |  4) หงส์ 🦢
+EN: Which bird cannot fly?
+   1) parrot 🦜  |  2) ostrich 🪶  |  3) owl 🦉  |  4) swan 🦢
+
+### gk-0345  (หัวข้อ: food)
+TH: ขนมปังทำจากแป้งของพืชอะไร
+   1) ถั่วลิสง  |  2) ข้าวสาลี 🌾  |  3) ข้าวโพดคั่ว  |  4) มะพร้าว
+EN: Bread is usually made from flour of which plant?
+   1) peanuts  |  2) wheat 🌾  |  3) popcorn  |  4) coconut
+
+### gk-0346  (หัวข้อ: light)
+TH: ดวงอาทิตย์ตกทางทิศไหน
+   1) ทิศเหนือ  |  2) ทิศใต้  |  3) ทิศตะวันออก  |  4) ทิศตะวันตก
+EN: Which direction does the Sun set in?
+   1) the north  |  2) the south  |  3) the east  |  4) the west
+
+### gk-0347  (หัวข้อ: sound)
+TH: เสียงเกิดจากอะไร
+   1) สีสัน  |  2) ความเย็น  |  3) การสั่นของสิ่งต่าง ๆ  |  4) แสงสว่าง
+EN: What makes sound?
+   1) colours  |  2) cold  |  3) things vibrating  |  4) bright light
+
+### gk-0348  (หัวข้อ: forces)
+TH: อะไรดึงของให้ตกลงพื้น
+   1) แสงแดด  |  2) แรงโน้มถ่วง  |  3) แม่เหล็กในรองเท้า  |  4) ลม
+EN: What pulls things down to the ground?
+   1) sunlight  |  2) gravity  |  3) magnets in shoes  |  4) wind
+
+### gk-0349  (หัวข้อ: magnets)
+TH: ขั้วเหนือกับขั้วใต้ของแม่เหล็กจะเป็นอย่างไร
+   1) ดูดกัน  |  2) ละลาย  |  3) ผลักกัน  |  4) เปลี่ยนสี
+EN: What happens when a north pole and a south pole of two magnets meet?
+   1) they attract  |  2) they melt  |  3) they push apart  |  4) they change colour
+
+### gk-0350  (หัวข้อ: earth)
+TH: ขวดพลาสติกใช้แล้วควรทำอย่างไร
+   1) ฝังในสนามเด็กเล่น  |  2) ทิ้งลงแม่น้ำ  |  3) เผาในบ้าน  |  4) ทิ้งถังรีไซเคิล ♻️
+EN: What should we do with an empty plastic bottle?
+   1) bury it in the playground  |  2) throw it in the river  |  3) burn it at home  |  4) put it in the recycling bin ♻️
+
+### gk-0351  (หัวข้อ: space)
+TH: ดาวเคราะห์ดวงไหนมีวงแหวนสวยที่เห็นชัดที่สุด
+   1) ดาวอังคาร  |  2) ดาวพุธ  |  3) โลก  |  4) ดาวเสาร์ 🪐
+EN: Which planet is famous for its bright rings?
+   1) Mars  |  2) Mercury  |  3) Earth  |  4) Saturn 🪐
+
+### gk-0352  (หัวข้อ: plants)
+TH: ต้นไม้ปล่อยแก๊สอะไรที่เราใช้หายใจ
+   1) ไอน้ำร้อน  |  2) ควันไฟ  |  3) ออกซิเจน  |  4) ฮีเลียม
+EN: Which gas do plants give out that we breathe?
+   1) hot steam  |  2) smoke  |  3) oxygen  |  4) helium
+
+### gk-0353  (หัวข้อ: materials)
+TH: ร่มควรทำจากวัสดุแบบไหน
+   1) วัสดุกันน้ำ  |  2) ขนมปัง  |  3) กระดาษทิชชู  |  4) ผ้าฝ้ายบาง ๆ
+EN: What should an umbrella be made of?
+   1) a waterproof material  |  2) bread  |  3) tissue paper  |  4) thin cotton
+
+### gk-0354  (หัวข้อ: water)
+TH: น้ำแข็งละลายกลายเป็นน้ำ เรียกว่าอะไร
+   1) การแข็งตัว  |  2) การเดือด  |  3) การหลอมเหลว (ละลาย)  |  4) การระเหิด
+EN: What do we call ice turning into water?
+   1) freezing  |  2) boiling  |  3) melting  |  4) sparkling
+
+### gk-0355  (หัวข้อ: weather)
+TH: ทำไมเห็นฟ้าแลบก่อนได้ยินฟ้าร้อง
+   1) หูเราช้า  |  2) แสงเดินทางเร็วกว่าเสียง  |  3) ฟ้าร้องเกิดทีหลังเสมอ 1 ชั่วโมง  |  4) เสียงเดินทางเร็วกว่าแสง
+EN: Why do we see lightning before we hear thunder?
+   1) our ears are slow  |  2) light travels faster than sound  |  3) thunder always happens an hour later  |  4) sound travels faster than light
+
+### gk-0356  (หัวข้อ: thailand)
+TH: แม่น้ำสายไหนไหลผ่านกรุงเทพฯ
+   1) แม่น้ำไนล์  |  2) แม่น้ำโขง  |  3) แม่น้ำเจ้าพระยา  |  4) แม่น้ำอเมซอน
+EN: Which river flows through Bangkok?
+   1) the Nile  |  2) the Mekong  |  3) the Chao Phraya  |  4) the Amazon
+
+### gk-0357  (หัวข้อ: time)
+TH: 1 ปีปกติมีกี่วัน
+   1) 52  |  2) 365  |  3) 100  |  4) 300
+EN: How many days are in a normal year?
+   (EN choices same as TH)
+
+### gk-0358  (หัวข้อ: safety)
+TH: ในประเทศไทย เรียกรถพยาบาลฉุกเฉินเบอร์อะไร
+   1) 123  |  2) 1669  |  3) 191  |  4) 199
+EN: In Thailand, which number calls an ambulance?
+   (EN choices same as TH)
+
+### gk-0359  (หัวข้อ: records)
+TH: สัตว์ตัวไหนใหญ่ที่สุดในโลก
+   1) ฉลามขาว  |  2) วาฬสีน้ำเงิน 🐋  |  3) ช้าง  |  4) ยีราฟ
+EN: What is the biggest animal in the world?
+   1) the great white shark  |  2) the blue whale 🐋  |  3) the elephant  |  4) the giraffe
+
+### gk-0360  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนไม่ใช่สัตว์เลี้ยงลูกด้วยนม
+   1) ควาย 🐃  |  2) ห่าน 🪿  |  3) แมว 🐱  |  4) เสือชีตาห์ 🐆
+EN: Which one is NOT a mammal?
+   1) buffalo 🐃  |  2) goose 🪿  |  3) cat 🐱  |  4) cheetah 🐆
+
+### gk-0361  (หัวข้อ: animal-babies)
+TH: ลูกสัตว์ที่เรียกว่า "lamb" คือลูกของสัตว์อะไร
+   1) แกะ 🐑  |  2) กบ 🐸  |  3) นกฟลามิงโก 🦩  |  4) เสือ 🐯
+EN: A "lamb" is a baby what?
+   1) sheep 🐑  |  2) frog 🐸  |  3) flamingo 🦩  |  4) tiger 🐯
+
+### gk-0362  (หัวข้อ: animal-food)
+TH: สัตว์ตัวไหนกินเนื้อเป็นอาหาร
+   1) อูฐ 🐫  |  2) จิงโจ้ 🦘  |  3) เพนกวิน 🐧  |  4) ฮิปโป 🦛
+EN: Which animal eats meat?
+   1) camel 🐫  |  2) kangaroo 🦘  |  3) penguin 🐧  |  4) hippo 🦛
+
+### gk-0363  (หัวข้อ: animal-abilities)
+TH: นกตัวไหนบินไม่ได้
+   1) เพนกวิน 🐧  |  2) นกฮูก 🦉  |  3) นกอินทรี 🦅  |  4) เป็ด 🦆
+EN: Which bird cannot fly?
+   1) penguin 🐧  |  2) owl 🦉  |  3) eagle 🦅  |  4) duck 🦆
+
+### gk-0364  (หัวข้อ: food)
+TH: ชีสทำมาจากอะไร
+   1) ไข่  |  2) แป้ง  |  3) นม 🥛  |  4) ผลไม้
+EN: What is cheese made from?
+   1) eggs  |  2) flour  |  3) milk 🥛  |  4) fruit
+
+### gk-0365  (หัวข้อ: magnets)
+TH: ขั้วเหนือกับขั้วเหนือของแม่เหล็กจะเป็นอย่างไร
+   1) ติดกันแน่น  |  2) ดูดกัน  |  3) ผลักกัน  |  4) ส่องแสง
+EN: What happens when two north poles of magnets meet?
+   1) they stick tightly  |  2) they attract  |  3) they push apart  |  4) they glow
+
+### gk-0366  (หัวข้อ: earth)
+TH: ฟอสซิลคืออะไร
+   1) ของเล่นพลาสติก  |  2) ขนมชนิดหนึ่ง  |  3) ก้อนเมฆ  |  4) ร่องรอยสิ่งมีชีวิตโบราณในหิน
+EN: What is a fossil?
+   1) a plastic toy  |  2) a kind of sweet  |  3) a cloud  |  4) remains of ancient life in rock
+
+### gk-0367  (หัวข้อ: space)
+TH: ดาวเคราะห์ดวงไหนอยู่ใกล้ดวงอาทิตย์ที่สุด
+   1) ดาวเสาร์  |  2) ดาวเนปจูน  |  3) โลก  |  4) ดาวพุธ
+EN: Which planet is closest to the Sun?
+   1) Saturn  |  2) Neptune  |  3) Earth  |  4) Mercury
+
+### gk-0368  (หัวข้อ: materials)
+TH: วัสดุไหนมองทะลุได้ (โปร่งใส)
+   1) กระจกใส  |  2) ไม้  |  3) เหล็ก  |  4) อิฐ
+EN: Which material can you see through?
+   1) clear glass  |  2) wood  |  3) metal  |  4) brick
+
+### gk-0369  (หัวข้อ: weather)
+TH: เครื่องมืออะไรใช้วัดอุณหภูมิ
+   1) เทอร์โมมิเตอร์ 🌡️  |  2) ตาชั่ง  |  3) ไม้บรรทัด  |  4) นาฬิกา
+EN: What measures temperature?
+   1) a thermometer 🌡️  |  2) scales  |  3) a ruler  |  4) a clock
+
+### gk-0370  (หัวข้อ: thailand)
+TH: พยัญชนะไทยมีกี่ตัว
+   1) 100  |  2) 26  |  3) 10  |  4) 44
+EN: How many consonants are in the Thai alphabet?
+   (EN choices same as TH)
+
+### gk-0371  (หัวข้อ: time)
+TH: 1 ปีมีประมาณกี่สัปดาห์
+   1) 12  |  2) 52  |  3) 365  |  4) 100
+EN: About how many weeks are in a year?
+   (EN choices same as TH)
+
+### gk-0372  (หัวข้อ: safety)
+TH: ในประเทศไทย แจ้งเหตุไฟไหม้เบอร์อะไร
+   1) 1669  |  2) 191  |  3) 199  |  4) 555
+EN: In Thailand, which number do you call for a fire?
+   (EN choices same as TH)
+
+### gk-0373  (หัวข้อ: records)
+TH: มหาสมุทรที่ใหญ่ที่สุดคืออะไร
+   1) มหาสมุทรแอตแลนติก  |  2) มหาสมุทรอินเดีย  |  3) อ่าวไทย  |  4) มหาสมุทรแปซิฟิก
+EN: Which is the biggest ocean?
+   1) the Atlantic Ocean  |  2) the Indian Ocean  |  3) the Gulf of Thailand  |  4) the Pacific Ocean
+
+### gk-0374  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนไม่ใช่สัตว์เลี้ยงลูกด้วยนม
+   1) แกะ 🐑  |  2) นกฮูก 🦉  |  3) ยีราฟ 🦒  |  4) หมีขั้วโลก 🐻‍❄️
+EN: Which one is NOT a mammal?
+   1) sheep 🐑  |  2) owl 🦉  |  3) giraffe 🦒  |  4) polar bear 🐻‍❄️
+
+### gk-0375  (หัวข้อ: animal-babies)
+TH: ลูกสัตว์ที่เรียกว่า "foal" คือลูกของสัตว์อะไร
+   1) จิ้งจก 🦎  |  2) ม้าลาย 🦓  |  3) ฉลาม 🦈  |  4) เพนกวิน 🐧
+EN: A "foal" is a baby what?
+   1) lizard 🦎  |  2) zebra 🦓  |  3) shark 🦈  |  4) penguin 🐧
+
+### gk-0376  (หัวข้อ: animal-food)
+TH: สัตว์ตัวไหนกินเนื้อเป็นอาหาร
+   1) อูฐ 🐫  |  2) แกะ 🐑  |  3) สิงโต 🦁  |  4) ห่าน 🪿
+EN: Which animal eats meat?
+   1) camel 🐫  |  2) sheep 🐑  |  3) lion 🦁  |  4) goose 🪿
+
+### gk-0377  (หัวข้อ: earth)
+TH: ภูเขาไฟพ่นอะไรออกมา
+   1) หิมะ  |  2) ลูกอม  |  3) ลาวาร้อน 🌋  |  4) น้ำผึ้ง
+EN: What comes out of a volcano?
+   1) snow  |  2) sweets  |  3) hot lava 🌋  |  4) honey
+
+### gk-0378  (หัวข้อ: space)
+TH: ทำไมมีกลางวันกลางคืน
+   1) โลกหมุนรอบตัวเอง  |  2) เมฆปิดท้องฟ้า  |  3) ดวงจันทร์บังดวงอาทิตย์ทุกวัน  |  4) ดวงอาทิตย์ดับตอนกลางคืน
+EN: Why do we have day and night?
+   1) the Earth spins  |  2) clouds cover the sky  |  3) the Moon hides the Sun every day  |  4) the Sun switches off at night
+
+### gk-0379  (หัวข้อ: materials)
+TH: น้ำแข็งลอยน้ำหรือจม
+   1) จม  |  2) ลอยขึ้นฟ้า  |  3) ละลายหายทันที  |  4) ลอย
+EN: Does ice float or sink in water?
+   1) it sinks  |  2) it flies up  |  3) it vanishes at once  |  4) it floats
+
+### gk-0380  (หัวข้อ: time)
+TH: 1 นาทีมีกี่วินาที
+   1) 100  |  2) 10  |  3) 60  |  4) 24
+EN: How many seconds are in a minute?
+   (EN choices same as TH)
+
+### gk-0381  (หัวข้อ: safety)
+TH: ในประเทศไทย เรียกตำรวจเบอร์อะไร
+   1) 100  |  2) 191  |  3) 1669  |  4) 199
+EN: In Thailand, which number calls the police?
+   (EN choices same as TH)
+
+### gk-0382  (หัวข้อ: records)
+TH: ภูเขาที่สูงที่สุดในโลกคืออะไร
+   1) ฟูจิ  |  2) ภูกระดึง  |  3) เอเวอเรสต์  |  4) ดอยอินทนนท์
+EN: What is the highest mountain in the world?
+   1) Mount Fuji  |  2) Phu Kradueng  |  3) Mount Everest  |  4) Doi Inthanon
+
+### gk-0383  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนไม่ใช่สัตว์เลี้ยงลูกด้วยนม
+   1) กระต่าย 🐰  |  2) ไก่ 🐔  |  3) ยีราฟ 🦒  |  4) วาฬ 🐋
+EN: Which one is NOT a mammal?
+   1) rabbit 🐰  |  2) chicken 🐔  |  3) giraffe 🦒  |  4) whale 🐋
+
+### gk-0384  (หัวข้อ: animal-babies)
+TH: ลูกของคางคก 🐸 ภาษาอังกฤษเรียกว่าอะไร
+   1) pup  |  2) foal  |  3) tadpole  |  4) kid
+EN: What is a baby toad 🐸 called?
+   (EN choices same as TH)
+
+### gk-0385  (หัวข้อ: animal-food)
+TH: สัตว์ตัวไหนกินเนื้อเป็นอาหาร
+   1) อูฐ 🐫  |  2) แรด 🦏  |  3) นกฮูก 🦉  |  4) แพะ 🐐
+EN: Which animal eats meat?
+   1) camel 🐫  |  2) rhino 🦏  |  3) owl 🦉  |  4) goat 🐐
+
+### gk-0386  (หัวข้อ: earth)
+TH: ไดโนเสาร์ยังมีชีวิตอยู่ในปัจจุบันไหม
+   1) ใช่ อยู่ใต้ทะเล  |  2) ใช่ อยู่ในสวนสัตว์  |  3) ใช่ อยู่ในป่า  |  4) ไม่ สูญพันธุ์ไปนานแล้ว
+EN: Do dinosaurs like T. rex still live today?
+   1) yes, under the sea  |  2) yes, in zoos  |  3) yes, in the jungle  |  4) no, they died out long ago
+
+### gk-0387  (หัวข้อ: space)
+TH: ดาวเคราะห์ดวงไหนใหญ่ที่สุด
+   1) ดาวพุธ  |  2) ดาวพฤหัสบดี  |  3) โลก  |  4) ดาวอังคาร
+EN: Which planet is the biggest?
+   1) Mercury  |  2) Jupiter  |  3) Earth  |  4) Mars
+
+### gk-0388  (หัวข้อ: records)
+TH: ยอดเขาที่สูงที่สุดในประเทศไทยคืออะไร
+   1) ดอยสุเทพ  |  2) ดอยอินทนนท์  |  3) เขาใหญ่  |  4) ภูกระดึง
+EN: What is the highest mountain in Thailand?
+   1) Doi Suthep  |  2) Doi Inthanon  |  3) Khao Yai  |  4) Phu Kradueng
+
+### gk-0389  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนเป็นสัตว์เลื้อยคลาน
+   1) ค้างคาว 🦇  |  2) ปลาทอง 🐠  |  3) จิ้งจก 🦎  |  4) ห่าน 🪿
+EN: Which one is a reptile?
+   1) bat 🦇  |  2) goldfish 🐠  |  3) lizard 🦎  |  4) goose 🪿
+
+### gk-0390  (หัวข้อ: animal-babies)
+TH: ลูกของไก่ 🐔 ภาษาอังกฤษเรียกว่าอะไร
+   1) chick  |  2) caterpillar  |  3) duckling  |  4) cygnet
+EN: What is a baby chicken 🐔 called?
+   (EN choices same as TH)
+
+### gk-0391  (หัวข้อ: animal-food)
+TH: สัตว์ตัวไหนกินเนื้อเป็นอาหาร
+   1) ห่าน 🪿  |  2) ปลาทูน่า 🐟  |  3) แกะ 🐑  |  4) ควาย 🐃
+EN: Which animal eats meat?
+   1) goose 🪿  |  2) tuna 🐟  |  3) sheep 🐑  |  4) buffalo 🐃
+
+### gk-0392  (หัวข้อ: space)
+TH: ระบบสุริยะของเรามีดาวเคราะห์กี่ดวง
+   1) 8  |  2) 5  |  3) 12  |  4) 20
+EN: How many planets are in our solar system?
+   (EN choices same as TH)
+
+### gk-0393  (หัวข้อ: animal-groups)
+TH: แมงป่อง 🦂 เป็นสัตว์กลุ่มไหน
+   1) สัตว์เลี้ยงลูกด้วยนม  |  2) สัตว์สะเทินน้ำสะเทินบก  |  3) แมงมุม (ไม่ใช่แมลง)  |  4) สัตว์เลื้อยคลาน
+EN: What kind of animal is a scorpion 🦂?
+   1) a mammal  |  2) an amphibian  |  3) an arachnid (not an insect)  |  4) a reptile
+
+### gk-0394  (หัวข้อ: animal-babies)
+TH: ลูกของนกฟลามิงโก 🦩 ภาษาอังกฤษเรียกว่าอะไร
+   1) duckling  |  2) kid  |  3) chick  |  4) kitten
+EN: What is a baby flamingo 🦩 called?
+   (EN choices same as TH)
+
+### gk-0395  (หัวข้อ: animal-food)
+TH: สัตว์ตัวไหนกินพืชเป็นอาหาร
+   1) จระเข้ 🐊  |  2) สิงโต 🦁  |  3) ยีราฟ 🦒  |  4) แมงกะพรุน 🪼
+EN: Which animal eats only plants?
+   1) crocodile 🐊  |  2) lion 🦁  |  3) giraffe 🦒  |  4) jellyfish 🪼
+
+### gk-0396  (หัวข้อ: space)
+TH: นักบินอวกาศเดินทางไปดวงจันทร์ด้วยอะไร
+   1) เรือ  |  2) เครื่องบินธรรมดา  |  3) จรวด 🚀  |  4) บอลลูน
+EN: How did astronauts travel to the Moon?
+   1) a boat  |  2) an ordinary plane  |  3) a rocket 🚀  |  4) a balloon
+
+### gk-0397  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนไม่ใช่สัตว์เลี้ยงลูกด้วยนม
+   1) แรด 🦏  |  2) แกะ 🐑  |  3) ช้าง 🐘  |  4) กบ 🐸
+EN: Which one is NOT a mammal?
+   1) rhino 🦏  |  2) sheep 🐑  |  3) elephant 🐘  |  4) frog 🐸
+
+### gk-0398  (หัวข้อ: animal-babies)
+TH: ลูกของยีราฟ 🦒 ภาษาอังกฤษเรียกว่าอะไร
+   1) piglet  |  2) calf  |  3) gosling  |  4) duckling
+EN: What is a baby giraffe 🦒 called?
+   (EN choices same as TH)
+
+### gk-0399  (หัวข้อ: animal-food)
+TH: สัตว์ตัวไหนกินเนื้อเป็นอาหาร
+   1) ตั๊กแตน 🦗  |  2) งู 🐍  |  3) แพะ 🐐  |  4) ยีราฟ 🦒
+EN: Which animal eats meat?
+   1) grasshopper 🦗  |  2) snake 🐍  |  3) goat 🐐  |  4) giraffe 🦒
+
+### gk-0400  (หัวข้อ: space)
+TH: ดวงจันทร์ส่องแสงได้อย่างไร
+   1) มีหลอดไฟ  |  2) สะท้อนแสงจากดวงอาทิตย์  |  3) ร้อนจนเรืองแสง  |  4) มีไฟอยู่ข้างใน
+EN: How does the Moon shine?
+   1) it has light bulbs  |  2) it reflects light from the Sun  |  3) it is so hot it glows  |  4) it has a fire inside
+
+### gk-0401  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนเป็นสัตว์สะเทินน้ำสะเทินบก
+   1) กบ 🐸  |  2) ห่าน 🪿  |  3) ควาย 🐃  |  4) ปลาทอง 🐠
+EN: Which one is an amphibian?
+   1) frog 🐸  |  2) goose 🪿  |  3) buffalo 🐃  |  4) goldfish 🐠
+
+### gk-0402  (หัวข้อ: animal-babies)
+TH: ลูกสัตว์ที่เรียกว่า "piglet" คือลูกของสัตว์อะไร
+   1) ด้วง 🪲  |  2) หมู 🐷  |  3) จิ้งจก 🦎  |  4) ช้าง 🐘
+EN: A "piglet" is a baby what?
+   1) beetle 🪲  |  2) pig 🐷  |  3) lizard 🦎  |  4) elephant 🐘
+
+### gk-0403  (หัวข้อ: animal-food)
+TH: สัตว์ตัวไหนกินพืชเป็นอาหาร
+   1) แกะ 🐑  |  2) แมงมุม 🕷️  |  3) เสือชีตาห์ 🐆  |  4) เพนกวิน 🐧
+EN: Which animal eats only plants?
+   1) sheep 🐑  |  2) spider 🕷️  |  3) cheetah 🐆  |  4) penguin 🐧
+
+### gk-0404  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนไม่ใช่สัตว์เลี้ยงลูกด้วยนม
+   1) วัว 🐄  |  2) เสือ 🐯  |  3) หงส์ 🦢  |  4) สิงโต 🦁
+EN: Which one is NOT a mammal?
+   1) cow 🐄  |  2) tiger 🐯  |  3) swan 🦢  |  4) lion 🦁
+
+### gk-0405  (หัวข้อ: animal-babies)
+TH: ลูกสัตว์ที่เรียกว่า "fawn" คือลูกของสัตว์อะไร
+   1) คางคก 🐸  |  2) นกฮูก 🦉  |  3) แกะ 🐑  |  4) กวาง 🦌
+EN: A "fawn" is a baby what?
+   1) toad 🐸  |  2) owl 🦉  |  3) sheep 🐑  |  4) deer 🦌
+
+### gk-0406  (หัวข้อ: animal-food)
+TH: สัตว์ตัวไหนกินเนื้อเป็นอาหาร
+   1) ห่าน 🪿  |  2) กิ้งก่าคาเมเลียน 🦎  |  3) ม้า 🐴  |  4) กระต่าย 🐰
+EN: Which animal eats meat?
+   1) goose 🪿  |  2) chameleon 🦎  |  3) horse 🐴  |  4) rabbit 🐰
+
+### gk-0407  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนเป็นสัตว์เลื้อยคลาน
+   1) จระเข้ 🐊  |  2) วาฬ 🐋  |  3) กระต่าย 🐰  |  4) ด้วง 🪲
+EN: Which one is a reptile?
+   1) crocodile 🐊  |  2) whale 🐋  |  3) rabbit 🐰  |  4) beetle 🪲
+
+### gk-0408  (หัวข้อ: animal-babies)
+TH: ลูกของหงส์ 🦢 ภาษาอังกฤษเรียกว่าอะไร
+   1) calf  |  2) tadpole  |  3) cygnet  |  4) foal
+EN: What is a baby swan 🦢 called?
+   (EN choices same as TH)
+
+### gk-0409  (หัวข้อ: animal-food)
+TH: สัตว์ตัวไหนกินพืชเป็นอาหาร
+   1) หมาป่า 🐺  |  2) ช้าง 🐘  |  3) ฉลาม 🦈  |  4) เสือชีตาห์ 🐆
+EN: Which animal eats only plants?
+   1) wolf 🐺  |  2) elephant 🐘  |  3) shark 🦈  |  4) cheetah 🐆
+
+### gk-0410  (หัวข้อ: animal-groups)
+TH: กบ 🐸 เป็นสัตว์กลุ่มไหน
+   1) สัตว์ปีก (นก)  |  2) สัตว์เลี้ยงลูกด้วยนม  |  3) สัตว์สะเทินน้ำสะเทินบก  |  4) สัตว์เลื้อยคลาน
+EN: What kind of animal is a frog 🐸?
+   1) a bird  |  2) a mammal  |  3) an amphibian  |  4) a reptile
+
+### gk-0411  (หัวข้อ: animal-babies)
+TH: ลูกของค้างคาว 🦇 ภาษาอังกฤษเรียกว่าอะไร
+   1) fawn  |  2) tadpole  |  3) pup  |  4) piglet
+EN: What is a baby bat 🦇 called?
+   (EN choices same as TH)
+
+### gk-0412  (หัวข้อ: animal-food)
+TH: สัตว์ตัวไหนกินเนื้อเป็นอาหาร
+   1) จระเข้ 🐊  |  2) ม้า 🐴  |  3) อูฐ 🐫  |  4) แพะ 🐐
+EN: Which animal eats meat?
+   1) crocodile 🐊  |  2) horse 🐴  |  3) camel 🐫  |  4) goat 🐐
+
+### gk-0413  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนเป็นสัตว์เลื้อยคลาน
+   1) งู 🐍  |  2) นกกระจอกเทศ 🪶  |  3) ตั๊กแตน 🦗  |  4) นกยูง 🦚
+EN: Which one is a reptile?
+   1) snake 🐍  |  2) ostrich 🪶  |  3) grasshopper 🦗  |  4) peacock 🦚
+
+### gk-0414  (หัวข้อ: animal-babies)
+TH: ลูกสัตว์ที่เรียกว่า "gosling" คือลูกของสัตว์อะไร
+   1) นกฮูก 🦉  |  2) เต่าทอง 🐞  |  3) ผึ้ง 🐝  |  4) ห่าน 🪿
+EN: A "gosling" is a baby what?
+   1) owl 🦉  |  2) ladybird 🐞  |  3) bee 🐝  |  4) goose 🪿
+
+### gk-0415  (หัวข้อ: animal-food)
+TH: สัตว์ตัวไหนกินเนื้อเป็นอาหาร
+   1) แมงมุม 🕷️  |  2) ห่าน 🪿  |  3) แกะ 🐑  |  4) จิงโจ้ 🦘
+EN: Which animal eats meat?
+   1) spider 🕷️  |  2) goose 🪿  |  3) sheep 🐑  |  4) kangaroo 🦘
+
+### gk-0416  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนไม่ใช่สัตว์เลี้ยงลูกด้วยนม
+   1) สิงโต 🦁  |  2) กวาง 🦌  |  3) ปลาทูน่า 🐟  |  4) หมีขั้วโลก 🐻‍❄️
+EN: Which one is NOT a mammal?
+   1) lion 🦁  |  2) deer 🦌  |  3) tuna 🐟  |  4) polar bear 🐻‍❄️
+
+### gk-0417  (หัวข้อ: animal-babies)
+TH: ลูกของม้า 🐴 ภาษาอังกฤษเรียกว่าอะไร
+   1) gosling  |  2) foal  |  3) owlet  |  4) cygnet
+EN: What is a baby horse 🐴 called?
+   (EN choices same as TH)
+
+### gk-0418  (หัวข้อ: animal-food)
+TH: สัตว์ตัวไหนกินเนื้อเป็นอาหาร
+   1) กระต่าย 🐰  |  2) แมงป่อง 🦂  |  3) ฮิปโป 🦛  |  4) ตั๊กแตน 🦗
+EN: Which animal eats meat?
+   1) rabbit 🐰  |  2) scorpion 🦂  |  3) hippo 🦛  |  4) grasshopper 🦗
+
+### gk-0419  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนเป็นสัตว์สะเทินน้ำสะเทินบก
+   1) หมีขั้วโลก 🐻‍❄️  |  2) อูฐ 🐫  |  3) ฉลาม 🦈  |  4) คางคก 🐸
+EN: Which one is an amphibian?
+   1) polar bear 🐻‍❄️  |  2) camel 🐫  |  3) shark 🦈  |  4) toad 🐸
+
+### gk-0420  (หัวข้อ: animal-babies)
+TH: ลูกของช้าง 🐘 ภาษาอังกฤษเรียกว่าอะไร
+   1) kitten  |  2) chick  |  3) calf  |  4) gosling
+EN: What is a baby elephant 🐘 called?
+   (EN choices same as TH)
+
+### gk-0421  (หัวข้อ: animal-food)
+TH: สัตว์ตัวไหนกินเนื้อเป็นอาหาร
+   1) อูฐ 🐫  |  2) แกะ 🐑  |  3) เสือ 🐯  |  4) ตั๊กแตน 🦗
+EN: Which animal eats meat?
+   1) camel 🐫  |  2) sheep 🐑  |  3) tiger 🐯  |  4) grasshopper 🦗
+
+### gk-0422  (หัวข้อ: animal-groups)
+TH: จระเข้ 🐊 เป็นสัตว์กลุ่มไหน
+   1) ปลา  |  2) สัตว์สะเทินน้ำสะเทินบก  |  3) สัตว์เลื้อยคลาน  |  4) สัตว์ปีก (นก)
+EN: What kind of animal is a crocodile 🐊?
+   1) a fish  |  2) an amphibian  |  3) a reptile  |  4) a bird
+
+### gk-0423  (หัวข้อ: animal-babies)
+TH: ลูกของแกะ 🐑 ภาษาอังกฤษเรียกว่าอะไร
+   1) lamb  |  2) chick  |  3) duckling  |  4) kitten
+EN: What is a baby sheep 🐑 called?
+   (EN choices same as TH)
+
+### gk-0424  (หัวข้อ: animal-food)
+TH: สัตว์ตัวไหนกินพืชเป็นอาหาร
+   1) แรด 🦏  |  2) สิงโต 🦁  |  3) แมงป่อง 🦂  |  4) ฉลาม 🦈
+EN: Which animal eats only plants?
+   1) rhino 🦏  |  2) lion 🦁  |  3) scorpion 🦂  |  4) shark 🦈
+
+### gk-0425  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนไม่ใช่สัตว์เลี้ยงลูกด้วยนม
+   1) วัว 🐄  |  2) จิ้งจก 🦎  |  3) กวาง 🦌  |  4) หมาป่า 🐺
+EN: Which one is NOT a mammal?
+   1) cow 🐄  |  2) lizard 🦎  |  3) deer 🦌  |  4) wolf 🐺
+
+### gk-0426  (หัวข้อ: animal-babies)
+TH: ลูกของผีเสื้อ 🦋 ภาษาอังกฤษเรียกว่าอะไร
+   1) cub  |  2) caterpillar  |  3) kid  |  4) duckling
+EN: What is a baby butterfly 🦋 called?
+   (EN choices same as TH)
+
+### gk-0427  (หัวข้อ: animal-food)
+TH: สัตว์ตัวไหนกินเนื้อเป็นอาหาร
+   1) ม้าลาย 🦓  |  2) อูฐ 🐫  |  3) ห่าน 🪿  |  4) หมาป่า 🐺
+EN: Which animal eats meat?
+   1) zebra 🦓  |  2) camel 🐫  |  3) goose 🪿  |  4) wolf 🐺
+
+### gk-0428  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนไม่ใช่สัตว์เลี้ยงลูกด้วยนม
+   1) แกะ 🐑  |  2) ยีราฟ 🦒  |  3) นกแก้ว 🦜  |  4) หนู 🐭
+EN: Which one is NOT a mammal?
+   1) sheep 🐑  |  2) giraffe 🦒  |  3) parrot 🦜  |  4) mouse 🐭
+
+### gk-0429  (หัวข้อ: animal-babies)
+TH: ลูกของเพนกวิน 🐧 ภาษาอังกฤษเรียกว่าอะไร
+   1) tadpole  |  2) lamb  |  3) chick  |  4) foal
+EN: What is a baby penguin 🐧 called?
+   (EN choices same as TH)
+
+### gk-0430  (หัวข้อ: animal-food)
+TH: สัตว์ตัวไหนกินเนื้อเป็นอาหาร
+   1) แมว 🐱  |  2) ช้าง 🐘  |  3) แรด 🦏  |  4) กระต่าย 🐰
+EN: Which animal eats meat?
+   1) cat 🐱  |  2) elephant 🐘  |  3) rhino 🦏  |  4) rabbit 🐰
+
+### gk-0431  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนไม่ใช่สัตว์เลี้ยงลูกด้วยนม
+   1) ปลาการ์ตูน 🐠  |  2) ช้าง 🐘  |  3) หมี 🐻  |  4) หมีขั้วโลก 🐻‍❄️
+EN: Which one is NOT a mammal?
+   1) clownfish 🐠  |  2) elephant 🐘  |  3) bear 🐻  |  4) polar bear 🐻‍❄️
+
+### gk-0432  (หัวข้อ: animal-babies)
+TH: ลูกของจิงโจ้ 🦘 ภาษาอังกฤษเรียกว่าอะไร
+   1) piglet  |  2) puppy  |  3) cub  |  4) joey
+EN: What is a baby kangaroo 🦘 called?
+   (EN choices same as TH)
+
+### gk-0433  (หัวข้อ: animal-food)
+TH: สัตว์ตัวไหนกินพืชเป็นอาหาร
+   1) เสือ 🐯  |  2) หมาป่า 🐺  |  3) กวาง 🦌  |  4) งู 🐍
+EN: Which animal eats only plants?
+   1) tiger 🐯  |  2) wolf 🐺  |  3) deer 🦌  |  4) snake 🐍
+
+### gk-0434  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนไม่ใช่สัตว์เลี้ยงลูกด้วยนม
+   1) ม้าลาย 🦓  |  2) เป็ด 🦆  |  3) วาฬ 🐋  |  4) สิงโต 🦁
+EN: Which one is NOT a mammal?
+   1) zebra 🦓  |  2) duck 🦆  |  3) whale 🐋  |  4) lion 🦁
+
+### gk-0435  (หัวข้อ: animal-babies)
+TH: ลูกของหมู 🐷 ภาษาอังกฤษเรียกว่าอะไร
+   1) piglet  |  2) cub  |  3) duckling  |  4) joey
+EN: What is a baby pig 🐷 called?
+   (EN choices same as TH)
+
+### gk-0436  (หัวข้อ: animal-food)
+TH: สัตว์ตัวไหนกินพืชเป็นอาหาร
+   1) อูฐ 🐫  |  2) แมงกะพรุน 🪼  |  3) เสือ 🐯  |  4) แมงป่อง 🦂
+EN: Which animal eats only plants?
+   1) camel 🐫  |  2) jellyfish 🪼  |  3) tiger 🐯  |  4) scorpion 🦂
+
+### gk-0437  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนไม่ใช่แมลง
+   1) แมงป่อง 🦂  |  2) ด้วง 🪲  |  3) ผึ้ง 🐝  |  4) แมลงวัน 🪰
+EN: Which one is NOT an insect?
+   1) scorpion 🦂  |  2) beetle 🪲  |  3) bee 🐝  |  4) fly 🪰
+
+### gk-0438  (หัวข้อ: animal-babies)
+TH: ลูกของแรด 🦏 ภาษาอังกฤษเรียกว่าอะไร
+   1) foal  |  2) calf  |  3) cub  |  4) lamb
+EN: What is a baby rhino 🦏 called?
+   (EN choices same as TH)
+
+### gk-0439  (หัวข้อ: animal-food)
+TH: สัตว์ตัวไหนกินพืชเป็นอาหาร
+   1) ฉลาม 🦈  |  2) กระต่าย 🐰  |  3) แมลงปอ  |  4) นกอินทรี 🦅
+EN: Which animal eats only plants?
+   1) shark 🦈  |  2) rabbit 🐰  |  3) dragonfly  |  4) eagle 🦅
+
+### gk-0440  (หัวข้อ: animal-groups)
+TH: คางคก 🐸 เป็นสัตว์กลุ่มไหน
+   1) สัตว์สะเทินน้ำสะเทินบก  |  2) สัตว์เลื้อยคลาน  |  3) สัตว์ปีก (นก)  |  4) แมลง
+EN: What kind of animal is a toad 🐸?
+   1) an amphibian  |  2) a reptile  |  3) a bird  |  4) an insect
+
+### gk-0441  (หัวข้อ: animal-babies)
+TH: ลูกของนกกระจอกเทศ 🪶 ภาษาอังกฤษเรียกว่าอะไร
+   1) chick  |  2) foal  |  3) duckling  |  4) pup
+EN: What is a baby ostrich 🪶 called?
+   (EN choices same as TH)
+
+### gk-0442  (หัวข้อ: animal-food)
+TH: สัตว์ตัวไหนกินพืชเป็นอาหาร
+   1) ม้า 🐴  |  2) กิ้งก่าคาเมเลียน 🦎  |  3) หมาป่า 🐺  |  4) ฉลาม 🦈
+EN: Which animal eats only plants?
+   1) horse 🐴  |  2) chameleon 🦎  |  3) wolf 🐺  |  4) shark 🦈
+
+### gk-0443  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนไม่ใช่สัตว์เลี้ยงลูกด้วยนม
+   1) เสือชีตาห์ 🐆  |  2) เพนกวิน 🐧  |  3) แพะ 🐐  |  4) ช้าง 🐘
+EN: Which one is NOT a mammal?
+   1) cheetah 🐆  |  2) penguin 🐧  |  3) goat 🐐  |  4) elephant 🐘
+
+### gk-0444  (หัวข้อ: animal-babies)
+TH: ลูกของควาย 🐃 ภาษาอังกฤษเรียกว่าอะไร
+   1) fawn  |  2) cub  |  3) puppy  |  4) calf
+EN: What is a baby buffalo 🐃 called?
+   (EN choices same as TH)
+
+### gk-0445  (หัวข้อ: animal-food)
+TH: สัตว์ตัวไหนกินพืชเป็นอาหาร
+   1) วัว 🐄  |  2) แมว 🐱  |  3) หมาป่า 🐺  |  4) จระเข้ 🐊
+EN: Which animal eats only plants?
+   1) cow 🐄  |  2) cat 🐱  |  3) wolf 🐺  |  4) crocodile 🐊
+
+### gk-0446  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนไม่ใช่สัตว์เลี้ยงลูกด้วยนม
+   1) ค้างคาว 🦇  |  2) นกกระจอกเทศ 🪶  |  3) ฮิปโป 🦛  |  4) หมู 🐷
+EN: Which one is NOT a mammal?
+   1) bat 🦇  |  2) ostrich 🪶  |  3) hippo 🦛  |  4) pig 🐷
+
+### gk-0447  (หัวข้อ: animal-babies)
+TH: ลูกของนกฮูก 🦉 ภาษาอังกฤษเรียกว่าอะไร
+   1) tadpole  |  2) calf  |  3) fawn  |  4) owlet
+EN: What is a baby owl 🦉 called?
+   (EN choices same as TH)
+
+### gk-0448  (หัวข้อ: animal-food)
+TH: สัตว์ตัวไหนกินพืชเป็นอาหาร
+   1) ห่าน 🪿  |  2) แมงมุม 🕷️  |  3) หมาป่า 🐺  |  4) จระเข้ 🐊
+EN: Which animal eats only plants?
+   1) goose 🪿  |  2) spider 🕷️  |  3) wolf 🐺  |  4) crocodile 🐊
+
+### gk-0449  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนเป็นสัตว์เลื้อยคลาน
+   1) กิ้งก่าคาเมเลียน 🦎  |  2) จิงโจ้ 🦘  |  3) ควาย 🐃  |  4) ไก่ 🐔
+EN: Which one is a reptile?
+   1) chameleon 🦎  |  2) kangaroo 🦘  |  3) buffalo 🐃  |  4) chicken 🐔
+
+### gk-0450  (หัวข้อ: animal-babies)
+TH: ลูกสัตว์ที่เรียกว่า "owlet" คือลูกของสัตว์อะไร
+   1) หมีขั้วโลก 🐻‍❄️  |  2) นกฮูก 🦉  |  3) แกะ 🐑  |  4) แมว 🐱
+EN: A "owlet" is a baby what?
+   1) polar bear 🐻‍❄️  |  2) owl 🦉  |  3) sheep 🐑  |  4) cat 🐱
+
+### gk-0451  (หัวข้อ: animal-food)
+TH: สัตว์ตัวไหนกินเนื้อเป็นอาหาร
+   1) ม้า 🐴  |  2) นกอินทรี 🦅  |  3) ยีราฟ 🦒  |  4) ม้าลาย 🦓
+EN: Which animal eats meat?
+   1) horse 🐴  |  2) eagle 🦅  |  3) giraffe 🦒  |  4) zebra 🦓
+
+### gk-0452  (หัวข้อ: animal-groups)
+TH: จิ้งจก 🦎 เป็นสัตว์กลุ่มไหน
+   1) สัตว์สะเทินน้ำสะเทินบก  |  2) ปลา  |  3) สัตว์ปีก (นก)  |  4) สัตว์เลื้อยคลาน
+EN: What kind of animal is a lizard 🦎?
+   1) an amphibian  |  2) a fish  |  3) a bird  |  4) a reptile
+
+### gk-0453  (หัวข้อ: animal-babies)
+TH: ลูกสัตว์ที่เรียกว่า "joey" คือลูกของสัตว์อะไร
+   1) หมาป่า 🐺  |  2) จิงโจ้ 🦘  |  3) ไก่ 🐔  |  4) แมลงวัน 🪰
+EN: A "joey" is a baby what?
+   1) wolf 🐺  |  2) kangaroo 🦘  |  3) chicken 🐔  |  4) fly 🪰
+
+### gk-0454  (หัวข้อ: animal-food)
+TH: สัตว์ตัวไหนกินพืชเป็นอาหาร
+   1) หมีขั้วโลก 🐻‍❄️  |  2) ฮิปโป 🦛  |  3) แมงป่อง 🦂  |  4) ปลาทูน่า 🐟
+EN: Which animal eats only plants?
+   1) polar bear 🐻‍❄️  |  2) hippo 🦛  |  3) scorpion 🦂  |  4) tuna 🐟
+
+### gk-0455  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนไม่ใช่สัตว์เลี้ยงลูกด้วยนม
+   1) อูฐ 🐫  |  2) กวาง 🦌  |  3) เสือชีตาห์ 🐆  |  4) ปลาทอง 🐠
+EN: Which one is NOT a mammal?
+   1) camel 🐫  |  2) deer 🦌  |  3) cheetah 🐆  |  4) goldfish 🐠
+
+### gk-0456  (หัวข้อ: animal-babies)
+TH: ลูกของหมีขั้วโลก 🐻‍❄️ ภาษาอังกฤษเรียกว่าอะไร
+   1) piglet  |  2) cub  |  3) gosling  |  4) cygnet
+EN: What is a baby polar bear 🐻‍❄️ called?
+   (EN choices same as TH)
+
+### gk-0457  (หัวข้อ: animal-food)
+TH: สัตว์ตัวไหนกินเนื้อเป็นอาหาร
+   1) ฉลาม 🦈  |  2) ห่าน 🪿  |  3) แพะ 🐐  |  4) วัว 🐄
+EN: Which animal eats meat?
+   1) shark 🦈  |  2) goose 🪿  |  3) goat 🐐  |  4) cow 🐄
+
+### gk-0458  (หัวข้อ: animal-groups)
+TH: กิ้งก่าคาเมเลียน 🦎 เป็นสัตว์กลุ่มไหน
+   1) สัตว์เลี้ยงลูกด้วยนม  |  2) สัตว์เลื้อยคลาน  |  3) แมลง  |  4) สัตว์ปีก (นก)
+EN: What kind of animal is a chameleon 🦎?
+   1) a mammal  |  2) a reptile  |  3) an insect  |  4) a bird
+
+### gk-0459  (หัวข้อ: animal-babies)
+TH: ลูกสัตว์ที่เรียกว่า "tadpole" คือลูกของสัตว์อะไร
+   1) หนู 🐭  |  2) ยุง 🦟  |  3) นกอินทรี 🦅  |  4) คางคก 🐸
+EN: A "tadpole" is a baby what?
+   1) mouse 🐭  |  2) mosquito 🦟  |  3) eagle 🦅  |  4) toad 🐸
+
+### gk-0460  (หัวข้อ: animal-food)
+TH: สัตว์ตัวไหนกินเนื้อเป็นอาหาร
+   1) ห่าน 🪿  |  2) ฮิปโป 🦛  |  3) ยีราฟ 🦒  |  4) แมลงปอ
+EN: Which animal eats meat?
+   1) goose 🪿  |  2) hippo 🦛  |  3) giraffe 🦒  |  4) dragonfly
+
+### gk-0461  (หัวข้อ: animal-groups)
+TH: เต่า 🐢 เป็นสัตว์กลุ่มไหน
+   1) แมลง  |  2) สัตว์เลื้อยคลาน  |  3) สัตว์เลี้ยงลูกด้วยนม  |  4) ปลา
+EN: What kind of animal is a turtle 🐢?
+   1) an insect  |  2) a reptile  |  3) a mammal  |  4) a fish
+
+### gk-0462  (หัวข้อ: animal-babies)
+TH: ลูกของม้าลาย 🦓 ภาษาอังกฤษเรียกว่าอะไร
+   1) tadpole  |  2) caterpillar  |  3) duckling  |  4) foal
+EN: What is a baby zebra 🦓 called?
+   (EN choices same as TH)
+
+### gk-0463  (หัวข้อ: animal-food)
+TH: สัตว์ตัวไหนกินพืชเป็นอาหาร
+   1) หมาป่า 🐺  |  2) ตั๊กแตน 🦗  |  3) หมีขั้วโลก 🐻‍❄️  |  4) ปลาทูน่า 🐟
+EN: Which animal eats only plants?
+   1) wolf 🐺  |  2) grasshopper 🦗  |  3) polar bear 🐻‍❄️  |  4) tuna 🐟
+
+### gk-0464  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนไม่ใช่สัตว์เลี้ยงลูกด้วยนม
+   1) คางคก 🐸  |  2) อูฐ 🐫  |  3) เสือ 🐯  |  4) หมีขั้วโลก 🐻‍❄️
+EN: Which one is NOT a mammal?
+   1) toad 🐸  |  2) camel 🐫  |  3) tiger 🐯  |  4) polar bear 🐻‍❄️
+
+### gk-0465  (หัวข้อ: animal-babies)
+TH: ลูกของเสือชีตาห์ 🐆 ภาษาอังกฤษเรียกว่าอะไร
+   1) cub  |  2) owlet  |  3) cygnet  |  4) puppy
+EN: What is a baby cheetah 🐆 called?
+   (EN choices same as TH)
+
+### gk-0466  (หัวข้อ: animal-food)
+TH: สัตว์ตัวไหนกินพืชเป็นอาหาร
+   1) หมีขั้วโลก 🐻‍❄️  |  2) ม้าลาย 🦓  |  3) หมาป่า 🐺  |  4) สิงโต 🦁
+EN: Which animal eats only plants?
+   1) polar bear 🐻‍❄️  |  2) zebra 🦓  |  3) wolf 🐺  |  4) lion 🦁
+
+### gk-0467  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนไม่ใช่สัตว์เลี้ยงลูกด้วยนม
+   1) ฉลาม 🦈  |  2) กวาง 🦌  |  3) ช้าง 🐘  |  4) เสือ 🐯
+EN: Which one is NOT a mammal?
+   1) shark 🦈  |  2) deer 🦌  |  3) elephant 🐘  |  4) tiger 🐯
+
+### gk-0468  (หัวข้อ: animal-babies)
+TH: ลูกของแมว 🐱 ภาษาอังกฤษเรียกว่าอะไร
+   1) kitten  |  2) kid  |  3) pup  |  4) tadpole
+EN: What is a baby cat 🐱 called?
+   (EN choices same as TH)
+
+### gk-0469  (หัวข้อ: animal-food)
+TH: สัตว์ตัวไหนกินพืชเป็นอาหาร
+   1) เสือชีตาห์ 🐆  |  2) สิงโต 🦁  |  3) หมาป่า 🐺  |  4) จิงโจ้ 🦘
+EN: Which animal eats only plants?
+   1) cheetah 🐆  |  2) lion 🦁  |  3) wolf 🐺  |  4) kangaroo 🦘
+
+### gk-0470  (หัวข้อ: animal-groups)
+TH: งู 🐍 เป็นสัตว์กลุ่มไหน
+   1) สัตว์เลื้อยคลาน  |  2) ปลา  |  3) สัตว์สะเทินน้ำสะเทินบก  |  4) แมลง
+EN: What kind of animal is a snake 🐍?
+   1) a reptile  |  2) a fish  |  3) an amphibian  |  4) an insect
+
+### gk-0471  (หัวข้อ: animal-babies)
+TH: ลูกสัตว์ที่เรียกว่า "foal" คือลูกของสัตว์อะไร
+   1) นกแก้ว 🦜  |  2) ม้า 🐴  |  3) แมว 🐱  |  4) ฉลาม 🦈
+EN: A "foal" is a baby what?
+   1) parrot 🦜  |  2) horse 🐴  |  3) cat 🐱  |  4) shark 🦈
+
+### gk-0472  (หัวข้อ: animal-food)
+TH: สัตว์ตัวไหนกินเนื้อเป็นอาหาร
+   1) เสือชีตาห์ 🐆  |  2) ม้า 🐴  |  3) กวาง 🦌  |  4) ตั๊กแตน 🦗
+EN: Which animal eats meat?
+   1) cheetah 🐆  |  2) horse 🐴  |  3) deer 🦌  |  4) grasshopper 🦗
+
+### gk-0473  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนไม่ใช่สัตว์เลี้ยงลูกด้วยนม
+   1) จระเข้ 🐊  |  2) แกะ 🐑  |  3) หมีขั้วโลก 🐻‍❄️  |  4) ช้าง 🐘
+EN: Which one is NOT a mammal?
+   1) crocodile 🐊  |  2) sheep 🐑  |  3) polar bear 🐻‍❄️  |  4) elephant 🐘
+
+### gk-0474  (หัวข้อ: animal-babies)
+TH: ลูกของแพะ 🐐 ภาษาอังกฤษเรียกว่าอะไร
+   1) gosling  |  2) kid  |  3) cub  |  4) calf
+EN: What is a baby goat 🐐 called?
+   (EN choices same as TH)
+
+### gk-0475  (หัวข้อ: animal-food)
+TH: สัตว์ตัวไหนกินเนื้อเป็นอาหาร
+   1) กระต่าย 🐰  |  2) แมงกะพรุน 🪼  |  3) แพะ 🐐  |  4) ช้าง 🐘
+EN: Which animal eats meat?
+   1) rabbit 🐰  |  2) jellyfish 🪼  |  3) goat 🐐  |  4) elephant 🐘
+
+### gk-0476  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนไม่ใช่สัตว์เลี้ยงลูกด้วยนม
+   1) หมี 🐻  |  2) กระรอก 🐿️  |  3) กระต่าย 🐰  |  4) นกอินทรี 🦅
+EN: Which one is NOT a mammal?
+   1) bear 🐻  |  2) squirrel 🐿️  |  3) rabbit 🐰  |  4) eagle 🦅
+
+### gk-0477  (หัวข้อ: animal-babies)
+TH: ลูกของกวาง 🦌 ภาษาอังกฤษเรียกว่าอะไร
+   1) puppy  |  2) foal  |  3) calf  |  4) fawn
+EN: What is a baby deer 🦌 called?
+   (EN choices same as TH)
+
+### gk-0478  (หัวข้อ: animal-food)
+TH: สัตว์ตัวไหนกินพืชเป็นอาหาร
+   1) งู 🐍  |  2) เสือ 🐯  |  3) แพะ 🐐  |  4) เสือชีตาห์ 🐆
+EN: Which animal eats only plants?
+   1) snake 🐍  |  2) tiger 🐯  |  3) goat 🐐  |  4) cheetah 🐆
+
+### gk-0479  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนไม่ใช่แมลง
+   1) ผีเสื้อ 🦋  |  2) แมงมุม 🕷️  |  3) หิ่งห้อย ✨  |  4) ตั๊กแตน 🦗
+EN: Which one is NOT an insect?
+   1) butterfly 🦋  |  2) spider 🕷️  |  3) firefly ✨  |  4) grasshopper 🦗
+
+### gk-0480  (หัวข้อ: animal-babies)
+TH: ลูกสัตว์ที่เรียกว่า "caterpillar" คือลูกของสัตว์อะไร
+   1) เต่าทอง 🐞  |  2) ผีเสื้อ 🦋  |  3) จิงโจ้ 🦘  |  4) แมว 🐱
+EN: A "caterpillar" is a baby what?
+   1) ladybird 🐞  |  2) butterfly 🦋  |  3) kangaroo 🦘  |  4) cat 🐱
+
+### gk-0481  (หัวข้อ: animal-food)
+TH: สัตว์ตัวไหนกินพืชเป็นอาหาร
+   1) แมลงปอ  |  2) ควาย 🐃  |  3) เสือชีตาห์ 🐆  |  4) ปลาทูน่า 🐟
+EN: Which animal eats only plants?
+   1) dragonfly  |  2) buffalo 🐃  |  3) cheetah 🐆  |  4) tuna 🐟
+
+### gk-0482  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนไม่ใช่สัตว์เลี้ยงลูกด้วยนม
+   1) ม้าลาย 🦓  |  2) นกฟลามิงโก 🦩  |  3) แกะ 🐑  |  4) จิงโจ้ 🦘
+EN: Which one is NOT a mammal?
+   1) zebra 🦓  |  2) flamingo 🦩  |  3) sheep 🐑  |  4) kangaroo 🦘
+
+### gk-0483  (หัวข้อ: animal-babies)
+TH: ลูกของสิงโต 🦁 ภาษาอังกฤษเรียกว่าอะไร
+   1) cub  |  2) tadpole  |  3) joey  |  4) fawn
+EN: What is a baby lion 🦁 called?
+   (EN choices same as TH)
+
+### gk-0484  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนไม่ใช่สัตว์เลี้ยงลูกด้วยนม
+   1) เต่า 🐢  |  2) กวาง 🦌  |  3) เสือ 🐯  |  4) เสือชีตาห์ 🐆
+EN: Which one is NOT a mammal?
+   1) turtle 🐢  |  2) deer 🦌  |  3) tiger 🐯  |  4) cheetah 🐆
+
+### gk-0485  (หัวข้อ: animal-babies)
+TH: ลูกของเป็ด 🦆 ภาษาอังกฤษเรียกว่าอะไร
+   1) chick  |  2) duckling  |  3) kid  |  4) calf
+EN: What is a baby duck 🦆 called?
+   (EN choices same as TH)
+
+### gk-0486  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนไม่ใช่สัตว์เลี้ยงลูกด้วยนม
+   1) แกะ 🐑  |  2) กิ้งก่าคาเมเลียน 🦎  |  3) เสือชีตาห์ 🐆  |  4) จิงโจ้ 🦘
+EN: Which one is NOT a mammal?
+   1) sheep 🐑  |  2) chameleon 🦎  |  3) cheetah 🐆  |  4) kangaroo 🦘
+
+### gk-0487  (หัวข้อ: animal-babies)
+TH: ลูกสัตว์ที่เรียกว่า "puppy" คือลูกของสัตว์อะไร
+   1) หมา 🐶  |  2) ช้าง 🐘  |  3) ม้าลาย 🦓  |  4) ยีราฟ 🦒
+EN: A "puppy" is a baby what?
+   1) dog 🐶  |  2) elephant 🐘  |  3) zebra 🦓  |  4) giraffe 🦒
+
+### gk-0488  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนเป็นสัตว์เลื้อยคลาน
+   1) กบ 🐸  |  2) จิงโจ้ 🦘  |  3) เต่า 🐢  |  4) ห่าน 🪿
+EN: Which one is a reptile?
+   1) frog 🐸  |  2) kangaroo 🦘  |  3) turtle 🐢  |  4) goose 🪿
+
+### gk-0489  (หัวข้อ: animal-babies)
+TH: ลูกของวาฬ 🐋 ภาษาอังกฤษเรียกว่าอะไร
+   1) lamb  |  2) calf  |  3) kid  |  4) cygnet
+EN: What is a baby whale 🐋 called?
+   (EN choices same as TH)
+
+### gk-0490  (หัวข้อ: animal-groups)
+TH: สัตว์ตัวไหนไม่ใช่สัตว์เลี้ยงลูกด้วยนม
+   1) นกยูง 🦚  |  2) กระรอก 🐿️  |  3) ยีราฟ 🦒  |  4) ช้าง 🐘
+EN: Which one is NOT a mammal?
+   1) peacock 🦚  |  2) squirrel 🐿️  |  3) giraffe 🦒  |  4) elephant 🐘
+
+### gk-0491  (หัวข้อ: animal-babies)
+TH: ลูกของโลมา 🐬 ภาษาอังกฤษเรียกว่าอะไร
+   1) caterpillar  |  2) piglet  |  3) puppy  |  4) calf
+EN: What is a baby dolphin 🐬 called?
+   (EN choices same as TH)
+
+### gk-0492  (หัวข้อ: animal-groups)
+TH: ปลาหมึกยักษ์ 🐙 เป็นสัตว์กลุ่มไหน
+   1) แมลง  |  2) สัตว์เลื้อยคลาน  |  3) สัตว์เลี้ยงลูกด้วยนม  |  4) สัตว์ลำตัวนิ่ม
+EN: What kind of animal is an octopus 🐙?
+   1) an insect  |  2) a reptile  |  3) a mammal  |  4) a mollusc
+
+### gk-0493  (หัวข้อ: animal-babies)
+TH: ลูกของหนู 🐭 ภาษาอังกฤษเรียกว่าอะไร
+   1) tadpole  |  2) pup  |  3) kitten  |  4) calf
+EN: What is a baby mouse 🐭 called?
+   (EN choices same as TH)
+
+### gk-0494  (หัวข้อ: animal-groups)
+TH: แมงมุม 🕷️ เป็นสัตว์กลุ่มไหน
+   1) สัตว์เลี้ยงลูกด้วยนม  |  2) สัตว์เลื้อยคลาน  |  3) สัตว์ปีก (นก)  |  4) แมงมุม (ไม่ใช่แมลง)
+EN: What kind of animal is a spider 🕷️?
+   1) a mammal  |  2) a reptile  |  3) a bird  |  4) an arachnid (not an insect)
+
+### gk-0495  (หัวข้อ: animal-babies)
+TH: ลูกของหมา 🐶 ภาษาอังกฤษเรียกว่าอะไร
+   1) piglet  |  2) chick  |  3) pup  |  4) puppy
+EN: What is a baby dog 🐶 called?
+   (EN choices same as TH)
+
+### gk-0496  (หัวข้อ: animal-babies)
+TH: ลูกของเสือ 🐯 ภาษาอังกฤษเรียกว่าอะไร
+   1) cub  |  2) puppy  |  3) calf  |  4) lamb
+EN: What is a baby tiger 🐯 called?
+   (EN choices same as TH)
+
+### gk-0497  (หัวข้อ: animal-babies)
+TH: ลูกของหมี 🐻 ภาษาอังกฤษเรียกว่าอะไร
+   1) duckling  |  2) tadpole  |  3) cub  |  4) calf
+EN: What is a baby bear 🐻 called?
+   (EN choices same as TH)
+
+### gk-0498  (หัวข้อ: animal-babies)
+TH: ลูกสัตว์ที่เรียกว่า "cygnet" คือลูกของสัตว์อะไร
+   1) หิ่งห้อย ✨  |  2) ปลาการ์ตูน 🐠  |  3) ผึ้ง 🐝  |  4) หงส์ 🦢
+EN: A "cygnet" is a baby what?
+   1) firefly ✨  |  2) clownfish 🐠  |  3) bee 🐝  |  4) swan 🦢
+
+### gk-0499  (หัวข้อ: animal-babies)
+TH: ลูกสัตว์ที่เรียกว่า "tadpole" คือลูกของสัตว์อะไร
+   1) กระรอก 🐿️  |  2) กบ 🐸  |  3) ปลาทูน่า 🐟  |  4) นกฮูก 🦉
+EN: A "tadpole" is a baby what?
+   1) squirrel 🐿️  |  2) frog 🐸  |  3) tuna 🐟  |  4) owl 🦉
+
+### gk-0500  (หัวข้อ: animal-babies)
+TH: ลูกของฮิปโป 🦛 ภาษาอังกฤษเรียกว่าอะไร
+   1) kid  |  2) fawn  |  3) calf  |  4) gosling
+EN: What is a baby hippo 🦛 called?
+   (EN choices same as TH)

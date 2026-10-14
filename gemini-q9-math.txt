@@ -1,0 +1,992 @@
+# ชุดตรวจ: คณิตศาสตร์ อายุ 9 (ป.3–ป.4) · 165 ข้อ · ไฟล์ q-math-9.json
+# ตัวเลือกนับ 1–4 · ไม่มีเฉลยในไฟล์นี้ (ให้แก้โจทย์เองก่อน)
+
+### ma-9-0001  (หัวข้อ: divide)
+TH: 534 ÷ 6 = ?
+   1) 99  |  2) 89  |  3) 90  |  4) 88
+EN: 534 ÷ 6 = ?
+   (EN choices same as TH)
+
+### ma-9-0002  (หัวข้อ: area)
+TH: สี่เหลี่ยมผืนผ้ามีพื้นที่ 98 ตารางเซนติเมตร กว้าง 7 ซม. ยาวกี่ ซม.
+   1) 91  |  2) 14  |  3) 15  |  4) 13
+EN: A rectangle has an area of 98 square centimetres and is 7 cm wide. How long is it in cm?
+   (EN choices same as TH)
+
+### ma-9-0003  (หัวข้อ: word-problem)
+TH: โรงหนังมีที่นั่ง 15 แถว แถวละ 18 ที่ มีคนนั่งแล้ว 109 ที่ เหลือที่ว่างกี่ที่
+   1) 171  |  2) 161  |  3) 270  |  4) 91
+EN: A cinema has 15 rows of 18 seats. 109 seats are taken. How many seats are empty?
+   (EN choices same as TH)
+
+### ma-9-0004  (หัวข้อ: add)
+TH: 6,929 + 8,085 = ?
+   1) 15,014  |  2) 15,114  |  3) 14,914  |  4) 14,014
+EN: 6,929 + 8,085 = ?
+   (EN choices same as TH)
+
+### ma-9-0005  (หัวข้อ: measure)
+TH: 7,250 เมตร เท่ากับเท่าไร
+   1) 70 กม. 250 ม.  |  2) 7 กม. 250 ม.  |  3) 7 กม. 25 ม.  |  4) 8 กม. 250 ม.
+EN: What is 7,250 m the same as?
+   1) 70 km 250 m  |  2) 7 km 250 m  |  3) 7 km 25 m  |  4) 8 km 250 m
+
+### ma-9-0006  (หัวข้อ: divide)
+TH: 875 ÷ 5 = ?
+   1) 174  |  2) 175  |  3) 185  |  4) 176
+EN: 875 ÷ 5 = ?
+   (EN choices same as TH)
+
+### ma-9-0007  (หัวข้อ: rounding)
+TH: ค่าประมาณเป็นจำนวนเต็มสิบของ 1,219 คือเท่าไร
+   1) 1,220  |  2) 1,230  |  3) 1,210  |  4) 1,200
+EN: Round 1,219 to the nearest ten.
+   (EN choices same as TH)
+
+### ma-9-0008  (หัวข้อ: fractions)
+TH: 2/3 ของ 15 คือเท่าไร
+   1) 10  |  2) 5  |  3) 15  |  4) 17
+EN: What is 2/3 of 15?
+   (EN choices same as TH)
+
+### ma-9-0009  (หัวข้อ: area)
+TH: สี่เหลี่ยมผืนผ้ากว้าง 6 ม. ยาว 15 ม. มีพื้นที่กี่ตารางเมตร
+   1) 21  |  2) 42  |  3) 96  |  4) 90
+EN: A rectangle is 6 m wide and 15 m long. What is its area in square metres?
+   (EN choices same as TH)
+
+### ma-9-0010  (หัวข้อ: decimals)
+TH: 7.1 − 4.3 = ?
+   1) 3.8  |  2) 2.8  |  3) 1.8  |  4) 3.2
+EN: 7.1 − 4.3 = ?
+   (EN choices same as TH)
+
+### ma-9-0011  (หัวข้อ: word-problem)
+TH: นีน่ามีลูกปัด 31 เม็ด ลีอามี 49 เม็ด รวมกันแล้วแบ่งใส่ถุง 4 ถุงเท่า ๆ กัน ได้ถุงละกี่เม็ด
+   1) 20  |  2) 21  |  3) 80  |  4) 7
+EN: Nina has 31 beads and Leah has 49. They share them all equally into 4 bags. How many go in each bag?
+   (EN choices same as TH)
+
+### ma-9-0012  (หัวข้อ: fractions)
+TH: 5/7 ของ 56 คือเท่าไร
+   1) 8  |  2) 48  |  3) 40  |  4) 16
+EN: What is 5/7 of 56?
+   (EN choices same as TH)
+
+### ma-9-0013  (หัวข้อ: multiply)
+TH: 341 × 6 = ?
+   1) 2,052  |  2) 2,046  |  3) 2,056  |  4) 2,040
+EN: 341 × 6 = ?
+   (EN choices same as TH)
+
+### ma-9-0014  (หัวข้อ: decimals)
+TH: 14 บาท 50 สตางค์ เขียนเป็นทศนิยมได้กี่บาท
+   1) 14.50  |  2) 14.050  |  3) 50.14  |  4) 145.0
+EN: How do you write 14 baht 50 satang in baht as a decimal?
+   (EN choices same as TH)
+
+### ma-9-0015  (หัวข้อ: divide)
+TH: 456 ÷ 8 = ?
+   1) 56  |  2) 67  |  3) 57  |  4) 58
+EN: 456 ÷ 8 = ?
+   (EN choices same as TH)
+
+### ma-9-0016  (หัวข้อ: measure)
+TH: 7,075 เมตร เท่ากับเท่าไร
+   1) 70 กม. 75 ม.  |  2) 7 กม. 75 ม.  |  3) 7 กม. 7 ม.  |  4) 8 กม. 75 ม.
+EN: What is 7,075 m the same as?
+   1) 70 km 75 m  |  2) 7 km 75 m  |  3) 7 km 7 m  |  4) 8 km 75 m
+
+### ma-9-0017  (หัวข้อ: fractions)
+TH: เศษส่วนใดมีค่าเท่ากับ 5/6
+   1) 9/10  |  2) 20/24  |  3) 21/24  |  4) 20/25
+EN: Which fraction is equal to 5/6?
+   (EN choices same as TH)
+
+### ma-9-0018  (หัวข้อ: decimals)
+TH: 37 บาท 25 สตางค์ เขียนเป็นทศนิยมได้กี่บาท
+   1) 25.37  |  2) 372.5  |  3) 37.025  |  4) 37.25
+EN: How do you write 37 baht 25 satang in baht as a decimal?
+   (EN choices same as TH)
+
+### ma-9-0019  (หัวข้อ: measure)
+TH: 8 กิโลเมตร 50 เมตร เท่ากับกี่เมตร
+   1) 9,050  |  2) 8,050  |  3) 58  |  4) 850
+EN: How many m are in 8 km 50 m?
+   (EN choices same as TH)
+
+### ma-9-0020  (หัวข้อ: decimals)
+TH: 7.7 − 6.9 = ?
+   1) 2.8  |  2) 1.2  |  3) 0.8  |  4) 1.8
+EN: 7.7 − 6.9 = ?
+   (EN choices same as TH)
+
+### ma-9-0021  (หัวข้อ: fractions)
+TH: 8/9 ของ 63 คือเท่าไร
+   1) 49  |  2) 7  |  3) 56  |  4) 63
+EN: What is 8/9 of 63?
+   (EN choices same as TH)
+
+### ma-9-0022  (หัวข้อ: decimals)
+TH: 3.6 − 1.8 = ?
+   1) 1.8  |  2) 2.2  |  3) 0.8  |  4) 2.8
+EN: 3.6 − 1.8 = ?
+   (EN choices same as TH)
+
+### ma-9-0023  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 725, 600, ?, 350, 225
+   1) 480  |  2) 475  |  3) 465  |  4) 485
+EN: What is the missing number: 725, 600, ?, 350, 225?
+   (EN choices same as TH)
+
+### ma-9-0024  (หัวข้อ: subtract)
+TH: 7,352 − 3,229 = ?
+   1) 4,133  |  2) 4,223  |  3) 4,113  |  4) 4,123
+EN: 7,352 − 3,229 = ?
+   (EN choices same as TH)
+
+### ma-9-0025  (หัวข้อ: add)
+TH: 17,891 + 3,369 = ?
+   1) 21,260  |  2) 20,260  |  3) 21,360  |  4) 21,160
+EN: 17,891 + 3,369 = ?
+   (EN choices same as TH)
+
+### ma-9-0026  (หัวข้อ: multiply)
+TH: 41 × 22 = ?
+   1) 943  |  2) 822  |  3) 902  |  4) 861
+EN: 41 × 22 = ?
+   (EN choices same as TH)
+
+### ma-9-0027  (หัวข้อ: fractions)
+TH: เศษส่วนใดน้อยที่สุด
+   1) 1/12  |  2) 8/12  |  3) 2/12  |  4) 4/12
+EN: Which fraction is the smallest?
+   (EN choices same as TH)
+
+### ma-9-0028  (หัวข้อ: divide)
+TH: 45 ÷ 6 ได้เท่าไร เศษเท่าไร
+   1) 6 เศษ 3  |  2) 8 เศษ 3  |  3) 7 เศษ 3  |  4) 7 เศษ 4
+EN: What is 45 ÷ 6, with its remainder?
+   1) 6 remainder 3  |  2) 8 remainder 3  |  3) 7 remainder 3  |  4) 7 remainder 4
+
+### ma-9-0029  (หัวข้อ: fractions)
+TH: 2/5 + 1/5 = ?
+   1) 2/5  |  2) 4/5  |  3) 3/10  |  4) 3/5
+EN: 2/5 + 1/5 = ?
+   (EN choices same as TH)
+
+### ma-9-0030  (หัวข้อ: measure)
+TH: 7 กิโลเมตร 300 เมตร เท่ากับกี่เมตร
+   1) 307  |  2) 1,000  |  3) 8,300  |  4) 7,300
+EN: How many m are in 7 km 300 m?
+   (EN choices same as TH)
+
+### ma-9-0031  (หัวข้อ: divide)
+TH: 225 ÷ 3 = ?
+   1) 75  |  2) 85  |  3) 76  |  4) 74
+EN: 225 ÷ 3 = ?
+   (EN choices same as TH)
+
+### ma-9-0032  (หัวข้อ: decimals)
+TH: 3.7 + 4.7 = ?
+   1) 7.14  |  2) 9.4  |  3) 7.4  |  4) 8.4
+EN: 3.7 + 4.7 = ?
+   (EN choices same as TH)
+
+### ma-9-0033  (หัวข้อ: rounding)
+TH: ค่าประมาณเป็นจำนวนเต็มร้อยของ 4,517 คือเท่าไร
+   1) 4,500  |  2) 4,700  |  3) 4,000  |  4) 4,600
+EN: Round 4,517 to the nearest hundred.
+   (EN choices same as TH)
+
+### ma-9-0034  (หัวข้อ: subtract)
+TH: 9,634 − 5,916 = ?
+   1) 3,818  |  2) 3,718  |  3) 3,708  |  4) 3,728
+EN: 9,634 − 5,916 = ?
+   (EN choices same as TH)
+
+### ma-9-0035  (หัวข้อ: rounding)
+TH: ค่าประมาณเป็นจำนวนเต็มพันของ 8,799 คือเท่าไร
+   1) 9,000  |  2) 7,000  |  3) 8,000  |  4) 10,000
+EN: Round 8,799 to the nearest thousand.
+   (EN choices same as TH)
+
+### ma-9-0036  (หัวข้อ: rounding)
+TH: ค่าประมาณเป็นจำนวนเต็มพันของ 35,968 คือเท่าไร
+   1) 35,000  |  2) 36,000  |  3) 37,000  |  4) 34,000
+EN: Round 35,968 to the nearest thousand.
+   (EN choices same as TH)
+
+### ma-9-0037  (หัวข้อ: multiply)
+TH: 507 × 7 = ?
+   1) 3,549  |  2) 3,556  |  3) 3,542  |  4) 3,559
+EN: 507 × 7 = ?
+   (EN choices same as TH)
+
+### ma-9-0038  (หัวข้อ: measure)
+TH: 732 เซนติเมตร เท่ากับเท่าไร
+   1) 7 ม. 32 ซม.  |  2) 70 ม. 32 ซม.  |  3) 8 ม. 32 ซม.  |  4) 7 ม. 3 ซม.
+EN: What is 732 cm the same as?
+   1) 7 m 32 cm  |  2) 70 m 32 cm  |  3) 8 m 32 cm  |  4) 7 m 3 cm
+
+### ma-9-0039  (หัวข้อ: time)
+TH: เริ่มเดินป่า 9:35 กลับถึงที่พัก 12:00 เดินนานเท่าไร
+   1) 3 ชม. 25 นาที  |  2) 2 ชม. 25 นาที  |  3) 3 ชม. 35 นาที  |  4) 2 ชม. 35 นาที
+EN: A hike starts at 9:35 and ends at 12:00. How long is the hike?
+   1) 3 h 25 min  |  2) 2 h 25 min  |  3) 3 h 35 min  |  4) 2 h 35 min
+
+### ma-9-0040  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 400, 435, ?, 505, 540
+   1) 460  |  2) 470  |  3) 480  |  4) 475
+EN: What is the missing number: 400, 435, ?, 505, 540?
+   (EN choices same as TH)
+
+### ma-9-0041  (หัวข้อ: fractions)
+TH: 7/10 + 2/10 = ?
+   1) 9/10  |  2) 10/10  |  3) 9/20  |  4) 8/10
+EN: 7/10 + 2/10 = ?
+   (EN choices same as TH)
+
+### ma-9-0042  (หัวข้อ: time)
+TH: เรียนว่ายน้ำเริ่ม 13:55 เลิก 15:20 เรียนนานเท่าไร
+   1) 1 ชม. 25 นาที  |  2) 1 ชม. 35 นาที  |  3) 2 ชม. 35 นาที  |  4) 2 ชม. 25 นาที
+EN: A swimming lesson starts at 13:55 and ends at 15:20. How long is the lesson?
+   1) 1 h 25 min  |  2) 1 h 35 min  |  3) 2 h 35 min  |  4) 2 h 25 min
+
+### ma-9-0043  (หัวข้อ: add)
+TH: 32,937 + 9,821 = ?
+   1) 42,658  |  2) 42,858  |  3) 42,758  |  4) 41,758
+EN: 32,937 + 9,821 = ?
+   (EN choices same as TH)
+
+### ma-9-0044  (หัวข้อ: rounding)
+TH: ค่าประมาณเป็นจำนวนเต็มพันของ 56,293 คือเท่าไร
+   1) 55,000  |  2) 56,000  |  3) 58,000  |  4) 57,000
+EN: Round 56,293 to the nearest thousand.
+   (EN choices same as TH)
+
+### ma-9-0045  (หัวข้อ: rounding)
+TH: ค่าประมาณเป็นจำนวนเต็มร้อยของ 3,252 คือเท่าไร
+   1) 3,400  |  2) 3,000  |  3) 3,300  |  4) 3,200
+EN: Round 3,252 to the nearest hundred.
+   (EN choices same as TH)
+
+### ma-9-0046  (หัวข้อ: time)
+TH: หนังเริ่มฉาย 16:25 จบ 18:20 ฉายนานเท่าไร
+   1) 2 ชม. 55 นาที  |  2) 1 ชม. 55 นาที  |  3) 2 ชม. 5 นาที  |  4) 1 ชม. 45 นาที
+EN: A film starts at 16:25 and ends at 18:20. How long is the film?
+   1) 2 h 55 min  |  2) 1 h 55 min  |  3) 2 h 5 min  |  4) 1 h 45 min
+
+### ma-9-0047  (หัวข้อ: divide)
+TH: เลขอะไรคูณกับ 7 แล้วได้ 707
+   1) 102  |  2) 101  |  3) 111  |  4) 100
+EN: What number times 7 makes 707?
+   (EN choices same as TH)
+
+### ma-9-0048  (หัวข้อ: area)
+TH: สี่เหลี่ยมผืนผ้ากว้าง 4 ม. ยาว 12 ม. มีพื้นที่กี่ตารางเมตร
+   1) 48  |  2) 32  |  3) 16  |  4) 52
+EN: A rectangle is 4 m wide and 12 m long. What is its area in square metres?
+   (EN choices same as TH)
+
+### ma-9-0049  (หัวข้อ: time)
+TH: 135 นาที เท่ากับกี่ชั่วโมง กี่นาที
+   1) 1 ชม. 35 นาที  |  2) 2 ชม. 15 นาที  |  3) 3 ชม. 15 นาที  |  4) 2 ชม. 25 นาที
+EN: How many hours and minutes is 135 minutes?
+   1) 1 h 35 min  |  2) 2 h 15 min  |  3) 3 h 15 min  |  4) 2 h 25 min
+
+### ma-9-0050  (หัวข้อ: rounding)
+TH: ค่าประมาณเป็นจำนวนเต็มร้อยของ 5,664 คือเท่าไร
+   1) 5,800  |  2) 5,600  |  3) 5,000  |  4) 5,700
+EN: Round 5,664 to the nearest hundred.
+   (EN choices same as TH)
+
+### ma-9-0051  (หัวข้อ: time)
+TH: 1 ชั่วโมง 45 นาที เท่ากับกี่นาที
+   1) 45  |  2) 145  |  3) 105  |  4) 165
+EN: How many minutes is 1 hour 45 minutes?
+   (EN choices same as TH)
+
+### ma-9-0052  (หัวข้อ: perimeter)
+TH: สนามกว้าง 23 ม. ยาว 51 ม. เดินรอบสนาม 1 รอบ ได้ระยะทางกี่เมตร
+   1) 97  |  2) 125  |  3) 74  |  4) 148
+EN: A field is 23 m wide and 51 m long. How far is 1 lap around the field, in metres?
+   (EN choices same as TH)
+
+### ma-9-0053  (หัวข้อ: angles)
+TH: มุมขนาด 145° เป็นมุมชนิดใด
+   1) มุมฉาก  |  2) มุมแหลม  |  3) มุมตรง  |  4) มุมป้าน
+EN: What kind of angle is 145°?
+   1) a right angle  |  2) an acute angle  |  3) a straight angle  |  4) an obtuse angle
+
+### ma-9-0054  (หัวข้อ: fractions)
+TH: เศษส่วนใดมากที่สุด
+   1) 7/8  |  2) 3/8  |  3) 4/8  |  4) 6/8
+EN: Which fraction is the largest?
+   (EN choices same as TH)
+
+### ma-9-0055  (หัวข้อ: area)
+TH: สี่เหลี่ยมจัตุรัสยาวด้านละ 13 ซม. มีพื้นที่กี่ตารางเซนติเมตร
+   1) 52  |  2) 169  |  3) 26  |  4) 182
+EN: A square has sides of 13 cm. What is its area in square centimetres?
+   (EN choices same as TH)
+
+### ma-9-0056  (หัวข้อ: measure)
+TH: 7,905 เมตร เท่ากับเท่าไร
+   1) 7 กม. 905 ม.  |  2) 8 กม. 905 ม.  |  3) 70 กม. 905 ม.  |  4) 7 กม. 90 ม.
+EN: What is 7,905 m the same as?
+   1) 7 km 905 m  |  2) 8 km 905 m  |  3) 70 km 905 m  |  4) 7 km 90 m
+
+### ma-9-0057  (หัวข้อ: rounding)
+TH: ค่าประมาณเป็นจำนวนเต็มสิบของ 4,472 คือเท่าไร
+   1) 4,400  |  2) 4,470  |  3) 4,490  |  4) 4,480
+EN: Round 4,472 to the nearest ten.
+   (EN choices same as TH)
+
+### ma-9-0058  (หัวข้อ: word-problem)
+TH: ออมเงินวันละ 12 บาท เป็นเวลา 14 วัน แล้วซื้อหนังสือ 50 บาท เหลือเงินกี่บาท
+   1) 168  |  2) 128  |  3) 118  |  4) 218
+EN: You save 12 baht a day for 14 days, then buy a book for 50 baht. How much money is left?
+   (EN choices same as TH)
+
+### ma-9-0059  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 4, 8, ?, 32, 64
+   1) 16  |  2) 10  |  3) 18  |  4) 12
+EN: What is the missing number: 4, 8, ?, 32, 64?
+   (EN choices same as TH)
+
+### ma-9-0060  (หัวข้อ: measure)
+TH: 3 กิโลกรัม 650 กรัม เท่ากับกี่กรัม
+   1) 653  |  2) 4,650  |  3) 3,650  |  4) 950
+EN: How many g are in 3 kg 650 g?
+   (EN choices same as TH)
+
+### ma-9-0061  (หัวข้อ: divide)
+TH: 41 ÷ 4 ได้เท่าไร เศษเท่าไร
+   1) 11 เศษ 1  |  2) 10 เศษ 1  |  3) 10 เศษ 2  |  4) 9 เศษ 1
+EN: What is 41 ÷ 4, with its remainder?
+   1) 11 remainder 1  |  2) 10 remainder 1  |  3) 10 remainder 2  |  4) 9 remainder 1
+
+### ma-9-0062  (หัวข้อ: divide)
+TH: 496 ÷ 4 = ?
+   1) 124  |  2) 123  |  3) 134  |  4) 125
+EN: 496 ÷ 4 = ?
+   (EN choices same as TH)
+
+### ma-9-0063  (หัวข้อ: time)
+TH: 1 ชั่วโมง 50 นาที เท่ากับกี่นาที
+   1) 150  |  2) 170  |  3) 50  |  4) 110
+EN: How many minutes is 1 hour 50 minutes?
+   (EN choices same as TH)
+
+### ma-9-0064  (หัวข้อ: fractions)
+TH: 4/9 ของ 81 คือเท่าไร
+   1) 27  |  2) 45  |  3) 36  |  4) 9
+EN: What is 4/9 of 81?
+   (EN choices same as TH)
+
+### ma-9-0065  (หัวข้อ: rounding)
+TH: ค่าประมาณเป็นจำนวนเต็มพันของ 58,037 คือเท่าไร
+   1) 59,000  |  2) 57,000  |  3) 58,000  |  4) 60,000
+EN: Round 58,037 to the nearest thousand.
+   (EN choices same as TH)
+
+### ma-9-0066  (หัวข้อ: divide)
+TH: 996 ÷ 4 = ?
+   1) 259  |  2) 249  |  3) 250  |  4) 248
+EN: 996 ÷ 4 = ?
+   (EN choices same as TH)
+
+### ma-9-0067  (หัวข้อ: fractions)
+TH: 3/12 + 2/12 = ?
+   1) 4/12  |  2) 5/12  |  3) 6/12  |  4) 5/24
+EN: 3/12 + 2/12 = ?
+   (EN choices same as TH)
+
+### ma-9-0068  (หัวข้อ: fractions)
+TH: 8/9 − 1/9 = ?
+   1) 9/9  |  2) 7/9  |  3) 6/9  |  4) 8/9
+EN: 8/9 − 1/9 = ?
+   (EN choices same as TH)
+
+### ma-9-0069  (หัวข้อ: subtract)
+TH: 8,959 − 5,863 = ?
+   1) 3,096  |  2) 3,086  |  3) 3,196  |  4) 3,106
+EN: 8,959 − 5,863 = ?
+   (EN choices same as TH)
+
+### ma-9-0070  (หัวข้อ: word-problem)
+TH: มีดินสอ 5 กล่อง กล่องละ 48 แท่ง ขายไป 90 แท่ง เหลือกี่แท่ง
+   1) 43  |  2) 330  |  3) 240  |  4) 150
+EN: There are 5 boxes with 48 pencils in each. 90 pencils are sold. How many are left?
+   (EN choices same as TH)
+
+### ma-9-0071  (หัวข้อ: decimals)
+TH: 7.5 + 3.7 = ?
+   1) 10.12  |  2) 12.2  |  3) 11.2  |  4) 10.2
+EN: 7.5 + 3.7 = ?
+   (EN choices same as TH)
+
+### ma-9-0072  (หัวข้อ: word-problem)
+TH: นีน่ามีลูกแก้ว 60 ลูก ภูมิมีเป็น 6 เท่าของนีน่า สองคนมีรวมกันกี่ลูก
+   1) 300  |  2) 66  |  3) 420  |  4) 360
+EN: Nina has 60 marbles. Poom has 6 times as many. How many do they have altogether?
+   (EN choices same as TH)
+
+### ma-9-0073  (หัวข้อ: measure)
+TH: 258 มิลลิเมตร เท่ากับเท่าไร
+   1) 250 ซม. 8 มม.  |  2) 26 ซม. 8 มม.  |  3) 25 ซม. 80 มม.  |  4) 25 ซม. 8 มม.
+EN: What is 258 mm the same as?
+   1) 250 cm 8 mm  |  2) 26 cm 8 mm  |  3) 25 cm 80 mm  |  4) 25 cm 8 mm
+
+### ma-9-0074  (หัวข้อ: fractions)
+TH: 4/5 − 1/5 = ?
+   1) 2/5  |  2) 4/5  |  3) 5/5  |  4) 3/5
+EN: 4/5 − 1/5 = ?
+   (EN choices same as TH)
+
+### ma-9-0075  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 100, 175, 250, ?, 400
+   1) 325  |  2) 335  |  3) 315  |  4) 330
+EN: What is the missing number: 100, 175, 250, ?, 400?
+   (EN choices same as TH)
+
+### ma-9-0076  (หัวข้อ: fractions)
+TH: เศษส่วนใดมีค่าเท่ากับ 3/5
+   1) 9/16  |  2) 6/8  |  3) 9/15  |  4) 10/15
+EN: Which fraction is equal to 3/5?
+   (EN choices same as TH)
+
+### ma-9-0077  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 725, 680, 635, ?, 545
+   1) 580  |  2) 595  |  3) 600  |  4) 590
+EN: What is the missing number: 725, 680, 635, ?, 545?
+   (EN choices same as TH)
+
+### ma-9-0078  (หัวข้อ: word-problem)
+TH: ซื้อไม้บรรทัด 4 อัน อันละ 45 บาท จ่ายธนบัตร 500 บาท ได้เงินทอนกี่บาท
+   1) 180  |  2) 330  |  3) 455  |  4) 320
+EN: You buy 4 rulers at 45 baht each and pay with a 500-baht note. How much change do you get?
+   (EN choices same as TH)
+
+### ma-9-0079  (หัวข้อ: word-problem)
+TH: ออมเงินวันละ 20 บาท เป็นเวลา 30 วัน แล้วซื้อหนังสือ 200 บาท เหลือเงินกี่บาท
+   1) 600  |  2) 410  |  3) 800  |  4) 400
+EN: You save 20 baht a day for 30 days, then buy a book for 200 baht. How much money is left?
+   (EN choices same as TH)
+
+### ma-9-0080  (หัวข้อ: measure)
+TH: 5 ลิตร 905 มิลลิลิตร เท่ากับกี่มิลลิลิตร
+   1) 1,405  |  2) 910  |  3) 5,905  |  4) 6,905
+EN: How many ml are in 5 litres 905 ml?
+   (EN choices same as TH)
+
+### ma-9-0081  (หัวข้อ: multiply)
+TH: 86 × 5 = ?
+   1) 435  |  2) 425  |  3) 440  |  4) 430
+EN: 86 × 5 = ?
+   (EN choices same as TH)
+
+### ma-9-0082  (หัวข้อ: place-value)
+TH: เลขโดด 9 ใน 185,972 มีค่าเท่าไร
+   1) 900  |  2) 90,000  |  3) 9  |  4) 90
+EN: What is the value of the digit 9 in 185,972?
+   (EN choices same as TH)
+
+### ma-9-0083  (หัวข้อ: multiply)
+TH: 49 × 28 = ?
+   1) 988  |  2) 1,323  |  3) 1,372  |  4) 1,421
+EN: 49 × 28 = ?
+   (EN choices same as TH)
+
+### ma-9-0084  (หัวข้อ: place-value)
+TH: เลขโดด 4 ใน 39,841 มีค่าเท่าไร
+   1) 4,000  |  2) 400  |  3) 40  |  4) 4
+EN: What is the value of the digit 4 in 39,841?
+   (EN choices same as TH)
+
+### ma-9-0085  (หัวข้อ: decimals)
+TH: ทศนิยมใดมากที่สุด
+   1) 0.26  |  2) 0.62  |  3) 0.2  |  4) 0.3
+EN: Which decimal is the largest?
+   (EN choices same as TH)
+
+### ma-9-0086  (หัวข้อ: word-problem)
+TH: นีน่ามีลูกปัด 47 เม็ด มะลิมีเป็น 5 เท่าของนีน่า สองคนมีรวมกันกี่เม็ด
+   1) 188  |  2) 52  |  3) 282  |  4) 235
+EN: Nina has 47 beads. Mali has 5 times as many. How many do they have altogether?
+   (EN choices same as TH)
+
+### ma-9-0087  (หัวข้อ: measure)
+TH: 104 มิลลิเมตร เท่ากับเท่าไร
+   1) 10 ซม. 40 มม.  |  2) 11 ซม. 4 มม.  |  3) 100 ซม. 4 มม.  |  4) 10 ซม. 4 มม.
+EN: What is 104 mm the same as?
+   1) 10 cm 40 mm  |  2) 11 cm 4 mm  |  3) 100 cm 4 mm  |  4) 10 cm 4 mm
+
+### ma-9-0088  (หัวข้อ: divide)
+TH: 32 ÷ 3 ได้เท่าไร เศษเท่าไร
+   1) 10 เศษ 2  |  2) 11 เศษ 2  |  3) 9 เศษ 2  |  4) 10 เศษ 1
+EN: What is 32 ÷ 3, with its remainder?
+   1) 10 remainder 2  |  2) 11 remainder 2  |  3) 9 remainder 2  |  4) 10 remainder 1
+
+### ma-9-0089  (หัวข้อ: fractions)
+TH: เศษส่วนใดมีค่าเท่ากับ 1/2
+   1) 2/4  |  2) 1/4  |  3) 2/5  |  4) 3/4
+EN: Which fraction is equal to 1/2?
+   (EN choices same as TH)
+
+### ma-9-0090  (หัวข้อ: measure)
+TH: 23 เซนติเมตร 2 มิลลิเมตร เท่ากับกี่มิลลิเมตร
+   1) 2,302  |  2) 25  |  3) 232  |  4) 242
+EN: How many mm are in 23 cm 2 mm?
+   (EN choices same as TH)
+
+### ma-9-0091  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 200, 235, 270, ?, 340
+   1) 310  |  2) 315  |  3) 305  |  4) 295
+EN: What is the missing number: 200, 235, 270, ?, 340?
+   (EN choices same as TH)
+
+### ma-9-0092  (หัวข้อ: fractions)
+TH: เศษส่วนใดน้อยที่สุด
+   1) 2/4  |  2) 2/7  |  3) 2/11  |  4) 2/12
+EN: Which fraction is the smallest?
+   (EN choices same as TH)
+
+### ma-9-0093  (หัวข้อ: area)
+TH: สี่เหลี่ยมผืนผ้ากว้าง 6 ม. ยาว 8 ม. มีพื้นที่กี่ตารางเมตร
+   1) 54  |  2) 14  |  3) 48  |  4) 28
+EN: A rectangle is 6 m wide and 8 m long. What is its area in square metres?
+   (EN choices same as TH)
+
+### ma-9-0094  (หัวข้อ: fractions)
+TH: 7/10 ของ 30 คือเท่าไร
+   1) 21  |  2) 3  |  3) 9  |  4) 24
+EN: What is 7/10 of 30?
+   (EN choices same as TH)
+
+### ma-9-0095  (หัวข้อ: decimals)
+TH: 9/100 เขียนเป็นทศนิยมได้อย่างไร
+   1) 0.9  |  2) 0.09  |  3) 0.009  |  4) 9.0
+EN: How do you write 9/100 as a decimal?
+   (EN choices same as TH)
+
+### ma-9-0096  (หัวข้อ: time)
+TH: 110 นาที เท่ากับกี่ชั่วโมง กี่นาที
+   1) 1 ชม. 10 นาที  |  2) 2 ชม. 50 นาที  |  3) 1 ชม. 40 นาที  |  4) 1 ชม. 50 นาที
+EN: How many hours and minutes is 110 minutes?
+   1) 1 h 10 min  |  2) 2 h 50 min  |  3) 1 h 40 min  |  4) 1 h 50 min
+
+### ma-9-0097  (หัวข้อ: rounding)
+TH: ค่าประมาณเป็นจำนวนเต็มสิบของ 1,501 คือเท่าไร
+   1) 1,490  |  2) 1,510  |  3) 1,520  |  4) 1,500
+EN: Round 1,501 to the nearest ten.
+   (EN choices same as TH)
+
+### ma-9-0098  (หัวข้อ: measure)
+TH: 6 เซนติเมตร 7 มิลลิเมตร เท่ากับกี่มิลลิเมตร
+   1) 67  |  2) 77  |  3) 607  |  4) 13
+EN: How many mm are in 6 cm 7 mm?
+   (EN choices same as TH)
+
+### ma-9-0099  (หัวข้อ: add)
+TH: 23,458 + 3,649 = ?
+   1) 26,107  |  2) 27,107  |  3) 27,207  |  4) 27,007
+EN: 23,458 + 3,649 = ?
+   (EN choices same as TH)
+
+### ma-9-0100  (หัวข้อ: subtract)
+TH: 38,016 − 9,163 = ?
+   1) 28,953  |  2) 28,843  |  3) 28,853  |  4) 28,863
+EN: 38,016 − 9,163 = ?
+   (EN choices same as TH)
+
+### ma-9-0101  (หัวข้อ: area)
+TH: สี่เหลี่ยมจัตุรัสยาวด้านละ 14 ม. มีพื้นที่กี่ตารางเมตร
+   1) 56  |  2) 210  |  3) 196  |  4) 28
+EN: A square has sides of 14 m. What is its area in square metres?
+   (EN choices same as TH)
+
+### ma-9-0102  (หัวข้อ: word-problem)
+TH: โรงหนังมีที่นั่ง 8 แถว แถวละ 12 ที่ มีคนนั่งแล้ว 48 ที่ เหลือที่ว่างกี่ที่
+   1) 48  |  2) 96  |  3) 58  |  4) 36
+EN: A cinema has 8 rows of 12 seats. 48 seats are taken. How many seats are empty?
+   (EN choices same as TH)
+
+### ma-9-0103  (หัวข้อ: area)
+TH: สี่เหลี่ยมผืนผ้ามีพื้นที่ 91 ตารางเซนติเมตร กว้าง 7 ซม. ยาวกี่ ซม.
+   1) 12  |  2) 84  |  3) 13  |  4) 14
+EN: A rectangle has an area of 91 square centimetres and is 7 cm wide. How long is it in cm?
+   (EN choices same as TH)
+
+### ma-9-0104  (หัวข้อ: angles)
+TH: มุมขนาด 180° เป็นมุมชนิดใด
+   1) มุมตรง  |  2) มุมป้าน  |  3) มุมแหลม  |  4) มุมฉาก
+EN: What kind of angle is 180°?
+   1) a straight angle  |  2) an obtuse angle  |  3) an acute angle  |  4) a right angle
+
+### ma-9-0105  (หัวข้อ: place-value)
+TH: 70,000 + 2,000 + 900 + 6 เท่ากับจำนวนใด
+   1) 72,960  |  2) 7,296  |  3) 72,906  |  4) 72,096
+EN: Which number is 70,000 + 2,000 + 900 + 6?
+   (EN choices same as TH)
+
+### ma-9-0106  (หัวข้อ: decimals)
+TH: 5.3 + 5.8 = ?
+   1) 11.1  |  2) 10.11  |  3) 10.1  |  4) 12.1
+EN: 5.3 + 5.8 = ?
+   (EN choices same as TH)
+
+### ma-9-0107  (หัวข้อ: multiply)
+TH: 78 × 5 = ?
+   1) 400  |  2) 390  |  3) 395  |  4) 385
+EN: 78 × 5 = ?
+   (EN choices same as TH)
+
+### ma-9-0108  (หัวข้อ: subtract)
+TH: 51,537 − 4,675 = ?
+   1) 46,872  |  2) 46,862  |  3) 46,852  |  4) 46,962
+EN: 51,537 − 4,675 = ?
+   (EN choices same as TH)
+
+### ma-9-0109  (หัวข้อ: place-value)
+TH: จำนวนใดมากที่สุด
+   1) 16,374  |  2) 61,374  |  3) 16,437  |  4) 16,347
+EN: Which number is the largest?
+   (EN choices same as TH)
+
+### ma-9-0110  (หัวข้อ: divide)
+TH: 872 ÷ 8 = ?
+   1) 108  |  2) 119  |  3) 110  |  4) 109
+EN: 872 ÷ 8 = ?
+   (EN choices same as TH)
+
+### ma-9-0111  (หัวข้อ: add)
+TH: 4,410 + 8,811 = ?
+   1) 12,221  |  2) 13,321  |  3) 13,121  |  4) 13,221
+EN: 4,410 + 8,811 = ?
+   (EN choices same as TH)
+
+### ma-9-0112  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 800, 765, 730, ?, 660
+   1) 685  |  2) 700  |  3) 695  |  4) 705
+EN: What is the missing number: 800, 765, 730, ?, 660?
+   (EN choices same as TH)
+
+### ma-9-0113  (หัวข้อ: divide)
+TH: 520 ÷ 8 = ?
+   1) 65  |  2) 66  |  3) 64  |  4) 75
+EN: 520 ÷ 8 = ?
+   (EN choices same as TH)
+
+### ma-9-0114  (หัวข้อ: area)
+TH: สี่เหลี่ยมผืนผ้ากว้าง 5 ซม. ยาว 16 ซม. มีพื้นที่กี่ตารางเซนติเมตร
+   1) 85  |  2) 42  |  3) 80  |  4) 21
+EN: A rectangle is 5 cm wide and 16 cm long. What is its area in square centimetres?
+   (EN choices same as TH)
+
+### ma-9-0115  (หัวข้อ: place-value)
+TH: 90,000 + 4,000 + 800 + 3 เท่ากับจำนวนใด
+   1) 94,083  |  2) 94,830  |  3) 94,803  |  4) 9,483
+EN: Which number is 90,000 + 4,000 + 800 + 3?
+   (EN choices same as TH)
+
+### ma-9-0116  (หัวข้อ: place-value)
+TH: เลขโดด 4 ใน 43,675 มีค่าเท่าไร
+   1) 4,000  |  2) 40  |  3) 40,000  |  4) 400
+EN: What is the value of the digit 4 in 43,675?
+   (EN choices same as TH)
+
+### ma-9-0117  (หัวข้อ: perimeter)
+TH: สนามกว้าง 21 ม. ยาว 37 ม. เดินรอบสนาม 1 รอบ ได้ระยะทางกี่เมตร
+   1) 95  |  2) 58  |  3) 116  |  4) 79
+EN: A field is 21 m wide and 37 m long. How far is 1 lap around the field, in metres?
+   (EN choices same as TH)
+
+### ma-9-0118  (หัวข้อ: multiply)
+TH: 98 × 4 = ?
+   1) 388  |  2) 402  |  3) 396  |  4) 392
+EN: 98 × 4 = ?
+   (EN choices same as TH)
+
+### ma-9-0119  (หัวข้อ: multiply)
+TH: 73 × 7 = ?
+   1) 504  |  2) 521  |  3) 518  |  4) 511
+EN: 73 × 7 = ?
+   (EN choices same as TH)
+
+### ma-9-0120  (หัวข้อ: decimals)
+TH: ทศนิยมใดมากที่สุด
+   1) 0.41  |  2) 0.1  |  3) 0.01  |  4) 0.2
+EN: Which decimal is the largest?
+   (EN choices same as TH)
+
+### ma-9-0121  (หัวข้อ: rounding)
+TH: ค่าประมาณเป็นจำนวนเต็มร้อยของ 1,541 คือเท่าไร
+   1) 1,000  |  2) 1,500  |  3) 1,700  |  4) 1,600
+EN: Round 1,541 to the nearest hundred.
+   (EN choices same as TH)
+
+### ma-9-0122  (หัวข้อ: multiply)
+TH: 24 × 25 = ?
+   1) 485  |  2) 624  |  3) 576  |  4) 600
+EN: 24 × 25 = ?
+   (EN choices same as TH)
+
+### ma-9-0123  (หัวข้อ: decimals)
+TH: ทศนิยมใดน้อยที่สุด
+   1) 0.84  |  2) 0.98  |  3) 0.9  |  4) 0.08
+EN: Which decimal is the smallest?
+   (EN choices same as TH)
+
+### ma-9-0124  (หัวข้อ: place-value)
+TH: "เจ็ดหมื่นสี่พันเก้าสิบห้า" เขียนเป็นตัวเลขได้อย่างไร
+   1) 74,095  |  2) 70,495  |  3) 74,905  |  4) 7,495
+EN: How do you write "seventy-four thousand and ninety-five" in digits?
+   (EN choices same as TH)
+
+### ma-9-0125  (หัวข้อ: place-value)
+TH: เลขโดด 3 ใน 239,164 มีค่าเท่าไร
+   1) 300,000  |  2) 30,000  |  3) 3  |  4) 30
+EN: What is the value of the digit 3 in 239,164?
+   (EN choices same as TH)
+
+### ma-9-0126  (หัวข้อ: place-value)
+TH: "หกหมื่นเจ็ดพันเก้าสิบแปด" เขียนเป็นตัวเลขได้อย่างไร
+   1) 67,908  |  2) 60,798  |  3) 67,098  |  4) 6,798
+EN: How do you write "sixty-seven thousand and ninety-eight" in digits?
+   (EN choices same as TH)
+
+### ma-9-0127  (หัวข้อ: subtract)
+TH: 6,781 − 1,165 = ?
+   1) 5,626  |  2) 5,716  |  3) 5,616  |  4) 5,606
+EN: 6,781 − 1,165 = ?
+   (EN choices same as TH)
+
+### ma-9-0128  (หัวข้อ: add)
+TH: 5,739 + 3,787 = ?
+   1) 9,426  |  2) 8,526  |  3) 9,626  |  4) 9,526
+EN: 5,739 + 3,787 = ?
+   (EN choices same as TH)
+
+### ma-9-0129  (หัวข้อ: place-value)
+TH: 40,000 + 8,000 + 600 + 2 เท่ากับจำนวนใด
+   1) 48,620  |  2) 4,862  |  3) 48,062  |  4) 48,602
+EN: Which number is 40,000 + 8,000 + 600 + 2?
+   (EN choices same as TH)
+
+### ma-9-0130  (หัวข้อ: multiply)
+TH: 186 × 5 = ?
+   1) 930  |  2) 935  |  3) 940  |  4) 925
+EN: 186 × 5 = ?
+   (EN choices same as TH)
+
+### ma-9-0131  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 6, 12, ?, 48, 96
+   1) 18  |  2) 14  |  3) 26  |  4) 24
+EN: What is the missing number: 6, 12, ?, 48, 96?
+   (EN choices same as TH)
+
+### ma-9-0132  (หัวข้อ: rounding)
+TH: ค่าประมาณเป็นจำนวนเต็มสิบของ 2,275 คือเท่าไร
+   1) 2,270  |  2) 2,290  |  3) 2,280  |  4) 2,200
+EN: Round 2,275 to the nearest ten.
+   (EN choices same as TH)
+
+### ma-9-0133  (หัวข้อ: decimals)
+TH: 25/100 เขียนเป็นทศนิยมได้อย่างไร
+   1) 0.25  |  2) 25.0  |  3) 0.025  |  4) 25.100
+EN: How do you write 25/100 as a decimal?
+   (EN choices same as TH)
+
+### ma-9-0134  (หัวข้อ: add)
+TH: 44,980 + 7,801 = ?
+   1) 51,781  |  2) 52,881  |  3) 52,681  |  4) 52,781
+EN: 44,980 + 7,801 = ?
+   (EN choices same as TH)
+
+### ma-9-0135  (หัวข้อ: add)
+TH: 8,964 + 3,628 = ?
+   1) 12,492  |  2) 12,592  |  3) 11,592  |  4) 12,692
+EN: 8,964 + 3,628 = ?
+   (EN choices same as TH)
+
+### ma-9-0136  (หัวข้อ: fractions)
+TH: เศษส่วนใดมีค่าเท่ากับ 1/5
+   1) 3/7  |  2) 2/11  |  3) 2/10  |  4) 3/10
+EN: Which fraction is equal to 1/5?
+   (EN choices same as TH)
+
+### ma-9-0137  (หัวข้อ: multiply)
+TH: 21 × 16 = ?
+   1) 315  |  2) 216  |  3) 357  |  4) 336
+EN: 21 × 16 = ?
+   (EN choices same as TH)
+
+### ma-9-0138  (หัวข้อ: time)
+TH: 205 นาที เท่ากับกี่ชั่วโมง กี่นาที
+   1) 2 ชม. 5 นาที  |  2) 3 ชม. 25 นาที  |  3) 4 ชม. 25 นาที  |  4) 3 ชม. 35 นาที
+EN: How many hours and minutes is 205 minutes?
+   1) 2 h 5 min  |  2) 3 h 25 min  |  3) 4 h 25 min  |  4) 3 h 35 min
+
+### ma-9-0139  (หัวข้อ: fractions)
+TH: 4/6 + 1/6 = ?
+   1) 5/6  |  2) 6/6  |  3) 5/12  |  4) 4/6
+EN: 4/6 + 1/6 = ?
+   (EN choices same as TH)
+
+### ma-9-0140  (หัวข้อ: subtract)
+TH: 29,344 − 4,726 = ?
+   1) 24,618  |  2) 24,628  |  3) 24,718  |  4) 24,608
+EN: 29,344 − 4,726 = ?
+   (EN choices same as TH)
+
+### ma-9-0141  (หัวข้อ: multiply)
+TH: 353 × 8 = ?
+   1) 2,824  |  2) 2,832  |  3) 2,816  |  4) 2,834
+EN: 353 × 8 = ?
+   (EN choices same as TH)
+
+### ma-9-0142  (หัวข้อ: divide)
+TH: 37 ÷ 5 ได้เท่าไร เศษเท่าไร
+   1) 8 เศษ 2  |  2) 7 เศษ 3  |  3) 7 เศษ 2  |  4) 6 เศษ 2
+EN: What is 37 ÷ 5, with its remainder?
+   1) 8 remainder 2  |  2) 7 remainder 3  |  3) 7 remainder 2  |  4) 6 remainder 2
+
+### ma-9-0143  (หัวข้อ: multiply)
+TH: 19 × 27 = ?
+   1) 494  |  2) 387  |  3) 532  |  4) 513
+EN: 19 × 27 = ?
+   (EN choices same as TH)
+
+### ma-9-0144  (หัวข้อ: multiply)
+TH: 325 × 6 = ?
+   1) 1,960  |  2) 1,944  |  3) 1,950  |  4) 1,956
+EN: 325 × 6 = ?
+   (EN choices same as TH)
+
+### ma-9-0145  (หัวข้อ: angles)
+TH: มุมขนาด 90° เป็นมุมชนิดใด
+   1) มุมตรง  |  2) มุมแหลม  |  3) มุมป้าน  |  4) มุมฉาก
+EN: What kind of angle is 90°?
+   1) a straight angle  |  2) an acute angle  |  3) an obtuse angle  |  4) a right angle
+
+### ma-9-0146  (หัวข้อ: decimals)
+TH: 6/10 เขียนเป็นทศนิยมได้อย่างไร
+   1) 6.10  |  2) 6.0  |  3) 0.6  |  4) 1.6
+EN: How do you write 6/10 as a decimal?
+   (EN choices same as TH)
+
+### ma-9-0147  (หัวข้อ: perimeter)
+TH: สี่เหลี่ยมจัตุรัสมีเส้นรอบรูป 44 ม. แต่ละด้านยาวกี่ ม.
+   1) 11  |  2) 10  |  3) 22  |  4) 12
+EN: A square has a perimeter of 44 m. How long is each side in m?
+   (EN choices same as TH)
+
+### ma-9-0148  (หัวข้อ: place-value)
+TH: จำนวนใดมากที่สุด
+   1) 95,316  |  2) 95,631  |  3) 95,163  |  4) 59,361
+EN: Which number is the largest?
+   (EN choices same as TH)
+
+### ma-9-0149  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 5, 10, 20, ?, 80
+   1) 22  |  2) 40  |  3) 30  |  4) 42
+EN: What is the missing number: 5, 10, 20, ?, 80?
+   (EN choices same as TH)
+
+### ma-9-0150  (หัวข้อ: time)
+TH: 2 ชั่วโมง 55 นาที เท่ากับกี่นาที
+   1) 115  |  2) 235  |  3) 255  |  4) 175
+EN: How many minutes is 2 hours 55 minutes?
+   (EN choices same as TH)
+
+### ma-9-0151  (หัวข้อ: fractions)
+TH: 6/11 − 2/11 = ?
+   1) 12/11  |  2) 5/11  |  3) 3/11  |  4) 4/11
+EN: 6/11 − 2/11 = ?
+   (EN choices same as TH)
+
+### ma-9-0152  (หัวข้อ: divide)
+TH: 35 ÷ 3 ได้เท่าไร เศษเท่าไร
+   1) 11 เศษ 1  |  2) 11 เศษ 2  |  3) 10 เศษ 2  |  4) 12 เศษ 2
+EN: What is 35 ÷ 3, with its remainder?
+   1) 11 remainder 1  |  2) 11 remainder 2  |  3) 10 remainder 2  |  4) 12 remainder 2
+
+### ma-9-0153  (หัวข้อ: fractions)
+TH: เศษส่วนใดมากที่สุด
+   1) 3/12  |  2) 3/11  |  3) 3/6  |  4) 3/9
+EN: Which fraction is the largest?
+   (EN choices same as TH)
+
+### ma-9-0154  (หัวข้อ: subtract)
+TH: 36,481 − 5,737 = ?
+   1) 30,844  |  2) 30,734  |  3) 30,744  |  4) 30,754
+EN: 36,481 − 5,737 = ?
+   (EN choices same as TH)
+
+### ma-9-0155  (หัวข้อ: multiply)
+TH: 31 × 18 = ?
+   1) 318  |  2) 527  |  3) 589  |  4) 558
+EN: 31 × 18 = ?
+   (EN choices same as TH)
+
+### ma-9-0156  (หัวข้อ: word-problem)
+TH: มีส้ม 4 ลัง ลังละ 24 ผล ขายไป 90 ผล เหลือกี่ผล
+   1) 6  |  2) 186  |  3) 20  |  4) 96
+EN: There are 4 crates with 24 oranges in each. 90 oranges are sold. How many are left?
+   (EN choices same as TH)
+
+### ma-9-0157  (หัวข้อ: multiply)
+TH: 472 × 5 = ?
+   1) 2,365  |  2) 2,370  |  3) 2,355  |  4) 2,360
+EN: 472 × 5 = ?
+   (EN choices same as TH)
+
+### ma-9-0158  (หัวข้อ: angles)
+TH: มุมขนาด 70° เป็นมุมชนิดใด
+   1) มุมแหลม  |  2) มุมตรง  |  3) มุมป้าน  |  4) มุมฉาก
+EN: What kind of angle is 70°?
+   1) an acute angle  |  2) a straight angle  |  3) an obtuse angle  |  4) a right angle
+
+### ma-9-0159  (หัวข้อ: time)
+TH: หนังเริ่มฉาย 11:55 จบ 14:40 ฉายนานเท่าไร
+   1) 2 ชม. 55 นาที  |  2) 3 ชม. 15 นาที  |  3) 3 ชม. 45 นาที  |  4) 2 ชม. 45 นาที
+EN: A film starts at 11:55 and ends at 14:40. How long is the film?
+   1) 2 h 55 min  |  2) 3 h 15 min  |  3) 3 h 45 min  |  4) 2 h 45 min
+
+### ma-9-0160  (หัวข้อ: place-value)
+TH: "สองหมื่นแปดร้อยเจ็ดสิบเก้า" เขียนเป็นตัวเลขได้อย่างไร
+   1) 2,879  |  2) 20,879  |  3) 21,879  |  4) 28,079
+EN: How do you write "twenty thousand, eight hundred and seventy-nine" in digits?
+   (EN choices same as TH)
+
+### ma-9-0161  (หัวข้อ: perimeter)
+TH: สี่เหลี่ยมจัตุรัสมีเส้นรอบรูป 36 ซม. แต่ละด้านยาวกี่ ซม.
+   1) 8  |  2) 9  |  3) 10  |  4) 18
+EN: A square has a perimeter of 36 cm. How long is each side in cm?
+   (EN choices same as TH)
+
+### ma-9-0162  (หัวข้อ: divide)
+TH: เลขอะไรคูณกับ 6 แล้วได้ 582
+   1) 97  |  2) 107  |  3) 96  |  4) 98
+EN: What number times 6 makes 582?
+   (EN choices same as TH)
+
+### ma-9-0163  (หัวข้อ: word-problem)
+TH: ซื้อขนมปัง 3 ก้อน ก้อนละ 45 บาท จ่ายธนบัตร 500 บาท ได้เงินทอนกี่บาท
+   1) 375  |  2) 365  |  3) 455  |  4) 135
+EN: You buy 3 loaves of bread at 45 baht each and pay with a 500-baht note. How much change do you get?
+   (EN choices same as TH)
+
+### ma-9-0164  (หัวข้อ: divide)
+TH: เลขอะไรคูณกับ 7 แล้วได้ 273
+   1) 38  |  2) 40  |  3) 49  |  4) 39
+EN: What number times 7 makes 273?
+   (EN choices same as TH)
+
+### ma-9-0165  (หัวข้อ: word-problem)
+TH: นีน่ามีลูกแก้ว 76 ลูก ลีอามี 108 ลูก รวมกันแล้วแบ่งใส่ถุง 8 ถุงเท่า ๆ กัน ได้ถุงละกี่ลูก
+   1) 24  |  2) 9  |  3) 184  |  4) 23
+EN: Nina has 76 marbles and Leah has 108. They share them all equally into 8 bags. How many go in each bag?
+   (EN choices same as TH)

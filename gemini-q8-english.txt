@@ -1,0 +1,962 @@
+# ชุดตรวจ: ภาษาอังกฤษ · เด็กอายุ 8 ปี (ป.2–ป.3) · 160 ข้อ · ไฟล์ q-english-8.json
+# ตัวเลือกนับ 1–4 · ไม่มีเฉลยในไฟล์นี้ (ให้แก้โจทย์เองก่อน)
+
+### en-0341  (หัวข้อ: spelling)
+TH: คำไหนสะกดถูก
+   1) rainbow  |  2) ranbow  |  3) rainebow  |  4) rainbo
+EN: Which spelling is correct?
+   (EN choices same as TH)
+
+### en-0342  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "short" (เตี้ย) คือคำไหน
+   1) push  |  2) tall  |  3) full  |  4) early
+EN: What is the opposite of "short"?
+   (EN choices same as TH)
+
+### en-0343  (หัวข้อ: plurals)
+TH: "child" มีหลายตัว/หลายอัน เขียนว่าอะไร
+   1) childys  |  2) childs  |  3) childes  |  4) children
+EN: What is the plural of "child"?
+   (EN choices same as TH)
+
+### en-0344  (หัวข้อ: grammar)
+TH: เติมคำให้ถูก: I ___ seven years old.
+   1) be  |  2) is  |  3) are  |  4) am
+EN: Choose the word: I ___ seven years old.
+   (EN choices same as TH)
+
+### en-0345  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่สี
+   1) black  |  2) green  |  3) purple  |  4) bike
+EN: Which word is NOT a colour?
+   (EN choices same as TH)
+
+### en-0346  (หัวข้อ: days-months)
+TH: เดือน"มกราคม" ภาษาอังกฤษคือคำไหน
+   1) April  |  2) March  |  3) January  |  4) February
+EN: Which month is "มกราคม"?
+   (EN choices same as TH)
+
+### en-0347  (หัวข้อ: spelling)
+TH: คำไหนสะกดถูก
+   1) school  |  2) shcool  |  3) skool  |  4) schol
+EN: Which spelling is correct?
+   (EN choices same as TH)
+
+### en-0348  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "short" (สั้น) คือคำไหน
+   1) fast  |  2) heavy  |  3) small  |  4) long
+EN: What is the opposite of "short"?
+   (EN choices same as TH)
+
+### en-0349  (หัวข้อ: plurals)
+TH: "mouse" มีหลายตัว/หลายอัน เขียนว่าอะไร
+   1) mice  |  2) mouseen  |  3) mouses  |  4) mousees
+EN: What is the plural of "mouse"?
+   (EN choices same as TH)
+
+### en-0350  (หัวข้อ: grammar)
+TH: เติมคำให้ถูก: This is ___ book.
+   1) many  |  2) an  |  3) two  |  4) a
+EN: Choose the word: This is ___ book.
+   (EN choices same as TH)
+
+### en-0351  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่ส่วนของร่างกาย
+   1) foot  |  2) cheese  |  3) ear  |  4) mouth
+EN: Which word is NOT a body part?
+   (EN choices same as TH)
+
+### en-0352  (หัวข้อ: days-months)
+TH: เดือนต่อจาก July คือเดือนอะไร
+   1) August  |  2) February  |  3) January  |  4) March
+EN: Which month comes after July?
+   (EN choices same as TH)
+
+### en-0353  (หัวข้อ: spelling)
+TH: คำไหนสะกดถูก
+   1) watter  |  2) water  |  3) woter  |  4) warter
+EN: Which spelling is correct?
+   (EN choices same as TH)
+
+### en-0354  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "dry" (แห้ง) คือคำไหน
+   1) early  |  2) wet  |  3) dirty  |  4) small
+EN: What is the opposite of "dry"?
+   (EN choices same as TH)
+
+### en-0355  (หัวข้อ: plurals)
+TH: "dog" มีหลายตัว/หลายอัน เขียนว่าอะไร
+   1) dogs  |  2) dogss  |  3) doges  |  4) dogys
+EN: What is the plural of "dog"?
+   (EN choices same as TH)
+
+### en-0356  (หัวข้อ: grammar)
+TH: เติมคำให้ถูก: Last night we ___ pizza.
+   1) eating  |  2) ate  |  3) eats  |  4) eat
+EN: Choose the word: Last night we ___ pizza.
+   (EN choices same as TH)
+
+### en-0357  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่สัตว์
+   1) horse  |  2) sheep  |  3) monkey  |  4) bread
+EN: Which word is NOT an animal?
+   (EN choices same as TH)
+
+### en-0358  (หัวข้อ: days-months)
+TH: เดือน"ธันวาคม" ภาษาอังกฤษคือคำไหน
+   1) March  |  2) December  |  3) February  |  4) January
+EN: Which month is "ธันวาคม"?
+   (EN choices same as TH)
+
+### en-0359  (หัวข้อ: spelling)
+TH: คำไหนสะกดถูก
+   1) sistre  |  2) siter  |  3) sistor  |  4) sister
+EN: Which spelling is correct?
+   (EN choices same as TH)
+
+### en-0360  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "right" (ขวา) คือคำไหน
+   1) full  |  2) rich  |  3) left  |  4) big
+EN: What is the opposite of "right"?
+   (EN choices same as TH)
+
+### en-0361  (หัวข้อ: plurals)
+TH: "butterfly" มีหลายตัว/หลายอัน เขียนว่าอะไร
+   1) butterflies  |  2) butterflyen  |  3) butterflys  |  4) butterflyies
+EN: What is the plural of "butterfly"?
+   (EN choices same as TH)
+
+### en-0362  (หัวข้อ: grammar)
+TH: เติมคำให้ถูก: The monsters ___ sleeping.
+   1) be  |  2) am  |  3) is  |  4) are
+EN: Choose the word: The monsters ___ sleeping.
+   (EN choices same as TH)
+
+### en-0363  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่สี
+   1) water  |  2) yellow  |  3) blue  |  4) brown
+EN: Which word is NOT a colour?
+   (EN choices same as TH)
+
+### en-0364  (หัวข้อ: days-months)
+TH: เดือน"กรกฎาคม" ภาษาอังกฤษคือคำไหน
+   1) March  |  2) January  |  3) July  |  4) February
+EN: Which month is "กรกฎาคม"?
+   (EN choices same as TH)
+
+### en-0365  (หัวข้อ: spelling)
+TH: คำไหนสะกดถูก
+   1) wendow  |  2) windo  |  3) windoe  |  4) window
+EN: Which spelling is correct?
+   (EN choices same as TH)
+
+### en-0366  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "pull" (ดึง) คือคำไหน
+   1) heavy  |  2) loud  |  3) push  |  4) far
+EN: What is the opposite of "pull"?
+   (EN choices same as TH)
+
+### en-0367  (หัวข้อ: plurals)
+TH: "fox" มีหลายตัว/หลายอัน เขียนว่าอะไร
+   1) foxs  |  2) foxes  |  3) foxies  |  4) foxess
+EN: What is the plural of "fox"?
+   (EN choices same as TH)
+
+### en-0368  (หัวข้อ: grammar)
+TH: เติมคำให้ถูก: We ___ at school now.
+   1) are  |  2) is  |  3) am  |  4) was
+EN: Choose the word: We ___ at school now.
+   (EN choices same as TH)
+
+### en-0369  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่อาหาร
+   1) water  |  2) horse  |  3) orange  |  4) cheese
+EN: Which word is NOT food?
+   (EN choices same as TH)
+
+### en-0370  (หัวข้อ: days-months)
+TH: เดือน"สิงหาคม" ภาษาอังกฤษคือคำไหน
+   1) January  |  2) August  |  3) March  |  4) February
+EN: Which month is "สิงหาคม"?
+   (EN choices same as TH)
+
+### en-0371  (หัวข้อ: spelling)
+TH: คำไหนสะกดถูก
+   1) brothr  |  2) brother  |  3) brather  |  4) bruther
+EN: Which spelling is correct?
+   (EN choices same as TH)
+
+### en-0372  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "slow" (ช้า) คือคำไหน
+   1) open  |  2) far  |  3) fast  |  4) new
+EN: What is the opposite of "slow"?
+   (EN choices same as TH)
+
+### en-0373  (หัวข้อ: plurals)
+TH: "leaf" มีหลายตัว/หลายอัน เขียนว่าอะไร
+   1) leafys  |  2) leafes  |  3) leafies  |  4) leaves
+EN: What is the plural of "leaf"?
+   (EN choices same as TH)
+
+### en-0374  (หัวข้อ: grammar)
+TH: เติมคำให้ถูก: I can ___ fast.
+   1) ran  |  2) running  |  3) runs  |  4) run
+EN: Choose the word: I can ___ fast.
+   (EN choices same as TH)
+
+### en-0375  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่ยานพาหนะ
+   1) plane  |  2) boat  |  3) bike  |  4) cheese
+EN: Which word is NOT a vehicle?
+   (EN choices same as TH)
+
+### en-0376  (หัวข้อ: days-months)
+TH: เดือนต่อจาก April คือเดือนอะไร
+   1) January  |  2) May  |  3) February  |  4) March
+EN: Which month comes after April?
+   (EN choices same as TH)
+
+### en-0377  (หัวข้อ: spelling)
+TH: คำไหนสะกดถูก
+   1) chickin  |  2) chicken  |  3) chikken  |  4) chiken
+EN: Which spelling is correct?
+   (EN choices same as TH)
+
+### en-0378  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "no" (ไม่) คือคำไหน
+   1) push  |  2) open  |  3) yes  |  4) small
+EN: What is the opposite of "no"?
+   (EN choices same as TH)
+
+### en-0379  (หัวข้อ: plurals)
+TH: "city" มีหลายตัว/หลายอัน เขียนว่าอะไร
+   1) cityen  |  2) cityies  |  3) citiess  |  4) cities
+EN: What is the plural of "city"?
+   (EN choices same as TH)
+
+### en-0380  (หัวข้อ: grammar)
+TH: เติมคำให้ถูก: The dog ___ happy.
+   1) is  |  2) am  |  3) be  |  4) are
+EN: Choose the word: The dog ___ happy.
+   (EN choices same as TH)
+
+### en-0381  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่อาหาร
+   1) apple  |  2) rice  |  3) plane  |  4) corn
+EN: Which word is NOT food?
+   (EN choices same as TH)
+
+### en-0382  (หัวข้อ: days-months)
+TH: เดือนต่อจาก October คือเดือนอะไร
+   1) February  |  2) March  |  3) November  |  4) January
+EN: Which month comes after October?
+   (EN choices same as TH)
+
+### en-0383  (หัวข้อ: spelling)
+TH: คำไหนสะกดถูก
+   1) orange  |  2) orenge  |  3) oringe  |  4) ornage
+EN: Which spelling is correct?
+   (EN choices same as TH)
+
+### en-0384  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "lose" (แพ้) คือคำไหน
+   1) win  |  2) old  |  3) early  |  4) rich
+EN: What is the opposite of "lose"?
+   (EN choices same as TH)
+
+### en-0385  (หัวข้อ: plurals)
+TH: "bus" มีหลายตัว/หลายอัน เขียนว่าอะไร
+   1) buss  |  2) buses  |  3) busess  |  4) busies
+EN: What is the plural of "bus"?
+   (EN choices same as TH)
+
+### en-0386  (หัวข้อ: grammar)
+TH: เติมคำให้ถูก: I ___ a cat.
+   1) having  |  2) haves  |  3) have  |  4) has
+EN: Choose the word: I ___ a cat.
+   (EN choices same as TH)
+
+### en-0387  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่อาหาร
+   1) purple  |  2) apple  |  3) grapes  |  4) cheese
+EN: Which word is NOT food?
+   (EN choices same as TH)
+
+### en-0388  (หัวข้อ: days-months)
+TH: เดือน"มีนาคม" ภาษาอังกฤษคือคำไหน
+   1) April  |  2) January  |  3) March  |  4) February
+EN: Which month is "มีนาคม"?
+   (EN choices same as TH)
+
+### en-0389  (หัวข้อ: spelling)
+TH: คำไหนสะกดถูก
+   1) little  |  2) littel  |  3) litle  |  4) lettle
+EN: Which spelling is correct?
+   (EN choices same as TH)
+
+### en-0390  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "down" (ลง) คือคำไหน
+   1) clean  |  2) long  |  3) wet  |  4) up
+EN: What is the opposite of "down"?
+   (EN choices same as TH)
+
+### en-0391  (หัวข้อ: plurals)
+TH: "goose" มีหลายตัว/หลายอัน เขียนว่าอะไร
+   1) gooses  |  2) gooseen  |  3) gooseies  |  4) geese
+EN: What is the plural of "goose"?
+   (EN choices same as TH)
+
+### en-0392  (หัวข้อ: grammar)
+TH: เติมคำให้ถูก: Yesterday I ___ to the park.
+   1) going  |  2) goes  |  3) went  |  4) go
+EN: Choose the word: Yesterday I ___ to the park.
+   (EN choices same as TH)
+
+### en-0393  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่สี
+   1) red  |  2) white  |  3) black  |  4) banana
+EN: Which word is NOT a colour?
+   (EN choices same as TH)
+
+### en-0394  (หัวข้อ: days-months)
+TH: เดือน"กุมภาพันธ์" ภาษาอังกฤษคือคำไหน
+   1) January  |  2) April  |  3) February  |  4) March
+EN: Which month is "กุมภาพันธ์"?
+   (EN choices same as TH)
+
+### en-0395  (หัวข้อ: spelling)
+TH: คำไหนสะกดถูก
+   1) mosnter  |  2) monster  |  3) monstar  |  4) monstor
+EN: Which spelling is correct?
+   (EN choices same as TH)
+
+### en-0396  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "bottom" (ล่าง) คือคำไหน
+   1) soft  |  2) top  |  3) big  |  4) dark
+EN: What is the opposite of "bottom"?
+   (EN choices same as TH)
+
+### en-0397  (หัวข้อ: plurals)
+TH: "key" มีหลายตัว/หลายอัน เขียนว่าอะไร
+   1) keyen  |  2) keyss  |  3) keies  |  4) keys
+EN: What is the plural of "key"?
+   (EN choices same as TH)
+
+### en-0398  (หัวข้อ: grammar)
+TH: เติมคำให้ถูก: She ___ a red bag.
+   1) having  |  2) haves  |  3) have  |  4) has
+EN: Choose the word: She ___ a red bag.
+   (EN choices same as TH)
+
+### en-0399  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่อาหาร
+   1) watermelon  |  2) orange  |  3) train  |  4) cake
+EN: Which word is NOT food?
+   (EN choices same as TH)
+
+### en-0400  (หัวข้อ: days-months)
+TH: เดือน"พฤศจิกายน" ภาษาอังกฤษคือคำไหน
+   1) March  |  2) February  |  3) November  |  4) January
+EN: Which month is "พฤศจิกายน"?
+   (EN choices same as TH)
+
+### en-0401  (หัวข้อ: spelling)
+TH: คำไหนสะกดถูก
+   1) pleaze  |  2) please  |  3) plese  |  4) pleese
+EN: Which spelling is correct?
+   (EN choices same as TH)
+
+### en-0402  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "quiet" (เงียบ) คือคำไหน
+   1) slow  |  2) near  |  3) loud  |  4) open
+EN: What is the opposite of "quiet"?
+   (EN choices same as TH)
+
+### en-0403  (หัวข้อ: plurals)
+TH: "sheep" มีหลายตัว/หลายอัน เขียนว่าอะไร
+   1) sheep  |  2) sheepen  |  3) sheepies  |  4) sheepes
+EN: What is the plural of "sheep"?
+   (EN choices same as TH)
+
+### en-0404  (หัวข้อ: grammar)
+TH: เติมคำให้ถูก: There ___ three apples.
+   1) is  |  2) be  |  3) are  |  4) am
+EN: Choose the word: There ___ three apples.
+   (EN choices same as TH)
+
+### en-0405  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่ยานพาหนะ
+   1) car  |  2) train  |  3) corn  |  4) bus
+EN: Which word is NOT a vehicle?
+   (EN choices same as TH)
+
+### en-0406  (หัวข้อ: days-months)
+TH: เดือนต่อจาก June คือเดือนอะไร
+   1) January  |  2) February  |  3) July  |  4) March
+EN: Which month comes after June?
+   (EN choices same as TH)
+
+### en-0407  (หัวข้อ: spelling)
+TH: คำไหนสะกดถูก
+   1) yellow  |  2) yellou  |  3) yelow  |  4) yelloe
+EN: Which spelling is correct?
+   (EN choices same as TH)
+
+### en-0408  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "new" (ใหม่) คือคำไหน
+   1) heavy  |  2) down  |  3) yes  |  4) old
+EN: What is the opposite of "new"?
+   (EN choices same as TH)
+
+### en-0409  (หัวข้อ: plurals)
+TH: "man" มีหลายตัว/หลายอัน เขียนว่าอะไร
+   1) manen  |  2) men  |  3) mans  |  4) manes
+EN: What is the plural of "man"?
+   (EN choices same as TH)
+
+### en-0410  (หัวข้อ: grammar)
+TH: เติมคำให้ถูก: They ___ my friends.
+   1) are  |  2) is  |  3) be  |  4) am
+EN: Choose the word: They ___ my friends.
+   (EN choices same as TH)
+
+### en-0411  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่ยานพาหนะ
+   1) train  |  2) car  |  3) blue  |  4) plane
+EN: Which word is NOT a vehicle?
+   (EN choices same as TH)
+
+### en-0412  (หัวข้อ: days-months)
+TH: เดือน"มิถุนายน" ภาษาอังกฤษคือคำไหน
+   1) March  |  2) January  |  3) February  |  4) June
+EN: Which month is "มิถุนายน"?
+   (EN choices same as TH)
+
+### en-0413  (หัวข้อ: spelling)
+TH: คำไหนสะกดถูก
+   1) castle  |  2) castel  |  3) cassle  |  4) casle
+EN: Which spelling is correct?
+   (EN choices same as TH)
+
+### en-0414  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "last" (สุดท้าย) คือคำไหน
+   1) full  |  2) first  |  3) light  |  4) no
+EN: What is the opposite of "last"?
+   (EN choices same as TH)
+
+### en-0415  (หัวข้อ: plurals)
+TH: "dish" มีหลายตัว/หลายอัน เขียนว่าอะไร
+   1) dishess  |  2) dishes  |  3) dishs  |  4) dishies
+EN: What is the plural of "dish"?
+   (EN choices same as TH)
+
+### en-0416  (หัวข้อ: grammar)
+TH: เติมคำให้ถูก: Dad ___ a wizard hat.
+   1) weared  |  2) wears  |  3) wearing  |  4) wear
+EN: Choose the word: Dad ___ a wizard hat.
+   (EN choices same as TH)
+
+### en-0417  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่สัตว์
+   1) blue  |  2) bird  |  3) elephant  |  4) rabbit
+EN: Which word is NOT an animal?
+   (EN choices same as TH)
+
+### en-0418  (หัวข้อ: days-months)
+TH: เดือนต่อจาก December คือเดือนอะไร
+   1) January  |  2) March  |  3) April  |  4) February
+EN: Which month comes after December?
+   (EN choices same as TH)
+
+### en-0419  (หัวข้อ: spelling)
+TH: คำไหนสะกดถูก
+   1) gardne  |  2) gardin  |  3) gardan  |  4) garden
+EN: Which spelling is correct?
+   (EN choices same as TH)
+
+### en-0420  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "empty" (ว่าง) คือคำไหน
+   1) top  |  2) old  |  3) yes  |  4) full
+EN: What is the opposite of "empty"?
+   (EN choices same as TH)
+
+### en-0421  (หัวข้อ: plurals)
+TH: "glass" มีหลายตัว/หลายอัน เขียนว่าอะไร
+   1) glassys  |  2) glasses  |  3) glassies  |  4) glassen
+EN: What is the plural of "glass"?
+   (EN choices same as TH)
+
+### en-0422  (หัวข้อ: grammar)
+TH: เติมคำให้ถูก: Leah ___ the cave yesterday.
+   1) finding  |  2) found  |  3) finds  |  4) find
+EN: Choose the word: Leah ___ the cave yesterday.
+   (EN choices same as TH)
+
+### en-0423  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่สัตว์
+   1) frog  |  2) bee  |  3) black  |  4) sheep
+EN: Which word is NOT an animal?
+   (EN choices same as TH)
+
+### en-0424  (หัวข้อ: days-months)
+TH: เดือน"เมษายน" ภาษาอังกฤษคือคำไหน
+   1) January  |  2) April  |  3) February  |  4) March
+EN: Which month is "เมษายน"?
+   (EN choices same as TH)
+
+### en-0425  (หัวข้อ: spelling)
+TH: คำไหนสะกดถูก
+   1) thank yu  |  2) thank you  |  3) thank yuo  |  4) thnak you
+EN: Which spelling is correct?
+   (EN choices same as TH)
+
+### en-0426  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "far" (ไกล) คือคำไหน
+   1) near  |  2) push  |  3) left  |  4) happy
+EN: What is the opposite of "far"?
+   (EN choices same as TH)
+
+### en-0427  (หัวข้อ: plurals)
+TH: "foot" มีหลายตัว/หลายอัน เขียนว่าอะไร
+   1) feet  |  2) footies  |  3) foots  |  4) feets
+EN: What is the plural of "foot"?
+   (EN choices same as TH)
+
+### en-0428  (หัวข้อ: grammar)
+TH: เติมคำให้ถูก: Look! The bird is ___.
+   1) fly  |  2) flew  |  3) flying  |  4) flies
+EN: Choose the word: Look! The bird is ___.
+   (EN choices same as TH)
+
+### en-0429  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่ยานพาหนะ
+   1) bus  |  2) car  |  3) bat  |  4) bike
+EN: Which word is NOT a vehicle?
+   (EN choices same as TH)
+
+### en-0430  (หัวข้อ: days-months)
+TH: เดือนต่อจาก August คือเดือนอะไร
+   1) September  |  2) January  |  3) March  |  4) February
+EN: Which month comes after August?
+   (EN choices same as TH)
+
+### en-0431  (หัวข้อ: spelling)
+TH: คำไหนสะกดถูก
+   1) teecher  |  2) techer  |  3) teachar  |  4) teacher
+EN: Which spelling is correct?
+   (EN choices same as TH)
+
+### en-0432  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "poor" (จน) คือคำไหน
+   1) rich  |  2) tall  |  3) give  |  4) big
+EN: What is the opposite of "poor"?
+   (EN choices same as TH)
+
+### en-0433  (หัวข้อ: plurals)
+TH: "baby" มีหลายตัว/หลายอัน เขียนว่าอะไร
+   1) babyies  |  2) babyen  |  3) babies  |  4) babyes
+EN: What is the plural of "baby"?
+   (EN choices same as TH)
+
+### en-0434  (หัวข้อ: grammar)
+TH: เติมคำให้ถูก: She ___ a picture yesterday.
+   1) drawing  |  2) draw  |  3) drew  |  4) draws
+EN: Choose the word: She ___ a picture yesterday.
+   (EN choices same as TH)
+
+### en-0435  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่อาหาร
+   1) monkey  |  2) grapes  |  3) egg  |  4) watermelon
+EN: Which word is NOT food?
+   (EN choices same as TH)
+
+### en-0436  (หัวข้อ: days-months)
+TH: เดือนต่อจาก May คือเดือนอะไร
+   1) January  |  2) June  |  3) March  |  4) February
+EN: Which month comes after May?
+   (EN choices same as TH)
+
+### en-0437  (หัวข้อ: spelling)
+TH: คำไหนสะกดถูก
+   1) brithday  |  2) birthday  |  3) birtday  |  4) birthdey
+EN: Which spelling is correct?
+   (EN choices same as TH)
+
+### en-0438  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "light" (เบา) คือคำไหน
+   1) heavy  |  2) tall  |  3) near  |  4) open
+EN: What is the opposite of "light"?
+   (EN choices same as TH)
+
+### en-0439  (หัวข้อ: plurals)
+TH: "potato" มีหลายตัว/หลายอัน เขียนว่าอะไร
+   1) potatoys  |  2) potatoen  |  3) potatoess  |  4) potatoes
+EN: What is the plural of "potato"?
+   (EN choices same as TH)
+
+### en-0440  (หัวข้อ: grammar)
+TH: เติมคำให้ถูก: This is ___ apple.
+   1) two  |  2) a  |  3) many  |  4) an
+EN: Choose the word: This is ___ apple.
+   (EN choices same as TH)
+
+### en-0441  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่ยานพาหนะ
+   1) car  |  2) train  |  3) bike  |  4) bear
+EN: Which word is NOT a vehicle?
+   (EN choices same as TH)
+
+### en-0442  (หัวข้อ: days-months)
+TH: เดือนต่อจาก September คือเดือนอะไร
+   1) March  |  2) January  |  3) February  |  4) October
+EN: Which month comes after September?
+   (EN choices same as TH)
+
+### en-0443  (หัวข้อ: spelling)
+TH: คำไหนสะกดถูก
+   1) hous  |  2) house  |  3) houes  |  4) howse
+EN: Which spelling is correct?
+   (EN choices same as TH)
+
+### en-0444  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "sad" (เสียใจ) คือคำไหน
+   1) soft  |  2) happy  |  3) short  |  4) heavy
+EN: What is the opposite of "sad"?
+   (EN choices same as TH)
+
+### en-0445  (หัวข้อ: plurals)
+TH: "puppy" มีหลายตัว/หลายอัน เขียนว่าอะไร
+   1) puppys  |  2) puppyies  |  3) puppiess  |  4) puppies
+EN: What is the plural of "puppy"?
+   (EN choices same as TH)
+
+### en-0446  (หัวข้อ: grammar)
+TH: เติมคำให้ถูก: He ___ football every day.
+   1) plays  |  2) played  |  3) play  |  4) playing
+EN: Choose the word: He ___ football every day.
+   (EN choices same as TH)
+
+### en-0447  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่ส่วนของร่างกาย
+   1) eye  |  2) nose  |  3) tooth  |  4) blue
+EN: Which word is NOT a body part?
+   (EN choices same as TH)
+
+### en-0448  (หัวข้อ: days-months)
+TH: เดือนต่อจาก November คือเดือนอะไร
+   1) January  |  2) December  |  3) March  |  4) February
+EN: Which month comes after November?
+   (EN choices same as TH)
+
+### en-0449  (หัวข้อ: spelling)
+TH: คำไหนสะกดถูก
+   1) island  |  2) iland  |  3) ilsand  |  4) islend
+EN: Which spelling is correct?
+   (EN choices same as TH)
+
+### en-0450  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "close" (ปิด) คือคำไหน
+   1) full  |  2) yes  |  3) open  |  4) cold
+EN: What is the opposite of "close"?
+   (EN choices same as TH)
+
+### en-0451  (หัวข้อ: plurals)
+TH: "box" มีหลายตัว/หลายอัน เขียนว่าอะไร
+   1) boxys  |  2) boxess  |  3) boxes  |  4) boxs
+EN: What is the plural of "box"?
+   (EN choices same as TH)
+
+### en-0452  (หัวข้อ: grammar)
+TH: เติมคำให้ถูก: I ___ my teeth every morning.
+   1) brush  |  2) brushing  |  3) brushed  |  4) brushes
+EN: Choose the word: I ___ my teeth every morning.
+   (EN choices same as TH)
+
+### en-0453  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่สี
+   1) black  |  2) dog  |  3) green  |  4) yellow
+EN: Which word is NOT a colour?
+   (EN choices same as TH)
+
+### en-0454  (หัวข้อ: days-months)
+TH: เดือนต่อจาก March คือเดือนอะไร
+   1) January  |  2) February  |  3) May  |  4) April
+EN: Which month comes after March?
+   (EN choices same as TH)
+
+### en-0455  (หัวข้อ: spelling)
+TH: คำไหนสะกดถูก
+   1) anamal  |  2) aminal  |  3) animel  |  4) animal
+EN: Which spelling is correct?
+   (EN choices same as TH)
+
+### en-0456  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "night" (กลางคืน) คือคำไหน
+   1) day  |  2) far  |  3) right  |  4) wet
+EN: What is the opposite of "night"?
+   (EN choices same as TH)
+
+### en-0457  (หัวข้อ: plurals)
+TH: "bench" มีหลายตัว/หลายอัน เขียนว่าอะไร
+   1) benches  |  2) benchies  |  3) benchs  |  4) benchen
+EN: What is the plural of "bench"?
+   (EN choices same as TH)
+
+### en-0458  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่สัตว์
+   1) rabbit  |  2) turtle  |  3) bus  |  4) owl
+EN: Which word is NOT an animal?
+   (EN choices same as TH)
+
+### en-0459  (หัวข้อ: days-months)
+TH: เดือนต่อจาก January คือเดือนอะไร
+   1) May  |  2) March  |  3) April  |  4) February
+EN: Which month comes after January?
+   (EN choices same as TH)
+
+### en-0460  (หัวข้อ: spelling)
+TH: คำไหนสะกดถูก
+   1) wizrad  |  2) wizzard  |  3) wizerd  |  4) wizard
+EN: Which spelling is correct?
+   (EN choices same as TH)
+
+### en-0461  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "late" (สาย) คือคำไหน
+   1) early  |  2) cold  |  3) small  |  4) right
+EN: What is the opposite of "late"?
+   (EN choices same as TH)
+
+### en-0462  (หัวข้อ: plurals)
+TH: "wolf" มีหลายตัว/หลายอัน เขียนว่าอะไร
+   1) wolves  |  2) wolfes  |  3) wolfys  |  4) wolvess
+EN: What is the plural of "wolf"?
+   (EN choices same as TH)
+
+### en-0463  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่สัตว์
+   1) turtle  |  2) brown  |  3) sheep  |  4) bird
+EN: Which word is NOT an animal?
+   (EN choices same as TH)
+
+### en-0464  (หัวข้อ: days-months)
+TH: เดือน"ตุลาคม" ภาษาอังกฤษคือคำไหน
+   1) February  |  2) January  |  3) October  |  4) March
+EN: Which month is "ตุลาคม"?
+   (EN choices same as TH)
+
+### en-0465  (หัวข้อ: spelling)
+TH: คำไหนสะกดถูก
+   1) becaus  |  2) because  |  3) beacuse  |  4) becuase
+EN: Which spelling is correct?
+   (EN choices same as TH)
+
+### en-0466  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "small" (เล็ก) คือคำไหน
+   1) early  |  2) big  |  3) slow  |  4) empty
+EN: What is the opposite of "small"?
+   (EN choices same as TH)
+
+### en-0467  (หัวข้อ: plurals)
+TH: "tomato" มีหลายตัว/หลายอัน เขียนว่าอะไร
+   1) tomatoen  |  2) tomatoes  |  3) tomatoies  |  4) tomatos
+EN: What is the plural of "tomato"?
+   (EN choices same as TH)
+
+### en-0468  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่สี
+   1) blue  |  2) brown  |  3) carrot  |  4) red
+EN: Which word is NOT a colour?
+   (EN choices same as TH)
+
+### en-0469  (หัวข้อ: days-months)
+TH: เดือน"กันยายน" ภาษาอังกฤษคือคำไหน
+   1) January  |  2) March  |  3) September  |  4) February
+EN: Which month is "กันยายน"?
+   (EN choices same as TH)
+
+### en-0470  (หัวข้อ: spelling)
+TH: คำไหนสะกดถูก
+   1) frendly  |  2) friendley  |  3) friendly  |  4) freindly
+EN: Which spelling is correct?
+   (EN choices same as TH)
+
+### en-0471  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "dirty" (สกปรก) คือคำไหน
+   1) night  |  2) quiet  |  3) clean  |  4) down
+EN: What is the opposite of "dirty"?
+   (EN choices same as TH)
+
+### en-0472  (หัวข้อ: plurals)
+TH: "knife" มีหลายตัว/หลายอัน เขียนว่าอะไร
+   1) knivess  |  2) knives  |  3) knifees  |  4) knifeies
+EN: What is the plural of "knife"?
+   (EN choices same as TH)
+
+### en-0473  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่สี
+   1) red  |  2) white  |  3) brown  |  4) ant
+EN: Which word is NOT a colour?
+   (EN choices same as TH)
+
+### en-0474  (หัวข้อ: days-months)
+TH: เดือน"พฤษภาคม" ภาษาอังกฤษคือคำไหน
+   1) May  |  2) February  |  3) March  |  4) January
+EN: Which month is "พฤษภาคม"?
+   (EN choices same as TH)
+
+### en-0475  (หัวข้อ: spelling)
+TH: คำไหนสะกดถูก
+   1) mornin  |  2) morning  |  3) moring  |  4) morring
+EN: Which spelling is correct?
+   (EN choices same as TH)
+
+### en-0476  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "soft" (นิ่ม) คือคำไหน
+   1) long  |  2) hard  |  3) down  |  4) dry
+EN: What is the opposite of "soft"?
+   (EN choices same as TH)
+
+### en-0477  (หัวข้อ: plurals)
+TH: "tooth" มีหลายตัว/หลายอัน เขียนว่าอะไร
+   1) teeths  |  2) toothen  |  3) teeth  |  4) toothys
+EN: What is the plural of "tooth"?
+   (EN choices same as TH)
+
+### en-0478  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่สี
+   1) yellow  |  2) lion  |  3) brown  |  4) red
+EN: Which word is NOT a colour?
+   (EN choices same as TH)
+
+### en-0479  (หัวข้อ: days-months)
+TH: เดือนต่อจาก February คือเดือนอะไร
+   1) April  |  2) May  |  3) March  |  4) January
+EN: Which month comes after February?
+   (EN choices same as TH)
+
+### en-0480  (หัวข้อ: spelling)
+TH: คำไหนสะกดถูก
+   1) friend  |  2) freind  |  3) friende  |  4) frend
+EN: Which spelling is correct?
+   (EN choices same as TH)
+
+### en-0481  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "cold" (เย็น) คือคำไหน
+   1) last  |  2) hot  |  3) fast  |  4) heavy
+EN: What is the opposite of "cold"?
+   (EN choices same as TH)
+
+### en-0482  (หัวข้อ: plurals)
+TH: "toy" มีหลายตัว/หลายอัน เขียนว่าอะไร
+   1) toyes  |  2) toyen  |  3) toys  |  4) toies
+EN: What is the plural of "toy"?
+   (EN choices same as TH)
+
+### en-0483  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่ส่วนของร่างกาย
+   1) watermelon  |  2) ear  |  3) tooth  |  4) mouth
+EN: Which word is NOT a body part?
+   (EN choices same as TH)
+
+### en-0484  (หัวข้อ: spelling)
+TH: คำไหนสะกดถูก
+   1) crystel  |  2) crystle  |  3) cristal  |  4) crystal
+EN: Which spelling is correct?
+   (EN choices same as TH)
+
+### en-0485  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "out" (นอก) คือคำไหน
+   1) hard  |  2) lose  |  3) yes  |  4) in
+EN: What is the opposite of "out"?
+   (EN choices same as TH)
+
+### en-0486  (หัวข้อ: plurals)
+TH: "woman" มีหลายตัว/หลายอัน เขียนว่าอะไร
+   1) womans  |  2) womens  |  3) womanen  |  4) women
+EN: What is the plural of "woman"?
+   (EN choices same as TH)
+
+### en-0487  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่อาหาร
+   1) bee  |  2) orange  |  3) banana  |  4) cake
+EN: Which word is NOT food?
+   (EN choices same as TH)
+
+### en-0488  (หัวข้อ: spelling)
+TH: คำไหนสะกดถูก
+   1) butterfly  |  2) butterflie  |  3) buterfly  |  4) butterfley
+EN: Which spelling is correct?
+   (EN choices same as TH)
+
+### en-0489  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "take" (รับ) คือคำไหน
+   1) give  |  2) dark  |  3) no  |  4) dry
+EN: What is the opposite of "take"?
+   (EN choices same as TH)
+
+### en-0490  (หัวข้อ: plurals)
+TH: "lady" มีหลายตัว/หลายอัน เขียนว่าอะไร
+   1) ladyes  |  2) ladyen  |  3) ladies  |  4) ladys
+EN: What is the plural of "lady"?
+   (EN choices same as TH)
+
+### en-0491  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่สัตว์
+   1) cow  |  2) milk  |  3) horse  |  4) bird
+EN: Which word is NOT an animal?
+   (EN choices same as TH)
+
+### en-0492  (หัวข้อ: spelling)
+TH: คำไหนสะกดถูก
+   1) pepole  |  2) peeple  |  3) people  |  4) peple
+EN: Which spelling is correct?
+   (EN choices same as TH)
+
+### en-0493  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "dark" (มืด) คือคำไหน
+   1) quiet  |  2) light  |  3) near  |  4) close
+EN: What is the opposite of "dark"?
+   (EN choices same as TH)
+
+### en-0494  (หัวข้อ: plurals)
+TH: "cat" มีหลายตัว/หลายอัน เขียนว่าอะไร
+   1) cates  |  2) catss  |  3) catys  |  4) cats
+EN: What is the plural of "cat"?
+   (EN choices same as TH)
+
+### en-0495  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่ส่วนของร่างกาย
+   1) yellow  |  2) foot  |  3) ear  |  4) hand
+EN: Which word is NOT a body part?
+   (EN choices same as TH)
+
+### en-0496  (หัวข้อ: spelling)
+TH: คำไหนสะกดถูก
+   1) purpul  |  2) perple  |  3) purple  |  4) purpel
+EN: Which spelling is correct?
+   (EN choices same as TH)
+
+### en-0497  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่ส่วนของร่างกาย
+   1) nose  |  2) tooth  |  3) white  |  4) foot
+EN: Which word is NOT a body part?
+   (EN choices same as TH)
+
+### en-0498  (หัวข้อ: spelling)
+TH: คำไหนสะกดถูก
+   1) munkey  |  2) monky  |  3) monkee  |  4) monkey
+EN: Which spelling is correct?
+   (EN choices same as TH)
+
+### en-0499  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่ส่วนของร่างกาย
+   1) ear  |  2) ant  |  3) mouth  |  4) nose
+EN: Which word is NOT a body part?
+   (EN choices same as TH)
+
+### en-0500  (หัวข้อ: spelling)
+TH: คำไหนสะกดถูก
+   1) happey  |  2) hapi  |  3) happy  |  4) hapy
+EN: Which spelling is correct?
+   (EN choices same as TH)

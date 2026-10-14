@@ -1,0 +1,962 @@
+# ชุดตรวจ: ภาษาจีน · เด็กอายุ 8 ปี (ป.2–ป.3) · 160 ข้อ · ไฟล์ q-chinese-8.json
+# ตัวเลือกนับ 1–4 · ไม่มีเฉลยในไฟล์นี้ (ให้แก้โจทย์เองก่อน)
+
+### zh-0341  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 书 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) หนังสือ  |  2) รถ  |  3) โรงเรียน  |  4) ปากกา/ดินสอ
+EN: What does 书 mean? (no pinyin)
+   1) book  |  2) school  |  3) home  |  4) car
+
+### zh-0342  (หัวข้อ: pinyin)
+TH: พินอิน "xià" เขียนเป็นตัวจีนว่าอะไร
+   1) 下  |  2) 你  |  3) 小  |  4) 大
+EN: Which characters are written "xià" in pinyin?
+   (EN choices same as TH)
+
+### zh-0343  (หัวข้อ: number-math)
+TH: 五 + 三 = ? (ตอบเป็นตัวจีน)
+   1) 十  |  2) 八  |  3) 二  |  4) 九
+EN: 五 + 三 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0344  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 蓝色 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) สีดำ  |  2) สีแดง  |  3) สีเหลือง  |  4) สีฟ้า/น้ำเงิน
+EN: What does 蓝色 mean? (no pinyin)
+   1) red  |  2) yellow  |  3) black  |  4) blue
+
+### zh-0345  (หัวข้อ: pinyin)
+TH: พินอิน "shí" เขียนเป็นตัวจีนว่าอะไร
+   1) 九  |  2) 二  |  3) 十  |  4) 三
+EN: Which characters are written "shí" in pinyin?
+   (EN choices same as TH)
+
+### zh-0346  (หัวข้อ: number-math)
+TH: 四 + 二 = ? (ตอบเป็นตัวจีน)
+   1) 六  |  2) 五  |  3) 七  |  4) 二
+EN: 四 + 二 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0347  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 人 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) ล่าง  |  2) คน  |  3) บน  |  4) เล็ก
+EN: What does 人 mean? (no pinyin)
+   1) you  |  2) person  |  3) up  |  4) small
+
+### zh-0348  (หัวข้อ: pinyin)
+TH: พินอิน "yuèliang" เขียนเป็นตัวจีนว่าอะไร
+   1) 花  |  2) 火  |  3) 月亮  |  4) 雨
+EN: Which characters are written "yuèliang" in pinyin?
+   (EN choices same as TH)
+
+### zh-0349  (หัวข้อ: number-math)
+TH: 四 + 四 = ? (ตอบเป็นตัวจีน)
+   1) 三  |  2) 五  |  3) 二  |  4) 八
+EN: 四 + 四 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0350  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 羊 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) ลิง  |  2) แมว  |  3) กระต่าย  |  4) แพะ/แกะ
+EN: What does 羊 mean? (no pinyin)
+   1) dog  |  2) fish  |  3) chicken  |  4) sheep/goat
+
+### zh-0351  (หัวข้อ: pinyin)
+TH: พินอิน "hēisè" เขียนเป็นตัวจีนว่าอะไร
+   1) 白色  |  2) 黄色  |  3) 黑色  |  4) 绿色
+EN: Which characters are written "hēisè" in pinyin?
+   (EN choices same as TH)
+
+### zh-0352  (หัวข้อ: number-math)
+TH: 四 + 六 = ? (ตอบเป็นตัวจีน)
+   1) 十  |  2) 八  |  3) 九  |  4) 二
+EN: 四 + 六 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0353  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 熊猫 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) หมู  |  2) แพนด้า  |  3) วัว  |  4) หมา
+EN: What does 熊猫 mean? (no pinyin)
+   1) rabbit  |  2) panda  |  3) cow  |  4) elephant
+
+### zh-0354  (หัวข้อ: pinyin)
+TH: พินอิน "shuǐ" เขียนเป็นตัวจีนว่าอะไร
+   1) 苹果  |  2) 米饭  |  3) 水  |  4) 面条
+EN: Which characters are written "shuǐ" in pinyin?
+   (EN choices same as TH)
+
+### zh-0355  (หัวข้อ: number-math)
+TH: 七 + 三 = ? (ตอบเป็นตัวจีน)
+   1) 三  |  2) 十  |  3) 一  |  4) 五
+EN: 七 + 三 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0356  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 奶奶 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) ย่า  |  2) พี่ชาย  |  3) เพื่อน  |  4) ปู่
+EN: What does 奶奶 mean? (no pinyin)
+   1) grandma (dad's mum)  |  2) friend  |  3) older brother  |  4) teacher
+
+### zh-0357  (หัวข้อ: pinyin)
+TH: พินอิน "shàng" เขียนเป็นตัวจีนว่าอะไร
+   1) 大  |  2) 小  |  3) 你  |  4) 上
+EN: Which characters are written "shàng" in pinyin?
+   (EN choices same as TH)
+
+### zh-0358  (หัวข้อ: number-math)
+TH: 五 + 二 = ? (ตอบเป็นตัวจีน)
+   1) 九  |  2) 七  |  3) 五  |  4) 八
+EN: 五 + 二 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0359  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 头 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) จมูก  |  2) ปาก  |  3) เท้า  |  4) หัว
+EN: What does 头 mean? (no pinyin)
+   1) eyes  |  2) mouth  |  3) hand  |  4) head
+
+### zh-0360  (หัวข้อ: pinyin)
+TH: พินอิน "yǎnjing" เขียนเป็นตัวจีนว่าอะไร
+   1) 嘴巴  |  2) 脚  |  3) 耳朵  |  4) 眼睛
+EN: Which characters are written "yǎnjing" in pinyin?
+   (EN choices same as TH)
+
+### zh-0361  (หัวข้อ: number-math)
+TH: 四 + 三 = ? (ตอบเป็นตัวจีน)
+   1) 八  |  2) 七  |  3) 九  |  4) 三
+EN: 四 + 三 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0362  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 茶 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) น้ำ  |  2) กล้วย  |  3) ข้าวสวย  |  4) ชา
+EN: What does 茶 mean? (no pinyin)
+   1) noodles  |  2) water  |  3) milk  |  4) tea
+
+### zh-0363  (หัวข้อ: pinyin)
+TH: พินอิน "yǔ" เขียนเป็นตัวจีนว่าอะไร
+   1) 雨  |  2) 月亮  |  3) 树  |  4) 太阳
+EN: Which characters are written "yǔ" in pinyin?
+   (EN choices same as TH)
+
+### zh-0364  (หัวข้อ: number-math)
+TH: 三 + 一 = ? (ตอบเป็นตัวจีน)
+   1) 三  |  2) 八  |  3) 四  |  4) 六
+EN: 三 + 一 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0365  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 嘴巴 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) ปาก  |  2) จมูก  |  3) หัว  |  4) มือ
+EN: What does 嘴巴 mean? (no pinyin)
+   1) mouth  |  2) head  |  3) hand  |  4) ear
+
+### zh-0366  (หัวข้อ: pinyin)
+TH: พินอิน "chá" เขียนเป็นตัวจีนว่าอะไร
+   1) 水  |  2) 鸡蛋  |  3) 茶  |  4) 苹果
+EN: Which characters are written "chá" in pinyin?
+   (EN choices same as TH)
+
+### zh-0367  (หัวข้อ: number-math)
+TH: 三 + 六 = ? (ตอบเป็นตัวจีน)
+   1) 十  |  2) 五  |  3) 九  |  4) 三
+EN: 三 + 六 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0368  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 大象 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) ช้าง  |  2) แพะ/แกะ  |  3) ปลา  |  4) หมา
+EN: What does 大象 mean? (no pinyin)
+   1) elephant  |  2) tiger  |  3) fish  |  4) horse
+
+### zh-0369  (หัวข้อ: pinyin)
+TH: พินอิน "lǜsè" เขียนเป็นตัวจีนว่าอะไร
+   1) 红色  |  2) 黄色  |  3) 白色  |  4) 绿色
+EN: Which characters are written "lǜsè" in pinyin?
+   (EN choices same as TH)
+
+### zh-0370  (หัวข้อ: number-math)
+TH: 一 + 二 = ? (ตอบเป็นตัวจีน)
+   1) 四  |  2) 三  |  3) 二  |  4) 一
+EN: 一 + 二 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0371  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 星星 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) ดวงอาทิตย์  |  2) ฝน  |  3) ดาว  |  4) ภูเขา
+EN: What does 星星 mean? (no pinyin)
+   1) flower  |  2) rain  |  3) star  |  4) moon
+
+### zh-0372  (หัวข้อ: pinyin)
+TH: พินอิน "nǎinai" เขียนเป็นตัวจีนว่าอะไร
+   1) 朋友  |  2) 奶奶  |  3) 姐姐  |  4) 爸爸
+EN: Which characters are written "nǎinai" in pinyin?
+   (EN choices same as TH)
+
+### zh-0373  (หัวข้อ: number-math)
+TH: 一 + 六 = ? (ตอบเป็นตัวจีน)
+   1) 七  |  2) 五  |  3) 三  |  4) 八
+EN: 一 + 六 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0374  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 白色 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) สีขาว  |  2) สีแดง  |  3) สีเหลือง  |  4) สีเขียว
+EN: What does 白色 mean? (no pinyin)
+   1) white  |  2) black  |  3) green  |  4) blue
+
+### zh-0375  (หัวข้อ: pinyin)
+TH: พินอิน "bā" เขียนเป็นตัวจีนว่าอะไร
+   1) 四  |  2) 九  |  3) 五  |  4) 八
+EN: Which characters are written "bā" in pinyin?
+   (EN choices same as TH)
+
+### zh-0376  (หัวข้อ: number-math)
+TH: 二 + 五 = ? (ตอบเป็นตัวจีน)
+   1) 七  |  2) 三  |  3) 一  |  4) 五
+EN: 二 + 五 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0377  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 鸡蛋 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) น้ำ  |  2) ไข่ไก่  |  3) ชา  |  4) บะหมี่
+EN: What does 鸡蛋 mean? (no pinyin)
+   1) banana  |  2) egg  |  3) tea  |  4) water
+
+### zh-0378  (หัวข้อ: pinyin)
+TH: พินอิน "ěrduo" เขียนเป็นตัวจีนว่าอะไร
+   1) 耳朵  |  2) 脚  |  3) 手  |  4) 嘴巴
+EN: Which characters are written "ěrduo" in pinyin?
+   (EN choices same as TH)
+
+### zh-0379  (หัวข้อ: number-math)
+TH: 七 + 二 = ? (ตอบเป็นตัวจีน)
+   1) 四  |  2) 一  |  3) 九  |  4) 十
+EN: 七 + 二 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0380  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 马 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) แพะ/แกะ  |  2) ช้าง  |  3) ม้า  |  4) ไก่
+EN: What does 马 mean? (no pinyin)
+   1) fish  |  2) rabbit  |  3) horse  |  4) chicken
+
+### zh-0381  (หัวข้อ: pinyin)
+TH: พินอิน "nǐ" เขียนเป็นตัวจีนว่าอะไร
+   1) 小  |  2) 你  |  3) 人  |  4) 上
+EN: Which characters are written "nǐ" in pinyin?
+   (EN choices same as TH)
+
+### zh-0382  (หัวข้อ: number-math)
+TH: 五 + 五 = ? (ตอบเป็นตัวจีน)
+   1) 十  |  2) 七  |  3) 六  |  4) 八
+EN: 五 + 五 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0383  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 学校 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) โรงเรียน  |  2) ปากกา/ดินสอ  |  3) หนังสือ  |  4) รถ
+EN: What does 学校 mean? (no pinyin)
+   1) school  |  2) book  |  3) plane  |  4) car
+
+### zh-0384  (หัวข้อ: pinyin)
+TH: พินอิน "jiā" เขียนเป็นตัวจีนว่าอะไร
+   1) 家  |  2) 笔  |  3) 学校  |  4) 车
+EN: Which characters are written "jiā" in pinyin?
+   (EN choices same as TH)
+
+### zh-0385  (หัวข้อ: number-math)
+TH: 六 + 三 = ? (ตอบเป็นตัวจีน)
+   1) 一  |  2) 四  |  3) 二  |  4) 九
+EN: 六 + 三 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0386  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 大 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) คน  |  2) ฉัน  |  3) ใหญ่  |  4) ล่าง
+EN: What does 大 mean? (no pinyin)
+   1) small  |  2) up  |  3) big  |  4) person
+
+### zh-0387  (หัวข้อ: pinyin)
+TH: พินอิน "bǐ" เขียนเป็นตัวจีนว่าอะไร
+   1) 书  |  2) 车  |  3) 笔  |  4) 家
+EN: Which characters are written "bǐ" in pinyin?
+   (EN choices same as TH)
+
+### zh-0388  (หัวข้อ: number-math)
+TH: 四 + 一 = ? (ตอบเป็นตัวจีน)
+   1) 四  |  2) 八  |  3) 五  |  4) 六
+EN: 四 + 一 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0389  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 十 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) หก  |  2) เก้า  |  3) สิบ  |  4) หนึ่ง
+EN: What does 十 mean? (no pinyin)
+   1) one  |  2) seven  |  3) ten  |  4) two
+
+### zh-0390  (หัวข้อ: pinyin)
+TH: พินอิน "báisè" เขียนเป็นตัวจีนว่าอะไร
+   1) 白色  |  2) 黑色  |  3) 绿色  |  4) 黄色
+EN: Which characters are written "báisè" in pinyin?
+   (EN choices same as TH)
+
+### zh-0391  (หัวข้อ: number-math)
+TH: 三 + 五 = ? (ตอบเป็นตัวจีน)
+   1) 三  |  2) 九  |  3) 八  |  4) 七
+EN: 三 + 五 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0392  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 绿色 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) สีเหลือง  |  2) สีเขียว  |  3) สีดำ  |  4) สีแดง
+EN: What does 绿色 mean? (no pinyin)
+   1) black  |  2) green  |  3) yellow  |  4) red
+
+### zh-0393  (หัวข้อ: pinyin)
+TH: พินอิน "dàxiàng" เขียนเป็นตัวจีนว่าอะไร
+   1) 猴子  |  2) 马  |  3) 大象  |  4) 兔子
+EN: Which characters are written "dàxiàng" in pinyin?
+   (EN choices same as TH)
+
+### zh-0394  (หัวข้อ: number-math)
+TH: 一 + 一 = ? (ตอบเป็นตัวจีน)
+   1) 二  |  2) 五  |  3) 三  |  4) 四
+EN: 一 + 一 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0395  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 猴子 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) ลิง  |  2) แพนด้า  |  3) หมา  |  4) ปลา
+EN: What does 猴子 mean? (no pinyin)
+   1) monkey  |  2) chicken  |  3) tiger  |  4) panda
+
+### zh-0396  (หัวข้อ: pinyin)
+TH: พินอิน "jiǎo" เขียนเป็นตัวจีนว่าอะไร
+   1) 头  |  2) 手  |  3) 鼻子  |  4) 脚
+EN: Which characters are written "jiǎo" in pinyin?
+   (EN choices same as TH)
+
+### zh-0397  (หัวข้อ: number-math)
+TH: 三 + 二 = ? (ตอบเป็นตัวจีน)
+   1) 五  |  2) 九  |  3) 十  |  4) 八
+EN: 三 + 二 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0398  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 西瓜 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) นม  |  2) น้ำ  |  3) แตงโม  |  4) บะหมี่
+EN: What does 西瓜 mean? (no pinyin)
+   1) egg  |  2) water  |  3) watermelon  |  4) apple
+
+### zh-0399  (หัวข้อ: pinyin)
+TH: พินอิน "èr" เขียนเป็นตัวจีนว่าอะไร
+   1) 二  |  2) 三  |  3) 四  |  4) 八
+EN: Which characters are written "èr" in pinyin?
+   (EN choices same as TH)
+
+### zh-0400  (หัวข้อ: number-math)
+TH: 八 + 一 = ? (ตอบเป็นตัวจีน)
+   1) 五  |  2) 三  |  3) 二  |  4) 九
+EN: 八 + 一 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0401  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 我 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) ฉัน  |  2) บน  |  3) ใหญ่  |  4) เล็ก
+EN: What does 我 mean? (no pinyin)
+   1) I / me  |  2) down  |  3) you  |  4) person
+
+### zh-0402  (หัวข้อ: pinyin)
+TH: พินอิน "niú" เขียนเป็นตัวจีนว่าอะไร
+   1) 老虎  |  2) 猫  |  3) 羊  |  4) 牛
+EN: Which characters are written "niú" in pinyin?
+   (EN choices same as TH)
+
+### zh-0403  (หัวข้อ: number-math)
+TH: 四 + 五 = ? (ตอบเป็นตัวจีน)
+   1) 一  |  2) 六  |  3) 四  |  4) 九
+EN: 四 + 五 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0404  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 家 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) บ้าน  |  2) โรงเรียน  |  3) เครื่องบิน  |  4) ปากกา/ดินสอ
+EN: What does 家 mean? (no pinyin)
+   1) home  |  2) book  |  3) pen  |  4) school
+
+### zh-0405  (หัวข้อ: pinyin)
+TH: พินอิน "lǎoshī" เขียนเป็นตัวจีนว่าอะไร
+   1) 妈妈  |  2) 朋友  |  3) 老师  |  4) 爸爸
+EN: Which characters are written "lǎoshī" in pinyin?
+   (EN choices same as TH)
+
+### zh-0406  (หัวข้อ: number-math)
+TH: 三 + 四 = ? (ตอบเป็นตัวจีน)
+   1) 八  |  2) 五  |  3) 一  |  4) 七
+EN: 三 + 四 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0407  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 二 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) สิบ  |  2) สาม  |  3) สอง  |  4) หก
+EN: What does 二 mean? (no pinyin)
+   1) eight  |  2) four  |  3) two  |  4) one
+
+### zh-0408  (หัวข้อ: pinyin)
+TH: พินอิน "hóuzi" เขียนเป็นตัวจีนว่าอะไร
+   1) 马  |  2) 牛  |  3) 猫  |  4) 猴子
+EN: Which characters are written "hóuzi" in pinyin?
+   (EN choices same as TH)
+
+### zh-0409  (หัวข้อ: number-math)
+TH: 一 + 五 = ? (ตอบเป็นตัวจีน)
+   1) 六  |  2) 三  |  3) 九  |  4) 二
+EN: 一 + 五 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0410  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 狗 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) หมา  |  2) ลิง  |  3) แมว  |  4) วัว
+EN: What does 狗 mean? (no pinyin)
+   1) dog  |  2) rabbit  |  3) elephant  |  4) tiger
+
+### zh-0411  (หัวข้อ: pinyin)
+TH: พินอิน "miàntiáo" เขียนเป็นตัวจีนว่าอะไร
+   1) 牛奶  |  2) 香蕉  |  3) 面条  |  4) 水
+EN: Which characters are written "miàntiáo" in pinyin?
+   (EN choices same as TH)
+
+### zh-0412  (หัวข้อ: number-math)
+TH: 一 + 八 = ? (ตอบเป็นตัวจีน)
+   1) 四  |  2) 三  |  3) 一  |  4) 九
+EN: 一 + 八 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0413  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 兔子 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) แพนด้า  |  2) กระต่าย  |  3) หมู  |  4) เสือ
+EN: What does 兔子 mean? (no pinyin)
+   1) sheep/goat  |  2) rabbit  |  3) tiger  |  4) cat
+
+### zh-0414  (หัวข้อ: pinyin)
+TH: พินอิน "huā" เขียนเป็นตัวจีนว่าอะไร
+   1) 星星  |  2) 树  |  3) 火  |  4) 花
+EN: Which characters are written "huā" in pinyin?
+   (EN choices same as TH)
+
+### zh-0415  (หัวข้อ: number-math)
+TH: 一 + 九 = ? (ตอบเป็นตัวจีน)
+   1) 五  |  2) 十  |  3) 六  |  4) 二
+EN: 一 + 九 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0416  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 太阳 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) ดอกไม้  |  2) ไฟ  |  3) ดวงจันทร์  |  4) ดวงอาทิตย์
+EN: What does 太阳 mean? (no pinyin)
+   1) flower  |  2) tree  |  3) mountain  |  4) sun
+
+### zh-0417  (หัวข้อ: pinyin)
+TH: พินอิน "píngguǒ" เขียนเป็นตัวจีนว่าอะไร
+   1) 米饭  |  2) 牛奶  |  3) 苹果  |  4) 鸡蛋
+EN: Which characters are written "píngguǒ" in pinyin?
+   (EN choices same as TH)
+
+### zh-0418  (หัวข้อ: number-math)
+TH: 一 + 三 = ? (ตอบเป็นตัวจีน)
+   1) 四  |  2) 十  |  3) 七  |  4) 五
+EN: 一 + 三 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0419  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 五 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) ห้า  |  2) แปด  |  3) เจ็ด  |  4) สิบ
+EN: What does 五 mean? (no pinyin)
+   1) five  |  2) four  |  3) seven  |  4) two
+
+### zh-0420  (หัวข้อ: pinyin)
+TH: พินอิน "jiǔ" เขียนเป็นตัวจีนว่าอะไร
+   1) 十  |  2) 二  |  3) 五  |  4) 九
+EN: Which characters are written "jiǔ" in pinyin?
+   (EN choices same as TH)
+
+### zh-0421  (หัวข้อ: number-math)
+TH: 八 + 二 = ? (ตอบเป็นตัวจีน)
+   1) 八  |  2) 七  |  3) 六  |  4) 十
+EN: 八 + 二 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0422  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 妈妈 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) พี่ชาย  |  2) แม่  |  3) ครู  |  4) น้องสาว
+EN: What does 妈妈 mean? (no pinyin)
+   1) grandma (dad's mum)  |  2) mum  |  3) dad  |  4) teacher
+
+### zh-0423  (หัวข้อ: pinyin)
+TH: พินอิน "zhū" เขียนเป็นตัวจีนว่าอะไร
+   1) 鱼  |  2) 猪  |  3) 熊猫  |  4) 猫
+EN: Which characters are written "zhū" in pinyin?
+   (EN choices same as TH)
+
+### zh-0424  (หัวข้อ: number-math)
+TH: 二 + 六 = ? (ตอบเป็นตัวจีน)
+   1) 十  |  2) 八  |  3) 六  |  4) 三
+EN: 二 + 六 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0425  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 猪 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) วัว  |  2) ปลา  |  3) ช้าง  |  4) หมู
+EN: What does 猪 mean? (no pinyin)
+   1) bird  |  2) monkey  |  3) elephant  |  4) pig
+
+### zh-0426  (หัวข้อ: pinyin)
+TH: พินอิน "sì" เขียนเป็นตัวจีนว่าอะไร
+   1) 十  |  2) 九  |  3) 四  |  4) 六
+EN: Which characters are written "sì" in pinyin?
+   (EN choices same as TH)
+
+### zh-0427  (หัวข้อ: number-math)
+TH: 二 + 一 = ? (ตอบเป็นตัวจีน)
+   1) 三  |  2) 五  |  3) 二  |  4) 一
+EN: 二 + 一 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0428  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 山 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) ไฟ  |  2) ฝน  |  3) ดวงจันทร์  |  4) ภูเขา
+EN: What does 山 mean? (no pinyin)
+   1) moon  |  2) star  |  3) fire  |  4) mountain
+
+### zh-0429  (หัวข้อ: pinyin)
+TH: พินอิน "hóngsè" เขียนเป็นตัวจีนว่าอะไร
+   1) 绿色  |  2) 蓝色  |  3) 红色  |  4) 黄色
+EN: Which characters are written "hóngsè" in pinyin?
+   (EN choices same as TH)
+
+### zh-0430  (หัวข้อ: number-math)
+TH: 五 + 四 = ? (ตอบเป็นตัวจีน)
+   1) 四  |  2) 十  |  3) 一  |  4) 九
+EN: 五 + 四 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0431  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 鸟 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) นก  |  2) แพะ/แกะ  |  3) หมู  |  4) ลิง
+EN: What does 鸟 mean? (no pinyin)
+   1) bird  |  2) cow  |  3) chicken  |  4) elephant
+
+### zh-0432  (หัวข้อ: pinyin)
+TH: พินอิน "huǒ" เขียนเป็นตัวจีนว่าอะไร
+   1) 山  |  2) 月亮  |  3) 星星  |  4) 火
+EN: Which characters are written "huǒ" in pinyin?
+   (EN choices same as TH)
+
+### zh-0433  (หัวข้อ: number-math)
+TH: 六 + 二 = ? (ตอบเป็นตัวจีน)
+   1) 八  |  2) 七  |  3) 十  |  4) 三
+EN: 六 + 二 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0434  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 四 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) สอง  |  2) เก้า  |  3) หนึ่ง  |  4) สี่
+EN: What does 四 mean? (no pinyin)
+   1) ten  |  2) five  |  3) one  |  4) four
+
+### zh-0435  (หัวข้อ: pinyin)
+TH: พินอิน "shān" เขียนเป็นตัวจีนว่าอะไร
+   1) 雨  |  2) 花  |  3) 树  |  4) 山
+EN: Which characters are written "shān" in pinyin?
+   (EN choices same as TH)
+
+### zh-0436  (หัวข้อ: number-math)
+TH: 二 + 七 = ? (ตอบเป็นตัวจีน)
+   1) 九  |  2) 八  |  3) 四  |  4) 三
+EN: 二 + 七 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0437  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 弟弟 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) น้องชาย  |  2) ย่า  |  3) น้องสาว  |  4) แม่
+EN: What does 弟弟 mean? (no pinyin)
+   1) younger brother  |  2) friend  |  3) older sister  |  4) grandpa (dad's dad)
+
+### zh-0438  (หัวข้อ: pinyin)
+TH: พินอิน "liù" เขียนเป็นตัวจีนว่าอะไร
+   1) 四  |  2) 六  |  3) 三  |  4) 一
+EN: Which characters are written "liù" in pinyin?
+   (EN choices same as TH)
+
+### zh-0439  (หัวข้อ: number-math)
+TH: 二 + 二 = ? (ตอบเป็นตัวจีน)
+   1) 九  |  2) 四  |  3) 二  |  4) 三
+EN: 二 + 二 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0440  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 手 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) หู  |  2) มือ  |  3) หัว  |  4) ปาก
+EN: What does 手 mean? (no pinyin)
+   1) head  |  2) hand  |  3) eyes  |  4) nose
+
+### zh-0441  (หัวข้อ: pinyin)
+TH: พินอิน "wǔ" เขียนเป็นตัวจีนว่าอะไร
+   1) 七  |  2) 五  |  3) 十  |  4) 九
+EN: Which characters are written "wǔ" in pinyin?
+   (EN choices same as TH)
+
+### zh-0442  (หัวข้อ: number-math)
+TH: 六 + 一 = ? (ตอบเป็นตัวจีน)
+   1) 四  |  2) 九  |  3) 七  |  4) 十
+EN: 六 + 一 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0443  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 耳朵 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) หัว  |  2) หู  |  3) จมูก  |  4) ตา
+EN: What does 耳朵 mean? (no pinyin)
+   1) eyes  |  2) ear  |  3) nose  |  4) head
+
+### zh-0444  (หัวข้อ: pinyin)
+TH: พินอิน "shù" เขียนเป็นตัวจีนว่าอะไร
+   1) 月亮  |  2) 花  |  3) 树  |  4) 火
+EN: Which characters are written "shù" in pinyin?
+   (EN choices same as TH)
+
+### zh-0445  (หัวข้อ: number-math)
+TH: 一 + 四 = ? (ตอบเป็นตัวจีน)
+   1) 五  |  2) 三  |  3) 二  |  4) 九
+EN: 一 + 四 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0446  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 笔 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) เครื่องบิน  |  2) รถ  |  3) ปากกา/ดินสอ  |  4) โรงเรียน
+EN: What does 笔 mean? (no pinyin)
+   1) book  |  2) home  |  3) pen  |  4) car
+
+### zh-0447  (หัวข้อ: pinyin)
+TH: พินอิน "dà" เขียนเป็นตัวจีนว่าอะไร
+   1) 上  |  2) 小  |  3) 大  |  4) 你
+EN: Which characters are written "dà" in pinyin?
+   (EN choices same as TH)
+
+### zh-0448  (หัวข้อ: number-math)
+TH: 一 + 七 = ? (ตอบเป็นตัวจีน)
+   1) 九  |  2) 五  |  3) 一  |  4) 八
+EN: 一 + 七 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0449  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 姐姐 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) ปู่  |  2) พี่สาว  |  3) ย่า  |  4) พ่อ
+EN: What does 姐姐 mean? (no pinyin)
+   1) mum  |  2) older sister  |  3) older brother  |  4) grandma (dad's mum)
+
+### zh-0450  (หัวข้อ: pinyin)
+TH: พินอิน "fēijī" เขียนเป็นตัวจีนว่าอะไร
+   1) 家  |  2) 飞机  |  3) 书  |  4) 学校
+EN: Which characters are written "fēijī" in pinyin?
+   (EN choices same as TH)
+
+### zh-0451  (หัวข้อ: number-math)
+TH: 五 + 一 = ? (ตอบเป็นตัวจีน)
+   1) 二  |  2) 六  |  3) 三  |  4) 七
+EN: 五 + 一 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0452  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 火 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) ต้นไม้  |  2) ฝน  |  3) ดวงจันทร์  |  4) ไฟ
+EN: What does 火 mean? (no pinyin)
+   1) rain  |  2) mountain  |  3) star  |  4) fire
+
+### zh-0453  (หัวข้อ: pinyin)
+TH: พินอิน "xīngxing" เขียนเป็นตัวจีนว่าอะไร
+   1) 星星  |  2) 月亮  |  3) 火  |  4) 太阳
+EN: Which characters are written "xīngxing" in pinyin?
+   (EN choices same as TH)
+
+### zh-0454  (หัวข้อ: number-math)
+TH: 三 + 七 = ? (ตอบเป็นตัวจีน)
+   1) 十  |  2) 一  |  3) 五  |  4) 七
+EN: 三 + 七 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0455  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 六 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) สาม  |  2) แปด  |  3) สอง  |  4) หก
+EN: What does 六 mean? (no pinyin)
+   1) nine  |  2) two  |  3) five  |  4) six
+
+### zh-0456  (หัวข้อ: pinyin)
+TH: พินอิน "zuǐba" เขียนเป็นตัวจีนว่าอะไร
+   1) 眼睛  |  2) 耳朵  |  3) 手  |  4) 嘴巴
+EN: Which characters are written "zuǐba" in pinyin?
+   (EN choices same as TH)
+
+### zh-0457  (หัวข้อ: number-math)
+TH: 六 + 四 = ? (ตอบเป็นตัวจีน)
+   1) 一  |  2) 三  |  3) 八  |  4) 十
+EN: 六 + 四 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0458  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 鸡 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) ม้า  |  2) ไก่  |  3) แพนด้า  |  4) หมู
+EN: What does 鸡 mean? (no pinyin)
+   1) cow  |  2) chicken  |  3) elephant  |  4) sheep/goat
+
+### zh-0459  (หัวข้อ: pinyin)
+TH: พินอิน "dìdi" เขียนเป็นตัวจีนว่าอะไร
+   1) 奶奶  |  2) 爷爷  |  3) 弟弟  |  4) 妈妈
+EN: Which characters are written "dìdi" in pinyin?
+   (EN choices same as TH)
+
+### zh-0460  (หัวข้อ: number-math)
+TH: 二 + 三 = ? (ตอบเป็นตัวจีน)
+   1) 二  |  2) 九  |  3) 八  |  4) 五
+EN: 二 + 三 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0461  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 妹妹 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) น้องสาว  |  2) น้องชาย  |  3) ย่า  |  4) แม่
+EN: What does 妹妹 mean? (no pinyin)
+   1) younger sister  |  2) grandpa (dad's dad)  |  3) mum  |  4) older brother
+
+### zh-0462  (หัวข้อ: pinyin)
+TH: พินอิน "xuéxiào" เขียนเป็นตัวจีนว่าอะไร
+   1) 家  |  2) 学校  |  3) 书  |  4) 笔
+EN: Which characters are written "xuéxiào" in pinyin?
+   (EN choices same as TH)
+
+### zh-0463  (หัวข้อ: number-math)
+TH: 二 + 八 = ? (ตอบเป็นตัวจีน)
+   1) 四  |  2) 十  |  3) 二  |  4) 八
+EN: 二 + 八 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0464  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 上 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) คน  |  2) เล็ก  |  3) บน  |  4) ใหญ่
+EN: What does 上 mean? (no pinyin)
+   1) person  |  2) small  |  3) up  |  4) big
+
+### zh-0465  (หัวข้อ: pinyin)
+TH: พินอิน "niúnǎi" เขียนเป็นตัวจีนว่าอะไร
+   1) 茶  |  2) 米饭  |  3) 水  |  4) 牛奶
+EN: Which characters are written "niúnǎi" in pinyin?
+   (EN choices same as TH)
+
+### zh-0466  (หัวข้อ: number-math)
+TH: 九 + 一 = ? (ตอบเป็นตัวจีน)
+   1) 十  |  2) 七  |  3) 二  |  4) 一
+EN: 九 + 一 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0467  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 雨 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) ฝน  |  2) ดวงอาทิตย์  |  3) ต้นไม้  |  4) ดวงจันทร์
+EN: What does 雨 mean? (no pinyin)
+   1) rain  |  2) mountain  |  3) sun  |  4) flower
+
+### zh-0468  (หัวข้อ: pinyin)
+TH: พินอิน "mǎ" เขียนเป็นตัวจีนว่าอะไร
+   1) 马  |  2) 兔子  |  3) 牛  |  4) 猪
+EN: Which characters are written "mǎ" in pinyin?
+   (EN choices same as TH)
+
+### zh-0469  (หัวข้อ: number-math)
+TH: 三 + 三 = ? (ตอบเป็นตัวจีน)
+   1) 六  |  2) 七  |  3) 十  |  4) 四
+EN: 三 + 三 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0470  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 苹果 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) น้ำ  |  2) กล้วย  |  3) แอปเปิล  |  4) นม
+EN: What does 苹果 mean? (no pinyin)
+   1) water  |  2) watermelon  |  3) apple  |  4) noodles
+
+### zh-0471  (หัวข้อ: pinyin)
+TH: พินอิน "xiǎo" เขียนเป็นตัวจีนว่าอะไร
+   1) 大  |  2) 小  |  3) 上  |  4) 你
+EN: Which characters are written "xiǎo" in pinyin?
+   (EN choices same as TH)
+
+### zh-0472  (หัวข้อ: number-math)
+TH: 七 + 一 = ? (ตอบเป็นตัวจีน)
+   1) 七  |  2) 九  |  3) 八  |  4) 二
+EN: 七 + 一 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0473  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 脚 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) ปาก  |  2) หู  |  3) เท้า  |  4) หัว
+EN: What does 脚 mean? (no pinyin)
+   1) ear  |  2) eyes  |  3) foot  |  4) head
+
+### zh-0474  (หัวข้อ: pinyin)
+TH: พินอิน "xīguā" เขียนเป็นตัวจีนว่าอะไร
+   1) 香蕉  |  2) 西瓜  |  3) 面条  |  4) 茶
+EN: Which characters are written "xīguā" in pinyin?
+   (EN choices same as TH)
+
+### zh-0475  (หัวข้อ: number-math)
+TH: 二 + 四 = ? (ตอบเป็นตัวจีน)
+   1) 五  |  2) 七  |  3) 六  |  4) 一
+EN: 二 + 四 = ? (answer in Chinese)
+   (EN choices same as TH)
+
+### zh-0476  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 黑色 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) สีฟ้า/น้ำเงิน  |  2) สีดำ  |  3) สีเหลือง  |  4) สีแดง
+EN: What does 黑色 mean? (no pinyin)
+   1) blue  |  2) black  |  3) yellow  |  4) white
+
+### zh-0477  (หัวข้อ: pinyin)
+TH: พินอิน "yéye" เขียนเป็นตัวจีนว่าอะไร
+   1) 爷爷  |  2) 奶奶  |  3) 爸爸  |  4) 朋友
+EN: Which characters are written "yéye" in pinyin?
+   (EN choices same as TH)
+
+### zh-0478  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 三 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) หนึ่ง  |  2) สิบ  |  3) สาม  |  4) ห้า
+EN: What does 三 mean? (no pinyin)
+   1) four  |  2) six  |  3) three  |  4) nine
+
+### zh-0479  (หัวข้อ: pinyin)
+TH: พินอิน "gēge" เขียนเป็นตัวจีนว่าอะไร
+   1) 姐姐  |  2) 朋友  |  3) 哥哥  |  4) 奶奶
+EN: Which characters are written "gēge" in pinyin?
+   (EN choices same as TH)
+
+### zh-0480  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 树 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) ดาว  |  2) ต้นไม้  |  3) ดวงจันทร์  |  4) ไฟ
+EN: What does 树 mean? (no pinyin)
+   1) star  |  2) tree  |  3) mountain  |  4) moon
+
+### zh-0481  (หัวข้อ: pinyin)
+TH: พินอิน "tóu" เขียนเป็นตัวจีนว่าอะไร
+   1) 耳朵  |  2) 头  |  3) 手  |  4) 脚
+EN: Which characters are written "tóu" in pinyin?
+   (EN choices same as TH)
+
+### zh-0482  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 鱼 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) แมว  |  2) ลิง  |  3) ปลา  |  4) ช้าง
+EN: What does 鱼 mean? (no pinyin)
+   1) tiger  |  2) elephant  |  3) fish  |  4) monkey
+
+### zh-0483  (หัวข้อ: pinyin)
+TH: พินอิน "bízi" เขียนเป็นตัวจีนว่าอะไร
+   1) 嘴巴  |  2) 耳朵  |  3) 鼻子  |  4) 手
+EN: Which characters are written "bízi" in pinyin?
+   (EN choices same as TH)
+
+### zh-0484  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 爸爸 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) พี่ชาย  |  2) ปู่  |  3) พ่อ  |  4) เพื่อน
+EN: What does 爸爸 mean? (no pinyin)
+   1) older brother  |  2) mum  |  3) dad  |  4) friend
+
+### zh-0485  (หัวข้อ: pinyin)
+TH: พินอิน "māo" เขียนเป็นตัวจีนว่าอะไร
+   1) 兔子  |  2) 猫  |  3) 猪  |  4) 羊
+EN: Which characters are written "māo" in pinyin?
+   (EN choices same as TH)
+
+### zh-0486  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 爷爷 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) พี่สาว  |  2) ปู่  |  3) ย่า  |  4) พี่ชาย
+EN: What does 爷爷 mean? (no pinyin)
+   1) grandma (dad's mum)  |  2) grandpa (dad's dad)  |  3) mum  |  4) dad
+
+### zh-0487  (หัวข้อ: pinyin)
+TH: พินอิน "sān" เขียนเป็นตัวจีนว่าอะไร
+   1) 一  |  2) 十  |  3) 三  |  4) 九
+EN: Which characters are written "sān" in pinyin?
+   (EN choices same as TH)
+
+### zh-0488  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 水 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) แตงโม  |  2) แอปเปิล  |  3) นม  |  4) น้ำ
+EN: What does 水 mean? (no pinyin)
+   1) banana  |  2) noodles  |  3) apple  |  4) water
+
+### zh-0489  (หัวข้อ: pinyin)
+TH: พินอิน "wǒ" เขียนเป็นตัวจีนว่าอะไร
+   1) 上  |  2) 你  |  3) 大  |  4) 我
+EN: Which characters are written "wǒ" in pinyin?
+   (EN choices same as TH)
+
+### zh-0490  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 眼睛 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) ปาก  |  2) ตา  |  3) มือ  |  4) หู
+EN: What does 眼睛 mean? (no pinyin)
+   1) head  |  2) eyes  |  3) ear  |  4) foot
+
+### zh-0491  (หัวข้อ: pinyin)
+TH: พินอิน "qī" เขียนเป็นตัวจีนว่าอะไร
+   1) 三  |  2) 九  |  3) 七  |  4) 十
+EN: Which characters are written "qī" in pinyin?
+   (EN choices same as TH)
+
+### zh-0492  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 面条 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) แอปเปิล  |  2) ข้าวสวย  |  3) กล้วย  |  4) บะหมี่
+EN: What does 面条 mean? (no pinyin)
+   1) banana  |  2) milk  |  3) egg  |  4) noodles
+
+### zh-0493  (หัวข้อ: pinyin)
+TH: พินอิน "xióngmāo" เขียนเป็นตัวจีนว่าอะไร
+   1) 大象  |  2) 熊猫  |  3) 猴子  |  4) 兔子
+EN: Which characters are written "xióngmāo" in pinyin?
+   (EN choices same as TH)
+
+### zh-0494  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 牛 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) วัว  |  2) ลิง  |  3) หมู  |  4) หมา
+EN: What does 牛 mean? (no pinyin)
+   1) cow  |  2) cat  |  3) pig  |  4) rabbit
+
+### zh-0495  (หัวข้อ: pinyin)
+TH: พินอิน "chē" เขียนเป็นตัวจีนว่าอะไร
+   1) 笔  |  2) 家  |  3) 书  |  4) 车
+EN: Which characters are written "chē" in pinyin?
+   (EN choices same as TH)
+
+### zh-0496  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 香蕉 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) น้ำ  |  2) กล้วย  |  3) แอปเปิล  |  4) บะหมี่
+EN: What does 香蕉 mean? (no pinyin)
+   1) cooked rice  |  2) banana  |  3) apple  |  4) tea
+
+### zh-0497  (หัวข้อ: pinyin)
+TH: พินอิน "māma" เขียนเป็นตัวจีนว่าอะไร
+   1) 姐姐  |  2) 妈妈  |  3) 妹妹  |  4) 爷爷
+EN: Which characters are written "māma" in pinyin?
+   (EN choices same as TH)
+
+### zh-0498  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 朋友 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) พี่ชาย  |  2) เพื่อน  |  3) น้องชาย  |  4) พ่อ
+EN: What does 朋友 mean? (no pinyin)
+   1) grandma (dad's mum)  |  2) friend  |  3) older sister  |  4) teacher
+
+### zh-0499  (หัวข้อ: pinyin)
+TH: พินอิน "tùzi" เขียนเป็นตัวจีนว่าอะไร
+   1) 狗  |  2) 鱼  |  3) 兔子  |  4) 羊
+EN: Which characters are written "tùzi" in pinyin?
+   (EN choices same as TH)
+
+### zh-0500  (หัวข้อ: read-hanzi)
+TH: ตัวอักษร 老师 แปลว่าอะไร (ไม่มีพินอินช่วย)
+   1) ครู  |  2) เพื่อน  |  3) พี่ชาย  |  4) ย่า
+EN: What does 老师 mean? (no pinyin)
+   1) teacher  |  2) dad  |  3) friend  |  4) older brother

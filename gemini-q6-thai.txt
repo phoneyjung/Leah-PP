@@ -1,0 +1,1022 @@
+# ชุดตรวจ: ภาษาไทย · เด็กอายุ 6 ปี (อนุบาล 3–ป.1) · 170 ข้อ · ไฟล์ q-thai-6.json
+# ตัวเลือกนับ 1–4 · ไม่มีเฉลยในไฟล์นี้ (ให้แก้โจทย์เองก่อน)
+
+### th-0001  (หัวข้อ: alphabet)
+TH: ฮ ... อะไร (ท่อง ก ไก่)
+   1) เสือ  |  2) นกฮูก  |  3) จุฬา  |  4) อ่าง
+EN: In the Thai alphabet chant, "ฮ" goes with which word?
+   (EN choices same as TH)
+
+### th-0002  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🥭
+   1) กล้วย  |  2) องุ่น  |  3) นม  |  4) มะม่วง
+EN: Which Thai word matches this picture? 🥭
+   (EN choices same as TH)
+
+### th-0003  (หัวข้อ: first-consonant)
+TH: "กบ" 🐸 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ก  |  2) ภ  |  3) ฏ  |  4) ฐ
+EN: What is the first consonant of "กบ" 🐸?
+   (EN choices same as TH)
+
+### th-0004  (หัวข้อ: alphabet)
+TH: ฐ ... อะไร (ท่อง ก ไก่)
+   1) ฐาน  |  2) ปฏัก  |  3) เด็ก  |  4) ผู้เฒ่า
+EN: In the Thai alphabet chant, "ฐ" goes with which word?
+   (EN choices same as TH)
+
+### th-0005  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🌈
+   1) รุ้ง  |  2) ดอกไม้  |  3) หิน  |  4) ไฟ
+EN: Which Thai word matches this picture? 🌈
+   (EN choices same as TH)
+
+### th-0006  (หัวข้อ: first-consonant)
+TH: "หมา" 🐶 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ห  |  2) ฑ  |  3) ษ  |  4) ค
+EN: What is the first consonant of "หมา" 🐶?
+   (EN choices same as TH)
+
+### th-0007  (หัวข้อ: alphabet)
+TH: ฝ ... อะไร (ท่อง ก ไก่)
+   1) พาน  |  2) ฝา  |  3) ม้า  |  4) หนู
+EN: In the Thai alphabet chant, "ฝ" goes with which word?
+   (EN choices same as TH)
+
+### th-0008  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน ⏰
+   1) ประตู  |  2) กุญแจ  |  3) นาฬิกา  |  4) บ้าน
+EN: Which Thai word matches this picture? ⏰
+   (EN choices same as TH)
+
+### th-0009  (หัวข้อ: first-consonant)
+TH: "ผีเสื้อ" 🦋 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ว  |  2) ท  |  3) ข  |  4) ผ
+EN: What is the first consonant of "ผีเสื้อ" 🦋?
+   (EN choices same as TH)
+
+### th-0010  (หัวข้อ: alphabet)
+TH: ธ ... อะไร (ท่อง ก ไก่)
+   1) หนู  |  2) ถุง  |  3) เต่า  |  4) ธง
+EN: In the Thai alphabet chant, "ธ" goes with which word?
+   (EN choices same as TH)
+
+### th-0011  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน ☀️
+   1) ทะเล  |  2) ดวงอาทิตย์  |  3) เมฆ  |  4) ต้นไม้
+EN: Which Thai word matches this picture? ☀️
+   (EN choices same as TH)
+
+### th-0012  (หัวข้อ: first-consonant)
+TH: "งู" 🐍 มีพยัญชนะตัวแรกคือตัวไหน
+   1) อ  |  2) ค  |  3) ฅ  |  4) ง
+EN: What is the first consonant of "งู" 🐍?
+   (EN choices same as TH)
+
+### th-0013  (หัวข้อ: alphabet)
+TH: ฟ ... อะไร (ท่อง ก ไก่)
+   1) สำเภา  |  2) เรือ  |  3) ฟัน  |  4) ปลา
+EN: In the Thai alphabet chant, "ฟ" goes with which word?
+   (EN choices same as TH)
+
+### th-0014  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🐷
+   1) นก  |  2) งู  |  3) หมู  |  4) ผีเสื้อ
+EN: Which Thai word matches this picture? 🐷
+   (EN choices same as TH)
+
+### th-0015  (หัวข้อ: first-consonant)
+TH: "หู" 👂 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ฮ  |  2) ธ  |  3) ห  |  4) ถ
+EN: What is the first consonant of "หู" 👂?
+   (EN choices same as TH)
+
+### th-0016  (หัวข้อ: alphabet)
+TH: ป ... อะไร (ท่อง ก ไก่)
+   1) ฟัน  |  2) ปลา  |  3) ใบไม้  |  4) หนู
+EN: In the Thai alphabet chant, "ป" goes with which word?
+   (EN choices same as TH)
+
+### th-0017  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🥚
+   1) ข้าวโพด  |  2) สับปะรด  |  3) ข้าว  |  4) ไข่
+EN: Which Thai word matches this picture? 🥚
+   (EN choices same as TH)
+
+### th-0018  (หัวข้อ: first-consonant)
+TH: "ดอกไม้" 🌸 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ด  |  2) จ  |  3) ม  |  4) ค
+EN: What is the first consonant of "ดอกไม้" 🌸?
+   (EN choices same as TH)
+
+### th-0019  (หัวข้อ: alphabet)
+TH: ต ... อะไร (ท่อง ก ไก่)
+   1) ธง  |  2) เต่า  |  3) เด็ก  |  4) มณโฑ
+EN: In the Thai alphabet chant, "ต" goes with which word?
+   (EN choices same as TH)
+
+### th-0020  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน ☂️
+   1) หนังสือ  |  2) ร่ม  |  3) ดินสอ  |  4) นาฬิกา
+EN: Which Thai word matches this picture? ☂️
+   (EN choices same as TH)
+
+### th-0021  (หัวข้อ: first-consonant)
+TH: "ข้าวโพด" 🌽 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ก  |  2) ข  |  3) ย  |  4) ฆ
+EN: What is the first consonant of "ข้าวโพด" 🌽?
+   (EN choices same as TH)
+
+### th-0022  (หัวข้อ: alphabet)
+TH: ฉ ... อะไร (ท่อง ก ไก่)
+   1) เฌอ  |  2) งู  |  3) ฉิ่ง  |  4) โซ่
+EN: In the Thai alphabet chant, "ฉ" goes with which word?
+   (EN choices same as TH)
+
+### th-0023  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🌙
+   1) หิน  |  2) ดอกไม้  |  3) รุ้ง  |  4) ดวงจันทร์
+EN: Which Thai word matches this picture? 🌙
+   (EN choices same as TH)
+
+### th-0024  (หัวข้อ: first-consonant)
+TH: "รถไฟ" 🚆 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ฮ  |  2) ฑ  |  3) ร  |  4) ซ
+EN: What is the first consonant of "รถไฟ" 🚆?
+   (EN choices same as TH)
+
+### th-0025  (หัวข้อ: alphabet)
+TH: ค ... อะไร (ท่อง ก ไก่)
+   1) ไก่  |  2) ควาย  |  3) คน  |  4) ระฆัง
+EN: In the Thai alphabet chant, "ค" goes with which word?
+   (EN choices same as TH)
+
+### th-0026  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 👃
+   1) จมูก  |  2) ตา  |  3) ปาก  |  4) ฟัน
+EN: Which Thai word matches this picture? 👃
+   (EN choices same as TH)
+
+### th-0027  (หัวข้อ: first-consonant)
+TH: "ดาว" ⭐ มีพยัญชนะตัวแรกคือตัวไหน
+   1) ผ  |  2) ร  |  3) ด  |  4) ถ
+EN: What is the first consonant of "ดาว" ⭐?
+   (EN choices same as TH)
+
+### th-0028  (หัวข้อ: alphabet)
+TH: ช ... อะไร (ท่อง ก ไก่)
+   1) โซ่  |  2) เฌอ  |  3) ช้าง  |  4) ชฎา
+EN: In the Thai alphabet chant, "ช" goes with which word?
+   (EN choices same as TH)
+
+### th-0029  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 👄
+   1) จมูก  |  2) หู  |  3) เท้า  |  4) ปาก
+EN: Which Thai word matches this picture? 👄
+   (EN choices same as TH)
+
+### th-0030  (หัวข้อ: first-consonant)
+TH: "บ้าน" 🏠 มีพยัญชนะตัวแรกคือตัวไหน
+   1) บ  |  2) ห  |  3) ด  |  4) ช
+EN: What is the first consonant of "บ้าน" 🏠?
+   (EN choices same as TH)
+
+### th-0031  (หัวข้อ: alphabet)
+TH: อ ... อะไร (ท่อง ก ไก่)
+   1) เสือ  |  2) หีบ  |  3) อ่าง  |  4) จุฬา
+EN: In the Thai alphabet chant, "อ" goes with which word?
+   (EN choices same as TH)
+
+### th-0032  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 📖
+   1) ประตู  |  2) หนังสือ  |  3) ร่ม  |  4) กุญแจ
+EN: Which Thai word matches this picture? 📖
+   (EN choices same as TH)
+
+### th-0033  (หัวข้อ: first-consonant)
+TH: "กระเป๋า" 🎒 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ฃ  |  2) ญ  |  3) ล  |  4) ก
+EN: What is the first consonant of "กระเป๋า" 🎒?
+   (EN choices same as TH)
+
+### th-0034  (หัวข้อ: alphabet)
+TH: ข ... อะไร (ท่อง ก ไก่)
+   1) ระฆัง  |  2) คน  |  3) ขวด  |  4) ไข่
+EN: In the Thai alphabet chant, "ข" goes with which word?
+   (EN choices same as TH)
+
+### th-0035  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🐔
+   1) แมว  |  2) ช้าง  |  3) กบ  |  4) ไก่
+EN: Which Thai word matches this picture? 🐔
+   (EN choices same as TH)
+
+### th-0036  (หัวข้อ: first-consonant)
+TH: "ช้าง" 🐘 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ช  |  2) ธ  |  3) ล  |  4) ศ
+EN: What is the first consonant of "ช้าง" 🐘?
+   (EN choices same as TH)
+
+### th-0037  (หัวข้อ: alphabet)
+TH: ม ... อะไร (ท่อง ก ไก่)
+   1) ม้า  |  2) สำเภา  |  3) เรือ  |  4) ยักษ์
+EN: In the Thai alphabet chant, "ม" goes with which word?
+   (EN choices same as TH)
+
+### th-0038  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🦋
+   1) ม้า  |  2) ลิง  |  3) ผีเสื้อ  |  4) เต่า
+EN: Which Thai word matches this picture? 🦋
+   (EN choices same as TH)
+
+### th-0039  (หัวข้อ: first-consonant)
+TH: "ม้า" 🐴 มีพยัญชนะตัวแรกคือตัวไหน
+   1) จ  |  2) ว  |  3) ม  |  4) ฎ
+EN: What is the first consonant of "ม้า" 🐴?
+   (EN choices same as TH)
+
+### th-0040  (หัวข้อ: alphabet)
+TH: ฎ ... อะไร (ท่อง ก ไก่)
+   1) ผู้เฒ่า  |  2) ชฎา  |  3) หญิง  |  4) ช้าง
+EN: In the Thai alphabet chant, "ฎ" goes with which word?
+   (EN choices same as TH)
+
+### th-0041  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🍚
+   1) ข้าว  |  2) สับปะรด  |  3) ไข่  |  4) กล้วย
+EN: Which Thai word matches this picture? 🍚
+   (EN choices same as TH)
+
+### th-0042  (หัวข้อ: first-consonant)
+TH: "มะม่วง" 🥭 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ม  |  2) ถ  |  3) อ  |  4) ด
+EN: What is the first consonant of "มะม่วง" 🥭?
+   (EN choices same as TH)
+
+### th-0043  (หัวข้อ: alphabet)
+TH: น ... อะไร (ท่อง ก ไก่)
+   1) เต่า  |  2) ใบไม้  |  3) หนู  |  4) ฝา
+EN: In the Thai alphabet chant, "น" goes with which word?
+   (EN choices same as TH)
+
+### th-0044  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🐯
+   1) ช้าง  |  2) นก  |  3) เป็ด  |  4) เสือ
+EN: Which Thai word matches this picture? 🐯
+   (EN choices same as TH)
+
+### th-0045  (หัวข้อ: first-consonant)
+TH: "จมูก" 👃 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ฟ  |  2) จ  |  3) ท  |  4) ฅ
+EN: What is the first consonant of "จมูก" 👃?
+   (EN choices same as TH)
+
+### th-0046  (หัวข้อ: alphabet)
+TH: ฅ ... อะไร (ท่อง ก ไก่)
+   1) ขวด  |  2) ระฆัง  |  3) คน  |  4) จาน
+EN: In the Thai alphabet chant, "ฅ" goes with which word?
+   (EN choices same as TH)
+
+### th-0047  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน ✋
+   1) จมูก  |  2) มือ  |  3) ฟัน  |  4) ตา
+EN: Which Thai word matches this picture? ✋
+   (EN choices same as TH)
+
+### th-0048  (หัวข้อ: first-consonant)
+TH: "ส้ม" 🍊 มีพยัญชนะตัวแรกคือตัวไหน
+   1) จ  |  2) ล  |  3) ง  |  4) ส
+EN: What is the first consonant of "ส้ม" 🍊?
+   (EN choices same as TH)
+
+### th-0049  (หัวข้อ: alphabet)
+TH: "ขวด" 🍾 คือตัวอักษรตัวไหน
+   1) ฃ  |  2) ฆ  |  3) ฅ  |  4) ง
+EN: Which Thai letter goes with "ขวด" 🍾?
+   (EN choices same as TH)
+
+### th-0050  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🚪
+   1) เตียง  |  2) ดินสอ  |  3) ประตู  |  4) หนังสือ
+EN: Which Thai word matches this picture? 🚪
+   (EN choices same as TH)
+
+### th-0051  (หัวข้อ: first-consonant)
+TH: "ผึ้ง" 🐝 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ล  |  2) ผ  |  3) ษ  |  4) ง
+EN: What is the first consonant of "ผึ้ง" 🐝?
+   (EN choices same as TH)
+
+### th-0052  (หัวข้อ: alphabet)
+TH: "คน" 🧑 คือตัวอักษรตัวไหน
+   1) ฅ  |  2) จ  |  3) ฃ  |  4) ค
+EN: Which Thai letter goes with "คน" 🧑?
+   (EN choices same as TH)
+
+### th-0053  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🐝
+   1) กระต่าย  |  2) เป็ด  |  3) เต่า  |  4) ผึ้ง
+EN: Which Thai word matches this picture? 🐝
+   (EN choices same as TH)
+
+### th-0054  (หัวข้อ: first-consonant)
+TH: "รถ" 🚗 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ษ  |  2) ฒ  |  3) ป  |  4) ร
+EN: What is the first consonant of "รถ" 🚗?
+   (EN choices same as TH)
+
+### th-0055  (หัวข้อ: alphabet)
+TH: "หญิง" 👩 คือตัวอักษรตัวไหน
+   1) ฎ  |  2) ญ  |  3) ฏ  |  4) ฌ
+EN: Which Thai letter goes with "หญิง" 👩?
+   (EN choices same as TH)
+
+### th-0056  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🥛
+   1) นม  |  2) กล้วย  |  3) ขนมปัง  |  4) ข้าวโพด
+EN: Which Thai word matches this picture? 🥛
+   (EN choices same as TH)
+
+### th-0057  (หัวข้อ: first-consonant)
+TH: "หิน" 🪨 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ห  |  2) ม  |  3) พ  |  4) ฅ
+EN: What is the first consonant of "หิน" 🪨?
+   (EN choices same as TH)
+
+### th-0058  (หัวข้อ: alphabet)
+TH: ผ ... อะไร (ท่อง ก ไก่)
+   1) ฟัน  |  2) ใบไม้  |  3) ปลา  |  4) ผึ้ง
+EN: In the Thai alphabet chant, "ผ" goes with which word?
+   (EN choices same as TH)
+
+### th-0059  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🍞
+   1) สับปะรด  |  2) องุ่น  |  3) ขนมปัง  |  4) มะม่วง
+EN: Which Thai word matches this picture? 🍞
+   (EN choices same as TH)
+
+### th-0060  (หัวข้อ: first-consonant)
+TH: "หนังสือ" 📖 มีพยัญชนะตัวแรกคือตัวไหน
+   1) พ  |  2) ฌ  |  3) ห  |  4) ค
+EN: What is the first consonant of "หนังสือ" 📖?
+   (EN choices same as TH)
+
+### th-0061  (หัวข้อ: alphabet)
+TH: ฏ ... อะไร (ท่อง ก ไก่)
+   1) โซ่  |  2) ผู้เฒ่า  |  3) ปฏัก  |  4) มณโฑ
+EN: In the Thai alphabet chant, "ฏ" goes with which word?
+   (EN choices same as TH)
+
+### th-0062  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🐘
+   1) หมี  |  2) แมว  |  3) ปลา  |  4) ช้าง
+EN: Which Thai word matches this picture? 🐘
+   (EN choices same as TH)
+
+### th-0063  (หัวข้อ: first-consonant)
+TH: "วัว" 🐄 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ญ  |  2) ว  |  3) อ  |  4) ฝ
+EN: What is the first consonant of "วัว" 🐄?
+   (EN choices same as TH)
+
+### th-0064  (หัวข้อ: alphabet)
+TH: "ไข่" 🥚 คือตัวอักษรตัวไหน
+   1) ฃ  |  2) ฅ  |  3) ข  |  4) ฆ
+EN: Which Thai letter goes with "ไข่" 🥚?
+   (EN choices same as TH)
+
+### th-0065  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 👑
+   1) นาฬิกา  |  2) รองเท้า  |  3) มงกุฎ  |  4) เตียง
+EN: Which Thai word matches this picture? 👑
+   (EN choices same as TH)
+
+### th-0066  (หัวข้อ: first-consonant)
+TH: "ประตู" 🚪 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ย  |  2) ฟ  |  3) ถ  |  4) ป
+EN: What is the first consonant of "ประตู" 🚪?
+   (EN choices same as TH)
+
+### th-0067  (หัวข้อ: alphabet)
+TH: ก ... อะไร (ท่อง ก ไก่)
+   1) ไก่  |  2) ขวด  |  3) ควาย  |  4) คน
+EN: In the Thai alphabet chant, "ก" goes with which word?
+   (EN choices same as TH)
+
+### th-0068  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🔑
+   1) มงกุฎ  |  2) กุญแจ  |  3) ร่ม  |  4) รองเท้า
+EN: Which Thai word matches this picture? 🔑
+   (EN choices same as TH)
+
+### th-0069  (หัวข้อ: first-consonant)
+TH: "ฝน" 🌧️ มีพยัญชนะตัวแรกคือตัวไหน
+   1) ฝ  |  2) จ  |  3) ฅ  |  4) ต
+EN: What is the first consonant of "ฝน" 🌧️?
+   (EN choices same as TH)
+
+### th-0070  (หัวข้อ: alphabet)
+TH: ซ ... อะไร (ท่อง ก ไก่)
+   1) หญิง  |  2) เฌอ  |  3) งู  |  4) โซ่
+EN: In the Thai alphabet chant, "ซ" goes with which word?
+   (EN choices same as TH)
+
+### th-0071  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🏠
+   1) บ้าน  |  2) มงกุฎ  |  3) ดินสอ  |  4) ร่ม
+EN: Which Thai word matches this picture? 🏠
+   (EN choices same as TH)
+
+### th-0072  (หัวข้อ: first-consonant)
+TH: "ภูเขา" ⛰️ มีพยัญชนะตัวแรกคือตัวไหน
+   1) ป  |  2) ภ  |  3) ย  |  4) ฆ
+EN: What is the first consonant of "ภูเขา" ⛰️?
+   (EN choices same as TH)
+
+### th-0073  (หัวข้อ: alphabet)
+TH: "จาน" 🍽️ คือตัวอักษรตัวไหน
+   1) ฌ  |  2) จ  |  3) ซ  |  4) ง
+EN: Which Thai letter goes with "จาน" 🍽️?
+   (EN choices same as TH)
+
+### th-0074  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🍍
+   1) กล้วย  |  2) สับปะรด  |  3) มะพร้าว  |  4) ข้าว
+EN: Which Thai word matches this picture? 🍍
+   (EN choices same as TH)
+
+### th-0075  (หัวข้อ: first-consonant)
+TH: "ตา" 👁️ มีพยัญชนะตัวแรกคือตัวไหน
+   1) ต  |  2) ฎ  |  3) ห  |  4) ฮ
+EN: What is the first consonant of "ตา" 👁️?
+   (EN choices same as TH)
+
+### th-0076  (หัวข้อ: alphabet)
+TH: "ฐาน" 🏛️ คือตัวอักษรตัวไหน
+   1) ฏ  |  2) ฐ  |  3) ญ  |  4) ณ
+EN: Which Thai letter goes with "ฐาน" 🏛️?
+   (EN choices same as TH)
+
+### th-0077  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🌊
+   1) ดวงจันทร์  |  2) ทะเล  |  3) ดาว  |  4) ต้นไม้
+EN: Which Thai word matches this picture? 🌊
+   (EN choices same as TH)
+
+### th-0078  (หัวข้อ: first-consonant)
+TH: "จักรยาน" 🚲 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ศ  |  2) ร  |  3) จ  |  4) ซ
+EN: What is the first consonant of "จักรยาน" 🚲?
+   (EN choices same as TH)
+
+### th-0079  (หัวข้อ: alphabet)
+TH: ณ ... อะไร (ท่อง ก ไก่)
+   1) ผู้เฒ่า  |  2) ฐาน  |  3) ถุง  |  4) เณร
+EN: In the Thai alphabet chant, "ณ" goes with which word?
+   (EN choices same as TH)
+
+### th-0080  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน ✈️
+   1) รถ  |  2) รถไฟ  |  3) จักรยาน  |  4) เครื่องบิน
+EN: Which Thai word matches this picture? ✈️
+   (EN choices same as TH)
+
+### th-0081  (หัวข้อ: first-consonant)
+TH: "มือ" ✋ มีพยัญชนะตัวแรกคือตัวไหน
+   1) ภ  |  2) ล  |  3) ฒ  |  4) ม
+EN: What is the first consonant of "มือ" ✋?
+   (EN choices same as TH)
+
+### th-0082  (หัวข้อ: alphabet)
+TH: ง ... อะไร (ท่อง ก ไก่)
+   1) ช้าง  |  2) คน  |  3) ควาย  |  4) งู
+EN: In the Thai alphabet chant, "ง" goes with which word?
+   (EN choices same as TH)
+
+### th-0083  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 👟
+   1) รองเท้า  |  2) กุญแจ  |  3) ดินสอ  |  4) กระเป๋า
+EN: Which Thai word matches this picture? 👟
+   (EN choices same as TH)
+
+### th-0084  (หัวข้อ: first-consonant)
+TH: "รุ้ง" 🌈 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ข  |  2) ง  |  3) ฅ  |  4) ร
+EN: What is the first consonant of "รุ้ง" 🌈?
+   (EN choices same as TH)
+
+### th-0085  (หัวข้อ: alphabet)
+TH: ษ ... อะไร (ท่อง ก ไก่)
+   1) แหวน  |  2) ฤๅษี  |  3) เสือ  |  4) อ่าง
+EN: In the Thai alphabet chant, "ษ" goes with which word?
+   (EN choices same as TH)
+
+### th-0086  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🛏️
+   1) ร่ม  |  2) รองเท้า  |  3) เตียง  |  4) ประตู
+EN: Which Thai word matches this picture? 🛏️
+   (EN choices same as TH)
+
+### th-0087  (หัวข้อ: first-consonant)
+TH: "ฟัน" 🦷 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ฃ  |  2) ด  |  3) ฟ  |  4) ฅ
+EN: What is the first consonant of "ฟัน" 🦷?
+   (EN choices same as TH)
+
+### th-0088  (หัวข้อ: alphabet)
+TH: ฌ ... อะไร (ท่อง ก ไก่)
+   1) เฌอ  |  2) ฉิ่ง  |  3) หญิง  |  4) ช้าง
+EN: In the Thai alphabet chant, "ฌ" goes with which word?
+   (EN choices same as TH)
+
+### th-0089  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🐍
+   1) เต่า  |  2) หมา  |  3) งู  |  4) เป็ด
+EN: Which Thai word matches this picture? 🐍
+   (EN choices same as TH)
+
+### th-0090  (หัวข้อ: first-consonant)
+TH: "รถบัส" 🚌 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ษ  |  2) ต  |  3) ร  |  4) ฮ
+EN: What is the first consonant of "รถบัส" 🚌?
+   (EN choices same as TH)
+
+### th-0091  (หัวข้อ: alphabet)
+TH: "ปฏัก" 🗡️ คือตัวอักษรตัวไหน
+   1) ฑ  |  2) ณ  |  3) ฌ  |  4) ฏ
+EN: Which Thai letter goes with "ปฏัก" 🗡️?
+   (EN choices same as TH)
+
+### th-0092  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🌸
+   1) ไฟ  |  2) ดอกไม้  |  3) เมฆ  |  4) ดาว
+EN: Which Thai word matches this picture? 🌸
+   (EN choices same as TH)
+
+### th-0093  (หัวข้อ: first-consonant)
+TH: "มด" 🐜 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ข  |  2) ย  |  3) ม  |  4) ผ
+EN: What is the first consonant of "มด" 🐜?
+   (EN choices same as TH)
+
+### th-0094  (หัวข้อ: alphabet)
+TH: "เฌอ" 🌳 คือตัวอักษรตัวไหน
+   1) ฉ  |  2) ฌ  |  3) ฐ  |  4) ซ
+EN: Which Thai letter goes with "เฌอ" 🌳?
+   (EN choices same as TH)
+
+### th-0095  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🍌
+   1) กล้วย  |  2) ส้ม  |  3) สับปะรด  |  4) ข้าวโพด
+EN: Which Thai word matches this picture? 🍌
+   (EN choices same as TH)
+
+### th-0096  (หัวข้อ: first-consonant)
+TH: "สับปะรด" 🍍 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ษ  |  2) ส  |  3) ย  |  4) ฟ
+EN: What is the first consonant of "สับปะรด" 🍍?
+   (EN choices same as TH)
+
+### th-0097  (หัวข้อ: alphabet)
+TH: "ช้าง" 🐘 คือตัวอักษรตัวไหน
+   1) ช  |  2) ฉ  |  3) ฌ  |  4) ฆ
+EN: Which Thai letter goes with "ช้าง" 🐘?
+   (EN choices same as TH)
+
+### th-0098  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน ⛵
+   1) เรือ  |  2) รถ  |  3) จักรยาน  |  4) เครื่องบิน
+EN: Which Thai word matches this picture? ⛵
+   (EN choices same as TH)
+
+### th-0099  (หัวข้อ: first-consonant)
+TH: "ขนมปัง" 🍞 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ล  |  2) ฌ  |  3) ษ  |  4) ข
+EN: What is the first consonant of "ขนมปัง" 🍞?
+   (EN choices same as TH)
+
+### th-0100  (หัวข้อ: alphabet)
+TH: "งู" 🐍 คือตัวอักษรตัวไหน
+   1) ง  |  2) ช  |  3) ฃ  |  4) ฉ
+EN: Which Thai letter goes with "งู" 🐍?
+   (EN choices same as TH)
+
+### th-0101  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🌳
+   1) รุ้ง  |  2) ต้นไม้  |  3) ฝน  |  4) ดาว
+EN: Which Thai word matches this picture? 🌳
+   (EN choices same as TH)
+
+### th-0102  (หัวข้อ: first-consonant)
+TH: "ดินสอ" ✏️ มีพยัญชนะตัวแรกคือตัวไหน
+   1) ฮ  |  2) ด  |  3) ก  |  4) ฏ
+EN: What is the first consonant of "ดินสอ" ✏️?
+   (EN choices same as TH)
+
+### th-0103  (หัวข้อ: alphabet)
+TH: "ระฆัง" 🔔 คือตัวอักษรตัวไหน
+   1) ข  |  2) จ  |  3) ฆ  |  4) ค
+EN: Which Thai letter goes with "ระฆัง" 🔔?
+   (EN choices same as TH)
+
+### th-0104  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🦆
+   1) วัว  |  2) ผีเสื้อ  |  3) เป็ด  |  4) นก
+EN: Which Thai word matches this picture? 🦆
+   (EN choices same as TH)
+
+### th-0105  (หัวข้อ: first-consonant)
+TH: "องุ่น" 🍇 มีพยัญชนะตัวแรกคือตัวไหน
+   1) บ  |  2) อ  |  3) ฟ  |  4) ศ
+EN: What is the first consonant of "องุ่น" 🍇?
+   (EN choices same as TH)
+
+### th-0106  (หัวข้อ: alphabet)
+TH: ว ... อะไร (ท่อง ก ไก่)
+   1) หีบ  |  2) ลิง  |  3) แหวน  |  4) ฤๅษี
+EN: In the Thai alphabet chant, "ว" goes with which word?
+   (EN choices same as TH)
+
+### th-0107  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🐰
+   1) หมู  |  2) มด  |  3) วัว  |  4) กระต่าย
+EN: Which Thai word matches this picture? 🐰
+   (EN choices same as TH)
+
+### th-0108  (หัวข้อ: first-consonant)
+TH: "นก" 🐦 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ญ  |  2) ฉ  |  3) ฑ  |  4) น
+EN: What is the first consonant of "นก" 🐦?
+   (EN choices same as TH)
+
+### th-0109  (หัวข้อ: alphabet)
+TH: ฬ ... อะไร (ท่อง ก ไก่)
+   1) นกฮูก  |  2) จุฬา  |  3) ฤๅษี  |  4) เสือ
+EN: In the Thai alphabet chant, "ฬ" goes with which word?
+   (EN choices same as TH)
+
+### th-0110  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🐦
+   1) กบ  |  2) เสือ  |  3) หมา  |  4) นก
+EN: Which Thai word matches this picture? 🐦
+   (EN choices same as TH)
+
+### th-0111  (หัวข้อ: first-consonant)
+TH: "ปาก" 👄 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ฑ  |  2) ถ  |  3) ญ  |  4) ป
+EN: What is the first consonant of "ปาก" 👄?
+   (EN choices same as TH)
+
+### th-0112  (หัวข้อ: alphabet)
+TH: ฑ ... อะไร (ท่อง ก ไก่)
+   1) เณร  |  2) เต่า  |  3) มณโฑ  |  4) ปฏัก
+EN: In the Thai alphabet chant, "ฑ" goes with which word?
+   (EN choices same as TH)
+
+### th-0113  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🐟
+   1) ปลา  |  2) กบ  |  3) ม้า  |  4) ไก่
+EN: Which Thai word matches this picture? 🐟
+   (EN choices same as TH)
+
+### th-0114  (หัวข้อ: first-consonant)
+TH: "กล้วย" 🍌 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ข  |  2) ธ  |  3) ก  |  4) ม
+EN: What is the first consonant of "กล้วย" 🍌?
+   (EN choices same as TH)
+
+### th-0115  (หัวข้อ: alphabet)
+TH: "ชฎา" 👑 คือตัวอักษรตัวไหน
+   1) ฏ  |  2) ฌ  |  3) ฎ  |  4) ช
+EN: Which Thai letter goes with "ชฎา" 👑?
+   (EN choices same as TH)
+
+### th-0116  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 👒
+   1) นาฬิกา  |  2) หนังสือ  |  3) รองเท้า  |  4) หมวก
+EN: Which Thai word matches this picture? 👒
+   (EN choices same as TH)
+
+### th-0117  (หัวข้อ: first-consonant)
+TH: "ทะเล" 🌊 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ญ  |  2) ข  |  3) ส  |  4) ท
+EN: What is the first consonant of "ทะเล" 🌊?
+   (EN choices same as TH)
+
+### th-0118  (หัวข้อ: alphabet)
+TH: "ไก่" 🐔 คือตัวอักษรตัวไหน
+   1) ฃ  |  2) ค  |  3) ข  |  4) ก
+EN: Which Thai letter goes with "ไก่" 🐔?
+   (EN choices same as TH)
+
+### th-0119  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🐒
+   1) หมา  |  2) ลิง  |  3) เสือ  |  4) วัว
+EN: Which Thai word matches this picture? 🐒
+   (EN choices same as TH)
+
+### th-0120  (หัวข้อ: first-consonant)
+TH: "ข้าว" 🍚 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ด  |  2) ก  |  3) ล  |  4) ข
+EN: What is the first consonant of "ข้าว" 🍚?
+   (EN choices same as TH)
+
+### th-0121  (หัวข้อ: alphabet)
+TH: บ ... อะไร (ท่อง ก ไก่)
+   1) ธง  |  2) ใบไม้  |  3) ถุง  |  4) ฝา
+EN: In the Thai alphabet chant, "บ" goes with which word?
+   (EN choices same as TH)
+
+### th-0122  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 👁️
+   1) ปาก  |  2) ตา  |  3) เท้า  |  4) มือ
+EN: Which Thai word matches this picture? 👁️
+   (EN choices same as TH)
+
+### th-0123  (หัวข้อ: first-consonant)
+TH: "ลิง" 🐒 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ณ  |  2) ร  |  3) ซ  |  4) ล
+EN: What is the first consonant of "ลิง" 🐒?
+   (EN choices same as TH)
+
+### th-0124  (หัวข้อ: alphabet)
+TH: ฃ ... อะไร (ท่อง ก ไก่)
+   1) ระฆัง  |  2) ขวด  |  3) คน  |  4) ไก่
+EN: In the Thai alphabet chant, "ฃ" goes with which word?
+   (EN choices same as TH)
+
+### th-0125  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน ✏️
+   1) เตียง  |  2) บ้าน  |  3) ร่ม  |  4) ดินสอ
+EN: Which Thai word matches this picture? ✏️
+   (EN choices same as TH)
+
+### th-0126  (หัวข้อ: first-consonant)
+TH: "หมู" 🐷 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ฮ  |  2) ท  |  3) ก  |  4) ห
+EN: What is the first consonant of "หมู" 🐷?
+   (EN choices same as TH)
+
+### th-0127  (หัวข้อ: alphabet)
+TH: ล ... อะไร (ท่อง ก ไก่)
+   1) ลิง  |  2) ม้า  |  3) แหวน  |  4) เสือ
+EN: In the Thai alphabet chant, "ล" goes with which word?
+   (EN choices same as TH)
+
+### th-0128  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🎒
+   1) หมวก  |  2) บ้าน  |  3) กระเป๋า  |  4) ประตู
+EN: Which Thai word matches this picture? 🎒
+   (EN choices same as TH)
+
+### th-0129  (หัวข้อ: first-consonant)
+TH: "ปลา" 🐟 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ท  |  2) ย  |  3) ส  |  4) ป
+EN: What is the first consonant of "ปลา" 🐟?
+   (EN choices same as TH)
+
+### th-0130  (หัวข้อ: alphabet)
+TH: ฆ ... อะไร (ท่อง ก ไก่)
+   1) งู  |  2) ระฆัง  |  3) ขวด  |  4) ช้าง
+EN: In the Thai alphabet chant, "ฆ" goes with which word?
+   (EN choices same as TH)
+
+### th-0131  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🐜
+   1) หมี  |  2) ปลา  |  3) ผึ้ง  |  4) มด
+EN: Which Thai word matches this picture? 🐜
+   (EN choices same as TH)
+
+### th-0132  (หัวข้อ: first-consonant)
+TH: "หมี" 🐻 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ห  |  2) ฎ  |  3) น  |  4) ฐ
+EN: What is the first consonant of "หมี" 🐻?
+   (EN choices same as TH)
+
+### th-0133  (หัวข้อ: alphabet)
+TH: ภ ... อะไร (ท่อง ก ไก่)
+   1) สำเภา  |  2) ลิง  |  3) ยักษ์  |  4) พาน
+EN: In the Thai alphabet chant, "ภ" goes with which word?
+   (EN choices same as TH)
+
+### th-0134  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🦷
+   1) ฟัน  |  2) เท้า  |  3) ปาก  |  4) จมูก
+EN: Which Thai word matches this picture? 🦷
+   (EN choices same as TH)
+
+### th-0135  (หัวข้อ: first-consonant)
+TH: "ร่ม" ☂️ มีพยัญชนะตัวแรกคือตัวไหน
+   1) ท  |  2) ร  |  3) พ  |  4) ถ
+EN: What is the first consonant of "ร่ม" ☂️?
+   (EN choices same as TH)
+
+### th-0136  (หัวข้อ: alphabet)
+TH: ฒ ... อะไร (ท่อง ก ไก่)
+   1) มณโฑ  |  2) ถุง  |  3) เด็ก  |  4) ผู้เฒ่า
+EN: In the Thai alphabet chant, "ฒ" goes with which word?
+   (EN choices same as TH)
+
+### th-0137  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🥥
+   1) แตงโม  |  2) มะพร้าว  |  3) ข้าว  |  4) ขนมปัง
+EN: Which Thai word matches this picture? 🥥
+   (EN choices same as TH)
+
+### th-0138  (หัวข้อ: first-consonant)
+TH: "ต้นไม้" 🌳 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ต  |  2) ฆ  |  3) ฟ  |  4) ส
+EN: What is the first consonant of "ต้นไม้" 🌳?
+   (EN choices same as TH)
+
+### th-0139  (หัวข้อ: alphabet)
+TH: ท ... อะไร (ท่อง ก ไก่)
+   1) ทหาร  |  2) เณร  |  3) ใบไม้  |  4) หนู
+EN: In the Thai alphabet chant, "ท" goes with which word?
+   (EN choices same as TH)
+
+### th-0140  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน ☁️
+   1) ดาว  |  2) เมฆ  |  3) ดวงจันทร์  |  4) ดวงอาทิตย์
+EN: Which Thai word matches this picture? ☁️
+   (EN choices same as TH)
+
+### th-0141  (หัวข้อ: first-consonant)
+TH: "ดวงอาทิตย์" ☀️ มีพยัญชนะตัวแรกคือตัวไหน
+   1) ด  |  2) ธ  |  3) ญ  |  4) ช
+EN: What is the first consonant of "ดวงอาทิตย์" ☀️?
+   (EN choices same as TH)
+
+### th-0142  (หัวข้อ: alphabet)
+TH: พ ... อะไร (ท่อง ก ไก่)
+   1) พาน  |  2) ยักษ์  |  3) สำเภา  |  4) ปลา
+EN: In the Thai alphabet chant, "พ" goes with which word?
+   (EN choices same as TH)
+
+### th-0143  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🌧️
+   1) รุ้ง  |  2) ภูเขา  |  3) หิน  |  4) ฝน
+EN: Which Thai word matches this picture? 🌧️
+   (EN choices same as TH)
+
+### th-0144  (หัวข้อ: first-consonant)
+TH: "กุญแจ" 🔑 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ส  |  2) ว  |  3) ก  |  4) ฝ
+EN: What is the first consonant of "กุญแจ" 🔑?
+   (EN choices same as TH)
+
+### th-0145  (หัวข้อ: alphabet)
+TH: ห ... อะไร (ท่อง ก ไก่)
+   1) อ่าง  |  2) หีบ  |  3) ฤๅษี  |  4) เสือ
+EN: In the Thai alphabet chant, "ห" goes with which word?
+   (EN choices same as TH)
+
+### th-0146  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🍉
+   1) นม  |  2) ไข่  |  3) องุ่น  |  4) แตงโม
+EN: Which Thai word matches this picture? 🍉
+   (EN choices same as TH)
+
+### th-0147  (หัวข้อ: first-consonant)
+TH: "ดวงจันทร์" 🌙 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ฎ  |  2) ส  |  3) ด  |  4) ง
+EN: What is the first consonant of "ดวงจันทร์" 🌙?
+   (EN choices same as TH)
+
+### th-0148  (หัวข้อ: alphabet)
+TH: "ควาย" 🐃 คือตัวอักษรตัวไหน
+   1) จ  |  2) ฃ  |  3) ฆ  |  4) ค
+EN: Which Thai letter goes with "ควาย" 🐃?
+   (EN choices same as TH)
+
+### th-0149  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🐢
+   1) เป็ด  |  2) เสือ  |  3) มด  |  4) เต่า
+EN: Which Thai word matches this picture? 🐢
+   (EN choices same as TH)
+
+### th-0150  (หัวข้อ: first-consonant)
+TH: "นม" 🥛 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ธ  |  2) น  |  3) ว  |  4) ฉ
+EN: What is the first consonant of "นม" 🥛?
+   (EN choices same as TH)
+
+### th-0151  (หัวข้อ: alphabet)
+TH: ร ... อะไร (ท่อง ก ไก่)
+   1) สำเภา  |  2) ฟัน  |  3) เรือ  |  4) แหวน
+EN: In the Thai alphabet chant, "ร" goes with which word?
+   (EN choices same as TH)
+
+### th-0152  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🌽
+   1) ข้าวโพด  |  2) แตงโม  |  3) ขนมปัง  |  4) ส้ม
+EN: Which Thai word matches this picture? 🌽
+   (EN choices same as TH)
+
+### th-0153  (หัวข้อ: first-consonant)
+TH: "รองเท้า" 👟 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ธ  |  2) ฬ  |  3) ล  |  4) ร
+EN: What is the first consonant of "รองเท้า" 👟?
+   (EN choices same as TH)
+
+### th-0154  (หัวข้อ: alphabet)
+TH: ด ... อะไร (ท่อง ก ไก่)
+   1) เต่า  |  2) ผู้เฒ่า  |  3) เด็ก  |  4) ทหาร
+EN: In the Thai alphabet chant, "ด" goes with which word?
+   (EN choices same as TH)
+
+### th-0155  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🐄
+   1) เสือ  |  2) เต่า  |  3) วัว  |  4) ผึ้ง
+EN: Which Thai word matches this picture? 🐄
+   (EN choices same as TH)
+
+### th-0156  (หัวข้อ: first-consonant)
+TH: "นาฬิกา" ⏰ มีพยัญชนะตัวแรกคือตัวไหน
+   1) ฐ  |  2) น  |  3) จ  |  4) ฌ
+EN: What is the first consonant of "นาฬิกา" ⏰?
+   (EN choices same as TH)
+
+### th-0157  (หัวข้อ: alphabet)
+TH: "โซ่" ⛓️ คือตัวอักษรตัวไหน
+   1) ง  |  2) ซ  |  3) จ  |  4) ฏ
+EN: Which Thai letter goes with "โซ่" ⛓️?
+   (EN choices same as TH)
+
+### th-0158  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🦶
+   1) มือ  |  2) ฟัน  |  3) ปาก  |  4) เท้า
+EN: Which Thai word matches this picture? 🦶
+   (EN choices same as TH)
+
+### th-0159  (หัวข้อ: first-consonant)
+TH: "มงกุฎ" 👑 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ฑ  |  2) ป  |  3) ม  |  4) ง
+EN: What is the first consonant of "มงกุฎ" 👑?
+   (EN choices same as TH)
+
+### th-0160  (หัวข้อ: alphabet)
+TH: "ฉิ่ง" 🎵 คือตัวอักษรตัวไหน
+   1) ซ  |  2) ง  |  3) ฉ  |  4) ช
+EN: Which Thai letter goes with "ฉิ่ง" 🎵?
+   (EN choices same as TH)
+
+### th-0161  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🐱
+   1) นก  |  2) วัว  |  3) แมว  |  4) ลิง
+EN: Which Thai word matches this picture? 🐱
+   (EN choices same as TH)
+
+### th-0162  (หัวข้อ: first-consonant)
+TH: "หมวก" 👒 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ธ  |  2) ม  |  3) ส  |  4) ห
+EN: What is the first consonant of "หมวก" 👒?
+   (EN choices same as TH)
+
+### th-0163  (หัวข้อ: alphabet)
+TH: "เด็ก" 👧 คือตัวอักษรตัวไหน
+   1) ด  |  2) ธ  |  3) ณ  |  4) ฑ
+EN: Which Thai letter goes with "เด็ก" 👧?
+   (EN choices same as TH)
+
+### th-0164  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🍇
+   1) กล้วย  |  2) องุ่น  |  3) แตงโม  |  4) ข้าว
+EN: Which Thai word matches this picture? 🍇
+   (EN choices same as TH)
+
+### th-0165  (หัวข้อ: first-consonant)
+TH: "กระต่าย" 🐰 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ก  |  2) ฆ  |  3) ษ  |  4) ซ
+EN: What is the first consonant of "กระต่าย" 🐰?
+   (EN choices same as TH)
+
+### th-0166  (หัวข้อ: alphabet)
+TH: จ ... อะไร (ท่อง ก ไก่)
+   1) คน  |  2) งู  |  3) จาน  |  4) ควาย
+EN: In the Thai alphabet chant, "จ" goes with which word?
+   (EN choices same as TH)
+
+### th-0167  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🚗
+   1) เรือ  |  2) รถบัส  |  3) จักรยาน  |  4) รถ
+EN: Which Thai word matches this picture? 🚗
+   (EN choices same as TH)
+
+### th-0168  (หัวข้อ: first-consonant)
+TH: "มะพร้าว" 🥥 มีพยัญชนะตัวแรกคือตัวไหน
+   1) อ  |  2) ผ  |  3) ม  |  4) ช
+EN: What is the first consonant of "มะพร้าว" 🥥?
+   (EN choices same as TH)
+
+### th-0169  (หัวข้อ: alphabet)
+TH: ศ ... อะไร (ท่อง ก ไก่)
+   1) ยักษ์  |  2) ศาลา  |  3) จุฬา  |  4) เสือ
+EN: In the Thai alphabet chant, "ศ" goes with which word?
+   (EN choices same as TH)
+
+### th-0170  (หัวข้อ: picture-word)
+TH: ภาพนี้คือคำไหน 🍊
+   1) ส้ม  |  2) ข้าวโพด  |  3) องุ่น  |  4) ขนมปัง
+EN: Which Thai word matches this picture? 🍊
+   (EN choices same as TH)

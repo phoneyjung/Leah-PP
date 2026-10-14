@@ -1,0 +1,1022 @@
+# ชุดตรวจ: ภาษาอังกฤษ · เด็กอายุ 6 ปี (อนุบาล 3–ป.1) · 170 ข้อ · ไฟล์ q-english-6.json
+# ตัวเลือกนับ 1–4 · ไม่มีเฉลยในไฟล์นี้ (ให้แก้โจทย์เองก่อน)
+
+### en-0001  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🥤
+   1) key  |  2) crown  |  3) cup  |  4) pen
+EN: Which word matches this picture? 🥤
+   (EN choices same as TH)
+
+### en-0002  (หัวข้อ: thai-to-english)
+TH: คำว่า "นกฮูก" ภาษาอังกฤษคือคำไหน
+   1) elephant  |  2) owl  |  3) horse  |  4) turtle
+EN: Which English word means "นกฮูก"?
+   (EN choices same as TH)
+
+### en-0003  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: rai_ 🌧️
+   1) d  |  2) n  |  3) j  |  4) c
+EN: Fill in the missing letter: rai_ 🌧️
+   (EN choices same as TH)
+
+### en-0004  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ 🌽 (ข้าวโพด) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) G  |  2) C  |  3) L  |  4) X
+EN: The English word for 🌽 "ข้าวโพด" starts with which letter?
+   (EN choices same as TH)
+
+### en-0005  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🍊
+   1) orange  |  2) cake  |  3) watermelon  |  4) egg
+EN: Which word matches this picture? 🍊
+   (EN choices same as TH)
+
+### en-0006  (หัวข้อ: thai-to-english)
+TH: คำว่า "มงกุฎ" ภาษาอังกฤษคือคำไหน
+   1) pen  |  2) chair  |  3) door  |  4) crown
+EN: Which English word means "มงกุฎ"?
+   (EN choices same as TH)
+
+### en-0007  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: re_ 🟥
+   1) y  |  2) r  |  3) o  |  4) d
+EN: Fill in the missing letter: re_ 🟥
+   (EN choices same as TH)
+
+### en-0008  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ 🐒 (ลิง) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) P  |  2) M  |  3) E  |  4) J
+EN: The English word for 🐒 "ลิง" starts with which letter?
+   (EN choices same as TH)
+
+### en-0009  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน ⬜
+   1) red  |  2) white  |  3) blue  |  4) black
+EN: Which word matches this picture? ⬜
+   (EN choices same as TH)
+
+### en-0010  (หัวข้อ: thai-to-english)
+TH: คำว่า "ส้ม" ภาษาอังกฤษคือคำไหน
+   1) corn  |  2) grapes  |  3) orange  |  4) cake
+EN: Which English word means "ส้ม"?
+   (EN choices same as TH)
+
+### en-0011  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: boo_ 📖
+   1) t  |  2) v  |  3) k  |  4) r
+EN: Fill in the missing letter: boo_ 📖
+   (EN choices same as TH)
+
+### en-0012  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ 🤴 (พระราชา) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) R  |  2) X  |  3) K  |  4) L
+EN: The English word for 🤴 "พระราชา" starts with which letter?
+   (EN choices same as TH)
+
+### en-0013  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🌳
+   1) flower  |  2) tree  |  3) snow  |  4) sun
+EN: Which word matches this picture? 🌳
+   (EN choices same as TH)
+
+### en-0014  (หัวข้อ: thai-to-english)
+TH: คำว่า "เตียง" ภาษาอังกฤษคือคำไหน
+   1) bed  |  2) crown  |  3) gem  |  4) door
+EN: Which English word means "เตียง"?
+   (EN choices same as TH)
+
+### en-0015  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: ca_e 🕳️
+   1) l  |  2) b  |  3) v  |  4) c
+EN: Fill in the missing letter: ca_e 🕳️
+   (EN choices same as TH)
+
+### en-0016  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ 🔥 (ไฟ) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) A  |  2) L  |  3) T  |  4) F
+EN: The English word for 🔥 "ไฟ" starts with which letter?
+   (EN choices same as TH)
+
+### en-0017  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 👑
+   1) book  |  2) ball  |  3) crown  |  4) key
+EN: Which word matches this picture? 👑
+   (EN choices same as TH)
+
+### en-0018  (หัวข้อ: thai-to-english)
+TH: คำว่า "กระเป๋า" ภาษาอังกฤษคือคำไหน
+   1) box  |  2) crown  |  3) pen  |  4) bag
+EN: Which English word means "กระเป๋า"?
+   (EN choices same as TH)
+
+### en-0019  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: roc_ 🪨
+   1) k  |  2) z  |  3) c  |  4) v
+EN: Fill in the missing letter: roc_ 🪨
+   (EN choices same as TH)
+
+### en-0020  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ 🦁 (สิงโต) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) T  |  2) F  |  3) L  |  4) A
+EN: The English word for 🦁 "สิงโต" starts with which letter?
+   (EN choices same as TH)
+
+### en-0021  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🔥
+   1) sea  |  2) cloud  |  3) rain  |  4) fire
+EN: Which word matches this picture? 🔥
+   (EN choices same as TH)
+
+### en-0022  (หัวข้อ: thai-to-english)
+TH: คำว่า "เครื่องบิน" ภาษาอังกฤษคือคำไหน
+   1) plane  |  2) bus  |  3) car  |  4) train
+EN: Which English word means "เครื่องบิน"?
+   (EN choices same as TH)
+
+### en-0023  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: _up 🥤
+   1) d  |  2) l  |  3) c  |  4) x
+EN: Fill in the missing letter: _up 🥤
+   (EN choices same as TH)
+
+### en-0024  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ 🐻 (หมี) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) D  |  2) H  |  3) B  |  4) F
+EN: The English word for 🐻 "หมี" starts with which letter?
+   (EN choices same as TH)
+
+### en-0025  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🐄
+   1) sheep  |  2) cow  |  3) bee  |  4) butterfly
+EN: Which word matches this picture? 🐄
+   (EN choices same as TH)
+
+### en-0026  (หัวข้อ: thai-to-english)
+TH: คำว่า "หมู" ภาษาอังกฤษคือคำไหน
+   1) elephant  |  2) ant  |  3) pig  |  4) bird
+EN: Which English word means "หมู"?
+   (EN choices same as TH)
+
+### en-0027  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: d_ck 🦆
+   1) y  |  2) r  |  3) u  |  4) d
+EN: Fill in the missing letter: d_ck 🦆
+   (EN choices same as TH)
+
+### en-0028  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ 🐔 (ไก่) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) I  |  2) E  |  3) C  |  4) O
+EN: The English word for 🐔 "ไก่" starts with which letter?
+   (EN choices same as TH)
+
+### en-0029  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🍌
+   1) banana  |  2) rice  |  3) carrot  |  4) bread
+EN: Which word matches this picture? 🍌
+   (EN choices same as TH)
+
+### en-0030  (หัวข้อ: thai-to-english)
+TH: คำว่า "ผึ้ง" ภาษาอังกฤษคือคำไหน
+   1) ant  |  2) owl  |  3) bee  |  4) cat
+EN: Which English word means "ผึ้ง"?
+   (EN choices same as TH)
+
+### en-0031  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: e_e 👁️
+   1) y  |  2) d  |  3) j  |  4) g
+EN: Fill in the missing letter: e_e 👁️
+   (EN choices same as TH)
+
+### en-0032  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ 🪨 (หิน) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) R  |  2) S  |  3) L  |  4) Q
+EN: The English word for 🪨 "หิน" starts with which letter?
+   (EN choices same as TH)
+
+### en-0033  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🟪
+   1) blue  |  2) brown  |  3) red  |  4) purple
+EN: Which word matches this picture? 🟪
+   (EN choices same as TH)
+
+### en-0034  (หัวข้อ: thai-to-english)
+TH: คำว่า "นม" ภาษาอังกฤษคือคำไหน
+   1) milk  |  2) cheese  |  3) bread  |  4) cake
+EN: Which English word means "นม"?
+   (EN choices same as TH)
+
+### en-0035  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: ca_ 🚗
+   1) x  |  2) r  |  3) b  |  4) o
+EN: Fill in the missing letter: ca_ 🚗
+   (EN choices same as TH)
+
+### en-0036  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ 🐷 (หมู) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) O  |  2) F  |  3) I  |  4) P
+EN: The English word for 🐷 "หมู" starts with which letter?
+   (EN choices same as TH)
+
+### en-0037  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🟩
+   1) yellow  |  2) green  |  3) purple  |  4) brown
+EN: Which word matches this picture? 🟩
+   (EN choices same as TH)
+
+### en-0038  (หัวข้อ: thai-to-english)
+TH: คำว่า "ลูกบอล" ภาษาอังกฤษคือคำไหน
+   1) bed  |  2) clock  |  3) ball  |  4) hat
+EN: Which English word means "ลูกบอล"?
+   (EN choices same as TH)
+
+### en-0039  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: c_t 🐱
+   1) a  |  2) v  |  3) n  |  4) t
+EN: Fill in the missing letter: c_t 🐱
+   (EN choices same as TH)
+
+### en-0040  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ ❄️ (หิมะ) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) H  |  2) C  |  3) S  |  4) Y
+EN: The English word for ❄️ "หิมะ" starts with which letter?
+   (EN choices same as TH)
+
+### en-0041  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 👩‍🏫
+   1) princess  |  2) teacher  |  3) king  |  4) mother
+EN: Which word matches this picture? 👩‍🏫
+   (EN choices same as TH)
+
+### en-0042  (หัวข้อ: thai-to-english)
+TH: คำว่า "แก้ว" ภาษาอังกฤษคือคำไหน
+   1) cup  |  2) shoe  |  3) ball  |  4) book
+EN: Which English word means "แก้ว"?
+   (EN choices same as TH)
+
+### en-0043  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: _ig 🐷
+   1) w  |  2) i  |  3) p  |  4) v
+EN: Fill in the missing letter: _ig 🐷
+   (EN choices same as TH)
+
+### en-0044  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ 🦆 (เป็ด) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) C  |  2) D  |  3) T  |  4) V
+EN: The English word for 🦆 "เป็ด" starts with which letter?
+   (EN choices same as TH)
+
+### en-0045  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🐜
+   1) bat  |  2) rabbit  |  3) ant  |  4) chicken
+EN: Which word matches this picture? 🐜
+   (EN choices same as TH)
+
+### en-0046  (หัวข้อ: thai-to-english)
+TH: คำว่า "รถบัส" ภาษาอังกฤษคือคำไหน
+   1) boat  |  2) bus  |  3) bike  |  4) car
+EN: Which English word means "รถบัส"?
+   (EN choices same as TH)
+
+### en-0047  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: ba_l ⚽
+   1) l  |  2) a  |  3) k  |  4) h
+EN: Fill in the missing letter: ba_l ⚽
+   (EN choices same as TH)
+
+### en-0048  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ ⭐ (ดาว) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) D  |  2) A  |  3) R  |  4) S
+EN: The English word for ⭐ "ดาว" starts with which letter?
+   (EN choices same as TH)
+
+### en-0049  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🤴
+   1) princess  |  2) father  |  3) king  |  4) mother
+EN: Which word matches this picture? 🤴
+   (EN choices same as TH)
+
+### en-0050  (หัวข้อ: thai-to-english)
+TH: คำว่า "หมี" ภาษาอังกฤษคือคำไหน
+   1) bear  |  2) cow  |  3) pig  |  4) tiger
+EN: Which English word means "หมี"?
+   (EN choices same as TH)
+
+### en-0051  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: b_d 🛏️
+   1) e  |  2) x  |  3) i  |  4) b
+EN: Fill in the missing letter: b_d 🛏️
+   (EN choices same as TH)
+
+### en-0052  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ 🐶 (หมา) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) J  |  2) W  |  3) N  |  4) D
+EN: The English word for 🐶 "หมา" starts with which letter?
+   (EN choices same as TH)
+
+### en-0053  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🐯
+   1) tiger  |  2) bat  |  3) bear  |  4) dog
+EN: Which word matches this picture? 🐯
+   (EN choices same as TH)
+
+### en-0054  (หัวข้อ: thai-to-english)
+TH: คำว่า "ข้าวโพด" ภาษาอังกฤษคือคำไหน
+   1) milk  |  2) watermelon  |  3) corn  |  4) water
+EN: Which English word means "ข้าวโพด"?
+   (EN choices same as TH)
+
+### en-0055  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: bl_e 🟦
+   1) a  |  2) g  |  3) u  |  4) b
+EN: Fill in the missing letter: bl_e 🟦
+   (EN choices same as TH)
+
+### en-0056  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ 🦋 (ผีเสื้อ) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) P  |  2) B  |  3) D  |  4) V
+EN: The English word for 🦋 "ผีเสื้อ" starts with which letter?
+   (EN choices same as TH)
+
+### en-0057  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🐷
+   1) owl  |  2) bat  |  3) pig  |  4) duck
+EN: Which word matches this picture? 🐷
+   (EN choices same as TH)
+
+### en-0058  (หัวข้อ: thai-to-english)
+TH: คำว่า "ไฟ" ภาษาอังกฤษคือคำไหน
+   1) flower  |  2) fire  |  3) sea  |  4) rain
+EN: Which English word means "ไฟ"?
+   (EN choices same as TH)
+
+### en-0059  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: e_r 👂
+   1) p  |  2) a  |  3) t  |  4) k
+EN: Fill in the missing letter: e_r 👂
+   (EN choices same as TH)
+
+### en-0060  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ 🍎 (แอปเปิล) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) A  |  2) D  |  3) R  |  4) C
+EN: The English word for 🍎 "แอปเปิล" starts with which letter?
+   (EN choices same as TH)
+
+### en-0061  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🧀
+   1) watermelon  |  2) corn  |  3) egg  |  4) cheese
+EN: Which word matches this picture? 🧀
+   (EN choices same as TH)
+
+### en-0062  (หัวข้อ: thai-to-english)
+TH: คำว่า "หมวก" ภาษาอังกฤษคือคำไหน
+   1) chair  |  2) cup  |  3) box  |  4) hat
+EN: Which English word means "หมวก"?
+   (EN choices same as TH)
+
+### en-0063  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: nos_ 👃
+   1) a  |  2) q  |  3) e  |  4) f
+EN: Fill in the missing letter: nos_ 👃
+   (EN choices same as TH)
+
+### en-0064  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ 👨 (พ่อ) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) K  |  2) O  |  3) F  |  4) W
+EN: The English word for 👨 "พ่อ" starts with which letter?
+   (EN choices same as TH)
+
+### en-0065  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🌈
+   1) leaf  |  2) cloud  |  3) rainbow  |  4) star
+EN: Which word matches this picture? 🌈
+   (EN choices same as TH)
+
+### en-0066  (หัวข้อ: thai-to-english)
+TH: คำว่า "เรือ" ภาษาอังกฤษคือคำไหน
+   1) boat  |  2) plane  |  3) train  |  4) bus
+EN: Which English word means "เรือ"?
+   (EN choices same as TH)
+
+### en-0067  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: bi_e 🚲
+   1) u  |  2) x  |  3) k  |  4) c
+EN: Fill in the missing letter: bi_e 🚲
+   (EN choices same as TH)
+
+### en-0068  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ 🍚 (ข้าว) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) O  |  2) F  |  3) L  |  4) R
+EN: The English word for 🍚 "ข้าว" starts with which letter?
+   (EN choices same as TH)
+
+### en-0069  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🪨
+   1) rain  |  2) rainbow  |  3) rock  |  4) fire
+EN: Which word matches this picture? 🪨
+   (EN choices same as TH)
+
+### en-0070  (หัวข้อ: thai-to-english)
+TH: คำว่า "รถไฟ" ภาษาอังกฤษคือคำไหน
+   1) bike  |  2) train  |  3) plane  |  4) boat
+EN: Which English word means "รถไฟ"?
+   (EN choices same as TH)
+
+### en-0071  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: _un ☀️
+   1) k  |  2) s  |  3) y  |  4) u
+EN: Fill in the missing letter: _un ☀️
+   (EN choices same as TH)
+
+### en-0072  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ 🟪 (สีม่วง) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) N  |  2) H  |  3) Y  |  4) P
+EN: The English word for 🟪 "สีม่วง" starts with which letter?
+   (EN choices same as TH)
+
+### en-0073  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🍞
+   1) egg  |  2) banana  |  3) bread  |  4) orange
+EN: Which word matches this picture? 🍞
+   (EN choices same as TH)
+
+### en-0074  (หัวข้อ: thai-to-english)
+TH: คำว่า "แครอท" ภาษาอังกฤษคือคำไหน
+   1) carrot  |  2) watermelon  |  3) egg  |  4) water
+EN: Which English word means "แครอท"?
+   (EN choices same as TH)
+
+### en-0075  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: _ire 🔥
+   1) h  |  2) f  |  3) x  |  4) y
+EN: Fill in the missing letter: _ire 🔥
+   (EN choices same as TH)
+
+### en-0076  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ 🟨 (สีเหลือง) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) E  |  2) J  |  3) S  |  4) Y
+EN: The English word for 🟨 "สีเหลือง" starts with which letter?
+   (EN choices same as TH)
+
+### en-0077  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🐴
+   1) tiger  |  2) fish  |  3) horse  |  4) cat
+EN: Which word matches this picture? 🐴
+   (EN choices same as TH)
+
+### en-0078  (หัวข้อ: thai-to-english)
+TH: คำว่า "กุญแจ" ภาษาอังกฤษคือคำไหน
+   1) gem  |  2) crown  |  3) cup  |  4) key
+EN: Which English word means "กุญแจ"?
+   (EN choices same as TH)
+
+### en-0079  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: _ish 🐟
+   1) f  |  2) a  |  3) r  |  4) q
+EN: Fill in the missing letter: _ish 🐟
+   (EN choices same as TH)
+
+### en-0080  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ 👄 (ปาก) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) M  |  2) U  |  3) D  |  4) X
+EN: The English word for 👄 "ปาก" starts with which letter?
+   (EN choices same as TH)
+
+### en-0081  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🟥
+   1) white  |  2) red  |  3) blue  |  4) black
+EN: Which word matches this picture? 🟥
+   (EN choices same as TH)
+
+### en-0082  (หัวข้อ: thai-to-english)
+TH: คำว่า "ไข่" ภาษาอังกฤษคือคำไหน
+   1) watermelon  |  2) apple  |  3) cake  |  4) egg
+EN: Which English word means "ไข่"?
+   (EN choices same as TH)
+
+### en-0083  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: f_og 🐸
+   1) q  |  2) r  |  3) w  |  4) n
+EN: Fill in the missing letter: f_og 🐸
+   (EN choices same as TH)
+
+### en-0084  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ 🛏️ (เตียง) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) L  |  2) Y  |  3) B  |  4) K
+EN: The English word for 🛏️ "เตียง" starts with which letter?
+   (EN choices same as TH)
+
+### en-0085  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🟦
+   1) white  |  2) blue  |  3) purple  |  4) green
+EN: Which word matches this picture? 🟦
+   (EN choices same as TH)
+
+### en-0086  (หัวข้อ: thai-to-english)
+TH: คำว่า "รุ้ง" ภาษาอังกฤษคือคำไหน
+   1) star  |  2) cave  |  3) rainbow  |  4) rain
+EN: Which English word means "รุ้ง"?
+   (EN choices same as TH)
+
+### en-0087  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: mi_k 🥛
+   1) h  |  2) k  |  3) u  |  4) l
+EN: Fill in the missing letter: mi_k 🥛
+   (EN choices same as TH)
+
+### en-0088  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ 🌸 (ดอกไม้) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) K  |  2) C  |  3) F  |  4) H
+EN: The English word for 🌸 "ดอกไม้" starts with which letter?
+   (EN choices same as TH)
+
+### en-0089  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🦁
+   1) chicken  |  2) snake  |  3) horse  |  4) lion
+EN: Which word matches this picture? 🦁
+   (EN choices same as TH)
+
+### en-0090  (หัวข้อ: thai-to-english)
+TH: คำว่า "ขนมปัง" ภาษาอังกฤษคือคำไหน
+   1) bread  |  2) apple  |  3) watermelon  |  4) grapes
+EN: Which English word means "ขนมปัง"?
+   (EN choices same as TH)
+
+### en-0091  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: lea_ 🍃
+   1) b  |  2) k  |  3) f  |  4) p
+EN: Fill in the missing letter: lea_ 🍃
+   (EN choices same as TH)
+
+### en-0092  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ ⏰ (นาฬิกา) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) C  |  2) N  |  3) Z  |  4) B
+EN: The English word for ⏰ "นาฬิกา" starts with which letter?
+   (EN choices same as TH)
+
+### en-0093  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🐑
+   1) ant  |  2) horse  |  3) sheep  |  4) tiger
+EN: Which word matches this picture? 🐑
+   (EN choices same as TH)
+
+### en-0094  (หัวข้อ: thai-to-english)
+TH: คำว่า "บ้าน" ภาษาอังกฤษคือคำไหน
+   1) hat  |  2) house  |  3) crown  |  4) pen
+EN: Which English word means "บ้าน"?
+   (EN choices same as TH)
+
+### en-0095  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: b_rd 🐦
+   1) p  |  2) l  |  3) c  |  4) i
+EN: Fill in the missing letter: b_rd 🐦
+   (EN choices same as TH)
+
+### en-0096  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ 🚲 (จักรยาน) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) B  |  2) M  |  3) J  |  4) I
+EN: The English word for 🚲 "จักรยาน" starts with which letter?
+   (EN choices same as TH)
+
+### en-0097  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน ⚽
+   1) ball  |  2) door  |  3) hat  |  4) bag
+EN: Which word matches this picture? ⚽
+   (EN choices same as TH)
+
+### en-0098  (หัวข้อ: thai-to-english)
+TH: คำว่า "ชีส" ภาษาอังกฤษคือคำไหน
+   1) water  |  2) cheese  |  3) orange  |  4) egg
+EN: Which English word means "ชีส"?
+   (EN choices same as TH)
+
+### en-0099  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: s_a 🌊
+   1) c  |  2) e  |  3) a  |  4) w
+EN: Fill in the missing letter: s_a 🌊
+   (EN choices same as TH)
+
+### en-0100  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ 🎒 (กระเป๋า) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) M  |  2) S  |  3) B  |  4) R
+EN: The English word for 🎒 "กระเป๋า" starts with which letter?
+   (EN choices same as TH)
+
+### en-0101  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน ☀️
+   1) fire  |  2) rain  |  3) cloud  |  4) sun
+EN: Which word matches this picture? ☀️
+   (EN choices same as TH)
+
+### en-0102  (หัวข้อ: thai-to-english)
+TH: คำว่า "เสือ" ภาษาอังกฤษคือคำไหน
+   1) ant  |  2) snake  |  3) tiger  |  4) elephant
+EN: Which English word means "เสือ"?
+   (EN choices same as TH)
+
+### en-0103  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: k_ng 🤴
+   1) i  |  2) t  |  3) c  |  4) y
+EN: Fill in the missing letter: k_ng 🤴
+   (EN choices same as TH)
+
+### en-0104  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ 🍃 (ใบไม้) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) D  |  2) L  |  3) F  |  4) Q
+EN: The English word for 🍃 "ใบไม้" starts with which letter?
+   (EN choices same as TH)
+
+### en-0105  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🥚
+   1) grapes  |  2) banana  |  3) egg  |  4) milk
+EN: Which word matches this picture? 🥚
+   (EN choices same as TH)
+
+### en-0106  (หัวข้อ: thai-to-english)
+TH: คำว่า "ดอกไม้" ภาษาอังกฤษคือคำไหน
+   1) snow  |  2) leaf  |  3) flower  |  4) star
+EN: Which English word means "ดอกไม้"?
+   (EN choices same as TH)
+
+### en-0107  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: _now ❄️
+   1) t  |  2) u  |  3) r  |  4) s
+EN: Fill in the missing letter: _now ❄️
+   (EN choices same as TH)
+
+### en-0108  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ ⬜ (สีขาว) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) T  |  2) W  |  3) H  |  4) O
+EN: The English word for ⬜ "สีขาว" starts with which letter?
+   (EN choices same as TH)
+
+### en-0109  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🦇
+   1) bat  |  2) cow  |  3) dog  |  4) ant
+EN: Which word matches this picture? 🦇
+   (EN choices same as TH)
+
+### en-0110  (หัวข้อ: thai-to-english)
+TH: คำว่า "กล่อง" ภาษาอังกฤษคือคำไหน
+   1) gem  |  2) box  |  3) book  |  4) crown
+EN: Which English word means "กล่อง"?
+   (EN choices same as TH)
+
+### en-0111  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: _oat ⛵
+   1) a  |  2) b  |  3) s  |  4) y
+EN: Fill in the missing letter: _oat ⛵
+   (EN choices same as TH)
+
+### en-0112  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ 🥕 (แครอท) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) C  |  2) E  |  3) W  |  4) P
+EN: The English word for 🥕 "แครอท" starts with which letter?
+   (EN choices same as TH)
+
+### en-0113  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🐒
+   1) ant  |  2) dog  |  3) monkey  |  4) rabbit
+EN: Which word matches this picture? 🐒
+   (EN choices same as TH)
+
+### en-0114  (หัวข้อ: thai-to-english)
+TH: คำว่า "หิน" ภาษาอังกฤษคือคำไหน
+   1) sun  |  2) moon  |  3) rock  |  4) fire
+EN: Which English word means "หิน"?
+   (EN choices same as TH)
+
+### en-0115  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: ric_ 🍚
+   1) p  |  2) u  |  3) e  |  4) z
+EN: Fill in the missing letter: ric_ 🍚
+   (EN choices same as TH)
+
+### en-0116  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ 🐄 (วัว) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) H  |  2) M  |  3) C  |  4) F
+EN: The English word for 🐄 "วัว" starts with which letter?
+   (EN choices same as TH)
+
+### en-0117  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🦆
+   1) bear  |  2) bird  |  3) pig  |  4) duck
+EN: Which word matches this picture? 🦆
+   (EN choices same as TH)
+
+### en-0118  (หัวข้อ: thai-to-english)
+TH: คำว่า "นก" ภาษาอังกฤษคือคำไหน
+   1) bat  |  2) bird  |  3) lion  |  4) turtle
+EN: Which English word means "นก"?
+   (EN choices same as TH)
+
+### en-0119  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: bo_ 📦
+   1) o  |  2) x  |  3) u  |  4) f
+EN: Fill in the missing letter: bo_ 📦
+   (EN choices same as TH)
+
+### en-0120  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ 🚪 (ประตู) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) F  |  2) Y  |  3) S  |  4) D
+EN: The English word for 🚪 "ประตู" starts with which letter?
+   (EN choices same as TH)
+
+### en-0121  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🚗
+   1) train  |  2) boat  |  3) plane  |  4) car
+EN: Which word matches this picture? 🚗
+   (EN choices same as TH)
+
+### en-0122  (หัวข้อ: thai-to-english)
+TH: คำว่า "จักรยาน" ภาษาอังกฤษคือคำไหน
+   1) bus  |  2) train  |  3) car  |  4) bike
+EN: Which English word means "จักรยาน"?
+   (EN choices same as TH)
+
+### en-0123  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: e_g 🥚
+   1) m  |  2) r  |  3) a  |  4) g
+EN: Fill in the missing letter: e_g 🥚
+   (EN choices same as TH)
+
+### en-0124  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ ⬛ (สีดำ) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) B  |  2) A  |  3) K  |  4) S
+EN: The English word for ⬛ "สีดำ" starts with which letter?
+   (EN choices same as TH)
+
+### en-0125  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🐘
+   1) snake  |  2) elephant  |  3) ant  |  4) sheep
+EN: Which word matches this picture? 🐘
+   (EN choices same as TH)
+
+### en-0126  (หัวข้อ: thai-to-english)
+TH: คำว่า "แมว" ภาษาอังกฤษคือคำไหน
+   1) chicken  |  2) fish  |  3) cat  |  4) pig
+EN: Which English word means "แมว"?
+   (EN choices same as TH)
+
+### en-0127  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: h_t 👒
+   1) m  |  2) c  |  3) v  |  4) a
+EN: Fill in the missing letter: h_t 👒
+   (EN choices same as TH)
+
+### en-0128  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ 💧 (น้ำ) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) T  |  2) F  |  3) W  |  4) G
+EN: The English word for 💧 "น้ำ" starts with which letter?
+   (EN choices same as TH)
+
+### en-0129  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 👟
+   1) shoe  |  2) clock  |  3) house  |  4) ball
+EN: Which word matches this picture? 👟
+   (EN choices same as TH)
+
+### en-0130  (หัวข้อ: thai-to-english)
+TH: คำว่า "สิงโต" ภาษาอังกฤษคือคำไหน
+   1) butterfly  |  2) sheep  |  3) lion  |  4) turtle
+EN: Which English word means "สิงโต"?
+   (EN choices same as TH)
+
+### en-0131  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: moo_ 🌙
+   1) n  |  2) r  |  3) w  |  4) a
+EN: Fill in the missing letter: moo_ 🌙
+   (EN choices same as TH)
+
+### en-0132  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ 👑 (มงกุฎ) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) C  |  2) E  |  3) X  |  4) K
+EN: The English word for 👑 "มงกุฎ" starts with which letter?
+   (EN choices same as TH)
+
+### en-0133  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🐟
+   1) dog  |  2) fish  |  3) owl  |  4) frog
+EN: Which word matches this picture? 🐟
+   (EN choices same as TH)
+
+### en-0134  (หัวข้อ: thai-to-english)
+TH: คำว่า "ม้า" ภาษาอังกฤษคือคำไหน
+   1) snake  |  2) horse  |  3) pig  |  4) duck
+EN: Which English word means "ม้า"?
+   (EN choices same as TH)
+
+### en-0135  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: sho_ 👟
+   1) p  |  2) n  |  3) j  |  4) e
+EN: Fill in the missing letter: sho_ 👟
+   (EN choices same as TH)
+
+### en-0136  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ 🐝 (ผึ้ง) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) Z  |  2) B  |  3) P  |  4) C
+EN: The English word for 🐝 "ผึ้ง" starts with which letter?
+   (EN choices same as TH)
+
+### en-0137  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน ⏰
+   1) door  |  2) chair  |  3) crown  |  4) clock
+EN: Which word matches this picture? ⏰
+   (EN choices same as TH)
+
+### en-0138  (หัวข้อ: thai-to-english)
+TH: คำว่า "เค้ก" ภาษาอังกฤษคือคำไหน
+   1) watermelon  |  2) corn  |  3) milk  |  4) cake
+EN: Which English word means "เค้ก"?
+   (EN choices same as TH)
+
+### en-0139  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: ba_ 🎒
+   1) n  |  2) g  |  3) m  |  4) e
+EN: Fill in the missing letter: ba_ 🎒
+   (EN choices same as TH)
+
+### en-0140  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ 🍞 (ขนมปัง) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) U  |  2) B  |  3) D  |  4) Z
+EN: The English word for 🍞 "ขนมปัง" starts with which letter?
+   (EN choices same as TH)
+
+### en-0141  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🍃
+   1) rain  |  2) leaf  |  3) tree  |  4) sun
+EN: Which word matches this picture? 🍃
+   (EN choices same as TH)
+
+### en-0142  (หัวข้อ: thai-to-english)
+TH: คำว่า "ดวงจันทร์" ภาษาอังกฤษคือคำไหน
+   1) tree  |  2) moon  |  3) cave  |  4) rainbow
+EN: Which English word means "ดวงจันทร์"?
+   (EN choices same as TH)
+
+### en-0143  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: c_w 🐄
+   1) l  |  2) g  |  3) n  |  4) o
+EN: Fill in the missing letter: c_w 🐄
+   (EN choices same as TH)
+
+### en-0144  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ 🐍 (งู) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) F  |  2) S  |  3) C  |  4) M
+EN: The English word for 🐍 "งู" starts with which letter?
+   (EN choices same as TH)
+
+### en-0145  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🔑
+   1) bag  |  2) key  |  3) ball  |  4) bed
+EN: Which word matches this picture? 🔑
+   (EN choices same as TH)
+
+### en-0146  (หัวข้อ: thai-to-english)
+TH: คำว่า "ค้างคาว" ภาษาอังกฤษคือคำไหน
+   1) dog  |  2) bat  |  3) bear  |  4) snake
+EN: Which English word means "ค้างคาว"?
+   (EN choices same as TH)
+
+### en-0147  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: o_l 🦉
+   1) b  |  2) w  |  3) g  |  4) j
+EN: Fill in the missing letter: o_l 🦉
+   (EN choices same as TH)
+
+### en-0148  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ ✋ (มือ) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) D  |  2) H  |  3) V  |  4) U
+EN: The English word for ✋ "มือ" starts with which letter?
+   (EN choices same as TH)
+
+### en-0149  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🍇
+   1) egg  |  2) grapes  |  3) milk  |  4) cheese
+EN: Which word matches this picture? 🍇
+   (EN choices same as TH)
+
+### en-0150  (หัวข้อ: thai-to-english)
+TH: คำว่า "ฝน" ภาษาอังกฤษคือคำไหน
+   1) rain  |  2) sun  |  3) moon  |  4) cave
+EN: Which English word means "ฝน"?
+   (EN choices same as TH)
+
+### en-0151  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: doo_ 🚪
+   1) r  |  2) l  |  3) z  |  4) u
+EN: Fill in the missing letter: doo_ 🚪
+   (EN choices same as TH)
+
+### en-0152  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ 🟦 (สีน้ำเงิน) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) X  |  2) B  |  3) R  |  4) C
+EN: The English word for 🟦 "สีน้ำเงิน" starts with which letter?
+   (EN choices same as TH)
+
+### en-0153  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🥕
+   1) grapes  |  2) carrot  |  3) bread  |  4) banana
+EN: Which word matches this picture? 🥕
+   (EN choices same as TH)
+
+### en-0154  (หัวข้อ: thai-to-english)
+TH: คำว่า "ข้าว" ภาษาอังกฤษคือคำไหน
+   1) orange  |  2) apple  |  3) banana  |  4) rice
+EN: Which English word means "ข้าว"?
+   (EN choices same as TH)
+
+### en-0155  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: _ree 🌳
+   1) c  |  2) i  |  3) m  |  4) t
+EN: Fill in the missing letter: _ree 🌳
+   (EN choices same as TH)
+
+### en-0156  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ 👁️ (ตา) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) R  |  2) F  |  3) A  |  4) E
+EN: The English word for 👁️ "ตา" starts with which letter?
+   (EN choices same as TH)
+
+### en-0157  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🟨
+   1) purple  |  2) brown  |  3) green  |  4) yellow
+EN: Which word matches this picture? 🟨
+   (EN choices same as TH)
+
+### en-0158  (หัวข้อ: thai-to-english)
+TH: คำว่า "ต้นไม้" ภาษาอังกฤษคือคำไหน
+   1) tree  |  2) moon  |  3) cave  |  4) sun
+EN: Which English word means "ต้นไม้"?
+   (EN choices same as TH)
+
+### en-0159  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: a_t 🐜
+   1) g  |  2) n  |  3) c  |  4) f
+EN: Fill in the missing letter: a_t 🐜
+   (EN choices same as TH)
+
+### en-0160  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ ☀️ (ดวงอาทิตย์) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) Z  |  2) S  |  3) L  |  4) R
+EN: The English word for ☀️ "ดวงอาทิตย์" starts with which letter?
+   (EN choices same as TH)
+
+### en-0161  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🐝
+   1) fish  |  2) pig  |  3) bee  |  4) rabbit
+EN: Which word matches this picture? 🐝
+   (EN choices same as TH)
+
+### en-0162  (หัวข้อ: thai-to-english)
+TH: คำว่า "ใบไม้" ภาษาอังกฤษคือคำไหน
+   1) sun  |  2) cave  |  3) snow  |  4) leaf
+EN: Which English word means "ใบไม้"?
+   (EN choices same as TH)
+
+### en-0163  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: l_on 🦁
+   1) y  |  2) i  |  3) b  |  4) a
+EN: Fill in the missing letter: l_on 🦁
+   (EN choices same as TH)
+
+### en-0164  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ 🐸 (กบ) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) E  |  2) O  |  3) F  |  4) M
+EN: The English word for 🐸 "กบ" starts with which letter?
+   (EN choices same as TH)
+
+### en-0165  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🍉
+   1) orange  |  2) watermelon  |  3) rice  |  4) cake
+EN: Which word matches this picture? 🍉
+   (EN choices same as TH)
+
+### en-0166  (หัวข้อ: thai-to-english)
+TH: คำว่า "รถยนต์" ภาษาอังกฤษคือคำไหน
+   1) train  |  2) boat  |  3) car  |  4) bike
+EN: Which English word means "รถยนต์"?
+   (EN choices same as TH)
+
+### en-0167  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: cor_ 🌽
+   1) n  |  2) b  |  3) z  |  4) r
+EN: Fill in the missing letter: cor_ 🌽
+   (EN choices same as TH)
+
+### en-0168  (หัวข้อ: first-letter)
+TH: คำภาษาอังกฤษของ 🐰 (กระต่าย) ขึ้นต้นด้วยตัวอักษรอะไร
+   1) R  |  2) W  |  3) L  |  4) I
+EN: The English word for 🐰 "กระต่าย" starts with which letter?
+   (EN choices same as TH)
+
+### en-0169  (หัวข้อ: picture-word)
+TH: ภาพนี้ภาษาอังกฤษคือคำไหน 🐻
+   1) frog  |  2) elephant  |  3) owl  |  4) bear
+EN: Which word matches this picture? 🐻
+   (EN choices same as TH)
+
+### en-0170  (หัวข้อ: thai-to-english)
+TH: คำว่า "หนังสือ" ภาษาอังกฤษคือคำไหน
+   1) shoe  |  2) bag  |  3) book  |  4) bed
+EN: Which English word means "หนังสือ"?
+   (EN choices same as TH)

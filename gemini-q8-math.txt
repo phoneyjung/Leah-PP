@@ -1,0 +1,992 @@
+# ชุดตรวจ: คณิตศาสตร์ · เด็กอายุ 8 ปี (ป.2–ป.3) · 165 ข้อ · ไฟล์ q-math-8.json
+# ตัวเลือกนับ 1–4 · ไม่มีเฉลยในไฟล์นี้ (ให้แก้โจทย์เองก่อน)
+
+### ma-0336  (หัวข้อ: measure)
+TH: 5 เมตร เท่ากับกี่เซนติเมตร
+   1) 500  |  2) 600  |  3) 50  |  4) 5000
+EN: How many cm are in 5 m?
+   (EN choices same as TH)
+
+### ma-0337  (หัวข้อ: multiply)
+TH: 9 × 3 = ?
+   1) 28  |  2) 24  |  3) 27  |  4) 29
+EN: 9 × 3 = ?
+   (EN choices same as TH)
+
+### ma-0338  (หัวข้อ: multiply)
+TH: 6 × 8 = ?
+   1) 45  |  2) 48  |  3) 46  |  4) 47
+EN: 6 × 8 = ?
+   (EN choices same as TH)
+
+### ma-0339  (หัวข้อ: multiply)
+TH: 7 × 6 = ?
+   1) 45  |  2) 32  |  3) 42  |  4) 41
+EN: 7 × 6 = ?
+   (EN choices same as TH)
+
+### ma-0340  (หัวข้อ: fractions)
+TH: 1/3 ของ 18 คือเท่าไร
+   1) 6  |  2) 8  |  3) 9  |  4) 7
+EN: What is 1/3 of 18?
+   (EN choices same as TH)
+
+### ma-0341  (หัวข้อ: fractions)
+TH: 1/3 ของ 21 คือเท่าไร
+   1) 6  |  2) 7  |  3) 9  |  4) 8
+EN: What is 1/3 of 21?
+   (EN choices same as TH)
+
+### ma-0342  (หัวข้อ: add)
+TH: 238 + 179 = ?
+   1) 419  |  2) 417  |  3) 427  |  4) 420
+EN: 238 + 179 = ?
+   (EN choices same as TH)
+
+### ma-0343  (หัวข้อ: subtract)
+TH: 979 − 482 = ?
+   1) 497  |  2) 498  |  3) 507  |  4) 500
+EN: 979 − 482 = ?
+   (EN choices same as TH)
+
+### ma-0344  (หัวข้อ: perimeter)
+TH: สี่เหลี่ยมผืนผ้ากว้าง 11 ซม. ยาว 2 ซม. มีเส้นรอบรูปยาวกี่ ซม.
+   1) 22  |  2) 28  |  3) 26  |  4) 13
+EN: A rectangle is 11 cm by 2 cm. What is its perimeter in cm?
+   (EN choices same as TH)
+
+### ma-0345  (หัวข้อ: measure)
+TH: 6 ลิตร เท่ากับกี่มิลลิลิตร
+   1) 60000  |  2) 7000  |  3) 6000  |  4) 600
+EN: How many ml are in 6 l?
+   (EN choices same as TH)
+
+### ma-0346  (หัวข้อ: subtract)
+TH: 965 − 401 = ?
+   1) 574  |  2) 564  |  3) 567  |  4) 566
+EN: 965 − 401 = ?
+   (EN choices same as TH)
+
+### ma-0347  (หัวข้อ: measure)
+TH: 6 เมตร เท่ากับกี่เซนติเมตร
+   1) 700  |  2) 600  |  3) 60  |  4) 6000
+EN: How many cm are in 6 m?
+   (EN choices same as TH)
+
+### ma-0348  (หัวข้อ: fractions)
+TH: 1/5 ของ 40 คือเท่าไร
+   1) 11  |  2) 7  |  3) 10  |  4) 8
+EN: What is 1/5 of 40?
+   (EN choices same as TH)
+
+### ma-0349  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 30, 55, 80, ?, 130
+   1) 102  |  2) 107  |  3) 105  |  4) 106
+EN: What is the missing number: 30, 55, 80, ?, 130?
+   (EN choices same as TH)
+
+### ma-0350  (หัวข้อ: word-problem)
+TH: มีขนม 42 ชิ้น แบ่งให้เพื่อน 6 คนเท่า ๆ กัน ได้คนละกี่ชิ้น 🍬
+   1) 5  |  2) 7  |  3) 9  |  4) 4
+EN: 42 sweets are shared equally between 6 friends. How many does each get? 🍬
+   (EN choices same as TH)
+
+### ma-0351  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 39, 139, 239, 339, ?
+   1) 439  |  2) 449  |  3) 436  |  4) 438
+EN: What is the missing number: 39, 139, 239, 339, ??
+   (EN choices same as TH)
+
+### ma-0352  (หัวข้อ: measure)
+TH: 3 ลิตร เท่ากับกี่มิลลิลิตร
+   1) 4000  |  2) 30000  |  3) 300  |  4) 3000
+EN: How many ml are in 3 l?
+   (EN choices same as TH)
+
+### ma-0353  (หัวข้อ: word-problem)
+TH: มีดอกไม้ 42 ดอก แบ่งให้เพื่อน 6 คนเท่า ๆ กัน ได้คนละกี่ดอก 🌸
+   1) 8  |  2) 7  |  3) 4  |  4) 5
+EN: 42 flowers are shared equally between 6 friends. How many does each get? 🌸
+   (EN choices same as TH)
+
+### ma-0354  (หัวข้อ: add)
+TH: 460 + 256 = ?
+   1) 706  |  2) 718  |  3) 713  |  4) 716
+EN: 460 + 256 = ?
+   (EN choices same as TH)
+
+### ma-0355  (หัวข้อ: word-problem)
+TH: มีดาว 24 ดวง แบ่งให้เพื่อน 3 คนเท่า ๆ กัน ได้คนละกี่ดวง ⭐
+   1) 7  |  2) 9  |  3) 8  |  4) 11
+EN: 24 stars are shared equally between 3 friends. How many does each get? ⭐
+   (EN choices same as TH)
+
+### ma-0356  (หัวข้อ: measure)
+TH: 1 ลิตร เท่ากับกี่มิลลิลิตร
+   1) 100  |  2) 10000  |  3) 2000  |  4) 1000
+EN: How many ml are in 1 l?
+   (EN choices same as TH)
+
+### ma-0357  (หัวข้อ: money)
+TH: ซื้อของ 61 บาท จ่ายแบงก์ 100 บาท ได้เงินทอนกี่บาท
+   1) 38 บาท  |  2) 40 บาท  |  3) 39 บาท  |  4) 42 บาท
+EN: Something costs 61 baht. You pay with 100 baht. How much change?
+   1) 38 baht  |  2) 40 baht  |  3) 39 baht  |  4) 42 baht
+
+### ma-0358  (หัวข้อ: perimeter)
+TH: สี่เหลี่ยมผืนผ้ากว้าง 10 ซม. ยาว 11 ซม. มีเส้นรอบรูปยาวกี่ ซม.
+   1) 44  |  2) 21  |  3) 110  |  4) 42
+EN: A rectangle is 10 cm by 11 cm. What is its perimeter in cm?
+   (EN choices same as TH)
+
+### ma-0359  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 42, 48, ?, 60, 66
+   1) 52  |  2) 44  |  3) 51  |  4) 54
+EN: What is the missing number: 42, 48, ?, 60, 66?
+   (EN choices same as TH)
+
+### ma-0360  (หัวข้อ: multiply)
+TH: 2 × 3 = ?
+   1) 7  |  2) 9  |  3) 6  |  4) 16
+EN: 2 × 3 = ?
+   (EN choices same as TH)
+
+### ma-0361  (หัวข้อ: subtract)
+TH: 489 − 172 = ?
+   1) 317  |  2) 307  |  3) 316  |  4) 315
+EN: 489 − 172 = ?
+   (EN choices same as TH)
+
+### ma-0362  (หัวข้อ: multiply)
+TH: 8 × 6 = ?
+   1) 48  |  2) 45  |  3) 51  |  4) 47
+EN: 8 × 6 = ?
+   (EN choices same as TH)
+
+### ma-0363  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 13, 63, 113, ?, 213
+   1) 162  |  2) 161  |  3) 165  |  4) 163
+EN: What is the missing number: 13, 63, 113, ?, 213?
+   (EN choices same as TH)
+
+### ma-0364  (หัวข้อ: word-problem)
+TH: มีแอปเปิล 12 ลูก แบ่งให้เพื่อน 4 คนเท่า ๆ กัน ได้คนละกี่ลูก 🍎
+   1) 5  |  2) 6  |  3) 4  |  4) 3
+EN: 12 apples are shared equally between 4 friends. How many does each get? 🍎
+   (EN choices same as TH)
+
+### ma-0365  (หัวข้อ: fractions)
+TH: 1/8 ของ 64 คือเท่าไร
+   1) 10  |  2) 5  |  3) 11  |  4) 8
+EN: What is 1/8 of 64?
+   (EN choices same as TH)
+
+### ma-0366  (หัวข้อ: divide)
+TH: 12 ÷ 6 = ?
+   1) 2  |  2) 0  |  3) 3  |  4) 1
+EN: 12 ÷ 6 = ?
+   (EN choices same as TH)
+
+### ma-0367  (หัวข้อ: word-problem)
+TH: มีเหรียญ 56 เหรียญ แบ่งให้เพื่อน 8 คนเท่า ๆ กัน ได้คนละกี่เหรียญ 🪙
+   1) 8  |  2) 9  |  3) 7  |  4) 5
+EN: 56 coins are shared equally between 8 friends. How many does each get? 🪙
+   (EN choices same as TH)
+
+### ma-0368  (หัวข้อ: measure)
+TH: 5 ลิตร เท่ากับกี่มิลลิลิตร
+   1) 500  |  2) 50000  |  3) 5000  |  4) 6000
+EN: How many ml are in 5 l?
+   (EN choices same as TH)
+
+### ma-0369  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 48, 52, ?, 60, 64
+   1) 66  |  2) 58  |  3) 55  |  4) 56
+EN: What is the missing number: 48, 52, ?, 60, 64?
+   (EN choices same as TH)
+
+### ma-0370  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 21, 46, ?, 96, 121
+   1) 61  |  2) 71  |  3) 69  |  4) 68
+EN: What is the missing number: 21, 46, ?, 96, 121?
+   (EN choices same as TH)
+
+### ma-0371  (หัวข้อ: subtract)
+TH: 722 − 169 = ?
+   1) 553  |  2) 551  |  3) 556  |  4) 554
+EN: 722 − 169 = ?
+   (EN choices same as TH)
+
+### ma-0372  (หัวข้อ: subtract)
+TH: 529 − 277 = ?
+   1) 254  |  2) 250  |  3) 262  |  4) 252
+EN: 529 − 277 = ?
+   (EN choices same as TH)
+
+### ma-0373  (หัวข้อ: multiply)
+TH: 6 × 3 = ?
+   1) 20  |  2) 16  |  3) 18  |  4) 17
+EN: 6 × 3 = ?
+   (EN choices same as TH)
+
+### ma-0374  (หัวข้อ: add)
+TH: 412 + 100 = ?
+   1) 512  |  2) 515  |  3) 511  |  4) 513
+EN: 412 + 100 = ?
+   (EN choices same as TH)
+
+### ma-0375  (หัวข้อ: multiply)
+TH: 3 × 6 = ?
+   1) 18  |  2) 17  |  3) 15  |  4) 8
+EN: 3 × 6 = ?
+   (EN choices same as TH)
+
+### ma-0376  (หัวข้อ: money)
+TH: ซื้อของ 28 บาท จ่ายแบงก์ 100 บาท ได้เงินทอนกี่บาท
+   1) 74 บาท  |  2) 75 บาท  |  3) 72 บาท  |  4) 69 บาท
+EN: Something costs 28 baht. You pay with 100 baht. How much change?
+   1) 74 baht  |  2) 75 baht  |  3) 72 baht  |  4) 69 baht
+
+### ma-0377  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 34, ?, 46, 52, 58
+   1) 41  |  2) 40  |  3) 37  |  4) 39
+EN: What is the missing number: 34, ?, 46, 52, 58?
+   (EN choices same as TH)
+
+### ma-0378  (หัวข้อ: divide)
+TH: 20 ÷ 4 = ?
+   1) 4  |  2) 8  |  3) 5  |  4) 2
+EN: 20 ÷ 4 = ?
+   (EN choices same as TH)
+
+### ma-0379  (หัวข้อ: time)
+TH: อีก 45 นาทีหลังจาก 10:40 คือกี่โมง
+   1) 11:15  |  2) 11:25  |  3) 11:40  |  4) 10:25
+EN: What time is 45 minutes after 10:40?
+   (EN choices same as TH)
+
+### ma-0380  (หัวข้อ: measure)
+TH: 2 ลิตร เท่ากับกี่มิลลิลิตร
+   1) 2000  |  2) 3000  |  3) 200  |  4) 20000
+EN: How many ml are in 2 l?
+   (EN choices same as TH)
+
+### ma-0381  (หัวข้อ: measure)
+TH: 4 ลิตร เท่ากับกี่มิลลิลิตร
+   1) 5000  |  2) 400  |  3) 4000  |  4) 40000
+EN: How many ml are in 4 l?
+   (EN choices same as TH)
+
+### ma-0382  (หัวข้อ: multiply)
+TH: 12 × 4 = ?
+   1) 48  |  2) 45  |  3) 58  |  4) 51
+EN: 12 × 4 = ?
+   (EN choices same as TH)
+
+### ma-0383  (หัวข้อ: time)
+TH: อีก 30 นาทีหลังจาก 1:50 คือกี่โมง
+   1) 2:10  |  2) 2:20  |  3) 2:35  |  4) 1:20
+EN: What time is 30 minutes after 1:50?
+   (EN choices same as TH)
+
+### ma-0384  (หัวข้อ: divide)
+TH: 56 ÷ 8 = ?
+   1) 8  |  2) 6  |  3) 4  |  4) 7
+EN: 56 ÷ 8 = ?
+   (EN choices same as TH)
+
+### ma-0385  (หัวข้อ: subtract)
+TH: 818 − 221 = ?
+   1) 596  |  2) 599  |  3) 597  |  4) 598
+EN: 818 − 221 = ?
+   (EN choices same as TH)
+
+### ma-0386  (หัวข้อ: money)
+TH: ซื้อของ 73 บาท จ่ายแบงก์ 100 บาท ได้เงินทอนกี่บาท
+   1) 27 บาท  |  2) 29 บาท  |  3) 28 บาท  |  4) 25 บาท
+EN: Something costs 73 baht. You pay with 100 baht. How much change?
+   1) 27 baht  |  2) 29 baht  |  3) 28 baht  |  4) 25 baht
+
+### ma-0387  (หัวข้อ: divide)
+TH: 30 ÷ 3 = ?
+   1) 10  |  2) 12  |  3) 11  |  4) 7
+EN: 30 ÷ 3 = ?
+   (EN choices same as TH)
+
+### ma-0388  (หัวข้อ: money)
+TH: ซื้อของ 36 บาท จ่ายแบงก์ 50 บาท ได้เงินทอนกี่บาท
+   1) 11 บาท  |  2) 17 บาท  |  3) 14 บาท  |  4) 16 บาท
+EN: Something costs 36 baht. You pay with 50 baht. How much change?
+   1) 11 baht  |  2) 17 baht  |  3) 14 baht  |  4) 16 baht
+
+### ma-0389  (หัวข้อ: word-problem)
+TH: มีดอกไม้ 12 ดอก แบ่งให้เพื่อน 6 คนเท่า ๆ กัน ได้คนละกี่ดอก 🌸
+   1) 0  |  2) 3  |  3) 2  |  4) 4
+EN: 12 flowers are shared equally between 6 friends. How many does each get? 🌸
+   (EN choices same as TH)
+
+### ma-0390  (หัวข้อ: add)
+TH: 399 + 357 = ?
+   1) 759  |  2) 755  |  3) 756  |  4) 753
+EN: 399 + 357 = ?
+   (EN choices same as TH)
+
+### ma-0391  (หัวข้อ: subtract)
+TH: 502 − 270 = ?
+   1) 235  |  2) 230  |  3) 222  |  4) 232
+EN: 502 − 270 = ?
+   (EN choices same as TH)
+
+### ma-0392  (หัวข้อ: time)
+TH: อีก 15 นาทีหลังจาก 1:50 คือกี่โมง
+   1) 1:55  |  2) 2:05  |  3) 2:20  |  4) 1:05
+EN: What time is 15 minutes after 1:50?
+   (EN choices same as TH)
+
+### ma-0393  (หัวข้อ: time)
+TH: อีก 45 นาทีหลังจาก 5:25 คือกี่โมง
+   1) 6:10  |  2) 6:25  |  3) 6:00  |  4) 5:10
+EN: What time is 45 minutes after 5:25?
+   (EN choices same as TH)
+
+### ma-0394  (หัวข้อ: subtract)
+TH: 588 − 504 = ?
+   1) 86  |  2) 82  |  3) 87  |  4) 84
+EN: 588 − 504 = ?
+   (EN choices same as TH)
+
+### ma-0395  (หัวข้อ: word-problem)
+TH: มีคริสตัล 12 ชิ้น แบ่งให้เพื่อน 4 คนเท่า ๆ กัน ได้คนละกี่ชิ้น 💎
+   1) 5  |  2) 2  |  3) 3  |  4) 1
+EN: 12 crystals are shared equally between 4 friends. How many does each get? 💎
+   (EN choices same as TH)
+
+### ma-0396  (หัวข้อ: word-problem)
+TH: มีลูกโป่ง 64 ลูก แบ่งให้เพื่อน 8 คนเท่า ๆ กัน ได้คนละกี่ลูก 🎈
+   1) 8  |  2) 9  |  3) 7  |  4) 6
+EN: 64 balloons are shared equally between 8 friends. How many does each get? 🎈
+   (EN choices same as TH)
+
+### ma-0397  (หัวข้อ: measure)
+TH: 7 เมตร เท่ากับกี่เซนติเมตร
+   1) 7000  |  2) 800  |  3) 70  |  4) 700
+EN: How many cm are in 7 m?
+   (EN choices same as TH)
+
+### ma-0398  (หัวข้อ: multiply)
+TH: 8 × 3 = ?
+   1) 21  |  2) 23  |  3) 25  |  4) 24
+EN: 8 × 3 = ?
+   (EN choices same as TH)
+
+### ma-0399  (หัวข้อ: fractions)
+TH: 1/4 ของ 32 คือเท่าไร
+   1) 8  |  2) 6  |  3) 11  |  4) 7
+EN: What is 1/4 of 32?
+   (EN choices same as TH)
+
+### ma-0400  (หัวข้อ: money)
+TH: ซื้อของ 16 บาท จ่ายแบงก์ 100 บาท ได้เงินทอนกี่บาท
+   1) 83 บาท  |  2) 86 บาท  |  3) 84 บาท  |  4) 85 บาท
+EN: Something costs 16 baht. You pay with 100 baht. How much change?
+   1) 83 baht  |  2) 86 baht  |  3) 84 baht  |  4) 85 baht
+
+### ma-0401  (หัวข้อ: perimeter)
+TH: สี่เหลี่ยมผืนผ้ากว้าง 6 ซม. ยาว 5 ซม. มีเส้นรอบรูปยาวกี่ ซม.
+   1) 24  |  2) 11  |  3) 30  |  4) 22
+EN: A rectangle is 6 cm by 5 cm. What is its perimeter in cm?
+   (EN choices same as TH)
+
+### ma-0402  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 45, 70, 95, ?, 145
+   1) 110  |  2) 120  |  3) 117  |  4) 130
+EN: What is the missing number: 45, 70, 95, ?, 145?
+   (EN choices same as TH)
+
+### ma-0403  (หัวข้อ: multiply)
+TH: 3 × 4 = ?
+   1) 13  |  2) 2  |  3) 12  |  4) 9
+EN: 3 × 4 = ?
+   (EN choices same as TH)
+
+### ma-0404  (หัวข้อ: divide)
+TH: 32 ÷ 4 = ?
+   1) 11  |  2) 8  |  3) 7  |  4) 10
+EN: 32 ÷ 4 = ?
+   (EN choices same as TH)
+
+### ma-0405  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 49, 52, 55, 58, ?
+   1) 61  |  2) 63  |  3) 51  |  4) 60
+EN: What is the missing number: 49, 52, 55, 58, ??
+   (EN choices same as TH)
+
+### ma-0406  (หัวข้อ: subtract)
+TH: 357 − 142 = ?
+   1) 216  |  2) 215  |  3) 225  |  4) 217
+EN: 357 − 142 = ?
+   (EN choices same as TH)
+
+### ma-0407  (หัวข้อ: multiply)
+TH: 12 × 8 = ?
+   1) 95  |  2) 94  |  3) 106  |  4) 96
+EN: 12 × 8 = ?
+   (EN choices same as TH)
+
+### ma-0408  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 34, ?, 50, 58, 66
+   1) 41  |  2) 44  |  3) 32  |  4) 42
+EN: What is the missing number: 34, ?, 50, 58, 66?
+   (EN choices same as TH)
+
+### ma-0409  (หัวข้อ: divide)
+TH: 44 ÷ 4 = ?
+   1) 10  |  2) 8  |  3) 11  |  4) 14
+EN: 44 ÷ 4 = ?
+   (EN choices same as TH)
+
+### ma-0410  (หัวข้อ: divide)
+TH: 60 ÷ 6 = ?
+   1) 7  |  2) 9  |  3) 10  |  4) 12
+EN: 60 ÷ 6 = ?
+   (EN choices same as TH)
+
+### ma-0411  (หัวข้อ: money)
+TH: ซื้อของ 17 บาท จ่ายแบงก์ 100 บาท ได้เงินทอนกี่บาท
+   1) 86 บาท  |  2) 81 บาท  |  3) 83 บาท  |  4) 85 บาท
+EN: Something costs 17 baht. You pay with 100 baht. How much change?
+   1) 86 baht  |  2) 81 baht  |  3) 83 baht  |  4) 85 baht
+
+### ma-0412  (หัวข้อ: divide)
+TH: 48 ÷ 6 = ?
+   1) 11  |  2) 7  |  3) 9  |  4) 8
+EN: 48 ÷ 6 = ?
+   (EN choices same as TH)
+
+### ma-0413  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 16, 66, 116, 166, ?
+   1) 216  |  2) 206  |  3) 213  |  4) 214
+EN: What is the missing number: 16, 66, 116, 166, ??
+   (EN choices same as TH)
+
+### ma-0414  (หัวข้อ: divide)
+TH: 28 ÷ 4 = ?
+   1) 7  |  2) 6  |  3) 4  |  4) 8
+EN: 28 ÷ 4 = ?
+   (EN choices same as TH)
+
+### ma-0415  (หัวข้อ: subtract)
+TH: 970 − 682 = ?
+   1) 288  |  2) 290  |  3) 289  |  4) 278
+EN: 970 − 682 = ?
+   (EN choices same as TH)
+
+### ma-0416  (หัวข้อ: subtract)
+TH: 935 − 172 = ?
+   1) 763  |  2) 766  |  3) 761  |  4) 764
+EN: 935 − 172 = ?
+   (EN choices same as TH)
+
+### ma-0417  (หัวข้อ: perimeter)
+TH: สี่เหลี่ยมผืนผ้ากว้าง 3 ซม. ยาว 4 ซม. มีเส้นรอบรูปยาวกี่ ซม.
+   1) 12  |  2) 16  |  3) 14  |  4) 7
+EN: A rectangle is 3 cm by 4 cm. What is its perimeter in cm?
+   (EN choices same as TH)
+
+### ma-0418  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 30, 34, 38, 42, ?
+   1) 44  |  2) 46  |  3) 48  |  4) 49
+EN: What is the missing number: 30, 34, 38, 42, ??
+   (EN choices same as TH)
+
+### ma-0419  (หัวข้อ: word-problem)
+TH: มีคริสตัล 16 ชิ้น แบ่งให้เพื่อน 8 คนเท่า ๆ กัน ได้คนละกี่ชิ้น 💎
+   1) 2  |  2) 5  |  3) 1  |  4) 3
+EN: 16 crystals are shared equally between 8 friends. How many does each get? 💎
+   (EN choices same as TH)
+
+### ma-0420  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 14, ?, 214, 314, 414
+   1) 113  |  2) 115  |  3) 114  |  4) 116
+EN: What is the missing number: 14, ?, 214, 314, 414?
+   (EN choices same as TH)
+
+### ma-0421  (หัวข้อ: word-problem)
+TH: มีเหรียญ 24 เหรียญ แบ่งให้เพื่อน 8 คนเท่า ๆ กัน ได้คนละกี่เหรียญ 🪙
+   1) 0  |  2) 5  |  3) 3  |  4) 2
+EN: 24 coins are shared equally between 8 friends. How many does each get? 🪙
+   (EN choices same as TH)
+
+### ma-0422  (หัวข้อ: word-problem)
+TH: มีดาว 72 ดวง แบ่งให้เพื่อน 8 คนเท่า ๆ กัน ได้คนละกี่ดวง ⭐
+   1) 6  |  2) 11  |  3) 10  |  4) 9
+EN: 72 stars are shared equally between 8 friends. How many does each get? ⭐
+   (EN choices same as TH)
+
+### ma-0423  (หัวข้อ: multiply)
+TH: 10 × 8 = ?
+   1) 78  |  2) 70  |  3) 83  |  4) 80
+EN: 10 × 8 = ?
+   (EN choices same as TH)
+
+### ma-0424  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 9, 17, 25, 33, ?
+   1) 44  |  2) 39  |  3) 41  |  4) 51
+EN: What is the missing number: 9, 17, 25, 33, ??
+   (EN choices same as TH)
+
+### ma-0425  (หัวข้อ: perimeter)
+TH: สี่เหลี่ยมผืนผ้ากว้าง 7 ซม. ยาว 6 ซม. มีเส้นรอบรูปยาวกี่ ซม.
+   1) 42  |  2) 28  |  3) 26  |  4) 13
+EN: A rectangle is 7 cm by 6 cm. What is its perimeter in cm?
+   (EN choices same as TH)
+
+### ma-0426  (หัวข้อ: add)
+TH: 342 + 396 = ?
+   1) 736  |  2) 740  |  3) 735  |  4) 738
+EN: 342 + 396 = ?
+   (EN choices same as TH)
+
+### ma-0427  (หัวข้อ: subtract)
+TH: 944 − 141 = ?
+   1) 813  |  2) 806  |  3) 803  |  4) 801
+EN: 944 − 141 = ?
+   (EN choices same as TH)
+
+### ma-0428  (หัวข้อ: add)
+TH: 463 + 358 = ?
+   1) 831  |  2) 824  |  3) 821  |  4) 823
+EN: 463 + 358 = ?
+   (EN choices same as TH)
+
+### ma-0429  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 23, 29, 35, 41, ?
+   1) 48  |  2) 47  |  3) 44  |  4) 45
+EN: What is the missing number: 23, 29, 35, 41, ??
+   (EN choices same as TH)
+
+### ma-0430  (หัวข้อ: money)
+TH: ซื้อของ 51 บาท จ่ายแบงก์ 100 บาท ได้เงินทอนกี่บาท
+   1) 49 บาท  |  2) 48 บาท  |  3) 47 บาท  |  4) 52 บาท
+EN: Something costs 51 baht. You pay with 100 baht. How much change?
+   1) 49 baht  |  2) 48 baht  |  3) 47 baht  |  4) 52 baht
+
+### ma-0431  (หัวข้อ: add)
+TH: 530 + 324 = ?
+   1) 851  |  2) 864  |  3) 852  |  4) 854
+EN: 530 + 324 = ?
+   (EN choices same as TH)
+
+### ma-0432  (หัวข้อ: fractions)
+TH: 1/5 ของ 20 คือเท่าไร
+   1) 4  |  2) 1  |  3) 7  |  4) 5
+EN: What is 1/5 of 20?
+   (EN choices same as TH)
+
+### ma-0433  (หัวข้อ: multiply)
+TH: 9 × 6 = ?
+   1) 57  |  2) 53  |  3) 64  |  4) 54
+EN: 9 × 6 = ?
+   (EN choices same as TH)
+
+### ma-0434  (หัวข้อ: divide)
+TH: 24 ÷ 3 = ?
+   1) 6  |  2) 8  |  3) 10  |  4) 5
+EN: 24 ÷ 3 = ?
+   (EN choices same as TH)
+
+### ma-0435  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 49, 57, 65, ?, 81
+   1) 63  |  2) 70  |  3) 73  |  4) 74
+EN: What is the missing number: 49, 57, 65, ?, 81?
+   (EN choices same as TH)
+
+### ma-0436  (หัวข้อ: subtract)
+TH: 534 − 320 = ?
+   1) 211  |  2) 214  |  3) 215  |  4) 212
+EN: 534 − 320 = ?
+   (EN choices same as TH)
+
+### ma-0437  (หัวข้อ: add)
+TH: 543 + 317 = ?
+   1) 863  |  2) 870  |  3) 860  |  4) 857
+EN: 543 + 317 = ?
+   (EN choices same as TH)
+
+### ma-0438  (หัวข้อ: add)
+TH: 278 + 308 = ?
+   1) 586  |  2) 583  |  3) 585  |  4) 588
+EN: 278 + 308 = ?
+   (EN choices same as TH)
+
+### ma-0439  (หัวข้อ: perimeter)
+TH: สี่เหลี่ยมผืนผ้ากว้าง 8 ซม. ยาว 12 ซม. มีเส้นรอบรูปยาวกี่ ซม.
+   1) 96  |  2) 42  |  3) 40  |  4) 20
+EN: A rectangle is 8 cm by 12 cm. What is its perimeter in cm?
+   (EN choices same as TH)
+
+### ma-0440  (หัวข้อ: measure)
+TH: 9 ลิตร เท่ากับกี่มิลลิลิตร
+   1) 900  |  2) 9000  |  3) 10000  |  4) 90000
+EN: How many ml are in 9 l?
+   (EN choices same as TH)
+
+### ma-0441  (หัวข้อ: time)
+TH: อีก 45 นาทีหลังจาก 8:35 คือกี่โมง
+   1) 8:20  |  2) 9:35  |  3) 9:20  |  4) 9:10
+EN: What time is 45 minutes after 8:35?
+   (EN choices same as TH)
+
+### ma-0442  (หัวข้อ: perimeter)
+TH: สี่เหลี่ยมผืนผ้ากว้าง 2 ซม. ยาว 7 ซม. มีเส้นรอบรูปยาวกี่ ซม.
+   1) 20  |  2) 18  |  3) 14  |  4) 9
+EN: A rectangle is 2 cm by 7 cm. What is its perimeter in cm?
+   (EN choices same as TH)
+
+### ma-0443  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 33, ?, 41, 45, 49
+   1) 40  |  2) 36  |  3) 47  |  4) 37
+EN: What is the missing number: 33, ?, 41, 45, 49?
+   (EN choices same as TH)
+
+### ma-0444  (หัวข้อ: add)
+TH: 433 + 219 = ?
+   1) 652  |  2) 651  |  3) 662  |  4) 653
+EN: 433 + 219 = ?
+   (EN choices same as TH)
+
+### ma-0445  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 37, 87, 137, ?, 237
+   1) 184  |  2) 197  |  3) 189  |  4) 187
+EN: What is the missing number: 37, 87, 137, ?, 237?
+   (EN choices same as TH)
+
+### ma-0446  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 23, ?, 35, 41, 47
+   1) 39  |  2) 28  |  3) 30  |  4) 29
+EN: What is the missing number: 23, ?, 35, 41, 47?
+   (EN choices same as TH)
+
+### ma-0447  (หัวข้อ: word-problem)
+TH: มีลูกโป่ง 18 ลูก แบ่งให้เพื่อน 6 คนเท่า ๆ กัน ได้คนละกี่ลูก 🎈
+   1) 3  |  2) 0  |  3) 6  |  4) 4
+EN: 18 balloons are shared equally between 6 friends. How many does each get? 🎈
+   (EN choices same as TH)
+
+### ma-0448  (หัวข้อ: add)
+TH: 302 + 279 = ?
+   1) 584  |  2) 571  |  3) 579  |  4) 581
+EN: 302 + 279 = ?
+   (EN choices same as TH)
+
+### ma-0449  (หัวข้อ: multiply)
+TH: 11 × 6 = ?
+   1) 63  |  2) 56  |  3) 66  |  4) 65
+EN: 11 × 6 = ?
+   (EN choices same as TH)
+
+### ma-0450  (หัวข้อ: fractions)
+TH: 1/4 ของ 16 คือเท่าไร
+   1) 2  |  2) 4  |  3) 5  |  4) 3
+EN: What is 1/4 of 16?
+   (EN choices same as TH)
+
+### ma-0451  (หัวข้อ: word-problem)
+TH: มีดอกไม้ 27 ดอก แบ่งให้เพื่อน 3 คนเท่า ๆ กัน ได้คนละกี่ดอก 🌸
+   1) 6  |  2) 11  |  3) 9  |  4) 12
+EN: 27 flowers are shared equally between 3 friends. How many does each get? 🌸
+   (EN choices same as TH)
+
+### ma-0452  (หัวข้อ: perimeter)
+TH: สี่เหลี่ยมผืนผ้ากว้าง 11 ซม. ยาว 9 ซม. มีเส้นรอบรูปยาวกี่ ซม.
+   1) 99  |  2) 40  |  3) 20  |  4) 42
+EN: A rectangle is 11 cm by 9 cm. What is its perimeter in cm?
+   (EN choices same as TH)
+
+### ma-0453  (หัวข้อ: word-problem)
+TH: มีขนม 18 ชิ้น แบ่งให้เพื่อน 3 คนเท่า ๆ กัน ได้คนละกี่ชิ้น 🍬
+   1) 9  |  2) 7  |  3) 6  |  4) 3
+EN: 18 sweets are shared equally between 3 friends. How many does each get? 🍬
+   (EN choices same as TH)
+
+### ma-0454  (หัวข้อ: add)
+TH: 413 + 263 = ?
+   1) 666  |  2) 674  |  3) 676  |  4) 673
+EN: 413 + 263 = ?
+   (EN choices same as TH)
+
+### ma-0455  (หัวข้อ: divide)
+TH: 96 ÷ 8 = ?
+   1) 11  |  2) 12  |  3) 10  |  4) 13
+EN: 96 ÷ 8 = ?
+   (EN choices same as TH)
+
+### ma-0456  (หัวข้อ: money)
+TH: ซื้อของ 15 บาท จ่ายแบงก์ 100 บาท ได้เงินทอนกี่บาท
+   1) 85 บาท  |  2) 87 บาท  |  3) 83 บาท  |  4) 84 บาท
+EN: Something costs 15 baht. You pay with 100 baht. How much change?
+   1) 85 baht  |  2) 87 baht  |  3) 83 baht  |  4) 84 baht
+
+### ma-0457  (หัวข้อ: money)
+TH: ซื้อของ 21 บาท จ่ายแบงก์ 100 บาท ได้เงินทอนกี่บาท
+   1) 79 บาท  |  2) 77 บาท  |  3) 80 บาท  |  4) 78 บาท
+EN: Something costs 21 baht. You pay with 100 baht. How much change?
+   1) 79 baht  |  2) 77 baht  |  3) 80 baht  |  4) 78 baht
+
+### ma-0458  (หัวข้อ: word-problem)
+TH: มีลูกโป่ง 60 ลูก แบ่งให้เพื่อน 6 คนเท่า ๆ กัน ได้คนละกี่ลูก 🎈
+   1) 12  |  2) 10  |  3) 9  |  4) 13
+EN: 60 balloons are shared equally between 6 friends. How many does each get? 🎈
+   (EN choices same as TH)
+
+### ma-0459  (หัวข้อ: money)
+TH: ซื้อของ 48 บาท จ่ายแบงก์ 50 บาท ได้เงินทอนกี่บาท
+   1) 1 บาท  |  2) 3 บาท  |  3) 2 บาท  |  4) 5 บาท
+EN: Something costs 48 baht. You pay with 50 baht. How much change?
+   1) 1 baht  |  2) 3 baht  |  3) 2 baht  |  4) 5 baht
+
+### ma-0460  (หัวข้อ: subtract)
+TH: 535 − 469 = ?
+   1) 69  |  2) 64  |  3) 56  |  4) 66
+EN: 535 − 469 = ?
+   (EN choices same as TH)
+
+### ma-0461  (หัวข้อ: perimeter)
+TH: สี่เหลี่ยมผืนผ้ากว้าง 7 ซม. ยาว 5 ซม. มีเส้นรอบรูปยาวกี่ ซม.
+   1) 35  |  2) 24  |  3) 12  |  4) 26
+EN: A rectangle is 7 cm by 5 cm. What is its perimeter in cm?
+   (EN choices same as TH)
+
+### ma-0462  (หัวข้อ: money)
+TH: ซื้อของ 71 บาท จ่ายแบงก์ 100 บาท ได้เงินทอนกี่บาท
+   1) 27 บาท  |  2) 30 บาท  |  3) 31 บาท  |  4) 29 บาท
+EN: Something costs 71 baht. You pay with 100 baht. How much change?
+   1) 27 baht  |  2) 30 baht  |  3) 31 baht  |  4) 29 baht
+
+### ma-0463  (หัวข้อ: word-problem)
+TH: มีปลา 24 ตัว แบ่งให้เพื่อน 6 คนเท่า ๆ กัน ได้คนละกี่ตัว 🐟
+   1) 3  |  2) 4  |  3) 5  |  4) 7
+EN: 24 fish are shared equally between 6 friends. How many does each get? 🐟
+   (EN choices same as TH)
+
+### ma-0464  (หัวข้อ: money)
+TH: ซื้อของ 78 บาท จ่ายแบงก์ 100 บาท ได้เงินทอนกี่บาท
+   1) 22 บาท  |  2) 24 บาท  |  3) 23 บาท  |  4) 19 บาท
+EN: Something costs 78 baht. You pay with 100 baht. How much change?
+   1) 22 baht  |  2) 24 baht  |  3) 23 baht  |  4) 19 baht
+
+### ma-0465  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 12, 112, 212, ?, 412
+   1) 311  |  2) 312  |  3) 302  |  4) 309
+EN: What is the missing number: 12, 112, 212, ?, 412?
+   (EN choices same as TH)
+
+### ma-0466  (หัวข้อ: add)
+TH: 573 + 231 = ?
+   1) 803  |  2) 802  |  3) 814  |  4) 804
+EN: 573 + 231 = ?
+   (EN choices same as TH)
+
+### ma-0467  (หัวข้อ: add)
+TH: 334 + 282 = ?
+   1) 614  |  2) 618  |  3) 616  |  4) 606
+EN: 334 + 282 = ?
+   (EN choices same as TH)
+
+### ma-0468  (หัวข้อ: measure)
+TH: 8 กิโลกรัม เท่ากับกี่กรัม
+   1) 80000  |  2) 800  |  3) 8000  |  4) 9000
+EN: How many g are in 8 kg?
+   (EN choices same as TH)
+
+### ma-0469  (หัวข้อ: time)
+TH: อีก 30 นาทีหลังจาก 5:50 คือกี่โมง
+   1) 6:35  |  2) 6:10  |  3) 5:20  |  4) 6:20
+EN: What time is 30 minutes after 5:50?
+   (EN choices same as TH)
+
+### ma-0470  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 50, ?, 62, 68, 74
+   1) 57  |  2) 59  |  3) 54  |  4) 56
+EN: What is the missing number: 50, ?, 62, 68, 74?
+   (EN choices same as TH)
+
+### ma-0471  (หัวข้อ: add)
+TH: 233 + 396 = ?
+   1) 639  |  2) 629  |  3) 627  |  4) 626
+EN: 233 + 396 = ?
+   (EN choices same as TH)
+
+### ma-0472  (หัวข้อ: word-problem)
+TH: มีเหรียญ 32 เหรียญ แบ่งให้เพื่อน 4 คนเท่า ๆ กัน ได้คนละกี่เหรียญ 🪙
+   1) 7  |  2) 5  |  3) 10  |  4) 8
+EN: 32 coins are shared equally between 4 friends. How many does each get? 🪙
+   (EN choices same as TH)
+
+### ma-0473  (หัวข้อ: multiply)
+TH: 10 × 3 = ?
+   1) 32  |  2) 31  |  3) 40  |  4) 30
+EN: 10 × 3 = ?
+   (EN choices same as TH)
+
+### ma-0474  (หัวข้อ: multiply)
+TH: 6 × 4 = ?
+   1) 23  |  2) 21  |  3) 27  |  4) 24
+EN: 6 × 4 = ?
+   (EN choices same as TH)
+
+### ma-0475  (หัวข้อ: divide)
+TH: 80 ÷ 8 = ?
+   1) 8  |  2) 9  |  3) 11  |  4) 10
+EN: 80 ÷ 8 = ?
+   (EN choices same as TH)
+
+### ma-0476  (หัวข้อ: money)
+TH: ซื้อของ 63 บาท จ่ายแบงก์ 100 บาท ได้เงินทอนกี่บาท
+   1) 34 บาท  |  2) 37 บาท  |  3) 36 บาท  |  4) 38 บาท
+EN: Something costs 63 baht. You pay with 100 baht. How much change?
+   1) 34 baht  |  2) 37 baht  |  3) 36 baht  |  4) 38 baht
+
+### ma-0477  (หัวข้อ: add)
+TH: 141 + 217 = ?
+   1) 355  |  2) 358  |  3) 360  |  4) 357
+EN: 141 + 217 = ?
+   (EN choices same as TH)
+
+### ma-0478  (หัวข้อ: perimeter)
+TH: สี่เหลี่ยมผืนผ้ากว้าง 2 ซม. ยาว 11 ซม. มีเส้นรอบรูปยาวกี่ ซม.
+   1) 28  |  2) 26  |  3) 13  |  4) 22
+EN: A rectangle is 2 cm by 11 cm. What is its perimeter in cm?
+   (EN choices same as TH)
+
+### ma-0479  (หัวข้อ: time)
+TH: อีก 45 นาทีหลังจาก 5:35 คือกี่โมง
+   1) 5:20  |  2) 6:35  |  3) 6:20  |  4) 6:10
+EN: What time is 45 minutes after 5:35?
+   (EN choices same as TH)
+
+### ma-0480  (หัวข้อ: perimeter)
+TH: สี่เหลี่ยมผืนผ้ากว้าง 10 ซม. ยาว 12 ซม. มีเส้นรอบรูปยาวกี่ ซม.
+   1) 46  |  2) 22  |  3) 120  |  4) 44
+EN: A rectangle is 10 cm by 12 cm. What is its perimeter in cm?
+   (EN choices same as TH)
+
+### ma-0481  (หัวข้อ: fractions)
+TH: 1/5 ของ 25 คือเท่าไร
+   1) 7  |  2) 3  |  3) 5  |  4) 2
+EN: What is 1/5 of 25?
+   (EN choices same as TH)
+
+### ma-0482  (หัวข้อ: multiply)
+TH: 5 × 8 = ?
+   1) 38  |  2) 40  |  3) 41  |  4) 37
+EN: 5 × 8 = ?
+   (EN choices same as TH)
+
+### ma-0483  (หัวข้อ: word-problem)
+TH: มีดอกไม้ 32 ดอก แบ่งให้เพื่อน 8 คนเท่า ๆ กัน ได้คนละกี่ดอก 🌸
+   1) 5  |  2) 4  |  3) 6  |  4) 1
+EN: 32 flowers are shared equally between 8 friends. How many does each get? 🌸
+   (EN choices same as TH)
+
+### ma-0484  (หัวข้อ: add)
+TH: 174 + 389 = ?
+   1) 561  |  2) 566  |  3) 563  |  4) 564
+EN: 174 + 389 = ?
+   (EN choices same as TH)
+
+### ma-0485  (หัวข้อ: add)
+TH: 543 + 161 = ?
+   1) 706  |  2) 701  |  3) 704  |  4) 707
+EN: 543 + 161 = ?
+   (EN choices same as TH)
+
+### ma-0486  (หัวข้อ: add)
+TH: 346 + 332 = ?
+   1) 679  |  2) 677  |  3) 688  |  4) 678
+EN: 346 + 332 = ?
+   (EN choices same as TH)
+
+### ma-0487  (หัวข้อ: fractions)
+TH: 1/5 ของ 35 คือเท่าไร
+   1) 8  |  2) 7  |  3) 6  |  4) 10
+EN: What is 1/5 of 35?
+   (EN choices same as TH)
+
+### ma-0488  (หัวข้อ: fractions)
+TH: 1/8 ของ 80 คือเท่าไร
+   1) 13  |  2) 11  |  3) 8  |  4) 10
+EN: What is 1/8 of 80?
+   (EN choices same as TH)
+
+### ma-0489  (หัวข้อ: multiply)
+TH: 11 × 3 = ?
+   1) 34  |  2) 33  |  3) 23  |  4) 30
+EN: 11 × 3 = ?
+   (EN choices same as TH)
+
+### ma-0490  (หัวข้อ: money)
+TH: ซื้อของ 43 บาท จ่ายแบงก์ 100 บาท ได้เงินทอนกี่บาท
+   1) 56 บาท  |  2) 60 บาท  |  3) 57 บาท  |  4) 58 บาท
+EN: Something costs 43 baht. You pay with 100 baht. How much change?
+   1) 56 baht  |  2) 60 baht  |  3) 57 baht  |  4) 58 baht
+
+### ma-0491  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 38, 41, 44, 47, ?
+   1) 50  |  2) 49  |  3) 47  |  4) 51
+EN: What is the missing number: 38, 41, 44, 47, ??
+   (EN choices same as TH)
+
+### ma-0492  (หัวข้อ: time)
+TH: อีก 45 นาทีหลังจาก 9:20 คือกี่โมง
+   1) 10:05  |  2) 10:20  |  3) 9:55  |  4) 9:05
+EN: What time is 45 minutes after 9:20?
+   (EN choices same as TH)
+
+### ma-0493  (หัวข้อ: perimeter)
+TH: สี่เหลี่ยมผืนผ้ากว้าง 9 ซม. ยาว 2 ซม. มีเส้นรอบรูปยาวกี่ ซม.
+   1) 11  |  2) 18  |  3) 24  |  4) 22
+EN: A rectangle is 9 cm by 2 cm. What is its perimeter in cm?
+   (EN choices same as TH)
+
+### ma-0494  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 10, ?, 22, 28, 34
+   1) 16  |  2) 13  |  3) 14  |  4) 26
+EN: What is the missing number: 10, ?, 22, 28, 34?
+   (EN choices same as TH)
+
+### ma-0495  (หัวข้อ: time)
+TH: อีก 20 นาทีหลังจาก 11:50 คือกี่โมง
+   1) 12:25  |  2) 12:10  |  3) 11:10  |  4) 12:00
+EN: What time is 20 minutes after 11:50?
+   (EN choices same as TH)
+
+### ma-0496  (หัวข้อ: word-problem)
+TH: มีเหรียญ 28 เหรียญ แบ่งให้เพื่อน 4 คนเท่า ๆ กัน ได้คนละกี่เหรียญ 🪙
+   1) 5  |  2) 8  |  3) 10  |  4) 7
+EN: 28 coins are shared equally between 4 friends. How many does each get? 🪙
+   (EN choices same as TH)
+
+### ma-0497  (หัวข้อ: subtract)
+TH: 677 − 489 = ?
+   1) 188  |  2) 198  |  3) 191  |  4) 187
+EN: 677 − 489 = ?
+   (EN choices same as TH)
+
+### ma-0498  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 20, 70, ?, 170, 220
+   1) 122  |  2) 119  |  3) 120  |  4) 118
+EN: What is the missing number: 20, 70, ?, 170, 220?
+   (EN choices same as TH)
+
+### ma-0499  (หัวข้อ: add)
+TH: 428 + 325 = ?
+   1) 754  |  2) 756  |  3) 755  |  4) 753
+EN: 428 + 325 = ?
+   (EN choices same as TH)
+
+### ma-0500  (หัวข้อ: money)
+TH: ซื้อของ 69 บาท จ่ายแบงก์ 100 บาท ได้เงินทอนกี่บาท
+   1) 31 บาท  |  2) 29 บาท  |  3) 30 บาท  |  4) 33 บาท
+EN: Something costs 69 baht. You pay with 100 baht. How much change?
+   1) 31 baht  |  2) 29 baht  |  3) 30 baht  |  4) 33 baht

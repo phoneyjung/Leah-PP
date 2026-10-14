@@ -1,0 +1,1022 @@
+# ชุดตรวจ: ภาษาจีน · เด็กอายุ 6 ปี (อนุบาล 3–ป.1) · 170 ข้อ · ไฟล์ q-chinese-6.json
+# ตัวเลือกนับ 1–4 · ไม่มีเฉลยในไฟล์นี้ (ให้แก้โจทย์เองก่อน)
+
+### zh-0001  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🍎
+   1) 鸡蛋 (jīdàn)  |  2) 苹果 (píngguǒ)  |  3) 西瓜 (xīguā)  |  4) 茶 (chá)
+EN: Which Chinese word matches this picture? 🍎
+   (EN choices same as TH)
+
+### zh-0002  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (bàba)
+   1) 👨  |  2) 👩  |  3) 👩‍🏫  |  4) 👦
+EN: 🔊 Listen and pick the matching picture (bàba)
+   (EN choices same as TH)
+
+### zh-0003  (หัวข้อ: greetings)
+TH: พูดว่า "สวัสดี" เป็นภาษาจีนว่าอย่างไร 👋
+   1) 谢谢 (xièxie)  |  2) 生日快乐 (shēngrì kuàilè)  |  3) 不客气 (bú kèqi)  |  4) 你好 (nǐ hǎo)
+EN: How do you say "hello" in Chinese? 👋
+   (EN choices same as TH)
+
+### zh-0004  (หัวข้อ: counting)
+TH: นับแล้วมีกี่ชิ้น ตอบเป็นภาษาจีน: 💎💎💎💎
+   1) 三 (sān)  |  2) 五 (wǔ)  |  3) 四 (sì)  |  4) 八 (bā)
+EN: Count them and answer in Chinese: 💎💎💎💎
+   (EN choices same as TH)
+
+### zh-0005  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 👩
+   1) 爷爷 (yéye)  |  2) 弟弟 (dìdi)  |  3) 妹妹 (mèimei)  |  4) 妈妈 (māma)
+EN: Which Chinese word matches this picture? 👩
+   (EN choices same as TH)
+
+### zh-0006  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (zuǐba)
+   1) 👄  |  2) 👃  |  3) ✋  |  4) 👂
+EN: 🔊 Listen and pick the matching picture (zuǐba)
+   (EN choices same as TH)
+
+### zh-0007  (หัวข้อ: greetings)
+TH: พูดว่า "ขอบคุณ" เป็นภาษาจีนว่าอย่างไร 🙏
+   1) 谢谢 (xièxie)  |  2) 我爱你 (wǒ ài nǐ)  |  3) 再见 (zàijiàn)  |  4) 生日快乐 (shēngrì kuàilè)
+EN: How do you say "thank you" in Chinese? 🙏
+   (EN choices same as TH)
+
+### zh-0008  (หัวข้อ: counting)
+TH: นับแล้วมีกี่ชิ้น ตอบเป็นภาษาจีน: ⭐⭐⭐
+   1) 三 (sān)  |  2) 七 (qī)  |  3) 六 (liù)  |  4) 八 (bā)
+EN: Count them and answer in Chinese: ⭐⭐⭐
+   (EN choices same as TH)
+
+### zh-0009  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🐰
+   1) 大象 (dàxiàng)  |  2) 兔子 (tùzi)  |  3) 鱼 (yú)  |  4) 猫 (māo)
+EN: Which Chinese word matches this picture? 🐰
+   (EN choices same as TH)
+
+### zh-0010  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (yáng)
+   1) 🐑  |  2) 🐟  |  3) 🐔  |  4) 🐱
+EN: 🔊 Listen and pick the matching picture (yáng)
+   (EN choices same as TH)
+
+### zh-0011  (หัวข้อ: greetings)
+TH: พูดว่า "สุขสันต์วันเกิด" เป็นภาษาจีนว่าอย่างไร 🎂
+   1) 再见 (zàijiàn)  |  2) 不客气 (bú kèqi)  |  3) 谢谢 (xièxie)  |  4) 生日快乐 (shēngrì kuàilè)
+EN: How do you say "happy birthday" in Chinese? 🎂
+   (EN choices same as TH)
+
+### zh-0012  (หัวข้อ: counting)
+TH: นับแล้วมีกี่ชิ้น ตอบเป็นภาษาจีน: ⭐⭐⭐⭐⭐⭐⭐⭐
+   1) 八 (bā)  |  2) 四 (sì)  |  3) 九 (jiǔ)  |  4) 五 (wǔ)
+EN: Count them and answer in Chinese: ⭐⭐⭐⭐⭐⭐⭐⭐
+   (EN choices same as TH)
+
+### zh-0013  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🟨
+   1) 蓝色 (lánsè)  |  2) 黄色 (huángsè)  |  3) 黑色 (hēisè)  |  4) 白色 (báisè)
+EN: Which Chinese word matches this picture? 🟨
+   (EN choices same as TH)
+
+### zh-0014  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (gǒu)
+   1) 🐄  |  2) 🐶  |  3) 🐒  |  4) 🐔
+EN: 🔊 Listen and pick the matching picture (gǒu)
+   (EN choices same as TH)
+
+### zh-0015  (หัวข้อ: greetings)
+TH: พูดว่า "ลาก่อน" เป็นภาษาจีนว่าอย่างไร 👋
+   1) 早上好 (zǎoshang hǎo)  |  2) 对不起 (duìbuqǐ)  |  3) 再见 (zàijiàn)  |  4) 我爱你 (wǒ ài nǐ)
+EN: How do you say "goodbye" in Chinese? 👋
+   (EN choices same as TH)
+
+### zh-0016  (หัวข้อ: counting)
+TH: นับแล้วมีกี่ชิ้น ตอบเป็นภาษาจีน: 💎💎💎💎💎💎💎
+   1) 五 (wǔ)  |  2) 二 (èr)  |  3) 四 (sì)  |  4) 七 (qī)
+EN: Count them and answer in Chinese: 💎💎💎💎💎💎💎
+   (EN choices same as TH)
+
+### zh-0017  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 7️⃣
+   1) 十 (shí)  |  2) 五 (wǔ)  |  3) 七 (qī)  |  4) 一 (yī)
+EN: Which Chinese word matches this picture? 7️⃣
+   (EN choices same as TH)
+
+### zh-0018  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (mèimei)
+   1) 👩‍🏫  |  2) 👩  |  3) 🧑‍🤝‍🧑  |  4) 👧
+EN: 🔊 Listen and pick the matching picture (mèimei)
+   (EN choices same as TH)
+
+### zh-0019  (หัวข้อ: greetings)
+TH: พูดว่า "อรุณสวัสดิ์" เป็นภาษาจีนว่าอย่างไร 🌅
+   1) 你好 (nǐ hǎo)  |  2) 早上好 (zǎoshang hǎo)  |  3) 不客气 (bú kèqi)  |  4) 生日快乐 (shēngrì kuàilè)
+EN: How do you say "good morning" in Chinese? 🌅
+   (EN choices same as TH)
+
+### zh-0020  (หัวข้อ: counting)
+TH: นับแล้วมีกี่ชิ้น ตอบเป็นภาษาจีน: ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
+   1) 十 (shí)  |  2) 九 (jiǔ)  |  3) 五 (wǔ)  |  4) 七 (qī)
+EN: Count them and answer in Chinese: ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
+   (EN choices same as TH)
+
+### zh-0021  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🦶
+   1) 耳朵 (ěrduo)  |  2) 鼻子 (bízi)  |  3) 头 (tóu)  |  4) 脚 (jiǎo)
+EN: Which Chinese word matches this picture? 🦶
+   (EN choices same as TH)
+
+### zh-0022  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (bā)
+   1) 1️⃣  |  2) 2️⃣  |  3) 8️⃣  |  4) 4️⃣
+EN: 🔊 Listen and pick the matching picture (bā)
+   (EN choices same as TH)
+
+### zh-0023  (หัวข้อ: greetings)
+TH: พูดว่า "ฉันรักเธอ" เป็นภาษาจีนว่าอย่างไร ❤️
+   1) 你好 (nǐ hǎo)  |  2) 对不起 (duìbuqǐ)  |  3) 不客气 (bú kèqi)  |  4) 我爱你 (wǒ ài nǐ)
+EN: How do you say "I love you" in Chinese? ❤️
+   (EN choices same as TH)
+
+### zh-0024  (หัวข้อ: counting)
+TH: นับแล้วมีกี่ชิ้น ตอบเป็นภาษาจีน: 💎💎💎💎💎💎
+   1) 四 (sì)  |  2) 五 (wǔ)  |  3) 九 (jiǔ)  |  4) 六 (liù)
+EN: Count them and answer in Chinese: 💎💎💎💎💎💎
+   (EN choices same as TH)
+
+### zh-0025  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 👉
+   1) 下 (xià)  |  2) 上 (shàng)  |  3) 你 (nǐ)  |  4) 小 (xiǎo)
+EN: Which Chinese word matches this picture? 👉
+   (EN choices same as TH)
+
+### zh-0026  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (wǒ)
+   1) ⬆️  |  2) 🐜  |  3) 🐘  |  4) 🙋
+EN: 🔊 Listen and pick the matching picture (wǒ)
+   (EN choices same as TH)
+
+### zh-0027  (หัวข้อ: greetings)
+TH: พูดว่า "ขอโทษ" เป็นภาษาจีนว่าอย่างไร 🙇
+   1) 谢谢 (xièxie)  |  2) 对不起 (duìbuqǐ)  |  3) 生日快乐 (shēngrì kuàilè)  |  4) 你好 (nǐ hǎo)
+EN: How do you say "sorry" in Chinese? 🙇
+   (EN choices same as TH)
+
+### zh-0028  (หัวข้อ: counting)
+TH: นับแล้วมีกี่ชิ้น ตอบเป็นภาษาจีน: 🍎🍎🍎🍎🍎🍎🍎🍎
+   1) 六 (liù)  |  2) 八 (bā)  |  3) 九 (jiǔ)  |  4) 四 (sì)
+EN: Count them and answer in Chinese: 🍎🍎🍎🍎🍎🍎🍎🍎
+   (EN choices same as TH)
+
+### zh-0029  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน ✋
+   1) 鼻子 (bízi)  |  2) 耳朵 (ěrduo)  |  3) 眼睛 (yǎnjing)  |  4) 手 (shǒu)
+EN: Which Chinese word matches this picture? ✋
+   (EN choices same as TH)
+
+### zh-0030  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (péngyou)
+   1) 🧑‍🤝‍🧑  |  2) 👦  |  3) 👵  |  4) 👩‍🏫
+EN: 🔊 Listen and pick the matching picture (péngyou)
+   (EN choices same as TH)
+
+### zh-0031  (หัวข้อ: greetings)
+TH: พูดว่า "ไม่เป็นไร (ตอบคำขอบคุณ)" เป็นภาษาจีนว่าอย่างไร 😊
+   1) 不客气 (bú kèqi)  |  2) 我爱你 (wǒ ài nǐ)  |  3) 对不起 (duìbuqǐ)  |  4) 早上好 (zǎoshang hǎo)
+EN: How do you say "you're welcome" in Chinese? 😊
+   (EN choices same as TH)
+
+### zh-0032  (หัวข้อ: counting)
+TH: นับแล้วมีกี่ชิ้น ตอบเป็นภาษาจีน: 🍎🍎🍎🍎🍎🍎🍎🍎🍎
+   1) 九 (jiǔ)  |  2) 八 (bā)  |  3) 三 (sān)  |  4) 五 (wǔ)
+EN: Count them and answer in Chinese: 🍎🍎🍎🍎🍎🍎🍎🍎🍎
+   (EN choices same as TH)
+
+### zh-0033  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 4️⃣
+   1) 一 (yī)  |  2) 七 (qī)  |  3) 八 (bā)  |  4) 四 (sì)
+EN: Which Chinese word matches this picture? 4️⃣
+   (EN choices same as TH)
+
+### zh-0034  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (miàntiáo)
+   1) 🍵  |  2) 🍜  |  3) 🍌  |  4) 🍉
+EN: 🔊 Listen and pick the matching picture (miàntiáo)
+   (EN choices same as TH)
+
+### zh-0035  (หัวข้อ: counting)
+TH: นับแล้วมีกี่ชิ้น ตอบเป็นภาษาจีน: 💎💎
+   1) 九 (jiǔ)  |  2) 八 (bā)  |  3) 五 (wǔ)  |  4) 二 (èr)
+EN: Count them and answer in Chinese: 💎💎
+   (EN choices same as TH)
+
+### zh-0036  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🐘
+   1) 你 (nǐ)  |  2) 上 (shàng)  |  3) 大 (dà)  |  4) 人 (rén)
+EN: Which Chinese word matches this picture? 🐘
+   (EN choices same as TH)
+
+### zh-0037  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (chá)
+   1) 🍵  |  2) 🍉  |  3) 🍚  |  4) 🥚
+EN: 🔊 Listen and pick the matching picture (chá)
+   (EN choices same as TH)
+
+### zh-0038  (หัวข้อ: counting)
+TH: นับแล้วมีกี่ชิ้น ตอบเป็นภาษาจีน: ⭐⭐
+   1) 六 (liù)  |  2) 八 (bā)  |  3) 一 (yī)  |  4) 二 (èr)
+EN: Count them and answer in Chinese: ⭐⭐
+   (EN choices same as TH)
+
+### zh-0039  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🐒
+   1) 猴子 (hóuzi)  |  2) 猫 (māo)  |  3) 老虎 (lǎohǔ)  |  4) 马 (mǎ)
+EN: Which Chinese word matches this picture? 🐒
+   (EN choices same as TH)
+
+### zh-0040  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (wǔ)
+   1) 4️⃣  |  2) 7️⃣  |  3) 5️⃣  |  4) 8️⃣
+EN: 🔊 Listen and pick the matching picture (wǔ)
+   (EN choices same as TH)
+
+### zh-0041  (หัวข้อ: counting)
+TH: นับแล้วมีกี่ชิ้น ตอบเป็นภาษาจีน: 💎💎💎💎💎💎💎💎
+   1) 十 (shí)  |  2) 八 (bā)  |  3) 二 (èr)  |  4) 一 (yī)
+EN: Count them and answer in Chinese: 💎💎💎💎💎💎💎💎
+   (EN choices same as TH)
+
+### zh-0042  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 👂
+   1) 耳朵 (ěrduo)  |  2) 鼻子 (bízi)  |  3) 眼睛 (yǎnjing)  |  4) 手 (shǒu)
+EN: Which Chinese word matches this picture? 👂
+   (EN choices same as TH)
+
+### zh-0043  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (xióngmāo)
+   1) 🐦  |  2) 🐄  |  3) 🐟  |  4) 🐼
+EN: 🔊 Listen and pick the matching picture (xióngmāo)
+   (EN choices same as TH)
+
+### zh-0044  (หัวข้อ: counting)
+TH: นับแล้วมีกี่ชิ้น ตอบเป็นภาษาจีน: 💎💎💎💎💎💎💎💎💎💎
+   1) 二 (èr)  |  2) 十 (shí)  |  3) 四 (sì)  |  4) 八 (bā)
+EN: Count them and answer in Chinese: 💎💎💎💎💎💎💎💎💎💎
+   (EN choices same as TH)
+
+### zh-0045  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน ⬆️
+   1) 小 (xiǎo)  |  2) 大 (dà)  |  3) 上 (shàng)  |  4) 你 (nǐ)
+EN: Which Chinese word matches this picture? ⬆️
+   (EN choices same as TH)
+
+### zh-0046  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (yǔ)
+   1) 🌧️  |  2) 🔥  |  3) 🌸  |  4) 🌳
+EN: 🔊 Listen and pick the matching picture (yǔ)
+   (EN choices same as TH)
+
+### zh-0047  (หัวข้อ: counting)
+TH: นับแล้วมีกี่ชิ้น ตอบเป็นภาษาจีน: 🍎🍎
+   1) 二 (èr)  |  2) 八 (bā)  |  3) 七 (qī)  |  4) 三 (sān)
+EN: Count them and answer in Chinese: 🍎🍎
+   (EN choices same as TH)
+
+### zh-0048  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🚗
+   1) 笔 (bǐ)  |  2) 家 (jiā)  |  3) 车 (chē)  |  4) 学校 (xuéxiào)
+EN: Which Chinese word matches this picture? 🚗
+   (EN choices same as TH)
+
+### zh-0049  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (yǎnjing)
+   1) 👄  |  2) 🙂  |  3) 👀  |  4) ✋
+EN: 🔊 Listen and pick the matching picture (yǎnjing)
+   (EN choices same as TH)
+
+### zh-0050  (หัวข้อ: counting)
+TH: นับแล้วมีกี่ชิ้น ตอบเป็นภาษาจีน: ⭐⭐⭐⭐⭐
+   1) 九 (jiǔ)  |  2) 四 (sì)  |  3) 八 (bā)  |  4) 五 (wǔ)
+EN: Count them and answer in Chinese: ⭐⭐⭐⭐⭐
+   (EN choices same as TH)
+
+### zh-0051  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🧑‍🤝‍🧑
+   1) 朋友 (péngyou)  |  2) 哥哥 (gēge)  |  3) 妹妹 (mèimei)  |  4) 姐姐 (jiějie)
+EN: Which Chinese word matches this picture? 🧑‍🤝‍🧑
+   (EN choices same as TH)
+
+### zh-0052  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (nǎinai)
+   1) 👩‍🏫  |  2) 👦  |  3) 👵  |  4) 👧
+EN: 🔊 Listen and pick the matching picture (nǎinai)
+   (EN choices same as TH)
+
+### zh-0053  (หัวข้อ: counting)
+TH: นับแล้วมีกี่ชิ้น ตอบเป็นภาษาจีน: 🍎🍎🍎🍎🍎🍎
+   1) 六 (liù)  |  2) 七 (qī)  |  3) 五 (wǔ)  |  4) 九 (jiǔ)
+EN: Count them and answer in Chinese: 🍎🍎🍎🍎🍎🍎
+   (EN choices same as TH)
+
+### zh-0054  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🥚
+   1) 牛奶 (niúnǎi)  |  2) 香蕉 (xiāngjiāo)  |  3) 水 (shuǐ)  |  4) 鸡蛋 (jīdàn)
+EN: Which Chinese word matches this picture? 🥚
+   (EN choices same as TH)
+
+### zh-0055  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (mǎ)
+   1) 🐴  |  2) 🐦  |  3) 🐒  |  4) 🐶
+EN: 🔊 Listen and pick the matching picture (mǎ)
+   (EN choices same as TH)
+
+### zh-0056  (หัวข้อ: counting)
+TH: นับแล้วมีกี่ชิ้น ตอบเป็นภาษาจีน: 🍎🍎🍎
+   1) 三 (sān)  |  2) 十 (shí)  |  3) 九 (jiǔ)  |  4) 五 (wǔ)
+EN: Count them and answer in Chinese: 🍎🍎🍎
+   (EN choices same as TH)
+
+### zh-0057  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน ⬛
+   1) 白色 (báisè)  |  2) 蓝色 (lánsè)  |  3) 黑色 (hēisè)  |  4) 红色 (hóngsè)
+EN: Which Chinese word matches this picture? ⬛
+   (EN choices same as TH)
+
+### zh-0058  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (jīdàn)
+   1) 🥚  |  2) 🍚  |  3) 💧  |  4) 🍵
+EN: 🔊 Listen and pick the matching picture (jīdàn)
+   (EN choices same as TH)
+
+### zh-0059  (หัวข้อ: counting)
+TH: นับแล้วมีกี่ชิ้น ตอบเป็นภาษาจีน: 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎
+   1) 二 (èr)  |  2) 五 (wǔ)  |  3) 一 (yī)  |  4) 十 (shí)
+EN: Count them and answer in Chinese: 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎
+   (EN choices same as TH)
+
+### zh-0060  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🐘
+   1) 牛 (niú)  |  2) 鸟 (niǎo)  |  3) 猴子 (hóuzi)  |  4) 大象 (dàxiàng)
+EN: Which Chinese word matches this picture? 🐘
+   (EN choices same as TH)
+
+### zh-0061  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (huǒ)
+   1) 🔥  |  2) 🌙  |  3) ⛰️  |  4) 🌳
+EN: 🔊 Listen and pick the matching picture (huǒ)
+   (EN choices same as TH)
+
+### zh-0062  (หัวข้อ: counting)
+TH: นับแล้วมีกี่ชิ้น ตอบเป็นภาษาจีน: ⭐⭐⭐⭐⭐⭐⭐
+   1) 四 (sì)  |  2) 七 (qī)  |  3) 九 (jiǔ)  |  4) 一 (yī)
+EN: Count them and answer in Chinese: ⭐⭐⭐⭐⭐⭐⭐
+   (EN choices same as TH)
+
+### zh-0063  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🌧️
+   1) 太阳 (tàiyáng)  |  2) 星星 (xīngxing)  |  3) 雨 (yǔ)  |  4) 山 (shān)
+EN: Which Chinese word matches this picture? 🌧️
+   (EN choices same as TH)
+
+### zh-0064  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (jiǎo)
+   1) 🦶  |  2) 👃  |  3) 👂  |  4) 🙂
+EN: 🔊 Listen and pick the matching picture (jiǎo)
+   (EN choices same as TH)
+
+### zh-0065  (หัวข้อ: counting)
+TH: นับแล้วมีกี่ชิ้น ตอบเป็นภาษาจีน: 💎💎💎
+   1) 二 (èr)  |  2) 三 (sān)  |  3) 四 (sì)  |  4) 九 (jiǔ)
+EN: Count them and answer in Chinese: 💎💎💎
+   (EN choices same as TH)
+
+### zh-0066  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 👧
+   1) 弟弟 (dìdi)  |  2) 姐姐 (jiějie)  |  3) 爸爸 (bàba)  |  4) 妈妈 (māma)
+EN: Which Chinese word matches this picture? 👧
+   (EN choices same as TH)
+
+### zh-0067  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (ěrduo)
+   1) 👃  |  2) 👂  |  3) ✋  |  4) 🙂
+EN: 🔊 Listen and pick the matching picture (ěrduo)
+   (EN choices same as TH)
+
+### zh-0068  (หัวข้อ: counting)
+TH: นับแล้วมีกี่ชิ้น ตอบเป็นภาษาจีน: 💎
+   1) 六 (liù)  |  2) 八 (bā)  |  3) 十 (shí)  |  4) 一 (yī)
+EN: Count them and answer in Chinese: 💎
+   (EN choices same as TH)
+
+### zh-0069  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🟦
+   1) 黄色 (huángsè)  |  2) 蓝色 (lánsè)  |  3) 绿色 (lǜsè)  |  4) 白色 (báisè)
+EN: Which Chinese word matches this picture? 🟦
+   (EN choices same as TH)
+
+### zh-0070  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (píngguǒ)
+   1) 🍌  |  2) 🍚  |  3) 🍎  |  4) 🍜
+EN: 🔊 Listen and pick the matching picture (píngguǒ)
+   (EN choices same as TH)
+
+### zh-0071  (หัวข้อ: counting)
+TH: นับแล้วมีกี่ชิ้น ตอบเป็นภาษาจีน: ⭐
+   1) 五 (wǔ)  |  2) 一 (yī)  |  3) 八 (bā)  |  4) 四 (sì)
+EN: Count them and answer in Chinese: ⭐
+   (EN choices same as TH)
+
+### zh-0072  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🟩
+   1) 红色 (hóngsè)  |  2) 白色 (báisè)  |  3) 黄色 (huángsè)  |  4) 绿色 (lǜsè)
+EN: Which Chinese word matches this picture? 🟩
+   (EN choices same as TH)
+
+### zh-0073  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (yú)
+   1) 🐰  |  2) 🐘  |  3) 🐶  |  4) 🐟
+EN: 🔊 Listen and pick the matching picture (yú)
+   (EN choices same as TH)
+
+### zh-0074  (หัวข้อ: counting)
+TH: นับแล้วมีกี่ชิ้น ตอบเป็นภาษาจีน: 🍎🍎🍎🍎
+   1) 三 (sān)  |  2) 六 (liù)  |  3) 四 (sì)  |  4) 一 (yī)
+EN: Count them and answer in Chinese: 🍎🍎🍎🍎
+   (EN choices same as TH)
+
+### zh-0075  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🐄
+   1) 大象 (dàxiàng)  |  2) 鸡 (jī)  |  3) 羊 (yáng)  |  4) 牛 (niú)
+EN: Which Chinese word matches this picture? 🐄
+   (EN choices same as TH)
+
+### zh-0076  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (fēijī)
+   1) ✈️  |  2) 🏫  |  3) 📖  |  4) 🏠
+EN: 🔊 Listen and pick the matching picture (fēijī)
+   (EN choices same as TH)
+
+### zh-0077  (หัวข้อ: counting)
+TH: นับแล้วมีกี่ชิ้น ตอบเป็นภาษาจีน: ⭐⭐⭐⭐
+   1) 二 (èr)  |  2) 十 (shí)  |  3) 四 (sì)  |  4) 九 (jiǔ)
+EN: Count them and answer in Chinese: ⭐⭐⭐⭐
+   (EN choices same as TH)
+
+### zh-0078  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🍌
+   1) 香蕉 (xiāngjiāo)  |  2) 西瓜 (xīguā)  |  3) 米饭 (mǐfàn)  |  4) 茶 (chá)
+EN: Which Chinese word matches this picture? 🍌
+   (EN choices same as TH)
+
+### zh-0079  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (qī)
+   1) 2️⃣  |  2) 3️⃣  |  3) 7️⃣  |  4) 4️⃣
+EN: 🔊 Listen and pick the matching picture (qī)
+   (EN choices same as TH)
+
+### zh-0080  (หัวข้อ: counting)
+TH: นับแล้วมีกี่ชิ้น ตอบเป็นภาษาจีน: 💎💎💎💎💎💎💎💎💎
+   1) 九 (jiǔ)  |  2) 八 (bā)  |  3) 三 (sān)  |  4) 四 (sì)
+EN: Count them and answer in Chinese: 💎💎💎💎💎💎💎💎💎
+   (EN choices same as TH)
+
+### zh-0081  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🌳
+   1) 山 (shān)  |  2) 树 (shù)  |  3) 星星 (xīngxing)  |  4) 火 (huǒ)
+EN: Which Chinese word matches this picture? 🌳
+   (EN choices same as TH)
+
+### zh-0082  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (niǎo)
+   1) 🐷  |  2) 🐦  |  3) 🐯  |  4) 🐒
+EN: 🔊 Listen and pick the matching picture (niǎo)
+   (EN choices same as TH)
+
+### zh-0083  (หัวข้อ: counting)
+TH: นับแล้วมีกี่ชิ้น ตอบเป็นภาษาจีน: 🍎
+   1) 八 (bā)  |  2) 三 (sān)  |  3) 九 (jiǔ)  |  4) 一 (yī)
+EN: Count them and answer in Chinese: 🍎
+   (EN choices same as TH)
+
+### zh-0084  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 1️⃣
+   1) 五 (wǔ)  |  2) 十 (shí)  |  3) 四 (sì)  |  4) 一 (yī)
+EN: Which Chinese word matches this picture? 1️⃣
+   (EN choices same as TH)
+
+### zh-0085  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (tóu)
+   1) 👄  |  2) 🙂  |  3) 👃  |  4) ✋
+EN: 🔊 Listen and pick the matching picture (tóu)
+   (EN choices same as TH)
+
+### zh-0086  (หัวข้อ: counting)
+TH: นับแล้วมีกี่ชิ้น ตอบเป็นภาษาจีน: ⭐⭐⭐⭐⭐⭐
+   1) 六 (liù)  |  2) 八 (bā)  |  3) 二 (èr)  |  4) 三 (sān)
+EN: Count them and answer in Chinese: ⭐⭐⭐⭐⭐⭐
+   (EN choices same as TH)
+
+### zh-0087  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน ⬇️
+   1) 下 (xià)  |  2) 大 (dà)  |  3) 小 (xiǎo)  |  4) 我 (wǒ)
+EN: Which Chinese word matches this picture? ⬇️
+   (EN choices same as TH)
+
+### zh-0088  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (xuéxiào)
+   1) 📖  |  2) ✈️  |  3) 🚗  |  4) 🏫
+EN: 🔊 Listen and pick the matching picture (xuéxiào)
+   (EN choices same as TH)
+
+### zh-0089  (หัวข้อ: counting)
+TH: นับแล้วมีกี่ชิ้น ตอบเป็นภาษาจีน: 💎💎💎💎💎
+   1) 一 (yī)  |  2) 五 (wǔ)  |  3) 六 (liù)  |  4) 七 (qī)
+EN: Count them and answer in Chinese: 💎💎💎💎💎
+   (EN choices same as TH)
+
+### zh-0090  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 📖
+   1) 飞机 (fēijī)  |  2) 书 (shū)  |  3) 车 (chē)  |  4) 家 (jiā)
+EN: Which Chinese word matches this picture? 📖
+   (EN choices same as TH)
+
+### zh-0091  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (xīguā)
+   1) 🥚  |  2) 🍚  |  3) 🍎  |  4) 🍉
+EN: 🔊 Listen and pick the matching picture (xīguā)
+   (EN choices same as TH)
+
+### zh-0092  (หัวข้อ: counting)
+TH: นับแล้วมีกี่ชิ้น ตอบเป็นภาษาจีน: 🍎🍎🍎🍎🍎🍎🍎
+   1) 七 (qī)  |  2) 九 (jiǔ)  |  3) 三 (sān)  |  4) 四 (sì)
+EN: Count them and answer in Chinese: 🍎🍎🍎🍎🍎🍎🍎
+   (EN choices same as TH)
+
+### zh-0093  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 6️⃣
+   1) 九 (jiǔ)  |  2) 六 (liù)  |  3) 二 (èr)  |  4) 十 (shí)
+EN: Which Chinese word matches this picture? 6️⃣
+   (EN choices same as TH)
+
+### zh-0094  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (mǐfàn)
+   1) 🥛  |  2) 🍉  |  3) 🍚  |  4) 🥚
+EN: 🔊 Listen and pick the matching picture (mǐfàn)
+   (EN choices same as TH)
+
+### zh-0095  (หัวข้อ: counting)
+TH: นับแล้วมีกี่ชิ้น ตอบเป็นภาษาจีน: 🍎🍎🍎🍎🍎
+   1) 二 (èr)  |  2) 四 (sì)  |  3) 十 (shí)  |  4) 五 (wǔ)
+EN: Count them and answer in Chinese: 🍎🍎🍎🍎🍎
+   (EN choices same as TH)
+
+### zh-0096  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 👨
+   1) 爸爸 (bàba)  |  2) 妈妈 (māma)  |  3) 老师 (lǎoshī)  |  4) 朋友 (péngyou)
+EN: Which Chinese word matches this picture? 👨
+   (EN choices same as TH)
+
+### zh-0097  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (jiějie)
+   1) 👧  |  2) 👨  |  3) 👴  |  4) 👩‍🏫
+EN: 🔊 Listen and pick the matching picture (jiějie)
+   (EN choices same as TH)
+
+### zh-0098  (หัวข้อ: counting)
+TH: นับแล้วมีกี่ชิ้น ตอบเป็นภาษาจีน: ⭐⭐⭐⭐⭐⭐⭐⭐⭐
+   1) 四 (sì)  |  2) 十 (shí)  |  3) 五 (wǔ)  |  4) 九 (jiǔ)
+EN: Count them and answer in Chinese: ⭐⭐⭐⭐⭐⭐⭐⭐⭐
+   (EN choices same as TH)
+
+### zh-0099  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน ⭐
+   1) 火 (huǒ)  |  2) 星星 (xīngxing)  |  3) 太阳 (tàiyáng)  |  4) 山 (shān)
+EN: Which Chinese word matches this picture? ⭐
+   (EN choices same as TH)
+
+### zh-0100  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (liù)
+   1) 4️⃣  |  2) 1️⃣  |  3) 7️⃣  |  4) 6️⃣
+EN: 🔊 Listen and pick the matching picture (liù)
+   (EN choices same as TH)
+
+### zh-0101  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🐦
+   1) 猴子 (hóuzi)  |  2) 老虎 (lǎohǔ)  |  3) 熊猫 (xióngmāo)  |  4) 鸟 (niǎo)
+EN: Which Chinese word matches this picture? 🐦
+   (EN choices same as TH)
+
+### zh-0102  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (tàiyáng)
+   1) 🌙  |  2) ☀️  |  3) 🌧️  |  4) 🌳
+EN: 🔊 Listen and pick the matching picture (tàiyáng)
+   (EN choices same as TH)
+
+### zh-0103  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🙂
+   1) 手 (shǒu)  |  2) 耳朵 (ěrduo)  |  3) 头 (tóu)  |  4) 眼睛 (yǎnjing)
+EN: Which Chinese word matches this picture? 🙂
+   (EN choices same as TH)
+
+### zh-0104  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (nǐ)
+   1) 🐘  |  2) 🐜  |  3) ⬆️  |  4) 👉
+EN: 🔊 Listen and pick the matching picture (nǐ)
+   (EN choices same as TH)
+
+### zh-0105  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🍜
+   1) 水 (shuǐ)  |  2) 牛奶 (niúnǎi)  |  3) 面条 (miàntiáo)  |  4) 米饭 (mǐfàn)
+EN: Which Chinese word matches this picture? 🍜
+   (EN choices same as TH)
+
+### zh-0106  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (shān)
+   1) 🌙  |  2) ⛰️  |  3) 🌧️  |  4) 🔥
+EN: 🔊 Listen and pick the matching picture (shān)
+   (EN choices same as TH)
+
+### zh-0107  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🐼
+   1) 猪 (zhū)  |  2) 兔子 (tùzi)  |  3) 鸟 (niǎo)  |  4) 熊猫 (xióngmāo)
+EN: Which Chinese word matches this picture? 🐼
+   (EN choices same as TH)
+
+### zh-0108  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (dà)
+   1) 👉  |  2) 🐘  |  3) 🐜  |  4) 🙋
+EN: 🔊 Listen and pick the matching picture (dà)
+   (EN choices same as TH)
+
+### zh-0109  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 💧
+   1) 茶 (chá)  |  2) 苹果 (píngguǒ)  |  3) 水 (shuǐ)  |  4) 米饭 (mǐfàn)
+EN: Which Chinese word matches this picture? 💧
+   (EN choices same as TH)
+
+### zh-0110  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (chē)
+   1) 🖊️  |  2) 🚗  |  3) 📖  |  4) 🏠
+EN: 🔊 Listen and pick the matching picture (chē)
+   (EN choices same as TH)
+
+### zh-0111  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 👵
+   1) 奶奶 (nǎinai)  |  2) 朋友 (péngyou)  |  3) 妈妈 (māma)  |  4) 爷爷 (yéye)
+EN: Which Chinese word matches this picture? 👵
+   (EN choices same as TH)
+
+### zh-0112  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (lánsè)
+   1) ⬜  |  2) 🟦  |  3) 🟥  |  4) ⬛
+EN: 🔊 Listen and pick the matching picture (lánsè)
+   (EN choices same as TH)
+
+### zh-0113  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🍵
+   1) 茶 (chá)  |  2) 牛奶 (niúnǎi)  |  3) 米饭 (mǐfàn)  |  4) 苹果 (píngguǒ)
+EN: Which Chinese word matches this picture? 🍵
+   (EN choices same as TH)
+
+### zh-0114  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (èr)
+   1) 2️⃣  |  2) 8️⃣  |  3) 4️⃣  |  4) 5️⃣
+EN: 🔊 Listen and pick the matching picture (èr)
+   (EN choices same as TH)
+
+### zh-0115  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🖊️
+   1) 飞机 (fēijī)  |  2) 笔 (bǐ)  |  3) 车 (chē)  |  4) 书 (shū)
+EN: Which Chinese word matches this picture? 🖊️
+   (EN choices same as TH)
+
+### zh-0116  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (hóngsè)
+   1) 🟥  |  2) 🟩  |  3) ⬜  |  4) ⬛
+EN: 🔊 Listen and pick the matching picture (hóngsè)
+   (EN choices same as TH)
+
+### zh-0117  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🐴
+   1) 老虎 (lǎohǔ)  |  2) 牛 (niú)  |  3) 狗 (gǒu)  |  4) 马 (mǎ)
+EN: Which Chinese word matches this picture? 🐴
+   (EN choices same as TH)
+
+### zh-0118  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (shǒu)
+   1) 🙂  |  2) 🦶  |  3) ✋  |  4) 👂
+EN: 🔊 Listen and pick the matching picture (shǒu)
+   (EN choices same as TH)
+
+### zh-0119  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🏫
+   1) 学校 (xuéxiào)  |  2) 家 (jiā)  |  3) 笔 (bǐ)  |  4) 飞机 (fēijī)
+EN: Which Chinese word matches this picture? 🏫
+   (EN choices same as TH)
+
+### zh-0120  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (huángsè)
+   1) 🟥  |  2) 🟩  |  3) ⬛  |  4) 🟨
+EN: 🔊 Listen and pick the matching picture (huángsè)
+   (EN choices same as TH)
+
+### zh-0121  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 👩‍🏫
+   1) 老师 (lǎoshī)  |  2) 爸爸 (bàba)  |  3) 姐姐 (jiějie)  |  4) 爷爷 (yéye)
+EN: Which Chinese word matches this picture? 👩‍🏫
+   (EN choices same as TH)
+
+### zh-0122  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (xiǎo)
+   1) ⬆️  |  2) 🙋  |  3) 🐜  |  4) ⬇️
+EN: 🔊 Listen and pick the matching picture (xiǎo)
+   (EN choices same as TH)
+
+### zh-0123  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🙋
+   1) 小 (xiǎo)  |  2) 我 (wǒ)  |  3) 人 (rén)  |  4) 上 (shàng)
+EN: Which Chinese word matches this picture? 🙋
+   (EN choices same as TH)
+
+### zh-0124  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (bǐ)
+   1) 🏠  |  2) 🖊️  |  3) ✈️  |  4) 📖
+EN: 🔊 Listen and pick the matching picture (bǐ)
+   (EN choices same as TH)
+
+### zh-0125  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🏠
+   1) 家 (jiā)  |  2) 飞机 (fēijī)  |  3) 车 (chē)  |  4) 书 (shū)
+EN: Which Chinese word matches this picture? 🏠
+   (EN choices same as TH)
+
+### zh-0126  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (jī)
+   1) 🐷  |  2) 🐔  |  3) 🐟  |  4) 🐘
+EN: 🔊 Listen and pick the matching picture (jī)
+   (EN choices same as TH)
+
+### zh-0127  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🐜
+   1) 小 (xiǎo)  |  2) 我 (wǒ)  |  3) 人 (rén)  |  4) 大 (dà)
+EN: Which Chinese word matches this picture? 🐜
+   (EN choices same as TH)
+
+### zh-0128  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (yéye)
+   1) 👨  |  2) 👩  |  3) 👴  |  4) 👩‍🏫
+EN: 🔊 Listen and pick the matching picture (yéye)
+   (EN choices same as TH)
+
+### zh-0129  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 👄
+   1) 眼睛 (yǎnjing)  |  2) 手 (shǒu)  |  3) 鼻子 (bízi)  |  4) 嘴巴 (zuǐba)
+EN: Which Chinese word matches this picture? 👄
+   (EN choices same as TH)
+
+### zh-0130  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (māma)
+   1) 🧑‍🤝‍🧑  |  2) 👩‍🏫  |  3) 👨  |  4) 👩
+EN: 🔊 Listen and pick the matching picture (māma)
+   (EN choices same as TH)
+
+### zh-0131  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน ⬜
+   1) 黑色 (hēisè)  |  2) 黄色 (huángsè)  |  3) 白色 (báisè)  |  4) 红色 (hóngsè)
+EN: Which Chinese word matches this picture? ⬜
+   (EN choices same as TH)
+
+### zh-0132  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (lǜsè)
+   1) ⬛  |  2) 🟥  |  3) 🟩  |  4) 🟦
+EN: 🔊 Listen and pick the matching picture (lǜsè)
+   (EN choices same as TH)
+
+### zh-0133  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 👦
+   1) 妈妈 (māma)  |  2) 妹妹 (mèimei)  |  3) 爸爸 (bàba)  |  4) 弟弟 (dìdi)
+EN: Which Chinese word matches this picture? 👦
+   (EN choices same as TH)
+
+### zh-0134  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (shū)
+   1) 🖊️  |  2) 📖  |  3) 🚗  |  4) 🏫
+EN: 🔊 Listen and pick the matching picture (shū)
+   (EN choices same as TH)
+
+### zh-0135  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🌙
+   1) 星星 (xīngxing)  |  2) 月亮 (yuèliang)  |  3) 花 (huā)  |  4) 雨 (yǔ)
+EN: Which Chinese word matches this picture? 🌙
+   (EN choices same as TH)
+
+### zh-0136  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (niú)
+   1) 🐄  |  2) 🐼  |  3) 🐘  |  4) 🐟
+EN: 🔊 Listen and pick the matching picture (niú)
+   (EN choices same as TH)
+
+### zh-0137  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🟥
+   1) 黑色 (hēisè)  |  2) 红色 (hóngsè)  |  3) 绿色 (lǜsè)  |  4) 黄色 (huángsè)
+EN: Which Chinese word matches this picture? 🟥
+   (EN choices same as TH)
+
+### zh-0138  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (jiǔ)
+   1) 9️⃣  |  2) 8️⃣  |  3) 6️⃣  |  4) 1️⃣
+EN: 🔊 Listen and pick the matching picture (jiǔ)
+   (EN choices same as TH)
+
+### zh-0139  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 5️⃣
+   1) 六 (liù)  |  2) 五 (wǔ)  |  3) 四 (sì)  |  4) 一 (yī)
+EN: Which Chinese word matches this picture? 5️⃣
+   (EN choices same as TH)
+
+### zh-0140  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (sì)
+   1) 2️⃣  |  2) 4️⃣  |  3) 7️⃣  |  4) 6️⃣
+EN: 🔊 Listen and pick the matching picture (sì)
+   (EN choices same as TH)
+
+### zh-0141  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 👀
+   1) 耳朵 (ěrduo)  |  2) 头 (tóu)  |  3) 眼睛 (yǎnjing)  |  4) 手 (shǒu)
+EN: Which Chinese word matches this picture? 👀
+   (EN choices same as TH)
+
+### zh-0142  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (xiāngjiāo)
+   1) 🍵  |  2) 💧  |  3) 🥛  |  4) 🍌
+EN: 🔊 Listen and pick the matching picture (xiāngjiāo)
+   (EN choices same as TH)
+
+### zh-0143  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🍉
+   1) 茶 (chá)  |  2) 鸡蛋 (jīdàn)  |  3) 西瓜 (xīguā)  |  4) 面条 (miàntiáo)
+EN: Which Chinese word matches this picture? 🍉
+   (EN choices same as TH)
+
+### zh-0144  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (jiā)
+   1) 🖊️  |  2) ✈️  |  3) 🏫  |  4) 🏠
+EN: 🔊 Listen and pick the matching picture (jiā)
+   (EN choices same as TH)
+
+### zh-0145  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 👴
+   1) 爷爷 (yéye)  |  2) 弟弟 (dìdi)  |  3) 朋友 (péngyou)  |  4) 妹妹 (mèimei)
+EN: Which Chinese word matches this picture? 👴
+   (EN choices same as TH)
+
+### zh-0146  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (báisè)
+   1) ⬛  |  2) ⬜  |  3) 🟦  |  4) 🟥
+EN: 🔊 Listen and pick the matching picture (báisè)
+   (EN choices same as TH)
+
+### zh-0147  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🌸
+   1) 雨 (yǔ)  |  2) 太阳 (tàiyáng)  |  3) 花 (huā)  |  4) 山 (shān)
+EN: Which Chinese word matches this picture? 🌸
+   (EN choices same as TH)
+
+### zh-0148  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (zhū)
+   1) 🐴  |  2) 🐷  |  3) 🐄  |  4) 🐦
+EN: 🔊 Listen and pick the matching picture (zhū)
+   (EN choices same as TH)
+
+### zh-0149  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🐯
+   1) 熊猫 (xióngmāo)  |  2) 马 (mǎ)  |  3) 猴子 (hóuzi)  |  4) 老虎 (lǎohǔ)
+EN: Which Chinese word matches this picture? 🐯
+   (EN choices same as TH)
+
+### zh-0150  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (māo)
+   1) 🐦  |  2) 🐼  |  3) 🐱  |  4) 🐯
+EN: 🔊 Listen and pick the matching picture (māo)
+   (EN choices same as TH)
+
+### zh-0151  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🐱
+   1) 猴子 (hóuzi)  |  2) 鸟 (niǎo)  |  3) 鸡 (jī)  |  4) 猫 (māo)
+EN: Which Chinese word matches this picture? 🐱
+   (EN choices same as TH)
+
+### zh-0152  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (shuǐ)
+   1) 🥚  |  2) 💧  |  3) 🍵  |  4) 🍌
+EN: 🔊 Listen and pick the matching picture (shuǐ)
+   (EN choices same as TH)
+
+### zh-0153  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🐔
+   1) 鸡 (jī)  |  2) 熊猫 (xióngmāo)  |  3) 马 (mǎ)  |  4) 猴子 (hóuzi)
+EN: Which Chinese word matches this picture? 🐔
+   (EN choices same as TH)
+
+### zh-0154  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (sān)
+   1) 4️⃣  |  2) 3️⃣  |  3) 5️⃣  |  4) 🔟
+EN: 🔊 Listen and pick the matching picture (sān)
+   (EN choices same as TH)
+
+### zh-0155  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🔟
+   1) 十 (shí)  |  2) 一 (yī)  |  3) 二 (èr)  |  4) 四 (sì)
+EN: Which Chinese word matches this picture? 🔟
+   (EN choices same as TH)
+
+### zh-0156  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (tùzi)
+   1) 🐰  |  2) 🐘  |  3) 🐴  |  4) 🐷
+EN: 🔊 Listen and pick the matching picture (tùzi)
+   (EN choices same as TH)
+
+### zh-0157  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🧑
+   1) 我 (wǒ)  |  2) 人 (rén)  |  3) 你 (nǐ)  |  4) 下 (xià)
+EN: Which Chinese word matches this picture? 🧑
+   (EN choices same as TH)
+
+### zh-0158  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (yī)
+   1) 5️⃣  |  2) 7️⃣  |  3) 1️⃣  |  4) 9️⃣
+EN: 🔊 Listen and pick the matching picture (yī)
+   (EN choices same as TH)
+
+### zh-0159  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 2️⃣
+   1) 三 (sān)  |  2) 九 (jiǔ)  |  3) 二 (èr)  |  4) 五 (wǔ)
+EN: Which Chinese word matches this picture? 2️⃣
+   (EN choices same as TH)
+
+### zh-0160  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (hēisè)
+   1) 🟩  |  2) 🟦  |  3) ⬛  |  4) ⬜
+EN: 🔊 Listen and pick the matching picture (hēisè)
+   (EN choices same as TH)
+
+### zh-0161  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🐶
+   1) 狗 (gǒu)  |  2) 鱼 (yú)  |  3) 鸟 (niǎo)  |  4) 马 (mǎ)
+EN: Which Chinese word matches this picture? 🐶
+   (EN choices same as TH)
+
+### zh-0162  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (dìdi)
+   1) 👴  |  2) 👩  |  3) 👧  |  4) 👦
+EN: 🔊 Listen and pick the matching picture (dìdi)
+   (EN choices same as TH)
+
+### zh-0163  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🐷
+   1) 鸟 (niǎo)  |  2) 大象 (dàxiàng)  |  3) 鱼 (yú)  |  4) 猪 (zhū)
+EN: Which Chinese word matches this picture? 🐷
+   (EN choices same as TH)
+
+### zh-0164  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (dàxiàng)
+   1) 🐴  |  2) 🐘  |  3) 🐷  |  4) 🐦
+EN: 🔊 Listen and pick the matching picture (dàxiàng)
+   (EN choices same as TH)
+
+### zh-0165  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 🥛
+   1) 牛奶 (niúnǎi)  |  2) 水 (shuǐ)  |  3) 米饭 (mǐfàn)  |  4) 香蕉 (xiāngjiāo)
+EN: Which Chinese word matches this picture? 🥛
+   (EN choices same as TH)
+
+### zh-0166  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (lǎohǔ)
+   1) 🐯  |  2) 🐴  |  3) 🐘  |  4) 🐄
+EN: 🔊 Listen and pick the matching picture (lǎohǔ)
+   (EN choices same as TH)
+
+### zh-0167  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 👧
+   1) 爷爷 (yéye)  |  2) 妹妹 (mèimei)  |  3) 奶奶 (nǎinai)  |  4) 哥哥 (gēge)
+EN: Which Chinese word matches this picture? 👧
+   (EN choices same as TH)
+
+### zh-0168  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (niúnǎi)
+   1) 🍚  |  2) 🍵  |  3) 💧  |  4) 🥛
+EN: 🔊 Listen and pick the matching picture (niúnǎi)
+   (EN choices same as TH)
+
+### zh-0169  (หัวข้อ: picture-word)
+TH: ภาษาจีนของภาพนี้คือคำไหน 3️⃣
+   1) 七 (qī)  |  2) 三 (sān)  |  3) 五 (wǔ)  |  4) 八 (bā)
+EN: Which Chinese word matches this picture? 3️⃣
+   (EN choices same as TH)
+
+### zh-0170  (หัวข้อ: listening)
+TH: 🔊 ฟังแล้วเลือกภาพที่ตรงกัน (yuèliang)
+   1) ☀️  |  2) 🌸  |  3) 🌙  |  4) 🌳
+EN: 🔊 Listen and pick the matching picture (yuèliang)
+   (EN choices same as TH)

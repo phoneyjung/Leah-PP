@@ -1,0 +1,1022 @@
+# ชุดตรวจ: ภาษาอังกฤษ · เด็กอายุ 7 ปี (ป.1–ป.2) · 170 ข้อ · ไฟล์ q-english-7.json
+# ตัวเลือกนับ 1–4 · ไม่มีเฉลยในไฟล์นี้ (ให้แก้โจทย์เองก่อน)
+
+### en-0171  (หัวข้อ: thai-to-english)
+TH: คำว่า "เท้า" ภาษาอังกฤษคือคำไหน
+   1) nose  |  2) ear  |  3) foot  |  4) hand
+EN: Which English word means "เท้า"?
+   (EN choices same as TH)
+
+### en-0172  (หัวข้อ: english-to-thai)
+TH: คำว่า "teacher" แปลว่าอะไร
+   1) ครู  |  2) พระราชา  |  3) ทารก  |  4) แม่
+EN: What does "teacher" mean in Thai?
+   (EN choices same as TH)
+
+### en-0173  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: f_ower 🌸
+   1) c  |  2) u  |  3) i  |  4) l
+EN: Fill in the missing letter: f_ower 🌸
+   (EN choices same as TH)
+
+### en-0174  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "rich" (รวย) คือคำไหน
+   1) far  |  2) old  |  3) new  |  4) poor
+EN: What is the opposite of "rich"?
+   (EN choices same as TH)
+
+### en-0175  (หัวข้อ: rhymes)
+TH: คำไหนสัมผัสเสียงเดียวกับ "cat"
+   1) dog  |  2) sun  |  3) bed  |  4) bat
+EN: Which word rhymes with "cat"?
+   (EN choices same as TH)
+
+### en-0176  (หัวข้อ: days-months)
+TH: "วันอาทิตย์" ภาษาอังกฤษคือคำไหน
+   1) Monday  |  2) Wednesday  |  3) Sunday  |  4) Tuesday
+EN: Which English word means "วันอาทิตย์"?
+   (EN choices same as TH)
+
+### en-0177  (หัวข้อ: thai-to-english)
+TH: คำว่า "สีเขียว" ภาษาอังกฤษคือคำไหน
+   1) blue  |  2) white  |  3) purple  |  4) green
+EN: Which English word means "สีเขียว"?
+   (EN choices same as TH)
+
+### en-0178  (หัวข้อ: english-to-thai)
+TH: คำว่า "egg" แปลว่าอะไร
+   1) ไข่  |  2) เค้ก  |  3) แอปเปิล  |  4) แครอท
+EN: What does "egg" mean in Thai?
+   (EN choices same as TH)
+
+### en-0179  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: _pple 🍎
+   1) a  |  2) d  |  3) z  |  4) w
+EN: Fill in the missing letter: _pple 🍎
+   (EN choices same as TH)
+
+### en-0180  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "top" (บน) คือคำไหน
+   1) hot  |  2) bottom  |  3) empty  |  4) in
+EN: What is the opposite of "top"?
+   (EN choices same as TH)
+
+### en-0181  (หัวข้อ: rhymes)
+TH: คำไหนสัมผัสเสียงเดียวกับ "light"
+   1) cup  |  2) dog  |  3) bright  |  4) bed
+EN: Which word rhymes with "light"?
+   (EN choices same as TH)
+
+### en-0182  (หัวข้อ: days-months)
+TH: "วันศุกร์" ภาษาอังกฤษคือคำไหน
+   1) Wednesday  |  2) Monday  |  3) Tuesday  |  4) Friday
+EN: Which English word means "วันศุกร์"?
+   (EN choices same as TH)
+
+### en-0183  (หัวข้อ: thai-to-english)
+TH: คำว่า "ปาก" ภาษาอังกฤษคือคำไหน
+   1) ear  |  2) nose  |  3) mouth  |  4) tooth
+EN: Which English word means "ปาก"?
+   (EN choices same as TH)
+
+### en-0184  (หัวข้อ: english-to-thai)
+TH: คำว่า "cake" แปลว่าอะไร
+   1) กล้วย  |  2) เค้ก  |  3) ไข่  |  4) ชีส
+EN: What does "cake" mean in Thai?
+   (EN choices same as TH)
+
+### en-0185  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: _heep 🐑
+   1) s  |  2) a  |  3) q  |  4) l
+EN: Fill in the missing letter: _heep 🐑
+   (EN choices same as TH)
+
+### en-0186  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "left" (ซ้าย) คือคำไหน
+   1) right  |  2) open  |  3) cold  |  4) heavy
+EN: What is the opposite of "left"?
+   (EN choices same as TH)
+
+### en-0187  (หัวข้อ: rhymes)
+TH: คำไหนสัมผัสเสียงเดียวกับ "light"
+   1) dog  |  2) cup  |  3) bed  |  4) kite
+EN: Which word rhymes with "light"?
+   (EN choices same as TH)
+
+### en-0188  (หัวข้อ: days-months)
+TH: วันต่อจาก Friday (วันศุกร์) คือวันอะไร
+   1) Monday  |  2) Wednesday  |  3) Saturday  |  4) Tuesday
+EN: What day comes after Friday?
+   (EN choices same as TH)
+
+### en-0189  (หัวข้อ: thai-to-english)
+TH: คำว่า "มือ" ภาษาอังกฤษคือคำไหน
+   1) eye  |  2) nose  |  3) hand  |  4) tooth
+EN: Which English word means "มือ"?
+   (EN choices same as TH)
+
+### en-0190  (หัวข้อ: english-to-thai)
+TH: คำว่า "mouth" แปลว่าอะไร
+   1) มือ  |  2) ปาก  |  3) หู  |  4) เท้า
+EN: What does "mouth" mean in Thai?
+   (EN choices same as TH)
+
+### en-0191  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: br_wn 🟫
+   1) o  |  2) c  |  3) f  |  4) h
+EN: Fill in the missing letter: br_wn 🟫
+   (EN choices same as TH)
+
+### en-0192  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "hard" (แข็ง) คือคำไหน
+   1) quiet  |  2) soft  |  3) down  |  4) small
+EN: What is the opposite of "hard"?
+   (EN choices same as TH)
+
+### en-0193  (หัวข้อ: rhymes)
+TH: คำไหนสัมผัสเสียงเดียวกับ "dog"
+   1) frog  |  2) pen  |  3) cat  |  4) sun
+EN: Which word rhymes with "dog"?
+   (EN choices same as TH)
+
+### en-0194  (หัวข้อ: days-months)
+TH: "วันพฤหัสบดี" ภาษาอังกฤษคือคำไหน
+   1) Monday  |  2) Thursday  |  3) Tuesday  |  4) Wednesday
+EN: Which English word means "วันพฤหัสบดี"?
+   (EN choices same as TH)
+
+### en-0195  (หัวข้อ: thai-to-english)
+TH: คำว่า "แม่" ภาษาอังกฤษคือคำไหน
+   1) mother  |  2) baby  |  3) father  |  4) king
+EN: Which English word means "แม่"?
+   (EN choices same as TH)
+
+### en-0196  (หัวข้อ: english-to-thai)
+TH: คำว่า "bike" แปลว่าอะไร
+   1) รถยนต์  |  2) เรือ  |  3) จักรยาน  |  4) รถไฟ
+EN: What does "bike" mean in Thai?
+   (EN choices same as TH)
+
+### en-0197  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: ban_na 🍌
+   1) j  |  2) i  |  3) r  |  4) a
+EN: Fill in the missing letter: ban_na 🍌
+   (EN choices same as TH)
+
+### en-0198  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "give" (ให้) คือคำไหน
+   1) take  |  2) small  |  3) last  |  4) old
+EN: What is the opposite of "give"?
+   (EN choices same as TH)
+
+### en-0199  (หัวข้อ: rhymes)
+TH: คำไหนสัมผัสเสียงเดียวกับ "bed"
+   1) box  |  2) fed  |  3) cat  |  4) sun
+EN: Which word rhymes with "bed"?
+   (EN choices same as TH)
+
+### en-0200  (หัวข้อ: days-months)
+TH: วันต่อจาก Sunday (วันอาทิตย์) คือวันอะไร
+   1) Wednesday  |  2) Tuesday  |  3) Monday  |  4) Thursday
+EN: What day comes after Sunday?
+   (EN choices same as TH)
+
+### en-0201  (หัวข้อ: thai-to-english)
+TH: คำว่า "สีม่วง" ภาษาอังกฤษคือคำไหน
+   1) yellow  |  2) purple  |  3) blue  |  4) brown
+EN: Which English word means "สีม่วง"?
+   (EN choices same as TH)
+
+### en-0202  (หัวข้อ: english-to-thai)
+TH: คำว่า "cave" แปลว่าอะไร
+   1) ฝน  |  2) ทะเล  |  3) ถ้ำ  |  4) ดวงจันทร์
+EN: What does "cave" mean in Thai?
+   (EN choices same as TH)
+
+### en-0203  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: _heese 🧀
+   1) n  |  2) c  |  3) a  |  4) r
+EN: Fill in the missing letter: _heese 🧀
+   (EN choices same as TH)
+
+### en-0204  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "clean" (สะอาด) คือคำไหน
+   1) far  |  2) dirty  |  3) near  |  4) give
+EN: What is the opposite of "clean"?
+   (EN choices same as TH)
+
+### en-0205  (หัวข้อ: rhymes)
+TH: คำไหนสัมผัสเสียงเดียวกับ "cake"
+   1) cup  |  2) lake  |  3) bed  |  4) dog
+EN: Which word rhymes with "cake"?
+   (EN choices same as TH)
+
+### en-0206  (หัวข้อ: days-months)
+TH: "วันเสาร์" ภาษาอังกฤษคือคำไหน
+   1) Wednesday  |  2) Saturday  |  3) Tuesday  |  4) Monday
+EN: Which English word means "วันเสาร์"?
+   (EN choices same as TH)
+
+### en-0207  (หัวข้อ: thai-to-english)
+TH: คำว่า "พระราชา" ภาษาอังกฤษคือคำไหน
+   1) teacher  |  2) mother  |  3) king  |  4) father
+EN: Which English word means "พระราชา"?
+   (EN choices same as TH)
+
+### en-0208  (หัวข้อ: english-to-thai)
+TH: คำว่า "tiger" แปลว่าอะไร
+   1) ไก่  |  2) เสือ  |  3) นก  |  4) นกฮูก
+EN: What does "tiger" mean in Thai?
+   (EN choices same as TH)
+
+### en-0209  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: grap_s 🍇
+   1) e  |  2) d  |  3) y  |  4) k
+EN: Fill in the missing letter: grap_s 🍇
+   (EN choices same as TH)
+
+### en-0210  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "up" (ขึ้น) คือคำไหน
+   1) win  |  2) down  |  3) give  |  4) small
+EN: What is the opposite of "up"?
+   (EN choices same as TH)
+
+### en-0211  (หัวข้อ: rhymes)
+TH: คำไหนสัมผัสเสียงเดียวกับ "moon"
+   1) noon  |  2) bed  |  3) cat  |  4) pig
+EN: Which word rhymes with "moon"?
+   (EN choices same as TH)
+
+### en-0212  (หัวข้อ: days-months)
+TH: "วันอังคาร" ภาษาอังกฤษคือคำไหน
+   1) Thursday  |  2) Tuesday  |  3) Wednesday  |  4) Monday
+EN: Which English word means "วันอังคาร"?
+   (EN choices same as TH)
+
+### en-0213  (หัวข้อ: thai-to-english)
+TH: คำว่า "สีน้ำตาล" ภาษาอังกฤษคือคำไหน
+   1) yellow  |  2) brown  |  3) blue  |  4) purple
+EN: Which English word means "สีน้ำตาล"?
+   (EN choices same as TH)
+
+### en-0214  (หัวข้อ: english-to-thai)
+TH: คำว่า "green" แปลว่าอะไร
+   1) สีม่วง  |  2) สีเขียว  |  3) สีน้ำเงิน  |  4) สีดำ
+EN: What does "green" mean in Thai?
+   (EN choices same as TH)
+
+### en-0215  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: t_oth 🦷
+   1) a  |  2) w  |  3) e  |  4) o
+EN: Fill in the missing letter: t_oth 🦷
+   (EN choices same as TH)
+
+### en-0216  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "first" (แรก) คือคำไหน
+   1) last  |  2) big  |  3) open  |  4) long
+EN: What is the opposite of "first"?
+   (EN choices same as TH)
+
+### en-0217  (หัวข้อ: rhymes)
+TH: คำไหนสัมผัสเสียงเดียวกับ "boat"
+   1) bed  |  2) sun  |  3) pig  |  4) float
+EN: Which word rhymes with "boat"?
+   (EN choices same as TH)
+
+### en-0218  (หัวข้อ: days-months)
+TH: วันต่อจาก Tuesday (วันอังคาร) คือวันอะไร
+   1) Monday  |  2) Wednesday  |  3) Friday  |  4) Thursday
+EN: What day comes after Tuesday?
+   (EN choices same as TH)
+
+### en-0219  (หัวข้อ: thai-to-english)
+TH: คำว่า "เจ้าหญิง" ภาษาอังกฤษคือคำไหน
+   1) baby  |  2) teacher  |  3) princess  |  4) father
+EN: Which English word means "เจ้าหญิง"?
+   (EN choices same as TH)
+
+### en-0220  (หัวข้อ: english-to-thai)
+TH: คำว่า "crown" แปลว่าอะไร
+   1) เตียง  |  2) กล่อง  |  3) มงกุฎ  |  4) นาฬิกา
+EN: What does "crown" mean in Thai?
+   (EN choices same as TH)
+
+### en-0221  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: wate_ 💧
+   1) r  |  2) l  |  3) f  |  4) d
+EN: Fill in the missing letter: wate_ 💧
+   (EN choices same as TH)
+
+### en-0222  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "long" (ยาว) คือคำไหน
+   1) short  |  2) small  |  3) yes  |  4) soft
+EN: What is the opposite of "long"?
+   (EN choices same as TH)
+
+### en-0223  (หัวข้อ: rhymes)
+TH: คำไหนสัมผัสเสียงเดียวกับ "cake"
+   1) bed  |  2) make  |  3) dog  |  4) cup
+EN: Which word rhymes with "cake"?
+   (EN choices same as TH)
+
+### en-0224  (หัวข้อ: days-months)
+TH: วันต่อจาก Monday (วันจันทร์) คือวันอะไร
+   1) Thursday  |  2) Wednesday  |  3) Friday  |  4) Tuesday
+EN: What day comes after Monday?
+   (EN choices same as TH)
+
+### en-0225  (หัวข้อ: thai-to-english)
+TH: คำว่า "สีขาว" ภาษาอังกฤษคือคำไหน
+   1) brown  |  2) white  |  3) red  |  4) blue
+EN: Which English word means "สีขาว"?
+   (EN choices same as TH)
+
+### en-0226  (หัวข้อ: english-to-thai)
+TH: คำว่า "shoe" แปลว่าอะไร
+   1) รองเท้า  |  2) เตียง  |  3) ลูกบอล  |  4) นาฬิกา
+EN: What does "shoe" mean in Thai?
+   (EN choices same as TH)
+
+### en-0227  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: mo_key 🐒
+   1) h  |  2) p  |  3) n  |  4) w
+EN: Fill in the missing letter: mo_key 🐒
+   (EN choices same as TH)
+
+### en-0228  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "win" (ชนะ) คือคำไหน
+   1) pull  |  2) heavy  |  3) lose  |  4) wet
+EN: What is the opposite of "win"?
+   (EN choices same as TH)
+
+### en-0229  (หัวข้อ: rhymes)
+TH: คำไหนสัมผัสเสียงเดียวกับ "star"
+   1) bed  |  2) sun  |  3) pig  |  4) far
+EN: Which word rhymes with "star"?
+   (EN choices same as TH)
+
+### en-0230  (หัวข้อ: days-months)
+TH: วันต่อจาก Saturday (วันเสาร์) คือวันอะไร
+   1) Monday  |  2) Tuesday  |  3) Wednesday  |  4) Sunday
+EN: What day comes after Saturday?
+   (EN choices same as TH)
+
+### en-0231  (หัวข้อ: thai-to-english)
+TH: คำว่า "ตา" ภาษาอังกฤษคือคำไหน
+   1) hand  |  2) eye  |  3) tooth  |  4) mouth
+EN: Which English word means "ตา"?
+   (EN choices same as TH)
+
+### en-0232  (หัวข้อ: english-to-thai)
+TH: คำว่า "foot" แปลว่าอะไร
+   1) ปาก  |  2) หู  |  3) เท้า  |  4) ตา
+EN: What does "foot" mean in Thai?
+   (EN choices same as TH)
+
+### en-0233  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: fat_er 👨
+   1) b  |  2) u  |  3) k  |  4) h
+EN: Fill in the missing letter: fat_er 👨
+   (EN choices same as TH)
+
+### en-0234  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "near" (ใกล้) คือคำไหน
+   1) top  |  2) short  |  3) full  |  4) far
+EN: What is the opposite of "near"?
+   (EN choices same as TH)
+
+### en-0235  (หัวข้อ: rhymes)
+TH: คำไหนสัมผัสเสียงเดียวกับ "star"
+   1) bed  |  2) car  |  3) sun  |  4) pig
+EN: Which word rhymes with "star"?
+   (EN choices same as TH)
+
+### en-0236  (หัวข้อ: days-months)
+TH: วันต่อจาก Thursday (วันพฤหัสบดี) คือวันอะไร
+   1) Wednesday  |  2) Friday  |  3) Tuesday  |  4) Monday
+EN: What day comes after Thursday?
+   (EN choices same as TH)
+
+### en-0237  (หัวข้อ: thai-to-english)
+TH: คำว่า "สีน้ำเงิน" ภาษาอังกฤษคือคำไหน
+   1) green  |  2) yellow  |  3) blue  |  4) brown
+EN: Which English word means "สีน้ำเงิน"?
+   (EN choices same as TH)
+
+### en-0238  (หัวข้อ: english-to-thai)
+TH: คำว่า "brown" แปลว่าอะไร
+   1) สีดำ  |  2) สีน้ำตาล  |  3) สีขาว  |  4) สีน้ำเงิน
+EN: What does "brown" mean in Thai?
+   (EN choices same as TH)
+
+### en-0239  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: rab_it 🐰
+   1) n  |  2) q  |  3) b  |  4) p
+EN: Fill in the missing letter: rab_it 🐰
+   (EN choices same as TH)
+
+### en-0240  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "full" (เต็ม) คือคำไหน
+   1) long  |  2) first  |  3) empty  |  4) old
+EN: What is the opposite of "full"?
+   (EN choices same as TH)
+
+### en-0241  (หัวข้อ: rhymes)
+TH: คำไหนสัมผัสเสียงเดียวกับ "boat"
+   1) coat  |  2) pig  |  3) sun  |  4) bed
+EN: Which word rhymes with "boat"?
+   (EN choices same as TH)
+
+### en-0242  (หัวข้อ: days-months)
+TH: วันต่อจาก Wednesday (วันพุธ) คือวันอะไร
+   1) Friday  |  2) Monday  |  3) Thursday  |  4) Tuesday
+EN: What day comes after Wednesday?
+   (EN choices same as TH)
+
+### en-0243  (หัวข้อ: thai-to-english)
+TH: คำว่า "ครู" ภาษาอังกฤษคือคำไหน
+   1) mother  |  2) baby  |  3) teacher  |  4) father
+EN: Which English word means "ครู"?
+   (EN choices same as TH)
+
+### en-0244  (หัวข้อ: english-to-thai)
+TH: คำว่า "nose" แปลว่าอะไร
+   1) จมูก  |  2) เท้า  |  3) หู  |  4) ปาก
+EN: What does "nose" mean in Thai?
+   (EN choices same as TH)
+
+### en-0245  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: b_ack ⬛
+   1) e  |  2) l  |  3) h  |  4) j
+EN: Fill in the missing letter: b_ack ⬛
+   (EN choices same as TH)
+
+### en-0246  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "happy" (ดีใจ) คือคำไหน
+   1) sad  |  2) heavy  |  3) new  |  4) pull
+EN: What is the opposite of "happy"?
+   (EN choices same as TH)
+
+### en-0247  (หัวข้อ: rhymes)
+TH: คำไหนสัมผัสเสียงเดียวกับ "light"
+   1) bed  |  2) cup  |  3) night  |  4) dog
+EN: Which word rhymes with "light"?
+   (EN choices same as TH)
+
+### en-0248  (หัวข้อ: days-months)
+TH: "วันจันทร์" ภาษาอังกฤษคือคำไหน
+   1) Thursday  |  2) Tuesday  |  3) Monday  |  4) Wednesday
+EN: Which English word means "วันจันทร์"?
+   (EN choices same as TH)
+
+### en-0249  (หัวข้อ: thai-to-english)
+TH: คำว่า "ฟัน" ภาษาอังกฤษคือคำไหน
+   1) ear  |  2) mouth  |  3) tooth  |  4) nose
+EN: Which English word means "ฟัน"?
+   (EN choices same as TH)
+
+### en-0250  (หัวข้อ: english-to-thai)
+TH: คำว่า "banana" แปลว่าอะไร
+   1) ขนมปัง  |  2) ชีส  |  3) ไข่  |  4) กล้วย
+EN: What does "banana" mean in Thai?
+   (EN choices same as TH)
+
+### en-0251  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: h_rse 🐴
+   1) o  |  2) z  |  3) l  |  4) f
+EN: Fill in the missing letter: h_rse 🐴
+   (EN choices same as TH)
+
+### en-0252  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "in" (ใน) คือคำไหน
+   1) out  |  2) no  |  3) left  |  4) quiet
+EN: What is the opposite of "in"?
+   (EN choices same as TH)
+
+### en-0253  (หัวข้อ: rhymes)
+TH: คำไหนสัมผัสเสียงเดียวกับ "fish"
+   1) dog  |  2) bed  |  3) wish  |  4) cup
+EN: Which word rhymes with "fish"?
+   (EN choices same as TH)
+
+### en-0254  (หัวข้อ: days-months)
+TH: "วันพุธ" ภาษาอังกฤษคือคำไหน
+   1) Tuesday  |  2) Thursday  |  3) Monday  |  4) Wednesday
+EN: Which English word means "วันพุธ"?
+   (EN choices same as TH)
+
+### en-0255  (หัวข้อ: thai-to-english)
+TH: คำว่า "หู" ภาษาอังกฤษคือคำไหน
+   1) hand  |  2) tooth  |  3) nose  |  4) ear
+EN: Which English word means "หู"?
+   (EN choices same as TH)
+
+### en-0256  (หัวข้อ: english-to-thai)
+TH: คำว่า "duck" แปลว่าอะไร
+   1) นกฮูก  |  2) เป็ด  |  3) ลิง  |  4) มด
+EN: What does "duck" mean in Thai?
+   (EN choices same as TH)
+
+### en-0257  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: mo_her 👩
+   1) u  |  2) a  |  3) x  |  4) t
+EN: Fill in the missing letter: mo_her 👩
+   (EN choices same as TH)
+
+### en-0258  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "light" (สว่าง) คือคำไหน
+   1) day  |  2) wet  |  3) dark  |  4) dirty
+EN: What is the opposite of "light"?
+   (EN choices same as TH)
+
+### en-0259  (หัวข้อ: rhymes)
+TH: คำไหนสัมผัสเสียงเดียวกับ "king"
+   1) sun  |  2) sing  |  3) bed  |  4) cat
+EN: Which word rhymes with "king"?
+   (EN choices same as TH)
+
+### en-0260  (หัวข้อ: thai-to-english)
+TH: คำว่า "สีเหลือง" ภาษาอังกฤษคือคำไหน
+   1) blue  |  2) yellow  |  3) green  |  4) white
+EN: Which English word means "สีเหลือง"?
+   (EN choices same as TH)
+
+### en-0261  (หัวข้อ: english-to-thai)
+TH: คำว่า "bee" แปลว่าอะไร
+   1) ผึ้ง  |  2) แกะ  |  3) แมว  |  4) นกฮูก
+EN: What does "bee" mean in Thai?
+   (EN choices same as TH)
+
+### en-0262  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: cloc_ ⏰
+   1) k  |  2) a  |  3) z  |  4) g
+EN: Fill in the missing letter: cloc_ ⏰
+   (EN choices same as TH)
+
+### en-0263  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "loud" (ดัง) คือคำไหน
+   1) sad  |  2) quiet  |  3) heavy  |  4) slow
+EN: What is the opposite of "loud"?
+   (EN choices same as TH)
+
+### en-0264  (หัวข้อ: rhymes)
+TH: คำไหนสัมผัสเสียงเดียวกับ "sun"
+   1) cat  |  2) bed  |  3) dog  |  4) fun
+EN: Which word rhymes with "sun"?
+   (EN choices same as TH)
+
+### en-0265  (หัวข้อ: thai-to-english)
+TH: คำว่า "ทารก" ภาษาอังกฤษคือคำไหน
+   1) teacher  |  2) mother  |  3) princess  |  4) baby
+EN: Which English word means "ทารก"?
+   (EN choices same as TH)
+
+### en-0266  (หัวข้อ: english-to-thai)
+TH: คำว่า "cow" แปลว่าอะไร
+   1) ปลา  |  2) กบ  |  3) หมี  |  4) วัว
+EN: What does "cow" mean in Thai?
+   (EN choices same as TH)
+
+### en-0267  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: r_inbow 🌈
+   1) j  |  2) a  |  3) n  |  4) i
+EN: Fill in the missing letter: r_inbow 🌈
+   (EN choices same as TH)
+
+### en-0268  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "yes" (ใช่) คือคำไหน
+   1) no  |  2) clean  |  3) soft  |  4) new
+EN: What is the opposite of "yes"?
+   (EN choices same as TH)
+
+### en-0269  (หัวข้อ: rhymes)
+TH: คำไหนสัมผัสเสียงเดียวกับ "rain"
+   1) train  |  2) dog  |  3) cup  |  4) bed
+EN: Which word rhymes with "rain"?
+   (EN choices same as TH)
+
+### en-0270  (หัวข้อ: thai-to-english)
+TH: คำว่า "จมูก" ภาษาอังกฤษคือคำไหน
+   1) hand  |  2) eye  |  3) nose  |  4) ear
+EN: Which English word means "จมูก"?
+   (EN choices same as TH)
+
+### en-0271  (หัวข้อ: english-to-thai)
+TH: คำว่า "rainbow" แปลว่าอะไร
+   1) ต้นไม้  |  2) ถ้ำ  |  3) รุ้ง  |  4) ดวงอาทิตย์
+EN: What does "rainbow" mean in Thai?
+   (EN choices same as TH)
+
+### en-0272  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: t_ain 🚆
+   1) r  |  2) t  |  3) m  |  4) q
+EN: Fill in the missing letter: t_ain 🚆
+   (EN choices same as TH)
+
+### en-0273  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "heavy" (หนัก) คือคำไหน
+   1) night  |  2) rich  |  3) light  |  4) far
+EN: What is the opposite of "heavy"?
+   (EN choices same as TH)
+
+### en-0274  (หัวข้อ: rhymes)
+TH: คำไหนสัมผัสเสียงเดียวกับ "moon"
+   1) cat  |  2) spoon  |  3) bed  |  4) pig
+EN: Which word rhymes with "moon"?
+   (EN choices same as TH)
+
+### en-0275  (หัวข้อ: thai-to-english)
+TH: คำว่า "สีดำ" ภาษาอังกฤษคือคำไหน
+   1) black  |  2) purple  |  3) red  |  4) blue
+EN: Which English word means "สีดำ"?
+   (EN choices same as TH)
+
+### en-0276  (หัวข้อ: english-to-thai)
+TH: คำว่า "fish" แปลว่าอะไร
+   1) กระต่าย  |  2) หมู  |  3) แมว  |  4) ปลา
+EN: What does "fish" mean in Thai?
+   (EN choices same as TH)
+
+### en-0277  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: t_rtle 🐢
+   1) u  |  2) r  |  3) d  |  4) v
+EN: Fill in the missing letter: t_rtle 🐢
+   (EN choices same as TH)
+
+### en-0278  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "day" (กลางวัน) คือคำไหน
+   1) open  |  2) short  |  3) small  |  4) night
+EN: What is the opposite of "day"?
+   (EN choices same as TH)
+
+### en-0279  (หัวข้อ: rhymes)
+TH: คำไหนสัมผัสเสียงเดียวกับ "bed"
+   1) cat  |  2) sun  |  3) red  |  4) box
+EN: Which word rhymes with "bed"?
+   (EN choices same as TH)
+
+### en-0280  (หัวข้อ: thai-to-english)
+TH: คำว่า "พ่อ" ภาษาอังกฤษคือคำไหน
+   1) mother  |  2) princess  |  3) king  |  4) father
+EN: Which English word means "พ่อ"?
+   (EN choices same as TH)
+
+### en-0281  (หัวข้อ: english-to-thai)
+TH: คำว่า "key" แปลว่าอะไร
+   1) กระเป๋า  |  2) กุญแจ  |  3) นาฬิกา  |  4) อัญมณี
+EN: What does "key" mean in Thai?
+   (EN choices same as TH)
+
+### en-0282  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: crow_ 👑
+   1) p  |  2) w  |  3) g  |  4) n
+EN: Fill in the missing letter: crow_ 👑
+   (EN choices same as TH)
+
+### en-0283  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "fast" (เร็ว) คือคำไหน
+   1) hot  |  2) full  |  3) night  |  4) slow
+EN: What is the opposite of "fast"?
+   (EN choices same as TH)
+
+### en-0284  (หัวข้อ: rhymes)
+TH: คำไหนสัมผัสเสียงเดียวกับ "boat"
+   1) sun  |  2) bed  |  3) pig  |  4) goat
+EN: Which word rhymes with "boat"?
+   (EN choices same as TH)
+
+### en-0285  (หัวข้อ: thai-to-english)
+TH: คำว่า "สีแดง" ภาษาอังกฤษคือคำไหน
+   1) green  |  2) purple  |  3) yellow  |  4) red
+EN: Which English word means "สีแดง"?
+   (EN choices same as TH)
+
+### en-0286  (หัวข้อ: english-to-thai)
+TH: คำว่า "car" แปลว่าอะไร
+   1) จักรยาน  |  2) เรือ  |  3) รถไฟ  |  4) รถยนต์
+EN: What does "car" mean in Thai?
+   (EN choices same as TH)
+
+### en-0287  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: m_uth 👄
+   1) k  |  2) o  |  3) q  |  4) l
+EN: Fill in the missing letter: m_uth 👄
+   (EN choices same as TH)
+
+### en-0288  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "wet" (เปียก) คือคำไหน
+   1) push  |  2) day  |  3) dry  |  4) long
+EN: What is the opposite of "wet"?
+   (EN choices same as TH)
+
+### en-0289  (หัวข้อ: rhymes)
+TH: คำไหนสัมผัสเสียงเดียวกับ "dog"
+   1) sun  |  2) fog  |  3) pen  |  4) cat
+EN: Which word rhymes with "dog"?
+   (EN choices same as TH)
+
+### en-0290  (หัวข้อ: english-to-thai)
+TH: คำว่า "chicken" แปลว่าอะไร
+   1) ไก่  |  2) เสือ  |  3) กระต่าย  |  4) ช้าง
+EN: What does "chicken" mean in Thai?
+   (EN choices same as TH)
+
+### en-0291  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: sna_e 🐍
+   1) v  |  2) h  |  3) k  |  4) r
+EN: Fill in the missing letter: sna_e 🐍
+   (EN choices same as TH)
+
+### en-0292  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "big" (ใหญ่) คือคำไหน
+   1) wet  |  2) rich  |  3) small  |  4) dry
+EN: What is the opposite of "big"?
+   (EN choices same as TH)
+
+### en-0293  (หัวข้อ: rhymes)
+TH: คำไหนสัมผัสเสียงเดียวกับ "bed"
+   1) cat  |  2) box  |  3) ted  |  4) sun
+EN: Which word rhymes with "bed"?
+   (EN choices same as TH)
+
+### en-0294  (หัวข้อ: english-to-thai)
+TH: คำว่า "cloud" แปลว่าอะไร
+   1) ดวงจันทร์  |  2) ถ้ำ  |  3) เมฆ  |  4) ดวงอาทิตย์
+EN: What does "cloud" mean in Thai?
+   (EN choices same as TH)
+
+### en-0295  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: hou_e 🏠
+   1) w  |  2) j  |  3) s  |  4) o
+EN: Fill in the missing letter: hou_e 🏠
+   (EN choices same as TH)
+
+### en-0296  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "open" (เปิด) คือคำไหน
+   1) close  |  2) yes  |  3) in  |  4) bottom
+EN: What is the opposite of "open"?
+   (EN choices same as TH)
+
+### en-0297  (หัวข้อ: rhymes)
+TH: คำไหนสัมผัสเสียงเดียวกับ "sun"
+   1) bed  |  2) cat  |  3) run  |  4) dog
+EN: Which word rhymes with "sun"?
+   (EN choices same as TH)
+
+### en-0298  (หัวข้อ: english-to-thai)
+TH: คำว่า "hand" แปลว่าอะไร
+   1) มือ  |  2) ตา  |  3) ปาก  |  4) ฟัน
+EN: What does "hand" mean in Thai?
+   (EN choices same as TH)
+
+### en-0299  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: orang_ 🍊
+   1) f  |  2) u  |  3) x  |  4) e
+EN: Fill in the missing letter: orang_ 🍊
+   (EN choices same as TH)
+
+### en-0300  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "hot" (ร้อน) คือคำไหน
+   1) dark  |  2) up  |  3) cold  |  4) out
+EN: What is the opposite of "hot"?
+   (EN choices same as TH)
+
+### en-0301  (หัวข้อ: rhymes)
+TH: คำไหนสัมผัสเสียงเดียวกับ "dog"
+   1) pen  |  2) cat  |  3) log  |  4) sun
+EN: Which word rhymes with "dog"?
+   (EN choices same as TH)
+
+### en-0302  (หัวข้อ: english-to-thai)
+TH: คำว่า "ear" แปลว่าอะไร
+   1) เท้า  |  2) ตา  |  3) หู  |  4) ฟัน
+EN: What does "ear" mean in Thai?
+   (EN choices same as TH)
+
+### en-0303  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: b_ead 🍞
+   1) a  |  2) u  |  3) r  |  4) n
+EN: Fill in the missing letter: b_ead 🍞
+   (EN choices same as TH)
+
+### en-0304  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "push" (ผลัก) คือคำไหน
+   1) open  |  2) rich  |  3) pull  |  4) cold
+EN: What is the opposite of "push"?
+   (EN choices same as TH)
+
+### en-0305  (หัวข้อ: rhymes)
+TH: คำไหนสัมผัสเสียงเดียวกับ "tree"
+   1) dog  |  2) see  |  3) box  |  4) cat
+EN: Which word rhymes with "tree"?
+   (EN choices same as TH)
+
+### en-0306  (หัวข้อ: english-to-thai)
+TH: คำว่า "bread" แปลว่าอะไร
+   1) ขนมปัง  |  2) แอปเปิล  |  3) ข้าว  |  4) นม
+EN: What does "bread" mean in Thai?
+   (EN choices same as TH)
+
+### en-0307  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: e_ephant 🐘
+   1) u  |  2) k  |  3) f  |  4) l
+EN: Fill in the missing letter: e_ephant 🐘
+   (EN choices same as TH)
+
+### en-0308  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "early" (เช้า/ก่อนเวลา) คือคำไหน
+   1) late  |  2) old  |  3) lose  |  4) top
+EN: What is the opposite of "early"?
+   (EN choices same as TH)
+
+### en-0309  (หัวข้อ: rhymes)
+TH: คำไหนสัมผัสเสียงเดียวกับ "fish"
+   1) swish  |  2) bed  |  3) dog  |  4) cup
+EN: Which word rhymes with "fish"?
+   (EN choices same as TH)
+
+### en-0310  (หัวข้อ: english-to-thai)
+TH: คำว่า "horse" แปลว่าอะไร
+   1) วัว  |  2) ม้า  |  3) เสือ  |  4) ไก่
+EN: What does "horse" mean in Thai?
+   (EN choices same as TH)
+
+### en-0311  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: y_llow 🟨
+   1) u  |  2) e  |  3) q  |  4) s
+EN: Fill in the missing letter: y_llow 🟨
+   (EN choices same as TH)
+
+### en-0312  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "tall" (สูง) คือคำไหน
+   1) left  |  2) short  |  3) old  |  4) rich
+EN: What is the opposite of "tall"?
+   (EN choices same as TH)
+
+### en-0313  (หัวข้อ: rhymes)
+TH: คำไหนสัมผัสเสียงเดียวกับ "house"
+   1) sun  |  2) cat  |  3) mouse  |  4) pig
+EN: Which word rhymes with "house"?
+   (EN choices same as TH)
+
+### en-0314  (หัวข้อ: english-to-thai)
+TH: คำว่า "turtle" แปลว่าอะไร
+   1) ช้าง  |  2) เสือ  |  3) เต่า  |  4) นก
+EN: What does "turtle" mean in Thai?
+   (EN choices same as TH)
+
+### en-0315  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: wa_ermelon 🍉
+   1) q  |  2) t  |  3) o  |  4) p
+EN: Fill in the missing letter: wa_ermelon 🍉
+   (EN choices same as TH)
+
+### en-0316  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "old" (เก่า) คือคำไหน
+   1) dry  |  2) in  |  3) new  |  4) hard
+EN: What is the opposite of "old"?
+   (EN choices same as TH)
+
+### en-0317  (หัวข้อ: rhymes)
+TH: คำไหนสัมผัสเสียงเดียวกับ "house"
+   1) blouse  |  2) sun  |  3) pig  |  4) cat
+EN: Which word rhymes with "house"?
+   (EN choices same as TH)
+
+### en-0318  (หัวข้อ: english-to-thai)
+TH: คำว่า "moon" แปลว่าอะไร
+   1) เมฆ  |  2) ใบไม้  |  3) ดวงจันทร์  |  4) ดวงอาทิตย์
+EN: What does "moon" mean in Thai?
+   (EN choices same as TH)
+
+### en-0319  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: cl_ud ☁️
+   1) e  |  2) k  |  3) n  |  4) o
+EN: Fill in the missing letter: cl_ud ☁️
+   (EN choices same as TH)
+
+### en-0320  (หัวข้อ: rhymes)
+TH: คำไหนสัมผัสเสียงเดียวกับ "sun"
+   1) cat  |  2) bed  |  3) dog  |  4) bun
+EN: Which word rhymes with "sun"?
+   (EN choices same as TH)
+
+### en-0321  (หัวข้อ: english-to-thai)
+TH: คำว่า "door" แปลว่าอะไร
+   1) อัญมณี  |  2) ประตู  |  3) กล่อง  |  4) แก้ว
+EN: What does "door" mean in Thai?
+   (EN choices same as TH)
+
+### en-0322  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: wh_te ⬜
+   1) i  |  2) b  |  3) g  |  4) q
+EN: Fill in the missing letter: wh_te ⬜
+   (EN choices same as TH)
+
+### en-0323  (หัวข้อ: rhymes)
+TH: คำไหนสัมผัสเสียงเดียวกับ "fish"
+   1) cup  |  2) dish  |  3) bed  |  4) dog
+EN: Which word rhymes with "fish"?
+   (EN choices same as TH)
+
+### en-0324  (หัวข้อ: english-to-thai)
+TH: คำว่า "rain" แปลว่าอะไร
+   1) ทะเล  |  2) ฝน  |  3) ดาว  |  4) ดวงจันทร์
+EN: What does "rain" mean in Thai?
+   (EN choices same as TH)
+
+### en-0325  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: pri_cess 👸
+   1) u  |  2) t  |  3) n  |  4) m
+EN: Fill in the missing letter: pri_cess 👸
+   (EN choices same as TH)
+
+### en-0326  (หัวข้อ: rhymes)
+TH: คำไหนสัมผัสเสียงเดียวกับ "king"
+   1) sun  |  2) wing  |  3) cat  |  4) bed
+EN: Which word rhymes with "king"?
+   (EN choices same as TH)
+
+### en-0327  (หัวข้อ: english-to-thai)
+TH: คำว่า "frog" แปลว่าอะไร
+   1) ไก่  |  2) กบ  |  3) วัว  |  4) แมว
+EN: What does "frog" mean in Thai?
+   (EN choices same as TH)
+
+### en-0328  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: _reen 🟩
+   1) g  |  2) f  |  3) d  |  4) e
+EN: Fill in the missing letter: _reen 🟩
+   (EN choices same as TH)
+
+### en-0329  (หัวข้อ: rhymes)
+TH: คำไหนสัมผัสเสียงเดียวกับ "cake"
+   1) cup  |  2) snake  |  3) dog  |  4) bed
+EN: Which word rhymes with "cake"?
+   (EN choices same as TH)
+
+### en-0330  (หัวข้อ: english-to-thai)
+TH: คำว่า "princess" แปลว่าอะไร
+   1) แม่  |  2) พ่อ  |  3) เจ้าหญิง  |  4) ทารก
+EN: What does "princess" mean in Thai?
+   (EN choices same as TH)
+
+### en-0331  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: teach_r 👩‍🏫
+   1) x  |  2) e  |  3) t  |  4) v
+EN: Fill in the missing letter: teach_r 👩‍🏫
+   (EN choices same as TH)
+
+### en-0332  (หัวข้อ: rhymes)
+TH: คำไหนสัมผัสเสียงเดียวกับ "tree"
+   1) dog  |  2) cat  |  3) box  |  4) bee
+EN: Which word rhymes with "tree"?
+   (EN choices same as TH)
+
+### en-0333  (หัวข้อ: english-to-thai)
+TH: คำว่า "father" แปลว่าอะไร
+   1) ทารก  |  2) แม่  |  3) พ่อ  |  4) เจ้าหญิง
+EN: What does "father" mean in Thai?
+   (EN choices same as TH)
+
+### en-0334  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: c_icken 🐔
+   1) h  |  2) w  |  3) n  |  4) t
+EN: Fill in the missing letter: c_icken 🐔
+   (EN choices same as TH)
+
+### en-0335  (หัวข้อ: rhymes)
+TH: คำไหนสัมผัสเสียงเดียวกับ "star"
+   1) bed  |  2) jar  |  3) sun  |  4) pig
+EN: Which word rhymes with "star"?
+   (EN choices same as TH)
+
+### en-0336  (หัวข้อ: english-to-thai)
+TH: คำว่า "dog" แปลว่าอะไร
+   1) เสือ  |  2) แกะ  |  3) ลิง  |  4) หมา
+EN: What does "dog" mean in Thai?
+   (EN choices same as TH)
+
+### en-0337  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: _hair 🪑
+   1) c  |  2) h  |  3) w  |  4) k
+EN: Fill in the missing letter: _hair 🪑
+   (EN choices same as TH)
+
+### en-0338  (หัวข้อ: rhymes)
+TH: คำไหนสัมผัสเสียงเดียวกับ "moon"
+   1) bed  |  2) soon  |  3) cat  |  4) pig
+EN: Which word rhymes with "moon"?
+   (EN choices same as TH)
+
+### en-0339  (หัวข้อ: english-to-thai)
+TH: คำว่า "butterfly" แปลว่าอะไร
+   1) งู  |  2) ผีเสื้อ  |  3) นก  |  4) เต่า
+EN: What does "butterfly" mean in Thai?
+   (EN choices same as TH)
+
+### en-0340  (หัวข้อ: missing-letter)
+TH: เติมตัวอักษรที่หายไป: car_ot 🥕
+   1) a  |  2) z  |  3) c  |  4) r
+EN: Fill in the missing letter: car_ot 🥕
+   (EN choices same as TH)

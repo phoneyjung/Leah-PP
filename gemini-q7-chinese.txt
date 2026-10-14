@@ -1,0 +1,1022 @@
+# ชุดตรวจ: ภาษาจีน · เด็กอายุ 7 ปี (ป.1–ป.2) · 170 ข้อ · ไฟล์ q-chinese-7.json
+# ตัวเลือกนับ 1–4 · ไม่มีเฉลยในไฟล์นี้ (ให้แก้โจทย์เองก่อน)
+
+### zh-0171  (หัวข้อ: meaning)
+TH: 四 (sì) แปลว่าอะไร
+   1) สี่  |  2) เก้า  |  3) เจ็ด  |  4) แปด
+EN: What does 四 (sì) mean?
+   1) four  |  2) eight  |  3) nine  |  4) ten
+
+### zh-0172  (หัวข้อ: say-it)
+TH: คำว่า "ตา" ภาษาจีนคือคำไหน
+   1) 手 (shǒu)  |  2) 眼睛 (yǎnjing)  |  3) 鼻子 (bízi)  |  4) 脚 (jiǎo)
+EN: How do you say "eyes" in Chinese?
+   (EN choices same as TH)
+
+### zh-0173  (หัวข้อ: read-pinyin)
+TH: 我 (ฉัน) อ่านว่าอะไร
+   1) xiǎo  |  2) xià  |  3) wǒ  |  4) rén
+EN: How do you read 我 ("I / me")?
+   (EN choices same as TH)
+
+### zh-0174  (หัวข้อ: greetings)
+TH: 对不起 (duìbuqǐ) แปลว่าอะไร
+   1) สุขสันต์วันเกิด  |  2) สวัสดี  |  3) ขอโทษ  |  4) ขอบคุณ
+EN: What does 对不起 (duìbuqǐ) mean?
+   1) happy birthday  |  2) hello  |  3) sorry  |  4) thank you
+
+### zh-0175  (หัวข้อ: meaning)
+TH: 熊猫 (xióngmāo) แปลว่าอะไร
+   1) วัว  |  2) เสือ  |  3) นก  |  4) แพนด้า
+EN: What does 熊猫 (xióngmāo) mean?
+   1) monkey  |  2) rabbit  |  3) cow  |  4) panda
+
+### zh-0176  (หัวข้อ: say-it)
+TH: คำว่า "ปลา" ภาษาจีนคือคำไหน
+   1) 鱼 (yú)  |  2) 鸡 (jī)  |  3) 兔子 (tùzi)  |  4) 大象 (dàxiàng)
+EN: How do you say "fish" in Chinese?
+   (EN choices same as TH)
+
+### zh-0177  (หัวข้อ: read-pinyin)
+TH: 红色 (สีแดง) อ่านว่าอะไร
+   1) lǜsè  |  2) hēisè  |  3) báisè  |  4) hóngsè
+EN: How do you read 红色 ("red")?
+   (EN choices same as TH)
+
+### zh-0178  (หัวข้อ: greetings)
+TH: 早上好 (zǎoshang hǎo) แปลว่าอะไร
+   1) ไม่เป็นไร (ตอบคำขอบคุณ)  |  2) อรุณสวัสดิ์  |  3) สวัสดี  |  4) สุขสันต์วันเกิด
+EN: What does 早上好 (zǎoshang hǎo) mean?
+   1) you're welcome  |  2) good morning  |  3) hello  |  4) happy birthday
+
+### zh-0179  (หัวข้อ: meaning)
+TH: 老师 (lǎoshī) แปลว่าอะไร
+   1) ครู  |  2) ย่า  |  3) พ่อ  |  4) เพื่อน
+EN: What does 老师 (lǎoshī) mean?
+   1) teacher  |  2) older brother  |  3) dad  |  4) grandpa (dad's dad)
+
+### zh-0180  (หัวข้อ: say-it)
+TH: คำว่า "ข้าวสวย" ภาษาจีนคือคำไหน
+   1) 牛奶 (niúnǎi)  |  2) 香蕉 (xiāngjiāo)  |  3) 茶 (chá)  |  4) 米饭 (mǐfàn)
+EN: How do you say "cooked rice" in Chinese?
+   (EN choices same as TH)
+
+### zh-0181  (หัวข้อ: read-pinyin)
+TH: 鱼 (ปลา) อ่านว่าอะไร
+   1) tùzi  |  2) yáng  |  3) yú  |  4) māo
+EN: How do you read 鱼 ("fish")?
+   (EN choices same as TH)
+
+### zh-0182  (หัวข้อ: greetings)
+TH: 你好 (nǐ hǎo) แปลว่าอะไร
+   1) สุขสันต์วันเกิด  |  2) ขอบคุณ  |  3) ไม่เป็นไร (ตอบคำขอบคุณ)  |  4) สวัสดี
+EN: What does 你好 (nǐ hǎo) mean?
+   1) happy birthday  |  2) thank you  |  3) you're welcome  |  4) hello
+
+### zh-0183  (หัวข้อ: meaning)
+TH: 笔 (bǐ) แปลว่าอะไร
+   1) โรงเรียน  |  2) ปากกา/ดินสอ  |  3) เครื่องบิน  |  4) บ้าน
+EN: What does 笔 (bǐ) mean?
+   1) home  |  2) pen  |  3) plane  |  4) book
+
+### zh-0184  (หัวข้อ: say-it)
+TH: คำว่า "พี่ชาย" ภาษาจีนคือคำไหน
+   1) 爸爸 (bàba)  |  2) 弟弟 (dìdi)  |  3) 哥哥 (gēge)  |  4) 妹妹 (mèimei)
+EN: How do you say "older brother" in Chinese?
+   (EN choices same as TH)
+
+### zh-0185  (หัวข้อ: read-pinyin)
+TH: 爷爷 (ปู่) อ่านว่าอะไร
+   1) lǎoshī  |  2) yéye  |  3) mèimei  |  4) jiějie
+EN: How do you read 爷爷 ("grandpa (dad's dad)")?
+   (EN choices same as TH)
+
+### zh-0186  (หัวข้อ: greetings)
+TH: 我爱你 (wǒ ài nǐ) แปลว่าอะไร
+   1) ไม่เป็นไร (ตอบคำขอบคุณ)  |  2) ฉันรักเธอ  |  3) สวัสดี  |  4) ขอโทษ
+EN: What does 我爱你 (wǒ ài nǐ) mean?
+   1) you're welcome  |  2) I love you  |  3) hello  |  4) sorry
+
+### zh-0187  (หัวข้อ: meaning)
+TH: 车 (chē) แปลว่าอะไร
+   1) รถ  |  2) หนังสือ  |  3) โรงเรียน  |  4) เครื่องบิน
+EN: What does 车 (chē) mean?
+   1) car  |  2) book  |  3) pen  |  4) plane
+
+### zh-0188  (หัวข้อ: say-it)
+TH: คำว่า "กล้วย" ภาษาจีนคือคำไหน
+   1) 牛奶 (niúnǎi)  |  2) 水 (shuǐ)  |  3) 茶 (chá)  |  4) 香蕉 (xiāngjiāo)
+EN: How do you say "banana" in Chinese?
+   (EN choices same as TH)
+
+### zh-0189  (หัวข้อ: read-pinyin)
+TH: 妹妹 (น้องสาว) อ่านว่าอะไร
+   1) dìdi  |  2) māma  |  3) mèimei  |  4) péngyou
+EN: How do you read 妹妹 ("younger sister")?
+   (EN choices same as TH)
+
+### zh-0190  (หัวข้อ: greetings)
+TH: 谢谢 (xièxie) แปลว่าอะไร
+   1) ลาก่อน  |  2) สุขสันต์วันเกิด  |  3) ขอบคุณ  |  4) ฉันรักเธอ
+EN: What does 谢谢 (xièxie) mean?
+   1) goodbye  |  2) happy birthday  |  3) thank you  |  4) I love you
+
+### zh-0191  (หัวข้อ: meaning)
+TH: 牛 (niú) แปลว่าอะไร
+   1) วัว  |  2) นก  |  3) ม้า  |  4) แมว
+EN: What does 牛 (niú) mean?
+   1) cow  |  2) chicken  |  3) fish  |  4) horse
+
+### zh-0192  (หัวข้อ: say-it)
+TH: คำว่า "ครู" ภาษาจีนคือคำไหน
+   1) 奶奶 (nǎinai)  |  2) 朋友 (péngyou)  |  3) 老师 (lǎoshī)  |  4) 弟弟 (dìdi)
+EN: How do you say "teacher" in Chinese?
+   (EN choices same as TH)
+
+### zh-0193  (หัวข้อ: read-pinyin)
+TH: 八 (แปด) อ่านว่าอะไร
+   1) qī  |  2) bā  |  3) sì  |  4) yī
+EN: How do you read 八 ("eight")?
+   (EN choices same as TH)
+
+### zh-0194  (หัวข้อ: greetings)
+TH: 不客气 (bú kèqi) แปลว่าอะไร
+   1) ฉันรักเธอ  |  2) ไม่เป็นไร (ตอบคำขอบคุณ)  |  3) อรุณสวัสดิ์  |  4) ขอโทษ
+EN: What does 不客气 (bú kèqi) mean?
+   1) I love you  |  2) you're welcome  |  3) good morning  |  4) sorry
+
+### zh-0195  (หัวข้อ: meaning)
+TH: 鸡蛋 (jīdàn) แปลว่าอะไร
+   1) กล้วย  |  2) แอปเปิล  |  3) ไข่ไก่  |  4) บะหมี่
+EN: What does 鸡蛋 (jīdàn) mean?
+   1) noodles  |  2) watermelon  |  3) egg  |  4) cooked rice
+
+### zh-0196  (หัวข้อ: say-it)
+TH: คำว่า "น้องสาว" ภาษาจีนคือคำไหน
+   1) 妹妹 (mèimei)  |  2) 姐姐 (jiějie)  |  3) 老师 (lǎoshī)  |  4) 妈妈 (māma)
+EN: How do you say "younger sister" in Chinese?
+   (EN choices same as TH)
+
+### zh-0197  (หัวข้อ: read-pinyin)
+TH: 狗 (หมา) อ่านว่าอะไร
+   1) tùzi  |  2) hóuzi  |  3) māo  |  4) gǒu
+EN: How do you read 狗 ("dog")?
+   (EN choices same as TH)
+
+### zh-0198  (หัวข้อ: greetings)
+TH: 生日快乐 (shēngrì kuàilè) แปลว่าอะไร
+   1) ขอบคุณ  |  2) ไม่เป็นไร (ตอบคำขอบคุณ)  |  3) สุขสันต์วันเกิด  |  4) ลาก่อน
+EN: What does 生日快乐 (shēngrì kuàilè) mean?
+   1) thank you  |  2) you're welcome  |  3) happy birthday  |  4) goodbye
+
+### zh-0199  (หัวข้อ: meaning)
+TH: 面条 (miàntiáo) แปลว่าอะไร
+   1) บะหมี่  |  2) ชา  |  3) กล้วย  |  4) แตงโม
+EN: What does 面条 (miàntiáo) mean?
+   1) noodles  |  2) egg  |  3) watermelon  |  4) tea
+
+### zh-0200  (หัวข้อ: say-it)
+TH: คำว่า "ปู่" ภาษาจีนคือคำไหน
+   1) 哥哥 (gēge)  |  2) 弟弟 (dìdi)  |  3) 爷爷 (yéye)  |  4) 妈妈 (māma)
+EN: How do you say "grandpa (dad's dad)" in Chinese?
+   (EN choices same as TH)
+
+### zh-0201  (หัวข้อ: read-pinyin)
+TH: 九 (เก้า) อ่านว่าอะไร
+   1) sān  |  2) wǔ  |  3) qī  |  4) jiǔ
+EN: How do you read 九 ("nine")?
+   (EN choices same as TH)
+
+### zh-0202  (หัวข้อ: greetings)
+TH: 再见 (zàijiàn) แปลว่าอะไร
+   1) ฉันรักเธอ  |  2) อรุณสวัสดิ์  |  3) ลาก่อน  |  4) ขอโทษ
+EN: What does 再见 (zàijiàn) mean?
+   1) I love you  |  2) good morning  |  3) goodbye  |  4) sorry
+
+### zh-0203  (หัวข้อ: meaning)
+TH: 爷爷 (yéye) แปลว่าอะไร
+   1) พ่อ  |  2) ปู่  |  3) พี่สาว  |  4) เพื่อน
+EN: What does 爷爷 (yéye) mean?
+   1) friend  |  2) grandpa (dad's dad)  |  3) older brother  |  4) mum
+
+### zh-0204  (หัวข้อ: say-it)
+TH: คำว่า "กระต่าย" ภาษาจีนคือคำไหน
+   1) 鱼 (yú)  |  2) 兔子 (tùzi)  |  3) 猴子 (hóuzi)  |  4) 猪 (zhū)
+EN: How do you say "rabbit" in Chinese?
+   (EN choices same as TH)
+
+### zh-0205  (หัวข้อ: read-pinyin)
+TH: 星星 (ดาว) อ่านว่าอะไร
+   1) tàiyáng  |  2) huā  |  3) xīngxing  |  4) yǔ
+EN: How do you read 星星 ("star")?
+   (EN choices same as TH)
+
+### zh-0206  (หัวข้อ: meaning)
+TH: 香蕉 (xiāngjiāo) แปลว่าอะไร
+   1) แอปเปิล  |  2) บะหมี่  |  3) แตงโม  |  4) กล้วย
+EN: What does 香蕉 (xiāngjiāo) mean?
+   1) egg  |  2) noodles  |  3) tea  |  4) banana
+
+### zh-0207  (หัวข้อ: say-it)
+TH: คำว่า "มือ" ภาษาจีนคือคำไหน
+   1) 手 (shǒu)  |  2) 耳朵 (ěrduo)  |  3) 脚 (jiǎo)  |  4) 鼻子 (bízi)
+EN: How do you say "hand" in Chinese?
+   (EN choices same as TH)
+
+### zh-0208  (หัวข้อ: read-pinyin)
+TH: 书 (หนังสือ) อ่านว่าอะไร
+   1) shū  |  2) chē  |  3) fēijī  |  4) bǐ
+EN: How do you read 书 ("book")?
+   (EN choices same as TH)
+
+### zh-0209  (หัวข้อ: meaning)
+TH: 鼻子 (bízi) แปลว่าอะไร
+   1) หัว  |  2) ตา  |  3) หู  |  4) จมูก
+EN: What does 鼻子 (bízi) mean?
+   1) hand  |  2) mouth  |  3) foot  |  4) nose
+
+### zh-0210  (หัวข้อ: say-it)
+TH: คำว่า "แพะ/แกะ" ภาษาจีนคือคำไหน
+   1) 鸡 (jī)  |  2) 老虎 (lǎohǔ)  |  3) 熊猫 (xióngmāo)  |  4) 羊 (yáng)
+EN: How do you say "sheep/goat" in Chinese?
+   (EN choices same as TH)
+
+### zh-0211  (หัวข้อ: read-pinyin)
+TH: 猴子 (ลิง) อ่านว่าอะไร
+   1) jī  |  2) gǒu  |  3) niú  |  4) hóuzi
+EN: How do you read 猴子 ("monkey")?
+   (EN choices same as TH)
+
+### zh-0212  (หัวข้อ: meaning)
+TH: 上 (shàng) แปลว่าอะไร
+   1) คน  |  2) เล็ก  |  3) บน  |  4) ล่าง
+EN: What does 上 (shàng) mean?
+   1) I / me  |  2) big  |  3) up  |  4) you
+
+### zh-0213  (หัวข้อ: say-it)
+TH: คำว่า "เพื่อน" ภาษาจีนคือคำไหน
+   1) 妈妈 (māma)  |  2) 老师 (lǎoshī)  |  3) 爷爷 (yéye)  |  4) 朋友 (péngyou)
+EN: How do you say "friend" in Chinese?
+   (EN choices same as TH)
+
+### zh-0214  (หัวข้อ: read-pinyin)
+TH: 花 (ดอกไม้) อ่านว่าอะไร
+   1) tàiyáng  |  2) shù  |  3) huā  |  4) yǔ
+EN: How do you read 花 ("flower")?
+   (EN choices same as TH)
+
+### zh-0215  (หัวข้อ: meaning)
+TH: 姐姐 (jiějie) แปลว่าอะไร
+   1) ครู  |  2) พี่สาว  |  3) ย่า  |  4) พ่อ
+EN: What does 姐姐 (jiějie) mean?
+   1) younger brother  |  2) older sister  |  3) dad  |  4) grandpa (dad's dad)
+
+### zh-0216  (หัวข้อ: say-it)
+TH: คำว่า "ปาก" ภาษาจีนคือคำไหน
+   1) 手 (shǒu)  |  2) 头 (tóu)  |  3) 耳朵 (ěrduo)  |  4) 嘴巴 (zuǐba)
+EN: How do you say "mouth" in Chinese?
+   (EN choices same as TH)
+
+### zh-0217  (หัวข้อ: read-pinyin)
+TH: 姐姐 (พี่สาว) อ่านว่าอะไร
+   1) nǎinai  |  2) mèimei  |  3) péngyou  |  4) jiějie
+EN: How do you read 姐姐 ("older sister")?
+   (EN choices same as TH)
+
+### zh-0218  (หัวข้อ: meaning)
+TH: 老虎 (lǎohǔ) แปลว่าอะไร
+   1) ม้า  |  2) แมว  |  3) แพะ/แกะ  |  4) เสือ
+EN: What does 老虎 (lǎohǔ) mean?
+   1) pig  |  2) horse  |  3) sheep/goat  |  4) tiger
+
+### zh-0219  (หัวข้อ: say-it)
+TH: คำว่า "รถ" ภาษาจีนคือคำไหน
+   1) 笔 (bǐ)  |  2) 家 (jiā)  |  3) 车 (chē)  |  4) 飞机 (fēijī)
+EN: How do you say "car" in Chinese?
+   (EN choices same as TH)
+
+### zh-0220  (หัวข้อ: read-pinyin)
+TH: 手 (มือ) อ่านว่าอะไร
+   1) ěrduo  |  2) jiǎo  |  3) bízi  |  4) shǒu
+EN: How do you read 手 ("hand")?
+   (EN choices same as TH)
+
+### zh-0221  (หัวข้อ: meaning)
+TH: 弟弟 (dìdi) แปลว่าอะไร
+   1) พี่ชาย  |  2) เพื่อน  |  3) ย่า  |  4) น้องชาย
+EN: What does 弟弟 (dìdi) mean?
+   1) mum  |  2) younger sister  |  3) older sister  |  4) younger brother
+
+### zh-0222  (หัวข้อ: say-it)
+TH: คำว่า "ต้นไม้" ภาษาจีนคือคำไหน
+   1) 星星 (xīngxing)  |  2) 花 (huā)  |  3) 雨 (yǔ)  |  4) 树 (shù)
+EN: How do you say "tree" in Chinese?
+   (EN choices same as TH)
+
+### zh-0223  (หัวข้อ: read-pinyin)
+TH: 上 (บน) อ่านว่าอะไร
+   1) dà  |  2) shàng  |  3) xiǎo  |  4) rén
+EN: How do you read 上 ("up")?
+   (EN choices same as TH)
+
+### zh-0224  (หัวข้อ: meaning)
+TH: 七 (qī) แปลว่าอะไร
+   1) แปด  |  2) เก้า  |  3) เจ็ด  |  4) สี่
+EN: What does 七 (qī) mean?
+   1) eight  |  2) one  |  3) seven  |  4) six
+
+### zh-0225  (หัวข้อ: say-it)
+TH: คำว่า "ดอกไม้" ภาษาจีนคือคำไหน
+   1) 花 (huā)  |  2) 树 (shù)  |  3) 火 (huǒ)  |  4) 月亮 (yuèliang)
+EN: How do you say "flower" in Chinese?
+   (EN choices same as TH)
+
+### zh-0226  (หัวข้อ: read-pinyin)
+TH: 水 (น้ำ) อ่านว่าอะไร
+   1) xīguā  |  2) shuǐ  |  3) niúnǎi  |  4) xiāngjiāo
+EN: How do you read 水 ("water")?
+   (EN choices same as TH)
+
+### zh-0227  (หัวข้อ: meaning)
+TH: 下 (xià) แปลว่าอะไร
+   1) เล็ก  |  2) ล่าง  |  3) ฉัน  |  4) คน
+EN: What does 下 (xià) mean?
+   1) person  |  2) down  |  3) I / me  |  4) small
+
+### zh-0228  (หัวข้อ: say-it)
+TH: คำว่า "แพนด้า" ภาษาจีนคือคำไหน
+   1) 狗 (gǒu)  |  2) 熊猫 (xióngmāo)  |  3) 牛 (niú)  |  4) 马 (mǎ)
+EN: How do you say "panda" in Chinese?
+   (EN choices same as TH)
+
+### zh-0229  (หัวข้อ: read-pinyin)
+TH: 大象 (ช้าง) อ่านว่าอะไร
+   1) dàxiàng  |  2) gǒu  |  3) yáng  |  4) xióngmāo
+EN: How do you read 大象 ("elephant")?
+   (EN choices same as TH)
+
+### zh-0230  (หัวข้อ: meaning)
+TH: 白色 (báisè) แปลว่าอะไร
+   1) สีขาว  |  2) สีเหลือง  |  3) สีดำ  |  4) สีฟ้า/น้ำเงิน
+EN: What does 白色 (báisè) mean?
+   1) white  |  2) green  |  3) black  |  4) yellow
+
+### zh-0231  (หัวข้อ: say-it)
+TH: คำว่า "สอง" ภาษาจีนคือคำไหน
+   1) 八 (bā)  |  2) 二 (èr)  |  3) 四 (sì)  |  4) 十 (shí)
+EN: How do you say "two" in Chinese?
+   (EN choices same as TH)
+
+### zh-0232  (หัวข้อ: read-pinyin)
+TH: 十 (สิบ) อ่านว่าอะไร
+   1) yī  |  2) jiǔ  |  3) sì  |  4) shí
+EN: How do you read 十 ("ten")?
+   (EN choices same as TH)
+
+### zh-0233  (หัวข้อ: meaning)
+TH: 太阳 (tàiyáng) แปลว่าอะไร
+   1) ภูเขา  |  2) ไฟ  |  3) ดวงอาทิตย์  |  4) ฝน
+EN: What does 太阳 (tàiyáng) mean?
+   1) fire  |  2) flower  |  3) sun  |  4) mountain
+
+### zh-0234  (หัวข้อ: say-it)
+TH: คำว่า "นม" ภาษาจีนคือคำไหน
+   1) 鸡蛋 (jīdàn)  |  2) 苹果 (píngguǒ)  |  3) 西瓜 (xīguā)  |  4) 牛奶 (niúnǎi)
+EN: How do you say "milk" in Chinese?
+   (EN choices same as TH)
+
+### zh-0235  (หัวข้อ: read-pinyin)
+TH: 二 (สอง) อ่านว่าอะไร
+   1) èr  |  2) jiǔ  |  3) sì  |  4) shí
+EN: How do you read 二 ("two")?
+   (EN choices same as TH)
+
+### zh-0236  (หัวข้อ: meaning)
+TH: 星星 (xīngxing) แปลว่าอะไร
+   1) ไฟ  |  2) ดวงจันทร์  |  3) ดอกไม้  |  4) ดาว
+EN: What does 星星 (xīngxing) mean?
+   1) mountain  |  2) moon  |  3) flower  |  4) star
+
+### zh-0237  (หัวข้อ: say-it)
+TH: คำว่า "สีแดง" ภาษาจีนคือคำไหน
+   1) 蓝色 (lánsè)  |  2) 黑色 (hēisè)  |  3) 绿色 (lǜsè)  |  4) 红色 (hóngsè)
+EN: How do you say "red" in Chinese?
+   (EN choices same as TH)
+
+### zh-0238  (หัวข้อ: read-pinyin)
+TH: 鸡 (ไก่) อ่านว่าอะไร
+   1) jī  |  2) tùzi  |  3) niú  |  4) dàxiàng
+EN: How do you read 鸡 ("chicken")?
+   (EN choices same as TH)
+
+### zh-0239  (หัวข้อ: meaning)
+TH: 绿色 (lǜsè) แปลว่าอะไร
+   1) สีขาว  |  2) สีเขียว  |  3) สีดำ  |  4) สีฟ้า/น้ำเงิน
+EN: What does 绿色 (lǜsè) mean?
+   1) yellow  |  2) green  |  3) black  |  4) red
+
+### zh-0240  (หัวข้อ: say-it)
+TH: คำว่า "หนังสือ" ภาษาจีนคือคำไหน
+   1) 书 (shū)  |  2) 车 (chē)  |  3) 笔 (bǐ)  |  4) 家 (jiā)
+EN: How do you say "book" in Chinese?
+   (EN choices same as TH)
+
+### zh-0241  (หัวข้อ: read-pinyin)
+TH: 太阳 (ดวงอาทิตย์) อ่านว่าอะไร
+   1) shān  |  2) tàiyáng  |  3) xīngxing  |  4) huǒ
+EN: How do you read 太阳 ("sun")?
+   (EN choices same as TH)
+
+### zh-0242  (หัวข้อ: meaning)
+TH: 你 (nǐ) แปลว่าอะไร
+   1) เล็ก  |  2) ใหญ่  |  3) ล่าง  |  4) เธอ
+EN: What does 你 (nǐ) mean?
+   1) person  |  2) small  |  3) I / me  |  4) you
+
+### zh-0243  (หัวข้อ: say-it)
+TH: คำว่า "ไฟ" ภาษาจีนคือคำไหน
+   1) 花 (huā)  |  2) 火 (huǒ)  |  3) 山 (shān)  |  4) 树 (shù)
+EN: How do you say "fire" in Chinese?
+   (EN choices same as TH)
+
+### zh-0244  (หัวข้อ: read-pinyin)
+TH: 车 (รถ) อ่านว่าอะไร
+   1) chē  |  2) fēijī  |  3) shū  |  4) jiā
+EN: How do you read 车 ("car")?
+   (EN choices same as TH)
+
+### zh-0245  (หัวข้อ: meaning)
+TH: 黑色 (hēisè) แปลว่าอะไร
+   1) สีขาว  |  2) สีแดง  |  3) สีดำ  |  4) สีเหลือง
+EN: What does 黑色 (hēisè) mean?
+   1) green  |  2) blue  |  3) black  |  4) red
+
+### zh-0246  (หัวข้อ: say-it)
+TH: คำว่า "หนึ่ง" ภาษาจีนคือคำไหน
+   1) 一 (yī)  |  2) 十 (shí)  |  3) 二 (èr)  |  4) 四 (sì)
+EN: How do you say "one" in Chinese?
+   (EN choices same as TH)
+
+### zh-0247  (หัวข้อ: read-pinyin)
+TH: 香蕉 (กล้วย) อ่านว่าอะไร
+   1) chá  |  2) xiāngjiāo  |  3) shuǐ  |  4) mǐfàn
+EN: How do you read 香蕉 ("banana")?
+   (EN choices same as TH)
+
+### zh-0248  (หัวข้อ: meaning)
+TH: 牛奶 (niúnǎi) แปลว่าอะไร
+   1) นม  |  2) ไข่ไก่  |  3) แตงโม  |  4) บะหมี่
+EN: What does 牛奶 (niúnǎi) mean?
+   1) milk  |  2) banana  |  3) apple  |  4) cooked rice
+
+### zh-0249  (หัวข้อ: say-it)
+TH: คำว่า "แม่" ภาษาจีนคือคำไหน
+   1) 妈妈 (māma)  |  2) 妹妹 (mèimei)  |  3) 老师 (lǎoshī)  |  4) 哥哥 (gēge)
+EN: How do you say "mum" in Chinese?
+   (EN choices same as TH)
+
+### zh-0250  (หัวข้อ: read-pinyin)
+TH: 白色 (สีขาว) อ่านว่าอะไร
+   1) báisè  |  2) hēisè  |  3) huángsè  |  4) lǜsè
+EN: How do you read 白色 ("white")?
+   (EN choices same as TH)
+
+### zh-0251  (หัวข้อ: meaning)
+TH: 我 (wǒ) แปลว่าอะไร
+   1) ล่าง  |  2) ใหญ่  |  3) บน  |  4) ฉัน
+EN: What does 我 (wǒ) mean?
+   1) person  |  2) small  |  3) down  |  4) I / me
+
+### zh-0252  (หัวข้อ: say-it)
+TH: คำว่า "ปากกา/ดินสอ" ภาษาจีนคือคำไหน
+   1) 车 (chē)  |  2) 学校 (xuéxiào)  |  3) 飞机 (fēijī)  |  4) 笔 (bǐ)
+EN: How do you say "pen" in Chinese?
+   (EN choices same as TH)
+
+### zh-0253  (หัวข้อ: read-pinyin)
+TH: 学校 (โรงเรียน) อ่านว่าอะไร
+   1) fēijī  |  2) xuéxiào  |  3) shū  |  4) chē
+EN: How do you read 学校 ("school")?
+   (EN choices same as TH)
+
+### zh-0254  (หัวข้อ: meaning)
+TH: 红色 (hóngsè) แปลว่าอะไร
+   1) สีดำ  |  2) สีเขียว  |  3) สีเหลือง  |  4) สีแดง
+EN: What does 红色 (hóngsè) mean?
+   1) green  |  2) white  |  3) blue  |  4) red
+
+### zh-0255  (หัวข้อ: say-it)
+TH: คำว่า "ไข่ไก่" ภาษาจีนคือคำไหน
+   1) 米饭 (mǐfàn)  |  2) 水 (shuǐ)  |  3) 鸡蛋 (jīdàn)  |  4) 苹果 (píngguǒ)
+EN: How do you say "egg" in Chinese?
+   (EN choices same as TH)
+
+### zh-0256  (หัวข้อ: read-pinyin)
+TH: 茶 (ชา) อ่านว่าอะไร
+   1) niúnǎi  |  2) xiāngjiāo  |  3) chá  |  4) xīguā
+EN: How do you read 茶 ("tea")?
+   (EN choices same as TH)
+
+### zh-0257  (หัวข้อ: meaning)
+TH: 大 (dà) แปลว่าอะไร
+   1) ใหญ่  |  2) คน  |  3) ฉัน  |  4) บน
+EN: What does 大 (dà) mean?
+   1) big  |  2) small  |  3) down  |  4) person
+
+### zh-0258  (หัวข้อ: say-it)
+TH: คำว่า "คน" ภาษาจีนคือคำไหน
+   1) 上 (shàng)  |  2) 下 (xià)  |  3) 大 (dà)  |  4) 人 (rén)
+EN: How do you say "person" in Chinese?
+   (EN choices same as TH)
+
+### zh-0259  (หัวข้อ: read-pinyin)
+TH: 绿色 (สีเขียว) อ่านว่าอะไร
+   1) lánsè  |  2) huángsè  |  3) lǜsè  |  4) hēisè
+EN: How do you read 绿色 ("green")?
+   (EN choices same as TH)
+
+### zh-0260  (หัวข้อ: meaning)
+TH: 头 (tóu) แปลว่าอะไร
+   1) เท้า  |  2) มือ  |  3) หัว  |  4) จมูก
+EN: What does 头 (tóu) mean?
+   1) foot  |  2) nose  |  3) head  |  4) eyes
+
+### zh-0261  (หัวข้อ: say-it)
+TH: คำว่า "พี่สาว" ภาษาจีนคือคำไหน
+   1) 妹妹 (mèimei)  |  2) 奶奶 (nǎinai)  |  3) 老师 (lǎoshī)  |  4) 姐姐 (jiějie)
+EN: How do you say "older sister" in Chinese?
+   (EN choices same as TH)
+
+### zh-0262  (หัวข้อ: read-pinyin)
+TH: 鸟 (นก) อ่านว่าอะไร
+   1) niǎo  |  2) hóuzi  |  3) zhū  |  4) niú
+EN: How do you read 鸟 ("bird")?
+   (EN choices same as TH)
+
+### zh-0263  (หัวข้อ: meaning)
+TH: 猫 (māo) แปลว่าอะไร
+   1) ปลา  |  2) หมา  |  3) ม้า  |  4) แมว
+EN: What does 猫 (māo) mean?
+   1) tiger  |  2) monkey  |  3) fish  |  4) cat
+
+### zh-0264  (หัวข้อ: say-it)
+TH: คำว่า "หมู" ภาษาจีนคือคำไหน
+   1) 猪 (zhū)  |  2) 马 (mǎ)  |  3) 老虎 (lǎohǔ)  |  4) 狗 (gǒu)
+EN: How do you say "pig" in Chinese?
+   (EN choices same as TH)
+
+### zh-0265  (หัวข้อ: read-pinyin)
+TH: 兔子 (กระต่าย) อ่านว่าอะไร
+   1) hóuzi  |  2) yú  |  3) tùzi  |  4) zhū
+EN: How do you read 兔子 ("rabbit")?
+   (EN choices same as TH)
+
+### zh-0266  (หัวข้อ: meaning)
+TH: 朋友 (péngyou) แปลว่าอะไร
+   1) พี่ชาย  |  2) เพื่อน  |  3) ปู่  |  4) น้องชาย
+EN: What does 朋友 (péngyou) mean?
+   1) grandpa (dad's dad)  |  2) friend  |  3) teacher  |  4) dad
+
+### zh-0267  (หัวข้อ: say-it)
+TH: คำว่า "ช้าง" ภาษาจีนคือคำไหน
+   1) 猴子 (hóuzi)  |  2) 大象 (dàxiàng)  |  3) 兔子 (tùzi)  |  4) 牛 (niú)
+EN: How do you say "elephant" in Chinese?
+   (EN choices same as TH)
+
+### zh-0268  (หัวข้อ: read-pinyin)
+TH: 六 (หก) อ่านว่าอะไร
+   1) sān  |  2) shí  |  3) bā  |  4) liù
+EN: How do you read 六 ("six")?
+   (EN choices same as TH)
+
+### zh-0269  (หัวข้อ: meaning)
+TH: 西瓜 (xīguā) แปลว่าอะไร
+   1) นม  |  2) แอปเปิล  |  3) บะหมี่  |  4) แตงโม
+EN: What does 西瓜 (xīguā) mean?
+   1) egg  |  2) apple  |  3) water  |  4) watermelon
+
+### zh-0270  (หัวข้อ: say-it)
+TH: คำว่า "ดวงอาทิตย์" ภาษาจีนคือคำไหน
+   1) 树 (shù)  |  2) 星星 (xīngxing)  |  3) 山 (shān)  |  4) 太阳 (tàiyáng)
+EN: How do you say "sun" in Chinese?
+   (EN choices same as TH)
+
+### zh-0271  (หัวข้อ: read-pinyin)
+TH: 鸡蛋 (ไข่ไก่) อ่านว่าอะไร
+   1) xīguā  |  2) niúnǎi  |  3) píngguǒ  |  4) jīdàn
+EN: How do you read 鸡蛋 ("egg")?
+   (EN choices same as TH)
+
+### zh-0272  (หัวข้อ: meaning)
+TH: 十 (shí) แปลว่าอะไร
+   1) หก  |  2) สิบ  |  3) ห้า  |  4) แปด
+EN: What does 十 (shí) mean?
+   1) seven  |  2) ten  |  3) six  |  4) eight
+
+### zh-0273  (หัวข้อ: say-it)
+TH: คำว่า "หมา" ภาษาจีนคือคำไหน
+   1) 兔子 (tùzi)  |  2) 猪 (zhū)  |  3) 老虎 (lǎohǔ)  |  4) 狗 (gǒu)
+EN: How do you say "dog" in Chinese?
+   (EN choices same as TH)
+
+### zh-0274  (หัวข้อ: read-pinyin)
+TH: 苹果 (แอปเปิล) อ่านว่าอะไร
+   1) mǐfàn  |  2) niúnǎi  |  3) píngguǒ  |  4) chá
+EN: How do you read 苹果 ("apple")?
+   (EN choices same as TH)
+
+### zh-0275  (หัวข้อ: meaning)
+TH: 书 (shū) แปลว่าอะไร
+   1) หนังสือ  |  2) ปากกา/ดินสอ  |  3) รถ  |  4) เครื่องบิน
+EN: What does 书 (shū) mean?
+   1) book  |  2) car  |  3) home  |  4) school
+
+### zh-0276  (หัวข้อ: say-it)
+TH: คำว่า "ฝน" ภาษาจีนคือคำไหน
+   1) 火 (huǒ)  |  2) 山 (shān)  |  3) 雨 (yǔ)  |  4) 月亮 (yuèliang)
+EN: How do you say "rain" in Chinese?
+   (EN choices same as TH)
+
+### zh-0277  (หัวข้อ: read-pinyin)
+TH: 五 (ห้า) อ่านว่าอะไร
+   1) qī  |  2) wǔ  |  3) sān  |  4) shí
+EN: How do you read 五 ("five")?
+   (EN choices same as TH)
+
+### zh-0278  (หัวข้อ: meaning)
+TH: 兔子 (tùzi) แปลว่าอะไร
+   1) หมา  |  2) กระต่าย  |  3) ไก่  |  4) ม้า
+EN: What does 兔子 (tùzi) mean?
+   1) sheep/goat  |  2) rabbit  |  3) pig  |  4) cow
+
+### zh-0279  (หัวข้อ: say-it)
+TH: คำว่า "หู" ภาษาจีนคือคำไหน
+   1) 眼睛 (yǎnjing)  |  2) 耳朵 (ěrduo)  |  3) 手 (shǒu)  |  4) 嘴巴 (zuǐba)
+EN: How do you say "ear" in Chinese?
+   (EN choices same as TH)
+
+### zh-0280  (หัวข้อ: read-pinyin)
+TH: 米饭 (ข้าวสวย) อ่านว่าอะไร
+   1) niúnǎi  |  2) miàntiáo  |  3) píngguǒ  |  4) mǐfàn
+EN: How do you read 米饭 ("cooked rice")?
+   (EN choices same as TH)
+
+### zh-0281  (หัวข้อ: meaning)
+TH: 苹果 (píngguǒ) แปลว่าอะไร
+   1) ไข่ไก่  |  2) ชา  |  3) แอปเปิล  |  4) น้ำ
+EN: What does 苹果 (píngguǒ) mean?
+   1) noodles  |  2) egg  |  3) apple  |  4) tea
+
+### zh-0282  (หัวข้อ: say-it)
+TH: คำว่า "เครื่องบิน" ภาษาจีนคือคำไหน
+   1) 飞机 (fēijī)  |  2) 笔 (bǐ)  |  3) 家 (jiā)  |  4) 车 (chē)
+EN: How do you say "plane" in Chinese?
+   (EN choices same as TH)
+
+### zh-0283  (หัวข้อ: read-pinyin)
+TH: 树 (ต้นไม้) อ่านว่าอะไร
+   1) shù  |  2) huǒ  |  3) yuèliang  |  4) shān
+EN: How do you read 树 ("tree")?
+   (EN choices same as TH)
+
+### zh-0284  (หัวข้อ: meaning)
+TH: 蓝色 (lánsè) แปลว่าอะไร
+   1) สีแดง  |  2) สีฟ้า/น้ำเงิน  |  3) สีเขียว  |  4) สีเหลือง
+EN: What does 蓝色 (lánsè) mean?
+   1) yellow  |  2) blue  |  3) green  |  4) red
+
+### zh-0285  (หัวข้อ: say-it)
+TH: คำว่า "ดวงจันทร์" ภาษาจีนคือคำไหน
+   1) 花 (huā)  |  2) 雨 (yǔ)  |  3) 星星 (xīngxing)  |  4) 月亮 (yuèliang)
+EN: How do you say "moon" in Chinese?
+   (EN choices same as TH)
+
+### zh-0286  (หัวข้อ: read-pinyin)
+TH: 月亮 (ดวงจันทร์) อ่านว่าอะไร
+   1) yuèliang  |  2) tàiyáng  |  3) shān  |  4) shù
+EN: How do you read 月亮 ("moon")?
+   (EN choices same as TH)
+
+### zh-0287  (หัวข้อ: meaning)
+TH: 茶 (chá) แปลว่าอะไร
+   1) กล้วย  |  2) ชา  |  3) บะหมี่  |  4) ไข่ไก่
+EN: What does 茶 (chá) mean?
+   1) cooked rice  |  2) tea  |  3) water  |  4) noodles
+
+### zh-0288  (หัวข้อ: say-it)
+TH: คำว่า "เจ็ด" ภาษาจีนคือคำไหน
+   1) 四 (sì)  |  2) 七 (qī)  |  3) 二 (èr)  |  4) 九 (jiǔ)
+EN: How do you say "seven" in Chinese?
+   (EN choices same as TH)
+
+### zh-0289  (หัวข้อ: read-pinyin)
+TH: 你 (เธอ) อ่านว่าอะไร
+   1) nǐ  |  2) dà  |  3) wǒ  |  4) shàng
+EN: How do you read 你 ("you")?
+   (EN choices same as TH)
+
+### zh-0290  (หัวข้อ: meaning)
+TH: 妈妈 (māma) แปลว่าอะไร
+   1) น้องชาย  |  2) น้องสาว  |  3) แม่  |  4) พ่อ
+EN: What does 妈妈 (māma) mean?
+   1) dad  |  2) grandma (dad's mum)  |  3) mum  |  4) older brother
+
+### zh-0291  (หัวข้อ: say-it)
+TH: คำว่า "สีเหลือง" ภาษาจีนคือคำไหน
+   1) 黑色 (hēisè)  |  2) 红色 (hóngsè)  |  3) 黄色 (huángsè)  |  4) 绿色 (lǜsè)
+EN: How do you say "yellow" in Chinese?
+   (EN choices same as TH)
+
+### zh-0292  (หัวข้อ: read-pinyin)
+TH: 猪 (หมู) อ่านว่าอะไร
+   1) zhū  |  2) niǎo  |  3) niú  |  4) dàxiàng
+EN: How do you read 猪 ("pig")?
+   (EN choices same as TH)
+
+### zh-0293  (หัวข้อ: meaning)
+TH: 花 (huā) แปลว่าอะไร
+   1) ภูเขา  |  2) ดอกไม้  |  3) ไฟ  |  4) ฝน
+EN: What does 花 (huā) mean?
+   1) fire  |  2) flower  |  3) moon  |  4) mountain
+
+### zh-0294  (หัวข้อ: say-it)
+TH: คำว่า "ม้า" ภาษาจีนคือคำไหน
+   1) 鱼 (yú)  |  2) 猪 (zhū)  |  3) 马 (mǎ)  |  4) 熊猫 (xióngmāo)
+EN: How do you say "horse" in Chinese?
+   (EN choices same as TH)
+
+### zh-0295  (หัวข้อ: read-pinyin)
+TH: 羊 (แพะ/แกะ) อ่านว่าอะไร
+   1) hóuzi  |  2) yáng  |  3) dàxiàng  |  4) niú
+EN: How do you read 羊 ("sheep/goat")?
+   (EN choices same as TH)
+
+### zh-0296  (หัวข้อ: meaning)
+TH: 爸爸 (bàba) แปลว่าอะไร
+   1) น้องสาว  |  2) พ่อ  |  3) พี่ชาย  |  4) แม่
+EN: What does 爸爸 (bàba) mean?
+   1) grandma (dad's mum)  |  2) dad  |  3) teacher  |  4) friend
+
+### zh-0297  (หัวข้อ: say-it)
+TH: คำว่า "บะหมี่" ภาษาจีนคือคำไหน
+   1) 鸡蛋 (jīdàn)  |  2) 面条 (miàntiáo)  |  3) 西瓜 (xīguā)  |  4) 香蕉 (xiāngjiāo)
+EN: How do you say "noodles" in Chinese?
+   (EN choices same as TH)
+
+### zh-0298  (หัวข้อ: read-pinyin)
+TH: 熊猫 (แพนด้า) อ่านว่าอะไร
+   1) yú  |  2) māo  |  3) zhū  |  4) xióngmāo
+EN: How do you read 熊猫 ("panda")?
+   (EN choices same as TH)
+
+### zh-0299  (หัวข้อ: meaning)
+TH: 小 (xiǎo) แปลว่าอะไร
+   1) เธอ  |  2) ใหญ่  |  3) เล็ก  |  4) ฉัน
+EN: What does 小 (xiǎo) mean?
+   1) big  |  2) up  |  3) small  |  4) down
+
+### zh-0300  (หัวข้อ: say-it)
+TH: คำว่า "น้ำ" ภาษาจีนคือคำไหน
+   1) 米饭 (mǐfàn)  |  2) 水 (shuǐ)  |  3) 鸡蛋 (jīdàn)  |  4) 西瓜 (xīguā)
+EN: How do you say "water" in Chinese?
+   (EN choices same as TH)
+
+### zh-0301  (หัวข้อ: read-pinyin)
+TH: 牛 (วัว) อ่านว่าอะไร
+   1) niú  |  2) zhū  |  3) dàxiàng  |  4) tùzi
+EN: How do you read 牛 ("cow")?
+   (EN choices same as TH)
+
+### zh-0302  (หัวข้อ: meaning)
+TH: 羊 (yáng) แปลว่าอะไร
+   1) นก  |  2) ม้า  |  3) แพะ/แกะ  |  4) ไก่
+EN: What does 羊 (yáng) mean?
+   1) elephant  |  2) cat  |  3) sheep/goat  |  4) pig
+
+### zh-0303  (หัวข้อ: say-it)
+TH: คำว่า "สีฟ้า/น้ำเงิน" ภาษาจีนคือคำไหน
+   1) 黄色 (huángsè)  |  2) 蓝色 (lánsè)  |  3) 黑色 (hēisè)  |  4) 白色 (báisè)
+EN: How do you say "blue" in Chinese?
+   (EN choices same as TH)
+
+### zh-0304  (หัวข้อ: read-pinyin)
+TH: 马 (ม้า) อ่านว่าอะไร
+   1) mǎ  |  2) xióngmāo  |  3) niú  |  4) dàxiàng
+EN: How do you read 马 ("horse")?
+   (EN choices same as TH)
+
+### zh-0305  (หัวข้อ: meaning)
+TH: 眼睛 (yǎnjing) แปลว่าอะไร
+   1) ตา  |  2) ปาก  |  3) เท้า  |  4) จมูก
+EN: What does 眼睛 (yǎnjing) mean?
+   1) eyes  |  2) ear  |  3) mouth  |  4) head
+
+### zh-0306  (หัวข้อ: say-it)
+TH: คำว่า "โรงเรียน" ภาษาจีนคือคำไหน
+   1) 飞机 (fēijī)  |  2) 学校 (xuéxiào)  |  3) 笔 (bǐ)  |  4) 书 (shū)
+EN: How do you say "school" in Chinese?
+   (EN choices same as TH)
+
+### zh-0307  (หัวข้อ: read-pinyin)
+TH: 笔 (ปากกา/ดินสอ) อ่านว่าอะไร
+   1) bǐ  |  2) shū  |  3) xuéxiào  |  4) fēijī
+EN: How do you read 笔 ("pen")?
+   (EN choices same as TH)
+
+### zh-0308  (หัวข้อ: meaning)
+TH: 火 (huǒ) แปลว่าอะไร
+   1) ไฟ  |  2) ดาว  |  3) ต้นไม้  |  4) ดอกไม้
+EN: What does 火 (huǒ) mean?
+   1) fire  |  2) star  |  3) mountain  |  4) sun
+
+### zh-0309  (หัวข้อ: say-it)
+TH: คำว่า "ภูเขา" ภาษาจีนคือคำไหน
+   1) 雨 (yǔ)  |  2) 山 (shān)  |  3) 星星 (xīngxing)  |  4) 花 (huā)
+EN: How do you say "mountain" in Chinese?
+   (EN choices same as TH)
+
+### zh-0310  (หัวข้อ: read-pinyin)
+TH: 蓝色 (สีฟ้า/น้ำเงิน) อ่านว่าอะไร
+   1) báisè  |  2) lánsè  |  3) huángsè  |  4) hóngsè
+EN: How do you read 蓝色 ("blue")?
+   (EN choices same as TH)
+
+### zh-0311  (หัวข้อ: meaning)
+TH: 雨 (yǔ) แปลว่าอะไร
+   1) ไฟ  |  2) ดอกไม้  |  3) ดวงจันทร์  |  4) ฝน
+EN: What does 雨 (yǔ) mean?
+   1) tree  |  2) star  |  3) moon  |  4) rain
+
+### zh-0312  (หัวข้อ: say-it)
+TH: คำว่า "หัว" ภาษาจีนคือคำไหน
+   1) 手 (shǒu)  |  2) 头 (tóu)  |  3) 眼睛 (yǎnjing)  |  4) 嘴巴 (zuǐba)
+EN: How do you say "head" in Chinese?
+   (EN choices same as TH)
+
+### zh-0313  (หัวข้อ: read-pinyin)
+TH: 妈妈 (แม่) อ่านว่าอะไร
+   1) lǎoshī  |  2) jiějie  |  3) māma  |  4) bàba
+EN: How do you read 妈妈 ("mum")?
+   (EN choices same as TH)
+
+### zh-0314  (หัวข้อ: meaning)
+TH: 脚 (jiǎo) แปลว่าอะไร
+   1) มือ  |  2) หัว  |  3) หู  |  4) เท้า
+EN: What does 脚 (jiǎo) mean?
+   1) head  |  2) ear  |  3) eyes  |  4) foot
+
+### zh-0315  (หัวข้อ: say-it)
+TH: คำว่า "วัว" ภาษาจีนคือคำไหน
+   1) 熊猫 (xióngmāo)  |  2) 大象 (dàxiàng)  |  3) 牛 (niú)  |  4) 鱼 (yú)
+EN: How do you say "cow" in Chinese?
+   (EN choices same as TH)
+
+### zh-0316  (หัวข้อ: read-pinyin)
+TH: 山 (ภูเขา) อ่านว่าอะไร
+   1) shān  |  2) huā  |  3) huǒ  |  4) yǔ
+EN: How do you read 山 ("mountain")?
+   (EN choices same as TH)
+
+### zh-0317  (หัวข้อ: meaning)
+TH: 一 (yī) แปลว่าอะไร
+   1) สี่  |  2) หนึ่ง  |  3) เจ็ด  |  4) ห้า
+EN: What does 一 (yī) mean?
+   1) six  |  2) one  |  3) three  |  4) seven
+
+### zh-0318  (หัวข้อ: say-it)
+TH: คำว่า "สิบ" ภาษาจีนคือคำไหน
+   1) 六 (liù)  |  2) 十 (shí)  |  3) 一 (yī)  |  4) 二 (èr)
+EN: How do you say "ten" in Chinese?
+   (EN choices same as TH)
+
+### zh-0319  (หัวข้อ: read-pinyin)
+TH: 朋友 (เพื่อน) อ่านว่าอะไร
+   1) péngyou  |  2) gēge  |  3) lǎoshī  |  4) jiějie
+EN: How do you read 朋友 ("friend")?
+   (EN choices same as TH)
+
+### zh-0320  (หัวข้อ: meaning)
+TH: 家 (jiā) แปลว่าอะไร
+   1) โรงเรียน  |  2) รถ  |  3) เครื่องบิน  |  4) บ้าน
+EN: What does 家 (jiā) mean?
+   1) car  |  2) book  |  3) plane  |  4) home
+
+### zh-0321  (หัวข้อ: say-it)
+TH: คำว่า "พ่อ" ภาษาจีนคือคำไหน
+   1) 爸爸 (bàba)  |  2) 爷爷 (yéye)  |  3) 弟弟 (dìdi)  |  4) 妹妹 (mèimei)
+EN: How do you say "dad" in Chinese?
+   (EN choices same as TH)
+
+### zh-0322  (หัวข้อ: read-pinyin)
+TH: 七 (เจ็ด) อ่านว่าอะไร
+   1) sān  |  2) shí  |  3) qī  |  4) liù
+EN: How do you read 七 ("seven")?
+   (EN choices same as TH)
+
+### zh-0323  (หัวข้อ: meaning)
+TH: 树 (shù) แปลว่าอะไร
+   1) ต้นไม้  |  2) ดาว  |  3) ดอกไม้  |  4) ฝน
+EN: What does 树 (shù) mean?
+   1) tree  |  2) mountain  |  3) fire  |  4) rain
+
+### zh-0324  (หัวข้อ: say-it)
+TH: คำว่า "สีดำ" ภาษาจีนคือคำไหน
+   1) 黑色 (hēisè)  |  2) 绿色 (lǜsè)  |  3) 黄色 (huángsè)  |  4) 蓝色 (lánsè)
+EN: How do you say "black" in Chinese?
+   (EN choices same as TH)
+
+### zh-0325  (หัวข้อ: read-pinyin)
+TH: 黑色 (สีดำ) อ่านว่าอะไร
+   1) huángsè  |  2) báisè  |  3) hóngsè  |  4) hēisè
+EN: How do you read 黑色 ("black")?
+   (EN choices same as TH)
+
+### zh-0326  (หัวข้อ: meaning)
+TH: 飞机 (fēijī) แปลว่าอะไร
+   1) รถ  |  2) เครื่องบิน  |  3) โรงเรียน  |  4) หนังสือ
+EN: What does 飞机 (fēijī) mean?
+   1) car  |  2) plane  |  3) home  |  4) book
+
+### zh-0327  (หัวข้อ: say-it)
+TH: คำว่า "แตงโม" ภาษาจีนคือคำไหน
+   1) 米饭 (mǐfàn)  |  2) 西瓜 (xīguā)  |  3) 牛奶 (niúnǎi)  |  4) 香蕉 (xiāngjiāo)
+EN: How do you say "watermelon" in Chinese?
+   (EN choices same as TH)
+
+### zh-0328  (หัวข้อ: read-pinyin)
+TH: 嘴巴 (ปาก) อ่านว่าอะไร
+   1) tóu  |  2) bízi  |  3) zuǐba  |  4) jiǎo
+EN: How do you read 嘴巴 ("mouth")?
+   (EN choices same as TH)
+
+### zh-0329  (หัวข้อ: meaning)
+TH: 马 (mǎ) แปลว่าอะไร
+   1) หมา  |  2) วัว  |  3) แพะ/แกะ  |  4) ม้า
+EN: What does 马 (mǎ) mean?
+   1) bird  |  2) chicken  |  3) pig  |  4) horse
+
+### zh-0330  (หัวข้อ: say-it)
+TH: คำว่า "เธอ" ภาษาจีนคือคำไหน
+   1) 大 (dà)  |  2) 你 (nǐ)  |  3) 我 (wǒ)  |  4) 人 (rén)
+EN: How do you say "you" in Chinese?
+   (EN choices same as TH)
+
+### zh-0331  (หัวข้อ: read-pinyin)
+TH: 一 (หนึ่ง) อ่านว่าอะไร
+   1) shí  |  2) yī  |  3) wǔ  |  4) sān
+EN: How do you read 一 ("one")?
+   (EN choices same as TH)
+
+### zh-0332  (หัวข้อ: meaning)
+TH: 水 (shuǐ) แปลว่าอะไร
+   1) นม  |  2) กล้วย  |  3) ชา  |  4) น้ำ
+EN: What does 水 (shuǐ) mean?
+   1) apple  |  2) banana  |  3) watermelon  |  4) water
+
+### zh-0333  (หัวข้อ: say-it)
+TH: คำว่า "เก้า" ภาษาจีนคือคำไหน
+   1) 一 (yī)  |  2) 三 (sān)  |  3) 二 (èr)  |  4) 九 (jiǔ)
+EN: How do you say "nine" in Chinese?
+   (EN choices same as TH)
+
+### zh-0334  (หัวข้อ: read-pinyin)
+TH: 弟弟 (น้องชาย) อ่านว่าอะไร
+   1) jiějie  |  2) nǎinai  |  3) dìdi  |  4) mèimei
+EN: How do you read 弟弟 ("younger brother")?
+   (EN choices same as TH)
+
+### zh-0335  (หัวข้อ: meaning)
+TH: 米饭 (mǐfàn) แปลว่าอะไร
+   1) ข้าวสวย  |  2) น้ำ  |  3) บะหมี่  |  4) กล้วย
+EN: What does 米饭 (mǐfàn) mean?
+   1) cooked rice  |  2) apple  |  3) noodles  |  4) watermelon
+
+### zh-0336  (หัวข้อ: say-it)
+TH: คำว่า "ฉัน" ภาษาจีนคือคำไหน
+   1) 我 (wǒ)  |  2) 大 (dà)  |  3) 小 (xiǎo)  |  4) 下 (xià)
+EN: How do you say "I / me" in Chinese?
+   (EN choices same as TH)
+
+### zh-0337  (หัวข้อ: read-pinyin)
+TH: 奶奶 (ย่า) อ่านว่าอะไร
+   1) nǎinai  |  2) mèimei  |  3) jiějie  |  4) péngyou
+EN: How do you read 奶奶 ("grandma (dad's mum)")?
+   (EN choices same as TH)
+
+### zh-0338  (หัวข้อ: meaning)
+TH: 学校 (xuéxiào) แปลว่าอะไร
+   1) หนังสือ  |  2) เครื่องบิน  |  3) โรงเรียน  |  4) ปากกา/ดินสอ
+EN: What does 学校 (xuéxiào) mean?
+   1) car  |  2) plane  |  3) school  |  4) home
+
+### zh-0339  (หัวข้อ: say-it)
+TH: คำว่า "ชา" ภาษาจีนคือคำไหน
+   1) 米饭 (mǐfàn)  |  2) 茶 (chá)  |  3) 面条 (miàntiáo)  |  4) 鸡蛋 (jīdàn)
+EN: How do you say "tea" in Chinese?
+   (EN choices same as TH)
+
+### zh-0340  (หัวข้อ: read-pinyin)
+TH: 牛奶 (นม) อ่านว่าอะไร
+   1) xiāngjiāo  |  2) mǐfàn  |  3) niúnǎi  |  4) miàntiáo
+EN: How do you read 牛奶 ("milk")?
+   (EN choices same as TH)

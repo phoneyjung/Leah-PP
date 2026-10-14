@@ -1,0 +1,992 @@
+# ชุดตรวจ: วิทยาศาสตร์และความรู้รอบตัว อายุ 9 (ป.3–ป.4) · 165 ข้อ · ไฟล์ q-general-9.json
+# ตัวเลือกนับ 1–4 · ไม่มีเฉลยในไฟล์นี้ (ให้แก้โจทย์เองก่อน)
+
+### gk-9-0001  (หัวข้อ: living-things)
+TH: สัตว์มีกระดูกสันหลังแบ่งเป็นกี่กลุ่ม
+   1) 3 กลุ่ม  |  2) 7 กลุ่ม  |  3) 5 กลุ่ม  |  4) 4 กลุ่ม
+EN: How many groups of animals with backbones are there?
+   1) 3 groups  |  2) 7 groups  |  3) 5 groups  |  4) 4 groups
+
+### gk-9-0002  (หัวข้อ: thailand)
+TH: ประเทศไทยมีกี่จังหวัด เมื่อนับรวมกรุงเทพมหานคร
+   1) 67  |  2) 77  |  3) 87  |  4) 55
+EN: How many provinces does Thailand have, counting Bangkok?
+   (EN choices same as TH)
+
+### gk-9-0003  (หัวข้อ: thailand)
+TH: สัตว์ประจำชาติไทยคือสัตว์ใด
+   1) เสือ  |  2) ลิง  |  3) ช้างไทย  |  4) ควาย
+EN: What is the national animal of Thailand?
+   1) the tiger  |  2) the monkey  |  3) the Thai elephant  |  4) the buffalo
+
+### gk-9-0004  (หัวข้อ: space)
+TH: ดาวเคราะห์ดวงใดอยู่ไกลดวงอาทิตย์ที่สุด
+   1) ดาวเสาร์  |  2) ดาวยูเรนัส  |  3) ดาวพฤหัสบดี  |  4) ดาวเนปจูน
+EN: Which planet is furthest from the Sun?
+   1) Saturn  |  2) Uranus  |  3) Jupiter  |  4) Neptune
+
+### gk-9-0005  (หัวข้อ: matter)
+TH: สถานะใดมีรูปร่างคงที่
+   1) แก๊ส  |  2) ของเหลว  |  3) ของแข็ง  |  4) ทั้งของเหลวและแก๊ส
+EN: Which state of matter keeps its own shape?
+   1) gas  |  2) liquid  |  3) solid  |  4) both liquid and gas
+
+### gk-9-0006  (หัวข้อ: plants)
+TH: เมื่อกินผักกาดหอม เรากินส่วนใดของพืช
+   1) ผล  |  2) ราก  |  3) เมล็ด  |  4) ใบ
+EN: Which part of the plant do we eat when we eat lettuce?
+   1) the fruit  |  2) the root  |  3) the seeds  |  4) the leaves
+
+### gk-9-0007  (หัวข้อ: electricity)
+TH: วัสดุใดเป็นตัวนำไฟฟ้า
+   1) ทองแดง  |  2) พลาสติก  |  3) ไม้แห้ง  |  4) ยาง
+EN: Which material lets electricity flow through it?
+   1) copper  |  2) plastic  |  3) dry wood  |  4) rubber
+
+### gk-9-0008  (หัวข้อ: electricity)
+TH: หลอดไฟเปลี่ยนพลังงานไฟฟ้าเป็นพลังงานใดที่เรานำมาใช้
+   1) พลังงานเคมี  |  2) พลังงานลม  |  3) พลังงานเสียง  |  4) พลังงานแสง
+EN: A lamp turns electricity into which useful energy?
+   1) chemical energy  |  2) wind energy  |  3) sound energy  |  4) light energy
+
+### gk-9-0009  (หัวข้อ: plants)
+TH: พืชใช้แก๊สใดในการสร้างอาหาร
+   1) คาร์บอนไดออกไซด์  |  2) ฮีเลียม  |  3) ออกซิเจน  |  4) ไนโตรเจน
+EN: Which gas do plants use to make food?
+   1) carbon dioxide  |  2) helium  |  3) oxygen  |  4) nitrogen
+
+### gk-9-0010  (หัวข้อ: forces)
+TH: ร่มชูชีพทำให้คนตกลงมาช้าลงเพราะแรงใด
+   1) แรงแม่เหล็ก  |  2) แรงเสียดทานของพื้น  |  3) แรงดึงของดวงจันทร์  |  4) แรงต้านอากาศ
+EN: Which force makes a parachute fall slowly?
+   1) magnetism  |  2) friction with the ground  |  3) the pull of the Moon  |  4) air resistance
+
+### gk-9-0011  (หัวข้อ: weather)
+TH: เมื่อมีฟ้าร้องฟ้าผ่า ควรทำอย่างไร
+   1) ชูร่มกลางสนาม  |  2) หลบเข้าในอาคาร  |  3) ลงว่ายน้ำ  |  4) ยืนใต้ต้นไม้สูง
+EN: What should you do in a thunderstorm?
+   1) hold up an umbrella in a field  |  2) go inside a building  |  3) go swimming  |  4) stand under a tall tree
+
+### gk-9-0012  (หัวข้อ: forces)
+TH: ทำไมนักบินอวกาศกระโดดบนดวงจันทร์ได้สูงกว่าบนโลก
+   1) ดวงจันทร์อยู่ใกล้ดวงอาทิตย์  |  2) บนดวงจันทร์มีลมพัดขึ้น  |  3) แรงโน้มถ่วงของดวงจันทร์น้อยกว่า  |  4) บนดวงจันทร์ตัวเราใหญ่ขึ้น
+EN: Why can an astronaut jump higher on the Moon than on Earth?
+   1) it is nearer the Sun  |  2) wind blows upward there  |  3) the Moon's gravity is weaker  |  4) we grow bigger there
+
+### gk-9-0013  (หัวข้อ: body)
+TH: ผู้ใหญ่มีกระดูกทั้งหมดกี่ชิ้น
+   1) 106  |  2) 206  |  3) 26  |  4) 306
+EN: How many bones does an adult have?
+   (EN choices same as TH)
+
+### gk-9-0014  (หัวข้อ: space)
+TH: ฤดูกาลบนโลกเกิดจากอะไร
+   1) แกนโลกเอียงขณะโคจรรอบดวงอาทิตย์  |  2) เมฆหนาขึ้นในบางเดือน  |  3) ดวงจันทร์บังแสงอาทิตย์  |  4) โลกเข้าใกล้และออกห่างดวงอาทิตย์
+EN: What causes the seasons on Earth?
+   1) Earth's tilted axis as it orbits the Sun  |  2) thicker clouds in some months  |  3) the Moon blocking sunlight  |  4) Earth moving nearer the Sun
+
+### gk-9-0015  (หัวข้อ: world)
+TH: หอไอเฟลอยู่ในเมืองใด
+   1) โรม  |  2) ปารีส  |  3) ลอนดอน  |  4) นิวยอร์ก
+EN: Which city is the Eiffel Tower in?
+   1) Rome  |  2) Paris  |  3) London  |  4) New York
+
+### gk-9-0016  (หัวข้อ: light-sound)
+TH: เสียงสูงหรือเสียงต่ำขึ้นอยู่กับอะไร
+   1) ขนาดของห้อง  |  2) สั่นแรงหรือเบา  |  3) สีของวัตถุ  |  4) สั่นเร็วหรือช้า
+EN: What decides whether a sound is high or low?
+   1) the size of the room  |  2) how hard it vibrates  |  3) its colour  |  4) how fast it vibrates
+
+### gk-9-0017  (หัวข้อ: space)
+TH: ทำไมเราเห็นดวงจันทร์เปลี่ยนรูปร่างไปในแต่ละคืน
+   1) เห็นด้านที่รับแสงอาทิตย์ไม่เท่ากัน  |  2) เมฆบังอยู่เสมอ  |  3) ดวงจันทร์หดและขยาย  |  4) เงาโลกบังทุกคืน
+EN: Why does the Moon seem to change shape from night to night?
+   1) we see different amounts of its sunlit side  |  2) clouds always hide it  |  3) the Moon shrinks and grows  |  4) Earth's shadow covers it every night
+
+### gk-9-0018  (หัวข้อ: living-things)
+TH: สัตว์ใดไม่มีกระดูกสันหลัง
+   1) หมึก  |  2) งู  |  3) กบ  |  4) ปลาทอง
+EN: Which animal has no backbone?
+   1) a squid  |  2) a snake  |  3) a frog  |  4) a goldfish
+
+### gk-9-0019  (หัวข้อ: body)
+TH: อาหารจำพวกข้าวและขนมปังให้สารอาหารใดเป็นหลัก
+   1) เกลือแร่  |  2) คาร์โบไฮเดรต  |  3) วิตามิน  |  4) ใยอาหาร
+EN: Which nutrient do rice and bread mainly give us?
+   1) minerals  |  2) carbohydrate  |  3) vitamins  |  4) fibre
+
+### gk-9-0020  (หัวข้อ: weather)
+TH: ลูกเห็บคืออะไร
+   1) ฝนที่ร้อนจัด  |  2) หิมะที่ละลาย  |  3) ฝุ่นที่แข็งตัว  |  4) ก้อนน้ำแข็งที่ตกจากเมฆ
+EN: What is hail?
+   1) very hot rain  |  2) melted snow  |  3) hardened dust  |  4) lumps of ice falling from clouds
+
+### gk-9-0021  (หัวข้อ: thailand)
+TH: ก่อนกรุงเทพมหานคร เมืองหลวงของไทยคือที่ใด
+   1) กรุงศรีอยุธยา  |  2) กรุงธนบุรี  |  3) กรุงสุโขทัย  |  4) เชียงใหม่
+EN: Which city was the Thai capital just before Bangkok?
+   1) Ayutthaya  |  2) Thonburi  |  3) Sukhothai  |  4) Chiang Mai
+
+### gk-9-0022  (หัวข้อ: matter)
+TH: หยดน้ำที่เกาะข้างแก้วน้ำเย็นมาจากไหน
+   1) ไอน้ำในอากาศควบแน่น  |  2) แก้วมีเหงื่อ  |  3) น้ำซึมผ่านแก้ว  |  4) น้ำแข็งละลายทะลุแก้ว
+EN: Where do the drops on the outside of a cold glass come from?
+   1) water vapour in the air condensing  |  2) the glass sweating  |  3) water leaking through the glass  |  4) ice melting through the glass
+
+### gk-9-0023  (หัวข้อ: light-sound)
+TH: รุ้งกินน้ำเกิดจากอะไร
+   1) แสงอาทิตย์ผ่านหยดน้ำแล้วแยกเป็นสี  |  2) แสงจันทร์ผสมกับหมอก  |  3) ลมพัดฝุ่นหลากสี  |  4) เมฆสะท้อนสีของดอกไม้
+EN: What makes a rainbow?
+   1) sunlight splitting in raindrops  |  2) moonlight mixing with fog  |  3) wind blowing coloured dust  |  4) clouds reflecting flowers
+
+### gk-9-0024  (หัวข้อ: electricity)
+TH: สวิตช์ทำหน้าที่อะไรในวงจรไฟฟ้า
+   1) เปิดและปิดวงจร  |  2) เก็บไฟฟ้า  |  3) ผลิตไฟฟ้า  |  4) ทำให้สายไฟร้อน
+EN: What does a switch do in a circuit?
+   1) it opens and closes the circuit  |  2) it stores electricity  |  3) it makes electricity  |  4) it heats the wire
+
+### gk-9-0025  (หัวข้อ: space)
+TH: ดวงจันทร์โคจรรอบโลกครบ 1 รอบใช้เวลาประมาณเท่าใด
+   1) ประมาณ 1 วัน  |  2) ประมาณ 1 สัปดาห์  |  3) ประมาณ 1 ปี  |  4) ประมาณ 1 เดือน
+EN: About how long does the Moon take to go once round the Earth?
+   1) about 1 day  |  2) about 1 week  |  3) about 1 year  |  4) about 1 month
+
+### gk-9-0026  (หัวข้อ: body)
+TH: กระดูกซี่โครงปกป้องอวัยวะใดเป็นหลัก
+   1) ดวงตา  |  2) สมอง  |  3) กระเพาะปัสสาวะ  |  4) หัวใจและปอด
+EN: What do the ribs mainly protect?
+   1) the eyes  |  2) the brain  |  3) the bladder  |  4) the heart and lungs
+
+### gk-9-0027  (หัวข้อ: space)
+TH: กาแล็กซีที่ระบบสุริยะของเราอยู่มีชื่อว่าอะไร
+   1) แอนดรอเมดา  |  2) ทางช้างเผือก  |  3) กลุ่มดาวลูกไก่  |  4) ดาวเหนือ
+EN: What is the name of the galaxy our Solar System is in?
+   1) Andromeda  |  2) the Milky Way  |  3) the Pleiades  |  4) the North Star
+
+### gk-9-0028  (หัวข้อ: matter)
+TH: วิธีใดแยกเกลือออกจากน้ำเกลือได้
+   1) กรองด้วยกระดาษ  |  2) ระเหยน้ำออก  |  3) ใช้แม่เหล็กดูด  |  4) ร่อนด้วยตะแกรง
+EN: How can you get the salt back out of salty water?
+   1) filter it with paper  |  2) evaporate the water  |  3) use a magnet  |  4) sieve it
+
+### gk-9-0029  (หัวข้อ: body)
+TH: ชีพจรที่จับได้ตรงข้อมือเกิดจากอะไร
+   1) การย่อยอาหาร  |  2) การเต้นของหัวใจ  |  3) การหายใจ  |  4) การกะพริบตา
+EN: What causes the pulse you can feel in your wrist?
+   1) digesting food  |  2) the heart beating  |  3) breathing  |  4) blinking
+
+### gk-9-0030  (หัวข้อ: electricity)
+TH: ทำไมสายไฟจึงหุ้มด้วยพลาสติก
+   1) กันไฟฟ้ารั่วและไฟดูด  |  2) ทำให้สายไฟเบา  |  3) ให้สายไฟดูสวย  |  4) ทำให้ไฟฟ้าไหลเร็วขึ้น
+EN: Why are wires covered in plastic?
+   1) to stop electric shocks  |  2) to make the wire lighter  |  3) to make the wire look nice  |  4) to make electricity flow faster
+
+### gk-9-0031  (หัวข้อ: living-things)
+TH: สัตว์กลุ่มใดเป็นสัตว์เลือดอุ่น
+   1) นกและสัตว์เลี้ยงลูกด้วยนม  |  2) ปลาและกบ  |  3) งูและจระเข้  |  4) แมลงและแมงมุม
+EN: Which animals are warm-blooded?
+   1) birds and mammals  |  2) fish and frogs  |  3) snakes and crocodiles  |  4) insects and spiders
+
+### gk-9-0032  (หัวข้อ: electricity)
+TH: หลอดไฟจะสว่างเมื่อวงจรเป็นแบบใด
+   1) สายไฟขาด  |  2) ไม่มีถ่านไฟฉาย  |  3) วงจรปิด ต่อครบวง  |  4) วงจรเปิด มีช่องขาด
+EN: When does the bulb in a circuit light up?
+   1) when a wire is broken  |  2) when there is no battery  |  3) when the circuit is a complete loop  |  4) when the circuit has a gap
+
+### gk-9-0033  (หัวข้อ: living-things)
+TH: เห็ดราและแบคทีเรียมีบทบาทอะไรในธรรมชาติ
+   1) ย่อยสลายซากพืชซากสัตว์  |  2) ถ่ายละอองเรณู  |  3) สร้างอาหารจากแสง  |  4) ล่าสัตว์อื่น
+EN: What job do fungi and bacteria do in nature?
+   1) break down dead plants and animals  |  2) carry pollen  |  3) make food from light  |  4) hunt other animals
+
+### gk-9-0034  (หัวข้อ: space)
+TH: ดาวเคราะห์ดวงใดร้อนที่สุดในระบบสุริยะ
+   1) ดาวอังคาร  |  2) ดาวศุกร์  |  3) ดาวพุธ  |  4) โลก
+EN: Which planet is the hottest in the Solar System?
+   1) Mars  |  2) Venus  |  3) Mercury  |  4) Earth
+
+### gk-9-0035  (หัวข้อ: earth)
+TH: น้ำบนโลกส่วนใหญ่เป็นน้ำชนิดใด
+   1) น้ำบาดาล  |  2) น้ำเค็ม  |  3) น้ำจืด  |  4) น้ำแข็ง
+EN: What kind of water is most of the water on Earth?
+   1) groundwater  |  2) salt water  |  3) fresh water  |  4) ice
+
+### gk-9-0036  (หัวข้อ: electricity)
+TH: ข้อใดเป็นการใช้ไฟฟ้าอย่างปลอดภัย
+   1) เอานิ้วแหย่เต้ารับ  |  2) เช็ดมือให้แห้งก่อนจับปลั๊ก  |  3) จับปลั๊กตอนมือเปียก  |  4) ดึงสายไฟแรง ๆ
+EN: Which is a safe way to use electricity?
+   1) put a finger in a socket  |  2) dry your hands before touching a plug  |  3) touch a plug with wet hands  |  4) pull hard on the wire
+
+### gk-9-0037  (หัวข้อ: plants)
+TH: เมล็ดต้องการอะไรจึงจะงอก
+   1) ความมืดและเกลือ  |  2) น้ำ อากาศ และอุณหภูมิที่เหมาะ  |  3) แสงแดดจัดและปุ๋ย  |  4) ดินและลมแรง
+EN: What does a seed need to start growing?
+   1) darkness and salt  |  2) water, air and the right warmth  |  3) strong sunlight and fertiliser  |  4) soil and strong wind
+
+### gk-9-0038  (หัวข้อ: world)
+TH: เพนกวินในธรรมชาติเกือบทั้งหมดอาศัยอยู่ที่ใด
+   1) ขั้วโลกเหนือ  |  2) ทวีปยุโรป  |  3) ทวีปเอเชีย  |  4) ซีกโลกใต้
+EN: Where do almost all wild penguins live?
+   1) the North Pole  |  2) Europe  |  3) Asia  |  4) the southern half of the world
+
+### gk-9-0039  (หัวข้อ: light-sound)
+TH: เงาเกิดขึ้นเมื่อใด
+   1) เมื่อแสงสะท้อนผิวน้ำ  |  2) เมื่อวัตถุทึบแสงกั้นแสง  |  3) เมื่อไม่มีแสงเลย  |  4) เมื่อแสงผ่านกระจกใส
+EN: When does a shadow form?
+   1) when light bounces off water  |  2) when an object blocks light  |  3) when there is no light at all  |  4) when light passes through clear glass
+
+### gk-9-0040  (หัวข้อ: weather)
+TH: ลมคืออะไร
+   1) อากาศที่เคลื่อนที่  |  2) เสียงของต้นไม้  |  3) ไอน้ำร้อน  |  4) เมฆที่ตกลงมา
+EN: What is wind?
+   1) moving air  |  2) the sound of trees  |  3) hot steam  |  4) falling cloud
+
+### gk-9-0041  (หัวข้อ: weather)
+TH: เครื่องมือใดใช้วัดอุณหภูมิ
+   1) เทอร์โมมิเตอร์  |  2) ไม้บรรทัด  |  3) เข็มทิศ  |  4) บารอมิเตอร์
+EN: Which tool measures temperature?
+   1) a thermometer  |  2) a ruler  |  3) a compass  |  4) a barometer
+
+### gk-9-0042  (หัวข้อ: thailand)
+TH: แม่น้ำใดเป็นพรมแดนระหว่างไทยกับลาวเป็นระยะทางยาว
+   1) แม่น้ำปิง  |  2) แม่น้ำแม่กลอง  |  3) แม่น้ำโขง  |  4) แม่น้ำเจ้าพระยา
+EN: Which river forms a long stretch of the border between Thailand and Laos?
+   1) the Ping  |  2) the Mae Klong  |  3) the Mekong  |  4) the Chao Phraya
+
+### gk-9-0043  (หัวข้อ: weather)
+TH: ศรลมใช้บอกอะไร
+   1) อุณหภูมิ  |  2) ความชื้น  |  3) ทิศทางลม  |  4) ปริมาณฝน
+EN: What does a wind vane show?
+   1) temperature  |  2) humidity  |  3) wind direction  |  4) rainfall
+
+### gk-9-0044  (หัวข้อ: plants)
+TH: พืชสร้างอาหารเองด้วยกระบวนการใด
+   1) การหายใจ  |  2) การสังเคราะห์ด้วยแสง  |  3) การย่อยอาหาร  |  4) การคายน้ำ
+EN: How do plants make their own food?
+   1) breathing  |  2) photosynthesis  |  3) digestion  |  4) losing water
+
+### gk-9-0045  (หัวข้อ: body)
+TH: ฟันแท้ของผู้ใหญ่มีครบทั้งหมดกี่ซี่
+   1) 24  |  2) 40  |  3) 20  |  4) 32
+EN: How many teeth are in a full adult set?
+   (EN choices same as TH)
+
+### gk-9-0046  (หัวข้อ: space)
+TH: ดาวหางมีลักษณะเด่นอย่างไร
+   1) อยู่นิ่งไม่เคลื่อนที่  |  2) ส่องแสงเองเหมือนดาวฤกษ์  |  3) มีหางยาวเมื่อเข้าใกล้ดวงอาทิตย์  |  4) มีวงแหวนล้อมรอบ
+EN: What is special about a comet?
+   1) it never moves  |  2) it shines like a star  |  3) it grows a long tail near the Sun  |  4) it has rings
+
+### gk-9-0047  (หัวข้อ: weather)
+TH: เมฆเกิดจากอะไร
+   1) ควันจากโรงงาน  |  2) ฝุ่นจากอวกาศ  |  3) ไอน้ำควบแน่นเป็นหยดน้ำเล็ก ๆ  |  4) ไอร้อนจากดวงอาทิตย์
+EN: What are clouds made from?
+   1) factory smoke  |  2) dust from space  |  3) water vapour condensed into tiny drops  |  4) hot steam from the Sun
+
+### gk-9-0048  (หัวข้อ: thailand)
+TH: สกุลเงินของประเทศไทยคืออะไร
+   1) เยน  |  2) ดอลลาร์  |  3) บาท  |  4) หยวน
+EN: What is the money of Thailand called?
+   1) the yen  |  2) the dollar  |  3) the baht  |  4) the yuan
+
+### gk-9-0049  (หัวข้อ: matter)
+TH: สสารรอบตัวเรามีสถานะหลัก 3 สถานะ คืออะไรบ้าง
+   1) ของแข็ง ของเหลว แก๊ส  |  2) ดิน น้ำ ลม  |  3) ใหญ่ กลาง เล็ก  |  4) ร้อน อุ่น เย็น
+EN: What are the three main states of matter?
+   1) solid, liquid, gas  |  2) earth, water, wind  |  3) big, medium, small  |  4) hot, warm, cold
+
+### gk-9-0050  (หัวข้อ: forces)
+TH: กังหันลมผลิตไฟฟ้าจากอะไร
+   1) ความร้อนของดิน  |  2) แสงจันทร์  |  3) อากาศที่เคลื่อนที่  |  4) เสียง
+EN: What does a wind turbine use to make electricity?
+   1) heat from the soil  |  2) moonlight  |  3) moving air  |  4) sound
+
+### gk-9-0051  (หัวข้อ: living-things)
+TH: สัตว์ใดออกหากินเวลากลางคืน
+   1) ค้างคาว  |  2) ผีเสื้อ  |  3) ไก่  |  4) นกพิราบ
+EN: Which animal is active at night?
+   1) a bat  |  2) a butterfly  |  3) a chicken  |  4) a pigeon
+
+### gk-9-0052  (หัวข้อ: body)
+TH: อวัยวะใดสูบฉีดเลือดไปทั่วร่างกาย
+   1) ปอด  |  2) กระเพาะอาหาร  |  3) หัวใจ  |  4) สมอง
+EN: Which organ pumps blood around the body?
+   1) the lungs  |  2) the stomach  |  3) the heart  |  4) the brain
+
+### gk-9-0053  (หัวข้อ: living-things)
+TH: การจำศีลในฤดูหนาวมีประโยชน์ต่อสัตว์อย่างไร
+   1) ทำให้ตัวโตเร็ว  |  2) ทำให้ขนเปลี่ยนสี  |  3) ประหยัดพลังงานเมื่ออาหารหายาก  |  4) ช่วยให้บินได้ไกล
+EN: How does sleeping through winter (hibernation) help an animal?
+   1) it makes them grow fast  |  2) it changes their fur colour  |  3) it saves energy when food is scarce  |  4) it helps them fly far
+
+### gk-9-0054  (หัวข้อ: matter)
+TH: น้ำแข็งตัวที่อุณหภูมิกี่องศาเซลเซียส
+   1) 10 °C  |  2) 32 °C  |  3) 100 °C  |  4) 0 °C
+EN: At what temperature does water freeze?
+   (EN choices same as TH)
+
+### gk-9-0055  (หัวข้อ: electricity)
+TH: วัสดุใดเป็นฉนวนไฟฟ้า
+   1) อะลูมิเนียม  |  2) ทองแดง  |  3) เหล็ก  |  4) ยาง
+EN: Which material stops electricity flowing?
+   1) aluminium  |  2) copper  |  3) iron  |  4) rubber
+
+### gk-9-0056  (หัวข้อ: light-sound)
+TH: วัตถุใดเป็นวัตถุโปร่งแสง คือแสงผ่านได้บ้าง แต่มองไม่ชัด
+   1) กระจกฝ้า  |  2) แผ่นเหล็ก  |  3) แผ่นไม้  |  4) กระจกใส
+EN: Which object lets some light through but gives no clear view?
+   1) frosted glass  |  2) a steel sheet  |  3) a wooden board  |  4) clear glass
+
+### gk-9-0057  (หัวข้อ: world)
+TH: ทวีปใดใหญ่ที่สุดในโลก
+   1) อเมริกาเหนือ  |  2) แอฟริกา  |  3) ยุโรป  |  4) เอเชีย
+EN: Which is the biggest continent?
+   1) North America  |  2) Africa  |  3) Europe  |  4) Asia
+
+### gk-9-0058  (หัวข้อ: plants)
+TH: สารสีเขียวในใบพืชที่ใช้จับแสงเรียกว่าอะไร
+   1) แป้ง  |  2) น้ำตาล  |  3) คลอโรฟิลล์  |  4) ออกซิเจน
+EN: What is the green substance in leaves that traps light?
+   1) starch  |  2) sugar  |  3) chlorophyll  |  4) oxygen
+
+### gk-9-0059  (หัวข้อ: body)
+TH: เซลล์เม็ดเลือดขาวทำหน้าที่อะไร
+   1) ทำให้เลือดเป็นสีแดง  |  2) ขนส่งออกซิเจน  |  3) ย่อยอาหาร  |  4) ต่อสู้กับเชื้อโรค
+EN: What do white blood cells do?
+   1) make blood red  |  2) carry oxygen  |  3) digest food  |  4) fight germs
+
+### gk-9-0060  (หัวข้อ: matter)
+TH: ที่ระดับน้ำทะเล น้ำเดือดที่อุณหภูมิกี่องศาเซลเซียส
+   1) 37 °C  |  2) 50 °C  |  3) 100 °C  |  4) 0 °C
+EN: At sea level, at what temperature does water boil?
+   (EN choices same as TH)
+
+### gk-9-0061  (หัวข้อ: forces)
+TH: รอกที่ยอดเสาธงช่วยเราอย่างไร
+   1) ทำให้ลมแรงขึ้น  |  2) ทำให้ธงหนักขึ้น  |  3) เปลี่ยนทิศของแรงดึง  |  4) ทำให้เชือกยาวขึ้น
+EN: How does the pulley at the top of a flagpole help?
+   1) it makes the wind stronger  |  2) it makes the flag heavier  |  3) it changes the direction of the pull  |  4) it makes the rope longer
+
+### gk-9-0062  (หัวข้อ: living-things)
+TH: ในวัฏจักรชีวิตของกบ ไข่ฟักออกมาเป็นอะไร
+   1) ดักแด้  |  2) ตัวอ่อนมีปีก  |  3) ลูกอ๊อด  |  4) หนอน
+EN: In a frog's life cycle, what hatches from the egg?
+   1) a pupa  |  2) a winged baby  |  3) a tadpole  |  4) a caterpillar
+
+### gk-9-0063  (หัวข้อ: living-things)
+TH: วัฏจักรชีวิตของผีเสื้อเรียงลำดับอย่างไร
+   1) ไข่ → หนอน → ดักแด้ → ผีเสื้อ  |  2) หนอน → ไข่ → ดักแด้ → ผีเสื้อ  |  3) ไข่ → ดักแด้ → หนอน → ผีเสื้อ  |  4) ไข่ → หนอน → ผีเสื้อ → ดักแด้
+EN: What is the order of a butterfly's life cycle?
+   1) egg → caterpillar → pupa → butterfly  |  2) caterpillar → egg → pupa → butterfly  |  3) egg → pupa → caterpillar → butterfly  |  4) egg → caterpillar → butterfly → pupa
+
+### gk-9-0064  (หัวข้อ: space)
+TH: จันทรุปราคาเกิดขึ้นเมื่อใด
+   1) โลกอยู่ระหว่างดวงอาทิตย์กับดวงจันทร์  |  2) ดวงจันทร์อยู่ระหว่างดวงอาทิตย์กับโลก  |  3) ดวงจันทร์หยุดหมุน  |  4) ดวงจันทร์เข้าใกล้ดาวอังคาร
+EN: When does an eclipse of the Moon happen?
+   1) Earth is between the Sun and the Moon  |  2) the Moon is between the Sun and Earth  |  3) the Moon stops turning  |  4) the Moon goes near Mars
+
+### gk-9-0065  (หัวข้อ: forces)
+TH: เครื่องมือใดใช้วัดแรง
+   1) นาฬิกาจับเวลา  |  2) เครื่องชั่งสปริง  |  3) เทอร์โมมิเตอร์  |  4) ไม้บรรทัด
+EN: Which tool measures force?
+   1) a stopwatch  |  2) a spring balance  |  3) a thermometer  |  4) a ruler
+
+### gk-9-0066  (หัวข้อ: forces)
+TH: ไม้กระดกในสนามเด็กเล่นเป็นเครื่องกลอย่างง่ายชนิดใด
+   1) พื้นเอียง  |  2) รอก  |  3) คาน  |  4) สกรู
+EN: What kind of simple machine is a playground seesaw?
+   1) a slope  |  2) a pulley  |  3) a lever  |  4) a screw
+
+### gk-9-0067  (หัวข้อ: health)
+TH: น้ำแบบใดดื่มได้อย่างปลอดภัย
+   1) น้ำขุ่นแต่เย็น  |  2) น้ำใสไม่มีกลิ่นที่กรองหรือต้มแล้ว  |  3) น้ำจากแม่น้ำโดยตรง  |  4) น้ำที่มีสีสวย
+EN: Which water is safe to drink?
+   1) cloudy but cold water  |  2) clear water that is filtered or boiled  |  3) water straight from a river  |  4) brightly coloured water
+
+### gk-9-0068  (หัวข้อ: weather)
+TH: โดยทั่วไปประเทศไทยมีกี่ฤดู
+   1) 2 ฤดู  |  2) 3 ฤดู  |  3) 5 ฤดู  |  4) 4 ฤดู
+EN: How many seasons does Thailand usually have?
+   1) 2  |  2) 3  |  3) 5  |  4) 4
+
+### gk-9-0069  (หัวข้อ: living-things)
+TH: ทำไมนกบางชนิดจึงอพยพย้ายถิ่นทุกปี
+   1) เพื่อตามดวงจันทร์  |  2) เพื่อเปลี่ยนสีขน  |  3) เพื่อหนีแรงโน้มถ่วง  |  4) เพื่อหาอาหารและอากาศที่เหมาะ
+EN: Why do some birds migrate every year?
+   1) to follow the Moon  |  2) to change feather colour  |  3) to escape gravity  |  4) to find food and better weather
+
+### gk-9-0070  (หัวข้อ: weather)
+TH: ฟ้าผ่าคืออะไร
+   1) ไฟฟ้าที่ปล่อยจากเมฆ  |  2) แสงจากดวงอาทิตย์  |  3) ดาวตก  |  4) เสียงของเมฆชนกัน
+EN: What is lightning?
+   1) electricity jumping from a cloud  |  2) light from the Sun  |  3) a shooting star  |  4) the sound of clouds bumping
+
+### gk-9-0071  (หัวข้อ: earth)
+TH: ชั้นหินแข็งนอกสุดของโลกที่เราอาศัยอยู่เรียกว่าอะไร
+   1) เปลือกโลก  |  2) แมกมา  |  3) แก่นโลก  |  4) เนื้อโลก
+EN: What is the hard, rocky outer layer of the Earth called?
+   1) the crust  |  2) magma  |  3) the core  |  4) the mantle
+
+### gk-9-0072  (หัวข้อ: earth)
+TH: พื้นผิวโลกมีน้ำปกคลุมประมาณเท่าใด
+   1) ราว 50%  |  2) ราว 90%  |  3) ราว 70%  |  4) ราว 30%
+EN: About how much of the Earth's surface is covered by water?
+   1) about 50%  |  2) about 90%  |  3) about 70%  |  4) about 30%
+
+### gk-9-0073  (หัวข้อ: forces)
+TH: ทำไมพื้นรองเท้าจึงมีลวดลายนูน
+   1) ทำให้เดินเสียงดัง  |  2) ทำให้รองเท้าเบา  |  3) ลดแรงโน้มถ่วง  |  4) เพิ่มแรงเสียดทานไม่ให้ลื่น
+EN: Why do the soles of shoes have a raised pattern?
+   1) to make walking louder  |  2) to make shoes lighter  |  3) to reduce gravity  |  4) to add friction and stop slipping
+
+### gk-9-0074  (หัวข้อ: body)
+TH: อะไรทำให้เลือดมีสีแดง
+   1) น้ำ  |  2) เกล็ดเลือด  |  3) เซลล์เม็ดเลือดขาว  |  4) เซลล์เม็ดเลือดแดง
+EN: What makes blood red?
+   1) water  |  2) platelets  |  3) white blood cells  |  4) red blood cells
+
+### gk-9-0075  (หัวข้อ: weather)
+TH: พลังงานที่ทำให้น้ำระเหยในวัฏจักรของน้ำมาจากไหน
+   1) ดวงดาว  |  2) ดวงอาทิตย์  |  3) แก่นโลก  |  4) ดวงจันทร์
+EN: Where does the energy that evaporates water in the water cycle come from?
+   1) the stars  |  2) the Sun  |  3) the Earth's core  |  4) the Moon
+
+### gk-9-0076  (หัวข้อ: matter)
+TH: น้ำกลายเป็นไอน้ำ เรียกว่าอะไร
+   1) การควบแน่น  |  2) การแข็งตัว  |  3) การระเหย  |  4) การหลอมเหลว
+EN: What do we call water turning into water vapour?
+   1) condensation  |  2) freezing  |  3) evaporation  |  4) melting
+
+### gk-9-0077  (หัวข้อ: earth)
+TH: ซากดึกดำบรรพ์ (ฟอสซิล) มักพบในหินประเภทใด
+   1) หินตะกอน  |  2) หินแปร  |  3) หินอัคนี  |  4) แมกมา
+EN: In which type of rock are fossils usually found?
+   1) sedimentary rock  |  2) metamorphic rock  |  3) igneous rock  |  4) magma
+
+### gk-9-0078  (หัวข้อ: forces)
+TH: หน่วยของแรงคืออะไร
+   1) ลิตร  |  2) เมตร  |  3) กิโลกรัม  |  4) นิวตัน
+EN: What is the unit of force?
+   1) the litre  |  2) the metre  |  3) the kilogram  |  4) the newton
+
+### gk-9-0079  (หัวข้อ: world)
+TH: ภาษาใดมีคนใช้เป็นภาษาแม่มากที่สุดในโลก
+   1) ภาษาอังกฤษ  |  2) ภาษาจีนกลาง  |  3) ภาษาฮินดี  |  4) ภาษาสเปน
+EN: Which language has the most native speakers in the world?
+   1) English  |  2) Mandarin Chinese  |  3) Hindi  |  4) Spanish
+
+### gk-9-0080  (หัวข้อ: thailand)
+TH: จังหวัดใดอยู่เหนือสุดของประเทศไทย
+   1) เชียงใหม่  |  2) แม่ฮ่องสอน  |  3) เชียงราย  |  4) น่าน
+EN: Which province is the furthest north in Thailand?
+   1) Chiang Mai  |  2) Mae Hong Son  |  3) Chiang Rai  |  4) Nan
+
+### gk-9-0081  (หัวข้อ: living-things)
+TH: วาฬและโลมาหายใจด้วยอวัยวะใด
+   1) เหงือก  |  2) ครีบ  |  3) ปอด  |  4) ผิวหนัง
+EN: What do whales and dolphins breathe with?
+   1) gills  |  2) fins  |  3) lungs  |  4) skin
+
+### gk-9-0082  (หัวข้อ: plants)
+TH: พืชคายน้ำออกทางใดเป็นส่วนใหญ่
+   1) ราก  |  2) กลีบดอก  |  3) เปลือกลำต้น  |  4) ปากใบ
+EN: Where does most water leave a plant?
+   1) the roots  |  2) the petals  |  3) the bark  |  4) tiny holes in the leaves
+
+### gk-9-0083  (หัวข้อ: earth)
+TH: หินแบ่งเป็นกี่ประเภทใหญ่
+   1) 3 ประเภท  |  2) 2 ประเภท  |  3) 7 ประเภท  |  4) 5 ประเภท
+EN: How many main types of rock are there?
+   1) 3 types  |  2) 2 types  |  3) 7 types  |  4) 5 types
+
+### gk-9-0084  (หัวข้อ: plants)
+TH: ผลมะพร้าวเดินทางไปงอกบนเกาะไกล ๆ ได้ด้วยวิธีใด
+   1) ปลิวไปกับลม  |  2) ดีดตัวจากฝัก  |  3) ลอยไปกับน้ำ  |  4) ติดขนสัตว์
+EN: How can a coconut travel to a far-off island?
+   1) by blowing in the wind  |  2) by popping from a pod  |  3) by floating on water  |  4) by sticking to fur
+
+### gk-9-0085  (หัวข้อ: space)
+TH: มนุษย์คนแรกที่เหยียบดวงจันทร์คือใคร
+   1) ไอแซก นิวตัน  |  2) ยูริ กาการิน  |  3) บัซ อัลดริน  |  4) นีล อาร์มสตรอง
+EN: Who was the first person to walk on the Moon?
+   1) Isaac Newton  |  2) Yuri Gagarin  |  3) Buzz Aldrin  |  4) Neil Armstrong
+
+### gk-9-0086  (หัวข้อ: world)
+TH: ขั้วโลกใต้อยู่ในทวีปใด
+   1) อเมริกาใต้  |  2) ออสเตรเลีย  |  3) แอฟริกา  |  4) แอนตาร์กติกา
+EN: Which continent is the South Pole in?
+   1) South America  |  2) Australia  |  3) Africa  |  4) Antarctica
+
+### gk-9-0087  (หัวข้อ: plants)
+TH: รากของพืชทำหน้าที่อะไร
+   1) สร้างเมล็ด  |  2) ดูดน้ำและแร่ธาตุ และยึดลำต้น  |  3) จับแสงแดด  |  4) ล่อแมลง
+EN: What do roots do?
+   1) make seeds  |  2) take in water and hold the plant  |  3) catch sunlight  |  4) attract insects
+
+### gk-9-0088  (หัวข้อ: body)
+TH: กระดูกส่วนใดปกป้องสมอง
+   1) กระดูกเชิงกราน  |  2) กะโหลกศีรษะ  |  3) กระดูกสันหลัง  |  4) ซี่โครง
+EN: Which bones protect the brain?
+   1) the hip bones  |  2) the skull  |  3) the backbone  |  4) the ribs
+
+### gk-9-0089  (หัวข้อ: body)
+TH: อวัยวะใดควบคุมการทำงานของทั้งร่างกาย
+   1) ปอด  |  2) หัวใจ  |  3) สมอง  |  4) กระเพาะอาหาร
+EN: Which organ controls the whole body?
+   1) the lungs  |  2) the heart  |  3) the brain  |  4) the stomach
+
+### gk-9-0090  (หัวข้อ: earth)
+TH: การปลูกต้นไม้บนภูเขาช่วยป้องกันอะไร
+   1) สุริยุปราคา  |  2) แผ่นดินไหว  |  3) ภูเขาไฟระเบิด  |  4) ดินถล่ม
+EN: What does planting trees on a hillside help to prevent?
+   1) eclipses  |  2) earthquakes  |  3) volcanic eruptions  |  4) landslides
+
+### gk-9-0091  (หัวข้อ: living-things)
+TH: ในห่วงโซ่อาหาร พืชมีบทบาทเป็นอะไร
+   1) ผู้ผลิต  |  2) ผู้ล่า  |  3) ผู้ย่อยสลาย  |  4) ผู้บริโภค
+EN: What is a plant's role in a food chain?
+   1) producer  |  2) predator  |  3) decomposer  |  4) consumer
+
+### gk-9-0092  (หัวข้อ: earth)
+TH: แผ่นดินไหวส่วนใหญ่เกิดจากอะไร
+   1) น้ำขึ้นน้ำลง  |  2) ลมพัดแรง  |  3) แผ่นเปลือกโลกเคลื่อนที่  |  4) ฝนตกหนัก
+EN: What causes most earthquakes?
+   1) the tides  |  2) strong wind  |  3) plates of the crust moving  |  4) heavy rain
+
+### gk-9-0093  (หัวข้อ: light-sound)
+TH: ในวันแดดออก เงาของเราสั้นที่สุดเวลาใด
+   1) เช้าตรู่  |  2) ตอนเย็น  |  3) ตอนพลบค่ำ  |  4) เที่ยงวัน
+EN: On a sunny day, when is your shadow shortest?
+   1) early morning  |  2) in the evening  |  3) at dusk  |  4) at noon
+
+### gk-9-0094  (หัวข้อ: plants)
+TH: ส่วนใดของดอกที่เจริญไปเป็นผล
+   1) รังไข่  |  2) กลีบเลี้ยง  |  3) กลีบดอก  |  4) ก้านดอก
+EN: Which part of a flower grows into the fruit?
+   1) the ovary  |  2) the sepals  |  3) the petals  |  4) the stalk
+
+### gk-9-0095  (หัวข้อ: body)
+TH: อวัยวะใดรับรสอาหาร
+   1) ผิวหนัง  |  2) ลิ้น  |  3) หู  |  4) จมูก
+EN: Which part of the body tastes food?
+   1) the skin  |  2) the tongue  |  3) the ears  |  4) the nose
+
+### gk-9-0096  (หัวข้อ: matter)
+TH: วิธีใดแยกผงเหล็กออกจากทรายได้ง่ายที่สุด
+   1) ใช้แม่เหล็กดูด  |  2) เติมน้ำตาล  |  3) กรองด้วยกระดาษ  |  4) ระเหยด้วยความร้อน
+EN: What is the easiest way to separate iron filings from sand?
+   1) use a magnet  |  2) add sugar  |  3) filter with paper  |  4) heat it
+
+### gk-9-0097  (หัวข้อ: forces)
+TH: แผงโซลาร์เซลล์เปลี่ยนพลังงานใดเป็นไฟฟ้า
+   1) พลังงานแสง  |  2) พลังงานลม  |  3) พลังงานเสียง  |  4) พลังงานน้ำ
+EN: Which kind of energy does a solar panel turn into electricity?
+   1) light energy  |  2) wind energy  |  3) sound energy  |  4) water energy
+
+### gk-9-0098  (หัวข้อ: living-things)
+TH: ปลาหายใจในน้ำด้วยอวัยวะใด
+   1) เกล็ด  |  2) ปอด  |  3) ครีบ  |  4) เหงือก
+EN: What do fish use to breathe under water?
+   1) scales  |  2) lungs  |  3) fins  |  4) gills
+
+### gk-9-0099  (หัวข้อ: plants)
+TH: การถ่ายละอองเรณูคืออะไร
+   1) รากดูดน้ำ  |  2) ใบร่วงจากต้น  |  3) ละอองเรณูไปตกบนเกสรเพศเมีย  |  4) เมล็ดงอกเป็นต้นอ่อน
+EN: What is pollination?
+   1) roots taking in water  |  2) leaves falling off  |  3) pollen landing on the female part  |  4) a seed starting to grow
+
+### gk-9-0100  (หัวข้อ: body)
+TH: อวัยวะใดกรองของเสียออกจากเลือดเป็นปัสสาวะ
+   1) ปอด  |  2) ตับ  |  3) หัวใจ  |  4) ไต
+EN: Which organs clean waste from the blood and make urine?
+   1) the lungs  |  2) the liver  |  3) the heart  |  4) the kidneys
+
+### gk-9-0101  (หัวข้อ: forces)
+TH: แรงเสียดทานคืออะไร
+   1) แรงที่ดึงของลงพื้น  |  2) แรงดูดของแม่เหล็ก  |  3) แรงต้านการเคลื่อนที่ระหว่างผิวสัมผัส  |  4) แรงที่ทำให้ของลอย
+EN: What is friction?
+   1) the force that pulls things down  |  2) the pull of a magnet  |  3) a force that slows things that rub  |  4) a force that makes things float
+
+### gk-9-0102  (หัวข้อ: body)
+TH: อวัยวะใดรับออกซิเจนเข้าสู่เลือดเมื่อเราหายใจ
+   1) ตับ  |  2) ปอด  |  3) ไต  |  4) หัวใจ
+EN: Which organs take oxygen into the blood when we breathe?
+   1) the liver  |  2) the lungs  |  3) the kidneys  |  4) the heart
+
+### gk-9-0103  (หัวข้อ: plants)
+TH: การสังเคราะห์ด้วยแสงเกิดที่ส่วนใดของพืชเป็นหลัก
+   1) ราก  |  2) เมล็ด  |  3) ดอก  |  4) ใบ
+EN: Where does a plant mainly make its food?
+   1) the roots  |  2) the seeds  |  3) the flowers  |  4) the leaves
+
+### gk-9-0104  (หัวข้อ: plants)
+TH: เมล็ดที่มีปีกหรือมีขนฟูเบา ๆ กระจายพันธุ์ด้วยวิธีใด
+   1) สัตว์กิน  |  2) ลม  |  3) ดีดตัวเอง  |  4) น้ำ
+EN: How do seeds with wings or fluffy hairs travel?
+   1) by being eaten  |  2) on the wind  |  3) by popping out  |  4) on water
+
+### gk-9-0105  (หัวข้อ: space)
+TH: โลกโคจรรอบดวงอาทิตย์ครบ 1 รอบใช้เวลาประมาณเท่าใด
+   1) 1 เดือน  |  2) 1 วัน  |  3) 1 ปี  |  4) 10 ปี
+EN: About how long does the Earth take to go once round the Sun?
+   1) 1 month  |  2) 1 day  |  3) 1 year  |  4) 10 years
+
+### gk-9-0106  (หัวข้อ: world)
+TH: พีระมิดแห่งกีซาอยู่ในประเทศใด
+   1) กรีซ  |  2) อียิปต์  |  3) อินเดีย  |  4) เม็กซิโก
+EN: Which country are the pyramids of Giza in?
+   1) Greece  |  2) Egypt  |  3) India  |  4) Mexico
+
+### gk-9-0107  (หัวข้อ: health)
+TH: เด็กวัยประถมควรนอนวันละประมาณกี่ชั่วโมง
+   1) ประมาณ 5–6 ชั่วโมง  |  2) ประมาณ 9–11 ชั่วโมง  |  3) ประมาณ 15–16 ชั่วโมง  |  4) ประมาณ 3–4 ชั่วโมง
+EN: About how many hours should a primary-school child sleep each night?
+   1) about 5–6 hours  |  2) about 9–11 hours  |  3) about 15–16 hours  |  4) about 3–4 hours
+
+### gk-9-0108  (หัวข้อ: health)
+TH: ควรฟอกสบู่ล้างมือนานอย่างน้อยเท่าใด
+   1) 20 วินาที  |  2) 8 วินาที  |  3) 5 วินาที  |  4) 2 วินาที
+EN: How long should you wash your hands with soap, at least?
+   1) 20 seconds  |  2) 8 seconds  |  3) 5 seconds  |  4) 2 seconds
+
+### gk-9-0109  (หัวข้อ: body)
+TH: โปรตีนจากเนื้อ นม ไข่ และถั่ว ช่วยร่างกายอย่างไรเป็นหลัก
+   1) ทำให้มองเห็นในที่มืด  |  2) สร้างและซ่อมแซมร่างกาย  |  3) ทำให้อาหารมีรสหวาน  |  4) ทำให้กระดูกงอได้
+EN: What is the main job of protein from meat, milk, eggs and beans?
+   1) helping us see in the dark  |  2) building and repairing the body  |  3) making food taste sweet  |  4) making bones bend
+
+### gk-9-0110  (หัวข้อ: thailand)
+TH: เกาะที่ใหญ่ที่สุดของประเทศไทยคือเกาะใด
+   1) ภูเก็ต  |  2) เกาะช้าง  |  3) เกาะสมุย  |  4) เกาะเต่า
+EN: Which is the biggest island in Thailand?
+   1) Phuket  |  2) Ko Chang  |  3) Ko Samui  |  4) Ko Tao
+
+### gk-9-0111  (หัวข้อ: light-sound)
+TH: หลอดที่จุ่มในแก้วน้ำดูเหมือนหักเพราะอะไร
+   1) น้ำขยายหลอด  |  2) การสะท้อนของแสง  |  3) การหักเหของแสง  |  4) หลอดงอจริง
+EN: Why does a straw in a glass of water look bent?
+   1) water stretches the straw  |  2) light reflecting  |  3) light bending (refraction)  |  4) the straw really bends
+
+### gk-9-0112  (หัวข้อ: space)
+TH: สุริยุปราคาเกิดขึ้นเมื่อใด
+   1) ดวงอาทิตย์ดับชั่วคราว  |  2) ดวงจันทร์อยู่ระหว่างดวงอาทิตย์กับโลก  |  3) เมฆบังดวงอาทิตย์  |  4) โลกอยู่ระหว่างดวงอาทิตย์กับดวงจันทร์
+EN: When does an eclipse of the Sun happen?
+   1) the Sun switches off  |  2) the Moon is between the Sun and Earth  |  3) clouds cover the Sun  |  4) Earth is between the Sun and the Moon
+
+### gk-9-0113  (หัวข้อ: thailand)
+TH: ดอกไม้ประจำชาติไทยคือดอกอะไร
+   1) ดอกราชพฤกษ์ (ดอกคูน)  |  2) ดอกกุหลาบ  |  3) ดอกบัว  |  4) ดอกมะลิ
+EN: What is the national flower of Thailand?
+   1) the golden shower flower  |  2) the rose  |  3) the lotus  |  4) jasmine
+
+### gk-9-0114  (หัวข้อ: plants)
+TH: ลำต้นของพืชทำหน้าที่อะไรเป็นหลัก
+   1) สร้างเมล็ด  |  2) ดูดน้ำจากดิน  |  3) ล่อแมลง  |  4) ลำเลียงน้ำและอาหาร และชูใบ
+EN: What is the main job of a plant's stem?
+   1) make seeds  |  2) take water from the soil  |  3) attract insects  |  4) carry water and food and hold up leaves
+
+### gk-9-0115  (หัวข้อ: body)
+TH: สารอาหารส่วนใหญ่ถูกดูดซึมเข้าสู่เลือดที่อวัยวะใด
+   1) หลอดอาหาร  |  2) ลำไส้ใหญ่  |  3) ปาก  |  4) ลำไส้เล็ก
+EN: Where does most food pass into the blood?
+   1) the food pipe  |  2) the large intestine  |  3) the mouth  |  4) the small intestine
+
+### gk-9-0116  (หัวข้อ: light-sound)
+TH: เสียงดังหรือเสียงเบาขึ้นอยู่กับอะไร
+   1) สีของวัตถุ  |  2) สั่นเร็วหรือช้า  |  3) เวลาของวัน  |  4) สั่นแรงหรือเบา
+EN: What decides whether a sound is loud or quiet?
+   1) its colour  |  2) how fast it vibrates  |  3) the time of day  |  4) how hard it vibrates
+
+### gk-9-0117  (หัวข้อ: living-things)
+TH: อูฐเก็บอะไรไว้ในหนอก
+   1) ไขมัน  |  2) น้ำ  |  3) อากาศ  |  4) กระดูก
+EN: What does a camel store in its hump?
+   1) fat  |  2) water  |  3) air  |  4) bone
+
+### gk-9-0118  (หัวข้อ: forces)
+TH: แม่เหล็กดูดวัสดุใด
+   1) ทองแดง  |  2) เหล็ก  |  3) อะลูมิเนียม  |  4) ทองคำ
+EN: Which material does a magnet attract?
+   1) copper  |  2) iron  |  3) aluminium  |  4) gold
+
+### gk-9-0119  (หัวข้อ: earth)
+TH: เส้นสมมุติที่แบ่งโลกเป็นซีกโลกเหนือและซีกโลกใต้เรียกว่าอะไร
+   1) เส้นศูนย์สูตร  |  2) เส้นเมริเดียน  |  3) แกนโลก  |  4) เส้นขอบฟ้า
+EN: What is the imaginary line that divides the Earth into north and south halves?
+   1) the Equator  |  2) a meridian  |  3) Earth's axis  |  4) the horizon
+
+### gk-9-0120  (หัวข้อ: world)
+TH: ทะเลทรายร้อนที่ใหญ่ที่สุดในโลกคือทะเลทรายใด
+   1) โกบี  |  2) อาตากามา  |  3) สะฮารา  |  4) คาลาฮารี
+EN: Which is the biggest hot desert in the world?
+   1) the Gobi  |  2) the Atacama  |  3) the Sahara  |  4) the Kalahari
+
+### gk-9-0121  (หัวข้อ: matter)
+TH: การเปลี่ยนแปลงใดเปลี่ยนกลับเป็นของเดิมไม่ได้
+   1) น้ำแข็งละลาย  |  2) น้ำเดือด  |  3) เผากระดาษ  |  4) ช็อกโกแลตละลาย
+EN: Which change cannot be undone?
+   1) ice melting  |  2) water boiling  |  3) burning paper  |  4) chocolate melting
+
+### gk-9-0122  (หัวข้อ: body)
+TH: ฟันน้ำนมมีทั้งหมดกี่ซี่
+   1) 32  |  2) 12  |  3) 20  |  4) 28
+EN: How many milk teeth do children have?
+   (EN choices same as TH)
+
+### gk-9-0123  (หัวข้อ: matter)
+TH: สถานะใดเปลี่ยนรูปร่างตามภาชนะ แต่ปริมาตรเท่าเดิม
+   1) ของแข็ง  |  2) ของเหลว  |  3) แก๊ส  |  4) ไม่มีสถานะใด
+EN: Which state takes the shape of its container but keeps the same volume?
+   1) solid  |  2) liquid  |  3) gas  |  4) none of them
+
+### gk-9-0124  (หัวข้อ: light-sound)
+TH: เราเห็นภาพตัวเองในกระจกเงาเพราะอะไร
+   1) การสะท้อนของแสง  |  2) การดูดกลืนแสง  |  3) การกระจายของเสียง  |  4) การหักเหของแสง
+EN: Why can you see yourself in a mirror?
+   1) light reflecting  |  2) light soaking in  |  3) sound spreading  |  4) light bending
+
+### gk-9-0125  (หัวข้อ: matter)
+TH: น้ำกลายเป็นน้ำแข็ง เรียกว่าอะไร
+   1) การควบแน่น  |  2) การระเหย  |  3) การหลอมเหลว  |  4) การแข็งตัว
+EN: What do we call water turning into ice?
+   1) condensation  |  2) evaporation  |  3) melting  |  4) freezing
+
+### gk-9-0126  (หัวข้อ: light-sound)
+TH: แสงเดินทางเป็นแนวแบบใด
+   1) วงกลม  |  2) ซิกแซก  |  3) เส้นตรง  |  4) เส้นโค้ง
+EN: In what kind of path does light travel?
+   1) a circle  |  2) a zigzag  |  3) a straight line  |  4) a curve
+
+### gk-9-0127  (หัวข้อ: matter)
+TH: วัสดุใดนำความร้อนได้ดี
+   1) โลหะ  |  2) พลาสติก  |  3) ไม้  |  4) ผ้า
+EN: Which material carries heat well?
+   1) metal  |  2) plastic  |  3) wood  |  4) cloth
+
+### gk-9-0128  (หัวข้อ: earth)
+TH: ชั้นในสุดตรงใจกลางโลกเรียกว่าอะไร
+   1) เนื้อโลก  |  2) เปลือกโลก  |  3) ชั้นดิน  |  4) แก่นโลก
+EN: What is the innermost layer at the centre of the Earth called?
+   1) the mantle  |  2) the crust  |  3) the soil  |  4) the core
+
+### gk-9-0129  (หัวข้อ: matter)
+TH: วิธีใดแยกทรายออกจากน้ำได้ง่ายที่สุด
+   1) การใช้แม่เหล็ก  |  2) การแช่แข็ง  |  3) การเขย่า  |  4) การกรอง
+EN: What is the easiest way to separate sand from water?
+   1) using a magnet  |  2) freezing  |  3) shaking  |  4) filtering
+
+### gk-9-0130  (หัวข้อ: earth)
+TH: ดินเกิดจากอะไร
+   1) ลาวาที่ยังร้อน  |  2) ทรายจากอวกาศ  |  3) หินผุพังผสมกับซากพืชซากสัตว์  |  4) ฝนที่แข็งตัว
+EN: What is soil made from?
+   1) hot lava  |  2) sand from space  |  3) worn rock mixed with rotted plants  |  4) frozen rain
+
+### gk-9-0131  (หัวข้อ: electricity)
+TH: วงจรไฟฟ้าอย่างง่ายที่ทำให้หลอดไฟสว่างต้องมีอะไรบ้าง
+   1) สายไฟ ไม้ ยาง  |  2) หลอดไฟ น้ำ แก้ว  |  3) ถ่านไฟฉาย เชือก กระดาษ  |  4) ถ่านไฟฉาย สายไฟ หลอดไฟ
+EN: What do you need for a simple circuit that lights a bulb?
+   1) wires, wood and rubber  |  2) a bulb, water and glass  |  3) a battery, string and paper  |  4) a battery, wires and a bulb
+
+### gk-9-0132  (หัวข้อ: body)
+TH: สารอาหารใดช่วยให้กระดูกและฟันแข็งแรง
+   1) แคลเซียม  |  2) เกลือ  |  3) น้ำตาล  |  4) ไขมัน
+EN: Which nutrient makes bones and teeth strong?
+   1) calcium  |  2) salt  |  3) sugar  |  4) fat
+
+### gk-9-0133  (หัวข้อ: body)
+TH: กล้ามเนื้อทำให้ร่างกายเคลื่อนไหวได้อย่างไร
+   1) สูบลมเข้าออก  |  2) เปลี่ยนเป็นกระดูก  |  3) ดันกระดูกออกไป  |  4) หดและคลายตัวเพื่อดึงกระดูก
+EN: How do muscles move the body?
+   1) by pumping air  |  2) by turning into bone  |  3) by pushing bones away  |  4) by tightening and relaxing to pull bones
+
+### gk-9-0134  (หัวข้อ: health)
+TH: วิตามินซีพบมากในอาหารใด
+   1) ส้มและฝรั่ง  |  2) น้ำมันพืช  |  3) ข้าวขาว  |  4) เนื้อหมู
+EN: Which food is rich in vitamin C?
+   1) oranges and guavas  |  2) cooking oil  |  3) white rice  |  4) pork
+
+### gk-9-0135  (หัวข้อ: earth)
+TH: ทวีปใดเล็กที่สุดในโลก
+   1) แอนตาร์กติกา  |  2) ออสเตรเลีย  |  3) อเมริกาใต้  |  4) ยุโรป
+EN: Which is the smallest continent?
+   1) Antarctica  |  2) Australia  |  3) South America  |  4) Europe
+
+### gk-9-0136  (หัวข้อ: matter)
+TH: ไอน้ำกลายเป็นหยดน้ำ เรียกว่าอะไร
+   1) การระเหย  |  2) การแข็งตัว  |  3) การควบแน่น  |  4) การหลอมเหลว
+EN: What do we call water vapour turning into drops of water?
+   1) evaporation  |  2) freezing  |  3) condensation  |  4) melting
+
+### gk-9-0137  (หัวข้อ: light-sound)
+TH: ตะโกนใส่หน้าผาแล้วได้ยินเสียงตัวเองกลับมา ปรากฏการณ์นี้คืออะไร
+   1) เสียงหักเห  |  2) เสียงระเหย  |  3) เสียงถูกดูดกลืน  |  4) เสียงสะท้อน
+EN: You shout at a cliff and hear your voice come back. What is this?
+   1) sound bending  |  2) sound evaporating  |  3) sound soaking in  |  4) an echo
+
+### gk-9-0138  (หัวข้อ: plants)
+TH: ต้นกระบองเพชรเก็บน้ำไว้ที่ส่วนใด
+   1) หนาม  |  2) ลำต้น  |  3) ดอก  |  4) เมล็ด
+EN: Where does a cactus store its water?
+   1) the spines  |  2) the stem  |  3) the flowers  |  4) the seeds
+
+### gk-9-0139  (หัวข้อ: earth)
+TH: หินหนืดร้อนที่ยังอยู่ใต้เปลือกโลกเรียกว่าอะไร
+   1) แมกมา  |  2) ถ่านหิน  |  3) ลาวา  |  4) โคลน
+EN: What is hot, melted rock called while it is still under the ground?
+   1) magma  |  2) coal  |  3) lava  |  4) mud
+
+### gk-9-0140  (หัวข้อ: space)
+TH: โลกหมุนรอบตัวเองครบ 1 รอบใช้เวลาเท่าใด
+   1) 12 ชั่วโมง  |  2) 24 ชั่วโมง  |  3) 365 วัน  |  4) 7 วัน
+EN: How long does the Earth take to spin round once?
+   1) 12 hours  |  2) 24 hours  |  3) 365 days  |  4) 7 days
+
+### gk-9-0141  (หัวข้อ: body)
+TH: อวัยวะที่ใหญ่ที่สุดของร่างกายคืออะไร
+   1) สมอง  |  2) ตับ  |  3) ปอด  |  4) ผิวหนัง
+EN: What is the biggest organ of the body?
+   1) the brain  |  2) the liver  |  3) the lungs  |  4) the skin
+
+### gk-9-0142  (หัวข้อ: electricity)
+TH: ถูลูกโป่งกับผมแห้ง แล้วลูกโป่งดูดเส้นผมได้ เพราะอะไร
+   1) ผมเปียกจึงเหนียว  |  2) เกิดไฟฟ้าสถิต  |  3) ลมในลูกโป่งดูดไว้  |  4) ลูกโป่งกลายเป็นแม่เหล็ก
+EN: Rub a balloon on dry hair and it pulls the hair up. Why?
+   1) the hair is wet and sticky  |  2) static electricity  |  3) the air inside pulls it  |  4) the balloon becomes a magnet
+
+### gk-9-0143  (หัวข้อ: space)
+TH: โลกเป็นดาวเคราะห์ลำดับที่เท่าใดนับจากดวงอาทิตย์
+   1) ลำดับที่ 1  |  2) ลำดับที่ 3  |  3) ลำดับที่ 4  |  4) ลำดับที่ 2
+EN: Which number planet from the Sun is the Earth?
+   1) the 1st  |  2) the 3rd  |  3) the 4th  |  4) the 2nd
+
+### gk-9-0144  (หัวข้อ: thailand)
+TH: ธงชาติไทยมีกี่สี
+   1) 5 สี  |  2) 4 สี  |  3) 2 สี  |  4) 3 สี
+EN: How many colours are on the Thai flag?
+   1) 5  |  2) 4  |  3) 2  |  4) 3
+
+### gk-9-0145  (หัวข้อ: living-things)
+TH: ห่วงโซ่อาหาร: หญ้า → ตั๊กแตน → กบ → งู สัตว์ตัวใดกินพืช
+   1) กบ  |  2) ตั๊กแตน  |  3) ไม่มีสัตว์ตัวใดเลย  |  4) งู
+EN: Food chain: grass → grasshopper → frog → snake. Which animal eats plants?
+   1) the frog  |  2) the grasshopper  |  3) none of them  |  4) the snake
+
+### gk-9-0146  (หัวข้อ: light-sound)
+TH: เรามองเห็นวัตถุรอบตัวได้เพราะอะไร
+   1) วัตถุทุกชนิดมีแสงในตัว  |  2) ตาปล่อยแสงออกไป  |  3) แสงสะท้อนจากวัตถุเข้าตา  |  4) อากาศพาภาพมา
+EN: How do we see the things around us?
+   1) every object makes its own light  |  2) our eyes send out light  |  3) light bounces off them into our eyes  |  4) air carries the picture
+
+### gk-9-0147  (หัวข้อ: earth)
+TH: เข็มทิศใช้บอกอะไร
+   1) อุณหภูมิ  |  2) น้ำหนัก  |  3) เวลา  |  4) ทิศ
+EN: What does a compass tell you?
+   1) temperature  |  2) weight  |  3) time  |  4) direction
+
+### gk-9-0148  (หัวข้อ: health)
+TH: เมื่อเกิดไฟไหม้ในอาคารและมีควันมาก ควรทำอย่างไร
+   1) วิ่งกลับไปเอาของ  |  2) ซ่อนใต้เตียง  |  3) ก้มตัวต่ำและออกทางหนีไฟ  |  4) ใช้ลิฟต์
+EN: What should you do in a building fire with a lot of smoke?
+   1) go back for your things  |  2) hide under the bed  |  3) stay low and leave by the fire exit  |  4) use the lift
+
+### gk-9-0149  (หัวข้อ: thailand)
+TH: ชายฝั่งด้านตะวันตกของภาคใต้ของไทยติดกับทะเลใด
+   1) ทะเลแดง  |  2) ทะเลอันดามัน  |  3) ทะเลญี่ปุ่น  |  4) อ่าวไทย
+EN: Which sea lies along the west coast of southern Thailand?
+   1) the Red Sea  |  2) the Andaman Sea  |  3) the Sea of Japan  |  4) the Gulf of Thailand
+
+### gk-9-0150  (หัวข้อ: forces)
+TH: พื้นแบบใดมีแรงเสียดทานมากที่สุด
+   1) พื้นขรุขระ  |  2) พื้นน้ำแข็ง  |  3) พื้นกระเบื้องเปียก  |  4) พื้นกระจก
+EN: Which surface has the most friction?
+   1) a rough floor  |  2) ice  |  3) wet tiles  |  4) glass
+
+### gk-9-0151  (หัวข้อ: earth)
+TH: หินที่เกิดจากแมกมาหรือลาวาเย็นตัวเรียกว่าอะไร
+   1) หินแปร  |  2) หินตะกอน  |  3) หินอัคนี  |  4) หินทราย
+EN: What is rock made from cooled magma or lava called?
+   1) metamorphic rock  |  2) sedimentary rock  |  3) igneous rock  |  4) sandstone
+
+### gk-9-0152  (หัวข้อ: weather)
+TH: ลมมรสุมตะวันตกเฉียงใต้นำอะไรมาสู่ประเทศไทย
+   1) พายุทราย  |  2) หิมะ  |  3) ฝน  |  4) ความหนาวเย็น
+EN: What does the south-west monsoon bring to Thailand?
+   1) sandstorms  |  2) snow  |  3) rain  |  4) cold weather
+
+### gk-9-0153  (หัวข้อ: electricity)
+TH: ถ่านไฟฉายเปลี่ยนพลังงานใดเป็นพลังงานไฟฟ้า
+   1) พลังงานแสง  |  2) พลังงานเสียง  |  3) พลังงานเคมี  |  4) พลังงานลม
+EN: Which energy does a battery turn into electricity?
+   1) light energy  |  2) sound energy  |  3) chemical energy  |  4) wind energy
+
+### gk-9-0154  (หัวข้อ: body)
+TH: ประสาทสัมผัสหลักของคนมีกี่อย่าง
+   1) 5  |  2) 3  |  3) 7  |  4) 4
+EN: How many main senses do people have?
+   (EN choices same as TH)
+
+### gk-9-0155  (หัวข้อ: space)
+TH: ดาวฤกษ์ที่อยู่ใกล้โลกที่สุดคือดวงใด
+   1) ดวงอาทิตย์  |  2) ดวงจันทร์  |  3) ดาวศุกร์  |  4) ดาวเหนือ
+EN: Which star is nearest to Earth?
+   1) the Sun  |  2) the Moon  |  3) Venus  |  4) the North Star
+
+### gk-9-0156  (หัวข้อ: forces)
+TH: แหล่งพลังงานใดใช้แล้วหมดไป
+   1) แสงอาทิตย์  |  2) น้ำมัน  |  3) น้ำไหล  |  4) ลม
+EN: Which energy source will run out?
+   1) sunlight  |  2) oil  |  3) flowing water  |  4) wind
+
+### gk-9-0157  (หัวข้อ: plants)
+TH: เมื่อกินแครอต เรากินส่วนใดของพืช
+   1) ลำต้น  |  2) ราก  |  3) ผล  |  4) ใบ
+EN: Which part of the plant do we eat when we eat a carrot?
+   1) the stem  |  2) the root  |  3) the fruit  |  4) the leaf
+
+### gk-9-0158  (หัวข้อ: forces)
+TH: ทางลาดช่วยให้ขนของหนักขึ้นที่สูงได้อย่างไร
+   1) ทำให้แรงโน้มถ่วงหายไป  |  2) ใช้แรงน้อยลง แต่ต้องเคลื่อนไกลขึ้น  |  3) ใช้แรงมากขึ้นและไกลขึ้น  |  4) ทำให้ของเบาลงจริง ๆ
+EN: How does a ramp help to lift a heavy load?
+   1) it removes gravity  |  2) less force, but a longer distance  |  3) more force and a longer distance  |  4) it makes the load truly lighter
+
+### gk-9-0159  (หัวข้อ: health)
+TH: ข้ามถนนอย่างไรจึงปลอดภัย
+   1) ข้ามทางม้าลายและมองรถทั้งสองทาง  |  2) ข้ามจากหลังรถที่จอดอยู่  |  3) วิ่งข้ามเร็ว ๆ  |  4) ดูโทรศัพท์ขณะข้าม
+EN: What is the safe way to cross a road?
+   1) use the crossing and look both ways  |  2) cross from behind a parked car  |  3) run across quickly  |  4) look at your phone while crossing
+
+### gk-9-0160  (หัวข้อ: matter)
+TH: เมื่อเกลือละลายในน้ำจนมองไม่เห็น เราเรียกของผสมนี้ว่าอะไร
+   1) ตะกอน  |  2) แก๊ส  |  3) ของแข็ง  |  4) สารละลาย
+EN: When salt dissolves in water until you cannot see it, what is the mixture called?
+   1) a sediment  |  2) a gas  |  3) a solid  |  4) a solution
+
+### gk-9-0161  (หัวข้อ: matter)
+TH: สิ่งใดไม่ละลายในน้ำ
+   1) ทราย  |  2) น้ำตาล  |  3) น้ำผึ้ง  |  4) เกลือ
+EN: Which of these does not dissolve in water?
+   1) sand  |  2) sugar  |  3) honey  |  4) salt
+
+### gk-9-0162  (หัวข้อ: world)
+TH: ประเทศใดมีพรมแดนติดกับประเทศไทย
+   1) เวียดนาม  |  2) อินโดนีเซีย  |  3) ฟิลิปปินส์  |  4) ลาว
+EN: Which country shares a border with Thailand?
+   1) Vietnam  |  2) Indonesia  |  3) the Philippines  |  4) Laos
+
+### gk-9-0163  (หัวข้อ: health)
+TH: ร่างกายสร้างวิตามินใดได้เองเมื่อผิวหนังได้รับแสงแดด
+   1) วิตามินซี  |  2) วิตามินบี  |  3) วิตามินเอ  |  4) วิตามินดี
+EN: Which vitamin can the body make when sunlight falls on the skin?
+   1) vitamin C  |  2) vitamin B  |  3) vitamin A  |  4) vitamin D
+
+### gk-9-0164  (หัวข้อ: light-sound)
+TH: เสียงเดินทางผ่านสิ่งใดไม่ได้
+   1) สุญญากาศ  |  2) น้ำ  |  3) อากาศ  |  4) เหล็ก
+EN: What can sound not travel through?
+   1) empty space (a vacuum)  |  2) water  |  3) air  |  4) steel
+
+### gk-9-0165  (หัวข้อ: plants)
+TH: สัตว์ใดช่วยถ่ายละอองเรณูให้ดอกไม้
+   1) ปลา  |  2) ไส้เดือน  |  3) ผึ้ง  |  4) กบ
+EN: Which animal helps to pollinate flowers?
+   1) a fish  |  2) an earthworm  |  3) a bee  |  4) a frog

@@ -1,0 +1,1022 @@
+# ชุดตรวจ: ภาษาไทย · เด็กอายุ 7 ปี (ป.1–ป.2) · 170 ข้อ · ไฟล์ q-thai-7.json
+# ตัวเลือกนับ 1–4 · ไม่มีเฉลยในไฟล์นี้ (ให้แก้โจทย์เองก่อน)
+
+### th-0171  (หัวข้อ: alphabet)
+TH: "อ่าง" 🛁 คือตัวอักษรตัวไหน
+   1) ฬ  |  2) อ  |  3) ษ  |  4) ห
+EN: Which Thai letter goes with "อ่าง" 🛁?
+   (EN choices same as TH)
+
+### th-0172  (หัวข้อ: first-consonant)
+TH: "ไฟ" 🔥 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ท  |  2) ภ  |  3) ฟ  |  4) ด
+EN: What is the first consonant of "ไฟ" 🔥?
+   (EN choices same as TH)
+
+### th-0173  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "ง่าย" คือคำไหน
+   1) หลับ  |  2) ว่าง  |  3) ยาก  |  4) ไกล
+EN: Which Thai word is the opposite of "ง่าย"?
+   (EN choices same as TH)
+
+### th-0174  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่อาหารหรือผลไม้
+   1) มะพร้าว  |  2) สับปะรด  |  3) ขนมปัง  |  4) ภูเขา
+EN: Which word is NOT food?
+   (EN choices same as TH)
+
+### th-0175  (หัวข้อ: meaning)
+TH: "มะพร้าว" ภาษาอังกฤษคือคำไหน
+   1) orange  |  2) corn  |  3) pineapple  |  4) coconut
+EN: What does the Thai word "มะพร้าว" mean?
+   (EN choices same as TH)
+
+### th-0176  (หัวข้อ: rhymes)
+TH: คำไหนคล้องจองกับ "มี"
+   1) ปลา  |  2) ร้อง  |  3) ดี  |  4) ขา
+EN: Which Thai word rhymes with "มี"?
+   (EN choices same as TH)
+
+### th-0177  (หัวข้อ: alphabet)
+TH: "ทหาร" 💂 คือตัวอักษรตัวไหน
+   1) ท  |  2) ธ  |  3) ต  |  4) ป
+EN: Which Thai letter goes with "ทหาร" 💂?
+   (EN choices same as TH)
+
+### th-0178  (หัวข้อ: first-consonant)
+TH: "เต่า" 🐢 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ฏ  |  2) ต  |  3) ฒ  |  4) ย
+EN: What is the first consonant of "เต่า" 🐢?
+   (EN choices same as TH)
+
+### th-0179  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "เต็ม" คือคำไหน
+   1) ว่าง  |  2) ชนะ  |  3) นิ่ม  |  4) สกปรก
+EN: Which Thai word is the opposite of "เต็ม"?
+   (EN choices same as TH)
+
+### th-0180  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่สัตว์
+   1) ช้าง  |  2) ผึ้ง  |  3) แตงโม  |  4) เสือ
+EN: Which word is NOT an animal?
+   (EN choices same as TH)
+
+### th-0181  (หัวข้อ: meaning)
+TH: "หนังสือ" ภาษาอังกฤษคือคำไหน
+   1) bed  |  2) key  |  3) hat  |  4) book
+EN: What does the Thai word "หนังสือ" mean?
+   (EN choices same as TH)
+
+### th-0182  (หัวข้อ: rhymes)
+TH: คำไหนคล้องจองกับ "ขัน"
+   1) รู  |  2) ใบ  |  3) ฟัน  |  4) เสือ
+EN: Which Thai word rhymes with "ขัน"?
+   (EN choices same as TH)
+
+### th-0183  (หัวข้อ: alphabet)
+TH: "เรือ" 🚣 คือตัวอักษรตัวไหน
+   1) ม  |  2) ว  |  3) ฟ  |  4) ร
+EN: Which Thai letter goes with "เรือ" 🚣?
+   (EN choices same as TH)
+
+### th-0184  (หัวข้อ: first-consonant)
+TH: "แมว" 🐱 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ม  |  2) ณ  |  3) ธ  |  4) ข
+EN: What is the first consonant of "แมว" 🐱?
+   (EN choices same as TH)
+
+### th-0185  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "แข็ง" คือคำไหน
+   1) กว้าง  |  2) นิ่ม  |  3) หัวเราะ  |  4) ง่าย
+EN: Which Thai word is the opposite of "แข็ง"?
+   (EN choices same as TH)
+
+### th-0186  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่ยานพาหนะ
+   1) รถบัส  |  2) เรือ  |  3) จมูก  |  4) จักรยาน
+EN: Which word is NOT a vehicle?
+   (EN choices same as TH)
+
+### th-0187  (หัวข้อ: meaning)
+TH: "ไก่" ภาษาอังกฤษคือคำไหน
+   1) bird  |  2) turtle  |  3) cat  |  4) chicken
+EN: What does the Thai word "ไก่" mean?
+   (EN choices same as TH)
+
+### th-0188  (หัวข้อ: rhymes)
+TH: คำไหนคล้องจองกับ "ไฟ"
+   1) ปลา  |  2) หู  |  3) เสือ  |  4) ใบ
+EN: Which Thai word rhymes with "ไฟ"?
+   (EN choices same as TH)
+
+### th-0189  (หัวข้อ: alphabet)
+TH: "เต่า" 🐢 คือตัวอักษรตัวไหน
+   1) ต  |  2) ฒ  |  3) ด  |  4) ธ
+EN: Which Thai letter goes with "เต่า" 🐢?
+   (EN choices same as TH)
+
+### th-0190  (หัวข้อ: first-consonant)
+TH: "เมฆ" ☁️ มีพยัญชนะตัวแรกคือตัวไหน
+   1) ฐ  |  2) ณ  |  3) ม  |  4) ฎ
+EN: What is the first consonant of "เมฆ" ☁️?
+   (EN choices same as TH)
+
+### th-0191  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "เข้า" คือคำไหน
+   1) รับ  |  2) กว้าง  |  3) ออก  |  4) เล็ก
+EN: Which Thai word is the opposite of "เข้า"?
+   (EN choices same as TH)
+
+### th-0192  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่เข้าพวก
+   1) ภูเขา  |  2) ดวงจันทร์  |  3) ดวงอาทิตย์  |  4) เต่า
+EN: Which word does not belong?
+   (EN choices same as TH)
+
+### th-0193  (หัวข้อ: meaning)
+TH: "รุ้ง" ภาษาอังกฤษคือคำไหน
+   1) star  |  2) sea  |  3) mountain  |  4) rainbow
+EN: What does the Thai word "รุ้ง" mean?
+   (EN choices same as TH)
+
+### th-0194  (หัวข้อ: rhymes)
+TH: คำไหนคล้องจองกับ "ดี"
+   1) ของ  |  2) ทอง  |  3) ปี  |  4) ไข่
+EN: Which Thai word rhymes with "ดี"?
+   (EN choices same as TH)
+
+### th-0195  (หัวข้อ: alphabet)
+TH: "ปลา" 🐟 คือตัวอักษรตัวไหน
+   1) น  |  2) ป  |  3) ธ  |  4) ท
+EN: Which Thai letter goes with "ปลา" 🐟?
+   (EN choices same as TH)
+
+### th-0196  (หัวข้อ: first-consonant)
+TH: "ไก่" 🐔 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ก  |  2) ม  |  3) ฒ  |  4) ฮ
+EN: What is the first consonant of "ไก่" 🐔?
+   (EN choices same as TH)
+
+### th-0197  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "ใกล้" คือคำไหน
+   1) กลางวัน  |  2) ไกล  |  3) สว่าง  |  4) กว้าง
+EN: Which Thai word is the opposite of "ใกล้"?
+   (EN choices same as TH)
+
+### th-0198  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่ยานพาหนะ
+   1) รถ  |  2) รถบัส  |  3) จักรยาน  |  4) เป็ด
+EN: Which word is NOT a vehicle?
+   (EN choices same as TH)
+
+### th-0199  (หัวข้อ: meaning)
+TH: "สับปะรด" ภาษาอังกฤษคือคำไหน
+   1) pineapple  |  2) rice  |  3) orange  |  4) corn
+EN: What does the Thai word "สับปะรด" mean?
+   (EN choices same as TH)
+
+### th-0200  (หัวข้อ: rhymes)
+TH: คำไหนคล้องจองกับ "เสือ"
+   1) วัน  |  2) ดี  |  3) มี  |  4) เรือ
+EN: Which Thai word rhymes with "เสือ"?
+   (EN choices same as TH)
+
+### th-0201  (หัวข้อ: alphabet)
+TH: "แหวน" 💍 คือตัวอักษรตัวไหน
+   1) ห  |  2) ส  |  3) ย  |  4) ว
+EN: Which Thai letter goes with "แหวน" 💍?
+   (EN choices same as TH)
+
+### th-0202  (หัวข้อ: first-consonant)
+TH: "เป็ด" 🦆 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ฆ  |  2) อ  |  3) ม  |  4) ป
+EN: What is the first consonant of "เป็ด" 🦆?
+   (EN choices same as TH)
+
+### th-0203  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "มาก" คือคำไหน
+   1) ซ้าย  |  2) ร้องไห้  |  3) น้อย  |  4) ปิด
+EN: Which Thai word is the opposite of "มาก"?
+   (EN choices same as TH)
+
+### th-0204  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่สัตว์
+   1) ทะเล  |  2) นก  |  3) ปลา  |  4) ผึ้ง
+EN: Which word is NOT an animal?
+   (EN choices same as TH)
+
+### th-0205  (หัวข้อ: meaning)
+TH: "วัว" ภาษาอังกฤษคือคำไหน
+   1) dog  |  2) cow  |  3) tiger  |  4) bird
+EN: What does the Thai word "วัว" mean?
+   (EN choices same as TH)
+
+### th-0206  (หัวข้อ: rhymes)
+TH: คำไหนคล้องจองกับ "รู"
+   1) ดู  |  2) มี  |  3) ไก่  |  4) น้อง
+EN: Which Thai word rhymes with "รู"?
+   (EN choices same as TH)
+
+### th-0207  (หัวข้อ: alphabet)
+TH: "ถุง" 🛍️ คือตัวอักษรตัวไหน
+   1) ธ  |  2) บ  |  3) น  |  4) ถ
+EN: Which Thai letter goes with "ถุง" 🛍️?
+   (EN choices same as TH)
+
+### th-0208  (หัวข้อ: first-consonant)
+TH: "เตียง" 🛏️ มีพยัญชนะตัวแรกคือตัวไหน
+   1) ค  |  2) ห  |  3) ศ  |  4) ต
+EN: What is the first consonant of "เตียง" 🛏️?
+   (EN choices same as TH)
+
+### th-0209  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "ให้" คือคำไหน
+   1) รับ  |  2) ตื่น  |  3) ใหญ่  |  4) ชนะ
+EN: Which Thai word is the opposite of "ให้"?
+   (EN choices same as TH)
+
+### th-0210  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่ส่วนของร่างกาย
+   1) ฟัน  |  2) จมูก  |  3) มือ  |  4) แมว
+EN: Which word is NOT a body part?
+   (EN choices same as TH)
+
+### th-0211  (หัวข้อ: meaning)
+TH: "มือ" ภาษาอังกฤษคือคำไหน
+   1) foot  |  2) tooth  |  3) hand  |  4) mouth
+EN: What does the Thai word "มือ" mean?
+   (EN choices same as TH)
+
+### th-0212  (หัวข้อ: rhymes)
+TH: คำไหนคล้องจองกับ "ทอง"
+   1) ขัน  |  2) ใบ  |  3) ฝา  |  4) ของ
+EN: Which Thai word rhymes with "ทอง"?
+   (EN choices same as TH)
+
+### th-0213  (หัวข้อ: alphabet)
+TH: "นกฮูก" 🦉 คือตัวอักษรตัวไหน
+   1) ส  |  2) อ  |  3) ฮ  |  4) ฬ
+EN: Which Thai letter goes with "นกฮูก" 🦉?
+   (EN choices same as TH)
+
+### th-0214  (หัวข้อ: first-consonant)
+TH: "เสือ" 🐯 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ฑ  |  2) ส  |  3) ต  |  4) ญ
+EN: What is the first consonant of "เสือ" 🐯?
+   (EN choices same as TH)
+
+### th-0215  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "สว่าง" คือคำไหน
+   1) หัวเราะ  |  2) มืด  |  3) เร็ว  |  4) ยาว
+EN: Which Thai word is the opposite of "สว่าง"?
+   (EN choices same as TH)
+
+### th-0216  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่ส่วนของร่างกาย
+   1) ตา  |  2) หมา  |  3) หู  |  4) มือ
+EN: Which word is NOT a body part?
+   (EN choices same as TH)
+
+### th-0217  (หัวข้อ: meaning)
+TH: "เตียง" ภาษาอังกฤษคือคำไหน
+   1) house  |  2) bed  |  3) bag  |  4) hat
+EN: What does the Thai word "เตียง" mean?
+   (EN choices same as TH)
+
+### th-0218  (หัวข้อ: rhymes)
+TH: คำไหนคล้องจองกับ "สอง"
+   1) วัน  |  2) ไก่  |  3) ฝา  |  4) ร้อง
+EN: Which Thai word rhymes with "สอง"?
+   (EN choices same as TH)
+
+### th-0219  (หัวข้อ: alphabet)
+TH: "ยักษ์" คือตัวอักษรตัวไหน
+   1) ล  |  2) ฟ  |  3) ศ  |  4) ย
+EN: Which Thai letter goes with "ยักษ์" ?
+   (EN choices same as TH)
+
+### th-0220  (หัวข้อ: first-consonant)
+TH: "เครื่องบิน" ✈️ มีพยัญชนะตัวแรกคือตัวไหน
+   1) ค  |  2) ป  |  3) พ  |  4) ม
+EN: What is the first consonant of "เครื่องบิน" ✈️?
+   (EN choices same as TH)
+
+### th-0221  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "ใหญ่" คือคำไหน
+   1) ถูก  |  2) ลง  |  3) แข็ง  |  4) เล็ก
+EN: Which Thai word is the opposite of "ใหญ่"?
+   (EN choices same as TH)
+
+### th-0222  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่อาหารหรือผลไม้
+   1) ข้าว  |  2) แตงโม  |  3) ลิง  |  4) ข้าวโพด
+EN: Which word is NOT food?
+   (EN choices same as TH)
+
+### th-0223  (หัวข้อ: meaning)
+TH: "ขนมปัง" ภาษาอังกฤษคือคำไหน
+   1) coconut  |  2) egg  |  3) bread  |  4) pineapple
+EN: What does the Thai word "ขนมปัง" mean?
+   (EN choices same as TH)
+
+### th-0224  (หัวข้อ: rhymes)
+TH: คำไหนคล้องจองกับ "ไป"
+   1) ใจ  |  2) ปลา  |  3) ผี  |  4) ร้อง
+EN: Which Thai word rhymes with "ไป"?
+   (EN choices same as TH)
+
+### th-0225  (หัวข้อ: alphabet)
+TH: "ฝา" 🫙 คือตัวอักษรตัวไหน
+   1) น  |  2) ม  |  3) ฝ  |  4) ฟ
+EN: Which Thai letter goes with "ฝา" 🫙?
+   (EN choices same as TH)
+
+### th-0226  (หัวข้อ: first-consonant)
+TH: "ไข่" 🥚 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ข  |  2) ษ  |  3) ต  |  4) ก
+EN: What is the first consonant of "ไข่" 🥚?
+   (EN choices same as TH)
+
+### th-0227  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "ร้องไห้" คือคำไหน
+   1) หัวเราะ  |  2) เต็ม  |  3) กลางคืน  |  4) ลง
+EN: Which Thai word is the opposite of "ร้องไห้"?
+   (EN choices same as TH)
+
+### th-0228  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่ยานพาหนะ
+   1) จักรยาน  |  2) รถบัส  |  3) รถไฟ  |  4) มด
+EN: Which word is NOT a vehicle?
+   (EN choices same as TH)
+
+### th-0229  (หัวข้อ: meaning)
+TH: "ภูเขา" ภาษาอังกฤษคือคำไหน
+   1) moon  |  2) sun  |  3) mountain  |  4) rock
+EN: What does the Thai word "ภูเขา" mean?
+   (EN choices same as TH)
+
+### th-0230  (หัวข้อ: rhymes)
+TH: คำไหนคล้องจองกับ "งู"
+   1) หู  |  2) สี  |  3) ไฟ  |  4) สอง
+EN: Which Thai word rhymes with "งู"?
+   (EN choices same as TH)
+
+### th-0231  (หัวข้อ: alphabet)
+TH: "ผึ้ง" 🐝 คือตัวอักษรตัวไหน
+   1) ฝ  |  2) ป  |  3) ธ  |  4) ผ
+EN: Which Thai letter goes with "ผึ้ง" 🐝?
+   (EN choices same as TH)
+
+### th-0232  (หัวข้อ: first-consonant)
+TH: "เท้า" 🦶 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ฌ  |  2) ฉ  |  3) ท  |  4) ฎ
+EN: What is the first consonant of "เท้า" 🦶?
+   (EN choices same as TH)
+
+### th-0233  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "ถูก" คือคำไหน
+   1) ง่าย  |  2) ผิด  |  3) ใกล้  |  4) ซ้าย
+EN: Which Thai word is the opposite of "ถูก"?
+   (EN choices same as TH)
+
+### th-0234  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่ยานพาหนะ
+   1) รถ  |  2) ตา  |  3) จักรยาน  |  4) เรือ
+EN: Which word is NOT a vehicle?
+   (EN choices same as TH)
+
+### th-0235  (หัวข้อ: meaning)
+TH: "นม" ภาษาอังกฤษคือคำไหน
+   1) milk  |  2) rice  |  3) pineapple  |  4) orange
+EN: What does the Thai word "นม" mean?
+   (EN choices same as TH)
+
+### th-0236  (หัวข้อ: rhymes)
+TH: คำไหนคล้องจองกับ "ฝา"
+   1) นา  |  2) ฟัน  |  3) มี  |  4) ทอง
+EN: Which Thai word rhymes with "ฝา"?
+   (EN choices same as TH)
+
+### th-0237  (หัวข้อ: alphabet)
+TH: "หนู" 🐭 คือตัวอักษรตัวไหน
+   1) ป  |  2) ต  |  3) น  |  4) ผ
+EN: Which Thai letter goes with "หนู" 🐭?
+   (EN choices same as TH)
+
+### th-0238  (หัวข้อ: first-consonant)
+TH: "แตงโม" 🍉 มีพยัญชนะตัวแรกคือตัวไหน
+   1) ช  |  2) ต  |  3) ข  |  4) จ
+EN: What is the first consonant of "แตงโม" 🍉?
+   (EN choices same as TH)
+
+### th-0239  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "หนัก" คือคำไหน
+   1) น้อย  |  2) อ้วน  |  3) เบา  |  4) หน้า
+EN: Which Thai word is the opposite of "หนัก"?
+   (EN choices same as TH)
+
+### th-0240  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่เข้าพวก
+   1) ดอกไม้  |  2) รุ้ง  |  3) หู  |  4) ดาว
+EN: Which word does not belong?
+   (EN choices same as TH)
+
+### th-0241  (หัวข้อ: meaning)
+TH: "องุ่น" ภาษาอังกฤษคือคำไหน
+   1) grapes  |  2) banana  |  3) rice  |  4) orange
+EN: What does the Thai word "องุ่น" mean?
+   (EN choices same as TH)
+
+### th-0242  (หัวข้อ: rhymes)
+TH: คำไหนคล้องจองกับ "ฟัน"
+   1) ตา  |  2) ขา  |  3) วัน  |  4) งู
+EN: Which Thai word rhymes with "ฟัน"?
+   (EN choices same as TH)
+
+### th-0243  (หัวข้อ: alphabet)
+TH: "เสือ" 🐯 คือตัวอักษรตัวไหน
+   1) ว  |  2) ส  |  3) ฮ  |  4) อ
+EN: Which Thai letter goes with "เสือ" 🐯?
+   (EN choices same as TH)
+
+### th-0244  (หัวข้อ: first-consonant)
+TH: "เรือ" ⛵ มีพยัญชนะตัวแรกคือตัวไหน
+   1) ผ  |  2) ร  |  3) พ  |  4) ฝ
+EN: What is the first consonant of "เรือ" ⛵?
+   (EN choices same as TH)
+
+### th-0245  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "บน" คือคำไหน
+   1) ดำ  |  2) ล่าง  |  3) ไกล  |  4) แข็ง
+EN: Which Thai word is the opposite of "บน"?
+   (EN choices same as TH)
+
+### th-0246  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่สัตว์
+   1) หู  |  2) งู  |  3) เสือ  |  4) หมา
+EN: Which word is NOT an animal?
+   (EN choices same as TH)
+
+### th-0247  (หัวข้อ: meaning)
+TH: "ฟัน" ภาษาอังกฤษคือคำไหน
+   1) ear  |  2) hand  |  3) nose  |  4) tooth
+EN: What does the Thai word "ฟัน" mean?
+   (EN choices same as TH)
+
+### th-0248  (หัวข้อ: rhymes)
+TH: คำไหนคล้องจองกับ "เกลือ"
+   1) ขา  |  2) ปู  |  3) ของ  |  4) เหนือ
+EN: Which Thai word rhymes with "เกลือ"?
+   (EN choices same as TH)
+
+### th-0249  (หัวข้อ: alphabet)
+TH: "ฟัน" 🦷 คือตัวอักษรตัวไหน
+   1) ฝ  |  2) ภ  |  3) ย  |  4) ฟ
+EN: Which Thai letter goes with "ฟัน" 🦷?
+   (EN choices same as TH)
+
+### th-0250  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "ชนะ" คือคำไหน
+   1) แพ้  |  2) ร้อน  |  3) แคบ  |  4) หัวเราะ
+EN: Which Thai word is the opposite of "ชนะ"?
+   (EN choices same as TH)
+
+### th-0251  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่ยานพาหนะ
+   1) เครื่องบิน  |  2) รถบัส  |  3) รถ  |  4) แมว
+EN: Which word is NOT a vehicle?
+   (EN choices same as TH)
+
+### th-0252  (หัวข้อ: meaning)
+TH: "รองเท้า" ภาษาอังกฤษคือคำไหน
+   1) shoes  |  2) door  |  3) clock  |  4) crown
+EN: What does the Thai word "รองเท้า" mean?
+   (EN choices same as TH)
+
+### th-0253  (หัวข้อ: rhymes)
+TH: คำไหนคล้องจองกับ "ตา"
+   1) รู  |  2) ไก่  |  3) ขัน  |  4) ขา
+EN: Which Thai word rhymes with "ตา"?
+   (EN choices same as TH)
+
+### th-0254  (หัวข้อ: alphabet)
+TH: "ศาลา" 🛖 คือตัวอักษรตัวไหน
+   1) ร  |  2) ว  |  3) ศ  |  4) ฬ
+EN: Which Thai letter goes with "ศาลา" 🛖?
+   (EN choices same as TH)
+
+### th-0255  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "หน้า" คือคำไหน
+   1) หลัง  |  2) แข็ง  |  3) ขาว  |  4) ไกล
+EN: Which Thai word is the opposite of "หน้า"?
+   (EN choices same as TH)
+
+### th-0256  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่อาหารหรือผลไม้
+   1) ขนมปัง  |  2) ผึ้ง  |  3) ข้าว  |  4) มะม่วง
+EN: Which word is NOT food?
+   (EN choices same as TH)
+
+### th-0257  (หัวข้อ: meaning)
+TH: "เป็ด" ภาษาอังกฤษคือคำไหน
+   1) butterfly  |  2) cow  |  3) duck  |  4) tiger
+EN: What does the Thai word "เป็ด" mean?
+   (EN choices same as TH)
+
+### th-0258  (หัวข้อ: rhymes)
+TH: คำไหนคล้องจองกับ "กัน"
+   1) ไป  |  2) ร้อง  |  3) มัน  |  4) เสือ
+EN: Which Thai word rhymes with "กัน"?
+   (EN choices same as TH)
+
+### th-0259  (หัวข้อ: alphabet)
+TH: "ใบไม้" 🍃 คือตัวอักษรตัวไหน
+   1) ฝ  |  2) พ  |  3) ท  |  4) บ
+EN: Which Thai letter goes with "ใบไม้" 🍃?
+   (EN choices same as TH)
+
+### th-0260  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "หลับ" คือคำไหน
+   1) ตื่น  |  2) ซ้าย  |  3) ให้  |  4) เก่า
+EN: Which Thai word is the opposite of "หลับ"?
+   (EN choices same as TH)
+
+### th-0261  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่สัตว์
+   1) ลิง  |  2) กระต่าย  |  3) ผึ้ง  |  4) นม
+EN: Which word is NOT an animal?
+   (EN choices same as TH)
+
+### th-0262  (หัวข้อ: meaning)
+TH: "แตงโม" ภาษาอังกฤษคือคำไหน
+   1) watermelon  |  2) egg  |  3) banana  |  4) pineapple
+EN: What does the Thai word "แตงโม" mean?
+   (EN choices same as TH)
+
+### th-0263  (หัวข้อ: rhymes)
+TH: คำไหนคล้องจองกับ "ยา"
+   1) ฟัน  |  2) ปู  |  3) ตา  |  4) ของ
+EN: Which Thai word rhymes with "ยา"?
+   (EN choices same as TH)
+
+### th-0264  (หัวข้อ: alphabet)
+TH: "พาน" 🏺 คือตัวอักษรตัวไหน
+   1) ฝ  |  2) พ  |  3) ป  |  4) ม
+EN: Which Thai letter goes with "พาน" 🏺?
+   (EN choices same as TH)
+
+### th-0265  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "เปิด" คือคำไหน
+   1) ร้องไห้  |  2) ช้า  |  3) ขึ้น  |  4) ปิด
+EN: Which Thai word is the opposite of "เปิด"?
+   (EN choices same as TH)
+
+### th-0266  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่ยานพาหนะ
+   1) เรือ  |  2) จักรยาน  |  3) รถบัส  |  4) รุ้ง
+EN: Which word is NOT a vehicle?
+   (EN choices same as TH)
+
+### th-0267  (หัวข้อ: meaning)
+TH: "เรือ" ภาษาอังกฤษคือคำไหน
+   1) boat  |  2) bicycle  |  3) bus  |  4) train
+EN: What does the Thai word "เรือ" mean?
+   (EN choices same as TH)
+
+### th-0268  (หัวข้อ: rhymes)
+TH: คำไหนคล้องจองกับ "หมา"
+   1) หู  |  2) ปลา  |  3) ไก่  |  4) ไป
+EN: Which Thai word rhymes with "หมา"?
+   (EN choices same as TH)
+
+### th-0269  (หัวข้อ: alphabet)
+TH: "ฤๅษี" 🧙 คือตัวอักษรตัวไหน
+   1) ฬ  |  2) ษ  |  3) อ  |  4) ร
+EN: Which Thai letter goes with "ฤๅษี" 🧙?
+   (EN choices same as TH)
+
+### th-0270  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "ใหม่" คือคำไหน
+   1) มาก  |  2) เล็ก  |  3) เก่า  |  4) หน้า
+EN: Which Thai word is the opposite of "ใหม่"?
+   (EN choices same as TH)
+
+### th-0271  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่ส่วนของร่างกาย
+   1) เท้า  |  2) ปาก  |  3) ส้ม  |  4) หู
+EN: Which word is NOT a body part?
+   (EN choices same as TH)
+
+### th-0272  (หัวข้อ: meaning)
+TH: "รถบัส" ภาษาอังกฤษคือคำไหน
+   1) bicycle  |  2) boat  |  3) plane  |  4) bus
+EN: What does the Thai word "รถบัส" mean?
+   (EN choices same as TH)
+
+### th-0273  (หัวข้อ: rhymes)
+TH: คำไหนคล้องจองกับ "ไก่"
+   1) สอง  |  2) ร้อง  |  3) ไข่  |  4) ปี
+EN: Which Thai word rhymes with "ไก่"?
+   (EN choices same as TH)
+
+### th-0274  (หัวข้อ: alphabet)
+TH: "ม้า" 🐴 คือตัวอักษรตัวไหน
+   1) ม  |  2) พ  |  3) ร  |  4) ว
+EN: Which Thai letter goes with "ม้า" 🐴?
+   (EN choices same as TH)
+
+### th-0275  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "ดีใจ" คือคำไหน
+   1) เสียใจ  |  2) กว้าง  |  3) ออก  |  4) หลัง
+EN: Which Thai word is the opposite of "ดีใจ"?
+   (EN choices same as TH)
+
+### th-0276  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่อาหารหรือผลไม้
+   1) แมว  |  2) แตงโม  |  3) ขนมปัง  |  4) ข้าว
+EN: Which word is NOT food?
+   (EN choices same as TH)
+
+### th-0277  (หัวข้อ: meaning)
+TH: "ลิง" ภาษาอังกฤษคือคำไหน
+   1) elephant  |  2) monkey  |  3) bee  |  4) dog
+EN: What does the Thai word "ลิง" mean?
+   (EN choices same as TH)
+
+### th-0278  (หัวข้อ: rhymes)
+TH: คำไหนคล้องจองกับ "น้อง"
+   1) ฝา  |  2) ผี  |  3) หมู  |  4) ทอง
+EN: Which Thai word rhymes with "น้อง"?
+   (EN choices same as TH)
+
+### th-0279  (หัวข้อ: alphabet)
+TH: "หีบ" 🧰 คือตัวอักษรตัวไหน
+   1) ฮ  |  2) ห  |  3) ส  |  4) ศ
+EN: Which Thai letter goes with "หีบ" 🧰?
+   (EN choices same as TH)
+
+### th-0280  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "ขึ้น" คือคำไหน
+   1) ลง  |  2) ขาว  |  3) กลางวัน  |  4) เล็ก
+EN: Which Thai word is the opposite of "ขึ้น"?
+   (EN choices same as TH)
+
+### th-0281  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่ส่วนของร่างกาย
+   1) จักรยาน  |  2) มือ  |  3) ตา  |  4) จมูก
+EN: Which word is NOT a body part?
+   (EN choices same as TH)
+
+### th-0282  (หัวข้อ: meaning)
+TH: "รถไฟ" ภาษาอังกฤษคือคำไหน
+   1) plane  |  2) train  |  3) boat  |  4) bus
+EN: What does the Thai word "รถไฟ" mean?
+   (EN choices same as TH)
+
+### th-0283  (หัวข้อ: rhymes)
+TH: คำไหนคล้องจองกับ "หมู"
+   1) ปู  |  2) ของ  |  3) กัน  |  4) สอง
+EN: Which Thai word rhymes with "หมู"?
+   (EN choices same as TH)
+
+### th-0284  (หัวข้อ: alphabet)
+TH: "สำเภา" ⛵ คือตัวอักษรตัวไหน
+   1) ม  |  2) ภ  |  3) ล  |  4) ผ
+EN: Which Thai letter goes with "สำเภา" ⛵?
+   (EN choices same as TH)
+
+### th-0285  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "กว้าง" คือคำไหน
+   1) ถูก  |  2) ขึ้น  |  3) ดำ  |  4) แคบ
+EN: Which Thai word is the opposite of "กว้าง"?
+   (EN choices same as TH)
+
+### th-0286  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่สัตว์
+   1) รถบัส  |  2) ลิง  |  3) ผีเสื้อ  |  4) นก
+EN: Which word is NOT an animal?
+   (EN choices same as TH)
+
+### th-0287  (หัวข้อ: meaning)
+TH: "จมูก" ภาษาอังกฤษคือคำไหน
+   1) foot  |  2) nose  |  3) ear  |  4) mouth
+EN: What does the Thai word "จมูก" mean?
+   (EN choices same as TH)
+
+### th-0288  (หัวข้อ: rhymes)
+TH: คำไหนคล้องจองกับ "สี"
+   1) หู  |  2) ผี  |  3) เรือ  |  4) นา
+EN: Which Thai word rhymes with "สี"?
+   (EN choices same as TH)
+
+### th-0289  (หัวข้อ: alphabet)
+TH: "ธง" 🚩 คือตัวอักษรตัวไหน
+   1) ธ  |  2) น  |  3) ต  |  4) ท
+EN: Which Thai letter goes with "ธง" 🚩?
+   (EN choices same as TH)
+
+### th-0290  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "กลางวัน" คือคำไหน
+   1) กลางคืน  |  2) ยาว  |  3) ล่าง  |  4) หลับ
+EN: Which Thai word is the opposite of "กลางวัน"?
+   (EN choices same as TH)
+
+### th-0291  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่ส่วนของร่างกาย
+   1) ไก่  |  2) จมูก  |  3) หู  |  4) มือ
+EN: Which word is NOT a body part?
+   (EN choices same as TH)
+
+### th-0292  (หัวข้อ: meaning)
+TH: "หิน" ภาษาอังกฤษคือคำไหน
+   1) fire  |  2) sun  |  3) star  |  4) rock
+EN: What does the Thai word "หิน" mean?
+   (EN choices same as TH)
+
+### th-0293  (หัวข้อ: alphabet)
+TH: "จุฬา" 🪁 คือตัวอักษรตัวไหน
+   1) ศ  |  2) อ  |  3) ห  |  4) ฬ
+EN: Which Thai letter goes with "จุฬา" 🪁?
+   (EN choices same as TH)
+
+### th-0294  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "เร็ว" คือคำไหน
+   1) สั้น  |  2) เล็ก  |  3) ช้า  |  4) รับ
+EN: Which Thai word is the opposite of "เร็ว"?
+   (EN choices same as TH)
+
+### th-0295  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่สัตว์
+   1) ปลา  |  2) หมา  |  3) กล้วย  |  4) ผีเสื้อ
+EN: Which word is NOT an animal?
+   (EN choices same as TH)
+
+### th-0296  (หัวข้อ: meaning)
+TH: "มะม่วง" ภาษาอังกฤษคือคำไหน
+   1) pineapple  |  2) mango  |  3) bread  |  4) corn
+EN: What does the Thai word "มะม่วง" mean?
+   (EN choices same as TH)
+
+### th-0297  (หัวข้อ: alphabet)
+TH: "ลิง" 🐒 คือตัวอักษรตัวไหน
+   1) ร  |  2) ล  |  3) ษ  |  4) ศ
+EN: Which Thai letter goes with "ลิง" 🐒?
+   (EN choices same as TH)
+
+### th-0298  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "อ้วน" คือคำไหน
+   1) เปียก  |  2) ผอม  |  3) ตื่น  |  4) หลัง
+EN: Which Thai word is the opposite of "อ้วน"?
+   (EN choices same as TH)
+
+### th-0299  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่เข้าพวก
+   1) ภูเขา  |  2) รถบัส  |  3) ไฟ  |  4) รุ้ง
+EN: Which word does not belong?
+   (EN choices same as TH)
+
+### th-0300  (หัวข้อ: meaning)
+TH: "แมว" ภาษาอังกฤษคือคำไหน
+   1) bee  |  2) frog  |  3) bear  |  4) cat
+EN: What does the Thai word "แมว" mean?
+   (EN choices same as TH)
+
+### th-0301  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "ขาว" คือคำไหน
+   1) รับ  |  2) สกปรก  |  3) ดำ  |  4) บน
+EN: Which Thai word is the opposite of "ขาว"?
+   (EN choices same as TH)
+
+### th-0302  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่เข้าพวก
+   1) จมูก  |  2) ฝน  |  3) ไฟ  |  4) ดอกไม้
+EN: Which word does not belong?
+   (EN choices same as TH)
+
+### th-0303  (หัวข้อ: meaning)
+TH: "ทะเล" ภาษาอังกฤษคือคำไหน
+   1) moon  |  2) rain  |  3) sea  |  4) tree
+EN: What does the Thai word "ทะเล" mean?
+   (EN choices same as TH)
+
+### th-0304  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "ร้อน" คือคำไหน
+   1) มืด  |  2) เย็น  |  3) ไกล  |  4) หัวเราะ
+EN: Which Thai word is the opposite of "ร้อน"?
+   (EN choices same as TH)
+
+### th-0305  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่ส่วนของร่างกาย
+   1) หู  |  2) ปาก  |  3) เท้า  |  4) ขนมปัง
+EN: Which word is NOT a body part?
+   1) หู  |  2) ปาก  |  3) เท้า  |  4) bread
+
+### th-0306  (หัวข้อ: meaning)
+TH: "เสือ" ภาษาอังกฤษคือคำไหน
+   1) tiger  |  2) frog  |  3) snake  |  4) chicken
+EN: What does the Thai word "เสือ" mean?
+   (EN choices same as TH)
+
+### th-0307  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "เปียก" คือคำไหน
+   1) แห้ง  |  2) สั้น  |  3) ผิด  |  4) ร้อน
+EN: Which Thai word is the opposite of "เปียก"?
+   (EN choices same as TH)
+
+### th-0308  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่อาหารหรือผลไม้
+   1) มะม่วง  |  2) หู  |  3) สับปะรด  |  4) ข้าว
+EN: Which word is NOT food?
+   (EN choices same as TH)
+
+### th-0309  (หัวข้อ: meaning)
+TH: "ปลา" ภาษาอังกฤษคือคำไหน
+   1) bird  |  2) cat  |  3) chicken  |  4) fish
+EN: What does the Thai word "ปลา" mean?
+   (EN choices same as TH)
+
+### th-0310  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "ยาว" คือคำไหน
+   1) หน้า  |  2) เสียใจ  |  3) เข้า  |  4) สั้น
+EN: Which Thai word is the opposite of "ยาว"?
+   (EN choices same as TH)
+
+### th-0311  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่ส่วนของร่างกาย
+   1) เท้า  |  2) ตา  |  3) วัว  |  4) ฟัน
+EN: Which word is NOT a body part?
+   (EN choices same as TH)
+
+### th-0312  (หัวข้อ: meaning)
+TH: "เมฆ" ภาษาอังกฤษคือคำไหน
+   1) sea  |  2) cloud  |  3) moon  |  4) sun
+EN: What does the Thai word "เมฆ" mean?
+   (EN choices same as TH)
+
+### th-0313  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "สะอาด" คือคำไหน
+   1) สกปรก  |  2) แข็ง  |  3) หัวเราะ  |  4) ไกล
+EN: Which Thai word is the opposite of "สะอาด"?
+   (EN choices same as TH)
+
+### th-0314  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่ส่วนของร่างกาย
+   1) หู  |  2) รถ  |  3) มือ  |  4) ฟัน
+EN: Which word is NOT a body part?
+   (EN choices same as TH)
+
+### th-0315  (หัวข้อ: meaning)
+TH: "เครื่องบิน" ภาษาอังกฤษคือคำไหน
+   1) car  |  2) plane  |  3) train  |  4) boat
+EN: What does the Thai word "เครื่องบิน" mean?
+   (EN choices same as TH)
+
+### th-0316  (หัวข้อ: opposites)
+TH: คำตรงข้ามของ "ซ้าย" คือคำไหน
+   1) ขวา  |  2) เสียใจ  |  3) ออก  |  4) ง่าย
+EN: Which Thai word is the opposite of "ซ้าย"?
+   (EN choices same as TH)
+
+### th-0317  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่สัตว์
+   1) กระต่าย  |  2) หมู  |  3) งู  |  4) เรือ
+EN: Which word is NOT an animal?
+   (EN choices same as TH)
+
+### th-0318  (หัวข้อ: meaning)
+TH: "ดวงอาทิตย์" ภาษาอังกฤษคือคำไหน
+   1) sun  |  2) sea  |  3) tree  |  4) rock
+EN: What does the Thai word "ดวงอาทิตย์" mean?
+   (EN choices same as TH)
+
+### th-0319  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่สัตว์
+   1) เสือ  |  2) ผีเสื้อ  |  3) ผึ้ง  |  4) หิน
+EN: Which word is NOT an animal?
+   (EN choices same as TH)
+
+### th-0320  (หัวข้อ: meaning)
+TH: "ผีเสื้อ" ภาษาอังกฤษคือคำไหน
+   1) cat  |  2) snake  |  3) chicken  |  4) butterfly
+EN: What does the Thai word "ผีเสื้อ" mean?
+   (EN choices same as TH)
+
+### th-0321  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่สัตว์
+   1) เต่า  |  2) ขนมปัง  |  3) กบ  |  4) หมา
+EN: Which word is NOT an animal?
+   (EN choices same as TH)
+
+### th-0322  (หัวข้อ: meaning)
+TH: "หมี" ภาษาอังกฤษคือคำไหน
+   1) chicken  |  2) cow  |  3) pig  |  4) bear
+EN: What does the Thai word "หมี" mean?
+   (EN choices same as TH)
+
+### th-0323  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่ยานพาหนะ
+   1) เครื่องบิน  |  2) จักรยาน  |  3) รถบัส  |  4) เต่า
+EN: Which word is NOT a vehicle?
+   (EN choices same as TH)
+
+### th-0324  (หัวข้อ: meaning)
+TH: "เต่า" ภาษาอังกฤษคือคำไหน
+   1) butterfly  |  2) rabbit  |  3) turtle  |  4) elephant
+EN: What does the Thai word "เต่า" mean?
+   (EN choices same as TH)
+
+### th-0325  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่ยานพาหนะ
+   1) นม  |  2) รถ  |  3) จักรยาน  |  4) เครื่องบิน
+EN: Which word is NOT a vehicle?
+   (EN choices same as TH)
+
+### th-0326  (หัวข้อ: meaning)
+TH: "ส้ม" ภาษาอังกฤษคือคำไหน
+   1) milk  |  2) corn  |  3) orange  |  4) pineapple
+EN: What does the Thai word "ส้ม" mean?
+   (EN choices same as TH)
+
+### th-0327  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่เข้าพวก
+   1) ดวงจันทร์  |  2) หิน  |  3) เครื่องบิน  |  4) ภูเขา
+EN: Which word does not belong?
+   (EN choices same as TH)
+
+### th-0328  (หัวข้อ: meaning)
+TH: "ดินสอ" ภาษาอังกฤษคือคำไหน
+   1) pencil  |  2) bag  |  3) clock  |  4) shoes
+EN: What does the Thai word "ดินสอ" mean?
+   (EN choices same as TH)
+
+### th-0329  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่เข้าพวก
+   1) ภูเขา  |  2) ดาว  |  3) กบ  |  4) ดอกไม้
+EN: Which word does not belong?
+   (EN choices same as TH)
+
+### th-0330  (หัวข้อ: meaning)
+TH: "กระต่าย" ภาษาอังกฤษคือคำไหน
+   1) monkey  |  2) rabbit  |  3) dog  |  4) butterfly
+EN: What does the Thai word "กระต่าย" mean?
+   (EN choices same as TH)
+
+### th-0331  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่เข้าพวก
+   1) ทะเล  |  2) ดวงอาทิตย์  |  3) รถ  |  4) ดวงจันทร์
+EN: Which word does not belong?
+   (EN choices same as TH)
+
+### th-0332  (หัวข้อ: meaning)
+TH: "ต้นไม้" ภาษาอังกฤษคือคำไหน
+   1) tree  |  2) star  |  3) rock  |  4) rain
+EN: What does the Thai word "ต้นไม้" mean?
+   (EN choices same as TH)
+
+### th-0333  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่อาหารหรือผลไม้
+   1) ขนมปัง  |  2) ดวงจันทร์  |  3) สับปะรด  |  4) แตงโม
+EN: Which word is NOT food?
+   (EN choices same as TH)
+
+### th-0334  (หัวข้อ: meaning)
+TH: "หู" ภาษาอังกฤษคือคำไหน
+   1) mouth  |  2) hand  |  3) foot  |  4) ear
+EN: What does the Thai word "หู" mean?
+   (EN choices same as TH)
+
+### th-0335  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่ส่วนของร่างกาย
+   1) ตา  |  2) นก  |  3) ฟัน  |  4) หู
+EN: Which word is NOT a body part?
+   (EN choices same as TH)
+
+### th-0336  (หัวข้อ: meaning)
+TH: "หมู" ภาษาอังกฤษคือคำไหน
+   1) chicken  |  2) horse  |  3) cow  |  4) pig
+EN: What does the Thai word "หมู" mean?
+   (EN choices same as TH)
+
+### th-0337  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่ใช่อาหารหรือผลไม้
+   1) ข้าว  |  2) แตงโม  |  3) สับปะรด  |  4) ไฟ
+EN: Which word is NOT food?
+   (EN choices same as TH)
+
+### th-0338  (หัวข้อ: meaning)
+TH: "เท้า" ภาษาอังกฤษคือคำไหน
+   1) mouth  |  2) nose  |  3) foot  |  4) ear
+EN: What does the Thai word "เท้า" mean?
+   (EN choices same as TH)
+
+### th-0339  (หัวข้อ: odd-one-out)
+TH: คำไหนไม่เข้าพวก
+   1) ข้าวโพด  |  2) ดวงอาทิตย์  |  3) ไฟ  |  4) ดวงจันทร์
+EN: Which word does not belong?
+   (EN choices same as TH)
+
+### th-0340  (หัวข้อ: meaning)
+TH: "ดวงจันทร์" ภาษาอังกฤษคือคำไหน
+   1) rainbow  |  2) fire  |  3) moon  |  4) flower
+EN: What does the Thai word "ดวงจันทร์" mean?
+   (EN choices same as TH)

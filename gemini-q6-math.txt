@@ -1,0 +1,1022 @@
+# ชุดตรวจ: คณิตศาสตร์ · เด็กอายุ 6 ปี (อนุบาล 3–ป.1) · 170 ข้อ · ไฟล์ q-math-6.json
+# ตัวเลือกนับ 1–4 · ไม่มีเฉลยในไฟล์นี้ (ให้แก้โจทย์เองก่อน)
+
+### ma-0001  (หัวข้อ: more-less)
+TH: มากกว่า 81 อยู่ 10 คือเลขอะไร
+   1) 88  |  2) 91  |  3) 94  |  4) 90
+EN: What is 10 more than 81?
+   (EN choices same as TH)
+
+### ma-0002  (หัวข้อ: more-less)
+TH: มากกว่า 54 อยู่ 10 คือเลขอะไร
+   1) 63  |  2) 62  |  3) 64  |  4) 66
+EN: What is 10 more than 54?
+   (EN choices same as TH)
+
+### ma-0003  (หัวข้อ: doubles)
+TH: สองเท่าของ 4 คือเท่าไร
+   1) 8  |  2) 10  |  3) 7  |  4) 5
+EN: What is double 4?
+   (EN choices same as TH)
+
+### ma-0004  (หัวข้อ: compare)
+TH: เลขไหนน้อยที่สุด: 28, 15, 84, 80
+   1) 28  |  2) 80  |  3) 15  |  4) 84
+EN: Which is the smallest: 28, 15, 84, 80?
+   (EN choices same as TH)
+
+### ma-0005  (หัวข้อ: more-less)
+TH: มากกว่า 66 อยู่ 1 คือเลขอะไร
+   1) 65  |  2) 69  |  3) 64  |  4) 67
+EN: What is 1 more than 66?
+   (EN choices same as TH)
+
+### ma-0006  (หัวข้อ: doubles)
+TH: สองเท่าของ 1 คือเท่าไร
+   1) 3  |  2) 0  |  3) 2  |  4) 4
+EN: What is double 1?
+   (EN choices same as TH)
+
+### ma-0007  (หัวข้อ: add)
+TH: 7 + 3 = ?
+   1) 8  |  2) 9  |  3) 11  |  4) 10
+EN: 7 + 3 = ?
+   (EN choices same as TH)
+
+### ma-0008  (หัวข้อ: word-problem)
+TH: ลีอามีดาว 9 ดวง ได้เพิ่มอีก 9 ดวง รวมเป็นกี่ดวง ⭐
+   1) 18  |  2) 21  |  3) 15  |  4) 17
+EN: Leah has 9 stars. She gets 9 more. How many now? ⭐
+   (EN choices same as TH)
+
+### ma-0009  (หัวข้อ: add)
+TH: 10 + 6 = ?
+   1) 16  |  2) 18  |  3) 19  |  4) 13
+EN: 10 + 6 = ?
+   (EN choices same as TH)
+
+### ma-0010  (หัวข้อ: number-bonds)
+TH: 10 + ? = 10
+   1) 1  |  2) 2  |  3) 3  |  4) 0
+EN: 10 + ? = 10
+   (EN choices same as TH)
+
+### ma-0011  (หัวข้อ: number-bonds)
+TH: 4 + ? = 10
+   1) 6  |  2) 8  |  3) 4  |  4) 7
+EN: 4 + ? = 10
+   (EN choices same as TH)
+
+### ma-0012  (หัวข้อ: word-problem)
+TH: ลีอามีคริสตัล 10 ชิ้น ให้เพื่อนไป 5 ชิ้น เหลือกี่ชิ้น 💎
+   1) 6  |  2) 3  |  3) 5  |  4) 4
+EN: Leah has 10 crystals. She gives away 5. How many are left? 💎
+   (EN choices same as TH)
+
+### ma-0013  (หัวข้อ: shapes)
+TH: รูปสามเหลี่ยมมีกี่ด้าน
+   1) 5  |  2) 6  |  3) 3  |  4) 4
+EN: How many sides does a triangle have?
+   (EN choices same as TH)
+
+### ma-0014  (หัวข้อ: compare)
+TH: เลขไหนมากที่สุด: 84, 23, 2, 82
+   1) 2  |  2) 23  |  3) 82  |  4) 84
+EN: Which is the biggest: 84, 23, 2, 82?
+   (EN choices same as TH)
+
+### ma-0015  (หัวข้อ: more-less)
+TH: มากกว่า 82 อยู่ 10 คือเลขอะไร
+   1) 89  |  2) 93  |  3) 92  |  4) 91
+EN: What is 10 more than 82?
+   (EN choices same as TH)
+
+### ma-0016  (หัวข้อ: add)
+TH: 4 + 9 = ?
+   1) 13  |  2) 12  |  3) 11  |  4) 10
+EN: 4 + 9 = ?
+   (EN choices same as TH)
+
+### ma-0017  (หัวข้อ: subtract)
+TH: 16 − 1 = ?
+   1) 12  |  2) 17  |  3) 15  |  4) 14
+EN: 16 − 1 = ?
+   (EN choices same as TH)
+
+### ma-0018  (หัวข้อ: number-bonds)
+TH: 7 + ? = 10
+   1) 0  |  2) 4  |  3) 3  |  4) 6
+EN: 7 + ? = 10
+   (EN choices same as TH)
+
+### ma-0019  (หัวข้อ: more-less)
+TH: มากกว่า 67 อยู่ 1 คือเลขอะไร
+   1) 68  |  2) 66  |  3) 67  |  4) 69
+EN: What is 1 more than 67?
+   (EN choices same as TH)
+
+### ma-0020  (หัวข้อ: word-problem)
+TH: ลีอามีขนม 7 ชิ้น ให้เพื่อนไป 5 ชิ้น เหลือกี่ชิ้น 🍬
+   1) 2  |  2) 4  |  3) 1  |  4) 0
+EN: Leah has 7 sweets. She gives away 5. How many are left? 🍬
+   (EN choices same as TH)
+
+### ma-0021  (หัวข้อ: word-problem)
+TH: ลีอามีดอกไม้ 12 ดอก ให้เพื่อนไป 8 ดอก เหลือกี่ดอก 🌸
+   1) 4  |  2) 2  |  3) 1  |  4) 5
+EN: Leah has 12 flowers. She gives away 8. How many are left? 🌸
+   (EN choices same as TH)
+
+### ma-0022  (หัวข้อ: word-problem)
+TH: ลีอามีปลา 3 ตัว ได้เพิ่มอีก 3 ตัว รวมเป็นกี่ตัว 🐟
+   1) 6  |  2) 7  |  3) 4  |  4) 8
+EN: Leah has 3 fish. She gets 3 more. How many now? 🐟
+   (EN choices same as TH)
+
+### ma-0023  (หัวข้อ: more-less)
+TH: น้อยกว่า 80 อยู่ 1 คือเลขอะไร
+   1) 78  |  2) 79  |  3) 82  |  4) 76
+EN: What is 1 less than 80?
+   (EN choices same as TH)
+
+### ma-0024  (หัวข้อ: subtract)
+TH: 5 − 3 = ?
+   1) 5  |  2) 3  |  3) 1  |  4) 2
+EN: 5 − 3 = ?
+   (EN choices same as TH)
+
+### ma-0025  (หัวข้อ: subtract)
+TH: 6 − 4 = ?
+   1) 3  |  2) 0  |  3) 2  |  4) 5
+EN: 6 − 4 = ?
+   (EN choices same as TH)
+
+### ma-0026  (หัวข้อ: add)
+TH: 2 + 5 = ?
+   1) 7  |  2) 10  |  3) 5  |  4) 4
+EN: 2 + 5 = ?
+   (EN choices same as TH)
+
+### ma-0027  (หัวข้อ: more-less)
+TH: น้อยกว่า 33 อยู่ 10 คือเลขอะไร
+   1) 20  |  2) 25  |  3) 23  |  4) 22
+EN: What is 10 less than 33?
+   (EN choices same as TH)
+
+### ma-0028  (หัวข้อ: more-less)
+TH: น้อยกว่า 51 อยู่ 10 คือเลขอะไร
+   1) 40  |  2) 41  |  3) 44  |  4) 43
+EN: What is 10 less than 51?
+   (EN choices same as TH)
+
+### ma-0029  (หัวข้อ: word-problem)
+TH: ลีอามีลูกโป่ง 7 ลูก ให้เพื่อนไป 1 ลูก เหลือกี่ลูก 🎈
+   1) 4  |  2) 6  |  3) 7  |  4) 5
+EN: Leah has 7 balloons. She gives away 1. How many are left? 🎈
+   (EN choices same as TH)
+
+### ma-0030  (หัวข้อ: doubles)
+TH: สองเท่าของ 8 คือเท่าไร
+   1) 17  |  2) 19  |  3) 14  |  4) 16
+EN: What is double 8?
+   (EN choices same as TH)
+
+### ma-0031  (หัวข้อ: subtract)
+TH: 10 − 1 = ?
+   1) 7  |  2) 11  |  3) 10  |  4) 9
+EN: 10 − 1 = ?
+   (EN choices same as TH)
+
+### ma-0032  (หัวข้อ: add)
+TH: 4 + 1 = ?
+   1) 3  |  2) 5  |  3) 7  |  4) 4
+EN: 4 + 1 = ?
+   (EN choices same as TH)
+
+### ma-0033  (หัวข้อ: compare)
+TH: เลขไหนน้อยที่สุด: 48, 94, 28, 88
+   1) 94  |  2) 88  |  3) 48  |  4) 28
+EN: Which is the smallest: 48, 94, 28, 88?
+   (EN choices same as TH)
+
+### ma-0034  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 16, ?, 26, 31, 36
+   1) 21  |  2) 19  |  3) 24  |  4) 23
+EN: What is the missing number: 16, ?, 26, 31, 36?
+   (EN choices same as TH)
+
+### ma-0035  (หัวข้อ: add)
+TH: 8 + 5 = ?
+   1) 15  |  2) 14  |  3) 13  |  4) 10
+EN: 8 + 5 = ?
+   (EN choices same as TH)
+
+### ma-0036  (หัวข้อ: word-problem)
+TH: ลีอามีลูกโป่ง 12 ลูก ให้เพื่อนไป 8 ลูก เหลือกี่ลูก 🎈
+   1) 6  |  2) 7  |  3) 2  |  4) 4
+EN: Leah has 12 balloons. She gives away 8. How many are left? 🎈
+   (EN choices same as TH)
+
+### ma-0037  (หัวข้อ: word-problem)
+TH: ลีอามีดอกไม้ 7 ดอก ได้เพิ่มอีก 7 ดอก รวมเป็นกี่ดอก 🌸
+   1) 17  |  2) 12  |  3) 13  |  4) 14
+EN: Leah has 7 flowers. She gets 7 more. How many now? 🌸
+   (EN choices same as TH)
+
+### ma-0038  (หัวข้อ: number-bonds)
+TH: 0 + ? = 10
+   1) 10  |  2) 13  |  3) 7  |  4) 11
+EN: 0 + ? = 10
+   (EN choices same as TH)
+
+### ma-0039  (หัวข้อ: compare)
+TH: เลขไหนน้อยที่สุด: 92, 21, 68, 17
+   1) 21  |  2) 92  |  3) 17  |  4) 68
+EN: Which is the smallest: 92, 21, 68, 17?
+   (EN choices same as TH)
+
+### ma-0040  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 19, ?, 21, 22, 23
+   1) 23  |  2) 20  |  3) 18  |  4) 19
+EN: What is the missing number: 19, ?, 21, 22, 23?
+   (EN choices same as TH)
+
+### ma-0041  (หัวข้อ: number-bonds)
+TH: 2 + ? = 10
+   1) 7  |  2) 8  |  3) 10  |  4) 6
+EN: 2 + ? = 10
+   (EN choices same as TH)
+
+### ma-0042  (หัวข้อ: compare)
+TH: เลขไหนมากที่สุด: 23, 86, 1, 42
+   1) 1  |  2) 42  |  3) 86  |  4) 23
+EN: Which is the biggest: 23, 86, 1, 42?
+   (EN choices same as TH)
+
+### ma-0043  (หัวข้อ: shapes)
+TH: รูปสี่เหลี่ยมจัตุรัสมีกี่ด้าน
+   1) 6  |  2) 4  |  3) 3  |  4) 5
+EN: How many sides does a square have?
+   (EN choices same as TH)
+
+### ma-0044  (หัวข้อ: doubles)
+TH: สองเท่าของ 6 คือเท่าไร
+   1) 9  |  2) 12  |  3) 13  |  4) 14
+EN: What is double 6?
+   (EN choices same as TH)
+
+### ma-0045  (หัวข้อ: compare)
+TH: เลขไหนน้อยที่สุด: 37, 67, 55, 21
+   1) 67  |  2) 21  |  3) 37  |  4) 55
+EN: Which is the smallest: 37, 67, 55, 21?
+   (EN choices same as TH)
+
+### ma-0046  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 14, 16, ?, 20, 22
+   1) 20  |  2) 18  |  3) 21  |  4) 17
+EN: What is the missing number: 14, 16, ?, 20, 22?
+   (EN choices same as TH)
+
+### ma-0047  (หัวข้อ: subtract)
+TH: 18 − 7 = ?
+   1) 9  |  2) 11  |  3) 10  |  4) 12
+EN: 18 − 7 = ?
+   (EN choices same as TH)
+
+### ma-0048  (หัวข้อ: number-bonds)
+TH: 3 + ? = 10
+   1) 7  |  2) 10  |  3) 4  |  4) 8
+EN: 3 + ? = 10
+   (EN choices same as TH)
+
+### ma-0049  (หัวข้อ: shapes)
+TH: รูปสี่เหลี่ยมผืนผ้ามีกี่ด้าน
+   1) 3  |  2) 4  |  3) 5  |  4) 6
+EN: How many sides does a rectangle have?
+   (EN choices same as TH)
+
+### ma-0050  (หัวข้อ: word-problem)
+TH: ลีอามีขนม 10 ชิ้น ให้เพื่อนไป 5 ชิ้น เหลือกี่ชิ้น 🍬
+   1) 7  |  2) 3  |  3) 6  |  4) 5
+EN: Leah has 10 sweets. She gives away 5. How many are left? 🍬
+   (EN choices same as TH)
+
+### ma-0051  (หัวข้อ: doubles)
+TH: สองเท่าของ 2 คือเท่าไร
+   1) 6  |  2) 4  |  3) 2  |  4) 5
+EN: What is double 2?
+   (EN choices same as TH)
+
+### ma-0052  (หัวข้อ: number-bonds)
+TH: 8 + ? = 10
+   1) 3  |  2) 1  |  3) 2  |  4) 5
+EN: 8 + ? = 10
+   (EN choices same as TH)
+
+### ma-0053  (หัวข้อ: number-bonds)
+TH: 5 + ? = 10
+   1) 8  |  2) 5  |  3) 2  |  4) 3
+EN: 5 + ? = 10
+   (EN choices same as TH)
+
+### ma-0054  (หัวข้อ: doubles)
+TH: สองเท่าของ 10 คือเท่าไร
+   1) 23  |  2) 20  |  3) 17  |  4) 21
+EN: What is double 10?
+   (EN choices same as TH)
+
+### ma-0055  (หัวข้อ: add)
+TH: 5 + 6 = ?
+   1) 12  |  2) 10  |  3) 11  |  4) 9
+EN: 5 + 6 = ?
+   (EN choices same as TH)
+
+### ma-0056  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 9, 11, ?, 15, 17
+   1) 11  |  2) 13  |  3) 10  |  4) 12
+EN: What is the missing number: 9, 11, ?, 15, 17?
+   (EN choices same as TH)
+
+### ma-0057  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 1, 6, 11, ?, 21
+   1) 14  |  2) 18  |  3) 19  |  4) 16
+EN: What is the missing number: 1, 6, 11, ?, 21?
+   (EN choices same as TH)
+
+### ma-0058  (หัวข้อ: shapes)
+TH: รูปห้าเหลี่ยมมีกี่ด้าน
+   1) 3  |  2) 4  |  3) 6  |  4) 5
+EN: How many sides does a pentagon have?
+   (EN choices same as TH)
+
+### ma-0059  (หัวข้อ: subtract)
+TH: 13 − 5 = ?
+   1) 8  |  2) 5  |  3) 10  |  4) 11
+EN: 13 − 5 = ?
+   (EN choices same as TH)
+
+### ma-0060  (หัวข้อ: subtract)
+TH: 10 − 9 = ?
+   1) 4  |  2) 0  |  3) 2  |  4) 1
+EN: 10 − 9 = ?
+   (EN choices same as TH)
+
+### ma-0061  (หัวข้อ: subtract)
+TH: 11 − 10 = ?
+   1) 3  |  2) 1  |  3) 2  |  4) 4
+EN: 11 − 10 = ?
+   (EN choices same as TH)
+
+### ma-0062  (หัวข้อ: number-bonds)
+TH: 6 + ? = 10
+   1) 2  |  2) 4  |  3) 7  |  4) 1
+EN: 6 + ? = 10
+   (EN choices same as TH)
+
+### ma-0063  (หัวข้อ: word-problem)
+TH: ลีอามีแอปเปิล 8 ลูก ได้เพิ่มอีก 3 ลูก รวมเป็นกี่ลูก 🍎
+   1) 11  |  2) 13  |  3) 14  |  4) 12
+EN: Leah has 8 apples. She gets 3 more. How many now? 🍎
+   (EN choices same as TH)
+
+### ma-0064  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 15, 17, 19, ?, 23
+   1) 18  |  2) 24  |  3) 22  |  4) 21
+EN: What is the missing number: 15, 17, 19, ?, 23?
+   (EN choices same as TH)
+
+### ma-0065  (หัวข้อ: number-bonds)
+TH: 1 + ? = 10
+   1) 11  |  2) 9  |  3) 8  |  4) 6
+EN: 1 + ? = 10
+   (EN choices same as TH)
+
+### ma-0066  (หัวข้อ: add)
+TH: 9 + 10 = ?
+   1) 18  |  2) 17  |  3) 19  |  4) 16
+EN: 9 + 10 = ?
+   (EN choices same as TH)
+
+### ma-0067  (หัวข้อ: more-less)
+TH: มากกว่า 73 อยู่ 1 คือเลขอะไร
+   1) 73  |  2) 74  |  3) 71  |  4) 77
+EN: What is 1 more than 73?
+   (EN choices same as TH)
+
+### ma-0068  (หัวข้อ: subtract)
+TH: 16 − 2 = ?
+   1) 15  |  2) 13  |  3) 12  |  4) 14
+EN: 16 − 2 = ?
+   (EN choices same as TH)
+
+### ma-0069  (หัวข้อ: subtract)
+TH: 5 − 1 = ?
+   1) 3  |  2) 1  |  3) 2  |  4) 4
+EN: 5 − 1 = ?
+   (EN choices same as TH)
+
+### ma-0070  (หัวข้อ: add)
+TH: 3 + 9 = ?
+   1) 14  |  2) 10  |  3) 12  |  4) 9
+EN: 3 + 9 = ?
+   (EN choices same as TH)
+
+### ma-0071  (หัวข้อ: doubles)
+TH: สองเท่าของ 3 คือเท่าไร
+   1) 7  |  2) 6  |  3) 8  |  4) 3
+EN: What is double 3?
+   (EN choices same as TH)
+
+### ma-0072  (หัวข้อ: add)
+TH: 9 + 4 = ?
+   1) 11  |  2) 15  |  3) 12  |  4) 13
+EN: 9 + 4 = ?
+   (EN choices same as TH)
+
+### ma-0073  (หัวข้อ: subtract)
+TH: 19 − 5 = ?
+   1) 15  |  2) 16  |  3) 13  |  4) 14
+EN: 19 − 5 = ?
+   (EN choices same as TH)
+
+### ma-0074  (หัวข้อ: more-less)
+TH: น้อยกว่า 25 อยู่ 10 คือเลขอะไร
+   1) 17  |  2) 15  |  3) 18  |  4) 12
+EN: What is 10 less than 25?
+   (EN choices same as TH)
+
+### ma-0075  (หัวข้อ: compare)
+TH: เลขไหนมากที่สุด: 31, 99, 68, 5
+   1) 5  |  2) 68  |  3) 99  |  4) 31
+EN: Which is the biggest: 31, 99, 68, 5?
+   (EN choices same as TH)
+
+### ma-0076  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 4, ?, 14, 19, 24
+   1) 7  |  2) 6  |  3) 9  |  4) 11
+EN: What is the missing number: 4, ?, 14, 19, 24?
+   (EN choices same as TH)
+
+### ma-0077  (หัวข้อ: compare)
+TH: เลขไหนน้อยที่สุด: 69, 9, 71, 14
+   1) 71  |  2) 9  |  3) 69  |  4) 14
+EN: Which is the smallest: 69, 9, 71, 14?
+   (EN choices same as TH)
+
+### ma-0078  (หัวข้อ: compare)
+TH: เลขไหนมากที่สุด: 99, 34, 89, 64
+   1) 34  |  2) 64  |  3) 89  |  4) 99
+EN: Which is the biggest: 99, 34, 89, 64?
+   (EN choices same as TH)
+
+### ma-0079  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 20, 25, 30, ?, 40
+   1) 35  |  2) 37  |  3) 34  |  4) 32
+EN: What is the missing number: 20, 25, 30, ?, 40?
+   (EN choices same as TH)
+
+### ma-0080  (หัวข้อ: shapes)
+TH: รูปหกเหลี่ยมมีกี่ด้าน
+   1) 4  |  2) 5  |  3) 3  |  4) 6
+EN: How many sides does a hexagon have?
+   (EN choices same as TH)
+
+### ma-0081  (หัวข้อ: compare)
+TH: เลขไหนน้อยที่สุด: 56, 62, 41, 48
+   1) 62  |  2) 56  |  3) 48  |  4) 41
+EN: Which is the smallest: 56, 62, 41, 48?
+   (EN choices same as TH)
+
+### ma-0082  (หัวข้อ: compare)
+TH: เลขไหนน้อยที่สุด: 20, 79, 72, 84
+   1) 79  |  2) 72  |  3) 84  |  4) 20
+EN: Which is the smallest: 20, 79, 72, 84?
+   (EN choices same as TH)
+
+### ma-0083  (หัวข้อ: compare)
+TH: เลขไหนมากที่สุด: 40, 67, 16, 70
+   1) 70  |  2) 16  |  3) 67  |  4) 40
+EN: Which is the biggest: 40, 67, 16, 70?
+   (EN choices same as TH)
+
+### ma-0084  (หัวข้อ: compare)
+TH: เลขไหนน้อยที่สุด: 35, 42, 58, 48
+   1) 48  |  2) 58  |  3) 42  |  4) 35
+EN: Which is the smallest: 35, 42, 58, 48?
+   (EN choices same as TH)
+
+### ma-0085  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 19, 29, 39, ?, 59
+   1) 51  |  2) 50  |  3) 49  |  4) 48
+EN: What is the missing number: 19, 29, 39, ?, 59?
+   (EN choices same as TH)
+
+### ma-0086  (หัวข้อ: word-problem)
+TH: ลีอามีปลา 18 ตัว ให้เพื่อนไป 9 ตัว เหลือกี่ตัว 🐟
+   1) 9  |  2) 12  |  3) 11  |  4) 6
+EN: Leah has 18 fish. She gives away 9. How many are left? 🐟
+   (EN choices same as TH)
+
+### ma-0087  (หัวข้อ: add)
+TH: 2 + 2 = ?
+   1) 5  |  2) 4  |  3) 6  |  4) 3
+EN: 2 + 2 = ?
+   (EN choices same as TH)
+
+### ma-0088  (หัวข้อ: more-less)
+TH: น้อยกว่า 19 อยู่ 1 คือเลขอะไร
+   1) 21  |  2) 19  |  3) 18  |  4) 20
+EN: What is 1 less than 19?
+   (EN choices same as TH)
+
+### ma-0089  (หัวข้อ: word-problem)
+TH: ลีอามีดาว 3 ดวง ได้เพิ่มอีก 7 ดวง รวมเป็นกี่ดวง ⭐
+   1) 10  |  2) 13  |  3) 9  |  4) 7
+EN: Leah has 3 stars. She gets 7 more. How many now? ⭐
+   (EN choices same as TH)
+
+### ma-0090  (หัวข้อ: compare)
+TH: เลขไหนมากที่สุด: 65, 71, 26, 38
+   1) 26  |  2) 71  |  3) 38  |  4) 65
+EN: Which is the biggest: 65, 71, 26, 38?
+   (EN choices same as TH)
+
+### ma-0091  (หัวข้อ: word-problem)
+TH: ลีอามีดาว 17 ดวง ให้เพื่อนไป 8 ดวง เหลือกี่ดวง ⭐
+   1) 8  |  2) 12  |  3) 9  |  4) 10
+EN: Leah has 17 stars. She gives away 8. How many are left? ⭐
+   (EN choices same as TH)
+
+### ma-0092  (หัวข้อ: word-problem)
+TH: ลีอามีดอกไม้ 5 ดอก ได้เพิ่มอีก 9 ดอก รวมเป็นกี่ดอก 🌸
+   1) 14  |  2) 12  |  3) 16  |  4) 11
+EN: Leah has 5 flowers. She gets 9 more. How many now? 🌸
+   (EN choices same as TH)
+
+### ma-0093  (หัวข้อ: add)
+TH: 6 + 8 = ?
+   1) 15  |  2) 13  |  3) 14  |  4) 16
+EN: 6 + 8 = ?
+   (EN choices same as TH)
+
+### ma-0094  (หัวข้อ: more-less)
+TH: มากกว่า 14 อยู่ 10 คือเลขอะไร
+   1) 27  |  2) 24  |  3) 26  |  4) 21
+EN: What is 10 more than 14?
+   (EN choices same as TH)
+
+### ma-0095  (หัวข้อ: compare)
+TH: เลขไหนน้อยที่สุด: 65, 46, 62, 93
+   1) 62  |  2) 46  |  3) 65  |  4) 93
+EN: Which is the smallest: 65, 46, 62, 93?
+   (EN choices same as TH)
+
+### ma-0096  (หัวข้อ: subtract)
+TH: 20 − 1 = ?
+   1) 21  |  2) 16  |  3) 20  |  4) 19
+EN: 20 − 1 = ?
+   (EN choices same as TH)
+
+### ma-0097  (หัวข้อ: word-problem)
+TH: ลีอามีขนม 5 ชิ้น ให้เพื่อนไป 2 ชิ้น เหลือกี่ชิ้น 🍬
+   1) 3  |  2) 5  |  3) 4  |  4) 0
+EN: Leah has 5 sweets. She gives away 2. How many are left? 🍬
+   (EN choices same as TH)
+
+### ma-0098  (หัวข้อ: subtract)
+TH: 19 − 7 = ?
+   1) 12  |  2) 13  |  3) 9  |  4) 15
+EN: 19 − 7 = ?
+   (EN choices same as TH)
+
+### ma-0099  (หัวข้อ: add)
+TH: 2 + 3 = ?
+   1) 3  |  2) 5  |  3) 7  |  4) 2
+EN: 2 + 3 = ?
+   (EN choices same as TH)
+
+### ma-0100  (หัวข้อ: subtract)
+TH: 15 − 9 = ?
+   1) 3  |  2) 6  |  3) 7  |  4) 8
+EN: 15 − 9 = ?
+   (EN choices same as TH)
+
+### ma-0101  (หัวข้อ: add)
+TH: 9 + 1 = ?
+   1) 13  |  2) 9  |  3) 7  |  4) 10
+EN: 9 + 1 = ?
+   (EN choices same as TH)
+
+### ma-0102  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 8, 13, ?, 23, 28
+   1) 19  |  2) 18  |  3) 16  |  4) 15
+EN: What is the missing number: 8, 13, ?, 23, 28?
+   (EN choices same as TH)
+
+### ma-0103  (หัวข้อ: add)
+TH: 6 + 5 = ?
+   1) 14  |  2) 10  |  3) 9  |  4) 11
+EN: 6 + 5 = ?
+   (EN choices same as TH)
+
+### ma-0104  (หัวข้อ: word-problem)
+TH: ลีอามีปลา 7 ตัว ได้เพิ่มอีก 8 ตัว รวมเป็นกี่ตัว 🐟
+   1) 17  |  2) 12  |  3) 15  |  4) 18
+EN: Leah has 7 fish. She gets 8 more. How many now? 🐟
+   (EN choices same as TH)
+
+### ma-0105  (หัวข้อ: add)
+TH: 8 + 2 = ?
+   1) 8  |  2) 12  |  3) 10  |  4) 9
+EN: 8 + 2 = ?
+   (EN choices same as TH)
+
+### ma-0106  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 20, 22, ?, 26, 28
+   1) 24  |  2) 26  |  3) 23  |  4) 27
+EN: What is the missing number: 20, 22, ?, 26, 28?
+   (EN choices same as TH)
+
+### ma-0107  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 19, 20, ?, 22, 23
+   1) 24  |  2) 21  |  3) 23  |  4) 18
+EN: What is the missing number: 19, 20, ?, 22, 23?
+   (EN choices same as TH)
+
+### ma-0108  (หัวข้อ: add)
+TH: 5 + 5 = ?
+   1) 10  |  2) 9  |  3) 7  |  4) 12
+EN: 5 + 5 = ?
+   (EN choices same as TH)
+
+### ma-0109  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 13, 18, 23, ?, 33
+   1) 31  |  2) 29  |  3) 27  |  4) 28
+EN: What is the missing number: 13, 18, 23, ?, 33?
+   (EN choices same as TH)
+
+### ma-0110  (หัวข้อ: subtract)
+TH: 7 − 5 = ?
+   1) 1  |  2) 3  |  3) 2  |  4) 0
+EN: 7 − 5 = ?
+   (EN choices same as TH)
+
+### ma-0111  (หัวข้อ: more-less)
+TH: น้อยกว่า 68 อยู่ 1 คือเลขอะไร
+   1) 65  |  2) 68  |  3) 67  |  4) 64
+EN: What is 1 less than 68?
+   (EN choices same as TH)
+
+### ma-0112  (หัวข้อ: more-less)
+TH: น้อยกว่า 43 อยู่ 10 คือเลขอะไร
+   1) 33  |  2) 35  |  3) 30  |  4) 34
+EN: What is 10 less than 43?
+   (EN choices same as TH)
+
+### ma-0113  (หัวข้อ: compare)
+TH: เลขไหนน้อยที่สุด: 72, 44, 52, 7
+   1) 72  |  2) 7  |  3) 52  |  4) 44
+EN: Which is the smallest: 72, 44, 52, 7?
+   (EN choices same as TH)
+
+### ma-0114  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 18, 23, 28, ?, 38
+   1) 33  |  2) 35  |  3) 36  |  4) 30
+EN: What is the missing number: 18, 23, 28, ?, 38?
+   (EN choices same as TH)
+
+### ma-0115  (หัวข้อ: compare)
+TH: เลขไหนน้อยที่สุด: 64, 93, 68, 56
+   1) 64  |  2) 68  |  3) 56  |  4) 93
+EN: Which is the smallest: 64, 93, 68, 56?
+   (EN choices same as TH)
+
+### ma-0116  (หัวข้อ: more-less)
+TH: น้อยกว่า 85 อยู่ 10 คือเลขอะไร
+   1) 73  |  2) 77  |  3) 72  |  4) 75
+EN: What is 10 less than 85?
+   (EN choices same as TH)
+
+### ma-0117  (หัวข้อ: doubles)
+TH: สองเท่าของ 9 คือเท่าไร
+   1) 18  |  2) 20  |  3) 19  |  4) 16
+EN: What is double 9?
+   (EN choices same as TH)
+
+### ma-0118  (หัวข้อ: shapes)
+TH: รูปแปดเหลี่ยมมีกี่ด้าน
+   1) 8  |  2) 5  |  3) 4  |  4) 3
+EN: How many sides does an octagon have?
+   (EN choices same as TH)
+
+### ma-0119  (หัวข้อ: more-less)
+TH: น้อยกว่า 89 อยู่ 10 คือเลขอะไร
+   1) 79  |  2) 80  |  3) 77  |  4) 82
+EN: What is 10 less than 89?
+   (EN choices same as TH)
+
+### ma-0120  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 17, 27, 37, ?, 57
+   1) 44  |  2) 48  |  3) 45  |  4) 47
+EN: What is the missing number: 17, 27, 37, ?, 57?
+   (EN choices same as TH)
+
+### ma-0121  (หัวข้อ: word-problem)
+TH: ลีอามีดอกไม้ 10 ดอก ให้เพื่อนไป 3 ดอก เหลือกี่ดอก 🌸
+   1) 5  |  2) 6  |  3) 4  |  4) 7
+EN: Leah has 10 flowers. She gives away 3. How many are left? 🌸
+   (EN choices same as TH)
+
+### ma-0122  (หัวข้อ: word-problem)
+TH: ลีอามีดาว 14 ดวง ให้เพื่อนไป 9 ดวง เหลือกี่ดวง ⭐
+   1) 7  |  2) 8  |  3) 4  |  4) 5
+EN: Leah has 14 stars. She gives away 9. How many are left? ⭐
+   (EN choices same as TH)
+
+### ma-0123  (หัวข้อ: more-less)
+TH: มากกว่า 80 อยู่ 10 คือเลขอะไร
+   1) 93  |  2) 92  |  3) 90  |  4) 88
+EN: What is 10 more than 80?
+   (EN choices same as TH)
+
+### ma-0124  (หัวข้อ: compare)
+TH: เลขไหนน้อยที่สุด: 44, 61, 86, 45
+   1) 44  |  2) 61  |  3) 86  |  4) 45
+EN: Which is the smallest: 44, 61, 86, 45?
+   (EN choices same as TH)
+
+### ma-0125  (หัวข้อ: add)
+TH: 7 + 10 = ?
+   1) 17  |  2) 19  |  3) 16  |  4) 18
+EN: 7 + 10 = ?
+   (EN choices same as TH)
+
+### ma-0126  (หัวข้อ: word-problem)
+TH: ลีอามีเหรียญ 12 เหรียญ ให้เพื่อนไป 3 เหรียญ เหลือกี่เหรียญ 🪙
+   1) 9  |  2) 11  |  3) 7  |  4) 10
+EN: Leah has 12 coins. She gives away 3. How many are left? 🪙
+   (EN choices same as TH)
+
+### ma-0127  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 14, 15, ?, 17, 18
+   1) 14  |  2) 19  |  3) 16  |  4) 13
+EN: What is the missing number: 14, 15, ?, 17, 18?
+   (EN choices same as TH)
+
+### ma-0128  (หัวข้อ: more-less)
+TH: น้อยกว่า 47 อยู่ 10 คือเลขอะไร
+   1) 37  |  2) 36  |  3) 38  |  4) 39
+EN: What is 10 less than 47?
+   (EN choices same as TH)
+
+### ma-0129  (หัวข้อ: more-less)
+TH: มากกว่า 37 อยู่ 10 คือเลขอะไร
+   1) 45  |  2) 44  |  3) 47  |  4) 50
+EN: What is 10 more than 37?
+   (EN choices same as TH)
+
+### ma-0130  (หัวข้อ: subtract)
+TH: 12 − 6 = ?
+   1) 4  |  2) 6  |  3) 9  |  4) 7
+EN: 12 − 6 = ?
+   (EN choices same as TH)
+
+### ma-0131  (หัวข้อ: word-problem)
+TH: ลีอามีเหรียญ 6 เหรียญ ได้เพิ่มอีก 1 เหรียญ รวมเป็นกี่เหรียญ 🪙
+   1) 4  |  2) 6  |  3) 7  |  4) 5
+EN: Leah has 6 coins. She gets 1 more. How many now? 🪙
+   (EN choices same as TH)
+
+### ma-0132  (หัวข้อ: more-less)
+TH: น้อยกว่า 48 อยู่ 1 คือเลขอะไร
+   1) 47  |  2) 44  |  3) 48  |  4) 49
+EN: What is 1 less than 48?
+   (EN choices same as TH)
+
+### ma-0133  (หัวข้อ: word-problem)
+TH: ลีอามีปลา 11 ตัว ให้เพื่อนไป 8 ตัว เหลือกี่ตัว 🐟
+   1) 4  |  2) 5  |  3) 3  |  4) 2
+EN: Leah has 11 fish. She gives away 8. How many are left? 🐟
+   (EN choices same as TH)
+
+### ma-0134  (หัวข้อ: subtract)
+TH: 5 − 4 = ?
+   1) 4  |  2) 2  |  3) 1  |  4) 3
+EN: 5 − 4 = ?
+   (EN choices same as TH)
+
+### ma-0135  (หัวข้อ: subtract)
+TH: 20 − 5 = ?
+   1) 14  |  2) 16  |  3) 15  |  4) 17
+EN: 20 − 5 = ?
+   (EN choices same as TH)
+
+### ma-0136  (หัวข้อ: compare)
+TH: เลขไหนน้อยที่สุด: 3, 39, 32, 67
+   1) 3  |  2) 32  |  3) 39  |  4) 67
+EN: Which is the smallest: 3, 39, 32, 67?
+   (EN choices same as TH)
+
+### ma-0137  (หัวข้อ: add)
+TH: 7 + 2 = ?
+   1) 6  |  2) 9  |  3) 8  |  4) 7
+EN: 7 + 2 = ?
+   (EN choices same as TH)
+
+### ma-0138  (หัวข้อ: word-problem)
+TH: ลีอามีดอกไม้ 5 ดอก ได้เพิ่มอีก 2 ดอก รวมเป็นกี่ดอก 🌸
+   1) 7  |  2) 6  |  3) 4  |  4) 9
+EN: Leah has 5 flowers. She gets 2 more. How many now? 🌸
+   (EN choices same as TH)
+
+### ma-0139  (หัวข้อ: more-less)
+TH: น้อยกว่า 13 อยู่ 10 คือเลขอะไร
+   1) 6  |  2) 4  |  3) 1  |  4) 3
+EN: What is 10 less than 13?
+   (EN choices same as TH)
+
+### ma-0140  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 20, ?, 40, 50, 60
+   1) 32  |  2) 29  |  3) 30  |  4) 33
+EN: What is the missing number: 20, ?, 40, 50, 60?
+   (EN choices same as TH)
+
+### ma-0141  (หัวข้อ: compare)
+TH: เลขไหนมากที่สุด: 16, 49, 45, 23
+   1) 45  |  2) 49  |  3) 16  |  4) 23
+EN: Which is the biggest: 16, 49, 45, 23?
+   (EN choices same as TH)
+
+### ma-0142  (หัวข้อ: word-problem)
+TH: ลีอามีลูกโป่ง 11 ลูก ให้เพื่อนไป 5 ลูก เหลือกี่ลูก 🎈
+   1) 6  |  2) 7  |  3) 9  |  4) 3
+EN: Leah has 11 balloons. She gives away 5. How many are left? 🎈
+   (EN choices same as TH)
+
+### ma-0143  (หัวข้อ: subtract)
+TH: 10 − 10 = ?
+   1) 0  |  2) 3  |  3) 2  |  4) 1
+EN: 10 − 10 = ?
+   (EN choices same as TH)
+
+### ma-0144  (หัวข้อ: more-less)
+TH: มากกว่า 60 อยู่ 10 คือเลขอะไร
+   1) 71  |  2) 72  |  3) 69  |  4) 70
+EN: What is 10 more than 60?
+   (EN choices same as TH)
+
+### ma-0145  (หัวข้อ: more-less)
+TH: น้อยกว่า 28 อยู่ 1 คือเลขอะไร
+   1) 27  |  2) 25  |  3) 24  |  4) 26
+EN: What is 1 less than 28?
+   (EN choices same as TH)
+
+### ma-0146  (หัวข้อ: subtract)
+TH: 14 − 7 = ?
+   1) 10  |  2) 7  |  3) 9  |  4) 4
+EN: 14 − 7 = ?
+   (EN choices same as TH)
+
+### ma-0147  (หัวข้อ: compare)
+TH: เลขไหนน้อยที่สุด: 17, 59, 48, 95
+   1) 95  |  2) 48  |  3) 59  |  4) 17
+EN: Which is the smallest: 17, 59, 48, 95?
+   (EN choices same as TH)
+
+### ma-0148  (หัวข้อ: word-problem)
+TH: ลีอามีดาว 8 ดวง ได้เพิ่มอีก 7 ดวง รวมเป็นกี่ดวง ⭐
+   1) 13  |  2) 18  |  3) 14  |  4) 15
+EN: Leah has 8 stars. She gets 7 more. How many now? ⭐
+   (EN choices same as TH)
+
+### ma-0149  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 12, 13, ?, 15, 16
+   1) 14  |  2) 11  |  3) 12  |  4) 13
+EN: What is the missing number: 12, 13, ?, 15, 16?
+   (EN choices same as TH)
+
+### ma-0150  (หัวข้อ: more-less)
+TH: มากกว่า 68 อยู่ 1 คือเลขอะไร
+   1) 70  |  2) 66  |  3) 69  |  4) 67
+EN: What is 1 more than 68?
+   (EN choices same as TH)
+
+### ma-0151  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 16, 26, 36, ?, 56
+   1) 45  |  2) 48  |  3) 47  |  4) 46
+EN: What is the missing number: 16, 26, 36, ?, 56?
+   (EN choices same as TH)
+
+### ma-0152  (หัวข้อ: subtract)
+TH: 11 − 1 = ?
+   1) 10  |  2) 8  |  3) 9  |  4) 13
+EN: 11 − 1 = ?
+   (EN choices same as TH)
+
+### ma-0153  (หัวข้อ: word-problem)
+TH: ลีอามีแอปเปิล 9 ลูก ให้เพื่อนไป 5 ลูก เหลือกี่ลูก 🍎
+   1) 1  |  2) 4  |  3) 3  |  4) 2
+EN: Leah has 9 apples. She gives away 5. How many are left? 🍎
+   (EN choices same as TH)
+
+### ma-0154  (หัวข้อ: word-problem)
+TH: ลีอามีปลา 4 ตัว ได้เพิ่มอีก 7 ตัว รวมเป็นกี่ตัว 🐟
+   1) 8  |  2) 10  |  3) 14  |  4) 11
+EN: Leah has 4 fish. She gets 7 more. How many now? 🐟
+   (EN choices same as TH)
+
+### ma-0155  (หัวข้อ: subtract)
+TH: 5 − 2 = ?
+   1) 6  |  2) 2  |  3) 0  |  4) 3
+EN: 5 − 2 = ?
+   (EN choices same as TH)
+
+### ma-0156  (หัวข้อ: word-problem)
+TH: ลีอามีปลา 4 ตัว ได้เพิ่มอีก 2 ตัว รวมเป็นกี่ตัว 🐟
+   1) 8  |  2) 3  |  3) 4  |  4) 6
+EN: Leah has 4 fish. She gets 2 more. How many now? 🐟
+   (EN choices same as TH)
+
+### ma-0157  (หัวข้อ: add)
+TH: 9 + 8 = ?
+   1) 16  |  2) 17  |  3) 15  |  4) 18
+EN: 9 + 8 = ?
+   (EN choices same as TH)
+
+### ma-0158  (หัวข้อ: doubles)
+TH: สองเท่าของ 5 คือเท่าไร
+   1) 8  |  2) 12  |  3) 9  |  4) 10
+EN: What is double 5?
+   (EN choices same as TH)
+
+### ma-0159  (หัวข้อ: more-less)
+TH: น้อยกว่า 58 อยู่ 1 คือเลขอะไร
+   1) 60  |  2) 58  |  3) 57  |  4) 55
+EN: What is 1 less than 58?
+   (EN choices same as TH)
+
+### ma-0160  (หัวข้อ: subtract)
+TH: 11 − 6 = ?
+   1) 4  |  2) 6  |  3) 5  |  4) 8
+EN: 11 − 6 = ?
+   (EN choices same as TH)
+
+### ma-0161  (หัวข้อ: subtract)
+TH: 15 − 1 = ?
+   1) 12  |  2) 14  |  3) 11  |  4) 15
+EN: 15 − 1 = ?
+   (EN choices same as TH)
+
+### ma-0162  (หัวข้อ: patterns)
+TH: เลขที่หายไปคืออะไร: 19, ?, 23, 25, 27
+   1) 21  |  2) 18  |  3) 22  |  4) 24
+EN: What is the missing number: 19, ?, 23, 25, 27?
+   (EN choices same as TH)
+
+### ma-0163  (หัวข้อ: subtract)
+TH: 12 − 2 = ?
+   1) 13  |  2) 10  |  3) 12  |  4) 8
+EN: 12 − 2 = ?
+   (EN choices same as TH)
+
+### ma-0164  (หัวข้อ: add)
+TH: 8 + 4 = ?
+   1) 13  |  2) 12  |  3) 15  |  4) 9
+EN: 8 + 4 = ?
+   (EN choices same as TH)
+
+### ma-0165  (หัวข้อ: more-less)
+TH: น้อยกว่า 39 อยู่ 1 คือเลขอะไร
+   1) 36  |  2) 38  |  3) 41  |  4) 35
+EN: What is 1 less than 39?
+   (EN choices same as TH)
+
+### ma-0166  (หัวข้อ: more-less)
+TH: มากกว่า 28 อยู่ 1 คือเลขอะไร
+   1) 29  |  2) 26  |  3) 27  |  4) 28
+EN: What is 1 more than 28?
+   (EN choices same as TH)
+
+### ma-0167  (หัวข้อ: word-problem)
+TH: ลีอามีปลา 10 ตัว ให้เพื่อนไป 1 ตัว เหลือกี่ตัว 🐟
+   1) 11  |  2) 7  |  3) 8  |  4) 9
+EN: Leah has 10 fish. She gives away 1. How many are left? 🐟
+   (EN choices same as TH)
+
+### ma-0168  (หัวข้อ: compare)
+TH: เลขไหนน้อยที่สุด: 54, 83, 41, 7
+   1) 7  |  2) 54  |  3) 41  |  4) 83
+EN: Which is the smallest: 54, 83, 41, 7?
+   (EN choices same as TH)
+
+### ma-0169  (หัวข้อ: more-less)
+TH: น้อยกว่า 49 อยู่ 1 คือเลขอะไร
+   1) 47  |  2) 51  |  3) 48  |  4) 50
+EN: What is 1 less than 49?
+   (EN choices same as TH)
+
+### ma-0170  (หัวข้อ: word-problem)
+TH: ลีอามีดาว 10 ดวง ให้เพื่อนไป 5 ดวง เหลือกี่ดวง ⭐
+   1) 2  |  2) 7  |  3) 5  |  4) 6
+EN: Leah has 10 stars. She gives away 5. How many are left? ⭐
+   (EN choices same as TH)

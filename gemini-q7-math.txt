@@ -1,0 +1,992 @@
+# ชุดตรวจ: คณิตศาสตร์ · เด็กอายุ 7 ปี (ป.1–ป.2) · 165 ข้อ · ไฟล์ q-math-7.json
+# ตัวเลือกนับ 1–4 · ไม่มีเฉลยในไฟล์นี้ (ให้แก้โจทย์เองก่อน)
+
+### ma-0171  (หัวข้อ: add)
+TH: 19 + 27 = ?
+   1) 43  |  2) 47  |  3) 45  |  4) 46
+EN: 19 + 27 = ?
+   (EN choices same as TH)
+
+### ma-0172  (หัวข้อ: missing-number)
+TH: 45 + ? = 52
+   1) 8  |  2) 6  |  3) 9  |  4) 7
+EN: 45 + ? = 52
+   (EN choices same as TH)
+
+### ma-0173  (หัวข้อ: money)
+TH: เหรียญ 2 บาท กับ 2 บาท รวมเป็นกี่บาท
+   1) 7 บาท  |  2) 3 บาท  |  3) 4 บาท  |  4) 1 บาท
+EN: A 2-baht coin and a 2-baht coin make how much?
+   1) 7 baht  |  2) 3 baht  |  3) 4 baht  |  4) 1 baht
+
+### ma-0174  (หัวข้อ: missing-number)
+TH: 29 + ? = 51
+   1) 24  |  2) 22  |  3) 21  |  4) 19
+EN: 29 + ? = 51
+   (EN choices same as TH)
+
+### ma-0175  (หัวข้อ: time)
+TH: 12 โมง 15 นาที เขียนแบบนาฬิกาดิจิทัลว่าอย่างไร
+   1) 12:30  |  2) 12:45  |  3) 1:15  |  4) 12:15
+EN: How do you write quarter past 12 on a digital clock?
+   (EN choices same as TH)
+
+### ma-0176  (หัวข้อ: time)
+TH: 8 โมง 15 นาที เขียนแบบนาฬิกาดิจิทัลว่าอย่างไร
+   1) 8:15  |  2) 8:45  |  3) 8:30  |  4) 9:15
+EN: How do you write quarter past 8 on a digital clock?
+   (EN choices same as TH)
+
+### ma-0177  (หัวข้อ: money)
+TH: เหรียญ 1 บาท กับ 2 บาท รวมเป็นกี่บาท
+   1) 4 บาท  |  2) 3 บาท  |  3) 1 บาท  |  4) 2 บาท
+EN: A 1-baht coin and a 2-baht coin make how much?
+   1) 4 baht  |  2) 3 baht  |  3) 1 baht  |  4) 2 baht
+
+### ma-0178  (หัวข้อ: subtract)
+TH: 52 − 12 = ?
+   1) 41  |  2) 43  |  3) 42  |  4) 40
+EN: 52 − 12 = ?
+   (EN choices same as TH)
+
+### ma-0179  (หัวข้อ: money)
+TH: เหรียญ 5 บาท กับ 10 บาท รวมเป็นกี่บาท
+   1) 18 บาท  |  2) 13 บาท  |  3) 17 บาท  |  4) 15 บาท
+EN: A 5-baht coin and a 10-baht coin make how much?
+   1) 18 baht  |  2) 13 baht  |  3) 17 baht  |  4) 15 baht
+
+### ma-0180  (หัวข้อ: time)
+TH: 1 โมง 45 นาที เขียนแบบนาฬิกาดิจิทัลว่าอย่างไร
+   1) 2:45  |  2) 1:00  |  3) 1:45  |  4) 1:15
+EN: How do you write quarter to 2 on a digital clock?
+   (EN choices same as TH)
+
+### ma-0181  (หัวข้อ: add)
+TH: 24 + 17 = ?
+   1) 38  |  2) 41  |  3) 44  |  4) 31
+EN: 24 + 17 = ?
+   (EN choices same as TH)
+
+### ma-0182  (หัวข้อ: divide)
+TH: 5 ÷ 5 = ?
+   1) 4  |  2) 2  |  3) 1  |  4) 3
+EN: 5 ÷ 5 = ?
+   (EN choices same as TH)
+
+### ma-0183  (หัวข้อ: money)
+TH: เหรียญ 10 บาท กับ 5 บาท รวมเป็นกี่บาท
+   1) 17 บาท  |  2) 18 บาท  |  3) 14 บาท  |  4) 15 บาท
+EN: A 10-baht coin and a 5-baht coin make how much?
+   1) 17 baht  |  2) 18 baht  |  3) 14 baht  |  4) 15 baht
+
+### ma-0184  (หัวข้อ: add)
+TH: 14 + 13 = ?
+   1) 26  |  2) 24  |  3) 30  |  4) 27
+EN: 14 + 13 = ?
+   (EN choices same as TH)
+
+### ma-0185  (หัวข้อ: place-value)
+TH: ใน 72 เลข 2 มีค่าเท่าไร
+   1) 70  |  2) 2  |  3) 20  |  4) 72
+EN: In 72, what is the 2 worth?
+   (EN choices same as TH)
+
+### ma-0186  (หัวข้อ: add)
+TH: 24 + 11 = ?
+   1) 34  |  2) 38  |  3) 35  |  4) 33
+EN: 24 + 11 = ?
+   (EN choices same as TH)
+
+### ma-0187  (หัวข้อ: divide)
+TH: 45 ÷ 5 = ?
+   1) 11  |  2) 7  |  3) 6  |  4) 9
+EN: 45 ÷ 5 = ?
+   (EN choices same as TH)
+
+### ma-0188  (หัวข้อ: word-problem)
+TH: มีกล่อง 8 กล่อง ใส่ปลากล่องละ 10 ตัว รวมกี่ตัว 🐟
+   1) 81  |  2) 83  |  3) 79  |  4) 80
+EN: There are 8 boxes with 10 fish in each. How many fish in total? 🐟
+   (EN choices same as TH)
+
+### ma-0189  (หัวข้อ: time)
+TH: 12 โมง 45 นาที เขียนแบบนาฬิกาดิจิทัลว่าอย่างไร
+   1) 12:00  |  2) 12:45  |  3) 12:15  |  4) 1:45
+EN: How do you write quarter to 1 on a digital clock?
+   (EN choices same as TH)
+
+### ma-0190  (หัวข้อ: missing-number)
+TH: 26 + ? = 49
+   1) 23  |  2) 26  |  3) 21  |  4) 22
+EN: 26 + ? = 49
+   (EN choices same as TH)
+
+### ma-0191  (หัวข้อ: divide)
+TH: 24 ÷ 2 = ?
+   1) 13  |  2) 10  |  3) 12  |  4) 11
+EN: 24 ÷ 2 = ?
+   (EN choices same as TH)
+
+### ma-0192  (หัวข้อ: money)
+TH: เหรียญ 2 บาท กับ 1 บาท รวมเป็นกี่บาท
+   1) 3 บาท  |  2) 2 บาท  |  3) 4 บาท  |  4) 0 บาท
+EN: A 2-baht coin and a 1-baht coin make how much?
+   1) 3 baht  |  2) 2 baht  |  3) 4 baht  |  4) 0 baht
+
+### ma-0193  (หัวข้อ: time)
+TH: 2 โมง 45 นาที เขียนแบบนาฬิกาดิจิทัลว่าอย่างไร
+   1) 2:45  |  2) 2:00  |  3) 3:45  |  4) 2:15
+EN: How do you write quarter to 3 on a digital clock?
+   (EN choices same as TH)
+
+### ma-0194  (หัวข้อ: odd-even)
+TH: เลขไหนเป็นเลขคู่: 53, 6, 23, 1
+   1) 53  |  2) 1  |  3) 6  |  4) 23
+EN: Which number is even? 53, 6, 23, 1
+   (EN choices same as TH)
+
+### ma-0195  (หัวข้อ: missing-number)
+TH: 27 + ? = 53
+   1) 29  |  2) 23  |  3) 26  |  4) 28
+EN: 27 + ? = 53
+   (EN choices same as TH)
+
+### ma-0196  (หัวข้อ: missing-number)
+TH: 47 + ? = 57
+   1) 9  |  2) 12  |  3) 13  |  4) 10
+EN: 47 + ? = 57
+   (EN choices same as TH)
+
+### ma-0197  (หัวข้อ: fractions)
+TH: หนึ่งในสี่ของ 48 คือเท่าไร
+   1) 12  |  2) 11  |  3) 15  |  4) 9
+EN: What is a quarter of 48?
+   (EN choices same as TH)
+
+### ma-0198  (หัวข้อ: missing-number)
+TH: 28 + ? = 38
+   1) 13  |  2) 7  |  3) 8  |  4) 10
+EN: 28 + ? = 38
+   (EN choices same as TH)
+
+### ma-0199  (หัวข้อ: place-value)
+TH: ใน 93 เลข 3 มีค่าเท่าไร
+   1) 9  |  2) 3  |  3) 93  |  4) 90
+EN: In 93, what is the 3 worth?
+   (EN choices same as TH)
+
+### ma-0200  (หัวข้อ: add)
+TH: 26 + 33 = ?
+   1) 57  |  2) 56  |  3) 49  |  4) 59
+EN: 26 + 33 = ?
+   (EN choices same as TH)
+
+### ma-0201  (หัวข้อ: time)
+TH: 7 โมงครึ่ง เขียนแบบนาฬิกาดิจิทัลว่าอย่างไร
+   1) 8:30  |  2) 7:45  |  3) 7:30  |  4) 7:00
+EN: How do you write half past 7 on a digital clock?
+   (EN choices same as TH)
+
+### ma-0202  (หัวข้อ: money)
+TH: เหรียญ 20 บาท กับ 20 บาท รวมเป็นกี่บาท
+   1) 38 บาท  |  2) 43 บาท  |  3) 40 บาท  |  4) 37 บาท
+EN: A 20-baht coin and a 20-baht coin make how much?
+   1) 38 baht  |  2) 43 baht  |  3) 40 baht  |  4) 37 baht
+
+### ma-0203  (หัวข้อ: odd-even)
+TH: เลขไหนเป็นเลขคี่: 12, 58, 49, 36
+   1) 49  |  2) 58  |  3) 12  |  4) 36
+EN: Which number is odd? 12, 58, 49, 36
+   (EN choices same as TH)
+
+### ma-0204  (หัวข้อ: divide)
+TH: 10 ÷ 5 = ?
+   1) 2  |  2) 5  |  3) 4  |  4) 1
+EN: 10 ÷ 5 = ?
+   (EN choices same as TH)
+
+### ma-0205  (หัวข้อ: time)
+TH: 1 โมงตรง เขียนแบบนาฬิกาดิจิทัลว่าอย่างไร
+   1) 1:00  |  2) 2:00  |  3) 1:30  |  4) 1:15
+EN: How do you write 1 o'clock on a digital clock?
+   (EN choices same as TH)
+
+### ma-0206  (หัวข้อ: fractions)
+TH: ครึ่งหนึ่งของ 10 คือเท่าไร
+   1) 5  |  2) 2  |  3) 7  |  4) 8
+EN: What is half of 10?
+   (EN choices same as TH)
+
+### ma-0207  (หัวข้อ: word-problem)
+TH: มีกล่อง 4 กล่อง ใส่เหรียญกล่องละ 2 เหรียญ รวมกี่เหรียญ 🪙
+   1) 10  |  2) 8  |  3) 6  |  4) 7
+EN: There are 4 boxes with 2 coins in each. How many coins in total? 🪙
+   (EN choices same as TH)
+
+### ma-0208  (หัวข้อ: fractions)
+TH: หนึ่งในสี่ของ 16 คือเท่าไร
+   1) 3  |  2) 7  |  3) 5  |  4) 4
+EN: What is a quarter of 16?
+   (EN choices same as TH)
+
+### ma-0209  (หัวข้อ: fractions)
+TH: หนึ่งในสี่ของ 8 คือเท่าไร
+   1) 0  |  2) 2  |  3) 3  |  4) 4
+EN: What is a quarter of 8?
+   (EN choices same as TH)
+
+### ma-0210  (หัวข้อ: money)
+TH: เหรียญ 2 บาท กับ 5 บาท รวมเป็นกี่บาท
+   1) 7 บาท  |  2) 9 บาท  |  3) 6 บาท  |  4) 8 บาท
+EN: A 2-baht coin and a 5-baht coin make how much?
+   1) 7 baht  |  2) 9 baht  |  3) 6 baht  |  4) 8 baht
+
+### ma-0211  (หัวข้อ: word-problem)
+TH: มีกล่อง 8 กล่อง ใส่ดาวกล่องละ 2 ดวง รวมกี่ดวง ⭐
+   1) 16  |  2) 17  |  3) 15  |  4) 26
+EN: There are 8 boxes with 2 stars in each. How many stars in total? ⭐
+   (EN choices same as TH)
+
+### ma-0212  (หัวข้อ: add)
+TH: 13 + 37 = ?
+   1) 50  |  2) 49  |  3) 40  |  4) 48
+EN: 13 + 37 = ?
+   (EN choices same as TH)
+
+### ma-0213  (หัวข้อ: odd-even)
+TH: เลขไหนเป็นเลขคู่: 21, 40, 1, 39
+   1) 40  |  2) 39  |  3) 21  |  4) 1
+EN: Which number is even? 21, 40, 1, 39
+   (EN choices same as TH)
+
+### ma-0214  (หัวข้อ: fractions)
+TH: หนึ่งในสี่ของ 12 คือเท่าไร
+   1) 0  |  2) 2  |  3) 4  |  4) 3
+EN: What is a quarter of 12?
+   (EN choices same as TH)
+
+### ma-0215  (หัวข้อ: place-value)
+TH: ใน 78 เลข 8 มีค่าเท่าไร
+   1) 8  |  2) 80  |  3) 78  |  4) 70
+EN: In 78, what is the 8 worth?
+   (EN choices same as TH)
+
+### ma-0216  (หัวข้อ: multiply)
+TH: 9 × 10 = ?
+   1) 88  |  2) 92  |  3) 87  |  4) 90
+EN: 9 × 10 = ?
+   (EN choices same as TH)
+
+### ma-0217  (หัวข้อ: fractions)
+TH: ครึ่งหนึ่งของ 6 คือเท่าไร
+   1) 3  |  2) 5  |  3) 1  |  4) 4
+EN: What is half of 6?
+   (EN choices same as TH)
+
+### ma-0218  (หัวข้อ: money)
+TH: เหรียญ 2 บาท กับ 10 บาท รวมเป็นกี่บาท
+   1) 12 บาท  |  2) 14 บาท  |  3) 10 บาท  |  4) 9 บาท
+EN: A 2-baht coin and a 10-baht coin make how much?
+   1) 12 baht  |  2) 14 baht  |  3) 10 baht  |  4) 9 baht
+
+### ma-0219  (หัวข้อ: word-problem)
+TH: มีกล่อง 4 กล่อง ใส่ปลากล่องละ 10 ตัว รวมกี่ตัว 🐟
+   1) 30  |  2) 39  |  3) 40  |  4) 41
+EN: There are 4 boxes with 10 fish in each. How many fish in total? 🐟
+   (EN choices same as TH)
+
+### ma-0220  (หัวข้อ: add)
+TH: 27 + 30 = ?
+   1) 60  |  2) 59  |  3) 57  |  4) 47
+EN: 27 + 30 = ?
+   (EN choices same as TH)
+
+### ma-0221  (หัวข้อ: word-problem)
+TH: มีกล่อง 7 กล่อง ใส่ปลากล่องละ 5 ตัว รวมกี่ตัว 🐟
+   1) 35  |  2) 33  |  3) 37  |  4) 25
+EN: There are 7 boxes with 5 fish in each. How many fish in total? 🐟
+   (EN choices same as TH)
+
+### ma-0222  (หัวข้อ: time)
+TH: 3 โมงตรง เขียนแบบนาฬิกาดิจิทัลว่าอย่างไร
+   1) 3:00  |  2) 3:30  |  3) 3:15  |  4) 4:00
+EN: How do you write 3 o'clock on a digital clock?
+   (EN choices same as TH)
+
+### ma-0223  (หัวข้อ: add)
+TH: 17 + 14 = ?
+   1) 21  |  2) 31  |  3) 30  |  4) 34
+EN: 17 + 14 = ?
+   (EN choices same as TH)
+
+### ma-0224  (หัวข้อ: divide)
+TH: 30 ÷ 5 = ?
+   1) 6  |  2) 4  |  3) 9  |  4) 5
+EN: 30 ÷ 5 = ?
+   (EN choices same as TH)
+
+### ma-0225  (หัวข้อ: place-value)
+TH: ใน 68 เลข 8 มีค่าเท่าไร
+   1) 6  |  2) 8  |  3) 80  |  4) 68
+EN: In 68, what is the 8 worth?
+   (EN choices same as TH)
+
+### ma-0226  (หัวข้อ: word-problem)
+TH: มีกล่อง 4 กล่อง ใส่ขนมกล่องละ 5 ชิ้น รวมกี่ชิ้น 🍬
+   1) 30  |  2) 17  |  3) 10  |  4) 20
+EN: There are 4 boxes with 5 sweets in each. How many sweets in total? 🍬
+   (EN choices same as TH)
+
+### ma-0227  (หัวข้อ: divide)
+TH: 12 ÷ 2 = ?
+   1) 9  |  2) 6  |  3) 5  |  4) 3
+EN: 12 ÷ 2 = ?
+   (EN choices same as TH)
+
+### ma-0228  (หัวข้อ: time)
+TH: 9 โมง 45 นาที เขียนแบบนาฬิกาดิจิทัลว่าอย่างไร
+   1) 10:45  |  2) 9:00  |  3) 9:45  |  4) 9:15
+EN: How do you write quarter to 10 on a digital clock?
+   (EN choices same as TH)
+
+### ma-0229  (หัวข้อ: money)
+TH: เหรียญ 2 บาท กับ 50 บาท รวมเป็นกี่บาท
+   1) 52 บาท  |  2) 50 บาท  |  3) 55 บาท  |  4) 53 บาท
+EN: A 2-baht coin and a 50-baht coin make how much?
+   1) 52 baht  |  2) 50 baht  |  3) 55 baht  |  4) 53 baht
+
+### ma-0230  (หัวข้อ: fractions)
+TH: หนึ่งในสี่ของ 44 คือเท่าไร
+   1) 8  |  2) 10  |  3) 14  |  4) 11
+EN: What is a quarter of 44?
+   (EN choices same as TH)
+
+### ma-0231  (หัวข้อ: add)
+TH: 57 + 22 = ?
+   1) 79  |  2) 80  |  3) 77  |  4) 76
+EN: 57 + 22 = ?
+   (EN choices same as TH)
+
+### ma-0232  (หัวข้อ: missing-number)
+TH: 21 + ? = 34
+   1) 12  |  2) 10  |  3) 13  |  4) 16
+EN: 21 + ? = 34
+   (EN choices same as TH)
+
+### ma-0233  (หัวข้อ: word-problem)
+TH: มีกล่อง 3 กล่อง ใส่ขนมกล่องละ 5 ชิ้น รวมกี่ชิ้น 🍬
+   1) 5  |  2) 17  |  3) 15  |  4) 13
+EN: There are 3 boxes with 5 sweets in each. How many sweets in total? 🍬
+   (EN choices same as TH)
+
+### ma-0234  (หัวข้อ: add)
+TH: 27 + 27 = ?
+   1) 57  |  2) 51  |  3) 44  |  4) 54
+EN: 27 + 27 = ?
+   (EN choices same as TH)
+
+### ma-0235  (หัวข้อ: multiply)
+TH: 10 × 2 = ?
+   1) 17  |  2) 21  |  3) 20  |  4) 18
+EN: 10 × 2 = ?
+   (EN choices same as TH)
+
+### ma-0236  (หัวข้อ: multiply)
+TH: 1 × 10 = ?
+   1) 10  |  2) 0  |  3) 13  |  4) 11
+EN: 1 × 10 = ?
+   (EN choices same as TH)
+
+### ma-0237  (หัวข้อ: multiply)
+TH: 12 × 10 = ?
+   1) 120  |  2) 119  |  3) 123  |  4) 130
+EN: 12 × 10 = ?
+   (EN choices same as TH)
+
+### ma-0238  (หัวข้อ: missing-number)
+TH: 47 + ? = 59
+   1) 12  |  2) 11  |  3) 15  |  4) 14
+EN: 47 + ? = 59
+   (EN choices same as TH)
+
+### ma-0239  (หัวข้อ: place-value)
+TH: ใน 54 เลข 4 มีค่าเท่าไร
+   1) 4  |  2) 50  |  3) 40  |  4) 5
+EN: In 54, what is the 4 worth?
+   (EN choices same as TH)
+
+### ma-0240  (หัวข้อ: missing-number)
+TH: 20 + ? = 44
+   1) 26  |  2) 21  |  3) 25  |  4) 24
+EN: 20 + ? = 44
+   (EN choices same as TH)
+
+### ma-0241  (หัวข้อ: word-problem)
+TH: มีกล่อง 7 กล่อง ใส่คริสตัลกล่องละ 10 ชิ้น รวมกี่ชิ้น 💎
+   1) 70  |  2) 71  |  3) 60  |  4) 67
+EN: There are 7 boxes with 10 crystals in each. How many crystals in total? 💎
+   (EN choices same as TH)
+
+### ma-0242  (หัวข้อ: time)
+TH: 6 โมง 45 นาที เขียนแบบนาฬิกาดิจิทัลว่าอย่างไร
+   1) 7:45  |  2) 6:15  |  3) 6:45  |  4) 6:00
+EN: How do you write quarter to 7 on a digital clock?
+   (EN choices same as TH)
+
+### ma-0243  (หัวข้อ: time)
+TH: 8 โมงครึ่ง เขียนแบบนาฬิกาดิจิทัลว่าอย่างไร
+   1) 8:00  |  2) 8:30  |  3) 8:45  |  4) 9:30
+EN: How do you write half past 8 on a digital clock?
+   (EN choices same as TH)
+
+### ma-0244  (หัวข้อ: word-problem)
+TH: มีกล่อง 4 กล่อง ใส่ดาวกล่องละ 10 ดวง รวมกี่ดวง ⭐
+   1) 40  |  2) 43  |  3) 41  |  4) 42
+EN: There are 4 boxes with 10 stars in each. How many stars in total? ⭐
+   (EN choices same as TH)
+
+### ma-0245  (หัวข้อ: multiply)
+TH: 12 × 2 = ?
+   1) 24  |  2) 21  |  3) 14  |  4) 26
+EN: 12 × 2 = ?
+   (EN choices same as TH)
+
+### ma-0246  (หัวข้อ: time)
+TH: 2 โมงครึ่ง เขียนแบบนาฬิกาดิจิทัลว่าอย่างไร
+   1) 2:30  |  2) 2:00  |  3) 2:45  |  4) 3:30
+EN: How do you write half past 2 on a digital clock?
+   (EN choices same as TH)
+
+### ma-0247  (หัวข้อ: time)
+TH: 8 โมงตรง เขียนแบบนาฬิกาดิจิทัลว่าอย่างไร
+   1) 8:15  |  2) 9:00  |  3) 8:30  |  4) 8:00
+EN: How do you write 8 o'clock on a digital clock?
+   (EN choices same as TH)
+
+### ma-0248  (หัวข้อ: multiply)
+TH: 10 × 10 = ?
+   1) 100  |  2) 103  |  3) 90  |  4) 98
+EN: 10 × 10 = ?
+   (EN choices same as TH)
+
+### ma-0249  (หัวข้อ: fractions)
+TH: หนึ่งในสี่ของ 20 คือเท่าไร
+   1) 6  |  2) 2  |  3) 3  |  4) 5
+EN: What is a quarter of 20?
+   (EN choices same as TH)
+
+### ma-0250  (หัวข้อ: multiply)
+TH: 10 × 5 = ?
+   1) 40  |  2) 50  |  3) 51  |  4) 53
+EN: 10 × 5 = ?
+   (EN choices same as TH)
+
+### ma-0251  (หัวข้อ: word-problem)
+TH: มีกล่อง 6 กล่อง ใส่ดาวกล่องละ 2 ดวง รวมกี่ดวง ⭐
+   1) 10  |  2) 12  |  3) 9  |  4) 14
+EN: There are 6 boxes with 2 stars in each. How many stars in total? ⭐
+   (EN choices same as TH)
+
+### ma-0252  (หัวข้อ: missing-number)
+TH: 38 + ? = 47
+   1) 12  |  2) 6  |  3) 7  |  4) 9
+EN: 38 + ? = 47
+   (EN choices same as TH)
+
+### ma-0253  (หัวข้อ: time)
+TH: 9 โมง 15 นาที เขียนแบบนาฬิกาดิจิทัลว่าอย่างไร
+   1) 10:15  |  2) 9:30  |  3) 9:45  |  4) 9:15
+EN: How do you write quarter past 9 on a digital clock?
+   (EN choices same as TH)
+
+### ma-0254  (หัวข้อ: time)
+TH: 5 โมง 15 นาที เขียนแบบนาฬิกาดิจิทัลว่าอย่างไร
+   1) 5:45  |  2) 5:15  |  3) 6:15  |  4) 5:30
+EN: How do you write quarter past 5 on a digital clock?
+   (EN choices same as TH)
+
+### ma-0255  (หัวข้อ: missing-number)
+TH: 38 + ? = 77
+   1) 40  |  2) 42  |  3) 39  |  4) 37
+EN: 38 + ? = 77
+   (EN choices same as TH)
+
+### ma-0256  (หัวข้อ: time)
+TH: 6 โมงครึ่ง เขียนแบบนาฬิกาดิจิทัลว่าอย่างไร
+   1) 7:30  |  2) 6:30  |  3) 6:45  |  4) 6:00
+EN: How do you write half past 6 on a digital clock?
+   (EN choices same as TH)
+
+### ma-0257  (หัวข้อ: money)
+TH: เหรียญ 20 บาท กับ 5 บาท รวมเป็นกี่บาท
+   1) 27 บาท  |  2) 22 บาท  |  3) 23 บาท  |  4) 25 บาท
+EN: A 20-baht coin and a 5-baht coin make how much?
+   1) 27 baht  |  2) 22 baht  |  3) 23 baht  |  4) 25 baht
+
+### ma-0258  (หัวข้อ: multiply)
+TH: 6 × 5 = ?
+   1) 33  |  2) 31  |  3) 30  |  4) 27
+EN: 6 × 5 = ?
+   (EN choices same as TH)
+
+### ma-0259  (หัวข้อ: odd-even)
+TH: เลขไหนเป็นเลขคี่: 56, 59, 34, 40
+   1) 34  |  2) 56  |  3) 59  |  4) 40
+EN: Which number is odd? 56, 59, 34, 40
+   (EN choices same as TH)
+
+### ma-0260  (หัวข้อ: time)
+TH: 9 โมงตรง เขียนแบบนาฬิกาดิจิทัลว่าอย่างไร
+   1) 9:30  |  2) 10:00  |  3) 9:00  |  4) 9:15
+EN: How do you write 9 o'clock on a digital clock?
+   (EN choices same as TH)
+
+### ma-0261  (หัวข้อ: word-problem)
+TH: มีกล่อง 6 กล่อง ใส่ปลากล่องละ 2 ตัว รวมกี่ตัว 🐟
+   1) 11  |  2) 13  |  3) 12  |  4) 22
+EN: There are 6 boxes with 2 fish in each. How many fish in total? 🐟
+   (EN choices same as TH)
+
+### ma-0262  (หัวข้อ: divide)
+TH: 14 ÷ 2 = ?
+   1) 9  |  2) 7  |  3) 6  |  4) 5
+EN: 14 ÷ 2 = ?
+   (EN choices same as TH)
+
+### ma-0263  (หัวข้อ: divide)
+TH: 90 ÷ 10 = ?
+   1) 6  |  2) 11  |  3) 9  |  4) 8
+EN: 90 ÷ 10 = ?
+   (EN choices same as TH)
+
+### ma-0264  (หัวข้อ: missing-number)
+TH: 42 + ? = 72
+   1) 29  |  2) 33  |  3) 31  |  4) 30
+EN: 42 + ? = 72
+   (EN choices same as TH)
+
+### ma-0265  (หัวข้อ: time)
+TH: 4 โมงตรง เขียนแบบนาฬิกาดิจิทัลว่าอย่างไร
+   1) 5:00  |  2) 4:30  |  3) 4:00  |  4) 4:15
+EN: How do you write 4 o'clock on a digital clock?
+   (EN choices same as TH)
+
+### ma-0266  (หัวข้อ: missing-number)
+TH: 48 + ? = 76
+   1) 25  |  2) 28  |  3) 30  |  4) 26
+EN: 48 + ? = 76
+   (EN choices same as TH)
+
+### ma-0267  (หัวข้อ: missing-number)
+TH: 15 + ? = 20
+   1) 5  |  2) 3  |  3) 7  |  4) 8
+EN: 15 + ? = 20
+   (EN choices same as TH)
+
+### ma-0268  (หัวข้อ: place-value)
+TH: ใน 39 เลข 3 มีค่าเท่าไร
+   1) 9  |  2) 3  |  3) 30  |  4) 90
+EN: In 39, what is the 3 worth?
+   (EN choices same as TH)
+
+### ma-0269  (หัวข้อ: multiply)
+TH: 11 × 5 = ?
+   1) 57  |  2) 56  |  3) 54  |  4) 55
+EN: 11 × 5 = ?
+   (EN choices same as TH)
+
+### ma-0270  (หัวข้อ: divide)
+TH: 40 ÷ 10 = ?
+   1) 4  |  2) 7  |  3) 6  |  4) 5
+EN: 40 ÷ 10 = ?
+   (EN choices same as TH)
+
+### ma-0271  (หัวข้อ: word-problem)
+TH: มีกล่อง 8 กล่อง ใส่ดอกไม้กล่องละ 10 ดอก รวมกี่ดอก 🌸
+   1) 78  |  2) 70  |  3) 80  |  4) 79
+EN: There are 8 boxes with 10 flowers in each. How many flowers in total? 🌸
+   (EN choices same as TH)
+
+### ma-0272  (หัวข้อ: subtract)
+TH: 95 − 73 = ?
+   1) 12  |  2) 23  |  3) 22  |  4) 32
+EN: 95 − 73 = ?
+   (EN choices same as TH)
+
+### ma-0273  (หัวข้อ: divide)
+TH: 10 ÷ 2 = ?
+   1) 4  |  2) 8  |  3) 5  |  4) 3
+EN: 10 ÷ 2 = ?
+   (EN choices same as TH)
+
+### ma-0274  (หัวข้อ: multiply)
+TH: 5 × 5 = ?
+   1) 25  |  2) 26  |  3) 28  |  4) 35
+EN: 5 × 5 = ?
+   (EN choices same as TH)
+
+### ma-0275  (หัวข้อ: divide)
+TH: 55 ÷ 5 = ?
+   1) 12  |  2) 10  |  3) 11  |  4) 9
+EN: 55 ÷ 5 = ?
+   (EN choices same as TH)
+
+### ma-0276  (หัวข้อ: add)
+TH: 58 + 34 = ?
+   1) 102  |  2) 92  |  3) 89  |  4) 95
+EN: 58 + 34 = ?
+   (EN choices same as TH)
+
+### ma-0277  (หัวข้อ: divide)
+TH: 10 ÷ 10 = ?
+   1) 2  |  2) 0  |  3) 3  |  4) 1
+EN: 10 ÷ 10 = ?
+   (EN choices same as TH)
+
+### ma-0278  (หัวข้อ: money)
+TH: เหรียญ 10 บาท กับ 1 บาท รวมเป็นกี่บาท
+   1) 14 บาท  |  2) 11 บาท  |  3) 8 บาท  |  4) 9 บาท
+EN: A 10-baht coin and a 1-baht coin make how much?
+   1) 14 baht  |  2) 11 baht  |  3) 8 baht  |  4) 9 baht
+
+### ma-0279  (หัวข้อ: divide)
+TH: 50 ÷ 10 = ?
+   1) 7  |  2) 3  |  3) 5  |  4) 4
+EN: 50 ÷ 10 = ?
+   (EN choices same as TH)
+
+### ma-0280  (หัวข้อ: divide)
+TH: 8 ÷ 2 = ?
+   1) 2  |  2) 4  |  3) 7  |  4) 6
+EN: 8 ÷ 2 = ?
+   (EN choices same as TH)
+
+### ma-0281  (หัวข้อ: divide)
+TH: 100 ÷ 10 = ?
+   1) 9  |  2) 13  |  3) 12  |  4) 10
+EN: 100 ÷ 10 = ?
+   (EN choices same as TH)
+
+### ma-0282  (หัวข้อ: multiply)
+TH: 8 × 5 = ?
+   1) 40  |  2) 42  |  3) 37  |  4) 38
+EN: 8 × 5 = ?
+   (EN choices same as TH)
+
+### ma-0283  (หัวข้อ: word-problem)
+TH: มีกล่อง 3 กล่อง ใส่ดาวกล่องละ 2 ดวง รวมกี่ดวง ⭐
+   1) 5  |  2) 9  |  3) 3  |  4) 6
+EN: There are 3 boxes with 2 stars in each. How many stars in total? ⭐
+   (EN choices same as TH)
+
+### ma-0284  (หัวข้อ: missing-number)
+TH: 41 + ? = 71
+   1) 28  |  2) 29  |  3) 32  |  4) 30
+EN: 41 + ? = 71
+   (EN choices same as TH)
+
+### ma-0285  (หัวข้อ: word-problem)
+TH: มีกล่อง 8 กล่อง ใส่ดาวกล่องละ 10 ดวง รวมกี่ดวง ⭐
+   1) 78  |  2) 80  |  3) 70  |  4) 77
+EN: There are 8 boxes with 10 stars in each. How many stars in total? ⭐
+   (EN choices same as TH)
+
+### ma-0286  (หัวข้อ: place-value)
+TH: ใน 24 เลข 4 มีค่าเท่าไร
+   1) 4  |  2) 40  |  3) 2  |  4) 24
+EN: In 24, what is the 4 worth?
+   (EN choices same as TH)
+
+### ma-0287  (หัวข้อ: missing-number)
+TH: 43 + ? = 73
+   1) 30  |  2) 33  |  3) 27  |  4) 28
+EN: 43 + ? = 73
+   (EN choices same as TH)
+
+### ma-0288  (หัวข้อ: add)
+TH: 57 + 37 = ?
+   1) 96  |  2) 97  |  3) 94  |  4) 92
+EN: 57 + 37 = ?
+   (EN choices same as TH)
+
+### ma-0289  (หัวข้อ: time)
+TH: 4 โมง 15 นาที เขียนแบบนาฬิกาดิจิทัลว่าอย่างไร
+   1) 4:15  |  2) 5:15  |  3) 4:30  |  4) 4:45
+EN: How do you write quarter past 4 on a digital clock?
+   (EN choices same as TH)
+
+### ma-0290  (หัวข้อ: subtract)
+TH: 71 − 13 = ?
+   1) 58  |  2) 48  |  3) 57  |  4) 56
+EN: 71 − 13 = ?
+   (EN choices same as TH)
+
+### ma-0291  (หัวข้อ: divide)
+TH: 4 ÷ 2 = ?
+   1) 0  |  2) 1  |  3) 4  |  4) 2
+EN: 4 ÷ 2 = ?
+   (EN choices same as TH)
+
+### ma-0292  (หัวข้อ: subtract)
+TH: 71 − 20 = ?
+   1) 54  |  2) 49  |  3) 41  |  4) 51
+EN: 71 − 20 = ?
+   (EN choices same as TH)
+
+### ma-0293  (หัวข้อ: multiply)
+TH: 11 × 10 = ?
+   1) 110  |  2) 107  |  3) 111  |  4) 113
+EN: 11 × 10 = ?
+   (EN choices same as TH)
+
+### ma-0294  (หัวข้อ: fractions)
+TH: ครึ่งหนึ่งของ 24 คือเท่าไร
+   1) 12  |  2) 14  |  3) 11  |  4) 9
+EN: What is half of 24?
+   (EN choices same as TH)
+
+### ma-0295  (หัวข้อ: word-problem)
+TH: มีกล่อง 4 กล่อง ใส่คริสตัลกล่องละ 5 ชิ้น รวมกี่ชิ้น 💎
+   1) 20  |  2) 23  |  3) 19  |  4) 17
+EN: There are 4 boxes with 5 crystals in each. How many crystals in total? 💎
+   (EN choices same as TH)
+
+### ma-0296  (หัวข้อ: add)
+TH: 27 + 17 = ?
+   1) 47  |  2) 45  |  3) 43  |  4) 44
+EN: 27 + 17 = ?
+   (EN choices same as TH)
+
+### ma-0297  (หัวข้อ: odd-even)
+TH: เลขไหนเป็นเลขคี่: 8, 15, 50, 56
+   1) 56  |  2) 50  |  3) 8  |  4) 15
+EN: Which number is odd? 8, 15, 50, 56
+   (EN choices same as TH)
+
+### ma-0298  (หัวข้อ: word-problem)
+TH: มีกล่อง 7 กล่อง ใส่ดอกไม้กล่องละ 5 ดอก รวมกี่ดอก 🌸
+   1) 38  |  2) 45  |  3) 35  |  4) 25
+EN: There are 7 boxes with 5 flowers in each. How many flowers in total? 🌸
+   (EN choices same as TH)
+
+### ma-0299  (หัวข้อ: add)
+TH: 40 + 26 = ?
+   1) 76  |  2) 66  |  3) 67  |  4) 56
+EN: 40 + 26 = ?
+   (EN choices same as TH)
+
+### ma-0300  (หัวข้อ: place-value)
+TH: ใน 96 เลข 6 มีค่าเท่าไร
+   1) 6  |  2) 90  |  3) 9  |  4) 96
+EN: In 96, what is the 6 worth?
+   (EN choices same as TH)
+
+### ma-0301  (หัวข้อ: missing-number)
+TH: 31 + ? = 45
+   1) 16  |  2) 11  |  3) 14  |  4) 12
+EN: 31 + ? = 45
+   (EN choices same as TH)
+
+### ma-0302  (หัวข้อ: divide)
+TH: 70 ÷ 10 = ?
+   1) 8  |  2) 10  |  3) 7  |  4) 6
+EN: 70 ÷ 10 = ?
+   (EN choices same as TH)
+
+### ma-0303  (หัวข้อ: odd-even)
+TH: เลขไหนเป็นเลขคี่: 23, 56, 48, 24
+   1) 23  |  2) 48  |  3) 24  |  4) 56
+EN: Which number is odd? 23, 56, 48, 24
+   (EN choices same as TH)
+
+### ma-0304  (หัวข้อ: money)
+TH: เหรียญ 10 บาท กับ 50 บาท รวมเป็นกี่บาท
+   1) 58 บาท  |  2) 60 บาท  |  3) 61 บาท  |  4) 63 บาท
+EN: A 10-baht coin and a 50-baht coin make how much?
+   1) 58 baht  |  2) 60 baht  |  3) 61 baht  |  4) 63 baht
+
+### ma-0305  (หัวข้อ: subtract)
+TH: 41 − 12 = ?
+   1) 39  |  2) 29  |  3) 31  |  4) 28
+EN: 41 − 12 = ?
+   (EN choices same as TH)
+
+### ma-0306  (หัวข้อ: subtract)
+TH: 49 − 35 = ?
+   1) 14  |  2) 11  |  3) 17  |  4) 15
+EN: 49 − 35 = ?
+   (EN choices same as TH)
+
+### ma-0307  (หัวข้อ: add)
+TH: 11 + 32 = ?
+   1) 42  |  2) 46  |  3) 43  |  4) 33
+EN: 11 + 32 = ?
+   (EN choices same as TH)
+
+### ma-0308  (หัวข้อ: odd-even)
+TH: เลขไหนเป็นเลขคี่: 56, 53, 34, 58
+   1) 56  |  2) 34  |  3) 53  |  4) 58
+EN: Which number is odd? 56, 53, 34, 58
+   (EN choices same as TH)
+
+### ma-0309  (หัวข้อ: money)
+TH: เหรียญ 1 บาท กับ 10 บาท รวมเป็นกี่บาท
+   1) 8 บาท  |  2) 13 บาท  |  3) 11 บาท  |  4) 10 บาท
+EN: A 1-baht coin and a 10-baht coin make how much?
+   1) 8 baht  |  2) 13 baht  |  3) 11 baht  |  4) 10 baht
+
+### ma-0310  (หัวข้อ: subtract)
+TH: 52 − 11 = ?
+   1) 41  |  2) 43  |  3) 51  |  4) 44
+EN: 52 − 11 = ?
+   (EN choices same as TH)
+
+### ma-0311  (หัวข้อ: multiply)
+TH: 3 × 10 = ?
+   1) 31  |  2) 30  |  3) 28  |  4) 40
+EN: 3 × 10 = ?
+   (EN choices same as TH)
+
+### ma-0312  (หัวข้อ: missing-number)
+TH: 25 + ? = 31
+   1) 7  |  2) 5  |  3) 8  |  4) 6
+EN: 25 + ? = 31
+   (EN choices same as TH)
+
+### ma-0313  (หัวข้อ: subtract)
+TH: 87 − 20 = ?
+   1) 57  |  2) 69  |  3) 67  |  4) 65
+EN: 87 − 20 = ?
+   (EN choices same as TH)
+
+### ma-0314  (หัวข้อ: word-problem)
+TH: มีกล่อง 3 กล่อง ใส่คริสตัลกล่องละ 2 ชิ้น รวมกี่ชิ้น 💎
+   1) 6  |  2) 9  |  3) 7  |  4) 16
+EN: There are 3 boxes with 2 crystals in each. How many crystals in total? 💎
+   (EN choices same as TH)
+
+### ma-0315  (หัวข้อ: subtract)
+TH: 49 − 12 = ?
+   1) 39  |  2) 40  |  3) 37  |  4) 34
+EN: 49 − 12 = ?
+   (EN choices same as TH)
+
+### ma-0316  (หัวข้อ: odd-even)
+TH: เลขไหนเป็นเลขคี่: 1, 30, 28, 26
+   1) 28  |  2) 30  |  3) 1  |  4) 26
+EN: Which number is odd? 1, 30, 28, 26
+   (EN choices same as TH)
+
+### ma-0317  (หัวข้อ: word-problem)
+TH: มีกล่อง 5 กล่อง ใส่ดาวกล่องละ 5 ดวง รวมกี่ดวง ⭐
+   1) 27  |  2) 22  |  3) 28  |  4) 25
+EN: There are 5 boxes with 5 stars in each. How many stars in total? ⭐
+   (EN choices same as TH)
+
+### ma-0318  (หัวข้อ: money)
+TH: เหรียญ 1 บาท กับ 50 บาท รวมเป็นกี่บาท
+   1) 52 บาท  |  2) 49 บาท  |  3) 48 บาท  |  4) 51 บาท
+EN: A 1-baht coin and a 50-baht coin make how much?
+   1) 52 baht  |  2) 49 baht  |  3) 48 baht  |  4) 51 baht
+
+### ma-0319  (หัวข้อ: time)
+TH: 6 โมงตรง เขียนแบบนาฬิกาดิจิทัลว่าอย่างไร
+   1) 6:30  |  2) 6:15  |  3) 7:00  |  4) 6:00
+EN: How do you write 6 o'clock on a digital clock?
+   (EN choices same as TH)
+
+### ma-0320  (หัวข้อ: divide)
+TH: 25 ÷ 5 = ?
+   1) 8  |  2) 2  |  3) 5  |  4) 4
+EN: 25 ÷ 5 = ?
+   (EN choices same as TH)
+
+### ma-0321  (หัวข้อ: time)
+TH: 7 โมงตรง เขียนแบบนาฬิกาดิจิทัลว่าอย่างไร
+   1) 7:00  |  2) 7:15  |  3) 8:00  |  4) 7:30
+EN: How do you write 7 o'clock on a digital clock?
+   (EN choices same as TH)
+
+### ma-0322  (หัวข้อ: odd-even)
+TH: เลขไหนเป็นเลขคี่: 5, 54, 38, 56
+   1) 38  |  2) 56  |  3) 5  |  4) 54
+EN: Which number is odd? 5, 54, 38, 56
+   (EN choices same as TH)
+
+### ma-0323  (หัวข้อ: add)
+TH: 34 + 29 = ?
+   1) 63  |  2) 60  |  3) 62  |  4) 53
+EN: 34 + 29 = ?
+   (EN choices same as TH)
+
+### ma-0324  (หัวข้อ: money)
+TH: เหรียญ 5 บาท กับ 50 บาท รวมเป็นกี่บาท
+   1) 55 บาท  |  2) 56 บาท  |  3) 53 บาท  |  4) 52 บาท
+EN: A 5-baht coin and a 50-baht coin make how much?
+   1) 55 baht  |  2) 56 baht  |  3) 53 baht  |  4) 52 baht
+
+### ma-0325  (หัวข้อ: missing-number)
+TH: 24 + ? = 63
+   1) 41  |  2) 40  |  3) 38  |  4) 39
+EN: 24 + ? = 63
+   (EN choices same as TH)
+
+### ma-0326  (หัวข้อ: time)
+TH: 12 โมงครึ่ง เขียนแบบนาฬิกาดิจิทัลว่าอย่างไร
+   1) 12:30  |  2) 12:45  |  3) 1:30  |  4) 12:00
+EN: How do you write half past 12 on a digital clock?
+   (EN choices same as TH)
+
+### ma-0327  (หัวข้อ: subtract)
+TH: 70 − 52 = ?
+   1) 15  |  2) 20  |  3) 18  |  4) 8
+EN: 70 − 52 = ?
+   (EN choices same as TH)
+
+### ma-0328  (หัวข้อ: subtract)
+TH: 30 − 10 = ?
+   1) 30  |  2) 21  |  3) 20  |  4) 19
+EN: 30 − 10 = ?
+   (EN choices same as TH)
+
+### ma-0329  (หัวข้อ: add)
+TH: 19 + 29 = ?
+   1) 38  |  2) 46  |  3) 49  |  4) 48
+EN: 19 + 29 = ?
+   (EN choices same as TH)
+
+### ma-0330  (หัวข้อ: word-problem)
+TH: มีกล่อง 5 กล่อง ใส่ปลากล่องละ 10 ตัว รวมกี่ตัว 🐟
+   1) 47  |  2) 51  |  3) 50  |  4) 60
+EN: There are 5 boxes with 10 fish in each. How many fish in total? 🐟
+   (EN choices same as TH)
+
+### ma-0331  (หัวข้อ: fractions)
+TH: หนึ่งในสี่ของ 28 คือเท่าไร
+   1) 7  |  2) 4  |  3) 10  |  4) 5
+EN: What is a quarter of 28?
+   (EN choices same as TH)
+
+### ma-0332  (หัวข้อ: multiply)
+TH: 3 × 5 = ?
+   1) 17  |  2) 15  |  3) 25  |  4) 13
+EN: 3 × 5 = ?
+   (EN choices same as TH)
+
+### ma-0333  (หัวข้อ: time)
+TH: 4 โมง 45 นาที เขียนแบบนาฬิกาดิจิทัลว่าอย่างไร
+   1) 4:15  |  2) 4:45  |  3) 5:45  |  4) 4:00
+EN: How do you write quarter to 5 on a digital clock?
+   (EN choices same as TH)
+
+### ma-0334  (หัวข้อ: time)
+TH: 3 โมง 45 นาที เขียนแบบนาฬิกาดิจิทัลว่าอย่างไร
+   1) 4:45  |  2) 3:15  |  3) 3:45  |  4) 3:00
+EN: How do you write quarter to 4 on a digital clock?
+   (EN choices same as TH)
+
+### ma-0335  (หัวข้อ: multiply)
+TH: 3 × 2 = ?
+   1) 8  |  2) 9  |  3) 3  |  4) 6
+EN: 3 × 2 = ?
+   (EN choices same as TH)
