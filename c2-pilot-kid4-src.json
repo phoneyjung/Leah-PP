@@ -1,0 +1,122 @@
+{
+ "schema": 1,
+ "file": "c2-pilot-kid4-src.png",
+ "cell": [
+  96,
+  96
+ ],
+ "rows": [
+  "S",
+  "SE",
+  "E",
+  "NE",
+  "N",
+  "NW",
+  "W",
+  "SW"
+ ],
+ "feet": [
+  48,
+  94
+ ],
+ "source": "PixelLab v3 88x88 Low Top-Down (G1 round 5 file _4, owner generated 14 Oct 2026)",
+ "pad": {
+  "south": {
+   "dx": 4,
+   "dy": 9,
+   "lossless": true,
+   "height": 84
+  },
+  "south-east": {
+   "dx": 4,
+   "dy": 8,
+   "lossless": true,
+   "height": 85
+  },
+  "east": {
+   "dx": 4,
+   "dy": 8,
+   "lossless": true,
+   "height": 84
+  },
+  "north-east": {
+   "dx": 4,
+   "dy": 10,
+   "lossless": true,
+   "height": 84
+  },
+  "north": {
+   "dx": 4,
+   "dy": 12,
+   "lossless": true,
+   "height": 82
+  },
+  "north-west": {
+   "dx": 4,
+   "dy": 10,
+   "lossless": true,
+   "height": 84
+  },
+  "west": {
+   "dx": 4,
+   "dy": 8,
+   "lossless": true,
+   "height": 84
+  },
+  "south-west": {
+   "dx": 4,
+   "dy": 8,
+   "lossless": true,
+   "height": 85
+  }
+ },
+ "source_sha256": {
+  "south": "4da22610b12fdf52c00d12c07ffb3d0a30902f0baa45ef75b0bd909c5b299f60",
+  "south-east": "939074918f3865494e63badcb359e0e6bb90ab2aec9ba4d3802d94b89b0f90c0",
+  "east": "943abd14b7bc140aa807c806320252379ae4b816e3b8bcb2e13f0d65d9c17116",
+  "north-east": "9c573b51038a49a5d579a28893b4b413de0d1e0360e690cc206b9978ad2dd79c",
+  "north": "938d7e8933777ca16faf45f35189f553738621d3620a670b368b3c76e4b8af01",
+  "north-west": "a69d01a27ff2ab91ce8c8bbff24f7b27b5d48878d7a170d5ee3bc9d8b9240545",
+  "west": "bfe5e1cd0cd1352cf79eb5f31369b5115d83919106aecb6090eddf13d87e8551",
+  "south-west": "2b168731b6e545c8f21d5c3c68b7671346808dfd5faf357e4273181fbbcf9b0b"
+ },
+ "holes_96": {
+  "S": [
+   [
+    29,
+    45
+   ],
+   [
+    67,
+    45
+   ]
+  ],
+  "NE": [
+   [
+    58,
+    44,
+    "2px"
+   ],
+   [
+    59,
+    46
+   ],
+   [
+    60,
+    47
+   ]
+  ],
+  "NW": [
+   [
+    37,
+    45
+   ],
+   [
+    35,
+    47,
+    "3px"
+   ]
+  ]
+ },
+ "note": "Lossless shift of the original pixels only. Never edit this file; edits go to c2-pilot-kid4-idle.png."
+}
