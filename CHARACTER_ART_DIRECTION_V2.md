@@ -37,18 +37,19 @@
 7. ข้อ 3–5: ปากไม่ใช่ชิ้นแต่งตัว → รวมปากเข้าชั้นหน้า · ตา ≤ 4 ทรง + สี 5 (EYEC) · แท็บหน้าสร้างตัว: ทรงผม ≤ 8 + สีผม · ตา ≤ 4 + สีตา · ผิว 4 · ของบนหัว (ไม่ใส่ + ≤ 5 ของเราเอง) · ชุด 2 + แบบที่ 1/2 · ไม่มีแท็บปาก
 8. ข้อ 8 Portrait: 256 → 384 (ตามที่ล็อกแล้ว)
 
-## 4. Prompt PixelLab รอบถัดไป = รอบ 3 (1 ฉบับ · **ฉบับสุดท้าย 4 จุด + ข้อ 5 · รอตรวจ** · ยังไม่กด)
-รอบ 2 เจ้าของสร้างแล้วด้วยพรอมป์ฉบับก่อนแก้ (commit `8d1f9fd`) และไม่ผ่าน → ผลอยู่ข้อ 9
+## 4. Prompt PixelLab รอบถัดไป = รอบ 4 (1 ฉบับ · **เจ้าของอนุมัติ 14 ต.ค.** · ยังไม่กด)
+รอบ 2 (พรอมป์ `8d1f9fd`) ไม่ผ่าน → ข้อ 9 · รอบ 3 (พรอมป์ `cb64582`) ไม่ผ่าน → ข้อ 10
 ตั้งค่า (เหมือนรอบแรก): Create from Text · Humanoid · Generation Mode **v3** · Camera **Low Top-Down** · Sprite Size **88 × 88** · Detail **Highly detailed** · Outline **Default** · ไม่ใส่ภาพอ้างอิง · ไม่กด ✨
-ราคา: รอบแรกหน้าจอแสดง **2 generations** → **ต้องถ่ายบรรทัด "Costs N generations" ส่งมาก่อนกดทุกครั้ง** · ถ้าเป็น 2 → สะสมประมาณ 6/65 (รอบแรก 2 + รอบ 2 คาด 2 + รอบ 3)
+ราคา: รอบแรกหน้าจอแสดง **2 generations** → **ต้องถ่ายบรรทัด "Costs N generations" ส่งมาก่อนกดทุกครั้ง** · ถ้าเป็น 2 → สะสมประมาณ 8/65 (รอบแรก 2 + รอบ 2–3 คาดรอบละ 2 + รอบ 4)
 
 ```text
-Original cute chibi female apprentice of a lantern academy, about 10 years old, friendly and brave, standing idle in a relaxed confident stance. Show the same character in all eight directions: S, SE, E, NE, N, NW, W, SW. The S view faces the viewer, SE and SW show the face turned naturally, and the back views N, NE and NW hide the face: no eyes and no mouth. Proportions: head about 38 percent of the total height, slim arms and legs that read clearly. Arms hang naturally a little away from the sides, both hands visible and not touching the body. Beautiful expressive face: large eyes with a thick solid black upper lash line and a tiny outer flick, a two-tone green iris with a darker pupil, one small white highlight at the upper left of each eye, thin soft eyebrows, a tiny nose, soft pink cheeks, and a small gentle closed smile that stays the same in every direction where the mouth is visible. Chestnut brown hair with soft bangs and side locks that frame the cheeks, drawn in chunky clean clusters. Ivory academy tunic with a short layered hem, warm brown leather belt, gloves and cuffed boots, small copper buttons. A medium blue short capelet over both shoulders, clearly visible from the front and the back, fastened at the chest with a round copper badge shaped like a small lantern. Nothing is worn across the chest or at the hips except the belt. Dark plum outlines, light from the upper left, three to four shading steps per material, crisp square pixels, a solid closed silhouette. Transparent background. Bare head showing the whole hairstyle, empty hands. No floor, no cast shadow, no glow effects, no text.
+One original cute chibi female apprentice of a lantern academy, about 10 years old, friendly and brave, drawn as a single full-body figure standing idle in a relaxed confident stance. Proportions: head about 38 percent of the total height, slim arms and legs that read clearly. Arms hang naturally a little away from the sides, both hands visible and not touching the body. Beautiful expressive face: large eyes with a thick solid black upper lash line and a tiny outer flick, a two-tone green iris with a darker pupil, one small white highlight at the upper left of each eye, thin soft eyebrows, a tiny nose, soft pink cheeks and a small gentle closed smile. Chestnut brown hair with soft bangs and side locks that frame the cheeks, drawn in chunky clean clusters. Ivory academy tunic with a short layered hem, warm brown leather belt, gloves and cuffed boots, small copper buttons. A medium blue short capelet over both shoulders, clearly visible from the front and the back, fastened at the chest with a small round muted copper badge shaped like a lantern. Nothing is worn across the chest or at the hips except the belt. Dark plum outlines, light from the upper left, three to four shading steps per material, crisp square pixels, a solid closed silhouette. Bare head showing the whole hairstyle, empty hands. Full body centered on a transparent background. No floor, no cast shadow, no glow effects, no text.
 ```
-- 1,629/2,000 ตัวอักษร · คำต้องห้าม 0 · ไม่มีชื่อเกมหรือตัวละครของคนอื่น · ไม่มีคำ hat / bag / pouch / strap / weapon / wings / adventurer
+- 1,414/2,000 ตัวอักษร · คำต้องห้าม 0 · ไม่มีชื่อเกมหรือตัวละครของคนอื่น · ไม่มีคำ hat / bag / pouch / strap / weapon / wings / adventurer / direction / view
 - **"head about 38 percent" เป็นค่าทดลองชดเชย** เพราะรอบแรกสั่ง 40–45% แต่ได้จริง 49% (PixelLab ทำหัวโตเกินที่สั่ง) · **เกณฑ์รับภาพจริงยังเป็น 40–45%** (ข้อ 5.2) · ลบคำว่า "two and three-quarter heads" ออกแล้วเพราะขัดกับ 38% (2.75 หัว ≈ 36%)
 - ระบุ **female apprentice** ให้ตรงกับรอบแรก เพื่อเทียบกันได้ตรง · เป็นเพศของ **ตัวต้นแบบ** เท่านั้น ระบบสร้างตัวละครจริงยังเลือกชาย/หญิงได้ภายหลัง (สเปก v2 มีชุด `f`/`m`/`any`)
-- ระบุ 8 ทิศ `S SE E NE N NW W SW` เป็นตัวเดียวกัน · S หันหน้าหาผู้เล่น · SE/SW หันหน้าตามธรรมชาติ · ทิศหลัง N / NE / NW ไม่มีตาและปาก · รอยยิ้มต้องเหมือนกันเฉพาะทิศที่เห็นปาก
+- **รอบ 4 ไม่เขียนเรื่องทิศในพรอมป์** (รอบ 3 เขียนรายชื่อ 8 ทิศแล้ว PixelLab วาดแผ่นรวมหลายตัวในทุกกรอบ) · PixelLab หมุน 8 ทิศให้เอง · กติกาทิศ (S หันหาผู้เล่น · SE/SW หันตามธรรมชาติ · ทิศหลัง N/NE/NW ไม่มีตาและปาก · ยิ้มเหมือนกันเฉพาะทิศที่เห็นปาก) **ใช้เป็นเกณฑ์ตรวจรับในข้อ 5 เท่านั้น** · พรอมป์บอก "a single full-body figure" และ "Full body centered on a transparent background" แบบรอบแรก
+- เข็มกลัดเปลี่ยนเป็น "small round muted copper" เพราะรอบ 3 ออกส้มทอง `#FEBD4A` ห่างทองสัญญาณ ΔE 6
 - ข้อ 5 (เจ้าของอนุมัติเพิ่ม): ไม่เอ่ยชื่อของที่ไม่ต้องการ ใช้ประโยคบอกสิ่งที่ต้องการแทน "Nothing is worn across the chest or at the hips except the belt." และ "Bare head showing the whole hairstyle, empty hands." เพราะรอบ 2 เขียน "no hat / no bag" แล้วได้ทั้งหมวกและกระเป๋า
 
 ## 5. เกณฑ์ตรวจรับรอบ 2
@@ -112,3 +113,15 @@ Claude วัดจาก ZIP (ไฟล์ภาพไม่เก็บใน 
 | 9. มือ | เห็น 2 ข้างใน S ✓ · แขนห้อยธรรมชาติ ✓ |
 
 สาเหตุที่น่าจะเป็น: คำ "adventurer" ชวนให้ใส่หมวกกับกระเป๋า และการเขียน "no hat / no bag / no strap" ทำให้ PixelLab ใส่ของนั้นเอง (รอบแรกไม่มี adventurer ก็ไม่มีหมวก) → แก้แล้วในข้อ 8 จุด 3 และ 5
+
+## 10. ผลรอบ 3 (เจ้าของกดเอง 14 ต.ค. 16:03 · พรอมป์ `cb64582` ตรงทุกตัวอักษร · v3 88×88 · **ไม่ผ่าน**)
+| เรื่อง | ผล |
+|---|---|
+| รูปแบบภาพ | **ทุกทิศเป็นแผ่นรวมหลายตัว: 5 ชิ้นต่อกรอบ** (ตัวเล็ก 4 ตัวขนาด ~21×41 px + ตัวกลาง 1 ตัวที่มีตัวเล็กซ้อน) ✗ · ใช้วัดเกณฑ์ข้ออื่นไม่ได้ |
+| หมวก | ไม่มี · ขอบบนว่าง 0 px ทุกทิศ ✓ (ข้อ 3 + 5 ได้ผล) |
+| กระเป๋า/สายคาด | ตัวกลางไม่เห็น ✓ |
+| ทิศหลัง | ไม่มีสีม่านตา (0 px) ✓ |
+| สี | เข็มกลัดส้มทอง `#FEBD4A` ห่างทองสัญญาณ ΔE 6.0 (< 10) ✗ |
+
+สาเหตุที่น่าจะเป็น: ประโยค "Show the same character in all eight directions: S, SE, … The S view … the back views …" ทำให้ PixelLab วาดแผ่นรวมหลายมุมในทุกกรอบ → รอบ 4 ตัดเรื่องทิศออกจากพรอมป์ (ข้อ 4)
+
