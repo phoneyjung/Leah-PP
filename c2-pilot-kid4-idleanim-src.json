@@ -1,0 +1,137 @@
+{
+ "schema": 1,
+ "file": "c2-pilot-kid4-idleanim-src.png",
+ "cell": [
+  96,
+  96
+ ],
+ "rows": [
+  "S",
+  "SE",
+  "E",
+  "NE",
+  "N",
+  "NW",
+  "W",
+  "SW"
+ ],
+ "cols": [
+  "f1",
+  "f2",
+  "f3",
+  "f4"
+ ],
+ "feet": [
+  48,
+  94
+ ],
+ "ms_per_frame": 200,
+ "playback": "f1 f2 f3 f2 loop; every 3-6 s one f2 slot becomes f4 (blink) - render contract, ASSET_SPEC_12 section 5",
+ "source": "PixelLab Template motion · Skeleton v3 · Breathing Idle · character _4 · owner generated 15 Oct 2026 · GIF 128x128 · placement = lossless crop: feet row 94 + cycle-mean body centre = locked static (same rule as walk)",
+ "per_direction": {
+  "S": {
+   "gif": "Idle_breathing-idle_south.gif",
+   "from": "idle1 (21:31 ZIP)",
+   "sha256": "a105267950023df3054599cf34e25026614d39b41634f367c863fd891b9a6075",
+   "canvas": [
+    128,
+    128
+   ],
+   "window_xy": [
+    16,
+    11
+   ],
+   "frames": 4
+  },
+  "SE": {
+   "gif": "Idle_breathing-idle_south-east.gif",
+   "from": "idle1 (21:31 ZIP)",
+   "sha256": "ed168616cf97a09c4f7904d61ac4b86798a2a16135aa4ceb09c659cd65396f94",
+   "canvas": [
+    128,
+    128
+   ],
+   "window_xy": [
+    16,
+    12
+   ],
+   "frames": 4
+  },
+  "E": {
+   "gif": "Idle_breathing-idle_east.gif",
+   "from": "re-roll 21:58 ZIP",
+   "sha256": "75c156fbd4dc1d06b0ae52f896698f3ee177da838344f3c3984f73547e86436f",
+   "canvas": [
+    128,
+    128
+   ],
+   "window_xy": [
+    19,
+    12
+   ],
+   "frames": 4
+  },
+  "NE": {
+   "gif": "Idle_breathing-idle_north-east.gif",
+   "from": "idle1",
+   "sha256": "57a8552bdcebe0aa2c0e4e352fd9e911666ce0821f82a875ec1501832a08d617",
+   "canvas": [
+    128,
+    128
+   ],
+   "window_xy": [
+    17,
+    10
+   ],
+   "frames": 4
+  },
+  "N": {
+   "gif": "Idle_breathing-idle_north.gif",
+   "from": "idle1",
+   "sha256": "50e59a21637c1a7c3c1502e9ebbbbeab0ad732a67771ea82cda77daa7c03f97f",
+   "canvas": [
+    128,
+    128
+   ],
+   "window_xy": [
+    16,
+    8
+   ],
+   "frames": 4
+  },
+  "NW": {
+   "gif": "Idle_breathing-idle_north-west.gif",
+   "from": "idle1",
+   "sha256": "a03b685c43f960cfaa9454de41b2b890d99d37bf7c960f29563a6726379521a2",
+   "canvas": [
+    128,
+    128
+   ],
+   "window_xy": [
+    14,
+    10
+   ],
+   "frames": 4
+  },
+  "W": {
+   "fallback": "D-IDLE-2 code breathing (PixelLab mirrored W from E twice)",
+   "frames": "4 copies of the locked static source W cell (c2-pilot-kid4-src.png row W)",
+   "codex": "do not clean W again: output W frames 1-4 = locked A2 W cell (c2-pilot-kid4-idle-a2.png @5bfda3b), mask = A3.1 W cell (@2813279); frame 4 = blink on that cell"
+  },
+  "SW": {
+   "gif": "Idle_breathing-idle_south-west.gif",
+   "from": "re-roll 23:30 ZIP",
+   "sha256": "d989be1ecbb44e3efc65734f7405ada93acf94e44a17212b928581786c1b7dc3",
+   "canvas": [
+    128,
+    128
+   ],
+   "window_xy": [
+    15,
+    12
+   ],
+   "frames": 4
+  }
+ },
+ "note": "Never edit this file. Cleanup goes to c2-pilot-kid4-idleanim.png per ASSET_SPEC_12 parts C/A."
+}
