@@ -1,0 +1,313 @@
+{
+ "inputs": {
+  "a2_png_sha256": "d11b184de7164f036c79a2ae242422464e41242340076c89d6bd148123923762",
+  "mask_png_sha256": "9b401cfb0b668643b1b4929858e19faa13d855b3a33889752457d21b2de81351"
+ },
+ "a3_checks": {
+  "hard": {
+   "1_size": true,
+   "2_id_range": true,
+   "3_g_range": true,
+   "4_coverage": true,
+   "6_alpha": true,
+   "7_a2_unchanged": true,
+   "8_id1_eq_plum_1882": true,
+   "5_wrong_material": true,
+   "9_id2_eyes_present": true,
+   "10_id11_groups": true,
+   "11_mouth_cheek": true,
+   "12_feet_shape": true,
+   "13_shade_order": true,
+   "14_signal_de00": true,
+   "15_leak_5120": true,
+   "16_json": true,
+   "17_png_size": true
+  },
+  "PASS": true,
+  "leak": {
+   "combos": 640,
+   "cells": 5120,
+   "fixed_changed_px": 0,
+   "alpha_changed_px": 0,
+   "wrong_ramp_px": 0,
+   "eye_lines_changed_px": 0,
+   "cross_material_px": 0,
+   "missing_change_px": 0,
+   "house_distinct": 4,
+   "copper_changed_by_house_px": 0,
+   "leak_dirs": {},
+   "PASS": true
+  },
+  "id11": {
+   "groups": 138,
+   "total_px": 1348,
+   "inner_dark_total": 3729,
+   "ratio_of_inner_dark": 0.361,
+   "not_dark_px": 0,
+   "max_group": 88
+  },
+  "signal": {
+   "fixed_fail": [],
+   "fixed_exceptions": [
+    {
+     "colour": "#F9DA99",
+     "id": 9,
+     "px": 6,
+     "de00_gold_cyan": [
+      9.2,
+      39.5
+     ]
+    }
+   ],
+   "ramp_fail": [],
+   "ramp_exceptions": [
+    {
+     "ramp": "hair",
+     "option": "Blonde",
+     "G": 3,
+     "colour": "#F0CC70",
+     "de00_gold_cyan": [
+      5.1,
+      43.1
+     ]
+    },
+    {
+     "ramp": "iris",
+     "option": "Amber",
+     "G": 2,
+     "colour": "#E6B446",
+     "de00_gold_cyan": [
+      5.3,
+      45.9
+     ]
+    },
+    {
+     "ramp": "house",
+     "option": "Sun",
+     "G": 1,
+     "colour": "#F0B512",
+     "de00_gold_cyan": [
+      5.8,
+      48.5
+     ]
+    },
+    {
+     "ramp": "house",
+     "option": "Sun",
+     "G": 2,
+     "colour": "#F3C546",
+     "de00_gold_cyan": [
+      3.5,
+      46.5
+     ]
+    },
+    {
+     "ramp": "house",
+     "option": "Sun",
+     "G": 3,
+     "colour": "#F6D579",
+     "de00_gold_cyan": [
+      6.3,
+      42.9
+     ]
+    }
+   ],
+   "PASS": true
+  }
+ },
+ "metrics": {
+  "S": {
+   "cell": [
+    96,
+    96
+   ],
+   "bottom_row": 94,
+   "top_row": 11,
+   "height": 84,
+   "feet_centre_x": 48.5,
+   "feet_centre_off": 0.5,
+   "bbox_centre_x": 48.0,
+   "semi_alpha": 0,
+   "holes_1_3px": 0,
+   "holes_any": 0,
+   "plum": 259,
+   "opaque_without_id": 0
+  },
+  "SE": {
+   "cell": [
+    96,
+    96
+   ],
+   "bottom_row": 94,
+   "top_row": 10,
+   "height": 85,
+   "feet_centre_x": 50.0,
+   "feet_centre_off": 2.0,
+   "bbox_centre_x": 47.0,
+   "semi_alpha": 0,
+   "holes_1_3px": 0,
+   "holes_any": 0,
+   "plum": 245,
+   "opaque_without_id": 0
+  },
+  "E": {
+   "cell": [
+    96,
+    96
+   ],
+   "bottom_row": 94,
+   "top_row": 11,
+   "height": 84,
+   "feet_centre_x": 48.5,
+   "feet_centre_off": 0.5,
+   "bbox_centre_x": 45.5,
+   "semi_alpha": 0,
+   "holes_1_3px": 0,
+   "holes_any": 0,
+   "plum": 213,
+   "opaque_without_id": 0
+  },
+  "NE": {
+   "cell": [
+    96,
+    96
+   ],
+   "bottom_row": 94,
+   "top_row": 11,
+   "height": 84,
+   "feet_centre_x": 49.0,
+   "feet_centre_off": 1.0,
+   "bbox_centre_x": 46.5,
+   "semi_alpha": 0,
+   "holes_1_3px": 0,
+   "holes_any": 0,
+   "plum": 231,
+   "opaque_without_id": 0
+  },
+  "N": {
+   "cell": [
+    96,
+    96
+   ],
+   "bottom_row": 94,
+   "top_row": 13,
+   "height": 82,
+   "feet_centre_x": 47.5,
+   "feet_centre_off": 0.5,
+   "bbox_centre_x": 47.5,
+   "semi_alpha": 0,
+   "holes_1_3px": 0,
+   "holes_any": 0,
+   "plum": 245,
+   "opaque_without_id": 0
+  },
+  "NW": {
+   "cell": [
+    96,
+    96
+   ],
+   "bottom_row": 94,
+   "top_row": 11,
+   "height": 84,
+   "feet_centre_x": 46.0,
+   "feet_centre_off": 2.0,
+   "bbox_centre_x": 48.5,
+   "semi_alpha": 0,
+   "holes_1_3px": 0,
+   "holes_any": 0,
+   "plum": 232,
+   "opaque_without_id": 0
+  },
+  "W": {
+   "cell": [
+    96,
+    96
+   ],
+   "bottom_row": 94,
+   "top_row": 11,
+   "height": 84,
+   "feet_centre_x": 46.5,
+   "feet_centre_off": 1.5,
+   "bbox_centre_x": 49.0,
+   "semi_alpha": 0,
+   "holes_1_3px": 0,
+   "holes_any": 0,
+   "plum": 210,
+   "opaque_without_id": 0
+  },
+  "SW": {
+   "cell": [
+    96,
+    96
+   ],
+   "bottom_row": 94,
+   "top_row": 10,
+   "height": 85,
+   "feet_centre_x": 45.0,
+   "feet_centre_off": 3.0,
+   "bbox_centre_x": 48.0,
+   "semi_alpha": 0,
+   "holes_1_3px": 0,
+   "holes_any": 0,
+   "plum": 247,
+   "opaque_without_id": 0
+  }
+ },
+ "default": {
+  "fixed_changed_px": 0,
+  "recolour_px_on_default_ramp": "13689/13689",
+  "EAB15C_in_A2": 4,
+  "EAB15C_in_default": 0,
+  "F9DA99_in_default": 6,
+  "default_colours_near_signal": {
+   "#F9DA99": {
+    "px": 6,
+    "de00_gold_cyan": [
+     9.2,
+     39.5
+    ]
+   }
+  },
+  "houses_order": [
+   "Sun",
+   "Wing",
+   "Leaf",
+   "Flame"
+  ],
+  "house_ids": [
+   "sun",
+   "wing",
+   "leaf",
+   "flame"
+  ]
+ },
+ "g2_1_criteria": {
+  "8/8 cells 96x96": true,
+  "bottom row 94 (feet [48,94])": true,
+  "feet centre within 2 px of x=48": false,
+  "height 80-88": true,
+  "semi-transparent 0": true,
+  "enclosed holes 1-3 px 0": true,
+  "plum outline 1,882 = ID 1": true,
+  "opaque without mask ID 0": true,
+  "5,120-image leak test 0": true,
+  "signal colours only locked exceptions": true,
+  "house order Sun Wing Leaf Flame 4/4": true,
+  "default render: fixed materials unchanged": true,
+  "default render: #EAB15C replaced by Brown ramp": true,
+  "default render: #F9DA99 kept (6 px)": true
+ },
+ "PASS": false,
+ "phone_scale": {
+  "qg1-5-phone-zoom100.png": 3.0,
+  "qg1-6-phone-zoom75.png": 2.25
+ },
+ "images": [
+  "qg1-1-default-8dirs.png",
+  "qg1-2-houses-4x8.png",
+  "qg1-3-skin-4.png",
+  "qg1-4-mix16.png",
+  "qg1-5-phone-zoom100.png",
+  "qg1-6-phone-zoom75.png"
+ ]
+}
