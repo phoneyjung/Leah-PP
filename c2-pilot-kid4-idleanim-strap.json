@@ -1,7 +1,7 @@
 {
  "schema": 1,
  "file": "c2-pilot-kid4-idleanim-src.png",
- "method": "S: A1 strap pixels (static S 12 px, 4ede68e) matched by colour with a +-5 px shift; box = expected strap pixels +-1 px (matched_px). SE/SW: PixelLab redrew the strap in the idle as a 2-3 px maroon band (SE runs down-RIGHT from the brooch; static ran down-left. SW runs down-left, steeper), so colour matching fails (SE 2/10, SW 3/7). strap_px = maroon pixels (R-G>=40, 70<=R<=175, B<R) in rows 58-62 that form one 8-connected band; keep_px = maroon pixels in the box that are not part of that band (clothing detail, keep, same rule as the SW f3 (37,59) answer). Row 57 and above = brooch and its dark rim: keep (A1 kept the same pixels in the static). Row 63 and below = belt: keep. Box = band +-1 px, top fixed at row 58.",
+ "method": "S: A1 strap pixels (static S 12 px, 4ede68e) matched by colour with a +-5 px shift; box = expected strap pixels +-1 px (matched_px). SE/SW: PixelLab redrew the strap in the idle as a 2-3 px maroon band (SE runs down-RIGHT from the brooch; static ran down-left. SW runs down-left, steeper), so colour matching fails (SE 2/10, SW 3/7). strap_px = maroon pixels (R-G>=40, 70<=R<=175, B<R) in rows 58-62 that form one 8-connected band; keep_px = maroon pixels in the box that are not part of that band (clothing detail, keep, same rule as the SW f3 (37,59) answer). Row 57 and above = brooch and its dark rim: keep (A1 kept the same pixels in the static). Row 63 and below = belt: keep. Box = band +-1 px, top fixed at row 58. S (v1.3.1, Codex query 23:45): strap_px = the 12 A1 static strap px shifted (0,+1) in f1/f2/f4, checked colour by colour; f3 = torso rises 1 px so the strap ends one row higher (10 px) and (44,63) is the belt top rim -> keep. matched_px kept for reference only; strap_px decides. The row >= 63 belt rule is for SE/SW only; S belt top rim = row 64 (f1 f2 f4) / row 63 (f3).",
  "coords": "x,y inside each 96x96 cell",
  "no_strap_expected": [
   "E",
@@ -64,7 +64,59 @@
      49,
      60
     ]
-   ]
+   ],
+   "strap_px": [
+    [
+     47,
+     60
+    ],
+    [
+     48,
+     60
+    ],
+    [
+     49,
+     60
+    ],
+    [
+     46,
+     61
+    ],
+    [
+     47,
+     61
+    ],
+    [
+     48,
+     61
+    ],
+    [
+     45,
+     62
+    ],
+    [
+     46,
+     62
+    ],
+    [
+     47,
+     62
+    ],
+    [
+     44,
+     63
+    ],
+    [
+     45,
+     63
+    ],
+    [
+     46,
+     63
+    ]
+   ],
+   "keep_px": [],
+   "note": "belt top rim = row 64 in this frame"
   },
   "S f2": {
    "match": "11/12",
@@ -123,7 +175,59 @@
      49,
      60
     ]
-   ]
+   ],
+   "strap_px": [
+    [
+     47,
+     60
+    ],
+    [
+     48,
+     60
+    ],
+    [
+     49,
+     60
+    ],
+    [
+     46,
+     61
+    ],
+    [
+     47,
+     61
+    ],
+    [
+     48,
+     61
+    ],
+    [
+     45,
+     62
+    ],
+    [
+     46,
+     62
+    ],
+    [
+     47,
+     62
+    ],
+    [
+     44,
+     63
+    ],
+    [
+     45,
+     63
+    ],
+    [
+     46,
+     63
+    ]
+   ],
+   "keep_px": [],
+   "note": "belt top rim = row 64 in this frame"
   },
   "S f3": {
    "match": "7/12",
@@ -166,7 +270,56 @@
      49,
      60
     ]
-   ]
+   ],
+   "strap_px": [
+    [
+     47,
+     60
+    ],
+    [
+     48,
+     60
+    ],
+    [
+     49,
+     60
+    ],
+    [
+     45,
+     61
+    ],
+    [
+     46,
+     61
+    ],
+    [
+     47,
+     61
+    ],
+    [
+     48,
+     61
+    ],
+    [
+     44,
+     62
+    ],
+    [
+     45,
+     62
+    ],
+    [
+     46,
+     62
+    ]
+   ],
+   "keep_px": [
+    [
+     44,
+     63
+    ]
+   ],
+   "note": "torso rises 1 px: strap ends 1 row higher, row 63 = belt top rim (44,63 is rim, not strap)"
   },
   "S f4": {
    "match": "11/12",
@@ -225,7 +378,59 @@
      49,
      60
     ]
-   ]
+   ],
+   "strap_px": [
+    [
+     47,
+     60
+    ],
+    [
+     48,
+     60
+    ],
+    [
+     49,
+     60
+    ],
+    [
+     46,
+     61
+    ],
+    [
+     47,
+     61
+    ],
+    [
+     48,
+     61
+    ],
+    [
+     45,
+     62
+    ],
+    [
+     46,
+     62
+    ],
+    [
+     47,
+     62
+    ],
+    [
+     44,
+     63
+    ],
+    [
+     45,
+     63
+    ],
+    [
+     46,
+     63
+    ]
+   ],
+   "keep_px": [],
+   "note": "belt top rim = row 64 in this frame"
   },
   "SE f1": {
    "box_x0y0x1y1": [
