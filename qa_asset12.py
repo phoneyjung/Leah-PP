@@ -156,8 +156,15 @@ def check_walk(srcp, sprp, mskp, chgp, holp, strp, od):
     H['09 mask: shade order (<= 2% inverted, no flat)'] = not shade_bad
     leg8 = []
     for i, D, k, sl in cells(A, nf):
-        for comp in components(ID[sl] == 8):
-            if len(comp) <= 3: leg8.append({'cell': '%s f%d' % (D, k + 1), 'size': len(comp), 'x': comp[0][0], 'y': comp[0][1], 'leg_zone': comp[0][1] >= 70})
+        I8 = ID[sl] == 8; opk = A[sl][..., 3] > 0
+        for comp in components(I8):
+            if len(comp) <= 3:
+                # spec 1.3.2: a cape-tip remnant (touches another ID 8 px diagonally AND borders transparent space) is not a leg piece
+                cs = set(comp)
+                touch8 = any(0 <= y + dy < C and 0 <= x + dx < C and I8[y + dy, x + dx] and (x + dx, y + dy) not in cs for x, y in comp for dx in (-1, 0, 1) for dy in (-1, 0, 1))
+                border_t = any(0 <= y + dy < C and 0 <= x + dx < C and not opk[y + dy, x + dx] for x, y in comp for dx, dy in q.N4)
+                tip = touch8 and border_t
+                leg8.append({'cell': '%s f%d' % (D, k + 1), 'size': len(comp), 'x': comp[0][0], 'y': comp[0][1], 'cape_tip': tip, 'leg_zone': comp[0][1] >= 70 and not tip})
     R['id8_small_pieces'] = leg8
     H['09 mask: small ID 8 pieces on legs (row >= 70) = 0'] = sum(1 for p in leg8 if p['leg_zone']) == 0
     # leak test on the whole sheet (640 combos x 48 frame images)
