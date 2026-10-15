@@ -1,0 +1,62 @@
+{
+ "schema": 1,
+ "from": "codex/asset-12-c2-motion e656034 \u00b7 c2-pilot-kid4-walk-mask.png",
+ "rule": "ASSET_SPEC_12 4.4: no small ID 8 piece (<= 3 px) split from the main cape on legs/boots. Relabel to the material around it (ID 11 if it is part of a dark dividing line, else ID 6 cloth / ID 7 leather), G = 0. Sprite pixels do not change.",
+ "coords": "x,y inside the 96x96 cell (row = direction, column = frame)",
+ "pieces": [
+  {
+   "cell": "S f2",
+   "x": 61,
+   "y": 75,
+   "size": 1
+  },
+  {
+   "cell": "SE f3",
+   "x": 39,
+   "y": 76,
+   "size": 1
+  },
+  {
+   "cell": "SE f5",
+   "x": 37,
+   "y": 70,
+   "size": 1
+  },
+  {
+   "cell": "SE f6",
+   "x": 61,
+   "y": 70,
+   "size": 1
+  },
+  {
+   "cell": "E f1",
+   "x": 41,
+   "y": 70,
+   "size": 1
+  },
+  {
+   "cell": "E f1",
+   "x": 45,
+   "y": 80,
+   "size": 1
+  },
+  {
+   "cell": "E f3",
+   "x": 41,
+   "y": 70,
+   "size": 1
+  },
+  {
+   "cell": "NE f3",
+   "x": 45,
+   "y": 83,
+   "size": 1
+  },
+  {
+   "cell": "W f1",
+   "x": 52,
+   "y": 81,
+   "size": 1
+  }
+ ]
+}
