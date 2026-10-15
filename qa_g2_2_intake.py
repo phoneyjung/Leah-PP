@@ -243,47 +243,30 @@ def check(zpath, src_json, od, rot_zip=None):
     dup = {k: [D for D, vs in dd.items() if len(vs) > 1] for k, dd in anims.items()}
     R['duplicate_directions'] = {k: v for k, v in dup.items() if v}
     chosen = {k: {D: vs[-1] for D, vs in dd.items()} for k, dd in anims.items()}   # last listed = latest generation (flag for owner)
-    # registration: anchor = idle frame 0 matched to the 88 rotation, placed like the locked static (dx, dy from src.json)
-    win = {}; reg = {}
-    for D in L8:
-        if D not in rot: continue
-        for k in ('idle', 'walk'):
-            v = chosen.get(k, {}).get(D)
-            if v and v['frames']:
-                ox, oy, mis, uni = register(rot[D], v['frames'][0]); reg.setdefault(D, {})[k] = {'offset': [ox, oy], 'mismatch_px': mis, 'union_px': uni}
-        a = reg.get(D, {}).get('idle') or reg.get(D, {}).get('walk')
-        if a: p = pad[inv[D]]; win[D] = (a['offset'][0] - p['dx'], a['offset'][1] - p['dy'])
-    R['registration'] = reg; R['window_xy'] = {D: list(v) for D, v in win.items()}
-    def place_all():
-        cells = {}; M = {}; lost_total = 0
-        for k, dd in chosen.items():
-            for D, v in dd.items():
-                if D not in win: continue
-                cs = []; ms = []
-                for i, f in enumerate(v['frames']):
-                    c, lost = place(f, *win[D]); lost_total += lost; cs.append(c)
-                    m = fmetrics(c, cs[0] if i else None); m['lost_px'] = lost; ms.append(m)
-                cells.setdefault(k, {})[D] = cs; M.setdefault(k, {})[D] = ms
-        return cells, M, lost_total
-    cells, M, lost_total = place_all()
-    # D-IDLE mode (owner 15 Oct 18:1x): idle comes from the locked A2 static, so the walk is anchored to it:
-    # feet = lowest foot of the cycle on row 94 · cycle-mean body centre = the static body centre of that direction (no jump idle <-> walk)
-    didle = 'idle' not in chosen
+    # anchor (owner decisions D-IDLE / D-IDLE-2): every animation is placed on the locked static of its direction:
+    # lowest foot of the cycle on row 94 · cycle-mean body centre (rows 52-86) = static body centre (no jump idle <-> walk <-> static)
+    # start from the registration of frame 1 to the 88 rotation (report only: Skeleton v3 redraws pixels, so it never matches exactly)
     static_bc = {}
     for D in L8:
         if D in rot: st, _ = place(rot[D], -pad[inv[D]]['dx'], -pad[inv[D]]['dy']); static_bc[D] = fmetrics(st)['body_centre_x']
-    R['mode'] = 'D-IDLE: walk anchored to the locked static (feet row 94 + cycle-mean body centre)' if didle else 'idle frame 0 anchored to the static'
-    if didle and 'walk' in M:
-        adj = {}
-        for D, ms in M['walk'].items():
-            fb = max(int(np.nonzero(f[..., 3] > 0)[0].max()) for f in chosen['walk'][D]['frames']) - win[D][1]   # unclipped lowest foot row
-            ddy = 94 - fb; mb = float(np.mean([m['body_centre_x'] for m in ms]))
-            ddx = rhu(static_bc[D] - mb); win[D] = (win[D][0] - ddx, win[D][1] - ddy); adj[D] = {'ddx': ddx, 'ddy': ddy}
-        cells, M, lost_total = place_all()
-        for D, ms in M['walk'].items():
-            adj[D]['static_body_x'] = static_bc[D]; adj[D]['walk_mean_body_x'] = round(float(np.mean([m['body_centre_x'] for m in ms])), 2)
-            adj[D]['walk_f1_body_x'] = ms[0]['body_centre_x']
-        R['walk_anchor'] = adj; R['window_xy'] = {D: list(v) for D, v in win.items()}
+    win = {}; reg = {}; adj = {}; cells = {}; M = {}; lost_total = 0
+    for k, dd in chosen.items():
+        for D, v in dd.items():
+            if D not in rot or not v['frames']: continue
+            ox, oy, mis, uni = register(rot[D], v['frames'][0]); reg.setdefault(D, {})[k] = {'offset': [ox, oy], 'mismatch_px': mis, 'union_px': uni}
+            p = pad[inv[D]]; w = [ox - p['dx'], oy - p['dy']]
+            fb = max(int(np.nonzero(f[..., 3] > 0)[0].max()) for f in v['frames']) - w[1]          # unclipped lowest foot row
+            w[1] -= 94 - fb
+            mb = float(np.mean([fmetrics(place(f, *w)[0])['body_centre_x'] for f in v['frames']]))
+            w[0] -= rhu(static_bc[D] - mb); win[(k, D)] = tuple(w)
+            cs = []; ms = []
+            for i, f in enumerate(v['frames']):
+                c, lost = place(f, *w); lost_total += lost; cs.append(c)
+                m = fmetrics(c, cs[0] if i else None); m['lost_px'] = lost; ms.append(m)
+            cells.setdefault(k, {})[D] = cs; M.setdefault(k, {})[D] = ms
+            adj.setdefault(k, {})[D] = {'window_xy': list(w), 'static_body_x': static_bc[D], 'mean_body_x': round(float(np.mean([m['body_centre_x'] for m in ms])), 2), 'f1_body_x': ms[0]['body_centre_x']}
+    R['registration'] = reg; R['anchor'] = adj; R['window_xy'] = {'%s %s' % kd: list(w) for kd, w in win.items()}
+    R['mode'] = 'each animation anchored to the locked static: feet row 94 + cycle-mean body centre'
     R['frames'] = M
     # per animation and direction summary
     summ = {}
@@ -296,7 +279,7 @@ def check(zpath, src_json, od, rot_zip=None):
                                          'face_changed': [m.get('face_changed_vs_frame0', 0) for m in ms], 'identical_frames': sum(1 for m in ms[1:] if m.get('changed_vs_frame0') == 0)}
     R['summary'] = summ
     # turning stability (idle frame 0 body centre, 8 adjacent pairs) + renderOffset proposal (plan 5)
-    bc0 = {D: M['idle'][D][0]['body_centre_x'] for D in L8 if D in M.get('idle', {})} if not didle else {D: static_bc[D] for D in L8 if D in static_bc}
+    bc0 = {D: static_bc[D] for D in L8 if D in static_bc}   # renderOffset is set on the static; every animation sits on it (anchor above)
     turn = {}
     if len(bc0) == 8:
         off = {D: max(-3, min(3, rhu(48 - bc0[D]))) for D in L8}
@@ -311,29 +294,24 @@ def check(zpath, src_json, od, rot_zip=None):
     R['mirrored_pairs'] = mir
     # raw-stage criteria (pre-cleanup); the rest of QG-2a waits for Codex cleanup + mask
     sk = lambda k: summ.get(k, {})
-    crit = {
-        'ZIP read safely (no refused members)': not bad,
-        'idle: 8 directions': len(sk('idle')) == 8, 'walk: 8 directions': len(sk('walk')) == 8,
-        'idle: %d frames every direction' % EXPECT['idle']: bool(sk('idle')) and all(v['frames'] == EXPECT['idle'] for v in sk('idle').values()),
-        'walk: %d frames every direction' % EXPECT['walk']: bool(sk('walk')) and all(v['frames'] == EXPECT['walk'] for v in sk('walk').values()),
+    kinds = [k for k in ('idle', 'walk') if k in summ]
+    crit = {'ZIP read safely (no refused members)': not bad}
+    for k in kinds:
+        crit['%s: 8 directions' % k] = len(sk(k)) == 8
+        crit['%s: %d frames every direction' % (k, EXPECT[k])] = all(v['frames'] == EXPECT[k] for v in sk(k).values())
+        crit['%s: cycle-mean body centre = static (<= 1 px)' % k] = len(adj.get(k, {})) == 8 and all(abs(v['mean_body_x'] - v['static_body_x']) <= 1 for v in adj[k].values())
+        crit['%s: frame 1 body centre within 2 px of static' % k] = len(adj.get(k, {})) == 8 and all(abs(v['f1_body_x'] - v['static_body_x']) <= 2 for v in adj[k].values())
+    crit.update({
         'one canvas size for all frames': len({tuple(f['canvas']) for k in R['found'].values() for vs in k.values() for f in vs if f['canvas']}) == 1,
         'no duplicate direction folders (else owner picks)': not R['duplicate_directions'],
         'no mirrored direction pairs': not mir,
         'placement into 96x96 lossless (0 px lost)': lost_total == 0 and bool(M),
-        'idle frame 0 matches the 88 rotation (<= 2% px differ)': bool(reg) and all(r['idle']['mismatch_px'] <= 0.02 * r['idle']['union_px'] for r in reg.values() if 'idle' in r),
-        'walk uses the same anchor as idle (offset within 1 px)': all(abs(r['walk']['offset'][0] - r['idle']['offset'][0]) <= 1 and abs(r['walk']['offset'][1] - r['idle']['offset'][1]) <= 1 for r in reg.values() if 'walk' in r and 'idle' in r),
         'semi-transparent 0': all(v['semi_alpha'] == 0 for k in summ.values() for v in k.values()),
-        'idle bottom row 94 all frames': bool(sk('idle')) and all(v['bottom_rows'] == [94] for v in sk('idle').values()),
-        'walk bottom row 92-94, >= 2 frames on 94, 0 px below 94': bool(sk('walk')) and all(min(v['bottom_rows']) >= 92 and max(v['bottom_rows']) <= 94 and v['frames_on_94'] >= 2 and v['below_94_px'] == 0 for v in sk('walk').values()),
         'in-cycle body centre drift <= 2 px': all(v['body_x_range'] is not None and v['body_x_range'] <= 2 for k in summ.values() for v in k.values()),
         'in-cycle bounce <= 2 px': all(v['bounce_top_row'] <= 2 for k in summ.values() for v in k.values()),
-        'turning 8 pairs <= 2 px (after renderOffset)': len(turn) == 8 and all(t['after_offset'] <= 2 for t in turn.values()),
-    }
-    if didle:   # idle is not from PixelLab: drop idle criteria, check the walk sits on the static idle instead
-        for c in [c for c in crit if c.startswith('idle') or c.startswith('walk uses the same anchor')]: crit.pop(c)
-        wa = R.get('walk_anchor', {})
-        crit['walk cycle-mean body centre = static idle centre (<= 1 px)'] = len(wa) == 8 and all(abs(v['walk_mean_body_x'] - v['static_body_x']) <= 1 for v in wa.values())
-        crit['walk frame 1 body centre within 2 px of static idle'] = len(wa) == 8 and all(abs(v['walk_f1_body_x'] - v['static_body_x']) <= 2 for v in wa.values())
+        'turning 8 pairs <= 2 px (after renderOffset)': len(turn) == 8 and all(t['after_offset'] <= 2 for t in turn.values())})
+    if 'idle' in kinds: crit['idle bottom row 94 all frames'] = all(v['bottom_rows'] == [94] for v in sk('idle').values())
+    if 'walk' in kinds: crit['walk bottom row 92-94, >= 2 frames on 94, 0 px below 94'] = all(min(v['bottom_rows']) >= 92 and max(v['bottom_rows']) <= 94 and v['frames_on_94'] >= 2 and v['below_94_px'] == 0 for v in sk('walk').values())
     R['criteria_raw_stage'] = crit; R['PASS_raw_stage'] = all(crit.values())
     R['waits_for_cleanup'] = ['strap pixels 0', 'enclosed holes 0', 'plum outer outline (A2 rule) 100%', 'mask on every opaque pixel', '640-combo leak test', 'signal colours', 'blink frame visual check (idle frame 4)']
     # ---------- pictures ----------
@@ -413,13 +391,13 @@ def selftest(src_zip, src_json, od):
         return R
     good = run('good', [])
     exp_off = {D: [22 - 4, 22 - p['dy']] for D, p in ((DIRNAME[k], v) for k, v in json.load(open(src_json))['pad'].items())}
-    res['good']['window_matches_expected'] = good['window_xy'] == {D: exp_off[D] for D in L8}
+    res['good']['window_matches_expected'] = all(good['window_xy']['%s %s' % (k, D)] == exp_off[D] for k in ('idle', 'walk') for D in L8)
     res['good']['identical_frame_count_idle'] = {D: v['identical_frames'] for D, v in good['summary']['idle'].items()}
     run('frames5', ['idle: 4 frames every direction'], idle_n=5)
     run('dupSE', ['no duplicate direction folders (else owner picks)'], dup='SE')
     run('mirrorW', ['no mirrored direction pairs'], mirror=True)
     run('semi', ['semi-transparent 0'], semi=True)
-    run('edgeloss', ['placement into 96x96 lossless (0 px lost)'], edge=True)
+    run('edgeloss', ['walk bottom row 92-94, >= 2 frames on 94, 0 px below 94'], edge=True)
     run('drift3', ['in-cycle body centre drift <= 2 px'], drift=3)
     json.dump(res, open(os.path.join(od, 'selftest.json'), 'w'), indent=1)
     for k, v in res.items(): print(('OK   ' if v['ok'] else 'MISS ') + k, '· failed criteria:', v['failed'])
