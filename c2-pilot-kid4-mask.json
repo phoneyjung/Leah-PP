@@ -70,6 +70,7 @@
     "house": 4
   },
   "source_colors": {
+    "0": [],
     "1": [
       "#3A1E3F"
     ],
@@ -280,6 +281,7 @@
       "#262A46",
       "#320C21",
       "#3D1123",
+      "#41566C",
       "#461625",
       "#513C4C",
       "#521C27",
@@ -410,8 +412,7 @@
       "#15031A",
       "#23071D",
       "#320C21"
-    ],
-    "0": []
+    ]
   },
   "notes": [
     "A2 5bfda3b is immutable: no source pixels, proportions, position, default character colours or game files changed. Native 96x96 cells, S SE E NE N NW W SW; foot [48,94].",
@@ -421,17 +422,9 @@
     "ID11 denotes dark inter-material boundary fragments; interior hair locks and cape folds retain their material shadow. Components are evaluated with 8-connectivity and 4-neighbour material contacts.",
     "G is determined monotonically from the original CIELAB L* within each material; official palette values and order are unchanged. The mask does not select or change the initial character palette.",
     "Signal exception approved by owner: #F9DA99 at S(47,53),(46,54),(48,55),W(39,53) brooch and S(47,64),(46,66) buckle =6 pixels, all ID9. Existing Sun/Blonde/Amber ramp exceptions remain locked. NW hair #EAB15C is ID4; keep-original default option remains for later D-A3-1 review.",
-    "Official e1d74b4 QA: all 17 hard checks PASS; 640 colour combinations / 5120 direction images, all leak counters 0. Source PNG and RGBA hashes unchanged; shade-order inversions 0%. ID11 1350 px / 139 eight-connected groups (36.2% of 3729); every group touches >=2 distinct materials 3..10 by four-neighbour contact.",
-    "Soft flags reviewed: 407 four-connected islands of size 1-2. Counts by ID: 1=307, 3=9, 4=22, 6=10, 7=15, 8=30, 9=6, 10=5, 11=3. ID1: immutable diagonal/staircase plum outline; cannot relabel its 1882 exact pixels. ID4: isolated brow tips and dark hair-rim steps. ID3: exposed fingertips and ear/face-rim fragments. ID8: cape/collar contour and fold steps separated by fixed boundary pixels. IDs6/7: small sleeve, cloth edge, glove and boot fragments. ID9: discrete copper trim/highlights. ID10: original smile corners. ID11: four-connected fragments belong to valid eight-connected boundary groups; no failing groups. These are retained source details, not added artwork.",
-    "Other soft QA information: ID2 outside padded eye zones =0; side-view mouth G0 is E=3 px, W=2 px, preserving the original smiles. Per-ID source colour inventory is complete in source_colors; shared colours are intentionally listed under multiple materials when their native positions differ.",
-    "Soft island audit coordinates below identify non-plum fragments as ID:x,y/size in each native 96x96 direction; immutable ID1 fragments are omitted from this coordinate list.",
-    "Soft islands S: 4:38,33/1; 10:46,43/1; 10:51,43/1; 4:39,44/1; 4:58,44/1; 11:39,45/1; 4:40,45/1; 4:57,45/1; 11:58,45/1; 4:40,47/1; 4:57,47/1; 4:53,48/1; 9:61,57/2; 8:36,58/1; 8:29,60/1; 8:28,61/1; 6:37,67/1; 7:33,69/1; 6:63,72/1; 3:29,73/2; 3:66,73/2; 7:43,74/2; 7:65,74/1; 8:44,77/1; 8:60,77/1; 6:63,78/1",
-    "Soft islands SE: 4:51,32/2; 10:52,42/2; 10:57,42/1; 9:62,55/1; 9:59,56/2; 6:47,57/1; 8:63,60/1; 8:64,62/1; 8:58,77/1; 8:37,83/1",
-    "Soft islands E: 4:54,30/2; 4:51,31/1; 4:53,31/1; 4:55,32/2; 4:62,32/1; 3:50,33/1; 4:61,33/1; 3:49,34/1; 11:38,35/1; 4:39,35/1; 4:51,49/1; 9:47,57/2; 6:53,57/1; 8:56,57/1; 8:43,64/1; 8:44,65/1; 8:43,68/1; 8:45,72/1; 7:49,75/1; 3:49,76/1; 7:50,76/1; 8:43,90/1",
-    "Soft islands NE: 8:64,65/1; 7:37,83/1; 7:57,86/1; 8:49,93/1",
-    "Soft islands N: 8:41,50/1; 6:31,59/1; 6:64,59/1; 7:30,66/1; 7:27,76/1",
-    "Soft islands NW: 4:39,41/1; 6:36,59/1; 6:37,60/1; 8:32,64/1; 7:37,64/1; 8:30,68/1; 7:37,68/1; 7:29,75/1; 3:30,75/2; 7:35,76/1; 7:58,83/1; 7:38,86/1; 8:47,89/1",
-    "Soft islands W: 10:36,43/2; 4:43,45/2; 3:44,45/1; 4:41,47/1; 8:58,49/1; 9:46,57/2; 8:52,77/1; 8:41,89/1; 8:50,92/1",
-    "Soft islands SW: 3:50,30/1; 4:40,31/1; 3:53,34/1; 8:33,46/1; 4:39,48/1; 8:37,58/1; 9:56,58/2; 6:59,58/2; 8:31,62/1; 8:29,67/1; 8:57,77/1"
+    "09-A3.1 / ASSET_SPEC_09 v2.6 section 21 plus explicit owner approval on 2026-10-15: original 20 pieces / 28 pixels relabelled (ID6: 8 pieces / 13 pixels; ID7: 12 pieces / 15 pixels; retained ID8: 0), plus S(35,83),(35,84) ID11->ID7 G0. Total 30 changed pixels: 13 cloth and 17 leather. The two added pixels belong to the old boundary beside S-3; after S-3 becomes leather the line lies within one material. All changed pixels use G0. No other RGBA pixel differs from accepted A3 d73cbd0. Exact changes, owner approval and 20 per-piece decisions are recorded in c2-pilot-kid4-a3-1-changes.json.",
+    "Shape/location decisions are independent of shared source RGB. W-1 is the cloth edge at the hip (ID6). A2/A1/src, game files, initial character colours and the official palette are unchanged. No PixelLab calls or credits.",
+    "Validation scope: use the unchanged qa_asset09_a3_1.py from fef953c with a copy of its targets JSON, append [35,83] and [35,84] to S-3.px and set px_total=30; retain all 20 piece names. The original 28-pixel target file is preserved unchanged. With that original list, the only expected failing check is 1_only_target_pixels_changed because of the two explicitly approved additions.",
+    "Current A3 checks PASS 17/17; colour leakage 0/5120 cells; L* inversions 0%; alpha differences 0; plum ID1 remains 1882 exact pixels. ID11 is now 1348 pixels / 138 groups, failing groups 0. Soft islands=391; counts by ID={\"1\": 307, \"3\": 9, \"4\": 22, \"6\": 10, \"7\": 14, \"8\": 15, \"9\": 6, \"10\": 5, \"11\": 3}. Immutable plum stair-step fragments dominate the 4-connected flags; remaining fragments are retained eyebrow/hair-rim, ear/fingertip, cape/collar, cloth/leather edge, copper detail and smile-corner pixels. ID11 fragments form valid 8-connected groups. ID2 outside eye zones=0; mouth G0 E=3/W=2. All original 20 target cape pieces have been removed from ID8."
   ]
 }
