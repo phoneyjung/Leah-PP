@@ -1,0 +1,264 @@
+{
+ "schema": 1,
+ "file": "c2-pilot-kid4-walk-src.png",
+ "cell": [
+  96,
+  96
+ ],
+ "rows": [
+  "S",
+  "SE",
+  "E",
+  "NE",
+  "N",
+  "NW",
+  "W",
+  "SW"
+ ],
+ "cols": [
+  "f1",
+  "f2",
+  "f3",
+  "f4",
+  "f5",
+  "f6"
+ ],
+ "feet": [
+  48,
+  94
+ ],
+ "fps": 10,
+ "ms_per_frame": 100,
+ "source": "PixelLab Add Animation · Template motion · Skeleton v3 · Walking (6 frames) · character _4 (88x88) · owner generated 15 Oct 2026 · downloaded as 8 GIFs (128x128)",
+ "placement": "lossless crop of the 128 canvas (no scaling, no colour change): lowest foot of the cycle on row 94, cycle-mean body centre (rows 52-86) = locked static idle body centre of that direction (D-IDLE)",
+ "per_direction": {
+  "S": {
+   "gif": "Idle_walking-6-frames_south.gif",
+   "sha256": "73e2e6b30e624317804c4c9c247454b5a54d6a14cc308b42265caadd4a6717ef",
+   "canvas": [
+    128,
+    128
+   ],
+   "window_xy": [
+    16,
+    12
+   ],
+   "frames": 6,
+   "gif_ms": [
+    200,
+    200,
+    200,
+    200,
+    200,
+    200
+   ]
+  },
+  "SE": {
+   "gif": "Idle_walking-6-frames_south-east.gif",
+   "sha256": "81be6d6daba358532a5d00b69ac030452e35a5a4334e72a853e8a2b5c2dc1728",
+   "canvas": [
+    128,
+    128
+   ],
+   "window_xy": [
+    15,
+    12
+   ],
+   "frames": 6,
+   "gif_ms": [
+    200,
+    200,
+    200,
+    200,
+    200,
+    200
+   ]
+  },
+  "E": {
+   "gif": "Idle_walking-6-frames_east.gif",
+   "sha256": "b4ee6de423283c34606eb29684dd523e1d724ba5e1aea3a926d6442b008dbffc",
+   "canvas": [
+    128,
+    128
+   ],
+   "window_xy": [
+    16,
+    12
+   ],
+   "frames": 6,
+   "gif_ms": [
+    200,
+    200,
+    200,
+    200,
+    200,
+    200
+   ]
+  },
+  "NE": {
+   "gif": "Idle_walking-6-frames_north-east.gif",
+   "sha256": "2f464623bd1cd29442f47e6c1c772328c6022a0a2528af3dd59b8db5d67f12a2",
+   "canvas": [
+    128,
+    128
+   ],
+   "window_xy": [
+    15,
+    12
+   ],
+   "frames": 6,
+   "gif_ms": [
+    200,
+    200,
+    200,
+    200,
+    200,
+    200
+   ]
+  },
+  "N": {
+   "gif": "Idle_walking-6-frames_north.gif",
+   "sha256": "5e521470f03bbc2caf1003ae9d193a8152acf1399bba65e784b1f8defa8f6861",
+   "canvas": [
+    128,
+    128
+   ],
+   "window_xy": [
+    16,
+    9
+   ],
+   "frames": 6,
+   "gif_ms": [
+    200,
+    200,
+    200,
+    200,
+    200,
+    200
+   ]
+  },
+  "NW": {
+   "gif": "Idle_walking-6-frames_north-west (1).gif",
+   "sha256": "2317812667ee3dcb68700902624206afe2d6bc5fd93854e443b24e97439f5260",
+   "canvas": [
+    128,
+    128
+   ],
+   "window_xy": [
+    15,
+    11
+   ],
+   "frames": 6,
+   "gif_ms": [
+    200,
+    200,
+    200,
+    200,
+    200,
+    200
+   ]
+  },
+  "W": {
+   "gif": "Idle_walking-6-frames_west (1).gif",
+   "sha256": "7b82662ecec2cd42a3bb76507145e437a40ba09453504c55afb0b2484c31cd57",
+   "canvas": [
+    128,
+    128
+   ],
+   "window_xy": [
+    15,
+    12
+   ],
+   "frames": 6,
+   "gif_ms": [
+    200,
+    200,
+    200,
+    200,
+    200,
+    200
+   ]
+  },
+  "SW": {
+   "gif": "Idle_walking-6-frames_south-west (1).gif",
+   "sha256": "9eccf2792805c2df3941574b5fe0f74db92dd4a8c9c6931fd5b50e511cdc04d3",
+   "canvas": [
+    128,
+    128
+   ],
+   "window_xy": [
+    16,
+    13
+   ],
+   "frames": 6,
+   "gif_ms": [
+    200,
+    200,
+    200,
+    200,
+    200,
+    200
+   ]
+  }
+ },
+ "walk_anchor": {
+  "E": {
+   "ddx": 0,
+   "ddy": 0,
+   "static_body_x": 44.81,
+   "walk_mean_body_x": 44.49,
+   "walk_f1_body_x": 44.06
+  },
+  "NE": {
+   "ddx": 1,
+   "ddy": -2,
+   "static_body_x": 46.47,
+   "walk_mean_body_x": 46.89,
+   "walk_f1_body_x": 47.71
+  },
+  "NW": {
+   "ddx": -1,
+   "ddy": -1,
+   "static_body_x": 48.77,
+   "walk_mean_body_x": 48.66,
+   "walk_f1_body_x": 48.33
+  },
+  "N": {
+   "ddx": -1,
+   "ddy": -2,
+   "static_body_x": 47.48,
+   "walk_mean_body_x": 47.39,
+   "walk_f1_body_x": 47.3
+  },
+  "SE": {
+   "ddx": 1,
+   "ddy": 0,
+   "static_body_x": 46.97,
+   "walk_mean_body_x": 47.44,
+   "walk_f1_body_x": 47.49
+  },
+  "SW": {
+   "ddx": 0,
+   "ddy": -1,
+   "static_body_x": 48.07,
+   "walk_mean_body_x": 47.99,
+   "walk_f1_body_x": 48.02
+  },
+  "S": {
+   "ddx": 0,
+   "ddy": -1,
+   "static_body_x": 48.08,
+   "walk_mean_body_x": 47.73,
+   "walk_f1_body_x": 47.82
+  },
+  "W": {
+   "ddx": 0,
+   "ddy": 0,
+   "static_body_x": 49.76,
+   "walk_mean_body_x": 49.26,
+   "walk_f1_body_x": 49.51
+  }
+ },
+ "zip_sha256": "f1a7188035af24869747355b669d3c652ecf60719ca0e46aef5c56b6d7708489",
+ "note": "Never edit this file. Cleanup edits go to c2-pilot-kid4-walk.png per ASSET_SPEC_12."
+}

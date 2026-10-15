@@ -4,7 +4,7 @@
 # measures the raw (pre-cleanup) frames against QG-2a section 5, and writes review sheets + GIFs at game timing (idle 200 ms, walk 100 ms).
 # Items that need Codex cleanup first (strap, holes, plum outline, mask, colour leak) are reported, not judged, here.
 #
-# usage: python3 -I qa_g2_2_intake.py check ZIP SRC_JSON OUT_DIR
+# usage: python3 -I qa_g2_2_intake.py check ZIP SRC_JSON OUT_DIR [ROTATIONS_ZIP]   (ROTATIONS_ZIP when the ZIP holds only GIFs)
 #        python3 -I qa_g2_2_intake.py selftest SRC_ZIP SRC_JSON OUT_DIR      (SRC_ZIP = the 14 Oct `_4` PixelLab ZIP with Idle/rotations)
 import sys, os, re, io, json, zipfile, hashlib
 from collections import deque
@@ -227,9 +227,11 @@ def gif_phone(cells_by_dir, zoom, ms, path, label):
     return sc
 
 # ---------------------------------------------------------------- main check
-def check(zpath, src_json, od):
+def check(zpath, src_json, od, rot_zip=None):
     os.makedirs(od, exist_ok=True); S = json.load(open(src_json, encoding='utf-8')); pad = S['pad']
     files, bad = safe_read(zpath); rot, anims, notes = parse(files)
+    if len(rot) < 8 and rot_zip:   # GIF-only download: take the 88 rotations from the locked 14 Oct `_4` ZIP
+        rf, _ = safe_read(rot_zip); r2, _, _ = parse(rf); notes.append('rotations taken from %s (%d/8)' % (os.path.basename(rot_zip), len(r2))); rot = {**r2, **rot}; files = {**rf, **files}
     R = {'zip': os.path.basename(zpath), 'zip_sha256': sha(open(zpath, 'rb').read()), 'refused_members': bad, 'notes': notes}
     # same character as the locked `_4` source?
     inv = {v: k for k, v in DIRNAME.items()}
@@ -252,15 +254,36 @@ def check(zpath, src_json, od):
         a = reg.get(D, {}).get('idle') or reg.get(D, {}).get('walk')
         if a: p = pad[inv[D]]; win[D] = (a['offset'][0] - p['dx'], a['offset'][1] - p['dy'])
     R['registration'] = reg; R['window_xy'] = {D: list(v) for D, v in win.items()}
-    cells = {}; M = {}; lost_total = 0
-    for k, dd in chosen.items():
-        for D, v in dd.items():
-            if D not in win: continue
-            cs = []; ms = []
-            for i, f in enumerate(v['frames']):
-                c, lost = place(f, *win[D]); lost_total += lost; cs.append(c)
-                m = fmetrics(c, cs[0] if i else None); m['lost_px'] = lost; ms.append(m)
-            cells.setdefault(k, {})[D] = cs; M.setdefault(k, {})[D] = ms
+    def place_all():
+        cells = {}; M = {}; lost_total = 0
+        for k, dd in chosen.items():
+            for D, v in dd.items():
+                if D not in win: continue
+                cs = []; ms = []
+                for i, f in enumerate(v['frames']):
+                    c, lost = place(f, *win[D]); lost_total += lost; cs.append(c)
+                    m = fmetrics(c, cs[0] if i else None); m['lost_px'] = lost; ms.append(m)
+                cells.setdefault(k, {})[D] = cs; M.setdefault(k, {})[D] = ms
+        return cells, M, lost_total
+    cells, M, lost_total = place_all()
+    # D-IDLE mode (owner 15 Oct 18:1x): idle comes from the locked A2 static, so the walk is anchored to it:
+    # feet = lowest foot of the cycle on row 94 · cycle-mean body centre = the static body centre of that direction (no jump idle <-> walk)
+    didle = 'idle' not in chosen
+    static_bc = {}
+    for D in L8:
+        if D in rot: st, _ = place(rot[D], -pad[inv[D]]['dx'], -pad[inv[D]]['dy']); static_bc[D] = fmetrics(st)['body_centre_x']
+    R['mode'] = 'D-IDLE: walk anchored to the locked static (feet row 94 + cycle-mean body centre)' if didle else 'idle frame 0 anchored to the static'
+    if didle and 'walk' in M:
+        adj = {}
+        for D, ms in M['walk'].items():
+            fb = max(int(np.nonzero(f[..., 3] > 0)[0].max()) for f in chosen['walk'][D]['frames']) - win[D][1]   # unclipped lowest foot row
+            ddy = 94 - fb; mb = float(np.mean([m['body_centre_x'] for m in ms]))
+            ddx = rhu(static_bc[D] - mb); win[D] = (win[D][0] - ddx, win[D][1] - ddy); adj[D] = {'ddx': ddx, 'ddy': ddy}
+        cells, M, lost_total = place_all()
+        for D, ms in M['walk'].items():
+            adj[D]['static_body_x'] = static_bc[D]; adj[D]['walk_mean_body_x'] = round(float(np.mean([m['body_centre_x'] for m in ms])), 2)
+            adj[D]['walk_f1_body_x'] = ms[0]['body_centre_x']
+        R['walk_anchor'] = adj; R['window_xy'] = {D: list(v) for D, v in win.items()}
     R['frames'] = M
     # per animation and direction summary
     summ = {}
@@ -273,7 +296,7 @@ def check(zpath, src_json, od):
                                          'face_changed': [m.get('face_changed_vs_frame0', 0) for m in ms], 'identical_frames': sum(1 for m in ms[1:] if m.get('changed_vs_frame0') == 0)}
     R['summary'] = summ
     # turning stability (idle frame 0 body centre, 8 adjacent pairs) + renderOffset proposal (plan 5)
-    bc0 = {D: M['idle'][D][0]['body_centre_x'] for D in L8 if D in M.get('idle', {})}
+    bc0 = {D: M['idle'][D][0]['body_centre_x'] for D in L8 if D in M.get('idle', {})} if not didle else {D: static_bc[D] for D in L8 if D in static_bc}
     turn = {}
     if len(bc0) == 8:
         off = {D: max(-3, min(3, rhu(48 - bc0[D]))) for D in L8}
@@ -306,6 +329,11 @@ def check(zpath, src_json, od):
         'in-cycle bounce <= 2 px': all(v['bounce_top_row'] <= 2 for k in summ.values() for v in k.values()),
         'turning 8 pairs <= 2 px (after renderOffset)': len(turn) == 8 and all(t['after_offset'] <= 2 for t in turn.values()),
     }
+    if didle:   # idle is not from PixelLab: drop idle criteria, check the walk sits on the static idle instead
+        for c in [c for c in crit if c.startswith('idle') or c.startswith('walk uses the same anchor')]: crit.pop(c)
+        wa = R.get('walk_anchor', {})
+        crit['walk cycle-mean body centre = static idle centre (<= 1 px)'] = len(wa) == 8 and all(abs(v['walk_mean_body_x'] - v['static_body_x']) <= 1 for v in wa.values())
+        crit['walk frame 1 body centre within 2 px of static idle'] = len(wa) == 8 and all(abs(v['walk_f1_body_x'] - v['static_body_x']) <= 2 for v in wa.values())
     R['criteria_raw_stage'] = crit; R['PASS_raw_stage'] = all(crit.values())
     R['waits_for_cleanup'] = ['strap pixels 0', 'enclosed holes 0', 'plum outer outline (A2 rule) 100%', 'mask on every opaque pixel', '640-combo leak test', 'signal colours', 'blink frame visual check (idle frame 4)']
     # ---------- pictures ----------
@@ -401,6 +429,6 @@ def selftest(src_zip, src_json, od):
 
 if __name__ == '__main__':
     a = sys.argv[1:]
-    if a and a[0] == 'check' and len(a) == 4: R = check(*a[1:]); printout(R); sys.exit(0 if R['PASS_raw_stage'] else 1)
+    if a and a[0] == 'check' and len(a) in (4, 5): R = check(*a[1:]); printout(R); sys.exit(0 if R['PASS_raw_stage'] else 1)
     if a and a[0] == 'selftest' and len(a) == 4: sys.exit(selftest(*a[1:]))
     print(__doc__ or 'usage: check ZIP SRC_JSON OUT | selftest SRC_ZIP SRC_JSON OUT'); sys.exit(2)
