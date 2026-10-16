@@ -1,0 +1,423 @@
+{
+ "anchors": {
+  "idle": {
+   "S": [
+    [
+     33,
+     77
+    ],
+    [
+     34,
+     77
+    ],
+    [
+     34,
+     77
+    ],
+    [
+     34,
+     77
+    ]
+   ],
+   "SE": [
+    [
+     36,
+     76
+    ],
+    [
+     38,
+     77
+    ],
+    [
+     39,
+     77
+    ],
+    [
+     39,
+     77
+    ]
+   ],
+   "E": [
+    [
+     49,
+     76
+    ],
+    [
+     50,
+     76
+    ],
+    [
+     50,
+     76
+    ],
+    [
+     50,
+     76
+    ]
+   ],
+   "NE": [
+    [
+     64,
+     76
+    ],
+    [
+     62,
+     76
+    ],
+    [
+     61,
+     76
+    ],
+    [
+     62,
+     76
+    ]
+   ],
+   "N": [
+    null,
+    null,
+    null,
+    null
+   ],
+   "NW": [
+    [
+     33,
+     77
+    ],
+    [
+     33,
+     77
+    ],
+    [
+     31,
+     76
+    ],
+    [
+     33,
+     77
+    ]
+   ],
+   "W": [
+    [
+     46,
+     76
+    ],
+    [
+     46,
+     76
+    ],
+    [
+     46,
+     76
+    ],
+    [
+     46,
+     76
+    ]
+   ],
+   "SW": [
+    [
+     60,
+     77
+    ],
+    [
+     59,
+     77
+    ],
+    [
+     57,
+     77
+    ],
+    [
+     58,
+     77
+    ]
+   ]
+  },
+  "walk": {
+   "S": [
+    [
+     31,
+     74
+    ],
+    [
+     32,
+     74
+    ],
+    [
+     32,
+     74
+    ],
+    [
+     31,
+     74
+    ],
+    [
+     31,
+     73
+    ],
+    [
+     31,
+     73
+    ]
+   ],
+   "SE": [
+    [
+     38,
+     76
+    ],
+    [
+     46,
+     75
+    ],
+    [
+     44,
+     75
+    ],
+    [
+     36,
+     75
+    ],
+    [
+     75,
+     68
+    ],
+    [
+     71,
+     69
+    ]
+   ],
+   "E": [
+    [
+     57,
+     75
+    ],
+    [
+     62,
+     73
+    ],
+    [
+     60,
+     74
+    ],
+    [
+     50,
+     76
+    ],
+    [
+     43,
+     76
+    ],
+    [
+     49,
+     76
+    ]
+   ],
+   "NE": [
+    [
+     66,
+     73
+    ],
+    [
+     69,
+     71
+    ],
+    [
+     67,
+     72
+    ],
+    [
+     64,
+     74
+    ],
+    [
+     61,
+     76
+    ],
+    null
+   ],
+   "N": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "NW": [
+    null,
+    null,
+    null,
+    [
+     30,
+     74
+    ],
+    null,
+    null
+   ],
+   "W": [
+    [
+     47,
+     76
+    ],
+    [
+     52,
+     76
+    ],
+    [
+     51,
+     77
+    ],
+    [
+     45,
+     76
+    ],
+    [
+     32,
+     72
+    ],
+    [
+     38,
+     74
+    ]
+   ],
+   "SW": [
+    [
+     57,
+     75
+    ],
+    [
+     60,
+     75
+    ],
+    [
+     61,
+     75
+    ],
+    [
+     58,
+     76
+    ],
+    [
+     56,
+     76
+    ],
+    [
+     51,
+     75
+    ]
+   ]
+  }
+ },
+ "summary": {
+  "idle": {
+   "S": {
+    "visible": 4,
+    "x_range": 1,
+    "y_range": 0,
+    "lantern_bottom_max": 96,
+    "below_feet_rows": 2
+   },
+   "SE": {
+    "visible": 4,
+    "x_range": 3,
+    "y_range": 1,
+    "lantern_bottom_max": 96,
+    "below_feet_rows": 2
+   },
+   "E": {
+    "visible": 4,
+    "x_range": 1,
+    "y_range": 0,
+    "lantern_bottom_max": 95,
+    "below_feet_rows": 1
+   },
+   "NE": {
+    "visible": 4,
+    "x_range": 3,
+    "y_range": 0,
+    "lantern_bottom_max": 95,
+    "below_feet_rows": 1
+   },
+   "N": {
+    "visible": 0
+   },
+   "NW": {
+    "visible": 4,
+    "x_range": 2,
+    "y_range": 1,
+    "lantern_bottom_max": 96,
+    "below_feet_rows": 2
+   },
+   "W": {
+    "visible": 4,
+    "x_range": 0,
+    "y_range": 0,
+    "lantern_bottom_max": 95,
+    "below_feet_rows": 1
+   },
+   "SW": {
+    "visible": 4,
+    "x_range": 3,
+    "y_range": 0,
+    "lantern_bottom_max": 96,
+    "below_feet_rows": 2
+   }
+  },
+  "walk": {
+   "S": {
+    "visible": 6,
+    "x_range": 1,
+    "y_range": 1,
+    "lantern_bottom_max": 93,
+    "below_feet_rows": 0
+   },
+   "SE": {
+    "visible": 6,
+    "x_range": 39,
+    "y_range": 8,
+    "lantern_bottom_max": 95,
+    "below_feet_rows": 1
+   },
+   "E": {
+    "visible": 6,
+    "x_range": 19,
+    "y_range": 3,
+    "lantern_bottom_max": 95,
+    "below_feet_rows": 1
+   },
+   "NE": {
+    "visible": 5,
+    "x_range": 8,
+    "y_range": 5,
+    "lantern_bottom_max": 95,
+    "below_feet_rows": 1
+   },
+   "N": {
+    "visible": 0
+   },
+   "NW": {
+    "visible": 1,
+    "x_range": 0,
+    "y_range": 0,
+    "lantern_bottom_max": 93,
+    "below_feet_rows": 0
+   },
+   "W": {
+    "visible": 6,
+    "x_range": 20,
+    "y_range": 5,
+    "lantern_bottom_max": 96,
+    "below_feet_rows": 2
+   },
+   "SW": {
+    "visible": 6,
+    "x_range": 10,
+    "y_range": 1,
+    "lantern_bottom_max": 95,
+    "below_feet_rows": 1
+   }
+  }
+ },
+ "note": "MOCK ONLY: skin-pixel fist, not the G2.2b anchor method"
+}
