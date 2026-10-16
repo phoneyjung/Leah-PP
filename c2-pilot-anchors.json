@@ -1,0 +1,1930 @@
+{
+ "schema": 1,
+ "set": "c2",
+ "base": "kid4",
+ "cell": [
+  96,
+  96
+ ],
+ "feet": [
+  48,
+  94
+ ],
+ "dirs": [
+  "S",
+  "SE",
+  "E",
+  "NE",
+  "N",
+  "NW",
+  "W",
+  "SW"
+ ],
+ "files": {
+  "walk": [
+   "c2-pilot-kid4-walk.png",
+   "c2-pilot-kid4-walk-mask.png"
+  ],
+  "idle": [
+   "c2-pilot-kid4-idleanim.png",
+   "c2-pilot-kid4-idleanim-mask.png"
+  ]
+ },
+ "locked": {
+  "walk": "codex/asset-12-c2-motion b5d2830",
+  "idle": "Codex local 5246d7c via ZIP \u00b7 sha256 in qa/asset12-CA/delivery-5246d7c/SHA256SUMS"
+ },
+ "anims": {
+  "walk": {
+   "frames": 6,
+   "ms": 100,
+   "loop": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "start": 1
+  },
+  "idle": {
+   "frames": 4,
+   "ms": 200,
+   "loop": [
+    1,
+    2,
+    3,
+    2
+   ],
+   "entry_after_walk": 3,
+   "blink": {
+    "frame": 4,
+    "dirs": [
+     "S",
+     "SE",
+     "E",
+     "W",
+     "SW"
+    ],
+    "every_s": [
+     3,
+     6
+    ],
+    "slot": "the f2 after f3 (loop index 4)"
+   },
+   "code_breathing": {
+    "W": {
+     "cut_row": 62,
+     "dy": [
+      0,
+      0,
+      -1,
+      0
+     ],
+     "rule": "after recolour: rows 0..cut-1 take rows 1..cut (up 1 px), row cut repeats; anchors below already include it"
+    }
+   }
+  }
+ },
+ "renderOffset": {
+  "status": "PROPOSED - owner approval pending (G2_2 plan section 9 item 5)",
+  "formula": "round-half-up(48 - idle f1 body centre rows 52-86), clamp +-3, same for every frame of every anim of that direction, x only, at draw time",
+  "dx": {
+   "S": 0,
+   "SE": 0,
+   "E": 3,
+   "NE": 1,
+   "N": 1,
+   "NW": -1,
+   "W": -2,
+   "SW": 0
+  },
+  "idle_f1_body_centre": {
+   "S": 48.17,
+   "SE": 47.52,
+   "E": 44.88,
+   "NE": 46.65,
+   "N": 47.49,
+   "NW": 48.81,
+   "W": 49.76,
+   "SW": 48.43
+  },
+  "turn_jump_before": {
+   "S>SE": 0.65,
+   "SE>E": 2.64,
+   "E>NE": 1.77,
+   "NE>N": 0.84,
+   "N>NW": 1.31,
+   "NW>W": 0.96,
+   "W>SW": 1.34,
+   "SW>S": 0.26
+  },
+  "turn_jump_after": {
+   "S>SE": 0.65,
+   "SE>E": 0.36,
+   "E>NE": 0.23,
+   "NE>N": 0.84,
+   "N>NW": 0.69,
+   "NW>W": 0.04,
+   "W>SW": 0.66,
+   "SW>S": 0.26
+  }
+ },
+ "anchor_rules": {
+  "feet": "fixed [48,94], the ground point, not the foot pixels",
+  "head_top": "[centre x of the head box (mask ID 1-5,10, rows <= 50), top row]",
+  "face": "centre of the eye box (ID 2/5) - checks only, null on back views",
+  "back": "[mean x of cape ID 8 on row y, y = first row >= 40 with >= 3 cape px + 6, z] z -1 behind body (S SE E W SW), +1 in front (NE N NW) - wings later",
+  "hand_r/hand_l": "null until G2.2b (idle_hold / walk_hold)",
+  "coords": "cell pixels before renderOffset; the renderer adds renderOffset dx to sprite and anchors alike"
+ },
+ "frames": {
+  "walk": {
+   "S": [
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      48,
+      10
+     ],
+     "face": [
+      49,
+      36
+     ],
+     "top": 10,
+     "bottom": 93,
+     "back": [
+      48,
+      53,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      47,
+      10
+     ],
+     "face": [
+      48,
+      36
+     ],
+     "top": 10,
+     "bottom": 94,
+     "back": [
+      48,
+      53,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      47,
+      9
+     ],
+     "face": [
+      48,
+      36
+     ],
+     "top": 9,
+     "bottom": 94,
+     "back": [
+      47,
+      53,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      48,
+      10
+     ],
+     "face": [
+      49,
+      36
+     ],
+     "top": 10,
+     "bottom": 93,
+     "back": [
+      48,
+      53,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      48,
+      10
+     ],
+     "face": [
+      49,
+      36
+     ],
+     "top": 10,
+     "bottom": 94,
+     "back": [
+      49,
+      53,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      48,
+      10
+     ],
+     "face": [
+      49,
+      36
+     ],
+     "top": 10,
+     "bottom": 94,
+     "back": [
+      49,
+      53,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    }
+   ],
+   "SE": [
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      48,
+      10
+     ],
+     "face": [
+      54,
+      36
+     ],
+     "top": 10,
+     "bottom": 94,
+     "back": [
+      47,
+      52,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      48,
+      10
+     ],
+     "face": [
+      54,
+      36
+     ],
+     "top": 10,
+     "bottom": 92,
+     "back": [
+      46,
+      52,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      48,
+      10
+     ],
+     "face": [
+      54,
+      36
+     ],
+     "top": 10,
+     "bottom": 92,
+     "back": [
+      46,
+      52,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      48,
+      10
+     ],
+     "face": [
+      54,
+      36
+     ],
+     "top": 10,
+     "bottom": 94,
+     "back": [
+      47,
+      52,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      48,
+      10
+     ],
+     "face": [
+      54,
+      36
+     ],
+     "top": 10,
+     "bottom": 94,
+     "back": [
+      48,
+      52,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      48,
+      10
+     ],
+     "face": [
+      54,
+      36
+     ],
+     "top": 10,
+     "bottom": 94,
+     "back": [
+      49,
+      52,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    }
+   ],
+   "E": [
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      46,
+      11
+     ],
+     "face": [
+      52,
+      36
+     ],
+     "top": 11,
+     "bottom": 94,
+     "back": [
+      45,
+      54,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      45,
+      11
+     ],
+     "face": [
+      52,
+      36
+     ],
+     "top": 11,
+     "bottom": 94,
+     "back": [
+      45,
+      54,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      45,
+      11
+     ],
+     "face": [
+      52,
+      36
+     ],
+     "top": 11,
+     "bottom": 94,
+     "back": [
+      45,
+      54,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      46,
+      11
+     ],
+     "face": [
+      52,
+      36
+     ],
+     "top": 11,
+     "bottom": 94,
+     "back": [
+      45,
+      54,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      45,
+      11
+     ],
+     "face": [
+      52,
+      36
+     ],
+     "top": 11,
+     "bottom": 93,
+     "back": [
+      45,
+      54,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      46,
+      11
+     ],
+     "face": [
+      52,
+      36
+     ],
+     "top": 11,
+     "bottom": 94,
+     "back": [
+      45,
+      54,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    }
+   ],
+   "NE": [
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      47,
+      9
+     ],
+     "face": null,
+     "top": 9,
+     "bottom": 92,
+     "back": [
+      47,
+      54,
+      1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      47,
+      9
+     ],
+     "face": null,
+     "top": 9,
+     "bottom": 94,
+     "back": [
+      47,
+      54,
+      1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      47,
+      9
+     ],
+     "face": null,
+     "top": 9,
+     "bottom": 94,
+     "back": [
+      47,
+      54,
+      1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      47,
+      9
+     ],
+     "face": null,
+     "top": 9,
+     "bottom": 92,
+     "back": [
+      47,
+      54,
+      1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      47,
+      9
+     ],
+     "face": null,
+     "top": 9,
+     "bottom": 91,
+     "back": [
+      47,
+      54,
+      1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      47,
+      9
+     ],
+     "face": null,
+     "top": 9,
+     "bottom": 91,
+     "back": [
+      47,
+      54,
+      1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    }
+   ],
+   "N": [
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      47,
+      11
+     ],
+     "face": null,
+     "top": 11,
+     "bottom": 93,
+     "back": [
+      47,
+      54,
+      1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      48,
+      12
+     ],
+     "face": null,
+     "top": 12,
+     "bottom": 94,
+     "back": [
+      48,
+      55,
+      1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      48,
+      12
+     ],
+     "face": null,
+     "top": 12,
+     "bottom": 94,
+     "back": [
+      48,
+      55,
+      1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      48,
+      12
+     ],
+     "face": null,
+     "top": 12,
+     "bottom": 93,
+     "back": [
+      48,
+      55,
+      1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      47,
+      12
+     ],
+     "face": null,
+     "top": 12,
+     "bottom": 94,
+     "back": [
+      47,
+      55,
+      1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      48,
+      12
+     ],
+     "face": null,
+     "top": 12,
+     "bottom": 93,
+     "back": [
+      48,
+      55,
+      1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    }
+   ],
+   "NW": [
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      49,
+      10
+     ],
+     "face": null,
+     "top": 10,
+     "bottom": 92,
+     "back": [
+      49,
+      55,
+      1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      50,
+      10
+     ],
+     "face": null,
+     "top": 10,
+     "bottom": 91,
+     "back": [
+      49,
+      55,
+      1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      50,
+      10
+     ],
+     "face": null,
+     "top": 10,
+     "bottom": 91,
+     "back": [
+      49,
+      55,
+      1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      50,
+      10
+     ],
+     "face": null,
+     "top": 10,
+     "bottom": 93,
+     "back": [
+      50,
+      55,
+      1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      49,
+      10
+     ],
+     "face": null,
+     "top": 10,
+     "bottom": 94,
+     "back": [
+      48,
+      55,
+      1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      50,
+      10
+     ],
+     "face": null,
+     "top": 10,
+     "bottom": 94,
+     "back": [
+      49,
+      55,
+      1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    }
+   ],
+   "W": [
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      49,
+      11
+     ],
+     "face": [
+      43,
+      36
+     ],
+     "top": 11,
+     "bottom": 94,
+     "back": [
+      50,
+      53,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      49,
+      11
+     ],
+     "face": [
+      43,
+      36
+     ],
+     "top": 11,
+     "bottom": 93,
+     "back": [
+      50,
+      53,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      49,
+      11
+     ],
+     "face": [
+      43,
+      36
+     ],
+     "top": 11,
+     "bottom": 93,
+     "back": [
+      50,
+      53,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      49,
+      11
+     ],
+     "face": [
+      43,
+      36
+     ],
+     "top": 11,
+     "bottom": 94,
+     "back": [
+      50,
+      53,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      49,
+      11
+     ],
+     "face": [
+      43,
+      36
+     ],
+     "top": 11,
+     "bottom": 94,
+     "back": [
+      50,
+      53,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      49,
+      11
+     ],
+     "face": [
+      43,
+      36
+     ],
+     "top": 11,
+     "bottom": 94,
+     "back": [
+      50,
+      53,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    }
+   ],
+   "SW": [
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      49,
+      9
+     ],
+     "face": [
+      42,
+      35
+     ],
+     "top": 9,
+     "bottom": 93,
+     "back": [
+      49,
+      51,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      48,
+      9
+     ],
+     "face": [
+      42,
+      35
+     ],
+     "top": 9,
+     "bottom": 94,
+     "back": [
+      48,
+      51,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      48,
+      8
+     ],
+     "face": [
+      42,
+      34
+     ],
+     "top": 8,
+     "bottom": 94,
+     "back": [
+      48,
+      50,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      48,
+      9
+     ],
+     "face": [
+      42,
+      35
+     ],
+     "top": 9,
+     "bottom": 93,
+     "back": [
+      47,
+      51,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      49,
+      9
+     ],
+     "face": [
+      43,
+      35
+     ],
+     "top": 9,
+     "bottom": 93,
+     "back": [
+      49,
+      51,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      49,
+      9
+     ],
+     "face": [
+      43,
+      35
+     ],
+     "top": 9,
+     "bottom": 91,
+     "back": [
+      49,
+      51,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    }
+   ]
+  },
+  "idle": {
+   "S": [
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      48,
+      12
+     ],
+     "face": [
+      49,
+      39
+     ],
+     "top": 12,
+     "bottom": 94,
+     "back": [
+      49,
+      55,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      48,
+      12
+     ],
+     "face": [
+      49,
+      38
+     ],
+     "top": 12,
+     "bottom": 94,
+     "back": [
+      49,
+      55,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      48,
+      11
+     ],
+     "face": [
+      49,
+      37
+     ],
+     "top": 11,
+     "bottom": 94,
+     "back": [
+      49,
+      54,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      48,
+      12
+     ],
+     "face": [
+      49,
+      38
+     ],
+     "top": 12,
+     "bottom": 94,
+     "back": [
+      49,
+      55,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    }
+   ],
+   "SE": [
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      51,
+      11
+     ],
+     "face": [
+      55,
+      38
+     ],
+     "top": 11,
+     "bottom": 94,
+     "back": [
+      48,
+      53,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      50,
+      11
+     ],
+     "face": [
+      54,
+      37
+     ],
+     "top": 11,
+     "bottom": 94,
+     "back": [
+      49,
+      52,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      49,
+      10
+     ],
+     "face": [
+      54,
+      36
+     ],
+     "top": 10,
+     "bottom": 94,
+     "back": [
+      48,
+      52,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      49,
+      10
+     ],
+     "face": [
+      53,
+      36
+     ],
+     "top": 10,
+     "bottom": 94,
+     "back": [
+      48,
+      52,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    }
+   ],
+   "E": [
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      50,
+      11
+     ],
+     "face": [
+      57,
+      36
+     ],
+     "top": 11,
+     "bottom": 94,
+     "back": [
+      46,
+      54,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      48,
+      11
+     ],
+     "face": [
+      55,
+      36
+     ],
+     "top": 11,
+     "bottom": 94,
+     "back": [
+      45,
+      54,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      46,
+      11
+     ],
+     "face": [
+      53,
+      36
+     ],
+     "top": 11,
+     "bottom": 94,
+     "back": [
+      45,
+      54,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      47,
+      11
+     ],
+     "face": [
+      54,
+      36
+     ],
+     "top": 11,
+     "bottom": 94,
+     "back": [
+      45,
+      54,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    }
+   ],
+   "NE": [
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      48,
+      11
+     ],
+     "face": null,
+     "top": 11,
+     "bottom": 94,
+     "back": [
+      46,
+      56,
+      1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      47,
+      11
+     ],
+     "face": null,
+     "top": 11,
+     "bottom": 94,
+     "back": [
+      46,
+      56,
+      1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      46,
+      11
+     ],
+     "face": null,
+     "top": 11,
+     "bottom": 94,
+     "back": [
+      46,
+      56,
+      1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      47,
+      11
+     ],
+     "face": null,
+     "top": 11,
+     "bottom": 94,
+     "back": [
+      46,
+      56,
+      1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    }
+   ],
+   "N": [
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      48,
+      12
+     ],
+     "face": null,
+     "top": 12,
+     "bottom": 94,
+     "back": [
+      48,
+      55,
+      1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      48,
+      13
+     ],
+     "face": null,
+     "top": 13,
+     "bottom": 94,
+     "back": [
+      47,
+      56,
+      1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      48,
+      13
+     ],
+     "face": null,
+     "top": 13,
+     "bottom": 94,
+     "back": [
+      47,
+      56,
+      1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      48,
+      12
+     ],
+     "face": null,
+     "top": 12,
+     "bottom": 94,
+     "back": [
+      48,
+      55,
+      1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    }
+   ],
+   "NW": [
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      48,
+      11
+     ],
+     "face": null,
+     "top": 11,
+     "bottom": 94,
+     "back": [
+      49,
+      56,
+      1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      49,
+      11
+     ],
+     "face": null,
+     "top": 11,
+     "bottom": 94,
+     "back": [
+      49,
+      56,
+      1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      50,
+      11
+     ],
+     "face": null,
+     "top": 11,
+     "bottom": 94,
+     "back": [
+      49,
+      56,
+      1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      49,
+      11
+     ],
+     "face": null,
+     "top": 11,
+     "bottom": 94,
+     "back": [
+      49,
+      56,
+      1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    }
+   ],
+   "W": [
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      49,
+      11
+     ],
+     "face": [
+      43,
+      36
+     ],
+     "top": 11,
+     "bottom": 94,
+     "back": [
+      50,
+      53,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      49,
+      11
+     ],
+     "face": [
+      43,
+      36
+     ],
+     "top": 11,
+     "bottom": 94,
+     "back": [
+      50,
+      53,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      49,
+      10
+     ],
+     "face": [
+      43,
+      35
+     ],
+     "top": 10,
+     "bottom": 94,
+     "back": [
+      50,
+      52,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      49,
+      11
+     ],
+     "face": [
+      43,
+      36
+     ],
+     "top": 11,
+     "bottom": 94,
+     "back": [
+      50,
+      53,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    }
+   ],
+   "SW": [
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      46,
+      11
+     ],
+     "face": [
+      41,
+      38
+     ],
+     "top": 11,
+     "bottom": 94,
+     "back": [
+      48,
+      53,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      47,
+      11
+     ],
+     "face": [
+      42,
+      37
+     ],
+     "top": 11,
+     "bottom": 94,
+     "back": [
+      48,
+      53,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      48,
+      10
+     ],
+     "face": [
+      43,
+      36
+     ],
+     "top": 10,
+     "bottom": 94,
+     "back": [
+      49,
+      52,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    },
+    {
+     "feet": [
+      48,
+      94
+     ],
+     "head_top": [
+      48,
+      10
+     ],
+     "face": [
+      43,
+      36
+     ],
+     "top": 10,
+     "bottom": 94,
+     "back": [
+      49,
+      52,
+      -1
+     ],
+     "hand_r": null,
+     "hand_l": null
+    }
+   ]
+  }
+ }
+}
