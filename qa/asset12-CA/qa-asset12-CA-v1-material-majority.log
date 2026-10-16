@@ -1,0 +1,56 @@
+PASS 01 sprite 384x768
+PASS 01 mask 384x768
+PASS 01 alpha binary (semi 0)
+PASS 01 mask alpha = sprite alpha
+PASS 01 mask B channel = 0
+PASS 02 alpha changes = listed hole fills exactly
+PASS 03 holes <= 3 px left = 0
+PASS 04 plum = A2 formula exactly (missing 0 · extra 0)
+PASS 05 strap edits only inside strap boxes (+1 px)
+PASS 05 strap edits <= 30 px per frame
+PASS 05 no strap edits in E NE N NW W
+PASS 06 head rows <= 50 unchanged outside the blink eye box
+PASS 06 ID 4 / 10 pixels changed = 0
+PASS 07 new colours 0 (except plum)
+PASS 07 blink only in f4 of S SE E W SW
+PASS 11 blink: changed px are ID 2 / 3 only
+PASS 11 blink: ID 5 = 0 in f4
+PASS 11 blink: lid lines >= visible eyes
+PASS 11 blink: every face direction edited
+PASS 4.5 W f1-f3 sprite = locked A2 W cell
+PASS 4.5 W f1-f3 mask = locked A3.1 W cell
+PASS 4.5 W f4 = A2 / A3.1 outside the eye box
+PASS 08 change log covers every changed pixel exactly
+PASS 08 rollback = source RGBA 100%
+PASS 09 mask: opaque -> ID 1-11 · transparent -> ID 0
+PASS 09 mask: G within range of its ID
+PASS 09 mask: ID 1 = plum pixels exactly
+PASS 09 mask: back dirs have no ID 2/5/10
+PASS 09 mask: ID 11 groups all touch >= 2 materials
+PASS 09 mask: shade order (<= 2% inverted, no flat)
+PASS 09 mask: small ID 8 pieces on legs (row >= 70) = 0
+PASS 10 leak test idle 640 x 32 + walk 640 x 48 = 51,200 images · leaks 0
+PASS 11 signal colours: fixed materials OK (F9DA99 handled below)
+PASS 11 F9DA99 only ID 9 · <= 6 px per frame · no new positions
+PASS 11 seam f2->f4: body <= 1 · top <= 1 · bottom equal
+PASS 11.1 height idle vs walk <= 2 px
+PASS 11.1 silhouette width = source in every frame (no reshaping)
+PASS 11.1 W / SW not mirrors of E / SE (0 pairs)
+FAIL 11.1 ID 6 / 7 / 9 colour labels agree with the locked walk
+PASS 13 PNG <= 160 KB
+log {'entries': 7709, 'diff_px': 7709, 'tasks': {'outline': 7227, 'hole': 45, 'strap': 149, 'blink': 288}, 'wrong_before_after': 0, 'non_idle_entries': 0} · plum 7227 missing 0 extra 0 · id11 {'px': 5075, 'groups': 581, 'groups_failing': 0}
+leak idle {'combos': 640, 'fixed_changed_px': 0, 'alpha_changed_px': 0, 'wrong_ramp_px': 0, 'eye_lines_changed_px': 0, 'cross_material_px': 0, 'missing_change_px': 0, 'house_distinct': 4, 'copper_changed_by_house_px': 0, 'leak_dirs': {}}
+leak walk {'combos': 640, 'fixed_changed_px': 0, 'alpha_changed_px': 0, 'wrong_ramp_px': 0, 'eye_lines_changed_px': 0, 'cross_material_px': 0, 'missing_change_px': 0, 'house_distinct': 4, 'copper_changed_by_house_px': 0, 'leak_dirs': {}}
+images 51200
+gold [('S f1', 3), ('S f2', 3), ('S f3', 2), ('S f4', 3), ('W f1', 1), ('W f2', 1), ('W f3', 1), ('W f4', 1)]
+signal fails []
+blink {'S': {'changed_px': 72, 'changed_not_id2_or_3': 0, 'id5_px': 0, 'id2_parts_in_eye_box': 2, 'eyes_expected': 2}, 'SE': {'changed_px': 73, 'changed_not_id2_or_3': 0, 'id5_px': 0, 'id2_parts_in_eye_box': 2, 'eyes_expected': 2}, 'E': {'changed_px': 34, 'changed_not_id2_or_3': 0, 'id5_px': 0, 'id2_parts_in_eye_box': 1, 'eyes_expected': 1}, 'W': {'changed_px': 31, 'changed_not_id2_or_3': 0, 'id5_px': 0, 'id2_parts_in_eye_box': 1, 'eyes_expected': 1}, 'SW': {'changed_px': 78, 'changed_not_id2_or_3': 0, 'id5_px': 0, 'id2_parts_in_eye_box': 2, 'eyes_expected': 2}}
+seam {'S': {'body_dx': 0.06, 'top_d': 0, 'bottom_d': 0, 'px_diff_outside_eye_box': 313}, 'SE': {'body_dx': 0.38, 'top_d': 1, 'bottom_d': 0, 'px_diff_outside_eye_box': 1491}, 'E': {'body_dx': 0.01, 'top_d': 0, 'bottom_d': 0, 'px_diff_outside_eye_box': 1009}, 'NE': {'body_dx': 0.13, 'top_d': 0, 'bottom_d': 0, 'px_diff_outside_eye_box': 91}, 'N': {'body_dx': 0.19, 'top_d': 1, 'bottom_d': 0, 'px_diff_outside_eye_box': 926}, 'NW': {'body_dx': 0.16, 'top_d': 0, 'bottom_d': 0, 'px_diff_outside_eye_box': 80}, 'W': {'body_dx': 0.0, 'top_d': 0, 'bottom_d': 0, 'px_diff_outside_eye_box': 0}, 'SW': {'body_dx': 0.31, 'top_d': 1, 'bottom_d': 0, 'px_diff_outside_eye_box': 1444}}
+idle vs walk {'S': {'head_f1_vs_walk_f1': -0.19, 'head_mean_vs_walk_mean': np.float64(0.15), 'height_d': 1, 'cape_width_vs_static': [-2, -2, -2, -4], 'width_changed_from_source': 0}, 'SE': {'head_f1_vs_walk_f1': 3.16, 'head_mean_vs_walk_mean': np.float64(1.71), 'height_d': 1, 'cape_width_vs_static': [2, -1, -3, -2], 'width_changed_from_source': 0}, 'E': {'head_f1_vs_walk_f1': 4.03, 'head_mean_vs_walk_mean': np.float64(2.1), 'height_d': 0, 'cape_width_vs_static': [-1, -1, -1, -1], 'width_changed_from_source': 0}, 'NE': {'head_f1_vs_walk_f1': 0.98, 'head_mean_vs_walk_mean': np.float64(-0.01), 'height_d': 0, 'cape_width_vs_static': [-1, -4, -4, -4], 'width_changed_from_source': 0}, 'N': {'head_f1_vs_walk_f1': 0.89, 'head_mean_vs_walk_mean': np.float64(0.31), 'height_d': 0, 'cape_width_vs_static': [0, -2, -1, 0], 'width_changed_from_source': 0}, 'NW': {'head_f1_vs_walk_f1': -1.03, 'head_mean_vs_walk_mean': np.float64(-0.67), 'height_d': 1, 'cape_width_vs_static': [-6, -4, -2, -5], 'width_changed_from_source': 0}, 'W': {'head_f1_vs_walk_f1': 0.0, 'head_mean_vs_walk_mean': np.float64(0.03), 'height_d': 0, 'cape_width_vs_static': [0, 0, 0, 0], 'width_changed_from_source': 0}, 'SW': {'head_f1_vs_walk_f1': -2.94, 'head_mean_vs_walk_mean': np.float64(-1.24), 'height_d': 1, 'cape_width_vs_static': [1, -2, -4, -3], 'width_changed_from_source': 0}}
+mirrored 0
+cape width vs static (source property, spec 7) {'NW': [-6, -4, -2, -5]}
+material mismatch [('#CA666B', 7, 3)]
+small ID8 pieces [{'cell': 'S f1', 'size': 1, 'x': 29, 'y': 64, 'cape_tip': True, 'leg_zone': False}, {'cell': 'SE f1', 'size': 1, 'x': 33, 'y': 83, 'cape_tip': True, 'leg_zone': False}, {'cell': 'E f1', 'size': 1, 'x': 56, 'y': 48, 'cape_tip': True, 'leg_zone': False}, {'cell': 'SW f3', 'size': 1, 'x': 37, 'y': 49, 'cape_tip': True, 'leg_zone': False}, {'cell': 'SW f4', 'size': 1, 'x': 37, 'y': 49, 'cape_tip': True, 'leg_zone': False}]
+shade failing []
+non-plum outer edge px 298
+RESULT FAIL

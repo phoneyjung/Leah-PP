@@ -377,18 +377,18 @@ def check_idle(srcp, sprp, mskp, chgp, holp, strp, a2p, m31p, walkp, walkmp, od)
     R['cape_width_outside_4px_source'] = {D: v['cape_width_vs_static'] for D, v in cons.items() if any(abs(x) > 4 for x in v['cape_width_vs_static'])}
     H['11.1 silhouette width = source in every frame (no reshaping)'] = all(v['width_changed_from_source'] == 0 for v in cons.values())
     H['11.1 W / SW not mirrors of E / SE (0 pairs)'] = mir == 0
-    # material labels consistent with the locked walk (ID 6 / 7 / 9): colour majority ID must agree when >= 10 px in both
-    WID = WM[..., 0].astype(int); mism = []
-    for kk in (6, 7, 9):
-        ic = Counter(q.hexc(c) for c in A[opm & (ID == kk), :3])
-        for c, n in ic.items():
-            if n < 10: continue
-            r = np.all(A[..., :3] == q.rgb(c), -1) & opm; rw = np.all(WK[..., :3] == q.rgb(c), -1) & (WK[..., 3] > 0)
-            if rw.sum() < 10: continue
-            mi = Counter(ID[r].tolist()).most_common(1)[0][0]; mw = Counter(WID[rw].tolist()).most_common(1)[0][0]
-            if mi != mw and (mi in (6, 7, 9) or mw in (6, 7, 9)): mism.append((c, mi, mw))
-    R['material_majority_mismatch'] = sorted(set(mism))
-    H['11.1 ID 6 / 7 / 9 colour labels agree with the locked walk'] = not mism
+    # spec 11.1 "fixed material colour sets (ID 6 / 7 / 9) are the same set" · literal check (v3, 16 Oct):
+    # every (colour, ID) pair the idle uses for ID 6 / 7 / 9 must already exist in the locked walk or the locked A3.1 static.
+    # (v1 "majority ID per colour" was a wrong proxy: _4 uses one colour for two materials by position, e.g. #CA666B = skin at the ear, leather at the hip.)
+    ref = set()
+    for X, MM in ((WK, WM), (A2, M31)):
+        o = X[..., 3] > 0; ref |= {(q.hexc(c), int(k)) for c, k in zip(X[o, :3], MM[o, 0])}
+    newpairs = []
+    for y, x in zip(*np.nonzero(opm & np.isin(ID, [6, 7, 9]))):
+        pr = (q.hexc(A[y, x, :3]), int(ID[y, x]))
+        if pr not in ref: newpairs.append({'cell': '%s f%d' % (L8[y // C], x // C + 1), 'x': int(x % C), 'y': int(y % C), 'colour': pr[0], 'id': pr[1]})
+    R['material_new_pairs_6_7_9'] = newpairs
+    H['11.1 ID 6 / 7 / 9 colour+ID pairs all seen in locked walk or A3.1 static'] = not newpairs
     H['13 PNG <= 160 KB'] = os.path.getsize(sprp) <= MAX_PNG and os.path.getsize(mskp) <= MAX_PNG
     R['hard'] = H; R['PASS'] = all(H.values()); R['nonplum_outer_edge_px'] = len(nonplum_edge)
     images_idle(S, A, ID, G, nonplum_edge, ebox, od)
@@ -495,7 +495,7 @@ if __name__ == '__main__':
         print('leak idle', R['leak']['idle']); print('leak walk', R['leak']['walk']); print('images', R['leak']['frame_images'])
         print('gold', [(g['cell'], g['px']) for g in R['gold_F9DA99'] if g['px']]); print('signal fails', R['signal_fails'])
         print('blink', R['blink']); print('seam', R['seam_f2_f4']); print('idle vs walk', R['idle_vs_walk']); print('mirrored', R['mirrored_pairs'])
-        print('cape width vs static (source property, spec 7)', R['cape_width_outside_4px_source']); print('material mismatch', R['material_majority_mismatch']); print('small ID8 pieces', [p for p in R['id8_small_pieces'] if p['leg_zone'] or p['cape_tip']])
+        print('cape width vs static (source property, spec 7)', R['cape_width_outside_4px_source']); print('material new pairs', R['material_new_pairs_6_7_9']); print('small ID8 pieces', [p for p in R['id8_small_pieces'] if p['leg_zone'] or p['cape_tip']])
         print('shade failing', R['shade_failing'][:10]); print('non-plum outer edge px', R['nonplum_outer_edge_px'])
         print('RESULT', 'PASS' if R['PASS'] else 'FAIL'); sys.exit(0 if R['PASS'] else 1)
     print('usage: walk SRC SPRITE MASK CHANGES HOLES STRAP OUT\n       idle SRC SPRITE MASK CHANGES HOLES STRAP A2 MASK31 WALK WALKMASK OUT'); sys.exit(2)
