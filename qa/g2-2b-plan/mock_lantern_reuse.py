@@ -1,6 +1,7 @@
 # G2.2b feasibility mock (scratch only, not a deliverable):
 # hang the existing Set-08 L0 lantern on the visible fist of the LOCKED idle/walk frames.
 # Fist = skin (mask ID 3) pixels below row 60, grouped; near-camera hand rule.
+# NOTE: 'visible' here = finger SKIN visible; gloved fists without skin (ID 7 only) count as not visible.
 import sys, json, numpy as np
 from PIL import Image, ImageDraw
 from scipy import ndimage as nd
@@ -22,7 +23,9 @@ def pick(cands, prev, D):
     if prev is None:
         if D=='S': return min(cands,key=lambda c:c[0])          # character's right hand = screen left
         return max(cands,key=lambda c:(c[1],c[2]))                # nearest camera = lowest on screen
-    return min(cands,key=lambda c:(c[0]-prev[0])**2+(c[1]-prev[1])**2)
+    best=min(cands,key=lambda c:(c[0]-prev[0])**2+(c[1]-prev[1])**2)
+    # v2 (review fix): never jump to the other hand - a fist further than 14 px from the last one is not the same hand
+    return best if max(abs(best[0]-prev[0]),abs(best[1]-prev[1]))<=14 else None
 res={}
 for anim,nf,fn in [('idle',4,'idleanim'),('walk',6,'walk')]:
     S=Image.open(f'{WT}/c2-pilot-kid4-{fn}.png').convert('RGBA')
@@ -32,7 +35,7 @@ for anim,nf,fn in [('idle',4,'idleanim'),('walk',6,'walk')]:
         prev=None; rows=[]
         for f in range(nf):
             c=pick(fists(M[r*C:(r+1)*C,f*C:(f+1)*C]),prev,D)
-            if c: prev=c
+            if c: prev=c  # a frame without skin keeps the last seen position for tracking only (anchor stays None)
             rows.append(None if c is None else [round(c[0]),round(c[1])])
         res[anim][D]=rows
 def stats(rows):
@@ -55,7 +58,7 @@ def frame(anim,fn,nf,f,bg):
         p=res[anim][D][f]
         L=lan.crop((r*32,0,(r+1)*32,32))
         layer=Image.new('RGBA',(C,C),(0,0,0,0))
-        back = D in ('N','NW','W','SW')
+        back = False  # plan 4.2: near-camera hand -> lantern always in front (v2 review fix)
         if p: 
             pos=(p[0]-RING[0],p[1]-RING[1])
         if p and back: layer.alpha_composite(L,pos)

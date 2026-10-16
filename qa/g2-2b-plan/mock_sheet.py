@@ -8,17 +8,17 @@ walk=Image.open(f'{WT}/c2-pilot-kid4-walk.png').convert('RGBA')
 F=ImageFont.truetype('/usr/share/fonts/opentype/tlwg/Loma-Bold.otf',22)
 Fs=ImageFont.truetype('/usr/share/fonts/opentype/tlwg/Loma-Bold.otf',18)
 X0,Y0,X1,Y1=8,36,88,96; cw,ch=(X1-X0)*2,(Y1-Y0)*2; LW=330
-note={'S':'มือนิ่ง (x 1 px) · ผ่าน','SE':'มือหาย f5–f6 · ตะเกียงกระโดดไปอีกมือ','E':'ตะเกียงเหวี่ยง 19 px','NE':'เหวี่ยง 8 px · มือหาย f6',
-      'N':'ไม่เห็นมือเลย 0/6','NW':'เห็นมือ 1/6 เฟรม','W':'ตะเกียงเหวี่ยง 20 px','SW':'เหวี่ยง 10 px'}
+note={'S':'มือนิ่ง (x 1 px) · ผ่าน','SE':'เหวี่ยง 12 px · f5 ไม่เห็นผิวมือ','E':'ตะเกียงเหวี่ยง 19 px','NE':'เหวี่ยง 8 px · f6 ไม่เห็นผิวมือ',
+      'N':'ไม่เห็นมือเลย 0/6','NW':'ผิวมือ 1/6 · ถุงมือ 6/6 เหวี่ยง ~10 px','W':'ตะเกียงเหวี่ยง 20 px','SW':'เหวี่ยง 10 px'}
 im=Image.new('RGB',(LW+6*cw,70+8*ch),(28,26,40)); d=ImageDraw.Draw(im)
 d.text((10,8),'ภาพจำลอง: ท่าเดินเดิม (ล็อก) + ตะเกียงชุด 08 เดิม ห้อยมือข้างที่หันหาจอ · เส้นเขียว = แถวเท้า 94',font=Fs,fill=(240,230,210))
-d.text((10,36),'ไม่ใช่งานจริง · ใช้ตัดสินแผน G2.2b เท่านั้น',font=Fs,fill=(200,190,170))
+d.text((10,36),'ไม่ใช่งานจริง · ใช้ตัดสินแผน G2.2b เท่านั้น · v2 แก้ตามผู้ตรวจ (ไม่กระโดดข้ามมือ)',font=Fs,fill=(200,190,170))
 for r,D in enumerate(L8):
     oy=70+r*ch
     s=SM[D]; bot=s.get('lantern_bottom_max')
     d.text((10,oy+10),D,font=F,fill=(255,214,120))
     d.text((10,oy+44),note[D],font=Fs,fill=(240,230,210))
-    if bot: d.text((10,oy+72),f'ก้นตะเกียงลงถึงแถว {bot} (เท้า 94)',font=Fs,fill=(200,190,170))
+    if bot: d.text((10,oy+72),f'ก้นตะเกียงลงถึงแถว {bot} (เท้า 94 · ช่อง 0–95)',font=Fs,fill=(200,190,170))
     for f in range(6):
         cell=walk.crop((f*C,r*C,(f+1)*C,(r+1)*C)); p=A[D][f]
         lay=Image.new('RGBA',(C,C),(0,0,0,0))

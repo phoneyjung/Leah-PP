@@ -178,13 +178,10 @@
      36,
      75
     ],
+    null,
     [
-     75,
-     68
-    ],
-    [
-     71,
-     69
+     34,
+     75
     ]
    ],
    "E": [
@@ -373,9 +370,9 @@
     "below_feet_rows": 0
    },
    "SE": {
-    "visible": 6,
-    "x_range": 39,
-    "y_range": 8,
+    "visible": 5,
+    "x_range": 12,
+    "y_range": 1,
     "lantern_bottom_max": 95,
     "below_feet_rows": 1
    },
