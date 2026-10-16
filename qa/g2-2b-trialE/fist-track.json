@@ -1,0 +1,61 @@
+{
+ "new_fist_anchor_template": [
+  [
+   56,
+   76
+  ],
+  [
+   56,
+   76
+  ],
+  [
+   55,
+   76
+  ],
+  [
+   54,
+   76
+  ],
+  [
+   54,
+   76
+  ],
+  [
+   54,
+   76
+  ]
+ ],
+ "template_track": [
+  [
+   0,
+   0,
+   0
+  ],
+  [
+   40,
+   0,
+   0
+  ],
+  [
+   49,
+   -1,
+   0
+  ],
+  [
+   84,
+   -2,
+   0
+  ],
+  [
+   85,
+   -2,
+   0
+  ],
+  [
+   82,
+   -2,
+   0
+  ]
+ ],
+ "note": "anchor f1 = skin centroid (56,76); later frames = f1 + exact-pixel template offset of fist box (47,68)-(60,80)"
+}

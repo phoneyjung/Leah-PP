@@ -1,0 +1,119 @@
+{
+ "direction": "E",
+ "gif": "qa/g2-2b-trialE/walkhold-E-trial1-pixellab.gif",
+ "frames": 6,
+ "gif_ms": [
+  200,
+  200,
+  200,
+  200,
+  200,
+  200
+ ],
+ "canvas": [
+  128,
+  128
+ ],
+ "placement_dxdy": [
+  -15,
+  -12
+ ],
+ "pixels_lost_outside_cell": 0,
+ "lowest_row": 94,
+ "new_colours_not_in_locked": 0,
+ "new_colour_pixels": 0,
+ "near_hand": [
+  [
+   56,
+   76
+  ],
+  [
+   55,
+   76
+  ],
+  [
+   48,
+   75
+  ],
+  [
+   53,
+   76
+  ],
+  [
+   53,
+   76
+  ],
+  [
+   53,
+   76
+  ]
+ ],
+ "visible": "6/6",
+ "x_range": 8,
+ "y_range": 1,
+ "max_adjacent_jump": 7,
+ "head_rows0_51_diff_vs_raw_walk_best_shift": [
+  [
+   217,
+   1,
+   0
+  ],
+  [
+   258,
+   1,
+   0
+  ],
+  [
+   263,
+   1,
+   0
+  ],
+  [
+   208,
+   1,
+   0
+  ],
+  [
+   256,
+   1,
+   0
+  ],
+  [
+   221,
+   1,
+   0
+  ]
+ ],
+ "baseline_locked_walk_same_method": {
+  "near_hand": [
+   [
+    56,
+    75
+   ],
+   [
+    61,
+    74
+   ],
+   [
+    59,
+    74
+   ],
+   [
+    51,
+    74
+   ],
+   [
+    54,
+    72
+   ],
+   [
+    50,
+    76
+   ]
+  ],
+  "visible": "6/6",
+  "x_range": 11,
+  "y_range": 4
+ },
+ "pass_hand": false
+}
