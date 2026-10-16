@@ -18,7 +18,7 @@ MEASURE = """() => { const P = PT, L = P.ST.last, cv = document.getElementById('
   let top = null; for (let y = 0; y < h && top === null; y++) for (let x = 0; x < w; x++) { const i = (y * w + x) * 4; if (!(D[i] === 0 && D[i + 1] === 255 && D[i + 2] === 0)) { top = (y0 + y - L.fy) / s + 94; break } }
   return { s, dir: L.dir, anim: L.anim, frame: L.frame, dx: L.dx, body: band(52, 86), contact: band(92, 94), head: band(0, 50), top, tag: L.tag, fx: L.fx, fy: L.fy, headTop: L.headTop, pos: L.pos } }"""
 TAB = {'S': 0, 'SE': 0, 'E': 3, 'NE': 1, 'N': 1, 'NW': -1, 'W': -2, 'SW': 0}
-MODES = {'A': (False, TAB), 'B': (True, TAB), 'B2': (True, dict(TAB, W=-1))}   # B2 = proposal only (W -1), measured for the owner
+MODES = {'A': (False, TAB), 'B': (True, TAB), 'B2': (True, dict(TAB, W=-1))}   # B = formula table · B2 = table in use (W -1, Claude decision 16 Oct under team rule 0.2)
 def setf(page, d, anim, fi, off, zoom=1, clean=True, tag='feet'):
     on, tab = MODES[off] if isinstance(off, str) else (off, TAB)
     page.evaluate("(a) => { PT.pause(true); PT.set({dir: a.d, anim: a.anim, fi: a.fi, off: a.off, offTable: a.tab, zoom: a.zoom, clean: a.clean, tag: a.tag, blinkNow: false}); PT.draw() }",
@@ -50,8 +50,8 @@ with sync_playwright() as p:
                 wj[a + '>' + c] = {'max_sprite_px': round(max(js), 2), 'mean_sprite_px': round(sum(js) / 6, 2)}
             R.setdefault('turn_walk', {}).setdefault(zk, {})[mode] = wj
     # T2 feet contact vs shadow centre (logical feet) · T3 name tag (two policies) · zoom 100
-    for mode, off in (('A', False), ('B', True)):
-        fc = {}; tags = {'feet': {}, 'head': {}}
+    for mode in ('A', 'B', 'B2'):
+        off = mode; fc = {}; tags = {'feet': {}, 'head': {}}
         for d in DIRS:
             vals = []
             for anim, nf in (('idle', 4), ('walk', 6)):
@@ -63,14 +63,15 @@ with sync_playwright() as p:
                 xs = []
                 for anim, loop in (('idle', [0, 1, 2, 1]), ('walk', [0, 1, 2, 3, 4, 5])):
                     for k in loop:
-                        page.evaluate("(a)=>{PT.pause(true);PT.set({dir:a.d,anim:a.anim,fi:a.fi,off:a.off,zoom:1,clean:false,tag:a.pol,blinkNow:false});PT.draw()}", {'d': d, 'anim': anim, 'fi': k, 'off': off, 'pol': pol})
+                        on, tab = MODES[off]
+                        page.evaluate("(a)=>{PT.pause(true);PT.set({dir:a.d,anim:a.anim,fi:a.fi,off:a.off,offTable:a.tab,zoom:1,clean:false,tag:a.pol,blinkNow:false});PT.draw()}", {'d': d, 'anim': anim, 'fi': k, 'off': on, 'tab': tab, 'pol': pol})
                         L = page.evaluate('PT.ST.last'); xs.append(((L['tag'][0] - L['fx']) / L['s'], (L['tag'][1] - L['fy']) / L['s']))
                 tags[pol][d] = {'x_range': round(max(x for x, _ in xs) - min(x for x, _ in xs), 2), 'y_range': round(max(y for _, y in xs) - min(y for _, y in xs), 2),
                                 'x_mean': round(sum(x for x, _ in xs) / len(xs), 2), 'gap_above_head_px': None}
         R.setdefault('feet_vs_shadow', {})[mode] = fc
         R.setdefault('name_tag', {})[mode] = tags
     # tag turn jumps (x mean per dir) and tag clearance over the head (tag bottom vs highest head pixel, sprite px)
-    for mode in ('A', 'B'):
+    for mode in ('A', 'B', 'B2'):
         for pol in ('feet', 'head'):
             t = R['name_tag'][mode][pol]; R['name_tag'][mode][pol + '_turn_jump_max'] = round(max(abs(t[a]['x_mean'] - t[c]['x_mean']) for a, c in PAIRS), 2)
     # T4 walk -> stop (entry f3) and idle -> walk, head/body jump · B only (offset is the same on both sides of a same-direction switch)
@@ -81,8 +82,11 @@ with sync_playwright() as p:
                  'stop_head_max_entry_f3': round(max(abs(w['head']['c'] - idle[2]['head']['c']) for w in walkf), 2),
                  'stop_body_max_entry_f3': round(max(abs(w['body']['c'] - idle[2]['body']['c']) for w in walkf), 2)}
     R['walk_stop'] = ws
-    page.evaluate("()=>{PT.pause(true);PT.set({dir:'E',anim:'walk',fi:3,clean:false});PT.stop()}")
-    R['stop_enters_f3'] = page.evaluate("()=>({anim:PT.ST.anim, frame:PT.curFrame()})")
+    se = {}
+    for d in DIRS:
+        page.evaluate("(d)=>{PT.pause(true);PT.set({dir:d,anim:'walk',fi:3,clean:false});PT.stop()}", d)
+        se[d] = page.evaluate("()=>PT.ST.anim==='idle'&&PT.curFrame()===2")
+    R['stop_enters_f3'] = {'ok': sum(se.values()), 'of': 8}
     # T6 world position + collision identical A vs B (deterministic steps, walk into the wall)
     script = [('E', 4000), ('N', 700), ('E', 1500), ('S', 1200), ('W', 900), ('SE', 800), ('stop', 300)]
     def run(off):
@@ -116,11 +120,12 @@ with sync_playwright() as p:
     # T9 fallbacks: missing files -> no white screen, no page errors
     fb = {}
     for name, pat in (('idle_png', '**/c2-pilot-kid4-idleanim.png'), ('walk_png', '**/c2-pilot-kid4-walk.png'), ('anchors', '**/c2-pilot-anchors.json'), ('all', '**/c2-pilot-*')):
-        pg = ctx.new_page(); errs = []; pg.on('pageerror', lambda e: errs.append(str(e)))
+        pg = ctx.new_page(); errs = []; cons = []; pg.on('pageerror', lambda e: errs.append(str(e))); pg.on('console', lambda m: cons.append(m.text) if m.type == 'error' and 'Failed to load resource' not in m.text else None)
         pg.route(pat, lambda r: r.abort()); pg.goto('http://127.0.0.1:%s/pilot-g2-motion.html' % PORT); pg.wait_for_timeout(1200)
         pg.screenshot(path=os.path.join(OUT, 'fallback-%s.png' % name))
+        pg.evaluate("()=>PT.walk('E')"); pg.wait_for_timeout(600); pg.screenshot(path=os.path.join(OUT, 'fallback-%s-walking.png' % name)); walking_img = pg.evaluate("()=>!!(PT.ST.img.walk||PT.ST.img.idle)")
         im = np.array(Image.open(os.path.join(OUT, 'fallback-%s.png' % name)).convert('RGB')); white = float((im.min(-1) > 250).mean())
-        fb[name] = {'page_errors': len(errs), 'white_fraction': round(white, 3), 'drawn_something': bool(pg.evaluate('!!PT.ST.last'))}
+        fb[name] = {'page_errors': len(errs), 'console_errors': len(cons), 'white_fraction': round(white, 3), 'drawn_something': bool(pg.evaluate('!!PT.ST.last')), 'walking_uses_sprite': walking_img}
         pg.close()
     R['fallback'] = fb
     # T2b foot pixels (rows 92-94) outside the shadow ellipse (half width 14 art px) · shadow fixed at logical feet or following renderOffset
