@@ -88,7 +88,7 @@
   }
  },
  "renderOffset": {
-  "status": "APPROVED FOR PILOT TEST ONLY (owner 16 Oct 2569 ~12:4x) - not for game 2.33 or Production; results in DESIGN_CHAR2_RENDER_CONTRACT.md 6.1",
+  "status": "B2 OWNER APPROVED FOR G2 PILOT ONLY (owner 16 Oct 2569 ~13:3x) - not for game 2.33 or Production; QG-2a stays CONDITIONAL PASS; see DESIGN_CHAR2_RENDER_CONTRACT.md 6-6.3",
   "formula": "round-half-up(48 - idle f1 body centre rows 52-86), clamp +-3, same for every frame of every anim of that direction, x only, at draw time",
   "dx": {
    "S": 0,
