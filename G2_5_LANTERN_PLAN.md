@@ -1,6 +1,6 @@
 # G2.5a — แผนและร่างสเปกตะเกียงจริงของตัวเด็ก (Claude · ฉบับ v0.3 · 17 ต.ค. 2569 ~02:3x)
 
-**สถานะ (17 ต.ค. ~02:4x): รอบ 1 ได้ 64 แบบ · เจ้าของเก็บ 4 แบบ (#33 #13 #2 #21) · **ทุกแบบใหญ่เกิน: 18–20 × 31 px · ใต้กลางห่วง 27 px (เพดาน 15)** → ✅ มติ D-LAN-R2 (เจ้าของเลือก ⭐): กดรอบ 2 ด้วยรูปอ้างอิง 18×18 ยึดแบบ #33 (ข้อ 12) · รอเจ้าของกด**
+**สถานะ (17 ต.ค. ~02:4x): รอบ 1 ได้ 64 แบบ · เจ้าของเก็บ 4 แบบ (#33 #13 #2 #21) · **ทุกแบบใหญ่เกิน: 18–20 × 31 px · ใต้กลางห่วง 27 px (เพดาน 15)** → ✅ มติ D-LAN-R2 (เจ้าของเลือก ⭐): กดรอบ 2 ด้วยรูปอ้างอิง 18×18 ยึดแบบ #33 (ข้อ 12) · รอเจ้าของกด · พรอมป์ฉบับสุดท้ายผ่าน ChatGPT แล้ว (~02:4x)**
 
 สถานะเดิม (17 ต.ค. ~02:3x): ✅ หน้าจอ PixelLab ตรวจแล้ว (รูปอ้างอิง 2 รูป `1-style.png` + `2-shape-unlit.png` · 2/8 · Color palette None · Max colours No limit · `Total: 10 generations for 64 frames at 32px (8×8 grid)`) · ✅ เจ้าของสั่งกด Generate ทิศ S รอบเลือกแบบ (เลือก ⭐) · รอผล zip → Claude วัดตาม QG-5a**
 
@@ -174,9 +174,11 @@ A single front-view sprite of a small round copper hand lantern for Lantern Acad
 
 **รอบ 2 (มติ D-LAN-R2 · เจ้าของ ~02:4x):** รูปอ้างอิง **18×18** (`qa/g2-5a-r2/make_refs_18.py`): `1-style-18.png` (ตัดจากตัวเด็ก · เข็มกลัด คอเสื้อ เข็มขัด) · `2-shape-18.png` (ทรงกลมแบบ #33 · 13×18 · กลางห่วง (9,2) · ใต้ห่วง 15 · กระจกมืด) · zip `g25a-pixellab-refs-r2-18px.zip`
 - ตั้งค่าเหมือนรอบ 1 · ตรวจบรรทัด Total ว่าเป็น "… at 18px" ก่อนกด
-- พรอมป์รอบ 2 = ฉบับ ChatGPT ปรับเฉพาะขนาด/ทรง (ตัด "two slim copper uprights" เพราะ #33 เป็นทรงลูกโลก):
+- 🟧 ChatGPT (~02:4x) เห็นด้วย #33 + กรอบ 18×18 · ล็อกขนาด: กรอบ 18×18 · กว้างเป้าหมาย 13 · สูงรวม 18 · กลางห่วง (9,2) · ใต้จุดจับ ≤ 15 · ขนาดจริงเกิน = รายงานไม่ผ่าน ไม่แอบย่อ · ห้ามเพิ่มรูปอ้างอิงอื่น
+- **พรอมป์รอบ 2 ฉบับสุดท้าย** (ฉบับ ChatGPT + แก้ 4 จุด: almost filling · 13 px at the widest part · straight front view / symmetrical / no tilt · small central crystal · ความสมมาตรใช้กับรูปทรงเท่านั้น แสงยังมาจากบนซ้าย):
 ```
-A single front-view sprite of a small round copper hand lantern for Lantern Academy, a cozy fantasy pixel-art RPG. Use the first reference for crisp square pixel clusters, dark plum outlines and upper-left material shading, but not its exact clothing colors or motifs. Use the second reference as the exact silhouette and scale: about 13 pixels wide and 18 pixels tall including the ring, filling the full height of the 18x18 transparent frame, with the hanging ring centre at (9,2). A round globe-shaped glass body, a small domed copper cap, a circular hanging ring, a thin copper rim above and below the glass and a narrow copper base. Muted copper palette #3D292C, #67413A, #915B49, #BB7A57 and plum outline #3A1E3F. A tiny faceted crystal shape visible at the center of the dark warm glass, with no emitted light. Clean readable details at this tiny native pixel size, consistent lighting from the upper left. One complete object only, transparent background, no surrounding light halo, cast shadow, scenery, character or lettering.
+A single front-view sprite of a small round copper hand lantern for Lantern Academy, a cozy fantasy pixel-art RPG. Straight front view, symmetrical silhouette, no perspective tilt. Use the first reference for crisp square pixel clusters, dark plum outlines and upper-left material shading, but not its exact clothing colors or motifs. Use the second reference as the exact silhouette and scale: about 13 pixels wide at the widest part and 18 pixels tall including the ring, almost filling the full height of the 18x18 transparent frame, with the hanging ring centre at (9,2). A round globe-shaped glass body, a small domed copper cap, a circular hanging ring, a thin copper rim above and below the glass and a narrow copper base. Muted copper palette #3D292C, #67413A, #915B49, #BB7A57 and plum outline #3A1E3F. A small central crystal, not filling the glass chamber, visible inside the dark warm glass, with no emitted light. Clean readable details at this tiny native pixel size, consistent lighting from the upper left. One complete object only, transparent background, no surrounding light halo, cast shadow, scenery, character or lettering.
 ```
+- หลังได้ผล: วัดกรอบภาพและกลางห่วงจริง · สีและ alpha · ความสวยตาม `ART_GUIDE.md` · ใส่มือตัวละครซูม 75%/100% · เจ้าของเลือก 1 แบบก่อนทำอีก 7 ทิศ
 - ในเกม: Codex วางภาพ 18 px ลงช่อง 32×32 ให้กลางห่วงอยู่ `[16,6]` (เลื่อนทั้งภาพเป็นจำนวนเต็ม ไม่ย่อ/ขยาย)
 
