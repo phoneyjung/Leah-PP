@@ -1,0 +1,248 @@
+{
+ "schema": 1,
+ "file": "c2-pilot-kid4-walkhold-src.png",
+ "cell": [
+  96,
+  96
+ ],
+ "rows": [
+  "S",
+  "SE",
+  "E",
+  "NE",
+  "N",
+  "NW",
+  "W",
+  "SW"
+ ],
+ "cols": [
+  "f1",
+  "f2",
+  "f3",
+  "f4",
+  "f5",
+  "f6"
+ ],
+ "feet": [
+  48,
+  94
+ ],
+ "fps": 10,
+ "ms_per_frame": 100,
+ "source": "PixelLab Add Animation \u00b7 Template motion \u00b7 Skeleton v3 \u00b7 Walking (6 frames) \u00b7 Motion settings: Arm swing 0x, Stride 1x, Advanced untouched (owner screenshot 16 Oct 14:54) \u00b7 character _4 (88x88) \u00b7 owner generated 16 Oct 2026 (E 16:0x trial, other 7 by 16:24) \u00b7 downloaded as 8 GIFs (128x128)",
+ "placement": "lossless crop of the 128 canvas (no scaling, no colour change): lowest foot of the cycle on row 94, cycle-mean body centre (rows 52-86) = locked static idle body centre of that direction (D-IDLE)",
+ "zip_sha256": "20c3dca0f1f7037cfb23ade4fae061f9dcd5463345c47bb44bec646019ae28c4",
+ "per_direction": {
+  "S": {
+   "gif": "Idle_walking-6-frames_south (1).gif",
+   "sha256": "7717d16ab8f615e8e083c9dccc815532d78509659dbb009349accbb5457b51d8",
+   "canvas": [
+    128,
+    128
+   ],
+   "window_xy": [
+    16,
+    12
+   ],
+   "frames": 6,
+   "gif_ms": [
+    200,
+    200,
+    200,
+    200,
+    200,
+    200
+   ]
+  },
+  "SE": {
+   "gif": "Idle_walking-6-frames_south-east (1).gif",
+   "sha256": "345b3010cf295d391e6ab4c37c9becb97f79a9753004d9907c170b08a1bc883f",
+   "canvas": [
+    128,
+    128
+   ],
+   "window_xy": [
+    15,
+    12
+   ],
+   "frames": 6,
+   "gif_ms": [
+    200,
+    200,
+    200,
+    200,
+    200,
+    200
+   ]
+  },
+  "E": {
+   "gif": "Idle_walking-6-frames_east (2).gif",
+   "sha256": "b8bc16d4e760cd2a5118fb1e540ccd2a7322496df0bb2eba4ddfebd7c11bb96c",
+   "canvas": [
+    128,
+    128
+   ],
+   "window_xy": [
+    15,
+    12
+   ],
+   "frames": 6,
+   "gif_ms": [
+    200,
+    200,
+    200,
+    200,
+    200,
+    200
+   ]
+  },
+  "NE": {
+   "gif": "Idle_walking-6-frames_north-east (1).gif",
+   "sha256": "3f627c9fb51629a79386c74de8cd9c1557b0f068fbf390b9aaea346b2b128c58",
+   "canvas": [
+    128,
+    128
+   ],
+   "window_xy": [
+    15,
+    11
+   ],
+   "frames": 6,
+   "gif_ms": [
+    200,
+    200,
+    200,
+    200,
+    200,
+    200
+   ]
+  },
+  "N": {
+   "gif": "Idle_walking-6-frames_north (1).gif",
+   "sha256": "ee1c3172bb79f0afd3b7c8a0b46e4d598eac5303eb601f1e109afeb3f5f4b4b7",
+   "canvas": [
+    128,
+    128
+   ],
+   "window_xy": [
+    16,
+    11
+   ],
+   "frames": 6,
+   "gif_ms": [
+    200,
+    200,
+    200,
+    200,
+    200,
+    200
+   ]
+  },
+  "NW": {
+   "gif": "Idle_walking-6-frames_north-west (2).gif",
+   "sha256": "39e7a711d4a1ce3f2a08d3a60f468c734bc63946b83ed5505a4e557af8c3b6fa",
+   "canvas": [
+    128,
+    128
+   ],
+   "window_xy": [
+    15,
+    11
+   ],
+   "frames": 6,
+   "gif_ms": [
+    200,
+    200,
+    200,
+    200,
+    200,
+    200
+   ]
+  },
+  "W": {
+   "gif": "Idle_walking-6-frames_west (2).gif",
+   "sha256": "16576c44970857be08004d52c6321dfb895e09d1a9c03438b7dbb167f3faee40",
+   "canvas": [
+    128,
+    128
+   ],
+   "window_xy": [
+    14,
+    12
+   ],
+   "frames": 6,
+   "gif_ms": [
+    200,
+    200,
+    200,
+    200,
+    200,
+    200
+   ]
+  },
+  "SW": {
+   "gif": "Idle_walking-6-frames_south-west (2).gif",
+   "sha256": "b9aa413f52662105d200f1e89261c938b293f4277531029671b6c7b7efc2d535",
+   "canvas": [
+    128,
+    128
+   ],
+   "window_xy": [
+    16,
+    12
+   ],
+   "frames": 6,
+   "gif_ms": [
+    200,
+    200,
+    200,
+    200,
+    200,
+    200
+   ]
+  }
+ },
+ "walkhold_anchor": {
+  "S": {
+   "static_body_x": 48.08,
+   "walkhold_mean_body_x": 47.93,
+   "walkhold_f1_body_x": 48.01
+  },
+  "SE": {
+   "static_body_x": 46.97,
+   "walkhold_mean_body_x": 47.47,
+   "walkhold_f1_body_x": 48.3
+  },
+  "E": {
+   "static_body_x": 44.81,
+   "walkhold_mean_body_x": 45.11,
+   "walkhold_f1_body_x": 44.82
+  },
+  "NE": {
+   "static_body_x": 46.47,
+   "walkhold_mean_body_x": 46.95,
+   "walkhold_f1_body_x": 47.3
+  },
+  "N": {
+   "static_body_x": 47.48,
+   "walkhold_mean_body_x": 47.15,
+   "walkhold_f1_body_x": 46.56
+  },
+  "NW": {
+   "static_body_x": 48.77,
+   "walkhold_mean_body_x": 48.41,
+   "walkhold_f1_body_x": 47.4
+  },
+  "W": {
+   "static_body_x": 49.76,
+   "walkhold_mean_body_x": 49.92,
+   "walkhold_f1_body_x": 50.11
+  },
+  "SW": {
+   "static_body_x": 48.07,
+   "walkhold_mean_body_x": 47.69,
+   "walkhold_f1_body_x": 47.87
+  }
+ },
+ "note": "Raw PixelLab pixels, no scaling, no colour change. Not cleaned: Codex cleans per ASSET_SPEC_12 part D. Plan: G2_2B_LANTERN_HOLD_PLAN.md"
+}

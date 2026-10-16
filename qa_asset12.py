@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # ASSET_SPEC_12 independent QA (Claude) · part B = walk cleanup (48 frames) · section 8 of the spec, numbers only.
 # usage: python3 -I qa_asset12.py walk SRC.png SPRITE.png MASK.png CHANGES.json HOLES.json STRAP.json OUT_DIR
+#        python3 -I qa_asset12.py walkhold SRC SPRITE MASK CHANGES HOLES STRAP LOCKED_WALK LOCKED_WALK_MASK OUT_DIR   (part D, spec 1.4 section 14)
 # needs qa_asset09_a3.py (e1d74b4) and qa_g2_2_intake.py in the same folder. Reads Codex files as data; writes only into OUT_DIR.
 import sys, os, json
 from collections import deque, Counter
@@ -61,7 +62,10 @@ def components(mask):
 
 def hx(c): return '#%02X%02X%02X%02X' % tuple(int(v) for v in c)
 
-def check_walk(srcp, sprp, mskp, chgp, holp, strp, od):
+def check_walk(srcp, sprp, mskp, chgp, holp, strp, od, anim='walk', skip=(), fill_big=(), keep_big=('SE f3',), outname='qa-asset12-B.json', img=True, allow_px=()):
+    # allow_px = {(dir, frame, x, y)} single-pixel colour fixes the spec names explicitly (part D: 2 x #F9DA99 on the W tunic hem)
+    # part D (walk_hold, spec 1.4 section 14): anim='walk_hold', skip=('S','N') rows are checked separately (copy of the locked walk),
+    # fill_big = '>3 px' holes Claude decided to fill (NE f2, NW f5); keep_big = natural gaps that stay open (SE f3)
     os.makedirs(od, exist_ok=True)
     S = q.load(srcp); A = q.load(sprp); M = q.load(mskp); CH = json.load(open(chgp, encoding='utf-8'))['changes']
     HO = json.load(open(holp, encoding='utf-8')); ST = json.load(open(strp, encoding='utf-8'))
@@ -77,13 +81,15 @@ def check_walk(srcp, sprp, mskp, chgp, holp, strp, od):
     for key, groups in HO['holes'].items():
         D, f = key.split(' f'); i = L8.index(D); k = int(f) - 1
         for g in groups:
-            if g['px'] <= 3: exp_fill |= {(i * C + y, k * C + x) for x, y in g['pts']}
+            if D in skip: continue
+            if g['px'] <= 3 or key in fill_big: exp_fill |= {(i * C + y, k * C + x) for x, y in g['pts']}
             else: kept_big.append((key, g['px']))
-    achg = {(int(y), int(x)) for y, x in zip(*np.nonzero(S[..., 3] != A[..., 3]))}
+    achg = {(int(y), int(x)) for y, x in zip(*np.nonzero(S[..., 3] != A[..., 3])) if L8[int(y) // C] not in skip}
     R['alpha_changed'] = len(achg); R['alpha_expected'] = len(exp_fill)
     H['02 alpha changes = listed hole fills exactly'] = achg == exp_fill and all(A[y, x, 3] == 255 and S[y, x, 3] == 0 for y, x in achg)
     per = {}; plum_bad = 0; plum_miss = 0; other_out = 0; head_chg = 0; newcol = 0; small_left = 0; big_ok = 0; gold = []; nonplum_edge = []
     for i, D, k, sl in cells(A, nf):
+        if D in skip: continue
         s = S[sl]; a = A[sl]; op = a[..., 3] > 0; key = '%s f%d' % (D, k + 1)
         out = outer_mask(op); edge = op & np.zeros_like(op)
         for dx, dy in q.N4:
@@ -98,6 +104,8 @@ def check_walk(srcp, sprp, mskp, chgp, holp, strp, od):
         for (yy, xx) in exp_fill:
             if sl[0].start <= yy < sl[0].stop and sl[1].start <= xx < sl[1].stop: holefill[yy - sl[0].start, xx - sl[1].start] = True
         chg = (s != a).any(-1) & ~plum & ~holefill
+        for (aD, af, ax, ay) in allow_px:
+            if aD == D and af == k + 1: chg[ay, ax] = False
         box = ST['frames'].get(key, {}).get('box_x0y0x1y1')
         inbox = np.zeros_like(op)
         if box: x0, y0, x1, y1 = box; inbox[max(0, y0 - 1):y1 + 2, max(0, x0 - 1):x1 + 2] = True
@@ -106,7 +114,8 @@ def check_walk(srcp, sprp, mskp, chgp, holp, strp, od):
         sc = {tuple(c) for c in s[s[..., 3] > 0][:, :3]}; ac = {tuple(c) for c in a[op][:, :3]} - {tuple(PLUM)}
         nc = len(ac - sc); newcol += nc
         hs = enclosed(op); small = [h for h in hs if len(h) <= 3]; small_left += len(small)
-        if key == 'SE f3': big_ok = int(any(len(h) == 6 for h in hs))
+        if key in fill_big: small_left += sum(1 for h in hs if len(h) > 3)
+        if key == 'SE f3' and 'SE f3' in keep_big: big_ok = int(any(len(h) == 6 for h in hs))
         g = op & (a[..., :3] == GOLD).all(-1); gs = (s[..., :3] == GOLD).all(-1) & (s[..., 3] > 0)
         gid = ID[sl][g]
         gold.append({'cell': key, 'px': int(g.sum()), 'all_id9': bool((gid == 9).all()), 'new_positions': int((g & ~gs).sum())})
@@ -125,17 +134,18 @@ def check_walk(srcp, sprp, mskp, chgp, holp, strp, od):
     # change log: exact and reversible
     log = {}; bad_log = 0; tasks = Counter()
     for e in CH:
-        if e.get('anim') != 'walk': continue
+        if e.get('anim') != anim: continue
         i = L8.index(e['dir']); k = e['frame'] - 1; y = i * C + e['y']; x = k * C + e['x']
         log[(y, x)] = e; tasks[e['task']] += 1
         if hx(S[y, x]) != e['before'].upper() or hx(A[y, x]) != e['after'].upper(): bad_log += 1
-    diff = {(int(y), int(x)) for y, x in zip(*np.nonzero((S != A).any(-1)))}
+    diff = {(int(y), int(x)) for y, x in zip(*np.nonzero((S != A).any(-1))) if L8[int(y) // C] not in skip}
     back = A.copy()
     for (y, x), e in log.items():
         h = e['before'].lstrip('#'); back[y, x] = [int(h[j:j + 2], 16) for j in (0, 2, 4, 6)]
     R['log'] = {'entries': len(log), 'diff_px': len(diff), 'tasks': dict(tasks), 'wrong_before_after': bad_log}
     H['08 change log covers every changed pixel exactly'] = set(log) == diff and bad_log == 0
-    H['08 rollback = source RGBA 100%'] = bool((back == S).all())
+    keep_rows = np.array([L8[y // C] not in skip for y in range(S.shape[0])])
+    H['08 rollback = source RGBA 100%'] = bool((back[keep_rows] == S[keep_rows]).all())
     # mask
     opm = A[..., 3] > 0
     H['09 mask: opaque -> ID 1-11 · transparent -> ID 0'] = bool(((ID >= 1) & (ID <= 11))[opm].all() and (ID[~opm] == 0).all())
@@ -186,8 +196,29 @@ def check_walk(srcp, sprp, mskp, chgp, holp, strp, od):
     H['13 PNG <= 160 KB'] = os.path.getsize(sprp) <= MAX_PNG and os.path.getsize(mskp) <= MAX_PNG
     R['hard'] = H; R['PASS'] = all(H.values())
     R['nonplum_outer_edge_px'] = len(nonplum_edge)
-    images(S, A, ID, G, nonplum_edge, od)
-    json.dump(R, open(os.path.join(od, 'qa-asset12-B.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1, default=int)
+    if img: images(S, A, ID, G, nonplum_edge, od)
+    json.dump(R, open(os.path.join(od, outname), 'w', encoding='utf-8'), ensure_ascii=False, indent=1, default=int)
+    return R
+
+def check_walkhold(srcp, sprp, mskp, chgp, holp, strp, lwp, lwmp, od):
+    """ASSET_SPEC_12 part D (spec 1.4 section 14): 36 cleaned frames (SE E NE NW W SW) + rows S N copied from the locked walk"""
+    R = check_walk(srcp, sprp, mskp, chgp, holp, strp, od, anim='walk_hold', skip=('S', 'N'), fill_big=('NE f2', 'NW f5'), keep_big=('SE f3',), outname='qa-asset12-D.json', img=False,
+                   allow_px={('W', 1, 41, 73), ('W', 5, 38, 75)})
+    Aq = q.load(sprp)
+    R['signal_fix_W'] = {'W f1 (41,73)': q.hexc(Aq[6 * C + 73, 0 * C + 41]), 'W f5 (38,75)': q.hexc(Aq[6 * C + 75, 4 * C + 38])}
+    R['hard']['14 W f1/f5 hem pixels no longer #F9DA99'] = all(v != '#F9DA99' for v in R['signal_fix_W'].values())
+    A = q.load(sprp); M = q.load(mskp); LW = q.load(lwp); LM = q.load(lwmp)
+    same = {}
+    for D in ('S', 'N'):
+        i = L8.index(D); r = slice(i * C, (i + 1) * C)
+        vis = LW[r][..., 3] > 0   # visible pixels only: the locked PNG keeps colour under alpha 0 and a PNG writer may zero it
+        same[D] = {'alpha_px_diff': int((A[r][..., 3] != LW[r][..., 3]).sum()) + int((M[r][..., 3] != LM[r][..., 3]).sum()),
+                   'sprite_px_diff': int(((A[r][..., :3] != LW[r][..., :3]).any(-1) & vis).sum()), 'mask_px_diff': int(((M[r][..., :3] != LM[r][..., :3]).any(-1) & vis).sum())}
+    R['rows_S_N_vs_locked_walk'] = same
+    R['hard']['14 rows S N = locked walk sprite + mask (alpha everywhere, colour on visible pixels)'] = all(v['alpha_px_diff'] == 0 and v['sprite_px_diff'] == 0 and v['mask_px_diff'] == 0 for v in same.values())
+    R['hard']['14 big holes NE f2 / NW f5 filled · SE f3 kept'] = R['hard'].pop('03 SE f3 6 px natural gap kept') and R['hard']['03 holes <= 3 px left = 0']
+    R['PASS'] = all(R['hard'].values())
+    json.dump(R, open(os.path.join(od, 'qa-asset12-D.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1, default=int)
     return R
 
 # ---------------------------------------------------------------- part C + A (idle 8 dirs x 4 frames + blink f4)
@@ -488,6 +519,12 @@ if __name__ == '__main__':
         print('leak', R['leak']); print('gold', [(g['cell'], g['px']) for g in R['gold_F9DA99'] if g['px']]); print('signal fails', R['signal_fails'])
         print('small ID8 pieces', R['id8_small_pieces']); print('shade failing', R['shade_failing'][:10]); print('non-plum outer edge px', R['nonplum_outer_edge_px'])
         print('RESULT', 'PASS' if R['PASS'] else 'FAIL'); sys.exit(0 if R['PASS'] else 1)
+    if a and a[0] == 'walkhold' and len(a) == 10:
+        R = check_walkhold(*a[1:])
+        for k, v in R['hard'].items(): print(('PASS ' if v else 'FAIL ') + k)
+        print('rows S N vs locked walk', R['rows_S_N_vs_locked_walk']); print('log', R['log'], '· plum', R['plum_total'], 'missing', R['plum_missing'], 'extra', R['plum_extra'])
+        print('leak', R['leak']); print('gold', [(g['cell'], g['px']) for g in R['gold_F9DA99'] if g['px']]); print('signal fails', R['signal_fails'])
+        print('RESULT', 'PASS' if R['PASS'] else 'FAIL'); sys.exit(0 if R['PASS'] else 1)
     if a and a[0] == 'idle' and len(a) == 12:
         R = check_idle(*a[1:])
         for k, v in R['hard'].items(): print(('PASS ' if v else 'FAIL ') + k)
@@ -498,4 +535,4 @@ if __name__ == '__main__':
         print('cape width vs static (source property, spec 7)', R['cape_width_outside_4px_source']); print('material new pairs', R['material_new_pairs_6_7_9']); print('small ID8 pieces', [p for p in R['id8_small_pieces'] if p['leg_zone'] or p['cape_tip']])
         print('shade failing', R['shade_failing'][:10]); print('non-plum outer edge px', R['nonplum_outer_edge_px'])
         print('RESULT', 'PASS' if R['PASS'] else 'FAIL'); sys.exit(0 if R['PASS'] else 1)
-    print('usage: walk SRC SPRITE MASK CHANGES HOLES STRAP OUT\n       idle SRC SPRITE MASK CHANGES HOLES STRAP A2 MASK31 WALK WALKMASK OUT'); sys.exit(2)
+    print('usage: walk SRC SPRITE MASK CHANGES HOLES STRAP OUT\n       walkhold SRC SPRITE MASK CHANGES HOLES STRAP LOCKED_WALK LOCKED_WALK_MASK OUT\n       idle SRC SPRITE MASK CHANGES HOLES STRAP A2 MASK31 WALK WALKMASK OUT'); sys.exit(2)
