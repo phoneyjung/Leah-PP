@@ -25,7 +25,8 @@ canvas{position:fixed;inset:0;width:100%;height:100%;image-rendering:pixelated}
 // G2 Pilot motion harness (Claude · 16 Oct 2569). Separate test page: no index.html / sw.js / save / Firebase.
 // Draws the locked c2 sprites as drawn (no recolour - not part of this test) following DESIGN_CHAR2_RENDER_CONTRACT.md.
 // G2.2b hold mode (?hold): walk_hold sheet + stand-in Set-08 L0 lantern at the measured hand anchors (c2-pilot-hold-anchors.json),
-// camera-side hand (D-HAND), N draws no lantern, lantern in front + fist pixels redrawn over the ring, D-EASE <= 3 art px per 100 ms per axis.
+// camera-side hand (D-HAND), N draws no lantern, lantern in front + fist pixels redrawn over the ring, D-EASE <= 3 art px per 100 ms per axis
+// (default step ease = D-EASE-STEP, owner 17 Oct; smooth and snap stay selectable for comparison).
 // No rotation, no scaling of the lantern; Pilot only (not index.html / sw.js / save).
 'use strict';
 const C=96, FEET=[48,94], DIRS=['S','SE','E','NE','N','NW','W','SW'];
@@ -33,7 +34,7 @@ const DV={S:[0,1],SE:[1,1],E:[1,0],NE:[1,-1],N:[0,-1],NW:[-1,-1],W:[-1,0],SW:[-1
 const OFF_TABLE={S:0,SE:0,E:3,NE:1,N:1,NW:-1,W:-1,SW:0};          // PILOT TEST ONLY (owner 16 Oct) · W -1 (formula -2) + shadow follows: Claude decision under team rule 0.2 after measurement
 const ST={off:true,shadowFollow:true,zoom:1,dark:false,tag:'feet',guides:false,dir:'S',anim:'idle',fi:0,t:0,blinkAt:4000,pos:{x:160,y:120},moving:false,mv:null,
   log:[],img:{},anc:null,ok:{walk:false,idle:false,anc:false,walkhold:false,lantern:false,hold:false},
-  hold:false,ease:true,easeStep:false,lpos:null,ldir:null,lhist:null,lclock:0};
+  hold:false,ease:true,easeStep:true,lpos:null,ldir:null,lhist:null,lclock:0};   // default = step ease (owner 17 Oct ~01:3x, D-EASE-STEP)
 const EASE_PX_PER_MS=0.03, EASE_MAX=3, EASE_WIN=120, LAN_HANG=[16,6], LAN_CELL=32;   // step ease looks back 120 ms = 100 ms rule + 20 ms for frame-time jitter           // D-EASE: 3 art px per 100 ms · stand-in lantern hangs from its ring centre (16,6)
 const WALL={x:200,y:60,w:16,h:120};                                 // simple collision box (world px) to prove offset never moves world/collision
 const IDLE_LOOP=[0,1,2,1], WALK_MS=100, IDLE_MS=200, SPEED=48;     // px per second (art px)
@@ -122,7 +123,7 @@ function draw(){
   if(img)g.drawImage(img,kk*C,DIRS.indexOf(d)*C,C,C,sx,sy,C*s,C*s);else{g.fillStyle='#c84';g.fillRect(fx-10*s,fy-40*s,20*s,40*s)}
   // lantern (G2.2b): in front of the body, then the fist pixels again over the ring · positions in art px of the cell, so renderOffset applies
   let lan=null;const t=H?lanternTarget():null;
-  if(t){if(!ST.lpos||ST.ldir!==d){ST.lpos=[t[0],t[1]];ST.ldir=d;ST.lhist=null}
+  if(t){if(!ST.lpos||ST.ldir!==d){ST.lpos=[t[0],t[1]];ST.ldir=d;ST.lhist=[{t:ST.lclock||0,p:[t[0],t[1]]}]}   // snap in draw is part of the history too
     const lx=Math.round(ST.lpos[0]),ly=Math.round(ST.lpos[1]),di=DIRS.indexOf(d);
     g.drawImage(ST.img.lantern,di*LAN_CELL,0,LAN_CELL,LAN_CELL,sx+(lx-LAN_HANG[0])*s,sy+(ly-LAN_HANG[1])*s,LAN_CELL*s,LAN_CELL*s);
     const fo=!ST.nofist&&FIST[ST.anim]&&FIST[ST.anim][d]?FIST[ST.anim][d][kk]:null;if(fo)g.drawImage(fo.c,0,0,fo.w,fo.h,sx+fo.x*s,sy+fo.y*s,fo.w*s,fo.h*s);
@@ -153,7 +154,7 @@ function sync(){const B=(id,on,t)=>{const b=document.getElementById(id);b.classL
   B('bOff',ST.off,ST.off?'Offset B (ตามตาราง) / table':'Offset A = 0');B('bZoom',ST.zoom===1,ST.zoom===1?'ซูม 100% / zoom':'ซูม 75% / zoom');
   B('bBg',ST.dark,ST.dark?'พื้นมืด / dark':'พื้นสว่าง / light');B('bTag',ST.tag==='feet',ST.tag==='feet'?'ป้าย: เท้า / tag: feet':'ป้าย: หัว / tag: head');B('bGuide',ST.guides,'เส้นช่วย / guides');
   B('bHold',ST.hold&&holdOn(),!ST.hold?'มือว่าง / no lantern':holdOn()?'ถือตะเกียง / hold':'ถือ: ไฟล์ไม่ครบ / files missing');B('bEase',ST.ease,!ST.ease?'ตะเกียงติดมือ / snap':ST.easeStep?'หน่วงเป็นจังหวะ / step':'หน่วงเรียบ / smooth')}
-const q=new URLSearchParams(location.search);if(q.has('off0'))ST.off=false;if(q.has('z75'))ST.zoom=0.75;if(q.has('dark'))ST.dark=true;if(q.has('guides'))ST.guides=true;if(q.get('tag')==='head')ST.tag='head';if(q.has('clean'))ST.clean=true;if(q.has('offW'))ST.offWq=+q.get('offW');if(q.has('shadowFixed'))ST.shadowFollow=false;if(q.has('hold'))ST.hold=true;if(q.has('nofist'))ST.nofist=true;if(q.has('snap'))ST.ease=false;if(q.has('stepease'))ST.easeStep=true;
+const q=new URLSearchParams(location.search);if(q.has('off0'))ST.off=false;if(q.has('z75'))ST.zoom=0.75;if(q.has('dark'))ST.dark=true;if(q.has('guides'))ST.guides=true;if(q.get('tag')==='head')ST.tag='head';if(q.has('clean'))ST.clean=true;if(q.has('offW'))ST.offWq=+q.get('offW');if(q.has('shadowFixed'))ST.shadowFollow=false;if(q.has('hold'))ST.hold=true;if(q.has('nofist'))ST.nofist=true;if(q.has('snap'))ST.ease=false;if(q.has('stepease'))ST.easeStep=true;if(q.has('smoothease'))ST.easeStep=false;
 window.PT={ST,GEO,OFF_TABLE,DIRS,setDir,walk,stop,draw,scale,step,curFrame,lanternTarget,holdOn,easeLantern,pause:v=>ST.paused=v,set:(o)=>Object.assign(ST,o)};
 sync();boot();
 </script></body></html>
