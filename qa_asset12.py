@@ -62,7 +62,9 @@ def components(mask):
 
 def hx(c): return '#%02X%02X%02X%02X' % tuple(int(v) for v in c)
 
-def check_walk(srcp, sprp, mskp, chgp, holp, strp, od, anim='walk', skip=(), fill_big=(), keep_big=('SE f3',), outname='qa-asset12-B.json', img=True, allow_px=()):
+def check_walk(srcp, sprp, mskp, chgp, holp, strp, od, anim='walk', skip=(), fill_big=(), keep_big=('SE f3',), outname='qa-asset12-B.json', img=True, allow_px=(), log_srcp=None, allow_box=None):
+    # log_srcp = original source for the change log / rollback when SRC was adjusted by a spec-approved copy (part D: NW f1 head <- NW f2)
+    # allow_box = {(dir, frame): (x0, y0, x1, y1, max_px)} seam edits allowed after such a copy
     # allow_px = {(dir, frame, x, y)} single-pixel colour fixes the spec names explicitly (part D: 2 x #F9DA99 on the W tunic hem)
     # part D (walk_hold, spec 1.4 section 14): anim='walk_hold', skip=('S','N') rows are checked separately (copy of the locked walk),
     # fill_big = '>3 px' holes Claude decided to fill (NE f2, NW f5); keep_big = natural gaps that stay open (SE f3)
@@ -70,6 +72,8 @@ def check_walk(srcp, sprp, mskp, chgp, holp, strp, od, anim='walk', skip=(), fil
     S = q.load(srcp); A = q.load(sprp); M = q.load(mskp); CH = json.load(open(chgp, encoding='utf-8'))['changes']
     HO = json.load(open(holp, encoding='utf-8')); ST = json.load(open(strp, encoding='utf-8'))
     ID = M[..., 0].astype(int); G = M[..., 1].astype(int); nf = 6
+    S0 = q.load(log_srcp) if log_srcp else S
+    seam = {}
     R = {'files': {os.path.basename(p): os.path.getsize(p) for p in (sprp, mskp, chgp)}}
     H = {}   # hard checks
     H['01 sprite 576x768'] = A.shape[:2] == (768, 576); H['01 mask 576x768'] = M.shape[:2] == (768, 576)
@@ -106,6 +110,10 @@ def check_walk(srcp, sprp, mskp, chgp, holp, strp, od, anim='walk', skip=(), fil
         chg = (s != a).any(-1) & ~plum & ~holefill
         for (aD, af, ax, ay) in allow_px:
             if aD == D and af == k + 1: chg[ay, ax] = False
+        if allow_box and (D, k + 1) in allow_box:
+            bx0, by0, bx1, by1, lim = allow_box[(D, k + 1)]; reg = np.zeros_like(chg); reg[by0:by1 + 1, bx0:bx1 + 1] = True
+            seam[key] = int((chg & reg).sum())
+            if seam[key] <= lim: chg &= ~reg
         box = ST['frames'].get(key, {}).get('box_x0y0x1y1')
         inbox = np.zeros_like(op)
         if box: x0, y0, x1, y1 = box; inbox[max(0, y0 - 1):y1 + 2, max(0, x0 - 1):x1 + 2] = True
@@ -137,15 +145,16 @@ def check_walk(srcp, sprp, mskp, chgp, holp, strp, od, anim='walk', skip=(), fil
         if e.get('anim') != anim: continue
         i = L8.index(e['dir']); k = e['frame'] - 1; y = i * C + e['y']; x = k * C + e['x']
         log[(y, x)] = e; tasks[e['task']] += 1
-        if hx(S[y, x]) != e['before'].upper() or hx(A[y, x]) != e['after'].upper(): bad_log += 1
-    diff = {(int(y), int(x)) for y, x in zip(*np.nonzero((S != A).any(-1))) if L8[int(y) // C] not in skip}
+        if hx(S0[y, x]) != e['before'].upper() or hx(A[y, x]) != e['after'].upper(): bad_log += 1
+    diff = {(int(y), int(x)) for y, x in zip(*np.nonzero((S0 != A).any(-1))) if L8[int(y) // C] not in skip}
     back = A.copy()
     for (y, x), e in log.items():
         h = e['before'].lstrip('#'); back[y, x] = [int(h[j:j + 2], 16) for j in (0, 2, 4, 6)]
     R['log'] = {'entries': len(log), 'diff_px': len(diff), 'tasks': dict(tasks), 'wrong_before_after': bad_log}
     H['08 change log covers every changed pixel exactly'] = set(log) == diff and bad_log == 0
     keep_rows = np.array([L8[y // C] not in skip for y in range(S.shape[0])])
-    H['08 rollback = source RGBA 100%'] = bool((back[keep_rows] == S[keep_rows]).all())
+    H['08 rollback = source RGBA 100%'] = bool((back[keep_rows] == S0[keep_rows]).all())
+    R['seam_edits'] = seam
     # mask
     opm = A[..., 3] > 0
     H['09 mask: opaque -> ID 1-11 · transparent -> ID 0'] = bool(((ID >= 1) & (ID <= 11))[opm].all() and (ID[~opm] == 0).all())
@@ -202,8 +211,14 @@ def check_walk(srcp, sprp, mskp, chgp, holp, strp, od, anim='walk', skip=(), fil
 
 def check_walkhold(srcp, sprp, mskp, chgp, holp, strp, lwp, lwmp, od):
     """ASSET_SPEC_12 part D (spec 1.4 section 14): 36 cleaned frames (SE E NE NW W SW) + rows S N copied from the locked walk"""
-    R = check_walk(srcp, sprp, mskp, chgp, holp, strp, od, anim='walk_hold', skip=('S', 'N'), fill_big=('NE f2', 'NW f5'), keep_big=('SE f3',), outname='qa-asset12-D.json', img=False,
-                   allow_px={('W', 1, 41, 73), ('W', 5, 38, 75)})
+    # spec 1.4.2: NW f1 rows 4-43 = NW f2 rows 4-43 of the source (same coordinates) before cleanup -> adjusted source for the structural checks
+    S0 = q.load(srcp); Sa = S0.copy(); r = L8.index('NW')
+    Sa[r * C + 4:r * C + 44, 0:C] = S0[r * C + 4:r * C + 44, C:2 * C]
+    os.makedirs(od, exist_ok=True); adj = os.path.join(od, 'walkhold-src-adjusted.png'); Image.fromarray(Sa, 'RGBA').save(adj)
+    R = check_walk(adj, sprp, mskp, chgp, holp, strp, od, anim='walk_hold', skip=('S', 'N'), fill_big=('NE f2', 'NW f5'), keep_big=('SE f3',), outname='qa-asset12-D.json', img=False,
+                   allow_px={('W', 1, 41, 73), ('W', 5, 38, 75)}, log_srcp=srcp, allow_box={('NW', 1): (0, 42, 95, 46, 10)})
+    tasks = R['log']['tasks']; R['head_copy_px'] = int((Sa != S0).any(-1).sum())
+    R['hard']['14 NW f1 head copy done (checks 05/06 run against the adjusted source) and logged as task head_copy'] = tasks.get('head_copy', 0) > 0
     Aq = q.load(sprp)
     R['signal_fix_W'] = {'W f1 (41,73)': q.hexc(Aq[6 * C + 73, 0 * C + 41]), 'W f5 (38,75)': q.hexc(Aq[6 * C + 75, 4 * C + 38])}
     R['hard']['14 W f1/f5 hem pixels no longer #F9DA99'] = all(v != '#F9DA99' for v in R['signal_fix_W'].values())
