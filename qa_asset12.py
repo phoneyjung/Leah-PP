@@ -190,6 +190,252 @@ def check_walk(srcp, sprp, mskp, chgp, holp, strp, od):
     json.dump(R, open(os.path.join(od, 'qa-asset12-B.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1, default=int)
     return R
 
+# ---------------------------------------------------------------- part C + A (idle 8 dirs x 4 frames + blink f4)
+FACEB = ['S', 'SE', 'E', 'W', 'SW']; EYES = {'S': 2, 'SE': 2, 'SW': 2, 'E': 1, 'W': 1}
+
+def body_metrics(c):
+    op = c[..., 3] > 0; ys, xs = np.nonzero(op); y, x = np.nonzero(op[52:87]); hy, hx_ = np.nonzero(op[:51])
+    bx = np.nonzero(op[52:87].any(0))[0]
+    return {'body_cx': float(x.mean()), 'head_cx': float(hx_.mean()), 'top': int(ys.min()), 'bottom': int(ys.max()), 'width': int(bx.max() - bx.min() + 1)}
+
+def comps8(mask):
+    seen = np.zeros_like(mask); out = []
+    for y0, x0 in zip(*np.nonzero(mask)):
+        if seen[y0, x0]: continue
+        st = [(y0, x0)]; seen[y0, x0] = True; n = 0
+        while st:
+            y, x = st.pop(); n += 1
+            for dx, dy in q.N8:
+                yy, xx = y + dy, x + dx
+                if 0 <= yy < mask.shape[0] and 0 <= xx < mask.shape[1] and mask[yy, xx] and not seen[yy, xx]: seen[yy, xx] = True; st.append((yy, xx))
+        out.append(n)
+    return out
+
+def check_idle(srcp, sprp, mskp, chgp, holp, strp, a2p, m31p, walkp, walkmp, od):
+    os.makedirs(od, exist_ok=True); nf = 4
+    S = q.load(srcp); A = q.load(sprp); M = q.load(mskp); CH = json.load(open(chgp, encoding='utf-8'))['changes']
+    HO = json.load(open(holp, encoding='utf-8')); ST = json.load(open(strp, encoding='utf-8'))
+    A2 = q.load(a2p); M31 = q.load(m31p); WK = q.load(walkp); WM = q.load(walkmp)
+    ID = M[..., 0].astype(int); G = M[..., 1].astype(int)
+    R = {'files': {os.path.basename(p): os.path.getsize(p) for p in (sprp, mskp, chgp)}}; H = {}
+    H['01 sprite 384x768'] = A.shape[:2] == (768, 384); H['01 mask 384x768'] = M.shape[:2] == (768, 384)
+    H['01 alpha binary (semi 0)'] = int(((A[..., 3] > 0) & (A[..., 3] < 255)).sum()) == 0
+    H['01 mask alpha = sprite alpha'] = bool((M[..., 3] == A[..., 3]).all())
+    H['01 mask B channel = 0'] = int(M[..., 2][M[..., 3] > 0].max(initial=0)) == 0
+    exp_fill = set()
+    for key, groups in HO['holes'].items():
+        D, f = key.split(' f'); i = L8.index(D); k = int(f) - 1
+        for g in groups: exp_fill |= {(i * C + y, k * C + x) for x, y in g['pts']}
+    achg = {(int(y), int(x)) for y, x in zip(*np.nonzero(S[..., 3] != A[..., 3]))}
+    R['alpha_changed'] = len(achg); R['alpha_expected'] = len(exp_fill)
+    H['02 alpha changes = listed hole fills exactly'] = achg == exp_fill and all(A[y, x, 3] == 255 and S[y, x, 3] == 0 for y, x in achg)
+    # eye boxes per face direction: ID 2/5 in f1-f3 + ID 2 in f4, bbox, used with +2 px (spec section 5)
+    ebox = {}
+    for D in FACEB:
+        i = L8.index(D); m = np.zeros((C, C), bool)
+        for k in range(nf):
+            Ik = ID[i * C:(i + 1) * C, k * C:(k + 1) * C]; m |= np.isin(Ik, [2, 5]) if k < 3 else (Ik == 2)
+        m[51:] = False   # eyes live in the head (rows <= 50)
+        ys, xs = np.nonzero(m); ebox[D] = [int(xs.min()), int(ys.min()), int(xs.max()), int(ys.max())] if len(xs) else None
+    R['eye_box'] = ebox
+    per = {}; plum_bad = plum_miss = other_out = head_chg = newcol = small_left = 0; gold = []; nonplum_edge = []; blink = {}; idfix = 0
+    for i, D, k, sl in cells(A, nf):
+        s = S[sl]; a = A[sl]; op = a[..., 3] > 0; key = '%s f%d' % (D, k + 1); Ik = ID[sl]
+        out = outer_mask(op); edge = np.zeros_like(op)
+        for dx, dy in q.N4:
+            sh = np.zeros_like(out); ys = slice(max(0, dy), C + min(0, dy)); yd = slice(max(0, -dy), C + min(0, -dy))
+            xs = slice(max(0, dx), C + min(0, dx)); xd = slice(max(0, -dx), C + min(0, -dx)); sh[yd, xd] = out[ys, xs]; edge |= op & sh
+        pre = np.where((s[..., 3] > 0)[..., None], s, a)
+        dark = (pre[..., :3].max(-1).astype(int) + pre[..., :3].min(-1).astype(int)) <= 76
+        expect = edge & dark; plum = op & (a[..., :3] == PLUM).all(-1)
+        plum_bad += int((plum & ~expect).sum()); plum_miss += int((expect & ~plum).sum())
+        ys, xs = np.nonzero(edge & ~dark); nonplum_edge += [(i, k, int(x), int(y)) for x, y in zip(xs, ys)]
+        holefill = np.zeros_like(op)
+        for (yy, xx) in exp_fill:
+            if sl[0].start <= yy < sl[0].stop and sl[1].start <= xx < sl[1].stop: holefill[yy - sl[0].start, xx - sl[1].start] = True
+        chg = (s != a).any(-1) & ~plum & ~holefill
+        eb = np.zeros_like(op)
+        if k == 3 and D in FACEB and ebox[D]:
+            x0, y0, x1, y1 = ebox[D]; eb[max(0, y0 - 2):y1 + 3, max(0, x0 - 2):x1 + 3] = True
+        bl = chg & eb; oth = chg & ~eb
+        box = ST['frames'].get(key, {}).get('box_x0y0x1y1'); inbox = np.zeros_like(op)
+        if box: x0, y0, x1, y1 = box; inbox[max(0, y0 - 1):y1 + 2, max(0, x0 - 1):x1 + 2] = True
+        o = int((oth & ~inbox).sum()); other_out += o; head_chg += int(oth[:51].sum())
+        idfix += int((chg & np.isin(Ik, [4, 10])).sum())
+        if k == 3 and D in FACEB:
+            blink[D] = {'changed_px': int(bl.sum()), 'changed_not_id2_or_3': int((bl & ~np.isin(Ik, [2, 3])).sum()), 'id5_px': int((Ik == 5).sum()),
+                        'id2_parts_in_eye_box': len([n for n in comps8((Ik == 2) & eb) if n >= 2]), 'eyes_expected': EYES[D]}
+        sc = {tuple(c) for c in s[s[..., 3] > 0][:, :3]}; ac = {tuple(c) for c in a[op][:, :3]} - {tuple(PLUM)}
+        nc = len(ac - sc); newcol += nc
+        small = [h for h in enclosed(op) if len(h) <= 3]; small_left += len(small)
+        g = op & (a[..., :3] == GOLD).all(-1); gs = (s[..., :3] == GOLD).all(-1) & (s[..., 3] > 0)
+        gold.append({'cell': key, 'px': int(g.sum()), 'all_id9': bool((Ik[g] == 9).all()), 'new_positions': int((g & ~gs).sum())})
+        per[key] = {'strap_edits': int(oth.sum()), 'outside_strap_box': o, 'blink_edits': int(bl.sum()), 'plum_px': int(plum.sum()),
+                    'plum_expected': int(expect.sum()), 'new_colours': nc, 'holes_le3_left': len(small)}
+    R['per_cell'] = per; R['blink'] = blink
+    H['03 holes <= 3 px left = 0'] = small_left == 0
+    H['04 plum = A2 formula exactly (missing 0 · extra 0)'] = plum_bad == 0 and plum_miss == 0
+    R['plum_missing'] = plum_miss; R['plum_extra'] = plum_bad; R['plum_total'] = int(sum(v['plum_px'] for v in per.values()))
+    H['05 strap edits only inside strap boxes (+1 px)'] = other_out == 0
+    H['05 strap edits <= 30 px per frame'] = all(v['strap_edits'] <= 30 for v in per.values())
+    H['05 no strap edits in E NE N NW W'] = all(v['strap_edits'] == 0 for kk, v in per.items() if kk.split()[0] in ('E', 'NE', 'N', 'NW', 'W'))
+    H['06 head rows <= 50 unchanged outside the blink eye box'] = head_chg == 0
+    H['06 ID 4 / 10 pixels changed = 0'] = idfix == 0
+    H['07 new colours 0 (except plum)'] = newcol == 0
+    H['07 blink only in f4 of S SE E W SW'] = all(v['blink_edits'] == 0 for kk, v in per.items() if not (kk.endswith('f4') and kk.split()[0] in FACEB))
+    H['11 blink: changed px are ID 2 / 3 only'] = all(v['changed_not_id2_or_3'] == 0 for v in blink.values())
+    H['11 blink: ID 5 = 0 in f4'] = all(v['id5_px'] == 0 for v in blink.values())
+    H['11 blink: lid lines >= visible eyes'] = all(v['id2_parts_in_eye_box'] >= v['eyes_expected'] for v in blink.values())
+    H['11 blink: every face direction edited'] = all(v['changed_px'] > 0 for v in blink.values()) and len(blink) == 5
+    # W = locked fallback (spec 4.5)
+    w = L8.index('W'); ws = slice(w * C, (w + 1) * C); a2w = A2[ws]; m31w = M31[ws]; ew = ebox['W']
+    ebw = np.zeros((C, C), bool)
+    if ew: ebw[max(0, ew[1] - 2):ew[3] + 3, max(0, ew[0] - 2):ew[2] + 3] = True
+    H['4.5 W f1-f3 sprite = locked A2 W cell'] = all(bool((A[ws, k * C:(k + 1) * C] == a2w).all()) for k in range(3))
+    H['4.5 W f1-f3 mask = locked A3.1 W cell'] = all(bool((M[ws, k * C:(k + 1) * C] == m31w).all()) for k in range(3))
+    H['4.5 W f4 = A2 / A3.1 outside the eye box'] = bool(((A[ws, 3 * C:] == a2w).all(-1) | ebw).all() and ((M[ws, 3 * C:] == m31w).all(-1) | ebw).all())
+    # change log
+    log = {}; bad_log = 0; tasks = Counter()
+    for e in CH:
+        if e.get('anim') != 'idle': continue
+        i = L8.index(e['dir']); k = e['frame'] - 1; y = i * C + e['y']; x = k * C + e['x']
+        log[(y, x)] = e; tasks[e['task']] += 1
+        if hx(S[y, x]) != e['before'].upper() or hx(A[y, x]) != e['after'].upper(): bad_log += 1
+    diff = {(int(y), int(x)) for y, x in zip(*np.nonzero((S != A).any(-1)))}
+    back = A.copy()
+    for (y, x), e in log.items():
+        h = e['before'].lstrip('#'); back[y, x] = [int(h[j:j + 2], 16) for j in (0, 2, 4, 6)]
+    R['log'] = {'entries': len(log), 'diff_px': len(diff), 'tasks': dict(tasks), 'wrong_before_after': bad_log, 'non_idle_entries': sum(1 for e in CH if e.get('anim') != 'idle')}
+    H['08 change log covers every changed pixel exactly'] = set(log) == diff and bad_log == 0
+    H['08 rollback = source RGBA 100%'] = bool((back == S).all())
+    # mask
+    opm = A[..., 3] > 0
+    H['09 mask: opaque -> ID 1-11 · transparent -> ID 0'] = bool(((ID >= 1) & (ID <= 11))[opm].all() and (ID[~opm] == 0).all())
+    gmax = {k: v[2] for k, v in q.IDS.items()}
+    H['09 mask: G within range of its ID'] = all(int(G[ID == k].max(initial=0)) <= gm for k, gm in gmax.items())
+    H['09 mask: ID 1 = plum pixels exactly'] = bool(((ID == 1) == (opm & (A[..., :3] == PLUM).all(-1))).all())
+    backrows = np.zeros(ID.shape, bool)
+    for D in BACK: i = L8.index(D); backrows[i * C:(i + 1) * C] = True
+    H['09 mask: back dirs have no ID 2/5/10'] = int((backrows & np.isin(ID, [2, 5, 10])).sum()) == 0
+    grp_bad = 0; ngrp = 0; n11 = 0; shade_bad = []
+    for k in range(nf):
+        Ak = np.ascontiguousarray(A[:, k * C:(k + 1) * C]); Ik = np.ascontiguousarray(ID[:, k * C:(k + 1) * C]); Gk = np.ascontiguousarray(G[:, k * C:(k + 1) * C])
+        gr = q.id11_groups(Ik, C); ngrp += len(gr); grp_bad += sum(1 for g in gr if not g['ok']); n11 += int((Ik == 11).sum())
+        so = q.shade_order(Ak, Ik, Gk); shade_bad += ['f%d %s %.3f' % (k + 1, kk, v['rate']) for kk, v in so.items() if not v['ok']]
+    R['id11'] = {'px': n11, 'groups': ngrp, 'groups_failing': grp_bad}; R['shade_failing'] = shade_bad
+    H['09 mask: ID 11 groups all touch >= 2 materials'] = grp_bad == 0
+    H['09 mask: shade order (<= 2% inverted, no flat)'] = not shade_bad
+    leg8 = []
+    for i, D, k, sl in cells(A, nf):
+        I8 = ID[sl] == 8; opk = A[sl][..., 3] > 0
+        for comp in components(I8):
+            if len(comp) <= 3:
+                cs = set(comp)
+                touch8 = any(0 <= y + dy < C and 0 <= x + dx < C and I8[y + dy, x + dx] and (x + dx, y + dy) not in cs for x, y in comp for dx in (-1, 0, 1) for dy in (-1, 0, 1))
+                border_t = any(0 <= y + dy < C and 0 <= x + dx < C and not opk[y + dy, x + dx] for x, y in comp for dx, dy in q.N4)
+                tip = touch8 and border_t
+                leg8.append({'cell': '%s f%d' % (D, k + 1), 'size': len(comp), 'x': comp[0][0], 'y': comp[0][1], 'cape_tip': tip, 'leg_zone': comp[0][1] >= 70 and not tip})
+    R['id8_small_pieces'] = leg8
+    H['09 mask: small ID 8 pieces on legs (row >= 70) = 0'] = sum(1 for p in leg8 if p['leg_zone']) == 0
+    # leak: idle 640 x 32 here + walk (locked B files) 640 x 48 = 51,200
+    Li = q.leak_test(A, ID, G); Lw = q.leak_test(WK, WM[..., 0].astype(int), WM[..., 1].astype(int))
+    def ok(L): return (L['combos'] == 640 and L['fixed_changed_px'] == 0 and L['alpha_changed_px'] == 0 and L['wrong_ramp_px'] == 0 and L['eye_lines_changed_px'] == 0
+                       and L['cross_material_px'] == 0 and L['missing_change_px'] == 0 and L['copper_changed_by_house_px'] == 0 and L['house_distinct'] == 4)
+    R['leak'] = {'idle': {k: v for k, v in Li.items() if k not in ('PASS', 'cells')}, 'walk': {k: v for k, v in Lw.items() if k not in ('PASS', 'cells')},
+                 'frame_images': Li['combos'] * 8 * nf + Lw['combos'] * 8 * 6}
+    H['10 leak test idle 640 x 32 + walk 640 x 48 = 51,200 images · leaks 0'] = ok(Li) and ok(Lw) and R['leak']['frame_images'] == 51200
+    fails = []
+    for kk in q.FIXED:
+        m = opm & (ID == kk)
+        for c in {tuple(int(v) for v in x) for x in A[m, :3]}:
+            if min(q.de00(c, s) for s in q.SIG) < q.SIG_MIN and q.hexc(c) != '#F9DA99': fails.append((kk, q.hexc(c)))
+    R['gold_F9DA99'] = gold; R['signal_fails'] = fails
+    H['11 signal colours: fixed materials OK (F9DA99 handled below)'] = not fails
+    H['11 F9DA99 only ID 9 · <= 6 px per frame · no new positions'] = all(g['all_id9'] and g['px'] <= 6 and g['new_positions'] == 0 for g in gold)
+    # seam f2 -> f4 and idle / walk consistency (section 5, 11.1)
+    seam = {}; cons = {}; mir = 0
+    for i, D in enumerate(L8):
+        f = [body_metrics(A[i * C:(i + 1) * C, k * C:(k + 1) * C]) for k in range(nf)]
+        d24 = (A[i * C:(i + 1) * C, C:2 * C] != A[i * C:(i + 1) * C, 3 * C:]).any(-1)
+        if D in FACEB and ebox[D]:
+            x0, y0, x1, y1 = ebox[D]; d24[max(0, y0 - 2):y1 + 3, max(0, x0 - 2):x1 + 3] = False
+        seam[D] = {'body_dx': round(abs(f[3]['body_cx'] - f[1]['body_cx']), 2), 'top_d': abs(f[3]['top'] - f[1]['top']), 'bottom_d': abs(f[3]['bottom'] - f[1]['bottom']),
+                   'px_diff_outside_eye_box': int(d24.sum())}
+        wf = [body_metrics(WK[i * C:(i + 1) * C, k * C:(k + 1) * C]) for k in range(6)]; st = body_metrics(A2[i * C:(i + 1) * C])
+        cons[D] = {'head_f1_vs_walk_f1': round(f[0]['head_cx'] - wf[0]['head_cx'], 2), 'head_mean_vs_walk_mean': round(np.mean([x['head_cx'] for x in f]) - np.mean([x['head_cx'] for x in wf]), 2),
+                   'height_d': abs((f[0]['bottom'] - f[0]['top']) - (wf[0]['bottom'] - wf[0]['top'])), 'cape_width_vs_static': [x['width'] - st['width'] for x in f],
+                   'width_changed_from_source': sum(1 for k in range(nf) if f[k]['width'] != body_metrics(S[i * C:(i + 1) * C, k * C:(k + 1) * C])['width'])}
+    for Dm, Do in (('W', 'E'), ('SW', 'SE')):
+        a = L8.index(Dm); b = L8.index(Do)
+        for k in range(nf):
+            for j in range(nf):
+                if (A[a * C:(a + 1) * C, k * C:(k + 1) * C] == A[b * C:(b + 1) * C, j * C:(j + 1) * C][:, ::-1]).all(): mir += 1
+    R['seam_f2_f4'] = seam; R['idle_vs_walk'] = cons; R['mirrored_pairs'] = mir
+    H['11 seam f2->f4: body <= 1 · top <= 1 · bottom equal'] = all(v['body_dx'] <= 1 and v['top_d'] <= 1 and v['bottom_d'] == 0 for v in seam.values())
+    H['11.1 height idle vs walk <= 2 px'] = all(v['height_d'] <= 2 for v in cons.values())
+    # spec 11.1 cape width +-4 vs static is a property of the PixelLab source (Codex may not reshape): reported, and listed in spec section 7 when outside +-4
+    R['cape_width_outside_4px_source'] = {D: v['cape_width_vs_static'] for D, v in cons.items() if any(abs(x) > 4 for x in v['cape_width_vs_static'])}
+    H['11.1 silhouette width = source in every frame (no reshaping)'] = all(v['width_changed_from_source'] == 0 for v in cons.values())
+    H['11.1 W / SW not mirrors of E / SE (0 pairs)'] = mir == 0
+    # material labels consistent with the locked walk (ID 6 / 7 / 9): colour majority ID must agree when >= 10 px in both
+    WID = WM[..., 0].astype(int); mism = []
+    for kk in (6, 7, 9):
+        ic = Counter(q.hexc(c) for c in A[opm & (ID == kk), :3])
+        for c, n in ic.items():
+            if n < 10: continue
+            r = np.all(A[..., :3] == q.rgb(c), -1) & opm; rw = np.all(WK[..., :3] == q.rgb(c), -1) & (WK[..., 3] > 0)
+            if rw.sum() < 10: continue
+            mi = Counter(ID[r].tolist()).most_common(1)[0][0]; mw = Counter(WID[rw].tolist()).most_common(1)[0][0]
+            if mi != mw and (mi in (6, 7, 9) or mw in (6, 7, 9)): mism.append((c, mi, mw))
+    R['material_majority_mismatch'] = sorted(set(mism))
+    H['11.1 ID 6 / 7 / 9 colour labels agree with the locked walk'] = not mism
+    H['13 PNG <= 160 KB'] = os.path.getsize(sprp) <= MAX_PNG and os.path.getsize(mskp) <= MAX_PNG
+    R['hard'] = H; R['PASS'] = all(H.values()); R['nonplum_outer_edge_px'] = len(nonplum_edge)
+    images_idle(S, A, ID, G, nonplum_edge, ebox, od)
+    json.dump(R, open(os.path.join(od, 'qa-asset12-CA.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1, default=int)
+    return R
+
+def images_idle(S, A, ID, G, nonplum_edge, ebox, od):
+    nf = 4; dflt = q.render(A, ID, G, q.DEFAULT)
+    grid(dflt, 2, LIGHT, 'ASSET 12 C+A · idle after cleanup · default colours · light · f4 of S SE E W SW = blink', nf).convert('RGB').save(os.path.join(od, 'ca-idle-default-light.png'), optimize=True)
+    grid(dflt, 2, DARK, 'ASSET 12 C+A · idle · default colours · dark', nf).convert('RGB').save(os.path.join(od, 'ca-idle-default-dark.png'), optimize=True)
+    cm = A.copy(); g = cm[..., :3].mean(-1).astype(np.uint8); cm[..., 0] = cm[..., 1] = cm[..., 2] = g
+    plum = (A[..., :3] == PLUM).all(-1) & (A[..., 3] > 0); hole = (S[..., 3] == 0) & (A[..., 3] > 0); other = (S != A).any(-1) & ~plum & ~hole
+    eyes = np.zeros(other.shape, bool)
+    for D, b in ebox.items():
+        if b: i = L8.index(D); eyes[i * C + max(0, b[1] - 2):i * C + b[3] + 3, 3 * C + max(0, b[0] - 2):3 * C + b[2] + 3] = True
+    cm[plum] = (190, 120, 200, 255); cm[hole] = (0, 230, 255, 255); cm[other & ~eyes] = (255, 40, 60, 255); cm[other & eyes] = (40, 200, 60, 255)
+    grid(cm, 3, LIGHT, 'changes · red = strap · green = blink · cyan = hole fills · lilac = plum outline', nf).convert('RGB').save(os.path.join(od, 'ca-idle-changes.png'), optimize=True)
+    ov = np.zeros_like(A)
+    for k, c in q.OVC.items(): ov[ID == k] = tuple(c) + (255,)
+    grid(ov, 3, LIGHT, 'mask overlay (colour per material ID, same key as A3)', nf).convert('RGB').save(os.path.join(od, 'ca-idle-mask-overlay.png'), optimize=True)
+    ne = A.copy(); ne[..., :3] = (ne[..., :3] * 0.35 + 160).clip(0, 255).astype(np.uint8)
+    for i, k, x, y in nonplum_edge: ne[i * C + y, k * C + x] = (255, 120, 0, 255)
+    grid(ne, 3, LIGHT, 'outer edge pixels kept in their own (light) colour by the A2 rule = orange', nf).convert('RGB').save(os.path.join(od, 'ca-idle-nonplum-edge.png'), optimize=True)
+    # blink close-up: f2 vs f4 heads, x6
+    s = 6; im = Image.new('RGBA', (40 + 2 * (60 * s + 10), 20 + 5 * (40 * s + 10)), LIGHT + (255,)); d = ImageDraw.Draw(im)
+    d.text((6, 4), 'blink close-up · left f2 (eyes open) · right f4 (blink) · rows 8-47 x 18-77', fill=(20, 20, 30))
+    for r, D in enumerate(FACEB):
+        i = L8.index(D); d.text((6, 24 + r * (40 * s + 10)), D, fill=(20, 20, 30))
+        for c, k in enumerate((1, 3)): im.alpha_composite(up(dflt[i * C + 8:i * C + 48, k * C + 18:k * C + 78], s), (40 + c * (60 * s + 10), 20 + r * (40 * s + 10)))
+    im.convert('RGB').save(os.path.join(od, 'ca-blink-closeup.png'), optimize=True)
+    # phone GIF: 4 houses x 8 dirs · 200 ms · f1 f2 f3 f2 x2 then f1 f2 f3 f4 (blink in the f2-return slot) · ground shadow
+    dw = round(PHONE[0] * DPR); seq = [0, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 3]
+    houses = [q.render(A, ID, G, dict(q.DEFAULT, house=b)) for b in range(4)]
+    for zoom, zn in ((1.0, '100'), (0.75, '75')):
+        sc = round(round(PHONE[1] * DPR) / 384) * zoom; rh = int(C * sc) + 12; frames = []
+        for f in seq:
+            im = Image.new('RGBA', (dw, 4 * rh + 30), GRASS + (255,)); d = ImageDraw.Draw(im)
+            d.text((8, 6), 'ASSET 12 C+A idle · phone 844x390 @DPR 2.625 · zoom %s%% · 200 ms · f1 f2 f3 f2 (x2) then f1 f2 f3 f4=blink · rows = Sun Wing Leaf Flame · W = locked still (code breathing in game)' % zn, fill=(20, 20, 30))
+            step = dw / 8.4
+            for b in range(4):
+                for i, D in enumerate(L8):
+                    a = houses[b][i * C:(i + 1) * C, f * C:(f + 1) * C]; sp = up(a, sc); x = int(step * (i + 0.7) - sp.width / 2); y = 26 + b * rh
+                    sh = Image.new('RGBA', sp.size, (0, 0, 0, 0)); ImageDraw.Draw(sh).ellipse((sp.width * 0.33, 92 * sc, sp.width * 0.67, 97 * sc), fill=(40, 50, 40, 90))
+                    im.alpha_composite(sh, (x, y)); im.alpha_composite(sp, (x, y))
+            frames.append(im.convert('RGB').quantize(colors=255, method=Image.MEDIANCUT))
+        frames[0].save(os.path.join(od, 'ca-idle-phone-zoom%s-4houses.gif' % zn), save_all=True, append_images=frames[1:], duration=200, loop=0)
+
 # ---------------------------------------------------------------- pictures
 def up(a, s): a = np.ascontiguousarray(a); return Image.fromarray(a, 'RGBA').resize((int(round(a.shape[1] * s)), int(round(a.shape[0] * s))), Image.NEAREST)
 def grid(arr, s, bg, title, nf=6):
@@ -242,4 +488,14 @@ if __name__ == '__main__':
         print('leak', R['leak']); print('gold', [(g['cell'], g['px']) for g in R['gold_F9DA99'] if g['px']]); print('signal fails', R['signal_fails'])
         print('small ID8 pieces', R['id8_small_pieces']); print('shade failing', R['shade_failing'][:10]); print('non-plum outer edge px', R['nonplum_outer_edge_px'])
         print('RESULT', 'PASS' if R['PASS'] else 'FAIL'); sys.exit(0 if R['PASS'] else 1)
-    print('usage: walk SRC SPRITE MASK CHANGES HOLES STRAP OUT'); sys.exit(2)
+    if a and a[0] == 'idle' and len(a) == 12:
+        R = check_idle(*a[1:])
+        for k, v in R['hard'].items(): print(('PASS ' if v else 'FAIL ') + k)
+        print('log', R['log'], '· plum', R['plum_total'], 'missing', R['plum_missing'], 'extra', R['plum_extra'], '· id11', R['id11'])
+        print('leak idle', R['leak']['idle']); print('leak walk', R['leak']['walk']); print('images', R['leak']['frame_images'])
+        print('gold', [(g['cell'], g['px']) for g in R['gold_F9DA99'] if g['px']]); print('signal fails', R['signal_fails'])
+        print('blink', R['blink']); print('seam', R['seam_f2_f4']); print('idle vs walk', R['idle_vs_walk']); print('mirrored', R['mirrored_pairs'])
+        print('cape width vs static (source property, spec 7)', R['cape_width_outside_4px_source']); print('material mismatch', R['material_majority_mismatch']); print('small ID8 pieces', [p for p in R['id8_small_pieces'] if p['leg_zone'] or p['cape_tip']])
+        print('shade failing', R['shade_failing'][:10]); print('non-plum outer edge px', R['nonplum_outer_edge_px'])
+        print('RESULT', 'PASS' if R['PASS'] else 'FAIL'); sys.exit(0 if R['PASS'] else 1)
+    print('usage: walk SRC SPRITE MASK CHANGES HOLES STRAP OUT\n       idle SRC SPRITE MASK CHANGES HOLES STRAP A2 MASK31 WALK WALKMASK OUT'); sys.exit(2)
