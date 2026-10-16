@@ -33,8 +33,8 @@ const DV={S:[0,1],SE:[1,1],E:[1,0],NE:[1,-1],N:[0,-1],NW:[-1,-1],W:[-1,0],SW:[-1
 const OFF_TABLE={S:0,SE:0,E:3,NE:1,N:1,NW:-1,W:-1,SW:0};          // PILOT TEST ONLY (owner 16 Oct) · W -1 (formula -2) + shadow follows: Claude decision under team rule 0.2 after measurement
 const ST={off:true,shadowFollow:true,zoom:1,dark:false,tag:'feet',guides:false,dir:'S',anim:'idle',fi:0,t:0,blinkAt:4000,pos:{x:160,y:120},moving:false,mv:null,
   log:[],img:{},anc:null,ok:{walk:false,idle:false,anc:false,walkhold:false,lantern:false,hold:false},
-  hold:false,ease:true,lpos:null,ldir:null};
-const EASE_PX_PER_MS=0.03, LAN_HANG=[16,6], LAN_CELL=32;           // D-EASE: 3 art px per 100 ms · stand-in lantern hangs from its ring centre (16,6)
+  hold:false,ease:true,easeStep:false,lpos:null,ldir:null,lhist:null,lclock:0};
+const EASE_PX_PER_MS=0.03, EASE_MAX=3, EASE_WIN=120, LAN_HANG=[16,6], LAN_CELL=32;   // step ease looks back 120 ms = 100 ms rule + 20 ms for frame-time jitter           // D-EASE: 3 art px per 100 ms · stand-in lantern hangs from its ring centre (16,6)
 const WALL={x:200,y:60,w:16,h:120};                                 // simple collision box (world px) to prove offset never moves world/collision
 const IDLE_LOOP=[0,1,2,1], WALK_MS=100, IDLE_MS=200, SPEED=48;     // px per second (art px)
 const cv=document.getElementById('cv'), g=cv.getContext('2d');
@@ -75,9 +75,16 @@ function buildFists(){if(!ST.hanc)return;[['idle','idle_hold',ST.img.idle,4],['w
     const o=document.createElement('canvas');o.width=bw;o.height=bh;const ox=o.getContext('2d');fr.fist.forEach(([fx,fy])=>ox.drawImage(c,k*C+fx,i*C+fy,1,1,fx-bx,fy-by,1,1));FIST[a][d].push({c:o,x:bx,y:by,w:bw,h:bh})}})})}
 function holdOn(){return ST.hold&&ST.ok.hold&&ST.ok.lantern&&ST.ok.walkhold&&ST.ok.idle}   // spec 14.8 / QG-2b #10: walk_hold, idle, lantern or anchors missing -> old sheets, no lantern at all
 function lanternTarget(){if(!holdOn())return null;const fr=(ST.hanc[ST.anim==='walk'?'walk_hold':'idle_hold'][ST.dir]||[])[curFrame()];return fr&&fr.anchor?fr.anchor:null}
-function easeLantern(dt){const t=lanternTarget();if(!t){ST.lpos=null;ST.ldir=null;return}
-  if(!ST.lpos||ST.ldir!==ST.dir||!ST.ease){ST.lpos=[t[0],t[1]];ST.ldir=ST.dir;return}          // direction change = hand switch -> snap
-  const m=EASE_PX_PER_MS*dt,cl=v=>Math.max(-m,Math.min(m,v));ST.lpos=[ST.lpos[0]+cl(t[0]-ST.lpos[0]),ST.lpos[1]+cl(t[1]-ST.lpos[1])]}
+function easeLantern(dt){const t=lanternTarget();if(!t){ST.lpos=null;ST.ldir=null;ST.lhist=null;return}
+  const now=ST.lclock=(ST.lclock||0)+dt;
+  if(!ST.lpos||ST.ldir!==ST.dir||!ST.ease){ST.lpos=[t[0],t[1]];ST.ldir=ST.dir;ST.lhist=[{t:now,p:[t[0],t[1]]}];return}   // direction change = hand switch -> snap
+  ST.lhist=(ST.lhist||[]).filter(h=>now-h.t<=EASE_WIN);const H=ST.lhist.length?ST.lhist:[{p:ST.lpos.map(Math.round)}];
+  const lim=a=>[Math.max(...H.map(h=>h.p[a]))-EASE_MAX,Math.min(...H.map(h=>h.p[a]))+EASE_MAX];   // drawn px allowed by every position drawn in the last EASE_WIN ms
+  if(ST.easeStep){                                   // step ease: jump as far as the window allows (whole px) -> smallest gap to the fist
+    ST.lpos=[0,1].map(a=>{const [lo,hi]=lim(a);return Math.min(hi,Math.max(lo,t[a]))})}
+  else{const m=EASE_PX_PER_MS*dt,cl=v=>Math.max(-m,Math.min(m,v));ST.lpos=[ST.lpos[0]+cl(t[0]-ST.lpos[0]),ST.lpos[1]+cl(t[1]-ST.lpos[1])];   // smooth ease: 0.03 px/ms
+    [0,1].forEach(a=>{const [lo,hi]=lim(a),r=Math.round(ST.lpos[a]);if(r<lo||r>hi)ST.lpos[a]=Math.min(hi,Math.max(lo,r))})}   // guard: rounding + frame jitter never give 4 px in 100 ms
+  ST.lhist.push({t:now,p:ST.lpos.map(Math.round)})}
 function resize(){const dpr=window.devicePixelRatio||1;cv.width=Math.round(innerWidth*dpr);cv.height=Math.round(innerHeight*dpr)}
 addEventListener('resize',resize);
 function scale(){return Math.round(cv.height/384)*ST.zoom}          // game formula: 3 at 100 %, 2.25 at 75 % on 844x390 @2.625
@@ -115,7 +122,7 @@ function draw(){
   if(img)g.drawImage(img,kk*C,DIRS.indexOf(d)*C,C,C,sx,sy,C*s,C*s);else{g.fillStyle='#c84';g.fillRect(fx-10*s,fy-40*s,20*s,40*s)}
   // lantern (G2.2b): in front of the body, then the fist pixels again over the ring · positions in art px of the cell, so renderOffset applies
   let lan=null;const t=H?lanternTarget():null;
-  if(t){if(!ST.lpos||ST.ldir!==d){ST.lpos=[t[0],t[1]];ST.ldir=d}
+  if(t){if(!ST.lpos||ST.ldir!==d){ST.lpos=[t[0],t[1]];ST.ldir=d;ST.lhist=null}
     const lx=Math.round(ST.lpos[0]),ly=Math.round(ST.lpos[1]),di=DIRS.indexOf(d);
     g.drawImage(ST.img.lantern,di*LAN_CELL,0,LAN_CELL,LAN_CELL,sx+(lx-LAN_HANG[0])*s,sy+(ly-LAN_HANG[1])*s,LAN_CELL*s,LAN_CELL*s);
     const fo=!ST.nofist&&FIST[ST.anim]&&FIST[ST.anim][d]?FIST[ST.anim][d][kk]:null;if(fo)g.drawImage(fo.c,0,0,fo.w,fo.h,sx+fo.x*s,sy+fo.y*s,fo.w*s,fo.h*s);
@@ -141,12 +148,12 @@ const KEYS={ArrowUp:'N',ArrowDown:'S',ArrowLeft:'W',ArrowRight:'E'};const held=n
 addEventListener('keydown',e=>{if(!KEYS[e.key])return;held.add(KEYS[e.key]);kd()});addEventListener('keyup',e=>{if(!KEYS[e.key])return;held.delete(KEYS[e.key]);kd()});
 function kd(){const n=held.has('N'),s=held.has('S'),w=held.has('W'),e=held.has('E');const d=(n?'N':s?'S':'')+(e?'E':w?'W':'');d?walk(d):stop()}
 const tg=(id,f)=>{const b=document.getElementById(id);b.onclick=()=>{f();sync()}};
-tg('bHold',()=>{ST.hold=!ST.hold;ST.lpos=null});tg('bEase',()=>ST.ease=!ST.ease);tg('bOff',()=>ST.off=!ST.off);tg('bZoom',()=>ST.zoom=ST.zoom===1?0.75:1);tg('bBg',()=>ST.dark=!ST.dark);tg('bTag',()=>ST.tag=ST.tag==='feet'?'head':'feet');tg('bGuide',()=>ST.guides=!ST.guides);
+tg('bHold',()=>{ST.hold=!ST.hold;ST.lpos=null});tg('bEase',()=>{if(ST.ease&&!ST.easeStep)ST.easeStep=true;else if(ST.ease){ST.ease=false;ST.easeStep=false}else ST.ease=true});   // smooth -> step -> snaptg('bOff',()=>ST.off=!ST.off);tg('bZoom',()=>ST.zoom=ST.zoom===1?0.75:1);tg('bBg',()=>ST.dark=!ST.dark);tg('bTag',()=>ST.tag=ST.tag==='feet'?'head':'feet');tg('bGuide',()=>ST.guides=!ST.guides);
 function sync(){const B=(id,on,t)=>{const b=document.getElementById(id);b.classList.toggle('on',on);b.textContent=t};
   B('bOff',ST.off,ST.off?'Offset B (ตามตาราง) / table':'Offset A = 0');B('bZoom',ST.zoom===1,ST.zoom===1?'ซูม 100% / zoom':'ซูม 75% / zoom');
   B('bBg',ST.dark,ST.dark?'พื้นมืด / dark':'พื้นสว่าง / light');B('bTag',ST.tag==='feet',ST.tag==='feet'?'ป้าย: เท้า / tag: feet':'ป้าย: หัว / tag: head');B('bGuide',ST.guides,'เส้นช่วย / guides');
-  B('bHold',ST.hold&&holdOn(),!ST.hold?'มือว่าง / no lantern':holdOn()?'ถือตะเกียง / hold':'ถือ: ไฟล์ไม่ครบ / files missing');B('bEase',ST.ease,ST.ease?'ตะเกียงหน่วง / ease':'ตะเกียงติดมือ / snap')}
-const q=new URLSearchParams(location.search);if(q.has('off0'))ST.off=false;if(q.has('z75'))ST.zoom=0.75;if(q.has('dark'))ST.dark=true;if(q.has('guides'))ST.guides=true;if(q.get('tag')==='head')ST.tag='head';if(q.has('clean'))ST.clean=true;if(q.has('offW'))ST.offWq=+q.get('offW');if(q.has('shadowFixed'))ST.shadowFollow=false;if(q.has('hold'))ST.hold=true;if(q.has('nofist'))ST.nofist=true;if(q.has('snap'))ST.ease=false;
+  B('bHold',ST.hold&&holdOn(),!ST.hold?'มือว่าง / no lantern':holdOn()?'ถือตะเกียง / hold':'ถือ: ไฟล์ไม่ครบ / files missing');B('bEase',ST.ease,!ST.ease?'ตะเกียงติดมือ / snap':ST.easeStep?'หน่วงเป็นจังหวะ / step':'หน่วงเรียบ / smooth')}
+const q=new URLSearchParams(location.search);if(q.has('off0'))ST.off=false;if(q.has('z75'))ST.zoom=0.75;if(q.has('dark'))ST.dark=true;if(q.has('guides'))ST.guides=true;if(q.get('tag')==='head')ST.tag='head';if(q.has('clean'))ST.clean=true;if(q.has('offW'))ST.offWq=+q.get('offW');if(q.has('shadowFixed'))ST.shadowFollow=false;if(q.has('hold'))ST.hold=true;if(q.has('nofist'))ST.nofist=true;if(q.has('snap'))ST.ease=false;if(q.has('stepease'))ST.easeStep=true;
 window.PT={ST,GEO,OFF_TABLE,DIRS,setDir,walk,stop,draw,scale,step,curFrame,lanternTarget,holdOn,easeLantern,pause:v=>ST.paused=v,set:(o)=>Object.assign(ST,o)};
 sync();boot();
 </script></body></html>
