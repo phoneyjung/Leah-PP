@@ -97,9 +97,21 @@
    "NE": 1,
    "N": 1,
    "NW": -1,
+   "W": -1,
+   "SW": 0
+  },
+  "formula_dx": {
+   "S": 0,
+   "SE": 0,
+   "E": 3,
+   "NE": 1,
+   "N": 1,
+   "NW": -1,
    "W": -2,
    "SW": 0
   },
+  "decision": "W -1 instead of formula -2 and shadow following the offset: Claude decision 16 Oct ~12:5x under team rule 0.2 (code only, Pilot only, reversible) after the Pilot test: standing turn max 0.96, walking turn max 1.65, feet outside shadow 5/80 (= offset 0)",
+  "shadow": "follows renderOffset (drawn under the sprite); world position, collision and pathfinding unchanged",
   "idle_f1_body_centre": {
    "S": 48.17,
    "SE": 47.52,
@@ -126,8 +138,8 @@
    "E>NE": 0.23,
    "NE>N": 0.84,
    "N>NW": 0.69,
-   "NW>W": 0.04,
-   "W>SW": 0.66,
+   "NW>W": 0.96,
+   "W>SW": 0.34,
    "SW>S": 0.26
   }
  },

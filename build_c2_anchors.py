@@ -40,6 +40,7 @@ def main(wp, wmp, ip, imp, out):
     for i in range(8):
         c = I[i * C:(i + 1) * C, 0:C]; y, x = np.nonzero(c[52:87, :, 3] > 0); body.append(float(x.mean()))
     ro = {D: max(-3, min(3, int(np.floor(48 - b + 0.5)))) for D, b in zip(L8, body)}
+    formula = dict(ro); ro['W'] = -1   # Claude decision 16 Oct (team rule 0.2) after the Pilot test: walking turn W>SW 2.53 -> 1.59
     pairs = [(L8[j], L8[(j + 1) % 8]) for j in range(8)]
     J = {'schema': 1, 'set': 'c2', 'base': 'kid4', 'cell': [96, 96], 'feet': [48, 94], 'dirs': L8,
          'files': {'walk': ['c2-pilot-kid4-walk.png', 'c2-pilot-kid4-walk-mask.png'], 'idle': ['c2-pilot-kid4-idleanim.png', 'c2-pilot-kid4-idleanim-mask.png']},
@@ -49,7 +50,7 @@ def main(wp, wmp, ip, imp, out):
                             'blink': {'frame': 4, 'dirs': ['S', 'SE', 'E', 'W', 'SW'], 'every_s': [3, 6], 'slot': 'the f2 after f3 (loop index 4)'},
                             'code_breathing': {'W': {'cut_row': CUT, 'dy': W_DY, 'rule': 'after recolour: rows 0..cut-1 take rows 1..cut (up 1 px), row cut repeats; anchors below already include it'}}}},
          'renderOffset': {'status': 'APPROVED FOR PILOT TEST ONLY (owner 16 Oct 2569 ~12:4x) - not for game 2.33 or Production; results in DESIGN_CHAR2_RENDER_CONTRACT.md 6.1', 'formula': 'round-half-up(48 - idle f1 body centre rows 52-86), clamp +-3, same for every frame of every anim of that direction, x only, at draw time',
-                          'dx': ro, 'idle_f1_body_centre': {D: round(b, 2) for D, b in zip(L8, body)},
+                          'dx': ro, 'formula_dx': formula, 'decision': 'W -1 instead of formula -2 and shadow following the offset: Claude decision 16 Oct ~12:5x under team rule 0.2 (code only, Pilot only, reversible) after the Pilot test: standing turn max 0.96, walking turn max 1.65, feet outside shadow 5/80 (= offset 0)', 'shadow': 'follows renderOffset (drawn under the sprite); world position, collision and pathfinding unchanged', 'idle_f1_body_centre': {D: round(b, 2) for D, b in zip(L8, body)},
                           'turn_jump_before': {a + '>' + b: round(abs(body[L8.index(a)] - body[L8.index(b)]), 2) for a, b in pairs},
                           'turn_jump_after': {a + '>' + b: round(abs(body[L8.index(a)] + ro[a] - body[L8.index(b)] - ro[b]), 2) for a, b in pairs}},
          'anchor_rules': {'feet': 'fixed [48,94], the ground point, not the foot pixels', 'head_top': '[centre x of the head box (mask ID 1-5,10, rows <= 50), top row]', 'face': 'centre of the eye box (ID 2/5) - checks only, null on back views',
