@@ -42,7 +42,7 @@ def anchors(spr,msk,nf):
                 a=(int(round(c['c'][0])),int(round(c['c'][1])))
                 pxs=set(c['px'])
                 if a not in pxs: a=min(pxs,key=lambda p:(p[0]-c['c'][0])**2+(p[1]-c['c'][1])**2)
-                rows.append(dict(hand=HAND[D],anchor=list(a),fist_px=len(pxs),method='mask'))
+                rows.append(dict(hand=HAND[D],anchor=list(a),fist_px=len(pxs),fist=sorted([list(p) for p in pxs]),method='mask'))
             else: rows.append(None)
         for k in range(nf):
             if rows[k] is None:
@@ -51,7 +51,8 @@ def anchors(spr,msk,nf):
                 cr=spr[r*C:(r+1)*C,ref*C:(ref+1)*C]; ck=spr[r*C:(r+1)*C,k*C:(k+1)*C]
                 mis,ox,oy=track(cr,ck,box); a=[ax+ox,ay+oy]
                 mk=msk[r*C:(r+1)*C,k*C:(k+1)*C][a[1],a[0]]
-                rows[k]=dict(hand=HAND[D],anchor=a,fist_px=None,method=f'template from f{ref+1} (mismatch {mis})',on_hand_px=bool(mk[3]>0 and mk[0] in (3,7)))
+                fist=[[x+ox,y+oy] for x,y in rows[ref]['fist']]
+                rows[k]=dict(hand=HAND[D],anchor=a,fist_px=len(fist),fist=fist,method=f'template from f{ref+1} (mismatch {mis})',on_hand_px=bool(mk[3]>0 and mk[0] in (3,7)))
         res[D]=rows
     return res
 IP,IM,WP,WM,OUT=sys.argv[1:6]
@@ -71,5 +72,9 @@ for D in L8:
     summary[D]=dict(walk=rng(walk[D]),idle=rng(idle[D]),stop_into_f3=[row[2] for row in J],stop_into_best=[min(row) for row in J],
                     best_entry=[ 'f%d'%(row.index(min(row))+1) for row in J],start_from_idle_max=max(max(abs(wa[0][0]-i[0]),abs(wa[0][1]-i[1])) for i in ia[:3]),
                     L_max=92-max(p[1] for p in wa+ia))
-json.dump(dict(schema=1,rule=open(__file__).read().split('\n')[1:6],hand_rule=HAND,idle_hold=idle,walk_hold=walk,summary=summary),open(OUT,'w'),indent=1)
+json.dump(dict(schema=1,cell=[96,96],feet=[48,94],files={'idle_hold':IP.split('/')[-1],'walk_hold':WP.split('/')[-1]},
+  rule=[l.lstrip('# ') for l in open(__file__).read().split('\n')[1:6]],hand_rule=HAND,
+  lantern_rule='D-EASE (owner 16 Oct): drawn lantern follows the frame anchor with at most 3 art px per 100 ms per axis; snaps on a direction change (hand switch); N draws no lantern',
+  stand_in_lantern=dict(file='kid-lantern.png',row='L0 (y 0-31)',cols='S SE E NE N NW W SW',hang_point=[16,6],note='Set-08 lantern used as a Pilot stand-in only; G2.5 makes the real lantern (hang length <= L_max)'),
+  idle_hold=idle,walk_hold=walk,summary=summary),open(OUT,'w'),separators=(',',':'))
 for D in L8: print(D,summary[D])
