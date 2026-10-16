@@ -1,0 +1,35 @@
+PASS 01 sprite 576x768
+PASS 01 mask 576x768
+PASS 01 alpha binary (semi 0)
+PASS 01 mask alpha = sprite alpha
+PASS 02 alpha changes = listed hole fills exactly
+PASS 03 holes <= 3 px left = 0
+PASS 04 plum = A2 formula exactly (missing 0 · extra 0)
+PASS 05 other changes only inside strap boxes (+1 px)
+PASS 05 other changes <= 30 px per frame
+PASS 05 no strap edits in E NE N NW W
+PASS 06 head rows <= 50 unchanged (except plum/holes)
+PASS 07 new colours 0 (except plum)
+PASS 08 change log covers every changed pixel exactly
+PASS 08 rollback = source RGBA 100%
+PASS 09 mask: opaque -> ID 1-11 · transparent -> ID 0
+PASS 09 mask: G within range of its ID
+PASS 09 mask: ID 1 = plum pixels exactly
+PASS 09 mask: back dirs have no ID 2/5/10
+PASS 09 mask: ID 11 groups all touch >= 2 materials
+PASS 09 mask: shade order (<= 2% inverted, no flat)
+PASS 09 mask: small ID 8 pieces on legs (row >= 70) = 0
+PASS 10 leak test 640 x 48 = 30,720 images · leaks 0
+PASS 11 signal colours: fixed materials OK (F9DA99 handled below)
+PASS 11 F9DA99 only ID 9 · <= 6 px per frame · no new positions
+PASS 13 PNG <= 160 KB
+PASS 14 NW f1 head copy done (checks 05/06 run against the adjusted source) and logged as task head_copy
+PASS 14 W f1/f5 hem pixels no longer #F9DA99
+PASS 14 rows S N = locked walk sprite + mask (alpha everywhere, colour on visible pixels)
+PASS 14 big holes NE f2 / NW f5 filled · SE f3 kept
+rows S N vs locked walk {'S': {'alpha_px_diff': 0, 'sprite_px_diff': 0, 'mask_px_diff': 0}, 'N': {'alpha_px_diff': 0, 'sprite_px_diff': 0, 'mask_px_diff': 0}}
+log {'entries': 8558, 'diff_px': 8558, 'tasks': {'outline': 8109, 'strap': 132, 'hole': 69, 'head_copy': 246, 'signal': 2}, 'wrong_before_after': 0} · plum 8109 missing 0 extra 0
+leak {'combos': 640, 'fixed_changed_px': 0, 'alpha_changed_px': 0, 'wrong_ramp_px': 0, 'eye_lines_changed_px': 0, 'cross_material_px': 0, 'missing_change_px': 0, 'house_distinct': 4, 'copper_changed_by_house_px': 0, 'leak_dirs': {}, 'frame_images': 30720}
+gold [('W f1', 1), ('W f2', 1), ('W f3', 1), ('W f4', 1), ('W f5', 1), ('W f6', 1)]
+signal fails []
+RESULT PASS

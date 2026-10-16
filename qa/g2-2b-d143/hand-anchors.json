@@ -1,0 +1,1005 @@
+{
+ "schema": 1,
+ "rule": [
+  "# fist pixels = skin (ID 3) at rows >= 60 + leather (ID 7) within 2 px (Chebyshev) of that skin  (plan section 5)",
+  "# hold hand = D-HAND (owner 16 Oct): S SE E NE right hand \u00b7 SW W NW left hand \u00b7 N none (hidden under the cape)",
+  "# the hold-hand component is the fist component nearest to the expected point (<= 9 px); a frame without finger skin",
+  "# falls back to exact-pixel template tracking of the fist box from the nearest frame that has one (measured, not guessed)",
+  "# usage: python3 -I build_hand_anchors.py IDLE_PNG IDLE_MASK WALKHOLD_PNG WALKHOLD_MASK OUT_JSON"
+ ],
+ "hand_rule": {
+  "S": "R",
+  "SE": "R",
+  "E": "R",
+  "NE": "R",
+  "N": null,
+  "NW": "L",
+  "W": "L",
+  "SW": "L"
+ },
+ "idle_hold": {
+  "S": [
+   {
+    "hand": "R",
+    "anchor": [
+     33,
+     76
+    ],
+    "fist_px": 20,
+    "method": "mask"
+   },
+   {
+    "hand": "R",
+    "anchor": [
+     34,
+     76
+    ],
+    "fist_px": 18,
+    "method": "mask"
+   },
+   {
+    "hand": "R",
+    "anchor": [
+     34,
+     75
+    ],
+    "fist_px": 19,
+    "method": "mask"
+   },
+   {
+    "hand": "R",
+    "anchor": [
+     34,
+     75
+    ],
+    "fist_px": 20,
+    "method": "mask"
+   }
+  ],
+  "SE": [
+   {
+    "hand": "R",
+    "anchor": [
+     36,
+     75
+    ],
+    "fist_px": 17,
+    "method": "mask"
+   },
+   {
+    "hand": "R",
+    "anchor": [
+     39,
+     76
+    ],
+    "fist_px": 25,
+    "method": "mask"
+   },
+   {
+    "hand": "R",
+    "anchor": [
+     39,
+     76
+    ],
+    "fist_px": 25,
+    "method": "mask"
+   },
+   {
+    "hand": "R",
+    "anchor": [
+     39,
+     76
+    ],
+    "fist_px": 23,
+    "method": "mask"
+   }
+  ],
+  "E": [
+   {
+    "hand": "R",
+    "anchor": [
+     48,
+     75
+    ],
+    "fist_px": 12,
+    "method": "mask"
+   },
+   {
+    "hand": "R",
+    "anchor": [
+     49,
+     75
+    ],
+    "fist_px": 18,
+    "method": "mask"
+   },
+   {
+    "hand": "R",
+    "anchor": [
+     49,
+     75
+    ],
+    "fist_px": 18,
+    "method": "mask"
+   },
+   {
+    "hand": "R",
+    "anchor": [
+     50,
+     75
+    ],
+    "fist_px": 17,
+    "method": "mask"
+   }
+  ],
+  "NE": [
+   {
+    "hand": "R",
+    "anchor": [
+     64,
+     74
+    ],
+    "fist_px": 13,
+    "method": "mask"
+   },
+   {
+    "hand": "R",
+    "anchor": [
+     62,
+     74
+    ],
+    "fist_px": 12,
+    "method": "mask"
+   },
+   {
+    "hand": "R",
+    "anchor": [
+     61,
+     74
+    ],
+    "fist_px": 11,
+    "method": "mask"
+   },
+   {
+    "hand": "R",
+    "anchor": [
+     62,
+     74
+    ],
+    "fist_px": 11,
+    "method": "mask"
+   }
+  ],
+  "N": [
+   {
+    "hand": null,
+    "anchor": null,
+    "why": "hand hidden under the cape (D-HAND: N draws no lantern)"
+   },
+   {
+    "hand": null,
+    "anchor": null,
+    "why": "hand hidden under the cape (D-HAND: N draws no lantern)"
+   },
+   {
+    "hand": null,
+    "anchor": null,
+    "why": "hand hidden under the cape (D-HAND: N draws no lantern)"
+   },
+   {
+    "hand": null,
+    "anchor": null,
+    "why": "hand hidden under the cape (D-HAND: N draws no lantern)"
+   }
+  ],
+  "NW": [
+   {
+    "hand": "L",
+    "anchor": [
+     34,
+     77
+    ],
+    "fist_px": 2,
+    "method": "mask"
+   },
+   {
+    "hand": "L",
+    "anchor": [
+     34,
+     77
+    ],
+    "fist_px": 2,
+    "method": "mask"
+   },
+   {
+    "hand": "L",
+    "anchor": [
+     31,
+     74
+    ],
+    "fist_px": 10,
+    "method": "mask"
+   },
+   {
+    "hand": "L",
+    "anchor": [
+     34,
+     77
+    ],
+    "fist_px": 2,
+    "method": "mask"
+   }
+  ],
+  "W": [
+   {
+    "hand": "L",
+    "anchor": [
+     47,
+     74
+    ],
+    "fist_px": 11,
+    "method": "mask"
+   },
+   {
+    "hand": "L",
+    "anchor": [
+     47,
+     74
+    ],
+    "fist_px": 11,
+    "method": "mask"
+   },
+   {
+    "hand": "L",
+    "anchor": [
+     47,
+     74
+    ],
+    "fist_px": 11,
+    "method": "mask"
+   },
+   {
+    "hand": "L",
+    "anchor": [
+     47,
+     74
+    ],
+    "fist_px": 11,
+    "method": "mask"
+   }
+  ],
+  "SW": [
+   {
+    "hand": "L",
+    "anchor": [
+     60,
+     76
+    ],
+    "fist_px": 26,
+    "method": "mask"
+   },
+   {
+    "hand": "L",
+    "anchor": [
+     58,
+     77
+    ],
+    "fist_px": 29,
+    "method": "mask"
+   },
+   {
+    "hand": "L",
+    "anchor": [
+     57,
+     76
+    ],
+    "fist_px": 23,
+    "method": "mask"
+   },
+   {
+    "hand": "L",
+    "anchor": [
+     58,
+     77
+    ],
+    "fist_px": 27,
+    "method": "mask"
+   }
+  ]
+ },
+ "walk_hold": {
+  "S": [
+   {
+    "hand": "R",
+    "anchor": [
+     31,
+     73
+    ],
+    "fist_px": 18,
+    "method": "mask"
+   },
+   {
+    "hand": "R",
+    "anchor": [
+     33,
+     73
+    ],
+    "fist_px": 28,
+    "method": "mask"
+   },
+   {
+    "hand": "R",
+    "anchor": [
+     32,
+     72
+    ],
+    "fist_px": 33,
+    "method": "mask"
+   },
+   {
+    "hand": "R",
+    "anchor": [
+     31,
+     73
+    ],
+    "fist_px": 20,
+    "method": "mask"
+   },
+   {
+    "hand": "R",
+    "anchor": [
+     32,
+     72
+    ],
+    "fist_px": 14,
+    "method": "mask"
+   },
+   {
+    "hand": "R",
+    "anchor": [
+     32,
+     72
+    ],
+    "fist_px": 14,
+    "method": "mask"
+   }
+  ],
+  "SE": [
+   {
+    "hand": "R",
+    "anchor": [
+     40,
+     74
+    ],
+    "fist_px": 32,
+    "method": "mask"
+   },
+   {
+    "hand": "R",
+    "anchor": [
+     41,
+     76
+    ],
+    "fist_px": 39,
+    "method": "mask"
+   },
+   {
+    "hand": "R",
+    "anchor": [
+     40,
+     77
+    ],
+    "fist_px": 56,
+    "method": "mask"
+   },
+   {
+    "hand": "R",
+    "anchor": [
+     36,
+     74
+    ],
+    "fist_px": 21,
+    "method": "mask"
+   },
+   {
+    "hand": "R",
+    "anchor": [
+     37,
+     74
+    ],
+    "fist_px": 21,
+    "method": "mask"
+   },
+   {
+    "hand": "R",
+    "anchor": [
+     37,
+     74
+    ],
+    "fist_px": 21,
+    "method": "mask"
+   }
+  ],
+  "E": [
+   {
+    "hand": "R",
+    "anchor": [
+     55,
+     75
+    ],
+    "fist_px": 29,
+    "method": "mask"
+   },
+   {
+    "hand": "R",
+    "anchor": [
+     54,
+     75
+    ],
+    "fist_px": 30,
+    "method": "mask"
+   },
+   {
+    "hand": "R",
+    "anchor": [
+     54,
+     75
+    ],
+    "fist_px": 34,
+    "method": "mask"
+   },
+   {
+    "hand": "R",
+    "anchor": [
+     56,
+     75
+    ],
+    "fist_px": 8,
+    "method": "mask"
+   },
+   {
+    "hand": "R",
+    "anchor": [
+     56,
+     75
+    ],
+    "fist_px": 8,
+    "method": "mask"
+   },
+   {
+    "hand": "R",
+    "anchor": [
+     56,
+     74
+    ],
+    "fist_px": 8,
+    "method": "mask"
+   }
+  ],
+  "NE": [
+   {
+    "hand": "R",
+    "anchor": [
+     65,
+     72
+    ],
+    "fist_px": 11,
+    "method": "mask"
+   },
+   {
+    "hand": "R",
+    "anchor": [
+     65,
+     73
+    ],
+    "fist_px": 11,
+    "method": "mask"
+   },
+   {
+    "hand": "R",
+    "anchor": [
+     64,
+     73
+    ],
+    "fist_px": 11,
+    "method": "mask"
+   },
+   {
+    "hand": "R",
+    "anchor": [
+     64,
+     73
+    ],
+    "fist_px": 11,
+    "method": "mask"
+   },
+   {
+    "hand": "R",
+    "anchor": [
+     63,
+     74
+    ],
+    "fist_px": 8,
+    "method": "mask"
+   },
+   {
+    "hand": "R",
+    "anchor": [
+     64,
+     75
+    ],
+    "fist_px": 6,
+    "method": "mask"
+   }
+  ],
+  "N": [
+   {
+    "hand": null,
+    "anchor": null,
+    "why": "hand hidden under the cape (D-HAND: N draws no lantern)"
+   },
+   {
+    "hand": null,
+    "anchor": null,
+    "why": "hand hidden under the cape (D-HAND: N draws no lantern)"
+   },
+   {
+    "hand": null,
+    "anchor": null,
+    "why": "hand hidden under the cape (D-HAND: N draws no lantern)"
+   },
+   {
+    "hand": null,
+    "anchor": null,
+    "why": "hand hidden under the cape (D-HAND: N draws no lantern)"
+   },
+   {
+    "hand": null,
+    "anchor": null,
+    "why": "hand hidden under the cape (D-HAND: N draws no lantern)"
+   },
+   {
+    "hand": null,
+    "anchor": null,
+    "why": "hand hidden under the cape (D-HAND: N draws no lantern)"
+   }
+  ],
+  "NW": [
+   {
+    "hand": "L",
+    "anchor": [
+     29,
+     72
+    ],
+    "fist_px": 15,
+    "method": "mask"
+   },
+   {
+    "hand": "L",
+    "anchor": [
+     30,
+     73
+    ],
+    "fist_px": 13,
+    "method": "mask"
+   },
+   {
+    "hand": "L",
+    "anchor": [
+     31,
+     74
+    ],
+    "fist_px": 13,
+    "method": "mask"
+   },
+   {
+    "hand": "L",
+    "anchor": [
+     31,
+     73
+    ],
+    "fist_px": 13,
+    "method": "mask"
+   },
+   {
+    "hand": "L",
+    "anchor": [
+     30,
+     74
+    ],
+    "fist_px": 13,
+    "method": "mask"
+   },
+   {
+    "hand": "L",
+    "anchor": [
+     31,
+     73
+    ],
+    "fist_px": 13,
+    "method": "mask"
+   }
+  ],
+  "W": [
+   {
+    "hand": "L",
+    "anchor": [
+     45,
+     74
+    ],
+    "fist_px": 14,
+    "method": "mask"
+   },
+   {
+    "hand": "L",
+    "anchor": [
+     42,
+     74
+    ],
+    "fist_px": 25,
+    "method": "mask"
+   },
+   {
+    "hand": "L",
+    "anchor": [
+     42,
+     74
+    ],
+    "fist_px": 21,
+    "method": "mask"
+   },
+   {
+    "hand": "L",
+    "anchor": [
+     43,
+     73
+    ],
+    "fist_px": 20,
+    "method": "mask"
+   },
+   {
+    "hand": "L",
+    "anchor": [
+     41,
+     74
+    ],
+    "fist_px": 26,
+    "method": "mask"
+   },
+   {
+    "hand": "L",
+    "anchor": [
+     44,
+     75
+    ],
+    "fist_px": 12,
+    "method": "mask"
+   }
+  ],
+  "SW": [
+   {
+    "hand": "L",
+    "anchor": [
+     57,
+     76
+    ],
+    "fist_px": 24,
+    "method": "mask"
+   },
+   {
+    "hand": "L",
+    "anchor": [
+     56,
+     77
+    ],
+    "fist_px": 20,
+    "method": "mask"
+   },
+   {
+    "hand": "L",
+    "anchor": [
+     56,
+     77
+    ],
+    "fist_px": 20,
+    "method": "mask"
+   },
+   {
+    "hand": "L",
+    "anchor": [
+     56,
+     77
+    ],
+    "fist_px": 20,
+    "method": "mask"
+   },
+   {
+    "hand": "L",
+    "anchor": [
+     56,
+     77
+    ],
+    "fist_px": 24,
+    "method": "mask"
+   },
+   {
+    "hand": "L",
+    "anchor": [
+     57,
+     77
+    ],
+    "fist_px": 17,
+    "method": "mask"
+   }
+  ]
+ },
+ "summary": {
+  "S": {
+   "walk": {
+    "x": 2,
+    "y": 1,
+    "adjacent": 2
+   },
+   "idle": {
+    "x": 1,
+    "y": 1,
+    "adjacent": 1
+   },
+   "stop_into_f3": [
+    3,
+    2,
+    3,
+    3,
+    3,
+    3
+   ],
+   "stop_into_best": [
+    3,
+    2,
+    3,
+    3,
+    3,
+    3
+   ],
+   "best_entry": [
+    "f1",
+    "f3",
+    "f3",
+    "f1",
+    "f3",
+    "f3"
+   ],
+   "start_from_idle_max": 3,
+   "L_max": 16
+  },
+  "SE": {
+   "walk": {
+    "x": 5,
+    "y": 3,
+    "adjacent": 4
+   },
+   "idle": {
+    "x": 3,
+    "y": 1,
+    "adjacent": 3
+   },
+   "stop_into_f3": [
+    2,
+    2,
+    1,
+    3,
+    2,
+    2
+   ],
+   "stop_into_best": [
+    2,
+    2,
+    1,
+    1,
+    1,
+    1
+   ],
+   "best_entry": [
+    "f2",
+    "f2",
+    "f2",
+    "f1",
+    "f1",
+    "f1"
+   ],
+   "start_from_idle_max": 4,
+   "L_max": 15
+  },
+  "E": {
+   "walk": {
+    "x": 2,
+    "y": 1,
+    "adjacent": 2
+   },
+   "idle": {
+    "x": 2,
+    "y": 0,
+    "adjacent": 2
+   },
+   "stop_into_f3": [
+    6,
+    5,
+    5,
+    7,
+    7,
+    7
+   ],
+   "stop_into_best": [
+    6,
+    5,
+    5,
+    7,
+    7,
+    7
+   ],
+   "best_entry": [
+    "f2",
+    "f2",
+    "f2",
+    "f2",
+    "f2",
+    "f2"
+   ],
+   "start_from_idle_max": 7,
+   "L_max": 17
+  },
+  "NE": {
+   "walk": {
+    "x": 2,
+    "y": 3,
+    "adjacent": 3
+   },
+   "idle": {
+    "x": 3,
+    "y": 0,
+    "adjacent": 2
+   },
+   "stop_into_f3": [
+    4,
+    4,
+    3,
+    3,
+    2,
+    3
+   ],
+   "stop_into_best": [
+    2,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "best_entry": [
+    "f1",
+    "f1",
+    "f1",
+    "f1",
+    "f1",
+    "f1"
+   ],
+   "start_from_idle_max": 4,
+   "L_max": 17
+  },
+  "N": null,
+  "NW": {
+   "walk": {
+    "x": 2,
+    "y": 2,
+    "adjacent": 2
+   },
+   "idle": {
+    "x": 3,
+    "y": 3,
+    "adjacent": 3
+   },
+   "stop_into_f3": [
+    2,
+    1,
+    0,
+    1,
+    1,
+    1
+   ],
+   "stop_into_best": [
+    2,
+    1,
+    0,
+    1,
+    1,
+    1
+   ],
+   "best_entry": [
+    "f3",
+    "f3",
+    "f3",
+    "f3",
+    "f3",
+    "f3"
+   ],
+   "start_from_idle_max": 5,
+   "L_max": 15
+  },
+  "W": {
+   "walk": {
+    "x": 4,
+    "y": 2,
+    "adjacent": 3
+   },
+   "idle": {
+    "x": 0,
+    "y": 0,
+    "adjacent": 0
+   },
+   "stop_into_f3": [
+    2,
+    5,
+    5,
+    4,
+    6,
+    3
+   ],
+   "stop_into_best": [
+    2,
+    5,
+    5,
+    4,
+    6,
+    3
+   ],
+   "best_entry": [
+    "f1",
+    "f1",
+    "f1",
+    "f1",
+    "f1",
+    "f1"
+   ],
+   "start_from_idle_max": 2,
+   "L_max": 17
+  },
+  "SW": {
+   "walk": {
+    "x": 1,
+    "y": 1,
+    "adjacent": 1
+   },
+   "idle": {
+    "x": 3,
+    "y": 1,
+    "adjacent": 2
+   },
+   "stop_into_f3": [
+    0,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "stop_into_best": [
+    0,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "best_entry": [
+    "f3",
+    "f3",
+    "f3",
+    "f3",
+    "f3",
+    "f2"
+   ],
+   "start_from_idle_max": 3,
+   "L_max": 15
+  }
+ }
+}
