@@ -3,6 +3,7 @@
 #   1-style.png              32x32 crop of the locked kid sprite (S idle f1: brooch, tunic, belt, gloves, cape edge, plum outline) = PixelLab style reference
 #   2-shape.png              32x32 size/silhouette guide 13x18, lit glass (13 px wide, 15 px below the grip = the ceiling) = PixelLab shape reference
 #   guide-small-11x16.png    32x32 smaller guide 11x16 (13 px below the grip), unlit glass, for the scale comparison only
+#   2-shape-unlit.png        32x32 same 13x18 silhouette as 2-shape.png, dark glass + crystal shape without light (proposed PixelLab shape reference)
 # grip = ring centre (16,6) in every guide. Colours: plum outline #3A1E3F, Copper Trim 4 shades (proposed), light #FFB36B / #FFF0C9.
 # usage: python3 -I make_refs.py WORKTREE OUT_DIR
 import sys, os
@@ -20,7 +21,8 @@ SMALL = {**RING, **{   # 11 wide (x11-21), bottom row 19 = 13 below the grip, un
     10: (14, 'ohcdo'), 11: (12, 'ohhcccddo'), 12: (11, 'odddddddddo'),
     13: (11, 'ocgcgggcgdo'), 14: (11, 'ocgcwkkcgdo'), 15: (11, 'ocgckkkcgdo'), 16: (11, 'ocgcgkgcgdo'),
     17: (11, 'odddddddddo'), 18: (13, 'ohcccdo'), 19: (14, 'ooooo')}}
-for name, rows in (('2-shape.png', LARGE), ('guide-small-11x16.png', SMALL)):
+UNLIT = {y: (x0, pat.replace('G', 'g').replace('K', 'h')) for y, (x0, pat) in LARGE.items()}   # same silhouette, dark warm glass, crystal shape in copper tones (no light) - matches the 'no emitted light' prompt
+for name, rows in (('2-shape.png', LARGE), ('guide-small-11x16.png', SMALL), ('2-shape-unlit.png', UNLIT)):
     g = Image.new('RGBA', (32, 32), (0, 0, 0, 0))
     for y, (x0, pat) in rows.items():
         for i, ch in enumerate(pat):

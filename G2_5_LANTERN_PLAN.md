@@ -1,6 +1,8 @@
-# G2.5a — แผนและร่างสเปกตะเกียงจริงของตัวเด็ก (Claude · ฉบับ v0.2 · 17 ต.ค. 2569 ~02:3x)
+# G2.5a — แผนและร่างสเปกตะเกียงจริงของตัวเด็ก (Claude · ฉบับ v0.3 · 17 ต.ค. 2569 ~02:3x)
 
-**สถานะ (~02:3x): ✅ มติ D-LAN-ART — เจ้าของอนุมัติแนวภาพ A (17 ต.ค. ~02:1x · เลือก ⭐ · หลัง ChatGPT ตรวจ v0.1 ผ่าน) · ✅ P1 เสร็จ (ข้อ 11): ภาพอ้างอิงขนาดจริง + ภาพเทียบขนาดในมือ + วิธีกด PixelLab + พรอมป์ 1 อัน · รอ 🟧 ChatGPT ตรวจพรอมป์ → เจ้าของตัดสินใจกด Generate (ยังไม่กด · ไม่ใช้เครดิต)**
+**สถานะ (~02:3x · v0.3): ✅ D-LAN-SIZE — เจ้าของยืนยันขนาด 13×18 (กว้าง 8–13) · ChatGPT ตรวจ P1 ผ่านพร้อมพรอมป์ฉบับปรับ · ต่อไป = เจ้าของเปิด PixelLab ใส่รูปอ้างอิงแล้วส่งภาพหน้าจอ (ยังไม่กด Generate) เพื่อยืนยันว่ารับรูปอ้างอิง 2 รูปได้จริง**
+
+สถานะเดิม (~02:3x · v0.2): ✅ มติ D-LAN-ART — เจ้าของอนุมัติแนวภาพ A (17 ต.ค. ~02:1x · เลือก ⭐ · หลัง ChatGPT ตรวจ v0.1 ผ่าน) · ✅ P1 เสร็จ (ข้อ 11): ภาพอ้างอิงขนาดจริง + ภาพเทียบขนาดในมือ + วิธีกด PixelLab + พรอมป์ 1 อัน · รอ 🟧 ChatGPT ตรวจพรอมป์ → เจ้าของตัดสินใจกด Generate (ยังไม่กด · ไม่ใช้เครดิต)**
 
 สถานะเดิม (~02:1x): ร่าง v0.1 รอ ChatGPT ตรวจรอบ 2 · **ยังไม่เริ่ม Codex · ไม่ Generate PixelLab · ไม่แตะเกมจริง** (`index.html` `sw.js` เซฟ Firebase)
 
@@ -42,8 +44,8 @@
 
 - **จุดจับ `grip`** = **กลางห่วงหิ้ว** · ตำแหน่งเดียวกันทุกช่อง **`[16,6]`** (เท่าที่หน้า Pilot ใช้กับตะเกียงตัวแทนตอนนี้)
   - ⚠️ **ต่างจาก metadata ชุด 08:** `kid-lantern.json` นิยาม grip = **พิกเซลบนสุดของห่วง** `[16,4]` (สูงกว่า 2 px) · ไฟล์ json ใหม่ต้องเขียนนิยาม "กลางห่วง" ชัดเจน · ห้ามนำค่า grip ของชุด 08 มาใช้กับไฟล์ใหม่
-- **กรอบภาพทึบ:** กว้าง 8–11 px · **ใต้ `grip` เป้าหมาย 11–13 px · เพดาน 15 px** (เผื่อจังหวะหน่วงที่ตะเกียงอยู่ต่ำกว่ามือชั่วครู่) · เหนือ `grip` ≤ 3 px · ห่วงกว้างนอก ≤ 5 px (ให้กำปั้น 4–8 px คลุมได้)
-- ขั้นต่ำเพื่อให้อ่านออก: กว้าง ≥ 8 px · ใต้ `grip` ≥ 11 px · เห็นช่องกระจก ≥ 6 px ทุกทิศที่วาด
+- **กรอบภาพทึบ (D-LAN-SIZE · เจ้าของ ~02:2x):** กว้าง **8–13 px** · **เป้าหมาย 13×18 รวมห่วง = ใต้ `grip` 14–15 px** · เพดาน 15 px (เผื่อจังหวะหน่วงที่ตะเกียงอยู่ต่ำกว่ามือชั่วครู่) · เหนือ `grip` ≤ 3 px · ห่วงกว้างนอก ≤ 5 px (ให้กำปั้น 4–8 px คลุมได้)
+- ขั้นต่ำเพื่อให้อ่านออก: กว้าง ≥ 8 px · ใต้ `grip` ≥ 11 px · เห็นช่องกระจก ≥ 6 px ทุกทิศที่วาด · (ประวัติ: เดิมกว้าง 8–11 · ห้อยเป้าหมาย 11–13 → ขยายตามภาพเทียบ P1)
 - พิกเซล alpha 0 หรือ 255 เท่านั้น · ไม่มีจุดลอยแยกชิ้น · ไม่มีพื้นหลัง/เงาพื้น
 
 ## 5. ตะเกียงชิ้นเดียว (A) เทียบห่วง + โซ่ + ตัวโคมแยกชิ้น (C)
@@ -72,7 +74,7 @@
 | # | เกณฑ์ | ค่าที่ต้องได้ |
 |---|---|---|
 | 1 | ไฟล์และขนาด | 3 ไฟล์ตามข้อ 4 · ช่อง 32×32 ครบ 8 · alpha 0/255 เท่านั้น |
-| 2 | ขนาดตะเกียง | กว้าง 8–11 · ใต้ `grip` 11–15 · เหนือ `grip` ≤ 3 · ห่วง ≤ 5 px ทุกทิศ |
+| 2 | ขนาดตะเกียง | กว้าง 8–13 (เป้าหมาย 13) · ใต้ `grip` 11–15 (เป้าหมาย 14–15) · เหนือ `grip` ≤ 3 · ห่วง ≤ 5 px ทุกทิศ |
 | 3 | ไม่จมพื้น | ก้นตะเกียง**ที่ตำแหน่งวาดจริง** ≤ แถว 92 ทุกเฟรมที่จำลอง: เดิน · ยืน · หยุดจากทุกเฟรม (6 × 7 ทิศ) · ออกเดิน · เล่นจริง CPU 1×/4× |
 | 4a | จุดจับบนกำปั้น (เป้าหมาย) | `grip` ตรงจุดมือเป้าหมาย 70/70 · กำปั้นทับห่วง (ประกอบภาพตรงทุกพิกเซลแบบชุดเดิม) |
 | 4b | ห่วงกับกำปั้น (ตำแหน่งวาดจริง · D-EASE-STEP) | ไม่เกินค่าที่รับใน QG-2b: E ≤ 4 px นาน ≤ 112 ms · ทิศอื่น ≤ 3 px · เกินนี้ = ข้อยกเว้นใหม่ให้เจ้าของตัดสิน (ไม่ยกต่ออัตโนมัติ) · **ห้ามรายงานว่า "ห่วงติดกำปั้นตลอด"** (4a ตรวจเป้าหมาย · 4b ตรวจที่วาดจริงซึ่งยังมีระยะหน่วงตามข้อยกเว้น) |
@@ -144,10 +146,13 @@
 | 8 | บรรทัดสีเขียว | คาดว่า `Total: 20 generations for 64 frames at 32px (8×8 grid)` · **ถ้าไม่ตรง ถ่ายภาพหน้าจอส่งมาก่อนกด** |
 | 9 | Generate Object | กดหลัง ChatGPT ตรวจพรอมป์ผ่านและเจ้าของตัดสินใจเท่านั้น |
 
-พรอมป์ (ร่าง 1 อัน):
+พรอมป์ (ฉบับปรับโดย 🟧 ChatGPT ~02:2x · ใช้ฉบับนี้):
 ```
-A small hand lantern carried by a child apprentice of the Lantern Academy, for a cute modern pixel-art fantasy RPG. A round lantern with a domed copper cap, a small round hanging ring on top, two thin copper bars over warm glass, a copper rim and a small base. Inside glows a small faceted warm apricot crystal core, not a flame. Muted copper metal in dark brown-copper tones with a dark plum-purple outline. Use the pixel style, outline and shading of the first reference exactly, with light from the upper left. Copy the size, silhouette and straight front view of the second reference exactly: about 13 pixels wide and 18 pixels tall including the ring, centred. One lantern only, fully visible, isolated on a transparent background. No hand, no ground, no shadow, no glow halo outside the lantern. Cute, friendly and magical. No text, no flame, no candle, no bright yellow gold, no blue or cyan, no extra objects.
+A single front-view sprite of a small round copper hand lantern for Lantern Academy, a cozy fantasy pixel-art RPG. Use the first reference for crisp square pixel clusters, dark plum outlines and upper-left material shading, but not its exact clothing colors or motifs. Use the second reference as the silhouette and scale guide: approximately 13 pixels wide and 18 pixels tall including the ring, centered in a 32x32 transparent frame, with the hanging ring center at (16,6). A small domed copper cap, circular hanging ring, two slim copper uprights, dark warm glass panels and a narrow copper base. Muted copper palette #3D292C, #67413A, #915B49, #BB7A57 and plum outline #3A1E3F. A tiny faceted crystal shape visible at the center of the glass, with no emitted light. Clean readable details at native pixel size, consistent lighting from the upper left. One complete object only, transparent background, no surrounding light halo, cast shadow, scenery, character or lettering.
 ```
+- **รูปทรงนำทาง:** `2-shape.png` เดิมมีกระจกเปิดแสง ขัดกับพรอมป์ "no emitted light" → Claude เสนอ **`2-shape-unlit.png`** (รูปทรงเหมือนเดิมทุกพิกเซล ต่างแค่กระจกมืดและคริสตัลเป็นสีทองแดง) · zip `g25a-pixellab-refs-v2.zip` = `1-style.png` + `2-shape-unlit.png` · รอ ChatGPT เห็นด้วย (ถ้าไม่ ใช้ zip เดิม)
+- ไม่ใช้ `lantern-scale-mock.png` เป็นรูปอ้างอิง (เป็นภาพเปรียบเทียบ)
+- ลำดับ (ChatGPT ~02:2x): ยืนยันขนาด ✅ → ตรวจว่าหน้า PixelLab รับรูปอ้างอิง 2 รูปในงานเดียวจริง (ภาพหน้าจอ) → แสดงค่าทุกช่องตามหน้าจอจริง → เจ้าของกดทิศ S เอง → Claude ตรวจตาม QG-5a ก่อนเสนออีก 7 ทิศ · ยังไม่เริ่ม `ASSET_SPEC_13` หรือ Codex จนภาพแรกผ่าน
 - หลังได้ผล: หน้า Review Generated Frames → เลือกที่ชอบได้ถึง 4 แบบ → Save Individually → ดาวน์โหลด zip ทุกแบบ → ส่งมาทั้ง zip · Claude วัดด้วยสคริปต์ (ขนาด · ห่วง · สีสัญญาณ · สีโลหะเทียบแสง) แล้วเทียบให้ ChatGPT และเจ้าของเลือก 1 แบบ
 - ภาพที่ได้อาจมีกระจกเปิดแสง → Codex แยกเป็นชั้นแสงในขั้น P4 (ภาพหลักต้องไม่ฝังแสงตามเกณฑ์ 6)
 
