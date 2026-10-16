@@ -48,6 +48,7 @@ function breatheW(img){const c=document.createElement('canvas');c.width=img.widt
 async function boot(){
   const [w,i]=await Promise.all([load('c2-pilot-kid4-walk.png'),load('c2-pilot-kid4-idleanim.png')]);
   try{ST.anc=await (await fetch('c2-pilot-anchors.json')).json();ST.ok.anc=true;const dx=ST.anc.renderOffset&&ST.anc.renderOffset.dx;if(dx&&DIRS.every(d=>Number.isInteger(dx[d])))ST.offTable=Object.assign({},dx)}catch(e){ST.anc=null}
+  if(ST.offWq!=null&&Number.isFinite(ST.offWq))ST.offTable=Object.assign({},ST.offTable||OFF_TABLE,{W:ST.offWq});   // ?offW=… test override, applied after the JSON
   // name-tag height: highest head of the whole character (all anims, all dirs) -> the tag never moves up/down
   ST.tagTop=ST.anc?Math.min(...['idle','walk'].flatMap(a=>DIRS.flatMap(d=>(ST.anc.frames[a]&&ST.anc.frames[a][d]||[]).map(f=>f.head_top[1])))):8;
   if(w){ST.img.walk=w;ST.ok.walk=true;geo(w,'walk',6)}
@@ -111,7 +112,7 @@ tg('bOff',()=>ST.off=!ST.off);tg('bZoom',()=>ST.zoom=ST.zoom===1?0.75:1);tg('bBg
 function sync(){const B=(id,on,t)=>{const b=document.getElementById(id);b.classList.toggle('on',on);b.textContent=t};
   B('bOff',ST.off,ST.off?'Offset B (ตามตาราง) / table':'Offset A = 0');B('bZoom',ST.zoom===1,ST.zoom===1?'ซูม 100% / zoom':'ซูม 75% / zoom');
   B('bBg',ST.dark,ST.dark?'พื้นมืด / dark':'พื้นสว่าง / light');B('bTag',ST.tag==='feet',ST.tag==='feet'?'ป้าย: เท้า / tag: feet':'ป้าย: หัว / tag: head');B('bGuide',ST.guides,'เส้นช่วย / guides')}
-const q=new URLSearchParams(location.search);if(q.has('off0'))ST.off=false;if(q.has('z75'))ST.zoom=0.75;if(q.has('dark'))ST.dark=true;if(q.has('guides'))ST.guides=true;if(q.get('tag')==='head')ST.tag='head';if(q.has('clean'))ST.clean=true;if(q.has('offW'))ST.offTable=Object.assign({},OFF_TABLE,{W:+q.get('offW')});if(q.has('shadowFixed'))ST.shadowFollow=false;
+const q=new URLSearchParams(location.search);if(q.has('off0'))ST.off=false;if(q.has('z75'))ST.zoom=0.75;if(q.has('dark'))ST.dark=true;if(q.has('guides'))ST.guides=true;if(q.get('tag')==='head')ST.tag='head';if(q.has('clean'))ST.clean=true;if(q.has('offW'))ST.offWq=+q.get('offW');if(q.has('shadowFixed'))ST.shadowFollow=false;
 window.PT={ST,GEO,OFF_TABLE,DIRS,setDir,walk,stop,draw,scale,step,curFrame,pause:v=>ST.paused=v,set:(o)=>Object.assign(ST,o)};
 sync();boot();
 </script></body></html>

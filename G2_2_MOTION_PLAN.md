@@ -51,7 +51,7 @@
 | 6 | Claude | อ่านขนาด canvas และจำนวนเฟรมจากไฟล์จริง · จัดกรอบ 88 → 96 แบบไม่เสียพิกเซล (ไม่ย่อ/ขยาย) · ออก `ASSET_SPEC_12_c2_pilot_motion.md` + สคริปต์ตรวจ | 🟧 ChatGPT ตรวจสเปก → เจ้าของอนุมัติให้ Codex เริ่ม |
 | 7 | 🟩 Codex | เก็บงานทุกเฟรมตามสเปก (ข้อ 6 "ต้นทาง") | ส่ง branch แล้วหยุด |
 | 8 | Claude → 🟧 ChatGPT → เจ้าของ | ตรวจสคริปต์ทุกเฟรม · Mask Overlay · GIF · ChatGPT ให้คะแนน | เจ้าของรับ **QG-2a** |
-| 9 | Claude | **เอกสารเท่านั้น:** `DESIGN_CHAR2_RENDER_CONTRACT.md` · `c2-pilot-anchors.json` · `DESIGN_CHAR2_SAVE_MIGRATION.md` · ไม่แตะระบบเกมหรือเซฟจริง | รวมใน QG-2a · ✅ ร่างฉบับ 1 เสร็จ 16 ต.ค. ~12:3x (`build_c2_anchors.py` สร้าง anchors 80 เฟรมจากไฟล์ที่ล็อก) → 🟧 ChatGPT ตรวจ → เจ้าของรับ |
+| 9 | Claude | **เอกสารเท่านั้น:** `DESIGN_CHAR2_RENDER_CONTRACT.md` · `c2-pilot-anchors.json` · `DESIGN_CHAR2_SAVE_MIGRATION.md` · ไม่แตะระบบเกมหรือเซฟจริง | รวมใน QG-2a · ✅ ร่างฉบับ 1 เสร็จ 16 ต.ค. ~12:3x (`build_c2_anchors.py` สร้าง anchors 80 เฟรมจากไฟล์ที่ล็อก) · ผู้ช่วยตรวจอิสระตรวจ 2 รอบ (กติกาทีมข้อ 0.1): รอบแรกพบ 6 จุดควรแก้ + 4 จุดเล็ก · แก้ครบ (`883c666` + ถัดไป) · ตรวจซ้ำ 10/10 FIXED · ไม่มีจุดร้ายแรง → รอเจ้าของรับ |
 
 ## 4. Motion Direction — Soft Heroic Pixel (ChatGPT)
 - **Breathing Idle:** หายใจเบา ไหล่และลำตัวขยับเล็กน้อย
