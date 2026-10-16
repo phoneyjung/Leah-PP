@@ -1,6 +1,8 @@
 # G2.2 — แผนท่าเคลื่อนไหวและสัญญาการวาดตัวละคร (Claude · ฉบับ v1 · 15 ต.ค. 2569)
 
-**สถานะ (16 ต.ค. ~14:1x): ✅ QG-2a = CONDITIONAL PASS (ไม่ใช่ Full PASS) · D9 ✅ · G2.2b เริ่มแล้ว → แผน `G2_2B_LANTERN_HOLD_PLAN.md` v0.1 · ✅ D-2b-A (ทาง A: PixelLab Walking ลด Arm swing) · ต่อไป = เจ้าของกดทิศ E**
+**สถานะ (16 ต.ค. ~18:5x): ✅ QG-2a = CONDITIONAL PASS · G2.2b: ได้ท่าเดินถือ 8 ทิศ (Arm swing 0×) · สเปก `ASSET_SPEC_12` 1.4.1 ส่วน D อนุมัติ → Codex เก็บงาน 36 เฟรม · ✅ D-HAND = มือฝั่งจอ · แผน `G2_2B_LANTERN_HOLD_PLAN.md` v0.2**
+
+สถานะเดิม (~14:1x): G2.2b เริ่มแล้ว · D-2b-A · รอกดทิศ E
 
 **สถานะเดิม (16 ต.ค. ~13:4x): ✅ QG-2a = CONDITIONAL PASS (ไม่ใช่ Full PASS) · เอกสารขั้น 9 เจ้าของรับแล้ว · renderOffset B2 อนุมัติสำหรับ G2 Pilot เท่านั้น · ต่อไป = เจ้าของตัดสิน D9 (ยังไม่เริ่ม G2.2b)**
 
