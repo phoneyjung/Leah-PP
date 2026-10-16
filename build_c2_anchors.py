@@ -48,7 +48,7 @@ def main(wp, wmp, ip, imp, out):
                    'idle': {'frames': 4, 'ms': 200, 'loop': [1, 2, 3, 2], 'entry_after_walk': 3,
                             'blink': {'frame': 4, 'dirs': ['S', 'SE', 'E', 'W', 'SW'], 'every_s': [3, 6], 'slot': 'the f2 after f3 (loop index 4)'},
                             'code_breathing': {'W': {'cut_row': CUT, 'dy': W_DY, 'rule': 'after recolour: rows 0..cut-1 take rows 1..cut (up 1 px), row cut repeats; anchors below already include it'}}}},
-         'renderOffset': {'status': 'APPROVED by owner 16 Oct 2569 ~12:4x (G2_2 plan section 9 item 5)', 'formula': 'round-half-up(48 - idle f1 body centre rows 52-86), clamp +-3, same for every frame of every anim of that direction, x only, at draw time',
+         'renderOffset': {'status': 'APPROVED FOR PILOT TEST ONLY (owner 16 Oct 2569 ~12:4x) - not for game 2.33 or Production; results in DESIGN_CHAR2_RENDER_CONTRACT.md 6.1', 'formula': 'round-half-up(48 - idle f1 body centre rows 52-86), clamp +-3, same for every frame of every anim of that direction, x only, at draw time',
                           'dx': ro, 'idle_f1_body_centre': {D: round(b, 2) for D, b in zip(L8, body)},
                           'turn_jump_before': {a + '>' + b: round(abs(body[L8.index(a)] - body[L8.index(b)]), 2) for a, b in pairs},
                           'turn_jump_after': {a + '>' + b: round(abs(body[L8.index(a)] + ro[a] - body[L8.index(b)] - ro[b]), 2) for a, b in pairs}},
