@@ -179,3 +179,9 @@
 - พรอมป์เขียนชัด: "Use the pixel style of the first reference, and copy the camera angle of the second reference exactly" + "isolated on a transparent background" + "No diagonal angle, no isometric view"
 - **ห้ามปนรูปต่างขนาด** (64 / 128 / 256) ในงานเดียว · ขนาด 128 ใส่ได้ 4 รูป · 256 ใส่ได้ 1 รูป
 - ล้างรูปเก่าด้วยปุ่ม 🗑 และเช็กว่า Describe each item ว่างก่อนทุกงาน
+
+### อัปเดต 17 ต.ค. 2569 · Object Creator หน้าจอจริง (ภาพหน้าจอเจ้าของ ~02:2x · ตะเกียง G2.5a)
+- ช่องเรียงใหม่: **Mode** (Pro | Pro Flash BETA) · **Directions** · **Style Reference Images** (ขึ้น `2/8 at this size` เมื่อใส่รูป 32×32 สองรูป · ปุ่ม Add another from gallery) · **Object Description** · **Describe each item (64)** (พับไว้) · **Color palette (Beta)** เมนู ค่าเดิม `None` · **Max colours** ค่าเดิม `No limit` ("Pro draws with these colours and every pixel of the result uses them") · บรรทัดสีฟ้า **Total** · ปุ่ม **Generate Object** · **Auto-add to** (Off)
+- **รูปอ้างอิง 32×32 สองรูปในงานเดียวได้จริง** · ราคาเห็นจริง: **`Total: 10 generations for 64 frames at 32px (8×8 grid)`** (ไม่ใช่ 20 ตามตารางเก่า)
+- รอบเลือกแบบ: ปล่อย Color palette = None และ Max colours = No limit (ค่อยบังคับสีตอนเก็บงาน)
+
