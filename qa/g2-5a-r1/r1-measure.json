@@ -1,0 +1,66 @@
+{
+ "33": {
+  "bbox": [
+   7,
+   1,
+   25,
+   32
+  ],
+  "w": 18,
+  "h": 31,
+  "ring_hole_centre": [
+   15.5,
+   4.2
+  ],
+  "below_ring_centre": 27,
+  "semi_alpha": 0
+ },
+ "13": {
+  "bbox": [
+   7,
+   1,
+   25,
+   32
+  ],
+  "w": 18,
+  "h": 31,
+  "ring_hole_centre": [
+   15.5,
+   3.5
+  ],
+  "below_ring_centre": 27,
+  "semi_alpha": 0
+ },
+ "2": {
+  "bbox": [
+   6,
+   1,
+   26,
+   32
+  ],
+  "w": 20,
+  "h": 31,
+  "ring_hole_centre": [
+   15.5,
+   3.5
+  ],
+  "below_ring_centre": 27,
+  "semi_alpha": 0
+ },
+ "21": {
+  "bbox": [
+   7,
+   1,
+   25,
+   32
+  ],
+  "w": 18,
+  "h": 31,
+  "ring_hole_centre": [
+   15.4,
+   4.4
+  ],
+  "below_ring_centre": 27,
+  "semi_alpha": 0
+ }
+}

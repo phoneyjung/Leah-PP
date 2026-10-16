@@ -1,0 +1,22 @@
+{
+  "group_id": "b395136e-3879-4a5a-ad87-12784ca98477",
+  "objects": [
+    {
+      "id": "b9b33a14-b763-46f7-a567-4dfff961a93d",
+      "name": "base",
+      "prompt": "A single front-view sprite of a small round copper hand lantern for Lantern Academy, a cozy fantasy pixel-art RPG. Use the first reference for crisp square pixel clusters, dark plum outlines and upper-left material shading, but not its exact clothing colors or motifs. Use the second reference as the silhouette and scale guide: approximately 13 pixels wide and 18 pixels tall including the ring, centered in a 32x32 transparent frame, with the hanging ring center at (16,6). A small domed copper cap, circular hanging ring, two slim copper uprights, dark warm glass panels and a narrow copper base. Muted copper palette #3D292C, #67413A, #915B49, #BB7A57 and plum outline #3A1E3F. A tiny faceted crystal shape visible at the center of the glass, with no emitted light. Clean readable details at native pixel size, consistent lighting from the upper left. One complete object only, transparent background, no surrounding light halo, cast shadow, scenery, character or lettering.",
+      "size": {
+        "width": 32,
+        "height": 32
+      },
+      "directions": 1,
+      "view": "low top-down",
+      "rotations": {
+        "unknown": "rotations/A_single_front-view_sprite_of.png"
+      },
+      "animations": {}
+    }
+  ],
+  "export_version": "1.1",
+  "export_date": "2026-10-16T19:37:25.116072"
+}

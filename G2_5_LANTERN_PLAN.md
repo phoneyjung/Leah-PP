@@ -1,6 +1,8 @@
 # G2.5a — แผนและร่างสเปกตะเกียงจริงของตัวเด็ก (Claude · ฉบับ v0.3 · 17 ต.ค. 2569 ~02:3x)
 
-**สถานะ (17 ต.ค. ~02:3x): ✅ หน้าจอ PixelLab ตรวจแล้ว (รูปอ้างอิง 2 รูป `1-style.png` + `2-shape-unlit.png` · 2/8 · Color palette None · Max colours No limit · `Total: 10 generations for 64 frames at 32px (8×8 grid)`) · ✅ เจ้าของสั่งกด Generate ทิศ S รอบเลือกแบบ (เลือก ⭐) · รอผล zip → Claude วัดตาม QG-5a**
+**สถานะ (17 ต.ค. ~02:4x): รอบ 1 ได้ 64 แบบ · เจ้าของเก็บ 4 แบบ (#33 #13 #2 #21) · **ทุกแบบใหญ่เกิน: 18–20 × 31 px · ใต้กลางห่วง 27 px (เพดาน 15)** → ✅ มติ D-LAN-R2 (เจ้าของเลือก ⭐): กดรอบ 2 ด้วยรูปอ้างอิง 18×18 ยึดแบบ #33 (ข้อ 12) · รอเจ้าของกด**
+
+สถานะเดิม (17 ต.ค. ~02:3x): ✅ หน้าจอ PixelLab ตรวจแล้ว (รูปอ้างอิง 2 รูป `1-style.png` + `2-shape-unlit.png` · 2/8 · Color palette None · Max colours No limit · `Total: 10 generations for 64 frames at 32px (8×8 grid)`) · ✅ เจ้าของสั่งกด Generate ทิศ S รอบเลือกแบบ (เลือก ⭐) · รอผล zip → Claude วัดตาม QG-5a**
 
 สถานะเดิม (~02:3x · v0.3): ✅ D-LAN-SIZE — เจ้าของยืนยันขนาด 13×18 (กว้าง 8–13) · ChatGPT ตรวจ P1 ผ่านพร้อมพรอมป์ฉบับปรับ · ต่อไป = เจ้าของเปิด PixelLab ใส่รูปอ้างอิงแล้วส่งภาพหน้าจอ (ยังไม่กด Generate) เพื่อยืนยันว่ารับรูปอ้างอิง 2 รูปได้จริง**
 
@@ -157,4 +159,24 @@ A single front-view sprite of a small round copper hand lantern for Lantern Acad
 - ลำดับ (ChatGPT ~02:2x): ยืนยันขนาด ✅ → ตรวจว่าหน้า PixelLab รับรูปอ้างอิง 2 รูปในงานเดียวจริง (ภาพหน้าจอ) → แสดงค่าทุกช่องตามหน้าจอจริง → เจ้าของกดทิศ S เอง → Claude ตรวจตาม QG-5a ก่อนเสนออีก 7 ทิศ · ยังไม่เริ่ม `ASSET_SPEC_13` หรือ Codex จนภาพแรกผ่าน
 - หลังได้ผล: หน้า Review Generated Frames → เลือกที่ชอบได้ถึง 4 แบบ → Save Individually → ดาวน์โหลด zip ทุกแบบ → ส่งมาทั้ง zip · Claude วัดด้วยสคริปต์ (ขนาด · ห่วง · สีสัญญาณ · สีโลหะเทียบแสง) แล้วเทียบให้ ChatGPT และเจ้าของเลือก 1 แบบ
 - ภาพที่ได้อาจมีกระจกเปิดแสง → Codex แยกเป็นชั้นแสงในขั้น P4 (ภาพหลักต้องไม่ฝังแสงตามเกณฑ์ 6)
+
+## 12. ผลรอบ 1 และรอบ 2 (17 ต.ค. ~02:4x)
+**รอบ 1 (ทิศ S · 10 generations · 64 แบบที่ 32px):** เจ้าของเก็บ 4 แบบที่ Claude วงแนะนำ · ไฟล์ดิบ `qa/g2-5a-r1/` (sha256 ใน `r1-SHA256SUMS` · zip ของเจ้าของ `acdc52d5…736d`)
+| แบบ (เลขในตาราง) | กว้าง × สูง | กลางห่วง | ใต้กลางห่วง | กึ่งใส | ใกล้ทองโต้ตอบ / ฟ้าคริสตัล (ΔE00 < 10) |
+|---|---|---|---|---|---|
+| #33 (ทรงกลม · แนะนำ 1) | 18 × 31 | (15.5, 4.2) | **27** | 0 | 0 / 0 |
+| #13 (กระบอก สว่าง) | 18 × 31 | (15.5, 3.5) | **27** | 0 | 0 / 0 |
+| #2 (กลม) | 20 × 31 | (15.5, 3.5) | **27** | 0 | 0 / 0 |
+| #21 (ซี่ทองแดง) | 18 × 31 | (15.4, 4.4) | **27** | 0 | 0 / 0 |
+- **ไม่ผ่านเกณฑ์ 2–3:** PixelLab วาดเต็มกรอบ 32 ไม่ทำตามรูปทรงนำทาง 13×18 · ใช้ขนาดนี้ก้นจะจมพื้น ~12 px · ห้ามย่อภาพ → ใช้ตรง ๆ ไม่ได้
+- แบบและสีดี: ทองแดงหม่น ขอบพลัม กระจกมืด คริสตัลเป็นรูปทรงเทา ไม่มีแสงเรือง · สีชนสัญญาณ 0
+- **บทเรียน PixelLab:** Object Creator วาดวัตถุเต็มขนาดรูปอ้างอิงเสมอ ข้อความ "13×18" ในพรอมป์และรูปทรงนำทางที่เล็กกว่ากรอบไม่ช่วย → ต้องให้ **กรอบรูปอ้างอิงเท่าขนาดของที่ต้องการ**
+
+**รอบ 2 (มติ D-LAN-R2 · เจ้าของ ~02:4x):** รูปอ้างอิง **18×18** (`qa/g2-5a-r2/make_refs_18.py`): `1-style-18.png` (ตัดจากตัวเด็ก · เข็มกลัด คอเสื้อ เข็มขัด) · `2-shape-18.png` (ทรงกลมแบบ #33 · 13×18 · กลางห่วง (9,2) · ใต้ห่วง 15 · กระจกมืด) · zip `g25a-pixellab-refs-r2-18px.zip`
+- ตั้งค่าเหมือนรอบ 1 · ตรวจบรรทัด Total ว่าเป็น "… at 18px" ก่อนกด
+- พรอมป์รอบ 2 = ฉบับ ChatGPT ปรับเฉพาะขนาด/ทรง (ตัด "two slim copper uprights" เพราะ #33 เป็นทรงลูกโลก):
+```
+A single front-view sprite of a small round copper hand lantern for Lantern Academy, a cozy fantasy pixel-art RPG. Use the first reference for crisp square pixel clusters, dark plum outlines and upper-left material shading, but not its exact clothing colors or motifs. Use the second reference as the exact silhouette and scale: about 13 pixels wide and 18 pixels tall including the ring, filling the full height of the 18x18 transparent frame, with the hanging ring centre at (9,2). A round globe-shaped glass body, a small domed copper cap, a circular hanging ring, a thin copper rim above and below the glass and a narrow copper base. Muted copper palette #3D292C, #67413A, #915B49, #BB7A57 and plum outline #3A1E3F. A tiny faceted crystal shape visible at the center of the dark warm glass, with no emitted light. Clean readable details at this tiny native pixel size, consistent lighting from the upper left. One complete object only, transparent background, no surrounding light halo, cast shadow, scenery, character or lettering.
+```
+- ในเกม: Codex วางภาพ 18 px ลงช่อง 32×32 ให้กลางห่วงอยู่ `[16,6]` (เลื่อนทั้งภาพเป็นจำนวนเต็ม ไม่ย่อ/ขยาย)
 
