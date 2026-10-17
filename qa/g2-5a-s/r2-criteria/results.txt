@@ -1,0 +1,16 @@
+== delivery-ea1dccc
+FAIL R2-1 cap rows 10,11 copper run >= 9 each :: {"10": 7, "11": 9}
+FAIL R2-3 base rows 19,20 copper run >= 9 each :: {"19": 5, "20": 3}
+FAIL R2-2 interior ribs: left & right run >= 4, rib/glass dE00 >= 15 unlit & lit :: {"rib_cols": {}, "left": 0, "right": 0, "min_dE_unlit_lit": null}
+PASS R2-4 crystal: 0 px touching copper/plum, >= 1 glass row below it :: {"crystal_rows": [14, 16], "touching_metal": 0, "glass_rows_below": [17]}
+== delivery-12948e2
+FAIL R2-1 cap rows 10,11 copper run >= 9 each :: {"10": 7, "11": 9}
+FAIL R2-3 base rows 19,20 copper run >= 9 each :: {"19": 7, "20": 7}
+FAIL R2-2 interior ribs: left & right run >= 4, rib/glass dE00 >= 15 unlit & lit :: {"rib_cols": {}, "left": 0, "right": 0, "min_dE_unlit_lit": null}
+FAIL R2-4 crystal: 0 px touching copper/plum, >= 1 glass row below it :: {"crystal_rows": [14, 17], "touching_metal": 1, "glass_rows_below": []}
+== feasibility check (fix1 + 4 changes, ribs #915B49) - NOT a design
+PASS R2-1 cap rows 10,11 copper run >= 9 each :: {"10": 9, "11": 9}
+PASS R2-3 base rows 19,20 copper run >= 9 each :: {"19": 9, "20": 9}
+PASS R2-2 interior ribs: left & right run >= 4, rib/glass dE00 >= 15 unlit & lit :: {"rib_cols": {"13": 4, "19": 4}, "left": 4, "right": 4, "min_dE_unlit_lit": [16.38, 32.78]}
+PASS R2-4 crystal: 0 px touching copper/plum, >= 1 glass row below it :: {"crystal_rows": [13, 16], "touching_metal": 0, "glass_rows_below": [17]}
+TOTAL 15/15 PASS
