@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="th"><head><meta charset="utf-8"><link rel="icon" href="data:,"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>EXP lantern visibility (scratch, not repo)</title>
+<style>
+html,body{margin:0;height:100%;overflow:hidden;background:#e8e6f0;font:12px system-ui,sans-serif;touch-action:none}
+canvas{position:fixed;inset:0;width:100%;height:100%;image-rendering:pixelated}
+#ui{position:fixed;left:6px;top:6px;display:flex;gap:4px;flex-wrap:wrap;max-width:70%}
+#ui button{font:12px system-ui;padding:6px 8px;border-radius:6px;border:1px solid #888;background:#fff}
+#ui button.on{background:#ffd76a}
+#pad{position:fixed;right:10px;bottom:10px;display:grid;grid-template-columns:repeat(3,40px);gap:4px}
+#pad button{height:40px;font-size:14px}
+</style></head><body>
+<canvas id="cv"></canvas>
+<div id="ui">
+ <button id="bOff">Offset B (ตามตาราง) / table</button>
+ <button id="bZoom">ซูม 100% / zoom</button>
+ <button id="bBg">พื้นสว่าง / light</button>
+ <button id="bTag">ป้าย: เท้า / tag: feet</button>
+ <button id="bGuide">เส้นช่วย / guides</button>
+ <button id="bHold">ถือตะเกียง / hold</button>
+ <button id="bEase">ตะเกียงหน่วง / ease</button>
+</div>
+<div id="pad"></div>
+<script>
+// G2 Pilot motion harness (Claude · 16 Oct 2569). Separate test page: no index.html / sw.js / save / Firebase.
+// Draws the locked c2 sprites as drawn (no recolour - not part of this test) following DESIGN_CHAR2_RENDER_CONTRACT.md.
+// G2.2b hold mode (?hold): walk_hold sheet + stand-in Set-08 L0 lantern at the measured hand anchors (c2-pilot-hold-anchors.json),
+// camera-side hand (D-HAND), N draws no lantern, lantern in front + fist pixels redrawn over the ring, D-EASE <= 3 art px per 100 ms per axis
+// (default step ease = D-EASE-STEP, owner 17 Oct; smooth and snap stay selectable for comparison).
+// No rotation, no scaling of the lantern; Pilot only (not index.html / sw.js / save).
+'use strict';
+// SCRATCH EXPERIMENT (Claude 17 Oct ~23:4x, owner-approved stage 1): copy of the pilot page, outside the repo. B2 feasibility sprite + lit-only Glow, C visibility pool, A outline ring, cave darkness.
+// Sprite files are only drawn (never recoloured/scaled differently): base sheet, then the light layer on top when lit. All overlays are built once at art resolution and drawn nearest-neighbour.
+let FILTER_SETS=0;{const fd=Object.getOwnPropertyDescriptor(CanvasRenderingContext2D.prototype,'filter');if(fd&&fd.set)Object.defineProperty(CanvasRenderingContext2D.prototype,'filter',{get(){return fd.get.call(this)},set(v){FILTER_SETS++;fd.set.call(this,v)},configurable:true})}
+const C=96, FEET=[48,94], DIRS=['S','SE','E','NE','N','NW','W','SW'];
+const DV={S:[0,1],SE:[1,1],E:[1,0],NE:[1,-1],N:[0,-1],NW:[-1,-1],W:[-1,0],SW:[-1,1]};
+const OFF_TABLE={S:0,SE:0,E:3,NE:1,N:1,NW:-1,W:-1,SW:0};          // PILOT TEST ONLY (owner 16 Oct) · W -1 (formula -2) + shadow follows: Claude decision under team rule 0.2 after measurement
+const ST={off:true,shadowFollow:true,zoom:1,dark:false,tag:'feet',guides:false,dir:'S',anim:'idle',fi:0,t:0,blinkAt:4000,pos:{x:160,y:120},moving:false,mv:null,
+  log:[],img:{},anc:null,ok:{walk:false,idle:false,anc:false,walkhold:false,lantern:false,hold:false},
+  hold:false,ease:true,easeStep:true,lpos:null,ldir:null,lhist:null,lclock:0,lit:false,scene:'light',fxGlow:false,fxC:false,fxA:false};   // default = step ease (owner 17 Oct ~01:3x, D-EASE-STEP)
+const EASE_PX_PER_MS=0.03, EASE_MAX=3, EASE_WIN=120, LAN_HANG=[16,6], LAN_CELL=32;   // step ease looks back 120 ms = 100 ms rule + 20 ms for frame-time jitter           // D-EASE: 3 art px per 100 ms · stand-in lantern hangs from its ring centre (16,6)
+const WALL={x:200,y:60,w:16,h:120};                                 // simple collision box (world px) to prove offset never moves world/collision
+const IDLE_LOOP=[0,1,2,1], WALK_MS=100, IDLE_MS=200, SPEED=48;     // px per second (art px)
+const cv=document.getElementById('cv'), g=cv.getContext('2d');
+function load(src){return new Promise(r=>{const i=new Image();i.onload=()=>r(i);i.onerror=()=>r(null);i.src=src})}
+// --- per-frame geometry from the real pixels (body centre rows 52-86, contact rows 92-94, head rows<=50)
+const GEO={};
+function geo(img,anim,nf){const c=document.createElement('canvas');c.width=img.width;c.height=img.height;const x=c.getContext('2d');x.drawImage(img,0,0);
+  const D=x.getImageData(0,0,img.width,img.height).data;GEO[anim]={};
+  DIRS.forEach((d,i)=>{GEO[anim][d]=[];for(let k=0;k<nf;k++){let bs=0,bn=0,cs=0,cn=0,top=99,hs=0,hn=0,cmin=99,cmax=-1;
+    for(let y=0;y<C;y++)for(let xx=0;xx<C;xx++){const a=D[((i*C+y)*img.width+k*C+xx)*4+3];if(!a)continue;if(y<top)top=y;
+      if(y>=52&&y<=86){bs+=xx;bn++}if(y>=92&&y<=94){cs+=xx;cn++;cmin=Math.min(cmin,xx);cmax=Math.max(cmax,xx)}if(y<=50){hs+=xx;hn++}}
+    GEO[anim][d].push({body:bs/bn,contact:cn?cs/cn:null,cmin,cmax,top,head:hs/hn})}})}
+// W idle code breathing B (contract section 5): rows 0..61 up 1 px in f3, row 62 repeats - applied on a copy at load
+function breatheW(img){const c=document.createElement('canvas');c.width=img.width;c.height=img.height;const x=c.getContext('2d');x.drawImage(img,0,0);
+  const w=DIRS.indexOf('W'),cut=62,k=2,sx=k*C,sy=w*C;const cell=x.getImageData(sx,sy,C,C);x.clearRect(sx,sy,C,C);
+  const up=document.createElement('canvas');up.width=C;up.height=C;up.getContext('2d').putImageData(cell,0,0);
+  x.drawImage(up,0,1,C,cut,sx,sy,C,cut);x.drawImage(up,0,cut,C,C-cut,sx,sy+cut,C,C-cut);return c}
+async function boot(){
+  const [w,i,wh,ln,lnl,cf]=await Promise.all([load('c2-pilot-kid4-walk.png'),load('c2-pilot-kid4-idleanim.png'),load('c2-pilot-kid4-walkhold.png'),load('kid-lantern-b2-base.png'),load('kid-lantern-b2-light.png'),load('cave-floor.jpg')]);
+  try{ST.hanc=await (await fetch('c2-pilot-hold-anchors.json')).json();ST.ok.hold=!!(ST.hanc&&ST.hanc.walk_hold&&ST.hanc.idle_hold)}catch(e){ST.hanc=null}
+  if(wh){ST.img.walkhold=wh;ST.ok.walkhold=true}
+  if(ln){ST.img.lantern=ln;ST.ok.lantern=true}if(lnl)ST.img.lanternLight=lnl;if(cf)ST.img.caveFloor=cf;buildFx();
+  try{ST.anc=await (await fetch('c2-pilot-anchors.json')).json();ST.ok.anc=true;const dx=ST.anc.renderOffset&&ST.anc.renderOffset.dx;if(dx&&DIRS.every(d=>Number.isInteger(dx[d])))ST.offTable=Object.assign({},dx)}catch(e){ST.anc=null}
+  if(ST.offWq!=null&&Number.isFinite(ST.offWq))ST.offTable=Object.assign({},ST.offTable||OFF_TABLE,{W:ST.offWq});   // ?offW=… test override, applied after the JSON
+  // name-tag height: highest head of the whole character (all anims, all dirs) -> the tag never moves up/down
+  ST.tagTop=ST.anc?Math.min(...['idle','walk'].flatMap(a=>DIRS.flatMap(d=>(ST.anc.frames[a]&&ST.anc.frames[a][d]||[]).map(f=>f.head_top[1])))):8;
+  if(w){ST.img.walk=w;ST.ok.walk=true;geo(w,'walk',6)}
+  if(i){ST.img.idle=breatheW(i);ST.ok.idle=true;geo(ST.img.idle,'idle',4)}
+  if(!i&&w){ST.img.idle=null}                                       // fallback (contract section 7): idle missing -> walk f1
+  buildFists();
+  resize();sync();requestAnimationFrame(loop)}
+// fist overlay canvases: only the fist pixels of each frame (copied from the sheet itself) -> drawn over the lantern ring
+const FIST={};
+function buildFists(){if(!ST.hanc)return;[['idle','idle_hold',ST.img.idle,4],['walk','walk_hold',ST.img.walkhold,6]].forEach(([a,key,img,nf])=>{if(!img)return;FIST[a]={};
+  const c=document.createElement('canvas');c.width=img.width;c.height=img.height;const x=c.getContext('2d');x.drawImage(img,0,0);
+  DIRS.forEach((d,i)=>{FIST[a][d]=[];for(let k=0;k<nf;k++){const fr=(ST.hanc[key][d]||[])[k];if(!fr||!fr.fist){FIST[a][d].push(null);continue}
+    const bx=Math.min(...fr.fist.map(p=>p[0])),by=Math.min(...fr.fist.map(p=>p[1])),bw=Math.max(...fr.fist.map(p=>p[0]))-bx+1,bh=Math.max(...fr.fist.map(p=>p[1]))-by+1;
+    const o=document.createElement('canvas');o.width=bw;o.height=bh;const ox=o.getContext('2d');fr.fist.forEach(([fx,fy])=>ox.drawImage(c,k*C+fx,i*C+fy,1,1,fx-bx,fy-by,1,1));FIST[a][d].push({c:o,x:bx,y:by,w:bw,h:bh})}})})}
+function holdOn(){return ST.hold&&ST.ok.hold&&ST.ok.lantern&&ST.ok.walkhold&&ST.ok.idle}   // spec 14.8 / QG-2b #10: walk_hold, idle, lantern or anchors missing -> old sheets, no lantern at all
+function lanternTarget(){if(!holdOn())return null;const fr=(ST.hanc[ST.anim==='walk'?'walk_hold':'idle_hold'][ST.dir]||[])[curFrame()];return fr&&fr.anchor?fr.anchor:null}
+function easeLantern(dt){const t=lanternTarget();if(!t){ST.lpos=null;ST.ldir=null;ST.lhist=null;return}
+  const now=ST.lclock=(ST.lclock||0)+dt;
+  if(!ST.lpos||ST.ldir!==ST.dir||!ST.ease){ST.lpos=[t[0],t[1]];ST.ldir=ST.dir;ST.lhist=[{t:now,p:[t[0],t[1]]}];return}   // direction change = hand switch -> snap
+  ST.lhist=(ST.lhist||[]).filter(h=>now-h.t<=EASE_WIN);const H=ST.lhist.length?ST.lhist:[{p:ST.lpos.map(Math.round)}];
+  const lim=a=>[Math.max(...H.map(h=>h.p[a]))-EASE_MAX,Math.min(...H.map(h=>h.p[a]))+EASE_MAX];   // drawn px allowed by every position drawn in the last EASE_WIN ms
+  if(ST.easeStep){                                   // step ease: jump as far as the window allows (whole px) -> smallest gap to the fist
+    ST.lpos=[0,1].map(a=>{const [lo,hi]=lim(a);return Math.min(hi,Math.max(lo,t[a]))})}
+  else{const m=EASE_PX_PER_MS*dt,cl=v=>Math.max(-m,Math.min(m,v));ST.lpos=[ST.lpos[0]+cl(t[0]-ST.lpos[0]),ST.lpos[1]+cl(t[1]-ST.lpos[1])];   // smooth ease: 0.03 px/ms
+    [0,1].forEach(a=>{const [lo,hi]=lim(a),r=Math.round(ST.lpos[a]);if(r<lo||r>hi)ST.lpos[a]=Math.min(hi,Math.max(lo,r))})}   // guard: rounding + frame jitter never give 4 px in 100 ms
+  ST.lhist.push({t:now,p:ST.lpos.map(Math.round)})}
+function resize(){const dpr=window.devicePixelRatio||1;cv.width=Math.round(innerWidth*dpr);cv.height=Math.round(innerHeight*dpr)}
+addEventListener('resize',resize);
+function scale(){return Math.round(cv.height/384)*ST.zoom}          // game formula: 3 at 100 %, 2.25 at 75 % on 844x390 @2.625
+function offX(d){return ST.off?(ST.offTable||OFF_TABLE)[d]:0}
+const BLINK_DIRS=['S','SE','E','W','SW'];
+function curFrame(){if(ST.anim==='walk')return ST.fi%6;const li=ST.fi%4;return li===3&&ST.blinkNow&&BLINK_DIRS.includes(ST.dir)?3:IDLE_LOOP[li]}
+function cam(){const s=scale();return{s,ox:Math.round(cv.width/2-ST.pos.x*s),oy:Math.round(cv.height/2-ST.pos.y*s)}}
+function blocked(x,y){return x>WALL.x-6&&x<WALL.x+WALL.w+6&&y>WALL.y&&y<WALL.y+WALL.h}
+function step(dt){
+  ST.t+=dt;
+  if(ST.moving&&ST.mv){const [vx,vy]=DV[ST.dir],n=Math.hypot(vx,vy),nx=ST.pos.x+vx/n*SPEED*dt/1000,ny=ST.pos.y+vy/n*SPEED*dt/1000;
+    if(!blocked(nx,ny)){ST.pos.x=nx;ST.pos.y=ny}}
+  const ms=ST.anim==='walk'?WALK_MS:IDLE_MS;
+  if(ST.anim==='idle')ST.blinkClock=(ST.blinkClock||0)+dt;
+  while(ST.t>=ms){ST.t-=ms;ST.fi++;
+    if(ST.anim==='idle'){const li=ST.fi%4;ST.blinkNow=false;                       // blink = the f2 slot after f3 (loop index 3), every 3-6 s
+      if(li===3&&ST.blinkClock>=ST.blinkAt){ST.blinkNow=true;ST.blinkClock=0;ST.blinkAt=3000+Math.random()*2200;ST.blinks=(ST.blinks||[]).concat([performance.now()])}}}
+  easeLantern(dt)}
+// ---------- experiment overlays (built once, art resolution, stepped bands = pixel-art friendly, no ctx.filter) ----------
+const FX={};const RING_COL='#8A7682', DARK_A=0.86, DARK_RGB='8,6,18';
+const GLOW={R:40,bands:[[8,0.26],[14,0.20],[20,0.15],[27,0.10],[34,0.06],[40,0.03]],col:'255,179,107'};          // lit-only warm glow (screen) behind the body, radius 40 art px
+const LHOLE={R:72,bands:[[20,1],[32,0.85],[44,0.65],[56,0.42],[66,0.22],[72,0.1]]};                                 // cave: lantern light radius PLACEHOLDER (not a game rule)
+const POOL={cx:44,cy:66,rx:30,ry:34,bands:[[0.55,1],[0.8,0.62],[1,0.3]]};   // centred between body and hand so the lantern sits inside the pool                         // C: visibility pool inside the player's own 96x96 cell (flat dark: backdrop · cave: darkness reduction)
+const POOL_FLAT={col:'74,68,102',a:0.55}, POOL_CAVE={a:0.45};
+function mk(w,h){const c=document.createElement('canvas');c.width=w;c.height=h;return c}
+function stampRadial(R,bands,rgb,alphaMul){const c=mk(2*R+1,2*R+1),x=c.getContext('2d'),im=x.createImageData(2*R+1,2*R+1);
+  for(let v=0;v<=2*R;v++)for(let u=0;u<=2*R;u++){const d=Math.hypot(u-R,v-R);const b=bands.find(b=>d<=b[0]);if(!b)continue;const o=(v*(2*R+1)+u)*4;
+    im.data[o]=rgb[0];im.data[o+1]=rgb[1];im.data[o+2]=rgb[2];im.data[o+3]=Math.round(255*b[1]*alphaMul)}x.putImageData(im,0,0);return c}
+function stampPool(rgb,alphaMul){const c=mk(C,C),x=c.getContext('2d'),im=x.createImageData(C,C);
+  for(let v=0;v<C;v++)for(let u=0;u<C;u++){const d=Math.hypot((u-POOL.cx)/POOL.rx,(v-POOL.cy)/POOL.ry);const b=POOL.bands.find(b=>d<=b[0]);if(!b)continue;const o=(v*C+u)*4;
+    im.data[o]=rgb[0];im.data[o+1]=rgb[1];im.data[o+2]=rgb[2];im.data[o+3]=Math.round(255*b[1]*alphaMul)}x.putImageData(im,0,0);return c}
+function buildFx(){
+  FX.glow=stampRadial(GLOW.R,GLOW.bands,GLOW.col.split(',').map(Number),1);
+  FX.lhole=stampRadial(LHOLE.R,LHOLE.bands,[0,0,0],1);
+  FX.poolFlat=stampPool(POOL_FLAT.col.split(',').map(Number),POOL_FLAT.a);
+  FX.poolHole=stampPool([0,0,0],POOL_CAVE.a);
+  // A ring per direction cell: 8-neighbour dilation of the lantern alpha minus the lantern, rows >= 10 only (keeps clear of the fist and the ring/neck)
+  FX.ring=[];const src=mk(256,32),sx=src.getContext('2d');sx.drawImage(ST.img.lantern,0,0);const D=sx.getImageData(0,0,256,32).data;const rc=RING_COL.match(/\w\w/g).map(h=>parseInt(h,16));
+  for(let di=0;di<8;di++){const c=mk(32,32),x=c.getContext('2d'),im=x.createImageData(32,32);const A=(u,v)=>u>=0&&u<32&&v>=0&&v<32&&D[(v*256+di*32+u)*4+3]>0;
+    for(let v=10;v<32;v++)for(let u=0;u<32;u++){if(A(u,v))continue;let n=false;for(let dv=-1;dv<=1;dv++)for(let du=-1;du<=1;du++)if(A(u+du,v+dv))n=true;
+      if(n){const o=(v*32+u)*4;im.data[o]=rc[0];im.data[o+1]=rc[1];im.data[o+2]=rc[2];im.data[o+3]=255}}x.putImageData(im,0,0);FX.ring.push(c)}
+  FX.dark=mk(480,360);   // world -40..440 x -30..330 art px
+}
+function dark(){return ST.scene==='dark'||ST.scene==='cave'}
+const MARKER={x:52,y:58};   // hidden test object (cyan crystal marker 9x12 art px) ~100 art px from the player: must stay unrevealed by C
+function drawMarker(ox,oy,s){const P=['....c....','...ccc...','..ccwcc..','..cwccc..','.ccwcccc.','.cccccccc','.ccccccc.','..cccccc.','..ccccc..','...cccc..','....cc...','.........'];
+  P.forEach((r,v)=>[...r].forEach((ch,u)=>{if(ch==='.')return;g.fillStyle=ch==='w'?'#e8fbff':'#5fe0ff';g.fillRect(ox+(MARKER.x+u)*s,oy+(MARKER.y+v)*s,Math.ceil(s),Math.ceil(s))}))}
+function draw(){
+  ST.dark=ST.scene!=='light';const {s,ox,oy}=cam(),bg=ST.clean?'#00ff00':ST.scene==='cave'?'#14121c':ST.dark?'#1e1b2e':'#e8e6f0';g.imageSmoothingEnabled=false;g.fillStyle=bg;g.fillRect(0,0,cv.width,cv.height);
+  if(ST.scene==='cave'&&ST.img.caveFloor){for(let wy=-256;wy<560;wy+=256)for(let wx=-256;wx<656;wx+=256)g.drawImage(ST.img.caveFloor,0,0,256,256,ox+wx*s,oy+wy*s,256*s,256*s);drawMarker(ox,oy,s)}
+  const fx=ox+ST.pos.x*s, fy=oy+ST.pos.y*s;                         // logical feet on screen
+  if(!ST.clean){
+  // ground grid (world) - 32 px tiles
+  if(ST.scene!=='cave'){g.strokeStyle=ST.dark?'#2c2840':'#d6d3e2';g.lineWidth=1;for(let x=0;x<=400;x+=32){g.beginPath();g.moveTo(ox+x*s,oy);g.lineTo(ox+x*s,oy+300*s);g.stroke()}
+  for(let y=0;y<=300;y+=32){g.beginPath();g.moveTo(ox,oy+y*s);g.lineTo(ox+400*s,oy+y*s);g.stroke()}}
+  g.fillStyle=ST.dark?'#4a4060':'#b9b2cc';g.fillRect(ox+WALL.x*s,oy+WALL.y*s,WALL.w*s,WALL.h*s);
+  // shadow under the drawn sprite: logical feet + renderOffset when shadowFollow (B2) · world position / collision never use the offset
+  const shx=fx+(ST.shadowFollow?offX(ST.dir)*s:0);g.fillStyle='rgba(40,50,40,0.35)';g.beginPath();g.ellipse(shx,fy,14*s,3*s,0,0,7);g.fill();}
+  const d=ST.dir,k=curFrame();let img,kk;
+  const H=holdOn();
+  if(ST.anim==='walk'&&H){img=ST.img.walkhold;kk=k}
+  else if(ST.anim==='walk'){img=ST.img.walk||ST.img.idle;kk=ST.img.walk?k:0}        // walk missing -> idle f1 slides along the path (contract 7)
+  else{img=ST.img.idle||ST.img.walk;kk=ST.img.idle?k:0}                          // idle missing -> walk f1
+  const dx=offX(d),sx=Math.round(fx-FEET[0]*s+dx*s),sy=Math.round(fy-FEET[1]*s);
+  const tt=H?lanternTarget():null;let LW=null;   // lantern world origin (art px) for the glow / light hole
+  if(tt){const lp=ST.lpos&&ST.ldir===d?ST.lpos:tt;LW=[ST.pos.x-FEET[0]+dx+Math.round(lp[0])-LAN_HANG[0],ST.pos.y-FEET[1]+Math.round(lp[1])-LAN_HANG[1]]}
+  if(ST.fxC&&ST.scene==='dark')g.drawImage(FX.poolFlat,0,0,C,C,sx,sy,C*s,C*s);
+  if(ST.fxGlow&&ST.lit&&LW){const gx=LW[0]+16-GLOW.R,gy=LW[1]+15-GLOW.R;g.globalCompositeOperation='screen';g.drawImage(FX.glow,0,0,2*GLOW.R+1,2*GLOW.R+1,ox+gx*s,oy+gy*s,(2*GLOW.R+1)*s,(2*GLOW.R+1)*s);g.globalCompositeOperation='source-over'}
+  if(img)g.drawImage(img,kk*C,DIRS.indexOf(d)*C,C,C,sx,sy,C*s,C*s);else{g.fillStyle='#c84';g.fillRect(fx-10*s,fy-40*s,20*s,40*s)}
+  // lantern (G2.2b): in front of the body, then the fist pixels again over the ring · positions in art px of the cell, so renderOffset applies
+  let lan=null;const t=tt;ST.lanDraw=null;
+  if(t){if(!ST.lpos||ST.ldir!==d){ST.lpos=[t[0],t[1]];ST.ldir=d;ST.lhist=[{t:ST.lclock||0,p:[t[0],t[1]]}]}   // snap in draw is part of the history too
+    const lx=Math.round(ST.lpos[0]),ly=Math.round(ST.lpos[1]),di=DIRS.indexOf(d);
+    g.drawImage(ST.img.lantern,di*LAN_CELL,0,LAN_CELL,LAN_CELL,sx+(lx-LAN_HANG[0])*s,sy+(ly-LAN_HANG[1])*s,LAN_CELL*s,LAN_CELL*s);
+    if(ST.lit&&ST.img.lanternLight)g.drawImage(ST.img.lanternLight,di*LAN_CELL,0,LAN_CELL,LAN_CELL,sx+(lx-LAN_HANG[0])*s,sy+(ly-LAN_HANG[1])*s,LAN_CELL*s,LAN_CELL*s);
+    ST.lanDraw=[di,sx+(lx-LAN_HANG[0])*s,sy+(ly-LAN_HANG[1])*s];
+    const fo=!ST.nofist&&FIST[ST.anim]&&FIST[ST.anim][d]?FIST[ST.anim][d][kk]:null;if(fo)g.drawImage(fo.c,0,0,fo.w,fo.h,sx+fo.x*s,sy+fo.y*s,fo.w*s,fo.h*s);
+    lan={target:t.slice(),drawn:[lx,ly],off:Math.max(Math.abs(lx-t[0]),Math.abs(ly-t[1])),fist:!!fo}}
+  if(ST.scene==='cave'){const dc=FX.dark,x=dc.getContext('2d');x.globalCompositeOperation='source-over';x.clearRect(0,0,480,360);x.fillStyle='rgba('+DARK_RGB+','+DARK_A+')';x.fillRect(0,0,480,360);
+    x.globalCompositeOperation='destination-out';
+    if(ST.fxGlow&&ST.lit&&LW)x.drawImage(FX.lhole,LW[0]+16-LHOLE.R+40,LW[1]+15-LHOLE.R+30);
+    if(ST.fxC)x.drawImage(FX.poolHole,Math.round((sx-ox)/s)+40,Math.round((sy-oy)/s)+30);
+    x.globalCompositeOperation='source-over';
+    g.fillStyle='rgba('+DARK_RGB+','+DARK_A+')';const X0=ox-40*s,Y0=oy-30*s,X1=X0+480*s,Y1=Y0+360*s;   // outside the world box: plain darkness
+    g.fillRect(0,0,cv.width,Math.max(0,Y0));g.fillRect(0,Y1,cv.width,cv.height-Y1);g.fillRect(0,Y0,Math.max(0,X0),Y1-Y0);g.fillRect(X1,Y0,cv.width-X1,Y1-Y0);
+    g.drawImage(dc,0,0,480,360,X0,Y0,480*s,360*s);
+    if(ST.lit&&ST.lanDraw&&ST.img.lanternLight){const [di,lx0,ly0]=ST.lanDraw;g.drawImage(ST.img.lanternLight,di*LAN_CELL,0,LAN_CELL,LAN_CELL,lx0,ly0,LAN_CELL*s,LAN_CELL*s)}}   // emissive pixels are not darkened
+  if(ST.fxA&&dark()&&ST.lanDraw){const [di,lx0,ly0]=ST.lanDraw;g.drawImage(FX.ring[di],0,0,32,32,lx0,ly0,32*s,32*s)}
+  // name tag: policy 'feet' = x from logical feet, y = highest head top of this anim+dir; policy 'head' = head_top of this frame (+offset)
+  const an=ST.anc&&ST.anc.frames[ST.anim]?ST.anc.frames[ST.anim][d]:null, fr=an?an[kk]:null;
+  let tx,ty;if(ST.tag==='feet'){tx=fx;ty=fy+(ST.tagTop-FEET[1]-4)*s}
+  else{tx=fr?fx+(fr.head_top[0]-FEET[0]+dx)*s:fx;ty=fr?fy+(fr.head_top[1]-FEET[1]-4)*s:fy-90*s}
+  if(!ST.clean){g.font=Math.round(5*s)+'px system-ui';g.textAlign='center';g.textBaseline='bottom';const label='ลีอา Leah';const tw=g.measureText(label).width;
+  g.fillStyle='rgba(0,0,0,.55)';g.fillRect(Math.round(tx-tw/2-2*s),Math.round(ty-6*s),Math.round(tw+4*s),Math.round(6*s));g.fillStyle='#fff';g.fillText(label,Math.round(tx),Math.round(ty-0.6*s));}
+  ST.last={s,fx,fy,sx,sy,dx,dir:d,anim:ST.anim,frame:kk,tag:[tx,ty],headTop:fr?[fx+(fr.head_top[0]-FEET[0]+dx)*s,fy+(fr.head_top[1]-FEET[1])*s]:null,pos:{...ST.pos},lantern:lan,sheet:img===ST.img.walkhold?'walkhold':img===ST.img.walk?'walk':img===ST.img.idle?'idle':null};
+  if(ST.guides){g.strokeStyle='#e33';g.beginPath();g.moveTo(fx-6*s,fy);g.lineTo(fx+6*s,fy);g.moveTo(fx,fy-6*s);g.lineTo(fx,fy+6*s);g.stroke();
+    if(ST.last.headTop){g.strokeStyle='#36f';g.strokeRect(ST.last.headTop[0]-2*s,ST.last.headTop[1]-2*s,4*s,4*s)}}
+}
+function loop(ts){const now=ts||0,dt=Math.min(100,now-(ST.lt||now));ST.lt=now;if(!ST.paused)step(dt);draw();requestAnimationFrame(loop)}
+// --- controls (keyboard + pad) and a test API
+function setDir(d){ST.dir=d}
+function walk(d){ST.dir=d;if(ST.anim!=='walk'){ST.anim='walk';ST.fi=0;ST.t=0}ST.moving=true;ST.mv=true}
+function stop(){if(ST.anim==='walk'){ST.anim='idle';ST.fi=2;ST.t=0}ST.moving=false;ST.mv=null}   // contract: stop -> idle starts at f3 (loop index 2)
+const pad=document.getElementById('pad');['NW','N','NE','W','·','E','SW','S','SE'].forEach(d=>{const b=document.createElement('button');b.textContent=d;
+  if(d==='·'){b.onpointerdown=stop}else{b.onpointerdown=()=>walk(d);b.onpointerup=b.onpointerleave=stop}pad.appendChild(b)});
+const KEYS={ArrowUp:'N',ArrowDown:'S',ArrowLeft:'W',ArrowRight:'E'};const held=new Set();
+addEventListener('keydown',e=>{if(!KEYS[e.key])return;held.add(KEYS[e.key]);kd()});addEventListener('keyup',e=>{if(!KEYS[e.key])return;held.delete(KEYS[e.key]);kd()});
+function kd(){const n=held.has('N'),s=held.has('S'),w=held.has('W'),e=held.has('E');const d=(n?'N':s?'S':'')+(e?'E':w?'W':'');d?walk(d):stop()}
+const tg=(id,f)=>{const b=document.getElementById(id);b.onclick=()=>{f();sync()}};
+tg('bHold',()=>{ST.hold=!ST.hold;ST.lpos=null});tg('bEase',()=>{if(ST.ease&&!ST.easeStep)ST.easeStep=true;else if(ST.ease){ST.ease=false;ST.easeStep=false}else ST.ease=true});   // smooth -> step -> snaptg('bOff',()=>ST.off=!ST.off);tg('bZoom',()=>ST.zoom=ST.zoom===1?0.75:1);tg('bBg',()=>ST.dark=!ST.dark);tg('bTag',()=>ST.tag=ST.tag==='feet'?'head':'feet');tg('bGuide',()=>ST.guides=!ST.guides);
+function sync(){const B=(id,on,t)=>{const b=document.getElementById(id);b.classList.toggle('on',on);b.textContent=t};
+  B('bOff',ST.off,ST.off?'Offset B (ตามตาราง) / table':'Offset A = 0');B('bZoom',ST.zoom===1,ST.zoom===1?'ซูม 100% / zoom':'ซูม 75% / zoom');
+  B('bBg',ST.dark,ST.dark?'พื้นมืด / dark':'พื้นสว่าง / light');B('bTag',ST.tag==='feet',ST.tag==='feet'?'ป้าย: เท้า / tag: feet':'ป้าย: หัว / tag: head');B('bGuide',ST.guides,'เส้นช่วย / guides');
+  B('bHold',ST.hold&&holdOn(),!ST.hold?'มือว่าง / no lantern':holdOn()?'ถือตะเกียง / hold':'ถือ: ไฟล์ไม่ครบ / files missing');B('bEase',ST.ease,!ST.ease?'ตะเกียงติดมือ / snap':ST.easeStep?'หน่วงเป็นจังหวะ / step':'หน่วงเรียบ / smooth')}
+const q=new URLSearchParams(location.search);if(q.has('off0'))ST.off=false;if(q.has('z75'))ST.zoom=0.75;if(q.has('dark'))ST.dark=true;if(q.has('guides'))ST.guides=true;if(q.get('tag')==='head')ST.tag='head';if(q.has('clean'))ST.clean=true;if(q.has('offW'))ST.offWq=+q.get('offW');if(q.has('shadowFixed'))ST.shadowFollow=false;if(q.has('hold'))ST.hold=true;if(q.has('nofist'))ST.nofist=true;if(q.has('snap'))ST.ease=false;if(q.has('stepease'))ST.easeStep=true;if(q.has('smoothease'))ST.easeStep=false;
+window.PT={FX,GLOW,LHOLE,POOL,MARKER,RING_COL,filterSets:()=>FILTER_SETS,ST,GEO,OFF_TABLE,DIRS,setDir,walk,stop,draw,scale,step,curFrame,lanternTarget,holdOn,easeLantern,pause:v=>ST.paused=v,set:(o)=>Object.assign(ST,o)};
+sync();boot();
+</script></body></html>

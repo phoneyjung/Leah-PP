@@ -1,0 +1,4 @@
+b462cdbaa6dcf6281055b844b993bab667a0d4f6264a77e615ed5b6e72de92ad  c2-held-lantern_L0-S-trial.png
+3f98b5cbbe1075eea5c876e9ad8136947883d75ae2bafe58be22a04e274fa70c  c2-held-lantern_L0-S-trial-light.png
+29aa509ef0091e6ba66287c2407e936f361eacf0e53013e62cd286de3ac8fba5  kid-lantern-b2-base.png
+3d8f8880f98eae81157b2b5895e7b2e3090ee93e7da908e660ba6e2a2d6702cf  kid-lantern-b2-light.png
