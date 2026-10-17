@@ -1,0 +1,205 @@
+{
+ "checks": [
+  {
+   "check": "1a 4 files present",
+   "pass": true,
+   "value": {
+    "png": true,
+    "light": true,
+    "json": true,
+    "x8": true
+   }
+  },
+  {
+   "check": "1b sizes 32x32 / 32x32 / 256x256",
+   "pass": true,
+   "value": [
+    [
+     32,
+     32
+    ],
+    [
+     32,
+     32
+    ],
+    [
+     256,
+     256
+    ]
+   ]
+  },
+  {
+   "check": "1c alpha only 0/255 (base and light)",
+   "pass": true,
+   "value": {
+    "base": [
+     0,
+     255
+    ],
+    "light": [
+     0,
+     255
+    ]
+   }
+  },
+  {
+   "check": "1d one piece (4-neighbour and 8-neighbour)",
+   "pass": true,
+   "value": {
+    "4n": 1,
+    "8n": 1
+   }
+  },
+  {
+   "check": "2 size: w 11-13, h 17-18, below grip <= 15, above <= 3, ring <= 5",
+   "pass": true,
+   "value": {
+    "bbox": [
+     10,
+     4,
+     23,
+     22
+    ],
+    "w": 13,
+    "h": 18,
+    "below_grip": 15,
+    "above_grip": 2,
+    "ring_w": 5
+   }
+  },
+  {
+   "check": "3 ring hole hollow, centre within 0.5 px per axis of [16,6], contains (16,6)",
+   "pass": true,
+   "value": {
+    "hole_px": [
+     [
+      16,
+      5
+     ],
+     [
+      16,
+      6
+     ]
+    ],
+    "centre": [
+     16.0,
+     5.5
+    ]
+   }
+  },
+  {
+   "check": "4 colours: gold/cyan dE00 >= 10, base vs light colours >= 5, copper vs #FFB36B >= 10, outer edge plum >= 90 %",
+   "pass": true,
+   "value": {
+    "min_dE_gold": 27.37,
+    "min_dE_cyan": 42.21,
+    "min_dE_FFB36B": 19.106,
+    "min_dE_FFF0C9": 29.066,
+    "copper_min_dE_FFB36B": 19.11,
+    "outer_plum": "40/40",
+    "n_colours": 11
+   }
+  },
+  {
+   "check": "5 light layer: only #FFB36B / #FFF0C9, every light px on a glass/crystal base px (not plum, not copper), crystal 2-6 px",
+   "pass": true,
+   "value": {
+    "colours": {
+     "#FFB36B": 45,
+     "#FFF0C9": 5
+    },
+    "on_glass": true,
+    "glass": 45,
+    "crystal": 5,
+    "base_under_light": [
+     "#3C2C3B",
+     "#55434C",
+     "#625366",
+     "#71606A",
+     "#81717E",
+     "#A89AA1"
+    ]
+   }
+  },
+  {
+   "check": "6 json matches the images (bbox, size, grip, hole, light counts, colours, sha256)",
+   "pass": true,
+   "value": {
+    "json_bbox": [
+     10,
+     4,
+     23,
+     22
+    ],
+    "json_colors": 11
+   }
+  },
+  {
+   "check": "6b x8 preview shows the same pixels (opaque centres)",
+   "pass": true,
+   "value": 0
+  },
+  {
+   "check": "7a lantern bottom row in the hand <= 92 (7 dirs, all 70 frames)",
+   "pass": true,
+   "value": {
+    "S": 91,
+    "SE": 92,
+    "E": 90,
+    "NE": 90,
+    "NW": 92,
+    "W": 90,
+    "SW": 92
+   }
+  }
+ ],
+ "measure": {
+  "bbox": [
+   10,
+   4,
+   23,
+   22
+  ],
+  "size": [
+   13,
+   18
+  ],
+  "below_grip": 15,
+  "above_grip": 2,
+  "hole": [
+   [
+    16,
+    5
+   ],
+   [
+    16,
+    6
+   ]
+  ],
+  "hole_centre": [
+   16.0,
+   5.5
+  ],
+  "ring_w": 5,
+  "colours": {
+   "#3A1E3F": 40,
+   "#67413A": 27,
+   "#55434C": 22,
+   "#3C2C3B": 18,
+   "#915B49": 15,
+   "#3D292C": 10,
+   "#BB7A57": 6,
+   "#71606A": 5,
+   "#A89AA1": 2,
+   "#625366": 2,
+   "#81717E": 1
+  },
+  "opaque_px": 148,
+  "sha256": {
+   "png": "45dcfedbecfb83d17f3a6b1823a6d8a06e619e60a40b16541f3fb5880e7be04f",
+   "light": "52a50d3574288a7330bfb27c7bc63ee4940b65bdc49f13f455bbff3ccf63843a",
+   "json": "7880354b0164723449c888886f01d462dbbe91697b984ff1e7025182e55637c6",
+   "x8": "3498d42aa1e1d826e119cd96093585c0cfa007cbfbbd0744d77fbaa97e1c713e"
+  }
+ }
+}
