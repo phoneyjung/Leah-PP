@@ -1,0 +1,509 @@
+{
+ "preflight": "PASS",
+ "references": {
+  "qa_asset13.py (a2efe77)": "OK",
+  "fix1 12948e2 .png": "OK",
+  "fix1 12948e2 -light.png": "OK",
+  "fix2 ca3d75b .png": "OK",
+  "fix2 ca3d75b -light.png": "OK",
+  "hold anchors json (87bba95 = a2efe77)": "OK",
+  "G3 sheet c2-pilot-kid4-idleanim.png (1714c65 = a2efe77)": "OK",
+  "G3 sheet c2-pilot-kid4-walkhold.png (fd2a55f = a2efe77)": "OK"
+ },
+ "qa_1_2a": {
+  "exit_code": 0,
+  "gates": 24,
+  "pass": 24,
+  "errors": [],
+  "skipped": [],
+  "missing_ids": [],
+  "unexpected_ids": [],
+  "duplicate_ids": [],
+  "all_24_pass_exit0": true
+ },
+ "items": [
+  {
+   "id": "D1a",
+   "text": "width y9 -> y16 never decreases (every row y9-21 non-empty)",
+   "result": "PASS",
+   "value": [
+    9,
+    11,
+    11,
+    13,
+    13,
+    13,
+    13,
+    13
+   ]
+  },
+  {
+   "id": "D1b",
+   "text": "width y16 -> y21 never increases (every row y9-21 non-empty)",
+   "result": "PASS",
+   "value": [
+    13,
+    11,
+    11,
+    11,
+    11,
+    9
+   ]
+  },
+  {
+   "id": "D1c",
+   "text": "no pinch row (narrower than both neighbours) in y10-20 (every row y9-21 non-empty)",
+   "result": "PASS",
+   "value": {
+    "pinch_rows": [],
+    "empty_rows": []
+   }
+  },
+  {
+   "id": "D1d",
+   "text": "S3 shape: cap y10-11 width <= 11, body y12-16 width = 13, opaque px <= fix2",
+   "result": "PASS",
+   "value": {
+    "cap_y10_11": [
+     11,
+     11
+    ],
+    "body_y12_16": [
+     13,
+     13,
+     13,
+     13,
+     13
+    ],
+    "opaque_px": 168,
+    "fix2_opaque_px": 170
+   }
+  },
+  {
+   "id": "D2a",
+   "text": "rounded base: width y21 = width y20 - 2",
+   "result": "PASS",
+   "value": {
+    "y20": 11,
+    "y21": 9
+   }
+  },
+  {
+   "id": "D2b",
+   "text": "bottom row y21 and bbox exactly [10,4,23,22]",
+   "result": "PASS",
+   "value": {
+    "bbox_xyxy_exclusive": [
+     10,
+     4,
+     23,
+     22
+    ]
+   }
+  },
+  {
+   "id": "D2c",
+   "text": "G3 from QA 1.2a: every hold frame <= +10 vs fix1 (E/W reported; a QA run with errors = FAIL)",
+   "result": "PASS",
+   "value": {
+    "max_increase_per_dir": {
+     "S": 6,
+     "SE": 6,
+     "E": 8,
+     "NE": 4,
+     "NW": 4,
+     "W": 8,
+     "SW": 6
+    },
+    "E": 8,
+    "W": 8,
+    "QA_G3": true
+   }
+  },
+  {
+   "id": "D3a",
+   "text": "mean L* left frame - right frame >= 10 (frame = copper 4-touching plum, y12-18)",
+   "result": "PASS",
+   "value": {
+    "left_L": 44.21,
+    "right_L": 31.74,
+    "diff": 12.47,
+    "left_px": 7,
+    "right_px": 7
+   }
+  },
+  {
+   "id": "D3b",
+   "text": "mean L* rib x14 - rib x18 >= 10 (rib px only, y12-18)",
+   "result": "PASS",
+   "value": {
+    "left_L": 57.24,
+    "right_L": 44.21,
+    "diff": 13.03,
+    "left_px": 7,
+    "right_px": 7
+   }
+  },
+  {
+   "id": "D3c",
+   "text": "every row y10-20: mean L* copper left >= right; a row without copper on both sides = N/A (reported, not counted); >= 8 evaluable rows",
+   "result": "PASS",
+   "value": {
+    "reversed_rows": [],
+    "na_rows": [],
+    "evaluable_rows": 11
+   }
+  },
+  {
+   "id": "D3d",
+   "text": "no new colour: every opaque colour is one of the fix2 colours (Copper Trim 4 shades, plum, glass, crystal)",
+   "result": "PASS",
+   "value": {
+    "n_colours": 9,
+    "new_colours": []
+   }
+  },
+  {
+   "id": "D4a",
+   "text": "glass px (light #FFB36B) 4-touching the plum outline = 0 (glass present, every glass px over a base px)",
+   "result": "PASS",
+   "value": {
+    "contacts": 0,
+    "first": [],
+    "glass_px": 37,
+    "glass_without_base": 0
+   }
+  },
+  {
+   "id": "D4b",
+   "text": "seam unlit: every (light px, 4-adjacent copper px, all 4 shades) dE00 >= 14",
+   "result": "PASS",
+   "value": {
+    "pairs": 56,
+    "light_px_without_base": 0,
+    "min_dE_unlit": 14.58,
+    "QA_8c_min_unlit": 14.5847,
+    "worst": [
+     [
+      [
+       19,
+       12
+      ],
+      [
+       19,
+       11
+      ]
+     ],
+     [
+      [
+       20,
+       12
+      ],
+      [
+       21,
+       12
+      ]
+     ],
+     [
+      [
+       20,
+       12
+      ],
+      [
+       20,
+       11
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "D4c",
+   "text": "seam lit: QA 8c PASS and the same pairs lit dE00 >= 10",
+   "result": "PASS",
+   "value": {
+    "min_dE_lit": 19.11,
+    "QA_8c": true
+   }
+  },
+  {
+   "id": "D4d",
+   "text": "ribs 1 px wide only at x14 and x18 (run >= 4); every other copper px in y12-18 is a frame px touching plum; QA C2 + C2b PASS",
+   "result": "PASS",
+   "value": {
+    "rib_cols": [
+     14,
+     18
+    ],
+    "runs": {
+     "14": 7,
+     "18": 7
+    },
+    "extra_copper_px": [],
+    "QA_C2": true,
+    "QA_C2b": true
+   }
+  }
+ ],
+ "route": {
+  "result": "PASS",
+  "value": "route M (owner-selected design direction)",
+  "signature": {
+   "frame_left": [
+    "#915B49"
+   ],
+   "frame_right": [
+    "#67413A"
+   ],
+   "rib_left": [
+    "#BB7A57"
+   ],
+   "rib_right": [
+    "#915B49"
+   ]
+  }
+ },
+ "sheet_A": {
+  "result": "PASS",
+  "strict": {
+   "size": [
+    512,
+    576
+   ],
+   "opaque_mismatch": {
+    "before_unlit": 0,
+    "after_unlit": 0,
+    "before_lit": 0,
+    "after_lit": 0
+   },
+   "stray_px_in_background": {
+    "before_unlit": 0,
+    "after_unlit": 0,
+    "before_lit": 0,
+    "after_lit": 0
+   },
+   "background": [
+    216,
+    216,
+    216,
+    255
+   ],
+   "alpha_not_255": 0
+  },
+  "QA_10prime": true
+ },
+ "sheet_B": {
+  "result": "PASS",
+  "strict": {
+   "size": [
+    512,
+    576
+   ],
+   "opaque_mismatch": {
+    "before_unlit": 0,
+    "after_unlit": 0,
+    "before_lit": 0,
+    "after_lit": 0
+   },
+   "stray_px_in_background": {
+    "before_unlit": 0,
+    "after_unlit": 0,
+    "before_lit": 0,
+    "after_lit": 0
+   },
+   "background": [
+    216,
+    216,
+    216,
+    255
+   ],
+   "alpha_not_255": 0
+  }
+ },
+ "manual_for_artistic_review": [
+  {
+   "id": "M1 (D1e)",
+   "check": "ChatGPT at 75% and 100%: the body y12-16 (13 px wide for 5 rows) no longer reads as a box",
+   "result": "MANUAL"
+  },
+  {
+   "id": "M2 (G1)",
+   "check": "ChatGPT: real brightness of the lit glass (G1 px reported) at 75% ON on light / dark / cave",
+   "result": "MANUAL"
+  },
+  {
+   "id": "M3 (route M)",
+   "check": "ChatGPT: the light right glass edge next to dark copper reads as a reflection, not reversed light - 75% OFF/ON x light/dark/cave",
+   "result": "MANUAL"
+  },
+  {
+   "id": "M4 (sheets)",
+   "check": "sheet A (fixed QA name, fix1 -> new) and sheet B (fix2 -> new) carry readable labels in the top bands; CODEX_STATUS says which is which; the sheet background contrasts with the plum outline #3A1E3F (checked by eye - this script does not check it)",
+   "result": "MANUAL"
+  }
+ ],
+ "report": {
+  "width_y9_21": [
+   9,
+   11,
+   11,
+   13,
+   13,
+   13,
+   13,
+   13,
+   11,
+   11,
+   11,
+   11,
+   9
+  ],
+  "route": {
+   "route": "M",
+   "signature": {
+    "frame_left": [
+     "#915B49"
+    ],
+    "frame_right": [
+     "#67413A"
+    ],
+    "rib_left": [
+     "#BB7A57"
+    ],
+    "rib_right": [
+     "#915B49"
+    ]
+   }
+  },
+  "L_by_row": {
+   "10": {
+    "frame_left": null,
+    "frame_right": null,
+    "rib_x14": null,
+    "rib_x18": null,
+    "copper_left_L": 53.98,
+    "copper_right_L": 34.86,
+    "status": "OK"
+   },
+   "11": {
+    "frame_left": null,
+    "frame_right": null,
+    "rib_x14": null,
+    "rib_x18": null,
+    "copper_left_L": 47.47,
+    "copper_right_L": 34.86,
+    "status": "OK"
+   },
+   "12": {
+    "frame_left": 44.21,
+    "frame_right": 31.74,
+    "rib_x14": 57.24,
+    "rib_x18": 44.21,
+    "copper_left_L": 50.73,
+    "copper_right_L": 37.97,
+    "status": "OK"
+   },
+   "13": {
+    "frame_left": 44.21,
+    "frame_right": 31.74,
+    "rib_x14": 57.24,
+    "rib_x18": 44.21,
+    "copper_left_L": 50.73,
+    "copper_right_L": 37.97,
+    "status": "OK"
+   },
+   "14": {
+    "frame_left": 44.21,
+    "frame_right": 31.74,
+    "rib_x14": 57.24,
+    "rib_x18": 44.21,
+    "copper_left_L": 50.73,
+    "copper_right_L": 37.97,
+    "status": "OK"
+   },
+   "15": {
+    "frame_left": 44.21,
+    "frame_right": 31.74,
+    "rib_x14": 57.24,
+    "rib_x18": 44.21,
+    "copper_left_L": 50.73,
+    "copper_right_L": 37.97,
+    "status": "OK"
+   },
+   "16": {
+    "frame_left": 44.21,
+    "frame_right": 31.74,
+    "rib_x14": 57.24,
+    "rib_x18": 44.21,
+    "copper_left_L": 50.73,
+    "copper_right_L": 37.97,
+    "status": "OK"
+   },
+   "17": {
+    "frame_left": 44.21,
+    "frame_right": 31.74,
+    "rib_x14": 57.24,
+    "rib_x18": 44.21,
+    "copper_left_L": 50.73,
+    "copper_right_L": 37.97,
+    "status": "OK"
+   },
+   "18": {
+    "frame_left": 44.21,
+    "frame_right": 31.74,
+    "rib_x14": 57.24,
+    "rib_x18": 44.21,
+    "copper_left_L": 50.73,
+    "copper_right_L": 37.97,
+    "status": "OK"
+   },
+   "19": {
+    "frame_left": null,
+    "frame_right": null,
+    "rib_x14": null,
+    "rib_x18": null,
+    "copper_left_L": 47.47,
+    "copper_right_L": 31.74,
+    "status": "OK"
+   },
+   "20": {
+    "frame_left": null,
+    "frame_right": null,
+    "rib_x14": null,
+    "rib_x18": null,
+    "copper_left_L": 41.09,
+    "copper_right_L": 31.74,
+    "status": "OK"
+   }
+  }
+ },
+ "margins": {
+  "G3_max_per_dir": {
+   "S": 6,
+   "SE": 6,
+   "E": 8,
+   "NE": 4,
+   "NW": 4,
+   "W": 8,
+   "SW": 6
+  },
+  "G3_margin_to_10": 2,
+  "8c_unlit_min (QA, >=10)": 14.5847,
+  "8c_lit_min (QA, >=10)": 19.1061,
+  "D4b_unlit_min (>=14)": 14.58,
+  "C2_glass_min_unlit_lit (>=15)": [
+   16.38,
+   19.11
+  ],
+  "C2_crystal_min_unlit_lit (>=15)": [
+   18.23,
+   32.26
+  ],
+  "V5a_min (>=20)": 23.07,
+  "V5b_min (>=15)": 15.87,
+  "G1_glass_light_px (report only)": 37,
+  "G1_fix2": 41
+ },
+ "errors": [],
+ "rule": "Design Preflight is not QA. A FAIL is reported to the owner; only the owner may approve an exception. Experimental scores never replace it."
+}

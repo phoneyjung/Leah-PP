@@ -1,0 +1,40 @@
+sizes (32, 32, 4) (32, 32, 4)
+alpha values base [np.int64(0), np.int64(255)] light [np.int64(0), np.int64(255)]
+bbox [10, 4, 23, 22] size [13, 18] opaque 168 fix2 opaque 170
+components 4n/8n 1 1
+enclosed holes [(16, 5), (16, 6)] (16,5)a 0 (16,6)a 0
+ring rows4-8 x-range 14 18 width 5
+rows4-8 vs fix1: alpha equal True rgb equal on opaque True
+row9 diffs vs fix1 [(12, 'clear', '#3A1E3F'), (20, 'clear', '#3A1E3F')]
+widths y9-21 fix3 [9, 11, 11, 13, 13, 13, 13, 13, 11, 11, 11, 11, 9]
+widths y9-21 fix2 [9, 11, 13, 11, 13, 13, 13, 13, 11, 11, 11, 11, 11]
+widths y9-21 plan [9, 11, 11, 13, 13, 13, 13, 13, 11, 11, 11, 11, 9]
+colours fix3 ['#3A1E3F', '#3D292C', '#55434C', '#67413A', '#71606A', '#81717E', '#915B49', '#A89AA1', '#BB7A57'] 9
+new vs fix2 [] dropped []
+colour counts {'#3A1E3F': 46, '#BB7A57': 16, '#67413A': 27, '#915B49': 32, '#3D292C': 2, '#71606A': 22, '#55434C': 15, '#A89AA1': 4, '#81717E': 4}
+light colours {'#FFB36B': 37, '#FFF0C9': 8}
+light px over transparent base 0
+glass px 37 crystal px 8
+base under light {'#71606A': 22, '#55434C': 15, '#A89AA1': 4, '#81717E': 4}
+glass 4-touching plum 0 []
+rib px by column {14: 7, 18: 7} rows [12, 13, 14, 15, 16, 17, 18]
+ rib col 14 colours ['#BB7A57'] neighbours x-1/x+1 copper? False
+ rib col 18 colours ['#915B49'] neighbours x-1/x+1 copper? False
+frame left colours ['#915B49'] 7 right ['#67413A'] 7 other copper y12-18 []
+L* left frame mean 44.21 right 31.74; rib14 57.24 rib18 44.21
+seam pairs all 56 min unlit all-shades 14.5834 | bright-copper pairs 56 min unlit 14.5834 lit 19.1052
+V5b glass unlit min dE vs dark 15.8729
+json checks {'bbox': True, 'size': True, 'below': True, 'above': True, 'grip': True, 'hole': True, 'light': True, 'colors': True, 'sha_png': True, 'sha_light': True, 'file': True}
+json keys diff vs fix2 ['sha256', 'light_px']
+x8 shape (256, 256, 4) alpha set [np.int64(255)]
+x8 opaque-block mismatches 0 background colours ['#D8D8D8/a255']
+base px changed vs fix2 25 alpha added 2 removed 4
+light px changed vs fix2 4
+vs plan base diffs []
+vs plan light diffs []
+raw array equal base True light True
+sha plan base b16b6f1cc4a640d8 light d0a367a8b51ef565
+c2-held-lantern_L0-S-trial-fix2-compare-x8.png (576, 512, 4) alpha [np.int64(255)] panel mismatches {'bu': 0, 'au': 0, 'bl': 0, 'al': 0} panel bg colours ['#D8D8D8'] band colours y0-31 217 y288-319 219
+  dE00 bg vs plum 72.01
+c2-held-lantern_L0-S-trial-fix3-vs-fix2-x8.png (576, 512, 4) alpha [np.int64(255)] panel mismatches {'bu': 0, 'au': 0, 'bl': 0, 'al': 0} panel bg colours ['#D8D8D8'] band colours y0-31 210 y288-319 215
+  dE00 bg vs plum 72.01
