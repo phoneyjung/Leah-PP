@@ -36,7 +36,7 @@
     ]
   ],
   "light_px": {
-    "glass": 41,
+    "glass": 37,
     "crystal": 8
   },
   "colors": [
@@ -56,7 +56,7 @@
     "native_size_example": "qa/g2-5a-r2/r2-grid41.png"
   },
   "sha256": {
-    "png": "b75105d97518b893179b7dbeaf2cbd10f63660cf640c2b3b2bf6b7aa21cd4409",
-    "light": "349ed6efcd204b946d9ba04cf3bfa45060ea809c1d850768c0e77aaa3019388f"
+    "png": "6693413f3cf0e7d4c84b1e9032ae5c4ea7676d72e1a057bab7c052688961e0f2",
+    "light": "e86599ffcab25f03fc86ca774227806f1c506726ebe80657acbc88cfd645b8a5"
   }
 }
