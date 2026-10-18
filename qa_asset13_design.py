@@ -8,7 +8,7 @@
 #   FIX1_DIR = fix1 12948e2 (reference of QA 1.2a) · FIX2_DIR = fix2 ca3d75b (opaque-px limit of D1d, colours of D3d, "before" of sheet B)
 #   pinned by SHA-256 below (read from the committed files): qa_asset13.py, fix1, fix2, the hold anchors json and the 2 sprite sheets G3 uses; any mismatch = PREFLIGHT FAIL
 # exit 0 = PREFLIGHT PASS = references OK + QA 1.2a exit code 0 with exactly the 24 gates, 24/24 PASS, no error, nothing skipped + all 15 D items PASS
-#          + route M (owner-approved) + sheet A and sheet B strict PASS + no error · 1 = FAIL · 2 = usage/setup error
+#          + route M (owner-selected design direction) + sheet A and sheet B strict PASS + no error · 1 = FAIL · 2 = usage/setup error
 # Result words: item = PASS / FAIL · D3c row = OK / REVERSED / N/A · route = M / K / UNCLEAR · items judged by people = MANUAL (never counted as PASS)
 import sys, os, json, math, ast, hashlib, subprocess
 import numpy as np
@@ -31,7 +31,7 @@ REF = {'qa_asset13.py (a2efe77)': QA_SHA,
        'hold anchors json (87bba95 = a2efe77)': '38f16cd4418e13b905b6b8fa53b8c307f09489b1248ef92515c601dc2094acba',
        'G3 sheet c2-pilot-kid4-idleanim.png (1714c65 = a2efe77)': '13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045',
        'G3 sheet c2-pilot-kid4-walkhold.png (fd2a55f = a2efe77)': '3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553'}
-ROUTES = {'M': {'frame_left': ['#915B49'], 'frame_right': ['#67413A'], 'rib_left': ['#BB7A57'], 'rib_right': ['#915B49']},   # owner-approved (spec 10.10)
+ROUTES = {'M': {'frame_left': ['#915B49'], 'frame_right': ['#67413A'], 'rib_left': ['#BB7A57'], 'rib_right': ['#915B49']},   # owner-selected design direction (spec 10.10)
           'K': {'frame_left': ['#BB7A57'], 'frame_right': ['#915B49'], 'rib_left': ['#BB7A57'], 'rib_right': ['#915B49']}}   # backup, NOT approved
 APPROVED_ROUTE = 'M'
 PLUM = (0x3A, 0x1E, 0x3F); COPPER = [(0x3D, 0x29, 0x2C), (0x67, 0x41, 0x3A), (0x91, 0x5B, 0x49), (0xBB, 0x7A, 0x57)]
@@ -253,7 +253,7 @@ def main(argv):
     qa10_ok, _ = qa_check(qa, "10'")
     rt = (rep.get('route') or {}).get('route')
     route_ok = rt == APPROVED_ROUTE
-    route_msg = {'M': 'route M (owner-approved)', 'K': 'ROUTE K = backup, NOT approved by the owner -> FAIL', 'UNCLEAR': 'ROUTE UNCLEAR -> needs owner review, no automatic PASS'}.get(rt, 'route not evaluated -> FAIL')
+    route_msg = {'M': 'route M (owner-selected design direction)', 'K': 'ROUTE K = backup, NOT approved by the owner -> FAIL', 'UNCLEAR': 'ROUTE UNCLEAR -> needs owner review, no automatic PASS'}.get(rt, 'route not evaluated -> FAIL')
     pre = refs_ok and p0 and all(i['result'] == 'PASS' for i in items) and route_ok and sa[0] and qa10_ok and sb[0] and not errors
     R = {'preflight': 'PASS' if pre else 'FAIL', 'references': refs, 'qa_1_2a': {**qa_info, 'all_24_pass_exit0': p0},
          'items': items, 'route': {'result': 'PASS' if route_ok else 'FAIL', 'value': route_msg, 'signature': (rep.get('route') or {}).get('signature')},
