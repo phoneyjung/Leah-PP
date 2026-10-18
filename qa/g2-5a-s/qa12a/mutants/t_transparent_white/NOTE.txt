@@ -1,0 +1,1 @@
+transparent px stored as (255,255,255,0) - visually identical

@@ -1,0 +1,1 @@
+whole lantern shifted +9 x (touches x=31)

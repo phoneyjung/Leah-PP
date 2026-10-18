@@ -1,0 +1,1 @@
+crystal shifted down 1 px (rows 14-17), bottom touches row 18 frame

@@ -9,6 +9,18 @@ from PIL import Image
 
 D, ANCH, OUT = sys.argv[1], sys.argv[2], sys.argv[3]
 V12 = len(sys.argv) > 4 and sys.argv[4] == '1.2'; V11 = len(sys.argv) > 4 and sys.argv[4] in ('1.1', '1.2'); BEFORE = sys.argv[5] if len(sys.argv) > 5 else None
+R0_ERRORS = []
+EXPECTED_V12 = ['1a', '1b', '1c', '1d', '2', '3', '4', '5', '6', '6b', '7a', '8c', '8d', "10'", 'C1', 'C3', 'C2', 'C2b', 'C4a', 'C4b', 'G2', 'G3', 'V5a', 'V5b']
+def finish_v12(R, out_path, err=None):   # fill every 1.2 gate that was not evaluated as FAIL, write json, print totals
+    if err: R0_ERRORS.append(err)
+    done = {c['check'].split(' ')[0] for c in R['checks']}
+    for gid in EXPECTED_V12:
+        if gid not in done: R['checks'].append({'check': gid + ' NOT EVALUATED (error or missing input) -> FAIL', 'pass': False, 'value': R0_ERRORS[-1] if R0_ERRORS else 'not reached'})
+    R['errors'] = R0_ERRORS
+    json.dump(R, open(out_path, 'w'), indent=1, ensure_ascii=False, default=str)
+    for c in R['checks']: print(('PASS ' if c['pass'] else 'FAIL ') + c['check'] + ' :: ' + json.dumps(c['value'], ensure_ascii=False, default=str)[:300])
+    print('TOTAL %d/%d PASS' % (sum(c['pass'] for c in R['checks']), len(R['checks'])) + ('  · ERRORS: %s' % R0_ERRORS if R0_ERRORS else ''))
+if V12 and not BEFORE: sys.exit('ERROR: mode 1.2 needs FIX1_DIR (fix1 12948e2) as the 5th argument - G2, G3 and 10\' cannot run without it')
 BASE = 'c2-held-lantern_L0-S-trial'
 GRIP = (16, 6)
 PLUM = (0x3A, 0x1E, 0x3F); COPPER = [(0x3D, 0x29, 0x2C), (0x67, 0x41, 0x3A), (0x91, 0x5B, 0x49), (0xBB, 0x7A, 0x57)]
@@ -39,6 +51,8 @@ def de00(a, b):
 def hexc(c): return '#%02X%02X%02X' % tuple(int(v) for v in c[:3])
 
 R = {'checks': []}
+if V12:   # an uncaught error anywhere still reports all 24 gates (missing ones = FAIL) instead of crashing silently
+    sys.excepthook = lambda t, v, tb: (finish_v12(R, OUT, '%s: %s' % (t.__name__, v)), sys.exit(1))
 def ok(name, cond, val): R['checks'].append({'check': name, 'pass': bool(cond), 'value': val})
 
 paths = {k: os.path.join(D, BASE + s) for k, s in (('png', '.png'), ('light', '-light.png'), ('json', '.json'), ('x8', '-x8.png'))}
@@ -76,13 +90,15 @@ while st:
         yy, xx = cy + dy, cx + dx
         if 0 <= yy < 32 and 0 <= xx < 32 and not op[yy, xx] and not out[yy, xx]: out[yy, xx] = True; st.append((yy, xx))
 holes = [(int(x), int(y)) for y, x in zip(*np.nonzero(~op & ~out))]
+body_holes = [p for p in holes if p[1] > 9] if V12 else []
+if V12: holes = [p for p in holes if p[1] <= 9]   # 1.2: the grip hole is the ring hole (rows <= 9); enclosed holes in the body are reported, not averaged in
 hc = (float(np.mean([p[0] for p in holes])), float(np.mean([p[1] for p in holes]))) if holes else None
 ring_rows = range(bb[1], (max(p[1] for p in holes) + 2) if holes else bb[1] + 5)
 ring_w = max(int(np.nonzero(op[y])[0].max() - np.nonzero(op[y])[0].min() + 1) for y in ring_rows if op[y].any())
-ok('2 size: w 11-13, h 17-18, below grip <= 15, above <= 3, ring <= 5', 11 <= w <= 13 and 17 <= h <= 18 and below <= 15 and above <= 3 and ring_w <= 5,
+ok('2 size: w 11-13, h 17-18, below grip <= 15, above <= 3, ring <= 5' + (' + 1.2: bbox exactly [10,4,23,22]' if V12 else ''), 11 <= w <= 13 and 17 <= h <= 18 and below <= 15 and above <= 3 and ring_w <= 5 and (bb == [10, 4, 23, 22] if V12 else True),
    {'bbox': bb, 'w': w, 'h': h, 'below_grip': below, 'above_grip': above, 'ring_w': ring_w})
 ok('3 ring hole hollow, centre within 0.5 px per axis of [16,6], contains (16,6)', bool(holes) and abs(hc[0] - 16) <= 0.5 and abs(hc[1] - 6) <= 0.5 and (16, 6) in holes,
-   {'hole_px': holes, 'centre': hc})
+   {'hole_px': holes, 'centre': hc, 'body_holes(report)': body_holes})
 cols = collections.Counter(tuple(int(v) for v in p[:3]) for p in a[op])
 mind = lambda ref: min(de00(c, ref) for c in cols)
 metal = [c for c in cols if c in COPPER]
@@ -106,13 +122,28 @@ sha = lambda p: hashlib.sha256(open(p, 'rb').read()).hexdigest()
 jok = (J.get('grip') == [16, 6] and J.get('bbox_xyxy_exclusive') == bb and J.get('size') == [w, h] and J.get('below_grip') == below and J.get('above_grip') == above
        and sorted(map(tuple, J.get('ring_hole_px', []))) == sorted(holes) and J.get('light_px') == {'glass': n_glass, 'crystal': n_crys}
        and sorted(J.get('colors', [])) == sorted(hexc(c) for c in cols) and J.get('sha256', {}).get('png') == sha(paths['png']) and J.get('sha256', {}).get('light') == sha(paths['light']))
-ok('6 json matches the images (bbox, size, grip, hole, light counts, colours, sha256)', jok, {'json_bbox': J.get('bbox_xyxy_exclusive'), 'json_colors': len(J.get('colors', []))})
+KEYS4 = ['schema', 'set', 'part', 'file', 'light_file', 'cell', 'grip', 'grip_definition', 'bbox_xyxy_exclusive', 'size', 'below_grip', 'above_grip', 'ring_hole_px', 'light_px', 'colors', 'references', 'sha256']
+missing = [k for k in KEYS4 if k not in J] if V12 else []
+ok('6 json matches the images (bbox, size, grip, hole, light counts, colours, sha256)' + (' + 1.2: all section-4 keys present' if V12 else ''), jok and not missing, {'json_bbox': J.get('bbox_xyxy_exclusive'), 'json_colors': len(J.get('colors', [])), 'missing_keys': missing})
 # x8 preview = the base image, nearest x8 (check opaque pixel colours at cell centres)
 x = np.array(x8.convert('RGBA')).astype(int); mism = 0
 for y in range(32):
     for xx in range(32):
         if op[y, xx] and tuple(x[y * 8 + 4, xx * 8 + 4, :3]) != tuple(a[y, xx, :3]): mism += 1
-ok('6b x8 preview shows the same pixels (opaque centres)', mism == 0, mism)
+if V12:   # 1.2: all 64 px of every 8x8 block = the sprite colour (opaque cells) or one plain background colour (transparent cells)
+    full = {'bad_px': -1, 'background': None}
+    if x.shape[:2] == (256, 256):
+        tb = [tuple(v) for y in range(32) for xx in range(32) if not op[y, xx] for v in x[y * 8:y * 8 + 8, xx * 8:xx * 8 + 8].reshape(-1, 4)]
+        bgc1 = collections.Counter(tb).most_common(1)[0][0] if tb else None; bad = 0
+        for y in range(32):
+            for xx in range(32):
+                blk_ = x[y * 8:y * 8 + 8, xx * 8:xx * 8 + 8].reshape(-1, 4)
+                ref_ = (tuple(a[y, xx, :3]) + (255,)) if op[y, xx] else bgc1
+                bad += sum(1 for v in blk_ if (tuple(v[:3]) + (255,) if op[y, xx] and v[3] == 255 else tuple(v)) != ref_)
+        full = {'bad_px': int(bad), 'background': list(bgc1) if bgc1 else None}
+    ok('6b x8 preview: 1.2 = every px of every 8x8 block equals the sprite colour or the single background colour', mism == 0 and full['bad_px'] == 0, {'centre_mismatch': mism, **full})
+else:
+    ok('6b x8 preview shows the same pixels (opaque centres)', mism == 0, mism)
 # bottom row in the hand: drawn lantern bottom = anchor y - grip y + bottom row (D-EASE-STEP keeps the drawn position inside the targets' range)
 A = json.load(open(ANCH)); bot = {}
 for d in ('S', 'SE', 'E', 'NE', 'NW', 'W', 'SW'):
@@ -126,7 +157,7 @@ if V11:   # spec 13 v1.1 section 9
         for xx in range(32):
             cur = cur + 1 if op[y, xx] and tuple(a[y, xx, :3]) in pal else 0; best = max(best, cur)
         return best
-    gl_rows = sorted(set(int(y) for y in np.nonzero(lop)[0])); gtop = gl_rows[0]
+    gl_rows = sorted(set(int(y) for y in np.nonzero(lop)[0])); gtop = gl_rows[0] if gl_rows else 1
     above_rows = {y: runs(y, COPPER) for y in range(bb[1], gtop)}
     if not V12: ok('8a cap rim: row directly above the glass has >= 7 adjacent copper px', runs(gtop - 1, COPPER) >= 7,
        {'glass_top_row': gtop, 'row': gtop - 1, 'run_copper4': runs(gtop - 1, COPPER), 'run_bright3': runs(gtop - 1, BRIGHT), 'all_rows_above': above_rows})
@@ -147,8 +178,8 @@ if V11:   # spec 13 v1.1 section 9
     cm = np.zeros((32, 32), bool)
     for y, xx in zip(*np.nonzero(lop)):
         if tuple(int(v) for v in l[y, xx, :3]) == CRYS_L: cm[y, xx] = True
-    cy, cx = np.nonzero(cm); cw = int(cx.max() - cx.min() + 1); chh = int(cy.max() - cy.min() + 1)
-    widths = [int(cm[y].sum()) for y in range(int(cy.min()), int(cy.max()) + 1)]
+    cy, cx = np.nonzero(cm); cw = int(cx.max() - cx.min() + 1) if len(cx) else 0; chh = int(cy.max() - cy.min() + 1) if len(cy) else 0
+    widths = [int(cm[y].sum()) for y in range(int(cy.min()), int(cy.max()) + 1)] if len(cy) else []
     contig = all(cm[y].sum() == 0 or (np.nonzero(cm[y])[0].max() - np.nonzero(cm[y])[0].min() + 1 == cm[y].sum()) for y in range(32))
     tones = collections.defaultdict(list)
     for y, xx in zip(cy, cx): tones[tuple(int(v) for v in a[y, xx, :3])].append((int(xx), int(y)))
@@ -186,84 +217,94 @@ if V11:   # spec 13 v1.1 section 9
         else:
             ok(('10\' ' if V12 else '10 ') + 'compare-x8 sheet present', False, cmp_p)
 if V12:   # spec 13 v1.2 section 10 (B2) - criteria agreed with ChatGPT 17 Oct (draft rev 2b), owner locked ~23:5x
-    N4 = ((1, 0), (-1, 0), (0, 1), (0, -1)); PLc = PLUM; BG_DARK = (30, 27, 46)
-    colA = lambda x, y: tuple(int(v) for v in a[y, x, :3]); lcolA = lambda x, y: tuple(int(v) for v in l[y, x, :3])
-    iscop = lambda x, y: bool(op[y, x]) and colA(x, y) in COPPER
-    cryM = lop & np.all(l[..., :3] == CRYS_L, axis=2); glaM = lop & np.all(l[..., :3] == GLASS_L, axis=2)
-    ok('C1 cap: rows 10 and 11 each have >= 9 adjacent copper px', runs(10, COPPER) >= 9 and runs(11, COPPER) >= 9, {10: runs(10, COPPER), 11: runs(11, COPPER)})
-    ok('C3 base: rows 19 and 20 each have >= 9 adjacent copper px (bottom row stays 21)', runs(19, COPPER) >= 9 and runs(20, COPPER) >= 9 and bb[3] == 22, {19: runs(19, COPPER), 20: runs(20, COPPER), 'bottom_row': bb[3] - 1})
-    ccx = float(np.nonzero(cryM)[1].mean()) if cryM.any() else 16.0
-    mat = lambda x, y: bool(op[y, x]) and colA(x, y) not in COPPER and colA(x, y) != PLc   # glass/crystal material, not metal/outline
-    rib = np.zeros((32, 32), bool)
-    for y in range(1, 31):
-        for x in range(1, 31):
-            if not iscop(x, y): continue
-            so = -1 if x < ccx else 1
-            if glaM[y, x + so] and mat(x + so, y) and lop[y, x - so] and mat(x - so, y): rib[y, x] = True
-    rcols = sorted(set(int(x) for x in np.nonzero(rib)[1]))
-    def vrun(x):
-        b_ = c_ = 0
-        for y in range(32): c_ = c_ + 1 if rib[y, x] else 0; b_ = max(b_, c_)
-        return b_
-    RL = [x for x in rcols if x < ccx]; RR = [x for x in rcols if x > ccx]
-    rp = []
-    for y, x in zip(*np.nonzero(rib)):
-        for dx, dy in N4:
-            if lop[y + dy, x + dx]: rp.append(('crystal' if cryM[y + dy, x + dx] else 'glass', de00(colA(x + dx, y + dy), colA(x, y)), de00(lcolA(x + dx, y + dy), colA(x, y))))
-    mn = lambda kind, i: round(min(p[i] for p in rp if kind in (None, p[0])), 2) if any(kind in (None, p[0]) for p in rp) else None
-    ok('C2 ribs: exactly 1 rib column left + 1 right of the crystal, 1 px wide; outer 4-nbr = glass (light #FFB36B and base not metal/plum), inner 4-nbr = glass/crystal (light and base not metal); each >= 4 px vertical run; dE00 >= 15 vs every touching glass/crystal px, unlit and lit',
-       bool(len(RL) == 1 and len(RR) == 1 and vrun(RL[0]) >= 4 and vrun(RR[0]) >= 4 and rp and mn(None, 1) >= 15 and mn(None, 2) >= 15),
-       {'rib_cols_run': {x: vrun(x) for x in rcols}, 'pairs': len(rp), 'glass_min_unlit_lit': [mn('glass', 1), mn('glass', 2)], 'crystal_min_unlit_lit': [mn('crystal', 1), mn('crystal', 2)]})
-    def gw(y, x0, step):
-        n_ = 0; x = x0 + step
-        while 0 <= x < 32 and glaM[y, x]: n_ += 1; x += step
-        return n_
-    rows2 = sum(1 for y in range(32) if RL and RR and rib[y, RL[0]] and rib[y, RR[0]] and gw(y, RL[0], -1) >= 2 and gw(y, RR[0], 1) >= 2)
-    ok('C2b layout B (owner choice): glass outside each rib >= 2 px wide on both sides in >= 4 rib rows (= ribs x14/x18 in this frame)', rows2 >= 4, {'rows': rows2, 'rib_cols': rcols})
-    ys_, xs_ = np.nonzero(cryM)
-    ab = all(glaM[int(ys_.min()) - 1, x] for x in xs_[ys_ == ys_.min()]); be = all(glaM[int(ys_.max()) + 1, x] for x in xs_[ys_ == ys_.max()])
-    fc = rv = lc_ = rc_ = 0
-    for y, x in zip(ys_, xs_):
-        for dx, dy in N4:
-            xx, yy = x + dx, y + dy
-            if op[yy, xx] and not lop[yy, xx]:
-                if rib[yy, xx]:
-                    if dy: rv += 1
-                    elif dx < 0: lc_ += 1
-                    else: rc_ += 1
-                else: fc += 1
-    ok('C4a crystal: glass directly above its top px and below its bottom px; 0 contact with cap/base/outer frame', ab and be and fc == 0,
-       {'rows': [int(ys_.min()), int(ys_.max())], 'glass_above': bool(ab), 'glass_below': bool(be), 'frame_contact': fc})
-    ok('C4b crystal-rib contact allowed on the sides only (not required): top/bottom contact 0', rv == 0, {'left_side_contact': lc_, 'right_side_contact': rc_, 'top_bottom_contact': rv})
-    if BEFORE:
-        f0 = np.array(Image.open(os.path.join(BEFORE, BASE + '.png')).convert('RGBA')).astype(int)
-        same48 = bool((a[4:9] == f0[4:9]).all()); r9 = [int(x) for x in range(32) if (a[9, x] != f0[9, x]).any()]
-        ok('G2 rows 4-8 identical to fix1; row 9 may only gain plum outline px', same48 and all(colA(x, 9) == PLc and f0[9, x, 3] == 0 for x in r9),
-           {'rows4_8_identical': same48, 'row9_changed_x': r9})
-        # G3 body px covered by the lantern in the hand (fist excluded), every hold frame, 7 dirs: increase vs fix1 <= 10
-        adir = os.path.dirname(os.path.abspath(ANCH)); D8 = ['S', 'SE', 'E', 'NE', 'N', 'NW', 'W', 'SW']
-        sheets = {k: np.array(Image.open(os.path.join(adir, A['files'][k])).convert('RGBA'))[..., 3] > 0 for k in ('idle_hold', 'walk_hold')}
-        def cover(lan_alpha):
-            ly_, lx_ = np.nonzero(lan_alpha); out_ = {}
-            for k in ('idle_hold', 'walk_hold'):
-                for di in ('S', 'SE', 'E', 'NE', 'NW', 'W', 'SW'):
-                    r_ = D8.index(di)
-                    for fi, fr in enumerate(A[k][di]):
-                        ax, ay = fr['anchor']; fist = {tuple(p) for p in fr['fist']}; cell = sheets[k][r_ * 96:(r_ + 1) * 96, fi * 96:(fi + 1) * 96]
-                        n_ = sum(1 for y, x in zip(ly_, lx_) if 0 <= ay - GRIP[1] + y < 96 and 0 <= ax - GRIP[0] + x < 96 and cell[ay - GRIP[1] + y, ax - GRIP[0] + x] and (ax - GRIP[0] + x, ay - GRIP[1] + y) not in fist)
-                        out_[di] = max(out_.get(di, 0), n_)
-            return out_
-        cn, cf = cover(op), cover(f0[..., 3] > 0); inc = {k: cn[k] - cf[k] for k in cn}
-        ok('G3 in hand: body px covered by the lantern (fist excluded) increase vs fix1 <= 10 in every direction', max(inc.values()) <= 10, {'increase': inc, 'now': cn, 'fix1': cf})
-    outer_pl = {(x, y) for y, x in zip(*np.nonzero(op)) if colA(x, y) == PLc and any(not op[y + dy, x + dx] for dx, dy in N4)}
-    rim = [(int(x), int(y)) for y, x in zip(*np.nonzero(op)) if y >= 10 and colA(x, y) != PLc and any((x + dx, y + dy) in outer_pl for dx, dy in N4)]
-    weak = [(x, y) for x, y in rim if de00(colA(x, y), BG_DARK) < 20]
-    ok('V5a unlit edge: every inner-rim px (rows 10-21, just inside the plum outline) dE00 >= 20 vs the pilot dark bg #1E1B2E', not weak, {'rim_px': len(rim), 'weak': weak})
-    gweak = sorted({hexc(colA(x, y)) for y, x in zip(*np.nonzero(glaM)) if de00(colA(x, y), BG_DARK) < 15})
-    ok('V5b unlit glass: every glass px (unlit colour) dE00 >= 15 vs #1E1B2E', not gweak, {'glass_px': int(glaM.sum()), 'weak_colours': gweak})
-    R['info'] = {'G1_glass_light_px (report only, not a gate)': int(glaM.sum()), 'G1_fix1': 42}
+  try:
+      N4 = ((1, 0), (-1, 0), (0, 1), (0, -1)); PLc = PLUM; BG_DARK = (30, 27, 46)
+      colA = lambda x, y: tuple(int(v) for v in a[y, x, :3]); lcolA = lambda x, y: tuple(int(v) for v in l[y, x, :3])
+      inb = lambda x, y: 0 <= x < 32 and 0 <= y < 32
+      iscop = lambda x, y: inb(x, y) and bool(op[y, x]) and colA(x, y) in COPPER
+      cryM = lop & np.all(l[..., :3] == CRYS_L, axis=2); glaM = lop & np.all(l[..., :3] == GLASS_L, axis=2)
+      ok('C1 cap: rows 10 and 11 each have >= 9 adjacent copper px', runs(10, COPPER) >= 9 and runs(11, COPPER) >= 9, {10: runs(10, COPPER), 11: runs(11, COPPER)})
+      ok('C3 base: rows 19 and 20 each have >= 9 adjacent copper px (bottom row stays 21)', runs(19, COPPER) >= 9 and runs(20, COPPER) >= 9 and bb[3] == 22, {19: runs(19, COPPER), 20: runs(20, COPPER), 'bottom_row': bb[3] - 1})
+      ccx = float(np.nonzero(cryM)[1].mean()) if cryM.any() else 16.0
+      mat = lambda x, y: inb(x, y) and bool(op[y, x]) and colA(x, y) not in COPPER and colA(x, y) != PLc   # glass/crystal material, not metal/outline
+      rib = np.zeros((32, 32), bool)
+      for y in range(1, 31):
+          for x in range(1, 31):
+              if not iscop(x, y): continue
+              so = -1 if x < ccx else 1
+              if glaM[y, x + so] and mat(x + so, y) and lop[y, x - so] and mat(x - so, y): rib[y, x] = True
+      rcols = sorted(set(int(x) for x in np.nonzero(rib)[1]))
+      def vrun(x):
+          b_ = c_ = 0
+          for y in range(32): c_ = c_ + 1 if rib[y, x] else 0; b_ = max(b_, c_)
+          return b_
+      RL = [x for x in rcols if x < ccx]; RR = [x for x in rcols if x > ccx]
+      rp = []
+      for y, x in zip(*np.nonzero(rib)):
+          for dx, dy in N4:
+              if lop[y + dy, x + dx]: rp.append(('crystal' if cryM[y + dy, x + dx] else 'glass', de00(colA(x + dx, y + dy), colA(x, y)), de00(lcolA(x + dx, y + dy), colA(x, y))))
+      mn = lambda kind, i: round(min(p[i] for p in rp if kind in (None, p[0])), 2) if any(kind in (None, p[0]) for p in rp) else None
+      ok('C2 ribs: exactly 1 rib column left + 1 right of the crystal, 1 px wide; outer 4-nbr = glass (light #FFB36B and base not metal/plum), inner 4-nbr = glass/crystal (light and base not metal); each >= 4 px vertical run; dE00 >= 15 vs every touching glass/crystal px, unlit and lit',
+         bool(len(rcols) == 2 and len(RL) == 1 and len(RR) == 1 and vrun(RL[0]) >= 4 and vrun(RR[0]) >= 4 and rp and mn(None, 1) >= 15 and mn(None, 2) >= 15),
+         {'rib_cols_run': {x: vrun(x) for x in rcols}, 'pairs': len(rp), 'glass_min_unlit_lit': [mn('glass', 1), mn('glass', 2)], 'crystal_min_unlit_lit': [mn('crystal', 1), mn('crystal', 2)]})
+      def gw(y, x0, step):
+          n_ = 0; x = x0 + step
+          while 0 <= x < 32 and glaM[y, x]: n_ += 1; x += step
+          return n_
+      rows2 = sum(1 for y in range(32) if RL and RR and rib[y, RL[0]] and rib[y, RR[0]] and gw(y, RL[0], -1) >= 2 and gw(y, RR[0], 1) >= 2)
+      ok('C2b layout B (owner choice): rib columns exactly x14 and x18, glass outside each rib >= 2 px wide on both sides in >= 4 rib rows', rows2 >= 4 and rcols == [14, 18], {'rows': rows2, 'rib_cols': rcols})
+      ys_, xs_ = np.nonzero(cryM)
+      if not len(ys_): raise ValueError('no crystal px in the light layer')
+      ab = all(glaM[int(ys_.min()) - 1, x] for x in xs_[ys_ == ys_.min()]); be = all(glaM[int(ys_.max()) + 1, x] for x in xs_[ys_ == ys_.max()])
+      fc = rv = lc_ = rc_ = 0
+      for y, x in zip(ys_, xs_):
+          for dx, dy in N4:
+              xx, yy = x + dx, y + dy
+              if inb(xx, yy) and op[yy, xx] and not lop[yy, xx]:
+                  if rib[yy, xx]:
+                      if dy: rv += 1
+                      elif dx < 0: lc_ += 1
+                      else: rc_ += 1
+                  else: fc += 1
+      ok('C4a crystal: glass directly above its top px and below its bottom px; 0 contact with cap/base/outer frame', ab and be and fc == 0,
+         {'rows': [int(ys_.min()), int(ys_.max())], 'glass_above': bool(ab), 'glass_below': bool(be), 'frame_contact': fc})
+      ok('C4b crystal-rib contact allowed on the sides only (not required): top/bottom contact 0', rv == 0, {'left_side_contact': lc_, 'right_side_contact': rc_, 'top_bottom_contact': rv})
+      if BEFORE:
+          f0 = np.array(Image.open(os.path.join(BEFORE, BASE + '.png')).convert('RGBA')).astype(int)
+          vis = lambda img, y, x: (0,) if img[y, x, 3] == 0 else tuple(int(v) for v in img[y, x])   # compare what is visible: transparent px are equal whatever their RGB
+          same48 = all(vis(a, y, x) == vis(f0, y, x) for y in range(4, 9) for x in range(32)); r9 = [int(x) for x in range(32) if vis(a, 9, x) != vis(f0, 9, x)]
+          ok('G2 rows 4-8 identical to fix1; row 9 may only gain plum outline px', same48 and all(colA(x, 9) == PLc and f0[9, x, 3] == 0 for x in r9),
+             {'rows4_8_identical': same48, 'row9_changed_x': r9})
+          # G3 body px covered by the lantern in the hand (fist excluded), every hold frame, 7 dirs: increase vs fix1 <= 10
+          adir = os.path.dirname(os.path.abspath(ANCH)); D8 = ['S', 'SE', 'E', 'NE', 'N', 'NW', 'W', 'SW']
+          sheets = {k: np.array(Image.open(os.path.join(adir, A['files'][k])).convert('RGBA'))[..., 3] > 0 for k in ('idle_hold', 'walk_hold')}
+          def cover(lan_alpha):
+              ly_, lx_ = np.nonzero(lan_alpha); out_ = {}   # per (sheet, dir, frame)
+              for k in ('idle_hold', 'walk_hold'):
+                  for di in ('S', 'SE', 'E', 'NE', 'NW', 'W', 'SW'):
+                      r_ = D8.index(di)
+                      for fi, fr in enumerate(A[k][di]):
+                          ax, ay = fr['anchor']; fist = {tuple(p) for p in fr['fist']}; cell = sheets[k][r_ * 96:(r_ + 1) * 96, fi * 96:(fi + 1) * 96]
+                          n_ = sum(1 for y, x in zip(ly_, lx_) if 0 <= ay - GRIP[1] + y < 96 and 0 <= ax - GRIP[0] + x < 96 and cell[ay - GRIP[1] + y, ax - GRIP[0] + x] and (ax - GRIP[0] + x, ay - GRIP[1] + y) not in fist)
+                          out_[(k, di, fi)] = n_
+              return out_
+          cn, cf = cover(op), cover(f0[..., 3] > 0); inc = {}
+          for (k, di, fi), v in cn.items(): inc[di] = max(inc.get(di, -99), v - cf[(k, di, fi)])
+          ok('G3 in hand: body px covered by the lantern (fist excluded), frame by frame vs fix1, increase <= 10 in every frame of every direction', max(inc.values()) <= 10, {'max_increase_per_dir': inc})
+      outer_pl = {(x, y) for y, x in zip(*np.nonzero(op)) if colA(x, y) == PLc and any(not inb(x + dx, y + dy) or not op[y + dy, x + dx] for dx, dy in N4)}
+      rim = [(int(x), int(y)) for y, x in zip(*np.nonzero(op)) if y >= 10 and colA(x, y) != PLc and any((x + dx, y + dy) in outer_pl for dx, dy in N4)]
+      weak = [(x, y) for x, y in rim if de00(colA(x, y), BG_DARK) < 20]
+      ok('V5a unlit edge: every inner-rim px (rows 10-21, just inside the plum outline) dE00 >= 20 vs the pilot dark bg #1E1B2E', not weak, {'rim_px': len(rim), 'weak': weak})
+      gweak = sorted({hexc(colA(x, y)) for y, x in zip(*np.nonzero(glaM)) if de00(colA(x, y), BG_DARK) < 15})
+      ok('V5b unlit glass: every glass px (unlit colour) dE00 >= 15 vs #1E1B2E', not gweak, {'glass_px': int(glaM.sum()), 'weak_colours': gweak})
+      R['info'] = {'G1_glass_light_px (report only, not a gate)': int(glaM.sum()), 'G1_fix1': 42}
+  except Exception as e:   # malformed delivery (no crystal, no light, lantern at the image edge ...) -> FAIL, never a crash
+    R0_ERRORS.append('1.2 block: ' + repr(e))
 R['measure'] = {'bbox': bb, 'size': [w, h], 'below_grip': below, 'above_grip': above, 'hole': holes, 'hole_centre': hc, 'ring_w': ring_w, 'colours': {hexc(c): n for c, n in cols.most_common()},
                 'opaque_px': int(op.sum()), 'sha256': {k: sha(p) for k, p in paths.items()}}
-json.dump(R, open(OUT, 'w'), indent=1, ensure_ascii=False)
-for c in R['checks']: print(('PASS ' if c['pass'] else 'FAIL ') + c['check'] + ' :: ' + json.dumps(c['value'], ensure_ascii=False)[:300])
-print('TOTAL %d/%d PASS' % (sum(c['pass'] for c in R['checks']), len(R['checks'])))
+if V12:
+    finish_v12(R, OUT)
+else:
+    json.dump(R, open(OUT, 'w'), indent=1, ensure_ascii=False)
+    for c in R['checks']: print(('PASS ' if c['pass'] else 'FAIL ') + c['check'] + ' :: ' + json.dumps(c['value'], ensure_ascii=False)[:300])
+    print('TOTAL %d/%d PASS' % (sum(c['pass'] for c in R['checks']), len(R['checks'])))

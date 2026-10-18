@@ -1,0 +1,47 @@
+{
+ "grip": [
+  16,
+  6
+ ],
+ "bbox_xyxy_exclusive": [
+  10,
+  4,
+  23,
+  22
+ ],
+ "size": [
+  13,
+  18
+ ],
+ "below_grip": 15,
+ "above_grip": 2,
+ "ring_hole_px": [
+  [
+   16,
+   5
+  ],
+  [
+   16,
+   6
+  ]
+ ],
+ "light_px": {
+  "glass": 24,
+  "crystal": 8
+ },
+ "colors": [
+  "#3A1E3F",
+  "#3D292C",
+  "#55434C",
+  "#67413A",
+  "#71606A",
+  "#81717E",
+  "#915B49",
+  "#A89AA1",
+  "#BB7A57"
+ ],
+ "sha256": {
+  "png": "524cbee91521870a1b5f8c09571b0fc98f5b89b7a30a6b893dad14ee738de019",
+  "light": "5932ed9d12821b53cad157695a76deb5f220ebb50b9e9c7ba182cef3d8b5deb3"
+ }
+}

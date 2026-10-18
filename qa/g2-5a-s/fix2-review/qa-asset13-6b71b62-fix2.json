@@ -1,0 +1,456 @@
+{
+ "checks": [
+  {
+   "check": "1a 4 files present",
+   "pass": true,
+   "value": {
+    "png": true,
+    "light": true,
+    "json": true,
+    "x8": true
+   }
+  },
+  {
+   "check": "1b sizes 32x32 / 32x32 / 256x256",
+   "pass": true,
+   "value": [
+    [
+     32,
+     32
+    ],
+    [
+     32,
+     32
+    ],
+    [
+     256,
+     256
+    ]
+   ]
+  },
+  {
+   "check": "1c alpha only 0/255 (base and light)",
+   "pass": true,
+   "value": {
+    "base": [
+     0,
+     255
+    ],
+    "light": [
+     0,
+     255
+    ]
+   }
+  },
+  {
+   "check": "1d one piece (4-neighbour and 8-neighbour)",
+   "pass": true,
+   "value": {
+    "4n": 1,
+    "8n": 1
+   }
+  },
+  {
+   "check": "2 size: w 11-13, h 17-18, below grip <= 15, above <= 3, ring <= 5",
+   "pass": true,
+   "value": {
+    "bbox": [
+     10,
+     4,
+     23,
+     22
+    ],
+    "w": 13,
+    "h": 18,
+    "below_grip": 15,
+    "above_grip": 2,
+    "ring_w": 5
+   }
+  },
+  {
+   "check": "3 ring hole hollow, centre within 0.5 px per axis of [16,6], contains (16,6)",
+   "pass": true,
+   "value": {
+    "hole_px": [
+     [
+      16,
+      5
+     ],
+     [
+      16,
+      6
+     ]
+    ],
+    "centre": [
+     16.0,
+     5.5
+    ]
+   }
+  },
+  {
+   "check": "4 colours: gold/cyan dE00 >= 10, base vs light colours >= 5, copper vs #FFB36B >= 10, outer edge plum >= 90 %",
+   "pass": true,
+   "value": {
+    "min_dE_gold": 27.37,
+    "min_dE_cyan": 42.21,
+    "min_dE_FFB36B": 19.106,
+    "min_dE_FFF0C9": 29.066,
+    "copper_min_dE_FFB36B": 19.11,
+    "outer_plum": "48/48",
+    "n_colours": 9
+   }
+  },
+  {
+   "check": "5 light layer: only #FFB36B / #FFF0C9, every light px on a glass/crystal base px (not plum, not copper), crystal 6-8 px",
+   "pass": true,
+   "value": {
+    "colours": {
+     "#FFB36B": 41,
+     "#FFF0C9": 8
+    },
+    "on_glass": true,
+    "glass": 41,
+    "crystal": 8,
+    "base_under_light": [
+     "#55434C",
+     "#71606A",
+     "#81717E",
+     "#A89AA1"
+    ]
+   }
+  },
+  {
+   "check": "6 json matches the images (bbox, size, grip, hole, light counts, colours, sha256)",
+   "pass": true,
+   "value": {
+    "json_bbox": [
+     10,
+     4,
+     23,
+     22
+    ],
+    "json_colors": 9
+   }
+  },
+  {
+   "check": "6b x8 preview shows the same pixels (opaque centres)",
+   "pass": true,
+   "value": 0
+  },
+  {
+   "check": "7a lantern bottom row in the hand <= 92 (7 dirs, all 70 frames)",
+   "pass": true,
+   "value": {
+    "S": 91,
+    "SE": 92,
+    "E": 90,
+    "NE": 90,
+    "NW": 92,
+    "W": 90,
+    "SW": 92
+   }
+  },
+  {
+   "check": "8c glass/copper separation: every 4-adjacent pair (light-layer px, bright copper px) dE00 >= 10 unlit and lit",
+   "pass": true,
+   "value": {
+    "pairs": 50,
+    "min_dE_unlit": 10.6067,
+    "min_dE_lit": 19.1061,
+    "worst_unlit": [
+     [
+      [
+       19,
+       12
+      ],
+      [
+       19,
+       11
+      ]
+     ],
+     [
+      [
+       17,
+       18
+      ],
+      [
+       17,
+       19
+      ]
+     ],
+     [
+      [
+       19,
+       18
+      ],
+      [
+       19,
+       19
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "check": "8d crystal diamond: #FFF0C9 6-8 px, 3 wide x 4 tall, rows 1-3-3-1 (each row contiguous), unlit base under it = 2 tones, lighter tone upper-left",
+   "pass": true,
+   "value": {
+    "crystal_px": 8,
+    "w": 3,
+    "h": 4,
+    "row_widths": [
+     1,
+     3,
+     3,
+     1
+    ],
+    "rows_contiguous": true,
+    "tones": {
+     "light": "#A89AA1",
+     "light_px": [
+      [
+       16,
+       14
+      ],
+      [
+       15,
+       15
+      ],
+      [
+       16,
+       15
+      ],
+      [
+       15,
+       16
+      ]
+     ],
+     "dark": "#81717E",
+     "dark_px": [
+      [
+       17,
+       15
+      ],
+      [
+       16,
+       16
+      ],
+      [
+       17,
+       16
+      ],
+      [
+       16,
+       17
+      ]
+     ],
+     "light_centre": [
+      15.5,
+      15.0
+     ],
+     "dark_centre": [
+      16.5,
+      16.0
+     ],
+     "light_upper_left": true
+    }
+   }
+  },
+  {
+   "check": "10' compare-x8 sheet: 512x576, 4 panels = nearest x8 of before/after unlit/lit (opaque px exact)",
+   "pass": true,
+   "value": {
+    "size": [
+     512,
+     576
+    ],
+    "mismatched_px": {
+     "before_unlit": 0,
+     "after_unlit": 0,
+     "before_lit": 0,
+     "after_lit": 0
+    }
+   }
+  },
+  {
+   "check": "C1 cap: rows 10 and 11 each have >= 9 adjacent copper px",
+   "pass": true,
+   "value": {
+    "10": 9,
+    "11": 9
+   }
+  },
+  {
+   "check": "C3 base: rows 19 and 20 each have >= 9 adjacent copper px (bottom row stays 21)",
+   "pass": true,
+   "value": {
+    "19": 9,
+    "20": 9,
+    "bottom_row": 21
+   }
+  },
+  {
+   "check": "C2 ribs: exactly 1 rib column left + 1 right of the crystal, 1 px wide; outer 4-nbr = glass (light #FFB36B and base not metal/plum), inner 4-nbr = glass/crystal (light and base not metal); each >= 4 px vertical run; dE00 >= 15 vs every touching glass/crystal px, unlit and lit",
+   "pass": true,
+   "value": {
+    "rib_cols_run": {
+     "14": 7,
+     "18": 7
+    },
+    "pairs": 28,
+    "glass_min_unlit_lit": [
+     16.38,
+     19.11
+    ],
+    "crystal_min_unlit_lit": [
+     18.23,
+     43.78
+    ]
+   }
+  },
+  {
+   "check": "C2b layout B (owner choice): glass outside each rib >= 2 px wide on both sides in >= 4 rib rows (= ribs x14/x18 in this frame)",
+   "pass": true,
+   "value": {
+    "rows": 7,
+    "rib_cols": [
+     14,
+     18
+    ]
+   }
+  },
+  {
+   "check": "C4a crystal: glass directly above its top px and below its bottom px; 0 contact with cap/base/outer frame",
+   "pass": true,
+   "value": {
+    "rows": [
+     14,
+     17
+    ],
+    "glass_above": true,
+    "glass_below": true,
+    "frame_contact": 0
+   }
+  },
+  {
+   "check": "C4b crystal-rib contact allowed on the sides only (not required): top/bottom contact 0",
+   "pass": true,
+   "value": {
+    "left_side_contact": 2,
+    "right_side_contact": 2,
+    "top_bottom_contact": 0
+   }
+  },
+  {
+   "check": "G2 rows 4-8 identical to fix1; row 9 may only gain plum outline px",
+   "pass": true,
+   "value": {
+    "rows4_8_identical": true,
+    "row9_changed_x": [
+     12,
+     20
+    ]
+   }
+  },
+  {
+   "check": "G3 in hand: body px covered by the lantern (fist excluded) increase vs fix1 <= 10 in every direction",
+   "pass": true,
+   "value": {
+    "increase": {
+     "S": 7,
+     "SE": 7,
+     "E": 10,
+     "NE": 5,
+     "NW": 5,
+     "W": 10,
+     "SW": 6
+    },
+    "now": {
+     "S": 105,
+     "SE": 131,
+     "E": 159,
+     "NE": 121,
+     "NW": 97,
+     "W": 160,
+     "SW": 135
+    },
+    "fix1": {
+     "S": 98,
+     "SE": 124,
+     "E": 149,
+     "NE": 116,
+     "NW": 92,
+     "W": 150,
+     "SW": 129
+    }
+   }
+  },
+  {
+   "check": "V5a unlit edge: every inner-rim px (rows 10-21, just inside the plum outline) dE00 >= 20 vs the pilot dark bg #1E1B2E",
+   "pass": true,
+   "value": {
+    "rim_px": 29,
+    "weak": []
+   }
+  },
+  {
+   "check": "V5b unlit glass: every glass px (unlit colour) dE00 >= 15 vs #1E1B2E",
+   "pass": true,
+   "value": {
+    "glass_px": 41,
+    "weak_colours": []
+   }
+  }
+ ],
+ "info": {
+  "G1_glass_light_px (report only, not a gate)": 41,
+  "G1_fix1": 42
+ },
+ "measure": {
+  "bbox": [
+   10,
+   4,
+   23,
+   22
+  ],
+  "size": [
+   13,
+   18
+  ],
+  "below_grip": 15,
+  "above_grip": 2,
+  "hole": [
+   [
+    16,
+    5
+   ],
+   [
+    16,
+    6
+   ]
+  ],
+  "hole_centre": [
+   16.0,
+   5.5
+  ],
+  "ring_w": 5,
+  "colours": {
+   "#3A1E3F": 50,
+   "#915B49": 30,
+   "#67413A": 28,
+   "#71606A": 22,
+   "#55434C": 19,
+   "#BB7A57": 11,
+   "#A89AA1": 4,
+   "#81717E": 4,
+   "#3D292C": 2
+  },
+  "opaque_px": 170,
+  "sha256": {
+   "png": "b75105d97518b893179b7dbeaf2cbd10f63660cf640c2b3b2bf6b7aa21cd4409",
+   "light": "349ed6efcd204b946d9ba04cf3bfa45060ea809c1d850768c0e77aaa3019388f",
+   "json": "427660dacf7f67bf3d97e16a14dbce3d591397e2ad07f5ff50e93611c516db24",
+   "x8": "5662865c865f5e1b0a8ab438f240a72eeed57f3ea62b2ddbb603f933eea05ae6"
+  }
+ }
+}

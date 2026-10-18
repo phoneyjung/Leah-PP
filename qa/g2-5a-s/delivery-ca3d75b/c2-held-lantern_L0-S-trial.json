@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "set": 13,
+  "part": "S-trial",
+  "file": "c2-held-lantern_L0-S-trial.png",
+  "light_file": "c2-held-lantern_L0-S-trial-light.png",
+  "cell": [
+    32,
+    32
+  ],
+  "grip": [
+    16,
+    6
+  ],
+  "grip_definition": "centre of the hollow ring hole",
+  "bbox_xyxy_exclusive": [
+    10,
+    4,
+    23,
+    22
+  ],
+  "size": [
+    13,
+    18
+  ],
+  "below_grip": 15,
+  "above_grip": 2,
+  "ring_hole_px": [
+    [
+      16,
+      5
+    ],
+    [
+      16,
+      6
+    ]
+  ],
+  "light_px": {
+    "glass": 41,
+    "crystal": 8
+  },
+  "colors": [
+    "#3A1E3F",
+    "#3D292C",
+    "#55434C",
+    "#67413A",
+    "#71606A",
+    "#81717E",
+    "#915B49",
+    "#A89AA1",
+    "#BB7A57"
+  ],
+  "references": {
+    "design": "qa/g2-5a-r1/r1-grid33.png",
+    "size": "qa/g2-5a-r2/2-shape-18.png",
+    "native_size_example": "qa/g2-5a-r2/r2-grid41.png"
+  },
+  "sha256": {
+    "png": "b75105d97518b893179b7dbeaf2cbd10f63660cf640c2b3b2bf6b7aa21cd4409",
+    "light": "349ed6efcd204b946d9ba04cf3bfa45060ea809c1d850768c0e77aaa3019388f"
+  }
+}
