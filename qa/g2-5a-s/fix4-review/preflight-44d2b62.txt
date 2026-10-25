@@ -1,0 +1,39 @@
+DESIGN PREFLIGHT 1.2c · round fix4 · spec 10.11 (v1.2c) · route expected K
+RUN_ID c2b0c1e028674eca8ba68ff76ac89aee (OUT_JSON is the result of this run only if its run_id is the same)
+REFERENCES OK
+QA 1.2a: exit 0 · 24/24 PASS
+PASS D1a  width y9 -> y16 never decreases (every row y9-21 non-empty) :: [9, 11, 11, 13, 13, 13, 13, 13]
+PASS D1b  width y16 -> y21 never increases (every row y9-21 non-empty) :: [13, 11, 11, 11, 11, 9]
+PASS D1c  no pinch row (narrower than both neighbours) in y10-20 (every row y9-21 non-empty) :: {"pinch_rows": [], "empty_rows": []}
+PASS D1d  S3 shape: cap y10-11 width <= 11, body y12-16 width = 13, opaque px <= fix2 :: {"cap_y10_11": [11, 11], "body_y12_16": [13, 13, 13, 13, 13], "opaque_px": 168, "fix2_opaque_px": 170}
+PASS D2a  rounded base: width y21 = width y20 - 2 :: {"y20": 11, "y21": 9}
+PASS D2b  bottom row y21 and bbox exactly [10,4,23,22] :: {"bbox_xyxy_exclusive": [10, 4, 23, 22]}
+PASS D2c  G3 from QA 1.2a: every hold frame <= +10 vs fix1 (E/W reported; a QA run with errors = FAIL) :: {"max_increase_per_dir": {"S": 6, "SE": 6, "E": 8, "NE": 4, "NW": 4, "W": 8, "SW": 6}, "E": 8, "W": 8, "QA_G3": true}
+PASS D3a  mean L* left frame - right frame >= 10 (frame = copper 4-touching plum, y12-18) :: {"left_L": 57.24, "right_L": 44.21, "diff": 13.03, "left_px": 7, "right_px": 7}
+PASS D3b  mean L* rib x14 - rib x18 >= 10 (rib px only, y12-18) :: {"left_L": 57.24, "right_L": 44.21, "diff": 13.03, "left_px": 7, "right_px": 7}
+PASS D3c  every row y10-20: mean L* copper left >= right; a row without copper on both sides = N/A (reported, not counted); >= 8 evaluable rows :: {"reversed_rows": [], "na_rows": [], "evaluable_rows": 11}
+PASS D3d  no new colour: every opaque colour is one of the fix2 colours (Copper Trim 4 shades, plum, glass, crystal) :: {"n_colours": 9, "new_colours": []}
+PASS D4a  glass px (light #FFB36B) 4-touching the plum outline = 0 (glass present, every glass px over a base px) :: {"contacts": 0, "first": [], "glass_px": 37, "glass_without_base": 0}
+PASS D4b  seam unlit: every (light px, 4-adjacent copper px, all 4 shades) dE00 >= 14 :: {"pairs": 56, "light_px_without_base": 0, "min_dE_unlit": 16.38, "QA_8c_min_unlit": 16.3798, "worst": [[[13, 12], [13, 11]], [[15, 12], [15, 11]], [[17, 15], [18, 15]]]}
+PASS D4c  seam lit: QA 8c PASS and the same pairs lit dE00 >= 10 :: {"min_dE_lit": 19.11, "QA_8c": true}
+PASS D4d  ribs 1 px wide only at x14 and x18 (run >= 4); every other copper px in y12-18 is a frame px touching plum; QA C2 + C2b PASS :: {"rib_cols": [14, 18], "runs": {"14": 7, "18": 7}, "extra_copper_px": [], "QA_C2": true, "QA_C2b": true}
+PASS ROUTE route K (owner-selected design direction for fix4, spec 10.11) :: {"frame_left": ["#BB7A57"], "frame_right": ["#915B49"], "rib_left": ["#BB7A57"], "rib_right": ["#915B49"]}
+PASS SHEET-A c2-held-lantern_L0-S-trial-fix2-compare-x8.png (QA 10' name, fix1 -> new) :: {"size": [512, 576], "opaque_mismatch": {"before_unlit": 0, "after_unlit": 0, "before_lit": 0, "after_lit": 0}, "stray_px_in_background": {"before_unlit": 0, "after_unlit": 0, "before_lit": 0, "after_
+PASS SHEET-B c2-held-lantern_L0-S-trial-fix4-vs-fix3-x8.png (fix3 776eae0 -> new) :: {"size": [512, 576], "opaque_mismatch": {"before_unlit": 0, "after_unlit": 0, "before_lit": 0, "after_lit": 0}, "stray_px_in_background": {"before_unlit": 0, "after_unlit": 0, "before_lit": 0, "after_
+PASS P1a  base image (OFF): exactly the planned px changed, each to its planned colour, nothing else (visible compare) :: {"planned": 36, "changed": 36, "missing": [], "wrong_colour": [], "extra": [], "plan_rows_not_matching_fix3": []}
+PASS P1b  alpha of the base image: 0 px changed :: {"alpha_px_changed": 0}
+PASS P1c  light layer untouched: RGBA of every px = fix3 (RGB of transparent px included) and the file SHA-256 = fix3 776eae0 :: {"rgba_px_changed": 0, "sha256_same_as_fix3": true, "sha256": "e86599ffcab25f03fc86ca774227806f1c506726ebe80657acbc88cfd645b8a5"}
+PASS P1d  ON view (base + light layer on top, as drawn when lit): differs from fix3 ON exactly at the planned px the light layer does not cover :: {"expected_px": 21, "changed_px": 21, "hidden_by_light": 15, "missing": [], "extra": []}
+PASS P2   kept file c2-held-lantern_L0-S-trial-fix3-vs-fix2-x8.png byte-identical to fix3 776eae0 (not touched) :: {"present": true, "sha256": "4170f28ee38ee99affa47e74492bddf3923d313d056e92dd64b10a1bd9410a06", "expected": "4170f28ee38ee99affa47e74492bddf3923d313d056e92dd64b10a1bd9410a06"}
+PASS X1   numbers of the plan (spec 10.11 table C): decimals within 0.01, counts and text exact :: {"checked": 14, "tolerance_decimal": 0.01, "different": {}}
+PASS GUARDS QA result bound to the delivery True · inputs unchanged during the run True
+D3c rows (copper L* left/right, status): y10 53.98/34.86 OK · y11 47.47/44.21 OK · y12 57.24/44.21 OK · y13 57.24/44.21 OK · y14 57.24/44.21 OK · y15 57.24/44.21 OK · y16 57.24/44.21 OK · y17 57.24/44.21 OK · y18 57.24/44.21 OK · y19 47.47/44.21 OK · y20 41.09/31.74 OK
+MANUAL M1 (D1e) ChatGPT at 75% and 100%: the body y12-16 (13 px wide for 5 rows) no longer reads as a box - B36 keeps the silhouette, judge it as it is
+MANUAL M2 (G1) ChatGPT: real brightness of the lit glass (G1 = 37 px) at 75% ON on light / dark / cave
+MANUAL M3 (route K) ChatGPT: the dark right glass reads as the shadow side of glass, not a hole; frame and rib of the same tone on each side do not read as bars - 75% OFF/ON x light/dark/cave
+MANUAL M4 (sheets) sheet A (fixed QA name, fix1 -> fix4) and sheet B (fix3 776eae0 -> fix4) carry readable labels in the top bands; CODEX_STATUS says which is which; the sheet background contrasts with the plum outline #3A1E3F (checked by eye - this script does not check it)
+MANUAL M5 (glass) ChatGPT at 75% and 100% OFF on light / dark / cave: the glass reads as glass, not as locker vents; the 2-px reflection #A89AA1 does not read as a second crystal
+MARGINS {"G3_max_per_dir": {"S": 6, "SE": 6, "E": 8, "NE": 4, "NW": 4, "W": 8, "SW": 6}, "G3_margin_to_10": 2, "8c_unlit_min (QA, >=10)": 16.3798, "8c_lit_min (QA, >=10)": 19.1061, "D4b_unlit_min (>=14)": 16.38, "C2_glass_min_unlit_lit (>=15)": [19.47, 19.11], "C2_crystal_min_unlit_lit (>=15)": [18.23, 32.26], "V5a_min (>=20)": 23.07, "V5b_min (>=15)": 15.87, "G1_glass_light_px (report only)": 37, "G1_fix2": 41}
+ERRORS none
+OUTPUT OUT_JSON written: /tmp/claude-0/-home-claude/d3d34840-5e4e-52a0-a344-341c2cb1b80f/scratchpad/fix4accept/run-LkCr2J/preflight-eKg5a2/preflight.json · OUT_JSON.tmp none · OUT_JSON.qa12a.json present
+PREFLIGHT: PASS (machine checks only - MANUAL items are judged in the Artistic Review)
