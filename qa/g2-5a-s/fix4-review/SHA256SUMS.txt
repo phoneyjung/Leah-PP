@@ -1,0 +1,15 @@
+ae8e0f27355892a9ea67f7aa79e8436b4be374e0dd6ee20f75a59d86322288d8  qa/g2-5a-s/fix4-review/README.md
+57aa5ee68b8027232ddea2ea4ba13f5dadeaab83b743ed1b26f9e0023faafc36  qa/g2-5a-s/fix4-review/compare_hand.py
+fbb5776b80bff907f89956bf25eff421644d42618ef352822839074112c671e7  qa/g2-5a-s/fix4-review/fix4-vs-fix3-hand-75.png
+367994cdffa87a7d9e260e96a7c46cf45eb23e0b296bea117698cc7405673e82  qa/g2-5a-s/fix4-review/independent/RESULT.md
+1eb023164b06642e29c76e18baf675a4d48cb7d3aba1130b0318c913510bca05  qa/g2-5a-s/fix4-review/independent/design.json
+b1464a298152300bec74a8f1ff99fc184898e5530ab09f557c3795901878076c  qa/g2-5a-s/fix4-review/independent/indep_stdout.txt
+15373891609e4087edb6dd549cf74d7eca9e24de87d5b11896623705b48fbaa1  qa/g2-5a-s/fix4-review/independent/qa.json
+b7d6287cd9e73ccf365ece12fadc2996a5f66d1aa5b627ed050a163b17b989fd  qa/g2-5a-s/fix4-review/preflight-44d2b62.json
+3bea71f1e4cd2cfdd0bc16696becd60fc34624f20719dd7f9ae7b04b1a885e39  qa/g2-5a-s/fix4-review/preflight-44d2b62.txt
+15373891609e4087edb6dd549cf74d7eca9e24de87d5b11896623705b48fbaa1  qa/g2-5a-s/fix4-review/qa-asset13-1.2a-44d2b62.json
+f1b0e8f725b1c2d25a82c6bec05f68dedbcac11821827da98316e44971191bfc  qa/g2-5a-s/fix4-review/qa-review.json
+9f4955430852e1f6065f8dabf7466bffa330acc257e663dac3e6a584c10ceb05  qa/g2-5a-s/fix4-review/review-body-100.png
+7ef2dcbd3d5becb82d9cad85a5afe9d4030543b9e9db0c34b1da64b6da70b27d  qa/g2-5a-s/fix4-review/review-body-75.png
+e2b87282dbe3a080a62bf5ea9d92cc0f10b907af4abb8bb4058af32166b8f3a8  qa/g2-5a-s/fix4-review/review-hand-x4-100.png
+0f5672ffc672fe1cd633158160e35387b73fa1c2a78bb83db661a60c9df793ae  qa/g2-5a-s/fix4-review/review-hand-x4-75.png
