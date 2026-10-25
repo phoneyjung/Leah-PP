@@ -1,0 +1,254 @@
+#!/usr/bin/env python3
+# G2.5a GM lantern test (Claude · 25 Oct 2569 · Pilot only, no index.html / sw.js / save)
+# Runs pilot-g2-motion.html?gm in Chromium (844x390 @ DPR 2.625) and checks the real L0 lantern S (Codex fix4 44d2b62) with its light layer,
+# power 100/50/10/0 %, Glow + C and light / dark / cave scenes, against G2_5_LANTERN_PLAN.md section 7 (criteria 5, 6, 8, 9, 10) and section 6.
+# The hold mechanics (QG-2b numbering: anchor on the fist, D-EASE, fist over the ring) are the existing test: python3 -I test_g2_hold.py PORT OUT gm
+# Plan G2.5 criterion 3 (lantern bottom <= row 92 at the drawn position) is G17 here.
+# usage: python3 -I test_g2_lantern_gm.py PORT OUT_DIR [OLD_PORT]
+#   OLD_PORT (optional) serves the Pilot before this change: then the page WITHOUT ?gm must draw the same canvas pixels as before.
+# Pixel work runs in the page (helpers in window.__T); Python only judges the numbers.
+import sys, os, json, math, hashlib
+from playwright.sync_api import sync_playwright
+from PIL import Image
+import numpy as np
+PORT, OUT = sys.argv[1], sys.argv[2]; OLD = sys.argv[3] if len(sys.argv) > 3 else None; os.makedirs(OUT, exist_ok=True)
+HERE = os.path.dirname(os.path.abspath(__file__))
+src = open(os.path.join(HERE, 'qa_asset13.py')).read(); ns = {'math': math}; exec(src[src.index('def lab'):src.index('def hexc')], ns); de00 = ns['de00']
+DIRS = ['S', 'SE', 'E', 'NE', 'N', 'NW', 'W', 'SW']; HOLD = [d for d in DIRS if d != 'N']; DPR = 2.625
+URL = 'http://127.0.0.1:%s/pilot-g2-motion.html?gm' % PORT
+BASE = 'c2-held-lantern_L0-S-trial'
+SIGNAL = {'gold #FFC857': (0xFF, 0xC8, 0x57), 'cyan #5FE0FF': (0x5F, 0xE0, 0xFF)}
+R = {'meta': {'viewport': [844, 390], 'dpr': DPR, 'page': 'pilot-g2-motion.html?gm', 'lantern': 'Codex fix4 44d2b62 (S cell in all 8 columns = SIZE PREVIEW ONLY)'}}; CHECK = []
+def ok(name, cond, val): CHECK.append({'check': name, 'pass': bool(cond), 'value': val}); print(('PASS ' if cond else 'FAIL ') + name, flush=True)
+sha = lambda p: hashlib.sha256(open(os.path.join(HERE, p), 'rb').read()).hexdigest()
+FILES = {BASE + '.png': '8d9485bf70f13f95ffec7d4bed54de895b9f2c00acbc281c28c3819e571684c3', BASE + '-light.png': 'e86599ffcab25f03fc86ca774227806f1c506726ebe80657acbc88cfd645b8a5',
+         BASE + '.json': '2637609f5aa4fc201cc9fa6efeadf2349478875444e0473a9c50147113aaf36d'}
+got = {f: sha(f) for f in FILES}
+ok('G0 lantern files in the Pilot branch = Codex fix4 44d2b62 byte for byte (SHA-256)', got == FILES, {f: v[:16] for f, v in got.items()})
+SRC = open(os.path.join(HERE, 'pilot-g2-motion.html'), encoding='utf-8').read()
+ok('G0b no rotation / no ctx.filter in the page source', SRC.count('rotate') + SRC.count('setTransform') + SRC.count('.filter=') + SRC.count('.filter =') == 0, 0)
+
+HELPERS = r"""()=>{const P=PT,S=P.ST,C=96;
+ const set=(a)=>{P.pause(true);P.set(Object.assign({pos:{x:160,y:120},anim:'idle',fi:0,t:0,hold:true,lpos:null,ldir:null,lhist:null,zoom:1,clean:false,blinkNow:false,nofist:false,guides:false,moving:false,eoff:null},a));P.draw();
+   if(a.eoff){const tg=P.lanternTarget();if(tg){S.lpos=[tg[0]+a.eoff[0],tg[1]+a.eoff[1]];S.ldir=S.dir;P.draw()}}return S.last};   // eoff = eased lantern offset from its target (art px)
+ const cv=()=>document.getElementById('cv');
+ const region=(L)=>{const s=L.s,x0=Math.max(0,Math.round(L.sx-48*s)),y0=Math.max(0,Math.round(L.sy-24*s));return {x0,y0,w:Math.min(cv().width-x0,Math.round(192*s)),h:Math.min(cv().height-y0,Math.round(144*s))}};
+ const grab=(Rg)=>cv().getContext('2d').getImageData(Rg.x0,Rg.y0,Rg.w,Rg.h).data;
+ const masks=(L)=>{const d=P.DIRS.indexOf(L.dir),img=L.sheet==='walkhold'?S.img.walkhold:S.img.idle;
+   const c=document.createElement('canvas');c.width=C;c.height=C;const x=c.getContext('2d');x.drawImage(img,L.frame*C,d*C,C,C,0,0,C,C);const B=x.getImageData(0,0,C,C).data;
+   let LA=null,LL=null,org=null;const fr=((S.hanc||{})[L.anim==='walk'?'walk_hold':'idle_hold']||{})[L.dir],ff=fr&&fr[L.frame]&&!S.nofist&&L.lantern?fr[L.frame].fist:[],F=new Set(ff.map(([x,y])=>x+','+y));
+   if(L.lantern){const l=document.createElement('canvas');l.width=32;l.height=32;const y=l.getContext('2d');y.drawImage(S.img.lantern,d*32,0,32,32,0,0,32,32);LA=y.getImageData(0,0,32,32).data;
+     if(S.img.lanternLight){y.clearRect(0,0,32,32);y.drawImage(S.img.lanternLight,d*32,0,32,32,0,0,32,32);LL=y.getImageData(0,0,32,32).data}
+     org=[L.lantern.drawn[0]-S.lanHang[0],L.lantern.drawn[1]-S.lanHang[1]]}
+   return {B,LA,LL,org,F}};
+ // class per device px: 0 floor · 1 body (sprite opaque, not lantern) · 2 lantern metal · 3 light px ; li = lantern px index (lv*32+lu) for 2/3
+ // class of one art px of the 96 cell: [k, lantern px index] · 0 floor · 1 body / fist · 2 lantern metal · 3 light px
+ const artClass=(M,u,v)=>{if(u<0||u>=C||v<0||v>=C)return [0,-1];if(M.F.has(u+','+v))return [1,-1];
+   if(M.org){const lu=u-M.org[0],lv=v-M.org[1];if(lu>=0&&lu<32&&lv>=0&&lv<32&&M.LA[(lv*32+lu)*4+3]>0)return [(M.LL&&M.LL[(lv*32+lu)*4+3]>0)?3:2,lv*32+lu]}
+   return [M.B[(v*C+u)*4+3]>0?1:0,-1]};
+ // per device px: the art px under its centre; at zoom 75 % a device px that straddles art px edges gets a class only when every art px it touches has the same class
+ // (and, for lantern px, the same lantern px) - otherwise 255 = not assigned (never happens at 100 %, where 1 art px = 3 whole device px)
+ const cls=(L,Rg,M)=>{const s=L.s,n=Rg.w*Rg.h,K=new Uint8Array(n),LI=new Int16Array(n).fill(-1);
+   for(let Y=0;Y<Rg.h;Y++)for(let X=0;X<Rg.w;X++){const i=Y*Rg.w+X,fu=(Rg.x0+X+0.5-L.sx)/s,fv=(Rg.y0+Y+0.5-L.sy)/s,u=Math.floor(fu),v=Math.floor(fv);
+     if(u<0||u>=C||v<0||v>=C)continue;
+     const u0=Math.floor((Rg.x0+X-L.sx)/s+1e-6),u1=Math.floor((Rg.x0+X+1-L.sx)/s-1e-6),v0=Math.floor((Rg.y0+Y-L.sy)/s+1e-6),v1=Math.floor((Rg.y0+Y+1-L.sy)/s-1e-6);
+     const c0=artClass(M,u,v);let same=true;for(let uu=u0;uu<=u1&&same;uu++)for(let vv=v0;vv<=v1&&same;vv++){const c=artClass(M,uu,vv);if(c[0]!==c0[0]||c[1]!==c0[1])same=false}
+     if(!same){K[i]=255;continue}K[i]=c0[0];LI[i]=c0[1]}return {K,LI}};
+ // render a and b at the same place: diff px per class and floor energy (sum |diff|)
+ const compare=(a,b,glow0)=>{const L=set(a),Rg=region(L),D1=grab(Rg),M=masks(L),Q=cls(L,Rg,M);let keep=null;if(glow0){keep=P.GM_POW[b.power].glow;P.GM_POW[b.power].glow=0}set(b);if(glow0)P.GM_POW[b.power].glow=keep;const D2=grab(Rg);
+   const c=[0,0,0,0];let e=0,outCell=0;const s=L.s;for(let i=0;i<Rg.w*Rg.h;i++){const o=i*4,d=Math.abs(D1[o]-D2[o])+Math.abs(D1[o+1]-D2[o+1])+Math.abs(D1[o+2]-D2[o+2]);if(d&&Q.K[i]!==255){c[Q.K[i]]++;if(!Q.K[i])e+=d;
+     const X=Rg.x0+i%Rg.w,Y=Rg.y0+Math.floor(i/Rg.w);if(X<L.sx||X>=L.sx+C*s||Y<L.sy||Y>=L.sy+C*s)outCell++}}
+   return {floor:c[0],body:c[1],lantern:c[2],light:c[3],energy:e,outCell}};
+ // cave: light / C only uncover the body - every changed body px of render a (vs b) is at least as close to the true sprite colour as in b (+1)
+ const reveal=(a,b)=>{const L=set(Object.assign({},a,{scene:'light',clean:true,fx:false,power:0})),Rg=region(L),T0=grab(Rg),M=masks(L),Q=cls(L,Rg,M);set(a);const D1=grab(Rg);set(b);const D2=grab(Rg);
+   let n=0,bad=0;const dist=(D,o)=>Math.abs(D[o]-T0[o])+Math.abs(D[o+1]-T0[o+1])+Math.abs(D[o+2]-T0[o+2]);for(let i=0;i<Rg.w*Rg.h;i++){if(Q.K[i]!==1)continue;const o=i*4;if(D1[o]===D2[o]&&D1[o+1]===D2[o+1]&&D1[o+2]===D2[o+2])continue;n++;if(dist(D1,o)>dist(D2,o)+1)bad++}return [bad,n]};
+ // light px vs a rule: 'light' (= light colour) · 'base' (= lantern colour) · number f (= base*(1-f)+light*f) ; +-2 per channel
+ const lightCheck=(a,rule)=>{const L=set(a),Rg=region(L),D=grab(Rg),M=masks(L),Q=cls(L,Rg,M);let bad=0,n=0;
+   for(let i=0;i<Rg.w*Rg.h;i++){if(Q.K[i]!==3)continue;n++;const li=Q.LI[i]*4,o=i*4;
+     for(let ch=0;ch<3;ch++){const bs=M.LA[li+ch],lg=M.LL[li+ch],w=rule==='light'?lg:rule==='base'?bs:bs*(1-rule)+lg*rule;if(Math.abs(D[o+ch]-w)>2){bad++;break}}}return [bad,n]};
+ // unique screen colours that differ between hold on and hold off (everything the lantern, its light and its glow change)
+ const changed=(a,noBody)=>{const L=set(Object.assign({},a,{hold:true})),Rg=region(L),D1=grab(Rg),Q=noBody?cls(L,Rg,masks(L)):null;set(Object.assign({},a,{hold:false}));const D2=grab(Rg);const u=new Set(),ub=new Set();
+   for(let i=0;i<Rg.w*Rg.h;i++){const o=i*4;if(D1[o]!==D2[o]||D1[o+1]!==D2[o+1]||D1[o+2]!==D2[o+2]){const c=(D1[o]<<16)|(D1[o+1]<<8)|D1[o+2];if(Q&&Q.K[i]===1)ub.add(c);else u.add(c)}}return [[...u],[...ub]]};
+ const hash=(a)=>{set(a);const c=cv(),D=c.getContext('2d').getImageData(0,0,c.width,c.height).data;let h1=2166136261>>>0,h2=0;for(let i=0;i<D.length;i++){h1=Math.imul(h1^D[i],16777619)>>>0;h2=(h2+D[i]*(i%251+1))>>>0}return h1+':'+h2+':'+c.width+'x'+c.height};
+ window.__T={set,compare,reveal,lightCheck,changed,hash};return true}"""
+T = lambda pg, fn, *a: pg.evaluate('(a)=>window.__T.%s(...a)' % fn, list(a))
+errors = []
+with sync_playwright() as p:
+    exe = '/opt/pw-browsers/chromium-1194/chrome-linux/chrome'
+    b = p.chromium.launch(executable_path=exe if os.path.exists(exe) else None)
+    ctx = b.new_context(viewport={'width': 844, 'height': 390}, device_scale_factor=DPR)
+    ctx.add_init_script("window.__FILTER_SETS=0;{const fd=Object.getOwnPropertyDescriptor(CanvasRenderingContext2D.prototype,'filter');if(fd&&fd.set)Object.defineProperty(CanvasRenderingContext2D.prototype,'filter',{get(){return fd.get.call(this)},set(v){window.__FILTER_SETS++;fd.set.call(this,v)},configurable:true})}")
+    page = ctx.new_page(); reqs = []
+    page.on('pageerror', lambda e: errors.append(str(e))); page.on('console', lambda m: errors.append(m.text) if m.type == 'error' else None); page.on('request', lambda r: reqs.append(r.url.rsplit('/', 1)[-1]))
+    page.goto(URL); page.wait_for_function('PT.ST.ok.walk && PT.ST.ok.idle && PT.ST.ok.hold && PT.ST.ok.walkhold && PT.ST.ok.lantern && PT.FX.glow', timeout=15000); page.evaluate(HELPERS)
+    st = page.evaluate("()=>({files:PT.ST.gmFiles,hang:PT.ST.lanHang,hold:PT.holdOn(),gm:PT.ST.gm,w:PT.ST.img.lantern.width,h:PT.ST.img.lantern.height,lw:PT.ST.img.lanternLight&&PT.ST.img.lanternLight.width})")
+    ok('G1 ?gm opens with the real lantern: base + light + json, grip [16,6], hold on, 8-column sheets 256x32, Set-08 stand-in never requested',
+       st['files'] == {'base': True, 'light': True, 'json': True} and st['hang'] == [16, 6] and st['hold'] and st['w'] == 256 and st['h'] == 32 and st['lw'] == 256 and 'kid-lantern.png' not in reqs, dict(st, kid_lantern_requested='kid-lantern.png' in reqs))
+    cols = page.evaluate("""()=>{const r=[];for(const im of [PT.ST.img.lantern,PT.ST.img.lanternLight]){const c=document.createElement('canvas');c.width=256;c.height=32;const x=c.getContext('2d');x.drawImage(im,0,0);const D=x.getImageData(0,0,256,32).data;
+      let bad=0;for(let k=1;k<8;k++)for(let y=0;y<32;y++)for(let u=0;u<32;u++)for(let ch=0;ch<4;ch++)if(D[(y*256+k*32+u)*4+ch]!==D[(y*256+u)*4+ch])bad++;r.push(bad)}return r}""")
+    col0 = page.evaluate("""()=>{const o=[];for(const im of [PT.ST.img.lantern,PT.ST.img.lanternLight]){const c=document.createElement('canvas');c.width=32;c.height=32;const x=c.getContext('2d');x.drawImage(im,0,0,32,32,0,0,32,32);o.push(Array.from(x.getImageData(0,0,32,32).data))}return o}""")
+    files = [np.array(Image.open(os.path.join(HERE, f)).convert('RGBA')).astype(int) for f in (BASE + '.png', BASE + '-light.png')]
+    same0 = [int(((np.array(c).reshape(32, 32, 4)[..., 3] > 0) != (f[..., 3] > 0)).sum() + ((np.abs(np.array(c).reshape(32, 32, 4)[..., :3] - f[..., :3]).max(-1) > 0) & (f[..., 3] > 0)).sum()) for c, f in zip(col0, files)]
+    ok('G2 the 8 columns of base and light = the S file pixels (column 1 vs file, columns 2-8 vs column 1)', cols == [0, 0] and same0 == [0, 0], {'columns_vs_col1': cols, 'col1_vs_file': same0})
+    pw = {P_: [0, 0] for P_ in (100, 50, 10, 0)}
+    for P_, rule in ((100, 'light'), (50, 'light'), (10, 0.35), (0, 'base')):
+        for d in HOLD:
+            for an, fi in (('idle', 0), ('walk', 2)):
+                r = T(page, 'lightCheck', {'dir': d, 'anim': an, 'fi': fi, 'power': P_, 'fx': False, 'scene': 'light', 'clean': True}, rule); pw[P_][0] += r[0]; pw[P_][1] += r[1]
+    ok('G3 light layer by power: 100/50 % = light colour, 10 % = 35 % glint, 0 % = dark glass (every light px, 7 dirs x idle/walk, +-2)', all(v[0] == 0 and v[1] > 0 for v in pw.values()), pw)
+    glow = {}
+    for d in HOLD:
+        for sc in ('light', 'dark', 'cave'):
+            for an, fi in (('idle', 0), ('walk', 2)):
+                base = {'dir': d, 'scene': sc, 'anim': an, 'fi': fi, 'fx': True}
+                g100 = T(page, 'compare', dict(base, power=100), dict(base, power=100), True); g50 = T(page, 'compare', dict(base, power=50), dict(base, power=50), True)
+                c = T(page, 'compare', dict(base, power=100), dict(base, power=0)); c50 = T(page, 'compare', dict(base, power=50), dict(base, power=0)); c10 = T(page, 'compare', dict(base, power=10), dict(base, power=0))
+                glow['%s %s %s' % (sc, d, an)] = {'glow100': {k: g100[k] for k in ('floor', 'body', 'lantern', 'light')}, 'glow50': {k: g50[k] for k in ('floor', 'body', 'lantern', 'light')},
+                                                  'p50_ratio': round(c50['energy'] / c['energy'], 3) if c['energy'] else None, 'p10_floor': c10['floor'],
+                                                  'p100_vs_0': {k: c[k] for k in ('floor', 'body', 'lantern', 'light')}}
+    R['glow'] = glow
+    ok('G4 plan criterion 8: the Glow alone (same render with glow 0) changes 0 body / fist / face px, 0 lantern px, > 0 floor px (power 100 and 50 x 7 dirs x 3 scenes x idle/walk)',
+       all(v[g]['body'] == 0 and v[g]['lantern'] == 0 and v[g]['light'] == 0 and v[g]['floor'] > 0 for v in glow.values() for g in ('glow100', 'glow50')),
+       {'worst_body': max(v[g]['body'] for v in glow.values() for g in ('glow100', 'glow50')), 'worst_lantern': max(v[g]['lantern'] for v in glow.values() for g in ('glow100', 'glow50')),
+        'min_floor': min(v[g]['floor'] for v in glow.values() for g in ('glow100', 'glow50'))})
+    ok('G4b power 50 = about half the light around (floor energy 50/100 % in 0.35-0.65) · power 10 = no glow (0 floor px)',
+       all(v['p50_ratio'] is not None and 0.35 <= v['p50_ratio'] <= 0.65 and v['p10_floor'] == 0 for v in glow.values()),
+       {'p50_ratio_min_max': [min(v['p50_ratio'] for v in glow.values()), max(v['p50_ratio'] for v in glow.values())], 'p10_floor_max': max(v['p10_floor'] for v in glow.values())})
+    ok('G4c light / dark floor: power 100 vs 0 changes only floor + light px (0 body, 0 lantern metal)',
+       all(v['p100_vs_0']['body'] == 0 and v['p100_vs_0']['lantern'] == 0 for k, v in glow.items() if not k.startswith('cave')),
+       {k: v['p100_vs_0'] for k, v in list(glow.items()) if k.startswith('dark')} )
+    rv = {}
+    for d in HOLD:
+        for an, fi, zoom, eoff in (('idle', 0, 1, None), ('walk', 2, 1, None), ('walk', 4, 0.75, None), ('idle', 1, 1, [2, -3]), ('walk', 1, 0.75, [-3, 2])):
+            base = {'dir': d, 'scene': 'cave', 'anim': an, 'fi': fi, 'fx': True, 'zoom': zoom, 'eoff': eoff}
+            k_ = '%s %s f%d z%s e%s' % (d, an, fi, zoom, eoff)
+            rv['light ' + k_] = T(page, 'reveal', dict(base, power=100), dict(base, power=0))
+            rv['C ' + k_] = T(page, 'reveal', dict(base, power=0), dict(base, power=0, fx=False))
+    ok('G4d cave: the lantern light and C only uncover the body (every changed body px is at least as close to the true sprite colour) · never tint it (7 dirs x idle/walk x zoom 100/75 x eased offsets)',
+       all(v[0] == 0 for v in rv.values()) and all(v[1] > 0 for v in rv.values()), {'bad_total': sum(v[0] for v in rv.values()), 'changed_body_px_min': min(v[1] for v in rv.values())})
+    pool = {}
+    for sc in ('dark', 'cave', 'light'):
+        for d in HOLD:
+            base = {'dir': d, 'scene': sc, 'power': 0}
+            c = T(page, 'compare', dict(base, fx=True), dict(base, fx=False)); pool['%s %s' % (sc, d)] = {k: c[k] for k in ('floor', 'body', 'lantern', 'light', 'outCell')}
+    ok('G5 C pool (fx on vs off at power 0): dark = behind the body (0 body / lantern px, > 0 floor px) · cave = only inside the player cell · light = no pool (0 px)',
+       all((v['body'] == 0 and v['lantern'] == 0 and v['light'] == 0 and v['floor'] > 0) if k.startswith('dark') else (v['outCell'] == 0 and v['floor'] > 0) if k.startswith('cave') else sum(v.values()) == 0 for k, v in pool.items()), pool)
+    em = {}
+    for d in HOLD:
+        for an, fi, zoom, eoff in (('idle', 0, 1, None), ('walk', 2, 1, None), ('walk', 4, 0.75, None), ('idle', 1, 1, [2, -3]), ('walk', 1, 0.75, [-3, 2])):
+            em['%s %s f%d z%s e%s' % (d, an, fi, zoom, eoff)] = T(page, 'lightCheck', {'dir': d, 'anim': an, 'fi': fi, 'zoom': zoom, 'eoff': eoff, 'power': 100, 'fx': True, 'scene': 'cave'}, 'light')
+    ok('G6 cave: light px are not darkened (power 100 = light colour · 7 dirs x idle/walk x zoom 100/75 x eased offsets)', all(v[0] == 0 and v[1] > 0 for v in em.values()),
+       {'bad': sum(v[0] for v in em.values()), 'light_px_min': min(v[1] for v in em.values()), 'cases': len(em)})
+    uniq, uniq_cave, uniq_rev = {}, {}, {}
+    for zoom in (1, 0.75):
+        for sc in ('light', 'dark', 'cave'):
+            for P_ in (100, 50, 10, 0):
+                for d in HOLD:
+                    u, ub = T(page, 'changed', {'dir': d, 'power': P_, 'fx': True, 'scene': sc, 'zoom': zoom}, sc == 'cave')
+                    for c_ in u: (uniq if sc != 'cave' else uniq_cave)[c_] = 1
+                    for c_ in ub: uniq_rev[c_] = 1
+    rgb = lambda c_: ((c_ >> 16) & 255, (c_ >> 8) & 255, c_ & 255)
+    def near_of(U): return {k: sorted({rgb(c_) for c_ in U if de00(rgb(c_), v) < 10}) for k, v in SIGNAL.items()}
+    def closest(U, k): return round(min(de00(rgb(c_), SIGNAL[k]) for c_ in U), 2) if U else None
+    nr, nc = near_of(uniq), near_of(uniq_cave)
+    ok('G7 plan criterion 5 (light / dark floor, as worded): every on-screen colour the lantern, light or glow changes has dE00 >= 10 from #FFC857 and #5FE0FF (power 100/50/10/0 x 7 dirs x zoom 100/75)',
+       all(not v for v in nr.values()), {'colours': len(uniq), 'near': {k: ['#%02X%02X%02X' % c_ for c_ in v[:5]] for k, v in nr.items()}, 'closest_gold': closest(uniq, 'gold #FFC857'), 'closest_cyan': closest(uniq, 'cyan #5FE0FF')})
+    ok('G7b cave (extra): the same, except body px that the light only uncovers (the locked sprite colours, G4d)',
+       all(not v for v in nc.values()), {'colours': len(uniq_cave), 'near': {k: ['#%02X%02X%02X' % c_ for c_ in v[:5]] for k, v in nc.items()}, 'closest_gold': closest(uniq_cave, 'gold #FFC857'),
+                                         'uncovered_body_closest_gold_info': closest(uniq_rev, 'gold #FFC857'), 'sprite_cream_F9DA99_vs_gold_info': round(de00((0xF9, 0xDA, 0x99), SIGNAL['gold #FFC857']), 2)})
+    nn = {}
+    for sc in ('dark', 'cave'):
+        L = T(page, 'set', {'dir': 'N', 'power': 100, 'fx': True, 'scene': sc}); nn[sc] = [L['lantern'], L['gm']['drawn']['glow'], L['gm']['drawn']['caveHole']]
+    turn = page.evaluate("""()=>{const P=PT,S=P.ST,o=[];for(const [a,c] of [['NE','N'],['N','NE'],['NW','N'],['N','NW']]){P.pause(true);P.set({dir:a,anim:'walk',fi:0,hold:true,power:100,fx:true,scene:'cave',lpos:null,ldir:null,clean:false});P.draw();
+       for(let i=0;i<10;i++){P.step(16);P.draw()}S.dir=c;P.step(16);P.draw();o.push([!!S.last.lantern,S.last.gm.drawn.glow,S.last.gm.drawn.caveHole>0])}return o}""")
+    ok('G8 N: no lantern, no glow, no cave light · turning N <-> NE/NW switches them on the same frame',
+       all(v == [None, False, 0] for v in nn.values()) and turn == [[False, False, False], [True, True, True], [False, False, False], [True, True, True]], {'N': nn, 'turn': turn})
+    fs = page.evaluate("""()=>{const P=PT;for(const sc of ['light','dark','cave'])for(const pw of [100,50,10,0]){P.set({scene:sc,power:pw,fx:true,hold:true,clean:false});for(let i=0;i<20;i++){P.step(16);P.draw()}}return window.__FILTER_SETS}""")
+    ok('G9 ctx.filter set 0 times while drawing', fs == 0, fs)
+    page.evaluate("()=>{PT.set({power:100,fx:true,scene:'light',zoom:1});PT.pause(false)}")
+    seq = []
+    for _ in range(4): page.click('#bPow'); seq.append(page.evaluate('PT.ST.power'))
+    fx = []
+    for _ in range(2): page.click('#bFx'); fx.append(page.evaluate('PT.ST.fx'))
+    sc = []
+    for _ in range(3): page.click('#bBg'); sc.append(page.evaluate('PT.ST.scene'))
+    zm = []
+    for _ in range(2): page.click('#bZoom'); zm.append(page.evaluate('PT.ST.zoom'))
+    vis = page.evaluate("()=>['bPow','bFx'].map(i=>getComputedStyle(document.getElementById(i)).display!=='none')")
+    ok('G10 GM buttons: power 50/10/0/100 · Glow+C off/on · floor dark/cave/light · zoom 75/100 % (fixed) · power and Glow+C buttons shown',
+       seq == [50, 10, 0, 100] and fx == [False, True] and sc == ['dark', 'cave', 'light'] and zm == [0.75, 1] and vis == [True, True], {'power': seq, 'fx': fx, 'scene': sc, 'zoom': zm, 'visible': vis})
+    cdp = ctx.new_cdp_session(page); cdp.send('Emulation.setCPUThrottlingRate', {'rate': 4}); vals = {False: [], True: []}
+    for rnd in range(5):
+        for h in ((False, True) if rnd % 2 == 0 else (True, False)):
+            page.evaluate("(h)=>{PT.set({hold:h,power:100,fx:true,scene:'cave',clean:false,lpos:null,ldir:null,pos:{x:160,y:120},zoom:1});PT.pause(false);PT.walk('SE')}", h); page.wait_for_timeout(300)
+            vals[h].append(page.evaluate("()=>new Promise(r=>{let n=0;const t0=performance.now();const f=()=>{n++;if(performance.now()-t0<2000)requestAnimationFrame(f);else r(n/((performance.now()-t0)/1000))};requestAnimationFrame(f)})"))
+            page.evaluate('PT.stop()')
+    cdp.send('Emulation.setCPUThrottlingRate', {'rate': 1})
+    med = lambda v: sorted(v)[len(v) // 2]; R['fps'] = {'off': [round(v, 1) for v in vals[False]], 'on': [round(v, 1) for v in vals[True]], 'median': [round(med(vals[False]), 1), round(med(vals[True]), 1)]}
+    cost = page.evaluate("""()=>{const P=PT;const run=(h)=>{P.pause(true);P.set({hold:h,power:100,fx:true,scene:'cave',dir:'SE',anim:'walk',fi:0,clean:false,lpos:null,ldir:null});for(let i=0;i<60;i++){P.step(16);P.draw()}
+       const g=document.getElementById('cv').getContext('2d');g.getImageData(0,0,1,1);const t0=performance.now();for(let i=0;i<300;i++){P.step(16);P.draw()}g.getImageData(0,0,1,1);return (performance.now()-t0)/300};const r=[];for(let k=0;k<7;k++)r.push([run(false),run(true)]);return r}""")
+    R['draw_ms'] = {'off_median7': round(med([c[0] for c in cost]), 3), 'on_median7': round(med([c[1] for c in cost]), 3)}
+    scene_ms = page.evaluate("""()=>{const P=PT;const run=(sc)=>{P.pause(true);P.set({hold:true,power:100,fx:true,scene:sc,dir:'SE',anim:'walk',fi:0,clean:false,lpos:null,ldir:null});for(let i=0;i<60;i++){P.step(16);P.draw()}
+       const g=document.getElementById('cv').getContext('2d');g.getImageData(0,0,1,1);const t0=performance.now();for(let i=0;i<300;i++){P.step(16);P.draw()}g.getImageData(0,0,1,1);return (performance.now()-t0)/300};const r={light:[],dark:[],cave:[]};for(let k=0;k<5;k++)for(const sc of ['light','dark','cave'])r[sc].push(run(sc));return r}""")
+    R['scene_draw_ms_median5_cpu1x'] = {k: round(med(v), 3) for k, v in scene_ms.items()}
+    ok('G11 FPS with the lantern (light + Glow + cave light) >= 90 % of the same cave scene without it (C and the cave on in both · rAF, 4x CPU, walking, median of 5) · draw ms per scene reported',
+       med(vals[True]) >= 0.9 * med(vals[False]), dict(R['fps'], draw_ms_cave_on_off_cpu1x=R['draw_ms'], scene_draw_ms_cpu1x=R['scene_draw_ms_median5_cpu1x']))
+    page.evaluate("()=>PT.pause(true)")
+    for zoom, zk in ((1, '100'), (0.75, '75')):
+        for scn in ('light', 'dark', 'cave'):
+            for P_ in (100, 0):
+                T(page, 'set', {'dir': 'SE', 'power': P_, 'fx': True, 'scene': scn, 'zoom': zoom}); page.screenshot(path=os.path.join(OUT, 'gm-844-z%s-%s-p%d.png' % (zk, scn, P_)))
+    page.evaluate("()=>{PT.set({scene:'cave',power:100,fx:true,zoom:1,hold:true,clean:false,pos:{x:160,y:120}});PT.pause(false);PT.walk('SW')}"); page.wait_for_timeout(900)
+    page.screenshot(path=os.path.join(OUT, 'gm-844-cave-walk.png')); page.evaluate('PT.stop()')
+    ctx2 = b.new_context(viewport={'width': 1180, 'height': 820}, device_scale_factor=2); pg2 = ctx2.new_page(); e2 = []
+    pg2.on('pageerror', lambda e: e2.append(str(e))); pg2.on('console', lambda m: e2.append(m.text) if m.type == 'error' else None)
+    pg2.goto(URL + '&scene=cave'); pg2.wait_for_function('PT.ST.ok.lantern && PT.ST.ok.walkhold && PT.FX.glow', timeout=15000)
+    pg2.evaluate("()=>PT.walk('SE')"); pg2.wait_for_timeout(900); pg2.screenshot(path=os.path.join(OUT, 'gm-1180-cave-walk.png'))
+    pg2.evaluate("()=>{PT.stop();PT.set({scene:'light'})}"); pg2.wait_for_timeout(300); pg2.screenshot(path=os.path.join(OUT, 'gm-1180-light.png'))
+    ok('G12 iPad 1180x820 GM page: 0 errors, lantern drawn', not e2 and pg2.evaluate('!!PT.ST.last.lantern'), e2[:3])
+    ctx2.close()
+    fb = {}
+    for name, pats in (('base_png', ['**/%s.png' % BASE]), ('json', ['**/%s.json' % BASE]), ('light_png', ['**/%s-light.png' % BASE]), ('cave_floor', ['**/cave-floor.jpg']),
+                       ('all_lantern', ['**/%s.png' % BASE, '**/%s-light.png' % BASE, '**/%s.json' % BASE])):
+        pg = ctx.new_page(); errs = []; cons = []; rq = []
+        pg.on('pageerror', lambda e: errs.append(str(e))); pg.on('console', lambda m: cons.append(m.text) if m.type == 'error' and 'Failed to load resource' not in m.text else None); pg.on('request', lambda r: rq.append(r.url.rsplit('/', 1)[-1]))
+        for pat in pats: pg.route(pat, lambda r: r.abort())
+        pg.goto(URL + '&scene=cave'); pg.wait_for_timeout(1500)
+        pg.evaluate("()=>PT.walk('E')"); pg.wait_for_timeout(600); shot = os.path.join(OUT, 'gm-fallback-%s.png' % name); pg.screenshot(path=shot)
+        L = pg.evaluate("()=>{const L=PT.ST.last;return {lantern:!!L.lantern,sheet:L.sheet,gm:L.gm}}")
+        ncol = pg.evaluate("()=>{const c=document.getElementById('cv'),D=c.getContext('2d').getImageData(0,0,c.width,c.height).data,u=new Set();for(let i=0;i<D.length;i+=4*7)u.add((D[i]<<16)|(D[i+1]<<8)|D[i+2]);return u.size}")
+        im = np.array(Image.open(shot).convert('RGB')); white = float((im.min(-1) > 250).mean())
+        fb[name] = {'errors': len(errs) + len(cons), 'white': round(white, 3), 'canvas_colours': ncol, 'lantern': L['lantern'], 'walk_sheet': L['sheet'], 'glow': L['gm']['drawn']['glow'], 'cave_light': L['gm']['drawn']['caveHole'],
+                    'light': L['gm']['drawn']['light'], 'kid_lantern_requested': 'kid-lantern.png' in rq}
+        pg.close()
+    want = {'base_png': (False, 'walk'), 'json': (False, 'walk'), 'all_lantern': (False, 'walk'), 'light_png': (True, 'walkhold'), 'cave_floor': (True, 'walkhold')}
+    ok('G13 missing files: base / json -> no lantern (old walk sheet, never Set 08) · light -> lantern without light, glow or cave light · cave floor -> still drawn · 0 errors, the canvas really drew (>= 50 colours, a sprite sheet)',
+       all(v['errors'] == 0 and v['white'] < 0.5 and v['canvas_colours'] >= 50 and v['walk_sheet'] and not v['kid_lantern_requested'] and (v['lantern'], v['walk_sheet']) == want[k] for k, v in fb.items())
+       and fb['light_png']['glow'] is False and fb['light_png']['cave_light'] == 0 and fb['light_png']['light'] == 0 and fb['cave_floor']['glow'] is True, fb)
+    far = {}
+    for pos in ([600, 120], [160, 400], [160, -90], [-200, 500], [900, 700]):
+        for d in ('SE', 'W'):
+            base = {'dir': d, 'scene': 'cave', 'pos': {'x': pos[0], 'y': pos[1]}}
+            c = T(page, 'compare', dict(base, power=100, fx=True), dict(base, power=0, fx=True)); cp = T(page, 'compare', dict(base, power=0, fx=True), dict(base, power=0, fx=False))
+            far['%s %s' % (pos, d)] = [c['floor'], cp['floor'] + cp['body']]
+    ok('G16 cave far from the start (5 places x 2 dirs): the lantern light and C still open the darkness (> 0 px changed)', all(v[0] > 0 and v[1] > 0 for v in far.values()), far)
+    c3 = page.evaluate("""()=>{const P=PT,S=P.ST,o={};const c=document.createElement('canvas');c.width=32;c.height=32;const x=c.getContext('2d');x.drawImage(S.img.lantern,0,0,32,32,0,0,32,32);const D=x.getImageData(0,0,32,32).data;
+      let bot=0;for(let i=0;i<1024;i++)if(D[i*4+3])bot=Math.max(bot,Math.floor(i/32));
+      for(const d of ['S','SE','E','NE','NW','W','SW'])for(const stp of [true,false]){P.pause(true);P.set({dir:d,anim:'idle',fi:0,t:0,hold:true,ease:true,easeStep:stp,lpos:null,ldir:null,lhist:null,moving:false,pos:{x:160,y:200},power:100,fx:true,scene:'cave',clean:false});P.draw();
+        let worst=0;const run=(ms)=>{for(let e=0;e<ms;e+=16){P.step(16);P.draw();const L=S.last.lantern;if(L)worst=Math.max(worst,L.drawn[1]-S.lanHang[1]+bot)}};
+        run(400);for(let k=0;k<6;k++){P.walk(d);run(1200+k*100+48);P.stop();run(800)}o[d+(stp?' step':' smooth')]=worst}return {bot,worst:o}}""")
+    ok('G17 plan criterion 3: lantern bottom at the DRAWN position <= row 92 (walk / stop on each of 6 frames / start · 7 dirs · step and smooth ease)', all(v <= 92 for v in c3['worst'].values()), c3)
+    ok('G14 page errors 0 (GM page)', not errors, errors[:3])
+    if OLD:
+        STATES = [{'dir': d, 'anim': an, 'fi': fi, 'hold': h, 'dark': dk, 'zoom': z} for d in DIRS for an, fi in (('idle', 0), ('walk', 2)) for h in (True, False) for dk in (False, True) for z in (1, 0.75)]
+        res = {}
+        for port in (OLD, PORT):
+            pg = ctx.new_page(); pg.goto('http://127.0.0.1:%s/pilot-g2-motion.html' % port); pg.wait_for_function('PT.ST.ok.walk && PT.ST.ok.idle && PT.ST.ok.hold && PT.ST.ok.lantern && PT.ST.ok.walkhold', timeout=15000)
+            pg.evaluate(HELPERS); res[port] = [T(pg, 'hash', s_) for s_ in STATES]; pg.close()
+        same = sum(a == c for a, c in zip(res[OLD], res[PORT]))
+        ok('G15 without ?gm: same canvas pixels as the Pilot before this change (%d states: 8 dirs x idle/walk x hold on/off x light/dark x zoom 100/75)' % len(STATES), same == len(STATES), '%d/%d' % (same, len(STATES)))
+    b.close()
+R['checks'] = CHECK
+json.dump(R, open(os.path.join(OUT, 'gm-lantern-test.json'), 'w'), indent=1, ensure_ascii=False)
+for c in CHECK: print(('PASS ' if c['pass'] else 'FAIL ') + c['check'] + ' :: ' + json.dumps(c['value'], ensure_ascii=False)[:400])
+print('TOTAL %d/%d PASS' % (sum(c['pass'] for c in CHECK), len(CHECK)))

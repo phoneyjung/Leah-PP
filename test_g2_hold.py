@@ -2,16 +2,18 @@
 # G2.2b Pilot lantern-hold test (Claude · 16 Oct 2569 · Pilot only, no index.html / sw.js / save)
 # Runs pilot-g2-motion.html?hold in Chromium (844x390 @ DPR 2.625) and measures QG-2b criteria 1, 3, 4, 5, 6, 7, 8, 9, 10, 11
 # from the drawn canvas pixels and the drawn lantern position (D-EASE: at most 3 art px per 100 ms per axis, snap on a direction change).
-# usage: python3 -I test_g2_hold.py PORT OUT_DIR   (serve this folder with python3 -m http.server PORT)
+# usage: python3 -I test_g2_hold.py PORT OUT_DIR [gm]   (serve this folder with python3 -m http.server PORT)
+#   gm = the same checks on the GM lantern (?gm: real L0 lantern S, power 0 + Glow/C off so only the hold mechanics are compared; G2.5a, 25 Oct 2569)
 import sys, os, json
 from playwright.sync_api import sync_playwright
 from PIL import Image
 import numpy as np
-PORT, OUT = sys.argv[1], sys.argv[2]; os.makedirs(OUT, exist_ok=True)
+PORT, OUT = sys.argv[1], sys.argv[2]; os.makedirs(OUT, exist_ok=True); GM = len(sys.argv) > 3 and sys.argv[3] == 'gm'
 HERE = os.path.dirname(os.path.abspath(__file__))
 DIRS = ['S', 'SE', 'E', 'NE', 'N', 'NW', 'W', 'SW']; HOLD = [d for d in DIRS if d != 'N']
-DPR = 2.625; URL = 'http://127.0.0.1:%s/pilot-g2-motion.html?hold' % PORT
-R = {'meta': {'viewport': [844, 390], 'dpr': DPR, 'page': 'pilot-g2-motion.html?hold'}}; CHECK = []
+DPR = 2.625; QS = '?hold&gm&power=0&nofx' if GM else '?hold'; URL = 'http://127.0.0.1:%s/pilot-g2-motion.html%s' % (PORT, QS)
+LANTERN_FILES = ['**/c2-held-lantern_L0-S-trial.png', '**/c2-held-lantern_L0-S-trial.json'] if GM else ['**/kid-lantern.png']
+R = {'meta': {'viewport': [844, 390], 'dpr': DPR, 'page': 'pilot-g2-motion.html' + QS}}; CHECK = []
 def ok(name, cond, val): CHECK.append({'check': name, 'pass': bool(cond), 'value': val})
 
 # ---------- file-level checks (criteria 1, 3, 8, 11) ----------
@@ -257,7 +259,7 @@ with sync_playwright() as p:
         for dark in (False, True):
             for d in DIRS:
                 for anim, fi in (('idle', 0), ('walk', 1)):
-                    page.evaluate("(a)=>{PT.pause(true);PT.set({pos:{x:160,y:120},dir:a.d,anim:a.anim,fi:a.fi,hold:true,lpos:null,ldir:null,zoom:a.z,clean:false,dark:a.dark,guides:false,blinkNow:false,nofist:false});PT.draw()}",
+                    page.evaluate("(a)=>{PT.pause(true);PT.set({pos:{x:160,y:120},dir:a.d,anim:a.anim,fi:a.fi,hold:true,lpos:null,ldir:null,zoom:a.z,clean:false,dark:a.dark,scene:a.dark?'dark':'light',guides:false,blinkNow:false,nofist:false});PT.draw()}",
                                   {'d': d, 'anim': anim, 'fi': fi, 'z': zoom, 'dark': dark})
                     page.screenshot(path=os.path.join(OUT, 'hold-z%s-%s-%s-%s.png' % (zk, 'dark' if dark else 'light', anim, d)), clip={'x': 422 - 60, 'y': 195 - 140 * zoom, 'width': 120, 'height': 160 * zoom + 10})
     page.evaluate("()=>{PT.pause(true);PT.set({pos:{x:160,y:120},dir:'SE',anim:'idle',fi:0,hold:true,lpos:null,ldir:null,zoom:1,clean:false,dark:false})}")
@@ -272,8 +274,8 @@ with sync_playwright() as p:
     ctx2.close()
     # criterion 10: missing files -> old sheets, no lantern, no white screen, no page errors
     fb = {}
-    for name, pats in (('walkhold_png', ['**/c2-pilot-kid4-walkhold.png']), ('lantern_png', ['**/kid-lantern.png']), ('hold_anchors', ['**/c2-pilot-hold-anchors.json']),
-                       ('idle_png', ['**/c2-pilot-kid4-idleanim.png']), ('all_hold', ['**/c2-pilot-kid4-walkhold.png', '**/kid-lantern.png', '**/c2-pilot-hold-anchors.json'])):
+    for name, pats in (('walkhold_png', ['**/c2-pilot-kid4-walkhold.png']), ('lantern_png', LANTERN_FILES[:1]), ('hold_anchors', ['**/c2-pilot-hold-anchors.json']),
+                       ('idle_png', ['**/c2-pilot-kid4-idleanim.png']), ('all_hold', ['**/c2-pilot-kid4-walkhold.png', '**/c2-pilot-hold-anchors.json'] + LANTERN_FILES)) + ((('lantern_json', LANTERN_FILES[1:]),) if GM else ()):
         pg = ctx.new_page(); errs = []; cons = []
         pg.on('pageerror', lambda e: errs.append(str(e))); pg.on('console', lambda m: cons.append(m.text) if m.type == 'error' and 'Failed to load resource' not in m.text else None)
         for pat in pats: pg.route(pat, lambda r: r.abort())
