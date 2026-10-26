@@ -1,0 +1,701 @@
+{
+ "gmv22_b": {
+  "pass": 24,
+  "n": 24,
+  "fails": [],
+  "exit": 0,
+  "g5b_bad_cases": {},
+  "g5b_all_keys": [
+   "dark power 0",
+   "dark facing N",
+   "dark not holding",
+   "dark power 10",
+   "dark power 10 W walk",
+   "dark power 100 E",
+   "dark fx off",
+   "cave power 0",
+   "cave facing N",
+   "cave not holding",
+   "cave power 10",
+   "cave power 10 W walk",
+   "cave power 100 E",
+   "cave fx off",
+   "dark light file missing power 100",
+   "dark light file missing power 10",
+   "cave light file missing power 100",
+   "cave light file missing power 10"
+  ]
+ },
+ "gmv22_a": {
+  "pass": 21,
+  "n": 24,
+  "fails": [
+   "G5b",
+   "G8",
+   "G13"
+  ],
+  "exit": 1,
+  "g5b_bad_cases": {
+   "dark power 0": {
+    "pool": true,
+    "glow": false,
+    "caveHole": 0,
+    "want_pool": false,
+    "px_fx_on_vs_off": 8181,
+    "ok": false
+   },
+   "dark facing N": {
+    "pool": true,
+    "glow": false,
+    "caveHole": 0,
+    "want_pool": false,
+    "px_fx_on_vs_off": 9306,
+    "ok": false
+   },
+   "dark not holding": {
+    "pool": true,
+    "glow": false,
+    "caveHole": 0,
+    "want_pool": false,
+    "px_fx_on_vs_off": 8730,
+    "ok": false
+   },
+   "cave power 0": {
+    "pool": true,
+    "glow": false,
+    "caveHole": 0,
+    "want_pool": false,
+    "px_fx_on_vs_off": 27990,
+    "ok": false
+   },
+   "cave facing N": {
+    "pool": true,
+    "glow": false,
+    "caveHole": 0,
+    "want_pool": false,
+    "px_fx_on_vs_off": 27990,
+    "ok": false
+   },
+   "cave not holding": {
+    "pool": true,
+    "glow": false,
+    "caveHole": 0,
+    "want_pool": false,
+    "px_fx_on_vs_off": 27990,
+    "ok": false
+   },
+   "dark light file missing power 100": {
+    "pool": true,
+    "glow": false,
+    "caveHole": 0,
+    "want_pool": false,
+    "ok": false
+   },
+   "dark light file missing power 10": {
+    "pool": true,
+    "glow": false,
+    "caveHole": 0,
+    "want_pool": false,
+    "ok": false
+   },
+   "cave light file missing power 100": {
+    "pool": true,
+    "glow": false,
+    "caveHole": 0,
+    "want_pool": false,
+    "ok": false
+   },
+   "cave light file missing power 10": {
+    "pool": true,
+    "glow": false,
+    "caveHole": 0,
+    "want_pool": false,
+    "ok": false
+   }
+  },
+  "g5b_all_keys": [
+   "dark power 0",
+   "dark facing N",
+   "dark not holding",
+   "dark power 10",
+   "dark power 10 W walk",
+   "dark power 100 E",
+   "dark fx off",
+   "cave power 0",
+   "cave facing N",
+   "cave not holding",
+   "cave power 10",
+   "cave power 10 W walk",
+   "cave power 100 E",
+   "cave fx off",
+   "dark light file missing power 100",
+   "dark light file missing power 10",
+   "cave light file missing power 100",
+   "cave light file missing power 10"
+  ],
+  "fail_vals": {
+   "G8": "{\"N\": {\"dark\": [null, false, 0, true], \"cave\": [null, false, 0, true]}, \"turn\": [[false, false, false], [true, true, true], [false, false, false], [true, true, true]]}",
+   "G13": "{\"base_png\": {\"errors\": 0, \"white\": 0.025, \"canvas_colours\": 2757, \"lantern\": false, \"walk_sheet\": \"walk\", \"glow\": false, \"cave_light\": 0, \"light\": 0, \"pool\": true, \"kid_lantern_requested\": false}, \"json\": {\"errors\": 0, \"white\": 0.025, \"canvas_colours\": 2757, \"lantern\": false, \"walk_sheet\": \"walk\", \"glow\": false, \"cave_light\": 0, \"light\": 0, \"pool\": true, \"kid_lantern_requested\": false}, \"light_png\": {\"errors\": 0, \"white\": 0.012, \"canvas_colours\": 3096, \"lantern\": true, \"walk_sheet\": \"walkhold\", \"glow\": false, \"cave_light\": 0, \"light\": 0, \"pool\": true, \"kid_lantern_requested\": false}, \"cave_fl"
+  }
+ },
+ "gmv22_MUT-1": {
+  "pass": 23,
+  "n": 24,
+  "fails": [
+   "G5b"
+  ],
+  "exit": 1,
+  "g5b_bad_cases": {
+   "dark power 0": {
+    "pool": true,
+    "glow": false,
+    "caveHole": 0,
+    "want_pool": false,
+    "px_fx_on_vs_off": 8181,
+    "ok": false
+   },
+   "cave power 0": {
+    "pool": true,
+    "glow": false,
+    "caveHole": 0,
+    "want_pool": false,
+    "px_fx_on_vs_off": 27990,
+    "ok": false
+   }
+  },
+  "g5b_all_keys": [
+   "dark power 0",
+   "dark facing N",
+   "dark not holding",
+   "dark power 10",
+   "dark power 10 W walk",
+   "dark power 100 E",
+   "dark fx off",
+   "cave power 0",
+   "cave facing N",
+   "cave not holding",
+   "cave power 10",
+   "cave power 10 W walk",
+   "cave power 100 E",
+   "cave fx off",
+   "dark light file missing power 100",
+   "dark light file missing power 10",
+   "cave light file missing power 100",
+   "cave light file missing power 10"
+  ]
+ },
+ "gmv22_MUT-2": {
+  "pass": 22,
+  "n": 24,
+  "fails": [
+   "G5b",
+   "G8"
+  ],
+  "exit": 1,
+  "g5b_bad_cases": {
+   "dark facing N": {
+    "pool": true,
+    "glow": false,
+    "caveHole": 0,
+    "want_pool": false,
+    "px_fx_on_vs_off": 9306,
+    "ok": false
+   },
+   "cave facing N": {
+    "pool": true,
+    "glow": false,
+    "caveHole": 0,
+    "want_pool": false,
+    "px_fx_on_vs_off": 27990,
+    "ok": false
+   }
+  },
+  "g5b_all_keys": [
+   "dark power 0",
+   "dark facing N",
+   "dark not holding",
+   "dark power 10",
+   "dark power 10 W walk",
+   "dark power 100 E",
+   "dark fx off",
+   "cave power 0",
+   "cave facing N",
+   "cave not holding",
+   "cave power 10",
+   "cave power 10 W walk",
+   "cave power 100 E",
+   "cave fx off",
+   "dark light file missing power 100",
+   "dark light file missing power 10",
+   "cave light file missing power 100",
+   "cave light file missing power 10"
+  ],
+  "fail_vals": {
+   "G8": "{\"N\": {\"dark\": [null, false, 0, true], \"cave\": [null, false, 0, true]}, \"turn\": [[false, false, false], [true, true, true], [false, false, false], [true, true, true]]}"
+  }
+ },
+ "gmv22_MUT-3": {
+  "pass": 23,
+  "n": 24,
+  "fails": [
+   "G5b"
+  ],
+  "exit": 1,
+  "g5b_bad_cases": {
+   "dark not holding": {
+    "pool": true,
+    "glow": false,
+    "caveHole": 0,
+    "want_pool": false,
+    "px_fx_on_vs_off": 8730,
+    "ok": false
+   },
+   "cave not holding": {
+    "pool": true,
+    "glow": false,
+    "caveHole": 0,
+    "want_pool": false,
+    "px_fx_on_vs_off": 27990,
+    "ok": false
+   }
+  },
+  "g5b_all_keys": [
+   "dark power 0",
+   "dark facing N",
+   "dark not holding",
+   "dark power 10",
+   "dark power 10 W walk",
+   "dark power 100 E",
+   "dark fx off",
+   "cave power 0",
+   "cave facing N",
+   "cave not holding",
+   "cave power 10",
+   "cave power 10 W walk",
+   "cave power 100 E",
+   "cave fx off",
+   "dark light file missing power 100",
+   "dark light file missing power 10",
+   "cave light file missing power 100",
+   "cave light file missing power 10"
+  ]
+ },
+ "gmv22_MUT-4": {
+  "pass": 20,
+  "n": 24,
+  "fails": [
+   "G4d",
+   "G5",
+   "G5b",
+   "G16"
+  ],
+  "exit": 1,
+  "g5b_bad_cases": {
+   "cave fx off": {
+    "pool": true,
+    "glow": false,
+    "caveHole": 0,
+    "want_pool": false,
+    "ok": false
+   }
+  },
+  "g5b_all_keys": [
+   "dark power 0",
+   "dark facing N",
+   "dark not holding",
+   "dark power 10",
+   "dark power 10 W walk",
+   "dark power 100 E",
+   "dark fx off",
+   "cave power 0",
+   "cave facing N",
+   "cave not holding",
+   "cave power 10",
+   "cave power 10 W walk",
+   "cave power 100 E",
+   "cave fx off",
+   "dark light file missing power 100",
+   "dark light file missing power 10",
+   "cave light file missing power 100",
+   "cave light file missing power 10"
+  ],
+  "fail_vals": {
+   "G4d": "{\"bad_total\": 0, \"changed_body_px_min\": 0}",
+   "G5": "{\"dark S\": {\"floor\": 8181, \"body\": 0, \"lantern\": 0, \"light\": 0, \"outCell\": 0}, \"dark SE\": {\"floor\": 10260, \"body\": 0, \"lantern\": 0, \"light\": 0, \"outCell\": 0}, \"dark E\": {\"floor\": 14121, \"body\": 0, \"lantern\": 0, \"light\": 0, \"outCell\": 0}, \"dark NE\": {\"floor\": 10089, \"body\": 0, \"lantern\": 0, \"light\": 0, \"outCell\": 0}, \"dark NW\": {\"floor\": 11709, \"body\": 0, \"lantern\": 0, \"light\": 0, \"outCell\": 0}, \"dark W\": {\"floor\": 14418, \"body\": 0, \"lantern\": 0, \"light\": 0, \"outCell\": 0}, \"dark SW\": {\"floor\": 10044, \"body\": 0, \"lantern\": 0, \"light\": 0, \"outCell\": 0}, \"cave S\": {\"floor\": 0, \"body\": 0, \"lantern\"",
+   "G16": "{\"[600, 120] SE\": [92520, 0], \"[600, 120] W\": [97461, 0], \"[160, 400] SE\": [92520, 0], \"[160, 400] W\": [97461, 0], \"[160, -90] SE\": [92520, 0], \"[160, -90] W\": [97461, 0], \"[-200, 500] SE\": [92520, 0], \"[-200, 500] W\": [97461, 0], \"[900, 700] SE\": [92520, 0], \"[900, 700] W\": [97461, 0]}"
+  }
+ },
+ "gmv22_MUT-5": {
+  "pass": 22,
+  "n": 24,
+  "fails": [
+   "G5b",
+   "G13"
+  ],
+  "exit": 1,
+  "g5b_bad_cases": {
+   "dark light file missing power 100": {
+    "pool": true,
+    "glow": false,
+    "caveHole": 0,
+    "want_pool": false,
+    "ok": false
+   },
+   "dark light file missing power 10": {
+    "pool": true,
+    "glow": false,
+    "caveHole": 0,
+    "want_pool": false,
+    "ok": false
+   },
+   "cave light file missing power 100": {
+    "pool": true,
+    "glow": false,
+    "caveHole": 0,
+    "want_pool": false,
+    "ok": false
+   },
+   "cave light file missing power 10": {
+    "pool": true,
+    "glow": false,
+    "caveHole": 0,
+    "want_pool": false,
+    "ok": false
+   }
+  },
+  "g5b_all_keys": [
+   "dark power 0",
+   "dark facing N",
+   "dark not holding",
+   "dark power 10",
+   "dark power 10 W walk",
+   "dark power 100 E",
+   "dark fx off",
+   "cave power 0",
+   "cave facing N",
+   "cave not holding",
+   "cave power 10",
+   "cave power 10 W walk",
+   "cave power 100 E",
+   "cave fx off",
+   "dark light file missing power 100",
+   "dark light file missing power 10",
+   "cave light file missing power 100",
+   "cave light file missing power 10"
+  ],
+  "fail_vals": {
+   "G13": "{\"base_png\": {\"errors\": 0, \"white\": 0.025, \"canvas_colours\": 2316, \"lantern\": false, \"walk_sheet\": \"walk\", \"glow\": false, \"cave_light\": 0, \"light\": 0, \"pool\": false, \"kid_lantern_requested\": false}, \"json\": {\"errors\": 0, \"white\": 0.025, \"canvas_colours\": 2316, \"lantern\": false, \"walk_sheet\": \"walk\", \"glow\": false, \"cave_light\": 0, \"light\": 0, \"pool\": false, \"kid_lantern_requested\": false}, \"light_png\": {\"errors\": 0, \"white\": 0.012, \"canvas_colours\": 3124, \"lantern\": true, \"walk_sheet\": \"walkhold\", \"glow\": false, \"cave_light\": 0, \"light\": 0, \"pool\": true, \"kid_lantern_requested\": false}, \"cave_"
+  }
+ },
+ "gmv22_MUT-6": {
+  "pass": 19,
+  "n": 24,
+  "fails": [
+   "G4b",
+   "G4d",
+   "G5",
+   "G5b",
+   "G16"
+  ],
+  "exit": 1,
+  "g5b_bad_cases": {
+   "dark power 10": {
+    "pool": false,
+    "glow": false,
+    "caveHole": 0,
+    "want_pool": true,
+    "px_fx_on_vs_off": null,
+    "ok": false
+   },
+   "dark power 10 W walk": {
+    "pool": false,
+    "glow": false,
+    "caveHole": 0,
+    "want_pool": true,
+    "px_fx_on_vs_off": null,
+    "ok": false
+   },
+   "cave power 10": {
+    "pool": false,
+    "glow": false,
+    "caveHole": 0,
+    "want_pool": true,
+    "px_fx_on_vs_off": null,
+    "ok": false
+   },
+   "cave power 10 W walk": {
+    "pool": false,
+    "glow": false,
+    "caveHole": 0,
+    "want_pool": true,
+    "px_fx_on_vs_off": null,
+    "ok": false
+   }
+  },
+  "g5b_all_keys": [
+   "dark power 0",
+   "dark facing N",
+   "dark not holding",
+   "dark power 10",
+   "dark power 10 W walk",
+   "dark power 100 E",
+   "dark fx off",
+   "cave power 0",
+   "cave facing N",
+   "cave not holding",
+   "cave power 10",
+   "cave power 10 W walk",
+   "cave power 100 E",
+   "cave fx off",
+   "dark light file missing power 100",
+   "dark light file missing power 10",
+   "cave light file missing power 100",
+   "cave light file missing power 10"
+  ],
+  "fail_vals": {
+   "G4b": "{\"p50_ratio_min_max\": [0.469, 0.674], \"p10_floor_max\": 0}",
+   "G4d": "{\"bad_total\": 0, \"changed_body_px_min\": 0}",
+   "G5": "{\"dark S\": {\"floor\": 0, \"body\": 0, \"lantern\": 0, \"light\": 0, \"outCell\": 0}, \"dark SE\": {\"floor\": 0, \"body\": 0, \"lantern\": 0, \"light\": 0, \"outCell\": 0}, \"dark E\": {\"floor\": 0, \"body\": 0, \"lantern\": 0, \"light\": 0, \"outCell\": 0}, \"dark NE\": {\"floor\": 0, \"body\": 0, \"lantern\": 0, \"light\": 0, \"outCell\": 0}, \"dark NW\": {\"floor\": 0, \"body\": 0, \"lantern\": 0, \"light\": 0, \"outCell\": 0}, \"dark W\": {\"floor\": 0, \"body\": 0, \"lantern\": 0, \"light\": 0, \"outCell\": 0}, \"dark SW\": {\"floor\": 0, \"body\": 0, \"lantern\": 0, \"light\": 0, \"outCell\": 0}, \"cave S\": {\"floor\": 0, \"body\": 0, \"lantern\": 0, \"light\": 0, \"outCell\":",
+   "G16": "{\"[600, 120] SE\": [92520, 0], \"[600, 120] W\": [97461, 0], \"[160, 400] SE\": [92520, 0], \"[160, 400] W\": [97461, 0], \"[160, -90] SE\": [92520, 0], \"[160, -90] W\": [97461, 0], \"[-200, 500] SE\": [92520, 0], \"[-200, 500] W\": [97461, 0], \"[900, 700] SE\": [92520, 0], \"[900, 700] W\": [97461, 0]}"
+  }
+ },
+ "gmv22_MUT-7": {
+  "pass": 21,
+  "n": 24,
+  "fails": [
+   "G4b",
+   "G5",
+   "G5b"
+  ],
+  "exit": 1,
+  "g5b_bad_cases": {
+   "dark power 10": {
+    "pool": true,
+    "glow": true,
+    "caveHole": 0,
+    "want_pool": true,
+    "px_fx_on_vs_off": null,
+    "ok": false
+   },
+   "dark power 10 W walk": {
+    "pool": true,
+    "glow": true,
+    "caveHole": 0,
+    "want_pool": true,
+    "px_fx_on_vs_off": null,
+    "ok": false
+   },
+   "cave power 10": {
+    "pool": true,
+    "glow": true,
+    "caveHole": 0,
+    "want_pool": true,
+    "px_fx_on_vs_off": null,
+    "ok": false
+   },
+   "cave power 10 W walk": {
+    "pool": true,
+    "glow": true,
+    "caveHole": 0,
+    "want_pool": true,
+    "px_fx_on_vs_off": null,
+    "ok": false
+   }
+  },
+  "g5b_all_keys": [
+   "dark power 0",
+   "dark facing N",
+   "dark not holding",
+   "dark power 10",
+   "dark power 10 W walk",
+   "dark power 100 E",
+   "dark fx off",
+   "cave power 0",
+   "cave facing N",
+   "cave not holding",
+   "cave power 10",
+   "cave power 10 W walk",
+   "cave power 100 E",
+   "cave fx off",
+   "dark light file missing power 100",
+   "dark light file missing power 10",
+   "cave light file missing power 100",
+   "cave light file missing power 10"
+  ],
+  "fail_vals": {
+   "G4b": "{\"p50_ratio_min_max\": [0.202, 0.477], \"p10_floor_max\": 33894}",
+   "G5": "{\"dark S\": {\"floor\": 30870, \"body\": 0, \"lantern\": 0, \"light\": 0, \"outCell\": 15255}, \"dark SE\": {\"floor\": 32166, \"body\": 0, \"lantern\": 0, \"light\": 0, \"outCell\": 14121}, \"dark E\": {\"floor\": 35433, \"body\": 0, \"lantern\": 0, \"light\": 0, \"outCell\": 13500}, \"dark NE\": {\"floor\": 35856, \"body\": 0, \"lantern\": 0, \"light\": 0, \"outCell\": 15273}, \"dark NW\": {\"floor\": 34308, \"body\": 0, \"lantern\": 0, \"light\": 0, \"outCell\": 15237}, \"dark W\": {\"floor\": 35451, \"body\": 0, \"lantern\": 0, \"light\": 0, \"outCell\": 13122}, \"dark SW\": {\"floor\": 34407, \"body\": 0, \"lantern\": 0, \"light\": 0, \"outCell\": 14697}, \"cave S\": {\"fl"
+  }
+ },
+ "gmv22_MUT-8": {
+  "pass": 20,
+  "n": 24,
+  "fails": [
+   "G4b",
+   "G5",
+   "G5b",
+   "G11"
+  ],
+  "exit": 1,
+  "g5b_bad_cases": {
+   "cave power 10": {
+    "pool": true,
+    "glow": false,
+    "caveHole": 0.35,
+    "want_pool": true,
+    "px_fx_on_vs_off": null,
+    "ok": false
+   },
+   "cave power 10 W walk": {
+    "pool": true,
+    "glow": false,
+    "caveHole": 0.35,
+    "want_pool": true,
+    "px_fx_on_vs_off": null,
+    "ok": false
+   }
+  },
+  "g5b_all_keys": [
+   "dark power 0",
+   "dark facing N",
+   "dark not holding",
+   "dark power 10",
+   "dark power 10 W walk",
+   "dark power 100 E",
+   "dark fx off",
+   "cave power 0",
+   "cave facing N",
+   "cave not holding",
+   "cave power 10",
+   "cave power 10 W walk",
+   "cave power 100 E",
+   "cave fx off",
+   "dark light file missing power 100",
+   "dark light file missing power 10",
+   "cave light file missing power 100",
+   "cave light file missing power 10"
+  ],
+  "fail_vals": {
+   "G4b": "{\"p50_ratio_min_max\": [0.239, 0.523], \"p10_floor_max\": 0}",
+   "G5": "{\"dark S\": {\"floor\": 8181, \"body\": 0, \"lantern\": 0, \"light\": 0, \"outCell\": 0}, \"dark SE\": {\"floor\": 10260, \"body\": 0, \"lantern\": 0, \"light\": 0, \"outCell\": 0}, \"dark E\": {\"floor\": 14121, \"body\": 0, \"lantern\": 0, \"light\": 0, \"outCell\": 0}, \"dark NE\": {\"floor\": 10089, \"body\": 0, \"lantern\": 0, \"light\": 0, \"outCell\": 0}, \"dark NW\": {\"floor\": 11709, \"body\": 0, \"lantern\": 0, \"light\": 0, \"outCell\": 0}, \"dark W\": {\"floor\": 14418, \"body\": 0, \"lantern\": 0, \"light\": 0, \"outCell\": 0}, \"dark SW\": {\"floor\": 10044, \"body\": 0, \"lantern\": 0, \"light\": 0, \"outCell\": 0}, \"cave S\": {\"floor\": 89604, \"body\": 24948, \"",
+   "G11": "{\"off\": [15.4, 18.6, 17.2, 17.5, 18.4], \"on\": [15.7, 14.8, 14.4, 14.8, 15.3], \"median\": [17.5, 14.8], \"draw_ms_cave_on_off_cpu1x\": {\"off_median7\": 6.093, \"on_median7\": 6.991}, \"scene_draw_ms_cpu1x\": {\"light\": 1.231, \"dark\": 1.494, \"cave\": 7.278}}"
+  }
+ },
+ "cpool_B": {
+  "exit": 0,
+  "n": 1536,
+  "flag_ok": 1536,
+  "pix_ok": 1536,
+  "assert_ok": 1536,
+  "flag_bad": 0,
+  "pix_bad": 0,
+  "assert_bad": 0,
+  "trans": "62/62",
+  "trans_bad": 0,
+  "errs": 0
+ },
+ "cpool_MUT-1": {
+  "exit": 1,
+  "n": 1536,
+  "flag_ok": 1508,
+  "pix_ok": 1508,
+  "assert_ok": 1536,
+  "flag_bad": 28,
+  "pix_bad": 28,
+  "assert_bad": 0,
+  "trans": "58/62",
+  "trans_bad": 4,
+  "errs": 0
+ },
+ "cpool_MUT-2": {
+  "exit": 1,
+  "n": 1536,
+  "flag_ok": 1524,
+  "pix_ok": 1524,
+  "assert_ok": 1536,
+  "flag_bad": 12,
+  "pix_bad": 12,
+  "assert_bad": 0,
+  "trans": "52/62",
+  "trans_bad": 10,
+  "errs": 0
+ },
+ "cpool_MUT-3": {
+  "exit": 1,
+  "n": 1536,
+  "flag_ok": 1452,
+  "pix_ok": 1452,
+  "assert_ok": 1536,
+  "flag_bad": 84,
+  "pix_bad": 84,
+  "assert_bad": 0,
+  "trans": "58/62",
+  "trans_bad": 4,
+  "errs": 0
+ },
+ "cpool_MUT-4": {
+  "exit": 1,
+  "n": 1536,
+  "flag_ok": 1494,
+  "pix_ok": 1494,
+  "assert_ok": 1536,
+  "flag_bad": 42,
+  "pix_bad": 42,
+  "assert_bad": 0,
+  "trans": "58/62",
+  "trans_bad": 4,
+  "errs": 0
+ },
+ "cpool_MUT-5": {
+  "exit": 1,
+  "n": 1536,
+  "flag_ok": 1452,
+  "pix_ok": 1452,
+  "assert_ok": 1536,
+  "flag_bad": 84,
+  "pix_bad": 84,
+  "assert_bad": 0,
+  "trans": "62/62",
+  "trans_bad": 0,
+  "errs": 0
+ },
+ "cpool_MUT-6": {
+  "exit": 1,
+  "n": 1536,
+  "flag_ok": 1508,
+  "pix_ok": 1508,
+  "assert_ok": 1536,
+  "flag_bad": 28,
+  "pix_bad": 28,
+  "assert_bad": 0,
+  "trans": "58/62",
+  "trans_bad": 4,
+  "errs": 0
+ },
+ "cpool_MUT-7": {
+  "exit": 1,
+  "n": 1536,
+  "flag_ok": 1536,
+  "pix_ok": 1494,
+  "assert_ok": 1536,
+  "flag_bad": 0,
+  "pix_bad": 42,
+  "assert_bad": 0,
+  "trans": "62/62",
+  "trans_bad": 0,
+  "errs": 0
+ },
+ "cpool_MUT-8": {
+  "exit": 1,
+  "n": 1536,
+  "flag_ok": 1536,
+  "pix_ok": 1522,
+  "assert_ok": 1536,
+  "flag_bad": 0,
+  "pix_bad": 14,
+  "assert_bad": 0,
+  "trans": "62/62",
+  "trans_bad": 0,
+  "errs": 0
+ }
+}

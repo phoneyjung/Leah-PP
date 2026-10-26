@@ -70,7 +70,16 @@ HELPERS = r"""()=>{const P=PT,S=P.ST,C=96;
  const changed=(a,noBody)=>{const L=set(Object.assign({},a,{hold:true})),Rg=region(L),D1=grab(Rg),Q=noBody?cls(L,Rg,masks(L)):null;set(Object.assign({},a,{hold:false}));const D2=grab(Rg);const u=new Set(),ub=new Set();
    for(let i=0;i<Rg.w*Rg.h;i++){const o=i*4;if(D1[o]!==D2[o]||D1[o+1]!==D2[o+1]||D1[o+2]!==D2[o+2]){const c=(D1[o]<<16)|(D1[o+1]<<8)|D1[o+2];if(Q&&Q.K[i]===1)ub.add(c);else u.add(c)}}return [[...u],[...ub]]};
  const hash=(a)=>{set(a);const c=cv(),D=c.getContext('2d').getImageData(0,0,c.width,c.height).data;let h1=2166136261>>>0,h2=0;for(let i=0;i<D.length;i++){h1=Math.imul(h1^D[i],16777619)>>>0;h2=(h2+D[i]*(i%251+1))>>>0}return h1+':'+h2+':'+c.width+'x'+c.height};
- window.__T={set,compare,reveal,lightCheck,changed,hash};return true}"""
+ // v2.3 G18a: every drawImage of the C pool images (FX.poolFlat / FX.poolHole) in one frame: image, alpha, blend, layer, place - recorded by the test, the page is not changed
+ const cdraw=(a)=>{const rec=[],pr=CanvasRenderingContext2D.prototype,orig=pr.drawImage;pr.drawImage=function(im,...r){if(im===P.FX.poolFlat||im===P.FX.poolHole)rec.push([im===P.FX.poolFlat?'flat':'hole',this.globalAlpha,this.globalCompositeOperation,this.canvas===P.FX.dark?'dark layer':'screen',r.map(v=>Math.round(v*1000)/1000).join(',')]);return orig.call(this,im,...r)};
+   try{set(a)}finally{pr.drawImage=orig}return rec};
+ // v2.3 G18b: C alone at power 10 (fx on - fx off) vs C alone at power 100 with GM_POW[100] glow / hole forced 0 · same place · light px of the glass (35 % vs 100 %) excluded
+ const cstr=(a)=>{const at=(p,fx,ov)=>{let keep=null;if(ov){keep=Object.assign({},P.GM_POW[p]);Object.assign(P.GM_POW[p],ov)}try{return set(Object.assign({},a,{power:p,fx}))}finally{if(ov)Object.assign(P.GM_POW[p],keep)}};
+   const L=at(10,true),Rg=region(L),Q=cls(L,Rg,masks(L)),A1=grab(Rg);at(10,false);const A0=grab(Rg);at(100,true,{glow:0,hole:0});const B1=grab(Rg);at(100,false,{glow:0,hole:0});const B0=grab(Rg);
+   let n10=0,n100=0,e10=0,e100=0,mis=0;for(let i=0;i<Rg.w*Rg.h;i++){if(Q.K[i]===3||Q.K[i]===255)continue;const o=i*4;let d10=0,d100=0,df=false;
+     for(let ch=0;ch<3;ch++){const u=A1[o+ch]-A0[o+ch],v=B1[o+ch]-B0[o+ch];d10+=Math.abs(u);d100+=Math.abs(v);if(u!==v)df=true}if(d10)n10++;if(d100)n100++;e10+=d10;e100+=d100;if(df)mis++}
+   return {px10:n10,px100:n100,ratio:e100?Math.round(e10/e100*1000)/1000:null,mismatch:mis,pool10:L.gm.drawn.pool}};
+ window.__T={set,compare,reveal,lightCheck,changed,hash,cdraw,cstr};return true}"""
 T = lambda pg, fn, *a: pg.evaluate('(a)=>window.__T.%s(...a)' % fn, list(a))
 errors = []
 with sync_playwright() as p:
@@ -102,16 +111,16 @@ with sync_playwright() as p:
             for an, fi in (('idle', 0), ('walk', 2)):
                 base = {'dir': d, 'scene': sc, 'anim': an, 'fi': fi, 'fx': True}
                 g100 = T(page, 'compare', dict(base, power=100), dict(base, power=100), True); g50 = T(page, 'compare', dict(base, power=50), dict(base, power=50), True)
-                c = T(page, 'compare', dict(base, power=100), dict(base, power=0)); c50 = T(page, 'compare', dict(base, power=50), dict(base, power=0)); c10 = T(page, 'compare', dict(base, power=10), dict(base, power=0))
+                c = T(page, 'compare', dict(base, power=100), dict(base, power=10)); c50 = T(page, 'compare', dict(base, power=50), dict(base, power=10)); c10 = T(page, 'compare', dict(base, power=10), dict(base, power=10), True); c0 = T(page, 'compare', dict(base, power=100), dict(base, power=0))   # G4c keeps its own 100-vs-0 comparison
                 glow['%s %s %s' % (sc, d, an)] = {'glow100': {k: g100[k] for k in ('floor', 'body', 'lantern', 'light')}, 'glow50': {k: g50[k] for k in ('floor', 'body', 'lantern', 'light')},
                                                   'p50_ratio': round(c50['energy'] / c['energy'], 3) if c['energy'] else None, 'p10_floor': c10['floor'],
-                                                  'p100_vs_0': {k: c[k] for k in ('floor', 'body', 'lantern', 'light')}}
+                                                  'p100_vs_0': {k: c0[k] for k in ('floor', 'body', 'lantern', 'light')}}
     R['glow'] = glow
     ok('G4 plan criterion 8: the Glow alone (same render with glow 0) changes 0 body / fist / face px, 0 lantern px, > 0 floor px (power 100 and 50 x 7 dirs x 3 scenes x idle/walk)',
        all(v[g]['body'] == 0 and v[g]['lantern'] == 0 and v[g]['light'] == 0 and v[g]['floor'] > 0 for v in glow.values() for g in ('glow100', 'glow50')),
        {'worst_body': max(v[g]['body'] for v in glow.values() for g in ('glow100', 'glow50')), 'worst_lantern': max(v[g]['lantern'] for v in glow.values() for g in ('glow100', 'glow50')),
         'min_floor': min(v[g]['floor'] for v in glow.values() for g in ('glow100', 'glow50'))})
-    ok('G4b power 50 = about half the light around (floor energy 50/100 % in 0.35-0.65) · power 10 = no glow (0 floor px)',
+    ok('G4b power 50 = about half the light around (floor energy 50/100 % in 0.35-0.65, baseline power 10 = C only) · power 10 = no glow (0 floor px)',
        all(v['p50_ratio'] is not None and 0.35 <= v['p50_ratio'] <= 0.65 and v['p10_floor'] == 0 for v in glow.values()),
        {'p50_ratio_min_max': [min(v['p50_ratio'] for v in glow.values()), max(v['p50_ratio'] for v in glow.values())], 'p10_floor_max': max(v['p10_floor'] for v in glow.values())})
     ok('G4c light / dark floor: power 100 vs 0 changes only floor + light px (0 body, 0 lantern metal)',
@@ -123,16 +132,51 @@ with sync_playwright() as p:
             base = {'dir': d, 'scene': 'cave', 'anim': an, 'fi': fi, 'fx': True, 'zoom': zoom, 'eoff': eoff}
             k_ = '%s %s f%d z%s e%s' % (d, an, fi, zoom, eoff)
             rv['light ' + k_] = T(page, 'reveal', dict(base, power=100), dict(base, power=0))
-            rv['C ' + k_] = T(page, 'reveal', dict(base, power=0), dict(base, power=0, fx=False))
+            rv['C ' + k_] = T(page, 'reveal', dict(base, power=10), dict(base, power=10, fx=False))
     ok('G4d cave: the lantern light and C only uncover the body (every changed body px is at least as close to the true sprite colour) · never tint it (7 dirs x idle/walk x zoom 100/75 x eased offsets)',
        all(v[0] == 0 for v in rv.values()) and all(v[1] > 0 for v in rv.values()), {'bad_total': sum(v[0] for v in rv.values()), 'changed_body_px_min': min(v[1] for v in rv.values())})
     pool = {}
     for sc in ('dark', 'cave', 'light'):
         for d in HOLD:
-            base = {'dir': d, 'scene': sc, 'power': 0}
+            base = {'dir': d, 'scene': sc, 'power': 10}
             c = T(page, 'compare', dict(base, fx=True), dict(base, fx=False)); pool['%s %s' % (sc, d)] = {k: c[k] for k in ('floor', 'body', 'lantern', 'light', 'outCell')}
-    ok('G5 C pool (fx on vs off at power 0): dark = behind the body (0 body / lantern px, > 0 floor px) · cave = only inside the player cell · light = no pool (0 px)',
+    ok('G5 C pool (fx on vs off at power 10): dark = behind the body (0 body / lantern px, > 0 floor px) · cave = only inside the player cell · light = no pool (0 px)',
        all((v['body'] == 0 and v['lantern'] == 0 and v['light'] == 0 and v['floor'] > 0) if k.startswith('dark') else (v['outCell'] == 0 and v['floor'] > 0) if k.startswith('cave') else sum(v.values()) == 0 for k, v in pool.items()), pool)
+    rule = {}   # G5b (v2.2): direct flag assertions + 0 px where C must be off · dark floor and cave
+    CASES = (('power 0', {'dir': 'S', 'power': 0, 'hold': True}, False), ('facing N', {'dir': 'N', 'power': 100, 'hold': True}, False),
+             ('not holding', {'dir': 'S', 'power': 100, 'hold': False}, False), ('power 10', {'dir': 'S', 'power': 10, 'hold': True}, True),
+             ('power 10 W walk', {'dir': 'W', 'power': 10, 'hold': True, 'anim': 'walk', 'fi': 3}, True), ('power 100 E', {'dir': 'E', 'power': 100, 'hold': True}, True))
+    def flags(L): D = L['gm']['drawn']; return {'pool': D['pool'], 'glow': D['glow'], 'caveHole': D['caveHole']}
+    for sc in ('dark', 'cave'):
+        for lab, st, want in CASES:
+            base = dict(st, scene=sc); F = flags(T(page, 'set', dict(base, fx=True))); c = T(page, 'compare', dict(base, fx=True), dict(base, fx=False)) if not want else None
+            ok_ = F['pool'] == want and (c is None or sum(c[k] for k in ('floor', 'body', 'lantern', 'light', 'outCell')) == 0)
+            if st['power'] == 10: ok_ = ok_ and F['glow'] is False and F['caveHole'] == 0       # power 10: C on, but no Glow and no cave lantern light
+            rule['%s %s' % (sc, lab)] = dict(F, want_pool=want, px_fx_on_vs_off=(sum(c[k] for k in ('floor', 'body', 'lantern', 'light', 'outCell')) if c else None), ok=ok_)
+        F = flags(T(page, 'set', {'dir': 'S', 'power': 100, 'hold': True, 'scene': sc, 'fx': False})); rule['%s fx off' % sc] = dict(F, want_pool=False, ok=F['pool'] is False and F['glow'] is False)
+    lp = ctx.new_page(); lp.route('**/%s-light.png' % BASE, lambda r: r.abort())   # light layer missing: no C (and no glow / cave light) at any power
+    lp.goto(URL); lp.wait_for_function('PT.ST.ok.walkhold && PT.ST.ok.lantern && PT.FX.glow && PT.ST.last', timeout=15000); lp.evaluate(HELPERS)
+    for sc in ('dark', 'cave'):
+        for pw in (100, 10):
+            F = flags(T(lp, 'set', {'dir': 'S', 'power': pw, 'hold': True, 'scene': sc, 'fx': True}))
+            rule['%s light file missing power %d' % (sc, pw)] = dict(F, want_pool=False, ok=F['pool'] is False and F['glow'] is False and F['caveHole'] == 0)
+    lp.close()
+    ok('G5b rule (owner choice 26 Oct, v2.2 flags): C only with Glow+C on + held lantern + light layer + power > 0 + not N · pool=false (and 0 px) at power 0 / facing N / not holding / Glow+C off / light file missing · power 10: pool=true, glow=false, caveHole=0 · dark floor + cave',
+       all(v['ok'] for v in rule.values()), rule)
+    cs = {}   # G18 (v2.3): V0 = full C at power 10 · a) the C draw call itself at the real power 10 / 50 / 100 · b) the C pixels on screen
+    for sc in ('dark', 'cave'):
+        for d in HOLD:
+            for an, fi in (('idle', 0), ('walk', 3)):
+                st = {'dir': d, 'scene': sc, 'anim': an, 'fi': fi, 'hold': True, 'fx': True}
+                calls = {pw: T(page, 'cdraw', dict(st, power=pw)) for pw in (10, 50, 100)}
+                px = T(page, 'cstr', st)
+                cs['%s %s %s' % (sc, d, an)] = dict(px, calls10=calls[10], same_call_as_50_100=calls[10] == calls[50] == calls[100],
+                                                    ok=len(calls[10]) == 1 and calls[10] == calls[50] == calls[100] and calls[10][0][1] == 1
+                                                    and px['pool10'] is True and px['px10'] > 0 and px['mismatch'] == 0 and px['ratio'] is not None and 0.98 <= px['ratio'] <= 1.02)
+    ok('G18 V0: C at power 10 = the full C · a) one C draw per frame, same image / alpha 1 / blend / layer / place as at power 50 and 100 · b) C alone at 10 = C alone at 100 with Glow / cave light forced 0 (0 px differ outside the glass, ratio 1.00 +- 0.02) · dark floor + cave · 7 dirs x idle/walk',
+       all(v['ok'] for v in cs.values()),
+       {'cases': len(cs), 'bad': [k for k, v in cs.items() if not v['ok']], 'ratio_min_max': [min(v['ratio'] or 0 for v in cs.values()), max(v['ratio'] or 0 for v in cs.values())], 'mismatch_max': max(v['mismatch'] for v in cs.values()),
+        'alpha10': sorted(set(c[1] for v in cs.values() for c in v['calls10'])), 'calls10_per_frame': sorted(set(len(v['calls10']) for v in cs.values())), 'px10_min': min(v['px10'] for v in cs.values()), 'by_case': cs})
     em = {}
     for d in HOLD:
         for an, fi, zoom, eoff in (('idle', 0, 1, None), ('walk', 2, 1, None), ('walk', 4, 0.75, None), ('idle', 1, 1, [2, -3]), ('walk', 1, 0.75, [-3, 2])):
@@ -158,11 +202,12 @@ with sync_playwright() as p:
                                          'uncovered_body_closest_gold_info': closest(uniq_rev, 'gold #FFC857'), 'sprite_cream_F9DA99_vs_gold_info': round(de00((0xF9, 0xDA, 0x99), SIGNAL['gold #FFC857']), 2)})
     nn = {}
     for sc in ('dark', 'cave'):
-        L = T(page, 'set', {'dir': 'N', 'power': 100, 'fx': True, 'scene': sc}); nn[sc] = [L['lantern'], L['gm']['drawn']['glow'], L['gm']['drawn']['caveHole']]
-    turn = page.evaluate("""()=>{const P=PT,S=P.ST,o=[];for(const [a,c] of [['NE','N'],['N','NE'],['NW','N'],['N','NW']]){P.pause(true);P.set({dir:a,anim:'walk',fi:0,hold:true,power:100,fx:true,scene:'cave',lpos:null,ldir:null,clean:false});P.draw();
-       for(let i=0;i<10;i++){P.step(16);P.draw()}S.dir=c;P.step(16);P.draw();o.push([!!S.last.lantern,S.last.gm.drawn.glow,S.last.gm.drawn.caveHole>0])}return o}""")
-    ok('G8 N: no lantern, no glow, no cave light · turning N <-> NE/NW switches them on the same frame',
-       all(v == [None, False, 0] for v in nn.values()) and turn == [[False, False, False], [True, True, True], [False, False, False], [True, True, True]], {'N': nn, 'turn': turn})
+        L = T(page, 'set', {'dir': 'N', 'power': 100, 'fx': True, 'scene': sc}); nn[sc] = [L['lantern'], L['gm']['drawn']['glow'], L['gm']['drawn']['caveHole'], L['gm']['drawn']['pool']]
+    turn = page.evaluate("""()=>{const P=PT,S=P.ST,o={};for(const [sc,pw] of [['cave',100],['dark',100],['cave',10],['dark',10]]){const k=sc+' '+pw;o[k]=[];for(const [a,c] of [['NE','N'],['N','NE'],['NW','N'],['N','NW']]){P.pause(true);P.set({dir:a,anim:'walk',fi:0,hold:true,power:pw,fx:true,scene:sc,lpos:null,ldir:null,clean:false});P.draw();
+       for(let i=0;i<10;i++){P.step(16);P.draw()}S.dir=c;P.step(16);P.draw();o[k].push([!!S.last.lantern,S.last.gm.drawn.glow,S.last.gm.drawn.caveHole>0,S.last.gm.drawn.pool])}}return o}""")   # v2.3: + C, dark floor, power 10
+    F_, T_ = False, True; TW = {'cave 100': [T_, T_, T_, T_], 'dark 100': [T_, T_, F_, T_], 'cave 10': [T_, F_, F_, T_], 'dark 10': [T_, F_, F_, T_]}   # first frame after turning away from N
+    ok('G8 N: no lantern, no glow, no cave light, no C · turning N <-> NE/NW switches them (and C) on the same frame · cave + dark floor · power 100 + 10',
+       all(v == [None, False, 0, False] for v in nn.values()) and turn == {k: [[F_] * 4, w, [F_] * 4, w] for k, w in TW.items()}, {'N': nn, 'turn': turn})
     fs = page.evaluate("""()=>{const P=PT;for(const sc of ['light','dark','cave'])for(const pw of [100,50,10,0]){P.set({scene:sc,power:pw,fx:true,hold:true,clean:false});for(let i=0;i<20;i++){P.step(16);P.draw()}}return window.__FILTER_SETS}""")
     ok('G9 ctx.filter set 0 times while drawing', fs == 0, fs)
     page.evaluate("()=>{PT.set({power:100,fx:true,scene:'light',zoom:1});PT.pause(false)}")
@@ -208,7 +253,8 @@ with sync_playwright() as p:
     ok('G12 iPad 1180x820 GM page: 0 errors, lantern drawn', not e2 and pg2.evaluate('!!PT.ST.last.lantern'), e2[:3])
     ctx2.close()
     fb = {}
-    for name, pats in (('base_png', ['**/%s.png' % BASE]), ('json', ['**/%s.json' % BASE]), ('light_png', ['**/%s-light.png' % BASE]), ('cave_floor', ['**/cave-floor.jpg']),
+    for name, pats in (('base_png', ['**/%s.png' % BASE]), ('json', ['**/%s.json' % BASE]), ('base_json', ['**/%s.png' % BASE, '**/%s.json' % BASE]), ('hold_json', ['**/c2-pilot-hold-anchors.json']), ('walkhold_png', ['**/c2-pilot-kid4-walkhold.png']),
+                       ('light_png', ['**/%s-light.png' % BASE]), ('cave_floor', ['**/cave-floor.jpg']),
                        ('all_lantern', ['**/%s.png' % BASE, '**/%s-light.png' % BASE, '**/%s.json' % BASE])):
         pg = ctx.new_page(); errs = []; cons = []; rq = []
         pg.on('pageerror', lambda e: errs.append(str(e))); pg.on('console', lambda m: cons.append(m.text) if m.type == 'error' and 'Failed to load resource' not in m.text else None); pg.on('request', lambda r: rq.append(r.url.rsplit('/', 1)[-1]))
@@ -218,18 +264,21 @@ with sync_playwright() as p:
         L = pg.evaluate("()=>{const L=PT.ST.last;return {lantern:!!L.lantern,sheet:L.sheet,gm:L.gm}}")
         ncol = pg.evaluate("()=>{const c=document.getElementById('cv'),D=c.getContext('2d').getImageData(0,0,c.width,c.height).data,u=new Set();for(let i=0;i<D.length;i+=4*7)u.add((D[i]<<16)|(D[i+1]<<8)|D[i+2]);return u.size}")
         im = np.array(Image.open(shot).convert('RGB')); white = float((im.min(-1) > 250).mean())
+        pools = pg.evaluate("()=>{const o={};for(const sc of ['cave','dark'])for(const pw of [100,10]){PT.set({scene:sc,power:pw});PT.draw();o[sc+' '+pw]=PT.ST.last.gm.drawn.pool}return o}")   # v2.3: C at power 100 / 10, cave + dark floor (after the canvas checks)
         fb[name] = {'errors': len(errs) + len(cons), 'white': round(white, 3), 'canvas_colours': ncol, 'lantern': L['lantern'], 'walk_sheet': L['sheet'], 'glow': L['gm']['drawn']['glow'], 'cave_light': L['gm']['drawn']['caveHole'],
-                    'light': L['gm']['drawn']['light'], 'kid_lantern_requested': 'kid-lantern.png' in rq}
+                    'light': L['gm']['drawn']['light'], 'pool': L['gm']['drawn']['pool'], 'pools': pools, 'kid_lantern_requested': 'kid-lantern.png' in rq}
         pg.close()
-    want = {'base_png': (False, 'walk'), 'json': (False, 'walk'), 'all_lantern': (False, 'walk'), 'light_png': (True, 'walkhold'), 'cave_floor': (True, 'walkhold')}
-    ok('G13 missing files: base / json -> no lantern (old walk sheet, never Set 08) · light -> lantern without light, glow or cave light · cave floor -> still drawn · 0 errors, the canvas really drew (>= 50 colours, a sprite sheet)',
+    want = {'base_png': (False, 'walk'), 'json': (False, 'walk'), 'base_json': (False, 'walk'), 'hold_json': (False, 'walk'), 'walkhold_png': (False, 'walk'), 'all_lantern': (False, 'walk'), 'light_png': (True, 'walkhold'), 'cave_floor': (True, 'walkhold')}
+    ok('G13 missing files: base / json / both / hold anchors / walk-hold sheet -> no lantern (old walk sheet, never Set 08) and no C · light -> lantern without light, glow, cave light or C · C off at power 100 and 10 on cave and dark floor · cave floor -> still drawn, C on (control) · 0 errors, the canvas really drew (>= 50 colours, a sprite sheet)',
        all(v['errors'] == 0 and v['white'] < 0.5 and v['canvas_colours'] >= 50 and v['walk_sheet'] and not v['kid_lantern_requested'] and (v['lantern'], v['walk_sheet']) == want[k] for k, v in fb.items())
-       and fb['light_png']['glow'] is False and fb['light_png']['cave_light'] == 0 and fb['light_png']['light'] == 0 and fb['cave_floor']['glow'] is True, fb)
+       and fb['light_png']['glow'] is False and fb['light_png']['cave_light'] == 0 and fb['light_png']['light'] == 0 and fb['light_png']['pool'] is False and fb['cave_floor']['glow'] is True
+       and all(fb[k]['pool'] is False and not any(fb[k]['pools'].values()) for k in ('base_png', 'json', 'base_json', 'hold_json', 'walkhold_png', 'all_lantern', 'light_png'))
+       and fb['cave_floor']['pool'] is True and all(fb['cave_floor']['pools'].values()), fb)   # v2.3
     far = {}
     for pos in ([600, 120], [160, 400], [160, -90], [-200, 500], [900, 700]):
         for d in ('SE', 'W'):
             base = {'dir': d, 'scene': 'cave', 'pos': {'x': pos[0], 'y': pos[1]}}
-            c = T(page, 'compare', dict(base, power=100, fx=True), dict(base, power=0, fx=True)); cp = T(page, 'compare', dict(base, power=0, fx=True), dict(base, power=0, fx=False))
+            c = T(page, 'compare', dict(base, power=100, fx=True), dict(base, power=0, fx=True)); cp = T(page, 'compare', dict(base, power=10, fx=True), dict(base, power=10, fx=False))
             far['%s %s' % (pos, d)] = [c['floor'], cp['floor'] + cp['body']]
     ok('G16 cave far from the start (5 places x 2 dirs): the lantern light and C still open the darkness (> 0 px changed)', all(v[0] > 0 and v[1] > 0 for v in far.values()), far)
     c3 = page.evaluate("""()=>{const P=PT,S=P.ST,o={};const c=document.createElement('canvas');c.width=32;c.height=32;const x=c.getContext('2d');x.drawImage(S.img.lantern,0,0,32,32,0,0,32,32);const D=x.getImageData(0,0,32,32).data;
@@ -252,3 +301,4 @@ R['checks'] = CHECK
 json.dump(R, open(os.path.join(OUT, 'gm-lantern-test.json'), 'w'), indent=1, ensure_ascii=False)
 for c in CHECK: print(('PASS ' if c['pass'] else 'FAIL ') + c['check'] + ' :: ' + json.dumps(c['value'], ensure_ascii=False)[:400])
 print('TOTAL %d/%d PASS' % (sum(c['pass'] for c in CHECK), len(CHECK)))
+sys.exit(0 if CHECK and all(c['pass'] for c in CHECK) else 1)   # v2.2: exit 1 when any check fails (v2.3: 25 checks with OLD_PORT)

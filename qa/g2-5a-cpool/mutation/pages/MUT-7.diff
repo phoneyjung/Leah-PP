@@ -1,0 +1,11 @@
+--- B/pilot-g2-motion.html
++++ MUT-7/pilot-g2-motion.html
+@@ -77,7 +77,7 @@
+   resize();sync();requestAnimationFrame(loop)}
+ // ---------- GM lantern: files, 8-column sheets (S cell reused), overlays built once at art resolution (stepped bands, no ctx.filter) ----------
+ const GM_BASE='c2-held-lantern_L0-S-trial', POWERS=[100,50,10,0];
+-const GM_POW={100:{light:1,glow:1,hole:1},50:{light:1,glow:0.5,hole:0.5},10:{light:0.35,glow:0,hole:0},0:{light:0,glow:0,hole:0}};   // plan G2.5 section 6: 50 % = half glow · 10 % = glint in the glass only · 0 % = dark glass, no glow
++const GM_POW={100:{light:1,glow:1,hole:1},50:{light:1,glow:0.5,hole:0.5},10:{light:0.35,glow:0.35,hole:0},0:{light:0,glow:0,hole:0}};   // plan G2.5 section 6: 50 % = half glow · 10 % = glint in the glass only · 0 % = dark glass, no glow
+ function sheet8(img){const c=document.createElement('canvas');c.width=8*LAN_CELL;c.height=LAN_CELL;const x=c.getContext('2d');for(let k=0;k<8;k++)x.drawImage(img,0,0,LAN_CELL,LAN_CELL,k*LAN_CELL,0,LAN_CELL,LAN_CELL);return c}
+ async function gmLantern(){
+   const [b,l]=await Promise.all([load(GM_BASE+'.png'),load(GM_BASE+'-light.png')]);let j=null;

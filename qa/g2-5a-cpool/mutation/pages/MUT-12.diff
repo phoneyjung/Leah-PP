@@ -1,0 +1,20 @@
+--- B/pilot-g2-motion.html
++++ MUT-12/pilot-g2-motion.html
+@@ -163,7 +163,7 @@
+   const P_=gmPow(),lit=gmLit();ST.gmDraw={glow:false,pool:false,light:0,caveHole:0};
+   const cOn=ST.gm&&ST.fx&&!!t&&lit&&d!=='N';   // C pool (owner choice ค, 26 Oct): only with a held, drawn, lit lantern (lantern + light files ok, power > 0), not facing N, Glow+C on
+   if(ST.gm&&!ST.clean&&ST.fx){   // behind the body: C pool on the flat dark floor, then the lit-only warm Glow (screen) - never over the face or fist
+-    if(ST.scene==='dark'&&cOn){g.drawImage(FX.poolFlat,0,0,C,C,sx,sy,C*s,C*s);ST.gmDraw.pool=true}
++    if(ST.scene==='dark'&&cOn){g.globalAlpha=P_.glow>0?1:0.35;g.drawImage(FX.poolFlat,0,0,C,C,sx,sy,C*s,C*s);g.globalAlpha=1;ST.gmDraw.pool=true}
+     if(lit&&LW&&P_.glow>0){g.globalAlpha=P_.glow;g.globalCompositeOperation='screen';const gx=LW[0]+16-GLOW.R,gy=LW[1]+15-GLOW.R;
+       g.drawImage(FX.glow,0,0,2*GLOW.R+1,2*GLOW.R+1,ox+gx*s,oy+gy*s,(2*GLOW.R+1)*s,(2*GLOW.R+1)*s);g.globalCompositeOperation='source-over';g.globalAlpha=1;ST.gmDraw.glow=true}}
+   if(img)g.drawImage(img,kk*C,DIRS.indexOf(d)*C,C,C,sx,sy,C*s,C*s);else{g.fillStyle='#c84';g.fillRect(fx-10*s,fy-40*s,20*s,40*s)}
+@@ -180,7 +180,7 @@
+     x.globalCompositeOperation='source-over';x.clearRect(0,0,aw,ah);x.fillStyle='rgba('+DARK_RGB+','+DARK_A+')';x.fillRect(0,0,aw,ah);
+     x.globalCompositeOperation='destination-out';
+     if(ST.fx&&lit&&lanXY&&P_.hole>0){x.globalAlpha=P_.hole;x.drawImage(FX.lhole,Math.round((lanXY[1]-DX)/s)+16-LHOLE.R,Math.round((lanXY[2]-DY)/s)+15-LHOLE.R);x.globalAlpha=1;ST.gmDraw.caveHole=P_.hole}
+-    if(cOn){x.drawImage(FX.poolHole,Math.round((sx-DX)/s),Math.round((sy-DY)/s));ST.gmDraw.pool=true}
++    if(cOn){x.globalAlpha=P_.hole>0?1:0.35;x.drawImage(FX.poolHole,Math.round((sx-DX)/s),Math.round((sy-DY)/s));x.globalAlpha=1;ST.gmDraw.pool=true}
+     x.globalCompositeOperation='source-over';
+     g.drawImage(dc,0,0,aw,ah,DX,DY,aw*s,ah*s);
+     if(lit&&lanXY){   // the fist stays in front of the light: cut the fist px out of the light cell before drawing it again

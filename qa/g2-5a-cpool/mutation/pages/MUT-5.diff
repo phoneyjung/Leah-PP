@@ -1,0 +1,11 @@
+--- B/pilot-g2-motion.html
++++ MUT-5/pilot-g2-motion.html
+@@ -161,7 +161,7 @@
+   if(t&&(!ST.lpos||ST.ldir!==d)){ST.lpos=[t[0],t[1]];ST.ldir=d;ST.lhist=[{t:ST.lclock||0,p:[t[0],t[1]]}]}   // snap in draw is part of the history too
+   const LW=t?[ST.pos.x-FEET[0]+dx+Math.round(ST.lpos[0])-HG[0],ST.pos.y-FEET[1]+Math.round(ST.lpos[1])-HG[1]]:null;   // lantern cell origin in world art px (glow / cave light)
+   const P_=gmPow(),lit=gmLit();ST.gmDraw={glow:false,pool:false,light:0,caveHole:0};
+-  const cOn=ST.gm&&ST.fx&&!!t&&lit&&d!=='N';   // C pool (owner choice ค, 26 Oct): only with a held, drawn, lit lantern (lantern + light files ok, power > 0), not facing N, Glow+C on
++  const cOn=ST.gm&&ST.fx&&!!t&&(lit||(!ST.img.lanternLight&&ST.power>0))&&d!=='N';   // C pool (owner choice ค, 26 Oct): only with a held, drawn, lit lantern (lantern + light files ok, power > 0), not facing N, Glow+C on
+   if(ST.gm&&!ST.clean&&ST.fx){   // behind the body: C pool on the flat dark floor, then the lit-only warm Glow (screen) - never over the face or fist
+     if(ST.scene==='dark'&&cOn){g.drawImage(FX.poolFlat,0,0,C,C,sx,sy,C*s,C*s);ST.gmDraw.pool=true}
+     if(lit&&LW&&P_.glow>0){g.globalAlpha=P_.glow;g.globalCompositeOperation='screen';const gx=LW[0]+16-GLOW.R,gy=LW[1]+15-GLOW.R;

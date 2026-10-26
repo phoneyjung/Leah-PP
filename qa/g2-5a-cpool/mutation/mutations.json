@@ -1,0 +1,95 @@
+{
+ "MUT-1": {
+  "what": "C on at power 0",
+  "from": "const cOn=ST.gm&&ST.fx&&!!t&&lit&&d!=='N';",
+  "to": "const cOn=ST.gm&&ST.fx&&!!t&&(lit||(ST.power===0&&!!ST.img.lanternLight))&&d!=='N';"
+ },
+ "MUT-2": {
+  "what": "C on facing N",
+  "from": "const cOn=ST.gm&&ST.fx&&!!t&&lit&&d!=='N';",
+  "to": "const cOn=ST.gm&&ST.fx&&(!!t||(d==='N'&&holdOn()))&&lit;"
+ },
+ "MUT-3": {
+  "what": "C on when hold=false",
+  "from": "const cOn=ST.gm&&ST.fx&&!!t&&lit&&d!=='N';",
+  "to": "const cOn=ST.gm&&ST.fx&&(!!t||!ST.hold)&&lit&&d!=='N';"
+ },
+ "MUT-4": {
+  "what": "C on when FX off (cave; the dark-floor C sits inside the fx block)",
+  "from": "const cOn=ST.gm&&ST.fx&&!!t&&lit&&d!=='N';",
+  "to": "const cOn=ST.gm&&!!t&&lit&&d!=='N';"
+ },
+ "MUT-5": {
+  "what": "C on when the light file is missing",
+  "from": "const cOn=ST.gm&&ST.fx&&!!t&&lit&&d!=='N';",
+  "to": "const cOn=ST.gm&&ST.fx&&!!t&&(lit||(!ST.img.lanternLight&&ST.power>0))&&d!=='N';"
+ },
+ "MUT-6": {
+  "what": "C off at power 10 although the rule is met",
+  "from": "const cOn=ST.gm&&ST.fx&&!!t&&lit&&d!=='N';",
+  "to": "const cOn=ST.gm&&ST.fx&&!!t&&lit&&d!=='N'&&ST.power!==10;"
+ },
+ "MUT-7": {
+  "what": "Glow at power 10",
+  "from": "10:{light:0.35,glow:0,hole:0}",
+  "to": "10:{light:0.35,glow:0.35,hole:0}"
+ },
+ "MUT-8": {
+  "what": "cave lantern light (caveHole) at power 10",
+  "from": "10:{light:0.35,glow:0,hole:0}",
+  "to": "10:{light:0.35,glow:0,hole:0.35}"
+ },
+ "MUT-9": {
+  "what": "C at 35 % strength at power 10 (dark floor + cave) - requested by ChatGPT",
+  "edits": [
+   [
+    "if(ST.scene==='dark'&&cOn){g.drawImage(FX.poolFlat,0,0,C,C,sx,sy,C*s,C*s);ST.gmDraw.pool=true}",
+    "if(ST.scene==='dark'&&cOn){g.globalAlpha=ST.power===10?0.35:1;g.drawImage(FX.poolFlat,0,0,C,C,sx,sy,C*s,C*s);g.globalAlpha=1;ST.gmDraw.pool=true}"
+   ],
+   [
+    "if(cOn){x.drawImage(FX.poolHole,Math.round((sx-DX)/s),Math.round((sy-DY)/s));ST.gmDraw.pool=true}",
+    "if(cOn){x.globalAlpha=ST.power===10?0.35:1;x.drawImage(FX.poolHole,Math.round((sx-DX)/s),Math.round((sy-DY)/s));x.globalAlpha=1;ST.gmDraw.pool=true}"
+   ]
+  ]
+ },
+ "MUT-11": {
+  "what": "extra control for G8 (not requested): C one frame late after turning away from N",
+  "edits": [
+   [
+    "const cOn=ST.gm&&ST.fx&&!!t&&lit&&d!=='N';",
+    "const cOn=ST.gm&&ST.fx&&!!t&&lit&&d!=='N'&&!(ST.last&&ST.last.dir==='N');"
+   ]
+  ]
+ },
+ "MUT-10a": {
+  "what": "extra control for G13 (not requested): C on while holding when the lantern cannot be held (needs !!t) - found by the independent reviewer: the draft v2.3 could not see it (with base/json missing the light layer is never loaded, so lit=false keeps C off anyway); final v2.3 catches it with the hold-anchors / walk-hold missing cases",
+  "edits": [
+   [
+    "const cOn=ST.gm&&ST.fx&&!!t&&lit&&d!=='N';",
+    "const cOn=ST.gm&&ST.fx&&(!!t||(ST.hold&&!holdOn()))&&lit&&d!=='N';"
+   ]
+  ]
+ },
+ "MUT-10": {
+  "what": "extra control for G13 (not requested): C on while holding when the lantern files cannot be used (base png / json / both missing), power > 0",
+  "edits": [
+   [
+    "const cOn=ST.gm&&ST.fx&&!!t&&lit&&d!=='N';",
+    "const cOn=ST.gm&&ST.fx&&((!!t&&lit)||(!ST.ok.lantern&&ST.hold&&ST.power>0))&&d!=='N';"
+   ]
+  ]
+ },
+ "MUT-12": {
+  "what": "found by the independent reviewer: C at 35 % whenever Glow (dark floor) or cave light (cave) is 0 - i.e. at power 10 - so a reference with Glow / cave light forced 0 is dimmed too",
+  "edits": [
+   [
+    "if(ST.scene==='dark'&&cOn){g.drawImage(FX.poolFlat,0,0,C,C,sx,sy,C*s,C*s);ST.gmDraw.pool=true}",
+    "if(ST.scene==='dark'&&cOn){g.globalAlpha=P_.glow>0?1:0.35;g.drawImage(FX.poolFlat,0,0,C,C,sx,sy,C*s,C*s);g.globalAlpha=1;ST.gmDraw.pool=true}"
+   ],
+   [
+    "if(cOn){x.drawImage(FX.poolHole,Math.round((sx-DX)/s),Math.round((sy-DY)/s));ST.gmDraw.pool=true}",
+    "if(cOn){x.globalAlpha=P_.hole>0?1:0.35;x.drawImage(FX.poolHole,Math.round((sx-DX)/s),Math.round((sy-DY)/s));x.globalAlpha=1;ST.gmDraw.pool=true}"
+   ]
+  ]
+ }
+}
