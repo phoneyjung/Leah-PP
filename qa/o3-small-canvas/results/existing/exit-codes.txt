@@ -1,0 +1,15 @@
+== v23-FIX: python3 -I /tmp/claude-0/-home-claude/d3d34840-5e4e-52a0-a344-341c2cb1b80f/scratchpad/o3/fix/test_g2_lantern_gm.py 8932 /tmp/claude-0/-home-claude/d3d34840-5e4e-52a0-a344-341c2cb1b80f/scratchpad/o3/results/existing/v23-FIX 8931
+v23-FIX exit=0
+== v23-OLD: python3 -I /tmp/claude-0/-home-claude/d3d34840-5e4e-52a0-a344-341c2cb1b80f/scratchpad/o3/old/test_g2_lantern_gm.py 8931 /tmp/claude-0/-home-claude/d3d34840-5e4e-52a0-a344-341c2cb1b80f/scratchpad/o3/results/existing/v23-OLD 8931
+v23-OLD exit=0
+== hold-FIX: python3 -I /tmp/claude-0/-home-claude/d3d34840-5e4e-52a0-a344-341c2cb1b80f/scratchpad/o3/fix/test_g2_hold.py 8932 /tmp/claude-0/-home-claude/d3d34840-5e4e-52a0-a344-341c2cb1b80f/scratchpad/o3/results/existing/hold-FIX gm
+hold-FIX exit=0
+== hold-OLD: python3 -I /tmp/claude-0/-home-claude/d3d34840-5e4e-52a0-a344-341c2cb1b80f/scratchpad/o3/old/test_g2_hold.py 8931 /tmp/claude-0/-home-claude/d3d34840-5e4e-52a0-a344-341c2cb1b80f/scratchpad/o3/results/existing/hold-OLD gm
+hold-OLD exit=0
+== cpool-OLDvsFIX: python3 -I /tmp/claude-0/-home-claude/d3d34840-5e4e-52a0-a344-341c2cb1b80f/scratchpad/o3/fix/qa/g2-5a-cpool/tools/test_cpool.py 8931 8932 /tmp/claude-0/-home-claude/d3d34840-5e4e-52a0-a344-341c2cb1b80f/scratchpad/o3/results/existing/cpool-OLDvsFIX.json
+cpool-OLDvsFIX exit=0
+== offset-FIX: python3 -I /tmp/claude-0/-home-claude/d3d34840-5e4e-52a0-a344-341c2cb1b80f/scratchpad/o3/fix/test_g2_motion_offset.py 8932 /tmp/claude-0/-home-claude/d3d34840-5e4e-52a0-a344-341c2cb1b80f/scratchpad/o3/results/existing/offset-FIX
+offset-FIX exit=0
+== offset-OLD: python3 -I /tmp/claude-0/-home-claude/d3d34840-5e4e-52a0-a344-341c2cb1b80f/scratchpad/o3/old/test_g2_motion_offset.py 8931 /tmp/claude-0/-home-claude/d3d34840-5e4e-52a0-a344-341c2cb1b80f/scratchpad/o3/results/existing/offset-OLD
+offset-OLD exit=0
+DONE

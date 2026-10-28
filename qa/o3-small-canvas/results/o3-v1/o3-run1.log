@@ -1,0 +1,16 @@
+PASS E1 FIX: draw() throws 0 times (exact canvas, all cases) · "0 errors / 864 cases"
+PASS E2 FIX: s > 0 and s = max(1, round(H/384)) x zoom in every case · "0 bad / 864 · s at H<192 = [0.75, 1]"
+PASS E3 FIX: no NaN / Infinity in s, feet, sprite, tag, head, lantern numbers · "864 / 864 finite"
+PASS E4 FIX: cave darkness layer has a finite size > 0 in every cave case · "216 / 216 · smallest (3, 3)"
+PASS E5 OLD vs FIX: identical pixels + same s for every case with H >= 192 · "480 same / 480 · diff []"
+PASS E6 FIX: H < 192 -> s = zoom (1 or 0.75), never 0 · [[0.75, 0.75], [1, 1]]
+PASS E7 FIX: character drawn at every H >= 64 (3 poses -> 3 different canvases) · "224 / 224 groups"
+PASS E8 OLD reproduces O3: s = 0 for H < 192 · cave draw() throws · other scenes draw no character · {"s values": [0], "cave throws": "96 / 96", "error": "InvalidStateError: Failed to execute 'drawImage' on 'CanvasRenderingContext2D': The image argument is a canvas element with a width or height of 0.", "non-cave poses identical (blank)": "48 / 48", "OLD throws outside cave H<192": 0}
+PASS V1 FIX: pageerror 0 (exact + fresh + resize runs) · {"FIX pageerrors": 0, "FIX runs": 44, "OLD pageerrors": 4}
+PASS V2 FIX: page keeps drawing after every resize (loop alive) · "190 / 190 steps"
+PASS V3 FIX: s > 0 and numbers finite after every resize · "190 / 190"
+PASS V4 FIX: shrink -> expand without reload = same pixels as a fresh page at 844x390 · "20 / 20"
+PASS V5 OLD vs FIX fresh pages: identical pixels at 844x390 and 1180x820 (DPR 1/2.625, all scenes, zoom 100/75, ?gm / no ?gm) · "40 / 40"
+PASS V6 OLD reproduces O3 (dpr1 ?gm cave): pageerror, page stops drawing, still blank after expanding back · {"pageerrors": 1, "first": "Failed to execute 'drawImage' on 'CanvasRenderingContext2D': The image argument is a canvas element with a width or heig", "alive after expand": false, "old runs that died": ["OLD dpr1 gm cave z0.75", "OLD dpr1 gm cave z1", "OLD dpr2.625 gm cave z0.75", "OLD dpr2.625 gm c
+O3 TOTAL 14/14
+exit=0

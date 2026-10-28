@@ -123,7 +123,7 @@ function easeLantern(dt){const t=lanternTarget();if(!t){ST.lpos=null;ST.ldir=nul
   ST.lhist.push({t:now,p:ST.lpos.map(Math.round)})}
 function resize(){const dpr=window.devicePixelRatio||1;cv.width=Math.round(innerWidth*dpr);cv.height=Math.round(innerHeight*dpr)}
 addEventListener('resize',resize);
-function scale(){return Math.round(cv.height/384)*ST.zoom}          // game formula: 3 at 100 %, 2.25 at 75 % on 844x390 @2.625
+function scale(){return Math.max(1,Math.round(cv.height/384))*ST.zoom}   // game formula (index.html: SC = max(1, round(h/384))): 3 at 100 %, 2.25 at 75 % on 844x390 @2.625 · never 0 on a canvas under 192 px (O3)
 function offX(d){return ST.off?(ST.offTable||OFF_TABLE)[d]:0}
 const BLINK_DIRS=['S','SE','E','W','SW'];
 function curFrame(){if(ST.anim==='walk')return ST.fi%6;const li=ST.fi%4;return li===3&&ST.blinkNow&&BLINK_DIRS.includes(ST.dir)?3:IDLE_LOOP[li]}
