@@ -59,6 +59,8 @@ Two fingers: send CDP `Input.dispatchTouchEvent`. To lift ONE finger while anoth
 - His pass mark for art is **9.5 / 10** on: camera angle matches the scene · the four views agree · looks good and real · other. Below that: write a new prompt. Measure (overlap with the guide), then look.
 
 ## Who does what — the owner's agreement of 9 Oct 2026 (replaces the 5 Oct file-ownership split)
+> **Update 29 Oct 2026 (owner, 22:47 "ok งั้นตามนี้ ใช้ codex"):** the team is now **Claude + Codex** only. ChatGPT is no longer a review gate (optional art opinion when the owner asks). Work orders from Claude live in `HANDOFF_TO_CODEX.md` (newest task at the top); Codex answers on a `codex/<task>` branch plus one line in `CODEX_STATUS.md`. Codex may also be asked to **review Claude's code** (read only; result in `REVIEW_CODEX_<task>.md`). One owner approval per task. Full rules: `HANDOFF_TEAM_ROLES.md` version 2. Where the text below disagrees, version 2 wins. The file-ownership table below still stands.
+
 The owner's words (9 Oct 2026, 01:34), recorded as given:
 
 **Codex**
@@ -87,23 +89,23 @@ Shared files such as `AGENTS.md` and the merge records (`HANDOFF_*.md`) are edit
 3. **Claude wires it in**: measures the delivery against the spec (a script; the numbers go in the handoff), merges the branch, adds every new file name to `sw.js`, writes the fallback, shows it **in GM mode first** (`?gm`) until the owner approves it for players, bumps `VERSION` and the cache name, runs the suites, pushes `main`, gives the owner the game link. Claude never stretches, crops or recolours a delivered picture in code; a picture that does not fit goes back as a spec revision.
 4. The owner judges the art (pass marks in `ART_GUIDE.md`, 9.5 / 10 for faces); Claude's checks are the numbers only.
 
-Rules that still stand: fetch the newest `main` before every push and never force-push · each side pushes only its own files · every task states a pass criterion as a number · no "small fixes" in the other side's files.
+Rules that still stand: fetch the newest version of the branch you build on (named in the work order) before every push and never force-push · each side pushes only its own files · every task states a pass criterion as a number · no "small fixes" in the other side's files.
 
 ## Codex ↔ Claude messages — every Codex task (owner, 12 Oct 2026 15:38)
-The owner carries messages between Codex and Claude by copy and paste. A new Codex chat remembers nothing, so this section is the standing order for every Codex task.
+Since 29 Oct 2026 the messages live in GitHub files: Claude writes the work order in `HANDOFF_TO_CODEX.md`, and the owner only sends Codex a short pointer to it. A new Codex chat remembers nothing, so this section is the standing order for every Codex task.
 
-1. **Start of every task:** fetch the newest `main`; read this file, the "Who does what" section above, the set's `ASSET_SPEC_NN_*.md` (the last "ฉบับ" at the end of the file is the current one) and `CODEX_STATUS.md`. Do Codex's side only: pictures, PixelLab, picture checks, numbered sets on `codex/asset-NN-<name>`. Never edit Claude's files, never push `main`.
-2. **End every reply to the owner** with one plain-text code block headed `ข้อความส่ง Claude` that he can copy in one tap — also when the task is blocked or nothing was made. In it, in Thai:
+1. **Start of every task:** fetch the branch the owner's message names (default `claude/g2-pilot`; `main` is behind and is not the base for G2 work). Read `HANDOFF_TO_CODEX.md` first and do only the top task whose status is "รอ Codex". Then read this file, the "Who does what" section above, `HANDOFF_TEAM_ROLES.md` version 2, the set's `ASSET_SPEC_NN_*.md` (the last "ฉบับ" at the end of the file is the current one) and `CODEX_STATUS.md`. Do Codex's side only: pictures, PixelLab, picture checks, numbered sets on `codex/asset-NN-<name>`, and code reviews when the task asks for one (read only; write `REVIEW_CODEX_<task>.md`). Never edit Claude's files, never push `main`.
+2. **Report in `CODEX_STATUS.md` on your branch, and end every reply to the owner** with one short plain-text code block headed `ข้อความส่ง Claude` that he can copy in one tap — also when the task is blocked or nothing was made. Since the details are in the file, the block can be short (task, branch, commit, one-line result). The report covers, in Thai:
    - set, spec version, branch and commit
    - what was done and the numbers measured: generations used, balance before → after, picture sizes, and each acceptance number of the spec against what was measured
    - what differs from the spec, what is blocked and why
    - questions for Claude or for the owner
-3. **Claude's messages** (they name the spec file and version, the order of work, the branch and the pass numbers) are the work order. If the work order and the spec disagree, stop and ask Claude through the owner.
+3. **Claude's messages** (they name the spec file and version, the order of work, the branch and the pass numbers) are the work order. If the work order and the spec disagree, stop, write the question in `CODEX_STATUS.md` on your branch, and tell the owner.
 4. **PixelLab token:** only from the Network secret `PIXELLAB_API_KEY` (the value is the token alone; send the header `Authorization: Bearer <value>`). Never print, log, commit or paste the token, and never ask the owner for it in chat.
 5. **Credits:** stay under the cap the spec names; record the balance before and after; one call per job; on a timeout check the old job ID before ever submitting again. The owner approves every paid batch before it starts.
 6. Talk to the owner in Thai, in simple words.
 
-Current set: **08 kid paperdoll** (`ASSET_SPEC_08_kid_base.md`). Pilot H-F1 + O-F1 delivered in 17de103 (12 generations); the next batch waits for Claude's review and the owner's decision.
+Current set (29 Oct 2026): **none in production.** Set 13 (fix4 `44d2b62`) is done and set 14 is cancelled. Check the top of `HANDOFF_TO_CODEX.md` for the current task. (Older note: set 08 kid paperdoll, pilot in 17de103, was the current set on 12 Oct.)
 
 **Current art work (9 Oct 2026):**
 - `ASSET_SPEC_01_ui_buttons.md` — new button icons (guide, buff slot, sit) and the compass-stick art; ready for Codex.
