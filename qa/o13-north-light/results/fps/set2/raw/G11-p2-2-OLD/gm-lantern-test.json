@@ -1,0 +1,2443 @@
+{
+ "meta": {
+  "viewport": [
+   844,
+   390
+  ],
+  "dpr": 2.625,
+  "page": "pilot-g2-motion.html?gm",
+  "lantern": "Codex fix4 44d2b62 (S cell in all 8 columns = SIZE PREVIEW ONLY)"
+ },
+ "glow": {
+  "light S idle": {
+   "glow100": {
+    "floor": 29196,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 21347,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.477,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 29196,
+    "body": 0,
+    "lantern": 0,
+    "light": 405
+   }
+  },
+  "light S walk": {
+   "glow100": {
+    "floor": 29421,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 20622,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.474,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 29421,
+    "body": 0,
+    "lantern": 0,
+    "light": 405
+   }
+  },
+  "dark S idle": {
+   "glow100": {
+    "floor": 29196,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 29196,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.521,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 30870,
+    "body": 0,
+    "lantern": 0,
+    "light": 405
+   }
+  },
+  "dark S walk": {
+   "glow100": {
+    "floor": 29421,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 29421,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.523,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 30951,
+    "body": 0,
+    "lantern": 0,
+    "light": 405
+   }
+  },
+  "cave S idle": {
+   "glow100": {
+    "floor": 29196,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 29106,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.48,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 89604,
+    "body": 24948,
+    "lantern": 990,
+    "light": 405
+   }
+  },
+  "cave S walk": {
+   "glow100": {
+    "floor": 29421,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 29322,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.482,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 93285,
+    "body": 25785,
+    "lantern": 936,
+    "light": 405
+   }
+  },
+  "light SE idle": {
+   "glow100": {
+    "floor": 30564,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 21382,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.475,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 30564,
+    "body": 0,
+    "lantern": 0,
+    "light": 405
+   }
+  },
+  "light SE walk": {
+   "glow100": {
+    "floor": 30681,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 21789,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.48,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 30681,
+    "body": 0,
+    "lantern": 0,
+    "light": 333
+   }
+  },
+  "dark SE idle": {
+   "glow100": {
+    "floor": 30564,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 30564,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.522,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 32166,
+    "body": 0,
+    "lantern": 0,
+    "light": 405
+   }
+  },
+  "dark SE walk": {
+   "glow100": {
+    "floor": 30681,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 30681,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.519,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 32445,
+    "body": 0,
+    "lantern": 0,
+    "light": 333
+   }
+  },
+  "cave SE idle": {
+   "glow100": {
+    "floor": 30564,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 30456,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.482,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 92520,
+    "body": 23157,
+    "lantern": 990,
+    "light": 405
+   }
+  },
+  "cave SE walk": {
+   "glow100": {
+    "floor": 30681,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 30591,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.48,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 91224,
+    "body": 22338,
+    "lantern": 909,
+    "light": 333
+   }
+  },
+  "light E idle": {
+   "glow100": {
+    "floor": 33822,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 24521,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.473,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 33822,
+    "body": 0,
+    "lantern": 0,
+    "light": 405
+   }
+  },
+  "light E walk": {
+   "glow100": {
+    "floor": 32949,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 25204,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.476,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 32949,
+    "body": 0,
+    "lantern": 0,
+    "light": 405
+   }
+  },
+  "dark E idle": {
+   "glow100": {
+    "floor": 33822,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 33822,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.52,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 35433,
+    "body": 0,
+    "lantern": 0,
+    "light": 405
+   }
+  },
+  "dark E walk": {
+   "glow100": {
+    "floor": 32949,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 32949,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.517,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 35280,
+    "body": 0,
+    "lantern": 0,
+    "light": 405
+   }
+  },
+  "cave E idle": {
+   "glow100": {
+    "floor": 33822,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 33822,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.48,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 96579,
+    "body": 19062,
+    "lantern": 1026,
+    "light": 405
+   }
+  },
+  "cave E walk": {
+   "glow100": {
+    "floor": 32949,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 32940,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.479,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 95454,
+    "body": 20250,
+    "lantern": 963,
+    "light": 405
+   }
+  },
+  "light NE idle": {
+   "glow100": {
+    "floor": 30852,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 25464,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.495,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 30852,
+    "body": 0,
+    "lantern": 0,
+    "light": 405
+   }
+  },
+  "light NE walk": {
+   "glow100": {
+    "floor": 31698,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 25960,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.493,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 31698,
+    "body": 0,
+    "lantern": 0,
+    "light": 405
+   }
+  },
+  "dark NE idle": {
+   "glow100": {
+    "floor": 30852,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 30852,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.517,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 35856,
+    "body": 0,
+    "lantern": 0,
+    "light": 405
+   }
+  },
+  "dark NE walk": {
+   "glow100": {
+    "floor": 31698,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 31698,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.518,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 36414,
+    "body": 0,
+    "lantern": 0,
+    "light": 405
+   }
+  },
+  "cave NE idle": {
+   "glow100": {
+    "floor": 30852,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 30834,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.477,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 93852,
+    "body": 22914,
+    "lantern": 1026,
+    "light": 405
+   }
+  },
+  "cave NE walk": {
+   "glow100": {
+    "floor": 31698,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 31680,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.477,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 95355,
+    "body": 22509,
+    "lantern": 1035,
+    "light": 405
+   }
+  },
+  "light NW idle": {
+   "glow100": {
+    "floor": 31545,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 22958,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.476,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 31545,
+    "body": 0,
+    "lantern": 0,
+    "light": 405
+   }
+  },
+  "light NW walk": {
+   "glow100": {
+    "floor": 31599,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 22632,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.473,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 31599,
+    "body": 0,
+    "lantern": 0,
+    "light": 405
+   }
+  },
+  "dark NW idle": {
+   "glow100": {
+    "floor": 31545,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 31545,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.519,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 34308,
+    "body": 0,
+    "lantern": 0,
+    "light": 405
+   }
+  },
+  "dark NW walk": {
+   "glow100": {
+    "floor": 31599,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 31599,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.521,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 34020,
+    "body": 0,
+    "lantern": 0,
+    "light": 405
+   }
+  },
+  "cave NW idle": {
+   "glow100": {
+    "floor": 31545,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 31446,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.48,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 92511,
+    "body": 20790,
+    "lantern": 1098,
+    "light": 405
+   }
+  },
+  "cave NW walk": {
+   "glow100": {
+    "floor": 31599,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 31518,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.48,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 94446,
+    "body": 22311,
+    "lantern": 1035,
+    "light": 405
+   }
+  },
+  "light W idle": {
+   "glow100": {
+    "floor": 33894,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 23727,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.469,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 33894,
+    "body": 0,
+    "lantern": 0,
+    "light": 405
+   }
+  },
+  "light W walk": {
+   "glow100": {
+    "floor": 33183,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 22879,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.472,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 33183,
+    "body": 0,
+    "lantern": 0,
+    "light": 405
+   }
+  },
+  "dark W idle": {
+   "glow100": {
+    "floor": 33894,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 33894,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.521,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 35451,
+    "body": 0,
+    "lantern": 0,
+    "light": 405
+   }
+  },
+  "dark W walk": {
+   "glow100": {
+    "floor": 33183,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 33183,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.521,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 34524,
+    "body": 0,
+    "lantern": 0,
+    "light": 405
+   }
+  },
+  "cave W idle": {
+   "glow100": {
+    "floor": 33894,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 33831,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.481,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 97461,
+    "body": 19305,
+    "lantern": 1026,
+    "light": 405
+   }
+  },
+  "cave W walk": {
+   "glow100": {
+    "floor": 33183,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 33057,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.482,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 96651,
+    "body": 20124,
+    "lantern": 1017,
+    "light": 405
+   }
+  },
+  "light SW idle": {
+   "glow100": {
+    "floor": 30564,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 24503,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.488,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 30564,
+    "body": 0,
+    "lantern": 0,
+    "light": 405
+   }
+  },
+  "light SW walk": {
+   "glow100": {
+    "floor": 30888,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 24155,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.48,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 30888,
+    "body": 0,
+    "lantern": 0,
+    "light": 405
+   }
+  },
+  "dark SW idle": {
+   "glow100": {
+    "floor": 30564,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 30564,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.516,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 34407,
+    "body": 0,
+    "lantern": 0,
+    "light": 405
+   }
+  },
+  "dark SW walk": {
+   "glow100": {
+    "floor": 30888,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 30888,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.517,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 34245,
+    "body": 0,
+    "lantern": 0,
+    "light": 405
+   }
+  },
+  "cave SW idle": {
+   "glow100": {
+    "floor": 30564,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 30555,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.478,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 91692,
+    "body": 22896,
+    "lantern": 954,
+    "light": 405
+   }
+  },
+  "cave SW walk": {
+   "glow100": {
+    "floor": 30888,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "glow50": {
+    "floor": 30879,
+    "body": 0,
+    "lantern": 0,
+    "light": 0
+   },
+   "p50_ratio": 0.478,
+   "p10_floor": 0,
+   "p100_vs_0": {
+    "floor": 91296,
+    "body": 22095,
+    "lantern": 1008,
+    "light": 405
+   }
+  }
+ },
+ "fps": {
+  "off": [
+   22.6,
+   22.9,
+   18.7,
+   22.4,
+   22.7
+  ],
+  "on": [
+   20.8,
+   20.9,
+   20.0,
+   22.7,
+   21.2
+  ],
+  "median": [
+   22.6,
+   20.9
+  ]
+ },
+ "draw_ms": {
+  "off_median7": 4.505,
+  "on_median7": 4.893
+ },
+ "scene_draw_ms_median5_cpu1x": {
+  "light": 0.894,
+  "dark": 0.983,
+  "cave": 4.839
+ },
+ "checks": [
+  {
+   "check": "G0 lantern files in the Pilot branch = Codex fix4 44d2b62 byte for byte (SHA-256)",
+   "pass": true,
+   "value": {
+    "c2-held-lantern_L0-S-trial.png": "8d9485bf70f13f95",
+    "c2-held-lantern_L0-S-trial-light.png": "e86599ffcab25f03",
+    "c2-held-lantern_L0-S-trial.json": "2637609f5aa4fc20"
+   }
+  },
+  {
+   "check": "G0b no rotation / no ctx.filter in the page source",
+   "pass": true,
+   "value": 0
+  },
+  {
+   "check": "G1 ?gm opens with the real lantern: base + light + json, grip [16,6], hold on, 8-column sheets 256x32, Set-08 stand-in never requested",
+   "pass": true,
+   "value": {
+    "files": {
+     "base": true,
+     "light": true,
+     "json": true
+    },
+    "hang": [
+     16,
+     6
+    ],
+    "hold": true,
+    "gm": true,
+    "w": 256,
+    "h": 32,
+    "lw": 256,
+    "kid_lantern_requested": false
+   }
+  },
+  {
+   "check": "G2 the 8 columns of base and light = the S file pixels (column 1 vs file, columns 2-8 vs column 1)",
+   "pass": true,
+   "value": {
+    "columns_vs_col1": [
+     0,
+     0
+    ],
+    "col1_vs_file": [
+     0,
+     0
+    ]
+   }
+  },
+  {
+   "check": "G3 light layer by power: 100/50 % = light colour, 10 % = 35 % glint, 0 % = dark glass (every light px, 7 dirs x idle/walk, +-2)",
+   "pass": true,
+   "value": {
+    "100": [
+     0,
+     5598
+    ],
+    "50": [
+     0,
+     5598
+    ],
+    "10": [
+     0,
+     5598
+    ],
+    "0": [
+     0,
+     5598
+    ]
+   }
+  },
+  {
+   "check": "G4 plan criterion 8: the Glow alone (same render with glow 0) changes 0 body / fist / face px, 0 lantern px, > 0 floor px (power 100 and 50 x 7 dirs x 3 scenes x idle/walk)",
+   "pass": true,
+   "value": {
+    "worst_body": 0,
+    "worst_lantern": 0,
+    "min_floor": 20622
+   }
+  },
+  {
+   "check": "G4b power 50 = about half the light around (floor energy 50/100 % in 0.35-0.65, baseline power 10 = C only) · power 10 = no glow (0 floor px)",
+   "pass": true,
+   "value": {
+    "p50_ratio_min_max": [
+     0.469,
+     0.523
+    ],
+    "p10_floor_max": 0
+   }
+  },
+  {
+   "check": "G4c light / dark floor: power 100 vs 0 changes only floor + light px (0 body, 0 lantern metal)",
+   "pass": true,
+   "value": {
+    "dark S idle": {
+     "floor": 30870,
+     "body": 0,
+     "lantern": 0,
+     "light": 405
+    },
+    "dark S walk": {
+     "floor": 30951,
+     "body": 0,
+     "lantern": 0,
+     "light": 405
+    },
+    "dark SE idle": {
+     "floor": 32166,
+     "body": 0,
+     "lantern": 0,
+     "light": 405
+    },
+    "dark SE walk": {
+     "floor": 32445,
+     "body": 0,
+     "lantern": 0,
+     "light": 333
+    },
+    "dark E idle": {
+     "floor": 35433,
+     "body": 0,
+     "lantern": 0,
+     "light": 405
+    },
+    "dark E walk": {
+     "floor": 35280,
+     "body": 0,
+     "lantern": 0,
+     "light": 405
+    },
+    "dark NE idle": {
+     "floor": 35856,
+     "body": 0,
+     "lantern": 0,
+     "light": 405
+    },
+    "dark NE walk": {
+     "floor": 36414,
+     "body": 0,
+     "lantern": 0,
+     "light": 405
+    },
+    "dark NW idle": {
+     "floor": 34308,
+     "body": 0,
+     "lantern": 0,
+     "light": 405
+    },
+    "dark NW walk": {
+     "floor": 34020,
+     "body": 0,
+     "lantern": 0,
+     "light": 405
+    },
+    "dark W idle": {
+     "floor": 35451,
+     "body": 0,
+     "lantern": 0,
+     "light": 405
+    },
+    "dark W walk": {
+     "floor": 34524,
+     "body": 0,
+     "lantern": 0,
+     "light": 405
+    },
+    "dark SW idle": {
+     "floor": 34407,
+     "body": 0,
+     "lantern": 0,
+     "light": 405
+    },
+    "dark SW walk": {
+     "floor": 34245,
+     "body": 0,
+     "lantern": 0,
+     "light": 405
+    }
+   }
+  },
+  {
+   "check": "G4d cave: the lantern light and C only uncover the body (every changed body px is at least as close to the true sprite colour) · never tint it (7 dirs x idle/walk x zoom 100/75 x eased offsets)",
+   "pass": true,
+   "value": {
+    "bad_total": 0,
+    "changed_body_px_min": 7236
+   }
+  },
+  {
+   "check": "G5 C pool (fx on vs off at power 10): dark = behind the body (0 body / lantern px, > 0 floor px) · cave = only inside the player cell · light = no pool (0 px)",
+   "pass": true,
+   "value": {
+    "dark S": {
+     "floor": 8181,
+     "body": 0,
+     "lantern": 0,
+     "light": 0,
+     "outCell": 0
+    },
+    "dark SE": {
+     "floor": 10260,
+     "body": 0,
+     "lantern": 0,
+     "light": 0,
+     "outCell": 0
+    },
+    "dark E": {
+     "floor": 14121,
+     "body": 0,
+     "lantern": 0,
+     "light": 0,
+     "outCell": 0
+    },
+    "dark NE": {
+     "floor": 10089,
+     "body": 0,
+     "lantern": 0,
+     "light": 0,
+     "outCell": 0
+    },
+    "dark NW": {
+     "floor": 11709,
+     "body": 0,
+     "lantern": 0,
+     "light": 0,
+     "outCell": 0
+    },
+    "dark W": {
+     "floor": 14418,
+     "body": 0,
+     "lantern": 0,
+     "light": 0,
+     "outCell": 0
+    },
+    "dark SW": {
+     "floor": 10044,
+     "body": 0,
+     "lantern": 0,
+     "light": 0,
+     "outCell": 0
+    },
+    "cave S": {
+     "floor": 8181,
+     "body": 18414,
+     "lantern": 990,
+     "light": 405,
+     "outCell": 0
+    },
+    "cave SE": {
+     "floor": 10260,
+     "body": 16335,
+     "lantern": 990,
+     "light": 405,
+     "outCell": 0
+    },
+    "cave E": {
+     "floor": 14121,
+     "body": 12438,
+     "lantern": 1026,
+     "light": 405,
+     "outCell": 0
+    },
+    "cave NE": {
+     "floor": 10089,
+     "body": 16569,
+     "lantern": 927,
+     "light": 405,
+     "outCell": 0
+    },
+    "cave NW": {
+     "floor": 11709,
+     "body": 14778,
+     "lantern": 1098,
+     "light": 405,
+     "outCell": 0
+    },
+    "cave W": {
+     "floor": 14418,
+     "body": 12141,
+     "lantern": 1026,
+     "light": 405,
+     "outCell": 0
+    },
+    "cave SW": {
+     "floor": 10044,
+     "body": 16587,
+     "lantern": 954,
+     "light": 405,
+     "outCell": 0
+    },
+    "light S": {
+     "floor": 0,
+     "body": 0,
+     "lantern": 0,
+     "light": 0,
+     "outCell": 0
+    },
+    "light SE": {
+     "floor": 0,
+     "body": 0,
+     "lantern": 0,
+     "light": 0,
+     "outCell": 0
+    },
+    "light E": {
+     "floor": 0,
+     "body": 0,
+     "lantern": 0,
+     "light": 0,
+     "outCell": 0
+    },
+    "light NE": {
+     "floor": 0,
+     "body": 0,
+     "lantern": 0,
+     "light": 0,
+     "outCell": 0
+    },
+    "light NW": {
+     "floor": 0,
+     "body": 0,
+     "lantern": 0,
+     "light": 0,
+     "outCell": 0
+    },
+    "light W": {
+     "floor": 0,
+     "body": 0,
+     "lantern": 0,
+     "light": 0,
+     "outCell": 0
+    },
+    "light SW": {
+     "floor": 0,
+     "body": 0,
+     "lantern": 0,
+     "light": 0,
+     "outCell": 0
+    }
+   }
+  },
+  {
+   "check": "G5b rule (owner choice 26 Oct, v2.2 flags): C only with Glow+C on + held lantern + light layer + power > 0 + not N · pool=false (and 0 px) at power 0 / facing N / not holding / Glow+C off / light file missing · power 10: pool=true, glow=false, caveHole=0 · dark floor + cave",
+   "pass": true,
+   "value": {
+    "dark power 0": {
+     "pool": false,
+     "glow": false,
+     "caveHole": 0,
+     "want_pool": false,
+     "px_fx_on_vs_off": 0,
+     "ok": true
+    },
+    "dark facing N": {
+     "pool": false,
+     "glow": false,
+     "caveHole": 0,
+     "want_pool": false,
+     "px_fx_on_vs_off": 0,
+     "ok": true
+    },
+    "dark not holding": {
+     "pool": false,
+     "glow": false,
+     "caveHole": 0,
+     "want_pool": false,
+     "px_fx_on_vs_off": 0,
+     "ok": true
+    },
+    "dark power 10": {
+     "pool": true,
+     "glow": false,
+     "caveHole": 0,
+     "want_pool": true,
+     "px_fx_on_vs_off": null,
+     "ok": true
+    },
+    "dark power 10 W walk": {
+     "pool": true,
+     "glow": false,
+     "caveHole": 0,
+     "want_pool": true,
+     "px_fx_on_vs_off": null,
+     "ok": true
+    },
+    "dark power 100 E": {
+     "pool": true,
+     "glow": true,
+     "caveHole": 0,
+     "want_pool": true,
+     "px_fx_on_vs_off": null,
+     "ok": true
+    },
+    "dark fx off": {
+     "pool": false,
+     "glow": false,
+     "caveHole": 0,
+     "want_pool": false,
+     "ok": true
+    },
+    "cave power 0": {
+     "pool": false,
+     "glow": false,
+     "caveHole": 0,
+     "want_pool": false,
+     "px_fx_on_vs_off": 0,
+     "ok": true
+    },
+    "cave facing N": {
+     "pool": false,
+     "glow": false,
+     "caveHole": 0,
+     "want_pool": false,
+     "px_fx_on_vs_off": 0,
+     "ok": true
+    },
+    "cave not holding": {
+     "pool": false,
+     "glow": false,
+     "caveHole": 0,
+     "want_pool": false,
+     "px_fx_on_vs_off": 0,
+     "ok": true
+    },
+    "cave power 10": {
+     "pool": true,
+     "glow": false,
+     "caveHole": 0,
+     "want_pool": true,
+     "px_fx_on_vs_off": null,
+     "ok": true
+    },
+    "cave power 10 W walk": {
+     "pool": true,
+     "glow": false,
+     "caveHole": 0,
+     "want_pool": true,
+     "px_fx_on_vs_off": null,
+     "ok": true
+    },
+    "cave power 100 E": {
+     "pool": true,
+     "glow": true,
+     "caveHole": 1,
+     "want_pool": true,
+     "px_fx_on_vs_off": null,
+     "ok": true
+    },
+    "cave fx off": {
+     "pool": false,
+     "glow": false,
+     "caveHole": 0,
+     "want_pool": false,
+     "ok": true
+    },
+    "dark light file missing power 100": {
+     "pool": false,
+     "glow": false,
+     "caveHole": 0,
+     "want_pool": false,
+     "ok": true
+    },
+    "dark light file missing power 10": {
+     "pool": false,
+     "glow": false,
+     "caveHole": 0,
+     "want_pool": false,
+     "ok": true
+    },
+    "cave light file missing power 100": {
+     "pool": false,
+     "glow": false,
+     "caveHole": 0,
+     "want_pool": false,
+     "ok": true
+    },
+    "cave light file missing power 10": {
+     "pool": false,
+     "glow": false,
+     "caveHole": 0,
+     "want_pool": false,
+     "ok": true
+    }
+   }
+  },
+  {
+   "check": "G18 V0: C at power 10 = the full C · a) one C draw per frame, same image / alpha 1 / blend / layer / place as at power 50 and 100 · b) C alone at 10 = C alone at 100 with Glow / cave light forced 0 (0 px differ outside the glass, ratio 1.00 +- 0.02) · dark floor + cave · 7 dirs x idle/walk",
+   "pass": true,
+   "value": {
+    "cases": 28,
+    "bad": [],
+    "ratio_min_max": [
+     1,
+     1
+    ],
+    "mismatch_max": 0,
+    "alpha10": [
+     1
+    ],
+    "calls10_per_frame": [
+     1
+    ],
+    "px10_min": 8181,
+    "by_case": {
+     "dark S idle": {
+      "px10": 8181,
+      "px100": 8181,
+      "ratio": 1,
+      "mismatch": 0,
+      "pool10": true,
+      "calls10": [
+       [
+        "flat",
+        1,
+        "source-over",
+        "screen",
+        "0,0,96,96,964,230,288,288"
+       ]
+      ],
+      "same_call_as_50_100": true,
+      "ok": true
+     },
+     "dark S walk": {
+      "px10": 8406,
+      "px100": 8406,
+      "ratio": 1,
+      "mismatch": 0,
+      "pool10": true,
+      "calls10": [
+       [
+        "flat",
+        1,
+        "source-over",
+        "screen",
+        "0,0,96,96,964,230,288,288"
+       ]
+      ],
+      "same_call_as_50_100": true,
+      "ok": true
+     },
+     "dark SE idle": {
+      "px10": 10260,
+      "px100": 10260,
+      "ratio": 1,
+      "mismatch": 0,
+      "pool10": true,
+      "calls10": [
+       [
+        "flat",
+        1,
+        "source-over",
+        "screen",
+        "0,0,96,96,964,230,288,288"
+       ]
+      ],
+      "same_call_as_50_100": true,
+      "ok": true
+     },
+     "dark SE walk": {
+      "px10": 10395,
+      "px100": 10395,
+      "ratio": 1,
+      "mismatch": 0,
+      "pool10": true,
+      "calls10": [
+       [
+        "flat",
+        1,
+        "source-over",
+        "screen",
+        "0,0,96,96,964,230,288,288"
+       ]
+      ],
+      "same_call_as_50_100": true,
+      "ok": true
+     },
+     "dark E idle": {
+      "px10": 14121,
+      "px100": 14121,
+      "ratio": 1,
+      "mismatch": 0,
+      "pool10": true,
+      "calls10": [
+       [
+        "flat",
+        1,
+        "source-over",
+        "screen",
+        "0,0,96,96,973,230,288,288"
+       ]
+      ],
+      "same_call_as_50_100": true,
+      "ok": true
+     },
+     "dark E walk": {
+      "px10": 13743,
+      "px100": 13743,
+      "ratio": 1,
+      "mismatch": 0,
+      "pool10": true,
+      "calls10": [
+       [
+        "flat",
+        1,
+        "source-over",
+        "screen",
+        "0,0,96,96,973,230,288,288"
+       ]
+      ],
+      "same_call_as_50_100": true,
+      "ok": true
+     },
+     "dark NE idle": {
+      "px10": 10089,
+      "px100": 10089,
+      "ratio": 1,
+      "mismatch": 0,
+      "pool10": true,
+      "calls10": [
+       [
+        "flat",
+        1,
+        "source-over",
+        "screen",
+        "0,0,96,96,967,230,288,288"
+       ]
+      ],
+      "same_call_as_50_100": true,
+      "ok": true
+     },
+     "dark NE walk": {
+      "px10": 10494,
+      "px100": 10494,
+      "ratio": 1,
+      "mismatch": 0,
+      "pool10": true,
+      "calls10": [
+       [
+        "flat",
+        1,
+        "source-over",
+        "screen",
+        "0,0,96,96,967,230,288,288"
+       ]
+      ],
+      "same_call_as_50_100": true,
+      "ok": true
+     },
+     "dark NW idle": {
+      "px10": 11709,
+      "px100": 11709,
+      "ratio": 1,
+      "mismatch": 0,
+      "pool10": true,
+      "calls10": [
+       [
+        "flat",
+        1,
+        "source-over",
+        "screen",
+        "0,0,96,96,961,230,288,288"
+       ]
+      ],
+      "same_call_as_50_100": true,
+      "ok": true
+     },
+     "dark NW walk": {
+      "px10": 10944,
+      "px100": 10944,
+      "ratio": 1,
+      "mismatch": 0,
+      "pool10": true,
+      "calls10": [
+       [
+        "flat",
+        1,
+        "source-over",
+        "screen",
+        "0,0,96,96,961,230,288,288"
+       ]
+      ],
+      "same_call_as_50_100": true,
+      "ok": true
+     },
+     "dark W idle": {
+      "px10": 14418,
+      "px100": 14418,
+      "ratio": 1,
+      "mismatch": 0,
+      "pool10": true,
+      "calls10": [
+       [
+        "flat",
+        1,
+        "source-over",
+        "screen",
+        "0,0,96,96,961,230,288,288"
+       ]
+      ],
+      "same_call_as_50_100": true,
+      "ok": true
+     },
+     "dark W walk": {
+      "px10": 14040,
+      "px100": 14040,
+      "ratio": 1,
+      "mismatch": 0,
+      "pool10": true,
+      "calls10": [
+       [
+        "flat",
+        1,
+        "source-over",
+        "screen",
+        "0,0,96,96,961,230,288,288"
+       ]
+      ],
+      "same_call_as_50_100": true,
+      "ok": true
+     },
+     "dark SW idle": {
+      "px10": 10044,
+      "px100": 10044,
+      "ratio": 1,
+      "mismatch": 0,
+      "pool10": true,
+      "calls10": [
+       [
+        "flat",
+        1,
+        "source-over",
+        "screen",
+        "0,0,96,96,964,230,288,288"
+       ]
+      ],
+      "same_call_as_50_100": true,
+      "ok": true
+     },
+     "dark SW walk": {
+      "px10": 10746,
+      "px100": 10746,
+      "ratio": 1,
+      "mismatch": 0,
+      "pool10": true,
+      "calls10": [
+       [
+        "flat",
+        1,
+        "source-over",
+        "screen",
+        "0,0,96,96,964,230,288,288"
+       ]
+      ],
+      "same_call_as_50_100": true,
+      "ok": true
+     },
+     "cave S idle": {
+      "px10": 27585,
+      "px100": 27585,
+      "ratio": 1,
+      "mismatch": 0,
+      "pool10": true,
+      "calls10": [
+       [
+        "hole",
+        1,
+        "destination-out",
+        "dark layer",
+        "323,78"
+       ]
+      ],
+      "same_call_as_50_100": true,
+      "ok": true
+     },
+     "cave S walk": {
+      "px10": 27585,
+      "px100": 27585,
+      "ratio": 1,
+      "mismatch": 0,
+      "pool10": true,
+      "calls10": [
+       [
+        "hole",
+        1,
+        "destination-out",
+        "dark layer",
+        "323,78"
+       ]
+      ],
+      "same_call_as_50_100": true,
+      "ok": true
+     },
+     "cave SE idle": {
+      "px10": 27585,
+      "px100": 27585,
+      "ratio": 1,
+      "mismatch": 0,
+      "pool10": true,
+      "calls10": [
+       [
+        "hole",
+        1,
+        "destination-out",
+        "dark layer",
+        "323,78"
+       ]
+      ],
+      "same_call_as_50_100": true,
+      "ok": true
+     },
+     "cave SE walk": {
+      "px10": 27585,
+      "px100": 27585,
+      "ratio": 1,
+      "mismatch": 0,
+      "pool10": true,
+      "calls10": [
+       [
+        "hole",
+        1,
+        "destination-out",
+        "dark layer",
+        "323,78"
+       ]
+      ],
+      "same_call_as_50_100": true,
+      "ok": true
+     },
+     "cave E idle": {
+      "px10": 27585,
+      "px100": 27585,
+      "ratio": 1,
+      "mismatch": 0,
+      "pool10": true,
+      "calls10": [
+       [
+        "hole",
+        1,
+        "destination-out",
+        "dark layer",
+        "326,78"
+       ]
+      ],
+      "same_call_as_50_100": true,
+      "ok": true
+     },
+     "cave E walk": {
+      "px10": 27585,
+      "px100": 27585,
+      "ratio": 1,
+      "mismatch": 0,
+      "pool10": true,
+      "calls10": [
+       [
+        "hole",
+        1,
+        "destination-out",
+        "dark layer",
+        "326,78"
+       ]
+      ],
+      "same_call_as_50_100": true,
+      "ok": true
+     },
+     "cave NE idle": {
+      "px10": 27585,
+      "px100": 27585,
+      "ratio": 1,
+      "mismatch": 0,
+      "pool10": true,
+      "calls10": [
+       [
+        "hole",
+        1,
+        "destination-out",
+        "dark layer",
+        "324,78"
+       ]
+      ],
+      "same_call_as_50_100": true,
+      "ok": true
+     },
+     "cave NE walk": {
+      "px10": 27585,
+      "px100": 27585,
+      "ratio": 1,
+      "mismatch": 0,
+      "pool10": true,
+      "calls10": [
+       [
+        "hole",
+        1,
+        "destination-out",
+        "dark layer",
+        "324,78"
+       ]
+      ],
+      "same_call_as_50_100": true,
+      "ok": true
+     },
+     "cave NW idle": {
+      "px10": 27585,
+      "px100": 27585,
+      "ratio": 1,
+      "mismatch": 0,
+      "pool10": true,
+      "calls10": [
+       [
+        "hole",
+        1,
+        "destination-out",
+        "dark layer",
+        "322,78"
+       ]
+      ],
+      "same_call_as_50_100": true,
+      "ok": true
+     },
+     "cave NW walk": {
+      "px10": 27585,
+      "px100": 27585,
+      "ratio": 1,
+      "mismatch": 0,
+      "pool10": true,
+      "calls10": [
+       [
+        "hole",
+        1,
+        "destination-out",
+        "dark layer",
+        "322,78"
+       ]
+      ],
+      "same_call_as_50_100": true,
+      "ok": true
+     },
+     "cave W idle": {
+      "px10": 27585,
+      "px100": 27585,
+      "ratio": 1,
+      "mismatch": 0,
+      "pool10": true,
+      "calls10": [
+       [
+        "hole",
+        1,
+        "destination-out",
+        "dark layer",
+        "322,78"
+       ]
+      ],
+      "same_call_as_50_100": true,
+      "ok": true
+     },
+     "cave W walk": {
+      "px10": 27585,
+      "px100": 27585,
+      "ratio": 1,
+      "mismatch": 0,
+      "pool10": true,
+      "calls10": [
+       [
+        "hole",
+        1,
+        "destination-out",
+        "dark layer",
+        "322,78"
+       ]
+      ],
+      "same_call_as_50_100": true,
+      "ok": true
+     },
+     "cave SW idle": {
+      "px10": 27585,
+      "px100": 27585,
+      "ratio": 1,
+      "mismatch": 0,
+      "pool10": true,
+      "calls10": [
+       [
+        "hole",
+        1,
+        "destination-out",
+        "dark layer",
+        "323,78"
+       ]
+      ],
+      "same_call_as_50_100": true,
+      "ok": true
+     },
+     "cave SW walk": {
+      "px10": 27585,
+      "px100": 27585,
+      "ratio": 1,
+      "mismatch": 0,
+      "pool10": true,
+      "calls10": [
+       [
+        "hole",
+        1,
+        "destination-out",
+        "dark layer",
+        "323,78"
+       ]
+      ],
+      "same_call_as_50_100": true,
+      "ok": true
+     }
+    }
+   }
+  },
+  {
+   "check": "G6 cave: light px are not darkened (power 100 = light colour · 7 dirs x idle/walk x zoom 100/75 x eased offsets)",
+   "pass": true,
+   "value": {
+    "bad": 0,
+    "light_px_min": 84,
+    "cases": 35
+   }
+  },
+  {
+   "check": "G7 plan criterion 5 (light / dark floor, as worded): every on-screen colour the lantern, light or glow changes has dE00 >= 10 from #FFC857 and #5FE0FF (power 100/50/10/0 x 7 dirs x zoom 100/75)",
+   "pass": true,
+   "value": {
+    "colours": 1116,
+    "near": {
+     "gold #FFC857": [],
+     "cyan #5FE0FF": []
+    },
+    "closest_gold": 11.39,
+    "closest_cyan": 22.44
+   }
+  },
+  {
+   "check": "G7b cave (extra): the same, except body px that the light only uncovers (the locked sprite colours, G4d)",
+   "pass": true,
+   "value": {
+    "colours": 21517,
+    "near": {
+     "gold #FFC857": [],
+     "cyan #5FE0FF": []
+    },
+    "closest_gold": 11.39,
+    "uncovered_body_closest_gold_info": 9.45,
+    "sprite_cream_F9DA99_vs_gold_info": 9.19
+   }
+  },
+  {
+   "check": "G8 N: no lantern, no glow, no cave light, no C · turning N <-> NE/NW switches them (and C) on the same frame · cave + dark floor · power 100 + 10",
+   "pass": true,
+   "value": {
+    "N": {
+     "dark": [
+      null,
+      false,
+      0,
+      false
+     ],
+     "cave": [
+      null,
+      false,
+      0,
+      false
+     ]
+    },
+    "turn": {
+     "cave 100": [
+      [
+       false,
+       false,
+       false,
+       false
+      ],
+      [
+       true,
+       true,
+       true,
+       true
+      ],
+      [
+       false,
+       false,
+       false,
+       false
+      ],
+      [
+       true,
+       true,
+       true,
+       true
+      ]
+     ],
+     "dark 100": [
+      [
+       false,
+       false,
+       false,
+       false
+      ],
+      [
+       true,
+       true,
+       false,
+       true
+      ],
+      [
+       false,
+       false,
+       false,
+       false
+      ],
+      [
+       true,
+       true,
+       false,
+       true
+      ]
+     ],
+     "cave 10": [
+      [
+       false,
+       false,
+       false,
+       false
+      ],
+      [
+       true,
+       false,
+       false,
+       true
+      ],
+      [
+       false,
+       false,
+       false,
+       false
+      ],
+      [
+       true,
+       false,
+       false,
+       true
+      ]
+     ],
+     "dark 10": [
+      [
+       false,
+       false,
+       false,
+       false
+      ],
+      [
+       true,
+       false,
+       false,
+       true
+      ],
+      [
+       false,
+       false,
+       false,
+       false
+      ],
+      [
+       true,
+       false,
+       false,
+       true
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "check": "G9 ctx.filter set 0 times while drawing",
+   "pass": true,
+   "value": 0
+  },
+  {
+   "check": "G10 GM buttons: power 50/10/0/100 · Glow+C off/on · floor dark/cave/light · zoom 75/100 % (fixed) · power and Glow+C buttons shown",
+   "pass": true,
+   "value": {
+    "power": [
+     50,
+     10,
+     0,
+     100
+    ],
+    "fx": [
+     false,
+     true
+    ],
+    "scene": [
+     "dark",
+     "cave",
+     "light"
+    ],
+    "zoom": [
+     0.75,
+     1
+    ],
+    "visible": [
+     true,
+     true
+    ]
+   }
+  },
+  {
+   "check": "G11 FPS with the lantern (light + Glow + cave light) >= 90 % of the same cave scene without it (C and the cave on in both · rAF, 4x CPU, walking, median of 5) · draw ms per scene reported",
+   "pass": true,
+   "value": {
+    "off": [
+     22.6,
+     22.9,
+     18.7,
+     22.4,
+     22.7
+    ],
+    "on": [
+     20.8,
+     20.9,
+     20.0,
+     22.7,
+     21.2
+    ],
+    "median": [
+     22.6,
+     20.9
+    ],
+    "draw_ms_cave_on_off_cpu1x": {
+     "off_median7": 4.505,
+     "on_median7": 4.893
+    },
+    "scene_draw_ms_cpu1x": {
+     "light": 0.894,
+     "dark": 0.983,
+     "cave": 4.839
+    }
+   }
+  },
+  {
+   "check": "G12 iPad 1180x820 GM page: 0 errors, lantern drawn",
+   "pass": true,
+   "value": []
+  },
+  {
+   "check": "G13 missing files: base / json / both / hold anchors / walk-hold sheet -> no lantern (old walk sheet, never Set 08) and no C · light -> lantern without light, glow, cave light or C · C off at power 100 and 10 on cave and dark floor · cave floor -> still drawn, C on (control) · 0 errors, the canvas really drew (>= 50 colours, a sprite sheet)",
+   "pass": true,
+   "value": {
+    "base_png": {
+     "errors": 0,
+     "white": 0.025,
+     "canvas_colours": 2315,
+     "lantern": false,
+     "walk_sheet": "walk",
+     "glow": false,
+     "cave_light": 0,
+     "light": 0,
+     "pool": false,
+     "pools": {
+      "cave 100": false,
+      "cave 10": false,
+      "dark 100": false,
+      "dark 10": false
+     },
+     "kid_lantern_requested": false
+    },
+    "json": {
+     "errors": 0,
+     "white": 0.025,
+     "canvas_colours": 2317,
+     "lantern": false,
+     "walk_sheet": "walk",
+     "glow": false,
+     "cave_light": 0,
+     "light": 0,
+     "pool": false,
+     "pools": {
+      "cave 100": false,
+      "cave 10": false,
+      "dark 100": false,
+      "dark 10": false
+     },
+     "kid_lantern_requested": false
+    },
+    "base_json": {
+     "errors": 0,
+     "white": 0.025,
+     "canvas_colours": 2317,
+     "lantern": false,
+     "walk_sheet": "walk",
+     "glow": false,
+     "cave_light": 0,
+     "light": 0,
+     "pool": false,
+     "pools": {
+      "cave 100": false,
+      "cave 10": false,
+      "dark 100": false,
+      "dark 10": false
+     },
+     "kid_lantern_requested": false
+    },
+    "hold_json": {
+     "errors": 0,
+     "white": 0.025,
+     "canvas_colours": 2230,
+     "lantern": false,
+     "walk_sheet": "walk",
+     "glow": false,
+     "cave_light": 0,
+     "light": 0,
+     "pool": false,
+     "pools": {
+      "cave 100": false,
+      "cave 10": false,
+      "dark 100": false,
+      "dark 10": false
+     },
+     "kid_lantern_requested": false
+    },
+    "walkhold_png": {
+     "errors": 0,
+     "white": 0.025,
+     "canvas_colours": 2230,
+     "lantern": false,
+     "walk_sheet": "walk",
+     "glow": false,
+     "cave_light": 0,
+     "light": 0,
+     "pool": false,
+     "pools": {
+      "cave 100": false,
+      "cave 10": false,
+      "dark 100": false,
+      "dark 10": false
+     },
+     "kid_lantern_requested": false
+    },
+    "light_png": {
+     "errors": 0,
+     "white": 0.012,
+     "canvas_colours": 2620,
+     "lantern": true,
+     "walk_sheet": "walkhold",
+     "glow": false,
+     "cave_light": 0,
+     "light": 0,
+     "pool": false,
+     "pools": {
+      "cave 100": false,
+      "cave 10": false,
+      "dark 100": false,
+      "dark 10": false
+     },
+     "kid_lantern_requested": false
+    },
+    "cave_floor": {
+     "errors": 0,
+     "white": 0.011,
+     "canvas_colours": 581,
+     "lantern": true,
+     "walk_sheet": "walkhold",
+     "glow": true,
+     "cave_light": 1,
+     "light": 1,
+     "pool": true,
+     "pools": {
+      "cave 100": true,
+      "cave 10": true,
+      "dark 100": true,
+      "dark 10": true
+     },
+     "kid_lantern_requested": false
+    },
+    "all_lantern": {
+     "errors": 0,
+     "white": 0.025,
+     "canvas_colours": 2317,
+     "lantern": false,
+     "walk_sheet": "walk",
+     "glow": false,
+     "cave_light": 0,
+     "light": 0,
+     "pool": false,
+     "pools": {
+      "cave 100": false,
+      "cave 10": false,
+      "dark 100": false,
+      "dark 10": false
+     },
+     "kid_lantern_requested": false
+    }
+   }
+  },
+  {
+   "check": "G16 cave far from the start (5 places x 2 dirs): the lantern light and C still open the darkness (> 0 px changed)",
+   "pass": true,
+   "value": {
+    "[600, 120] SE": [
+     92520,
+     26595
+    ],
+    "[600, 120] W": [
+     97461,
+     26559
+    ],
+    "[160, 400] SE": [
+     92520,
+     26595
+    ],
+    "[160, 400] W": [
+     97461,
+     26559
+    ],
+    "[160, -90] SE": [
+     92520,
+     26595
+    ],
+    "[160, -90] W": [
+     97461,
+     26559
+    ],
+    "[-200, 500] SE": [
+     92520,
+     26595
+    ],
+    "[-200, 500] W": [
+     97461,
+     26559
+    ],
+    "[900, 700] SE": [
+     92520,
+     26595
+    ],
+    "[900, 700] W": [
+     97461,
+     26559
+    ]
+   }
+  },
+  {
+   "check": "G17 plan criterion 3: lantern bottom at the DRAWN position <= row 92 (walk / stop on each of 6 frames / start · 7 dirs · step and smooth ease)",
+   "pass": true,
+   "value": {
+    "bot": 21,
+    "worst": {
+     "S step": 91,
+     "S smooth": 91,
+     "SE step": 92,
+     "SE smooth": 92,
+     "E step": 90,
+     "E smooth": 90,
+     "NE step": 90,
+     "NE smooth": 90,
+     "NW step": 92,
+     "NW smooth": 92,
+     "W step": 90,
+     "W smooth": 90,
+     "SW step": 92,
+     "SW smooth": 92
+    }
+   }
+  },
+  {
+   "check": "G14 page errors 0 (GM page)",
+   "pass": true,
+   "value": []
+  },
+  {
+   "check": "G15 without ?gm: same canvas pixels as the Pilot before this change (128 states: 8 dirs x idle/walk x hold on/off x light/dark x zoom 100/75)",
+   "pass": true,
+   "value": "128/128"
+  }
+ ]
+}

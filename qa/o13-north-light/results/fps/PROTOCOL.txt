@@ -1,0 +1,25 @@
+O13 A · Paired FPS remeasurement (G11 + Hold 9) · PROTOCOL (written before measuring · not changed during the run)
+Claude · 30 Oct 2569 ~00:4x · same method as the O3 paired remeasurement the owner approved on 28-29 Oct (o3ff/fps/PROTOCOL.txt), only the pages change
+
+Why: final run of test_g2_lantern_gm.py v2.4 on the O13 page: G11 = 88.2 % (OFF 17.8 / ON 15.7) -> FAIL (1 run).
+  The previous v2.4 run on the same page code path for G11 passed (suites run). G11 walks SE with the lantern on vs off; the O13 line only runs when facing N
+  (N1: 1536 states, every non-N state draws the same pixels as 62f93a9). This run decides whether the G11 failure is the machine or the change. Criterion unchanged.
+
+Pages (not edited during the run):
+  OLD  = claude/g2-pilot 62f93a9 · pilot-g2-motion.html SHA-256 c0b04ab20e85a42f… · served 127.0.0.1:8961
+  CAND = claude/o13-north-light working tree (O13 A, after review fixes) · pilot-g2-motion.html SHA-256 0e8285d18c58ff5a… · served 127.0.0.1:8970
+Tests (whole file, one fresh process + browser per measurement, nothing cut out):
+  G11: OLD uses test_g2_lantern_gm.py v2.3 (SHA-256 5bf619f23b4f1b9c…, = 62f93a9) PORT 8961 OLD_PORT 8961
+       CAND uses test_g2_lantern_gm.py v2.4 (SHA-256 0cbfaa2661563eb9…) PORT 8970 OLD_PORT 8961
+       (v2.3 is needed for OLD because v2.4 G5b sets PT.NHOLE, which the old page does not have · the G11 code is byte-identical in v2.3 and v2.4: only G5b / G8 / comments differ)
+  Hold 9: test_g2_hold.py gm (SHA-256 d4339f7681a55dd6…, same file for both)
+Values read (from the test's own JSON, FPS not recomputed):
+  G11: checks[G11].value.median = [OFF, ON] · ratio = ON/OFF x 100 · Hold 9: checks[9].value.raf_cpu4x_median5 = [OFF, ON]
+Order (locked): G11 set first, then Hold 9 · pair 1 OLD->CAND · 2 CAND->OLD · 3 OLD->CAND · 4 CAND->OLD · 5 OLD->CAND · 15 s rest before every measurement
+  No 6th pair · no re-runs · a broken measurement (exit not 0/1, no FPS in the JSON) -> recorded, whole set STOPS
+Environment: same container (2 CPU Xeon 2.80 GHz, 7 GB) · during the run: no other test, no reviewer, no other Claude work using CPU (Claude only waits) · only the 5 idle http.servers
+  Per measurement: start/end UTC · loadavg before/after · exit code · failed checks · top 5 CPU processes before
+Criterion (unchanged): median of the 5 per-run ratios, separately for G11 OLD · G11 CAND · Hold9 OLD · Hold9 CAND
+  PASS = CAND G11 median >= 90 % and CAND Hold9 median >= 90 % · no outlier removal · median of ratios (not ratio of medians)
+  INCONCLUSIVE (declared before measuring, only makes passing harder): any broken measurement or recorded interference · an OLD median below 90 %
+The failed single run (88.2 %) stays in the report either way.

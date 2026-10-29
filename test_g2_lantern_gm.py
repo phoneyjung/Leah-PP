@@ -6,6 +6,9 @@
 # Plan G2.5 criterion 3 (lantern bottom <= row 92 at the drawn position) is G17 here.
 # usage: python3 -I test_g2_lantern_gm.py PORT OUT_DIR [OLD_PORT]
 #   OLD_PORT (optional) serves the Pilot before this change: then the page WITHOUT ?gm must draw the same canvas pixels as before.
+# v2.4 (29 Oct · O13 option D, candidate A): facing N in the cave with a held lit lantern (power 100/50, Glow+C on) now opens ONE cave hole (no lantern, Glow or C).
+#   Only G8 and G5b change (their N case): G8 expects caveHole = 1 at N in the cave at power 100 (dark floor and power 10 unchanged = 0);
+#   G5b 'cave facing N' keeps "0 px fx on vs off" with the N light switched off (PT.NHOLE.k = 0) and adds "0 C draw calls" with it on. The N light itself: test_g2_north_light.py
 # Pixel work runs in the page (helpers in window.__T); Python only judges the numbers.
 import sys, os, json, math, hashlib
 from playwright.sync_api import sync_playwright
@@ -149,10 +152,14 @@ with sync_playwright() as p:
     def flags(L): D = L['gm']['drawn']; return {'pool': D['pool'], 'glow': D['glow'], 'caveHole': D['caveHole']}
     for sc in ('dark', 'cave'):
         for lab, st, want in CASES:
-            base = dict(st, scene=sc); F = flags(T(page, 'set', dict(base, fx=True))); c = T(page, 'compare', dict(base, fx=True), dict(base, fx=False)) if not want else None
-            ok_ = F['pool'] == want and (c is None or sum(c[k] for k in ('floor', 'body', 'lantern', 'light', 'outCell')) == 0)
+            base = dict(st, scene=sc); F = flags(T(page, 'set', dict(base, fx=True))); nlight = sc == 'cave' and lab == 'facing N'   # v2.4: the N light (fx on only) is there on purpose
+            if nlight: page.evaluate('PT.NHOLE.k=0')   # v2.4: same 0 px check as before with the N light switched off (k 0 = the old N) ...
+            c = T(page, 'compare', dict(base, fx=True), dict(base, fx=False)) if not want else None
+            if nlight: page.evaluate('PT.NHOLE.k=1')
+            cd = T(page, 'cdraw', dict(base, fx=True)) if nlight else None   # ... + 0 C draw calls with the N light on (k 1)
+            ok_ = F['pool'] == want and (c is None or sum(c[k] for k in ('floor', 'body', 'lantern', 'light', 'outCell')) == 0) and (cd is None or cd == [])
             if st['power'] == 10: ok_ = ok_ and F['glow'] is False and F['caveHole'] == 0       # power 10: C on, but no Glow and no cave lantern light
-            rule['%s %s' % (sc, lab)] = dict(F, want_pool=want, px_fx_on_vs_off=(sum(c[k] for k in ('floor', 'body', 'lantern', 'light', 'outCell')) if c else None), ok=ok_)
+            rule['%s %s' % (sc, lab)] = dict(F, want_pool=want, px_fx_on_vs_off=(sum(c[k] for k in ('floor', 'body', 'lantern', 'light', 'outCell')) if c else None), c_draw_calls=(len(cd) if cd is not None else None), ok=ok_)
         F = flags(T(page, 'set', {'dir': 'S', 'power': 100, 'hold': True, 'scene': sc, 'fx': False})); rule['%s fx off' % sc] = dict(F, want_pool=False, ok=F['pool'] is False and F['glow'] is False)
     lp = ctx.new_page(); lp.route('**/%s-light.png' % BASE, lambda r: r.abort())   # light layer missing: no C (and no glow / cave light) at any power
     lp.goto(URL); lp.wait_for_function('PT.ST.ok.walkhold && PT.ST.ok.lantern && PT.FX.glow && PT.ST.last', timeout=15000); lp.evaluate(HELPERS)
@@ -161,7 +168,7 @@ with sync_playwright() as p:
             F = flags(T(lp, 'set', {'dir': 'S', 'power': pw, 'hold': True, 'scene': sc, 'fx': True}))
             rule['%s light file missing power %d' % (sc, pw)] = dict(F, want_pool=False, ok=F['pool'] is False and F['glow'] is False and F['caveHole'] == 0)
     lp.close()
-    ok('G5b rule (owner choice 26 Oct, v2.2 flags): C only with Glow+C on + held lantern + light layer + power > 0 + not N · pool=false (and 0 px) at power 0 / facing N / not holding / Glow+C off / light file missing · power 10: pool=true, glow=false, caveHole=0 · dark floor + cave',
+    ok('G5b rule (owner choice 26 Oct, v2.2 flags · v2.4 cave N: 0 px with k 0 + 0 C draw calls with k 1): C only with Glow+C on + held lantern + light layer + power > 0 + not N · pool=false (and 0 px) at power 0 / facing N / not holding / Glow+C off / light file missing · power 10: pool=true, glow=false, caveHole=0 · dark floor + cave',
        all(v['ok'] for v in rule.values()), rule)
     cs = {}   # G18 (v2.3): V0 = full C at power 10 · a) the C draw call itself at the real power 10 / 50 / 100 · b) the C pixels on screen
     for sc in ('dark', 'cave'):
@@ -206,8 +213,10 @@ with sync_playwright() as p:
     turn = page.evaluate("""()=>{const P=PT,S=P.ST,o={};for(const [sc,pw] of [['cave',100],['dark',100],['cave',10],['dark',10]]){const k=sc+' '+pw;o[k]=[];for(const [a,c] of [['NE','N'],['N','NE'],['NW','N'],['N','NW']]){P.pause(true);P.set({dir:a,anim:'walk',fi:0,hold:true,power:pw,fx:true,scene:sc,lpos:null,ldir:null,clean:false});P.draw();
        for(let i=0;i<10;i++){P.step(16);P.draw()}S.dir=c;P.step(16);P.draw();o[k].push([!!S.last.lantern,S.last.gm.drawn.glow,S.last.gm.drawn.caveHole>0,S.last.gm.drawn.pool])}}return o}""")   # v2.3: + C, dark floor, power 10
     F_, T_ = False, True; TW = {'cave 100': [T_, T_, T_, T_], 'dark 100': [T_, T_, F_, T_], 'cave 10': [T_, F_, F_, T_], 'dark 10': [T_, F_, F_, T_]}   # first frame after turning away from N
-    ok('G8 N: no lantern, no glow, no cave light, no C · turning N <-> NE/NW switches them (and C) on the same frame · cave + dark floor · power 100 + 10',
-       all(v == [None, False, 0, False] for v in nn.values()) and turn == {k: [[F_] * 4, w, [F_] * 4, w] for k, w in TW.items()}, {'N': nn, 'turn': turn})
+    TN = {k: [F_, F_, k == 'cave 100', F_] for k in TW}   # v2.4 (O13 A): at N only the cave N light (cave + power 100/50), never lantern / glow / C
+    NN = {'dark': [None, False, 0, False], 'cave': [None, False, 1, False]}
+    ok('G8 N (v2.4 O13 A): no lantern, no glow, no C · cave light at N = 1 in the cave at power 100, 0 at power 10 and on the dark floor (N light; power 50 in test_g2_north_light.py) · turning N <-> NE/NW switches them (and C) on the same frame · cave + dark floor · power 100 + 10',
+       nn == NN and turn == {k: [TN[k], w, TN[k], w] for k, w in TW.items()}, {'N': nn, 'turn': turn})
     fs = page.evaluate("""()=>{const P=PT;for(const sc of ['light','dark','cave'])for(const pw of [100,50,10,0]){P.set({scene:sc,power:pw,fx:true,hold:true,clean:false});for(let i=0;i<20;i++){P.step(16);P.draw()}}return window.__FILTER_SETS}""")
     ok('G9 ctx.filter set 0 times while drawing', fs == 0, fs)
     page.evaluate("()=>{PT.set({power:100,fx:true,scene:'light',zoom:1});PT.pause(false)}")
@@ -301,4 +310,4 @@ R['checks'] = CHECK
 json.dump(R, open(os.path.join(OUT, 'gm-lantern-test.json'), 'w'), indent=1, ensure_ascii=False)
 for c in CHECK: print(('PASS ' if c['pass'] else 'FAIL ') + c['check'] + ' :: ' + json.dumps(c['value'], ensure_ascii=False)[:400])
 print('TOTAL %d/%d PASS' % (sum(c['pass'] for c in CHECK), len(CHECK)))
-sys.exit(0 if CHECK and all(c['pass'] for c in CHECK) else 1)   # v2.2: exit 1 when any check fails (v2.3: 25 checks with OLD_PORT)
+sys.exit(0 if CHECK and all(c['pass'] for c in CHECK) else 1)   # v2.2: exit 1 when any check fails (v2.3: 25 checks with OLD_PORT · v2.4: same 25, G8 / G5b N rule for O13 A)

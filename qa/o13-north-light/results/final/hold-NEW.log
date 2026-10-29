@@ -1,0 +1,36 @@
+PASS 1 frames idle_hold 8x4 + walk_hold 8x6 :: 80
+PASS 3 target anchor on a fist pixel (70 frames, N = no lantern) :: "70/70"
+PASS 3b fist pixels are skin ID3 or leather ID7 in the masks :: "1259/1259"
+PASS 8 L_max per dir (92 - lowest hand row) reported, all 15-17 :: {"S": 16, "SE": 15, "E": 17, "NE": 17, "NW": 15, "W": 17, "SW": 15}
+PASS 11 walk_hold body centre vs walk <= 1 px per dir (B2 table reused) :: {"S": 0.0, "SE": 0.03, "E": 0.63, "NE": 0.09, "N": 0.0, "NW": 0.26, "W": 0.65, "SW": 0.3}
+FAIL 6a stop (walk_hold -> idle f3) head jump <= 1 px (unrounded, rows 0-50) :: {"over_1": {"N": 1.002, "NW": 1.084}, "all": {"S": 0.697, "SE": 0.875, "E": 0.639, "NE": 0.992, "N": 1.002, "NW": 1.084, "W": 0.0, "SW": 0.984}}
+PASS 7b no rotation in the page (rotate / setTransform count) :: 0
+PASS page opens in hold mode (?hold) with all files :: {"walk": true, "idle": true, "anc": true, "walkhold": true, "lantern": true, "hold": true}
+PASS 7 lantern drawn in front, fist pixels redrawn over the ring, exact pixels (bad + outside = 0) :: {"frames": 70, "lanPx": 11760, "front": 10980, "fistOver": 780, "bad": 0, "outside": 0}
+PASS 3c eased lantern converges onto the frame target from 6 px away (every frame, both modes, within 256 ms) :: {"step": {"ok": 70, "n": 70, "worst_ms": 128}, "smooth": {"ok": 70, "n": 70, "worst_ms": 224}}
+PASS 7c ?nofist shows the ring over the fist (overlay really does something) :: 780
+PASS N draws no lantern (D-HAND) :: 0
+PASS walk in hold mode uses the walk_hold sheet :: "70/70"
+PASS 11b lantern moves with the B2 renderOffset (sprite and lantern share sx) :: {"S": true, "SE": true, "E": true, "NE": true, "NW": true, "W": true, "SW": true}
+PASS 4 walk_hold drawn lantern: x range <= 4, y range <= 3, per 100 ms <= 3 (ease) :: {"S": [2, 1, 2, 1], "SE": [4, 3, 3, 3], "E": [2, 1, 2, 1], "NE": [2, 3, 1, 3], "NW": [2, 2, 2, 1], "W": [4, 2, 3, 1], "SW": [1, 1, 1, 1]}
+PASS 5 idle_hold drawn lantern moves <= 3 px :: {"S": [1, 1], "SE": [3, 1], "E": [2, 0], "NE": [3, 0], "NW": [3, 3], "W": [0, 0], "SW": [3, 1]}
+PASS 6b stop (walk -> idle f3) drawn lantern jump <= 3 px per 100 ms (ease) :: {"S": [3, 2, 80, 0], "SE": [3, 3, 64, 0], "E": [3, 6, 272, 128], "NE": [3, 3, 112, 0], "NW": [3, 3, 48, 0], "W": [3, 3, 112, 0], "SW": [2, 2, 16, 0]}
+PASS 6c stop from each of the 6 walk frames: drawn lantern <= 3 px per 100 ms (ease) :: {"S": [3, 3, 96, 0], "SE": [3, 3, 64, 0], "E": [3, 7, 288, 144], "NE": [3, 4, 160, 16], "NW": [3, 3, 64, 0], "W": [3, 5, 224, 80], "SW": [2, 2, 32, 0]}
+PASS 4s step ease: walk x range <= 4, y range <= 3, per 100 ms <= 3 :: {"S": [2, 1, 2], "SE": [4, 3, 3], "E": [2, 1, 2], "NE": [2, 3, 3], "NW": [2, 2, 2], "W": [4, 2, 3], "SW": [1, 1, 1]}
+PASS 6s step ease: stop from each of the 6 walk frames and start <= 3 px per 100 ms :: {"S": [3, 0, 16, 0], "SE": [3, 1, 16, 0], "E": [3, 4, 240, 112], "NE": [3, 1, 128, 0], "NW": [3, 0, 16, 0], "W": [3, 3, 128, 0], "SW": [2, 0, 16, 0]}
+PASS live rAF (CPU 1x/4x, real time): <= 3 px per 100 ms, ends on the hand, both ease modes :: {"cpu1 smooth E": [3, 6, true], "cpu1 smooth W": [3, 4, true], "cpu1 smooth NE": [3, 2, true], "cpu1 smooth SE": [3, 4, true], "cpu1 step E": [3, 4, true], "cpu1 step W": [3, 2, true], "cpu1 step NE": [3, 0, true], "cpu1 step SE": [3, 2, true], "cpu4 smooth E": [3, 6, true], "cpu4 smooth W": [3, 3, true], "cpu4 smooth NE": [2, 2, true], "cpu4 smooth SE": [3, 3, true], "cpu4 step E": [3, 4, true], 
+PASS N <-> NE/NW: lantern hides/shows on the turn frame, on the hand, no flicker :: "8/8"
+PASS hand switch on a direction change snaps (drawn = target at once) :: "84/84"
+PASS E -> N hides the lantern, N -> W snaps :: [null, true]
+PASS 9 FPS hold on >= 90 % of off (rAF median of 5 alternating rounds, 4x CPU throttle, walking; 10x reported as info) · real phone in G2.6 :: {"draw_ms_off_median15": 1.571, "draw_ms_on_median15": 1.975, "draw_extra_ms": 0.404, "extra_pct_of_16_7ms": 2.4, "raf_cpu4x_median5": [35.2, 33.2], "raf_cpu10x_median9_info": [14.1, 12.0], "raf_cpu10x_rounds_off": [12.4, 13.3, 14.1, 14.1, 14.4, 13.5, 12.4, 14.5, 16.1], "raf_cpu10x_rounds_on": [11.7, 11.2, 13.9, 11.2, 13.7, 12.0, 13.3, 10.8, 14.2]}
+PASS 10 missing files -> no lantern, old walk sheet, no white screen, 0 errors :: {"walkhold_png": ["walk", 0, 0.056], "lantern_png": ["walk", 0, 0.056], "hold_anchors": ["walk", 0, 0.056], "idle_png": ["walk", 0, 0.056], "all_hold": ["walk", 0, 0.056], "lantern_json": ["walk", 0, 0.056]}
+PASS hold off -> walk sheet, no lantern (old Pilot unchanged) :: "walk"
+PASS page errors 0 :: []
+start (walk begins) per dir [max per 100 ms, max off from hand]: {'S': [3, 3, 96, 0], 'SE': [3, 4, 48, 16], 'E': [3, 6, 208, 96], 'NE': [3, 2, 80, 0], 'NW': [3, 5, 160, 48], 'W': [3, 3, 64, 0], 'SW': [2, 2, 48, 0]}
+snap mode for comparison: {'S': {'walk_per100': 2, 'stop_per100': 3}, 'SE': {'walk_per100': 4, 'stop_per100': 3}, 'E': {'walk_per100': 2, 'stop_per100': 6}, 'NE': {'walk_per100': 3, 'stop_per100': 4}, 'NW': {'walk_per100': 2, 'stop_per100': 3}, 'W': {'walk_per100': 3, 'stop_per100': 2}, 'SW': {'walk_per100': 1, 'stop_per100': 2}}
+ease max off from hand (px): 6
+stop all frames: frames {'S': [1, 2, 3, 4, 5, 6], 'SE': [1, 2, 3, 4, 5, 6], 'E': [1, 2, 3, 4, 5, 6], 'NE': [1, 2, 3, 4, 5, 6], 'NW': [1, 2, 3, 4, 5, 6], 'W': [1, 2, 3, 4, 5, 6], 'SW': [1, 2, 3, 4, 5, 6]} | snap max per 100 ms: {'S': 3, 'SE': 3, 'E': 7, 'NE': 4, 'NW': 3, 'W': 6, 'SW': 2}
+ring vs fist per dir {phase: [max px, ms > 3 px]}: {'S': {'walk': [2, 0], 'idle': [1, 0], 'stop': [2, 0], 'start': [3, 0]}, 'SE': {'walk': [4, 48], 'idle': [3, 0], 'stop': [3, 0], 'start': [4, 16]}, 'E': {'walk': [2, 0], 'idle': [2, 0], 'stop': [6, 128], 'start': [6, 96]}, 'NE': {'walk': [3, 0], 'idle': [2, 0], 'stop': [3, 0], 'start': [2, 0]}, 'NW': {'walk': [2, 0], 'idle': [3, 0], 'stop': [3, 0], 'start': [5, 48]}, 'W': {'walk': [3, 0], 'idle': [0, 0], 'stop': [3, 0], 'start': [3, 0]}, 'SW': {'walk': [1, 0], 'idle': [2, 0], 'stop': [2, 0], 'start': [2, 0]}}
+ring vs fist smooth (ease) vs step [max px, ms > 3 px]: {"S": {"ease": {"stop_all_frames": [3, 0], "start": [3, 0], "walk": [2, 0]}, "step": {"stop_all_frames": [0, 0], "start": [0, 0], "walk": [0, 0]}}, "SE": {"ease": {"stop_all_frames": [3, 0], "start": [4, 16], "walk": [4, 48]}, "step": {"stop_all_frames": [1, 0], "start": [2, 0], "walk": [2, 0]}}, "E": {"ease": {"stop_all_frames": [7, 144], "start": [6, 96], "walk": [2, 0]}, "step": {"stop_all_frames": [4, 112], "start": [4, 96], "walk": [0, 0]}}, "NE": {"ease": {"stop_all_frames": [4, 16], "start": [2, 0], "walk": [3, 0]}, "step": {"stop_all_frames": [1, 0], "start": [0, 0], "walk": [0, 0]}}, "NW": {"ease": {"stop_all_frames": [3, 0], "start": [5, 48], "walk": [2, 0]}, "step": {"stop_all_frames": [0, 0], "start": [2, 0], "walk": [0, 0]}}, "W": {"ease": {"stop_all_frames": [5, 80], "start": [3, 0], "walk": [3, 0]}, "step": {"stop_all_frames": [3, 0], "start": [2, 0], "walk": [1, 0]}}, "SW": {"ease": {"stop_all_frames": [2, 0], "start": [2, 0], "walk": [1, 0]}, "step": {"stop_all_frames": [0, 0], "start": [1, 0], "walk": [0, 0]}}}
+head jump rows 0-43: {'S': 0.748, 'SE': 0.923, 'E': 0.739, 'NE': 0.935, 'N': 1.041, 'NW': 0.942, 'W': 0.0, 'SW': 1.0} | locked walk rows 0-50: {'S': 0.697, 'SE': 0.941, 'E': 0.575, 'NE': 0.992, 'N': 1.002, 'NW': 0.994, 'W': 0.169, 'SW': 0.976}
+TOTAL 27/28 PASS

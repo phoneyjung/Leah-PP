@@ -1,0 +1,18 @@
+PASS E1 FIX: draw() throws 0 times (exact canvas, all cases) · "0 errors / 1080 cases"
+PASS E2 FIX: s > 0 and s = max(1, round(H/384)) x zoom in every case · "0 bad / 1080 · s at H<192 = [0.75, 1]"
+PASS E3 FIX: no NaN / Infinity in s, feet, sprite, tag, head, lantern numbers · "1080 / 1080 finite"
+PASS E4 FIX: cave darkness layer has a finite size > 0 in every cave case · "216 / 216 · smallest (3, 3)"
+FAIL E5 OLD vs FIX: identical pixels + same s for every case with H >= 192 · "580 same / 600 · diff [('OLD dpr1 gm', 192, 1, 'cave', 'idle N 0'), ('OLD dpr1 gm', 192, 0.75, 'cave', 'idle N 0'), ('OLD dpr1 gm', 193, 1, 'cave', 'idle N 0'), ('OLD dpr1 gm', 193, 0.75, 'cave', 'idle N 0'), ('OLD dpr1 gm', 383, 1, 'cave', 'idle N 0')]"
+PASS E6 FIX: H < 192 -> s = zoom (1 or 0.75), never 0 · [[0.75, 0.75], [1, 1]]
+PASS E7 FIX: character sprite pixels drawn (> 0) in every case with H >= 64 · "840 / 840 cases · fewest sprite px 515"
+PASS E7b FIX: the 3 poses draw 3 different canvases at every H >= 64 (v1 check kept) · "280 / 280 groups"
+PASS E8 OLD reproduces O3: s = 0 for H < 192 · cave draw() throws · other scenes draw no character · {"s values": [0], "cave throws": "96 / 96", "error": "InvalidStateError: Failed to execute 'drawImage' on 'CanvasRenderingContext2D': The image argument is a canvas element with a width or height of 0.", "non-cave sprite px 0": "288 / 288", "non-cave poses identical (blank)": "64 / 64", "OLD throws 
+PASS V1 FIX: pageerror 0 (exact + fresh + resize runs) · {"FIX pageerrors": 0, "FIX runs": 66, "OLD pageerrors": 6}
+PASS V2 FIX: page keeps drawing after every resize (loop alive) · "252 / 252 steps"
+PASS V3 FIX: s > 0 and numbers finite after every resize · "252 / 252"
+PASS V4 FIX: shrink -> expand without reload = same pixels as a fresh page at 844x390 · "28 / 28"
+PASS V5 OLD vs FIX fresh pages: identical pixels at 844x390 and 1180x820 (DPR 1/2.625, all scenes, zoom 100/75, ?gm / no ?gm / ?hold) · "56 / 56"
+PASS V6 OLD reproduces O3 (dpr1 ?gm cave): pageerror, page stops drawing, still blank (all-zero canvas) after expanding back · {"pageerrors": 1, "first": "Failed to execute 'drawImage' on 'CanvasRenderingContext2D': The image argument is a canvas element with a width or heig", "alive after expand": false, "old runs that died": ["OLD dpr1 gm cave z0.75", "OLD dpr1 gm cave z1", "OLD dpr2.625 gm cave z0.75", "OLD dpr2.625 gm c
+PASS E9 FIX: width extremes (W 0/1/4000 · H 0/1/64/191/384/1024): no throw, s > 0, numbers finite, cave layer > 0 · {"ok": "196 / 196", "OLD throws": "20 / 196"}
+PASS V7 FIX: walking while resized (dpr 1/2.625 · cave/light): no pageerror, loop alive and moving at every step, not blank at the end · {"steps alive": "36 / 36", "pos moved first->last": {"FIX dpr1 gm cave walk": [[65.65459150779257, 65.65459150779257], [102.42301275864328, 102.42301275864328]], "FIX dpr1 gm light walk": [[65.65798562034229, 65.65798562034229], [100.16592791309584, 100.16592791309584]], "FIX dpr2.625 gm cave walk":
+O3 TOTAL 16/17

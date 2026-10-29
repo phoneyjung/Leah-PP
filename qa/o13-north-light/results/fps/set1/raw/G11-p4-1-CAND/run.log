@@ -1,0 +1,20 @@
+PASS G0 lantern files in the Pilot branch = Codex fix4 44d2b62 byte for byte (SHA-256)
+PASS G0b no rotation / no ctx.filter in the page source
+PASS G1 ?gm opens with the real lantern: base + light + json, grip [16,6], hold on, 8-column sheets 256x32, Set-08 stand-in never requested
+PASS G2 the 8 columns of base and light = the S file pixels (column 1 vs file, columns 2-8 vs column 1)
+PASS G3 light layer by power: 100/50 % = light colour, 10 % = 35 % glint, 0 % = dark glass (every light px, 7 dirs x idle/walk, +-2)
+PASS G4 plan criterion 8: the Glow alone (same render with glow 0) changes 0 body / fist / face px, 0 lantern px, > 0 floor px (power 100 and 50 x 7 dirs x 3 scenes x idle/walk)
+PASS G4b power 50 = about half the light around (floor energy 50/100 % in 0.35-0.65, baseline power 10 = C only) · power 10 = no glow (0 floor px)
+PASS G4c light / dark floor: power 100 vs 0 changes only floor + light px (0 body, 0 lantern metal)
+PASS G4d cave: the lantern light and C only uncover the body (every changed body px is at least as close to the true sprite colour) · never tint it (7 dirs x idle/walk x zoom 100/75 x eased offsets)
+PASS G5 C pool (fx on vs off at power 10): dark = behind the body (0 body / lantern px, > 0 floor px) · cave = only inside the player cell · light = no pool (0 px)
+PASS G5b rule (owner choice 26 Oct, v2.2 flags · v2.4 cave N: 0 px with k 0 + 0 C draw calls with k 1): C only with Glow+C on + held lantern + light layer + power > 0 + not N · pool=false (and 0 px) at power 0 / facing N / not holding / Glow+C off / light file missing · power 10: pool=true, glow=false, caveHole=0 · dark floor + cave
+PASS G18 V0: C at power 10 = the full C · a) one C draw per frame, same image / alpha 1 / blend / layer / place as at power 50 and 100 · b) C alone at 10 = C alone at 100 with Glow / cave light forced 0 (0 px differ outside the glass, ratio 1.00 +- 0.02) · dark floor + cave · 7 dirs x idle/walk
+PASS G6 cave: light px are not darkened (power 100 = light colour · 7 dirs x idle/walk x zoom 100/75 x eased offsets)
+PASS G7 plan criterion 5 (light / dark floor, as worded): every on-screen colour the lantern, light or glow changes has dE00 >= 10 from #FFC857 and #5FE0FF (power 100/50/10/0 x 7 dirs x zoom 100/75)
+PASS G7b cave (extra): the same, except body px that the light only uncovers (the locked sprite colours, G4d)
+PASS G8 N (v2.4 O13 A): no lantern, no glow, no C · cave light at N = 1 in the cave at power 100, 0 at power 10 and on the dark floor (N light; power 50 in test_g2_north_light.py) · turning N <-> NE/NW switches them (and C) on the same frame · cave + dark floor · power 100 + 10
+PASS G9 ctx.filter set 0 times while drawing
+PASS G10 GM buttons: power 50/10/0/100 · Glow+C off/on · floor dark/cave/light · zoom 75/100 % (fixed) · power and Glow+C buttons shown
+PASS G11 FPS with the lantern (light + Glow + cave light) >= 90 % of the same cave scene without it (C and the cave on in both · rAF, 4x CPU, walking, median of 5) · draw ms per scene reported
+PASS G12 iPad 1180x820 GM page: 0 errors, lantern drawn

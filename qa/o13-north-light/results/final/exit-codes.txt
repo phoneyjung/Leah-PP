@@ -1,0 +1,20 @@
+port 8961 page sha256 c0b04ab20e85a42f
+port 8962 page sha256 8839e326d9cfead3
+port 8964 page sha256 b1fb175c09de93a6
+port 8970 page sha256 0e8285d18c58ff5a
+== north-NEW: python3 -I /tmp/claude-0/-home-claude-leah-pp/d3d34840-5e4e-52a0-a344-341c2cb1b80f/scratchpad/wt_pilot/test_g2_north_light.py 8970 /tmp/claude-0/-home-claude/d3d34840-5e4e-52a0-a344-341c2cb1b80f/scratchpad/o13real/out/final/north-NEW 8961 8962
+north-NEW exit=0
+== lantern-v24-NEW: python3 -I /tmp/claude-0/-home-claude-leah-pp/d3d34840-5e4e-52a0-a344-341c2cb1b80f/scratchpad/wt_pilot/test_g2_lantern_gm.py 8970 /tmp/claude-0/-home-claude/d3d34840-5e4e-52a0-a344-341c2cb1b80f/scratchpad/o13real/out/final/lantern-v24-NEW 8961
+lantern-v24-NEW exit=1
+== hold-NEW: python3 -I /tmp/claude-0/-home-claude-leah-pp/d3d34840-5e4e-52a0-a344-341c2cb1b80f/scratchpad/wt_pilot/test_g2_hold.py 8970 /tmp/claude-0/-home-claude/d3d34840-5e4e-52a0-a344-341c2cb1b80f/scratchpad/o13real/out/final/hold-NEW gm
+hold-NEW exit=0
+== offset-NEW: python3 -I /tmp/claude-0/-home-claude-leah-pp/d3d34840-5e4e-52a0-a344-341c2cb1b80f/scratchpad/wt_pilot/test_g2_motion_offset.py 8970 /tmp/claude-0/-home-claude/d3d34840-5e4e-52a0-a344-341c2cb1b80f/scratchpad/o13real/out/final/offset-NEW
+offset-NEW exit=0
+== o3v3-PREO3vsNEW: python3 -I /tmp/claude-0/-home-claude-leah-pp/d3d34840-5e4e-52a0-a344-341c2cb1b80f/scratchpad/wt_pilot/qa/o3-small-canvas/tools/test_o3_small_canvas.py 8964 8970 /tmp/claude-0/-home-claude/d3d34840-5e4e-52a0-a344-341c2cb1b80f/scratchpad/o13real/out/final/o3v3
+o3v3-PREO3vsNEW exit=1
+== cpool-OLDvsNEW: python3 -I /tmp/claude-0/-home-claude-leah-pp/d3d34840-5e4e-52a0-a344-341c2cb1b80f/scratchpad/wt_pilot/qa/g2-5a-cpool/tools/test_cpool.py 8961 8970 /tmp/claude-0/-home-claude/d3d34840-5e4e-52a0-a344-341c2cb1b80f/scratchpad/o13real/out/final/cpool.json
+cpool-OLDvsNEW exit=1
+== shots-NEW: python3 -I /tmp/claude-0/-home-claude/d3d34840-5e4e-52a0-a344-341c2cb1b80f/scratchpad/o13real/shots.py 8970 /tmp/claude-0/-home-claude/d3d34840-5e4e-52a0-a344-341c2cb1b80f/scratchpad/o13real/out/final/shots
+shots-NEW exit=0
+DONE
+lantern-v23-NEW (page 0e8285d1, v2.3 5bf619f2) exit=1

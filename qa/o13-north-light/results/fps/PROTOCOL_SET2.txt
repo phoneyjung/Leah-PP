@@ -1,0 +1,10 @@
+O13 A · Paired FPS remeasurement · SET 2 · PROTOCOL (written before measuring set 2 · not changed during the run)
+Claude · 30 Oct 2569 ~01:1x
+
+Set 1 (PROTOCOL.txt, SHA-256 5685f201…) ENDED EARLY = INCONCLUSIVE: the container restarted during G11 pair 4 slot 1 (CAND), 6 of 20 measurements done.
+  Set 1 results are reported as they are and are NOT combined with set 2:
+  G11 OLD 93.5 / 84.7 / 93.4 · G11 CAND 90.9 / 89.8 / 105.6 (the OLD page itself failed G11 once: 84.7 %)
+Set 2 = everything exactly as PROTOCOL.txt (pages, test files, values read, order, 15 s rest, criterion, INCONCLUSIVE rules), with ONE scope change decided now, before measuring:
+  G11 only (10 measurements). Reason: only G11 failed in the final run; Hold 9 passed there (single run) and in the suites run. Fewer measurements = less exposure to another container restart.
+  PASS = CAND G11 median of the 5 per-run ratios >= 90 % · INCONCLUSIVE = a broken / interrupted measurement, recorded interference, or OLD G11 median < 90 %
+Pages: OLD 62f93a9 (c0b04ab20e85a42f…) on 8961 · CAND WT (0e8285d18c58ff5a…) on 8970 · servers restarted after the container restart (same folders)

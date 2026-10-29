@@ -1,0 +1,6 @@
+%CPU CMD
+ 1.3 /opt/claude-code/bin/claude --preload /home/claude/.claude/remote/spare.sock
+ 0.0 [kworker/u8:0-iou_exit]
+ 0.0 /process_api --firecracker-init --addr 0.0.0.0:2024 --max-ws-buffer-size 32768 --block-local-connections --control-
+ 0.0 python3 -m http.server 8970 --bind 127.0.0.1 --directory /tmp/claude-0/-home-claude-leah-pp/d3d34840-5e4e-52a0-a344
+ 0.0 [kworker/u8:2-iou_exit]

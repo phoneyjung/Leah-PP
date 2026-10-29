@@ -1,0 +1,6 @@
+N12 FPS protocol note (written 29 Oct 2569 ~23:4x, BEFORE run 3)
+Criterion (unchanged): walking N in the cave, k 1 vs k 0 on the same page, 4x CPU, rAF 2 s each, 5 alternating pairs (k0 first in pairs 1/3/5), median of per-pair ratios k1/k0 >= 0.90.
+Run 1 (north1): ratios 1.033 0.716 0.936 1.079 0.988 -> median 0.988 (PASS) · draw ms cpu1x k0 16.012 k1 16.861
+Run 2 (north2): ratios 0.674 0.760 1.153 0.677 1.082 -> median 0.760 (FAIL) · draw ms cpu1x k0 14.080 k1 13.192
+Cause found: the test keeps 3 pages open (new, old, sim). Every page runs its own draw loop each frame (loop() draws even when paused), so 2 other pages competed for the CPU during the FPS run. The draw-ms numbers (same page, no rAF) show no consistent cost (k1 +5% in run 1, -6% in run 2).
+Change for run 3 (method only): close the old and sim pages before the FPS block. Same criterion, same 5 pairs, same order. No 6th pair. Runs 1, 2 and 3 are all reported.
