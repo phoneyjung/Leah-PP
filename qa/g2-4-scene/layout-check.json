@@ -1,0 +1,83 @@
+{
+ "size_tiles": [
+  28,
+  14
+ ],
+ "size_px": [
+  896,
+  448
+ ],
+ "T": 32,
+ "door_opening_px": 64,
+ "door_rule_ge_64": true,
+ "exits": 2,
+ "single_exit_point": true,
+ "reachable_pairs_ok": 60,
+ "pairs": 60,
+ "repeat_identical": true,
+ "blocked_found": 0,
+ "blocked_targets": 11,
+ "exit_reachable": true,
+ "door_reachable": true,
+ "crystal_reachable": true,
+ "unreachable_walkable_cells": [],
+ "area": {
+  "walkable_open": 198,
+  "blocked": 194,
+  "pct_walkable": 50.5,
+  "pct_walkable_below_cliff": 68.8,
+  "cliff_tiles": 104
+ },
+ "focal_cave_x_pct": 60.7,
+ "path_len_start_to_exit_tiles": 7,
+ "path_len_start_to_door_tiles": 11,
+ "lamps": [
+  [
+   14,
+   4
+  ],
+  [
+   19,
+   4
+  ],
+  [
+   13,
+   7
+  ],
+  [
+   4,
+   9
+  ],
+  [
+   13,
+   10
+  ]
+ ],
+ "lamp_r_tiles": 4.5,
+ "dark_cells": 59,
+ "dark_regions": [
+  47,
+  12,
+  1
+ ],
+ "slime_zone_cells": 47,
+ "slime_zone_x_range": [
+  18,
+  26
+ ],
+ "slime_zone_lit_cells": 0,
+ "lit_grass_cells": 106,
+ "crystal_light": {
+  "[25, 8]": "dark 7.2 tiles from a lamp",
+  "[9, 11]": "lit 4.1 tiles from a lamp"
+ },
+ "lamps_next_to_path_or_door": {
+  "[14, 4]": true,
+  "[19, 4]": true,
+  "[13, 7]": true,
+  "[4, 9]": true,
+  "[13, 10]": true
+ },
+ "dead_ends": [],
+ "narrow_1_tile": []
+}

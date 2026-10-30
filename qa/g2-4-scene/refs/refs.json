@@ -1,0 +1,73 @@
+{
+ "kid_bbox": [
+  25,
+  12,
+  72,
+  95
+ ],
+ "kid_height": 83,
+ "ref192-1-style-kid.png": {
+  "size": [
+   192,
+   192
+  ],
+  "bbox": [
+   121,
+   108,
+   168,
+   191
+  ],
+  "alpha_values": [
+   0,
+   255
+  ]
+ },
+ "ref192-2-shape-hut.png": {
+  "size": [
+   192,
+   192
+  ],
+  "bbox": [
+   4,
+   6,
+   188,
+   192
+  ],
+  "alpha_values": [
+   0,
+   255
+  ]
+ },
+ "ref64-1-style-kid.png": {
+  "size": [
+   64,
+   64
+  ],
+  "bbox": [
+   10,
+   4,
+   55,
+   64
+  ],
+  "alpha_values": [
+   0,
+   255
+  ]
+ },
+ "ref64-2-shape-slime.png": {
+  "size": [
+   64,
+   64
+  ],
+  "bbox": [
+   2,
+   4,
+   62,
+   64
+  ],
+  "alpha_values": [
+   0,
+   255
+  ]
+ }
+}
