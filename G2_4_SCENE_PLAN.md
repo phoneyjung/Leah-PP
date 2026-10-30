@@ -144,6 +144,13 @@ A round friendly slime creature for a children's adventure game, facing the came
 A rocky outcrop with a dark cave entrance at the foot of a purple-gray cliff, for a cozy fantasy village at dusk, seen from the front, low top-down RPG view, on a 128x128 canvas. Layered purple-gray rock with moss, small grass tufts and hanging ivy, the same rock colors and texture as reference image 2. Follow the outline of reference image 1: the rock fills x 2-125 and y 6-127, and the dark arched entrance is 64 px wide at x 32-95, rising from y 124 up to y 40 with a 3 px rock lip below it, taller than the girl in the style image, solid very dark inside, kept clear and unobstructed. No crystals, no bright yellow, no gold, no cyan or sky-blue glow, no bright red. Use the pixel style, outline and shading of the style image but do not draw the girl. Keep the whole outcrop inside the canvas with a 2 px clear margin at the left, right and top. Front view only, no isometric view, no ground plane, no ground shadow, isolated on a transparent background. pixel art for a colorful adventure RPG, rich saturated colors, dark single-color outline, soft shading, light from the top-left
 ```
 
+### E2 · ปากถ้ำ 192 (เจ้าของ 31 ต.ค. ~00:5x "กดใหม่ใหญ่ขึ้น 192" · Creator · Create image Pro · 10)
+ปากถ้ำ 128 ทั้ง 4 แบบได้ช่องมืดราว 36×41 (เกณฑ์ ≥ 51×72) → ใช้วิธีเดียวกับบ้าน 256 · วางในโลกมุมซ้ายบน (448, −64) (คอลัมน์ 14–19 · ส่วนบน 64 px อยู่นอกขอบแมพ) · ช่องมืดในโลก x 508–579 ตรงทางออก 512–575
+ภาพสไตล์ `qa/g2-4-scene/refs/ref192-1-style-kid.png` · reference image 1 `round2/refs/ref192-2-shape-cave.png` ("copy this exact outline and the tall dark entrance") · reference image 2 `round1/img/b-tileset-grass-cliff.png` ("use the rock colors and texture only") · reference image 3 `round2/refs/ref128-3-look-cave4.png` ("same rock design; ignore its size and its small entrance") · Custom size 192×192
+```text
+A rocky outcrop with a dark cave entrance at the foot of a purple-gray cliff, the same rock design as reference image 3, for a cozy fantasy village at dusk, seen from the front, low top-down RPG view, on a 192x192 canvas. Layered purple-gray rock with moss, small grass tufts and hanging ivy, the same rock colors and texture as reference image 2. Follow the outline of reference image 1: the rock fills x 4-187 and y 8-190, and the dark arched entrance is 72 px wide at x 60-131, rising from y 187 up to y 60 with a 3 px rock lip below it, much taller than the girl in the style image, solid very dark inside, kept clear and unobstructed. No crystals, no flowers, no bright yellow, no gold, no cyan or sky-blue glow, no bright red, no bright leaf green. Use the pixel style, outline and shading of the style image but do not draw the girl. Keep the whole outcrop inside the canvas with a 2 px clear margin at the left, right and top. Front view only, no isometric view, no ground plane, no ground shadow, isolated on a transparent background. pixel art for a colorful adventure RPG, rich saturated colors, dark single-color outline, soft shading, light from the top-left
+```
+
 ### F · ต้นไม้ 2 แบบ (Object Creator · Pro · 1 Direction · 128 · 10 · ได้ 4 แบบ เลือก 2)
 รูปอ้างอิง `ref128-1-style-kid.png` + `ref128-2-shape-tree.png` (ต้องขึ้น 2/N · ได้ 1/1 → Create image Pro 1 ภาพต่อครั้ง)
 ```text
@@ -230,3 +237,6 @@ the same round lavender slime from the reference seen from 8 directions, same si
 - สไลม์: เจ้าของเลือก **แบบ ค** (54 px)
 - 23:48 "ok ต่อ" = รับ **บ้านยาม 256** + เกณฑ์ประตู **≥ ตัวเด็ก + 4 px** (แทน ≥ 64) และ **วงแสงตะเกียงในถ้ำ 130** (หน้า Pilot GM)
 - เจ้าของลองหน้า Pilot แล้ว 23:26: "ตะเกียงมองเห็นได้แคบไป" → ปุ่มวงแสง 72/100/130/160 → ค่าเริ่ม 130
+
+**รอบ 2 (31 ต.ค. 00:3x–01:0x · `qa/g2-4-scene/round2/README.md`):** เจ้าของอนุมัติ "กดครบ 6 ชิ้น" → Claude กด 51 generations · สไลม์ 8 ทิศ **รับ** (Codex เก็บ) · ต้นไม้ **1+2** · เสาไฟ **1** · ประตูรั้ว **2** · ของเล็ก **1–6, 55, 8–16** · ปากถ้ำ 128 ช่องเตี้ย 36×41 → เจ้าของเลือก **กดใหม่ 192** (ข้อ E2) · ยังไม่ได้กดเพราะ Chrome บนคอมเจ้าของหลุดการเชื่อมต่อตอน ~01:0x
+
