@@ -1,0 +1,5 @@
+north exit=0
+lantern exit=1
+hold exit=0
+offset exit=0
+cpool exit=1

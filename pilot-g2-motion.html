@@ -21,6 +21,7 @@ canvas{position:fixed;inset:0;width:100%;height:100%;image-rendering:pixelated}
  <button id="bEase">ตะเกียงหน่วง / ease</button>
  <button id="bPow" style="display:none">พลัง / power</button>
  <button id="bFx" style="display:none">Glow+C</button>
+ <button id="bLR" style="display:none">วงแสง / light 72</button>
 </div>
 <div id="pad"></div>
 <script>
@@ -90,6 +91,8 @@ async function gmLantern(){
 const FX={};const DARK_A=0.86, DARK_RGB='8,6,18';
 const GLOW={R:40,bands:[[8,0.26],[14,0.20],[20,0.15],[27,0.10],[34,0.06],[40,0.03]],col:[255,179,107]};   // stage-1 experiment values (ChatGPT scored B2+Glow+C with them)
 const LHOLE={R:72,bands:[[20,1],[32,0.85],[44,0.65],[56,0.42],[66,0.22],[72,0.1]]};                     // cave lantern light radius = PLACEHOLDER, not a game rule
+const LHOLE72=LHOLE.bands.map(b=>b.slice()), LR_SET=[72,100,130,160];   // owner 30 Oct 23:26 'light too narrow' -> GM try-out sizes · same band shape scaled to R (72 = unchanged)
+function setLR(R){if(!LR_SET.includes(R))return;LHOLE.R=R;LHOLE.bands=LHOLE72.map(b=>[Math.round(b[0]*R/72),b[1]]);if(FX.lhole)FX.lhole=stampRadial(LHOLE.R,LHOLE.bands,[0,0,0])}
 const NHOLE={cx:48,cy:84,k:1};   // O13 option D, candidate A (29 Oct): cave + facing N + held lit lantern -> the lantern stays hidden (D-HAND) but its light still opens the darkness: same LHOLE stamp, centre = feet [48,94] 10 px up (P2), alpha = power-table hole x k · GM ?nk=0..1 changes k (0 = the old N)
 const POOL={cx:44,cy:66,rx:30,ry:34,bands:[[0.55,1],[0.8,0.62],[1,0.3]]}, POOL_FLAT={col:[74,68,102],a:0.55}, POOL_CAVE={a:0.45};
 function mk(w,h){const c=document.createElement('canvas');c.width=w;c.height=h;return c}
@@ -220,15 +223,16 @@ function kd(){const n=held.has('N'),s=held.has('S'),w=held.has('W'),e=held.has('
 const tg=(id,f)=>{const b=document.getElementById(id);b.onclick=()=>{f();sync()}};
 tg('bHold',()=>{ST.hold=!ST.hold;ST.lpos=null});tg('bEase',()=>{if(ST.ease&&!ST.easeStep)ST.easeStep=true;else if(ST.ease){ST.ease=false;ST.easeStep=false}else ST.ease=true});   // smooth -> step -> snap
 tg('bOff',()=>ST.off=!ST.off);tg('bZoom',()=>ST.zoom=ST.zoom===1?0.75:1);tg('bBg',()=>{if(ST.gm)ST.scene=ST.scene==='light'?'dark':ST.scene==='dark'?'cave':'light';else ST.dark=!ST.dark});   // fix 25 Oct: these 5 buttons were commented out by the line above · GM: light -> dark -> cave
-tg('bPow',()=>{ST.power=POWERS[(POWERS.indexOf(ST.power)+1)%POWERS.length]});tg('bFx',()=>{ST.fx=!ST.fx});tg('bTag',()=>ST.tag=ST.tag==='feet'?'head':'feet');tg('bGuide',()=>ST.guides=!ST.guides);
+tg('bPow',()=>{ST.power=POWERS[(POWERS.indexOf(ST.power)+1)%POWERS.length]});tg('bLR',()=>setLR(LR_SET[(LR_SET.indexOf(LHOLE.R)+1)%LR_SET.length]));tg('bFx',()=>{ST.fx=!ST.fx});tg('bTag',()=>ST.tag=ST.tag==='feet'?'head':'feet');tg('bGuide',()=>ST.guides=!ST.guides);
 function sync(){const B=(id,on,t)=>{const b=document.getElementById(id);b.classList.toggle('on',on);b.textContent=t}
-  ['bPow','bFx'].forEach(id=>{document.getElementById(id).style.display=ST.gm?'':'none'});B('bPow',ST.power>0,'พลัง / power '+ST.power+'%');B('bFx',ST.fx,ST.fx?'แสงรอบตัว Glow+C เปิด / on':'แสงรอบตัว Glow+C ปิด / off');
+  ['bPow','bFx','bLR'].forEach(id=>{document.getElementById(id).style.display=ST.gm?'':'none'});B('bLR',LHOLE.R!==72,'วงแสง / light '+LHOLE.R);B('bPow',ST.power>0,'พลัง / power '+ST.power+'%');B('bFx',ST.fx,ST.fx?'แสงรอบตัว Glow+C เปิด / on':'แสงรอบตัว Glow+C ปิด / off');
   B('bOff',ST.off,ST.off?'Offset B (ตามตาราง) / table':'Offset A = 0');B('bZoom',ST.zoom===1,ST.zoom===1?'ซูม 100% / zoom':'ซูม 75% / zoom');
   if(ST.gm)B('bBg',ST.scene!=='light',ST.scene==='cave'?'ถ้ำ / cave':ST.scene==='dark'?'พื้นมืด / dark':'พื้นสว่าง / light');else B('bBg',ST.dark,ST.dark?'พื้นมืด / dark':'พื้นสว่าง / light');B('bTag',ST.tag==='feet',ST.tag==='feet'?'ป้าย: เท้า / tag: feet':'ป้าย: หัว / tag: head');B('bGuide',ST.guides,'เส้นช่วย / guides');
   B('bHold',ST.hold&&holdOn(),!ST.hold?'มือว่าง / no lantern':holdOn()?'ถือตะเกียง / hold':'ถือ: ไฟล์ไม่ครบ / files missing');B('bEase',ST.ease,!ST.ease?'ตะเกียงติดมือ / snap':ST.easeStep?'หน่วงเป็นจังหวะ / step':'หน่วงเรียบ / smooth')}
 const q=new URLSearchParams(location.search);if(q.has('gm')){ST.gm=true;ST.hold=true;const pw=+q.get('power');if((q.get('power')||'')!==''&&POWERS.includes(pw))ST.power=pw;if(q.has('dark'))ST.scene='dark';if(['light','dark','cave'].includes(q.get('scene')))ST.scene=q.get('scene');if(q.has('nofx'))ST.fx=false}
+if(q.has('gm')&&/^\d+$/.test(q.get('lr')||''))setLR(+q.get('lr'));   // GM try-out: ?lr=100 / 130 / 160 (only these sizes, anything else is ignored)
 if(q.has('gm')&&/^\d*\.?\d+$/.test(q.get('nk')||'')){const v=+q.get('nk');if(v>=0&&v<=1)NHOLE.k=v}   // O13 GM try-out: ?nk=0.6 = candidate B · ?nk=0 = no N light · plain decimals 0..1 only, anything else is ignored
 if(q.has('off0'))ST.off=false;if(q.has('z75'))ST.zoom=0.75;if(q.has('dark'))ST.dark=true;if(q.has('guides'))ST.guides=true;if(q.get('tag')==='head')ST.tag='head';if(q.has('clean'))ST.clean=true;if(q.has('offW'))ST.offWq=+q.get('offW');if(q.has('shadowFixed'))ST.shadowFollow=false;if(q.has('hold'))ST.hold=true;if(q.has('nofist'))ST.nofist=true;if(q.has('snap'))ST.ease=false;if(q.has('stepease'))ST.easeStep=true;if(q.has('smoothease'))ST.easeStep=false;
-window.PT={FX,GLOW,LHOLE,NHOLE,POOL,GM_POW,POWERS,gmLit,ST,GEO,OFF_TABLE,DIRS,setDir,walk,stop,draw,scale,step,curFrame,lanternTarget,holdOn,easeLantern,pause:v=>ST.paused=v,set:(o)=>Object.assign(ST,o)};
+window.PT={FX,GLOW,LHOLE,NHOLE,LR_SET,setLR,POOL,GM_POW,POWERS,gmLit,ST,GEO,OFF_TABLE,DIRS,setDir,walk,stop,draw,scale,step,curFrame,lanternTarget,holdOn,easeLantern,pause:v=>ST.paused=v,set:(o)=>Object.assign(ST,o)};
 sync();boot();
 </script></body></html>
