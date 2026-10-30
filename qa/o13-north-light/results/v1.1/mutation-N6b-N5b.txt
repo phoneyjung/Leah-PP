@@ -1,0 +1,4 @@
+mutation none -> N6b max err 0.333 pass | N5b differ 0 pass
+mutation {'cx': 49} -> N6b max err 1.111 FAIL | N5b differ 4 FAIL
+mutation {'cy': 85} -> N6b max err 1.333 FAIL | N5b differ 4 FAIL
+mutation {'cx': 47.5} -> N6b max err 0.833 FAIL | N5b differ 0 pass

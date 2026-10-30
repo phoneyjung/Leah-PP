@@ -5,6 +5,8 @@
 # Nothing else changes: no lantern, Glow, light layer or C at N; every other state draws the same pixels as the Pilot before this change.
 # usage: python3 -I test_g2_north_light.py NEW_PORT OUT_DIR OLD_PORT SIM_PORT
 #   OLD_PORT = Pilot before this change (claude/g2-pilot 62f93a9) · SIM_PORT = the O13 simulation page the owner saw (NH_DEFAULT=null, ST.nh set by the test)
+# v1.1 (30 Oct): Codex review T1 R1 + R2 -> N11 measures the page errors of the no-gm page too · new N6b (hole centre on screen vs the feet, zoom 100 / 75,
+#   7 world positions, idle / walk, power 100 / 50: snap error <= 0.5 art px) · new N5b (real page = simulation A at zoom 75 %, same positions)
 import sys, os, json
 from playwright.sync_api import sync_playwright
 PN, OUT, PO, PS = sys.argv[1:5]; os.makedirs(OUT, exist_ok=True)
@@ -26,6 +28,15 @@ MATRIX = """(c)=>{const P=PT,S=P.ST,cv=document.getElementById('cv'),g=cv.getCon
   o[[d,sc,pw,fx,hold,an,lay].join(' ')]={err,h:__M.h(g.getImageData(0,0,cv.width,cv.height).data),lantern:!!L.lantern,light:D.light,glow:D.glow,pool:D.pool,hole:D.caveHole,nHole:!!D.nHole,
    fin:__M.fin({s:L.s,fx:L.fx,fy:L.fy,sx:L.sx,sy:L.sy,tag:L.tag,lan:L.lantern?L.lantern.drawn:[]})}}
  S.img.lanternLight=keepL;__M.cfg({k:1,nh:null});return o}"""
+# v1.1 N6b: where the N hole lands on screen, from the page's own draw calls (lhole into the dark layer + dark layer onto the screen) vs feet [48,94] - 10 px
+POS = """(a)=>{const P=PT,S=P.ST,pr=CanvasRenderingContext2D.prototype,orig=pr.drawImage;let hole=null,dark=null,n=0;
+ pr.drawImage=function(im,...r){if(im===P.FX.lhole){n++;hole=[r[0],r[1],this.globalAlpha]}if(im===P.FX.dark)dark=[r[4],r[5],r[6]/r[2],r[7]/r[3]];return orig.call(this,im,...r)};
+ try{__M.set(a);P.draw()}finally{pr.drawImage=orig}const L=S.last,s=L.s;if(!hole||!dark)return {n,hole,dark};
+ const cx=dark[0]+(hole[0]+P.LHOLE.R+0.5)*dark[2],cy=dark[1]+(hole[1]+P.LHOLE.R+0.5)*dark[3],ex=L.sx+(48+0.5)*s,ey=L.sy+(84+0.5)*s;   // expected = the rule (cell px 48,84), not the page constant
+ return {n,s,scale:[dark[2],dark[3]],alpha:hole[2],intX:Number.isInteger(hole[0]),intY:Number.isInteger(hole[1]),errX:+((cx-ex)/s).toFixed(4),errY:+((cy-ey)/s).toFixed(4),nHole:!!L.gm.drawn.nHole}}"""
+# v1.1 N5b: canvas hash of one state (real page vs simulation page) at any zoom / world position
+ONE = """(a)=>{const P=PT,S=P.ST,cv=document.getElementById('cv'),g=cv.getContext('2d');__M.cfg(a.c);__M.set(a.st);P.draw();const h=__M.h(g.getImageData(0,0,cv.width,cv.height).data);__M.cfg({k:1,nh:null});return h}"""
+PLACES = [[160, 120], [161, 121], [163.4, 118.6], [97.25, 203.75], [240.5, 66.5], [33, 140], [300.75, 250.25]]
 # draw calls of the light / C / lantern images in one frame (recorded by the test, the page is not changed)
 CALLS = """(a)=>{const P=PT,S=P.ST,rec=[],pr=CanvasRenderingContext2D.prototype,orig=pr.drawImage;const name=im=>im===P.FX.lhole?'lhole':im===P.FX.glow?'glow':im===P.FX.poolHole?'poolHole':im===P.FX.poolFlat?'poolFlat':im===S.img.lantern?'lantern':im===S.img.lanternLight?'light':null;
  pr.drawImage=function(im,...r){const n=name(im);if(n)rec.push([n,Math.round(this.globalAlpha*1000)/1000,this.globalCompositeOperation,this.canvas===P.FX.dark?'dark layer':'screen',r.slice(0,2).map(v=>Math.round(v))]);return orig.call(this,im,...r)};
@@ -102,6 +113,23 @@ with sync_playwright() as p:
         return len(lh) == 1 and lh[0][1] == a and lh[0][2] == 'destination-out' and lh[0][3] == 'dark layer'
     ok('N6 facing N (cave / dark / light x power 100/50/10/0 x idle/walk x Glow+C on/off): lantern, light layer, Glow and C are never drawn · the cave hole is drawn once (destination-out on the darkness, alpha 1 / 0.5) only in cave + power 100/50 + Glow+C on',
        all(good(k, c) for k, c in calls.items()), {k: c['rec'] for k, c in calls.items() if c['rec'] or not good(k, c)})
+    # v1.1 N6b / N5b (Codex R2): exact place of the hole at zoom 100 / 75 and several world positions, and the same pictures as the simulation there
+    pos, sim75 = {}, {}
+    for z in (1, 0.75):
+        for px, py in PLACES:
+            for an, fi in (('idle', 0), ('walk', 3)):
+                for pw in (100, 50):
+                    st = {'dir': 'N', 'anim': an, 'fi': fi, 'hold': True, 'fx': True, 'power': pw, 'scene': 'cave', 'zoom': z, 'pos': {'x': px, 'y': py}}
+                    k = 'z%s %s,%s %s %d' % (z, px, py, an, pw); pos[k] = new.evaluate(POS, st)
+                    if z == 0.75 or (px, py) != (160, 120):
+                        sim75[k] = [new.evaluate(ONE, {'c': {'k': 1}, 'st': st}), sim.evaluate(ONE, {'c': {'nh': {'cx': 48, 'cy': 84, 'k': 1}}, 'st': st})]
+    R['n6b'] = pos
+    ok('N6b the N hole lands where it should: centre on screen = feet [48,94] 10 px up within the whole-px snap (|error| <= 0.5 art px on each axis) · one stamp, alpha 1 / 0.5, whole art px, dark layer scaled by s · zoom 100/75 x 7 world positions x idle/walk x power 100/50',
+       all(v.get('n') == 1 and v['nHole'] and v['intX'] and v['intY'] and abs(v['errX']) <= 0.5 and abs(v['errY']) <= 0.5 and abs(v['scale'][0] - v['s']) < 1e-9 and abs(v['scale'][1] - v['s']) < 1e-9
+           and v['alpha'] == (1 if k.endswith(' 100') else 0.5) for k, v in pos.items()),
+       {'cases': len(pos), 'max_abs_err_art_px': max(max(abs(v.get('errX', 9)), abs(v.get('errY', 9))) for v in pos.values()), 'bad': [k for k, v in pos.items() if v.get('n') != 1 or abs(v.get('errX', 9)) > 0.5 or abs(v.get('errY', 9)) > 0.5][:5]})
+    ok('N5b the real page = simulation A also at zoom 75 %% and away from the start position (N cave, idle/walk, power 100/50: %d pictures)' % len(sim75), all(a == b for a, b in sim75.values()),
+       {'differ': [k for k, (a, b) in sim75.items() if a != b][:5]})
     # where the light goes and what it does to the body: every frame, zoom 100 / 75, power 100 / 50
     shots = {}
     for pw in (100, 50):
@@ -130,7 +158,8 @@ with sync_playwright() as p:
     for v in ('0', '0.6', '0.35', '.5', '1', '2', '-1', 'abc', '', '1e-1', '%20', '%200.6', '0x1', 'Infinity'):
         pg = ctx.new_page(); e = []; pg.on('pageerror', lambda x, e=e: e.append(str(x))); pg.goto(URL(PN, '&nk=' + v)); pg.wait_for_function('window.PT&&PT.ST.ok.lantern', timeout=15000)
         url[v] = [pg.evaluate('PT.NHOLE.k'), len(e)]; pg.close()
-    pg = ctx.new_page(); pg.goto('http://127.0.0.1:%s/pilot-g2-motion.html?nk=0' % PN); pg.wait_for_function('window.PT&&PT.ST.ok.walk', timeout=15000); url['no gm, nk=0'] = [pg.evaluate('PT.NHOLE.k'), 0]; pg.close()
+    pg = ctx.new_page(); e = []; pg.on('pageerror', lambda x, e=e: e.append(str(x))); pg.goto('http://127.0.0.1:%s/pilot-g2-motion.html?nk=0' % PN); pg.wait_for_function('window.PT&&PT.ST.ok.walk', timeout=15000)
+    pg.wait_for_timeout(500); url['no gm, nk=0'] = [pg.evaluate('PT.NHOLE.k'), len(e)]; pg.close()   # v1.1 (Codex R1): real page-error count, after 0.5 s of drawing
     want_url = {'0': 0, '0.6': 0.6, '0.35': 0.35, '.5': 0.5, '1': 1, '2': 1, '-1': 1, 'abc': 1, '': 1, '1e-1': 1, '%20': 1, '%200.6': 1, '0x1': 1, 'Infinity': 1, 'no gm, nk=0': 1}
     ok('N11 GM switch ?nk=0..1 (plain decimal digits only) sets k (0 = old N, 0.6 = candidate B) · out of range / not a number / empty / spaces / 1e-1 / 0x1 / without ?gm -> ignored (k stays 1) · 0 page errors',
        {k: v[0] for k, v in url.items()} == want_url and all(v[1] == 0 for v in url.values()), url)
@@ -151,7 +180,7 @@ with sync_playwright() as p:
     ok('N12 FPS walking N in the cave with the N light >= 90 % of the same walk without it (4x CPU, rAF 2 s, 5 alternating pairs, median of ratios) · the N light really drawn in the k1 runs and not in the k0 runs · not at the 60 fps cap · draw ms reported',
        med([q[2] for q in pairs]) >= 0.9 and all(q[3] is False and q[4] is True for q in pairs) and max(max(q[0], q[1]) for q in pairs) < 55,
        {'pairs [k0, k1, ratio, nHole k0, nHole k1]': pairs, 'median_ratio': med([q[2] for q in pairs]), 'draw_ms_cpu1x': dms})
-    ok('N13 page errors 0 (new / old / sim pages)', not any(errs.values()), {k: v[:3] for k, v in errs.items()})
+    ok('N13 page errors 0 (new / old / sim pages · the extra pages of N11 are counted in N11)', not any(errs.values()), {k: v[:3] for k, v in errs.items()})
     R['matrix_sample'] = {k: M['new'][k] for k in inside}
     br.close()
 R['checks'] = CHECK

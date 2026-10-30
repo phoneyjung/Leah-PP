@@ -1,0 +1,2621 @@
+{
+ "meta": {
+  "viewport": [
+   844,
+   390
+  ],
+  "dpr": 2.625,
+  "new": "8970",
+  "old": "8961",
+  "sim": "8962"
+ },
+ "states": 1536,
+ "n6b": {
+  "z1 160,120 idle 100": {
+   "n": 1,
+   "s": 3,
+   "scale": [
+    3,
+    3
+   ],
+   "alpha": 1,
+   "intX": true,
+   "intY": true,
+   "errX": 0,
+   "errY": 0,
+   "nHole": true
+  },
+  "z1 160,120 idle 50": {
+   "n": 1,
+   "s": 3,
+   "scale": [
+    3,
+    3
+   ],
+   "alpha": 0.5,
+   "intX": true,
+   "intY": true,
+   "errX": 0,
+   "errY": 0,
+   "nHole": true
+  },
+  "z1 160,120 walk 100": {
+   "n": 1,
+   "s": 3,
+   "scale": [
+    3,
+    3
+   ],
+   "alpha": 1,
+   "intX": true,
+   "intY": true,
+   "errX": 0,
+   "errY": 0,
+   "nHole": true
+  },
+  "z1 160,120 walk 50": {
+   "n": 1,
+   "s": 3,
+   "scale": [
+    3,
+    3
+   ],
+   "alpha": 0.5,
+   "intX": true,
+   "intY": true,
+   "errX": 0,
+   "errY": 0,
+   "nHole": true
+  },
+  "z1 161,121 idle 100": {
+   "n": 1,
+   "s": 3,
+   "scale": [
+    3,
+    3
+   ],
+   "alpha": 1,
+   "intX": true,
+   "intY": true,
+   "errX": 0,
+   "errY": 0,
+   "nHole": true
+  },
+  "z1 161,121 idle 50": {
+   "n": 1,
+   "s": 3,
+   "scale": [
+    3,
+    3
+   ],
+   "alpha": 0.5,
+   "intX": true,
+   "intY": true,
+   "errX": 0,
+   "errY": 0,
+   "nHole": true
+  },
+  "z1 161,121 walk 100": {
+   "n": 1,
+   "s": 3,
+   "scale": [
+    3,
+    3
+   ],
+   "alpha": 1,
+   "intX": true,
+   "intY": true,
+   "errX": 0,
+   "errY": 0,
+   "nHole": true
+  },
+  "z1 161,121 walk 50": {
+   "n": 1,
+   "s": 3,
+   "scale": [
+    3,
+    3
+   ],
+   "alpha": 0.5,
+   "intX": true,
+   "intY": true,
+   "errX": 0,
+   "errY": 0,
+   "nHole": true
+  },
+  "z1 163.4,118.6 idle 100": {
+   "n": 1,
+   "s": 3,
+   "scale": [
+    3,
+    3
+   ],
+   "alpha": 1,
+   "intX": true,
+   "intY": true,
+   "errX": -0.3333,
+   "errY": 0.3333,
+   "nHole": true
+  },
+  "z1 163.4,118.6 idle 50": {
+   "n": 1,
+   "s": 3,
+   "scale": [
+    3,
+    3
+   ],
+   "alpha": 0.5,
+   "intX": true,
+   "intY": true,
+   "errX": -0.3333,
+   "errY": 0.3333,
+   "nHole": true
+  },
+  "z1 163.4,118.6 walk 100": {
+   "n": 1,
+   "s": 3,
+   "scale": [
+    3,
+    3
+   ],
+   "alpha": 1,
+   "intX": true,
+   "intY": true,
+   "errX": -0.3333,
+   "errY": 0.3333,
+   "nHole": true
+  },
+  "z1 163.4,118.6 walk 50": {
+   "n": 1,
+   "s": 3,
+   "scale": [
+    3,
+    3
+   ],
+   "alpha": 0.5,
+   "intX": true,
+   "intY": true,
+   "errX": -0.3333,
+   "errY": 0.3333,
+   "nHole": true
+  },
+  "z1 97.25,203.75 idle 100": {
+   "n": 1,
+   "s": 3,
+   "scale": [
+    3,
+    3
+   ],
+   "alpha": 1,
+   "intX": true,
+   "intY": true,
+   "errX": -0.3333,
+   "errY": 0.3333,
+   "nHole": true
+  },
+  "z1 97.25,203.75 idle 50": {
+   "n": 1,
+   "s": 3,
+   "scale": [
+    3,
+    3
+   ],
+   "alpha": 0.5,
+   "intX": true,
+   "intY": true,
+   "errX": -0.3333,
+   "errY": 0.3333,
+   "nHole": true
+  },
+  "z1 97.25,203.75 walk 100": {
+   "n": 1,
+   "s": 3,
+   "scale": [
+    3,
+    3
+   ],
+   "alpha": 1,
+   "intX": true,
+   "intY": true,
+   "errX": -0.3333,
+   "errY": 0.3333,
+   "nHole": true
+  },
+  "z1 97.25,203.75 walk 50": {
+   "n": 1,
+   "s": 3,
+   "scale": [
+    3,
+    3
+   ],
+   "alpha": 0.5,
+   "intX": true,
+   "intY": true,
+   "errX": -0.3333,
+   "errY": 0.3333,
+   "nHole": true
+  },
+  "z1 240.5,66.5 idle 100": {
+   "n": 1,
+   "s": 3,
+   "scale": [
+    3,
+    3
+   ],
+   "alpha": 1,
+   "intX": true,
+   "intY": true,
+   "errX": 0.3333,
+   "errY": 0.3333,
+   "nHole": true
+  },
+  "z1 240.5,66.5 idle 50": {
+   "n": 1,
+   "s": 3,
+   "scale": [
+    3,
+    3
+   ],
+   "alpha": 0.5,
+   "intX": true,
+   "intY": true,
+   "errX": 0.3333,
+   "errY": 0.3333,
+   "nHole": true
+  },
+  "z1 240.5,66.5 walk 100": {
+   "n": 1,
+   "s": 3,
+   "scale": [
+    3,
+    3
+   ],
+   "alpha": 1,
+   "intX": true,
+   "intY": true,
+   "errX": 0.3333,
+   "errY": 0.3333,
+   "nHole": true
+  },
+  "z1 240.5,66.5 walk 50": {
+   "n": 1,
+   "s": 3,
+   "scale": [
+    3,
+    3
+   ],
+   "alpha": 0.5,
+   "intX": true,
+   "intY": true,
+   "errX": 0.3333,
+   "errY": 0.3333,
+   "nHole": true
+  },
+  "z1 33,140 idle 100": {
+   "n": 1,
+   "s": 3,
+   "scale": [
+    3,
+    3
+   ],
+   "alpha": 1,
+   "intX": true,
+   "intY": true,
+   "errX": 0,
+   "errY": 0,
+   "nHole": true
+  },
+  "z1 33,140 idle 50": {
+   "n": 1,
+   "s": 3,
+   "scale": [
+    3,
+    3
+   ],
+   "alpha": 0.5,
+   "intX": true,
+   "intY": true,
+   "errX": 0,
+   "errY": 0,
+   "nHole": true
+  },
+  "z1 33,140 walk 100": {
+   "n": 1,
+   "s": 3,
+   "scale": [
+    3,
+    3
+   ],
+   "alpha": 1,
+   "intX": true,
+   "intY": true,
+   "errX": 0,
+   "errY": 0,
+   "nHole": true
+  },
+  "z1 33,140 walk 50": {
+   "n": 1,
+   "s": 3,
+   "scale": [
+    3,
+    3
+   ],
+   "alpha": 0.5,
+   "intX": true,
+   "intY": true,
+   "errX": 0,
+   "errY": 0,
+   "nHole": true
+  },
+  "z1 300.75,250.25 idle 100": {
+   "n": 1,
+   "s": 3,
+   "scale": [
+    3,
+    3
+   ],
+   "alpha": 1,
+   "intX": true,
+   "intY": true,
+   "errX": 0.3333,
+   "errY": -0.3333,
+   "nHole": true
+  },
+  "z1 300.75,250.25 idle 50": {
+   "n": 1,
+   "s": 3,
+   "scale": [
+    3,
+    3
+   ],
+   "alpha": 0.5,
+   "intX": true,
+   "intY": true,
+   "errX": 0.3333,
+   "errY": -0.3333,
+   "nHole": true
+  },
+  "z1 300.75,250.25 walk 100": {
+   "n": 1,
+   "s": 3,
+   "scale": [
+    3,
+    3
+   ],
+   "alpha": 1,
+   "intX": true,
+   "intY": true,
+   "errX": 0.3333,
+   "errY": -0.3333,
+   "nHole": true
+  },
+  "z1 300.75,250.25 walk 50": {
+   "n": 1,
+   "s": 3,
+   "scale": [
+    3,
+    3
+   ],
+   "alpha": 0.5,
+   "intX": true,
+   "intY": true,
+   "errX": 0.3333,
+   "errY": -0.3333,
+   "nHole": true
+  },
+  "z0.75 160,120 idle 100": {
+   "n": 1,
+   "s": 2.25,
+   "scale": [
+    2.25,
+    2.25
+   ],
+   "alpha": 1,
+   "intX": true,
+   "intY": true,
+   "errX": 0.1111,
+   "errY": -0.2222,
+   "nHole": true
+  },
+  "z0.75 160,120 idle 50": {
+   "n": 1,
+   "s": 2.25,
+   "scale": [
+    2.25,
+    2.25
+   ],
+   "alpha": 0.5,
+   "intX": true,
+   "intY": true,
+   "errX": 0.1111,
+   "errY": -0.2222,
+   "nHole": true
+  },
+  "z0.75 160,120 walk 100": {
+   "n": 1,
+   "s": 2.25,
+   "scale": [
+    2.25,
+    2.25
+   ],
+   "alpha": 1,
+   "intX": true,
+   "intY": true,
+   "errX": 0.1111,
+   "errY": -0.2222,
+   "nHole": true
+  },
+  "z0.75 160,120 walk 50": {
+   "n": 1,
+   "s": 2.25,
+   "scale": [
+    2.25,
+    2.25
+   ],
+   "alpha": 0.5,
+   "intX": true,
+   "intY": true,
+   "errX": 0.1111,
+   "errY": -0.2222,
+   "nHole": true
+  },
+  "z0.75 161,121 idle 100": {
+   "n": 1,
+   "s": 2.25,
+   "scale": [
+    2.25,
+    2.25
+   ],
+   "alpha": 1,
+   "intX": true,
+   "intY": true,
+   "errX": -0.2222,
+   "errY": -0.1111,
+   "nHole": true
+  },
+  "z0.75 161,121 idle 50": {
+   "n": 1,
+   "s": 2.25,
+   "scale": [
+    2.25,
+    2.25
+   ],
+   "alpha": 0.5,
+   "intX": true,
+   "intY": true,
+   "errX": -0.2222,
+   "errY": -0.1111,
+   "nHole": true
+  },
+  "z0.75 161,121 walk 100": {
+   "n": 1,
+   "s": 2.25,
+   "scale": [
+    2.25,
+    2.25
+   ],
+   "alpha": 1,
+   "intX": true,
+   "intY": true,
+   "errX": -0.2222,
+   "errY": -0.1111,
+   "nHole": true
+  },
+  "z0.75 161,121 walk 50": {
+   "n": 1,
+   "s": 2.25,
+   "scale": [
+    2.25,
+    2.25
+   ],
+   "alpha": 0.5,
+   "intX": true,
+   "intY": true,
+   "errX": -0.2222,
+   "errY": -0.1111,
+   "nHole": true
+  },
+  "z0.75 163.4,118.6 idle 100": {
+   "n": 1,
+   "s": 2.25,
+   "scale": [
+    2.25,
+    2.25
+   ],
+   "alpha": 1,
+   "intX": true,
+   "intY": true,
+   "errX": -0.4444,
+   "errY": -0.4444,
+   "nHole": true
+  },
+  "z0.75 163.4,118.6 idle 50": {
+   "n": 1,
+   "s": 2.25,
+   "scale": [
+    2.25,
+    2.25
+   ],
+   "alpha": 0.5,
+   "intX": true,
+   "intY": true,
+   "errX": -0.4444,
+   "errY": -0.4444,
+   "nHole": true
+  },
+  "z0.75 163.4,118.6 walk 100": {
+   "n": 1,
+   "s": 2.25,
+   "scale": [
+    2.25,
+    2.25
+   ],
+   "alpha": 1,
+   "intX": true,
+   "intY": true,
+   "errX": -0.4444,
+   "errY": -0.4444,
+   "nHole": true
+  },
+  "z0.75 163.4,118.6 walk 50": {
+   "n": 1,
+   "s": 2.25,
+   "scale": [
+    2.25,
+    2.25
+   ],
+   "alpha": 0.5,
+   "intX": true,
+   "intY": true,
+   "errX": -0.4444,
+   "errY": -0.4444,
+   "nHole": true
+  },
+  "z0.75 97.25,203.75 idle 100": {
+   "n": 1,
+   "s": 2.25,
+   "scale": [
+    2.25,
+    2.25
+   ],
+   "alpha": 1,
+   "intX": true,
+   "intY": true,
+   "errX": -0.2222,
+   "errY": 0.2222,
+   "nHole": true
+  },
+  "z0.75 97.25,203.75 idle 50": {
+   "n": 1,
+   "s": 2.25,
+   "scale": [
+    2.25,
+    2.25
+   ],
+   "alpha": 0.5,
+   "intX": true,
+   "intY": true,
+   "errX": -0.2222,
+   "errY": 0.2222,
+   "nHole": true
+  },
+  "z0.75 97.25,203.75 walk 100": {
+   "n": 1,
+   "s": 2.25,
+   "scale": [
+    2.25,
+    2.25
+   ],
+   "alpha": 1,
+   "intX": true,
+   "intY": true,
+   "errX": -0.2222,
+   "errY": 0.2222,
+   "nHole": true
+  },
+  "z0.75 97.25,203.75 walk 50": {
+   "n": 1,
+   "s": 2.25,
+   "scale": [
+    2.25,
+    2.25
+   ],
+   "alpha": 0.5,
+   "intX": true,
+   "intY": true,
+   "errX": -0.2222,
+   "errY": 0.2222,
+   "nHole": true
+  },
+  "z0.75 240.5,66.5 idle 100": {
+   "n": 1,
+   "s": 2.25,
+   "scale": [
+    2.25,
+    2.25
+   ],
+   "alpha": 1,
+   "intX": true,
+   "intY": true,
+   "errX": -0.3333,
+   "errY": -0.4444,
+   "nHole": true
+  },
+  "z0.75 240.5,66.5 idle 50": {
+   "n": 1,
+   "s": 2.25,
+   "scale": [
+    2.25,
+    2.25
+   ],
+   "alpha": 0.5,
+   "intX": true,
+   "intY": true,
+   "errX": -0.3333,
+   "errY": -0.4444,
+   "nHole": true
+  },
+  "z0.75 240.5,66.5 walk 100": {
+   "n": 1,
+   "s": 2.25,
+   "scale": [
+    2.25,
+    2.25
+   ],
+   "alpha": 1,
+   "intX": true,
+   "intY": true,
+   "errX": -0.3333,
+   "errY": -0.4444,
+   "nHole": true
+  },
+  "z0.75 240.5,66.5 walk 50": {
+   "n": 1,
+   "s": 2.25,
+   "scale": [
+    2.25,
+    2.25
+   ],
+   "alpha": 0.5,
+   "intX": true,
+   "intY": true,
+   "errX": -0.3333,
+   "errY": -0.4444,
+   "nHole": true
+  },
+  "z0.75 33,140 idle 100": {
+   "n": 1,
+   "s": 2.25,
+   "scale": [
+    2.25,
+    2.25
+   ],
+   "alpha": 1,
+   "intX": true,
+   "intY": true,
+   "errX": -0.2222,
+   "errY": -0.2222,
+   "nHole": true
+  },
+  "z0.75 33,140 idle 50": {
+   "n": 1,
+   "s": 2.25,
+   "scale": [
+    2.25,
+    2.25
+   ],
+   "alpha": 0.5,
+   "intX": true,
+   "intY": true,
+   "errX": -0.2222,
+   "errY": -0.2222,
+   "nHole": true
+  },
+  "z0.75 33,140 walk 100": {
+   "n": 1,
+   "s": 2.25,
+   "scale": [
+    2.25,
+    2.25
+   ],
+   "alpha": 1,
+   "intX": true,
+   "intY": true,
+   "errX": -0.2222,
+   "errY": -0.2222,
+   "nHole": true
+  },
+  "z0.75 33,140 walk 50": {
+   "n": 1,
+   "s": 2.25,
+   "scale": [
+    2.25,
+    2.25
+   ],
+   "alpha": 0.5,
+   "intX": true,
+   "intY": true,
+   "errX": -0.2222,
+   "errY": -0.2222,
+   "nHole": true
+  },
+  "z0.75 300.75,250.25 idle 100": {
+   "n": 1,
+   "s": 2.25,
+   "scale": [
+    2.25,
+    2.25
+   ],
+   "alpha": 1,
+   "intX": true,
+   "intY": true,
+   "errX": 0.2222,
+   "errY": -0.4444,
+   "nHole": true
+  },
+  "z0.75 300.75,250.25 idle 50": {
+   "n": 1,
+   "s": 2.25,
+   "scale": [
+    2.25,
+    2.25
+   ],
+   "alpha": 0.5,
+   "intX": true,
+   "intY": true,
+   "errX": 0.2222,
+   "errY": -0.4444,
+   "nHole": true
+  },
+  "z0.75 300.75,250.25 walk 100": {
+   "n": 1,
+   "s": 2.25,
+   "scale": [
+    2.25,
+    2.25
+   ],
+   "alpha": 1,
+   "intX": true,
+   "intY": true,
+   "errX": 0.2222,
+   "errY": -0.4444,
+   "nHole": true
+  },
+  "z0.75 300.75,250.25 walk 50": {
+   "n": 1,
+   "s": 2.25,
+   "scale": [
+    2.25,
+    2.25
+   ],
+   "alpha": 0.5,
+   "intX": true,
+   "intY": true,
+   "errX": 0.2222,
+   "errY": -0.4444,
+   "nHole": true
+  }
+ },
+ "shots": {
+  "100 z1 idle f1": {
+   "s": 3,
+   "bodyPx": 25218,
+   "lumBase": 16.4,
+   "lumNew": 55.2,
+   "lumLight": 72.9,
+   "changedPx": 146169,
+   "changedBodyPx": 25155,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 25155,
+   "bodyWorse": 0,
+   "brighter": 144405,
+   "darker": 1764,
+   "maxTintDev": 1.25,
+   "maxR_art": 73.02,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 1,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "100 z1 idle f2": {
+   "s": 3,
+   "bodyPx": 24606,
+   "lumBase": 16.3,
+   "lumNew": 55.2,
+   "lumLight": 72.7,
+   "changedPx": 146169,
+   "changedBodyPx": 24606,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 24606,
+   "bodyWorse": 0,
+   "brighter": 144450,
+   "darker": 1719,
+   "maxTintDev": 1.25,
+   "maxR_art": 73.02,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 1,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "100 z1 idle f3": {
+   "s": 3,
+   "bodyPx": 24669,
+   "lumBase": 16.3,
+   "lumNew": 55.3,
+   "lumLight": 72.8,
+   "changedPx": 146169,
+   "changedBodyPx": 24669,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 24669,
+   "bodyWorse": 0,
+   "brighter": 144468,
+   "darker": 1701,
+   "maxTintDev": 1.25,
+   "maxR_art": 73.02,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 1,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "100 z1 idle f4": {
+   "s": 3,
+   "bodyPx": 24606,
+   "lumBase": 16.3,
+   "lumNew": 55.2,
+   "lumLight": 72.7,
+   "changedPx": 146169,
+   "changedBodyPx": 24606,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 24606,
+   "bodyWorse": 0,
+   "brighter": 144450,
+   "darker": 1719,
+   "maxTintDev": 1.25,
+   "maxR_art": 73.02,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 1,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "100 z1 walk f1": {
+   "s": 3,
+   "bodyPx": 25263,
+   "lumBase": 16.2,
+   "lumNew": 53.3,
+   "lumLight": 71.6,
+   "changedPx": 146169,
+   "changedBodyPx": 25065,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 25065,
+   "bodyWorse": 0,
+   "brighter": 144531,
+   "darker": 1638,
+   "maxTintDev": 1.25,
+   "maxR_art": 73.02,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 1,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "100 z1 walk f2": {
+   "s": 3,
+   "bodyPx": 24939,
+   "lumBase": 16.3,
+   "lumNew": 54.6,
+   "lumLight": 72.6,
+   "changedPx": 146169,
+   "changedBodyPx": 24876,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 24876,
+   "bodyWorse": 0,
+   "brighter": 144513,
+   "darker": 1656,
+   "maxTintDev": 1.25,
+   "maxR_art": 73.02,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 1,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "100 z1 walk f3": {
+   "s": 3,
+   "bodyPx": 25218,
+   "lumBase": 16.3,
+   "lumNew": 54.4,
+   "lumLight": 72.2,
+   "changedPx": 146169,
+   "changedBodyPx": 25155,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 25155,
+   "bodyWorse": 0,
+   "brighter": 144468,
+   "darker": 1701,
+   "maxTintDev": 1.25,
+   "maxR_art": 73.02,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 1,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "100 z1 walk f4": {
+   "s": 3,
+   "bodyPx": 25389,
+   "lumBase": 16.3,
+   "lumNew": 54.6,
+   "lumLight": 72.4,
+   "changedPx": 146169,
+   "changedBodyPx": 25326,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 25326,
+   "bodyWorse": 0,
+   "brighter": 144387,
+   "darker": 1782,
+   "maxTintDev": 1.25,
+   "maxR_art": 73.02,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 1,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "100 z1 walk f5": {
+   "s": 3,
+   "bodyPx": 25119,
+   "lumBase": 16.3,
+   "lumNew": 54.5,
+   "lumLight": 72.5,
+   "changedPx": 146169,
+   "changedBodyPx": 25056,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 25056,
+   "bodyWorse": 0,
+   "brighter": 144459,
+   "darker": 1710,
+   "maxTintDev": 1.25,
+   "maxR_art": 73.02,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 1,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "100 z1 walk f6": {
+   "s": 3,
+   "bodyPx": 25452,
+   "lumBase": 16.3,
+   "lumNew": 54.5,
+   "lumLight": 72.3,
+   "changedPx": 146169,
+   "changedBodyPx": 25389,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 25389,
+   "bodyWorse": 0,
+   "brighter": 144459,
+   "darker": 1710,
+   "maxTintDev": 1.25,
+   "maxR_art": 73.02,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 1,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "100 z0.75 idle f1": {
+   "s": 2.25,
+   "bodyPx": 14171,
+   "lumBase": 16.4,
+   "lumNew": 55.4,
+   "lumLight": 73,
+   "changedPx": 82088,
+   "changedBodyPx": 14141,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 14141,
+   "bodyWorse": 0,
+   "brighter": 81127,
+   "darker": 961,
+   "maxTintDev": 1.25,
+   "maxR_art": 73.11,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 1,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "100 z0.75 idle f2": {
+   "s": 2.25,
+   "bodyPx": 13811,
+   "lumBase": 16.4,
+   "lumNew": 55.5,
+   "lumLight": 72.9,
+   "changedPx": 82088,
+   "changedBodyPx": 13811,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 13811,
+   "bodyWorse": 0,
+   "brighter": 81164,
+   "darker": 924,
+   "maxTintDev": 1.25,
+   "maxR_art": 73.11,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 1,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "100 z0.75 idle f3": {
+   "s": 2.25,
+   "bodyPx": 13854,
+   "lumBase": 16.4,
+   "lumNew": 55.6,
+   "lumLight": 72.9,
+   "changedPx": 82088,
+   "changedBodyPx": 13854,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 13854,
+   "bodyWorse": 0,
+   "brighter": 81172,
+   "darker": 916,
+   "maxTintDev": 1.25,
+   "maxR_art": 73.11,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 1,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "100 z0.75 idle f4": {
+   "s": 2.25,
+   "bodyPx": 13811,
+   "lumBase": 16.4,
+   "lumNew": 55.5,
+   "lumLight": 72.9,
+   "changedPx": 82088,
+   "changedBodyPx": 13811,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 13811,
+   "bodyWorse": 0,
+   "brighter": 81164,
+   "darker": 924,
+   "maxTintDev": 1.25,
+   "maxR_art": 73.11,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 1,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "100 z0.75 walk f1": {
+   "s": 2.25,
+   "bodyPx": 14246,
+   "lumBase": 16.1,
+   "lumNew": 53.4,
+   "lumLight": 71.4,
+   "changedPx": 82088,
+   "changedBodyPx": 14148,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 14148,
+   "bodyWorse": 0,
+   "brighter": 81158,
+   "darker": 930,
+   "maxTintDev": 1.25,
+   "maxR_art": 73.11,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 1,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "100 z0.75 walk f2": {
+   "s": 2.25,
+   "bodyPx": 14028,
+   "lumBase": 16.3,
+   "lumNew": 54.9,
+   "lumLight": 72.8,
+   "changedPx": 82088,
+   "changedBodyPx": 13998,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 13998,
+   "bodyWorse": 0,
+   "brighter": 81179,
+   "darker": 909,
+   "maxTintDev": 1.25,
+   "maxR_art": 73.11,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 1,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "100 z0.75 walk f3": {
+   "s": 2.25,
+   "bodyPx": 14175,
+   "lumBase": 16.3,
+   "lumNew": 54.7,
+   "lumLight": 72.4,
+   "changedPx": 82088,
+   "changedBodyPx": 14145,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 14145,
+   "bodyWorse": 0,
+   "brighter": 81150,
+   "darker": 938,
+   "maxTintDev": 1.25,
+   "maxR_art": 73.11,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 1,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "100 z0.75 walk f4": {
+   "s": 2.25,
+   "bodyPx": 14290,
+   "lumBase": 16.3,
+   "lumNew": 54.9,
+   "lumLight": 72.6,
+   "changedPx": 82088,
+   "changedBodyPx": 14260,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 14260,
+   "bodyWorse": 0,
+   "brighter": 81110,
+   "darker": 978,
+   "maxTintDev": 1.25,
+   "maxR_art": 73.11,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 1,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "100 z0.75 walk f5": {
+   "s": 2.25,
+   "bodyPx": 14156,
+   "lumBase": 16.3,
+   "lumNew": 54.7,
+   "lumLight": 72.5,
+   "changedPx": 82088,
+   "changedBodyPx": 14126,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 14126,
+   "bodyWorse": 0,
+   "brighter": 81144,
+   "darker": 944,
+   "maxTintDev": 1.25,
+   "maxR_art": 73.11,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 1,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "100 z0.75 walk f6": {
+   "s": 2.25,
+   "bodyPx": 14320,
+   "lumBase": 16.3,
+   "lumNew": 54.8,
+   "lumLight": 72.4,
+   "changedPx": 82088,
+   "changedBodyPx": 14290,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 14290,
+   "bodyWorse": 0,
+   "brighter": 81148,
+   "darker": 940,
+   "maxTintDev": 1.25,
+   "maxR_art": 73.11,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 1,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "50 z1 idle f1": {
+   "s": 3,
+   "bodyPx": 25218,
+   "lumBase": 16.4,
+   "lumNew": 35.5,
+   "lumLight": 72.9,
+   "changedPx": 146169,
+   "changedBodyPx": 25155,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 25155,
+   "bodyWorse": 0,
+   "brighter": 144243,
+   "darker": 1926,
+   "maxTintDev": 1.45,
+   "maxR_art": 73.02,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 0.5,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "50 z1 idle f2": {
+   "s": 3,
+   "bodyPx": 24606,
+   "lumBase": 16.3,
+   "lumNew": 35.5,
+   "lumLight": 72.7,
+   "changedPx": 146169,
+   "changedBodyPx": 24606,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 24606,
+   "bodyWorse": 0,
+   "brighter": 144288,
+   "darker": 1881,
+   "maxTintDev": 1.45,
+   "maxR_art": 73.02,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 0.5,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "50 z1 idle f3": {
+   "s": 3,
+   "bodyPx": 24669,
+   "lumBase": 16.3,
+   "lumNew": 35.6,
+   "lumLight": 72.8,
+   "changedPx": 146169,
+   "changedBodyPx": 24669,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 24669,
+   "bodyWorse": 0,
+   "brighter": 144306,
+   "darker": 1863,
+   "maxTintDev": 1.45,
+   "maxR_art": 73.02,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 0.5,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "50 z1 idle f4": {
+   "s": 3,
+   "bodyPx": 24606,
+   "lumBase": 16.3,
+   "lumNew": 35.5,
+   "lumLight": 72.7,
+   "changedPx": 146169,
+   "changedBodyPx": 24606,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 24606,
+   "bodyWorse": 0,
+   "brighter": 144288,
+   "darker": 1881,
+   "maxTintDev": 1.45,
+   "maxR_art": 73.02,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 0.5,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "50 z1 walk f1": {
+   "s": 3,
+   "bodyPx": 25263,
+   "lumBase": 16.2,
+   "lumNew": 34.6,
+   "lumLight": 71.6,
+   "changedPx": 146169,
+   "changedBodyPx": 25065,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 25065,
+   "bodyWorse": 0,
+   "brighter": 144225,
+   "darker": 1944,
+   "maxTintDev": 1.45,
+   "maxR_art": 73.02,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 0.5,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "50 z1 walk f2": {
+   "s": 3,
+   "bodyPx": 24939,
+   "lumBase": 16.3,
+   "lumNew": 35.2,
+   "lumLight": 72.6,
+   "changedPx": 146169,
+   "changedBodyPx": 24876,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 24876,
+   "bodyWorse": 0,
+   "brighter": 144288,
+   "darker": 1881,
+   "maxTintDev": 1.45,
+   "maxR_art": 73.02,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 0.5,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "50 z1 walk f3": {
+   "s": 3,
+   "bodyPx": 25218,
+   "lumBase": 16.3,
+   "lumNew": 35.1,
+   "lumLight": 72.2,
+   "changedPx": 146169,
+   "changedBodyPx": 25155,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 25155,
+   "bodyWorse": 0,
+   "brighter": 144198,
+   "darker": 1971,
+   "maxTintDev": 1.45,
+   "maxR_art": 73.02,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 0.5,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "50 z1 walk f4": {
+   "s": 3,
+   "bodyPx": 25389,
+   "lumBase": 16.3,
+   "lumNew": 35.2,
+   "lumLight": 72.4,
+   "changedPx": 146169,
+   "changedBodyPx": 25326,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 25326,
+   "bodyWorse": 0,
+   "brighter": 144162,
+   "darker": 2007,
+   "maxTintDev": 1.45,
+   "maxR_art": 73.02,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 0.5,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "50 z1 walk f5": {
+   "s": 3,
+   "bodyPx": 25119,
+   "lumBase": 16.3,
+   "lumNew": 35.2,
+   "lumLight": 72.5,
+   "changedPx": 146169,
+   "changedBodyPx": 25056,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 25056,
+   "bodyWorse": 0,
+   "brighter": 144216,
+   "darker": 1953,
+   "maxTintDev": 1.45,
+   "maxR_art": 73.02,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 0.5,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "50 z1 walk f6": {
+   "s": 3,
+   "bodyPx": 25452,
+   "lumBase": 16.3,
+   "lumNew": 35.2,
+   "lumLight": 72.3,
+   "changedPx": 146169,
+   "changedBodyPx": 25389,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 25389,
+   "bodyWorse": 0,
+   "brighter": 144216,
+   "darker": 1953,
+   "maxTintDev": 1.45,
+   "maxR_art": 73.02,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 0.5,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "50 z0.75 idle f1": {
+   "s": 2.25,
+   "bodyPx": 14171,
+   "lumBase": 16.4,
+   "lumNew": 35.7,
+   "lumLight": 73,
+   "changedPx": 82088,
+   "changedBodyPx": 14141,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 14141,
+   "bodyWorse": 0,
+   "brighter": 81049,
+   "darker": 1039,
+   "maxTintDev": 1.45,
+   "maxR_art": 73.11,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 0.5,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "50 z0.75 idle f2": {
+   "s": 2.25,
+   "bodyPx": 13811,
+   "lumBase": 16.4,
+   "lumNew": 35.7,
+   "lumLight": 72.9,
+   "changedPx": 82088,
+   "changedBodyPx": 13811,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 13811,
+   "bodyWorse": 0,
+   "brighter": 81084,
+   "darker": 1004,
+   "maxTintDev": 1.45,
+   "maxR_art": 73.11,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 0.5,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "50 z0.75 idle f3": {
+   "s": 2.25,
+   "bodyPx": 13854,
+   "lumBase": 16.4,
+   "lumNew": 35.7,
+   "lumLight": 72.9,
+   "changedPx": 82088,
+   "changedBodyPx": 13854,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 13854,
+   "bodyWorse": 0,
+   "brighter": 81092,
+   "darker": 996,
+   "maxTintDev": 1.45,
+   "maxR_art": 73.11,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 0.5,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "50 z0.75 idle f4": {
+   "s": 2.25,
+   "bodyPx": 13811,
+   "lumBase": 16.4,
+   "lumNew": 35.7,
+   "lumLight": 72.9,
+   "changedPx": 82088,
+   "changedBodyPx": 13811,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 13811,
+   "bodyWorse": 0,
+   "brighter": 81084,
+   "darker": 1004,
+   "maxTintDev": 1.45,
+   "maxR_art": 73.11,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 0.5,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "50 z0.75 walk f1": {
+   "s": 2.25,
+   "bodyPx": 14246,
+   "lumBase": 16.1,
+   "lumNew": 34.5,
+   "lumLight": 71.4,
+   "changedPx": 82088,
+   "changedBodyPx": 14148,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 14148,
+   "bodyWorse": 0,
+   "brighter": 81008,
+   "darker": 1080,
+   "maxTintDev": 1.45,
+   "maxR_art": 73.11,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 0.5,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "50 z0.75 walk f2": {
+   "s": 2.25,
+   "bodyPx": 14028,
+   "lumBase": 16.3,
+   "lumNew": 35.4,
+   "lumLight": 72.8,
+   "changedPx": 82088,
+   "changedBodyPx": 13998,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 13998,
+   "bodyWorse": 0,
+   "brighter": 81051,
+   "darker": 1037,
+   "maxTintDev": 1.45,
+   "maxR_art": 73.11,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 0.5,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "50 z0.75 walk f3": {
+   "s": 2.25,
+   "bodyPx": 14175,
+   "lumBase": 16.3,
+   "lumNew": 35.3,
+   "lumLight": 72.4,
+   "changedPx": 82088,
+   "changedBodyPx": 14145,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 14145,
+   "bodyWorse": 0,
+   "brighter": 80980,
+   "darker": 1108,
+   "maxTintDev": 1.45,
+   "maxR_art": 73.11,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 0.5,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "50 z0.75 walk f4": {
+   "s": 2.25,
+   "bodyPx": 14290,
+   "lumBase": 16.3,
+   "lumNew": 35.4,
+   "lumLight": 72.6,
+   "changedPx": 82088,
+   "changedBodyPx": 14260,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 14260,
+   "bodyWorse": 0,
+   "brighter": 80985,
+   "darker": 1103,
+   "maxTintDev": 1.45,
+   "maxR_art": 73.11,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 0.5,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "50 z0.75 walk f5": {
+   "s": 2.25,
+   "bodyPx": 14156,
+   "lumBase": 16.3,
+   "lumNew": 35.3,
+   "lumLight": 72.5,
+   "changedPx": 82088,
+   "changedBodyPx": 14126,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 14126,
+   "bodyWorse": 0,
+   "brighter": 81006,
+   "darker": 1082,
+   "maxTintDev": 1.45,
+   "maxR_art": 73.11,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 0.5,
+    "nHole": true
+   },
+   "lantern": false
+  },
+  "50 z0.75 walk f6": {
+   "s": 2.25,
+   "bodyPx": 14320,
+   "lumBase": 16.3,
+   "lumNew": 35.3,
+   "lumLight": 72.4,
+   "changedPx": 82088,
+   "changedBodyPx": 14290,
+   "awayFromUndarkened": 0,
+   "bodyCloser": 14290,
+   "bodyWorse": 0,
+   "brighter": 80997,
+   "darker": 1091,
+   "maxTintDev": 1.45,
+   "maxR_art": 73.11,
+   "drawn": {
+    "glow": false,
+    "pool": false,
+    "light": 0,
+    "caveHole": 0.5,
+    "nHole": true
+   },
+   "lantern": false
+  }
+ },
+ "luma": {
+  "100 z1 idle f1": [
+   16.4,
+   55.2,
+   72.9
+  ],
+  "100 z1 idle f2": [
+   16.3,
+   55.2,
+   72.7
+  ],
+  "100 z1 idle f3": [
+   16.3,
+   55.3,
+   72.8
+  ],
+  "100 z1 idle f4": [
+   16.3,
+   55.2,
+   72.7
+  ],
+  "100 z1 walk f1": [
+   16.2,
+   53.3,
+   71.6
+  ],
+  "100 z1 walk f2": [
+   16.3,
+   54.6,
+   72.6
+  ],
+  "100 z1 walk f3": [
+   16.3,
+   54.4,
+   72.2
+  ],
+  "100 z1 walk f4": [
+   16.3,
+   54.6,
+   72.4
+  ],
+  "100 z1 walk f5": [
+   16.3,
+   54.5,
+   72.5
+  ],
+  "100 z1 walk f6": [
+   16.3,
+   54.5,
+   72.3
+  ],
+  "100 z0.75 idle f1": [
+   16.4,
+   55.4,
+   73
+  ],
+  "100 z0.75 idle f2": [
+   16.4,
+   55.5,
+   72.9
+  ],
+  "100 z0.75 idle f3": [
+   16.4,
+   55.6,
+   72.9
+  ],
+  "100 z0.75 idle f4": [
+   16.4,
+   55.5,
+   72.9
+  ],
+  "100 z0.75 walk f1": [
+   16.1,
+   53.4,
+   71.4
+  ],
+  "100 z0.75 walk f2": [
+   16.3,
+   54.9,
+   72.8
+  ],
+  "100 z0.75 walk f3": [
+   16.3,
+   54.7,
+   72.4
+  ],
+  "100 z0.75 walk f4": [
+   16.3,
+   54.9,
+   72.6
+  ],
+  "100 z0.75 walk f5": [
+   16.3,
+   54.7,
+   72.5
+  ],
+  "100 z0.75 walk f6": [
+   16.3,
+   54.8,
+   72.4
+  ],
+  "50 z1 idle f1": [
+   16.4,
+   35.5,
+   72.9
+  ],
+  "50 z1 idle f2": [
+   16.3,
+   35.5,
+   72.7
+  ],
+  "50 z1 idle f3": [
+   16.3,
+   35.6,
+   72.8
+  ],
+  "50 z1 idle f4": [
+   16.3,
+   35.5,
+   72.7
+  ],
+  "50 z1 walk f1": [
+   16.2,
+   34.6,
+   71.6
+  ],
+  "50 z1 walk f2": [
+   16.3,
+   35.2,
+   72.6
+  ],
+  "50 z1 walk f3": [
+   16.3,
+   35.1,
+   72.2
+  ],
+  "50 z1 walk f4": [
+   16.3,
+   35.2,
+   72.4
+  ],
+  "50 z1 walk f5": [
+   16.3,
+   35.2,
+   72.5
+  ],
+  "50 z1 walk f6": [
+   16.3,
+   35.2,
+   72.3
+  ],
+  "50 z0.75 idle f1": [
+   16.4,
+   35.7,
+   73
+  ],
+  "50 z0.75 idle f2": [
+   16.4,
+   35.7,
+   72.9
+  ],
+  "50 z0.75 idle f3": [
+   16.4,
+   35.7,
+   72.9
+  ],
+  "50 z0.75 idle f4": [
+   16.4,
+   35.7,
+   72.9
+  ],
+  "50 z0.75 walk f1": [
+   16.1,
+   34.5,
+   71.4
+  ],
+  "50 z0.75 walk f2": [
+   16.3,
+   35.4,
+   72.8
+  ],
+  "50 z0.75 walk f3": [
+   16.3,
+   35.3,
+   72.4
+  ],
+  "50 z0.75 walk f4": [
+   16.3,
+   35.4,
+   72.6
+  ],
+  "50 z0.75 walk f5": [
+   16.3,
+   35.3,
+   72.5
+  ],
+  "50 z0.75 walk f6": [
+   16.3,
+   35.3,
+   72.4
+  ]
+ },
+ "n13_errors_before_close": {
+  "new": [],
+  "old": [],
+  "sim": []
+ },
+ "fps_pairs_k0_k1_ratio": [
+  [
+   41.9,
+   41.2,
+   0.982,
+   false,
+   true
+  ],
+  [
+   41.9,
+   43.8,
+   1.044,
+   false,
+   true
+  ],
+  [
+   41.6,
+   42.2,
+   1.014,
+   false,
+   true
+  ],
+  [
+   40.9,
+   41.6,
+   1.016,
+   false,
+   true
+  ],
+  [
+   43.1,
+   43.3,
+   1.004,
+   false,
+   true
+  ]
+ ],
+ "draw_ms_cpu1x": {
+  "k0": 4.579,
+  "k1": 4.43
+ },
+ "matrix_sample": {
+  "N cave 100 true true idle ok": {
+   "err": null,
+   "h": "15a67fe0328d08fd",
+   "lantern": false,
+   "light": 0,
+   "glow": false,
+   "pool": false,
+   "hole": 1,
+   "nHole": true,
+   "fin": true
+  },
+  "N cave 100 true true walk ok": {
+   "err": null,
+   "h": "13d7509373ed0a74",
+   "lantern": false,
+   "light": 0,
+   "glow": false,
+   "pool": false,
+   "hole": 1,
+   "nHole": true,
+   "fin": true
+  },
+  "N cave 50 true true idle ok": {
+   "err": null,
+   "h": "efdd00ddc3298337",
+   "lantern": false,
+   "light": 0,
+   "glow": false,
+   "pool": false,
+   "hole": 0.5,
+   "nHole": true,
+   "fin": true
+  },
+  "N cave 50 true true walk ok": {
+   "err": null,
+   "h": "56d42df9f5458cce",
+   "lantern": false,
+   "light": 0,
+   "glow": false,
+   "pool": false,
+   "hole": 0.5,
+   "nHole": true,
+   "fin": true
+  }
+ },
+ "checks": [
+  {
+   "check": "N0 page source: one NHOLE = {cx:48,cy:84,k:1} (P2 = feet 10 px up, k 1.00 = candidate A) · no rotation / ctx.filter",
+   "pass": true,
+   "value": 1
+  },
+  {
+   "check": "N0b default k = 1 on the GM page",
+   "pass": true,
+   "value": {
+    "cx": 48,
+    "cy": 84,
+    "k": 1
+   }
+  },
+  {
+   "check": "N1 regression (1536 states = 8 dirs x light/dark/cave x power 100/50/10/0 x Glow+C on/off x hold on/off x idle/walk x light layer ok/missing): same pixels and draw flags as before this change, except the allowed states (N + cave + hold + Glow+C on + light layer ok + power 100/50)",
+   "pass": true,
+   "value": {
+    "differ": 4,
+    "allowed": 4,
+    "differ_outside_allowed": [],
+    "differ_keys": [
+     "N cave 100 true true idle ok",
+     "N cave 100 true true walk ok",
+     "N cave 50 true true idle ok",
+     "N cave 50 true true walk ok"
+    ]
+   }
+  },
+  {
+   "check": "N2 allowed states: no lantern, no light layer, no Glow, no C · one cave hole with alpha = hole x k (power 100 -> 1, 50 -> 0.5) · nHole flag only there",
+   "pass": true,
+   "value": {
+    "N cave 100 true true idle ok": {
+     "lantern": false,
+     "light": 0,
+     "glow": false,
+     "pool": false,
+     "hole": 1,
+     "nHole": true
+    },
+    "N cave 100 true true walk ok": {
+     "lantern": false,
+     "light": 0,
+     "glow": false,
+     "pool": false,
+     "hole": 1,
+     "nHole": true
+    },
+    "N cave 50 true true idle ok": {
+     "lantern": false,
+     "light": 0,
+     "glow": false,
+     "pool": false,
+     "hole": 0.5,
+     "nHole": true
+    },
+    "N cave 50 true true walk ok": {
+     "lantern": false,
+     "light": 0,
+     "glow": false,
+     "pool": false,
+     "hole": 0.5,
+     "nHole": true
+    }
+   }
+  },
+  {
+   "check": "N3 draw() throws 0 times and every number is finite (all states, old / new / k 0 / k 0.6)",
+   "pass": true,
+   "value": 0
+  },
+  {
+   "check": "N4 k = 0 draws exactly the old page in every state (the switch fully restores the old N)",
+   "pass": true,
+   "value": 0
+  },
+  {
+   "check": "N5 the real page = the simulation the owner looked at, in every state: k 1.00 = SIM P2 k1.00 (A) · k 0.60 = SIM P2 k0.60 (B)",
+   "pass": true,
+   "value": {
+    "A_differ": 0,
+    "B_differ": 0
+   }
+  },
+  {
+   "check": "N6 facing N (cave / dark / light x power 100/50/10/0 x idle/walk x Glow+C on/off): lantern, light layer, Glow and C are never drawn · the cave hole is drawn once (destination-out on the darkness, alpha 1 / 0.5) only in cave + power 100/50 + Glow+C on",
+   "pass": true,
+   "value": {
+    "cave 100 idle fxTrue": [
+     [
+      "lhole",
+      1,
+      "destination-out",
+      "dark layer",
+      [
+       300,
+       90
+      ]
+     ]
+    ],
+    "cave 100 walk fxTrue": [
+     [
+      "lhole",
+      1,
+      "destination-out",
+      "dark layer",
+      [
+       300,
+       90
+      ]
+     ]
+    ],
+    "cave 50 idle fxTrue": [
+     [
+      "lhole",
+      0.5,
+      "destination-out",
+      "dark layer",
+      [
+       300,
+       90
+      ]
+     ]
+    ],
+    "cave 50 walk fxTrue": [
+     [
+      "lhole",
+      0.5,
+      "destination-out",
+      "dark layer",
+      [
+       300,
+       90
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "check": "N6b the N hole lands where it should: centre on screen = feet [48,94] 10 px up within the whole-px snap (|error| <= 0.5 art px on each axis) · one stamp, alpha 1 / 0.5, whole art px, dark layer scaled by s · zoom 100/75 x 7 world positions x idle/walk x power 100/50",
+   "pass": true,
+   "value": {
+    "cases": 56,
+    "max_abs_err_art_px": 0.4444,
+    "bad": []
+   }
+  },
+  {
+   "check": "N5b the real page = simulation A also at zoom 75 % and away from the start position (N cave, idle/walk, power 100/50: 52 pictures)",
+   "pass": true,
+   "value": {
+    "differ": []
+   }
+  },
+  {
+   "check": "N7 the light stays inside the hole: every changed px is within 74 art px of the centre (feet 10 px up; stamp radius 72 + 2 px for whole-px placement) and moves toward the same picture without the cave darkness (0 away) · every frame, idle/walk, zoom 100/75, power 100/50",
+   "pass": true,
+   "value": {
+    "cases": 40,
+    "maxR_art_max": 73.11,
+    "away_max": 0,
+    "darker_lum_info_max": 2007,
+    "changed_min": 82088
+   }
+  },
+  {
+   "check": "N8 the body is only uncovered, never tinted: every changed body px moves toward its true colour (0 worse) · tint off the base->true line <= 2",
+   "pass": true,
+   "value": {
+    "worse_max": 0,
+    "tint_max": 1.45,
+    "changed_body_min": 13811
+   }
+  },
+  {
+   "check": "N9 body brightness facing N in the cave (idle f1, zoom 100) = the simulation: power 100 55.2 (was 16.4) · power 50 35.5 (+-0.1)",
+   "pass": true,
+   "value": {
+    "100": [
+     16.4,
+     55.2,
+     72.9
+    ],
+    "50": [
+     16.4,
+     35.5,
+     72.9
+    ]
+   }
+  },
+  {
+   "check": "N10 turning NE/NW -> N -> NE/NW while walking: the N light and the lantern (+ its light, Glow, C) swap on the same frame · cave 100 / 50 / 10 and dark floor 100",
+   "pass": true,
+   "value": {
+    "got": {
+     "cave 100": [
+      [
+       false,
+       false,
+       1,
+       true,
+       false
+      ],
+      [
+       true,
+       true,
+       1,
+       false,
+       true
+      ],
+      [
+       false,
+       false,
+       1,
+       true,
+       false
+      ],
+      [
+       true,
+       true,
+       1,
+       false,
+       true
+      ]
+     ],
+     "cave 50": [
+      [
+       false,
+       false,
+       0.5,
+       true,
+       false
+      ],
+      [
+       true,
+       true,
+       0.5,
+       false,
+       true
+      ],
+      [
+       false,
+       false,
+       0.5,
+       true,
+       false
+      ],
+      [
+       true,
+       true,
+       0.5,
+       false,
+       true
+      ]
+     ],
+     "cave 10": [
+      [
+       false,
+       false,
+       0,
+       false,
+       false
+      ],
+      [
+       true,
+       false,
+       0,
+       false,
+       true
+      ],
+      [
+       false,
+       false,
+       0,
+       false,
+       false
+      ],
+      [
+       true,
+       false,
+       0,
+       false,
+       true
+      ]
+     ],
+     "dark 100": [
+      [
+       false,
+       false,
+       0,
+       false,
+       false
+      ],
+      [
+       true,
+       true,
+       0,
+       false,
+       true
+      ],
+      [
+       false,
+       false,
+       0,
+       false,
+       false
+      ],
+      [
+       true,
+       true,
+       0,
+       false,
+       true
+      ]
+     ]
+    },
+    "want": {
+     "cave 100": [
+      [
+       false,
+       false,
+       1,
+       true,
+       false
+      ],
+      [
+       true,
+       true,
+       1,
+       false,
+       true
+      ],
+      [
+       false,
+       false,
+       1,
+       true,
+       false
+      ],
+      [
+       true,
+       true,
+       1,
+       false,
+       true
+      ]
+     ],
+     "cave 50": [
+      [
+       false,
+       false,
+       0.5,
+       true,
+       false
+      ],
+      [
+       true,
+       true,
+       0.5,
+       false,
+       true
+      ],
+      [
+       false,
+       false,
+       0.5,
+       true,
+       false
+      ],
+      [
+       true,
+       true,
+       0.5,
+       false,
+       true
+      ]
+     ],
+     "cave 10": [
+      [
+       false,
+       false,
+       0,
+       false,
+       false
+      ],
+      [
+       true,
+       false,
+       0,
+       false,
+       true
+      ],
+      [
+       false,
+       false,
+       0,
+       false,
+       false
+      ],
+      [
+       true,
+       false,
+       0,
+       false,
+       true
+      ]
+     ],
+     "dark 100": [
+      [
+       false,
+       false,
+       0,
+       false,
+       false
+      ],
+      [
+       true,
+       true,
+       0,
+       false,
+       true
+      ],
+      [
+       false,
+       false,
+       0,
+       false,
+       false
+      ],
+      [
+       true,
+       true,
+       0,
+       false,
+       true
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "check": "N11 GM switch ?nk=0..1 (plain decimal digits only) sets k (0 = old N, 0.6 = candidate B) · out of range / not a number / empty / spaces / 1e-1 / 0x1 / without ?gm -> ignored (k stays 1) · 0 page errors",
+   "pass": true,
+   "value": {
+    "0": [
+     0,
+     0
+    ],
+    "0.6": [
+     0.6,
+     0
+    ],
+    "0.35": [
+     0.35,
+     0
+    ],
+    ".5": [
+     0.5,
+     0
+    ],
+    "1": [
+     1,
+     0
+    ],
+    "2": [
+     1,
+     0
+    ],
+    "-1": [
+     1,
+     0
+    ],
+    "abc": [
+     1,
+     0
+    ],
+    "": [
+     1,
+     0
+    ],
+    "1e-1": [
+     1,
+     0
+    ],
+    "%20": [
+     1,
+     0
+    ],
+    "%200.6": [
+     1,
+     0
+    ],
+    "0x1": [
+     1,
+     0
+    ],
+    "Infinity": [
+     1,
+     0
+    ],
+    "no gm, nk=0": [
+     1,
+     0
+    ]
+   }
+  },
+  {
+   "check": "N12 FPS walking N in the cave with the N light >= 90 % of the same walk without it (4x CPU, rAF 2 s, 5 alternating pairs, median of ratios) · the N light really drawn in the k1 runs and not in the k0 runs · not at the 60 fps cap · draw ms reported",
+   "pass": true,
+   "value": {
+    "pairs [k0, k1, ratio, nHole k0, nHole k1]": [
+     [
+      41.9,
+      41.2,
+      0.982,
+      false,
+      true
+     ],
+     [
+      41.9,
+      43.8,
+      1.044,
+      false,
+      true
+     ],
+     [
+      41.6,
+      42.2,
+      1.014,
+      false,
+      true
+     ],
+     [
+      40.9,
+      41.6,
+      1.016,
+      false,
+      true
+     ],
+     [
+      43.1,
+      43.3,
+      1.004,
+      false,
+      true
+     ]
+    ],
+    "median_ratio": 1.014,
+    "draw_ms_cpu1x": {
+     "k0": 4.579,
+     "k1": 4.43
+    }
+   }
+  },
+  {
+   "check": "N13 page errors 0 (new / old / sim pages · the extra pages of N11 are counted in N11)",
+   "pass": true,
+   "value": {
+    "new": [],
+    "old": [],
+    "sim": []
+   }
+  }
+ ]
+}

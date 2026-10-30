@@ -1,0 +1,19 @@
+PASS N0 page source: one NHOLE = {cx:48,cy:84,k:1} (P2 = feet 10 px up, k 1.00 = candidate A) · no rotation / ctx.filter
+PASS N0b default k = 1 on the GM page
+PASS N1 regression (1536 states = 8 dirs x light/dark/cave x power 100/50/10/0 x Glow+C on/off x hold on/off x idle/walk x light layer ok/missing): same pixels and draw flags as before this change, except the allowed states (N + cave + hold + Glow+C on + light layer ok + power 100/50)
+PASS N2 allowed states: no lantern, no light layer, no Glow, no C · one cave hole with alpha = hole x k (power 100 -> 1, 50 -> 0.5) · nHole flag only there
+PASS N3 draw() throws 0 times and every number is finite (all states, old / new / k 0 / k 0.6)
+PASS N4 k = 0 draws exactly the old page in every state (the switch fully restores the old N)
+PASS N5 the real page = the simulation the owner looked at, in every state: k 1.00 = SIM P2 k1.00 (A) · k 0.60 = SIM P2 k0.60 (B)
+PASS N6 facing N (cave / dark / light x power 100/50/10/0 x idle/walk x Glow+C on/off): lantern, light layer, Glow and C are never drawn · the cave hole is drawn once (destination-out on the darkness, alpha 1 / 0.5) only in cave + power 100/50 + Glow+C on
+PASS N6b the N hole lands where it should: centre on screen = feet [48,94] 10 px up within the whole-px snap (|error| <= 0.5 art px on each axis) · one stamp, alpha 1 / 0.5, whole art px, dark layer scaled by s · zoom 100/75 x 7 world positions x idle/walk x power 100/50
+PASS N5b the real page = simulation A also at zoom 75 % and away from the start position (N cave, idle/walk, power 100/50: 52 pictures)
+PASS N7 the light stays inside the hole: every changed px is within 74 art px of the centre (feet 10 px up; stamp radius 72 + 2 px for whole-px placement) and moves toward the same picture without the cave darkness (0 away) · every frame, idle/walk, zoom 100/75, power 100/50
+PASS N8 the body is only uncovered, never tinted: every changed body px moves toward its true colour (0 worse) · tint off the base->true line <= 2
+PASS N9 body brightness facing N in the cave (idle f1, zoom 100) = the simulation: power 100 55.2 (was 16.4) · power 50 35.5 (+-0.1)
+PASS N10 turning NE/NW -> N -> NE/NW while walking: the N light and the lantern (+ its light, Glow, C) swap on the same frame · cave 100 / 50 / 10 and dark floor 100
+PASS N11 GM switch ?nk=0..1 (plain decimal digits only) sets k (0 = old N, 0.6 = candidate B) · out of range / not a number / empty / spaces / 1e-1 / 0x1 / without ?gm -> ignored (k stays 1) · 0 page errors
+PASS N12 FPS walking N in the cave with the N light >= 90 % of the same walk without it (4x CPU, rAF 2 s, 5 alternating pairs, median of ratios) · the N light really drawn in the k1 runs and not in the k0 runs · not at the 60 fps cap · draw ms reported
+PASS N13 page errors 0 (new / old / sim pages · the extra pages of N11 are counted in N11)
+17/17 PASS
+exit=0

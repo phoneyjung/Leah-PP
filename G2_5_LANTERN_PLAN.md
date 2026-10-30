@@ -419,3 +419,5 @@ A single front-view sprite of a small round copper hand lantern for Lantern Acad
 - `test_o3_small_canvas.py` E5 และ `test_cpool.py` เป็นการเทียบ "ก่อน/หลัง" ของงานเดิม (O3 / C pool) จึงเห็นภาพต่างในสถานะทิศ N ถ้ำ ตามที่ตั้งใจ · ไม่แก้สองไฟล์นี้ · รายงานเป็นข้อมูล
 ### 20.4 ผลทดสอบ
 - ดู `qa/o13-north-light/README.md`
+### 20.5 Codex ตรวจโค้ด (งาน T1 · 30 ต.ค.)
+- `REVIEW_CODEX_T1_O13.md`: ผ่านแบบมีข้อแนะนำ · ไม่พบบั๊กโค้ด · ข้อแนะนำ R1 R2 เป็นเรื่องความครอบคลุมของเทสต์ → `test_g2_north_light.py` v1.1 เพิ่ม N5b N6b และนับ error หน้าไม่มี GM จริง (ไม่ลดเกณฑ์ใด) · ผลใน `qa/o13-north-light/results/v1.1/`
