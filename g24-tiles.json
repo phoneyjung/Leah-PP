@@ -1,0 +1,146 @@
+{
+  "schema": 1,
+  "tile": 32,
+  "files": {
+    "g24-tiles-path.png": {
+      "lower": "dirt",
+      "upper": "grass",
+      "tiles": {
+        "grass,grass,dirt,grass": [
+          0,
+          0
+        ],
+        "grass,dirt,grass,dirt": [
+          32,
+          0
+        ],
+        "dirt,grass,dirt,dirt": [
+          64,
+          0
+        ],
+        "grass,grass,dirt,dirt": [
+          96,
+          0
+        ],
+        "dirt,grass,grass,dirt": [
+          0,
+          32
+        ],
+        "grass,dirt,dirt,dirt": [
+          32,
+          32
+        ],
+        "dirt,dirt,dirt,dirt": [
+          64,
+          32
+        ],
+        "dirt,dirt,dirt,grass": [
+          96,
+          32
+        ],
+        "grass,dirt,grass,grass": [
+          0,
+          64
+        ],
+        "dirt,dirt,grass,grass": [
+          32,
+          64
+        ],
+        "dirt,dirt,grass,dirt": [
+          64,
+          64
+        ],
+        "dirt,grass,dirt,grass": [
+          96,
+          64
+        ],
+        "grass,grass,grass,grass": [
+          0,
+          96
+        ],
+        "grass,grass,grass,dirt": [
+          32,
+          96
+        ],
+        "grass,dirt,dirt,grass": [
+          64,
+          96
+        ],
+        "dirt,grass,grass,grass": [
+          96,
+          96
+        ]
+      }
+    },
+    "g24-tiles-cliff.png": {
+      "lower": "grass",
+      "upper": "cliff",
+      "tiles": {
+        "cliff,cliff,grass,cliff": [
+          0,
+          0
+        ],
+        "cliff,grass,cliff,grass": [
+          32,
+          0
+        ],
+        "grass,cliff,grass,grass": [
+          64,
+          0
+        ],
+        "cliff,cliff,grass,grass": [
+          96,
+          0
+        ],
+        "grass,cliff,cliff,grass": [
+          0,
+          32
+        ],
+        "cliff,grass,grass,grass": [
+          32,
+          32
+        ],
+        "grass,grass,grass,grass": [
+          64,
+          32
+        ],
+        "grass,grass,grass,cliff": [
+          96,
+          32
+        ],
+        "cliff,grass,cliff,cliff": [
+          0,
+          64
+        ],
+        "grass,grass,cliff,cliff": [
+          32,
+          64
+        ],
+        "grass,grass,cliff,grass": [
+          64,
+          64
+        ],
+        "grass,cliff,grass,cliff": [
+          96,
+          64
+        ],
+        "cliff,cliff,cliff,cliff": [
+          0,
+          96
+        ],
+        "cliff,cliff,cliff,grass": [
+          32,
+          96
+        ],
+        "cliff,grass,grass,cliff": [
+          64,
+          96
+        ],
+        "grass,cliff,cliff,cliff": [
+          96,
+          96
+        ]
+      }
+    }
+  }
+}
