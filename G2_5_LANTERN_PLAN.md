@@ -421,3 +421,7 @@ A single front-view sprite of a small round copper hand lantern for Lantern Acad
 - ดู `qa/o13-north-light/README.md`
 ### 20.5 Codex ตรวจโค้ด (งาน T1 · 30 ต.ค.)
 - `REVIEW_CODEX_T1_O13.md`: ผ่านแบบมีข้อแนะนำ · ไม่พบบั๊กโค้ด · ข้อแนะนำ R1 R2 เป็นเรื่องความครอบคลุมของเทสต์ → `test_g2_north_light.py` v1.1 เพิ่ม N5b N6b และนับ error หน้าไม่มี GM จริง (ไม่ลดเกณฑ์ใด) · ผลใน `qa/o13-north-light/results/v1.1/`
+### 20.6 เจ้าของดูบนมือถือจริง (30 ต.ค. 17:29)
+- Claude เผยแพร่หน้า Pilot เป็นหน้าส่วนตัวใน claude.ai ("Lantern Pilot GM" · สำเนา `pilot-g2-motion.html` @ `e53b6cc` · ต่างแค่: เอาแท็กหัว/ท้ายออก · ชื่อหน้า · เปิด GM + ถ้ำเป็นค่าเริ่ม เพราะหน้าแบบนี้รับ `?query` ไม่ได้) · ทดสอบในเครื่องแนวตั้ง/แนวนอน: error 0 · หัน N ในถ้ำมีแสง (nHole) · NE มีตะเกียง
+- เจ้าของเปิดบนมือถือแล้วตอบ **"ผ่าน"** = ยอมรับภาพแสงทิศ N แบบ A ในหน้า GM
+- **ไม่ได้หมายถึง:** FPS มือถือจริง (ยังไม่มีตัวเลข) · คะแนน Production Artistic Gate (≥ 8.5) · ปิด QG-5a · ทั้งสามเรื่องยังเปิด
