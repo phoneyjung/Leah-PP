@@ -1,0 +1,13 @@
+port 8961 page sha256 c0b04ab20e85a42f
+port 8962 page sha256 8839e326d9cfead3
+port 8964 page sha256 b1fb175c09de93a6
+port 8970 page sha256 7a955652bf1ea308
+radius exit=0
+north exit=0
+lantern exit=0
+hold exit=0
+holdnogm exit=0
+offset exit=0
+cpool exit=1
+o3 exit=1
+DONE

@@ -18,7 +18,7 @@ PAGES = {'OLD': PO, 'FIX': PF}
 HEIGHTS = [0, 1, 64, 191, 192, 193, 383, 384, 1024]
 DPRS = [1, 2.625]
 POSES = [['idle', 'S', 0], ['walk', 'E', 2], ['idle', 'N', 0]]
-MODES = {'gm': {'q': '?gm', 'scenes': ['light', 'dark', 'cave'], 'powers': [100, 10]}, 'nogm': {'q': '', 'scenes': ['light', 'dark'], 'powers': [100]}, 'nogm-hold': {'q': '?hold', 'scenes': ['light', 'dark'], 'powers': [100]}}
+MODES = {'gm': {'q': '?gm&lr=72', 'scenes': ['light', 'dark', 'cave'], 'powers': [100, 10]}, 'nogm': {'q': '', 'scenes': ['light', 'dark'], 'powers': [100]}, 'nogm-hold': {'q': '?hold', 'scenes': ['light', 'dark'], 'powers': [100]}}
 VP_SMALL = {1: [0, 1, 64, 191, 192, 193, 383, 384, 1024], 2.625: [0, 1, 24, 72, 73, 146, 147]}   # the loop below adds 390 (= back to normal)   # DPR 2.625: canvas = round(h*2.625) -> 0 3 63 189 192 383 386 1024
 SAVE = {(1, 'gm', 'cave', 191), (1, 'gm', 'light', 191), (1, 'nogm', 'light', 64), (2.625, 'gm', 'cave', 1024), (1, 'gm', 'cave', 64), (1, 'nogm-hold', 'light', 191)}
 WIDE = [[0, 64], [0, 384], [1, 191], [1, 1024], [4000, 191], [4000, 1], [2216, 0]]

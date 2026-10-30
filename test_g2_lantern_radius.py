@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # Cave lantern light size try-out (Claude · 30 Oct 2569 · owner 23:26 "ตะเกียงมองเห็นได้แคบไป") · Pilot only, GM only
-# The cave hole keeps its band shape and is scaled to R = 72 (unchanged default) / 100 / 130 / 160 art px: GM button "วงแสง / light" or ?gm&lr=R.
+# The cave hole keeps its band shape and is scaled to R = 72 (the old light) / 100 / 130 / 160 art px: GM button "วงแสง / light" or ?gm&lr=R.
+# v1.1 (owner ok 23:48): GM default = 130 · without ?gm nothing changes (R 72, button hidden)
 # usage: python3 -I test_g2_lantern_radius.py PORT OUT_DIR   (serve this folder with python3 -m http.server PORT)
 import sys, os, json
 from playwright.sync_api import sync_playwright
@@ -22,13 +23,15 @@ with sync_playwright() as p:
         pg.on('pageerror', lambda e: errs.append(str(e))); pg.on('console', lambda m: m.type == 'error' and errs.append(m.text))
         pg.goto(BASE + q); pg.wait_for_function("window.PT&&PT.ST&&(!PT.ST.gm||PT.FX.lhole)&&PT.ST.img&&PT.ST.img.idle", timeout=20000); pg.wait_for_timeout(300); return pg
     pg = page('?gm&scene=cave'); s = pg.evaluate(STATE); R['default'] = s
-    ok('L1 default unchanged: R 72, same 6 bands, stamp 145 px, button shown in GM', s['R'] == 72 and s['bands'] == B72 and s['w'] == 145 and s['shown'] and s['btn'].endswith('72'), [s['R'], s['w'], s['btn']])
-    lit = {72: pg.evaluate(LIT, 'S')}
+    W130 = [[round(b[0] * 130 / 72), b[1]] for b in B72]
+    ok('L1 GM default = 130: bands = the old 6 scaled x130/72 (same strengths), stamp 261 px, button shown with 130', s['R'] == 130 and s['bands'] == W130 and s['w'] == 261 and s['shown'] and s['btn'].endswith('130'), [s['R'], s['w'], s['btn']])
     seq = []
     for _ in range(4):
         pg.click('#bLR'); seq.append(pg.evaluate(STATE)['R'])
-    ok('L2 button cycles 100 -> 130 -> 160 -> 72', seq == [100, 130, 160, 72], seq)
-    fps = {72: pg.evaluate(FPS)}; pg.close()
+    ok('L2 button cycles 160 -> 72 -> 100 -> 130', seq == [160, 72, 100, 130], seq)
+    pg.close(); pg = page('?gm&scene=cave&lr=72'); s = pg.evaluate(STATE)
+    ok('L1b ?lr=72 gives the old light exactly: R 72, the old 6 bands, stamp 145 px', s['R'] == 72 and s['bands'] == B72 and s['w'] == 145, [s['R'], s['w']])
+    lit = {72: pg.evaluate(LIT, 'S')}; fps = {72: pg.evaluate(FPS)}; pg.close()
     for r in (100, 130, 160):
         pg = page('?gm&scene=cave&lr=%d' % r); s = pg.evaluate(STATE); R['lr%d' % r] = s
         want = [[round(b[0] * r / 72), b[1]] for b in B72]
@@ -41,9 +44,9 @@ with sync_playwright() as p:
         pg.close()
     R['lit'] = lit; L = [lit[r]['lit'] for r in (72, 100, 130, 160)]
     ok('L4 lit cave px (luminance > 40) grows with every step 72 < 100 < 130 < 160', L[0] < L[1] < L[2] < L[3], L)
-    for q, name in (('?gm&scene=cave&lr=999', 'not in the list'), ('?gm&scene=cave&lr=abc', 'not a number'), ('?lr=130', 'no GM')):
+    for q, name, want in (('?gm&scene=cave&lr=999', 'not in the list', 130), ('?gm&scene=cave&lr=abc', 'not a number', 130), ('?lr=130', 'no GM', 72)):
         pg = page(q); s = pg.evaluate(STATE)
-        ok('L6 %s (%s) ignored: R 72%s' % (q, name, ', button hidden' if 'gm' not in q else ''), s['R'] == 72 and (s['shown'] if 'gm' in q else not s['shown']), [s['R'], s['shown']]); pg.close()
+        ok('L6 %s (%s) ignored: R %d%s' % (q, name, want, ', button hidden' if 'gm' not in q else ''), s['R'] == want and (s['shown'] if 'gm' in q else not s['shown']), [s['R'], s['shown']]); pg.close()
     R['fps'] = fps
     ok('L7 FPS at R 160 >= 90 % of R 72 (same build, 3 s each)', fps[160] >= 0.9 * fps[72], fps)
     ok('L8 page errors 0', not errs, errs[:3])

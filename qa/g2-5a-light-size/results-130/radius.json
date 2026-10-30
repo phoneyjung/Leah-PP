@@ -1,0 +1,302 @@
+{
+ "default": {
+  "R": 130,
+  "bands": [
+   [
+    36,
+    1
+   ],
+   [
+    58,
+    0.85
+   ],
+   [
+    79,
+    0.65
+   ],
+   [
+    101,
+    0.42
+   ],
+   [
+    119,
+    0.22
+   ],
+   [
+    130,
+    0.1
+   ]
+  ],
+  "w": 261,
+  "btn": "วงแสง / light 130",
+  "shown": true
+ },
+ "lr100": {
+  "R": 100,
+  "bands": [
+   [
+    28,
+    1
+   ],
+   [
+    44,
+    0.85
+   ],
+   [
+    61,
+    0.65
+   ],
+   [
+    78,
+    0.42
+   ],
+   [
+    92,
+    0.22
+   ],
+   [
+    100,
+    0.1
+   ]
+  ],
+  "w": 201,
+  "btn": "วงแสง / light 100",
+  "shown": true
+ },
+ "lr130": {
+  "R": 130,
+  "bands": [
+   [
+    36,
+    1
+   ],
+   [
+    58,
+    0.85
+   ],
+   [
+    79,
+    0.65
+   ],
+   [
+    101,
+    0.42
+   ],
+   [
+    119,
+    0.22
+   ],
+   [
+    130,
+    0.1
+   ]
+  ],
+  "w": 261,
+  "btn": "วงแสง / light 130",
+  "shown": true
+ },
+ "lr160": {
+  "R": 160,
+  "bands": [
+   [
+    44,
+    1
+   ],
+   [
+    71,
+    0.85
+   ],
+   [
+    98,
+    0.65
+   ],
+   [
+    124,
+    0.42
+   ],
+   [
+    147,
+    0.22
+   ],
+   [
+    160,
+    0.1
+   ]
+  ],
+  "w": 321,
+  "btn": "วงแสง / light 160",
+  "shown": true
+ },
+ "north160": {
+  "lit": 286534,
+  "mean": 23.99,
+  "hole": 1,
+  "nHole": true
+ },
+ "lit": {
+  "72": {
+   "lit": 73884,
+   "mean": 18.42,
+   "hole": 1,
+   "nHole": false
+  },
+  "100": {
+   "lit": 117545,
+   "mean": 19.85,
+   "hole": 1,
+   "nHole": false
+  },
+  "130": {
+   "lit": 197146,
+   "mean": 21.84,
+   "hole": 1,
+   "nHole": false
+  },
+  "160": {
+   "lit": 287092,
+   "mean": 24.32,
+   "hole": 1,
+   "nHole": false
+  }
+ },
+ "fps": {
+  "72": 60.6,
+  "160": 60.3
+ },
+ "checks": [
+  {
+   "check": "L1 GM default = 130: bands = the old 6 scaled x130/72 (same strengths), stamp 261 px, button shown with 130",
+   "pass": true,
+   "value": [
+    130,
+    261,
+    "วงแสง / light 130"
+   ]
+  },
+  {
+   "check": "L2 button cycles 160 -> 72 -> 100 -> 130",
+   "pass": true,
+   "value": [
+    160,
+    72,
+    100,
+    130
+   ]
+  },
+  {
+   "check": "L1b ?lr=72 gives the old light exactly: R 72, the old 6 bands, stamp 145 px",
+   "pass": true,
+   "value": [
+    72,
+    145
+   ]
+  },
+  {
+   "check": "L3 ?lr=100: R 100, bands scaled (same strengths), stamp 201 px, button label",
+   "pass": true,
+   "value": [
+    100,
+    201,
+    [
+     28,
+     1
+    ],
+    [
+     100,
+     0.1
+    ]
+   ]
+  },
+  {
+   "check": "L3 ?lr=130: R 130, bands scaled (same strengths), stamp 261 px, button label",
+   "pass": true,
+   "value": [
+    130,
+    261,
+    [
+     36,
+     1
+    ],
+    [
+     130,
+     0.1
+    ]
+   ]
+  },
+  {
+   "check": "L3 ?lr=160: R 160, bands scaled (same strengths), stamp 321 px, button label",
+   "pass": true,
+   "value": [
+    160,
+    321,
+    [
+     44,
+     1
+    ],
+    [
+     160,
+     0.1
+    ]
+   ]
+  },
+  {
+   "check": "L5 facing N (lantern hidden) uses the same wider light: N hole on, lit px > R72 facing S",
+   "pass": true,
+   "value": {
+    "lit": 286534,
+    "mean": 23.99,
+    "hole": 1,
+    "nHole": true
+   }
+  },
+  {
+   "check": "L4 lit cave px (luminance > 40) grows with every step 72 < 100 < 130 < 160",
+   "pass": true,
+   "value": [
+    73884,
+    117545,
+    197146,
+    287092
+   ]
+  },
+  {
+   "check": "L6 ?gm&scene=cave&lr=999 (not in the list) ignored: R 130",
+   "pass": true,
+   "value": [
+    130,
+    true
+   ]
+  },
+  {
+   "check": "L6 ?gm&scene=cave&lr=abc (not a number) ignored: R 130",
+   "pass": true,
+   "value": [
+    130,
+    true
+   ]
+  },
+  {
+   "check": "L6 ?lr=130 (no GM) ignored: R 72, button hidden",
+   "pass": true,
+   "value": [
+    72,
+    false
+   ]
+  },
+  {
+   "check": "L7 FPS at R 160 >= 90 % of R 72 (same build, 3 s each)",
+   "pass": true,
+   "value": {
+    "72": 60.6,
+    "160": 60.3
+   }
+  },
+  {
+   "check": "L8 page errors 0",
+   "pass": true,
+   "value": []
+  }
+ ],
+ "passed": 13,
+ "total": 13
+}

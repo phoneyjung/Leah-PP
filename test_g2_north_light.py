@@ -14,7 +14,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = open(os.path.join(HERE, 'pilot-g2-motion.html'), encoding='utf-8').read()
 CHECK = []; R = {'meta': {'viewport': [844, 390], 'dpr': 2.625, 'new': PN, 'old': PO, 'sim': PS}}
 def ok(name, cond, val): CHECK.append({'check': name, 'pass': bool(cond), 'value': val}); print(('PASS ' if cond else 'FAIL ') + name, flush=True)
-URL = lambda port, extra='': 'http://127.0.0.1:%s/pilot-g2-motion.html?gm%s' % (port, extra)
+URL = lambda port, extra='': 'http://127.0.0.1:%s/pilot-g2-motion.html?gm&lr=72%s' % (port, extra)   # v1.2: &lr=72 pins the light size the O13 old/sim pages use (default is 130 since 30 Oct; the size itself: test_g2_lantern_radius.py)
 LIB = """window.__M={
  h(D){let a=2166136261>>>0,b=0x9747b28c;for(let i=0;i<D.length;i++){a=Math.imul(a^D[i],16777619)>>>0;b=Math.imul(b^D[i],0x01000193^0x2f)>>>0;b=(b<<13|b>>>19)>>>0}return a.toString(16).padStart(8,'0')+b.toString(16).padStart(8,'0')},
  set(o){const P=PT;P.pause(true);P.set(Object.assign({pos:{x:160,y:120},t:0,lpos:null,ldir:null,lhist:null,zoom:1,clean:false,blinkNow:false,guides:false,moving:false,mv:null},o))},

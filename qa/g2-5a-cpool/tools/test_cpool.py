@@ -30,7 +30,7 @@ with sync_playwright() as p:
         for miss in (False, True):
             pg = b.new_page(viewport={'width': 844, 'height': 390}, device_scale_factor=2.625); e = []; pg.on('pageerror', lambda x, e=e: e.append(str(x)))
             if miss: pg.route('**/c2-held-lantern_L0-S-trial-light.png', lambda r: r.abort())
-            pg.goto('http://127.0.0.1:%s/pilot-g2-motion.html?gm' % port); pg.wait_for_function('PT.ST.ok.walkhold && PT.FX.glow && PT.ST.last', timeout=15000)
+            pg.goto('http://127.0.0.1:%s/pilot-g2-motion.html?gm&lr=72' % port); pg.wait_for_function('PT.ST.ok.walkhold && PT.FX.glow && PT.ST.last', timeout=15000)
             res[(tag, miss)] = pg.evaluate(RUN, {'dirs': DIRS}); errs['%s %s' % (tag, 'light missing' if miss else 'files ok')] = e
             if tag == 'B' and not miss: trans = pg.evaluate(TRANS)
             pg.close()

@@ -18,7 +18,7 @@ PORT, OUT = sys.argv[1], sys.argv[2]; OLD = sys.argv[3] if len(sys.argv) > 3 els
 HERE = os.path.dirname(os.path.abspath(__file__))
 src = open(os.path.join(HERE, 'qa_asset13.py')).read(); ns = {'math': math}; exec(src[src.index('def lab'):src.index('def hexc')], ns); de00 = ns['de00']
 DIRS = ['S', 'SE', 'E', 'NE', 'N', 'NW', 'W', 'SW']; HOLD = [d for d in DIRS if d != 'N']; DPR = 2.625
-URL = 'http://127.0.0.1:%s/pilot-g2-motion.html?gm' % PORT
+URL = 'http://127.0.0.1:%s/pilot-g2-motion.html?gm&lr=72' % PORT   # v2.5: &lr=72 = the light size these checks were written for (GM default 130 since 30 Oct; the size: test_g2_lantern_radius.py)
 BASE = 'c2-held-lantern_L0-S-trial'
 SIGNAL = {'gold #FFC857': (0xFF, 0xC8, 0x57), 'cyan #5FE0FF': (0x5F, 0xE0, 0xFF)}
 R = {'meta': {'viewport': [844, 390], 'dpr': DPR, 'page': 'pilot-g2-motion.html?gm', 'lantern': 'Codex fix4 44d2b62 (S cell in all 8 columns = SIZE PREVIEW ONLY)'}}; CHECK = []
