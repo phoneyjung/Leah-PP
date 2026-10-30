@@ -1,0 +1,252 @@
+<title>Lantern Pilot GM</title>
+<!-- published copy of pilot-g2-motion.html @ claude/g2-pilot e53b6cc · only changes: wrapper tags removed, title, GM + cave on by default (artifacts get no ?query) -->
+<style>
+html,body{margin:0;height:100%;overflow:hidden;background:#e8e6f0;font:12px system-ui,sans-serif;touch-action:none}
+canvas{position:fixed;inset:0;width:100%;height:100%;image-rendering:pixelated}
+#ui{position:fixed;left:6px;top:6px;display:flex;gap:4px;flex-wrap:wrap;max-width:70%}
+#ui button{font:12px system-ui;padding:6px 8px;border-radius:6px;border:1px solid #888;background:#fff}
+#ui button.on{background:#ffd76a}
+#pad{position:fixed;right:10px;bottom:10px;display:grid;grid-template-columns:repeat(3,40px);gap:4px}
+#pad button{height:40px;font-size:14px}
+#fpsbox{position:fixed;bottom:calc(148px + env(safe-area-inset-bottom,0px));right:max(10px,env(safe-area-inset-right,0px));max-width:60%;padding:6px 8px;border-radius:6px;border:1px solid #888;background:#fff;color:#111;font:12px system-ui;text-align:right;line-height:1.35}
+#fpsbox.run{background:#ffd76a}
+</style>
+<canvas id="cv"></canvas>
+<div id="ui">
+ <button id="bOff">Offset B (ตามตาราง) / table</button>
+ <button id="bZoom">ซูม 100% / zoom</button>
+ <button id="bBg">พื้นสว่าง / light</button>
+ <button id="bTag">ป้าย: เท้า / tag: feet</button>
+ <button id="bGuide">เส้นช่วย / guides</button>
+ <button id="bHold">ถือตะเกียง / hold</button>
+ <button id="bEase">ตะเกียงหน่วง / ease</button>
+ <button id="bPow" style="display:none">พลัง / power</button>
+ <button id="bFx" style="display:none">Glow+C</button>
+</div>
+<div id="pad"></div>
+<button id="fpsbox" type="button">FPS –<br>กดเพื่อวัด 18 วิ</button>
+<script>
+// G2 Pilot motion harness (Claude · 16 Oct 2569). Separate test page: no index.html / sw.js / save / Firebase.
+// Draws the locked c2 sprites as drawn (no recolour - not part of this test) following DESIGN_CHAR2_RENDER_CONTRACT.md.
+// G2.2b hold mode (?hold): walk_hold sheet + stand-in Set-08 L0 lantern at the measured hand anchors (c2-pilot-hold-anchors.json),
+// camera-side hand (D-HAND), N draws no lantern, lantern in front + fist pixels redrawn over the ring, D-EASE <= 3 art px per 100 ms per axis
+// (default step ease = D-EASE-STEP, owner 17 Oct; smooth and snap stay selectable for comparison).
+// No rotation, no scaling of the lantern; Pilot only (not index.html / sw.js / save).
+// G2.5a GM lantern (?gm · owner 25 Oct 2569 ~11:0x): the accepted L0 lantern S (Codex fix4 44d2b62, c2-held-lantern_L0-S-trial*) replaces the Set-08
+// stand-in, with its light layer, power 100/50/10/0 %, Glow (lit only, behind the body) + C (visibility pool) and light / dark / cave scenes.
+// SIZE PREVIEW ONLY: the S cell is reused in all 8 columns at load (code composition, the asset files are untouched) until set 14 brings E/W.
+// Missing base png or json -> no lantern at all (never the Set-08 stand-in) · missing light layer -> no light and no glow. Without ?gm the page is unchanged.
+'use strict';
+const C=96, FEET=[48,94], DIRS=['S','SE','E','NE','N','NW','W','SW'];
+const DV={S:[0,1],SE:[1,1],E:[1,0],NE:[1,-1],N:[0,-1],NW:[-1,-1],W:[-1,0],SW:[-1,1]};
+const OFF_TABLE={S:0,SE:0,E:3,NE:1,N:1,NW:-1,W:-1,SW:0};          // PILOT TEST ONLY (owner 16 Oct) · W -1 (formula -2) + shadow follows: Claude decision under team rule 0.2 after measurement
+const ST={off:true,shadowFollow:true,zoom:1,dark:false,tag:'feet',guides:false,dir:'S',anim:'idle',fi:0,t:0,blinkAt:4000,pos:{x:160,y:120},moving:false,mv:null,
+  log:[],img:{},anc:null,ok:{walk:false,idle:false,anc:false,walkhold:false,lantern:false,hold:false},
+  hold:false,ease:true,easeStep:true,lpos:null,ldir:null,lhist:null,lclock:0,   // default = step ease (owner 17 Oct ~01:3x, D-EASE-STEP)
+  gm:false,power:100,fx:true,scene:'light',lanHang:null,gmFiles:{base:false,light:false,json:false}};   // GM lantern (?gm): power %, Glow+C on/off, scene light/dark/cave
+const EASE_PX_PER_MS=0.03, EASE_MAX=3, EASE_WIN=120, LAN_HANG=[16,6], LAN_CELL=32;   // step ease looks back 120 ms = 100 ms rule + 20 ms for frame-time jitter           // D-EASE: 3 art px per 100 ms · stand-in lantern hangs from its ring centre (16,6)
+const WALL={x:200,y:60,w:16,h:120};                                 // simple collision box (world px) to prove offset never moves world/collision
+const IDLE_LOOP=[0,1,2,1], WALK_MS=100, IDLE_MS=200, SPEED=48;     // px per second (art px)
+const cv=document.getElementById('cv'), g=cv.getContext('2d');
+function load(src){return new Promise(r=>{const i=new Image();i.onload=()=>r(i);i.onerror=()=>r(null);i.src=src})}
+// --- per-frame geometry from the real pixels (body centre rows 52-86, contact rows 92-94, head rows<=50)
+const GEO={};
+function geo(img,anim,nf){const c=document.createElement('canvas');c.width=img.width;c.height=img.height;const x=c.getContext('2d');x.drawImage(img,0,0);
+  const D=x.getImageData(0,0,img.width,img.height).data;GEO[anim]={};
+  DIRS.forEach((d,i)=>{GEO[anim][d]=[];for(let k=0;k<nf;k++){let bs=0,bn=0,cs=0,cn=0,top=99,hs=0,hn=0,cmin=99,cmax=-1;
+    for(let y=0;y<C;y++)for(let xx=0;xx<C;xx++){const a=D[((i*C+y)*img.width+k*C+xx)*4+3];if(!a)continue;if(y<top)top=y;
+      if(y>=52&&y<=86){bs+=xx;bn++}if(y>=92&&y<=94){cs+=xx;cn++;cmin=Math.min(cmin,xx);cmax=Math.max(cmax,xx)}if(y<=50){hs+=xx;hn++}}
+    GEO[anim][d].push({body:bs/bn,contact:cn?cs/cn:null,cmin,cmax,top,head:hs/hn})}})}
+// W idle code breathing B (contract section 5): rows 0..61 up 1 px in f3, row 62 repeats - applied on a copy at load
+function breatheW(img){const c=document.createElement('canvas');c.width=img.width;c.height=img.height;const x=c.getContext('2d');x.drawImage(img,0,0);
+  const w=DIRS.indexOf('W'),cut=62,k=2,sx=k*C,sy=w*C;const cell=x.getImageData(sx,sy,C,C);x.clearRect(sx,sy,C,C);
+  const up=document.createElement('canvas');up.width=C;up.height=C;up.getContext('2d').putImageData(cell,0,0);
+  x.drawImage(up,0,1,C,cut,sx,sy,C,cut);x.drawImage(up,0,cut,C,C-cut,sx,sy+cut,C,C-cut);return c}
+async function boot(){
+  const [w,i,wh,ln]=await Promise.all([load('c2-pilot-kid4-walk.png'),load('c2-pilot-kid4-idleanim.png'),load('c2-pilot-kid4-walkhold.png'),ST.gm?gmLantern():load('kid-lantern.png')]);
+  try{ST.hanc=await (await fetch('c2-pilot-hold-anchors.json')).json();ST.ok.hold=!!(ST.hanc&&ST.hanc.walk_hold&&ST.hanc.idle_hold)}catch(e){ST.hanc=null}
+  if(wh){ST.img.walkhold=wh;ST.ok.walkhold=true}
+  if(ln){ST.img.lantern=ln;ST.ok.lantern=true}
+  if(ST.gm){ST.img.caveFloor=await load('cave-floor.jpg');buildFx()}
+  try{ST.anc=await (await fetch('c2-pilot-anchors.json')).json();ST.ok.anc=true;const dx=ST.anc.renderOffset&&ST.anc.renderOffset.dx;if(dx&&DIRS.every(d=>Number.isInteger(dx[d])))ST.offTable=Object.assign({},dx)}catch(e){ST.anc=null}
+  if(ST.offWq!=null&&Number.isFinite(ST.offWq))ST.offTable=Object.assign({},ST.offTable||OFF_TABLE,{W:ST.offWq});   // ?offW=… test override, applied after the JSON
+  // name-tag height: highest head of the whole character (all anims, all dirs) -> the tag never moves up/down
+  ST.tagTop=ST.anc?Math.min(...['idle','walk'].flatMap(a=>DIRS.flatMap(d=>(ST.anc.frames[a]&&ST.anc.frames[a][d]||[]).map(f=>f.head_top[1])))):8;
+  if(w){ST.img.walk=w;ST.ok.walk=true;geo(w,'walk',6)}
+  if(i){ST.img.idle=breatheW(i);ST.ok.idle=true;geo(ST.img.idle,'idle',4)}
+  if(!i&&w){ST.img.idle=null}                                       // fallback (contract section 7): idle missing -> walk f1
+  buildFists();
+  resize();sync();requestAnimationFrame(loop)}
+// ---------- GM lantern: files, 8-column sheets (S cell reused), overlays built once at art resolution (stepped bands, no ctx.filter) ----------
+const GM_BASE='c2-held-lantern_L0-S-trial', POWERS=[100,50,10,0];
+const GM_POW={100:{light:1,glow:1,hole:1},50:{light:1,glow:0.5,hole:0.5},10:{light:0.35,glow:0,hole:0},0:{light:0,glow:0,hole:0}};   // plan G2.5 section 6: 50 % = half glow · 10 % = glint in the glass only · 0 % = dark glass, no glow
+function sheet8(img){const c=document.createElement('canvas');c.width=8*LAN_CELL;c.height=LAN_CELL;const x=c.getContext('2d');for(let k=0;k<8;k++)x.drawImage(img,0,0,LAN_CELL,LAN_CELL,k*LAN_CELL,0,LAN_CELL,LAN_CELL);return c}
+async function gmLantern(){
+  const [b,l]=await Promise.all([load(GM_BASE+'.png'),load(GM_BASE+'-light.png')]);let j=null;
+  try{j=await (await fetch(GM_BASE+'.json')).json()}catch(e){j=null}
+  const grip=j&&Array.isArray(j.grip)&&j.grip.length===2&&j.grip.every(v=>Number.isInteger(v)&&v>=0&&v<LAN_CELL)?j.grip:null;
+  ST.gmFiles={base:!!b,light:!!l,json:!!grip};
+  if(!b||!grip||b.width!==LAN_CELL||b.height!==LAN_CELL)return null;            // base or json missing / wrong -> no lantern at all (spec 13 section 6)
+  ST.lanHang=grip;if(l&&l.width===LAN_CELL&&l.height===LAN_CELL)ST.img.lanternLight=sheet8(l);
+  return sheet8(b)}
+const FX={};const DARK_A=0.86, DARK_RGB='8,6,18';
+const GLOW={R:40,bands:[[8,0.26],[14,0.20],[20,0.15],[27,0.10],[34,0.06],[40,0.03]],col:[255,179,107]};   // stage-1 experiment values (ChatGPT scored B2+Glow+C with them)
+const LHOLE={R:72,bands:[[20,1],[32,0.85],[44,0.65],[56,0.42],[66,0.22],[72,0.1]]};                     // cave lantern light radius = PLACEHOLDER, not a game rule
+const NHOLE={cx:48,cy:84,k:1};   // O13 option D, candidate A (29 Oct): cave + facing N + held lit lantern -> the lantern stays hidden (D-HAND) but its light still opens the darkness: same LHOLE stamp, centre = feet [48,94] 10 px up (P2), alpha = power-table hole x k · GM ?nk=0..1 changes k (0 = the old N)
+const POOL={cx:44,cy:66,rx:30,ry:34,bands:[[0.55,1],[0.8,0.62],[1,0.3]]}, POOL_FLAT={col:[74,68,102],a:0.55}, POOL_CAVE={a:0.45};
+function mk(w,h){const c=document.createElement('canvas');c.width=w;c.height=h;return c}
+function stampRadial(R,bands,rgb){const c=mk(2*R+1,2*R+1),x=c.getContext('2d'),im=x.createImageData(2*R+1,2*R+1);
+  for(let v=0;v<=2*R;v++)for(let u=0;u<=2*R;u++){const b=bands.find(b=>Math.hypot(u-R,v-R)<=b[0]);if(!b)continue;const o=(v*(2*R+1)+u)*4;
+    im.data[o]=rgb[0];im.data[o+1]=rgb[1];im.data[o+2]=rgb[2];im.data[o+3]=Math.round(255*b[1])}x.putImageData(im,0,0);return c}
+function stampPool(rgb,a){const c=mk(C,C),x=c.getContext('2d'),im=x.createImageData(C,C);
+  for(let v=0;v<C;v++)for(let u=0;u<C;u++){const b=POOL.bands.find(b=>Math.hypot((u-POOL.cx)/POOL.rx,(v-POOL.cy)/POOL.ry)<=b[0]);if(!b)continue;const o=(v*C+u)*4;
+    im.data[o]=rgb[0];im.data[o+1]=rgb[1];im.data[o+2]=rgb[2];im.data[o+3]=Math.round(255*b[1]*a)}x.putImageData(im,0,0);return c}
+function buildFx(){FX.glow=stampRadial(GLOW.R,GLOW.bands,GLOW.col);FX.lhole=stampRadial(LHOLE.R,LHOLE.bands,[0,0,0]);
+  FX.poolFlat=stampPool(POOL_FLAT.col,POOL_FLAT.a);FX.poolHole=stampPool([0,0,0],POOL_CAVE.a);FX.dark=mk(1,1)}   // cave darkness layer: resized to the screen (in art px) when drawn
+function gmPow(){return GM_POW[ST.power]||GM_POW[0]}
+function gmLit(){return ST.gm&&!!ST.img.lanternLight&&gmPow().light>0}
+// fist overlay canvases: only the fist pixels of each frame (copied from the sheet itself) -> drawn over the lantern ring
+const FIST={};
+function buildFists(){if(!ST.hanc)return;[['idle','idle_hold',ST.img.idle,4],['walk','walk_hold',ST.img.walkhold,6]].forEach(([a,key,img,nf])=>{if(!img)return;FIST[a]={};
+  const c=document.createElement('canvas');c.width=img.width;c.height=img.height;const x=c.getContext('2d');x.drawImage(img,0,0);
+  DIRS.forEach((d,i)=>{FIST[a][d]=[];for(let k=0;k<nf;k++){const fr=(ST.hanc[key][d]||[])[k];if(!fr||!fr.fist){FIST[a][d].push(null);continue}
+    const bx=Math.min(...fr.fist.map(p=>p[0])),by=Math.min(...fr.fist.map(p=>p[1])),bw=Math.max(...fr.fist.map(p=>p[0]))-bx+1,bh=Math.max(...fr.fist.map(p=>p[1]))-by+1;
+    const o=document.createElement('canvas');o.width=bw;o.height=bh;const ox=o.getContext('2d');fr.fist.forEach(([fx,fy])=>ox.drawImage(c,k*C+fx,i*C+fy,1,1,fx-bx,fy-by,1,1));FIST[a][d].push({c:o,x:bx,y:by,w:bw,h:bh})}})})}
+function holdOn(){return ST.hold&&ST.ok.hold&&ST.ok.lantern&&ST.ok.walkhold&&ST.ok.idle}   // spec 14.8 / QG-2b #10: walk_hold, idle, lantern or anchors missing -> old sheets, no lantern at all
+function lanternTarget(){if(!holdOn())return null;const fr=(ST.hanc[ST.anim==='walk'?'walk_hold':'idle_hold'][ST.dir]||[])[curFrame()];return fr&&fr.anchor?fr.anchor:null}
+function easeLantern(dt){const t=lanternTarget();if(!t){ST.lpos=null;ST.ldir=null;ST.lhist=null;return}
+  const now=ST.lclock=(ST.lclock||0)+dt;
+  if(!ST.lpos||ST.ldir!==ST.dir||!ST.ease){ST.lpos=[t[0],t[1]];ST.ldir=ST.dir;ST.lhist=[{t:now,p:[t[0],t[1]]}];return}   // direction change = hand switch -> snap
+  ST.lhist=(ST.lhist||[]).filter(h=>now-h.t<=EASE_WIN);const H=ST.lhist.length?ST.lhist:[{p:ST.lpos.map(Math.round)}];
+  const lim=a=>[Math.max(...H.map(h=>h.p[a]))-EASE_MAX,Math.min(...H.map(h=>h.p[a]))+EASE_MAX];   // drawn px allowed by every position drawn in the last EASE_WIN ms
+  if(ST.easeStep){                                   // step ease: jump as far as the window allows (whole px) -> smallest gap to the fist
+    ST.lpos=[0,1].map(a=>{const [lo,hi]=lim(a);return Math.min(hi,Math.max(lo,t[a]))})}
+  else{const m=EASE_PX_PER_MS*dt,cl=v=>Math.max(-m,Math.min(m,v));ST.lpos=[ST.lpos[0]+cl(t[0]-ST.lpos[0]),ST.lpos[1]+cl(t[1]-ST.lpos[1])];   // smooth ease: 0.03 px/ms
+    [0,1].forEach(a=>{const [lo,hi]=lim(a),r=Math.round(ST.lpos[a]);if(r<lo||r>hi)ST.lpos[a]=Math.min(hi,Math.max(lo,r))})}   // guard: rounding + frame jitter never give 4 px in 100 ms
+  ST.lhist.push({t:now,p:ST.lpos.map(Math.round)})}
+function resize(){const dpr=window.devicePixelRatio||1;cv.width=Math.round(innerWidth*dpr);cv.height=Math.round(innerHeight*dpr)}
+addEventListener('resize',resize);
+function scale(){return Math.max(1,Math.round(cv.height/384))*ST.zoom}   // game formula (index.html: SC = max(1, round(h/384))): 3 at 100 %, 2.25 at 75 % on 844x390 @2.625 · never 0 on a canvas under 192 px (O3)
+function offX(d){return ST.off?(ST.offTable||OFF_TABLE)[d]:0}
+const BLINK_DIRS=['S','SE','E','W','SW'];
+function curFrame(){if(ST.anim==='walk')return ST.fi%6;const li=ST.fi%4;return li===3&&ST.blinkNow&&BLINK_DIRS.includes(ST.dir)?3:IDLE_LOOP[li]}
+function cam(){const s=scale();return{s,ox:Math.round(cv.width/2-ST.pos.x*s),oy:Math.round(cv.height/2-ST.pos.y*s)}}
+function blocked(x,y){return x>WALL.x-6&&x<WALL.x+WALL.w+6&&y>WALL.y&&y<WALL.y+WALL.h}
+function step(dt){
+  ST.t+=dt;
+  if(ST.moving&&ST.mv){const [vx,vy]=DV[ST.dir],n=Math.hypot(vx,vy),nx=ST.pos.x+vx/n*SPEED*dt/1000,ny=ST.pos.y+vy/n*SPEED*dt/1000;
+    if(!blocked(nx,ny)){ST.pos.x=nx;ST.pos.y=ny}}
+  const ms=ST.anim==='walk'?WALK_MS:IDLE_MS;
+  if(ST.anim==='idle')ST.blinkClock=(ST.blinkClock||0)+dt;
+  while(ST.t>=ms){ST.t-=ms;ST.fi++;
+    if(ST.anim==='idle'){const li=ST.fi%4;ST.blinkNow=false;                       // blink = the f2 slot after f3 (loop index 3), every 3-6 s
+      if(li===3&&ST.blinkClock>=ST.blinkAt){ST.blinkNow=true;ST.blinkClock=0;ST.blinkAt=3000+Math.random()*2200;ST.blinks=(ST.blinks||[]).concat([performance.now()])}}}
+  easeLantern(dt)}
+function draw(){
+  if(ST.gm)ST.dark=ST.scene!=='light';const cave=ST.gm&&ST.scene==='cave';
+  const {s,ox,oy}=cam(),bg=ST.clean?'#00ff00':cave?'#14121c':ST.dark?'#1e1b2e':'#e8e6f0';g.imageSmoothingEnabled=false;g.fillStyle=bg;g.fillRect(0,0,cv.width,cv.height);
+  const fx=ox+ST.pos.x*s, fy=oy+ST.pos.y*s;                         // logical feet on screen
+  if(!ST.clean){
+  if(cave&&ST.img.caveFloor)for(let wy=Math.floor(-oy/s/256)*256;oy+wy*s<cv.height;wy+=256)for(let wx=Math.floor(-ox/s/256)*256;ox+wx*s<cv.width;wx+=256)g.drawImage(ST.img.caveFloor,0,0,256,256,ox+wx*s,oy+wy*s,256*s,256*s);   // floor tiles cover the whole screen at any zoom
+  // ground grid (world) - 32 px tiles
+  if(!cave){g.strokeStyle=ST.dark?'#2c2840':'#d6d3e2';g.lineWidth=1;for(let x=0;x<=400;x+=32){g.beginPath();g.moveTo(ox+x*s,oy);g.lineTo(ox+x*s,oy+300*s);g.stroke()}
+  for(let y=0;y<=300;y+=32){g.beginPath();g.moveTo(ox,oy+y*s);g.lineTo(ox+400*s,oy+y*s);g.stroke()}}
+  g.fillStyle=ST.dark?'#4a4060':'#b9b2cc';g.fillRect(ox+WALL.x*s,oy+WALL.y*s,WALL.w*s,WALL.h*s);
+  // shadow under the drawn sprite: logical feet + renderOffset when shadowFollow (B2) · world position / collision never use the offset
+  const shx=fx+(ST.shadowFollow?offX(ST.dir)*s:0);g.fillStyle='rgba(40,50,40,0.35)';g.beginPath();g.ellipse(shx,fy,14*s,3*s,0,0,7);g.fill();}
+  const d=ST.dir,k=curFrame();let img,kk;
+  const H=holdOn();
+  if(ST.anim==='walk'&&H){img=ST.img.walkhold;kk=k}
+  else if(ST.anim==='walk'){img=ST.img.walk||ST.img.idle;kk=ST.img.walk?k:0}        // walk missing -> idle f1 slides along the path (contract 7)
+  else{img=ST.img.idle||ST.img.walk;kk=ST.img.idle?k:0}                          // idle missing -> walk f1
+  const dx=offX(d),sx=Math.round(fx-FEET[0]*s+dx*s),sy=Math.round(fy-FEET[1]*s);
+  const t=H?lanternTarget():null,HG=ST.lanHang||LAN_HANG;
+  if(t&&(!ST.lpos||ST.ldir!==d)){ST.lpos=[t[0],t[1]];ST.ldir=d;ST.lhist=[{t:ST.lclock||0,p:[t[0],t[1]]}]}   // snap in draw is part of the history too
+  const LW=t?[ST.pos.x-FEET[0]+dx+Math.round(ST.lpos[0])-HG[0],ST.pos.y-FEET[1]+Math.round(ST.lpos[1])-HG[1]]:null;   // lantern cell origin in world art px (glow / cave light)
+  const P_=gmPow(),lit=gmLit();ST.gmDraw={glow:false,pool:false,light:0,caveHole:0};
+  const cOn=ST.gm&&ST.fx&&!!t&&lit&&d!=='N';   // C pool (owner choice ค, 26 Oct): only with a held, drawn, lit lantern (lantern + light files ok, power > 0), not facing N, Glow+C on
+  if(ST.gm&&!ST.clean&&ST.fx){   // behind the body: C pool on the flat dark floor, then the lit-only warm Glow (screen) - never over the face or fist
+    if(ST.scene==='dark'&&cOn){g.drawImage(FX.poolFlat,0,0,C,C,sx,sy,C*s,C*s);ST.gmDraw.pool=true}
+    if(lit&&LW&&P_.glow>0){g.globalAlpha=P_.glow;g.globalCompositeOperation='screen';const gx=LW[0]+16-GLOW.R,gy=LW[1]+15-GLOW.R;
+      g.drawImage(FX.glow,0,0,2*GLOW.R+1,2*GLOW.R+1,ox+gx*s,oy+gy*s,(2*GLOW.R+1)*s,(2*GLOW.R+1)*s);g.globalCompositeOperation='source-over';g.globalAlpha=1;ST.gmDraw.glow=true}}
+  if(img)g.drawImage(img,kk*C,DIRS.indexOf(d)*C,C,C,sx,sy,C*s,C*s);else{g.fillStyle='#c84';g.fillRect(fx-10*s,fy-40*s,20*s,40*s)}
+  // lantern (G2.2b): in front of the body, then the fist pixels again over the ring · positions in art px of the cell, so renderOffset applies
+  let lan=null,lanXY=null;
+  if(t){const lx=Math.round(ST.lpos[0]),ly=Math.round(ST.lpos[1]),di=DIRS.indexOf(d);lanXY=[di,sx+(lx-HG[0])*s,sy+(ly-HG[1])*s];
+    g.drawImage(ST.img.lantern,di*LAN_CELL,0,LAN_CELL,LAN_CELL,lanXY[1],lanXY[2],LAN_CELL*s,LAN_CELL*s);
+    if(lit){g.globalAlpha=P_.light;g.drawImage(ST.img.lanternLight,di*LAN_CELL,0,LAN_CELL,LAN_CELL,lanXY[1],lanXY[2],LAN_CELL*s,LAN_CELL*s);g.globalAlpha=1;ST.gmDraw.light=P_.light}   // light layer on top, dimmed by power
+    const fo=!ST.nofist&&FIST[ST.anim]&&FIST[ST.anim][d]?FIST[ST.anim][d][kk]:null;if(fo)g.drawImage(fo.c,0,0,fo.w,fo.h,sx+fo.x*s,sy+fo.y*s,fo.w*s,fo.h*s);
+    lan={target:t.slice(),drawn:[lx,ly],off:Math.max(Math.abs(lx-t[0]),Math.abs(ly-t[1])),fist:!!fo}}
+  if(cave&&!ST.clean){   // cave darkness over the whole screen (follows the camera): holes for the lantern light (lit, scaled by power) and for C; emissive light px are not darkened
+    const ax0=Math.floor(-ox/s)-1,ay0=Math.floor(-oy/s)-1,aw=Math.ceil(cv.width/s)+3,ah=Math.ceil(cv.height/s)+3,DX=ox+ax0*s,DY=oy+ay0*s;   // layer origin in world art px and on screen
+    const dc=FX.dark;if(dc.width!==aw||dc.height!==ah){dc.width=aw;dc.height=ah}const x=dc.getContext('2d');x.imageSmoothingEnabled=false;
+    x.globalCompositeOperation='source-over';x.clearRect(0,0,aw,ah);x.fillStyle='rgba('+DARK_RGB+','+DARK_A+')';x.fillRect(0,0,aw,ah);
+    x.globalCompositeOperation='destination-out';
+    if(ST.fx&&lit&&lanXY&&P_.hole>0){x.globalAlpha=P_.hole;x.drawImage(FX.lhole,Math.round((lanXY[1]-DX)/s)+16-LHOLE.R,Math.round((lanXY[2]-DY)/s)+15-LHOLE.R);x.globalAlpha=1;ST.gmDraw.caveHole=P_.hole}
+    if(d==='N'&&H&&!lanXY&&ST.fx&&lit&&P_.hole>0&&NHOLE.k>0){const a_=P_.hole*NHOLE.k;x.globalAlpha=a_;x.drawImage(FX.lhole,Math.round((sx-DX)/s)+NHOLE.cx-LHOLE.R,Math.round((sy-DY)/s)+NHOLE.cy-LHOLE.R);x.globalAlpha=1;ST.gmDraw.caveHole=a_;ST.gmDraw.nHole=true}   // O13: N light (no lantern, Glow or C at N)
+    if(cOn){x.drawImage(FX.poolHole,Math.round((sx-DX)/s),Math.round((sy-DY)/s));ST.gmDraw.pool=true}
+    x.globalCompositeOperation='source-over';
+    g.drawImage(dc,0,0,aw,ah,DX,DY,aw*s,ah*s);
+    if(lit&&lanXY){   // the fist stays in front of the light: cut the fist px out of the light cell before drawing it again
+      const lc=FX.lcell||(FX.lcell=mk(LAN_CELL,LAN_CELL)),lx_=lc.getContext('2d');lx_.globalCompositeOperation='source-over';lx_.clearRect(0,0,LAN_CELL,LAN_CELL);
+      lx_.drawImage(ST.img.lanternLight,lanXY[0]*LAN_CELL,0,LAN_CELL,LAN_CELL,0,0,LAN_CELL,LAN_CELL);
+      const fo=!ST.nofist&&FIST[ST.anim]&&FIST[ST.anim][d]?FIST[ST.anim][d][kk]:null;
+      if(fo){lx_.globalCompositeOperation='destination-out';lx_.drawImage(fo.c,fo.x-Math.round((lanXY[1]-sx)/s),fo.y-Math.round((lanXY[2]-sy)/s));lx_.globalCompositeOperation='source-over'}
+      g.globalAlpha=P_.light;g.drawImage(lc,0,0,LAN_CELL,LAN_CELL,lanXY[1],lanXY[2],LAN_CELL*s,LAN_CELL*s);g.globalAlpha=1}}
+  // name tag: policy 'feet' = x from logical feet, y = highest head top of this anim+dir; policy 'head' = head_top of this frame (+offset)
+  const an=ST.anc&&ST.anc.frames[ST.anim]?ST.anc.frames[ST.anim][d]:null, fr=an?an[kk]:null;
+  let tx,ty;if(ST.tag==='feet'){tx=fx;ty=fy+(ST.tagTop-FEET[1]-4)*s}
+  else{tx=fr?fx+(fr.head_top[0]-FEET[0]+dx)*s:fx;ty=fr?fy+(fr.head_top[1]-FEET[1]-4)*s:fy-90*s}
+  if(!ST.clean){g.font=Math.round(5*s)+'px system-ui';g.textAlign='center';g.textBaseline='bottom';const label='ลีอา Leah';const tw=g.measureText(label).width;
+  g.fillStyle='rgba(0,0,0,.55)';g.fillRect(Math.round(tx-tw/2-2*s),Math.round(ty-6*s),Math.round(tw+4*s),Math.round(6*s));g.fillStyle='#fff';g.fillText(label,Math.round(tx),Math.round(ty-0.6*s));}
+  ST.last={s,fx,fy,sx,sy,dx,dir:d,anim:ST.anim,frame:kk,tag:[tx,ty],headTop:fr?[fx+(fr.head_top[0]-FEET[0]+dx)*s,fy+(fr.head_top[1]-FEET[1])*s]:null,pos:{...ST.pos},lantern:lan,sheet:img===ST.img.walkhold?'walkhold':img===ST.img.walk?'walk':img===ST.img.idle?'idle':null};
+  if(ST.gm&&!ST.clean){const fs=Math.round(11*(window.devicePixelRatio||1));g.font=fs+'px system-ui';g.textAlign='left';g.textBaseline='bottom';   // GM label: what this page shows
+    const t1=!ST.ok.lantern?'GM · ไฟล์ตะเกียงหายหรือไม่ถูกต้อง → ซ่อนตะเกียง / lantern files missing or invalid':!holdOn()?(ST.hold?'GM · ไฟล์ท่าถือไม่ครบ → ไม่ถือตะเกียง / hold files missing':'GM · มือว่าง / not holding'):'GM · ตะเกียงจริง L0 · ทุกทิศใช้ภาพทิศใต้ (S) ชั่วคราว / S image in every direction for now';
+    const t2=ST.ok.lantern&&holdOn()?(ST.img.lanternLight?'พลัง / power '+ST.power+'%':'ไม่มีชั้นแสง → ไม่มีแสง / no light layer')+' · '+(ST.fx?'แสงรอบตัว Glow+C เปิด':'แสงรอบตัว Glow+C ปิด'):'';
+    g.fillStyle='rgba(0,0,0,.55)';const w_=Math.max(g.measureText(t1).width,g.measureText(t2).width)+fs;g.fillRect(4,cv.height-2.5*fs-8,w_,2.5*fs+4);
+    g.fillStyle='#fff';g.fillText(t1,4+fs/2,cv.height-1.2*fs-6);g.fillText(t2,4+fs/2,cv.height-6)}
+  ST.last.gm=ST.gm?{power:ST.power,fx:ST.fx,scene:ST.scene,lit:gmLit(),drawn:Object.assign({},ST.gmDraw)}:null;
+  if(ST.guides){g.strokeStyle='#e33';g.beginPath();g.moveTo(fx-6*s,fy);g.lineTo(fx+6*s,fy);g.moveTo(fx,fy-6*s);g.lineTo(fx,fy+6*s);g.stroke();
+    if(ST.last.headTop){g.strokeStyle='#36f';g.strokeRect(ST.last.headTop[0]-2*s,ST.last.headTop[1]-2*s,4*s,4*s)}}
+}
+function loop(ts){const now=ts||0,dt=Math.min(100,now-(ST.lt||now));ST.lt=now;if(!ST.paused)step(dt);draw();requestAnimationFrame(loop)}
+// --- controls (keyboard + pad) and a test API
+function setDir(d){ST.dir=d}
+function walk(d){ST.dir=d;if(ST.anim!=='walk'){ST.anim='walk';ST.fi=0;ST.t=0}ST.moving=true;ST.mv=true}
+function stop(){if(ST.anim==='walk'){ST.anim='idle';ST.fi=2;ST.t=0}ST.moving=false;ST.mv=null}   // contract: stop -> idle starts at f3 (loop index 2)
+const pad=document.getElementById('pad');['NW','N','NE','W','·','E','SW','S','SE'].forEach(d=>{const b=document.createElement('button');b.textContent=d;
+  if(d==='·'){b.onpointerdown=stop}else{b.onpointerdown=()=>walk(d);b.onpointerup=b.onpointerleave=stop}pad.appendChild(b)});
+const KEYS={ArrowUp:'N',ArrowDown:'S',ArrowLeft:'W',ArrowRight:'E'};const held=new Set();
+addEventListener('keydown',e=>{if(!KEYS[e.key])return;held.add(KEYS[e.key]);kd()});addEventListener('keyup',e=>{if(!KEYS[e.key])return;held.delete(KEYS[e.key]);kd()});
+function kd(){const n=held.has('N'),s=held.has('S'),w=held.has('W'),e=held.has('E');const d=(n?'N':s?'S':'')+(e?'E':w?'W':'');d?walk(d):stop()}
+const tg=(id,f)=>{const b=document.getElementById(id);b.onclick=()=>{f();sync()}};
+tg('bHold',()=>{ST.hold=!ST.hold;ST.lpos=null});tg('bEase',()=>{if(ST.ease&&!ST.easeStep)ST.easeStep=true;else if(ST.ease){ST.ease=false;ST.easeStep=false}else ST.ease=true});   // smooth -> step -> snap
+tg('bOff',()=>ST.off=!ST.off);tg('bZoom',()=>ST.zoom=ST.zoom===1?0.75:1);tg('bBg',()=>{if(ST.gm)ST.scene=ST.scene==='light'?'dark':ST.scene==='dark'?'cave':'light';else ST.dark=!ST.dark});   // fix 25 Oct: these 5 buttons were commented out by the line above · GM: light -> dark -> cave
+tg('bPow',()=>{ST.power=POWERS[(POWERS.indexOf(ST.power)+1)%POWERS.length]});tg('bFx',()=>{ST.fx=!ST.fx});tg('bTag',()=>ST.tag=ST.tag==='feet'?'head':'feet');tg('bGuide',()=>ST.guides=!ST.guides);
+function sync(){const B=(id,on,t)=>{const b=document.getElementById(id);b.classList.toggle('on',on);b.textContent=t}
+  ['bPow','bFx'].forEach(id=>{document.getElementById(id).style.display=ST.gm?'':'none'});B('bPow',ST.power>0,'พลัง / power '+ST.power+'%');B('bFx',ST.fx,ST.fx?'แสงรอบตัว Glow+C เปิด / on':'แสงรอบตัว Glow+C ปิด / off');
+  B('bOff',ST.off,ST.off?'Offset B (ตามตาราง) / table':'Offset A = 0');B('bZoom',ST.zoom===1,ST.zoom===1?'ซูม 100% / zoom':'ซูม 75% / zoom');
+  if(ST.gm)B('bBg',ST.scene!=='light',ST.scene==='cave'?'ถ้ำ / cave':ST.scene==='dark'?'พื้นมืด / dark':'พื้นสว่าง / light');else B('bBg',ST.dark,ST.dark?'พื้นมืด / dark':'พื้นสว่าง / light');B('bTag',ST.tag==='feet',ST.tag==='feet'?'ป้าย: เท้า / tag: feet':'ป้าย: หัว / tag: head');B('bGuide',ST.guides,'เส้นช่วย / guides');
+  B('bHold',ST.hold&&holdOn(),!ST.hold?'มือว่าง / no lantern':holdOn()?'ถือตะเกียง / hold':'ถือ: ไฟล์ไม่ครบ / files missing');B('bEase',ST.ease,!ST.ease?'ตะเกียงติดมือ / snap':ST.easeStep?'หน่วงเป็นจังหวะ / step':'หน่วงเรียบ / smooth')}
+const q=new URLSearchParams('gm&scene=cave');if(q.has('gm')){ST.gm=true;ST.hold=true;const pw=+q.get('power');if((q.get('power')||'')!==''&&POWERS.includes(pw))ST.power=pw;if(q.has('dark'))ST.scene='dark';if(['light','dark','cave'].includes(q.get('scene')))ST.scene=q.get('scene');if(q.has('nofx'))ST.fx=false}
+if(q.has('gm')&&/^\d*\.?\d+$/.test(q.get('nk')||'')){const v=+q.get('nk');if(v>=0&&v<=1)NHOLE.k=v}   // O13 GM try-out: ?nk=0.6 = candidate B · ?nk=0 = no N light · plain decimals 0..1 only, anything else is ignored
+if(q.has('off0'))ST.off=false;if(q.has('z75'))ST.zoom=0.75;if(q.has('dark'))ST.dark=true;if(q.has('guides'))ST.guides=true;if(q.get('tag')==='head')ST.tag='head';if(q.has('clean'))ST.clean=true;if(q.has('offW'))ST.offWq=+q.get('offW');if(q.has('shadowFixed'))ST.shadowFollow=false;if(q.has('hold'))ST.hold=true;if(q.has('nofist'))ST.nofist=true;if(q.has('snap'))ST.ease=false;if(q.has('stepease'))ST.easeStep=true;if(q.has('smoothease'))ST.easeStep=false;
+window.PT={FX,GLOW,LHOLE,NHOLE,POOL,GM_POW,POWERS,gmLit,ST,GEO,OFF_TABLE,DIRS,setDir,walk,stop,draw,scale,step,curFrame,lanternTarget,holdOn,easeLantern,pause:v=>ST.paused=v,set:(o)=>Object.assign(ST,o)};
+sync();boot();
+</script>
+<script>
+// FPS meter for the real phone (this published copy only, not in the repo page): same idea as test G11 / plan G2.5 #9
+// tap -> walk SE in the cave, power 100, Glow+C on, 3 s per phase: lantern off / on x 3 pairs -> median FPS and on/off %
+(function(){const box=document.getElementById('fpsbox');let n=0,t0=performance.now(),cur='–',busy=false,res='';
+ function tick(){n++;const now=performance.now();if(now-t0>=1000){cur=Math.round(n*1000/(now-t0));n=0;t0=now;if(!busy)box.innerHTML='FPS '+cur+'<br>'+(res||'กดเพื่อวัด 18 วิ')}requestAnimationFrame(tick)}requestAnimationFrame(tick);
+ const wait=ms=>new Promise(r=>setTimeout(r,ms));
+ const count=ms=>new Promise(r=>{let k=0;const a=performance.now();const f=()=>{k++;const b=performance.now();if(b-a<ms)requestAnimationFrame(f);else r(k*1000/(b-a))};requestAnimationFrame(f)});
+ box.onclick=async()=>{if(busy||!window.PT)return;busy=true;box.classList.add('run');const off=[],on=[];
+  try{for(let i=0;i<6;i++){const h=i%2===1;box.innerHTML='กำลังวัด '+(i+1)+'/6<br>'+(h?'เปิดตะเกียง':'ปิดตะเกียง')+' · อย่าแตะจอ';
+    PT.set({scene:'cave',power:100,fx:true,hold:h,lpos:null,ldir:null,pos:{x:160,y:120},zoom:1});PT.pause(false);PT.walk('SE');await wait(500);(h?on:off).push(await count(3000));PT.stop()}
+   const med=v=>v.slice().sort((a,b)=>a-b)[1],a=med(off),b=med(on),pct=Math.round(b/a*1000)/10;
+   res='ปิด '+a.toFixed(1)+' · เปิด '+b.toFixed(1)+'<br>= '+pct+'% '+(pct>=90?'ผ่าน (≥ 90%)':'ต่ำกว่า 90%');
+  }catch(e){res='วัดไม่สำเร็จ'}
+  PT.set({hold:true,pos:{x:160,y:120},lpos:null,ldir:null});busy=false;box.classList.remove('run');box.innerHTML='FPS '+cur+'<br>'+res};
+})();
+</script>
