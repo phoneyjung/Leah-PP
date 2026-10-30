@@ -1,0 +1,128 @@
+{
+ "ref128-1-style-kid.png": {
+  "size": [
+   128,
+   128
+  ],
+  "bbox": [
+   41,
+   44,
+   88,
+   127
+  ],
+  "alpha_values": [
+   0,
+   255
+  ]
+ },
+ "ref128-2-shape-cave.png": {
+  "size": [
+   128,
+   128
+  ],
+  "bbox": [
+   2,
+   6,
+   126,
+   128
+  ],
+  "alpha_values": [
+   0,
+   255
+  ]
+ },
+ "ref128-2-shape-tree.png": {
+  "size": [
+   128,
+   128
+  ],
+  "bbox": [
+   16,
+   4,
+   112,
+   125
+  ],
+  "alpha_values": [
+   0,
+   255
+  ]
+ },
+ "ref128-2-shape-lamp.png": {
+  "size": [
+   128,
+   128
+  ],
+  "bbox": [
+   44,
+   28,
+   74,
+   125
+  ],
+  "alpha_values": [
+   0,
+   255
+  ]
+ },
+ "ref64-2-shape-gate.png": {
+  "size": [
+   64,
+   64
+  ],
+  "bbox": [
+   2,
+   8,
+   62,
+   63
+  ],
+  "alpha_values": [
+   0,
+   255
+  ]
+ },
+ "ref64-1-style-kid.png": {
+  "size": [
+   64,
+   64
+  ],
+  "bbox": [
+   10,
+   4,
+   55,
+   64
+  ],
+  "alpha_values": [
+   0,
+   255
+  ]
+ },
+ "ref32-1-style-grass.png": {
+  "size": [
+   32,
+   32
+  ],
+  "bbox": [
+   0,
+   0,
+   32,
+   32
+  ],
+  "alpha_values": [
+   255
+  ]
+ },
+ "ref32-2-style-stone.png": {
+  "size": [
+   32,
+   32
+  ],
+  "bbox": [
+   0,
+   0,
+   32,
+   32
+  ],
+  "alpha_values": [
+   255
+  ]
+ }
+}

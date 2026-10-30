@@ -1,6 +1,6 @@
-# G2.4 — ฉากทดลอง + มอน 1 ชนิด (Claude · แผน v1 · 30 ต.ค. 2569)
+# G2.4 — ฉากทดลอง + มอน 1 ชนิด (Claude · แผน v1.2 · 30–31 ต.ค. 2569)
 
-**สถานะ:** แผน v1.1 (v1 = แก้ตามผู้ตรวจอิสระ 13 ข้อ · v1.1 = พรอมป์ C D1 ใส่ตัวเลขและสีที่ต้องเลี่ยงตาม Codex T2 `REVIEW_CODEX_T2_G24.md` · `qa/g2-4-scene/REVIEW_G24_PLAN.md`) · **ยังไม่กด PixelLab** · เจ้าของอนุมัติแล้ว (ข้อ 10: Claude กดเอง · สไลม์ทาง ก) · รอ Codex ตรวจพรอมป์ (T2) + เจ้าของล็อกอิน PixelLab ในเบราว์เซอร์บนคอม
+**สถานะ:** แผน v1.2 · **รอบ 1 กดแล้ว** (`qa/g2-4-scene/round1/README.md`: ไทล์ A B · สไลม์ ค 54 px · บ้านยาม 256 ประตู 52×103) · ผัง v2 (บ้าน 8 ช่อง) · สเปก `ASSET_SPEC_10_g24_scene.md` `ASSET_SPEC_11_g24_slime.md` · **รอบ 2 = ข้อ 5b รอ Codex ตรวจ (T3) แล้วเจ้าของอนุมัติครั้งเดียว** · (v1 = ผู้ตรวจอิสระ 13 ข้อ · v1.1 = Codex T2 · v1.2 = หลังรอบ 1)
 **ที่มา:** เจ้าของ 30 ต.ค. 18:07 "Ok ผ่าน ต่อ" (QG-5a ตะเกียงผ่าน) → เลือก **G2.4** → **D6:** ธีม = **ชายหมู่บ้านหน้าปากถ้ำ ตอนพลบค่ำ** · มอน = **สไลม์**
 **อ้างอิง:** แผน G2.0 ข้อ 5 G2.4 และ QG-4 (branch `plan/g1-3-character-art-direction-v2` `200c504`) · `SCENE_GUIDE.md` ข้อ 0–10 · `ART_DIRECTION.md` · `ART_GUIDE.md` · `PIXELLAB_GUIDE.md` · `STORY.md` ข้อ 5, 7–8, 14
 
@@ -14,25 +14,25 @@
 |---|---|---|
 | ช่องพื้น | `T = 32` px · ชนด้วยจุดเท้า | G1.6 · G2.0 |
 | ตัวละคร | ช่อง 96×96 · ตัว `_4` สูง 83 กว้าง 47 · เท้า `[48,94]` | G1.6 |
-| ประตูที่เห็น | กว้าง **≥ 64 px** | G2.0 ข้อ 16 |
+| ประตูที่เห็น | ~~≥ 64 px~~ → **ช่องในภาพ ≥ ตัวเด็ก + 4 px (กว้าง ≥ 51 · สูง ≥ 87)** | G2.0 ข้อ 16 · เจ้าของ 31 ต.ค. 23:48 (บ้าน 256 ได้ 52×103) |
 | ฉาก | ≥ 28×14 ช่อง (896×448 px) | G2.0 |
 | มอน | สูง 0.6–1.0 เท่าตัวเด็ก = **50–83 px** · ดุดันแต่ไม่น่ากลัว | G2.0 |
 | สีสัญญาณ | ทอง `#FFC857` (แตะได้) · ฟ้า `#5FE0FF` / `#7FE0FF` (ความรู้ = ของที่เก็บได้) · ของประดับห้ามใช้ | `ART_DIRECTION.md` ข้อ 2 |
 | วงแสงทางออก | ฟ้าขาว | `SCENE_GUIDE.md` ข้อ 4 (หมายเหตุ: `ART_DIRECTION.md` ข้อ 2 ใส่ "ทางออก" ไว้ในหมวดทอง · เอกสารสองฉบับไม่ตรงกัน · ใช้ข้อ 4 ไปก่อน ให้เจ้าของตัดสินภายหลัง) |
 
-## 3. ผังฉาก v1 (`qa/g2-4-scene/layout-v1.png`)
+## 3. ผังฉาก v2 (`qa/g2-4-scene/layout-v2.png` · v1 = `layout-v1.png`)
 ```
    0         1         2
    0123456789012345678901234567
  0 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^   ^ หน้าผาหิน (แถว 0–2 = บนผา · แถว 3 = หน้าผา)
  1 ^^^^^^^^^^^^^^^CCCC^^^^^^^^^   C ปากถ้ำ (โขดหิน 128×128 ซ้อนบนหน้าผา)
  2 TT^^^^^^^^^^^^^CCCC^^^^^^^TT   X ทางออก (วงแสงวาร์ป) = จุดเดียวของฉาก
- 3 TT^^^^^^^^^^^^^CCCC^^^^^^^TT   T ต้นไม้   H บ้านยาม   D ช่องประตู 64 px
+ 3 TT^^^^^^^^^^^^^CCCC^^^^^^^TT   T ต้นไม้   H บ้านยาม 256 (8 ช่อง)   D ช่องประตู
  4 T.............L=XX=L.......T   L เสาไฟถนน (วงแสง 4.5 ช่อง)
  5 T...............==.........T   b ลัง   r ขดเชือก   R หิน
- 6 T..HHHHHH......==.......R..T   f รั้ว   G ประตูรั้วหมู่บ้าน (ปิดตอนค่ำ)
- 7 T..HHHHHHb...L.==..........T   = ทางหลัก 2 ช่อง   - ทางรอง 1 ช่อง
- 8 T..HHDDHHbr...==.......R.*.T   . หญ้า (สคริปต์ทำหญ้าที่ไกลไฟทุกต้น > 4.5 ช่อง เป็น "ทุ่งมืด")
+ 6 T..HHHHHHHH....==.......R..T   f รั้ว   G ประตูรั้วหมู่บ้าน (ปิดตอนค่ำ)
+ 7 T..HHHHHHHH..L.==..........T   = ทางหลัก 2 ช่อง   - ทางรอง 1 ช่อง
+ 8 T..HHHDDHHHbr.==.......R.*.T   . หญ้า (สคริปต์ทำหญ้าที่ไกลไฟทุกต้น > 4.5 ช่อง เป็น "ทุ่งมืด")
  9 T...L---------==...........T   * เศษคริสตัล (ของที่เก็บได้)
 10 T............L==...........T   S จุดเริ่ม
 11 TT.......*.....=S.........TT
@@ -51,12 +51,13 @@
 | ตรวจ | ได้ |
 |---|---|
 | ขนาด | 28×14 ช่อง = 896×448 px · `T = 32` |
-| ช่องประตู | 2 ช่อง = **64 px** |
+| ช่องประตู | 2 ช่อง (คอลัมน์ 6–7) · ช่องในภาพบ้าน 52×103 px |
 | คู่จุดสุ่มจากช่องที่เดินได้ทั้งหมด (seed 2410 · 8 ทิศ ไม่ตัดมุม) | **60/60** · รันซ้ำได้เส้นทางเดิม |
 | จุดที่ต้องไปไม่ได้ 11 จุด | หาเส้นทางได้ **0/11** |
 | ช่องที่เดินได้แต่ไปไม่ถึง · ทางตัน · ช่องแคบ 1 ช่อง | **0 · 0 · 0** |
 | ไปถึงทางออก / ประตู / คริสตัล 2 ชิ้น | ✅ / ✅ / ✅ |
-| พื้นที่เดินได้ | 50.5 % ทั้งฉาก · 68.8 % ใต้แนวหน้าผา (เกณฑ์ราว 60 %) |
+| พื้นที่เดินได้ | 49.2 % ทั้งฉาก · 67.0 % ใต้แนวหน้าผา (เกณฑ์ราว 60 %) · v1 = 50.5 / 68.8 |
+| ช่องที่ตัวเด็กถูกงานภาพด้านหน้าบังเกินครึ่ง (v2 · บ้านจริง + ต้นไม้ทุกช่อง T) | 64 ช่อง (23 ในเขตสไลม์) → หน้า Pilot เลือกช่องวางต้นไม้ให้ ≤ 24 และ 0 ในเขตสไลม์ (`ASSET_SPEC_10` ข้อ 4) |
 - **ข้อจำกัด (ผู้ตรวจอิสระ ข้อ 4):** จุดที่ต้องไปไม่ได้ทุกจุดเป็นช่องทึบ A* จึงปฏิเสธทันที · ช่องเดินได้ทุกช่องต่อถึงกันหมด จึงได้ 60/60 แน่นอน → ตัวเลขนี้ยืนยันแค่ว่า "ผังต่อกันครบ" · **การตรวจจริง (QG-4 ข้อ 1) ทำในหน้า Pilot ด้วยการเดินจริง**
 
 ## 4. รายการชิ้นภาพ
@@ -68,7 +69,7 @@
 | **1** | **D1** สไลม์ ทิศใต้ (เลือกแบบ) | Object Creator Pro · 1 ทิศ | 64×64 | มอน |
 | 2 | **D2** สไลม์ครบ 8 ทิศ (จากแบบที่เลือก) | ตามเมนูที่มีจริง (ถามก่อน) | 64×64 | มอน |
 | 2 | ปากถ้ำ = โขดหินมีปากถ้ำ ซ้อนบนหน้าผา | Object Creator Pro | 128×128 | `C` |
-| 2 | ต้นไม้ 2 แบบ · เสาไฟถนน | Object Creator Pro | 96–128 · 32×96 | `T` `L` |
+| 2 | ต้นไม้ 2 แบบ · เสาไฟถนน | Object Creator Pro | 128×128 (ฐาน 64,124) | `T` `L` |
 | 2 | ของเล็ก 1 ชุด (ลัง ขดเชือก หิน รั้ว ประตูรั้ว กอหญ้า ดอกไม้ เศษคริสตัล) | Object Creator · Describe each item | 32–64 | `b` `r` `R` `f` `G` `*` |
 - **ทำด้วยโค้ด (ไม่ใช้เครดิต):** วงแสงวาร์ป · แสงอุ่นลอดประตู · วงแสงเสาไฟ · ความมืดทุ่ง (หรี่ ไม่ดำ) · เงา Trickster · การเดินของสไลม์ (ข้อ 6)
 - **รอบ 1 = 4 ชิ้นที่กำหนดลุค** · ดูผลก่อนกดรอบ 2 (ลุคไม่ใช่ จะได้ไม่เสียเครดิตทั้งชุด)
@@ -129,6 +130,54 @@ A round friendly slime creature for a children's adventure game, facing the came
 
 **ส่งกลับ:** Wang PNG (A, B) · zip ของแต่ละชิ้นที่เลือก (C, D1) · ไม่ต้องเปลี่ยนชื่อ · บอกแค่ "รอบ 1 A–D1"
 
+## 5b. รอบ 2 · วิธีกดและพรอมป์ (v1.2 · 30 ต.ค. 2569 · หลังผลรอบ 1)
+**ฐานจากรอบ 1** (`qa/g2-4-scene/round1/README.md`): ไทล์ A B ใช้ได้ · สไลม์แบบ ค (54 px) · บ้านยาม 256 (ประตู 52×103) · ผัง v2 (บ้าน 8 ช่อง)
+**บทเรียนที่ใช้ในรอบนี้**
+- PixelLab วาดช่องเปิด (ประตู/ปากถ้ำ) สูงราว 40 % ของตัวชิ้น ไม่ทำตามตัวเลข → เกณฑ์ปากถ้ำ "กว้าง ≥ 51 (เด็ก + 4) · สูง ≥ 72 (ยอดช่องสูงกว่าหัวเด็กที่ยืนบนทางออก)" (เป้าในพรอมป์ 64×88) · ได้ไม่ถึง → **ไม่กดซ้ำ** Codex ขยายช่องด้วยมือตามสเปกฉบับ 2 · ช่องมืดออกมาใส → Codex เติมสีเงามืด
+- Object Creator ใส่รูปอ้างอิงได้: 64 px = 8 รูป · 192 px = 1 รูป · 128 px = ยังไม่รู้ → **ดู "(n/N at this size)" ก่อนกด** · ได้ 1/1 → ใช้ Creator "Create image" Pro แทน (ภาพสไตล์ = รูปเด็ก · reference image 1 = รูปทรง · Custom size 128) ข้อความพรอมป์ใช้ได้ทั้ง 2 เครื่องมือ
+- ทุกชิ้น: ลบข้อความตัวอย่างในช่องก่อนพิมพ์ · Color palette None · Max colours No limit · Auto-add Off · Creator: ปิด "Copy from style image: Color palette" · เปิด Remove background
+- รูปอ้างอิงอยู่ใน `qa/g2-4-scene/round2/refs/` (`round1/tools/make_refs_r2.py`) · ใช้เครดิตรวมราว **51 generations** ถ้า Object Creator 128 ใส่รูปอ้างอิงได้ 2 รูป · ถ้าต้องใช้ทางสำรอง ต้นไม้ 2 แบบ = 20 · เสาไฟ = 10 → รวมราว 61 (ใช้ไปแล้ว 55 จาก 5,000)
+
+### E · ปากถ้ำ 128 (Creator · Create image Pro · 10)
+ภาพสไตล์ `ref128-1-style-kid.png` · reference image 1 `ref128-2-shape-cave.png` ("copy this exact outline and the dark entrance") · reference image 2 = `qa/g2-4-scene/round1/img/b-tileset-grass-cliff.png` ("use the rock colors and texture only") · Custom size 128×128
+```text
+A rocky outcrop with a dark cave entrance at the foot of a purple-gray cliff, for a cozy fantasy village at dusk, seen from the front, low top-down RPG view, on a 128x128 canvas. Layered purple-gray rock with moss, small grass tufts and hanging ivy, the same rock colors and texture as reference image 2. Follow the outline of reference image 1: the rock fills x 2-125 and y 6-127, and the dark arched entrance is 64 px wide at x 32-95, rising from y 124 up to y 40 with a 3 px rock lip below it, taller than the girl in the style image, solid very dark inside, kept clear and unobstructed. No crystals, no bright yellow, no gold, no cyan or sky-blue glow, no bright red. Use the pixel style, outline and shading of the style image but do not draw the girl. Keep the whole outcrop inside the canvas with a 2 px clear margin at the left, right and top. Front view only, no isometric view, no ground plane, no ground shadow, isolated on a transparent background. pixel art for a colorful adventure RPG, rich saturated colors, dark single-color outline, soft shading, light from the top-left
+```
+
+### F · ต้นไม้ 2 แบบ (Object Creator · Pro · 1 Direction · 128 · 10 · ได้ 4 แบบ เลือก 2)
+รูปอ้างอิง `ref128-1-style-kid.png` + `ref128-2-shape-tree.png` (ต้องขึ้น 2/N · ได้ 1/1 → Create image Pro 1 ภาพต่อครั้ง)
+```text
+A village tree for a cozy fantasy village at dusk, seen from the front, low top-down RPG view, on a 128x128 canvas. A rounded leafy crown in muted blue-green and deep teal with a few darker leaf clusters, a short sturdy brown trunk with small visible roots, the trunk base centered at x 64 at y 124. Follow the size and outline of the flat silhouette reference: crown about 96 px wide, the whole tree about 120 px tall. No flowers, no fruit, no bright leaf green, no bright yellow, no gold, no cyan, no bright red. Use the pixel style, outline and shading of the reference with the girl but do not draw the girl. Keep the whole tree inside the canvas. Front view only, no ground plane, no ground shadow, isolated on a transparent background. pixel art for a colorful adventure RPG, rich saturated colors, dark single-color outline, soft shading, light from the top-left
+```
+
+### G · เสาไฟถนน (Object Creator · Pro · 1 Direction · 128 · 10 · ได้ 4 แบบ เลือก 1)
+รูปอ้างอิง `ref128-1-style-kid.png` + `ref128-2-shape-lamp.png`
+```text
+A wooden village street lamp post for a cozy fantasy village at dusk, seen from the front, low top-down RPG view, on a 128x128 canvas. A thin dark brown wooden post about 8 px wide with a short arm at the top, a small paper lantern in muted orange hanging from the arm, unlit because the game adds the light, a small stone footing, the base centered at x 64 at y 124, the whole lamp about 97 px tall. Follow the size and outline of the flat silhouette reference. No glow, no light rays, no bright yellow, no gold, no cyan, no bright red. Use the pixel style, outline and shading of the reference with the girl but do not draw the girl. Front view only, no ground plane, no ground shadow, isolated on a transparent background. pixel art for a colorful adventure RPG, rich saturated colors, dark single-color outline, soft shading, light from the top-left
+```
+
+### H · ของเล็ก 32 (Object Creator · Pro · 1 Direction · 32 · Describe each item **เปิด** · 10)
+รูปอ้างอิง `ref32-1-style-grass.png` + `ref32-2-style-stone.png` (สีและลายของไทล์รอบ 1)
+คำบรรยายหลัก:
+```text
+Small props for a cozy fantasy village edge at dusk, one object centered in each 32x32 frame, seen from the front, low top-down RPG view, matching the colors and pixel style of the grass and stone references, muted dusk colors, no bright leaf green, no bright yellow, no gold, no bright red, no cyan except on the crystal shard, dark single-color outline, soft shading, light from the top-left, no ground shadow, transparent background, pixel art
+```
+ช่อง 1–16: `a small wooden crate with dark iron corners` · `a coiled hemp rope` · `a mossy gray-purple boulder` · `a short horizontal wooden fence segment` · `a single wooden fence post` · `a clump of tall grass` · `a tuft of short grass with clover` · `a few tiny white wildflowers on green stems` · `a small lavender wildflower clump` · `a small glowing pale sky-blue crystal shard stuck in the ground` · `a small wooden barrel` · `a small round dark green bush` · `a flat stepping stone` · `a small stack of firewood` · `a wooden bucket` · `two small brown mushrooms`
+- เศษคริสตัล (ช่อง 10) = ของที่เก็บได้ จึงใช้ฟ้าเรืองได้ · ชิ้นอื่นห้ามใกล้ทอง/ฟ้าสัญญาณ
+
+### I · ประตูรั้วหมู่บ้าน 64 (Object Creator · Pro · 1 Direction · 64 · 10 · ได้ 16 แบบ เลือก 1)
+รูปอ้างอิง `ref64-1-style-kid.png` + `ref64-2-shape-gate.png`
+```text
+A closed wooden village gate between two sturdy posts, for a cozy fantasy village at dusk, seen from the front, low top-down RPG view, on a 64x64 canvas. Follow the size and outline of the flat silhouette reference: a post at each side and closed plank doors in the middle with a simple crossbar, muted brown wood with dark iron hinges. No bright yellow, no gold, no cyan, no bright red. Use the pixel style, outline and shading of the reference with the girl but do not draw the girl. Front view only, no ground plane, no ground shadow, isolated on a transparent background. pixel art for a colorful adventure RPG, rich saturated colors, dark single-color outline, soft shading, light from the top-left
+```
+
+### D2 · สไลม์ 8 ทิศ (Creator → Rotate → Generate 8 rotations · Single reference · 1 generation)
+รูปอ้างอิง `qa/g2-4-scene/round1/img/d1-slime-c-tall.png` (64×64 ขนาดจริง) · Transparent background เปิด · Description:
+```text
+the same round lavender slime from the reference seen from 8 directions, same size and colors; the back views show only the smooth back of the jelly body with no eyes and no mouth
+```
+**เกณฑ์รับรอบ 2:** `ASSET_SPEC_10` ข้อ 7 · `ASSET_SPEC_11` ข้อ 6 · หยุดถามเจ้าของถ้าเครื่องมือบนหน้าจอไม่ตรงข้อนี้
+
 ## 6. สไลม์เดินอย่างไร (เจ้าของเลือกตอนอนุมัติ · ไม่ย่อขยายภาพในโค้ด)
 - สไลม์ไม่มีขา ท่าเดินคือ**กระโดด** · ภาพจาก Object Creator ใส่ท่าใน PixelLab ต่อไม่ได้
 - **ทาง ก (แนะนำตอนนี้):** เด้งขึ้นลง 0–3 px ทีละพิกเซลเต็ม + เงาใต้ตัวเล็ก/ใหญ่ตามความสูง · ไม่ย่อขยายภาพ · ไม่ใช้เครดิต · ใช้ได้ทั้ง 8 ทิศ
@@ -140,7 +189,7 @@ A round friendly slime creature for a children's adventure game, facing the came
 | # | เกณฑ์ | ค่า |
 |---|---|---|
 | 1 | ผัง | ตรวจแบบผัง ✅ (ข้อ 3) · **ตรวจจริงในหน้า Pilot:** เดินจริงด้วยระบบชนของหน้า 60/60 คู่ · รันซ้ำเหมือน 100 % · ไปไม่ได้ 0/≥10 (รวมจุดหลังของ/ซอกแคบที่ช่องรอบตัวเดินได้) |
-| 2 | ประตู | ช่องประตูในภาพกว้าง ≥ 64 px · เดินเข้าช่องประตูได้ 100 % (จัดตัวเข้ากลางช่องประตู) · ช่องประตูในภาพเป็นพื้นใสหรือแยกชั้นมืดด้านใน วาดหลังตัว · ไหล่/ผมทับขอบประตูนอกแผนบัง 0 px (วัด) |
+| 2 | ประตู | ช่องประตูในภาพ ≥ ตัวเด็ก + 4 px (กว้าง ≥ 51 · สูง ≥ 87 · บ้าน 256 = 52×103) · จับเท้า x 224 · เท้า y ≥ 264 ในช่อง D · เดินเข้าช่องประตูได้ 100 % (จัดตัวเข้ากลางช่องประตู) · ช่องประตูในภาพเป็นพื้นใสหรือแยกชั้นมืดด้านใน วาดหลังตัว · ไหล่/ผมทับขอบประตูนอกแผนบัง 0 px (วัด) |
 | 3 | ภาพ | alpha 0/255 เท่านั้น · ไม่ย่อขยายแบบไม่เต็มเท่า · ไทล์ Wang 16 แบบต่อกันไม่มีรอย |
 | 4 | ความลึก | y-sort ถูกรอบของทุกชิ้น 8 ทิศ · ของสูงจางเมื่อเดินหลัง (40–50 % ใน 0.2 วิ) |
 | 5 | สี | ของประดับที่ ΔE00 < 10 จาก `#FFC857` / `#5FE0FF` / `#7FE0FF` = 0 px (ยกเว้นของที่เก็บได้ + วงแสงทางออก) · สไลม์ห่างสีบ้าน 4 สี ΔE00 ≥ 10 |
@@ -174,3 +223,9 @@ A round friendly slime creature for a children's adventure game, facing the came
 - ใครกด: **"คุณสั่ง pixellab เองเลย"** → **Claude กดเอง** ผ่านเบราว์เซอร์ในแอป Claude บนคอมของเจ้าของ (บัญชี PixelLab ของเจ้าของ) · กดหลัง Codex ตรวจพรอมป์ (T2) ตามที่ถามไว้ · Claude ไม่ใส่รหัสผ่าน → **เจ้าของต้องล็อกอิน PixelLab ในเบราว์เซอร์นั้นเองก่อน** (ตรวจ 30 ต.ค.: ยังไม่ได้ล็อกอิน)
 - สไลม์เดิน: **ทาง ก** (เด้ง 0–3 px ทีละพิกเซลเต็ม · เงาตามความสูง · ไม่ย่อขยาย)
 - รอบ 1 (A B C D1) = อนุมัติแล้ว เมื่อ Codex ตรวจผ่าน
+
+**ผลรอบ 1 และมติเจ้าของ (30 ต.ค. 22:3x–23:48):**
+- C ที่ 192 ใส่รูปอ้างอิงได้ 1/1 → หยุดตามกติกา → เจ้าของเลือก **Creator + Style image** → ประตู 36×69 → เจ้าของเลือก **กดใหม่เน้นผนังสูง** → ประตู 40×70 → เจ้าของเลือก **บ้าน 256** → ประตู 52×103 ✅
+- สไลม์: เจ้าของเลือก **แบบ ค** (54 px)
+- 23:48 "ok ต่อ" = รับ **บ้านยาม 256** + เกณฑ์ประตู **≥ ตัวเด็ก + 4 px** (แทน ≥ 64) และ **วงแสงตะเกียงในถ้ำ 130** (หน้า Pilot GM)
+- เจ้าของลองหน้า Pilot แล้ว 23:26: "ตะเกียงมองเห็นได้แคบไป" → ปุ่มวงแสง 72/100/130/160 → ค่าเริ่ม 130

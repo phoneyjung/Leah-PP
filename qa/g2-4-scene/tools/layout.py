@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-# G2.4 scene pilot - layout v1 (Claude · 30 Oct 2569 · v1 = fixes from the independent review): village edge in front of the cave mouth at dusk (owner D6 18:1x)
+# G2.4 scene pilot - layout v2 (Claude · 30 Oct 2569 · v1 = fixes from the independent review · v2 = owner ok 23:48 for the 256 px guard hut:
+#   hut footprint 8 tiles (cols 3-10, rows 6-8), door cols 6-7 = hut tiles +3/+4 (image door x 96-159), crate/rope moved to (11,8)(12,8), hut image bottom-left at world px (96, 288))
+# village edge in front of the cave mouth at dusk (owner D6 18:1x)
 # Grid only (no art yet): collision on T = 32 px tiles, feet-point movement, 8 directions without corner cutting.
 # Grass is drawn '.'; the script marks grass farther than LAMP_R tiles from every lamp as dark (',') = where the slime may walk.
 # NOTE: this is a GRID DESIGN CHECK only. Pairs come from all walkable cells, blocked targets are solid cells (A* refuses them at once),
 #       so 60/60 and 0/11 mostly prove the grid is connected; the real check runs later in the Pilot page with real movement.
 # Writes: pilot-scene-layout.json (grid + legend + points) · pilot-paths.json (seed 2410: 60 pairs + 11 blocked targets)
-#         layout-v0.png (labelled map, 1 tile = 24 px) · layout-check.json (numbers vs plan G2.0 / G2.4 criteria)
+#         layout-v2.png (labelled map, 1 tile = 24 px) · layout-check.json (numbers vs plan G2.0 / G2.4 criteria)
 # usage: python3 -I layout.py OUT_DIR
 import sys, os, json, heapq, random, hashlib
 from PIL import Image, ImageDraw, ImageFont
@@ -18,9 +20,9 @@ GRID = [  # 28 x 14 · row 0 = top (north) · rows 0-3 = cliff (row 3 = cliff fa
     "TT^^^^^^^^^^^^^CCCC^^^^^^^TT",
     "T.............L=XX=L.......T",
     "T...............==.........T",
-    "T..HHHHHH......==.......R..T",
-    "T..HHHHHHb...L.==..........T",
-    "T..HHDDHHbr...==.......R.*.T",
+    "T..HHHHHHHH....==.......R..T",
+    "T..HHHHHHHH..L.==..........T",
+    "T..HHHDDHHHbr.==.......R.*.T",
     "T...L---------==...........T",
     "T............L==...........T",
     "TT.......*.....=S.........TT",
@@ -33,7 +35,7 @@ LEGEND = {  # char: (name Thai, walkable, colour)
     'X': ('ทางออกฉาก = ปากถ้ำ (วงแสงวาร์ป)', True, (95, 224, 255)),
     'T': ('ต้นไม้/แนวป่า', False, (47, 92, 70)),
     'H': ('บ้านยามปากถ้ำ (ฐานอาคาร)', False, (200, 110, 80)),
-    'D': ('ช่องประตูบ้านยาม (2 ช่อง = 64 px)', True, (255, 200, 87)),
+    'D': ('ช่องประตูบ้านยาม (2 ช่อง · ช่องในภาพ 52 px > ตัวเด็ก 47)', True, (255, 200, 87)),
     'L': ('เสาไฟถนน (โคมอุ่น)', False, (255, 170, 90)),
     'b': ('ลัง/ถังของชาวบ้าน', False, (150, 100, 60)),
     'r': ('ขดเชือก (เตี้ย)', False, (170, 130, 80)),
@@ -121,7 +123,8 @@ while left:
 slime_zone = next((r for r in regions if any(c in r for c in crystal)), max(regions, key=len) if regions else set())
 check = {
     'size_tiles': [W, H], 'size_px': [W * T, H * T], 'T': T,
-    'door_opening_px': len(doors) * T, 'door_rule_ge_64': len(doors) * T >= 64,
+    'door_cells_px': len(doors) * T, 'door_image_opening_px': 52, 'kid_width_px': 47, 'door_rule_kid_plus_4': 52 >= 47 + 4,
+    'hut_footprint_tiles': [min(c[0] for c in cells('H')), max(c[0] for c in cells('H')), min(c[1] for c in cells('H')), max(c[1] for c in cells('H'))], 'hut_image_bottom_left_px': [96, 288],
     'exits': len(exits), 'single_exit_point': len({e[1] for e in exits}) == 1 and len(exits) == 2,
     'reachable_pairs_ok': sum(1 for p in run1 if p) , 'pairs': len(pairs), 'repeat_identical': run1 == run2,
     'blocked_found': sum(1 for b in blocked if b['path_found']), 'blocked_targets': len(blocked),
@@ -134,7 +137,29 @@ check = {
     'crystal_light': {str(list(c)): ('dark' if lamp_d(c) > LAMP_R else 'lit') + ' %.1f tiles from a lamp' % lamp_d(c) for c in crystal}, 'lamps_next_to_path_or_door': {str(list(l)): any(GRID[y][x] in '=-XD' for x, y in [(l[0] + dx, l[1] + dy) for dx in (-1, 0, 1) for dy in (-1, 0, 1)] if 0 <= x < W and 0 <= y < H) for l in _lamps},
     'dead_ends': dead_ends, 'narrow_1_tile': narrow,
 }
-json.dump({'version': 'v1', 'lamp_r_tiles': LAMP_R, 'slime_zone': sorted(list(c) for c in slime_zone), 'T': T, 'size': [W, H], 'grid': GRID, 'legend': {k: {'name': v[0], 'walkable': v[1]} for k, v in LEGEND.items()},
+# v2 (independent review R7): cells where the kid (47 x 83 box, feet at the cell centre) is more than half hidden by art drawn IN FRONT of her
+# (y-sort by base row: hut base y 287 · tree base = cell bottom - 4 · lamp base = cell bottom - 4) · art = the real 256 hut + the round-2 tree / lamp silhouettes
+# these cells stay walkable on purpose = "walk-behind" cells: the art in front fades to 40-50 % (SCENE_GUIDE / QG-4 item 4) · counted here, judged in the Pilot page
+import numpy as np
+HERE = os.path.dirname(os.path.abspath(__file__)); G24 = os.path.dirname(HERE)
+def amask(p): return np.array(Image.open(p).convert('RGBA'))[..., 3] > 0
+ART = [(amask(os.path.join(G24, 'round1', 'img', 'c-hut-256.png')), 96, 32, 287)]   # mask, world left, world top, base y
+_tree = amask(os.path.join(G24, 'round2', 'refs', 'ref128-2-shape-tree.png')); _lamp = amask(os.path.join(G24, 'round2', 'refs', 'ref128-2-shape-lamp.png'))
+for (x, y) in cells('T'): ART.append((_tree, x * T + 16 - 64, (y + 1) * T - 128, (y + 1) * T - 4))
+for (x, y) in _lamps: ART.append((_lamp, x * T + 16 - 64, (y + 1) * T - 128, (y + 1) * T - 4))
+behind = {}
+for (x, y) in walk_cells:
+    fx, fy = x * T + 16, y * T + 16; bx0, by0, bw, bh = fx - 23, fy - 82, 47, 83; cov = np.zeros((bh, bw), bool)
+    for m, l, t, base in ART:
+        if base <= fy: continue
+        h_, w_ = m.shape; ox0, oy0 = max(bx0, l), max(by0, t); ox1, oy1 = min(bx0 + bw, l + w_), min(by0 + bh, t + h_)
+        if ox0 >= ox1 or oy0 >= oy1: continue
+        cov[oy0 - by0:oy1 - by0, ox0 - bx0:ox1 - bx0] |= m[oy0 - t:oy1 - t, ox0 - l:ox1 - l]
+    f = cov.mean()
+    if f > 0.5: behind[str([x, y])] = round(float(f), 2)
+check['walk_behind_cells_gt50'] = behind; check['walk_behind_count'] = len(behind)
+check['walk_behind_in_slime_zone'] = sorted(k for k in behind if json.loads(k) in [list(c) for c in slime_zone])
+json.dump({'version': 'v2', 'lamp_r_tiles': LAMP_R, 'slime_zone': sorted(list(c) for c in slime_zone), 'T': T, 'size': [W, H], 'grid': GRID, 'legend': {k: {'name': v[0], 'walkable': v[1]} for k, v in LEGEND.items()},
            'start': list(start), 'exits': [list(e) for e in exits], 'doors': [list(d) for d in doors], 'crystals': [list(c) for c in crystal]},
           open(os.path.join(OUT, 'pilot-scene-layout.json'), 'w'), ensure_ascii=False, indent=1)
 json.dump({'seed': 2410, 'movement': '8 directions, no corner cutting, feet point on T = 32 tiles', 'pairs': [{'from': a, 'to': b, 'len': len(p) - 1 if p else None} for (a, b), p in zip(pairs, run1)],
@@ -162,5 +187,5 @@ for i, (k, v) in enumerate(LEGEND.items()):
 for lx, ly in _lamps:
     cxp, cyp, rr = PADL + lx * S + S // 2, PADL + ly * S + S // 2, LAMP_R * S
     d.ellipse([cxp - rr, cyp - rr, cxp + rr, cyp + rr], outline=(255, 190, 90), width=1)
-img.save(os.path.join(OUT, 'layout-v1.png'))
+img.save(os.path.join(OUT, 'layout-v2.png'))
 print(json.dumps({k: v for k, v in check.items() if k not in ('unreachable_walkable_cells',)}, ensure_ascii=False), 'unreachable', len(unreach))
