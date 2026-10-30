@@ -1,0 +1,45 @@
+{
+ "checked_by": "Claude 31 Oct 2569",
+ "branch": "codex/asset-10-g24-scene @ a906bc5",
+ "1_sizes_alpha": "path 128x128 a255 \u00b7 cliff 128x128 a255 \u00b7 hut 256x256 a0/255 \u00b7 door 256x256 a0/255 \u00b7 PASS",
+ "2_path": {
+  "changed_px": 25,
+  "all_on_the_25_flowers": true,
+  "new_colour": [
+   232,
+   222,
+   212
+  ],
+  "px_dE00_lt10_of_7_colours": 0,
+  "min_dE00": 14.1,
+  "pass": true
+ },
+ "3_cliff_identical": true,
+ "3_pure_grass_equal_in_both": true,
+ "4_wang": {
+  "path_corners": "64/64",
+  "cliff_top_corners": "32/32",
+  "json_vs_template": "16/16 x2",
+  "random_tiles": 384,
+  "missing": 0,
+  "pass": true
+ },
+ "5_hut": {
+  "door_layer_plus_hut_equals_original_mismatch_px": 0,
+  "new_transparent_px": 5616,
+  "bbox": [
+   102,
+   146,
+   153,
+   253
+  ],
+  "inside_102_153_x_146_253": true,
+  "clear_w_at_y200": 52,
+  "clear_h_at_x128": 108,
+  "need": ">= 51 x 87",
+  "pass": true
+ },
+ "7_total_bytes": 67250,
+ "colour_check_hut_min_dE00": 13.0,
+ "verdict": "PASS"
+}

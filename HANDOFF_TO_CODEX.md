@@ -3,7 +3,10 @@
 
 ---
 
-## งาน T3 · ตรวจพรอมป์ PixelLab รอบ 2 + สเปกชุด 10/11 ของฉาก G2.4 (อ่านอย่างเดียว · ไม่กด) · สถานะ: รอ Codex
+## งาน T3 · ตรวจพรอมป์ PixelLab รอบ 2 + สเปกชุด 10/11 ของฉาก G2.4 (อ่านอย่างเดียว · ไม่กด) · สถานะ: เสร็จ (Claude รับงาน 31 ต.ค. 2569)
+- **ผลรับงาน:** `codex/t3-review-g24-round2` @ `07311d7` · ฐาน `2959095` ถูกต้อง · ต่าง 2 ไฟล์ · ตอบครบ 6 ข้อ · เครดิต 0 · **ผ่าน** · รวมแล้ว (`a9c6dfc`)
+- **Codex สรุป:** ผ่านแบบมีข้อแนะนำ · ย้ำแขนซ้ายในพรอมป์ G · H ย้ำ isolated / ไม่มีพื้นใต้ของ และระบุการกระจาย 16 ชนิดตามช่องจริงบนจอ · D2 ใส่ตัวเลขฐานและทิศหลัง · Object Creator 128 ยังไม่ยืนยันจำนวนรูปอ้างอิง
+- **Claude ทำตาม:** แผน v1.3 ข้อ 5b แก้ G H D2 ตามนั้น · จำนวนรูปอ้างอิงที่ 128 ดูบนจอตอนกด (กติกาเดิม)
 - **วันที่:** 30 ต.ค. 2569 · ทีมฉบับ 2 ข้อ 2: พรอมป์ PixelLab = Claude ทำ · **Codex ตรวจ** · เจ้าของอนุมัติ · ไม่ใช้เครดิต
 - **branch ฐาน:** `claude/g2-pilot` (commit ที่มีงานนี้) · **branch ส่งงาน:** `codex/t3-review-g24-round2`
 - **อ่าน:** `G2_4_SCENE_PLAN.md` ข้อ 5b (รอบ 2) + ท้ายไฟล์ (ผลรอบ 1 · มติเจ้าของ) · `qa/g2-4-scene/round1/README.md` (ผลรอบ 1 · บทเรียน PixelLab หน้าจอใหม่) · `qa/g2-4-scene/round2/refs/` + `round1/tools/make_refs_r2.py` · `ASSET_SPEC_10_g24_scene.md` · `ASSET_SPEC_11_g24_slime.md` · ผัง `qa/g2-4-scene/layout-v2.png` + `layout-check.json` · เครื่องตรวจ `qa/g2-4-scene/tools/check_wang.py` · ผู้ตรวจอิสระของ Claude พบ 15 ข้อ แก้แล้วในฉบับนี้
@@ -21,7 +24,8 @@
 
 ---
 
-## งาน T4 · ชุด 10 รอบ 1: เก็บพิกเซลไทล์ + บ้านยาม (ทำต่อจาก T3 ได้ทันที) · สถานะ: รอ Codex
+## งาน T4 · ชุด 10 รอบ 1: เก็บพิกเซลไทล์ + บ้านยาม (ทำต่อจาก T3 ได้ทันที) · สถานะ: เสร็จ (Claude รับงาน 31 ต.ค. 2569)
+- **ผลรับงาน:** `codex/asset-10-g24-scene` @ `a906bc5` · ฐาน `2959095` · 6 ไฟล์ + `CODEX_STATUS.md` · **ผ่านทุกข้อในสเปก 10 ข้อ 7 (1–5)** (Claude วัดซ้ำ: `qa/g2-4-scene/round1/T4-accept.json`) · รวมแล้ว (`4fb7749`)
 - **ทำตาม:** `ASSET_SPEC_10_g24_scene.md` ข้อ 1a, 4, 7 (ข้อ 1–5) · ต้นฉบับ `qa/g2-4-scene/round1/img/` (ห้ามแก้ไฟล์ต้นฉบับ · สร้างไฟล์ใหม่ที่ root)
 - **branch ฐาน:** `claude/g2-pilot` · **branch ส่งงาน:** `codex/asset-10-g24-scene`
 - **ส่ง 6 ไฟล์ที่ root:** `g24-tiles-path.png` (เปลี่ยนสีดอกไม้ 25 px) · `g24-tiles-cliff.png` (สำเนาตรง) · `g24-tiles.json` (มุม Wang · ค่าที่ถูก = `python3 -I qa/g2-4-scene/tools/check_wang.py qa/g2-4-scene/round1/img` ช่อง `expected_json`) · `g24-hut.png` (ช่องประตูพื้นใส) · `g24-hut-door.png` (ส่วนที่ตัดออก) · `g24-hut.json` + 1 บรรทัด `CODEX_STATUS.md`

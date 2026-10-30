@@ -1,6 +1,6 @@
-# G2.4 — ฉากทดลอง + มอน 1 ชนิด (Claude · แผน v1.2 · 30–31 ต.ค. 2569)
+# G2.4 — ฉากทดลอง + มอน 1 ชนิด (Claude · แผน v1.3 · 30–31 ต.ค. 2569)
 
-**สถานะ:** แผน v1.2 · **รอบ 1 กดแล้ว** (`qa/g2-4-scene/round1/README.md`: ไทล์ A B · สไลม์ ค 54 px · บ้านยาม 256 ประตู 52×103) · ผัง v2 (บ้าน 8 ช่อง) · สเปก `ASSET_SPEC_10_g24_scene.md` `ASSET_SPEC_11_g24_slime.md` · **รอบ 2 = ข้อ 5b รอ Codex ตรวจ (T3) แล้วเจ้าของอนุมัติครั้งเดียว** · (v1 = ผู้ตรวจอิสระ 13 ข้อ · v1.1 = Codex T2 · v1.2 = หลังรอบ 1)
+**สถานะ:** แผน v1.2 · **รอบ 1 กดแล้ว** (`qa/g2-4-scene/round1/README.md`: ไทล์ A B · สไลม์ ค 54 px · บ้านยาม 256 ประตู 52×103) · ผัง v2 (บ้าน 8 ช่อง) · สเปก `ASSET_SPEC_10_g24_scene.md` `ASSET_SPEC_11_g24_slime.md` · **รอบ 2 = ข้อ 5b · Codex ตรวจผ่าน (T3 `07311d7`) · รอเจ้าของอนุมัติครั้งเดียว** · ชุด 10 รอบ 1 Codex เก็บพิกเซลแล้ว (T4 `a906bc5` ผ่าน) · (v1 = ผู้ตรวจอิสระ 13 ข้อ · v1.1 = Codex T2 · v1.2 = หลังรอบ 1 · v1.3 = Codex T3: G แขนซ้าย · H ไม่มีพื้น + การกระจายช่อง · D2 ตัวเลข)
 **ที่มา:** เจ้าของ 30 ต.ค. 18:07 "Ok ผ่าน ต่อ" (QG-5a ตะเกียงผ่าน) → เลือก **G2.4** → **D6:** ธีม = **ชายหมู่บ้านหน้าปากถ้ำ ตอนพลบค่ำ** · มอน = **สไลม์**
 **อ้างอิง:** แผน G2.0 ข้อ 5 G2.4 และ QG-4 (branch `plan/g1-3-character-art-direction-v2` `200c504`) · `SCENE_GUIDE.md` ข้อ 0–10 · `ART_DIRECTION.md` · `ART_GUIDE.md` · `PIXELLAB_GUIDE.md` · `STORY.md` ข้อ 5, 7–8, 14
 
@@ -153,17 +153,18 @@ A village tree for a cozy fantasy village at dusk, seen from the front, low top-
 ### G · เสาไฟถนน (Object Creator · Pro · 1 Direction · 128 · 10 · ได้ 4 แบบ เลือก 1)
 รูปอ้างอิง `ref128-1-style-kid.png` + `ref128-2-shape-lamp.png`
 ```text
-A wooden village street lamp post for a cozy fantasy village at dusk, seen from the front, low top-down RPG view, on a 128x128 canvas. A thin dark brown wooden post about 8 px wide with a short arm at the top, a small paper lantern in muted orange hanging from the arm, unlit because the game adds the light, a small stone footing, the base centered at x 64 at y 124, the whole lamp about 97 px tall. Follow the size and outline of the flat silhouette reference. No glow, no light rays, no bright yellow, no gold, no cyan, no bright red. Use the pixel style, outline and shading of the reference with the girl but do not draw the girl. Front view only, no ground plane, no ground shadow, isolated on a transparent background. pixel art for a colorful adventure RPG, rich saturated colors, dark single-color outline, soft shading, light from the top-left
+A wooden village street lamp post for a cozy fantasy village at dusk, seen from the front, low top-down RPG view, on a 128x128 canvas. A thin dark brown wooden post about 8 px wide with a short arm reaching to the left at the top, a small paper lantern in muted orange hanging by a short cord from the left end of the arm, unlit because the game adds the light, a small stone footing, the base centered at x 64 at y 124, the whole lamp about 97 px tall. Follow the size and outline of the flat silhouette reference. No glow, no light rays, no bright yellow, no gold, no cyan, no bright red. Use the pixel style, outline and shading of the reference with the girl but do not draw the girl. Front view only, no ground plane, no ground shadow, isolated on a transparent background. pixel art for a colorful adventure RPG, rich saturated colors, dark single-color outline, soft shading, light from the top-left
 ```
 
 ### H · ของเล็ก 32 (Object Creator · Pro · 1 Direction · 32 · Describe each item **เปิด** · 10)
 รูปอ้างอิง `ref32-1-style-grass.png` + `ref32-2-style-stone.png` (สีและลายของไทล์รอบ 1)
 คำบรรยายหลัก:
 ```text
-Small props for a cozy fantasy village edge at dusk, one object centered in each 32x32 frame, seen from the front, low top-down RPG view, matching the colors and pixel style of the grass and stone references, muted dusk colors, no bright leaf green, no bright yellow, no gold, no bright red, no cyan except on the crystal shard, dark single-color outline, soft shading, light from the top-left, no ground shadow, transparent background, pixel art
+Small isolated props for a cozy fantasy village edge at dusk, one object centered in each 32x32 frame with no grass, soil or paving base under it, seen from the front, low top-down RPG view, matching the colors and pixel style of the grass and stone references, muted dusk colors, no bright leaf green, no bright yellow, no gold, no bright red, no cyan except on the crystal shard, dark single-color outline, soft shading, light from the top-left, no ground shadow, transparent background, pixel art
 ```
 ช่อง 1–16: `a small wooden crate with dark iron corners` · `a coiled hemp rope` · `a mossy gray-purple boulder` · `a short horizontal wooden fence segment` · `a single wooden fence post` · `a clump of tall grass` · `a tuft of short grass with clover` · `a few tiny white wildflowers on green stems` · `a small lavender wildflower clump` · `a small glowing pale sky-blue crystal shard stuck in the ground` · `a small wooden barrel` · `a small round dark green bush` · `a flat stepping stone` · `a small stack of firewood` · `a wooden bucket` · `two small brown mushrooms`
 - เศษคริสตัล (ช่อง 10) = ของที่เก็บได้ จึงใช้ฟ้าเรืองได้ · ชิ้นอื่นห้ามใกล้ทอง/ฟ้าสัญญาณ
+- **ก่อนกด H (Codex T3):** ดูบนจอว่า Describe each item มีกี่ช่อง และบรรทัด Total ได้กี่ภาพ · ถ้าช่องมากกว่า 16 ใส่ 16 ชนิดซ้ำเรียงกันจนเต็ม (ห้ามเว้นช่องให้เครื่องสุ่มของเอง) · ถ้าน้อยกว่า 16 ตัดตามลำดับท้ายรายการ (ช่อง 13–16 ตัดก่อน)
 
 ### I · ประตูรั้วหมู่บ้าน 64 (Object Creator · Pro · 1 Direction · 64 · 10 · ได้ 16 แบบ เลือก 1)
 รูปอ้างอิง `ref64-1-style-kid.png` + `ref64-2-shape-gate.png`
@@ -174,7 +175,7 @@ A closed wooden village gate between two sturdy posts, for a cozy fantasy villag
 ### D2 · สไลม์ 8 ทิศ (Creator → Rotate → Generate 8 rotations · Single reference · 1 generation)
 รูปอ้างอิง `qa/g2-4-scene/round1/img/d1-slime-c-tall.png` (64×64 ขนาดจริง) · Transparent background เปิด · Description:
 ```text
-the same round lavender slime from the reference seen from 8 directions, same size and colors; the back views show only the smooth back of the jelly body with no eyes and no mouth
+the same round lavender slime from the reference seen from 8 directions, same size and colors in every view: about 54 px tall and 50 px wide, the lowest row at y 56, centered at x 32 of the 64x64 frame; the back-facing views (north-east, north, north-west) show only the smooth back of the jelly body with no eyes and no mouth
 ```
 **เกณฑ์รับรอบ 2:** `ASSET_SPEC_10` ข้อ 7 · `ASSET_SPEC_11` ข้อ 6 · หยุดถามเจ้าของถ้าเครื่องมือบนหน้าจอไม่ตรงข้อนี้
 
