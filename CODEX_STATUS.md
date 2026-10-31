@@ -47,3 +47,4 @@ T7 · 31 ต.ค. 2569 · ตรวจ S6 @f3ec512 · REVIEW_CODEX_T7_G24_S6.md 
 T8 · 31 ต.ค. 2569 · ตรวจ G2.3/ASSET_SPEC_14 ฉบับ1 @9a1c9c6 · REVIEW_CODEX_T8_G23.md · inspect_pt.py exit 0 ตรง inspection.json ทุกค่า (2 รู/50 px ขอบขาว0 สี46 สีหลายวัสดุ13) · ต้องชี้แจงสูตรเติมรู/เส้นเข้ม/G/schema/ข้อยกเว้นสีและ semantic QA ก่อน T9 · อ่านอย่างเดียว เครดิต0 · branch codex/t8-review-g23-portrait
 
 T9 · 1 พ.ย. 2569 · ชุด 14 v1.1 @56d3d8c · c2-pilot-kid4-pt.png + -edits.json + -mask.png + -mask.json + qa/g2-3-portrait/img/pt-edits-x4.png + pt-mask-ids.png + T9_CODEX_NOTES.md · ปิดรู 50 px · QA 11/11 exit 0 · selftest 13/13 exit 0 · ข้อ 3.5 จด 1 บริเวณ V1 (ภายในหัวเข็มขัด; คง mask ตามกติกา) · เครดิต 0 · ต่างจากสเปก: ไม่มี
+T10 · 1 พ.ย. 2569 · REVIEW_CODEX_T10_G24_S6.md · ฐาน 56d3d8c · เริ่มหลังส่ง T9 da0aaff · ชุดหลัก 38/38 exit 0 · negative R6 37/38 exit 1 (จงใจ FAIL 1 ข้อ) · R1–R7 ผ่าน 7/7 · บั๊ก runtime ใหม่ 0 · ข้อเสนอ coverage S8q ในรายงาน · เครดิต 0 · ต่างจากสเปก: ไม่มี
