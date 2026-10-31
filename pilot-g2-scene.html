@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="th"><head><meta charset="utf-8"><link rel="icon" href="data:,"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>G2.4 Pilot · ชายหมู่บ้านหน้าปากถ้ำ / village edge</title>
+<style>
+html,body{margin:0;height:100%;overflow:hidden;background:#0c0a18;font:12px system-ui,sans-serif;touch-action:none;-webkit-user-select:none;user-select:none}
+canvas{position:fixed;inset:0;width:100%;height:100%;image-rendering:pixelated}
+#ui{position:fixed;left:6px;top:6px;display:flex;gap:4px;flex-wrap:wrap;max-width:70%}
+#ui button{font:12px system-ui;padding:6px 8px;border-radius:6px;border:1px solid #888;background:#fff}
+#ui button.on{background:#ffd76a}
+#pad{position:fixed;right:10px;bottom:10px;display:grid;grid-template-columns:repeat(3,44px);gap:4px;opacity:.85}
+#pad button{height:44px;font-size:15px;border-radius:8px;border:1px solid #777;background:#f4f2fa}
+#msg{position:fixed;left:50%;top:52px;transform:translateX(-50%);max-width:70%;padding:8px 14px;border-radius:10px;background:rgba(10,8,24,.82);color:#fff;font:15px system-ui;text-align:center;display:none;pointer-events:none}
+#msg small{display:block;font-size:12px;opacity:.85}
+</style></head><body>
+<canvas id="cv"></canvas>
+<div id="ui">
+ <button id="bZoom">ซูม ใกล้ / zoom near</button>
+ <button id="bPow">พลัง / power 100%</button>
+ <button id="bLR">วงแสง / light 130</button>
+ <button id="bGuide">เส้นช่วย / guides</button>
+</div>
+<div id="pad"></div>
+<div id="msg" role="status" aria-live="polite"></div>
+<script>
+// G2.4 scene Pilot (Claude · 31 Oct 2569 · S6 of G2_4_SCENE_PLAN.md). Separate test page: no index.html / sw.js / save / Firebase.
+// Village edge in front of the cave mouth at dusk: layout v2 (28 x 14, T = 32), art = Codex sets 10 + 11 (T4 T5 T6, accepted), the locked kid (cell 96, _4)
+// and the GM lantern L0 (held, light layer, power, light size 72/100/130/160, default 130) exactly as pilot-g2-motion.html draws them.
+// Rules kept: whole-number scale only (no 75 % zoom here) · no rotation, no ctx.filter · art never stretched, cut or recoloured · every file has a drawn fallback.
+// Collision = the feet point on the tile grid (slides along walls) · door cells: feet x pulled to 224, feet y >= 264 (spec 10 section 4) · trees chosen so that
+// walk-behind cells <= 24 and 0 in the slime zone (qa/g2-4-scene/tools/trees.py) · art in front of the kid fades to 55 % in 200 ms.
+// Dusk: night layer over the field (dark grass stays >= 35 % of lit grass), holes for the 5 street lamps (4.5 tiles) and the kid's lantern.
+// Slimes (set 11): wander only on the 47 dark-field cells (never in lamp light), hop 0-3 whole px, shadow drawn by code (no sprite scaling).
+// Exit X = warp ring -> the GM cave room (cave-floor.jpg + darkness + lantern light) with a ring back · closed village gate -> message TH + EN.
+'use strict';
+const T=32, C=96, FEET=[48,94], DIRS=['S','SE','E','NE','N','NW','W','SW'];
+const DV={S:[0,1],SE:[1,1],E:[1,0],NE:[1,-1],N:[0,-1],NW:[-1,-1],W:[-1,0],SW:[-1,1]};
+const OFF_TABLE={S:0,SE:0,E:3,NE:1,N:1,NW:-1,W:-1,SW:0};
+const GRID=[  // layout v2 (qa/g2-4-scene/tools/layout.py) · row 0 = north
+ "^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+ "^^^^^^^^^^^^^^^CCCC^^^^^^^^^",
+ "TT^^^^^^^^^^^^^CCCC^^^^^^^TT",
+ "TT^^^^^^^^^^^^^CCCC^^^^^^^TT",
+ "T.............L=XX=L.......T",
+ "T...............==.........T",
+ "T..HHHHHHHH....==.......R..T",
+ "T..HHHHHHHH..L.==..........T",
+ "T..HHHDDHHHbr.==.......R.*.T",
+ "T...L---------==...........T",
+ "T............L==...........T",
+ "TT.......*.....=S.........TT",
+ "TTT..TT.......==.....TT..TTT",
+ "TTTTTTTTTTTTffGGffTTTTTTTTTT"];
+const W=28, H=14, MAPW=W*T, MAPH=H*T, SOLID='^CTHLbrfGR', PATHC='=-XGDS', CLIFFC='^C', LAMP_R=4.5;
+const TREES=[[26,2,0,0],[0,2,0,0],[2,12,0,0],[5,12,0,0],[27,4,12,0],[0,4,0,0],[27,6,12,0],[0,6,0,0],[27,8,12,0],[0,8,0,0],[27,10,12,0],[0,10,-20,0],[27,12,12,0],[0,13,0,0],[21,13,0,20],[25,13,0,20]];   // [cell x, y, image dx, dy] (trees.py: walk-behind 24, slime zone 0)
+const PROP_AT=[[11,8,'crate'],[12,8,'rope'],[24,6,'boulder'],[23,8,'boulder'],[12,13,'fence'],[13,13,'fence'],[16,13,'fence'],[17,13,'fence']];
+const DECOR=['tall_grass','white_flowers','lavender','clover','mushrooms','tall_grass','white_flowers'];
+const HUT_TL=[96,32], HUT_SORT=287, CAVE_TL=[448,-48], GATE_TL=[448,384], GATE_SORT=446, DOOR_X=224, DOOR_MINY=264, START=[16,11];
+const RING={x:544,y:144,rx:26,ry:9}, CAVE_ROOM={w:13,h:10,ring:[6,8],arrive:[6,6]};
+const IDLE_LOOP=[0,1,2,1], WALK_MS=100, IDLE_MS=200, SPEED=48, FADE_A=0.55, FADE_MS=200;
+const NIGHT_RGB=[14,12,34], NIGHT_A=0.58, LAMP_POOL={R:144,bands:[[44,1],[60,0.94],[74,0.87],[87,0.79],[99,0.7],[110,0.6],[120,0.5],[129,0.4],[137,0.29],[144,0.18]]};   // field dusk: lit pool r <= 4.5 tiles
+const SLIME_N=3, SLIME_SPEED=18, HOP=[0,1,2,3,3,2,1,0], HOP_MS=70;
+const cv=document.getElementById('cv');let g=cv.getContext('2d');
+const ST={mode:'field',dir:'N',anim:'idle',fi:0,t:0,blinkAt:4000,pos:{x:START[0]*T+16,y:START[1]*T+16},moving:false,mv:null,auto:null,img:{},ok:{walk:false,idle:false,anc:false,walkhold:false,lantern:false,hold:false},
+  hold:true,ease:true,easeStep:true,lpos:null,ldir:null,lhist:null,lclock:0,gm:false,power:100,fx:true,lanHang:null,zoomOut:false,guides:false,files:{},warp:null,msg:null,fade:{},seed:2410,log:[]};
+const EASE_MAX=3, EASE_WIN=120, LAN_HANG=[16,6], LAN_CELL=32;
+function load(src){return new Promise(r=>{const i=new Image();i.onload=()=>{ST.files[src]=true;r(i)};i.onerror=()=>{ST.files[src]=false;r(null)};i.src=src})}
+async function jget(src){try{const r=await fetch(src);if(!r.ok)throw 0;const j=await r.json();ST.files[src]=true;return j}catch(e){ST.files[src]=false;return null}}
+function mk(w,h){const c=document.createElement('canvas');c.width=w;c.height=h;return c}
+function rng(seed){let a=seed>>>0;return()=>{a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296}}
+// ---------- grid ----------
+const ch=(x,y)=>(x<0||y<0||x>=W||y>=H)?'#':GRID[y][x];
+const cellOf=(x,y)=>[Math.floor(x/T),Math.floor(y/T)];
+function solidCell(x,y){if(ST.mode==='cave'){return x<=0||y<=0||x>=CAVE_ROOM.w-1||y>=CAVE_ROOM.h-1}const c=ch(x,y);return c==='#'||SOLID.includes(c)}
+function solidAt(px,py){const [x,y]=cellOf(px,py);if(solidCell(x,y))return true;if(ST.mode==='field'&&ch(x,y)==='D'&&py<DOOR_MINY)return true;return false}
+const LAMPS=[];GRID.forEach((r,y)=>[...r].forEach((c,x)=>{if(c==='L')LAMPS.push([x,y])}));
+const lampDist=(x,y)=>Math.min(...LAMPS.map(([a,b])=>Math.hypot(x-a,y-b)));
+const CRYSTALS=[];GRID.forEach((r,y)=>[...r].forEach((c,x)=>{if(c==='*')CRYSTALS.push([x,y])}));
+const ZONE=(()=>{const dark=new Set();for(let y=0;y<H;y++)for(let x=0;x<W;x++){const c=GRID[y][x];if((c==='.'||c==='*')&&lampDist(x,y)>LAMP_R)dark.add(x+','+y)}   // = layout.py slime_zone
+  const regs=[],left=new Set(dark);while(left.size){const s=left.values().next().value;left.delete(s);const reg=new Set([s]),st=[s];
+    while(st.length){const [x,y]=st.pop().split(',').map(Number);for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){const k=(x+dx)+','+(y+dy);if(left.has(k)){left.delete(k);reg.add(k);st.push(k)}}}regs.push(reg)}
+  return regs.find(r=>CRYSTALS.some(([x,y])=>r.has(x+','+y)))||new Set()})();
+function astar(a,b,ok){   // 8 directions, no corner cutting (same as layout.py)
+  const key=p=>p[0]+','+p[1];if(!ok(b[0],b[1])||!ok(a[0],a[1]))return null;
+  const h=p=>Math.max(Math.abs(p[0]-b[0]),Math.abs(p[1]-b[1]))+0.41421356*Math.min(Math.abs(p[0]-b[0]),Math.abs(p[1]-b[1]));
+  const open=[[h(a),0,a]],gs=new Map([[key(a),0]]),came=new Map();
+  while(open.length){let bi=0;for(let i=1;i<open.length;i++)if(open[i][0]<open[bi][0]-1e-9||(Math.abs(open[i][0]-open[bi][0])<1e-9&&open[i][1]>open[bi][1]))bi=i;
+    const [,gc,cur]=open.splice(bi,1)[0];if(cur[0]===b[0]&&cur[1]===b[1]){const p=[cur];let k=key(cur);while(came.has(k)){const q=came.get(k);p.push(q);k=key(q)}return p.reverse()}
+    if(gc>gs.get(key(cur))+1e-9)continue;
+    for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]]){const nx=cur[0]+dx,ny=cur[1]+dy;if(!ok(nx,ny))continue;if(dx&&dy&&!(ok(nx,cur[1])&&ok(cur[0],ny)))continue;
+      const ng=gc+(dx&&dy?1.41421356:1),k=nx+','+ny;if(ng<(gs.has(k)?gs.get(k):1e18)-1e-9){gs.set(k,ng);came.set(k,cur);open.push([ng+h([nx,ny]),ng,[nx,ny]])}}}
+  return null}
+const walkable=(x,y)=>!solidCell(x,y);
+// ---------- images ----------
+const A={};   // art: sheets + json
+async function boot(){
+  const L=f=>load(f);
+  const [w,i,wh,ln]=await Promise.all([L('c2-pilot-kid4-walk.png'),L('c2-pilot-kid4-idleanim.png'),L('c2-pilot-kid4-walkhold.png'),gmLantern()]);
+  ST.hanc=await jget('c2-pilot-hold-anchors.json');ST.ok.hold=!!(ST.hanc&&ST.hanc.walk_hold&&ST.hanc.idle_hold);
+  if(wh){ST.img.walkhold=wh;ST.ok.walkhold=true}if(ln){ST.img.lantern=ln;ST.ok.lantern=true}
+  ST.anc=await jget('c2-pilot-anchors.json');ST.ok.anc=!!ST.anc;if(ST.anc){const dx=ST.anc.renderOffset&&ST.anc.renderOffset.dx;if(dx&&DIRS.every(d=>Number.isInteger(dx[d])))ST.offTable=Object.assign({},dx)}
+  ST.tagTop=ST.anc?Math.min(...['idle','walk'].flatMap(a=>DIRS.flatMap(d=>(ST.anc.frames[a]&&ST.anc.frames[a][d]||[]).map(f=>f.head_top[1])))):8;
+  if(w){ST.img.walk=w;ST.ok.walk=true}if(i){ST.img.idle=breatheW(i);ST.ok.idle=true}
+  const names=['g24-tiles-path.png','g24-tiles-cliff.png','g24-hut.png','g24-hut-door.png','g24-cave-mouth.png','g24-tree-a.png','g24-tree-b.png','g24-lamp.png','g24-gate.png','g24-props.png','g24-slime.png','cave-floor.jpg'];
+  const imgs=await Promise.all(names.map(L));names.forEach((n,k)=>A[n]=imgs[k]);
+  const js=await Promise.all(['g24-tiles.json','g24-hut.json','g24-props.json','g24-slime.json','g24-cave-mouth.json'].map(jget));
+  [A.tiles,A.hutJ,A.propsJ,A.slimeJ,A.caveJ]=js;
+  buildFists();buildFx();buildWorld();buildSlimes();resize();sync();ST.ready=true;requestAnimationFrame(loop)}
+function breatheW(img){const c=mk(img.width,img.height),x=c.getContext('2d');x.drawImage(img,0,0);
+  const w=DIRS.indexOf('W'),cut=62,k=2,sx=k*C,sy=w*C;const cell=x.getImageData(sx,sy,C,C);x.clearRect(sx,sy,C,C);
+  const up=mk(C,C);up.getContext('2d').putImageData(cell,0,0);x.drawImage(up,0,1,C,cut,sx,sy,C,cut);x.drawImage(up,0,cut,C,C-cut,sx,sy+cut,C,C-cut);return c}
+const GM_BASE='c2-held-lantern_L0-S-trial', POWERS=[100,50,10,0];
+const GM_POW={100:{light:1,glow:1,hole:1},50:{light:1,glow:0.5,hole:0.5},10:{light:0.35,glow:0,hole:0},0:{light:0,glow:0,hole:0}};
+function sheet8(img){const c=mk(8*LAN_CELL,LAN_CELL),x=c.getContext('2d');for(let k=0;k<8;k++)x.drawImage(img,0,0,LAN_CELL,LAN_CELL,k*LAN_CELL,0,LAN_CELL,LAN_CELL);return c}
+async function gmLantern(){const [b,l]=await Promise.all([load(GM_BASE+'.png'),load(GM_BASE+'-light.png')]);const j=await jget(GM_BASE+'.json');
+  const grip=j&&Array.isArray(j.grip)&&j.grip.length===2&&j.grip.every(v=>Number.isInteger(v)&&v>=0&&v<LAN_CELL)?j.grip:null;
+  if(!b||!grip||b.width!==LAN_CELL||b.height!==LAN_CELL)return null;ST.lanHang=grip;if(l&&l.width===LAN_CELL&&l.height===LAN_CELL)ST.img.lanternLight=sheet8(l);return sheet8(b)}
+// ---------- light stamps (stepped bands at art resolution, built once) ----------
+const FX={}, DARK_A=0.86, DARK_RGB='8,6,18';
+const GLOW={R:40,bands:[[8,0.26],[14,0.20],[20,0.15],[27,0.10],[34,0.06],[40,0.03]],col:[255,179,107]};
+const LHOLE={R:72,bands:[[20,1],[32,0.85],[44,0.65],[56,0.42],[66,0.22],[72,0.1]]};
+const LHOLE72=LHOLE.bands.map(b=>b.slice()), LR_SET=[72,100,130,160], LR_DEFAULT=130;
+function setLR(R){if(!LR_SET.includes(R))return;LHOLE.R=R;LHOLE.bands=LHOLE72.map(b=>[Math.round(b[0]*R/72),b[1]]);if(FX.lhole)FX.lhole=stampRadial(LHOLE.R,LHOLE.bands,[0,0,0])}
+const NHOLE={cx:48,cy:84,k:1};
+const POOL={cx:44,cy:66,rx:30,ry:34,bands:[[0.55,1],[0.8,0.62],[1,0.3]]}, POOL_CAVE={a:0.45};
+const LAMP_GLOW={R:30,bands:[[6,0.5],[11,0.36],[16,0.24],[22,0.14],[30,0.06]],col:[255,170,96]};
+function stampRadial(R,bands,rgb){const c=mk(2*R+1,2*R+1),x=c.getContext('2d'),im=x.createImageData(2*R+1,2*R+1);
+  for(let v=0;v<=2*R;v++)for(let u=0;u<=2*R;u++){const b=bands.find(b=>Math.hypot(u-R,v-R)<=b[0]);if(!b)continue;const o=(v*(2*R+1)+u)*4;
+    im.data[o]=rgb[0];im.data[o+1]=rgb[1];im.data[o+2]=rgb[2];im.data[o+3]=Math.round(255*b[1])}x.putImageData(im,0,0);return c}
+function stampPool(rgb,a){const c=mk(C,C),x=c.getContext('2d'),im=x.createImageData(C,C);
+  for(let v=0;v<C;v++)for(let u=0;u<C;u++){const b=POOL.bands.find(b=>Math.hypot((u-POOL.cx)/POOL.rx,(v-POOL.cy)/POOL.ry)<=b[0]);if(!b)continue;const o=(v*C+u)*4;
+    im.data[o]=rgb[0];im.data[o+1]=rgb[1];im.data[o+2]=rgb[2];im.data[o+3]=Math.round(255*b[1]*a)}x.putImageData(im,0,0);return c}
+function buildFx(){FX.glow=stampRadial(GLOW.R,GLOW.bands,GLOW.col);FX.lhole=stampRadial(LHOLE.R,LHOLE.bands,[0,0,0]);FX.poolHole=stampPool([0,0,0],POOL_CAVE.a);
+  FX.lampPool=stampRadial(LAMP_POOL.R,LAMP_POOL.bands,[0,0,0]);FX.lampGlow=stampRadial(LAMP_GLOW.R,LAMP_GLOW.bands,LAMP_GLOW.col);FX.dark=mk(1,1);FX.night=mk(MAPW,MAPH)}
+function gmPow(){return GM_POW[ST.power]||GM_POW[0]}
+function gmLit(){return!!ST.img.lanternLight&&gmPow().light>0}
+const FIST={};
+function buildFists(){if(!ST.hanc)return;[['idle','idle_hold',ST.img.idle,4],['walk','walk_hold',ST.img.walkhold,6]].forEach(([a,key,img,nf])=>{if(!img)return;FIST[a]={};
+  const c=mk(img.width,img.height),x=c.getContext('2d');x.drawImage(img,0,0);
+  DIRS.forEach((d,i)=>{FIST[a][d]=[];for(let k=0;k<nf;k++){const fr=(ST.hanc[key][d]||[])[k];if(!fr||!fr.fist){FIST[a][d].push(null);continue}
+    const bx=Math.min(...fr.fist.map(p=>p[0])),by=Math.min(...fr.fist.map(p=>p[1])),bw=Math.max(...fr.fist.map(p=>p[0]))-bx+1,bh=Math.max(...fr.fist.map(p=>p[1]))-by+1;
+    const o=mk(bw,bh),ox=o.getContext('2d');fr.fist.forEach(([fx,fy])=>ox.drawImage(c,k*C+fx,i*C+fy,1,1,fx-bx,fy-by,1,1));FIST[a][d].push({c:o,x:bx,y:by,w:bw,h:bh})}})})}
+function holdOn(){return ST.hold&&ST.ok.hold&&ST.ok.lantern&&ST.ok.walkhold&&ST.ok.idle}
+function lanternTarget(){if(!holdOn())return null;const fr=(ST.hanc[ST.anim==='walk'?'walk_hold':'idle_hold'][ST.dir]||[])[curFrame()];return fr&&fr.anchor?fr.anchor:null}
+function easeLantern(dt){const t=lanternTarget();if(!t){ST.lpos=null;ST.ldir=null;ST.lhist=null;return}
+  const now=ST.lclock=(ST.lclock||0)+dt;
+  if(!ST.lpos||ST.ldir!==ST.dir||!ST.ease){ST.lpos=[t[0],t[1]];ST.ldir=ST.dir;ST.lhist=[{t:now,p:[t[0],t[1]]}];return}
+  ST.lhist=(ST.lhist||[]).filter(h=>now-h.t<=EASE_WIN);const Hh=ST.lhist.length?ST.lhist:[{p:ST.lpos.map(Math.round)}];
+  const lim=a=>[Math.max(...Hh.map(h=>h.p[a]))-EASE_MAX,Math.min(...Hh.map(h=>h.p[a]))+EASE_MAX];
+  ST.lpos=[0,1].map(a=>{const [lo,hi]=lim(a);return Math.min(hi,Math.max(lo,t[a]))});ST.lhist.push({t:now,p:ST.lpos.map(Math.round)})}
+// ---------- world build: ground canvas (tiles, decor, door layer, cave mouth) + sprite list ----------
+const W0={spr:[],ground:null,errors:[]};
+function vcount(set,vx,vy){let n=0;for(const [cx,cy] of [[vx-1,vy-1],[vx,vy-1],[vx-1,vy],[vx,vy]]){const x=Math.min(W-1,Math.max(0,cx)),y=Math.min(H-1,Math.max(0,cy));if(set.includes(GRID[y][x]))n++}return n}
+function tileFor(x,y){   // Wang corners NW,NE,SW,SE (g24-tiles.json): cliff = all 4 cells round a corner are cliff · dirt = 2+ of the 4 are path
+  const cl=[[x,y],[x+1,y],[x,y+1],[x+1,y+1]].map(([a,b])=>vcount(CLIFFC,a,b)===4);
+  if(cl.some(v=>v))return{sheet:'g24-tiles-cliff.png',key:cl.map(v=>v?'cliff':'grass').join(','),terr:cl.filter(v=>v).length>=2?'cliff':'grass'};
+  const pt=[[x,y],[x+1,y],[x,y+1],[x+1,y+1]].map(([a,b])=>vcount(PATHC,a,b)>=2);
+  return{sheet:'g24-tiles-path.png',key:pt.map(v=>v?'dirt':'grass').join(','),terr:pt.filter(v=>v).length>=2?'dirt':'grass'}}
+const FALLBACK_COL={grass:'#4f6e5e',dirt:'#b8956a',cliff:'#5d5078'};
+function propRect(k){const j=A.propsJ&&A.propsJ.items&&A.propsJ.items[k];return j?{sx:j[0],sy:j[1],sw:32,sh:32}:null}
+function alphaMask(img,sx,sy,sw,sh){const c=mk(sw,sh),x=c.getContext('2d');x.drawImage(img,sx,sy,sw,sh,0,0,sw,sh);const d=x.getImageData(0,0,sw,sh).data,m=new Uint8Array(sw*sh);
+  let x0=sw,y0=sh,x1=-1,y1=-1;for(let v=0;v<sh;v++)for(let u=0;u<sw;u++)if(d[(v*sw+u)*4+3]>0){m[v*sw+u]=1;if(u<x0)x0=u;if(u>x1)x1=u;if(v<y0)y0=v;if(v>y1)y1=v}return{m,bb:x1<0?null:[x0,y0,x1,y1]}}
+function addSprite(o){o.alpha=1;o.id=W0.spr.length;if(o.img){const mm=alphaMask(o.img,o.sx,o.sy,o.sw,o.sh);o.mask=mm.m;o.bb=mm.bb}W0.spr.push(o);return o}
+function placeProp(kind,cx,cy,fade){const r=propRect(kind),img=A['g24-props.png'];
+  if(img&&r){const mm=alphaMask(img,r.sx,r.sy,32,32);const bb=mm.bb||[0,0,31,31];const l=cx*T+16-Math.round((bb[0]+bb[2])/2),t=(cy+1)*T-4-bb[3];
+    return addSprite({kind,img,sx:r.sx,sy:r.sy,sw:32,sh:32,x:l,y:t,sort:t+bb[3],fade:!!fade})}
+  return addSprite({kind,img:null,x:cx*T+4,y:cy*T+6,sw:24,sh:22,sort:(cy+1)*T-4,fb:kind==='bush'?'#3d5e44':kind==='crystal'?'#7fd8ee':kind==='fence'?'#7a5a3a':'#7d6a58',fade:!!fade})}
+function buildWorld(){
+  const gr=mk(MAPW,MAPH),x=gr.getContext('2d');x.imageSmoothingEnabled=false;W0.ground=gr;W0.tileMiss=0;
+  for(let cy=0;cy<H;cy++)for(let cx=0;cx<W;cx++){const t=tileFor(cx,cy),im=A[t.sheet],pos=A.tiles&&A.tiles.files&&A.tiles.files[t.sheet]&&A.tiles.files[t.sheet].tiles[t.key];
+    if(im&&pos)x.drawImage(im,pos[0],pos[1],T,T,cx*T,cy*T,T,T);else{if(im&&A.tiles)W0.tileMiss++;x.fillStyle=FALLBACK_COL[t.terr];x.fillRect(cx*T,cy*T,T,T)}}
+  const R=rng(ST.seed),pimg=A['g24-props.png'];   // flat decor on grass (seeded, not on paths / door / start / crystal)
+  for(let cy=4;cy<H;cy++)for(let cx=1;cx<W-1;cx++){const c=GRID[cy][cx];const r1=R(),r2=R(),r3=R(),r4=R();if(c!=='.'||r1>0.16)continue;
+    const k=DECOR[Math.floor(r2*DECOR.length)],r=propRect(k);const dx=Math.round(r3*8-4),dy=Math.round(r4*8-4);
+    if(pimg&&r)x.drawImage(pimg,r.sx,r.sy,32,32,cx*T+dx,cy*T+dy,32,32);W0.decor=(W0.decor||0)+1}
+  const hi=A['g24-hut.png'],hd=A['g24-hut-door.png'];
+  if(hd)x.drawImage(hd,HUT_TL[0],HUT_TL[1]);else{x.fillStyle='#1a1424';x.fillRect(HUT_TL[0]+102,HUT_TL[1]+146,52,108)}   // door interior (behind the kid)
+  const cm=A['g24-cave-mouth.png'];
+  if(cm)x.drawImage(cm,CAVE_TL[0],CAVE_TL[1]);else{x.fillStyle='#4a4060';x.beginPath();x.ellipse(544,72,86,70,0,Math.PI,0);x.lineTo(630,132);x.lineTo(458,132);x.fill();x.fillStyle='#140c18';x.fillRect(517,64,54,60);x.beginPath();x.ellipse(544,64,27,14,0,Math.PI,0);x.fill()}   // fallback arch, opening 54 x 74
+  // sprites (y-sorted every frame with the kid and the slimes)
+  if(hi)addSprite({kind:'hut',img:hi,sx:0,sy:0,sw:256,sh:256,x:HUT_TL[0],y:HUT_TL[1],sort:HUT_SORT,fade:true});
+  else addSprite({kind:'hut',img:null,x:HUT_TL[0],y:HUT_TL[1]+64,sw:256,sh:192,sort:HUT_SORT,fb:'#8a5a44',hole:[HUT_TL[0]+102,HUT_TL[1]+146,52,108],fade:true});
+  const trees=new Set();TREES.forEach(([cx,cy,dx,dy],k)=>{trees.add(cx+','+cy);const im=A[k%2?'g24-tree-b.png':'g24-tree-a.png'],l=cx*T+16-64+dx,t=(cy+1)*T-128+dy;
+    if(im)addSprite({kind:'tree',img:im,sx:0,sy:0,sw:128,sh:128,x:l,y:t,sort:t+124,fade:true});else addSprite({kind:'tree',img:null,x:l+20,y:t+8,sw:88,sh:116,sort:t+124,fb:'#2f5c46',round:true,fade:true})});
+  for(let cy=0;cy<H;cy++)for(let cx=0;cx<W;cx++)if(GRID[cy][cx]==='T'&&!trees.has(cx+','+cy))placeProp('bush',cx,cy,false);
+  LAMPS.forEach(([cx,cy])=>{const im=A['g24-lamp.png'],l=cx*T+16-64,t=(cy+1)*T-128;
+    if(im)addSprite({kind:'lamp',img:im,sx:0,sy:0,sw:128,sh:128,x:l,y:t,sort:t+124,fade:true});else addSprite({kind:'lamp',img:null,x:l+59,y:t+30,sw:10,sh:94,sort:t+124,fb:'#5a3c2a',lantern:[l+24,t+44,19,31],fade:true})});
+  const gi=A['g24-gate.png'];if(gi)addSprite({kind:'gate',img:gi,sx:0,sy:0,sw:64,sh:64,x:GATE_TL[0],y:GATE_TL[1],sort:GATE_SORT,fade:false});else addSprite({kind:'gate',img:null,x:GATE_TL[0]+3,y:GATE_TL[1]+8,sw:58,sh:55,sort:GATE_SORT,fb:'#8a6040',fade:false});
+  PROP_AT.forEach(([cx,cy,k])=>placeProp(k,cx,cy,false));
+  CRYSTALS.forEach(([cx,cy])=>placeProp('crystal',cx,cy,false));
+  buildNight()}
+function lampLight(cx,cy){return[cx*T+16-24,cy*T+24]}   // ground pool under the paper lantern (lamp art: lantern x 24-42 of 128, post x 59-69)
+function lampHead(cx,cy){return[cx*T+16-31,(cy+1)*T-69]}
+function buildNight(){const n=mk(MAPW,MAPH),x=n.getContext('2d');x.fillStyle='rgba('+NIGHT_RGB.join(',')+','+NIGHT_A+')';x.fillRect(0,0,MAPW,MAPH);
+  x.globalCompositeOperation='destination-out';LAMPS.forEach(([cx,cy])=>{const [px,py]=lampLight(cx,cy);x.drawImage(FX.lampPool,px-LAMP_POOL.R,py-LAMP_POOL.R)});x.globalCompositeOperation='source-over';W0.nightStatic=n}
+// ---------- slimes ----------
+const SL=[];
+function buildSlimes(){const R=rng(ST.seed+11),cells=[...ZONE].map(k=>k.split(',').map(Number)).sort((a,b)=>a[1]-b[1]||a[0]-b[0]);SL.rng=R;SL.cells=cells;
+  const used=new Set();for(let k=0;k<SLIME_N&&cells.length;k++){let c;do{c=cells[Math.floor(R()*cells.length)]}while(used.has(c+'')&&used.size<cells.length);used.add(c+'');
+    SL.push({x:c[0]*T+16,y:c[1]*T+16,dir:DIRS[Math.floor(R()*8)],path:null,wait:400+R()*1600,hop:0,bob:0,dirs:{}})}}
+const inZone=(x,y)=>ZONE.has(x+','+y);
+function dir8(vx,vy){const a=Math.atan2(vy,vx),k=((Math.round(a/(Math.PI/4))%8)+8)%8;return['E','SE','S','SW','W','NW','N','NE'][k]}
+function slimeStep(s,dt){
+  if(!s.path){s.wait-=dt;s.bob=0;if(s.wait>0)return;const R=SL.rng,c=SL.cells[Math.floor(R()*SL.cells.length)],me=cellOf(s.x,s.y);
+    const p=astar(me,c,inZone);if(!p||p.length<2){s.wait=500+R()*1500;return}s.path=p.slice(1);s.hop=0}
+  const [tx,ty]=[s.path[0][0]*T+16,s.path[0][1]*T+16],vx=tx-s.x,vy=ty-s.y,d=Math.hypot(vx,vy),m=SLIME_SPEED*dt/1000;
+  if(d>0.01)s.dir=dir8(vx,vy);s.dirs[s.dir]=(s.dirs[s.dir]||0)+1;
+  if(d<=m){s.x=tx;s.y=ty;s.path.shift();if(!s.path.length){s.path=null;s.wait=800+SL.rng()*2200}}else{s.x+=vx/d*m;s.y+=vy/d*m}
+  s.hop+=dt;s.bob=s.path?HOP[Math.floor(s.hop/HOP_MS)%HOP.length]:0}
+// ---------- view ----------
+function resize(){const dpr=window.devicePixelRatio||1;cv.width=Math.round(innerWidth*dpr);cv.height=Math.round(innerHeight*dpr)}
+addEventListener('resize',resize);
+function baseScale(){return Math.max(1,Math.round(cv.height/384))}
+function scale(){const b=baseScale();return ST.zoomOut?Math.max(1,b-1):b}   // whole numbers only
+function offX(d){return(ST.offTable||OFF_TABLE)[d]}
+const BLINK_DIRS=['S','SE','E','W','SW'];
+function curFrame(){if(ST.anim==='walk')return ST.fi%6;const li=ST.fi%4;return li===3&&ST.blinkNow&&BLINK_DIRS.includes(ST.dir)?3:IDLE_LOOP[li]}
+function mapSize(){return ST.mode==='cave'?[CAVE_ROOM.w*T,CAVE_ROOM.h*T]:[MAPW,MAPH]}
+function cam(){const s=scale(),vw=cv.width/s,vh=cv.height/s,[mw,mh]=mapSize();
+  const cx=mw<=vw?(mw-vw)/2:Math.min(mw-vw,Math.max(0,ST.pos.x-vw/2)),cy=mh<=vh?(mh-vh)/2:Math.min(mh-vh,Math.max(0,ST.pos.y-vh/2));
+  const X=Math.round(cx),Y=Math.round(cy);return{s,X,Y,ox:-X*s,oy:-Y*s,vw,vh}}
+// ---------- movement ----------
+function tryMove(nx,ny){   // feet point vs tiles, slide along walls · returns the cell that blocked (for the gate message)
+  const p=ST.pos;if(!solidAt(nx,ny)){p.x=nx;p.y=ny;return null}
+  const bc=cellOf(nx,ny);if(!solidAt(nx,p.y)){p.x=nx;return bc}if(!solidAt(p.x,ny)){p.y=ny;return bc}return bc}
+function doorPull(dt){const [cx,cy]=cellOf(ST.pos.x,ST.pos.y);if(ST.mode!=='field'||ch(cx,cy)!=='D')return;
+  const m=SPEED*2*dt/1000,d=DOOR_X-ST.pos.x;ST.pos.x=Math.abs(d)<=m?DOOR_X:ST.pos.x+Math.sign(d)*m;if(ST.pos.y<DOOR_MINY)ST.pos.y=DOOR_MINY}
+function step(dt){
+  ST.t+=dt;ST.now=(ST.now||0)+dt;
+  if(ST.warp){warpStep(dt)}
+  else if(ST.auto)autoStep(dt);
+  else if(ST.moving&&ST.mv){const [vx,vy]=DV[ST.dir],n=Math.hypot(vx,vy);const b=tryMove(ST.pos.x+vx/n*SPEED*dt/1000,ST.pos.y+vy/n*SPEED*dt/1000);if(b)blockedBy(b)}
+  doorPull(dt);if(!ST.warp)checkWarp();
+  const ms=ST.anim==='walk'?WALK_MS:IDLE_MS;
+  if(ST.anim==='idle')ST.blinkClock=(ST.blinkClock||0)+dt;
+  while(ST.t>=ms){ST.t-=ms;ST.fi++;if(ST.anim==='idle'){const li=ST.fi%4;ST.blinkNow=false;if(li===3&&ST.blinkClock>=ST.blinkAt){ST.blinkNow=true;ST.blinkClock=0;ST.blinkAt=3000+Math.random()*2200}}}
+  easeLantern(dt);
+  if(ST.mode==='field'){SL.forEach(s=>slimeStep(s,dt));fadeStep(dt)}
+  if(ST.msg){ST.msg.t-=dt;if(ST.msg.t<=0)hideMsg()}}
+function blockedBy([cx,cy]){if(ST.mode==='field'&&ch(cx,cy)==='G')showMsg('ประตูหมู่บ้านปิดตอนค่ำ','The village gate is closed at night',2500,'gate')}
+function goto(cx,cy){   // tap to walk / tests: A* on the page grid, then walk the waypoints with the same movement + collision
+  const me=cellOf(ST.pos.x,ST.pos.y);let tgt=[cx,cy],gate=false;
+  if(ST.mode==='field'&&ch(cx,cy)==='G'){tgt=[cx,cy-1];gate=true}
+  const ok=(x,y)=>walkable(x,y)&&(ST.mode!=='field'||ch(x,y)!=='X'||(x===tgt[0]&&y===tgt[1])||(x===me[0]&&y===me[1]));   // never walk through the exit unless it is the goal
+  const p=astar(me,tgt,ok);if(!p){ST.auto=null;return null}
+  const wp=p.slice(1).map(([x,y])=>ST.mode==='field'&&ch(x,y)==='D'?[DOOR_X,DOOR_MINY+4]:[x*T+16,y*T+16]);
+  if(!wp.length)wp.push([tgt[0]*T+16,tgt[1]*T+16]);
+  ST.auto={wp,goal:tgt,gate,best:1e9,stuck:0,done:false,fail:false};return p.length-1}
+function autoStep(dt){const a=ST.auto;if(!a.wp.length){a.done=true;ST.auto=null;stop();if(a.gate){ST.dir='S';blockedBy([a.goal[0],a.goal[1]+1])}ST.lastAuto=a;return}
+  const [tx,ty]=a.wp[0],vx=tx-ST.pos.x,vy=ty-ST.pos.y,d=Math.hypot(vx,vy),m=SPEED*dt/1000;
+  if(d<=m){const ok_=!solidAt(tx,ty);if(ok_){ST.pos.x=tx;ST.pos.y=ty}a.wp.shift();a.best=1e9;a.stuck=0;if(!ok_){a.fail=true;ST.auto=null;stop();ST.lastAuto=a}return}
+  const dd=dir8(vx,vy);if(ST.anim!=='walk'){ST.anim='walk';ST.fi=0;ST.t=0}ST.dir=dd;ST.moving=true;
+  tryMove(ST.pos.x+vx/d*m,ST.pos.y+vy/d*m);
+  const d2=Math.hypot(tx-ST.pos.x,ty-ST.pos.y);if(d2<a.best-0.05){a.best=d2;a.stuck=0}else{a.stuck+=dt;if(a.stuck>1500){a.fail=true;ST.auto=null;stop();ST.lastAuto=a}}}
+function checkWarp(){const [cx,cy]=cellOf(ST.pos.x,ST.pos.y);
+  if(ST.mode==='field'&&ch(cx,cy)==='X')startWarp('cave');
+  else if(ST.mode==='cave'&&cx===CAVE_ROOM.ring[0]&&cy===CAVE_ROOM.ring[1])startWarp('field')}
+function startWarp(to){ST.warp={t:0,to,switched:false};ST.auto=null;stop();ST.warps=(ST.warps||[]).concat([to])}
+function warpStep(dt){const w=ST.warp;w.t+=dt;
+  if(!w.switched&&w.t>=300){w.switched=true;ST.mode=w.to;ST.lpos=null;
+    if(w.to==='cave'){ST.pos={x:CAVE_ROOM.arrive[0]*T+16,y:CAVE_ROOM.arrive[1]*T+16};ST.dir='N';showMsg('ถ้ำ (ลองเดิน) · เดินลงวงแสงด้านล่างเพื่อกลับ','Cave (try-out) · step on the light ring below to go back',3500,'cave')}
+    else{ST.pos={x:16*T+16,y:5*T+20};ST.dir='S'}}
+  if(w.t>=600)ST.warp=null}
+// ---------- fade (art in front of the kid -> 55 % in 200 ms) ----------
+function covered(o){   // share of the kid body box (feet-relative, 40 x 74, every 2 px) under opaque px of o
+  if(!o.mask||!o.bb)return 0;const fx=Math.round(ST.pos.x),fy=Math.round(ST.pos.y);let n=0,k=0;
+  for(let y=fy-80;y<fy-6;y+=2)for(let x=fx-20;x<fx+20;x+=2){k++;const u=x-o.x,v=y-o.y;if(u<0||v<0||u>=o.sw||v>=o.sh)continue;if(o.mask[v*o.sw+u])n++}return n/k}
+function fadeStep(dt){const fy=ST.pos.y,fx=ST.pos.x;
+  for(const o of W0.spr){let want=1;if(o.fade&&o.sort>fy&&fx>o.x-30&&fx<o.x+o.sw+30&&fy>o.y&&fy<o.y+o.sh+90&&covered(o)>0.12)want=FADE_A;
+    const r=dt*(1-FADE_A)/FADE_MS;o.alpha=o.alpha<want?Math.min(want,o.alpha+r):Math.max(want,o.alpha-r)}}
+// ---------- messages ----------
+const msgEl=document.getElementById('msg');
+function showMsg(th,en,ms,id){msgEl.innerHTML='';const a=document.createElement('div');a.textContent=th;const b=document.createElement('small');b.textContent=en;msgEl.append(a,b);msgEl.style.display='block';ST.msg={t:ms,id,th,en}}
+function hideMsg(){msgEl.style.display='none';ST.msg=null}
+// ---------- draw ----------
+function drawSprite(o,s,ox,oy){const a=o.alpha;if(a<1)g.globalAlpha=a;
+  if(o.img)g.drawImage(o.img,o.sx,o.sy,o.sw,o.sh,ox+o.x*s,oy+o.y*s,o.sw*s,o.sh*s);
+  else{g.fillStyle=o.fb;if(o.round){g.beginPath();g.ellipse(ox+(o.x+o.sw/2)*s,oy+(o.y+o.sh*0.4)*s,o.sw/2*s,o.sh*0.4*s,0,0,7);g.fill();g.fillStyle='#5a3c2a';g.fillRect(ox+(o.x+o.sw/2-5)*s,oy+(o.y+o.sh*0.7)*s,10*s,o.sh*0.3*s)}
+    else{g.fillRect(ox+o.x*s,oy+o.y*s,o.sw*s,o.sh*s);if(o.hole){g.fillStyle='#1a1424';g.fillRect(ox+o.hole[0]*s,oy+o.hole[1]*s,o.hole[2]*s,o.hole[3]*s)}if(o.lantern){g.fillStyle='#d98a4e';g.fillRect(ox+o.lantern[0]*s,oy+o.lantern[1]*s,o.lantern[2]*s,o.lantern[3]*s)}}}
+  if(a<1)g.globalAlpha=1}
+function drawSlime(s_,s,ox,oy){const di=DIRS.indexOf(s_.dir),img=A['g24-slime.png'],b=(A.slimeJ&&A.slimeJ.base&&A.slimeJ.base[di])||[32,56],x=Math.round(s_.x),y=Math.round(s_.y);
+  if(img)g.drawImage(img,di*64,0,64,64,ox+(x-Math.round(b[0]))*s,oy+(y-b[1]-s_.bob)*s,64*s,64*s);
+  else{const t=y-s_.bob;g.fillStyle='#9b84b8';g.beginPath();g.ellipse(ox+x*s,oy+(t-24)*s,25*s,27*s,0,Math.PI,0);g.lineTo(ox+(x+25)*s,oy+t*s);g.lineTo(ox+(x-25)*s,oy+t*s);g.fill();
+    if(!['N','NE','NW'].includes(s_.dir)){g.fillStyle='#2a1a33';g.fillRect(ox+(x-9)*s,oy+(t-30)*s,4*s,5*s);g.fillRect(ox+(x+5)*s,oy+(t-30)*s,4*s,5*s)}}}
+function drawKid(s,ox,oy,info){
+  const fx=ox+ST.pos.x*s,fy=oy+ST.pos.y*s,d=ST.dir,k=curFrame();let img,kk;const Hh=holdOn();
+  if(ST.anim==='walk'&&Hh){img=ST.img.walkhold;kk=k}else if(ST.anim==='walk'){img=ST.img.walk||ST.img.idle;kk=ST.img.walk?k:0}else{img=ST.img.idle||ST.img.walk;kk=ST.img.idle?k:0}
+  const dx=offX(d),sx=Math.round(fx-FEET[0]*s+dx*s),sy=Math.round(fy-FEET[1]*s);
+  const t=Hh?lanternTarget():null,HG=ST.lanHang||LAN_HANG;
+  if(t&&(!ST.lpos||ST.ldir!==d)){ST.lpos=[t[0],t[1]];ST.ldir=d;ST.lhist=[{t:ST.lclock||0,p:[t[0],t[1]]}]}
+  const P_=gmPow(),lit=gmLit();
+  const LW=t?[ST.pos.x-FEET[0]+dx+Math.round(ST.lpos[0])-HG[0],ST.pos.y-FEET[1]+Math.round(ST.lpos[1])-HG[1]]:null;
+  if(lit&&LW&&P_.glow>0&&ST.fx){g.globalAlpha=P_.glow;g.globalCompositeOperation='screen';const gx=LW[0]+16-GLOW.R,gy=LW[1]+15-GLOW.R;
+    g.drawImage(FX.glow,0,0,2*GLOW.R+1,2*GLOW.R+1,ox+gx*s,oy+gy*s,(2*GLOW.R+1)*s,(2*GLOW.R+1)*s);g.globalCompositeOperation='source-over';g.globalAlpha=1}
+  if(img)g.drawImage(img,kk*C,DIRS.indexOf(d)*C,C,C,sx,sy,C*s,C*s);else{g.fillStyle='#c84';g.fillRect(fx-10*s,fy-40*s,20*s,40*s)}
+  let lanXY=null;
+  if(t){const lx=Math.round(ST.lpos[0]),ly=Math.round(ST.lpos[1]),di=DIRS.indexOf(d);lanXY=[di,sx+(lx-HG[0])*s,sy+(ly-HG[1])*s];
+    g.drawImage(ST.img.lantern,di*LAN_CELL,0,LAN_CELL,LAN_CELL,lanXY[1],lanXY[2],LAN_CELL*s,LAN_CELL*s);
+    if(lit){g.globalAlpha=P_.light;g.drawImage(ST.img.lanternLight,di*LAN_CELL,0,LAN_CELL,LAN_CELL,lanXY[1],lanXY[2],LAN_CELL*s,LAN_CELL*s);g.globalAlpha=1}
+    const fo=FIST[ST.anim]&&FIST[ST.anim][d]?FIST[ST.anim][d][kk]:null;if(fo)g.drawImage(fo.c,0,0,fo.w,fo.h,sx+fo.x*s,sy+fo.y*s,fo.w*s,fo.h*s)}
+  Object.assign(info,{fx,fy,sx,sy,dx,kk,img,lanXY,lit,P_,Hh,LW,cOn:!!t&&lit&&d!=='N'&&ST.fx})}
+function cutLight(x,info,DX,DY,s){   // holes in a darkness layer (layer origin DX,DY on screen) for the lantern light, the N light and C
+  const {lanXY,lit,P_,Hh,sx,sy,cOn}=info;
+  if(ST.fx&&lit&&lanXY&&P_.hole>0){x.globalAlpha=P_.hole;x.drawImage(FX.lhole,Math.round((lanXY[1]-DX)/s)+16-LHOLE.R,Math.round((lanXY[2]-DY)/s)+15-LHOLE.R);x.globalAlpha=1}
+  if(ST.dir==='N'&&Hh&&!lanXY&&ST.fx&&lit&&P_.hole>0&&NHOLE.k>0){x.globalAlpha=P_.hole*NHOLE.k;x.drawImage(FX.lhole,Math.round((sx-DX)/s)+NHOLE.cx-LHOLE.R,Math.round((sy-DY)/s)+NHOLE.cy-LHOLE.R);x.globalAlpha=1}
+  if(cOn)x.drawImage(FX.poolHole,Math.round((sx-DX)/s),Math.round((sy-DY)/s))}
+function relight(info,s){   // the lantern glass stays bright over the darkness, fist in front of it
+  const {lanXY,lit,P_,sx,sy,kk}=info;if(!lit||!lanXY)return;
+  const lc=FX.lcell||(FX.lcell=mk(LAN_CELL,LAN_CELL)),lx_=lc.getContext('2d');lx_.globalCompositeOperation='source-over';lx_.clearRect(0,0,LAN_CELL,LAN_CELL);
+  lx_.drawImage(ST.img.lanternLight,lanXY[0]*LAN_CELL,0,LAN_CELL,LAN_CELL,0,0,LAN_CELL,LAN_CELL);
+  const fo=FIST[ST.anim]&&FIST[ST.anim][ST.dir]?FIST[ST.anim][ST.dir][kk]:null;
+  if(fo){lx_.globalCompositeOperation='destination-out';lx_.drawImage(fo.c,fo.x-Math.round((lanXY[1]-sx)/s),fo.y-Math.round((lanXY[2]-sy)/s));lx_.globalCompositeOperation='source-over'}
+  g.globalAlpha=P_.light;g.drawImage(lc,0,0,LAN_CELL,LAN_CELL,lanXY[1],lanXY[2],LAN_CELL*s,LAN_CELL*s);g.globalAlpha=1}
+function shadow(x,y,rx,ry,a,s,ox,oy){g.fillStyle='rgba(20,18,40,'+a+')';g.beginPath();g.ellipse(ox+x*s,oy+y*s,rx*s,ry*s,0,0,7);g.fill()}
+function drawRing(cx,cy,s,ox,oy){const p=0.5+0.5*Math.sin((ST.now||0)/380);
+  for(const [k,a] of [[1,0.35+0.25*p],[0.7,0.5+0.3*p],[0.42,0.25+0.2*p]]){g.strokeStyle='rgba(205,244,255,'+a.toFixed(3)+')';g.lineWidth=Math.max(1,Math.round(2*s*k));g.beginPath();g.ellipse(ox+cx*s,oy+cy*s,RING.rx*k*s,RING.ry*k*s,0,0,7);g.stroke()}}
+const BUF=mk(1,1);   // the world is drawn at art resolution here, then enlarged to the screen once by the whole number s (one scaled blit per frame)
+function draw(){
+  const {s,X,Y,vw,vh}=cam(),info={},screen=g,bw=Math.ceil(cv.width/s)+1,bh=Math.ceil(cv.height/s)+1;
+  if(BUF.width!==bw||BUF.height!==bh){BUF.width=bw;BUF.height=bh}
+  g=BUF.getContext('2d');g.imageSmoothingEnabled=false;g.globalAlpha=1;g.globalCompositeOperation='source-over';
+  const ox=-X,oy=-Y,order=[];ST.order=order;   // art px: 1 world px = 1 buffer px
+  const [mw,mh]=mapSize();if(X<0||Y<0||mw-X<bw||mh-Y<bh){g.fillStyle='#0c0a18';g.fillRect(0,0,bw,bh)}
+  if(ST.mode==='field'){
+    g.drawImage(W0.ground,ox,oy);
+    shadow(ST.pos.x+offX(ST.dir),ST.pos.y,14,3,0.35,1,ox,oy);SL.forEach(q=>shadow(q.x,q.y+1,13-q.bob*1.5,4-q.bob*0.5,0.32,1,ox,oy));
+    const list=W0.spr.map(o=>({sort:o.sort,o,t:0})).concat(SL.map((q,k)=>({sort:q.y,q,t:1,k})),[{sort:ST.pos.y,t:2}]);
+    list.sort((a,b)=>a.sort-b.sort||a.t-b.t);
+    for(const it of list){if(it.t===0){if(it.o.x+ox>bw||it.o.x+it.o.sw+ox<0||it.o.y+oy>bh||it.o.y+it.o.sh+oy<0)continue;drawSprite(it.o,1,ox,oy);order.push(it.o.kind+'#'+it.o.id)}
+      else if(it.t===1){drawSlime(it.q,1,ox,oy);order.push('slime#'+it.k)}else{drawKid(1,ox,oy,info);order.push('kid')}}
+    if(!ST.noNight){const n=FX.night;if(n.width!==bw||n.height!==bh){n.width=bw;n.height=bh}const x=n.getContext('2d');x.globalCompositeOperation='source-over';x.clearRect(0,0,bw,bh);x.drawImage(W0.nightStatic,ox,oy);
+      x.globalCompositeOperation='destination-out';cutLight(x,info,0,0,1);x.globalCompositeOperation='source-over';g.drawImage(n,0,0)}
+    // light emitters over the dusk: street-lamp glass glow, exit ring, crystal glints, the kid's lantern glass
+    g.globalCompositeOperation='screen';LAMPS.forEach(([cx,cy])=>{const [hx,hy]=lampHead(cx,cy);g.drawImage(FX.lampGlow,ox+hx-LAMP_GLOW.R,oy+hy-LAMP_GLOW.R)});g.globalCompositeOperation='source-over';
+    drawRing(RING.x,RING.y,1,ox,oy);
+    CRYSTALS.forEach(([cx,cy],k)=>{const on=Math.floor(((ST.now||0)+k*700)/450)%4===0;if(!on)return;const x0=cx*T+16,y0=cy*T+12;g.fillStyle='rgba(205,244,255,.9)';g.fillRect(ox+x0-1,oy+y0-4,2,8);g.fillRect(ox+x0-4,oy+y0-1,8,2)});
+    relight(info,1)}
+  else{   // cave room (GM cave floor + darkness, as pilot-g2-motion.html)
+    const fl=A['cave-floor.jpg'];
+    if(fl)for(let wy=0;wy<mh;wy+=256)for(let wx=0;wx<mw;wx+=256)g.drawImage(fl,0,0,Math.min(256,mw-wx),Math.min(256,mh-wy),ox+wx,oy+wy,Math.min(256,mw-wx),Math.min(256,mh-wy));else{g.fillStyle='#2a2436';g.fillRect(ox,oy,mw,mh)}
+    const ct=A['g24-tiles-cliff.png'],cp=A.tiles&&A.tiles.files&&A.tiles.files['g24-tiles-cliff.png']&&A.tiles.files['g24-tiles-cliff.png'].tiles['cliff,cliff,cliff,cliff'];
+    for(let y=0;y<CAVE_ROOM.h;y++)for(let x=0;x<CAVE_ROOM.w;x++)if(solidCell(x,y)){if(ct&&cp)g.drawImage(ct,cp[0],cp[1],T,T,ox+x*T,oy+y*T,T,T);else{g.fillStyle=FALLBACK_COL.cliff;g.fillRect(ox+x*T,oy+y*T,T,T)}}
+    shadow(ST.pos.x+offX(ST.dir),ST.pos.y,14,3,0.35,1,ox,oy);drawKid(1,ox,oy,info);order.push('kid');
+    const dc=FX.dark;if(dc.width!==bw||dc.height!==bh){dc.width=bw;dc.height=bh}const x=dc.getContext('2d');x.imageSmoothingEnabled=false;
+    x.globalCompositeOperation='source-over';x.clearRect(0,0,bw,bh);x.fillStyle='rgba('+DARK_RGB+','+DARK_A+')';x.fillRect(0,0,bw,bh);
+    x.globalCompositeOperation='destination-out';cutLight(x,info,0,0,1);x.globalCompositeOperation='source-over';g.drawImage(dc,0,0);
+    drawRing(CAVE_ROOM.ring[0]*T+16,CAVE_ROOM.ring[1]*T+16,1,ox,oy);relight(info,1)}
+  g=screen;g.imageSmoothingEnabled=false;g.drawImage(BUF,0,0,bw,bh,0,0,bw*s,bh*s);
+  // screen space (sharp text): name tag (feet policy) + GM guides / label
+  const OX=ox*s,OY=oy*s,fx=info.fx*s,fy=info.fy*s;
+  const tx=fx,ty=fy+(ST.tagTop-FEET[1]-4)*s;g.font=Math.round(5*s)+'px system-ui';g.textAlign='center';g.textBaseline='bottom';const label='ลีอา Leah',tw=g.measureText(label).width;
+  g.fillStyle='rgba(0,0,0,.55)';g.fillRect(Math.round(tx-tw/2-2*s),Math.round(ty-6*s),Math.round(tw+4*s),Math.round(6*s));g.fillStyle='#fff';g.fillText(label,Math.round(tx),Math.round(ty-0.6*s));
+  if(ST.guides&&ST.mode==='field'){g.lineWidth=1;for(let y=0;y<H;y++)for(let x=0;x<W;x++){const c=GRID[y][x];if(SOLID.includes(c)){g.strokeStyle='rgba(255,80,80,.55)';g.strokeRect(OX+x*T*s+1,OY+y*T*s+1,T*s-2,T*s-2)}else if(inZone(x,y)){g.strokeStyle='rgba(180,140,255,.7)';g.strokeRect(OX+x*T*s+2,OY+y*T*s+2,T*s-4,T*s-4)}}
+    LAMPS.forEach(([cx,cy])=>{g.strokeStyle='rgba(255,190,90,.8)';g.beginPath();g.arc(OX+(cx*T+16)*s,OY+(cy*T+16)*s,LAMP_R*T*s,0,7);g.stroke()});
+    g.strokeStyle='#e33';g.beginPath();g.moveTo(fx-6*s,fy);g.lineTo(fx+6*s,fy);g.moveTo(fx,fy-6*s);g.lineTo(fx,fy+6*s);g.stroke()}
+  if(ST.warp){const w=ST.warp,a=w.t<300?w.t/300:Math.max(0,1-(w.t-300)/300);g.fillStyle='rgba(8,6,18,'+a.toFixed(3)+')';g.fillRect(0,0,cv.width,cv.height)}
+  if(ST.gm){const fs=Math.round(11*(window.devicePixelRatio||1));g.font=fs+'px system-ui';g.textAlign='left';g.textBaseline='bottom';
+    const t1=ST.mode==='cave'?'GM · ถ้ำลองเดิน / cave try-out':'GM · ฉากทดลอง G2.4 ชายหมู่บ้าน · แตะพื้นเพื่อเดิน / tap to walk',t2='ตะเกียง / lantern '+(holdOn()?ST.power+'%':'ไม่มี / none')+' · วงแสง / light '+LHOLE.R;
+    g.fillStyle='rgba(0,0,0,.55)';const w_=Math.max(g.measureText(t1).width,g.measureText(t2).width)+fs;g.fillRect(4,cv.height-2.5*fs-8,w_,2.5*fs+4);g.fillStyle='#fff';g.fillText(t1,4+fs/2,cv.height-1.2*fs-6);g.fillText(t2,4+fs/2,cv.height-6)}
+  ST.last={s,X,Y,vw,vh,fx,fy,sx:info.sx*s,sy:info.sy*s,dir:ST.dir,anim:ST.anim,frame:info.kk,pos:{...ST.pos},mode:ST.mode,lan:!!info.lanXY}}
+function loop(ts){const now=ts||0,dt=Math.min(100,now-(ST.lt||now));ST.lt=now;if(!ST.paused&&ST.ready)step(dt);if(ST.ready)draw();requestAnimationFrame(loop)}
+// ---------- controls ----------
+function walk(d){ST.auto=null;ST.dir=d;if(ST.anim!=='walk'){ST.anim='walk';ST.fi=0;ST.t=0}ST.moving=true;ST.mv=true}
+function stop(){if(ST.anim==='walk'){ST.anim='idle';ST.fi=2;ST.t=0}ST.moving=false;ST.mv=null}
+const pad=document.getElementById('pad');['NW','N','NE','W','·','E','SW','S','SE'].forEach(d=>{const b=document.createElement('button');b.textContent={NW:'↖',N:'↑',NE:'↗',W:'←','·':'•',E:'→',SW:'↙',S:'↓',SE:'↘'}[d];b.setAttribute('aria-label',d);
+  if(d==='·'){b.onpointerdown=()=>{ST.auto=null;stop()}}else{b.onpointerdown=e=>{e.preventDefault();if(!ST.warp)walk(d)};b.onpointerup=b.onpointerleave=b.onpointercancel=()=>{if(!ST.auto)stop()}}pad.appendChild(b)});
+const KEYS={ArrowUp:'N',ArrowDown:'S',ArrowLeft:'W',ArrowRight:'E'};const held=new Set();
+addEventListener('keydown',e=>{if(!KEYS[e.key])return;e.preventDefault();held.add(KEYS[e.key]);kd()});addEventListener('keyup',e=>{if(!KEYS[e.key])return;held.delete(KEYS[e.key]);kd()});
+function kd(){if(ST.warp)return;const n=held.has('N'),s=held.has('S'),w=held.has('W'),e=held.has('E');const d=(n?'N':s?'S':'')+(e?'E':w?'W':'');d?walk(d):stop()}
+cv.addEventListener('pointerdown',e=>{if(!ST.ready||ST.warp)return;const dpr=window.devicePixelRatio||1,{s,X,Y}=cam();const wx=X+e.clientX*dpr/s,wy=Y+e.clientY*dpr/s;const [cx,cy]=cellOf(wx,wy);goto(cx,cy)});
+const tg=(id,f)=>{const b=document.getElementById(id);b.onclick=()=>{f();sync()}};
+tg('bZoom',()=>ST.zoomOut=!ST.zoomOut);tg('bPow',()=>{ST.power=POWERS[(POWERS.indexOf(ST.power)+1)%POWERS.length]});tg('bLR',()=>setLR(LR_SET[(LR_SET.indexOf(LHOLE.R)+1)%LR_SET.length]));tg('bGuide',()=>ST.guides=!ST.guides);
+function sync(){const B=(id,on,t)=>{const b=document.getElementById(id);b.classList.toggle('on',on);b.textContent=t};
+  ['bPow','bLR','bGuide'].forEach(id=>{document.getElementById(id).style.display=ST.gm?'':'none'});
+  B('bZoom',ST.zoomOut,ST.zoomOut?'ซูม ไกล / zoom far':'ซูม ใกล้ / zoom near');B('bPow',ST.power<100,'พลัง / power '+ST.power+'%');B('bLR',LHOLE.R!==LR_DEFAULT,'วงแสง / light '+LHOLE.R);B('bGuide',ST.guides,'เส้นช่วย / guides')}
+const q=new URLSearchParams(location.search);
+if(q.has('gm')){ST.gm=true;const pw=+q.get('power');if((q.get('power')||'')!==''&&POWERS.includes(pw))ST.power=pw;if(q.has('guides'))ST.guides=true}
+setLR(LR_DEFAULT);if(q.has('gm')&&/^\d+$/.test(q.get('lr')||''))setLR(+q.get('lr'));
+if(q.has('far'))ST.zoomOut=true;if(q.has('nonight'))ST.noNight=true;
+window.PS={ST,W0,SL,A,FX,GRID,ZONE,LAMPS,CRYSTALS,TREES,LHOLE,LR_SET,setLR,POWERS,DIRS,T,W,H,MAPW,MAPH,DOOR_X,DOOR_MINY,LAMP_R,FADE_A,FADE_MS,SPEED,
+  solidAt,solidCell,cellOf,astar,walkable,inZone,lampDist,tileFor,dir8,goto,walk,stop,step,draw,scale,cam,holdOn,curFrame,lanternTarget,covered,showMsg,
+  pause:v=>ST.paused=v,set:o=>Object.assign(ST,o),
+  teleport:(cx,cy,d)=>{ST.mode='field';ST.warp=null;ST.auto=null;stop();ST.pos={x:cx*T+16,y:cy*T+16};if(d)ST.dir=d;ST.lpos=null;W0.spr.forEach(o=>o.alpha=1)},
+  sim:(ms,until)=>{let t=0;while(t<ms){step(16);t+=16;if(until&&until())break}return t}};
+sync();boot();
+</script></body></html>

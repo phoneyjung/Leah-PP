@@ -1,0 +1,1604 @@
+{
+ "meta": {
+  "page": "pilot-g2-scene.html",
+  "phone": [
+   844,
+   390,
+   2.625
+  ],
+  "ipad": [
+   1180,
+   820,
+   2
+  ]
+ },
+ "sha256": {
+  "g24-tiles-path.png": "8bd0b3537439e8ff",
+  "g24-tiles-cliff.png": "54b3f27a3d598579",
+  "g24-hut.png": "b7d123ad53017fd2",
+  "g24-hut-door.png": "300aefc89d91b5eb",
+  "g24-cave-mouth.png": "41091fe93684ff61",
+  "g24-tree-a.png": "9bd7becab4c23426",
+  "g24-tree-b.png": "dc6b06e70252e292",
+  "g24-lamp.png": "59ebbe86ea6fed2d",
+  "g24-gate.png": "4296ef2416b6f9ee",
+  "g24-props.png": "ab93096f57bd12d3",
+  "g24-slime.png": "a978238c12f104be"
+ },
+ "walks": [
+  {
+   "from": [
+    4,
+    12
+   ],
+   "to": [
+    24,
+    10
+   ],
+   "ok": true,
+   "ms": 14400,
+   "warp": null
+  },
+  {
+   "from": [
+    20,
+    5
+   ],
+   "to": [
+    20,
+    12
+   ],
+   "ok": true,
+   "ms": 4720,
+   "warp": null
+  },
+  {
+   "from": [
+    26,
+    10
+   ],
+   "to": [
+    7,
+    4
+   ],
+   "ok": true,
+   "ms": 14416,
+   "warp": null
+  },
+  {
+   "from": [
+    21,
+    9
+   ],
+   "to": [
+    22,
+    6
+   ],
+   "ok": true,
+   "ms": 2304,
+   "warp": null
+  },
+  {
+   "from": [
+    12,
+    4
+   ],
+   "to": [
+    14,
+    6
+   ],
+   "ok": true,
+   "ms": 1904,
+   "warp": null
+  },
+  {
+   "from": [
+    20,
+    8
+   ],
+   "to": [
+    14,
+    10
+   ],
+   "ok": true,
+   "ms": 4592,
+   "warp": null
+  },
+  {
+   "from": [
+    14,
+    10
+   ],
+   "to": [
+    15,
+    8
+   ],
+   "ok": true,
+   "ms": 1632,
+   "warp": null
+  },
+  {
+   "from": [
+    3,
+    11
+   ],
+   "to": [
+    6,
+    11
+   ],
+   "ok": true,
+   "ms": 2032,
+   "warp": null
+  },
+  {
+   "from": [
+    7,
+    5
+   ],
+   "to": [
+    24,
+    8
+   ],
+   "ok": true,
+   "ms": 12656,
+   "warp": null
+  },
+  {
+   "from": [
+    3,
+    5
+   ],
+   "to": [
+    21,
+    4
+   ],
+   "ok": true,
+   "ms": 12384,
+   "warp": null
+  },
+  {
+   "from": [
+    24,
+    10
+   ],
+   "to": [
+    5,
+    10
+   ],
+   "ok": true,
+   "ms": 13328,
+   "warp": null
+  },
+  {
+   "from": [
+    23,
+    7
+   ],
+   "to": [
+    26,
+    6
+   ],
+   "ok": true,
+   "ms": 2304,
+   "warp": null
+  },
+  {
+   "from": [
+    19,
+    8
+   ],
+   "to": [
+    21,
+    11
+   ],
+   "ok": true,
+   "ms": 2576,
+   "warp": null
+  },
+  {
+   "from": [
+    18,
+    10
+   ],
+   "to": [
+    1,
+    5
+   ],
+   "ok": true,
+   "ms": 12800,
+   "warp": null
+  },
+  {
+   "from": [
+    14,
+    9
+   ],
+   "to": [
+    9,
+    4
+   ],
+   "ok": true,
+   "ms": 5936,
+   "warp": null
+  },
+  {
+   "from": [
+    8,
+    4
+   ],
+   "to": [
+    2,
+    6
+   ],
+   "ok": true,
+   "ms": 4992,
+   "warp": null
+  },
+  {
+   "from": [
+    24,
+    10
+   ],
+   "to": [
+    24,
+    9
+   ],
+   "ok": true,
+   "ms": 688,
+   "warp": null
+  },
+  {
+   "from": [
+    20,
+    11
+   ],
+   "to": [
+    18,
+    7
+   ],
+   "ok": true,
+   "ms": 3248,
+   "warp": null
+  },
+  {
+   "from": [
+    21,
+    8
+   ],
+   "to": [
+    20,
+    7
+   ],
+   "ok": true,
+   "ms": 960,
+   "warp": null
+  },
+  {
+   "from": [
+    2,
+    10
+   ],
+   "to": [
+    14,
+    12
+   ],
+   "ok": true,
+   "ms": 8624,
+   "warp": null
+  },
+  {
+   "from": [
+    20,
+    6
+   ],
+   "to": [
+    15,
+    10
+   ],
+   "ok": true,
+   "ms": 4464,
+   "warp": null
+  },
+  {
+   "from": [
+    23,
+    6
+   ],
+   "to": [
+    2,
+    4
+   ],
+   "ok": true,
+   "ms": 14672,
+   "warp": null
+  },
+  {
+   "from": [
+    19,
+    7
+   ],
+   "to": [
+    22,
+    5
+   ],
+   "ok": true,
+   "ms": 2576,
+   "warp": null
+  },
+  {
+   "from": [
+    18,
+    5
+   ],
+   "to": [
+    24,
+    12
+   ],
+   "ok": true,
+   "ms": 6352,
+   "warp": null
+  },
+  {
+   "from": [
+    3,
+    11
+   ],
+   "to": [
+    17,
+    7
+   ],
+   "ok": true,
+   "ms": 10512,
+   "warp": null
+  },
+  {
+   "from": [
+    7,
+    10
+   ],
+   "to": [
+    14,
+    11
+   ],
+   "ok": true,
+   "ms": 4992,
+   "warp": null
+  },
+  {
+   "from": [
+    17,
+    11
+   ],
+   "to": [
+    16,
+    9
+   ],
+   "ok": true,
+   "ms": 1632,
+   "warp": null
+  },
+  {
+   "from": [
+    10,
+    5
+   ],
+   "to": [
+    1,
+    5
+   ],
+   "ok": true,
+   "ms": 6064,
+   "warp": null
+  },
+  {
+   "from": [
+    19,
+    5
+   ],
+   "to": [
+    19,
+    11
+   ],
+   "ok": true,
+   "ms": 4048,
+   "warp": null
+  },
+  {
+   "from": [
+    14,
+    5
+   ],
+   "to": [
+    19,
+    10
+   ],
+   "ok": true,
+   "ms": 4736,
+   "warp": null
+  },
+  {
+   "from": [
+    4,
+    11
+   ],
+   "to": [
+    23,
+    10
+   ],
+   "ok": true,
+   "ms": 13056,
+   "warp": null
+  },
+  {
+   "from": [
+    20,
+    12
+   ],
+   "to": [
+    19,
+    10
+   ],
+   "ok": true,
+   "ms": 1632,
+   "warp": null
+  },
+  {
+   "from": [
+    16,
+    9
+   ],
+   "to": [
+    2,
+    5
+   ],
+   "ok": true,
+   "ms": 10912,
+   "warp": null
+  },
+  {
+   "from": [
+    12,
+    9
+   ],
+   "to": [
+    24,
+    12
+   ],
+   "ok": true,
+   "ms": 8896,
+   "warp": null
+  },
+  {
+   "from": [
+    7,
+    9
+   ],
+   "to": [
+    24,
+    8
+   ],
+   "ok": true,
+   "ms": 12112,
+   "warp": null
+  },
+  {
+   "from": [
+    8,
+    10
+   ],
+   "to": [
+    20,
+    4
+   ],
+   "ok": true,
+   "ms": 10112,
+   "warp": null
+  },
+  {
+   "from": [
+    23,
+    6
+   ],
+   "to": [
+    14,
+    9
+   ],
+   "ok": true,
+   "ms": 6880,
+   "warp": null
+  },
+  {
+   "from": [
+    14,
+    11
+   ],
+   "to": [
+    12,
+    10
+   ],
+   "ok": true,
+   "ms": 2032,
+   "warp": null
+  },
+  {
+   "from": [
+    15,
+    11
+   ],
+   "to": [
+    24,
+    10
+   ],
+   "ok": true,
+   "ms": 6336,
+   "warp": null
+  },
+  {
+   "from": [
+    16,
+    7
+   ],
+   "to": [
+    15,
+    11
+   ],
+   "ok": true,
+   "ms": 2976,
+   "warp": null
+  },
+  {
+   "from": [
+    23,
+    6
+   ],
+   "to": [
+    16,
+    7
+   ],
+   "ok": true,
+   "ms": 4992,
+   "warp": null
+  },
+  {
+   "from": [
+    20,
+    8
+   ],
+   "to": [
+    4,
+    10
+   ],
+   "ok": true,
+   "ms": 11312,
+   "warp": null
+  },
+  {
+   "from": [
+    15,
+    5
+   ],
+   "to": [
+    16,
+    5
+   ],
+   "ok": true,
+   "ms": 688,
+   "warp": null
+  },
+  {
+   "from": [
+    2,
+    5
+   ],
+   "to": [
+    16,
+    5
+   ],
+   "ok": true,
+   "ms": 9424,
+   "warp": null
+  },
+  {
+   "from": [
+    19,
+    8
+   ],
+   "to": [
+    12,
+    6
+   ],
+   "ok": true,
+   "ms": 5264,
+   "warp": null
+  },
+  {
+   "from": [
+    22,
+    5
+   ],
+   "to": [
+    25,
+    8
+   ],
+   "ok": true,
+   "ms": 3248,
+   "warp": null
+  },
+  {
+   "from": [
+    24,
+    8
+   ],
+   "to": [
+    14,
+    6
+   ],
+   "ok": true,
+   "ms": 7680,
+   "warp": null
+  },
+  {
+   "from": [
+    10,
+    5
+   ],
+   "to": [
+    11,
+    5
+   ],
+   "ok": true,
+   "ms": 688,
+   "warp": null
+  },
+  {
+   "from": [
+    20,
+    4
+   ],
+   "to": [
+    26,
+    9
+   ],
+   "ok": true,
+   "ms": 5408,
+   "warp": null
+  },
+  {
+   "from": [
+    6,
+    4
+   ],
+   "to": [
+    4,
+    12
+   ],
+   "ok": true,
+   "ms": 8224,
+   "warp": null
+  },
+  {
+   "from": [
+    21,
+    6
+   ],
+   "to": [
+    7,
+    4
+   ],
+   "ok": true,
+   "ms": 9968,
+   "warp": null
+  },
+  {
+   "from": [
+    1,
+    8
+   ],
+   "to": [
+    21,
+    8
+   ],
+   "ok": true,
+   "ms": 14544,
+   "warp": null
+  },
+  {
+   "from": [
+    13,
+    8
+   ],
+   "to": [
+    7,
+    5
+   ],
+   "ok": true,
+   "ms": 7008,
+   "warp": null
+  },
+  {
+   "from": [
+    20,
+    5
+   ],
+   "to": [
+    19,
+    7
+   ],
+   "ok": true,
+   "ms": 1632,
+   "warp": null
+  },
+  {
+   "from": [
+    14,
+    6
+   ],
+   "to": [
+    13,
+    4
+   ],
+   "ok": true,
+   "ms": 1632,
+   "warp": null
+  },
+  {
+   "from": [
+    26,
+    7
+   ],
+   "to": [
+    21,
+    4
+   ],
+   "ok": true,
+   "ms": 4592,
+   "warp": null
+  },
+  {
+   "from": [
+    16,
+    11
+   ],
+   "to": [
+    3,
+    4
+   ],
+   "ok": true,
+   "ms": 11856,
+   "warp": null
+  },
+  {
+   "from": [
+    9,
+    4
+   ],
+   "to": [
+    14,
+    12
+   ],
+   "ok": true,
+   "ms": 7952,
+   "warp": null
+  },
+  {
+   "from": [
+    20,
+    9
+   ],
+   "to": [
+    16,
+    4
+   ],
+   "ok": true,
+   "ms": 4112,
+   "warp": "cave"
+  },
+  {
+   "from": [
+    18,
+    6
+   ],
+   "to": [
+    12,
+    5
+   ],
+   "ok": true,
+   "ms": 4320,
+   "warp": null
+  }
+ ],
+ "fps": {
+  "cave": [
+   18.6,
+   19.6,
+   19.5,
+   17.0,
+   19.0
+  ],
+  "dark": [
+   46.6,
+   45.5,
+   50.7,
+   46.5,
+   49.3
+  ],
+  "scene": [
+   29.6,
+   27.9,
+   27.9,
+   27.6,
+   30.6
+  ],
+  "median": {
+   "cave": 19.0,
+   "dark": 46.6,
+   "scene": 27.9
+  },
+  "scene_vs_cave": 1.472,
+  "scene_vs_empty_dark_grid": 0.6
+ },
+ "draw_ms_cpu1x": 4.24,
+ "checks": [
+  {
+   "check": "S0 page source: no rotate / setTransform / ctx.filter · no 0.75 zoom",
+   "pass": true,
+   "value": {}
+  },
+  {
+   "check": "S3a every g24 art file alpha 0/255 only (11 files)",
+   "pass": true,
+   "value": {
+    "g24-tiles-path.png": [
+     255
+    ],
+    "g24-tiles-cliff.png": [
+     255
+    ],
+    "g24-hut.png": [
+     0,
+     255
+    ],
+    "g24-hut-door.png": [
+     0,
+     255
+    ],
+    "g24-cave-mouth.png": [
+     0,
+     255
+    ],
+    "g24-tree-a.png": [
+     0,
+     255
+    ],
+    "g24-tree-b.png": [
+     0,
+     255
+    ],
+    "g24-lamp.png": [
+     0,
+     255
+    ],
+    "g24-gate.png": [
+     0,
+     255
+    ],
+    "g24-props.png": [
+     0,
+     255
+    ],
+    "g24-slime.png": [
+     0,
+     255
+    ]
+   }
+  },
+  {
+   "check": "S0b every file the page asks for loads (art, json, kid, lantern, cave floor)",
+   "pass": true,
+   "value": {
+    "files": 25,
+    "missing": []
+   }
+  },
+  {
+   "check": "S6a slime zone in the page = layout v2 slime zone (47 dark-field cells, 0 lit)",
+   "pass": true,
+   "value": {
+    "page": 47,
+    "layout": 47
+   }
+  },
+  {
+   "check": "S1a real walks with the page movement + collision (A* -> waypoints, feet point, slide): arrived 60/60 (1 pair ends on the exit = warp to the cave)",
+   "pass": true,
+   "value": {
+    "arrived": 60,
+    "of": 60,
+    "sim_s_total": 386.0
+   }
+  },
+  {
+   "check": "S1b second run identical (every trace hash + end position)",
+   "pass": true,
+   "value": {
+    "identical": 60
+   }
+  },
+  {
+   "check": "S1c cannot reach 17 blocked targets (11 from layout.py + crate, rope, bush edge, cave face, hut behind the door, rock): A* refuses all and a 20 s straight push from the nearest open cell reaches 0, feet never in a solid cell",
+   "pass": true,
+   "value": {
+    "astar_found": 0,
+    "push_reached": 0,
+    "feet_in_solid_steps": 0,
+    "push_warped": 1
+   }
+  },
+  {
+   "check": "S1d 300 s random walking (seed 2410, new direction every 0.3-1.5 s): feet in a solid cell 0 · outside the map 0 · door rule broken 0",
+   "pass": true,
+   "value": {
+    "steps": 18750,
+    "bad": 0,
+    "out": 0,
+    "doorBad": 0,
+    "warps": 1,
+    "cells": 112
+   }
+  },
+  {
+   "check": "S2a door: 10 walks from 10 starts end in a door cell with feet x = 224, feet y >= 264, the kid drawn before (behind) the hut",
+   "pass": true,
+   "value": {
+    "ok": 10,
+    "runs": [
+     {
+      "start": [
+       9,
+       10
+      ],
+      "to": [
+       7,
+       8
+      ],
+      "pos": [
+       224,
+       268
+      ],
+      "cell": [
+       7,
+       8
+      ],
+      "kid_before_hut": true
+     },
+     {
+      "start": [
+       2,
+       9
+      ],
+      "to": [
+       6,
+       8
+      ],
+      "pos": [
+       224,
+       268
+      ],
+      "cell": [
+       7,
+       8
+      ],
+      "kid_before_hut": true
+     },
+     {
+      "start": [
+       12,
+       11
+      ],
+      "to": [
+       7,
+       8
+      ],
+      "pos": [
+       224,
+       268
+      ],
+      "cell": [
+       7,
+       8
+      ],
+      "kid_before_hut": true
+     },
+     {
+      "start": [
+       5,
+       10
+      ],
+      "to": [
+       6,
+       8
+      ],
+      "pos": [
+       224,
+       268
+      ],
+      "cell": [
+       7,
+       8
+      ],
+      "kid_before_hut": true
+     },
+     {
+      "start": [
+       3,
+       12
+      ],
+      "to": [
+       7,
+       8
+      ],
+      "pos": [
+       224,
+       268
+      ],
+      "cell": [
+       7,
+       8
+      ],
+      "kid_before_hut": true
+     },
+     {
+      "start": [
+       11,
+       9
+      ],
+      "to": [
+       6,
+       8
+      ],
+      "pos": [
+       224,
+       268
+      ],
+      "cell": [
+       7,
+       8
+      ],
+      "kid_before_hut": true
+     },
+     {
+      "start": [
+       16,
+       11
+      ],
+      "to": [
+       7,
+       8
+      ],
+      "pos": [
+       224,
+       268
+      ],
+      "cell": [
+       7,
+       8
+      ],
+      "kid_before_hut": true
+     },
+     {
+      "start": [
+       1,
+       4
+      ],
+      "to": [
+       6,
+       8
+      ],
+      "pos": [
+       224,
+       268
+      ],
+      "cell": [
+       7,
+       8
+      ],
+      "kid_before_hut": true
+     },
+     {
+      "start": [
+       20,
+       5
+      ],
+      "to": [
+       7,
+       8
+      ],
+      "pos": [
+       224,
+       268
+      ],
+      "cell": [
+       7,
+       8
+      ],
+      "kid_before_hut": true
+     },
+     {
+      "start": [
+       8,
+       12
+      ],
+      "to": [
+       6,
+       8
+      ],
+      "pos": [
+       224,
+       268
+      ],
+      "cell": [
+       7,
+       8
+      ],
+      "kid_before_hut": true
+     }
+    ]
+   }
+  },
+  {
+   "check": "S2b door: kid px drawn over the hut frame 0 (hut is drawn after the kid) · kid px hidden by the frame reported (opening 52 x 108 vs kid 47 x 83)",
+   "pass": true,
+   "value": {
+    "kid": 2741,
+    "underFrame": 0,
+    "inHole": 2741,
+    "dir": "N",
+    "pos": {
+     "x": 224,
+     "y": 268
+    }
+   }
+  },
+  {
+   "check": "S3b Wang: 392 cells, every corner combo found in g24-tiles.json, every shared corner agrees between neighbours (path meeting the cliff only under the cave-mouth rock)",
+   "pass": true,
+   "value": {
+    "cells": 392,
+    "vertices": 435,
+    "miss": 0,
+    "seam": [],
+    "hiddenUnderCaveMouth": [
+     "16,4 grass/dirt",
+     "17,4 grass/dirt",
+     "18,4 grass/dirt"
+    ],
+    "tileMissDrawn": 0
+   }
+  },
+  {
+   "check": "S3c whole-number scale only (phone: near / far)",
+   "pass": true,
+   "value": [
+    3,
+    2,
+    true
+   ]
+  },
+  {
+   "check": "S4a y-sort: kid 6 px behind / in front of each kind of art (tree lamp hut gate crate bush boulder fence crystal slime) x 8 directions = right order every time",
+   "pass": true,
+   "value": {
+    "tree": [
+     16,
+     16
+    ],
+    "lamp": [
+     16,
+     16
+    ],
+    "hut": [
+     16,
+     16
+    ],
+    "gate": [
+     16,
+     16
+    ],
+    "crate": [
+     16,
+     16
+    ],
+    "bush": [
+     16,
+     16
+    ],
+    "boulder": [
+     16,
+     16
+    ],
+    "fence": [
+     16,
+     16
+    ],
+    "crystal": [
+     16,
+     16
+    ],
+    "slime": [
+     16,
+     16
+    ]
+   }
+  },
+  {
+   "check": "S4b art in front of the kid fades to 55 % (45 % lighter, rule 40-50 %) within 200 ms (+1 frame) and comes back after",
+   "pass": true,
+   "value": {
+    "reach_ms": 208,
+    "minAlpha": 0.55,
+    "faded": [
+     "tree",
+     "tree"
+    ],
+    "after": 0
+   }
+  },
+  {
+   "check": "S4c walk-behind cells (kid S more than half covered by art drawn in front, feet at the cell centre, measured in the page) <= 24 and 0 in the slime zone",
+   "pass": true,
+   "value": {
+    "count": 24,
+    "inZone": [],
+    "cells": [
+     [
+      1,
+      4
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      6,
+      4
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      8,
+      4
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      5,
+      5
+     ],
+     [
+      6,
+      5
+     ],
+     [
+      7,
+      5
+     ],
+     [
+      8,
+      5
+     ],
+     [
+      9,
+      5
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      1,
+      7
+     ],
+     [
+      1,
+      8
+     ],
+     [
+      2,
+      10
+     ],
+     [
+      5,
+      10
+     ],
+     [
+      2,
+      11
+     ],
+     [
+      3,
+      11
+     ],
+     [
+      4,
+      11
+     ],
+     [
+      5,
+      11
+     ],
+     [
+      6,
+      11
+     ],
+     [
+      3,
+      12
+     ],
+     [
+      4,
+      12
+     ]
+    ]
+   }
+  },
+  {
+   "check": "S6b 3 slimes x 180 s: in lamp light 0 frames · outside the zone 0 · all 8 directions used · hop 0-3 whole px",
+   "pass": true,
+   "value": {
+    "sim_s": 180,
+    "slimes": 3,
+    "outOfZone": 0,
+    "litFrames": 0,
+    "bobs": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "nonInt": 0,
+    "dirs": {
+     "E": 44912,
+     "N": 35952,
+     "S": 34496,
+     "SW": 38578,
+     "W": 44526,
+     "NE": 37762,
+     "NW": 7742,
+     "SE": 8350
+    },
+    "dirCount": 8
+   }
+  },
+  {
+   "check": "S6c slime art: height 50-83 px in all 8 views (rule 0.6-1.0 x kid 83)",
+   "pass": true,
+   "value": [
+    54,
+    55,
+    55,
+    55,
+    55,
+    54,
+    55,
+    55
+   ]
+  },
+  {
+   "check": "S8a exit X -> warp ring -> cave room with a TH + EN message · ring in the cave -> back in front of the cave facing S",
+   "pass": true,
+   "value": {
+    "cave": {
+     "mode": "cave",
+     "msg": [
+      "ถ้ำ (ลองเดิน) · เดินลงวงแสงด้านล่างเพื่อกลับ",
+      "Cave (try-out) · step on the light ring below to go back"
+     ],
+     "pos": [
+      208,
+      208
+     ]
+    },
+    "back": {
+     "mode": "field",
+     "cell": [
+      16,
+      5
+     ],
+     "dir": "S"
+    }
+   }
+  },
+  {
+   "check": "S8b walking into the closed village gate -> message \"ประตูหมู่บ้านปิดตอนค่ำ\" + \"The village gate is closed at night\" on screen",
+   "pass": true,
+   "value": {
+    "msg": [
+     "ประตูหมู่บ้านปิดตอนค่ำ",
+     "The village gate is closed at night"
+    ],
+    "shown": true,
+    "text": "ประตูหมู่บ้านปิดตอนค่ำ\nThe village gate is closed at night",
+    "cell": [
+     15,
+     12
+    ]
+   }
+  },
+  {
+   "check": "S8c tap on the ground walks there (tap at cell 20,9)",
+   "pass": true,
+   "value": {
+    "auto": true,
+    "cell": [
+     20,
+     9
+    ]
+   }
+  },
+  {
+   "check": "S8d on-screen pad: holding ↑ for 0.7 s walks north",
+   "pass": true,
+   "value": {
+    "dy": -33.6
+   }
+  },
+  {
+   "check": "S8e GM buttons: power 50/10/0/100 · light 160/72/100/130 · zoom far/near/far/near (whole numbers)",
+   "pass": true,
+   "value": {
+    "bPow": [
+     50,
+     10,
+     0,
+     100
+    ],
+    "bLR": [
+     160,
+     72,
+     100,
+     130
+    ],
+    "bZoom": [
+     2,
+     3,
+     2,
+     3
+    ]
+   }
+  },
+  {
+   "check": "S8f dusk \"dim, not black\": dark-field grass >= 35 % as bright as grass under a lamp (median over cells, canvas px night on / off)",
+   "pass": true,
+   "value": {
+    "darkCells": 16,
+    "litCells": 8,
+    "darkRatio": 0.4918647976717493,
+    "litRatio": 1,
+    "share": 0.4918647976717493
+   }
+  },
+  {
+   "check": "S5 drawn dusk frames (4 camera spots cover the whole map): px with dE00 < 10 from the 3 signal colours = 0 (crystals, exit ring, kid + lantern exempt)",
+   "pass": true,
+   "value": {
+    "px_checked": 8549120,
+    "near": {
+     "gold #FFC857": 0,
+     "cyan #5FE0FF": 0,
+     "cyan #7FE0FF": 0
+    }
+   }
+  },
+  {
+   "check": "S8g missing files (5 cases incl. every art file): page draws the fallback shapes (> 20 colours, not white), walks, 0 JS errors",
+   "pass": true,
+   "value": {
+    "all art": {
+     "colours": 548,
+     "meanLum": 77,
+     "spr": 75,
+     "slimes": 3,
+     "walked": [
+      20,
+      9
+     ],
+     "js_errors": 0
+    },
+    "tiles + json": {
+     "colours": 1770,
+     "meanLum": 73,
+     "spr": 75,
+     "slimes": 3,
+     "walked": [
+      20,
+      9
+     ],
+     "js_errors": 0
+    },
+    "slime": {
+     "colours": 2896,
+     "meanLum": 71,
+     "spr": 75,
+     "slimes": 3,
+     "walked": [
+      20,
+      9
+     ],
+     "js_errors": 0
+    },
+    "hut + cave mouth": {
+     "colours": 2467,
+     "meanLum": 73,
+     "spr": 75,
+     "slimes": 3,
+     "walked": [
+      20,
+      9
+     ],
+     "js_errors": 0
+    },
+    "trees + lamp + props": {
+     "colours": 2308,
+     "meanLum": 74,
+     "spr": 75,
+     "slimes": 3,
+     "walked": [
+      20,
+      9
+     ],
+     "js_errors": 0
+    }
+   }
+  },
+  {
+   "check": "S8h FPS of the scene >= 90 % of the Pilot motion page in its cave view (the existing view with the same work: floor art + darkness + held lantern) · 4x CPU · rAF 2 s · walking · median of 5 · the empty dark grid view and draw ms reported",
+   "pass": true,
+   "value": {
+    "cave": [
+     18.6,
+     19.6,
+     19.5,
+     17.0,
+     19.0
+    ],
+    "dark": [
+     46.6,
+     45.5,
+     50.7,
+     46.5,
+     49.3
+    ],
+    "scene": [
+     29.6,
+     27.9,
+     27.9,
+     27.6,
+     30.6
+    ],
+    "median": {
+     "cave": 19.0,
+     "dark": 46.6,
+     "scene": 27.9
+    },
+    "scene_vs_cave": 1.472,
+    "scene_vs_empty_dark_grid": 0.6,
+    "draw_ms_cpu1x": 4.24
+   }
+  },
+  {
+   "check": "S8i JS errors 0 across every page load (page errors + console errors; blocked-file loads count page errors only)",
+   "pass": true,
+   "value": []
+  }
+ ],
+ "passed": 27,
+ "total": 27
+}
