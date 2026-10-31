@@ -42,12 +42,20 @@
   }
  ],
  "outline_ring_px": 1220,
+ "exterior_ring_px": 1172,
+ "hole_rim_px": 48,
+ "exterior_ring_light_px_L200": 13,
  "ring_light_px_L200": 13,
  "ring_near_white_px": 0,
  "old_bg_F8F9F9_px_on_ring": 0,
  "colours": 46,
  "colours_identical_to_sprite": 15,
  "colours_shared_by_2plus_sprite_materials": 13,
+ "notes": {
+  "outline_ring_px": "opaque px touching ANY transparency (exterior ring + hole rims)",
+  "colours_identical_to_sprite": "exact RGB match with sprite S f0",
+  "colours_shared_by_2plus_sprite_materials": "portrait colours that sprite S f0 uses in 2+ material ids (sprite data, not a portrait split)"
+ },
  "colour_table": [
   {
    "colour": "#12001E",

@@ -3,7 +3,31 @@
 
 ---
 
-## งาน T8 · ตรวจแผน G2.3 รูปหน้าใหญ่ + `ASSET_SPEC_14` (อ่านอย่างเดียว) · สถานะ: รอ Codex (**เริ่มหลังส่ง T7**)
+## งาน T10 · ตรวจซ้ำหน้าฉาก G2.4 S6 ฉบับ 1.2 (อ่าน + รันเท่านั้น) · สถานะ: รอ Codex (**เริ่มหลังส่ง T9**)
+- **วันที่:** 1 พ.ย. 2569 · ไม่ใช้เครดิต · ใช้เวลาไม่เกิน ~1 ชั่วโมง
+- **branch ฐาน:** `claude/g2-pilot` (commit ที่มีงานนี้) · **branch ส่งงาน:** `codex/t10-recheck-g24-s6` · ส่งไฟล์เดียว `REVIEW_CODEX_T10_G24_S6.md` + 1 บรรทัด `CODEX_STATUS.md`
+- **อ่าน:** `qa/g2-4-scene/s6/RESPONSE_T7.md` (Claude ตอบ R1–R7) · diff ของ `pilot-g2-scene.html` `test_g2_scene.py` `qa/g2-4-scene/tools/trees.py` จาก `f3ec512`
+- **รัน:** `python3 -I test_g2_scene.py <PORT> <OUT>` (ผล Claude 38/38 exit 0) · ลองซ้ำด้วยวิธีของ Codex เองอย่างน้อย R1 (เมาส์ลากออกนอกแผงแล้วปล่อย) · R2 (ไม่มี `g24-hut.png` แล้วเดินเข้าประตู) · R3 (anchor เสียบางเฟรม) · R6 (ทำให้ข้อหนึ่งตกแล้วดู exit code)
+- **ตอบ:** R1–R7 แต่ละข้อ ผ่าน / ยังไม่ผ่าน + หลักฐานตัวเลข · ข้อทดสอบใหม่ S8o S8p S8q วัดของจริงไหม · พบปัญหาใหม่ไหม
+- **ห้าม:** แก้ไฟล์ของ Claude · push `main` · force push · ใช้เครดิต
+- **หยุดเมื่อ:** push แล้ว ตอบเจ้าของสั้น ๆ (ผลรันกี่/กี่ · R1–R7 ผ่านกี่ข้อ · พบใหม่กี่ข้อ)
+
+---
+
+## งาน T9 · ชุด 14 รูปหน้าใหญ่: ปิดรู 50 จุด + หน้ากากวัสดุ ตาม `ASSET_SPEC_14` ฉบับ 1.1 · สถานะ: รอ Codex (**ทำก่อน T10**)
+- **วันที่:** 1 พ.ย. 2569 · มติเจ้าของ D-PT-1 ก · D-PT-2 ก · D-PT-3 ก (ไม่เปลี่ยน) · ไม่ใช้เครดิต · ประมาณ 1–3 ชั่วโมง
+- **branch ฐาน:** `claude/g2-pilot` (commit ที่มีสเปกฉบับ 1.1) · **branch ส่งงาน:** `codex/asset-14-c2-portrait`
+- **อ่าน:** `ASSET_SPEC_14_c2_portrait.md` ฉบับ 1.1 (ทั้งไฟล์) · `qa/g2-3-portrait/pt-rules.json` · `qa/g2-3-portrait/tools/pt_mask_ref.py` · `tools/check_pt_t9.py` · `img/pt-ref-ids.png`
+- **ทำ:** ไฟล์ 7 รายการตามสเปกข้อ 1 (รูป · edits · หน้ากาก png + json · ภาพตรวจ 2 · `T9_CODEX_NOTES.md`) · ปิดรูด้วย `#2E0A27` ทั้ง 50 จุด · หน้ากากตามกติกา 9 ขั้น (เขียนเครื่องมือเองหรือใช้ `pt_mask_ref.py` ก็ได้) · **ดูด้วยตาตามข้อ 3.5** แล้วจดบริเวณที่ดูเป็นวัสดุผิด (ไม่แก้ไฟล์ให้ต่างจากกติกา)
+- **ตรวจก่อนส่ง:** `python3 -I qa/g2-3-portrait/tools/check_pt_t9.py .` ต้อง **exit 0 (11/11)** · `--selftest` ต้อง 13/13 · คัดลอกข้อความที่พิมพ์ออกลง `T9_CODEX_NOTES.md`
+- **ห้าม:** แก้ต้นฉบับ · แก้พิกเซลนอกรู · แก้ `pt-rules.json` หรือ `tools/*.py` ของ Claude · แตะ `index.html` `sw.js` `pilot-*.html` `test_*` · push `main` · force push · ใช้เครดิต
+- **ถ้าทำตามไม่ได้ / กติกาให้ผลแปลก:** หยุดแล้วเขียนพิกัด + เหตุผลใน `CODEX_STATUS.md` ให้ Claude ตัดสิน
+- **หยุดเมื่อ:** push แล้ว ตอบเจ้าของสั้น ๆ (ผลเครื่องตรวจ x/y · จดบริเวณกี่จุด) แล้วเริ่ม T10
+
+---
+
+## งาน T8 · ตรวจแผน G2.3 รูปหน้าใหญ่ + `ASSET_SPEC_14` (อ่านอย่างเดียว) · สถานะ: เสร็จ (1 พ.ย. 2569)
+- **ผล:** `codex/t8-review-g23-portrait` @ `447db75` (รวมแล้ว) · inspection ตรงทุกค่า · ขอชี้แจง 5 ข้อ → ตอบใน `ASSET_SPEC_14` ฉบับ 1.1 (ข้อ 0 บนสุดของสเปก) · งานต่อ = T9
 - **วันที่:** 31 ต.ค. 2569 · เจ้าของเลือก D-PT-1 ก · D-PT-2 ก · D-PT-3 ก แล้ว · ไม่ใช้เครดิต
 - **branch ฐาน:** `claude/g2-pilot` (commit ที่มีงานนี้) · **branch ส่งงาน:** `codex/t8-review-g23-portrait` · ส่งไฟล์เดียว `REVIEW_CODEX_T8_G23.md` + 1 บรรทัด `CODEX_STATUS.md`
 - **อ่าน:** `G2_3_PORTRAIT_PLAN.md` · `ASSET_SPEC_14_c2_portrait.md` · `qa/g2-3-portrait/` (`inspection.json` · `tools/inspect_pt.py` · `src/` · `img/`) · ตาราง Mask ID ในแผน G2.0 (branch `plan/g1-3-character-art-direction-v2`) · `c2-pilot-kid4-idleanim-mask.png`
@@ -18,7 +42,8 @@
 
 ---
 
-## งาน T7 · ตรวจโค้ดหน้าฉากทดลอง G2.4 (S6) · อ่าน + รันทดสอบเท่านั้น · สถานะ: รอ Codex
+## งาน T7 · ตรวจโค้ดหน้าฉากทดลอง G2.4 (S6) · อ่าน + รันทดสอบเท่านั้น · สถานะ: เสร็จ (1 พ.ย. 2569)
+- **ผล:** `codex/t7-review-g24-s6` @ `1280d63` (รวมแล้ว) · พบ R1–R7 (กลาง 4 / ต่ำ 3) → Claude แก้ครบใน S6 v1.2 · `qa/g2-4-scene/s6/RESPONSE_T7.md` · ชุดทดสอบ 38/38 exit 0 · งานตรวจซ้ำ = T10
 - **วันที่:** 31 ต.ค. 2569 · แผน `G2_4_SCENE_PLAN.md` ข้อ 8 ขั้น S6 = "ผู้ตรวจอิสระ · **Codex ตรวจโค้ด**" · ผู้ตรวจอิสระของ Claude ตรวจแล้ว (`qa/g2-4-scene/s6/REVIEW_S6.md`) และ Claude แก้แล้ว
 - **branch ฐาน:** `claude/g2-pilot` (commit ที่มีงานนี้) · **branch ส่งงาน:** `codex/t7-review-g24-s6` · ส่งไฟล์เดียว `REVIEW_CODEX_T7_G24_S6.md` + 1 บรรทัด `CODEX_STATUS.md`
 - **อ่าน:** `pilot-g2-scene.html` · `test_g2_scene.py` · `qa/g2-4-scene/tools/trees.py` · `qa/g2-4-scene/s6/README.md` + `REVIEW_S6.md` · แผน G2.4 ข้อ 3, 6, 7 (QG-4) · `ASSET_SPEC_10_g24_scene.md` ข้อ 4 + ฉบับ 1.2 1.3 · `ASSET_SPEC_11_g24_slime.md` ข้อ 5

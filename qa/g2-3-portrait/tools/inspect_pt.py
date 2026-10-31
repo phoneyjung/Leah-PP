@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 # G2.3 portrait inspection (Claude · 31 Oct 2569): size, alpha, half-transparent px, enclosed holes, light/white px on the outline ring,
 # old background colours left, colour list, and each colour's nearest colour in the in-game kid (S idle f0 + its material mask, ΔE00).
+# v1.1 (1 Nov · Codex T8 notes): the ring is now split into the exterior ring (round the outside transparency) and the hole rims;
+#   'identical' colours are counted by exact RGB (not a rounded dE of 0.0); the 2+ count is colours of THIS portrait that the SPRITE S f0 uses
+#   in 2+ ids (it is not the portrait's own material split). Old keys kept with the same values.
 # usage: python3 -I inspect_pt.py PORTRAIT.png SPRITE_SHEET.png SPRITE_MASK.png OUT.json
 import sys, json, hashlib
 import numpy as np
@@ -15,7 +18,10 @@ holes = []
 for i in range(1, n + 1):
     if i in edge: continue
     ys, xs = np.where(lab == i); holes.append({'px': int(len(xs)), 'x': [int(xs.min()), int(xs.max())], 'y': [int(ys.min()), int(ys.max())]})
-ring = op & ndimage.binary_dilation(~op, structure=np.ones((3, 3)))
+ring = op & ndimage.binary_dilation(~op, structure=np.ones((3, 3)))   # all transparency: exterior + hole rims
+ext = np.isin(lab, list(edge - {0})) & ~op
+ring_ext = op & ndimage.binary_dilation(ext, structure=np.ones((3, 3)))
+ring_holes = ring & ~ring_ext
 L = 0.2126 * p[..., 0] + 0.7152 * p[..., 1] + 0.0722 * p[..., 2]
 s = np.array(Image.open(SS).convert('RGBA'))[0:96, 0:96]; m = np.array(Image.open(SM).convert('RGBA'))[0:96, 0:96]
 sop = s[..., 3] > 0; sid = m[..., 0]
@@ -31,10 +37,13 @@ table.sort(key=lambda r: -r['px'])
 res = {'file': P, 'sha256': hashlib.sha256(open(P, 'rb').read()).hexdigest(), 'size': list(p.shape[1::-1]), 'alpha_values': sorted(int(v) for v in np.unique(p[..., 3])),
        'half_transparent_px': int(((p[..., 3] > 0) & (p[..., 3] < 255)).sum()), 'opaque_px': int(op.sum()),
        'bbox': [int(np.where(op)[1].min()), int(np.where(op)[0].min()), int(np.where(op)[1].max()), int(np.where(op)[0].max())],
-       'enclosed_holes': holes, 'outline_ring_px': int(ring.sum()), 'ring_light_px_L200': int((ring & (L > 200)).sum()),
+       'enclosed_holes': holes, 'outline_ring_px': int(ring.sum()), 'exterior_ring_px': int(ring_ext.sum()), 'hole_rim_px': int(ring_holes.sum()),
+       'exterior_ring_light_px_L200': int((ring_ext & (L > 200)).sum()), 'ring_light_px_L200': int((ring & (L > 200)).sum()),
        'ring_near_white_px': int((ring & (p[..., 0] > 230) & (p[..., 1] > 230) & (p[..., 2] > 230)).sum()),
        'old_bg_F8F9F9_px_on_ring': int((ring & (p[..., 0] == 248) & (p[..., 1] == 249) & (p[..., 2] == 249)).sum()),
-       'colours': len(cols), 'colours_identical_to_sprite': sum(1 for r in table if r['dE00'] == 0), 'colours_shared_by_2plus_sprite_materials': sum(1 for r in table if len(r['identical_in_sprite_as']) > 1),
+       'colours': len(cols), 'colours_identical_to_sprite': sum(1 for r in table if r['identical_in_sprite_as']), 'colours_shared_by_2plus_sprite_materials': sum(1 for r in table if len(r['identical_in_sprite_as']) > 1),
+       'notes': {'outline_ring_px': 'opaque px touching ANY transparency (exterior ring + hole rims)', 'colours_identical_to_sprite': 'exact RGB match with sprite S f0',
+                 'colours_shared_by_2plus_sprite_materials': 'portrait colours that sprite S f0 uses in 2+ material ids (sprite data, not a portrait split)'},
        'colour_table': table}
 json.dump(res, open(OUT, 'w'), ensure_ascii=False, indent=1)
 print(json.dumps({k: v for k, v in res.items() if k != 'colour_table'}, ensure_ascii=False))
