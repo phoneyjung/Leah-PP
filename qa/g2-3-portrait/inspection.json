@@ -1,0 +1,431 @@
+{
+ "file": "qa/g2-3-portrait/src/g14-portrait-v1-transparent-copy.png",
+ "sha256": "28c4bb6e65a975931dc467e7173842ca1f4ae819d8d9bfab608825d8257f94ef",
+ "size": [
+  384,
+  384
+ ],
+ "alpha_values": [
+  0,
+  255
+ ],
+ "half_transparent_px": 0,
+ "opaque_px": 70083,
+ "bbox": [
+  52,
+  21,
+  335,
+  383
+ ],
+ "enclosed_holes": [
+  {
+   "px": 25,
+   "x": [
+    103,
+    107
+   ],
+   "y": [
+    181,
+    185
+   ]
+  },
+  {
+   "px": 25,
+   "x": [
+    280,
+    284
+   ],
+   "y": [
+    181,
+    185
+   ]
+  }
+ ],
+ "outline_ring_px": 1220,
+ "ring_light_px_L200": 13,
+ "ring_near_white_px": 0,
+ "old_bg_F8F9F9_px_on_ring": 0,
+ "colours": 46,
+ "colours_identical_to_sprite": 15,
+ "colours_shared_by_2plus_sprite_materials": 13,
+ "colour_table": [
+  {
+   "colour": "#12001E",
+   "px": 11445,
+   "sprite_nearest": "#15031A",
+   "dE00": 2.8,
+   "identical_in_sprite_as": []
+  },
+  {
+   "colour": "#6181A2",
+   "px": 6078,
+   "sprite_nearest": "#5A7687",
+   "dE00": 7.5,
+   "identical_in_sprite_as": []
+  },
+  {
+   "colour": "#F6F1D8",
+   "px": 5889,
+   "sprite_nearest": "#F6F1D8",
+   "dE00": 0.0,
+   "identical_in_sprite_as": [
+    "face lines",
+    "ivory cloth"
+   ]
+  },
+  {
+   "colour": "#461625",
+   "px": 4741,
+   "sprite_nearest": "#461625",
+   "dE00": 0.0,
+   "identical_in_sprite_as": [
+    "copper",
+    "hair",
+    "leather"
+   ]
+  },
+  {
+   "colour": "#3B5273",
+   "px": 4483,
+   "sprite_nearest": "#41566C",
+   "dE00": 4.3,
+   "identical_in_sprite_as": []
+  },
+  {
+   "colour": "#D7C0AD",
+   "px": 3690,
+   "sprite_nearest": "#CAB4A5",
+   "dE00": 3.5,
+   "identical_in_sprite_as": []
+  },
+  {
+   "colour": "#723531",
+   "px": 3393,
+   "sprite_nearest": "#6B2D28",
+   "dE00": 2.5,
+   "identical_in_sprite_as": []
+  },
+  {
+   "colour": "#2E0A27",
+   "px": 3350,
+   "sprite_nearest": "#320C21",
+   "dE00": 3.7,
+   "identical_in_sprite_as": []
+  },
+  {
+   "colour": "#FDDFC4",
+   "px": 2287,
+   "sprite_nearest": "#F8D5B6",
+   "dE00": 2.7,
+   "identical_in_sprite_as": []
+  },
+  {
+   "colour": "#262A46",
+   "px": 2111,
+   "sprite_nearest": "#262A46",
+   "dE00": 0.0,
+   "identical_in_sprite_as": [
+    "cape",
+    "face lines",
+    "ivory cloth",
+    "skin"
+   ]
+  },
+  {
+   "colour": "#894736",
+   "px": 2030,
+   "sprite_nearest": "#82402A",
+   "dE00": 3.1,
+   "identical_in_sprite_as": []
+  },
+  {
+   "colour": "#AE8D88",
+   "px": 1980,
+   "sprite_nearest": "#AE8D88",
+   "dE00": 0.0,
+   "identical_in_sprite_as": [
+    "ivory cloth"
+   ]
+  },
+  {
+   "colour": "#7D3B34",
+   "px": 1650,
+   "sprite_nearest": "#773627",
+   "dE00": 3.8,
+   "identical_in_sprite_as": []
+  },
+  {
+   "colour": "#DC8A7A",
+   "px": 1641,
+   "sprite_nearest": "#DC8A7A",
+   "dE00": 0.0,
+   "identical_in_sprite_as": [
+    "leather",
+    "skin"
+   ]
+  },
+  {
+   "colour": "#BB7049",
+   "px": 1489,
+   "sprite_nearest": "#B2633E",
+   "dE00": 4.5,
+   "identical_in_sprite_as": []
+  },
+  {
+   "colour": "#521C27",
+   "px": 1403,
+   "sprite_nearest": "#521C27",
+   "dE00": 0.0,
+   "identical_in_sprite_as": [
+    "copper",
+    "hair",
+    "leather"
+   ]
+  },
+  {
+   "colour": "#F7C7AC",
+   "px": 1148,
+   "sprite_nearest": "#F7C7AC",
+   "dE00": 0.0,
+   "identical_in_sprite_as": [
+    "copper",
+    "skin"
+   ]
+  },
+  {
+   "colour": "#3D1123",
+   "px": 1025,
+   "sprite_nearest": "#3D1123",
+   "dE00": 0.0,
+   "identical_in_sprite_as": [
+    "copper",
+    "hair",
+    "leather"
+   ]
+  },
+  {
+   "colour": "#A2593E",
+   "px": 1012,
+   "sprite_nearest": "#B2633E",
+   "dE00": 5.3,
+   "identical_in_sprite_as": []
+  },
+  {
+   "colour": "#EFAF76",
+   "px": 989,
+   "sprite_nearest": "#E6A163",
+   "dE00": 3.7,
+   "identical_in_sprite_as": []
+  },
+  {
+   "colour": "#5E2428",
+   "px": 969,
+   "sprite_nearest": "#5E2428",
+   "dE00": 0.0,
+   "identical_in_sprite_as": [
+    "copper",
+    "hair",
+    "leather",
+    "skin"
+   ]
+  },
+  {
+   "colour": "#914A2F",
+   "px": 636,
+   "sprite_nearest": "#914A2F",
+   "dE00": 0.0,
+   "identical_in_sprite_as": [
+    "copper",
+    "hair",
+    "leather",
+    "skin"
+   ]
+  },
+  {
+   "colour": "#7D4760",
+   "px": 616,
+   "sprite_nearest": "#69354B",
+   "dE00": 6.3,
+   "identical_in_sprite_as": []
+  },
+  {
+   "colour": "#09011C",
+   "px": 577,
+   "sprite_nearest": "#100D24",
+   "dE00": 2.1,
+   "identical_in_sprite_as": []
+  },
+  {
+   "colour": "#CA825F",
+   "px": 549,
+   "sprite_nearest": "#CE804C",
+   "dE00": 4.5,
+   "identical_in_sprite_as": []
+  },
+  {
+   "colour": "#B2633E",
+   "px": 543,
+   "sprite_nearest": "#B2633E",
+   "dE00": 0.0,
+   "identical_in_sprite_as": [
+    "copper",
+    "hair",
+    "leather"
+   ]
+  },
+  {
+   "colour": "#1B1636",
+   "px": 526,
+   "sprite_nearest": "#1F1D3C",
+   "dE00": 2.4,
+   "identical_in_sprite_as": []
+  },
+  {
+   "colour": "#F8BBA4",
+   "px": 462,
+   "sprite_nearest": "#F0AD99",
+   "dE00": 3.7,
+   "identical_in_sprite_as": []
+  },
+  {
+   "colour": "#240725",
+   "px": 434,
+   "sprite_nearest": "#23071D",
+   "dE00": 3.4,
+   "identical_in_sprite_as": []
+  },
+  {
+   "colour": "#2E3852",
+   "px": 423,
+   "sprite_nearest": "#2E3852",
+   "dE00": 0.0,
+   "identical_in_sprite_as": [
+    "cape",
+    "face lines",
+    "ivory cloth"
+   ]
+  },
+  {
+   "colour": "#FE998D",
+   "px": 378,
+   "sprite_nearest": "#F6897B",
+   "dE00": 4.0,
+   "identical_in_sprite_as": []
+  },
+  {
+   "colour": "#1B0522",
+   "px": 304,
+   "sprite_nearest": "#15031A",
+   "dE00": 4.1,
+   "identical_in_sprite_as": []
+  },
+  {
+   "colour": "#BC5E56",
+   "px": 276,
+   "sprite_nearest": "#BC5E56",
+   "dE00": 0.0,
+   "identical_in_sprite_as": [
+    "leather",
+    "mouth/cheek",
+    "skin"
+   ]
+  },
+  {
+   "colour": "#4C6887",
+   "px": 204,
+   "sprite_nearest": "#475F74",
+   "dE00": 4.8,
+   "identical_in_sprite_as": []
+  },
+  {
+   "colour": "#9F4A3D",
+   "px": 196,
+   "sprite_nearest": "#B74634",
+   "dE00": 5.4,
+   "identical_in_sprite_as": []
+  },
+  {
+   "colour": "#F8F9F9",
+   "px": 173,
+   "sprite_nearest": "#F8F9F9",
+   "dE00": 0.0,
+   "identical_in_sprite_as": [
+    "face lines"
+   ]
+  },
+  {
+   "colour": "#8A5C5A",
+   "px": 162,
+   "sprite_nearest": "#9B766F",
+   "dE00": 9.8,
+   "identical_in_sprite_as": []
+  },
+  {
+   "colour": "#7E4847",
+   "px": 150,
+   "sprite_nearest": "#773627",
+   "dE00": 8.6,
+   "identical_in_sprite_as": []
+  },
+  {
+   "colour": "#75C080",
+   "px": 131,
+   "sprite_nearest": "#58C072",
+   "dE00": 3.8,
+   "identical_in_sprite_as": []
+  },
+  {
+   "colour": "#EC945D",
+   "px": 121,
+   "sprite_nearest": "#E6A163",
+   "dE00": 5.8,
+   "identical_in_sprite_as": []
+  },
+  {
+   "colour": "#34465B",
+   "px": 115,
+   "sprite_nearest": "#34465B",
+   "dE00": 0.0,
+   "identical_in_sprite_as": [
+    "cape",
+    "face lines",
+    "ivory cloth"
+   ]
+  },
+  {
+   "colour": "#D57953",
+   "px": 108,
+   "sprite_nearest": "#CE804C",
+   "dE00": 5.6,
+   "identical_in_sprite_as": []
+  },
+  {
+   "colour": "#FEF6C6",
+   "px": 95,
+   "sprite_nearest": "#F6F1D8",
+   "dE00": 6.4,
+   "identical_in_sprite_as": []
+  },
+  {
+   "colour": "#41716D",
+   "px": 87,
+   "sprite_nearest": "#327261",
+   "dE00": 6.3,
+   "identical_in_sprite_as": []
+  },
+  {
+   "colour": "#499677",
+   "px": 10,
+   "sprite_nearest": "#339364",
+   "dE00": 5.0,
+   "identical_in_sprite_as": []
+  },
+  {
+   "colour": "#DBDCDE",
+   "px": 4,
+   "sprite_nearest": "#F8F9F9",
+   "dE00": 6.3,
+   "identical_in_sprite_as": []
+  }
+ ]
+}
