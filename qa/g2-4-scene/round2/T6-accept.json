@@ -1,0 +1,35 @@
+{
+ "checked_by": "Claude 31 Oct 2569",
+ "branch": "codex/asset-10-g24-cave @ 1489809 (base 90222c6, 3 files)",
+ "spec": "ASSET_SPEC_10_g24_scene.md v1.2",
+ "check_cave_t6": {
+  "1_size_alpha": true,
+  "2_outside_diff_px": 0,
+  "3_new_colour_px": 0,
+  "4_opening": [
+   69,
+   98,
+   122,
+   171
+  ],
+  "4_w_h_cx": [
+   54,
+   74,
+   95.5
+  ],
+  "4_pass": true,
+  "5_solid_rows": true,
+  "5_min_width_lower": 54,
+  "5_top_non_decreasing": true,
+  "5_top_row_width": 14,
+  "5_pass": true,
+  "6_json": true,
+  "PASS": true
+ },
+ "colours_px_dE00_lt10_of_7": 0,
+ "min_dE00": 14.1,
+ "png_bytes": 31347,
+ "visual": "img/t6-cave-before-after.png: opening clean, rounded top, kid 83 fits with headroom; sides straighter and top rim a little plainer than the original stones",
+ "owner_criterion_7": "owner 31 Oct ~10:1x: 'รับ ใช้ตามนี้' (passes 7.5)",
+ "verdict": "PASS"
+}
