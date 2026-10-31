@@ -1,0 +1,235 @@
+{
+ "shade_map": {
+  "schema": 1,
+  "image": "c2-pilot-kid4-pt.png",
+  "mask": "c2-pilot-kid4-pt-mask.png",
+  "method": "D-PT-3 ก: base option = game option with the lowest pixel-weighted mean dE00 to the portrait colours of that material; each portrait shade (G) -> the base option shade with the nearest Y = 0.2126R+0.7152G+0.0722B (tie -> darker); the same index is used for every option",
+  "materials": {
+   "3": {
+    "group": "skin",
+    "base": "Light",
+    "base_mean_dE00": 4.05,
+    "shade_index_by_G": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     1,
+     1,
+     2,
+     3,
+     3,
+     4,
+     4,
+     4
+    ],
+    "px_per_index": [
+     325,
+     1604,
+     2,
+     1536,
+     2299
+    ]
+   },
+   "4": {
+    "group": "hair",
+    "base": "Red",
+    "base_mean_dE00": 11.22,
+    "shade_index_by_G": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     1,
+     1,
+     1,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     4,
+     4,
+     4,
+     4
+    ],
+    "px_per_index": [
+     8664,
+     4337,
+     2701,
+     1808,
+     929
+    ]
+   },
+   "5": {
+    "group": "iris",
+    "base": "Green",
+    "base_mean_dE00": 9.67,
+    "shade_index_by_G": [
+     1,
+     1,
+     2
+    ],
+    "px_per_index": [
+     0,
+     96,
+     131
+    ]
+   },
+   "8": {
+    "group": "house",
+    "base": "Wing",
+    "base_mean_dE00": 9.21,
+    "shade_index_by_G": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     1,
+     1,
+     2,
+     2,
+     3
+    ],
+    "px_per_index": [
+     3032,
+     4476,
+     202,
+     6075
+    ]
+   }
+  }
+ },
+ "leak_640": {
+  "combos": 640,
+  "renders": 1871,
+  "cross_material_px": 0,
+  "fixed_changed_px": 0,
+  "alpha_changed_px": 0,
+  "unchanged_when_option_changes_px": 0
+ },
+ "signal": {
+  "colours_checked": 128,
+  "hits": [
+   {
+    "colour": "#F0CC70",
+    "signal": "#FFC857",
+    "dE00": 5.1,
+    "from": [
+     [
+      "hair",
+      "Blonde",
+      3
+     ]
+    ],
+    "locked_exception": true
+   },
+   {
+    "colour": "#E6B446",
+    "signal": "#FFC857",
+    "dE00": 5.29,
+    "from": [
+     [
+      "iris",
+      "Amber",
+      2
+     ]
+    ],
+    "locked_exception": true
+   },
+   {
+    "colour": "#F0B512",
+    "signal": "#FFC857",
+    "dE00": 5.83,
+    "from": [
+     [
+      "house",
+      "Sun",
+      1
+     ]
+    ],
+    "locked_exception": true
+   },
+   {
+    "colour": "#F3C546",
+    "signal": "#FFC857",
+    "dE00": 3.48,
+    "from": [
+     [
+      "house",
+      "Sun",
+      2
+     ]
+    ],
+    "locked_exception": true
+   },
+   {
+    "colour": "#F6D579",
+    "signal": "#FFC857",
+    "dE00": 6.29,
+    "from": [
+     [
+      "house",
+      "Sun",
+      3
+     ]
+    ],
+    "locked_exception": true
+   }
+  ],
+  "unexpected_hits": [],
+  "exception_px_when_used": {
+   "hair Blonde shade 4 #F0CC70": 1808,
+   "iris Amber shade 3 #E6B446": 131,
+   "house Sun shade 2 #F0B512": 4476,
+   "house Sun shade 3 #F3C546": 202,
+   "house Sun shade 4 #F6D579": 6075
+  },
+  "source_min_dE00": {
+   "#FFC857": 12.86,
+   "#5FE0FF": 22.25,
+   "#7FE0FF": 20.26
+  }
+ },
+ "default_fidelity": {
+  "skin": {
+   "mean_dE00": 4.06,
+   "p95_dE00": 7.79
+  },
+  "hair": {
+   "mean_dE00": 11.71,
+   "p95_dE00": 23.75
+  },
+  "iris": {
+   "mean_dE00": 9.67,
+   "p95_dE00": 18.21
+  },
+  "house": {
+   "mean_dE00": 9.23,
+   "p95_dE00": 11.33
+  }
+ },
+ "pass": {
+  "4.5 cross-material px = 0, fixed px changed = 0, alpha changed = 0 over 640 combos": true,
+  "4.6 signal hits outside the 5 locked exceptions = 0": true
+ }
+}

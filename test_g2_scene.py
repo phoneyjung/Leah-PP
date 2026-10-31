@@ -5,6 +5,7 @@
 # Pairs and blocked targets: qa/g2-4-scene/pilot-paths.json (layout.py seed 2410) · slime zone: qa/g2-4-scene/pilot-scene-layout.json.
 # v1.2 (Codex T7 R1-R7): mouse drag-off release (S8o) · stand-in hut keeps the kid visible in the door (S8p) · bad anchor entry (S8q) · S8g walks before
 #   the fallback teleport · S8k lifts a finger with touchEnd · S6b every frame · S2b blink frame · S4a every sprite · exit code 1 on any FAIL
+# v1.3 (Codex T10 note): S8q also asserts the bad fist frame is null (lantern kept) and the cave keeps its small light on the bad-anchor frame
 # usage: python3 -I test_g2_scene.py PORT OUT_DIR
 import sys, os, json, math, base64, hashlib, io
 from playwright.sync_api import sync_playwright
@@ -296,9 +297,11 @@ with sync_playwright() as p:
     p9.goto(URL + '?gm'); p9.wait_for_function('window.PS&&PS.ST.ready', timeout=20000); p9.evaluate('PS.pause(true)')
     ba = p9.evaluate("""()=>{const P=PS,S=P.ST,out={};P.teleport(16,11,'S');P.set({anim:'idle',fi:0,t:0});P.step(1);P.draw();out.idleS0={hold:P.holdOn(),lpos:S.lpos,lan:S.last.lan,finite:!S.lpos||S.lpos.every(Number.isFinite)};
       P.set({dir:'E',anim:'walk',fi:2,t:0});P.step(1);P.draw();out.walkE2={lan:S.last.lan,finite:!S.lpos||S.lpos.every(Number.isFinite)};P.set({dir:'S',anim:'idle',fi:1,t:0});P.step(1);P.draw();out.idleS1={lan:S.last.lan};
-      P.teleport(16,6,'N');P.goto(16,4);P.sim(8000,()=>S.mode==='cave'&&!S.warp);P.set({dir:'S',anim:'idle',fi:0,t:0});P.step(1);P.draw();out.cave=S.mode;out.loopErr=S.loopErr||null;return out}""")
+      P.teleport(16,6,'N');P.goto(16,4);P.sim(8000,()=>S.mode==='cave'&&!S.warp);P.sim(300);P.set({dir:'S',anim:'idle',fi:0,t:0});P.step(1);P.draw();out.cave=S.mode;out.caveLan=S.last.lan;
+      {const cv=document.getElementById('cv'),g=cv.getContext('2d'),L=S.last;const d=g.getImageData(Math.round(L.fx-60*L.s),Math.round(L.fy-90*L.s),Math.round(120*L.s),Math.round(100*L.s)).data;let t=0,n=0;for(let i=0;i<d.length;i+=16){t+=0.2126*d[i]+0.7152*d[i+1]+0.0722*d[i+2];n++}out.caveLum=+(t/n).toFixed(1)}
+      out.fistWalkE2=P.FIST.walk&&P.FIST.walk.E?P.FIST.walk.E[2]:'missing';out.fistWalkE1=!!(P.FIST.walk&&P.FIST.walk.E&&P.FIST.walk.E[1]);out.loopErr=S.loopErr||null;return out}""")
     ctx9.close()
-    ok('S8q a bad entry in the hold-anchor file (one anchor an object, one fist point text): that frame draws no lantern and no NaN, the next frame draws it again, no error', ba['idleS0']['lan'] is False and ba['idleS0']['finite'] and ba['walkE2']['finite'] and ba['idleS1']['lan'] is True and not ba['loopErr'], ba)
+    ok('S8q a bad entry in the hold-anchor file: a bad ANCHOR (object) -> that frame has no lantern, no NaN, the next frame has it again; a bad FIST point (text) -> that frame has no fist (FIST null) but keeps the lantern; in the cave the bad-anchor frame keeps the small light (>= 50 % of the lantern case in S8n); no error', ba['idleS0']['lan'] is False and ba['idleS0']['finite'] and ba['walkE2']['finite'] and ba['walkE2']['lan'] is True and ba['fistWalkE2'] is None and ba['fistWalkE1'] and ba['idleS1']['lan'] is True and ba['cave'] == 'cave' and ba['caveLan'] is False and ba['caveLum'] >= 0.5 * lc['lantern']['lum'] and not ba['loopErr'], ba)
     # ---------- screenshots ----------
     for (vw, vh, dpr, tag) in ((844, 390, 2.625, 'phone'), (1180, 820, 2, 'ipad')):
         c3, p3 = newpage(vw, vh, dpr)

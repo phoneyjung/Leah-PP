@@ -406,7 +406,7 @@ if(q.has('gm')){ST.gm=true;const pw=+q.get('power');if((q.get('power')||'')!==''
 setLR(LR_DEFAULT);if(q.has('gm')&&/^\d+$/.test(q.get('lr')||''))setLR(+q.get('lr'));
 if(q.has('far'))ST.zoomOut=true;if(q.has('nonight'))ST.noNight=true;
 window.PS={ST,W0,SL,A,FX,GRID,ZONE,LAMPS,CRYSTALS,TREES,LHOLE,LR_SET,setLR,POWERS,DIRS,T,W,H,MAPW,MAPH,DOOR_X,DOOR_MINY,LAMP_R,FADE_A,FADE_MS,SPEED,
-  PADP,okXY,solidAt,solidCell,cellOf,astar,walkable,inZone,inSlime,SLIME_CELLS,SLIME_BOX,lampLight,LAMP_POOL,NIGHT_A,HUT_SORT,inDoor,tapTarget,lampDist,tileFor,dir8,goto,walk,stop,step,draw,scale,cam,holdOn,curFrame,lanternTarget,covered,showMsg,
+  PADP,okXY,FIST,solidAt,solidCell,cellOf,astar,walkable,inZone,inSlime,SLIME_CELLS,SLIME_BOX,lampLight,LAMP_POOL,NIGHT_A,HUT_SORT,inDoor,tapTarget,lampDist,tileFor,dir8,goto,walk,stop,step,draw,scale,cam,holdOn,curFrame,lanternTarget,covered,showMsg,
   pause:v=>ST.paused=v,set:o=>Object.assign(ST,o),
   teleport:(cx,cy,d)=>{ST.mode='field';ST.warp=null;ST.auto=null;stop();ST.pos={x:cx*T+16,y:cy*T+16};if(d)ST.dir=d;ST.lpos=null;W0.spr.forEach(o=>o.alpha=1)},
   sim:(ms,until)=>{let t=0;while(t<ms){step(16);t+=16;if(until&&until())break}return t}};

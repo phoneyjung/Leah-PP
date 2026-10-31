@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="th"><head><meta charset="utf-8"><link rel="icon" href="data:,"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>G2.3 Pilot · รูปหน้าใหญ่ / portrait</title>
+<style>
+html,body{margin:0;height:100%;overflow:hidden;background:#1d1b2c;color:#ecebf5;font:13px system-ui,sans-serif;-webkit-user-select:none;user-select:none}
+#stage{position:fixed;left:0;top:0;overflow:hidden}
+#view{position:absolute;left:0;top:0;image-rendering:pixelated}
+#panel{position:fixed;top:0;right:0;bottom:0;overflow-y:auto;padding:8px 10px 12px 8px;box-sizing:border-box;background:#26233a}
+#panel h2{font:600 12px system-ui;margin:8px 0 4px;color:#cfcbe6}
+#panel h2:first-child{margin-top:0}
+.row{display:flex;flex-wrap:wrap;gap:6px}
+.sw{width:44px;height:44px;min-width:44px;border-radius:10px;border:2px solid #4a4566;padding:0;cursor:pointer;position:relative}
+.sw[aria-pressed=true]{border-color:#fff;box-shadow:0 0 0 2px #ffffff55}
+.sw span{position:absolute;left:0;right:0;bottom:2px;font:600 9px system-ui;line-height:1.1;color:#fff;text-shadow:0 0 2px #000,0 0 2px #000;white-space:nowrap;overflow:hidden}
+#note{font:11px system-ui;color:#b9b4d6;margin-top:10px;line-height:1.4}
+#warn{display:none;margin-top:8px;padding:6px 8px;border-radius:8px;background:#5a2a3a;color:#fff;font:12px system-ui}
+</style></head><body>
+<div id="stage"><canvas id="view" aria-label="portrait + in-game kid"></canvas></div>
+<div id="panel" role="group" aria-label="colours"><div id="rows"></div><div id="warn" role="status"></div><div id="note"></div></div>
+<script>
+// G2.3 S5 Pilot page (Claude · 1 Nov 2569) · ASSET_SPEC_14 v1.1 + D-PT-1/2/3 ก · GM test page only (not index.html, no save, no online).
+// Shows c2-pilot-kid4-pt.png recoloured through its material mask (R = id, G = shade) and the shade map (D-PT-3: portrait shade -> game shade by
+// brightness), next to the in-game kid (sprite S idle f0, its own mask). One canvas the size of the stage in device pixels; the art is copied in at
+// whole device-pixel offsets and whole scale k (1 art px = k x k device px), smoothing off.
+// Mouth / cheek (id 10) keep their colours like the sprite (G2.0 table, P3). Every file has a fallback: no white screen.
+'use strict';
+const RAMPS={ // Palette v1.2 (locked game ramps; skin = pilot proposal D3) · list index = shade (0 = darkest)
+ hair:[['Black','#18141C #28222E #3E3646 #5C5264 #7E7486'],['Brown','#3A2216 #5C3822 #825432 #AA764A #CEA070'],['Blonde','#7A4E1E #AA722C #D6A046 #F0CC70 #FFECAA'],['Red','#541814 #86281E #B8422C #DC6E46 #F6A078'],
+  ['Pink','#6E284A #A6426E #D66A96 #F098BA #FFCCDE'],['Blue','#1C2860 #2C4294 #4668C4 #7098E4 #B0CEFA'],['Silver','#46485A #6E7082 #9698AA #C2C4D2 #E8EAF2'],['Green','#184628 #286E3C #469650 #78BE6E #B4E6A0']],
+ iris:[['Brown','#281810 #58361E #8C5C34'],['Black','#14121A #2E2838 #50485C'],['Green','#144628 #288246 #5ABE6E'],['Blue','#14286E #285ABE #64A0F0'],['Amber','#5A320A #AA6E1E #E6B446']],
+ skin:[['Light','#9C665C #BD846D #DEA68E #F1C4AA #FFE2CB'],['Medium','#73473F #98604C #BE8366 #DBA98A #EFC9A6'],['Tan','#513532 #75483E #98614B #BE8765 #DDA781'],['Deep','#342629 #503332 #744839 #98694F #B88A69']],
+ house:[['Sun','#C0900C #F0B512 #F3C546 #F6D579'],['Wing','#133C72 #1B56A4 #2370D5 #508FE2'],['Leaf','#165A19 #218324 #2BAB2F #3BCE40'],['Flame','#7F1015 #B0161D #E01C25 #E94951']]};
+const GROUP={3:'skin',4:'hair',5:'iris',8:'house'}, ORDER=['hair','iris','skin','house'];
+const TH_NAMES={hair:['ดำ','น้ำตาล','ทอง','แดง','ชมพู','ฟ้า','เงิน','เขียว'],iris:['น้ำตาล','ดำ','เขียว','ฟ้า','อำพัน'],skin:['ขาว','กลาง','แทน','เข้ม'],house:['อาทิตย์','ปีกฟ้า','ใบไม้','เปลวไฟ']};   // names used in the game (HAIRC / EYEC / HOUSES / skin)
+const T={th:{hair:'สีผม',iris:'สีตา',skin:'สีผิว',house:'บ้าน (ผ้าคลุม)',noPt:'ไม่พบไฟล์รูปหน้าใหญ่ — แสดงกรอบแทน',noMask:'ไม่พบหน้ากากสี — แสดงรูปตามต้นฉบับ เปลี่ยนสีไม่ได้',noMap:'ไม่พบตารางจับคู่เฉด — แสดงรูปตามต้นฉบับ',noKid:'ไม่พบภาพตัวในเกม',
+  note:'หน้าทดลอง GM · รูปซ้าย 1 พิกเซลภาพ = {k} พิกเซลจอ · ตัวในเกม {k2} เท่า · ปาก/แก้มคงสีเดิม (เหมือนตัวในเกม)'},
+ en:{hair:'Hair',iris:'Eyes',skin:'Skin',house:'House (cape)',noPt:'Portrait file missing - showing a frame',noMask:'Colour mask missing - portrait shown as drawn',noMap:'Shade map missing - portrait shown as drawn',noKid:'In-game kid missing',
+  note:'GM test page · 1 art px = {k} screen px · kid x{k2} · mouth / cheek keep their colours (like the sprite)'}};
+const LANG=(navigator.language||'th').toLowerCase().startsWith('th')?'th':'en', tx=k=>T[LANG][k]+(LANG==='th'?' / '+T.en[k]:'');
+const S={opts:{hair:1,iris:2,skin:1,house:1},img:{},data:{},warn:[],ready:false,k:1,k2:1,errors:[]};   // default = sprite G1 default (Brown / Green / Medium / Wing)
+const rgb=h=>[parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)];
+const ramp=(g,i)=>RAMPS[g][i][1].split(' ').map(rgb);
+function load(src){return new Promise(r=>{const i=new Image();i.onload=()=>r(i.naturalWidth?i:null);i.onerror=()=>r(null);i.src=src})}
+async function loadJSON(src){try{const r=await fetch(src);if(!r.ok)return null;return await r.json()}catch(e){return null}}
+function pixels(img,w,h,sx=0,sy=0){const c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d');g.drawImage(img,sx,sy,w,h,0,0,w,h);return g.getImageData(0,0,w,h)}
+function validMap(m,mj){try{for(const id in GROUP){const e=m.materials[id],sh=mj.materials[id].shades,n=RAMPS[GROUP[id]][0][1].split(' ').length;
+  if(!e||!Array.isArray(e.shade_index_by_G)||e.shade_index_by_G.length!==sh.length||!e.shade_index_by_G.every(v=>Number.isInteger(v)&&v>=0&&v<n))return false}return true}catch(e){return false}}
+const OFF={pt:document.createElement('canvas'),kid:document.createElement('canvas')};OFF.pt.width=OFF.pt.height=384;OFF.kid.width=OFF.kid.height=96;
+const V={x:0,y:0,kx:0,ky:0,k:1,k2:1};
+function renderPt(){const c=OFF.pt,g=c.getContext('2d');g.imageSmoothingEnabled=false;g.clearRect(0,0,384,384);
+  const P=S.data.pt;if(!P){g.fillStyle='#3a3552';g.fillRect(40,20,304,364);g.strokeStyle='#8f88b8';g.lineWidth=4;g.strokeRect(42,22,300,360);return}
+  const out=new ImageData(new Uint8ClampedArray(P.data),384,384),M=S.data.mask,MP=S.data.map;
+  if(M&&MP){const R={};for(const id in GROUP)R[id]=ramp(GROUP[id],S.opts[GROUP[id]]);const d=out.data,m=M.data;
+    for(let i=0;i<d.length;i+=4){const id=m[i];if(!(id in R)||m[i+3]!==255)continue;const k=MP[id][m[i+1]];if(k===undefined)continue;const c=R[id][k];d[i]=c[0];d[i+1]=c[1];d[i+2]=c[2]}}
+  g.putImageData(out,0,0)}
+function renderKid(){const c=OFF.kid,g=c.getContext('2d');g.clearRect(0,0,96,96);const K=S.data.kid,KM=S.data.kidMask;if(!K){g.fillStyle='#3a3552';g.fillRect(28,10,40,80);return}
+  const out=new ImageData(new Uint8ClampedArray(K.data),96,96);if(KM){const d=out.data,m=KM.data,R={};for(const id in GROUP)R[id]=ramp(GROUP[id],S.opts[GROUP[id]]);
+    for(let i=0;i<d.length;i+=4){const id=m[i];if(!(id in R)||d[i+3]===0)continue;const c=R[id][m[i+1]];if(!c)continue;d[i]=c[0];d[i+1]=c[1];d[i+2]=c[2]}}
+  g.putImageData(out,0,0)}
+function layout(){const dpr=window.devicePixelRatio||1,W=innerWidth,H=innerHeight,panel=document.getElementById('panel'),stage=document.getElementById('stage');
+  let aw,ah;const P=panel.style;
+  if(H>W){const ph=Math.round(H*0.42);P.left='0';P.right='0';P.top='auto';P.bottom='0';P.width='auto';P.height=ph+'px';aw=W;ah=H-ph}   // upright phone: colours below
+  else{const pw=Math.min(Math.max(236,Math.round(W*0.42)),360);P.left='auto';P.right='0';P.top='0';P.bottom='0';P.height='auto';P.width=pw+'px';aw=W-pw;ah=H}
+  stage.style.width=aw+'px';stage.style.height=ah+'px';
+  const devW=Math.floor(aw*dpr),devH=Math.floor(ah*dpr),gap=Math.round(8*dpr);
+  let k=Math.max(1,Math.floor(Math.min((devW-3*gap)/(384+96*0.5),(devH-2*gap)/384)));                 // portrait scale (whole device px)
+  let k2=Math.max(1,Math.min(Math.floor(k*2),Math.floor((devW-3*gap-384*k)/96)));                     // kid scale (whole device px)
+  if(384*k+96*k2+3*gap>devW)k2=1;S.k=k;S.k2=k2;
+  const view=document.getElementById('view');view.style.width=aw+'px';view.style.height=ah+'px';view.width=Math.round(aw*dpr);view.height=Math.round(ah*dpr);
+  const totalW=384*k+gap+96*k2,x0=Math.max(gap,Math.floor((view.width-totalW)/2)),y0=Math.max(0,Math.floor((view.height-384*k)/2));
+  Object.assign(V,{x:x0,y:y0,kx:x0+384*k+gap,ky:y0+384*k-96*k2,k,k2});blit();
+  document.getElementById('note').textContent=tx('note').replace(/\{k\}/g,k).replace(/\{k2\}/g,k2)}
+function buildUI(){const rows=document.getElementById('rows');rows.innerHTML='';
+  for(const g of ORDER){const h=document.createElement('h2');h.textContent=tx(g);rows.appendChild(h);const row=document.createElement('div');row.className='row';row.dataset.group=g;
+    RAMPS[g].forEach(([name,hs],i)=>{const b=document.createElement('button');b.className='sw';b.type='button';const sh=hs.split(' ');
+      b.style.background='linear-gradient(135deg,'+sh[Math.floor(sh.length/2)]+' 55%,'+sh[0]+' 55%)';const th=TH_NAMES[g][i];b.setAttribute('aria-label',tx(g)+': '+th+' / '+name);b.title=th+' / '+name;b.dataset.group=g;b.dataset.i=i;
+      const s=document.createElement('span');s.textContent=LANG==='th'?th:name;b.appendChild(s);b.setAttribute('aria-pressed',String(S.opts[g]===i));
+      b.addEventListener('click',()=>{S.opts[g]=i;row.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));draw()});row.appendChild(b)});rows.appendChild(row)}}
+function showWarn(){const w=document.getElementById('warn');w.style.display=S.warn.length?'block':'none';w.textContent=S.warn.map(tx).join(' · ')}
+function blit(){const v=document.getElementById('view'),g=v.getContext('2d');g.imageSmoothingEnabled=false;g.clearRect(0,0,v.width,v.height);
+  g.drawImage(OFF.pt,0,0,384,384,V.x,V.y,384*V.k,384*V.k);g.drawImage(OFF.kid,0,0,96,96,V.kx,V.ky,96*V.k2,96*V.k2)}
+function draw(){try{renderPt();renderKid();blit()}catch(e){S.errors.push(String(e))}}
+async function boot(){buildUI();layout();
+  const [pt,mask,kid,kidMask,map,mj]=await Promise.all([load('c2-pilot-kid4-pt.png'),load('c2-pilot-kid4-pt-mask.png'),load('c2-pilot-kid4-idleanim.png'),load('c2-pilot-kid4-idleanim-mask.png'),
+    loadJSON('c2-pilot-kid4-pt-shademap.json'),loadJSON('c2-pilot-kid4-pt-mask.json')]);
+  if(pt&&pt.naturalWidth===384&&pt.naturalHeight===384)S.data.pt=pixels(pt,384,384);else S.warn.push('noPt');
+  if(S.data.pt){if(mask&&mask.naturalWidth===384&&mask.naturalHeight===384)S.data.mask=pixels(mask,384,384);else S.warn.push('noMask');
+    if(S.data.mask){if(map&&mj&&validMap(map,mj)){S.data.map={};for(const id in GROUP)S.data.map[id]=map.materials[id].shade_index_by_G}else S.warn.push('noMap')}}
+  if(kid&&kid.naturalWidth>=96&&kid.naturalHeight>=96){S.data.kid=pixels(kid,96,96);if(kidMask&&kidMask.naturalWidth>=96)S.data.kidMask=pixels(kidMask,96,96)}else S.warn.push('noKid');
+  showWarn();draw();S.ready=true}
+addEventListener('resize',()=>{layout()});
+addEventListener('error',e=>S.errors.push(String(e.message)));
+window.PT={S,RAMPS,GROUP,layout,draw,renderPt,set:(o)=>{Object.assign(S.opts,o);document.querySelectorAll('.sw').forEach(b=>b.setAttribute('aria-pressed',String(S.opts[b.dataset.group]===+b.dataset.i)));draw()},
+  ptPixels:()=>Array.from(OFF.pt.getContext('2d').getImageData(0,0,384,384).data),kidPixels:()=>Array.from(OFF.kid.getContext('2d').getImageData(0,0,96,96).data),
+  view:()=>{const v=document.getElementById('view'),b=v.getBoundingClientRect(),d=devicePixelRatio;return{dpr:d,cw:v.width,ch:v.height,ratioW:b.width*d/v.width,ratioH:b.height*d/v.height,left:b.left*d,top:b.top*d,...V}},
+  // every device pixel of the art in the view = the art pixel it comes from (whole scale, no smoothing): returns mismatching px
+  checkBlit:()=>{const v=document.getElementById('view').getContext('2d');let bad=0;for(const [src,n,x,y,k] of [[OFF.pt,384,V.x,V.y,V.k],[OFF.kid,96,V.kx,V.ky,V.k2]]){
+    const a=src.getContext('2d').getImageData(0,0,n,n).data,b=v.getImageData(x,y,n*k,n*k).data,W=n*k;for(let yy=0;yy<W;yy++)for(let xx=0;xx<W;xx++){const i=(yy*W+xx)*4,j=(((yy/k)|0)*n+((xx/k)|0))*4;
+      if(a[j+3]===0){if(b[i+3]!==0)bad++;continue}if(a[j]!==b[i]||a[j+1]!==b[i+1]||a[j+2]!==b[i+2]||b[i+3]!==255)bad++}}return bad}};
+boot().catch(e=>{S.errors.push(String(e));S.ready=true});
+</script>
+</body></html>

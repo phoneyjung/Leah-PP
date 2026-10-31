@@ -809,35 +809,35 @@
  ],
  "fps": {
   "cave": [
-   20.6,
-   21.1,
-   19.8,
-   19.5,
-   18.4
+   18.4,
+   18.4,
+   16.9,
+   15.8,
+   16.6
   ],
   "dark": [
-   48.4,
-   49.5,
-   49.3,
-   49.6,
-   44.9
+   38.2,
+   38.3,
+   40.7,
+   40.6,
+   42.7
   ],
   "scene": [
-   26.0,
-   28.2,
-   29.5,
-   28.5,
-   29.2
+   26.7,
+   24.4,
+   23.4,
+   25.9,
+   25.9
   ],
   "median": {
-   "cave": 19.8,
-   "dark": 49.3,
-   "scene": 28.5
+   "cave": 16.9,
+   "dark": 40.6,
+   "scene": 25.9
   },
-  "scene_vs_cave": 1.434,
-  "scene_vs_empty_dark_grid": 0.577
+  "scene_vs_cave": 1.531,
+  "scene_vs_empty_dark_grid": 0.637
  },
- "draw_ms_cpu1x": 4.13,
+ "draw_ms_cpu1x": 5.55,
  "checks": [
   {
    "check": "S0 page source: no rotate / setTransform / ctx.filter · no 0.75 zoom",
@@ -1461,7 +1461,7 @@
    "check": "S8d on-screen pad with a mouse: holding ↑ for 0.7 s walks north",
    "pass": true,
    "value": {
-    "dy": -33.6
+    "dy": -34.4
    }
   },
   {
@@ -1788,7 +1788,7 @@
    "check": "S8k real touch (CDP) on the pad: hold ↑ walks N · add a 2nd finger on → turns E · lift ↑ (touchEnd) -> still walking E with 1 finger · lift → -> stops, 0 fingers · slide ↑ to ↗ turns NE · window blur with a key held -> stops",
    "pass": true,
    "value": {
-    "hold_N_dy": -28.8,
+    "hold_N_dy": -29.6,
     "dir1": "N",
     "second_finger_E": "E",
     "lift_N_keep_E": [
@@ -1885,7 +1885,7 @@
    }
   },
   {
-   "check": "S8q a bad entry in the hold-anchor file (one anchor an object, one fist point text): that frame draws no lantern and no NaN, the next frame draws it again, no error",
+   "check": "S8q a bad entry in the hold-anchor file: a bad ANCHOR (object) -> that frame has no lantern, no NaN, the next frame has it again; a bad FIST point (text) -> that frame has no fist (FIST null) but keeps the lantern; in the cave the bad-anchor frame keeps the small light (>= 50 % of the lantern case in S8n); no error",
    "pass": true,
    "value": {
     "idleS0": {
@@ -1902,6 +1902,10 @@
      "lan": true
     },
     "cave": "cave",
+    "caveLan": false,
+    "caveLum": 41.5,
+    "fistWalkE2": null,
+    "fistWalkE1": true,
     "loopErr": null
    }
   },
@@ -1910,34 +1914,34 @@
    "pass": true,
    "value": {
     "cave": [
-     20.6,
-     21.1,
-     19.8,
-     19.5,
-     18.4
+     18.4,
+     18.4,
+     16.9,
+     15.8,
+     16.6
     ],
     "dark": [
-     48.4,
-     49.5,
-     49.3,
-     49.6,
-     44.9
+     38.2,
+     38.3,
+     40.7,
+     40.6,
+     42.7
     ],
     "scene": [
-     26.0,
-     28.2,
-     29.5,
-     28.5,
-     29.2
+     26.7,
+     24.4,
+     23.4,
+     25.9,
+     25.9
     ],
     "median": {
-     "cave": 19.8,
-     "dark": 49.3,
-     "scene": 28.5
+     "cave": 16.9,
+     "dark": 40.6,
+     "scene": 25.9
     },
-    "scene_vs_cave": 1.434,
-    "scene_vs_empty_dark_grid": 0.577,
-    "draw_ms_cpu1x": 4.13
+    "scene_vs_cave": 1.531,
+    "scene_vs_empty_dark_grid": 0.637,
+    "draw_ms_cpu1x": 5.55
    }
   },
   {

@@ -1,0 +1,260 @@
+{
+ "checks": [
+  {
+   "check": "S5-4.7 screens 740x360 / 844x390 / 915x412 at DPR 2 / 2.625 / 3 (+ iPad, upright phone): one canvas = stage in device px (CSS x DPR / canvas = 1 +- 0.002), portrait 384 x whole k and kid 96 x whole k2 at whole offsets, every art device px = its art px (0 wrong), 21 colour buttons >= 44 CSS px, none covered (after scrolling the panel), none over the art, none overlapping",
+   "pass": true,
+   "value": {
+    "740x360@2": {
+     "k": 1,
+     "k2": 2,
+     "ok": true,
+     "ratio": [
+      1,
+      1
+     ],
+     "blitBad": 0,
+     "small": [],
+     "covered": [],
+     "overlapArt": [],
+     "overlapBtn": 0,
+     "panelHitsArt": false
+    },
+    "844x390@2.625": {
+     "k": 2,
+     "k2": 4,
+     "ok": true,
+     "ratio": [
+      1.00019,
+      0.99976
+     ],
+     "blitBad": 0,
+     "small": [],
+     "covered": [],
+     "overlapArt": [],
+     "overlapBtn": 0,
+     "panelHitsArt": false
+    },
+    "915x412@3": {
+     "k": 3,
+     "k2": 4,
+     "ok": true,
+     "ratio": [
+      1,
+      1
+     ],
+     "blitBad": 0,
+     "small": [],
+     "covered": [],
+     "overlapArt": [],
+     "overlapBtn": 0,
+     "panelHitsArt": false
+    },
+    "740x360@3": {
+     "k": 2,
+     "k2": 4,
+     "ok": true,
+     "ratio": [
+      1,
+      1
+     ],
+     "blitBad": 0,
+     "small": [],
+     "covered": [],
+     "overlapArt": [],
+     "overlapBtn": 0,
+     "panelHitsArt": false
+    },
+    "915x412@2.625": {
+     "k": 2,
+     "k2": 4,
+     "ok": true,
+     "ratio": [
+      0.99991,
+      0.99954
+     ],
+     "blitBad": 0,
+     "small": [],
+     "covered": [],
+     "overlapArt": [],
+     "overlapBtn": 0,
+     "panelHitsArt": false
+    },
+    "1180x820@2": {
+     "k": 3,
+     "k2": 4,
+     "ok": true,
+     "ratio": [
+      1,
+      1
+     ],
+     "blitBad": 0,
+     "small": [],
+     "covered": [],
+     "overlapArt": [],
+     "overlapBtn": 0,
+     "panelHitsArt": false
+    },
+    "390x844@3": {
+     "k": 2,
+     "k2": 3,
+     "ok": true,
+     "ratio": [
+      1,
+      1
+     ],
+     "blitBad": 0,
+     "small": [],
+     "covered": [],
+     "overlapArt": [],
+     "overlapBtn": 0,
+     "panelHitsArt": false
+    }
+   }
+  },
+  {
+   "check": "S5-r page colours = Python renderer (shade map D-PT-3) for all 16 sets: portrait px different 0 · in-game kid px different 0",
+   "pass": true,
+   "value": {
+    "Brown/Green/Medium/Wing": [
+     0,
+     0
+    ],
+    "Black/Brown/Light/Sun": [
+     0,
+     0
+    ],
+    "Blonde/Blue/Deep/Sun": [
+     0,
+     0
+    ],
+    "Red/Amber/Tan/Leaf": [
+     0,
+     0
+    ],
+    "Pink/Black/Medium/Flame": [
+     0,
+     0
+    ],
+    "Blue/Green/Light/Leaf": [
+     0,
+     0
+    ],
+    "Silver/Amber/Deep/Wing": [
+     0,
+     0
+    ],
+    "Green/Blue/Tan/Flame": [
+     0,
+     0
+    ],
+    "Black/Amber/Deep/Leaf": [
+     0,
+     0
+    ],
+    "Blonde/Brown/Light/Flame": [
+     0,
+     0
+    ],
+    "Brown/Amber/Tan/Sun": [
+     0,
+     0
+    ],
+    "Red/Green/Deep/Flame": [
+     0,
+     0
+    ],
+    "Pink/Blue/Light/Wing": [
+     0,
+     0
+    ],
+    "Blue/Brown/Medium/Sun": [
+     0,
+     0
+    ],
+    "Silver/Black/Tan/Leaf": [
+     0,
+     0
+    ],
+    "Green/Black/Medium/Wing": [
+     0,
+     0
+    ]
+   }
+  },
+  {
+   "check": "S5-t tap the Blonde hair button: hair option 2, button pressed, portrait = Python render of the new set",
+   "pass": true,
+   "value": {
+    "state": [
+     2,
+     "true"
+    ]
+   }
+  },
+  {
+   "check": "S5-f missing / broken files (portrait · mask · shade map · kid · every file · half-written shade map): a frame or the portrait as drawn is shown, a TH+EN note, 21 buttons, no error",
+   "pass": true,
+   "value": {
+    "portrait png": {
+     "warn": [
+      "noPt"
+     ],
+     "warnShown": true,
+     "drawnPx": 110656,
+     "errors": [],
+     "buttons": 21
+    },
+    "mask png": {
+     "warn": [
+      "noMask"
+     ],
+     "warnShown": true,
+     "drawnPx": 70133,
+     "errors": [],
+     "buttons": 21
+    },
+    "shade map": {
+     "warn": [
+      "noMap"
+     ],
+     "warnShown": true,
+     "drawnPx": 70133,
+     "errors": [],
+     "buttons": 21
+    },
+    "kid files": {
+     "warn": [
+      "noKid"
+     ],
+     "warnShown": true,
+     "drawnPx": 70133,
+     "errors": [],
+     "buttons": 21
+    },
+    "every file": {
+     "warn": [
+      "noPt",
+      "noKid"
+     ],
+     "warnShown": true,
+     "drawnPx": 110656,
+     "errors": [],
+     "buttons": 21
+    },
+    "half shade map": [
+     [
+      "noMap"
+     ],
+     []
+    ]
+   }
+  },
+  {
+   "check": "S5-e JS errors 0 across every load (page errors + console errors; blocked-file loads count page errors only)",
+   "pass": true,
+   "value": []
+  }
+ ],
+ "passed": 5,
+ "total": 5
+}

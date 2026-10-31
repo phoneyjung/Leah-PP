@@ -1,0 +1,120 @@
+{
+ "schema": 1,
+ "image": "c2-pilot-kid4-pt.png",
+ "mask": "c2-pilot-kid4-pt-mask.png",
+ "method": "D-PT-3 \u0e01: base option = game option with the lowest pixel-weighted mean dE00 to the portrait colours of that material; each portrait shade (G) -> the base option shade with the nearest Y = 0.2126R+0.7152G+0.0722B (tie -> darker); the same index is used for every option",
+ "materials": {
+  "3": {
+   "group": "skin",
+   "base": "Light",
+   "base_mean_dE00": 4.05,
+   "shade_index_by_G": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    2,
+    3,
+    3,
+    4,
+    4,
+    4
+   ],
+   "px_per_index": [
+    325,
+    1604,
+    2,
+    1536,
+    2299
+   ]
+  },
+  "4": {
+   "group": "hair",
+   "base": "Red",
+   "base_mean_dE00": 11.22,
+   "shade_index_by_G": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    4,
+    4,
+    4,
+    4
+   ],
+   "px_per_index": [
+    8664,
+    4337,
+    2701,
+    1808,
+    929
+   ]
+  },
+  "5": {
+   "group": "iris",
+   "base": "Green",
+   "base_mean_dE00": 9.67,
+   "shade_index_by_G": [
+    1,
+    1,
+    2
+   ],
+   "px_per_index": [
+    0,
+    96,
+    131
+   ]
+  },
+  "8": {
+   "group": "house",
+   "base": "Wing",
+   "base_mean_dE00": 9.21,
+   "shade_index_by_G": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    2,
+    2,
+    3
+   ],
+   "px_per_index": [
+    3032,
+    4476,
+    202,
+    6075
+   ]
+  }
+ }
+}

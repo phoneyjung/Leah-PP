@@ -48,3 +48,7 @@
 
 ## ภาพ (`img/`)
 มือถือ 844×390: `phone-start` `phone-door` `phone-field` `phone-behind-tree` `phone-cave` `phone-gate` · iPad 1180×820: `ipad-start` `ipad-field` · ไฟล์ภาพหายทั้งหมด: `fallback-allart`
+
+## Codex T10 (ตรวจซ้ำ v1.2 · `REVIEW_CODEX_T10_G24_S6.md` · 1 พ.ย.) → v1.3
+- R1–R7 ผ่านครบ 7/7 · ชุดทดสอบ 38/38 exit 0 · ทำให้ข้อหนึ่งตกแล้ว exit 1 จริง · พบบั๊กใหม่ 0
+- ข้อเสนอ: S8q ควรวัดตรง ๆ ว่าเฟรม fist เสียได้ค่า null และในถ้ำเฟรม anchor เสียยังมีแสงสำรอง → v1.3 เพิ่มแล้ว (ส่งออก `FIST` ใน `PS`) · รันใหม่ 38/38 exit 0 · ในถ้ำเฟรมเสียสว่าง 41.5 (เกณฑ์ ≥ 50 % ของกรณีมีตะเกียง)
