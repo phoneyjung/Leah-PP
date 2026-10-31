@@ -1,0 +1,70 @@
+{
+  "schema": 1,
+  "tile": 32,
+  "items": {
+    "crate": [
+      0,
+      0
+    ],
+    "rope": [
+      32,
+      0
+    ],
+    "boulder": [
+      64,
+      0
+    ],
+    "fence": [
+      96,
+      0
+    ],
+    "fence_post": [
+      128,
+      0
+    ],
+    "tall_grass": [
+      160,
+      0
+    ],
+    "clover": [
+      192,
+      0
+    ],
+    "white_flowers": [
+      224,
+      0
+    ],
+    "lavender": [
+      256,
+      0
+    ],
+    "crystal": [
+      288,
+      0
+    ],
+    "barrel": [
+      320,
+      0
+    ],
+    "bush": [
+      352,
+      0
+    ],
+    "stepping_stone": [
+      384,
+      0
+    ],
+    "firewood": [
+      416,
+      0
+    ],
+    "bucket": [
+      448,
+      0
+    ],
+    "mushrooms": [
+      480,
+      0
+    ]
+  }
+}
