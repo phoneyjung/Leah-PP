@@ -3,6 +3,8 @@
 # Runs pilot-g2-scene.html in Chromium (phone 844x390 @ DPR 2.625 · iPad 1180x820 @ 2). Movement runs in the page with its own collision
 # (PS.sim steps the same step() the page uses, 16 ms per step, no drawing) so the walks are real page walks, only faster than real time.
 # Pairs and blocked targets: qa/g2-4-scene/pilot-paths.json (layout.py seed 2410) · slime zone: qa/g2-4-scene/pilot-scene-layout.json.
+# v1.2 (Codex T7 R1-R7): mouse drag-off release (S8o) · stand-in hut keeps the kid visible in the door (S8p) · bad anchor entry (S8q) · S8g walks before
+#   the fallback teleport · S8k lifts a finger with touchEnd · S6b every frame · S2b blink frame · S4a every sprite · exit code 1 on any FAIL
 # usage: python3 -I test_g2_scene.py PORT OUT_DIR
 import sys, os, json, math, base64, hashlib, io
 from playwright.sync_api import sync_playwright
@@ -109,7 +111,7 @@ with sync_playwright() as p:
     door_ok = sum(1 for q in door if q['pos'][0] == 224 and q['pos'][1] >= 264 and q['cell'][1] == 8 and q['cell'][0] in (6, 7) and q['kid_before_hut'])
     ok('S2a door: 10 walks from 10 starts end in a door cell with feet x = 224, feet y >= 264, the kid drawn before (behind) the hut', door_ok == 10, {'ok': door_ok, 'runs': door})
     clip = pg.evaluate("""()=>{const P=PS,S=P.ST;let worst=0,soles=0,n=0;for(const y of [264,268,276,284,287])for(const d of P.DIRS)for(const [anim,nf] of [['idle',4],['walk',6]])for(let f=0;f<nf;f++){
-      P.set({mode:'field',pos:{x:224,y},dir:d,anim,fi:f,t:0,auto:null});const h=__S.hidden();n++;if(h.n>worst)worst=h.n;if(h.soles>soles)soles=h.soles}return{poses:n,maxHiddenBodyPx:worst,maxSolePxOnThreshold:soles}}""")
+      P.set({mode:'field',pos:{x:224,y},dir:d,anim,fi:f,t:0,auto:null,blinkNow:true});const h=__S.hidden();n++;if(h.n>worst)worst=h.n;if(h.soles>soles)soles=h.soles}return{poses:n,maxHiddenBodyPx:worst,maxSolePxOnThreshold:soles}}""")
     ok('S2b door: standing in the door (x 224, feet y 264-287) the frame hides 0 px of head / hair / shoulders / body / legs in every direction and frame (idle 4 + walk 6 with the lantern) · soles behind the stone threshold at y 287 reported', clip['maxHiddenBodyPx'] == 0 and clip['poses'] == 400, clip)
     pe = pg.evaluate("""()=>{const P=PS,S=P.ST,res=[];const hut=P.W0.spr.find(o=>o.kind==='hut');
       for(const [x0,d] of [...Array.from({length:22},(_,k)=>[192+3*k,'N']),[200,'NE'],[248,'NW'],[194,'NE'],[254,'NW']]){P.teleport(7,9,d);S.pos={x:x0,y:300};S.lastAuto=null;P.walk(d);
@@ -127,19 +129,19 @@ with sync_playwright() as p:
     ok('S3b Wang: 392 cells, every corner combo found in g24-tiles.json, every shared corner agrees between neighbours (path meeting the cliff only under the cave-mouth rock)', wang['miss'] == 0 and not wang['seam'] and wang['tileMissDrawn'] == 0, wang)
     scl = pg.evaluate("()=>{const a=PS.scale();PS.set({zoomOut:true});const b=PS.scale();PS.set({zoomOut:false});return [a,b,Number.isInteger(a)&&Number.isInteger(b)]}")
     # ---------- item 4: y-sort + fade ----------
-    ys = pg.evaluate("""()=>{const P=PS,S=P.ST,out={};const kinds=['tree','lamp','hut','gate','crate','bush','boulder','fence','crystal'];
-      for(const kd of kinds){const o=P.W0.spr.find(q=>q.kind===kd);const cx=o.x+(o.bb?(o.bb[0]+o.bb[2])/2:o.sw/2);let good=0,n=0;
+    ys = pg.evaluate("""()=>{const P=PS,S=P.ST,out={};const kinds=['tree','lamp','hut','gate','crate','rope','bush','boulder','fence','crystal'];
+      for(const kd of kinds)for(const o of P.W0.spr.filter(q=>q.kind===kd)){const cx=o.x+(o.bb?(o.bb[0]+o.bb[2])/2:o.sw/2);let good=0,n=0;
         for(const d of P.DIRS)for(const [dy,front] of [[-6,false],[6,true]]){P.set({mode:'field',dir:d,anim:'idle',auto:null,pos:{x:cx,y:o.sort+dy}});P.draw();const L=S.order,ki=L.indexOf('kid'),oi=L.indexOf(o.kind+'#'+o.id);n++;if(oi>=0&&ki>=0&&((ki>oi)===front))good++}
-        out[kd]=[good,n]}
+        out[kd]=[(out[kd]||[0,0])[0]+good,(out[kd]||[0,0])[1]+n]}
       const sl=P.SL[0];let good=0,n=0;for(const d of P.DIRS)for(const [dy,front] of [[-6,false],[6,true]]){P.set({dir:d,pos:{x:sl.x,y:sl.y+dy}});P.draw();const L=S.order,ki=L.indexOf('kid'),oi=L.indexOf('slime#0');n++;if((ki>oi)===front)good++}
-      out.slime=[good,n];return out}""")
+      out.slime=[good,n];out.count=P.W0.spr.length;out.covered=Object.keys(out).filter(k=>k!=='count').reduce((m,k)=>m+out[k][1]/16,0)-1;return out}""")
     sv = pg.evaluate("""()=>{const P=PS,bad=[];const tr=P.W0.spr.filter(o=>o.kind==='tree');P.TREES.forEach(([cx,cy,dx,dy],k)=>{const o=tr[k];if(!o||o.x!==cx*32+16-64+dx||o.y!==(cy+1)*32-128+dy||o.sort!==(cy+1)*32-4+dy)bad.push(['tree',cx,cy])});
       const la=P.W0.spr.filter(o=>o.kind==='lamp');P.LAMPS.forEach(([cx,cy],k)=>{const o=la[k];if(o.x!==cx*32-48||o.y!==(cy+1)*32-128||o.sort!==(cy+1)*32-4)bad.push(['lamp',cx,cy])});
       const hut=P.W0.spr.find(o=>o.kind==='hut'),gate=P.W0.spr.find(o=>o.kind==='gate');if(hut.x!==96||hut.y!==32||hut.sort!==287)bad.push('hut');if(gate.x!==448||gate.y!==384||gate.sort!==446)bad.push('gate');
       P.W0.spr.filter(o=>['crate','rope','boulder','fence','bush','crystal'].includes(o.kind)).forEach(o=>{if(o.x%32||o.y%32||o.sort!==o.y+30)bad.push([o.kind,o.x,o.y])});
       return{bad,trees:tr.length,lamps:la.length,props:P.W0.spr.filter(o=>['crate','rope','boulder','fence','bush','crystal'].includes(o.kind)).length}}""")
     ok('S4d placement = spec 10 §4: lamps TL (col x 32 - 48, (row+1) x 32 - 128) sort (row+1) x 32 - 4 · hut (96,32) sort 287 · gate (448,384) sort 446 · 32 px props on their cell, sort = cell y + 30 · trees the same + the TREES offsets (spec 10 v1.3)', not sv['bad'], sv)
-    ok('S4a y-sort: kid 6 px behind / in front of each kind of art (tree lamp hut gate crate bush boulder fence crystal slime) x 8 directions = right order every time', all(v[0] == v[1] == 16 for v in ys.values()), ys)
+    ok('S4a y-sort: kid 6 px behind / in front of EVERY sprite (trees lamps hut gate crate rope bushes boulders fences crystals) + a slime x 8 directions = right order every time', all(v[0] == v[1] for k, v in ys.items() if k not in ('count', 'covered')) and ys['covered'] == ys['count'], ys)
     fd = pg.evaluate("""()=>{const P=PS,S=P.ST;P.teleport(1,6,'N');const tr=[];for(let t=0;t<=400;t+=16){P.step(16);const o=P.W0.spr.filter(q=>q.alpha<1);tr.push([t+16,o.length?Math.min(...o.map(q=>q.alpha)):1])}
       const reach=(tr.find(e=>e[1]<=P.FADE_A+0.001)||[null])[0];P.teleport(1,9,'N');S.pos={x:48,y:9*32+16};const back=[];for(let t=0;t<=400;t+=16){P.step(16);back.push([t+16,Math.min(...P.W0.spr.filter(q=>q.kind==='tree').map(q=>q.alpha))])}
       P.teleport(1,6,'N');P.sim(400);const faded=P.W0.spr.filter(q=>q.alpha<1).map(q=>q.kind);P.ST.pos={x:16*32+16,y:11*32+16};P.sim(400);const after=P.W0.spr.filter(q=>q.alpha<1).length;return{reach_ms:reach,minAlpha:Math.min(...tr.map(e=>e[1])),faded,after}}""")
@@ -156,7 +158,7 @@ with sync_playwright() as p:
       const img=P.A['g24-slime.png'],c=document.createElement('canvas');c.width=img.width;c.height=img.height;const cx_=c.getContext('2d');cx_.drawImage(img,0,0);const sd=cx_.getImageData(0,0,img.width,img.height).data;
       const masks=P.DIRS.map((d,i)=>{const m=[];for(let v=0;v<64;v++)for(let u=0;u<64;u++)if(sd[(v*img.width+i*64+u)*4+3])m.push([u,v]);return m});const base=P.A.slimeJ.base;
       for(k=0;k<11250;k++){P.step(16);let fl=false;for(const s of P.SL){const c=P.cellOf(s.x,s.y);if(!P.inZone(c[0],c[1]))out++;if(P.lampDist(c[0],c[1])<=P.LAMP_R)lit++;bobs.add(s.bob);if(!Number.isInteger(s.bob))nonInt++;
-        if(k%4===0){const di=P.DIRS.indexOf(s.dir),x0=Math.round(s.x)-Math.round(base[di][0]),y0=Math.round(s.y)-base[di][1]-s.bob;for(const [u,v] of masks[di]){const X=x0+u,Y=y0+v;if(X<0||Y<0||X>=N.width||Y>=N.height)continue;if(na[(Y*N.width+X)*4+3]<full-1){drawnLitPx++;fl=true}}}}if(fl)drawnLitFrames++}
+        {const di=P.DIRS.indexOf(s.dir),x0=Math.round(s.x)-Math.round(base[di][0]),y0=Math.round(s.y)-base[di][1]-s.bob;for(const [u,v] of masks[di]){const X=x0+u,Y=y0+v;if(X<0||Y<0||X>=N.width||Y>=N.height)continue;if(na[(Y*N.width+X)*4+3]<full-1){drawnLitPx++;fl=true}}}}if(fl)drawnLitFrames++}
       const dirs={};P.SL.forEach(s=>Object.entries(s.dirs).forEach(([d,n])=>dirs[d]=(dirs[d]||0)+n));return{sim_s:k*16/1000,slimes:P.SL.length,slimeCells:P.SLIME_CELLS.size,outOfZone:out,litCellFrames:lit,drawnLitFrames,drawnLitPx,bobs:[...bobs].sort(),nonInt,dirs,dirCount:Object.keys(dirs).length}}""")
     ok('S6b 3 slimes x 180 s (kid far west): slime px inside the DRAWN lamp light (night layer thinner than full) 0 · feet in a lit cell 0 · outside the 47-cell zone 0 · all 8 directions · hop 0-3 whole px', sl['drawnLitPx'] == 0 and sl['litCellFrames'] == 0 and sl['outOfZone'] == 0 and sl['dirCount'] == 8 and set(sl['bobs']) <= {0, 1, 2, 3} and sl['nonInt'] == 0, sl)
     sm = np.array(Image.open(os.path.join(HERE, 'g24-slime.png')).convert('RGBA'))[..., 3] > 0
@@ -222,18 +224,18 @@ with sync_playwright() as p:
             ctxf = b.new_context(viewport={'width': 844, 'height': 390}, device_scale_factor=2.625); p2 = ctxf.new_page(); c2 = ctxf
             def fake(body, ctype): return lambda route: route.fulfill(status=200, body=body, content_type=ctype)
             for pat, body in FAKE[name].items(): p2.route(pat, fake(body, 'image/png' if pat.endswith('.png') else 'application/json'))
-            p2.on('pageerror', lambda e: errs.append('pageerror ' + str(e)))
+            p2.on('pageerror', lambda e: errs.append('pageerror ' + str(e))); p2.on('console', lambda m: errs.append('console ' + m.text) if m.type == 'error' else None)
             p2.goto(URL + '?gm'); p2.wait_for_function('window.PS&&PS.ST.ready', timeout=20000); p2.evaluate('PS.pause(true)'); p2.evaluate(HELP)
         else:
             c2, p2 = newpage(block=block)
         r = p2.evaluate("""()=>{const P=PS,S=P.ST;P.teleport(16,11,'N');P.draw();const cv=document.getElementById('cv'),d=cv.getContext('2d').getImageData(0,0,cv.width,cv.height).data;const cols=new Set();let L=0,n=0;
-           for(let i=0;i<d.length;i+=4*97){cols.add(d[i]<<16|d[i+1]<<8|d[i+2]);L+=0.2126*d[i]+0.7152*d[i+1]+0.0722*d[i+2];n++}const g=P.goto(20,9);P.sim(10000,()=>!S.auto);
+           for(let i=0;i<d.length;i+=4*97){cols.add(d[i]<<16|d[i+1]<<8|d[i+2]);L+=0.2126*d[i]+0.7152*d[i+1]+0.0722*d[i+2];n++}S.lastAuto=null;const g=P.goto(20,9);P.sim(10000,()=>!S.auto);const walked=P.cellOf(S.pos.x,S.pos.y),autoOk=!!(S.lastAuto&&S.lastAuto.done&&!S.lastAuto.fail&&g>0);   // measured before the fallback-view teleport
            const fbc=P.ST.noNight=true;P.teleport(20,9,'S');P.draw();const e=cv.getContext('2d').getImageData(0,0,cv.width,cv.height).data;const want={grass:[79,110,94],dirt:[184,149,106],cliff:[93,80,120],slime:[155,132,184],tree:[47,92,70],lampPost:[90,60,42]};const hits={};
            for(const [k,v] of Object.entries(want)){let h=0;for(let i=0;i<e.length;i+=4*7)if(e[i]===v[0]&&e[i+1]===v[1]&&e[i+2]===v[2])h++;hits[k]=h}P.ST.noNight=false;
-           const sl=P.SL.map(q=>{const di=P.DIRS.indexOf(q.dir);return di});return{colours:cols.size,meanLum:Math.round(L/n),spr:P.W0.spr.length,slimes:P.SL.length,walked:P.cellOf(S.pos.x,S.pos.y),loopErr:P.ST.loopErr||null,buildErrors:P.W0.errors,fallbackHits:hits}}""")
+           const sl=P.SL.map(q=>{const di=P.DIRS.indexOf(q.dir);return di});return{colours:cols.size,meanLum:Math.round(L/n),spr:P.W0.spr.length,slimes:P.SL.length,walked,autoOk,steps:g,loopErr:P.ST.loopErr||null,buildErrors:P.W0.errors.slice(),fallbackHits:hits}}""")
         p2.screenshot(path=os.path.join(OUT, 'img', 'fallback-%s.png' % name.replace(' ', '').replace('+', '-'))); c2.close()
         fb[name] = dict(r, js_errors=len(errs) - pe)
-    ok('S8g missing or half-written files (7 cases: every art file · tiles · slime · hut + cave · trees + lamp + props · json with missing keys · slime sheet with only S): page draws, walks, no JS / loop error', all(v['colours'] > 20 and v['meanLum'] < 200 and v['walked'] == [20, 9] and v['js_errors'] == 0 and not v['loopErr'] for v in fb.values()), fb)
+    ok('S8g missing or half-written files (7 cases: every art file · tiles · slime · hut + cave · trees + lamp + props · json with missing keys · slime sheet with only S): page draws, walks, no JS / loop error', all(v['colours'] > 20 and v['meanLum'] < 200 and v['walked'] == [20, 9] and v['autoOk'] and v['js_errors'] == 0 and not v['loopErr'] and not v['buildErrors'] for v in fb.values()), fb)
     allh = fb['all art']['fallbackHits']
     ok('S8g2 every art file missing: the drawn fallback shapes are on screen (grass, dirt, tree, slime and lamp-post fallback colours found, night off)', all(allh[k] > 0 for k in ('grass', 'dirt', 'tree', 'slime', 'lampPost')), allh)
     # ---------- other screens: scale from the short side, camera follows without shaking ----------
@@ -252,14 +254,17 @@ with sync_playwright() as p:
     P1 = {'x': bn['x'] + bn['width'] / 2, 'y': bn['y'] + bn['height'] / 2, 'id': 1}; P2 = {'x': be['x'] + be['width'] / 2, 'y': be['y'] + be['height'] / 2, 'id': 2}
     y0 = p6.evaluate('PS.ST.pos.y'); cdp6.send('Input.dispatchTouchEvent', {'type': 'touchStart', 'touchPoints': [P1]}); p6.wait_for_timeout(600); y1 = p6.evaluate('PS.ST.pos.y'); d1 = p6.evaluate('PS.ST.dir')
     cdp6.send('Input.dispatchTouchEvent', {'type': 'touchStart', 'touchPoints': [P1, P2]}); p6.wait_for_timeout(150); d2 = p6.evaluate('PS.ST.dir')
-    cdp6.send('Input.dispatchTouchEvent', {'type': 'touchMove', 'touchPoints': [P2]}); p6.wait_for_timeout(250); st3 = p6.evaluate('[PS.ST.dir,PS.ST.moving]')
-    cdp6.send('Input.dispatchTouchEvent', {'type': 'touchEnd', 'touchPoints': []}); p6.wait_for_timeout(150); st4 = p6.evaluate('[PS.ST.moving]')
+    cdp6.send('Input.dispatchTouchEvent', {'type': 'touchEnd', 'touchPoints': [P1]}); p6.wait_for_timeout(250); st3 = p6.evaluate('[PS.ST.dir,PS.ST.moving,PS.PADP.size]')   # lift the N finger only (Codex T7 R5: touchEnd with the lifted point)
+    cdp6.send('Input.dispatchTouchEvent', {'type': 'touchEnd', 'touchPoints': [P2]}); p6.wait_for_timeout(150); st4 = p6.evaluate('[PS.ST.moving,PS.PADP.size]')
     p6.evaluate("()=>{PS.teleport(16,11,'N')}"); cdp6.send('Input.dispatchTouchEvent', {'type': 'touchStart', 'touchPoints': [P1]}); p6.wait_for_timeout(200)
     cdp6.send('Input.dispatchTouchEvent', {'type': 'touchMove', 'touchPoints': [{'x': bne['x'] + bne['width'] / 2, 'y': bne['y'] + bne['height'] / 2, 'id': 1}]}); p6.wait_for_timeout(200); slide = p6.evaluate('PS.ST.dir')
     cdp6.send('Input.dispatchTouchEvent', {'type': 'touchEnd', 'touchPoints': []}); p6.wait_for_timeout(100)
     p6.keyboard.down('ArrowUp'); p6.wait_for_timeout(200); mv = p6.evaluate('PS.ST.moving'); p6.evaluate("()=>window.dispatchEvent(new Event('blur'))"); p6.wait_for_timeout(100); after_blur = p6.evaluate('PS.ST.moving'); p6.keyboard.up('ArrowUp')
     touch = {'hold_N_dy': round(y1 - y0, 1), 'dir1': d1, 'second_finger_E': d2, 'lift_N_keep_E': st3, 'lift_all': st4, 'slide_N_to_NE': slide, 'key_walking': mv, 'after_blur_moving': after_blur}
-    ok('S8k real touch (CDP) on the pad: hold ↑ walks N · add a 2nd finger on → · lift ↑ -> still walking E · lift all -> stops · slide ↑ to ↗ turns NE · window blur with a key held -> stops', y1 < y0 - 15 and d1 == 'N' and st3 == ['E', True] and st4 == [False] and slide == 'NE' and mv and not after_blur, touch)
+    ok('S8k real touch (CDP) on the pad: hold ↑ walks N · add a 2nd finger on → turns E · lift ↑ (touchEnd) -> still walking E with 1 finger · lift → -> stops, 0 fingers · slide ↑ to ↗ turns NE · window blur with a key held -> stops', y1 < y0 - 15 and d1 == 'N' and d2 == 'E' and st3 == ['E', True, 1] and st4 == [False, 0] and slide == 'NE' and mv and not after_blur, touch)
+    p6.evaluate("()=>{PS.teleport(16,11,'N')}"); p6.mouse.move(P1['x'], P1['y']); p6.mouse.down(); p6.wait_for_timeout(200); mvd = p6.evaluate('PS.ST.moving')
+    p6.mouse.move(400, 150, steps=5); p6.mouse.up(); p6.wait_for_timeout(100); ya = p6.evaluate('PS.ST.pos.y'); p6.wait_for_timeout(500); yb = p6.evaluate('PS.ST.pos.y'); drag = {'walking_while_held': mvd, 'moving_after_release': p6.evaluate('PS.ST.moving'), 'fingers': p6.evaluate('PS.PADP.size'), 'moved_after_release_px': round(ya - yb, 1)}
+    ok('S8o mouse: press ↑, drag off the pad onto the scene, release -> the kid stops (no walking on, 0 pointers held)', drag['walking_while_held'] and not drag['moving_after_release'] and drag['fingers'] == 0 and drag['moved_after_release_px'] == 0, drag)
     p6.evaluate('PS.pause(true)')
     tp = p6.evaluate("""()=>{const P=PS,S=P.ST,r={};const tap=(wx,wy)=>{const t=P.tapTarget(wx,wy);if(t)P.goto(t[0],t[1]);return t};
       P.teleport(16,9,'N');r.caveRock=tap(16*32+16,2*32+16);P.sim(10000,()=>S.mode==='cave'&&!S.warp);r.caveRockMode=S.mode;
@@ -278,6 +283,22 @@ with sync_playwright() as p:
           const d=g.getImageData(Math.round(L.fx-60*L.s),Math.round(L.fy-90*L.s),Math.round(120*L.s),Math.round(100*L.s)).data;let t=0,n=0;for(let i=0;i<d.length;i+=16){t+=0.2126*d[i]+0.7152*d[i+1]+0.0722*d[i+2];n++}return{mode:S.mode,lum:+(t/n).toFixed(1),hold:P.holdOn()}}""")
         c7.close()
     ok('S8n cave without the lantern files: a small light stays round the kid (brightness >= 50 % of the lantern case, not near black)', lc['no lantern files']['lum'] >= 0.5 * lc['lantern']['lum'] and not lc['no lantern files']['hold'], lc)
+    c8, p8 = newpage(block=['**/g24-hut.png'])
+    hv = p8.evaluate("""()=>{const P=PS,S=P.ST;P.teleport(9,10,'N');P.goto(7,8);P.sim(15000,()=>!S.auto);S.noNight=true;const cv=document.getElementById('cv'),g=cv.getContext('2d');P.draw();const a=g.getImageData(0,0,cv.width,cv.height).data;
+      const keep=[S.img.idle,S.img.walk,S.img.walkhold,S.img.lantern];const blank=document.createElement('canvas');blank.width=576;blank.height=768;S.img.idle=S.img.walk=S.img.walkhold=blank;S.img.lantern=document.createElement('canvas');P.draw();const b=g.getImageData(0,0,cv.width,cv.height).data;
+      [S.img.idle,S.img.walk,S.img.walkhold,S.img.lantern]=keep;S.noNight=false;let n=0;for(let i=0;i<a.length;i+=4)if(a[i]!==b[i]||a[i+1]!==b[i+1]||a[i+2]!==b[i+2])n++;return{inDoor:P.inDoor(),x:S.pos.x,kidPxVisible:n,hutImg:!!P.A['g24-hut.png']}}""")
+    c8.close()
+    ok('S8p stand-in hut (g24-hut.png missing): the kid in the doorway is still visible (screen px that change when the kid is hidden > 1000)', hv['inDoor'] and hv['x'] == 224 and not hv['hutImg'] and hv['kidPxVisible'] > 1000, hv)
+    ctx9 = b.new_context(viewport={'width': 844, 'height': 390}, device_scale_factor=2.625); p9 = ctx9.new_page()
+    hanc = json.load(open(os.path.join(HERE, 'c2-pilot-hold-anchors.json'))); hanc['idle_hold']['S'][0]['anchor'] = {'x': 48, 'y': 60}; hanc['walk_hold']['E'][2]['fist'] = [[1, 'a']]
+    p9.route('**/c2-pilot-hold-anchors.json', lambda r: r.fulfill(status=200, body=json.dumps(hanc), content_type='application/json'))
+    p9.on('pageerror', lambda e: errs.append('pageerror ' + str(e))); p9.on('console', lambda m: errs.append('console ' + m.text) if m.type == 'error' else None)
+    p9.goto(URL + '?gm'); p9.wait_for_function('window.PS&&PS.ST.ready', timeout=20000); p9.evaluate('PS.pause(true)')
+    ba = p9.evaluate("""()=>{const P=PS,S=P.ST,out={};P.teleport(16,11,'S');P.set({anim:'idle',fi:0,t:0});P.step(1);P.draw();out.idleS0={hold:P.holdOn(),lpos:S.lpos,lan:S.last.lan,finite:!S.lpos||S.lpos.every(Number.isFinite)};
+      P.set({dir:'E',anim:'walk',fi:2,t:0});P.step(1);P.draw();out.walkE2={lan:S.last.lan,finite:!S.lpos||S.lpos.every(Number.isFinite)};P.set({dir:'S',anim:'idle',fi:1,t:0});P.step(1);P.draw();out.idleS1={lan:S.last.lan};
+      P.teleport(16,6,'N');P.goto(16,4);P.sim(8000,()=>S.mode==='cave'&&!S.warp);P.set({dir:'S',anim:'idle',fi:0,t:0});P.step(1);P.draw();out.cave=S.mode;out.loopErr=S.loopErr||null;return out}""")
+    ctx9.close()
+    ok('S8q a bad entry in the hold-anchor file (one anchor an object, one fist point text): that frame draws no lantern and no NaN, the next frame draws it again, no error', ba['idleS0']['lan'] is False and ba['idleS0']['finite'] and ba['walkE2']['finite'] and ba['idleS1']['lan'] is True and not ba['loopErr'], ba)
     # ---------- screenshots ----------
     for (vw, vh, dpr, tag) in ((844, 390, 2.625, 'phone'), (1180, 820, 2, 'ipad')):
         c3, p3 = newpage(vw, vh, dpr)
@@ -312,3 +333,4 @@ ok('S8i JS errors 0 across every page load (page errors + console errors; blocke
 R['checks'] = CHECK; R['passed'] = sum(c['pass'] for c in CHECK); R['total'] = len(CHECK)
 json.dump(R, open(os.path.join(OUT, 'results.json'), 'w'), ensure_ascii=False, indent=1)
 print('%d/%d' % (R['passed'], R['total']))
+sys.exit(0 if R['passed'] == R['total'] else 1)

@@ -4,6 +4,7 @@
 # 'walk-behind' = more than half of the kid covered by art drawn in front of her. Greedy: east / west / bottom in turn, trees >= 2 cells apart,
 # east-edge trees may sit 12-28 px further out and bottom-row trees 12-20 px lower (whole px, art never scaled).
 # Result -> TREES in pilot-g2-scene.html. usage: python3 -I trees.py
+# v1.1 (Codex T7 R7): props placed exactly like the page (cell top-left, sort +30), was bbox-centred; TREES result unchanged
 import json, sys, numpy as np
 from PIL import Image
 import os
@@ -18,9 +19,8 @@ kid=np.array(Image.open(R+'c2-pilot-kid4-idleanim.png').convert('RGBA'))[0:96,0:
 hut=m('g24-hut.png'); ta=m('g24-tree-a.png'); tb=m('g24-tree-b.png'); lamp=m('g24-lamp.png'); gate=m('g24-gate.png')
 pr=np.array(Image.open(R+'g24-props.png').convert('RGBA'))[...,3]>0; P=json.load(open(R+'g24-props.json'))['items']
 def prop(k): x,y=P[k]; return pr[y:y+32,x:x+32]
-def placed_prop(k,cx,cy):
-    a=prop(k); ys=np.where(a.any(1))[0]; xs=np.where(a.any(0))[0]; bottom=ys.max(); midx=(xs.min()+xs.max())/2
-    l=int(round(cx*T+16-midx-0.5)); t=(cy+1)*T-4-bottom; return (a,l,t,t+bottom)
+def placed_prop(k,cx,cy):   # same as the page (spec 10 v1.3 section 4, Codex T7 R7): 32 x 32 on its own cell, top-left (cx*32, cy*32), sort y = cy*32+30
+    return (prop(k),cx*T,cy*T,cy*T+30)
 base=[(hut,96,32,287)]
 for (x,y) in cells:
     ch=G[y][x]

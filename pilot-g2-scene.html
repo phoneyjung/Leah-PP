@@ -35,6 +35,8 @@ canvas{position:fixed;inset:0;width:100%;height:100%;image-rendering:pixelated}
 // door funnel (line up on x 224 before stepping into D, hut never fades / sorts over a kid in the door) · slimes keep their whole body out of the drawn lamp pools ·
 // cave taps never cross the return ring · half-written json guarded, errors never stop the loop · S-only slime sheet · taps on solid art go to the nearest open cell ·
 // no name tag (the player is their own character; the tag was 5.7 CSS px) · props sit on their cell (spec 10 §4: 32 x 32 at the cell, anchor (16,30)).
+// v1.2 (Codex T7 REVIEW_CODEX_T7_G24_S6.md): pad buttons capture the pointer + release anywhere stops (R1) · stand-in hut keeps the door opening see-through (R2) ·
+// every lantern anchor / fist point is checked per frame, a bad one = no lantern that frame (+ the cave keeps a small light) (R3).
 'use strict';
 const T=32, C=96, FEET=[48,94], DIRS=['S','SE','E','NE','N','NW','W','SW'];
 const DV={S:[0,1],SE:[1,1],E:[1,0],NE:[1,-1],N:[0,-1],NW:[-1,-1],W:[-1,0],SW:[-1,1]};
@@ -141,11 +143,12 @@ function gmLit(){return!!ST.img.lanternLight&&gmPow().light>0}
 const FIST={};
 function buildFists(){if(!ST.ok.hold)return;[['idle','idle_hold',ST.img.idle,4],['walk','walk_hold',ST.img.walkhold,6]].forEach(([a,key,img,nf])=>{if(!img)return;FIST[a]={};
   const c=mk(img.width,img.height),x=c.getContext('2d');x.drawImage(img,0,0);
-  DIRS.forEach((d,i)=>{FIST[a][d]=[];for(let k=0;k<nf;k++){const fr=(ST.hanc[key][d]||[])[k];if(!fr||!fr.fist){FIST[a][d].push(null);continue}
+  DIRS.forEach((d,i)=>{FIST[a][d]=[];for(let k=0;k<nf;k++){const fr=(ST.hanc[key][d]||[])[k];if(!fr||!Array.isArray(fr.fist)||!fr.fist.length||!fr.fist.every(okXY)){FIST[a][d].push(null);continue}
     const bx=Math.min(...fr.fist.map(p=>p[0])),by=Math.min(...fr.fist.map(p=>p[1])),bw=Math.max(...fr.fist.map(p=>p[0]))-bx+1,bh=Math.max(...fr.fist.map(p=>p[1]))-by+1;
     const o=mk(bw,bh),ox=o.getContext('2d');fr.fist.forEach(([fx,fy])=>ox.drawImage(c,k*C+fx,i*C+fy,1,1,fx-bx,fy-by,1,1));FIST[a][d].push({c:o,x:bx,y:by,w:bw,h:bh})}})})}
 function holdOn(){return ST.hold&&ST.ok.hold&&ST.ok.lantern&&ST.ok.walkhold&&ST.ok.idle}
-function lanternTarget(){if(!holdOn())return null;const fr=(ST.hanc[ST.anim==='walk'?'walk_hold':'idle_hold'][ST.dir]||[])[curFrame()];return fr&&fr.anchor?fr.anchor:null}
+const okXY=a=>Array.isArray(a)&&a.length>=2&&Number.isFinite(a[0])&&Number.isFinite(a[1]);   // a usable [x,y] from a json file
+function lanternTarget(){if(!holdOn())return null;const fr=(ST.hanc[ST.anim==='walk'?'walk_hold':'idle_hold'][ST.dir]||[])[curFrame()];return fr&&okXY(fr.anchor)?fr.anchor:null}
 function easeLantern(dt){const t=lanternTarget();if(!t){ST.lpos=null;ST.ldir=null;ST.lhist=null;return}
   const now=ST.lclock=(ST.lclock||0)+dt;
   if(!ST.lpos||ST.ldir!==ST.dir||!ST.ease){ST.lpos=[t[0],t[1]];ST.ldir=ST.dir;ST.lhist=[{t:now,p:[t[0],t[1]]}];return}
@@ -269,7 +272,7 @@ function autoStep(dt){const a=ST.auto;if(!a.wp.length){a.done=true;ST.auto=null;
 function checkWarp(){const [cx,cy]=cellOf(ST.pos.x,ST.pos.y);
   if(ST.mode==='field'&&ch(cx,cy)==='X')startWarp('cave');
   else if(ST.mode==='cave'&&cx===CAVE_ROOM.ring[0]&&cy===CAVE_ROOM.ring[1])startWarp('field')}
-function startWarp(to){ST.warp={t:0,to,switched:false};ST.auto=null;stop();ST.warps=(ST.warps||[]).concat([to])}
+function startWarp(to){ST.warp={t:0,to,switched:false};ST.auto=null;stop();ST.warps=(ST.warps||[]).concat([to]).slice(-20)}   // last 20 only (Codex T7 note: the list grew with every warp)
 function warpStep(dt){const w=ST.warp;w.t+=dt;
   if(!w.switched&&w.t>=300){w.switched=true;ST.mode=w.to;ST.lpos=null;
     if(w.to==='cave'){ST.pos={x:CAVE_ROOM.arrive[0]*T+16,y:CAVE_ROOM.arrive[1]*T+16};ST.dir='N';showMsg('ถ้ำ (ลองเดิน) · เดินลงวงแสงด้านล่างเพื่อกลับ','Cave (try-out) · step on the light ring below to go back',3500,'cave')}
@@ -290,7 +293,8 @@ function hideMsg(){msgEl.style.display='none';ST.msg=null}
 function drawSprite(o,s,ox,oy){const a=o.alpha;if(a<1)g.globalAlpha=a;
   if(o.img)g.drawImage(o.img,o.sx,o.sy,o.sw,o.sh,ox+o.x*s,oy+o.y*s,o.sw*s,o.sh*s);
   else{g.fillStyle=o.fb;if(o.round){g.beginPath();g.ellipse(ox+(o.x+o.sw/2)*s,oy+(o.y+o.sh*0.4)*s,o.sw/2*s,o.sh*0.4*s,0,0,7);g.fill();g.fillStyle='#5a3c2a';g.fillRect(ox+(o.x+o.sw/2-5)*s,oy+(o.y+o.sh*0.7)*s,10*s,o.sh*0.3*s)}
-    else{g.fillRect(ox+o.x*s,oy+o.y*s,o.sw*s,o.sh*s);if(o.hole){g.fillStyle='#1a1424';g.fillRect(ox+o.hole[0]*s,oy+o.hole[1]*s,o.hole[2]*s,o.hole[3]*s)}if(o.lantern){g.fillStyle='#d98a4e';g.fillRect(ox+o.lantern[0]*s,oy+o.lantern[1]*s,o.lantern[2]*s,o.lantern[3]*s)}}}
+    else{if(o.hole){const [hx,hy,hw,hh]=o.hole;for(const r of [[o.x,o.y,o.sw,hy-o.y],[o.x,hy,hx-o.x,o.y+o.sh-hy],[hx+hw,hy,o.x+o.sw-hx-hw,o.y+o.sh-hy]])if(r[2]>0&&r[3]>0)g.fillRect(ox+r[0]*s,oy+r[1]*s,r[2]*s,r[3]*s)}   // stand-in hut: walls round the door, the opening stays see-through (dark inside is on the ground layer)
+      else g.fillRect(ox+o.x*s,oy+o.y*s,o.sw*s,o.sh*s);if(o.lantern){g.fillStyle='#d98a4e';g.fillRect(ox+o.lantern[0]*s,oy+o.lantern[1]*s,o.lantern[2]*s,o.lantern[3]*s)}}}
   if(a<1)g.globalAlpha=1}
 function drawSlime(s_,s,ox,oy){const img=A['g24-slime.png'],di=img&&img.width>=512?DIRS.indexOf(s_.dir):0,b=(A.slimeJ&&A.slimeJ.base&&A.slimeJ.base[di])||[32,56],x=Math.round(s_.x),y=Math.round(s_.y);
   if(img)g.drawImage(img,di*64,0,64,64,ox+(x-Math.round(b[0]))*s,oy+(y-b[1]-s_.bob)*s,64*s,64*s);
@@ -358,7 +362,7 @@ function draw(){
     shadow(Math.round(ST.pos.x)+offX(ST.dir),Math.round(ST.pos.y),14,3,0.35,1,ox,oy);drawKid(1,ox,oy,info);order.push('kid');
     const dc=FX.dark;if(dc.width!==bw||dc.height!==bh){dc.width=bw;dc.height=bh}const x=dc.getContext('2d');x.imageSmoothingEnabled=false;
     x.globalCompositeOperation='source-over';x.clearRect(0,0,bw,bh);x.fillStyle='rgba('+DARK_RGB+','+DARK_A+')';x.fillRect(0,0,bw,bh);
-    x.globalCompositeOperation='destination-out';cutLight(x,info,0,0,1);if(!holdOn()||!ST.img.lanternLight){x.globalAlpha=0.6;x.drawImage(FX.lhole,Math.round(info.sx+48-LHOLE.R),Math.round(info.sy+60-LHOLE.R));x.globalAlpha=1}   // lantern or its light file missing: a small light so the kid can still see (power 0 stays dark on purpose)
+    x.globalCompositeOperation='destination-out';cutLight(x,info,0,0,1);if(!holdOn()||!ST.img.lanternLight||(!info.lanXY&&ST.dir!=='N')){x.globalAlpha=0.6;x.drawImage(FX.lhole,Math.round(info.sx+48-LHOLE.R),Math.round(info.sy+60-LHOLE.R));x.globalAlpha=1}   // lantern / light file missing or a bad anchor this frame: a small light so the kid can still see (power 0 stays dark on purpose)
     x.globalCompositeOperation='source-over';g.drawImage(dc,0,0);
     drawRing(CAVE_ROOM.ring[0]*T+16,CAVE_ROOM.ring[1]*T+16,1,ox,oy);relight(info,1);tapMark(ox,oy)}
   g=screen;g.imageSmoothingEnabled=false;g.drawImage(BUF,0,0,bw,bh,0,0,bw*s,bh*s);
@@ -379,9 +383,9 @@ function stop(){if(ST.anim==='walk'){ST.anim='idle';ST.fi=2;ST.t=0}ST.moving=fal
 const pad=document.getElementById('pad'),PADP=new Map();   // pointerId -> direction: two fingers and sliding from one arrow to the next work
 ['NW','N','NE','W','·','E','SW','S','SE'].forEach(d=>{const b=document.createElement('button');b.textContent={NW:'↖',N:'↑',NE:'↗',W:'←','·':'•',E:'→',SW:'↙',S:'↓',SE:'↘'}[d];b.setAttribute('aria-label',d);b.dataset.d=d;pad.appendChild(b)});
 function padApply(){if(ST.warp)return;const ds=[...PADP.values()].filter(d=>d!=='·');if(ds.length)walk(ds[ds.length-1]);else if(!ST.auto)stop()}
-pad.addEventListener('pointerdown',e=>{const b=e.target.closest('button');if(!b)return;e.preventDefault();PADP.delete(e.pointerId);PADP.set(e.pointerId,b.dataset.d);if(b.dataset.d==='·'){ST.auto=null;stop()}padApply()});
+pad.addEventListener('pointerdown',e=>{const b=e.target.closest('button');if(!b)return;e.preventDefault();try{b.setPointerCapture(e.pointerId)}catch(_){}PADP.delete(e.pointerId);PADP.set(e.pointerId,b.dataset.d);if(b.dataset.d==='·'){ST.auto=null;stop()}padApply()});
 pad.addEventListener('pointermove',e=>{if(!PADP.has(e.pointerId))return;const el=document.elementFromPoint(e.clientX,e.clientY),b=el&&el.closest&&el.closest('#pad button');if(b&&b.dataset.d!==PADP.get(e.pointerId)){PADP.set(e.pointerId,b.dataset.d);padApply()}});
-['pointerup','pointercancel'].forEach(t=>pad.addEventListener(t,e=>{if(!PADP.has(e.pointerId))return;PADP.delete(e.pointerId);padApply()}));
+['pointerup','pointercancel','lostpointercapture'].forEach(t=>addEventListener(t,e=>{if(!PADP.has(e.pointerId))return;PADP.delete(e.pointerId);padApply()},true));   // released anywhere (mouse dragged off the pad too) -> that finger stops
 function releaseAll(){held.clear();PADP.clear();if(!ST.auto)stop()}   // window loses focus / page hidden: no key or finger stays 'down'
 const KEYS={ArrowUp:'N',ArrowDown:'S',ArrowLeft:'W',ArrowRight:'E'};const held=new Set();addEventListener('blur',()=>releaseAll());document.addEventListener('visibilitychange',()=>{if(document.hidden)releaseAll()});
 addEventListener('keydown',e=>{if(!KEYS[e.key])return;e.preventDefault();held.add(KEYS[e.key]);kd()});addEventListener('keyup',e=>{if(!KEYS[e.key])return;held.delete(KEYS[e.key]);kd()});
@@ -402,7 +406,7 @@ if(q.has('gm')){ST.gm=true;const pw=+q.get('power');if((q.get('power')||'')!==''
 setLR(LR_DEFAULT);if(q.has('gm')&&/^\d+$/.test(q.get('lr')||''))setLR(+q.get('lr'));
 if(q.has('far'))ST.zoomOut=true;if(q.has('nonight'))ST.noNight=true;
 window.PS={ST,W0,SL,A,FX,GRID,ZONE,LAMPS,CRYSTALS,TREES,LHOLE,LR_SET,setLR,POWERS,DIRS,T,W,H,MAPW,MAPH,DOOR_X,DOOR_MINY,LAMP_R,FADE_A,FADE_MS,SPEED,
-  solidAt,solidCell,cellOf,astar,walkable,inZone,inSlime,SLIME_CELLS,SLIME_BOX,lampLight,LAMP_POOL,NIGHT_A,HUT_SORT,inDoor,tapTarget,lampDist,tileFor,dir8,goto,walk,stop,step,draw,scale,cam,holdOn,curFrame,lanternTarget,covered,showMsg,
+  PADP,okXY,solidAt,solidCell,cellOf,astar,walkable,inZone,inSlime,SLIME_CELLS,SLIME_BOX,lampLight,LAMP_POOL,NIGHT_A,HUT_SORT,inDoor,tapTarget,lampDist,tileFor,dir8,goto,walk,stop,step,draw,scale,cam,holdOn,curFrame,lanternTarget,covered,showMsg,
   pause:v=>ST.paused=v,set:o=>Object.assign(ST,o),
   teleport:(cx,cy,d)=>{ST.mode='field';ST.warp=null;ST.auto=null;stop();ST.pos={x:cx*T+16,y:cy*T+16};if(d)ST.dir=d;ST.lpos=null;W0.spr.forEach(o=>o.alpha=1)},
   sim:(ms,until)=>{let t=0;while(t<ms){step(16);t+=16;if(until&&until())break}return t}};

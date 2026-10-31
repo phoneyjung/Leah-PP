@@ -809,35 +809,35 @@
  ],
  "fps": {
   "cave": [
-   18.8,
-   20.5,
-   19.7,
-   19.1,
-   20.6
+   20.6,
+   21.1,
+   19.8,
+   19.5,
+   18.4
   ],
   "dark": [
-   47.2,
-   50.0,
-   47.7,
    48.4,
-   50.0
+   49.5,
+   49.3,
+   49.6,
+   44.9
   ],
   "scene": [
-   29.0,
-   30.7,
+   26.0,
+   28.2,
+   29.5,
    28.5,
-   29.0,
-   28.4
+   29.2
   ],
   "median": {
-   "cave": 19.7,
-   "dark": 48.4,
-   "scene": 29.0
+   "cave": 19.8,
+   "dark": 49.3,
+   "scene": 28.5
   },
-  "scene_vs_cave": 1.472,
-  "scene_vs_empty_dark_grid": 0.598
+  "scene_vs_cave": 1.434,
+  "scene_vs_empty_dark_grid": 0.577
  },
- "draw_ms_cpu1x": 3.25,
+ "draw_ms_cpu1x": 4.13,
  "checks": [
   {
    "check": "S0 page source: no rotate / setTransform / ctx.filter · no 0.75 zoom",
@@ -1190,16 +1190,16 @@
    }
   },
   {
-   "check": "S4a y-sort: kid 6 px behind / in front of each kind of art (tree lamp hut gate crate bush boulder fence crystal slime) x 8 directions = right order every time",
+   "check": "S4a y-sort: kid 6 px behind / in front of EVERY sprite (trees lamps hut gate crate rope bushes boulders fences crystals) + a slime x 8 directions = right order every time",
    "pass": true,
    "value": {
     "tree": [
-     16,
-     16
+     256,
+     256
     ],
     "lamp": [
-     16,
-     16
+     80,
+     80
     ],
     "hut": [
      16,
@@ -1213,26 +1213,32 @@
      16,
      16
     ],
-    "bush": [
+    "rope": [
      16,
      16
+    ],
+    "bush": [
+     672,
+     672
     ],
     "boulder": [
-     16,
-     16
+     32,
+     32
     ],
     "fence": [
-     16,
-     16
+     64,
+     64
     ],
     "crystal": [
-     16,
-     16
+     32,
+     32
     ],
     "slime": [
      16,
      16
-    ]
+    ],
+    "count": 75,
+    "covered": 75
    }
   },
   {
@@ -1518,11 +1524,13 @@
       20,
       9
      ],
+     "autoOk": true,
+     "steps": 4,
      "loopErr": null,
      "buildErrors": [],
      "fallbackHits": {
       "grass": 128260,
-      "dirt": 53593,
+      "dirt": 53727,
       "cliff": 7069,
       "slime": 6827,
       "tree": 36763,
@@ -1539,6 +1547,8 @@
       20,
       9
      ],
+     "autoOk": true,
+     "steps": 4,
      "loopErr": null,
      "buildErrors": [],
      "fallbackHits": {
@@ -1560,6 +1570,8 @@
       20,
       9
      ],
+     "autoOk": true,
+     "steps": 4,
      "loopErr": null,
      "buildErrors": [],
      "fallbackHits": {
@@ -1581,6 +1593,8 @@
       20,
       9
      ],
+     "autoOk": true,
+     "steps": 4,
      "loopErr": null,
      "buildErrors": [],
      "fallbackHits": {
@@ -1602,6 +1616,8 @@
       20,
       9
      ],
+     "autoOk": true,
+     "steps": 4,
      "loopErr": null,
      "buildErrors": [],
      "fallbackHits": {
@@ -1623,6 +1639,8 @@
       20,
       9
      ],
+     "autoOk": true,
+     "steps": 4,
      "loopErr": null,
      "buildErrors": [],
      "fallbackHits": {
@@ -1644,6 +1662,8 @@
       20,
       9
      ],
+     "autoOk": true,
+     "steps": 4,
      "loopErr": null,
      "buildErrors": [],
      "fallbackHits": {
@@ -1663,7 +1683,7 @@
    "pass": true,
    "value": {
     "grass": 128260,
-    "dirt": 53593,
+    "dirt": 53727,
     "cliff": 7069,
     "slime": 6827,
     "tree": 36763,
@@ -1765,7 +1785,7 @@
    }
   },
   {
-   "check": "S8k real touch (CDP) on the pad: hold ↑ walks N · add a 2nd finger on → · lift ↑ -> still walking E · lift all -> stops · slide ↑ to ↗ turns NE · window blur with a key held -> stops",
+   "check": "S8k real touch (CDP) on the pad: hold ↑ walks N · add a 2nd finger on → turns E · lift ↑ (touchEnd) -> still walking E with 1 finger · lift → -> stops, 0 fingers · slide ↑ to ↗ turns NE · window blur with a key held -> stops",
    "pass": true,
    "value": {
     "hold_N_dy": -28.8,
@@ -1773,14 +1793,26 @@
     "second_finger_E": "E",
     "lift_N_keep_E": [
      "E",
-     true
+     true,
+     1
     ],
     "lift_all": [
-     false
+     false,
+     0
     ],
     "slide_N_to_NE": "NE",
     "key_walking": true,
     "after_blur_moving": false
+   }
+  },
+  {
+   "check": "S8o mouse: press ↑, drag off the pad onto the scene, release -> the kid stops (no walking on, 0 pointers held)",
+   "pass": true,
+   "value": {
+    "walking_while_held": true,
+    "moving_after_release": false,
+    "fingers": 0,
+    "moved_after_release_px": 0.0
    }
   },
   {
@@ -1843,38 +1875,69 @@
    }
   },
   {
+   "check": "S8p stand-in hut (g24-hut.png missing): the kid in the doorway is still visible (screen px that change when the kid is hidden > 1000)",
+   "pass": true,
+   "value": {
+    "inDoor": true,
+    "x": 224,
+    "kidPxVisible": 24669,
+    "hutImg": false
+   }
+  },
+  {
+   "check": "S8q a bad entry in the hold-anchor file (one anchor an object, one fist point text): that frame draws no lantern and no NaN, the next frame draws it again, no error",
+   "pass": true,
+   "value": {
+    "idleS0": {
+     "hold": true,
+     "lpos": null,
+     "lan": false,
+     "finite": true
+    },
+    "walkE2": {
+     "lan": true,
+     "finite": true
+    },
+    "idleS1": {
+     "lan": true
+    },
+    "cave": "cave",
+    "loopErr": null
+   }
+  },
+  {
    "check": "S8h FPS of the scene >= 90 % of the Pilot motion page in its cave view (the existing view with the same work: floor art + darkness + held lantern) · 4x CPU · rAF 2 s · walking · median of 5 · the empty dark grid view and draw ms reported",
    "pass": true,
    "value": {
     "cave": [
-     18.8,
-     20.5,
-     19.7,
-     19.1,
-     20.6
+     20.6,
+     21.1,
+     19.8,
+     19.5,
+     18.4
     ],
     "dark": [
-     47.2,
-     50.0,
-     47.7,
      48.4,
-     50.0
+     49.5,
+     49.3,
+     49.6,
+     44.9
     ],
     "scene": [
-     29.0,
-     30.7,
+     26.0,
+     28.2,
+     29.5,
      28.5,
-     29.0,
-     28.4
+     29.2
     ],
     "median": {
-     "cave": 19.7,
-     "dark": 48.4,
-     "scene": 29.0
+     "cave": 19.8,
+     "dark": 49.3,
+     "scene": 28.5
     },
-    "scene_vs_cave": 1.472,
-    "scene_vs_empty_dark_grid": 0.598,
-    "draw_ms_cpu1x": 3.25
+    "scene_vs_cave": 1.434,
+    "scene_vs_empty_dark_grid": 0.577,
+    "draw_ms_cpu1x": 4.13
    }
   },
   {
@@ -1883,6 +1946,6 @@
    "value": []
   }
  ],
- "passed": 35,
- "total": 35
+ "passed": 38,
+ "total": 38
 }
