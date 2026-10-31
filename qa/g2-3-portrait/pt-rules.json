@@ -68,5 +68,6 @@
  },
  "ids": {"0": "transparent", "1": "outline", "2": "face lines (eyes)", "3": "skin", "4": "hair + brows", "5": "iris", "6": "ivory cloth",
          "7": "leather", "8": "cape (house)", "9": "copper", "10": "mouth (G 0-15) / cheek (G 16-31)", "11": "inner lines"},
- "recolour_ids": [3, 4, 5, 8, 10]
+ "recolour_ids": [3, 4, 5, 8],
+ "recolour_note": "id 10 (mouth / cheek) is fixed like the sprite (G2.0 mask table, P3: cheek keeps its colour, trial); the G split mouth 0-15 / cheek 16-31 is kept so S5 can try other colours later"
 }
