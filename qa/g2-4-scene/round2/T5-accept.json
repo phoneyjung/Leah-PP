@@ -1,0 +1,35 @@
+{
+ "checked_by": "Claude 31 Oct 2569",
+ "branch": "codex/asset-10-11-g24-round2 @ 05d8195 (base 28a8a97, 9 files)",
+ "merged_as": "claude/g2-pilot merge commit (see git log)",
+ "spec": ["ASSET_SPEC_10_g24_scene.md v1.1", "ASSET_SPEC_11_g24_slime.md v1.1"],
+ "scene": {
+  "tree_a": {"size": [128,128], "shift": [0,0], "diff_vs_raw_after_shift_px": 0, "base_row": 124, "pass": true},
+  "tree_b": {"size": [128,128], "shift": [0,-1], "diff_vs_raw_after_shift_px": 0, "base_row": 124, "pass": true},
+  "lamp":   {"size": [128,128], "shift": [-16,-2], "diff_vs_raw_after_shift_px": 0, "base_row": 124, "post_x": "59-69", "pass": true},
+  "gate":   {"size": [64,64], "shift": [0,1], "diff_vs_raw_after_shift_px": 0, "base_row": 62, "pass": true},
+  "props":  {"size": [512,32], "cells": "1-6,55,8-16", "diff_vs_raw_px": 0, "json_keys_ok": true, "pass": true},
+  "alpha_0_255_only": true,
+  "edge_touch": 0,
+  "px_dE00_lt10_of_7_colours": "0 (crystal shard exempt: collectible)"
+ },
+ "slime": {
+  "size": [512,64],
+  "alpha_0_255_only": true,
+  "cell_S_identical_to_design_c": true,
+  "order": ["S","SE","E","NE","N","NW","W","SW"],
+  "height": [54,55,55,55,55,54,55,55],
+  "width":  [50,46,43,45,50,47,44,46],
+  "base_row": [56,56,56,56,56,56,56,56],
+  "base_mid_x": [31.5,31.5,31,31,31,31.5,32,32],
+  "min_transparent_margin_px": 2,
+  "eye_white_px_back_views_NE_N_NW": [0,0,0],
+  "palette_within_dE5_of_design_c_min_pct": 98.6,
+  "px_dE00_lt10_of_7_colours": 0,
+  "visual_check": "img/t5-slime8-3x.png: back views NE N NW smooth, no eye marks, same body in 8 views",
+  "pass": true
+ },
+ "total_bytes_9_files_png_json": 45315,
+ "credits_used_by_codex": 0,
+ "verdict": "PASS"
+}
