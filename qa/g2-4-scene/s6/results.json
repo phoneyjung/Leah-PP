@@ -809,35 +809,35 @@
  ],
  "fps": {
   "cave": [
-   18.6,
-   19.6,
-   19.5,
-   17.0,
-   19.0
+   18.8,
+   20.5,
+   19.7,
+   19.1,
+   20.6
   ],
   "dark": [
-   46.6,
-   45.5,
-   50.7,
-   46.5,
-   49.3
+   47.2,
+   50.0,
+   47.7,
+   48.4,
+   50.0
   ],
   "scene": [
-   29.6,
-   27.9,
-   27.9,
-   27.6,
-   30.6
+   29.0,
+   30.7,
+   28.5,
+   29.0,
+   28.4
   ],
   "median": {
-   "cave": 19.0,
-   "dark": 46.6,
-   "scene": 27.9
+   "cave": 19.7,
+   "dark": 48.4,
+   "scene": 29.0
   },
   "scene_vs_cave": 1.472,
-  "scene_vs_empty_dark_grid": 0.6
+  "scene_vs_empty_dark_grid": 0.598
  },
- "draw_ms_cpu1x": 4.24,
+ "draw_ms_cpu1x": 3.25,
  "checks": [
   {
    "check": "S0 page source: no rotate / setTransform / ctx.filter · no 0.75 zoom",
@@ -1146,17 +1146,21 @@
    }
   },
   {
-   "check": "S2b door: kid px drawn over the hut frame 0 (hut is drawn after the kid) · kid px hidden by the frame reported (opening 52 x 108 vs kid 47 x 83)",
+   "check": "S2b door: standing in the door (x 224, feet y 264-287) the frame hides 0 px of head / hair / shoulders / body / legs in every direction and frame (idle 4 + walk 6 with the lantern) · soles behind the stone threshold at y 287 reported",
    "pass": true,
    "value": {
-    "kid": 2741,
-    "underFrame": 0,
-    "inHole": 2741,
-    "dir": "N",
-    "pos": {
-     "x": 224,
-     "y": 268
-    }
+    "poses": 400,
+    "maxHiddenBodyPx": 0,
+    "maxSolePxOnThreshold": 36
+   }
+  },
+  {
+   "check": "S2c door with the pad / keys (22 starts x 192-255 walking N + 4 diagonal): every frame in the door x = 224, hidden head / body px 0, hut never fades, kid never drawn over the hut, all end inside the door",
+   "pass": true,
+   "value": {
+    "runs": 26,
+    "bad": [],
+    "frames_in_door": 3081
    }
   },
   {
@@ -1176,13 +1180,14 @@
    }
   },
   {
-   "check": "S3c whole-number scale only (phone: near / far)",
+   "check": "S4d placement = spec 10 §4: lamps TL (col x 32 - 48, (row+1) x 32 - 128) sort (row+1) x 32 - 4 · hut (96,32) sort 287 · gate (448,384) sort 446 · 32 px props on their cell, sort = cell y + 30 · trees the same + the TREES offsets (spec 10 v1.3)",
    "pass": true,
-   "value": [
-    3,
-    2,
-    true
-   ]
+   "value": {
+    "bad": [],
+    "trees": 16,
+    "lamps": 5,
+    "props": 52
+   }
   },
   {
    "check": "S4a y-sort: kid 6 px behind / in front of each kind of art (tree lamp hut gate crate bush boulder fence crystal slime) x 8 directions = right order every time",
@@ -1350,13 +1355,16 @@
    }
   },
   {
-   "check": "S6b 3 slimes x 180 s: in lamp light 0 frames · outside the zone 0 · all 8 directions used · hop 0-3 whole px",
+   "check": "S6b 3 slimes x 180 s (kid far west): slime px inside the DRAWN lamp light (night layer thinner than full) 0 · feet in a lit cell 0 · outside the 47-cell zone 0 · all 8 directions · hop 0-3 whole px",
    "pass": true,
    "value": {
     "sim_s": 180,
     "slimes": 3,
+    "slimeCells": 36,
     "outOfZone": 0,
-    "litFrames": 0,
+    "litCellFrames": 0,
+    "drawnLitFrames": 0,
+    "drawnLitPx": 0,
     "bobs": [
      0,
      1,
@@ -1365,14 +1373,14 @@
     ],
     "nonInt": 0,
     "dirs": {
-     "E": 44912,
-     "N": 35952,
-     "S": 34496,
-     "SW": 38578,
-     "W": 44526,
-     "NE": 37762,
-     "NW": 7742,
-     "SE": 8350
+     "W": 35056,
+     "NE": 48378,
+     "N": 42336,
+     "S": 43792,
+     "SW": 46796,
+     "E": 34272,
+     "NW": 6478,
+     "SE": 5372
     },
     "dirCount": 8
    }
@@ -1444,7 +1452,7 @@
    }
   },
   {
-   "check": "S8d on-screen pad: holding ↑ for 0.7 s walks north",
+   "check": "S8d on-screen pad with a mouse: holding ↑ for 0.7 s walks north",
    "pass": true,
    "value": {
     "dy": -33.6
@@ -1489,7 +1497,7 @@
    "check": "S5 drawn dusk frames (4 camera spots cover the whole map): px with dE00 < 10 from the 3 signal colours = 0 (crystals, exit ring, kid + lantern exempt)",
    "pass": true,
    "value": {
-    "px_checked": 8549120,
+    "px_checked": 8548064,
     "near": {
      "gold #FFC857": 0,
      "cyan #5FE0FF": 0,
@@ -1498,11 +1506,11 @@
    }
   },
   {
-   "check": "S8g missing files (5 cases incl. every art file): page draws the fallback shapes (> 20 colours, not white), walks, 0 JS errors",
+   "check": "S8g missing or half-written files (7 cases: every art file · tiles · slime · hut + cave · trees + lamp + props · json with missing keys · slime sheet with only S): page draws, walks, no JS / loop error",
    "pass": true,
    "value": {
     "all art": {
-     "colours": 548,
+     "colours": 537,
      "meanLum": 77,
      "spr": 75,
      "slimes": 3,
@@ -1510,10 +1518,20 @@
       20,
       9
      ],
+     "loopErr": null,
+     "buildErrors": [],
+     "fallbackHits": {
+      "grass": 128260,
+      "dirt": 53593,
+      "cliff": 7069,
+      "slime": 6827,
+      "tree": 36763,
+      "lampPost": 4727
+     },
      "js_errors": 0
     },
     "tiles + json": {
-     "colours": 1770,
+     "colours": 1708,
      "meanLum": 73,
      "spr": 75,
      "slimes": 3,
@@ -1521,21 +1539,41 @@
       20,
       9
      ],
+     "loopErr": null,
+     "buildErrors": [],
+     "fallbackHits": {
+      "grass": 122625,
+      "dirt": 54039,
+      "cliff": 8504,
+      "slime": 0,
+      "tree": 0,
+      "lampPost": 0
+     },
      "js_errors": 0
     },
     "slime": {
-     "colours": 2896,
-     "meanLum": 71,
+     "colours": 2873,
+     "meanLum": 70,
      "spr": 75,
      "slimes": 3,
      "walked": [
       20,
       9
      ],
+     "loopErr": null,
+     "buildErrors": [],
+     "fallbackHits": {
+      "grass": 0,
+      "dirt": 0,
+      "cliff": 0,
+      "slime": 6922,
+      "tree": 0,
+      "lampPost": 0
+     },
      "js_errors": 0
     },
     "hut + cave mouth": {
-     "colours": 2467,
+     "colours": 2415,
      "meanLum": 73,
      "spr": 75,
      "slimes": 3,
@@ -1543,10 +1581,20 @@
       20,
       9
      ],
+     "loopErr": null,
+     "buildErrors": [],
+     "fallbackHits": {
+      "grass": 0,
+      "dirt": 0,
+      "cliff": 0,
+      "slime": 0,
+      "tree": 0,
+      "lampPost": 0
+     },
      "js_errors": 0
     },
     "trees + lamp + props": {
-     "colours": 2308,
+     "colours": 2283,
      "meanLum": 74,
      "spr": 75,
      "slimes": 3,
@@ -1554,7 +1602,243 @@
       20,
       9
      ],
+     "loopErr": null,
+     "buildErrors": [],
+     "fallbackHits": {
+      "grass": 0,
+      "dirt": 0,
+      "cliff": 0,
+      "slime": 0,
+      "tree": 36760,
+      "lampPost": 4727
+     },
      "js_errors": 0
+    },
+    "half json": {
+     "colours": 1382,
+     "meanLum": 71,
+     "spr": 75,
+     "slimes": 3,
+     "walked": [
+      20,
+      9
+     ],
+     "loopErr": null,
+     "buildErrors": [],
+     "fallbackHits": {
+      "grass": 126295,
+      "dirt": 54335,
+      "cliff": 8504,
+      "slime": 0,
+      "tree": 0,
+      "lampPost": 0
+     },
+     "js_errors": 0
+    },
+    "slime S only": {
+     "colours": 2881,
+     "meanLum": 70,
+     "spr": 75,
+     "slimes": 3,
+     "walked": [
+      20,
+      9
+     ],
+     "loopErr": null,
+     "buildErrors": [],
+     "fallbackHits": {
+      "grass": 0,
+      "dirt": 0,
+      "cliff": 0,
+      "slime": 0,
+      "tree": 0,
+      "lampPost": 0
+     },
+     "js_errors": 0
+    }
+   }
+  },
+  {
+   "check": "S8g2 every art file missing: the drawn fallback shapes are on screen (grass, dirt, tree, slime and lamp-post fallback colours found, night off)",
+   "pass": true,
+   "value": {
+    "grass": 128260,
+    "dirt": 53593,
+    "cliff": 7069,
+    "slime": 6827,
+    "tree": 36763,
+    "lampPost": 4727
+   }
+  },
+  {
+   "check": "S3c whole-number scale from the short side (phone 3 · small phone 2 · upright phone 3 = 12 tiles wide · upright iPad 4 · desktop 3) and zoom far = 1 step less",
+   "pass": true,
+   "value": {
+    "sizes": {
+     "844x390@2.625": [
+      3,
+      23.1,
+      10.7
+     ],
+     "667x375@3": [
+      3,
+      20.8,
+      11.7
+     ],
+     "390x844@3": [
+      3,
+      12.2,
+      26.4
+     ],
+     "820x1180@2": [
+      4,
+      12.8,
+      18.4
+     ],
+     "1920x1080@1": [
+      3,
+      20,
+      11.3
+     ]
+    },
+    "zoom_far_phone": [
+     3,
+     2,
+     true
+    ]
+   }
+  },
+  {
+   "check": "S8j camera follows without shaking: walking E and S for 150 frames on 5 screens, the kid's screen position never jumps back (direction changes 0)",
+   "pass": true,
+   "value": {
+    "844x390@2.625": [
+     {
+      "dirChanges": 0,
+      "distinct": 33
+     },
+     {
+      "dirChanges": 0,
+      "distinct": 16
+     }
+    ],
+    "667x375@3": [
+     {
+      "dirChanges": 0,
+      "distinct": 1
+     },
+     {
+      "dirChanges": 0,
+      "distinct": 42
+     }
+    ],
+    "390x844@3": [
+     {
+      "dirChanges": 0,
+      "distinct": 1
+     },
+     {
+      "dirChanges": 0,
+      "distinct": 115
+     }
+    ],
+    "820x1180@2": [
+     {
+      "dirChanges": 0,
+      "distinct": 1
+     },
+     {
+      "dirChanges": 0,
+      "distinct": 115
+     }
+    ],
+    "1920x1080@1": [
+     {
+      "dirChanges": 0,
+      "distinct": 1
+     },
+     {
+      "dirChanges": 0,
+      "distinct": 27
+     }
+    ]
+   }
+  },
+  {
+   "check": "S8k real touch (CDP) on the pad: hold ↑ walks N · add a 2nd finger on → · lift ↑ -> still walking E · lift all -> stops · slide ↑ to ↗ turns NE · window blur with a key held -> stops",
+   "pass": true,
+   "value": {
+    "hold_N_dy": -28.8,
+    "dir1": "N",
+    "second_finger_E": "E",
+    "lift_N_keep_E": [
+     "E",
+     true
+    ],
+    "lift_all": [
+     false
+    ],
+    "slide_N_to_NE": "NE",
+    "key_walking": true,
+    "after_blur_moving": false
+   }
+  },
+  {
+   "check": "S8l taps on solid art go somewhere sensible: the cave rock -> the exit -> cave · cave tap to the far side never crosses the return ring · the top of the hut door -> into the door · a tree -> the nearest open cell",
+   "pass": true,
+   "value": {
+    "caveRock": [
+     16,
+     4
+    ],
+    "caveRockMode": "cave",
+    "caveTap": 8,
+    "caveTapEnd": {
+     "mode": "cave",
+     "cell": [
+      10,
+      8
+     ]
+    },
+    "hutDoorTop": [
+     6,
+     8
+    ],
+    "hutDoorEnd": {
+     "inDoor": true,
+     "x": 224
+    },
+    "tree": [
+     1,
+     8
+    ],
+    "treeEnd": [
+     1,
+     8
+    ]
+   }
+  },
+  {
+   "check": "S8m pushing into the gate for 2 s builds the message once (no DOM churn on the aria-live box)",
+   "pass": true,
+   "value": {
+    "mutations": 2,
+    "shown": true
+   }
+  },
+  {
+   "check": "S8n cave without the lantern files: a small light stays round the kid (brightness >= 50 % of the lantern case, not near black)",
+   "pass": true,
+   "value": {
+    "lantern": {
+     "mode": "cave",
+     "lum": 58.7,
+     "hold": true
+    },
+    "no lantern files": {
+     "mode": "cave",
+     "lum": 41.4,
+     "hold": false
     }
    }
   },
@@ -1563,34 +1847,34 @@
    "pass": true,
    "value": {
     "cave": [
-     18.6,
-     19.6,
-     19.5,
-     17.0,
-     19.0
+     18.8,
+     20.5,
+     19.7,
+     19.1,
+     20.6
     ],
     "dark": [
-     46.6,
-     45.5,
-     50.7,
-     46.5,
-     49.3
+     47.2,
+     50.0,
+     47.7,
+     48.4,
+     50.0
     ],
     "scene": [
-     29.6,
-     27.9,
-     27.9,
-     27.6,
-     30.6
+     29.0,
+     30.7,
+     28.5,
+     29.0,
+     28.4
     ],
     "median": {
-     "cave": 19.0,
-     "dark": 46.6,
-     "scene": 27.9
+     "cave": 19.7,
+     "dark": 48.4,
+     "scene": 29.0
     },
     "scene_vs_cave": 1.472,
-    "scene_vs_empty_dark_grid": 0.6,
-    "draw_ms_cpu1x": 4.24
+    "scene_vs_empty_dark_grid": 0.598,
+    "draw_ms_cpu1x": 3.25
    }
   },
   {
@@ -1599,6 +1883,6 @@
    "value": []
   }
  ],
- "passed": 27,
- "total": 27
+ "passed": 35,
+ "total": 35
 }
