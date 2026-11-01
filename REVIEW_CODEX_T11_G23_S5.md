@@ -25,7 +25,7 @@ python3 -m http.server 8783 --bind 127.0.0.1
 # 5/5, exit 0
 ```
 
-Playwright ใช้ `PLAYWRIGHT_BROWSERS_PATH=/tmp/t11-browser` กับ symlink ไป `/usr/bin/chromium`. การทดสอบปกติและ probes สำเร็จ; คำสั่ง screenshot เพิ่มเติมรอบท้ายถูกเครื่องมือปฏิเสธสิทธิ์ (`denied`, ไม่ให้เหตุผล) จึง **ไม่ได้** ตรวจเทียบทุกพิกเซลของ screenshot หลัง browser compositor. ผล full-scale ที่รายงานคือการตรวจ canvas/device geometry + screenshot ที่เปิดดูจริง ไม่อ้างว่าผ่านการตรวจเพิ่มเติมที่ไม่ได้รัน
+Playwright ใช้ `PLAYWRIGHT_BROWSERS_PATH=/tmp/t11-browser` กับ symlink ไป `/usr/bin/chromium`. การทดสอบปกติและ probes สำเร็จ. เจ้าของแจ้งว่ากดปฏิเสธสิทธิ์ screenshot ผิด และขอให้ถามใหม่; หลังได้รับสิทธิ์ รันเพิ่มสำเร็จ exit 0: screenshot หลัง browser compositor ที่ DPR 2.625 ทั้ง 844×390, 740×360 และ 390×844 ตรงภาพ expected ของรูปใหญ่และตัวเล็กทุกพิกเซล (0/0 ทุกจอ). วิธีตรวจ: อ่าน OFF.pt/OFF.kid, composite บนพื้น #1d1b2c, ขยาย nearest ด้วย k/k2 และเทียบ crop จาก screenshot จริงที่พิกัด device-pixel ของ PT.view(). ผลนี้ยืนยันการวาง/ขยายของ browser; ความถูกของสีตรวจแยกด้วย oracle 640 ชุดข้างล่าง
 
 ## 1. ตารางเฉดกับ D-PT-3 ก — ผ่าน
 
@@ -182,4 +182,46 @@ SHA-256 หลักฐาน local (ไม่ได้ commit logs/ภาพท
 - `actual-signal.json`: `eb1f8e12a13f85d5dc66d572943104b613899a1859dff72865293bf6a96dde35`
 - `mutation/s5.json`: `2d194cac131042f355fcd5837a247dd454821d7f1bcc46324b54785111b777e2`
 
-ต่างจากงานที่สั่ง: ไม่มีการแก้ไฟล์ Claude/ภาพ/เกม; รัน numeric ในสำเนาเพื่อหลีกเลี่ยงการเขียนทับ shademap. การตรวจ screenshot เพิ่มเติมที่เครื่องมือปฏิเสธไม่ได้ถูกนับว่าผ่าน
+ต่างจากงานที่สั่ง: ไม่มีการแก้ไฟล์ Claude/ภาพ/เกม; รัน numeric ในสำเนาเพื่อหลีกเลี่ยงการเขียนทับ shademap. การตรวจ screenshot เพิ่มเติมรันผ่านแล้วหลังเจ้าของขอสิทธิ์ใหม่; บั๊กที่รายงาน 4 ข้อยังคงเดิม
+
+## ผลเพิ่มเติม: screenshot จริงหลังได้รับสิทธิ์ใหม่
+
+```json
+[
+  {
+    "screen": [
+      844,
+      390,
+      2.625
+    ],
+    "actual_screenshot_mismatches": {
+      "pt": 0,
+      "kid": 0
+    }
+  },
+  {
+    "screen": [
+      740,
+      360,
+      2.625
+    ],
+    "actual_screenshot_mismatches": {
+      "pt": 0,
+      "kid": 0
+    }
+  },
+  {
+    "screen": [
+      390,
+      844,
+      2.625
+    ],
+    "actual_screenshot_mismatches": {
+      "pt": 0,
+      "kid": 0
+    }
+  }
+]
+```
+
+process exit 0 · screenshot-check.json SHA-256 `674c9498661a1972bbaf3420a797871512451b30ada1fe710b7e8f5d32f9b0c4` · ไม่เปลี่ยนผล 4 ข้อที่พบในรายงาน
