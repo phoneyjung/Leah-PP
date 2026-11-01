@@ -48,3 +48,7 @@ T8 · 31 ต.ค. 2569 · ตรวจ G2.3/ASSET_SPEC_14 ฉบับ1 @9a1c9c6
 
 T9 · 1 พ.ย. 2569 · ชุด 14 v1.1 @56d3d8c · c2-pilot-kid4-pt.png + -edits.json + -mask.png + -mask.json + qa/g2-3-portrait/img/pt-edits-x4.png + pt-mask-ids.png + T9_CODEX_NOTES.md · ปิดรู 50 px · QA 11/11 exit 0 · selftest 13/13 exit 0 · ข้อ 3.5 จด 1 บริเวณ V1 (ภายในหัวเข็มขัด; คง mask ตามกติกา) · เครดิต 0 · ต่างจากสเปก: ไม่มี
 T10 · 1 พ.ย. 2569 · REVIEW_CODEX_T10_G24_S6.md · ฐาน 56d3d8c · เริ่มหลังส่ง T9 da0aaff · ชุดหลัก 38/38 exit 0 · negative R6 37/38 exit 1 (จงใจ FAIL 1 ข้อ) · R1–R7 ผ่าน 7/7 · บั๊ก runtime ใหม่ 0 · ข้อเสนอ coverage S8q ในรายงาน · เครดิต 0 · ต่างจากสเปก: ไม่มี
+
+T11 · 1 พ.ย. 2569 · REVIEW_CODEX_T11_G23_S5.md · ฐาน 46e1c4f · pt_s5 exit 0 (640 ชุด สีรั่ว0) · browser 5/5 exit 0 · ตรวจ browser จริง640ชุด RGBผิด0 · map59/59 · พบ4ข้อ (กลาง2 ต่ำ2: signal QA false positive / kid maskหายไม่แจ้ง / Gเสียข้ามเงียบ / DPR1แคบตัดภาพ) · ดู16ชุดไม่ให้คะแนน · เครดิต0 · ไม่แก้ไฟล์ Claude
+
+T11 เพิ่มเติม · 1 พ.ย. 2569 · เจ้าของขอสิทธิ์ screenshot ใหม่ · DPR2.625 จอ844×390 / 740×360 / 390×844 ผ่าน3/3 exit0 · screenshotจริงเทียบexpected รูปใหญ่0/ตัวเล็ก0pxทุกจอ · ปรับ REVIEW_CODEX_T11_G23_S5.md · ข้อพบเดิม4ข้อคงเดิม · เครดิต0
