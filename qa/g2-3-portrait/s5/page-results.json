@@ -317,7 +317,7 @@
       "noMask"
      ],
      "warnShown": true,
-     "drawnPx": 70133,
+     "drawnPx": 70045,
      "errors": [],
      "buttons": 21
     },
@@ -326,7 +326,7 @@
       "noMap"
      ],
      "warnShown": true,
-     "drawnPx": 70133,
+     "drawnPx": 70045,
      "errors": [],
      "buttons": 21
     },
@@ -335,7 +335,7 @@
       "noKid"
      ],
      "warnShown": true,
-     "drawnPx": 70133,
+     "drawnPx": 70045,
      "errors": [],
      "buttons": 21
     },
@@ -361,7 +361,7 @@
      ],
      "warnShown": true,
      "warnText": "ไม่พบหน้ากากสีตัวในเกม — ตัวในเกมแสดงสีเดิม เปลี่ยนสีไม่ได้ / In-game kid colour mask missing - kid shown as drawn",
-     "ptChanged": 55317,
+     "ptChanged": 55083,
      "kidChanged": 0,
      "errors": [],
      "buttons": 21,
@@ -403,7 +403,7 @@
      ],
      "warnShown": true,
      "warnText": "หน้ากากสีตัวในเกมเสีย — ตัวในเกมแสดงสีเดิม เปลี่ยนสีไม่ได้ / In-game kid colour mask is damaged - kid shown as drawn",
-     "ptChanged": 55317,
+     "ptChanged": 55083,
      "kidChanged": 0,
      "errors": [],
      "buttons": 21,

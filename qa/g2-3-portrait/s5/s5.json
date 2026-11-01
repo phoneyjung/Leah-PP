@@ -40,7 +40,7 @@
    "4": {
     "group": "hair",
     "base": "Red",
-    "base_mean_dE00": 11.22,
+    "base_mean_dE00": 11.18,
     "shade_index_by_G": [
      0,
      0,
@@ -59,24 +59,20 @@
      2,
      2,
      2,
-     2,
      3,
      3,
      3,
      3,
      3,
-     3,
-     4,
-     4,
      4,
      4
     ],
     "px_per_index": [
-     8664,
+     8612,
      4337,
-     2701,
-     1808,
-     929
+     2700,
+     1801,
+     911
     ]
    },
    "5": {
@@ -97,7 +93,7 @@
    "8": {
     "group": "house",
     "base": "Wing",
-    "base_mean_dE00": 9.21,
+    "base_mean_dE00": 9.22,
     "shade_index_by_G": [
      0,
      0,
@@ -108,14 +104,13 @@
      1,
      1,
      2,
-     2,
      3
     ],
     "px_per_index": [
-     3032,
-     4476,
-     202,
-     6075
+     3016,
+     4473,
+     197,
+     6071
     ]
    }
   }
@@ -202,10 +197,10 @@
   "unexpected_hits": [],
   "exception_px_when_used": {
    "iris Amber shade 3 #E6B446": 131,
-   "house Sun shade 2 #F0B512": 4476,
-   "hair Blonde shade 4 #F0CC70": 1808,
-   "house Sun shade 3 #F3C546": 202,
-   "house Sun shade 4 #F6D579": 6075
+   "house Sun shade 2 #F0B512": 4473,
+   "hair Blonde shade 4 #F0CC70": 1801,
+   "house Sun shade 3 #F3C546": 197,
+   "house Sun shade 4 #F6D579": 6071
   },
   "source_min_dE00": {
    "#FFC857": 12.86,
@@ -219,7 +214,7 @@
    "p95_dE00": 7.79
   },
   "hair": {
-   "mean_dE00": 11.71,
+   "mean_dE00": 11.67,
    "p95_dE00": 23.75
   },
   "iris": {
@@ -227,7 +222,7 @@
    "p95_dE00": 18.21
   },
   "house": {
-   "mean_dE00": 9.23,
+   "mean_dE00": 9.24,
    "p95_dE00": 11.33
   }
  },
