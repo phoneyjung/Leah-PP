@@ -14,9 +14,18 @@ html,body{margin:0;height:100%;overflow:hidden;background:#1d1b2c;color:#ecebf5;
 .sw span{position:absolute;left:0;right:0;bottom:2px;font:600 9px system-ui;line-height:1.1;color:#fff;text-shadow:0 0 2px #000,0 0 2px #000;white-space:nowrap;overflow:hidden}
 #note{font:11px system-ui;color:#b9b4d6;margin-top:10px;line-height:1.4}
 #warn{display:none;margin-top:8px;padding:6px 8px;border-radius:8px;background:#5a2a3a;color:#fff;font:12px system-ui}
+.big{display:block;width:100%;min-height:48px;margin-top:10px;border:0;border-radius:12px;background:#5b5487;color:#fff;font:600 15px system-ui;cursor:pointer}
+#lu{position:fixed;inset:0;background:#1d1b2c;display:none;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:8px;box-sizing:border-box}
+#lu.on{display:flex}
+#luAsk{font:700 20px system-ui;text-align:center}
+#luMsg{font:600 16px system-ui;min-height:22px;text-align:center;color:#f3e9b8}
+#luView{image-rendering:pixelated;touch-action:manipulation}
+#luBar{display:flex;gap:10px}#luBar .big{width:auto;min-width:140px;margin:0;padding:0 16px}
 </style></head><body>
 <div id="stage"><canvas id="view" aria-label="portrait + in-game kid"></canvas></div>
-<div id="panel" role="group" aria-label="colours"><div id="rows"></div><div id="warn" role="status"></div><div id="note"></div></div>
+<div id="panel" role="group" aria-label="colours"><div id="rows"></div><button id="luOpen" class="big" type="button"></button><div id="warn" role="status"></div><div id="note"></div></div>
+<div id="lu" role="dialog" aria-label="find yourself"><div id="luAsk"></div><canvas id="luView" aria-label="4 kids"></canvas><div id="luMsg" role="status"></div>
+  <div id="luBar"><button id="luAgain" class="big" type="button"></button><button id="luBack" class="big" type="button"></button></div></div>
 <script>
 // G2.3 S5 Pilot page (Claude · 1 Nov 2569 · v1.1 after Codex T11: R2 kid mask named on its own · R3 masks checked before use · R4 small DPR 1 windows) · ASSET_SPEC_14 v1.1 + D-PT-1/2/3 ก · GM test page only (not index.html, no save, no online).
 // Shows c2-pilot-kid4-pt.png recoloured through its material mask (R = id, G = shade) and the shade map (D-PT-3: portrait shade -> game shade by
@@ -34,10 +43,12 @@ const GROUP={3:'skin',4:'hair',5:'iris',8:'house'}, ORDER=['hair','iris','skin',
 const TH_NAMES={hair:['ดำ','น้ำตาล','ทอง','แดง','ชมพู','ฟ้า','เงิน','เขียว'],iris:['น้ำตาล','ดำ','เขียว','ฟ้า','อำพัน'],skin:['ขาว','กลาง','แทน','เข้ม'],house:['อาทิตย์','ปีกฟ้า','ใบไม้','เปลวไฟ']};   // names used in the game (HAIRC / EYEC / HOUSES / skin)
 const T={th:{hair:'สีผม',iris:'สีตา',skin:'สีผิว',house:'บ้าน (ผ้าคลุม)',noPt:'ไม่พบไฟล์รูปหน้าใหญ่ — แสดงกรอบแทน',noMask:'ไม่พบหน้ากากสี — แสดงรูปตามต้นฉบับ เปลี่ยนสีไม่ได้',noMap:'ไม่พบตารางจับคู่เฉด — แสดงรูปตามต้นฉบับ',noKid:'ไม่พบภาพตัวในเกม',
   badMask:'หน้ากากสีรูปหน้าใหญ่เสีย — แสดงรูปตามต้นฉบับ เปลี่ยนสีไม่ได้',noKidMask:'ไม่พบหน้ากากสีตัวในเกม — ตัวในเกมแสดงสีเดิม เปลี่ยนสีไม่ได้',badKidMask:'หน้ากากสีตัวในเกมเสีย — ตัวในเกมแสดงสีเดิม เปลี่ยนสีไม่ได้',
-  note:'หน้าทดลอง GM · รูปซ้าย 1 พิกเซลภาพ = {k} พิกเซลจอ · ตัวในเกม {k2} เท่า · ปาก/แก้มคงสีเดิม (เหมือนตัวในเกม)'},
+  note:'หน้าทดลอง GM · รูปซ้าย 1 พิกเซลภาพ = {k} พิกเซลจอ · ตัวในเกม {k2} เท่า · ปาก/แก้มคงสีเดิม (เหมือนตัวในเกม)',
+  luOpen:'หาตัวเองในกลุ่มเพื่อน',luAsk:'หนูอยู่ตัวไหน? แตะที่ตัวเองเลย',luRight:'ถูกแล้ว! {s} วินาที',luWrong:'ตัวนี้เป็นเพื่อนนะ ลองดูอีกตัว',luAgain:'อีกรอบ',luBack:'กลับไปแต่งตัว'},
  en:{hair:'Hair',iris:'Eyes',skin:'Skin',house:'House (cape)',noPt:'Portrait file missing - showing a frame',noMask:'Colour mask missing - portrait shown as drawn',noMap:'Shade map missing - portrait shown as drawn',noKid:'In-game kid missing',
   badMask:'Portrait colour mask is damaged - portrait shown as drawn',noKidMask:'In-game kid colour mask missing - kid shown as drawn',badKidMask:'In-game kid colour mask is damaged - kid shown as drawn',
-  note:'GM test page · 1 art px = {k} screen px · kid x{k2} · mouth / cheek keep their colours (like the sprite)'}};
+  note:'GM test page · 1 art px = {k} screen px · kid x{k2} · mouth / cheek keep their colours (like the sprite)',
+  luOpen:'Find yourself among friends',luAsk:'Which one is you? Tap yourself',luRight:'Right! {s} s',luWrong:'That one is a friend - try another',luAgain:'Again',luBack:'Back to dressing up'}};
 const LANG=(navigator.language||'th').toLowerCase().startsWith('th')?'th':'en', tx=k=>T[LANG][k]+(LANG==='th'?' / '+T.en[k]:'');
 const S={opts:{hair:1,iris:2,skin:1,house:1},img:{},data:{},warn:[],ready:false,k:1,k2:1,errors:[]};   // default = sprite G1 default (Brown / Green / Medium / Wing)
 const rgb=h=>[parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)];
@@ -69,10 +80,27 @@ function renderPt(){const c=OFF.pt,g=c.getContext('2d');g.imageSmoothingEnabled=
   if(M&&MP){const R={};for(const id in GROUP)R[id]=ramp(GROUP[id],S.opts[GROUP[id]]);const d=out.data,m=M.data;
     for(let i=0;i<d.length;i+=4){const id=m[i];if(!(id in R)||m[i+3]!==255)continue;const k=MP[id][m[i+1]];if(k===undefined)continue;const c=R[id][k];d[i]=c[0];d[i+1]=c[1];d[i+2]=c[2]}}
   g.putImageData(out,0,0)}
-function renderKid(){const c=OFF.kid,g=c.getContext('2d');g.clearRect(0,0,96,96);const K=S.data.kid,KM=S.data.kidMask;if(!K){g.fillStyle='#3a3552';g.fillRect(28,10,40,80);return}
-  const out=new ImageData(new Uint8ClampedArray(K.data),96,96);if(KM){const d=out.data,m=KM.data,R={};for(const id in GROUP)R[id]=ramp(GROUP[id],S.opts[GROUP[id]]);
+function renderKid(){kidInto(OFF.kid,S.opts,'#3a3552')}
+// one in-game kid (sprite S idle f0) recoloured with opts into a 96 x 96 canvas · no sprite -> a block (in the house colour when one is given)
+function kidInto(c,opts,blank){const g=c.getContext('2d');g.clearRect(0,0,96,96);const K=S.data.kid,KM=S.data.kidMask;if(!K){g.fillStyle=blank||RAMPS.house[opts.house][1].split(' ')[1];g.fillRect(28,10,40,80);return}
+  const out=new ImageData(new Uint8ClampedArray(K.data),96,96);if(KM){const d=out.data,m=KM.data,R={};for(const id in GROUP)R[id]=ramp(GROUP[id],opts[GROUP[id]]);
     for(let i=0;i<d.length;i+=4){const id=m[i];if(!(id in R)||d[i+3]===0)continue;const c=R[id][m[i+1]];if(!c)continue;d[i]=c[0];d[i+1]=c[1];d[i+2]=c[2]}}
   g.putImageData(out,0,0)}
+// G2.6 A8 "find yourself": the player's kid (the colours chosen on this page) + 3 friends, the 4 houses all different, friends' hair never the
+// player's, random order; the time from showing to the first tap on the right kid is shown (plan G2.0 table A: <= 3 s). Wrong taps only say "friend".
+const LU={me:-1,sets:[],t0:0,done:false,hist:[],k:1,gap:0,x0:0,y0:0,cv:[0,1,2,3].map(()=>{const c=document.createElement('canvas');c.width=c.height=96;return c})};
+const rnd=n=>Math.floor(Math.random()*n),shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=rnd(i+1);[a[i],a[j]]=[a[j],a[i]]}return a};
+function luNew(){const me=Object.assign({},S.opts),hairs=shuffle([...Array(RAMPS.hair.length).keys()].filter(h=>h!==me.hair)),houses=shuffle([...Array(4).keys()].filter(h=>h!==me.house));
+  const sets=[me,...houses.map((h,i)=>({hair:hairs[i],iris:rnd(RAMPS.iris.length),skin:rnd(RAMPS.skin.length),house:h}))],order=shuffle([0,1,2,3]);
+  LU.sets=order.map(i=>sets[i]);LU.me=order.indexOf(0);LU.sets.forEach((o,i)=>kidInto(LU.cv[i],o));LU.done=false;luLayout();luMsg('');LU.t0=performance.now()}
+function luLayout(){const v=document.getElementById('luView'),dpr=window.devicePixelRatio||1,W=innerWidth-16,H=innerHeight-160,gap=Math.round(10*dpr);
+  const k=Math.max(1,Math.floor(Math.min((W*dpr-5*gap)/(4*96),(H*dpr)/96)));LU.k=k;LU.gap=gap;
+  v.width=4*96*k+5*gap;v.height=96*k+2*gap;v.style.width=(v.width/dpr)+'px';v.style.height=(v.height/dpr)+'px';LU.x0=gap;LU.y0=gap;
+  const g=v.getContext('2d');g.imageSmoothingEnabled=false;g.clearRect(0,0,v.width,v.height);LU.cv.forEach((c,i)=>g.drawImage(c,0,0,96,96,gap+i*(96*k+gap),gap,96*k,96*k))}
+function luMsg(t){document.getElementById('luMsg').textContent=t}
+function luTap(i){if(i<0||i>3)return;if(i===LU.me){if(!LU.done){const s=(performance.now()-LU.t0)/1000;LU.done=true;LU.hist.push({s:+s.toFixed(2),ok:true});luMsg(tx('luRight').replace(/\{s\}/g,s.toFixed(1)))}}
+  else{LU.hist.push({ok:false});luMsg(tx('luWrong'))}}
+function luOpen(on){document.getElementById('lu').classList.toggle('on',on);if(on)luNew();else layout()}
 function layout(){const dpr=window.devicePixelRatio||1,W=innerWidth,H=innerHeight,panel=document.getElementById('panel'),stage=document.getElementById('stage');
   let aw,ah;const P=panel.style;
   if(H>W){const ph=Math.round(H*0.42);P.left='0';P.right='0';P.top='auto';P.bottom='0';P.width='auto';P.height=ph+'px';aw=W;ah=H-ph}   // upright phone: colours below
@@ -111,7 +139,11 @@ function showWarn(){const w=document.getElementById('warn');w.style.display=S.wa
 function blit(){const v=document.getElementById('view'),g=v.getContext('2d');g.imageSmoothingEnabled=false;g.clearRect(0,0,v.width,v.height);
   g.drawImage(OFF.pt,0,0,384,384,V.x,V.y,384*V.k,384*V.k);g.drawImage(OFF.kid,0,0,96,96,V.kx,V.ky,96*V.k2,96*V.k2)}
 function draw(){try{renderPt();renderKid();blit()}catch(e){S.errors.push(String(e))}}
-async function boot(){buildUI();layout();
+function buildLineup(){const set=(id,k)=>{const e=document.getElementById(id);e.textContent=tx(k);return e};
+  set('luOpen','luOpen').onclick=()=>luOpen(true);set('luAgain','luAgain').onclick=()=>luNew();set('luBack','luBack').onclick=()=>luOpen(false);set('luAsk','luAsk');
+  document.getElementById('luView').addEventListener('pointerdown',e=>{const v=e.currentTarget,b=v.getBoundingClientRect(),x=(e.clientX-b.left)*v.width/b.width,y=(e.clientY-b.top)*v.height/b.height,
+    w=96*LU.k,i=Math.floor((x-LU.x0)/(w+LU.gap)),inX=x-LU.x0-i*(w+LU.gap);if(inX>=0&&inX<w&&y>=LU.y0&&y<LU.y0+w)luTap(i)})}
+async function boot(){buildUI();buildLineup();layout();
   const [pt,mask,kid,kidMask,map,mj]=await Promise.all([load('c2-pilot-kid4-pt.png'),load('c2-pilot-kid4-pt-mask.png'),load('c2-pilot-kid4-idleanim.png'),load('c2-pilot-kid4-idleanim-mask.png'),
     loadJSON('c2-pilot-kid4-pt-shademap.json'),loadJSON('c2-pilot-kid4-pt-mask.json')]);
   if(pt&&pt.naturalWidth===384&&pt.naturalHeight===384)S.data.pt=pixels(pt,384,384);else S.warn.push('noPt');
@@ -122,9 +154,9 @@ async function boot(){buildUI();layout();
     if(kidMask&&kidMask.naturalWidth>=96&&kidMask.naturalHeight>=96){const KM=pixels(kidMask,96,96);if(validKidMask(S.data.kid,KM))S.data.kidMask=KM;else S.warn.push('badKidMask')}
     else S.warn.push('noKidMask')}else S.warn.push('noKid');
   showWarn();draw();S.ready=true}
-addEventListener('resize',()=>{layout()});
+addEventListener('resize',()=>{if(document.getElementById('lu').classList.contains('on'))luLayout();else layout()});
 addEventListener('error',e=>S.errors.push(String(e.message)));
-window.PT={S,RAMPS,GROUP,layout,draw,renderPt,set:(o)=>{Object.assign(S.opts,o);document.querySelectorAll('.sw').forEach(b=>b.setAttribute('aria-pressed',String(S.opts[b.dataset.group]===+b.dataset.i)));draw()},
+window.PT={S,RAMPS,GROUP,layout,draw,renderPt,LU,luNew,luTap,luOpen,set:(o)=>{Object.assign(S.opts,o);document.querySelectorAll('.sw').forEach(b=>b.setAttribute('aria-pressed',String(S.opts[b.dataset.group]===+b.dataset.i)));draw()},
   ptPixels:()=>Array.from(OFF.pt.getContext('2d').getImageData(0,0,384,384).data),kidPixels:()=>Array.from(OFF.kid.getContext('2d').getImageData(0,0,96,96).data),
   view:()=>{const v=document.getElementById('view'),b=v.getBoundingClientRect(),d=devicePixelRatio;return{dpr:d,cw:v.width,ch:v.height,ratioW:b.width*d/v.width,ratioH:b.height*d/v.height,left:b.left*d,top:b.top*d,...V}},
   // every device pixel of the art in the view = the art pixel it comes from (whole scale, no smoothing): returns mismatching px

@@ -5,10 +5,10 @@
 html,body{margin:0;height:100%;overflow:hidden;background:#e8e6f0;font:12px system-ui,sans-serif;touch-action:none}
 canvas{position:fixed;inset:0;width:100%;height:100%;image-rendering:pixelated}
 #ui{position:fixed;left:6px;top:6px;display:flex;gap:4px;flex-wrap:wrap;max-width:70%}
-#ui button{font:12px system-ui;padding:6px 8px;border-radius:6px;border:1px solid #888;background:#fff}
+#ui button{font:12px system-ui;padding:6px 8px;border-radius:6px;border:1px solid #888;background:#fff;min-height:44px}   /* G2.6 A7: every button >= 44 CSS px */
 #ui button.on{background:#ffd76a}
-#pad{position:fixed;right:10px;bottom:10px;display:grid;grid-template-columns:repeat(3,40px);gap:4px}
-#pad button{height:40px;font-size:14px}
+#pad{position:fixed;right:10px;bottom:10px;display:grid;grid-template-columns:repeat(3,44px);gap:4px}
+#pad button{height:44px;font-size:14px}
 </style></head><body>
 <canvas id="cv"></canvas>
 <div id="ui">

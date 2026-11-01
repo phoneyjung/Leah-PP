@@ -1,0 +1,1420 @@
+{
+ "pass": true,
+ "rows": [
+  {
+   "screen": "phone 740x360",
+   "dpr": 2.625,
+   "zoom": 1,
+   "file": "a7-740x360-z100.png",
+   "canvasOk": true,
+   "errors": 0,
+   "pass": true,
+   "scale": 2,
+   "whole": true,
+   "canvas_dev": [
+    1943,
+    945
+   ],
+   "canvas_css_x_dpr": [
+    1943,
+    945
+   ],
+   "kid_css_px": 63.2,
+   "art_px_widths_dev": [
+    2
+   ],
+   "buttons": [
+    {
+     "id": "bOff",
+     "w": 171,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bZoom",
+     "w": 111.7,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bBg",
+     "w": 96,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bTag",
+     "w": 123,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bGuide",
+     "w": 108.7,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bHold",
+     "w": 106.6,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bEase",
+     "w": 136.2,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bPow",
+     "w": 120.8,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bFx",
+     "w": 171.7,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bLR",
+     "w": 110,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "NW",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "N",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "NE",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "W",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "·",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "E",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "SW",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "S",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "SE",
+     "w": 44,
+     "h": 44,
+     "free": true
+    }
+   ],
+   "small": [],
+   "covered": []
+  },
+  {
+   "screen": "phone 740x360",
+   "dpr": 2.625,
+   "zoom": 0.75,
+   "file": "a7-740x360-z75.png",
+   "canvasOk": true,
+   "errors": 0,
+   "pass": true,
+   "scale": 1.5,
+   "whole": false,
+   "canvas_dev": [
+    1943,
+    945
+   ],
+   "canvas_css_x_dpr": [
+    1943,
+    945
+   ],
+   "kid_css_px": 47.4,
+   "art_px_widths_dev": [
+    1,
+    2
+   ],
+   "buttons": [
+    {
+     "id": "bOff",
+     "w": 171,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bZoom",
+     "w": 105.6,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bBg",
+     "w": 96,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bTag",
+     "w": 123,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bGuide",
+     "w": 108.7,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bHold",
+     "w": 106.6,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bEase",
+     "w": 136.2,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bPow",
+     "w": 120.8,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bFx",
+     "w": 171.7,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bLR",
+     "w": 110,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "NW",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "N",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "NE",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "W",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "·",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "E",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "SW",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "S",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "SE",
+     "w": 44,
+     "h": 44,
+     "free": true
+    }
+   ],
+   "small": [],
+   "covered": []
+  },
+  {
+   "screen": "phone 844x390",
+   "dpr": 2.625,
+   "zoom": 1,
+   "file": "a7-844x390-z100.png",
+   "canvasOk": true,
+   "errors": 0,
+   "pass": true,
+   "scale": 3,
+   "whole": true,
+   "canvas_dev": [
+    2216,
+    1024
+   ],
+   "canvas_css_x_dpr": [
+    2216,
+    1024
+   ],
+   "kid_css_px": 94.9,
+   "art_px_widths_dev": [
+    3
+   ],
+   "buttons": [
+    {
+     "id": "bOff",
+     "w": 171,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bZoom",
+     "w": 111.7,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bBg",
+     "w": 96,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bTag",
+     "w": 123,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bGuide",
+     "w": 108.7,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bHold",
+     "w": 106.6,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bEase",
+     "w": 136.2,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bPow",
+     "w": 120.8,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bFx",
+     "w": 171.7,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bLR",
+     "w": 110,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "NW",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "N",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "NE",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "W",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "·",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "E",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "SW",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "S",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "SE",
+     "w": 44,
+     "h": 44,
+     "free": true
+    }
+   ],
+   "small": [],
+   "covered": []
+  },
+  {
+   "screen": "phone 844x390",
+   "dpr": 2.625,
+   "zoom": 0.75,
+   "file": "a7-844x390-z75.png",
+   "canvasOk": true,
+   "errors": 0,
+   "pass": true,
+   "scale": 2.25,
+   "whole": false,
+   "canvas_dev": [
+    2216,
+    1024
+   ],
+   "canvas_css_x_dpr": [
+    2216,
+    1024
+   ],
+   "kid_css_px": 71.1,
+   "art_px_widths_dev": [
+    2,
+    3
+   ],
+   "buttons": [
+    {
+     "id": "bOff",
+     "w": 171,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bZoom",
+     "w": 105.6,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bBg",
+     "w": 96,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bTag",
+     "w": 123,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bGuide",
+     "w": 108.7,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bHold",
+     "w": 106.6,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bEase",
+     "w": 136.2,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bPow",
+     "w": 120.8,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bFx",
+     "w": 171.7,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bLR",
+     "w": 110,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "NW",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "N",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "NE",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "W",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "·",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "E",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "SW",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "S",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "SE",
+     "w": 44,
+     "h": 44,
+     "free": true
+    }
+   ],
+   "small": [],
+   "covered": []
+  },
+  {
+   "screen": "phone 915x412",
+   "dpr": 2.625,
+   "zoom": 1,
+   "file": "a7-915x412-z100.png",
+   "canvasOk": true,
+   "errors": 0,
+   "pass": true,
+   "scale": 3,
+   "whole": true,
+   "canvas_dev": [
+    2402,
+    1082
+   ],
+   "canvas_css_x_dpr": [
+    2402,
+    1082
+   ],
+   "kid_css_px": 94.9,
+   "art_px_widths_dev": [
+    3
+   ],
+   "buttons": [
+    {
+     "id": "bOff",
+     "w": 171,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bZoom",
+     "w": 111.7,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bBg",
+     "w": 96,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bTag",
+     "w": 123,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bGuide",
+     "w": 108.7,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bHold",
+     "w": 106.6,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bEase",
+     "w": 136.2,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bPow",
+     "w": 120.8,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bFx",
+     "w": 171.7,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bLR",
+     "w": 110,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "NW",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "N",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "NE",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "W",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "·",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "E",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "SW",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "S",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "SE",
+     "w": 44,
+     "h": 44,
+     "free": true
+    }
+   ],
+   "small": [],
+   "covered": []
+  },
+  {
+   "screen": "phone 915x412",
+   "dpr": 2.625,
+   "zoom": 0.75,
+   "file": "a7-915x412-z75.png",
+   "canvasOk": true,
+   "errors": 0,
+   "pass": true,
+   "scale": 2.25,
+   "whole": false,
+   "canvas_dev": [
+    2402,
+    1082
+   ],
+   "canvas_css_x_dpr": [
+    2402,
+    1082
+   ],
+   "kid_css_px": 71.1,
+   "art_px_widths_dev": [
+    2,
+    3
+   ],
+   "buttons": [
+    {
+     "id": "bOff",
+     "w": 171,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bZoom",
+     "w": 105.6,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bBg",
+     "w": 96,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bTag",
+     "w": 123,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bGuide",
+     "w": 108.7,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bHold",
+     "w": 106.6,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bEase",
+     "w": 136.2,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bPow",
+     "w": 120.8,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bFx",
+     "w": 171.7,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bLR",
+     "w": 110,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "NW",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "N",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "NE",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "W",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "·",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "E",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "SW",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "S",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "SE",
+     "w": 44,
+     "h": 44,
+     "free": true
+    }
+   ],
+   "small": [],
+   "covered": []
+  },
+  {
+   "screen": "iPad 1180x820",
+   "dpr": 2,
+   "zoom": 1,
+   "file": "a7-1180x820-z100.png",
+   "canvasOk": true,
+   "errors": 0,
+   "pass": true,
+   "scale": 4,
+   "whole": true,
+   "canvas_dev": [
+    2360,
+    1640
+   ],
+   "canvas_css_x_dpr": [
+    2360,
+    1640
+   ],
+   "kid_css_px": 166,
+   "art_px_widths_dev": [
+    4
+   ],
+   "buttons": [
+    {
+     "id": "bOff",
+     "w": 171,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bZoom",
+     "w": 111.7,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bBg",
+     "w": 96,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bTag",
+     "w": 123,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bGuide",
+     "w": 108.7,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bHold",
+     "w": 106.6,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bEase",
+     "w": 136.2,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bPow",
+     "w": 120.8,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bFx",
+     "w": 171.7,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bLR",
+     "w": 110,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "NW",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "N",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "NE",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "W",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "·",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "E",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "SW",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "S",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "SE",
+     "w": 44,
+     "h": 44,
+     "free": true
+    }
+   ],
+   "small": [],
+   "covered": []
+  },
+  {
+   "screen": "iPad 1180x820",
+   "dpr": 2,
+   "zoom": 0.75,
+   "file": "a7-1180x820-z75.png",
+   "canvasOk": true,
+   "errors": 0,
+   "pass": true,
+   "scale": 3,
+   "whole": true,
+   "canvas_dev": [
+    2360,
+    1640
+   ],
+   "canvas_css_x_dpr": [
+    2360,
+    1640
+   ],
+   "kid_css_px": 124.5,
+   "art_px_widths_dev": [
+    3
+   ],
+   "buttons": [
+    {
+     "id": "bOff",
+     "w": 171,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bZoom",
+     "w": 105.6,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bBg",
+     "w": 96,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bTag",
+     "w": 123,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bGuide",
+     "w": 108.7,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bHold",
+     "w": 106.6,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bEase",
+     "w": 136.2,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bPow",
+     "w": 120.8,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bFx",
+     "w": 171.7,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bLR",
+     "w": 110,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "NW",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "N",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "NE",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "W",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "·",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "E",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "SW",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "S",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "SE",
+     "w": 44,
+     "h": 44,
+     "free": true
+    }
+   ],
+   "small": [],
+   "covered": []
+  },
+  {
+   "screen": "PC 1920x1080",
+   "dpr": 1,
+   "zoom": 1,
+   "file": "a7-1920x1080-z100.png",
+   "canvasOk": true,
+   "errors": 0,
+   "pass": true,
+   "scale": 3,
+   "whole": true,
+   "canvas_dev": [
+    1920,
+    1080
+   ],
+   "canvas_css_x_dpr": [
+    1920,
+    1080
+   ],
+   "kid_css_px": 249,
+   "art_px_widths_dev": [
+    3
+   ],
+   "buttons": [
+    {
+     "id": "bOff",
+     "w": 171,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bZoom",
+     "w": 111.7,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bBg",
+     "w": 96,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bTag",
+     "w": 123,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bGuide",
+     "w": 108.7,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bHold",
+     "w": 106.6,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bEase",
+     "w": 136.2,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bPow",
+     "w": 120.8,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bFx",
+     "w": 171.7,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bLR",
+     "w": 110,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "NW",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "N",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "NE",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "W",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "·",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "E",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "SW",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "S",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "SE",
+     "w": 44,
+     "h": 44,
+     "free": true
+    }
+   ],
+   "small": [],
+   "covered": []
+  },
+  {
+   "screen": "PC 1920x1080",
+   "dpr": 1,
+   "zoom": 0.75,
+   "file": "a7-1920x1080-z75.png",
+   "canvasOk": true,
+   "errors": 0,
+   "pass": true,
+   "scale": 2.25,
+   "whole": false,
+   "canvas_dev": [
+    1920,
+    1080
+   ],
+   "canvas_css_x_dpr": [
+    1920,
+    1080
+   ],
+   "kid_css_px": 186.8,
+   "art_px_widths_dev": [
+    2,
+    3
+   ],
+   "buttons": [
+    {
+     "id": "bOff",
+     "w": 171,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bZoom",
+     "w": 105.6,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bBg",
+     "w": 96,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bTag",
+     "w": 123,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bGuide",
+     "w": 108.7,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bHold",
+     "w": 106.6,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bEase",
+     "w": 136.2,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bPow",
+     "w": 120.8,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bFx",
+     "w": 171.7,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "bLR",
+     "w": 110,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "NW",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "N",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "NE",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "W",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "·",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "E",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "SW",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "S",
+     "w": 44,
+     "h": 44,
+     "free": true
+    },
+    {
+     "id": "SE",
+     "w": 44,
+     "h": 44,
+     "free": true
+    }
+   ],
+   "small": [],
+   "covered": []
+  }
+ ],
+ "gif_frames": 64
+}

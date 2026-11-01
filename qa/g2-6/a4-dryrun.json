@@ -1,0 +1,347 @@
+{
+ "passed": 12,
+ "total": 12,
+ "changed": 0,
+ "cases": [
+  {
+   "case": "T1 old save, no colour fields",
+   "ok": true,
+   "slots": 1,
+   "cur": 0,
+   "got": [
+    {
+     "hair": "brown",
+     "iris": "green",
+     "skin": "medium",
+     "from": "default"
+    }
+   ],
+   "want": [
+    {
+     "hair": "brown",
+     "iris": "green",
+     "skin": "medium",
+     "from": "default"
+    }
+   ],
+   "fieldsChanged": 0,
+   "kept": null
+  },
+  {
+   "case": "T2 hc / ec (<= 1.70)",
+   "ok": true,
+   "slots": 1,
+   "cur": 0,
+   "got": [
+    {
+     "hair": "red",
+     "iris": "amber",
+     "skin": "medium",
+     "from": "hc"
+    }
+   ],
+   "want": [
+    {
+     "hair": "red",
+     "iris": "amber",
+     "skin": "medium",
+     "from": "hc"
+    }
+   ],
+   "fieldsChanged": 0,
+   "kept": null
+  },
+  {
+   "case": "T3 hcol / ecol dye (1.94) beats hc",
+   "ok": true,
+   "slots": 1,
+   "cur": 0,
+   "got": [
+    {
+     "hair": "blue",
+     "iris": "blue",
+     "skin": "medium",
+     "from": "hcol"
+    }
+   ],
+   "want": [
+    {
+     "hair": "blue",
+     "iris": "blue",
+     "skin": "medium",
+     "from": "hcol"
+    }
+   ],
+   "fieldsChanged": 0,
+   "kept": null
+  },
+  {
+   "case": "T4 appearance169 (GM 1.69)",
+   "ok": true,
+   "slots": 1,
+   "cur": 0,
+   "got": [
+    {
+     "hair": "silver",
+     "iris": "black",
+     "skin": "medium",
+     "from": "appearance169"
+    }
+   ],
+   "want": [
+    {
+     "hair": "silver",
+     "iris": "black",
+     "skin": "medium",
+     "from": "appearance169"
+    }
+   ],
+   "fieldsChanged": 0,
+   "kept": null
+  },
+  {
+   "case": "T5 gmSprite170 + appearance169",
+   "ok": true,
+   "slots": 1,
+   "cur": 0,
+   "got": [
+    {
+     "hair": "green",
+     "iris": "green",
+     "skin": "medium",
+     "from": "appearance169"
+    }
+   ],
+   "want": [
+    {
+     "hair": "green",
+     "iris": "green",
+     "skin": "medium",
+     "from": "appearance169"
+    }
+   ],
+   "fieldsChanged": 0,
+   "kept": null
+  },
+  {
+   "case": "T6 pd219 set 07, tn 0-3",
+   "ok": true,
+   "slots": 4,
+   "cur": 1,
+   "got": [
+    {
+     "hair": "blonde",
+     "iris": "amber",
+     "skin": "light",
+     "from": "pd219"
+    },
+    {
+     "hair": "blonde",
+     "iris": "amber",
+     "skin": "medium",
+     "from": "pd219"
+    },
+    {
+     "hair": "blonde",
+     "iris": "amber",
+     "skin": "tan",
+     "from": "pd219"
+    },
+    {
+     "hair": "blonde",
+     "iris": "amber",
+     "skin": "deep",
+     "from": "pd219"
+    }
+   ],
+   "want": [
+    {
+     "hair": "blonde",
+     "iris": "amber",
+     "skin": "light",
+     "from": "pd219"
+    },
+    {
+     "hair": "blonde",
+     "iris": "amber",
+     "skin": "medium",
+     "from": "pd219"
+    },
+    {
+     "hair": "blonde",
+     "iris": "amber",
+     "skin": "tan",
+     "from": "pd219"
+    },
+    {
+     "hair": "blonde",
+     "iris": "amber",
+     "skin": "deep",
+     "from": "pd219"
+    }
+   ],
+   "fieldsChanged": 0,
+   "kept": null
+  },
+  {
+   "case": "T7 pd219 set 08 (2.30), hc -1 = drawn colour -> next source",
+   "ok": true,
+   "slots": 1,
+   "cur": 0,
+   "got": [
+    {
+     "hair": "pink",
+     "iris": "blue",
+     "skin": "tan",
+     "from": "hcol"
+    }
+   ],
+   "want": [
+    {
+     "hair": "pink",
+     "iris": "blue",
+     "skin": "tan",
+     "from": "hcol"
+    }
+   ],
+   "fieldsChanged": 0,
+   "kept": null
+  },
+  {
+   "case": "T8 boy (gender194 m)",
+   "ok": true,
+   "slots": 1,
+   "cur": 0,
+   "got": [
+    null
+   ],
+   "want": [
+    null
+   ],
+   "fieldsChanged": 0,
+   "kept": null
+  },
+  {
+   "case": "T9 broken values",
+   "ok": true,
+   "slots": 1,
+   "cur": 0,
+   "got": [
+    {
+     "hair": "brown",
+     "iris": "green",
+     "skin": "medium",
+     "from": "default"
+    }
+   ],
+   "want": [
+    {
+     "hair": "brown",
+     "iris": "green",
+     "skin": "medium",
+     "from": "default"
+    }
+   ],
+   "fieldsChanged": 0,
+   "kept": null
+  },
+  {
+   "case": "T10 4 slots + cur in the middle + sid",
+   "ok": true,
+   "slots": 4,
+   "cur": 2,
+   "got": [
+    {
+     "hair": "black",
+     "iris": "black",
+     "skin": "medium",
+     "from": "hc"
+    },
+    null,
+    {
+     "hair": "green",
+     "iris": "brown",
+     "skin": "deep",
+     "from": "pd219"
+    },
+    {
+     "hair": "brown",
+     "iris": "green",
+     "skin": "medium",
+     "from": "default"
+    }
+   ],
+   "want": [
+    {
+     "hair": "black",
+     "iris": "black",
+     "skin": "medium",
+     "from": "hc"
+    },
+    null,
+    {
+     "hair": "green",
+     "iris": "brown",
+     "skin": "deep",
+     "from": "pd219"
+    },
+    {
+     "hair": "brown",
+     "iris": "green",
+     "skin": "medium",
+     "from": "default"
+    }
+   ],
+   "fieldsChanged": 0,
+   "kept": null
+  },
+  {
+   "case": "T11 old key leahpp2d-v1 only",
+   "ok": true,
+   "slots": 1,
+   "cur": 0,
+   "got": [
+    {
+     "hair": "blonde",
+     "iris": "green",
+     "skin": "medium",
+     "from": "hc"
+    }
+   ],
+   "want": [
+    {
+     "hair": "blonde",
+     "iris": "green",
+     "skin": "medium",
+     "from": "hc"
+    }
+   ],
+   "fieldsChanged": 0,
+   "kept": null
+  },
+  {
+   "case": "T12 S.char2 already there",
+   "ok": true,
+   "slots": 1,
+   "cur": 0,
+   "got": [
+    {
+     "hair": "pink",
+     "iris": "amber",
+     "skin": "deep",
+     "from": "owner"
+    }
+   ],
+   "want": [
+    {
+     "hair": "pink",
+     "iris": "amber",
+     "skin": "deep",
+     "from": "owner"
+    }
+   ],
+   "fieldsChanged": 0,
+   "kept": true
+  }
+ ]
+}

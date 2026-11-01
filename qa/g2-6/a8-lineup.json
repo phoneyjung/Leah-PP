@@ -1,0 +1,79 @@
+{
+ "pass": true,
+ "rows": [
+  {
+   "screen": "phone",
+   "fair": {
+    "shuffles": 20,
+    "me_once": 20,
+    "houses_all_different": 20,
+    "friend_with_my_hair": 0,
+    "positions_seen": 4
+   },
+   "kid_scale": 5,
+   "msgFriend": "ตัวนี้เป็นเพื่อนนะ ลองดูอีกตัว / That one is a friend - try another",
+   "msgMine": "ถูกแล้ว! 0.4 วินาที / Right! 0.4 s",
+   "hist": [
+    {
+     "ok": false
+    },
+    {
+     "s": 0.43,
+     "ok": true
+    }
+   ],
+   "buttons": [
+    [
+     "luAgain",
+     140,
+     48
+    ],
+    [
+     "luBack",
+     278,
+     48
+    ]
+   ],
+   "closed": true,
+   "errors": [],
+   "pass": true
+  },
+  {
+   "screen": "iPad",
+   "fair": {
+    "shuffles": 20,
+    "me_once": 20,
+    "houses_all_different": 20,
+    "friend_with_my_hair": 0,
+    "positions_seen": 4
+   },
+   "kid_scale": 5,
+   "msgFriend": "ตัวนี้เป็นเพื่อนนะ ลองดูอีกตัว / That one is a friend - try another",
+   "msgMine": "ถูกแล้ว! 0.4 วินาที / Right! 0.4 s",
+   "hist": [
+    {
+     "ok": false
+    },
+    {
+     "s": 0.43,
+     "ok": true
+    }
+   ],
+   "buttons": [
+    [
+     "luAgain",
+     140,
+     48
+    ],
+    [
+     "luBack",
+     278,
+     48
+    ]
+   ],
+   "closed": true,
+   "errors": [],
+   "pass": true
+  }
+ ]
+}

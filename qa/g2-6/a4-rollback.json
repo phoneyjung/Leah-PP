@@ -1,0 +1,58 @@
+{
+ "seeded": {
+  "slots": 2,
+  "sids": [
+   null,
+   "s-b"
+  ],
+  "c2": [
+   {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "pink",
+     "iris": "amber",
+     "skin": "deep"
+    },
+    "from": "pd219"
+   },
+   {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "green",
+     "iris": "blue",
+     "skin": "light"
+    },
+    "from": "pd219"
+   }
+  ]
+ },
+ "saved": true,
+ "played_slot_char2_kept": true,
+ "other_slot_char2_kept": true,
+ "sids_kept": true,
+ "snd_changed_by_click": true,
+ "errors": [],
+ "pass": true
+}

@@ -5,7 +5,7 @@
 html,body{margin:0;height:100%;overflow:hidden;background:#0c0a18;font:12px system-ui,sans-serif;touch-action:none;-webkit-user-select:none;user-select:none}
 canvas{position:fixed;inset:0;width:100%;height:100%;image-rendering:pixelated}
 #ui{position:fixed;left:6px;top:6px;display:flex;gap:4px;flex-wrap:wrap;max-width:70%}
-#ui button{font:12px system-ui;padding:6px 8px;border-radius:6px;border:1px solid #888;background:#fff}
+#ui button{font:12px system-ui;padding:6px 8px;border-radius:6px;border:1px solid #888;background:#fff;min-height:44px}   /* G2.6 A7: every button >= 44 CSS px */
 #ui button.on{background:#ffd76a}
 #pad{position:fixed;right:10px;bottom:10px;display:grid;grid-template-columns:repeat(3,44px);gap:4px;opacity:.6;touch-action:none}
 #pad button{height:44px;font-size:15px;border-radius:8px;border:1px solid #777;background:#f4f2fa}
@@ -101,6 +101,7 @@ const A={};   // art: sheets + json
 async function boot(){
   const L=f=>load(f);
   const [w,i,wh,ln]=await Promise.all([L('c2-pilot-kid4-walk.png'),L('c2-pilot-kid4-idleanim.png'),L('c2-pilot-kid4-walkhold.png'),gmLantern()]);
+  if(ST.oldKid){const [ow,oi]=await Promise.all([L('kid-bob-walk.png'),L('kid-bob-idle.png')]);if(ow&&oi){ST.img.oldWalk=ow;ST.img.oldIdle=oi}}   // G2.6 A5: 2.33 sprite (GM ?oldkid only)
   ST.hanc=await jget('c2-pilot-hold-anchors.json');ST.ok.hold=!!(ST.hanc&&ST.hanc.walk_hold&&ST.hanc.idle_hold&&typeof ST.hanc.walk_hold==='object'&&typeof ST.hanc.idle_hold==='object');
   if(wh){ST.img.walkhold=wh;ST.ok.walkhold=true}if(ln){ST.img.lantern=ln;ST.ok.lantern=true}
   ST.anc=await jget('c2-pilot-anchors.json');ST.ok.anc=!!ST.anc;if(ST.anc){const dx=ST.anc.renderOffset&&ST.anc.renderOffset.dx;if(dx&&DIRS.every(d=>Number.isInteger(dx[d])))ST.offTable=Object.assign({},dx)}
@@ -310,7 +311,9 @@ function drawKid(s,ox,oy,info){
   const LW=t?[px-FEET[0]+dx+Math.round(ST.lpos[0])-HG[0],py-FEET[1]+Math.round(ST.lpos[1])-HG[1]]:null;
   if(lit&&LW&&P_.glow>0&&ST.fx){g.globalAlpha=P_.glow;g.globalCompositeOperation='screen';const gx=LW[0]+16-GLOW.R,gy=LW[1]+15-GLOW.R;
     g.drawImage(FX.glow,0,0,2*GLOW.R+1,2*GLOW.R+1,ox+gx*s,oy+gy*s,(2*GLOW.R+1)*s,(2*GLOW.R+1)*s);g.globalCompositeOperation='source-over';g.globalAlpha=1}
-  if(img)g.drawImage(img,kk*C,DIRS.indexOf(d)*C,C,C,sx,sy,C*s,C*s);else{g.fillStyle='#c84';g.fillRect(fx-10*s,fy-40*s,20*s,40*s)}
+  if(ST.img.oldWalk){const di=DIRS.indexOf(d),wk=ST.anim==='walk';   // G2.6 A5 ?oldkid: game 2.33 sheets (walk 6 x 8 rows, idle 8 x 1 · cell 64 · feet [32,61] · same row order)
+    g.drawImage(wk?ST.img.oldWalk:ST.img.oldIdle,wk?(k%6)*64:di*64,wk?di*64:0,64,64,Math.round(fx-32*s),Math.round(fy-61*s),64*s,64*s)}
+  else if(img)g.drawImage(img,kk*C,DIRS.indexOf(d)*C,C,C,sx,sy,C*s,C*s);else{g.fillStyle='#c84';g.fillRect(fx-10*s,fy-40*s,20*s,40*s)}
   let lanXY=null;
   if(t){const lx=Math.round(ST.lpos[0]),ly=Math.round(ST.lpos[1]),di=DIRS.indexOf(d);lanXY=[di,sx+(lx-HG[0])*s,sy+(ly-HG[1])*s];
     g.drawImage(ST.img.lantern,di*LAN_CELL,0,LAN_CELL,LAN_CELL,lanXY[1],lanXY[2],LAN_CELL*s,LAN_CELL*s);
@@ -404,7 +407,7 @@ function sync(){const B=(id,on,t)=>{const b=document.getElementById(id);b.classL
 const q=new URLSearchParams(location.search);
 if(q.has('gm')){ST.gm=true;const pw=+q.get('power');if((q.get('power')||'')!==''&&POWERS.includes(pw))ST.power=pw;if(q.has('guides'))ST.guides=true}
 setLR(LR_DEFAULT);if(q.has('gm')&&/^\d+$/.test(q.get('lr')||''))setLR(+q.get('lr'));
-if(q.has('far'))ST.zoomOut=true;if(q.has('nonight'))ST.noNight=true;
+if(q.has('far'))ST.zoomOut=true;if(q.has('nonight'))ST.noNight=true;if(q.has('gm')&&q.has('oldkid'))ST.oldKid=true;
 window.PS={ST,W0,SL,A,FX,GRID,ZONE,LAMPS,CRYSTALS,TREES,LHOLE,LR_SET,setLR,POWERS,DIRS,T,W,H,MAPW,MAPH,DOOR_X,DOOR_MINY,LAMP_R,FADE_A,FADE_MS,SPEED,
   PADP,okXY,FIST,solidAt,solidCell,cellOf,astar,walkable,inZone,inSlime,SLIME_CELLS,SLIME_BOX,lampLight,LAMP_POOL,NIGHT_A,HUT_SORT,inDoor,tapTarget,lampDist,tileFor,dir8,goto,walk,stop,step,draw,scale,cam,holdOn,curFrame,lanternTarget,covered,showMsg,
   pause:v=>ST.paused=v,set:o=>Object.assign(ST,o),

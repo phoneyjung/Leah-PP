@@ -1,0 +1,563 @@
+{
+ "pages": {
+  "pilot-g2-motion": {
+   "files": 10,
+   "bytes": 357200,
+   "MB": 0.341,
+   "list": [
+    [
+     "c2-held-lantern_L0-S-trial-light.png",
+     148
+    ],
+    [
+     "c2-held-lantern_L0-S-trial.json",
+     1038
+    ],
+    [
+     "c2-held-lantern_L0-S-trial.png",
+     364
+    ],
+    [
+     "c2-pilot-anchors.json",
+     24468
+    ],
+    [
+     "c2-pilot-hold-anchors.json",
+     18601
+    ],
+    [
+     "c2-pilot-kid4-idleanim.png",
+     67972
+    ],
+    [
+     "c2-pilot-kid4-walk.png",
+     102137
+    ],
+    [
+     "c2-pilot-kid4-walkhold.png",
+     87694
+    ],
+    [
+     "cave-floor.jpg",
+     25731
+    ],
+    [
+     "pilot-g2-motion.html",
+     29047
+    ]
+   ],
+   "A2_pass": true,
+   "normal_errors": 0,
+   "normal_drawn": true,
+   "blocked_runs": 10,
+   "A3_pass": true,
+   "rows": [
+    {
+     "blocked": "c2-held-lantern_L0-S-trial-light.png",
+     "drawn": true,
+     "colours": 1210,
+     "other_share": 0.248,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "c2-held-lantern_L0-S-trial.json",
+     "drawn": true,
+     "colours": 1201,
+     "other_share": 0.252,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "c2-held-lantern_L0-S-trial.png",
+     "drawn": true,
+     "colours": 1201,
+     "other_share": 0.252,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "c2-pilot-anchors.json",
+     "drawn": true,
+     "colours": 1263,
+     "other_share": 0.261,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "c2-pilot-hold-anchors.json",
+     "drawn": true,
+     "colours": 1186,
+     "other_share": 0.241,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "c2-pilot-kid4-idleanim.png",
+     "drawn": true,
+     "colours": 1186,
+     "other_share": 0.242,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "c2-pilot-kid4-walk.png",
+     "drawn": true,
+     "colours": 1261,
+     "other_share": 0.261,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "c2-pilot-kid4-walkhold.png",
+     "drawn": true,
+     "colours": 1186,
+     "other_share": 0.241,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "cave-floor.jpg",
+     "drawn": true,
+     "colours": 1263,
+     "other_share": 0.261,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "* every file",
+     "drawn": true,
+     "colours": 1158,
+     "other_share": 0.244,
+     "page_errors": 0,
+     "err": []
+    }
+   ]
+  },
+  "pilot-g2-scene": {
+   "files": 26,
+   "bytes": 520297,
+   "MB": 0.496,
+   "list": [
+    [
+     "c2-held-lantern_L0-S-trial-light.png",
+     148
+    ],
+    [
+     "c2-held-lantern_L0-S-trial.json",
+     1038
+    ],
+    [
+     "c2-held-lantern_L0-S-trial.png",
+     364
+    ],
+    [
+     "c2-pilot-anchors.json",
+     24468
+    ],
+    [
+     "c2-pilot-hold-anchors.json",
+     18601
+    ],
+    [
+     "c2-pilot-kid4-idleanim.png",
+     67972
+    ],
+    [
+     "c2-pilot-kid4-walk.png",
+     102137
+    ],
+    [
+     "c2-pilot-kid4-walkhold.png",
+     87694
+    ],
+    [
+     "cave-floor.jpg",
+     25731
+    ],
+    [
+     "g24-cave-mouth.json",
+     195
+    ],
+    [
+     "g24-cave-mouth.png",
+     31347
+    ],
+    [
+     "g24-gate.png",
+     3713
+    ],
+    [
+     "g24-hut-door.png",
+     807
+    ],
+    [
+     "g24-hut.json",
+     233
+    ],
+    [
+     "g24-hut.png",
+     24050
+    ],
+    [
+     "g24-lamp.png",
+     5175
+    ],
+    [
+     "g24-props.json",
+     742
+    ],
+    [
+     "g24-props.png",
+     9913
+    ],
+    [
+     "g24-slime.json",
+     440
+    ],
+    [
+     "g24-slime.png",
+     8226
+    ],
+    [
+     "g24-tiles-cliff.png",
+     20127
+    ],
+    [
+     "g24-tiles-path.png",
+     19418
+    ],
+    [
+     "g24-tiles.json",
+     2615
+    ],
+    [
+     "g24-tree-a.png",
+     5796
+    ],
+    [
+     "g24-tree-b.png",
+     11310
+    ],
+    [
+     "pilot-g2-scene.html",
+     48037
+    ]
+   ],
+   "A2_pass": true,
+   "normal_errors": 0,
+   "normal_drawn": true,
+   "blocked_runs": 26,
+   "A3_pass": true,
+   "rows": [
+    {
+     "blocked": "c2-held-lantern_L0-S-trial-light.png",
+     "drawn": true,
+     "colours": 10387,
+     "other_share": 0.929,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "c2-held-lantern_L0-S-trial.json",
+     "drawn": true,
+     "colours": 10522,
+     "other_share": 0.929,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "c2-held-lantern_L0-S-trial.png",
+     "drawn": true,
+     "colours": 10506,
+     "other_share": 0.929,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "c2-pilot-anchors.json",
+     "drawn": true,
+     "colours": 10867,
+     "other_share": 0.95,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "c2-pilot-hold-anchors.json",
+     "drawn": true,
+     "colours": 10516,
+     "other_share": 0.929,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "c2-pilot-kid4-idleanim.png",
+     "drawn": true,
+     "colours": 10518,
+     "other_share": 0.929,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "c2-pilot-kid4-walk.png",
+     "drawn": true,
+     "colours": 10859,
+     "other_share": 0.95,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "c2-pilot-kid4-walkhold.png",
+     "drawn": true,
+     "colours": 10489,
+     "other_share": 0.929,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "cave-floor.jpg",
+     "drawn": true,
+     "colours": 10881,
+     "other_share": 0.95,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "g24-cave-mouth.json",
+     "drawn": true,
+     "colours": 10872,
+     "other_share": 0.95,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "g24-cave-mouth.png",
+     "drawn": true,
+     "colours": 10724,
+     "other_share": 0.95,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "g24-gate.png",
+     "drawn": true,
+     "colours": 10564,
+     "other_share": 0.95,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "g24-hut-door.png",
+     "drawn": true,
+     "colours": 10875,
+     "other_share": 0.95,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "g24-hut.json",
+     "drawn": true,
+     "colours": 10896,
+     "other_share": 0.95,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "g24-hut.png",
+     "drawn": true,
+     "colours": 10284,
+     "other_share": 0.95,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "g24-lamp.png",
+     "drawn": true,
+     "colours": 10609,
+     "other_share": 0.95,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "g24-props.json",
+     "drawn": true,
+     "colours": 9280,
+     "other_share": 0.951,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "g24-props.png",
+     "drawn": true,
+     "colours": 9290,
+     "other_share": 0.951,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "g24-slime.json",
+     "drawn": true,
+     "colours": 10882,
+     "other_share": 0.95,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "g24-slime.png",
+     "drawn": true,
+     "colours": 10810,
+     "other_share": 0.95,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "g24-tiles-cliff.png",
+     "drawn": true,
+     "colours": 10530,
+     "other_share": 0.951,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "g24-tiles-path.png",
+     "drawn": true,
+     "colours": 8304,
+     "other_share": 0.871,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "g24-tiles.json",
+     "drawn": true,
+     "colours": 7997,
+     "other_share": 0.87,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "g24-tree-a.png",
+     "drawn": true,
+     "colours": 10934,
+     "other_share": 0.939,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "g24-tree-b.png",
+     "drawn": true,
+     "colours": 10492,
+     "other_share": 0.95,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "* every file",
+     "drawn": true,
+     "colours": 3963,
+     "other_share": 0.815,
+     "page_errors": 0,
+     "err": []
+    }
+   ]
+  },
+  "pilot-g2-portrait": {
+   "files": 7,
+   "bytes": 146197,
+   "MB": 0.139,
+   "list": [
+    [
+     "c2-pilot-kid4-idleanim-mask.png",
+     25691
+    ],
+    [
+     "c2-pilot-kid4-idleanim.png",
+     67972
+    ],
+    [
+     "c2-pilot-kid4-pt-mask.json",
+     5908
+    ],
+    [
+     "c2-pilot-kid4-pt-mask.png",
+     10703
+    ],
+    [
+     "c2-pilot-kid4-pt-shademap.json",
+     1475
+    ],
+    [
+     "c2-pilot-kid4-pt.png",
+     17142
+    ],
+    [
+     "pilot-g2-portrait.html",
+     17306
+    ]
+   ],
+   "A2_pass": true,
+   "normal_errors": 0,
+   "normal_drawn": true,
+   "blocked_runs": 7,
+   "A3_pass": true,
+   "rows": [
+    {
+     "blocked": "c2-pilot-kid4-idleanim-mask.png",
+     "drawn": true,
+     "colours": 14038,
+     "other_share": 0.564,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "c2-pilot-kid4-idleanim.png",
+     "drawn": true,
+     "colours": 14000,
+     "other_share": 0.566,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "c2-pilot-kid4-pt-mask.json",
+     "drawn": true,
+     "colours": 14037,
+     "other_share": 0.564,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "c2-pilot-kid4-pt-mask.png",
+     "drawn": true,
+     "colours": 14036,
+     "other_share": 0.564,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "c2-pilot-kid4-pt-shademap.json",
+     "drawn": true,
+     "colours": 14037,
+     "other_share": 0.564,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "c2-pilot-kid4-pt.png",
+     "drawn": true,
+     "colours": 14008,
+     "other_share": 0.635,
+     "page_errors": 0,
+     "err": []
+    },
+    {
+     "blocked": "* every file",
+     "drawn": true,
+     "colours": 13734,
+     "other_share": 0.637,
+     "page_errors": 0,
+     "err": []
+    }
+   ]
+  }
+ },
+ "pass": true
+}

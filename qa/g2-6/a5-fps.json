@@ -1,0 +1,88 @@
+{
+ "fps": {
+  "old": [
+   23.417721518987342,
+   24.796776419065406,
+   24.972530216761562
+  ],
+  "new": [
+   24.722949694461775,
+   24.721631760966513,
+   24.268451013682213
+  ]
+ },
+ "median": {
+  "old": 24.8,
+  "new": 24.72
+ },
+ "info": {
+  "old": {
+   "old_sheets": true,
+   "files": [
+    "c2-pilot-kid4-walk.png",
+    "c2-pilot-kid4-walkhold.png",
+    "c2-held-lantern_L0-S-trial.png",
+    "c2-held-lantern_L0-S-trial-light.png",
+    "c2-pilot-kid4-idleanim.png",
+    "c2-held-lantern_L0-S-trial.json",
+    "kid-bob-walk.png",
+    "kid-bob-idle.png",
+    "c2-pilot-hold-anchors.json",
+    "c2-pilot-anchors.json",
+    "g24-tiles-path.png",
+    "g24-tiles-cliff.png",
+    "g24-hut.png",
+    "g24-hut-door.png",
+    "g24-cave-mouth.png",
+    "g24-tree-a.png",
+    "g24-tree-b.png",
+    "g24-lamp.png",
+    "g24-gate.png",
+    "g24-props.png",
+    "g24-slime.png",
+    "cave-floor.jpg",
+    "g24-tiles.json",
+    "g24-hut.json",
+    "g24-props.json",
+    "g24-slime.json",
+    "g24-cave-mouth.json"
+   ]
+  },
+  "old_moving": true,
+  "new": {
+   "old_sheets": false,
+   "files": [
+    "c2-pilot-kid4-walk.png",
+    "c2-pilot-kid4-idleanim.png",
+    "c2-pilot-kid4-walkhold.png",
+    "c2-held-lantern_L0-S-trial.png",
+    "c2-held-lantern_L0-S-trial-light.png",
+    "c2-held-lantern_L0-S-trial.json",
+    "c2-pilot-hold-anchors.json",
+    "c2-pilot-anchors.json",
+    "g24-tiles-path.png",
+    "g24-tiles-cliff.png",
+    "g24-hut.png",
+    "g24-hut-door.png",
+    "g24-cave-mouth.png",
+    "g24-tree-a.png",
+    "g24-tree-b.png",
+    "g24-lamp.png",
+    "g24-gate.png",
+    "g24-props.png",
+    "g24-slime.png",
+    "cave-floor.jpg",
+    "g24-tiles.json",
+    "g24-slime.json",
+    "g24-hut.json",
+    "g24-props.json",
+    "g24-cave-mouth.json"
+   ]
+  },
+  "new_moving": true
+ },
+ "errors": [],
+ "measure_s": 30,
+ "ratio_new_vs_old": 0.997,
+ "pass": true
+}
