@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-# G2.3 S5 portrait Pilot page test (Claude · 1 Nov 2569) · ASSET_SPEC_14 v1.1 section 4.7 (screen) + page = Python renderer + fallbacks.
+# G2.3 S5 portrait Pilot page test (Claude · 1 Nov 2569 · v1.1 after Codex T11) · ASSET_SPEC_14 v1.1 section 4.7 (screen) + page = Python renderer + fallbacks.
 # Runs pilot-g2-portrait.html in Chromium on the phone sizes of 4.7 (740x360 / 844x390 / 915x412 at DPR 2 / 2.625 / 3) and iPad 1180x820 @ 2.
+# v1.1: S5-s small windows at DPR 1 / 2 (T11 R4) · S5-f adds the kid mask missing alone (R2) and masks that load but carry wrong data (R3)
 # usage: python3 -I test_g2_portrait.py PORT OUT_DIR      (exit 0 = all PASS)
-import sys, os, json
+import sys, os, json, io
 import numpy as np
 from PIL import Image
 from playwright.sync_api import sync_playwright
@@ -29,19 +30,29 @@ SETS = ['Brown/Green/Medium/Wing', 'Black/Brown/Light/Sun', 'Blonde/Blue/Deep/Su
 def opts(s):
     h, e, k, u = s.split('/'); n = lambda g, x: [a for a, _ in q.RAMPS[g]].index(x)
     return {'hair': n('hair', h), 'iris': n('iris', e), 'skin': n('skin', k), 'house': n('house', u)}
-GEO = """()=>{const V=PT.view(),d=devicePixelRatio;const art=[V.x/d,V.y/d,(V.x+384*V.k)/d,(V.y+384*V.k)/d],kid=[V.kx/d,V.ky/d,(V.kx+96*V.k2)/d,(V.ky+96*V.k2)/d];
+GEO = """()=>{const V=PT.view(),d=devicePixelRatio,L=V.left/d,T=V.top/d;const art=[L+V.x/d,T+V.y/d,L+(V.x+384*V.k)/d,T+(V.y+384*V.k)/d],kid=[L+V.kx/d,T+V.ky/d,L+(V.kx+96*V.k2)/d,T+(V.ky+96*V.k2)/d];
   const bs=[...document.querySelectorAll('.sw')];const out={V,small:[],covered:[],overlapArt:[],overlapBtn:0,blitBad:PT.checkBlit()};
-  const hitR=(c,r)=>c.left<r[2]&&r[0]<c.right&&c.top<r[3]&&r[1]<c.bottom,hit=(a,b)=>a.left<b.right&&b.left<a.right&&a.top<b.bottom&&b.top<a.bottom;
+  const sr0=document.getElementById('stage').getBoundingClientRect(),clip=r=>[Math.max(r[0],sr0.left),Math.max(r[1],sr0.top),Math.min(r[2],sr0.right),Math.min(r[3],sr0.bottom)];
+  const hitR0=(c,r)=>c.left<r[2]&&r[0]<c.right&&c.top<r[3]&&r[1]<c.bottom,hitR=(c,r)=>hitR0(c,clip(r)),hit=(a,b)=>a.left<b.right&&b.left<a.right&&a.top<b.bottom&&b.top<a.bottom;   // the art you can see = art inside the stage
   bs.forEach((b,i)=>{b.scrollIntoView({block:'nearest'});const c=b.getBoundingClientRect();if(c.width<44||c.height<44)out.small.push(i);
     const e=document.elementFromPoint(c.left+c.width/2,c.top+c.height/2);if(!(e===b||b.contains(e)))out.covered.push(i);if(hitR(c,art)||hitR(c,kid))out.overlapArt.push(i);
     bs.forEach((b2,j)=>{if(j>i&&hit(c,b2.getBoundingClientRect()))out.overlapBtn++})});
   const pan=document.getElementById('panel').getBoundingClientRect();out.panelHitsArt=hitR(pan,art)||hitR(pan,kid);
-  out.artInView=V.x>=0&&V.y>=0&&V.x+384*V.k<=V.cw&&V.y+384*V.k<=V.ch&&V.kx+96*V.k2<=V.cw&&V.ky>=0;out.buttons=bs.length;return out}"""
+  out.artInView=V.x>=0&&V.y>=0&&V.x+384*V.k<=V.cw&&V.y+384*V.k<=V.ch&&V.kx>=0&&V.kx+96*V.k2<=V.cw&&V.ky>=0&&V.ky+96*V.k2<=V.ch;out.buttons=bs.length;
+  const st=document.getElementById('stage'),sr=st.getBoundingClientRect();out.stage={w:sr.width,h:sr.height,sw:st.scrollWidth,sh:st.scrollHeight,overflow:getComputedStyle(st).overflow};
+  // art inside the part of the stage you see without scrolling
+  out.artVisible=art[0]>=sr.left-1e-6&&art[1]>=sr.top-1e-6&&art[2]<=sr.right+1e-6&&art[3]<=sr.bottom+1e-6&&kid[0]>=sr.left-1e-6&&kid[1]>=sr.top-1e-6&&kid[2]<=sr.right+1e-6&&kid[3]<=sr.bottom+1e-6;
+  // art reachable by scrolling the stage
+  out.artReachable=Math.ceil(Math.max(art[2],kid[2])-sr.left)<=st.scrollWidth&&Math.ceil(Math.max(art[3],kid[3])-sr.top)<=st.scrollHeight;return out}"""
+def png_bytes(a):
+    f = io.BytesIO(); Image.fromarray(a).save(f, 'PNG'); return f.getvalue()
 with sync_playwright() as p:
     b = p.chromium.launch()
-    def page(vw, vh, dpr, block=None, collect=True):
-        c = b.new_context(viewport={'width': vw, 'height': vh}, device_scale_factor=dpr, has_touch=True); pg = c.new_page()
+    def page(vw, vh, dpr, block=None, collect=True, serve=None, locale=None):
+        c = b.new_context(viewport={'width': vw, 'height': vh}, device_scale_factor=dpr, has_touch=True, **({'locale': locale} if locale else {})); pg = c.new_page()
         for pat in block or []: pg.route(pat, lambda r: r.abort())
+        def fulfil(body): return lambda r: r.fulfill(status=200, body=body, content_type='image/png')
+        for pat, body in (serve or {}).items(): pg.route(pat, fulfil(body))
         pg.on('pageerror', lambda e: errs.append('pageerror ' + str(e)))
         if collect and not block: pg.on('console', lambda m: errs.append('console ' + m.text) if m.type == 'error' else None)
         pg.goto(URL); pg.wait_for_function('window.PT&&PT.S.ready', timeout=20000); return c, pg
@@ -56,6 +67,17 @@ with sync_playwright() as p:
                                            'small': g['small'], 'covered': g['covered'], 'overlapArt': g['overlapArt'], 'overlapBtn': g['overlapBtn'], 'panelHitsArt': g['panelHitsArt']}
     ok('S5-4.7 screens 740x360 / 844x390 / 915x412 at DPR 2 / 2.625 / 3 (+ iPad, upright phone): one canvas = stage in device px (CSS x DPR / canvas = 1 +- 0.002), portrait 384 x whole k and kid 96 x whole k2 at whole offsets, every art device px = its art px (0 wrong), '
        '21 colour buttons >= 44 CSS px, none covered (after scrolling the panel), none over the art, none overlapping', all(v['ok'] for v in geo.values()), geo)
+    # ---- T11 R4: small windows (a computer at DPR 1, small phones at DPR 2): whole scale, nothing cut off; if it can't fit, the stage scrolls to it ----
+    small = {}
+    for vw, vh, dpr, want_scroll in [(800, 600, 1, False), (390, 844, 1, False), (1280, 720, 1, False), (320, 568, 2, False), (360, 740, 2, False), (560, 420, 1, True)]:
+        c, pg = page(vw, vh, dpr); g = pg.evaluate(GEO); pg.screenshot(path=os.path.join(OUT, 'pt-small-%dx%d@%s.png' % (vw, vh, dpr))); c.close()
+        V = g['V']; whole = all(float(V[k]).is_integer() for k in ('x', 'y', 'kx', 'ky', 'k', 'k2'))
+        g['ok'] = (whole and V['k'] >= 1 and V['k2'] >= 1 and g['blitBad'] == 0 and g['artInView'] and g['artReachable'] and bool(V.get('scroll')) == want_scroll
+                   and (g['artVisible'] if not want_scroll else g['stage']['overflow'] == 'auto') and not g['small'] and not g['covered'] and not g['overlapArt'] and g['overlapBtn'] == 0)
+        small['%dx%d@%s' % (vw, vh, dpr)] = {'k': V['k'], 'k2': V['k2'], 'mode': V.get('mode'), 'scroll': V.get('scroll'), 'ok': g['ok'], 'blitBad': g['blitBad'],
+                                            'artVisible': g['artVisible'], 'artReachable': g['artReachable'], 'stage': g['stage']}
+    ok('S5-s small windows 800x600 / 390x844 / 1280x720 @ 1 and 320x568 / 360x740 @ 2: whole scale, every art device px right (0 wrong), portrait + kid fully on screen; '
+       '560x420 @ 1 (too small): whole scale and the stage scrolls to the art; buttons >= 44 CSS px, not covered', all(v['ok'] for v in small.values()), small)
     # ---- page renderer = Python renderer (16 sets, portrait 384 x 384 and kid 96 x 96, exact RGBA) ----
     c, pg = page(844, 390, 2.625); diffs = {}
     for s in SETS:
@@ -85,8 +107,32 @@ with sync_playwright() as p:
     bad = json.loads(json.dumps(SM)); bad['materials']['4']['shade_index_by_G'] = bad['materials']['4']['shade_index_by_G'][:3]
     pg.route('**/c2-pilot-kid4-pt-shademap.json', lambda r: r.fulfill(status=200, body=json.dumps(bad), content_type='application/json')); pg.reload(); pg.wait_for_function('window.PT&&PT.S.ready')
     half = pg.evaluate('[PT.S.warn,PT.S.errors]'); c.close(); fb['half shade map'] = half
-    ok('S5-f missing / broken files (portrait · mask · shade map · kid · every file · half-written shade map): a frame or the portrait as drawn is shown, a TH+EN note, 21 buttons, no error',
-       good and half == [['noMap'], []], fb)
+    # T11 R2 / R3: kid mask missing alone · masks that load but carry wrong data -> that picture shown as drawn (no part-recolour) + its own TH+EN note
+    kid_drawn = SA.copy(); kid_drawn[kid_drawn[..., 3] == 0] = 0
+    full_kid_mask = np.array(Image.open(os.path.join(HERE, 'c2-pilot-kid4-idleanim-mask.png')).convert('RGBA'))
+    m_g = mk.copy(); m_g[(mk[..., 0] == 4), 1] = 255                                   # Codex T11 R3 probe: G out of range for hair
+    m_id = mk.copy(); yx = np.argwhere(mk[..., 0] == 4)[:40]; m_id[yx[:, 0], yx[:, 1], 0] = 3; m_id[yx[:, 0], yx[:, 1], 1] = 0   # valid id + valid G, wrong counts (40 hair px marked skin shade 0)
+    S1 = {'hair': 5, 'iris': 2, 'skin': 1, 'house': 1}                                    # page default + hair 5
+    k_g = full_kid_mask.copy(); k_g[(k_g[..., 0] == 4) & (k_g[..., 3] == 255), 1] = 9    # kid hair shade 9 (ramp has 5)
+    probe = "()=>{const k0=PT.kidPixels(),p0=PT.ptPixels();PT.set({hair:5});const k1=PT.kidPixels(),p1=PT.ptPixels();let kc=0,pc=0;for(let i=0;i<k0.length;i++)if(k0[i]!==k1[i])kc++;for(let i=0;i<p0.length;i++)if(p0[i]!==p1[i])pc++;" \
+            "return{warn:PT.S.warn,warnShown:getComputedStyle(document.getElementById('warn')).display!=='none',warnText:document.getElementById('warn').textContent,ptChanged:pc,kidChanged:kc,errors:PT.S.errors,buttons:document.querySelectorAll('.sw').length,pt:p1,kid:k1}}"
+    extra = {}; WTXT = {'noKidMask': ('ไม่พบหน้ากากสีตัวในเกม', 'In-game kid colour mask missing'), 'badMask': ('หน้ากากสีรูปหน้าใหญ่เสีย', 'Portrait colour mask is damaged'),
+                        'badKidMask': ('หน้ากากสีตัวในเกมเสีย', 'In-game kid colour mask is damaged')}
+    for name, kw, want in [('kid mask only', {'block': ['**/c2-pilot-kid4-idleanim-mask.png']}, 'noKidMask'),
+                           ('portrait mask G out of range', {'serve': {'**/c2-pilot-kid4-pt-mask.png': png_bytes(m_g)}}, 'badMask'),
+                           ('portrait mask counts wrong', {'serve': {'**/c2-pilot-kid4-pt-mask.png': png_bytes(m_id)}}, 'badMask'),
+                           ('kid mask G out of range', {'serve': {'**/c2-pilot-kid4-idleanim-mask.png': png_bytes(k_g)}}, 'badKidMask')]:
+        c, pg = page(844, 390, 2.625, collect=False, locale='th-TH', **kw); r = pg.evaluate(probe); c.close()
+        ptA = np.array(r.pop('pt'), np.uint8).reshape(384, 384, 4); kA = np.array(r.pop('kid'), np.uint8).reshape(96, 96, 4)
+        kid_side = want in ('noKidMask', 'badKidMask')
+        r['shownAsDrawn'] = bool((kA == kid_drawn).all()) if kid_side else bool((ptA == pt).all())
+        r['otherStillRecolours'] = (r['ptChanged'] > 0 and bool((ptA == py_render(S1)).all())) if kid_side else r['kidChanged'] > 0
+        r['ok'] = (r['warn'] == [want] and r['warnShown'] and all(t in r['warnText'] for t in WTXT[want]) and r['shownAsDrawn'] and r['otherStillRecolours'] and not r['errors'] and r['buttons'] == 21)
+        extra[name] = r
+    fb.update(extra)
+    ok('S5-f missing / broken files (portrait · mask · shade map · kid · every file · half-written shade map · kid mask alone · masks with wrong data): '
+       'a frame or that picture as drawn is shown (never part-recoloured), its own TH+EN note, 21 buttons, no error',
+       good and half == [['noMap'], []] and all(v['ok'] for v in extra.values()), fb)
     b.close()
 ok('S5-e JS errors 0 across every load (page errors + console errors; blocked-file loads count page errors only)', not errs, errs[:5])
 p_ = sum(c['pass'] for c in CHECK); json.dump({'checks': CHECK, 'passed': p_, 'total': len(CHECK)}, open(os.path.join(OUT, 'results.json'), 'w'), ensure_ascii=False, indent=1)

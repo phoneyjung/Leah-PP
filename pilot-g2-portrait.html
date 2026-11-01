@@ -18,7 +18,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#1d1b2c;color:#ecebf5;
 <div id="stage"><canvas id="view" aria-label="portrait + in-game kid"></canvas></div>
 <div id="panel" role="group" aria-label="colours"><div id="rows"></div><div id="warn" role="status"></div><div id="note"></div></div>
 <script>
-// G2.3 S5 Pilot page (Claude · 1 Nov 2569) · ASSET_SPEC_14 v1.1 + D-PT-1/2/3 ก · GM test page only (not index.html, no save, no online).
+// G2.3 S5 Pilot page (Claude · 1 Nov 2569 · v1.1 after Codex T11: R2 kid mask named on its own · R3 masks checked before use · R4 small DPR 1 windows) · ASSET_SPEC_14 v1.1 + D-PT-1/2/3 ก · GM test page only (not index.html, no save, no online).
 // Shows c2-pilot-kid4-pt.png recoloured through its material mask (R = id, G = shade) and the shade map (D-PT-3: portrait shade -> game shade by
 // brightness), next to the in-game kid (sprite S idle f0, its own mask). One canvas the size of the stage in device pixels; the art is copied in at
 // whole device-pixel offsets and whole scale k (1 art px = k x k device px), smoothing off.
@@ -33,8 +33,10 @@ const RAMPS={ // Palette v1.2 (locked game ramps; skin = pilot proposal D3) · l
 const GROUP={3:'skin',4:'hair',5:'iris',8:'house'}, ORDER=['hair','iris','skin','house'];
 const TH_NAMES={hair:['ดำ','น้ำตาล','ทอง','แดง','ชมพู','ฟ้า','เงิน','เขียว'],iris:['น้ำตาล','ดำ','เขียว','ฟ้า','อำพัน'],skin:['ขาว','กลาง','แทน','เข้ม'],house:['อาทิตย์','ปีกฟ้า','ใบไม้','เปลวไฟ']};   // names used in the game (HAIRC / EYEC / HOUSES / skin)
 const T={th:{hair:'สีผม',iris:'สีตา',skin:'สีผิว',house:'บ้าน (ผ้าคลุม)',noPt:'ไม่พบไฟล์รูปหน้าใหญ่ — แสดงกรอบแทน',noMask:'ไม่พบหน้ากากสี — แสดงรูปตามต้นฉบับ เปลี่ยนสีไม่ได้',noMap:'ไม่พบตารางจับคู่เฉด — แสดงรูปตามต้นฉบับ',noKid:'ไม่พบภาพตัวในเกม',
+  badMask:'หน้ากากสีรูปหน้าใหญ่เสีย — แสดงรูปตามต้นฉบับ เปลี่ยนสีไม่ได้',noKidMask:'ไม่พบหน้ากากสีตัวในเกม — ตัวในเกมแสดงสีเดิม เปลี่ยนสีไม่ได้',badKidMask:'หน้ากากสีตัวในเกมเสีย — ตัวในเกมแสดงสีเดิม เปลี่ยนสีไม่ได้',
   note:'หน้าทดลอง GM · รูปซ้าย 1 พิกเซลภาพ = {k} พิกเซลจอ · ตัวในเกม {k2} เท่า · ปาก/แก้มคงสีเดิม (เหมือนตัวในเกม)'},
  en:{hair:'Hair',iris:'Eyes',skin:'Skin',house:'House (cape)',noPt:'Portrait file missing - showing a frame',noMask:'Colour mask missing - portrait shown as drawn',noMap:'Shade map missing - portrait shown as drawn',noKid:'In-game kid missing',
+  badMask:'Portrait colour mask is damaged - portrait shown as drawn',noKidMask:'In-game kid colour mask missing - kid shown as drawn',badKidMask:'In-game kid colour mask is damaged - kid shown as drawn',
   note:'GM test page · 1 art px = {k} screen px · kid x{k2} · mouth / cheek keep their colours (like the sprite)'}};
 const LANG=(navigator.language||'th').toLowerCase().startsWith('th')?'th':'en', tx=k=>T[LANG][k]+(LANG==='th'?' / '+T.en[k]:'');
 const S={opts:{hair:1,iris:2,skin:1,house:1},img:{},data:{},warn:[],ready:false,k:1,k2:1,errors:[]};   // default = sprite G1 default (Brown / Green / Medium / Wing)
@@ -45,6 +47,20 @@ async function loadJSON(src){try{const r=await fetch(src);if(!r.ok)return null;r
 function pixels(img,w,h,sx=0,sy=0){const c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d');g.drawImage(img,sx,sy,w,h,0,0,w,h);return g.getImageData(0,0,w,h)}
 function validMap(m,mj){try{for(const id in GROUP){const e=m.materials[id],sh=mj.materials[id].shades,n=RAMPS[GROUP[id]][0][1].split(' ').length;
   if(!e||!Array.isArray(e.shade_index_by_G)||e.shade_index_by_G.length!==sh.length||!e.shade_index_by_G.every(v=>Number.isInteger(v)&&v>=0&&v<n))return false}return true}catch(e){return false}}
+// T11 R3: a mask that loads but carries wrong data must not recolour part of the art silently -> check it first (else: art as drawn + a note).
+// Portrait mask: every opaque px has mask alpha 255 and an id 1-11, a colour-changing id has a G inside its shade map, and the px count of every
+// (id, G) equals pt-mask.json; every clear px is clear in the mask.
+function validPtMask(P,M,MP,mj){try{const p=P.data,m=M.data,h=new Map();
+  for(let i=0;i<p.length;i+=4){if(p[i+3]===0){if(m[i+3]!==0)return false;continue}
+    const id=m[i],g=m[i+1];if(m[i+3]!==255||id<1||id>11)return false;if(id in GROUP&&!(g<MP[id].length))return false;const key=id*256+g;h.set(key,(h.get(key)||0)+1)}
+  const want=new Map();for(const id in mj.materials){const e=mj.materials[id];
+    if(Array.isArray(e.px))e.px.forEach((n,g)=>{if(n)want.set(id*256+g,n)});else if(e.parts)for(const q of Object.values(e.parts))q.px.forEach((n,j)=>{if(n)want.set(id*256+q.g0+j,n)});else return false}
+  if(want.size!==h.size)return false;for(const [key,n] of want)if(h.get(key)!==n)return false;return true}catch(e){return false}}
+// In-game kid mask (sprite rules): every opaque px has mask alpha 255 and an id 1-11, a colour-changing id has G < its ramp length, all 4 groups are present.
+function validKidMask(K,KM){try{const p=K.data,m=KM.data,seen={};
+  for(let i=0;i<p.length;i+=4){if(p[i+3]===0){if(m[i+3]!==0)return false;continue}
+    const id=m[i];if(m[i+3]!==255||id<1||id>11)return false;if(id in GROUP){if(!(m[i+1]<RAMPS[GROUP[id]][0][1].split(' ').length))return false;seen[id]=1}}
+  return Object.keys(GROUP).every(id=>seen[id])}catch(e){return false}}
 const OFF={pt:document.createElement('canvas'),kid:document.createElement('canvas')};OFF.pt.width=OFF.pt.height=384;OFF.kid.width=OFF.kid.height=96;
 const V={x:0,y:0,kx:0,ky:0,k:1,k2:1};
 function renderPt(){const c=OFF.pt,g=c.getContext('2d');g.imageSmoothingEnabled=false;g.clearRect(0,0,384,384);
@@ -65,10 +81,25 @@ function layout(){const dpr=window.devicePixelRatio||1,W=innerWidth,H=innerHeigh
   const devW=Math.floor(aw*dpr),devH=Math.floor(ah*dpr),gap=Math.round(8*dpr);
   let k=Math.max(1,Math.floor(Math.min((devW-3*gap)/(384+96*0.5),(devH-2*gap)/384)));                 // portrait scale (whole device px)
   let k2=Math.max(1,Math.min(Math.floor(k*2),Math.floor((devW-3*gap-384*k)/96)));                     // kid scale (whole device px)
-  if(384*k+96*k2+3*gap>devW)k2=1;S.k=k;S.k2=k2;
-  const view=document.getElementById('view');view.style.width=aw+'px';view.style.height=ah+'px';view.width=Math.round(aw*dpr);view.height=Math.round(ah*dpr);
-  const totalW=384*k+gap+96*k2,x0=Math.max(gap,Math.floor((view.width-totalW)/2)),y0=Math.max(0,Math.floor((view.height-384*k)/2));
-  Object.assign(V,{x:x0,y:y0,kx:x0+384*k+gap,ky:y0+384*k-96*k2,k,k2});blit();
+  if(384*k+96*k2+3*gap>devW)k2=1;
+  // T11 R4: a small window (e.g. a computer at DPR 1) cannot fit 384 + 96 side by side -> keep whole scale and put the kid under the portrait,
+  // use a smaller gap, or (last) let the stage scroll. Never a fractional scale.
+  const fits=(m,a,b,g)=>m==='side'?384*a+96*b+3*g<=devW&&384*a+2*g<=devH:Math.max(384*a,96*b)+2*g<=devW&&384*a+96*b+3*g<=devH;
+  let mode='side',g=gap,scroll=false;
+  if(!fits('side',k,k2,gap)){let best=null;
+    for(const gg of [gap,Math.max(2,Math.round(gap/4))])for(const m of ['side','stack'])for(let a=k;a>=1;a--)for(let b=2*a;b>=1;b--)
+      if(fits(m,a,b,gg)&&(!best||a>best.k||(a===best.k&&b>best.k2)))best={m,k:a,k2:b,g:gg};
+    if(best){mode=best.m;k=best.k;k2=best.k2;g=best.g}else{k=1;k2=1;g=Math.max(2,Math.round(gap/4));mode=devW>=devH?'side':'stack';scroll=true}}
+  S.k=k;S.k2=k2;
+  const cw=mode==='side'?384*k+96*k2+3*g:Math.max(384*k,96*k2)+2*g,ch=mode==='side'?384*k+2*g:384*k+96*k2+3*g;
+  const view=document.getElementById('view');stage.style.overflow=scroll?'auto':'hidden';
+  if(scroll){view.width=Math.max(Math.round(aw*dpr),cw);view.height=Math.max(Math.round(ah*dpr),ch);view.style.width=(view.width/dpr)+'px';view.style.height=(view.height/dpr)+'px'}
+  else{view.style.width=aw+'px';view.style.height=ah+'px';view.width=Math.round(aw*dpr);view.height=Math.round(ah*dpr)}
+  if(mode==='side'){const totalW=384*k+g+96*k2,x0=Math.max(g,Math.floor((view.width-totalW)/2)),y0=Math.max(0,Math.floor((view.height-384*k)/2));
+    Object.assign(V,{x:x0,y:y0,kx:x0+384*k+g,ky:y0+384*k-96*k2,k,k2,mode,scroll})}
+  else{const totalH=384*k+g+96*k2,x0=Math.max(g,Math.floor((view.width-384*k)/2)),y0=Math.max(g,Math.floor((view.height-totalH)/2));
+    Object.assign(V,{x:x0,y:y0,kx:Math.max(g,Math.floor((view.width-96*k2)/2)),ky:y0+384*k+g,k,k2,mode,scroll})}
+  blit();
   document.getElementById('note').textContent=tx('note').replace(/\{k\}/g,k).replace(/\{k2\}/g,k2)}
 function buildUI(){const rows=document.getElementById('rows');rows.innerHTML='';
   for(const g of ORDER){const h=document.createElement('h2');h.textContent=tx(g);rows.appendChild(h);const row=document.createElement('div');row.className='row';row.dataset.group=g;
@@ -85,8 +116,11 @@ async function boot(){buildUI();layout();
     loadJSON('c2-pilot-kid4-pt-shademap.json'),loadJSON('c2-pilot-kid4-pt-mask.json')]);
   if(pt&&pt.naturalWidth===384&&pt.naturalHeight===384)S.data.pt=pixels(pt,384,384);else S.warn.push('noPt');
   if(S.data.pt){if(mask&&mask.naturalWidth===384&&mask.naturalHeight===384)S.data.mask=pixels(mask,384,384);else S.warn.push('noMask');
-    if(S.data.mask){if(map&&mj&&validMap(map,mj)){S.data.map={};for(const id in GROUP)S.data.map[id]=map.materials[id].shade_index_by_G}else S.warn.push('noMap')}}
-  if(kid&&kid.naturalWidth>=96&&kid.naturalHeight>=96){S.data.kid=pixels(kid,96,96);if(kidMask&&kidMask.naturalWidth>=96)S.data.kidMask=pixels(kidMask,96,96)}else S.warn.push('noKid');
+    if(S.data.mask){if(map&&mj&&validMap(map,mj)){S.data.map={};for(const id in GROUP)S.data.map[id]=map.materials[id].shade_index_by_G;
+        if(!validPtMask(S.data.pt,S.data.mask,S.data.map,mj)){S.data.mask=null;S.data.map=null;S.warn.push('badMask')}}else S.warn.push('noMap')}}
+  if(kid&&kid.naturalWidth>=96&&kid.naturalHeight>=96){S.data.kid=pixels(kid,96,96);   // T11 R2: the kid's own mask is checked on its own and named when missing
+    if(kidMask&&kidMask.naturalWidth>=96&&kidMask.naturalHeight>=96){const KM=pixels(kidMask,96,96);if(validKidMask(S.data.kid,KM))S.data.kidMask=KM;else S.warn.push('badKidMask')}
+    else S.warn.push('noKidMask')}else S.warn.push('noKid');
   showWarn();draw();S.ready=true}
 addEventListener('resize',()=>{layout()});
 addEventListener('error',e=>S.errors.push(String(e.message)));

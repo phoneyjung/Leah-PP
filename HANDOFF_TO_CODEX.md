@@ -3,7 +3,20 @@
 
 ---
 
-## งาน T11 · ตรวจอิสระ G2.3 S5 รูปหน้าใหญ่เปลี่ยนสีได้ (อ่าน + รันเท่านั้น) · สถานะ: รอ Codex
+## งาน T12 · ตรวจซ้ำการแก้ R1–R4 ของ G2.3 S5 (อ่าน + รันเท่านั้น) · สถานะ: รอ Codex
+- **วันที่:** 1 พ.ย. 2569 · ไม่ใช้เครดิต · ไม่เกิน ~1 ชั่วโมง
+- **branch ฐาน:** `claude/g2-pilot` (commit ที่มีงานนี้) · **branch ส่งงาน:** `codex/t12-recheck-g23-s5` · ส่งไฟล์เดียว `REVIEW_CODEX_T12_G23_S5.md` + 1 บรรทัด `CODEX_STATUS.md`
+- **อ่าน:** `qa/g2-3-portrait/s5/RESPONSE_T11.md` (Claude ตอบ R1–R4) · diff ของ `qa/g2-3-portrait/tools/pt_s5.py` `pilot-g2-portrait.html` `test_g2_portrait.py` จาก `46e1c4f`
+- **รัน:** `python3 -I qa/g2-3-portrait/tools/pt_s5.py . <OUT>` (Claude: exit 0 · ไม่เขียนไฟล์ในที่เก็บแล้ว) · `python3 -I qa/g2-3-portrait/tools/pt_s5.py . --selftest <OUT.json>` (Claude: 9/9 exit 0) · `python3 -I test_g2_portrait.py <PORT> <OUT>` (Claude: 6/6 exit 0)
+- **ลองซ้ำด้วยวิธีของ Codex เองอย่างน้อย:** R1 (ฉีดสีผิดเข้า render แล้วดูว่าตก exit 1) · R2 (บล็อกหน้ากากตัวในเกมอย่างเดียว) · R3 (หน้ากาก G เสีย และแบบรหัสถูกช่วงแต่จำนวนไม่ตรง) · R4 (800×600 / 390×844 ที่ DPR 1 + จอเล็กอื่นที่เลือกเอง)
+- **ตอบ:** R1–R4 แต่ละข้อ ผ่าน / ยังไม่ผ่าน + หลักฐานตัวเลข · ข้อทดสอบใหม่ (selftest · S5-s · S5-f ส่วนเพิ่ม) วัดของจริงไหม · พบปัญหาใหม่ไหม · 7 จอเดิมเปลี่ยนตำแหน่งไหม
+- **ห้าม:** แก้ไฟล์ของ Claude หรือไฟล์ภาพ · push `main` · force push · ใช้เครดิต
+- **หยุดเมื่อ:** push แล้ว ตอบเจ้าของสั้น ๆ (ผลรัน · R1–R4 ผ่านกี่ข้อ · พบใหม่กี่ข้อ)
+
+---
+
+## งาน T11 · ตรวจอิสระ G2.3 S5 รูปหน้าใหญ่เปลี่ยนสีได้ (อ่าน + รันเท่านั้น) · สถานะ: เสร็จ (1 พ.ย. 2569)
+- **ผล:** `codex/t11-review-g23-s5` @ `982fa9d` (รวมแล้ว) · 5/5 · browser จริง 640 ชุด ผิด 0 · screenshot DPR 2.625 3/3 ตรง 0 px · พบ 4 ข้อ (กลาง 2 ต่ำ 2) → แก้ครบ `qa/g2-3-portrait/s5/RESPONSE_T11.md` · งานต่อ = T12
 - **วันที่:** 1 พ.ย. 2569 · ไม่ใช้เครดิต · ประมาณ 1–2 ชั่วโมง
 - **branch ฐาน:** `claude/g2-pilot` (commit ที่มีงานนี้) · **branch ส่งงาน:** `codex/t11-review-g23-s5` · ส่งไฟล์เดียว `REVIEW_CODEX_T11_G23_S5.md` + 1 บรรทัด `CODEX_STATUS.md`
 - **อ่าน:** `qa/g2-3-portrait/s5/README.md` · `qa/g2-3-portrait/tools/pt_s5.py` · `c2-pilot-kid4-pt-shademap.json` · `pilot-g2-portrait.html` · `test_g2_portrait.py` · `ASSET_SPEC_14` ข้อ 4.5–4.8 · `G2_3_PORTRAIT_PLAN.md` ข้อ 6 (D-PT-3)

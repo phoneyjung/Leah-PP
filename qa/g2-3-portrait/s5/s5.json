@@ -1,4 +1,5 @@
 {
+ "version": "1.1",
  "shade_map": {
   "schema": 1,
   "image": "c2-pilot-kid4-pt.png",
@@ -122,27 +123,16 @@
  "leak_640": {
   "combos": 640,
   "renders": 1871,
+  "oracle_wrong_px": 0,
   "cross_material_px": 0,
   "fixed_changed_px": 0,
   "alpha_changed_px": 0,
+  "not_in_ramp_colours": 0,
   "unchanged_when_option_changes_px": 0
  },
  "signal": {
-  "colours_checked": 128,
+  "output_colours": 128,
   "hits": [
-   {
-    "colour": "#F0CC70",
-    "signal": "#FFC857",
-    "dE00": 5.1,
-    "from": [
-     [
-      "hair",
-      "Blonde",
-      3
-     ]
-    ],
-    "locked_exception": true
-   },
    {
     "colour": "#E6B446",
     "signal": "#FFC857",
@@ -165,6 +155,19 @@
       "house",
       "Sun",
       1
+     ]
+    ],
+    "locked_exception": true
+   },
+   {
+    "colour": "#F0CC70",
+    "signal": "#FFC857",
+    "dE00": 5.1,
+    "from": [
+     [
+      "hair",
+      "Blonde",
+      3
      ]
     ],
     "locked_exception": true
@@ -198,9 +201,9 @@
   ],
   "unexpected_hits": [],
   "exception_px_when_used": {
-   "hair Blonde shade 4 #F0CC70": 1808,
    "iris Amber shade 3 #E6B446": 131,
    "house Sun shade 2 #F0B512": 4476,
+   "hair Blonde shade 4 #F0CC70": 1808,
    "house Sun shade 3 #F3C546": 202,
    "house Sun shade 4 #F6D579": 6075
   },
@@ -210,7 +213,7 @@
    "#7FE0FF": 20.26
   }
  },
- "default_fidelity": {
+ "default_fidelity_after_mapping": {
   "skin": {
    "mean_dE00": 4.06,
    "p95_dE00": 7.79
@@ -229,7 +232,8 @@
   }
  },
  "pass": {
-  "4.5 cross-material px = 0, fixed px changed = 0, alpha changed = 0 over 640 combos": true,
-  "4.6 signal hits outside the 5 locked exceptions = 0": true
+  "map: shade map on disk = D-PT-3 build (byte for byte)": true,
+  "4.5 640 renders = pixel oracle (0 wrong px) · cross-material px 0 · fixed px changed 0 · alpha changed 0 · every recolour output colour is a Palette shade": true,
+  "4.6 signal hits in the OUTPUT colours outside the 5 locked exceptions = 0": true
  }
 }

@@ -112,6 +112,114 @@
    }
   },
   {
+   "check": "S5-s small windows 800x600 / 390x844 / 1280x720 @ 1 and 320x568 / 360x740 @ 2: whole scale, every art device px right (0 wrong), portrait + kid fully on screen; 560x420 @ 1 (too small): whole scale and the stage scrolls to the art; buttons >= 44 CSS px, not covered",
+   "pass": true,
+   "value": {
+    "800x600@1": {
+     "k": 1,
+     "k2": 2,
+     "mode": "stack",
+     "scroll": false,
+     "ok": true,
+     "blitBad": 0,
+     "artVisible": true,
+     "artReachable": true,
+     "stage": {
+      "w": 464,
+      "h": 600,
+      "sw": 464,
+      "sh": 600,
+      "overflow": "hidden"
+     }
+    },
+    "390x844@1": {
+     "k": 1,
+     "k2": 1,
+     "mode": "stack",
+     "scroll": false,
+     "ok": true,
+     "blitBad": 0,
+     "artVisible": true,
+     "artReachable": true,
+     "stage": {
+      "w": 390,
+      "h": 490,
+      "sw": 390,
+      "sh": 490,
+      "overflow": "hidden"
+     }
+    },
+    "1280x720@1": {
+     "k": 1,
+     "k2": 2,
+     "mode": "side",
+     "scroll": false,
+     "ok": true,
+     "blitBad": 0,
+     "artVisible": true,
+     "artReachable": true,
+     "stage": {
+      "w": 920,
+      "h": 720,
+      "sw": 920,
+      "sh": 720,
+      "overflow": "hidden"
+     }
+    },
+    "320x568@2": {
+     "k": 1,
+     "k2": 2,
+     "mode": "side",
+     "scroll": false,
+     "ok": true,
+     "blitBad": 0,
+     "artVisible": true,
+     "artReachable": true,
+     "stage": {
+      "w": 320,
+      "h": 329,
+      "sw": 320,
+      "sh": 329,
+      "overflow": "hidden"
+     }
+    },
+    "360x740@2": {
+     "k": 1,
+     "k2": 2,
+     "mode": "side",
+     "scroll": false,
+     "ok": true,
+     "blitBad": 0,
+     "artVisible": true,
+     "artReachable": true,
+     "stage": {
+      "w": 360,
+      "h": 429,
+      "sw": 360,
+      "sh": 429,
+      "overflow": "hidden"
+     }
+    },
+    "560x420@1": {
+     "k": 1,
+     "k2": 1,
+     "mode": "stack",
+     "scroll": true,
+     "ok": true,
+     "blitBad": 0,
+     "artVisible": false,
+     "artReachable": true,
+     "stage": {
+      "w": 324,
+      "h": 420,
+      "sw": 388,
+      "sh": 486,
+      "overflow": "auto"
+     }
+    }
+   }
+  },
+  {
    "check": "S5-r page colours = Python renderer (shade map D-PT-3) for all 16 sets: portrait px different 0 · in-game kid px different 0",
    "pass": true,
    "value": {
@@ -192,7 +300,7 @@
    }
   },
   {
-   "check": "S5-f missing / broken files (portrait · mask · shade map · kid · every file · half-written shade map): a frame or the portrait as drawn is shown, a TH+EN note, 21 buttons, no error",
+   "check": "S5-f missing / broken files (portrait · mask · shade map · kid · every file · half-written shade map · kid mask alone · masks with wrong data): a frame or that picture as drawn is shown (never part-recoloured), its own TH+EN note, 21 buttons, no error",
    "pass": true,
    "value": {
     "portrait png": {
@@ -246,7 +354,63 @@
       "noMap"
      ],
      []
-    ]
+    ],
+    "kid mask only": {
+     "warn": [
+      "noKidMask"
+     ],
+     "warnShown": true,
+     "warnText": "ไม่พบหน้ากากสีตัวในเกม — ตัวในเกมแสดงสีเดิม เปลี่ยนสีไม่ได้ / In-game kid colour mask missing - kid shown as drawn",
+     "ptChanged": 55317,
+     "kidChanged": 0,
+     "errors": [],
+     "buttons": 21,
+     "shownAsDrawn": true,
+     "otherStillRecolours": true,
+     "ok": true
+    },
+    "portrait mask G out of range": {
+     "warn": [
+      "badMask"
+     ],
+     "warnShown": true,
+     "warnText": "หน้ากากสีรูปหน้าใหญ่เสีย — แสดงรูปตามต้นฉบับ เปลี่ยนสีไม่ได้ / Portrait colour mask is damaged - portrait shown as drawn",
+     "ptChanged": 0,
+     "kidChanged": 2565,
+     "errors": [],
+     "buttons": 21,
+     "shownAsDrawn": true,
+     "otherStillRecolours": true,
+     "ok": true
+    },
+    "portrait mask counts wrong": {
+     "warn": [
+      "badMask"
+     ],
+     "warnShown": true,
+     "warnText": "หน้ากากสีรูปหน้าใหญ่เสีย — แสดงรูปตามต้นฉบับ เปลี่ยนสีไม่ได้ / Portrait colour mask is damaged - portrait shown as drawn",
+     "ptChanged": 0,
+     "kidChanged": 2565,
+     "errors": [],
+     "buttons": 21,
+     "shownAsDrawn": true,
+     "otherStillRecolours": true,
+     "ok": true
+    },
+    "kid mask G out of range": {
+     "warn": [
+      "badKidMask"
+     ],
+     "warnShown": true,
+     "warnText": "หน้ากากสีตัวในเกมเสีย — ตัวในเกมแสดงสีเดิม เปลี่ยนสีไม่ได้ / In-game kid colour mask is damaged - kid shown as drawn",
+     "ptChanged": 55317,
+     "kidChanged": 0,
+     "errors": [],
+     "buttons": 21,
+     "shownAsDrawn": true,
+     "otherStillRecolours": true,
+     "ok": true
+    }
    }
   },
   {
@@ -255,6 +419,6 @@
    "value": []
   }
  ],
- "passed": 5,
- "total": 5
+ "passed": 6,
+ "total": 6
 }
