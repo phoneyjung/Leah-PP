@@ -9,6 +9,7 @@
 #   - signal check: the colours found in those 640 outputs, each with where it came from (material, option, shade), are measured against the signal colours
 #   - build and check are separate: by default nothing in REPO_ROOT is written; the shade map on disk must equal the D-PT-3 build byte for byte
 #   - --selftest: the checker is run on broken renderers / a wrong shade map and must FAIL each one (exit 0 = every fault caught)
+# v1.1.1 (Codex T12 note): importing qa_asset09_a3 from REPO_ROOT no longer leaves REPO_ROOT/__pycache__ behind (dont_write_bytecode)
 # usage: python3 -I pt_s5.py REPO_ROOT OUT_DIR [--write-map]   -> OUT_DIR/s5.json, OUT_DIR/pt-16-sets.png   (--write-map: also (re)write the shade map)
 #        python3 -I pt_s5.py REPO_ROOT --selftest [OUT.json]
 import sys, os, json, itertools
@@ -17,8 +18,8 @@ from PIL import Image, ImageDraw
 from skimage.color import rgb2lab, deltaE_ciede2000
 ROOT = sys.argv[1]; SELFTEST = '--selftest' in sys.argv; WRITE = '--write-map' in sys.argv
 rest = [a for a in sys.argv[2:] if not a.startswith('--')]; OUT = rest[0] if rest else None
-sys.path.insert(0, ROOT)
-import qa_asset09_a3 as q          # RAMPS (locked game ramps, Palette v1.2), sprite renderer
+sys.path.insert(0, ROOT); sys.dont_write_bytecode = True   # T12: write nothing into REPO_ROOT, not even an import cache
+import qa_asset09_a3 as q         # RAMPS (locked game ramps, Palette v1.2), sprite renderer
 
 GROUP = {3: 'skin', 4: 'hair', 5: 'iris', 8: 'house'}; GORDER = ('hair', 'iris', 'skin', 'house')
 SIG = {'#FFC857': 'gold (tap)', '#5FE0FF': 'cyan', '#7FE0FF': 'cyan old'}

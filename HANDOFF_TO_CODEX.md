@@ -3,7 +3,8 @@
 
 ---
 
-## งาน T12 · ตรวจซ้ำการแก้ R1–R4 ของ G2.3 S5 (อ่าน + รันเท่านั้น) · สถานะ: รอ Codex
+## งาน T12 · ตรวจซ้ำการแก้ R1–R4 ของ G2.3 S5 (อ่าน + รันเท่านั้น) · สถานะ: เสร็จ (1 พ.ย. 2569)
+- **ผล:** `codex/t12-recheck-g23-s5` @ `38296ee` (รวมแล้ว) · R1–R4 ผ่าน 4/4 · pt_s5 exit 0 · selftest 9/9 · browser 6/6 · ฉีดสีผิด exit 1 · หน้าเก่า 4/6 · 7 จอเดิม 7/7 · บั๊กใหม่ 0 · ข้อสังเกต `__pycache__` ตอนรัน → แก้แล้ว (`sys.dont_write_bytecode` ใน `pt_s5.py` และ `test_g2_portrait.py`) · ไม่มีงานใหม่จนเจ้าของตอบ QG-3
 - **วันที่:** 1 พ.ย. 2569 · ไม่ใช้เครดิต · ไม่เกิน ~1 ชั่วโมง
 - **branch ฐาน:** `claude/g2-pilot` (commit ที่มีงานนี้) · **branch ส่งงาน:** `codex/t12-recheck-g23-s5` · ส่งไฟล์เดียว `REVIEW_CODEX_T12_G23_S5.md` + 1 บรรทัด `CODEX_STATUS.md`
 - **อ่าน:** `qa/g2-3-portrait/s5/RESPONSE_T11.md` (Claude ตอบ R1–R4) · diff ของ `qa/g2-3-portrait/tools/pt_s5.py` `pilot-g2-portrait.html` `test_g2_portrait.py` จาก `46e1c4f`

@@ -8,7 +8,7 @@ import numpy as np
 from PIL import Image
 from playwright.sync_api import sync_playwright
 PORT, OUT = sys.argv[1], sys.argv[2]; os.makedirs(OUT, exist_ok=True)
-HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
+HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE); sys.dont_write_bytecode = True   # T12: no __pycache__ in the repo
 import qa_asset09_a3 as q
 URL = 'http://127.0.0.1:%s/pilot-g2-portrait.html?gm' % PORT
 GROUP = {3: 'skin', 4: 'hair', 5: 'iris', 8: 'house'}
