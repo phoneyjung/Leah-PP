@@ -1,0 +1,71 @@
+{
+ "pass": true,
+ "rows": [
+  {
+   "page": "motion",
+   "sheet": "walk",
+   "errors": [],
+   "ok": false,
+   "anim": "walk",
+   "holding": false,
+   "kid_frames": 36,
+   "min_src_w": 384,
+   "pass": true
+  },
+  {
+   "page": "motion",
+   "sheet": "idleanim",
+   "errors": [],
+   "ok": false,
+   "anim": "walk",
+   "holding": false,
+   "kid_frames": 36,
+   "min_src_w": 576,
+   "pass": true
+  },
+  {
+   "page": "motion",
+   "sheet": "walkhold",
+   "errors": [],
+   "ok": false,
+   "anim": "walk",
+   "holding": false,
+   "kid_frames": 36,
+   "min_src_w": 576,
+   "pass": true
+  },
+  {
+   "page": "scene",
+   "sheet": "walk",
+   "errors": [],
+   "ok": false,
+   "anim": "walk",
+   "holding": false,
+   "kid_frames": 36,
+   "min_src_w": 384,
+   "pass": true
+  },
+  {
+   "page": "scene",
+   "sheet": "idleanim",
+   "errors": [],
+   "ok": false,
+   "anim": "walk",
+   "holding": false,
+   "kid_frames": 36,
+   "min_src_w": 576,
+   "pass": true
+  },
+  {
+   "page": "scene",
+   "sheet": "walkhold",
+   "errors": [],
+   "ok": false,
+   "anim": "walk",
+   "holding": false,
+   "kid_frames": 36,
+   "min_src_w": 576,
+   "pass": true
+  }
+ ]
+}

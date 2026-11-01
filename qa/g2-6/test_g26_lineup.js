@@ -27,15 +27,35 @@ const URL = 'http://127.0.0.1:' + PORT + '/pilot-g2-portrait.html?gm';
     await p.waitForTimeout(400);
     await p.touchscreen.tap(...geo.friend); const msgFriend = await p.locator('#luMsg').textContent();
     await p.touchscreen.tap(...geo.mine); const msgMine = await p.locator('#luMsg').textContent();
+    // T14 R4: after the right answer a tap on a friend and a 2nd right tap change nothing (no "friend" message stuck under a solved round)
+    await p.touchscreen.tap(...geo.friend); await p.touchscreen.tap(...geo.mine); const msgAfter = await p.locator('#luMsg').textContent();
+    // T14 R1: the 4 kids really drawn are 4 different pictures, and the player's one = the page's own in-game kid render
+    const px = await p.evaluate(() => { const g = c => Array.from(c.getContext('2d').getImageData(0, 0, 96, 96).data).join(',');
+      const s = PT.LU.cv.map(g); return { distinct: new Set(s).size, mine_is_own_kid: s[PT.LU.me] === PT.kidPixels().join(',') }; });
     const hist = await p.evaluate(() => PT.LU.hist);
     const btn = await p.evaluate(() => ['luAgain', 'luBack'].map(id => { const q = document.getElementById(id).getBoundingClientRect(); return [id, +q.width.toFixed(0), +q.height.toFixed(0)]; }));
     await p.screenshot({ path: path.join(OUT, 'a8-' + name + '.png') });
     await p.locator('#luBack').tap(); await p.waitForTimeout(200); const closed = await p.evaluate(() => !document.getElementById('lu').classList.contains('on'));
-    const r = { screen: name, fair, kid_scale: geo.k, msgFriend, msgMine, hist, buttons: btn, closed, errors: errs };
+    const r = { screen: name, fair, kid_scale: geo.k, msgFriend, msgMine, msgAfter, pixels: px, hist, buttons: btn, closed, errors: errs };
     r.pass = fair.me_once === 20 && fair.houses_all_different === 20 && fair.friend_with_my_hair === 0 && fair.positions_seen >= 3 && /เพื่อน/.test(msgFriend) && /ถูกแล้ว/.test(msgMine)
+      && msgAfter === msgMine && px.distinct === 4 && px.mine_is_own_kid
       && hist.length === 2 && hist[0].ok === false && hist[1].ok === true && btn.every(([, bw, bh]) => bw >= 44 && bh >= 44) && closed && errs.length === 0 && Number.isInteger(geo.k);
     ok = ok && r.pass; R.push(r); console.log(name, r.pass ? 'PASS' : 'FAIL', JSON.stringify({ fair, k: geo.k, msgFriend, msgMine, t: hist[1] && hist[1].s, btn, closed, errors: errs.length }));
     await ctx.close();
+  }
+  // T14 R1: the kid's colour mask missing (404) or loaded but broken (hair G = 250) -> the quiz button is off and says why; tapping it opens nothing
+  const BAD = process.env.BADMASK;   // path of a broken copy of c2-pilot-kid4-idleanim-mask.png (made outside the repo)
+  for (const [cname, how] of [['kid mask 404', 'abort'], ['kid mask broken G', 'bad']]) {
+    if (how === 'bad' && !BAD) { R.push({ case: cname, pass: false, why: 'BADMASK not given' }); ok = false; continue; }
+    const ctx = await b.newContext({ viewport: { width: 844, height: 390 }, deviceScaleFactor: 2.625, hasTouch: true, isMobile: true, locale: 'th-TH' });
+    const p = await ctx.newPage(); const errs = []; p.on('pageerror', e => errs.push(String(e)));
+    await p.route('**/c2-pilot-kid4-idleanim-mask.png', r => how === 'abort' ? r.abort() : r.fulfill({ status: 200, contentType: 'image/png', body: fs.readFileSync(BAD) }));
+    await p.goto(URL); await p.waitForFunction('window.PT&&PT.S.ready'); await p.waitForTimeout(300);
+    const st = await p.evaluate(() => { const bt = document.getElementById('luOpen'); return { disabled: bt.disabled, text: bt.textContent, warn: document.getElementById('warn').textContent }; });
+    await p.locator('#luOpen').tap({ force: true }).catch(() => {}); await p.waitForTimeout(200);
+    const opened = await p.evaluate(() => document.getElementById('lu').classList.contains('on'));
+    const r = { case: cname, ...st, opened, errors: errs }; r.pass = st.disabled && /ใช้ไม่ได้/.test(st.text) && /หน้ากากสีตัวในเกม/.test(st.warn) && !opened && errs.length === 0;
+    ok = ok && r.pass; R.push(r); console.log(cname, r.pass ? 'PASS' : 'FAIL', JSON.stringify(r)); await ctx.close();
   }
   fs.writeFileSync(path.join(OUT, 'a8.json'), JSON.stringify({ pass: ok, rows: R }, null, 1)); await b.close(); process.exit(ok ? 0 : 1);
 })().catch(e => { console.error(e); process.exit(2); });

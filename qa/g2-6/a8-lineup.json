@@ -13,6 +13,11 @@
    "kid_scale": 5,
    "msgFriend": "ตัวนี้เป็นเพื่อนนะ ลองดูอีกตัว / That one is a friend - try another",
    "msgMine": "ถูกแล้ว! 0.4 วินาที / Right! 0.4 s",
+   "msgAfter": "ถูกแล้ว! 0.4 วินาที / Right! 0.4 s",
+   "pixels": {
+    "distinct": 4,
+    "mine_is_own_kid": true
+   },
    "hist": [
     {
      "ok": false
@@ -50,12 +55,17 @@
    "kid_scale": 5,
    "msgFriend": "ตัวนี้เป็นเพื่อนนะ ลองดูอีกตัว / That one is a friend - try another",
    "msgMine": "ถูกแล้ว! 0.4 วินาที / Right! 0.4 s",
+   "msgAfter": "ถูกแล้ว! 0.4 วินาที / Right! 0.4 s",
+   "pixels": {
+    "distinct": 4,
+    "mine_is_own_kid": true
+   },
    "hist": [
     {
      "ok": false
     },
     {
-     "s": 0.43,
+     "s": 0.44,
      "ok": true
     }
    ],
@@ -72,6 +82,24 @@
     ]
    ],
    "closed": true,
+   "errors": [],
+   "pass": true
+  },
+  {
+   "case": "kid mask 404",
+   "disabled": true,
+   "text": "หาตัวเองในกลุ่มเพื่อน / Find yourself among friends — ใช้ไม่ได้ เพราะเปลี่ยนสีตัวในเกมไม่ได้ / not available: the in-game kid cannot change colour",
+   "warn": "ไม่พบหน้ากากสีตัวในเกม — ตัวในเกมแสดงสีเดิม เปลี่ยนสีไม่ได้ / In-game kid colour mask missing - kid shown as drawn",
+   "opened": false,
+   "errors": [],
+   "pass": true
+  },
+  {
+   "case": "kid mask broken G",
+   "disabled": true,
+   "text": "หาตัวเองในกลุ่มเพื่อน / Find yourself among friends — ใช้ไม่ได้ เพราะเปลี่ยนสีตัวในเกมไม่ได้ / not available: the in-game kid cannot change colour",
+   "warn": "หน้ากากสีตัวในเกมเสีย — ตัวในเกมแสดงสีเดิม เปลี่ยนสีไม่ได้ / In-game kid colour mask is damaged - kid shown as drawn",
+   "opened": false,
    "errors": [],
    "pass": true
   }

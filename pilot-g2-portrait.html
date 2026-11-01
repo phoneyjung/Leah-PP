@@ -15,6 +15,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#1d1b2c;color:#ecebf5;
 #note{font:11px system-ui;color:#b9b4d6;margin-top:10px;line-height:1.4}
 #warn{display:none;margin-top:8px;padding:6px 8px;border-radius:8px;background:#5a2a3a;color:#fff;font:12px system-ui}
 .big{display:block;width:100%;min-height:48px;margin-top:10px;border:0;border-radius:12px;background:#5b5487;color:#fff;font:600 15px system-ui;cursor:pointer}
+.big:disabled{background:#3a3552;color:#b9b4d6;cursor:default;font-size:13px}
 #lu{position:fixed;inset:0;background:#1d1b2c;display:none;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:8px;box-sizing:border-box}
 #lu.on{display:flex}
 #luAsk{font:700 20px system-ui;text-align:center}
@@ -44,11 +45,13 @@ const TH_NAMES={hair:['ดำ','น้ำตาล','ทอง','แดง','ช
 const T={th:{hair:'สีผม',iris:'สีตา',skin:'สีผิว',house:'บ้าน (ผ้าคลุม)',noPt:'ไม่พบไฟล์รูปหน้าใหญ่ — แสดงกรอบแทน',noMask:'ไม่พบหน้ากากสี — แสดงรูปตามต้นฉบับ เปลี่ยนสีไม่ได้',noMap:'ไม่พบตารางจับคู่เฉด — แสดงรูปตามต้นฉบับ',noKid:'ไม่พบภาพตัวในเกม',
   badMask:'หน้ากากสีรูปหน้าใหญ่เสีย — แสดงรูปตามต้นฉบับ เปลี่ยนสีไม่ได้',noKidMask:'ไม่พบหน้ากากสีตัวในเกม — ตัวในเกมแสดงสีเดิม เปลี่ยนสีไม่ได้',badKidMask:'หน้ากากสีตัวในเกมเสีย — ตัวในเกมแสดงสีเดิม เปลี่ยนสีไม่ได้',
   note:'หน้าทดลอง GM · รูปซ้าย 1 พิกเซลภาพ = {k} พิกเซลจอ · ตัวในเกม {k2} เท่า · ปาก/แก้มคงสีเดิม (เหมือนตัวในเกม)',
-  luOpen:'หาตัวเองในกลุ่มเพื่อน',luAsk:'หนูอยู่ตัวไหน? แตะที่ตัวเองเลย',luRight:'ถูกแล้ว! {s} วินาที',luWrong:'ตัวนี้เป็นเพื่อนนะ ลองดูอีกตัว',luAgain:'อีกรอบ',luBack:'กลับไปแต่งตัว'},
+  luOpen:'หาตัวเองในกลุ่มเพื่อน',luAsk:'หนูอยู่ตัวไหน? แตะที่ตัวเองเลย',luRight:'ถูกแล้ว! {s} วินาที',luWrong:'ตัวนี้เป็นเพื่อนนะ ลองดูอีกตัว',luAgain:'อีกรอบ',luBack:'กลับไปแต่งตัว',
+  luOff:'ใช้ไม่ได้ เพราะเปลี่ยนสีตัวในเกมไม่ได้'},
  en:{hair:'Hair',iris:'Eyes',skin:'Skin',house:'House (cape)',noPt:'Portrait file missing - showing a frame',noMask:'Colour mask missing - portrait shown as drawn',noMap:'Shade map missing - portrait shown as drawn',noKid:'In-game kid missing',
   badMask:'Portrait colour mask is damaged - portrait shown as drawn',noKidMask:'In-game kid colour mask missing - kid shown as drawn',badKidMask:'In-game kid colour mask is damaged - kid shown as drawn',
   note:'GM test page · 1 art px = {k} screen px · kid x{k2} · mouth / cheek keep their colours (like the sprite)',
-  luOpen:'Find yourself among friends',luAsk:'Which one is you? Tap yourself',luRight:'Right! {s} s',luWrong:'That one is a friend - try another',luAgain:'Again',luBack:'Back to dressing up'}};
+  luOpen:'Find yourself among friends',luAsk:'Which one is you? Tap yourself',luRight:'Right! {s} s',luWrong:'That one is a friend - try another',luAgain:'Again',luBack:'Back to dressing up',
+  luOff:'not available: the in-game kid cannot change colour'}};
 const LANG=(navigator.language||'th').toLowerCase().startsWith('th')?'th':'en', tx=k=>T[LANG][k]+(LANG==='th'?' / '+T.en[k]:'');
 const S={opts:{hair:1,iris:2,skin:1,house:1},img:{},data:{},warn:[],ready:false,k:1,k2:1,errors:[]};   // default = sprite G1 default (Brown / Green / Medium / Wing)
 const rgb=h=>[parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)];
@@ -92,15 +95,23 @@ const LU={me:-1,sets:[],t0:0,done:false,hist:[],k:1,gap:0,x0:0,y0:0,cv:[0,1,2,3]
 const rnd=n=>Math.floor(Math.random()*n),shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=rnd(i+1);[a[i],a[j]]=[a[j],a[i]]}return a};
 function luNew(){const me=Object.assign({},S.opts),hairs=shuffle([...Array(RAMPS.hair.length).keys()].filter(h=>h!==me.hair)),houses=shuffle([...Array(4).keys()].filter(h=>h!==me.house));
   const sets=[me,...houses.map((h,i)=>({hair:hairs[i],iris:rnd(RAMPS.iris.length),skin:rnd(RAMPS.skin.length),house:h}))],order=shuffle([0,1,2,3]);
-  LU.sets=order.map(i=>sets[i]);LU.me=order.indexOf(0);LU.sets.forEach((o,i)=>kidInto(LU.cv[i],o));LU.done=false;luLayout();luMsg('');LU.t0=performance.now()}
+  LU.sets=order.map(i=>sets[i]);LU.me=order.indexOf(0);LU.sets.forEach((o,i)=>kidInto(LU.cv[i],o));LU.done=false;luLayout();luMsg('');
+  // T14 R1: the 4 kids must really look different (pixels, not only the data) - else no quiz, no timer, a visible note
+  const sig=LU.cv.map(c=>{const d=c.getContext('2d').getImageData(0,0,96,96).data;let h=0;for(let j=0;j<d.length;j++)h=(h*31+d[j])|0;return h});
+  if(new Set(sig).size<4){LU.done=true;LU.off=true;luMsg(tx('luOff'));return}
+  LU.off=false;LU.t0=performance.now()}
 function luLayout(){const v=document.getElementById('luView'),dpr=window.devicePixelRatio||1,W=innerWidth-16,H=innerHeight-160,gap=Math.round(10*dpr);
   const k=Math.max(1,Math.floor(Math.min((W*dpr-5*gap)/(4*96),(H*dpr)/96)));LU.k=k;LU.gap=gap;
   v.width=4*96*k+5*gap;v.height=96*k+2*gap;v.style.width=(v.width/dpr)+'px';v.style.height=(v.height/dpr)+'px';LU.x0=gap;LU.y0=gap;
   const g=v.getContext('2d');g.imageSmoothingEnabled=false;g.clearRect(0,0,v.width,v.height);LU.cv.forEach((c,i)=>g.drawImage(c,0,0,96,96,gap+i*(96*k+gap),gap,96*k,96*k))}
 function luMsg(t){document.getElementById('luMsg').textContent=t}
-function luTap(i){if(i<0||i>3)return;if(i===LU.me){if(!LU.done){const s=(performance.now()-LU.t0)/1000;LU.done=true;LU.hist.push({s:+s.toFixed(2),ok:true});luMsg(tx('luRight').replace(/\{s\}/g,s.toFixed(1)))}}
+function luTap(i){if(i<0||i>3||LU.done)return;   // T14 R4: a round ends at the right answer; every tap after it is ignored until "again"
+  if(i===LU.me){const s=(performance.now()-LU.t0)/1000;LU.done=true;LU.hist.push({s:+s.toFixed(2),ok:true});luMsg(tx('luRight').replace(/\{s\}/g,s.toFixed(1)))}
   else{LU.hist.push({ok:false});luMsg(tx('luWrong'))}}
-function luOpen(on){document.getElementById('lu').classList.toggle('on',on);if(on)luNew();else layout()}
+// T14 R1: the quiz needs the in-game kid AND its colour mask (else all 4 kids look the same) -> the button is off, with the reason on it
+const luUsable=()=>!!(S.data.kid&&S.data.kidMask);
+function luButton(){const b=document.getElementById('luOpen');b.disabled=!luUsable();b.textContent=tx('luOpen')+(b.disabled?' — '+tx('luOff'):'')}
+function luOpen(on){if(on&&!luUsable())return;document.getElementById('lu').classList.toggle('on',on);if(on)luNew();else layout()}
 function layout(){const dpr=window.devicePixelRatio||1,W=innerWidth,H=innerHeight,panel=document.getElementById('panel'),stage=document.getElementById('stage');
   let aw,ah;const P=panel.style;
   if(H>W){const ph=Math.round(H*0.42);P.left='0';P.right='0';P.top='auto';P.bottom='0';P.width='auto';P.height=ph+'px';aw=W;ah=H-ph}   // upright phone: colours below
@@ -153,7 +164,7 @@ async function boot(){buildUI();buildLineup();layout();
   if(kid&&kid.naturalWidth>=96&&kid.naturalHeight>=96){S.data.kid=pixels(kid,96,96);   // T11 R2: the kid's own mask is checked on its own and named when missing
     if(kidMask&&kidMask.naturalWidth>=96&&kidMask.naturalHeight>=96){const KM=pixels(kidMask,96,96);if(validKidMask(S.data.kid,KM))S.data.kidMask=KM;else S.warn.push('badKidMask')}
     else S.warn.push('noKidMask')}else S.warn.push('noKid');
-  showWarn();draw();S.ready=true}
+  showWarn();luButton();draw();S.ready=true}
 addEventListener('resize',()=>{if(document.getElementById('lu').classList.contains('on'))luLayout();else layout()});
 addEventListener('error',e=>S.errors.push(String(e.message)));
 window.PT={S,RAMPS,GROUP,layout,draw,renderPt,LU,luNew,luTap,luOpen,set:(o)=>{Object.assign(S.opts,o);document.querySelectorAll('.sw').forEach(b=>b.setAttribute('aria-pressed',String(S.opts[b.dataset.group]===+b.dataset.i)));draw()},

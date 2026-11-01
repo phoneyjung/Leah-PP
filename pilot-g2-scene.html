@@ -100,7 +100,9 @@ const walkable=(x,y)=>!solidCell(x,y);
 const A={};   // art: sheets + json
 async function boot(){
   const L=f=>load(f);
-  const [w,i,wh,ln]=await Promise.all([L('c2-pilot-kid4-walk.png'),L('c2-pilot-kid4-idleanim.png'),L('c2-pilot-kid4-walkhold.png'),gmLantern()]);
+  let [w,i,wh,ln]=await Promise.all([L('c2-pilot-kid4-walk.png'),L('c2-pilot-kid4-idleanim.png'),L('c2-pilot-kid4-walkhold.png'),gmLantern()]);
+  const fit=(im,nf)=>im&&im.naturalWidth===nf*96&&im.naturalHeight===8*96?im:null;   // G2.6 T14 R2: a sheet that loads with the wrong size = missing (same fallback)
+  w=fit(w,6);i=fit(i,4);wh=fit(wh,6);
   if(ST.oldKid){const [ow,oi]=await Promise.all([L('kid-bob-walk.png'),L('kid-bob-idle.png')]);if(ow&&oi){ST.img.oldWalk=ow;ST.img.oldIdle=oi}}   // G2.6 A5: 2.33 sprite (GM ?oldkid only)
   ST.hanc=await jget('c2-pilot-hold-anchors.json');ST.ok.hold=!!(ST.hanc&&ST.hanc.walk_hold&&ST.hanc.idle_hold&&typeof ST.hanc.walk_hold==='object'&&typeof ST.hanc.idle_hold==='object');
   if(wh){ST.img.walkhold=wh;ST.ok.walkhold=true}if(ln){ST.img.lantern=ln;ST.ok.lantern=true}

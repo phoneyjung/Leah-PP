@@ -1,1566 +1,3900 @@
 {
- "scene": {
-  "images": {
-   "c2-pilot-kid4-walk.png": [
-    576,
-    768
+ "pages": {
+  "scene": {
+   "gc": true,
+   "images": [
+    {
+     "file": "c2-pilot-kid4-walk.png",
+     "w": 576,
+     "h": 768,
+     "bytes": 1769472,
+     "cat": "character"
+    },
+    {
+     "file": "c2-pilot-kid4-walkhold.png",
+     "w": 576,
+     "h": 768,
+     "bytes": 1769472,
+     "cat": "character"
+    },
+    {
+     "file": "g24-tiles-path.png",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "cat": "scene"
+    },
+    {
+     "file": "g24-tiles-cliff.png",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "cat": "scene"
+    },
+    {
+     "file": "g24-hut.png",
+     "w": 256,
+     "h": 256,
+     "bytes": 262144,
+     "cat": "scene"
+    },
+    {
+     "file": "g24-hut-door.png",
+     "w": 256,
+     "h": 256,
+     "bytes": 262144,
+     "cat": "scene"
+    },
+    {
+     "file": "g24-cave-mouth.png",
+     "w": 192,
+     "h": 192,
+     "bytes": 147456,
+     "cat": "scene"
+    },
+    {
+     "file": "g24-tree-b.png",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "cat": "scene"
+    },
+    {
+     "file": "g24-tree-a.png",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "cat": "scene"
+    },
+    {
+     "file": "g24-lamp.png",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "cat": "scene"
+    },
+    {
+     "file": "g24-gate.png",
+     "w": 64,
+     "h": 64,
+     "bytes": 16384,
+     "cat": "scene"
+    },
+    {
+     "file": "g24-props.png",
+     "w": 512,
+     "h": 32,
+     "bytes": 65536,
+     "cat": "scene"
+    },
+    {
+     "file": "g24-slime.png",
+     "w": 512,
+     "h": 64,
+     "bytes": 131072,
+     "cat": "scene"
+    },
+    {
+     "file": "cave-floor.jpg",
+     "w": 256,
+     "h": 256,
+     "bytes": 262144,
+     "cat": "scene"
+    },
+    {
+     "file": "c2-pilot-kid4-idleanim.png",
+     "w": 384,
+     "h": 768,
+     "bytes": 1179648,
+     "cat": "character"
+    },
+    {
+     "file": "c2-held-lantern_L0-S-trial.png",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "cat": "character"
+    },
+    {
+     "file": "c2-held-lantern_L0-S-trial-light.png",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "cat": "character"
+    }
    ],
-   "c2-pilot-kid4-idleanim.png": [
-    384,
-    768
+   "tracked": [
+    {
+     "kind": "canvas",
+     "w": 740,
+     "h": 343,
+     "bytes": 1015280,
+     "live_bytes": 1015280,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http"
+    },
+    {
+     "kind": "canvas",
+     "w": 256,
+     "h": 32,
+     "bytes": 32768,
+     "live_bytes": 32768,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<mk<sheet8<gmLantern<async<async"
+    },
+    {
+     "kind": "canvas",
+     "w": 256,
+     "h": 32,
+     "bytes": 32768,
+     "live_bytes": 32768,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<mk<sheet8<gmLantern<async<async"
+    },
+    {
+     "kind": "canvas",
+     "w": 384,
+     "h": 768,
+     "bytes": 1179648,
+     "live_bytes": 1179648,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<mk<breatheW<boot"
+    },
+    {
+     "kind": "imagedata",
+     "w": 96,
+     "h": 96,
+     "bytes": 36864,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "character",
+     "fn": "add<C2.getImageData<breatheW<boot"
+    },
+    {
+     "kind": "canvas",
+     "w": 96,
+     "h": 96,
+     "bytes": 36864,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "character",
+     "fn": "add<mk<breatheW<boot"
+    },
+    {
+     "kind": "canvas",
+     "w": 384,
+     "h": 768,
+     "bytes": 1179648,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<buildFists<boot"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 5,
+     "bytes": 140,
+     "live_bytes": 140,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 4,
+     "bytes": 96,
+     "live_bytes": 96,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 4,
+     "bytes": 96,
+     "live_bytes": 96,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 4,
+     "bytes": 96,
+     "live_bytes": 96,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 4,
+     "bytes": 96,
+     "live_bytes": 96,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 8,
+     "h": 7,
+     "bytes": 224,
+     "live_bytes": 224,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 7,
+     "bytes": 196,
+     "live_bytes": 196,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 7,
+     "bytes": 196,
+     "live_bytes": 196,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 5,
+     "h": 4,
+     "bytes": 80,
+     "live_bytes": 80,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 4,
+     "bytes": 112,
+     "live_bytes": 112,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 4,
+     "bytes": 112,
+     "live_bytes": 112,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 4,
+     "bytes": 112,
+     "live_bytes": 112,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 3,
+     "bytes": 72,
+     "live_bytes": 72,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 5,
+     "h": 3,
+     "bytes": 60,
+     "live_bytes": 60,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 5,
+     "h": 3,
+     "bytes": 60,
+     "live_bytes": 60,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 5,
+     "h": 3,
+     "bytes": 60,
+     "live_bytes": 60,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 2,
+     "h": 1,
+     "bytes": 8,
+     "live_bytes": 8,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 2,
+     "h": 1,
+     "bytes": 8,
+     "live_bytes": 8,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 3,
+     "bytes": 72,
+     "live_bytes": 72,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 2,
+     "h": 1,
+     "bytes": 8,
+     "live_bytes": 8,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 4,
+     "h": 4,
+     "bytes": 64,
+     "live_bytes": 64,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 4,
+     "h": 4,
+     "bytes": 64,
+     "live_bytes": 64,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 4,
+     "h": 4,
+     "bytes": 64,
+     "live_bytes": 64,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 4,
+     "h": 4,
+     "bytes": 64,
+     "live_bytes": 64,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 8,
+     "h": 8,
+     "bytes": 256,
+     "live_bytes": 256,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 7,
+     "bytes": 196,
+     "live_bytes": 196,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 7,
+     "bytes": 168,
+     "live_bytes": 168,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 7,
+     "bytes": 196,
+     "live_bytes": 196,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 576,
+     "h": 768,
+     "bytes": 1769472,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<buildFists<boot"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 4,
+     "bytes": 96,
+     "live_bytes": 96,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 8,
+     "h": 5,
+     "bytes": 160,
+     "live_bytes": 160,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 7,
+     "bytes": 196,
+     "live_bytes": 196,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 5,
+     "bytes": 120,
+     "live_bytes": 120,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 4,
+     "h": 4,
+     "bytes": 64,
+     "live_bytes": 64,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 4,
+     "h": 4,
+     "bytes": 64,
+     "live_bytes": 64,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 10,
+     "h": 6,
+     "bytes": 240,
+     "live_bytes": 240,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 12,
+     "h": 9,
+     "bytes": 432,
+     "live_bytes": 432,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 11,
+     "h": 13,
+     "bytes": 572,
+     "live_bytes": 572,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 4,
+     "bytes": 112,
+     "live_bytes": 112,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 4,
+     "bytes": 112,
+     "live_bytes": 112,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 4,
+     "bytes": 112,
+     "live_bytes": 112,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 6,
+     "bytes": 168,
+     "live_bytes": 168,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 6,
+     "bytes": 168,
+     "live_bytes": 168,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 11,
+     "h": 6,
+     "bytes": 264,
+     "live_bytes": 264,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 3,
+     "h": 5,
+     "bytes": 60,
+     "live_bytes": 60,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 3,
+     "h": 5,
+     "bytes": 60,
+     "live_bytes": 60,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 3,
+     "h": 5,
+     "bytes": 60,
+     "live_bytes": 60,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 3,
+     "bytes": 72,
+     "live_bytes": 72,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 3,
+     "bytes": 72,
+     "live_bytes": 72,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 3,
+     "bytes": 72,
+     "live_bytes": 72,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 3,
+     "bytes": 72,
+     "live_bytes": 72,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 5,
+     "h": 3,
+     "bytes": 60,
+     "live_bytes": 60,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 4,
+     "h": 3,
+     "bytes": 48,
+     "live_bytes": 48,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 3,
+     "bytes": 84,
+     "live_bytes": 84,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 3,
+     "bytes": 72,
+     "live_bytes": 72,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 3,
+     "bytes": 72,
+     "live_bytes": 72,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 3,
+     "bytes": 72,
+     "live_bytes": 72,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 3,
+     "bytes": 72,
+     "live_bytes": 72,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 3,
+     "bytes": 72,
+     "live_bytes": 72,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 5,
+     "h": 4,
+     "bytes": 80,
+     "live_bytes": 80,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 8,
+     "h": 6,
+     "bytes": 192,
+     "live_bytes": 192,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 8,
+     "h": 6,
+     "bytes": 192,
+     "live_bytes": 192,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 6,
+     "bytes": 168,
+     "live_bytes": 168,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 8,
+     "bytes": 224,
+     "live_bytes": 224,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 5,
+     "h": 3,
+     "bytes": 60,
+     "live_bytes": 60,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 5,
+     "bytes": 140,
+     "live_bytes": 140,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 8,
+     "h": 4,
+     "bytes": 128,
+     "live_bytes": 128,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 8,
+     "h": 4,
+     "bytes": 128,
+     "live_bytes": 128,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 8,
+     "h": 4,
+     "bytes": 128,
+     "live_bytes": 128,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 9,
+     "h": 6,
+     "bytes": 216,
+     "live_bytes": 216,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 4,
+     "bytes": 96,
+     "live_bytes": 96,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+    },
+    {
+     "kind": "canvas",
+     "w": 81,
+     "h": 81,
+     "bytes": 26244,
+     "live_bytes": 26244,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<mk<stampRadial<buildFx<boot"
+    },
+    {
+     "kind": "imagedata",
+     "w": 81,
+     "h": 81,
+     "bytes": 26244,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "character",
+     "fn": "add<C2.createImageData<stampRadial<buildFx<boot"
+    },
+    {
+     "kind": "canvas",
+     "w": 261,
+     "h": 261,
+     "bytes": 272484,
+     "live_bytes": 272484,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<mk<stampRadial<buildFx<boot"
+    },
+    {
+     "kind": "imagedata",
+     "w": 261,
+     "h": 261,
+     "bytes": 272484,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "character",
+     "fn": "add<C2.createImageData<stampRadial<buildFx<boot"
+    },
+    {
+     "kind": "canvas",
+     "w": 96,
+     "h": 96,
+     "bytes": 36864,
+     "live_bytes": 36864,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<mk<stampPool<buildFx<boot"
+    },
+    {
+     "kind": "imagedata",
+     "w": 96,
+     "h": 96,
+     "bytes": 36864,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "character",
+     "fn": "add<C2.createImageData<stampPool<buildFx<boot"
+    },
+    {
+     "kind": "canvas",
+     "w": 289,
+     "h": 289,
+     "bytes": 334084,
+     "live_bytes": 334084,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<mk<stampRadial<buildFx<boot"
+    },
+    {
+     "kind": "imagedata",
+     "w": 289,
+     "h": 289,
+     "bytes": 334084,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "character",
+     "fn": "add<C2.createImageData<stampRadial<buildFx<boot"
+    },
+    {
+     "kind": "canvas",
+     "w": 61,
+     "h": 61,
+     "bytes": 14884,
+     "live_bytes": 14884,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<mk<stampRadial<buildFx<boot"
+    },
+    {
+     "kind": "imagedata",
+     "w": 61,
+     "h": 61,
+     "bytes": 14884,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "character",
+     "fn": "add<C2.createImageData<stampRadial<buildFx<boot"
+    },
+    {
+     "kind": "canvas",
+     "w": 1,
+     "h": 1,
+     "bytes": 4,
+     "live_bytes": 4,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<mk<buildFx<boot"
+    },
+    {
+     "kind": "canvas",
+     "w": 740,
+     "h": 343,
+     "bytes": 1015280,
+     "live_bytes": 1015280,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<mk<buildFx<boot"
+    },
+    {
+     "kind": "canvas",
+     "w": 896,
+     "h": 448,
+     "bytes": 1605632,
+     "live_bytes": 1605632,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<buildWorld<boot"
+    },
+    {
+     "kind": "canvas",
+     "w": 256,
+     "h": 256,
+     "bytes": 262144,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<buildWorld<boot"
+    },
+    {
+     "kind": "imagedata",
+     "w": 256,
+     "h": 256,
+     "bytes": 262144,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<buildWorld<boot"
+    },
+    {
+     "kind": "canvas",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+    },
+    {
+     "kind": "imagedata",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<http<Array.forEach<b"
+    },
+    {
+     "kind": "canvas",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+    },
+    {
+     "kind": "imagedata",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<http<Array.forEach<b"
+    },
+    {
+     "kind": "canvas",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+    },
+    {
+     "kind": "imagedata",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<http<Array.forEach<b"
+    },
+    {
+     "kind": "canvas",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+    },
+    {
+     "kind": "imagedata",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<http<Array.forEach<b"
+    },
+    {
+     "kind": "canvas",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+    },
+    {
+     "kind": "imagedata",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<http<Array.forEach<b"
+    },
+    {
+     "kind": "canvas",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+    },
+    {
+     "kind": "imagedata",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<http<Array.forEach<b"
+    },
+    {
+     "kind": "canvas",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+    },
+    {
+     "kind": "imagedata",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<http<Array.forEach<b"
+    },
+    {
+     "kind": "canvas",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+    },
+    {
+     "kind": "imagedata",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<http<Array.forEach<b"
+    },
+    {
+     "kind": "canvas",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+    },
+    {
+     "kind": "imagedata",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<http<Array.forEach<b"
+    },
+    {
+     "kind": "canvas",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+    },
+    {
+     "kind": "imagedata",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<http<Array.forEach<b"
+    },
+    {
+     "kind": "canvas",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+    },
+    {
+     "kind": "imagedata",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<http<Array.forEach<b"
+    },
+    {
+     "kind": "canvas",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+    },
+    {
+     "kind": "imagedata",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<http<Array.forEach<b"
+    },
+    {
+     "kind": "canvas",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+    },
+    {
+     "kind": "imagedata",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<http<Array.forEach<b"
+    },
+    {
+     "kind": "canvas",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+    },
+    {
+     "kind": "imagedata",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<http<Array.forEach<b"
+    },
+    {
+     "kind": "canvas",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+    },
+    {
+     "kind": "imagedata",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<http<Array.forEach<b"
+    },
+    {
+     "kind": "canvas",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+    },
+    {
+     "kind": "imagedata",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<http<Array.forEach<b"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<buildWorld"
+    },
+    {
+     "kind": "canvas",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+    },
+    {
+     "kind": "imagedata",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<http<Array.forEach<b"
+    },
+    {
+     "kind": "canvas",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+    },
+    {
+     "kind": "imagedata",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<http<Array.forEach<b"
+    },
+    {
+     "kind": "canvas",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+    },
+    {
+     "kind": "imagedata",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<http<Array.forEach<b"
+    },
+    {
+     "kind": "canvas",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+    },
+    {
+     "kind": "imagedata",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<http<Array.forEach<b"
+    },
+    {
+     "kind": "canvas",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+    },
+    {
+     "kind": "imagedata",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<http<Array.forEach<b"
+    },
+    {
+     "kind": "canvas",
+     "w": 64,
+     "h": 64,
+     "bytes": 16384,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<buildWorld<boot"
+    },
+    {
+     "kind": "imagedata",
+     "w": 64,
+     "h": 64,
+     "bytes": 16384,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<buildWorld<boot"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<http"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<http<Array"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<http"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<http<Array"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<http"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<http<Array"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<http"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<http<Array"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<http"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<http<Array"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<http"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<http<Array"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<http"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<http<Array"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<http"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<http<Array"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<http"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<http<Array"
+    },
+    {
+     "kind": "canvas",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<placeProp<http"
+    },
+    {
+     "kind": "imagedata",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<placeProp<http<Array"
+    },
+    {
+     "kind": "canvas",
+     "w": 896,
+     "h": 448,
+     "bytes": 1605632,
+     "live_bytes": 1605632,
+     "alive": true,
+     "cat": "scene",
+     "fn": "add<mk<buildNight<buildWorld<boot"
+    }
    ],
-   "c2-pilot-kid4-walkhold.png": [
-    576,
-    768
-   ]
+   "screen": [
+    {
+     "id": "cv",
+     "w": 2216,
+     "h": 1024,
+     "bytes": 9076736
+    }
+   ],
+   "character_resident": 7671812,
+   "character_made": 11379220,
+   "scene_resident": 5709732,
+   "screen_bytes": 9076736,
+   "kid_sheets": [
+    [
+     "c2-pilot-kid4-walk.png",
+     576,
+     768
+    ],
+    [
+     "c2-pilot-kid4-walkhold.png",
+     576,
+     768
+    ],
+    [
+     "c2-pilot-kid4-idleanim.png",
+     384,
+     768
+    ]
+   ],
+   "lantern": 1773572
   },
-  "image_MB": 4.5,
-  "canvases": [
-   {
-    "w": 740,
-    "h": 343,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 256,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 256,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 384,
-    "h": 768,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 96,
-    "h": 96,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 384,
-    "h": 768,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 7,
-    "h": 5,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 6,
-    "h": 4,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 6,
-    "h": 4,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 6,
-    "h": 4,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 6,
-    "h": 4,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 8,
-    "h": 7,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 7,
-    "h": 7,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 7,
-    "h": 7,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 5,
-    "h": 4,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 7,
-    "h": 4,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 7,
-    "h": 4,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 7,
-    "h": 4,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 6,
-    "h": 3,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 5,
-    "h": 3,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 5,
-    "h": 3,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 5,
-    "h": 3,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 2,
-    "h": 1,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 2,
-    "h": 1,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 6,
-    "h": 3,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 2,
-    "h": 1,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 4,
-    "h": 4,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 4,
-    "h": 4,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 4,
-    "h": 4,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 4,
-    "h": 4,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 8,
-    "h": 8,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 7,
-    "h": 7,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 6,
-    "h": 7,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 7,
-    "h": 7,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 576,
-    "h": 768,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 6,
-    "h": 4,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 8,
-    "h": 5,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 7,
-    "h": 7,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 6,
-    "h": 5,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 4,
-    "h": 4,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 4,
-    "h": 4,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 10,
-    "h": 6,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 12,
-    "h": 9,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 11,
-    "h": 13,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 7,
-    "h": 4,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 7,
-    "h": 4,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 7,
-    "h": 4,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 7,
-    "h": 6,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 7,
-    "h": 6,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 11,
-    "h": 6,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 3,
-    "h": 5,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 3,
-    "h": 5,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 3,
-    "h": 5,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 6,
-    "h": 3,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 6,
-    "h": 3,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 6,
-    "h": 3,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 6,
-    "h": 3,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 5,
-    "h": 3,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 4,
-    "h": 3,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 7,
-    "h": 3,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 6,
-    "h": 3,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 6,
-    "h": 3,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 6,
-    "h": 3,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 6,
-    "h": 3,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 6,
-    "h": 3,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 5,
-    "h": 4,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 8,
-    "h": 6,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 8,
-    "h": 6,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 7,
-    "h": 6,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 7,
-    "h": 8,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 5,
-    "h": 3,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 7,
-    "h": 5,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 8,
-    "h": 4,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 8,
-    "h": 4,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 8,
-    "h": 4,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 9,
-    "h": 6,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 6,
-    "h": 4,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 81,
-    "h": 81,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 261,
-    "h": 261,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 96,
-    "h": 96,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 289,
-    "h": 289,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 61,
-    "h": 61,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 1,
-    "h": 1,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 740,
-    "h": 343,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 896,
-    "h": 448,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 256,
-    "h": 256,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 128,
-    "h": 128,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 128,
-    "h": 128,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 128,
-    "h": 128,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 128,
-    "h": 128,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 128,
-    "h": 128,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 128,
-    "h": 128,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 128,
-    "h": 128,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 128,
-    "h": 128,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 128,
-    "h": 128,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 128,
-    "h": 128,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 128,
-    "h": 128,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 128,
-    "h": 128,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 128,
-    "h": 128,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 128,
-    "h": 128,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 128,
-    "h": 128,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 128,
-    "h": 128,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 128,
-    "h": 128,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 128,
-    "h": 128,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 128,
-    "h": 128,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 128,
-    "h": 128,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 128,
-    "h": 128,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 64,
-    "h": 64,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 32,
-    "h": 32,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   },
-   {
-    "w": 896,
-    "h": 448,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-scene.html?gm:74:35)"
-   }
-  ],
-  "canvas_MB_all": 11.476
+  "portrait": {
+   "gc": true,
+   "images": [
+    {
+     "file": "c2-pilot-kid4-idleanim.png",
+     "w": 384,
+     "h": 768,
+     "bytes": 1179648,
+     "cat": "character"
+    },
+    {
+     "file": "c2-pilot-kid4-pt-mask.png",
+     "w": 384,
+     "h": 384,
+     "bytes": 589824,
+     "cat": "character"
+    },
+    {
+     "file": "c2-pilot-kid4-pt.png",
+     "w": 384,
+     "h": 384,
+     "bytes": 589824,
+     "cat": "character"
+    },
+    {
+     "file": "c2-pilot-kid4-idleanim-mask.png",
+     "w": 384,
+     "h": 768,
+     "bytes": 1179648,
+     "cat": "character"
+    }
+   ],
+   "tracked": [
+    {
+     "kind": "canvas",
+     "w": 384,
+     "h": 384,
+     "bytes": 589824,
+     "live_bytes": 589824,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http"
+    },
+    {
+     "kind": "canvas",
+     "w": 96,
+     "h": 96,
+     "bytes": 36864,
+     "live_bytes": 36864,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http"
+    },
+    {
+     "kind": "canvas",
+     "w": 96,
+     "h": 96,
+     "bytes": 36864,
+     "live_bytes": 36864,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.map<http"
+    },
+    {
+     "kind": "canvas",
+     "w": 96,
+     "h": 96,
+     "bytes": 36864,
+     "live_bytes": 36864,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.map<http"
+    },
+    {
+     "kind": "canvas",
+     "w": 96,
+     "h": 96,
+     "bytes": 36864,
+     "live_bytes": 36864,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.map<http"
+    },
+    {
+     "kind": "canvas",
+     "w": 96,
+     "h": 96,
+     "bytes": 36864,
+     "live_bytes": 36864,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.map<http"
+    },
+    {
+     "kind": "canvas",
+     "w": 384,
+     "h": 384,
+     "bytes": 589824,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "character",
+     "fn": "add<pixels<boot"
+    },
+    {
+     "kind": "imagedata",
+     "w": 384,
+     "h": 384,
+     "bytes": 589824,
+     "live_bytes": 589824,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<C2.getImageData<pixels<boot"
+    },
+    {
+     "kind": "canvas",
+     "w": 384,
+     "h": 384,
+     "bytes": 589824,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "character",
+     "fn": "add<pixels<boot"
+    },
+    {
+     "kind": "imagedata",
+     "w": 384,
+     "h": 384,
+     "bytes": 589824,
+     "live_bytes": 589824,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<C2.getImageData<pixels<boot"
+    },
+    {
+     "kind": "canvas",
+     "w": 96,
+     "h": 96,
+     "bytes": 36864,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "character",
+     "fn": "add<pixels<boot"
+    },
+    {
+     "kind": "imagedata",
+     "w": 96,
+     "h": 96,
+     "bytes": 36864,
+     "live_bytes": 36864,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<C2.getImageData<pixels<boot"
+    },
+    {
+     "kind": "canvas",
+     "w": 96,
+     "h": 96,
+     "bytes": 36864,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "character",
+     "fn": "add<pixels<boot"
+    },
+    {
+     "kind": "imagedata",
+     "w": 96,
+     "h": 96,
+     "bytes": 36864,
+     "live_bytes": 36864,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<C2.getImageData<pixels<boot"
+    },
+    {
+     "kind": "imagedata",
+     "w": 384,
+     "h": 384,
+     "bytes": 589824,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "character",
+     "fn": "add<renderPt<draw<boot"
+    },
+    {
+     "kind": "imagedata",
+     "w": 96,
+     "h": 96,
+     "bytes": 36864,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "character",
+     "fn": "add<kidInto<renderKid<draw<boot"
+    },
+    {
+     "kind": "imagedata",
+     "w": 96,
+     "h": 96,
+     "bytes": 36864,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "character",
+     "fn": "add<kidInto<http<Array.forEach<luNew<luOpen"
+    },
+    {
+     "kind": "imagedata",
+     "w": 96,
+     "h": 96,
+     "bytes": 36864,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "character",
+     "fn": "add<kidInto<http<Array.forEach<luNew<luOpen"
+    },
+    {
+     "kind": "imagedata",
+     "w": 96,
+     "h": 96,
+     "bytes": 36864,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "character",
+     "fn": "add<kidInto<http<Array.forEach<luNew<luOpen"
+    },
+    {
+     "kind": "imagedata",
+     "w": 96,
+     "h": 96,
+     "bytes": 36864,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "character",
+     "fn": "add<kidInto<http<Array.forEach<luNew<luOpen"
+    },
+    {
+     "kind": "imagedata",
+     "w": 96,
+     "h": 96,
+     "bytes": 36864,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "character",
+     "fn": "add<C2.getImageData<http<Array.map<luNew<luOpen<set.onclick"
+    },
+    {
+     "kind": "imagedata",
+     "w": 96,
+     "h": 96,
+     "bytes": 36864,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "character",
+     "fn": "add<C2.getImageData<http<Array.map<luNew<luOpen<set.onclick"
+    },
+    {
+     "kind": "imagedata",
+     "w": 96,
+     "h": 96,
+     "bytes": 36864,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "character",
+     "fn": "add<C2.getImageData<http<Array.map<luNew<luOpen<set.onclick"
+    },
+    {
+     "kind": "imagedata",
+     "w": 96,
+     "h": 96,
+     "bytes": 36864,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "character",
+     "fn": "add<C2.getImageData<http<Array.map<luNew<luOpen<set.onclick"
+    }
+   ],
+   "screen": [
+    {
+     "id": "view",
+     "w": 1286,
+     "h": 1024,
+     "bytes": 5267456
+    },
+    {
+     "id": "luView",
+     "w": 2050,
+     "h": 532,
+     "bytes": 4362400
+    }
+   ],
+   "character_resident": 5566464,
+   "character_made": 7741440,
+   "scene_resident": 0,
+   "screen_bytes": 9629856,
+   "kid_sheets": [
+    [
+     "c2-pilot-kid4-idleanim.png",
+     384,
+     768
+    ]
+   ],
+   "lantern": 0
+  },
+  "motion": {
+   "gc": true,
+   "images": [
+    {
+     "file": "c2-pilot-kid4-walk.png",
+     "w": 576,
+     "h": 768,
+     "bytes": 1769472,
+     "cat": "character"
+    },
+    {
+     "file": "c2-pilot-kid4-walkhold.png",
+     "w": 576,
+     "h": 768,
+     "bytes": 1769472,
+     "cat": "character"
+    },
+    {
+     "file": "cave-floor.jpg",
+     "w": 256,
+     "h": 256,
+     "bytes": 262144,
+     "cat": "scene"
+    },
+    {
+     "file": "c2-held-lantern_L0-S-trial.png",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "cat": "character"
+    },
+    {
+     "file": "c2-pilot-kid4-idleanim.png",
+     "w": 384,
+     "h": 768,
+     "bytes": 1179648,
+     "cat": "character"
+    },
+    {
+     "file": "c2-held-lantern_L0-S-trial-light.png",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
+     "cat": "character"
+    }
+   ],
+   "tracked": [
+    {
+     "kind": "canvas",
+     "w": 256,
+     "h": 32,
+     "bytes": 32768,
+     "live_bytes": 32768,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<sheet8<gmLantern<async<async"
+    },
+    {
+     "kind": "canvas",
+     "w": 256,
+     "h": 32,
+     "bytes": 32768,
+     "live_bytes": 32768,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<sheet8<gmLantern<async<async"
+    },
+    {
+     "kind": "canvas",
+     "w": 81,
+     "h": 81,
+     "bytes": 26244,
+     "live_bytes": 26244,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<mk<stampRadial<buildFx<boot"
+    },
+    {
+     "kind": "imagedata",
+     "w": 81,
+     "h": 81,
+     "bytes": 26244,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "character",
+     "fn": "add<C2.createImageData<stampRadial<buildFx<boot"
+    },
+    {
+     "kind": "canvas",
+     "w": 261,
+     "h": 261,
+     "bytes": 272484,
+     "live_bytes": 272484,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<mk<stampRadial<buildFx<boot"
+    },
+    {
+     "kind": "imagedata",
+     "w": 261,
+     "h": 261,
+     "bytes": 272484,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "character",
+     "fn": "add<C2.createImageData<stampRadial<buildFx<boot"
+    },
+    {
+     "kind": "canvas",
+     "w": 96,
+     "h": 96,
+     "bytes": 36864,
+     "live_bytes": 36864,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<mk<stampPool<buildFx<boot"
+    },
+    {
+     "kind": "imagedata",
+     "w": 96,
+     "h": 96,
+     "bytes": 36864,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "character",
+     "fn": "add<C2.createImageData<stampPool<buildFx<boot"
+    },
+    {
+     "kind": "canvas",
+     "w": 96,
+     "h": 96,
+     "bytes": 36864,
+     "live_bytes": 36864,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<mk<stampPool<buildFx<boot"
+    },
+    {
+     "kind": "imagedata",
+     "w": 96,
+     "h": 96,
+     "bytes": 36864,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "character",
+     "fn": "add<C2.createImageData<stampPool<buildFx<boot"
+    },
+    {
+     "kind": "canvas",
+     "w": 1,
+     "h": 1,
+     "bytes": 4,
+     "live_bytes": 4,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<mk<buildFx<boot"
+    },
+    {
+     "kind": "canvas",
+     "w": 576,
+     "h": 768,
+     "bytes": 1769472,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "character",
+     "fn": "add<geo<boot"
+    },
+    {
+     "kind": "imagedata",
+     "w": 576,
+     "h": 768,
+     "bytes": 1769472,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "character",
+     "fn": "add<C2.getImageData<geo<boot"
+    },
+    {
+     "kind": "canvas",
+     "w": 384,
+     "h": 768,
+     "bytes": 1179648,
+     "live_bytes": 1179648,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<breatheW<boot"
+    },
+    {
+     "kind": "imagedata",
+     "w": 96,
+     "h": 96,
+     "bytes": 36864,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "character",
+     "fn": "add<C2.getImageData<breatheW<boot"
+    },
+    {
+     "kind": "canvas",
+     "w": 96,
+     "h": 96,
+     "bytes": 36864,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "character",
+     "fn": "add<breatheW<boot"
+    },
+    {
+     "kind": "canvas",
+     "w": 384,
+     "h": 768,
+     "bytes": 1179648,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "character",
+     "fn": "add<geo<boot"
+    },
+    {
+     "kind": "imagedata",
+     "w": 384,
+     "h": 768,
+     "bytes": 1179648,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "character",
+     "fn": "add<C2.getImageData<geo<boot"
+    },
+    {
+     "kind": "canvas",
+     "w": 384,
+     "h": 768,
+     "bytes": 1179648,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<buildFists<boot"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 5,
+     "bytes": 140,
+     "live_bytes": 140,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 4,
+     "bytes": 96,
+     "live_bytes": 96,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 4,
+     "bytes": 96,
+     "live_bytes": 96,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 4,
+     "bytes": 96,
+     "live_bytes": 96,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 4,
+     "bytes": 96,
+     "live_bytes": 96,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 8,
+     "h": 7,
+     "bytes": 224,
+     "live_bytes": 224,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 7,
+     "bytes": 196,
+     "live_bytes": 196,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 7,
+     "bytes": 196,
+     "live_bytes": 196,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 5,
+     "h": 4,
+     "bytes": 80,
+     "live_bytes": 80,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 4,
+     "bytes": 112,
+     "live_bytes": 112,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 4,
+     "bytes": 112,
+     "live_bytes": 112,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 4,
+     "bytes": 112,
+     "live_bytes": 112,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 3,
+     "bytes": 72,
+     "live_bytes": 72,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 5,
+     "h": 3,
+     "bytes": 60,
+     "live_bytes": 60,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 5,
+     "h": 3,
+     "bytes": 60,
+     "live_bytes": 60,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 5,
+     "h": 3,
+     "bytes": 60,
+     "live_bytes": 60,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 2,
+     "h": 1,
+     "bytes": 8,
+     "live_bytes": 8,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 2,
+     "h": 1,
+     "bytes": 8,
+     "live_bytes": 8,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 3,
+     "bytes": 72,
+     "live_bytes": 72,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 2,
+     "h": 1,
+     "bytes": 8,
+     "live_bytes": 8,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 4,
+     "h": 4,
+     "bytes": 64,
+     "live_bytes": 64,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 4,
+     "h": 4,
+     "bytes": 64,
+     "live_bytes": 64,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 4,
+     "h": 4,
+     "bytes": 64,
+     "live_bytes": 64,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 4,
+     "h": 4,
+     "bytes": 64,
+     "live_bytes": 64,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 8,
+     "h": 8,
+     "bytes": 256,
+     "live_bytes": 256,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 7,
+     "bytes": 196,
+     "live_bytes": 196,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 7,
+     "bytes": 168,
+     "live_bytes": 168,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 7,
+     "bytes": 196,
+     "live_bytes": 196,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 576,
+     "h": 768,
+     "bytes": 1769472,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<buildFists<boot"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 4,
+     "bytes": 96,
+     "live_bytes": 96,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 8,
+     "h": 5,
+     "bytes": 160,
+     "live_bytes": 160,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 7,
+     "bytes": 196,
+     "live_bytes": 196,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 5,
+     "bytes": 120,
+     "live_bytes": 120,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 4,
+     "h": 4,
+     "bytes": 64,
+     "live_bytes": 64,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 4,
+     "h": 4,
+     "bytes": 64,
+     "live_bytes": 64,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 10,
+     "h": 6,
+     "bytes": 240,
+     "live_bytes": 240,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 12,
+     "h": 9,
+     "bytes": 432,
+     "live_bytes": 432,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 11,
+     "h": 13,
+     "bytes": 572,
+     "live_bytes": 572,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 4,
+     "bytes": 112,
+     "live_bytes": 112,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 4,
+     "bytes": 112,
+     "live_bytes": 112,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 4,
+     "bytes": 112,
+     "live_bytes": 112,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 6,
+     "bytes": 168,
+     "live_bytes": 168,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 6,
+     "bytes": 168,
+     "live_bytes": 168,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 11,
+     "h": 6,
+     "bytes": 264,
+     "live_bytes": 264,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 3,
+     "h": 5,
+     "bytes": 60,
+     "live_bytes": 60,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 3,
+     "h": 5,
+     "bytes": 60,
+     "live_bytes": 60,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 3,
+     "h": 5,
+     "bytes": 60,
+     "live_bytes": 60,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 3,
+     "bytes": 72,
+     "live_bytes": 72,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 3,
+     "bytes": 72,
+     "live_bytes": 72,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 3,
+     "bytes": 72,
+     "live_bytes": 72,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 3,
+     "bytes": 72,
+     "live_bytes": 72,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 5,
+     "h": 3,
+     "bytes": 60,
+     "live_bytes": 60,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 4,
+     "h": 3,
+     "bytes": 48,
+     "live_bytes": 48,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 3,
+     "bytes": 84,
+     "live_bytes": 84,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 3,
+     "bytes": 72,
+     "live_bytes": 72,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 3,
+     "bytes": 72,
+     "live_bytes": 72,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 3,
+     "bytes": 72,
+     "live_bytes": 72,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 3,
+     "bytes": 72,
+     "live_bytes": 72,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 3,
+     "bytes": 72,
+     "live_bytes": 72,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 5,
+     "h": 4,
+     "bytes": 80,
+     "live_bytes": 80,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 8,
+     "h": 6,
+     "bytes": 192,
+     "live_bytes": 192,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 8,
+     "h": 6,
+     "bytes": 192,
+     "live_bytes": 192,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 6,
+     "bytes": 168,
+     "live_bytes": 168,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 8,
+     "bytes": 224,
+     "live_bytes": 224,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 5,
+     "h": 3,
+     "bytes": 60,
+     "live_bytes": 60,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 7,
+     "h": 5,
+     "bytes": 140,
+     "live_bytes": 140,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 8,
+     "h": 4,
+     "bytes": 128,
+     "live_bytes": 128,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 8,
+     "h": 4,
+     "bytes": 128,
+     "live_bytes": 128,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 8,
+     "h": 4,
+     "bytes": 128,
+     "live_bytes": 128,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 9,
+     "h": 6,
+     "bytes": 216,
+     "live_bytes": 216,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    },
+    {
+     "kind": "canvas",
+     "w": 6,
+     "h": 4,
+     "bytes": 96,
+     "live_bytes": 96,
+     "alive": true,
+     "cat": "character",
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+    }
+   ],
+   "screen": [
+    {
+     "id": "cv",
+     "w": 2216,
+     "h": 1024,
+     "bytes": 9076736
+    }
+   ],
+   "character_resident": 6353056,
+   "character_made": 15646600,
+   "scene_resident": 262144,
+   "screen_bytes": 9076736,
+   "kid_sheets": [
+    [
+     "c2-pilot-kid4-walk.png",
+     576,
+     768
+    ],
+    [
+     "c2-pilot-kid4-walkhold.png",
+     576,
+     768
+    ],
+    [
+     "c2-pilot-kid4-idleanim.png",
+     384,
+     768
+    ]
+   ],
+   "lantern": 446188
+  }
  },
- "portrait": {
-  "images": {
-   "c2-pilot-kid4-pt.png": [
-    384,
-    384
-   ],
-   "c2-pilot-kid4-pt-mask.png": [
-    384,
-    384
-   ],
-   "c2-pilot-kid4-idleanim-mask.png": [
-    384,
-    768
-   ],
-   "c2-pilot-kid4-idleanim.png": [
-    384,
-    768
-   ]
-  },
-  "image_MB": 3.375,
-  "canvases": [
-   {
-    "w": 384,
-    "h": 384,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-portrait.html?gm:64:24"
-   },
-   {
-    "w": 96,
-    "h": 96,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-portrait.html?gm:64:61"
-   },
-   {
-    "w": 384,
-    "h": 384,
-    "onPage": false,
-    "at": "at pixels (http://127.0.0.1:8794/pilot-g2-portrait.html?gm:47:53)"
-   },
-   {
-    "w": 384,
-    "h": 384,
-    "onPage": false,
-    "at": "at pixels (http://127.0.0.1:8794/pilot-g2-portrait.html?gm:47:53)"
-   },
-   {
-    "w": 96,
-    "h": 96,
-    "onPage": false,
-    "at": "at pixels (http://127.0.0.1:8794/pilot-g2-portrait.html?gm:47:53)"
-   },
-   {
-    "w": 96,
-    "h": 96,
-    "onPage": false,
-    "at": "at pixels (http://127.0.0.1:8794/pilot-g2-portrait.html?gm:47:53)"
-   }
-  ],
-  "canvas_MB_all": 1.793
+ "inject": false,
+ "model_4_colours": {
+  "per_colour_set_MiB": 4.5,
+  "originals_MiB": 4.5,
+  "masks_3_MiB": 4.5,
+  "four_sets_MiB": 18,
+  "portrait_page_character_resident_MiB": 5.309,
+  "lantern_MiB": 1.691,
+  "total_MiB": 34
  },
- "motion": {
-  "images": {
-   "c2-pilot-kid4-walk.png": [
-    576,
-    768
-   ],
-   "c2-pilot-kid4-idleanim.png": [
-    384,
-    768
-   ],
-   "c2-pilot-kid4-walkhold.png": [
-    576,
-    768
-   ]
+ "summary": {
+  "scene": {
+   "gc": true,
+   "character_resident_MiB": 7.316,
+   "character_made_MiB": 10.852,
+   "scene_resident_MiB": 5.445,
+   "screen_MiB": 8.656,
+   "tracked": 242,
+   "alive": 83
   },
-  "image_MB": 4.5,
-  "canvases": [
-   {
-    "w": 256,
-    "h": 32,
-    "onPage": false,
-    "at": "at sheet8 (http://127.0.0.1:8794/pilot-g2-motion.html?gm:82:39)"
-   },
-   {
-    "w": 256,
-    "h": 32,
-    "onPage": false,
-    "at": "at sheet8 (http://127.0.0.1:8794/pilot-g2-motion.html?gm:82:39)"
-   },
-   {
-    "w": 81,
-    "h": 81,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-motion.html?gm:98:35)"
-   },
-   {
-    "w": 261,
-    "h": 261,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-motion.html?gm:98:35)"
-   },
-   {
-    "w": 96,
-    "h": 96,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-motion.html?gm:98:35)"
-   },
-   {
-    "w": 96,
-    "h": 96,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-motion.html?gm:98:35)"
-   },
-   {
-    "w": 1,
-    "h": 1,
-    "onPage": false,
-    "at": "at mk (http://127.0.0.1:8794/pilot-g2-motion.html?gm:98:35)"
-   },
-   {
-    "w": 576,
-    "h": 768,
-    "onPage": false,
-    "at": "at geo (http://127.0.0.1:8794/pilot-g2-motion.html?gm:53:44)"
-   },
-   {
-    "w": 384,
-    "h": 768,
-    "onPage": false,
-    "at": "at breatheW (http://127.0.0.1:8794/pilot-g2-motion.html?gm:60:41)"
-   },
-   {
-    "w": 96,
-    "h": 96,
-    "onPage": false,
-    "at": "at breatheW (http://127.0.0.1:8794/pilot-g2-motion.html?gm:62:21)"
-   },
-   {
-    "w": 384,
-    "h": 768,
-    "onPage": false,
-    "at": "at geo (http://127.0.0.1:8794/pilot-g2-motion.html?gm:53:44)"
-   },
-   {
-    "w": 384,
-    "h": 768,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:112:20"
-   },
-   {
-    "w": 7,
-    "h": 5,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 6,
-    "h": 4,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 6,
-    "h": 4,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 6,
-    "h": 4,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 6,
-    "h": 4,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 8,
-    "h": 7,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 7,
-    "h": 7,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 7,
-    "h": 7,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 5,
-    "h": 4,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 7,
-    "h": 4,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 7,
-    "h": 4,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 7,
-    "h": 4,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 6,
-    "h": 3,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 5,
-    "h": 3,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 5,
-    "h": 3,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 5,
-    "h": 3,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 2,
-    "h": 1,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 2,
-    "h": 1,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 6,
-    "h": 3,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 2,
-    "h": 1,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 4,
-    "h": 4,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 4,
-    "h": 4,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 4,
-    "h": 4,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 4,
-    "h": 4,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 8,
-    "h": 8,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 7,
-    "h": 7,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 6,
-    "h": 7,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 7,
-    "h": 7,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 576,
-    "h": 768,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:112:20"
-   },
-   {
-    "w": 6,
-    "h": 4,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 8,
-    "h": 5,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 7,
-    "h": 7,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 6,
-    "h": 5,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 4,
-    "h": 4,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 4,
-    "h": 4,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 10,
-    "h": 6,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 12,
-    "h": 9,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 11,
-    "h": 13,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 7,
-    "h": 4,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 7,
-    "h": 4,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 7,
-    "h": 4,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 7,
-    "h": 6,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 7,
-    "h": 6,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 11,
-    "h": 6,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 3,
-    "h": 5,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 3,
-    "h": 5,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 3,
-    "h": 5,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 6,
-    "h": 3,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 6,
-    "h": 3,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 6,
-    "h": 3,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 6,
-    "h": 3,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 5,
-    "h": 3,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 4,
-    "h": 3,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 7,
-    "h": 3,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 6,
-    "h": 3,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 6,
-    "h": 3,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 6,
-    "h": 3,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 6,
-    "h": 3,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 6,
-    "h": 3,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 5,
-    "h": 4,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 8,
-    "h": 6,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 8,
-    "h": 6,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 7,
-    "h": 6,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 7,
-    "h": 8,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 5,
-    "h": 3,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 7,
-    "h": 5,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 8,
-    "h": 4,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 8,
-    "h": 4,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 8,
-    "h": 4,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 9,
-    "h": 6,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   },
-   {
-    "w": 6,
-    "h": 4,
-    "onPage": false,
-    "at": "at http://127.0.0.1:8794/pilot-g2-motion.html?gm:115:22"
-   }
-  ],
-  "canvas_MB_all": 7.211
- }
+  "portrait": {
+   "gc": true,
+   "character_resident_MiB": 5.309,
+   "character_made_MiB": 7.383,
+   "scene_resident_MiB": 0,
+   "screen_MiB": 9.184,
+   "tracked": 24,
+   "alive": 10
+  },
+  "motion": {
+   "gc": true,
+   "character_resident_MiB": 6.059,
+   "character_made_MiB": 14.922,
+   "scene_resident_MiB": 0.25,
+   "screen_MiB": 8.656,
+   "tracked": 90,
+   "alive": 78
+  }
+ },
+ "pass": true
 }

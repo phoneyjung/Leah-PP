@@ -62,7 +62,9 @@ function breatheW(img){const c=document.createElement('canvas');c.width=img.widt
   const up=document.createElement('canvas');up.width=C;up.height=C;up.getContext('2d').putImageData(cell,0,0);
   x.drawImage(up,0,1,C,cut,sx,sy,C,cut);x.drawImage(up,0,cut,C,C-cut,sx,sy+cut,C,C-cut);return c}
 async function boot(){
-  const [w,i,wh,ln]=await Promise.all([load('c2-pilot-kid4-walk.png'),load('c2-pilot-kid4-idleanim.png'),load('c2-pilot-kid4-walkhold.png'),ST.gm?gmLantern():load('kid-lantern.png')]);
+  let [w,i,wh,ln]=await Promise.all([load('c2-pilot-kid4-walk.png'),load('c2-pilot-kid4-idleanim.png'),load('c2-pilot-kid4-walkhold.png'),ST.gm?gmLantern():load('kid-lantern.png')]);
+  const fit=(im,nf)=>im&&im.naturalWidth===nf*96&&im.naturalHeight===8*96?im:null;   // G2.6 T14 R2: a sheet that loads with the wrong size = missing (same fallback)
+  w=fit(w,6);i=fit(i,4);wh=fit(wh,6);
   try{ST.hanc=await (await fetch('c2-pilot-hold-anchors.json')).json();ST.ok.hold=!!(ST.hanc&&ST.hanc.walk_hold&&ST.hanc.idle_hold)}catch(e){ST.hanc=null}
   if(wh){ST.img.walkhold=wh;ST.ok.walkhold=true}
   if(ln){ST.img.lantern=ln;ST.ok.lantern=true}

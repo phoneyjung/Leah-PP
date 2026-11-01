@@ -1,19 +1,35 @@
 {
  "fps": {
   "old": [
-   23.417721518987342,
-   24.796776419065406,
-   24.972530216761562
+   24.946376946750007,
+   24.29562678717829,
+   25.060151027399506
   ],
   "new": [
-   24.722949694461775,
-   24.721631760966513,
-   24.268451013682213
+   25.717731243045876,
+   25.84504298070616,
+   25.72047309678494
   ]
  },
  "median": {
-  "old": 24.8,
-  "new": 24.72
+  "old": 24.95,
+  "new": 25.72
+ },
+ "p95_ms": {
+  "old": [
+   50.1,
+   50.1,
+   50.1
+  ],
+  "new": [
+   50.1,
+   50.1,
+   50.1
+  ]
+ },
+ "p95_median_ms": {
+  "old": 50.1,
+  "new": 50.1
  },
  "info": {
   "old": {
@@ -21,8 +37,8 @@
    "files": [
     "c2-pilot-kid4-walk.png",
     "c2-pilot-kid4-walkhold.png",
-    "c2-held-lantern_L0-S-trial.png",
     "c2-held-lantern_L0-S-trial-light.png",
+    "c2-held-lantern_L0-S-trial.png",
     "c2-pilot-kid4-idleanim.png",
     "c2-held-lantern_L0-S-trial.json",
     "kid-bob-walk.png",
@@ -73,9 +89,9 @@
     "g24-slime.png",
     "cave-floor.jpg",
     "g24-tiles.json",
-    "g24-slime.json",
     "g24-hut.json",
     "g24-props.json",
+    "g24-slime.json",
     "g24-cave-mouth.json"
    ]
   },
@@ -83,6 +99,6 @@
  },
  "errors": [],
  "measure_s": 30,
- "ratio_new_vs_old": 0.997,
+ "ratio_new_vs_old": 1.031,
  "pass": true
 }

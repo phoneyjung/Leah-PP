@@ -2,7 +2,7 @@
  "pages": {
   "pilot-g2-motion": {
    "files": 10,
-   "bytes": 357200,
+   "bytes": 357461,
    "MB": 0.341,
    "list": [
     [
@@ -43,7 +43,7 @@
     ],
     [
      "pilot-g2-motion.html",
-     29047
+     29308
     ]
    ],
    "A2_pass": true,
@@ -55,80 +55,80 @@
     {
      "blocked": "c2-held-lantern_L0-S-trial-light.png",
      "drawn": true,
-     "colours": 1210,
-     "other_share": 0.248,
+     "colours": 1164,
+     "other_share": 0.299,
      "page_errors": 0,
      "err": []
     },
     {
      "blocked": "c2-held-lantern_L0-S-trial.json",
      "drawn": true,
-     "colours": 1201,
-     "other_share": 0.252,
+     "colours": 1158,
+     "other_share": 0.305,
      "page_errors": 0,
      "err": []
     },
     {
      "blocked": "c2-held-lantern_L0-S-trial.png",
      "drawn": true,
-     "colours": 1201,
-     "other_share": 0.252,
+     "colours": 1158,
+     "other_share": 0.305,
      "page_errors": 0,
      "err": []
     },
     {
      "blocked": "c2-pilot-anchors.json",
      "drawn": true,
-     "colours": 1263,
-     "other_share": 0.261,
+     "colours": 1217,
+     "other_share": 0.311,
      "page_errors": 0,
      "err": []
     },
     {
      "blocked": "c2-pilot-hold-anchors.json",
      "drawn": true,
-     "colours": 1186,
-     "other_share": 0.241,
+     "colours": 1142,
+     "other_share": 0.294,
      "page_errors": 0,
      "err": []
     },
     {
      "blocked": "c2-pilot-kid4-idleanim.png",
      "drawn": true,
-     "colours": 1186,
-     "other_share": 0.242,
+     "colours": 1142,
+     "other_share": 0.295,
      "page_errors": 0,
      "err": []
     },
     {
      "blocked": "c2-pilot-kid4-walk.png",
      "drawn": true,
-     "colours": 1261,
-     "other_share": 0.261,
+     "colours": 1215,
+     "other_share": 0.311,
      "page_errors": 0,
      "err": []
     },
     {
      "blocked": "c2-pilot-kid4-walkhold.png",
      "drawn": true,
-     "colours": 1186,
-     "other_share": 0.241,
+     "colours": 1142,
+     "other_share": 0.294,
      "page_errors": 0,
      "err": []
     },
     {
      "blocked": "cave-floor.jpg",
      "drawn": true,
-     "colours": 1263,
-     "other_share": 0.261,
+     "colours": 1215,
+     "other_share": 0.311,
      "page_errors": 0,
      "err": []
     },
     {
      "blocked": "* every file",
      "drawn": true,
-     "colours": 1158,
-     "other_share": 0.244,
+     "colours": 1115,
+     "other_share": 0.296,
      "page_errors": 0,
      "err": []
     }
@@ -136,8 +136,8 @@
   },
   "pilot-g2-scene": {
    "files": 26,
-   "bytes": 520297,
-   "MB": 0.496,
+   "bytes": 521115,
+   "MB": 0.497,
    "list": [
     [
      "c2-held-lantern_L0-S-trial-light.png",
@@ -241,7 +241,7 @@
     ],
     [
      "pilot-g2-scene.html",
-     48037
+     48855
     ]
    ],
    "A2_pass": true,
@@ -253,7 +253,7 @@
     {
      "blocked": "c2-held-lantern_L0-S-trial-light.png",
      "drawn": true,
-     "colours": 10387,
+     "colours": 10186,
      "other_share": 0.929,
      "page_errors": 0,
      "err": []
@@ -261,7 +261,7 @@
     {
      "blocked": "c2-held-lantern_L0-S-trial.json",
      "drawn": true,
-     "colours": 10522,
+     "colours": 10320,
      "other_share": 0.929,
      "page_errors": 0,
      "err": []
@@ -269,7 +269,7 @@
     {
      "blocked": "c2-held-lantern_L0-S-trial.png",
      "drawn": true,
-     "colours": 10506,
+     "colours": 10306,
      "other_share": 0.929,
      "page_errors": 0,
      "err": []
@@ -277,15 +277,15 @@
     {
      "blocked": "c2-pilot-anchors.json",
      "drawn": true,
-     "colours": 10867,
-     "other_share": 0.95,
+     "colours": 10692,
+     "other_share": 0.945,
      "page_errors": 0,
      "err": []
     },
     {
      "blocked": "c2-pilot-hold-anchors.json",
      "drawn": true,
-     "colours": 10516,
+     "colours": 10310,
      "other_share": 0.929,
      "page_errors": 0,
      "err": []
@@ -293,7 +293,7 @@
     {
      "blocked": "c2-pilot-kid4-idleanim.png",
      "drawn": true,
-     "colours": 10518,
+     "colours": 10335,
      "other_share": 0.929,
      "page_errors": 0,
      "err": []
@@ -301,15 +301,15 @@
     {
      "blocked": "c2-pilot-kid4-walk.png",
      "drawn": true,
-     "colours": 10859,
-     "other_share": 0.95,
+     "colours": 10692,
+     "other_share": 0.945,
      "page_errors": 0,
      "err": []
     },
     {
      "blocked": "c2-pilot-kid4-walkhold.png",
      "drawn": true,
-     "colours": 10489,
+     "colours": 10306,
      "other_share": 0.929,
      "page_errors": 0,
      "err": []
@@ -317,119 +317,119 @@
     {
      "blocked": "cave-floor.jpg",
      "drawn": true,
-     "colours": 10881,
-     "other_share": 0.95,
+     "colours": 10695,
+     "other_share": 0.945,
      "page_errors": 0,
      "err": []
     },
     {
      "blocked": "g24-cave-mouth.json",
      "drawn": true,
-     "colours": 10872,
-     "other_share": 0.95,
+     "colours": 10695,
+     "other_share": 0.945,
      "page_errors": 0,
      "err": []
     },
     {
      "blocked": "g24-cave-mouth.png",
      "drawn": true,
-     "colours": 10724,
-     "other_share": 0.95,
+     "colours": 10535,
+     "other_share": 0.945,
      "page_errors": 0,
      "err": []
     },
     {
      "blocked": "g24-gate.png",
      "drawn": true,
-     "colours": 10564,
-     "other_share": 0.95,
+     "colours": 10374,
+     "other_share": 0.945,
      "page_errors": 0,
      "err": []
     },
     {
      "blocked": "g24-hut-door.png",
      "drawn": true,
-     "colours": 10875,
-     "other_share": 0.95,
+     "colours": 10695,
+     "other_share": 0.945,
      "page_errors": 0,
      "err": []
     },
     {
      "blocked": "g24-hut.json",
      "drawn": true,
-     "colours": 10896,
-     "other_share": 0.95,
+     "colours": 10683,
+     "other_share": 0.945,
      "page_errors": 0,
      "err": []
     },
     {
      "blocked": "g24-hut.png",
      "drawn": true,
-     "colours": 10284,
-     "other_share": 0.95,
+     "colours": 10144,
+     "other_share": 0.945,
      "page_errors": 0,
      "err": []
     },
     {
      "blocked": "g24-lamp.png",
      "drawn": true,
-     "colours": 10609,
-     "other_share": 0.95,
+     "colours": 10427,
+     "other_share": 0.945,
      "page_errors": 0,
      "err": []
     },
     {
      "blocked": "g24-props.json",
      "drawn": true,
-     "colours": 9280,
-     "other_share": 0.951,
+     "colours": 9116,
+     "other_share": 0.945,
      "page_errors": 0,
      "err": []
     },
     {
      "blocked": "g24-props.png",
      "drawn": true,
-     "colours": 9290,
-     "other_share": 0.951,
+     "colours": 9102,
+     "other_share": 0.945,
      "page_errors": 0,
      "err": []
     },
     {
      "blocked": "g24-slime.json",
      "drawn": true,
-     "colours": 10882,
-     "other_share": 0.95,
+     "colours": 10684,
+     "other_share": 0.945,
      "page_errors": 0,
      "err": []
     },
     {
      "blocked": "g24-slime.png",
      "drawn": true,
-     "colours": 10810,
-     "other_share": 0.95,
+     "colours": 10643,
+     "other_share": 0.945,
      "page_errors": 0,
      "err": []
     },
     {
      "blocked": "g24-tiles-cliff.png",
      "drawn": true,
-     "colours": 10530,
-     "other_share": 0.951,
+     "colours": 10359,
+     "other_share": 0.945,
      "page_errors": 0,
      "err": []
     },
     {
      "blocked": "g24-tiles-path.png",
      "drawn": true,
-     "colours": 8304,
-     "other_share": 0.871,
+     "colours": 8172,
+     "other_share": 0.873,
      "page_errors": 0,
      "err": []
     },
     {
      "blocked": "g24-tiles.json",
      "drawn": true,
-     "colours": 7997,
+     "colours": 7794,
      "other_share": 0.87,
      "page_errors": 0,
      "err": []
@@ -437,7 +437,7 @@
     {
      "blocked": "g24-tree-a.png",
      "drawn": true,
-     "colours": 10934,
+     "colours": 10750,
      "other_share": 0.939,
      "page_errors": 0,
      "err": []
@@ -445,16 +445,16 @@
     {
      "blocked": "g24-tree-b.png",
      "drawn": true,
-     "colours": 10492,
-     "other_share": 0.95,
+     "colours": 10295,
+     "other_share": 0.945,
      "page_errors": 0,
      "err": []
     },
     {
      "blocked": "* every file",
      "drawn": true,
-     "colours": 3963,
-     "other_share": 0.815,
+     "colours": 3809,
+     "other_share": 0.816,
      "page_errors": 0,
      "err": []
     }
@@ -462,8 +462,8 @@
   },
   "pilot-g2-portrait": {
    "files": 7,
-   "bytes": 146197,
-   "MB": 0.139,
+   "bytes": 151891,
+   "MB": 0.145,
    "list": [
     [
      "c2-pilot-kid4-idleanim-mask.png",
@@ -491,7 +491,7 @@
     ],
     [
      "pilot-g2-portrait.html",
-     17306
+     23000
     ]
    ],
    "A2_pass": true,
@@ -503,7 +503,7 @@
     {
      "blocked": "c2-pilot-kid4-idleanim-mask.png",
      "drawn": true,
-     "colours": 14038,
+     "colours": 13753,
      "other_share": 0.564,
      "page_errors": 0,
      "err": []
@@ -511,7 +511,7 @@
     {
      "blocked": "c2-pilot-kid4-idleanim.png",
      "drawn": true,
-     "colours": 14000,
+     "colours": 13723,
      "other_share": 0.566,
      "page_errors": 0,
      "err": []
@@ -519,7 +519,7 @@
     {
      "blocked": "c2-pilot-kid4-pt-mask.json",
      "drawn": true,
-     "colours": 14037,
+     "colours": 13808,
      "other_share": 0.564,
      "page_errors": 0,
      "err": []
@@ -527,7 +527,7 @@
     {
      "blocked": "c2-pilot-kid4-pt-mask.png",
      "drawn": true,
-     "colours": 14036,
+     "colours": 13808,
      "other_share": 0.564,
      "page_errors": 0,
      "err": []
@@ -535,7 +535,7 @@
     {
      "blocked": "c2-pilot-kid4-pt-shademap.json",
      "drawn": true,
-     "colours": 14037,
+     "colours": 13808,
      "other_share": 0.564,
      "page_errors": 0,
      "err": []
@@ -543,7 +543,7 @@
     {
      "blocked": "c2-pilot-kid4-pt.png",
      "drawn": true,
-     "colours": 14008,
+     "colours": 13779,
      "other_share": 0.635,
      "page_errors": 0,
      "err": []
@@ -551,7 +551,7 @@
     {
      "blocked": "* every file",
      "drawn": true,
-     "colours": 13734,
+     "colours": 13674,
      "other_share": 0.637,
      "page_errors": 0,
      "err": []
