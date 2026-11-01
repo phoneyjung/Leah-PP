@@ -1,20 +1,22 @@
 #!/usr/bin/env python3
 # G2.3 T9 acceptance checker (Claude · 1 Nov 2569) for ASSET_SPEC_14 v1.1 section 4 items 1-5.
+# v1.2 (spec 1.2, T13, D-PT-4): the expected picture is holes + the section 2b debris pass; numbers come from pt-rules.json "expect";
+#      4.3 also counts debris (non-LINE pixels on the outside edge) = 0; selftest adds 2 debris cases (15 in all).
 # Codex runs it before sending; Claude runs it on the branch. Exit 0 = every check PASS, exit 1 = any FAIL.
 # The expected mask comes from pt_mask_ref.py (the written rules in pt-rules.json), never from the files being checked.
-# usage: python3 -I check_pt_t9.py REPO_ROOT [OUT.json]
-#        python3 -I check_pt_t9.py REPO_ROOT --selftest      (the checker must PASS a correct set and FAIL each of 12 broken sets)
+# usage: python3 -I -B check_pt_t9.py REPO_ROOT [OUT.json]
+#        python3 -I -B check_pt_t9.py REPO_ROOT --selftest      (the checker must PASS a correct set and FAIL each of 14 broken sets)
 import sys, os, json, hashlib, shutil, tempfile, copy
 import numpy as np
 from PIL import Image
 from scipy import ndimage
+sys.dont_write_bytecode = True
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import pt_mask_ref as ref
 
 QA = 'qa/g2-3-portrait/'
 F_PT, F_ED, F_MK, F_MJ = 'c2-pilot-kid4-pt.png', 'c2-pilot-kid4-pt-edits.json', 'c2-pilot-kid4-pt-mask.png', 'c2-pilot-kid4-pt-mask.json'
 F_IMG = [QA + 'img/pt-edits-x4.png', QA + 'img/pt-mask-ids.png']
-OPAQUE_AFTER, EXT_RING = 70133, 1172
 
 def sha(p): return hashlib.sha256(open(p, 'rb').read()).hexdigest()
 def hx(c): return '#%02X%02X%02X' % tuple(int(v) for v in c[:3])
@@ -32,22 +34,24 @@ def check(root, rules, src_path):
            {'size': im.size, 'mode': im.mode, 'alpha': sorted(np.unique(pt[..., 3]).tolist())})
     except Exception as e:
         ok('4.1b %s readable' % F_PT, False, str(e)); return C
-    holes = {(x, y) for x0, y0, x1, y1 in rules['holes']['boxes'] for y in range(y0, y1 + 1) for x in range(x0, x1 + 1)}
+    X = rules.get('expect', {'edits': 50, 'opaque_after': 70133, 'ext_ring': 1172})   # v1.1 numbers when the rules have no "expect"
+    want_ed = {(int(x), int(y)): w for x, y, w in info['edits']}
     diff = {(int(x), int(y)) for y, x in zip(*np.where((pt != src).any(2)))}
-    want = [int(rules['holes']['colour'][k:k + 2], 16) for k in (1, 3, 5)] + [255]
-    ok('4.2a pixels that differ from the source = exactly the 50 hole pixels, each now %s alpha 255' % rules['holes']['colour'],
-       diff == holes and all(list(pt[y, x]) == want and src[y, x, 3] == 0 for x, y in holes), {'differ': len(diff), 'extra': sorted(diff - holes)[:10], 'missing': sorted(holes - diff)[:10]})
+    ok('4.2a pixels that differ from the source = exactly the %d edited pixels of the rules (50 holes %s alpha 255 + debris pass 2b), each = the rule result'
+       % (len(want_ed), rules['holes']['colour']),
+       len(want_ed) == X['edits'] and diff == set(want_ed) and (pt == exp_a).all(),
+       {'differ': len(diff), 'want': len(want_ed), 'extra': sorted(diff - set(want_ed))[:10], 'missing': sorted(set(want_ed) - diff)[:10],
+        'px_not_rule_result': int((pt != exp_a).any(2).sum())})
     try:
         E = json.load(open(J(F_ED))); ed = E['edits']
         keys = [(e['x'], e['y']) for e in ed]
-        side = lambda x: 'hole-left' if x < 192 else 'hole-right'
-        good = (E.get('schema') == 1 and E.get('source') == os.path.basename(src_path) and E.get('source_sha256') == rules['source_sha256'] and len(ed) == 50
-                and len(set(keys)) == 50 and set(keys) == holes and all(list(e['before']) == [int(v) for v in src[e['y'], e['x']]] and list(e['after']) == [int(v) for v in pt[e['y'], e['x']]]
-                and e.get('why') == side(e['x']) for e in ed))
+        good = (E.get('schema') == 1 and E.get('source') == os.path.basename(src_path) and E.get('source_sha256') == rules['source_sha256'] and len(ed) == len(want_ed)
+                and len(set(keys)) == len(ed) and set(keys) == set(want_ed) and all(list(e['before']) == [int(v) for v in src[e['y'], e['x']]] and list(e['after']) == [int(v) for v in pt[e['y'], e['x']]]
+                and e.get('why') == want_ed.get((e['x'], e['y'])) for e in ed))
         rep = src.copy(); rev = pt.copy()
         for e in ed: rep[e['y'], e['x']] = e['after']; rev[e['y'], e['x']] = e['before']
-        ok('4.2b edits json: 50 entries, no repeats, = the hole set, before/after match the images, why = hole-left/right · replay = %s · revert = source' % F_PT,
-           good and (rep == pt).all() and (rev == src).all(), {'entries': len(ed), 'unique': len(set(keys))})
+        ok('4.2b edits json: %d entries, no repeats, = the edited set, before/after match the images, why = hole-left/right / debris-clear / debris-line as the rules say · replay = %s · revert = source'
+           % (len(want_ed), F_PT), good and (rep == pt).all() and (rev == src).all(), {'entries': len(ed), 'unique': len(set(keys))})
     except Exception as e:
         ok('4.2b edits json readable and complete', False, str(e))
     op = pt[..., 3] == 255
@@ -55,9 +59,11 @@ def check(root, rules, src_path):
     enclosed = [i for i in range(1, n + 1) if i not in edge]
     ext = np.isin(lab, list(edge)) & ~op; ring = op & ndimage.binary_dilation(ext, structure=np.ones((3, 3)))
     white = ring & (pt[..., 0] > 230) & (pt[..., 1] > 230) & (pt[..., 2] > 230)
-    ok('4.3 enclosed transparent areas 0 · half-transparent 0 · opaque %d · exterior ring %d px · near-white (all > 230) on it 0' % (OPAQUE_AFTER, EXT_RING),
-       not enclosed and op.sum() == OPAQUE_AFTER and ring.sum() == EXT_RING and not white.any(),
-       {'enclosed': len(enclosed), 'opaque': int(op.sum()), 'ext_ring': int(ring.sum()), 'near_white_on_ring': int(white.sum())})
+    deb = int(ref.debris_map(rules, pt)[2].sum()) if 'debris' in rules else 0
+    ok('4.3 enclosed transparent areas 0 · half-transparent 0 · opaque %d · exterior ring %d px · near-white (all > 230) on it 0 · debris outside the outline 0'
+       % (X['opaque_after'], X['ext_ring']),
+       not enclosed and op.sum() == X['opaque_after'] and ring.sum() == X['ext_ring'] and not white.any() and deb == 0,
+       {'enclosed': len(enclosed), 'opaque': int(op.sum()), 'ext_ring': int(ring.sum()), 'near_white_on_ring': int(white.sum()), 'debris': deb})
     try:
         mi = Image.open(J(F_MK)); mk = np.array(mi.convert('RGBA'))
     except Exception as e:
@@ -109,7 +115,7 @@ def write_set(root, rules, src_path, mutate=None):
     """a correct delivery built from the rules (used by --selftest only), then one mutation"""
     src = np.array(Image.open(src_path).convert('RGBA')); a, R, Gm, info = ref.build(rules, src)
     mk = ref.mask_png(R, Gm, a[..., 3] == 255)
-    ed = [{'x': x, 'y': y, 'before': [int(v) for v in src[y, x]], 'after': [int(v) for v in a[y, x]], 'why': 'hole-left' if x < 192 else 'hole-right'} for x, y in info['edits']]
+    ed = [{'x': x, 'y': y, 'before': [int(v) for v in src[y, x]], 'after': [int(v) for v in a[y, x]], 'why': w} for x, y, w in info['edits']]
     E = {'schema': 1, 'source': os.path.basename(src_path), 'source_sha256': rules['source_sha256'], 'edits': ed}
     mats = copy.deepcopy(info['materials'])
     if mutate: a, mk, E, mats = mutate(a.copy(), mk.copy(), copy.deepcopy(E), mats)
@@ -132,10 +138,20 @@ def selftest(rules, src_path):
     def eye_to_cape(a, mk, E, M): mk[145, 155, 0] = 8; return a, mk, E, M
     def hole_wrong_colour(a, mk, E, M): a[183, 282, :3] = (0x12, 0x00, 0x1E); return a, mk, E, M
     def no_review_img(a, mk, E, M): return a, mk, E, M
+    src0 = np.array(Image.open(src_path).convert('RGBA'))
+    def debris_kept(a, mk, E, M):      # v1.2: the orange line on top of the head (cape colour, x 154, y 25) left as it was; its edit entry dropped
+        a[25, 154] = src0[25, 154]; E['edits'] = [e for e in E['edits'] if (e['x'], e['y']) != (154, 25)]; return a, mk, E, M
+    def debris_painted(a, mk, E, M):   # v1.2: a light speck that the rule clears (x 257, y 40) painted with the outline colour instead
+        a[40, 257] = (0x12, 0x00, 0x1E, 255)
+        for e in E['edits']:
+            if (e['x'], e['y']) == (257, 40): e['after'] = [0x12, 0x00, 0x1E, 255]; e['why'] = 'debris-line'
+        return a, mk, E, M
     neg = [('one skin pixel labelled hair', px_skin_to_hair, '4.4b'), ('one G off by 1', px_g, '4.4c'), ('one extra pixel edited', extra_edit, '4.2a'),
            ('one hole pixel left open', hole_left_open, '4.3'), ('mask alpha off on one pixel', alpha_off, '4.4a'), ('B channel set', b_set, '4.4a'),
            ('edits json missing one entry', edit_missing, '4.2b'), ('hair shades out of order in json', shade_swap, '4.4d'), ('cheek pixel marked as mouth', cheek_as_mouth, '4.4c'),
            ('pupil labelled cape', eye_to_cape, '4.4b'), ('hole filled with the outline colour', hole_wrong_colour, '4.2a'), ('review image missing', no_review_img, '4.4f')]
+    if 'debris' in rules:
+        neg += [('debris left on the head (x 154 y 25)', debris_kept, '4.3'), ('debris painted instead of cleared (x 257 y 40)', debris_painted, '4.2a')]
     res = []; tmp = tempfile.mkdtemp()
     try:
         write_set(tmp, rules, src_path); C = check(tmp, rules, src_path); pos = all(c['pass'] for c in C)

@@ -1,10 +1,14 @@
 {
  "schema": 1,
- "spec": "ASSET_SPEC_14_c2_portrait.md v1.1",
+ "spec": "ASSET_SPEC_14_c2_portrait.md v1.2",
  "source": "qa/g2-3-portrait/src/g14-portrait-v1-transparent-copy.png",
  "source_sha256": "28c4bb6e65a975931dc467e7173842ca1f4ae819d8d9bfab608825d8257f94ef",
  "boxes_note": "every box is [x0, y0, x1, y1] in source pixels, both ends INCLUDED",
  "holes": {"colour": "#2E0A27", "boxes": [[103, 181, 107, 185], [280, 181, 284, 185]]},
+ "debris": {"note": "v1.2 section 2b (D-PT-4): after the holes, ONE pass. debris = opaque, colour not LINE, a transparent pixel up/right/down/left (outside the image = transparent), y != crop_row. Debris with an up/right/down/left neighbour that is opaque, not LINE and not debris -> line_colour alpha 255 (why debris-line); other debris -> (0,0,0,0) (why debris-clear). Then the mask rules run on the cleaned picture.",
+            "line_colour": "#12001E", "crop_row": 383},
+ "expect": {"note": "numbers of the v1.2 result (pt_mask_ref.py), used by check_pt_t9.py", "edits": 156, "hole": 50, "debris_clear": 88, "debris_line": 18,
+            "opaque_after": 70045, "ext_ring": 1161},
  "families": {
   "LINE":  ["#12001E", "#09011C", "#1B0522", "#240725"],
   "BLUE":  ["#6181A2", "#3B5273", "#262A46", "#2E3852", "#4C6887", "#34465B", "#1B1636"],

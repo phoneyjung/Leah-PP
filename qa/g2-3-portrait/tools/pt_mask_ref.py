@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # G2.3 (Claude · 1 Nov 2569) reference for ASSET_SPEC_14 v1.1: fills the 2 holes and builds the material mask with the written rules
 # in qa/g2-3-portrait/pt-rules.json (sections 2-3 of the spec). The acceptance checker compares Codex's files with this result pixel by pixel.
+# v1.2 (spec 1.2, D-PT-4, after the owner saw colour specks on the head): when pt-rules.json has "debris", section 2b clears the debris
+# outside the outline in one pass after the holes, then the same mask rules run on the cleaned picture.
 # It is a second, independent implementation of the same written rules - Codex builds the asset files with its own tools.
 # usage: python3 -I pt_mask_ref.py RULES.json SOURCE.png OUT_DIR      -> OUT_DIR/ref-pt.png ref-pt-mask.png ref-pt-mask.json
 #        (import) build(rules, rgba_source) -> filled rgba, R (ids), G, info
@@ -16,18 +18,47 @@ D4 = ((0, -1), (1, 0), (0, 1), (-1, 0))   # up, right, down, left
 def inbox(x, y, boxes): return any(x0 <= x <= x1 and y0 <= y <= y1 for x0, y0, x1, y1 in boxes)
 
 def fill_holes(rules, a):
-    """Section 2: every pixel of the 2 hole boxes was alpha 0 -> rules.holes.colour, alpha 255. Nothing else changes."""
+    """Section 2: every pixel of the 2 hole boxes was alpha 0 -> rules.holes.colour, alpha 255. Nothing else changes.
+    edits = [(x, y, why)] with why hole-left (x < 192) / hole-right"""
     out = a.copy(); c = rules['holes']['colour']; rgb = [int(c[k:k + 2], 16) for k in (1, 3, 5)]
     edits = []
     for x0, y0, x1, y1 in rules['holes']['boxes']:
         for y in range(y0, y1 + 1):
             for x in range(x0, x1 + 1):
                 if a[y, x, 3] != 0: raise ValueError('hole pixel %d,%d is not transparent in the source' % (x, y))
-                out[y, x] = rgb + [255]; edits.append((x, y))
+                out[y, x] = rgb + [255]; edits.append((x, y, 'hole-left' if x < 192 else 'hole-right'))
+    return out, edits
+
+def debris_map(rules, a):
+    """Section 2b (v1.2, D-PT-4): debris = opaque pixel whose colour is not in the LINE family, with a transparent pixel
+    up / right / down / left (outside the image counts as transparent), not on the crop row (y = debris.crop_row).
+    returns (op, line, debris) boolean maps"""
+    H, W = a.shape[:2]; op = a[..., 3] == 255
+    key = (a[..., 0].astype(np.int64) << 16) | (a[..., 1].astype(np.int64) << 8) | a[..., 2].astype(np.int64)
+    line = op & np.isin(key, [int(h[1:], 16) for h in rules['families']['LINE']])
+    pad = np.pad(op, 1)
+    t4 = ~pad[:-2, 1:-1] | ~pad[2:, 1:-1] | ~pad[1:-1, :-2] | ~pad[1:-1, 2:]
+    deb = op & t4 & ~line; deb[rules['debris']['crop_row'], :] = False
+    return op, line, deb
+
+def clear_debris(rules, a):
+    """Section 2b: ONE pass on the image after the holes. A debris pixel with an up / right / down / left neighbour that is opaque,
+    not LINE and not debris (removing it would bare that pixel) -> debris.line_colour alpha 255 ('debris-line');
+    every other debris pixel -> (0, 0, 0, 0) ('debris-clear'). Afterwards there is no debris (checked)."""
+    op, line, deb = debris_map(rules, a)
+    inner = op & ~line & ~deb; p = np.pad(inner, 1)
+    paint = deb & (p[:-2, 1:-1] | p[2:, 1:-1] | p[1:-1, :-2] | p[1:-1, 2:])
+    c = rules['debris']['line_colour']; rgb = [int(c[k:k + 2], 16) for k in (1, 3, 5)]
+    out = a.copy(); edits = []
+    for y, x in zip(*np.where(deb)):
+        if paint[y, x]: out[y, x] = rgb + [255]; edits.append((int(x), int(y), 'debris-line'))
+        else: out[y, x] = 0; edits.append((int(x), int(y), 'debris-clear'))
+    if debris_map(rules, out)[2].any(): raise ValueError('debris left after the one pass')
     return out, edits
 
 def build(rules, src):
     a, edits = fill_holes(rules, src)
+    if 'debris' in rules: a, ed2 = clear_debris(rules, a); edits = edits + ed2
     H, W = a.shape[:2]; op = a[..., 3] == 255
     if ((a[..., 3] != 0) & ~op).any(): raise ValueError('half-transparent pixels')
     fam_of = {h: f for f, hs in rules['families'].items() for h in hs}
