@@ -17,7 +17,7 @@ const { chromium } = require('playwright');
 const PORT = process.env.PORT || 8794, base = 'http://127.0.0.1:' + PORT + '/', MiB = 1048576, BUDGET = 40 * MiB;
 const INJECT = process.argv.includes('--inject'), OUTF = process.argv.slice(2).find(a => !a.startsWith('--'));
 const HOOK = () => {
-  const T = window.__t = []; const who = () => (new Error().stack || '').split('\n').slice(2, 9).map(l => (l.trim().match(/^at (?:new )?([\w$.<>]+)/) || [])[1]).filter(x => x && !/^(Document|HTMLDocument|CanvasRenderingContext2D|OffscreenCanvas|ImageData|window\.)/.test(x)).join('<');
+  const T = window.__t = []; const who = () => (new Error().stack || '').split("\n").slice(2, 16).map(l => (l.trim().match(/^at (?:new )?([\w$.<>]+)/) || [])[1]).filter(x => x && !/^(Document|HTMLDocument|CanvasRenderingContext2D|OffscreenCanvas|ImageData|window\.)/.test(x)).join('<');
   const add = (kind, o, w, h) => T.push({ kind, ref: new WeakRef(o), w0: w, h0: h, fn: who(), o: kind === 'canvas' ? null : undefined });
   const ce = Document.prototype.createElement;
   Document.prototype.createElement = function (t, ...a) { const e = ce.call(this, t, ...a); if (String(t).toLowerCase() === 'canvas') add('canvas', e); return e; };
@@ -44,9 +44,14 @@ const CHAR_FN = /\b(breatheW|buildFists|sheet8|gmLantern|buildFx|stampRadial|sta
     R.pages[name] = await p.evaluate(async ([allChar, CF]) => {
       for (let k = 0; k < 3; k++) { if (window.gc) gc(); await new Promise(r => setTimeout(r, 100)); }
       const CHAR = new RegExp(CF), screen = new Set(document.querySelectorAll('canvas')), items = [];
+      // T15 N1: buffers the character system HOLDS are known by identity (not only by the function names in a cut stack): the scene page's
+      // fist overlays (PS.FIST) and kid pictures (PS.ST.img) -> character, whatever made them
+      const own = new Set(), walk = (o, d) => { if (!o || d > 6 || typeof o !== 'object') return; if (o instanceof HTMLCanvasElement || o instanceof ImageData || o instanceof HTMLImageElement) { own.add(o); return; }
+        for (const v of (Array.isArray(o) ? o : Object.values(o))) walk(v, d + 1); };
+      if (window.PS) { walk(PS.FIST, 0); walk(PS.ST && PS.ST.img, 0); }
       for (const t of window.__t) { const o = t.ref.deref(), alive = !!o; let w = t.w0 || 0, h = t.h0 || 0;
         if (t.kind === 'canvas' && o) { w = Math.max(w, o.width); h = Math.max(h, o.height); if (screen.has(o)) continue; }
-        const cat = allChar || CHAR.test(t.fn) ? 'character' : 'scene';
+        const cat = allChar || (o && own.has(o)) || CHAR.test(t.fn) ? 'character' : 'scene';
         items.push({ kind: t.kind, w, h, bytes: w * h * 4, live_bytes: alive ? (t.kind === 'canvas' ? o.width * o.height * 4 : w * h * 4) : 0, alive, cat, fn: t.fn.slice(0, 60) }); }
       const scr = [...screen].map(c => ({ id: c.id || '(no id)', w: c.width, h: c.height, bytes: c.width * c.height * 4 }));
       const files = [...new Set(performance.getEntriesByType('resource').map(e => e.name.split('/').pop().split('?')[0]).filter(f => /\.(png|jpe?g)$/i.test(f)))];

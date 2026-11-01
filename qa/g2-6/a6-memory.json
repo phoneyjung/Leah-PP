@@ -25,17 +25,17 @@
      "cat": "scene"
     },
     {
-     "file": "g24-tiles-cliff.png",
-     "w": 128,
-     "h": 128,
-     "bytes": 65536,
-     "cat": "scene"
-    },
-    {
      "file": "g24-hut.png",
      "w": 256,
      "h": 256,
      "bytes": 262144,
+     "cat": "scene"
+    },
+    {
+     "file": "g24-tiles-cliff.png",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
      "cat": "scene"
     },
     {
@@ -53,14 +53,14 @@
      "cat": "scene"
     },
     {
-     "file": "g24-tree-b.png",
+     "file": "g24-tree-a.png",
      "w": 128,
      "h": 128,
      "bytes": 65536,
      "cat": "scene"
     },
     {
-     "file": "g24-tree-a.png",
+     "file": "g24-tree-b.png",
      "w": 128,
      "h": 128,
      "bytes": 65536,
@@ -201,8 +201,8 @@
      "bytes": 140,
      "live_bytes": 140,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -211,8 +211,8 @@
      "bytes": 96,
      "live_bytes": 96,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -221,8 +221,8 @@
      "bytes": 96,
      "live_bytes": 96,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -231,8 +231,8 @@
      "bytes": 96,
      "live_bytes": 96,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -241,8 +241,8 @@
      "bytes": 96,
      "live_bytes": 96,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -251,8 +251,8 @@
      "bytes": 224,
      "live_bytes": 224,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -261,8 +261,8 @@
      "bytes": 196,
      "live_bytes": 196,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -271,8 +271,8 @@
      "bytes": 196,
      "live_bytes": 196,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -281,8 +281,8 @@
      "bytes": 80,
      "live_bytes": 80,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -291,8 +291,8 @@
      "bytes": 112,
      "live_bytes": 112,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -301,8 +301,8 @@
      "bytes": 112,
      "live_bytes": 112,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -311,8 +311,8 @@
      "bytes": 112,
      "live_bytes": 112,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -321,8 +321,8 @@
      "bytes": 72,
      "live_bytes": 72,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -331,8 +331,8 @@
      "bytes": 60,
      "live_bytes": 60,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -341,8 +341,8 @@
      "bytes": 60,
      "live_bytes": 60,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -351,8 +351,8 @@
      "bytes": 60,
      "live_bytes": 60,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -361,8 +361,8 @@
      "bytes": 8,
      "live_bytes": 8,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -371,8 +371,8 @@
      "bytes": 8,
      "live_bytes": 8,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -381,8 +381,8 @@
      "bytes": 72,
      "live_bytes": 72,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -391,8 +391,8 @@
      "bytes": 8,
      "live_bytes": 8,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -401,8 +401,8 @@
      "bytes": 64,
      "live_bytes": 64,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -411,8 +411,8 @@
      "bytes": 64,
      "live_bytes": 64,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -421,8 +421,8 @@
      "bytes": 64,
      "live_bytes": 64,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -431,8 +431,8 @@
      "bytes": 64,
      "live_bytes": 64,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -441,8 +441,8 @@
      "bytes": 256,
      "live_bytes": 256,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -451,8 +451,8 @@
      "bytes": 196,
      "live_bytes": 196,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -461,8 +461,8 @@
      "bytes": 168,
      "live_bytes": 168,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -471,8 +471,8 @@
      "bytes": 196,
      "live_bytes": 196,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -491,8 +491,8 @@
      "bytes": 96,
      "live_bytes": 96,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -501,8 +501,8 @@
      "bytes": 160,
      "live_bytes": 160,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -511,8 +511,8 @@
      "bytes": 196,
      "live_bytes": 196,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -521,8 +521,8 @@
      "bytes": 120,
      "live_bytes": 120,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -531,8 +531,8 @@
      "bytes": 64,
      "live_bytes": 64,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -541,8 +541,8 @@
      "bytes": 64,
      "live_bytes": 64,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -551,8 +551,8 @@
      "bytes": 240,
      "live_bytes": 240,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -561,8 +561,8 @@
      "bytes": 432,
      "live_bytes": 432,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -571,8 +571,8 @@
      "bytes": 572,
      "live_bytes": 572,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -581,8 +581,8 @@
      "bytes": 112,
      "live_bytes": 112,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -591,8 +591,8 @@
      "bytes": 112,
      "live_bytes": 112,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -601,8 +601,8 @@
      "bytes": 112,
      "live_bytes": 112,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -611,8 +611,8 @@
      "bytes": 168,
      "live_bytes": 168,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -621,8 +621,8 @@
      "bytes": 168,
      "live_bytes": 168,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -631,8 +631,8 @@
      "bytes": 264,
      "live_bytes": 264,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -641,8 +641,8 @@
      "bytes": 60,
      "live_bytes": 60,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -651,8 +651,8 @@
      "bytes": 60,
      "live_bytes": 60,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -661,8 +661,8 @@
      "bytes": 60,
      "live_bytes": 60,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -671,8 +671,8 @@
      "bytes": 72,
      "live_bytes": 72,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -681,8 +681,8 @@
      "bytes": 72,
      "live_bytes": 72,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -691,8 +691,8 @@
      "bytes": 72,
      "live_bytes": 72,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -701,8 +701,8 @@
      "bytes": 72,
      "live_bytes": 72,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -711,8 +711,8 @@
      "bytes": 60,
      "live_bytes": 60,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -721,8 +721,8 @@
      "bytes": 48,
      "live_bytes": 48,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -731,8 +731,8 @@
      "bytes": 84,
      "live_bytes": 84,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -741,8 +741,8 @@
      "bytes": 72,
      "live_bytes": 72,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -751,8 +751,8 @@
      "bytes": 72,
      "live_bytes": 72,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -761,8 +761,8 @@
      "bytes": 72,
      "live_bytes": 72,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -771,8 +771,8 @@
      "bytes": 72,
      "live_bytes": 72,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -781,8 +781,8 @@
      "bytes": 72,
      "live_bytes": 72,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -791,8 +791,8 @@
      "bytes": 80,
      "live_bytes": 80,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -801,8 +801,8 @@
      "bytes": 192,
      "live_bytes": 192,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -811,8 +811,8 @@
      "bytes": 192,
      "live_bytes": 192,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -821,8 +821,8 @@
      "bytes": 168,
      "live_bytes": 168,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -831,8 +831,8 @@
      "bytes": 224,
      "live_bytes": 224,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -841,8 +841,8 @@
      "bytes": 60,
      "live_bytes": 60,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -851,8 +851,8 @@
      "bytes": 140,
      "live_bytes": 140,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -861,8 +861,8 @@
      "bytes": 128,
      "live_bytes": 128,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -871,8 +871,8 @@
      "bytes": 128,
      "live_bytes": 128,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -881,8 +881,8 @@
      "bytes": 128,
      "live_bytes": 128,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -891,8 +891,8 @@
      "bytes": 216,
      "live_bytes": 216,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -901,8 +901,8 @@
      "bytes": 96,
      "live_bytes": 96,
      "alive": true,
-     "cat": "scene",
-     "fn": "add<mk<http<Array.forEach<http<Array.forEach"
+     "cat": "character",
+     "fn": "add<mk<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -1062,7 +1062,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach<buildWorld<boo"
     },
     {
      "kind": "imagedata",
@@ -1082,7 +1082,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach<buildWorld<boo"
     },
     {
      "kind": "imagedata",
@@ -1102,7 +1102,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach<buildWorld<boo"
     },
     {
      "kind": "imagedata",
@@ -1122,7 +1122,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach<buildWorld<boo"
     },
     {
      "kind": "imagedata",
@@ -1142,7 +1142,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach<buildWorld<boo"
     },
     {
      "kind": "imagedata",
@@ -1162,7 +1162,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach<buildWorld<boo"
     },
     {
      "kind": "imagedata",
@@ -1182,7 +1182,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach<buildWorld<boo"
     },
     {
      "kind": "imagedata",
@@ -1202,7 +1202,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach<buildWorld<boo"
     },
     {
      "kind": "imagedata",
@@ -1222,7 +1222,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach<buildWorld<boo"
     },
     {
      "kind": "imagedata",
@@ -1242,7 +1242,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach<buildWorld<boo"
     },
     {
      "kind": "imagedata",
@@ -1262,7 +1262,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach<buildWorld<boo"
     },
     {
      "kind": "imagedata",
@@ -1282,7 +1282,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach<buildWorld<boo"
     },
     {
      "kind": "imagedata",
@@ -1302,7 +1302,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach<buildWorld<boo"
     },
     {
      "kind": "imagedata",
@@ -1322,7 +1322,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach<buildWorld<boo"
     },
     {
      "kind": "imagedata",
@@ -1342,7 +1342,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach<buildWorld<boo"
     },
     {
      "kind": "imagedata",
@@ -1362,7 +1362,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach<buildWorld<boo"
     },
     {
      "kind": "imagedata",
@@ -1382,7 +1382,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -1402,7 +1402,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -1422,7 +1422,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -1442,7 +1442,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -1462,7 +1462,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -1482,7 +1482,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -1502,7 +1502,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -1522,7 +1522,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -1542,7 +1542,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -1562,7 +1562,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -1582,7 +1582,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -1602,7 +1602,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -1622,7 +1622,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -1642,7 +1642,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -1662,7 +1662,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -1682,7 +1682,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -1702,7 +1702,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -1722,7 +1722,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -1742,7 +1742,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -1762,7 +1762,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -1782,7 +1782,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -1802,7 +1802,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -1822,7 +1822,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -1842,7 +1842,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -1862,7 +1862,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -1882,7 +1882,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -1902,7 +1902,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -1922,7 +1922,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -1942,7 +1942,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -1962,7 +1962,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -1982,7 +1982,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -2002,7 +2002,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -2022,7 +2022,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -2042,7 +2042,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -2062,7 +2062,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -2082,7 +2082,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -2102,7 +2102,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -2122,7 +2122,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -2142,7 +2142,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -2162,7 +2162,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -2182,7 +2182,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -2202,7 +2202,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<buildWorld<boot"
     },
     {
      "kind": "imagedata",
@@ -2222,27 +2222,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
-    },
-    {
-     "kind": "imagedata",
-     "w": 128,
-     "h": 128,
-     "bytes": 65536,
-     "live_bytes": 0,
-     "alive": false,
-     "cat": "scene",
-     "fn": "add<C2.getImageData<alphaMask<addSprite<http<Array.forEach<b"
-    },
-    {
-     "kind": "canvas",
-     "w": 128,
-     "h": 128,
-     "bytes": 65536,
-     "live_bytes": 0,
-     "alive": false,
-     "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach<buildWorld<boo"
     },
     {
      "kind": "imagedata",
@@ -2262,7 +2242,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach<buildWorld<boo"
     },
     {
      "kind": "imagedata",
@@ -2282,7 +2262,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach<buildWorld<boo"
     },
     {
      "kind": "imagedata",
@@ -2302,7 +2282,27 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach"
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach<buildWorld<boo"
+    },
+    {
+     "kind": "imagedata",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<C2.getImageData<alphaMask<addSprite<http<Array.forEach<b"
+    },
+    {
+     "kind": "canvas",
+     "w": 128,
+     "h": 128,
+     "bytes": 65536,
+     "live_bytes": 0,
+     "alive": false,
+     "cat": "scene",
+     "fn": "add<mk<alphaMask<addSprite<http<Array.forEach<buildWorld<boo"
     },
     {
      "kind": "imagedata",
@@ -2342,7 +2342,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<http"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<http<Array.forEach<buil"
     },
     {
      "kind": "imagedata",
@@ -2362,7 +2362,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<http"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<http<Array.forEach<buil"
     },
     {
      "kind": "imagedata",
@@ -2382,7 +2382,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<http"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<http<Array.forEach<buil"
     },
     {
      "kind": "imagedata",
@@ -2402,7 +2402,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<http"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<http<Array.forEach<buil"
     },
     {
      "kind": "imagedata",
@@ -2422,7 +2422,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<http"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<http<Array.forEach<buil"
     },
     {
      "kind": "imagedata",
@@ -2442,7 +2442,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<http"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<http<Array.forEach<buil"
     },
     {
      "kind": "imagedata",
@@ -2462,7 +2462,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<http"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<http<Array.forEach<buil"
     },
     {
      "kind": "imagedata",
@@ -2482,7 +2482,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<http"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<http<Array.forEach<buil"
     },
     {
      "kind": "imagedata",
@@ -2502,7 +2502,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<http"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<http<Array.forEach<buil"
     },
     {
      "kind": "imagedata",
@@ -2522,7 +2522,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "scene",
-     "fn": "add<mk<alphaMask<addSprite<placeProp<http"
+     "fn": "add<mk<alphaMask<addSprite<placeProp<http<Array.forEach<buil"
     },
     {
      "kind": "imagedata",
@@ -2553,9 +2553,9 @@
      "bytes": 9076736
     }
    ],
-   "character_resident": 7671812,
-   "character_made": 11379220,
-   "scene_resident": 5709732,
+   "character_resident": 7680440,
+   "character_made": 11387848,
+   "scene_resident": 5701104,
    "screen_bytes": 9076736,
    "kid_sheets": [
     [
@@ -2580,6 +2580,13 @@
    "gc": true,
    "images": [
     {
+     "file": "c2-pilot-kid4-pt.png",
+     "w": 384,
+     "h": 384,
+     "bytes": 589824,
+     "cat": "character"
+    },
+    {
      "file": "c2-pilot-kid4-idleanim.png",
      "w": 384,
      "h": 768,
@@ -2588,13 +2595,6 @@
     },
     {
      "file": "c2-pilot-kid4-pt-mask.png",
-     "w": 384,
-     "h": 384,
-     "bytes": 589824,
-     "cat": "character"
-    },
-    {
-     "file": "c2-pilot-kid4-pt.png",
      "w": 384,
      "h": 384,
      "bytes": 589824,
@@ -2777,7 +2777,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "character",
-     "fn": "add<kidInto<http<Array.forEach<luNew<luOpen"
+     "fn": "add<kidInto<http<Array.forEach<luNew<luOpen<set.onclick"
     },
     {
      "kind": "imagedata",
@@ -2787,7 +2787,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "character",
-     "fn": "add<kidInto<http<Array.forEach<luNew<luOpen"
+     "fn": "add<kidInto<http<Array.forEach<luNew<luOpen<set.onclick"
     },
     {
      "kind": "imagedata",
@@ -2797,7 +2797,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "character",
-     "fn": "add<kidInto<http<Array.forEach<luNew<luOpen"
+     "fn": "add<kidInto<http<Array.forEach<luNew<luOpen<set.onclick"
     },
     {
      "kind": "imagedata",
@@ -2807,7 +2807,7 @@
      "live_bytes": 0,
      "alive": false,
      "cat": "character",
-     "fn": "add<kidInto<http<Array.forEach<luNew<luOpen"
+     "fn": "add<kidInto<http<Array.forEach<luNew<luOpen<set.onclick"
     },
     {
      "kind": "imagedata",
@@ -2902,17 +2902,17 @@
      "cat": "scene"
     },
     {
-     "file": "c2-held-lantern_L0-S-trial.png",
-     "w": 32,
-     "h": 32,
-     "bytes": 4096,
-     "cat": "character"
-    },
-    {
      "file": "c2-pilot-kid4-idleanim.png",
      "w": 384,
      "h": 768,
      "bytes": 1179648,
+     "cat": "character"
+    },
+    {
+     "file": "c2-held-lantern_L0-S-trial.png",
+     "w": 32,
+     "h": 32,
+     "bytes": 4096,
      "cat": "character"
     },
     {
@@ -3122,7 +3122,7 @@
      "live_bytes": 140,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3132,7 +3132,7 @@
      "live_bytes": 96,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3142,7 +3142,7 @@
      "live_bytes": 96,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3152,7 +3152,7 @@
      "live_bytes": 96,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3162,7 +3162,7 @@
      "live_bytes": 96,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3172,7 +3172,7 @@
      "live_bytes": 224,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3182,7 +3182,7 @@
      "live_bytes": 196,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3192,7 +3192,7 @@
      "live_bytes": 196,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3202,7 +3202,7 @@
      "live_bytes": 80,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3212,7 +3212,7 @@
      "live_bytes": 112,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3222,7 +3222,7 @@
      "live_bytes": 112,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3232,7 +3232,7 @@
      "live_bytes": 112,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3242,7 +3242,7 @@
      "live_bytes": 72,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3252,7 +3252,7 @@
      "live_bytes": 60,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3262,7 +3262,7 @@
      "live_bytes": 60,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3272,7 +3272,7 @@
      "live_bytes": 60,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3282,7 +3282,7 @@
      "live_bytes": 8,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3292,7 +3292,7 @@
      "live_bytes": 8,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3302,7 +3302,7 @@
      "live_bytes": 72,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3312,7 +3312,7 @@
      "live_bytes": 8,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3322,7 +3322,7 @@
      "live_bytes": 64,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3332,7 +3332,7 @@
      "live_bytes": 64,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3342,7 +3342,7 @@
      "live_bytes": 64,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3352,7 +3352,7 @@
      "live_bytes": 64,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3362,7 +3362,7 @@
      "live_bytes": 256,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3372,7 +3372,7 @@
      "live_bytes": 196,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3382,7 +3382,7 @@
      "live_bytes": 168,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3392,7 +3392,7 @@
      "live_bytes": 196,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3412,7 +3412,7 @@
      "live_bytes": 96,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3422,7 +3422,7 @@
      "live_bytes": 160,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3432,7 +3432,7 @@
      "live_bytes": 196,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3442,7 +3442,7 @@
      "live_bytes": 120,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3452,7 +3452,7 @@
      "live_bytes": 64,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3462,7 +3462,7 @@
      "live_bytes": 64,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3472,7 +3472,7 @@
      "live_bytes": 240,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3482,7 +3482,7 @@
      "live_bytes": 432,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3492,7 +3492,7 @@
      "live_bytes": 572,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3502,7 +3502,7 @@
      "live_bytes": 112,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3512,7 +3512,7 @@
      "live_bytes": 112,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3522,7 +3522,7 @@
      "live_bytes": 112,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3532,7 +3532,7 @@
      "live_bytes": 168,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3542,7 +3542,7 @@
      "live_bytes": 168,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3552,7 +3552,7 @@
      "live_bytes": 264,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3562,7 +3562,7 @@
      "live_bytes": 60,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3572,7 +3572,7 @@
      "live_bytes": 60,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3582,7 +3582,7 @@
      "live_bytes": 60,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3592,7 +3592,7 @@
      "live_bytes": 72,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3602,7 +3602,7 @@
      "live_bytes": 72,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3612,7 +3612,7 @@
      "live_bytes": 72,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3622,7 +3622,7 @@
      "live_bytes": 72,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3632,7 +3632,7 @@
      "live_bytes": 60,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3642,7 +3642,7 @@
      "live_bytes": 48,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3652,7 +3652,7 @@
      "live_bytes": 84,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3662,7 +3662,7 @@
      "live_bytes": 72,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3672,7 +3672,7 @@
      "live_bytes": 72,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3682,7 +3682,7 @@
      "live_bytes": 72,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3692,7 +3692,7 @@
      "live_bytes": 72,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3702,7 +3702,7 @@
      "live_bytes": 72,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3712,7 +3712,7 @@
      "live_bytes": 80,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3722,7 +3722,7 @@
      "live_bytes": 192,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3732,7 +3732,7 @@
      "live_bytes": 192,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3742,7 +3742,7 @@
      "live_bytes": 168,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3752,7 +3752,7 @@
      "live_bytes": 224,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3762,7 +3762,7 @@
      "live_bytes": 60,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3772,7 +3772,7 @@
      "live_bytes": 140,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3782,7 +3782,7 @@
      "live_bytes": 128,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3792,7 +3792,7 @@
      "live_bytes": 128,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3802,7 +3802,7 @@
      "live_bytes": 128,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3812,7 +3812,7 @@
      "live_bytes": 216,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     },
     {
      "kind": "canvas",
@@ -3822,7 +3822,7 @@
      "live_bytes": 96,
      "alive": true,
      "cat": "character",
-     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists"
+     "fn": "add<http<Array.forEach<http<Array.forEach<buildFists<boot"
     }
    ],
    "screen": [
@@ -3870,9 +3870,9 @@
  "summary": {
   "scene": {
    "gc": true,
-   "character_resident_MiB": 7.316,
-   "character_made_MiB": 10.852,
-   "scene_resident_MiB": 5.445,
+   "character_resident_MiB": 7.325,
+   "character_made_MiB": 10.86,
+   "scene_resident_MiB": 5.437,
    "screen_MiB": 8.656,
    "tracked": 242,
    "alive": 83
