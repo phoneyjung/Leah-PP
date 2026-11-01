@@ -52,3 +52,4 @@ T10 · 1 พ.ย. 2569 · REVIEW_CODEX_T10_G24_S6.md · ฐาน 56d3d8c · เ
 T11 · 1 พ.ย. 2569 · REVIEW_CODEX_T11_G23_S5.md · ฐาน 46e1c4f · pt_s5 exit 0 (640 ชุด สีรั่ว0) · browser 5/5 exit 0 · ตรวจ browser จริง640ชุด RGBผิด0 · map59/59 · พบ4ข้อ (กลาง2 ต่ำ2: signal QA false positive / kid maskหายไม่แจ้ง / Gเสียข้ามเงียบ / DPR1แคบตัดภาพ) · ดู16ชุดไม่ให้คะแนน · เครดิต0 · ไม่แก้ไฟล์ Claude
 
 T11 เพิ่มเติม · 1 พ.ย. 2569 · เจ้าของขอสิทธิ์ screenshot ใหม่ · DPR2.625 จอ844×390 / 740×360 / 390×844 ผ่าน3/3 exit0 · screenshotจริงเทียบexpected รูปใหญ่0/ตัวเล็ก0pxทุกจอ · ปรับ REVIEW_CODEX_T11_G23_S5.md · ข้อพบเดิม4ข้อคงเดิม · เครดิต0
+T12 · 1 พ.ย. 2569 · REVIEW_CODEX_T12_G23_S5.md · ฐาน 0d826fc · R1–R4 ผ่าน 4/4 · pt_s5 exit0 (640 ชุด ผิด0px) · selftest 9/9 exit0 · browser 6/6 exit0 · ฉีดสีผิด exit1 · หน้าเก่า 4/6 exit1 · 7จอตำแหน่งเดิม7/7 · บั๊กใหม่0 · เครดิต0 · ต่างจากสเปก: ไม่มี
