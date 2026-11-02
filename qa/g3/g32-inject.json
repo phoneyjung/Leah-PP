@@ -1,0 +1,66 @@
+{
+ "I1": {
+  "summary": {
+   "k2": "25/28",
+   "k7": "35/35",
+   "loadTwice": true,
+   "fails": 3
+  },
+  "failed_cases": 3,
+  "first": [
+   "walk mask G 9 (1 px)",
+   "walk mask id 0 (1 px)",
+   "walk mask = walkhold mask"
+  ]
+ },
+ "I2": {
+  "summary": {
+   "k2": "28/28",
+   "k7": "29/35",
+   "loadTwice": true,
+   "fails": 6
+  },
+  "failed_cases": 6,
+  "first": [
+   "T6#0",
+   "T6#1",
+   "T6#2",
+   "T6#3",
+   "T7",
+   "T10#2"
+  ]
+ },
+ "I3": {
+  "summary": {
+   "k2": "28/28",
+   "k7": "2/35",
+   "loadTwice": true,
+   "fails": 33
+  },
+  "failed_cases": 33,
+  "first": [
+   "T1",
+   "T2",
+   "T3",
+   "T4",
+   "T5",
+   "T6#0"
+  ]
+ },
+ "I4": {
+  "summary": {
+   "k2": "23/28",
+   "k7": "35/35",
+   "loadTwice": true,
+   "fails": 5
+  },
+  "failed_cases": 5,
+  "first": [
+   "pack missing",
+   "pack not JSON",
+   "pack cell 64",
+   "pack bad palette hex",
+   "every file missing"
+  ]
+ }
+}

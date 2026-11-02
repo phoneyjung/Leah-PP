@@ -1,0 +1,2387 @@
+{
+ "k2": [
+  {
+   "case": "full set",
+   "ok": true,
+   "ready": true,
+   "failed": [],
+   "modes": {
+    "idle": "idle",
+    "walk": "walk",
+    "raw": [],
+    "hold": true,
+    "lantern_light": true,
+    "portrait": "recolour"
+   },
+   "want": {
+    "ready": true,
+    "failed": [],
+    "modes": {
+     "idle": "idle",
+     "walk": "walk",
+     "raw": [],
+     "hold": true,
+     "lantern_light": true,
+     "portrait": "recolour"
+    }
+   },
+   "ms": 160,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 5308416,
+    "masks": 5308416,
+    "other": 8192
+   },
+   "total": 10625024
+  },
+  {
+   "case": "pack missing",
+   "ok": true,
+   "ready": false,
+   "failed": [
+    "pack"
+   ],
+   "modes": null,
+   "want": {
+    "ready": false,
+    "failed": [
+     "pack"
+    ],
+    "modes": null
+   },
+   "ms": 7,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 0,
+    "masks": 0,
+    "other": 0
+   },
+   "total": 0
+  },
+  {
+   "case": "pack not JSON",
+   "ok": true,
+   "ready": false,
+   "failed": [
+    "pack"
+   ],
+   "modes": null,
+   "want": {
+    "ready": false,
+    "failed": [
+     "pack"
+    ],
+    "modes": null
+   },
+   "ms": 6,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 0,
+    "masks": 0,
+    "other": 0
+   },
+   "total": 0
+  },
+  {
+   "case": "pack cell 64",
+   "ok": true,
+   "ready": false,
+   "failed": [
+    "pack"
+   ],
+   "modes": null,
+   "want": {
+    "ready": false,
+    "failed": [
+     "pack"
+    ],
+    "modes": null
+   },
+   "ms": 6,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 0,
+    "masks": 0,
+    "other": 0
+   },
+   "total": 0
+  },
+  {
+   "case": "pack bad palette hex",
+   "ok": true,
+   "ready": false,
+   "failed": [
+    "pack"
+   ],
+   "modes": null,
+   "want": {
+    "ready": false,
+    "failed": [
+     "pack"
+    ],
+    "modes": null
+   },
+   "ms": 8,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 0,
+    "masks": 0,
+    "other": 0
+   },
+   "total": 0
+  },
+  {
+   "case": "idle missing",
+   "ok": true,
+   "ready": true,
+   "failed": [
+    "idle"
+   ],
+   "modes": {
+    "idle": "walk-f1",
+    "walk": "walk",
+    "raw": [],
+    "hold": false,
+    "lantern_light": true,
+    "portrait": "recolour"
+   },
+   "want": {
+    "ready": true,
+    "failed": [
+     "idle"
+    ],
+    "modes": {
+     "idle": "walk-f1",
+     "walk": "walk",
+     "raw": [],
+     "hold": false,
+     "lantern_light": true,
+     "portrait": "recolour"
+    }
+   },
+   "ms": 153,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 4128768,
+    "masks": 4128768,
+    "other": 8192
+   },
+   "total": 8265728
+  },
+  {
+   "case": "idle wrong size",
+   "ok": true,
+   "ready": true,
+   "failed": [
+    "idle"
+   ],
+   "modes": {
+    "idle": "walk-f1",
+    "walk": "walk",
+    "raw": [],
+    "hold": false,
+    "lantern_light": true,
+    "portrait": "recolour"
+   },
+   "want": {
+    "ready": true,
+    "failed": [
+     "idle"
+    ],
+    "modes": {
+     "idle": "walk-f1",
+     "walk": "walk",
+     "raw": [],
+     "hold": false,
+     "lantern_light": true,
+     "portrait": "recolour"
+    }
+   },
+   "ms": 141,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 4128768,
+    "masks": 4128768,
+    "other": 8192
+   },
+   "total": 8265728
+  },
+  {
+   "case": "walk missing",
+   "ok": true,
+   "ready": true,
+   "failed": [
+    "walk"
+   ],
+   "modes": {
+    "idle": "idle",
+    "walk": "idle-f1",
+    "raw": [],
+    "hold": true,
+    "lantern_light": true,
+    "portrait": "recolour"
+   },
+   "want": {
+    "ready": true,
+    "failed": [
+     "walk"
+    ],
+    "modes": {
+     "idle": "idle",
+     "walk": "idle-f1",
+     "raw": [],
+     "hold": true,
+     "lantern_light": true,
+     "portrait": "recolour"
+    }
+   },
+   "ms": 128,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 3538944,
+    "masks": 3538944,
+    "other": 8192
+   },
+   "total": 7086080
+  },
+  {
+   "case": "walk wrong size 575",
+   "ok": true,
+   "ready": true,
+   "failed": [
+    "walk"
+   ],
+   "modes": {
+    "idle": "idle",
+    "walk": "idle-f1",
+    "raw": [],
+    "hold": true,
+    "lantern_light": true,
+    "portrait": "recolour"
+   },
+   "want": {
+    "ready": true,
+    "failed": [
+     "walk"
+    ],
+    "modes": {
+     "idle": "idle",
+     "walk": "idle-f1",
+     "raw": [],
+     "hold": true,
+     "lantern_light": true,
+     "portrait": "recolour"
+    }
+   },
+   "ms": 114,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 3538944,
+    "masks": 3538944,
+    "other": 8192
+   },
+   "total": 7086080
+  },
+  {
+   "case": "walkhold missing",
+   "ok": true,
+   "ready": true,
+   "failed": [
+    "walkhold"
+   ],
+   "modes": {
+    "idle": "idle",
+    "walk": "walk",
+    "raw": [],
+    "hold": false,
+    "lantern_light": true,
+    "portrait": "recolour"
+   },
+   "want": {
+    "ready": true,
+    "failed": [
+     "walkhold"
+    ],
+    "modes": {
+     "idle": "idle",
+     "walk": "walk",
+     "raw": [],
+     "hold": false,
+     "lantern_light": true,
+     "portrait": "recolour"
+    }
+   },
+   "ms": 117,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 3538944,
+    "masks": 3538944,
+    "other": 8192
+   },
+   "total": 7086080
+  },
+  {
+   "case": "idle + walk missing",
+   "ok": true,
+   "ready": false,
+   "failed": [
+    "idle",
+    "walk"
+   ],
+   "modes": null,
+   "want": {
+    "ready": false,
+    "failed": [
+     "idle",
+     "walk"
+    ],
+    "modes": null
+   },
+   "ms": 67,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 0,
+    "masks": 0,
+    "other": 0
+   },
+   "total": 0
+  },
+  {
+   "case": "idle mask missing",
+   "ok": true,
+   "ready": true,
+   "failed": [
+    "idle-mask"
+   ],
+   "modes": {
+    "idle": "idle",
+    "walk": "walk",
+    "raw": [
+     "idle"
+    ],
+    "hold": true,
+    "lantern_light": true,
+    "portrait": "recolour"
+   },
+   "want": {
+    "ready": true,
+    "failed": [
+     "idle-mask"
+    ],
+    "modes": {
+     "idle": "idle",
+     "walk": "walk",
+     "raw": [
+      "idle"
+     ],
+     "hold": true,
+     "lantern_light": true,
+     "portrait": "recolour"
+    }
+   },
+   "ms": 123,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 5308416,
+    "masks": 4128768,
+    "other": 8192
+   },
+   "total": 9445376
+  },
+  {
+   "case": "walk mask missing",
+   "ok": true,
+   "ready": true,
+   "failed": [
+    "walk-mask"
+   ],
+   "modes": {
+    "idle": "idle",
+    "walk": "walk",
+    "raw": [
+     "walk"
+    ],
+    "hold": true,
+    "lantern_light": true,
+    "portrait": "recolour"
+   },
+   "want": {
+    "ready": true,
+    "failed": [
+     "walk-mask"
+    ],
+    "modes": {
+     "idle": "idle",
+     "walk": "walk",
+     "raw": [
+      "walk"
+     ],
+     "hold": true,
+     "lantern_light": true,
+     "portrait": "recolour"
+    }
+   },
+   "ms": 122,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 5308416,
+    "masks": 3538944,
+    "other": 8192
+   },
+   "total": 8855552
+  },
+  {
+   "case": "walkhold mask missing",
+   "ok": true,
+   "ready": true,
+   "failed": [
+    "walkhold-mask"
+   ],
+   "modes": {
+    "idle": "idle",
+    "walk": "walk",
+    "raw": [
+     "walkhold"
+    ],
+    "hold": true,
+    "lantern_light": true,
+    "portrait": "recolour"
+   },
+   "want": {
+    "ready": true,
+    "failed": [
+     "walkhold-mask"
+    ],
+    "modes": {
+     "idle": "idle",
+     "walk": "walk",
+     "raw": [
+      "walkhold"
+     ],
+     "hold": true,
+     "lantern_light": true,
+     "portrait": "recolour"
+    }
+   },
+   "ms": 138,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 5308416,
+    "masks": 3538944,
+    "other": 8192
+   },
+   "total": 8855552
+  },
+  {
+   "case": "walk mask G 9 (1 px)",
+   "ok": true,
+   "ready": true,
+   "failed": [
+    "walk-mask"
+   ],
+   "modes": {
+    "idle": "idle",
+    "walk": "walk",
+    "raw": [
+     "walk"
+    ],
+    "hold": true,
+    "lantern_light": true,
+    "portrait": "recolour"
+   },
+   "want": {
+    "ready": true,
+    "failed": [
+     "walk-mask"
+    ],
+    "modes": {
+     "idle": "idle",
+     "walk": "walk",
+     "raw": [
+      "walk"
+     ],
+     "hold": true,
+     "lantern_light": true,
+     "portrait": "recolour"
+    }
+   },
+   "ms": 127,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 5308416,
+    "masks": 3538944,
+    "other": 8192
+   },
+   "total": 8855552
+  },
+  {
+   "case": "walk mask id 0 (1 px)",
+   "ok": true,
+   "ready": true,
+   "failed": [
+    "walk-mask"
+   ],
+   "modes": {
+    "idle": "idle",
+    "walk": "walk",
+    "raw": [
+     "walk"
+    ],
+    "hold": true,
+    "lantern_light": true,
+    "portrait": "recolour"
+   },
+   "want": {
+    "ready": true,
+    "failed": [
+     "walk-mask"
+    ],
+    "modes": {
+     "idle": "idle",
+     "walk": "walk",
+     "raw": [
+      "walk"
+     ],
+     "hold": true,
+     "lantern_light": true,
+     "portrait": "recolour"
+    }
+   },
+   "ms": 118,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 5308416,
+    "masks": 3538944,
+    "other": 8192
+   },
+   "total": 8855552
+  },
+  {
+   "case": "walk mask = walkhold mask",
+   "ok": true,
+   "ready": true,
+   "failed": [
+    "walk-mask"
+   ],
+   "modes": {
+    "idle": "idle",
+    "walk": "walk",
+    "raw": [
+     "walk"
+    ],
+    "hold": true,
+    "lantern_light": true,
+    "portrait": "recolour"
+   },
+   "want": {
+    "ready": true,
+    "failed": [
+     "walk-mask"
+    ],
+    "modes": {
+     "idle": "idle",
+     "walk": "walk",
+     "raw": [
+      "walk"
+     ],
+     "hold": true,
+     "lantern_light": true,
+     "portrait": "recolour"
+    }
+   },
+   "ms": 132,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 5308416,
+    "masks": 3538944,
+    "other": 8192
+   },
+   "total": 8855552
+  },
+  {
+   "case": "hold anchors missing",
+   "ok": true,
+   "ready": true,
+   "failed": [
+    "hold"
+   ],
+   "modes": {
+    "idle": "idle",
+    "walk": "walk",
+    "raw": [],
+    "hold": false,
+    "lantern_light": true,
+    "portrait": "recolour"
+   },
+   "want": {
+    "ready": true,
+    "failed": [
+     "hold"
+    ],
+    "modes": {
+     "idle": "idle",
+     "walk": "walk",
+     "raw": [],
+     "hold": false,
+     "lantern_light": true,
+     "portrait": "recolour"
+    }
+   },
+   "ms": 132,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 5308416,
+    "masks": 5308416,
+    "other": 8192
+   },
+   "total": 10625024
+  },
+  {
+   "case": "hold anchors 5 frames",
+   "ok": true,
+   "ready": true,
+   "failed": [
+    "hold"
+   ],
+   "modes": {
+    "idle": "idle",
+    "walk": "walk",
+    "raw": [],
+    "hold": false,
+    "lantern_light": true,
+    "portrait": "recolour"
+   },
+   "want": {
+    "ready": true,
+    "failed": [
+     "hold"
+    ],
+    "modes": {
+     "idle": "idle",
+     "walk": "walk",
+     "raw": [],
+     "hold": false,
+     "lantern_light": true,
+     "portrait": "recolour"
+    }
+   },
+   "ms": 155,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 5308416,
+    "masks": 5308416,
+    "other": 8192
+   },
+   "total": 10625024
+  },
+  {
+   "case": "lantern missing",
+   "ok": true,
+   "ready": true,
+   "failed": [
+    "lantern"
+   ],
+   "modes": {
+    "idle": "idle",
+    "walk": "walk",
+    "raw": [],
+    "hold": false,
+    "lantern_light": true,
+    "portrait": "recolour"
+   },
+   "want": {
+    "ready": true,
+    "failed": [
+     "lantern"
+    ],
+    "modes": {
+     "idle": "idle",
+     "walk": "walk",
+     "raw": [],
+     "hold": false,
+     "lantern_light": true,
+     "portrait": "recolour"
+    }
+   },
+   "ms": 132,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 5308416,
+    "masks": 5308416,
+    "other": 4096
+   },
+   "total": 10620928
+  },
+  {
+   "case": "lantern 32x31",
+   "ok": true,
+   "ready": true,
+   "failed": [
+    "lantern"
+   ],
+   "modes": {
+    "idle": "idle",
+    "walk": "walk",
+    "raw": [],
+    "hold": false,
+    "lantern_light": true,
+    "portrait": "recolour"
+   },
+   "want": {
+    "ready": true,
+    "failed": [
+     "lantern"
+    ],
+    "modes": {
+     "idle": "idle",
+     "walk": "walk",
+     "raw": [],
+     "hold": false,
+     "lantern_light": true,
+     "portrait": "recolour"
+    }
+   },
+   "ms": 133,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 5308416,
+    "masks": 5308416,
+    "other": 4096
+   },
+   "total": 10620928
+  },
+  {
+   "case": "lantern light missing",
+   "ok": true,
+   "ready": true,
+   "failed": [
+    "lantern-light"
+   ],
+   "modes": {
+    "idle": "idle",
+    "walk": "walk",
+    "raw": [],
+    "hold": true,
+    "lantern_light": false,
+    "portrait": "recolour"
+   },
+   "want": {
+    "ready": true,
+    "failed": [
+     "lantern-light"
+    ],
+    "modes": {
+     "idle": "idle",
+     "walk": "walk",
+     "raw": [],
+     "hold": true,
+     "lantern_light": false,
+     "portrait": "recolour"
+    }
+   },
+   "ms": 127,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 5308416,
+    "masks": 5308416,
+    "other": 4096
+   },
+   "total": 10620928
+  },
+  {
+   "case": "portrait missing",
+   "ok": true,
+   "ready": true,
+   "failed": [
+    "portrait"
+   ],
+   "modes": {
+    "idle": "idle",
+    "walk": "walk",
+    "raw": [],
+    "hold": true,
+    "lantern_light": true,
+    "portrait": null
+   },
+   "want": {
+    "ready": true,
+    "failed": [
+     "portrait"
+    ],
+    "modes": {
+     "idle": "idle",
+     "walk": "walk",
+     "raw": [],
+     "hold": true,
+     "lantern_light": true,
+     "portrait": null
+    }
+   },
+   "ms": 116,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 4718592,
+    "masks": 4718592,
+    "other": 8192
+   },
+   "total": 9445376
+  },
+  {
+   "case": "portrait mask missing",
+   "ok": true,
+   "ready": true,
+   "failed": [
+    "portrait-mask"
+   ],
+   "modes": {
+    "idle": "idle",
+    "walk": "walk",
+    "raw": [],
+    "hold": true,
+    "lantern_light": true,
+    "portrait": "raw"
+   },
+   "want": {
+    "ready": true,
+    "failed": [
+     "portrait-mask"
+    ],
+    "modes": {
+     "idle": "idle",
+     "walk": "walk",
+     "raw": [],
+     "hold": true,
+     "lantern_light": true,
+     "portrait": "raw"
+    }
+   },
+   "ms": 117,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 5308416,
+    "masks": 4718592,
+    "other": 8192
+   },
+   "total": 10035200
+  },
+  {
+   "case": "portrait mask json missing",
+   "ok": true,
+   "ready": true,
+   "failed": [
+    "portrait-mask"
+   ],
+   "modes": {
+    "idle": "idle",
+    "walk": "walk",
+    "raw": [],
+    "hold": true,
+    "lantern_light": true,
+    "portrait": "raw"
+   },
+   "want": {
+    "ready": true,
+    "failed": [
+     "portrait-mask"
+    ],
+    "modes": {
+     "idle": "idle",
+     "walk": "walk",
+     "raw": [],
+     "hold": true,
+     "lantern_light": true,
+     "portrait": "raw"
+    }
+   },
+   "ms": 150,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 5308416,
+    "masks": 4718592,
+    "other": 8192
+   },
+   "total": 10035200
+  },
+  {
+   "case": "shade map missing",
+   "ok": true,
+   "ready": true,
+   "failed": [
+    "portrait-mask"
+   ],
+   "modes": {
+    "idle": "idle",
+    "walk": "walk",
+    "raw": [],
+    "hold": true,
+    "lantern_light": true,
+    "portrait": "raw"
+   },
+   "want": {
+    "ready": true,
+    "failed": [
+     "portrait-mask"
+    ],
+    "modes": {
+     "idle": "idle",
+     "walk": "walk",
+     "raw": [],
+     "hold": true,
+     "lantern_light": true,
+     "portrait": "raw"
+    }
+   },
+   "ms": 133,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 5308416,
+    "masks": 4718592,
+    "other": 8192
+   },
+   "total": 10035200
+  },
+  {
+   "case": "every file but the pack missing",
+   "ok": true,
+   "ready": false,
+   "failed": [
+    "idle",
+    "walk",
+    "walkhold"
+   ],
+   "modes": null,
+   "want": {
+    "ready": false,
+    "failed": [
+     "idle",
+     "walk",
+     "walkhold"
+    ],
+    "modes": null
+   },
+   "ms": 23,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 0,
+    "masks": 0,
+    "other": 0
+   },
+   "total": 0
+  },
+  {
+   "case": "every file missing",
+   "ok": true,
+   "ready": false,
+   "failed": [
+    "pack"
+   ],
+   "modes": null,
+   "want": {
+    "ready": false,
+    "failed": [
+     "pack"
+    ],
+    "modes": null
+   },
+   "ms": 10,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 0,
+    "masks": 0,
+    "other": 0
+   },
+   "total": 0
+  }
+ ],
+ "k7": [
+  {
+   "case": "T1",
+   "ok": true,
+   "got": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "brown",
+     "iris": "green",
+     "skin": "medium"
+    }
+   },
+   "want": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "brown",
+     "iris": "green",
+     "skin": "medium"
+    }
+   },
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "T2",
+   "ok": true,
+   "got": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "red",
+     "iris": "amber",
+     "skin": "medium"
+    }
+   },
+   "want": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "red",
+     "iris": "amber",
+     "skin": "medium"
+    }
+   },
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "T3",
+   "ok": true,
+   "got": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "blue",
+     "iris": "blue",
+     "skin": "medium"
+    }
+   },
+   "want": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "blue",
+     "iris": "blue",
+     "skin": "medium"
+    }
+   },
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "T4",
+   "ok": true,
+   "got": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "silver",
+     "iris": "black",
+     "skin": "medium"
+    }
+   },
+   "want": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "silver",
+     "iris": "black",
+     "skin": "medium"
+    }
+   },
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "T5",
+   "ok": true,
+   "got": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "green",
+     "iris": "green",
+     "skin": "medium"
+    }
+   },
+   "want": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "green",
+     "iris": "green",
+     "skin": "medium"
+    }
+   },
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "T6#0",
+   "ok": true,
+   "got": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "blonde",
+     "iris": "amber",
+     "skin": "light"
+    }
+   },
+   "want": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "blonde",
+     "iris": "amber",
+     "skin": "light"
+    }
+   },
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "T6#1",
+   "ok": true,
+   "got": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "blonde",
+     "iris": "amber",
+     "skin": "medium"
+    }
+   },
+   "want": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "blonde",
+     "iris": "amber",
+     "skin": "medium"
+    }
+   },
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "T6#2",
+   "ok": true,
+   "got": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "blonde",
+     "iris": "amber",
+     "skin": "tan"
+    }
+   },
+   "want": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "blonde",
+     "iris": "amber",
+     "skin": "tan"
+    }
+   },
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "T6#3",
+   "ok": true,
+   "got": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "blonde",
+     "iris": "amber",
+     "skin": "deep"
+    }
+   },
+   "want": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "blonde",
+     "iris": "amber",
+     "skin": "deep"
+    }
+   },
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "T7",
+   "ok": true,
+   "got": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "pink",
+     "iris": "blue",
+     "skin": "tan"
+    }
+   },
+   "want": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "pink",
+     "iris": "blue",
+     "skin": "tan"
+    }
+   },
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "T8",
+   "ok": true,
+   "got": null,
+   "want": null,
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "T9",
+   "ok": true,
+   "got": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "brown",
+     "iris": "green",
+     "skin": "medium"
+    }
+   },
+   "want": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "brown",
+     "iris": "green",
+     "skin": "medium"
+    }
+   },
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "T10#0",
+   "ok": true,
+   "got": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "black",
+     "iris": "black",
+     "skin": "medium"
+    }
+   },
+   "want": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "black",
+     "iris": "black",
+     "skin": "medium"
+    }
+   },
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "T10#1",
+   "ok": true,
+   "got": null,
+   "want": null,
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "T10#2",
+   "ok": true,
+   "got": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "green",
+     "iris": "brown",
+     "skin": "deep"
+    }
+   },
+   "want": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "green",
+     "iris": "brown",
+     "skin": "deep"
+    }
+   },
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "T10#3",
+   "ok": true,
+   "got": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "brown",
+     "iris": "green",
+     "skin": "medium"
+    }
+   },
+   "want": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "brown",
+     "iris": "green",
+     "skin": "medium"
+    }
+   },
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "T11",
+   "ok": true,
+   "got": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "blonde",
+     "iris": "green",
+     "skin": "medium"
+    }
+   },
+   "want": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "blonde",
+     "iris": "green",
+     "skin": "medium"
+    }
+   },
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "T12",
+   "ok": true,
+   "got": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "pink",
+     "iris": "amber",
+     "skin": "deep"
+    }
+   },
+   "want": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "pink",
+     "iris": "amber",
+     "skin": "deep"
+    }
+   },
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "B1 char2 is a string -> old fields",
+   "ok": true,
+   "got": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "red",
+     "iris": "amber",
+     "skin": "medium"
+    }
+   },
+   "want": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "red",
+     "iris": "amber",
+     "skin": "medium"
+    }
+   },
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "B2 char2 is an array -> old fields",
+   "ok": true,
+   "got": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "red",
+     "iris": "amber",
+     "skin": "medium"
+    }
+   },
+   "want": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "red",
+     "iris": "amber",
+     "skin": "medium"
+    }
+   },
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "B3 char2 null -> old fields",
+   "ok": true,
+   "got": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "red",
+     "iris": "amber",
+     "skin": "medium"
+    }
+   },
+   "want": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "red",
+     "iris": "amber",
+     "skin": "medium"
+    }
+   },
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "B4 v 1 -> old fields",
+   "ok": true,
+   "got": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "red",
+     "iris": "amber",
+     "skin": "medium"
+    }
+   },
+   "want": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "red",
+     "iris": "amber",
+     "skin": "medium"
+    }
+   },
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "B5 v 3 (newer game) -> old fields",
+   "ok": true,
+   "got": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "red",
+     "iris": "amber",
+     "skin": "medium"
+    }
+   },
+   "want": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "red",
+     "iris": "amber",
+     "skin": "medium"
+    }
+   },
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "B6 set c3 -> old fields",
+   "ok": true,
+   "got": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "red",
+     "iris": "amber",
+     "skin": "medium"
+    }
+   },
+   "want": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "red",
+     "iris": "amber",
+     "skin": "medium"
+    }
+   },
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "B7 base with no art -> null",
+   "ok": true,
+   "got": null,
+   "want": null,
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "B8 gender m on the girl base -> null",
+   "ok": true,
+   "got": null,
+   "want": null,
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "B9 gender missing -> base gender",
+   "ok": true,
+   "got": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "pink",
+     "iris": "blue",
+     "skin": "tan"
+    }
+   },
+   "want": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "pink",
+     "iris": "blue",
+     "skin": "tan"
+    }
+   },
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "B10 parts missing -> defaults",
+   "ok": true,
+   "got": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "pink",
+     "iris": "blue",
+     "skin": "tan"
+    }
+   },
+   "want": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "pink",
+     "iris": "blue",
+     "skin": "tan"
+    }
+   },
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "B11 unknown parts -> defaults / null",
+   "ok": true,
+   "got": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "pink",
+     "iris": "blue",
+     "skin": "tan"
+    }
+   },
+   "want": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "pink",
+     "iris": "blue",
+     "skin": "tan"
+    }
+   },
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "B12 wrong colours -> that field default",
+   "ok": true,
+   "got": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "brown",
+     "iris": "green",
+     "skin": "medium"
+    }
+   },
+   "want": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "brown",
+     "iris": "green",
+     "skin": "medium"
+    }
+   },
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "B13 one wrong colour only",
+   "ok": true,
+   "got": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "silver",
+     "iris": "black",
+     "skin": "medium"
+    }
+   },
+   "want": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "silver",
+     "iris": "black",
+     "skin": "medium"
+    }
+   },
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "B14 valid char2 -> same values, new object",
+   "ok": true,
+   "got": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "pink",
+     "iris": "blue",
+     "skin": "tan"
+    }
+   },
+   "want": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "pink",
+     "iris": "blue",
+     "skin": "tan"
+    }
+   },
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "B15 look({}) -> defaults",
+   "ok": true,
+   "got": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "brown",
+     "iris": "green",
+     "skin": "medium"
+    }
+   },
+   "want": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "brown",
+     "iris": "green",
+     "skin": "medium"
+    }
+   },
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "not a save (null, string, number, array, undefined) -> null",
+   "ok": true,
+   "got": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ]
+  },
+  {
+   "case": "deprecated hair id -> default part",
+   "ok": true,
+   "got": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "red",
+     "iris": "blue",
+     "skin": "deep"
+    }
+   }
+  }
+ ],
+ "extra": {
+  "loadTwice": {
+   "ok": true,
+   "sameObj": true,
+   "t1": 10625024,
+   "t2": 0,
+   "lookAfter": null,
+   "again": true,
+   "t3": 10625024
+  }
+ },
+ "inject": null,
+ "failedCases": [],
+ "summary": {
+  "k2": "28/28",
+  "k7": "35/35",
+  "loadTwice": true,
+  "fails": 0
+ }
+}
