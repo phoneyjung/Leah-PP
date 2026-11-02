@@ -1,13 +1,13 @@
 {
  "I1": {
   "summary": {
-   "k2": "25/28",
-   "k7": "35/35",
+   "k2": "38/41",
+   "k7": "41/41",
    "loadTwice": true,
+   "releaseWhileLoading": true,
    "fails": 3
   },
-  "failed_cases": 3,
-  "first": [
+  "failed_cases": [
    "walk mask G 9 (1 px)",
    "walk mask id 0 (1 px)",
    "walk mask = walkhold mask"
@@ -15,13 +15,13 @@
  },
  "I2": {
   "summary": {
-   "k2": "28/28",
-   "k7": "29/35",
+   "k2": "41/41",
+   "k7": "35/41",
    "loadTwice": true,
+   "releaseWhileLoading": true,
    "fails": 6
   },
-  "failed_cases": 6,
-  "first": [
+  "failed_cases": [
    "T6#0",
    "T6#1",
    "T6#2",
@@ -32,35 +32,101 @@
  },
  "I3": {
   "summary": {
-   "k2": "28/28",
-   "k7": "2/35",
+   "k2": "41/41",
+   "k7": "2/41",
    "loadTwice": true,
-   "fails": 33
+   "releaseWhileLoading": true,
+   "fails": 39
   },
-  "failed_cases": 33,
-  "first": [
+  "failed_cases": [
    "T1",
    "T2",
    "T3",
    "T4",
    "T5",
-   "T6#0"
+   "T6#0",
+   "T6#1",
+   "T6#2",
+   "T6#3",
+   "T7",
+   "T8",
+   "T9",
+   "T10#0",
+   "T10#1",
+   "T10#2",
+   "T10#3",
+   "T11",
+   "T12",
+   "B1 char2 is a string -> old fields",
+   "B2 char2 is an array -> old fields",
+   "B3 char2 null -> old fields",
+   "B4 v 1 -> old fields",
+   "B5 v 3 (newer game) -> old fields",
+   "B6 set c3 -> old fields",
+   "B7 base with no art -> null",
+   "B8 gender m on the girl base -> null",
+   "B9 gender missing -> base gender",
+   "B10 parts missing -> defaults",
+   "B11 unknown parts -> defaults / null",
+   "B12 wrong colours -> that field default",
+   "B13 one wrong colour only",
+   "B14 valid char2 -> same values, new object",
+   "B15 look({}) -> defaults",
+   "B16 base __proto__ -> null (T22 R1)",
+   "B16b base __proto__, no gender / parts -> null (T22 R1 probe)",
+   "B17 base {toString:null} -> null (T22 R1)",
+   "B18 base constructor -> null",
+   "B19 base number -> null",
+   "B20 colour named constructor -> default"
   ]
  },
  "I4": {
   "summary": {
-   "k2": "23/28",
-   "k7": "35/35",
+   "k2": "30/41",
+   "k7": "41/41",
    "loadTwice": true,
-   "fails": 5
+   "releaseWhileLoading": false,
+   "fails": 12
   },
-  "failed_cases": 5,
-  "first": [
+  "failed_cases": [
    "pack missing",
    "pack not JSON",
    "pack cell 64",
    "pack bad palette hex",
-   "every file missing"
+   "pack walk_ms 0",
+   "pack idle_loop [99]",
+   "pack budget -1",
+   "pack recolour {}",
+   "pack without hold",
+   "pack colour named __proto__",
+   "every file missing",
+   "release while loading"
+  ]
+ },
+ "g3.2-first-version (5a7e27e)": {
+  "summary": {
+   "k2": "29/41",
+   "k7": "39/41",
+   "loadTwice": true,
+   "releaseWhileLoading": false,
+   "fails": 15
+  },
+  "failed_cases": [
+   "pack walk_ms 0",
+   "pack idle_loop [99]",
+   "pack budget -1",
+   "pack recolour {}",
+   "pack without hold",
+   "pack colour named __proto__",
+   "hold S anchor null",
+   "hold SE fist empty",
+   "hold fist on a clear px",
+   "hold N has a hand",
+   "hold hand flips inside a dir",
+   "shade map values 99",
+   "B16b base __proto__, no gender / parts -> null (T22 R1 probe)",
+   "B17 base {toString:null} -> null (T22 R1)",
+   "release while loading"
   ]
  }
 }

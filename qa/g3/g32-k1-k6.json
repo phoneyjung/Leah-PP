@@ -2,12 +2,12 @@
  "game_files_changed_vs_origin/main": [],
  "baseline_sha": "20/20",
  "pack_sha": "13/13",
- "pack_rebuild": "c2-pack.json matches the locked files · 4022 bytes",
+ "pack_rebuild": "c2-pack.json matches the locked files · 4042 bytes",
  "k6": {
-  "char2.js": 16384,
-  "c2-pack.json": 4022,
+  "char2.js": 19659,
+  "c2-pack.json": 4042,
   "loaded_files": 14,
-  "loaded_bytes": 410056,
+  "loaded_bytes": 410076,
   "sw_mentions_char2": []
  },
  "pass": true

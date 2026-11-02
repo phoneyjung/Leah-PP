@@ -7,6 +7,8 @@
 - palettes / recolour ids / material id range = qa_asset09_a3.py RAMPS RECOL IDS (read with ast, not imported) in save-file order
 - light centre [16,15] = the +16 / +15 of the Pilot Glow line · typed from documents (not from a locked file): bases + defaults
   (DESIGN_CHAR2_SAVE_MIGRATION.md section 2), budget (G3_0_RENDERER_PLAN.md section 4), blink_frame 3 (idle f4 = blink)
+- frame counts = PNG width / cell · W breathing = c2-pilot-anchors.json code_breathing, asserted equal to the Pilot breatheW line ·
+  hidden lantern dirs = the Pilot O13 line (T22 R6)
 - timing / ease / blink / N hole = the constants of pilot-g2-motion.html (read with regex, so a changed Pilot shows up)
 
 usage: python3 -I qa/g3/build_pack.py REPO_ROOT [--check]
@@ -44,30 +46,38 @@ nhole = re.search(r'const NHOLE=\{cx:(\d+),cy:(\d+)', motion)
 blink = re.search(r'ST\.blinkAt=(\d+)\+Math\.random\(\)\*(\d+)', motion)
 lc = re.search(r'gx=LW\[0\]\+(\d+)-GLOW\.R,gy=LW\[1\]\+(\d+)-GLOW\.R', motion)   # light centre = lantern cell corner + [16,15]
 gm_pow = re.search(r'const GM_POW=\{100:\{light:([\d.]+)[^}]*\},50:\{light:([\d.]+)[^}]*\},10:\{light:([\d.]+)[^}]*\},0:\{light:([\d.]+)', motion)
-assert nhole and blink and gm_pow and lc, 'Pilot constants changed'
+hid = re.findall(r"if\(d==='([A-Z]+)'&&H&&!lanXY", motion)                     # O13: facing these dirs the lantern is hidden
+brp = re.search(r"const w=DIRS\.indexOf\('([A-Z]+)'\),cut=(\d+),k=(\d+)", motion)   # Pilot breatheW: dir, cut row, frame index
+assert nhole and blink and gm_pow and lc and hid and brp, 'Pilot constants changed'
+# W breathing: the locked anchors JSON and the Pilot code must say the same (T22 R6) - the pack takes the JSON value
+cb = anchors['anims']['idle']['code_breathing']; assert len(cb) == 1, 'one breathing direction expected'
+b_dir, b = next(iter(cb.items())); b_frame = b['dy'].index(-1)
+assert (b_dir, b['cut_row'], b_frame) == (brp.group(1), int(brp.group(2)), int(brp.group(3))), 'breathing: anchors JSON != Pilot'
+C = pilot_const('C', motion)
+frames = lambda src: png_size(src)[0] // C   # frame count = sheet width / cell (height checked = 8 dirs in char2.js)
 
 R = ramps()
 pal = {g: [[n.lower(), [h.upper() for h in hexes]] for n, hexes in R[g]] for g in ('hair', 'iris', 'skin', 'house')}
 DIRS = pilot_const('DIRS', motion)
-sheet = lambda key, src, mask, frames: {'src': src, 'mask': mask, 'size': png_size(src), 'frames': frames,
+sheet = lambda key, src, mask: {'src': src, 'mask': mask, 'size': png_size(src), 'frames': frames(src),
                                         'sha256': sha(src), 'mask_sha256': sha(mask)}
 pack = {
     'schema': 'c2-pack/1', 'id': 'c2-pilot', 'version': 1, 'set': 'c2',
     'note': 'G3 Char2 pack (Claude). Points at locked files only; values copied from them by qa/g3/build_pack.py. Pilot whole-body sheets + colour masks, not the G5 layered art.',
-    'cell': pilot_const('C', motion), 'feet': pilot_const('FEET', motion), 'dirs': DIRS,
+    'cell': C, 'feet': pilot_const('FEET', motion), 'dirs': DIRS,
     'bases': {'kid4': {'gender': 'f', 'parts': {'hair': ['kid4'], 'eyes': ['kid4'], 'outfit': ['kid4'], 'head': [], 'face_acc': [], 'back': []},
                        'defaults': {'hair': 'brown', 'iris': 'green', 'skin': 'medium'}}},
     'deprecated': [],
     'sheets': {
-        'idle': dict(sheet('idle', 'c2-pilot-kid4-idleanim.png', 'c2-pilot-kid4-idleanim-mask.png', 4),
-                     breathe={'dir': 'W', 'frame': 2, 'cut': 62}),
-        'walk': sheet('walk', 'c2-pilot-kid4-walk.png', 'c2-pilot-kid4-walk-mask.png', 6),
-        'walkhold': sheet('walkhold', 'c2-pilot-kid4-walkhold.png', 'c2-pilot-kid4-walkhold-mask.png', 6),
+        'idle': dict(sheet('idle', 'c2-pilot-kid4-idleanim.png', 'c2-pilot-kid4-idleanim-mask.png'),
+                     breathe={'dir': b_dir, 'frame': b_frame, 'cut': b['cut_row']}),
+        'walk': sheet('walk', 'c2-pilot-kid4-walk.png', 'c2-pilot-kid4-walk-mask.png'),
+        'walkhold': sheet('walkhold', 'c2-pilot-kid4-walkhold.png', 'c2-pilot-kid4-walkhold-mask.png'),
     },
     'hold': {'src': 'c2-pilot-hold-anchors.json', 'sha256': sha('c2-pilot-hold-anchors.json')},
     'lantern': {'id': 'lantern_L0', 'src': 'c2-held-lantern_L0-S-trial.png', 'light': 'c2-held-lantern_L0-S-trial-light.png',
                 'size': png_size('c2-held-lantern_L0-S-trial.png'), 'cell': pilot_const('LAN_CELL', motion), 'grip': lantern['grip'],
-                'light_centre': [int(lc.group(1)), int(lc.group(2))], 'n_hole': [int(nhole.group(1)), int(nhole.group(2))],
+                'light_centre': [int(lc.group(1)), int(lc.group(2))], 'n_hole': [int(nhole.group(1)), int(nhole.group(2))], 'hidden_dirs': hid,
                 'power_light': {'100': float(gm_pow.group(1)), '50': float(gm_pow.group(2)), '10': float(gm_pow.group(3)), '0': float(gm_pow.group(4))},
                 'sha256': sha('c2-held-lantern_L0-S-trial.png'), 'light_sha256': sha('c2-held-lantern_L0-S-trial-light.png')},
     'portrait': {'src': 'c2-pilot-kid4-pt.png', 'mask': 'c2-pilot-kid4-pt-mask.png', 'mask_meta': 'c2-pilot-kid4-pt-mask.json',

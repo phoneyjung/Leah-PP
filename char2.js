@@ -12,7 +12,7 @@
   const SLOT_NEED = ['hair', 'eyes', 'outfit'], SLOT_OPT = ['head', 'face_acc', 'back'];
   const GROUPS = ['hair', 'iris', 'skin', 'house'];
 
-  let LOADING = null;   // the one load promise (until release)
+  let LOADING = null, GEN = 0;   // the one load promise (until release) · GEN = load generation: a load started before release() never commits (T22 R2)
   let ST = null;        // loaded state
   const ZERO = () => ({ hit: 0, miss: 0, evict: 0, refused: 0, rebuilt: 0, peak: 0 });
   let CNT = ZERO();
@@ -22,40 +22,52 @@
   const isPt = (p, lim) => Array.isArray(p) && p.length === 2 && p.every((v) => isInt(v) && v >= 0 && v < lim);
   const HEX = /^#[0-9A-F]{6}$/;
 
-  // ---------- pack check (any doubt -> not ready) ----------
+  // ---------- pack check: every field that is used later, with its range (any doubt -> not ready · T22 R3) ----------
+  const NAME = /^[a-z][a-z0-9_]*$/, own = (o, k) => isObj(o) && typeof k === 'string' && Object.prototype.hasOwnProperty.call(o, k);
+  const inR = (v, a, b) => isInt(v) && v >= a && v <= b, isStr = (v) => typeof v === 'string' && v.length > 0;
+  const isSize = (z, w, h) => Array.isArray(z) && z.length === 2 && z[0] === w && z[1] === h;
   function packOk(p) {
     try {
-      if (!isObj(p) || p.schema !== 'c2-pack/1' || typeof p.set !== 'string' || !isInt(p.cell) || p.cell < 8) return false;
-      const C = p.cell;
-      if (!isPt(p.feet, C) || !Array.isArray(p.dirs) || p.dirs.length !== 8 || new Set(p.dirs).size !== 8) return false;
+      if (!isObj(p) || p.schema !== 'c2-pack/1' || !isStr(p.id) || !isInt(p.version) || !isStr(p.set) || !inR(p.cell, 8, 512)) return false;
+      const C = p.cell, S = p.sheets, D = p.dirs;
+      if (!isPt(p.feet, C) || !Array.isArray(D) || D.length !== 8 || !D.every(isStr) || new Set(D).size !== 8 || !isObj(S)) return false;
       for (const k of ['idle', 'walk', 'walkhold']) {
-        const s = p.sheets && p.sheets[k];
-        if (!isObj(s) || typeof s.src !== 'string' || typeof s.mask !== 'string' || !isInt(s.frames) || s.frames < 1 ||
-            !Array.isArray(s.size) || s.size[0] !== s.frames * C || s.size[1] !== 8 * C) return false;
+        const q = S[k];
+        if (!isObj(q) || !isStr(q.src) || !isStr(q.mask) || !inR(q.frames, 1, 64) || !isSize(q.size, q.frames * C, 8 * C)) return false;
       }
-      const b = p.sheets.idle.breathe;
-      if (b && !(p.dirs.includes(b.dir) && isInt(b.frame) && b.frame >= 0 && b.frame < p.sheets.idle.frames && isInt(b.cut) && b.cut > 0 && b.cut < C)) return false;
+      const b = S.idle.breathe, F = S.idle.frames;
+      if (b !== undefined && !(isObj(b) && D.includes(b.dir) && inR(b.frame, 0, F - 1) && inR(b.cut, 1, C - 2))) return false;
       for (const g of GROUPS) {
         const L = p.palette && p.palette[g];
-        if (!Array.isArray(L) || !L.length) return false;
-        const n = L[0][1] && L[0][1].length;
-        if (!L.every((e) => Array.isArray(e) && typeof e[0] === 'string' && Array.isArray(e[1]) && e[1].length === n && e[1].every((h) => HEX.test(h)))) return false;
+        if (!Array.isArray(L) || !L.length || !Array.isArray(L[0]) || !Array.isArray(L[0][1])) return false;
+        const n = L[0][1].length;
+        if (n < 1 || n > 255 || new Set(L.map((e) => e && e[0])).size !== L.length) return false;
+        if (!L.every((e) => Array.isArray(e) && NAME.test(e[0]) && Array.isArray(e[1]) && e[1].length === n && e[1].every((h) => HEX.test(h)))) return false;
       }
+      const R = p.materials && p.materials.recolour, ids = p.materials && p.materials.ids;
+      if (!isObj(R) || !Array.isArray(ids) || ids[0] !== 1 || !inR(ids[1], 1, 254)) return false;
+      const rk = Object.keys(R);
+      if (rk.length !== GROUPS.length || !GROUPS.every((g) => rk.filter((k) => R[k] === g).length === 1) || !rk.every((k) => String(+k) === k && inR(+k, ids[0], ids[1]))) return false;
       if (!isObj(p.bases) || !Object.keys(p.bases).length) return false;
-      for (const k in p.bases) {
+      for (const k of Object.keys(p.bases)) {
         const B = p.bases[k];
-        if (!isObj(B) || (B.gender !== 'f' && B.gender !== 'm') || !isObj(B.parts) || !isObj(B.defaults)) return false;
-        if (!SLOT_NEED.every((s) => Array.isArray(B.parts[s]) && B.parts[s].length && B.parts[s].every((x) => typeof x === 'string'))) return false;
-        if (!SLOT_OPT.every((s) => B.parts[s] === undefined || (Array.isArray(B.parts[s]) && B.parts[s].every((x) => typeof x === 'string')))) return false;
+        if (!NAME.test(k) || !isObj(B) || (B.gender !== 'f' && B.gender !== 'm') || !isObj(B.parts) || !isObj(B.defaults)) return false;
+        if (!SLOT_NEED.every((x) => Array.isArray(B.parts[x]) && B.parts[x].length && B.parts[x].every(isStr))) return false;
+        if (!SLOT_OPT.every((x) => B.parts[x] === undefined || (Array.isArray(B.parts[x]) && B.parts[x].every(isStr)))) return false;
         if (!['hair', 'iris', 'skin'].every((g) => colourIx(p, g, B.defaults[g]) >= 0)) return false;
       }
-      if (!Array.isArray(p.deprecated) || !isObj(p.render_offset) || !p.dirs.every((d) => isInt(p.render_offset[d]) && Math.abs(p.render_offset[d]) <= 8)) return false;
-      const t = p.timing, e = p.ease, L = p.lantern;
-      if (!isObj(t) || !isInt(t.walk_ms) || !isInt(t.idle_ms) || !Array.isArray(t.idle_loop) || !Array.isArray(t.blink_dirs)) return false;
-      if (!isObj(e) || !isInt(e.max_px) || !isInt(e.window_ms)) return false;
-      if (!isObj(L) || !isInt(L.cell) || !isPt(L.grip, L.cell) || !isPt(L.light_centre, L.cell) || !isPt(L.n_hole, C) || !isObj(L.power_light)) return false;
-      if (!isObj(p.materials) || !isObj(p.materials.recolour) || !isObj(p.budget) || !isInt(p.budget.bytes) || !isInt(p.budget.borrow_max)) return false;
-      for (const id in p.materials.recolour) if (!GROUPS.includes(p.materials.recolour[id])) return false;
+      if (!Array.isArray(p.deprecated) || !p.deprecated.every(isStr) || !isObj(p.render_offset) || !D.every((d) => inR(p.render_offset[d], -8, 8))) return false;
+      const t = p.timing, e = p.ease, L = p.lantern, P = p.portrait, H = p.hold, u = p.budget;
+      if (!isObj(t) || !inR(t.walk_ms, 16, 2000) || !inR(t.idle_ms, 16, 2000) || !Array.isArray(t.idle_loop) || !t.idle_loop.length ||
+          !t.idle_loop.every((v) => inR(v, 0, F - 1)) || !Array.isArray(t.blink_dirs) || !t.blink_dirs.every((d) => D.includes(d)) ||
+          !inR(t.blink_min_ms, 0, 60000) || !inR(t.blink_span_ms, 0, 60000) || !inR(t.blink_frame, 0, F - 1)) return false;
+      if (!isObj(e) || !inR(e.max_px, 0, C) || !inR(e.window_ms, 0, 2000)) return false;
+      if (!isObj(L) || !isStr(L.src) || !isStr(L.light) || !inR(L.cell, 1, C) || !isSize(L.size, L.cell, L.cell) || !isPt(L.grip, L.cell) ||
+          !isPt(L.light_centre, L.cell) || !isPt(L.n_hole, C) || !Array.isArray(L.hidden_dirs) || !L.hidden_dirs.every((d) => D.includes(d)) ||
+          !isObj(L.power_light) || !['0', '10', '50', '100'].every((k) => typeof L.power_light[k] === 'number' && L.power_light[k] >= 0 && L.power_light[k] <= 1)) return false;
+      if (!isObj(H) || !isStr(H.src) || !isObj(P) || !isStr(P.src) || !isStr(P.mask) || !isStr(P.mask_meta) || !isStr(P.shademap) ||
+          !Array.isArray(P.size) || !inR(P.size[0], 1, 4096) || !inR(P.size[1], 1, 4096)) return false;
+      if (!isObj(u) || !inR(u.bytes, 1, 2 ** 31) || !inR(u.borrow_max, 0, u.bytes - 1) || !inR(u.fixed_other_max, 0, u.bytes - 1)) return false;
       return true;
     } catch (err) { return false; }
   }
@@ -88,11 +100,16 @@
   function ptMaskOk(p, P, M, meta, smap) {   // portrait: same as the Pilot portrait page (validPtMask) - counts per (id, G) must equal pt-mask.json
     try {
       const a = P.data, m = M.data, R = p.materials.recolour, got = new Map();
+      for (const id of Object.keys(R)) {   // shade map = the Pilot validMap rule (T22 R5): length = shades in pt-mask.json, every value inside the ramp
+        const e = isObj(smap.materials) && smap.materials[id], sh = isObj(meta.materials) && meta.materials[id] && meta.materials[id].shades, n = p.palette[R[id]][0][1].length;
+        if (!isObj(e) || !Array.isArray(e.shade_index_by_G) || !Array.isArray(sh) || e.shade_index_by_G.length !== sh.length || !e.shade_index_by_G.every((v) => inR(v, 0, n - 1))) return false;
+        if (e.group !== undefined && e.group !== R[id]) return false;
+      }
       for (let i = 0; i < a.length; i += 4) {
         if (a[i + 3] === 0) { if (m[i + 3] !== 0) return false; continue; }
         const id = m[i], g = m[i + 1];
         if (m[i + 3] !== 255 || id < 1 || id > 11) return false;
-        if (R[id] !== undefined) { const s = smap.materials && smap.materials[id]; if (!s || !Array.isArray(s.shade_index_by_G) || !(g < s.shade_index_by_G.length)) return false; }
+        if (own(R, String(id)) && !(g < smap.materials[id].shade_index_by_G.length)) return false;
         const k = id * 256 + g; got.set(k, (got.get(k) || 0) + 1);
       }
       const want = new Map();
@@ -107,19 +124,27 @@
       return true;
     } catch (e) { return false; }
   }
-  function holdOk(p, j) {   // c2-pilot-hold-anchors.json: cell / feet as the pack, every direction has the right frame count, points inside the cell
+  function holdOk(p, j, sh) {   // c2-pilot-hold-anchors.json vs the pack and the loaded sheets (T22 R4)
     try {
-      const C = p.cell;
+      const C = p.cell, hid = p.lantern.hidden_dirs;
       if (!isObj(j) || j.schema !== 1 || !Array.isArray(j.cell) || j.cell[0] !== C || j.cell[1] !== C || !isPt(j.feet, C) || j.feet[0] !== p.feet[0] || j.feet[1] !== p.feet[1]) return false;
-      for (const [key, n] of [['idle_hold', p.sheets.idle.frames], ['walk_hold', p.sheets.walkhold.frames]]) {
-        if (!isObj(j[key])) return false;
-        for (const d of p.dirs) {
-          const L = j[key][d];
+      for (const [key, an] of [['idle_hold', 'idle'], ['walk_hold', 'walkhold']]) {
+        const n = p.sheets[an].frames, A = sh[an] && sh[an].A;
+        if (!isObj(j[key]) || !A) return false;
+        for (let di = 0; di < 8; di++) {
+          const d = p.dirs[di], L = j[key][d];
           if (!Array.isArray(L) || L.length !== n) return false;
-          for (const f of L) {
+          let hand = null;
+          for (let k = 0; k < n; k++) {
+            const f = L[k];
             if (!isObj(f)) return false;
-            if (f.anchor === null) continue;   // N: hand under the cape, no lantern (D-HAND)
-            if (!isPt(f.anchor, C) || !Array.isArray(f.fist) || !f.fist.every((q) => isPt(q, C))) return false;
+            if (hid.includes(d)) { if (f.anchor !== null) return false; continue; }   // N: hand under the cape, no lantern (D-HAND)
+            if (f.hand !== 'R' && f.hand !== 'L') return false;
+            if (hand === null) hand = f.hand; else if (f.hand !== hand) return false;
+            if (!isPt(f.anchor, C) || !Array.isArray(f.fist) || !f.fist.length || !f.fist.every((q) => isPt(q, C))) return false;
+            if (f.fist_px !== undefined && f.fist_px !== f.fist.length) return false;
+            if (!f.fist.some((q) => q[0] === f.anchor[0] && q[1] === f.anchor[1])) return false;
+            for (const q of f.fist) if (A.data[((di * C + q[1]) * A.width + k * C + q[0]) * 4 + 3] === 0) return false;   // fist px must be drawn px
           }
         }
       }
@@ -136,10 +161,12 @@
   // ---------- load ----------
   function load(packUrl) {
     if (LOADING) return LOADING;   // a second load returns the first result (no old/new pack mix) until release()
-    LOADING = doLoad(packUrl).catch(() => ({ ready: false, failed: ['internal'], pack: null }));
+    const g = GEN;
+    LOADING = doLoad(packUrl, g).catch(() => ({ ready: false, failed: ['internal'], pack: null }));
     return LOADING;
   }
-  async function doLoad(packUrl) {
+  const GONE = { ready: false, failed: ['released'], pack: null };
+  async function doLoad(packUrl, g) {
     const base = new URL(String(packUrl || 'c2-pack.json'), location.href);
     const { t, j: p } = await getJSON(base.href);
     if (!packOk(p)) return { ready: false, failed: ['pack'], pack: null };
@@ -162,7 +189,7 @@
     // hold mode needs walkhold + the real idle + hand anchors + the lantern (contract 7 / 12): anything missing -> hold off
     const L = p.lantern;
     const [hj, lb, ll] = await Promise.all([getJSON(at(p.hold.src)), getImg(at(L.src)), getImg(at(L.light))]);
-    const hold = holdOk(p, hj.j) ? hj.j : null; if (!hold) failed.push('hold');
+    const hold = holdOk(p, hj.j, sh) ? hj.j : null; if (!hold && sh.idle && sh.walkhold) failed.push('hold');
     const lanA = pixels(lb, L.cell, L.cell), lanL = pixels(ll, L.cell, L.cell);
     if (!lanA) failed.push('lantern'); if (!lanL) failed.push('lantern-light');
     if (lanA) fixed.other += lanA.data.length; if (lanL) fixed.other += lanL.data.length;
@@ -174,6 +201,7 @@
     if (!PA) failed.push('portrait');
     else if (!(PM && isObj(pj.j) && isObj(ps.j) && ptMaskOk(p, PA, PM, pj.j, ps.j))) { PM = null; failed.push('portrait-mask'); }
     if (PA) fixed.images += PA.data.length; if (PM) fixed.masks += PM.data.length;
+    if (g !== GEN) return Object.assign({}, GONE, { failed: ['released'] });   // release() was called while this load ran
     ST = { pack: deepFreeze(p), key: p.id + '@' + p.version + '#' + hashText(t), sh, idleFrom, walkFrom, raw: raw.sort(), hold, holdOn,
            lantern: lanA ? { A: lanA, light: lanL } : null, portrait: PA ? { A: PA, M: PM, meta: pj.j, smap: ps.j } : null, fixed };
     CNT.peak = Math.max(CNT.peak, total());
@@ -188,14 +216,16 @@
   function look169Valid(a) {
     return isObj(a) && a.v === 1 && ix(a.hair, 3) !== null && ix(a.face, 3) !== null && ix(a.hc, HAIRC.length) !== null && ix(a.ec, EYEC.length) !== null;
   }
-  function look(save) {
+  function look(save) { try { return look1(save); } catch (e) { return null; } }   // a broken save never throws into the game (T22 R1)
+  function look1(save) {
     if (!ST || !isObj(save)) return null;
     const p = ST.pack, c = save.char2;
     if (isObj(c) && c.v === 2 && c.set === p.set) return fromChar2(p, c);   // other v / set -> read the old fields (they are never changed)
     return fromOld(p, save);
   }
   function fromChar2(p, c) {
-    const B = p.bases[c.base]; if (!isObj(B)) return null;                 // no art for that base
+    if (!own(p.bases, c.base)) return null;                                // no art for that base (own string keys only)
+    const B = p.bases[c.base];
     const gender = c.gender === 'f' || c.gender === 'm' ? c.gender : B.gender;
     if (gender !== B.gender) return null;                                   // e.g. a boy on the girl base: the old system draws
     const parts = {}, inP = isObj(c.parts) ? c.parts : {};
@@ -227,8 +257,8 @@
     return Object.assign({ budget: ST ? ST.pack.budget.bytes : 0, fixed: f, cache: 0, borrowed: 0, scratch: 0, total: total(),
                            entries: { cached: 0, pinned: 0 }, handles: 0 }, CNT);
   }
-  function release() { ST = null; LOADING = null; CNT = ZERO(); }
+  function release() { GEN++; ST = null; LOADING = null; CNT = ZERO(); }
 
-  window.Char2 = Object.freeze({ version: 'g3.2', load, look, stats, release,
+  window.Char2 = Object.freeze({ version: 'g3.2b', load, look, stats, release,
     _test: Object.freeze({ packOk, kidMaskOk, holdOk, state: () => (ST ? { key: ST.key, idleFrom: ST.idleFrom, walkFrom: ST.walkFrom, raw: ST.raw.slice(), holdOn: ST.holdOn } : null) }) });
 })();

@@ -17,10 +17,10 @@ const INJ = { I1: ['function kidMaskOk(p, A, M) {', 'function kidMaskOk(p, A, M)
   I2: ['if (pd219Look(S.pd219)) src.push', 'if (false) src.push'],
   I3: ['if (!ST || !isObj(save)) return null;', 'if (!ST || !isObj(save)) return null; save.seen = 1;'],
   I4: ["if (!packOk(p)) return { ready: false, failed: ['pack'], pack: null };", "if (!packOk(p)) throw new Error('inject');"] }[process.env.INJECT || ''];
-let C2SRC = fs.readFileSync(path.join(process.cwd(), 'char2.js'), 'utf8');
+let C2SRC = fs.readFileSync(process.env.C2_FILE || path.join(process.cwd(), 'char2.js'), 'utf8');   // C2_FILE = run the suite on another copy (e.g. the G3.2 first version)
 if (INJ) { if (!C2SRC.includes(INJ[0])) { console.log('inject target missing'); process.exit(2); } C2SRC = C2SRC.replace(INJ[0], INJ[1]); }
 // I4 also turns the safety catch off, so a throw would surface as a rejection
-if (process.env.INJECT === 'I4') C2SRC = C2SRC.replace("LOADING = doLoad(packUrl).catch(() => ({ ready: false, failed: ['internal'], pack: null }));", 'LOADING = doLoad(packUrl);');
+if (process.env.INJECT === 'I4') { const t = "LOADING = doLoad(packUrl, g).catch(() => ({ ready: false, failed: ['internal'], pack: null }));"; if (!C2SRC.includes(t)) { console.log('inject target missing'); process.exit(2); } C2SRC = C2SRC.replace(t, 'LOADING = doLoad(packUrl, g);'); }
 const DEF_PARTS = { hair: 'kid4', eyes: 'kid4', outfit: 'kid4', head: null, face_acc: null, back: null };
 const AP = (hair, iris, skin, parts) => ({ v: 2, set: 'c2', base: 'kid4', gender: 'f', parts: Object.assign({}, DEF_PARTS, parts || {}), color: { hair, iris, skin } });
 const FULL_MODES = { idle: 'idle', walk: 'walk', raw: [], hold: true, lantern_light: true, portrait: 'recolour' };
@@ -54,6 +54,20 @@ const K2 = [
   ['portrait mask missing', { 'c2-pilot-kid4-pt-mask.png': 404 }, true, ['portrait-mask'], M({ portrait: 'raw' })],
   ['portrait mask json missing', { 'c2-pilot-kid4-pt-mask.json': 404 }, true, ['portrait-mask'], M({ portrait: 'raw' })],
   ['shade map missing', { 'c2-pilot-kid4-pt-shademap.json': 404 }, true, ['portrait-mask'], M({ portrait: 'raw' })],
+  // T22 R3-R5 regressions: a file that loads but carries wrong values
+  ['pack walk_ms 0', { 'c2-pack.json': bad('pack-walkms0.json') }, false, ['pack']],
+  ['pack idle_loop [99]', { 'c2-pack.json': bad('pack-idleloop99.json') }, false, ['pack']],
+  ['pack budget -1', { 'c2-pack.json': bad('pack-budgetneg.json') }, false, ['pack']],
+  ['pack recolour {}', { 'c2-pack.json': bad('pack-recolour-empty.json') }, false, ['pack']],
+  ['pack without hold', { 'c2-pack.json': bad('pack-nohold.json') }, false, ['pack']],
+  ['pack colour named __proto__', { 'c2-pack.json': bad('pack-protoname.json') }, false, ['pack']],
+  ['hold S anchor null', { 'c2-pilot-hold-anchors.json': bad('hold-S-anchor-null.json') }, true, ['hold'], M({ hold: false })],
+  ['hold SE fist empty', { 'c2-pilot-hold-anchors.json': bad('hold-SE-fist-empty.json') }, true, ['hold'], M({ hold: false })],
+  ['hold fist on a clear px', { 'c2-pilot-hold-anchors.json': bad('hold-fist-on-clear.json') }, true, ['hold'], M({ hold: false })],
+  ['hold N has a hand', { 'c2-pilot-hold-anchors.json': bad('hold-N-has-hand.json') }, true, ['hold'], M({ hold: false })],
+  ['hold hand flips inside a dir', { 'c2-pilot-hold-anchors.json': bad('hold-hand-flips.json') }, true, ['hold'], M({ hold: false })],
+  ['shade map values 99', { 'c2-pilot-kid4-pt-shademap.json': bad('shademap-99.json') }, true, ['portrait-mask'], M({ portrait: 'raw' })],
+  ['shade map one short', { 'c2-pilot-kid4-pt-shademap.json': bad('shademap-short.json') }, true, ['portrait-mask'], M({ portrait: 'raw' })],
   ['every file but the pack missing', { '*files': 404 }, false, ['idle', 'walk', 'walkhold']],
   ['every file missing', { '*': 404 }, false, ['pack']],
 ];
@@ -94,6 +108,12 @@ const B7 = [
   ['B13 one wrong colour only', sb({ char2: C2({ color: { hair: 'silver', iris: 'black', skin: 'blue' } }) }), AP('silver', 'black', 'medium')],
   ['B14 valid char2 -> same values, new object', sb({ char2: C2({ from: 'owner', extra: 1 }) }), AP('pink', 'blue', 'tan')],
   ['B15 look({}) -> defaults', {}, AP('brown', 'green', 'medium')],
+  ['B16 base __proto__ -> null (T22 R1)', sb({ char2: C2({ base: '__proto__' }) }), null],
+  ['B16b base __proto__, no gender / parts -> null (T22 R1 probe)', sb({ char2: { v: 2, set: 'c2', base: '__proto__' } }), null],
+  ['B17 base {toString:null} -> null (T22 R1)', sb({ char2: C2({ base: { toString: null } }) }), null],
+  ['B18 base constructor -> null', sb({ char2: C2({ base: 'constructor' }) }), null],
+  ['B19 base number -> null', sb({ char2: C2({ base: 4 }) }), null],
+  ['B20 colour named constructor -> default', sb({ char2: C2({ color: { hair: 'constructor', iris: '__proto__', skin: 'toString' } }) }), AP('brown', 'green', 'medium')],
 ];
 const NOT_SAVES = [null, 'x', 5, [], undefined];
 
@@ -101,7 +121,7 @@ async function run(b, routes, fn, arg) {
   const ctx = await b.newContext({ viewport: { width: 844, height: 390 }, deviceScaleFactor: 2.625 });
   const p = await ctx.newPage(); const errs = [];
   p.on('pageerror', e => errs.push(String(e)));
-  if (INJ) await p.route(u => u.href.endsWith('/char2.js'), r => r.fulfill({ status: 200, contentType: 'application/javascript', body: C2SRC }));
+  if (INJ || process.env.C2_FILE) await p.route(u => u.href.endsWith('/char2.js'), r => r.fulfill({ status: 200, contentType: 'application/javascript', body: C2SRC }));
   await p.route(u => u.href.startsWith(base) && !u.href.includes('/qa/g3/char2-test.html') && !u.href.endsWith('/char2.js'), async r => {
     const f = r.request().url().slice(base.length).split('?')[0], isPack = f === 'c2-pack.json';
     let a = routes[f]; if (a === undefined && routes['*']) a = routes['*']; if (a === undefined && routes['*files'] && !isPack) a = routes['*files'];
@@ -146,6 +166,25 @@ const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
     const ok = out.sameObj && out.t1 > 0 && out.t2 === 0 && out.lookAfter === null && out.again && out.t3 === out.t1 && !errs.length && !rej;
     if (!ok) fails++; R.extra.loadTwice = Object.assign({ ok }, out); console.log((ok ? 'PASS ' : 'FAIL ') + 'load twice / release / again ' + JSON.stringify(out));
   }
+  // ---- T22 R2: release() while a load is still running must not bring the old load back ----
+  {
+    const ctx = await b.newContext({ viewport: { width: 844, height: 390 }, deviceScaleFactor: 2.625 }); const p = await ctx.newPage(); const errs = [];
+    p.on('pageerror', e => errs.push(String(e)));
+    if (INJ || process.env.C2_FILE) await p.route(u => u.href.endsWith('/char2.js'), r => r.fulfill({ status: 200, contentType: 'application/javascript', body: C2SRC }));
+    let open; const gate = new Promise(r => { open = r; }); let held = 0;
+    await p.route(u => u.href.endsWith('/c2-pack.json'), async r => { held++; if (held === 1) await gate; return r.continue(); });
+    await p.goto(PAGE, { waitUntil: 'load' });
+    const s1 = await p.evaluate((pack) => { window.pA = Char2.load(pack); Char2.release(); return { total: Char2.stats().total, look: Char2.look({}) }; }, PACK);
+    const rB = await p.evaluate(async () => { try { const r = await Char2.load('../../nope-pack.json'); window.rB = r; return { ready: r.ready, failed: r.failed }; } catch (e) { return { ready: 'rejected', failed: [] }; } });
+    open();
+    const s2 = await p.evaluate(async (pack) => { let rA, again; try { rA = await window.pA; again = await Char2.load(pack); } catch (e) { return { rA: { ready: 'rejected' }, total: -1 }; }
+      return { rA: { ready: rA.ready, failed: rA.failed }, total: Char2.stats().total, look: Char2.look({}), state: Char2._test.state(), againIsB: again === window.rB }; }, PACK);
+    const rej = await p.evaluate(() => window.__rej); await ctx.close();
+    const ok = s1.total === 0 && s1.look === null && !rB.ready && same(rB.failed, ['pack']) && !s2.rA.ready && same(s2.rA.failed, ['released']) &&
+      s2.total === 0 && s2.look === null && s2.state === null && s2.againIsB && !errs.length && !rej;
+    if (!ok) fails++; R.extra.releaseWhileLoading = Object.assign({ ok, s1, rB }, s2);
+    console.log((ok ? 'PASS ' : 'FAIL ') + 'release while loading ' + JSON.stringify({ s1, rB, s2 }));
+  }
   // ---- K7 T1-T12 against the G2.6 oracle ----
   {
     const items = []; for (const [name, ls] of T) { const d = readSlots(JSON.parse(JSON.stringify(ls))); d.slots.forEach((s, i) => items.push({ name: name + (d.slots.length > 1 ? '#' + i : ''), save: s, want: oracle(s) })); }
@@ -162,7 +201,7 @@ const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
   {
     const { out, errs, rej } = await run(b, {}, async ({ pack, items, ns }) => {
       await Char2.load(pack);
-      const r = items.map(([n, s]) => { const before = JSON.stringify(s), got = Char2.look(s);
+      const r = items.map(([n, s]) => { const before = JSON.stringify(s); let got; try { got = Char2.look(s); } catch (e) { got = 'THREW ' + e.message; }
         return { got, unchanged: JSON.stringify(s) === before, fresh: !got || !s.char2 || (got !== s.char2 && got.parts !== s.char2.parts && got.color !== s.char2.color) }; });
       return { r, ns: ns.map(v => Char2.look(v)), ns2: Char2.look(undefined) };
     }, { pack: PACK, items: B7.map(([n, s]) => [n, s]), ns: NOT_SAVES.filter(v => v !== undefined) });
@@ -181,8 +220,8 @@ const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
     R.k7.push({ case: 'deprecated hair id -> default part', ok, got: out.a }); console.log((ok ? 'PASS ' : 'FAIL ') + 'K7 deprecated part -> default');
   }
   const k2p = R.k2.filter(x => x.ok).length, k7p = R.k7.filter(x => x.ok).length;
-  R.inject = process.env.INJECT || null; R.failedCases = R.k2.concat(R.k7).filter(x => !x.ok).map(x => x.case).concat(R.extra.loadTwice.ok ? [] : ['load twice']);
-  R.summary = { k2: k2p + '/' + R.k2.length, k7: k7p + '/' + R.k7.length, loadTwice: R.extra.loadTwice.ok, fails };
+  R.inject = process.env.INJECT || null; R.failedCases = R.k2.concat(R.k7).filter(x => !x.ok).map(x => x.case).concat(R.extra.loadTwice.ok ? [] : ['load twice']).concat(R.extra.releaseWhileLoading.ok ? [] : ['release while loading']);
+  R.summary = { k2: k2p + '/' + R.k2.length, k7: k7p + '/' + R.k7.length, loadTwice: R.extra.loadTwice.ok, releaseWhileLoading: R.extra.releaseWhileLoading.ok, fails };
   console.log('K2 %s · K7 %s · load twice/release %s · fails %d%s', R.summary.k2, R.summary.k7, R.summary.loadTwice ? 'ok' : 'FAIL', fails, R.inject ? ' · inject ' + R.inject : '');
   fs.writeFileSync(OUT, JSON.stringify(R, null, 1)); await b.close(); process.exit(fails ? 1 : 0);
 })();

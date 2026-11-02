@@ -25,7 +25,7 @@
      "portrait": "recolour"
     }
    },
-   "ms": 160,
+   "ms": 203,
    "pageErrors": [],
    "rejections": 0,
    "fixed": {
@@ -50,7 +50,7 @@
     ],
     "modes": null
    },
-   "ms": 7,
+   "ms": 10,
    "pageErrors": [],
    "rejections": 0,
    "fixed": {
@@ -75,7 +75,7 @@
     ],
     "modes": null
    },
-   "ms": 6,
+   "ms": 9,
    "pageErrors": [],
    "rejections": 0,
    "fixed": {
@@ -100,7 +100,7 @@
     ],
     "modes": null
    },
-   "ms": 6,
+   "ms": 12,
    "pageErrors": [],
    "rejections": 0,
    "fixed": {
@@ -125,7 +125,7 @@
     ],
     "modes": null
    },
-   "ms": 8,
+   "ms": 7,
    "pageErrors": [],
    "rejections": 0,
    "fixed": {
@@ -164,7 +164,7 @@
      "portrait": "recolour"
     }
    },
-   "ms": 153,
+   "ms": 144,
    "pageErrors": [],
    "rejections": 0,
    "fixed": {
@@ -203,7 +203,7 @@
      "portrait": "recolour"
     }
    },
-   "ms": 141,
+   "ms": 148,
    "pageErrors": [],
    "rejections": 0,
    "fixed": {
@@ -242,7 +242,7 @@
      "portrait": "recolour"
     }
    },
-   "ms": 128,
+   "ms": 153,
    "pageErrors": [],
    "rejections": 0,
    "fixed": {
@@ -281,7 +281,7 @@
      "portrait": "recolour"
     }
    },
-   "ms": 114,
+   "ms": 154,
    "pageErrors": [],
    "rejections": 0,
    "fixed": {
@@ -320,7 +320,7 @@
      "portrait": "recolour"
     }
    },
-   "ms": 117,
+   "ms": 125,
    "pageErrors": [],
    "rejections": 0,
    "fixed": {
@@ -347,7 +347,7 @@
     ],
     "modes": null
    },
-   "ms": 67,
+   "ms": 64,
    "pageErrors": [],
    "rejections": 0,
    "fixed": {
@@ -390,7 +390,7 @@
      "portrait": "recolour"
     }
    },
-   "ms": 123,
+   "ms": 161,
    "pageErrors": [],
    "rejections": 0,
    "fixed": {
@@ -433,7 +433,7 @@
      "portrait": "recolour"
     }
    },
-   "ms": 122,
+   "ms": 127,
    "pageErrors": [],
    "rejections": 0,
    "fixed": {
@@ -476,7 +476,7 @@
      "portrait": "recolour"
     }
    },
-   "ms": 138,
+   "ms": 114,
    "pageErrors": [],
    "rejections": 0,
    "fixed": {
@@ -519,7 +519,7 @@
      "portrait": "recolour"
     }
    },
-   "ms": 127,
+   "ms": 123,
    "pageErrors": [],
    "rejections": 0,
    "fixed": {
@@ -562,7 +562,7 @@
      "portrait": "recolour"
     }
    },
-   "ms": 118,
+   "ms": 115,
    "pageErrors": [],
    "rejections": 0,
    "fixed": {
@@ -605,7 +605,7 @@
      "portrait": "recolour"
     }
    },
-   "ms": 132,
+   "ms": 136,
    "pageErrors": [],
    "rejections": 0,
    "fixed": {
@@ -644,7 +644,7 @@
      "portrait": "recolour"
     }
    },
-   "ms": 132,
+   "ms": 126,
    "pageErrors": [],
    "rejections": 0,
    "fixed": {
@@ -683,7 +683,7 @@
      "portrait": "recolour"
     }
    },
-   "ms": 155,
+   "ms": 127,
    "pageErrors": [],
    "rejections": 0,
    "fixed": {
@@ -722,7 +722,7 @@
      "portrait": "recolour"
     }
    },
-   "ms": 132,
+   "ms": 126,
    "pageErrors": [],
    "rejections": 0,
    "fixed": {
@@ -761,7 +761,7 @@
      "portrait": "recolour"
     }
    },
-   "ms": 133,
+   "ms": 141,
    "pageErrors": [],
    "rejections": 0,
    "fixed": {
@@ -800,7 +800,7 @@
      "portrait": "recolour"
     }
    },
-   "ms": 127,
+   "ms": 118,
    "pageErrors": [],
    "rejections": 0,
    "fixed": {
@@ -839,7 +839,7 @@
      "portrait": null
     }
    },
-   "ms": 116,
+   "ms": 117,
    "pageErrors": [],
    "rejections": 0,
    "fixed": {
@@ -878,7 +878,7 @@
      "portrait": "raw"
     }
    },
-   "ms": 117,
+   "ms": 150,
    "pageErrors": [],
    "rejections": 0,
    "fixed": {
@@ -917,7 +917,7 @@
      "portrait": "raw"
     }
    },
-   "ms": 150,
+   "ms": 139,
    "pageErrors": [],
    "rejections": 0,
    "fixed": {
@@ -956,7 +956,430 @@
      "portrait": "raw"
     }
    },
-   "ms": 133,
+   "ms": 139,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 5308416,
+    "masks": 4718592,
+    "other": 8192
+   },
+   "total": 10035200
+  },
+  {
+   "case": "pack walk_ms 0",
+   "ok": true,
+   "ready": false,
+   "failed": [
+    "pack"
+   ],
+   "modes": null,
+   "want": {
+    "ready": false,
+    "failed": [
+     "pack"
+    ],
+    "modes": null
+   },
+   "ms": 10,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 0,
+    "masks": 0,
+    "other": 0
+   },
+   "total": 0
+  },
+  {
+   "case": "pack idle_loop [99]",
+   "ok": true,
+   "ready": false,
+   "failed": [
+    "pack"
+   ],
+   "modes": null,
+   "want": {
+    "ready": false,
+    "failed": [
+     "pack"
+    ],
+    "modes": null
+   },
+   "ms": 6,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 0,
+    "masks": 0,
+    "other": 0
+   },
+   "total": 0
+  },
+  {
+   "case": "pack budget -1",
+   "ok": true,
+   "ready": false,
+   "failed": [
+    "pack"
+   ],
+   "modes": null,
+   "want": {
+    "ready": false,
+    "failed": [
+     "pack"
+    ],
+    "modes": null
+   },
+   "ms": 7,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 0,
+    "masks": 0,
+    "other": 0
+   },
+   "total": 0
+  },
+  {
+   "case": "pack recolour {}",
+   "ok": true,
+   "ready": false,
+   "failed": [
+    "pack"
+   ],
+   "modes": null,
+   "want": {
+    "ready": false,
+    "failed": [
+     "pack"
+    ],
+    "modes": null
+   },
+   "ms": 7,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 0,
+    "masks": 0,
+    "other": 0
+   },
+   "total": 0
+  },
+  {
+   "case": "pack without hold",
+   "ok": true,
+   "ready": false,
+   "failed": [
+    "pack"
+   ],
+   "modes": null,
+   "want": {
+    "ready": false,
+    "failed": [
+     "pack"
+    ],
+    "modes": null
+   },
+   "ms": 11,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 0,
+    "masks": 0,
+    "other": 0
+   },
+   "total": 0
+  },
+  {
+   "case": "pack colour named __proto__",
+   "ok": true,
+   "ready": false,
+   "failed": [
+    "pack"
+   ],
+   "modes": null,
+   "want": {
+    "ready": false,
+    "failed": [
+     "pack"
+    ],
+    "modes": null
+   },
+   "ms": 5,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 0,
+    "masks": 0,
+    "other": 0
+   },
+   "total": 0
+  },
+  {
+   "case": "hold S anchor null",
+   "ok": true,
+   "ready": true,
+   "failed": [
+    "hold"
+   ],
+   "modes": {
+    "idle": "idle",
+    "walk": "walk",
+    "raw": [],
+    "hold": false,
+    "lantern_light": true,
+    "portrait": "recolour"
+   },
+   "want": {
+    "ready": true,
+    "failed": [
+     "hold"
+    ],
+    "modes": {
+     "idle": "idle",
+     "walk": "walk",
+     "raw": [],
+     "hold": false,
+     "lantern_light": true,
+     "portrait": "recolour"
+    }
+   },
+   "ms": 146,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 5308416,
+    "masks": 5308416,
+    "other": 8192
+   },
+   "total": 10625024
+  },
+  {
+   "case": "hold SE fist empty",
+   "ok": true,
+   "ready": true,
+   "failed": [
+    "hold"
+   ],
+   "modes": {
+    "idle": "idle",
+    "walk": "walk",
+    "raw": [],
+    "hold": false,
+    "lantern_light": true,
+    "portrait": "recolour"
+   },
+   "want": {
+    "ready": true,
+    "failed": [
+     "hold"
+    ],
+    "modes": {
+     "idle": "idle",
+     "walk": "walk",
+     "raw": [],
+     "hold": false,
+     "lantern_light": true,
+     "portrait": "recolour"
+    }
+   },
+   "ms": 208,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 5308416,
+    "masks": 5308416,
+    "other": 8192
+   },
+   "total": 10625024
+  },
+  {
+   "case": "hold fist on a clear px",
+   "ok": true,
+   "ready": true,
+   "failed": [
+    "hold"
+   ],
+   "modes": {
+    "idle": "idle",
+    "walk": "walk",
+    "raw": [],
+    "hold": false,
+    "lantern_light": true,
+    "portrait": "recolour"
+   },
+   "want": {
+    "ready": true,
+    "failed": [
+     "hold"
+    ],
+    "modes": {
+     "idle": "idle",
+     "walk": "walk",
+     "raw": [],
+     "hold": false,
+     "lantern_light": true,
+     "portrait": "recolour"
+    }
+   },
+   "ms": 163,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 5308416,
+    "masks": 5308416,
+    "other": 8192
+   },
+   "total": 10625024
+  },
+  {
+   "case": "hold N has a hand",
+   "ok": true,
+   "ready": true,
+   "failed": [
+    "hold"
+   ],
+   "modes": {
+    "idle": "idle",
+    "walk": "walk",
+    "raw": [],
+    "hold": false,
+    "lantern_light": true,
+    "portrait": "recolour"
+   },
+   "want": {
+    "ready": true,
+    "failed": [
+     "hold"
+    ],
+    "modes": {
+     "idle": "idle",
+     "walk": "walk",
+     "raw": [],
+     "hold": false,
+     "lantern_light": true,
+     "portrait": "recolour"
+    }
+   },
+   "ms": 135,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 5308416,
+    "masks": 5308416,
+    "other": 8192
+   },
+   "total": 10625024
+  },
+  {
+   "case": "hold hand flips inside a dir",
+   "ok": true,
+   "ready": true,
+   "failed": [
+    "hold"
+   ],
+   "modes": {
+    "idle": "idle",
+    "walk": "walk",
+    "raw": [],
+    "hold": false,
+    "lantern_light": true,
+    "portrait": "recolour"
+   },
+   "want": {
+    "ready": true,
+    "failed": [
+     "hold"
+    ],
+    "modes": {
+     "idle": "idle",
+     "walk": "walk",
+     "raw": [],
+     "hold": false,
+     "lantern_light": true,
+     "portrait": "recolour"
+    }
+   },
+   "ms": 163,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 5308416,
+    "masks": 5308416,
+    "other": 8192
+   },
+   "total": 10625024
+  },
+  {
+   "case": "shade map values 99",
+   "ok": true,
+   "ready": true,
+   "failed": [
+    "portrait-mask"
+   ],
+   "modes": {
+    "idle": "idle",
+    "walk": "walk",
+    "raw": [],
+    "hold": true,
+    "lantern_light": true,
+    "portrait": "raw"
+   },
+   "want": {
+    "ready": true,
+    "failed": [
+     "portrait-mask"
+    ],
+    "modes": {
+     "idle": "idle",
+     "walk": "walk",
+     "raw": [],
+     "hold": true,
+     "lantern_light": true,
+     "portrait": "raw"
+    }
+   },
+   "ms": 144,
+   "pageErrors": [],
+   "rejections": 0,
+   "fixed": {
+    "images": 5308416,
+    "masks": 4718592,
+    "other": 8192
+   },
+   "total": 10035200
+  },
+  {
+   "case": "shade map one short",
+   "ok": true,
+   "ready": true,
+   "failed": [
+    "portrait-mask"
+   ],
+   "modes": {
+    "idle": "idle",
+    "walk": "walk",
+    "raw": [],
+    "hold": true,
+    "lantern_light": true,
+    "portrait": "raw"
+   },
+   "want": {
+    "ready": true,
+    "failed": [
+     "portrait-mask"
+    ],
+    "modes": {
+     "idle": "idle",
+     "walk": "walk",
+     "raw": [],
+     "hold": true,
+     "lantern_light": true,
+     "portrait": "raw"
+    }
+   },
+   "ms": 126,
    "pageErrors": [],
    "rejections": 0,
    "fixed": {
@@ -985,7 +1408,7 @@
     ],
     "modes": null
    },
-   "ms": 23,
+   "ms": 27,
    "pageErrors": [],
    "rejections": 0,
    "fixed": {
@@ -1010,7 +1433,7 @@
     ],
     "modes": null
    },
-   "ms": 10,
+   "ms": 6,
    "pageErrors": [],
    "rejections": 0,
    "fixed": {
@@ -2331,6 +2754,90 @@
    "fresh": true
   },
   {
+   "case": "B16 base __proto__ -> null (T22 R1)",
+   "ok": true,
+   "got": null,
+   "want": null,
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "B16b base __proto__, no gender / parts -> null (T22 R1 probe)",
+   "ok": true,
+   "got": null,
+   "want": null,
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "B17 base {toString:null} -> null (T22 R1)",
+   "ok": true,
+   "got": null,
+   "want": null,
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "B18 base constructor -> null",
+   "ok": true,
+   "got": null,
+   "want": null,
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "B19 base number -> null",
+   "ok": true,
+   "got": null,
+   "want": null,
+   "unchanged": true,
+   "fresh": true
+  },
+  {
+   "case": "B20 colour named constructor -> default",
+   "ok": true,
+   "got": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "brown",
+     "iris": "green",
+     "skin": "medium"
+    }
+   },
+   "want": {
+    "v": 2,
+    "set": "c2",
+    "base": "kid4",
+    "gender": "f",
+    "parts": {
+     "hair": "kid4",
+     "eyes": "kid4",
+     "outfit": "kid4",
+     "head": null,
+     "face_acc": null,
+     "back": null
+    },
+    "color": {
+     "hair": "brown",
+     "iris": "green",
+     "skin": "medium"
+    }
+   },
+   "unchanged": true,
+   "fresh": true
+  },
+  {
    "case": "not a save (null, string, number, array, undefined) -> null",
    "ok": true,
    "got": [
@@ -2374,14 +2881,38 @@
    "lookAfter": null,
    "again": true,
    "t3": 10625024
+  },
+  "releaseWhileLoading": {
+   "ok": true,
+   "s1": {
+    "total": 0,
+    "look": null
+   },
+   "rB": {
+    "ready": false,
+    "failed": [
+     "pack"
+    ]
+   },
+   "rA": {
+    "ready": false,
+    "failed": [
+     "released"
+    ]
+   },
+   "total": 0,
+   "look": null,
+   "state": null,
+   "againIsB": true
   }
  },
  "inject": null,
  "failedCases": [],
  "summary": {
-  "k2": "28/28",
-  "k7": "35/35",
+  "k2": "41/41",
+  "k7": "41/41",
   "loadTwice": true,
+  "releaseWhileLoading": true,
   "fails": 0
  }
 }
