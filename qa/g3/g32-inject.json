@@ -1,7 +1,7 @@
 {
  "I1": {
   "summary": {
-   "k2": "38/41",
+   "k2": "41/44",
    "k7": "41/41",
    "loadTwice": true,
    "releaseWhileLoading": true,
@@ -15,7 +15,7 @@
  },
  "I2": {
   "summary": {
-   "k2": "41/41",
+   "k2": "44/44",
    "k7": "35/41",
    "loadTwice": true,
    "releaseWhileLoading": true,
@@ -32,7 +32,7 @@
  },
  "I3": {
   "summary": {
-   "k2": "41/41",
+   "k2": "44/44",
    "k7": "2/41",
    "loadTwice": true,
    "releaseWhileLoading": true,
@@ -82,11 +82,11 @@
  },
  "I4": {
   "summary": {
-   "k2": "30/41",
+   "k2": "30/44",
    "k7": "41/41",
    "loadTwice": true,
    "releaseWhileLoading": false,
-   "fails": 12
+   "fails": 15
   },
   "failed_cases": [
    "pack missing",
@@ -99,17 +99,20 @@
    "pack recolour {}",
    "pack without hold",
    "pack colour named __proto__",
+   "pack colour name is an array (T23 N1)",
+   "pack colour name is null (T23 N1)",
+   "pack hex is an array (T23 N1)",
    "every file missing",
    "release while loading"
   ]
  },
- "g3.2-first-version (5a7e27e)": {
+ "g3.2 v1 (5a7e27e)": {
   "summary": {
-   "k2": "29/41",
+   "k2": "31/44",
    "k7": "39/41",
    "loadTwice": true,
    "releaseWhileLoading": false,
-   "fails": 15
+   "fails": 16
   },
   "failed_cases": [
    "pack walk_ms 0",
@@ -118,6 +121,7 @@
    "pack recolour {}",
    "pack without hold",
    "pack colour named __proto__",
+   "pack hex is an array (T23 N1)",
    "hold S anchor null",
    "hold SE fist empty",
    "hold fist on a clear px",
@@ -127,6 +131,20 @@
    "B16b base __proto__, no gender / parts -> null (T22 R1 probe)",
    "B17 base {toString:null} -> null (T22 R1)",
    "release while loading"
+  ]
+ },
+ "g3.2 v1.1 (d206fd5)": {
+  "summary": {
+   "k2": "41/44",
+   "k7": "41/41",
+   "loadTwice": true,
+   "releaseWhileLoading": true,
+   "fails": 3
+  },
+  "failed_cases": [
+   "pack colour name is an array (T23 N1)",
+   "pack colour name is null (T23 N1)",
+   "pack hex is an array (T23 N1)"
   ]
  }
 }

@@ -36,6 +36,9 @@ pack_edit('pack-budgetneg.json', lambda q: q['budget'].__setitem__('bytes', -1))
 pack_edit('pack-recolour-empty.json', lambda q: q['materials'].__setitem__('recolour', {}))
 pack_edit('pack-nohold.json', lambda q: q.pop('hold'))
 pack_edit('pack-protoname.json', lambda q: q['palette']['hair'][0].__setitem__(0, '__proto__'))
+pack_edit('pack-name-array.json', lambda q: q['palette']['hair'][0].__setitem__(0, ['black']))   # T23 N1: a regex would turn these into text
+pack_edit('pack-name-null.json', lambda q: q['palette']['hair'][0].__setitem__(0, None))
+pack_edit('pack-hex-array.json', lambda q: q['palette']['hair'][0][1].__setitem__(0, ['#18141C']))
 h = json.loads((root / 'c2-pilot-hold-anchors.json').read_text(encoding='utf-8'))
 def hold_edit(name, fn):  # T22 R4: one wrong hand entry per file
     q = json.loads(json.dumps(h)); fn(q); (out / name).write_text(json.dumps(q))

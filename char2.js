@@ -23,7 +23,7 @@
   const HEX = /^#[0-9A-F]{6}$/;
 
   // ---------- pack check: every field that is used later, with its range (any doubt -> not ready · T22 R3) ----------
-  const NAME = /^[a-z][a-z0-9_]*$/, own = (o, k) => isObj(o) && typeof k === 'string' && Object.prototype.hasOwnProperty.call(o, k);
+  const NAME = /^[a-z][a-z0-9_]*$/, isName = (v) => typeof v === 'string' && NAME.test(v), isHex = (v) => typeof v === 'string' && HEX.test(v), own = (o, k) => isObj(o) && typeof k === 'string' && Object.prototype.hasOwnProperty.call(o, k);
   const inR = (v, a, b) => isInt(v) && v >= a && v <= b, isStr = (v) => typeof v === 'string' && v.length > 0;
   const isSize = (z, w, h) => Array.isArray(z) && z.length === 2 && z[0] === w && z[1] === h;
   function packOk(p) {
@@ -42,7 +42,7 @@
         if (!Array.isArray(L) || !L.length || !Array.isArray(L[0]) || !Array.isArray(L[0][1])) return false;
         const n = L[0][1].length;
         if (n < 1 || n > 255 || new Set(L.map((e) => e && e[0])).size !== L.length) return false;
-        if (!L.every((e) => Array.isArray(e) && NAME.test(e[0]) && Array.isArray(e[1]) && e[1].length === n && e[1].every((h) => HEX.test(h)))) return false;
+        if (!L.every((e) => Array.isArray(e) && isName(e[0]) && Array.isArray(e[1]) && e[1].length === n && e[1].every(isHex))) return false;
       }
       const R = p.materials && p.materials.recolour, ids = p.materials && p.materials.ids;
       if (!isObj(R) || !Array.isArray(ids) || ids[0] !== 1 || !inR(ids[1], 1, 254)) return false;
@@ -51,7 +51,7 @@
       if (!isObj(p.bases) || !Object.keys(p.bases).length) return false;
       for (const k of Object.keys(p.bases)) {
         const B = p.bases[k];
-        if (!NAME.test(k) || !isObj(B) || (B.gender !== 'f' && B.gender !== 'm') || !isObj(B.parts) || !isObj(B.defaults)) return false;
+        if (!isName(k) || !isObj(B) || (B.gender !== 'f' && B.gender !== 'm') || !isObj(B.parts) || !isObj(B.defaults)) return false;
         if (!SLOT_NEED.every((x) => Array.isArray(B.parts[x]) && B.parts[x].length && B.parts[x].every(isStr))) return false;
         if (!SLOT_OPT.every((x) => B.parts[x] === undefined || (Array.isArray(B.parts[x]) && B.parts[x].every(isStr)))) return false;
         if (!['hair', 'iris', 'skin'].every((g) => colourIx(p, g, B.defaults[g]) >= 0)) return false;
@@ -259,6 +259,6 @@
   }
   function release() { GEN++; ST = null; LOADING = null; CNT = ZERO(); }
 
-  window.Char2 = Object.freeze({ version: 'g3.2b', load, look, stats, release,
+  window.Char2 = Object.freeze({ version: 'g3.2c', load, look, stats, release,
     _test: Object.freeze({ packOk, kidMaskOk, holdOk, state: () => (ST ? { key: ST.key, idleFrom: ST.idleFrom, walkFrom: ST.walkFrom, raw: ST.raw.slice(), holdOn: ST.holdOn } : null) }) });
 })();

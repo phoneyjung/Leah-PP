@@ -4,7 +4,7 @@
  "pack_sha": "13/13",
  "pack_rebuild": "c2-pack.json matches the locked files · 4042 bytes",
  "k6": {
-  "char2.js": 19659,
+  "char2.js": 19748,
   "c2-pack.json": 4042,
   "loaded_files": 14,
   "loaded_bytes": 410076,
