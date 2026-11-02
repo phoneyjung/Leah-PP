@@ -1,0 +1,325 @@
+{
+ "inject": null,
+ "ops": 1952,
+ "opBad": 0,
+ "firstOpBad": null,
+ "checkpoints": [
+  {
+   "name": "load",
+   "resident": 11848608,
+   "total": 11848608,
+   "fixed": {
+    "images": 5308416,
+    "masks": 5308416,
+    "other": 49152
+   },
+   "cache": 1182624,
+   "borrowed": 0,
+   "scratch": 0,
+   "entries": {
+    "cached": 1,
+    "pinned": 0
+   },
+   "handles": 0,
+   "peakIndep": 23664448,
+   "peakC2": 12987296,
+   "cum": 34289472,
+   "typed": 0,
+   "kinds": {
+    "image": 10,
+    "canvas": 43,
+    "imagedata": 39
+   },
+   "ready": true,
+   "failed": []
+  },
+  {
+   "name": "ก",
+   "resident": 18941076,
+   "total": 18941076,
+   "fixed": {
+    "images": 5308416,
+    "masks": 5308416,
+    "other": 49152
+   },
+   "cache": 8275092,
+   "borrowed": 0,
+   "scratch": 0,
+   "entries": {
+    "cached": 6,
+    "pinned": 0
+   },
+   "handles": 0,
+   "peakIndep": 20123700,
+   "peakC2": 20120724,
+   "cum": 48474408,
+   "typed": 0,
+   "kinds": {
+    "image": 10,
+    "canvas": 174,
+    "imagedata": 170
+   },
+   "allDrawn": true,
+   "repeatHits": {
+    "hits": 476,
+    "misses": 4
+   }
+  },
+  {
+   "name": "ข",
+   "resident": 40237812,
+   "total": 40237812,
+   "fixed": {
+    "images": 5308416,
+    "masks": 5308416,
+    "other": 49152
+   },
+   "cache": 29571828,
+   "borrowed": 0,
+   "scratch": 0,
+   "entries": {
+    "cached": 20,
+    "pinned": 0
+   },
+   "handles": 0,
+   "peakIndep": 41420436,
+   "peakC2": 41417460,
+   "cum": 137206848,
+   "typed": 0,
+   "kinds": {
+    "image": 10,
+    "canvas": 1254,
+    "imagedata": 1250
+   },
+   "xDrawn": true,
+   "allDrawn": true,
+   "repeatHits": {
+    "hits": 10,
+    "misses": 0
+   }
+  },
+  {
+   "name": "ค ยืม",
+   "resident": 39619428,
+   "total": 39619428,
+   "fixed": {
+    "images": 5308416,
+    "masks": 5308416,
+    "other": 49152
+   },
+   "cache": 24818724,
+   "borrowed": 4134720,
+   "scratch": 0,
+   "entries": {
+    "cached": 16,
+    "pinned": 3
+   },
+   "handles": 4,
+   "peakIndep": 41420436,
+   "peakC2": 41417460,
+   "cum": 206926872,
+   "typed": 0,
+   "kinds": {
+    "image": 10,
+    "canvas": 1766,
+    "imagedata": 1762
+   },
+   "allDrawn": true,
+   "reborrow": {
+    "same": true,
+    "newBytes": 0,
+    "borrowedDelta": 0
+   },
+   "got": [
+    true,
+    true,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true
+   ]
+  },
+  {
+   "name": "ค คืน",
+   "resident": 39619428,
+   "total": 39619428,
+   "fixed": {
+    "images": 5308416,
+    "masks": 5308416,
+    "other": 49152
+   },
+   "cache": 28953444,
+   "borrowed": 0,
+   "scratch": 0,
+   "entries": {
+    "cached": 19,
+    "pinned": 0
+   },
+   "handles": 0,
+   "peakIndep": 41420436,
+   "peakC2": 41417460,
+   "cum": 206926872,
+   "typed": 0,
+   "kinds": {
+    "image": 10,
+    "canvas": 1766,
+    "imagedata": 1762
+   },
+   "allDrawn": true
+  },
+  {
+   "name": "ค2",
+   "resident": 39619428,
+   "total": 39619428,
+   "fixed": {
+    "images": 5308416,
+    "masks": 5308416,
+    "other": 49152
+   },
+   "cache": 25405572,
+   "borrowed": 3547872,
+   "scratch": 0,
+   "entries": {
+    "cached": 16,
+    "pinned": 3
+   },
+   "handles": 3,
+   "peakIndep": 41420436,
+   "peakC2": 41417460,
+   "cum": 206926872,
+   "typed": 0,
+   "kinds": {
+    "image": 10,
+    "canvas": 1766,
+    "imagedata": 1762
+   },
+   "allDrawn": true,
+   "borrowedAtStart": 3547872,
+   "borrowedMax": 3547872,
+   "got": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "name": "ง",
+   "resident": 14213856,
+   "total": 14213856,
+   "fixed": {
+    "images": 5308416,
+    "masks": 5308416,
+    "other": 49152
+   },
+   "cache": 0,
+   "borrowed": 3547872,
+   "scratch": 0,
+   "entries": {
+    "cached": 0,
+    "pinned": 3
+   },
+   "handles": 3,
+   "peakIndep": 41420436,
+   "peakC2": 41417460,
+   "cum": 206926872,
+   "typed": 0,
+   "kinds": {
+    "image": 10,
+    "canvas": 1766,
+    "imagedata": 1762
+   },
+   "fixedSame": true,
+   "borrowedSame": true,
+   "evictedNonZero": 0,
+   "pinnedOk": true,
+   "kept": 6
+  },
+  {
+   "name": "จ",
+   "resident": 0,
+   "total": 0,
+   "fixed": {
+    "images": 0,
+    "masks": 0,
+    "other": 0
+   },
+   "cache": 0,
+   "borrowed": 0,
+   "scratch": 0,
+   "entries": {
+    "cached": 0,
+    "pinned": 0
+   },
+   "handles": 0,
+   "peakIndep": 41420436,
+   "peakC2": 0,
+   "cum": 218746560,
+   "typed": 0,
+   "kinds": {
+    "image": 10,
+    "canvas": 1868,
+    "imagedata": 1864
+   },
+   "dead": true,
+   "drawAfter": false,
+   "sheetAfter": true,
+   "allZero": true,
+   "afterTrimDrawn": true
+  }
+ ],
+ "cpBad": [],
+ "colour": "6/6",
+ "peak": {
+  "load_indep": 23664448,
+  "ก_to_จ_indep": 41420436,
+  "all_indep": 41420436,
+  "char2_stats": 41417460,
+  "MiB": 39.502
+ },
+ "cumulative_made": 218746560,
+ "gate": {
+  "peakLE40": true,
+  "c2PeakLEindep": true
+ },
+ "sizes": {
+  "sheet": {
+   "idle": 1179648,
+   "walk": 1769472,
+   "walkhold": 1769472,
+   "stand8": 294912
+  },
+  "fist": {
+   "idle": 2976,
+   "walkhold": 5652,
+   "walk": 0,
+   "stand8": 0
+  }
+ },
+ "model_counters": {
+  "hit": 1880,
+  "miss": 62,
+  "evict": 55,
+  "refused": 21,
+  "rebuilt": 19
+ },
+ "pageErrors": []
+}

@@ -1,0 +1,43 @@
+{
+ "mode": "k3b",
+ "inject": null,
+ "frozen_raw": [
+  "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+  "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+  "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
+ ],
+ "sheets": "2560/2560",
+ "composed": "10240/10240",
+ "anchors": "309/309",
+ "headTopVsJson": "80/80",
+ "refused": 0,
+ "maxTotal": 15647156,
+ "sBad": [],
+ "cBad": [],
+ "aBad": [],
+ "pageErrors": 0,
+ "stats": {
+  "budget": 41943040,
+  "fixed": {
+   "images": 5308416,
+   "masks": 5308416,
+   "other": 8192
+  },
+  "cache": 0,
+  "borrowed": 0,
+  "scratch": 0,
+  "total": 10625024,
+  "entries": {
+   "cached": 0,
+   "pinned": 0
+  },
+  "handles": 0,
+  "hit": 10240,
+  "miss": 2560,
+  "evict": 2560,
+  "refused": 0,
+  "rebuilt": 0,
+  "peak": 17121716
+ },
+ "fails": 0
+}

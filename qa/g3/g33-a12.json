@@ -1,0 +1,21 @@
+{
+ "mode": "a12",
+ "inject": null,
+ "frozen_raw": [
+  "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+  "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+  "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
+ ],
+ "main": "48/48",
+ "extra": "27/27",
+ "byKind": [
+  "alpha0/1 6/6",
+  "afterimage 9/9",
+  "clip 10/10",
+  "power10 2/2"
+ ],
+ "step1to1_max": 1,
+ "bad": [],
+ "pageErrors": 0,
+ "fails": 0
+}

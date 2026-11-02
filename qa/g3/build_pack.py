@@ -48,7 +48,8 @@ lc = re.search(r'gx=LW\[0\]\+(\d+)-GLOW\.R,gy=LW\[1\]\+(\d+)-GLOW\.R', motion)  
 gm_pow = re.search(r'const GM_POW=\{100:\{light:([\d.]+)[^}]*\},50:\{light:([\d.]+)[^}]*\},10:\{light:([\d.]+)[^}]*\},0:\{light:([\d.]+)', motion)
 hid = re.findall(r"if\(d==='([A-Z]+)'&&H&&!lanXY", motion)                     # O13: facing these dirs the lantern is hidden
 brp = re.search(r"const w=DIRS\.indexOf\('([A-Z]+)'\),cut=(\d+),k=(\d+)", motion)   # Pilot breatheW: dir, cut row, frame index
-assert nhole and blink and gm_pow and lc and hid and brp, 'Pilot constants changed'
+stopfi = re.search(r"ST\.anim='idle';ST\.fi=(\d+)", motion)                           # stop(): idle starts at loop index 2 (f3)
+assert nhole and blink and gm_pow and lc and hid and brp and stopfi, 'Pilot constants changed'
 # W breathing: the locked anchors JSON and the Pilot code must say the same (T22 R6) - the pack takes the JSON value
 cb = anchors['anims']['idle']['code_breathing']; assert len(cb) == 1, 'one breathing direction expected'
 b_dir, b = next(iter(cb.items())); b_frame = b['dy'].index(-1)
@@ -86,7 +87,7 @@ pack = {
                  'mask_meta_sha256': sha('c2-pilot-kid4-pt-mask.json'), 'shademap_sha256': sha('c2-pilot-kid4-pt-shademap.json')},
     'render_offset': {d: anchors['renderOffset']['dx'][d] for d in DIRS},
     'timing': {'walk_ms': pilot_const('WALK_MS', motion), 'idle_ms': pilot_const('IDLE_MS', motion), 'idle_loop': pilot_const('IDLE_LOOP', motion),
-               'blink_dirs': pilot_const('BLINK_DIRS', motion), 'blink_min_ms': int(blink.group(1)), 'blink_span_ms': int(blink.group(2)), 'blink_frame': 3},
+               'blink_dirs': pilot_const('BLINK_DIRS', motion), 'stop_fi': int(stopfi.group(1)), 'blink_min_ms': int(blink.group(1)), 'blink_span_ms': int(blink.group(2)), 'blink_frame': 3},
     'ease': {'max_px': pilot_const('EASE_MAX', motion), 'window_ms': pilot_const('EASE_WIN', motion)},
     'materials': {'recolour': {str(k): v for k, v in sorted(ref_const('RECOL').items())}, 'ids': [min(i for i in ref_const('IDS') if i), max(ref_const('IDS'))]},
     'palette': pal,

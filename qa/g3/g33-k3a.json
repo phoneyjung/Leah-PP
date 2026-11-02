@@ -1,0 +1,1396 @@
+{
+ "mode": "k3a",
+ "inject": null,
+ "frozen_raw": [
+  "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+  "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+  "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
+ ],
+ "runs": [
+  {
+   "group": "A1",
+   "dpr": 3,
+   "steps": 400,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    0,
+    0
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [],
+   "blinkStartsC": [],
+   "ok": true
+  },
+  {
+   "group": "A2",
+   "dpr": 3,
+   "steps": 320,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    0,
+    0
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [],
+   "blinkStartsC": [],
+   "ok": true
+  },
+  {
+   "group": "A3",
+   "dpr": 3,
+   "steps": 400,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    0,
+    0
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [],
+   "blinkStartsC": [],
+   "ok": true
+  },
+  {
+   "group": "A4",
+   "dpr": 3,
+   "steps": 320,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553",
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    0,
+    0
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [],
+   "blinkStartsC": [],
+   "ok": true
+  },
+  {
+   "group": "A5",
+   "dpr": 3,
+   "steps": 540,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    0,
+    0
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [],
+   "blinkStartsC": [],
+   "ok": true
+  },
+  {
+   "group": "A6",
+   "dpr": 3,
+   "steps": 320,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    0,
+    0
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [],
+   "blinkStartsC": [],
+   "ok": true
+  },
+  {
+   "group": "A6h",
+   "dpr": 3,
+   "steps": 320,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553",
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    0,
+    0
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [],
+   "blinkStartsC": [],
+   "ok": true
+  },
+  {
+   "group": "A7",
+   "dpr": 3,
+   "steps": 80,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    0,
+    0
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [],
+   "blinkStartsC": [],
+   "ok": true
+  },
+  {
+   "group": "A8",
+   "dpr": 3,
+   "steps": 120,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    0,
+    0
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [],
+   "blinkStartsC": [],
+   "ok": true
+  },
+  {
+   "group": "A9",
+   "dpr": 3,
+   "steps": 125,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    0,
+    0
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [],
+   "blinkStartsC": [],
+   "ok": true
+  },
+  {
+   "group": "A11",
+   "dpr": 3,
+   "steps": 64,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    0,
+    0
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [],
+   "blinkStartsC": [],
+   "ok": true
+  },
+  {
+   "group": "A10-S",
+   "dpr": 3,
+   "steps": 625,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553",
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    24,
+    24
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [
+    288,
+    588
+   ],
+   "blinkStartsC": [
+    288,
+    588
+   ],
+   "ok": true
+  },
+  {
+   "group": "A10-S-hold",
+   "dpr": 3,
+   "steps": 625,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553",
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    24,
+    24
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [
+    288,
+    588
+   ],
+   "blinkStartsC": [
+    288,
+    588
+   ],
+   "ok": true
+  },
+  {
+   "group": "A10-SE",
+   "dpr": 3,
+   "steps": 625,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553",
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    24,
+    24
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [
+    288,
+    588
+   ],
+   "blinkStartsC": [
+    288,
+    588
+   ],
+   "ok": true
+  },
+  {
+   "group": "A10-SE-hold",
+   "dpr": 3,
+   "steps": 625,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553",
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    24,
+    24
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [
+    288,
+    588
+   ],
+   "blinkStartsC": [
+    288,
+    588
+   ],
+   "ok": true
+  },
+  {
+   "group": "A10-E",
+   "dpr": 3,
+   "steps": 625,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    24,
+    24
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [
+    288,
+    588
+   ],
+   "blinkStartsC": [
+    288,
+    588
+   ],
+   "ok": true
+  },
+  {
+   "group": "A10-E-hold",
+   "dpr": 3,
+   "steps": 625,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553",
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    24,
+    24
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [
+    288,
+    588
+   ],
+   "blinkStartsC": [
+    288,
+    588
+   ],
+   "ok": true
+  },
+  {
+   "group": "A10-W",
+   "dpr": 3,
+   "steps": 625,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553",
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    24,
+    24
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [
+    288,
+    588
+   ],
+   "blinkStartsC": [
+    288,
+    588
+   ],
+   "ok": true
+  },
+  {
+   "group": "A10-W-hold",
+   "dpr": 3,
+   "steps": 625,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    24,
+    24
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [
+    288,
+    588
+   ],
+   "blinkStartsC": [
+    288,
+    588
+   ],
+   "ok": true
+  },
+  {
+   "group": "A10-SW",
+   "dpr": 3,
+   "steps": 625,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553",
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    24,
+    24
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [
+    288,
+    588
+   ],
+   "blinkStartsC": [
+    288,
+    588
+   ],
+   "ok": true
+  },
+  {
+   "group": "A10-SW-hold",
+   "dpr": 3,
+   "steps": 625,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    24,
+    24
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [
+    288,
+    588
+   ],
+   "blinkStartsC": [
+    288,
+    588
+   ],
+   "ok": true
+  },
+  {
+   "group": "A1",
+   "dpr": 1,
+   "steps": 400,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553",
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    0,
+    0
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [],
+   "blinkStartsC": [],
+   "ok": true
+  },
+  {
+   "group": "A2",
+   "dpr": 1,
+   "steps": 320,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    0,
+    0
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [],
+   "blinkStartsC": [],
+   "ok": true
+  },
+  {
+   "group": "A3",
+   "dpr": 1,
+   "steps": 400,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    0,
+    0
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [],
+   "blinkStartsC": [],
+   "ok": true
+  },
+  {
+   "group": "A4",
+   "dpr": 1,
+   "steps": 320,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553",
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    0,
+    0
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [],
+   "blinkStartsC": [],
+   "ok": true
+  },
+  {
+   "group": "A5",
+   "dpr": 1,
+   "steps": 540,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553",
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    0,
+    0
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [],
+   "blinkStartsC": [],
+   "ok": true
+  },
+  {
+   "group": "A6",
+   "dpr": 1,
+   "steps": 320,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    0,
+    0
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [],
+   "blinkStartsC": [],
+   "ok": true
+  },
+  {
+   "group": "A6h",
+   "dpr": 1,
+   "steps": 320,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553",
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    0,
+    0
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [],
+   "blinkStartsC": [],
+   "ok": true
+  },
+  {
+   "group": "A7",
+   "dpr": 1,
+   "steps": 80,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553",
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    0,
+    0
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [],
+   "blinkStartsC": [],
+   "ok": true
+  },
+  {
+   "group": "A8",
+   "dpr": 1,
+   "steps": 120,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    0,
+    0
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [],
+   "blinkStartsC": [],
+   "ok": true
+  },
+  {
+   "group": "A9",
+   "dpr": 1,
+   "steps": 125,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    0,
+    0
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [],
+   "blinkStartsC": [],
+   "ok": true
+  },
+  {
+   "group": "A11",
+   "dpr": 1,
+   "steps": 64,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    0,
+    0
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [],
+   "blinkStartsC": [],
+   "ok": true
+  },
+  {
+   "group": "A10-S",
+   "dpr": 1,
+   "steps": 625,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    24,
+    24
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [
+    288,
+    588
+   ],
+   "blinkStartsC": [
+    288,
+    588
+   ],
+   "ok": true
+  },
+  {
+   "group": "A10-S-hold",
+   "dpr": 1,
+   "steps": 625,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    24,
+    24
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [
+    288,
+    588
+   ],
+   "blinkStartsC": [
+    288,
+    588
+   ],
+   "ok": true
+  },
+  {
+   "group": "A10-SE",
+   "dpr": 1,
+   "steps": 625,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    24,
+    24
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [
+    288,
+    588
+   ],
+   "blinkStartsC": [
+    288,
+    588
+   ],
+   "ok": true
+  },
+  {
+   "group": "A10-SE-hold",
+   "dpr": 1,
+   "steps": 625,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    24,
+    24
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [
+    288,
+    588
+   ],
+   "blinkStartsC": [
+    288,
+    588
+   ],
+   "ok": true
+  },
+  {
+   "group": "A10-E",
+   "dpr": 1,
+   "steps": 625,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553",
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    24,
+    24
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [
+    288,
+    588
+   ],
+   "blinkStartsC": [
+    288,
+    588
+   ],
+   "ok": true
+  },
+  {
+   "group": "A10-E-hold",
+   "dpr": 1,
+   "steps": 625,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    24,
+    24
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [
+    288,
+    588
+   ],
+   "blinkStartsC": [
+    288,
+    588
+   ],
+   "ok": true
+  },
+  {
+   "group": "A10-W",
+   "dpr": 1,
+   "steps": 625,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    24,
+    24
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [
+    288,
+    588
+   ],
+   "blinkStartsC": [
+    288,
+    588
+   ],
+   "ok": true
+  },
+  {
+   "group": "A10-W-hold",
+   "dpr": 1,
+   "steps": 625,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    24,
+    24
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [
+    288,
+    588
+   ],
+   "blinkStartsC": [
+    288,
+    588
+   ],
+   "ok": true
+  },
+  {
+   "group": "A10-SW",
+   "dpr": 1,
+   "steps": 625,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553",
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    24,
+    24
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [
+    288,
+    588
+   ],
+   "blinkStartsC": [
+    288,
+    588
+   ],
+   "ok": true
+  },
+  {
+   "group": "A10-SW-hold",
+   "dpr": 1,
+   "steps": 625,
+   "startOk": true,
+   "servedOk": true,
+   "served": {
+    "P": {
+     "c2-pilot-kid4-walk.png": "dc473a2f913af74decb226212ba7ce7a82352d3c07b6bc5807e33f90a08c11a5",
+     "c2-pilot-kid4-idleanim.png": "26194c12ac3d19b655810b9d83e3f761da8c7df8b4b0114201cfc574dd787172",
+     "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
+    },
+    "C": {
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553",
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045"
+    }
+   },
+   "pageErrors": 0,
+   "rejections": 0,
+   "badSteps": 0,
+   "blinkSteps": [
+    24,
+    24
+   ],
+   "blinkBad": 0,
+   "blinkStartsP": [
+    288,
+    588
+   ],
+   "blinkStartsC": [
+    288,
+    588
+   ],
+   "ok": true
+  }
+ ],
+ "steps_dpr3": 9259,
+ "cover_dpr3": "160/160",
+ "steps_dpr1": 9259,
+ "cover_dpr1": "160/160",
+ "fails": 0
+}

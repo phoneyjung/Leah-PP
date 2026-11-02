@@ -17,7 +17,7 @@ const INJ = { I1: ['function kidMaskOk(p, A, M) {', 'function kidMaskOk(p, A, M)
   I2: ['if (pd219Look(S.pd219)) src.push', 'if (false) src.push'],
   I3: ['if (!ST || !isObj(save)) return null;', 'if (!ST || !isObj(save)) return null; save.seen = 1;'],
   I4: ["if (!packOk(p)) return { ready: false, failed: ['pack'], pack: null };", "if (!packOk(p)) throw new Error('inject');"] }[process.env.INJECT || ''];
-let C2SRC = fs.readFileSync(process.env.C2_FILE || path.join(process.cwd(), 'char2.js'), 'utf8');   // C2_FILE = run the suite on another copy (e.g. the G3.2 first version)
+let C2SRC = fs.readFileSync(process.env.C2_FILE || path.join(process.cwd(), 'char2.src.js'), 'utf8');   // injections edit the readable source (served in place of the built char2.js)   // C2_FILE = run the suite on another copy (e.g. the G3.2 first version)
 if (INJ) { if (!C2SRC.includes(INJ[0])) { console.log('inject target missing'); process.exit(2); } C2SRC = C2SRC.replace(INJ[0], INJ[1]); }
 // I4 also turns the safety catch off, so a throw would surface as a rejection
 if (process.env.INJECT === 'I4') { const t = "LOADING = doLoad(packUrl, g).catch(() => ({ ready: false, failed: ['internal'], pack: null }));"; if (!C2SRC.includes(t)) { console.log('inject target missing'); process.exit(2); } C2SRC = C2SRC.replace(t, 'LOADING = doLoad(packUrl, g);'); }
