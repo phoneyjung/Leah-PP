@@ -1,0 +1,371 @@
+{
+ "mode": "k7",
+ "inject": null,
+ "cases": [
+  {
+   "case": "encode -> decode 160/160 looks give the same Appearance (a new object)",
+   "ok": true,
+   "note": "160/160 · longest text 52 chars · e.g. c2.2|kid4|f|kid4.kid4.kid4.-.-.-|brown.green.medium"
+  },
+  {
+   "case": "encode of a look this pack cannot draw -> null (14 cases)",
+   "ok": true,
+   "note": ""
+  },
+  {
+   "case": "decode of malformed text -> null (21 cases)",
+   "ok": true,
+   "note": ""
+  },
+  {
+   "case": "decode of well-formed text with an unknown name -> that slot default, encodable again (4 cases)",
+   "ok": true,
+   "note": ""
+  },
+  {
+   "case": "nothing throws · before load / after release -> null",
+   "ok": true
+  }
+ ],
+ "k7": {
+  "round": 160,
+  "roundOf": 160,
+  "lens": [
+   50,
+   51,
+   48,
+   49,
+   50,
+   51,
+   48,
+   49,
+   50,
+   51,
+   48,
+   49,
+   49,
+   50,
+   47,
+   48,
+   50,
+   51,
+   48,
+   49,
+   50,
+   51,
+   48,
+   49,
+   50,
+   51,
+   48,
+   49,
+   50,
+   51,
+   48,
+   49,
+   49,
+   50,
+   47,
+   48,
+   50,
+   51,
+   48,
+   49,
+   51,
+   52,
+   49,
+   50,
+   51,
+   52,
+   49,
+   50,
+   51,
+   52,
+   49,
+   50,
+   50,
+   51,
+   48,
+   49,
+   51,
+   52,
+   49,
+   50,
+   48,
+   49,
+   46,
+   47,
+   48,
+   49,
+   46,
+   47,
+   48,
+   49,
+   46,
+   47,
+   47,
+   48,
+   45,
+   46,
+   48,
+   49,
+   46,
+   47,
+   49,
+   50,
+   47,
+   48,
+   49,
+   50,
+   47,
+   48,
+   49,
+   50,
+   47,
+   48,
+   48,
+   49,
+   46,
+   47,
+   49,
+   50,
+   47,
+   48,
+   49,
+   50,
+   47,
+   48,
+   49,
+   50,
+   47,
+   48,
+   49,
+   50,
+   47,
+   48,
+   48,
+   49,
+   46,
+   47,
+   49,
+   50,
+   47,
+   48,
+   51,
+   52,
+   49,
+   50,
+   51,
+   52,
+   49,
+   50,
+   51,
+   52,
+   49,
+   50,
+   50,
+   51,
+   48,
+   49,
+   51,
+   52,
+   49,
+   50,
+   50,
+   51,
+   48,
+   49,
+   50,
+   51,
+   48,
+   49,
+   50,
+   51,
+   48,
+   49,
+   49,
+   50,
+   47,
+   48,
+   50,
+   51,
+   48,
+   49
+  ],
+  "bad": [],
+  "enc": [
+   [
+    "null",
+    true
+   ],
+   [
+    "string",
+    true
+   ],
+   [
+    "v 1",
+    true
+   ],
+   [
+    "set other",
+    true
+   ],
+   [
+    "base other",
+    true
+   ],
+   [
+    "base __proto__",
+    true
+   ],
+   [
+    "gender m",
+    true
+   ],
+   [
+    "hair part unknown",
+    true
+   ],
+   [
+    "outfit missing",
+    true
+   ],
+   [
+    "head part not in base",
+    true
+   ],
+   [
+    "colour unknown",
+    true
+   ],
+   [
+    "colour array",
+    true
+   ],
+   [
+    "colour missing",
+    true
+   ],
+   [
+    "parts not object",
+    true
+   ]
+  ],
+  "dec": [
+   [
+    "not a string",
+    true
+   ],
+   [
+    "object",
+    true
+   ],
+   [
+    "null",
+    true
+   ],
+   [
+    "empty",
+    true
+   ],
+   [
+    "spaces",
+    true
+   ],
+   [
+    "4 fields",
+    true
+   ],
+   [
+    "6 fields",
+    true
+   ],
+   [
+    "version 1",
+    true
+   ],
+   [
+    "set other",
+    true
+   ],
+   [
+    "base unknown",
+    true
+   ],
+   [
+    "base __proto__",
+    true
+   ],
+   [
+    "gender x",
+    true
+   ],
+   [
+    "gender m on a girl base",
+    true
+   ],
+   [
+    "5 parts",
+    true
+   ],
+   [
+    "needed part empty",
+    true
+   ],
+   [
+    "2 colours",
+    true
+   ],
+   [
+    "upper case colour",
+    true
+   ],
+   [
+    "colour with space",
+    true
+   ],
+   [
+    "too long (1 MB)",
+    true
+   ],
+   [
+    "trailing newline",
+    true
+   ],
+   [
+    "unicode",
+    true
+   ]
+  ],
+  "lenient": [
+   [
+    "unknown hair colour -> default brown",
+    true,
+    true
+   ],
+   [
+    "unknown iris colour -> default green",
+    true,
+    true
+   ],
+   [
+    "unknown hair part -> base part",
+    true,
+    true
+   ],
+   [
+    "unknown head part -> none",
+    true,
+    true
+   ]
+  ],
+  "throws": 0,
+  "sample": "c2.2|kid4|f|kid4.kid4.kid4.-.-.-|brown.green.medium",
+  "maxLen": 52,
+  "notLoaded": [
+   null,
+   null
+  ]
+ },
+ "fails": 0
+}

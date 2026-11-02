@@ -7,7 +7,8 @@
 //   live = what is held now · peak = max(live) · cum = everything ever made (reported only, not a gate)
 // Scenarios (plan K4): load · (ก) 4 actors in 4 colour sets x 120 frames · (ข) one actor through looks 1->8->1, then 1->8 again in another house ·
 // (ค) borrow all 3 sheets of looks 1-8 without returning while the 4 actors draw · borrow look 1 again · release one by one · (ค2) borrow some
-// sheets first, then draw the same looks so more sheets are built (the portrait half of ค2 waits for G3.4: Char2.portrait does not exist yet) ·
+// sheets first, then draw the same looks so more sheets are built · (ค2 หน้า, G3.4) borrow the portraits of 8 looks (= borrowMax) first, one more sheet
+// is refused, then draw those looks so their sheets are built: borrowed stays 8 x 589,824 ·
 // (ง) trim() · (จ) release(). gc() after every call that built a sheet, so the garbage of an earlier step is not counted in a later one.
 // Every checkpoint (after gc + finalizers): independent live == stats().total (byte for byte) and <= 40 MiB · fixed.other <= 256 KiB · scratch 0.
 // Every op: the counters of Char2 (hit miss evict refused rebuilt cache borrowed) == an LRU model written here from the plan rules (section 4),
@@ -63,8 +64,8 @@ const HOOK = () => {
 (async () => {
   const pack = JSON.parse(fs.readFileSync(path.join(ROOT, 'c2-pack.json'))), H = JSON.parse(fs.readFileSync(path.join(ROOT, 'c2-pilot-hold-anchors.json')));
   const fistBytes = (key) => { let t = 0; for (const L of Object.values(H[key])) for (const f of L) { if (!f.anchor) continue; const xs = f.fist.map((q) => q[0]), ys = f.fist.map((q) => q[1]); t += (Math.max(...xs) - Math.min(...xs) + 1) * (Math.max(...ys) - Math.min(...ys) + 1) * 4; } return t; };
-  const C = pack.cell, SZ = {}; for (const an of ['idle', 'walk', 'walkhold']) SZ[an] = pack.sheets[an].size[0] * pack.sheets[an].size[1] * 4; SZ.stand8 = 8 * C * C * 4;
-  const FIST = { idle: fistBytes('idle_hold'), walkhold: fistBytes('walk_hold'), walk: 0, stand8: 0 };
+  const C = pack.cell, SZ = {}; for (const an of ['idle', 'walk', 'walkhold']) SZ[an] = pack.sheets[an].size[0] * pack.sheets[an].size[1] * 4; SZ.stand8 = 8 * C * C * 4; SZ.portrait = pack.portrait.size[0] * pack.portrait.size[1] * 4;
+  const FIST = { idle: fistBytes('idle_hold'), walkhold: fistBytes('walk_hold'), walk: 0, stand8: 0, portrait: 0 };
   const refC = JSON.parse(fs.readFileSync(path.join(REFJ, 'composed.json')));
   const b = await chromium.launch({ args: ['--js-flags=--expose-gc'] }); const ctx = await b.newContext({ viewport: { width: 844, height: 390 }, deviceScaleFactor: 1 });
   await ctx.addInitScript(HOOK); const p = await ctx.newPage(); const errs = []; p.on('pageerror', (e) => errs.push(String(e)));
@@ -136,9 +137,18 @@ const HOOK = () => {
     const Y = [4, 5, 6].map(() => Char2.actor());
     for (let f = 0; f < 10; f++) for (let j = 0; j < 3; j++) { await drawOne(LOOK[4 + j], 'wing', Y[j], { moving: true, dir: 'S', holding: f < 5 }, 150 + 250 * j, 150); b2max = Math.max(b2max, Char2.stats().borrowed); await four(); }
     await cp('ค2', { allDrawn, borrowedAtStart: b2, borrowedMax: b2max, got: H2.map((h) => !!h) });
+    // ---- (ค2 หน้า · G3.4) the 3 sheets go back, then the portraits of looks 1-8 are borrowed (8 x 589,824 = borrowMax exactly) and kept
+    for (const h of H2) if (h) { h.release(); rec('release', null, { hid: handles.indexOf(h) }); }
+    const HP = [];
+    for (const L of LOOK) { const m0 = Char2.stats().miss, h = Char2.portrait(L, DCof('wing')), hid = handles.length; handles.push(h); HP.push(h); rec('sheet', 'portrait' + lk(L, 'wing'), { hid, got: !!h }); if (h) keptCanvases.push(h.canvas); if (Char2.stats().miss !== m0) await __settle(); }
+    await __settle(); const bP = Char2.stats().borrowed; let bPmax = bP;
+    const mX = Char2.stats().miss, extra = Char2.sheet(LOOK[0], DCof('wing'), 'walk'), hidX = handles.length; handles.push(extra); rec('sheet', 'walk' + lk(LOOK[0], 'wing'), { hid: hidX, got: !!extra }); if (Char2.stats().miss !== mX) await __settle();
+    const Z = [0, 1, 2, 3, 4, 5].map(() => Char2.actor());
+    for (let f = 0; f < 10; f++) for (let j = 0; j < 6; j++) { await drawOne(LOOK[j], 'wing', Z[j], { moving: f >= 3, dir: 'SW', holding: j % 2 === 0 }, 100 + 120 * j, 200); bPmax = Math.max(bPmax, Char2.stats().borrowed); if (j === 5) await four(); }
+    await cp('ค2 หน้า', { allDrawn, borrowedAtStart: bP, borrowedMax: bPmax, got: HP.map((h) => !!h), extraRefused: extra === null, ptSize: HP[0] ? [HP[0].canvas.width, HP[0].canvas.height] : null });
     // ---- (ง) trim(): cache 0, fixed and borrowed unchanged, evicted canvases 0 x 0 even though this page still holds them
     const pre = Char2.stats(); Char2.trim(); rec('trim', null);
-    const pinnedCanvases = new Set(H2.filter(Boolean).map((h) => h.canvas));
+    const pinnedCanvases = new Set(HP.filter(Boolean).map((h) => h.canvas));   // the 8 portraits are still borrowed (the 3 ค2 sheets were given back)
     const evictedNonZero = keptCanvases.filter((c) => !pinnedCanvases.has(c) && (c.width || c.height)).length, pinnedOk = [...pinnedCanvases].every((c) => c.width > 0);
     await cp('ง', { fixedSame: JSON.stringify(pre.fixed) === JSON.stringify(Char2.stats().fixed), borrowedSame: pre.borrowed === Char2.stats().borrowed, evictedNonZero, pinnedOk, kept: keptCanvases.length });
     await four(); const afterTrimDrawn = allDrawn;
@@ -187,6 +197,8 @@ const HOOK = () => {
     if (c.name === 'ค ยืม' && (!c.allDrawn || !c.reborrow.same || c.reborrow.newBytes !== 0 || c.reborrow.borrowedDelta !== 0)) why.push('ค re-borrow ' + JSON.stringify(c.reborrow));
     if (c.name === 'ค คืน' && (c.borrowed !== 0 || c.handles !== 0 || !c.allDrawn)) why.push('ค release: borrowed ' + c.borrowed + ' handles ' + c.handles);
     if (c.name === 'ค2' && (c.borrowedMax !== c.borrowedAtStart || !c.allDrawn || !c.got.every(Boolean))) why.push('ค2 borrowed ' + c.borrowedAtStart + ' -> max ' + c.borrowedMax);
+    if (c.name === 'ค2 หน้า' && (c.borrowedAtStart !== 8 * SZ.portrait || c.borrowedMax !== c.borrowedAtStart || !c.allDrawn || !c.got.every(Boolean) || !c.extraRefused || JSON.stringify(c.ptSize) !== '[384,384]'))
+      why.push('ค2 หน้า ' + JSON.stringify({ borrowed: c.borrowedAtStart, max: c.borrowedMax, got: c.got, extraRefused: c.extraRefused, ptSize: c.ptSize }));
     if (c.name === 'ง' && (c.cache !== 0 || !c.fixedSame || !c.borrowedSame || c.evictedNonZero || !c.pinnedOk)) why.push('ง trim ' + JSON.stringify({ cache: c.cache, fixedSame: c.fixedSame, borrowedSame: c.borrowedSame, evictedNonZero: c.evictedNonZero, pinnedOk: c.pinnedOk }));
     if (c.name === 'จ' && (c.total !== 0 || c.resident !== 0 || !c.dead || c.drawAfter !== false || !c.sheetAfter || !c.allZero || !c.afterTrimDrawn)) why.push('จ release ' + JSON.stringify({ total: c.total, resident: c.resident, dead: c.dead, drawAfter: c.drawAfter, allZero: c.allZero }));
     if (why.length) cpBad.push(c.name + ': ' + why.join(' · '));

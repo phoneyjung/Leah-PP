@@ -1,0 +1,105 @@
+{
+ "selftest": [
+  {
+   "case": "clean",
+   "want_fail": [],
+   "failed": [],
+   "ok": true,
+   "unexpected_signal_hits": 0
+  },
+  {
+   "case": "hair painted #FFC857 (T11 R1 probe)",
+   "want_fail": [
+    "4.5",
+    "4.6"
+   ],
+   "failed": [
+    "4.5",
+    "4.6"
+   ],
+   "ok": true,
+   "unexpected_signal_hits": 1
+  },
+  {
+   "case": "copper (fixed) painted #FFC857",
+   "want_fail": [
+    "4.5",
+    "4.6"
+   ],
+   "failed": [
+    "4.5",
+    "4.6"
+   ],
+   "ok": true,
+   "unexpected_signal_hits": 1
+  },
+  {
+   "case": "no recolour at all",
+   "want_fail": [
+    "4.5"
+   ],
+   "failed": [
+    "4.5"
+   ],
+   "ok": true,
+   "unexpected_signal_hits": 0
+  },
+  {
+   "case": "hair option leaks into skin",
+   "want_fail": [
+    "4.5"
+   ],
+   "failed": [
+    "4.5"
+   ],
+   "ok": true,
+   "unexpected_signal_hits": 0
+  },
+  {
+   "case": "outline colour changed",
+   "want_fail": [
+    "4.5"
+   ],
+   "failed": [
+    "4.5"
+   ],
+   "ok": true,
+   "unexpected_signal_hits": 0
+  },
+  {
+   "case": "alpha changed",
+   "want_fail": [
+    "4.5"
+   ],
+   "failed": [
+    "4.5"
+   ],
+   "ok": true,
+   "unexpected_signal_hits": 0
+  },
+  {
+   "case": "skin shade off by one",
+   "want_fail": [
+    "4.5"
+   ],
+   "failed": [
+    "4.5"
+   ],
+   "ok": true,
+   "unexpected_signal_hits": 0
+  },
+  {
+   "case": "shade map on disk differs from the D-PT-3 build",
+   "want_fail": [
+    "map"
+   ],
+   "failed": [
+    "map"
+   ],
+   "ok": true,
+   "unexpected_signal_hits": 0
+  }
+ ],
+ "passed": 9,
+ "total": 9
+}

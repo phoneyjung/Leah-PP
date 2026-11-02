@@ -1,0 +1,492 @@
+{
+ "a12-X1": {
+  "exit": "1",
+  "lines": [
+   "FAIL A12 main 6/48 · alpha0/1 3/6 · afterimage 0/9 · clip 0/10 · power10 0/2 · vs 1:1 full-size blit: largest channel step 204"
+  ]
+ },
+ "a12": {
+  "exit": "0",
+  "lines": [
+   "PASS A12 main 48/48 · alpha0/1 6/6 · afterimage 9/9 · clip 10/10 · power10 2/2 · vs 1:1 full-size blit: largest channel step 1"
+  ]
+ },
+ "build": {
+  "exit": "0",
+  "lines": [
+   "char2.js is the build of char2.src.js · 22458 B"
+  ]
+ },
+ "g32-I1": {
+  "exit": "1",
+  "lines": [
+   "PASS K2 full set | ready true failed [] | 499 ms",
+   "PASS K2 pack missing | ready false failed [\"pack\"] | 16 ms",
+   "PASS K2 pack not JSON | ready false failed [\"pack\"] | 8 ms",
+   "PASS K2 pack cell 64 | ready false failed [\"pack\"] | 25 ms",
+   "PASS K2 pack bad palette hex | ready false failed [\"pack\"] | 23 ms",
+   "PASS K2 idle missing | ready true failed [\"idle\"] | 505 ms",
+   "PASS K2 idle wrong size | ready true failed [\"idle\"] | 435 ms",
+   "PASS K2 walk missing | ready true failed [\"walk\"] | 481 ms"
+  ]
+ },
+ "g32-I2": {
+  "exit": "1",
+  "lines": [
+   "PASS K2 full set | ready true failed [] | 1642 ms",
+   "PASS K2 pack missing | ready false failed [\"pack\"] | 9 ms",
+   "PASS K2 pack not JSON | ready false failed [\"pack\"] | 11 ms",
+   "PASS K2 pack cell 64 | ready false failed [\"pack\"] | 47 ms",
+   "PASS K2 pack bad palette hex | ready false failed [\"pack\"] | 12 ms",
+   "PASS K2 idle missing | ready true failed [\"idle\"] | 560 ms",
+   "PASS K2 idle wrong size | ready true failed [\"idle\"] | 613 ms",
+   "PASS K2 walk missing | ready true failed [\"walk\"] | 460 ms"
+  ]
+ },
+ "g32-I3": {
+  "exit": "1",
+  "lines": [
+   "PASS K2 full set | ready true failed [] | 903 ms",
+   "PASS K2 pack missing | ready false failed [\"pack\"] | 18 ms",
+   "PASS K2 pack not JSON | ready false failed [\"pack\"] | 26 ms",
+   "PASS K2 pack cell 64 | ready false failed [\"pack\"] | 9 ms",
+   "PASS K2 pack bad palette hex | ready false failed [\"pack\"] | 45 ms",
+   "PASS K2 idle missing | ready true failed [\"idle\"] | 561 ms",
+   "PASS K2 idle wrong size | ready true failed [\"idle\"] | 1112 ms",
+   "PASS K2 walk missing | ready true failed [\"walk\"] | 757 ms"
+  ]
+ },
+ "g32-I4": {
+  "exit": "1",
+  "lines": [
+   "PASS K2 full set | ready true failed [] | 580 ms",
+   "FAIL K2 pack missing | ready undefined failed undefined | 0 ms",
+   "FAIL K2 pack not JSON | ready undefined failed undefined | 0 ms",
+   "FAIL K2 pack cell 64 | ready undefined failed undefined | 0 ms",
+   "FAIL K2 pack bad palette hex | ready undefined failed undefined | 0 ms",
+   "PASS K2 idle missing | ready true failed [\"idle\"] | 474 ms",
+   "PASS K2 idle wrong size | ready true failed [\"idle\"] | 839 ms",
+   "PASS K2 walk missing | ready true failed [\"walk\"] | 448 ms"
+  ]
+ },
+ "g32": {
+  "exit": "0",
+  "lines": [
+   "PASS K2 full set | ready true failed [] | 269 ms",
+   "PASS K2 pack missing | ready false failed [\"pack\"] | 9 ms",
+   "PASS K2 pack not JSON | ready false failed [\"pack\"] | 9 ms",
+   "PASS K2 pack cell 64 | ready false failed [\"pack\"] | 12 ms",
+   "PASS K2 pack bad palette hex | ready false failed [\"pack\"] | 9 ms",
+   "PASS K2 idle missing | ready true failed [\"idle\"] | 225 ms",
+   "PASS K2 idle wrong size | ready true failed [\"idle\"] | 236 ms",
+   "PASS K2 walk missing | ready true failed [\"walk\"] | 228 ms"
+  ]
+ },
+ "inj-B4-k3a": {
+  "exit": "1",
+  "lines": [
+   "FAIL k3a dpr3 A2 · 320 steps · bad 40 (first step 80: rgb 12447 / alpha 0 px) · blink steps 0/0",
+   "FAIL k3a dpr1 A2 · 320 steps · bad 40 (first step 80: rgb 1383 / alpha 0 px) · blink steps 0/0"
+  ]
+ },
+ "inj-B5-k3a": {
+  "exit": "1",
+  "lines": [
+   "FAIL k3a dpr3 A3 · 400 steps · bad 350 (first step 0: rgb 1008 / alpha 0 px) · blink steps 0/0",
+   "FAIL k3a dpr3 A4 · 320 steps · bad 280 (first step 0: rgb 981 / alpha 0 px) · blink steps 0/0",
+   "FAIL k3a dpr1 A3 · 400 steps · bad 350 (first step 0: rgb 112 / alpha 0 px) · blink steps 0/0",
+   "FAIL k3a dpr1 A4 · 320 steps · bad 280 (first step 0: rgb 109 / alpha 0 px) · blink steps 0/0"
+  ]
+ },
+ "inj-B5-k3d": {
+  "exit": "1",
+  "lines": [
+   "FAIL k3d dpr3 A3 · 400 steps · holes 400 (N 50) bad 0 · lit glass 350 bad 350",
+   "FAIL k3d dpr3 A4 · 320 steps · holes 320 (N 40) bad 0 · lit glass 280 bad 280",
+   "FAIL k3d dpr1 A3 · 400 steps · holes 400 (N 50) bad 0 · lit glass 350 bad 350",
+   "FAIL k3d dpr1 A4 · 320 steps · holes 320 (N 40) bad 0 · lit glass 280 bad 280",
+   "PASS D3 true · D4 true · D5 true · D6 true · D6 files true · E1 anchor+dc true · E2 huge dt true (0.1 ms) · E3 broken actor 24/24 + control true"
+  ]
+ },
+ "inj-S0-k3a": {
+  "exit": "0",
+  "lines": [
+   "PASS k3a dpr3 A4 · 320 steps · bad 0 · blink steps 0/0",
+   "PASS k3a dpr3 A6h · 320 steps · bad 0 · blink steps 0/0",
+   "PASS k3a dpr3 A9 · 125 steps · bad 0 · blink steps 0/0",
+   "PASS k3a dpr3 A10-E-hold · 625 steps · bad 0 · blink steps 24/24 starts 4608 ms 9408 ms",
+   "PASS k3a dpr1 A4 · 320 steps · bad 0 · blink steps 0/0",
+   "PASS k3a dpr1 A6h · 320 steps · bad 0 · blink steps 0/0",
+   "PASS k3a dpr1 A9 · 125 steps · bad 0 · blink steps 0/0",
+   "PASS k3a dpr1 A10-E-hold · 625 steps · bad 0 · blink steps 24/24 starts 4608 ms 9408 ms"
+  ]
+ },
+ "inj-T1-k3a": {
+  "exit": "1",
+  "lines": [
+   "FAIL k3a dpr3 A6 · 320 steps · bad 152 (first step 20: rgb 6570 / alpha 0 px) · blink steps 0/0",
+   "FAIL k3a dpr1 A6 · 320 steps · bad 152 (first step 20: rgb 730 / alpha 0 px) · blink steps 0/0"
+  ]
+ },
+ "inj-T2-k3a": {
+  "exit": "1",
+  "lines": [
+   "FAIL k3a dpr3 A10-S · 625 steps · bad 24 (first step 287: rgb 3276 / alpha 0 px) · blink steps 24/26 starts 4608 ms 9408 ms",
+   "FAIL k3a dpr3 A10-W-hold · 625 steps · bad 24 (first step 287: rgb 279 / alpha 0 px) · blink steps 24/26 starts 4608 ms 9408 ms",
+   "FAIL k3a dpr1 A10-S · 625 steps · bad 24 (first step 287: rgb 364 / alpha 0 px) · blink steps 24/26 starts 4608 ms 9408 ms",
+   "FAIL k3a dpr1 A10-W-hold · 625 steps · bad 24 (first step 287: rgb 31 / alpha 0 px) · blink steps 24/26 starts 4608 ms 9408 ms"
+  ]
+ },
+ "inj-T3-k3a": {
+  "exit": "1",
+  "lines": [
+   "FAIL k3a dpr3 A6h · 320 steps · bad 7 (first step 260: rgb 1035 / alpha 0 px) · blink steps 0/0",
+   "FAIL k3a dpr1 A6h · 320 steps · bad 7 (first step 260: rgb 115 / alpha 0 px) · blink steps 0/0"
+  ]
+ },
+ "inj-T3-k3d": {
+  "exit": "1",
+  "lines": [
+   "FAIL k3d dpr3 A6h · 320 steps · holes 320 (N 40) bad 7 · lit glass 280 bad 7",
+   "FAIL k3d dpr1 A6h · 320 steps · holes 320 (N 40) bad 7 · lit glass 280 bad 7",
+   "PASS D3 true · D4 true · D5 true · D6 true · D6 files true · E1 anchor+dc true · E2 huge dt true (0 ms) · E3 broken actor 24/24 + control true"
+  ]
+ },
+ "inj-T4-k3a": {
+  "exit": "1",
+  "lines": [
+   "FAIL k3a dpr3 A10-S · 625 steps · bad 12 (first step 587: rgb 3276 / alpha 0 px) · blink steps 24/12 starts 4608 ms 9408 ms",
+   "FAIL k3a dpr3 A10-W-hold · 625 steps · bad 12 (first step 587: rgb 279 / alpha 0 px) · blink steps 24/12 starts 4608 ms 9408 ms",
+   "FAIL k3a dpr1 A10-S · 625 steps · bad 12 (first step 587: rgb 364 / alpha 0 px) · blink steps 24/12 starts 4608 ms 9408 ms",
+   "FAIL k3a dpr1 A10-W-hold · 625 steps · bad 12 (first step 587: rgb 31 / alpha 0 px) · blink steps 24/12 starts 4608 ms 9408 ms"
+  ]
+ },
+ "inj-X2-k3d": {
+  "exit": "1",
+  "lines": [
+   "PASS k3d dpr3 A11 · 64 steps · holes 32 (N 0) bad 0 · lit glass 48 bad 0",
+   "PASS k3d dpr1 A11 · 64 steps · holes 32 (N 0) bad 0 · lit glass 48 bad 0",
+   "FAIL D3 true · D4 true · D5 true · D6 true · D6 files true · E1 anchor+dc true · E2 huge dt true (0.1 ms) · E3 broken actor 10/24 + control true · bad: anim 'jump' [true,true], anim 'jump'/walk [true,true], lpos NaN [true,true], lpos NaN/wa"
+  ]
+ },
+ "inj-X3-k3d": {
+  "exit": "1",
+  "lines": [
+   "PASS k3d dpr3 A11 · 64 steps · holes 32 (N 0) bad 0 · lit glass 48 bad 0",
+   "PASS k3d dpr1 A11 · 64 steps · holes 32 (N 0) bad 0 · lit glass 48 bad 0",
+   "FAIL D3 true · D4 true · D5 true · D6 true · D6 files true · E1 anchor+dc true · E2 huge dt true (0 ms) · E3 broken actor 0/24 + control true · bad: fi NaN [true,true], fi NaN/walk [true,true], fi missing [true,true], fi missing/walk [true,"
+  ]
+ },
+ "inj-X4-k3d": {
+  "exit": "1",
+  "lines": [
+   "PASS k3d dpr3 A11 · 64 steps · holes 32 (N 0) bad 0 · lit glass 48 bad 0",
+   "PASS k3d dpr1 A11 · 64 steps · holes 32 (N 0) bad 0 · lit glass 48 bad 0",
+   "FAIL D3 true · D4 true · D5 true · D6 true · D6 files true · E1 anchor+dc true · E2 huge dt true (0 ms) · E3 broken actor 18/24 + control true · bad: lpos new Array(2) [true,true], lpos new Array(2)/walk [true,true], lpos hole at 0 [true,tr"
+  ]
+ },
+ "k1k6": {
+  "exit": "0",
+  "lines": [
+   "  \"char2.js\": 22458,",
+   "  \"c2-pack.json\": 4054,",
+   "  \"loaded_files\": 14,",
+   "  \"loaded_bytes\": 410088,",
+   "  \"char2.src.js\": 39275,",
+   "  \"char2.js_built_from_src\": true,",
+   "  \"sw_mentions_char2\": []"
+  ]
+ },
+ "k3a": {
+  "exit": "0",
+  "lines": [
+   "PASS k3a dpr3 A1 · 400 steps · bad 0 · blink steps 0/0",
+   "PASS k3a dpr3 A2 · 320 steps · bad 0 · blink steps 0/0",
+   "PASS k3a dpr3 A3 · 400 steps · bad 0 · blink steps 0/0",
+   "PASS k3a dpr3 A4 · 320 steps · bad 0 · blink steps 0/0",
+   "PASS k3a dpr3 A5 · 540 steps · bad 0 · blink steps 0/0",
+   "PASS k3a dpr3 A6 · 320 steps · bad 0 · blink steps 0/0",
+   "PASS k3a dpr3 A6h · 320 steps · bad 0 · blink steps 0/0",
+   "PASS k3a dpr3 A7 · 80 steps · bad 0 · blink steps 0/0"
+  ]
+ },
+ "k3b-B1": {
+  "exit": "1",
+  "lines": [
+   "FAIL K3b sheets 2559/2560 · composed 10240/10240 · anchors 309/309 · head_top vs JSON 80/80 · peak total 15647156",
+   "  sheets: black/brown/light/sun walk"
+  ]
+ },
+ "k3b-B2": {
+  "exit": "1",
+  "lines": [
+   "FAIL K3b sheets 0/2560 · composed 0/10240 · anchors 309/309 · head_top vs JSON 80/80 · peak total 15647156",
+   "  sheets: black/brown/light/sun idle, black/brown/light/sun walk, black/brown/light/sun walkhold, black/brown/light/sun stand8, black/brown/light/wing idle",
+   "  composed: black/brown/light/sun S:idle, black/brown/light/sun S:walk, black/brown/light/sun SE:idle, black/brown/light/sun SE:walk, black/brown/light/sun E:idle"
+  ]
+ },
+ "k3b-B3": {
+  "exit": "1",
+  "lines": [
+   "FAIL K3b sheets 2560/2560 · composed 1280/10240 · anchors 309/309 · head_top vs JSON 80/80 · peak total 15647156",
+   "  composed: black/brown/light/sun S:idle, black/brown/light/sun S:walk, black/brown/light/sun SE:idle, black/brown/light/sun SE:walk, black/brown/light/sun E:idle"
+  ]
+ },
+ "k3b-B4": {
+  "exit": "1",
+  "lines": [
+   "FAIL K3b sheets 2560/2560 · composed 8960/10240 · anchors 309/309 · head_top vs JSON 80/80 · peak total 15647156",
+   "  composed: black/brown/light/sun E:idle, black/brown/light/sun E:walk, black/brown/light/wing E:idle, black/brown/light/wing E:walk, black/brown/light/leaf E:idle"
+  ]
+ },
+ "k3b-B5": {
+  "exit": "1",
+  "lines": [
+   "FAIL K3b sheets 2560/2560 · composed 1280/10240 · anchors 309/309 · head_top vs JSON 80/80 · peak total 15647156",
+   "  composed: black/brown/light/sun S:idle, black/brown/light/sun S:walk, black/brown/light/sun SE:idle, black/brown/light/sun SE:walk, black/brown/light/sun E:idle"
+  ]
+ },
+ "k3b-S0": {
+  "exit": "0",
+  "lines": [
+   "PASS K3b sheets 2560/2560 · composed 10240/10240 · anchors 309/309 · head_top vs JSON 80/80 · peak total 15647156"
+  ]
+ },
+ "k3b": {
+  "exit": "0",
+  "lines": [
+   "PASS K3b sheets 2560/2560 · composed 10240/10240 · anchors 309/309 · head_top vs JSON 80/80 · peak total 15647156"
+  ]
+ },
+ "k3c-P1": {
+  "exit": "1",
+  "lines": [
+   "PASS 640 portraits written (384 x 384, borrowed one at a time) · 640 files · null 0 · max borrowed 589824 B · after: borrowed 0 handles 0",
+   "FAIL pt_s5.py --check (frozen oracle): 640 x 0 wrong px, no cross-material / fixed / alpha change, every recolour colour a Palette shade · exit 1 · {\"combos\":640,\"renders\":1871,\"oracle_wrong_px\":18367360,\"cross_material_px\":0,\"fixed_changed",
+   "PASS portrait borrow: same canvas twice = +0 B · release twice harmless · all back = 0",
+   "PASS portrait with bad app / dc / house / colour -> null (4/4) · [true,true,true,true]",
+   "PASS portrait picture missing -> portrait() null (the rest still loads) · ready true · failed [\"portrait\"] · got null",
+   "PASS portrait colour mask missing -> the portrait as drawn (no recolour) · ready true · failed [\"portrait-mask\"] · got raw",
+   "PASS shade map missing -> the portrait as drawn · ready true · failed [\"portrait-mask\"] · got raw"
+  ]
+ },
+ "k3c-P2": {
+  "exit": "1",
+  "lines": [
+   "PASS 640 portraits written (384 x 384, borrowed one at a time) · 640 files · null 0 · max borrowed 589824 B · after: borrowed 0 handles 0",
+   "FAIL pt_s5.py --check (frozen oracle): 640 x 0 wrong px, no cross-material / fixed / alpha change, every recolour colour a Palette shade · exit 1 · {\"combos\":640,\"renders\":1871,\"oracle_wrong_px\":24391040,\"cross_material_px\":0,\"fixed_changed",
+   "PASS portrait borrow: same canvas twice = +0 B · release twice harmless · all back = 0",
+   "PASS portrait with bad app / dc / house / colour -> null (4/4) · [true,true,true,true]",
+   "PASS portrait picture missing -> portrait() null (the rest still loads) · ready true · failed [\"portrait\"] · got null",
+   "PASS portrait colour mask missing -> the portrait as drawn (no recolour) · ready true · failed [\"portrait-mask\"] · got raw",
+   "PASS shade map missing -> the portrait as drawn · ready true · failed [\"portrait-mask\"] · got raw"
+  ]
+ },
+ "k3c-S0": {
+  "exit": "0",
+  "lines": [
+   "PASS 640 portraits written (384 x 384, borrowed one at a time) · 640 files · null 0 · max borrowed 589824 B · after: borrowed 0 handles 0",
+   "PASS pt_s5.py --check (frozen oracle): 640 x 0 wrong px, no cross-material / fixed / alpha change, every recolour colour a Palette shade · exit 0 · {\"combos\":640,\"renders\":1871,\"oracle_wrong_px\":0,\"cross_material_px\":0,\"fixed_changed_px\":0,",
+   "PASS portrait borrow: same canvas twice = +0 B · release twice harmless · all back = 0",
+   "PASS portrait with bad app / dc / house / colour -> null (4/4) · [true,true,true,true]",
+   "PASS portrait picture missing -> portrait() null (the rest still loads) · ready true · failed [\"portrait\"] · got null",
+   "PASS portrait colour mask missing -> the portrait as drawn (no recolour) · ready true · failed [\"portrait-mask\"] · got raw",
+   "PASS shade map missing -> the portrait as drawn · ready true · failed [\"portrait-mask\"] · got raw"
+  ]
+ },
+ "k3c": {
+  "exit": "0",
+  "lines": [
+   "PASS 640 portraits written (384 x 384, borrowed one at a time) · 640 files · null 0 · max borrowed 589824 B · after: borrowed 0 handles 0",
+   "PASS pt_s5.py --check (frozen oracle): 640 x 0 wrong px, no cross-material / fixed / alpha change, every recolour colour a Palette shade · exit 0 · {\"combos\":640,\"renders\":1871,\"oracle_wrong_px\":0,\"cross_material_px\":0,\"fixed_changed_px\":0,",
+   "PASS checker catches 2 swapped portraits (exit 1) · oracle wrong px 36722",
+   "PASS checker catches 1 px changed in 1 portrait (exit 1) · oracle wrong px 1",
+   "PASS folder put back -> exit 0 again",
+   "PASS portrait borrow: same canvas twice = +0 B · release twice harmless · all back = 0",
+   "PASS portrait with bad app / dc / house / colour -> null (4/4) · [true,true,true,true]",
+   "PASS portrait picture missing -> portrait() null (the rest still loads) · ready true · failed [\"portrait\"] · got null"
+  ]
+ },
+ "k3d": {
+  "exit": "0",
+  "lines": [
+   "PASS k3d dpr3 A3 · 400 steps · holes 400 (N 50) bad 0 · lit glass 350 bad 0",
+   "PASS k3d dpr3 A4 · 320 steps · holes 320 (N 40) bad 0 · lit glass 280 bad 0",
+   "PASS k3d dpr3 A6h · 320 steps · holes 320 (N 40) bad 0 · lit glass 280 bad 0",
+   "PASS k3d dpr3 A7 · 80 steps · holes 40 (N 0) bad 0 · lit glass 40 bad 0",
+   "PASS k3d dpr3 A8 · 120 steps · holes 120 (N 60) bad 0 · lit glass 60 bad 0",
+   "PASS k3d dpr3 A9 · 125 steps · holes 125 (N 0) bad 0 · lit glass 125 bad 0",
+   "PASS k3d dpr3 A11 · 64 steps · holes 32 (N 0) bad 0 · lit glass 48 bad 0",
+   "PASS k3d dpr1 A3 · 400 steps · holes 400 (N 50) bad 0 · lit glass 350 bad 0"
+  ]
+ },
+ "k4-M1": {
+  "exit": "1",
+  "lines": [
+   "FAIL K4 inject M1 · ops 2064 (model mismatch 294) · checkpoints 7/9 · colour 6/6 · peak 39.502 MiB (Char2 stats 39.499) · made in all 249.2 MiB · counters {\"hit\":1970,\"miss\":81,\"evict\":69,\"refused\":22,\"rebuilt\":30}",
+   "  ค ยืม: resident 39619428 != total 39613476",
+   "  ค2: resident 39619428 != total 39610500",
+   "  first op mismatch: {\"op\":{\"op\":\"sheet\",\"key\":\"idle|0|0|0|1\",\"hit\":1613,\"miss\":36,\"evict\":16,\"refused\":0,\"rebuilt\":1,\"cache\":28389204,\"borrowed\":1179648,\"total\":40234836,\"scratch\":0,\"hid\":0,\"got\":true},\"model\":{\"hit\":1613,\"miss\":36,\"evict\""
+  ]
+ },
+ "k4-M2": {
+  "exit": "1",
+  "lines": [
+   "FAIL K4 inject M2 · ops 2064 (model mismatch 0) · checkpoints 6/9 · colour 6/6 · peak 46.779 MiB (Char2 stats 39.499) · made in all 249.2 MiB · counters {\"hit\":1970,\"miss\":81,\"evict\":69,\"refused\":22,\"rebuilt\":30}",
+   "  ค2 หน้า: resident 45506364 != total 39018300 · resident > 40 MiB",
+   "  ง: resident 23052288 != total 15384576 · ง trim {\"cache\":0,\"fixedSame\":true,\"borrowedSame\":true,\"evictedNonZero\":6,\"pinnedOk\":true}",
+   "  จ: resident 12386304 != total 0 · จ release {\"total\":0,\"resident\":12386304,\"dead\":true,\"drawAfter\":false,\"allZero\":false}"
+  ]
+ },
+ "k4-M3": {
+  "exit": "1",
+  "lines": [
+   "FAIL K4 inject M3 · ops 2160 (model mismatch 501) · checkpoints 4/9 · colour 6/6 · peak 39.502 MiB (Char2 stats 39.499) · made in all 279.6 MiB · counters {\"hit\":2034,\"miss\":81,\"evict\":69,\"refused\":22,\"rebuilt\":30}",
+   "  ค ยืม: ค re-borrow {\"same\":true,\"newBytes\":0,\"borrowedDelta\":0}",
+   "  ค คืน: ค release: borrowed 0 handles 0",
+   "  ค2: ค2 borrowed 3547872 -> max 3547872",
+   "  ค2 หน้า: ค2 หน้า {\"borrowed\":4718592,\"max\":6488064,\"got\":[true,true,true,true,true,true,true,true],\"extraRefused\":false,\"ptSize\":[384,384]}",
+   "  จ: จ release {\"total\":0,\"resident\":0,\"dead\":true,\"drawAfter\":false,\"allZero\":true}",
+   "  first op mismatch: {\"op\":{\"op\":\"sheet\",\"key\":\"walkhold|0|0|0|1\",\"hit\":1622,\"miss\":37,\"evict\":18,\"refused\":0,\"rebuilt\":1,\"cache\":23656332,\"borrowed\":4727220,\"total\":39049536,\"scratch\":0,\"hid\":2,\"got\":true},\"model\":{\"hit\":1622,\"miss\":37,\"ev"
+  ]
+ },
+ "k4-M4": {
+  "exit": "1",
+  "lines": [
+   "FAIL K4 inject M4 · ops 2073 (model mismatch 404) · checkpoints 5/9 · colour 6/6 · peak 39.502 MiB (Char2 stats 39.499) · made in all 260.4 MiB · counters {\"hit\":1980,\"miss\":79,\"evict\":71,\"refused\":29,\"rebuilt\":28}",
+   "  ค คืน: ค release: borrowed 5314068 handles 0",
+   "  ค2: ค2 borrowed 5314068 -> max 5314068",
+   "  ค2 หน้า: ค2 หน้า {\"borrowed\":6493716,\"max\":8858964,\"got\":[true,true,false,false,false,false,false,false],\"extraRefused\":false,\"ptSize\":[384,384]}",
+   "  ง: ง trim {\"cache\":0,\"fixedSame\":true,\"borrowedSame\":true,\"evictedNonZero\":3,\"pinnedOk\":true}",
+   "  first op mismatch: {\"op\":{\"op\":\"sheet\",\"key\":\"walk|1|1|1|1\",\"hit\":1630,\"miss\":39,\"evict\":20,\"refused\":1,\"rebuilt\":2,\"cache\":22473708,\"borrowed\":5904192,\"total\":39043884,\"scratch\":0,\"hid\":4,\"got\":true},\"model\":{\"hit\":1630,\"miss\":39,\"evict\""
+  ]
+ },
+ "k4-M5": {
+  "exit": "1",
+  "lines": [
+   "FAIL K4 inject M5 · ops 2064 (model mismatch 0) · checkpoints 0/9 · colour 6/6 · peak 140.711 MiB (Char2 stats 39.499) · made in all 249.2 MiB · counters {\"hit\":1970,\"miss\":81,\"evict\":69,\"refused\":22,\"rebuilt\":30}",
+   "  load: resident 13028256 != total 11848608",
+   "  ก: resident 27198612 != total 18941076",
+   "  ข: resident 92732148 != total 40237812 · resident > 40 MiB",
+   "  ค ยืม: resident 126913380 != total 39619428 · resident > 40 MiB",
+   "  ค คืน: resident 126913380 != total 39619428 · resident > 40 MiB",
+   "  ค2: resident 126913380 != total 39619428 · resident > 40 MiB",
+   "  ค2 หน้า: resident 147545916 != total 39018300 · resident > 40 MiB"
+  ]
+ },
+ "k4-S0": {
+  "exit": "0",
+  "lines": [
+   "PASS K4 inject S0 · ops 2064 (model mismatch 0) · checkpoints 9/9 · colour 6/6 · peak 39.502 MiB (Char2 stats 39.499) · made in all 249.2 MiB · counters {\"hit\":1970,\"miss\":81,\"evict\":69,\"refused\":22,\"rebuilt\":30}"
+  ]
+ },
+ "k4": {
+  "exit": "0",
+  "lines": [
+   "PASS K4 · ops 2064 (model mismatch 0) · checkpoints 9/9 · colour 6/6 · peak 39.502 MiB (Char2 stats 39.499) · made in all 249.2 MiB · counters {\"hit\":1970,\"miss\":81,\"evict\":69,\"refused\":22,\"rebuilt\":30}"
+  ]
+ },
+ "k4rep-1": {
+  "exit": "0",
+  "lines": [
+   "PASS K4 · ops 2064 (model mismatch 0) · checkpoints 9/9 · colour 6/6 · peak 39.502 MiB (Char2 stats 39.499) · made in all 249.2 MiB · counters {\"hit\":1970,\"miss\":81,\"evict\":69,\"refused\":22,\"rebuilt\":30}"
+  ]
+ },
+ "k4rep-10": {
+  "exit": "0",
+  "lines": [
+   "PASS K4 · ops 2064 (model mismatch 0) · checkpoints 9/9 · colour 6/6 · peak 39.502 MiB (Char2 stats 39.499) · made in all 249.2 MiB · counters {\"hit\":1970,\"miss\":81,\"evict\":69,\"refused\":22,\"rebuilt\":30}"
+  ]
+ },
+ "k4rep-2": {
+  "exit": "0",
+  "lines": [
+   "PASS K4 · ops 2064 (model mismatch 0) · checkpoints 9/9 · colour 6/6 · peak 39.502 MiB (Char2 stats 39.499) · made in all 249.2 MiB · counters {\"hit\":1970,\"miss\":81,\"evict\":69,\"refused\":22,\"rebuilt\":30}"
+  ]
+ },
+ "k4rep-3": {
+  "exit": "0",
+  "lines": [
+   "PASS K4 · ops 2064 (model mismatch 0) · checkpoints 9/9 · colour 6/6 · peak 39.502 MiB (Char2 stats 39.499) · made in all 249.2 MiB · counters {\"hit\":1970,\"miss\":81,\"evict\":69,\"refused\":22,\"rebuilt\":30}"
+  ]
+ },
+ "k4rep-4": {
+  "exit": "0",
+  "lines": [
+   "PASS K4 · ops 2064 (model mismatch 0) · checkpoints 9/9 · colour 6/6 · peak 39.502 MiB (Char2 stats 39.499) · made in all 249.2 MiB · counters {\"hit\":1970,\"miss\":81,\"evict\":69,\"refused\":22,\"rebuilt\":30}"
+  ]
+ },
+ "k4rep-5": {
+  "exit": "0",
+  "lines": [
+   "PASS K4 · ops 2064 (model mismatch 0) · checkpoints 9/9 · colour 6/6 · peak 39.502 MiB (Char2 stats 39.499) · made in all 249.2 MiB · counters {\"hit\":1970,\"miss\":81,\"evict\":69,\"refused\":22,\"rebuilt\":30}"
+  ]
+ },
+ "k4rep-6": {
+  "exit": "0",
+  "lines": [
+   "PASS K4 · ops 2064 (model mismatch 0) · checkpoints 9/9 · colour 6/6 · peak 39.502 MiB (Char2 stats 39.499) · made in all 249.2 MiB · counters {\"hit\":1970,\"miss\":81,\"evict\":69,\"refused\":22,\"rebuilt\":30}"
+  ]
+ },
+ "k4rep-7": {
+  "exit": "0",
+  "lines": [
+   "PASS K4 · ops 2064 (model mismatch 0) · checkpoints 9/9 · colour 6/6 · peak 39.502 MiB (Char2 stats 39.499) · made in all 249.2 MiB · counters {\"hit\":1970,\"miss\":81,\"evict\":69,\"refused\":22,\"rebuilt\":30}"
+  ]
+ },
+ "k4rep-8": {
+  "exit": "0",
+  "lines": [
+   "PASS K4 · ops 2064 (model mismatch 0) · checkpoints 9/9 · colour 6/6 · peak 39.502 MiB (Char2 stats 39.499) · made in all 249.2 MiB · counters {\"hit\":1970,\"miss\":81,\"evict\":69,\"refused\":22,\"rebuilt\":30}"
+  ]
+ },
+ "k4rep-9": {
+  "exit": "0",
+  "lines": [
+   "PASS K4 · ops 2064 (model mismatch 0) · checkpoints 9/9 · colour 6/6 · peak 39.502 MiB (Char2 stats 39.499) · made in all 249.2 MiB · counters {\"hit\":1970,\"miss\":81,\"evict\":69,\"refused\":22,\"rebuilt\":30}"
+  ]
+ },
+ "k7-E1": {
+  "exit": "1",
+  "lines": [
+   "FAIL encode -> decode 160/160 looks give the same Appearance (a new object) · 5/160 · longest text 52 chars · e.g. c2.2|kid4|f|kid4.kid4.kid4.-.-.-|medium.green.brown · bad [[\"black\",\"brown\",\"light\",\"c2.2|kid4|f|kid4.kid4.kid4.-.-.-|light.b",
+   "PASS encode of a look this pack cannot draw -> null (14 cases)",
+   "FAIL decode of malformed text -> null (21 cases) · 2 colours",
+   "PASS decode of well-formed text with an unknown name -> that slot default, encodable again (4 cases)",
+   "PASS nothing throws · before load / after release -> null"
+  ]
+ },
+ "k7-S0": {
+  "exit": "0",
+  "lines": [
+   "PASS encode -> decode 160/160 looks give the same Appearance (a new object) · 160/160 · longest text 52 chars · e.g. c2.2|kid4|f|kid4.kid4.kid4.-.-.-|brown.green.medium",
+   "PASS encode of a look this pack cannot draw -> null (14 cases)",
+   "PASS decode of malformed text -> null (21 cases)",
+   "PASS decode of well-formed text with an unknown name -> that slot default, encodable again (4 cases)",
+   "PASS nothing throws · before load / after release -> null"
+  ]
+ },
+ "k7": {
+  "exit": "0",
+  "lines": [
+   "PASS encode -> decode 160/160 looks give the same Appearance (a new object) · 160/160 · longest text 52 chars · e.g. c2.2|kid4|f|kid4.kid4.kid4.-.-.-|brown.green.medium",
+   "PASS encode of a look this pack cannot draw -> null (14 cases)",
+   "PASS decode of malformed text -> null (21 cases)",
+   "PASS decode of well-formed text with an unknown name -> that slot default, encodable again (4 cases)",
+   "PASS nothing throws · before load / after release -> null"
+  ]
+ },
+ "pt-selftest": {
+  "exit": "0",
+  "lines": [
+   "ok   clean []",
+   "ok   hair painted #FFC857 (T11 R1 probe) ['4.5', '4.6']",
+   "ok   copper (fixed) painted #FFC857 ['4.5', '4.6']",
+   "ok   no recolour at all ['4.5']",
+   "ok   hair option leaks into skin ['4.5']",
+   "ok   outline colour changed ['4.5']",
+   "ok   alpha changed ['4.5']",
+   "ok   skin shade off by one ['4.5']"
+  ]
+ }
+}

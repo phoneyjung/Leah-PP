@@ -1,0 +1,78 @@
+{
+ "mode": "k3c",
+ "inject": null,
+ "cases": [
+  {
+   "case": "640 portraits written (384 x 384, borrowed one at a time)",
+   "ok": true,
+   "note": "640 files · null 0 · max borrowed 589824 B · after: borrowed 0 handles 0"
+  },
+  {
+   "case": "pt_s5.py --check (frozen oracle): 640 x 0 wrong px, no cross-material / fixed / alpha change, every recolour colour a Palette shade",
+   "ok": true,
+   "note": "exit 0 · {\"combos\":640,\"renders\":1871,\"oracle_wrong_px\":0,\"cross_material_px\":0,\"fixed_changed_px\":0,\"alpha_changed_px\":0,\"not_in_ramp_colours\":0,\"unchanged_when_option_changes_px\":0}"
+  },
+  {
+   "case": "checker catches 2 swapped portraits (exit 1)",
+   "ok": true,
+   "note": "oracle wrong px 36722"
+  },
+  {
+   "case": "checker catches 1 px changed in 1 portrait (exit 1)",
+   "ok": true,
+   "note": "oracle wrong px 1"
+  },
+  {
+   "case": "folder put back -> exit 0 again",
+   "ok": true
+  },
+  {
+   "case": "portrait borrow: same canvas twice = +0 B · release twice harmless · all back = 0",
+   "ok": true
+  },
+  {
+   "case": "portrait with bad app / dc / house / colour -> null (4/4)",
+   "ok": true,
+   "note": "[true,true,true,true]"
+  },
+  {
+   "case": "portrait picture missing -> portrait() null (the rest still loads)",
+   "ok": true,
+   "note": "ready true · failed [\"portrait\"] · got null"
+  },
+  {
+   "case": "portrait colour mask missing -> the portrait as drawn (no recolour)",
+   "ok": true,
+   "note": "ready true · failed [\"portrait-mask\"] · got raw"
+  },
+  {
+   "case": "shade map missing -> the portrait as drawn",
+   "ok": true,
+   "note": "ready true · failed [\"portrait-mask\"] · got raw"
+  }
+ ],
+ "check": {
+  "check_dir": "/tmp/claude-0/-home-claude/d3d34840-5e4e-52a0-a344-341c2cb1b80f/scratchpad/g34/k3c-1793635557567",
+  "files_read": 640,
+  "leak_640": {
+   "combos": 640,
+   "renders": 1871,
+   "oracle_wrong_px": 0,
+   "cross_material_px": 0,
+   "fixed_changed_px": 0,
+   "alpha_changed_px": 0,
+   "not_in_ramp_colours": 0,
+   "unchanged_when_option_changes_px": 0
+  },
+  "output_colours": 128,
+  "unexpected_signal_hits": 0,
+  "pass": {
+   "map": true,
+   "4.5": true,
+   "4.6": true
+  },
+  "ok": true
+ },
+ "tmpRemoved": true,
+ "fails": 0
+}

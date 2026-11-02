@@ -12,11 +12,13 @@
 # v1.1.1 (Codex T12 note): importing qa_asset09_a3 from REPO_ROOT no longer leaves REPO_ROOT/__pycache__ behind (dont_write_bytecode)
 # usage: python3 -I pt_s5.py REPO_ROOT OUT_DIR [--write-map]   -> OUT_DIR/s5.json, OUT_DIR/pt-16-sets.png   (--write-map: also (re)write the shade map)
 #        python3 -I pt_s5.py REPO_ROOT --selftest [OUT.json]
+#        python3 -I pt_s5.py REPO_ROOT --check DIR      (G3.4 K3c · 2 Nov 2569) DIR = 640 PNGs written by another renderer (Char2.portrait),
+#          h<hair>_i<iris>_s<skin>_u<house>.png with option indices in RAMPS order -> the same run_checks / oracle / shade map rule as above (unchanged)
 import sys, os, json, itertools
 import numpy as np
 from PIL import Image, ImageDraw
 from skimage.color import rgb2lab, deltaE_ciede2000
-ROOT = sys.argv[1]; SELFTEST = '--selftest' in sys.argv; WRITE = '--write-map' in sys.argv
+ROOT = sys.argv[1]; SELFTEST = '--selftest' in sys.argv; WRITE = '--write-map' in sys.argv; CHECK = '--check' in sys.argv
 rest = [a for a in sys.argv[2:] if not a.startswith('--')]; OUT = rest[0] if rest else None
 sys.path.insert(0, ROOT); sys.dont_write_bytecode = True   # T12: write nothing into REPO_ROOT, not even an import cache
 import qa_asset09_a3 as q         # RAMPS (locked game ramps, Palette v1.2), sprite renderer
@@ -171,6 +173,17 @@ if SELFTEST:
     n = sum(c['ok'] for c in out); print('%d/%d' % (n, len(out)))
     if OUT: json.dump({'selftest': out, 'passed': n, 'total': len(out)}, open(OUT, 'w'), indent=1, ensure_ascii=False)
     sys.exit(0 if n == len(out) else 1)
+
+# ---- --check DIR (G3.4 K3c): the pictures another renderer drew are the renderer under test; nothing above is changed and nothing is written ----
+if CHECK:
+    seen = set()
+    def from_files(o):
+        f = os.path.join(OUT, 'h%d_i%d_s%d_u%d.png' % (o['hair'], o['iris'], o['skin'], o['house'])); seen.add(f)
+        return np.array(Image.open(f).convert('RGBA'))
+    res, sig, p = run_checks(from_files, DISK, all_combos())
+    ok = all(p.values()) and res['combos'] == 640 and len(seen) == 640
+    print(json.dumps({'check_dir': OUT, 'files_read': len(seen), 'leak_640': res, 'output_colours': sig['output_colours'], 'unexpected_signal_hits': len(sig['unexpected_hits']), 'pass': p, 'ok': ok}, ensure_ascii=False))
+    sys.exit(0 if ok else 1)
 
 os.makedirs(OUT, exist_ok=True)
 IDX = idx_of(DISK); render = make_render(IDX)

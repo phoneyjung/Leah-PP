@@ -1,4 +1,4 @@
-/* char2.js — Lantern Academy character renderer v2 (G3 · Claude · stages G3.2 pack · load · look · fallbacks + G3.3 cache · actor · tick · draw · anchor · light · sheet)
+/* char2.js — Lantern Academy character renderer v2 (G3 · Claude · stages G3.2 pack · load · look · fallbacks + G3.3 cache · actor · tick · draw · anchor · light · sheet + G3.4 portrait · encode · decode)
    Plan: G3_0_RENDERER_PLAN.md v1.4 (owner approved 1 Nov 2569 22:32) · notes: G3_2_LOAD_LOOK.md
    One global, window.Char2. No game state, no save writes, no network beyond the pack files. Not loaded by index.html (G4). */
 (function () {
@@ -304,12 +304,14 @@
     return true;
   }
   function drop(k, e) { kill(e.cv); if (e.fists) for (const r of e.fists) for (const f of r) if (f) kill(f.c); CACHE.delete(k); GONEK.add(k); CNT.evict++; }
-  function build(an, o) {   // one recoloured sheet (idle / walk / walkhold / stand8) as a canvas + its fist canvases
-    const p = ST.pack, C = p.cell, S = an === 'stand8' ? ST.sh.idle || ST.sh.walk : ST.sh[an]; if (!S) return null;
+  function build(an, o) {   // one recoloured sheet (idle / walk / walkhold / stand8 / portrait) as a canvas + its fist canvases
+    const p = ST.pack, C = p.cell, PT = an === 'portrait', S = PT ? ST.portrait : an === 'stand8' ? ST.sh.idle || ST.sh.walk : ST.sh[an]; if (!S) return null;
     const W = an === 'stand8' ? 8 * C : S.A.width, H = an === 'stand8' ? C : S.A.height, b = W * H * 4;
     if (!room(2 * b + 16384)) return null;   // canvas + one scratch ImageData + room for the fists
     SCR = b; const out = new ImageData(W, H), d = out.data, a = S.A.data, m = S.M && S.M.data, R = p.materials.recolour, ramp = Object.create(null);
-    for (const id of Object.keys(R)) ramp[id] = p.palette[R[id]][o[R[id]]][1].map(rgbOf);
+    if (m) for (const id of Object.keys(R)) {   // portrait: G = portrait shade -> game shade through the shade map (D-PT-3 ก) · no mask = drawn as it is
+      const cols = p.palette[R[id]][o[R[id]]][1].map(rgbOf); ramp[id] = PT ? S.smap.materials[id].shade_index_by_G.map((k) => cols[k]) : cols;
+    }
     for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
       const i = (an === 'stand8' ? ((Math.floor(x / C) * C + y) * S.A.width + (x % C)) : (y * W + x)) * 4, j = (y * W + x) * 4;
       if (!a[i + 3]) continue;
@@ -337,7 +339,7 @@
   }
   function sheet(app, dc, an) {   // borrow handle: the cache's own canvas (read only), pinned until handle.release()
     try {
-      if (!ST || !['idle', 'walk', 'walkhold', 'stand8'].includes(an)) return null;
+      if (!ST || !['idle', 'walk', 'walkhold', 'stand8', 'portrait'].includes(an)) return null;
       const o = opts(app, dc), e = o && entry(an, o); if (!e) return null;
       if (!e.pins && sizes().b + e.bytes > ST.pack.budget.borrow_max) { CNT.refused++; return null; }
       e.pins++; const h = { canvas: e.cv, release() { if (h.dead) return; h.dead = true; h.canvas = null; e.pins--; HANDLES.delete(h); } };
@@ -345,6 +347,29 @@
     } catch (err) { return null; }
   }
   function trim() { for (const kv of [...CACHE]) if (!kv[1].pins) drop(kv[0], kv[1]); }
+
+  // ---------- G3.4 encode / decode: a short text of an Appearance only (no house · not an online envelope) ----------
+  // "c2.2|kid4|f|kid4.kid4.kid4.-.-.-|brown.green.medium" = set.v | base | gender | hair.eyes.outfit.head.face_acc.back (- = none) | hair.iris.skin
+  const SLOTS = SLOT_NEED.concat(SLOT_OPT), COL = ['hair', 'iris', 'skin'];
+  function appOk(p, a) {   // exactly an Appearance this pack draws (encode never fixes a look on its own)
+    if (!isObj(a) || a.v !== 2 || a.set !== p.set || !own(p.bases, a.base) || !isObj(a.parts) || !isObj(a.color)) return false;
+    const B = p.bases[a.base], ok = (v, L) => isName(v) && L.includes(v) && !p.deprecated.includes(v);
+    return a.gender === B.gender && SLOT_NEED.every((x) => ok(a.parts[x], B.parts[x])) && SLOT_OPT.every((x) => a.parts[x] == null || ok(a.parts[x], B.parts[x] || [])) &&
+      COL.every((g) => isName(a.color[g]) && colourIx(p, g, a.color[g]) >= 0);
+  }
+  function encode(app) {
+    try { if (!ST || !appOk(ST.pack, app)) return null; return [app.set + '.2', app.base, app.gender, SLOTS.map((x) => app.parts[x] || '-').join('.'), COL.map((g) => app.color[g]).join('.')].join('|'); } catch (e) { return null; }
+  }
+  function decode(text) {   // wrong shape / set / version -> null · then the save rules (fromChar2): unknown base or other gender -> null, unknown part or colour name -> default
+    try {
+      if (!ST || typeof text !== 'string' || text.length > 160) return null;
+      const p = ST.pack, f = text.split('|'); if (f.length !== 5 || f[0] !== p.set + '.2' || !isName(f[1]) || (f[2] !== 'f' && f[2] !== 'm')) return null;
+      const pa = f[3].split('.'), co = f[4].split('.'); if (pa.length !== SLOTS.length || co.length !== 3 || !co.every(isName)) return null;
+      if (!pa.every((v, k) => isName(v) || (v === '-' && k >= SLOT_NEED.length))) return null;
+      const parts = {}; SLOTS.forEach((x, k) => { parts[x] = pa[k] === '-' ? null : pa[k]; });
+      return fromChar2(p, { v: 2, set: p.set, base: f[1], gender: f[2], parts, color: { hair: co[0], iris: co[1], skin: co[2] } });
+    } catch (e) { return null; }
+  }
 
   function rng(a) { return () => { a = (a + 0x6D2B79F5) >>> 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }   // mulberry32
   function actor(o) {   // per-character state, owned by the caller · o.rand / o.blinkAt = tests only
@@ -454,6 +479,6 @@
     ST = null; LOADING = null; CNT = ZERO();
   }
 
-  window.Char2 = Object.freeze({ version: 'g3.3', load, look, actor, tick, draw, anchor, light, sheet, stats, trim, release,
+  window.Char2 = Object.freeze({ version: 'g3.4', load, look, actor, tick, draw, anchor, light, sheet, portrait: (app, dc) => sheet(app, dc, 'portrait'), encode, decode, stats, trim, release,
     _test: Object.freeze({ packOk, kidMaskOk, holdOk, state: () => (ST ? { key: ST.key, idleFrom: ST.idleFrom, walkFrom: ST.walkFrom, raw: ST.raw.slice(), holdOn: ST.holdOn } : null) }) });
 })();
