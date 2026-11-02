@@ -32,12 +32,16 @@ const INJ = { B1: ["d[j] = c[0]; d[j + 1] = c[1];", "d[j] = c[0] ^ (an === 'walk
   T2: ["A.fi % L === L - 1 && A.blinkClock", "A.fi % L === L - 2 && A.blinkClock"],                                                 // blink on the wrong loop position
   T4: ["A.blinkAt = T.blink_min_ms + A.rand() * T.blink_span_ms;", "A.blinkAt = T.blink_min_ms + T.blink_span_ms;"],                 // next blink ignores rand()
   T3: ["+ E.max_px, Math.max(", "+ E.max_px + 1, Math.max("],                                                                        // ease allows 4 px
-  X1: ["comp = a0 < 1 && !emis", "comp = false && a0 < 1 && !emis"] }[process.env.INJECT || ''];                                    // A12: alpha per layer (no composition)
+  X1: ["comp = a0 < 1 && !emis", "comp = false && a0 < 1 && !emis"],                                                                // A12: alpha per layer (no composition)
+  // T25 N1 (Codex): X2 = only the actor check of G3.3 v1 (the frame-index check still stops NaN / -1 frames) · X3 = both checks as in G3.3 v1 (v1 behaviour)
+  X2: ["function actorOk(A) {", "function actorOk(A) { return isObj(A) && ST.pack.dirs.includes(A.dir);"],
+  X3: [["function actorOk(A) {", "function actorOk(A) { return isObj(A) && ST.pack.dirs.includes(A.dir);"],
+       ["if (!e || !isInt(kk) || kk < 0 || (kk + 1) * C > e.cv.width) return false;", "if (!e) return false;"]] }[process.env.INJECT || ''];   // X2 = T25 N1: the old actor check (object + dir only)
 let C2SRC = null;
 if (process.env.INJECT) {
   if (!INJ) { console.log('unknown INJECT'); process.exit(2); }
-  C2SRC = fs.readFileSync(path.join(ROOT, 'char2.src.js'), 'utf8'); if (!C2SRC.includes(INJ[0])) { console.log('inject target missing'); process.exit(2); }
-  C2SRC = C2SRC.replace(INJ[0], INJ[1]);
+  C2SRC = fs.readFileSync(path.join(ROOT, 'char2.src.js'), 'utf8');
+  for (const [from, to] of Array.isArray(INJ[0]) ? INJ : [INJ]) { if (!C2SRC.includes(from)) { console.log('inject target missing'); process.exit(2); } C2SRC = C2SRC.replace(from, to); }
 }
 const ONLY = process.env.K3_GROUPS ? process.env.K3_GROUPS.split(',') : null;
 
@@ -228,6 +232,22 @@ async function runGroup(b, dpr, gname, G, mode, upto) {   // upto = replay to th
         // E2 (extra): a huge dt returns at once (<= 60 s per call) and leaves a drawable actor
         const Z = mkA(), t0 = performance.now(); Char2.tick(Z, 1e15, { moving: true, dir: 'S', holding: true }); const ms = performance.now() - t0;
         const zc = document.createElement('canvas'); zc.width = zc.height = 160; out.E2 = ms < 200 && Char2.draw(zc.getContext('2d'), APP, DC, Z, 80, 120, 1) === true; out.E2ms = +ms.toFixed(1);
+        // E3 (Codex T25 N1): an actor the caller broke -> draw false with no pixel touched (on a clear canvas and on a filled one) · light / anchor null
+        const BAD = [['fi NaN', (a) => { a.fi = NaN; }], ['fi missing', (a) => { delete a.fi; }], ['fi -1', (a) => { a.fi = -1; }], ['fi Infinity', (a) => { a.fi = Infinity; }],
+          ['fi 1.5', (a) => { a.fi = 1.5; }], ["anim 'jump'", (a) => { a.anim = 'jump'; }], ['lpos NaN', (a) => { a.lpos = [NaN, 70]; }], ['lpos outside', (a) => { a.lpos = [500, 70]; }], ['lpos 3 values', (a) => { a.lpos = [30, 70, 1]; }]];
+        const px = (c) => c.getContext('2d').getImageData(0, 0, 160, 160).data, mkC = () => { const c = document.createElement('canvas'); c.width = c.height = 160; return c; };
+        out.E3 = [];
+        for (const [nm, f] of BAD) for (const mv of [false, true]) {
+          const a = mkA(); for (let i = 0; i < 3; i++) Char2.tick(a, 16, { moving: mv, dir: 'E', holding: true }); f(a);
+          const c1 = mkC(), c2 = mkC(), g2 = c2.getContext('2d'); g2.fillStyle = '#336699'; g2.fillRect(0, 0, 160, 160); const before = px(c2).join();
+          const r1 = Char2.draw(c1.getContext('2d'), APP, DC, a, 80, 120, 1), r2 = Char2.draw(g2, APP, DC, a, 80, 120, 1);
+          const clear = px(c1).every((v, i) => (i & 3) !== 3 || v === 0), same = px(c2).join() === before;
+          out.E3.push({ nm, walk: mv, draw: [r1, r2], clear, same, light: Char2.light(a, DC), anchor: Char2.anchor(a, 'head_top'),
+            ok: r1 === false && r2 === false && clear && same && Char2.light(a, DC) === null && Char2.anchor(a, 'head_top') === null });
+        }
+        const okA = mkA(); for (let i = 0; i < 3; i++) Char2.tick(okA, 16, { moving: true, dir: 'E', holding: true }); const oc = mkC();
+        out.E3control = Char2.draw(oc.getContext('2d'), APP, DC, okA, 80, 120, 1) === true && px(oc).some((v, i) => (i & 3) === 3 && v > 0) && Char2.light(okA, DC) !== null;
+        out.E3ok = out.E3.every((r) => r.ok) && out.E3control; out.E3n = out.E3.filter((r) => r.ok).length + '/' + out.E3.length;
         return out;
       });
       // D6 files: lantern base missing -> null · light layer missing -> lit false (plan API table)
@@ -235,8 +255,8 @@ async function runGroup(b, dpr, gname, G, mode, upto) {   // upto = replay to th
       const fileCase = async (Cx) => Cx.p.evaluate(() => { const X = Char2.actor({ rand: () => 0.5, blinkAt: 1e12 }); Char2.tick(X, 16, { moving: false, dir: 'S', holding: true }); return Char2.light(X, DC); });
       d.noLantern = await fileCase(C2); d.noLightLayer = await fileCase(C3);
       d.D6files = d.noLantern === null && !!d.noLightLayer && d.noLightLayer.lit === false;
-      await ctx.close(); R.props = d; const ok = d.D3 && d.D4 && d.D5 && d.D6 && d.D6files && d.E1 && d.E2 && !C1.errs.length; if (!ok) fails++;
-      console.log((ok ? 'PASS ' : 'FAIL ') + 'D3 ' + d.D3 + ' · D4 ' + d.D4 + ' · D5 ' + d.D5 + ' · D6 ' + d.D6 + ' · D6 files ' + d.D6files + ' · E1 anchor+dc ' + d.E1 + ' · E2 huge dt ' + d.E2 + ' (' + d.E2ms + ' ms)');
+      await ctx.close(); R.props = d; const ok = d.D3 && d.D4 && d.D5 && d.D6 && d.D6files && d.E1 && d.E2 && d.E3ok && !C1.errs.length; if (!ok) fails++;
+      console.log((ok ? 'PASS ' : 'FAIL ') + 'D3 ' + d.D3 + ' · D4 ' + d.D4 + ' · D5 ' + d.D5 + ' · D6 ' + d.D6 + ' · D6 files ' + d.D6files + ' · E1 anchor+dc ' + d.E1 + ' · E2 huge dt ' + d.E2 + ' (' + d.E2ms + ' ms) · E3 broken actor ' + d.E3n + ' + control ' + d.E3control + (d.E3ok ? '' : ' · bad: ' + d.E3.filter((r) => !r.ok).map((r) => r.nm + (r.walk ? '/walk' : '') + ' ' + JSON.stringify(r.draw)).join(', ')));
     }
   } else if (MODE === 'k3b') {
     const refS = JSON.parse(fs.readFileSync(path.join(REFJ, 'sheets.json'))), refC = JSON.parse(fs.readFileSync(path.join(REFJ, 'composed.json'))), refA = JSON.parse(fs.readFileSync(path.join(REFJ, 'anchors.json')));

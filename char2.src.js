@@ -352,6 +352,10 @@
     return { dir: 'S', anim: 'idle', fi: 0, t: 0, moving: false, holding: false, blinkClock: 0, blinkNow: false, rand,
              blinkAt: Number.isFinite(o.blinkAt) ? o.blinkAt : T.blink_min_ms + rand() * T.blink_span_ms, lpos: null, ldir: null, lhist: null, lclock: 0 };
   }
+  function actorOk(A) {   // T25 N1: an actor the caller broke (fi NaN / -1 / missing / Infinity, unknown anim, lantern position not 2 numbers inside the cell) -> draw false, anchor / light null
+    return isObj(A) && ST.pack.dirs.includes(A.dir) && (A.anim === 'idle' || A.anim === 'walk') && Number.isSafeInteger(A.fi) && A.fi >= 0 &&
+      (A.lpos == null || (Array.isArray(A.lpos) && A.lpos.length === 2 && A.lpos.every((v) => Number.isFinite(v) && v >= 0 && v < ST.pack.cell)));
+  }
   function frame(A) {   // Pilot curFrame
     const T = ST.pack.timing; if (A.anim === 'walk') return A.fi % ST.pack.sheets.walk.frames;
     const L = T.idle_loop.length, li = A.fi % L; return li === L - 1 && A.blinkNow && T.blink_dirs.includes(A.dir) ? T.blink_frame : T.idle_loop[li];
@@ -387,9 +391,9 @@
   }
   function draw(ctx, app, dc, A, x, y, s, op) {   // all checks before the first pixel: false = nothing drawn
     try {
-      if (!ST || !ctx || !isObj(A) || !ST.pack.dirs.includes(A.dir) || !Number.isFinite(x) || !Number.isFinite(y) || !isInt(s) || s < 1) return false;
+      if (!ST || !ctx || !actorOk(A) || !Number.isFinite(x) || !Number.isFinite(y) || !isInt(s) || s < 1) return false;
       const o = opts(app, dc); if (!o) return false;
-      const p = ST.pack, C = p.cell, d = A.dir, di = p.dirs.indexOf(d), H = held(A, dc), [an, kk] = pick(A, H), e = entry(an, o); if (!e) return false;
+      const p = ST.pack, C = p.cell, d = A.dir, di = p.dirs.indexOf(d), H = held(A, dc), [an, kk] = pick(A, H), e = entry(an, o); if (!e || !isInt(kk) || kk < 0 || (kk + 1) * C > e.cv.width) return false;
       const t = H ? target(A) : null, lp = t && (A.lpos && A.ldir === d ? A.lpos : t), la = t ? lightA(dc) : 0, fo = t && e.fists ? e.fists[di][kk] : null;
       const emis = isObj(op) && op.only === 'emissive'; if (emis && !(t && la)) return false;
       const G = p.lantern.grip, LN = p.lantern.cell, X0 = Math.round(x - p.feet[0] * s + p.render_offset[d] * s), Y0 = Math.round(y - p.feet[1] * s);
@@ -418,7 +422,7 @@
   }
   function anchor(A, name, dc) {   // cell px BEFORE renderOffset · dc (optional) = the DrawContext of the draw it goes with (no lantern held -> the sheet draw uses)
     try {
-      if (!ST || !isObj(A) || !ST.pack.dirs.includes(A.dir)) return null;
+      if (!ST || !actorOk(A)) return null;
       const p = ST.pack, G = ST.geo, H = dc === undefined ? ST.holdOn && A.holding : held(A, dc), [an, kk] = pick(A, H), f = G[an][A.dir], ht = f.fr[kk];
       if (name === 'feet') return p.feet.slice(); if (name === 'label') return G.label.slice(); if (name === 'head_top') return ht.slice();
       if (name === 'body') return [p.feet[0], Math.round((ht[1] + p.feet[1]) / 2)]; if (name === 'box') return f.box.slice();
@@ -430,7 +434,7 @@
   }
   function light(A, dc) {   // art px from the logical feet, renderOffset included · computed from actor + dc + pack only (T17 N1)
     try {
-      if (!ST || !isObj(A) || !ST.pack.dirs.includes(A.dir) || !held(A, dc)) return null;
+      if (!ST || !actorOk(A) || !held(A, dc)) return null;
       const p = ST.pack, L = p.lantern, d = A.dir, dx = p.render_offset[d], lit = lightA(dc) > 0, power = dc.held.power;
       if (L.hidden_dirs.includes(d)) return { x: dx + L.n_hole[0] - p.feet[0], y: L.n_hole[1] - p.feet[1], hidden: true, lit, power };
       const t = target(A); if (!t) return null; const lp = A.lpos && A.ldir === d ? A.lpos : t;
