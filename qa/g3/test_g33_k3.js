@@ -36,7 +36,8 @@ const INJ = { B1: ["d[j] = c[0]; d[j + 1] = c[1];", "d[j] = c[0] ^ (an === 'walk
   // T25 N1 (Codex): X2 = only the actor check of G3.3 v1 (the frame-index check still stops NaN / -1 frames) · X3 = both checks as in G3.3 v1 (v1 behaviour)
   X2: ["function actorOk(A) {", "function actorOk(A) { return isObj(A) && ST.pack.dirs.includes(A.dir);"],
   X3: [["function actorOk(A) {", "function actorOk(A) { return isObj(A) && ST.pack.dirs.includes(A.dir);"],
-       ["if (!e || !isInt(kk) || kk < 0 || (kk + 1) * C > e.cv.width) return false;", "if (!e) return false;"]] }[process.env.INJECT || ''];   // X2 = T25 N1: the old actor check (object + dir only)
+       ["if (!e || !isInt(kk) || kk < 0 || (kk + 1) * C > e.cv.width) return false;", "if (!e) return false;"]],
+  X4: ["A.lpos.length === 2 && inCell(A.lpos[0]) && inCell(A.lpos[1])", "A.lpos.length === 2 && A.lpos.every(inCell)"] }[process.env.INJECT || ''];   // X4 = T26 N2: the v1.1 lpos check (every() skips holes)
 let C2SRC = null;
 if (process.env.INJECT) {
   if (!INJ) { console.log('unknown INJECT'); process.exit(2); }
@@ -234,7 +235,9 @@ async function runGroup(b, dpr, gname, G, mode, upto) {   // upto = replay to th
         const zc = document.createElement('canvas'); zc.width = zc.height = 160; out.E2 = ms < 200 && Char2.draw(zc.getContext('2d'), APP, DC, Z, 80, 120, 1) === true; out.E2ms = +ms.toFixed(1);
         // E3 (Codex T25 N1): an actor the caller broke -> draw false with no pixel touched (on a clear canvas and on a filled one) · light / anchor null
         const BAD = [['fi NaN', (a) => { a.fi = NaN; }], ['fi missing', (a) => { delete a.fi; }], ['fi -1', (a) => { a.fi = -1; }], ['fi Infinity', (a) => { a.fi = Infinity; }],
-          ['fi 1.5', (a) => { a.fi = 1.5; }], ["anim 'jump'", (a) => { a.anim = 'jump'; }], ['lpos NaN', (a) => { a.lpos = [NaN, 70]; }], ['lpos outside', (a) => { a.lpos = [500, 70]; }], ['lpos 3 values', (a) => { a.lpos = [30, 70, 1]; }]];
+          ['fi 1.5', (a) => { a.fi = 1.5; }], ["anim 'jump'", (a) => { a.anim = 'jump'; }], ['lpos NaN', (a) => { a.lpos = [NaN, 70]; }], ['lpos outside', (a) => { a.lpos = [500, 70]; }], ['lpos 3 values', (a) => { a.lpos = [30, 70, 1]; }],
+          // Codex T26 N2: sparse arrays (every() skips the holes)
+          ['lpos new Array(2)', (a) => { a.lpos = new Array(2); }], ['lpos hole at 0', (a) => { a.lpos = (a.lpos || [30, 70]).slice(); delete a.lpos[0]; }], ['lpos hole at 1', (a) => { a.lpos = [30, , ]; }]];
         const px = (c) => c.getContext('2d').getImageData(0, 0, 160, 160).data, mkC = () => { const c = document.createElement('canvas'); c.width = c.height = 160; return c; };
         out.E3 = [];
         for (const [nm, f] of BAD) for (const mv of [false, true]) {
@@ -246,7 +249,8 @@ async function runGroup(b, dpr, gname, G, mode, upto) {   // upto = replay to th
             ok: r1 === false && r2 === false && clear && same && Char2.light(a, DC) === null && Char2.anchor(a, 'head_top') === null });
         }
         const okA = mkA(); for (let i = 0; i < 3; i++) Char2.tick(okA, 16, { moving: true, dir: 'E', holding: true }); const oc = mkC();
-        out.E3control = Char2.draw(oc.getContext('2d'), APP, DC, okA, 80, 120, 1) === true && px(oc).some((v, i) => (i & 3) === 3 && v > 0) && Char2.light(okA, DC) !== null;
+        const okL = Char2.light(okA, DC);
+        out.E3control = Char2.draw(oc.getContext('2d'), APP, DC, okA, 80, 120, 1) === true && px(oc).some((v, i) => (i & 3) === 3 && v > 0) && !!okL && Number.isFinite(okL.x) && Number.isFinite(okL.y);
         out.E3ok = out.E3.every((r) => r.ok) && out.E3control; out.E3n = out.E3.filter((r) => r.ok).length + '/' + out.E3.length;
         return out;
       });

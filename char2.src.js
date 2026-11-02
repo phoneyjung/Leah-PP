@@ -352,9 +352,10 @@
     return { dir: 'S', anim: 'idle', fi: 0, t: 0, moving: false, holding: false, blinkClock: 0, blinkNow: false, rand,
              blinkAt: Number.isFinite(o.blinkAt) ? o.blinkAt : T.blink_min_ms + rand() * T.blink_span_ms, lpos: null, ldir: null, lhist: null, lclock: 0 };
   }
+  const inCell = (v) => Number.isFinite(v) && v >= 0 && v < ST.pack.cell;
   function actorOk(A) {   // T25 N1: an actor the caller broke (fi NaN / -1 / missing / Infinity, unknown anim, lantern position not 2 numbers inside the cell) -> draw false, anchor / light null
     return isObj(A) && ST.pack.dirs.includes(A.dir) && (A.anim === 'idle' || A.anim === 'walk') && Number.isSafeInteger(A.fi) && A.fi >= 0 &&
-      (A.lpos == null || (Array.isArray(A.lpos) && A.lpos.length === 2 && A.lpos.every((v) => Number.isFinite(v) && v >= 0 && v < ST.pack.cell)));
+      (A.lpos == null || (Array.isArray(A.lpos) && A.lpos.length === 2 && inCell(A.lpos[0]) && inCell(A.lpos[1])));   // T26 N2: index both (every() skips holes)
   }
   function frame(A) {   // Pilot curFrame
     const T = ST.pack.timing; if (A.anim === 'walk') return A.fi % ST.pack.sheets.walk.frames;

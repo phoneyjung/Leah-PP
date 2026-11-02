@@ -14,62 +14,62 @@
  "build": {
   "exit": "0",
   "lines": [
-   "char2.js is the build of char2.src.js · 21154 B"
+   "char2.js is the build of char2.src.js · 21176 B"
   ]
  },
  "g32-I1": {
   "exit": "1",
   "lines": [
-   "PASS K2 full set | ready true failed [] | 506 ms",
-   "PASS K2 pack missing | ready false failed [\"pack\"] | 37 ms",
-   "PASS K2 pack not JSON | ready false failed [\"pack\"] | 7 ms",
-   "PASS K2 pack cell 64 | ready false failed [\"pack\"] | 12 ms",
-   "PASS K2 pack bad palette hex | ready false failed [\"pack\"] | 13 ms",
-   "PASS K2 idle missing | ready true failed [\"idle\"] | 399 ms"
+   "PASS K2 full set | ready true failed [] | 858 ms",
+   "PASS K2 pack missing | ready false failed [\"pack\"] | 7 ms",
+   "PASS K2 pack not JSON | ready false failed [\"pack\"] | 22 ms",
+   "PASS K2 pack cell 64 | ready false failed [\"pack\"] | 44 ms",
+   "PASS K2 pack bad palette hex | ready false failed [\"pack\"] | 70 ms",
+   "PASS K2 idle missing | ready true failed [\"idle\"] | 1485 ms"
   ]
  },
  "g32-I2": {
   "exit": "1",
   "lines": [
-   "PASS K2 full set | ready true failed [] | 583 ms",
-   "PASS K2 pack missing | ready false failed [\"pack\"] | 21 ms",
-   "PASS K2 pack not JSON | ready false failed [\"pack\"] | 10 ms",
-   "PASS K2 pack cell 64 | ready false failed [\"pack\"] | 25 ms",
-   "PASS K2 pack bad palette hex | ready false failed [\"pack\"] | 72 ms",
-   "PASS K2 idle missing | ready true failed [\"idle\"] | 380 ms"
+   "PASS K2 full set | ready true failed [] | 876 ms",
+   "PASS K2 pack missing | ready false failed [\"pack\"] | 24 ms",
+   "PASS K2 pack not JSON | ready false failed [\"pack\"] | 46 ms",
+   "PASS K2 pack cell 64 | ready false failed [\"pack\"] | 95 ms",
+   "PASS K2 pack bad palette hex | ready false failed [\"pack\"] | 18 ms",
+   "PASS K2 idle missing | ready true failed [\"idle\"] | 389 ms"
   ]
  },
  "g32-I3": {
   "exit": "1",
   "lines": [
-   "PASS K2 full set | ready true failed [] | 643 ms",
-   "PASS K2 pack missing | ready false failed [\"pack\"] | 24 ms",
-   "PASS K2 pack not JSON | ready false failed [\"pack\"] | 28 ms",
-   "PASS K2 pack cell 64 | ready false failed [\"pack\"] | 8 ms",
-   "PASS K2 pack bad palette hex | ready false failed [\"pack\"] | 17 ms",
-   "PASS K2 idle missing | ready true failed [\"idle\"] | 656 ms"
+   "PASS K2 full set | ready true failed [] | 891 ms",
+   "PASS K2 pack missing | ready false failed [\"pack\"] | 27 ms",
+   "PASS K2 pack not JSON | ready false failed [\"pack\"] | 17 ms",
+   "PASS K2 pack cell 64 | ready false failed [\"pack\"] | 14 ms",
+   "PASS K2 pack bad palette hex | ready false failed [\"pack\"] | 31 ms",
+   "PASS K2 idle missing | ready true failed [\"idle\"] | 362 ms"
   ]
  },
  "g32-I4": {
   "exit": "1",
   "lines": [
-   "PASS K2 full set | ready true failed [] | 336 ms",
+   "PASS K2 full set | ready true failed [] | 809 ms",
    "FAIL K2 pack missing | ready undefined failed undefined | 0 ms",
    "FAIL K2 pack not JSON | ready undefined failed undefined | 0 ms",
    "FAIL K2 pack cell 64 | ready undefined failed undefined | 0 ms",
    "FAIL K2 pack bad palette hex | ready undefined failed undefined | 0 ms",
-   "PASS K2 idle missing | ready true failed [\"idle\"] | 528 ms"
+   "PASS K2 idle missing | ready true failed [\"idle\"] | 1615 ms"
   ]
  },
  "g32": {
   "exit": "0",
   "lines": [
-   "PASS K2 full set | ready true failed [] | 203 ms",
-   "PASS K2 pack missing | ready false failed [\"pack\"] | 8 ms",
-   "PASS K2 pack not JSON | ready false failed [\"pack\"] | 9 ms",
-   "PASS K2 pack cell 64 | ready false failed [\"pack\"] | 9 ms",
+   "PASS K2 full set | ready true failed [] | 277 ms",
+   "PASS K2 pack missing | ready false failed [\"pack\"] | 7 ms",
+   "PASS K2 pack not JSON | ready false failed [\"pack\"] | 6 ms",
+   "PASS K2 pack cell 64 | ready false failed [\"pack\"] | 11 ms",
    "PASS K2 pack bad palette hex | ready false failed [\"pack\"] | 11 ms",
-   "PASS K2 idle missing | ready true failed [\"idle\"] | 168 ms"
+   "PASS K2 idle missing | ready true failed [\"idle\"] | 167 ms"
   ]
  },
  "inj-B4-k3a": {
@@ -95,7 +95,7 @@
    "FAIL k3d dpr3 A4 · 320 steps · holes 320 (N 40) bad 0 · lit glass 280 bad 280",
    "FAIL k3d dpr1 A3 · 400 steps · holes 400 (N 50) bad 0 · lit glass 350 bad 350",
    "FAIL k3d dpr1 A4 · 320 steps · holes 320 (N 40) bad 0 · lit glass 280 bad 280",
-   "PASS D3 true · D4 true · D5 true · D6 true · D6 files true · E1 anchor+dc true · E2 huge dt true (0.1 ms) · E3 broken actor 18/18 + control true"
+   "PASS D3 true · D4 true · D5 true · D6 true · D6 files true · E1 anchor+dc true · E2 huge dt true (0 ms) · E3 broken actor 24/24 + control true"
   ]
  },
  "inj-S0-k3a": {
@@ -137,7 +137,7 @@
   "lines": [
    "FAIL k3d dpr3 A6h · 320 steps · holes 320 (N 40) bad 7 · lit glass 280 bad 7",
    "FAIL k3d dpr1 A6h · 320 steps · holes 320 (N 40) bad 7 · lit glass 280 bad 7",
-   "PASS D3 true · D4 true · D5 true · D6 true · D6 files true · E1 anchor+dc true · E2 huge dt true (0 ms) · E3 broken actor 18/18 + control true"
+   "PASS D3 true · D4 true · D5 true · D6 true · D6 files true · E1 anchor+dc true · E2 huge dt true (0.1 ms) · E3 broken actor 24/24 + control true"
   ]
  },
  "inj-T4-k3a": {
@@ -154,7 +154,7 @@
   "lines": [
    "PASS k3d dpr3 A11 · 64 steps · holes 32 (N 0) bad 0 · lit glass 48 bad 0",
    "PASS k3d dpr1 A11 · 64 steps · holes 32 (N 0) bad 0 · lit glass 48 bad 0",
-   "FAIL D3 true · D4 true · D5 true · D6 true · D6 files true · E1 anchor+dc true · E2 huge dt true (0 ms) · E3 broken actor 10/18 + control true · bad: anim 'jump' [true,true], anim 'jump'/walk [true,true], lpos NaN [true,true], lpos NaN/walk"
+   "FAIL D3 true · D4 true · D5 true · D6 true · D6 files true · E1 anchor+dc true · E2 huge dt true (0 ms) · E3 broken actor 10/24 + control true · bad: anim 'jump' [true,true], anim 'jump'/walk [true,true], lpos NaN [true,true], lpos NaN/walk"
   ]
  },
  "inj-X3-k3d": {
@@ -162,17 +162,25 @@
   "lines": [
    "PASS k3d dpr3 A11 · 64 steps · holes 32 (N 0) bad 0 · lit glass 48 bad 0",
    "PASS k3d dpr1 A11 · 64 steps · holes 32 (N 0) bad 0 · lit glass 48 bad 0",
-   "FAIL D3 true · D4 true · D5 true · D6 true · D6 files true · E1 anchor+dc true · E2 huge dt true (0 ms) · E3 broken actor 0/18 + control true · bad: fi NaN [true,true], fi NaN/walk [true,true], fi missing [true,true], fi missing/walk [true,"
+   "FAIL D3 true · D4 true · D5 true · D6 true · D6 files true · E1 anchor+dc true · E2 huge dt true (0 ms) · E3 broken actor 0/24 + control true · bad: fi NaN [true,true], fi NaN/walk [true,true], fi missing [true,true], fi missing/walk [true,"
+  ]
+ },
+ "inj-X4-k3d": {
+  "exit": "1",
+  "lines": [
+   "PASS k3d dpr3 A11 · 64 steps · holes 32 (N 0) bad 0 · lit glass 48 bad 0",
+   "PASS k3d dpr1 A11 · 64 steps · holes 32 (N 0) bad 0 · lit glass 48 bad 0",
+   "FAIL D3 true · D4 true · D5 true · D6 true · D6 files true · E1 anchor+dc true · E2 huge dt true (0.1 ms) · E3 broken actor 18/24 + control true · bad: lpos new Array(2) [true,true], lpos new Array(2)/walk [true,true], lpos hole at 0 [true,"
   ]
  },
  "k1k6": {
   "exit": "0",
   "lines": [
-   "  \"char2.js\": 21154,",
+   "  \"char2.js\": 21176,",
    "  \"c2-pack.json\": 4054,",
    "  \"loaded_files\": 14,",
    "  \"loaded_bytes\": 410088,",
-   "  \"char2.src.js\": 36680,",
+   "  \"char2.src.js\": 36769,",
    "  \"char2.js_built_from_src\": true,"
   ]
  },

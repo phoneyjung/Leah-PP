@@ -49,8 +49,8 @@
     },
     "C": {
      "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
-     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
-     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553",
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045"
     }
    },
    "pageErrors": 0,
@@ -105,8 +105,8 @@
     },
     "C": {
      "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
-     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553",
-     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652"
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
     }
    },
    "pageErrors": 0,
@@ -132,9 +132,9 @@
      "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
     },
     "C": {
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
      "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
-     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553",
-     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045"
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
     }
    },
    "pageErrors": 0,
@@ -160,8 +160,8 @@
      "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
     },
     "C": {
-     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
      "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
      "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
     }
    },
@@ -188,9 +188,9 @@
      "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
     },
     "C": {
-     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
      "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
-     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553",
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652"
     }
    },
    "pageErrors": 0,
@@ -217,8 +217,8 @@
     },
     "C": {
      "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
-     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
-     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553",
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652"
     }
    },
    "pageErrors": 0,
@@ -245,8 +245,8 @@
     },
     "C": {
      "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
-     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
-     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553",
+     "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652"
     }
    },
    "pageErrors": 0,
@@ -272,8 +272,8 @@
      "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
     },
     "C": {
-     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
      "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
      "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
     }
    },
@@ -356,9 +356,9 @@
      "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
     },
     "C": {
-     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
      "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
-     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553",
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045"
     }
    },
    "pageErrors": 0,
@@ -384,9 +384,9 @@
      "c2-pilot-kid4-walkhold.png": "6ead87a760f5f9ef2562f75fa411a647fc2e282348bd1921ac498cf83168fa90"
     },
     "C": {
-     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045",
+     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553",
      "c2-pilot-kid4-walk.png": "e8e7e33bd6b760611872875dd72bacb7d351ee9c76ee7c49d31bd433d42f2652",
-     "c2-pilot-kid4-walkhold.png": "3dbe652d8a5f18b869b42ddd27a523d1d03609096e397507839d82c6cb310553"
+     "c2-pilot-kid4-idleanim.png": "13182512fd2a0d6b2a1947fcc3eea9cd883d760c018792d5cc278ad144156045"
     }
    },
    "pageErrors": 0,
@@ -694,11 +694,89 @@
     "light": null,
     "anchor": null,
     "ok": true
+   },
+   {
+    "nm": "lpos new Array(2)",
+    "walk": false,
+    "draw": [
+     false,
+     false
+    ],
+    "clear": true,
+    "same": true,
+    "light": null,
+    "anchor": null,
+    "ok": true
+   },
+   {
+    "nm": "lpos new Array(2)",
+    "walk": true,
+    "draw": [
+     false,
+     false
+    ],
+    "clear": true,
+    "same": true,
+    "light": null,
+    "anchor": null,
+    "ok": true
+   },
+   {
+    "nm": "lpos hole at 0",
+    "walk": false,
+    "draw": [
+     false,
+     false
+    ],
+    "clear": true,
+    "same": true,
+    "light": null,
+    "anchor": null,
+    "ok": true
+   },
+   {
+    "nm": "lpos hole at 0",
+    "walk": true,
+    "draw": [
+     false,
+     false
+    ],
+    "clear": true,
+    "same": true,
+    "light": null,
+    "anchor": null,
+    "ok": true
+   },
+   {
+    "nm": "lpos hole at 1",
+    "walk": false,
+    "draw": [
+     false,
+     false
+    ],
+    "clear": true,
+    "same": true,
+    "light": null,
+    "anchor": null,
+    "ok": true
+   },
+   {
+    "nm": "lpos hole at 1",
+    "walk": true,
+    "draw": [
+     false,
+     false
+    ],
+    "clear": true,
+    "same": true,
+    "light": null,
+    "anchor": null,
+    "ok": true
    }
   ],
   "E3control": true,
   "E3ok": true,
-  "E3n": "18/18",
+  "E3n": "24/24",
   "noLantern": null,
   "noLightLayer": {
    "x": -15,
