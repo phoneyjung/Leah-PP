@@ -1,0 +1,72 @@
+{
+ "what": "G3.5 K1: the 5 game suites of G2.6 A1 on main and on the branch + git diff of the 3 game files + SHA of the 3 game files",
+ "main": {
+  "checkout": "eb60c650922e55c7d81b27b59f180e1f42c367b2",
+  "suites": {
+   "test_150_bugs": {
+    "exit": 0,
+    "last_line": "errors 0 []"
+   },
+   "test_151_remaining": {
+    "exit": 0,
+    "last_line": "errors 0 []"
+   },
+   "test_152_future_art": {
+    "exit": 0,
+    "last_line": "errors 0 []"
+   },
+   "test_169_character_studio": {
+    "exit": 0,
+    "last_line": "errors 0"
+   },
+   "test_220_local_sprite": {
+    "exit": 0,
+    "last_line": "errors 0"
+   }
+  }
+ },
+ "branch": {
+  "checkout": "de1c4941b5ef02151cd961370b8ceeb5dfacdb9e + G3.5 files (not yet committed when run; index.html sw.js database.rules.json identical)",
+  "suites": {
+   "test_150_bugs": {
+    "exit": 0,
+    "last_line": "errors 0 []"
+   },
+   "test_151_remaining": {
+    "exit": 0,
+    "last_line": "errors 0 []"
+   },
+   "test_152_future_art": {
+    "exit": 0,
+    "last_line": "errors 0 []"
+   },
+   "test_169_character_studio": {
+    "exit": 0,
+    "last_line": "errors 0"
+   },
+   "test_220_local_sprite": {
+    "exit": 0,
+    "last_line": "errors 0"
+   }
+  }
+ },
+ "git_diff_lines_vs_origin_main": 0,
+ "sha256": {
+  "index.html": {
+   "branch": "9fdff13ad58a46d8c15d03d5ce7b41ed7f74c6b8579f3a099f8d5cc4f6d22ca6",
+   "main": "9fdff13ad58a46d8c15d03d5ce7b41ed7f74c6b8579f3a099f8d5cc4f6d22ca6",
+   "same": true
+  },
+  "sw.js": {
+   "branch": "beb6b04db20e84ad968f5b2a465a49e42bf9fc45e88c256dae0b07944b52123a",
+   "main": "beb6b04db20e84ad968f5b2a465a49e42bf9fc45e88c256dae0b07944b52123a",
+   "same": true
+  },
+  "database.rules.json": {
+   "branch": "357b5a78c2ebb1f22ba0f62d3c4d0704724bf6aa2a2645663a3a3a70abf93031",
+   "main": "357b5a78c2ebb1f22ba0f62d3c4d0704724bf6aa2a2645663a3a3a70abf93031",
+   "same": true
+  }
+ },
+ "pass": true
+}

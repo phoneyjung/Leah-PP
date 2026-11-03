@@ -1,0 +1,255 @@
+{
+ "method": "A5: 844x390 DPR 3 · CPU 4x · warm 5 s · 30 s x 3 · order alternates · median",
+ "inject": null,
+ "fps": {
+  "pilot": [
+   23.88542988776861,
+   23.412262297265794,
+   23.94854560049548
+  ],
+  "char2": [
+   24.791323036937072,
+   24.056242295005497,
+   25.021573193932497
+  ]
+ },
+ "median": {
+  "pilot": 23.89,
+  "char2": 24.79
+ },
+ "p95_ms": {
+  "pilot": [
+   50.1,
+   50.1,
+   50.1
+  ],
+  "char2": [
+   50.1,
+   50.1,
+   50.1
+  ]
+ },
+ "p95_median_ms": {
+  "pilot": 50.1,
+  "char2": 50.1
+ },
+ "runs": [
+  {
+   "round": 1,
+   "renderer": "pilot",
+   "fps": 23.89,
+   "p95_ms": 50.1,
+   "frames": 719,
+   "kid_draws": 2876,
+   "other_draws": 0,
+   "c2fail": 0,
+   "walked_px": [
+    1366,
+    1370,
+    1361,
+    1366
+   ],
+   "loopErr": null,
+   "ok": true
+  },
+  {
+   "round": 1,
+   "renderer": "char2",
+   "fps": 24.79,
+   "p95_ms": 50.1,
+   "frames": 746,
+   "kid_draws": 2984,
+   "other_draws": 0,
+   "c2fail": 0,
+   "walked_px": [
+    1369,
+    1367,
+    1371,
+    1381
+   ],
+   "loopErr": null,
+   "ok": true,
+   "stats": {
+    "budget": 41943040,
+    "fixed": {
+     "images": 5308416,
+     "masks": 5308416,
+     "other": 12288
+    },
+    "cache": 11830992,
+    "borrowed": 0,
+    "scratch": 0,
+    "total": 22460112,
+    "entries": {
+     "cached": 8,
+     "pinned": 0
+    },
+    "handles": 0,
+    "hit": 6780,
+    "miss": 8,
+    "evict": 0,
+    "refused": 0,
+    "rebuilt": 0,
+    "peak": 24225488
+   }
+  },
+  {
+   "round": 2,
+   "renderer": "char2",
+   "fps": 24.06,
+   "p95_ms": 50.1,
+   "frames": 724,
+   "kid_draws": 2896,
+   "other_draws": 0,
+   "c2fail": 0,
+   "walked_px": [
+    1376,
+    1355,
+    1363,
+    1377
+   ],
+   "loopErr": null,
+   "ok": true,
+   "stats": {
+    "budget": 41943040,
+    "fixed": {
+     "images": 5308416,
+     "masks": 5308416,
+     "other": 12288
+    },
+    "cache": 11830992,
+    "borrowed": 0,
+    "scratch": 0,
+    "total": 22460112,
+    "entries": {
+     "cached": 8,
+     "pinned": 0
+    },
+    "handles": 0,
+    "hit": 6553,
+    "miss": 8,
+    "evict": 0,
+    "refused": 0,
+    "rebuilt": 0,
+    "peak": 24225488
+   }
+  },
+  {
+   "round": 2,
+   "renderer": "pilot",
+   "fps": 23.41,
+   "p95_ms": 50.1,
+   "frames": 705,
+   "kid_draws": 2820,
+   "other_draws": 0,
+   "c2fail": 0,
+   "walked_px": [
+    1367,
+    1363,
+    1361,
+    1365
+   ],
+   "loopErr": null,
+   "ok": true
+  },
+  {
+   "round": 3,
+   "renderer": "pilot",
+   "fps": 23.95,
+   "p95_ms": 50.1,
+   "frames": 721,
+   "kid_draws": 2884,
+   "other_draws": 0,
+   "c2fail": 0,
+   "walked_px": [
+    1363,
+    1363,
+    1365,
+    1383
+   ],
+   "loopErr": null,
+   "ok": true
+  },
+  {
+   "round": 3,
+   "renderer": "char2",
+   "fps": 25.02,
+   "p95_ms": 50.1,
+   "frames": 753,
+   "kid_draws": 3012,
+   "other_draws": 0,
+   "c2fail": 0,
+   "walked_px": [
+    1374,
+    1365,
+    1360,
+    1386
+   ],
+   "loopErr": null,
+   "ok": true,
+   "stats": {
+    "budget": 41943040,
+    "fixed": {
+     "images": 5308416,
+     "masks": 5308416,
+     "other": 12288
+    },
+    "cache": 11830992,
+    "borrowed": 0,
+    "scratch": 0,
+    "total": 22460112,
+    "entries": {
+     "cached": 8,
+     "pinned": 0
+    },
+    "handles": 0,
+    "hit": 6811,
+    "miss": 8,
+    "evict": 0,
+    "refused": 0,
+    "rebuilt": 0,
+    "peak": 24225488
+   }
+  }
+ ],
+ "build_cpu4x": {
+  "all4_from_empty_ms": [
+   507.9,
+   519.9,
+   532.2
+  ],
+  "one_change_ms": [
+   135.3,
+   126.3,
+   112.8
+  ],
+  "stats": {
+   "budget": 41943040,
+   "fixed": {
+    "images": 5308416,
+    "masks": 5308416,
+    "other": 12288
+   },
+   "cache": 20704236,
+   "borrowed": 0,
+   "scratch": 0,
+   "total": 31333356,
+   "entries": {
+    "cached": 14,
+    "pinned": 0
+   },
+   "handles": 0,
+   "hit": 199,
+   "miss": 38,
+   "evict": 24,
+   "refused": 0,
+   "rebuilt": 24,
+   "peak": 33102828
+  }
+ },
+ "errors": [],
+ "measure_s": 30,
+ "ratio_char2_vs_pilot": 1.038,
+ "runs_ok": true,
+ "pass": true
+}

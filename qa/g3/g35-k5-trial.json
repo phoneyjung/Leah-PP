@@ -1,0 +1,255 @@
+{
+ "method": "A5: 844x390 DPR 3 · CPU 4x · warm 5 s · 30 s x 3 · order alternates · median",
+ "inject": null,
+ "fps": {
+  "pilot": [
+   23.62679658627776,
+   23.003275719726258,
+   23.103529779917277
+  ],
+  "char2": [
+   23.215457431111485,
+   23.205790143855985,
+   23.766647471381752
+  ]
+ },
+ "median": {
+  "pilot": 23.1,
+  "char2": 23.22
+ },
+ "p95_ms": {
+  "pilot": [
+   50.1,
+   66.6,
+   50.1
+  ],
+  "char2": [
+   50.1,
+   50.1,
+   50.1
+  ]
+ },
+ "p95_median_ms": {
+  "pilot": 50.1,
+  "char2": 50.1
+ },
+ "runs": [
+  {
+   "round": 1,
+   "renderer": "pilot",
+   "fps": 23.63,
+   "p95_ms": 50.1,
+   "frames": 711,
+   "kid_draws": 2844,
+   "other_draws": 0,
+   "c2fail": 0,
+   "walked_px": [
+    1356,
+    1377,
+    1366,
+    1375
+   ],
+   "loopErr": null,
+   "ok": true
+  },
+  {
+   "round": 1,
+   "renderer": "char2",
+   "fps": 23.22,
+   "p95_ms": 50.1,
+   "frames": 699,
+   "kid_draws": 2796,
+   "other_draws": 0,
+   "c2fail": 0,
+   "walked_px": [
+    1364,
+    1366,
+    1368,
+    1378
+   ],
+   "loopErr": null,
+   "ok": true,
+   "stats": {
+    "budget": 41943040,
+    "fixed": {
+     "images": 5308416,
+     "masks": 5308416,
+     "other": 12288
+    },
+    "cache": 11830992,
+    "borrowed": 0,
+    "scratch": 0,
+    "total": 22460112,
+    "entries": {
+     "cached": 8,
+     "pinned": 0
+    },
+    "handles": 0,
+    "hit": 6463,
+    "miss": 8,
+    "evict": 0,
+    "refused": 0,
+    "rebuilt": 0,
+    "peak": 24225488
+   }
+  },
+  {
+   "round": 2,
+   "renderer": "char2",
+   "fps": 23.21,
+   "p95_ms": 50.1,
+   "frames": 700,
+   "kid_draws": 2800,
+   "other_draws": 0,
+   "c2fail": 0,
+   "walked_px": [
+    1364,
+    1356,
+    1371,
+    1383
+   ],
+   "loopErr": null,
+   "ok": true,
+   "stats": {
+    "budget": 41943040,
+    "fixed": {
+     "images": 5308416,
+     "masks": 5308416,
+     "other": 12288
+    },
+    "cache": 11830992,
+    "borrowed": 0,
+    "scratch": 0,
+    "total": 22460112,
+    "entries": {
+     "cached": 8,
+     "pinned": 0
+    },
+    "handles": 0,
+    "hit": 6511,
+    "miss": 8,
+    "evict": 0,
+    "refused": 0,
+    "rebuilt": 0,
+    "peak": 24225488
+   }
+  },
+  {
+   "round": 2,
+   "renderer": "pilot",
+   "fps": 23,
+   "p95_ms": 66.6,
+   "frames": 693,
+   "kid_draws": 2772,
+   "other_draws": 0,
+   "c2fail": 0,
+   "walked_px": [
+    1357,
+    1376,
+    1363,
+    1387
+   ],
+   "loopErr": null,
+   "ok": true
+  },
+  {
+   "round": 3,
+   "renderer": "pilot",
+   "fps": 23.1,
+   "p95_ms": 50.1,
+   "frames": 696,
+   "kid_draws": 2784,
+   "other_draws": 0,
+   "c2fail": 0,
+   "walked_px": [
+    1354,
+    1361,
+    1359,
+    1386
+   ],
+   "loopErr": null,
+   "ok": true
+  },
+  {
+   "round": 3,
+   "renderer": "char2",
+   "fps": 23.77,
+   "p95_ms": 50.1,
+   "frames": 716,
+   "kid_draws": 2864,
+   "other_draws": 0,
+   "c2fail": 0,
+   "walked_px": [
+    1361,
+    1361,
+    1359,
+    1381
+   ],
+   "loopErr": null,
+   "ok": true,
+   "stats": {
+    "budget": 41943040,
+    "fixed": {
+     "images": 5308416,
+     "masks": 5308416,
+     "other": 12288
+    },
+    "cache": 11830992,
+    "borrowed": 0,
+    "scratch": 0,
+    "total": 22460112,
+    "entries": {
+     "cached": 8,
+     "pinned": 0
+    },
+    "handles": 0,
+    "hit": 6367,
+    "miss": 8,
+    "evict": 0,
+    "refused": 0,
+    "rebuilt": 0,
+    "peak": 24225488
+   }
+  }
+ ],
+ "build_cpu4x": {
+  "all4_from_empty_ms": [
+   338.4,
+   390.9,
+   260.1
+  ],
+  "one_change_ms": [
+   65.6,
+   67.3,
+   65
+  ],
+  "stats": {
+   "budget": 41943040,
+   "fixed": {
+    "images": 5308416,
+    "masks": 5308416,
+    "other": 12288
+   },
+   "cache": 20704236,
+   "borrowed": 0,
+   "scratch": 0,
+   "total": 31333356,
+   "entries": {
+    "cached": 14,
+    "pinned": 0
+   },
+   "handles": 0,
+   "hit": 207,
+   "miss": 38,
+   "evict": 24,
+   "refused": 0,
+   "rebuilt": 24,
+   "peak": 33102828
+  }
+ },
+ "errors": [],
+ "measure_s": 30,
+ "ratio_char2_vs_pilot": 1.005,
+ "runs_ok": true,
+ "pass": true
+}

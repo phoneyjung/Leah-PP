@@ -1,0 +1,613 @@
+{
+ "a12-X1": {
+  "exit": "1",
+  "lines": [
+   "FAIL A12 main 6/48 · alpha0/1 3/6 · afterimage 0/9 · clip 0/10 · power10 0/2 · vs 1:1 full-size blit: largest channel step 204"
+  ]
+ },
+ "a12": {
+  "exit": "0",
+  "lines": [
+   "PASS A12 main 48/48 · alpha0/1 6/6 · afterimage 9/9 · clip 10/10 · power10 2/2 · vs 1:1 full-size blit: largest channel step 1"
+  ]
+ },
+ "build": {
+  "exit": "0",
+  "lines": [
+   "char2.js is the build of char2.src.js · 22458 B"
+  ]
+ },
+ "g32-I1": {
+  "exit": "1",
+  "lines": [
+   "PASS K7 B11 unknown parts -> defaults / null",
+   "PASS K7 B12 wrong colours -> that field default",
+   "PASS K7 B13 one wrong colour only",
+   "PASS K7 B14 valid char2 -> same values, new object",
+   "PASS K7 B15 look({}) -> defaults",
+   "PASS K7 B16 base __proto__ -> null (T22 R1)",
+   "PASS K7 B16b base __proto__, no gender / parts -> null (T22 R1 probe)",
+   "PASS K7 B17 base {toString:null} -> null (T22 R1)",
+   "PASS K7 B18 base constructor -> null",
+   "PASS K7 B19 base number -> null",
+   "PASS K7 B20 colour named constructor -> default",
+   "PASS K7 not a save -> null x5",
+   "PASS K7 deprecated part -> default",
+   "K2 41/44 · K7 41/41 · load twice/release ok · fails 3 · inject I1"
+  ]
+ },
+ "g32-I2": {
+  "exit": "1",
+  "lines": [
+   "PASS K7 B11 unknown parts -> defaults / null",
+   "PASS K7 B12 wrong colours -> that field default",
+   "PASS K7 B13 one wrong colour only",
+   "PASS K7 B14 valid char2 -> same values, new object",
+   "PASS K7 B15 look({}) -> defaults",
+   "PASS K7 B16 base __proto__ -> null (T22 R1)",
+   "PASS K7 B16b base __proto__, no gender / parts -> null (T22 R1 probe)",
+   "PASS K7 B17 base {toString:null} -> null (T22 R1)",
+   "PASS K7 B18 base constructor -> null",
+   "PASS K7 B19 base number -> null",
+   "PASS K7 B20 colour named constructor -> default",
+   "PASS K7 not a save -> null x5",
+   "PASS K7 deprecated part -> default",
+   "K2 44/44 · K7 35/41 · load twice/release ok · fails 6 · inject I2"
+  ]
+ },
+ "g32-I3": {
+  "exit": "1",
+  "lines": [
+   "FAIL K7 B11 unknown parts -> defaults / null",
+   "FAIL K7 B12 wrong colours -> that field default",
+   "FAIL K7 B13 one wrong colour only",
+   "FAIL K7 B14 valid char2 -> same values, new object",
+   "FAIL K7 B15 look({}) -> defaults",
+   "FAIL K7 B16 base __proto__ -> null (T22 R1)",
+   "FAIL K7 B16b base __proto__, no gender / parts -> null (T22 R1 probe)",
+   "FAIL K7 B17 base {toString:null} -> null (T22 R1)",
+   "FAIL K7 B18 base constructor -> null",
+   "FAIL K7 B19 base number -> null",
+   "FAIL K7 B20 colour named constructor -> default",
+   "PASS K7 not a save -> null x5",
+   "PASS K7 deprecated part -> default",
+   "K2 44/44 · K7 2/41 · load twice/release ok · fails 39 · inject I3"
+  ]
+ },
+ "g32-I4": {
+  "exit": "1",
+  "lines": [
+   "PASS K7 B11 unknown parts -> defaults / null",
+   "PASS K7 B12 wrong colours -> that field default",
+   "PASS K7 B13 one wrong colour only",
+   "PASS K7 B14 valid char2 -> same values, new object",
+   "PASS K7 B15 look({}) -> defaults",
+   "PASS K7 B16 base __proto__ -> null (T22 R1)",
+   "PASS K7 B16b base __proto__, no gender / parts -> null (T22 R1 probe)",
+   "PASS K7 B17 base {toString:null} -> null (T22 R1)",
+   "PASS K7 B18 base constructor -> null",
+   "PASS K7 B19 base number -> null",
+   "PASS K7 B20 colour named constructor -> default",
+   "PASS K7 not a save -> null x5",
+   "PASS K7 deprecated part -> default",
+   "K2 30/44 · K7 41/41 · load twice/release ok · fails 15 · inject I4"
+  ]
+ },
+ "g32": {
+  "exit": "0",
+  "lines": [
+   "PASS K7 B11 unknown parts -> defaults / null",
+   "PASS K7 B12 wrong colours -> that field default",
+   "PASS K7 B13 one wrong colour only",
+   "PASS K7 B14 valid char2 -> same values, new object",
+   "PASS K7 B15 look({}) -> defaults",
+   "PASS K7 B16 base __proto__ -> null (T22 R1)",
+   "PASS K7 B16b base __proto__, no gender / parts -> null (T22 R1 probe)",
+   "PASS K7 B17 base {toString:null} -> null (T22 R1)",
+   "PASS K7 B18 base constructor -> null",
+   "PASS K7 B19 base number -> null",
+   "PASS K7 B20 colour named constructor -> default",
+   "PASS K7 not a save -> null x5",
+   "PASS K7 deprecated part -> default",
+   "K2 44/44 · K7 41/41 · load twice/release ok · fails 0"
+  ]
+ },
+ "inj-B4-k3a": {
+  "exit": "1",
+  "lines": [
+   "FAIL k3a dpr3 A2 · 320 steps · bad 40 (first step 80: rgb 12447 / alpha 0 px) · blink steps 0/0",
+   "FAIL k3a dpr1 A2 · 320 steps · bad 40 (first step 80: rgb 1383 / alpha 0 px) · blink steps 0/0"
+  ]
+ },
+ "inj-B5-k3a": {
+  "exit": "1",
+  "lines": [
+   "FAIL k3a dpr3 A3 · 400 steps · bad 350 (first step 0: rgb 1008 / alpha 0 px) · blink steps 0/0",
+   "FAIL k3a dpr3 A4 · 320 steps · bad 280 (first step 0: rgb 981 / alpha 0 px) · blink steps 0/0",
+   "FAIL k3a dpr1 A3 · 400 steps · bad 350 (first step 0: rgb 112 / alpha 0 px) · blink steps 0/0",
+   "FAIL k3a dpr1 A4 · 320 steps · bad 280 (first step 0: rgb 109 / alpha 0 px) · blink steps 0/0"
+  ]
+ },
+ "inj-B5-k3d": {
+  "exit": "1",
+  "lines": [
+   "FAIL k3d dpr3 A3 · 400 steps · holes 400 (N 50) bad 0 · lit glass 350 bad 350",
+   "FAIL k3d dpr3 A4 · 320 steps · holes 320 (N 40) bad 0 · lit glass 280 bad 280",
+   "FAIL k3d dpr1 A3 · 400 steps · holes 400 (N 50) bad 0 · lit glass 350 bad 350",
+   "FAIL k3d dpr1 A4 · 320 steps · holes 320 (N 40) bad 0 · lit glass 280 bad 280",
+   "PASS D3 true · D4 true · D5 true · D6 true · D6 files true · E1 anchor+dc true · E2 huge dt true (0 ms) · E3 broken actor 24/24 + control true"
+  ]
+ },
+ "inj-S0-k3a": {
+  "exit": "0",
+  "lines": [
+   "PASS k3a dpr3 A4 · 320 steps · bad 0 · blink steps 0/0",
+   "PASS k3a dpr3 A6h · 320 steps · bad 0 · blink steps 0/0",
+   "PASS k3a dpr3 A9 · 125 steps · bad 0 · blink steps 0/0",
+   "PASS k3a dpr3 A10-E-hold · 625 steps · bad 0 · blink steps 24/24 starts 4608 ms 9408 ms",
+   "PASS k3a dpr1 A4 · 320 steps · bad 0 · blink steps 0/0",
+   "PASS k3a dpr1 A6h · 320 steps · bad 0 · blink steps 0/0",
+   "PASS k3a dpr1 A9 · 125 steps · bad 0 · blink steps 0/0",
+   "PASS k3a dpr1 A10-E-hold · 625 steps · bad 0 · blink steps 24/24 starts 4608 ms 9408 ms"
+  ]
+ },
+ "inj-T1-k3a": {
+  "exit": "1",
+  "lines": [
+   "FAIL k3a dpr3 A6 · 320 steps · bad 152 (first step 20: rgb 6570 / alpha 0 px) · blink steps 0/0",
+   "FAIL k3a dpr1 A6 · 320 steps · bad 152 (first step 20: rgb 730 / alpha 0 px) · blink steps 0/0"
+  ]
+ },
+ "inj-T2-k3a": {
+  "exit": "1",
+  "lines": [
+   "FAIL k3a dpr3 A10-S · 625 steps · bad 24 (first step 287: rgb 3276 / alpha 0 px) · blink steps 24/26 starts 4608 ms 9408 ms",
+   "FAIL k3a dpr3 A10-W-hold · 625 steps · bad 24 (first step 287: rgb 279 / alpha 0 px) · blink steps 24/26 starts 4608 ms 9408 ms",
+   "FAIL k3a dpr1 A10-S · 625 steps · bad 24 (first step 287: rgb 364 / alpha 0 px) · blink steps 24/26 starts 4608 ms 9408 ms",
+   "FAIL k3a dpr1 A10-W-hold · 625 steps · bad 24 (first step 287: rgb 31 / alpha 0 px) · blink steps 24/26 starts 4608 ms 9408 ms"
+  ]
+ },
+ "inj-T3-k3a": {
+  "exit": "1",
+  "lines": [
+   "FAIL k3a dpr3 A6h · 320 steps · bad 7 (first step 260: rgb 1035 / alpha 0 px) · blink steps 0/0",
+   "FAIL k3a dpr1 A6h · 320 steps · bad 7 (first step 260: rgb 115 / alpha 0 px) · blink steps 0/0"
+  ]
+ },
+ "inj-T3-k3d": {
+  "exit": "1",
+  "lines": [
+   "FAIL k3d dpr3 A6h · 320 steps · holes 320 (N 40) bad 7 · lit glass 280 bad 7",
+   "FAIL k3d dpr1 A6h · 320 steps · holes 320 (N 40) bad 7 · lit glass 280 bad 7",
+   "PASS D3 true · D4 true · D5 true · D6 true · D6 files true · E1 anchor+dc true · E2 huge dt true (0 ms) · E3 broken actor 24/24 + control true"
+  ]
+ },
+ "inj-T4-k3a": {
+  "exit": "1",
+  "lines": [
+   "FAIL k3a dpr3 A10-S · 625 steps · bad 12 (first step 587: rgb 3276 / alpha 0 px) · blink steps 24/12 starts 4608 ms 9408 ms",
+   "FAIL k3a dpr3 A10-W-hold · 625 steps · bad 12 (first step 587: rgb 279 / alpha 0 px) · blink steps 24/12 starts 4608 ms 9408 ms",
+   "FAIL k3a dpr1 A10-S · 625 steps · bad 12 (first step 587: rgb 364 / alpha 0 px) · blink steps 24/12 starts 4608 ms 9408 ms",
+   "FAIL k3a dpr1 A10-W-hold · 625 steps · bad 12 (first step 587: rgb 31 / alpha 0 px) · blink steps 24/12 starts 4608 ms 9408 ms"
+  ]
+ },
+ "inj-X2-k3d": {
+  "exit": "1",
+  "lines": [
+   "PASS k3d dpr3 A11 · 64 steps · holes 32 (N 0) bad 0 · lit glass 48 bad 0",
+   "PASS k3d dpr1 A11 · 64 steps · holes 32 (N 0) bad 0 · lit glass 48 bad 0",
+   "FAIL D3 true · D4 true · D5 true · D6 true · D6 files true · E1 anchor+dc true · E2 huge dt true (0.1 ms) · E3 broken actor 10/24 + control true · bad: anim 'jump' [true,true], anim 'jump'/walk [true,true], lpos NaN [true,true], lpos NaN/walk [true,true], lpos outside [true,true], lpos outside/walk [true,true], lpos 3 values [true,true], lpos 3 values/walk [true,true], lpos new Array(2) [true,true"
+  ]
+ },
+ "inj-X3-k3d": {
+  "exit": "1",
+  "lines": [
+   "PASS k3d dpr3 A11 · 64 steps · holes 32 (N 0) bad 0 · lit glass 48 bad 0",
+   "PASS k3d dpr1 A11 · 64 steps · holes 32 (N 0) bad 0 · lit glass 48 bad 0",
+   "FAIL D3 true · D4 true · D5 true · D6 true · D6 files true · E1 anchor+dc true · E2 huge dt true (0.1 ms) · E3 broken actor 0/24 + control true · bad: fi NaN [true,true], fi NaN/walk [true,true], fi missing [true,true], fi missing/walk [true,true], fi -1 [true,true], fi -1/walk [true,true], fi Infinity [true,true], fi Infinity/walk [true,true], fi 1.5 [true,true], fi 1.5/walk [true,true], anim 'ju"
+  ]
+ },
+ "inj-X4-k3d": {
+  "exit": "1",
+  "lines": [
+   "PASS k3d dpr3 A11 · 64 steps · holes 32 (N 0) bad 0 · lit glass 48 bad 0",
+   "PASS k3d dpr1 A11 · 64 steps · holes 32 (N 0) bad 0 · lit glass 48 bad 0",
+   "FAIL D3 true · D4 true · D5 true · D6 true · D6 files true · E1 anchor+dc true · E2 huge dt true (0.1 ms) · E3 broken actor 18/24 + control true · bad: lpos new Array(2) [true,true], lpos new Array(2)/walk [true,true], lpos hole at 0 [true,true], lpos hole at 0/walk [true,true], lpos hole at 1 [true,true], lpos hole at 1/walk [true,true]"
+  ]
+ },
+ "k1k6": {
+  "exit": "0",
+  "lines": [
+   "{"
+  ]
+ },
+ "k3a": {
+  "exit": "0",
+  "lines": [
+   "PASS k3a dpr1 A7 · 80 steps · bad 0 · blink steps 0/0",
+   "PASS k3a dpr1 A8 · 120 steps · bad 0 · blink steps 0/0",
+   "PASS k3a dpr1 A9 · 125 steps · bad 0 · blink steps 0/0",
+   "PASS k3a dpr1 A11 · 64 steps · bad 0 · blink steps 0/0",
+   "PASS k3a dpr1 A10-S · 625 steps · bad 0 · blink steps 24/24 starts 4608 ms 9408 ms",
+   "PASS k3a dpr1 A10-S-hold · 625 steps · bad 0 · blink steps 24/24 starts 4608 ms 9408 ms",
+   "PASS k3a dpr1 A10-SE · 625 steps · bad 0 · blink steps 24/24 starts 4608 ms 9408 ms",
+   "PASS k3a dpr1 A10-SE-hold · 625 steps · bad 0 · blink steps 24/24 starts 4608 ms 9408 ms",
+   "PASS k3a dpr1 A10-E · 625 steps · bad 0 · blink steps 24/24 starts 4608 ms 9408 ms",
+   "PASS k3a dpr1 A10-E-hold · 625 steps · bad 0 · blink steps 24/24 starts 4608 ms 9408 ms",
+   "PASS k3a dpr1 A10-W · 625 steps · bad 0 · blink steps 24/24 starts 4608 ms 9408 ms",
+   "PASS k3a dpr1 A10-W-hold · 625 steps · bad 0 · blink steps 24/24 starts 4608 ms 9408 ms",
+   "PASS k3a dpr1 A10-SW · 625 steps · bad 0 · blink steps 24/24 starts 4608 ms 9408 ms",
+   "PASS k3a dpr1 A10-SW-hold · 625 steps · bad 0 · blink steps 24/24 starts 4608 ms 9408 ms"
+  ]
+ },
+ "k3b-B1": {
+  "exit": "1",
+  "lines": [
+   "FAIL K3b sheets 2559/2560 · composed 10240/10240 · anchors 309/309 · head_top vs JSON 80/80 · peak total 15647156"
+  ]
+ },
+ "k3b-B2": {
+  "exit": "1",
+  "lines": [
+   "FAIL K3b sheets 0/2560 · composed 0/10240 · anchors 309/309 · head_top vs JSON 80/80 · peak total 15647156"
+  ]
+ },
+ "k3b-B3": {
+  "exit": "1",
+  "lines": [
+   "FAIL K3b sheets 2560/2560 · composed 1280/10240 · anchors 309/309 · head_top vs JSON 80/80 · peak total 15647156"
+  ]
+ },
+ "k3b-B4": {
+  "exit": "1",
+  "lines": [
+   "FAIL K3b sheets 2560/2560 · composed 8960/10240 · anchors 309/309 · head_top vs JSON 80/80 · peak total 15647156"
+  ]
+ },
+ "k3b-B5": {
+  "exit": "1",
+  "lines": [
+   "FAIL K3b sheets 2560/2560 · composed 1280/10240 · anchors 309/309 · head_top vs JSON 80/80 · peak total 15647156"
+  ]
+ },
+ "k3b-S0": {
+  "exit": "0",
+  "lines": [
+   "PASS K3b sheets 2560/2560 · composed 10240/10240 · anchors 309/309 · head_top vs JSON 80/80 · peak total 15647156"
+  ]
+ },
+ "k3b": {
+  "exit": "0",
+  "lines": [
+   "PASS K3b sheets 2560/2560 · composed 10240/10240 · anchors 309/309 · head_top vs JSON 80/80 · peak total 15647156"
+  ]
+ },
+ "k3c-P1": {
+  "exit": "1",
+  "lines": [
+   "PASS 640 portraits written (384 x 384, borrowed one at a time) · 640 files · null 0 · max borrowed 589824 B · after: borrowed 0 handles 0",
+   "FAIL pt_s5.py --check (frozen oracle): 640 x 0 wrong px, no cross-material / fixed / alpha change, every recolour colour a Palette shade · exit 1 · {\"combos\":640,\"renders\":1871,\"oracle_wrong_px\":18367360,\"cross_material_px\":0,\"fixed_changed_px\":0,\"alpha_changed_px\":0,\"not_in_ramp_colours\":0,\"unchanged_when_option_changes_px\":0} ·",
+   "PASS portrait borrow: same canvas twice = +0 B · release twice harmless · all back = 0",
+   "PASS portrait with bad app / dc / house / colour -> null (4/4) · [true,true,true,true]",
+   "PASS portrait picture missing -> portrait() null (the rest still loads) · ready true · failed [\"portrait\"] · got null",
+   "PASS portrait colour mask missing -> the portrait as drawn (no recolour) · ready true · failed [\"portrait-mask\"] · got raw",
+   "PASS shade map missing -> the portrait as drawn · ready true · failed [\"portrait-mask\"] · got raw"
+  ]
+ },
+ "k3c-P2": {
+  "exit": "1",
+  "lines": [
+   "PASS 640 portraits written (384 x 384, borrowed one at a time) · 640 files · null 0 · max borrowed 589824 B · after: borrowed 0 handles 0",
+   "FAIL pt_s5.py --check (frozen oracle): 640 x 0 wrong px, no cross-material / fixed / alpha change, every recolour colour a Palette shade · exit 1 · {\"combos\":640,\"renders\":1871,\"oracle_wrong_px\":24391040,\"cross_material_px\":0,\"fixed_changed_px\":0,\"alpha_changed_px\":0,\"not_in_ramp_colours\":34560,\"unchanged_when_option_changes_px\":24391040} ·",
+   "PASS portrait borrow: same canvas twice = +0 B · release twice harmless · all back = 0",
+   "PASS portrait with bad app / dc / house / colour -> null (4/4) · [true,true,true,true]",
+   "PASS portrait picture missing -> portrait() null (the rest still loads) · ready true · failed [\"portrait\"] · got null",
+   "PASS portrait colour mask missing -> the portrait as drawn (no recolour) · ready true · failed [\"portrait-mask\"] · got raw",
+   "PASS shade map missing -> the portrait as drawn · ready true · failed [\"portrait-mask\"] · got raw"
+  ]
+ },
+ "k3c-S0": {
+  "exit": "0",
+  "lines": [
+   "PASS 640 portraits written (384 x 384, borrowed one at a time) · 640 files · null 0 · max borrowed 589824 B · after: borrowed 0 handles 0",
+   "PASS pt_s5.py --check (frozen oracle): 640 x 0 wrong px, no cross-material / fixed / alpha change, every recolour colour a Palette shade · exit 0 · {\"combos\":640,\"renders\":1871,\"oracle_wrong_px\":0,\"cross_material_px\":0,\"fixed_changed_px\":0,\"alpha_changed_px\":0,\"not_in_ramp_colours\":0,\"unchanged_when_option_changes_px\":0}",
+   "PASS portrait borrow: same canvas twice = +0 B · release twice harmless · all back = 0",
+   "PASS portrait with bad app / dc / house / colour -> null (4/4) · [true,true,true,true]",
+   "PASS portrait picture missing -> portrait() null (the rest still loads) · ready true · failed [\"portrait\"] · got null",
+   "PASS portrait colour mask missing -> the portrait as drawn (no recolour) · ready true · failed [\"portrait-mask\"] · got raw",
+   "PASS shade map missing -> the portrait as drawn · ready true · failed [\"portrait-mask\"] · got raw"
+  ]
+ },
+ "k3c": {
+  "exit": "0",
+  "lines": [
+   "PASS 640 portraits written (384 x 384, borrowed one at a time) · 640 files · null 0 · max borrowed 589824 B · after: borrowed 0 handles 0",
+   "PASS pt_s5.py --check (frozen oracle): 640 x 0 wrong px, no cross-material / fixed / alpha change, every recolour colour a Palette shade · exit 0 · {\"combos\":640,\"renders\":1871,\"oracle_wrong_px\":0,\"cross_material_px\":0,\"fixed_changed_px\":0,\"alpha_changed_px\":0,\"not_in_ramp_colours\":0,\"unchanged_when_option_changes_px\":0}",
+   "PASS checker catches 2 swapped portraits (exit 1) · oracle wrong px 36722",
+   "PASS checker catches 1 px changed in 1 portrait (exit 1) · oracle wrong px 1",
+   "PASS folder put back -> exit 0 again",
+   "PASS portrait borrow: same canvas twice = +0 B · release twice harmless · all back = 0",
+   "PASS portrait with bad app / dc / house / colour -> null (4/4) · [true,true,true,true]",
+   "PASS portrait picture missing -> portrait() null (the rest still loads) · ready true · failed [\"portrait\"] · got null",
+   "PASS portrait colour mask missing -> the portrait as drawn (no recolour) · ready true · failed [\"portrait-mask\"] · got raw",
+   "PASS shade map missing -> the portrait as drawn · ready true · failed [\"portrait-mask\"] · got raw"
+  ]
+ },
+ "k3d": {
+  "exit": "0",
+  "lines": [
+   "PASS k3d dpr3 A4 · 320 steps · holes 320 (N 40) bad 0 · lit glass 280 bad 0",
+   "PASS k3d dpr3 A6h · 320 steps · holes 320 (N 40) bad 0 · lit glass 280 bad 0",
+   "PASS k3d dpr3 A7 · 80 steps · holes 40 (N 0) bad 0 · lit glass 40 bad 0",
+   "PASS k3d dpr3 A8 · 120 steps · holes 120 (N 60) bad 0 · lit glass 60 bad 0",
+   "PASS k3d dpr3 A9 · 125 steps · holes 125 (N 0) bad 0 · lit glass 125 bad 0",
+   "PASS k3d dpr3 A11 · 64 steps · holes 32 (N 0) bad 0 · lit glass 48 bad 0",
+   "PASS k3d dpr1 A3 · 400 steps · holes 400 (N 50) bad 0 · lit glass 350 bad 0",
+   "PASS k3d dpr1 A4 · 320 steps · holes 320 (N 40) bad 0 · lit glass 280 bad 0",
+   "PASS k3d dpr1 A6h · 320 steps · holes 320 (N 40) bad 0 · lit glass 280 bad 0",
+   "PASS k3d dpr1 A7 · 80 steps · holes 40 (N 0) bad 0 · lit glass 40 bad 0",
+   "PASS k3d dpr1 A8 · 120 steps · holes 120 (N 60) bad 0 · lit glass 60 bad 0",
+   "PASS k3d dpr1 A9 · 125 steps · holes 125 (N 0) bad 0 · lit glass 125 bad 0",
+   "PASS k3d dpr1 A11 · 64 steps · holes 32 (N 0) bad 0 · lit glass 48 bad 0",
+   "PASS D3 true · D4 true · D5 true · D6 true · D6 files true · E1 anchor+dc true · E2 huge dt true (0 ms) · E3 broken actor 24/24 + control true"
+  ]
+ },
+ "k4-M1": {
+  "exit": "1",
+  "lines": [
+   "FAIL K4 inject M1 · ops 2064 (model mismatch 294) · checkpoints 7/9 · colour 6/6 · peak 39.502 MiB (Char2 stats 39.499) · made in all 249.2 MiB · counters {\"hit\":1970,\"miss\":81,\"evict\":69,\"refused\":22,\"rebuilt\":30}"
+  ]
+ },
+ "k4-M2": {
+  "exit": "1",
+  "lines": [
+   "FAIL K4 inject M2 · ops 2064 (model mismatch 0) · checkpoints 6/9 · colour 6/6 · peak 46.779 MiB (Char2 stats 39.499) · made in all 249.2 MiB · counters {\"hit\":1970,\"miss\":81,\"evict\":69,\"refused\":22,\"rebuilt\":30}"
+  ]
+ },
+ "k4-M3": {
+  "exit": "1",
+  "lines": [
+   "FAIL K4 inject M3 · ops 2160 (model mismatch 501) · checkpoints 4/9 · colour 6/6 · peak 39.502 MiB (Char2 stats 39.499) · made in all 279.6 MiB · counters {\"hit\":2034,\"miss\":81,\"evict\":69,\"refused\":22,\"rebuilt\":30}"
+  ]
+ },
+ "k4-M4": {
+  "exit": "1",
+  "lines": [
+   "FAIL K4 inject M4 · ops 2073 (model mismatch 404) · checkpoints 5/9 · colour 6/6 · peak 39.502 MiB (Char2 stats 39.499) · made in all 260.4 MiB · counters {\"hit\":1980,\"miss\":79,\"evict\":71,\"refused\":29,\"rebuilt\":28}"
+  ]
+ },
+ "k4-M5": {
+  "exit": "1",
+  "lines": [
+   "FAIL K4 inject M5 · ops 2064 (model mismatch 0) · checkpoints 0/9 · colour 6/6 · peak 140.711 MiB (Char2 stats 39.499) · made in all 249.2 MiB · counters {\"hit\":1970,\"miss\":81,\"evict\":69,\"refused\":22,\"rebuilt\":30}"
+  ]
+ },
+ "k4-S0": {
+  "exit": "0",
+  "lines": [
+   "PASS K4 inject S0 · ops 2064 (model mismatch 0) · checkpoints 9/9 · colour 6/6 · peak 39.502 MiB (Char2 stats 39.499) · made in all 249.2 MiB · counters {\"hit\":1970,\"miss\":81,\"evict\":69,\"refused\":22,\"rebuilt\":30}"
+  ]
+ },
+ "k4": {
+  "exit": "0",
+  "lines": [
+   "PASS K4 · ops 2064 (model mismatch 0) · checkpoints 9/9 · colour 6/6 · peak 39.502 MiB (Char2 stats 39.499) · made in all 249.2 MiB · counters {\"hit\":1970,\"miss\":81,\"evict\":69,\"refused\":22,\"rebuilt\":30}"
+  ]
+ },
+ "k4rep-1": {
+  "exit": "0",
+  "lines": [
+   "PASS K4 · ops 2064 (model mismatch 0) · checkpoints 9/9 · colour 6/6 · peak 39.502 MiB (Char2 stats 39.499) · made in all 249.2 MiB · counters {\"hit\":1970,\"miss\":81,\"evict\":69,\"refused\":22,\"rebuilt\":30}"
+  ]
+ },
+ "k4rep-10": {
+  "exit": "0",
+  "lines": [
+   "PASS K4 · ops 2064 (model mismatch 0) · checkpoints 9/9 · colour 6/6 · peak 39.502 MiB (Char2 stats 39.499) · made in all 249.2 MiB · counters {\"hit\":1970,\"miss\":81,\"evict\":69,\"refused\":22,\"rebuilt\":30}"
+  ]
+ },
+ "k4rep-2": {
+  "exit": "0",
+  "lines": [
+   "PASS K4 · ops 2064 (model mismatch 0) · checkpoints 9/9 · colour 6/6 · peak 39.502 MiB (Char2 stats 39.499) · made in all 249.2 MiB · counters {\"hit\":1970,\"miss\":81,\"evict\":69,\"refused\":22,\"rebuilt\":30}"
+  ]
+ },
+ "k4rep-3": {
+  "exit": "0",
+  "lines": [
+   "PASS K4 · ops 2064 (model mismatch 0) · checkpoints 9/9 · colour 6/6 · peak 39.502 MiB (Char2 stats 39.499) · made in all 249.2 MiB · counters {\"hit\":1970,\"miss\":81,\"evict\":69,\"refused\":22,\"rebuilt\":30}"
+  ]
+ },
+ "k4rep-4": {
+  "exit": "0",
+  "lines": [
+   "PASS K4 · ops 2064 (model mismatch 0) · checkpoints 9/9 · colour 6/6 · peak 39.502 MiB (Char2 stats 39.499) · made in all 249.2 MiB · counters {\"hit\":1970,\"miss\":81,\"evict\":69,\"refused\":22,\"rebuilt\":30}"
+  ]
+ },
+ "k4rep-5": {
+  "exit": "0",
+  "lines": [
+   "PASS K4 · ops 2064 (model mismatch 0) · checkpoints 9/9 · colour 6/6 · peak 39.502 MiB (Char2 stats 39.499) · made in all 249.2 MiB · counters {\"hit\":1970,\"miss\":81,\"evict\":69,\"refused\":22,\"rebuilt\":30}"
+  ]
+ },
+ "k4rep-6": {
+  "exit": "0",
+  "lines": [
+   "PASS K4 · ops 2064 (model mismatch 0) · checkpoints 9/9 · colour 6/6 · peak 39.502 MiB (Char2 stats 39.499) · made in all 249.2 MiB · counters {\"hit\":1970,\"miss\":81,\"evict\":69,\"refused\":22,\"rebuilt\":30}"
+  ]
+ },
+ "k4rep-7": {
+  "exit": "0",
+  "lines": [
+   "PASS K4 · ops 2064 (model mismatch 0) · checkpoints 9/9 · colour 6/6 · peak 39.502 MiB (Char2 stats 39.499) · made in all 249.2 MiB · counters {\"hit\":1970,\"miss\":81,\"evict\":69,\"refused\":22,\"rebuilt\":30}"
+  ]
+ },
+ "k4rep-8": {
+  "exit": "0",
+  "lines": [
+   "PASS K4 · ops 2064 (model mismatch 0) · checkpoints 9/9 · colour 6/6 · peak 39.502 MiB (Char2 stats 39.499) · made in all 249.2 MiB · counters {\"hit\":1970,\"miss\":81,\"evict\":69,\"refused\":22,\"rebuilt\":30}"
+  ]
+ },
+ "k4rep-9": {
+  "exit": "0",
+  "lines": [
+   "PASS K4 · ops 2064 (model mismatch 0) · checkpoints 9/9 · colour 6/6 · peak 39.502 MiB (Char2 stats 39.499) · made in all 249.2 MiB · counters {\"hit\":1970,\"miss\":81,\"evict\":69,\"refused\":22,\"rebuilt\":30}"
+  ]
+ },
+ "k5-1": {
+  "exit": "0",
+  "lines": [
+   "round 1 pilot 23.89 fps · p95 50.1 ms · frames 719 · draws 2876 · walked 1366/1370/1361/1366",
+   "round 1 char2 24.79 fps · p95 50.1 ms · frames 746 · draws 2984 · walked 1369/1367/1371/1381",
+   "round 2 char2 24.06 fps · p95 50.1 ms · frames 724 · draws 2896 · walked 1376/1355/1363/1377",
+   "round 2 pilot 23.41 fps · p95 50.1 ms · frames 705 · draws 2820 · walked 1367/1363/1361/1365",
+   "round 3 pilot 23.95 fps · p95 50.1 ms · frames 721 · draws 2884 · walked 1363/1363/1365/1383",
+   "round 3 char2 25.02 fps · p95 50.1 ms · frames 753 · draws 3012 · walked 1374/1365/1360/1386",
+   "{\"median\":{\"pilot\":23.89,\"char2\":24.79},\"ratio\":1.038,\"p95_median_ms\":{\"pilot\":50.1,\"char2\":50.1},\"runs_ok\":true,\"build_cpu4x\":{\"all4\":[507.9,519.9,532.2],\"change\":[135.3,126.3,112.8]},\"pass\":true,\"errors\":0}"
+  ]
+ },
+ "k5-2": {
+  "exit": "0",
+  "lines": [
+   "round 1 pilot 24.42 fps · p95 50.1 ms · frames 737 · draws 2948 · walked 1368/1371/1369/1390",
+   "round 1 char2 24.41 fps · p95 50.1 ms · frames 738 · draws 2952 · walked 1357/1364/1368/1387",
+   "round 2 char2 24.12 fps · p95 50.1 ms · frames 726 · draws 2904 · walked 1358/1359/1354/1369",
+   "round 2 pilot 26.48 fps · p95 50.1 ms · frames 797 · draws 3188 · walked 1372/1366/1363/1388",
+   "round 3 pilot 27.76 fps · p95 50 ms · frames 835 · draws 3340 · walked 1366/1380/1375/1391",
+   "round 3 char2 24.39 fps · p95 50.1 ms · frames 734 · draws 2936 · walked 1379/1351/1368/1380",
+   "{\"median\":{\"pilot\":26.48,\"char2\":24.39},\"ratio\":0.921,\"p95_median_ms\":{\"pilot\":50.1,\"char2\":50.1},\"runs_ok\":true,\"build_cpu4x\":{\"all4\":[297.5,338.7,324.3],\"change\":[120.9,141.7,139.9]},\"pass\":true,\"errors\":0}"
+  ]
+ },
+ "k5-SLOW": {
+  "exit": "1",
+  "lines": [
+   "round 1 pilot 24.16 fps · p95 66.6 ms · frames 244 · draws 976 · walked 450/460/456/461",
+   "round 1 char2 17.15 fps · p95 66.7 ms · frames 174 · draws 696 · walked 444/447/455/456",
+   "round 2 char2 15.86 fps · p95 83.3 ms · frames 161 · draws 644 · walked 449/453/448/456",
+   "round 2 pilot 24.86 fps · p95 50.1 ms · frames 251 · draws 1004 · walked 448/462/461/464",
+   "round 3 pilot 25.93 fps · p95 50.1 ms · frames 262 · draws 1048 · walked 450/453/457/460",
+   "round 3 char2 17.23 fps · p95 83.3 ms · frames 175 · draws 700 · walked 453/444/452/458",
+   "{\"median\":{\"pilot\":24.86,\"char2\":17.15},\"ratio\":0.69,\"p95_median_ms\":{\"pilot\":50.1,\"char2\":83.3},\"runs_ok\":true,\"build_cpu4x\":{\"all4\":[439.6,422.8,433],\"change\":[107.3,83.9,65]},\"pass\":false,\"errors\":0}"
+  ]
+ },
+ "k7-E1": {
+  "exit": "1",
+  "lines": [
+   "FAIL encode -> decode 160/160 looks give the same Appearance (a new object) · 5/160 · longest text 52 chars · e.g. c2.2|kid4|f|kid4.kid4.kid4.-.-.-|medium.green.brown · bad [[\"black\",\"brown\",\"light\",\"c2.2|kid4|f|kid4.kid4.kid4.-.-.-|light.brown.black\",{\"v\":2,\"set\":\"c2\",\"base\":\"kid4\",\"gender\":\"f\",\"parts\":{\"hair\":\"kid4\",\"eyes\":\"kid4\",\"outfit\":\"kid4\",\"head\":null,\"face_acc\":null,\"back\":null},\"color\":{",
+   "PASS encode of a look this pack cannot draw -> null (14 cases)",
+   "FAIL decode of malformed text -> null (21 cases) · 2 colours",
+   "PASS decode of well-formed text with an unknown name -> that slot default, encodable again (4 cases)",
+   "PASS nothing throws · before load / after release -> null"
+  ]
+ },
+ "k7-S0": {
+  "exit": "0",
+  "lines": [
+   "PASS encode -> decode 160/160 looks give the same Appearance (a new object) · 160/160 · longest text 52 chars · e.g. c2.2|kid4|f|kid4.kid4.kid4.-.-.-|brown.green.medium",
+   "PASS encode of a look this pack cannot draw -> null (14 cases)",
+   "PASS decode of malformed text -> null (21 cases)",
+   "PASS decode of well-formed text with an unknown name -> that slot default, encodable again (4 cases)",
+   "PASS nothing throws · before load / after release -> null"
+  ]
+ },
+ "k7": {
+  "exit": "0",
+  "lines": [
+   "PASS encode -> decode 160/160 looks give the same Appearance (a new object) · 160/160 · longest text 52 chars · e.g. c2.2|kid4|f|kid4.kid4.kid4.-.-.-|brown.green.medium",
+   "PASS encode of a look this pack cannot draw -> null (14 cases)",
+   "PASS decode of malformed text -> null (21 cases)",
+   "PASS decode of well-formed text with an unknown name -> that slot default, encodable again (4 cases)",
+   "PASS nothing throws · before load / after release -> null"
+  ]
+ },
+ "page-HOUSE": {
+  "exit": "1",
+  "lines": [
+   "FAIL P2_4_looks_4_houses [{\"kid\":0,\"look\":[\"brown\",\"green\",\"medium\",\"sun\"],\"own_house\":251,\"other_houses\":0,\"own_hair\":241,\"own_skin\":175},{\"kid\":1,\"look\":[\"black\",\"brown\",\"deep\",\"wing\"],\"own_house\":0,\"other_houses\":328,\"own_hair\":855,\"own_skin\":261},{\"kid\":2,\"look\":[\"blonde\",\"blue\",\"light\",\"leaf\"],\"own_house\":0,\"other_hous",
+   "PASS P3_colour_change_one_kid {\"from\":\"brown\",\"to\":\"blonde\",\"old_px_before\":241,\"after\":{\"old\":0,\"neu\":241},\"other_kids_px_changed\":0,\"build_ms\":26.59999999962747}",
+   "PASS P6_phone_buttons_44_free {\"closed\":16,\"open\":22,\"bad\":[]}",
+   "PASS P4_phone_portrait {\"k\":2,\"w\":768,\"cssW\":256,\"opaque\":280180,\"handles\":0,\"changed_after_kid_switch\":3007,\"cap1\":\"ตัวที่ 1 (คุณ) / kid 1 (you) · ผมน้ำตาล · ตาเขียว · ผิวกลาง · บ้านอาทิตย์ / hair brown · eyes green · skin medium · house sun\",\"cap2\":\"ตัวที่ 2 (เพื่อน) / kid 2 (friend) · ผมดำ · ตาน้ำตาล · ผิวเข้ม · บ้านปี",
+   "PASS P5_live_switch {\"to_pilot\":{\"r\":\"pilot\",\"label\":\"ตัววาด / renderer: Pilot\",\"frames\":60,\"c2\":0,\"pilot\":240,\"c2fail\":0},\"back_to_char2\":{\"r\":\"char2\",\"label\":\"ตัววาด / renderer: Char2\",\"frames\":60,\"c2\":240,\"pilot\":0,\"c2fail\":0},\"errors\":[]}",
+   "PASS P6_ipad_buttons_44_free {\"closed\":16,\"open\":22,\"bad\":[]}",
+   "PASS P4_ipad_portrait {\"k\":3,\"w\":1152,\"cssW\":576,\"opaque\":630405,\"handles\":0,\"changed_after_kid_switch\":6787,\"cap1\":\"ตัวที่ 1 (คุณ) / kid 1 (you) · ผมน้ำตาล · ตาเขียว · ผิวกลาง · บ้านอาทิตย์ / hair brown · eyes green · skin medium · house sun\",\"cap2\":\"ตัวที่ 2 (เพื่อน) / kid 2 (friend) · ผมดำ · ตาน้ำตาล · ผิวเข้ม · บ้านป",
+   "PASS P8_bench_all_4_move {\"moved_px\":[134,132,133,71]}",
+   "PASS P8_friends_wander_not_door_gate_exit {\"bad\":[],\"nbad\":0,\"cells\":[1,37,37,27]}",
+   "PASS P8_pad_walks_kid1 {\"dx\":33.6,\"moving_after_release\":false}",
+   "PASS P9_memory_40MiB_no_borrow_left {\"total\":40197672,\"peak_seen\":40197672,\"peak\":41377320,\"handles\":0,\"borrowed\":0,\"evict\":10,\"budget\":41943040}",
+   "PASS P10_measure_button {\"out\":{\"pilot\":60.6,\"char2\":60.4,\"pct\":99.7,\"runs\":{\"pilot\":[60.57629338574211,60.61598951503509,60.72542261613542],\"char2\":[60.44763927457315,60.487166911866495,60.37859007834734]}},\"before\":{\"r\":\"char2\",\"bench\":false},\"after\":{\"r\":\"char2\",\"bench\":false,\"meas\":null},\"label\":\"วัดความลื่น / FPS: 99.",
+   "PASS P7_files_missing_one_by_one_and_all {\"blocked\":34,\"failing\":[]}",
+   "{\"pass\":false,\"fails\":[\"P2_4_looks_4_houses\"],\"errors\":0}"
+  ]
+ },
+ "page-NOPT": {
+  "exit": "1",
+  "lines": [
+   "PASS P2_4_looks_4_houses [{\"kid\":0,\"look\":[\"brown\",\"green\",\"medium\",\"sun\"],\"own_house\":251,\"other_houses\":0,\"own_hair\":241,\"own_skin\":175},{\"kid\":1,\"look\":[\"black\",\"brown\",\"deep\",\"wing\"],\"own_house\":328,\"other_houses\":0,\"own_hair\":855,\"own_skin\":261},{\"kid\":2,\"look\":[\"blonde\",\"blue\",\"light\",\"leaf\"],\"own_house\":328,\"other_ho",
+   "PASS P3_colour_change_one_kid {\"from\":\"brown\",\"to\":\"blonde\",\"old_px_before\":241,\"after\":{\"old\":0,\"neu\":241},\"other_kids_px_changed\":0,\"build_ms\":29.5}",
+   "PASS P6_phone_buttons_44_free {\"closed\":16,\"open\":22,\"bad\":[]}",
+   "FAIL P4_phone_portrait {\"k\":2,\"w\":768,\"cssW\":256,\"opaque\":589824,\"handles\":0,\"changed_after_kid_switch\":0,\"cap1\":\"ตัวที่ 1 (คุณ) / kid 1 (you) · ผมน้ำตาล · ตาเขียว · ผิวกลาง · บ้านอาทิตย์ / hair brown · eyes green · skin medium · house sun\",\"cap2\":\"ตัวที่ 2 (เพื่อน) / kid 2 (friend) · ผมดำ · ตาน้ำตาล · ผิวเข้ม · บ้านปีกฟ้",
+   "PASS P5_live_switch {\"to_pilot\":{\"r\":\"pilot\",\"label\":\"ตัววาด / renderer: Pilot\",\"frames\":60,\"c2\":0,\"pilot\":240,\"c2fail\":0},\"back_to_char2\":{\"r\":\"char2\",\"label\":\"ตัววาด / renderer: Char2\",\"frames\":61,\"c2\":244,\"pilot\":0,\"c2fail\":0},\"errors\":[]}",
+   "PASS P6_ipad_buttons_44_free {\"closed\":16,\"open\":22,\"bad\":[]}",
+   "FAIL P4_ipad_portrait {\"k\":3,\"w\":1152,\"cssW\":576,\"opaque\":1327104,\"handles\":0,\"changed_after_kid_switch\":0,\"cap1\":\"ตัวที่ 1 (คุณ) / kid 1 (you) · ผมน้ำตาล · ตาเขียว · ผิวกลาง · บ้านอาทิตย์ / hair brown · eyes green · skin medium · house sun\",\"cap2\":\"ตัวที่ 2 (เพื่อน) / kid 2 (friend) · ผมดำ · ตาน้ำตาล · ผิวเข้ม · บ้านปีก",
+   "PASS P8_bench_all_4_move {\"moved_px\":[134,132,133,70]}",
+   "PASS P8_friends_wander_not_door_gate_exit {\"bad\":[],\"nbad\":0,\"cells\":[1,37,37,27]}",
+   "PASS P8_pad_walks_kid1 {\"dx\":33.6,\"moving_after_release\":false}",
+   "PASS P9_memory_40MiB_no_borrow_left {\"total\":39616476,\"peak_seen\":39616476,\"peak\":41386248,\"handles\":0,\"borrowed\":0,\"evict\":53,\"budget\":41943040}",
+   "PASS P10_measure_button {\"out\":{\"pilot\":60.5,\"char2\":60.4,\"pct\":99.9,\"runs\":{\"pilot\":[60.56637747581836,60.487166911866495,57.33944954124941],\"char2\":[60.487166911866495,60.437765436113594,60.42789482281766]}},\"before\":{\"r\":\"char2\",\"bench\":false},\"after\":{\"r\":\"char2\",\"bench\":false,\"meas\":null},\"label\":\"วัดความลื่น / FPS: 9",
+   "PASS P7_files_missing_one_by_one_and_all {\"blocked\":34,\"failing\":[]}",
+   "{\"pass\":false,\"fails\":[\"P4_phone_portrait\",\"P4_ipad_portrait\"],\"errors\":0}"
+  ]
+ },
+ "page-S0": {
+  "exit": "0",
+  "lines": [
+   "PASS P2_4_looks_4_houses [{\"kid\":0,\"look\":[\"brown\",\"green\",\"medium\",\"sun\"],\"own_house\":251,\"other_houses\":0,\"own_hair\":241,\"own_skin\":175},{\"kid\":1,\"look\":[\"black\",\"brown\",\"deep\",\"wing\"],\"own_house\":328,\"other_houses\":0,\"own_hair\":855,\"own_skin\":261},{\"kid\":2,\"look\":[\"blonde\",\"blue\",\"light\",\"leaf\"],\"own_house\":328,\"other_ho",
+   "PASS P3_colour_change_one_kid {\"from\":\"brown\",\"to\":\"blonde\",\"old_px_before\":241,\"after\":{\"old\":0,\"neu\":241},\"other_kids_px_changed\":0,\"build_ms\":33.299999999813735}",
+   "PASS P6_phone_buttons_44_free {\"closed\":16,\"open\":22,\"bad\":[]}",
+   "PASS P4_phone_portrait {\"k\":2,\"w\":768,\"cssW\":256,\"opaque\":280180,\"handles\":0,\"changed_after_kid_switch\":4709,\"cap1\":\"ตัวที่ 1 (คุณ) / kid 1 (you) · ผมน้ำตาล · ตาเขียว · ผิวกลาง · บ้านอาทิตย์ / hair brown · eyes green · skin medium · house sun\",\"cap2\":\"ตัวที่ 2 (เพื่อน) / kid 2 (friend) · ผมดำ · ตาน้ำตาล · ผิวเข้ม · บ้านปี",
+   "PASS P5_live_switch {\"to_pilot\":{\"r\":\"pilot\",\"label\":\"ตัววาด / renderer: Pilot\",\"frames\":53,\"c2\":0,\"pilot\":212,\"c2fail\":0},\"back_to_char2\":{\"r\":\"char2\",\"label\":\"ตัววาด / renderer: Char2\",\"frames\":60,\"c2\":240,\"pilot\":0,\"c2fail\":0},\"errors\":[]}",
+   "PASS P6_ipad_buttons_44_free {\"closed\":16,\"open\":22,\"bad\":[]}",
+   "PASS P4_ipad_portrait {\"k\":3,\"w\":1152,\"cssW\":576,\"opaque\":630405,\"handles\":0,\"changed_after_kid_switch\":10637,\"cap1\":\"ตัวที่ 1 (คุณ) / kid 1 (you) · ผมน้ำตาล · ตาเขียว · ผิวกลาง · บ้านอาทิตย์ / hair brown · eyes green · skin medium · house sun\",\"cap2\":\"ตัวที่ 2 (เพื่อน) / kid 2 (friend) · ผมดำ · ตาน้ำตาล · ผิวเข้ม · บ้าน",
+   "PASS P8_bench_all_4_move {\"moved_px\":[134,132,133,71]}",
+   "PASS P8_friends_wander_not_door_gate_exit {\"bad\":[],\"nbad\":0,\"cells\":[1,37,37,27]}",
+   "PASS P8_pad_walks_kid1 {\"dx\":33.6,\"moving_after_release\":false}",
+   "PASS P9_memory_40MiB_no_borrow_left {\"total\":40197672,\"peak_seen\":40197972,\"peak\":41377620,\"handles\":0,\"borrowed\":0,\"evict\":81,\"budget\":41943040}",
+   "PASS P10_measure_button {\"out\":{\"pilot\":60.8,\"char2\":60.5,\"pct\":99.4,\"runs\":{\"pilot\":[62.59265359911599,60.42789482281766,60.83525156196756],\"char2\":[60.497056899879325,60.17238575383578,60.54655539186085]}},\"before\":{\"r\":\"char2\",\"bench\":false},\"after\":{\"r\":\"char2\",\"bench\":false,\"meas\":null},\"label\":\"วัดความลื่น / FPS: 99.",
+   "PASS P7_files_missing_one_by_one_and_all {\"blocked\":34,\"failing\":[]}",
+   "{\"pass\":true,\"fails\":[],\"errors\":0}"
+  ]
+ },
+ "page": {
+  "exit": "0",
+  "lines": [
+   "PASS P2_4_looks_4_houses [{\"kid\":0,\"look\":[\"brown\",\"green\",\"medium\",\"sun\"],\"own_house\":251,\"other_houses\":0,\"own_hair\":241,\"own_skin\":175},{\"kid\":1,\"look\":[\"black\",\"brown\",\"deep\",\"wing\"],\"own_house\":328,\"other_houses\":0,\"own_hair\":855,\"own_skin\":261},{\"kid\":2,\"look\":[\"blonde\",\"blue\",\"light\",\"leaf\"],\"own_house\":328,\"other_ho",
+   "PASS P3_colour_change_one_kid {\"from\":\"brown\",\"to\":\"blonde\",\"old_px_before\":241,\"after\":{\"old\":0,\"neu\":241},\"other_kids_px_changed\":0,\"build_ms\":28.799999999813735}",
+   "PASS P6_phone_buttons_44_free {\"closed\":16,\"open\":22,\"bad\":[]}",
+   "PASS P4_phone_portrait {\"k\":2,\"w\":768,\"cssW\":256,\"opaque\":280180,\"handles\":0,\"changed_after_kid_switch\":4709,\"cap1\":\"ตัวที่ 1 (คุณ) / kid 1 (you) · ผมน้ำตาล · ตาเขียว · ผิวกลาง · บ้านอาทิตย์ / hair brown · eyes green · skin medium · house sun\",\"cap2\":\"ตัวที่ 2 (เพื่อน) / kid 2 (friend) · ผมดำ · ตาน้ำตาล · ผิวเข้ม · บ้านปี",
+   "PASS P5_live_switch {\"to_pilot\":{\"r\":\"pilot\",\"label\":\"ตัววาด / renderer: Pilot\",\"frames\":60,\"c2\":0,\"pilot\":240,\"c2fail\":0},\"back_to_char2\":{\"r\":\"char2\",\"label\":\"ตัววาด / renderer: Char2\",\"frames\":61,\"c2\":244,\"pilot\":0,\"c2fail\":0},\"errors\":[]}",
+   "PASS P6_ipad_buttons_44_free {\"closed\":16,\"open\":22,\"bad\":[]}",
+   "PASS P4_ipad_portrait {\"k\":3,\"w\":1152,\"cssW\":576,\"opaque\":630405,\"handles\":0,\"changed_after_kid_switch\":10637,\"cap1\":\"ตัวที่ 1 (คุณ) / kid 1 (you) · ผมน้ำตาล · ตาเขียว · ผิวกลาง · บ้านอาทิตย์ / hair brown · eyes green · skin medium · house sun\",\"cap2\":\"ตัวที่ 2 (เพื่อน) / kid 2 (friend) · ผมดำ · ตาน้ำตาล · ผิวเข้ม · บ้าน",
+   "PASS P8_bench_all_4_move {\"moved_px\":[134,133,134,71]}",
+   "PASS P8_friends_wander_not_door_gate_exit {\"bad\":[],\"nbad\":0,\"cells\":[1,37,37,27]}",
+   "PASS P8_pad_walks_kid1 {\"dx\":33.6,\"moving_after_release\":false}",
+   "PASS P9_memory_40MiB_no_borrow_left {\"total\":40197672,\"peak_seen\":40197972,\"peak\":41377620,\"handles\":0,\"borrowed\":0,\"evict\":81,\"budget\":41943040}",
+   "PASS P10_measure_button {\"out\":{\"pilot\":60.5,\"char2\":60.4,\"pct\":99.8,\"runs\":{\"pilot\":[60.47728015693244,60.80525883319638,60.53664921464124],\"char2\":[60.93544137020529,60.39830231802563,60.437765436113594]}},\"before\":{\"r\":\"char2\",\"bench\":false},\"after\":{\"r\":\"char2\",\"bench\":false,\"meas\":null},\"label\":\"วัดความลื่น / FPS: 99.",
+   "PASS P7_files_missing_one_by_one_and_all {\"blocked\":34,\"failing\":[]}",
+   "{\"pass\":true,\"fails\":[],\"errors\":0}"
+  ]
+ },
+ "pt-selftest": {
+  "exit": "0",
+  "lines": [
+   "ok   clean []",
+   "ok   hair painted #FFC857 (T11 R1 probe) ['4.5', '4.6']",
+   "ok   copper (fixed) painted #FFC857 ['4.5', '4.6']",
+   "ok   no recolour at all ['4.5']",
+   "ok   hair option leaks into skin ['4.5']",
+   "ok   outline colour changed ['4.5']",
+   "ok   alpha changed ['4.5']",
+   "ok   skin shade off by one ['4.5']",
+   "ok   shade map on disk differs from the D-PT-3 build ['map']"
+  ]
+ }
+}

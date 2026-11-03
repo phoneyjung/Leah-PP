@@ -1,0 +1,710 @@
+{
+ "inject": null,
+ "checks": {
+  "P1_char2_4_kids_every_frame": {
+   "pass": true,
+   "info": {
+    "frames": 121,
+    "draws": 484,
+    "other": 0,
+    "c2fail": 0,
+    "failed": [],
+    "errors": []
+   }
+  },
+  "P1_pilot_4_kids_every_frame": {
+   "pass": true,
+   "info": {
+    "frames": 121,
+    "draws": 484,
+    "other": 0,
+    "c2fail": 0,
+    "failed": [],
+    "errors": []
+   }
+  },
+  "P2_4_looks_4_houses": {
+   "pass": true,
+   "info": [
+    {
+     "kid": 0,
+     "look": [
+      "brown",
+      "green",
+      "medium",
+      "sun"
+     ],
+     "own_house": 251,
+     "other_houses": 0,
+     "own_hair": 241,
+     "own_skin": 175
+    },
+    {
+     "kid": 1,
+     "look": [
+      "black",
+      "brown",
+      "deep",
+      "wing"
+     ],
+     "own_house": 328,
+     "other_houses": 0,
+     "own_hair": 855,
+     "own_skin": 261
+    },
+    {
+     "kid": 2,
+     "look": [
+      "blonde",
+      "blue",
+      "light",
+      "leaf"
+     ],
+     "own_house": 328,
+     "other_houses": 0,
+     "own_hair": 855,
+     "own_skin": 261
+    },
+    {
+     "kid": 3,
+     "look": [
+      "pink",
+      "amber",
+      "tan",
+      "flame"
+     ],
+     "own_house": 328,
+     "other_houses": 0,
+     "own_hair": 855,
+     "own_skin": 261
+    }
+   ]
+  },
+  "P3_colour_change_one_kid": {
+   "pass": true,
+   "info": {
+    "from": "brown",
+    "to": "blonde",
+    "old_px_before": 241,
+    "after": {
+     "old": 0,
+     "neu": 241
+    },
+    "other_kids_px_changed": 0,
+    "build_ms": 28.799999999813735
+   }
+  },
+  "P6_phone_buttons_44_free": {
+   "pass": true,
+   "info": {
+    "closed": 16,
+    "open": 22,
+    "bad": []
+   }
+  },
+  "P4_phone_portrait": {
+   "pass": true,
+   "info": {
+    "k": 2,
+    "w": 768,
+    "cssW": 256,
+    "opaque": 280180,
+    "handles": 0,
+    "changed_after_kid_switch": 4709,
+    "cap1": "ตัวที่ 1 (คุณ) / kid 1 (you) · ผมน้ำตาล · ตาเขียว · ผิวกลาง · บ้านอาทิตย์ / hair brown · eyes green · skin medium · house sun",
+    "cap2": "ตัวที่ 2 (เพื่อน) / kid 2 (friend) · ผมดำ · ตาน้ำตาล · ผิวเข้ม · บ้านปีกฟ้า / hair black · eyes brown · skin deep · house wing"
+   }
+  },
+  "P5_live_switch": {
+   "pass": true,
+   "info": {
+    "to_pilot": {
+     "r": "pilot",
+     "label": "ตัววาด / renderer: Pilot",
+     "frames": 60,
+     "c2": 0,
+     "pilot": 240,
+     "c2fail": 0
+    },
+    "back_to_char2": {
+     "r": "char2",
+     "label": "ตัววาด / renderer: Char2",
+     "frames": 61,
+     "c2": 244,
+     "pilot": 0,
+     "c2fail": 0
+    },
+    "errors": []
+   }
+  },
+  "P6_ipad_buttons_44_free": {
+   "pass": true,
+   "info": {
+    "closed": 16,
+    "open": 22,
+    "bad": []
+   }
+  },
+  "P4_ipad_portrait": {
+   "pass": true,
+   "info": {
+    "k": 3,
+    "w": 1152,
+    "cssW": 576,
+    "opaque": 630405,
+    "handles": 0,
+    "changed_after_kid_switch": 10637,
+    "cap1": "ตัวที่ 1 (คุณ) / kid 1 (you) · ผมน้ำตาล · ตาเขียว · ผิวกลาง · บ้านอาทิตย์ / hair brown · eyes green · skin medium · house sun",
+    "cap2": "ตัวที่ 2 (เพื่อน) / kid 2 (friend) · ผมดำ · ตาน้ำตาล · ผิวเข้ม · บ้านปีกฟ้า / hair black · eyes brown · skin deep · house wing"
+   }
+  },
+  "P8_bench_all_4_move": {
+   "pass": true,
+   "info": {
+    "moved_px": [
+     134,
+     133,
+     134,
+     71
+    ]
+   }
+  },
+  "P8_friends_wander_not_door_gate_exit": {
+   "pass": true,
+   "info": {
+    "bad": [],
+    "nbad": 0,
+    "cells": [
+     1,
+     37,
+     37,
+     27
+    ]
+   }
+  },
+  "P8_pad_walks_kid1": {
+   "pass": true,
+   "info": {
+    "dx": 33.6,
+    "moving_after_release": false
+   }
+  },
+  "P9_memory_40MiB_no_borrow_left": {
+   "pass": true,
+   "info": {
+    "total": 40197672,
+    "peak_seen": 40197972,
+    "peak": 41377620,
+    "handles": 0,
+    "borrowed": 0,
+    "evict": 81,
+    "budget": 41943040
+   }
+  },
+  "P10_measure_button": {
+   "pass": true,
+   "info": {
+    "out": {
+     "pilot": 60.5,
+     "char2": 60.4,
+     "pct": 99.8,
+     "runs": {
+      "pilot": [
+       60.47728015693244,
+       60.80525883319638,
+       60.53664921464124
+      ],
+      "char2": [
+       60.93544137020529,
+       60.39830231802563,
+       60.437765436113594
+      ]
+     }
+    },
+    "before": {
+     "r": "char2",
+     "bench": false
+    },
+    "after": {
+     "r": "char2",
+     "bench": false,
+     "meas": null
+    },
+    "label": "วัดความลื่น / FPS: 99.8 %",
+    "msg": "Pilot 60.5 · Char2 60.4 fps = 99.8 % ผ่าน (≥ 90 %)"
+   }
+  },
+  "P7_files_missing_one_by_one_and_all": {
+   "pass": true,
+   "info": {
+    "blocked": 34,
+    "failing": []
+   }
+  }
+ },
+ "fails": [],
+ "errors": [],
+ "pilot_lineup_house_px": [
+  {
+   "kid": 0,
+   "own_house": 251
+  },
+  {
+   "kid": 1,
+   "own_house": 328
+  },
+  {
+   "kid": 2,
+   "own_house": 328
+  },
+  {
+   "kid": 3,
+   "own_house": 328
+  }
+ ],
+ "colour_change_ms_cpu1": 28.799999999813735,
+ "files_loaded": [
+  "c2-held-lantern_L0-S-trial-light.png",
+  "c2-held-lantern_L0-S-trial.json",
+  "c2-held-lantern_L0-S-trial.png",
+  "c2-pack.json",
+  "c2-pilot-anchors.json",
+  "c2-pilot-hold-anchors.json",
+  "c2-pilot-kid4-idleanim-mask.png",
+  "c2-pilot-kid4-idleanim.png",
+  "c2-pilot-kid4-pt-mask.json",
+  "c2-pilot-kid4-pt-mask.png",
+  "c2-pilot-kid4-pt-shademap.json",
+  "c2-pilot-kid4-pt.png",
+  "c2-pilot-kid4-walk-mask.png",
+  "c2-pilot-kid4-walk.png",
+  "c2-pilot-kid4-walkhold-mask.png",
+  "c2-pilot-kid4-walkhold.png",
+  "char2.js",
+  "g24-cave-mouth.json",
+  "g24-cave-mouth.png",
+  "g24-gate.png",
+  "g24-hut-door.png",
+  "g24-hut.json",
+  "g24-hut.png",
+  "g24-lamp.png",
+  "g24-props.json",
+  "g24-props.png",
+  "g24-slime.json",
+  "g24-slime.png",
+  "g24-tiles-cliff.png",
+  "g24-tiles-path.png",
+  "g24-tiles.json",
+  "g24-tree-a.png",
+  "g24-tree-b.png"
+ ],
+ "p7": [
+  {
+   "file": "c2-held-lantern_L0-S-trial-light.png",
+   "pass": true,
+   "c2": true,
+   "failed": [
+    "lantern-light"
+   ],
+   "drawn_by": "char2",
+   "ptOk": true,
+   "colours": 7426,
+   "notBg": 0.89,
+   "errors": []
+  },
+  {
+   "file": "c2-held-lantern_L0-S-trial.json",
+   "pass": true,
+   "c2": true,
+   "failed": [],
+   "drawn_by": "char2",
+   "ptOk": true,
+   "colours": 8506,
+   "notBg": 0.89,
+   "errors": []
+  },
+  {
+   "file": "c2-held-lantern_L0-S-trial.png",
+   "pass": true,
+   "c2": true,
+   "failed": [
+    "lantern"
+   ],
+   "drawn_by": "char2",
+   "ptOk": true,
+   "colours": 7481,
+   "notBg": 0.89,
+   "errors": []
+  },
+  {
+   "file": "c2-pack.json",
+   "pass": true,
+   "c2": false,
+   "failed": [
+    "pack"
+   ],
+   "drawn_by": "pilot",
+   "ptOk": false,
+   "colours": 10525,
+   "notBg": 0.906,
+   "errors": []
+  },
+  {
+   "file": "c2-pilot-anchors.json",
+   "pass": true,
+   "c2": true,
+   "failed": [],
+   "drawn_by": "char2",
+   "ptOk": true,
+   "colours": 8529,
+   "notBg": 0.89,
+   "errors": []
+  },
+  {
+   "file": "c2-pilot-hold-anchors.json",
+   "pass": true,
+   "c2": true,
+   "failed": [
+    "hold"
+   ],
+   "drawn_by": "char2",
+   "ptOk": true,
+   "colours": 7447,
+   "notBg": 0.89,
+   "errors": []
+  },
+  {
+   "file": "c2-pilot-kid4-idleanim-mask.png",
+   "pass": true,
+   "c2": true,
+   "failed": [
+    "idle-mask"
+   ],
+   "drawn_by": "char2",
+   "ptOk": true,
+   "colours": 8487,
+   "notBg": 0.89,
+   "errors": []
+  },
+  {
+   "file": "c2-pilot-kid4-idleanim.png",
+   "pass": true,
+   "c2": true,
+   "failed": [
+    "idle"
+   ],
+   "drawn_by": "char2",
+   "ptOk": true,
+   "colours": 7491,
+   "notBg": 0.89,
+   "errors": []
+  },
+  {
+   "file": "c2-pilot-kid4-pt-mask.json",
+   "pass": true,
+   "c2": true,
+   "failed": [
+    "portrait-mask"
+   ],
+   "drawn_by": "char2",
+   "ptOk": true,
+   "colours": 8525,
+   "notBg": 0.89,
+   "errors": []
+  },
+  {
+   "file": "c2-pilot-kid4-pt-mask.png",
+   "pass": true,
+   "c2": true,
+   "failed": [
+    "portrait-mask"
+   ],
+   "drawn_by": "char2",
+   "ptOk": true,
+   "colours": 8551,
+   "notBg": 0.89,
+   "errors": []
+  },
+  {
+   "file": "c2-pilot-kid4-pt-shademap.json",
+   "pass": true,
+   "c2": true,
+   "failed": [
+    "portrait-mask"
+   ],
+   "drawn_by": "char2",
+   "ptOk": true,
+   "colours": 8497,
+   "notBg": 0.89,
+   "errors": []
+  },
+  {
+   "file": "c2-pilot-kid4-pt.png",
+   "pass": true,
+   "c2": true,
+   "failed": [
+    "portrait"
+   ],
+   "drawn_by": "char2",
+   "ptOk": false,
+   "colours": 8588,
+   "notBg": 0.806,
+   "errors": []
+  },
+  {
+   "file": "c2-pilot-kid4-walk-mask.png",
+   "pass": true,
+   "c2": true,
+   "failed": [
+    "walk-mask"
+   ],
+   "drawn_by": "char2",
+   "ptOk": true,
+   "colours": 8476,
+   "notBg": 0.89,
+   "errors": []
+  },
+  {
+   "file": "c2-pilot-kid4-walk.png",
+   "pass": true,
+   "c2": true,
+   "failed": [
+    "walk"
+   ],
+   "drawn_by": "char2",
+   "ptOk": true,
+   "colours": 8437,
+   "notBg": 0.89,
+   "errors": []
+  },
+  {
+   "file": "c2-pilot-kid4-walkhold-mask.png",
+   "pass": true,
+   "c2": true,
+   "failed": [
+    "walkhold-mask"
+   ],
+   "drawn_by": "char2",
+   "ptOk": true,
+   "colours": 8551,
+   "notBg": 0.89,
+   "errors": []
+  },
+  {
+   "file": "c2-pilot-kid4-walkhold.png",
+   "pass": true,
+   "c2": true,
+   "failed": [
+    "walkhold"
+   ],
+   "drawn_by": "char2",
+   "ptOk": true,
+   "colours": 7463,
+   "notBg": 0.89,
+   "errors": []
+  },
+  {
+   "file": "char2.js",
+   "pass": true,
+   "c2": false,
+   "failed": [
+    "char2.js"
+   ],
+   "drawn_by": "pilot",
+   "ptOk": false,
+   "colours": 10510,
+   "notBg": 0.906,
+   "errors": []
+  },
+  {
+   "file": "g24-cave-mouth.json",
+   "pass": true,
+   "c2": true,
+   "failed": [],
+   "drawn_by": "char2",
+   "ptOk": true,
+   "colours": 8547,
+   "notBg": 0.89,
+   "errors": []
+  },
+  {
+   "file": "g24-cave-mouth.png",
+   "pass": true,
+   "c2": true,
+   "failed": [],
+   "drawn_by": "char2",
+   "ptOk": true,
+   "colours": 8152,
+   "notBg": 0.89,
+   "errors": []
+  },
+  {
+   "file": "g24-gate.png",
+   "pass": true,
+   "c2": true,
+   "failed": [],
+   "drawn_by": "char2",
+   "ptOk": true,
+   "colours": 8190,
+   "notBg": 0.89,
+   "errors": []
+  },
+  {
+   "file": "g24-hut-door.png",
+   "pass": true,
+   "c2": true,
+   "failed": [],
+   "drawn_by": "char2",
+   "ptOk": true,
+   "colours": 8539,
+   "notBg": 0.89,
+   "errors": []
+  },
+  {
+   "file": "g24-hut.json",
+   "pass": true,
+   "c2": true,
+   "failed": [],
+   "drawn_by": "char2",
+   "ptOk": true,
+   "colours": 8478,
+   "notBg": 0.89,
+   "errors": []
+  },
+  {
+   "file": "g24-hut.png",
+   "pass": true,
+   "c2": true,
+   "failed": [],
+   "drawn_by": "char2",
+   "ptOk": true,
+   "colours": 8450,
+   "notBg": 0.89,
+   "errors": []
+  },
+  {
+   "file": "g24-lamp.png",
+   "pass": true,
+   "c2": true,
+   "failed": [],
+   "drawn_by": "char2",
+   "ptOk": true,
+   "colours": 8103,
+   "notBg": 0.89,
+   "errors": []
+  },
+  {
+   "file": "g24-props.json",
+   "pass": true,
+   "c2": true,
+   "failed": [],
+   "drawn_by": "char2",
+   "ptOk": true,
+   "colours": 7712,
+   "notBg": 0.89,
+   "errors": []
+  },
+  {
+   "file": "g24-props.png",
+   "pass": true,
+   "c2": true,
+   "failed": [],
+   "drawn_by": "char2",
+   "ptOk": true,
+   "colours": 7648,
+   "notBg": 0.89,
+   "errors": []
+  },
+  {
+   "file": "g24-slime.json",
+   "pass": true,
+   "c2": true,
+   "failed": [],
+   "drawn_by": "char2",
+   "ptOk": true,
+   "colours": 8516,
+   "notBg": 0.89,
+   "errors": []
+  },
+  {
+   "file": "g24-slime.png",
+   "pass": true,
+   "c2": true,
+   "failed": [],
+   "drawn_by": "char2",
+   "ptOk": true,
+   "colours": 8516,
+   "notBg": 0.89,
+   "errors": []
+  },
+  {
+   "file": "g24-tiles-cliff.png",
+   "pass": true,
+   "c2": true,
+   "failed": [],
+   "drawn_by": "char2",
+   "ptOk": true,
+   "colours": 8190,
+   "notBg": 0.89,
+   "errors": []
+  },
+  {
+   "file": "g24-tiles-path.png",
+   "pass": true,
+   "c2": true,
+   "failed": [],
+   "drawn_by": "char2",
+   "ptOk": true,
+   "colours": 6596,
+   "notBg": 0.89,
+   "errors": []
+  },
+  {
+   "file": "g24-tiles.json",
+   "pass": true,
+   "c2": true,
+   "failed": [],
+   "drawn_by": "char2",
+   "ptOk": true,
+   "colours": 6217,
+   "notBg": 0.89,
+   "errors": []
+  },
+  {
+   "file": "g24-tree-a.png",
+   "pass": true,
+   "c2": true,
+   "failed": [],
+   "drawn_by": "char2",
+   "ptOk": true,
+   "colours": 8577,
+   "notBg": 0.89,
+   "errors": []
+  },
+  {
+   "file": "g24-tree-b.png",
+   "pass": true,
+   "c2": true,
+   "failed": [],
+   "drawn_by": "char2",
+   "ptOk": true,
+   "colours": 8533,
+   "notBg": 0.89,
+   "errors": []
+  },
+  {
+   "file": "*ALL*",
+   "pass": true,
+   "c2": false,
+   "failed": [
+    "char2.js"
+   ],
+   "drawn_by": "pilot",
+   "ptOk": false,
+   "colours": 4634,
+   "notBg": 0.868,
+   "errors": []
+  }
+ ],
+ "pass": true
+}
