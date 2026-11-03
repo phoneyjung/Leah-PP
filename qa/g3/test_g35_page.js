@@ -12,7 +12,7 @@
 'use strict';
 const { chromium } = require('playwright'); const fs = require('fs'), path = require('path');
 const PORT = process.env.PORT || 8792, BASE = 'http://127.0.0.1:' + PORT + '/pilot-g3-char2.html', ROOT = path.join(__dirname, '..', '..');
-const IMG = path.join(__dirname, 'img'), XIMG = process.env.G35_XIMG || require('os').tmpdir(); fs.mkdirSync(IMG, { recursive: true });   // 4 key screenshots in the repo, the rest in a temp folder (repo size)
+const XIMG = process.env.G35_XIMG || require('os').tmpdir(), IMG = process.env.INJECT ? XIMG : path.join(__dirname, 'img'); fs.mkdirSync(IMG, { recursive: true });   // 4 key screenshots in the repo, the rest in a temp folder (repo size) · an INJECT run never writes into the repo
 const pack = JSON.parse(fs.readFileSync(path.join(ROOT, 'c2-pack.json'), 'utf8'));
 const hex = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
 const RAMP = {}; for (const g of ['hair', 'iris', 'skin', 'house']) { RAMP[g] = {}; for (const [n, cols] of pack.palette[g]) RAMP[g][n] = cols.map(hex); }
