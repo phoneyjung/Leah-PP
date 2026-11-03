@@ -91,7 +91,7 @@
      "neu": 241
     },
     "other_kids_px_changed": 0,
-    "build_ms": 28.799999999813735
+    "build_ms": 23
    }
   },
   "P6_phone_buttons_44_free": {
@@ -129,8 +129,8 @@
     "back_to_char2": {
      "r": "char2",
      "label": "ตัววาด / renderer: Char2",
-     "frames": 61,
-     "c2": 244,
+     "frames": 60,
+     "c2": 240,
      "pilot": 0,
      "c2fail": 0
     },
@@ -163,8 +163,8 @@
    "info": {
     "moved_px": [
      134,
-     133,
-     134,
+     131,
+     132,
      71
     ]
    }
@@ -185,7 +185,7 @@
   "P8_pad_walks_kid1": {
    "pass": true,
    "info": {
-    "dx": 33.6,
+    "dx": 34.4,
     "moving_after_release": false
    }
   },
@@ -207,17 +207,17 @@
     "out": {
      "pilot": 60.5,
      "char2": 60.4,
-     "pct": 99.8,
+     "pct": 99.9,
      "runs": {
       "pilot": [
-       60.47728015693244,
-       60.80525883319638,
-       60.53664921464124
+       60.576293385730565,
+       60.516846581613656,
+       60.47728015690942
       ],
       "char2": [
-       60.93544137020529,
-       60.39830231802563,
-       60.437765436113594
+       60.29004399543065,
+       60.52674627841842,
+       60.43776543612509
       ]
      }
     },
@@ -230,14 +230,43 @@
      "bench": false,
      "meas": null
     },
-    "label": "วัดความลื่น / FPS: 99.8 %",
-    "msg": "Pilot 60.5 · Char2 60.4 fps = 99.8 % ผ่าน (≥ 90 %)"
+    "label": "วัดความลื่น / FPS: 99.9 %",
+    "msg": "Pilot 60.5 · Char2 60.4 fps = 99.9 % ผ่าน (≥ 90 %)"
+   }
+  },
+  "P11_phone_portrait_never_covers_a_button": {
+   "pass": true,
+   "info": {
+    "states": 26,
+    "bad_states": 0,
+    "bad": [],
+    "k": [
+     2
+    ],
+    "errors": []
+   }
+  },
+  "P11_ipad_portrait_never_covers_a_button": {
+   "pass": true,
+   "info": {
+    "states": 26,
+    "bad_states": 0,
+    "bad": [],
+    "k": [
+     3
+    ],
+    "errors": []
    }
   },
   "P7_files_missing_one_by_one_and_all": {
    "pass": true,
    "info": {
     "blocked": 34,
+    "lowest": {
+     "sceneColours": 684,
+     "sceneNotBg": 0.628,
+     "kidPx": 871
+    },
     "failing": []
    }
   }
@@ -262,7 +291,7 @@
    "own_house": 328
   }
  ],
- "colour_change_ms_cpu1": 28.799999999813735,
+ "colour_change_ms_cpu1": 23,
  "files_loaded": [
   "c2-held-lantern_L0-S-trial-light.png",
   "c2-held-lantern_L0-S-trial.json",
@@ -308,8 +337,22 @@
    ],
    "drawn_by": "char2",
    "ptOk": true,
-   "colours": 7426,
-   "notBg": 0.89,
+   "art": {
+    "W": 845,
+    "H": 391,
+    "sceneColours": 1301,
+    "sceneNotBg": 0.849,
+    "kidPx": [
+     4901,
+     2732,
+     3093,
+     4551
+    ]
+   },
+   "screenshot": {
+    "colours": 7433,
+    "notBg": 0.89
+   },
    "errors": []
   },
   {
@@ -319,8 +362,22 @@
    "failed": [],
    "drawn_by": "char2",
    "ptOk": true,
-   "colours": 8506,
-   "notBg": 0.89,
+   "art": {
+    "W": 845,
+    "H": 391,
+    "sceneColours": 1310,
+    "sceneNotBg": 0.849,
+    "kidPx": [
+     4858,
+     2550,
+     3089,
+     4539
+    ]
+   },
+   "screenshot": {
+    "colours": 8497,
+    "notBg": 0.89
+   },
    "errors": []
   },
   {
@@ -332,8 +389,22 @@
    ],
    "drawn_by": "char2",
    "ptOk": true,
-   "colours": 7481,
-   "notBg": 0.89,
+   "art": {
+    "W": 845,
+    "H": 391,
+    "sceneColours": 1309,
+    "sceneNotBg": 0.849,
+    "kidPx": [
+     4834,
+     2506,
+     3092,
+     4518
+    ]
+   },
+   "screenshot": {
+    "colours": 7451,
+    "notBg": 0.89
+   },
    "errors": []
   },
   {
@@ -345,8 +416,22 @@
    ],
    "drawn_by": "pilot",
    "ptOk": false,
-   "colours": 10525,
-   "notBg": 0.906,
+   "art": {
+    "W": 845,
+    "H": 391,
+    "sceneColours": 1304,
+    "sceneNotBg": 0.849,
+    "kidPx": [
+     4863,
+     2574,
+     3091,
+     4543
+    ]
+   },
+   "screenshot": {
+    "colours": 10540,
+    "notBg": 0.906
+   },
    "errors": []
   },
   {
@@ -356,8 +441,22 @@
    "failed": [],
    "drawn_by": "char2",
    "ptOk": true,
-   "colours": 8529,
-   "notBg": 0.89,
+   "art": {
+    "W": 845,
+    "H": 391,
+    "sceneColours": 1309,
+    "sceneNotBg": 0.849,
+    "kidPx": [
+     4873,
+     2609,
+     3091,
+     4543
+    ]
+   },
+   "screenshot": {
+    "colours": 8574,
+    "notBg": 0.89
+   },
    "errors": []
   },
   {
@@ -369,8 +468,22 @@
    ],
    "drawn_by": "char2",
    "ptOk": true,
-   "colours": 7447,
-   "notBg": 0.89,
+   "art": {
+    "W": 845,
+    "H": 391,
+    "sceneColours": 1304,
+    "sceneNotBg": 0.849,
+    "kidPx": [
+     4834,
+     2506,
+     3091,
+     4514
+    ]
+   },
+   "screenshot": {
+    "colours": 7455,
+    "notBg": 0.89
+   },
    "errors": []
   },
   {
@@ -382,8 +495,22 @@
    ],
    "drawn_by": "char2",
    "ptOk": true,
-   "colours": 8487,
-   "notBg": 0.89,
+   "art": {
+    "W": 845,
+    "H": 391,
+    "sceneColours": 1301,
+    "sceneNotBg": 0.849,
+    "kidPx": [
+     4901,
+     2732,
+     3093,
+     4551
+    ]
+   },
+   "screenshot": {
+    "colours": 8437,
+    "notBg": 0.89
+   },
    "errors": []
   },
   {
@@ -395,8 +522,22 @@
    ],
    "drawn_by": "char2",
    "ptOk": true,
-   "colours": 7491,
-   "notBg": 0.89,
+   "art": {
+    "W": 845,
+    "H": 391,
+    "sceneColours": 1309,
+    "sceneNotBg": 0.849,
+    "kidPx": [
+     4833,
+     2547,
+     3100,
+     4604
+    ]
+   },
+   "screenshot": {
+    "colours": 7412,
+    "notBg": 0.89
+   },
    "errors": []
   },
   {
@@ -408,8 +549,22 @@
    ],
    "drawn_by": "char2",
    "ptOk": true,
-   "colours": 8525,
-   "notBg": 0.89,
+   "art": {
+    "W": 845,
+    "H": 391,
+    "sceneColours": 1303,
+    "sceneNotBg": 0.849,
+    "kidPx": [
+     4886,
+     2679,
+     3092,
+     4547
+    ]
+   },
+   "screenshot": {
+    "colours": 8562,
+    "notBg": 0.89
+   },
    "errors": []
   },
   {
@@ -421,8 +576,22 @@
    ],
    "drawn_by": "char2",
    "ptOk": true,
-   "colours": 8551,
-   "notBg": 0.89,
+   "art": {
+    "W": 845,
+    "H": 391,
+    "sceneColours": 1310,
+    "sceneNotBg": 0.849,
+    "kidPx": [
+     4863,
+     2574,
+     3089,
+     4539
+    ]
+   },
+   "screenshot": {
+    "colours": 8548,
+    "notBg": 0.89
+   },
    "errors": []
   },
   {
@@ -434,8 +603,22 @@
    ],
    "drawn_by": "char2",
    "ptOk": true,
-   "colours": 8497,
-   "notBg": 0.89,
+   "art": {
+    "W": 845,
+    "H": 391,
+    "sceneColours": 1309,
+    "sceneNotBg": 0.849,
+    "kidPx": [
+     4873,
+     2609,
+     3091,
+     4543
+    ]
+   },
+   "screenshot": {
+    "colours": 8572,
+    "notBg": 0.89
+   },
    "errors": []
   },
   {
@@ -447,8 +630,22 @@
    ],
    "drawn_by": "char2",
    "ptOk": false,
-   "colours": 8588,
-   "notBg": 0.806,
+   "art": {
+    "W": 845,
+    "H": 391,
+    "sceneColours": 1310,
+    "sceneNotBg": 0.849,
+    "kidPx": [
+     4863,
+     2574,
+     3089,
+     4539
+    ]
+   },
+   "screenshot": {
+    "colours": 8642,
+    "notBg": 0.806
+   },
    "errors": []
   },
   {
@@ -460,8 +657,22 @@
    ],
    "drawn_by": "char2",
    "ptOk": true,
-   "colours": 8476,
-   "notBg": 0.89,
+   "art": {
+    "W": 845,
+    "H": 391,
+    "sceneColours": 1304,
+    "sceneNotBg": 0.849,
+    "kidPx": [
+     4863,
+     2574,
+     3091,
+     4543
+    ]
+   },
+   "screenshot": {
+    "colours": 8496,
+    "notBg": 0.89
+   },
    "errors": []
   },
   {
@@ -473,8 +684,22 @@
    ],
    "drawn_by": "char2",
    "ptOk": true,
-   "colours": 8437,
-   "notBg": 0.89,
+   "art": {
+    "W": 845,
+    "H": 391,
+    "sceneColours": 1300,
+    "sceneNotBg": 0.849,
+    "kidPx": [
+     4863,
+     2574,
+     3091,
+     4543
+    ]
+   },
+   "screenshot": {
+    "colours": 8527,
+    "notBg": 0.89
+   },
    "errors": []
   },
   {
@@ -486,8 +711,22 @@
    ],
    "drawn_by": "char2",
    "ptOk": true,
-   "colours": 8551,
-   "notBg": 0.89,
+   "art": {
+    "W": 845,
+    "H": 391,
+    "sceneColours": 1304,
+    "sceneNotBg": 0.849,
+    "kidPx": [
+     4873,
+     2609,
+     3091,
+     4543
+    ]
+   },
+   "screenshot": {
+    "colours": 8603,
+    "notBg": 0.89
+   },
    "errors": []
   },
   {
@@ -499,8 +738,22 @@
    ],
    "drawn_by": "char2",
    "ptOk": true,
-   "colours": 7463,
-   "notBg": 0.89,
+   "art": {
+    "W": 845,
+    "H": 391,
+    "sceneColours": 1310,
+    "sceneNotBg": 0.849,
+    "kidPx": [
+     4829,
+     2471,
+     3091,
+     4514
+    ]
+   },
+   "screenshot": {
+    "colours": 7487,
+    "notBg": 0.89
+   },
    "errors": []
   },
   {
@@ -512,8 +765,22 @@
    ],
    "drawn_by": "pilot",
    "ptOk": false,
-   "colours": 10510,
-   "notBg": 0.906,
+   "art": {
+    "W": 845,
+    "H": 391,
+    "sceneColours": 1310,
+    "sceneNotBg": 0.849,
+    "kidPx": [
+     4858,
+     2550,
+     3127,
+     4572
+    ]
+   },
+   "screenshot": {
+    "colours": 10509,
+    "notBg": 0.906
+   },
    "errors": []
   },
   {
@@ -523,8 +790,22 @@
    "failed": [],
    "drawn_by": "char2",
    "ptOk": true,
-   "colours": 8547,
-   "notBg": 0.89,
+   "art": {
+    "W": 845,
+    "H": 391,
+    "sceneColours": 1304,
+    "sceneNotBg": 0.849,
+    "kidPx": [
+     4873,
+     2609,
+     3091,
+     4543
+    ]
+   },
+   "screenshot": {
+    "colours": 8540,
+    "notBg": 0.89
+   },
    "errors": []
   },
   {
@@ -534,8 +815,22 @@
    "failed": [],
    "drawn_by": "char2",
    "ptOk": true,
-   "colours": 8152,
-   "notBg": 0.89,
+   "art": {
+    "W": 845,
+    "H": 391,
+    "sceneColours": 1197,
+    "sceneNotBg": 0.849,
+    "kidPx": [
+     4901,
+     2732,
+     3092,
+     4547
+    ]
+   },
+   "screenshot": {
+    "colours": 8084,
+    "notBg": 0.89
+   },
    "errors": []
   },
   {
@@ -545,8 +840,22 @@
    "failed": [],
    "drawn_by": "char2",
    "ptOk": true,
-   "colours": 8190,
-   "notBg": 0.89,
+   "art": {
+    "W": 845,
+    "H": 391,
+    "sceneColours": 1268,
+    "sceneNotBg": 0.849,
+    "kidPx": [
+     4886,
+     2659,
+     3091,
+     4543
+    ]
+   },
+   "screenshot": {
+    "colours": 8211,
+    "notBg": 0.89
+   },
    "errors": []
   },
   {
@@ -556,8 +865,22 @@
    "failed": [],
    "drawn_by": "char2",
    "ptOk": true,
-   "colours": 8539,
-   "notBg": 0.89,
+   "art": {
+    "W": 845,
+    "H": 391,
+    "sceneColours": 1305,
+    "sceneNotBg": 0.849,
+    "kidPx": [
+     4863,
+     2574,
+     3091,
+     4543
+    ]
+   },
+   "screenshot": {
+    "colours": 8505,
+    "notBg": 0.89
+   },
    "errors": []
   },
   {
@@ -567,8 +890,22 @@
    "failed": [],
    "drawn_by": "char2",
    "ptOk": true,
-   "colours": 8478,
-   "notBg": 0.89,
+   "art": {
+    "W": 845,
+    "H": 391,
+    "sceneColours": 1304,
+    "sceneNotBg": 0.849,
+    "kidPx": [
+     4863,
+     2574,
+     3091,
+     4543
+    ]
+   },
+   "screenshot": {
+    "colours": 8521,
+    "notBg": 0.89
+   },
    "errors": []
   },
   {
@@ -578,8 +915,22 @@
    "failed": [],
    "drawn_by": "char2",
    "ptOk": true,
-   "colours": 8450,
-   "notBg": 0.89,
+   "art": {
+    "W": 845,
+    "H": 391,
+    "sceneColours": 1225,
+    "sceneNotBg": 0.855,
+    "kidPx": [
+     4863,
+     2574,
+     3091,
+     4543
+    ]
+   },
+   "screenshot": {
+    "colours": 8507,
+    "notBg": 0.89
+   },
    "errors": []
   },
   {
@@ -589,8 +940,22 @@
    "failed": [],
    "drawn_by": "char2",
    "ptOk": true,
-   "colours": 8103,
-   "notBg": 0.89,
+   "art": {
+    "W": 845,
+    "H": 391,
+    "sceneColours": 1159,
+    "sceneNotBg": 0.846,
+    "kidPx": [
+     4873,
+     2609,
+     3091,
+     4543
+    ]
+   },
+   "screenshot": {
+    "colours": 8073,
+    "notBg": 0.89
+   },
    "errors": []
   },
   {
@@ -600,8 +965,22 @@
    "failed": [],
    "drawn_by": "char2",
    "ptOk": true,
-   "colours": 7712,
-   "notBg": 0.89,
+   "art": {
+    "W": 845,
+    "H": 391,
+    "sceneColours": 1164,
+    "sceneNotBg": 0.852,
+    "kidPx": [
+     4901,
+     2732,
+     3092,
+     4547
+    ]
+   },
+   "screenshot": {
+    "colours": 7634,
+    "notBg": 0.89
+   },
    "errors": []
   },
   {
@@ -611,8 +990,22 @@
    "failed": [],
    "drawn_by": "char2",
    "ptOk": true,
-   "colours": 7648,
-   "notBg": 0.89,
+   "art": {
+    "W": 845,
+    "H": 391,
+    "sceneColours": 1163,
+    "sceneNotBg": 0.852,
+    "kidPx": [
+     4863,
+     2574,
+     3091,
+     4543
+    ]
+   },
+   "screenshot": {
+    "colours": 7684,
+    "notBg": 0.89
+   },
    "errors": []
   },
   {
@@ -622,8 +1015,22 @@
    "failed": [],
    "drawn_by": "char2",
    "ptOk": true,
-   "colours": 8516,
-   "notBg": 0.89,
+   "art": {
+    "W": 845,
+    "H": 391,
+    "sceneColours": 1300,
+    "sceneNotBg": 0.849,
+    "kidPx": [
+     4863,
+     2574,
+     3091,
+     4543
+    ]
+   },
+   "screenshot": {
+    "colours": 8498,
+    "notBg": 0.89
+   },
    "errors": []
   },
   {
@@ -633,8 +1040,22 @@
    "failed": [],
    "drawn_by": "char2",
    "ptOk": true,
-   "colours": 8516,
-   "notBg": 0.89,
+   "art": {
+    "W": 845,
+    "H": 391,
+    "sceneColours": 1378,
+    "sceneNotBg": 0.849,
+    "kidPx": [
+     4886,
+     2659,
+     3091,
+     4543
+    ]
+   },
+   "screenshot": {
+    "colours": 8478,
+    "notBg": 0.89
+   },
    "errors": []
   },
   {
@@ -644,8 +1065,22 @@
    "failed": [],
    "drawn_by": "char2",
    "ptOk": true,
-   "colours": 8190,
-   "notBg": 0.89,
+   "art": {
+    "W": 845,
+    "H": 391,
+    "sceneColours": 1217,
+    "sceneNotBg": 0.852,
+    "kidPx": [
+     4886,
+     2679,
+     3092,
+     4547
+    ]
+   },
+   "screenshot": {
+    "colours": 8122,
+    "notBg": 0.89
+   },
    "errors": []
   },
   {
@@ -655,8 +1090,22 @@
    "failed": [],
    "drawn_by": "char2",
    "ptOk": true,
-   "colours": 6596,
-   "notBg": 0.89,
+   "art": {
+    "W": 845,
+    "H": 391,
+    "sceneColours": 981,
+    "sceneNotBg": 0.634,
+    "kidPx": [
+     4863,
+     2574,
+     3091,
+     4543
+    ]
+   },
+   "screenshot": {
+    "colours": 6628,
+    "notBg": 0.89
+   },
    "errors": []
   },
   {
@@ -666,8 +1115,22 @@
    "failed": [],
    "drawn_by": "char2",
    "ptOk": true,
-   "colours": 6217,
-   "notBg": 0.89,
+   "art": {
+    "W": 845,
+    "H": 391,
+    "sceneColours": 890,
+    "sceneNotBg": 0.628,
+    "kidPx": [
+     4873,
+     2609,
+     3091,
+     4543
+    ]
+   },
+   "screenshot": {
+    "colours": 6234,
+    "notBg": 0.89
+   },
    "errors": []
   },
   {
@@ -677,8 +1140,22 @@
    "failed": [],
    "drawn_by": "char2",
    "ptOk": true,
-   "colours": 8577,
-   "notBg": 0.89,
+   "art": {
+    "W": 845,
+    "H": 391,
+    "sceneColours": 1683,
+    "sceneNotBg": 0.847,
+    "kidPx": [
+     4863,
+     2574,
+     3091,
+     4543
+    ]
+   },
+   "screenshot": {
+    "colours": 8552,
+    "notBg": 0.89
+   },
    "errors": []
   },
   {
@@ -688,8 +1165,22 @@
    "failed": [],
    "drawn_by": "char2",
    "ptOk": true,
-   "colours": 8533,
-   "notBg": 0.89,
+   "art": {
+    "W": 845,
+    "H": 391,
+    "sceneColours": 1721,
+    "sceneNotBg": 0.848,
+    "kidPx": [
+     4873,
+     2609,
+     3091,
+     4543
+    ]
+   },
+   "screenshot": {
+    "colours": 8557,
+    "notBg": 0.89
+   },
    "errors": []
   },
   {
@@ -701,8 +1192,22 @@
    ],
    "drawn_by": "pilot",
    "ptOk": false,
-   "colours": 4634,
-   "notBg": 0.868,
+   "art": {
+    "W": 845,
+    "H": 391,
+    "sceneColours": 684,
+    "sceneNotBg": 0.639,
+    "kidPx": [
+     1761,
+     873,
+     871,
+     1070
+    ]
+   },
+   "screenshot": {
+    "colours": 4635,
+    "notBg": 0.868
+   },
    "errors": []
   }
  ],

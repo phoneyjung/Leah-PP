@@ -2,10 +2,13 @@
 // P1 both renderers draw the 4 kids every frame (counters) · P2 4 looks x 4 houses on screen (exact palette colours in each kid's cell, other houses 0)
 // P3 a colour change touches only that kid (other kids 0 px) · P4 portrait (Char2.portrait, whole-number scale, borrow returned, follows the kid)
 // P5 one switch: live toggle Char2 <-> Pilot · P6 buttons >= 44 CSS px and not covered (844x390 @3, 1180x820 @2; colour panel + portrait open) + screenshots
-// P7 every file the page loads blocked one at a time + all: no page error, picture still drawn (>= 12 colours, >= 2 % not background, A3 rule)
+// P7 every file the page loads blocked one at a time + all: no page error, and on the ART BUFFER (no DOM UI, no GM label · T29 N2): the scene without kids
+//    has >= 12 colours and >= 2 % not its main colour, and every kid adds >= 200 px in its own cell (scene drawn with / without the kids, sim paused)
 // P8 movement: bench = all 4 move · friends wander 60 s sim and never step on the door / cave mouth / gate cells · pad still walks kid 1
 // P9 memory: Char2.stats().total <= 40 MiB and no borrow left after all of the above · P10 the GM 'measure FPS' button (short phases) runs and puts everything back.
-// usage: PORT=<server at repo root> node qa/g3/test_g35_page.js [OUT.json]
+// P11 (T29 N1) the portrait box never covers any part of a button: colour panel + portrait open, then 25 real clicks (kid x4, hair x8, eyes x5, skin x4,
+//    house x4) = 26 states x 2 screens · overlap area 0 and 5 hit points per button (centre + 2 px inside each edge) land on the button
+// usage: PORT=<server at repo root> [G35_ONLY=P7,P11] node qa/g3/test_g35_page.js [OUT.json]   (groups: P1 P2 P4 P8 P7 P11 · P2 = P2+P3 · P4 = P4+P5+P6 · P8 = P8+P9+P10)
 'use strict';
 const { chromium } = require('playwright'); const fs = require('fs'), path = require('path');
 const PORT = process.env.PORT || 8792, BASE = 'http://127.0.0.1:' + PORT + '/pilot-g3-char2.html', ROOT = path.join(__dirname, '..', '..');
@@ -16,13 +19,22 @@ const RAMP = {}; for (const g of ['hair', 'iris', 'skin', 'house']) { RAMP[g] = 
 const R = { inject: process.env.INJECT || null, checks: {}, fails: [], errors: [] };
 const ok = (name, cond, info) => { R.checks[name] = { pass: !!cond, info }; if (!cond) R.fails.push(name); console.log((cond ? 'PASS ' : 'FAIL ') + name + ' ' + JSON.stringify(info).slice(0, 300)); };
 // INJECT (must fail, exit 1): HOUSE = every kid gets house option 0 (P2) · NOPT = portrait() gives null (P4) · S0 = the source served unchanged (must pass)
-// served as char2.src.js through page.route (the built char2.js and the page are never touched)
-const INJ = process.env.INJECT || '', SRC = fs.readFileSync(path.join(ROOT, 'char2.src.js'), 'utf8');
+//   served as char2.src.js through page.route (the built char2.js and the page are never touched)
+// page INJECT (served through page.route, the file on disk is never touched): BLANK = draw() returns at once (scene empty, UI still there) -> P7
+//   NOKIDS = drawKid() draws nothing -> P7 · N1OLD = the T29 order (portrait placed before the labels change) -> P11
+const INJ = process.env.INJECT || '', SRC = fs.readFileSync(path.join(ROOT, 'char2.src.js'), 'utf8'), PAGE = fs.readFileSync(path.join(ROOT, 'pilot-g3-char2.html'), 'utf8');
 const INJ_SRC = { S0: SRC, HOUSE: SRC.replace("house: colourIx(p, 'house', dc.house)", 'house: 0'), NOPT: SRC.replace("portrait: (app, dc) => sheet(app, dc, 'portrait')", 'portrait: () => null') }[INJ];
-if (INJ && (!INJ_SRC || (INJ !== 'S0' && INJ_SRC === SRC))) throw new Error('unknown inject / inject point missing: ' + INJ);
+const pageSwap = (pairs) => pairs.reduce((t, [a, b]) => { if (t.split(a).length !== 2) throw new Error('page inject point missing: ' + a); return t.replace(a, b); }, PAGE);
+const INJ_PAGE = INJ === 'BLANK' ? pageSwap([['function draw(){', 'function draw(){return;']]) : INJ === 'NOKIDS' ? pageSwap([['function drawKid(K,ox,oy,info){', 'function drawKid(K,ox,oy,info){info.K=K;return;']]) :
+  INJ === 'N1OLD' ? pageSwap([["ptBox.classList.toggle('open',ST.ptOpen);if(ST.ptOpen)ptShow()}", "ptBox.classList.toggle('open',ST.ptOpen)}"], ["tg('dKid',()=>{ST.sel=(ST.sel+1)%KIDS.length});", "tg('dKid',()=>{ST.sel=(ST.sel+1)%KIDS.length;if(ST.ptOpen)ptShow()});"],
+    ["tg('bPt',()=>{ST.ptOpen=!ST.ptOpen});", "tg('bPt',()=>{ST.ptOpen=!ST.ptOpen;if(ST.ptOpen){sync();ptShow()}});"], ["tg('bDress',()=>{ST.dressOpen=!ST.dressOpen});", "tg('bDress',()=>{ST.dressOpen=!ST.dressOpen;if(ST.ptOpen){sync();ptShow()}});"]]) : null;
+if (INJ && ((!INJ_SRC && !INJ_PAGE) || (INJ_SRC && INJ !== 'S0' && INJ_SRC === SRC))) throw new Error('unknown inject / inject point missing: ' + INJ);
+const ONLY = (process.env.G35_ONLY || '').split(',').filter(Boolean), want = (g) => !ONLY.length || ONLY.includes(g);
+const isPage = (u) => new URL(u).pathname === '/pilot-g3-char2.html';
 async function open(ctx, q, routeFn) {
   const p = await ctx.newPage(); const errs = []; p.on('pageerror', (e) => errs.push(String(e)));
   if (INJ_SRC) await p.route('**/char2.js', (rt) => rt.fulfill({ status: 200, contentType: 'application/javascript', body: INJ_SRC }));
+  if (INJ_PAGE) await p.route(isPage, (rt) => rt.fulfill({ status: 200, contentType: 'text/html; charset=utf-8', body: INJ_PAGE }));
   if (routeFn) await routeFn(p);
   await p.goto(BASE + q); await p.waitForFunction('window.PG&&PG.ST.ready', null, { timeout: 30000, polling: 100 }); p.__errs = errs; return p;
 }
@@ -41,7 +53,7 @@ const kidRects = (p) => p.evaluate(() => { PG.draw(); const o = {}; for (const k
 (async () => {
   const b = await chromium.launch(); const phone = await b.newContext({ viewport: { width: 844, height: 390 }, deviceScaleFactor: 3, hasTouch: true, isMobile: true });
   // ---------- P1 ----------
-  for (const r of ['char2', 'pilot']) {
+  if (want('P1')) for (const r of ['char2', 'pilot']) {
     const p = await open(phone, '?gm' + (r === 'pilot' ? '&r=pilot' : ''));
     const a = await p.evaluate(() => ({ ...PG.ST.cnt })); await p.waitForTimeout(2000); const z = await p.evaluate(() => ({ cnt: { ...PG.ST.cnt }, r: PG.ST.renderer, ready: PG.C2.ready, failed: PG.C2.failed, loopErr: PG.ST.loopErr || null }));
     const fr = z.cnt.frames - a.frames, want = r === 'char2' ? z.cnt.c2 - a.c2 : z.cnt.pilot - a.pilot, other = r === 'char2' ? z.cnt.pilot - a.pilot : z.cnt.c2 - a.c2;
@@ -49,7 +61,7 @@ const kidRects = (p) => p.evaluate(() => { PG.draw(); const o = {}; for (const k
     await p.close();
   }
   // ---------- P2 / P3 ----------
-  {
+  if (want('P2')) {
     const p = await open(phone, '?gm'); await lineup(p); const rc = await kidRects(p); const looks = await p.evaluate(() => PG.KIDS.map((K) => [K.look.hair, K.look.iris, K.look.skin, K.house]));
     const rows = [];
     for (let i = 0; i < 4; i++) {
@@ -74,7 +86,8 @@ const kidRects = (p) => p.evaluate(() => { PG.draw(); const o = {}; for (const k
     await p.close();
   }
   // ---------- P4 / P5 / P6 ----------
-  for (const [name, vp, dpr] of [['phone', { width: 844, height: 390 }, 3], ['ipad', { width: 1180, height: 820 }, 2]]) {
+  const SCREENS = [['phone', { width: 844, height: 390 }, 3], ['ipad', { width: 1180, height: 820 }, 2]];
+  if (want('P4')) for (const [name, vp, dpr] of SCREENS) {
     const ctx = name === 'phone' ? phone : await b.newContext({ viewport: vp, deviceScaleFactor: dpr, hasTouch: true });
     const p = await open(ctx, '?gm');
     const btnCheck = async () => p.evaluate(() => { const out = []; for (const el of document.querySelectorAll('button')) { const r = el.getBoundingClientRect(); if (!r.width || getComputedStyle(el).display === 'none' || el.closest('[style*="display: none"]')) continue;
@@ -108,7 +121,7 @@ const kidRects = (p) => p.evaluate(() => { PG.draw(); const o = {}; for (const k
     R.errors.push(...p.__errs.map((e) => name + ': ' + e)); await p.close(); if (name !== 'phone') await ctx.close();
   }
   // ---------- P8 ----------
-  {
+  if (want('P8')) {
     const p = await open(phone, '?gm&bench'); const a = await p.evaluate(() => PG.KIDS.map((K) => [K.pos.x, K.pos.y])); await p.waitForTimeout(3000);
     const z = await p.evaluate(() => PG.KIDS.map((K) => [K.pos.x, K.pos.y])); const moved = z.map((q, i) => Math.hypot(q[0] - a[i][0], q[1] - a[i][1]));
     ok('P8_bench_all_4_move', moved.every((d) => d > 40), { moved_px: moved.map(Math.round) }); await p.close();
@@ -131,26 +144,54 @@ const kidRects = (p) => p.evaluate(() => { PG.draw(); const o = {}; for (const k
     ok('P10_measure_button', ms.out && ms.out.runs.pilot.length === 3 && ms.out.runs.char2.length === 3 && ms.out.pct > 0 && ms.after.r === ms.before.r && ms.after.bench === ms.before.bench && ms.after.meas === null && /%/.test(ms.label) && /Char2/.test(ms.msg || ''), ms);
     R.errors.push(...q.__errs.map((x) => 'P8: ' + x)); await q.close();
   }
+  // ---------- P11 (T29 N1) ----------
+  if (want('P11')) for (const [name, vp, dpr] of SCREENS) {
+    const ctx = name === 'phone' ? phone : await b.newContext({ viewport: vp, deviceScaleFactor: dpr, hasTouch: true });
+    const p = await open(ctx, '?gm'); await p.click('#bDress'); await p.click('#bPt'); await p.waitForTimeout(200);
+    const probe = () => p.evaluate(() => { const box = document.getElementById('ptBox').getBoundingClientRect(), out = { overlap: [], hit: [] };
+      for (const el of document.querySelectorAll('button')) { const r = el.getBoundingClientRect(); if (!r.width || !r.height) continue; const id = el.id || el.getAttribute('aria-label');
+        if (!el.closest('#ptBox')) { const ix = Math.max(0, Math.min(r.right, box.right) - Math.max(r.left, box.left)), iy = Math.max(0, Math.min(r.bottom, box.bottom) - Math.max(r.top, box.top)); if (ix * iy > 0) out.overlap.push([id, +(ix * iy).toFixed(2)]); }
+        for (const [x, y] of [[r.left + r.width / 2, r.top + r.height / 2], [r.left + 2, r.top + r.height / 2], [r.right - 2, r.top + r.height / 2], [r.left + r.width / 2, r.top + 2], [r.left + r.width / 2, r.bottom - 2]]) {
+          const t = document.elementFromPoint(x, y); if (!(t === el || el.contains(t))) { out.hit.push([id, Math.round(x), Math.round(y), t && (t.id || t.tagName)]); break; } } }
+      out.inView = box.left >= 0 && box.top >= 0 && box.right <= innerWidth && box.bottom <= innerHeight; out.k = PG.ST.ptK; out.box = [Math.round(box.left), Math.round(box.top), Math.round(box.width), Math.round(box.height)]; return out; });
+    const states = [{ s: 'open', ...(await probe()) }];
+    for (const [id, n] of [['dKid', 4], ['dHair', 8], ['dIris', 5], ['dSkin', 4], ['dHouse', 4]]) for (let i = 0; i < n; i++) { await p.click('#' + id); await p.waitForTimeout(60); states.push({ s: id + ' ' + (i + 1), ...(await probe()) }); }
+    const badS = states.filter((x) => x.overlap.length || x.hit.length || !x.inView);
+    ok('P11_' + name + '_portrait_never_covers_a_button', states.length === 26 && badS.length === 0 && p.__errs.length === 0, { states: states.length, bad_states: badS.length, bad: badS.slice(0, 3), k: [...new Set(states.map((x) => x.k))], errors: p.__errs });
+    R.errors.push(...p.__errs.map((e) => 'P11 ' + name + ': ' + e)); await p.close(); if (name !== 'phone') await ctx.close();
+  }
   // ---------- P7 ----------
-  {
+  if (want('P7')) {
     const p0 = await phone.newPage(); const files = new Set(); p0.on('request', (r) => { const u = new URL(r.url()); if (u.pathname !== '/pilot-g3-char2.html') files.add(u.pathname.slice(1)); });
     await p0.goto(BASE + '?gm'); await p0.waitForFunction('window.PG&&PG.ST.ready', null, { timeout: 30000, polling: 100 }); await p0.click('#bPt'); await p0.waitForTimeout(1500); await p0.close();
     const list = [...files].sort(); R.files_loaded = list; const rows = [];
     for (const f of list.concat(['*ALL*'])) {
       const p = await phone.newPage(); const errs = []; p.on('pageerror', (e) => errs.push(String(e)));
-      await p.route('**/*', (rt) => { const u = new URL(rt.request().url()).pathname.slice(1); if (u !== 'pilot-g3-char2.html' && (f === '*ALL*' || u === f)) return rt.abort(); return rt.continue(); });
+      await p.route('**/*', (rt) => { const u = new URL(rt.request().url()).pathname.slice(1); if (u !== 'pilot-g3-char2.html' && (f === '*ALL*' || u === f)) return rt.abort();
+        if (u === 'pilot-g3-char2.html' && INJ_PAGE) return rt.fulfill({ status: 200, contentType: 'text/html; charset=utf-8', body: INJ_PAGE });
+        if (u === 'char2.js' && INJ_SRC) return rt.fulfill({ status: 200, contentType: 'application/javascript', body: INJ_SRC }); return rt.continue(); });
       await p.goto(BASE + '?gm'); let ready = true; try { await p.waitForFunction('window.PG&&PG.ST.ready', null, { timeout: 30000, polling: 100 }); } catch (e) { ready = false; }
       await p.waitForTimeout(1200); if (ready) { await p.click('#bPt').catch(() => {}); await p.waitForTimeout(300); }
       const st = ready ? await p.evaluate(() => ({ c2: PG.C2.ready, failed: PG.C2.failed, cnt: { ...PG.ST.cnt }, loopErr: PG.ST.loopErr || null, ptOk: !!PG.ST.ptOk })) : null;
+      // T29 N2: judge the art buffer only (no DOM UI, no GM label): scene without kids + what each kid adds in its own cell
+      const art = ready ? await p.evaluate(() => { try {
+        PG.pause(true); const keep = { noNight: PG.ST.noNight, fx: PG.ST.fx }; PG.set({ noNight: true, fx: false, hideKids: false }); PG.draw();
+        const B = PG.BUF, W = B.width, H = B.height, A = B.getContext('2d').getImageData(0, 0, W, H).data.slice(), kids = ((PG.ST.last && PG.ST.last.kids) || []).map((k) => ({ id: k.id, sx: k.sx, sy: k.sy }));
+        PG.set({ hideKids: true }); PG.draw(); const S = B.getContext('2d').getImageData(0, 0, W, H).data; PG.set({ hideKids: false, noNight: keep.noNight, fx: keep.fx }); PG.draw(); PG.pause(false);
+        const m = new Map(); for (let i = 0; i < S.length; i += 4) { const k = (S[i] << 16) | (S[i + 1] << 8) | S[i + 2]; m.set(k, (m.get(k) || 0) + 1); } let top = 0, n = 0; for (const v of m.values()) { n += v; if (v > top) top = v; }
+        const kidPx = [0, 1, 2, 3].map((id) => { const k = kids.find((q) => q.id === id); if (!k || !Number.isFinite(k.sx) || !Number.isFinite(k.sy)) return 0; let c = 0;
+          for (let y = Math.max(0, k.sy); y < Math.min(H, k.sy + 96); y++) for (let x = Math.max(0, k.sx); x < Math.min(W, k.sx + 96); x++) { const o = (y * W + x) * 4; if (A[o] !== S[o] || A[o + 1] !== S[o + 1] || A[o + 2] !== S[o + 2] || A[o + 3] !== S[o + 3]) c++; } return c; });
+        return { W, H, sceneColours: m.size, sceneNotBg: +(1 - top / n).toFixed(3), kidPx }; } catch (e) { return { err: String(e) }; } }) : { err: 'not ready' };
       const shot = await p.screenshot({ type: 'png' }), cols = await p.evaluate(async (b64) => { const im = new Image(); im.src = 'data:image/png;base64,' + b64; await im.decode(); const c = document.createElement('canvas'); c.width = im.width; c.height = im.height;
         const x = c.getContext('2d'); x.drawImage(im, 0, 0); const d = x.getImageData(0, 0, c.width, c.height).data, m = new Map(); for (let i = 0; i < d.length; i += 16) { const k = (d[i] << 16) | (d[i + 1] << 8) | d[i + 2]; m.set(k, (m.get(k) || 0) + 1); }
         let top = 0, n = 0; for (const v of m.values()) { n += v; if (v > top) top = v; } return { colours: m.size, notBg: +(1 - top / n).toFixed(3) }; }, shot.toString('base64'));
-      const pass = ready && errs.length === 0 && st && !st.loopErr && cols.colours >= 12 && cols.notBg >= 0.02;
-      rows.push({ file: f, pass, c2: st && st.c2, failed: st && st.failed, drawn_by: st && (st.cnt.c2 ? 'char2' : 'pilot'), ptOk: st && st.ptOk, ...cols, errors: errs });
+      const pass = ready && errs.length === 0 && st && !st.loopErr && !art.err && art.W > 100 && art.sceneColours >= 12 && art.sceneNotBg >= 0.02 && art.kidPx.every((v) => v >= 200);
+      rows.push({ file: f, pass, c2: st && st.c2, failed: st && st.failed, drawn_by: st && (st.cnt.c2 ? 'char2' : 'pilot'), ptOk: st && st.ptOk, art, screenshot: cols, errors: errs });
       if (f === '*ALL*') await p.screenshot({ path: path.join(IMG, 'g35-p7-all-blocked.png') });
       await p.close();
     }
-    ok('P7_files_missing_one_by_one_and_all', rows.length >= 30 && rows.every((r) => r.pass), { blocked: rows.length, failing: rows.filter((r) => !r.pass) });
+    const mins = { sceneColours: Math.min(...rows.map((r) => r.art.sceneColours || 0)), sceneNotBg: Math.min(...rows.map((r) => r.art.sceneNotBg || 0)), kidPx: Math.min(...rows.map((r) => Math.min(...(r.art.kidPx || [0])))) };
+    ok('P7_files_missing_one_by_one_and_all', rows.length >= 30 && rows.every((r) => r.pass), { blocked: rows.length, lowest: mins, failing: rows.filter((r) => !r.pass).slice(0, 4) });
     R.p7 = rows;
   }
   R.pass = R.fails.length === 0 && R.errors.length === 0; console.log(JSON.stringify({ pass: R.pass, fails: R.fails, errors: R.errors.length }));

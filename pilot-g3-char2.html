@@ -46,6 +46,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#0c0a18;font:12px syst
 // Files missing: char2.js / c2-pack.json -> the Pilot code draws (no colours) · a sheet missing -> the stand-in shape · the scene keeps its own fallbacks.
 // GM 'measure FPS' (for a real phone, not K5): the 4 kids walk their bench paths, the renderer switches live Pilot / Char2 / Pilot / Char2 / Pilot / Char2,
 // 1 s settle + 5 s count each -> median of each and Char2 as % of Pilot (K5 itself = qa/g3/test_g35_k5.js: page reloads, CPU 4x, 30 s x 3).
+// ST.hideKids (tests only, T29 N2): draw the scene without the kids, so a test can tell scene pixels from kid pixels.
 // The 3 Pilot pages stay as they are (frozen answers, D-G3-2).
 'use strict';
 const T=32, C=96, FEET=[48,94], DIRS=['S','SE','E','NE','N','NW','W','SW'];
@@ -278,7 +279,7 @@ function syncState(K,to){   // live switch: carry the pose over so the kid does 
   else{Object.assign(A,{anim:P.anim,fi:P.fi,t:P.t,dir:K.dir,moving:K.moving,blinkClock:P.blinkClock,blinkNow:P.blinkNow,blinkAt:P.blinkAt,lpos:null,ldir:null,lhist:null})}}
 // ---------- view ----------
 function resize(){const dpr=window.devicePixelRatio||1;cv.width=Math.round(innerWidth*dpr);cv.height=Math.round(innerHeight*dpr)}
-addEventListener('resize',()=>{resize();sync();if(ST.ptOpen)ptShow()});
+addEventListener('resize',()=>{resize();sync()});
 function baseScale(){return Math.max(1,Math.round(Math.min(cv.width,cv.height)/384))}
 function scale(){const b=baseScale();return ST.zoomOut?Math.max(1,b-1):b}
 function offX(d){return(ST.offTable||OFF_TABLE)[d]}
@@ -412,9 +413,9 @@ function draw(){
   const ox=-X,oy=-Y,order=[];ST.order=order;
   if(X<0||Y<0||MAPW-X<bw||MAPH-Y<bh){g.fillStyle='#0c0a18';g.fillRect(0,0,bw,bh)}
   g.drawImage(W0.ground,ox,oy);
-  KIDS.forEach(K=>shadow(Math.round(K.pos.x)+offX(K.dir),Math.round(K.pos.y),14,3,0.35,1,ox,oy));SL.forEach(q=>shadow(Math.round(q.x),Math.round(q.y)+1,13-q.bob*1.5,4-q.bob*0.5,0.32,1,ox,oy));
+  if(!ST.hideKids)KIDS.forEach(K=>shadow(Math.round(K.pos.x)+offX(K.dir),Math.round(K.pos.y),14,3,0.35,1,ox,oy));SL.forEach(q=>shadow(Math.round(q.x),Math.round(q.y)+1,13-q.bob*1.5,4-q.bob*0.5,0.32,1,ox,oy));
   selMark(ox,oy);
-  const list=W0.spr.map(o=>({sort:o.sort,o,t:0,k:0})).concat(SL.map((q,k)=>({sort:q.y,q,t:1,k})),KIDS.map(K=>({sort:inDoor(K)?Math.min(K.pos.y,HUT_SORT-0.5):K.pos.y,t:2,k:K.id,K})));   // a kid in the door is always behind the hut
+  const list=W0.spr.map(o=>({sort:o.sort,o,t:0,k:0})).concat(SL.map((q,k)=>({sort:q.y,q,t:1,k})),(ST.hideKids?[]:KIDS).map(K=>({sort:inDoor(K)?Math.min(K.pos.y,HUT_SORT-0.5):K.pos.y,t:2,k:K.id,K})));   // a kid in the door is always behind the hut
   list.sort((a,b)=>a.sort-b.sort||a.t-b.t||a.k-b.k);
   const infos=[];
   for(const it of list){if(it.t===0){if(it.o.x+ox>bw||it.o.x+it.o.sw+ox<0||it.o.y+oy>bh||it.o.y+it.o.sh+oy<0)continue;drawSprite(it.o,1,ox,oy);order.push(it.o.kind+'#'+it.o.id)}
@@ -467,7 +468,7 @@ function setRenderer(r){if(r!=='pilot'&&r!=='char2')return;if(r===ST.renderer)re
 function cycle(K,gk){const L=(C2.pack&&C2.pack.palette&&C2.pack.palette[gk])?C2.pack.palette[gk].map(o=>o[0]):OPTS[gk],cur=gk==='house'?K.house:K.look[gk],nx=L[(L.indexOf(cur)+1)%L.length];
   if(gk==='house')K.house=nx;else K.look[gk]=nx;refreshKid(K);ST.lastChange=ST.renderer==='char2'?prewarm(K):null;
   if(ST.renderer!=='char2'||!C2.ready)showMsg('ตัววาดเดิมเปลี่ยนสีไม่ได้ · สลับเป็น Char2 เพื่อดูสี','The old renderer cannot recolour · switch to Char2 to see it',2500,'pilotcol');
-  if(ST.ptOpen)ptShow()}
+}
 const ptCv=document.getElementById('pt'),ptBox=document.getElementById('ptBox'),ptCap=document.getElementById('ptCap');
 function kidName(i){return 'ตัวที่ '+(i+1)+(i===0?' (คุณ)':' (เพื่อน)')+' / kid '+(i+1)+(i===0?' (you)':' (friend)')}
 function lookLine(K){return ['hair','iris','skin','house'].map(gk=>{const v=gk==='house'?K.house:K.look[gk];return GLABEL[gk][0]+TH[gk][v]}).join(' · ')+' / '+['hair','iris','skin','house'].map(gk=>{const v=gk==='house'?K.house:K.look[gk];return GLABEL[gk][1]+' '+v}).join(' · ')}
@@ -494,14 +495,14 @@ async function measure(phase){   // GM: live A/B on this device (Pilot first, al
   sync();return ST.measOut}
 const tg=(id,f)=>{const b=document.getElementById(id);b.onclick=()=>{f();sync()}};
 tg('bR',()=>setRenderer(ST.renderer==='char2'?'pilot':'char2'));
-tg('bDress',()=>{ST.dressOpen=!ST.dressOpen;if(ST.ptOpen){sync();ptShow()}});
-tg('bPt',()=>{ST.ptOpen=!ST.ptOpen;if(ST.ptOpen){sync();ptShow()}});
+tg('bDress',()=>{ST.dressOpen=!ST.dressOpen});
+tg('bPt',()=>{ST.ptOpen=!ST.ptOpen});
 tg('ptClose',()=>{ST.ptOpen=false});
 tg('bZoom',()=>ST.zoomOut=!ST.zoomOut);
 tg('bPow',()=>{ST.power=POWERS[(POWERS.indexOf(ST.power)+1)%POWERS.length];KIDS.forEach(refreshKid)});
 tg('bHold',()=>{ST.hold=!ST.hold;KIDS.forEach(refreshKid);if(ST.renderer==='char2')prewarmAll()});
 tg('bMeas',()=>{measure()});
-tg('dKid',()=>{ST.sel=(ST.sel+1)%KIDS.length;if(ST.ptOpen)ptShow()});
+tg('dKid',()=>{ST.sel=(ST.sel+1)%KIDS.length});
 [['dHair','hair'],['dIris','iris'],['dSkin','skin'],['dHouse','house']].forEach(([id,gk])=>tg(id,()=>cycle(KIDS[ST.sel],gk)));
 function sync(){const B=(id,on,t)=>{const b=document.getElementById(id);b.classList.toggle('on',on);b.textContent=t};
   ['bR','bPow','bHold','bMeas'].forEach(id=>{document.getElementById(id).style.display=ST.gm?'':'none'});
@@ -513,7 +514,7 @@ function sync(){const B=(id,on,t)=>{const b=document.getElementById(id);b.classL
   dr.style.top=Math.round(document.getElementById('ui').getBoundingClientRect().bottom+6)+'px';
   document.getElementById('dKid').textContent=kidName(ST.sel);
   [['dHair','hair'],['dIris','iris'],['dSkin','skin'],['dHouse','house']].forEach(([id,gk])=>{const v=gk==='house'?K.house:K.look[gk];document.getElementById(id).textContent=GLABEL[gk][0]+' / '+GLABEL[gk][1]+': '+TH[gk][v]+' / '+cap(v)});
-  ptBox.classList.toggle('open',ST.ptOpen)}
+  ptBox.classList.toggle('open',ST.ptOpen);if(ST.ptOpen)ptShow()}   // T29 N1: the portrait box is placed AFTER the labels above changed width (else it can cover a button edge)
 const q=new URLSearchParams(location.search);
 if(q.has('gm')){ST.gm=true;const pw=+q.get('power');if((q.get('power')||'')!==''&&POWERS.includes(pw))ST.power=pw;if(q.has('guides'))ST.guides=true}
 if(q.get('r')==='pilot')ST.renderer='pilot';   // K5: the one renderer switch (default = char2.js)

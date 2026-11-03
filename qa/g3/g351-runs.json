@@ -1,0 +1,118 @@
+{
+ "what": "G3.5 v1.1 (after Codex T29 N1 N2): runs on the fixed page",
+ "runs": {
+  "inj-BLANK": {
+   "exit": "1",
+   "lines": [
+    "FAIL P7_files_missing_one_by_one_and_all {\"blocked\":34,\"lowest\":{\"sceneColours\":1,\"sceneNotBg\":0,\"kidPx\":0},\"failing\":[{\"file\":\"c2-held-lantern_L0-S-trial-light.png\",\"pass\":false,\"c2\":true,\"failed\":[\"lantern-light\"],\"drawn_by\":\"pilot\",\"ptOk\":true,\"art\":{\"W\":1,\"H\":1,\"sceneColours\":1,\"sceneNotBg\":0,\"kidPx\":[0,0,0,0]},\"screenshot\":{\"colours\":",
+    "{\"pass\":false,\"fails\":[\"P7_files_missing_one_by_one_and_all\"],\"errors\":0}"
+   ]
+  },
+  "inj-N1OLD": {
+   "exit": "1",
+   "lines": [
+    "FAIL P11_phone_portrait_never_covers_a_button {\"states\":26,\"bad_states\":1,\"bad\":[{\"s\":\"dKid 1\",\"overlap\":[[\"dKid\",260.56]],\"hit\":[[\"dKid\",179,126,\"ptBox\"]],\"inView\":true,\"k\":2,\"box\":[175,102,426,268]}],\"k\":[2],\"errors\":[]}",
+    "FAIL P11_ipad_portrait_never_covers_a_button {\"states\":26,\"bad_states\":1,\"bad\":[{\"s\":\"dKid 1\",\"overlap\":[[\"dKid\",260.56]],\"hit\":[[\"dKid\",179,126,\"ptBox\"]],\"inView\":true,\"k\":3,\"box\":[175,102,746,588]}],\"k\":[3],\"errors\":[]}",
+    "{\"pass\":false,\"fails\":[\"P11_phone_portrait_never_covers_a_button\",\"P11_ipad_portrait_never_covers_a_button\"],\"errors\":0}"
+   ]
+  },
+  "inj-NOKIDS": {
+   "exit": "1",
+   "lines": [
+    "FAIL P7_files_missing_one_by_one_and_all {\"blocked\":34,\"lowest\":{\"sceneColours\":681,\"sceneNotBg\":0.628,\"kidPx\":0},\"failing\":[{\"file\":\"c2-held-lantern_L0-S-trial-light.png\",\"pass\":false,\"c2\":true,\"failed\":[\"lantern-light\"],\"drawn_by\":\"pilot\",\"ptOk\":true,\"art\":{\"W\":845,\"H\":391,\"sceneColours\":1309,\"sceneNotBg\":0.849,\"kidPx\":[0,0,0,0]},\"screen",
+    "{\"pass\":false,\"fails\":[\"P7_files_missing_one_by_one_and_all\"],\"errors\":0}"
+   ]
+  },
+  "k1k6": {
+   "exit": "0",
+   "lines": [
+    "{"
+   ]
+  },
+  "k5": {
+   "exit": "0",
+   "lines": [
+    "round 1 pilot 28 fps · p95 50 ms · frames 842 · draws 3368 · walked 1358/1361/1363/1379",
+    "round 1 char2 30.17 fps · p95 50 ms · frames 907 · draws 3628 · walked 1382/1369/1371/1396",
+    "round 2 char2 28.93 fps · p95 50 ms · frames 870 · draws 3480 · walked 1360/1374/1378/1393",
+    "round 2 pilot 28.03 fps · p95 50 ms · frames 843 · draws 3372 · walked 1362/1364/1373/1384",
+    "round 3 pilot 27.8 fps · p95 50 ms · frames 837 · draws 3348 · walked 1377/1368/1366/1388",
+    "round 3 char2 28.95 fps · p95 50 ms · frames 871 · draws 3484 · walked 1364/1369/1377/1378",
+    "{\"median\":{\"pilot\":28,\"char2\":28.95},\"ratio\":1.034,\"p95_median_ms\":{\"pilot\":50,\"char2\":50},\"runs_ok\":true,\"build_cpu4x\":{\"all4\":[306.5,275.7,322],\"change\":[61.6,63.5,67]},\"pass\":true,\"errors\":0}"
+   ]
+  },
+  "page-HOUSE": {
+   "exit": "1",
+   "lines": [
+    "FAIL P2_4_looks_4_houses [{\"kid\":0,\"look\":[\"brown\",\"green\",\"medium\",\"sun\"],\"own_house\":251,\"other_houses\":0,\"own_hair\":241,\"own_skin\":175},{\"kid\":1,\"look\":[\"black\",\"brown\",\"deep\",\"wing\"],\"own_house\":0,\"other_houses\":328,\"own_hair\":855,\"own_skin\":261},{\"kid\":2,\"look\":[\"blonde\",\"blue\",\"light\",\"leaf\"],\"own_house\":0,\"other_hous",
+    "PASS P3_colour_change_one_kid {\"from\":\"brown\",\"to\":\"blonde\",\"old_px_before\":241,\"after\":{\"old\":0,\"neu\":241},\"other_kids_px_changed\":0,\"build_ms\":22.699999999953434}",
+    "{\"pass\":false,\"fails\":[\"P2_4_looks_4_houses\"],\"errors\":0}"
+   ]
+  },
+  "page-NOPT": {
+   "exit": "1",
+   "lines": [
+    "PASS P6_phone_buttons_44_free {\"closed\":16,\"open\":22,\"bad\":[]}",
+    "FAIL P4_phone_portrait {\"k\":2,\"w\":768,\"cssW\":256,\"opaque\":589824,\"handles\":0,\"changed_after_kid_switch\":0,\"cap1\":\"ตัวที่ 1 (คุณ) / kid 1 (you) · ผมน้ำตาล · ตาเขียว · ผิวกลาง · บ้านอาทิตย์ / hair brown · eyes green · skin medium · house sun\",\"cap2\":\"ตัวที่ 2 (เพื่อน) / kid 2 (friend) · ผมดำ · ตาน้ำตาล · ผิวเข้ม · บ้านปีกฟ้",
+    "PASS P5_live_switch {\"to_pilot\":{\"r\":\"pilot\",\"label\":\"ตัววาด / renderer: Pilot\",\"frames\":61,\"c2\":0,\"pilot\":244,\"c2fail\":0},\"back_to_char2\":{\"r\":\"char2\",\"label\":\"ตัววาด / renderer: Char2\",\"frames\":60,\"c2\":240,\"pilot\":0,\"c2fail\":0},\"errors\":[]}",
+    "PASS P6_ipad_buttons_44_free {\"closed\":16,\"open\":22,\"bad\":[]}",
+    "FAIL P4_ipad_portrait {\"k\":3,\"w\":1152,\"cssW\":576,\"opaque\":1327104,\"handles\":0,\"changed_after_kid_switch\":0,\"cap1\":\"ตัวที่ 1 (คุณ) / kid 1 (you) · ผมน้ำตาล · ตาเขียว · ผิวกลาง · บ้านอาทิตย์ / hair brown · eyes green · skin medium · house sun\",\"cap2\":\"ตัวที่ 2 (เพื่อน) / kid 2 (friend) · ผมดำ · ตาน้ำตาล · ผิวเข้ม · บ้านปีก",
+    "{\"pass\":false,\"fails\":[\"P4_phone_portrait\",\"P4_ipad_portrait\"],\"errors\":0}"
+   ]
+  },
+  "page-S0": {
+   "exit": "0",
+   "lines": [
+    "PASS P1_char2_4_kids_every_frame {\"frames\":121,\"draws\":484,\"other\":0,\"c2fail\":0,\"failed\":[],\"errors\":[]}",
+    "PASS P1_pilot_4_kids_every_frame {\"frames\":121,\"draws\":484,\"other\":0,\"c2fail\":0,\"failed\":[],\"errors\":[]}",
+    "PASS P2_4_looks_4_houses [{\"kid\":0,\"look\":[\"brown\",\"green\",\"medium\",\"sun\"],\"own_house\":251,\"other_houses\":0,\"own_hair\":241,\"own_skin\":175},{\"kid\":1,\"look\":[\"black\",\"brown\",\"deep\",\"wing\"],\"own_house\":328,\"other_houses\":0,\"own_hair\":855,\"own_skin\":261},{\"kid\":2,\"look\":[\"blonde\",\"blue\",\"light\",\"leaf\"],\"own_house\":328,\"other_ho",
+    "PASS P3_colour_change_one_kid {\"from\":\"brown\",\"to\":\"blonde\",\"old_px_before\":241,\"after\":{\"old\":0,\"neu\":241},\"other_kids_px_changed\":0,\"build_ms\":26.300000000046566}",
+    "PASS P6_phone_buttons_44_free {\"closed\":16,\"open\":22,\"bad\":[]}",
+    "PASS P4_phone_portrait {\"k\":2,\"w\":768,\"cssW\":256,\"opaque\":280180,\"handles\":0,\"changed_after_kid_switch\":4709,\"cap1\":\"ตัวที่ 1 (คุณ) / kid 1 (you) · ผมน้ำตาล · ตาเขียว · ผิวกลาง · บ้านอาทิตย์ / hair brown · eyes green · skin medium · house sun\",\"cap2\":\"ตัวที่ 2 (เพื่อน) / kid 2 (friend) · ผมดำ · ตาน้ำตาล · ผิวเข้ม · บ้านปี",
+    "PASS P5_live_switch {\"to_pilot\":{\"r\":\"pilot\",\"label\":\"ตัววาด / renderer: Pilot\",\"frames\":60,\"c2\":0,\"pilot\":240,\"c2fail\":0},\"back_to_char2\":{\"r\":\"char2\",\"label\":\"ตัววาด / renderer: Char2\",\"frames\":60,\"c2\":240,\"pilot\":0,\"c2fail\":0},\"errors\":[]}",
+    "PASS P6_ipad_buttons_44_free {\"closed\":16,\"open\":22,\"bad\":[]}",
+    "PASS P4_ipad_portrait {\"k\":3,\"w\":1152,\"cssW\":576,\"opaque\":630405,\"handles\":0,\"changed_after_kid_switch\":10637,\"cap1\":\"ตัวที่ 1 (คุณ) / kid 1 (you) · ผมน้ำตาล · ตาเขียว · ผิวกลาง · บ้านอาทิตย์ / hair brown · eyes green · skin medium · house sun\",\"cap2\":\"ตัวที่ 2 (เพื่อน) / kid 2 (friend) · ผมดำ · ตาน้ำตาล · ผิวเข้ม · บ้าน",
+    "PASS P8_bench_all_4_move {\"moved_px\":[134,133,133,71]}",
+    "PASS P8_friends_wander_not_door_gate_exit {\"bad\":[],\"nbad\":0,\"cells\":[1,37,37,27]}",
+    "PASS P8_pad_walks_kid1 {\"dx\":33.6,\"moving_after_release\":false}",
+    "PASS P9_memory_40MiB_no_borrow_left {\"total\":40197672,\"peak_seen\":40197972,\"peak\":41377620,\"handles\":0,\"borrowed\":0,\"evict\":81,\"budget\":41943040}",
+    "PASS P10_measure_button {\"out\":{\"pilot\":60.6,\"char2\":60.4,\"pct\":99.7,\"runs\":{\"pilot\":[60.68558307364741,60.596134949221025,60.50695012264922],\"char2\":[60.38844458952638,60.447639274630625,60.418027433047996]}},\"before\":{\"r\":\"char2\",\"bench\":false},\"after\":{\"r\":\"char2\",\"bench\":false,\"meas\":null},\"label\":\"วัดความลื่น / FPS: 9",
+    "PASS P11_phone_portrait_never_covers_a_button {\"states\":26,\"bad_states\":0,\"bad\":[],\"k\":[2],\"errors\":[]}",
+    "PASS P11_ipad_portrait_never_covers_a_button {\"states\":26,\"bad_states\":0,\"bad\":[],\"k\":[3],\"errors\":[]}",
+    "PASS P7_files_missing_one_by_one_and_all {\"blocked\":34,\"lowest\":{\"sceneColours\":681,\"sceneNotBg\":0.628,\"kidPx\":871},\"failing\":[]}",
+    "{\"pass\":true,\"fails\":[],\"errors\":0}"
+   ]
+  },
+  "page": {
+   "exit": "0",
+   "lines": [
+    "PASS P1_char2_4_kids_every_frame {\"frames\":121,\"draws\":484,\"other\":0,\"c2fail\":0,\"failed\":[],\"errors\":[]}",
+    "PASS P1_pilot_4_kids_every_frame {\"frames\":121,\"draws\":484,\"other\":0,\"c2fail\":0,\"failed\":[],\"errors\":[]}",
+    "PASS P2_4_looks_4_houses [{\"kid\":0,\"look\":[\"brown\",\"green\",\"medium\",\"sun\"],\"own_house\":251,\"other_houses\":0,\"own_hair\":241,\"own_skin\":175},{\"kid\":1,\"look\":[\"black\",\"brown\",\"deep\",\"wing\"],\"own_house\":328,\"other_houses\":0,\"own_hair\":855,\"own_skin\":261},{\"kid\":2,\"look\":[\"blonde\",\"blue\",\"light\",\"leaf\"],\"own_house\":328,\"other_ho",
+    "PASS P3_colour_change_one_kid {\"from\":\"brown\",\"to\":\"blonde\",\"old_px_before\":241,\"after\":{\"old\":0,\"neu\":241},\"other_kids_px_changed\":0,\"build_ms\":23}",
+    "PASS P6_phone_buttons_44_free {\"closed\":16,\"open\":22,\"bad\":[]}",
+    "PASS P4_phone_portrait {\"k\":2,\"w\":768,\"cssW\":256,\"opaque\":280180,\"handles\":0,\"changed_after_kid_switch\":4709,\"cap1\":\"ตัวที่ 1 (คุณ) / kid 1 (you) · ผมน้ำตาล · ตาเขียว · ผิวกลาง · บ้านอาทิตย์ / hair brown · eyes green · skin medium · house sun\",\"cap2\":\"ตัวที่ 2 (เพื่อน) / kid 2 (friend) · ผมดำ · ตาน้ำตาล · ผิวเข้ม · บ้านปี",
+    "PASS P5_live_switch {\"to_pilot\":{\"r\":\"pilot\",\"label\":\"ตัววาด / renderer: Pilot\",\"frames\":60,\"c2\":0,\"pilot\":240,\"c2fail\":0},\"back_to_char2\":{\"r\":\"char2\",\"label\":\"ตัววาด / renderer: Char2\",\"frames\":60,\"c2\":240,\"pilot\":0,\"c2fail\":0},\"errors\":[]}",
+    "PASS P6_ipad_buttons_44_free {\"closed\":16,\"open\":22,\"bad\":[]}",
+    "PASS P4_ipad_portrait {\"k\":3,\"w\":1152,\"cssW\":576,\"opaque\":630405,\"handles\":0,\"changed_after_kid_switch\":10637,\"cap1\":\"ตัวที่ 1 (คุณ) / kid 1 (you) · ผมน้ำตาล · ตาเขียว · ผิวกลาง · บ้านอาทิตย์ / hair brown · eyes green · skin medium · house sun\",\"cap2\":\"ตัวที่ 2 (เพื่อน) / kid 2 (friend) · ผมดำ · ตาน้ำตาล · ผิวเข้ม · บ้าน",
+    "PASS P8_bench_all_4_move {\"moved_px\":[134,131,132,71]}",
+    "PASS P8_friends_wander_not_door_gate_exit {\"bad\":[],\"nbad\":0,\"cells\":[1,37,37,27]}",
+    "PASS P8_pad_walks_kid1 {\"dx\":34.4,\"moving_after_release\":false}",
+    "PASS P9_memory_40MiB_no_borrow_left {\"total\":40197672,\"peak_seen\":40197972,\"peak\":41377620,\"handles\":0,\"borrowed\":0,\"evict\":81,\"budget\":41943040}",
+    "PASS P10_measure_button {\"out\":{\"pilot\":60.5,\"char2\":60.4,\"pct\":99.9,\"runs\":{\"pilot\":[60.576293385730565,60.516846581613656,60.47728015690942],\"char2\":[60.29004399543065,60.52674627841842,60.43776543612509]}},\"before\":{\"r\":\"char2\",\"bench\":false},\"after\":{\"r\":\"char2\",\"bench\":false,\"meas\":null},\"label\":\"วัดความลื่น / FPS: 99",
+    "PASS P11_phone_portrait_never_covers_a_button {\"states\":26,\"bad_states\":0,\"bad\":[],\"k\":[2],\"errors\":[]}",
+    "PASS P11_ipad_portrait_never_covers_a_button {\"states\":26,\"bad_states\":0,\"bad\":[],\"k\":[3],\"errors\":[]}",
+    "PASS P7_files_missing_one_by_one_and_all {\"blocked\":34,\"lowest\":{\"sceneColours\":684,\"sceneNotBg\":0.628,\"kidPx\":871},\"failing\":[]}",
+    "{\"pass\":true,\"fails\":[],\"errors\":0}"
+   ]
+  }
+ },
+ "must_fail": [
+  "inj-N1OLD",
+  "inj-BLANK",
+  "inj-NOKIDS",
+  "page-HOUSE",
+  "page-NOPT"
+ ],
+ "ok": true
+}
