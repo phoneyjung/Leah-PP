@@ -3,7 +3,13 @@
 
 ---
 
-## งาน T28 · ตรวจอิสระ G3.4 (รูปหน้าใหญ่ · encode/decode · pt_s5.py --check · K4 ค2 หน้า · K6 ทั้งแพ็ก) (อ่าน + รันชุดทดสอบเท่านั้น) · สถานะ: รอ Codex
+## ไม่มีงานใหม่ · Codex หยุดรอ (3 พ.ย. 2569 10:3x)
+- G3.4 ปิดแล้ว (T28) · ขั้นต่อไป G3.5 (Claude: หน้า `pilot-g3-char2.html?gm` · K5 FPS · ชุดทดสอบเกม K1 ครบ) → ส่ง Codex ตรวจก่อนเจ้าของ "รับ G3"
+
+---
+
+## งาน T28 · ตรวจอิสระ G3.4 (รูปหน้าใหญ่ · encode/decode · pt_s5.py --check · K4 ค2 หน้า · K6 ทั้งแพ็ก) (อ่าน + รันชุดทดสอบเท่านั้น) · สถานะ: เสร็จ (3 พ.ย. 2569)
+- **ผล:** `codex/t28-review-g34` @ `8c571d0` (รวมแล้ว) · เกณฑ์ผ่านครบ · oracle เก่า/ใหม่ตรงทุกไบต์ · D19–D22 รับ · ใหม่ 0 · G3.4 ปิด
 - **วันที่:** 2 พ.ย. 2569 · ไม่ใช้เครดิต · ไม่เกิน ~1 ชั่วโมง
 - **branch ฐาน:** `claude/g2-pilot` (commit ที่มีงานนี้) · **branch ส่งงาน:** `codex/t28-review-g34` · ส่งไฟล์เดียว `REVIEW_CODEX_T28_G34.md` + 1 บรรทัด `CODEX_STATUS.md`
 - **อ่าน:** `G3_4_PORTRAIT_SAVE.md` (ข้อ 1 API · ข้อ 2 ผล · ข้อ 3 D19–D22) · diff ของ `char2.src.js` จาก `68720fe` (`build` ส่วน portrait · `appOk` `encode` `decode`) · diff ของ `qa/g2-3-portrait/tools/pt_s5.py` (โหมด `--check`) · `G3_0_BASELINE.md` ฉบับ 3 ข้อ 8 · `qa/g3/test_g34.js` · ช่วง (ค2 หน้า) ใน `qa/g3/test_g33_k4.js` · แผนข้อ 4 แถว `portrait` `encode/decode` และข้อ 6 K3c K4 K6 K7

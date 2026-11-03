@@ -1,6 +1,7 @@
 # G3.4 — รูปหน้าใหญ่ · ข้อความลุค (encode / decode) · ปิด K4 K6 ทั้งแพ็ก (Claude · ฉบับ 1 · 2 พ.ย. 2569)
 
 **ที่มา:** แผน G3 ฉบับ 1.4 ขั้น G3.4 ("ต่อ" 2 พ.ย. 22:32 หลัง G3.3 ปิดด้วย Codex T27) · **ไม่แตะเกม** (`index.html` `sw.js` `database.rules.json` เปลี่ยน 0) · ไม่อ่าน/เขียนเซฟจริง · ไม่แตะไฟล์ภาพ/หน้ากาก/ตารางเฉดที่ล็อก · ไม่ใช้เครดิต
+**✅ ปิดขั้น G3.4 แล้ว** (Codex T28 @ `8c571d0`: ตัวเลขตรงทุกข้อ · oracle รุ่นเก่า/ใหม่ผลตรงทุกไบต์ · D19–D22 รับ · ใหม่ สูง 0 กลาง 0 ต่ำ 0) · ยังไม่ใช่การรับ G3 ทั้งระบบ (เหลือ G3.5)
 **ไฟล์ของ Claude ที่เพิ่ม/เปลี่ยน:**
 - `char2.src.js` → `char2.js` (สร้างด้วย `qa/g3/build_char2.js` เหมือน G3.3) · รุ่น `g3.4`
 - `qa/g2-3-portrait/tools/pt_s5.py` + โหมด `--check DIR` (oracle เดิมไม่แตะ · baseline ฉบับ 3 ข้อ 8)
@@ -39,7 +40,7 @@
 python3 -m http.server 8792 --bind 127.0.0.1                                     (ที่ root)
 NODE_PATH=<dir ที่มี terser 5.36.0> node qa/g3/build_char2.js --check
 python3 -I qa/g3/check_k1_k6.py . origin/main
-python3 -I qa/g2-3-portrait/tools/pt_s5.py . --selftest <OUT.json>              (ต้อง 9/9)
+python3 -I qa/g2-3-portrait/tools/pt_s5.py . --selftest <OUT.json>              (ต้อง 9/9 · ต้องมี numpy Pillow scikit-image ใน python3 ที่อยู่ใน PATH เพราะ k3c เรียก python3 เอง)
 PORT=8792 node qa/g3/test_g34.js k3c <OUT.json> <TMP_DIR นอก repo>           (~3 นาที · เรียก pt_s5.py --check เอง)
 PORT=8792 node qa/g3/test_g34.js k7 <OUT.json>
 PORT=8792 node qa/g3/test_g33_k4.js <OUT.json> <DIR ที่มี composed.json>       (มีช่วง ค2 หน้า แล้ว)
