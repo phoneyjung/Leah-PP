@@ -1,0 +1,5 @@
+[
+ {"id": "S1-capital", "map": "capital", "go": [5, 0], "dark": false, "why": "start map of a new save (game 2.33 new world): town, houses, NPCs, shadows · zoom 75 % by default"},
+ {"id": "S2-farm", "map": "farm", "go": [0, 4], "dark": false, "why": "large painted outdoor map: crops, animals, farm music"},
+ {"id": "S3-cavemouth", "map": "cavemouth", "go": [4, 0], "dark": true, "why": "dark cave mouth: darkness layer, lantern held (age 7), monsters that do not attack"}
+]

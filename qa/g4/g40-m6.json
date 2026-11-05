@@ -1,0 +1,1157 @@
+{
+ "baseline": {
+  "method": "A5 · 844x390 DPR3 · CPU 4x · warm 5 s · 30 s x 3 · order alternates",
+  "targets": [
+   {
+    "label": "main",
+    "url": "http://127.0.0.1:8780"
+   }
+  ],
+  "runs": [
+   {
+    "round": 1,
+    "scene": "S1-capital",
+    "target": "main",
+    "fps": 21.96,
+    "p95": 66.6,
+    "frames": 659,
+    "draws": 12521,
+    "walked": 2930,
+    "map": "capital",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 19
+   },
+   {
+    "round": 1,
+    "scene": "S2-farm",
+    "target": "main",
+    "fps": 18.34,
+    "p95": 66.7,
+    "frames": 551,
+    "draws": 132244,
+    "walked": 2595,
+    "map": "farm",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 240
+   },
+   {
+    "round": 1,
+    "scene": "S3-cavemouth",
+    "target": "main",
+    "fps": 43.38,
+    "p95": 33.4,
+    "frames": 1302,
+    "draws": 18228,
+    "walked": 2941,
+    "map": "cavemouth",
+    "dark": true,
+    "held": true,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 14
+   },
+   {
+    "round": 2,
+    "scene": "S1-capital",
+    "target": "main",
+    "fps": 22.2,
+    "p95": 50.1,
+    "frames": 666,
+    "draws": 12654,
+    "walked": 2971,
+    "map": "capital",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 19
+   },
+   {
+    "round": 2,
+    "scene": "S2-farm",
+    "target": "main",
+    "fps": 18.44,
+    "p95": 66.7,
+    "frames": 554,
+    "draws": 131625,
+    "walked": 2579,
+    "map": "farm",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 237.6
+   },
+   {
+    "round": 2,
+    "scene": "S3-cavemouth",
+    "target": "main",
+    "fps": 44.2,
+    "p95": 33.4,
+    "frames": 1326,
+    "draws": 18564,
+    "walked": 2927,
+    "map": "cavemouth",
+    "dark": true,
+    "held": true,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 14
+   },
+   {
+    "round": 3,
+    "scene": "S1-capital",
+    "target": "main",
+    "fps": 21.26,
+    "p95": 66.6,
+    "frames": 638,
+    "draws": 12122,
+    "walked": 2905,
+    "map": "capital",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 19
+   },
+   {
+    "round": 3,
+    "scene": "S2-farm",
+    "target": "main",
+    "fps": 18.76,
+    "p95": 66.7,
+    "frames": 563,
+    "draws": 135634,
+    "walked": 2631,
+    "map": "farm",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 240.9
+   },
+   {
+    "round": 3,
+    "scene": "S3-cavemouth",
+    "target": "main",
+    "fps": 42.98,
+    "p95": 33.4,
+    "frames": 1290,
+    "draws": 18060,
+    "walked": 2934,
+    "map": "cavemouth",
+    "dark": true,
+    "held": true,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 14
+   }
+  ],
+  "errors": [],
+  "summary": {
+   "S1-capital": {
+    "main": {
+     "fps": 21.96,
+     "p95": 66.6,
+     "drawsPerFrame": 19,
+     "walked": 2930,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    }
+   },
+   "S2-farm": {
+    "main": {
+     "fps": 18.44,
+     "p95": 66.7,
+     "drawsPerFrame": 240,
+     "walked": 2595,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    }
+   },
+   "S3-cavemouth": {
+    "main": {
+     "fps": 43.38,
+     "p95": 33.4,
+     "drawsPerFrame": 14,
+     "walked": 2934,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    }
+   }
+  },
+  "pass": true
+ },
+ "mainVsMain_full": {
+  "method": "A5 · 844x390 DPR3 · CPU 4x · warm 5 s · 30 s x 3 · order alternates",
+  "targets": [
+   {
+    "label": "main",
+    "url": "http://127.0.0.1:8780"
+   },
+   {
+    "label": "main-2",
+    "url": "http://127.0.0.1:8780"
+   }
+  ],
+  "runs": [
+   {
+    "round": 1,
+    "scene": "S1-capital",
+    "target": "main",
+    "fps": 17.37,
+    "p95": 83.3,
+    "frames": 521,
+    "draws": 9899,
+    "walked": 2510,
+    "map": "capital",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 19
+   },
+   {
+    "round": 1,
+    "scene": "S1-capital",
+    "target": "main-2",
+    "fps": 16.99,
+    "p95": 83.4,
+    "frames": 510,
+    "draws": 9690,
+    "walked": 2501,
+    "map": "capital",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 19
+   },
+   {
+    "round": 1,
+    "scene": "S2-farm",
+    "target": "main",
+    "fps": 12.68,
+    "p95": 100.1,
+    "frames": 381,
+    "draws": 90725,
+    "walked": 1826,
+    "map": "farm",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 238.1
+   },
+   {
+    "round": 1,
+    "scene": "S2-farm",
+    "target": "main-2",
+    "fps": 14.1,
+    "p95": 100.1,
+    "frames": 423,
+    "draws": 101053,
+    "walked": 1997,
+    "map": "farm",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 238.9
+   },
+   {
+    "round": 1,
+    "scene": "S3-cavemouth",
+    "target": "main",
+    "fps": 32.51,
+    "p95": 50,
+    "frames": 976,
+    "draws": 13664,
+    "walked": 2906,
+    "map": "cavemouth",
+    "dark": true,
+    "held": true,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 14
+   },
+   {
+    "round": 1,
+    "scene": "S3-cavemouth",
+    "target": "main-2",
+    "fps": 30.66,
+    "p95": 50,
+    "frames": 920,
+    "draws": 12880,
+    "walked": 2872,
+    "map": "cavemouth",
+    "dark": true,
+    "held": true,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 14
+   },
+   {
+    "round": 2,
+    "scene": "S1-capital",
+    "target": "main-2",
+    "fps": 17.21,
+    "p95": 83.3,
+    "frames": 517,
+    "draws": 9823,
+    "walked": 2505,
+    "map": "capital",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 19
+   },
+   {
+    "round": 2,
+    "scene": "S1-capital",
+    "target": "main",
+    "fps": 14.84,
+    "p95": 116.6,
+    "frames": 446,
+    "draws": 8474,
+    "walked": 2224,
+    "map": "capital",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 19
+   },
+   {
+    "round": 2,
+    "scene": "S2-farm",
+    "target": "main-2",
+    "fps": 12.9,
+    "p95": 116.6,
+    "frames": 388,
+    "draws": 91912,
+    "walked": 1867,
+    "map": "farm",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 236.9
+   },
+   {
+    "round": 2,
+    "scene": "S2-farm",
+    "target": "main",
+    "fps": 12.66,
+    "p95": 100.1,
+    "frames": 380,
+    "draws": 89562,
+    "walked": 1802,
+    "map": "farm",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 235.7
+   },
+   {
+    "round": 2,
+    "scene": "S3-cavemouth",
+    "target": "main-2",
+    "fps": 35.81,
+    "p95": 33.4,
+    "frames": 1078,
+    "draws": 15092,
+    "walked": 2929,
+    "map": "cavemouth",
+    "dark": true,
+    "held": true,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 14
+   },
+   {
+    "round": 2,
+    "scene": "S3-cavemouth",
+    "target": "main",
+    "fps": 36.45,
+    "p95": 33.4,
+    "frames": 1094,
+    "draws": 15316,
+    "walked": 2890,
+    "map": "cavemouth",
+    "dark": true,
+    "held": true,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 14
+   },
+   {
+    "round": 3,
+    "scene": "S1-capital",
+    "target": "main",
+    "fps": 19.46,
+    "p95": 66.7,
+    "frames": 584,
+    "draws": 11096,
+    "walked": 2828,
+    "map": "capital",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 19
+   },
+   {
+    "round": 3,
+    "scene": "S1-capital",
+    "target": "main-2",
+    "fps": 18.45,
+    "p95": 66.8,
+    "frames": 554,
+    "draws": 10526,
+    "walked": 2713,
+    "map": "capital",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 19
+   },
+   {
+    "round": 3,
+    "scene": "S2-farm",
+    "target": "main",
+    "fps": 17.07,
+    "p95": 83.3,
+    "frames": 513,
+    "draws": 124474,
+    "walked": 2416,
+    "map": "farm",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 242.6
+   },
+   {
+    "round": 3,
+    "scene": "S2-farm",
+    "target": "main-2",
+    "fps": 17.36,
+    "p95": 83.3,
+    "frames": 521,
+    "draws": 121843,
+    "walked": 2442,
+    "map": "farm",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 233.9
+   },
+   {
+    "round": 3,
+    "scene": "S3-cavemouth",
+    "target": "main",
+    "fps": 41.47,
+    "p95": 33.4,
+    "frames": 1245,
+    "draws": 17430,
+    "walked": 2954,
+    "map": "cavemouth",
+    "dark": true,
+    "held": true,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 14
+   },
+   {
+    "round": 3,
+    "scene": "S3-cavemouth",
+    "target": "main-2",
+    "fps": 40.62,
+    "p95": 33.4,
+    "frames": 1219,
+    "draws": 17066,
+    "walked": 2888,
+    "map": "cavemouth",
+    "dark": true,
+    "held": true,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 14
+   }
+  ],
+  "errors": [],
+  "summary": {
+   "S1-capital": {
+    "main": {
+     "fps": 17.37,
+     "p95": 83.3,
+     "drawsPerFrame": 19,
+     "walked": 2510,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "main-2": {
+     "fps": 17.21,
+     "p95": 83.3,
+     "drawsPerFrame": 19,
+     "walked": 2505,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "ratio": 0.991,
+    "gate": true
+   },
+   "S2-farm": {
+    "main": {
+     "fps": 12.68,
+     "p95": 100.1,
+     "drawsPerFrame": 238.1,
+     "walked": 1826,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "main-2": {
+     "fps": 14.1,
+     "p95": 100.1,
+     "drawsPerFrame": 236.9,
+     "walked": 1997,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "ratio": 1.112,
+    "gate": true
+   },
+   "S3-cavemouth": {
+    "main": {
+     "fps": 36.45,
+     "p95": 33.4,
+     "drawsPerFrame": 14,
+     "walked": 2906,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "main-2": {
+     "fps": 35.81,
+     "p95": 33.4,
+     "drawsPerFrame": 14,
+     "walked": 2888,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "ratio": 0.982,
+    "gate": true
+   }
+  },
+  "pass": true
+ },
+ "mainVsMain_quick": {
+  "method": "A5 · 844x390 DPR3 · CPU 4x · warm 3 s · 10 s x 1 · order alternates",
+  "targets": [
+   {
+    "label": "main",
+    "url": "http://127.0.0.1:8780"
+   },
+   {
+    "label": "main-2",
+    "url": "http://127.0.0.1:8780"
+   }
+  ],
+  "runs": [
+   {
+    "round": 1,
+    "scene": "S1-capital",
+    "target": "main",
+    "fps": 21.23,
+    "p95": 66.7,
+    "frames": 213,
+    "draws": 4047,
+    "walked": 987,
+    "map": "capital",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 19
+   },
+   {
+    "round": 1,
+    "scene": "S1-capital",
+    "target": "main-2",
+    "fps": 19.48,
+    "p95": 66.7,
+    "frames": 195,
+    "draws": 3705,
+    "walked": 934,
+    "map": "capital",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 19
+   },
+   {
+    "round": 1,
+    "scene": "S2-farm",
+    "target": "main",
+    "fps": 18.05,
+    "p95": 66.8,
+    "frames": 181,
+    "draws": 47555,
+    "walked": 843,
+    "map": "farm",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 262.7
+   },
+   {
+    "round": 1,
+    "scene": "S2-farm",
+    "target": "main-2",
+    "fps": 18.1,
+    "p95": 66.7,
+    "frames": 182,
+    "draws": 48385,
+    "walked": 864,
+    "map": "farm",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 265.9
+   },
+   {
+    "round": 1,
+    "scene": "S3-cavemouth",
+    "target": "main",
+    "fps": 40.32,
+    "p95": 33.4,
+    "frames": 404,
+    "draws": 5656,
+    "walked": 989,
+    "map": "cavemouth",
+    "dark": true,
+    "held": true,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 14
+   },
+   {
+    "round": 1,
+    "scene": "S3-cavemouth",
+    "target": "main-2",
+    "fps": 42.78,
+    "p95": 33.4,
+    "frames": 428,
+    "draws": 5992,
+    "walked": 993,
+    "map": "cavemouth",
+    "dark": true,
+    "held": true,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 14
+   }
+  ],
+  "errors": [],
+  "summary": {
+   "S1-capital": {
+    "main": {
+     "fps": 21.23,
+     "p95": 66.7,
+     "drawsPerFrame": 19,
+     "walked": 987,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "main-2": {
+     "fps": 19.48,
+     "p95": 66.7,
+     "drawsPerFrame": 19,
+     "walked": 934,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "ratio": 0.918,
+    "gate": true
+   },
+   "S2-farm": {
+    "main": {
+     "fps": 18.05,
+     "p95": 66.8,
+     "drawsPerFrame": 262.7,
+     "walked": 843,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "main-2": {
+     "fps": 18.1,
+     "p95": 66.7,
+     "drawsPerFrame": 265.9,
+     "walked": 864,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "ratio": 1.003,
+    "gate": true
+   },
+   "S3-cavemouth": {
+    "main": {
+     "fps": 40.32,
+     "p95": 33.4,
+     "drawsPerFrame": 14,
+     "walked": 989,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "main-2": {
+     "fps": 42.78,
+     "p95": 33.4,
+     "drawsPerFrame": 14,
+     "walked": 993,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "ratio": 1.061,
+    "gate": true
+   }
+  },
+  "pass": true
+ },
+ "inject_SLOW": {
+  "method": "A5 · 844x390 DPR3 · CPU 4x · warm 3 s · 10 s x 1 · order alternates",
+  "targets": [
+   {
+    "label": "main",
+    "url": "http://127.0.0.1:8780"
+   },
+   {
+    "label": "main+SLOW",
+    "url": "http://127.0.0.1:8780",
+    "inject": "SLOW"
+   }
+  ],
+  "runs": [
+   {
+    "round": 1,
+    "scene": "S1-capital",
+    "target": "main",
+    "fps": 22.06,
+    "p95": 66.6,
+    "frames": 221,
+    "draws": 4199,
+    "walked": 984,
+    "map": "capital",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 19
+   },
+   {
+    "round": 1,
+    "scene": "S1-capital",
+    "target": "main+SLOW",
+    "fps": 15.43,
+    "p95": 83.4,
+    "frames": 155,
+    "draws": 2945,
+    "walked": 779,
+    "map": "capital",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 19
+   },
+   {
+    "round": 1,
+    "scene": "S2-farm",
+    "target": "main",
+    "fps": 19.05,
+    "p95": 66.7,
+    "frames": 191,
+    "draws": 49649,
+    "walked": 893,
+    "map": "farm",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 259.9
+   },
+   {
+    "round": 1,
+    "scene": "S2-farm",
+    "target": "main+SLOW",
+    "fps": 12.23,
+    "p95": 100,
+    "frames": 123,
+    "draws": 32328,
+    "walked": 568,
+    "map": "farm",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 262.8
+   },
+   {
+    "round": 1,
+    "scene": "S3-cavemouth",
+    "target": "main",
+    "fps": 44.22,
+    "p95": 33.4,
+    "frames": 443,
+    "draws": 6202,
+    "walked": 988,
+    "map": "cavemouth",
+    "dark": true,
+    "held": true,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 14
+   },
+   {
+    "round": 1,
+    "scene": "S3-cavemouth",
+    "target": "main+SLOW",
+    "fps": 23.04,
+    "p95": 50.1,
+    "frames": 231,
+    "draws": 3234,
+    "walked": 973,
+    "map": "cavemouth",
+    "dark": true,
+    "held": true,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 14
+   }
+  ],
+  "errors": [],
+  "summary": {
+   "S1-capital": {
+    "main": {
+     "fps": 22.06,
+     "p95": 66.6,
+     "drawsPerFrame": 19,
+     "walked": 984,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "main+SLOW": {
+     "fps": 15.43,
+     "p95": 83.4,
+     "drawsPerFrame": 19,
+     "walked": 779,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "ratio": 0.699,
+    "gate": false
+   },
+   "S2-farm": {
+    "main": {
+     "fps": 19.05,
+     "p95": 66.7,
+     "drawsPerFrame": 259.9,
+     "walked": 893,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "main+SLOW": {
+     "fps": 12.23,
+     "p95": 100,
+     "drawsPerFrame": 262.8,
+     "walked": 568,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "ratio": 0.642,
+    "gate": false
+   },
+   "S3-cavemouth": {
+    "main": {
+     "fps": 44.22,
+     "p95": 33.4,
+     "drawsPerFrame": 14,
+     "walked": 988,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "main+SLOW": {
+     "fps": 23.04,
+     "p95": 50.1,
+     "drawsPerFrame": 14,
+     "walked": 973,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "ratio": 0.521,
+    "gate": false
+   }
+  },
+  "pass": false
+ },
+ "inject_EMPTY": {
+  "method": "A5 · 844x390 DPR3 · CPU 4x · warm 3 s · 10 s x 1 · order alternates",
+  "targets": [
+   {
+    "label": "main",
+    "url": "http://127.0.0.1:8780"
+   },
+   {
+    "label": "main+EMPTY",
+    "url": "http://127.0.0.1:8780",
+    "inject": "EMPTY"
+   }
+  ],
+  "runs": [
+   {
+    "round": 1,
+    "scene": "S1-capital",
+    "target": "main",
+    "fps": 21.49,
+    "p95": 50.1,
+    "frames": 215,
+    "draws": 4085,
+    "walked": 1010,
+    "map": "capital",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 19
+   },
+   {
+    "round": 1,
+    "scene": "S1-capital",
+    "target": "main+EMPTY",
+    "fps": 31.84,
+    "p95": 50,
+    "frames": 319,
+    "draws": 0,
+    "walked": 1007,
+    "map": "capital",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 0
+   },
+   {
+    "round": 1,
+    "scene": "S2-farm",
+    "target": "main",
+    "fps": 17.34,
+    "p95": 66.7,
+    "frames": 174,
+    "draws": 45882,
+    "walked": 838,
+    "map": "farm",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 263.7
+   },
+   {
+    "round": 1,
+    "scene": "S2-farm",
+    "target": "main+EMPTY",
+    "fps": 26.96,
+    "p95": 50.1,
+    "frames": 270,
+    "draws": 0,
+    "walked": 962,
+    "map": "farm",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 0
+   },
+   {
+    "round": 1,
+    "scene": "S3-cavemouth",
+    "target": "main",
+    "fps": 44.54,
+    "p95": 33.4,
+    "frames": 446,
+    "draws": 6244,
+    "walked": 991,
+    "map": "cavemouth",
+    "dark": true,
+    "held": true,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 14
+   },
+   {
+    "round": 1,
+    "scene": "S3-cavemouth",
+    "target": "main+EMPTY",
+    "fps": 55.3,
+    "p95": 33.3,
+    "frames": 554,
+    "draws": 0,
+    "walked": 982,
+    "map": "cavemouth",
+    "dark": true,
+    "held": true,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 0
+   }
+  ],
+  "errors": [],
+  "summary": {
+   "S1-capital": {
+    "main": {
+     "fps": 21.49,
+     "p95": 50.1,
+     "drawsPerFrame": 19,
+     "walked": 1010,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "main+EMPTY": {
+     "fps": 31.84,
+     "p95": 50,
+     "drawsPerFrame": 0,
+     "walked": 1007,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "ratio": 1.482,
+    "gate": false
+   },
+   "S2-farm": {
+    "main": {
+     "fps": 17.34,
+     "p95": 66.7,
+     "drawsPerFrame": 263.7,
+     "walked": 838,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "main+EMPTY": {
+     "fps": 26.96,
+     "p95": 50.1,
+     "drawsPerFrame": 0,
+     "walked": 962,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "ratio": 1.555,
+    "gate": false
+   },
+   "S3-cavemouth": {
+    "main": {
+     "fps": 44.54,
+     "p95": 33.4,
+     "drawsPerFrame": 14,
+     "walked": 991,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "main+EMPTY": {
+     "fps": 55.3,
+     "p95": 33.3,
+     "drawsPerFrame": 0,
+     "walked": 982,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "ratio": 1.242,
+    "gate": false
+   }
+  },
+  "pass": false
+ }
+}

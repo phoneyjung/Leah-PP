@@ -1,0 +1,2302 @@
+{
+ "harness": "qa/g4/replay.js + vclock.js + compare.py",
+ "base": "main eb60c65",
+ "runs": {
+  "m5_0.75_A": {
+   "zoom": 0.75,
+   "inject": null,
+   "checkpoints": 63,
+   "startV": 600,
+   "endV": 69199.99999999725,
+   "frames": 4152,
+   "pageErrors": [],
+   "blocked": [
+    "fonts.googleapis.com"
+   ],
+   "ms": 20039,
+   "args": [
+    "--disable-gpu",
+    "--disable-gpu-compositing",
+    "--disable-lcd-text",
+    "--disable-partial-raster",
+    "--num-raster-threads=1",
+    "--run-all-compositor-stages-before-draw"
+   ]
+  },
+  "m5_0.75_B": {
+   "zoom": 0.75,
+   "inject": null,
+   "checkpoints": 63,
+   "startV": 600,
+   "endV": 69199.99999999725,
+   "frames": 4152,
+   "pageErrors": [],
+   "blocked": [
+    "fonts.googleapis.com"
+   ],
+   "ms": 19820,
+   "args": [
+    "--disable-gpu",
+    "--disable-gpu-compositing",
+    "--disable-lcd-text",
+    "--disable-partial-raster",
+    "--num-raster-threads=1",
+    "--run-all-compositor-stages-before-draw"
+   ]
+  },
+  "m5_0.75_C": {
+   "zoom": 0.75,
+   "inject": null,
+   "checkpoints": 63,
+   "startV": 600,
+   "endV": 69199.99999999725,
+   "frames": 4152,
+   "pageErrors": [],
+   "blocked": [
+    "fonts.googleapis.com"
+   ],
+   "ms": 19675,
+   "args": [
+    "--disable-gpu",
+    "--disable-gpu-compositing",
+    "--disable-lcd-text",
+    "--disable-partial-raster",
+    "--num-raster-threads=1",
+    "--run-all-compositor-stages-before-draw"
+   ]
+  },
+  "m5_1_A": {
+   "zoom": 1,
+   "inject": null,
+   "checkpoints": 63,
+   "startV": 600,
+   "endV": 69199.99999999725,
+   "frames": 4152,
+   "pageErrors": [],
+   "blocked": [
+    "fonts.googleapis.com"
+   ],
+   "ms": 18992,
+   "args": [
+    "--disable-gpu",
+    "--disable-gpu-compositing",
+    "--disable-lcd-text",
+    "--disable-partial-raster",
+    "--num-raster-threads=1",
+    "--run-all-compositor-stages-before-draw"
+   ]
+  },
+  "m5_1_B": {
+   "zoom": 1,
+   "inject": null,
+   "checkpoints": 63,
+   "startV": 600,
+   "endV": 69199.99999999725,
+   "frames": 4152,
+   "pageErrors": [],
+   "blocked": [
+    "fonts.googleapis.com"
+   ],
+   "ms": 18904,
+   "args": [
+    "--disable-gpu",
+    "--disable-gpu-compositing",
+    "--disable-lcd-text",
+    "--disable-partial-raster",
+    "--num-raster-threads=1",
+    "--run-all-compositor-stages-before-draw"
+   ]
+  },
+  "m5_1_C": {
+   "zoom": 1,
+   "inject": null,
+   "checkpoints": 63,
+   "startV": 600,
+   "endV": 69199.99999999725,
+   "frames": 4152,
+   "pageErrors": [],
+   "blocked": [
+    "fonts.googleapis.com"
+   ],
+   "ms": 19188,
+   "args": [
+    "--disable-gpu",
+    "--disable-gpu-compositing",
+    "--disable-lcd-text",
+    "--disable-partial-raster",
+    "--num-raster-threads=1",
+    "--run-all-compositor-stages-before-draw"
+   ]
+  },
+  "rp_A": {
+   "zoom": null,
+   "inject": null,
+   "checkpoints": 24,
+   "startV": 600,
+   "endV": 124600.00000001337,
+   "frames": 7476,
+   "pageErrors": [],
+   "blocked": [
+    "fonts.googleapis.com"
+   ],
+   "ms": 22381,
+   "args": [
+    "--disable-gpu",
+    "--disable-gpu-compositing",
+    "--disable-lcd-text",
+    "--disable-partial-raster",
+    "--num-raster-threads=1",
+    "--run-all-compositor-stages-before-draw"
+   ]
+  },
+  "rp_B": {
+   "zoom": null,
+   "inject": null,
+   "checkpoints": 24,
+   "startV": 600,
+   "endV": 124600.00000001337,
+   "frames": 7476,
+   "pageErrors": [],
+   "blocked": [
+    "fonts.googleapis.com"
+   ],
+   "ms": 22099,
+   "args": [
+    "--disable-gpu",
+    "--disable-gpu-compositing",
+    "--disable-lcd-text",
+    "--disable-partial-raster",
+    "--num-raster-threads=1",
+    "--run-all-compositor-stages-before-draw"
+   ]
+  },
+  "rp_C": {
+   "zoom": null,
+   "inject": null,
+   "checkpoints": 24,
+   "startV": 600,
+   "endV": 124600.00000001337,
+   "frames": 7476,
+   "pageErrors": [],
+   "blocked": [
+    "fonts.googleapis.com"
+   ],
+   "ms": 22205,
+   "args": [
+    "--disable-gpu",
+    "--disable-gpu-compositing",
+    "--disable-lcd-text",
+    "--disable-partial-raster",
+    "--num-raster-threads=1",
+    "--run-all-compositor-stages-before-draw"
+   ]
+  },
+  "rp_img": {
+   "zoom": null,
+   "inject": "img@13",
+   "checkpoints": 24,
+   "startV": 600,
+   "endV": 124600.00000001337,
+   "frames": 7476,
+   "pageErrors": [],
+   "blocked": [
+    "fonts.googleapis.com"
+   ],
+   "ms": 22563,
+   "args": [
+    "--disable-gpu",
+    "--disable-gpu-compositing",
+    "--disable-lcd-text",
+    "--disable-partial-raster",
+    "--num-raster-threads=1",
+    "--run-all-compositor-stages-before-draw"
+   ]
+  },
+  "rp_pos": {
+   "zoom": null,
+   "inject": "pos@13",
+   "checkpoints": 24,
+   "startV": 600,
+   "endV": 124600.00000001337,
+   "frames": 7476,
+   "pageErrors": [],
+   "blocked": [
+    "fonts.googleapis.com"
+   ],
+   "ms": 22556,
+   "args": [
+    "--disable-gpu",
+    "--disable-gpu-compositing",
+    "--disable-lcd-text",
+    "--disable-partial-raster",
+    "--num-raster-threads=1",
+    "--run-all-compositor-stages-before-draw"
+   ]
+  },
+  "rpz1_A": {
+   "zoom": 1,
+   "inject": null,
+   "checkpoints": 24,
+   "startV": 600,
+   "endV": 124600.00000001337,
+   "frames": 7476,
+   "pageErrors": [],
+   "blocked": [
+    "fonts.googleapis.com"
+   ],
+   "ms": 19302,
+   "args": [
+    "--disable-gpu",
+    "--disable-gpu-compositing",
+    "--disable-lcd-text",
+    "--disable-partial-raster",
+    "--num-raster-threads=1",
+    "--run-all-compositor-stages-before-draw"
+   ]
+  },
+  "rpz1_B": {
+   "zoom": 1,
+   "inject": null,
+   "checkpoints": 24,
+   "startV": 600,
+   "endV": 124600.00000001337,
+   "frames": 7476,
+   "pageErrors": [],
+   "blocked": [
+    "fonts.googleapis.com"
+   ],
+   "ms": 19674,
+   "args": [
+    "--disable-gpu",
+    "--disable-gpu-compositing",
+    "--disable-lcd-text",
+    "--disable-partial-raster",
+    "--num-raster-threads=1",
+    "--run-all-compositor-stages-before-draw"
+   ]
+  }
+ },
+ "compare": {
+  "AB": {
+   "checkpoints": 24,
+   "bad": 0,
+   "pxTotal": 0,
+   "stateTotal": 0,
+   "drawDiff": 0,
+   "rows": [
+    {
+     "cp": "cp01",
+     "map": "capital",
+     "vnow": 1100,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp02",
+     "map": "capital",
+     "vnow": 3100,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp03",
+     "map": "capital",
+     "vnow": 4600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp04",
+     "map": "capital",
+     "vnow": 6100,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp05",
+     "map": "capital",
+     "vnow": 9600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp06",
+     "map": "capital",
+     "vnow": 11600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp07",
+     "map": "capital",
+     "vnow": 15600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp08",
+     "map": "capital",
+     "vnow": 17600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp09",
+     "map": "farm",
+     "vnow": 18100,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp10",
+     "map": "farm",
+     "vnow": 20100,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp11",
+     "map": "farm",
+     "vnow": 22100,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp12",
+     "map": "farm",
+     "vnow": 27100,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp13",
+     "map": "farm",
+     "vnow": 29100,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp14",
+     "map": "farm",
+     "vnow": 61100,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "dusk"
+    },
+    {
+     "cp": "cp15",
+     "map": "farm",
+     "vnow": 63100,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "dusk"
+    },
+    {
+     "cp": "cp16",
+     "map": "farm",
+     "vnow": 65100,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "dusk"
+    },
+    {
+     "cp": "cp17",
+     "map": "cavemouth",
+     "vnow": 65600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "dusk"
+    },
+    {
+     "cp": "cp18",
+     "map": "cavemouth",
+     "vnow": 67600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "dusk"
+    },
+    {
+     "cp": "cp19",
+     "map": "cavemouth",
+     "vnow": 69600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "dusk"
+    },
+    {
+     "cp": "cp20",
+     "map": "cavemouth",
+     "vnow": 74600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "dusk"
+    },
+    {
+     "cp": "cp21",
+     "map": "cavemouth",
+     "vnow": 76600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "dusk"
+    },
+    {
+     "cp": "cp22",
+     "map": "cavemouth",
+     "vnow": 121600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "dusk"
+    },
+    {
+     "cp": "cp23",
+     "map": "cavemouth",
+     "vnow": 123600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "dusk"
+    },
+    {
+     "cp": "cp24",
+     "map": "cavemouth",
+     "vnow": 124600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "dusk"
+    }
+   ]
+  },
+  "AC": {
+   "checkpoints": 24,
+   "bad": 0,
+   "pxTotal": 0,
+   "stateTotal": 0,
+   "drawDiff": 0
+  },
+  "Z1": {
+   "checkpoints": 24,
+   "bad": 0,
+   "pxTotal": 0,
+   "stateTotal": 0,
+   "drawDiff": 0
+  },
+  "inj_img": {
+   "checkpoints": 24,
+   "bad": 1,
+   "pxTotal": 4,
+   "stateTotal": 0,
+   "drawDiff": 0,
+   "rows": [
+    {
+     "cp": "cp01",
+     "map": "capital",
+     "vnow": 1100,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp02",
+     "map": "capital",
+     "vnow": 3100,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp03",
+     "map": "capital",
+     "vnow": 4600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp04",
+     "map": "capital",
+     "vnow": 6100,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp05",
+     "map": "capital",
+     "vnow": 9600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp06",
+     "map": "capital",
+     "vnow": 11600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp07",
+     "map": "capital",
+     "vnow": 15600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp08",
+     "map": "capital",
+     "vnow": 17600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp09",
+     "map": "farm",
+     "vnow": 18100,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp10",
+     "map": "farm",
+     "vnow": 20100,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp11",
+     "map": "farm",
+     "vnow": 22100,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp12",
+     "map": "farm",
+     "vnow": 27100,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp13",
+     "map": "farm",
+     "vnow": 29100,
+     "px": 4,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp14",
+     "map": "farm",
+     "vnow": 61100,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "dusk"
+    },
+    {
+     "cp": "cp15",
+     "map": "farm",
+     "vnow": 63100,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "dusk"
+    },
+    {
+     "cp": "cp16",
+     "map": "farm",
+     "vnow": 65100,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "dusk"
+    },
+    {
+     "cp": "cp17",
+     "map": "cavemouth",
+     "vnow": 65600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "dusk"
+    },
+    {
+     "cp": "cp18",
+     "map": "cavemouth",
+     "vnow": 67600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "dusk"
+    },
+    {
+     "cp": "cp19",
+     "map": "cavemouth",
+     "vnow": 69600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "dusk"
+    },
+    {
+     "cp": "cp20",
+     "map": "cavemouth",
+     "vnow": 74600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "dusk"
+    },
+    {
+     "cp": "cp21",
+     "map": "cavemouth",
+     "vnow": 76600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "dusk"
+    },
+    {
+     "cp": "cp22",
+     "map": "cavemouth",
+     "vnow": 121600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "dusk"
+    },
+    {
+     "cp": "cp23",
+     "map": "cavemouth",
+     "vnow": 123600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "dusk"
+    },
+    {
+     "cp": "cp24",
+     "map": "cavemouth",
+     "vnow": 124600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "dusk"
+    }
+   ]
+  },
+  "inj_pos": {
+   "checkpoints": 24,
+   "bad": 4,
+   "pxTotal": 1981,
+   "stateTotal": 7,
+   "drawDiff": 4,
+   "rows": [
+    {
+     "cp": "cp01",
+     "map": "capital",
+     "vnow": 1100,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp02",
+     "map": "capital",
+     "vnow": 3100,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp03",
+     "map": "capital",
+     "vnow": 4600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp04",
+     "map": "capital",
+     "vnow": 6100,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp05",
+     "map": "capital",
+     "vnow": 9600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp06",
+     "map": "capital",
+     "vnow": 11600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp07",
+     "map": "capital",
+     "vnow": 15600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp08",
+     "map": "capital",
+     "vnow": 17600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp09",
+     "map": "farm",
+     "vnow": 18100,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp10",
+     "map": "farm",
+     "vnow": 20100,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp11",
+     "map": "farm",
+     "vnow": 22100,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp12",
+     "map": "farm",
+     "vnow": 27100,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "day"
+    },
+    {
+     "cp": "cp13",
+     "map": "farm",
+     "vnow": 29100,
+     "px": 564,
+     "stateN": 1,
+     "draw": false,
+     "phase": "day"
+    },
+    {
+     "cp": "cp14",
+     "map": "farm",
+     "vnow": 61100,
+     "px": 563,
+     "stateN": 2,
+     "draw": false,
+     "phase": "dusk"
+    },
+    {
+     "cp": "cp15",
+     "map": "farm",
+     "vnow": 63100,
+     "px": 427,
+     "stateN": 2,
+     "draw": false,
+     "phase": "dusk"
+    },
+    {
+     "cp": "cp16",
+     "map": "farm",
+     "vnow": 65100,
+     "px": 427,
+     "stateN": 2,
+     "draw": false,
+     "phase": "dusk"
+    },
+    {
+     "cp": "cp17",
+     "map": "cavemouth",
+     "vnow": 65600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "dusk"
+    },
+    {
+     "cp": "cp18",
+     "map": "cavemouth",
+     "vnow": 67600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "dusk"
+    },
+    {
+     "cp": "cp19",
+     "map": "cavemouth",
+     "vnow": 69600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "dusk"
+    },
+    {
+     "cp": "cp20",
+     "map": "cavemouth",
+     "vnow": 74600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "dusk"
+    },
+    {
+     "cp": "cp21",
+     "map": "cavemouth",
+     "vnow": 76600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "dusk"
+    },
+    {
+     "cp": "cp22",
+     "map": "cavemouth",
+     "vnow": 121600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "dusk"
+    },
+    {
+     "cp": "cp23",
+     "map": "cavemouth",
+     "vnow": 123600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "dusk"
+    },
+    {
+     "cp": "cp24",
+     "map": "cavemouth",
+     "vnow": 124600,
+     "px": 0,
+     "stateN": 0,
+     "draw": true,
+     "phase": "dusk"
+    }
+   ]
+  },
+  "m5_0.75_AB": {
+   "checkpoints": 63,
+   "bad": 0,
+   "pxTotal": 0,
+   "stateTotal": 0,
+   "drawDiff": 0
+  },
+  "m5_0.75_AC": {
+   "checkpoints": 63,
+   "bad": 0,
+   "pxTotal": 0,
+   "stateTotal": 0,
+   "drawDiff": 0
+  },
+  "m5_1_AB": {
+   "checkpoints": 63,
+   "bad": 0,
+   "pxTotal": 0,
+   "stateTotal": 0,
+   "drawDiff": 0
+  },
+  "m5_1_AC": {
+   "checkpoints": 63,
+   "bad": 0,
+   "pxTotal": 0,
+   "stateTotal": 0,
+   "drawDiff": 0
+  }
+ },
+ "checkpoints_default": [
+  {
+   "map": "capital",
+   "vnow": 1099.9999999999993,
+   "phase": "day",
+   "dark": false,
+   "lkid": true,
+   "msg": "",
+   "draw": {
+    "n": 19,
+    "hash": "167b327d"
+   }
+  },
+  {
+   "map": "capital",
+   "vnow": 3099.999999999994,
+   "phase": "day",
+   "dark": false,
+   "lkid": true,
+   "msg": "นิ้วโป้งซ้ายแตะจอด้านซ้ายล่าง จอยจะมาอยู่ใต้นิ้ว ลากเพื่อเดิน · แตะพื้นหรือแตะคนก็ได้",
+   "draw": {
+    "n": 19,
+    "hash": "5cc0c74b"
+   }
+  },
+  {
+   "map": "capital",
+   "vnow": 4599.9999999999945,
+   "phase": "day",
+   "dark": false,
+   "lkid": true,
+   "msg": "✨ ศิลาแสงตื่นแล้ว · บันทึกจุดวาร์ป",
+   "draw": {
+    "n": 19,
+    "hash": "4bf4e3bf"
+   }
+  },
+  {
+   "map": "capital",
+   "vnow": 6100.000000000022,
+   "phase": "day",
+   "dark": false,
+   "lkid": true,
+   "msg": "✨ ศิลาแสงตื่นแล้ว · บันทึกจุดวาร์ป",
+   "draw": {
+    "n": 19,
+    "hash": "3ec4b06f"
+   }
+  },
+  {
+   "map": "capital",
+   "vnow": 9600.00000000001,
+   "phase": "day",
+   "dark": false,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 19,
+    "hash": "1639278a"
+   }
+  },
+  {
+   "map": "capital",
+   "vnow": 11599.999999999936,
+   "phase": "day",
+   "dark": false,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 19,
+    "hash": "5a3b41db"
+   }
+  },
+  {
+   "map": "capital",
+   "vnow": 15599.99999999979,
+   "phase": "day",
+   "dark": false,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 19,
+    "hash": "57117363"
+   }
+  },
+  {
+   "map": "capital",
+   "vnow": 17599.99999999985,
+   "phase": "day",
+   "dark": false,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 19,
+    "hash": "94ba1340"
+   }
+  },
+  {
+   "map": "farm",
+   "vnow": 18099.999999999887,
+   "phase": "day",
+   "dark": false,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 147,
+    "hash": "a4294851"
+   }
+  },
+  {
+   "map": "farm",
+   "vnow": 20100.000000000033,
+   "phase": "day",
+   "dark": false,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 237,
+    "hash": "6bd1853c"
+   }
+  },
+  {
+   "map": "farm",
+   "vnow": 22100.00000000018,
+   "phase": "day",
+   "dark": false,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 186,
+    "hash": "e6588717"
+   }
+  },
+  {
+   "map": "farm",
+   "vnow": 27100.000000000542,
+   "phase": "day",
+   "dark": false,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 321,
+    "hash": "a07c8e3b"
+   }
+  },
+  {
+   "map": "farm",
+   "vnow": 29100.000000000688,
+   "phase": "day",
+   "dark": false,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 192,
+    "hash": "74696d5b"
+   }
+  },
+  {
+   "map": "farm",
+   "vnow": 61099.999999996835,
+   "phase": "dusk",
+   "dark": false,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 247,
+    "hash": "4cc4ba4"
+   }
+  },
+  {
+   "map": "farm",
+   "vnow": 63099.999999996544,
+   "phase": "dusk",
+   "dark": false,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 153,
+    "hash": "44f6a293"
+   }
+  },
+  {
+   "map": "farm",
+   "vnow": 65099.99999999625,
+   "phase": "dusk",
+   "dark": false,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 153,
+    "hash": "ac7d7e8c"
+   }
+  },
+  {
+   "map": "cavemouth",
+   "vnow": 65599.9999999962,
+   "phase": "dusk",
+   "dark": true,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 14,
+    "hash": "19e23c5a"
+   }
+  },
+  {
+   "map": "cavemouth",
+   "vnow": 67599.99999999678,
+   "phase": "dusk",
+   "dark": true,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 14,
+    "hash": "de6eef17"
+   }
+  },
+  {
+   "map": "cavemouth",
+   "vnow": 69599.99999999737,
+   "phase": "dusk",
+   "dark": true,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 14,
+    "hash": "568c5c29"
+   }
+  },
+  {
+   "map": "cavemouth",
+   "vnow": 74599.99999999882,
+   "phase": "dusk",
+   "dark": true,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 14,
+    "hash": "2cc199eb"
+   }
+  },
+  {
+   "map": "cavemouth",
+   "vnow": 76599.9999999994,
+   "phase": "dusk",
+   "dark": true,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 14,
+    "hash": "c3549065"
+   }
+  },
+  {
+   "map": "cavemouth",
+   "vnow": 121600.0000000125,
+   "phase": "dusk",
+   "dark": true,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 14,
+    "hash": "4b8d1341"
+   }
+  },
+  {
+   "map": "cavemouth",
+   "vnow": 123600.00000001308,
+   "phase": "dusk",
+   "dark": true,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 14,
+    "hash": "f787ab6b"
+   }
+  },
+  {
+   "map": "cavemouth",
+   "vnow": 124600.00000001337,
+   "phase": "dusk",
+   "dark": true,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 14,
+    "hash": "16d0fa05"
+   }
+  }
+ ],
+ "m5": {
+  "0.75": [
+   {
+    "id": "X01-capital-n",
+    "from": "capital",
+    "after": "cavemouth",
+    "cam": [
+     [
+      253,
+      0
+     ],
+     [
+      240,
+      0
+     ],
+     [
+      189,
+      594
+     ]
+    ],
+    "P3": [
+     752,
+     880
+    ],
+    "SC": 0.75
+   },
+   {
+    "id": "X02-capital-home",
+    "from": "capital",
+    "after": "room",
+    "cam": [
+     [
+      410,
+      504
+     ],
+     [
+      410,
+      479
+     ],
+     [
+      -6,
+      163
+     ]
+    ],
+    "P3": [
+     128,
+     368
+    ],
+    "SC": 0.75
+   },
+   {
+    "id": "X03-capital-w",
+    "from": "capital",
+    "after": "capital",
+    "cam": [
+     [
+      0,
+      290
+     ],
+     [
+      0,
+      206
+     ],
+     [
+      0,
+      206
+     ]
+    ],
+    "P3": [
+     36,
+     476
+    ],
+    "SC": 0.75
+   },
+   {
+    "id": "X04-farm-e",
+    "from": "farm",
+    "after": "capital",
+    "cam": [
+     [
+      794,
+      418
+     ],
+     [
+      0,
+      196
+     ],
+     [
+      0,
+      196
+     ]
+    ],
+    "P3": [
+     44,
+     466
+    ],
+    "SC": 0.75
+   },
+   {
+    "id": "X05-farm-home",
+    "from": "farm",
+    "after": "room",
+    "cam": [
+     [
+      221,
+      258
+     ],
+     [
+      217,
+      152
+     ],
+     [
+      -6,
+      163
+     ]
+    ],
+    "P3": [
+     128,
+     368
+    ],
+    "SC": 0.75
+   },
+   {
+    "id": "X06-room-door",
+    "from": "room",
+    "after": "farm",
+    "cam": [
+     [
+      -6,
+      99
+     ],
+     [
+      -6,
+      194
+     ],
+     [
+      236,
+      166
+     ]
+    ],
+    "P3": [
+     799,
+     436
+    ],
+    "SC": 1
+   },
+   {
+    "id": "X07-room2-down",
+    "from": "room2",
+    "after": "room",
+    "cam": [
+     [
+      -198,
+      -35
+     ],
+     [
+      -198,
+      -35
+     ],
+     [
+      -6,
+      163
+     ]
+    ],
+    "P3": [
+     128,
+     368
+    ],
+    "SC": 1
+   },
+   {
+    "id": "X08-royal-n",
+    "from": "royal",
+    "after": "cavemouth",
+    "cam": [
+     [
+      410,
+      0
+     ],
+     [
+      410,
+      0
+     ],
+     [
+      189,
+      594
+     ]
+    ],
+    "P3": [
+     752,
+     880
+    ],
+    "SC": 0.75
+   },
+   {
+    "id": "X09-royal-s",
+    "from": "royal",
+    "after": "capital",
+    "cam": [
+     [
+      221,
+      504
+     ],
+     [
+      208,
+      504
+     ],
+     [
+      235,
+      0
+     ]
+    ],
+    "P3": [
+     798,
+     42
+    ],
+    "SC": 0.75
+   },
+   {
+    "id": "X10-cavemouth-s",
+    "from": "cavemouth",
+    "after": "capital",
+    "cam": [
+     [
+      189,
+      594
+     ],
+     [
+      189,
+      594
+     ],
+     [
+      235,
+      0
+     ]
+    ],
+    "P3": [
+     798,
+     42
+    ],
+    "SC": 0.75
+   },
+   {
+    "id": "X11-town2-n",
+    "from": "town2",
+    "after": "cavemouth",
+    "cam": [
+     [
+      221,
+      0
+     ],
+     [
+      208,
+      0
+     ],
+     [
+      189,
+      594
+     ]
+    ],
+    "P3": [
+     752,
+     880
+    ],
+    "SC": 0.75
+   },
+   {
+    "id": "X12-town2-w",
+    "from": "town2",
+    "after": "farm",
+    "cam": [
+     [
+      0,
+      290
+     ],
+     [
+      0,
+      262
+     ],
+     [
+      794,
+      366
+     ]
+    ],
+    "P3": [
+     1876,
+     636
+    ],
+    "SC": 0.75
+   },
+   {
+    "id": "X13-town2-e",
+    "from": "town2",
+    "after": "capital",
+    "cam": [
+     [
+      410,
+      258
+     ],
+     [
+      410,
+      258
+     ],
+     [
+      317,
+      290
+     ]
+    ],
+    "P3": [
+     880,
+     560
+    ],
+    "SC": 0.75
+   },
+   {
+    "id": "X14-town2-s",
+    "from": "town2",
+    "after": "capital",
+    "cam": [
+     [
+      221,
+      504
+     ],
+     [
+      208,
+      504
+     ],
+     [
+      317,
+      290
+     ]
+    ],
+    "P3": [
+     880,
+     560
+    ],
+    "SC": 0.75
+   },
+   {
+    "id": "N01-capital-31-17",
+    "from": "capital",
+    "after": "capital",
+    "cam": [
+     [
+      349,
+      290
+     ],
+     [
+      410,
+      290
+     ],
+     [
+      410,
+      290
+     ]
+    ],
+    "P3": [
+     1101,
+     560
+    ],
+    "SC": 0.75
+   },
+   {
+    "id": "N02-capital-31-26",
+    "from": "capital",
+    "after": "capital",
+    "cam": [
+     [
+      349,
+      504
+     ],
+     [
+      410,
+      504
+     ],
+     [
+      410,
+      504
+     ]
+    ],
+    "P3": [
+     1101,
+     848
+    ],
+    "SC": 0.75
+   },
+   {
+    "id": "N03-town2-15-9",
+    "from": "town2",
+    "after": "town2",
+    "cam": [
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      44
+     ],
+     [
+      0,
+      127
+     ]
+    ],
+    "P3": [
+     496,
+     397
+    ],
+    "SC": 0.75
+   },
+   {
+    "id": "N04-town2-33-9",
+    "from": "town2",
+    "after": "town2",
+    "cam": [
+     [
+      410,
+      0
+     ],
+     [
+      410,
+      44
+     ],
+     [
+      410,
+      127
+     ]
+    ],
+    "P3": [
+     1072,
+     397
+    ],
+    "SC": 0.75
+   },
+   {
+    "id": "N05-farm-46-3",
+    "from": "farm",
+    "after": "farm",
+    "cam": [
+     [
+      794,
+      0
+     ],
+     [
+      794,
+      0
+     ],
+     [
+      794,
+      0
+     ]
+    ],
+    "P3": [
+     1581,
+     112
+    ],
+    "SC": 0.75
+   },
+   {
+    "id": "N06-farm-1-4",
+    "from": "farm",
+    "after": "farm",
+    "cam": [
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      0
+     ]
+    ],
+    "P3": [
+     93,
+     239
+    ],
+    "SC": 0.75
+   },
+   {
+    "id": "N07-room-11-3",
+    "from": "room",
+    "after": "room",
+    "cam": [
+     [
+      -6,
+      -90
+     ],
+     [
+      -6,
+      -90
+     ],
+     [
+      -6,
+      -90
+     ]
+    ],
+    "P3": [
+     464,
+     114
+    ],
+    "SC": 1
+   }
+  ],
+  "1": [
+   {
+    "id": "X01-capital-n",
+    "from": "capital",
+    "after": "cavemouth",
+    "cam": [
+     [
+      394,
+      0
+     ],
+     [
+      381,
+      0
+     ],
+     [
+      330,
+      675
+     ]
+    ],
+    "P3": [
+     752,
+     880
+    ],
+    "SC": 1
+   },
+   {
+    "id": "X02-capital-home",
+    "from": "capital",
+    "after": "room",
+    "cam": [
+     [
+      692,
+      634
+     ],
+     [
+      692,
+      544
+     ],
+     [
+      -6,
+      163
+     ]
+    ],
+    "P3": [
+     128,
+     368
+    ],
+    "SC": 1
+   },
+   {
+    "id": "X03-capital-w",
+    "from": "capital",
+    "after": "capital",
+    "cam": [
+     [
+      0,
+      355
+     ],
+     [
+      0,
+      271
+     ],
+     [
+      0,
+      271
+     ]
+    ],
+    "P3": [
+     36,
+     476
+    ],
+    "SC": 1
+   },
+   {
+    "id": "X04-farm-e",
+    "from": "farm",
+    "after": "capital",
+    "cam": [
+     [
+      1076,
+      483
+     ],
+     [
+      0,
+      261
+     ],
+     [
+      0,
+      261
+     ]
+    ],
+    "P3": [
+     44,
+     466
+    ],
+    "SC": 1
+   },
+   {
+    "id": "X05-farm-home",
+    "from": "farm",
+    "after": "room",
+    "cam": [
+     [
+      362,
+      323
+     ],
+     [
+      358,
+      217
+     ],
+     [
+      -6,
+      163
+     ]
+    ],
+    "P3": [
+     128,
+     368
+    ],
+    "SC": 1
+   },
+   {
+    "id": "X06-room-door",
+    "from": "room",
+    "after": "farm",
+    "cam": [
+     [
+      -6,
+      99
+     ],
+     [
+      -6,
+      194
+     ],
+     [
+      377,
+      231
+     ]
+    ],
+    "P3": [
+     799,
+     436
+    ],
+    "SC": 1
+   },
+   {
+    "id": "X07-room2-down",
+    "from": "room2",
+    "after": "room",
+    "cam": [
+     [
+      -198,
+      -35
+     ],
+     [
+      -198,
+      -35
+     ],
+     [
+      -6,
+      163
+     ]
+    ],
+    "P3": [
+     128,
+     368
+    ],
+    "SC": 1
+   },
+   {
+    "id": "X08-royal-n",
+    "from": "royal",
+    "after": "cavemouth",
+    "cam": [
+     [
+      692,
+      0
+     ],
+     [
+      692,
+      0
+     ],
+     [
+      330,
+      675
+     ]
+    ],
+    "P3": [
+     752,
+     880
+    ],
+    "SC": 1
+   },
+   {
+    "id": "X09-royal-s",
+    "from": "royal",
+    "after": "capital",
+    "cam": [
+     [
+      362,
+      634
+     ],
+     [
+      349,
+      634
+     ],
+     [
+      376,
+      0
+     ]
+    ],
+    "P3": [
+     798,
+     42
+    ],
+    "SC": 1
+   },
+   {
+    "id": "X10-cavemouth-s",
+    "from": "cavemouth",
+    "after": "capital",
+    "cam": [
+     [
+      330,
+      675
+     ],
+     [
+      330,
+      724
+     ],
+     [
+      376,
+      0
+     ]
+    ],
+    "P3": [
+     798,
+     42
+    ],
+    "SC": 1
+   },
+   {
+    "id": "X11-town2-n",
+    "from": "town2",
+    "after": "cavemouth",
+    "cam": [
+     [
+      362,
+      0
+     ],
+     [
+      349,
+      0
+     ],
+     [
+      330,
+      675
+     ]
+    ],
+    "P3": [
+     752,
+     880
+    ],
+    "SC": 1
+   },
+   {
+    "id": "X12-town2-w",
+    "from": "town2",
+    "after": "farm",
+    "cam": [
+     [
+      0,
+      355
+     ],
+     [
+      0,
+      327
+     ],
+     [
+      1076,
+      431
+     ]
+    ],
+    "P3": [
+     1876,
+     636
+    ],
+    "SC": 1
+   },
+   {
+    "id": "X13-town2-e",
+    "from": "town2",
+    "after": "capital",
+    "cam": [
+     [
+      692,
+      323
+     ],
+     [
+      692,
+      323
+     ],
+     [
+      458,
+      355
+     ]
+    ],
+    "P3": [
+     880,
+     560
+    ],
+    "SC": 1
+   },
+   {
+    "id": "X14-town2-s",
+    "from": "town2",
+    "after": "capital",
+    "cam": [
+     [
+      362,
+      634
+     ],
+     [
+      349,
+      634
+     ],
+     [
+      458,
+      355
+     ]
+    ],
+    "P3": [
+     880,
+     560
+    ],
+    "SC": 1
+   },
+   {
+    "id": "N01-capital-31-17",
+    "from": "capital",
+    "after": "capital",
+    "cam": [
+     [
+      490,
+      355
+     ],
+     [
+      596,
+      355
+     ],
+     [
+      679,
+      355
+     ]
+    ],
+    "P3": [
+     1101,
+     560
+    ],
+    "SC": 1
+   },
+   {
+    "id": "N02-capital-31-26",
+    "from": "capital",
+    "after": "capital",
+    "cam": [
+     [
+      490,
+      634
+     ],
+     [
+      596,
+      634
+     ],
+     [
+      679,
+      634
+     ]
+    ],
+    "P3": [
+     1101,
+     848
+    ],
+    "SC": 1
+   },
+   {
+    "id": "N03-town2-15-9",
+    "from": "town2",
+    "after": "town2",
+    "cam": [
+     [
+      74,
+      3
+     ],
+     [
+      74,
+      109
+     ],
+     [
+      74,
+      192
+     ]
+    ],
+    "P3": [
+     496,
+     397
+    ],
+    "SC": 1
+   },
+   {
+    "id": "N04-town2-33-9",
+    "from": "town2",
+    "after": "town2",
+    "cam": [
+     [
+      650,
+      3
+     ],
+     [
+      650,
+      109
+     ],
+     [
+      650,
+      192
+     ]
+    ],
+    "P3": [
+     1072,
+     397
+    ],
+    "SC": 1
+   },
+   {
+    "id": "N05-farm-46-3",
+    "from": "farm",
+    "after": "farm",
+    "cam": [
+     [
+      970,
+      0
+     ],
+     [
+      1076,
+      0
+     ],
+     [
+      1076,
+      0
+     ]
+    ],
+    "P3": [
+     1581,
+     112
+    ],
+    "SC": 1
+   },
+   {
+    "id": "N06-farm-1-4",
+    "from": "farm",
+    "after": "farm",
+    "cam": [
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      34
+     ]
+    ],
+    "P3": [
+     93,
+     239
+    ],
+    "SC": 1
+   },
+   {
+    "id": "N07-room-11-3",
+    "from": "room",
+    "after": "room",
+    "cam": [
+     [
+      -6,
+      -90
+     ],
+     [
+      -6,
+      -90
+     ],
+     [
+      -6,
+      -90
+     ]
+    ],
+    "P3": [
+     464,
+     114
+    ],
+    "SC": 1
+   }
+  ]
+ }
+}

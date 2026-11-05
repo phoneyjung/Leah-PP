@@ -1,0 +1,91 @@
+{
+ "main": {
+  "base": "http://127.0.0.1:8780",
+  "patch": null,
+  "inject": false,
+  "steps": {
+   "title": {
+    "resident_MiB": 135.52,
+    "made_MiB": 169.57,
+    "by_kind_resident_MiB": {
+     "image": 116.33,
+     "canvas": 19.19,
+     "imagedata": 0,
+     "bitmap": 0
+    },
+    "screen_MiB": 11.3,
+    "tracked": 794,
+    "alive": 248,
+    "gc": true,
+    "map": null
+   },
+   "S1-capital": {
+    "resident_MiB": 159.37,
+    "made_MiB": 271.16,
+    "by_kind_resident_MiB": {
+     "image": 99.48,
+     "canvas": 59.89,
+     "imagedata": 0,
+     "bitmap": 0
+    },
+    "screen_MiB": 11.3,
+    "tracked": 980,
+    "alive": 291,
+    "gc": true,
+    "map": "capital"
+   },
+   "S2-farm": {
+    "resident_MiB": 192.07,
+    "made_MiB": 320.74,
+    "by_kind_resident_MiB": {
+     "image": 99.48,
+     "canvas": 92.59,
+     "imagedata": 0,
+     "bitmap": 0
+    },
+    "screen_MiB": 11.3,
+    "tracked": 1331,
+    "alive": 476,
+    "gc": true,
+    "map": "farm"
+   },
+   "S3-cavemouth": {
+    "resident_MiB": 204.05,
+    "made_MiB": 349.2,
+    "by_kind_resident_MiB": {
+     "image": 99.48,
+     "canvas": 104.58,
+     "imagedata": 0,
+     "bitmap": 0
+    },
+    "screen_MiB": 11.3,
+    "tracked": 1338,
+    "alive": 478,
+    "gc": true,
+    "map": "cavemouth"
+   }
+  },
+  "peak_resident_MiB": 204.05,
+  "peak_made_MiB": 349.2,
+  "errors": [],
+  "pass": true
+ },
+ "main_run2": {
+  "base": "http://127.0.0.1:8780",
+  "patch": null,
+  "inject": false,
+  "peak_resident_MiB": 204.05,
+  "peak_made_MiB": 349.2,
+  "errors": [],
+  "pass": true
+ },
+ "inject": {
+  "base": "http://127.0.0.1:8780",
+  "patch": null,
+  "inject": true,
+  "peak_resident_MiB": 268.05,
+  "peak_made_MiB": 413.2,
+  "errors": [],
+  "pass": true
+ }
+}
