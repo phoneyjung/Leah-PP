@@ -857,5 +857,15 @@
   "test_170_swordsman.js": "fail 4/4 · same assert every time: after switching save in the picker PS.gmSprite170 is still set (suite written for 1.70, last updated 1.93)",
   "test_178_dig_button.js": "fail 4/4 · the same 9 errors every time (A2 A5 A8 B2 C0 C1 C2 D2 K2: the dig does not start) (suite written for 1.78)"
  },
- "M1rule": "G4 branch, flag off: the 112 suites pass, the 3 above fail with the same signature (no new error line), the flaky 3 are run alone and reported apart"
+ "M1rule": "G4 branch, flag off: the 112 suites pass, the 3 above fail with the same signature (no new error line), the flaky 3 are run alone and reported apart",
+ "v2_after_T34": {
+  "when": "6 Nov 2569 22:05–22:20, a restarted machine (same 2 CPU / Chromium 141 / Node 22), paired runner qa/g4/suites_pair.sh, main vs main",
+  "results": {
+   "test_104_lantern.js": "pass 1/1 both sides",
+   "test_170_swordsman.js": "PASS 1/1 both sides (failed 4/4 at 01–04 h)",
+   "test_178_dig_button.js": "PASS 1/1 both sides (failed 4/4 at 01–04 h; Codex Chromium 151: pass 2/2)",
+   "test_167_context_bubble.js": "fail 3/3 both sides, at two different places (waiting for #context167 · inspect() on farm)"
+  },
+  "conclusion": "the 3 \"fail on main\" of the first session are environment-sensitive (real-time sleeps on a slow shared machine), not a fixed baseline → M1 is judged only main vs branch in the same session (suites_pair.sh + suites_cmp.py); the table above is history, never a reference"
+ }
 }

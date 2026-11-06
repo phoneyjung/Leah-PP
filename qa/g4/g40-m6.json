@@ -1153,5 +1153,600 @@
    }
   },
   "pass": false
+ },
+ "v2_gate_check_none": {
+  "method": "A5 · 844x390 DPR3 · CPU 4x · warm 2 s · 5 s x 1 · order alternates",
+  "targets": [
+   {
+    "label": "main",
+    "url": "http://127.0.0.1:8780"
+   },
+   {
+    "label": "main-control",
+    "url": "http://127.0.0.1:8780"
+   },
+   {
+    "label": "cand",
+    "url": "http://127.0.0.1:8780"
+   }
+  ],
+  "runs": [
+   {
+    "round": 1,
+    "scene": "S1-capital",
+    "target": "main",
+    "fps": 12.31,
+    "p95": 116.6,
+    "frames": 62,
+    "draws": 1178,
+    "walked": 313,
+    "map": "capital",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 19
+   },
+   {
+    "round": 1,
+    "scene": "S1-capital",
+    "target": "main-control",
+    "fps": 12.68,
+    "p95": 100,
+    "frames": 64,
+    "draws": 1216,
+    "walked": 323,
+    "map": "capital",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 19
+   },
+   {
+    "round": 1,
+    "scene": "S1-capital",
+    "target": "cand",
+    "fps": 13.34,
+    "p95": 100.1,
+    "frames": 67,
+    "draws": 1273,
+    "walked": 327,
+    "map": "capital",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 19
+   },
+   {
+    "round": 1,
+    "scene": "S2-farm",
+    "target": "main",
+    "fps": 10.13,
+    "p95": 116.7,
+    "frames": 51,
+    "draws": 13355,
+    "walked": 229,
+    "map": "farm",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 261.9
+   },
+   {
+    "round": 1,
+    "scene": "S2-farm",
+    "target": "main-control",
+    "fps": 9.18,
+    "p95": 150,
+    "frames": 47,
+    "draws": 12392,
+    "walked": 218,
+    "map": "farm",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 263.7
+   },
+   {
+    "round": 1,
+    "scene": "S2-farm",
+    "target": "cand",
+    "fps": 9.76,
+    "p95": 133.4,
+    "frames": 49,
+    "draws": 13009,
+    "walked": 222,
+    "map": "farm",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 265.5
+   },
+   {
+    "round": 1,
+    "scene": "S3-cavemouth",
+    "target": "main",
+    "fps": 25.17,
+    "p95": 50.1,
+    "frames": 126,
+    "draws": 1764,
+    "walked": 489,
+    "map": "cavemouth",
+    "dark": true,
+    "held": true,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 14
+   },
+   {
+    "round": 1,
+    "scene": "S3-cavemouth",
+    "target": "main-control",
+    "fps": 22.6,
+    "p95": 66.7,
+    "frames": 113,
+    "draws": 1582,
+    "walked": 482,
+    "map": "cavemouth",
+    "dark": true,
+    "held": true,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 14
+   },
+   {
+    "round": 1,
+    "scene": "S3-cavemouth",
+    "target": "cand",
+    "fps": 24.26,
+    "p95": 50.1,
+    "frames": 122,
+    "draws": 1708,
+    "walked": 493,
+    "map": "cavemouth",
+    "dark": true,
+    "held": true,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 14
+   }
+  ],
+  "errors": [],
+  "summary": {
+   "S1-capital": {
+    "main": {
+     "fps": 12.31,
+     "p95": 116.6,
+     "drawsPerFrame": 19,
+     "walked": 313,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "main-control": {
+     "fps": 12.68,
+     "p95": 100,
+     "drawsPerFrame": 19,
+     "walked": 323,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "cand": {
+     "fps": 13.34,
+     "p95": 100.1,
+     "drawsPerFrame": 19,
+     "walked": 327,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "pairedRatios": [
+     1.084
+    ],
+    "ratio": 1.084,
+    "ratioOfMedians": 1.084,
+    "controlPairedRatios": [
+     1.03
+    ],
+    "controlRatio": 1.03,
+    "verdict": "pass",
+    "gate": true
+   },
+   "S2-farm": {
+    "main": {
+     "fps": 10.13,
+     "p95": 116.7,
+     "drawsPerFrame": 261.9,
+     "walked": 229,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "main-control": {
+     "fps": 9.18,
+     "p95": 150,
+     "drawsPerFrame": 263.7,
+     "walked": 218,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "cand": {
+     "fps": 9.76,
+     "p95": 133.4,
+     "drawsPerFrame": 265.5,
+     "walked": 222,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "pairedRatios": [
+     0.963
+    ],
+    "ratio": 0.963,
+    "ratioOfMedians": 0.963,
+    "controlPairedRatios": [
+     0.906
+    ],
+    "controlRatio": 0.906,
+    "verdict": "undecided: rerun with ROUNDS=5",
+    "gate": false
+   },
+   "S3-cavemouth": {
+    "main": {
+     "fps": 25.17,
+     "p95": 50.1,
+     "drawsPerFrame": 14,
+     "walked": 489,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "main-control": {
+     "fps": 22.6,
+     "p95": 66.7,
+     "drawsPerFrame": 14,
+     "walked": 482,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "cand": {
+     "fps": 24.26,
+     "p95": 50.1,
+     "drawsPerFrame": 14,
+     "walked": 493,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "pairedRatios": [
+     0.964
+    ],
+    "ratio": 0.964,
+    "ratioOfMedians": 0.964,
+    "controlPairedRatios": [
+     0.898
+    ],
+    "controlRatio": 0.898,
+    "verdict": "undecided: rerun with ROUNDS=5",
+    "gate": false
+   }
+  },
+  "verdict": "undecided",
+  "pass": false
+ },
+ "v2_gate_check_SLOW": {
+  "method": "A5 · 844x390 DPR3 · CPU 4x · warm 2 s · 5 s x 1 · order alternates",
+  "targets": [
+   {
+    "label": "main",
+    "url": "http://127.0.0.1:8780"
+   },
+   {
+    "label": "main-control",
+    "url": "http://127.0.0.1:8780"
+   },
+   {
+    "label": "cand",
+    "url": "http://127.0.0.1:8780",
+    "inject": "SLOW"
+   }
+  ],
+  "runs": [
+   {
+    "round": 1,
+    "scene": "S1-capital",
+    "target": "main",
+    "fps": 11.92,
+    "p95": 116.7,
+    "frames": 60,
+    "draws": 1140,
+    "walked": 297,
+    "map": "capital",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 19
+   },
+   {
+    "round": 1,
+    "scene": "S1-capital",
+    "target": "main-control",
+    "fps": 12.05,
+    "p95": 116.6,
+    "frames": 61,
+    "draws": 1159,
+    "walked": 307,
+    "map": "capital",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 19
+   },
+   {
+    "round": 1,
+    "scene": "S1-capital",
+    "target": "cand",
+    "fps": 8.89,
+    "p95": 133.3,
+    "frames": 45,
+    "draws": 855,
+    "walked": 228,
+    "map": "capital",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 19
+   },
+   {
+    "round": 1,
+    "scene": "S2-farm",
+    "target": "main",
+    "fps": 9.4,
+    "p95": 133.4,
+    "frames": 48,
+    "draws": 12574,
+    "walked": 218,
+    "map": "farm",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 262
+   },
+   {
+    "round": 1,
+    "scene": "S2-farm",
+    "target": "main-control",
+    "fps": 9.25,
+    "p95": 116.8,
+    "frames": 47,
+    "draws": 12458,
+    "walked": 213,
+    "map": "farm",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 265.1
+   },
+   {
+    "round": 1,
+    "scene": "S2-farm",
+    "target": "cand",
+    "fps": 8.07,
+    "p95": 166.6,
+    "frames": 41,
+    "draws": 11076,
+    "walked": 197,
+    "map": "farm",
+    "dark": false,
+    "held": false,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 270.1
+   },
+   {
+    "round": 1,
+    "scene": "S3-cavemouth",
+    "target": "main",
+    "fps": 23.05,
+    "p95": 66.7,
+    "frames": 116,
+    "draws": 1624,
+    "walked": 465,
+    "map": "cavemouth",
+    "dark": true,
+    "held": true,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 14
+   },
+   {
+    "round": 1,
+    "scene": "S3-cavemouth",
+    "target": "main-control",
+    "fps": 23.37,
+    "p95": 66.6,
+    "frames": 117,
+    "draws": 1638,
+    "walked": 470,
+    "map": "cavemouth",
+    "dark": true,
+    "held": true,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 14
+   },
+   {
+    "round": 1,
+    "scene": "S3-cavemouth",
+    "target": "cand",
+    "fps": 15.71,
+    "p95": 83.3,
+    "frames": 79,
+    "draws": 1106,
+    "walked": 382,
+    "map": "cavemouth",
+    "dark": true,
+    "held": true,
+    "LITE": false,
+    "eco": false,
+    "fpsChecks": 6,
+    "drawsPerFrame": 14
+   }
+  ],
+  "errors": [],
+  "summary": {
+   "S1-capital": {
+    "main": {
+     "fps": 11.92,
+     "p95": 116.7,
+     "drawsPerFrame": 19,
+     "walked": 297,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "main-control": {
+     "fps": 12.05,
+     "p95": 116.6,
+     "drawsPerFrame": 19,
+     "walked": 307,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "cand": {
+     "fps": 8.89,
+     "p95": 133.3,
+     "drawsPerFrame": 19,
+     "walked": 228,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "pairedRatios": [
+     0.746
+    ],
+    "ratio": 0.746,
+    "ratioOfMedians": 0.746,
+    "controlPairedRatios": [
+     1.011
+    ],
+    "controlRatio": 1.011,
+    "verdict": "fail",
+    "gate": false
+   },
+   "S2-farm": {
+    "main": {
+     "fps": 9.4,
+     "p95": 133.4,
+     "drawsPerFrame": 262,
+     "walked": 218,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "main-control": {
+     "fps": 9.25,
+     "p95": 116.8,
+     "drawsPerFrame": 265.1,
+     "walked": 213,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "cand": {
+     "fps": 8.07,
+     "p95": 166.6,
+     "drawsPerFrame": 270.1,
+     "walked": 197,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "pairedRatios": [
+     0.859
+    ],
+    "ratio": 0.859,
+    "ratioOfMedians": 0.859,
+    "controlPairedRatios": [
+     0.984
+    ],
+    "controlRatio": 0.984,
+    "verdict": "fail",
+    "gate": false
+   },
+   "S3-cavemouth": {
+    "main": {
+     "fps": 23.05,
+     "p95": 66.7,
+     "drawsPerFrame": 14,
+     "walked": 465,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "main-control": {
+     "fps": 23.37,
+     "p95": 66.6,
+     "drawsPerFrame": 14,
+     "walked": 470,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "cand": {
+     "fps": 15.71,
+     "p95": 83.3,
+     "drawsPerFrame": 14,
+     "walked": 382,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true
+    },
+    "pairedRatios": [
+     0.682
+    ],
+    "ratio": 0.682,
+    "ratioOfMedians": 0.682,
+    "controlPairedRatios": [
+     1.014
+    ],
+    "controlRatio": 1.014,
+    "verdict": "fail",
+    "gate": false
+   }
+  },
+  "verdict": "fail",
+  "pass": false
  }
 }

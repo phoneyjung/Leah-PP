@@ -6,10 +6,18 @@
 //   TARGETS='[{"label":"main","url":"http://127.0.0.1:8780"}]' node qa/g4/fps.js OUT.json [measure_s]
 //   a target may carry "patch" (fields merged into the synthetic save, e.g. {"char2On":true}) and "inject":
 //   "SLOW" (8 ms of busy work before every frame) or "EMPTY" (drawImage on the game canvas does nothing) → used to prove the gate fails.
-// Gate (G4.2+): for every scene, target[1] median ÷ target[0] median ≥ 0.90, draws/frame ≥ 0.8 × target[0], walked > 0. G4.0 = target[0] only.
+// Gate (G4.2+, v2 after Codex T34): reference = target[0] (main), candidate = the last target (the branch). CONTROL=1 adds a second copy of
+// main as a control (3 targets). Per scene: ratio = the MEDIAN OF THE PAIRED RATIOS candidate ÷ reference measured in the same round
+// (pairs sit next to each other in time, so a slow spell of the machine hits both; G4.0 saw absolute FPS drift 20–30 % in 15 min);
+// ratioOfMedians is reported beside it. verdict: fail = ratio < 0.90, or draws/frame < 0.8 × reference, or walked 0, or a pin/map lost ·
+// undecided = 0.90 ≤ ratio < 0.95, or the control is off by more than ±5 % → rerun with ROUNDS=5 and report every set; still undecided
+// after 5 rounds = "cannot decide" (never pick the better set) · pass otherwise. Exit 0 pass · 1 fail · 3 undecided.
+// The draw count proves the screen is drawn at all, not that the kid is: the M3 player-draw counter is used beside it.
+// SLOW wraps every rAF callback (the measuring one too): it proves the gate reacts to slowness, it is not a model of an 8 ms renderer.
 'use strict';
 const fs = require('fs'), { chromium } = require('playwright');
 const TARGETS = JSON.parse(process.env.TARGETS || '[{"label":"main","url":"http://127.0.0.1:8780"}]');
+if (process.env.CONTROL === '1' && TARGETS.length === 2) TARGETS.splice(1, 0, Object.assign({}, TARGETS[0], { label: TARGETS[0].label + '-control' }));
 const OUTF = process.argv[2], MEAS = +(process.argv[3] || 30), WARM = +(process.env.WARM || 5), ROUNDS = +(process.env.ROUNDS || 3);
 const SCENES = require('./m6-scenes.json');
 const SAVE = { name: 'P', kid: 0, house: 1, age: 7 };
@@ -59,10 +67,22 @@ const INJ = {
     for (const tg of TARGETS) { const rs = runs.filter(r => r.scene === sc.id && r.target === tg.label);
       row[tg.label] = { fps: med(rs.map(r => r.fps)), p95: med(rs.map(r => r.p95)), drawsPerFrame: med(rs.map(r => r.drawsPerFrame)), walked: med(rs.map(r => r.walked)),
         pins: rs.every(r => r.LITE === false && r.eco === false && r.fpsChecks === 6), mapOk: rs.every(r => r.map === sc.map), heldOk: rs.every(r => r.held === !!sc.dark) }; }
-    if (TARGETS.length > 1) { const a = row[TARGETS[0].label], c = row[TARGETS[1].label];
-      row.ratio = +(c.fps / a.fps).toFixed(3); row.gate = row.ratio >= 0.9 && c.drawsPerFrame >= 0.8 * a.drawsPerFrame && c.walked > 0 && c.pins && c.mapOk; } }
-  R.pass = errs.length === 0 && Object.values(R.summary).every(r => Object.values(r).every(v => typeof v !== 'object' || (v.pins && v.mapOk && v.heldOk && v.walked > 0)) && (r.gate === undefined || r.gate));
-  console.log(JSON.stringify({ summary: R.summary, pass: R.pass, errors: errs.length }));
+    if (TARGETS.length > 1) {
+      const ref = TARGETS[0].label, cand = TARGETS[TARGETS.length - 1].label, ctl = TARGETS.length > 2 ? TARGETS[1].label : null;
+      const fpsOf = (lab, rd) => (runs.find(r => r.scene === sc.id && r.target === lab && r.round === rd) || {}).fps;
+      const paired = lab => [...Array(ROUNDS).keys()].map(i => fpsOf(lab, i + 1) / fpsOf(ref, i + 1)).filter(x => isFinite(x)).map(x => +x.toFixed(3));
+      const a = row[ref], c = row[cand];
+      row.pairedRatios = paired(cand); row.ratio = med(row.pairedRatios); row.ratioOfMedians = +(c.fps / a.fps).toFixed(3);
+      if (ctl) { row.controlPairedRatios = paired(ctl); row.controlRatio = med(row.controlPairedRatios); }
+      const hardFail = row.ratio < 0.9 || c.drawsPerFrame < 0.8 * a.drawsPerFrame || !(c.walked > 0) || !c.pins || !c.mapOk;
+      const shaky = (row.ratio < 0.95) || (ctl && Math.abs(row.controlRatio - 1) > 0.05);
+      row.verdict = hardFail ? 'fail' : shaky ? (ROUNDS >= 5 ? 'cannot decide (after ' + ROUNDS + ' rounds)' : 'undecided: rerun with ROUNDS=5') : 'pass';
+      row.gate = row.verdict === 'pass'; } }
+  const baseOk = errs.length === 0 && Object.values(R.summary).every(r => Object.values(r).every(v => typeof v !== 'object' || Array.isArray(v) || (v.pins && v.mapOk && v.heldOk && v.walked > 0)));
+  const verdicts = Object.values(R.summary).map(r => r.verdict).filter(Boolean);
+  R.verdict = !baseOk || verdicts.includes('fail') ? 'fail' : verdicts.some(v => v !== 'pass') ? 'undecided' : 'pass';
+  R.pass = R.verdict === 'pass';
+  console.log(JSON.stringify({ summary: R.summary, verdict: R.verdict, errors: errs.length }));
   if (OUTF) fs.writeFileSync(OUTF, JSON.stringify(R, null, 1));
-  process.exit(R.pass ? 0 : 1);
+  process.exit(R.verdict === 'pass' ? 0 : R.verdict === 'fail' ? 1 : 3);
 })().catch(e => { console.error(e); process.exit(2); });

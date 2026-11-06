@@ -1,996 +1,475 @@
 {
- "harness": "qa/g4/replay.js + vclock.js + compare.py",
+ "version": "v2 after Codex T34 (6 Nov 2569 evening)",
+ "harness": "qa/g4/replay.js + vclock.js + compare.py (v2: canvas pixels + meta checks + via + stay + tap + intro)",
  "base": "main eb60c65",
  "runs": {
+  "intro_A": {
+   "zoom": null,
+   "inject": null,
+   "intro": true,
+   "scenHash": "c9024c4286732911",
+   "expected": 8,
+   "checkpoints": 8,
+   "complete": true,
+   "startV": 600,
+   "endV": 17599.99999999985,
+   "frames": 1056,
+   "pageErrors": [],
+   "vcErrors": {
+    "n": 0,
+    "last": ""
+   },
+   "chromium": "141.0.7390.37",
+   "ms": 5253
+  },
+  "intro_B": {
+   "zoom": null,
+   "inject": null,
+   "intro": true,
+   "scenHash": "c9024c4286732911",
+   "expected": 8,
+   "checkpoints": 8,
+   "complete": true,
+   "startV": 600,
+   "endV": 17599.99999999985,
+   "frames": 1056,
+   "pageErrors": [],
+   "vcErrors": {
+    "n": 0,
+    "last": ""
+   },
+   "chromium": "141.0.7390.37",
+   "ms": 5348
+  },
   "m5_0.75_A": {
    "zoom": 0.75,
    "inject": null,
-   "checkpoints": 63,
+   "intro": false,
+   "scenHash": "e6117af0c73a39ac",
+   "expected": 69,
+   "checkpoints": 69,
+   "complete": true,
    "startV": 600,
-   "endV": 69199.99999999725,
-   "frames": 4152,
+   "endV": 75999.99999999923,
+   "frames": 4560,
    "pageErrors": [],
-   "blocked": [
-    "fonts.googleapis.com"
-   ],
-   "ms": 20039,
-   "args": [
-    "--disable-gpu",
-    "--disable-gpu-compositing",
-    "--disable-lcd-text",
-    "--disable-partial-raster",
-    "--num-raster-threads=1",
-    "--run-all-compositor-stages-before-draw"
-   ]
+   "vcErrors": {
+    "n": 0,
+    "last": ""
+   },
+   "chromium": "141.0.7390.37",
+   "ms": 27760
   },
   "m5_0.75_B": {
    "zoom": 0.75,
    "inject": null,
-   "checkpoints": 63,
+   "intro": false,
+   "scenHash": "e6117af0c73a39ac",
+   "expected": 69,
+   "checkpoints": 69,
+   "complete": true,
    "startV": 600,
-   "endV": 69199.99999999725,
-   "frames": 4152,
+   "endV": 75999.99999999923,
+   "frames": 4560,
    "pageErrors": [],
-   "blocked": [
-    "fonts.googleapis.com"
-   ],
-   "ms": 19820,
-   "args": [
-    "--disable-gpu",
-    "--disable-gpu-compositing",
-    "--disable-lcd-text",
-    "--disable-partial-raster",
-    "--num-raster-threads=1",
-    "--run-all-compositor-stages-before-draw"
-   ]
+   "vcErrors": {
+    "n": 0,
+    "last": ""
+   },
+   "chromium": "141.0.7390.37",
+   "ms": 27658
   },
   "m5_0.75_C": {
    "zoom": 0.75,
    "inject": null,
-   "checkpoints": 63,
+   "intro": false,
+   "scenHash": "e6117af0c73a39ac",
+   "expected": 69,
+   "checkpoints": 69,
+   "complete": true,
    "startV": 600,
-   "endV": 69199.99999999725,
-   "frames": 4152,
+   "endV": 75999.99999999923,
+   "frames": 4560,
    "pageErrors": [],
-   "blocked": [
-    "fonts.googleapis.com"
-   ],
-   "ms": 19675,
-   "args": [
-    "--disable-gpu",
-    "--disable-gpu-compositing",
-    "--disable-lcd-text",
-    "--disable-partial-raster",
-    "--num-raster-threads=1",
-    "--run-all-compositor-stages-before-draw"
-   ]
+   "vcErrors": {
+    "n": 0,
+    "last": ""
+   },
+   "chromium": "141.0.7390.37",
+   "ms": 27573
   },
   "m5_1_A": {
    "zoom": 1,
    "inject": null,
-   "checkpoints": 63,
+   "intro": false,
+   "scenHash": "e6117af0c73a39ac",
+   "expected": 69,
+   "checkpoints": 69,
+   "complete": true,
    "startV": 600,
-   "endV": 69199.99999999725,
-   "frames": 4152,
+   "endV": 75999.99999999923,
+   "frames": 4560,
    "pageErrors": [],
-   "blocked": [
-    "fonts.googleapis.com"
-   ],
-   "ms": 18992,
-   "args": [
-    "--disable-gpu",
-    "--disable-gpu-compositing",
-    "--disable-lcd-text",
-    "--disable-partial-raster",
-    "--num-raster-threads=1",
-    "--run-all-compositor-stages-before-draw"
-   ]
+   "vcErrors": {
+    "n": 0,
+    "last": ""
+   },
+   "chromium": "141.0.7390.37",
+   "ms": 27256
   },
   "m5_1_B": {
    "zoom": 1,
    "inject": null,
-   "checkpoints": 63,
+   "intro": false,
+   "scenHash": "e6117af0c73a39ac",
+   "expected": 69,
+   "checkpoints": 69,
+   "complete": true,
    "startV": 600,
-   "endV": 69199.99999999725,
-   "frames": 4152,
+   "endV": 75999.99999999923,
+   "frames": 4560,
    "pageErrors": [],
-   "blocked": [
-    "fonts.googleapis.com"
-   ],
-   "ms": 18904,
-   "args": [
-    "--disable-gpu",
-    "--disable-gpu-compositing",
-    "--disable-lcd-text",
-    "--disable-partial-raster",
-    "--num-raster-threads=1",
-    "--run-all-compositor-stages-before-draw"
-   ]
+   "vcErrors": {
+    "n": 0,
+    "last": ""
+   },
+   "chromium": "141.0.7390.37",
+   "ms": 27077
   },
   "m5_1_C": {
    "zoom": 1,
    "inject": null,
-   "checkpoints": 63,
+   "intro": false,
+   "scenHash": "e6117af0c73a39ac",
+   "expected": 69,
+   "checkpoints": 69,
+   "complete": true,
    "startV": 600,
-   "endV": 69199.99999999725,
-   "frames": 4152,
+   "endV": 75999.99999999923,
+   "frames": 4560,
    "pageErrors": [],
-   "blocked": [
-    "fonts.googleapis.com"
-   ],
-   "ms": 19188,
-   "args": [
-    "--disable-gpu",
-    "--disable-gpu-compositing",
-    "--disable-lcd-text",
-    "--disable-partial-raster",
-    "--num-raster-threads=1",
-    "--run-all-compositor-stages-before-draw"
-   ]
+   "vcErrors": {
+    "n": 0,
+    "last": ""
+   },
+   "chromium": "141.0.7390.37",
+   "ms": 27720
   },
   "rp_A": {
    "zoom": null,
    "inject": null,
+   "intro": false,
+   "scenHash": "63f76ebdbaa70482",
+   "expected": 24,
    "checkpoints": 24,
+   "complete": true,
    "startV": 600,
    "endV": 124600.00000001337,
    "frames": 7476,
    "pageErrors": [],
-   "blocked": [
-    "fonts.googleapis.com"
-   ],
-   "ms": 22381,
-   "args": [
-    "--disable-gpu",
-    "--disable-gpu-compositing",
-    "--disable-lcd-text",
-    "--disable-partial-raster",
-    "--num-raster-threads=1",
-    "--run-all-compositor-stages-before-draw"
-   ]
+   "vcErrors": {
+    "n": 0,
+    "last": ""
+   },
+   "chromium": "141.0.7390.37",
+   "ms": 32204
   },
   "rp_B": {
    "zoom": null,
    "inject": null,
+   "intro": false,
+   "scenHash": "63f76ebdbaa70482",
+   "expected": 24,
    "checkpoints": 24,
+   "complete": true,
    "startV": 600,
    "endV": 124600.00000001337,
    "frames": 7476,
    "pageErrors": [],
-   "blocked": [
-    "fonts.googleapis.com"
-   ],
-   "ms": 22099,
-   "args": [
-    "--disable-gpu",
-    "--disable-gpu-compositing",
-    "--disable-lcd-text",
-    "--disable-partial-raster",
-    "--num-raster-threads=1",
-    "--run-all-compositor-stages-before-draw"
-   ]
+   "vcErrors": {
+    "n": 0,
+    "last": ""
+   },
+   "chromium": "141.0.7390.37",
+   "ms": 30372
   },
   "rp_C": {
    "zoom": null,
    "inject": null,
+   "intro": false,
+   "scenHash": "63f76ebdbaa70482",
+   "expected": 24,
    "checkpoints": 24,
+   "complete": true,
    "startV": 600,
    "endV": 124600.00000001337,
    "frames": 7476,
    "pageErrors": [],
-   "blocked": [
-    "fonts.googleapis.com"
-   ],
-   "ms": 22205,
-   "args": [
-    "--disable-gpu",
-    "--disable-gpu-compositing",
-    "--disable-lcd-text",
-    "--disable-partial-raster",
-    "--num-raster-threads=1",
-    "--run-all-compositor-stages-before-draw"
-   ]
+   "vcErrors": {
+    "n": 0,
+    "last": ""
+   },
+   "chromium": "141.0.7390.37",
+   "ms": 30164
+  },
+  "rp_hud": {
+   "zoom": null,
+   "inject": "hud@13",
+   "intro": false,
+   "scenHash": "63f76ebdbaa70482",
+   "expected": 24,
+   "checkpoints": 24,
+   "complete": true,
+   "startV": 600,
+   "endV": 124600.00000001337,
+   "frames": 7476,
+   "pageErrors": [],
+   "vcErrors": {
+    "n": 0,
+    "last": ""
+   },
+   "chromium": "141.0.7390.37",
+   "ms": 28146
   },
   "rp_img": {
    "zoom": null,
    "inject": "img@13",
+   "intro": false,
+   "scenHash": "63f76ebdbaa70482",
+   "expected": 24,
    "checkpoints": 24,
+   "complete": true,
    "startV": 600,
    "endV": 124600.00000001337,
    "frames": 7476,
    "pageErrors": [],
-   "blocked": [
-    "fonts.googleapis.com"
-   ],
-   "ms": 22563,
-   "args": [
-    "--disable-gpu",
-    "--disable-gpu-compositing",
-    "--disable-lcd-text",
-    "--disable-partial-raster",
-    "--num-raster-threads=1",
-    "--run-all-compositor-stages-before-draw"
-   ]
+   "vcErrors": {
+    "n": 0,
+    "last": ""
+   },
+   "chromium": "141.0.7390.37",
+   "ms": 29863
   },
   "rp_pos": {
    "zoom": null,
    "inject": "pos@13",
+   "intro": false,
+   "scenHash": "63f76ebdbaa70482",
+   "expected": 24,
    "checkpoints": 24,
+   "complete": true,
    "startV": 600,
    "endV": 124600.00000001337,
    "frames": 7476,
    "pageErrors": [],
-   "blocked": [
-    "fonts.googleapis.com"
-   ],
-   "ms": 22556,
-   "args": [
-    "--disable-gpu",
-    "--disable-gpu-compositing",
-    "--disable-lcd-text",
-    "--disable-partial-raster",
-    "--num-raster-threads=1",
-    "--run-all-compositor-stages-before-draw"
-   ]
+   "vcErrors": {
+    "n": 0,
+    "last": ""
+   },
+   "chromium": "141.0.7390.37",
+   "ms": 29458
   },
   "rpz1_A": {
    "zoom": 1,
    "inject": null,
+   "intro": false,
+   "scenHash": "63f76ebdbaa70482",
+   "expected": 24,
    "checkpoints": 24,
+   "complete": true,
    "startV": 600,
    "endV": 124600.00000001337,
    "frames": 7476,
    "pageErrors": [],
-   "blocked": [
-    "fonts.googleapis.com"
-   ],
-   "ms": 19302,
-   "args": [
-    "--disable-gpu",
-    "--disable-gpu-compositing",
-    "--disable-lcd-text",
-    "--disable-partial-raster",
-    "--num-raster-threads=1",
-    "--run-all-compositor-stages-before-draw"
-   ]
+   "vcErrors": {
+    "n": 0,
+    "last": ""
+   },
+   "chromium": "141.0.7390.37",
+   "ms": 26824
   },
   "rpz1_B": {
    "zoom": 1,
    "inject": null,
+   "intro": false,
+   "scenHash": "63f76ebdbaa70482",
+   "expected": 24,
    "checkpoints": 24,
+   "complete": true,
    "startV": 600,
    "endV": 124600.00000001337,
    "frames": 7476,
    "pageErrors": [],
-   "blocked": [
-    "fonts.googleapis.com"
-   ],
-   "ms": 19674,
-   "args": [
-    "--disable-gpu",
-    "--disable-gpu-compositing",
-    "--disable-lcd-text",
-    "--disable-partial-raster",
-    "--num-raster-threads=1",
-    "--run-all-compositor-stages-before-draw"
-   ]
+   "vcErrors": {
+    "n": 0,
+    "last": ""
+   },
+   "chromium": "141.0.7390.37",
+   "ms": 26783
   }
  },
  "compare": {
   "AB": {
+   "metaOk": true,
+   "meta": [],
    "checkpoints": 24,
    "bad": 0,
    "pxTotal": 0,
+   "canvasPxTotal": 0,
    "stateTotal": 0,
-   "drawDiff": 0,
-   "rows": [
-    {
-     "cp": "cp01",
-     "map": "capital",
-     "vnow": 1100,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp02",
-     "map": "capital",
-     "vnow": 3100,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp03",
-     "map": "capital",
-     "vnow": 4600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp04",
-     "map": "capital",
-     "vnow": 6100,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp05",
-     "map": "capital",
-     "vnow": 9600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp06",
-     "map": "capital",
-     "vnow": 11600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp07",
-     "map": "capital",
-     "vnow": 15600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp08",
-     "map": "capital",
-     "vnow": 17600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp09",
-     "map": "farm",
-     "vnow": 18100,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp10",
-     "map": "farm",
-     "vnow": 20100,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp11",
-     "map": "farm",
-     "vnow": 22100,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp12",
-     "map": "farm",
-     "vnow": 27100,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp13",
-     "map": "farm",
-     "vnow": 29100,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp14",
-     "map": "farm",
-     "vnow": 61100,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "dusk"
-    },
-    {
-     "cp": "cp15",
-     "map": "farm",
-     "vnow": 63100,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "dusk"
-    },
-    {
-     "cp": "cp16",
-     "map": "farm",
-     "vnow": 65100,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "dusk"
-    },
-    {
-     "cp": "cp17",
-     "map": "cavemouth",
-     "vnow": 65600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "dusk"
-    },
-    {
-     "cp": "cp18",
-     "map": "cavemouth",
-     "vnow": 67600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "dusk"
-    },
-    {
-     "cp": "cp19",
-     "map": "cavemouth",
-     "vnow": 69600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "dusk"
-    },
-    {
-     "cp": "cp20",
-     "map": "cavemouth",
-     "vnow": 74600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "dusk"
-    },
-    {
-     "cp": "cp21",
-     "map": "cavemouth",
-     "vnow": 76600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "dusk"
-    },
-    {
-     "cp": "cp22",
-     "map": "cavemouth",
-     "vnow": 121600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "dusk"
-    },
-    {
-     "cp": "cp23",
-     "map": "cavemouth",
-     "vnow": 123600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "dusk"
-    },
-    {
-     "cp": "cp24",
-     "map": "cavemouth",
-     "vnow": 124600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "dusk"
-    }
-   ]
+   "drawDiff": 0
   },
   "AC": {
+   "metaOk": true,
+   "meta": [],
    "checkpoints": 24,
    "bad": 0,
    "pxTotal": 0,
+   "canvasPxTotal": 0,
    "stateTotal": 0,
    "drawDiff": 0
   },
   "Z1": {
+   "metaOk": true,
+   "meta": [],
    "checkpoints": 24,
    "bad": 0,
    "pxTotal": 0,
+   "canvasPxTotal": 0,
+   "stateTotal": 0,
+   "drawDiff": 0
+  },
+  "inj_hud": {
+   "metaOk": true,
+   "meta": [],
+   "checkpoints": 24,
+   "bad": 1,
+   "pxTotal": 0,
+   "canvasPxTotal": 4,
    "stateTotal": 0,
    "drawDiff": 0
   },
   "inj_img": {
+   "metaOk": true,
+   "meta": [],
    "checkpoints": 24,
    "bad": 1,
    "pxTotal": 4,
+   "canvasPxTotal": 4,
    "stateTotal": 0,
-   "drawDiff": 0,
-   "rows": [
-    {
-     "cp": "cp01",
-     "map": "capital",
-     "vnow": 1100,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp02",
-     "map": "capital",
-     "vnow": 3100,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp03",
-     "map": "capital",
-     "vnow": 4600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp04",
-     "map": "capital",
-     "vnow": 6100,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp05",
-     "map": "capital",
-     "vnow": 9600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp06",
-     "map": "capital",
-     "vnow": 11600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp07",
-     "map": "capital",
-     "vnow": 15600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp08",
-     "map": "capital",
-     "vnow": 17600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp09",
-     "map": "farm",
-     "vnow": 18100,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp10",
-     "map": "farm",
-     "vnow": 20100,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp11",
-     "map": "farm",
-     "vnow": 22100,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp12",
-     "map": "farm",
-     "vnow": 27100,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp13",
-     "map": "farm",
-     "vnow": 29100,
-     "px": 4,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp14",
-     "map": "farm",
-     "vnow": 61100,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "dusk"
-    },
-    {
-     "cp": "cp15",
-     "map": "farm",
-     "vnow": 63100,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "dusk"
-    },
-    {
-     "cp": "cp16",
-     "map": "farm",
-     "vnow": 65100,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "dusk"
-    },
-    {
-     "cp": "cp17",
-     "map": "cavemouth",
-     "vnow": 65600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "dusk"
-    },
-    {
-     "cp": "cp18",
-     "map": "cavemouth",
-     "vnow": 67600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "dusk"
-    },
-    {
-     "cp": "cp19",
-     "map": "cavemouth",
-     "vnow": 69600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "dusk"
-    },
-    {
-     "cp": "cp20",
-     "map": "cavemouth",
-     "vnow": 74600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "dusk"
-    },
-    {
-     "cp": "cp21",
-     "map": "cavemouth",
-     "vnow": 76600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "dusk"
-    },
-    {
-     "cp": "cp22",
-     "map": "cavemouth",
-     "vnow": 121600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "dusk"
-    },
-    {
-     "cp": "cp23",
-     "map": "cavemouth",
-     "vnow": 123600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "dusk"
-    },
-    {
-     "cp": "cp24",
-     "map": "cavemouth",
-     "vnow": 124600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "dusk"
-    }
-   ]
+   "drawDiff": 0
   },
   "inj_pos": {
+   "metaOk": true,
+   "meta": [],
    "checkpoints": 24,
    "bad": 4,
    "pxTotal": 1981,
+   "canvasPxTotal": 1981,
    "stateTotal": 7,
-   "drawDiff": 4,
-   "rows": [
-    {
-     "cp": "cp01",
-     "map": "capital",
-     "vnow": 1100,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp02",
-     "map": "capital",
-     "vnow": 3100,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp03",
-     "map": "capital",
-     "vnow": 4600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp04",
-     "map": "capital",
-     "vnow": 6100,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp05",
-     "map": "capital",
-     "vnow": 9600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp06",
-     "map": "capital",
-     "vnow": 11600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp07",
-     "map": "capital",
-     "vnow": 15600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp08",
-     "map": "capital",
-     "vnow": 17600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp09",
-     "map": "farm",
-     "vnow": 18100,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp10",
-     "map": "farm",
-     "vnow": 20100,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp11",
-     "map": "farm",
-     "vnow": 22100,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp12",
-     "map": "farm",
-     "vnow": 27100,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "day"
-    },
-    {
-     "cp": "cp13",
-     "map": "farm",
-     "vnow": 29100,
-     "px": 564,
-     "stateN": 1,
-     "draw": false,
-     "phase": "day"
-    },
-    {
-     "cp": "cp14",
-     "map": "farm",
-     "vnow": 61100,
-     "px": 563,
-     "stateN": 2,
-     "draw": false,
-     "phase": "dusk"
-    },
-    {
-     "cp": "cp15",
-     "map": "farm",
-     "vnow": 63100,
-     "px": 427,
-     "stateN": 2,
-     "draw": false,
-     "phase": "dusk"
-    },
-    {
-     "cp": "cp16",
-     "map": "farm",
-     "vnow": 65100,
-     "px": 427,
-     "stateN": 2,
-     "draw": false,
-     "phase": "dusk"
-    },
-    {
-     "cp": "cp17",
-     "map": "cavemouth",
-     "vnow": 65600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "dusk"
-    },
-    {
-     "cp": "cp18",
-     "map": "cavemouth",
-     "vnow": 67600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "dusk"
-    },
-    {
-     "cp": "cp19",
-     "map": "cavemouth",
-     "vnow": 69600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "dusk"
-    },
-    {
-     "cp": "cp20",
-     "map": "cavemouth",
-     "vnow": 74600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "dusk"
-    },
-    {
-     "cp": "cp21",
-     "map": "cavemouth",
-     "vnow": 76600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "dusk"
-    },
-    {
-     "cp": "cp22",
-     "map": "cavemouth",
-     "vnow": 121600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "dusk"
-    },
-    {
-     "cp": "cp23",
-     "map": "cavemouth",
-     "vnow": 123600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "dusk"
-    },
-    {
-     "cp": "cp24",
-     "map": "cavemouth",
-     "vnow": 124600,
-     "px": 0,
-     "stateN": 0,
-     "draw": true,
-     "phase": "dusk"
-    }
-   ]
+   "drawDiff": 4
   },
-  "m5_0.75_AB": {
-   "checkpoints": 63,
+  "intro": {
+   "metaOk": true,
+   "meta": [],
+   "checkpoints": 8,
    "bad": 0,
    "pxTotal": 0,
+   "canvasPxTotal": 0,
+   "stateTotal": 0,
+   "drawDiff": 0
+  },
+  "m5_0.75_AB": {
+   "metaOk": true,
+   "meta": [],
+   "checkpoints": 69,
+   "bad": 0,
+   "pxTotal": 0,
+   "canvasPxTotal": 0,
    "stateTotal": 0,
    "drawDiff": 0
   },
   "m5_0.75_AC": {
-   "checkpoints": 63,
+   "metaOk": true,
+   "meta": [],
+   "checkpoints": 69,
    "bad": 0,
    "pxTotal": 0,
+   "canvasPxTotal": 0,
    "stateTotal": 0,
    "drawDiff": 0
   },
   "m5_1_AB": {
-   "checkpoints": 63,
+   "metaOk": true,
+   "meta": [],
+   "checkpoints": 69,
    "bad": 0,
    "pxTotal": 0,
+   "canvasPxTotal": 0,
    "stateTotal": 0,
    "drawDiff": 0
   },
   "m5_1_AC": {
-   "checkpoints": 63,
+   "metaOk": true,
+   "meta": [],
+   "checkpoints": 69,
    "bad": 0,
    "pxTotal": 0,
+   "canvasPxTotal": 0,
+   "stateTotal": 0,
+   "drawDiff": 0
+  },
+  "neg_norun": {
+   "metaOk": false,
+   "meta": [
+    "B: no run.json (the run did not finish)"
+   ],
+   "checkpoints": 24,
+   "bad": 0,
+   "pxTotal": 0,
+   "canvasPxTotal": 0,
+   "stateTotal": 0,
+   "drawDiff": 0
+  },
+  "neg_otherscen": {
+   "metaOk": false,
+   "meta": [
+    "run field differs: scenHash",
+    "run field differs: zoom",
+    "run field differs: expected",
+    "checkpoint names differ: A 24 B 69"
+   ],
+   "checkpoints": 24,
+   "bad": 24,
+   "pxTotal": 7617934,
+   "canvasPxTotal": 7899475,
+   "stateTotal": 434,
+   "drawDiff": 24
+  },
+  "neg_short": {
+   "metaOk": false,
+   "meta": [
+    "B: incomplete 19/24",
+    "checkpoint names differ: A 24 B 19",
+    "B: 19 checkpoint files, expected 24"
+   ],
+   "checkpoints": 19,
+   "bad": 0,
+   "pxTotal": 0,
+   "canvasPxTotal": 0,
+   "stateTotal": 0,
+   "drawDiff": 0
+  },
+  "neg_vcerr_both_sides": {
+   "metaOk": false,
+   "meta": [
+    "A cp05: virtual-clock errors 1",
+    "B cp05: virtual-clock errors 1"
+   ],
+   "checkpoints": 24,
+   "bad": 0,
+   "pxTotal": 0,
+   "canvasPxTotal": 0,
    "stateTotal": 0,
    "drawDiff": 0
   }
@@ -1005,7 +484,7 @@
    "msg": "",
    "draw": {
     "n": 19,
-    "hash": "167b327d"
+    "hash": "851ec1f8"
    }
   },
   {
@@ -1017,7 +496,7 @@
    "msg": "นิ้วโป้งซ้ายแตะจอด้านซ้ายล่าง จอยจะมาอยู่ใต้นิ้ว ลากเพื่อเดิน · แตะพื้นหรือแตะคนก็ได้",
    "draw": {
     "n": 19,
-    "hash": "5cc0c74b"
+    "hash": "4ff2ec2"
    }
   },
   {
@@ -1029,7 +508,7 @@
    "msg": "✨ ศิลาแสงตื่นแล้ว · บันทึกจุดวาร์ป",
    "draw": {
     "n": 19,
-    "hash": "4bf4e3bf"
+    "hash": "b699c844"
    }
   },
   {
@@ -1041,7 +520,7 @@
    "msg": "✨ ศิลาแสงตื่นแล้ว · บันทึกจุดวาร์ป",
    "draw": {
     "n": 19,
-    "hash": "3ec4b06f"
+    "hash": "3c923426"
    }
   },
   {
@@ -1053,7 +532,7 @@
    "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
    "draw": {
     "n": 19,
-    "hash": "1639278a"
+    "hash": "25de8df3"
    }
   },
   {
@@ -1065,7 +544,7 @@
    "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
    "draw": {
     "n": 19,
-    "hash": "5a3b41db"
+    "hash": "e542b04"
    }
   },
   {
@@ -1077,7 +556,7 @@
    "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
    "draw": {
     "n": 19,
-    "hash": "57117363"
+    "hash": "a92cffe0"
    }
   },
   {
@@ -1089,7 +568,7 @@
    "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
    "draw": {
     "n": 19,
-    "hash": "94ba1340"
+    "hash": "e8c43b83"
    }
   },
   {
@@ -1101,7 +580,7 @@
    "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
    "draw": {
     "n": 147,
-    "hash": "a4294851"
+    "hash": "d92e8c91"
    }
   },
   {
@@ -1113,7 +592,7 @@
    "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
    "draw": {
     "n": 237,
-    "hash": "6bd1853c"
+    "hash": "56534f9c"
    }
   },
   {
@@ -1125,7 +604,7 @@
    "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
    "draw": {
     "n": 186,
-    "hash": "e6588717"
+    "hash": "abd757"
    }
   },
   {
@@ -1137,7 +616,7 @@
    "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
    "draw": {
     "n": 321,
-    "hash": "a07c8e3b"
+    "hash": "2a1e4e3b"
    }
   },
   {
@@ -1149,7 +628,7 @@
    "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
    "draw": {
     "n": 192,
-    "hash": "74696d5b"
+    "hash": "e82c0c1b"
    }
   },
   {
@@ -1161,7 +640,7 @@
    "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
    "draw": {
     "n": 247,
-    "hash": "4cc4ba4"
+    "hash": "7ef30664"
    }
   },
   {
@@ -1173,7 +652,7 @@
    "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
    "draw": {
     "n": 153,
-    "hash": "44f6a293"
+    "hash": "fc08a253"
    }
   },
   {
@@ -1185,7 +664,7 @@
    "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
    "draw": {
     "n": 153,
-    "hash": "ac7d7e8c"
+    "hash": "bb18f8ac"
    }
   },
   {
@@ -1197,7 +676,7 @@
    "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
    "draw": {
     "n": 14,
-    "hash": "19e23c5a"
+    "hash": "b387f793"
    }
   },
   {
@@ -1209,7 +688,7 @@
    "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
    "draw": {
     "n": 14,
-    "hash": "de6eef17"
+    "hash": "214b720c"
    }
   },
   {
@@ -1221,7 +700,7 @@
    "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
    "draw": {
     "n": 14,
-    "hash": "568c5c29"
+    "hash": "593b8384"
    }
   },
   {
@@ -1233,7 +712,7 @@
    "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
    "draw": {
     "n": 14,
-    "hash": "2cc199eb"
+    "hash": "62f8eb86"
    }
   },
   {
@@ -1245,7 +724,7 @@
    "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
    "draw": {
     "n": 14,
-    "hash": "c3549065"
+    "hash": "e6ef6faa"
    }
   },
   {
@@ -1257,7 +736,7 @@
    "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
    "draw": {
     "n": 14,
-    "hash": "4b8d1341"
+    "hash": "b99e5ef6"
    }
   },
   {
@@ -1269,7 +748,7 @@
    "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
    "draw": {
     "n": 14,
-    "hash": "f787ab6b"
+    "hash": "2ad83ba8"
    }
   },
   {
@@ -1281,8 +760,92 @@
    "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
    "draw": {
     "n": 14,
-    "hash": "16d0fa05"
+    "hash": "bec3c534"
    }
+  }
+ ],
+ "intro": [
+  {
+   "vnow": 1600.0000000000016,
+   "dlg": null,
+   "PAUSE": false,
+   "seen": [],
+   "msg": ""
+  },
+  {
+   "vnow": 4099.999999999985,
+   "dlg": {
+    "i": 0,
+    "n": 3,
+    "open": true
+   },
+   "PAUSE": true,
+   "seen": [
+    "intro"
+   ],
+   "msg": "นิ้วโป้งซ้ายแตะจอด้านซ้ายล่าง จอยจะมาอยู่ใต้นิ้ว ลากเพื่อเดิน · แตะพื้นหรือแตะคนก็ได้"
+  },
+  {
+   "vnow": 5600.000000000013,
+   "dlg": {
+    "i": 1,
+    "n": 3,
+    "open": true
+   },
+   "PAUSE": true,
+   "seen": [
+    "intro"
+   ],
+   "msg": "นิ้วโป้งซ้ายแตะจอด้านซ้ายล่าง จอยจะมาอยู่ใต้นิ้ว ลากเพื่อเดิน · แตะพื้นหรือแตะคนก็ได้"
+  },
+  {
+   "vnow": 7100.00000000004,
+   "dlg": {
+    "i": 2,
+    "n": 3,
+    "open": true
+   },
+   "PAUSE": true,
+   "seen": [
+    "intro"
+   ],
+   "msg": "นิ้วโป้งซ้ายแตะจอด้านซ้ายล่าง จอยจะมาอยู่ใต้นิ้ว ลากเพื่อเดิน · แตะพื้นหรือแตะคนก็ได้"
+  },
+  {
+   "vnow": 8600.000000000045,
+   "dlg": null,
+   "PAUSE": false,
+   "seen": [
+    "intro"
+   ],
+   "msg": "นิ้วโป้งซ้ายแตะจอด้านซ้ายล่าง จอยจะมาอยู่ใต้นิ้ว ลากเพื่อเดิน · แตะพื้นหรือแตะคนก็ได้"
+  },
+  {
+   "vnow": 11599.999999999936,
+   "dlg": null,
+   "PAUSE": false,
+   "seen": [
+    "intro"
+   ],
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ"
+  },
+  {
+   "vnow": 13599.999999999864,
+   "dlg": null,
+   "PAUSE": false,
+   "seen": [
+    "intro"
+   ],
+   "msg": "✨ ศิลาแสงตื่นแล้ว · บันทึกจุดวาร์ป"
+  },
+  {
+   "vnow": 17599.99999999985,
+   "dlg": null,
+   "PAUSE": false,
+   "seen": [
+    "intro"
+   ],
+   "msg": "✨ ศิลาแสงตื่นแล้ว · บันทึกจุดวาร์ป"
   }
  ],
  "m5": {
@@ -1291,359 +854,126 @@
     "id": "X01-capital-n",
     "from": "capital",
     "after": "cavemouth",
-    "cam": [
-     [
-      253,
-      0
-     ],
-     [
-      240,
-      0
-     ],
-     [
-      189,
-      594
-     ]
-    ],
-    "P3": [
-     752,
-     880
-    ],
+    "via": [],
     "SC": 0.75
    },
    {
     "id": "X02-capital-home",
     "from": "capital",
     "after": "room",
-    "cam": [
-     [
-      410,
-      504
-     ],
-     [
-      410,
-      479
-     ],
-     [
-      -6,
-      163
-     ]
-    ],
-    "P3": [
-     128,
-     368
-    ],
+    "via": [],
     "SC": 0.75
    },
    {
-    "id": "X03-capital-w",
+    "id": "X03-room-door-from-capital",
+    "from": "room",
+    "after": "capital",
+    "via": [],
+    "SC": 1
+   },
+   {
+    "id": "X04-capital-w",
     "from": "capital",
     "after": "capital",
-    "cam": [
-     [
-      0,
-      290
-     ],
-     [
-      0,
-      206
-     ],
-     [
-      0,
-      206
-     ]
-    ],
-    "P3": [
-     36,
-     476
-    ],
+    "via": [],
     "SC": 0.75
    },
    {
-    "id": "X04-farm-e",
+    "id": "X05-farm-e",
     "from": "farm",
     "after": "capital",
-    "cam": [
-     [
-      794,
-      418
-     ],
-     [
-      0,
-      196
-     ],
-     [
-      0,
-      196
-     ]
-    ],
-    "P3": [
-     44,
-     466
-    ],
+    "via": [],
     "SC": 0.75
    },
    {
-    "id": "X05-farm-home",
+    "id": "X06-farm-home",
     "from": "farm",
     "after": "room",
-    "cam": [
-     [
-      221,
-      258
-     ],
-     [
-      217,
-      152
-     ],
-     [
-      -6,
-      163
-     ]
-    ],
-    "P3": [
-     128,
-     368
-    ],
+    "via": [],
     "SC": 0.75
    },
    {
-    "id": "X06-room-door",
+    "id": "X07-room-door",
     "from": "room",
     "after": "farm",
-    "cam": [
-     [
-      -6,
-      99
-     ],
-     [
-      -6,
-      194
-     ],
-     [
-      236,
-      166
-     ]
-    ],
-    "P3": [
-     799,
-     436
-    ],
+    "via": [],
     "SC": 1
    },
    {
-    "id": "X07-room2-down",
+    "id": "X08-room2-down",
     "from": "room2",
     "after": "room",
-    "cam": [
-     [
-      -198,
-      -35
-     ],
-     [
-      -198,
-      -35
-     ],
-     [
-      -6,
-      163
-     ]
-    ],
-    "P3": [
-     128,
-     368
-    ],
+    "via": [],
     "SC": 1
    },
    {
-    "id": "X08-royal-n",
+    "id": "X09-room3-down",
+    "from": "room3",
+    "after": "room2",
+    "via": [],
+    "SC": 1
+   },
+   {
+    "id": "X10-royal-n",
     "from": "royal",
     "after": "cavemouth",
-    "cam": [
-     [
-      410,
-      0
-     ],
-     [
-      410,
-      0
-     ],
-     [
-      189,
-      594
-     ]
-    ],
-    "P3": [
-     752,
-     880
-    ],
+    "via": [],
     "SC": 0.75
    },
    {
-    "id": "X09-royal-s",
+    "id": "X11-royal-s",
     "from": "royal",
     "after": "capital",
-    "cam": [
-     [
-      221,
-      504
-     ],
-     [
-      208,
-      504
-     ],
-     [
-      235,
-      0
-     ]
-    ],
-    "P3": [
-     798,
-     42
-    ],
+    "via": [],
     "SC": 0.75
    },
    {
-    "id": "X10-cavemouth-s",
+    "id": "X12-cavemouth-s",
     "from": "cavemouth",
     "after": "capital",
-    "cam": [
-     [
-      189,
-      594
-     ],
-     [
-      189,
-      594
-     ],
-     [
-      235,
-      0
-     ]
-    ],
-    "P3": [
-     798,
-     42
-    ],
+    "via": [],
     "SC": 0.75
    },
    {
-    "id": "X11-town2-n",
+    "id": "X13-town2-n",
     "from": "town2",
     "after": "cavemouth",
-    "cam": [
-     [
-      221,
-      0
-     ],
-     [
-      208,
-      0
-     ],
-     [
-      189,
-      594
-     ]
-    ],
-    "P3": [
-     752,
-     880
-    ],
+    "via": [],
     "SC": 0.75
    },
    {
-    "id": "X12-town2-w",
+    "id": "X14-town2-w",
     "from": "town2",
     "after": "farm",
-    "cam": [
-     [
-      0,
-      290
-     ],
-     [
-      0,
-      262
-     ],
-     [
-      794,
-      366
-     ]
-    ],
-    "P3": [
-     1876,
-     636
-    ],
+    "via": [],
     "SC": 0.75
    },
    {
-    "id": "X13-town2-e",
+    "id": "X15-town2-e",
     "from": "town2",
     "after": "capital",
-    "cam": [
-     [
-      410,
-      258
-     ],
-     [
-      410,
-      258
-     ],
-     [
-      317,
-      290
-     ]
-    ],
-    "P3": [
-     880,
-     560
-    ],
+    "via": [],
     "SC": 0.75
    },
    {
-    "id": "X14-town2-s",
+    "id": "X16-town2-s",
     "from": "town2",
     "after": "capital",
-    "cam": [
-     [
-      221,
-      504
-     ],
-     [
-      208,
-      504
-     ],
-     [
-      317,
-      290
-     ]
-    ],
-    "P3": [
-     880,
-     560
-    ],
+    "via": [],
     "SC": 0.75
    },
    {
     "id": "N01-capital-31-17",
     "from": "capital",
     "after": "capital",
-    "cam": [
-     [
-      349,
-      290
-     ],
-     [
-      410,
-      290
-     ],
-     [
-      410,
-      290
-     ]
-    ],
-    "P3": [
-     1101,
-     560
+    "via": [
+     {
+      "tile": [
+       31,
+       17
+      ],
+      "onPath": true
+     }
     ],
     "SC": 0.75
    },
@@ -1651,23 +981,14 @@
     "id": "N02-capital-31-26",
     "from": "capital",
     "after": "capital",
-    "cam": [
-     [
-      349,
-      504
-     ],
-     [
-      410,
-      504
-     ],
-     [
-      410,
-      504
-     ]
-    ],
-    "P3": [
-     1101,
-     848
+    "via": [
+     {
+      "tile": [
+       31,
+       26
+      ],
+      "onPath": true
+     }
     ],
     "SC": 0.75
    },
@@ -1675,23 +996,14 @@
     "id": "N03-town2-15-9",
     "from": "town2",
     "after": "town2",
-    "cam": [
-     [
-      0,
-      0
-     ],
-     [
-      0,
-      44
-     ],
-     [
-      0,
-      127
-     ]
-    ],
-    "P3": [
-     496,
-     397
+    "via": [
+     {
+      "tile": [
+       15,
+       9
+      ],
+      "onPath": true
+     }
     ],
     "SC": 0.75
    },
@@ -1699,23 +1011,14 @@
     "id": "N04-town2-33-9",
     "from": "town2",
     "after": "town2",
-    "cam": [
-     [
-      410,
-      0
-     ],
-     [
-      410,
-      44
-     ],
-     [
-      410,
-      127
-     ]
-    ],
-    "P3": [
-     1072,
-     397
+    "via": [
+     {
+      "tile": [
+       33,
+       9
+      ],
+      "onPath": true
+     }
     ],
     "SC": 0.75
    },
@@ -1723,47 +1026,29 @@
     "id": "N05-farm-46-3",
     "from": "farm",
     "after": "farm",
-    "cam": [
-     [
-      794,
-      0
-     ],
-     [
-      794,
-      0
-     ],
-     [
-      794,
-      0
-     ]
-    ],
-    "P3": [
-     1581,
-     112
+    "via": [
+     {
+      "tile": [
+       46,
+       3
+      ],
+      "onPath": true
+     }
     ],
     "SC": 0.75
    },
    {
-    "id": "N06-farm-1-4",
+    "id": "N06-farm-1-12",
     "from": "farm",
     "after": "farm",
-    "cam": [
-     [
-      0,
-      0
-     ],
-     [
-      0,
-      0
-     ],
-     [
-      0,
-      0
-     ]
-    ],
-    "P3": [
-     93,
-     239
+    "via": [
+     {
+      "tile": [
+       1,
+       12
+      ],
+      "onPath": true
+     }
     ],
     "SC": 0.75
    },
@@ -1771,23 +1056,14 @@
     "id": "N07-room-11-3",
     "from": "room",
     "after": "room",
-    "cam": [
-     [
-      -6,
-      -90
-     ],
-     [
-      -6,
-      -90
-     ],
-     [
-      -6,
-      -90
-     ]
-    ],
-    "P3": [
-     464,
-     114
+    "via": [
+     {
+      "tile": [
+       11,
+       3
+      ],
+      "onPath": true
+     }
     ],
     "SC": 1
    }
@@ -1797,359 +1073,126 @@
     "id": "X01-capital-n",
     "from": "capital",
     "after": "cavemouth",
-    "cam": [
-     [
-      394,
-      0
-     ],
-     [
-      381,
-      0
-     ],
-     [
-      330,
-      675
-     ]
-    ],
-    "P3": [
-     752,
-     880
-    ],
+    "via": [],
     "SC": 1
    },
    {
     "id": "X02-capital-home",
     "from": "capital",
     "after": "room",
-    "cam": [
-     [
-      692,
-      634
-     ],
-     [
-      692,
-      544
-     ],
-     [
-      -6,
-      163
-     ]
-    ],
-    "P3": [
-     128,
-     368
-    ],
+    "via": [],
     "SC": 1
    },
    {
-    "id": "X03-capital-w",
+    "id": "X03-room-door-from-capital",
+    "from": "room",
+    "after": "capital",
+    "via": [],
+    "SC": 1
+   },
+   {
+    "id": "X04-capital-w",
     "from": "capital",
     "after": "capital",
-    "cam": [
-     [
-      0,
-      355
-     ],
-     [
-      0,
-      271
-     ],
-     [
-      0,
-      271
-     ]
-    ],
-    "P3": [
-     36,
-     476
-    ],
+    "via": [],
     "SC": 1
    },
    {
-    "id": "X04-farm-e",
+    "id": "X05-farm-e",
     "from": "farm",
     "after": "capital",
-    "cam": [
-     [
-      1076,
-      483
-     ],
-     [
-      0,
-      261
-     ],
-     [
-      0,
-      261
-     ]
-    ],
-    "P3": [
-     44,
-     466
-    ],
+    "via": [],
     "SC": 1
    },
    {
-    "id": "X05-farm-home",
+    "id": "X06-farm-home",
     "from": "farm",
     "after": "room",
-    "cam": [
-     [
-      362,
-      323
-     ],
-     [
-      358,
-      217
-     ],
-     [
-      -6,
-      163
-     ]
-    ],
-    "P3": [
-     128,
-     368
-    ],
+    "via": [],
     "SC": 1
    },
    {
-    "id": "X06-room-door",
+    "id": "X07-room-door",
     "from": "room",
     "after": "farm",
-    "cam": [
-     [
-      -6,
-      99
-     ],
-     [
-      -6,
-      194
-     ],
-     [
-      377,
-      231
-     ]
-    ],
-    "P3": [
-     799,
-     436
-    ],
+    "via": [],
     "SC": 1
    },
    {
-    "id": "X07-room2-down",
+    "id": "X08-room2-down",
     "from": "room2",
     "after": "room",
-    "cam": [
-     [
-      -198,
-      -35
-     ],
-     [
-      -198,
-      -35
-     ],
-     [
-      -6,
-      163
-     ]
-    ],
-    "P3": [
-     128,
-     368
-    ],
+    "via": [],
     "SC": 1
    },
    {
-    "id": "X08-royal-n",
+    "id": "X09-room3-down",
+    "from": "room3",
+    "after": "room2",
+    "via": [],
+    "SC": 1
+   },
+   {
+    "id": "X10-royal-n",
     "from": "royal",
     "after": "cavemouth",
-    "cam": [
-     [
-      692,
-      0
-     ],
-     [
-      692,
-      0
-     ],
-     [
-      330,
-      675
-     ]
-    ],
-    "P3": [
-     752,
-     880
-    ],
+    "via": [],
     "SC": 1
    },
    {
-    "id": "X09-royal-s",
+    "id": "X11-royal-s",
     "from": "royal",
     "after": "capital",
-    "cam": [
-     [
-      362,
-      634
-     ],
-     [
-      349,
-      634
-     ],
-     [
-      376,
-      0
-     ]
-    ],
-    "P3": [
-     798,
-     42
-    ],
+    "via": [],
     "SC": 1
    },
    {
-    "id": "X10-cavemouth-s",
+    "id": "X12-cavemouth-s",
     "from": "cavemouth",
     "after": "capital",
-    "cam": [
-     [
-      330,
-      675
-     ],
-     [
-      330,
-      724
-     ],
-     [
-      376,
-      0
-     ]
-    ],
-    "P3": [
-     798,
-     42
-    ],
+    "via": [],
     "SC": 1
    },
    {
-    "id": "X11-town2-n",
+    "id": "X13-town2-n",
     "from": "town2",
     "after": "cavemouth",
-    "cam": [
-     [
-      362,
-      0
-     ],
-     [
-      349,
-      0
-     ],
-     [
-      330,
-      675
-     ]
-    ],
-    "P3": [
-     752,
-     880
-    ],
+    "via": [],
     "SC": 1
    },
    {
-    "id": "X12-town2-w",
+    "id": "X14-town2-w",
     "from": "town2",
     "after": "farm",
-    "cam": [
-     [
-      0,
-      355
-     ],
-     [
-      0,
-      327
-     ],
-     [
-      1076,
-      431
-     ]
-    ],
-    "P3": [
-     1876,
-     636
-    ],
+    "via": [],
     "SC": 1
    },
    {
-    "id": "X13-town2-e",
+    "id": "X15-town2-e",
     "from": "town2",
     "after": "capital",
-    "cam": [
-     [
-      692,
-      323
-     ],
-     [
-      692,
-      323
-     ],
-     [
-      458,
-      355
-     ]
-    ],
-    "P3": [
-     880,
-     560
-    ],
+    "via": [],
     "SC": 1
    },
    {
-    "id": "X14-town2-s",
+    "id": "X16-town2-s",
     "from": "town2",
     "after": "capital",
-    "cam": [
-     [
-      362,
-      634
-     ],
-     [
-      349,
-      634
-     ],
-     [
-      458,
-      355
-     ]
-    ],
-    "P3": [
-     880,
-     560
-    ],
+    "via": [],
     "SC": 1
    },
    {
     "id": "N01-capital-31-17",
     "from": "capital",
     "after": "capital",
-    "cam": [
-     [
-      490,
-      355
-     ],
-     [
-      596,
-      355
-     ],
-     [
-      679,
-      355
-     ]
-    ],
-    "P3": [
-     1101,
-     560
+    "via": [
+     {
+      "tile": [
+       31,
+       17
+      ],
+      "onPath": true
+     }
     ],
     "SC": 1
    },
@@ -2157,23 +1200,14 @@
     "id": "N02-capital-31-26",
     "from": "capital",
     "after": "capital",
-    "cam": [
-     [
-      490,
-      634
-     ],
-     [
-      596,
-      634
-     ],
-     [
-      679,
-      634
-     ]
-    ],
-    "P3": [
-     1101,
-     848
+    "via": [
+     {
+      "tile": [
+       31,
+       26
+      ],
+      "onPath": true
+     }
     ],
     "SC": 1
    },
@@ -2181,23 +1215,14 @@
     "id": "N03-town2-15-9",
     "from": "town2",
     "after": "town2",
-    "cam": [
-     [
-      74,
-      3
-     ],
-     [
-      74,
-      109
-     ],
-     [
-      74,
-      192
-     ]
-    ],
-    "P3": [
-     496,
-     397
+    "via": [
+     {
+      "tile": [
+       15,
+       9
+      ],
+      "onPath": true
+     }
     ],
     "SC": 1
    },
@@ -2205,23 +1230,14 @@
     "id": "N04-town2-33-9",
     "from": "town2",
     "after": "town2",
-    "cam": [
-     [
-      650,
-      3
-     ],
-     [
-      650,
-      109
-     ],
-     [
-      650,
-      192
-     ]
-    ],
-    "P3": [
-     1072,
-     397
+    "via": [
+     {
+      "tile": [
+       33,
+       9
+      ],
+      "onPath": true
+     }
     ],
     "SC": 1
    },
@@ -2229,47 +1245,29 @@
     "id": "N05-farm-46-3",
     "from": "farm",
     "after": "farm",
-    "cam": [
-     [
-      970,
-      0
-     ],
-     [
-      1076,
-      0
-     ],
-     [
-      1076,
-      0
-     ]
-    ],
-    "P3": [
-     1581,
-     112
+    "via": [
+     {
+      "tile": [
+       46,
+       3
+      ],
+      "onPath": true
+     }
     ],
     "SC": 1
    },
    {
-    "id": "N06-farm-1-4",
+    "id": "N06-farm-1-12",
     "from": "farm",
     "after": "farm",
-    "cam": [
-     [
-      0,
-      0
-     ],
-     [
-      0,
-      0
-     ],
-     [
-      0,
-      34
-     ]
-    ],
-    "P3": [
-     93,
-     239
+    "via": [
+     {
+      "tile": [
+       1,
+       12
+      ],
+      "onPath": true
+     }
     ],
     "SC": 1
    },
@@ -2277,23 +1275,14 @@
     "id": "N07-room-11-3",
     "from": "room",
     "after": "room",
-    "cam": [
-     [
-      -6,
-      -90
-     ],
-     [
-      -6,
-      -90
-     ],
-     [
-      -6,
-      -90
-     ]
-    ],
-    "P3": [
-     464,
-     114
+    "via": [
+     {
+      "tile": [
+       11,
+       3
+      ],
+      "onPath": true
+     }
     ],
     "SC": 1
    }

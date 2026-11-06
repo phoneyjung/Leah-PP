@@ -4,7 +4,8 @@
 // animation frame every 50/3 ms. Math.random is seeded. Every image / fetch / decode / bitmap / script load is counted
 // as "pending" and run() stops before the next frame while one is pending, so the harness can wait for it in real time
 // and every load lands between the same two virtual frames in every run. A draw recorder logs drawImage calls on the
-// game canvas (#c) for one frame on request: the order is the y-sort order, the arguments are the positions.
+// game canvas (#c) for one frame on request: the order is the y-sort order, the arguments + the full transform are the positions
+// (fills, paths and text are not logged: the harness compares the canvas pixels themselves for those, cpNN.canvas.png).
 // Used on main and on the G4 branch alike; it never edits the game.
 module.exports = ({ epoch, seed }) => `(()=>{
 'use strict';
@@ -50,7 +51,7 @@ const imgId=im=>{if(!im)return 'null';if(im instanceof HTMLImageElement){const s
   let v=IDS.get(im);if(!v){v=(im.constructor&&im.constructor.name||'x')+'#'+(++nid)+':'+(im.width|0)+'x'+(im.height|0);IDS.set(im,v)}return v};
 const r2=x=>typeof x==='number'?Math.round(x*100)/100:x;
 const DI=CanvasRenderingContext2D.prototype.drawImage;
-CanvasRenderingContext2D.prototype.drawImage=function(im,...a){if(REC&&this.canvas&&this.canvas.id==='c'){const m=this.getTransform();REC.push(imgId(im)+'|'+a.map(r2).join(',')+'|'+[m.a,m.d,m.e,m.f].map(r2).join(',')+'|'+r2(this.globalAlpha))}return DI.call(this,im,...a)};
+CanvasRenderingContext2D.prototype.drawImage=function(im,...a){if(REC&&this.canvas&&this.canvas.id==='c'){const m=this.getTransform();REC.push(imgId(im)+'|'+a.map(r2).join(',')+'|'+[m.a,m.b,m.c,m.d,m.e,m.f].map(r2).join(',')+'|'+r2(this.globalAlpha))}return DI.call(this,im,...a)};
 const flush=async()=>{for(let i=0;i<40;i++)await null};
 async function frame(){const target=vnow+FRAME;
   for(;;){let bid=0,bt=null;for(const [id,t] of T)if(t.at<=target&&(!bt||t.at<bt.at||(t.at===bt.at&&t.ord<bt.ord))){bid=id;bt=t}

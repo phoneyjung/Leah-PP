@@ -40,9 +40,16 @@ const BASE = process.env.BASE || 'http://127.0.0.1:8780';
       const cells = [...narrow].map(k => { const [x, y] = k.split(',').map(Number), ns = sol(x - 1, y) && sol(x + 1, y);
         const a = ns ? [x, y - 3] : [x - 3, y], b = ns ? [x, y + 3] : [x + 3, y];
         const okc = ([cx, cy]) => !sol(cx, cy) && !blockedAt(M, cx * T + T / 2, cy * T + T / 2);
-        const cross = okc(a) && okc(b) && !!findPath(M, a[0] * T + T / 2, a[1] * T + T / 2, b[0] * T + T / 2, b[1] * T + T / 2);
+        const pth = okc(a) && okc(b) ? findPath(M, a[0] * T + T / 2, a[1] * T + T / 2, b[0] * T + T / 2, b[1] * T + T / 2) : null;
+        const cross = !!pth;
+        // T34-N1: the game's own path must go THROUGH the passage tile, not round it
+        // the path is a list of turn points → walk the polyline from the start in steps of ≤ 4 px and look for the tile
+        const passes = !!pth && (() => { const pts = [[a[0] * T + T / 2, a[1] * T + T / 2], ...pth];
+          for (let i = 1; i < pts.length; i++) { const [x0, y0] = pts[i - 1], [x1, y1] = pts[i], n = Math.max(1, Math.ceil(Math.hypot(x1 - x0, y1 - y0) / 4));
+            for (let j = 0; j <= n; j++) { const px = x0 + (x1 - x0) * j / n, py = y0 + (y1 - y0) * j / n; if (Math.floor(px / T) === x && Math.floor(py / T) === y) return true; } }
+          return false; })();
         const nearExit = (M.exits || []).some(o => Math.hypot(o.x - (x * T + T / 2), o.y - (y * T + T / 2)) < 3 * T);
-        return { x, y, dir: ns ? 'NS' : 'EW', cross: cross ? [a, b] : null, nearExit }; });
+        return { x, y, dir: ns ? 'NS' : 'EW', cross: cross ? [a, b] : null, passes, nearExit }; });
       return { w: M.w, h: M.h, kind: M.kind || '', dark: DARK(), narrow: narrow.size, cells, exits };
     }, id);
     R.maps[id] = r; if (r.narrow) { R.narrowTotal += r.narrow; R.mapsWithNarrow++; }
