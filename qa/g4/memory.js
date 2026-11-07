@@ -1,8 +1,11 @@
-// G4 M9 (plan G4_0 §8 M9): picture memory of the WHOLE game, counted once per object (method G2.6 A6, v3 after Codex T34-R2).
+// G4 M9 (plan G4_0 §8 M9): picture memory of the WHOLE game, counted once per object (method G2.6 A6, v3 after Codex T34-R2,
+// v3.1 after Codex T35-N2: ImageData from an OffscreenCanvas 2D context counted too).
 // Tracked with a WeakRef: every <img>/Image given a src (+ <img> in the page), every canvas however it was made (createElement,
 // OffscreenCanvas, the HTML itself, innerHTML …: caught when it enters the document (MutationObserver), when anything asks it for a
 // context (getContext — a canvas only gets pixel memory then) and by a sweep of document canvases at each count), every ImageData
-// (getImageData / createImageData / new ImageData) together with its pixel buffer, and every ImageBitmap.
+// (getImageData / createImageData of a canvas OR OffscreenCanvas 2D context, new ImageData) together with its pixel buffer, and every
+// ImageBitmap. Not seen: pictures made inside a Worker (the hunt1 floor is joined in one; M9's scenes do not visit hunt1) and WebGL /
+// VideoFrame / ImageDecoder (the game and char2.js use none of them: grep on main eb60c65 + char2.src.js).
 // After each scene: 1.5 s, then gc() ×3 (--expose-gc). RESIDENT = what is still alive (w×h×4): an ImageData counts while its wrapper
 // OR its pixel buffer is alive, each pixel buffer once (ImageData sharing a buffer are not counted twice). The game canvas #c is reported
 // apart (screen), never in the totals. MADE_CUMULATIVE = everything ever made and tracked — a sum over time, NOT a peak; the peak here is
@@ -10,7 +13,8 @@
 // Scenes: the 3 M6 scenes (m6-scenes.json) visited in order with a short walk · synthetic save · external hosts blocked.
 //   BASE=http://127.0.0.1:8780 node qa/g4/memory.js OUT.json [--patch '{"char2On":true}'] [--inject canvas|html|imagedata]
 //   --inject (at the last scene, kept alive): canvas = createElement 4096² · html = a 4096² canvas written with innerHTML then given a
-//   context · imagedata = new ImageData(4096,4096) of which only .data is kept → each must add 64 MiB to RESIDENT
+//   context · imagedata = new ImageData(4096,4096) of which only .data is kept · offscreen = OffscreenCanvas 4096², getImageData of all
+//   of it, only .data kept, the canvas shrunk to 0 and let go → each must add 64 MiB to RESIDENT
 'use strict';
 const fs = require('fs'), { chromium } = require('playwright');
 const BASE = process.env.BASE || 'http://127.0.0.1:8780';
@@ -32,9 +36,11 @@ const HOOK = () => {
   new MutationObserver(ms => { for (const m of ms) for (const n of m.addedNodes) { if (n.nodeType !== 1) continue; if (n.tagName === 'CANVAS') canvas(n); else n.querySelectorAll && n.querySelectorAll('canvas').forEach(canvas); } })
     .observe(document, { childList: true, subtree: true });
   const img = d => add('imagedata', d, d.width, d.height, d.data.buffer);
-  const C2 = CanvasRenderingContext2D.prototype, gid = C2.getImageData, cid = C2.createImageData;
-  C2.getImageData = function (...a) { const d = gid.apply(this, a); img(d); return d; };
-  C2.createImageData = function (...a) { const d = cid.apply(this, a); img(d); return d; };
+  // both 2D context kinds (T35-N2: an OffscreenCanvas context made ImageData the v3 counter did not see)
+  for (const K of [window.CanvasRenderingContext2D, window.OffscreenCanvasRenderingContext2D]) { if (!K) continue;
+    const C2 = K.prototype, gid = C2.getImageData, cid = C2.createImageData;
+    C2.getImageData = function (...a) { const d = gid.apply(this, a); img(d); return d; };
+    C2.createImageData = function (...a) { const d = cid.apply(this, a); img(d); return d; }; }
   const ID = window.ImageData; window.ImageData = function (...a) { const d = new ID(...a); img(d); return d; }; window.ImageData.prototype = ID.prototype;
   if (window.createImageBitmap) { const cib = window.createImageBitmap; window.createImageBitmap = (...a) => cib(...a).then(b => { add('bitmap', b, b.width, b.height); return b; }); }
   const d = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, 'src');
@@ -65,7 +71,7 @@ const MEASURE = async () => {
   await ctx.addInitScript(HOOK);
   const p = await ctx.newPage(), errs = []; p.on('pageerror', e => errs.push(String(e.message).slice(0, 160)));
   await p.goto(BASE + '/', { waitUntil: 'load' }); await p.waitForFunction(() => !document.getElementById('load'), null, { timeout: 90000 }); await p.waitForTimeout(800);
-  const R = { base: BASE, patch: PATCH, inject: INJECT, method: 'v3 (T34-R2): canvas by getContext/MutationObserver/sweep · ImageData by wrapper or buffer, buffer once', steps: {} };
+  const R = { base: BASE, patch: PATCH, inject: INJECT, method: 'v3.1 (T34-R2, T35-N2): canvas by getContext/MutationObserver/sweep · ImageData of both 2D context kinds + new ImageData, by wrapper or buffer, buffer once', steps: {} };
   R.steps.title = await p.evaluate(MEASURE);
   await p.evaluate(([sv, patch]) => { const d = Store.all(); d.slots = [Object.assign(newSave(sv), patch || {})]; d.cur = 0; Store.put(d); S = d.slots[0]; S.seen = { intro: 1 }; startGame();
     document.querySelectorAll('#cr,#title,#picker').forEach(e => e.classList.add('hide')); DLG = null; try { closeModal() } catch (e) {} LITE = false; fpsChecks = 6; S.eco = false; }, [SAVE, PATCH]);
@@ -76,6 +82,7 @@ const MEASURE = async () => {
       if (kind === 'canvas') { const c = document.createElement('canvas'); c.width = c.height = 4096; c.getContext('2d').fillRect(0, 0, 1, 1); window.__inj = c; }
       if (kind === 'html') { const box = document.createElement('div'); box.style.display = 'none'; box.innerHTML = '<canvas width="4096" height="4096"></canvas>'; document.body.appendChild(box); box.firstChild.getContext('2d').fillRect(0, 0, 1, 1); }
       if (kind === 'imagedata') { const d = new ImageData(4096, 4096); d.data[0] = 123; window.__inj = d.data; }
+      if (kind === 'offscreen') { const o = new OffscreenCanvas(4096, 4096), g = o.getContext('2d'); g.fillRect(0, 0, 1, 1); window.__inj = g.getImageData(0, 0, 4096, 4096).data; o.width = o.height = 0; }
     }, INJECT);
     await p.waitForTimeout(1500);
     R.steps[sc.id] = await p.evaluate(MEASURE);

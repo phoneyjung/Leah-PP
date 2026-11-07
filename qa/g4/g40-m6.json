@@ -1748,5 +1748,61 @@
   },
   "verdict": "fail",
   "pass": false
+ },
+ "v1_2_control_default": {
+  "when": "7 Nov 2569",
+  "change": "with 2 targets the main control is added unless CONTROL=0; with CONTROL=0 the verdict can never be pass",
+  "quick_default (ROUNDS=1, 2 s, main vs main)": {
+   "targets": [
+    "main",
+    "main-control",
+    "branch"
+   ],
+   "runs": 9,
+   "verdict": "undecided",
+   "scenes": {
+    "S1-capital": {
+     "verdict": "undecided: rerun with ROUNDS=5",
+     "ratio": 1.026,
+     "controlRatio": 1.071
+    },
+    "S2-farm": {
+     "verdict": "undecided: rerun with ROUNDS=5",
+     "ratio": 1.015,
+     "controlRatio": 1.179
+    },
+    "S3-cavemouth": {
+     "verdict": "pass",
+     "ratio": 1.291,
+     "controlRatio": 1.007
+    }
+   }
+  },
+  "quick_CONTROL0": {
+   "targets": [
+    "main",
+    "branch"
+   ],
+   "runs": 6,
+   "verdict": "undecided",
+   "scenes": {
+    "S1-capital": {
+     "verdict": "undecided: no control (CONTROL=0)",
+     "ratio": 1.078,
+     "controlRatio": null
+    },
+    "S2-farm": {
+     "verdict": "undecided: no control (CONTROL=0)",
+     "ratio": 1.11,
+     "controlRatio": null
+    },
+    "S3-cavemouth": {
+     "verdict": "undecided: no control (CONTROL=0)",
+     "ratio": 1.149,
+     "controlRatio": null
+    }
+   }
+  },
+  "reading": "2-second runs only prove the wiring (3 targets, verdicts), not speed"
  }
 }

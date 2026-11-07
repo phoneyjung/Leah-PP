@@ -140,5 +140,39 @@
   "made_cumulative_MiB_last": 451.43,
   "errors": [],
   "pass": true
+ },
+ "v3_1_after_T35": {
+  "when": "7 Nov 2569 · main eb60c65 · same machine/Chromium 141",
+  "change": "getImageData/createImageData hooked on BOTH 2D context kinds (CanvasRenderingContext2D + OffscreenCanvasRenderingContext2D) · --inject offscreen added",
+  "base": {
+   "peak_resident_MiB": 205.88,
+   "cavemouth": 205.88,
+   "errors": 0,
+   "pass": true,
+   "method": "v3.1 (T34-R2, T35-N2): canvas by getContext/MutationObserver/sweep · ImageData of both 2D context kinds + new ImageData, by wrapper or buffer, buffer once"
+  },
+  "inject_offscreen": {
+   "peak_resident_MiB": 269.88,
+   "cavemouth": 269.88,
+   "errors": 0,
+   "pass": true,
+   "method": "v3.1 (T34-R2, T35-N2): canvas by getContext/MutationObserver/sweep · ImageData of both 2D context kinds + new ImageData, by wrapper or buffer, buffer once"
+  },
+  "inject_imagedata": {
+   "peak_resident_MiB": 269.88,
+   "cavemouth": 269.88,
+   "errors": 0,
+   "pass": true,
+   "method": "v3.1 (T34-R2, T35-N2): canvas by getContext/MutationObserver/sweep · ImageData of both 2D context kinds + new ImageData, by wrapper or buffer, buffer once"
+  },
+  "v3_counter_on_offscreen": {
+   "peak_resident_MiB": 205.88,
+   "cavemouth": 205.88,
+   "errors": 0,
+   "pass": true,
+   "method": "v3 (T34-R2): canvas by getContext/MutationObserver/sweep · ImageData by wrapper or buffer, buffer once",
+   "note": "the v3 counter (bc92e6c) with only the offscreen injection added: it misses the 64 MiB (Codex T35-N2)"
+  },
+  "notSeen": "pictures made inside a Worker (hunt1 joins its floor in one; M9 scenes do not visit hunt1) · WebGL/VideoFrame/ImageDecoder (not used by the game or char2.src.js)"
  }
 }

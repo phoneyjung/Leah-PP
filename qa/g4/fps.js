@@ -6,8 +6,8 @@
 //   TARGETS='[{"label":"main","url":"http://127.0.0.1:8780"}]' node qa/g4/fps.js OUT.json [measure_s]
 //   a target may carry "patch" (fields merged into the synthetic save, e.g. {"char2On":true}) and "inject":
 //   "SLOW" (8 ms of busy work before every frame) or "EMPTY" (drawImage on the game canvas does nothing) → used to prove the gate fails.
-// Gate (G4.2+, v2 after Codex T34): reference = target[0] (main), candidate = the last target (the branch). CONTROL=1 adds a second copy of
-// main as a control (3 targets). Per scene: ratio = the MEDIAN OF THE PAIRED RATIOS candidate ÷ reference measured in the same round
+// Gate (G4.2+, v2 after Codex T34): reference = target[0] (main), candidate = the last target (the branch). With 2 targets a second copy of
+// main is added as a control (3 targets; on by default since T35, CONTROL=0 = off and then never 'pass'). Per scene: ratio = the MEDIAN OF THE PAIRED RATIOS candidate ÷ reference measured in the same round
 // (pairs sit next to each other in time, so a slow spell of the machine hits both; G4.0 saw absolute FPS drift 20–30 % in 15 min);
 // ratioOfMedians is reported beside it. verdict: fail = ratio < 0.90, or draws/frame < 0.8 × reference, or walked 0, or a pin/map lost ·
 // undecided = 0.90 ≤ ratio < 0.95, or the control is off by more than ±5 % → rerun with ROUNDS=5 and report every set; still undecided
@@ -17,7 +17,9 @@
 'use strict';
 const fs = require('fs'), { chromium } = require('playwright');
 const TARGETS = JSON.parse(process.env.TARGETS || '[{"label":"main","url":"http://127.0.0.1:8780"}]');
-if (process.env.CONTROL === '1' && TARGETS.length === 2) TARGETS.splice(1, 0, Object.assign({}, TARGETS[0], { label: TARGETS[0].label + '-control' }));
+// the control is ON by default whenever main and a branch are compared (T35 note: a gate run that forgot CONTROL=1 still ran);
+// CONTROL=0 turns it off for a quick look, and then the verdict can never be 'pass' (at best 'undecided: no control')
+if (process.env.CONTROL !== '0' && TARGETS.length === 2) TARGETS.splice(1, 0, Object.assign({}, TARGETS[0], { label: TARGETS[0].label + '-control' }));
 const OUTF = process.argv[2], MEAS = +(process.argv[3] || 30), WARM = +(process.env.WARM || 5), ROUNDS = +(process.env.ROUNDS || 3);
 const SCENES = require('./m6-scenes.json');
 const SAVE = { name: 'P', kid: 0, house: 1, age: 7 };
@@ -76,7 +78,7 @@ const INJ = {
       if (ctl) { row.controlPairedRatios = paired(ctl); row.controlRatio = med(row.controlPairedRatios); }
       const hardFail = row.ratio < 0.9 || c.drawsPerFrame < 0.8 * a.drawsPerFrame || !(c.walked > 0) || !c.pins || !c.mapOk;
       const shaky = (row.ratio < 0.95) || (ctl && Math.abs(row.controlRatio - 1) > 0.05);
-      row.verdict = hardFail ? 'fail' : shaky ? (ROUNDS >= 5 ? 'cannot decide (after ' + ROUNDS + ' rounds)' : 'undecided: rerun with ROUNDS=5') : 'pass';
+      row.verdict = hardFail ? 'fail' : !ctl ? 'undecided: no control (CONTROL=0)' : shaky ? (ROUNDS >= 5 ? 'cannot decide (after ' + ROUNDS + ' rounds)' : 'undecided: rerun with ROUNDS=5') : 'pass';
       row.gate = row.verdict === 'pass'; } }
   const baseOk = errs.length === 0 && Object.values(R.summary).every(r => Object.values(r).every(v => typeof v !== 'object' || Array.isArray(v) || (v.pins && v.mapOk && v.heldOk && v.walked > 0)));
   const verdicts = Object.values(R.summary).map(r => r.verdict).filter(Boolean);
