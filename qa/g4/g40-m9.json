@@ -1,0 +1,178 @@
+{
+ "method": "v3 after Codex T34-R2",
+ "main": {
+  "base": "http://127.0.0.1:8780",
+  "patch": null,
+  "inject": null,
+  "method": "v3 (T34-R2): canvas by getContext/MutationObserver/sweep · ImageData by wrapper or buffer, buffer once",
+  "steps": {
+   "title": {
+    "resident_MiB": 136.83,
+    "made_cumulative_MiB": 214.53,
+    "by_kind_resident_MiB": {
+     "image": 116.33,
+     "canvas": 20.5,
+     "imagedata": 0,
+     "bitmap": 0
+    },
+    "screen_MiB": 11.3,
+    "tracked": 799,
+    "alive": 252,
+    "documentCanvases": [
+     "mm:300x150",
+     "-:32x32",
+     "dlgP:64x64",
+     "-:384x384",
+     "-:384x384"
+    ],
+    "gc": true,
+    "map": null
+   },
+   "S1-capital": {
+    "resident_MiB": 160.54,
+    "made_cumulative_MiB": 294.37,
+    "by_kind_resident_MiB": {
+     "image": 99.48,
+     "canvas": 61.06,
+     "imagedata": 0,
+     "bitmap": 0
+    },
+    "screen_MiB": 11.3,
+    "tracked": 985,
+    "alive": 295,
+    "documentCanvases": [
+     "hudPortrait:64x64",
+     "mm:96x64",
+     "-:32x32",
+     "dlgP:64x64",
+     "-:384x384",
+     "-:384x384"
+    ],
+    "gc": true,
+    "map": "capital"
+   },
+   "S2-farm": {
+    "resident_MiB": 193.91,
+    "made_cumulative_MiB": 370.46,
+    "by_kind_resident_MiB": {
+     "image": 99.48,
+     "canvas": 93.77,
+     "imagedata": 0.66,
+     "bitmap": 0
+    },
+    "screen_MiB": 11.3,
+    "tracked": 1336,
+    "alive": 481,
+    "documentCanvases": [
+     "hudPortrait:64x64",
+     "mm:120x80",
+     "dlgP:64x64",
+     "-:384x384",
+     "-:384x384"
+    ],
+    "gc": true,
+    "map": "farm"
+   },
+   "S3-cavemouth": {
+    "resident_MiB": 205.88,
+    "made_cumulative_MiB": 387.43,
+    "by_kind_resident_MiB": {
+     "image": 99.48,
+     "canvas": 105.74,
+     "imagedata": 0.66,
+     "bitmap": 0
+    },
+    "screen_MiB": 11.3,
+    "tracked": 1343,
+    "alive": 483,
+    "documentCanvases": [
+     "hudPortrait:64x64",
+     "mm:96x64",
+     "dlgP:64x64",
+     "-:384x384",
+     "-:384x384"
+    ],
+    "gc": true,
+    "map": "cavemouth"
+   }
+  },
+  "peak_resident_MiB": 205.88,
+  "made_cumulative_MiB_last": 387.43,
+  "errors": [],
+  "pass": true
+ },
+ "main_run2": {
+  "base": "http://127.0.0.1:8780",
+  "patch": null,
+  "inject": null,
+  "method": "v3 (T34-R2): canvas by getContext/MutationObserver/sweep · ImageData by wrapper or buffer, buffer once",
+  "peak_resident_MiB": 205.88,
+  "made_cumulative_MiB_last": 387.43,
+  "errors": [],
+  "pass": true
+ },
+ "inject_canvas": {
+  "base": "http://127.0.0.1:8780",
+  "patch": null,
+  "inject": "canvas",
+  "method": "v3 (T34-R2): canvas by getContext/MutationObserver/sweep · ImageData by wrapper or buffer, buffer once",
+  "peak_resident_MiB": 269.88,
+  "made_cumulative_MiB_last": 452.15,
+  "errors": [],
+  "pass": true
+ },
+ "inject_html": {
+  "base": "http://127.0.0.1:8780",
+  "patch": null,
+  "inject": "html",
+  "method": "v3 (T34-R2): canvas by getContext/MutationObserver/sweep · ImageData by wrapper or buffer, buffer once",
+  "peak_resident_MiB": 269.88,
+  "made_cumulative_MiB_last": 451.43,
+  "errors": [],
+  "pass": true
+ },
+ "inject_imagedata": {
+  "base": "http://127.0.0.1:8780",
+  "patch": null,
+  "inject": "imagedata",
+  "method": "v3 (T34-R2): canvas by getContext/MutationObserver/sweep · ImageData by wrapper or buffer, buffer once",
+  "peak_resident_MiB": 269.88,
+  "made_cumulative_MiB_last": 451.43,
+  "errors": [],
+  "pass": true
+ },
+ "v3_1_after_T35": {
+  "when": "7 Nov 2569 · main eb60c65 · same machine/Chromium 141",
+  "change": "getImageData/createImageData hooked on BOTH 2D context kinds (CanvasRenderingContext2D + OffscreenCanvasRenderingContext2D) · --inject offscreen added",
+  "base": {
+   "peak_resident_MiB": 205.88,
+   "cavemouth": 205.88,
+   "errors": 0,
+   "pass": true,
+   "method": "v3.1 (T34-R2, T35-N2): canvas by getContext/MutationObserver/sweep · ImageData of both 2D context kinds + new ImageData, by wrapper or buffer, buffer once"
+  },
+  "inject_offscreen": {
+   "peak_resident_MiB": 269.88,
+   "cavemouth": 269.88,
+   "errors": 0,
+   "pass": true,
+   "method": "v3.1 (T34-R2, T35-N2): canvas by getContext/MutationObserver/sweep · ImageData of both 2D context kinds + new ImageData, by wrapper or buffer, buffer once"
+  },
+  "inject_imagedata": {
+   "peak_resident_MiB": 269.88,
+   "cavemouth": 269.88,
+   "errors": 0,
+   "pass": true,
+   "method": "v3.1 (T34-R2, T35-N2): canvas by getContext/MutationObserver/sweep · ImageData of both 2D context kinds + new ImageData, by wrapper or buffer, buffer once"
+  },
+  "v3_counter_on_offscreen": {
+   "peak_resident_MiB": 205.88,
+   "cavemouth": 205.88,
+   "errors": 0,
+   "pass": true,
+   "method": "v3 (T34-R2): canvas by getContext/MutationObserver/sweep · ImageData by wrapper or buffer, buffer once",
+   "note": "the v3 counter (bc92e6c) with only the offscreen injection added: it misses the 64 MiB (Codex T35-N2)"
+  },
+  "notSeen": "pictures made inside a Worker (hunt1 joins its floor in one; M9 scenes do not visit hunt1) · WebGL/VideoFrame/ImageDecoder (not used by the game or char2.src.js)"
+ }
+}

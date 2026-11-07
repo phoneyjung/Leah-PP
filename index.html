@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.33';
+const VERSION='Lantern Academy 2.34';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -7742,4 +7742,67 @@ function kid8Iris(r,g,b){const [,s,l]=hslOf(r/255,g/255,b/255);return l>=.18&&l<
 // online: a set-08 look travels with its set
 {const o=pdEnc226;pdEnc226=function(x){const s=o.apply(this,arguments);try{return s&&x&&x.set===8?s+',8':s}catch(e){return s}}}
 {const o=pdDec226;pdDec226=function(s){if(typeof s==='string'&&s.length<=40&&/^(-?\d+,){8}8$/.test(s)){const r=o.call(this,s.slice(0,s.lastIndexOf(',')));if(r)r.set=8;return r}return o.apply(this,arguments)}}
+// ================= 2.34 G4.1 (Claude · plan G4_0_GAME_INTEGRATION_PLAN.md v1.2 · owner "อนุมัติแผน G4" 6 Nov 2569 01:26 · G4.0 closed 7 Nov) =================
+// Character v2 (char2.js) behind a per-save GM flag. G4.1 = the flag + its state + a strict load + the save migration + rollback. NOTHING is drawn with
+// Char2 in G4.1 (the W1–W15 drawing points come in G4.2–G4.4). With the flag off — every save today — nothing here runs: no file is asked for, no timer,
+// no listener, no save field is written. S.char2On===true (only that value: false / 1 / "true" / missing = off) is the save's own choice and is changed
+// only from the GM panel. Who may use it (D-G4-2 ก): a girl (S.gender194, else the look's gender) aged 6–9. Every async step belongs to one owner
+// (the save object S at the start + a generation number): switching save or turning the flag off bumps the generation and late results are dropped.
+// Strict load (plan 3.4): Char2.load() must be ready AND list no failed file (no Char2 fallback modes in G4) within 20 s, else 'failed' = the old character.
+// Save (plan 6): an S.char2 already in the save is only read (a wrong/future one is never overwritten → 'failed'); none yet → once, after PD219 is decided,
+// from a COPY of the save cleaned with the game's own pd219Look / look169Valid → Char2.look → S.char2 (+ from = where the hair colour came from); old fields
+// are never touched; it is written by the next ordinary save(). Rollback: flag off keeps S.char2; "clear v2" (two taps) = flag off + S.char2 removed.
+const C234={st:'off',gen:0,owner:null,why:'',app:null,res:null,script:null,cnt:{script:0,load:0,migrate:0,cleanup:0,fail:0},
+  on(){return this.st==='ready'&&S===this.owner}};
+function c234Who(s){if(!s)return 'nosave';const g=(s.gender194==='f'||s.gender194==='m')?s.gender194:genderOf194(s.kid);if(g!=='f')return 'gender';
+  const a=Number(s.age);return Number.isInteger(a)&&a>=6&&a<=9?'':'age'}
+function c234Off(why){const was=C234.st;C234.gen++;C234.st='off';C234.app=null;C234.res=null;C234.why=why||'';
+  if(was==='ready'){C234.cnt.cleanup++;try{if(window.Char2)Char2.trim()}catch(e){}}c234Paint()}
+function c234Fail(g,why){if(g!==C234.gen||C234.st!=='loading')return;C234.st='failed';C234.why=why;C234.app=null;C234.cnt.fail++;c234Paint()}
+function c234Ready(app){C234.app=app;C234.st='ready';C234.why='';c234Paint()}
+function c234Script(){if(C234.script)return C234.script;C234.cnt.script++;   // char2.js is asked for once per page, never again
+  C234.script=new Promise(res=>{if(window.Char2)return res(true);const e=document.createElement('script');e.src='char2.js';e.onload=()=>res(!!window.Char2);e.onerror=()=>res(false);document.head.appendChild(e)});
+  return C234.script}
+function c234Sync(){const s=S;
+  if(!s||s.char2On!==true){if(C234.st!=='off'||C234.owner!==s)c234Off(s?'flag':'nosave');C234.owner=s;return}
+  const who=c234Who(s);if(who){if(C234.st!=='off'||C234.owner!==s)c234Off(who);C234.owner=s;C234.why=who;return}
+  if(C234.owner===s&&C234.st!=='off')return;   // this save is already loading / ready / failed
+  c234Off('');C234.owner=s;C234.st='loading';const g=C234.gen,live=()=>S===s&&C234.owner===s&&C234.gen===g&&C234.st==='loading';
+  setTimeout(()=>{if(live())c234Fail(g,'timeout')},20000);
+  c234Script().then(ok=>{if(!live())return null;if(!ok){c234Fail(g,'script');return null}C234.cnt.load++;return Char2.load('c2-pack.json')})
+    .then(r=>{if(!r||!live())return;const f=Array.isArray(r.failed)?r.failed.slice():['?'];C234.res={ready:r.ready===true,failed:f};
+      if(r.ready!==true||f.length){c234Fail(g,'files: '+(f.join(' ')||'not ready'));return}
+      return c234Look(s,g,r.pack,live)})
+    .catch(e=>{if(live())c234Fail(g,'error: '+String(e&&e.message||e).slice(0,80))})}
+function c234Look(s,g,pack,live){const c=s.char2;
+  if(c!==undefined){const app=(c&&typeof c==='object'&&!Array.isArray(c)&&c.v===2&&c.set===pack.set)?Char2.look(s):null;
+    if(!app){c234Fail(g,'save look unreadable');return}c234Ready(app);return}
+  return ((PD219.ok||PD219.tried)?Promise.resolve():pd219Load().catch(()=>false)).then(()=>{if(!live())return;
+    const m=c234Migrate(s);if(!m){c234Fail(g,'no look');return}
+    s.char2=m.char2;C234.cnt.migrate++;c234Ready(m.app)})}   // the ONLY write to the save in G4.1 (besides char2On / clear in the GM row)
+function c234Migrate(s){   // pure: reads a COPY of the save, never changes s · {char2 (Appearance + from), app} or null
+  const src=JSON.parse(JSON.stringify(s));delete src.char2;
+  if(src.pd219!==undefined&&!pd219Look(src.pd219))delete src.pd219;
+  if(src.appearance169!==undefined&&!look169Valid(src.appearance169))delete src.appearance169;
+  const app=Char2.look(src);if(!app)return null;
+  const okH=v=>Number.isInteger(v)&&v>=0&&v<HAIRC.length;
+  const from=src.pd219&&okH(src.pd219.hc)?'pd219':src.appearance169?'appearance169':okH(src.hcol)?'hcol':okH(src.hc)?'hc':'default';
+  return {char2:Object.assign({},app,{from}),app}}
+{const _sg234=startGame;startGame=function(){const r=_sg234.apply(this,arguments);try{c234Sync()}catch(e){}return r}}
+// GM panel row (TH/EN): the flag, its state (kept current while the row is on screen), and "clear v2" with an in-page second tap (no browser dialog)
+function c234StText(){if(!S)return '';const tx=(a,b)=>LANG==='en'?b:a,who=c234Who(S),on=S.char2On===true,st=C234.owner===S?C234.st:'off';
+  const ST={off:tx('ปิด','off'),loading:tx('กำลังโหลด…','loading…'),ready:tx('พร้อม · ขั้น G4.1 ยังไม่วาดตัวใหม่','ready · step G4.1 does not draw it yet'),failed:tx('ใช้ไม่ได้ · ใช้ตัวเดิม','unavailable · original character')};
+  const why=who?tx('ยังไม่มีตัวแบบนี้','No v2 character for this player yet'):(on&&st==='failed')?(C234.why==='save look unreadable'?tx('ลุครุ่น 2 ในเซฟนี้อ่านไม่ได้','The v2 look in this save cannot be read'):C234.why):'';
+  return tx('สถานะ: ','State: ')+(on?ST[st]:ST.off)+(why?' · '+why:'')}
+function c234Paint(){const e=document.getElementById('c234st');if(e)e.textContent=c234StText()}
+function c234Row(h2){const tx=(a,b)=>LANG==='en'?b:a,who=c234Who(S),on=S.char2On===true;
+  const d=document.createElement('div');d.className='pn';d.id='c234row';d.style.margin='6px 0';const hi='background:#e8c46a;color:#1b1330;';
+  d.innerHTML='<b>'+tx('ตัวละครรุ่น 2 (ทดสอบ · เซฟนี้)','Character v2 (trial · this save)')+'</b><div id="c234st" style="margin-top:4px">'+c234StText()+'</div>'+
+    '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px"><button id="c234on" style="min-height:44px;'+(on?hi:'')+'"'+(who&&!on?' disabled':'')+'>'+(on?tx('ปิดตัวละครรุ่น 2','Turn v2 off'):tx('เปิดตัวละครรุ่น 2','Turn v2 on'))+'</button>'+
+    (on||S.char2!==undefined?'<button id="c234clr" style="min-height:44px">'+tx('ล้างตัวรุ่น 2','Clear v2')+'</button>':'')+'</div>';
+  h2.after(d);
+  $('c234on').onclick=()=>{if(!S)return;if(S.char2On===true)S.char2On=false;else if(!c234Who(S))S.char2On=true;else return;save();c234Sync();closeModal();openGM()};
+  const c=$('c234clr');if(c)c.onclick=()=>{if(!c.dataset.armed){c.dataset.armed='1';c.textContent=tx('แตะอีกครั้งเพื่อยืนยัน · ลบลุครุ่น 2 ของเซฟนี้','Tap again to confirm · removes this save\'s v2 look');return}
+    S.char2On=false;delete S.char2;save();c234Sync();closeModal();openGM()}}
+{const _og234=openGM;openGM=function(){const r=_og234.apply(this,arguments);try{const h2=document.querySelector('#modal h2');if(h2&&gmOn())c234Row(h2)}catch(e){}return r}}
 </script></body></html>

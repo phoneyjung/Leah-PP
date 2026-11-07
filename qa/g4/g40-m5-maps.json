@@ -1,0 +1,2094 @@
+{
+ "maps": {
+  "room": {
+   "w": 26,
+   "h": 16,
+   "kind": "room",
+   "dark": false,
+   "narrow": 9,
+   "cells": [
+    {
+     "x": 5,
+     "y": 3,
+     "dir": "NS",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 9,
+     "y": 3,
+     "dir": "EW",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 10,
+     "y": 3,
+     "dir": "EW",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 11,
+     "y": 3,
+     "dir": "EW",
+     "cross": [
+      [
+       8,
+       3
+      ],
+      [
+       14,
+       3
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 14,
+     "y": 3,
+     "dir": "NS",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 24,
+     "y": 7,
+     "dir": "EW",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 1,
+     "y": 11,
+     "dir": "EW",
+     "cross": null,
+     "passes": false,
+     "nearExit": true
+    },
+    {
+     "x": 16,
+     "y": 13,
+     "dir": "EW",
+     "cross": [
+      [
+       13,
+       13
+      ],
+      [
+       19,
+       13
+      ]
+     ],
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 19,
+     "y": 14,
+     "dir": "NS",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    }
+   ],
+   "exits": [
+    {
+     "id": "door",
+     "x": 128,
+     "y": 402,
+     "tile": [
+      4,
+      12
+     ],
+     "to": "capital",
+     "toExit": "home",
+     "locked": false,
+     "needBoss": false,
+     "lockBoss": false,
+     "narrowAt": false,
+     "narrowNear": false,
+     "start": [
+      5,
+      9,
+      4
+     ]
+    }
+   ]
+  },
+  "room2": {
+   "w": 14,
+   "h": 10,
+   "kind": "room",
+   "dark": false,
+   "narrow": 0,
+   "cells": [],
+   "exits": [
+    {
+     "id": "down",
+     "x": 80,
+     "y": 208,
+     "tile": [
+      2,
+      6
+     ],
+     "to": "room",
+     "toExit": "up",
+     "locked": false,
+     "needBoss": false,
+     "lockBoss": false,
+     "narrowAt": false,
+     "narrowNear": false,
+     "start": [
+      4,
+      8,
+      4
+     ]
+    }
+   ]
+  },
+  "room3": {
+   "w": 14,
+   "h": 10,
+   "kind": "room",
+   "dark": false,
+   "narrow": 0,
+   "cells": [],
+   "exits": [
+    {
+     "id": "down",
+     "x": 80,
+     "y": 208,
+     "tile": [
+      2,
+      6
+     ],
+     "to": "room2",
+     "toExit": "up",
+     "locked": false,
+     "needBoss": false,
+     "lockBoss": false,
+     "narrowAt": false,
+     "narrowNear": false,
+     "start": [
+      4,
+      8,
+      4
+     ]
+    }
+   ]
+  },
+  "market": {
+   "error": "landed on capital"
+  },
+  "lake": {
+   "error": "landed on capital"
+  },
+  "home": {
+   "error": "landed on capital"
+  },
+  "plaza": {
+   "error": "landed on capital"
+  },
+  "mountain": {
+   "error": "landed on capital"
+  },
+  "cave1": {
+   "error": "landed on capital"
+  },
+  "cave2": {
+   "error": "landed on capital"
+  },
+  "cave3": {
+   "error": "landed on capital"
+  },
+  "beach": {
+   "error": "landed on capital"
+  },
+  "falls": {
+   "error": "landed on capital"
+  },
+  "forest1": {
+   "error": "landed on capital"
+  },
+  "forest2": {
+   "error": "landed on capital"
+  },
+  "desert1": {
+   "error": "landed on capital"
+  },
+  "desert2": {
+   "error": "landed on capital"
+  },
+  "ulake1": {
+   "error": "landed on capital"
+  },
+  "ulake2": {
+   "error": "landed on capital"
+  },
+  "sky1": {
+   "error": "landed on capital"
+  },
+  "sky2": {
+   "error": "landed on capital"
+  },
+  "trial": {
+   "error": "landed on capital"
+  },
+  "capital": {
+   "w": 48,
+   "h": 32,
+   "kind": "town",
+   "dark": false,
+   "narrow": 4,
+   "cells": [
+    {
+     "x": 31,
+     "y": 17,
+     "dir": "EW",
+     "cross": [
+      [
+       28,
+       17
+      ],
+      [
+       34,
+       17
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 31,
+     "y": 19,
+     "dir": "EW",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 31,
+     "y": 26,
+     "dir": "EW",
+     "cross": [
+      [
+       28,
+       26
+      ],
+      [
+       34,
+       26
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 37,
+     "y": 26,
+     "dir": "EW",
+     "cross": [
+      [
+       34,
+       26
+      ],
+      [
+       40,
+       26
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    }
+   ],
+   "exits": [
+    {
+     "id": "n",
+     "x": 800,
+     "y": 12,
+     "tile": [
+      25,
+      0
+     ],
+     "to": "cavemouth",
+     "toExit": "s",
+     "locked": false,
+     "needBoss": false,
+     "lockBoss": false,
+     "narrowAt": false,
+     "narrowNear": false,
+     "start": [
+      25,
+      4,
+      4
+     ]
+    },
+    {
+     "id": "w",
+     "x": 14,
+     "y": 464,
+     "tile": [
+      0,
+      14
+     ],
+     "to": "farm",
+     "toExit": "e",
+     "locked": true,
+     "needBoss": false,
+     "lockBoss": false,
+     "narrowAt": false,
+     "narrowNear": false,
+     "start": [
+      1,
+      17,
+      4
+     ]
+    },
+    {
+     "id": "e",
+     "x": 1522,
+     "y": 480,
+     "tile": [
+      47,
+      15
+     ],
+     "to": "scn_east",
+     "toExit": "w",
+     "locked": true,
+     "needBoss": false,
+     "lockBoss": false,
+     "narrowAt": false,
+     "narrowNear": false,
+     "start": [
+      45,
+      17,
+      4
+     ]
+    },
+    {
+     "id": "s",
+     "x": 816,
+     "y": 1014,
+     "tile": [
+      25,
+      31
+     ],
+     "to": "plaza",
+     "toExit": "s",
+     "locked": true,
+     "needBoss": false,
+     "lockBoss": false,
+     "narrowAt": false,
+     "narrowNear": false,
+     "start": [
+      25,
+      27,
+      4
+     ]
+    },
+    {
+     "id": "home",
+     "x": 1424,
+     "y": 747.2,
+     "tile": [
+      44,
+      23
+     ],
+     "to": "room",
+     "toExit": "door",
+     "locked": false,
+     "needBoss": false,
+     "lockBoss": false,
+     "narrowAt": false,
+     "narrowNear": false,
+     "start": [
+      45,
+      26,
+      4
+     ]
+    }
+   ]
+  },
+  "farm": {
+   "w": 60,
+   "h": 40,
+   "kind": "town",
+   "dark": false,
+   "narrow": 70,
+   "cells": [
+    {
+     "x": 46,
+     "y": 1,
+     "dir": "EW",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 40,
+     "y": 3,
+     "dir": "NS",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 46,
+     "y": 3,
+     "dir": "EW",
+     "cross": [
+      [
+       43,
+       3
+      ],
+      [
+       49,
+       3
+      ]
+     ],
+     "passes": true,
+     "nearExit": true
+    },
+    {
+     "x": 54,
+     "y": 3,
+     "dir": "NS",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 1,
+     "y": 4,
+     "dir": "NS",
+     "cross": [
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       7
+      ]
+     ],
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 55,
+     "y": 4,
+     "dir": "EW",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 2,
+     "y": 5,
+     "dir": "EW",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 58,
+     "y": 5,
+     "dir": "NS",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 58,
+     "y": 6,
+     "dir": "NS",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 1,
+     "y": 7,
+     "dir": "EW",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 2,
+     "y": 7,
+     "dir": "EW",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 57,
+     "y": 7,
+     "dir": "EW",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 1,
+     "y": 12,
+     "dir": "NS",
+     "cross": [
+      [
+       1,
+       9
+      ],
+      [
+       1,
+       15
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 27,
+     "y": 12,
+     "dir": "EW",
+     "cross": [
+      [
+       24,
+       12
+      ],
+      [
+       30,
+       12
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 28,
+     "y": 12,
+     "dir": "EW",
+     "cross": [
+      [
+       25,
+       12
+      ],
+      [
+       31,
+       12
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 29,
+     "y": 12,
+     "dir": "EW",
+     "cross": [
+      [
+       26,
+       12
+      ],
+      [
+       32,
+       12
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 3,
+     "y": 13,
+     "dir": "EW",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 9,
+     "y": 14,
+     "dir": "NS",
+     "cross": [
+      [
+       9,
+       11
+      ],
+      [
+       9,
+       17
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 14,
+     "y": 14,
+     "dir": "NS",
+     "cross": [
+      [
+       14,
+       11
+      ],
+      [
+       14,
+       17
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 1,
+     "y": 15,
+     "dir": "NS",
+     "cross": [
+      [
+       1,
+       12
+      ],
+      [
+       1,
+       18
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 7,
+     "y": 15,
+     "dir": "EW",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 8,
+     "y": 15,
+     "dir": "EW",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 12,
+     "y": 15,
+     "dir": "NS",
+     "cross": [
+      [
+       12,
+       12
+      ],
+      [
+       12,
+       18
+      ]
+     ],
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 49,
+     "y": 15,
+     "dir": "EW",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 50,
+     "y": 15,
+     "dir": "EW",
+     "cross": [
+      [
+       47,
+       15
+      ],
+      [
+       53,
+       15
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 53,
+     "y": 15,
+     "dir": "EW",
+     "cross": [
+      [
+       50,
+       15
+      ],
+      [
+       56,
+       15
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 54,
+     "y": 15,
+     "dir": "EW",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 1,
+     "y": 16,
+     "dir": "NS",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 4,
+     "y": 16,
+     "dir": "NS",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 6,
+     "y": 16,
+     "dir": "NS",
+     "cross": null,
+     "passes": false,
+     "nearExit": true
+    },
+    {
+     "x": 1,
+     "y": 17,
+     "dir": "NS",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 6,
+     "y": 17,
+     "dir": "NS",
+     "cross": null,
+     "passes": false,
+     "nearExit": true
+    },
+    {
+     "x": 2,
+     "y": 18,
+     "dir": "EW",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 57,
+     "y": 22,
+     "dir": "NS",
+     "cross": [
+      [
+       57,
+       19
+      ],
+      [
+       57,
+       25
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 58,
+     "y": 26,
+     "dir": "NS",
+     "cross": [
+      [
+       58,
+       23
+      ],
+      [
+       58,
+       29
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 2,
+     "y": 27,
+     "dir": "NS",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 22,
+     "y": 27,
+     "dir": "EW",
+     "cross": [
+      [
+       19,
+       27
+      ],
+      [
+       25,
+       27
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 27,
+     "y": 27,
+     "dir": "EW",
+     "cross": [
+      [
+       24,
+       27
+      ],
+      [
+       30,
+       27
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 28,
+     "y": 27,
+     "dir": "EW",
+     "cross": [
+      [
+       25,
+       27
+      ],
+      [
+       31,
+       27
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 57,
+     "y": 27,
+     "dir": "EW",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 25,
+     "y": 28,
+     "dir": "NS",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 58,
+     "y": 28,
+     "dir": "NS",
+     "cross": [
+      [
+       58,
+       25
+      ],
+      [
+       58,
+       31
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 10,
+     "y": 29,
+     "dir": "EW",
+     "cross": [
+      [
+       7,
+       29
+      ],
+      [
+       13,
+       29
+      ]
+     ],
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 11,
+     "y": 29,
+     "dir": "EW",
+     "cross": [
+      [
+       8,
+       29
+      ],
+      [
+       14,
+       29
+      ]
+     ],
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 25,
+     "y": 29,
+     "dir": "NS",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 4,
+     "y": 30,
+     "dir": "EW",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 8,
+     "y": 30,
+     "dir": "NS",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 10,
+     "y": 32,
+     "dir": "EW",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 29,
+     "y": 32,
+     "dir": "NS",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 56,
+     "y": 32,
+     "dir": "EW",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 58,
+     "y": 32,
+     "dir": "NS",
+     "cross": [
+      [
+       58,
+       29
+      ],
+      [
+       58,
+       35
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 9,
+     "y": 34,
+     "dir": "NS",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 11,
+     "y": 34,
+     "dir": "NS",
+     "cross": null,
+     "passes": false,
+     "nearExit": true
+    },
+    {
+     "x": 30,
+     "y": 36,
+     "dir": "EW",
+     "cross": [
+      [
+       27,
+       36
+      ],
+      [
+       33,
+       36
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 58,
+     "y": 36,
+     "dir": "NS",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 10,
+     "y": 37,
+     "dir": "NS",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 53,
+     "y": 37,
+     "dir": "EW",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 11,
+     "y": 38,
+     "dir": "EW",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 12,
+     "y": 38,
+     "dir": "EW",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 13,
+     "y": 38,
+     "dir": "EW",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 14,
+     "y": 38,
+     "dir": "EW",
+     "cross": [
+      [
+       11,
+       38
+      ],
+      [
+       17,
+       38
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 15,
+     "y": 38,
+     "dir": "EW",
+     "cross": [
+      [
+       12,
+       38
+      ],
+      [
+       18,
+       38
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 16,
+     "y": 38,
+     "dir": "EW",
+     "cross": [
+      [
+       13,
+       38
+      ],
+      [
+       19,
+       38
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 17,
+     "y": 38,
+     "dir": "EW",
+     "cross": [
+      [
+       14,
+       38
+      ],
+      [
+       20,
+       38
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 18,
+     "y": 38,
+     "dir": "EW",
+     "cross": [
+      [
+       15,
+       38
+      ],
+      [
+       21,
+       38
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 19,
+     "y": 38,
+     "dir": "EW",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 20,
+     "y": 38,
+     "dir": "EW",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 29,
+     "y": 38,
+     "dir": "EW",
+     "cross": [
+      [
+       26,
+       38
+      ],
+      [
+       32,
+       38
+      ]
+     ],
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 30,
+     "y": 38,
+     "dir": "EW",
+     "cross": [
+      [
+       27,
+       38
+      ],
+      [
+       33,
+       38
+      ]
+     ],
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 50,
+     "y": 38,
+     "dir": "EW",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    }
+   ],
+   "exits": [
+    {
+     "id": "e",
+     "x": 1906,
+     "y": 635.52,
+     "tile": [
+      59,
+      19
+     ],
+     "to": "capital",
+     "toExit": "w",
+     "locked": false,
+     "needBoss": false,
+     "lockBoss": false,
+     "narrowAt": false,
+     "narrowNear": false,
+     "start": [
+      57,
+      21,
+      4
+     ]
+    },
+    {
+     "id": "w0",
+     "x": 230.08,
+     "y": 603.2,
+     "tile": [
+      7,
+      18
+     ],
+     "to": "farm",
+     "toExit": "e",
+     "locked": true,
+     "needBoss": false,
+     "lockBoss": false,
+     "narrowAt": false,
+     "narrowNear": true,
+     "start": [
+      10,
+      19,
+      4
+     ]
+    },
+    {
+     "id": "w",
+     "x": 230.08,
+     "y": 641.6,
+     "tile": [
+      7,
+      20
+     ],
+     "to": "farm",
+     "toExit": "e",
+     "locked": true,
+     "needBoss": false,
+     "lockBoss": false,
+     "narrowAt": false,
+     "narrowNear": false,
+     "start": [
+      7,
+      24,
+      4
+     ]
+    },
+    {
+     "id": "w2",
+     "x": 230.08,
+     "y": 680,
+     "tile": [
+      7,
+      21
+     ],
+     "to": "farm",
+     "toExit": "e",
+     "locked": true,
+     "needBoss": false,
+     "lockBoss": false,
+     "narrowAt": false,
+     "narrowNear": false,
+     "start": [
+      7,
+      25,
+      4
+     ]
+    },
+    {
+     "id": "n0",
+     "x": 1383.04,
+     "y": 185.92,
+     "tile": [
+      43,
+      5
+     ],
+     "to": "farm",
+     "toExit": "e",
+     "locked": true,
+     "needBoss": false,
+     "lockBoss": false,
+     "narrowAt": false,
+     "narrowNear": false,
+     "start": [
+      43,
+      9,
+      4
+     ]
+    },
+    {
+     "id": "n",
+     "x": 1421.44,
+     "y": 185.92,
+     "tile": [
+      44,
+      5
+     ],
+     "to": "farm",
+     "toExit": "e",
+     "locked": true,
+     "needBoss": false,
+     "lockBoss": false,
+     "narrowAt": false,
+     "narrowNear": false,
+     "start": [
+      44,
+      9,
+      4
+     ]
+    },
+    {
+     "id": "n2",
+     "x": 1459.8400000000001,
+     "y": 185.92,
+     "tile": [
+      45,
+      5
+     ],
+     "to": "farm",
+     "toExit": "e",
+     "locked": true,
+     "needBoss": false,
+     "lockBoss": false,
+     "narrowAt": false,
+     "narrowNear": false,
+     "start": [
+      45,
+      9,
+      4
+     ]
+    },
+    {
+     "id": "s0",
+     "x": 441.6,
+     "y": 1101.12,
+     "tile": [
+      13,
+      34
+     ],
+     "to": "farm",
+     "toExit": "e",
+     "locked": true,
+     "needBoss": false,
+     "lockBoss": false,
+     "narrowAt": false,
+     "narrowNear": false,
+     "start": [
+      11,
+      36,
+      4
+     ]
+    },
+    {
+     "id": "s",
+     "x": 480,
+     "y": 1101.12,
+     "tile": [
+      15,
+      34
+     ],
+     "to": "farm",
+     "toExit": "e",
+     "locked": true,
+     "needBoss": false,
+     "lockBoss": false,
+     "narrowAt": false,
+     "narrowNear": false,
+     "start": [
+      15,
+      30,
+      4
+     ]
+    },
+    {
+     "id": "s2",
+     "x": 518.4,
+     "y": 1101.12,
+     "tile": [
+      16,
+      34
+     ],
+     "to": "farm",
+     "toExit": "e",
+     "locked": true,
+     "needBoss": false,
+     "lockBoss": false,
+     "narrowAt": false,
+     "narrowNear": false,
+     "start": [
+      18,
+      32,
+      4
+     ]
+    },
+    {
+     "id": "home",
+     "x": 780.16,
+     "y": 412.48,
+     "tile": [
+      24,
+      12
+     ],
+     "to": "room",
+     "toExit": "door",
+     "locked": false,
+     "needBoss": false,
+     "lockBoss": false,
+     "narrowAt": false,
+     "narrowNear": false,
+     "start": [
+      24,
+      16,
+      4
+     ]
+    }
+   ]
+  },
+  "scn_north": {
+   "error": "landed on capital"
+  },
+  "scn_east": {
+   "error": "landed on capital"
+  },
+  "scn_south": {
+   "error": "landed on capital"
+  },
+  "royal": {
+   "w": 48,
+   "h": 32,
+   "kind": "town",
+   "dark": false,
+   "narrow": 0,
+   "cells": [],
+   "exits": [
+    {
+     "id": "n",
+     "x": 1152,
+     "y": 38.4,
+     "tile": [
+      36,
+      1
+     ],
+     "to": "cavemouth",
+     "toExit": "s",
+     "locked": false,
+     "needBoss": false,
+     "lockBoss": false,
+     "narrowAt": false,
+     "narrowNear": false,
+     "start": [
+      36,
+      5,
+      4
+     ]
+    },
+    {
+     "id": "s",
+     "x": 768,
+     "y": 1014,
+     "tile": [
+      24,
+      31
+     ],
+     "to": "capital",
+     "toExit": "n",
+     "locked": false,
+     "needBoss": false,
+     "lockBoss": false,
+     "narrowAt": false,
+     "narrowNear": false,
+     "start": [
+      24,
+      27,
+      4
+     ]
+    },
+    {
+     "id": "w",
+     "x": 80,
+     "y": 656,
+     "tile": [
+      2,
+      20
+     ],
+     "to": "royal",
+     "toExit": "s",
+     "locked": true,
+     "needBoss": false,
+     "lockBoss": false,
+     "narrowAt": false,
+     "narrowNear": false,
+     "start": [
+      5,
+      21,
+      4
+     ]
+    },
+    {
+     "id": "e",
+     "x": 1456,
+     "y": 656,
+     "tile": [
+      45,
+      20
+     ],
+     "to": "royal",
+     "toExit": "s",
+     "locked": true,
+     "needBoss": false,
+     "lockBoss": false,
+     "narrowAt": false,
+     "narrowNear": false,
+     "start": [
+      42,
+      21,
+      4
+     ]
+    }
+   ]
+  },
+  "cavemouth": {
+   "w": 48,
+   "h": 32,
+   "kind": "cave",
+   "dark": true,
+   "narrow": 0,
+   "cells": [],
+   "exits": [
+    {
+     "id": "s",
+     "x": 752,
+     "y": 1014,
+     "tile": [
+      23,
+      31
+     ],
+     "to": "capital",
+     "toExit": "n",
+     "locked": false,
+     "needBoss": false,
+     "lockBoss": false,
+     "narrowAt": false,
+     "narrowNear": false,
+     "start": [
+      23,
+      27,
+      4
+     ]
+    },
+    {
+     "id": "n",
+     "x": 784,
+     "y": 38.4,
+     "tile": [
+      24,
+      1
+     ],
+     "to": "hunt1",
+     "toExit": "s",
+     "locked": false,
+     "needBoss": false,
+     "lockBoss": false,
+     "narrowAt": false,
+     "narrowNear": false,
+     "start": [
+      24,
+      5,
+      4
+     ]
+    }
+   ]
+  },
+  "hunt1": {
+   "w": 96,
+   "h": 64,
+   "kind": "cave",
+   "dark": true,
+   "narrow": 0,
+   "cells": [],
+   "exits": [
+    {
+     "id": "s",
+     "x": 752,
+     "y": 2038,
+     "tile": [
+      23,
+      63
+     ],
+     "to": "cavemouth",
+     "toExit": "n",
+     "locked": false,
+     "needBoss": false,
+     "lockBoss": false,
+     "narrowAt": false,
+     "narrowNear": false,
+     "start": [
+      23,
+      59,
+      4
+     ]
+    },
+    {
+     "id": "n",
+     "x": 2336,
+     "y": 76.8,
+     "tile": [
+      73,
+      2
+     ],
+     "to": "cave1",
+     "toExit": "up",
+     "locked": true,
+     "needBoss": false,
+     "lockBoss": false,
+     "narrowAt": false,
+     "narrowNear": false,
+     "start": [
+      73,
+      6,
+      4
+     ]
+    }
+   ]
+  },
+  "town2": {
+   "w": 48,
+   "h": 32,
+   "kind": "town",
+   "dark": false,
+   "narrow": 22,
+   "cells": [
+    {
+     "x": 8,
+     "y": 6,
+     "dir": "EW",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 15,
+     "y": 9,
+     "dir": "NS",
+     "cross": [
+      [
+       15,
+       6
+      ],
+      [
+       15,
+       12
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 33,
+     "y": 9,
+     "dir": "NS",
+     "cross": [
+      [
+       33,
+       6
+      ],
+      [
+       33,
+       12
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 15,
+     "y": 10,
+     "dir": "NS",
+     "cross": [
+      [
+       15,
+       7
+      ],
+      [
+       15,
+       13
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 33,
+     "y": 10,
+     "dir": "NS",
+     "cross": [
+      [
+       33,
+       7
+      ],
+      [
+       33,
+       13
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 15,
+     "y": 11,
+     "dir": "NS",
+     "cross": [
+      [
+       15,
+       8
+      ],
+      [
+       15,
+       14
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 33,
+     "y": 11,
+     "dir": "NS",
+     "cross": [
+      [
+       33,
+       8
+      ],
+      [
+       33,
+       14
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 31,
+     "y": 14,
+     "dir": "NS",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 44,
+     "y": 16,
+     "dir": "EW",
+     "cross": [
+      [
+       41,
+       16
+      ],
+      [
+       47,
+       16
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 5,
+     "y": 18,
+     "dir": "NS",
+     "cross": [
+      [
+       5,
+       15
+      ],
+      [
+       5,
+       21
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 14,
+     "y": 20,
+     "dir": "NS",
+     "cross": [
+      [
+       14,
+       17
+      ],
+      [
+       14,
+       23
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 41,
+     "y": 20,
+     "dir": "NS",
+     "cross": [
+      [
+       41,
+       17
+      ],
+      [
+       41,
+       23
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 14,
+     "y": 21,
+     "dir": "NS",
+     "cross": [
+      [
+       14,
+       18
+      ],
+      [
+       14,
+       24
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 41,
+     "y": 21,
+     "dir": "NS",
+     "cross": [
+      [
+       41,
+       18
+      ],
+      [
+       41,
+       24
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 14,
+     "y": 22,
+     "dir": "NS",
+     "cross": [
+      [
+       14,
+       19
+      ],
+      [
+       14,
+       25
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 41,
+     "y": 22,
+     "dir": "NS",
+     "cross": [
+      [
+       41,
+       19
+      ],
+      [
+       41,
+       25
+      ]
+     ],
+     "passes": true,
+     "nearExit": false
+    },
+    {
+     "x": 42,
+     "y": 23,
+     "dir": "EW",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 5,
+     "y": 25,
+     "dir": "NS",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 8,
+     "y": 27,
+     "dir": "NS",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 10,
+     "y": 27,
+     "dir": "NS",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 37,
+     "y": 27,
+     "dir": "NS",
+     "cross": null,
+     "passes": false,
+     "nearExit": false
+    },
+    {
+     "x": 25,
+     "y": 31,
+     "dir": "EW",
+     "cross": null,
+     "passes": false,
+     "nearExit": true
+    }
+   ],
+   "exits": [
+    {
+     "id": "n",
+     "x": 768,
+     "y": 10,
+     "tile": [
+      24,
+      0
+     ],
+     "to": "cavemouth",
+     "toExit": "s",
+     "locked": false,
+     "needBoss": false,
+     "lockBoss": false,
+     "narrowAt": false,
+     "narrowNear": false,
+     "start": [
+      24,
+      4,
+      4
+     ]
+    },
+    {
+     "id": "w",
+     "x": 10,
+     "y": 531.2,
+     "tile": [
+      0,
+      16
+     ],
+     "to": "farm",
+     "toExit": "e",
+     "locked": false,
+     "needBoss": false,
+     "lockBoss": false,
+     "narrowAt": false,
+     "narrowNear": false,
+     "start": [
+      3,
+      17,
+      4
+     ]
+    },
+    {
+     "id": "e",
+     "x": 1526,
+     "y": 528,
+     "tile": [
+      47,
+      16
+     ],
+     "to": "scn_east",
+     "toExit": "w",
+     "locked": false,
+     "needBoss": false,
+     "lockBoss": false,
+     "narrowAt": false,
+     "narrowNear": false,
+     "start": [
+      43,
+      16,
+      4
+     ]
+    },
+    {
+     "id": "s",
+     "x": 768,
+     "y": 1014,
+     "tile": [
+      24,
+      31
+     ],
+     "to": "plaza",
+     "toExit": "s",
+     "locked": false,
+     "needBoss": false,
+     "lockBoss": false,
+     "narrowAt": false,
+     "narrowNear": true,
+     "start": [
+      24,
+      27,
+      4
+     ]
+    }
+   ]
+  },
+  "h9": {
+   "error": "landed on capital"
+  }
+ },
+ "narrowTotal": 105,
+ "mapsWithNarrow": 4,
+ "errors": [],
+ "mapCount": 32
+}
