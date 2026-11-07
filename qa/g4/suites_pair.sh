@@ -11,6 +11,8 @@
 # resumable: a run with an .exit file is not run again · ALLDONE is written last, with the counts.
 # v3.1 (after Codex T36-N2): runs.tsv = every run in the order it ran (suite · side · run number · exit · sha256-16 of its log), written
 # right after the run · ALLDONE carries suites=, runs= and manifest= (sha256-16 of runs.tsv), so a deleted, added or edited run shows ·
+# v3.2 (after Codex T37): ALLDONE also carries suites_sha=, env_sha=, target_sha= (sha256-16 of suites.tsv, env.txt, target.txt as they
+# stand when the runner finishes), so the files that choose HOW a suite is judged (kind) cannot change afterwards without showing ·
 # target.txt = what this OUT measures (both folders, both HEADs, sha of the game files): resuming an OUT with another target is refused
 # (exit 2: use a new OUT).
 set -u
@@ -62,4 +64,5 @@ for n in $(grep -v '^#' "$OUT/suites.tsv" | cut -f1); do
   for i in $(seq 2 $((1 + ${RERUNS:-2}))); do one "$n" main ".$i"; one "$n" branch ".$i"; done
 done
 echo "end $(date -Is)" >> "$OUT/env.txt"
-echo "DONE suites=$(grep -vc '^#' "$OUT/suites.tsv") runs=$(wc -l < "$OUT/runs.tsv") manifest=$(sha256sum "$OUT/runs.tsv" | cut -c1-16)" > "$OUT/ALLDONE"
+h() { sha256sum "$1" | cut -c1-16; }
+echo "DONE suites=$(grep -vc '^#' "$OUT/suites.tsv") runs=$(wc -l < "$OUT/runs.tsv") manifest=$(h "$OUT/runs.tsv") suites_sha=$(h "$OUT/suites.tsv") env_sha=$(h "$OUT/env.txt") target_sha=$(h "$OUT/target.txt")" > "$OUT/ALLDONE"

@@ -1,4 +1,4 @@
-# G4 M1 (v3 after Codex T35-N1, v3.1 after T36-N1/N2): judges a suites_pair.sh folder. Main and branch come from the SAME session on the SAME machine.
+# G4 M1 (v3 after Codex T35-N1, v3.1 after T36-N1/N2, v3.2 after T37-N1/N2): judges a suites_pair.sh folder. Main and branch come from the SAME session on the SAME machine.
 #   python3 qa/g4/suites_cmp.py OUT [--json out.json]         judge the whole folder
 #   python3 qa/g4/suites_cmp.py --needs-rerun OUT NAME         (used by suites_pair.sh) prints yes/no after the first round
 #   exit 0 = pass · 1 = a regression on the branch · 3 = cannot judge (the folder is not complete, a main run broke, a flaky suite
@@ -10,6 +10,11 @@
 #    pass) · suites.tsv (the list the runner chose, with the kind and the sha256 of each suite file on both sides) · env.txt · runs of a
 #    suite numbered 1…N with no gap, the same N on both sides, N ≥ 3 when rule 3 asks for reruns · no run of a suite outside the list ·
 #    the suite file is the same on main and on the branch (a changed suite file makes the pair meaningless).
+#    v3.2: ALLDONE also seals suites.tsv, env.txt and target.txt (suites_sha= env_sha= target_sha=) — the files that choose HOW a suite
+#    is judged (its kind) and how logs are masked cannot change afterwards · a kind is 'assert' or 'legacy', nothing else · when the
+#    checkouts named in env.txt still exist, every suite file is hashed again and its kind worked out again with the runner's own rule
+#    (must match suites.tsv) · every run-like file (.exit OR .log) must be in runs.tsv · the top of OUT holds only the runner's files and
+#    the suites' own out_<run> folders; anything else (a note, a report) makes the folder 'not complete' — keep reports outside OUT.
 #    Out of reach: someone who rewrites the logs AND runs.tsv AND ALLDONE together (that is forging, not a broken run).
 # 2. Every run gets a status. The runner's own failures are kept apart from the game's failures:
 #      pass   = exit 0, a non-empty log, no failure line
@@ -48,6 +53,9 @@ FLAKY = ('test_157_equipment', 'test_176_steer_and_act', 'test_risk_monthly')
 NUM = re.compile(r'(?<![A-Za-z_#\d.])-?\d+(?:\.\d+)?')
 HEAD = re.compile(r'^\s*(?:Uncaught\s+)?(?:[A-Z][A-Za-z]*)?(?:Error|Exception)\b|^\s*(?:AssertionError|FAIL\b)')
 LEGACY_ERR = re.compile(r'^errors (\d+)\b(.*)$')
+KINDS = ('assert', 'legacy')                                       # T37-N1: nothing else is a kind
+ASSERTS = re.compile(r'errors\.push|errors\.length|process\.exit|exitCode')   # the runner's own rule: a suite with none of these is 'legacy'
+RUNNER_FILES = {'env.txt', 'suites.tsv', 'runs.tsv', 'target.txt', 'ALLDONE'}
 BROKEN_EXIT = {124: 'timeout (300 s)', 137: 'killed (signal 9)', 143: 'stopped (signal 15)', 130: 'interrupted'}
 
 def env(out):
@@ -151,15 +159,36 @@ def suites_list(out):
         if len(f) >= 4 and not l.startswith('#'): rows[f[0]] = {'kind': f[1], 'shaMain': f[2], 'shaBranch': f[3]}
     return rows
 
+def recheck_kinds(out, lst):
+    """T37-N1, second layer: when the checkouts named in env.txt are still there, the kind and the sha of every suite file are worked out
+    again from the files themselves (the runner's rule) and must match suites.tsv. Returns (meta, how many suites were rechecked)"""
+    e, meta, n_ok = env(out), [], 0
+    md, bd = e.get('maindir'), e.get('branchdir')
+    if not (md and os.path.isdir(md) and bd and os.path.isdir(bd)): return meta, 0
+    for n, info in lst.items():
+        pm, pb = os.path.join(md, n + '.js'), os.path.join(bd, n + '.js')
+        if not (os.path.exists(pm) and os.path.exists(pb)): meta.append(f'{n}: the suite file is gone from a checkout named in env.txt'); continue
+        sm = hashlib.sha256(open(pm, 'rb').read()).hexdigest()[:16]; sb = hashlib.sha256(open(pb, 'rb').read()).hexdigest()[:16]
+        kind = 'assert' if ASSERTS.search(open(pm, errors='replace').read()) else 'legacy'
+        if (sm, sb) != (info['shaMain'], info['shaBranch']): meta.append(f'{n}: the suite file sha differs from suites.tsv (the checkout changed after the run)')
+        elif kind != info['kind']: meta.append(f"{n}: suites.tsv says kind '{info['kind']}', the suite file says '{kind}'")
+        else: n_ok += 1
+    return meta, n_ok
+
 def manifest(out, lst):
     """T36-N2: the run list the runner wrote (runs.tsv, hashed into ALLDONE) must match the folder exactly: every listed run has its
     files, unchanged (exit + sha of the log) · no run file is unlisted · the counts agree. Returns (meta, {(suite, side): [run numbers]})"""
     pa, pr = os.path.join(out, 'ALLDONE'), os.path.join(out, 'runs.tsv')
     if not os.path.exists(pa): return ['no ALLDONE: the runner did not finish'], None
-    g = dict(re.findall(r'(suites|runs|manifest)=(\S+)', open(pa).read()))
-    if set(g) != {'suites', 'runs', 'manifest'}: return ['ALLDONE has no suites=/runs=/manifest= (an older runner): run again into a new OUT'], None
+    FIELDS = {'suites', 'runs', 'manifest', 'suites_sha', 'env_sha', 'target_sha'}
+    g = dict(re.findall(r'(suites_sha|env_sha|target_sha|suites|runs|manifest)=(\S+)', open(pa).read()))
+    if set(g) != FIELDS: return ['ALLDONE lacks ' + '/'.join(sorted(FIELDS - set(g))) + ' (an older runner): run again into a new OUT'], None
     if not os.path.exists(pr): return ['no runs.tsv (the list of runs)'], None
     meta, raw = [], open(pr, 'rb').read()
+    for f, k in (('suites.tsv', 'suites_sha'), ('env.txt', 'env_sha'), ('target.txt', 'target_sha')):   # T37-N1: the files that choose
+        p = os.path.join(out, f)                                                                         # how a suite is judged
+        if not os.path.exists(p): meta.append(f'no {f}')
+        elif hashlib.sha256(open(p, 'rb').read()).hexdigest()[:16] != g[k]: meta.append(f'{f} does not match {k} in ALLDONE (changed after the runner finished)')
     if hashlib.sha256(raw).hexdigest()[:16] != g['manifest']: meta.append('runs.tsv does not match the hash in ALLDONE (changed after the runner finished)')
     rows = [l.split('\t') for l in raw.decode(errors='replace').splitlines() if l.strip()]
     if not g['runs'].isdigit() or len(rows) != int(g['runs']): meta.append(f"ALLDONE says runs={g['runs']}, runs.tsv lists {len(rows)}")
@@ -176,9 +205,13 @@ def manifest(out, lst):
         if not (os.path.exists(pe) and os.path.exists(pl)): meta.append(f'{n} {side} run {k}: listed in runs.tsv but its files are gone'); continue
         if open(pe).read().split()[:1] != [e]: meta.append(f'{n} {side} run {k}: the exit file differs from runs.tsv')
         if hashlib.sha256(open(pl, 'rb').read()).hexdigest()[:16] != h: meta.append(f'{n} {side} run {k}: the log changed after the run')
-    for f in sorted(os.listdir(out)):
-        g2 = re.match(r'(.+?)\.(main|branch)(?:\.(\d+))?\.exit$', f)
-        if g2 and (g2.group(1), g2.group(2), int(g2.group(3) or 1)) not in listed: meta.append(f'{f}: a run that runs.tsv does not list')
+    for f in sorted(os.listdir(out)):   # T37-N2: a run file (.exit OR .log) that the list does not know · anything else unknown
+        g2 = re.match(r'(.+?)\.(main|branch)(?:\.(\d+))?\.(exit|log)$', f)
+        if g2:
+            if (g2.group(1), g2.group(2), int(g2.group(3) or 1)) not in listed: meta.append(f'{f}: a run file that runs.tsv does not list')
+        elif f in RUNNER_FILES: pass
+        elif f.startswith('out_') and os.path.isdir(os.path.join(out, f)): pass     # a suite's own OUT_DIR (screenshots …): not evidence
+        else: meta.append(f'{f}: a file the runner never writes (keep reports and notes outside OUT)')
     return meta, idx
 
 def files_idx(out, n, side):
@@ -203,6 +236,10 @@ def judge(out):
     if not lst: meta.append('the suite list is empty')
     mm, _ = manifest(out, lst)
     meta += mm
+    for n, info in lst.items():
+        if info['kind'] not in KINDS: meta.append(f"{n}: kind '{info['kind']}' is not one of {'/'.join(KINDS)}")
+    rk, rechecked = recheck_kinds(out, lst)
+    meta += rk
     seen = {f.split('.')[0] for f in os.listdir(out) if f.endswith('.exit')}
     for x in sorted(seen - set(lst)): meta.append(f'{x}: runs found for a suite that is not in suites.tsv')
     rows, bad, undecided = [], [], []
@@ -272,8 +309,8 @@ def judge(out):
     code = 3 if meta else 1 if bad else 3 if undecided else 0
     e = env(out)
     sts = lambda r: r.get('mainStatus', []) + r.get('branchStatus', [])
-    res = {'out': out, 'v': '3.1', 'main': e.get('main'), 'branch': e.get('branch'), 'control': bool(e.get('maindir')) and e.get('maindir') == e.get('branchdir'),
-           'meta': meta, 'metaOk': not meta, 'suites': len(rows), 'legacy': sum(r['kind'] == 'legacy' for r in rows),
+    res = {'out': out, 'v': '3.2', 'main': e.get('main'), 'branch': e.get('branch'), 'control': bool(e.get('maindir')) and e.get('maindir') == e.get('branchdir'),
+           'meta': meta, 'metaOk': not meta, 'suites': len(rows), 'kindsRechecked': rechecked, 'legacy': sum(r['kind'] == 'legacy' for r in rows),
            'bothPass': sum(bool(sts(r)) and all(s == 'pass' for s in sts(r)) for r in rows),
            'runs': sum(len(r.get('main', [])) + len(r.get('branch', [])) for r in rows),
            'bad': bad, 'undecided': undecided, 'exit': code, 'verdict': {0: 'pass', 1: 'regression', 3: 'cannot judge'}[code], 'rows': rows}
@@ -293,7 +330,7 @@ def main():
             print(r['suite'], r.get('main', ''), r.get('branch', ''), r['verdict'], r.get('why', ''), r.get('newLines', ''),
                   ('+' + str(r['outAdded']) + ' -' + str(r['outMissing'])) if 'outAdded' in r else '')
     for x in res['meta']: print('META', x)
-    print(json.dumps({k: res[k] for k in ('suites', 'legacy', 'runs', 'bothPass', 'bad', 'undecided', 'metaOk', 'control', 'verdict', 'exit')}))
+    print(json.dumps({k: res[k] for k in ('suites', 'legacy', 'kindsRechecked', 'runs', 'bothPass', 'bad', 'undecided', 'metaOk', 'control', 'verdict', 'exit')}))
     return res['exit']
 
 if __name__ == '__main__':

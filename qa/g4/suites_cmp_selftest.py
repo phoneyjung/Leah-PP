@@ -24,16 +24,24 @@ def tmo(side, at='27:324'):
             f'    at async press ({d}/test_167_context_bubble.js:4:41)\n    at async {d}/test_167_context_bubble.js:{at}\n{{\n  map: \'farm\',\n  player: [ 1101.008, 782.992 ]\n}}\n')
 LEG = lambda lamp=1, extra='': json.dumps({'version': 'Lantern Academy 2.33', 'adultLamp': lamp, 'msgs': ['เติมแสงแล้ว'], 'took': 1234, 'x': -12.5}) + '\nerrors 0 []\n' + extra
 
-def write(d, suites, runs, alldone=True, env=True, tsv=True, sha=None, tamper=None):
+def write(d, suites, runs, alldone=True, env=True, tsv=True, sha=None, tamper=None, files=None):
     """a folder as suites_pair.sh v3.1 leaves it: runs.tsv in run order + ALLDONE with suites=/runs=/manifest= ·
     alldone='old' = the older runner's bare ALLDONE · tamper(d) is applied after everything is written (deleting/changing evidence)"""
     os.makedirs(d)
+    md, bd = MD, BD
+    if files:   # real checkouts holding the suite files (so suites_cmp can work the kind out again from the file itself)
+        md, bd = d + '_main', d + '_branch'
+        for x in (md, bd):
+            os.makedirs(x)
+            for n, src in files.items(): open(os.path.join(x, n + '.js'), 'w').write(src)
+        sha = {n: hashlib.sha256(src.encode()).hexdigest()[:16] for n, src in files.items()}
     if env:
-        open(os.path.join(d, 'env.txt'), 'w').write(f'chromium test\nmain aaaa\nbranch bbbb\nmaindir {MD}\nbranchdir {BD}\nout {d}\n')
+        open(os.path.join(d, 'env.txt'), 'w').write(f'chromium test\nmain aaaa\nbranch bbbb\nmaindir {md}\nbranchdir {bd}\nout {d}\n')
+    open(os.path.join(d, 'target.txt'), 'w').write(f'main aaaa 1111 {MD} | branch bbbb 1111 {BD}\n')
     if tsv:
         with open(os.path.join(d, 'suites.tsv'), 'w') as f:
             f.write('# name\tkind\tsha main\tsha branch\n')
-            for n, kind in suites.items(): f.write(f'{n}\t{kind}\t1111\t{(sha or {}).get(n, "1111")}\n')
+            for n, kind in suites.items(): f.write(f'{n}\t{kind}\t{(sha or {}).get(n, "1111") if files else "1111"}\t{(sha or {}).get(n, "1111")}\n')
     num = lambda k: 1 if k == '' else int(k[1:])
     lines = []
     for (n, side, k), (e, log) in sorted(runs.items(), key=lambda x: (num(x[0][2]), x[0][0], x[0][1])):
@@ -43,9 +51,16 @@ def write(d, suites, runs, alldone=True, env=True, tsv=True, sha=None, tamper=No
     open(os.path.join(d, 'runs.tsv'), 'w').write(''.join(lines))
     if alldone == 'old': open(os.path.join(d, 'ALLDONE'), 'w').write('DONE\n')
     elif alldone:
+        h = lambda f: hashlib.sha256(open(os.path.join(d, f), 'rb').read()).hexdigest()[:16] if os.path.exists(os.path.join(d, f)) else 'none'
         man = hashlib.sha256(''.join(lines).encode()).hexdigest()[:16]
-        open(os.path.join(d, 'ALLDONE'), 'w').write(f'DONE suites={len(suites)} runs={len(lines)} manifest={man}\n')
+        open(os.path.join(d, 'ALLDONE'), 'w').write(f'DONE suites={len(suites)} runs={len(lines)} manifest={man} suites_sha={h("suites.tsv")} env_sha={h("env.txt")} target_sha={h("target.txt")}\n')
     if tamper: tamper(d)
+
+def edit(d, f, old, new):
+    """change one file of a finished folder: read it first, then write it back (never open for writing before reading)"""
+    p = os.path.join(d, f); s = open(p).read()
+    assert old in s, (f, old)
+    open(p, 'w').write(s.replace(old, new))
 
 def three(n, f, n_runs=3):
     """f(side, k) -> (exit, log) or None (no such run) · k is '' (run 1), '.2', '.3'"""
@@ -132,13 +147,33 @@ CASES = [
   {'tamper': lambda d: [os.remove(f) for f in glob.glob(os.path.join(d, '*.2.*'))]}, 'yes'),
  ('M12', 'Codex T36-N2: only runs 1, 3, 4 on both sides, and runs.tsv/ALLDONE agree with that', 3, {S: 'assert'},
   {(S, side, k): (1, jerr(A2, side=side)) for k in ('', '.3', '.4') for side in ('main', 'branch')}, {}, 'yes'),
- ('M13', 'ALLDONE of the older runner (no suites=/runs=/manifest=)', 3, {S: 'assert'}, three(S, lambda s, k: (0, PASS(s)), 1), {'alldone': 'old'}, 'no'),
+ ('M13', 'ALLDONE of an older runner (no suites=/runs=/manifest=)', 3, {S: 'assert'}, three(S, lambda s, k: (0, PASS(s)), 1), {'alldone': 'old'}, 'no'),
  ('M14', 'a log changed after the run (a failure line removed)', 3, {S: 'assert'}, three(S, lambda s, k: (1, jerr(A2, side=s)) if s == 'main' else (1, jerr(A2, 'new regression', side=s))),
   {'tamper': lambda d: open(os.path.join(d, f'{S}.branch.2.log'), 'w').write(jerr(A2, side='branch'))}, 'yes'),
  ('M15', 'a run on disk that runs.tsv does not list (branch run 4 added later)', 3, {S: 'assert'}, three(S, lambda s, k: (1, jerr(A2, side=s))),
   {'tamper': lambda d: (open(os.path.join(d, f'{S}.branch.4.exit'), 'w').write('0 1\n'), open(os.path.join(d, f'{S}.branch.4.log'), 'w').write(PASS('branch')))}, 'yes'),
  ('M16', 'runs.tsv edited (one line dropped) without ALLDONE', 3, {S: 'assert'}, three(S, lambda s, k: (1, jerr(A2, side=s))),
-  {'tamper': lambda d: open(os.path.join(d, 'runs.tsv'), 'w').write(''.join(open(os.path.join(d, 'runs.tsv')).readlines()[:-1]))}, 'yes'),
+  {'tamper': lambda d: edit(d, 'runs.tsv', open(os.path.join(d, 'runs.tsv')).readlines()[-1], '')}, 'yes'),
+ ('K01', 'Codex T37-N1: the word-change folder (OUTPUT DIFFERS) with kind legacy → legacY in suites.tsv after the run', 3, {'test_121_beds': 'legacy'},
+  three('test_121_beds', lambda s, k: (0, LEG(1 if s == 'main' else False))),
+  {'tamper': lambda d: edit(d, 'suites.tsv', '\tlegacy\t', '\tlegacY\t')}, None),
+ ('K02', 'Codex T37-N1: the same folder with kind legacy → assert (a real kind, not the one the runner chose)', 3, {'test_121_beds': 'legacy'},
+  three('test_121_beds', lambda s, k: (0, LEG(1 if s == 'main' else False))),
+  {'tamper': lambda d: edit(d, 'suites.tsv', '\tlegacy\t', '\tassert\t')}, None),
+ ('K03', 'a kind that is not legacy/assert, written so by the runner itself (hashes agree)', 3, {S: 'Assert'}, three(S, lambda s, k: (0, PASS(s)), 1), {}, 'no'),
+ ('K04', 'env.txt changed after the run (the folders used for masking)', 3, {S: 'assert'}, three(S, lambda s, k: (0, PASS(s)), 1),
+  {'tamper': lambda d: open(os.path.join(d, 'env.txt'), 'a').write('maindir /elsewhere\n')}, 'no'),
+ ('K05', 'Codex T37-N2: a log of run 99 with "Error: new regression" and no exit, not in runs.tsv', 3, {'test_103_village': 'legacy'},
+  three('test_103_village', lambda s, k: (0, LEG())),
+  {'tamper': lambda d: open(os.path.join(d, 'test_103_village.branch.99.log'), 'w').write('Error: new regression\n')}, None),
+ ('K06', 'a file the runner never writes, at the top of OUT', 3, {S: 'assert'}, three(S, lambda s, k: (0, PASS(s)), 1),
+  {'tamper': lambda d: open(os.path.join(d, 'notes.txt'), 'w').write('x')}, 'no'),
+ ('K07', 'a suite\'s own output folder out_<run> with files in it (allowed, not evidence)', 0, {S: 'assert'}, three(S, lambda s, k: (0, PASS(s)), 1),
+  {'tamper': lambda d: (os.makedirs(os.path.join(d, f'out_{S}.branch')), open(os.path.join(d, f'out_{S}.branch', 'shot.png'), 'w').write('x'))}, 'no'),
+ ('K08', 'the runner itself wrote kind assert for a suite file with no assert (hashes all agree): worked out again from the file', 3, {S: 'assert'},
+  three(S, lambda s, k: (0, PASS(s)), 1), {'files': {S: "const p=require('puppeteer');(async()=>{console.log('errors',0,[])})()\n"}}, 'no'),
+ ('K09', 'control for K08: the suite file has errors.push and suites.tsv says assert', 0, {S: 'assert'},
+  three(S, lambda s, k: (0, PASS(s)), 1), {'files': {S: "const errors=[];errors.push('x');process.exit(errors.length?1:0)\n"}}, 'no'),
  ('F01', 'flaky suite: branch timeout ×3 → run it alone (cannot judge)', 3, {'test_176_steer_and_act': 'assert'},
   three('test_176_steer_and_act', lambda s, k: (0, PASS(s)) if s == 'main' else (124, 'half\n')), {}, None),
 ]
