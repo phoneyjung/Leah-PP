@@ -1,0 +1,752 @@
+{
+ "what": "G4.0 v1.3 · M1 judge v3.1 (qa/g4/suites_cmp.py + suites_pair.sh) after Codex T36-N1/N2 · 7 Nov 2569 · game main eb60c65 · raw logs outside the repo",
+ "selftest": {
+  "cmd": "python3 -I -B qa/g4/suites_cmp_selftest.py",
+  "summary": {
+   "cases": 49,
+   "right": 49,
+   "wrong": [],
+   "byWant": {
+    "0": 12,
+    "1": 12,
+    "3": 25
+   }
+  },
+  "cases": [
+   {
+    "id": "C01",
+    "want": 0,
+    "got": 0,
+    "needsRerun": "no",
+    "ok": true,
+    "case": "control: both pass · ports and folders differ in the logs",
+    "verdict": "ok"
+   },
+   {
+    "id": "C02",
+    "want": 0,
+    "got": 0,
+    "needsRerun": "yes",
+    "ok": true,
+    "case": "control: both fail A2 ×3 · stack frames, ports, coordinates differ",
+    "verdict": "ok (fails on main in this session too; no new failure line)"
+   },
+   {
+    "id": "T35a",
+    "want": 1,
+    "got": 1,
+    "needsRerun": "yes",
+    "ok": true,
+    "case": "Codex: branch timeout (exit 124), empty log ×3",
+    "verdict": "BRANCH RUN BROKEN"
+   },
+   {
+    "id": "T35b",
+    "want": 1,
+    "got": 1,
+    "needsRerun": "yes",
+    "ok": true,
+    "case": "Codex: main A2 · branch A5 with the same message",
+    "verdict": "NEW ERROR LINES"
+   },
+   {
+    "id": "T35c",
+    "want": 1,
+    "got": 1,
+    "needsRerun": "yes",
+    "ok": true,
+    "case": "Codex: main A2 · branch \"new regression\"",
+    "verdict": "NEW ERROR LINES"
+   },
+   {
+    "id": "T35d",
+    "want": 3,
+    "got": 3,
+    "needsRerun": "yes",
+    "ok": true,
+    "case": "Codex: 1 failing run per side, no ALLDONE",
+    "verdict": "META no ALLDONE: the runner did not finish"
+   },
+   {
+    "id": "M01",
+    "want": 3,
+    "got": 3,
+    "needsRerun": "yes",
+    "ok": true,
+    "case": "failing, ALLDONE written, but only 1 run per side",
+    "verdict": "META test_178_dig_button: needs at least 3 runs per side, has main 1 / branch 1"
+   },
+   {
+    "id": "M02",
+    "want": 3,
+    "got": 3,
+    "needsRerun": "yes",
+    "ok": true,
+    "case": "failing, 3 runs on main but 2 on the branch",
+    "verdict": "META test_178_dig_button: main has 3 runs, the branch 2 (must be the same)"
+   },
+   {
+    "id": "M03",
+    "want": 3,
+    "got": 3,
+    "needsRerun": "no",
+    "ok": true,
+    "case": "run 1 missing on the branch",
+    "verdict": "META test_178_dig_button: run 1 missing on branch"
+   },
+   {
+    "id": "M04",
+    "want": 3,
+    "got": 3,
+    "needsRerun": "-",
+    "ok": true,
+    "case": "no suites.tsv (the runner list is missing)",
+    "verdict": "META no suites.tsv: the list of suites the runner chose is missing"
+   },
+   {
+    "id": "M05",
+    "want": 3,
+    "got": 3,
+    "needsRerun": "no",
+    "ok": true,
+    "case": "runs of a suite that is not in the list",
+    "verdict": "META test_999_extra: runs found for a suite that is not in suites.tsv"
+   },
+   {
+    "id": "M06",
+    "want": 3,
+    "got": 3,
+    "needsRerun": "no",
+    "ok": true,
+    "case": "the suite file differs between main and the branch",
+    "verdict": "META test_178_dig_button: the suite file differs between main and the branch"
+   },
+   {
+    "id": "M07",
+    "want": 3,
+    "got": 3,
+    "needsRerun": "no",
+    "ok": true,
+    "case": "no env.txt",
+    "verdict": "META no env.txt"
+   },
+   {
+    "id": "B01",
+    "want": 1,
+    "got": 1,
+    "needsRerun": "yes",
+    "ok": true,
+    "case": "main passes · branch exit 0 with an empty log ×3",
+    "verdict": "BRANCH RUN BROKEN"
+   },
+   {
+    "id": "B02",
+    "want": 1,
+    "got": 1,
+    "needsRerun": "yes",
+    "ok": true,
+    "case": "main fails A2 · branch exit 1 with no failure line ×3",
+    "verdict": "BRANCH RUN BROKEN"
+   },
+   {
+    "id": "B03",
+    "want": 1,
+    "got": 1,
+    "needsRerun": "yes",
+    "ok": true,
+    "case": "main passes · branch exit 2 ×3",
+    "verdict": "BRANCH RUN BROKEN"
+   },
+   {
+    "id": "B04",
+    "want": 3,
+    "got": 3,
+    "needsRerun": "yes",
+    "ok": true,
+    "case": "main killed (137) ×3 · branch passes: cannot judge",
+    "verdict": "MAIN RUN BROKEN (cannot judge)"
+   },
+   {
+    "id": "B05",
+    "want": 1,
+    "got": 1,
+    "needsRerun": "-",
+    "ok": true,
+    "case": "main passes ×3 · branch fails A2 in run 2 only",
+    "verdict": "NEW FAIL"
+   },
+   {
+    "id": "B06",
+    "want": 0,
+    "got": 0,
+    "needsRerun": "yes",
+    "ok": true,
+    "case": "main fails A2 in run 1 only · branch passes ×3",
+    "verdict": "ok (fails on main in this session too; no new failure line)"
+   },
+   {
+    "id": "B07",
+    "want": 0,
+    "got": 0,
+    "needsRerun": "yes",
+    "ok": true,
+    "case": "main fails A2 and A5 · branch fails only A2 (fewer)",
+    "verdict": "ok (fails on main in this session too; no new failure line)"
+   },
+   {
+    "id": "B08",
+    "want": 0,
+    "got": 0,
+    "needsRerun": "yes",
+    "ok": true,
+    "case": "an error message holding \"]\" · main and branch the same",
+    "verdict": "ok (fails on main in this session too; no new failure line)"
+   },
+   {
+    "id": "B09",
+    "want": 0,
+    "got": 0,
+    "needsRerun": "-",
+    "ok": true,
+    "case": "test_103 style: exit 0 + the same page error on both sides ×3",
+    "verdict": "ok (fails on main in this session too; no new failure line)"
+   },
+   {
+    "id": "L01",
+    "want": 1,
+    "got": 1,
+    "needsRerun": "-",
+    "ok": true,
+    "case": "legacy: branch exit 0 but a new page error (errors 2 […])",
+    "verdict": "NEW FAIL"
+   },
+   {
+    "id": "L02",
+    "want": 3,
+    "got": 3,
+    "needsRerun": "-",
+    "ok": true,
+    "case": "legacy: a printed value changes (adultLamp 1",
+    "verdict": "false) ×3 → OUTPUT DIFFERS (a person reads the lines)"
+   },
+   {
+    "id": "L03",
+    "want": 0,
+    "got": 0,
+    "needsRerun": "-",
+    "ok": true,
+    "case": "legacy: only numbers differ (times, coordinates)",
+    "verdict": "ok"
+   },
+   {
+    "id": "L04",
+    "want": 3,
+    "got": 3,
+    "needsRerun": "-",
+    "ok": true,
+    "case": "legacy: a random pick list that differs from run to run",
+    "verdict": "cannot judge (no tolerance for random lists) → OUTPUT DIFFERS (a person reads the lines)"
+   },
+   {
+    "id": "A01",
+    "want": 0,
+    "got": 0,
+    "needsRerun": "yes",
+    "ok": true,
+    "case": "node assert: the same assert fails on both sides (folders and printed state differ)",
+    "verdict": "ok (fails on main in this session too; no new failure line)"
+   },
+   {
+    "id": "A02",
+    "want": 3,
+    "got": 3,
+    "needsRerun": "yes",
+    "ok": true,
+    "case": "node assert: the branch stops at a LATER assert than main (same headline)",
+    "verdict": "cannot judge → NEW STOP POINT (cannot judge: stops LATER in the suite file than every main stop, it MAY have got further — a "
+   },
+   {
+    "id": "A03",
+    "want": 0,
+    "got": 0,
+    "needsRerun": "yes",
+    "ok": true,
+    "case": "puppeteer timeout: same wait, same place, both sides",
+    "verdict": "ok (fails on main in this session too; no new failure line)"
+   },
+   {
+    "id": "A04",
+    "want": 3,
+    "got": 3,
+    "needsRerun": "yes",
+    "ok": true,
+    "case": "puppeteer timeout: same message, thrown from a LATER line of the suite on the branch",
+    "verdict": "cannot judge → NEW STOP POINT (cannot judge: stops LATER in the suite file than every main stop, it MAY have got further — a "
+   },
+   {
+    "id": "A08",
+    "want": 1,
+    "got": 1,
+    "needsRerun": "yes",
+    "ok": true,
+    "case": "node assert: the branch stops EARLIER in the suite than main ever did",
+    "verdict": "regression → NEW ERROR LINES (stops EARLIER in the suite than main ever did: a check main passes now fails)"
+   },
+   {
+    "id": "A05",
+    "want": 1,
+    "got": 1,
+    "needsRerun": "yes",
+    "ok": true,
+    "case": "main fails only with COLLECTED errors (A2) · the branch also throws a TypeError",
+    "verdict": "regression → NEW ERROR LINES"
+   },
+   {
+    "id": "A06",
+    "want": 1,
+    "got": 1,
+    "needsRerun": "yes",
+    "ok": true,
+    "case": "main passes · the branch stops on an assert",
+    "verdict": "regression → NEW FAIL"
+   },
+   {
+    "id": "A07",
+    "want": 0,
+    "got": 0,
+    "needsRerun": "yes",
+    "ok": true,
+    "case": "main stops at an assert in run 1 and another in run 2 · the branch at either",
+    "verdict": "ok → ok (fails on main in this session too; no new failure line)"
+   },
+   {
+    "id": "M08",
+    "want": 0,
+    "got": 0,
+    "needsRerun": "yes",
+    "ok": true,
+    "case": "5 runs per side after RERUNS=4 (allowed)",
+    "verdict": "ok (fails on main in this session too; no new failure line)"
+   },
+   {
+    "id": "M09",
+    "want": 3,
+    "got": 3,
+    "needsRerun": "yes",
+    "ok": true,
+    "case": "5 runs on main, 3 on the branch",
+    "verdict": "META test_178_dig_button: main has 5 runs, the branch 3 (must be the same)"
+   },
+   {
+    "id": "L05",
+    "want": 3,
+    "got": 3,
+    "needsRerun": "-",
+    "ok": true,
+    "case": "legacy: ONE long line (> 240 chars, as the suites print) changes one word near its end (ตี",
+    "verdict": "ตีเลย) → OUTPUT DIFFERS (a person reads the lines)"
+   },
+   {
+    "id": "L06",
+    "want": 3,
+    "got": 3,
+    "needsRerun": "-",
+    "ok": true,
+    "case": "Codex T36-N1: legacy, the branch prints everything but ONE line (feature: true) ×3",
+    "verdict": "OUTPUT DIFFERS (a person reads the lines)"
+   },
+   {
+    "id": "L07",
+    "want": 3,
+    "got": 3,
+    "needsRerun": "-",
+    "ok": true,
+    "case": "Codex T36-N1: legacy, two lines swap order (alpha/beta",
+    "verdict": "beta/alpha) ×3 → OUTPUT DIFFERS (a person reads the lines)"
+   },
+   {
+    "id": "L08",
+    "want": 3,
+    "got": 3,
+    "needsRerun": "-",
+    "ok": true,
+    "case": "legacy: a line printed twice on main, once on the branch ×3",
+    "verdict": "OUTPUT DIFFERS (a person reads the lines)"
+   },
+   {
+    "id": "L09",
+    "want": 0,
+    "got": 0,
+    "needsRerun": "no",
+    "ok": true,
+    "case": "legacy: several lines, the same on both sides but every number differs (1 run)",
+    "verdict": "ok"
+   },
+   {
+    "id": "M10",
+    "want": 1,
+    "got": 1,
+    "needsRerun": "yes",
+    "ok": true,
+    "case": "Codex T36-N2 (before): 5 runs per side, the branch has \"new regression\" in run 2 only",
+    "verdict": "NEW ERROR LINES"
+   },
+   {
+    "id": "M11",
+    "want": 3,
+    "got": 3,
+    "needsRerun": "yes",
+    "ok": true,
+    "case": "Codex T36-N2: the same folder with run 2 deleted on both sides (4 files), ALLDONE kept",
+    "verdict": "META test_178_dig_button branch run 2: listed in runs.tsv but its files are gone"
+   },
+   {
+    "id": "M12",
+    "want": 3,
+    "got": 3,
+    "needsRerun": "yes",
+    "ok": true,
+    "case": "Codex T36-N2: only runs 1, 3, 4 on both sides, and runs.tsv/ALLDONE agree with that",
+    "verdict": "META test_178_dig_button main: runs [1, 3, 4] have a gap (expected 1…3)"
+   },
+   {
+    "id": "M13",
+    "want": 3,
+    "got": 3,
+    "needsRerun": "no",
+    "ok": true,
+    "case": "ALLDONE of the older runner (no suites=/runs=/manifest=)",
+    "verdict": "META ALLDONE has no suites=/runs=/manifest= (an older runner): run again into a new OUT"
+   },
+   {
+    "id": "M14",
+    "want": 3,
+    "got": 3,
+    "needsRerun": "yes",
+    "ok": true,
+    "case": "a log changed after the run (a failure line removed)",
+    "verdict": "META test_178_dig_button branch run 2: the log changed after the run"
+   },
+   {
+    "id": "M15",
+    "want": 3,
+    "got": 3,
+    "needsRerun": "yes",
+    "ok": true,
+    "case": "a run on disk that runs.tsv does not list (branch run 4 added later)",
+    "verdict": "META test_178_dig_button.branch.4.exit: a run that runs.tsv does not list"
+   },
+   {
+    "id": "M16",
+    "want": 3,
+    "got": 3,
+    "needsRerun": "yes",
+    "ok": true,
+    "case": "runs.tsv edited (one line dropped) without ALLDONE",
+    "verdict": "META runs.tsv does not match the hash in ALLDONE (changed after the runner finished)"
+   },
+   {
+    "id": "F01",
+    "want": 3,
+    "got": 3,
+    "needsRerun": "-",
+    "ok": true,
+    "case": "flaky suite: branch timeout ×3",
+    "verdict": "run it alone (cannot judge) → BRANCH RUN BROKEN · flaky: run it alone"
+   }
+  ]
+ },
+ "v1_2JudgeOnSameFolders": {
+  "note": "the v1.2 judge (d866f52) on the same made-up folders: exit 0 = it passed the folder",
+  "passedButMustNot": [
+   "L04",
+   "L06",
+   "L07",
+   "L08",
+   "M11",
+   "M12",
+   "M13",
+   "M16"
+  ],
+  "didNotPassButMust": []
+ },
+ "realControl": {
+  "v": "3.1",
+  "main": "eb60c650922e55c7d81b27b59f180e1f42c367b2",
+  "branch": "eb60c650922e55c7d81b27b59f180e1f42c367b2",
+  "control": true,
+  "meta": [],
+  "suites": 7,
+  "legacy": 4,
+  "runs": 18,
+  "bothPass": 6,
+  "bad": [],
+  "undecided": [],
+  "verdict": "pass",
+  "exit": 0,
+  "rows": [
+   {
+    "suite": "test_103_village",
+    "kind": "legacy",
+    "main": [
+     0,
+     0,
+     0
+    ],
+    "branch": [
+     0,
+     0,
+     0
+    ],
+    "mainStatus": [
+     "fail",
+     "fail",
+     "fail"
+    ],
+    "branchStatus": [
+     "fail",
+     "fail",
+     "fail"
+    ],
+    "verdict": "ok (fails on main in this session too; no new failure line)"
+   },
+   {
+    "suite": "test_104_lantern",
+    "kind": "legacy",
+    "main": [
+     0
+    ],
+    "branch": [
+     0
+    ],
+    "mainStatus": [
+     "pass"
+    ],
+    "branchStatus": [
+     "pass"
+    ],
+    "verdict": "ok"
+   },
+   {
+    "suite": "test_109_mail",
+    "kind": "legacy",
+    "main": [
+     0
+    ],
+    "branch": [
+     0
+    ],
+    "mainStatus": [
+     "pass"
+    ],
+    "branchStatus": [
+     "pass"
+    ],
+    "verdict": "ok"
+   },
+   {
+    "suite": "test_121_beds",
+    "kind": "legacy",
+    "main": [
+     0
+    ],
+    "branch": [
+     0
+    ],
+    "mainStatus": [
+     "pass"
+    ],
+    "branchStatus": [
+     "pass"
+    ],
+    "verdict": "ok"
+   },
+   {
+    "suite": "test_167_context_bubble",
+    "kind": "assert",
+    "main": [
+     0
+    ],
+    "branch": [
+     0
+    ],
+    "mainStatus": [
+     "pass"
+    ],
+    "branchStatus": [
+     "pass"
+    ],
+    "verdict": "ok"
+   },
+   {
+    "suite": "test_170_swordsman",
+    "kind": "assert",
+    "main": [
+     0
+    ],
+    "branch": [
+     0
+    ],
+    "mainStatus": [
+     "pass"
+    ],
+    "branchStatus": [
+     "pass"
+    ],
+    "verdict": "ok"
+   },
+   {
+    "suite": "test_178_dig_button",
+    "kind": "assert",
+    "main": [
+     0
+    ],
+    "branch": [
+     0
+    ],
+    "mainStatus": [
+     "pass"
+    ],
+    "branchStatus": [
+     "pass"
+    ],
+    "verdict": "ok"
+   }
+  ],
+  "note": "main vs main (MAIN_DIR = BRANCH_DIR = main eb60c65) with runner v3.1, 7 suites (4 legacy)"
+ },
+ "realPlantedPageError": {
+  "v": "3.1",
+  "main": "eb60c650922e55c7d81b27b59f180e1f42c367b2",
+  "branch": "",
+  "control": false,
+  "meta": [],
+  "suites": 1,
+  "legacy": 1,
+  "runs": 6,
+  "bothPass": 0,
+  "bad": [
+   "test_104_lantern"
+  ],
+  "undecided": [],
+  "verdict": "regression",
+  "exit": 1,
+  "rows": [
+   {
+    "suite": "test_104_lantern",
+    "kind": "legacy",
+    "main": [
+     0,
+     0,
+     0
+    ],
+    "branch": [
+     0,
+     0,
+     0
+    ],
+    "mainStatus": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "branchStatus": [
+     "fail",
+     "fail",
+     "fail"
+    ],
+    "verdict": "NEW FAIL",
+    "newLines": [
+     "P [ 'planted G4 check' ]",
+     "P [ 'planted G4 check', 'planted G4 check' ]"
+    ]
+   }
+  ],
+  "planted": "copy of main outside the repo + a page error thrown 5 s after load"
+ },
+ "realPlantedWord": {
+  "v": "3.1",
+  "main": "eb60c650922e55c7d81b27b59f180e1f42c367b2",
+  "branch": "",
+  "control": false,
+  "meta": [],
+  "suites": 1,
+  "legacy": 1,
+  "runs": 6,
+  "bothPass": 1,
+  "bad": [],
+  "undecided": [
+   "test_121_beds"
+  ],
+  "verdict": "cannot judge",
+  "exit": 3,
+  "rows": [
+   {
+    "suite": "test_121_beds",
+    "kind": "legacy",
+    "main": [
+     0,
+     0,
+     0
+    ],
+    "branch": [
+     0,
+     0,
+     0
+    ],
+    "mainStatus": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "branchStatus": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "verdict": "OUTPUT DIFFERS (a person reads the lines)",
+    "outRuns": [
+     1,
+     2,
+     3
+    ],
+    "outAdded": [
+     "…BedAfterClearing\":true,\"bed4AfterClearing\":true,\"buttonOnRightBed\":\"ตีเลย\",\"fire\":{\"noon\":false,\"evening\":true,\"deepNight\":true,\"morning\":fa…"
+    ],
+    "outMissing": [
+     "…BedAfterClearing\":true,\"bed4AfterClearing\":true,\"buttonOnRightBed\":\"ตี\",\"fire\":{\"noon\":false,\"evening\":true,\"deepNight\":true,\"morning\":false…"
+    ],
+    "outAddedN": 1,
+    "outMissingN": 1
+   }
+  ],
+  "planted": "copy of main outside the repo + one word: TX.th.hit 'ตี' → 'ตีเลย'"
+ },
+ "realEvidenceTampering": {
+  "note": "copies of the real folders above, changed after the runner finished; every one must be exit 3 (cannot judge), never 0",
+  "cases": [
+   {
+    "what": "A delete run 2 of test_103 (4 files)",
+    "exit": 3
+   },
+   {
+    "what": "B last line of a log removed",
+    "exit": 3
+   },
+   {
+    "what": "C regression folder: runs 2-3 deleted on both sides and runs.tsv trimmed to match (ALLDONE kept)",
+    "exit": 3
+   },
+   {
+    "what": "D a branch log replaced by main's",
+    "exit": 3
+   }
+  ]
+ },
+ "resumeAnotherTarget": {
+  "what": "runner v3.1 started again on the word-change OUT with BRANCH_DIR = the page-error copy",
+  "runnerExit": 2,
+  "message": "OUT … belongs to another target (folders/HEAD/game files differ): use a new OUT",
+  "folderKept": "ALLDONE and every run file left as they were (the check runs before anything is touched)"
+ }
+}

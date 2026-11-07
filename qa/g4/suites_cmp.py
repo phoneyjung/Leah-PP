@@ -1,13 +1,16 @@
-# G4 M1 (v3 after Codex T35-N1): judges a suites_pair.sh folder. Main and branch come from the SAME session on the SAME machine.
+# G4 M1 (v3 after Codex T35-N1, v3.1 after T36-N1/N2): judges a suites_pair.sh folder. Main and branch come from the SAME session on the SAME machine.
 #   python3 qa/g4/suites_cmp.py OUT [--json out.json]         judge the whole folder
 #   python3 qa/g4/suites_cmp.py --needs-rerun OUT NAME         (used by suites_pair.sh) prints yes/no after the first round
 #   exit 0 = pass · 1 = a regression on the branch · 3 = cannot judge (the folder is not complete, a main run broke, a flaky suite
 #   or a legacy output needs a person) · 2 = this script crashed. Never 0 on data that cannot decide.
 #
-# 1. The folder must be complete before anything is judged (else exit 3): ALLDONE written by the runner · suites.tsv (the list the
-#    runner chose, with the kind and the sha256 of each suite file on both sides) · env.txt · every listed suite has run 1 on both sides
-#    (.exit + .log) · a suite that needs reruns (rule 3) has runs 2 and 3 on both sides · no run of a suite outside the list · the suite
-#    file is the same on main and on the branch (a changed suite file makes the pair meaningless).
+# 1. The folder must be complete before anything is judged (else exit 3): ALLDONE written by the runner with suites=, runs= and
+#    manifest= · runs.tsv (every run as it ran: suite, side, run number, exit, sha of the log) whose hash is that manifest, whose count is
+#    runs=, every listed run present and unchanged, no run on disk that it does not list (T36-N2: deleting a failing rerun can never
+#    pass) · suites.tsv (the list the runner chose, with the kind and the sha256 of each suite file on both sides) · env.txt · runs of a
+#    suite numbered 1…N with no gap, the same N on both sides, N ≥ 3 when rule 3 asks for reruns · no run of a suite outside the list ·
+#    the suite file is the same on main and on the branch (a changed suite file makes the pair meaningless).
+#    Out of reach: someone who rewrites the logs AND runs.tsv AND ALLDONE together (that is forging, not a broken run).
 # 2. Every run gets a status. The runner's own failures are kept apart from the game's failures:
 #      pass   = exit 0, a non-empty log, no failure line
 #      fail   = exit 0 or 1 with at least one failure line (the suite said why)
@@ -29,18 +32,19 @@
 #      main failed in a run                      → every failure line of the branch must be one main showed in one of its runs,
 #                                                  else 'NEW ERROR LINES'; a branch that passes is fine · one exception: when main
 #                                                  itself stops on a thrown error (assert/timeout) and the branch stops at ANOTHER
-#                                                  place LATER in the suite file than every main stop, that is 'NEW STOP POINT' =
-#                                                  cannot judge (the branch got further: seen on main itself, test_170 stopped at
-#                                                  L30C265 10 times and at L30C472 once in 10 runs of one session) · a stop EARLIER than
-#                                                  every main stop (a check main passes now fails), new COLLECTED errors, or a throw
+#                                                  place that is not provably EARLIER, that is cannot judge: 'NEW STOP POINT' when it
+#                                                  is later in the suite file than every main stop (it MAY have got further: seen on
+#                                                  main itself, test_170 stopped at L30C265 9 times and at L30C472 once in 10 runs of one
+#                                                  session — a hint only, a person checks), 'UNKNOWN STOP' otherwise · a stop EARLIER
+#                                                  than every main stop (a check main passes now fails), new COLLECTED errors, or a throw
 #                                                  where main never throws, stay regressions
-#      legacy suites (no assert of their own: they print values for a person to read, 32 of 115) also: every output line of every branch
-#      run must appear in one of main's runs (numbers masked), else 'OUTPUT DIFFERS' with the lines (a person reads them: cannot judge)
+#      legacy suites (no assert of their own: they print values for a person to read, 32 of 115) also: every branch run must print
+#      EXACTLY what one main run printed — all lines, same order, same count, numbers masked (T36-N1: a line that disappears is a
+#      difference too) — else 'OUTPUT DIFFERS' with the added and the missing lines (a person reads them: cannot judge)
 #      the flaky three (test_157, test_176, test_risk_monthly) that are not ok → run them alone (cannot judge)
-import json, os, re, sys
+import difflib, hashlib, json, os, re, sys
 
 FLAKY = ('test_157_equipment', 'test_176_steer_and_act', 'test_risk_monthly')
-RUNS = ('',) + tuple(f'.{i}' for i in range(2, 10))   # run 1 · reruns .2 … (3 runs per side by default, RERUNS=n in the runner for more)
 NUM = re.compile(r'(?<![A-Za-z_#\d.])-?\d+(?:\.\d+)?')
 HEAD = re.compile(r'^\s*(?:Uncaught\s+)?(?:[A-Z][A-Za-z]*)?(?:Error|Exception)\b|^\s*(?:AssertionError|FAIL\b)')
 LEGACY_ERR = re.compile(r'^errors (\d+)\b(.*)$')
@@ -147,6 +151,44 @@ def suites_list(out):
         if len(f) >= 4 and not l.startswith('#'): rows[f[0]] = {'kind': f[1], 'shaMain': f[2], 'shaBranch': f[3]}
     return rows
 
+def manifest(out, lst):
+    """T36-N2: the run list the runner wrote (runs.tsv, hashed into ALLDONE) must match the folder exactly: every listed run has its
+    files, unchanged (exit + sha of the log) · no run file is unlisted · the counts agree. Returns (meta, {(suite, side): [run numbers]})"""
+    pa, pr = os.path.join(out, 'ALLDONE'), os.path.join(out, 'runs.tsv')
+    if not os.path.exists(pa): return ['no ALLDONE: the runner did not finish'], None
+    g = dict(re.findall(r'(suites|runs|manifest)=(\S+)', open(pa).read()))
+    if set(g) != {'suites', 'runs', 'manifest'}: return ['ALLDONE has no suites=/runs=/manifest= (an older runner): run again into a new OUT'], None
+    if not os.path.exists(pr): return ['no runs.tsv (the list of runs)'], None
+    meta, raw = [], open(pr, 'rb').read()
+    if hashlib.sha256(raw).hexdigest()[:16] != g['manifest']: meta.append('runs.tsv does not match the hash in ALLDONE (changed after the runner finished)')
+    rows = [l.split('\t') for l in raw.decode(errors='replace').splitlines() if l.strip()]
+    if not g['runs'].isdigit() or len(rows) != int(g['runs']): meta.append(f"ALLDONE says runs={g['runs']}, runs.tsv lists {len(rows)}")
+    if not g['suites'].isdigit() or int(g['suites']) != len(lst): meta.append(f"ALLDONE says suites={g['suites']}, suites.tsv lists {len(lst)}")
+    listed, idx = set(), {}
+    for f in rows:
+        if len(f) != 5 or not f[2].isdigit(): meta.append('runs.tsv: a line that is not suite/side/run/exit/sha'); continue
+        n, side, k, e, h = f
+        key = (n, side, int(k))
+        if key in listed: meta.append(f'runs.tsv lists {n} {side} run {k} twice')
+        listed.add(key); idx.setdefault((n, side), []).append(int(k))
+        suf = '' if k == '1' else '.' + k
+        pe, pl = os.path.join(out, f'{n}.{side}{suf}.exit'), os.path.join(out, f'{n}.{side}{suf}.log')
+        if not (os.path.exists(pe) and os.path.exists(pl)): meta.append(f'{n} {side} run {k}: listed in runs.tsv but its files are gone'); continue
+        if open(pe).read().split()[:1] != [e]: meta.append(f'{n} {side} run {k}: the exit file differs from runs.tsv')
+        if hashlib.sha256(open(pl, 'rb').read()).hexdigest()[:16] != h: meta.append(f'{n} {side} run {k}: the log changed after the run')
+    for f in sorted(os.listdir(out)):
+        g2 = re.match(r'(.+?)\.(main|branch)(?:\.(\d+))?\.exit$', f)
+        if g2 and (g2.group(1), g2.group(2), int(g2.group(3) or 1)) not in listed: meta.append(f'{f}: a run that runs.tsv does not list')
+    return meta, idx
+
+def files_idx(out, n, side):
+    """run numbers present on disk for one suite and side (1 = the run without a suffix)"""
+    ks = []
+    for f in os.listdir(out):
+        g = re.match(re.escape(n) + r'\.' + side + r'(?:\.(\d+))?\.exit$', f)
+        if g: ks.append(int(g.group(1) or 1))
+    return sorted(ks)
+
 def needs_rerun(r1m, r1b, kind):
     if r1m is None or r1b is None: return False
     if r1m['status'] != 'pass' or r1b['status'] != 'pass': return True
@@ -155,11 +197,12 @@ def needs_rerun(r1m, r1b, kind):
 def judge(out):
     m = masker(out)
     meta = []
-    if not os.path.exists(os.path.join(out, 'ALLDONE')): meta.append('no ALLDONE: the runner did not finish')
     if not os.path.exists(os.path.join(out, 'env.txt')): meta.append('no env.txt')
     lst = suites_list(out)
     if lst is None: meta.append('no suites.tsv: the list of suites the runner chose is missing'); lst = {}
     if not lst: meta.append('the suite list is empty')
+    mm, _ = manifest(out, lst)
+    meta += mm
     seen = {f.split('.')[0] for f in os.listdir(out) if f.endswith('.exit')}
     for x in sorted(seen - set(lst)): meta.append(f'{x}: runs found for a suite that is not in suites.tsv')
     rows, bad, undecided = [], [], []
@@ -167,14 +210,19 @@ def judge(out):
         info = lst[n]
         r = {'suite': n, 'kind': info['kind'], 'flaky': n in FLAKY}
         if info['shaMain'] != info['shaBranch']: meta.append(f'{n}: the suite file differs between main and the branch'); r['verdict'] = 'SUITE FILE DIFFERS'
-        rm = [run(out, n, 'main', k, m) for k in RUNS]
-        rb = [run(out, n, 'branch', k, m) for k in RUNS]
-        if rm[0] is None or rb[0] is None:
-            meta.append(f'{n}: run 1 missing on ' + ' and '.join(s for s, x in (('main', rm[0]), ('branch', rb[0])) if x is None))
-            r['verdict'] = 'MISSING'; rows.append(r); continue
+        im, ib = files_idx(out, n, 'main'), files_idx(out, n, 'branch')
+        for side, ks in (('main', im), ('branch', ib)):    # T36-N2: runs 1…N with no gap (a deleted run 2 must never shrink to "2 runs")
+            if ks and ks != list(range(1, len(ks) + 1)): meta.append(f'{n} {side}: runs {ks} have a gap (expected 1…{len(ks)})')
+        sfx = lambda k: '' if k == 1 else f'.{k}'
+        rm = [run(out, n, 'main', sfx(k), m) for k in im]
+        rb = [run(out, n, 'branch', sfx(k), m) for k in ib]
         rm = [x for x in rm if x is not None]; rb = [x for x in rb if x is not None]
-        if needs_rerun(rm[0], rb[0], info['kind']) and (len(rm) < 3 or len(rb) < 3 or len(rm) != len(rb)):
-            meta.append(f'{n}: needs at least 3 runs per side (the same number on both), has main {len(rm)} / branch {len(rb)}')
+        if 1 not in im or 1 not in ib or not rm or not rb:
+            meta.append(f'{n}: run 1 missing on ' + ' and '.join(s for s, x in (('main', im), ('branch', ib)) if 1 not in x))
+            r['verdict'] = 'MISSING'; rows.append(r); continue
+        if len(rm) != len(rb): meta.append(f'{n}: main has {len(rm)} runs, the branch {len(rb)} (must be the same)')
+        if needs_rerun(rm[0], rb[0], info['kind']) and (len(rm) < 3 or len(rb) < 3):
+            meta.append(f'{n}: needs at least 3 runs per side, has main {len(rm)} / branch {len(rb)}')
         r.update(main=[x['exit'] for x in rm], branch=[x['exit'] for x in rb], mainStatus=[x['status'] for x in rm], branchStatus=[x['status'] for x in rb])
         if 'verdict' in r: rows.append(r); continue
         if any(x['status'] == 'broken' for x in rb):
@@ -193,24 +241,38 @@ def judge(out):
             known = [p for p in main_stops if p]
             earlier = [x for x in thrown if stop_pos(x) and known and stop_pos(x) < min(known)]
             if listed or (thrown and not main_stops) or earlier: r['verdict'] = 'NEW ERROR LINES' + (' (stops EARLIER in the suite than main ever did: a check main passes now fails)' if earlier and not listed else '')
-            elif thrown:
+            elif thrown:   # not provably earlier → a person reads; 'later' is only a hint (loops/helpers make file order ≠ run order)
                 later = all(stop_pos(x) and known and stop_pos(x) > max(known) for x in thrown)
-                r['verdict'] = 'NEW STOP POINT (cannot judge: ' + ('the branch stops LATER in the suite than every main stop = it got further; ' if later else '') + 'rerun with RERUNS=4 or a person reads)'
+                r['verdict'] = ('NEW STOP POINT (cannot judge: stops LATER in the suite file than every main stop, it MAY have got further — a person checks; rerun with RERUNS=4)'
+                                if later else 'UNKNOWN STOP (cannot judge: the new stop point cannot be placed before main\'s — a person reads; rerun with RERUNS=4)')
             else: r['verdict'] = 'ok (fails on main in this session too; no new failure line)'
             if new: r['newLines'] = [excerpt(x, sorted(allowed)) for x in new[:8]]
         if r['verdict'].startswith('ok') and info['kind'] == 'legacy':
-            allowed = set().union(*[set(x['out']) for x in rm])
-            diff = sorted(set().union(*[set(x['out']) for x in rb]) - allowed)
-            if diff: r['verdict'] = 'OUTPUT DIFFERS (a person reads the lines)'; r['outLines'] = [excerpt(d, sorted(allowed)) for d in diff[:8]]; r['outLinesN'] = len(diff)
+            # T36-N1: every branch run must print EXACTLY what one main run printed (all lines, in order, as many times; numbers masked) —
+            # a line that disappears, moves or repeats is a difference too, not only a new line. No tolerance for random lists: they
+            # differ → a person reads (seen in one session the 5 legacy suites printed the same on both sides)
+            mains = [x['out'] for x in rm]
+            off = [i for i, x in enumerate(rb) if x['out'] not in mains]
+            if off:
+                b = rb[off[0]]['out']
+                best = max(mains, key=lambda mo: difflib.SequenceMatcher(None, mo, b, autojunk=False).ratio())
+                added, missing = [], []
+                for op, i1, i2, j1, j2 in difflib.SequenceMatcher(None, best, b, autojunk=False).get_opcodes():
+                    if op in ('replace', 'delete'): missing += best[i1:i2]
+                    if op in ('replace', 'insert'): added += b[j1:j2]
+                r['verdict'] = 'OUTPUT DIFFERS (a person reads the lines)'
+                r['outRuns'] = [i + 1 for i in off]
+                r['outAdded'] = [excerpt(x, best) for x in added[:6]]; r['outMissing'] = [excerpt(x, b) for x in missing[:6]]
+                r['outAddedN'], r['outMissingN'] = len(added), len(missing)
         if r['flaky'] and not r['verdict'].startswith('ok'): r['verdict'] += ' · flaky: run it alone'
         if not r['verdict'].startswith('ok'):
-            if r['flaky'] or r['verdict'].startswith(('MAIN RUN BROKEN', 'OUTPUT DIFFERS', 'NEW STOP POINT')): undecided.append(n)
+            if r['flaky'] or r['verdict'].startswith(('MAIN RUN BROKEN', 'OUTPUT DIFFERS', 'NEW STOP POINT', 'UNKNOWN STOP')): undecided.append(n)
             else: bad.append(n)
         rows.append(r)
     code = 3 if meta else 1 if bad else 3 if undecided else 0
     e = env(out)
     sts = lambda r: r.get('mainStatus', []) + r.get('branchStatus', [])
-    res = {'out': out, 'v': 3, 'main': e.get('main'), 'branch': e.get('branch'), 'control': bool(e.get('maindir')) and e.get('maindir') == e.get('branchdir'),
+    res = {'out': out, 'v': '3.1', 'main': e.get('main'), 'branch': e.get('branch'), 'control': bool(e.get('maindir')) and e.get('maindir') == e.get('branchdir'),
            'meta': meta, 'metaOk': not meta, 'suites': len(rows), 'legacy': sum(r['kind'] == 'legacy' for r in rows),
            'bothPass': sum(bool(sts(r)) and all(s == 'pass' for s in sts(r)) for r in rows),
            'runs': sum(len(r.get('main', [])) + len(r.get('branch', [])) for r in rows),
@@ -228,7 +290,8 @@ def main():
     if '--json' in a: json.dump(res, open(a[a.index('--json') + 1], 'w'), ensure_ascii=False, indent=1)
     for r in res['rows']:
         if r.get('verdict') != 'ok':
-            print(r['suite'], r.get('main', ''), r.get('branch', ''), r['verdict'], r.get('why', ''), r.get('newLines', ''), r.get('outLines', ''))
+            print(r['suite'], r.get('main', ''), r.get('branch', ''), r['verdict'], r.get('why', ''), r.get('newLines', ''),
+                  ('+' + str(r['outAdded']) + ' -' + str(r['outMissing'])) if 'outAdded' in r else '')
     for x in res['meta']: print('META', x)
     print(json.dumps({k: res[k] for k in ('suites', 'legacy', 'runs', 'bothPass', 'bad', 'undecided', 'metaOk', 'control', 'verdict', 'exit')}))
     return res['exit']

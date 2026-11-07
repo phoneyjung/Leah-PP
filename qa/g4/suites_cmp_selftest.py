@@ -1,7 +1,7 @@
 # G4 M1 v3: proves suites_cmp.py on made-up folders (T35-N1 · Codex's false passes + the other ways a pair can lie).
 #   python3 qa/g4/suites_cmp_selftest.py            exit 0 only when every case gets the expected exit code (and --needs-rerun agrees)
 # The folders are written to a temporary folder outside the repo and deleted at the end. Nothing here runs the game.
-import json, os, shutil, subprocess, sys, tempfile
+import glob, hashlib, json, os, shutil, subprocess, sys, tempfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 CMP = os.path.join(HERE, 'suites_cmp.py')
@@ -24,7 +24,9 @@ def tmo(side, at='27:324'):
             f'    at async press ({d}/test_167_context_bubble.js:4:41)\n    at async {d}/test_167_context_bubble.js:{at}\n{{\n  map: \'farm\',\n  player: [ 1101.008, 782.992 ]\n}}\n')
 LEG = lambda lamp=1, extra='': json.dumps({'version': 'Lantern Academy 2.33', 'adultLamp': lamp, 'msgs': ['เติมแสงแล้ว'], 'took': 1234, 'x': -12.5}) + '\nerrors 0 []\n' + extra
 
-def write(d, suites, runs, alldone=True, env=True, tsv=True, sha=None):
+def write(d, suites, runs, alldone=True, env=True, tsv=True, sha=None, tamper=None):
+    """a folder as suites_pair.sh v3.1 leaves it: runs.tsv in run order + ALLDONE with suites=/runs=/manifest= ·
+    alldone='old' = the older runner's bare ALLDONE · tamper(d) is applied after everything is written (deleting/changing evidence)"""
     os.makedirs(d)
     if env:
         open(os.path.join(d, 'env.txt'), 'w').write(f'chromium test\nmain aaaa\nbranch bbbb\nmaindir {MD}\nbranchdir {BD}\nout {d}\n')
@@ -32,10 +34,18 @@ def write(d, suites, runs, alldone=True, env=True, tsv=True, sha=None):
         with open(os.path.join(d, 'suites.tsv'), 'w') as f:
             f.write('# name\tkind\tsha main\tsha branch\n')
             for n, kind in suites.items(): f.write(f'{n}\t{kind}\t1111\t{(sha or {}).get(n, "1111")}\n')
-    for (n, side, k), (e, log) in runs.items():
+    num = lambda k: 1 if k == '' else int(k[1:])
+    lines = []
+    for (n, side, k), (e, log) in sorted(runs.items(), key=lambda x: (num(x[0][2]), x[0][0], x[0][1])):
         open(os.path.join(d, f'{n}.{side}{k}.exit'), 'w').write(f'{e} 12.3\n')
         open(os.path.join(d, f'{n}.{side}{k}.log'), 'w').write(log)
-    if alldone: open(os.path.join(d, 'ALLDONE'), 'w').write('DONE\n')
+        lines.append(f'{n}\t{side}\t{num(k)}\t{e}\t{hashlib.sha256(log.encode()).hexdigest()[:16]}\n')
+    open(os.path.join(d, 'runs.tsv'), 'w').write(''.join(lines))
+    if alldone == 'old': open(os.path.join(d, 'ALLDONE'), 'w').write('DONE\n')
+    elif alldone:
+        man = hashlib.sha256(''.join(lines).encode()).hexdigest()[:16]
+        open(os.path.join(d, 'ALLDONE'), 'w').write(f'DONE suites={len(suites)} runs={len(lines)} manifest={man}\n')
+    if tamper: tamper(d)
 
 def three(n, f, n_runs=3):
     """f(side, k) -> (exit, log) or None (no such run) · k is '' (run 1), '.2', '.3'"""
@@ -81,7 +91,7 @@ CASES = [
   three('test_104_lantern', lambda s, k: (0, LEG(1 if s == 'main' else False))), {}, None),
  ('L03', 'legacy: only numbers differ (times, coordinates)', 0, {'test_104_lantern': 'legacy'},
   three('test_104_lantern', lambda s, k: (0, LEG() if s == 'main' else LEG().replace('1234', '987').replace('-12.5', '3')), 1), {}, None),
- ('L04', 'legacy: a random pick list, branch picks seen across main runs', 0, {'test_109_mail': 'legacy'},
+ ('L04', 'legacy: a random pick list that differs from run to run → cannot judge (no tolerance for random lists)', 3, {'test_109_mail': 'legacy'},
   three('test_109_mail', lambda s, k: (0, LEG(extra={('main', ''): '"clock_shop"\n"house_w2"\n', ('main', '.2'): '"blacksmith"\n"stall"\n', ('main', '.3'): '"house_w1"\n"stall"\n',
         ('branch', ''): '"blacksmith"\n"house_w1"\n', ('branch', '.2'): '"stall"\n"clock_shop"\n', ('branch', '.3'): '"house_w2"\n"house_w1"\n'}[(s, k)]))), {}, None),
  ('A01', 'node assert: the same assert fails on both sides (folders and printed state differ)', 0, {'test_170_swordsman': 'assert'},
@@ -107,6 +117,28 @@ CASES = [
  ('L05', 'legacy: ONE long line (> 240 chars, as the suites print) changes one word near its end (ตี → ตีเลย)', 3, {'test_121_beds': 'legacy'},
   three('test_121_beds', lambda s, k: (0, json.dumps({'version': 'Lantern Academy 2.33', 'bedsAtStart': {'plantable': 3, 'weeds': 5}, 'pad': 'x' * 300,
         'buttonOnRightBed': 'ตี' if s == 'main' else 'ตีเลย'}, ensure_ascii=False, separators=(',', ':')) + '\nerrors 0 []\n')), {}, None),
+ ('L06', 'Codex T36-N1: legacy, the branch prints everything but ONE line (feature: true) ×3', 3, {'test_109_mail': 'legacy'},
+  three('test_109_mail', lambda s, k: (0, '{\n  "start": 1,\n' + ('  "feature": true,\n' if s == 'main' else '') + '  "end": 2\n}\nerrors 0 []\n')), {}, None),
+ ('L07', 'Codex T36-N1: legacy, two lines swap order (alpha/beta → beta/alpha) ×3', 3, {'test_109_mail': 'legacy'},
+  three('test_109_mail', lambda s, k: (0, ('alpha\nbeta\n' if s == 'main' else 'beta\nalpha\n') + 'errors 0 []\n')), {}, None),
+ ('L08', 'legacy: a line printed twice on main, once on the branch ×3', 3, {'test_109_mail': 'legacy'},
+  three('test_109_mail', lambda s, k: (0, ('"stall"\n"stall"\n' if s == 'main' else '"stall"\n') + 'errors 0 []\n')), {}, None),
+ ('L09', 'legacy: several lines, the same on both sides but every number differs (1 run)', 0, {'test_109_mail': 'legacy'},
+  three('test_109_mail', lambda s, k: (0, '{\n  "start": %d,\n  "feature": true,\n  "x": [%s]\n}\nerrors 0 []\n' % ((1, '1.5, -2') if s == 'main' else (7, '3.25, 9'))), 1), {}, 'no'),
+ ('M10', 'Codex T36-N2 (before): 5 runs per side, the branch has "new regression" in run 2 only', 1, {S: 'assert'},
+  {(S, side, k): (1, jerr(A2 if not (side == 'branch' and k == '.2') else 'new regression', side=side)) for k in ('', '.2', '.3', '.4', '.5') for side in ('main', 'branch')}, {}, 'yes'),
+ ('M11', 'Codex T36-N2: the same folder with run 2 deleted on both sides (4 files), ALLDONE kept', 3, {S: 'assert'},
+  {(S, side, k): (1, jerr(A2 if not (side == 'branch' and k == '.2') else 'new regression', side=side)) for k in ('', '.2', '.3', '.4', '.5') for side in ('main', 'branch')},
+  {'tamper': lambda d: [os.remove(f) for f in glob.glob(os.path.join(d, '*.2.*'))]}, 'yes'),
+ ('M12', 'Codex T36-N2: only runs 1, 3, 4 on both sides, and runs.tsv/ALLDONE agree with that', 3, {S: 'assert'},
+  {(S, side, k): (1, jerr(A2, side=side)) for k in ('', '.3', '.4') for side in ('main', 'branch')}, {}, 'yes'),
+ ('M13', 'ALLDONE of the older runner (no suites=/runs=/manifest=)', 3, {S: 'assert'}, three(S, lambda s, k: (0, PASS(s)), 1), {'alldone': 'old'}, 'no'),
+ ('M14', 'a log changed after the run (a failure line removed)', 3, {S: 'assert'}, three(S, lambda s, k: (1, jerr(A2, side=s)) if s == 'main' else (1, jerr(A2, 'new regression', side=s))),
+  {'tamper': lambda d: open(os.path.join(d, f'{S}.branch.2.log'), 'w').write(jerr(A2, side='branch'))}, 'yes'),
+ ('M15', 'a run on disk that runs.tsv does not list (branch run 4 added later)', 3, {S: 'assert'}, three(S, lambda s, k: (1, jerr(A2, side=s))),
+  {'tamper': lambda d: (open(os.path.join(d, f'{S}.branch.4.exit'), 'w').write('0 1\n'), open(os.path.join(d, f'{S}.branch.4.log'), 'w').write(PASS('branch')))}, 'yes'),
+ ('M16', 'runs.tsv edited (one line dropped) without ALLDONE', 3, {S: 'assert'}, three(S, lambda s, k: (1, jerr(A2, side=s))),
+  {'tamper': lambda d: open(os.path.join(d, 'runs.tsv'), 'w').write(''.join(open(os.path.join(d, 'runs.tsv')).readlines()[:-1]))}, 'yes'),
  ('F01', 'flaky suite: branch timeout ×3 → run it alone (cannot judge)', 3, {'test_176_steer_and_act': 'assert'},
   three('test_176_steer_and_act', lambda s, k: (0, PASS(s)) if s == 'main' else (124, 'half\n')), {}, None),
 ]

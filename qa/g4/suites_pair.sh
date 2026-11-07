@@ -9,6 +9,10 @@
 # assert of its own, it prints values for a person to read) · env.txt also keeps both folders and OUT (the comparator masks them) ·
 # reruns are decided by the comparator's own rule (suites_cmp.py --needs-rerun), so the runner and the judge never disagree ·
 # resumable: a run with an .exit file is not run again · ALLDONE is written last, with the counts.
+# v3.1 (after Codex T36-N2): runs.tsv = every run in the order it ran (suite · side · run number · exit · sha256-16 of its log), written
+# right after the run · ALLDONE carries suites=, runs= and manifest= (sha256-16 of runs.tsv), so a deleted, added or edited run shows ·
+# target.txt = what this OUT measures (both folders, both HEADs, sha of the game files): resuming an OUT with another target is refused
+# (exit 2: use a new OUT).
 set -u
 : "${MAIN_DIR:?}" "${BRANCH_DIR:?}" "${OUT:?}"
 HERE=$(cd "$(dirname "$0")" && pwd)
@@ -17,6 +21,12 @@ python3 -m http.server 8790 --bind 127.0.0.1 --directory "$MAIN_DIR" >/dev/null 
 python3 -m http.server 8791 --bind 127.0.0.1 --directory "$BRANCH_DIR" >/dev/null 2>&1 & S2=$!
 trap 'kill $S1 $S2 2>/dev/null' EXIT
 sleep 1
+# the game files that make the target (index.html, sw.js, every root *.js but the suites): a resumed OUT must measure the same thing
+game() { (cd "$1" && ls index.html sw.js *.js 2>/dev/null | grep -v '^test_' | sort | xargs -r sha256sum | sha256sum | cut -c1-16); }
+TARGET="main $(git -C "$MAIN_DIR" rev-parse HEAD 2>/dev/null) $(game "$MAIN_DIR") $MAIN_DIR | branch $(git -C "$BRANCH_DIR" rev-parse HEAD 2>/dev/null) $(game "$BRANCH_DIR") $BRANCH_DIR"
+if [ -f "$OUT/target.txt" ]; then
+  [ "$(cat "$OUT/target.txt")" = "$TARGET" ] || { echo "OUT $OUT belongs to another target (folders/HEAD/game files differ): use a new OUT"; exit 2; }
+else echo "$TARGET" > "$OUT/target.txt"; fi
 rm -f "$OUT/ALLDONE"
 [ -f "$OUT/env.txt" ] || { echo "chromium $("${CHROME_EXE:-chromium}" --version 2>/dev/null)"; echo "node $(node --version)"; echo "main $(git -C "$MAIN_DIR" rev-parse HEAD 2>/dev/null)"; echo "branch $(git -C "$BRANCH_DIR" rev-parse HEAD 2>/dev/null)";
   echo "maindir $MAIN_DIR"; echo "branchdir $BRANCH_DIR"; echo "out $OUT"; echo "only ${ONLY:-}"; echo "start $(date -Is)"; } > "$OUT/env.txt"
@@ -36,6 +46,8 @@ one() { # one run: $1 suite name · $2 side · $3 run suffix ('' or .2 / .3)
   if [ "$side" = main ]; then dir=$MAIN_DIR; port=8790; else dir=$BRANCH_DIR; port=8791; fi
   t0=$(date +%s.%N); (cd "$dir" && PORT=$port OUT_DIR="$OUT/out_$n.$side$k" timeout 300 node "$n.js" > "$OUT/$n.$side$k.log" 2>&1); e=$?; t1=$(date +%s.%N)
   echo "$e $(python3 -c "print(round($t1-$t0,1))")" > "$OUT/$n.$side$k.exit"
+  local r=${k#.}
+  printf '%s\t%s\t%s\t%s\t%s\n' "$n" "$side" "${r:-1}" "$e" "$(sha256sum "$OUT/$n.$side$k.log" | cut -c1-16)" >> "$OUT/runs.tsv"
 }
 i=0
 for n in $(grep -v '^#' "$OUT/suites.tsv" | cut -f1); do
@@ -50,4 +62,4 @@ for n in $(grep -v '^#' "$OUT/suites.tsv" | cut -f1); do
   for i in $(seq 2 $((1 + ${RERUNS:-2}))); do one "$n" main ".$i"; one "$n" branch ".$i"; done
 done
 echo "end $(date -Is)" >> "$OUT/env.txt"
-echo "DONE suites=$(grep -vc '^#' "$OUT/suites.tsv") runs=$(ls "$OUT"/*.exit | wc -l)" > "$OUT/ALLDONE"
+echo "DONE suites=$(grep -vc '^#' "$OUT/suites.tsv") runs=$(wc -l < "$OUT/runs.tsv") manifest=$(sha256sum "$OUT/runs.tsv" | cut -c1-16)" > "$OUT/ALLDONE"
