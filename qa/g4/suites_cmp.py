@@ -1,4 +1,4 @@
-# G4 M1 (v3 after Codex T35-N1, v3.1 after T36-N1/N2, v3.2 after T37-N1/N2): judges a suites_pair.sh folder. Main and branch come from the SAME session on the SAME machine.
+# G4 M1 (v3 after Codex T35-N1, v3.1 after T36-N1/N2, v3.2 after T37-N1/N2, v3.2.1 after T38-N1): judges a suites_pair.sh folder. Main and branch come from the SAME session on the SAME machine.
 #   python3 qa/g4/suites_cmp.py OUT [--json out.json]         judge the whole folder
 #   python3 qa/g4/suites_cmp.py --needs-rerun OUT NAME         (used by suites_pair.sh) prints yes/no after the first round
 #   exit 0 = pass · 1 = a regression on the branch · 3 = cannot judge (the folder is not complete, a main run broke, a flaky suite
@@ -207,8 +207,10 @@ def manifest(out, lst):
         if hashlib.sha256(open(pl, 'rb').read()).hexdigest()[:16] != h: meta.append(f'{n} {side} run {k}: the log changed after the run')
     for f in sorted(os.listdir(out)):   # T37-N2: a run file (.exit OR .log) that the list does not know · anything else unknown
         g2 = re.match(r'(.+?)\.(main|branch)(?:\.(\d+))?\.(exit|log)$', f)
-        if g2:
-            if (g2.group(1), g2.group(2), int(g2.group(3) or 1)) not in listed: meta.append(f'{f}: a run file that runs.tsv does not list')
+        if g2:   # T38-N1: only the names the runner writes count as a run (run 1 = no number, run N ≥ 2 = '.N' with no leading 0)
+            num = g2.group(3)
+            if num is not None and (num.startswith('0') or int(num) < 2): meta.append(f'{f}: a run-file name the runner never writes (run 1 has no number, run N is .N)')
+            elif (g2.group(1), g2.group(2), int(num or 1)) not in listed: meta.append(f'{f}: a run file that runs.tsv does not list')
         elif f in RUNNER_FILES: pass
         elif f.startswith('out_') and os.path.isdir(os.path.join(out, f)): pass     # a suite's own OUT_DIR (screenshots …): not evidence
         else: meta.append(f'{f}: a file the runner never writes (keep reports and notes outside OUT)')
@@ -309,7 +311,7 @@ def judge(out):
     code = 3 if meta else 1 if bad else 3 if undecided else 0
     e = env(out)
     sts = lambda r: r.get('mainStatus', []) + r.get('branchStatus', [])
-    res = {'out': out, 'v': '3.2', 'main': e.get('main'), 'branch': e.get('branch'), 'control': bool(e.get('maindir')) and e.get('maindir') == e.get('branchdir'),
+    res = {'out': out, 'v': '3.2.1', 'main': e.get('main'), 'branch': e.get('branch'), 'control': bool(e.get('maindir')) and e.get('maindir') == e.get('branchdir'),
            'meta': meta, 'metaOk': not meta, 'suites': len(rows), 'kindsRechecked': rechecked, 'legacy': sum(r['kind'] == 'legacy' for r in rows),
            'bothPass': sum(bool(sts(r)) and all(s == 'pass' for s in sts(r)) for r in rows),
            'runs': sum(len(r.get('main', [])) + len(r.get('branch', [])) for r in rows),

@@ -174,6 +174,12 @@ CASES = [
   three(S, lambda s, k: (0, PASS(s)), 1), {'files': {S: "const p=require('puppeteer');(async()=>{console.log('errors',0,[])})()\n"}}, 'no'),
  ('K09', 'control for K08: the suite file has errors.push and suites.tsv says assert', 0, {S: 'assert'},
   three(S, lambda s, k: (0, PASS(s)), 1), {'files': {S: "const errors=[];errors.push('x');process.exit(errors.length?1:0)\n"}}, 'no'),
+ ('K10', 'Codex T38-N1: an extra test_103_village.branch.1.log ("Error: new regression") beside the real run-1 log', 3, {'test_103_village': 'legacy'},
+  three('test_103_village', lambda s, k: (0, LEG())), {'tamper': lambda d: open(os.path.join(d, 'test_103_village.branch.1.log'), 'w').write('Error: new regression\n')}, None),
+ ('K11', 'Codex T38-N1: the same with .branch.01.log', 3, {'test_103_village': 'legacy'},
+  three('test_103_village', lambda s, k: (0, LEG())), {'tamper': lambda d: open(os.path.join(d, 'test_103_village.branch.01.log'), 'w').write('Error: new regression\n')}, None),
+ ('K12', 'an extra .main.02.exit beside a real run 2 (leading zero)', 3, {S: 'assert'}, three(S, lambda s, k: (1, jerr(A2, side=s))),
+  {'tamper': lambda d: open(os.path.join(d, f'{S}.main.02.exit'), 'w').write('0 1\n')}, 'yes'),
  ('F01', 'flaky suite: branch timeout ×3 → run it alone (cannot judge)', 3, {'test_176_steer_and_act': 'assert'},
   three('test_176_steer_and_act', lambda s, k: (0, PASS(s)) if s == 'main' else (124, 'half\n')), {}, None),
 ]
