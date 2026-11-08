@@ -52,10 +52,11 @@ const INJ = {
           window.__walk += Math.hypot(P.x - lx, P.y - ly); lx = P.x; ly = P.y; }, 100); }, [SAVE, tg.patch, sc]);
       await cdp.send('Emulation.setCPUThrottlingRate', { rate: 4 });
       await p.waitForTimeout(WARM * 1000);
-      const m = await p.evaluate(ms => new Promise(r => { let n = 0, last = 0; const iv = [], d0 = window.__draws, w0 = window.__walk, t0 = performance.now();
+      const m = await p.evaluate(ms => new Promise(r => { let n = 0, last = 0; const iv = [], d0 = window.__draws, w0 = window.__walk, t0 = performance.now(), c20 = typeof C234 === 'object' && C234.n ? C234.n.body : null;
         const f = t => { if (last) iv.push(t - last); last = t; n++; if (performance.now() - t0 < ms) requestAnimationFrame(f); else { iv.sort((x, y) => x - y);
           r({ fps: n / ((performance.now() - t0) / 1000), p95: iv[Math.floor(iv.length * .95)] || 0, frames: n, draws: window.__draws - d0, walked: window.__walk - w0,
-            map: M && M.id, dark: DARK(), held: !!(DARK() && LKID()), LITE, eco: !!S.eco, fpsChecks }); } }; requestAnimationFrame(f); }), MEAS * 1000);
+            map: M && M.id, dark: DARK(), held: !!(DARK() && LKID()), LITE, eco: !!S.eco, fpsChecks,
+            c2: c20 === null ? null : { st: C234.st, body: C234.n.body - c20 } }); } }; requestAnimationFrame(f); }), MEAS * 1000);
       await cdp.send('Emulation.setCPUThrottlingRate', { rate: 1 });
       m.drawsPerFrame = +(m.draws / Math.max(1, m.frames)).toFixed(1); m.fps = +m.fps.toFixed(2); m.p95 = +m.p95.toFixed(1); m.walked = Math.round(m.walked);
       runs.push(Object.assign({ round: rnd + 1, scene: sc.id, target: tg.label }, m));
@@ -68,7 +69,9 @@ const INJ = {
   for (const sc of SCENES) { const row = R.summary[sc.id] = {};
     for (const tg of TARGETS) { const rs = runs.filter(r => r.scene === sc.id && r.target === tg.label);
       row[tg.label] = { fps: med(rs.map(r => r.fps)), p95: med(rs.map(r => r.p95)), drawsPerFrame: med(rs.map(r => r.drawsPerFrame)), walked: med(rs.map(r => r.walked)),
-        pins: rs.every(r => r.LITE === false && r.eco === false && r.fpsChecks === 6), mapOk: rs.every(r => r.map === sc.map), heldOk: rs.every(r => r.held === !!sc.dark) }; }
+        pins: rs.every(r => r.LITE === false && r.eco === false && r.fpsChecks === 6), mapOk: rs.every(r => r.map === sc.map), heldOk: rs.every(r => r.held === !!sc.dark),
+        // G4.2: a target with the flag on must really draw the kid with Char2 in every measured frame (ready + body draws ≥ 95 % of frames)
+        c2Ok: !(tg.patch && tg.patch.char2On === true) || rs.every(r => r.c2 && r.c2.st === 'ready' && r.c2.body >= 0.95 * r.frames) }; }
     if (TARGETS.length > 1) {
       const ref = TARGETS[0].label, cand = TARGETS[TARGETS.length - 1].label, ctl = TARGETS.length > 2 ? TARGETS[1].label : null;
       const fpsOf = (lab, rd) => (runs.find(r => r.scene === sc.id && r.target === lab && r.round === rd) || {}).fps;
@@ -76,7 +79,7 @@ const INJ = {
       const a = row[ref], c = row[cand];
       row.pairedRatios = paired(cand); row.ratio = med(row.pairedRatios); row.ratioOfMedians = +(c.fps / a.fps).toFixed(3);
       if (ctl) { row.controlPairedRatios = paired(ctl); row.controlRatio = med(row.controlPairedRatios); }
-      const hardFail = row.ratio < 0.9 || c.drawsPerFrame < 0.8 * a.drawsPerFrame || !(c.walked > 0) || !c.pins || !c.mapOk;
+      const hardFail = row.ratio < 0.9 || c.drawsPerFrame < 0.8 * a.drawsPerFrame || !(c.walked > 0) || !c.pins || !c.mapOk || !c.c2Ok;
       const shaky = (row.ratio < 0.95) || (ctl && Math.abs(row.controlRatio - 1) > 0.05);
       row.verdict = hardFail ? 'fail' : !ctl ? 'undecided: no control (CONTROL=0)' : shaky ? (ROUNDS >= 5 ? 'cannot decide (after ' + ROUNDS + ' rounds)' : 'undecided: rerun with ROUNDS=5') : 'pass';
       row.gate = row.verdict === 'pass'; } }

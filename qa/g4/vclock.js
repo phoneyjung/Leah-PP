@@ -7,6 +7,8 @@
 // game canvas (#c) for one frame on request: the order is the y-sort order, the arguments + the full transform are the positions
 // (fills, paths and text are not logged: the harness compares the canvas pixels themselves for those, cpNN.canvas.png).
 // Used on main and on the G4 branch alike; it never edits the game.
+// G4.2 (M5): a line gets a tag only when the harness sets window.__VC_TAG (replay.js with TAGP=1 / PATCH): '|P' = drawn inside drawPlayer,
+// '|S' = the player's blurred shadow sheet. Unset (every M1 run) = the lines are exactly as before.
 module.exports = ({ epoch, seed }) => `(()=>{
 'use strict';
 const EPOCH=${+epoch}, FRAME=50/3;
@@ -51,7 +53,7 @@ const imgId=im=>{if(!im)return 'null';if(im instanceof HTMLImageElement){const s
   let v=IDS.get(im);if(!v){v=(im.constructor&&im.constructor.name||'x')+'#'+(++nid)+':'+(im.width|0)+'x'+(im.height|0);IDS.set(im,v)}return v};
 const r2=x=>typeof x==='number'?Math.round(x*100)/100:x;
 const DI=CanvasRenderingContext2D.prototype.drawImage;
-CanvasRenderingContext2D.prototype.drawImage=function(im,...a){if(REC&&this.canvas&&this.canvas.id==='c'){const m=this.getTransform();REC.push(imgId(im)+'|'+a.map(r2).join(',')+'|'+[m.a,m.b,m.c,m.d,m.e,m.f].map(r2).join(',')+'|'+r2(this.globalAlpha))}return DI.call(this,im,...a)};
+CanvasRenderingContext2D.prototype.drawImage=function(im,...a){if(REC&&this.canvas&&this.canvas.id==='c'){const m=this.getTransform();REC.push(imgId(im)+'|'+a.map(r2).join(',')+'|'+[m.a,m.b,m.c,m.d,m.e,m.f].map(r2).join(',')+'|'+r2(this.globalAlpha)+(typeof window.__VC_TAG==='function'?window.__VC_TAG(im):''))}return DI.call(this,im,...a)};
 const flush=async()=>{for(let i=0;i<40;i++)await null};
 async function frame(){const target=vnow+FRAME;
   for(;;){let bid=0,bt=null;for(const [id,t] of T)if(t.at<=target&&(!bt||t.at<bt.at||(t.at===bt.at&&t.ord<bt.ord))){bid=id;bt=t}

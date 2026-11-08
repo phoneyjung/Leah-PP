@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.36';
+const VERSION='Lantern Academy 2.37';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -1347,7 +1347,7 @@ function render(tm){if(!M||!S)return;
   // player shadow
   const F=PS.F||64,lf=P.moving?Math.floor(P.dist/10)%6:0,sx=P.moving?lf*F:P.row*F,sy=P.moving?P.row*F:0;
   {const sh=P.moving?PS.shW:PS.shS,X=Math.round(P.x-F/2-camX),Y=Math.round(P.y-camY);ctx.save();ctx.imageSmoothingEnabled=true;ctx.globalCompositeOperation='multiply';ctx.globalAlpha=.55;softAO(ctx,P.x-camX,P.y-camY,24,1);
-    if(M.g9b){softAO(ctx,P.x-camX+5,P.y-camY+2,26,.9)}else if(sh){ctx.globalAlpha=M.kind==='cave'?.3:.4;ctx.setTransform(1,0,0,.5,SC*(X+.55*(F-2)),SC*(Y-.5*(F-2)));ctx.transform(1,0,-.55,1,0,0);ctx.drawImage(sh,sx*SC,sy*SC,F*SC,(F-2)*SC,0,0,F*SC,(F-2)*SC)}ctx.restore()}
+    if(M.g9b){softAO(ctx,P.x-camX+5,P.y-camY+2,26,.9)}else if(!c234Shadow()&&sh){ctx.globalAlpha=M.kind==='cave'?.3:.4;ctx.setTransform(1,0,0,.5,SC*(X+.55*(F-2)),SC*(Y-.5*(F-2)));ctx.transform(1,0,-.55,1,0,0);ctx.drawImage(sh,sx*SC,sy*SC,F*SC,(F-2)*SC,0,0,F*SC,(F-2)*SC)}ctx.restore()}
   // y-sorted world
   const list=[];for(const o of M.objs)list.push([o.y,0,o]);for(const m of MONS)list.push([m.y,1,m]);for(const c of M.crystals||[])list.push([c.y,2,c]);for(const d of DROPS)list.push([d.y-2,3,d]);list.push([P.y,4,P]);if(PEB.on)list.push([PEB.y,5,PEB]);if(petNow())list.push([PET.y,7,PET]);for(const o of Object.values(Net.others))if(o.p&&o.p.m===mapKey())list.push([o.y,6,o]);list.sort((a,b)=>a[0]-b[0]);
   for(const [,k,o] of list){if(k===0)drawObj(o,tm);else if(k===1)drawMon(o,tm);else if(k===2)drawCrystal(o,tm);else if(k===3)drawDrop(o,tm);else if(k===5)drawPeb();else if(k===6)drawOther(o);else if(k===7)drawPet(tm);else drawPlayer(sx,sy)}
@@ -1402,7 +1402,7 @@ function render(tm){if(!M||!S)return;
   if(P.hurt>0){ctx.fillStyle=`rgba(255,60,60,${P.hurt*.5})`;ctx.fillRect(0,0,VW,VH)}
   vig.style.opacity=M.kind==='cave'?1.3:(1.25-.35*LIGHT).toFixed(2);drawMinimap(tm)}
 function drawPlayer(sx,sy){const F=PS.F||64,im=P.moving?PS.walk:PS.stand;const a=DIR_ANG[P.row],l=P.atkAnim>0?Math.round(Math.sin(P.atkAnim/.25*Math.PI)*8):0,wet=inPool();const X=Math.round(P.x-F/2-camX+Math.cos(a)*l),Y=Math.round(P.y-(F-2)-camY+Math.sin(a)*l);
-  if(im){if(wet){const cut=wet==='pool'?22:16;ctx.save();ctx.beginPath();ctx.rect(X,Y,F,F-cut);ctx.clip();ctx.drawImage(im,sx,sy,F,F,X,Y+(wet==='pool'?8:4),F,F);ctx.restore();const wy=Y+F-cut+(wet==='pool'?8:4);if(wet==='pool'){ctx.strokeStyle='rgba(235,255,255,.8)';ctx.lineWidth=1;ctx.beginPath();ctx.ellipse(P.x-camX,wy,12+Math.sin(performance.now()/200)*2,4,0,0,7);ctx.stroke()}else{for(let i=0;i<9;i++){ctx.fillStyle=['#ffb3d9','#ffe36b','#9fd8ff','#a8f0a0','#ffc38a'][i%5];ctx.fillRect(Math.round(P.x-camX-12+i*3),wy-2+(i%3),5,5)}}}else ctx.drawImage(im,sx,sy,F,F,X,Y,F,F)}
+  if(im){if(wet){const cut=wet==='pool'?22:16;ctx.save();ctx.beginPath();ctx.rect(...c234Clip(X,Y,F,cut));ctx.clip();c234Body(X,Y,F,wet==='pool'?8:4)||ctx.drawImage(im,sx,sy,F,F,X,Y+(wet==='pool'?8:4),F,F);ctx.restore();const wy=Y+F-cut+(wet==='pool'?8:4);if(wet==='pool'){ctx.strokeStyle='rgba(235,255,255,.8)';ctx.lineWidth=1;ctx.beginPath();ctx.ellipse(P.x-camX,wy,12+Math.sin(performance.now()/200)*2,4,0,0,7);ctx.stroke()}else{for(let i=0;i<9;i++){ctx.fillStyle=['#ffb3d9','#ffe36b','#9fd8ff','#a8f0a0','#ffc38a'][i%5];ctx.fillRect(Math.round(P.x-camX-12+i*3),wy-2+(i%3),5,5)}}}else c234Body(X,Y,F,0)||ctx.drawImage(im,sx,sy,F,F,X,Y,F,F)}
   if(compassT>0&&M.crystals){const c=M.crystals.filter(x=>!x.awake).sort((a,b)=>Math.hypot(a.x-P.x,a.y-P.y)-Math.hypot(b.x-P.x,b.y-P.y))[0];if(c){const an=Math.atan2(c.y-P.y,c.x-P.x),r=28,x=P.x-camX+Math.cos(an)*r,y=P.y-26-camY+Math.sin(an)*r*.7;ctx.save();ctx.translate(x,y);ctx.rotate(an);ctx.fillStyle=`rgba(140,240,255,${Math.min(1,compassT)})`;ctx.beginPath();ctx.moveTo(8,0);ctx.lineTo(-4,-5);ctx.lineTo(-1,0);ctx.lineTo(-4,5);ctx.fill();ctx.restore()}}}
 function drawPet(tm){const p=petNow(),art=MON_ART[p.kind+'1'];if(!art)return;const im=art[Math.floor(PET.t*4)%2],X=Math.round(PET.x-im.width/2-camX),Y=Math.round(PET.y-im.height-camY-(p.kind==='bat'?6+Math.sin(PET.t*5)*2:0));ctx.save();ctx.imageSmoothingEnabled=true;ctx.globalCompositeOperation='multiply';softAO(ctx,PET.x-camX,PET.y-camY,im.width*.7,.6);ctx.restore();ctx.drawImage(im,X,Y);if(PET.heart>0){ctx.fillStyle='#ff8fbf';const hx=Math.round(PET.x-camX),hy=Y-6-Math.round((1.5-PET.heart)*6);ctx.fillRect(hx-2,hy,2,2);ctx.fillRect(hx+1,hy,2,2);ctx.fillRect(hx-1,hy+2,3,1)}}
 function drawPeb(){const im=IMG.npc_peb;const h=PEB.hop>0?Math.abs(Math.sin(PEB.hop*8))*5:0,X=Math.round(PEB.x-32-camX),Y=Math.round(PEB.y-62-camY-h);ctx.save();ctx.imageSmoothingEnabled=true;ctx.globalCompositeOperation='multiply';softAO(ctx,PEB.x-camX,PEB.y-camY,20,.7);ctx.restore();if(im)ctx.drawImage(im,PEB.row*64,0,64,64,X,Y,64,64);else{ctx.fillStyle='#7a8a6a';ctx.fillRect(X+24,Y+44,16,14)}if(PEB.hop>0){ctx.fillStyle='rgba(170,245,255,.95)';ctx.fillRect(X+31,Y+30,2,4);ctx.fillRect(X+30,Y+31,4,2)}}
@@ -1429,7 +1429,7 @@ function drawDrop(d,tm){const x=Math.round(d.x-camX),y=Math.round(d.y-camY-3-Mat
   else{ctx.save();ctx.globalCompositeOperation='lighter';glow(x,y-4,10,d.item.rar>=2?'255,210,90':d.item.rar?'120,170,255':'255,255,255',.5);ctx.restore();ctx.drawImage(wepIcon(d.item,1),x-6,y-10)}}
 function drawDark(tm){if(!dark||dark.width!==VW||dark.height!==VH){dark=document.createElement('canvas');dark.width=VW;dark.height=VH;darkG=dark.getContext('2d')}const g=darkG;g.globalCompositeOperation='source-over';g.clearRect(0,0,VW,VH);g.fillStyle=(M&&M.darkA!=null)?`rgba(27,19,48,${M.darkA})`:(S.boss?'rgba(27,19,48,.5)':'rgba(27,19,48,.82)');g.fillRect(0,0,VW,VH);g.globalCompositeOperation='destination-out';
   const hole=(x,y,r,a=1)=>{const gr=g.createRadialGradient(x,y,0,x,y,r);gr.addColorStop(0,`rgba(0,0,0,${a})`);gr.addColorStop(.55,`rgba(0,0,0,${a*.8})`);gr.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=gr;g.fillRect(x-r,y-r,r*2,r*2)};
-  hole(P.x-camX,P.y-26-camY,(M.darkFloor?70:132)+25*((S.lampLv||0)+Math.min(1,S.lamp||0))+16*((typeof tool==='function'?tool('lantern'):1)-1)+Math.sin(tm*6)*2);if(PEB.on)hole(PEB.x-camX,PEB.y-20-camY,40,.6);for(const c of M.crystals)if(c.awake)hole(c.x-camX,c.y-14-camY,70,.9);for(const s of M.stones)hole(s.x-camX,s.y-30-camY,S.stones.includes(s.id)?70:34,.8);for(const [x,y] of M.glows)hole(x-camX,y-camY,50,.8);for(const e of M.exits)hole(e.x-camX,e.y-camY,34,.7);
+  hole(...c234Hole(P.x-camX,P.y-26-camY),(M.darkFloor?70:132)+25*((S.lampLv||0)+Math.min(1,S.lamp||0))+16*((typeof tool==='function'?tool('lantern'):1)-1)+Math.sin(tm*6)*2);if(PEB.on)hole(PEB.x-camX,PEB.y-20-camY,40,.6);for(const c of M.crystals)if(c.awake)hole(c.x-camX,c.y-14-camY,70,.9);for(const s of M.stones)hole(s.x-camX,s.y-30-camY,S.stones.includes(s.id)?70:34,.8);for(const [x,y] of M.glows)hole(x-camX,y-camY,50,.8);for(const e of M.exits)hole(e.x-camX,e.y-camY,34,.7);
   ctx.drawImage(dark,0,0)}
 
 // ===== start =====
@@ -3804,7 +3804,7 @@ function g9bSeats(){return ((G9B&&G9B.benches)||[]).flatMap(([cx,by,w])=>[{x:Mat
 function g9bSit(seat){if(!P)return;P.x=seat.x;P.y=seat.by+16;P.sit={x:P.x,y:P.y,seatY:seat.by+1,side:seat.side,t0:performance.now()};P.path=null;P.act=null;P.target=null;P.moving=false;try{P.row=rowFor(0,1)}catch(e){}}
 function g9bSitTick(){const s=P&&P.sit;if(!s||typeof s!=='object')return;if(!M||!M.g9b){P.sit=null;return}const fresh=performance.now()-s.t0<300;   // the step that brought the player here still counts as 'moving' for a moment
   if((P.path&&P.path.length)||(!fresh&&(P.moving||Math.hypot(P.x-s.x,P.y-s.y)>.6)))P.sit=null;else{P.x=s.x;P.y=s.y}}
-{const _dpS=drawPlayer;drawPlayer=function(){let s=P&&P.sit;if(typeof s!=='object')s=null;if(s&&s.free&&((P.path&&P.path.length)||(performance.now()-s.t0>300&&P.moving)||Math.hypot(P.x-s.x,P.y-s.y)>6)){P.sit=null;s=null}if(s){ctx.save();ctx.beginPath();ctx.rect(P.x-44-camX,s.seatY-92-camY,88,89);ctx.clip();ctx.translate(0,s.seatY-P.y+G9SIT.drop);try{return _dpS.apply(this,arguments)}finally{ctx.restore()}}return _dpS.apply(this,arguments)}}
+{const _dpS=drawPlayer;drawPlayer=function(){let s=P&&P.sit;if(typeof s!=='object')s=null;if(s&&s.free&&((P.path&&P.path.length)||(performance.now()-s.t0>300&&P.moving)||Math.hypot(P.x-s.x,P.y-s.y)>6)){P.sit=null;s=null}if(s){ctx.save();ctx.beginPath();const t5=c234SitTop(s);ctx.rect(P.x-44-camX,(t5===null?s.seatY-92:t5)-camY,88,t5===null?89:s.seatY-3-t5);ctx.clip();ctx.translate(0,s.seatY-P.y+G9SIT.drop);try{return _dpS.apply(this,arguments)}finally{ctx.restore()}}return _dpS.apply(this,arguments)}}
 {const cv=document.getElementById('c');if(cv)cv.addEventListener('pointerup',ev=>{try{if(!M||!M.g9b||PAUSE||DLG)return;const r=cv.getBoundingClientRect(),dpr=devicePixelRatio||1,wx=(ev.clientX-r.left)*dpr/SC+camX,wy=(ev.clientY-r.top)*dpr/SC+camY;
     for(const [cx,by,w] of (G9B.benches||[])){if(Math.abs(wx-cx)<w/2+4&&wy>by-42&&wy<by+6){ev.stopImmediatePropagation();window._farmTapT=performance.now();const seat=g9bSeats().find(q=>q.cx===cx&&q.by===by&&q.side===(wx<cx?'L':'R'));g9WalkThen(seat.x,seat.by+16,()=>g9bSit(seat));return}}}catch(e){}},true)}
 // ================= 1.28 THUMB CONTROLS like the phone games Thai players know (RoV): stick on the left, round buttons on the right, map top right =================
@@ -7756,10 +7756,10 @@ const C234={st:'off',gen:0,owner:null,why:'',app:null,res:null,script:null,cnt:{
   on(){return this.st==='ready'&&S===this.owner}};
 function c234Who(s){if(!s)return 'nosave';const g=(s.gender194==='f'||s.gender194==='m')?s.gender194:genderOf194(s.kid);if(g!=='f')return 'gender';
   const a=Number(s.age);return Number.isInteger(a)&&a>=6&&a<=9?'':'age'}
-function c234Off(why){const was=C234.st;C234.gen++;C234.st='off';C234.app=null;C234.res=null;C234.why=why||'';
+function c234Off(why){const was=C234.st;C234.gen++;C234.st='off';C234.app=null;C234.res=null;C234.why=why||'';C234.A=null;C234.pack=null;C234.feet=null;
   if(was==='ready'){C234.cnt.cleanup++;try{if(window.Char2)Char2.trim()}catch(e){}}c234Paint()}
 function c234Fail(g,why){if(g!==C234.gen||C234.st!=='loading')return;C234.st='failed';C234.why=why;C234.app=null;C234.cnt.fail++;c234Paint()}
-function c234Ready(app){C234.app=app;C234.st='ready';C234.why='';c234Paint()}
+function c234Ready(app){C234.app=app;C234.A=Char2.actor();C234.st='ready';C234.why='';c234Paint()}
 function c234Script(){if(C234.script)return C234.script;C234.cnt.script++;   // char2.js is asked for once per page, never again
   C234.script=new Promise(res=>{if(window.Char2)return res(true);const e=document.createElement('script');e.src='char2.js';e.onload=()=>res(!!window.Char2);e.onerror=()=>res(false);document.head.appendChild(e)});
   return C234.script}
@@ -7772,7 +7772,7 @@ function c234Sync(){const s=S;
   c234Script().then(ok=>{if(!live())return null;if(!ok){c234Fail(g,'script');return null}C234.cnt.load++;return Char2.load('c2-pack.json')})
     .then(r=>{if(!r||!live())return;const f=Array.isArray(r.failed)?r.failed.slice():['?'];C234.res={ready:r.ready===true,failed:f};
       if(r.ready!==true||f.length){c234Fail(g,'files: '+(f.join(' ')||'not ready'));return}
-      return c234Look(s,g,r.pack,live)})
+      C234.pack=r.pack;return c234Look(s,g,r.pack,live)})
     .catch(e=>{if(live())c234Fail(g,'error: '+String(e&&e.message||e).slice(0,80))})}
 // 2.35 (Codex T39-N1): an S.char2 already in the save is used only when it is EXACTLY what Char2 reads back — Char2 (G3) quietly puts a default in
 // for a wrong gender / part / colour; here any such field, an unknown key, or a `from` the migration never writes = "malformed" (plan 6.1) → failed,
@@ -7801,7 +7801,7 @@ function c234Migrate(s){   // pure: reads a COPY of the save, never changes s ·
 // 2.36 (Codex T39-N4): the on/off button shows "on" the game's own way (aria-pressed → the pressed style / the active frame art) — 2.35 put dark
 // text on an inline gold background that the frame art (border-image … fill) painted over, so the label was hard to read
 function c234StText(){if(!S)return '';const tx=(a,b)=>LANG==='en'?b:a,who=c234Who(S),on=S.char2On===true,st=C234.owner===S?C234.st:'off';
-  const ST={off:tx('ปิด','off'),loading:tx('กำลังโหลด…','loading…'),ready:tx('พร้อม · ขั้น G4.1 ยังไม่วาดตัวใหม่','ready · step G4.1 does not draw it yet'),failed:tx('ใช้ไม่ได้ · ใช้ตัวเดิม','unavailable · original character')};
+  const ST={off:tx('ปิด','off'),loading:tx('กำลังโหลด…','loading…'),ready:tx('พร้อม · วาดตัวใหม่ในเกม (ขั้น G4.2)','ready · drawn in the game (step G4.2)'),failed:tx('ใช้ไม่ได้ · ใช้ตัวเดิม','unavailable · original character')};
   const why=who?tx('ยังไม่มีตัวแบบนี้','No v2 character for this player yet'):(on&&st==='failed')?(C234.why==='save look unreadable'?tx('ลุครุ่น 2 ในเซฟนี้อ่านไม่ได้','The v2 look in this save cannot be read'):C234.why):'';
   return tx('สถานะ: ','State: ')+(on?ST[st]:ST.off)+(why?' · '+why:'')}
 function c234Paint(){const e=document.getElementById('c234st');if(e)e.textContent=c234StText()}
@@ -7815,4 +7815,34 @@ function c234Row(h2){const tx=(a,b)=>LANG==='en'?b:a,who=c234Who(S),on=S.char2On
   const c=$('c234clr');if(c)c.onclick=()=>{if(!c.dataset.armed){c.dataset.armed='1';c.textContent=tx('แตะอีกครั้งเพื่อยืนยัน · ลบลุครุ่น 2 ของเซฟนี้','Tap again to confirm · removes this save\'s v2 look');return}
     S.char2On=false;delete S.char2;save();c234Sync();closeModal();openGM()}}
 {const _og234=openGM;openGM=function(){const r=_og234.apply(this,arguments);try{const h2=document.querySelector('#modal h2');if(h2&&gmOn())c234Row(h2)}catch(e){}return r}}
+// ================= 2.37 G4.2 (Claude · plan G4_0_GAME_INTEGRATION_PLAN.md v1.2 §4 §5 · table rows W1–W5 + W11 · G4.1 closed 9 Nov after Codex T39) =================
+// The player is drawn with Char2 while C234 is ready for this save. In-place edits in the old code — each calls a helper below that gives the OLD value
+// (or false → the old drawImage runs) when Char2 is not in use, so with the flag off the game is the old one: W1 drawPlayer, the two body draws (normal ·
+// wading) · W2 the wading clip · W3 the blurred-shadow branch → the Pilot ellipse (softAO and the g9b branch unchanged) · W5 the sitting clip (top +
+// height; translate and state unchanged) · W11 the cave light hole. W4 (see-through α .5) is untouched: Char2.draw reads the context's α (one composite).
+// Time (plan 4.1): one Char2.tick per game step in the update wrapper below, not while PAUSE or P.dead · nothing ticks while drawing.
+// Lantern (plan 5): held only when DARK() && LKID() · power 100 (S.lamp > warn) · 10 (0 < S.lamp ≤ warn, glass 35 %) · 0 (S.lamp ≤ 0: still held,
+// glass dark) · no S.lamp = 1 (the game's own default) · no emissive pass in G4 (the glass is y-sorted with the body and can be covered).
+// A Char2 draw that returns false, or a held lantern without a light point, is a bug → 'failed' from that frame on (old character + GM label), never blank.
+C234.A=null;C234.pack=null;C234.feet=null;C234.step=0;C234.n={call:0,body:0,tick:0,shadow:0,hole:0,sit:0};
+function c234Use(){return C234.on()&&!!C234.A&&!!C234.app&&!!C234.pack&&!!window.Char2}
+function c234Hold(){return DARK()&&LKID()}
+function c234Lamp(){const w=LAMP_CFG(S.age).warn,l=S.lamp===undefined?1:Number(S.lamp);return l>w?100:l>0?10:0}
+function c234DC(){const h=HOUSES[S.house]||HOUSES[0],dc={house:h.id};if(c234Hold())dc.held={id:C234.pack.lantern.id,on:true,lit:true,power:c234Lamp()};return dc}
+function c234Broke(why){if(C234.st!=='ready')return;C234.gen++;C234.st='failed';C234.why=why;C234.app=null;C234.A=null;C234.feet=null;C234.cnt.fail++;c234Paint()}
+function c234Body(X,Y,F,yoff){   // W1/W2: feet = (X+F/2, Y+F−2+yoff) = the old sprite's feet (lunge and rounding included) · s = 1 under the game's transform
+  if(!c234Use())return false;C234.n.call++;const fx=X+F/2,fy=Y+F-2+yoff,dc=c234DC();
+  if(!Char2.draw(ctx,C234.app,dc,C234.A,fx,fy,1)){c234Broke('draw');return false}
+  const m=ctx.getTransform();C234.feet={x:(m.a*fx+m.c*fy+m.e)/SC,y:(m.b*fx+m.d*fy+m.f)/SC,step:C234.step,dc};C234.n.body++;return true}   // feet on screen (sit translate included)
+function c234Clip(X,Y,F,cut){return c234Use()?[X+F/2-48,Y+F-2-94,96,96-cut]:[X,Y,F,F-cut]}   // W2: the 96 cell, bottom edge Y+F−cut = the old one
+function c234Shadow(){if(!c234Use())return false;const ro=C234.pack.render_offset[C234.A.dir]||0;   // W3 (inside the game's save/restore)
+  ctx.globalCompositeOperation='source-over';ctx.globalAlpha=1;ctx.fillStyle='rgba(20,18,40,.35)';ctx.beginPath();ctx.ellipse(Math.round(P.x-camX)+ro,Math.round(P.y-camY),14,3,0,0,7);ctx.fill();C234.n.shadow++;return true}
+function c234SitTop(s){if(!c234Use())return null;const b=Char2.anchor(C234.A,'box',c234DC());if(!b){c234Broke('anchor box');return null}   // W5: top of the clip
+  C234.n.sit++;return s.seatY+G9SIT.drop-(94-b[1])-4}
+function c234Hole(x,y){const f=C234.feet;if(!c234Use()||!f||f.step!==C234.step)return [x,y];   // W11: from the feet the body was drawn at THIS frame
+  if(f.dc.held){const L=Char2.light(C234.A,f.dc);if(!L){c234Broke('light');return [x,y]}C234.n.hole++;return [f.x+L.x,f.y+L.y]}   // light() includes the offset
+  const b=Char2.anchor(C234.A,'body',f.dc);if(!b){c234Broke('anchor body');return [x,y]}C234.n.hole++;
+  return [f.x+(C234.pack.render_offset[C234.A.dir]||0),f.y-(94-b[1])+4]}   // body, e −4 (the old 26 = 30 − 4)
+{const _u237=update;update=function(dt){const r=_u237.apply(this,arguments);try{if(c234Use()){C234.step++;
+  if(!PAUSE&&!(P&&P.dead)){Char2.tick(C234.A,dt*1000,{dir:C234.pack.dirs[P.row],moving:!!P.moving,holding:c234Hold()});C234.n.tick++}}}catch(e){}return r}}
 </script></body></html>

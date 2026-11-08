@@ -6,6 +6,7 @@
 //   INJECT=img@13 → 4 px painted on the game canvas at (560,230), clear of the HUD (screenshot and canvas must both differ)
 //   INJECT=hud@13 → 4 px painted on the game canvas at (100,100), UNDER the HUD (the screenshot cannot see it; the canvas file must)
 //   ZOOM=1 / ZOOM=0.75 → the game's own zoom set before load (localStorage la-zoom) · unset = the game's default
+//   PATCH='{"char2On":true}' → merged into the synthetic save (G4.2 M5 flag on) · TAGP=1 → tag the player's draw lines without a patch (flag off side)
 //   SCEN=<file.json> → another scenario: a plain list [[map, steps], …] or {intro?, cases:[{map, steps, stay?}, …]} (M5 doors, intro)
 // A step: {s} idle seconds (virtual) · {at:[tx,ty]} put the kid on a tile centre · {walk:[dx,dy], via?:[tx,ty]} the game's own path
 // (findPath), via = a tile the path must cross (else the run fails) · {exit:'id'} walk to that exit · {tap:'#dlg'} click like a finger.
@@ -17,6 +18,7 @@ const vclock = require('./vclock.js');
 const BASE = process.env.BASE || 'http://127.0.0.1:8780', OUT = process.env.OUT;
 if (!OUT) { console.error('OUT= is required (a folder outside the repo)'); process.exit(2); }
 const INJ = /^(pos|img|hud)@(\d+)$/.exec(process.env.INJECT || '') || null;
+const PATCH = process.env.PATCH ? JSON.parse(process.env.PATCH) : null, TAGP = !!PATCH || process.env.TAGP === '1'; // G4.2 M5: fields merged into the synthetic save (e.g. {"char2On":true}) · tag the player's draw lines
 const ZOOM = process.env.ZOOM ? +process.env.ZOOM : null; // null = the game's default (a new player gets 75 % on entering capital, L2657)
 // 16:59:00 in Bangkok on 6 Nov 2026 → 17:00 (day → dusk) is crossed at virtual 60 s
 const EPOCH = Date.UTC(2026, 10, 6, 9, 59, 0), SEED = 20261106, FPS = 60;
@@ -64,10 +66,12 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
   while (await ev(() => !!document.getElementById('load'))) { await frames(6); bootFrames += 6; if (bootFrames > 3600) throw new Error('loading screen never closed'); }
   await frames(6);
   // a synthetic save, the same boot as test_risk_monthly.js · then pin LITE / fpsChecks / eco (plan §8.1)
-  await ev(([sv, intro]) => { const d = Store.all(); d.slots = [newSave(sv)]; d.cur = 0; Store.put(d); S = d.slots[0]; S.seen = intro ? {} : { intro: 1 }; startGame();
+  await ev(([sv, intro, patch]) => { const d = Store.all(); d.slots = [Object.assign(newSave(sv), patch || {})]; d.cur = 0; Store.put(d); S = d.slots[0]; S.seen = intro ? {} : { intro: 1 }; startGame();
     document.querySelectorAll('#cr,#title,#picker').forEach(e => e.classList.add('hide')); DLG = null; try { closeModal() } catch (e) {}
-    LITE = false; fpsChecks = 6; S.eco = false; }, [SAVE, INTRO]);
+    LITE = false; fpsChecks = 6; S.eco = false; }, [SAVE, INTRO, PATCH]);
   await settle();
+  if (TAGP) await ev(() => { const o = drawPlayer; drawPlayer = function () { window.__VC_P = 1; try { return o.apply(this, arguments); } finally { window.__VC_P = 0; } };
+    window.__VC_TAG = (im) => (window.__VC_P ? '|P' : '') + (im && typeof PS === 'object' && (im === PS.shW || im === PS.shS) ? '|S' : ''); });
   const startV = await ev(() => __VC.now());
 
   const state = () => ev(() => {
@@ -79,7 +83,8 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
       cam: [camX, camY, SC, VW, VH], ZOOM, LITE, fpsChecks, eco: !!S.eco, PAUSE: !!PAUSE,
       S: pk(S, ['hp', 'lamp', 'lampLv', 'house', 'age', 'kid', 'coins', 'lv', 'exp']), Shash: hs(JSON.stringify(S)), seen: Object.keys(S.seen || {}).sort(),
       dlg: DLG ? { i: DLG.i, n: DLG.lines.length, open: !dlg.classList.contains('hide') } : null,
-      msg: msg ? msg.textContent : null, timers: __VC.timers(), vcErrors: __VC.errors() };
+      msg: msg ? msg.textContent : null, timers: __VC.timers(), vcErrors: __VC.errors(),
+      ...(window.__VC_TAG && typeof C234 === 'object' ? { c2: { st: C234.st, why: C234.why, n: Object.assign({}, C234.n || {}) } } : {}) };
   });
 
   const cps = [];
@@ -122,7 +127,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
     }
   }
   const vcErrors = await ev(() => __VC.errors());
-  const run = { base: BASE, args: ARGS, inject: process.env.INJECT || null, zoom: ZOOM, epoch: EPOCH, seed: SEED, save: SAVE, intro: INTRO, scenHash: SCEN_HASH,
+  const run = { base: BASE, args: ARGS, inject: process.env.INJECT || null, zoom: ZOOM, ...(PATCH || TAGP ? { patch: PATCH, tagp: TAGP } : {}), epoch: EPOCH, seed: SEED, save: SAVE, intro: INTRO, scenHash: SCEN_HASH,
     expected: EXPECTED, checkpoints: cps.length, complete: cps.length === EXPECTED, fontStatus, bootFrames, startV,
     endV: await ev(() => __VC.now()), frames: await ev(() => __VC.frames()), blocked: [...blocked].sort(),
     pageErrors, vcErrors, consoleErrors: consoleErr.slice(0, 20), requests: requests.length, chromium: browser.version(), ms: Date.now() - t0 };
