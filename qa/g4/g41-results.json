@@ -1,322 +1,762 @@
 {
- "stage": "G4.1",
- "game": "2.34",
- "branch": "claude/g4-char2",
- "base": "main eb60c65 (2.33)",
- "date": "2026-11-08",
- "env": [
-  "chromium Google Chrome for Testing 153.0.8010.12 ",
-  "node v22.23.4",
-  "main eb60c650922e55c7d81b27b59f180e1f42c367b2",
-  "branch 2e2fc7451cf4cbf9511daadf021bcde2b6f8642b"
- ],
- "raw": "outside the repo (scratchpad)",
- "replay": {
-  "default": {
-   "checkpoints": 24,
-   "bad": 0,
-   "pxTotal": 0,
-   "canvasPxTotal": 0,
-   "stateTotal": 0,
-   "drawDiff": 0,
-   "metaOk": true
+ "v2_34": {
+  "stage": "G4.1",
+  "game": "2.34",
+  "branch": "claude/g4-char2",
+  "base": "main eb60c65 (2.33)",
+  "date": "2026-11-08",
+  "env": [
+   "chromium Google Chrome for Testing 153.0.8010.12 ",
+   "node v22.23.4",
+   "main eb60c650922e55c7d81b27b59f180e1f42c367b2",
+   "branch 2e2fc7451cf4cbf9511daadf021bcde2b6f8642b"
+  ],
+  "raw": "outside the repo (scratchpad)",
+  "replay": {
+   "default": {
+    "checkpoints": 24,
+    "bad": 0,
+    "pxTotal": 0,
+    "canvasPxTotal": 0,
+    "stateTotal": 0,
+    "drawDiff": 0,
+    "metaOk": true
+   },
+   "intro": {
+    "checkpoints": 8,
+    "bad": 0,
+    "pxTotal": 0,
+    "canvasPxTotal": 0,
+    "stateTotal": 0,
+    "drawDiff": 0,
+    "metaOk": true
+   },
+   "zoom1": {
+    "checkpoints": 24,
+    "bad": 0,
+    "pxTotal": 0,
+    "canvasPxTotal": 0,
+    "stateTotal": 0,
+    "drawDiff": 0,
+    "metaOk": true
+   }
   },
-  "intro": {
-   "checkpoints": 8,
-   "bad": 0,
-   "pxTotal": 0,
-   "canvasPxTotal": 0,
-   "stateTotal": 0,
-   "drawDiff": 0,
-   "metaOk": true
-  },
-  "zoom1": {
-   "checkpoints": 24,
-   "bad": 0,
-   "pxTotal": 0,
-   "canvasPxTotal": 0,
-   "stateTotal": 0,
-   "drawDiff": 0,
-   "metaOk": true
-  }
- },
- "suites234": {
-  "test_234_flag": {
-   "tail": "errors 0",
-   "log_sha16": "91dd8a4745684903"
-  },
-  "test_234_files": {
-   "tail": "errors 0",
-   "log_sha16": "834c8bef4816c13d"
-  },
-  "test_234_save": {
-   "tail": "errors 0",
-   "log_sha16": "1cb62280973cc904"
-  },
-  "test_234_net": {
-   "tail": "errors 0",
-   "log_sha16": "01ba522d87787fba",
-   "results": {
-    "off": {
-     "st": "off",
-     "n": 18,
-     "pe": 0
-    },
-    "on": {
-     "st": "ready",
-     "n": 18,
-     "pe": 0
-    },
-    "fields": [
-     "a",
-     "appearance169",
-     "ec",
-     "h",
-     "hc",
-     "k",
-     "lv",
-     "m",
-     "n",
-     "pd",
-     "r",
-     "ti",
-     "w",
-     "x",
-     "y",
-     "z"
-    ],
-    "pd": "1,1,1,1,1,4,3,2",
-    "diff": [],
-    "ps": [
-     {
-      "g": true,
-      "l": true
+  "suites234": {
+   "test_234_flag": {
+    "tail": "errors 0",
+    "log_sha16": "91dd8a4745684903"
+   },
+   "test_234_files": {
+    "tail": "errors 0",
+    "log_sha16": "834c8bef4816c13d"
+   },
+   "test_234_save": {
+    "tail": "errors 0",
+    "log_sha16": "1cb62280973cc904"
+   },
+   "test_234_net": {
+    "tail": "errors 0",
+    "log_sha16": "01ba522d87787fba",
+    "results": {
+     "off": {
+      "st": "off",
+      "n": 18,
+      "pe": 0
      },
-     {
-      "g": true,
-      "l": true
-     }
+     "on": {
+      "st": "ready",
+      "n": 18,
+      "pe": 0
+     },
+     "fields": [
+      "a",
+      "appearance169",
+      "ec",
+      "h",
+      "hc",
+      "k",
+      "lv",
+      "m",
+      "n",
+      "pd",
+      "r",
+      "ti",
+      "w",
+      "x",
+      "y",
+      "z"
+     ],
+     "pd": "1,1,1,1,1,4,3,2",
+     "diff": [],
+     "ps": [
+      {
+       "g": true,
+       "l": true
+      },
+      {
+       "g": true,
+       "l": true
+      }
+     ]
+    }
+   }
+  },
+  "M1": {
+   "judge": "qa/g4/suites_cmp.py v3.2.1",
+   "alldone": "DONE suites=115 runs=250 manifest=a500bd5da5c35d36 suites_sha=dd56bbb3c9293652 env_sha=7aa4ff30ab09f398 target_sha=4d39acb37ac6df80",
+   "summary": {
+    "suites": 115,
+    "legacy": 32,
+    "runs": 250,
+    "bothPass": 111,
+    "bad": [
+     "test_227_swipe"
+    ],
+    "undecided": [],
+    "metaOk": true,
+    "verdict": "regression",
+    "exit": 1
+   },
+   "notPassRuns": [
+    [
+     "test_170_swordsman",
+     "main",
+     "1",
+     "1",
+     "49d9d04966941ee6"
+    ],
+    [
+     "test_222_tk_pack",
+     "branch",
+     "1",
+     "1",
+     "b3ac0ceb584c5ddc"
+    ],
+    [
+     "test_222_tk_pack",
+     "main",
+     "1",
+     "1",
+     "32e786adb320c882"
+    ],
+    [
+     "test_227_swipe",
+     "branch",
+     "1",
+     "1",
+     "ef1bc210004e93c9"
+    ],
+    [
+     "test_170_swordsman",
+     "main",
+     "2",
+     "1",
+     "49d9d04966941ee6"
+    ],
+    [
+     "test_170_swordsman",
+     "branch",
+     "2",
+     "1",
+     "46fa88eacc4d2071"
+    ],
+    [
+     "test_170_swordsman",
+     "branch",
+     "3",
+     "1",
+     "46fa88eacc4d2071"
+    ],
+    [
+     "test_222_tk_pack",
+     "main",
+     "2",
+     "1",
+     "32e786adb320c882"
+    ],
+    [
+     "test_222_tk_pack",
+     "branch",
+     "2",
+     "1",
+     "b3ac0ceb584c5ddc"
+    ],
+    [
+     "test_222_tk_pack",
+     "main",
+     "3",
+     "1",
+     "32e786adb320c882"
+    ],
+    [
+     "test_222_tk_pack",
+     "branch",
+     "3",
+     "1",
+     "b3ac0ceb584c5ddc"
+    ]
+   ],
+   "interrupted": "runner stopped by the 2 h background limit at 71/115 suites (02:19) · resumed with the same OUT and target (accepted, no exit 2)",
+   "diag_test_227": {
+    "loadprobe": {
+     "main": {
+      "n": 30,
+      "hung": 0,
+      "med": 1448,
+      "max": 1573,
+      "over10s": 0
+     },
+     "branch": {
+      "n": 30,
+      "hung": 0,
+      "med": 1431,
+      "max": 1519,
+      "over10s": 0
+     },
+     "stalls": [],
+     "pe": {
+      "main": 0,
+      "branch": 0
+     },
+     "crash": null
+    },
+    "reruns_outside_OUT": [
+     [
+      "main",
+      "1",
+      "0",
+      "39s"
+     ],
+     [
+      "branch",
+      "1",
+      "0",
+      "39s"
+     ],
+     [
+      "branch",
+      "2",
+      "0",
+      "40s"
+     ],
+     [
+      "main",
+      "2",
+      "0",
+      "39s"
+     ],
+     [
+      "main",
+      "3",
+      "0",
+      "39s"
+     ],
+     [
+      "branch",
+      "3",
+      "0",
+      "40s"
+     ],
+     [
+      "branch",
+      "4",
+      "0",
+      "40s"
+     ],
+     [
+      "main",
+      "4",
+      "0",
+      "39s"
+     ],
+     [
+      "main",
+      "5",
+      "0",
+      "40s"
+     ],
+     [
+      "branch",
+      "5",
+      "0",
+      "39s"
+     ],
+     [
+      "branch",
+      "6",
+      "0",
+      "40s"
+     ],
+     [
+      "main",
+      "6",
+      "0",
+      "40s"
+     ],
+     [
+      "main",
+      "7",
+      "0",
+      "40s"
+     ],
+     [
+      "branch",
+      "7",
+      "0",
+      "40s"
+     ],
+     [
+      "branch",
+      "8",
+      "0",
+      "39s"
+     ],
+     [
+      "main",
+      "8",
+      "0",
+      "39s"
+     ]
     ]
    }
   }
  },
- "M1": {
-  "judge": "qa/g4/suites_cmp.py v3.2.1",
-  "alldone": "DONE suites=115 runs=250 manifest=a500bd5da5c35d36 suites_sha=dd56bbb3c9293652 env_sha=7aa4ff30ab09f398 target_sha=4d39acb37ac6df80",
-  "summary": {
-   "suites": 115,
-   "legacy": 32,
-   "runs": 250,
-   "bothPass": 111,
-   "bad": [
-    "test_227_swipe"
-   ],
-   "undecided": [],
-   "metaOk": true,
-   "verdict": "regression",
-   "exit": 1
+ "v2_35": {
+  "game": "2.35",
+  "code": "4ba6784",
+  "after": "Codex T39 v0.1 (codex/t39-review-g41 @ cdc4de9)",
+  "suites234": {
+   "test_234_flag": {
+    "tail": "errors 0",
+    "log_sha16": "c297123019ba67e1"
+   },
+   "test_234_files": {
+    "tail": "errors 0",
+    "log_sha16": "748a4843ee1785e9"
+   },
+   "test_234_save": {
+    "tail": "errors 0",
+    "log_sha16": "203a33e1f924f6b6",
+    "K": [
+     [
+      "valid",
+      "ready",
+      true
+     ],
+     [
+      "valid · no from",
+      "ready",
+      true
+     ],
+     [
+      "valid · optional slots left out",
+      "ready",
+      true
+     ],
+     [
+      "future v 3",
+      "failed",
+      true
+     ],
+     [
+      "a string",
+      "failed",
+      true
+     ],
+     [
+      "an array",
+      "failed",
+      true
+     ],
+     [
+      "another set",
+      "failed",
+      true
+     ],
+     [
+      "gender 42",
+      "failed",
+      true
+     ],
+     [
+      "gender left out",
+      "failed",
+      true
+     ],
+     [
+      "gender m on the girl base",
+      "failed",
+      true
+     ],
+     [
+      "base not in the pack",
+      "failed",
+      true
+     ],
+     [
+      "parts an array",
+      "failed",
+      true
+     ],
+     [
+      "parts left out",
+      "failed",
+      true
+     ],
+     [
+      "parts.hair unknown",
+      "failed",
+      true
+     ],
+     [
+      "parts.hair null",
+      "failed",
+      true
+     ],
+     [
+      "parts.head unknown",
+      "failed",
+      true
+     ],
+     [
+      "parts extra key",
+      "failed",
+      true
+     ],
+     [
+      "color null",
+      "failed",
+      true
+     ],
+     [
+      "color.hair an array",
+      "failed",
+      true
+     ],
+     [
+      "color.iris left out",
+      "failed",
+      true
+     ],
+     [
+      "color.skin unknown",
+      "failed",
+      true
+     ],
+     [
+      "color extra key",
+      "failed",
+      true
+     ],
+     [
+      "extra top-level key",
+      "failed",
+      true
+     ],
+     [
+      "from unknown",
+      "failed",
+      true
+     ]
+    ]
+   },
+   "test_234_net": {
+    "tail": "errors 0",
+    "log_sha16": "01ba522d87787fba"
+   }
   },
-  "notPassRuns": [
+  "K_on_2_34_code": {
+   "errors": 15,
+   "wrongReady": [
+    "gender 42",
+    "gender left out",
+    "parts an array",
+    "parts left out",
+    "parts.hair unknown",
+    "parts.hair null",
+    "parts.head unknown",
+    "parts extra key",
+    "color null",
+    "color.hair an array",
+    "color.iris left out",
+    "color.skin unknown",
+    "color extra key",
+    "extra top-level key",
+    "from unknown"
+   ]
+  },
+  "migration_roundtrip_exact": "7/7 save shapes of M (outside the repo check)",
+  "replay": {
+   "default": {
+    "checkpoints": 24,
+    "bad": 0,
+    "pxTotal": 0,
+    "canvasPxTotal": 0,
+    "stateTotal": 0,
+    "drawDiff": 0,
+    "metaOk": true
+   },
+   "intro": {
+    "checkpoints": 8,
+    "bad": 0,
+    "pxTotal": 0,
+    "canvasPxTotal": 0,
+    "stateTotal": 0,
+    "drawDiff": 0,
+    "metaOk": true
+   },
+   "zoom1": {
+    "checkpoints": 24,
+    "bad": 0,
+    "pxTotal": 0,
+    "canvasPxTotal": 0,
+    "stateTotal": 0,
+    "drawDiff": 0,
+    "metaOk": true
+   }
+  },
+  "test_227_isolated_round2": [
    [
-    "test_170_swordsman",
     "main",
     "1",
-    "1",
-    "49d9d04966941ee6"
+    "0",
+    "42s"
    ],
    [
-    "test_222_tk_pack",
     "branch",
     "1",
-    "1",
-    "b3ac0ceb584c5ddc"
+    "0",
+    "41s"
    ],
    [
-    "test_222_tk_pack",
-    "main",
-    "1",
-    "1",
-    "32e786adb320c882"
-   ],
-   [
-    "test_227_swipe",
     "branch",
-    "1",
-    "1",
-    "ef1bc210004e93c9"
+    "2",
+    "0",
+    "38s"
    ],
    [
-    "test_170_swordsman",
     "main",
     "2",
-    "1",
-    "49d9d04966941ee6"
+    "0",
+    "39s"
    ],
    [
-    "test_170_swordsman",
-    "branch",
-    "2",
-    "1",
-    "46fa88eacc4d2071"
+    "main",
+    "3",
+    "0",
+    "38s"
    ],
    [
-    "test_170_swordsman",
     "branch",
     "3",
-    "1",
-    "46fa88eacc4d2071"
+    "0",
+    "38s"
    ],
    [
-    "test_222_tk_pack",
-    "main",
-    "2",
-    "1",
-    "32e786adb320c882"
-   ],
-   [
-    "test_222_tk_pack",
     "branch",
-    "2",
-    "1",
-    "b3ac0ceb584c5ddc"
+    "4",
+    "0",
+    "39s"
    ],
    [
-    "test_222_tk_pack",
     "main",
-    "3",
-    "1",
-    "32e786adb320c882"
+    "4",
+    "0",
+    "39s"
    ],
    [
-    "test_222_tk_pack",
+    "main",
+    "5",
+    "0",
+    "37s"
+   ],
+   [
     "branch",
-    "3",
-    "1",
-    "b3ac0ceb584c5ddc"
+    "5",
+    "0",
+    "40s"
+   ],
+   [
+    "branch",
+    "6",
+    "0",
+    "37s"
+   ],
+   [
+    "main",
+    "6",
+    "0",
+    "39s"
+   ],
+   [
+    "main",
+    "7",
+    "0",
+    "37s"
+   ],
+   [
+    "branch",
+    "7",
+    "0",
+    "38s"
+   ],
+   [
+    "branch",
+    "8",
+    "0",
+    "38s"
+   ],
+   [
+    "main",
+    "8",
+    "0",
+    "39s"
+   ],
+   [
+    "main",
+    "9",
+    "0",
+    "38s"
+   ],
+   [
+    "branch",
+    "9",
+    "0",
+    "39s"
+   ],
+   [
+    "branch",
+    "10",
+    "0",
+    "38s"
+   ],
+   [
+    "main",
+    "10",
+    "0",
+    "37s"
+   ],
+   [
+    "main",
+    "11",
+    "0",
+    "38s"
+   ],
+   [
+    "branch",
+    "11",
+    "0",
+    "39s"
+   ],
+   [
+    "branch",
+    "12",
+    "0",
+    "40s"
+   ],
+   [
+    "main",
+    "12",
+    "0",
+    "39s"
+   ],
+   [
+    "main",
+    "13",
+    "0",
+    "38s"
+   ],
+   [
+    "branch",
+    "13",
+    "0",
+    "39s"
+   ],
+   [
+    "branch",
+    "14",
+    "0",
+    "38s"
+   ],
+   [
+    "main",
+    "14",
+    "0",
+    "39s"
+   ],
+   [
+    "main",
+    "15",
+    "0",
+    "38s"
+   ],
+   [
+    "branch",
+    "15",
+    "0",
+    "37s"
+   ],
+   [
+    "branch",
+    "16",
+    "0",
+    "39s"
+   ],
+   [
+    "main",
+    "16",
+    "0",
+    "39s"
+   ],
+   [
+    "main",
+    "17",
+    "0",
+    "36s"
+   ],
+   [
+    "branch",
+    "17",
+    "0",
+    "39s"
+   ],
+   [
+    "branch",
+    "18",
+    "0",
+    "38s"
+   ],
+   [
+    "main",
+    "18",
+    "0",
+    "37s"
+   ],
+   [
+    "main",
+    "19",
+    "0",
+    "39s"
+   ],
+   [
+    "branch",
+    "19",
+    "0",
+    "39s"
+   ],
+   [
+    "branch",
+    "20",
+    "0",
+    "39s"
+   ],
+   [
+    "main",
+    "20",
+    "0",
+    "38s"
    ]
   ],
-  "interrupted": "runner stopped by the 2 h background limit at 71/115 suites (02:19) · resumed with the same OUT and target (accepted, no exit 2)",
-  "diag_test_227": {
-   "loadprobe": {
-    "main": {
-     "n": 30,
-     "hung": 0,
-     "med": 1448,
-     "max": 1573,
-     "over10s": 0
-    },
-    "branch": {
-     "n": 30,
-     "hung": 0,
-     "med": 1431,
-     "max": 1519,
-     "over10s": 0
-    },
-    "stalls": [],
-    "pe": {
-     "main": 0,
-     "branch": 0
-    },
-    "crash": null
-   },
-   "reruns_outside_OUT": [
-    [
-     "main",
-     "1",
-     "0",
-     "39s"
-    ],
-    [
-     "branch",
-     "1",
-     "0",
-     "39s"
-    ],
-    [
-     "branch",
-     "2",
-     "0",
-     "40s"
-    ],
-    [
-     "main",
-     "2",
-     "0",
-     "39s"
-    ],
-    [
-     "main",
-     "3",
-     "0",
-     "39s"
-    ],
-    [
-     "branch",
-     "3",
-     "0",
-     "40s"
-    ],
-    [
-     "branch",
-     "4",
-     "0",
-     "40s"
-    ],
-    [
-     "main",
-     "4",
-     "0",
-     "39s"
-    ],
-    [
-     "main",
-     "5",
-     "0",
-     "40s"
-    ],
-    [
-     "branch",
-     "5",
-     "0",
-     "39s"
-    ],
-    [
-     "branch",
-     "6",
-     "0",
-     "40s"
-    ],
-    [
-     "main",
-     "6",
-     "0",
-     "40s"
-    ],
-    [
-     "main",
-     "7",
-     "0",
-     "40s"
-    ],
-    [
-     "branch",
-     "7",
-     "0",
-     "40s"
-    ],
-    [
-     "branch",
-     "8",
-     "0",
-     "39s"
-    ],
-    [
-     "main",
-     "8",
-     "0",
-     "39s"
-    ]
-   ]
-  }
+  "M1": "paired run of 115 suites on 4ba6784 with runner v3.3 trace: in progress (report v1.2)"
  }
 }
