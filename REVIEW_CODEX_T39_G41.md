@@ -1,3 +1,48 @@
+# T39 · ฉบับ 0.2 — เครื่องติดข้อ 4; ยังไม่ใช่ฉบับยืนยัน 1.0
+
+วันที่ 8 พ.ย. 2569 (Asia/Bangkok) · ต่อจาก `cdc4de9` ตาม HANDOFF งานบนสุดที่ `claude/g2-pilot @c57384f` · เป้าตรวจเกม 2.35 `claude/g4-char2 @b3d3c1f` (โค้ด `4ba6784`) เทียบ main `eb60c65`
+
+**หยุดตามข้อเตรียมเครื่อง 5 ของ HANDOFF** หลังข้อ 4 เปิด Chromium หน้าว่างไม่สำเร็จ ไม่ลอง flags/ทางอ้อมและไม่รัน browser tests ต่อ ส่งสถานะเป็นฉบับ 0.2 ตามที่เจ้าของอนุญาต ไม่อ้างว่าได้ตรวจยืนยันเกม 2.35 แล้ว
+
+## ผลเตรียมเครื่องรอบนี้
+
+- Fetch ใน sandbox เริ่มแรกติด proxy: `fatal: unable to access 'https://github.com/phoneyjung/Leah-PP.git/': Failed to connect to proxy port 8080 after 0 ms: Could not connect to server` เมื่อใช้สิทธิ์ network ของเครื่องมือกับคำสั่งเดิม fetch สำเร็จ exit 0 และอ่าน HANDOFF @c57384f ได้ จึงเดินหน้าข้อเตรียมเครื่อง
+- ข้อ 1: ติดตั้ง `puppeteer@25.8.0` ด้วย `PUPPETEER_SKIP_DOWNLOAD=1` สำเร็จ exit 0; ตรวจ version จาก package.json = **25.8.0**; `require('puppeteer')` พิมพ์ `puppeteer ok`
+- ข้อ 2: พบ `/usr/bin/chromium` · version **Chromium 151.0.7922.173 built on Debian GNU/Linux 13 (trixie)**
+- ข้อ 3: ไม่ต้องดาวน์โหลด Chrome เพิ่ม เพราะมี binary แล้ว
+- ข้อ 4: เรียก binary ด้วย `--headless=new --no-sandbox --user-data-dir=<โฟลเดอร์ชั่วคราว> --dump-dom about:blank` → **exit 133 (Trace/breakpoint trap)**; HTML stdout **0 bytes** ไม่ผ่านเกณฑ์ `<html>`
+
+error แรกจาก Chromium stderr:
+
+```text
+[14016:14016:1108/072939.517746:ERROR:third_party/crashpad/crashpad/util/linux/socket.cc:45] setsockopt: Operation not permitted (1)
+```
+
+นี่พิสูจน์ว่า Chromium เริ่มไม่ได้ใน command sandbox ของรอบนี้ ไม่ได้พิสูจน์ว่าโค้ดเกมผิดหรือเครือข่าย Git ใช้ไม่ได้ ไม่ได้ทดลองลด sandbox/ปิด crashpad หรือเปลี่ยน browser flags เพื่อข้ามจุดนี้ เพราะ HANDOFF กำหนดให้หยุด
+
+Dependency และ log เก็บที่ `/var/tmp/t39-v02/` นอก repository; ตอนเริ่มติดตั้งใช้ `/tmp/t39-v10/` แต่ตรวจพบ `.git` marker ที่ `/tmp` จึงย้ายออกทั้งหมดก่อนส่ง ไม่ commit dependency/log/HTML/profile/package.json ใด ๆ (การย้ายที่เก็บไม่ใช่การลองรันทดสอบใหม่)
+
+## ยังไม่รัน / ยังไม่ยืนยัน
+
+| รายการที่ขอในฉบับ 1.0 | สถานะรอบนี้ |
+|---|---|
+| อ่าน G4_1_REPORT.md ฉบับ 1.1 ข้อ 4 และตรวจ diff 2.35 หลังเตรียมเครื่อง | ยังไม่ดำเนินต่อ เพราะหยุดที่ด่านเครื่อง |
+| test_234_flag / files / save / net | **ยังไม่รันทั้ง 4** ไม่มี errors 0 หรือ exit ที่รับรองได้ |
+| save ส่วน O พร้อม MAIN_PORT | **ยังไม่รัน** ไม่ใช้การ skip เป็นผลผ่าน |
+| K 24 แถว (ready 3 / failed 21), same ทุกแถว | **ยังไม่วัด** |
+| malformed ภายในที่ Codex เพิ่มอย่างน้อย 3 แบบ | **ยังไม่รัน** |
+| test_227 ด้วย runner v3.3 RERUNS=4 และ OUT.trace | **ยังไม่รัน** ไม่มี trace ชุดใหม่ของ Codex |
+| loadprobe N=30 / ชุดเกมคู่ ≥5 ชุด / race และ GM | **ยังไม่รัน** |
+| ปิด N1/N2/N3 | **ยังไม่ยืนยันการแก้** ข้อสังเกตฉบับ 0.1 ด้านล่างเป็นของเกม 2.34 ไม่ใช่ข้อกล่าวหาว่าเกม 2.35 ยังมีอยู่ |
+| ปัญหาใหม่ สูง/กลาง/ต่ำ ในเกม 2.35 | **ยังไม่ประเมิน** ไม่รายงานเป็น 0/0/0 |
+| ตัดสิน test_227 / รับ G4.1 เพื่อเริ่ม G4.2 | **ยังตัดสินไม่ได้ / ยังไม่รับ** ต้องรันต่อเมื่อเครื่องพร้อม และพิจารณาหลักฐาน trace/ผลคู่ 2.35 ของ Claude ประกอบ |
+
+ส่งเฉพาะรายงานนี้และ 1 บรรทัด CODEX_STATUS.md บน branch เดิมต่อจาก cdc4de9; ไม่แก้ไฟล์ Claude/เกม/ภาพ ไม่แตะเซฟจริง ไม่ใช้เครดิต ไม่ push main/force push
+
+---
+
+## ประวัติฉบับ 0.1 — เกม 2.34 (เก็บหลักฐานเดิม ไม่ใช่ผลตรวจ 2.35)
+
 # T39 · ตรวจ G4.1 · ฉบับ 0.1 (อ่านโค้ด; ยังไม่รับ G4.1)
 
 วันที่ 8 พ.ย. 2569 · Codex · เครดิต 0 · ตามคำสั่งเจ้าของให้ตรวจเครื่องก่อน และส่งฉบับอ่านโค้ดเมื่อ Git ใช้ได้แต่ browser ยังไม่พร้อม
