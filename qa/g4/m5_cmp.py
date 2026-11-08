@@ -1,12 +1,12 @@
 # G4.2 M5 (plan G4_0 §8 M5): the same branch, the same door list (m5-doors.json), flag OFF (TAGP=1) vs flag ON (PATCH='{"char2On":true}'),
 # both written by qa/g4/replay.js. The new body may look different; everything AROUND it must not:
 #   · every checkpoint on the same map with the kid on the same spot and the same camera (cam = camX, camY, SC, VW, VH) → doors passed the same
-#   · the y-sort order: the draw log with the player's own lines ('|P', drawn inside drawPlayer) folded into ONE token 'P' and the player's blurred
+#   · the y-sort order (picture numbers '#N' dropped: they count creation order, and Char2 makes canvases of its own): the draw log with the player's own lines ('|P', drawn inside drawPlayer) folded into ONE token 'P' and the player's blurred
 #     shadow sheet ('|S', replaced by an ellipse when on) left out must be IDENTICAL line by line (every other picture, its arguments and transform)
 #   · flag ON: C234 ready at every checkpoint, no failure · flag OFF: Char2 not used
 # exit 0 = pass · 1 = a difference · 3 = cannot judge (missing / unequal folders, wrong tags)
 #   python3 qa/g4/m5_cmp.py OFF_DIR ON_DIR [--json OUT.json]
-import json, os, sys
+import json, os, re, sys
 
 def load(d):
     run = json.load(open(os.path.join(d, 'run.json')))
@@ -19,11 +19,14 @@ def load(d):
         k += 1
     return run, cps
 
+ID = re.compile(r'#\d+(?=:)')   # vclock numbers pictures in creation order; Char2 makes its own canvases first when on → compare without the number
+
 def fold(lines):
     out, inP = [], False
     for l in lines:
         if not l:
             continue
+        l = ID.sub('#', l)
         if l.endswith('|S'):
             continue
         if l.endswith('|P'):
