@@ -3,12 +3,31 @@
 
 ---
 
-## งาน T39 ต่อ · ฉบับยืนยัน 1.0 (เกม 2.35 · รันเบราว์เซอร์ · ตัดสิน test_227) · สถานะ: รอ Codex
+## งาน T39 ต่อ · ฉบับยืนยัน 1.0 (เกม 2.35 · รันเบราว์เซอร์ · ตัดสิน test_227) · สถานะ: รอ Codex (เตรียมเครื่องรอบ 3)
+- **รอบ 3 · 8 พ.ย. 21:4x (หลัง Codex ฉบับ 0.2 @ `0be131f`):** อ่านแล้ว ทั้งสองครั้งที่ติดเป็นเรื่องสิทธิ์ของ sandbox ไม่ใช่เกม
+  - `mkdir /var/tmp/...` → Read-only: ใน sandbox แบบ workspace-write เขียนได้แค่โฟลเดอร์งานกับ `/tmp` → **ใช้ `/tmp/t39/` เป็นที่เก็บผลดิบ, dependency, สำเนาโค้ด** (เจ้าของอนุญาต) · `.git` ที่อยู่เหนือ `/tmp` ไม่เกี่ยว ไม่มีอะไรใน `/tmp` ถูก commit เข้า Leah-PP · ห้ามรัน `git add`/`commit` ใน `/tmp`
+  - Chromium exit 133 `setsockopt: Operation not permitted`: เมื่อ sandbox ปิดเน็ต คำสั่งที่ใช้ socket ถูกห้าม · ชุดทดสอบต้องใช้ socket ภายในเครื่องอย่างเดียว (Chrome คุยกับ puppeteer · `python3 -m http.server --bind 127.0.0.1`) ไม่ออกอินเทอร์เน็ต → **ต้องเปิดเน็ตของ sandbox ให้งานนี้** (เจ้าของเปิดเอง · ใน CLI/config = `sandbox_workspace_write.network_access = true` หรือโหมดสิทธิ์เต็มเฉพาะงานนี้ · หน้าจออื่น: บอกเจ้าของชื่อสวิตช์ที่คุณเห็น)
+  - `.git` ใน sandbox อ่านอย่างเดียว → **ไม่ใช้ `git worktree`** · ทำสำเนาโค้ดด้วย `git archive` (อ่าน `.git` อย่างเดียว) ตามข้อ 0 ด้านล่าง
+  - ด่านตรวจเครื่องใหม่ (แทนข้อ 4 เดิม): เปิด Chrome **ผ่าน puppeteer แบบเดียวกับชุดทดสอบ** + เปิดหน้าจาก server ในเครื่อง (ข้อ 0) · `--dump-dom` เดิมไม่ใช้แล้ว (ชุดทดสอบไม่ได้เรียก Chrome แบบนั้น)
+  - **0. เตรียม (ทำครั้งเดียว · ทุกอย่างอยู่ใน `/tmp/t39/`):**
+    ```
+    R=<โฟลเดอร์ repo Leah-PP>; T=/tmp/t39; mkdir -p $T/main $T/b235 $T/b234 $T/pp $T/out
+    git -C $R fetch origin main claude/g4-char2   # ถ้า fetch เขียน .git ไม่ได้ ใช้ ref ที่มีอยู่แล้ว
+    git -C $R archive eb60c65 | tar -x -C $T/main
+    git -C $R archive 959b1b1 | tar -x -C $T/b235      # เกม 2.35 (โค้ด = 4ba6784) + รายงาน 1.2
+    git -C $R archive a6b4be4 | tar -x -C $T/b234      # เกม 2.34 (ไว้ลองว่าชุด K จับได้ · ทางเลือก)
+    cd $T/pp && npm init -y >/dev/null && PUPPETEER_SKIP_DOWNLOAD=1 npm i puppeteer@25.8.0   # หรือคัดลอก node_modules เดิมจาก /var/tmp/t39-v02/pp
+    export NODE_PATH=$T/pp/node_modules CHROME_EXE=/usr/bin/chromium
+    (cd $T/b235 && python3 -m http.server 8791 --bind 127.0.0.1 >$T/srv.b.log 2>&1 &) ; (cd $T/main && python3 -m http.server 8790 --bind 127.0.0.1 >$T/srv.m.log 2>&1 &)
+    node -e "require('puppeteer').launch({executablePath:process.env.CHROME_EXE,args:['--no-sandbox']}).then(async b=>{const p=await b.newPage();await p.goto('http://localhost:8791/?gm');console.log('ok',await b.version(),await p.title());await b.close()})"
+    ```
+    ผ่าน = พิมพ์ `ok Chrome/151… Lantern Academy` · (Claude ซ้อมข้อ 0 + runner `ONLY="test_227"` จากโฟลเดอร์ `git archive` บนเครื่อง Claude แล้ว: ok · runner exit 0 · ตัวตัดสิน exit 0 metaOk true) · ตก → หยุด แจ้ง error บรรทัดแรก + บอกว่าเน็ตของ sandbox เปิดแล้วหรือยัง (ส่งฉบับ 0.3 ได้) · ไม่ต้องหาทางอ้อม (ไม่เพิ่ม flag ที่ชุดทดสอบไม่ได้ใช้)
+  - **รันต่อจากข้อ 0:** ชุด `test_234_*` รันจาก `$T/b235` (`PORT=8791 MAIN_PORT=8790`) · runner: `cd $T/b235 && MAIN_DIR=$T/main BRANCH_DIR=$T/b235 OUT=$T/out/t227 ONLY="test_227" RERUNS=4 bash qa/g4/suites_pair.sh` (runner เปิด server 8790/8791 เอง → ปิด server ของข้อ 0 ก่อน) · โฟลเดอร์จาก `git archive` ไม่มี HEAD → `target.txt` ช่อง HEAD ว่างได้ (ตัวตัดสินใช้ path + แฮชไฟล์ ไม่ใช้ HEAD) · บอก commit ในรายงานแทน
 - **วันที่:** 8 พ.ย. 2569 · ไม่ใช้เครดิต · ไม่เกิน ~3 ชั่วโมง (ไม่ต้องรันชุดเกมครบ 115 ชุดเอง)
 - **อัปเดต 8 พ.ย. 15:2x:** ชุดเกมคู่ 115 ชุดของ Claude บน 2.35 จบแล้ว = **exit 0** (242 รอบ · ผ่านคู่ 112 · ตกเท่ากันทั้งสองฝั่ง 3 ชุดเดิม · ใหม่ 0 · `test_227` ผ่าน 1/1 ทั้งสองฝั่ง · trace 12 ไฟล์ error หน้าเว็บ 0) → `G4_1_REPORT.md` **ฉบับ 1.2** ข้อ 2.1 บน `claude/g4-char2` @ `959b1b1` (โค้ดเกมเดิม `4ba6784` · เปลี่ยนแค่รายงาน + `g41-results.json`) · สาเหตุ `test_227` รอบ 2.34 ยังไม่พบ — ยังขอให้ Codex ตัดสินตามข้อเดิม
-- **โค้ดที่ตรวจ:** `claude/g4-char2` @ `b3d3c1f` (โค้ดเกม = `4ba6784` เกม 2.35 · `b3d3c1f` เพิ่มรายงานฉบับ 1.1 + ผล) · **คู่เทียบ:** `main` @ `eb60c65` · **ส่ง:** branch เดิม `codex/t39-review-g41` ต่อจาก `cdc4de9` · แก้ `REVIEW_CODEX_T39_G41.md` เป็นฉบับ 1.0 + 1 บรรทัดใหม่ `CODEX_STATUS.md`
-- **อ่านก่อน:** `G4_1_REPORT.md` ฉบับ 1.1 ข้อ 4 (Claude ตอบ N1–N3 + test_227) · `git diff a6b4be4 4ba6784` (index.html: `c234Exact` + VERSION · sw.js: CACHE v237 · test_234_save K 5 → 24 · test_234_files แฮชทุกไบต์ · `qa/g4/suites_pair.sh` v3.3 + `qa/g4/trace_preload.js`)
-- **เตรียมเครื่อง (เจ้าของอนุญาตติดตั้งนอก repo · ไม่ commit node_modules):**
+- **โค้ดที่ตรวจ:** `claude/g4-char2` @ `959b1b1` (โค้ดเกม = `4ba6784` เกม 2.35 · หลังนั้นเพิ่มแค่รายงานฉบับ 1.1 → 1.2 + ผล) · **คู่เทียบ:** `main` @ `eb60c65` · **ส่ง:** branch เดิม `codex/t39-review-g41` ต่อจาก `cdc4de9` · แก้ `REVIEW_CODEX_T39_G41.md` เป็นฉบับ 1.0 + 1 บรรทัดใหม่ `CODEX_STATUS.md`
+- **อ่านก่อน:** `G4_1_REPORT.md` ฉบับ 1.2 ข้อ 2.1 (ชุดเกมคู่ 2.35) และข้อ 4 (Claude ตอบ N1–N3 + test_227) · `git diff a6b4be4 4ba6784` (index.html: `c234Exact` + VERSION · sw.js: CACHE v237 · test_234_save K 5 → 24 · test_234_files แฮชทุกไบต์ · `qa/g4/suites_pair.sh` v3.3 + `qa/g4/trace_preload.js`)
+- **เตรียมเครื่อง รอบ 1–2 (แทนด้วยข้อ 0 ของรอบ 3 ด้านบน · เก็บไว้เป็นประวัติ):**
   1. `mkdir -p ~/pp && cd ~/pp && npm init -y >/dev/null && PUPPETEER_SKIP_DOWNLOAD=1 npm i puppeteer@25.8.0` แล้ว `export NODE_PATH=~/pp/node_modules`
   2. หาเบราว์เซอร์ที่มี: `ls -d ~/.cache/ms-playwright/chromium*/chrome-linux*/chrome ~/.cache/puppeteer/chrome/*/chrome-linux64/chrome /opt/pw-browsers/chromium*/chrome-linux*/chrome 2>/dev/null; command -v chromium chromium-browser google-chrome`
   3. ไม่เจอ → ติดตั้ง (ต้องใช้เน็ต): `cd ~/pp && npx puppeteer browsers install chrome` (หรือ `npx playwright install chromium`)
