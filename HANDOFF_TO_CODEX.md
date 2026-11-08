@@ -3,6 +3,46 @@
 
 ---
 
+## งาน T40 · ตรวจ G4.2 (เกม 2.37 · วาดตัวผู้เล่นด้วยตัวละครรุ่น 2 · W1–W5 W11 + ตะเกียง) + N4 (2.36) · สถานะ: รอ Codex
+- **วันที่:** 9 พ.ย. 2569 · ไม่ใช้เครดิต · ไม่เกิน ~3 ชั่วโมง (ไม่ต้องรันชุดเกมครบ 115 ชุดเอง · ใช้ `ONLY=` ได้)
+- **โค้ดที่ตรวจ:** `claude/g4-char2` @ `761ee62` (โค้ดเกม = `fb286c4` เกม 2.37 · `deea224` แก้ตัวตัดสิน M5 · หลังนั้นเพิ่มแค่รายงาน + ผล) · **คู่เทียบ:** `main` @ `eb60c65` · **ส่ง:** branch ใหม่ `codex/t40-review-g42` แตกจาก `claude/g2-pilot` (commit ที่มีงานนี้) · ส่ง `REVIEW_CODEX_T40_G42.md` + 1 บรรทัด `CODEX_STATUS.md`
+- **อ่านก่อน:** `G4_2_REPORT.md` (บน `claude/g4-char2`) · แผน `G4_0_GAME_INTEGRATION_PLAN.md` ฉบับ 1.2 ข้อ 4 (4.1 4.2 4.3 แถว W1–W5 W11) ข้อ 5 ข้อ 8 (M3 M5 M6) · `git diff 715bc84 fb286c4 -- index.html sw.js` (บรรทัดเดิม 4 บรรทัด + บล็อก `2.37 G4.2` ท้าย `C234`) · ชุด `test_237_draw.js` · เครื่องมือ `qa/g4/replay.js` `vclock.js` (`PATCH` `TAGP`) `m5_cmp.py` `fps.js` (ด่าน Char2 วาดจริง) · ผล `qa/g4/g42-results.json`
+- **0. เตรียมเครื่อง (แบบรอบ 3 ของ T39 ที่ผ่านแล้ว · ทุกอย่างอยู่ใน `/tmp/t40/` · เน็ตของ sandbox เปิด · ห้าม `git add`/`commit` ใน `/tmp`):**
+  ```
+  R=<โฟลเดอร์ repo Leah-PP>; T=/tmp/t40; mkdir -p $T/main $T/b237 $T/b236 $T/pp $T/out
+  git -C $R fetch origin main claude/g4-char2   # ถ้า fetch เขียน .git ไม่ได้ ใช้ ref ที่มีอยู่แล้ว
+  git -C $R archive eb60c65 | tar -x -C $T/main
+  git -C $R archive 761ee62 | tar -x -C $T/b237     # เกม 2.37 (โค้ด = fb286c4) + เครื่องมือ deea224 + รายงาน
+  git -C $R archive 715bc84 | tar -x -C $T/b236       # เกม 2.36 (ไว้ดู N4 · ทางเลือก)
+  cd $T/pp && npm init -y >/dev/null && PUPPETEER_SKIP_DOWNLOAD=1 PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm i puppeteer@25.8.0 playwright@1.63.0
+  export NODE_PATH=$T/pp/node_modules CHROME_EXE=/usr/bin/chromium
+  (cd $T/b237 && python3 -m http.server 8791 --bind 127.0.0.1 >$T/srv.b.log 2>&1 &) ; (cd $T/main && python3 -m http.server 8790 --bind 127.0.0.1 >$T/srv.m.log 2>&1 &)
+  node -e "require('puppeteer').launch({executablePath:process.env.CHROME_EXE,args:['--no-sandbox']}).then(async b=>{const p=await b.newPage();await p.goto('http://localhost:8791/?gm');console.log('ok',await b.version(),await p.title());await b.close()})"
+  node -e "require('playwright').chromium.launch({executablePath:process.env.CHROME_EXE}).then(async b=>{console.log('pw ok',b.version());await b.close()})"
+  ```
+  ผ่าน = `ok … Lantern Academy` และ `pw ok …` (`replay.js` กับ `fps.js` ใช้ playwright · ชุดทดสอบใช้ puppeteer) · (Claude ซ้อมข้อ 0 จาก `git archive 761ee62` บนเครื่อง Claude แล้ว: ok · pw ok · `test_237_draw` errors 0) · ตก → หยุด แจ้ง error บรรทัดแรก ส่งฉบับ 0.x · ไม่ต้องหาทางอ้อม
+- **รัน (ผลดิบไว้ใน `$T/out` · ทุกคำสั่งรันจาก `$T/b237`):**
+  1. `PORT=8791 node test_237_draw.js` → errors 0 · `test_234_flag` `test_234_files` `test_234_save` (**ใส่ `MAIN_PORT=8790`** ห้ามข้ามส่วน O) `test_234_net` (`PORT=8791`) → errors 0 ทั้ง 4
+  2. **N4 (2.36/2.37):** `test_234_flag` ส่วน F วัด contrast บนพิกเซลจริงของปุ่ม GM ตอนพร้อม ต้อง ≥ 4.5 · ดูภาพปุ่มที่ 844×390 (ทางเลือก: รันชุดเดียวกันกับ `$T/b236` ที่พอร์ตอื่น)
+  3. **M5:** สำหรับ `Z` = `0.75` และ `1`:
+     `ZOOM=$Z SCEN=qa/g4/m5-doors.json TAGP=1 BASE=http://127.0.0.1:8791 OUT=$T/out/m5/off.$Z node qa/g4/replay.js`
+     `ZOOM=$Z SCEN=qa/g4/m5-doors.json PATCH='{"char2On":true}' BASE=http://127.0.0.1:8791 OUT=$T/out/m5/on.$Z node qa/g4/replay.js`
+     `python3 -I -B qa/g4/m5_cmp.py $T/out/m5/off.$Z $T/out/m5/on.$Z` → ต้อง exit 0 · ฝังความต่างของคุณเองในสำเนาโฟลเดอร์ผลอย่างน้อย 2 แบบ (เช่น ย้ายบรรทัดวาดของผู้เล่น · แก้ตำแหน่งกล้อง) ต้อง exit 1
+  4. **M1:** `replay.js` ค่าเริ่ม (ไม่ตั้ง `PATCH` `TAGP`) กับ main (`BASE=…8790`) และ branch (`BASE=…8791`) → `python3 -I -B qa/g4/compare.py <main> <branch>` ต้องได้ 0 px · ชุดเกมคู่ที่เลือกเอง ≥ 5 ชุด: ปิด server ของข้อ 0 ก่อน (runner เปิด 8790/8791 เอง) แล้ว `MAIN_DIR=$T/main BRANCH_DIR=$T/b237 OUT=$T/out/pair ONLY="…" bash qa/g4/suites_pair.sh` + `python3 -I -B qa/g4/suites_cmp.py $T/out/pair` → ห้าม exit 1 (exit 3 = รันซ้ำด้วย `RERUNS=4` ใน OUT เดิม)
+  5. **M6 (ถ้าเวลาพอ ~20 นาที · server ข้อ 0 เปิดอยู่):**
+     `TARGETS='[{"label":"main","url":"http://127.0.0.1:8790"},{"label":"main-control","url":"http://127.0.0.1:8790"},{"label":"branch-off","url":"http://127.0.0.1:8791"},{"label":"branch-on","url":"http://127.0.0.1:8791","patch":{"char2On":true}}]' node qa/g4/fps.js $T/out/m6.json`
+     → verdict pass ทุกฉาก (หรือรันฉากเดียวพอรายงาน)
+  6. **อ่านโค้ด:** แก้ในที่เฉพาะแถว W1 W2 W3 W5 W11 ไหม · ธงปิดได้ค่าเดิมทุกจุดไหม · `Char2.draw` false / `light()` null → failed + ตัวเดิมในเฟรมเดียวกัน · tick ครั้งเดียวต่อ step ไม่ tick ตอน PAUSE/P.dead · พลังตะเกียง 100/10/0 ตามข้อ 5 · เท้าใน W11 ผ่าน transform ของท่านั่ง/ลุยน้ำถูกไหม
+- **ตอบ:**
+  1. ตรงแผนข้อ 4–5 ไหม (สูตร · จุดแก้ · ทางสำรอง)
+  2. M3 M5 M6 ผ่านตามเกณฑ์ไหม · N4 ปิดได้ไหม
+  3. **ชุดเกมคู่ของ Claude = exit 3** (`G4_2_REPORT.md` ข้อ 2.1): `test_122_spots` (ชุดเก่า) เข้าห้องทันใน branch 1/5 · main 0/5 · รอบ G4.1 main 1/4 · branch 0/4 · Claude อ่านว่าเป็นความแกว่งเดิมของชุด ไม่ใช่ถอยหลัง — เห็นด้วยไหม (ถ้าเวลาพอ: `ONLY="test_122" RERUNS=4` ในเครื่องคุณ)
+  4. W11 ยังไม่มีแผนที่ใช้ (`cavemouth` `hunt1` = bright) ทดสอบโดยปิด bright ในหน้าทดสอบ — รับได้ไหม หรือควรทำอย่างอื่น
+  5. ปัญหาใหม่ (สูง/กลาง/ต่ำ) · รับ G4.2 เพื่อเริ่ม G4.3 ไหม
+  - (ขนาดตัวใหม่ 83 px เทียบฉากเดิมเป็นเรื่องที่เจ้าของตัดสิน ไม่ต้องตัดสิน · รายงานได้ถ้าเห็นปัญหาการชนหรือบัง)
+- **ห้าม:** แก้ไฟล์ของ Claude หรือไฟล์ภาพ · แก้ `index.html` `sw.js` `char2.js` `c2-*` · push `main` · force push · ใช้เครดิต · แตะเซฟจริง · ใส่ผลดิบ/ภาพเต็ม/fixture/node_modules ใน repo
+- **หยุดเมื่อ:** push แล้ว ตอบเจ้าของสั้น ๆ
+
 ## งาน T39 ต่อ · ฉบับยืนยัน 1.0 (เกม 2.35 · รันเบราว์เซอร์ · ตัดสิน test_227) · สถานะ: เสร็จ (9 พ.ย. 2569)
 - **ผล:** `codex/t39-review-g41` @ `ed1ed58` (รวมแล้ว `f422676`) · test_234 4/4 errors 0 · K 24 + เซฟผิดของ Codex 5/5 · ปิด N1–N3 3/3 · สูง 0 กลาง 0 ต่ำ 1 (N4 ปุ่ม GM) · **เสนอรับ G4.1** → `G4_1_REPORT.md` ฉบับ 1.3 ปิด G4.1 · N4 แก้ในเกม 2.36 (`claude/g4-char2` @ `715bc84` · ให้ดูพร้อมงานตรวจ G4.2)
 - **รอบ 3 · 8 พ.ย. 21:4x (หลัง Codex ฉบับ 0.2 @ `0be131f`):** อ่านแล้ว ทั้งสองครั้งที่ติดเป็นเรื่องสิทธิ์ของ sandbox ไม่ใช่เกม
