@@ -1,4 +1,4 @@
-// Claude 2.34 (G4.1 · plan G4_0_GAME_INTEGRATION_PLAN.md v1.2 section 6 + 8 M8 basic · DESIGN_CHAR2_SAVE_MIGRATION.md section 4): the first migration of a save
+// Claude 2.34 → 2.35 after Codex T39 (G4.1 · plan G4_0_GAME_INTEGRATION_PLAN.md v1.2 section 6 + 8 M8 basic · DESIGN_CHAR2_SAVE_MIGRATION.md section 4): the first migration of a save
 // to S.char2 and the way back. Saves are made here (no real save). Girl, age 7, flag on.
 // M  where the colours come from (each colour on its own, the first usable source; `from` = the source of the hair colour):
 //    pd219 valid → pd219 · pd219 broken (a part 0) → next · pd219 with a part the paper-doll set does not have (hair 99): PD219 loaded first / not loaded yet
@@ -7,8 +7,9 @@
 //    for every case: S.char2 v 2 set c2 base kid4 + the expected colours + from · nothing in the stored save until save() · after save() the stored save has it
 //    · "old fields changed 0" is measured on the migration step alone (plan 8 M8: before/after the step, a fixture apart from play): c234Migrate(fixture) on a
 //    deep copy of the case's save, then the fixture compared with that copy field by field (the game itself writes position, missions … while it runs)
-// K  an S.char2 already in the save: a valid one is read, not migrated again (count 0) and not changed · a future one (v 3), a string, an array, another set
-//    → failed "unreadable", S.char2 unchanged after save()
+// K  an S.char2 already in the save: a valid one (also with no `from`, or with the optional slots left out) is read, not migrated again (count 0) and not
+//    changed · a future one (v 3), a string, an array, another set → failed "unreadable", S.char2 unchanged after save() · 2.35 (Codex T39-N1): a v2 look
+//    whose INSIDE is wrong (gender / base / parts / colours / an unknown key / an unknown `from`: anything Char2 would replace with a default) → the same
 // B  the way back: flag off keeps S.char2 · "clear" (flag off + S.char2 removed) → off · flag on again → migrated again from the old fields
 // O  game 2.33 (main) opens a save holding char2 + char2On, plays and saves → both kept (needs MAIN_PORT = a server of main; without it this part is reported 'skipped')
 // Prints one JSON line, then `errors N`.  Run: PORT=8775 [MAIN_PORT=8776] CHROME_EXE=/path/to/chromium node test_234_save.js
@@ -71,7 +72,15 @@ const CASES = [
     }
     // K: an S.char2 already there
     const good = { v: 2, set: 'c2', base: 'kid4', gender: 'f', parts: { hair: 'kid4', eyes: 'kid4', outfit: 'kid4', head: null, face_acc: null, back: null }, color: { hair: 'red', iris: 'blue', skin: 'deep' }, from: 'hc' };
-    for (const [lab, v, wantSt] of [['valid', good, 'ready'], ['future v 3', Object.assign({}, good, { v: 3 }), 'failed'], ['a string', 'kid4', 'failed'], ['an array', [1, 2], 'failed'], ['another set', Object.assign({}, good, { set: 'c9' }), 'failed']]) {
+    const w = (f) => { const c = JSON.parse(JSON.stringify(good)); f(c); return c; };
+    for (const [lab, v, wantSt] of [['valid', good, 'ready'], ['valid · no from', w((c) => { delete c.from; }), 'ready'], ['valid · optional slots left out', w((c) => { delete c.parts.head; delete c.parts.face_acc; delete c.parts.back; }), 'ready'],
+      ['future v 3', Object.assign({}, good, { v: 3 }), 'failed'], ['a string', 'kid4', 'failed'], ['an array', [1, 2], 'failed'], ['another set', Object.assign({}, good, { set: 'c9' }), 'failed'],
+      ['gender 42', w((c) => { c.gender = 42; }), 'failed'], ['gender left out', w((c) => { delete c.gender; }), 'failed'], ['gender m on the girl base', w((c) => { c.gender = 'm'; }), 'failed'],
+      ['base not in the pack', w((c) => { c.base = 'kid9'; }), 'failed'], ['parts an array', w((c) => { c.parts = []; }), 'failed'], ['parts left out', w((c) => { delete c.parts; }), 'failed'],
+      ['parts.hair unknown', w((c) => { c.parts.hair = 'zzz'; }), 'failed'], ['parts.hair null', w((c) => { c.parts.hair = null; }), 'failed'], ['parts.head unknown', w((c) => { c.parts.head = 'zzz'; }), 'failed'],
+      ['parts extra key', w((c) => { c.parts.wings = 'kid4'; }), 'failed'], ['color null', w((c) => { c.color = null; }), 'failed'], ['color.hair an array', w((c) => { c.color.hair = ['black']; }), 'failed'],
+      ['color.iris left out', w((c) => { delete c.color.iris; }), 'failed'], ['color.skin unknown', w((c) => { c.color.skin = 'zzz'; }), 'failed'], ['color extra key', w((c) => { c.color.glow = 'red'; }), 'failed'],
+      ['extra top-level key', w((c) => { c.extra = 1; }), 'failed'], ['from unknown', w((c) => { c.from = 'zzz'; }), 'failed']]) {
       const t = await open(browser); await play(t.p, { char2On: true, gender194: 'f', hc: 1, char2: v }); const ok = await settle(t.p); const s = await snap(t.p);
       await t.p.evaluate(() => save()); const stored = await t.p.evaluate(() => Store.all().slots[0].char2);
       const same = JSON.stringify(stored) === JSON.stringify(v) && JSON.stringify(s.char2) === JSON.stringify(v);

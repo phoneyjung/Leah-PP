@@ -39,9 +39,9 @@ const play = (p, on) => p.evaluate((on) => {
   startGame(); document.querySelectorAll('#cr,#title,#picker').forEach((e) => e.classList.add('hide')); DLG = null; try { closeModal(); } catch (e) {} goMap('plaza');
 }, on);
 const settle = (p, ms) => p.waitForFunction(() => C234.st !== 'loading', { timeout: ms }).then(() => true).catch(() => false);
-// the original look: sheet pixels as a hash, + how many times the old sheets reach the game canvas in ~1 s, + not a white/empty screen
+// the original look: sheet pixels as a hash of EVERY byte (2.35, Codex T39-N3: 2.34 hashed 1 byte in 7), + how many times the old sheets reach the game canvas in ~1 s, + not a white/empty screen
 const look = (p) => p.evaluate(() => new Promise((res) => {
-  const h = (c) => { try { const d = c.getContext ? c.getContext('2d').getImageData(0, 0, c.width, c.height).data : null; if (!d) return 'img:' + (c.src || '').slice(-40); let x = 2166136261; for (let i = 0; i < d.length; i += 7) x = Math.imul(x ^ d[i], 16777619) >>> 0; return c.width + 'x' + c.height + ':' + x; } catch (e) { return 'err'; } };
+  const h = (c) => { try { const d = c.getContext ? c.getContext('2d').getImageData(0, 0, c.width, c.height).data : null; if (!d) return 'img:' + (c.src || '').slice(-40); let x = 2166136261; for (let i = 0; i < d.length; i++) x = Math.imul(x ^ d[i], 16777619) >>> 0; return c.width + 'x' + c.height + ':' + x; } catch (e) { return 'err'; } };
   const DI = CanvasRenderingContext2D.prototype.drawImage; let n = 0;
   CanvasRenderingContext2D.prototype.drawImage = function (im) { if (this.canvas && this.canvas.id === 'c' && (im === PS.stand || im === PS.walk)) n++; return DI.apply(this, arguments); };
   setTimeout(() => { CanvasRenderingContext2D.prototype.drawImage = DI; const c = document.getElementById('c'), d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data; let lit = 0;

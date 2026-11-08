@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.34';
+const VERSION='Lantern Academy 2.35';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -7774,9 +7774,17 @@ function c234Sync(){const s=S;
       if(r.ready!==true||f.length){c234Fail(g,'files: '+(f.join(' ')||'not ready'));return}
       return c234Look(s,g,r.pack,live)})
     .catch(e=>{if(live())c234Fail(g,'error: '+String(e&&e.message||e).slice(0,80))})}
+// 2.35 (Codex T39-N1): an S.char2 already in the save is used only when it is EXACTLY what Char2 reads back — Char2 (G3) quietly puts a default in
+// for a wrong gender / part / colour; here any such field, an unknown key, or a `from` the migration never writes = "malformed" (plan 6.1) → failed,
+// the save untouched, the original character drawn. Allowed: keys v set base gender parts color from · parts = the base's slots (an optional one may be
+// left out = none) · color = hair iris skin, each a colour of that group · from = pd219 appearance169 hcol hc default, or left out.
+function c234Exact(c,a){const po=o=>!!o&&typeof o==='object'&&!Array.isArray(o),only=(o,L)=>Object.keys(o).every(k=>L.includes(k)),G=['hair','iris','skin'];
+  if(!a||!po(c)||!only(c,['v','set','base','gender','parts','color','from'])||c.base!==a.base||c.gender!==a.gender||!po(c.parts)||!po(c.color))return false;
+  if(c.from!==undefined&&!['pd219','appearance169','hcol','hc','default'].includes(c.from))return false;
+  const P=Object.keys(a.parts);return only(c.parts,P)&&P.every(k=>(c.parts[k]===undefined?null:c.parts[k])===a.parts[k])&&only(c.color,G)&&G.every(k=>c.color[k]===a.color[k])}
 function c234Look(s,g,pack,live){const c=s.char2;
   if(c!==undefined){const app=(c&&typeof c==='object'&&!Array.isArray(c)&&c.v===2&&c.set===pack.set)?Char2.look(s):null;
-    if(!app){c234Fail(g,'save look unreadable');return}c234Ready(app);return}
+    if(!app||!c234Exact(c,app)){c234Fail(g,'save look unreadable');return}c234Ready(app);return}
   return ((PD219.ok||PD219.tried)?Promise.resolve():pd219Load().catch(()=>false)).then(()=>{if(!live())return;
     const m=c234Migrate(s);if(!m){c234Fail(g,'no look');return}
     s.char2=m.char2;C234.cnt.migrate++;c234Ready(m.app)})}   // the ONLY write to the save in G4.1 (besides char2On / clear in the GM row)

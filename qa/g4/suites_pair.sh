@@ -15,12 +15,16 @@
 # stand when the runner finishes), so the files that choose HOW a suite is judged (kind) cannot change afterwards without showing ·
 # target.txt = what this OUT measures (both folders, both HEADs, sha of the game files): resuming an OUT with another target is refused
 # (exit 2: use a new OUT).
+# v3.3 (after Codex T39 on test_227): a trace folder NEXT TO the OUT (<OUT>.trace, so the judge's folder is unchanged): both servers' request logs
+# (server.main.log / server.branch.log, one line per request with the time), sys.tsv (one line per run: time, load average, free memory, chrome
+# processes, free /tmp) and, for a run that exits non-zero, <run>.json from trace_preload.js (open/failed requests, page errors, navigation times; it
+# only listens). TRACE=0 turns the preload off; the logs and sys.tsv are always written.
 set -u
 : "${MAIN_DIR:?}" "${BRANCH_DIR:?}" "${OUT:?}"
 HERE=$(cd "$(dirname "$0")" && pwd)
-mkdir -p "$OUT"
-python3 -m http.server 8790 --bind 127.0.0.1 --directory "$MAIN_DIR" >/dev/null 2>&1 & S1=$!
-python3 -m http.server 8791 --bind 127.0.0.1 --directory "$BRANCH_DIR" >/dev/null 2>&1 & S2=$!
+mkdir -p "$OUT"; TD="${OUT%/}.trace"; mkdir -p "$TD"
+python3 -m http.server 8790 --bind 127.0.0.1 --directory "$MAIN_DIR" >/dev/null 2>>"$TD/server.main.log" & S1=$!
+python3 -m http.server 8791 --bind 127.0.0.1 --directory "$BRANCH_DIR" >/dev/null 2>>"$TD/server.branch.log" & S2=$!
 trap 'kill $S1 $S2 2>/dev/null' EXIT
 sleep 1
 # the game files that make the target (index.html, sw.js, every root *.js but the suites): a resumed OUT must measure the same thing
@@ -46,7 +50,10 @@ one() { # one run: $1 suite name · $2 side · $3 run suffix ('' or .2 / .3)
   local n=$1 side=$2 k=$3 dir port t0 t1 e
   [ -f "$OUT/$n.$side$k.exit" ] && return
   if [ "$side" = main ]; then dir=$MAIN_DIR; port=8790; else dir=$BRANCH_DIR; port=8791; fi
-  t0=$(date +%s.%N); (cd "$dir" && PORT=$port OUT_DIR="$OUT/out_$n.$side$k" timeout 300 node "$n.js" > "$OUT/$n.$side$k.log" 2>&1); e=$?; t1=$(date +%s.%N)
+  printf '%s\t%s\t%s\t%s\t%s\t%s\n' "$n.$side$k" "$(date +%T)" "$(cut -d' ' -f1-3 /proc/loadavg)" "$(awk '/MemAvailable/{print $2}' /proc/meminfo)" \
+    "$(pgrep -c -f 'chrome|chromium' 2>/dev/null)" "$(df -k /tmp | awk 'NR==2{print $4}')" >> "$TD/sys.tsv"
+  local pre=""; [ "${TRACE:-1}" = 0 ] || pre="--require $HERE/trace_preload.js"
+  t0=$(date +%s.%N); (cd "$dir" && PORT=$port OUT_DIR="$OUT/out_$n.$side$k" TRACE_FILE="$TD/$n.$side$k.json" NODE_OPTIONS="${NODE_OPTIONS:-} $pre" timeout 300 node "$n.js" > "$OUT/$n.$side$k.log" 2>&1); e=$?; t1=$(date +%s.%N)
   echo "$e $(python3 -c "print(round($t1-$t0,1))")" > "$OUT/$n.$side$k.exit"
   local r=${k#.}
   printf '%s\t%s\t%s\t%s\t%s\n' "$n" "$side" "${r:-1}" "$e" "$(sha256sum "$OUT/$n.$side$k.log" | cut -c1-16)" >> "$OUT/runs.tsv"
