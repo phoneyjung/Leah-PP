@@ -1,0 +1,540 @@
+{
+ "game": "Lantern Academy 2.37",
+ "code": "fb286c4 (+ deea224 M5 judge)",
+ "plan": "G4_0 v1.2 rows W1-W5 W11, gates M3 M5 M6 (+M1)",
+ "suites": {
+  "test_234_flag": "errors 0",
+  "test_234_files": "errors 0",
+  "test_234_save": "errors 0 (MAIN_PORT, O ran: {\"version\": \"Lantern Academy 2.33\", \"on\": true, \"same\": true, \"coins\": 5, \"pe\": 0})",
+  "test_234_net": "errors 0",
+  "test_237_draw": "errors 0",
+  "K": {
+   "rows": 24,
+   "ready": 3,
+   "failed": 21,
+   "same": 24
+  }
+ },
+ "M3_test_237": {
+  "A": {
+   "st": "ready",
+   "frames": 107,
+   "drawn": 107,
+   "c2ok": 107,
+   "old": 0,
+   "feetBad": 0,
+   "walkAnim": 46,
+   "walkFrames": 46,
+   "ticksOne": 105,
+   "pe": 0
+  },
+  "B": {
+   "ok": 8,
+   "distinct": 8
+  },
+  "C": [
+   {
+    "h": 0,
+    "house": "sun",
+    "want": "sun",
+    "n": [
+     345,
+     0,
+     0,
+     0
+    ]
+   },
+   {
+    "h": 1,
+    "house": "wing",
+    "want": "wing",
+    "n": [
+     0,
+     345,
+     0,
+     0
+    ]
+   },
+   {
+    "h": 2,
+    "house": "leaf",
+    "want": "leaf",
+    "n": [
+     0,
+     0,
+     345,
+     0
+    ]
+   },
+   {
+    "h": 3,
+    "house": "flame",
+    "want": "flame",
+    "n": [
+     0,
+     0,
+     0,
+     345
+    ]
+   }
+  ],
+  "G": {
+   "frames": 21,
+   "good": 21,
+   "blur": 0
+  },
+  "I": {
+   "frames": 7,
+   "half": 7
+  },
+  "F": [
+   {
+    "wet": "pool",
+    "frames": 7,
+    "good": 7,
+    "ripple": 7
+   },
+   {
+    "wet": "flower",
+    "frames": 7,
+    "good": 7,
+    "ripple": 7
+   }
+  ],
+  "L": {
+   "pause": 0,
+   "dead": 0,
+   "after": 18
+  },
+  "Ape": 0,
+  "D": [
+   {
+    "map": "capital",
+    "dark": false,
+    "frames": 21,
+    "held": 0,
+    "ok": 21
+   },
+   {
+    "map": "farm",
+    "dark": false,
+    "frames": 21,
+    "held": 0,
+    "ok": 21
+   },
+   {
+    "map": "cavemouth",
+    "dark": true,
+    "frames": 21,
+    "held": 21,
+    "ok": 21
+   },
+   {
+    "map": "hunt1",
+    "dark": true,
+    "frames": 21,
+    "held": 21,
+    "ok": 21
+   }
+  ],
+  "E": {
+   "E": [
+    {
+     "lab": "0",
+     "power": 0,
+     "want": 0
+    },
+    {
+     "lab": "w-e",
+     "power": 10,
+     "want": 10
+    },
+    {
+     "lab": "w",
+     "power": 10,
+     "want": 10
+    },
+    {
+     "lab": "w+e",
+     "power": 100,
+     "want": 100
+    },
+    {
+     "lab": "1",
+     "power": 100,
+     "want": 100
+    },
+    {
+     "lab": "none",
+     "power": 100,
+     "want": 100
+    }
+   ],
+   "glass": {
+    "0": 14843,
+    "10": 18391,
+    "100": 25110
+   },
+   "warn": 0.3
+  },
+  "J": [
+   {
+    "row": 0,
+    "dir": "S",
+    "hidden": false,
+    "hole": [
+     549,
+     292
+    ],
+    "want": [
+     549,
+     292
+    ]
+   },
+   {
+    "row": 4,
+    "dir": "N",
+    "hidden": true,
+    "hole": [
+     564,
+     292
+    ],
+    "want": [
+     564,
+     292
+    ]
+   },
+   {
+    "row": 1,
+    "dir": "SE",
+    "hidden": false,
+    "hole": [
+     551,
+     292
+    ],
+    "want": [
+     551,
+     292
+    ]
+   }
+  ],
+  "H": {
+   "g9b": 6,
+   "frames": 7,
+   "good": 7,
+   "box": [
+    25,
+    11,
+    72,
+    95
+   ],
+   "sit": {
+    "seatY": 465,
+    "drop": 8
+   },
+   "sitN": 31
+  },
+  "K1": {
+   "st": "failed",
+   "why": "draw",
+   "firstOld": 1,
+   "after": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     1
+    ]
+   ]
+  },
+  "K2": {
+   "st": "failed",
+   "why": "light",
+   "old": [
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  "M": {
+   "frames": 31,
+   "c2": 0,
+   "oldPerFrame": 31,
+   "blurPerFrame": 31,
+   "n": {
+    "call": 0,
+    "body": 0,
+    "tick": 0,
+    "shadow": 0,
+    "hole": 0,
+    "sit": 0
+   },
+   "st": "off",
+   "char2": "undefined"
+  },
+  "N": [
+   {
+    "lab": "girl 10",
+    "st": "off",
+    "c2": 0,
+    "old": 11,
+    "frames": 11
+   },
+   {
+    "lab": "boy 7",
+    "st": "off",
+    "c2": 0,
+    "old": 11,
+    "frames": 11
+   }
+  ]
+ },
+ "M5": {
+  "0.75": {
+   "checkpoints": 69,
+   "bad": [],
+   "notes": [],
+   "playerTagged": 69,
+   "verdict": "pass"
+  },
+  "1": {
+   "checkpoints": 69,
+   "bad": [],
+   "notes": [],
+   "playerTagged": 69,
+   "verdict": "pass"
+  }
+ },
+ "M5_planted": "3 differences planted in a copy of on.0.75 (2 draw lines swapped, camera +1, state failed) -> 3/3 caught, exit 1",
+ "M6": {
+  "verdict": "pass",
+  "summary": {
+   "S1-capital": {
+    "main": {
+     "fps": 13.82,
+     "p95": 100,
+     "drawsPerFrame": 19,
+     "walked": 2077,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true,
+     "c2Ok": true
+    },
+    "main-control": {
+     "fps": 12.9,
+     "p95": 100,
+     "drawsPerFrame": 19,
+     "walked": 1934,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true,
+     "c2Ok": true
+    },
+    "branch-off": {
+     "fps": 13.15,
+     "p95": 100,
+     "drawsPerFrame": 19,
+     "walked": 1964,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true,
+     "c2Ok": true
+    },
+    "branch-on": {
+     "fps": 13.68,
+     "p95": 100,
+     "drawsPerFrame": 18,
+     "walked": 2055,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true,
+     "c2Ok": true
+    },
+    "pairedRatios": [
+     0.933,
+     0.974,
+     1.109
+    ],
+    "ratio": 0.974,
+    "ratioOfMedians": 0.99,
+    "controlPairedRatios": [
+     0.933,
+     1.019,
+     0.977
+    ],
+    "controlRatio": 0.977,
+    "verdict": "pass",
+    "gate": true
+   },
+   "S2-farm": {
+    "main": {
+     "fps": 10.66,
+     "p95": 116.7,
+     "drawsPerFrame": 236.5,
+     "walked": 1536,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true,
+     "c2Ok": true
+    },
+    "main-control": {
+     "fps": 10.46,
+     "p95": 116.7,
+     "drawsPerFrame": 237.5,
+     "walked": 1507,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true,
+     "c2Ok": true
+    },
+    "branch-off": {
+     "fps": 10.85,
+     "p95": 116.7,
+     "drawsPerFrame": 237.3,
+     "walked": 1551,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true,
+     "c2Ok": true
+    },
+    "branch-on": {
+     "fps": 10.44,
+     "p95": 116.7,
+     "drawsPerFrame": 238.5,
+     "walked": 1513,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true,
+     "c2Ok": true
+    },
+    "pairedRatios": [
+     0.925,
+     1.07,
+     1.004
+    ],
+    "ratio": 1.004,
+    "ratioOfMedians": 0.979,
+    "controlPairedRatios": [
+     0.981,
+     1.037,
+     0.994
+    ],
+    "controlRatio": 0.994,
+    "verdict": "pass",
+    "gate": true
+   },
+   "S3-cavemouth": {
+    "main": {
+     "fps": 23.52,
+     "p95": 50.1,
+     "drawsPerFrame": 14,
+     "walked": 2876,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true,
+     "c2Ok": true
+    },
+    "main-control": {
+     "fps": 24.45,
+     "p95": 50.1,
+     "drawsPerFrame": 14,
+     "walked": 2902,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true,
+     "c2Ok": true
+    },
+    "branch-off": {
+     "fps": 23.87,
+     "p95": 50.1,
+     "drawsPerFrame": 14,
+     "walked": 2883,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true,
+     "c2Ok": true
+    },
+    "branch-on": {
+     "fps": 24.23,
+     "p95": 50.1,
+     "drawsPerFrame": 16,
+     "walked": 2914,
+     "pins": true,
+     "mapOk": true,
+     "heldOk": true,
+     "c2Ok": true
+    },
+    "pairedRatios": [
+     0.943,
+     1.054,
+     1.03
+    ],
+    "ratio": 1.03,
+    "ratioOfMedians": 1.03,
+    "controlPairedRatios": [
+     0.986,
+     1.018,
+     1.04
+    ],
+    "controlRatio": 1.018,
+    "verdict": "pass",
+    "gate": true
+   }
+  }
+ },
+ "M1_replay": {
+  "default": {
+   "checkpoints": 24,
+   "bad": 0,
+   "pxTotal": 0,
+   "canvasPxTotal": 0,
+   "stateTotal": 0,
+   "drawDiff": 0,
+   "metaOk": true
+  },
+  "zoom1": {
+   "checkpoints": 24,
+   "bad": 0,
+   "pxTotal": 0,
+   "canvasPxTotal": 0,
+   "stateTotal": 0,
+   "drawDiff": 0,
+   "metaOk": true
+  },
+  "intro": {
+   "checkpoints": 8,
+   "bad": 0,
+   "pxTotal": 0,
+   "canvasPxTotal": 0,
+   "stateTotal": 0,
+   "drawDiff": 0,
+   "metaOk": true
+  }
+ },
+ "body_height": {
+  "new_px": 83,
+  "rows": "12-94 of the 96 cell (idle S f0)",
+  "old_ref_px": 60
+ },
+ "W11_note": "cavemouth and hunt1 are 'bright' in game 2.33 (all 32 map ids checked): drawDark is not reached in play; tested with bright off in the test page",
+ "M1_pair": {
+  "runner": "suites_pair.sh v3.3 + trace", "judge": "suites_cmp.py v3.2.1", "main": "eb60c65", "branch": "deea224 (game code fb286c4)",
+  "suites": 115, "legacy": 32, "runs": 262, "metaOk": true, "manifest": "6d72f61c61780cbd",
+  "bothPass": 112, "failBothSides": ["test_103_village", "test_170_swordsman", "test_222_tk_pack"], "new": 0,
+  "undecided": ["test_122_spots"], "exit": 3,
+  "test_122_spots": {"endedIn_room": {"this_run_main": "0/5", "this_run_branch": "1/5", "g41_main": "1/4", "g41_branch": "0/4"},
+    "read_by": "Claude", "reading": "the same timing flake of an old print-only suite, seen on main in G4.1; not a regression", "codex": "asked in T40"},
+  "trace_files": 16, "page_errors": 0
+ }
+}
