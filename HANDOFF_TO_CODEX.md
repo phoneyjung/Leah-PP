@@ -3,6 +3,26 @@
 
 ---
 
+## งาน T39 ต่อ · ฉบับยืนยัน 1.0 (เกม 2.35 · รันเบราว์เซอร์ · ตัดสิน test_227) · สถานะ: รอ Codex
+- **วันที่:** 8 พ.ย. 2569 · ไม่ใช้เครดิต · ไม่เกิน ~3 ชั่วโมง (ไม่ต้องรันชุดเกมครบ 115 ชุดเอง · Claude กำลังรันครบบน 2.35 พร้อม trace → รายงานฉบับ 1.2)
+- **โค้ดที่ตรวจ:** `claude/g4-char2` @ `b3d3c1f` (โค้ดเกม = `4ba6784` เกม 2.35 · `b3d3c1f` เพิ่มรายงานฉบับ 1.1 + ผล) · **คู่เทียบ:** `main` @ `eb60c65` · **ส่ง:** branch เดิม `codex/t39-review-g41` ต่อจาก `cdc4de9` · แก้ `REVIEW_CODEX_T39_G41.md` เป็นฉบับ 1.0 + 1 บรรทัดใหม่ `CODEX_STATUS.md`
+- **อ่านก่อน:** `G4_1_REPORT.md` ฉบับ 1.1 ข้อ 4 (Claude ตอบ N1–N3 + test_227) · `git diff a6b4be4 4ba6784` (index.html: `c234Exact` + VERSION · sw.js: CACHE v237 · test_234_save K 5 → 24 · test_234_files แฮชทุกไบต์ · `qa/g4/suites_pair.sh` v3.3 + `qa/g4/trace_preload.js`)
+- **เตรียมเครื่อง (เจ้าของอนุญาตติดตั้งนอก repo · ไม่ commit node_modules):**
+  1. `mkdir -p ~/pp && cd ~/pp && npm init -y >/dev/null && PUPPETEER_SKIP_DOWNLOAD=1 npm i puppeteer@25.8.0` แล้ว `export NODE_PATH=~/pp/node_modules`
+  2. หาเบราว์เซอร์ที่มี: `ls -d ~/.cache/ms-playwright/chromium*/chrome-linux*/chrome ~/.cache/puppeteer/chrome/*/chrome-linux64/chrome /opt/pw-browsers/chromium*/chrome-linux*/chrome 2>/dev/null; command -v chromium chromium-browser google-chrome`
+  3. ไม่เจอ → ติดตั้ง (ต้องใช้เน็ต): `cd ~/pp && npx puppeteer browsers install chrome` (หรือ `npx playwright install chromium`)
+  4. `export CHROME_EXE=<ไฟล์ chrome ที่ได้>` · ตรวจ: `"$CHROME_EXE" --headless=new --no-sandbox --dump-dom about:blank | head -c 60` ต้องได้ `<html>` · `node -e "require('puppeteer');console.log('ok')"`
+  5. ติดขัดข้อไหน → หยุด แจ้ง error บรรทัดแรก (ส่งฉบับ 0.2 ได้) · ไม่ต้องหาทางอ้อม
+- **รัน (ผลดิบนอก repo):**
+  1. server `b3d3c1f` และ `main` คนละพอร์ต · `test_234_flag` `test_234_files` `test_234_save` (**ใส่ MAIN_PORT** ห้าม skip ส่วน O) `test_234_net` → ต้อง errors 0 ทั้ง 4
+  2. **N1:** K ต้อง 24 แถว: 3 ready + 21 failed · `same` true ทุกแถว · ลองเซฟสังเคราะห์ข้างในผิดแบบของคุณเองเพิ่ม (อย่างน้อย 3 แบบที่ไม่อยู่ใน K) ต้อง failed + เซฟไม่ถูกทับ · (ทางเลือก) รัน `test_234_save.js` ชุดใหม่กับ server ของ `a6b4be4` ต้องตก (ยืนยันว่าชุดจับได้)
+  3. **test_227:** `MAIN_DIR=<main> BRANCH_DIR=<4ba6784> OUT=<นอก repo> ONLY="test_227" RERUNS=4 bash qa/g4/suites_pair.sh` แล้ว `python3 qa/g4/suites_cmp.py <OUT>` · ดู `<OUT>.trace/` (ถ้ามีรอบตก: `*.json` คำขอที่ค้าง + log เซิร์ฟเวอร์ช่วงเวลานั้น) · `node qa/g4/loadprobe.js` (`PORT=<branch> MAIN_PORT=<main> N=30`)
+  4. ชุดเกมคู่ที่เลือกเอง ≥ 5 ชุด (เช่น `ONLY="test_103 test_105 test_109 test_170 test_178"`) → ห้าม exit 1
+  5. race/GM ข้อ 2 ของ T39 เดิม (ปิด–เปิดเร็ว · A→B→A · ออกหน้าเลือกเซฟ · แผง GM ค้าง) ตามที่ทำได้
+- **ตอบ:** ปิด N1 N2 N3 ได้ไหม · test_227: ความแกว่งของเครื่อง / หาสาเหตุต่อ / ถอยหลังจริง (ถ้ายังตัดสินไม่ได้ ให้บอกว่าต้องรอผลชุดเกมคู่ 2.35 ของ Claude ไหม) · ปัญหาใหม่ (สูง/กลาง/ต่ำ) · รับ G4.1 เพื่อเริ่ม G4.2 ไหม
+- **ห้าม:** แก้ไฟล์ของ Claude หรือไฟล์ภาพ · แก้ `index.html` `sw.js` `char2.js` `c2-*` · push `main` · force push · ใช้เครดิต · แตะเซฟจริง · ใส่ผลดิบ/ภาพเต็ม/fixture/node_modules ใน repo
+- **หยุดเมื่อ:** push แล้ว ตอบเจ้าของสั้น ๆ
+
 ## งาน T39 · ตรวจ G4.1 (เกม 2.34 · ธงตัวละครรุ่น 2 · โหลดเข้ม · ย้ายเซฟพื้นฐาน · ยังไม่วาด) · สถานะ: รอ Codex
 - **วันที่:** 8 พ.ย. 2569 · ไม่ใช้เครดิต · ไม่เกิน ~2 ชั่วโมง (ไม่ต้องรันชุดเกมครบ 115 ชุดเอง ~4 ชม. · ใช้ `ONLY=` ได้)
 - **โค้ดที่ตรวจ:** `claude/g4-char2` @ `a6b4be4` (โค้ดเกม = `2e2fc74` · `a6b4be4` เพิ่มแค่รายงาน/ผล · เกม 2.34 แตกจาก `main` @ `eb60c65` เกม 2.33) · **คู่เทียบ:** `main` @ `eb60c65` · **branch ส่งงาน:** `codex/t39-review-g41` แตกจาก `claude/g2-pilot` (ที่มีงานนี้) · ส่งไฟล์เดียว `REVIEW_CODEX_T39_G41.md` + 1 บรรทัด `CODEX_STATUS.md`
