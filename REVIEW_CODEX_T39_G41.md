@@ -1,194 +1,130 @@
-# T39 · ฉบับ 0.2 — ตรวจเครื่องซ้ำตาม 062b653; ยังไม่ยืนยัน 1.0
+# T39 · ตรวจยืนยัน G4.1 เกม 2.35 · ฉบับ 1.0
 
-วันที่ 8 พ.ย. 2569 (Asia/Bangkok) · เป้าตรวจ `claude/g4-char2 @959b1b1` (โค้ดเกม `4ba6784` เดิม) เทียบ main `eb60c65` · อ่าน HANDOFF บนสุด @062b653 แล้ว · ต่อ branch เดิมจาก 1d3184f (สืบจาก cdc4de9)
+งานวันที่ 8 พ.ย. 2569 (Asia/Bangkok) · ตรวจโดย Codex ตาม HANDOFF รอบ 3 `claude/g2-pilot @9e30b2a` · เกมที่ตรวจ `claude/g4-char2 @959b1b1` (โค้ดเกม `4ba6784`) · คู่เทียบ `main @eb60c65` · ส่งต่อ `codex/t39-review-g41` จาก `0be131f` · เครดิต 0
 
-**รอบล่าสุดหยุดก่อนเปิด Chromium** เพราะสร้างโฟลเดอร์ผลตรวจนอก repo ไม่ได้ ไม่ใช่ผลว่าเกมตก และไม่ใช่การรันแล้วพบ setsockopt ซ้ำ
+ฉบับนี้แทนสถานะ “ยังไม่รัน” ในฉบับ 0.1/0.2 ประวัติเดิมยังอยู่ใน Git (`cdc4de9`, `1d3184f`, `0be131f`) ผลด้านล่างรันโดย Codex เว้นแต่ระบุว่าเป็นรายงานของ Claude
 
-ผลที่ทำจริง:
+## 0. เครื่องและวิธีรัน
 
-- Fetch `claude/g4-char2 claude/g2-pilot main` ผ่าน exit 0; อ่าน HANDOFF ล่าสุดได้
-- Dependency ที่ติดตั้งไว้เดิม `/var/tmp/t39-v02/pp/node_modules`: version **25.8.0**, `require('puppeteer')` ผ่าน
-- พบ `/usr/bin/chromium`; `--version` = **Chromium 151.0.7922.173** ไม่ต้องดาวน์โหลดใหม่
-- ระหว่างเตรียมผลตรวจข้อ 4 คำสั่ง `mkdir -p /var/tmp/t39-confirm` ล้มเหลว แม้ส่ง additional filesystem write สำหรับ `/var/tmp/t39-confirm` และ network permission ให้คำสั่งแล้ว
+- ด่านใหม่ผ่าน **exit 0**: `ok Chrome/151.0.7922.173 Lantern Academy` จาก Puppeteer ที่เปิด `http://localhost:8791/?gm`
+- Node `v24.19.0`, Puppeteer **25.8.0**, `/usr/bin/chromium` **151.0.7922.173**; ต่างจาก Chrome 153/Node 22 ในรายงาน Claude จึงวัด main และ branch บนเครื่องเดียวกันใหม่
+- สำเนาด้วย `git archive`: `/tmp/t39/main`, `/tmp/t39/b235`, `/tmp/t39/b234`; dependency `/tmp/t39/pp`; ผล `/tmp/t39/out` ตามอนุญาตรอบ 3 ไม่สร้าง worktree ใหม่และไม่ git add/commit ใน /tmp
+- ใช้ `NODE_PATH=/tmp/t39/pp/node_modules`, `CHROME_EXE=/usr/bin/chromium`, `TMPDIR=/tmp/t39`; คำสั่ง browser/server ใช้สิทธิ์ `additional_permissions.network.enabled=true` ของเครื่องมือ ไม่มี Chrome flag พิเศษนอกจาก `--no-sandbox` ตามชุดทดสอบ
+- server ผูก `127.0.0.1` พอร์ต 8791 (2.35) และ 8790 (2.33); หยุด server เตรียมเครื่องก่อนให้ runner เปิดเอง ไม่แตะเซฟจริง ใช้ BrowserContext/เซฟสังเคราะห์
+- `index.html`, `sw.js`, `char2.js`, `c2-pack.json` ของสำเนา 959b1b1 ตรงโค้ด 4ba6784 ทุกไบต์; ชุด Char2 15 ไฟล์ **432,546 B** SHA ตรง Pilot @9e30b2a **15/15**
 
-error บรรทัดแรก:
+## 1. ผล test_234 ทั้ง 4 ชุด
 
-```text
-mkdir: cannot create directory ‘/var/tmp/t39-confirm’: Read-only file system
-```
+รันชุดเดิมจาก `/tmp/t39/b235` โดยตั้ง `PORT=8791 MAIN_PORT=8790 OUT_DIR=/tmp/t39/out/test234-<ชื่อ>` ไม่แก้ test หรือโค้ดเกม
 
-Shell เปิดไฟล์ `/var/tmp/t39-confirm/blank.html` ไม่ได้และชุดคำสั่งจบ exit 1 จึง **ยังไม่ได้เปิด Chromium หน้าว่างจริงในรอบนี้** ไม่อ้าง exit 133 ของรอบก่อนเป็นผลใหม่ หยุดตาม HANDOFF ข้อเตรียมเครื่อง 5 ไม่เปลี่ยนปลายทางหรือรันทางอ้อมต่อ
+| ชุด | ผล Codex | รายละเอียด |
+|---|---|---|
+| flag | **errors 0 · exit 0** | ค่าไม่ใช่ true 5/5 off และไม่ขอ Char2; ใครใช้ได้ 36/36; on ขอ 15 ไฟล์ไม่ซ้ำ; ปิดระหว่างโหลด 4 รอยต่อผ่าน; A→B→A ไม่เขียน B; ปุ่ม/สองครั้งล้างผ่าน; cold SW Char2 0 B |
+| files | **errors 0 · exit 0** | cold 16/16 failed; warm ลบ cache+บล็อก 15/15 failed และ control ready; bad image/JSON 5/5 failed; หน่วง 25s → timeout ที่ **19,954 ms**, ผลมาช้าไม่กลับ ready |
+| save | **errors 0 · exit 0** | M แหล่งสี 9/9; fixture ช่องเดิมไม่เปลี่ยน 9/9; K **24 แถว = ready 3 + failed 21**, same **24/24**; ปิด/ล้าง/ย้ายใหม่ผ่าน; O รัน main 2.33 จริง **ไม่ skip** |
+| net | **errors 0 · exit 0** | off/on ส่ง **18/18**, field 16 ช่อง (ไม่นับ t) ต่าง 0; pd=`1,1,1,1,1,4,3,2`; PS flags เท่าก่อนส่งภายในแต่ละ mode; page error 0 |
 
-ผล 115 ชุดของ Claude บน 2.35 (exit 0, ผ่านคู่ 112/ตกเท่ากัน 3/ใหม่ 0/test227 ผ่านทั้งสองฝั่ง) รับทราบจาก HANDOFF เท่านั้น ยังไม่ได้อ่านรายงาน 1.2 ข้อ 2.1/4 ต่อหรือรันตรวจซ้ำหลังด่านเครื่อง จึงไม่ใช้รับ G4.1 แทนผล Codex
+รายละเอียดสำคัญ:
 
-**ยังไม่รัน:** test_234 ทั้ง 4 รวม save ส่วน O, K24, malformed ของ Codex ≥3, test227 RERUNS=4 พร้อม trace, loadprobe และชุดเกมคู่ ≥5; ยังไม่ยืนยันปิด N1/N2/N3, ยังไม่ประเมินปัญหาใหม่ใน 2.35, ยังไม่รับ G4.1 เพื่อเริ่ม G4.2
+- flag-off 5 แบบ: absent/false/1/"true"/{} → requests 0, ไม่มี script, ไม่มี S.char2, page error 0
+- ปิดระหว่าง pack/body/lantern/portrait: off ทันทีและยัง off เมื่อผลเก่ามา ไม่มี char2; เปิดใหม่ ready; แต่ละกรณี script 1 ครั้ง, requests 15/unique 15 (การเรียก API load สองครั้งใช้ Promise เดิม ไม่ใช่ network ซ้ำ)
+- A→B→A: B off ไม่มี char2 ทั้งหน่วยความจำ/เซฟ; A ready มี char2; requests ไม่ซ้ำ
+- GM ปุ่มสูง **44 px**, เปิดค้างไว้แล้วสถานะแสดง ready; แตะล้างครั้งแรกยังมีลุค/ธง ครั้งที่สอง off และไม่มี char2 ใน Store
+- cold SW: cache `lantern-v237`, มีไฟล์ทั่วไป 199; Char2 **0 ไฟล์ / 0 B**
+- fallback hash อ่านทุก RGBA byte; ทุกกรณี failed แผ่นตรง ref `512x64:650618397|384x512:1654765220` และถูกวาดบน canvas **59–61 ครั้ง/ช่วงประมาณ 1 วินาที**; reference 60, ไม่จอขาว
+- save O: `version=Lantern Academy 2.33`, `on=true`, `same=true`, `coins=5`, `pe=0` หลัง main เล่น/บันทึกข้อมูลใหม่ ไม่ใช่ errors 0 ที่ข้าม O
 
-ส่งเฉพาะรายงานกับสถานะหนึ่งบรรทัด ไม่แก้เกม/ภาพ/ไฟล์ Claude ไม่ใช้เครดิต ไม่แตะเซฟจริง ไม่ใส่ dependency หรือผลดิบใน Git
+## 2. N1–N3 ปิดได้ไหม
 
----
+### N1: ปิดได้
 
-## ประวัติฉบับ 0.2 รอบก่อน (คำสั่ง c57384f)
+`c234Exact` ที่ `index.html:7781–7785` ตรวจรูปภายในหลัง Char2.look ก่อน ready อยู่ในชั้น G4 ไม่แก้ G3 และไม่เขียนข้อมูลเดิมทับ เกณฑ์ตาม REPORT ฉบับ 1.2 ข้อ 4 ชัดขึ้น: คีย์/ชิ้น/สี/เพศที่ไม่ตรงต้อง failed; ยอมเว้น `from` และ optional slots ได้
 
-# T39 · ฉบับ 0.2 — เครื่องติดข้อ 4; ยังไม่ใช่ฉบับยืนยัน 1.0
+นอกจาก K 24 แถว รัน probe ของ Codex เพิ่มใน browser จริง (แต่ละแบบไม่อยู่ในรายการ K เดิม):
 
-วันที่ 8 พ.ย. 2569 (Asia/Bangkok) · ต่อจาก `cdc4de9` ตาม HANDOFF งานบนสุดที่ `claude/g2-pilot @c57384f` · เป้าตรวจเกม 2.35 `claude/g4-char2 @b3d3c1f` (โค้ด `4ba6784`) เทียบ main `eb60c65`
+| เซฟผิดเพิ่ม | สถานะ | ค่า char2 ใน S และ Store หลัง save |
+|---|---|---|
+| `parts.eyes = 0` | failed / save look unreadable | เดิมทุกค่า |
+| ลบ `parts.outfit` | failed / save look unreadable | เดิมทุกค่า |
+| `color.skin = {name:'deep'}` | failed / save look unreadable | เดิมทุกค่า |
+| `parts.face_acc = false` | failed / save look unreadable | เดิมทุกค่า |
+| `from = null` | failed / save look unreadable | เดิมทุกค่า |
 
-**หยุดตามข้อเตรียมเครื่อง 5 ของ HANDOFF** หลังข้อ 4 เปิด Chromium หน้าว่างไม่สำเร็จ ไม่ลอง flags/ทางอ้อมและไม่รัน browser tests ต่อ ส่งสถานะเป็นฉบับ 0.2 ตามที่เจ้าของอนุญาต ไม่อ้างว่าได้ตรวจยืนยันเกม 2.35 แล้ว
+same ใน K/probe หมายถึงค่า `char2` ไม่ใช่อ้างว่าเวลา/ตำแหน่งหรือทุก field ของเกมที่กำลังเล่นหยุดเปลี่ยน; ช่องเก่าเทียบแยกใน fixture M 9/9
 
-## ผลเตรียมเครื่องรอบนี้
+รวม **5/5 failed + same**, page errors 0, probe exit 0; ตัวอย่างปกติที่ไม่ใส่ optional slots/ไม่ใส่ from ยัง ready และไม่ถูกทับ **2/2** ไม่พบการปฏิเสธตัวอย่างปกติผิดจากชุดที่ตรวจ (ไม่อ้างว่าครอบคลุมเซฟทุกแบบ)
 
-- Fetch ใน sandbox เริ่มแรกติด proxy: `fatal: unable to access 'https://github.com/phoneyjung/Leah-PP.git/': Failed to connect to proxy port 8080 after 0 ms: Could not connect to server` เมื่อใช้สิทธิ์ network ของเครื่องมือกับคำสั่งเดิม fetch สำเร็จ exit 0 และอ่าน HANDOFF @c57384f ได้ จึงเดินหน้าข้อเตรียมเครื่อง
-- ข้อ 1: ติดตั้ง `puppeteer@25.8.0` ด้วย `PUPPETEER_SKIP_DOWNLOAD=1` สำเร็จ exit 0; ตรวจ version จาก package.json = **25.8.0**; `require('puppeteer')` พิมพ์ `puppeteer ok`
-- ข้อ 2: พบ `/usr/bin/chromium` · version **Chromium 151.0.7922.173 built on Debian GNU/Linux 13 (trixie)**
-- ข้อ 3: ไม่ต้องดาวน์โหลด Chrome เพิ่ม เพราะมี binary แล้ว
-- ข้อ 4: เรียก binary ด้วย `--headless=new --no-sandbox --user-data-dir=<โฟลเดอร์ชั่วคราว> --dump-dom about:blank` → **exit 133 (Trace/breakpoint trap)**; HTML stdout **0 bytes** ไม่ผ่านเกณฑ์ `<html>`
+probe เสริม lifecycle: กัก c2-pack.json แล้วกดปุ่มเปลี่ยนผู้เล่นจริง `#swP` ใน Settings ให้ reload ก่อนปล่อยคำขอ → `S===null`, `cur=-1`, C234 off, หน้าเลือกแสดง, เซฟไม่มี char2; ไม่สร้างลุคย้อนหลังหลังออกหน้าเลือก
 
-error แรกจาก Chromium stderr:
+ไม่ได้รันตัวเลือก test_save รุ่นใหม่กับเกม 2.34 ทั้งชุด ตัวเลข “รุ่นเก่าผิด 15 แถว” เป็นของ Claude ไม่ใช่ผลรัน Codex ในรอบนี้
 
-```text
-[14016:14016:1108/072939.517746:ERROR:third_party/crashpad/crashpad/util/linux/socket.cc:45] setsockopt: Operation not permitted (1)
-```
+### N2: ปิดได้
 
-นี่พิสูจน์ว่า Chromium เริ่มไม่ได้ใน command sandbox ของรอบนี้ ไม่ได้พิสูจน์ว่าโค้ดเกมผิดหรือเครือข่าย Git ใช้ไม่ได้ ไม่ได้ทดลองลด sandbox/ปิด crashpad หรือเปลี่ยน browser flags เพื่อข้ามจุดนี้ เพราะ HANDOFF กำหนดให้หยุด
+พบ `play-src/src/45_net.js` ใน `play-src.zip` จริง ไม่ใช่ไฟล์ root เปรียบเทียบ bytes ของ `play-src.zip`, `database.rules.json`, `DATABASE.md` กับ main → ตรง **3/3**; ZIP ตรงจึงรวมสมาชิก 45_net.js ด้วย รายงานแก้ path แล้ว ส่วน Net ที่ runtime ใช้อยู่ใน index; diff 2.35 ไม่เปลี่ยนบล็อก Net เดิม และ test_net ยืนยัน payload จริง 18 คู่ต่าง 0 (ไม่ทดสอบ Firebase จริง/สองเครื่อง)
 
-Dependency และ log เก็บที่ `/var/tmp/t39-v02/` นอก repository; ตอนเริ่มติดตั้งใช้ `/tmp/t39-v10/` แต่ตรวจพบ `.git` marker ที่ `/tmp` จึงย้ายออกทั้งหมดก่อนส่ง ไม่ commit dependency/log/HTML/profile/package.json ใด ๆ (การย้ายที่เก็บไม่ใช่การลองรันทดสอบใหม่)
+### N3: ปิดได้
 
-## ยังไม่รัน / ยังไม่ยืนยัน
+`test_234_files.js:44` เปลี่ยน `i+=7` เป็น `i++` จริงและชุด browser ผ่าน Independent probe ใช้ฟังก์ชัน h ที่อ่านจากไฟล์เดิม/ใหม่ แก้ byte ทีละตำแหน่งใน RGBA 64 bytes: รุ่นเก่าจับ **10/64**, รุ่นใหม่ **64/64** ตรงช่องว่างที่แจ้งไว้ ไม่ได้เปลี่ยนเครื่องตรวจหรือ criteria
 
-| รายการที่ขอในฉบับ 1.0 | สถานะรอบนี้ |
+## 3. test_227 และ trace
+
+คำสั่งจริง: `MAIN_DIR=/tmp/t39/main BRANCH_DIR=/tmp/t39/b235 OUT=/tmp/t39/out/t227 ONLY="test_227" RERUNS=4 bash qa/g4/suites_pair.sh` แล้วใช้ `suites_cmp.py` ในชุดเดียวกัน
+
+- runner exit 0, comparator **exit 0**, `suites=1`, `runs=2`, `bothPass=1`, `bad=[]`, `undecided=[]`, `metaOk=true`
+- main **1/1** errors 0 (**35.1s**), branch **1/1** errors 0 (**35.6s**); output hashes ตรง `420d22787fbae72e` ทั้งคู่
+- ปัด scroll 50 ครบ **8/8**, stock คงเดิม, placed 0, ไม่ค้าง drag; กดค้าง/ลาก stock **2→1** ทั้งสองฝั่ง
+- **RERUNS=4 เป็นจำนวน retry เมื่อมีรอบไม่ผ่าน**; เมื่อรอบแรกผ่านคู่ runner ไม่สร้างอีก 4 รอบ จึงไม่รายงานเป็น 5/5
+- อ่าน `/tmp/t39/out/t227.trace`: `server.main.log` **2,503 บรรทัด**, `server.branch.log` **2,503 บรรทัด** ไม่พบ HTTP error line; `sys.tsv` **2 แถว** ตรงลำดับ main→branch; failure JSON **0 ไฟล์** ตามเงื่อนไข preload ที่เขียนเฉพาะ exit ไม่ใช่ 0 การไม่มี JSON ไม่ใช่คำอ้างว่ามี failure trace แล้วไม่พบ pending requests
+- loadprobe N=30 ของ Codex: main **30/30**, med **976 ms**, max **1,243 ms**; branch **30/30**, med **992 ms**, max **1,152 ms**; hung 0 ทั้งคู่, over10s 0, stalls [], page errors 0, crash null, exit 0 ตัวตรวจนี้อ่าน pending ระหว่างรอถ้าเกิน 8s ไม่ใช่เก็บทุก request ต่ออีก 8s หลังทุกหน้าที่โหลดเร็ว
+
+รอบ 2.34 เดิมยังไม่มีข้อมูลพอชี้ root cause; ไม่แก้ผล exit 1 เดิม ไม่เพิ่ม timeout และไม่แทน raw เดิมด้วยรอบที่ผ่าน รายงาน Claude ของ 2.35 เพิ่มหลักฐาน full suite 115 ชุด/242 รอบ exit 0 (112 ผ่านคู่, 3 ตกเดิม) แต่ Codex ไม่ได้รันครบ 115 เอง
+
+**คำตัดสิน:** สำหรับ root cause ของเหตุการณ์ 2.34 เลือก **“ต้องหาสาเหตุต่อ”** — ไม่มี trace ของครั้งนั้นพอให้ยืนยันว่าเครื่องเป็นต้นเหตุหรือชี้ว่าโค้ดถอยหลังจริง ไม่ลงความเห็นว่า “พิสูจน์แล้วว่าเป็นเครื่อง” จากการรันซ้ำที่ผ่านเพียงอย่างเดียว
+
+สำหรับการรับ **โค้ด 2.35** ใช้ผล M1 รอบใหม่ตามเกณฑ์เดิม: test227 ผ่านคู่, loadprobe 60 หน้าไม่ค้าง, ชุดคู่ที่เลือกด้านล่างไม่มี regression และข้อมูล full suite ของ Claude เป็นหลักฐานประกอบ จึงไม่ถือเหตุการณ์ที่ยังอธิบายไม่ได้ของรอบเก่าเป็นหลักฐานว่า 2.35 ตกโดยอัตโนมัติ เสนอให้เดินหน้าขั้นถัดไปได้โดยคงบันทึกเหตุการณ์เก่า/trace ต่อไป การตัดสินนี้ไม่เปลี่ยนผล exit 1 ของรอบ 2.34 เป็นผ่าน และไม่ประกาศว่าแก้สาเหตุโหลดค้างแล้ว
+
+## 4. ชุดเกมคู่ที่เลือกเอง 5 ชุด
+
+คำสั่ง runner v3.3: `MAIN_DIR=/tmp/t39/main BRANCH_DIR=/tmp/t39/b235 OUT=/tmp/t39/out/selected5 ONLY="test_103 test_105 test_109 test_170 test_178" bash qa/g4/suites_pair.sh` (RERUNS ค่าเดิม 2 สำหรับชุดที่ต้องตรวจซ้ำ)
+
+**runner exit 0 · comparator exit 0 · suites 5 · runs 18 · bothPass 3 · bad=[] · undecided=[] · metaOk=true · kindsRechecked=5**
+
+| ชุด | main (process exit ตามลำดับรอบ) | 2.35 (process exit ตามลำดับรอบ) | ตัวตัดสิน |
+|---|---|---|---|
+| test_103_village | 0,0,0 | 0,0,0 | ผลเท่ากัน 3/3 คู่; log มี errors 1 จาก `test boom` ที่ชุดฝังเอง จึงไม่อ้างว่าฟังก์ชันนี้ errors 0 |
+| test_105_gm | 0 | 0 | ผ่านคู่; log ต่างเพียง VERSION ตามการ normalize ที่ตกลงไว้ |
+| test_109_mail | 0 | 0 | ผ่านคู่; log ต่างเพียง VERSION |
+| test_170_swordsman | 1,1,0 | 0,0,1 | ไม่มี failure ใหม่; ที่ตกทุกครั้งเป็น assert `!PS.gmSprite170&&!S.gmSprite170` จุดเดิม main:30:265; main ตก 2/3, branch ตก 1/3 |
+| test_178_dig_button | 0 | 0 | ผ่านคู่ |
+
+อ่าน trace ของ selected5 ด้วย: sys 18 แถว; failure JSON **3 ไฟล์** เป็น test170 main รอบ 1/2 และ branch รอบ 3, ทั้งสามมี page errors **0**, pending **0**; คำขอล้มเป็นฟอนต์ Google/manifest ping ยกเลิกตามที่บันทึก ไม่ใช่ loader ค้าง และไม่พบ failure line ใหม่จากโค้ดเกม 2.35 ผลนี้เป็นการใช้กติกา baseline เดิม ไม่เปลี่ยน assert หรือถือทุก process exit 0 เป็นผลผ่านโดยไม่อ่าน log
+
+## 5. ข้อสังเกตใหม่
+
+**สูง 0 · กลาง 0 · ต่ำ 1 (N4 · ภาพปุ่ม GM)** จากขอบเขตที่ตรวจ ไม่ใช่การรับรองว่าครบ M1–M10 ของ G4 ทั้งหมด
+
+N4 (มีอยู่ในบล็อก C234 ตั้งแต่ 2.34 พบเพิ่มในการดูภาพรอบนี้): เมื่อพร้อม ปุ่ม “ปิดตัวละครรุ่น 2” อ่านยาก เพราะ C234 (`index.html:7807` และการสร้างปุ่มบรรทัด 7809) กำหนดตัวอักษร `#1b1330` บน background ทอง `#e8c46a` แต่กฎเดิม `body.art156-frames button` (`4654`) วาด **border-image slice 22 fill** สีม่วงทับพื้นปุ่ม; ไม่มี `.on`/`aria-pressed=true` ที่เลือก active art ตามบรรทัด 4655
+
+เห็นในภาพจริงทั้ง `test234-flag/f-gm-row.png` (844×390) และ `probe-ui.png` (800×600) ภายใต้ /tmp/t39/out; computed color=`rgb(27,19,48)`, backgroundColor=`rgb(232,196,106)`, backgroundImage=none, height=44 แต่สีพื้นจาก border-image ไม่อยู่ใน backgroundImage จึงตรวจแค่ computed background ไม่พอ ปุ่มยังคลิก/ปิดได้ตาม test ไม่ใช่ disabled/ปัญหาเซฟ ขอ Claude ปรับข้อความ/skin ให้สอดคล้องกับกรอบจริงและดูสถานะเปิด–ปิดเมื่อโหลด art แล้ว (Codex ไม่แก้ไฟล์เกม/ภาพ)
+
+## 6. คำตัดสินและขอบเขต
+
+**ปิด N1/N2/N3 ได้ครบ 3/3 และเสนอรับ G4.1 (2.35) เพื่อให้เริ่ม G4.2 ได้** ตามผลชุดใหม่ที่ผ่านข้างต้น พร้อมข้อสังเกตต่ำ N4 เรื่องสีข้อความปุ่ม GM ให้ Claude เก็บงาน
+
+แยกให้ชัด: รับด่านของโค้ด 2.35 จากผลทดสอบปัจจุบัน ไม่ใช่ปิด root cause ของ timeout 2.34 และไม่ใช่รับ G4 ทั้งหมด/อนุมัติเปิดตัวละครใหม่ให้ผู้เล่นทั่วไป M3–M7/M9 และ M8 ส่วนแต่งสีเต็มยังเป็นงานขั้นถัดไปตามแผน ไม่ได้วัด FPS/หน่วยความจำเต็มหรือทำออนไลน์สองอุปกรณ์ในงานนี้ ไม่ต้องรอรายงาน 115 ชุดของ Claude อีกเพราะรายงานฉบับ 1.2 ส่งแล้ว; หากจะปิด root cause เก่าต้องมีหลักฐานเพิ่มหรือการเกิดซ้ำพร้อม trace ไม่ใช่ลดเวลารอ/เปลี่ยนเกณฑ์
+
+ผลดิบนอก repo ทั้งหมด; ไม่ commit ภาพ/trace/fixture/node_modules; ไฟล์ส่งเพียง REVIEW_CODEX_T39_G41.md กับ CODEX_STATUS.md หนึ่งบรรทัด ไม่ใช้เครดิต ไม่แตะเซฟจริง ไม่แก้ไฟล์ Claude และไม่ push main
+
+หลักฐานระบุ SHA-256 16 ตัวแรกของผล Codex (ไฟล์อยู่ใต้ /tmp/t39/out):
+
+| ไฟล์ | SHA-256 prefix |
 |---|---|
-| อ่าน G4_1_REPORT.md ฉบับ 1.1 ข้อ 4 และตรวจ diff 2.35 หลังเตรียมเครื่อง | ยังไม่ดำเนินต่อ เพราะหยุดที่ด่านเครื่อง |
-| test_234_flag / files / save / net | **ยังไม่รันทั้ง 4** ไม่มี errors 0 หรือ exit ที่รับรองได้ |
-| save ส่วน O พร้อม MAIN_PORT | **ยังไม่รัน** ไม่ใช้การ skip เป็นผลผ่าน |
-| K 24 แถว (ready 3 / failed 21), same ทุกแถว | **ยังไม่วัด** |
-| malformed ภายในที่ Codex เพิ่มอย่างน้อย 3 แบบ | **ยังไม่รัน** |
-| test_227 ด้วย runner v3.3 RERUNS=4 และ OUT.trace | **ยังไม่รัน** ไม่มี trace ชุดใหม่ของ Codex |
-| loadprobe N=30 / ชุดเกมคู่ ≥5 ชุด / race และ GM | **ยังไม่รัน** |
-| ปิด N1/N2/N3 | **ยังไม่ยืนยันการแก้** ข้อสังเกตฉบับ 0.1 ด้านล่างเป็นของเกม 2.34 ไม่ใช่ข้อกล่าวหาว่าเกม 2.35 ยังมีอยู่ |
-| ปัญหาใหม่ สูง/กลาง/ต่ำ ในเกม 2.35 | **ยังไม่ประเมิน** ไม่รายงานเป็น 0/0/0 |
-| ตัดสิน test_227 / รับ G4.1 เพื่อเริ่ม G4.2 | **ยังตัดสินไม่ได้ / ยังไม่รับ** ต้องรันต่อเมื่อเครื่องพร้อม และพิจารณาหลักฐาน trace/ผลคู่ 2.35 ของ Claude ประกอบ |
-
-ส่งเฉพาะรายงานนี้และ 1 บรรทัด CODEX_STATUS.md บน branch เดิมต่อจาก cdc4de9; ไม่แก้ไฟล์ Claude/เกม/ภาพ ไม่แตะเซฟจริง ไม่ใช้เครดิต ไม่ push main/force push
-
----
-
-## ประวัติฉบับ 0.1 — เกม 2.34 (เก็บหลักฐานเดิม ไม่ใช่ผลตรวจ 2.35)
-
-# T39 · ตรวจ G4.1 · ฉบับ 0.1 (อ่านโค้ด; ยังไม่รับ G4.1)
-
-วันที่ 8 พ.ย. 2569 · Codex · เครดิต 0 · ตามคำสั่งเจ้าของให้ตรวจเครื่องก่อน และส่งฉบับอ่านโค้ดเมื่อ Git ใช้ได้แต่ browser ยังไม่พร้อม
-
-- ฐานรายงาน/HANDOFF/แผน: `claude/g2-pilot @0772f4561506e644652a6f1a58121201da041cfa`
-- เกมที่อ่าน: `claude/g4-char2 @a6b4be494c6d85be6191789254a0137c580287c1`; ตรวจ bytes ของ `index.html`, `sw.js` และชุด Char2 15 ไฟล์แล้วตรง `2e2fc74`
-- คู่เทียบ: `main @eb60c650922e55c7d81b27b59f180e1f42c367b2`
-- ส่ง: `codex/t39-review-g41` · เฉพาะรายงานนี้ + 1 บรรทัด `CODEX_STATUS.md`
-
-**ข้อสรุป: ยังไม่รับ G4.1 เพื่อเริ่ม G4.2 ในฉบับนี้** — browser tests ยังไม่รัน, `test_227` ยังต้องหาสาเหตุต่อ และมีข้อไม่ตรงกันของการรับ `char2` ผิดรูปภายใน (N1 ระดับกลางด้านล่าง) ที่ต้องยืนยันกติกา/ทดสอบเพิ่ม ผล `errors 0` ในรายงาน Claude ไม่ใช่ผลตรวจซ้ำของ Codex
-
-## 0. ตรวจเครื่องตามลำดับ 1–6
-
-| ข้อ | ผลที่ทำจริง | ผ่านไหม / error บรรทัดแรกที่บอกสาเหตุ |
-|---|---|---|
-| 1 `git ls-remote` URL ตัวพิมพ์ใหญ่ | g4-char2=`a6b4be4…`, g2-pilot=`0772f45…`, main=`eb60c65…` ตรงครบ 3 | ผ่าน |
-| 2 `git fetch origin claude/g4-char2 claude/g2-pilot main` | exit 0 | ผ่าน |
-| 3 `node -v` / `python3 -V` | `v24.19.0` / `Python 3.12.14` | ผ่าน (Node ≥18) |
-| 4 `require('puppeteer')` | ไม่โหลดแพ็กเกจ | ไม่ผ่าน: `Error: Cannot find module 'puppeteer'` |
-| 5 `"$CHROME_EXE" --headless=new --no-sandbox --dump-dom about:blank` | ตัวแปร `CHROME_EXE` ว่าง; exit 127; ไม่ได้ HTML | ไม่ผ่าน: `/bin/bash: line 4: : command not found` |
-| 6 HTTP server 8790 ที่ root checkout a6b4be4 + `curl -sI .../index.html` | `HTTP/1.0 200 OK`, Content-Length `1535498`; curl exit 0 | ผ่าน |
-
-รวม **4/6 ข้อผ่าน** (1,2,3,6); ไม่ผ่าน 4,5 ไม่ใช่ปัญหา Git/สิทธิ์เข้าถึง GitHub ในรอบนี้ ข้อ 5 ยืนยันเพียงว่า env var ว่าง ไม่ได้ยืนยันว่าเครื่องไม่มี Chromium อยู่ที่อื่น หยุด server หลังตรวจ ไม่ติดตั้งแพ็กเกจหรือเปลี่ยน environment ในฉบับนี้ ใช้ทางอ่านโค้ดที่เจ้าของอนุญาตไว้
-
-สิ่งที่ทำจริงเพิ่มเติม: อ่าน REPORT → แผนข้อ 3/6/9 → C234 → SW → ชุดทดสอบใหม่ทั้ง 4; อ่าน `qa/g4/g41-results.json`; เทียบ Git blobs/bytes/SHA ของไฟล์ด้วย Python/git แบบอ่านอย่างเดียว ไม่มี browser session และไม่มีเซฟจริง
-
-## 1. ธงปิด = เกมเดิม / M1 และ test_227
-
-**ผลอ่านโค้ด:** เส้นทางเริ่มเกมที่ธงไม่ใช่ `true` สอดคล้องกับเจตนา ไม่มีการเริ่ม script/fetch/timeout/เขียนเซฟใหม่จาก C234 (`index.html:7766–7772`) และ `c234Who` ให้ `gender194` ที่เป็น f/m มาก่อนเพศจาก kid; จำกัดอายุจำนวนเต็ม 6–9 หลังแปลงด้วย `Number` (`7757–7758`) นี่ไม่ใช่ผลรันตาราง 36 กรณี
-
-ตัวห่อ `startGame` (`7791`) เรียกของเดิมก่อน ส่ง `this`/arguments และคืนค่าเดิม; exception ของของเดิมอยู่นอก try จึงยังออกตามเดิม ส่วน exception ของ `c234Sync` ถูกกลืน ไม่ได้กลืนของเดิม การกลืนนี้ช่วยคงเกมเก่า แต่จะทำให้ข้อผิดพลาด C234 แบบ synchronous มองไม่เห็น ต้องตรวจ state ด้วยใน runtime
-
-ตัวห่อ `openGM` (`7807`) เรียกของเดิมก่อน คืนค่าเดิม และเพิ่มแถวเฉพาะ `gmOn()`; เมื่อเปิด GM ถึงมีปุ่ม/onclick ใหม่ (`7798–7806`) ดังนั้นคำว่า “ธงปิดไม่ฟังเหตุการณ์” ต้องหมายถึงเส้นทางเล่นปกติที่ไม่เปิดแผง GM ไม่ใช่อ้างว่าปุ่มเปิดธงใน GM ไม่มี listener เลย ตัวห่อไม่ได้เพิ่ม listener ส่วนกลาง
-
-`git diff --numstat eb60c65 a6b4be4 -- index.html` = **+64/−1**; บรรทัดเดิมที่ลบมีเพียง `VERSION` 2.33; ขนาด **1,527,627 → 1,535,498 (+7,871 B)** ตรงรายงาน การเทียบนี้ไม่ใช่ replay และไม่พิสูจน์ว่า pixels/timing ขณะเล่นเหมือนเดิม
-
-**ยังไม่รัน:** `test_234_flag.js`, ชุดเกมคู่ที่เลือก และ replay; ไม่มีค่า errors/exit ของ Codex ให้รับรอง
-
-**test_227: เลือก “ต้องหาสาเหตุต่อ”** ไม่เลือก “รับเป็นความแกว่งของเครื่อง” และยังไม่ฟันธง “ถอยหลังจริง”:
-
-- `test_227_swipe.js:8` รอ loader หายก่อนสร้างเซฟ/เรียก `startGame` ที่บรรทัด 9; boot เดิมรอ `loadImages()` ก่อนลบ loader (`index.html:1440`) บล็อก C234 ตอน parse มีนิยามและตัวห่อ ไม่มีการเรียก `Char2.load()` ทันที จึงยังไม่พบทางตรงที่ธงปิดไปทำให้โหลด Char2 ค้าง ณ จุดนี้จากการอ่าน
-- แต่ code diff เพิ่มขนาดหน้า/เปลี่ยน SW และการอ่านไม่ตัดผล scheduling/network/resource ของ runtime จึงไม่ใช้เหตุผลข้างต้นล้างผลตก
-- หลักฐาน Claude: paired เดิม exit 1 เพราะ branch โหลดค้าง 1/3; รอบเสริม 8/8 ทั้งสองฝั่ง และ loadprobe 30/30 ทั้งสองฝั่ง เป็นข้อมูลประกอบ ไม่ใช่ผลที่ Codex รันและไม่แทนที่รอบเดิม
-- **ยังไม่รัน** `ONLY="test_227"` ใน OUT ใหม่หรือ loadprobe คู่อิสระ ต้องเก็บคำขอที่ยังไม่จบ/failed, pageerror, loader state และเวลาระหว่าง load ก่อนตัดสิน M1; อย่าขยาย timeout อย่างเดียวแล้วนับเป็นผ่าน
-
-## 2. สถานะและเจ้าของคำขอ
-
-**อ่านแล้วไม่พบทางตรงที่ผล async ไปเขียนเซฟ B เมื่อคำขอเริ่มจาก A**: `live()` ตรวจ `S===s`, `owner===s`, `gen` และ `st==='loading'` (`7770`); ตรวจหลัง script และ load (`7772–7775`) และหลังรอ PD219 ก่อนจุดเขียน `s.char2` (`7780–7782`) ปิดผ่านปุ่มเรียก sync แล้วเพิ่ม gen; สลับผ่าน startGame ก็ sync ใหม่ ผลเก่าถูกทิ้ง การอ่าน existing char2 เป็น synchronous หลัง live-check ไม่มี await แทรก
-
-- script Promise เก็บครั้งเดียวต่อหน้า (`7763–7765`); ตัว renderer เก็บ `LOADING` Promise เดิม (`char2.src.js:162–167` บนฐาน Pilot; bytes ของ built renderer ตรงชุดที่คัดลอก) การเปิดใหม่จึงไม่แปลว่าขอ network ใหม่ทุกครั้ง
-- timeout 20,000 ms มี live-check (`7771`); ถ้า callback โหลดมาหลัง state failed จะไม่ย้ายเซฟ ไม่ได้ยกเลิกคำขอเดิม ตรงแผนที่ยอมให้รอบเดิมโหลดต่อ
-- เส้นทางปุ่มเปลี่ยนผู้เล่นจริง (`index.html:1127`) save แล้ว reload; ลบ GM (`3505`) ตั้ง `S=null` แล้ว reload; จึงไม่ควรสรุปบั๊กจากการเรียก `openPicker()` ลอย ๆ ซึ่งไม่ใช่ทางออกจากเกมของผู้เล่นปัจจุบัน
-- cleanup เรียก trim เมื่อเคย ready (`7760`); ช่วงนี้ยังไม่สร้าง actor/borrow เพื่อวาด จึงยังไม่มี actor ที่ต้องคืนจาก G4.1
-- สถานะในแผงใช้ `c234Paint()`/textContent ตามผล async; ต้องทดสอบค้างแผงจริงต่อ
-
-**ยังไม่รัน:** ปิด–เปิดเร็ว/4 รอยต่อ, A→B→A, ลบ/ออกหน้าเลือก, ปุ่ม GM และ late response หลัง timeout ไม่อ้างว่าผ่าน race test จากการอ่าน
-
-## 3. โหลดเข้ม / M2
-
-`index.html:7773–7775` ต้องได้ `r.ready===true` และ failed เป็น array ว่าง จึงไปสร้างลุค; ไม่รับ ready แบบผ่อนปรนของ G3 เมื่อ failed มีรายการ ตัว renderer เช็กภาพ/หน้ากาก/anchors/portrait ระหว่างโหลด (`char2.src.js:169–210`) จึงไม่พบทางขาดไฟล์ตามรายการแล้ว C234 พร้อมจากเงื่อนไขนี้
-
-**วัดจริงจากไฟล์:** pack อ้าง **13 ไฟล์** + `char2.js` + pack = **15 ไฟล์, 432,546 B**; มีครบใน checkout; SHA-256 ตรง Pilot `0772f45` **15/15**; `sw.js FILES` มีแต่ละชื่อครั้งเดียวครบ **15/15**
-
-อ่าน `test_234_files.js`: รายการดึงจาก pack จริง; cold 15+all, warm ควบคุม+ลบ cache และบล็อก network ฝั่ง worker รายไฟล์, bad image/JSON, 25s→20s timeout เป็นการฉีดที่เกี่ยวข้องกับทางโหลดจริง ไม่ใช่แค่เปลี่ยนค่าผลทดสอบ ทว่า **ทั้งหมดนี้ยังไม่รัน** ไม่มี Codex errors 0; การยืนยัน 0 ไฟล์ในแคชขณะ install ก็ยังต้อง browser
-
-ข้อจำกัดการตรวจภาพ fallback เป็น N3 ด้านล่าง
-
-## 4. ย้ายเซฟ/ย้อนกลับ / M8 พื้นฐาน
-
-`c234Migrate` (`index.html:7783–7790`) stringify/parse สำเนา แล้วลบเฉพาะช่องที่ไม่ผ่าน `pd219Look`/`look169Valid` ในสำเนา; ไม่มี assignment ไปยังช่องเก่าของต้นฉบับ `s` การเขียนใหม่อยู่บรรทัด 7782 เท่านั้น ไม่เรียก save อัตโนมัติจากการย้ายเซฟ แหล่ง `from` ใช้ลำดับผม; appearance169 ที่ผ่านมี hc ถูกช่วงแล้ว
-
-รอ PD219.ok/tried หรือ Promise เดิมจบก่อนย้าย และ live-check ซ้ำตรงตามข้อ 6.2 ปิดธงเก็บ char2; ปุ่มล้างต้องยืนยันสองครั้งแล้วตั้ง off+delete+save (`7804–7806`) ส่วนการ persist/เปิดใน 2.33 **ยังไม่รัน** และต้องใส่ MAIN_PORT จริง: ชุด save อนุญาต skip ส่วน O หากไม่ใส่ จึงห้ามใช้ errors 0 ของการรันแบบ skip มารับ M8 ย้อนรุ่น
-
-future v3/string/array/null/other set ถูกชั้น G4 ปฏิเสธและไม่เขียนทับจากการอ่าน แต่ inner shape มีข้อไม่ตรงกัน **N1 (กลาง)**:
-
-1. `c234Look` (`7777–7779`) ตรวจเฉพาะ object ไม่ใช่ array + v2 + set ก่อนเรียก `Char2.look(s)`; ผล non-null → ready
-2. `fromChar2` (`char2.src.js:260–271`) ยอมใช้ default เมื่อ gender/parts/color ผิดชนิดหรือไม่อยู่ในรายการ ถ้า base ยังถูก เช่น `{v:2,set:'c2',base:'kid4',gender:42,parts:[],color:null}` หรือสี `hair:['black']` จะถูกทำเป็น Appearance ค่าเริ่มต้นในหน่วยความจำตามเส้นทางนี้ แทน failed; S.char2 เดิมยังไม่ถูกทับ
-3. นี่เป็นพฤติกรรมผ่อนปรนของ G3 ที่มีอยู่แล้ว ไม่เสนอให้เปลี่ยน G3 โดยพลการ แต่แผน G4 ข้อ 6.1/REPORT ข้อ 1 เขียนว่า char2 “รูปผิด” ต้อง failed/ใช้เดิม ชุด K ของ `test_234_save.js` มี valid/future/string/array/other set แต่ไม่มีกรณี base ถูกแล้วข้อมูลภายในผิด
-4. ขอ Claude ระบุขอบเขต “รูปผิด” ให้ตรงสัญญา G4 แล้วเพิ่ม case ภายในเหล่านี้; ถ้าต้อง strict ให้ตรวจที่ชั้น G4 ก่อน Char2.look โดยคงเซฟเดิม หากต้องยอม normalize บางช่อง ต้องเขียนกติกา/เหตุผลและทดสอบให้ชัด ไม่อ้างว่า G3 เปลี่ยนเซฟเสีย
-
-**สถานะ N1:** พบจากอ่าน control flow ไม่ใช่ผล browser repro; ยังไม่รันเซฟสังเคราะห์ของ Codex ต้องยืนยันพร้อมเครื่องก่อนปิดข้อ ส่วน G4.1 ยังไม่วาดจึงยังไม่อ้างว่าเห็นตัวผิดสีบนจอแล้ว
-
-## 5. Service worker
-
-`sw.js:3` = `lantern-v236`, ข้อความ 2.34; `FILES` มีชุด Char2 ครบตามข้อ 3; install filter (`:5`) ตัด `^c2-` และ `char2.js` ก่อนเรียก cache.add จึง **คำนวณรายชื่อ install สำหรับ Char2 ได้ 0** จากโค้ด เส้นทาง fetch เดิม network-first/cache-backup ไม่เปลี่ยน logic
-
-**ยังไม่รัน cold install จริง** ไม่รายงานว่าได้ “แคช 0 B” จาก Chrome แล้ว และยังไม่ตรวจการอัปเดต worker/cold-vs-warm runtime บนเครื่องนี้
-
-## 6. ออนไลน์ / M10
-
-วัด Git blobs จริง: `database.rules.json` และ `DATABASE.md` ตรง main ทุกไบต์ **2/2**; index เดิมเปลี่ยนเพียง VERSION และเพิ่มบล็อกท้าย จึงไม่มีการแก้บรรทัด Net.send เดิม C234 ไม่เขียน PS.gmSprite170/PS.local220 หรือ payload ออนไลน์
-
-**N2 (ต่ำ · รายการไฟล์ในคำสั่ง/รายงาน): ไม่พบ `45_net.js` ใน tree ทั้ง eb60c65 และ a6b4be4** (ตรวจชื่อเต็มทุก path ด้วย git ls-tree) `git diff -- 45_net.js` ว่างในกรณีนี้ไม่ได้แปลว่าเทียบเนื้อหาไฟล์ที่มีอยู่แล้วผ่าน ขอระบุ path/ไฟล์จริงหากต้องตรวจแยก; ในฉบับนี้ตรวจ Net ที่ฝังใน index ผ่าน diff ข้างต้นแทน ไม่อ้าง SHA 3/3
-
-อ่าน `test_234_net.js`: ใช้ BrowserContext สังเคราะห์, abort Firebase, recorder ที่ Net.me.set, 12 forced + 6 changed sends, เทียบทุก field ยกเว้น t และตรวจ state ready/off; วัดผล payload จริงของ Net.send ในหน้าเมื่อรัน ไม่ใช่ส่งฐานข้อมูลจริง แต่ **ยังไม่รัน** จึงยังไม่มี Codex errors 0 หรือ 18=18 ยืนยันสองอุปกรณ์จริงอยู่นอกงานตามแผน
-
-## 7. ปัญหาใหม่และคำตัดสิน
-
-| ระดับ | ข้อ | สถานะ |
-|---|---|---|
-| สูง | ยังไม่พบจากขอบเขต static นี้ | ไม่ใช่การรับรองว่า browser ไม่มีบั๊ก |
-| กลาง | N1: inner shape ของ char2 ใช้ default แล้ว ready ต่างจากข้อความ strict ของ G4 | ต้องชี้แจง/เพิ่มกรณีและยืนยัน runtime ก่อนปิด |
-| ต่ำ | N2: `45_net.js` ไม่มีในสอง commit ที่ให้เทียบ | แก้ path/ข้อความหลักฐาน; ไม่ใช่ regression ของเน็ต |
-| ต่ำ | N3: คำว่า fallback sheets “same pixels” ใน test_234_files กว้างกว่าวิธีตรวจ | ฟังก์ชัน h (`test_234_files.js:44`) วน `i += 7` จึงข้าม 6/7 ของ RGBA bytes; ภาพต่างที่ byte ที่ไม่ได้สุ่มอาจได้ hash เท่าเดิม ควรเทียบ/hash ทุก byte ถ้าจะรับรองตรงทุกพิกเซล |
-
-N3 ไม่ได้พิสูจน์ว่าภาพปัจจุบันต่าง และไม่นับเป็นผลฉีดภาพผิดของ Codex เพราะยังไม่รัน เป็นช่องว่างของ assertion ที่อ่านพบ ส่วน test_227 เป็นประเด็นค้างเดิม ไม่รวมเป็นปัญหาใหม่
-
-T38-N1 ที่ HANDOFF ให้ดูพร้อม: อ่าน `qa/g4/suites_cmp.py:207–215` แล้วปฏิเสธชื่อ `.1` และ leading-zero ก่อนเทียบกับ manifest; มี K10–K12 เพิ่มใน selftest สอดคล้องกับข้อเสนอเดิม **ยังไม่รัน selftest ซ้ำในฉบับอ่านโค้ดนี้**
-
-### รายการยังไม่รันที่ต้องเติมก่อนฉบับยืนยัน
-
-1. หลัง Puppeteer ใช้ได้และตั้ง CHROME_EXE เป็น binary ที่รัน blank page ได้ ให้เสิร์ฟ game a6b4be4 และ main eb60c65 คนละพอร์ต (แยก browser profile/เซฟสังเคราะห์)
-2. `test_234_flag.js`, `test_234_files.js`, `test_234_save.js` พร้อม MAIN_PORT, `test_234_net.js`: ทุกชุดต้อง errors 0/exit 0 โดยไม่ skip rollback-main; ผล/ภาพอยู่นอก repo
-3. ชุดเกมคู่ที่เลือกตาม HANDOFF และ test_227 ใน OUT ใหม่; loadprobe คู่พร้อม trace ถ้ายังค้าง; ไม่แทนที่ผลเดิมด้วย retry ที่ผ่าน
-4. Race/GM/save lifecycle ในข้อ 2 และเซฟ malformed ภายในของ N1 ในข้อ 4; ตรวจเซฟก่อน/หลังด้วย ไม่ดูแค่ state
-5. ตรวจภาพ/worker cache จาก browser จริง และยืนยันข้อที่ต้องแก้/ชี้แจงในรายงานนี้
-
-**ไม่เสนอปิด G4.1 หรือเริ่ม G4.2 จากฉบับ 0.1 นี้** ทำเฉพาะรายงานตาม fallback ของเจ้าของ ไม่แก้โค้ด Claude/ภาพ/เซฟจริง ไม่ใช้เครดิต และไม่ commit ผลดิบ/fixture
+| test234-flag.log | c297123019ba67e1 |
+| test234-files.log | ef727ab72d296a1f |
+| test234-save.log | 203a33e1f924f6b6 |
+| test234-net.log | 01ba522d87787fba |
+| probe-own.json | 63a28bd1a39facdd |
+| hash-probe.json | 9d3458f6aa570ded |
+| loadprobe.json | a432ae980d168d79 |
+| t227-compare.log | 09157ecc1d54d1b1 |
+| selected5-compare.log | d5994db232368a52 |
