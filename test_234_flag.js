@@ -7,6 +7,7 @@
 //    no S.char2) · after the hold is released 0 new loads and no file asked for twice · turning it on again reuses the first load → ready, still 15 files once each
 // E  switching saves A (flag on) → B (flag off) → A while A loads: B never gets char2, A gets it once, no save written across (Store checked after save())
 // F  GM panel (S.gm): the row, the state text, the on/off button (≥ 44 px) and "clear v2" needing a second tap; a boy's row is disabled with "ยังไม่มีตัวแบบนี้"
+//    2.36 (Codex T39-N4): the on/off button is aria-pressed false/true, no inline background, and when on its text reads on the drawn pixels (contrast ≥ 4.5)
 // G  the offline cache after a fresh install (service worker on, flag off): 0 character-v2 files and 0 bytes in it (sw.js lists them, never installs them)
 // Prints one JSON line, then `errors N`.  Run: PORT=8775 CHROME_EXE=/path/to/chromium node test_234_flag.js   (serve the repo root first)
 const fs = require('node:fs'), path = require('node:path'), puppeteer = require('puppeteer');
@@ -104,14 +105,24 @@ const strip = (o) => { const c = JSON.parse(JSON.stringify(o)); delete c.char2; 
     // F: GM panel
     { const t = await open(browser); await play(t.p, [{ age: 7, x: { gm: true } }], 0); await sleep(500);
       await t.p.evaluate(() => openGM()); await sleep(300);
-      const row = await t.p.evaluate(() => { const r = document.getElementById('c234row'), b = document.getElementById('c234on'); return r && b ? { text: r.textContent, h: b.getBoundingClientRect().height, dis: b.disabled, clr: !!document.getElementById('c234clr') } : null; });
+      const row = await t.p.evaluate(() => { const r = document.getElementById('c234row'), b = document.getElementById('c234on'); return r && b ? { text: r.textContent, h: b.getBoundingClientRect().height, dis: b.disabled, clr: !!document.getElementById('c234clr'), pressed: b.getAttribute('aria-pressed') } : null; });
       await t.p.click('#c234on'); const ok = await untilNot(t.p, 'loading', 15000); await sleep(200);
       const s1 = await state(t.p); const row2 = await t.p.evaluate(() => document.getElementById('c234row')?.textContent || '');
       await t.p.screenshot({ path: path.join(out, 'f-gm-row.png') });
+      // 2.36 (Codex T39-N4): the "on" button must read well ON THE PIXELS DRAWN (the frame art paints over the CSS background, so the computed
+      // background says nothing): the commonest colour of the button's own screenshot vs its text colour, WCAG contrast ≥ 4.5 · pressed the game's way
+      { const bb = await (await t.p.$('#c234on')).boundingBox(), shot = await t.p.screenshot({ clip: bb, encoding: 'base64' });
+        R.Fbtn = await t.p.evaluate(async (b64) => { const b = document.getElementById('c234on'), cs = getComputedStyle(b), img = new Image(); img.src = 'data:image/png;base64,' + b64; await img.decode();
+          const c = document.createElement('canvas'); c.width = img.width; c.height = img.height; const x = c.getContext('2d'); x.drawImage(img, 0, 0); const d = x.getImageData(0, 0, c.width, c.height).data, n = {};
+          for (let i = 0; i < d.length; i += 4) { const k = (d[i] >> 3) + ',' + (d[i + 1] >> 3) + ',' + (d[i + 2] >> 3); n[k] = (n[k] || 0) + 1; }
+          const bg = Object.entries(n).sort((a, z) => z[1] - a[1])[0][0].split(',').map((v) => v * 8 + 4), fg = cs.color.match(/\d+/g).slice(0, 3).map(Number);
+          const L = (a) => { const s = a.map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }); return 0.2126 * s[0] + 0.7152 * s[1] + 0.0722 * s[2]; };
+          const l1 = L(fg), l2 = L(bg); return { pressed: b.getAttribute('aria-pressed'), inlineBg: b.style.background || '', frames: document.body.classList.contains('art156-frames'), color: cs.color, bg, contrast: +((Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05)).toFixed(2) }; }, shot); }
       await t.p.click('#c234clr'); const armed = await t.p.evaluate(() => ({ char2: !!S.char2, on: S.char2On === true, text: document.getElementById('c234clr')?.textContent || '' }));
       await t.p.click('#c234clr'); await sleep(200); const cleared = await t.p.evaluate(() => ({ char2: S.char2 === undefined ? null : S.char2, on: S.char2On, st: C234.st, stored: Store.all().slots[0].char2 === undefined }));
       R.F = { row, s1: s1.st, char2: !!s1.char2, row2: row2.slice(0, 120), armed, cleared, pe: t.pe.length };
-      ck(row && !row.dis && row.h >= 44 && !row.clr && /ตัวละครรุ่น 2/.test(row.text), 'F row ' + JSON.stringify(row));
+      ck(row && !row.dis && row.h >= 44 && !row.clr && row.pressed === 'false' && /ตัวละครรุ่น 2/.test(row.text), 'F row ' + JSON.stringify(row));
+      ck(R.Fbtn.pressed === 'true' && !R.Fbtn.inlineBg && R.Fbtn.contrast >= 4.5, 'F on button readable (Codex T39-N4) ' + JSON.stringify(R.Fbtn));
       ck(ok && s1.st === 'ready' && s1.char2 && /พร้อม/.test(row2), 'F on → ready ' + JSON.stringify(R.F).slice(0, 300));
       ck(armed.char2 && armed.on && /แตะอีกครั้ง/.test(armed.text), 'F first tap must not clear ' + JSON.stringify(armed));
       ck(cleared.char2 === null && cleared.on === false && cleared.st === 'off' && cleared.stored && t.pe.length === 0, 'F second tap clears ' + JSON.stringify(cleared));
@@ -129,7 +140,7 @@ const strip = (o) => { const c = JSON.parse(JSON.stringify(o)); delete c.char2; 
         for (const k of out.caches) { const c = await caches.open(k); for (const r of await c.keys()) { out.files++; if (/\/(char2\.js|c2-[^/]*)$/.test(new URL(r.url).pathname)) { out.c2.push(r.url.split('/').pop()); const b = await (await c.match(r)).arrayBuffer(); out.bytes += b.byteLength; } } }
         return out; });
       R.G.pe = pe.length;
-      ck(R.G.caches.includes('lantern-v237') && R.G.files > 50 && R.G.c2.length === 0 && R.G.bytes === 0 && pe.length === 0, 'G install ' + JSON.stringify(R.G).slice(0, 300));
+      ck(R.G.caches.includes('lantern-v238') && R.G.files > 50 && R.G.c2.length === 0 && R.G.bytes === 0 && pe.length === 0, 'G install ' + JSON.stringify(R.G).slice(0, 300));
       await bc.close(); }
   } catch (e) { errors.push('crash: ' + String(e && e.stack || e).slice(0, 300)); }
   finally { await browser.close(); }

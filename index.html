@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.35';
+const VERSION='Lantern Academy 2.36';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -7798,15 +7798,17 @@ function c234Migrate(s){   // pure: reads a COPY of the save, never changes s ·
   return {char2:Object.assign({},app,{from}),app}}
 {const _sg234=startGame;startGame=function(){const r=_sg234.apply(this,arguments);try{c234Sync()}catch(e){}return r}}
 // GM panel row (TH/EN): the flag, its state (kept current while the row is on screen), and "clear v2" with an in-page second tap (no browser dialog)
+// 2.36 (Codex T39-N4): the on/off button shows "on" the game's own way (aria-pressed → the pressed style / the active frame art) — 2.35 put dark
+// text on an inline gold background that the frame art (border-image … fill) painted over, so the label was hard to read
 function c234StText(){if(!S)return '';const tx=(a,b)=>LANG==='en'?b:a,who=c234Who(S),on=S.char2On===true,st=C234.owner===S?C234.st:'off';
   const ST={off:tx('ปิด','off'),loading:tx('กำลังโหลด…','loading…'),ready:tx('พร้อม · ขั้น G4.1 ยังไม่วาดตัวใหม่','ready · step G4.1 does not draw it yet'),failed:tx('ใช้ไม่ได้ · ใช้ตัวเดิม','unavailable · original character')};
   const why=who?tx('ยังไม่มีตัวแบบนี้','No v2 character for this player yet'):(on&&st==='failed')?(C234.why==='save look unreadable'?tx('ลุครุ่น 2 ในเซฟนี้อ่านไม่ได้','The v2 look in this save cannot be read'):C234.why):'';
   return tx('สถานะ: ','State: ')+(on?ST[st]:ST.off)+(why?' · '+why:'')}
 function c234Paint(){const e=document.getElementById('c234st');if(e)e.textContent=c234StText()}
 function c234Row(h2){const tx=(a,b)=>LANG==='en'?b:a,who=c234Who(S),on=S.char2On===true;
-  const d=document.createElement('div');d.className='pn';d.id='c234row';d.style.margin='6px 0';const hi='background:#e8c46a;color:#1b1330;';
+  const d=document.createElement('div');d.className='pn';d.id='c234row';d.style.margin='6px 0';
   d.innerHTML='<b>'+tx('ตัวละครรุ่น 2 (ทดสอบ · เซฟนี้)','Character v2 (trial · this save)')+'</b><div id="c234st" style="margin-top:4px">'+c234StText()+'</div>'+
-    '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px"><button id="c234on" style="min-height:44px;'+(on?hi:'')+'"'+(who&&!on?' disabled':'')+'>'+(on?tx('ปิดตัวละครรุ่น 2','Turn v2 off'):tx('เปิดตัวละครรุ่น 2','Turn v2 on'))+'</button>'+
+    '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px"><button id="c234on" style="min-height:44px" aria-pressed="'+on+'"'+(who&&!on?' disabled':'')+'>'+(on?tx('ปิดตัวละครรุ่น 2','Turn v2 off'):tx('เปิดตัวละครรุ่น 2','Turn v2 on'))+'</button>'+
     (on||S.char2!==undefined?'<button id="c234clr" style="min-height:44px">'+tx('ล้างตัวรุ่น 2','Clear v2')+'</button>':'')+'</div>';
   h2.after(d);
   $('c234on').onclick=()=>{if(!S)return;if(S.char2On===true)S.char2On=false;else if(!c234Who(S))S.char2On=true;else return;save();c234Sync();closeModal();openGM()};
