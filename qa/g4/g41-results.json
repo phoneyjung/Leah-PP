@@ -795,5 +795,46 @@
    },
    "note": "this pass does not explain the 2.34 test_227 failure; cause still not found. test_227 on branch code overall 31/32, main 32/32"
   }
+ },
+ "v2_36": {
+  "game": "Lantern Academy 2.36",
+  "code": "715bc84",
+  "after": "Codex T39 v1.0 (ed1ed58): N1-N3 closed, N4 low (GM v2 button hard to read), recommends accepting G4.1",
+  "N4": {
+   "fix": "#c234on uses aria-pressed true/false (game's pressed style / active frame art), no inline colours",
+   "contrast_on_drawn_pixels": {
+    "2.36": 13.77,
+    "2.35_code_with_new_test": 1.09
+   },
+   "shots": "844x390 and 1180x820 checked by eye"
+  },
+  "suites234": {
+   "flag": "errors 0",
+   "files": "errors 0",
+   "save": "errors 0 (MAIN_PORT, part O ran: version 2.33, on true, same true, pe 0)",
+   "net": "errors 0",
+   "K": {
+    "rows": 24,
+    "ready": 3,
+    "failed": 21,
+    "same": 24
+   }
+  },
+  "pair6": {
+   "only": "test_103 test_105 test_109 test_178 test_201 test_227",
+   "judge": {
+    "suites": 6,
+    "legacy": 3,
+    "runs": 16,
+    "bothPass": 5,
+    "bad": [],
+    "undecided": [],
+    "metaOk": true,
+    "verdict": "pass",
+    "exit": 0
+   },
+   "alldone": "manifest=70067c3f88c9bbd3 target_sha=7f72d7407945fdaa"
+  },
+  "note": "main's own GM 'chosen' buttons (age/job/speed) use the same inline style (2 places in main) and are hard to read too; pre-existing, outside the G4 W table, not changed"
  }
 }
