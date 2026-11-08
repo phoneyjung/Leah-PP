@@ -757,6 +757,43 @@
     "38s"
    ]
   ],
-  "M1": "paired run of 115 suites on 4ba6784 with runner v3.3 trace: in progress (report v1.2)"
+  "M1": {
+   "run": "suites_pair.sh v3.3 + trace · 2026-11-08 11:31:05-15:14:45 · main eb60c65 vs branch 4ba6784 · resumed once at the 2 h limit (13:31, test_201 main run 1 redone)",
+   "judge": {
+    "suites": 115,
+    "legacy": 32,
+    "runs": 242,
+    "bothPass": 112,
+    "bad": [],
+    "undecided": [],
+    "metaOk": true,
+    "verdict": "pass",
+    "exit": 0
+   },
+   "alldone": "manifest=874fcd34d89a68dc suites_sha=dd56bbb3c9293652 env_sha=df418b6bf0d90a60 target_sha=6e0eb8db6aa396f1",
+   "fail_both_sides": {
+    "test_103_village": "main 3/3 = branch 3/3 (planted error)",
+    "test_170_swordsman": "main fail 3/3, branch fail 2/3, same assert !PS.gmSprite170&&!S.gmSprite170",
+    "test_222_tk_pack": "fail 3/3 both, '12 letters at most (online rule)'"
+   },
+   "test_227_swipe": "pass 1/1 both sides (no rerun, no trace file)",
+   "trace_files": {
+    "count": 12,
+    "page_errors": 0,
+    "failed_requests_other_than_google_font_and_manifest_ping": 0,
+    "pending_at_exit": "0 except test_222 main run 2: favicon-32.png"
+   },
+   "machine": {
+    "sys_rows": 243,
+    "max_load1": 3.39,
+    "min_memavailable_kb": 7154512,
+    "max_chrome_procs": 12,
+    "server_log_lines": {
+     "main": 115428,
+     "branch": 116566
+    }
+   },
+   "note": "this pass does not explain the 2.34 test_227 failure; cause still not found. test_227 on branch code overall 31/32, main 32/32"
+  }
  }
 }
