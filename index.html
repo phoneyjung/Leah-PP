@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.37';
+const VERSION='Lantern Academy 2.38';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -7824,23 +7824,29 @@ function c234Row(h2){const tx=(a,b)=>LANG==='en'?b:a,who=c234Who(S),on=S.char2On
 // Lantern (plan 5): held only when DARK() && LKID() · power 100 (S.lamp > warn) · 10 (0 < S.lamp ≤ warn, glass 35 %) · 0 (S.lamp ≤ 0: still held,
 // glass dark) · no S.lamp = 1 (the game's own default) · no emissive pass in G4 (the glass is y-sorted with the body and can be covered).
 // A Char2 draw that returns false, or a held lantern without a light point, is a bug → 'failed' from that frame on (old character + GM label), never blank.
+// 2.38 (Codex T40-N1): the light point is checked BEFORE anything of the new body is drawn — in every helper of the frame (c234Go), on every map
+// (not only where the dark layer is drawn) — so a null light gives the old shadow, clip and body in the SAME frame. Held = the lantern is wanted
+// (dc.held) AND the actor is in its holding state (A.holding, set by the tick of this step): while paused right after a map change the actor may
+// not hold yet — then Char2 draws it without the lantern and that is not a failure. The light found for the body is kept with the feet for W11.
 C234.A=null;C234.pack=null;C234.feet=null;C234.step=0;C234.n={call:0,body:0,tick:0,shadow:0,hole:0,sit:0};
 function c234Use(){return C234.on()&&!!C234.A&&!!C234.app&&!!C234.pack&&!!window.Char2}
 function c234Hold(){return DARK()&&LKID()}
 function c234Lamp(){const w=LAMP_CFG(S.age).warn,l=S.lamp===undefined?1:Number(S.lamp);return l>w?100:l>0?10:0}
 function c234DC(){const h=HOUSES[S.house]||HOUSES[0],dc={house:h.id};if(c234Hold())dc.held={id:C234.pack.lantern.id,on:true,lit:true,power:c234Lamp()};return dc}
+function c234Go(){if(!c234Use())return null;const dc=c234DC();let L=null;   // 2.38 (T40-N1): {dc, L} for this frame, or null = the old way
+  if(dc.held&&C234.A.holding){L=Char2.light(C234.A,dc);if(!L){c234Broke('light');return null}}return {dc,L}}
 function c234Broke(why){if(C234.st!=='ready')return;C234.gen++;C234.st='failed';C234.why=why;C234.app=null;C234.A=null;C234.feet=null;C234.cnt.fail++;c234Paint()}
 function c234Body(X,Y,F,yoff){   // W1/W2: feet = (X+F/2, Y+F−2+yoff) = the old sprite's feet (lunge and rounding included) · s = 1 under the game's transform
-  if(!c234Use())return false;C234.n.call++;const fx=X+F/2,fy=Y+F-2+yoff,dc=c234DC();
+  const g=c234Go();if(!g)return false;C234.n.call++;const fx=X+F/2,fy=Y+F-2+yoff,dc=g.dc;
   if(!Char2.draw(ctx,C234.app,dc,C234.A,fx,fy,1)){c234Broke('draw');return false}
-  const m=ctx.getTransform();C234.feet={x:(m.a*fx+m.c*fy+m.e)/SC,y:(m.b*fx+m.d*fy+m.f)/SC,step:C234.step,dc};C234.n.body++;return true}   // feet on screen (sit translate included)
-function c234Clip(X,Y,F,cut){return c234Use()?[X+F/2-48,Y+F-2-94,96,96-cut]:[X,Y,F,F-cut]}   // W2: the 96 cell, bottom edge Y+F−cut = the old one
-function c234Shadow(){if(!c234Use())return false;const ro=C234.pack.render_offset[C234.A.dir]||0;   // W3 (inside the game's save/restore)
+  const m=ctx.getTransform();C234.feet={x:(m.a*fx+m.c*fy+m.e)/SC,y:(m.b*fx+m.d*fy+m.f)/SC,step:C234.step,dc,L:g.L};C234.n.body++;return true}   // feet on screen (sit translate included)
+function c234Clip(X,Y,F,cut){return c234Go()?[X+F/2-48,Y+F-2-94,96,96-cut]:[X,Y,F,F-cut]}   // W2: the 96 cell, bottom edge Y+F−cut = the old one
+function c234Shadow(){if(!c234Go())return false;const ro=C234.pack.render_offset[C234.A.dir]||0;   // W3 (inside the game's save/restore)
   ctx.globalCompositeOperation='source-over';ctx.globalAlpha=1;ctx.fillStyle='rgba(20,18,40,.35)';ctx.beginPath();ctx.ellipse(Math.round(P.x-camX)+ro,Math.round(P.y-camY),14,3,0,0,7);ctx.fill();C234.n.shadow++;return true}
-function c234SitTop(s){if(!c234Use())return null;const b=Char2.anchor(C234.A,'box',c234DC());if(!b){c234Broke('anchor box');return null}   // W5: top of the clip
+function c234SitTop(s){const g=c234Go();if(!g)return null;const b=Char2.anchor(C234.A,'box',g.dc);if(!b){c234Broke('anchor box');return null}   // W5: top of the clip
   C234.n.sit++;return s.seatY+G9SIT.drop-(94-b[1])-4}
 function c234Hole(x,y){const f=C234.feet;if(!c234Use()||!f||f.step!==C234.step)return [x,y];   // W11: from the feet the body was drawn at THIS frame
-  if(f.dc.held){const L=Char2.light(C234.A,f.dc);if(!L){c234Broke('light');return [x,y]}C234.n.hole++;return [f.x+L.x,f.y+L.y]}   // light() includes the offset
+  if(f.L){C234.n.hole++;return [f.x+f.L.x,f.y+f.L.y]}   // light() includes the offset · checked before the body was drawn (2.38)
   const b=Char2.anchor(C234.A,'body',f.dc);if(!b){c234Broke('anchor body');return [x,y]}C234.n.hole++;
   return [f.x+(C234.pack.render_offset[C234.A.dir]||0),f.y-(94-b[1])+4]}   // body, e −4 (the old 26 = 30 − 4)
 {const _u237=update;update=function(dt){const r=_u237.apply(this,arguments);try{if(c234Use()){C234.step++;

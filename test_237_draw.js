@@ -16,6 +16,7 @@
 // J  cave light (W11): no map of game 2.33 uses the cave darkness layer (cavemouth / hunt1 are 'bright') → here cavemouth with bright switched off:
 //    the player's hole = drawn feet + Char2.light() (S and N = hidden lantern) · flag off = (P.x−camX, P.y−26−camY)
 // K  a Char2.draw that returns false → 'failed' and the OLD body drawn in the same frame (never blank) · light() null while held → 'failed'
+//    (2.38, T40-N1: asked before anything new is drawn, on the bright cave mouth too → the old shadow AND body in that same frame · S and N)
 // L  no tick while PAUSE or P.dead
 // M  flag off: Char2 0 calls, C234 counters 0, old body + blurred shadow every frame (the old game)
 // N  not allowed (girl 10 · boy 7) with the flag on: off, Char2 0 calls
@@ -65,7 +66,7 @@ async function wrapC2(p) {   // window.Char2 is frozen → a copy with draw/ligh
     window.Char2 = Object.assign({}, C2, { __w: 1, __orig: C2,
       draw(...a) { const c = T.cur; if (T.fail > 0 && !(a[7] && a[7].spare)) { T.fail--; if (c) c.c2.push({ forced: 1, r: false }); return false; }
         const r = C2.draw(...a); if (c && !(a[7] && a[7].spare)) c.c2.push({ x: a[4], y: a[5], s: a[6], alpha: a[0].globalAlpha, held: a[2].held ? Object.assign({}, a[2].held) : null, house: a[2].house, dir: a[3].dir, anim: a[3].anim, r }); return r; },
-      light(...a) { if (T.lightNull > 0) { T.lightNull--; return null; } return C2.light(...a); } });
+      light(...a) { const c = T.cur; if (c) c.lt = (c.lt || 0) + 1; if (T.lightNull > 0) { T.lightNull--; if (c) c.ln = (c.ln || 0) + 1; return null; } return C2.light(...a); } });
   });
 }
 const rec = (p, n) => p.evaluate((n) => new Promise((res) => { const T = window.__T; T.fr = []; T.on = true; let k = 0; const f = () => { if (++k > n) { T.on = false; res(T.fr.map((c) => { delete c.inP; return c; })); } else requestAnimationFrame(f); }; requestAnimationFrame(f); }), n);
@@ -192,10 +193,33 @@ const drawnOK = (fr) => fr.filter((c) => c.player > 0).every((c) => c.c2.length 
       R.K1 = { st: await t.p.evaluate(() => C234.st), why: await t.p.evaluate(() => C234.why), firstOld: first && first.old, after: fr.slice(fr.indexOf(first) + 1).map((c) => [c.c2.length, c.old]) };
       ck(R.K1.st === 'failed' && R.K1.why === 'draw' && first && first.old >= 1 && R.K1.after.length && R.K1.after.every((q) => q[0] === 0 && q[1] >= 1), 'K draw false → failed, old body same frame ' + JSON.stringify(R.K1));
       await t.bc.close(); }
-    { const t = await open(browser); await setup(t.p, { map: 'cavemouth' });
-      await t.p.evaluate(() => { M.bright = false; __T.lightNull = 1; }); const fr = await rec(t.p, 4);
-      R.K2 = { st: await t.p.evaluate(() => C234.st), why: await t.p.evaluate(() => C234.why), old: fr.slice(1).map((c) => c.old) };
-      ck(R.K2.st === 'failed' && R.K2.why === 'light' && R.K2.old.every((v) => v >= 1), 'K light null → failed ' + JSON.stringify(R.K2));
+    // K2 (2.38 after Codex T40-N1): holding, light() null → failed and the OLD shadow + body in the SAME frame, on the real bright cave mouth
+    // (no dark layer) and with the dark layer, facing S and N (N = the hidden lantern: light() gives a point with hidden = true, never null)
+    R.K2 = [];
+    for (const bright of [true, false]) for (const dir of ['S', 'N']) {
+      const t = await open(browser); await setup(t.p, { map: 'cavemouth' });
+      await t.p.evaluate((o) => { M.bright = o.bright; P.row = C234.pack.dirs.indexOf(o.dir); P.moving = false; }, { bright, dir }); await sleep(200);
+      const pre = await rec(t.p, 3), hid = await t.p.evaluate(() => { const L = Char2.__orig.light(C234.A, c234DC()); return L && L.hidden; });
+      await t.p.evaluate(() => { __T.lightNull = 1; }); const fr = await rec(t.p, 4), i = fr.findIndex((c) => c.ln > 0), f = fr[i], after = i >= 0 ? fr.slice(i + 1) : [];
+      const K = { bright, dir, hidden: hid, pre: pre.map((c) => [c.st1, c.lt || 0, c.c2.length, c.old, c.holes.length]), st: await t.p.evaluate(() => C234.st), why: await t.p.evaluate(() => C234.why),
+        first: f && { k: i, st0: f.st0, st1: f.st1, old: f.old, blur: f.blur, c2: f.c2.length, ell: f.ell.length }, after: after.map((c) => [c.c2.length, c.old, c.blur]) };
+      R.K2.push(K);
+      ck(K.pre.length && K.pre.every((q) => q[0] === 'ready' && q[1] >= 1 && q[2] === 1 && q[3] === 0 && (bright ? q[4] === 0 : q[4] >= 1)) && K.hidden === (dir === 'N'), 'K2 before: holding, light() asked every frame, new body ' + JSON.stringify(K));
+      const F1 = K.first; ck(K.st === 'failed' && K.why === 'light' && F1 && F1.k === 0 && F1.st0 === 'ready' && F1.st1 === 'failed' && F1.c2 === 0 && F1.old >= 1 && F1.blur >= 1 && K.after.length && K.after.every((q) => q[0] === 0 && q[1] >= 1 && q[2] >= 1),
+        'K2 light null → failed, old shadow + body in the same frame ' + JSON.stringify(K));
+      ck(t.pe.length === 0, 'K2 page errors ' + t.pe.join(' | '));
+      await t.bc.close(); }
+    // K3 (2.38): paused right after a map change into the dark → the lantern is wanted but the actor has not ticked into holding yet:
+    // drawn by Char2 without the lantern, NOT a failure · after the pause it holds and light() is asked
+    { const t = await open(browser); await setup(t.p, { map: 'capital' });
+      await t.p.evaluate(() => { PAUSE = true; goMap('cavemouth'); PAUSE = true; }); await sleep(100);
+      const fr = await rec(t.p, 3), mid = await t.p.evaluate(() => ({ st: C234.st, map: M.id, held: !!c234DC().held, holding: C234.A && C234.A.holding }));
+      await t.p.evaluate(() => { PAUSE = false; }); await sleep(300); const fr2 = await rec(t.p, 3);
+      const K3 = { mid, paused: fr.map((c) => [c.player, c.c2.length, c.c2.every((q) => q.r), c.old, c.lt || 0]), after: fr2.map((c) => [c.st1, c.c2.length, c.lt || 0]), st: await t.p.evaluate(() => C234.st) };
+      R.K3 = K3;
+      ck(mid.map === 'cavemouth' && mid.held === true && mid.holding === false && K3.paused.length && K3.paused.every((q) => q[0] >= 1 && q[1] === 1 && q[2] && q[3] === 0 && q[4] === 0) &&
+        K3.after.every((q) => q[0] === 'ready' && q[1] === 1 && q[2] >= 1) && K3.st === 'ready', 'K3 paused before the first holding tick = no failure ' + JSON.stringify(K3));
+      ck(t.pe.length === 0, 'K3 page errors ' + t.pe.join(' | '));
       await t.bc.close(); }
     // M: flag off
     { const t = await open(browser); await setup(t.p, { map: 'capital', on: false }); const fr = await rec(t.p, 30), dr = fr.filter((c) => c.player > 0);
