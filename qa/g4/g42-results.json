@@ -529,12 +529,301 @@
  },
  "W11_note": "cavemouth and hunt1 are 'bright' in game 2.33 (all 32 map ids checked): drawDark is not reached in play; tested with bright off in the test page",
  "M1_pair": {
-  "runner": "suites_pair.sh v3.3 + trace", "judge": "suites_cmp.py v3.2.1", "main": "eb60c65", "branch": "deea224 (game code fb286c4)",
-  "suites": 115, "legacy": 32, "runs": 262, "metaOk": true, "manifest": "6d72f61c61780cbd",
-  "bothPass": 112, "failBothSides": ["test_103_village", "test_170_swordsman", "test_222_tk_pack"], "new": 0,
-  "undecided": ["test_122_spots"], "exit": 3,
-  "test_122_spots": {"endedIn_room": {"this_run_main": "0/5", "this_run_branch": "1/5", "g41_main": "1/4", "g41_branch": "0/4"},
-    "read_by": "Claude", "reading": "the same timing flake of an old print-only suite, seen on main in G4.1; not a regression", "codex": "asked in T40"},
-  "trace_files": 16, "page_errors": 0
+  "runner": "suites_pair.sh v3.3 + trace",
+  "judge": "suites_cmp.py v3.2.1",
+  "main": "eb60c65",
+  "branch": "deea224 (game code fb286c4)",
+  "suites": 115,
+  "legacy": 32,
+  "runs": 262,
+  "metaOk": true,
+  "manifest": "6d72f61c61780cbd",
+  "bothPass": 112,
+  "failBothSides": [
+   "test_103_village",
+   "test_170_swordsman",
+   "test_222_tk_pack"
+  ],
+  "new": 0,
+  "undecided": [
+   "test_122_spots"
+  ],
+  "exit": 3,
+  "test_122_spots": {
+   "endedIn_room": {
+    "this_run_main": "0/5",
+    "this_run_branch": "1/5",
+    "g41_main": "1/4",
+    "g41_branch": "0/4"
+   },
+   "read_by": "Claude",
+   "reading": "the same timing flake of an old print-only suite, seen on main in G4.1; not a regression",
+   "codex": "asked in T40"
+  },
+  "trace_files": 16,
+  "page_errors": 0
+ },
+ "v2_38_after_T40": {
+  "game": "2.38",
+  "code": "568bd87 (game) · e04a3c5 (cost_probe verdict)",
+  "codex": "REVIEW_CODEX_T40_G42.md v1.0 @1a58d69: high 0 · medium 3 (N1 N2 N3) · N4 closed",
+  "suites": {
+   "test_234_flag": 0,
+   "test_234_files": 0,
+   "test_234_save": 0,
+   "test_234_net": 0,
+   "test_237_draw": 0
+  },
+  "N1": {
+   "test_237_K2_cases": 4,
+   "on_2_38_errors": 0,
+   "new_test_on_2_37_errors": 6,
+   "first_frame": "failed · old body 1 · old blurred shadow 1 · Char2.draw 0",
+   "K3_paused": "4/4 frames Char2 without lantern, not failed; after the pause holding, light 2/frame"
+  },
+  "N2": {
+   "selftest_cases": 10,
+   "judge_v1": "4/10",
+   "judge_v2": "10/10",
+   "M5_2_38": {
+    "0.75": "69 pass meta0 errors0 bad0",
+    "1": "69 pass meta0 errors0 bad0"
+   },
+   "selftest_on_2_38_evidence": "10/10"
+  },
+  "M1_replay_2_38": {
+   "default": "24 · 0 px",
+   "zoom1": "24 · 0 px",
+   "intro": "8 · 0 px"
+  },
+  "N3_cost_probe": {
+   "browser": "Chrome/153.0.8010.12",
+   "run1": {
+    "cavemouth": {
+     "frameMs": 29.727,
+     "body": [
+      0.272,
+      0.06,
+      0.218
+     ],
+     "shadow": [
+      0.025,
+      0.154,
+      -0.128
+     ],
+     "playerDiff": 0.09,
+     "share": 0.003,
+     "whole_diff": 0.88
+    },
+    "capital": {
+     "frameMs": 47.953,
+     "body": [
+      0.127,
+      0.062,
+      0.065
+     ],
+     "shadow": [
+      0.021,
+      0.159,
+      -0.138
+     ],
+     "playerDiff": -0.073,
+     "share": -0.002,
+     "whole_diff": -1.473
+    },
+    "farm": {
+     "frameMs": 76.547,
+     "body": [
+      0.131,
+      0.073,
+      0.07
+     ],
+     "shadow": [
+      0,
+      0,
+      0
+     ],
+     "playerDiff": 0.07,
+     "share": 0.001,
+     "whole_diff": 0.08
+    }
+   },
+   "final": {
+    "cavemouth": {
+     "frameMs": 35.033,
+     "body": [
+      0.294,
+      0.071,
+      0.232
+     ],
+     "shadow": [
+      0.03,
+      0.164,
+      -0.137
+     ],
+     "playerDiff": 0.095,
+     "share": 0.003,
+     "whole_diff": -2.1
+    },
+    "capital": {
+     "frameMs": 44.627,
+     "body": [
+      0.118,
+      0.062,
+      0.054
+     ],
+     "shadow": [
+      0.019,
+      0.144,
+      -0.127
+     ],
+     "playerDiff": -0.073,
+     "share": -0.002,
+     "whole_diff": 0.787
+    },
+    "farm": {
+     "frameMs": 66.653,
+     "body": [
+      0.12,
+      0.071,
+      0.051
+     ],
+     "shadow": [
+      0,
+      0,
+      0
+     ],
+     "playerDiff": 0.051,
+     "share": 0.001,
+     "whole_diff": -0.913
+    }
+   },
+   "inject_3ms": {
+    "cavemouth": {
+     "frameMs": 33.347,
+     "body": [
+      3.606,
+      0.084,
+      3.549
+     ],
+     "shadow": [
+      0.031,
+      0.175,
+      -0.145
+     ],
+     "playerDiff": 3.404,
+     "share": 0.102,
+     "whole_diff": 3.16
+    },
+    "capital": {
+     "frameMs": 48.733,
+     "body": [
+      3.428,
+      0.075,
+      3.319
+     ],
+     "shadow": [
+      0.016,
+      0.18,
+      -0.138
+     ],
+     "playerDiff": 3.181,
+     "share": 0.065,
+     "whole_diff": 8.74
+    },
+    "farm": {
+     "frameMs": 77.067,
+     "body": [
+      3.447,
+      0.064,
+      3.365
+     ],
+     "shadow": [
+      0,
+      0,
+      0
+     ],
+     "playerDiff": 3.365,
+     "share": 0.044,
+     "whole_diff": 10.933
+    }
+   },
+   "inject_verdict": "fail"
+  },
+  "N3_M6_rounds5": {
+   "S1-capital": {
+    "pairedRatios": [
+     0.89,
+     1.268,
+     1.139,
+     1.071,
+     1.083
+    ],
+    "ratio": 1.083,
+    "controlPairedRatios": [
+     0.961,
+     0.894,
+     1.083,
+     0.928,
+     0.945
+    ],
+    "controlRatio": 0.945,
+    "verdict": "cannot decide (after 5 rounds)"
+   },
+   "S2-farm": {
+    "pairedRatios": [
+     1.47,
+     0.994,
+     1.011,
+     0.685,
+     1.063
+    ],
+    "ratio": 1.011,
+    "controlPairedRatios": [
+     0.963,
+     0.959,
+     1.092,
+     0.872,
+     1.061
+    ],
+    "controlRatio": 0.963,
+    "verdict": "pass"
+   },
+   "S3-cavemouth": {
+    "pairedRatios": [
+     1.413,
+     1.364,
+     0.992,
+     1.351,
+     1.451
+    ],
+    "ratio": 1.364,
+    "controlPairedRatios": [
+     1.097,
+     1.128,
+     0.929,
+     0.855,
+     1
+    ],
+    "controlRatio": 1,
+    "verdict": "pass"
+   }
+  },
+  "N3_M6_exit": 3,
+  "M6b_proposal": "owner to decide (report 6.2): player extra cost <= 10 % of the old frame per scene, fps.js kept as report + hard checks",
+  "pair_6_suites": {
+   "only": "test_105 test_109 test_122 test_148 test_178 test_227",
+   "main": "eb60c65",
+   "branch": "e04a3c5 (game 568bd87)",
+   "runs": 16,
+   "bothPass": 5,
+   "failBothSides": [
+    "test_178_dig_button"
+   ],
+   "new": 0,
+   "undecided": 0,
+   "metaOk": true,
+   "exit": 0
+  }
  }
 }
