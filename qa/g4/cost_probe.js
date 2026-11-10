@@ -1,8 +1,10 @@
-// G4.2 cost probe (Codex T40-N3: "find what loads the cave mouth"): what the flag-on player costs per frame, measured INSIDE one page,
-// the same scene and the same state, old way vs Char2 way, so the machine's drift (the FPS gate's noise) cannot enter.
-// Not a gate yet (M6 stays the gate until the owner decides) — it is the explanation beside it. 844×390 DPR 3 (as fps.js) · CPU throttled (CPU, default 4×).
-// Proposed M6b (owner to decide · T40-N3): per scene, the player's extra cost (body + shadow + tick, on − off) ≤ LIMIT (0.10) × the old frame
-// time (= the FPS drop ≤ ~10 % of the master plan) → exit 0 · over → exit 1 · errors / not ready / a replay that is not faithful → exit 2.
+// G4.2 cost probe — the M6 gate for G4.2–G4.5 (owner D-G4-7, 10 Nov 2026 = a+c · plan 1.3): what the flag-on player costs per frame,
+// measured INSIDE one page, the same scene and the same state, old way vs Char2 way, blocks alternating — this keeps most of the machine's
+// drift (the noise that made the FPS ratio of fps.js unable to decide) out of the difference; it does not prove that no drift enters at all.
+// Gate: per scene, the player's extra cost (body + shadow + tick, on − off) ≤ LIMIT (0.10) × the old frame time (= the FPS drop ≤ ~10 % of
+// the master plan) → exit 0 · over → exit 1 · errors / not ready / a replay that is not faithful → exit 2. fps.js still runs every step as a
+// report + its hard checks; the owner's real phone is measured once before G4.6 (this probe never stands in for it).
+// 844×390 DPR 3 (as fps.js) · CPU throttled (CPU, default 4×).
 //   whole: render(…) of a full frame, N frames per block, each frame followed by a 1-px getImageData (the canvas must raster before the
 //          next frame starts) · blocks alternate on/off (on-off, off-on, …) · paired difference per pair of blocks → median + all pairs
 //   body:  drawPlayer(…) alone, N×20 calls per block, a 1-px getImageData every 20 calls · old body vs Char2 body (+ lantern when held)
@@ -17,8 +19,10 @@
 // INJECT_MS=3: every Char2.draw first burns 3 ms (wall clock) → the probe must MEASURE it (proof that it reacts; never in a real measurement):
 //   exit 0 = seen in every scene (playerDiff ≥ 0.8 × INJECT_MS) · 1 = missed · the 10 % verdict is not used then (3 ms is under 10 % of a
 //   frame longer than 30 ms, which is the gate working, not the probe failing — Codex T41 §4).
-// Known limits (Codex T41 §4): the kid stands still (the loop is paused during the blocks; render still draws every call) — walking frames,
-//   easing, cache misses and GPU/compositor time outside the canvas raster are not in it; "off" is 2.38 without C234.A, not main (M1 = 0 px).
+// Known limits (Codex T41 §4 · T42-N1): the kid does not walk in the world (the loop is paused during the blocks; render still draws every
+//   call) — the tick part walks the actor (idle → walk frames), but not every pose, turn or route, nor touch-to-screen delay; cache misses,
+//   batching differences (forced 1-px readbacks) and GPU/compositor time outside the canvas raster are not in it; "off" is the same build
+//   without C234.A, not main (M1 = 0 px); the replay check covers the W3 calls as they are now (no clip/filter/shadow blur — re-check if added).
 // DROP_STATE=globalCompositeOperation,imageSmoothingEnabled: replays WITHOUT those (the v1 mistake) → the replay check must fail (exit 2).
 //   PORT=8791 CHROME_EXE=… node qa/g4/cost_probe.js OUT.json      (MAPS=cavemouth,capital,farm · N=15 · BL=30 · CPU=4)
 'use strict';
