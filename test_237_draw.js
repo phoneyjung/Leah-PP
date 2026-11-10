@@ -70,7 +70,9 @@ async function wrapC2(p) {   // window.Char2 is frozen → a copy with draw/ligh
       light(...a) { const c = T.cur; if (c) c.lt = (c.lt || 0) + 1; if (T.lightNull > 0 && (!T.lightNullInFrame || c)) { T.lightNull--; if (c) c.ln = (c.ln || 0) + 1; return null; } return C2.light(...a); } });
   });
 }
-const rec = (p, n) => p.evaluate((n) => new Promise((res) => { const T = window.__T; T.fr = []; T.on = true; let k = 0; const f = () => { if (++k > n) { T.on = false; res(T.fr.map((c) => { delete c.inP; return c; })); } else requestAnimationFrame(f); }; requestAnimationFrame(f); }), n);
+// fail (optional): set __T.fail in the same task that starts recording — no frame can slip in between (2.41: K1 once saw the fault land before
+// recording began on a busy machine, so its forced frame was never recorded)
+const rec = (p, n, fail) => p.evaluate((n, fail) => new Promise((res) => { const T = window.__T; if (fail) T.fail = fail; T.fr = []; T.on = true; let k = 0; const f = () => { if (++k > n) { T.on = false; res(T.fr.map((c) => { delete c.inP; return c; })); } else requestAnimationFrame(f); }; requestAnimationFrame(f); }), n, fail);
 const feetOf = (c) => [Math.round(c.P[0] - 32 - c.cam[0]) + 32, Math.round(c.P[1] - 62 - c.cam[1]) + 62];   // no lunge (atk 0 checked)
 const drawnOK = (fr) => fr.filter((c) => c.player > 0).every((c) => c.c2.length === c.player && c.c2.every((q) => q.r === true) && c.old === 0);
 
@@ -192,7 +194,7 @@ const drawnOK = (fr) => fr.filter((c) => c.player > 0).every((c) => c.c2.length 
       await t.bc.close(); }
     // K: failures are never blank
     { const t = await open(browser); await setup(t.p, { map: 'capital' });
-      await t.p.evaluate(() => { __T.fail = 1; }); const fr = await rec(t.p, 4), first = fr.find((c) => c.c2.some((q) => q.forced));
+      const fr = await rec(t.p, 4, 1), first = fr.find((c) => c.c2.some((q) => q.forced));
       R.K1 = { st: await t.p.evaluate(() => C234.st), why: await t.p.evaluate(() => C234.why), firstOld: first && first.old, after: fr.slice(fr.indexOf(first) + 1).map((c) => [c.c2.length, c.old]) };
       ck(R.K1.st === 'failed' && R.K1.why === 'draw' && first && first.old >= 1 && R.K1.after.length && R.K1.after.every((q) => q[0] === 0 && q[1] >= 1), 'K draw false → failed, old body same frame ' + JSON.stringify(R.K1));
       await t.bc.close(); }
