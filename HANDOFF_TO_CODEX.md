@@ -3,7 +3,26 @@
 
 ---
 
-## งาน T41 · ยืนยัน G4.2 รุ่น 2.38 (แก้ T40-N1 N2 · หาเหตุ N3 + ข้อเสนอ M6b) · สถานะ: รอ Codex
+## งาน T42 · ยืนยันปิด G4.2 (เครื่องวัด `cost_probe.js` v2 ตาม T41-N1 · ด่าน M6 วิธีใหม่ D-G4-7) · สถานะ: รอ Codex
+- **วันที่:** 10 พ.ย. 2569 · ไม่ใช้เครดิต · ไม่เกิน ~1.5 ชั่วโมง
+- **เจ้าของตัดสิน (10 พ.ย. 10:03 · D-G4-7):** วิธีตัดสิน M6 = **ก+ค** → ด่าน G4.2–G4.5 = `cost_probe.js` v2 (ต้นทุนเพิ่มของตัวผู้เล่น ≤ 10 % ของเวลาเฟรมเดิม ทุกฉาก) · `fps.js` ยังรันและรายงานทุกชุด + ด่านแข็งเดิม แต่อัตราส่วน FPS ไม่ตัดสิน · วัดบนมือถือจริงของเจ้าของครั้งเดียวก่อนรับ G4 (G4.6) · แผนฉบับ 1.3 แถว M6 G4.6 D-G4-7
+- **โค้ดที่ตรวจ:** `claude/g4-char2` @ `39459d2` (เกม **ไม่เปลี่ยน** = 2.38 `568bd87` · เปลี่ยนแค่ `qa/g4/cost_probe.js` v2 `6594d7d` + รายงาน/ผล) · **คู่เทียบ:** `main` @ `eb60c65` · **ส่ง:** branch ใหม่ `codex/t42-close-g42` แตกจาก `claude/g2-pilot` (commit ที่มีงานนี้) · `REVIEW_CODEX_T42_G42.md` + 1 บรรทัด `CODEX_STATUS.md`
+- **อ่านก่อน:** `G4_2_REPORT.md` ฉบับ 1.2 ข้อ 7 · `git diff 297c8b0 39459d2 -- qa/g4/cost_probe.js` · แผนแถว M6 (ฉบับ 1.3)
+- **เตรียมเครื่อง:** เหมือนข้อ 0 ของ T40 แต่ใช้ `/tmp/t42/` และ `git archive 39459d2` (ต้องมี server branch 8791 · main ไม่จำเป็น ยกเว้นจะรัน `fps.js`)
+- **รัน (Chromium 151 ของคุณ · ผลดิบใน `/tmp/t42/out`):**
+  1. `PORT=8791 node qa/g4/cost_probe.js $T/out/cost.json` → ต้อง exit 0 · ทุกฉาก `faithful: true` (เงาเดิม multiply/smoothing true/alpha .3 หรือ .4 · `bytesDiff` 0 · `stateBad` 0 · `changedByReal` > 0) · รายงาน body/shadow/tick/playerDiff/share
+  2. `DROP_STATE=globalCompositeOperation,imageSmoothingEnabled BL=2 MAPS=cavemouth,capital … cost_probe.js` → ต้อง **exit 2** (`faithful: false`)
+  3. `INJECT_MS=3 BL=10 … cost_probe.js` → ต้อง **exit 0 = "inject seen"** ทุกฉาก (playerDiff ≥ 2.4 ms)
+  4. (ทางเลือก ถ้ามีเวลา) probe อิสระของคุณ (`own-shadow-state` แบบ T41) ยืนยันว่าสถานะที่ v2 เก็บตรงกับ drawImage จริงของเกม
+  5. **อ่านโค้ด:** `snap/apply/same` ครบทุกค่าที่ drawImage ใช้ไหม (ไม่มี clip ในบล็อก W3) · การเทียบพิกเซล before/after ยุติธรรมไหม · `tick` วัดงานที่ 2.38 เพิ่มใน update จริงไหม · ข้อจำกัดที่ประกาศในหัวไฟล์ครบไหม
+- **ตอบ:**
+  1. T41-N1 ปิดไหม (เครื่องวัด replay ตรงจริง + มีตัวตรวจตัวเองที่ตกเมื่อสถานะไม่ครบ)
+  2. ตามวิธี D-G4-7: M6 ของ G4.2 ผ่านไหมบนเครื่องคุณ
+  3. **รับ G4.2 เพื่อเริ่ม G4.3 ไหม** · ปัญหาใหม่ (สูง/กลาง/ต่ำ)
+- **ห้าม:** แก้ไฟล์ของ Claude หรือไฟล์ภาพ · แก้ `index.html` `sw.js` `char2.js` `c2-*` · push `main` · force push · ใช้เครดิต · แตะเซฟจริง · ใส่ผลดิบ/ภาพเต็ม/fixture/node_modules ใน repo
+- **หยุดเมื่อ:** push แล้ว ตอบเจ้าของสั้น ๆ
+
+## งาน T41 · ยืนยัน G4.2 รุ่น 2.38 (แก้ T40-N1 N2 · หาเหตุ N3 + ข้อเสนอ M6b) · สถานะ: เสร็จ (Codex ฉบับ 1.0 @ `20310c0` · ปิด T40-N1/N2 · ใหม่ กลาง 1 T41-N1 → `cost_probe.js` v2 · เจ้าของเลือก M6 = ก+ค · ยืนยันใน T42)
 - **วันที่:** 9 พ.ย. 2569 · ไม่ใช้เครดิต · ไม่เกิน ~2.5 ชั่วโมง
 - **โค้ดที่ตรวจ:** `claude/g4-char2` @ `297c8b0` (เกม 2.38 = `568bd87` · `cost_probe.js` เพิ่มด่านเสนอ M6b + `INJECT_MS` ใน `e04a3c5` · หลังนั้นรายงาน + ผล) · **คู่เทียบ:** `main` @ `eb60c65` · ผลเดิมของคุณ: `REVIEW_CODEX_T40_G42.md` (merge แล้วใน `claude/g2-pilot`) · **ส่ง:** branch ใหม่ `codex/t41-confirm-g42` แตกจาก `claude/g2-pilot` (commit ที่มีงานนี้) · `REVIEW_CODEX_T41_G42.md` + 1 บรรทัด `CODEX_STATUS.md`
 - **อ่านก่อน:** `G4_2_REPORT.md` ฉบับ 1.1 ข้อ 6 · `git diff 761ee62 297c8b0 -- index.html sw.js test_237_draw.js qa/g4/m5_cmp.py qa/g4/m5_selftest.py qa/g4/cost_probe.js` · แผน `G4_0_GAME_INTEGRATION_PLAN.md` ข้อ 5 (บรรทัด "เพิ่ม 9 พ.ย. … T40-N1") และแถว M5 (T40-N2)
