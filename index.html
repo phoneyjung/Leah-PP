@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.39';
+const VERSION='Lantern Academy 2.40';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -7828,7 +7828,7 @@ function c234Row(h2){const tx=(a,b)=>LANG==='en'?b:a,who=c234Who(S),on=S.char2On
 // (not only where the dark layer is drawn) — so a null light gives the old shadow, clip and body in the SAME frame. Held = the lantern is wanted
 // (dc.held) AND the actor is in its holding state (A.holding, set by the tick of this step): while paused right after a map change the actor may
 // not hold yet — then Char2 draws it without the lantern and that is not a failure. The light found for the body is kept with the feet for W11.
-C234.A=null;C234.pack=null;C234.feet=null;C234.step=0;C234.n={call:0,body:0,tick:0,shadow:0,hole:0,sit:0,anchor:0,after:0};
+C234.A=null;C234.pack=null;C234.feet=null;C234.step=0;C234.n={call:0,body:0,tick:0,shadow:0,hole:0,sit:0,anchor:0,after:0,hud:0,equip:0,pick:0,list:0,trim:0};
 function c234Use(){return C234.on()&&!!C234.A&&!!C234.app&&!!C234.pack&&!!window.Char2}
 function c234Hold(){return DARK()&&LKID()}
 function c234Lamp(){const w=LAMP_CFG(S.age).warn,l=S.lamp===undefined?1:Number(S.lamp);return l>w?100:l>0?10:0}
@@ -7865,4 +7865,57 @@ function c234Box4(){const g=c234Go();if(!g)return null;const b=Char2.anchor(C234
   const top=94-b[1]+4,ro=C234.pack.render_offset[C234.A.dir]||0;return [P.x+b[0]-48+ro,P.y-top,b[2]-b[0],top+4]}   // y = P.y − top_new · h = top_new + 4 (bottom +4 as before)
 function c234After(f,al){const g=c234Go();if(!g)return false;const F=PS.F||64,X=Math.round(P.x-F/2-camX+f.ox),Y=Math.round(P.y-(F-2)-camY);
   ctx.globalAlpha=.35*al;const ok=Char2.draw(ctx,C234.app,g.dc,C234.A,X+F/2,Y+F-2,1);ctx.globalAlpha=1;if(!ok){c234Broke('draw');return false}C234.n.after++;return true}
+
+// ── 2.40 G4.4 (plan G4_0 §7 rows W13 W14 W15 · D-G4-3 = b, the owner 10 Nov): the screens show the new character.
+// HUD + equipment figure = the big face portrait (Char2.sheet(app,{house},'portrait'), 384 px). Whole-number scale (plan §7, M7) without
+// moving anything: the picture keeps its CSS box (no inline size · the HUD layout and its buttons stay put); its backing = that box in
+// device pixels (CSS size × devicePixelRatio × the box's own CSS scale); the face is drawn at 384/q (q = 1 2 3 4 6 8 … divides 384) — the largest that is
+// box within +15 % (phone ×3 → 96 in an 84×88 box · iPad ×2 → 64 in 56×62) — centred, its edge margin cropped when larger than the box.
+// Save picker = the whole body facing S (sheet 'stand8', cell 0): big view on the stand / shadow redrawn at device resolution, the largest
+// whole scale that keeps the head inside (feet where the old feet were); each slot's small picture = the cell's upper part at a whole scale.
+// Every sheet is borrowed, drawn and released in the SAME call (borrows left 0). A slot shows the new look only when ITS save has
+// char2On === true, passes c234Who (girl 6–9), its S.char2 is exact and Char2 is loaded; otherwise the old picture stays.
+// Flag off / save switch / failure → the old pictures come back on the next draw (keys cleared, the canvas back to its old size).
+// The equipment figure is drawn without the old gear painted on the body (that art fits the 64 px body); kids 6–9 reach it only via GM.
+function c234UiOk(){return C234.st==='ready'&&!!C234.app&&!!window.Char2&&!!S&&C234.owner===S}
+// M9 (plan §8 · R6 · memory): the playing save's house or look changed (same save, no cleanup since) → Char2.trim() ONCE: every sheet not
+// borrowed right now goes (the old house's / old look's, and other slots' picker looks); the current look is rebuilt at once by the draw that
+// noticed it (this frame's body · the HUD face). Checked where sheets are asked for (c234DC each frame · c234Face): a compare every frame, a trim
+// only on a change. Save switch / flag off already trim in c234Off (G4.1 · cnt.cleanup) → not trimmed twice; flag off rebuilds nothing.
+function c234Mem(house){const a=C234.app,c=C234.cnt.cleanup;if(C234.ma===a&&C234.mk===house&&C234.mc===c)return;
+  const t=!!C234.ma&&C234.mc===c;C234.ma=a;C234.mk=house;C234.mc=c;if(t){C234.n.trim++;try{Char2.trim()}catch(e){}}}
+{const o=c234DC;c234DC=function(){const dc=o.apply(this,arguments);try{c234Mem(dc.house)}catch(e){}return dc}}
+function c234Sheet(app,house,mode,draw){const sh=Char2.sheet(app,{house},mode);if(!sh)return false;try{draw(sh.canvas)}finally{sh.release()}return true}
+function c234Fit(c){   // the picture's own CSS box (its stylesheet size) in device pixels, and the face size 384/q that fits it best
+  const cs=getComputedStyle(c),w=parseFloat(cs.width)||c.width,h=parseFloat(cs.height)||w,r=c.getBoundingClientRect(),k=r.width&&w?r.width/w:1,dpk=(devicePixelRatio||1)*k;
+  const bw=Math.max(1,Math.round(w*dpk)),bh=Math.max(1,Math.round(h*dpk)),box=Math.min(bw,bh),q=[1,2,3,4,6,8,12,16,24].find(q=>384/q<=box*1.15)||24;return {bw,bh,n:384/q,q,dpk}}
+function c234Face(c,why){const f=c234Fit(c),h=(HOUSES[S.house]||HOUSES[0]).id;c234Mem(h);c.width=f.bw;c.height=f.bh;c.dataset.c2='1';const g=c.getContext('2d');g.imageSmoothingEnabled=false;g.clearRect(0,0,f.bw,f.bh);
+  const x=Math.floor((f.bw-f.n)/2),y=Math.floor((f.bh-f.n)/2);
+  if(!c234Sheet(C234.app,h,'portrait',cv=>g.drawImage(cv,0,0,cv.width,cv.height,x,y,f.n,f.n))){c234Broke('portrait '+why);return false}C234.ui=Object.assign(f,{x,y});return true}
+function c234Unface(c,n){c.width=c.height=n;delete c.dataset.c2}
+function c234SlotApp(s){   // the look of a picker slot (its own save), or null = the old picture
+  try{if(!s||s.char2On!==true||c234Who(s)||!window.Char2)return null;if(S&&(S===s||(s.sid&&s.sid===S.sid))&&c234UiOk())return C234.app;const c=s.char2;   // the playing save: its live look (the stored copy may not hold char2 yet)
+
+    if(!c||typeof c!=='object'||Array.isArray(c)||c.v!==2)return null;const app=Char2.look(s);return app&&c234Exact(c,app)?app:null}catch(e){return null}}
+{const o=ui149Portrait;ui149Portrait=function(){const k0=UI149.portraitKey;const r=o.apply(this,arguments);try{const c=document.getElementById('hudPortrait');if(!c)return r;
+  if(c234UiOk()){const f=c234Fit(c),k=[S.sid,S.char2On,JSON.stringify(S.char2),S.house,f.bw,f.bh,f.n].join('|');
+    if(k!==UI149.c2key||UI149.portraitKey!==k0){if(c234Face(c,'hud')){UI149.c2key=k;C234.n.hud++}else{UI149.c2key=null;c234Unface(c,64);UI149.portraitKey=null;o.apply(this,arguments)}}}
+  else if(UI149.c2key||c.dataset.c2){UI149.c2key=null;c234Unface(c,64);UI149.portraitKey=null;o.apply(this,arguments)}}catch(e){}return r}}
+{const o=ui154Portrait;ui154Portrait=function(){const c=o.apply(this,arguments);try{if(c&&c234UiOk()){requestAnimationFrame(()=>{try{if(c.isConnected&&c234UiOk()&&c234Face(c,'equip'))C234.n.equip++}catch(e){}})}}catch(e){}return c}}   // sized once it is on screen
+{const o=pkDraw193;pkDraw193=function(){const r=o.apply(this,arguments);try{const c=$('pkv'),s0=Store.all().slots[C193.pick],app=c&&c234SlotApp(s0);if(!app)return r;
+  const h=(HOUSES[s0.house]||HOUSES[0]).id,stand=c.height!==c.width,cw=parseFloat(c.style.width)||64,sc=Math.max(1,Math.round(cw/64)),D=Math.max(1,Math.round(devicePixelRatio||1)),u=sc*D;
+  c.width=64*u;c.height=(stand?84:64)*u;const g=c.getContext('2d');g.imageSmoothingEnabled=false;g.clearRect(0,0,c.width,c.height);
+  if(stand){const s1=ART195.stC||ART195.stS;glow197(g,32*u,34*u,40*u);g.drawImage(s1===ART195.stC?stand197(s1,s0.house):s1,0,0,64,64,0,20*u,64*u,64*u)}
+  else{g.fillStyle='#00000045';g.beginPath();g.ellipse(c.width/2,c.height*.93,c.width*.26,c.height*.05,0,0,7);g.fill()}
+  let k2=1;if(!c234Sheet(app,h,'stand8',cv=>{const top=c234Top(cv);k2=Math.max(1,Math.floor(62*u/(94-top)));g.drawImage(cv,0,0,96,96,32*u-48*k2,62*u-94*k2,96*k2,96*k2)}))return r;
+  C234.n.pick++;C234.pk={u,k2,stand};if(stand)feet195('p',c,32*u,60*u)}catch(e){}return r}}
+function c234Top(cv){   // the first row of the S cell with a solid pixel (the head) · read each time (the borrowed canvas may be reused)
+  let y=0;try{const d=cv.getContext('2d').getImageData(0,0,96,96).data;for(y=0;y<96;y++){let hit=false;for(let x=0;x<96;x++)if(d[(y*96+x)*4+3]){hit=true;break}if(hit)break}}catch(e){y=11}return y}
+function c234PickList(d){const sl=((d&&d.slots)||Store.all().slots||[]);document.querySelectorAll('#pk .pn').forEach((b,i)=>{try{const s=sl[i],c=b.querySelector('canvas'),app=c&&c234SlotApp(s);if(!app)return;
+  // keep the picture's CSS size: backing n = its device size, a whole scale k, the cell region m = n / k around the body (old crop ≈ head to knees)
+  const r=c.getBoundingClientRect(),D=devicePixelRatio||1,n0=Math.max(32,Math.round((r.width||64)*D)),k=Math.max(1,Math.round(n0/64)),m=Math.min(96,Math.floor(n0/k)),n=m*k,x0=48-Math.floor(m/2),y0=Math.max(0,Math.min(96-m,6));
+  c.width=c.height=n;c.style.width=c.style.height=(n/D)+'px';const g=c.getContext('2d');g.clearRect(0,0,n,n);g.imageSmoothingEnabled=false;
+  if(c234Sheet(app,(HOUSES[s.house]||HOUSES[0]).id,'stand8',cv=>g.drawImage(cv,x0,y0,m,m,0,0,n,n))){C234.n.list++;C234.pl={n,k,m}}}catch(e){}})}
+{const o=pd219PickList;pd219PickList=function(d){const r=o.apply(this,arguments);try{c234PickList(d)}catch(e){}return r}}
+{const o=c234Paint;c234Paint=function(){const r=o.apply(this,arguments);if(!C234.uiBusy){C234.uiBusy=true;try{UI149.c2key=null;if(S&&document.getElementById('hudPortrait'))ui149Portrait()}catch(e){}C234.uiBusy=false}return r}}
 </script></body></html>

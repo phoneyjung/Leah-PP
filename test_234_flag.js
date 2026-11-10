@@ -140,7 +140,7 @@ const strip = (o) => { const c = JSON.parse(JSON.stringify(o)); delete c.char2; 
         for (const k of out.caches) { const c = await caches.open(k); for (const r of await c.keys()) { out.files++; if (/\/(char2\.js|c2-[^/]*)$/.test(new URL(r.url).pathname)) { out.c2.push(r.url.split('/').pop()); const b = await (await c.match(r)).arrayBuffer(); out.bytes += b.byteLength; } } }
         return out; });
       R.G.pe = pe.length;
-      ck(R.G.caches.includes('lantern-v241') && R.G.files > 50 && R.G.c2.length === 0 && R.G.bytes === 0 && pe.length === 0, 'G install ' + JSON.stringify(R.G).slice(0, 300));
+      ck(R.G.caches.includes('lantern-v242') && R.G.files > 50 && R.G.c2.length === 0 && R.G.bytes === 0 && pe.length === 0, 'G install ' + JSON.stringify(R.G).slice(0, 300));
       await bc.close(); }
   } catch (e) { errors.push('crash: ' + String(e && e.stack || e).slice(0, 300)); }
   finally { await browser.close(); }
