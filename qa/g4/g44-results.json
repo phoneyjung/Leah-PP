@@ -1,0 +1,664 @@
+{
+ "game": "2.40",
+ "code": "b76f14d",
+ "plan": "G4_0_GAME_INTEGRATION_PLAN.md v1.3 §4.3 W13 W14 W15 · §7 · D-G4-3 = b (face) · M7 M9 · M6 by D-G4-7",
+ "edits": {
+  "old_lines": 2,
+  "old_lines_what": [
+   "VERSION",
+   "C234.n counters"
+  ],
+  "wrapped": [
+   "ui149Portrait",
+   "ui154Portrait",
+   "pkDraw193",
+   "pd219PickList",
+   "c234Paint",
+   "c234DC"
+  ]
+ },
+ "size": {
+  "index_html": 1552113,
+  "vs_2_39": 7676,
+  "vs_main": 24486,
+  "vs_main_pct": 1.6
+ },
+ "suites": {
+  "test_240_screens": 0,
+  "test_234_flag": 0,
+  "test_234_files": 0,
+  "test_234_save": 0,
+  "test_234_net": 0,
+  "test_237_draw": 0,
+  "test_239_anchor": 0
+ },
+ "M7": {
+  "phone": {
+   "H": {
+    "on": {
+     "n": 96,
+     "bad": 0,
+     "nz": 4086,
+     "bw": 84,
+     "bh": 88,
+     "q": 4,
+     "x": -6,
+     "y": -4
+    },
+    "off": {
+     "w": 64,
+     "css": "",
+     "nz": 1643,
+     "st": "off"
+    },
+    "houseDiff": 2412,
+    "borrows": [
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      0
+     ]
+    ],
+    "switch": {
+     "old": {
+      "w": 64,
+      "css": "",
+      "st": "off"
+     },
+     "back": {
+      "w": 84,
+      "st": "ready"
+     },
+     "bor": [
+      0,
+      0
+     ]
+    }
+   },
+   "E": {
+    "n": 384,
+    "bad": 0,
+    "nz": 70045,
+    "bw": 480,
+    "bh": 480,
+    "q": 1,
+    "x": 48,
+    "y": 48,
+    "bor": [
+     0,
+     0
+    ]
+   },
+   "P": {
+    "big": {
+     "n": 105120,
+     "bad": 0,
+     "u": 9,
+     "k2": 6,
+     "top": 12,
+     "game": [
+      9,
+      6
+     ],
+     "headY": 66,
+     "w": 576,
+     "h": 576
+    },
+    "slot0": {
+     "n": 8644,
+     "bad": 0,
+     "n0": 132,
+     "k": 2,
+     "m": 66,
+     "size": 132,
+     "game": [
+      132,
+      2,
+      66
+     ]
+    },
+    "newSlots": [
+     "Pim",
+     "Ann"
+    ],
+    "borrows": [
+     0,
+     0
+    ]
+   },
+   "B": {
+    "pick": 15,
+    "hud": 8,
+    "pickOneSide": [],
+    "pickOnPic": [
+     [
+      "hud",
+      1,
+      0
+     ]
+    ],
+    "pickUnder44": [],
+    "hudOneSide": [],
+    "hudOnPic": [],
+    "hudUnder44": []
+   }
+  },
+  "ipad": {
+   "H": {
+    "on": {
+     "n": 64,
+     "bad": 0,
+     "nz": 1896,
+     "bw": 56,
+     "bh": 62,
+     "q": 6,
+     "x": -4,
+     "y": -1
+    },
+    "off": {
+     "w": 64,
+     "css": "",
+     "nz": 1643,
+     "st": "off"
+    },
+    "houseDiff": 1110,
+    "borrows": [
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      0
+     ]
+    ],
+    "switch": {
+     "old": {
+      "w": 64,
+      "css": "",
+      "st": "off"
+     },
+     "back": {
+      "w": 56,
+      "st": "ready"
+     },
+     "bor": [
+      0,
+      0
+     ]
+    }
+   },
+   "E": {
+    "n": 384,
+    "bad": 0,
+    "nz": 70045,
+    "bw": 500,
+    "bh": 500,
+    "q": 1,
+    "x": 58,
+    "y": 58,
+    "bor": [
+     0,
+     0
+    ]
+   },
+   "P": {
+    "big": {
+     "n": 236520,
+     "bad": 0,
+     "u": 12,
+     "k2": 9,
+     "top": 12,
+     "game": [
+      12,
+      9
+     ],
+     "headY": 6,
+     "w": 768,
+     "h": 768
+    },
+    "slot0": {
+     "n": 2906,
+     "bad": 0,
+     "n0": 88,
+     "k": 1,
+     "m": 88,
+     "size": 88,
+     "game": [
+      88,
+      1,
+      88
+     ]
+    },
+    "newSlots": [
+     "Pim",
+     "Ann"
+    ],
+    "borrows": [
+     0,
+     0
+    ]
+   },
+   "B": {
+    "pick": 15,
+    "hud": 8,
+    "pickOneSide": [],
+    "pickOnPic": [
+     [
+      "hud",
+      1,
+      0
+     ]
+    ],
+    "pickUnder44": [],
+    "hudOneSide": [],
+    "hudOnPic": [],
+    "hudUnder44": []
+   }
+  }
+ },
+ "faults_test_240_errors": {
+  "none": 0,
+  "norelease": 9,
+  "notrim": 1,
+  "q16": 1,
+  "k2plus": 2,
+  "slotk": 2
+ },
+ "M9_char2": {
+  "events": [
+   {
+    "tag": "ready",
+    "total": 11.82,
+    "cache": 1.69,
+    "cached": 2,
+    "peak": 12.95,
+    "miss": 2,
+    "evict": 0,
+    "n": 0,
+    "st": "ready"
+   },
+   {
+    "tag": "house0",
+    "total": 11.82,
+    "cache": 1.69,
+    "cached": 2,
+    "peak": 12.95,
+    "miss": 4,
+    "evict": 2,
+    "n": 1,
+    "st": "ready"
+   },
+   {
+    "tag": "house2",
+    "total": 11.82,
+    "cache": 1.69,
+    "cached": 2,
+    "peak": 12.95,
+    "miss": 6,
+    "evict": 4,
+    "n": 2,
+    "st": "ready"
+   },
+   {
+    "tag": "house3",
+    "total": 11.82,
+    "cache": 1.69,
+    "cached": 2,
+    "peak": 12.95,
+    "miss": 8,
+    "evict": 6,
+    "n": 3,
+    "st": "ready"
+   },
+   {
+    "tag": "house1",
+    "total": 11.82,
+    "cache": 1.69,
+    "cached": 2,
+    "peak": 12.95,
+    "miss": 10,
+    "evict": 8,
+    "n": 4,
+    "st": "ready"
+   },
+   {
+    "tag": "still120",
+    "total": 11.82,
+    "cache": 1.69,
+    "cached": 2,
+    "peak": 12.95,
+    "miss": 10,
+    "evict": 8,
+    "n": 4,
+    "st": "ready"
+   },
+   {
+    "tag": "timed",
+    "total": 11.54,
+    "cache": 1.41,
+    "cached": 2,
+    "peak": 13.51,
+    "miss": 15,
+    "evict": 13,
+    "n": 4,
+    "st": "ready"
+   },
+   {
+    "tag": "picker",
+    "total": 11.82,
+    "cache": 1.69,
+    "cached": 3,
+    "peak": 13.51,
+    "miss": 16,
+    "evict": 13,
+    "n": 4,
+    "st": "ready"
+   },
+   {
+    "tag": "equip",
+    "total": 12.39,
+    "cache": 2.25,
+    "cached": 4,
+    "peak": 13.51,
+    "miss": 17,
+    "evict": 13,
+    "n": 4,
+    "st": "ready"
+   },
+   {
+    "tag": "switch",
+    "total": 11.82,
+    "cache": 1.69,
+    "cached": 2,
+    "peak": 13.51,
+    "miss": 19,
+    "evict": 17,
+    "n": 4,
+    "st": "ready"
+   },
+   {
+    "tag": "off",
+    "total": 10.13,
+    "cache": 0,
+    "cached": 0,
+    "peak": 13.51,
+    "miss": 19,
+    "evict": 19,
+    "n": 4,
+    "st": "off"
+   },
+   {
+    "tag": "off30",
+    "total": 10.13,
+    "cache": 0,
+    "cached": 0,
+    "peak": 13.51,
+    "miss": 19,
+    "evict": 19,
+    "n": 4,
+    "st": "off"
+   }
+  ],
+  "rebuild_ms_cold": {
+   "idle": 40.2,
+   "walk": 36.8,
+   "portrait": 10.4,
+   "stand8": 24
+  },
+  "char2_frozen": true,
+  "limit_MiB": 24
+ },
+ "M9_whole_game": {
+  "steps": {
+   "title": {
+    "off": 136.83,
+    "on": 136.83,
+    "diff": 0.0
+   },
+   "S1-capital": {
+    "off": 160.54,
+    "on": 174.06,
+    "diff": 13.52
+   },
+   "S2-farm": {
+    "off": 193.91,
+    "on": 207.43,
+    "diff": 13.52
+   },
+   "S3-cavemouth": {
+    "off": 205.88,
+    "on": 221.1,
+    "diff": 15.22
+   }
+  },
+  "limit": "on <= off + 20 MiB",
+  "method": "qa/g4/memory.js v3.1, branch flag off vs --patch char2On"
+ },
+ "M1_replay": {
+  "default": {
+   "metaOk": true,
+   "checkpoints": 24,
+   "bad": 0,
+   "pxTotal": 0,
+   "canvasPxTotal": 0,
+   "stateTotal": 0,
+   "drawDiff": 0
+  },
+  "zoom1": {
+   "metaOk": true,
+   "checkpoints": 24,
+   "bad": 0,
+   "pxTotal": 0,
+   "canvasPxTotal": 0,
+   "stateTotal": 0,
+   "drawDiff": 0
+  },
+  "intro": {
+   "metaOk": true,
+   "checkpoints": 8,
+   "bad": 0,
+   "pxTotal": 0,
+   "canvasPxTotal": 0,
+   "stateTotal": 0,
+   "drawDiff": 0
+  }
+ },
+ "M5": {
+  "0.75": {
+   "checkpoints": 69,
+   "playerTagged": 69,
+   "verdict": "pass"
+  },
+  "1": {
+   "checkpoints": 69,
+   "playerTagged": 69,
+   "verdict": "pass"
+  }
+ },
+ "M6_cost_probe": [
+  {
+   "map": "cavemouth",
+   "held": true,
+   "frameMs": 21.08,
+   "body": [
+    0.267,
+    0.062,
+    0.199
+   ],
+   "shadow": [
+    0.038,
+    0.283,
+    -0.248
+   ],
+   "tick": [
+    0.001,
+    0,
+    0.001
+   ],
+   "anchor": [
+    3.22,
+    0,
+    0
+   ],
+   "playerDiff": -0.048,
+   "share": -0.002,
+   "m6b": "pass",
+   "faithful": true
+  },
+  {
+   "map": "capital",
+   "held": false,
+   "frameMs": 32.667,
+   "body": [
+    0.119,
+    0.059,
+    0.064
+   ],
+   "shadow": [
+    0.028,
+    0.286,
+    -0.255
+   ],
+   "tick": [
+    0,
+    0,
+    0
+   ],
+   "anchor": [
+    2,
+    0,
+    0
+   ],
+   "playerDiff": -0.191,
+   "share": -0.006,
+   "m6b": "pass",
+   "faithful": true
+  },
+  {
+   "map": "farm",
+   "held": false,
+   "frameMs": 47.62,
+   "body": [
+    0.121,
+    0.073,
+    0.054
+   ],
+   "shadow": [
+    0,
+    0,
+    0
+   ],
+   "tick": [
+    0,
+    0,
+    0
+   ],
+   "anchor": [
+    3,
+    0,
+    0
+   ],
+   "playerDiff": 0.054,
+   "share": 0.001,
+   "m6b": "pass",
+   "faithful": true
+  },
+  {}
+ ],
+ "inject_3ms": [
+  {
+   "map": "cavemouth",
+   "playerDiff": 3.238,
+   "m6b": "inject seen"
+  },
+  {
+   "map": "capital",
+   "playerDiff": 3.072,
+   "m6b": "inject seen"
+  },
+  {
+   "map": "farm",
+   "playerDiff": 3.327,
+   "m6b": "inject seen"
+  },
+  {
+   "verdict": "inject seen"
+  }
+ ],
+ "drop_state": [
+  {
+   "map": "cavemouth",
+   "faithful": false,
+   "oldReplay": [
+    "multiply",
+    true,
+    0.3,
+    14071,
+    18273,
+    2
+   ]
+  },
+  {
+   "map": "capital",
+   "faithful": false,
+   "oldReplay": [
+    "multiply",
+    true,
+    0.4,
+    13825,
+    18722,
+    2
+   ]
+  },
+  {
+   "verdict": "errors"
+  }
+ ],
+ "fps_report_only": {
+  "S1-capital": {
+   "fps": {
+    "main": 19.75,
+    "main-control": 19.49,
+    "branch-off": 20.93,
+    "branch-on": 19.51
+   },
+   "ratio": 0.98,
+   "control": 0.98,
+   "verdict": "pass"
+  },
+  "S2-farm": {
+   "fps": {
+    "main": 18.45,
+    "main-control": 17.79,
+    "branch-off": 15.96,
+    "branch-on": 16.14
+   },
+   "ratio": 0.865,
+   "control": 0.915,
+   "verdict": "fail"
+  },
+  "S3-cavemouth": {
+   "fps": {
+    "main": 27.56,
+    "main-control": 25.64,
+    "branch-off": 25.99,
+    "branch-on": 29.91
+   },
+   "ratio": 0.866,
+   "control": 0.93,
+   "verdict": "fail"
+  }
+ }
+}
