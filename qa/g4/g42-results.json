@@ -825,5 +825,263 @@
    "metaOk": true,
    "exit": 0
   }
+ },
+ "v2_38_after_T41": {
+  "codex": "REVIEW_CODEX_T41_G42.md v1.0 @20310c0: T40-N1/N2 closed · M6 fps.js exit 3 · new medium T41-N1 (cost_probe shadow state)",
+  "owner": "D-G4-7 10 Nov 2026 10:03: a+c (cost_probe v2 decides G4.2-G4.5, real phone once before G4.6)",
+  "cost_probe": "v2 6594d7d",
+  "browser": "Chrome/153.0.8010.12",
+  "run": {
+   "cavemouth": {
+    "frameMs": 22.3,
+    "body": 0.225,
+    "shadow": [
+     0.046,
+     0.318,
+     -0.275
+    ],
+    "tick": 0.001,
+    "playerDiff": -0.049,
+    "share": -0.002,
+    "faithful": true,
+    "check": {
+     "old": {
+      "box": {
+       "x": 1192,
+       "y": 607,
+       "w": 226,
+       "h": 75
+      },
+      "stateBad": [],
+      "bytesDiff": 0,
+      "bytes": 67800,
+      "changedByReal": 18264,
+      "gco": "multiply",
+      "smoothing": true,
+      "alpha": 0.3
+     },
+     "new": {
+      "box": {
+       "x": 1228,
+       "y": 666,
+       "w": 77,
+       "h": 27
+      },
+      "stateBad": [],
+      "bytesDiff": 0,
+      "bytes": 8316,
+      "changedByReal": 2205,
+      "gco": "multiply",
+      "smoothing": true,
+      "alpha": 0.55
+     }
+    },
+    "m6b": "pass"
+   },
+   "capital": {
+    "frameMs": 32.2,
+    "body": 0.082,
+    "shadow": [
+     0.043,
+     0.31,
+     -0.265
+    ],
+    "tick": 0,
+    "playerDiff": -0.183,
+    "share": -0.006,
+    "faithful": true,
+    "check": {
+     "old": {
+      "box": {
+       "x": 1192,
+       "y": 535,
+       "w": 226,
+       "h": 75
+      },
+      "stateBad": [],
+      "bytesDiff": 0,
+      "bytes": 67800,
+      "changedByReal": 18722,
+      "gco": "multiply",
+      "smoothing": true,
+      "alpha": 0.4
+     },
+     "new": {
+      "box": {
+       "x": 1228,
+       "y": 594,
+       "w": 77,
+       "h": 27
+      },
+      "stateBad": [],
+      "bytesDiff": 0,
+      "bytes": 8316,
+      "changedByReal": 2205,
+      "gco": "multiply",
+      "smoothing": true,
+      "alpha": 0.55
+     }
+    },
+    "m6b": "pass"
+   },
+   "farm": {
+    "frameMs": 52.727,
+    "body": 0.073,
+    "shadow": [
+     0,
+     0,
+     0
+    ],
+    "tick": 0,
+    "playerDiff": 0.073,
+    "share": 0.001,
+    "faithful": true,
+    "check": {
+     "old": null,
+     "new": null
+    },
+    "m6b": "pass"
+   }
+  },
+  "verdict": "pass",
+  "inject_3ms": {
+   "cavemouth": {
+    "frameMs": 25.773,
+    "body": 3.517,
+    "shadow": [
+     0.046,
+     0.329,
+     -0.27
+    ],
+    "tick": 0.001,
+    "playerDiff": 3.248,
+    "share": 0.126,
+    "faithful": true,
+    "check": {
+     "old": {
+      "box": {
+       "x": 1192,
+       "y": 607,
+       "w": 226,
+       "h": 75
+      },
+      "stateBad": [],
+      "bytesDiff": 0,
+      "bytes": 67800,
+      "changedByReal": 18268,
+      "gco": "multiply",
+      "smoothing": true,
+      "alpha": 0.3
+     },
+     "new": {
+      "box": {
+       "x": 1228,
+       "y": 666,
+       "w": 77,
+       "h": 27
+      },
+      "stateBad": [],
+      "bytesDiff": 0,
+      "bytes": 8316,
+      "changedByReal": 2205,
+      "gco": "multiply",
+      "smoothing": true,
+      "alpha": 0.55
+     }
+    },
+    "m6b": "inject seen"
+   },
+   "capital": {
+    "frameMs": 34.3,
+    "body": 3.338,
+    "shadow": [
+     0.059,
+     0.358,
+     -0.252
+    ],
+    "tick": 0,
+    "playerDiff": 3.086,
+    "share": 0.09,
+    "faithful": true,
+    "check": {
+     "old": {
+      "box": {
+       "x": 1192,
+       "y": 535,
+       "w": 226,
+       "h": 75
+      },
+      "stateBad": [],
+      "bytesDiff": 0,
+      "bytes": 67800,
+      "changedByReal": 18722,
+      "gco": "multiply",
+      "smoothing": true,
+      "alpha": 0.4
+     },
+     "new": {
+      "box": {
+       "x": 1228,
+       "y": 594,
+       "w": 77,
+       "h": 27
+      },
+      "stateBad": [],
+      "bytesDiff": 0,
+      "bytes": 8316,
+      "changedByReal": 2205,
+      "gco": "multiply",
+      "smoothing": true,
+      "alpha": 0.55
+     }
+    },
+    "m6b": "inject seen"
+   },
+   "farm": {
+    "frameMs": 53.273,
+    "body": 3.312,
+    "shadow": [
+     0,
+     0,
+     0
+    ],
+    "tick": 0,
+    "playerDiff": 3.312,
+    "share": 0.062,
+    "faithful": true,
+    "check": {
+     "old": null,
+     "new": null
+    },
+    "m6b": "inject seen"
+   }
+  },
+  "inject_verdict": "inject seen",
+  "drop_state": {
+   "set": [
+    "globalCompositeOperation",
+    "imageSmoothingEnabled"
+   ],
+   "verdict": "errors",
+   "maps": {
+    "cavemouth": {
+     "faithful": false,
+     "oldBytesDiff": 14062,
+     "stateBad": [
+      "globalCompositeOperation",
+      "imageSmoothingEnabled"
+     ]
+    },
+    "capital": {
+     "faithful": false,
+     "oldBytesDiff": 13825,
+     "stateBad": [
+      "globalCompositeOperation",
+      "imageSmoothingEnabled"
+     ]
+    }
+   }
+  },
+  "M6_D_G4_7": "pass (every scene share <= 0.1)"
  }
 }
