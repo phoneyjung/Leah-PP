@@ -1,0 +1,729 @@
+{
+ "game": "2.39",
+ "code": "2b94d36",
+ "plan": "G4_0_GAME_INTEGRATION_PLAN.md v1.3 §4.2 §4.3 W6 W7 W8 W9 W12 · M4 · M6 by D-G4-7",
+ "edits": {
+  "expressions": 37,
+  "old_lines": 33,
+  "W7": 2,
+  "W8": 9,
+  "W9": 20,
+  "W12": 5,
+  "W6": 1,
+  "W10": 0
+ },
+ "size": {
+  "index_html": 1544437,
+  "vs_2_38": 2351,
+  "vs_main": 16810,
+  "vs_main_pct": 1.1
+ },
+ "suites": {
+  "test_234_flag": 0,
+  "test_234_files": 0,
+  "test_234_save": 0,
+  "test_234_net": 0,
+  "test_237_draw": "0 (after K2 change, 8/8)",
+  "test_239_anchor": 0
+ },
+ "M4": {
+  "S": {
+   "sites": 37,
+   "bad": 0,
+   "byRow": {
+    "W7": 2,
+    "W8": 9,
+    "W9": 20,
+    "W12": 5,
+    "W6": 1
+   },
+   "helpers": {
+    "c234D": 35,
+    "box4": 1,
+    "after": 1
+   },
+   "p4": {
+    "branch": 1,
+    "main": 1
+   },
+   "w10": [
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   "mainChecked": true
+  },
+  "F": {
+   "n": 1536,
+   "bad": 0,
+   "box": 96,
+   "boxBad": 0,
+   "off": 16,
+   "offBad": 0
+  },
+  "D": {
+   "on-capital": {
+    "label": 30,
+    "labelBad": 0,
+    "emote": 30,
+    "emoteBad": 0,
+    "exp": true,
+    "celebrate": [
+     true,
+     true
+    ],
+    "skills": [
+     true,
+     true
+    ],
+    "after": [
+     5,
+     0,
+     true
+    ],
+    "box": {
+     "got": [
+      540,
+      183,
+      47,
+      91
+     ],
+     "want": [
+      540,
+      183,
+      47,
+      91
+     ],
+     "ok": true
+    }
+   },
+   "on-cavemouth": {
+    "label": 30,
+    "labelBad": 0,
+    "emote": 30,
+    "emoteBad": 0,
+    "exp": true,
+    "celebrate": [
+     true,
+     true
+    ],
+    "skills": [
+     true,
+     true
+    ],
+    "after": [
+     5,
+     0,
+     true
+    ],
+    "box": {
+     "got": [
+      540,
+      215,
+      47,
+      91
+     ],
+     "want": [
+      540,
+      215,
+      47,
+      91
+     ],
+     "ok": true
+    }
+   },
+   "off-capital": {
+    "label": 30,
+    "labelBad": 0,
+    "emote": 30,
+    "emoteBad": 0,
+    "exp": true,
+    "celebrate": [
+     true,
+     true
+    ],
+    "skills": [
+     true,
+     true
+    ],
+    "after": [
+     0,
+     5,
+     false
+    ],
+    "box": {
+     "got": [
+      543,
+      206,
+      40,
+      68
+     ],
+     "want": [
+      543,
+      206,
+      40,
+      68
+     ],
+     "ok": true
+    }
+   },
+   "off-cavemouth": {
+    "label": 30,
+    "labelBad": 0,
+    "emote": 30,
+    "emoteBad": 0,
+    "exp": true,
+    "celebrate": [
+     true,
+     true
+    ],
+    "skills": [
+     true,
+     true
+    ],
+    "after": [
+     0,
+     5,
+     false
+    ],
+    "box": {
+     "got": [
+      543,
+      238,
+      40,
+      68
+     ],
+     "want": [
+      543,
+      238,
+      40,
+      68
+     ],
+     "ok": true
+    }
+   }
+  },
+  "K": {
+   "v": 72,
+   "st": "failed",
+   "why": "anchor head",
+   "v2": 30,
+   "b": null
+  },
+  "planted": "body +1 px and mail d 66 -> errors 6"
+ },
+ "K2_237": [
+  {
+   "mode": "any",
+   "bright": true,
+   "dir": "S",
+   "first": null,
+   "frames": [
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ]
+   ]
+  },
+  {
+   "mode": "any",
+   "bright": true,
+   "dir": "N",
+   "first": null,
+   "frames": [
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ]
+   ]
+  },
+  {
+   "mode": "any",
+   "bright": false,
+   "dir": "S",
+   "first": null,
+   "frames": [
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ]
+   ]
+  },
+  {
+   "mode": "any",
+   "bright": false,
+   "dir": "N",
+   "first": null,
+   "frames": [
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ]
+   ]
+  },
+  {
+   "mode": "frame",
+   "bright": true,
+   "dir": "S",
+   "first": {
+    "k": 0,
+    "st0": "ready",
+    "st1": "failed",
+    "old": 1,
+    "blur": 1,
+    "c2": 0,
+    "ell": 12
+   },
+   "frames": [
+    [
+     "ready",
+     "failed",
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ]
+   ]
+  },
+  {
+   "mode": "frame",
+   "bright": true,
+   "dir": "N",
+   "first": {
+    "k": 0,
+    "st0": "ready",
+    "st1": "failed",
+    "old": 1,
+    "blur": 1,
+    "c2": 0,
+    "ell": 12
+   },
+   "frames": [
+    [
+     "ready",
+     "failed",
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ]
+   ]
+  },
+  {
+   "mode": "frame",
+   "bright": false,
+   "dir": "S",
+   "first": {
+    "k": 0,
+    "st0": "ready",
+    "st1": "failed",
+    "old": 1,
+    "blur": 1,
+    "c2": 0,
+    "ell": 10
+   },
+   "frames": [
+    [
+     "ready",
+     "failed",
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ]
+   ]
+  },
+  {
+   "mode": "frame",
+   "bright": false,
+   "dir": "N",
+   "first": {
+    "k": 0,
+    "st0": "ready",
+    "st1": "failed",
+    "old": 1,
+    "blur": 1,
+    "c2": 0,
+    "ell": 10
+   },
+   "frames": [
+    [
+     "ready",
+     "failed",
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     "failed",
+     "failed",
+     0,
+     1,
+     1,
+     0
+    ]
+   ]
+  }
+ ],
+ "M1_replay": {
+  "default": "24 · 0 px",
+  "zoom1": "24 · 0 px",
+  "intro": "8 · 0 px"
+ },
+ "M5": {
+  "0.75": "69 pass",
+  "1": "69 pass",
+  "selftest": "10/10"
+ },
+ "M6_cost_probe": {
+  "cavemouth": {
+   "frameMs": 34.253,
+   "body": 0.252,
+   "shadow": -0.325,
+   "tick": 0.001,
+   "anchorPerFrame": 3.32,
+   "anchorCost": 0,
+   "playerDiff": -0.072,
+   "share": -0.002,
+   "faithful": true
+  },
+  "capital": {
+   "frameMs": 54.3,
+   "body": 0.071,
+   "shadow": -0.306,
+   "tick": 0,
+   "anchorPerFrame": 2,
+   "anchorCost": 0,
+   "playerDiff": -0.235,
+   "share": -0.004,
+   "faithful": true
+  },
+  "farm": {
+   "frameMs": 72.713,
+   "body": 0.07,
+   "shadow": 0,
+   "tick": 0,
+   "anchorPerFrame": 3,
+   "anchorCost": 0,
+   "playerDiff": 0.07,
+   "share": 0.001,
+   "faithful": true
+  }
+ },
+ "M6_verdict": "pass",
+ "inject_3ms": {
+  "cavemouth": 3.262,
+  "capital": 3.096,
+  "farm": 3.37
+ },
+ "inject_verdict": "inject seen",
+ "drop_state": {
+  "verdict": "errors",
+  "bytesDiff": {
+   "cavemouth": 14078,
+   "capital": 13825
+  }
+ },
+ "fps_report_only": {
+  "S1-capital": {
+   "pairedRatios": [
+    0.969,
+    1.045,
+    0.938
+   ],
+   "ratio": 0.969,
+   "control": 0.956,
+   "verdict": "pass"
+  },
+  "S2-farm": {
+   "pairedRatios": [
+    0.965,
+    0.988,
+    0.976
+   ],
+   "ratio": 0.976,
+   "control": 0.978,
+   "verdict": "pass"
+  },
+  "S3-cavemouth": {
+   "pairedRatios": [
+    1.053,
+    1.067,
+    0.862
+   ],
+   "ratio": 1.053,
+   "control": 0.922,
+   "verdict": "undecided: rerun with ROUNDS=5"
+  }
+ }
+}
