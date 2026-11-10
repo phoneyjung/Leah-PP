@@ -11,6 +11,8 @@
 //   shadow: the shadow pass alone — old = the blurred, skewed shadow sheet (the game's own call, recorded once and replayed),
 //          new = c234Shadow() (the ellipse) · same block scheme
 //   tick:  the work 2.38 adds to every update step (c234Use + Char2.tick, walking) · off = c234Use() alone (false)
+//   anchor (2.39 G4.3): the anchor reads the game makes per frame (name label, emote, line-gap box, see-through checks, sparks …):
+//          calls per frame counted from C234.n.anchor over real frames (the loop running) × the cost of one c234D read (on − off block)
 //   "off" = the same page with C234.A taken away for the block (c234Use() false → every helper gives the old value), then put back.
 // v2 (Codex T41-N1): the shadow replays carry the WHOLE canvas state of the real call (transform · globalAlpha · globalCompositeOperation ·
 //   imageSmoothingEnabled/Quality · filter · shadow*) — the old sheet is drawn with multiply + smoothing on, the ellipse inside the same save —
@@ -79,33 +81,38 @@ const LIMIT = +(process.env.LIMIT || 0.10), INJ = +(process.env.INJECT_MS || 0),
       if (NS && NS.drew) { ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.putImageData(NS.before, NS.bb.x, NS.bb.y); ctx.restore(); ctx.save(); apply(NS.st); const bad = same(NS.st); c234Shadow(); ctx.restore();
         const got = grab(NS.bb); check.new = { box: NS.bb, stateBad: bad, bytesDiff: diffBytes(got, NS.after), bytes: got.data.length, changedByReal: diffBytes(NS.before, NS.after), gco: NS.st.globalCompositeOperation, smoothing: NS.st.imageSmoothingEnabled, alpha: NS.st.globalAlpha }; }
       const faithful = (!SH || (check.old.stateBad.length === 0 && check.old.bytesDiff === 0 && check.old.changedByReal > 0)) && (!NS || !NS.drew || (check.new.stateBad.length === 0 && check.new.bytesDiff === 0 && check.new.changedByReal > 0));
+      // anchor reads per real frame (2.39+): count frames by wrapping render while the loop runs ~1.2 s
+      let APF = 0; { let fr = 0; const orr = render; render = function () { fr++; return orr.apply(this, arguments); }; const n0 = (C234.n && C234.n.anchor) || 0;
+        await new Promise((res) => setTimeout(res, 1200)); render = orr; APF = fr ? Math.round(((((C234.n && C234.n.anchor) || 0) - n0) / fr) * 100) / 100 : 0; }
       PAUSE = true;
-      const W = { on: [], off: [], d: [] }, B = { on: [], off: [], d: [] }, Sh = { on: [], off: [], d: [] }, Tk = { on: [], off: [], d: [] };
+      const W = { on: [], off: [], d: [] }, B = { on: [], off: [], d: [] }, Sh = { on: [], off: [], d: [] }, Tk = { on: [], off: [], d: [] }, An = { on: [], off: [], d: [] };
       const block = (mode, fn, n) => { C234.A = mode === 'on' ? keepA : null; const t0 = performance.now(); for (let i = 0; i < n; i++) { fn(i); } flush(); const dt = (performance.now() - t0) / n; C234.A = keepA; return dt; };
       const whole = () => { render(...RA); flush(); };
       const body = (i) => { ctx.save(); try { drawPlayer(...PA); } finally { ctx.restore(); } if (i % 20 === 19) flush(); };
       const shOld = (i) => { if (!SH) return; ctx.save(); apply(SH.st); ctx.drawImage(SH.im, ...SH.a); ctx.restore(); if (i % 20 === 19) flush(); };
       const shNew = (i) => { if (!NS || !NS.drew) return; ctx.save(); apply(NS.st); c234Shadow(); ctx.restore(); if (i % 20 === 19) flush(); };
       const dirs = C234.pack.dirs, hold = c234Hold();
+      const anchor = (i) => { if (typeof c234D === 'function') c234D('label', 66); };
       const tick = (i) => { if (c234Use()) Char2.tick(C234.A, 1000 / 60, { dir: dirs[P.row], moving: true, holding: hold }); };
       for (let k = 0; k < BL; k++) {
-        const ord = k % 2 ? ['off', 'on'] : ['on', 'off'], w = {}, bb = {}, s = {}, t = {};
+        const ord = k % 2 ? ['off', 'on'] : ['on', 'off'], w = {}, bb = {}, s = {}, t = {}, an = {};
         for (const m of ord) { w[m] = block(m, whole, N); await wait(); }
         for (const m of ord) { bb[m] = block(m, body, N * 20); await wait(); }
         for (const m of ord) { s[m] = m === 'on' ? block('on', shNew, N * 20) : block('off', shOld, N * 20); await wait(); }
         for (const m of ord) { t[m] = block(m, tick, N * 20); await wait(); }
-        for (const [X, v] of [[W, w], [B, bb], [Sh, s], [Tk, t]]) { X.on.push(r3(v.on)); X.off.push(r3(v.off)); X.d.push(r3(v.on - v.off)); }
+        for (const m of ord) { an[m] = block(m, anchor, N * 20); await wait(); }
+        for (const [X, v] of [[W, w], [B, bb], [Sh, s], [Tk, t], [An, an]]) { X.on.push(r3(v.on)); X.off.push(r3(v.off)); X.d.push(r3(v.on - v.off)); }
       }
       PAUSE = false;
       const sum = (X) => ({ on: med(X.on), off: med(X.off), diff: med(X.d), diffs: X.d });
-      const body1 = sum(B), sh1 = sum(Sh), tk1 = sum(Tk), pd = body1.diff + sh1.diff + tk1.diff;
+      const body1 = sum(B), sh1 = sum(Sh), tk1 = sum(Tk), an1 = sum(An), anPerFrame = APF, anCost = an1.diff * anPerFrame, pd = body1.diff + sh1.diff + tk1.diff + anCost;
       return { map: M.id, bright: !!M.bright, held: !!c234DC().held, SC, canvas: [W0, H0], oldShadow: SH ? { w: SH.a[6], h: SH.a[7] } : null, check, faithful, n: Object.assign({}, C234.n), st: C234.st,
-        whole: sum(W), body: body1, shadow: sh1, tick: tk1, playerDiff: r3(pd), frameMs: med(W.off), playerShare: r3(pd / med(W.off)) };
+        whole: sum(W), body: body1, shadow: sh1, tick: tk1, anchor: Object.assign(an1, { perFrame: anPerFrame, costPerFrame: r3(anCost) }), playerDiff: r3(pd), frameMs: med(W.off), playerShare: r3(pd / med(W.off)) };
     }, N, BL, DROP);
     r.pe = pe;
     r.m6b = INJ > 0 ? (r.playerDiff >= 0.8 * INJ ? 'inject seen' : 'inject missed') : (r.playerShare <= LIMIT ? 'pass' : 'fail');
     out.maps[map] = r;
-    console.log(JSON.stringify({ map, held: r.held, frameMs: r.frameMs, whole: [r.whole.on, r.whole.off, r.whole.diff], body: [r.body.on, r.body.off, r.body.diff], shadow: [r.shadow.on, r.shadow.off, r.shadow.diff], tick: [r.tick.on, r.tick.off, r.tick.diff],
+    console.log(JSON.stringify({ map, held: r.held, frameMs: r.frameMs, whole: [r.whole.on, r.whole.off, r.whole.diff], body: [r.body.on, r.body.off, r.body.diff], shadow: [r.shadow.on, r.shadow.off, r.shadow.diff], tick: [r.tick.on, r.tick.off, r.tick.diff], anchor: [r.anchor.perFrame, r.anchor.diff, r.anchor.costPerFrame],
       playerDiff: r.playerDiff, share: r.playerShare, m6b: r.m6b, faithful: r.faithful, oldReplay: r.check.old && [r.check.old.gco, r.check.old.smoothing, r.check.old.alpha, r.check.old.bytesDiff, r.check.old.changedByReal, r.check.old.stateBad.length],
       newReplay: r.check.new && [r.check.new.gco, r.check.new.bytesDiff, r.check.new.changedByReal, r.check.new.stateBad.length], pe: pe.length, st: r.st }));
     await bc.close();
