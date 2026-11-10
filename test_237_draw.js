@@ -135,8 +135,10 @@ const drawnOK = (fr) => fr.filter((c) => c.player > 0).every((c) => c.c2.length 
         R.F = F; ck(F.every((q) => q.frames > 0 && q.good === q.frames && q.ripple === q.frames), 'F wading ' + JSON.stringify(F));
         await t.p.evaluate(() => { inPool = () => 'pool'; }); await sleep(150); await t.p.screenshot({ path: path.join(out, 'f-wading.png') }); await t.p.evaluate(() => { inPool = window.__ip; }); }
       // L: no tick while paused / down
-      { const a = await t.p.evaluate(() => C234.n.tick); await t.p.evaluate(() => { PAUSE = true; }); await sleep(400); const b = await t.p.evaluate(() => C234.n.tick); await t.p.evaluate(() => { PAUSE = false; P.dead = 1; }); await sleep(400);
-        const c = await t.p.evaluate(() => C234.n.tick); await t.p.evaluate(() => { P.dead = 0; }); await sleep(300); const d = await t.p.evaluate(() => C234.n.tick);
+      // (2.39 · Codex T43-N1) each switch and its counter read happen in ONE evaluate, so no frame can tick between them
+      { const a = await t.p.evaluate(() => { PAUSE = true; return C234.n.tick; }); await sleep(400);
+        const b = await t.p.evaluate(() => { const v = C234.n.tick; PAUSE = false; P.dead = 1; return v; }); await sleep(400);
+        const c = await t.p.evaluate(() => { const v = C234.n.tick; P.dead = 0; return v; }); await sleep(300); const d = await t.p.evaluate(() => C234.n.tick);
         R.L = { pause: b - a, dead: c - b, after: d - c }; ck(R.L.pause === 0 && R.L.dead === 0 && R.L.after > 0, 'L ticks ' + JSON.stringify(R.L)); }
       R.Ape = t.pe.length; ck(t.pe.length === 0, 'A–L page errors ' + t.pe.join(' | '));
       await t.bc.close(); }
