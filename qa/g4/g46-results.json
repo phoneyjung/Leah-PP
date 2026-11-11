@@ -1,0 +1,324 @@
+{
+ "game": "2.43",
+ "code": "35b0ac4",
+ "checked_at": "2bdca2f (game files = 35b0ac4)",
+ "main": "eb60c65",
+ "plan": "G4_0 v1.3 §8 M1-M10 · §9 G4.6 · D-G4-7 \"ค\"",
+ "size": {
+  "index_html_main": 1527627,
+  "index_html_branch": 1558275,
+  "vs_main": 30648,
+  "vs_main_pct": 2.01
+ },
+ "unchanged": {
+  "database.rules.json": 0,
+  "char2.js": 0,
+  "c2-pack.json": 0
+ },
+ "M1_suites_pair": {
+  "out": "g46_pair (outside repo)",
+  "start": "2026-11-11T21:36:23+07:00",
+  "end": "2026-11-12T01:25:32+07:00",
+  "stopped_and_resumed": 1,
+  "ALLDONE": "DONE suites=115 runs=254 manifest=00797625ffc1a2be suites_sha=dd56bbb3c9293652 env_sha=04495115cfc22089 target_sha=9cfbd74d04b4e829",
+  "verdict": {
+   "suites": 115,
+   "legacy": 32,
+   "kindsRechecked": 115,
+   "runs": 254,
+   "bothPass": 112,
+   "bad": [],
+   "undecided": [],
+   "metaOk": true,
+   "control": false,
+   "verdict": "pass",
+   "exit": 0
+  },
+  "ok_after_reruns": {
+   "test_103_village": "legacy · fails on main too · no new failure line",
+   "test_170_swordsman": "[1,0,1,1,1] both sides",
+   "test_222_tk_pack": "[1,1,1,1,1] both sides"
+  },
+  "flaky3": {
+   "test_157_equipment": [
+    0,
+    0
+   ],
+   "test_176_steer_and_act": [
+    0,
+    0
+   ],
+   "test_risk_monthly": [
+    0,
+    0
+   ]
+  }
+ },
+ "suites": {
+  "test_245_gm": 0,
+  "test_240_screens": 0,
+  "test_234_flag": 0,
+  "test_234_files": 0,
+  "test_234_save": 0,
+  "test_234_net": 0,
+  "test_237_draw": 0,
+  "test_239_anchor": 0
+ },
+ "M1_replay": {
+  "default": {
+   "checkpoints": 24,
+   "pxTotal": 0,
+   "canvasPxTotal": 0,
+   "stateTotal": 0,
+   "drawDiff": 0
+  },
+  "zoom1": {
+   "checkpoints": 24,
+   "pxTotal": 0,
+   "canvasPxTotal": 0,
+   "stateTotal": 0,
+   "drawDiff": 0
+  },
+  "intro": {
+   "checkpoints": 8,
+   "pxTotal": 0,
+   "canvasPxTotal": 0,
+   "stateTotal": 0,
+   "drawDiff": 0
+  }
+ },
+ "M5": {
+  "0.75": {
+   "checkpoints": 69,
+   "playerTagged": 69,
+   "verdict": "pass"
+  },
+  "1": {
+   "checkpoints": 69,
+   "playerTagged": 69,
+   "verdict": "pass"
+  }
+ },
+ "M5_selftest": {
+  "cases": 10,
+  "ok": 10
+ },
+ "M6_cost_probe": [
+  {
+   "map": "cavemouth",
+   "frameMs": 23.133,
+   "playerDiff": -0.054,
+   "share": -0.002,
+   "m6b": "pass",
+   "faithful": true
+  },
+  {
+   "map": "capital",
+   "frameMs": 42.387,
+   "playerDiff": -0.213,
+   "share": -0.005,
+   "m6b": "pass",
+   "faithful": true
+  },
+  {
+   "map": "farm",
+   "frameMs": 56.653,
+   "playerDiff": 0.061,
+   "share": 0.001,
+   "m6b": "pass",
+   "faithful": true
+  }
+ ],
+ "inject_3ms": [
+  {
+   "map": "cavemouth",
+   "playerDiff": 3.236,
+   "m6b": "inject seen"
+  },
+  {
+   "map": "capital",
+   "playerDiff": 3.02,
+   "m6b": "inject seen"
+  },
+  {
+   "map": "farm",
+   "playerDiff": 3.311,
+   "m6b": "inject seen"
+  }
+ ],
+ "drop_state": [
+  {
+   "map": "cavemouth",
+   "faithful": false
+  },
+  {
+   "map": "capital",
+   "faithful": false
+  }
+ ],
+ "drop_exit": 2,
+ "M9_char2": {
+  "peak_screens": 13.51,
+  "peak_8_looks": 12.95,
+  "limit": 24
+ },
+ "M10": {
+  "sends_off": 18,
+  "sends_on": 18,
+  "fields": 16,
+  "diff": 0
+ },
+ "T46": {
+  "N1_broken": {
+   "opened": true,
+   "st": "failed",
+   "why": "portrait gm",
+   "row": true,
+   "panel": false,
+   "set": false,
+   "pe": 0
+  },
+  "N2_K": {
+   "n": 24,
+   "ready": 3,
+   "failed": 21
+  }
+ },
+ "phone": {
+  "owner_phone": {
+   "when": "2026-11-11 21:56",
+   "ua": "Android 10 Chrome/157.0.0.0",
+   "screen": "892x412 @2.63",
+   "ratio": {
+    "capital": 1.0,
+    "farm": 1.0,
+    "cavemouth": 1.0
+   },
+   "fps_on_off": [
+    [
+     120.0,
+     120.0
+    ],
+    [
+     120.0,
+     120.0
+    ],
+    [
+     120.2,
+     120.0
+    ]
+   ],
+   "checks": "ok ok ok",
+   "verdict": "pass",
+   "note": "120 Hz screen cap on both sides"
+  },
+  "owner_first_run_computer": {
+   "ua": "Chrome/156.0.8078.75",
+   "screen": "2560x1440 @1",
+   "ratio": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "fps_on_off": [
+    [
+     60.1,
+     60.0
+    ],
+    [
+     59.9,
+     60.0
+    ],
+    [
+     59.9,
+     60.0
+    ]
+   ],
+   "note": "supporting data, not a phone"
+  },
+  "claude_short": {
+   "ua": "Chromium 153",
+   "screen": "844x390 @3",
+   "ratio": [
+    0.96,
+    0.95,
+    1.0
+   ]
+  },
+  "bench": "qa/g4/phone_bench.js + qa/g4/build_phone_bench.py · private artifact copy, 140 files, no firebase-config.js"
+ },
+ "fps": {
+  "report_only": true,
+  "errors": 0,
+  "S1-capital": {
+   "fps": {
+    "main": 20.07,
+    "main-control": 20.71,
+    "branch-off": 19.6,
+    "branch-on": 20.31
+   },
+   "paired": [
+    0.983,
+    1.003,
+    1.012
+   ],
+   "ratio": 1.003,
+   "control": 1.036,
+   "verdict": "pass"
+  },
+  "S2-farm": {
+   "fps": {
+    "main": 17.41,
+    "main-control": 17.47,
+    "branch-off": 17.89,
+    "branch-on": 17.96
+   },
+   "paired": [
+    0.979,
+    0.986,
+    1.048
+   ],
+   "ratio": 0.986,
+   "control": 0.997,
+   "verdict": "pass"
+  },
+  "S3-cavemouth": {
+   "fps": {
+    "main": 34.81,
+    "main-control": 34.11,
+    "branch-off": 34.23,
+    "branch-on": 35.72
+   },
+   "paired": [
+    1.021,
+    1.03,
+    1.002
+   ],
+   "ratio": 1.021,
+   "control": 0.979,
+   "verdict": "pass"
+  }
+ },
+ "M9_whole_game": {
+  "title": {
+   "off": 136.83,
+   "on": 136.83,
+   "diff": 0.0
+  },
+  "S1-capital": {
+   "off": 160.54,
+   "on": 174.06,
+   "diff": 13.52
+  },
+  "S2-farm": {
+   "off": 193.91,
+   "on": 207.43,
+   "diff": 13.52
+  },
+  "S3-cavemouth": {
+   "off": 205.88,
+   "on": 221.1,
+   "diff": 15.22
+  }
+ }
+}
