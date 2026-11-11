@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.41';
+const VERSION='Lantern Academy 2.42';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -7801,7 +7801,7 @@ function c234Migrate(s){   // pure: reads a COPY of the save, never changes s ·
 // 2.36 (Codex T39-N4): the on/off button shows "on" the game's own way (aria-pressed → the pressed style / the active frame art) — 2.35 put dark
 // text on an inline gold background that the frame art (border-image … fill) painted over, so the label was hard to read
 function c234StText(){if(!S)return '';const tx=(a,b)=>LANG==='en'?b:a,who=c234Who(S),on=S.char2On===true,st=C234.owner===S?C234.st:'off';
-  const ST={off:tx('ปิด','off'),loading:tx('กำลังโหลด…','loading…'),ready:tx('พร้อม · วาดตัวใหม่ในเกม (ขั้น G4.2)','ready · drawn in the game (step G4.2)'),failed:tx('ใช้ไม่ได้ · ใช้ตัวเดิม','unavailable · original character')};
+  const ST={off:tx('ปิด','off'),loading:tx('กำลังโหลด…','loading…'),ready:tx('พร้อม · ใช้ตัวใหม่ในเกม','ready · the new character is in the game'),failed:tx('ใช้ไม่ได้ · ใช้ตัวเดิม','unavailable · original character')};
   const why=who?tx('ยังไม่มีตัวแบบนี้','No v2 character for this player yet'):(on&&st==='failed')?(C234.why==='save look unreadable'?tx('ลุครุ่น 2 ในเซฟนี้อ่านไม่ได้','The v2 look in this save cannot be read'):C234.why):'';
   return tx('สถานะ: ','State: ')+(on?ST[st]:ST.off)+(why?' · '+why:'')}
 function c234Paint(){const e=document.getElementById('c234st');if(e)e.textContent=c234StText()}
@@ -7929,4 +7929,34 @@ function c234PickList(d){const sl=((d&&d.slots)||Store.all().slots||[]);document
 {let t=0;addEventListener('resize',()=>{if(t)return;t=requestAnimationFrame(()=>{t=0;try{if(!c234UiOk())return;const e=document.getElementById('equipPortrait');
   if(e&&e.isConnected&&e.dataset.c2){const f=c234Fit(e);if(f.bw!==e.width||f.bh!==e.height)c234Equip(e)}
   if(document.getElementById('hudPortrait'))ui149Portrait();const el=$('cr');if(el&&el.classList.contains('p193')&&!el.classList.contains('hide'))c234PickList()}catch(x){}})})}
+// ── 2.42 G4.5 (plan G4_0 §6.4 · step G4.5 · gates M8 M9 · G4.4 closed 11 Nov after Codex T45): the GM colour panel of character v2.
+// Shown under the v2 row of the GM panel only while this save's new character is ready (S.char2 there, C234.pack loaded). Hair 8 · eyes 5 ·
+// skin 4 = the pack's own palette names (c2-pack.json "palette"), shown in Thai / English, each a ≥ 44 px button with the colour's middle shade
+// (a span inside: the frame art paints over a button's own background) and aria-pressed on the chosen one (the game's pressed style).
+// A tap changes ONLY S.char2.color[group]: a copy with the new name is read back by Char2.look and must pass c234Exact (never writes a look
+// Char2 would read differently) → S.char2 + C234.app replaced → save() (the whole save, as the game always writes it; the old fields untouched)
+// → the HUD face redraws (its key holds S.char2) → the next sheet request sees the new app → c234Mem trims once (M9). The house is S.house
+// (never set here). A preview of the face sits beside the title (same rule as the HUD: whole scale, borrowed and released at once).
+const C245G=[['hair','ผม','Hair'],['iris','ตา','Eyes'],['skin','ผิว','Skin']],
+  C245TH={hair:{black:'ดำ',brown:'น้ำตาล',blonde:'บลอนด์',red:'แดง',pink:'ชมพู',blue:'ฟ้า',silver:'เงิน',green:'เขียว'},
+    iris:{brown:'น้ำตาล',black:'ดำ',green:'เขียว',blue:'ฟ้า',amber:'อำพัน'},skin:{light:'อ่อน',medium:'กลาง',tan:'แทน',deep:'เข้ม'}};
+function c245Name(g,n){return LANG==='en'?String(n):((C245TH[g]&&C245TH[g][n])||String(n))}
+function c245Set(g,n){if(!S||!c234UiOk()||!S.char2||!S.char2.color||!C234.pack||!C234.pack.palette)return false;
+  const pal=C234.pack.palette[g];if(!Array.isArray(pal)||!pal.some(p=>p[0]===n)||!(g in S.char2.color))return false;
+  if(S.char2.color[g]===n)return true;const c=JSON.parse(JSON.stringify(S.char2));c.color[g]=n;
+  const app=Char2.look(Object.assign({},S,{char2:c}));if(!app||!c234Exact(c,app))return false;
+  S.char2=c;C234.app=app;C234.n.color=(C234.n.color||0)+1;try{save()}catch(e){}c234Paint();return true}
+function c245Show(){const d=$('c245');if(!d||!S||!S.char2)return;d.querySelectorAll('button[data-g]').forEach(b=>b.setAttribute('aria-pressed',String(S.char2.color[b.dataset.g]===b.dataset.n)));
+  for(const [g] of C245G){const e=$('c245n_'+g);if(e)e.textContent=c245Name(g,S.char2.color[g])}
+  const c=$('c245pv');if(c)requestAnimationFrame(()=>{try{if(c.isConnected&&c234UiOk())c234Face(c,'gm')}catch(e){}})}
+function c245Panel(){const row=$('c234row');if(!row||$('c245')||!S||!c234UiOk()||!S.char2||!S.char2.color||!C234.pack||!C234.pack.palette)return;
+  const tx=(a,b)=>LANG==='en'?b:a,P=C234.pack.palette,d=document.createElement('div');d.id='c245';d.style.marginTop='8px';
+  let h='<div style="display:flex;gap:8px;align-items:center"><canvas id="c245pv" width="64" height="64" style="width:72px;height:72px;image-rendering:pixelated"></canvas><b>'+tx('สีของตัวรุ่น 2 (เซฟนี้)','v2 colours (this save)')+'</b></div>';
+  for(const [g,t,e] of C245G){if(!Array.isArray(P[g]))continue;
+    h+='<div style="margin-top:6px">'+tx(t,e)+': <span id="c245n_'+g+'"></span></div><div style="display:flex;flex-wrap:wrap;gap:4px">';
+    for(const [n,ramp] of P[g])h+='<button data-g="'+g+'" data-n="'+n+'" aria-pressed="false" aria-label="'+tx(t,e)+' '+c245Name(g,n)+'" style="min-width:44px;min-height:44px;padding:4px">'+
+      '<span style="display:block;width:28px;height:28px;margin:auto;border-radius:50%;border:2px solid #0006;background:'+ramp[Math.floor(ramp.length/2)]+'"></span></button>';
+    h+='</div>'}
+  d.innerHTML=h;row.appendChild(d);d.querySelectorAll('button[data-g]').forEach(b=>b.onclick=()=>{if(c245Set(b.dataset.g,b.dataset.n))c245Show()});c245Show()}
+{const o=c234Row;c234Row=function(){const r=o.apply(this,arguments);try{c245Panel()}catch(e){}return r}}
 </script></body></html>
