@@ -6,7 +6,8 @@
 // C  a real tap on "hair pink": S.char2.color.hair → pink and nothing else changes — the stored save before/after: only the top-level key char2 differs,
 //    inside it only color.hair · the button pressed, the name shown · preview and HUD face = the new look's portrait (0 differ) · trim once ·
 //    wrong calls (unknown colour / group / an array / flag off) change nothing
-// N  no panel when the flag is off, for a boy, when failed (a v3 look), while loading (the pack held) — it appears once ready and the panel is reopened
+// N  no panel when the flag is off, for a boy, when failed (a v3 look), while loading (the pack held) — it appears once ready and the panel is reopened ·
+//    2.43 (Codex T46-N1): ready → failed after the panel is open (the preview's portrait refused) → the panel goes at once
 // P  the colours stay: a new page in the same storage reads them (ready, migrated 0 times) · flag off → on keeps them · clear → gone · flag on again →
 //    migrated again from the old fields
 // T  the save table in the game (each: state, S.char2 colours + from, the migration step leaves a fixture unchanged, the appearance fields unchanged,
@@ -120,9 +121,16 @@ const PD = { v: 1, hair: 1, face: 1, eyes: 1, mouth: 1, body: 1, hc: 4, ec: 3, t
       N.loading = await t.p.evaluate(() => { openGM(); return { st: C234.st, row: !!document.getElementById('c234row'), panel: !!document.getElementById('c245'), set: c245Set('hair', 'pink') }; });
       rel(); await t.p.waitForFunction(() => C234.st === 'ready', { timeout: 25000 }).catch(() => {});
       N.afterReady = await t.p.evaluate(() => { const before = !!document.getElementById('c245'); closeModal(); openGM(); return { st: C234.st, before, reopened: !!document.getElementById('c245') }; }); N.pe = t.pe.length; await t.bc.close();
+      // ready → failed AFTER the panel is open (Codex T46-N1): the preview's own portrait refused (a copy of Char2's API in window.Char2) → the panel goes
+      { const t3 = await open(browser, v); await start(t3.p, [GIRL()]);
+        N.broken = await t3.p.evaluate(async () => { closeModal(); const real = window.Char2; window.Char2 = Object.assign({}, real, { sheet: (a, o, m) => (m === 'portrait' ? null : real.sheet(a, o, m)) });
+          openGM(); const opened = !!document.getElementById('c245'); await new Promise((r) => setTimeout(r, 400)); await __frames(3);
+          const out = { opened, st: C234.st, why: C234.why, row: !!document.getElementById('c234row'), panel: !!document.getElementById('c245'), set: c245Set('hair', 'pink') }; window.Char2 = real; return out; });
+        N.broken.pe = t3.pe.length; await t3.bc.close(); }
       R.N = N;
       ck(['flag off', 'boy', 'failed (v3 look)'].every((k) => N[k].row && !N[k].panel && N[k].set === false && N[k].pe === 0) && N['flag off'].st === 'off' && N.boy.st === 'off' && N['failed (v3 look)'].st === 'failed' &&
-        N.loading.st === 'loading' && N.loading.row && !N.loading.panel && N.loading.set === false && N.afterReady.st === 'ready' && !N.afterReady.before && N.afterReady.reopened && N.pe === 0, 'N panel only when ready ' + JSON.stringify(N)); }
+        N.loading.st === 'loading' && N.loading.row && !N.loading.panel && N.loading.set === false && N.afterReady.st === 'ready' && !N.afterReady.before && N.afterReady.reopened && N.pe === 0 &&
+        N.broken.opened && N.broken.st === 'failed' && N.broken.why === 'portrait gm' && N.broken.row && !N.broken.panel && N.broken.set === false && N.broken.pe === 0, 'N panel only when ready ' + JSON.stringify(N)); }
     // ── P: the colours stay
     { const t = await open(browser, v); await start(t.p, [GIRL()]);
       const set = await t.p.evaluate(() => [c245Set('hair', 'pink'), c245Set('iris', 'amber'), c245Set('skin', 'deep')]); await t.p.evaluate(() => save());

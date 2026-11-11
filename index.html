@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.42';
+const VERSION='Lantern Academy 2.43';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -7959,4 +7959,8 @@ function c245Panel(){const row=$('c234row');if(!row||$('c245')||!S||!c234UiOk()|
     h+='</div>'}
   d.innerHTML=h;row.appendChild(d);d.querySelectorAll('button[data-g]').forEach(b=>b.onclick=()=>{if(c245Set(b.dataset.g,b.dataset.n))c245Show()});c245Show()}
 {const o=c234Row;c234Row=function(){const r=o.apply(this,arguments);try{c245Panel()}catch(e){}return r}}
+// 2.43 (Codex T46-N1): every state change paints (c234Paint) — leaving ready while the panel is open (e.g. the preview's own sheet refused →
+// c234Broke) takes the panel away at once; the row's status text already shows the new state. (Back to ready: the panel comes with the next
+// opening of the GM panel, as before.)
+{const o=c234Paint;c234Paint=function(){const r=o.apply(this,arguments);try{const d=document.getElementById('c245');if(d&&!c234UiOk())d.remove()}catch(e){}return r}}
 </script></body></html>
