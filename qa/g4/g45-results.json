@@ -797,5 +797,62 @@
    "faithful": false
   }
  ],
- "fps": "report only (D-G4-7), run after, not waited for"
+ "fps": "report only (D-G4-7), run after, not waited for",
+ "fps_2_42_report_only": {
+  "S1-capital": {
+   "fps": {
+    "main": 23.02,
+    "main-control": 22.95,
+    "branch-off": 23.27,
+    "branch-on": 23.6
+   },
+   "ratio": 1.014,
+   "control": 0.99,
+   "verdict": "pass"
+  },
+  "S2-farm": {
+   "fps": {
+    "main": 17.8,
+    "main-control": 19.12,
+    "branch-off": 18.2,
+    "branch-on": 18.89
+   },
+   "ratio": 1.02,
+   "control": 1.017,
+   "verdict": "pass"
+  },
+  "S3-cavemouth": {
+   "fps": {
+    "main": 32.93,
+    "main-control": 34.59,
+    "branch-off": 33.83,
+    "branch-on": 32.63
+   },
+   "ratio": 1.029,
+   "control": 1.014,
+   "verdict": "pass"
+  }
+ },
+ "after_t46": {
+  "game": "2.43",
+  "review": "codex/t46-review-g45 @ff23a7f (high 0, medium 0, low 2)",
+  "N_broken": {
+   "opened": true,
+   "st": "failed",
+   "why": "portrait gm",
+   "row": true,
+   "panel": false,
+   "set": false,
+   "pe": 0
+  },
+  "suites": {
+   "test_245_gm": 0,
+   "test_240_screens": 0,
+   "test_234_flag": 0,
+   "test_234_save": 0,
+   "test_237_draw": 0
+  },
+  "fault_no_wrapper_errors": 1,
+  "K_cases": "24 (ready 3 + failed 21)"
+ }
 }
