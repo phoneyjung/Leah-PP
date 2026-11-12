@@ -1179,7 +1179,14 @@
     "total": "7/7"
    },
    "claude_full_length_emulated_phone": "G4.6 วัดความลื่น v2 · เกม 2.43 · เมือง 101 % · ฟาร์ม 102 % · ปากถ้ำ 100 % → ผ่าน (เกณฑ์ ≥ 90 %) · fps เปิด/ปิด 60.2/59.7 · 59.0/58.6 · 60.1/60.1 · งาน JS ms/เฟรม เปิด/ปิด 1.29/1.22 · 2.24/2.27 · 1.44/1.06 · ตรวจ ✓ ✓ ✓ · ไฟล์ 198 ขาด 0 · มือถือ 844×390 @3 · Android 10 Chrome/153.0.0.0",
-   "note": "mutations were run on the first v2 build (315 files); the bench code differs since only in the base address of the file check and the copy without the two Trickster test files"
+   "note": "mutations were run on the first v2 build (315 files); the bench code differs since only in the base address of the file check and the copy without the two Trickster test files",
+   "published": {
+    "artifact_version": "1794501176-9b71",
+    "built_from": "28411ef",
+    "files": 313,
+    "when": "2026-11-13 00:1x +07",
+    "checked_on_real_host": false
+   }
   }
  }
 }
