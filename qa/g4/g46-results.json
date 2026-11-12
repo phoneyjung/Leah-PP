@@ -184,69 +184,6 @@
    "failed": 21
   }
  },
- "phone": {
-  "owner_phone": {
-   "when": "2026-11-11 21:56",
-   "ua": "Android 10 Chrome/157.0.0.0",
-   "screen": "892x412 @2.63",
-   "ratio": {
-    "capital": 1.0,
-    "farm": 1.0,
-    "cavemouth": 1.0
-   },
-   "fps_on_off": [
-    [
-     120.0,
-     120.0
-    ],
-    [
-     120.0,
-     120.0
-    ],
-    [
-     120.2,
-     120.0
-    ]
-   ],
-   "checks": "ok ok ok",
-   "verdict": "pass",
-   "note": "120 Hz screen cap on both sides"
-  },
-  "owner_first_run_computer": {
-   "ua": "Chrome/156.0.8078.75",
-   "screen": "2560x1440 @1",
-   "ratio": [
-    1.0,
-    1.0,
-    1.0
-   ],
-   "fps_on_off": [
-    [
-     60.1,
-     60.0
-    ],
-    [
-     59.9,
-     60.0
-    ],
-    [
-     59.9,
-     60.0
-    ]
-   ],
-   "note": "supporting data, not a phone"
-  },
-  "claude_short": {
-   "ua": "Chromium 153",
-   "screen": "844x390 @3",
-   "ratio": [
-    0.96,
-    0.95,
-    1.0
-   ]
-  },
-  "bench": "qa/g4/phone_bench.js + qa/g4/build_phone_bench.py · private artifact copy, 140 files, no firebase-config.js"
- },
  "fps": {
   "report_only": true,
   "errors": 0,
@@ -319,6 +256,916 @@
    "off": 205.88,
    "on": 221.1,
    "diff": 15.22
+  }
+ },
+ "report": "v1.1",
+ "M6_phone": {
+  "status": "no usable result yet: v1 result withdrawn, re-measure on bench v2 pending",
+  "v1_withdrawn": {
+   "why": [
+    "the published copy lacked 58 game files the real game asks for in a full-length run (199 asked, 140 in the copy; + sw.js left out on purpose) and the bench did not check files",
+    "no check that the device is a phone (a desktop run was labelled a real phone and passed)",
+    "an interrupted measurement passed (0.9 s stall in the OFF runs of scene 1 -> ratio 3.65 -> pass)"
+   ],
+   "missing_by_group": {
+    "pd-kid-*": 32,
+    "question bank (questions-index.json + q-*.json)": 16,
+    "hunt-*": 4,
+    "kit-town*": 3,
+    "card-*": 2,
+    "tiles-town-meadow.png": 1
+   },
+   "root_cause": "the v1 file list came from a capture with request interception that aborted data:/blob: requests, which changed what the page loaded (125 names; listening only: 199); the published file set was never run on a server holding only those files",
+   "owner_phone": {
+    "when": "2026-11-11 21:56",
+    "ua": "Android 10 Chrome/157.0.0.0",
+    "screen": "892x412 @2.63",
+    "ratio": {
+     "capital": 1.0,
+     "farm": 1.0,
+     "cavemouth": 1.0
+    },
+    "fps_on_off": [
+     [
+      120.0,
+      120.0
+     ],
+     [
+      120.0,
+      120.0
+     ],
+     [
+      120.2,
+      120.0
+     ]
+    ],
+    "checks": "ok ok ok",
+    "verdict": "pass",
+    "note": "120 Hz screen cap on both sides"
+   },
+   "owner_first_run_computer": {
+    "ua": "Chrome/156.0.8078.75",
+    "screen": "2560x1440 @1",
+    "ratio": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "fps_on_off": [
+     [
+      60.1,
+      60.0
+     ],
+     [
+      59.9,
+      60.0
+     ],
+     [
+      59.9,
+      60.0
+     ]
+    ],
+    "note": "supporting data, not a phone"
+   },
+   "claude_short": {
+    "ua": "Chromium 153",
+    "screen": "844x390 @3",
+    "ratio": [
+     0.96,
+     0.95,
+     1.0
+    ]
+   }
+  },
+  "bench_v2": {
+   "files": "sw.js FILES (319) minus ./ index.html play.html firebase-config.js = 315 files, 32,876,615 B; sw.js absent on purpose",
+   "page_bytes": 1586289,
+   "selftest": {
+    "summary": {
+     "cases": 12,
+     "ok": 12,
+     "verdict": "pass"
+    },
+    "cases": [
+     {
+      "name": "ok",
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "pass",
+      "reasons": [
+       "mode"
+      ],
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1.001,
+        "fps": [
+         60.8,
+         60.7
+        ],
+        "js": [
+         1.65,
+         1.42
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1.012,
+        "fps": [
+         60.6,
+         59.1
+        ],
+        "js": [
+         2.32,
+         2.27
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.001,
+        "fps": [
+         60.5,
+         60.5
+        ],
+        "js": [
+         1.09,
+         1.02
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "missing": [],
+       "failed": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "desktop",
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "device"
+      ],
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1.001,
+        "fps": [
+         60.4,
+         60.4
+        ],
+        "js": [
+         1.57,
+         1.35
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S2",
+        "ratio": 0.998,
+        "fps": [
+         60.5,
+         60.4
+        ],
+        "js": [
+         2.07,
+         2.14
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.002,
+        "fps": [
+         60.3,
+         60.3
+        ],
+        "js": [
+         1.36,
+         1.41
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "missing": [],
+       "failed": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "nofile",
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "files"
+      ],
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1,
+        "fps": [
+         60.6,
+         60.7
+        ],
+        "js": [
+         1.45,
+         1.54
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1,
+        "fps": [
+         60.7,
+         60.8
+        ],
+        "js": [
+         2.48,
+         2.08
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1,
+        "fps": [
+         60.5,
+         60.5
+        ],
+        "js": [
+         1.04,
+         0.96
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       }
+      ],
+      "files": {
+       "ok": false,
+       "asked": 198,
+       "missing": [],
+       "failed": [
+        "kit-town.png"
+       ],
+       "why": ""
+      }
+     },
+     {
+      "name": "unlisted",
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "files"
+      ],
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 0.997,
+        "fps": [
+         60.7,
+         60.8
+        ],
+        "js": [
+         1.09,
+         1.04
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1.003,
+        "fps": [
+         59.9,
+         59.5
+        ],
+        "js": [
+         2.37,
+         2.3
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1,
+        "fps": [
+         60.6,
+         60.6
+        ],
+        "js": [
+         1.61,
+         1.62
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       }
+      ],
+      "files": {
+       "ok": false,
+       "asked": 198,
+       "missing": [
+        "kit-town.png"
+       ],
+       "failed": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "build",
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "build"
+      ],
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1.001,
+        "fps": [
+         60.8,
+         60.8
+        ],
+        "js": [
+         1.2,
+         1.08
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S2",
+        "ratio": 0.994,
+        "fps": [
+         58.9,
+         59.4
+        ],
+        "js": [
+         2.39,
+         2.37
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.003,
+        "fps": [
+         60.5,
+         60.4
+        ],
+        "js": [
+         1.76,
+         1.75
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "missing": [],
+       "failed": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "c2fail",
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "files"
+      ],
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1.001,
+        "fps": [
+         60.8,
+         60.7
+        ],
+        "js": [
+         0.95,
+         0.98
+        ],
+        "ok": false,
+        "why": "ตัวใหม่ไม่พร้อม",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S2",
+        "ratio": 0.975,
+        "fps": [
+         58.8,
+         60.3
+        ],
+        "js": [
+         2.28,
+         2.45
+        ],
+        "ok": false,
+        "why": "ตัวใหม่ไม่พร้อม",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S3",
+        "ratio": 0.996,
+        "fps": [
+         60.4,
+         60.5
+        ],
+        "js": [
+         1.32,
+         1.52
+        ],
+        "ok": false,
+        "why": "ตัวใหม่ไม่พร้อม",
+        "cut": false,
+        "shaky": false
+       }
+      ],
+      "files": {
+       "ok": false,
+       "asked": 185,
+       "missing": [],
+       "failed": [
+        "c2-pack.json"
+       ],
+       "why": ""
+      }
+     },
+     {
+      "name": "stall",
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "interrupted",
+       "unstable"
+      ],
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 4.621,
+        "fps": [
+         60.9,
+         13.2
+        ],
+        "js": [
+         1.61,
+         1.43
+        ],
+        "ok": true,
+        "why": "",
+        "cut": true,
+        "shaky": true
+       },
+       {
+        "id": "S2",
+        "ratio": 0.999,
+        "fps": [
+         58.6,
+         59.6
+        ],
+        "js": [
+         2.42,
+         2.38
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.002,
+        "fps": [
+         60.6,
+         60.5
+        ],
+        "js": [
+         1.55,
+         1.4
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "missing": [],
+       "failed": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "hidden",
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "interrupted"
+      ],
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 0.999,
+        "fps": [
+         60.6,
+         60.7
+        ],
+        "js": [
+         1.45,
+         1.01
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1.006,
+        "fps": [
+         61,
+         58.9
+        ],
+        "js": [
+         2.28,
+         2.3
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1,
+        "fps": [
+         60.5,
+         60.6
+        ],
+        "js": [
+         1.39,
+         1.41
+        ],
+        "ok": true,
+        "why": "",
+        "cut": true,
+        "shaky": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "missing": [],
+       "failed": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "slowoff",
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "unstable"
+      ],
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1.001,
+        "fps": [
+         60.8,
+         60.7
+        ],
+        "js": [
+         1.62,
+         1.41
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S2",
+        "ratio": 2.65,
+        "fps": [
+         60.1,
+         21.3
+        ],
+        "js": [
+         2.55,
+         28.4
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": true
+       },
+       {
+        "id": "S3",
+        "ratio": 1.001,
+        "fps": [
+         60.4,
+         60.4
+        ],
+        "js": [
+         1.97,
+         1.78
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "missing": [],
+       "failed": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "slowon",
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "fail",
+      "reasons": [
+       "mode"
+      ],
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 0.65,
+        "fps": [
+         39.4,
+         60.8
+        ],
+        "js": [
+         10.65,
+         1.53
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S2",
+        "ratio": 0.604,
+        "fps": [
+         36.1,
+         60.4
+        ],
+        "js": [
+         12.38,
+         2.48
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S3",
+        "ratio": 0.753,
+        "fps": [
+         45.5,
+         60.4
+        ],
+        "js": [
+         10.82,
+         1.59
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "missing": [],
+       "failed": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "lowfps",
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "interrupted"
+      ],
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1,
+        "fps": [
+         2.5,
+         2.5
+        ],
+        "js": [
+         2.77,
+         1.7
+        ],
+        "ok": false,
+        "why": "ตัวไม่เดิน",
+        "cut": true,
+        "shaky": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1,
+        "fps": [
+         2.5,
+         2.5
+        ],
+        "js": [
+         7.13,
+         6.47
+        ],
+        "ok": false,
+        "why": "ตัวไม่เดิน",
+        "cut": true,
+        "shaky": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1,
+        "fps": [
+         2.5,
+         2.5
+        ],
+        "js": [
+         2.2,
+         1.4
+        ],
+        "ok": false,
+        "why": "ตัวไม่เดิน",
+        "cut": true,
+        "shaky": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "missing": [],
+       "failed": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "full",
+      "ok": true,
+      "verdict": "pass",
+      "verdictIfCounted": "pass",
+      "reasons": [],
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1,
+        "fps": [
+         59.9,
+         60.1
+        ],
+        "js": [
+         1.23,
+         1.26
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S2",
+        "ratio": 0.996,
+        "fps": [
+         58.2,
+         58.5
+        ],
+        "js": [
+         2.27,
+         2.23
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1,
+        "fps": [
+         60.1,
+         60.1
+        ],
+        "js": [
+         1.43,
+         1.14
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "missing": [],
+       "failed": [],
+       "why": ""
+      }
+     }
+    ]
+   },
+   "mutations_caught": {
+    "device": 1,
+    "files": 1,
+    "interrupted": 1,
+    "unstable": 1,
+    "build": 1,
+    "mode": 1,
+    "gate_0.60": 1,
+    "total": "7/7"
+   },
+   "claude_full_length_emulated_phone": "G4.6 วัดความลื่น v2 · เกม 2.43 · เมือง 100 % · ฟาร์ม 100 % · ปากถ้ำ 100 % → ผ่าน (เกณฑ์ ≥ 90 %) · fps เปิด/ปิด 59.9/60.1 · 58.2/58.5 · 60.1/60.1 · งาน JS ms/เฟรม เปิด/ปิด 1.23/1.26 · 2.27/2.23 · 1.43/1.14 · ตรวจ ✓ ✓ ✓ · ไฟล์ 198 ขาด 0 · มือถือ 844×390 @3 · Android 10 Chrome/153.0.0.0"
   }
  }
 }

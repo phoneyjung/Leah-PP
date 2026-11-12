@@ -1,12 +1,27 @@
-// G4.6 (plan G4_0 §9 G4.6 · D-G4-7 "ค"): smoothness of character v2 on the owner's REAL phone, once, before "รับ G4".
+// G4.6 (plan G4_0 §9 G4.6 · D-G4-7 "ค"): smoothness of character v2 on the owner's REAL phone, once, before "รับ G4". Version 2.
 // Added only to the private test copy of the game (built by qa/g4/build_phone_bench.py); the game in the repo never loads it.
 // One button: a synthetic save of its own (this copy has its own storage — no real save is read or written, nothing goes online),
 // then 3 fixed scenes of M6 (qa/g4/m6-scenes.json: town · farm · dark cave mouth with the lantern), the kid walking back and forth
 // on the game's own path. In each scene 3 pairs, the flag switched in the same page (new character ON / OFF = the old drawing),
 // order alternating (on-off · off-on · on-off): settle 1.5 s, count frames 5 s. Pins as M6: LITE off, eco off, fpsChecks 6.
-// Per scene: ratio = the median of the 3 paired ratios ON ÷ OFF · pass = every scene ≥ 90 % (plan) and the checks below.
-// Checks per run (so a frozen or empty screen cannot pass): the right map, the kid walked, ON = the new character drawn on ≥ 80 % of
-// frames (C234.n.body) and state ready · OFF = drawn 0 times · lantern held exactly in the dark scene.
+// Per scene: ratio = the median of the 3 paired ratios ON ÷ OFF.
+//
+// Three results (v2 — v1 said "ผ่าน" on a computer, with game files missing, and with a stalled measurement):
+//   ผ่าน     every scene ≥ 90 % AND everything below holds
+//   ไม่ผ่าน   the measurement counts, but a scene is < 90 % or the game itself did the wrong thing (a check of a scene failed)
+//   ไม่นับ    the measurement cannot be used as evidence: measure again (or send the line back). Reasons:
+//     mode         a short / test run (?short · window.__benchTest): never counts
+//     device       not a phone (UA not mobile, no coarse pointer, or no touch)
+//     build        the copy is not the game version it was built from, or it carries no file list
+//     files        a game file asked for by the page is not in the copy, or did not load (HTTP ≥ 400 / network), or the browser's
+//                  resource log cannot be read · read from the browser's own resource timing, no request is touched
+//     interrupted  a run had a frame gap > 300 ms, the page was hidden, or fewer than 10 frames per second
+//     unstable     the 3 paired ratios of a scene differ by more than 0.15, or the scene's ratio is above 1.10
+// Checks per run (so a frozen or empty screen cannot pass): the right map, the kid walked, ON = state ready on every sample and the
+// new character drawn on ≥ 80 % of frames (C234.n.body) · OFF = state off on every sample and drawn 0 times · lantern held exactly in
+// the dark scene.
+// Report only (no gate): JS work per frame (ms inside the page's animation-frame callbacks) ON / OFF — it still shows the cost when
+// both frame rates sit at the screen's refresh rate. It does not include the GPU's work.
 // Result: a table on screen and one line to copy and send back. Takes about 2 minutes; the screen must not be touched.
 (function () {
   'use strict';
@@ -15,30 +30,71 @@
     { id: 'S2', name: 'ฟาร์ม', map: 'farm', go: [0, 4], dark: false },
     { id: 'S3', name: 'ปากถ้ำ (มืด · ถือตะเกียง)', map: 'cavemouth', go: [4, 0], dark: true },
   ];
-  const Q = new URLSearchParams(location.search), SHORT = Q.has('short') || window.__benchShort;
-  const SETTLE = SHORT ? 400 : 1500, MEAS = SHORT ? 1200 : 5000, PAIRS = 3, GATE = 0.90;
+  const BUILD = window.__benchBuild || null, TEST = window.__benchTest || null;
+  const SHORT = !!TEST || new URLSearchParams(location.search).has('short');
+  const SETTLE = TEST ? TEST.settle : SHORT ? 400 : 1500, MEAS = TEST ? TEST.meas : SHORT ? 1200 : 5000;
+  const PAIRS = 3, GATE = 0.90, GAP_MS = 300, MIN_FPS = 10, SPREAD = 0.15, RATIO_MAX = 1.10;
+  try { performance.setResourceTimingBufferSize(4000); } catch (e) {}
+  const RES0 = (() => { try { return performance.getEntriesByType('resource').length; } catch (e) { return -1; } })();
+  // JS work per frame: time inside every animation-frame callback of the page (the game's loop asks for its next frame by the
+  // global name, so it runs through this from its next frame on). The bench's own counter uses the original function.
+  const raf0 = window.requestAnimationFrame.bind(window), JS = { t: 0 };
+  window.requestAnimationFrame = (f) => raf0((t) => { const a = performance.now(); try { return f(t); } finally { JS.t += performance.now() - a; } });
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
   const med = (a) => { const s = [...a].sort((x, y) => x - y); return s.length % 2 ? s[(s.length - 1) / 2] : (s[s.length / 2 - 1] + s[s.length / 2]) / 2; };
   const el = (tag, css, html) => { const e = document.createElement(tag); if (css) e.style.cssText = css; if (html !== undefined) e.innerHTML = html; return e; };
+  const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
   let box, pill, lock = null;
   const FONT = 'font:16px/1.45 system-ui,-apple-system,"Noto Sans Thai",sans-serif';
+  const show = (e, on, how) => { e.style.display = on ? how : 'none'; };   // not the hidden attribute: the page may be opened without the host's reset
   function panel(html) {
-    if (!box) { box = el('div', 'position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;background:#0b0816cc;padding:max(16px,env(safe-area-inset-left,0px));' + FONT + ';color:#f4ecd8');
+    if (!box) { box = el('div', 'position:fixed;inset:0;z-index:2147483000;align-items:center;justify-content:center;background:#0b0816cc;padding:max(16px,env(safe-area-inset-left,0px));' + FONT + ';color:#f4ecd8');
       document.body.appendChild(box); }
     box.innerHTML = '<div style="max-width:620px;width:100%;max-height:92vh;overflow:auto;background:#1d1530;border:2px solid #c9a24a;border-radius:14px;padding:16px 18px;box-shadow:0 8px 30px #0008">' + html + '</div>';
-    box.hidden = false; return box;
+    show(box, true, 'flex'); return box;
   }
   function btn(label, fn, main) {
     const b = el('button', 'min-height:48px;min-width:120px;margin:6px 8px 0 0;padding:8px 18px;border-radius:10px;border:2px solid #c9a24a;' + FONT + ';font-weight:700;cursor:pointer;' +
       (main ? 'background:#c9a24a;color:#1d1530' : 'background:#2b2142;color:#f4ecd8'), label); b.onclick = fn; return b;
   }
   function showPill(t) { if (!pill) { pill = el('div', 'position:fixed;top:calc(6px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);z-index:2147483000;pointer-events:none;background:#1d1530e6;border:1px solid #c9a24a;border-radius:20px;padding:4px 14px;' + FONT + ';font-size:14px;color:#f4ecd8'); document.body.appendChild(pill); }
-    pill.textContent = t; pill.hidden = false; }
+    pill.textContent = t; show(pill, true, 'block'); }
+  function device() {
+    const ua = navigator.userAgent, uad = navigator.userAgentData;
+    const mobileUA = (uad && typeof uad.mobile === 'boolean') ? uad.mobile : /Android|iPhone|iPod|Mobile/.test(ua);
+    let coarse = false; try { coarse = matchMedia('(pointer:coarse)').matches; } catch (e) {}
+    const touch = (navigator.maxTouchPoints || 0) > 0;
+    return { phone: !!(mobileUA && coarse && touch), mobileUA: !!mobileUA, coarse, touch,
+      screen: Math.round(screen.width) + '×' + Math.round(screen.height) + ' @' + (Math.round(devicePixelRatio * 100) / 100),
+      ua: (ua.match(/Android[^;)]*|iPhone OS [\d_]+|iPad|Chrome\/[\d.]+|Version\/[\d.]+ Mobile/g) || []).join(' ') };
+  }
+  // Every file the page asked for from its own folder must be in the copy and must have loaded. Read from the browser's resource log.
+  function files() {
+    const out = { ok: false, asked: 0, missing: [], failed: [], why: '' };
+    if (!BUILD || !Array.isArray(BUILD.files)) { out.why = 'no file list'; return out; }
+    let ents; try { ents = performance.getEntriesByType('resource'); } catch (e) { out.why = 'no resource log'; return out; }
+    if (RES0 < 0 || RES0 >= 250) { out.why = 'resource log was full before the bench started'; return out; }
+    const base = new URL('.', location.href).href, have = new Set(BUILD.files), absent = new Set(BUILD.absent || []), seen = new Set();
+    let status = 0;
+    for (const e of ents) {
+      if (!e.name.startsWith(base)) continue;
+      const rel = decodeURIComponent(e.name.slice(base.length).split(/[?#]/)[0]); if (!rel || rel === 'favicon.ico') continue;
+      if (typeof e.responseStatus === 'number') status++;
+      if (absent.has(rel)) continue;
+      if (!seen.has(rel)) { seen.add(rel); if (!have.has(rel)) out.missing.push(rel); }
+      const bad = typeof e.responseStatus !== 'number' ? false : e.responseStatus >= 400 || (e.responseStatus === 0 && !e.decodedBodySize && !e.transferSize);
+      if (bad && have.has(rel) && !out.failed.includes(rel)) out.failed.push(rel);
+    }
+    out.asked = seen.size;
+    if (!seen.size) out.why = 'the resource log is empty';
+    else if (!status) out.why = 'this browser does not report file status';
+    out.ok = !out.why && !out.missing.length && !out.failed.length; return out;
+  }
   function start() {
     const b = panel('<h2 style="margin:0 0 8px;font-size:20px">วัดความลื่นตัวละครรุ่น 2 (G4.6)</h2>' +
-      '<p style="margin:0 0 6px">หน้านี้เป็น<b>สำเนาทดสอบ</b>ของเกม 2.43 · ใช้เซฟทดลองของมันเอง ไม่แตะเซฟของลีอา ไม่ต่อออนไลน์</p>' +
-      '<p style="margin:0 0 6px">กดเริ่มแล้ว <b>วางมือถือแนวนอนนิ่ง ๆ ไม่ต้องแตะจอ</b> ประมาณ <b>2 นาที</b> · ตัวละครจะเดินเองใน 3 ฉาก สลับเปิด-ปิดตัวใหม่ 6 ครั้งต่อฉาก</p>' +
-      '<p style="margin:0 0 10px;color:#d8c8a0">ผ่านเมื่อเปิดตัวใหม่แล้วยังลื่นอย่างน้อย 90 % ของตอนปิด ทุกฉาก</p>');
+      '<p style="margin:0 0 6px">หน้านี้เป็น<b>สำเนาทดสอบ</b>ของเกม ' + esc(typeof VERSION === 'string' ? VERSION.replace('Lantern Academy ', '') : '?') + ' · ใช้เซฟทดลองของมันเอง ไม่แตะเซฟของลีอา ไม่ต่อออนไลน์</p>' +
+      '<p style="margin:0 0 6px">กดเริ่มแล้ว <b>วางมือถือแนวนอนนิ่ง ๆ ไม่ต้องแตะจอ ไม่สลับแอป</b> ประมาณ <b>2 นาที</b> · ตัวละครจะเดินเองใน 3 ฉาก สลับเปิด-ปิดตัวใหม่ 6 ครั้งต่อฉาก</p>' +
+      '<p style="margin:0 0 10px;color:#d8c8a0">ผ่านเมื่อเปิดตัวใหม่แล้วยังลื่นอย่างน้อย 90 % ของตอนปิด ทุกฉาก' + (SHORT ? ' · <b>รอบสั้นสำหรับทดสอบ ไม่นับเป็นผล</b>' : '') + '</p>');
     const row = el('div'); row.appendChild(btn('เริ่มวัด', run, true)); b.firstChild.appendChild(row);
   }
   async function setFlag(on) {
@@ -48,13 +104,18 @@
   }
   function pin() { try { LITE = false; fpsChecks = 6; S.eco = false; } catch (e) {} }
   function measure(ms) {
-    return new Promise((r) => { let n = 0; const b0 = C234.n.body, w0 = window.__bw, t0 = performance.now(), held0 = [];
-      const f = () => { n++; if (n % 10 === 0) held0.push(!!(DARK() && LKID())); if (performance.now() - t0 < ms) requestAnimationFrame(f);
-        else { const dt = (performance.now() - t0) / 1000; r({ fps: n / dt, frames: n, body: C234.n.body - b0, walked: Math.round(window.__bw - w0), map: M && M.id, st: C234.st, held: held0.length ? held0.every(Boolean) : !!(DARK() && LKID()), heldAny: held0.some(Boolean) }); } };
-      requestAnimationFrame(f); });
+    return new Promise((r) => { let n = 0, gap = 0, lastT = 0, hid = document.hidden; const b0 = C234.n.body, w0 = window.__bw, j0 = JS.t, t0 = performance.now(), held0 = [], sts = [];
+      const onv = () => { if (document.hidden) hid = true; }; document.addEventListener('visibilitychange', onv);
+      const f = () => { const now = performance.now(); if (lastT) gap = Math.max(gap, now - lastT); lastT = now; n++;
+        if (n % 10 === 0) { held0.push(!!(DARK() && LKID())); if (!sts.includes(C234.st)) sts.push(C234.st); }
+        if (now - t0 < ms) raf0(f);
+        else { document.removeEventListener('visibilitychange', onv); const dt = (now - t0) / 1000; if (!sts.includes(C234.st)) sts.push(C234.st);
+          r({ fps: n / dt, frames: n, gap: Math.round(gap), hidden: hid, js: (JS.t - j0) / n, body: C234.n.body - b0, walked: Math.round(window.__bw - w0), map: M && M.id, st: C234.st, sts,
+            held: held0.length ? held0.every(Boolean) : !!(DARK() && LKID()), heldAny: held0.some(Boolean) }); } };
+      raf0(f); });
   }
   async function run() {
-    box.hidden = true; try { lock = await navigator.wakeLock.request('screen'); } catch (e) {}
+    show(box, false); try { lock = await navigator.wakeLock.request('screen'); } catch (e) {}
     const runs = [];
     try {
       const d = Store.all(); d.slots = [Object.assign(newSave({ name: 'ทดสอบ', kid: 0, house: 1, age: 7 }), { gender194: 'f', hc: 3, char2On: false })]; d.cur = 0; Store.put(d);
@@ -75,32 +136,57 @@
       }
     } catch (e) { runs.err = String(e && e.message || e).slice(0, 200); }
     try { if (lock) lock.release(); } catch (e) {}
-    if (pill) pill.hidden = true; report(runs);
+    if (pill) show(pill, false); report(runs);
   }
   function report(runs) {
+    const only = (r, s) => r.sts.length === 1 && r.sts[0] === s;
     const rows = SCENES.map((sc) => {
       const rs = runs.filter((r) => r.scene === sc.id), on = rs.filter((r) => r.on), off = rs.filter((r) => !r.on);
       const pairs = [0, 1, 2].map((i) => { const a = on.find((r) => r.pair === i), b = off.find((r) => r.pair === i); return a && b && b.fps > 0 ? a.fps / b.fps : null; }).filter((x) => x !== null);
       const ok = rs.length === 6 && rs.every((r) => r.map === sc.map && r.walked > 20 && r.held === sc.dark && (sc.dark || !r.heldAny)) &&
-        on.every((r) => r.st === 'ready' && r.body >= 0.8 * r.frames) && off.every((r) => r.body === 0);
+        on.every((r) => only(r, 'ready') && r.body >= 0.8 * r.frames) && off.every((r) => only(r, 'off') && r.body === 0);
       const ratio = pairs.length === 3 ? med(pairs) : null;
-      return { sc, ratio, pairs, ok, fpsOn: on.length ? med(on.map((r) => r.fps)) : 0, fpsOff: off.length ? med(off.map((r) => r.fps)) : 0,
-        why: !rs.length ? 'ไม่ได้วัด' : rs.some((r) => r.map !== sc.map) ? 'แผนที่ผิด' : rs.some((r) => r.walked <= 20) ? 'ตัวไม่เดิน' : on.some((r) => r.st !== 'ready') ? 'ตัวใหม่ไม่พร้อม' : on.some((r) => r.body < 0.8 * r.frames) ? 'ตัวใหม่วาดไม่ครบ' : off.some((r) => r.body) ? 'ปิดแล้วยังวาดตัวใหม่' : rs.some((r) => r.held !== sc.dark) ? 'ตะเกียงไม่ตรง' : '' };
+      const cut = rs.some((r) => r.gap > GAP_MS || r.hidden || r.fps < MIN_FPS);
+      const shaky = pairs.length === 3 && (Math.max(...pairs) - Math.min(...pairs) > SPREAD || ratio > RATIO_MAX);
+      return { sc, ratio, pairs, ok, cut, shaky, fpsOn: on.length ? med(on.map((r) => r.fps)) : 0, fpsOff: off.length ? med(off.map((r) => r.fps)) : 0,
+        jsOn: on.length ? med(on.map((r) => r.js)) : 0, jsOff: off.length ? med(off.map((r) => r.js)) : 0,
+        why: !rs.length ? 'ไม่ได้วัด' : rs.length !== 6 ? 'วัดไม่ครบ' : rs.some((r) => r.map !== sc.map) ? 'แผนที่ผิด' : rs.some((r) => r.walked <= 20) ? 'ตัวไม่เดิน' : on.some((r) => !only(r, 'ready')) ? 'ตัวใหม่ไม่พร้อม' :
+          on.some((r) => r.body < 0.8 * r.frames) ? 'ตัวใหม่วาดไม่ครบ' : off.some((r) => r.body || !only(r, 'off')) ? 'ปิดแล้วยังวาดตัวใหม่' : rs.some((r) => r.held !== sc.dark || (!sc.dark && r.heldAny)) ? 'ตะเกียงไม่ตรง' : '' };
     });
-    const pass = !runs.err && rows.every((r) => r.ok && r.ratio !== null && r.ratio >= GATE);
+    const dev = device(), fl = files(), ver = typeof VERSION === 'string' ? VERSION : '?';
+    const reasons = [];   // why the measurement does not count
+    if (SHORT) reasons.push('mode');
+    if (!dev.phone) reasons.push('device');
+    if (!BUILD || BUILD.version !== ver) reasons.push('build');
+    if (!fl.ok) reasons.push('files');
+    if (rows.some((r) => r.cut)) reasons.push('interrupted');
+    if (rows.some((r) => r.shaky)) reasons.push('unstable');
+    const good = !runs.err && rows.every((r) => r.ok && r.ratio !== null && r.ratio >= GATE);
+    const counted = reasons.filter((x) => x !== 'mode');   // what the verdict would be in a full-length run (the self-test reads this)
+    const verdictIfCounted = counted.length ? 'void' : good ? 'pass' : 'fail', verdict = reasons.length ? 'void' : good ? 'pass' : 'fail';
+    const WORD = { pass: 'ผ่าน', fail: 'ไม่ผ่าน', void: 'ไม่นับ' };
+    const SAY = { mode: 'รอบสั้นสำหรับทดสอบ', device: 'เครื่องนี้ไม่ใช่มือถือ', build: 'สำเนาไม่ตรงรุ่นเกม',
+      files: fl.why ? 'ตรวจไฟล์เกมไม่ได้' : 'โหลดไฟล์เกมไม่ครบ ' + (fl.missing.length + fl.failed.length) + ' ไฟล์', interrupted: 'ระหว่างวัดมีการสะดุดหรือสลับแอป', unstable: 'ผลแต่ละรอบต่างกันมากเกินไป' };
     const pct = (x) => (x === null ? '–' : Math.round(x * 100) + ' %');
-    const scr = Math.round(screen.width) + '×' + Math.round(screen.height) + ' @' + (Math.round(devicePixelRatio * 100) / 100);
-    const ua = (navigator.userAgent.match(/Android[^;)]*|iPhone OS [\d_]+|iPad|Chrome\/[\d.]+|Version\/[\d.]+ Mobile/g) || []).join(' ');
-    const line = 'G4.6 มือถือจริง · เกม ' + (typeof VERSION === 'string' ? VERSION.replace('Lantern Academy ', '') : '?') + ' · ' +
-      rows.map((r) => r.sc.name.split(' ')[0] + ' ' + pct(r.ratio)).join(' · ') + ' → ' + (pass ? 'ผ่าน' : 'ไม่ผ่าน') + ' (เกณฑ์ ≥ 90 %) · fps เปิด/ปิด ' +
-      rows.map((r) => r.fpsOn.toFixed(1) + '/' + r.fpsOff.toFixed(1)).join(' · ') + ' · ตรวจ ' + rows.map((r) => (r.ok ? '✓' : '✗' + r.why)).join(' ') +
-      ' · ' + scr + ' · ' + ua + (runs.err ? ' · error ' + runs.err : '') + (SHORT ? ' · (รอบสั้นทดสอบ)' : '');
-    window.__benchResult = { pass, rows: rows.map((r) => ({ id: r.sc.id, ratio: r.ratio, pairs: r.pairs, ok: r.ok, why: r.why, fpsOn: r.fpsOn, fpsOff: r.fpsOff })), runs, line };
-    const tr = rows.map((r) => '<tr><td style="padding:4px 8px">' + r.sc.name + '</td><td style="padding:4px 8px;text-align:right">' + r.fpsOn.toFixed(1) + '</td><td style="padding:4px 8px;text-align:right">' + r.fpsOff.toFixed(1) +
-      '</td><td style="padding:4px 8px;text-align:right;font-weight:700">' + pct(r.ratio) + '</td><td style="padding:4px 8px">' + (r.ok ? '✓' : '✗ ' + r.why) + '</td></tr>').join('');
-    const b = panel('<h2 style="margin:0 0 8px;font-size:20px">ผล: ' + (pass ? '<span style="color:#8fd18f">ผ่าน</span>' : '<span style="color:#ff9a8a">ไม่ผ่าน</span>') + '</h2>' +
-      '<div style="overflow-x:auto"><table style="border-collapse:collapse;width:100%;font-size:15px"><tr style="color:#d8c8a0"><th style="text-align:left;padding:4px 8px">ฉาก</th><th style="padding:4px 8px">fps เปิด</th><th style="padding:4px 8px">fps ปิด</th><th style="padding:4px 8px">เปิด ÷ ปิด</th><th style="padding:4px 8px">ตรวจ</th></tr>' + tr + '</table></div>' +
-      '<p style="margin:10px 0 4px">กด "คัดลอกผล" แล้วส่งข้อความนี้กลับมาให้ Claude:</p><textarea readonly style="width:100%;min-height:96px;box-sizing:border-box;background:#120d20;color:#f4ecd8;border:1px solid #6b5a8a;border-radius:8px;padding:8px;font-size:13px">' + line.replace(/</g, '&lt;') + '</textarea>');
+    const lost = fl.missing.concat(fl.failed);
+    const line = 'G4.6 วัดความลื่น v2 · เกม ' + ver.replace('Lantern Academy ', '') + ' · ' +
+      rows.map((r) => r.sc.name.split(' ')[0] + ' ' + pct(r.ratio)).join(' · ') + ' → ' + WORD[verdict] + (reasons.length ? ' (' + reasons.map((x) => SAY[x]).join(' · ') + ')' : ' (เกณฑ์ ≥ 90 %)') +
+      ' · fps เปิด/ปิด ' + rows.map((r) => r.fpsOn.toFixed(1) + '/' + r.fpsOff.toFixed(1)).join(' · ') +
+      ' · งาน JS ms/เฟรม เปิด/ปิด ' + rows.map((r) => r.jsOn.toFixed(2) + '/' + r.jsOff.toFixed(2)).join(' · ') +
+      ' · ตรวจ ' + rows.map((r) => (r.ok ? '✓' : '✗' + r.why)).join(' ') +
+      ' · ไฟล์ ' + fl.asked + ' ขาด ' + lost.length + (lost.length ? ' [' + lost.slice(0, 8).join(' ') + (lost.length > 8 ? ' …' : '') + ']' : '') + (fl.why ? ' [' + fl.why + ']' : '') +
+      ' · ' + (dev.phone ? 'มือถือ' : 'ไม่ใช่มือถือ') + ' ' + dev.screen + ' · ' + dev.ua + (runs.err ? ' · error ' + runs.err : '');
+    window.__benchResult = { v: 2, verdict, verdictIfCounted, pass: verdict === 'pass', reasons, device: dev, files: fl, build: BUILD && { version: BUILD.version, files: BUILD.files.length },
+      rows: rows.map((r) => ({ id: r.sc.id, ratio: r.ratio, pairs: r.pairs, ok: r.ok, why: r.why, cut: r.cut, shaky: r.shaky, fpsOn: r.fpsOn, fpsOff: r.fpsOff, jsOn: r.jsOn, jsOff: r.jsOff })), runs, line };
+    const td = 'padding:4px 8px', tr = rows.map((r) => '<tr><td style="' + td + '">' + r.sc.name + '</td><td style="' + td + ';text-align:right">' + r.fpsOn.toFixed(1) + '</td><td style="' + td + ';text-align:right">' + r.fpsOff.toFixed(1) +
+      '</td><td style="' + td + ';text-align:right;font-weight:700">' + pct(r.ratio) + '</td><td style="' + td + ';text-align:right">' + r.jsOn.toFixed(2) + ' / ' + r.jsOff.toFixed(2) + '</td><td style="' + td + '">' + (r.ok ? '✓' : '✗ ' + r.why) + (r.cut ? ' · สะดุด' : '') + (r.shaky ? ' · แกว่ง' : '') + '</td></tr>').join('');
+    const head = verdict === 'pass' ? '<span style="color:#8fd18f">ผ่าน</span>' : verdict === 'fail' ? '<span style="color:#ff9a8a">ไม่ผ่าน</span>' : '<span style="color:#f0c869">ไม่นับ · ต้องวัดใหม่</span>';
+    const tell = reasons.length ? '<p style="margin:0 0 8px;color:#f0c869">' + reasons.map((x) => esc(SAY[x])).join(' · ') +
+      (reasons.includes('interrupted') || reasons.includes('unstable') ? ' → กด "วัดอีกครั้ง" แล้ววางมือถือนิ่ง ๆ' : reasons.includes('device') ? ' → เปิดลิงก์นี้ในมือถือแล้ววัดใหม่' : ' → ส่งข้อความด้านล่างให้ Claude') + '</p>' : '';
+    const b = panel('<h2 style="margin:0 0 8px;font-size:20px">ผล: ' + head + '</h2>' + tell +
+      '<div style="overflow-x:auto"><table style="border-collapse:collapse;width:100%;font-size:15px"><tr style="color:#d8c8a0"><th style="text-align:left;' + td + '">ฉาก</th><th style="' + td + '">fps เปิด</th><th style="' + td + '">fps ปิด</th><th style="' + td + '">เปิด ÷ ปิด</th><th style="' + td + '">งาน JS ms เปิด / ปิด</th><th style="' + td + '">ตรวจ</th></tr>' + tr + '</table></div>' +
+      '<p style="margin:8px 0 0;color:#d8c8a0;font-size:14px">ไฟล์เกมที่หน้าเรียก ' + fl.asked + ' ไฟล์ · ขาด ' + lost.length + ' · ' + (dev.phone ? 'มือถือ' : 'ไม่ใช่มือถือ') + ' ' + esc(dev.screen) + '</p>' +
+      '<p style="margin:10px 0 4px">กด "คัดลอกผล" แล้วส่งข้อความนี้กลับมาให้ Claude:</p><textarea readonly style="width:100%;min-height:110px;box-sizing:border-box;background:#120d20;color:#f4ecd8;border:1px solid #6b5a8a;border-radius:8px;padding:8px;font-size:13px">' + esc(line) + '</textarea>');
     const row = el('div'), msg = el('span', 'margin-left:6px;color:#8fd18f');
     row.appendChild(btn('คัดลอกผล', () => { const ta = b.querySelector('textarea'); const done = () => { msg.textContent = 'คัดลอกแล้ว'; };
       try { navigator.clipboard.writeText(line).then(done, () => { ta.focus(); ta.select(); msg.textContent = 'เลือกข้อความแล้ว กดคัดลอกเอง'; }); } catch (e) { ta.focus(); ta.select(); } }, true));
