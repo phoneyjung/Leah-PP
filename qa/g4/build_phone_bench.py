@@ -18,6 +18,7 @@ of requests seen in a run (v1 took such a list from a probe that changed what th
 Left out on purpose, and nothing else:
   './' · *.html     pages (the copy's page is page.html)
   firebase-config.js the copy never goes online (difference 3)
+  tk-test.js · tk-pack.bin   the Trickster test mode: the game fetches them only with ?tk on a GM slot, which this page never has
   sw.js             not in FILES; the copy installs no cache. The game asks for sw.js?check=… to look for a newer version; in the
                     copy that request fails and the game skips the check. phone_bench.js is told so (BUILD.absent).
 Every listed file must exist, or the build stops. Whether the list is enough is checked where it matters: on the device,
@@ -54,7 +55,7 @@ if not m:
 listed = re.findall(r"'([^']*)'", m.group(1))
 if len(listed) != len(set(listed)) or len(listed) < 100:
     sys.exit('sw.js: FILES has repeats or is too short (%d)' % len(listed))
-skip = lambda p: p == './' or p.endswith('.html') or p == 'firebase-config.js'
+skip = lambda p: p == './' or p.endswith('.html') or p in ('firebase-config.js', 'tk-test.js', 'tk-pack.bin')
 names = sorted(p for p in listed if not skip(p))
 left_out = sorted(p for p in listed if skip(p))
 fmap, size = {}, 0

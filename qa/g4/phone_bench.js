@@ -74,12 +74,12 @@
     if (!BUILD || !Array.isArray(BUILD.files)) { out.why = 'no file list'; return out; }
     let ents; try { ents = performance.getEntriesByType('resource'); } catch (e) { out.why = 'no resource log'; return out; }
     if (RES0 < 0 || RES0 >= 250) { out.why = 'resource log was full before the bench started'; return out; }
-    const base = new URL('.', location.href).href, have = new Set(BUILD.files), absent = new Set(BUILD.absent || []), seen = new Set();
-    let status = 0;
+    const base = new URL('.', document.baseURI).href, have = new Set(BUILD.files), absent = new Set(BUILD.absent || []), seen = new Set();
+    let real = 0;   // entries whose HTTP status the browser shows (a host that serves the files from another origin shows 0 for all)
     for (const e of ents) {
       if (!e.name.startsWith(base)) continue;
       const rel = decodeURIComponent(e.name.slice(base.length).split(/[?#]/)[0]); if (!rel || rel === 'favicon.ico') continue;
-      if (typeof e.responseStatus === 'number') status++;
+      if (e.responseStatus > 0) real++;
       if (absent.has(rel)) continue;
       if (!seen.has(rel)) { seen.add(rel); if (!have.has(rel)) out.missing.push(rel); }
       const bad = typeof e.responseStatus !== 'number' ? false : e.responseStatus >= 400 || (e.responseStatus === 0 && !e.decodedBodySize && !e.transferSize);
@@ -87,7 +87,7 @@
     }
     out.asked = seen.size;
     if (!seen.size) out.why = 'the resource log is empty';
-    else if (!status) out.why = 'this browser does not report file status';
+    else if (!real) out.why = 'the browser does not show the status of the files here';
     out.ok = !out.why && !out.missing.length && !out.failed.length; return out;
   }
   function start() {
