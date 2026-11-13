@@ -9,7 +9,8 @@ Version 2.
      host wraps the page itself; their contents stay in place, in the same order
   2. <title> → "LA วัดความลื่น" (the artifact's name)
   3. <script src="firebase-config.js"></script> removed: the copy never goes online (no real database, no other players)
-  4. one inline <script> appended at the end: window.__benchBuild (the game version and the copy's file list) + qa/g4/phone_bench.js
+  4. one inline <script> appended at the end: window.__benchBuild (the game version and the copy's file list with each file's
+     size and SHA-256) + qa/g4/phone_bench.js
 <out>/files.json = {published path: source path} for every file of the copy · <out>/files.N.json = the same in parts of at most 250
 files (one publish takes at most 255).
 
@@ -25,7 +26,7 @@ Every listed file must exist, or the build stops. Whether the list is enough is 
 phone_bench.js reads the browser's resource log and does not count a run in which the page asked for a file that is not in the copy
 or that did not load (qa/g4/phone_bench_selftest.js proves that check).
 """
-import json, os, re, sys
+import hashlib, json, os, re, sys
 
 game, out = sys.argv[1], sys.argv[2]
 here = os.path.dirname(os.path.abspath(__file__))
@@ -58,7 +59,7 @@ if len(listed) != len(set(listed)) or len(listed) < 100:
 skip = lambda p: p == './' or p.endswith('.html') or p in ('firebase-config.js', 'tk-test.js', 'tk-pack.bin')
 names = sorted(p for p in listed if not skip(p))
 left_out = sorted(p for p in listed if skip(p))
-fmap, size = {}, 0
+fmap, size, meta = {}, 0, {}
 for p in names:
     if not re.match(r'^[\w.@-]+$', p):
         sys.exit('unexpected path in FILES: %r' % p)
@@ -66,13 +67,15 @@ for p in names:
     if not os.path.isfile(fp):
         sys.exit('listed in sw.js but not in the game: %s' % p)
     fmap[p] = os.path.abspath(fp)
-    size += os.path.getsize(fp)
+    data = open(fp, 'rb').read()
+    size += len(data)
+    meta[p] = [len(data), hashlib.sha256(data).hexdigest()]   # phone_bench.js v3 checks both against what the page really got
 for must in ('char2.js', 'c2-pack.json', 'manifest.json'):
     if must not in fmap:
         sys.exit('%s is not in sw.js FILES' % must)
 
 bench = open(os.path.join(here, 'phone_bench.js'), encoding='utf-8').read()
-build = json.dumps({'version': ver[0], 'files': names, 'absent': ['sw.js']}, ensure_ascii=False, separators=(',', ':'))
+build = json.dumps({'version': ver[0], 'files': names, 'meta': meta, 'absent': ['sw.js']}, ensure_ascii=False, separators=(',', ':'))
 if '</script' in bench or '</script' in build:
     sys.exit('the appended script must not contain </script')
 page = page.rstrip() + '\n<script>\nwindow.__benchBuild=' + build + ';\n' + bench + '</script>\n'

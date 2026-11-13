@@ -1,4 +1,4 @@
-// G4.6 (plan G4_0 §9 G4.6 · D-G4-7 "ค"): smoothness of character v2 on the owner's REAL phone, once, before "รับ G4". Version 2.
+// G4.6 (plan G4_0 §9 G4.6 · D-G4-7 "ค"): smoothness of character v2 on the owner's REAL phone, once, before "รับ G4". Version 3.
 // Added only to the private test copy of the game (built by qa/g4/build_phone_bench.py); the game in the repo never loads it.
 // One button: a synthetic save of its own (this copy has its own storage — no real save is read or written, nothing goes online),
 // then 3 fixed scenes of M6 (qa/g4/m6-scenes.json: town · farm · dark cave mouth with the lantern), the kid walking back and forth
@@ -13,13 +13,29 @@
 //     mode         a short / test run (?short · window.__benchTest): never counts
 //     device       not a phone (UA not mobile, no coarse pointer, or no touch)
 //     build        the copy is not the game version it was built from, or it carries no file list
-//     files        a game file asked for by the page is not in the copy, or did not load (HTTP ≥ 400 / network), or the browser's
-//                  resource log cannot be read · read from the browser's own resource timing, no request is touched
+//     files        a game file asked for by the page is not in the copy, or did not load (HTTP ≥ 400 / network), or is not the
+//                  file of the build (v3: the size the page received, and the SHA-256 of the file read back, must equal the build's
+//                  — HTTP 200 alone proves nothing), or an image of the game's first table failed (MISSING), or the browser's
+//                  resource log / the files cannot be read · read from the browser's own resource timing, no request is touched
 //     interrupted  a run had a frame gap > 300 ms, the page was hidden, or fewer than 10 frames per second
 //     unstable     the 3 paired ratios of a scene differ by more than 0.15, or the scene's ratio is above 1.10
-// Checks per run (so a frozen or empty screen cannot pass): the right map, the kid walked, ON = state ready on every sample and the
-// new character drawn on ≥ 80 % of frames (C234.n.body) · OFF = state off on every sample and drawn 0 times · lantern held exactly in
-// the dark scene.
+// Checks per run (so a frozen or empty screen cannot pass): the right map, the kid walked, and — v3 — what was really DRAWN, counted
+// at the draw itself (v2 passed with the lantern not drawn and with the old character not drawn at all, Codex T47-N1 N2):
+// while measuring, the bench wraps the game's drawPlayer and the drawImage of the game's main canvas context and, for every player
+// draw, counts the drawImage commands issued inside it. The same wrappers are on in ON and OFF runs.
+//   ON  = state ready on every sample · the new character drawn (C234.n.body moved AND ≥ 1 draw command) on ≥ 80 % of frames ·
+//         the old sheet never drawn
+//   OFF = state off on every sample · the new character drawn 0 times · the OLD sheet (PS.walk / PS.stand) really blitted on
+//         ≥ 80 % of frames
+//   lantern, ON: read from the draw config the game handed to the renderer in that very draw (C234.feet.dc.held) and from the
+//         commands: dark scene = held in every new-character draw, and in every draw where the lantern is visible (not a hidden
+//         direction such as N — Char2.light says so — and not the half-transparent path) ≥ 2 commands (body + lantern); such
+//         draws must be ≥ 50 % of the draws · lit scene = held in none
+//   lantern, OFF: the old drawing uses the game's own condition (dark map and a little kid) directly; the bench reads that
+//         condition only as the state of the scene, not as proof of a drawing
+//   the scene, both ways (medians of the 3 runs): draw commands per frame on the main canvas, ON ≥ 80 % of OFF (as M6's fps.js) ·
+//         the player's shadow on the same share of frames (ON: the game's counter at the new shadow, OFF: the old shadow sheet
+//         blitted) · LITE off, eco off, fpsChecks 6 still so at the end of every run (the game may not change its own graphics mode)
 // Report only (no gate): JS work per frame (ms inside the page's animation-frame callbacks) ON / OFF — it still shows the cost when
 // both frame rates sit at the screen's refresh rate. It does not include the GPU's work.
 // Result: a table on screen and one line to copy and send back. Takes about 2 minutes; the screen must not be touched.
@@ -40,6 +56,22 @@
   // global name, so it runs through this from its next frame on). The bench's own counter uses the original function.
   const raf0 = window.requestAnimationFrame.bind(window), JS = { t: 0 };
   window.requestAnimationFrame = (f) => raf0((t) => { const a = performance.now(); try { return f(t); } finally { JS.t += performance.now() - a; } });
+  // What is really drawn (v3). EV counts per player draw; measure() takes the difference over a run.
+  const EV = { calls: 0, cmd: 0, newD: 0, oldD: 0, heldCfg: 0, vis: 0, heldCmd: 0, all: 0, oldSh: 0 };
+  let hooked = null;
+  function hook() {
+    if (hooked) return;   // once: a wrapper put around drawPlayer later stays outside this one, and is seen as draws that never arrive here
+    const draw0 = Object.getPrototypeOf(ctx).drawImage; let inP = 0, n = 0, old = false, thin = false;
+    ctx.drawImage = function (img) { EV.all++; if (inP) { if (!n) thin = this.globalAlpha < 1; n++; if (img === PS.walk || img === PS.stand) old = true; } else if (img === PS.shS || img === PS.shW) EV.oldSh++;
+      return draw0.apply(this, arguments); };
+    const dp = drawPlayer;
+    drawPlayer = function () { const b0 = C234.n.body; inP++; n = 0; old = false; thin = false;
+      try { return dp.apply(this, arguments); } finally { inP--;
+        EV.calls++; if (n) EV.cmd++; if (old) EV.oldD++;
+        if (C234.n.body > b0) { const f = C234.feet, held = !!(f && f.dc && f.dc.held), L = f && f.L; if (n) EV.newD++;
+          if (held) { EV.heldCfg++; if (L && !L.hidden && !thin) { EV.vis++; if (n >= 2) EV.heldCmd++; } } } } };
+    hooked = ctx;
+  }
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
   const med = (a) => { const s = [...a].sort((x, y) => x - y); return s.length % 2 ? s[(s.length - 1) / 2] : (s[s.length / 2 - 1] + s[s.length / 2]) / 2; };
   const el = (tag, css, html) => { const e = document.createElement(tag); if (css) e.style.cssText = css; if (html !== undefined) e.innerHTML = html; return e; };
@@ -70,8 +102,8 @@
   }
   // Every file the page asked for from its own folder must be in the copy and must have loaded. Read from the browser's resource log.
   function files() {
-    const out = { ok: false, asked: 0, missing: [], failed: [], why: '' };
-    if (!BUILD || !Array.isArray(BUILD.files)) { out.why = 'no file list'; return out; }
+    const out = { ok: false, asked: 0, missing: [], failed: [], wrong: [], why: '', seen: [] };
+    if (!BUILD || !Array.isArray(BUILD.files) || !BUILD.meta) { out.why = 'no file list'; return out; }
     let ents; try { ents = performance.getEntriesByType('resource'); } catch (e) { out.why = 'no resource log'; return out; }
     if (RES0 < 0 || RES0 >= 250) { out.why = 'resource log was full before the bench started'; return out; }
     const base = new URL('.', document.baseURI).href, have = new Set(BUILD.files), absent = new Set(BUILD.absent || []), seen = new Set();
@@ -84,11 +116,28 @@
       if (!seen.has(rel)) { seen.add(rel); if (!have.has(rel)) out.missing.push(rel); }
       const bad = typeof e.responseStatus !== 'number' ? false : e.responseStatus >= 400 || (e.responseStatus === 0 && !e.decodedBodySize && !e.transferSize);
       if (bad && have.has(rel) && !out.failed.includes(rel)) out.failed.push(rel);
+      // the size of what the page itself received for this request (a HEAD answer has no body: skipped)
+      const m = BUILD.meta[rel]; if (m && !bad && e.decodedBodySize > 0 && e.decodedBodySize !== m[0] && !out.wrong.includes(rel)) out.wrong.push(rel);
     }
-    out.asked = seen.size;
+    out.asked = seen.size; out.seen = [...seen].filter((x) => have.has(x)); out.base = base;
+    try { if (typeof MISSING === 'object' && MISSING.size) for (const k of MISSING) out.failed.push('image:' + k); } catch (e) {}
     if (!seen.size) out.why = 'the resource log is empty';
     else if (!real) out.why = 'the browser does not show the status of the files here';
-    out.ok = !out.why && !out.missing.length && !out.failed.length; return out;
+    out.ok = !out.why && !out.missing.length && !out.failed.length && !out.wrong.length; return out;
+  }
+  // The files the page asked for are read back (from the browser's cache when it has them) and their SHA-256 must be the build's.
+  async function verify(fl) {
+    if (fl.why) return fl;
+    if (!(window.crypto && crypto.subtle)) { fl.why = 'no SHA-256 in this browser'; fl.ok = false; return fl; }
+    const hex = (buf) => Array.from(new Uint8Array(buf), (b) => b.toString(16).padStart(2, '0')).join('');
+    let i = 0, hashed = 0, unread = 0;
+    const one = async () => { while (i < fl.seen.length) { const rel = fl.seen[i++], m = BUILD.meta[rel]; if (fl.failed.includes(rel)) continue;
+      try { const r = await fetch(fl.base + rel, { cache: 'force-cache' }); if (!r.ok) { unread++; continue; }
+        const buf = await r.arrayBuffer(); hashed++; if (buf.byteLength !== m[0] || hex(await crypto.subtle.digest('SHA-256', buf)) !== m[1]) { if (!fl.wrong.includes(rel)) fl.wrong.push(rel); } }
+      catch (e) { unread++; } } };
+    await Promise.all([one(), one(), one(), one()]);
+    fl.hashed = hashed; if (unread) fl.why = 'cannot read ' + unread + ' files back';
+    fl.ok = !fl.why && !fl.missing.length && !fl.failed.length && !fl.wrong.length; return fl;
   }
   function start() {
     const b = panel('<h2 style="margin:0 0 8px;font-size:20px">วัดความลื่นตัวละครรุ่น 2 (G4.6)</h2>' +
@@ -104,13 +153,16 @@
   }
   function pin() { try { LITE = false; fpsChecks = 6; S.eco = false; } catch (e) {} }
   function measure(ms) {
-    return new Promise((r) => { let n = 0, gap = 0, lastT = 0, hid = document.hidden; const b0 = C234.n.body, w0 = window.__bw, j0 = JS.t, t0 = performance.now(), held0 = [], sts = [];
+    return new Promise((r) => { let n = 0, gap = 0, lastT = 0, hid = document.hidden; const b0 = C234.n.body, w0 = window.__bw, j0 = JS.t, e0 = Object.assign({}, EV), g0 = [C234.n.shadow || 0, C234.n.hole || 0], t0 = performance.now(), held0 = [], sts = [];
       const onv = () => { if (document.hidden) hid = true; }; document.addEventListener('visibilitychange', onv);
       const f = () => { const now = performance.now(); if (lastT) gap = Math.max(gap, now - lastT); lastT = now; n++;
         if (n % 10 === 0) { held0.push(!!(DARK() && LKID())); if (!sts.includes(C234.st)) sts.push(C234.st); }
         if (now - t0 < ms) raf0(f);
         else { document.removeEventListener('visibilitychange', onv); const dt = (now - t0) / 1000; if (!sts.includes(C234.st)) sts.push(C234.st);
-          r({ fps: n / dt, frames: n, gap: Math.round(gap), hidden: hid, js: (JS.t - j0) / n, body: C234.n.body - b0, walked: Math.round(window.__bw - w0), map: M && M.id, st: C234.st, sts,
+          const ev = {}; for (const k in EV) ev[k] = EV[k] - e0[k];
+          ev.shadow = (C234.n.shadow || 0) - g0[0]; ev.hole = (C234.n.hole || 0) - g0[1];   // the game's own counters at the new shadow and at the lantern's light hole
+          let pins = false; try { pins = LITE === false && !S.eco && fpsChecks === 6; } catch (e) {}
+          r({ fps: n / dt, frames: n, gap: Math.round(gap), hidden: hid, js: (JS.t - j0) / n, body: C234.n.body - b0, ev, pins, walked: Math.round(window.__bw - w0), map: M && M.id, st: C234.st, sts,
             held: held0.length ? held0.every(Boolean) : !!(DARK() && LKID()), heldAny: held0.some(Boolean) }); } };
       raf0(f); });
   }
@@ -121,6 +173,7 @@
       const d = Store.all(); d.slots = [Object.assign(newSave({ name: 'ทดสอบ', kid: 0, house: 1, age: 7 }), { gender194: 'f', hc: 3, char2On: false })]; d.cur = 0; Store.put(d);
       S = d.slots[0]; S.seen = { intro: 1 }; S.snd = S.mus = false; startGame();
       document.querySelectorAll('#cr,#title,#picker').forEach((e) => e.classList.add('hide')); DLG = null; try { closeModal(); } catch (e) {}
+      hook();
       for (let si = 0; si < SCENES.length; si++) {
         const sc = SCENES[si]; showPill('ฉาก ' + (si + 1) + '/3 ' + sc.name + ' · เตรียม…');
         goMap(sc.map); P.path = P.act = null; DLG = null; try { closeModal(); } catch (e) {} pin();
@@ -136,24 +189,36 @@
       }
     } catch (e) { runs.err = String(e && e.message || e).slice(0, 200); }
     try { if (lock) lock.release(); } catch (e) {}
-    if (pill) show(pill, false); report(runs);
+    showPill('กำลังตรวจไฟล์เกม…'); const fl = await verify(files());
+    if (pill) show(pill, false); report(runs, fl);
   }
-  function report(runs) {
+  function report(runs, fl) {
     const only = (r, s) => r.sts.length === 1 && r.sts[0] === s;
     const rows = SCENES.map((sc) => {
       const rs = runs.filter((r) => r.scene === sc.id), on = rs.filter((r) => r.on), off = rs.filter((r) => !r.on);
       const pairs = [0, 1, 2].map((i) => { const a = on.find((r) => r.pair === i), b = off.find((r) => r.pair === i); return a && b && b.fps > 0 ? a.fps / b.fps : null; }).filter((x) => x !== null);
-      const ok = rs.length === 6 && rs.every((r) => r.map === sc.map && r.walked > 20 && r.held === sc.dark && (sc.dark || !r.heldAny)) &&
-        on.every((r) => only(r, 'ready') && r.body >= 0.8 * r.frames) && off.every((r) => only(r, 'off') && r.body === 0);
+      const scene = (r) => r.held === sc.dark && (sc.dark || !r.heldAny);                              // the game's own condition: dark map and a little kid
+      const drewNew = (r) => r.body >= 0.8 * r.frames && r.ev.newD >= 0.8 * r.frames && r.ev.oldD === 0;   // ON: the new character really drawn, the old sheet never
+      const drewOld = (r) => r.body === 0 && r.ev.newD === 0 && r.ev.oldD >= 0.8 * r.frames;             // OFF: the old sheet really blitted
+      const lamp = (r) => sc.dark ? r.ev.heldCfg === r.ev.newD && r.ev.newD > 0 && r.ev.vis >= 0.5 * r.ev.newD && r.ev.heldCmd === r.ev.vis : r.ev.heldCfg === 0;   // ON: what the renderer was given and what it drew
+      // the scene around the player, both ways (medians of the 3 runs): draw commands per frame on the main canvas (as M6's fps.js:
+      // ON ≥ 80 % of OFF) · the player's shadow (ON: the game's counter at the new shadow · OFF: the old shadow sheet blitted)
+      const per = (a, f) => a.length ? med(a.map((r) => f(r) / r.frames)) : 0;
+      const drawsOn = per(on, (r) => r.ev.all), drawsOff = per(off, (r) => r.ev.all), shOn = per(on, (r) => r.ev.shadow), shOff = per(off, (r) => r.ev.oldSh);
+      const full = drawsOn >= 0.8 * drawsOff && drawsOff > 0, shade = Math.abs(shOn - shOff) <= 0.2, pinned = rs.every((r) => r.pins);
+      const ok = rs.length === 6 && pinned && rs.every((r) => r.map === sc.map && r.walked > 20 && scene(r)) &&
+        on.every((r) => only(r, 'ready') && drewNew(r) && lamp(r)) && off.every((r) => only(r, 'off') && drewOld(r)) && full && shade;
       const ratio = pairs.length === 3 ? med(pairs) : null;
       const cut = rs.some((r) => r.gap > GAP_MS || r.hidden || r.fps < MIN_FPS);
       const shaky = pairs.length === 3 && (Math.max(...pairs) - Math.min(...pairs) > SPREAD || ratio > RATIO_MAX);
       return { sc, ratio, pairs, ok, cut, shaky, fpsOn: on.length ? med(on.map((r) => r.fps)) : 0, fpsOff: off.length ? med(off.map((r) => r.fps)) : 0,
         jsOn: on.length ? med(on.map((r) => r.js)) : 0, jsOff: off.length ? med(off.map((r) => r.js)) : 0,
-        why: !rs.length ? 'ไม่ได้วัด' : rs.length !== 6 ? 'วัดไม่ครบ' : rs.some((r) => r.map !== sc.map) ? 'แผนที่ผิด' : rs.some((r) => r.walked <= 20) ? 'ตัวไม่เดิน' : on.some((r) => !only(r, 'ready')) ? 'ตัวใหม่ไม่พร้อม' :
-          on.some((r) => r.body < 0.8 * r.frames) ? 'ตัวใหม่วาดไม่ครบ' : off.some((r) => r.body || !only(r, 'off')) ? 'ปิดแล้วยังวาดตัวใหม่' : rs.some((r) => r.held !== sc.dark || (!sc.dark && r.heldAny)) ? 'ตะเกียงไม่ตรง' : '' };
+        draws: [drawsOn, drawsOff], shadow: [shOn, shOff],
+        why: !rs.length ? 'ไม่ได้วัด' : rs.length !== 6 ? 'วัดไม่ครบ' : !pinned ? 'เกมเปลี่ยนโหมดกราฟิกเอง' : rs.some((r) => r.map !== sc.map) ? 'แผนที่ผิด' : rs.some((r) => r.walked <= 20) ? 'ตัวไม่เดิน' : on.some((r) => !only(r, 'ready')) ? 'ตัวใหม่ไม่พร้อม' :
+          on.some((r) => !drewNew(r)) ? 'ตัวใหม่วาดไม่ครบ' : off.some((r) => r.body || r.ev.newD || !only(r, 'off')) ? 'ปิดแล้วยังวาดตัวใหม่' : off.some((r) => !drewOld(r)) ? 'ตัวเดิมไม่ถูกวาด' :
+          rs.some((r) => !scene(r)) ? 'ตะเกียงไม่ตรง' : on.some((r) => !lamp(r)) ? (sc.dark ? 'ตะเกียงไม่ถูกวาด' : 'วาดตะเกียงในที่สว่าง') : !shade ? 'เงาไม่ตรง' : !full ? 'ฉากวาดไม่ครบตอนเปิด' : '' };
     });
-    const dev = device(), fl = files(), ver = typeof VERSION === 'string' ? VERSION : '?';
+    const dev = device(), ver = typeof VERSION === 'string' ? VERSION : '?';
     const reasons = [];   // why the measurement does not count
     if (SHORT) reasons.push('mode');
     if (!dev.phone) reasons.push('device');
@@ -166,18 +231,19 @@
     const verdictIfCounted = counted.length ? 'void' : good ? 'pass' : 'fail', verdict = reasons.length ? 'void' : good ? 'pass' : 'fail';
     const WORD = { pass: 'ผ่าน', fail: 'ไม่ผ่าน', void: 'ไม่นับ' };
     const SAY = { mode: 'รอบสั้นสำหรับทดสอบ', device: 'เครื่องนี้ไม่ใช่มือถือ', build: 'สำเนาไม่ตรงรุ่นเกม',
-      files: fl.why ? 'ตรวจไฟล์เกมไม่ได้' : 'โหลดไฟล์เกมไม่ครบ ' + (fl.missing.length + fl.failed.length) + ' ไฟล์', interrupted: 'ระหว่างวัดมีการสะดุดหรือสลับแอป', unstable: 'ผลแต่ละรอบต่างกันมากเกินไป' };
+      files: fl.why ? 'ตรวจไฟล์เกมไม่ได้' : 'ไฟล์เกมไม่ครบหรือไม่ตรง ' + (fl.missing.length + fl.failed.length + fl.wrong.length) + ' ไฟล์', interrupted: 'ระหว่างวัดมีการสะดุดหรือสลับแอป', unstable: 'ผลแต่ละรอบต่างกันมากเกินไป' };
     const pct = (x) => (x === null ? '–' : Math.round(x * 100) + ' %');
-    const lost = fl.missing.concat(fl.failed);
-    const line = 'G4.6 วัดความลื่น v2 · เกม ' + ver.replace('Lantern Academy ', '') + ' · ' +
+    const lost = fl.missing.concat(fl.failed), wrong = fl.wrong;
+    const line = 'G4.6 วัดความลื่น v3 · เกม ' + ver.replace('Lantern Academy ', '') + ' · ' +
       rows.map((r) => r.sc.name.split(' ')[0] + ' ' + pct(r.ratio)).join(' · ') + ' → ' + WORD[verdict] + (reasons.length ? ' (' + reasons.map((x) => SAY[x]).join(' · ') + ')' : ' (เกณฑ์ ≥ 90 %)') +
       ' · fps เปิด/ปิด ' + rows.map((r) => r.fpsOn.toFixed(1) + '/' + r.fpsOff.toFixed(1)).join(' · ') +
       ' · งาน JS ms/เฟรม เปิด/ปิด ' + rows.map((r) => r.jsOn.toFixed(2) + '/' + r.jsOff.toFixed(2)).join(' · ') +
       ' · ตรวจ ' + rows.map((r) => (r.ok ? '✓' : '✗' + r.why)).join(' ') +
-      ' · ไฟล์ ' + fl.asked + ' ขาด ' + lost.length + (lost.length ? ' [' + lost.slice(0, 8).join(' ') + (lost.length > 8 ? ' …' : '') + ']' : '') + (fl.why ? ' [' + fl.why + ']' : '') +
+      ' · ไฟล์ ' + fl.asked + ' ขาด ' + lost.length + (lost.length ? ' [' + lost.slice(0, 8).join(' ') + (lost.length > 8 ? ' …' : '') + ']' : '') +
+      ' ผิด ' + wrong.length + (wrong.length ? ' [' + wrong.slice(0, 8).join(' ') + (wrong.length > 8 ? ' …' : '') + ']' : '') + (fl.why ? ' [' + fl.why + ']' : '') +
       ' · ' + (dev.phone ? 'มือถือ' : 'ไม่ใช่มือถือ') + ' ' + dev.screen + ' · ' + dev.ua + (runs.err ? ' · error ' + runs.err : '');
-    window.__benchResult = { v: 2, verdict, verdictIfCounted, pass: verdict === 'pass', reasons, device: dev, files: fl, build: BUILD && { version: BUILD.version, files: BUILD.files.length },
-      rows: rows.map((r) => ({ id: r.sc.id, ratio: r.ratio, pairs: r.pairs, ok: r.ok, why: r.why, cut: r.cut, shaky: r.shaky, fpsOn: r.fpsOn, fpsOff: r.fpsOff, jsOn: r.jsOn, jsOff: r.jsOff })), runs, line };
+    window.__benchResult = { v: 3, verdict, verdictIfCounted, pass: verdict === 'pass', reasons, device: dev, files: fl, build: BUILD && { version: BUILD.version, files: BUILD.files.length },
+      rows: rows.map((r) => ({ id: r.sc.id, ratio: r.ratio, pairs: r.pairs, ok: r.ok, why: r.why, cut: r.cut, shaky: r.shaky, fpsOn: r.fpsOn, fpsOff: r.fpsOff, jsOn: r.jsOn, jsOff: r.jsOff, draws: r.draws, shadow: r.shadow })), runs, line };
     const td = 'padding:4px 8px', tr = rows.map((r) => '<tr><td style="' + td + '">' + r.sc.name + '</td><td style="' + td + ';text-align:right">' + r.fpsOn.toFixed(1) + '</td><td style="' + td + ';text-align:right">' + r.fpsOff.toFixed(1) +
       '</td><td style="' + td + ';text-align:right;font-weight:700">' + pct(r.ratio) + '</td><td style="' + td + ';text-align:right">' + r.jsOn.toFixed(2) + ' / ' + r.jsOff.toFixed(2) + '</td><td style="' + td + '">' + (r.ok ? '✓' : '✗ ' + r.why) + (r.cut ? ' · สะดุด' : '') + (r.shaky ? ' · แกว่ง' : '') + '</td></tr>').join('');
     const head = verdict === 'pass' ? '<span style="color:#8fd18f">ผ่าน</span>' : verdict === 'fail' ? '<span style="color:#ff9a8a">ไม่ผ่าน</span>' : '<span style="color:#f0c869">ไม่นับ · ต้องวัดใหม่</span>';
@@ -185,7 +251,7 @@
       (reasons.includes('interrupted') || reasons.includes('unstable') ? ' → กด "วัดอีกครั้ง" แล้ววางมือถือนิ่ง ๆ' : reasons.includes('device') ? ' → เปิดลิงก์นี้ในมือถือแล้ววัดใหม่' : ' → ส่งข้อความด้านล่างให้ Claude') + '</p>' : '';
     const b = panel('<h2 style="margin:0 0 8px;font-size:20px">ผล: ' + head + '</h2>' + tell +
       '<div style="overflow-x:auto"><table style="border-collapse:collapse;width:100%;font-size:15px"><tr style="color:#d8c8a0"><th style="text-align:left;' + td + '">ฉาก</th><th style="' + td + '">fps เปิด</th><th style="' + td + '">fps ปิด</th><th style="' + td + '">เปิด ÷ ปิด</th><th style="' + td + '">งาน JS ms เปิด / ปิด</th><th style="' + td + '">ตรวจ</th></tr>' + tr + '</table></div>' +
-      '<p style="margin:8px 0 0;color:#d8c8a0;font-size:14px">ไฟล์เกมที่หน้าเรียก ' + fl.asked + ' ไฟล์ · ขาด ' + lost.length + ' · ' + (dev.phone ? 'มือถือ' : 'ไม่ใช่มือถือ') + ' ' + esc(dev.screen) + '</p>' +
+      '<p style="margin:8px 0 0;color:#d8c8a0;font-size:14px">ไฟล์เกมที่หน้าเรียก ' + fl.asked + ' ไฟล์ · ขาด ' + lost.length + ' · ไม่ตรง ' + wrong.length + ' · ' + (dev.phone ? 'มือถือ' : 'ไม่ใช่มือถือ') + ' ' + esc(dev.screen) + '</p>' +
       '<p style="margin:10px 0 4px">กด "คัดลอกผล" แล้วส่งข้อความนี้กลับมาให้ Claude:</p><textarea readonly style="width:100%;min-height:110px;box-sizing:border-box;background:#120d20;color:#f4ecd8;border:1px solid #6b5a8a;border-radius:8px;padding:8px;font-size:13px">' + esc(line) + '</textarea>');
     const row = el('div'), msg = el('span', 'margin-left:6px;color:#8fd18f');
     row.appendChild(btn('คัดลอกผล', () => { const ta = b.querySelector('textarea'); const done = () => { msg.textContent = 'คัดลอกแล้ว'; };
