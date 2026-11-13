@@ -258,9 +258,9 @@
    "diff": 15.22
   }
  },
- "report": "v1.1",
+ "report": "v1.2",
  "M6_phone": {
-  "status": "no usable result yet: v1 result withdrawn, re-measure on bench v2 pending",
+  "status": "no usable result yet: v1 result withdrawn; bench v2 superseded by v3 after Codex T47; re-measure on v3 after Codex T48",
   "v1_withdrawn": {
    "why": [
     "the published copy lacked 58 game files the real game asks for in a full-length run (199 asked, 140 in the copy; + sw.js left out on purpose) and the bench did not check files",
@@ -1187,6 +1187,2378 @@
     "when": "2026-11-13 00:1x +07",
     "checked_on_real_host": false
    }
+  },
+  "bench_v3": {
+   "code": "eca2ff7",
+   "files": 313,
+   "file_bytes": 26892217,
+   "page_bytes": 1623430,
+   "selftest": {
+    "summary": {
+     "cases": 21,
+     "ok": 21,
+     "retried": [],
+     "verdict": "pass"
+    },
+    "cases": [
+     {
+      "name": "ok",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "pass",
+      "reasons": [
+       "mode"
+      ],
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1.003,
+        "fps": [
+         60.7,
+         60.5
+        ],
+        "js": [
+         1,
+         0.82
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1.055,
+        "fps": [
+         60.8,
+         57.7
+        ],
+        "js": [
+         2.08,
+         2.17
+        ],
+        "draws": [
+         287.6,
+         271.4
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.007,
+        "fps": [
+         60.7,
+         60.5
+        ],
+        "js": [
+         1.77,
+         1.75
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "desktop",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "device"
+      ],
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1.002,
+        "fps": [
+         60.4,
+         60.3
+        ],
+        "js": [
+         0.95,
+         1.43
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1.001,
+        "fps": [
+         60.3,
+         60.5
+        ],
+        "js": [
+         2.23,
+         2.12
+        ],
+        "draws": [
+         226,
+         231
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.002,
+        "fps": [
+         60.3,
+         60.3
+        ],
+        "js": [
+         1.24,
+         1.2
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "nofile",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "files"
+      ],
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 0.998,
+        "fps": [
+         60.7,
+         60.6
+        ],
+        "js": [
+         1.29,
+         1.53
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S2",
+        "ratio": 0.989,
+        "fps": [
+         58,
+         60.2
+        ],
+        "js": [
+         2.3,
+         2.33
+        ],
+        "draws": [
+         285,
+         270.7
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S3",
+        "ratio": 0.999,
+        "fps": [
+         60.4,
+         60.5
+        ],
+        "js": [
+         1.72,
+         1.37
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       }
+      ],
+      "files": {
+       "ok": false,
+       "asked": 198,
+       "hashed": 197,
+       "missing": [],
+       "failed": [
+        "kit-town.png"
+       ],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "unlisted",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "files"
+      ],
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1.003,
+        "fps": [
+         60.7,
+         60.5
+        ],
+        "js": [
+         1.52,
+         1.56
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1.008,
+        "fps": [
+         60.5,
+         58.7
+        ],
+        "js": [
+         2.45,
+         2.43
+        ],
+        "draws": [
+         266.2,
+         256.4
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1,
+        "fps": [
+         60.6,
+         60.6
+        ],
+        "js": [
+         1.78,
+         1.86
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       }
+      ],
+      "files": {
+       "ok": false,
+       "asked": 198,
+       "hashed": 197,
+       "missing": [
+        "kit-town.png"
+       ],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "build",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "build"
+      ],
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 0.999,
+        "fps": [
+         60.6,
+         60.9
+        ],
+        "js": [
+         1.46,
+         1.27
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S2",
+        "ratio": 0.984,
+        "fps": [
+         59.5,
+         60.6
+        ],
+        "js": [
+         2.12,
+         2.25
+        ],
+        "draws": [
+         261.5,
+         254.6
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.004,
+        "fps": [
+         60.6,
+         60.4
+        ],
+        "js": [
+         1.62,
+         2.04
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "c2fail",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "files"
+      ],
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1.003,
+        "fps": [
+         60.6,
+         60.7
+        ],
+        "js": [
+         0.99,
+         1.1
+        ],
+        "draws": [
+         19,
+         19
+        ],
+        "shadow": [
+         0,
+         1
+        ],
+        "ok": false,
+        "why": "ตัวใหม่ไม่พร้อม",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1.023,
+        "fps": [
+         60.9,
+         59.5
+        ],
+        "js": [
+         2.34,
+         2.09
+        ],
+        "draws": [
+         261.5,
+         248.8
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": false,
+        "why": "ตัวใหม่ไม่พร้อม",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S3",
+        "ratio": 0.999,
+        "fps": [
+         60.4,
+         60.5
+        ],
+        "js": [
+         1.15,
+         1.26
+        ],
+        "draws": [
+         14,
+         14
+        ],
+        "shadow": [
+         0,
+         1
+        ],
+        "ok": false,
+        "why": "ตัวใหม่ไม่พร้อม",
+        "cut": false,
+        "shaky": false
+       }
+      ],
+      "files": {
+       "ok": false,
+       "asked": 185,
+       "hashed": 184,
+       "missing": [],
+       "failed": [
+        "c2-pack.json"
+       ],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "stall",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "interrupted",
+       "unstable"
+      ],
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 4.836,
+        "fps": [
+         60.6,
+         12.5
+        ],
+        "js": [
+         1.4,
+         1.49
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": true,
+        "shaky": true
+       },
+       {
+        "id": "S2",
+        "ratio": 0.99,
+        "fps": [
+         60.2,
+         60.8
+        ],
+        "js": [
+         2.14,
+         2.17
+        ],
+        "draws": [
+         299.2,
+         265.9
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.001,
+        "fps": [
+         60.5,
+         60.4
+        ],
+        "js": [
+         2.02,
+         1.74
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "hidden",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "interrupted"
+      ],
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1.001,
+        "fps": [
+         60.8,
+         60.7
+        ],
+        "js": [
+         1.29,
+         1.49
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S2",
+        "ratio": 0.977,
+        "fps": [
+         58.3,
+         59.4
+        ],
+        "js": [
+         2.31,
+         2.18
+        ],
+        "draws": [
+         263.1,
+         262.8
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.003,
+        "fps": [
+         60.5,
+         60.4
+        ],
+        "js": [
+         1.69,
+         2.08
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": true,
+        "shaky": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "slowoff",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "unstable"
+      ],
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1,
+        "fps": [
+         60.8,
+         60.8
+        ],
+        "js": [
+         1.47,
+         1.22
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S2",
+        "ratio": 2.586,
+        "fps": [
+         59.4,
+         23.5
+        ],
+        "js": [
+         2.29,
+         27.92
+        ],
+        "draws": [
+         281.9,
+         257
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": true
+       },
+       {
+        "id": "S3",
+        "ratio": 0.999,
+        "fps": [
+         60.4,
+         60.5
+        ],
+        "js": [
+         1.41,
+         1.04
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "slowon",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "fail",
+      "reasons": [
+       "mode"
+      ],
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 0.687,
+        "fps": [
+         41.6,
+         60.6
+        ],
+        "js": [
+         10.81,
+         1.46
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S2",
+        "ratio": 0.66,
+        "fps": [
+         38.5,
+         60.5
+        ],
+        "js": [
+         11.94,
+         2.26
+        ],
+        "draws": [
+         298.8,
+         270
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S3",
+        "ratio": 0.756,
+        "fps": [
+         45.8,
+         60.5
+        ],
+        "js": [
+         10.7,
+         1.49
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "lowfps",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "interrupted"
+      ],
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1,
+        "fps": [
+         2.5,
+         2.5
+        ],
+        "js": [
+         1.9,
+         1.6
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": false,
+        "why": "ตัวไม่เดิน",
+        "cut": true,
+        "shaky": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1,
+        "fps": [
+         2.5,
+         2.5
+        ],
+        "js": [
+         8.63,
+         4.67
+        ],
+        "draws": [
+         223,
+         261.7
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": false,
+        "why": "ตัวไม่เดิน",
+        "cut": true,
+        "shaky": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1,
+        "fps": [
+         2.5,
+         2.5
+        ],
+        "js": [
+         1.97,
+         1.43
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": false,
+        "why": "ตัวไม่เดิน",
+        "cut": true,
+        "shaky": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "nolantern",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "fail",
+      "reasons": [
+       "mode"
+      ],
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1.004,
+        "fps": [
+         60.8,
+         60.5
+        ],
+        "js": [
+         1.65,
+         1.46
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S2",
+        "ratio": 0.999,
+        "fps": [
+         60.7,
+         60.7
+        ],
+        "js": [
+         2.25,
+         2.15
+        ],
+        "draws": [
+         284.3,
+         261
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.002,
+        "fps": [
+         60.5,
+         60.4
+        ],
+        "js": [
+         1.1,
+         1.13
+        ],
+        "draws": [
+         13,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": false,
+        "why": "ตะเกียงไม่ถูกวาด",
+        "cut": false,
+        "shaky": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "nohold",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "fail",
+      "reasons": [
+       "mode"
+      ],
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1.006,
+        "fps": [
+         60.9,
+         60.6
+        ],
+        "js": [
+         1.56,
+         1.17
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S2",
+        "ratio": 0.98,
+        "fps": [
+         58.2,
+         59.4
+        ],
+        "js": [
+         2.39,
+         2.16
+        ],
+        "draws": [
+         287.7,
+         267.7
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.003,
+        "fps": [
+         60.6,
+         60.5
+        ],
+        "js": [
+         1.68,
+         1.93
+        ],
+        "draws": [
+         13,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": false,
+        "why": "ตะเกียงไม่ถูกวาด",
+        "cut": false,
+        "shaky": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "nooldbody",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "fail",
+      "reasons": [
+       "mode"
+      ],
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1.002,
+        "fps": [
+         60.9,
+         60.8
+        ],
+        "js": [
+         1.72,
+         1.56
+        ],
+        "draws": [
+         18,
+         18
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": false,
+        "why": "ตัวเดิมไม่ถูกวาด",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S2",
+        "ratio": 0.998,
+        "fps": [
+         60.5,
+         60.2
+        ],
+        "js": [
+         2.43,
+         2.38
+        ],
+        "draws": [
+         285.1,
+         262.5
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": false,
+        "why": "ตัวเดิมไม่ถูกวาด",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1,
+        "fps": [
+         60.6,
+         60.5
+        ],
+        "js": [
+         1.77,
+         1.44
+        ],
+        "draws": [
+         16,
+         13
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": false,
+        "why": "ตัวเดิมไม่ถูกวาด",
+        "cut": false,
+        "shaky": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "nooldbody_late",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "fail",
+      "reasons": [
+       "mode"
+      ],
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 0.999,
+        "fps": [
+         60.7,
+         60.6
+        ],
+        "js": [
+         1.63,
+         1.44
+        ],
+        "draws": [
+         18,
+         18
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": false,
+        "why": "ตัวเดิมไม่ถูกวาด",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1.02,
+        "fps": [
+         59.1,
+         57.9
+        ],
+        "js": [
+         2.22,
+         2.34
+        ],
+        "draws": [
+         295.9,
+         269.3
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": false,
+        "why": "ตัวเดิมไม่ถูกวาด",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1,
+        "fps": [
+         60.5,
+         60.6
+        ],
+        "js": [
+         1.7,
+         1.49
+        ],
+        "draws": [
+         16,
+         13
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": false,
+        "why": "ตัวเดิมไม่ถูกวาด",
+        "cut": false,
+        "shaky": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "noshadow",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "fail",
+      "reasons": [
+       "mode"
+      ],
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 0.999,
+        "fps": [
+         60.7,
+         60.7
+        ],
+        "js": [
+         1.52,
+         1.8
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "shadow": [
+         0,
+         1
+        ],
+        "ok": false,
+        "why": "เงาไม่ตรง",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1,
+        "fps": [
+         59.4,
+         59.2
+        ],
+        "js": [
+         2.42,
+         2.2
+        ],
+        "draws": [
+         279.8,
+         261.1
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.001,
+        "fps": [
+         60.5,
+         60.4
+        ],
+        "js": [
+         1.19,
+         1.33
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "shadow": [
+         0,
+         1
+        ],
+        "ok": false,
+        "why": "เงาไม่ตรง",
+        "cut": false,
+        "shaky": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "lite",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "fail",
+      "reasons": [
+       "mode"
+      ],
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1.001,
+        "fps": [
+         60.7,
+         60.8
+        ],
+        "js": [
+         1.33,
+         1.33
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1.003,
+        "fps": [
+         60.7,
+         60.6
+        ],
+        "js": [
+         2.12,
+         1.74
+        ],
+        "draws": [
+         155.5,
+         153.9
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": false,
+        "why": "เกมเปลี่ยนโหมดกราฟิกเอง",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.005,
+        "fps": [
+         60.6,
+         60.3
+        ],
+        "js": [
+         1.87,
+         1.43
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "fewdraws",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "fail",
+      "reasons": [
+       "mode"
+      ],
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1.001,
+        "fps": [
+         60.7,
+         60.6
+        ],
+        "js": [
+         0.9,
+         0.81
+        ],
+        "draws": [
+         9.5,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": false,
+        "why": "ฉากวาดไม่ครบตอนเปิด",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1.042,
+        "fps": [
+         60.8,
+         58.2
+        ],
+        "js": [
+         2.17,
+         2.2
+        ],
+        "draws": [
+         142.1,
+         268.6
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": false,
+        "why": "ฉากวาดไม่ครบตอนเปิด",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.004,
+        "fps": [
+         60.6,
+         60.6
+        ],
+        "js": [
+         1.36,
+         1.89
+        ],
+        "draws": [
+         10,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": false,
+        "why": "ฉากวาดไม่ครบตอนเปิด",
+        "cut": false,
+        "shaky": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "wrongimage",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "files"
+      ],
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 0.996,
+        "fps": [
+         60.6,
+         60.9
+        ],
+        "js": [
+         1.48,
+         1.39
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1.001,
+        "fps": [
+         60.7,
+         60.6
+        ],
+        "js": [
+         2.3,
+         2.19
+        ],
+        "draws": [
+         260.1,
+         260.1
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.001,
+        "fps": [
+         60.5,
+         60.4
+        ],
+        "js": [
+         0.94,
+         0.87
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       }
+      ],
+      "files": {
+       "ok": false,
+       "asked": 198,
+       "hashed": 198,
+       "missing": [],
+       "failed": [],
+       "wrong": [
+        "map-cave-mouth.jpg"
+       ],
+       "why": ""
+      }
+     },
+     {
+      "name": "wrongsame",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "files"
+      ],
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1.001,
+        "fps": [
+         60.6,
+         60.5
+        ],
+        "js": [
+         1.06,
+         0.78
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1.046,
+        "fps": [
+         60.7,
+         58.5
+        ],
+        "js": [
+         2.17,
+         2.02
+        ],
+        "draws": [
+         260.2,
+         259.5
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S3",
+        "ratio": 0.998,
+        "fps": [
+         60.4,
+         60.5
+        ],
+        "js": [
+         0.98,
+         0.92
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       }
+      ],
+      "files": {
+       "ok": false,
+       "asked": 198,
+       "hashed": 198,
+       "missing": [],
+       "failed": [],
+       "wrong": [
+        "map-cave-mouth.jpg"
+       ],
+       "why": ""
+      }
+     },
+     {
+      "name": "full",
+      "tries": 1,
+      "ok": true,
+      "verdict": "pass",
+      "verdictIfCounted": "pass",
+      "reasons": [],
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1.002,
+        "fps": [
+         60.1,
+         60
+        ],
+        "js": [
+         1.3,
+         1.3
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1.006,
+        "fps": [
+         57.5,
+         58
+        ],
+        "js": [
+         2.4,
+         2.23
+        ],
+        "draws": [
+         249.1,
+         251.8
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1,
+        "fps": [
+         60.1,
+         60.1
+        ],
+        "js": [
+         0.87,
+         0.95
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     }
+    ]
+   },
+   "full_run_evidence": [
+    {
+     "scene": "S1",
+     "on": true,
+     "frames": 301,
+     "ev": {
+      "calls": 301,
+      "cmd": 301,
+      "newD": 301,
+      "oldD": 0,
+      "heldCfg": 0,
+      "vis": 0,
+      "heldCmd": 0,
+      "all": 5418,
+      "oldSh": 0,
+      "shadow": 301,
+      "hole": 0
+     },
+     "pins": true
+    },
+    {
+     "scene": "S1",
+     "on": false,
+     "frames": 301,
+     "ev": {
+      "calls": 301,
+      "cmd": 301,
+      "newD": 0,
+      "oldD": 301,
+      "heldCfg": 0,
+      "vis": 0,
+      "heldCmd": 0,
+      "all": 5719,
+      "oldSh": 301,
+      "shadow": 0,
+      "hole": 0
+     },
+     "pins": true
+    },
+    {
+     "scene": "S1",
+     "on": false,
+     "frames": 298,
+     "ev": {
+      "calls": 298,
+      "cmd": 298,
+      "newD": 0,
+      "oldD": 298,
+      "heldCfg": 0,
+      "vis": 0,
+      "heldCmd": 0,
+      "all": 5662,
+      "oldSh": 298,
+      "shadow": 0,
+      "hole": 0
+     },
+     "pins": true
+    },
+    {
+     "scene": "S1",
+     "on": true,
+     "frames": 300,
+     "ev": {
+      "calls": 300,
+      "cmd": 300,
+      "newD": 300,
+      "oldD": 0,
+      "heldCfg": 0,
+      "vis": 0,
+      "heldCmd": 0,
+      "all": 5400,
+      "oldSh": 0,
+      "shadow": 300,
+      "hole": 0
+     },
+     "pins": true
+    },
+    {
+     "scene": "S1",
+     "on": true,
+     "frames": 301,
+     "ev": {
+      "calls": 301,
+      "cmd": 301,
+      "newD": 301,
+      "oldD": 0,
+      "heldCfg": 0,
+      "vis": 0,
+      "heldCmd": 0,
+      "all": 5418,
+      "oldSh": 0,
+      "shadow": 301,
+      "hole": 0
+     },
+     "pins": true
+    },
+    {
+     "scene": "S1",
+     "on": false,
+     "frames": 300,
+     "ev": {
+      "calls": 300,
+      "cmd": 300,
+      "newD": 0,
+      "oldD": 300,
+      "heldCfg": 0,
+      "vis": 0,
+      "heldCmd": 0,
+      "all": 5700,
+      "oldSh": 300,
+      "shadow": 0,
+      "hole": 0
+     },
+     "pins": true
+    },
+    {
+     "scene": "S2",
+     "on": true,
+     "frames": 288,
+     "ev": {
+      "calls": 288,
+      "cmd": 288,
+      "newD": 288,
+      "oldD": 0,
+      "heldCfg": 0,
+      "vis": 0,
+      "heldCmd": 0,
+      "all": 71753,
+      "oldSh": 0,
+      "shadow": 0,
+      "hole": 0
+     },
+     "pins": true
+    },
+    {
+     "scene": "S2",
+     "on": false,
+     "frames": 283,
+     "ev": {
+      "calls": 283,
+      "cmd": 283,
+      "newD": 0,
+      "oldD": 283,
+      "heldCfg": 0,
+      "vis": 0,
+      "heldCmd": 0,
+      "all": 71273,
+      "oldSh": 0,
+      "shadow": 0,
+      "hole": 0
+     },
+     "pins": true
+    },
+    {
+     "scene": "S2",
+     "on": false,
+     "frames": 291,
+     "ev": {
+      "calls": 291,
+      "cmd": 291,
+      "newD": 0,
+      "oldD": 291,
+      "heldCfg": 0,
+      "vis": 0,
+      "heldCmd": 0,
+      "all": 75319,
+      "oldSh": 0,
+      "shadow": 0,
+      "hole": 0
+     },
+     "pins": true
+    },
+    {
+     "scene": "S2",
+     "on": true,
+     "frames": 293,
+     "ev": {
+      "calls": 293,
+      "cmd": 293,
+      "newD": 293,
+      "oldD": 0,
+      "heldCfg": 0,
+      "vis": 0,
+      "heldCmd": 0,
+      "all": 62174,
+      "oldSh": 0,
+      "shadow": 0,
+      "hole": 0
+     },
+     "pins": true
+    },
+    {
+     "scene": "S2",
+     "on": true,
+     "frames": 267,
+     "ev": {
+      "calls": 267,
+      "cmd": 267,
+      "newD": 267,
+      "oldD": 0,
+      "heldCfg": 0,
+      "vis": 0,
+      "heldCmd": 0,
+      "all": 70998,
+      "oldSh": 0,
+      "shadow": 0,
+      "hole": 0
+     },
+     "pins": true
+    },
+    {
+     "scene": "S2",
+     "on": false,
+     "frames": 298,
+     "ev": {
+      "calls": 298,
+      "cmd": 298,
+      "newD": 0,
+      "oldD": 298,
+      "heldCfg": 0,
+      "vis": 0,
+      "heldCmd": 0,
+      "all": 63545,
+      "oldSh": 0,
+      "shadow": 0,
+      "hole": 0
+     },
+     "pins": true
+    },
+    {
+     "scene": "S3",
+     "on": true,
+     "frames": 301,
+     "ev": {
+      "calls": 301,
+      "cmd": 301,
+      "newD": 301,
+      "oldD": 0,
+      "heldCfg": 301,
+      "vis": 301,
+      "heldCmd": 301,
+      "all": 4816,
+      "oldSh": 0,
+      "shadow": 301,
+      "hole": 0
+     },
+     "pins": true
+    },
+    {
+     "scene": "S3",
+     "on": false,
+     "frames": 301,
+     "ev": {
+      "calls": 301,
+      "cmd": 301,
+      "newD": 0,
+      "oldD": 301,
+      "heldCfg": 0,
+      "vis": 0,
+      "heldCmd": 0,
+      "all": 4214,
+      "oldSh": 301,
+      "shadow": 0,
+      "hole": 0
+     },
+     "pins": true
+    },
+    {
+     "scene": "S3",
+     "on": false,
+     "frames": 301,
+     "ev": {
+      "calls": 301,
+      "cmd": 301,
+      "newD": 0,
+      "oldD": 301,
+      "heldCfg": 0,
+      "vis": 0,
+      "heldCmd": 0,
+      "all": 4214,
+      "oldSh": 301,
+      "shadow": 0,
+      "hole": 0
+     },
+     "pins": true
+    },
+    {
+     "scene": "S3",
+     "on": true,
+     "frames": 301,
+     "ev": {
+      "calls": 301,
+      "cmd": 301,
+      "newD": 301,
+      "oldD": 0,
+      "heldCfg": 301,
+      "vis": 301,
+      "heldCmd": 301,
+      "all": 4816,
+      "oldSh": 0,
+      "shadow": 301,
+      "hole": 0
+     },
+     "pins": true
+    },
+    {
+     "scene": "S3",
+     "on": true,
+     "frames": 301,
+     "ev": {
+      "calls": 301,
+      "cmd": 301,
+      "newD": 301,
+      "oldD": 0,
+      "heldCfg": 301,
+      "vis": 301,
+      "heldCmd": 301,
+      "all": 4816,
+      "oldSh": 0,
+      "shadow": 301,
+      "hole": 0
+     },
+     "pins": true
+    },
+    {
+     "scene": "S3",
+     "on": false,
+     "frames": 301,
+     "ev": {
+      "calls": 301,
+      "cmd": 301,
+      "newD": 0,
+      "oldD": 301,
+      "heldCfg": 0,
+      "vis": 0,
+      "heldCmd": 0,
+      "all": 4214,
+      "oldSh": 301,
+      "shadow": 0,
+      "hole": 0
+     },
+     "pins": true
+    }
+   ],
+   "mutations_caught": {
+    "new": [
+     "lamp",
+     "oldbody",
+     "hash",
+     "size+hash",
+     "shadow",
+     "draws",
+     "pins"
+    ],
+    "old": [
+     "device",
+     "files",
+     "interrupted",
+     "unstable",
+     "build",
+     "mode",
+     "gate_0.60"
+    ],
+    "total": "14/14, every case failed on all 3 tries"
+   },
+   "claude_full_length_emulated_phone": "G4.6 วัดความลื่น v3 · เกม 2.43 · เมือง 100 % · ฟาร์ม 101 % · ปากถ้ำ 100 % → ผ่าน (เกณฑ์ ≥ 90 %) · fps เปิด/ปิด 60.1/60.0 · 57.5/58.0 · 60.1/60.1 · งาน JS ms/เฟรม เปิด/ปิด 1.30/1.30 · 2.40/2.23 · 0.87/0.95 · ตรวจ ✓ ✓ ✓ · ไฟล์ 198 ขาด 0 ผิด 0 · มือถือ 844×390 @3 · Android 10 Chrome/153.0.0.0",
+   "published": {
+    "artifact_version": "1794584976-1fb2",
+    "built_from": "eca2ff7",
+    "when": "2026-11-13 22:5x +07",
+    "checked_on_real_host": false
+   }
+  }
+ },
+ "codex_T47": {
+  "review": "REVIEW_CODEX_T47_G46.md @59310ed",
+  "T46_N1_N2": "closed 2/2",
+  "M1_M10_confirmed": "9/10 (M6 phone part open)",
+  "v2_findings": {
+   "N1": "medium: lantern not drawn still passed",
+   "N2": "medium: old character not drawn still passed",
+   "N3": "low: closed in v2",
+   "N4": "medium: HTTP 200 with a 1x1 image for the cave map still passed"
   }
  }
 }
