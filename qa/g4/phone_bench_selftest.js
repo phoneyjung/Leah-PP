@@ -1,4 +1,4 @@
-// G4.6: self-test of the phone bench (qa/g4/phone_bench.js v3) — it must not say "ผ่าน" when the measurement cannot be trusted.
+// G4.6: self-test of the phone bench (qa/g4/phone_bench.js v4) — it must not say "ผ่าน" when the measurement cannot be trusted.
 //   node qa/g4/phone_bench_selftest.js <out dir of build_phone_bench.py> [results.json]      CASES=a,b  FULL=1  CHROME_EXE=…
 // Serves the built copy itself (page.html inside the same skeleton the artifact host adds + exactly the files of files.json; a case
 // can leave a file out or answer 200 with other bytes — the fault is at the server, no request is intercepted in the browser) and runs the bench in test timing
@@ -15,13 +15,20 @@ const MAP = JSON.parse(fs.readFileSync(path.join(dir, 'files.json'), 'utf8')), P
 // HTTP 200 with the wrong body (T47-N4): a valid 1×1 transparent PNG in place of a file · the file with the same length and 4,000 bytes zeroed
 const PNG1 = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==', 'base64');
 const sameSize = (name) => { const b = Buffer.from(fs.readFileSync(MAP[name])); b.fill(0, Math.floor(b.length * 0.6), Math.floor(b.length * 0.6) + 4000); return b; };
-function serve(deny, swap) {
+// T48: the FIRST answer for a file is wrong (a 1×1 PNG padded to the file's own length, or the file with 4,000 bytes zeroed — same size
+// both), every later answer is the real file: a check that reads the file again sees nothing wrong, the game already holds the bad one
+const padded = (name) => { const b = Buffer.alloc(fs.statSync(MAP[name]).size); PNG1.copy(b); return b; };
+// the file with one piece of text replaced by another of the same length (it must be there exactly once)
+const alter = (name, from, to) => { const t = fs.readFileSync(MAP[name], 'latin1'); if (from.length !== to.length || t.split(from).length !== 2) throw Error('alter ' + name); return Buffer.from(t.replace(from, to), 'latin1'); };
+function serve(deny, swap, first, nostore) {
+  const served = {}, cc = nostore ? { 'cache-control': 'no-store' } : {};   // no-store: the browser keeps no copy, so a second read goes to the server again
   return new Promise((res) => { const s = http.createServer((q, r) => {
     const p = decodeURIComponent(new URL(q.url, 'http://x').pathname).slice(1) || 'index.html';
     if (p === 'index.html') { r.writeHead(200, { 'content-type': 'text/html; charset=utf-8' }); return r.end(q.method === 'HEAD' ? undefined : PAGE); }
     if (deny.includes(p) || !MAP[p]) { r.writeHead(404); return r.end(); }
+    if (first && first[p] && q.method === 'GET' && !served[p]) { served[p] = 1; r.writeHead(200, Object.assign({ 'content-type': TYPES[p.split('.').pop()] || 'application/octet-stream', 'content-length': first[p].length }, cc)); return r.end(first[p]); }
     if (swap && swap[p]) { r.writeHead(200, { 'content-type': TYPES[p.split('.').pop()] || 'application/octet-stream', 'content-length': swap[p].length }); return r.end(q.method === 'HEAD' ? undefined : swap[p]); }
-    r.writeHead(200, { 'content-type': TYPES[p.split('.').pop()] || 'application/octet-stream', 'content-length': fs.statSync(MAP[p]).size });
+    r.writeHead(200, Object.assign({ 'content-type': TYPES[p.split('.').pop()] || 'application/octet-stream', 'content-length': fs.statSync(MAP[p]).size }, cc));
     if (q.method === 'HEAD') return r.end(); fs.createReadStream(MAP[p]).pipe(r); });
     s.listen(0, '127.0.0.1', () => res(s)); });
 }
@@ -52,30 +59,46 @@ function fault(kind) {
 }
 const sameSet = (a, b) => a.length === b.length && a.every((x) => b.includes(x));
 // name · what is wrong · expected reasons besides "mode" · expected verdictIfCounted · extra check
+// noise: the fault itself can change the speed of some runs (a lighter graphics mode, half of the scene not drawn …) or the machine
+// can be busy, so the bench's own noise guards (unstable / interrupted) may ALSO fire: for these cases such extra reasons are let
+// through and the verdict may then be "void" — but "more", which reads the very check the case is about, must hold on every
+// machine (Codex T48: "lite" came out void + unstable on Codex's machine while its own check had fired). "ok", "full" and "slowon"
+// (the 90 % gate itself) stay exact.
+const NOISE = ['unstable', 'interrupted'];
 const CASES = [
-  { name: 'ok', want: [], verdict: 'pass', more: (r) => r.files.ok && r.files.asked >= 150 && r.files.hashed >= 150 && !r.files.wrong.length && r.device.phone && r.rows.every((x) => x.ok && !x.cut && !x.shaky && x.jsOn > 0 && x.jsOff > 0) &&
+  { name: 'ok', want: [], verdict: 'pass', more: (r) => r.files.ok && r.files.asked >= 150 && r.files.hashed >= 150 && !r.files.wrong.length && r.device.phone &&
+      r.files.images >= 100 && r.files.imagesEqual === r.files.images && r.files.fetches >= 20 && r.files.scripts.some((x) => x.rel === 'char2.js' && x.guarded && x.state === 'loaded') &&   // what the game holds r.rows.every((x) => x.ok && !x.cut && !x.shaky && x.jsOn > 0 && x.jsOff > 0) &&
       r.runs.every((x) => x.on ? x.ev.newD >= 0.8 * x.frames && x.ev.oldD === 0 : x.ev.oldD >= 0.8 * x.frames && x.ev.newD === 0) &&      // what was drawn, both ways
       r.runs.filter((x) => x.on && x.scene === 'S3').every((x) => x.ev.heldCfg === x.ev.newD && x.ev.vis > 0 && x.ev.heldCmd === x.ev.vis) && r.runs.filter((x) => x.scene !== 'S3').every((x) => x.ev.heldCfg === 0) },
-  { name: 'desktop', desktop: true, want: ['device'], verdict: 'void', more: (r) => !r.device.phone && r.files.ok },
-  { name: 'nofile', deny: ['kit-town.png'], want: ['files'], verdict: 'void', more: (r) => r.files.failed.includes('kit-town.png') && !r.files.missing.length },
-  { name: 'unlisted', fault: 'unlisted', want: ['files'], verdict: 'void', more: (r) => r.files.missing.includes('kit-town.png') },
-  { name: 'build', fault: 'build', want: ['build'], verdict: 'void' },
-  { name: 'c2fail', deny: ['c2-pack.json'], want: ['files'], verdict: 'void', more: (r) => r.files.failed.includes('c2-pack.json') && r.rows.every((x) => !x.ok && x.why === 'ตัวใหม่ไม่พร้อม') },
+  { name: 'desktop', noise: true, desktop: true, want: ['device'], verdict: 'void', more: (r) => !r.device.phone && r.files.ok },
+  { name: 'nofile', noise: true, deny: ['kit-town.png'], want: ['files'], verdict: 'void', more: (r) => r.files.failed.includes('kit-town.png') && !r.files.missing.length },
+  { name: 'unlisted', noise: true, fault: 'unlisted', want: ['files'], verdict: 'void', more: (r) => r.files.missing.includes('kit-town.png') },
+  { name: 'build', noise: true, fault: 'build', want: ['build'], verdict: 'void' },
+  { name: 'c2fail', noise: true, deny: ['c2-pack.json'], want: ['files'], verdict: 'void', more: (r) => r.files.failed.includes('c2-pack.json') && r.rows.every((x) => !x.ok && x.why === 'ตัวใหม่ไม่พร้อม') },
   { name: 'stall', fault: 'stall', wantHas: ['interrupted'], verdict: 'void', more: (r) => r.rows[0].cut && !r.rows[1].cut && !r.rows[2].cut },
   { name: 'hidden', fault: 'hidden', want: ['interrupted'], verdict: 'void', more: (r) => r.rows[2].cut && r.runs.filter((x) => x.hidden).length === 1 },
   { name: 'slowoff', fault: 'slowoff', want: ['unstable'], verdict: 'void', more: (r) => r.rows[1].shaky && r.rows[1].ratio > 1.10 && !r.rows[0].shaky },
   { name: 'slowon', fault: 'slowon', want: [], verdict: 'fail', more: (r) => r.rows.every((x) => x.ok && x.ratio < 0.90 && x.ratio > 0.60) },
   { name: 'lowfps', slowRaf: true, wantHas: ['interrupted'], verdict: 'void' },
   // v3 (Codex T47-N1 N2 N4): each of these passed in v2
-  { name: 'nolantern', fault: 'nolantern', want: [], verdict: 'fail', more: (r) => r.rows[0].ok && r.rows[1].ok && !r.rows[2].ok && r.rows[2].why === 'ตะเกียงไม่ถูกวาด' && r.runs.filter((x) => x.on && x.scene === 'S3').every((x) => x.ev.heldCfg === 0 && x.ev.newD > 0) },
-  { name: 'nohold', fault: 'nohold', want: [], verdict: 'fail', more: (r) => r.rows[0].ok && r.rows[1].ok && !r.rows[2].ok && r.rows[2].why === 'ตะเกียงไม่ถูกวาด' && r.runs.filter((x) => x.on && x.scene === 'S3').every((x) => x.ev.heldCfg === x.ev.newD && x.ev.vis === 0) },
-  { name: 'nooldbody', fault: 'nooldbody', want: [], verdict: 'fail', more: (r) => r.rows.every((x) => !x.ok && x.why === 'ตัวเดิมไม่ถูกวาด') && r.runs.filter((x) => !x.on).every((x) => x.ev.oldD === 0 && x.ev.calls > 0) },
-  { name: 'nooldbody_late', fault: 'nooldbody_late', want: [], verdict: 'fail', more: (r) => r.rows.every((x) => !x.ok && x.why === 'ตัวเดิมไม่ถูกวาด') && r.runs.filter((x) => !x.on).every((x) => x.ev.oldD === 0 && x.ev.calls === 0) },
-  { name: 'noshadow', fault: 'noshadow', want: [], verdict: 'fail', more: (r) => !r.rows[0].ok && r.rows[0].why === 'เงาไม่ตรง' && r.rows[1].ok && !r.rows[2].ok && r.rows[2].why === 'เงาไม่ตรง' },
-  { name: 'lite', fault: 'lite', want: [], verdict: 'fail', more: (r) => r.rows[0].ok && !r.rows[1].ok && r.rows[1].why === 'เกมเปลี่ยนโหมดกราฟิกเอง' },
-  { name: 'fewdraws', fault: 'fewdraws', want: [], verdict: 'fail', more: (r) => r.rows.every((x) => !x.ok && x.why === 'ฉากวาดไม่ครบตอนเปิด' && x.draws[0] < 0.8 * x.draws[1]) },
-  { name: 'wrongimage', swap: () => ({ 'map-cave-mouth.jpg': PNG1 }), want: ['files'], verdict: 'void', more: (r) => r.files.wrong.includes('map-cave-mouth.jpg') && !r.files.missing.length && !r.files.failed.length },
-  { name: 'wrongsame', swap: () => ({ 'map-cave-mouth.jpg': sameSize('map-cave-mouth.jpg') }), want: ['files'], verdict: 'void', more: (r) => r.files.wrong.length === 1 && r.files.wrong[0] === 'map-cave-mouth.jpg' && !r.files.missing.length && !r.files.failed.length },
+  { name: 'nolantern', noise: true, fault: 'nolantern', want: [], verdict: 'fail', more: (r) => r.rows[0].ok && r.rows[1].ok && !r.rows[2].ok && r.rows[2].why === 'ตะเกียงไม่ถูกวาด' && r.runs.filter((x) => x.on && x.scene === 'S3').every((x) => x.ev.heldCfg === 0 && x.ev.newD > 0) },
+  { name: 'nohold', noise: true, fault: 'nohold', want: [], verdict: 'fail', more: (r) => r.rows[0].ok && r.rows[1].ok && !r.rows[2].ok && r.rows[2].why === 'ตะเกียงไม่ถูกวาด' && r.runs.filter((x) => x.on && x.scene === 'S3').every((x) => x.ev.heldCfg === x.ev.newD && x.ev.vis === 0) },
+  { name: 'nooldbody', noise: true, fault: 'nooldbody', want: [], verdict: 'fail', more: (r) => r.rows.every((x) => !x.ok && x.why === 'ตัวเดิมไม่ถูกวาด') && r.runs.filter((x) => !x.on).every((x) => x.ev.oldD === 0 && x.ev.calls > 0) },
+  { name: 'nooldbody_late', noise: true, fault: 'nooldbody_late', want: [], verdict: 'fail', more: (r) => r.rows.every((x) => !x.ok && x.why === 'ตัวเดิมไม่ถูกวาด') && r.runs.filter((x) => !x.on).every((x) => x.ev.oldD === 0 && x.ev.calls === 0) },
+  { name: 'noshadow', noise: true, fault: 'noshadow', want: [], verdict: 'fail', more: (r) => !r.rows[0].ok && r.rows[0].why === 'เงาไม่ตรง' && r.rows[1].ok && !r.rows[2].ok && r.rows[2].why === 'เงาไม่ตรง' },
+  { name: 'lite', noise: true, fault: 'lite', want: [], verdict: 'fail', more: (r) => r.rows[0].ok && !r.rows[1].ok && r.rows[1].why === 'เกมเปลี่ยนโหมดกราฟิกเอง' },
+  { name: 'fewdraws', noise: true, fault: 'fewdraws', want: [], verdict: 'fail', more: (r) => r.rows.every((x) => !x.ok && x.why === 'ฉากวาดไม่ครบตอนเปิด' && x.draws[0] < 0.8 * x.draws[1]) },
+  { name: 'wrongimage', noise: true, swap: () => ({ 'map-cave-mouth.jpg': PNG1 }), want: ['files'], verdict: 'void', more: (r) => r.files.wrong.includes('map-cave-mouth.jpg') && !r.files.missing.length && !r.files.failed.length },
+  { name: 'wrongsame', noise: true, swap: () => ({ 'map-cave-mouth.jpg': sameSize('map-cave-mouth.jpg') }), want: ['files'], verdict: 'void', more: (r) => r.files.wrong.length === 1 && r.files.wrong[0] === 'map-cave-mouth.jpg' && !r.files.missing.length && !r.files.failed.length },
+  // v4 (Codex T48): only the first answer is wrong, same size
+  { name: 'firstwrong', noise: true, first: () => ({ 'map-cave-mouth.jpg': padded('map-cave-mouth.jpg') }), want: ['files'], verdict: 'void', more: (r) => r.files.wrong.includes('map-cave-mouth.jpg') },
+  // … and the browser keeps no copy (Cache-Control: no-store): v3 said "ผ่าน" here. An image of another size · an image of the same
+  // size in pixels and bytes · a file the game fetches · the script of the new character (same behaviour, one letter of its comment changed)
+  { name: 'firstwrong_nostore', noise: true, nostore: true, first: () => ({ 'map-cave-mouth.jpg': padded('map-cave-mouth.jpg') }), want: ['files'], verdict: 'void', more: (r) => r.files.wrong.length === 1 && r.files.wrong[0] === 'map-cave-mouth.jpg' && r.files.imagesEqual === r.files.images - 1 },
+  { name: 'firstsame_nostore', noise: true, nostore: true, first: () => ({ 'map-cave-mouth.jpg': sameSize('map-cave-mouth.jpg') }), want: ['files'], verdict: 'void', more: (r) => r.files.wrong.length === 1 && r.files.wrong[0] === 'map-cave-mouth.jpg' && r.files.imagesEqual === r.files.images - 1 },
+  { name: 'firstjson_nostore', noise: true, nostore: true, first: () => ({ 'g9b-scene.json': alter('g9b-scene.json', '"mailbox":[22.88,', '"mailbox":[22.89,') }), want: ['files'], verdict: 'void', more: (r) => r.files.wrong.length === 1 && r.files.wrong[0] === 'g9b-scene.json' && r.files.imagesEqual === r.files.images },
+  { name: 'firstscript_nostore', noise: true, nostore: true, first: () => ({ 'char2.js': alter('char2.js', 'built from char2.src.js', 'buil7 from char2.src.js') }), want: ['files'], verdict: 'void',
+    more: (r) => r.files.wrong.length === 1 && r.files.wrong[0] === 'char2.js' && !r.rows[0].ok && r.rows[0].why === 'ตัวใหม่ไม่พร้อม' && r.files.scripts.some((x) => x.rel === 'char2.js' && x.guarded && x.state === 'error') },
 ];
 if (process.env.FULL) CASES.push({ name: 'full', full: true, want: [], verdict: 'pass', exact: 'pass', more: (r) => r.files.ok && r.device.phone && !r.reasons.length && /→ ผ่าน \(เกณฑ์/.test(r.line) });
 const ONLY = process.env.CASES ? process.env.CASES.split(',') : null;
@@ -89,7 +112,7 @@ const ONLY = process.env.CASES ? process.env.CASES.split(',') : null;
       // is the bench working, not the case being wrong. A fault the bench misses is missed on every try. "tries" is in the result.
       for (let tries = 1; tries <= 3; tries++) {
       if (tries > 1) out.pop();
-      const srv = await serve(c.deny || [], c.swap ? c.swap() : null), port = srv.address().port, bc = await browser.createBrowserContext(), p = await bc.newPage(), pe = [];
+      const srv = await serve(c.deny || [], c.swap ? c.swap() : null, c.first ? c.first() : null, c.nostore), port = srv.address().port, bc = await browser.createBrowserContext(), p = await bc.newPage(), pe = [];
       const row = { name: c.name, tries }; out.push(row);
       try {
         p.on('pageerror', (e) => pe.push(String(e.message).slice(0, 120)));
@@ -109,28 +132,30 @@ const ONLY = process.env.CASES ? process.env.CASES.split(',') : null;
         const r = await p.evaluate(() => { const b = window.__benchResult; return { verdict: b.verdict, verdictIfCounted: b.verdictIfCounted, pass: b.pass, reasons: b.reasons, device: b.device, files: b.files, rows: b.rows, line: b.line,
           runs: b.runs.map((x) => ({ scene: x.scene, on: x.on, fps: +x.fps.toFixed(1), frames: x.frames, gap: x.gap, hidden: x.hidden, sts: x.sts, body: x.body, ev: x.ev, pins: x.pins })), err: b.runs.err || null,
           head: (document.querySelector('h2') || {}).textContent }; });
-        const counted = r.reasons.filter((x) => x !== 'mode');
+        const counted = r.reasons.filter((x) => x !== 'mode'), noise = counted.filter((x) => NOISE.includes(x)), firm = c.noise ? counted.filter((x) => !NOISE.includes(x)) : counted;
+        row.noise = c.noise ? noise : [];   // only where such reasons were let through
         row.reasons = r.reasons; row.verdict = r.verdict; row.verdictIfCounted = r.verdictIfCounted; row.head = r.head; row.line = r.line;
         row.rows = r.rows.map((x) => ({ id: x.id, ratio: x.ratio === null ? null : +x.ratio.toFixed(3), ok: x.ok, why: x.why, cut: x.cut, shaky: x.shaky, fps: [+x.fpsOn.toFixed(1), +x.fpsOff.toFixed(1)], js: [+x.jsOn.toFixed(2), +x.jsOff.toFixed(2)],
           draws: x.draws.map((v) => +v.toFixed(1)), shadow: x.shadow.map((v) => +v.toFixed(2)) }));
-        row.files = { ok: r.files.ok, asked: r.files.asked, hashed: r.files.hashed, missing: r.files.missing, failed: r.files.failed, wrong: r.files.wrong, why: r.files.why }; row.runs = r.runs; row.phone = r.device.phone; row.pageErrors = pe;
+        row.files = { ok: r.files.ok, asked: r.files.asked, hashed: r.files.hashed, images: r.files.images, imagesEqual: r.files.imagesEqual, fetches: r.files.fetches, scripts: r.files.scripts, ms: r.files.ms, missing: r.files.missing, failed: r.files.failed, wrong: r.files.wrong, why: r.files.why }; row.runs = r.runs; row.phone = r.device.phone; row.pageErrors = pe;
         const checks = {
-          reasons: c.wantHas ? c.wantHas.every((x) => counted.includes(x)) : sameSet(counted, c.want),
-          verdictIfCounted: r.verdictIfCounted === c.verdict,
+          reasons: c.wantHas ? c.wantHas.every((x) => counted.includes(x)) : sameSet(firm, c.want),
+          verdictIfCounted: r.verdictIfCounted === c.verdict || (!!c.noise && noise.length > 0 && r.verdictIfCounted === 'void'),
           verdict: r.verdict === (c.exact || 'void') && r.pass === (r.verdict === 'pass'),   // a test-timing run never counts
           mode: c.full ? !r.reasons.includes('mode') : r.reasons.includes('mode'),
           head: c.exact === 'pass' ? /ผ่าน/.test(r.head) && !/ไม่/.test(r.head) : /ไม่นับ/.test(r.head),
           panelHidden: row.panelHidden, noPageError: !pe.length && !r.err, more: c.more ? !!c.more(r) : true };
         row.checks = checks; row.ok = Object.values(checks).every(Boolean);
       } catch (e) { row.ok = false; row.error = String(e && e.message || e).slice(0, 300); }
-      console.log(JSON.stringify({ name: row.name, tries, ok: row.ok, verdict: row.verdict, verdictIfCounted: row.verdictIfCounted, reasons: row.reasons, checks: row.checks, error: row.error }));
+      console.log(JSON.stringify({ name: row.name, tries, ok: row.ok, verdict: row.verdict, verdictIfCounted: row.verdictIfCounted, reasons: row.reasons, noise: row.noise, checks: row.checks, error: row.error }));
       await bc.close(); if (srv.closeAllConnections) srv.closeAllConnections(); await new Promise((r) => srv.close(r));
       if (row.ok) break;
       }
     }
   } catch (e) { console.error(String(e && e.stack || e)); if (browser) await browser.close(); process.exit(2); }
   await browser.close();
-  const sum = { cases: out.length, ok: out.filter((x) => x.ok).length, retried: out.filter((x) => x.tries > 1).map((x) => x.name + '×' + x.tries), verdict: out.length && out.every((x) => x.ok) ? 'pass' : 'fail' };
+  // noisy = cases that passed with a noise reason let through
+  const sum = { cases: out.length, ok: out.filter((x) => x.ok).length, retried: out.filter((x) => x.tries > 1).map((x) => x.name + '×' + x.tries), noisy: out.filter((x) => x.noise && x.noise.length).map((x) => x.name + ':' + x.noise.join('+')), verdict: out.length && out.every((x) => x.ok) ? 'pass' : 'fail' };
   if (outFile) fs.writeFileSync(outFile, JSON.stringify({ summary: sum, cases: out }, null, 1));
   console.log(JSON.stringify(sum)); process.exit(sum.verdict === 'pass' ? 0 : 1);
 })();

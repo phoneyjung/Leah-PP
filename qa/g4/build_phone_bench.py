@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """G4.6 (plan G4_0 §9 · D-G4-7 "ค"): build the private test copy of the game that measures smoothness on the owner's real phone.
-Version 2.
+Version 4.
 
   python3 qa/g4/build_phone_bench.py <game dir (a checkout of the branch)> <out dir>
 
@@ -9,8 +9,10 @@ Version 2.
      host wraps the page itself; their contents stay in place, in the same order
   2. <title> → "LA วัดความลื่น" (the artifact's name)
   3. <script src="firebase-config.js"></script> removed: the copy never goes online (no real database, no other players)
-  4. one inline <script> appended at the end: window.__benchBuild (the game version and the copy's file list with each file's
-     size and SHA-256) + qa/g4/phone_bench.js
+  4. one inline <script> put right after the title, before every script of the game: window.__benchBuild (the game version and the copy's file list with each file's size and
+     SHA-256) + qa/g4/phone_bench_prelude.js, the load record (v4): it keeps what the game itself received — it changes no request
+     and no answer, except that a <script src> of the copy gets its integrity="sha256-…"
+  5. one inline <script> appended at the end: qa/g4/phone_bench.js
 <out>/files.json = {published path: source path} for every file of the copy · <out>/files.N.json = the same in parts of at most 250
 files (one publish takes at most 255).
 
@@ -75,10 +77,15 @@ for must in ('char2.js', 'c2-pack.json', 'manifest.json'):
         sys.exit('%s is not in sw.js FILES' % must)
 
 bench = open(os.path.join(here, 'phone_bench.js'), encoding='utf-8').read()
+prelude = open(os.path.join(here, 'phone_bench_prelude.js'), encoding='utf-8').read()
 build = json.dumps({'version': ver[0], 'files': names, 'meta': meta, 'absent': ['sw.js']}, ensure_ascii=False, separators=(',', ':'))
-if '</script' in bench or '</script' in build:
-    sys.exit('the appended script must not contain </script')
-page = page.rstrip() + '\n<script>\nwindow.__benchBuild=' + build + ';\n' + bench + '</script>\n'
+if '</script' in bench or '</script' in build or '</script' in prelude:
+    sys.exit('the added scripts must not contain </script')
+new_title = '<title>LA วัดความลื่น</title>'
+if page.count(new_title) != 1 or '<script' in page[:page.index(new_title)]:
+    sys.exit('the title must come before every script of the game')
+# right after the title (the host reads the title from the first 8 KB) and before every script of the game
+page = page.replace(new_title, new_title + '\n<script>\nwindow.__benchBuild=' + build + ';\n' + prelude + '</script>', 1).rstrip() + '\n<script>\n' + bench + '</script>\n'
 os.makedirs(out, exist_ok=True)
 open(os.path.join(out, 'page.html'), 'w', encoding='utf-8').write(page)
 json.dump(fmap, open(os.path.join(out, 'files.json'), 'w'), indent=1, ensure_ascii=False)

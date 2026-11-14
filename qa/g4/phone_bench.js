@@ -1,4 +1,4 @@
-// G4.6 (plan G4_0 §9 G4.6 · D-G4-7 "ค"): smoothness of character v2 on the owner's REAL phone, once, before "รับ G4". Version 3.
+// G4.6 (plan G4_0 §9 G4.6 · D-G4-7 "ค"): smoothness of character v2 on the owner's REAL phone, once, before "รับ G4". Version 4.
 // Added only to the private test copy of the game (built by qa/g4/build_phone_bench.py); the game in the repo never loads it.
 // One button: a synthetic save of its own (this copy has its own storage — no real save is read or written, nothing goes online),
 // then 3 fixed scenes of M6 (qa/g4/m6-scenes.json: town · farm · dark cave mouth with the lantern), the kid walking back and forth
@@ -14,9 +14,21 @@
 //     device       not a phone (UA not mobile, no coarse pointer, or no touch)
 //     build        the copy is not the game version it was built from, or it carries no file list
 //     files        a game file asked for by the page is not in the copy, or did not load (HTTP ≥ 400 / network), or is not the
-//                  file of the build (v3: the size the page received, and the SHA-256 of the file read back, must equal the build's
-//                  — HTTP 200 alone proves nothing), or an image of the game's first table failed (MISSING), or the browser's
-//                  resource log / the files cannot be read · read from the browser's own resource timing, no request is touched
+//                  file of the build — HTTP 200 alone proves nothing, and neither does reading the file a second time (v3 did
+//                  that; a server whose FIRST answer is wrong passed, Codex T48). v4 checks what the game itself holds, kept by
+//                  the load record that runs before the game (phone_bench_prelude.js):
+//                    · every file asked for is read once more and its SHA-256 must be the build's — this is only the reference
+//                    · every image the game loaded: the very element is compared, pixel by pixel, with a decode of that
+//                      reference on this device (same size, every pixel equal)
+//                    · every fetch the game made: the bytes the game got are hashed — they must be the build's
+//                    · char2.js runs under integrity="sha256-…" — the browser itself refuses any other bytes, and a refused
+//                      script makes the run not count
+//                    · the size the page received (resource log) must be the build's; an image of the game's first table that
+//                      failed (MISSING) counts as failed
+//                  or the resource log / the load record / the files cannot be read · no request and no answer is changed
+//                  Not covered (said plainly): pictures the page shows through CSS (frames of the HUD, backgrounds of screens
+//                  that are hidden while measuring) and the bytes the game's hunting-map worker reads again — for those only the
+//                  size and the reference hash; none is drawn on the game canvas in the three scenes
 //     interrupted  a run had a frame gap > 300 ms, the page was hidden, or fewer than 10 frames per second
 //     unstable     the 3 paired ratios of a scene differ by more than 0.15, or the scene's ratio is above 1.10
 // Checks per run (so a frozen or empty screen cannot pass): the right map, the kid walked, and — v3 — what was really DRAWN, counted
@@ -34,8 +46,8 @@
 //   lantern, OFF: the old drawing uses the game's own condition (dark map and a little kid) directly; the bench reads that
 //         condition only as the state of the scene, not as proof of a drawing
 //   the scene, both ways (medians of the 3 runs): draw commands per frame on the main canvas, ON ≥ 80 % of OFF (as M6's fps.js) ·
-//         the player's shadow on the same share of frames (ON: the game's counter at the new shadow, OFF: the old shadow sheet
-//         blitted) · LITE off, eco off, fpsChecks 6 still so at the end of every run (the game may not change its own graphics mode)
+//         the player's shadow on the same share of frames (ON: the 14 × 3 ellipse commands of the new shadow, OFF: the old shadow
+//         sheet blitted) · LITE off, eco off, fpsChecks 6 still so at the end of every run (the game may not change its own graphics mode)
 // Report only (no gate): JS work per frame (ms inside the page's animation-frame callbacks) ON / OFF — it still shows the cost when
 // both frame rates sit at the screen's refresh rate. It does not include the GPU's work.
 // Result: a table on screen and one line to copy and send back. Takes about 2 minutes; the screen must not be touched.
@@ -46,7 +58,7 @@
     { id: 'S2', name: 'ฟาร์ม', map: 'farm', go: [0, 4], dark: false },
     { id: 'S3', name: 'ปากถ้ำ (มืด · ถือตะเกียง)', map: 'cavemouth', go: [4, 0], dark: true },
   ];
-  const BUILD = window.__benchBuild || null, TEST = window.__benchTest || null;
+  const BUILD = window.__benchBuild || null, LOADS = window.__benchLoads || null, TEST = window.__benchTest || null;
   const SHORT = !!TEST || new URLSearchParams(location.search).has('short');
   const SETTLE = TEST ? TEST.settle : SHORT ? 400 : 1500, MEAS = TEST ? TEST.meas : SHORT ? 1200 : 5000;
   const PAIRS = 3, GATE = 0.90, GAP_MS = 300, MIN_FPS = 10, SPREAD = 0.15, RATIO_MAX = 1.10;
@@ -57,13 +69,15 @@
   const raf0 = window.requestAnimationFrame.bind(window), JS = { t: 0 };
   window.requestAnimationFrame = (f) => raf0((t) => { const a = performance.now(); try { return f(t); } finally { JS.t += performance.now() - a; } });
   // What is really drawn (v3). EV counts per player draw; measure() takes the difference over a run.
-  const EV = { calls: 0, cmd: 0, newD: 0, oldD: 0, heldCfg: 0, vis: 0, heldCmd: 0, all: 0, oldSh: 0 };
+  const EV = { calls: 0, cmd: 0, newD: 0, oldD: 0, heldCfg: 0, vis: 0, heldCmd: 0, all: 0, oldSh: 0, newSh: 0 };
   let hooked = null;
   function hook() {
     if (hooked) return;   // once: a wrapper put around drawPlayer later stays outside this one, and is seen as draws that never arrive here
     const draw0 = Object.getPrototypeOf(ctx).drawImage; let inP = 0, n = 0, old = false, thin = false;
     ctx.drawImage = function (img) { EV.all++; if (inP) { if (!n) thin = this.globalAlpha < 1; n++; if (img === PS.walk || img === PS.stand) old = true; } else if (img === PS.shS || img === PS.shW) EV.oldSh++;
       return draw0.apply(this, arguments); };
+    const ell0 = Object.getPrototypeOf(ctx).ellipse;   // the new character's shadow is the only 14 × 3 ellipse (c234Shadow, W3): the command itself is counted
+    ctx.ellipse = function (x, y, rx, ry) { if (rx === 14 && ry === 3) EV.newSh++; return ell0.apply(this, arguments); };
     const dp = drawPlayer;
     drawPlayer = function () { const b0 = C234.n.body; inP++; n = 0; old = false; thin = false;
       try { return dp.apply(this, arguments); } finally { inP--;
@@ -125,24 +139,61 @@
     else if (!real) out.why = 'the browser does not show the status of the files here';
     out.ok = !out.why && !out.missing.length && !out.failed.length && !out.wrong.length; return out;
   }
-  // The files the page asked for are read back (from the browser's cache when it has them) and their SHA-256 must be the build's.
+  // v4. The reference: every file asked for is read once more (the bench's own fetch) and must be the build's by SHA-256.
+  // Then what the GAME holds is checked against it: its fetched bytes by hash, its images pixel by pixel.
   async function verify(fl) {
     if (fl.why) return fl;
     if (!(window.crypto && crypto.subtle)) { fl.why = 'no SHA-256 in this browser'; fl.ok = false; return fl; }
+    if (!LOADS || !LOADS.fetch0 || !Array.isArray(LOADS.img)) { fl.why = 'no load record'; fl.ok = false; return fl; }
     const hex = (buf) => Array.from(new Uint8Array(buf), (b) => b.toString(16).padStart(2, '0')).join('');
-    let i = 0, hashed = 0, unread = 0;
+    const sha = async (buf) => hex(await crypto.subtle.digest('SHA-256', buf));
+    const have = new Set(BUILD.files), absent = new Set(BUILD.absent || []), bad = (rel) => { if (!fl.wrong.includes(rel)) fl.wrong.push(rel); };
+    const imgs = [...new Set(LOADS.img.concat([...document.images]))], gets = LOADS.fetch.slice(), t0 = performance.now();   // taken before the bench loads anything itself
+    const ref = {}; let i = 0, hashed = 0, unread = 0;
     const one = async () => { while (i < fl.seen.length) { const rel = fl.seen[i++], m = BUILD.meta[rel]; if (fl.failed.includes(rel)) continue;
-      try { const r = await fetch(fl.base + rel, { cache: 'force-cache' }); if (!r.ok) { unread++; continue; }
-        const buf = await r.arrayBuffer(); hashed++; if (buf.byteLength !== m[0] || hex(await crypto.subtle.digest('SHA-256', buf)) !== m[1]) { if (!fl.wrong.includes(rel)) fl.wrong.push(rel); } }
+      try { const r = await LOADS.fetch0(fl.base + rel, { cache: 'force-cache' }); if (!r.ok) { unread++; continue; }
+        const buf = await r.arrayBuffer(); hashed++; if (buf.byteLength !== m[0] || await sha(buf) !== m[1]) bad(rel); else ref[rel] = buf; }
       catch (e) { unread++; } } };
     await Promise.all([one(), one(), one(), one()]);
     fl.hashed = hashed; if (unread) fl.why = 'cannot read ' + unread + ' files back';
+    // the game's own fetches: the bytes it got
+    let teed = 0;
+    for (const g of gets) { if (absent.has(g.rel) || !g.rel) continue;
+      if (!have.has(g.rel)) { if (!fl.missing.includes(g.rel)) fl.missing.push(g.rel); continue; }
+      if (g.status >= 400 || !g.status) { if (!fl.failed.includes(g.rel)) fl.failed.push(g.rel); continue; }
+      if (!g.body) continue;   // a HEAD
+      try { const buf = await g.body, m = BUILD.meta[g.rel]; teed++; if (buf.byteLength !== m[0] || await sha(buf) !== m[1]) bad(g.rel); } catch (e) { fl.why = fl.why || 'cannot read what a fetch of the game received'; } }
+    fl.fetches = teed;
+    // the game's own images: the elements themselves against a decode of the reference
+    const T = 1024, mk = () => { const c = document.createElement('canvas'); c.width = c.height = T; const g = c.getContext('2d', { willReadFrequently: true }); g.globalCompositeOperation = 'copy'; g.imageSmoothingEnabled = false; return g; };
+    const ga = mk(), gb = mk(), setSrc = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, 'src').set;
+    const same = (a, b) => { const w = a.naturalWidth, h = a.naturalHeight; if (!w || w !== b.naturalWidth || h !== b.naturalHeight) return false;
+      for (let y = 0; y < h; y += T) for (let x = 0; x < w; x += T) { const tw = Math.min(T, w - x), th = Math.min(T, h - y);
+        ga.clearRect(0, 0, T, T); gb.clearRect(0, 0, T, T); ga.drawImage(a, x, y, tw, th, 0, 0, tw, th); gb.drawImage(b, x, y, tw, th, 0, 0, tw, th);
+        const da = new Uint32Array(ga.getImageData(0, 0, tw, th).data.buffer), db = new Uint32Array(gb.getImageData(0, 0, tw, th).data.buffer);
+        for (let k = 0; k < da.length; k++) if (da[k] !== db[k]) return false; }
+      return true; };
+    let seenImg = 0, eq = 0;   // one image at a time, nothing decoded is kept: a phone has little memory
+    for (const el of imgs) { const rel = LOADS.rel(el.currentSrc || el.src); if (!rel || absent.has(rel)) continue;   // data:, blob:, another origin: not a file of the copy
+      seenImg++;
+      if (!have.has(rel)) { if (!fl.missing.includes(rel)) fl.missing.push(rel); continue; }
+      if (!el.complete) { try { await Promise.race([el.decode(), sleep(4000)]); } catch (e) {} }
+      if (!el.complete || !el.naturalWidth) { if (!fl.failed.includes(rel)) fl.failed.push(rel); continue; }
+      if (!ref[rel]) continue;   // the reference itself is wrong or unread: already counted
+      const im = new Image(), u = URL.createObjectURL(new Blob([ref[rel]]));
+      try { setSrc.call(im, u); await im.decode(); if (same(el, im)) eq++; else bad(rel); } catch (e) { bad(rel); }
+      URL.revokeObjectURL(u); }
+    fl.images = seenImg; fl.imagesEqual = eq;
+    // the game's own scripts: run only under the build's integrity; one the browser refused (or that never loaded) is not the build's file
+    fl.scripts = LOADS.script.filter((x) => x.rel && !absent.has(x.rel)).map((x) => ({ rel: x.rel, guarded: x.guarded && !!x.el.integrity, state: x.state }));
+    for (const x of fl.scripts) { if (!have.has(x.rel)) { if (!fl.missing.includes(x.rel)) fl.missing.push(x.rel); } else if (!x.guarded || x.state !== 'loaded') bad(x.rel); }
+    fl.ms = Math.round(performance.now() - t0);
     fl.ok = !fl.why && !fl.missing.length && !fl.failed.length && !fl.wrong.length; return fl;
   }
   function start() {
     const b = panel('<h2 style="margin:0 0 8px;font-size:20px">วัดความลื่นตัวละครรุ่น 2 (G4.6)</h2>' +
       '<p style="margin:0 0 6px">หน้านี้เป็น<b>สำเนาทดสอบ</b>ของเกม ' + esc(typeof VERSION === 'string' ? VERSION.replace('Lantern Academy ', '') : '?') + ' · ใช้เซฟทดลองของมันเอง ไม่แตะเซฟของลีอา ไม่ต่อออนไลน์</p>' +
-      '<p style="margin:0 0 6px">กดเริ่มแล้ว <b>วางมือถือแนวนอนนิ่ง ๆ ไม่ต้องแตะจอ ไม่สลับแอป</b> ประมาณ <b>2 นาที</b> · ตัวละครจะเดินเองใน 3 ฉาก สลับเปิด-ปิดตัวใหม่ 6 ครั้งต่อฉาก</p>' +
+      '<p style="margin:0 0 6px">กดเริ่มแล้ว <b>วางมือถือแนวนอนนิ่ง ๆ ไม่ต้องแตะจอ ไม่สลับแอป</b> ประมาณ <b>2 นาที</b> · ตัวละครจะเดินเองใน 3 ฉาก สลับเปิด-ปิดตัวใหม่ 6 ครั้งต่อฉาก · ตอนจบหน้าจะตรวจไฟล์และภาพของเกมอีกไม่เกินครึ่งนาที</p>' +
       '<p style="margin:0 0 10px;color:#d8c8a0">ผ่านเมื่อเปิดตัวใหม่แล้วยังลื่นอย่างน้อย 90 % ของตอนปิด ทุกฉาก' + (SHORT ? ' · <b>รอบสั้นสำหรับทดสอบ ไม่นับเป็นผล</b>' : '') + '</p>');
     const row = el('div'); row.appendChild(btn('เริ่มวัด', run, true)); b.firstChild.appendChild(row);
   }
@@ -188,8 +239,9 @@
         clearInterval(window.__bwk);
       }
     } catch (e) { runs.err = String(e && e.message || e).slice(0, 200); }
+    showPill('กำลังตรวจไฟล์และภาพของเกม… อีกสักครู่ อย่าเพิ่งปิดหน้า'); let fl = files();
+    try { fl = await verify(fl); } catch (e) { fl.why = fl.why || 'the check of the files stopped: ' + String(e && e.message || e).slice(0, 80); fl.ok = false; }
     try { if (lock) lock.release(); } catch (e) {}
-    showPill('กำลังตรวจไฟล์เกม…'); const fl = await verify(files());
     if (pill) show(pill, false); report(runs, fl);
   }
   function report(runs, fl) {
@@ -202,9 +254,9 @@
       const drewOld = (r) => r.body === 0 && r.ev.newD === 0 && r.ev.oldD >= 0.8 * r.frames;             // OFF: the old sheet really blitted
       const lamp = (r) => sc.dark ? r.ev.heldCfg === r.ev.newD && r.ev.newD > 0 && r.ev.vis >= 0.5 * r.ev.newD && r.ev.heldCmd === r.ev.vis : r.ev.heldCfg === 0;   // ON: what the renderer was given and what it drew
       // the scene around the player, both ways (medians of the 3 runs): draw commands per frame on the main canvas (as M6's fps.js:
-      // ON ≥ 80 % of OFF) · the player's shadow (ON: the game's counter at the new shadow · OFF: the old shadow sheet blitted)
+      // ON ≥ 80 % of OFF) · the player's shadow (ON: the new shadow's ellipse commands · OFF: the old shadow sheet blitted)
       const per = (a, f) => a.length ? med(a.map((r) => f(r) / r.frames)) : 0;
-      const drawsOn = per(on, (r) => r.ev.all), drawsOff = per(off, (r) => r.ev.all), shOn = per(on, (r) => r.ev.shadow), shOff = per(off, (r) => r.ev.oldSh);
+      const drawsOn = per(on, (r) => r.ev.all), drawsOff = per(off, (r) => r.ev.all), shOn = per(on, (r) => r.ev.newSh), shOff = per(off, (r) => r.ev.oldSh);
       const full = drawsOn >= 0.8 * drawsOff && drawsOff > 0, shade = Math.abs(shOn - shOff) <= 0.2, pinned = rs.every((r) => r.pins);
       const ok = rs.length === 6 && pinned && rs.every((r) => r.map === sc.map && r.walked > 20 && scene(r)) &&
         on.every((r) => only(r, 'ready') && drewNew(r) && lamp(r)) && off.every((r) => only(r, 'off') && drewOld(r)) && full && shade;
@@ -234,15 +286,16 @@
       files: fl.why ? 'ตรวจไฟล์เกมไม่ได้' : 'ไฟล์เกมไม่ครบหรือไม่ตรง ' + (fl.missing.length + fl.failed.length + fl.wrong.length) + ' ไฟล์', interrupted: 'ระหว่างวัดมีการสะดุดหรือสลับแอป', unstable: 'ผลแต่ละรอบต่างกันมากเกินไป' };
     const pct = (x) => (x === null ? '–' : Math.round(x * 100) + ' %');
     const lost = fl.missing.concat(fl.failed), wrong = fl.wrong;
-    const line = 'G4.6 วัดความลื่น v3 · เกม ' + ver.replace('Lantern Academy ', '') + ' · ' +
+    const line = 'G4.6 วัดความลื่น v4 · เกม ' + ver.replace('Lantern Academy ', '') + ' · ' +
       rows.map((r) => r.sc.name.split(' ')[0] + ' ' + pct(r.ratio)).join(' · ') + ' → ' + WORD[verdict] + (reasons.length ? ' (' + reasons.map((x) => SAY[x]).join(' · ') + ')' : ' (เกณฑ์ ≥ 90 %)') +
       ' · fps เปิด/ปิด ' + rows.map((r) => r.fpsOn.toFixed(1) + '/' + r.fpsOff.toFixed(1)).join(' · ') +
       ' · งาน JS ms/เฟรม เปิด/ปิด ' + rows.map((r) => r.jsOn.toFixed(2) + '/' + r.jsOff.toFixed(2)).join(' · ') +
       ' · ตรวจ ' + rows.map((r) => (r.ok ? '✓' : '✗' + r.why)).join(' ') +
       ' · ไฟล์ ' + fl.asked + ' ขาด ' + lost.length + (lost.length ? ' [' + lost.slice(0, 8).join(' ') + (lost.length > 8 ? ' …' : '') + ']' : '') +
       ' ผิด ' + wrong.length + (wrong.length ? ' [' + wrong.slice(0, 8).join(' ') + (wrong.length > 8 ? ' …' : '') + ']' : '') + (fl.why ? ' [' + fl.why + ']' : '') +
+      ' · ภาพที่เกมถือ ' + (fl.images || 0) + ' ตรง ' + (fl.imagesEqual || 0) + ' · fetch ' + (fl.fetches || 0) +
       ' · ' + (dev.phone ? 'มือถือ' : 'ไม่ใช่มือถือ') + ' ' + dev.screen + ' · ' + dev.ua + (runs.err ? ' · error ' + runs.err : '');
-    window.__benchResult = { v: 3, verdict, verdictIfCounted, pass: verdict === 'pass', reasons, device: dev, files: fl, build: BUILD && { version: BUILD.version, files: BUILD.files.length },
+    window.__benchResult = { v: 4, verdict, verdictIfCounted, pass: verdict === 'pass', reasons, device: dev, files: fl, build: BUILD && { version: BUILD.version, files: BUILD.files.length },
       rows: rows.map((r) => ({ id: r.sc.id, ratio: r.ratio, pairs: r.pairs, ok: r.ok, why: r.why, cut: r.cut, shaky: r.shaky, fpsOn: r.fpsOn, fpsOff: r.fpsOff, jsOn: r.jsOn, jsOff: r.jsOff, draws: r.draws, shadow: r.shadow })), runs, line };
     const td = 'padding:4px 8px', tr = rows.map((r) => '<tr><td style="' + td + '">' + r.sc.name + '</td><td style="' + td + ';text-align:right">' + r.fpsOn.toFixed(1) + '</td><td style="' + td + ';text-align:right">' + r.fpsOff.toFixed(1) +
       '</td><td style="' + td + ';text-align:right;font-weight:700">' + pct(r.ratio) + '</td><td style="' + td + ';text-align:right">' + r.jsOn.toFixed(2) + ' / ' + r.jsOff.toFixed(2) + '</td><td style="' + td + '">' + (r.ok ? '✓' : '✗ ' + r.why) + (r.cut ? ' · สะดุด' : '') + (r.shaky ? ' · แกว่ง' : '') + '</td></tr>').join('');
@@ -251,7 +304,7 @@
       (reasons.includes('interrupted') || reasons.includes('unstable') ? ' → กด "วัดอีกครั้ง" แล้ววางมือถือนิ่ง ๆ' : reasons.includes('device') ? ' → เปิดลิงก์นี้ในมือถือแล้ววัดใหม่' : ' → ส่งข้อความด้านล่างให้ Claude') + '</p>' : '';
     const b = panel('<h2 style="margin:0 0 8px;font-size:20px">ผล: ' + head + '</h2>' + tell +
       '<div style="overflow-x:auto"><table style="border-collapse:collapse;width:100%;font-size:15px"><tr style="color:#d8c8a0"><th style="text-align:left;' + td + '">ฉาก</th><th style="' + td + '">fps เปิด</th><th style="' + td + '">fps ปิด</th><th style="' + td + '">เปิด ÷ ปิด</th><th style="' + td + '">งาน JS ms เปิด / ปิด</th><th style="' + td + '">ตรวจ</th></tr>' + tr + '</table></div>' +
-      '<p style="margin:8px 0 0;color:#d8c8a0;font-size:14px">ไฟล์เกมที่หน้าเรียก ' + fl.asked + ' ไฟล์ · ขาด ' + lost.length + ' · ไม่ตรง ' + wrong.length + ' · ' + (dev.phone ? 'มือถือ' : 'ไม่ใช่มือถือ') + ' ' + esc(dev.screen) + '</p>' +
+      '<p style="margin:8px 0 0;color:#d8c8a0;font-size:14px">ไฟล์เกมที่หน้าเรียก ' + fl.asked + ' ไฟล์ · ขาด ' + lost.length + ' · ไม่ตรง ' + wrong.length + ' · ภาพที่เกมถือ ' + (fl.images || 0) + ' ตรง ' + (fl.imagesEqual || 0) + ' · ' + (dev.phone ? 'มือถือ' : 'ไม่ใช่มือถือ') + ' ' + esc(dev.screen) + '</p>' +
       '<p style="margin:10px 0 4px">กด "คัดลอกผล" แล้วส่งข้อความนี้กลับมาให้ Claude:</p><textarea readonly style="width:100%;min-height:110px;box-sizing:border-box;background:#120d20;color:#f4ecd8;border:1px solid #6b5a8a;border-radius:8px;padding:8px;font-size:13px">' + esc(line) + '</textarea>');
     const row = el('div'), msg = el('span', 'margin-left:6px;color:#8fd18f');
     row.appendChild(btn('คัดลอกผล', () => { const ta = b.querySelector('textarea'); const done = () => { msg.textContent = 'คัดลอกแล้ว'; };
