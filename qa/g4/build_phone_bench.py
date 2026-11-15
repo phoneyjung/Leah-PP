@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """G4.6 (plan G4_0 §9 · D-G4-7 "ค"): build the private test copy of the game that measures smoothness on the owner's real phone.
-Version 4.
+Version 5 (the page is put together as in v4; the two scripts it adds are v5).
 
   python3 qa/g4/build_phone_bench.py <game dir (a checkout of the branch)> <out dir>
 
@@ -10,7 +10,7 @@ Version 4.
   2. <title> → "LA วัดความลื่น" (the artifact's name)
   3. <script src="firebase-config.js"></script> removed: the copy never goes online (no real database, no other players)
   4. one inline <script> put right after the title, before every script of the game: window.__benchBuild (the game version and the copy's file list with each file's size and
-     SHA-256) + qa/g4/phone_bench_prelude.js, the load record (v4): it keeps what the game itself received — it changes no request
+     SHA-256) + qa/g4/phone_bench_prelude.js, the load record (v4 · v5 adds the time each load starts and ends): it keeps what the game itself received — it changes no request
      and no answer, except that a <script src> of the copy gets its integrity="sha256-…"
   5. one inline <script> appended at the end: qa/g4/phone_bench.js
 <out>/files.json = {published path: source path} for every file of the copy · <out>/files.N.json = the same in parts of at most 250

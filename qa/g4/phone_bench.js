@@ -1,4 +1,4 @@
-// G4.6 (plan G4_0 §9 G4.6 · D-G4-7 "ค"): smoothness of character v2 on the owner's REAL phone, once, before "รับ G4". Version 4.
+// G4.6 (plan G4_0 §9 G4.6 · D-G4-7 "ค"): smoothness of character v2 on the owner's REAL phone, once, before "รับ G4". Version 5.
 // Added only to the private test copy of the game (built by qa/g4/build_phone_bench.py); the game in the repo never loads it.
 // One button: a synthetic save of its own (this copy has its own storage — no real save is read or written, nothing goes online),
 // then 3 fixed scenes of M6 (qa/g4/m6-scenes.json: town · farm · dark cave mouth with the lantern), the kid walking back and forth
@@ -19,8 +19,13 @@
 //                  the load record that runs before the game (phone_bench_prelude.js):
 //                    · every file asked for is read once more and its SHA-256 must be the build's — this is only the reference
 //                    · every image the game loaded: the very element is compared, pixel by pixel, with a decode of that
-//                      reference on this device (same size, every pixel equal)
-//                    · every fetch the game made: the bytes the game got are hashed — they must be the build's
+//                      reference on this device (same size, every pixel equal); v5: every image load the game started must
+//                      have ended with "load" (one that failed and was replaced by a built-in picture left a fine element
+//                      behind), and an element that was given two files cannot be compared, so such a run does not count
+//                    · every fetch the game made: the bytes the game got are hashed — they must be the build's; a GET must have
+//                      been answered 2xx with a body (v5: v4 skipped any fetch without a body as if it were a HEAD)
+//                    · v5: before the game is started, before each scene and before each run the bench waits until every load
+//                      of the copy has ended (a slow file is waited for, up to a limit; one that never ends makes the run not count)
 //                    · char2.js runs under integrity="sha256-…" — the browser itself refuses any other bytes, and a refused
 //                      script makes the run not count
 //                    · the size the page received (resource log) must be the build's; an image of the game's first table that
@@ -29,7 +34,11 @@
 //                  Not covered (said plainly): pictures the page shows through CSS (frames of the HUD, backgrounds of screens
 //                  that are hidden while measuring) and the bytes the game's hunting-map worker reads again — for those only the
 //                  size and the reference hash; none is drawn on the game canvas in the three scenes
-//     interrupted  a run had a frame gap > 300 ms, the page was hidden, or fewer than 10 frames per second
+//     scene        the game is showing a stand-in for a scene (v5): a file of the scene did not arrive, so the map was built the
+//                  old way — a different, far lighter scene (Codex T49-N1: g9b-scene.json answered 304 with no body, the farm
+//                  fell back to its old map, 17 draw commands a frame instead of 250, and v4 said "ผ่าน")
+//     interrupted  a run had a frame gap > 300 ms, the page was hidden, fewer than 10 frames per second, or (v5) a file of the
+//                  copy was still loading or began to load inside the measured 5 seconds
 //     unstable     the 3 paired ratios of a scene differ by more than 0.15, or the scene's ratio is above 1.10
 // Checks per run (so a frozen or empty screen cannot pass): the right map, the kid walked, and — v3 — what was really DRAWN, counted
 // at the draw itself (v2 passed with the lantern not drawn and with the old character not drawn at all, Codex T47-N1 N2):
@@ -45,7 +54,8 @@
 //         draws must be ≥ 50 % of the draws · lit scene = held in none
 //   lantern, OFF: the old drawing uses the game's own condition (dark map and a little kid) directly; the bench reads that
 //         condition only as the state of the scene, not as proof of a drawing
-//   the scene, both ways (medians of the 3 runs): draw commands per frame on the main canvas, ON ≥ 80 % of OFF (as M6's fps.js) ·
+//   the scene, both ways (medians of the 3 runs): things drawn per frame on the main canvas, ON ≥ 80 % of OFF (as M6's fps.js; v5
+//         counts things, not commands — up to v4 the farm's wind moved this number by itself, see hook()) ·
 //         the player's shadow on the same share of frames (ON: the 14 × 3 ellipse commands of the new shadow, OFF: the old shadow
 //         sheet blitted) · LITE off, eco off, fpsChecks 6 still so at the end of every run (the game may not change its own graphics mode)
 // Report only (no gate): JS work per frame (ms inside the page's animation-frame callbacks) ON / OFF — it still shows the cost when
@@ -54,10 +64,13 @@
 (function () {
   'use strict';
   const SCENES = [
-    { id: 'S1', name: 'เมือง', map: 'capital', go: [5, 0], dark: false },
-    { id: 'S2', name: 'ฟาร์ม', map: 'farm', go: [0, 4], dark: false },
-    { id: 'S3', name: 'ปากถ้ำ (มืด · ถือตะเกียง)', map: 'cavemouth', go: [4, 0], dark: true },
+    { id: 'S1', name: 'เมือง', map: 'capital', go: [5, 0], dark: false, painted: 'mapCapA', w: 48, h: 32 },
+    { id: 'S2', name: 'ฟาร์ม', map: 'farm', go: [0, 4], dark: false, painted: 'mapG9b', w: 60, h: 40 },
+    { id: 'S3', name: 'ปากถ้ำ (มืด · ถือตะเกียง)', map: 'cavemouth', go: [4, 0], dark: true, painted: 'mapCaveMouth', w: 48, h: 32 },
   ];
+  // The real scene, not one of the game's stand-ins (v5). Each of these maps is built by a chain of "if the file is not there, use the
+  // older map" steps; the real one is the painted map named here, of this size in tiles, and its picture is that size × 32 px.
+  const realScene = (sc) => { try { const im = IMG[M.painted]; return M.id === sc.map && M.painted === sc.painted && M.w === sc.w && M.h === sc.h && !!im && (im.naturalWidth || im.width) === sc.w * 32 && (im.naturalHeight || im.height) === sc.h * 32; } catch (e) { return false; } };
   const BUILD = window.__benchBuild || null, LOADS = window.__benchLoads || null, TEST = window.__benchTest || null;
   const SHORT = !!TEST || new URLSearchParams(location.search).has('short');
   const SETTLE = TEST ? TEST.settle : SHORT ? 400 : 1500, MEAS = TEST ? TEST.meas : SHORT ? 1200 : 5000;
@@ -69,12 +82,19 @@
   const raf0 = window.requestAnimationFrame.bind(window), JS = { t: 0 };
   window.requestAnimationFrame = (f) => raf0((t) => { const a = performance.now(); try { return f(t); } finally { JS.t += performance.now() - a; } });
   // What is really drawn (v3). EV counts per player draw; measure() takes the difference over a run.
-  const EV = { calls: 0, cmd: 0, newD: 0, oldD: 0, heldCfg: 0, vis: 0, heldCmd: 0, all: 0, oldSh: 0, newSh: 0 };
+  const EV = { calls: 0, cmd: 0, newD: 0, oldD: 0, heldCfg: 0, vis: 0, heldCmd: 0, all: 0, things: 0, oldSh: 0, newSh: 0 };
   let hooked = null;
   function hook() {
     if (hooked) return;   // once: a wrapper put around drawPlayer later stays outside this one, and is seen as draws that never arrive here
     const draw0 = Object.getPrototypeOf(ctx).drawImage; let inP = 0, n = 0, old = false, thin = false;
-    ctx.drawImage = function (img) { EV.all++; if (inP) { if (!n) thin = this.globalAlpha < 1; n++; if (img === PS.walk || img === PS.stand) old = true; } else if (img === PS.shS || img === PS.shW) EV.oldSh++;
+    // v5: things, not commands. The farm draws a plant with 1 command when the air is still and with 1 command per 3 px of height
+    // when it leans in the wind (g9bSway), so commands per frame go from 150 to 330 with the gusts — nothing to do with the
+    // character. A command that goes on with the next rows of the same source picture (same image, same sx and sw, sy where the
+    // last one ended) belongs to the thing before it.
+    let ti = null, tx = 0, tw = 0, te = 0;
+    ctx.drawImage = function (img, sx, sy, sw, sh) { EV.all++;
+      if (arguments.length >= 9) { if (!(img === ti && sx === tx && sw === tw && sy === te)) EV.things++; ti = img; tx = sx; tw = sw; te = sy + sh; } else { EV.things++; ti = null; }
+      if (inP) { if (!n) thin = this.globalAlpha < 1; n++; if (img === PS.walk || img === PS.stand) old = true; } else if (img === PS.shS || img === PS.shW) EV.oldSh++;
       return draw0.apply(this, arguments); };
     const ell0 = Object.getPrototypeOf(ctx).ellipse;   // the new character's shadow is the only 14 × 3 ellipse (c234Shadow, W3): the command itself is counted
     ctx.ellipse = function (x, y, rx, ry) { if (rx === 14 && ry === 3) EV.newSh++; return ell0.apply(this, arguments); };
@@ -87,6 +107,16 @@
     hooked = ctx;
   }
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  // Loads of the copy (v5). A HEAD is the game's ping, not a file it uses; sw.js is left out of the copy on purpose.
+  const ABSENT = new Set((BUILD && BUILD.absent) || []);
+  const loads = () => (LOADS && LOADS.time ? LOADS.time.filter((x) => x.rel && !ABSENT.has(x.rel) && x.method !== 'HEAD') : []);
+  const STUCK = [], WAIT = { ms: 0 };
+  // wait until nothing of the copy is loading and nothing has started for 300 ms; false (and the names kept) when the limit passes
+  async function quiet(limit) { const t0 = performance.now();
+    for (;;) { const all = loads(), pend = all.filter((x) => !x.t1), last = all.reduce((m, x) => Math.max(m, x.t0, x.t1), 0);
+      if (!pend.length && performance.now() - last > 300) { WAIT.ms += performance.now() - t0; return true; }
+      if (performance.now() - t0 > limit) { WAIT.ms += performance.now() - t0; for (const x of pend) if (!STUCK.includes(x.rel)) STUCK.push(x.rel); return false; }
+      await sleep(100); } }
   const med = (a) => { const s = [...a].sort((x, y) => x - y); return s.length % 2 ? s[(s.length - 1) / 2] : (s[s.length / 2 - 1] + s[s.length / 2]) / 2; };
   const el = (tag, css, html) => { const e = document.createElement(tag); if (css) e.style.cssText = css; if (html !== undefined) e.innerHTML = html; return e; };
   const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
@@ -157,16 +187,17 @@
     await Promise.all([one(), one(), one(), one()]);
     fl.hashed = hashed; if (unread) fl.why = 'cannot read ' + unread + ' files back';
     // the game's own fetches: the bytes it got
-    let teed = 0;
+    let teed = 0, heads = 0; const rec0 = LOADS.img.length;
     for (const g of gets) { if (absent.has(g.rel) || !g.rel) continue;
       if (!have.has(g.rel)) { if (!fl.missing.includes(g.rel)) fl.missing.push(g.rel); continue; }
-      if (g.status >= 400 || !g.status) { if (!fl.failed.includes(g.rel)) fl.failed.push(g.rel); continue; }
-      if (!g.body) continue;   // a HEAD
+      if (g.method === 'HEAD') { if (!g.t1) continue; if (g.ok) heads++; else if (!fl.failed.includes(g.rel)) fl.failed.push(g.rel); continue; }   // the game's ping (every 15 s; one may be on its way right now): answered, nothing to hash
+      if (!g.ok || !g.body) { if (!fl.failed.includes(g.rel)) fl.failed.push(g.rel); continue; }   // a GET the game did not get: 4xx, 5xx, a bare 304, a network error — the game went on without that file
       try { const buf = await g.body, m = BUILD.meta[g.rel]; teed++; if (buf.byteLength !== m[0] || await sha(buf) !== m[1]) bad(g.rel); } catch (e) { fl.why = fl.why || 'cannot read what a fetch of the game received'; } }
-    fl.fetches = teed;
+    fl.fetches = teed; fl.heads = heads;
     // the game's own images: the elements themselves against a decode of the reference
     const T = 1024, mk = () => { const c = document.createElement('canvas'); c.width = c.height = T; const g = c.getContext('2d', { willReadFrequently: true }); g.globalCompositeOperation = 'copy'; g.imageSmoothingEnabled = false; return g; };
-    const ga = mk(), gb = mk(), setSrc = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, 'src').set;
+    const ga = mk(), gb = mk(), setSrc = LOADS.imgSrc0;   // the original setter: the reference images are the bench's own and are not put in the load record (T49-N2)
+    if (typeof setSrc !== 'function') { fl.why = 'no load record'; fl.ok = false; return fl; }
     const same = (a, b) => { const w = a.naturalWidth, h = a.naturalHeight; if (!w || w !== b.naturalWidth || h !== b.naturalHeight) return false;
       for (let y = 0; y < h; y += T) for (let x = 0; x < w; x += T) { const tw = Math.min(T, w - x), th = Math.min(T, h - y);
         ga.clearRect(0, 0, T, T); gb.clearRect(0, 0, T, T); ga.drawImage(a, x, y, tw, th, 0, 0, tw, th); gb.drawImage(b, x, y, tw, th, 0, 0, tw, th);
@@ -182,11 +213,21 @@
       if (!ref[rel]) continue;   // the reference itself is wrong or unread: already counted
       const im = new Image(), u = URL.createObjectURL(new Blob([ref[rel]]));
       try { setSrc.call(im, u); await im.decode(); if (same(el, im)) eq++; else bad(rel); } catch (e) { bad(rel); }
-      URL.revokeObjectURL(u); }
-    fl.images = seenImg; fl.imagesEqual = eq;
+      URL.revokeObjectURL(u); try { setSrc.call(im, ''); } catch (e) {} }
+    fl.images = seenImg; fl.imagesEqual = eq; fl.record = [rec0, LOADS.img.length];   // the load record before and after the check: the same
+    // v5: every image load the game started for a file of the copy must have ended with "load" — one that ended with "error" (the
+    // game then goes on without the picture, or with another one) or never ended is a file the game did not get. And an element
+    // that was given two different files shows only the last one, so the first cannot be compared: such a run cannot be checked.
+    const els = new Map(); let imgErr = 0;
+    for (const x of LOADS.time) { if (x.kind !== 'img' || !x.rel || absent.has(x.rel)) continue;
+      if (x.end !== 'load') { imgErr++; if (have.has(x.rel) && !fl.failed.includes(x.rel)) fl.failed.push(x.rel); }
+      const set = els.get(x.el) || new Set(); set.add(x.rel); els.set(x.el, set); }
+    fl.imageLoads = [...els.values()].reduce((n, x) => n + x.size, 0); fl.imageErrors = imgErr; fl.reused = [...els.values()].filter((x) => x.size > 1).length;
+    if (fl.reused) fl.why = fl.why || 'an image of the game was given more than one file';
     // the game's own scripts: run only under the build's integrity; one the browser refused (or that never loaded) is not the build's file
     fl.scripts = LOADS.script.filter((x) => x.rel && !absent.has(x.rel)).map((x) => ({ rel: x.rel, guarded: x.guarded && !!x.el.integrity, state: x.state }));
     for (const x of fl.scripts) { if (!have.has(x.rel)) { if (!fl.missing.includes(x.rel)) fl.missing.push(x.rel); } else if (!x.guarded || x.state !== 'loaded') bad(x.rel); }
+    for (const rel of STUCK) if (!fl.failed.includes(rel)) fl.failed.push(rel);   // never finished loading
     fl.ms = Math.round(performance.now() - t0);
     fl.ok = !fl.why && !fl.missing.length && !fl.failed.length && !fl.wrong.length; return fl;
   }
@@ -203,17 +244,20 @@
     return C234.st;
   }
   function pin() { try { LITE = false; fpsChecks = 6; S.eco = false; } catch (e) {} }
-  function measure(ms) {
-    return new Promise((r) => { let n = 0, gap = 0, lastT = 0, hid = document.hidden; const b0 = C234.n.body, w0 = window.__bw, j0 = JS.t, e0 = Object.assign({}, EV), g0 = [C234.n.shadow || 0, C234.n.hole || 0], t0 = performance.now(), held0 = [], sts = [];
+  function measure(ms, sc) {
+    return new Promise((r) => { let n = 0, gap = 0, lastT = 0, hid = document.hidden, real0 = false; const b0 = C234.n.body, w0 = window.__bw, j0 = JS.t, e0 = Object.assign({}, EV), g0 = [C234.n.shadow || 0, C234.n.hole || 0], t0 = performance.now(), held0 = [], sts = [];
       const onv = () => { if (document.hidden) hid = true; }; document.addEventListener('visibilitychange', onv);
       const f = () => { const now = performance.now(); if (lastT) gap = Math.max(gap, now - lastT); lastT = now; n++;
+        if (n === 1) real0 = sc ? realScene(sc) : true;
         if (n % 10 === 0) { held0.push(!!(DARK() && LKID())); if (!sts.includes(C234.st)) sts.push(C234.st); }
         if (now - t0 < ms) raf0(f);
         else { document.removeEventListener('visibilitychange', onv); const dt = (now - t0) / 1000; if (!sts.includes(C234.st)) sts.push(C234.st);
           const ev = {}; for (const k in EV) ev[k] = EV[k] - e0[k];
           ev.shadow = (C234.n.shadow || 0) - g0[0]; ev.hole = (C234.n.hole || 0) - g0[1];   // the game's own counters at the new shadow and at the lantern's light hole
           let pins = false; try { pins = LITE === false && !S.eco && fpsChecks === 6; } catch (e) {}
-          r({ fps: n / dt, frames: n, gap: Math.round(gap), hidden: hid, js: (JS.t - j0) / n, body: C234.n.body - b0, ev, pins, walked: Math.round(window.__bw - w0), map: M && M.id, st: C234.st, sts,
+          // v5: the real scene at the first and at the last frame · files of the copy that were loading inside this window
+          const real = real0 && (sc ? realScene(sc) : true), busy = [...new Set(loads().filter((x) => (x.t0 >= t0 && x.t0 <= now) || (x.t0 < t0 && (!x.t1 || x.t1 >= t0))).map((x) => x.rel))];
+          r({ fps: n / dt, frames: n, gap: Math.round(gap), hidden: hid, js: (JS.t - j0) / n, body: C234.n.body - b0, ev, pins, real, busy, walked: Math.round(window.__bw - w0), map: M && M.id, st: C234.st, sts,
             held: held0.length ? held0.every(Boolean) : !!(DARK() && LKID()), heldAny: held0.some(Boolean) }); } };
       raf0(f); });
   }
@@ -222,24 +266,26 @@
     const runs = [];
     try {
       const d = Store.all(); d.slots = [Object.assign(newSave({ name: 'ทดสอบ', kid: 0, house: 1, age: 7 }), { gender194: 'f', hc: 3, char2On: false })]; d.cur = 0; Store.put(d);
-      S = d.slots[0]; S.seen = { intro: 1 }; S.snd = S.mus = false; startGame();
+      showPill('รอให้เกมโหลดไฟล์ครบ…'); await quiet(SHORT ? 20000 : 45000);   // before the game builds anything: a slow file is waited for
+      S = d.slots[0]; S.seen = { intro: 1 }; S.snd = S.mus = false; startGame(); await quiet(SHORT ? 20000 : 45000);
       document.querySelectorAll('#cr,#title,#picker').forEach((e) => e.classList.add('hide')); DLG = null; try { closeModal(); } catch (e) {}
       hook();
       for (let si = 0; si < SCENES.length; si++) {
         const sc = SCENES[si]; showPill('ฉาก ' + (si + 1) + '/3 ' + sc.name + ' · เตรียม…');
-        goMap(sc.map); P.path = P.act = null; DLG = null; try { closeModal(); } catch (e) {} pin();
+        await quiet(20000);   // the map is built from what has arrived (when a file of a scene arrives late the game itself drops the map it had built without it)
+        goMap(sc.map); P.path = P.act = null; DLG = null; try { closeModal(); } catch (e) {} pin(); await sleep(200); await quiet(20000);
         const a = [P.x, P.y], b = [P.x + sc.go[0] * T, P.y + sc.go[1] * T]; let k = 0, lx = P.x, ly = P.y; window.__bw = 0; clearInterval(window.__bwk);
         window.__bwk = setInterval(() => { if (!P.path || !P.path.length) { k ^= 1; const g = k ? b : a; P.path = findPath(M, P.x, P.y, g[0], g[1]) || [[g[0], g[1]]]; }
           window.__bw += Math.hypot(P.x - lx, P.y - ly); lx = P.x; ly = P.y; }, 100);
         for (let pi = 0; pi < PAIRS; pi++) for (const on of (pi % 2 ? [false, true] : [true, false])) {
           showPill('ฉาก ' + (si + 1) + '/3 ' + sc.name + ' · คู่ ' + (pi + 1) + '/3 · ตัวใหม่ ' + (on ? 'เปิด' : 'ปิด') + ' · อย่าแตะจอ');
-          const st = await setFlag(on); pin(); DLG = null; await sleep(SETTLE); pin();
-          const m = await measure(MEAS); m.scene = sc.id; m.on = on; m.pair = pi; m.stSet = st; runs.push(m);
+          const st = await setFlag(on); pin(); DLG = null; await sleep(SETTLE); await quiet(10000); pin();
+          const m = await measure(MEAS, sc); m.scene = sc.id; m.on = on; m.pair = pi; m.stSet = st; runs.push(m);
         }
         clearInterval(window.__bwk);
       }
     } catch (e) { runs.err = String(e && e.message || e).slice(0, 200); }
-    showPill('กำลังตรวจไฟล์และภาพของเกม… อีกสักครู่ อย่าเพิ่งปิดหน้า'); let fl = files();
+    showPill('กำลังตรวจไฟล์และภาพของเกม… อีกสักครู่ อย่าเพิ่งปิดหน้า'); await quiet(10000); let fl = files();   // a load still on its way is let to end first
     try { fl = await verify(fl); } catch (e) { fl.why = fl.why || 'the check of the files stopped: ' + String(e && e.message || e).slice(0, 80); fl.ok = false; }
     try { if (lock) lock.release(); } catch (e) {}
     if (pill) show(pill, false); report(runs, fl);
@@ -253,20 +299,22 @@
       const drewNew = (r) => r.body >= 0.8 * r.frames && r.ev.newD >= 0.8 * r.frames && r.ev.oldD === 0;   // ON: the new character really drawn, the old sheet never
       const drewOld = (r) => r.body === 0 && r.ev.newD === 0 && r.ev.oldD >= 0.8 * r.frames;             // OFF: the old sheet really blitted
       const lamp = (r) => sc.dark ? r.ev.heldCfg === r.ev.newD && r.ev.newD > 0 && r.ev.vis >= 0.5 * r.ev.newD && r.ev.heldCmd === r.ev.vis : r.ev.heldCfg === 0;   // ON: what the renderer was given and what it drew
-      // the scene around the player, both ways (medians of the 3 runs): draw commands per frame on the main canvas (as M6's fps.js:
+      // the scene around the player, both ways (medians of the 3 runs): things drawn per frame on the main canvas (as M6's fps.js:
       // ON ≥ 80 % of OFF) · the player's shadow (ON: the new shadow's ellipse commands · OFF: the old shadow sheet blitted)
       const per = (a, f) => a.length ? med(a.map((r) => f(r) / r.frames)) : 0;
       const drawsOn = per(on, (r) => r.ev.all), drawsOff = per(off, (r) => r.ev.all), shOn = per(on, (r) => r.ev.newSh), shOff = per(off, (r) => r.ev.oldSh);
-      const full = drawsOn >= 0.8 * drawsOff && drawsOff > 0, shade = Math.abs(shOn - shOff) <= 0.2, pinned = rs.every((r) => r.pins);
-      const ok = rs.length === 6 && pinned && rs.every((r) => r.map === sc.map && r.walked > 20 && scene(r)) &&
+      const thingsOn = per(on, (r) => r.ev.things), thingsOff = per(off, (r) => r.ev.things);   // v5: the check is on things; commands are only reported
+      const full = thingsOn >= 0.8 * thingsOff && thingsOff > 0, shade = Math.abs(shOn - shOff) <= 0.2, pinned = rs.every((r) => r.pins);
+      const cut = rs.some((r) => r.gap > GAP_MS || r.hidden || r.fps < MIN_FPS || r.busy.length > 0);   // v5: … or a file of the copy was loading inside a measured window
+      const standin = rs.some((r) => !r.real);                                                           // v5: not the real scene (see realScene)
+      const ok = rs.length === 6 && !standin && pinned && rs.every((r) => r.map === sc.map && r.walked > 20 && scene(r)) &&
         on.every((r) => only(r, 'ready') && drewNew(r) && lamp(r)) && off.every((r) => only(r, 'off') && drewOld(r)) && full && shade;
       const ratio = pairs.length === 3 ? med(pairs) : null;
-      const cut = rs.some((r) => r.gap > GAP_MS || r.hidden || r.fps < MIN_FPS);
       const shaky = pairs.length === 3 && (Math.max(...pairs) - Math.min(...pairs) > SPREAD || ratio > RATIO_MAX);
-      return { sc, ratio, pairs, ok, cut, shaky, fpsOn: on.length ? med(on.map((r) => r.fps)) : 0, fpsOff: off.length ? med(off.map((r) => r.fps)) : 0,
+      return { sc, ratio, pairs, ok, cut, shaky, standin, fpsOn: on.length ? med(on.map((r) => r.fps)) : 0, fpsOff: off.length ? med(off.map((r) => r.fps)) : 0,
         jsOn: on.length ? med(on.map((r) => r.js)) : 0, jsOff: off.length ? med(off.map((r) => r.js)) : 0,
-        draws: [drawsOn, drawsOff], shadow: [shOn, shOff],
-        why: !rs.length ? 'ไม่ได้วัด' : rs.length !== 6 ? 'วัดไม่ครบ' : !pinned ? 'เกมเปลี่ยนโหมดกราฟิกเอง' : rs.some((r) => r.map !== sc.map) ? 'แผนที่ผิด' : rs.some((r) => r.walked <= 20) ? 'ตัวไม่เดิน' : on.some((r) => !only(r, 'ready')) ? 'ตัวใหม่ไม่พร้อม' :
+        draws: [drawsOn, drawsOff], things: [thingsOn, thingsOff], shadow: [shOn, shOff],
+        why: !rs.length ? 'ไม่ได้วัด' : rs.length !== 6 ? 'วัดไม่ครบ' : !pinned ? 'เกมเปลี่ยนโหมดกราฟิกเอง' : rs.some((r) => r.map !== sc.map) ? 'แผนที่ผิด' : standin ? 'ฉากสำรอง' : rs.some((r) => r.walked <= 20) ? 'ตัวไม่เดิน' : on.some((r) => !only(r, 'ready')) ? 'ตัวใหม่ไม่พร้อม' :
           on.some((r) => !drewNew(r)) ? 'ตัวใหม่วาดไม่ครบ' : off.some((r) => r.body || r.ev.newD || !only(r, 'off')) ? 'ปิดแล้วยังวาดตัวใหม่' : off.some((r) => !drewOld(r)) ? 'ตัวเดิมไม่ถูกวาด' :
           rs.some((r) => !scene(r)) ? 'ตะเกียงไม่ตรง' : on.some((r) => !lamp(r)) ? (sc.dark ? 'ตะเกียงไม่ถูกวาด' : 'วาดตะเกียงในที่สว่าง') : !shade ? 'เงาไม่ตรง' : !full ? 'ฉากวาดไม่ครบตอนเปิด' : '' };
     });
@@ -276,6 +324,7 @@
     if (!dev.phone) reasons.push('device');
     if (!BUILD || BUILD.version !== ver) reasons.push('build');
     if (!fl.ok) reasons.push('files');
+    if (rows.some((r) => r.standin)) reasons.push('scene');
     if (rows.some((r) => r.cut)) reasons.push('interrupted');
     if (rows.some((r) => r.shaky)) reasons.push('unstable');
     const good = !runs.err && rows.every((r) => r.ok && r.ratio !== null && r.ratio >= GATE);
@@ -283,20 +332,22 @@
     const verdictIfCounted = counted.length ? 'void' : good ? 'pass' : 'fail', verdict = reasons.length ? 'void' : good ? 'pass' : 'fail';
     const WORD = { pass: 'ผ่าน', fail: 'ไม่ผ่าน', void: 'ไม่นับ' };
     const SAY = { mode: 'รอบสั้นสำหรับทดสอบ', device: 'เครื่องนี้ไม่ใช่มือถือ', build: 'สำเนาไม่ตรงรุ่นเกม',
-      files: fl.why ? 'ตรวจไฟล์เกมไม่ได้' : 'ไฟล์เกมไม่ครบหรือไม่ตรง ' + (fl.missing.length + fl.failed.length + fl.wrong.length) + ' ไฟล์', interrupted: 'ระหว่างวัดมีการสะดุดหรือสลับแอป', unstable: 'ผลแต่ละรอบต่างกันมากเกินไป' };
+      files: fl.why ? 'ตรวจไฟล์เกมไม่ได้' : 'ไฟล์เกมไม่ครบหรือไม่ตรง ' + (fl.missing.length + fl.failed.length + fl.wrong.length) + ' ไฟล์', interrupted: 'ระหว่างวัดมีการสะดุด สลับแอป หรือยังโหลดไฟล์อยู่', unstable: 'ผลแต่ละรอบต่างกันมากเกินไป', scene: 'เกมใช้ฉากสำรอง (ไฟล์ของฉากมาไม่ครบ)' };
     const pct = (x) => (x === null ? '–' : Math.round(x * 100) + ' %');
-    const lost = fl.missing.concat(fl.failed), wrong = fl.wrong;
-    const line = 'G4.6 วัดความลื่น v4 · เกม ' + ver.replace('Lantern Academy ', '') + ' · ' +
+    const lost = fl.missing.concat(fl.failed), wrong = fl.wrong, busy = [...new Set([].concat(...runs.map((r) => r.busy || [])))];
+    const line = 'G4.6 วัดความลื่น v5 · เกม ' + ver.replace('Lantern Academy ', '') + ' · ' +
       rows.map((r) => r.sc.name.split(' ')[0] + ' ' + pct(r.ratio)).join(' · ') + ' → ' + WORD[verdict] + (reasons.length ? ' (' + reasons.map((x) => SAY[x]).join(' · ') + ')' : ' (เกณฑ์ ≥ 90 %)') +
       ' · fps เปิด/ปิด ' + rows.map((r) => r.fpsOn.toFixed(1) + '/' + r.fpsOff.toFixed(1)).join(' · ') +
       ' · งาน JS ms/เฟรม เปิด/ปิด ' + rows.map((r) => r.jsOn.toFixed(2) + '/' + r.jsOff.toFixed(2)).join(' · ') +
+      ' · วาด/เฟรม เปิด/ปิด ' + rows.map((r) => Math.round(r.draws[0]) + '/' + Math.round(r.draws[1])).join(' · ') +
       ' · ตรวจ ' + rows.map((r) => (r.ok ? '✓' : '✗' + r.why)).join(' ') +
       ' · ไฟล์ ' + fl.asked + ' ขาด ' + lost.length + (lost.length ? ' [' + lost.slice(0, 8).join(' ') + (lost.length > 8 ? ' …' : '') + ']' : '') +
       ' ผิด ' + wrong.length + (wrong.length ? ' [' + wrong.slice(0, 8).join(' ') + (wrong.length > 8 ? ' …' : '') + ']' : '') + (fl.why ? ' [' + fl.why + ']' : '') +
-      ' · ภาพที่เกมถือ ' + (fl.images || 0) + ' ตรง ' + (fl.imagesEqual || 0) + ' · fetch ' + (fl.fetches || 0) +
+      ' · ภาพที่เกมถือ ' + (fl.images || 0) + ' ตรง ' + (fl.imagesEqual || 0) + ' · fetch ' + (fl.fetches || 0) + ' · รอโหลด ' + (WAIT.ms / 1000).toFixed(1) + ' วิ' +
+      (busy.length ? ' · โหลดระหว่างวัด [' + busy.slice(0, 6).join(' ') + (busy.length > 6 ? ' …' : '') + ']' : '') +
       ' · ' + (dev.phone ? 'มือถือ' : 'ไม่ใช่มือถือ') + ' ' + dev.screen + ' · ' + dev.ua + (runs.err ? ' · error ' + runs.err : '');
-    window.__benchResult = { v: 4, verdict, verdictIfCounted, pass: verdict === 'pass', reasons, device: dev, files: fl, build: BUILD && { version: BUILD.version, files: BUILD.files.length },
-      rows: rows.map((r) => ({ id: r.sc.id, ratio: r.ratio, pairs: r.pairs, ok: r.ok, why: r.why, cut: r.cut, shaky: r.shaky, fpsOn: r.fpsOn, fpsOff: r.fpsOff, jsOn: r.jsOn, jsOff: r.jsOff, draws: r.draws, shadow: r.shadow })), runs, line };
+    window.__benchResult = { v: 5, verdict, verdictIfCounted, pass: verdict === 'pass', reasons, waited: Math.round(WAIT.ms), device: dev, files: fl, build: BUILD && { version: BUILD.version, files: BUILD.files.length },
+      rows: rows.map((r) => ({ id: r.sc.id, ratio: r.ratio, pairs: r.pairs, ok: r.ok, why: r.why, cut: r.cut, shaky: r.shaky, standin: r.standin, fpsOn: r.fpsOn, fpsOff: r.fpsOff, jsOn: r.jsOn, jsOff: r.jsOff, draws: r.draws, things: r.things, shadow: r.shadow })), runs, line };
     const td = 'padding:4px 8px', tr = rows.map((r) => '<tr><td style="' + td + '">' + r.sc.name + '</td><td style="' + td + ';text-align:right">' + r.fpsOn.toFixed(1) + '</td><td style="' + td + ';text-align:right">' + r.fpsOff.toFixed(1) +
       '</td><td style="' + td + ';text-align:right;font-weight:700">' + pct(r.ratio) + '</td><td style="' + td + ';text-align:right">' + r.jsOn.toFixed(2) + ' / ' + r.jsOff.toFixed(2) + '</td><td style="' + td + '">' + (r.ok ? '✓' : '✗ ' + r.why) + (r.cut ? ' · สะดุด' : '') + (r.shaky ? ' · แกว่ง' : '') + '</td></tr>').join('');
     const head = verdict === 'pass' ? '<span style="color:#8fd18f">ผ่าน</span>' : verdict === 'fail' ? '<span style="color:#ff9a8a">ไม่ผ่าน</span>' : '<span style="color:#f0c869">ไม่นับ · ต้องวัดใหม่</span>';

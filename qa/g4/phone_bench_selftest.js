@@ -1,9 +1,10 @@
-// G4.6: self-test of the phone bench (qa/g4/phone_bench.js v4) — it must not say "ผ่าน" when the measurement cannot be trusted.
+// G4.6: self-test of the phone bench (qa/g4/phone_bench.js v5) — it must not say "ผ่าน" when the measurement cannot be trusted.
 //   node qa/g4/phone_bench_selftest.js <out dir of build_phone_bench.py> [results.json]      CASES=a,b  FULL=1  CHROME_EXE=…
 // Serves the built copy itself (page.html inside the same skeleton the artifact host adds + exactly the files of files.json; a case
 // can leave a file out or answer 200 with other bytes — the fault is at the server, no request is intercepted in the browser) and runs the bench in test timing
 // (window.__benchTest: settle 300 ms · count 1000 ms — such a run never counts; the self-test reads verdictIfCounted, the verdict the
-// same checks would give in a full-length run). FULL=1 adds one full-length run on an emulated phone, which must say "ผ่าน".
+// same checks would give in a full-length run). FULL=1 adds two full-length runs on an emulated phone: the normal one, which
+// must say "ผ่าน", and (v5) the farm's scene data answered 304 with no body, which must say "ไม่นับ" as the run's real verdict.
 // Exit 0 = every case as expected · 1 = a case is wrong · 2 = could not run.
 const http = require('http'), fs = require('fs'), path = require('path'), puppeteer = require('puppeteer');
 const dir = process.argv[2], outFile = process.argv[3];
@@ -20,16 +21,30 @@ const sameSize = (name) => { const b = Buffer.from(fs.readFileSync(MAP[name])); 
 const padded = (name) => { const b = Buffer.alloc(fs.statSync(MAP[name]).size); PNG1.copy(b); return b; };
 // the file with one piece of text replaced by another of the same length (it must be there exactly once)
 const alter = (name, from, to) => { const t = fs.readFileSync(MAP[name], 'latin1'); if (from.length !== to.length || t.split(from).length !== 2) throw Error('alter ' + name); return Buffer.from(t.replace(from, to), 'latin1'); };
-function serve(deny, swap, first, nostore) {
-  const served = {}, cc = nostore ? { 'cache-control': 'no-store' } : {};   // no-store: the browser keeps no copy, so a second read goes to the server again
+// first[name]: the FIRST GET of that file is answered with these bytes (200), or — { status: 304 } — with that status and no body
+// (Codex T49-N1: a bare 304, the browser has nothing to show for it); every later answer is the real file.
+// hold: GETs of these files are not answered until release() is called (a slow file, v5).
+// etag: every file is sent with an ETag and "Cache-Control: no-cache", and a request that brings the ETag back is answered 304 with
+// no body — the ordinary way a browser checks its own copy; the game then gets a full 200 answer from the browser (v5).
+function serve(deny, swap, first, nostore, hold, etag) {
+  const served = {}, cc = nostore ? { 'cache-control': 'no-store' } : etag ? { 'cache-control': 'no-cache' } : {}, waiting = [];   // no-store: the browser keeps no copy, so a second read goes to the server again
+  let open = false, n304 = 0;
   return new Promise((res) => { const s = http.createServer((q, r) => {
     const p = decodeURIComponent(new URL(q.url, 'http://x').pathname).slice(1) || 'index.html';
     if (p === 'index.html') { r.writeHead(200, { 'content-type': 'text/html; charset=utf-8' }); return r.end(q.method === 'HEAD' ? undefined : PAGE); }
     if (deny.includes(p) || !MAP[p]) { r.writeHead(404); return r.end(); }
-    if (first && first[p] && q.method === 'GET' && !served[p]) { served[p] = 1; r.writeHead(200, Object.assign({ 'content-type': TYPES[p.split('.').pop()] || 'application/octet-stream', 'content-length': first[p].length }, cc)); return r.end(first[p]); }
-    if (swap && swap[p]) { r.writeHead(200, { 'content-type': TYPES[p.split('.').pop()] || 'application/octet-stream', 'content-length': swap[p].length }); return r.end(q.method === 'HEAD' ? undefined : swap[p]); }
-    r.writeHead(200, Object.assign({ 'content-type': TYPES[p.split('.').pop()] || 'application/octet-stream', 'content-length': fs.statSync(MAP[p]).size }, cc));
-    if (q.method === 'HEAD') return r.end(); fs.createReadStream(MAP[p]).pipe(r); });
+    const type = TYPES[p.split('.').pop()] || 'application/octet-stream';
+    if (first && first[p] && q.method === 'GET' && !served[p]) { served[p] = 1;
+      if (!Buffer.isBuffer(first[p])) { r.writeHead(first[p].status, cc); return r.end(); }
+      r.writeHead(200, Object.assign({ 'content-type': type, 'content-length': first[p].length }, cc)); return r.end(first[p]); }
+    if (swap && swap[p]) { r.writeHead(200, { 'content-type': type, 'content-length': swap[p].length }); return r.end(q.method === 'HEAD' ? undefined : swap[p]); }
+    const tag = etag ? '"' + fs.statSync(MAP[p]).size + '-' + p.length + '"' : null;
+    if (tag && q.headers['if-none-match'] === tag) { n304++; r.writeHead(304, Object.assign({ etag: tag }, cc)); return r.end(); }
+    const send = () => { r.writeHead(200, Object.assign({ 'content-type': type, 'content-length': fs.statSync(MAP[p]).size }, cc, tag ? { etag: tag } : {}));
+      if (q.method === 'HEAD') return r.end(); fs.createReadStream(MAP[p]).pipe(r); };
+    if (hold && hold.includes(p) && q.method === 'GET' && !open) return waiting.push(send);
+    send(); });
+    s.release = () => { open = true; waiting.splice(0).forEach((f) => f()); }; s.n304 = () => n304;
     s.listen(0, '127.0.0.1', () => res(s)); });
 }
 // Faults put into the page (after it loaded, before "เริ่มวัด"). The bench's progress pill tells which run is on.
@@ -50,10 +65,24 @@ function fault(kind) {
   if (kind === 'lite') setInterval(() => { if (/ฉาก 2\/3/.test(txt())) LITE = true; }, 40);
   if (kind === 'fewdraws') { const t = setInterval(() => { if (!txt()) return; clearInterval(t); setTimeout(() => { let inp = 0, k = 0; const dp = drawPlayer, o = ctx.drawImage;
     drawPlayer = function () { inp++; try { return dp.apply(this, arguments); } finally { inp--; } };
-    ctx.drawImage = function () { if (!inp && c234Use() && (k++ % 2)) return; return o.apply(this, arguments); }; }, 150); }, 20); }
+    // every other THING of the scene (a plant drawn in rows in the wind is one thing: all of its rows go, or none)
+    let ti = null, tx = 0, tw = 0, te = 0, skip = false;
+    ctx.drawImage = function (img, sx, sy, sw, sh) { if (!inp && c234Use()) { const more = arguments.length >= 9 && img === ti && sx === tx && sw === tw && sy === te;
+        if (arguments.length >= 9) { ti = img; tx = sx; tw = sw; te = sy + sh; } else ti = null;
+        if (!more) skip = !!(k++ % 2); if (skip) return; }
+      return o.apply(this, arguments); }; }, 150); }, 20); }
   if (kind === 'stall') { let last = ''; setInterval(() => { const t = txt(); if (/^ฉาก 1\/3.*ตัวใหม่ ปิด/.test(t) && t !== last) { last = t; setTimeout(() => burn(900), 500); } }, 30); }
   if (kind === 'slowoff' || kind === 'slowon') { const re = kind === 'slowoff' ? /^ฉาก 2\/3.*ตัวใหม่ ปิด/ : /ตัวใหม่ เปิด/; let k = 0;
     const f = () => { if (re.test(txt()) && (kind === 'slowoff' || ++k % 3 === 0)) burn(kind === 'slowoff' ? 25 : 28); requestAnimationFrame(f); }; requestAnimationFrame(f); }   // slowon: every 3rd frame is late → 65–80 %
+  // v5: the farm's scene data is gone (every file is right, the game simply builds the farm the old way) · a file of the copy is
+  // loaded in the middle of a measured run · the game's own kind of ping (HEAD) — that one must change nothing
+  if (kind === 'standin') { G9B = null; delete CACHE.farm; }
+  if (kind === 'lateload') { let done = false; setInterval(() => { if (!done && /^ฉาก 1\/3.*คู่ 2\/3.*ตัวใหม่ เปิด/.test(txt())) { done = true; setTimeout(() => { new Image().src = 'kit-town.png?late=1'; }, 700); } }, 30); }
+  if (kind === 'headok') { fetch('manifest.json?ping=1', { method: 'HEAD', cache: 'no-store' }); fetch(new Request('c2-pack.json', { method: 'HEAD' })); }
+  // v5: a picture of the copy fails and the page puts a built-in picture in its place (what is left on the element is fine) ·
+  // one image element is given two files, one after the other (only the second can still be compared)
+  if (kind === 'imgerror') { const im = new Image(); im.onerror = () => { im.onerror = null; im.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=='; }; im.src = 'gm-c207-g2.png'; window.__keep = im; }
+  if (kind === 'imgreuse') { const im = new Image(); im.onload = () => { im.onload = null; im.src = 'gm-c207-g1.png'; }; im.src = 'gm-c207-g2.png'; window.__keep = im; }
   if (kind === 'hidden') { let h = false, done = false; Object.defineProperty(document, 'hidden', { get: () => h, configurable: true });
     setInterval(() => { if (!done && /^ฉาก 3\/3.*คู่ 2\/3/.test(txt())) { done = true; setTimeout(() => { h = true; document.dispatchEvent(new Event('visibilitychange')); setTimeout(() => { h = false; document.dispatchEvent(new Event('visibilitychange')); }, 100); }, 600); } }, 30); }
 }
@@ -67,7 +96,10 @@ const sameSet = (a, b) => a.length === b.length && a.every((x) => b.includes(x))
 const NOISE = ['unstable', 'interrupted'];
 const CASES = [
   { name: 'ok', want: [], verdict: 'pass', more: (r) => r.files.ok && r.files.asked >= 150 && r.files.hashed >= 150 && !r.files.wrong.length && r.device.phone &&
-      r.files.images >= 100 && r.files.imagesEqual === r.files.images && r.files.fetches >= 20 && r.files.scripts.some((x) => x.rel === 'char2.js' && x.guarded && x.state === 'loaded') &&   // what the game holds r.rows.every((x) => x.ok && !x.cut && !x.shaky && x.jsOn > 0 && x.jsOff > 0) &&
+      r.files.images >= 100 && r.files.imagesEqual === r.files.images && r.files.fetches >= 20 && r.files.scripts.some((x) => x.rel === 'char2.js' && x.guarded && x.state === 'loaded') &&   // what the game holds
+      r.rows.every((x) => x.ok && !x.cut && !x.shaky && !x.standin && x.jsOn > 0 && x.jsOff > 0) &&
+      r.files.imageLoads >= 100 && r.files.imageErrors === 0 && r.files.reused === 0 &&                                 // v5: every picture load ended well, no element was given two files
+      r.runs.every((x) => x.real && !x.busy.length) && r.files.record[0] > 100 && r.files.record[0] === r.files.record[1] &&   // v5: the real scenes, nothing loading while measuring, the check leaves the load record as it was (T49-N2)
       r.runs.every((x) => x.on ? x.ev.newD >= 0.8 * x.frames && x.ev.oldD === 0 : x.ev.oldD >= 0.8 * x.frames && x.ev.newD === 0) &&      // what was drawn, both ways
       r.runs.filter((x) => x.on && x.scene === 'S3').every((x) => x.ev.heldCfg === x.ev.newD && x.ev.vis > 0 && x.ev.heldCmd === x.ev.vis) && r.runs.filter((x) => x.scene !== 'S3').every((x) => x.ev.heldCfg === 0) },
   { name: 'desktop', noise: true, desktop: true, want: ['device'], verdict: 'void', more: (r) => !r.device.phone && r.files.ok },
@@ -87,19 +119,50 @@ const CASES = [
   { name: 'nooldbody_late', noise: true, fault: 'nooldbody_late', want: [], verdict: 'fail', more: (r) => r.rows.every((x) => !x.ok && x.why === 'ตัวเดิมไม่ถูกวาด') && r.runs.filter((x) => !x.on).every((x) => x.ev.oldD === 0 && x.ev.calls === 0) },
   { name: 'noshadow', noise: true, fault: 'noshadow', want: [], verdict: 'fail', more: (r) => !r.rows[0].ok && r.rows[0].why === 'เงาไม่ตรง' && r.rows[1].ok && !r.rows[2].ok && r.rows[2].why === 'เงาไม่ตรง' },
   { name: 'lite', noise: true, fault: 'lite', want: [], verdict: 'fail', more: (r) => r.rows[0].ok && !r.rows[1].ok && r.rows[1].why === 'เกมเปลี่ยนโหมดกราฟิกเอง' },
-  { name: 'fewdraws', noise: true, fault: 'fewdraws', want: [], verdict: 'fail', more: (r) => r.rows.every((x) => !x.ok && x.why === 'ฉากวาดไม่ครบตอนเปิด' && x.draws[0] < 0.8 * x.draws[1]) },
-  { name: 'wrongimage', noise: true, swap: () => ({ 'map-cave-mouth.jpg': PNG1 }), want: ['files'], verdict: 'void', more: (r) => r.files.wrong.includes('map-cave-mouth.jpg') && !r.files.missing.length && !r.files.failed.length },
+  { name: 'fewdraws', noise: true, fault: 'fewdraws', want: [], verdict: 'fail', more: (r) => r.rows.every((x) => !x.ok && x.why === 'ฉากวาดไม่ครบตอนเปิด' && x.things[0] < 0.8 * x.things[1]) },
+  // (v5: a 1×1 picture in place of the painted cave mouth is also not the real scene — "files" and "scene"; a picture of the right size with wrong pixels is "files" only)
+  { name: 'wrongimage', noise: true, swap: () => ({ 'map-cave-mouth.jpg': PNG1 }), want: ['files', 'scene'], verdict: 'void', more: (r) => r.files.wrong.includes('map-cave-mouth.jpg') && !r.files.missing.length && !r.files.failed.length && r.rows[2].standin && !r.rows[0].standin && !r.rows[1].standin },
   { name: 'wrongsame', noise: true, swap: () => ({ 'map-cave-mouth.jpg': sameSize('map-cave-mouth.jpg') }), want: ['files'], verdict: 'void', more: (r) => r.files.wrong.length === 1 && r.files.wrong[0] === 'map-cave-mouth.jpg' && !r.files.missing.length && !r.files.failed.length },
   // v4 (Codex T48): only the first answer is wrong, same size
-  { name: 'firstwrong', noise: true, first: () => ({ 'map-cave-mouth.jpg': padded('map-cave-mouth.jpg') }), want: ['files'], verdict: 'void', more: (r) => r.files.wrong.includes('map-cave-mouth.jpg') },
+  { name: 'firstwrong', noise: true, first: () => ({ 'map-cave-mouth.jpg': padded('map-cave-mouth.jpg') }), want: ['files', 'scene'], verdict: 'void', more: (r) => r.files.wrong.includes('map-cave-mouth.jpg') && r.rows[2].standin },
   // … and the browser keeps no copy (Cache-Control: no-store): v3 said "ผ่าน" here. An image of another size · an image of the same
   // size in pixels and bytes · a file the game fetches · the script of the new character (same behaviour, one letter of its comment changed)
-  { name: 'firstwrong_nostore', noise: true, nostore: true, first: () => ({ 'map-cave-mouth.jpg': padded('map-cave-mouth.jpg') }), want: ['files'], verdict: 'void', more: (r) => r.files.wrong.length === 1 && r.files.wrong[0] === 'map-cave-mouth.jpg' && r.files.imagesEqual === r.files.images - 1 },
+  { name: 'firstwrong_nostore', noise: true, nostore: true, first: () => ({ 'map-cave-mouth.jpg': padded('map-cave-mouth.jpg') }), want: ['files', 'scene'], verdict: 'void', more: (r) => r.files.wrong.length === 1 && r.files.wrong[0] === 'map-cave-mouth.jpg' && r.files.imagesEqual === r.files.images - 1 && r.rows[2].standin },
   { name: 'firstsame_nostore', noise: true, nostore: true, first: () => ({ 'map-cave-mouth.jpg': sameSize('map-cave-mouth.jpg') }), want: ['files'], verdict: 'void', more: (r) => r.files.wrong.length === 1 && r.files.wrong[0] === 'map-cave-mouth.jpg' && r.files.imagesEqual === r.files.images - 1 },
   { name: 'firstjson_nostore', noise: true, nostore: true, first: () => ({ 'g9b-scene.json': alter('g9b-scene.json', '"mailbox":[22.88,', '"mailbox":[22.89,') }), want: ['files'], verdict: 'void', more: (r) => r.files.wrong.length === 1 && r.files.wrong[0] === 'g9b-scene.json' && r.files.imagesEqual === r.files.images },
   { name: 'firstscript_nostore', noise: true, nostore: true, first: () => ({ 'char2.js': alter('char2.js', 'built from char2.src.js', 'buil7 from char2.src.js') }), want: ['files'], verdict: 'void',
     more: (r) => r.files.wrong.length === 1 && r.files.wrong[0] === 'char2.js' && !r.rows[0].ok && r.rows[0].why === 'ตัวใหม่ไม่พร้อม' && r.files.scripts.some((x) => x.rel === 'char2.js' && x.guarded && x.state === 'error') },
+  // v5 (Codex T49-N1): the first GET of the farm's scene data is answered 304 with no body, every later one is right. The game gets
+  // nothing, keeps the old farm (17 draw commands a frame instead of 250) — v4 said "ผ่าน". Two guards must fire, each on its own:
+  // the file (a GET the game did not get) and the scene (not the real farm).
+  { name: 'first304_nostore', noise: true, nostore: true, first: () => ({ 'g9b-scene.json': { status: 304 } }), want: ['files', 'scene'], verdict: 'void',
+    more: (r) => r.files.failed.length === 1 && r.files.failed[0] === 'g9b-scene.json' && !r.files.wrong.length && !r.files.missing.length &&
+      r.rows[0].ok && r.rows[2].ok && !r.rows[1].ok && r.rows[1].standin && r.rows[1].why === 'ฉากสำรอง' && r.runs.filter((x) => x.scene === 'S2').every((x) => !x.real) && r.runs.filter((x) => x.scene !== 'S2').every((x) => x.real) },
+  // the same answer for a picture: the painted cave mouth never arrives
+  { name: 'first304img_nostore', noise: true, nostore: true, first: () => ({ 'map-cave-mouth.jpg': { status: 304 } }), want: ['files', 'scene'], verdict: 'void',
+    more: (r) => r.files.failed.includes('map-cave-mouth.jpg') && !r.rows[2].ok && r.rows[2].standin && r.rows[0].ok && r.rows[1].ok },
+  // only the scene guard: every file is right, the farm is the old one
+  { name: 'standin', noise: true, fault: 'standin', want: ['scene'], verdict: 'void', more: (r) => r.files.ok && r.rows[0].ok && r.rows[2].ok && !r.rows[1].ok && r.rows[1].standin && r.rows[1].why === 'ฉากสำรอง' },
+  // a slow file that is right: the bench waits for it before it starts the game, and the run is a normal one. The server holds the
+  // farm's scene data until the page has shown "waiting for files" for 3 s (or, if the bench does not wait, until the farm is being measured).
+  { name: 'slowjson', hold: ['g9b-scene.json'], want: [], verdict: 'pass', more: (r) => r.hold.how === 'waiting' && r.waited >= 2500 && r.files.ok && r.rows.every((x) => x.ok && !x.standin && !x.cut) && r.runs.every((x) => x.real && !x.busy.length) },
+  // a file of the copy loaded inside a measured run: that run is not a clean one
+  { name: 'lateload', fault: 'lateload', want: ['interrupted'], verdict: 'void', more: (r) => r.files.ok && r.rows[0].cut && !r.rows[1].cut && !r.rows[2].cut && r.runs.filter((x) => x.busy.length).length === 1 && r.runs.find((x) => x.busy.length).busy[0] === 'kit-town.png' && r.runs.every((x) => x.gap <= 300) },
+  // a picture load that ended with an error although the element shows a fine picture afterwards (gm-c207-g2.png is a file of the
+  // copy that the game itself never asks for here; its first answer is a bare 304) · an element given two files
+  { name: 'imgerror', noise: true, nostore: true, fault: 'imgerror', first: () => ({ 'gm-c207-g2.png': { status: 304 } }), want: ['files'], verdict: 'void',
+    more: (r) => r.files.failed.length === 1 && r.files.failed[0] === 'gm-c207-g2.png' && r.files.imageErrors === 1 && !r.files.wrong.length && !r.files.missing.length && !r.files.why && r.rows.every((x) => x.ok) },
+  { name: 'imgreuse', noise: true, fault: 'imgreuse', want: ['files'], verdict: 'void',
+    more: (r) => r.files.reused === 1 && /more than one file/.test(r.files.why) && !r.files.failed.length && !r.files.wrong.length && !r.files.missing.length && r.files.imageErrors === 0 && r.rows.every((x) => x.ok) },
+  // the ordinary use of the browser's cache must go on working: the page is loaded once, then loaded again — this time the browser
+  // asks the server "is my copy still good?" for every file and is told 304. The game gets full answers from the browser, so this
+  // is a normal run (a bare 304 that leaves the game with nothing is first304_nostore above)
+  { name: 'revalidate', etag: true, reload: true, want: [], verdict: 'pass', more: (r) => r.files.ok && r.srv.n304 >= 100 && r.files.fetches >= 20 && r.files.imagesEqual === r.files.images && r.rows.every((x) => x.ok && !x.standin) },
+  // a HEAD (the game's ping) has no body and must not count as a file the game did not get
+  { name: 'headok', fault: 'headok', want: [], verdict: 'pass', more: (r) => r.files.ok && r.files.heads >= 2 },
 ];
+if (process.env.FULL) CASES.push({ name: 'full304', full: true, noise: true, nostore: true, first: () => ({ 'g9b-scene.json': { status: 304 } }), want: ['files', 'scene'], verdict: 'void', exact: 'void',
+  more: (r) => r.files.failed.length === 1 && r.files.failed[0] === 'g9b-scene.json' && r.rows[1].standin && /→ ไม่นับ \(/.test(r.line) && !r.pass });
 if (process.env.FULL) CASES.push({ name: 'full', full: true, want: [], verdict: 'pass', exact: 'pass', more: (r) => r.files.ok && r.device.phone && !r.reasons.length && /→ ผ่าน \(เกณฑ์/.test(r.line) });
 const ONLY = process.env.CASES ? process.env.CASES.split(',') : null;
 (async () => {
@@ -112,7 +175,7 @@ const ONLY = process.env.CASES ? process.env.CASES.split(',') : null;
       // is the bench working, not the case being wrong. A fault the bench misses is missed on every try. "tries" is in the result.
       for (let tries = 1; tries <= 3; tries++) {
       if (tries > 1) out.pop();
-      const srv = await serve(c.deny || [], c.swap ? c.swap() : null, c.first ? c.first() : null, c.nostore), port = srv.address().port, bc = await browser.createBrowserContext(), p = await bc.newPage(), pe = [];
+      const srv = await serve(c.deny || [], c.swap ? c.swap() : null, c.first ? c.first() : null, c.nostore, c.hold, c.etag), port = srv.address().port, bc = await browser.createBrowserContext(), p = await bc.newPage(), pe = [];
       const row = { name: c.name, tries }; out.push(row);
       try {
         p.on('pageerror', (e) => pe.push(String(e.message).slice(0, 120)));
@@ -124,20 +187,30 @@ const ONLY = process.env.CASES ? process.env.CASES.split(',') : null;
         if (c.slowRaf) await p.evaluateOnNewDocument(() => { window.requestAnimationFrame = (f) => setTimeout(() => f(performance.now()), 400); });
         await p.goto('http://127.0.0.1:' + port + '/index.html', { waitUntil: 'load' });
         await p.waitForFunction(() => [...document.querySelectorAll('button')].some((b) => b.textContent === 'เริ่มวัด'), { timeout: 120000 });
+        if (c.reload) { await sleep(1500); await p.reload({ waitUntil: 'load' });   // the second load of the page is the one that is measured
+          await p.waitForFunction(() => [...document.querySelectorAll('button')].some((b) => b.textContent === 'เริ่มวัด'), { timeout: 120000 }); }
         if (c.fault) await p.evaluate(fault, c.fault);
         await sleep(300); const bt = await p.evaluateHandle(() => [...document.querySelectorAll('button')].find((b) => b.textContent === 'เริ่มวัด')); await bt.click();
         await sleep(1500); row.panelHidden = await p.evaluate(() => ![...document.querySelectorAll('button')].some((b) => b.textContent === 'เริ่มวัด' && b.getClientRects().length));
+        if (c.hold) { const t0 = Date.now(); let seen = 0, how = '';   // let the held file go: after the page has waited 3 s for it, or — a bench that does not wait — in the middle of the farm
+          for (;;) { const t = await p.evaluate(() => { for (const d of document.body.children) { const t = d.textContent || ''; if (/^รอให้เกมโหลด|^ฉาก \d\/3/.test(t)) return t; } return ''; });
+            if (/^รอให้เกมโหลด/.test(t)) { if (!seen) seen = Date.now(); if (Date.now() - seen >= 3000) { how = 'waiting'; break; } }
+            else if (/^ฉาก 2\/3.*คู่ 2\/3/.test(t)) { how = 'farm'; break; }
+            if (Date.now() - t0 > 90000) { how = 'timeout'; break; }
+            await sleep(100); }
+          srv.release(); row.hold = { how, ms: Date.now() - t0 }; }
         await p.waitForFunction(() => window.__benchResult, { timeout: c.full ? 400000 : 240000 }); await sleep(200);
         if (process.env.SHOTS) await p.screenshot({ path: path.join(process.env.SHOTS, 'selftest.' + c.name + '.png') });
-        const r = await p.evaluate(() => { const b = window.__benchResult; return { verdict: b.verdict, verdictIfCounted: b.verdictIfCounted, pass: b.pass, reasons: b.reasons, device: b.device, files: b.files, rows: b.rows, line: b.line,
-          runs: b.runs.map((x) => ({ scene: x.scene, on: x.on, fps: +x.fps.toFixed(1), frames: x.frames, gap: x.gap, hidden: x.hidden, sts: x.sts, body: x.body, ev: x.ev, pins: x.pins })), err: b.runs.err || null,
+        const r = await p.evaluate(() => { const b = window.__benchResult; return { verdict: b.verdict, verdictIfCounted: b.verdictIfCounted, pass: b.pass, reasons: b.reasons, waited: b.waited, device: b.device, files: b.files, rows: b.rows, line: b.line,
+          runs: b.runs.map((x) => ({ scene: x.scene, on: x.on, fps: +x.fps.toFixed(1), frames: x.frames, gap: x.gap, hidden: x.hidden, sts: x.sts, body: x.body, ev: x.ev, pins: x.pins, real: x.real, busy: x.busy })), err: b.runs.err || null,
           head: (document.querySelector('h2') || {}).textContent }; });
+        r.hold = row.hold || null; row.waited = r.waited; r.srv = row.srv = { n304: srv.n304() };
         const counted = r.reasons.filter((x) => x !== 'mode'), noise = counted.filter((x) => NOISE.includes(x)), firm = c.noise ? counted.filter((x) => !NOISE.includes(x)) : counted;
         row.noise = c.noise ? noise : [];   // only where such reasons were let through
         row.reasons = r.reasons; row.verdict = r.verdict; row.verdictIfCounted = r.verdictIfCounted; row.head = r.head; row.line = r.line;
-        row.rows = r.rows.map((x) => ({ id: x.id, ratio: x.ratio === null ? null : +x.ratio.toFixed(3), ok: x.ok, why: x.why, cut: x.cut, shaky: x.shaky, fps: [+x.fpsOn.toFixed(1), +x.fpsOff.toFixed(1)], js: [+x.jsOn.toFixed(2), +x.jsOff.toFixed(2)],
-          draws: x.draws.map((v) => +v.toFixed(1)), shadow: x.shadow.map((v) => +v.toFixed(2)) }));
-        row.files = { ok: r.files.ok, asked: r.files.asked, hashed: r.files.hashed, images: r.files.images, imagesEqual: r.files.imagesEqual, fetches: r.files.fetches, scripts: r.files.scripts, ms: r.files.ms, missing: r.files.missing, failed: r.files.failed, wrong: r.files.wrong, why: r.files.why }; row.runs = r.runs; row.phone = r.device.phone; row.pageErrors = pe;
+        row.rows = r.rows.map((x) => ({ id: x.id, ratio: x.ratio === null ? null : +x.ratio.toFixed(3), ok: x.ok, why: x.why, cut: x.cut, shaky: x.shaky, standin: x.standin, fps: [+x.fpsOn.toFixed(1), +x.fpsOff.toFixed(1)], js: [+x.jsOn.toFixed(2), +x.jsOff.toFixed(2)],
+          draws: x.draws.map((v) => +v.toFixed(1)), things: x.things.map((v) => +v.toFixed(1)), shadow: x.shadow.map((v) => +v.toFixed(2)) }));
+        row.files = { ok: r.files.ok, asked: r.files.asked, hashed: r.files.hashed, images: r.files.images, imagesEqual: r.files.imagesEqual, fetches: r.files.fetches, heads: r.files.heads, record: r.files.record, imageLoads: r.files.imageLoads, imageErrors: r.files.imageErrors, reused: r.files.reused, scripts: r.files.scripts, ms: r.files.ms, missing: r.files.missing, failed: r.files.failed, wrong: r.files.wrong, why: r.files.why }; row.runs = r.runs; row.phone = r.device.phone; row.pageErrors = pe;
         const checks = {
           reasons: c.wantHas ? c.wantHas.every((x) => counted.includes(x)) : sameSet(firm, c.want),
           verdictIfCounted: r.verdictIfCounted === c.verdict || (!!c.noise && noise.length > 0 && r.verdictIfCounted === 'void'),
