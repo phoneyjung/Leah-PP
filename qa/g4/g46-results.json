@@ -258,9 +258,9 @@
    "diff": 15.22
   }
  },
- "report": "v1.3",
+ "report": "v1.4",
  "M6_phone": {
-  "status": "no usable result yet: v1 result withdrawn; bench v2 and v3 superseded after Codex T47 and T48; re-measure on v4 after Codex T49",
+  "status": "no usable result yet: v1 result withdrawn; bench v2, v3 and v4 superseded after Codex T47, T48 and T49; re-measure on v5 after Codex T50",
   "v1_withdrawn": {
    "why": [
     "the published copy lacked 58 game files the real game asks for in a full-length run (199 asked, 140 in the copy; + sw.js left out on purpose) and the bench did not check files",
@@ -6711,6 +6711,5601 @@
     "when": "2026-11-14 08:1x +07",
     "checked_on_real_host": false
    }
+  },
+  "bench_v5": {
+   "code": "99b52ea",
+   "files": 313,
+   "file_bytes": 26892217,
+   "page_bytes": 1641530,
+   "published": {
+    "version": "1794725665-0046",
+    "page_equals_tested_build": true,
+    "host_wrapper_bytes": [
+     531,
+     15
+    ],
+    "checked_on_real_host": false
+   },
+   "fixes": {
+    "T49-N1": [
+     "a fetch is told from a HEAD by its real method; every GET of the game must be answered 2xx and the bytes it got must be the build's",
+     "new void reason \"scene\": in every run, first and last frame, the map is the real painted scene of M6 (M.painted, map size in tiles, picture size = tiles x 32 px)"
+    ],
+    "T49-N2": "reference images are loaded with the browser's own src setter (kept before wrapping) and cleared after the comparison; load record before/after the check 212 -> 212"
+   },
+   "added_by_claude": [
+    "wait until every load of the copy has ended (before the game starts up to 45 s, after it starts, before and after entering each scene, before each run, before the file check); a load that never ends = a file the game did not get",
+    "a file of the copy loading inside a measured run = interrupted (HEAD pings and sw.js are not files)",
+    "every image load must have ended with \"load\"; an element given two files cannot be checked",
+    "a ping still on its way when the check starts is skipped"
+   ],
+   "claude_errors_found": {
+    "scene_check_counted_commands": "v3-v4 compared draw commands per frame ON >= 80 % of OFF; the farm draws a leaning plant in 3 px rows (g9bSway), so commands move with the wind: standing still 147-250 a frame (per-second means over 16 s), full-length runs of v4 200-274; the check could fail a correct run (frequency not measured). v5 counts things (a command that goes on with the next source rows of the same picture belongs to the thing before it): farm 152.9-153.9 a frame in every full-length run, commands 213-269. It could never cause a false pass.",
+    "selftest_ok_case": "in v4 one line of the \"ok\" case (rows ok, not cut, not shaky, JS work > 0) was swallowed by a comment; the first three were still enforced through reasons + verdict, \"JS work > 0\" was not checked. Fixed."
+   },
+   "not_covered": [
+    "pictures shown through CSS (HUD frames, backgrounds of screens hidden while measuring)",
+    "bytes the hunting-map worker reads again",
+    "a HUD picture the game itself gave up on after its own 8 s limit and that arrived later",
+    "the wind in the farm changes the scene's work between runs (draw commands +-25 % per second): noise in the farm's fps ratio on a device that is not at the refresh cap; only alternating order, median of 3 pairs and the \"unstable\" guard stand against it",
+    "an emulated phone passes the device check",
+    "the wrappers cannot be proven free of bias; no upper bound is claimed",
+    "not checked on the real artifact host"
+   ],
+   "selftest_final": {
+    "summary": {
+     "cases": 36,
+     "ok": 36,
+     "retried": [],
+     "noisy": [],
+     "verdict": "pass"
+    },
+    "file": "qa/g4/phone_bench_selftest.js as committed",
+    "cases": [
+     {
+      "name": "ok",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "pass",
+      "reasons": [
+       "mode"
+      ],
+      "waited": 677,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 0.998,
+        "fps": [
+         60.8,
+         60.8
+        ],
+        "js": [
+         1.88,
+         1.52
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "things": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 0.984,
+        "fps": [
+         59.5,
+         60.4
+        ],
+        "js": [
+         2.55,
+         2.48
+        ],
+        "draws": [
+         284.7,
+         247.5
+        ],
+        "things": [
+         152.6,
+         152.7
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.002,
+        "fps": [
+         60.6,
+         60.7
+        ],
+        "js": [
+         1.61,
+         1.56
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "things": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 172,
+       "fetches": 28,
+       "heads": 2,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "loaded"
+        }
+       ],
+       "ms": 5345,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "desktop",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "device"
+      ],
+      "waited": 567,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 0.998,
+        "fps": [
+         60.2,
+         60.3
+        ],
+        "js": [
+         1.45,
+         1.26
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "things": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1.002,
+        "fps": [
+         60.5,
+         60.4
+        ],
+        "js": [
+         2.86,
+         2.46
+        ],
+        "draws": [
+         272.7,
+         204.9
+        ],
+        "things": [
+         124.4,
+         124
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.001,
+        "fps": [
+         60.3,
+         60.2
+        ],
+        "js": [
+         1.46,
+         1.52
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "things": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 172,
+       "fetches": 28,
+       "heads": 2,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "loaded"
+        }
+       ],
+       "ms": 3590,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "nofile",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "files"
+      ],
+      "waited": 710,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1.007,
+        "fps": [
+         60.8,
+         60.6
+        ],
+        "js": [
+         1.39,
+         1.39
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "things": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1.001,
+        "fps": [
+         60.6,
+         60.6
+        ],
+        "js": [
+         2.61,
+         2.56
+        ],
+        "draws": [
+         288.8,
+         245.6
+        ],
+        "things": [
+         152.7,
+         152.7
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.003,
+        "fps": [
+         60.6,
+         60.4
+        ],
+        "js": [
+         2.06,
+         1.8
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "things": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": false,
+       "asked": 198,
+       "hashed": 197,
+       "images": 172,
+       "imagesEqual": 170,
+       "fetches": 28,
+       "heads": 2,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 2,
+       "reused": 0,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "loaded"
+        }
+       ],
+       "ms": 5526,
+       "missing": [],
+       "failed": [
+        "kit-town.png"
+       ],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "unlisted",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "files"
+      ],
+      "waited": 624,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 0.999,
+        "fps": [
+         60.7,
+         60.7
+        ],
+        "js": [
+         1.74,
+         1.54
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "things": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 0.938,
+        "fps": [
+         56.6,
+         60.4
+        ],
+        "js": [
+         2.97,
+         2.7
+        ],
+        "draws": [
+         287.4,
+         242.9
+        ],
+        "things": [
+         152.5,
+         152.7
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.001,
+        "fps": [
+         60.5,
+         60.4
+        ],
+        "js": [
+         1.3,
+         1.97
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "things": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": false,
+       "asked": 198,
+       "hashed": 197,
+       "images": 172,
+       "imagesEqual": 170,
+       "fetches": 28,
+       "heads": 2,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "loaded"
+        }
+       ],
+       "ms": 5980,
+       "missing": [
+        "kit-town.png"
+       ],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "build",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "build"
+      ],
+      "waited": 624,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1.002,
+        "fps": [
+         60.7,
+         60.7
+        ],
+        "js": [
+         1.72,
+         1.61
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "things": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 0.958,
+        "fps": [
+         57.8,
+         60.6
+        ],
+        "js": [
+         2.7,
+         2.68
+        ],
+        "draws": [
+         286.7,
+         239.3
+        ],
+        "things": [
+         152.8,
+         152.8
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.001,
+        "fps": [
+         60.5,
+         60.4
+        ],
+        "js": [
+         1.14,
+         1
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "things": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 172,
+       "fetches": 28,
+       "heads": 2,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "loaded"
+        }
+       ],
+       "ms": 5981,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "c2fail",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "files"
+      ],
+      "waited": 605,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1.003,
+        "fps": [
+         60.9,
+         60.8
+        ],
+        "js": [
+         1.52,
+         1.55
+        ],
+        "draws": [
+         19,
+         19
+        ],
+        "things": [
+         19,
+         19
+        ],
+        "shadow": [
+         0,
+         1
+        ],
+        "ok": false,
+        "why": "ตัวใหม่ไม่พร้อม",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 0.994,
+        "fps": [
+         58,
+         58.7
+        ],
+        "js": [
+         2.79,
+         2.73
+        ],
+        "draws": [
+         285.6,
+         241.1
+        ],
+        "things": [
+         152.9,
+         152.7
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": false,
+        "why": "ตัวใหม่ไม่พร้อม",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.002,
+        "fps": [
+         60.4,
+         60.4
+        ],
+        "js": [
+         0.9,
+         1
+        ],
+        "draws": [
+         14,
+         14
+        ],
+        "things": [
+         14,
+         14
+        ],
+        "shadow": [
+         0,
+         1
+        ],
+        "ok": false,
+        "why": "ตัวใหม่ไม่พร้อม",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": false,
+       "asked": 185,
+       "hashed": 184,
+       "images": 162,
+       "imagesEqual": 162,
+       "fetches": 24,
+       "heads": 2,
+       "record": [
+        202,
+        202
+       ],
+       "imageLoads": 162,
+       "imageErrors": 0,
+       "reused": 0,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "loaded"
+        }
+       ],
+       "ms": 4879,
+       "missing": [],
+       "failed": [
+        "c2-pack.json"
+       ],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "stall",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "interrupted",
+       "unstable"
+      ],
+      "waited": 634,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 4.862,
+        "fps": [
+         60.7,
+         12.5
+        ],
+        "js": [
+         1.41,
+         1.54
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "things": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": true,
+        "shaky": true,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 0.999,
+        "fps": [
+         59.8,
+         60.3
+        ],
+        "js": [
+         2.57,
+         2.59
+        ],
+        "draws": [
+         290.5,
+         243.2
+        ],
+        "things": [
+         152.7,
+         152.7
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.001,
+        "fps": [
+         60.7,
+         60.6
+        ],
+        "js": [
+         1.65,
+         1.74
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "things": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 172,
+       "fetches": 28,
+       "heads": 2,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "loaded"
+        }
+       ],
+       "ms": 5301,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "hidden",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "interrupted"
+      ],
+      "waited": 668,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 0.998,
+        "fps": [
+         60.5,
+         60.6
+        ],
+        "js": [
+         1.22,
+         1.49
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "things": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 0.998,
+        "fps": [
+         60.7,
+         60.5
+        ],
+        "js": [
+         2.7,
+         2.2
+        ],
+        "draws": [
+         294.2,
+         238.2
+        ],
+        "things": [
+         152.6,
+         152.7
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1,
+        "fps": [
+         60.5,
+         60.6
+        ],
+        "js": [
+         1.74,
+         1.79
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "things": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": true,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 172,
+       "fetches": 28,
+       "heads": 2,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "loaded"
+        }
+       ],
+       "ms": 5336,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "slowoff",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "unstable"
+      ],
+      "waited": 646,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 0.994,
+        "fps": [
+         60.4,
+         60.5
+        ],
+        "js": [
+         1.85,
+         1.47
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "things": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 2.479,
+        "fps": [
+         60.2,
+         24.4
+        ],
+        "js": [
+         2.8,
+         27.96
+        ],
+        "draws": [
+         293.1,
+         255
+        ],
+        "things": [
+         153.1,
+         152.8
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": true,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1,
+        "fps": [
+         60.3,
+         60.3
+        ],
+        "js": [
+         1.79,
+         1.9
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "things": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 172,
+       "fetches": 28,
+       "heads": 2,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "loaded"
+        }
+       ],
+       "ms": 4961,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "slowon",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "fail",
+      "reasons": [
+       "mode"
+      ],
+      "waited": 610,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 0.736,
+        "fps": [
+         44.6,
+         60.6
+        ],
+        "js": [
+         10.92,
+         1.5
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "things": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 0.653,
+        "fps": [
+         39.6,
+         61.1
+        ],
+        "js": [
+         11.99,
+         2.54
+        ],
+        "draws": [
+         277.4,
+         246.7
+        ],
+        "things": [
+         152.7,
+         152.7
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 0.757,
+        "fps": [
+         45.8,
+         60.6
+        ],
+        "js": [
+         10.81,
+         1.71
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "things": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 172,
+       "fetches": 28,
+       "heads": 2,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "loaded"
+        }
+       ],
+       "ms": 4883,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "lowfps",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "interrupted"
+      ],
+      "waited": 535,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1,
+        "fps": [
+         2.5,
+         2.5
+        ],
+        "js": [
+         2.83,
+         1.5
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "things": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": false,
+        "why": "ตัวไม่เดิน",
+        "cut": true,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1,
+        "fps": [
+         2.5,
+         2.5
+        ],
+        "js": [
+         9.13,
+         5.03
+        ],
+        "draws": [
+         231.3,
+         242.7
+        ],
+        "things": [
+         154,
+         152.7
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": false,
+        "why": "ตัวไม่เดิน",
+        "cut": true,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1,
+        "fps": [
+         2.5,
+         2.5
+        ],
+        "js": [
+         2.03,
+         1.37
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "things": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": false,
+        "why": "ตัวไม่เดิน",
+        "cut": true,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 172,
+       "fetches": 28,
+       "heads": 3,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "loaded"
+        }
+       ],
+       "ms": 3416,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "nolantern",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "fail",
+      "reasons": [
+       "mode"
+      ],
+      "waited": 701,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1.003,
+        "fps": [
+         60.6,
+         60.8
+        ],
+        "js": [
+         1.38,
+         1.5
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "things": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1.002,
+        "fps": [
+         60.2,
+         60.1
+        ],
+        "js": [
+         2.67,
+         2.66
+        ],
+        "draws": [
+         275.6,
+         245.5
+        ],
+        "things": [
+         152.7,
+         152.8
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.004,
+        "fps": [
+         60.6,
+         60.4
+        ],
+        "js": [
+         1.79,
+         1.61
+        ],
+        "draws": [
+         13,
+         14
+        ],
+        "things": [
+         13,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": false,
+        "why": "ตะเกียงไม่ถูกวาด",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 172,
+       "fetches": 28,
+       "heads": 2,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "loaded"
+        }
+       ],
+       "ms": 5115,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "nohold",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "fail",
+      "reasons": [
+       "mode"
+      ],
+      "waited": 623,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1,
+        "fps": [
+         60.5,
+         60.5
+        ],
+        "js": [
+         1.63,
+         1.44
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "things": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 0.999,
+        "fps": [
+         60.2,
+         60.4
+        ],
+        "js": [
+         2.67,
+         2.47
+        ],
+        "draws": [
+         287.8,
+         237.8
+        ],
+        "things": [
+         152.7,
+         152.6
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.001,
+        "fps": [
+         60.6,
+         60.6
+        ],
+        "js": [
+         1.61,
+         1.61
+        ],
+        "draws": [
+         13,
+         14
+        ],
+        "things": [
+         13,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": false,
+        "why": "ตะเกียงไม่ถูกวาด",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 172,
+       "fetches": 28,
+       "heads": 2,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "loaded"
+        }
+       ],
+       "ms": 5234,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "nooldbody",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "fail",
+      "reasons": [
+       "mode"
+      ],
+      "waited": 597,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1,
+        "fps": [
+         60.6,
+         60.5
+        ],
+        "js": [
+         1.64,
+         1.5
+        ],
+        "draws": [
+         18,
+         18
+        ],
+        "things": [
+         18,
+         18
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": false,
+        "why": "ตัวเดิมไม่ถูกวาด",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1,
+        "fps": [
+         60.7,
+         60.6
+        ],
+        "js": [
+         2.65,
+         2.68
+        ],
+        "draws": [
+         299.5,
+         236.5
+        ],
+        "things": [
+         152.6,
+         151.7
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": false,
+        "why": "ตัวเดิมไม่ถูกวาด",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1,
+        "fps": [
+         60.6,
+         60.6
+        ],
+        "js": [
+         1.7,
+         1.75
+        ],
+        "draws": [
+         16,
+         13
+        ],
+        "things": [
+         16,
+         13
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": false,
+        "why": "ตัวเดิมไม่ถูกวาด",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 172,
+       "fetches": 28,
+       "heads": 2,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "loaded"
+        }
+       ],
+       "ms": 5281,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "nooldbody_late",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "fail",
+      "reasons": [
+       "mode"
+      ],
+      "waited": 628,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 0.993,
+        "fps": [
+         60.5,
+         60.8
+        ],
+        "js": [
+         1.52,
+         1.59
+        ],
+        "draws": [
+         18,
+         18
+        ],
+        "things": [
+         18,
+         18
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": false,
+        "why": "ตัวเดิมไม่ถูกวาด",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 0.999,
+        "fps": [
+         60.5,
+         60.6
+        ],
+        "js": [
+         2.47,
+         2.22
+        ],
+        "draws": [
+         302.6,
+         236.2
+        ],
+        "things": [
+         152.8,
+         151.6
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": false,
+        "why": "ตัวเดิมไม่ถูกวาด",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1,
+        "fps": [
+         60.5,
+         60.6
+        ],
+        "js": [
+         1.91,
+         1.94
+        ],
+        "draws": [
+         16,
+         13
+        ],
+        "things": [
+         16,
+         13
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": false,
+        "why": "ตัวเดิมไม่ถูกวาด",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 172,
+       "fetches": 28,
+       "heads": 2,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "loaded"
+        }
+       ],
+       "ms": 5997,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "noshadow",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "fail",
+      "reasons": [
+       "mode"
+      ],
+      "waited": 672,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 0.994,
+        "fps": [
+         60.3,
+         60.7
+        ],
+        "js": [
+         2.12,
+         1.52
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "things": [
+         18,
+         19
+        ],
+        "shadow": [
+         0,
+         1
+        ],
+        "ok": false,
+        "why": "เงาไม่ตรง",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1.057,
+        "fps": [
+         60.3,
+         56.6
+        ],
+        "js": [
+         2.8,
+         2.74
+        ],
+        "draws": [
+         273.4,
+         249.8
+        ],
+        "things": [
+         152.6,
+         152.8
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1,
+        "fps": [
+         60.6,
+         60.6
+        ],
+        "js": [
+         2.18,
+         1.66
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "things": [
+         16,
+         14
+        ],
+        "shadow": [
+         0,
+         1
+        ],
+        "ok": false,
+        "why": "เงาไม่ตรง",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 172,
+       "fetches": 28,
+       "heads": 2,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "loaded"
+        }
+       ],
+       "ms": 5466,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "lite",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "fail",
+      "reasons": [
+       "mode"
+      ],
+      "waited": 623,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1.001,
+        "fps": [
+         60.8,
+         60.7
+        ],
+        "js": [
+         1.3,
+         1.49
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "things": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 0.996,
+        "fps": [
+         60.5,
+         60.7
+        ],
+        "js": [
+         2.25,
+         1.94
+        ],
+        "draws": [
+         155.3,
+         155.9
+        ],
+        "things": [
+         152.7,
+         152.6
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": false,
+        "why": "เกมเปลี่ยนโหมดกราฟิกเอง",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.001,
+        "fps": [
+         60.5,
+         60.4
+        ],
+        "js": [
+         1.99,
+         1.63
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "things": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 172,
+       "fetches": 28,
+       "heads": 2,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "loaded"
+        }
+       ],
+       "ms": 5095,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "fewdraws",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "fail",
+      "reasons": [
+       "mode"
+      ],
+      "waited": 618,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 0.995,
+        "fps": [
+         60.5,
+         60.9
+        ],
+        "js": [
+         1.22,
+         1.55
+        ],
+        "draws": [
+         9.5,
+         19
+        ],
+        "things": [
+         9.5,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": false,
+        "why": "ฉากวาดไม่ครบตอนเปิด",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 0.998,
+        "fps": [
+         60.4,
+         60.6
+        ],
+        "js": [
+         1.94,
+         1.93
+        ],
+        "draws": [
+         152.9,
+         242.3
+        ],
+        "things": [
+         76.9,
+         152.6
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": false,
+        "why": "ฉากวาดไม่ครบตอนเปิด",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1,
+        "fps": [
+         60.5,
+         60.4
+        ],
+        "js": [
+         1.87,
+         1.53
+        ],
+        "draws": [
+         10,
+         14
+        ],
+        "things": [
+         10,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": false,
+        "why": "ฉากวาดไม่ครบตอนเปิด",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 172,
+       "fetches": 28,
+       "heads": 2,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "loaded"
+        }
+       ],
+       "ms": 5098,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "wrongimage",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "files",
+       "scene"
+      ],
+      "waited": 610,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1.002,
+        "fps": [
+         60.7,
+         60.6
+        ],
+        "js": [
+         1.47,
+         1.37
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "things": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 0.999,
+        "fps": [
+         60.6,
+         60.5
+        ],
+        "js": [
+         2.04,
+         1.93
+        ],
+        "draws": [
+         286.9,
+         246.7
+        ],
+        "things": [
+         152.6,
+         152.8
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.001,
+        "fps": [
+         60.5,
+         60.5
+        ],
+        "js": [
+         1.16,
+         1.07
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "things": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": false,
+        "why": "ฉากสำรอง",
+        "cut": false,
+        "shaky": false,
+        "standin": true
+       }
+      ],
+      "files": {
+       "ok": false,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 171,
+       "fetches": 28,
+       "heads": 2,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "loaded"
+        }
+       ],
+       "ms": 4982,
+       "missing": [],
+       "failed": [],
+       "wrong": [
+        "map-cave-mouth.jpg"
+       ],
+       "why": ""
+      }
+     },
+     {
+      "name": "wrongsame",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "files"
+      ],
+      "waited": 606,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1.002,
+        "fps": [
+         60.7,
+         60.6
+        ],
+        "js": [
+         1.68,
+         1.63
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "things": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 0.991,
+        "fps": [
+         60.2,
+         60.7
+        ],
+        "js": [
+         2.71,
+         2.23
+        ],
+        "draws": [
+         297.9,
+         237.1
+        ],
+        "things": [
+         152.6,
+         152.6
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 0.999,
+        "fps": [
+         60.4,
+         60.5
+        ],
+        "js": [
+         2.04,
+         2
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "things": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": false,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 171,
+       "fetches": 28,
+       "heads": 2,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "loaded"
+        }
+       ],
+       "ms": 5383,
+       "missing": [],
+       "failed": [],
+       "wrong": [
+        "map-cave-mouth.jpg"
+       ],
+       "why": ""
+      }
+     },
+     {
+      "name": "firstwrong",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "files",
+       "scene"
+      ],
+      "waited": 667,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1.002,
+        "fps": [
+         60.7,
+         60.6
+        ],
+        "js": [
+         1.7,
+         1.79
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "things": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1.005,
+        "fps": [
+         60.5,
+         60.2
+        ],
+        "js": [
+         2.69,
+         2.71
+        ],
+        "draws": [
+         290.5,
+         242.4
+        ],
+        "things": [
+         152.6,
+         152.7
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.003,
+        "fps": [
+         60.7,
+         60.6
+        ],
+        "js": [
+         1.66,
+         1.63
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "things": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": false,
+        "why": "ฉากสำรอง",
+        "cut": false,
+        "shaky": false,
+        "standin": true
+       }
+      ],
+      "files": {
+       "ok": false,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 171,
+       "fetches": 28,
+       "heads": 2,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "loaded"
+        }
+       ],
+       "ms": 5830,
+       "missing": [],
+       "failed": [],
+       "wrong": [
+        "map-cave-mouth.jpg"
+       ],
+       "why": ""
+      }
+     },
+     {
+      "name": "firstwrong_nostore",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "files",
+       "scene"
+      ],
+      "waited": 592,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1.003,
+        "fps": [
+         60.9,
+         60.5
+        ],
+        "js": [
+         1.78,
+         1.78
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "things": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 0.995,
+        "fps": [
+         59.5,
+         59.3
+        ],
+        "js": [
+         2.99,
+         2.81
+        ],
+        "draws": [
+         277.1,
+         245.9
+        ],
+        "things": [
+         152.8,
+         152.6
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.002,
+        "fps": [
+         60.5,
+         60.4
+        ],
+        "js": [
+         1.64,
+         1.69
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "things": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": false,
+        "why": "ฉากสำรอง",
+        "cut": false,
+        "shaky": false,
+        "standin": true
+       }
+      ],
+      "files": {
+       "ok": false,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 171,
+       "fetches": 28,
+       "heads": 2,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "loaded"
+        }
+       ],
+       "ms": 5608,
+       "missing": [],
+       "failed": [],
+       "wrong": [
+        "map-cave-mouth.jpg"
+       ],
+       "why": ""
+      }
+     },
+     {
+      "name": "firstsame_nostore",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "files"
+      ],
+      "waited": 611,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 0.999,
+        "fps": [
+         60.6,
+         60.7
+        ],
+        "js": [
+         1.52,
+         1.46
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "things": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1,
+        "fps": [
+         60.7,
+         60.7
+        ],
+        "js": [
+         2.34,
+         2.44
+        ],
+        "draws": [
+         300.2,
+         237.2
+        ],
+        "things": [
+         152.7,
+         152.7
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1,
+        "fps": [
+         60.4,
+         60.4
+        ],
+        "js": [
+         1.67,
+         1.57
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "things": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": false,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 171,
+       "fetches": 28,
+       "heads": 2,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "loaded"
+        }
+       ],
+       "ms": 5280,
+       "missing": [],
+       "failed": [],
+       "wrong": [
+        "map-cave-mouth.jpg"
+       ],
+       "why": ""
+      }
+     },
+     {
+      "name": "firstjson_nostore",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "files"
+      ],
+      "waited": 628,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1,
+        "fps": [
+         60.6,
+         60.6
+        ],
+        "js": [
+         1.7,
+         1.37
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "things": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 0.983,
+        "fps": [
+         59.8,
+         60.7
+        ],
+        "js": [
+         2.97,
+         2.78
+        ],
+        "draws": [
+         296.1,
+         239.1
+        ],
+        "things": [
+         152.7,
+         152.6
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 0.997,
+        "fps": [
+         60.6,
+         60.8
+        ],
+        "js": [
+         1.79,
+         1.73
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "things": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": false,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 172,
+       "fetches": 28,
+       "heads": 2,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "loaded"
+        }
+       ],
+       "ms": 5451,
+       "missing": [],
+       "failed": [],
+       "wrong": [
+        "g9b-scene.json"
+       ],
+       "why": ""
+      }
+     },
+     {
+      "name": "firstscript_nostore",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "files"
+      ],
+      "waited": 630,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1.002,
+        "fps": [
+         60.7,
+         60.5
+        ],
+        "js": [
+         1.82,
+         1.74
+        ],
+        "draws": [
+         19,
+         19
+        ],
+        "things": [
+         19,
+         19
+        ],
+        "shadow": [
+         0,
+         1
+        ],
+        "ok": false,
+        "why": "ตัวใหม่ไม่พร้อม",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1.017,
+        "fps": [
+         60.5,
+         58.9
+        ],
+        "js": [
+         2.8,
+         2.65
+        ],
+        "draws": [
+         299.2,
+         241.7
+        ],
+        "things": [
+         152.6,
+         152.7
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": false,
+        "why": "ตัวใหม่ไม่พร้อม",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.004,
+        "fps": [
+         60.6,
+         60.4
+        ],
+        "js": [
+         1.49,
+         1.58
+        ],
+        "draws": [
+         14,
+         14
+        ],
+        "things": [
+         14,
+         14
+        ],
+        "shadow": [
+         0,
+         1
+        ],
+        "ok": false,
+        "why": "ตัวใหม่ไม่พร้อม",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": false,
+       "asked": 184,
+       "hashed": 184,
+       "images": 162,
+       "imagesEqual": 162,
+       "fetches": 24,
+       "heads": 2,
+       "record": [
+        202,
+        202
+       ],
+       "imageLoads": 162,
+       "imageErrors": 0,
+       "reused": 0,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "error"
+        }
+       ],
+       "ms": 5480,
+       "missing": [],
+       "failed": [],
+       "wrong": [
+        "char2.js"
+       ],
+       "why": ""
+      }
+     },
+     {
+      "name": "first304_nostore",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "files",
+       "scene"
+      ],
+      "waited": 594,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 0.998,
+        "fps": [
+         60.5,
+         60.6
+        ],
+        "js": [
+         1.72,
+         1.75
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "things": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1.002,
+        "fps": [
+         60.8,
+         60.5
+        ],
+        "js": [
+         1.6,
+         1.55
+        ],
+        "draws": [
+         19.3,
+         15.5
+        ],
+        "things": [
+         19.3,
+         15.5
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": false,
+        "why": "ฉากสำรอง",
+        "cut": false,
+        "shaky": false,
+        "standin": true
+       },
+       {
+        "id": "S3",
+        "ratio": 1.004,
+        "fps": [
+         60.6,
+         60.4
+        ],
+        "js": [
+         2.11,
+         1.82
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "things": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": false,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 172,
+       "fetches": 27,
+       "heads": 2,
+       "record": [
+        210,
+        210
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "loaded"
+        }
+       ],
+       "ms": 5377,
+       "missing": [],
+       "failed": [
+        "g9b-scene.json"
+       ],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "first304img_nostore",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "files",
+       "scene"
+      ],
+      "waited": 658,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1.001,
+        "fps": [
+         60.7,
+         60.6
+        ],
+        "js": [
+         1.65,
+         1.49
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "things": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 0.997,
+        "fps": [
+         60.3,
+         60.6
+        ],
+        "js": [
+         2.61,
+         2.75
+        ],
+        "draws": [
+         281.9,
+         240.7
+        ],
+        "things": [
+         152.5,
+         152.8
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.003,
+        "fps": [
+         60.7,
+         60.5
+        ],
+        "js": [
+         1.61,
+         1.58
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "things": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": false,
+        "why": "ฉากสำรอง",
+        "cut": false,
+        "shaky": false,
+        "standin": true
+       }
+      ],
+      "files": {
+       "ok": false,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 171,
+       "fetches": 28,
+       "heads": 2,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 1,
+       "reused": 0,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "loaded"
+        }
+       ],
+       "ms": 5375,
+       "missing": [],
+       "failed": [
+        "map-cave-mouth.jpg"
+       ],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "standin",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "scene"
+      ],
+      "waited": 602,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 0.997,
+        "fps": [
+         60.6,
+         60.8
+        ],
+        "js": [
+         1.47,
+         1.55
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "things": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 0.998,
+        "fps": [
+         60.5,
+         60.6
+        ],
+        "js": [
+         1.69,
+         1.42
+        ],
+        "draws": [
+         14.6,
+         15.5
+        ],
+        "things": [
+         14.6,
+         15.5
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": false,
+        "why": "ฉากสำรอง",
+        "cut": false,
+        "shaky": false,
+        "standin": true
+       },
+       {
+        "id": "S3",
+        "ratio": 0.999,
+        "fps": [
+         60.5,
+         60.5
+        ],
+        "js": [
+         1.94,
+         1.76
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "things": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 172,
+       "fetches": 28,
+       "heads": 2,
+       "record": [
+        210,
+        210
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "loaded"
+        }
+       ],
+       "ms": 5167,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "slowjson",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "pass",
+      "reasons": [
+       "mode"
+      ],
+      "waited": 5493,
+      "hold": {
+       "how": "waiting",
+       "ms": 3057
+      },
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 0.999,
+        "fps": [
+         60.7,
+         60.8
+        ],
+        "js": [
+         1.5,
+         1.59
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "things": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1.004,
+        "fps": [
+         60.1,
+         60.1
+        ],
+        "js": [
+         2.84,
+         2.65
+        ],
+        "draws": [
+         208.4,
+         274
+        ],
+        "things": [
+         152.7,
+         152.7
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.003,
+        "fps": [
+         60.7,
+         60.5
+        ],
+        "js": [
+         1.91,
+         1.79
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "things": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 172,
+       "fetches": 28,
+       "heads": 3,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "loaded"
+        }
+       ],
+       "ms": 4898,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "lateload",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "interrupted"
+      ],
+      "waited": 648,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1.003,
+        "fps": [
+         60.8,
+         60.6
+        ],
+        "js": [
+         1.12,
+         0.94
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "things": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": true,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1,
+        "fps": [
+         60.6,
+         60.6
+        ],
+        "js": [
+         2.09,
+         1.92
+        ],
+        "draws": [
+         292.7,
+         241.7
+        ],
+        "things": [
+         152.6,
+         152.7
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1,
+        "fps": [
+         60.3,
+         60.5
+        ],
+        "js": [
+         1.48,
+         1.55
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "things": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "images": 173,
+       "imagesEqual": 173,
+       "fetches": 28,
+       "heads": 2,
+       "record": [
+        213,
+        213
+       ],
+       "imageLoads": 173,
+       "imageErrors": 0,
+       "reused": 0,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "loaded"
+        }
+       ],
+       "ms": 4977,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "imgerror",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "files"
+      ],
+      "waited": 613,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1,
+        "fps": [
+         60.7,
+         60.7
+        ],
+        "js": [
+         1.31,
+         1.65
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "things": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 0.993,
+        "fps": [
+         60.5,
+         60.9
+        ],
+        "js": [
+         2.83,
+         2.54
+        ],
+        "draws": [
+         307.9,
+         243.6
+        ],
+        "things": [
+         152.8,
+         152.6
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.005,
+        "fps": [
+         60.7,
+         60.4
+        ],
+        "js": [
+         1.32,
+         1.43
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "things": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": false,
+       "asked": 199,
+       "hashed": 199,
+       "images": 172,
+       "imagesEqual": 172,
+       "fetches": 28,
+       "heads": 2,
+       "record": [
+        214,
+        214
+       ],
+       "imageLoads": 173,
+       "imageErrors": 1,
+       "reused": 0,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "loaded"
+        }
+       ],
+       "ms": 6058,
+       "missing": [],
+       "failed": [
+        "gm-c207-g2.png"
+       ],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "imgreuse",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "files"
+      ],
+      "waited": 597,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1.005,
+        "fps": [
+         60.7,
+         60.4
+        ],
+        "js": [
+         1.72,
+         1.47
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "things": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1.007,
+        "fps": [
+         60.7,
+         60.4
+        ],
+        "js": [
+         2.49,
+         2.19
+        ],
+        "draws": [
+         296.5,
+         239.2
+        ],
+        "things": [
+         152.6,
+         152.6
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 0.999,
+        "fps": [
+         60.5,
+         60.5
+        ],
+        "js": [
+         1.88,
+         1.33
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "things": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": false,
+       "asked": 200,
+       "hashed": 200,
+       "images": 173,
+       "imagesEqual": 173,
+       "fetches": 28,
+       "heads": 2,
+       "record": [
+        214,
+        214
+       ],
+       "imageLoads": 174,
+       "imageErrors": 0,
+       "reused": 1,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "loaded"
+        }
+       ],
+       "ms": 4879,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": "an image of the game was given more than one file"
+      }
+     },
+     {
+      "name": "revalidate",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "pass",
+      "reasons": [
+       "mode"
+      ],
+      "waited": 578,
+      "srv": {
+       "n304": 174
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 0.996,
+        "fps": [
+         60.7,
+         60.8
+        ],
+        "js": [
+         1.51,
+         1.28
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "things": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 0.996,
+        "fps": [
+         60.6,
+         60.5
+        ],
+        "js": [
+         2.51,
+         2.46
+        ],
+        "draws": [
+         299.4,
+         240
+        ],
+        "things": [
+         152.6,
+         152.6
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.004,
+        "fps": [
+         60.6,
+         60.4
+        ],
+        "js": [
+         1.6,
+         1.55
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "things": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 172,
+       "fetches": 28,
+       "heads": 2,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "loaded"
+        }
+       ],
+       "ms": 4539,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "headok",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "pass",
+      "reasons": [
+       "mode"
+      ],
+      "waited": 632,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 0.999,
+        "fps": [
+         60.7,
+         60.7
+        ],
+        "js": [
+         1.49,
+         1.38
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "things": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1,
+        "fps": [
+         60.6,
+         60.6
+        ],
+        "js": [
+         2.5,
+         2.66
+        ],
+        "draws": [
+         299.6,
+         240.6
+        ],
+        "things": [
+         152.6,
+         152.7
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 0.998,
+        "fps": [
+         60.4,
+         60.5
+        ],
+        "js": [
+         1.5,
+         1.3
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "things": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 172,
+       "fetches": 28,
+       "heads": 4,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "loaded"
+        }
+       ],
+       "ms": 4478,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "full304",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "files",
+       "scene"
+      ],
+      "waited": 587,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1,
+        "fps": [
+         60.1,
+         60.1
+        ],
+        "js": [
+         1.27,
+         1.23
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "things": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 0.999,
+        "fps": [
+         60.1,
+         60.1
+        ],
+        "js": [
+         0.9,
+         0.95
+        ],
+        "draws": [
+         17.2,
+         18.2
+        ],
+        "things": [
+         17.2,
+         18.2
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": false,
+        "why": "ฉากสำรอง",
+        "cut": false,
+        "shaky": false,
+        "standin": true
+       },
+       {
+        "id": "S3",
+        "ratio": 1,
+        "fps": [
+         60.1,
+         60.1
+        ],
+        "js": [
+         0.92,
+         0.78
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "things": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": false,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 172,
+       "fetches": 27,
+       "heads": 9,
+       "record": [
+        210,
+        210
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "loaded"
+        }
+       ],
+       "ms": 4718,
+       "missing": [],
+       "failed": [
+        "g9b-scene.json"
+       ],
+       "wrong": [],
+       "why": ""
+      },
+      "line": "G4.6 วัดความลื่น v5 · เกม 2.43 · เมือง 100 % · ฟาร์ม 100 % · ปากถ้ำ 100 % → ไม่นับ (ไฟล์เกมไม่ครบหรือไม่ตรง 1 ไฟล์ · เกมใช้ฉากสำรอง (ไฟล์ของฉากมาไม่ครบ)) · fps เปิด/ปิด 60.1/60.1 · 60.1/60.1 · 60.1/60.1 · งาน JS ms/เฟรม เปิด/ปิด 1.27/1.23 · 0.90/0.95 · 0.92/0.78 · วาด/เฟรม เปิด/ปิด 18/19 · 17/18 · 16/14 · ตรวจ ✓ ✗ฉากสำรอง ✓ · ไฟล์ 198 ขาด 1 [g9b-scene.json] ผิด 0 · ภาพที่เกมถือ 172 ตรง 172 · fetch 27 · รอโหลด 0.6 วิ · มือถือ 844×390 @3 · Android 10 Chrome/153.0.0.0",
+      "runs": [
+       {
+        "scene": "S1",
+        "on": true,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 26,
+        "real": true,
+        "busy": [],
+        "draws": 18.0,
+        "things": 18.0
+       },
+       {
+        "scene": "S1",
+        "on": false,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 27,
+        "real": true,
+        "busy": [],
+        "draws": 19.0,
+        "things": 19.0
+       },
+       {
+        "scene": "S1",
+        "on": false,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 21,
+        "real": true,
+        "busy": [],
+        "draws": 19.0,
+        "things": 19.0
+       },
+       {
+        "scene": "S1",
+        "on": true,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 21,
+        "real": true,
+        "busy": [],
+        "draws": 18.0,
+        "things": 18.0
+       },
+       {
+        "scene": "S1",
+        "on": true,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 21,
+        "real": true,
+        "busy": [],
+        "draws": 18.0,
+        "things": 18.0
+       },
+       {
+        "scene": "S1",
+        "on": false,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 22,
+        "real": true,
+        "busy": [],
+        "draws": 19.0,
+        "things": 19.0
+       },
+       {
+        "scene": "S2",
+        "on": true,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 23,
+        "real": false,
+        "busy": [],
+        "draws": 17.2,
+        "things": 17.2
+       },
+       {
+        "scene": "S2",
+        "on": false,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 21,
+        "real": false,
+        "busy": [],
+        "draws": 18.2,
+        "things": 18.2
+       },
+       {
+        "scene": "S2",
+        "on": false,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 21,
+        "real": false,
+        "busy": [],
+        "draws": 17.9,
+        "things": 17.9
+       },
+       {
+        "scene": "S2",
+        "on": true,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 20,
+        "real": false,
+        "busy": [],
+        "draws": 16.9,
+        "things": 16.9
+       },
+       {
+        "scene": "S2",
+        "on": true,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 22,
+        "real": false,
+        "busy": [],
+        "draws": 17.2,
+        "things": 17.2
+       },
+       {
+        "scene": "S2",
+        "on": false,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 21,
+        "real": false,
+        "busy": [],
+        "draws": 18.2,
+        "things": 18.2
+       },
+       {
+        "scene": "S3",
+        "on": true,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 19,
+        "real": true,
+        "busy": [],
+        "draws": 16.0,
+        "things": 16.0
+       },
+       {
+        "scene": "S3",
+        "on": false,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 27,
+        "real": true,
+        "busy": [],
+        "draws": 14.0,
+        "things": 14.0
+       },
+       {
+        "scene": "S3",
+        "on": false,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 22,
+        "real": true,
+        "busy": [],
+        "draws": 14.0,
+        "things": 14.0
+       },
+       {
+        "scene": "S3",
+        "on": true,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 20,
+        "real": true,
+        "busy": [],
+        "draws": 16.0,
+        "things": 16.0
+       },
+       {
+        "scene": "S3",
+        "on": true,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 28,
+        "real": true,
+        "busy": [],
+        "draws": 16.0,
+        "things": 16.0
+       },
+       {
+        "scene": "S3",
+        "on": false,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 26,
+        "real": true,
+        "busy": [],
+        "draws": 14.0,
+        "things": 14.0
+       }
+      ]
+     },
+     {
+      "name": "full",
+      "tries": 1,
+      "ok": true,
+      "verdict": "pass",
+      "verdictIfCounted": "pass",
+      "waited": 600,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1,
+        "fps": [
+         60.1,
+         60.1
+        ],
+        "js": [
+         1.18,
+         1.04
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "things": [
+         18,
+         19
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1.002,
+        "fps": [
+         60.2,
+         60.1
+        ],
+        "js": [
+         2.21,
+         2.18
+        ],
+        "draws": [
+         246.9,
+         250.8
+        ],
+        "things": [
+         153.1,
+         153.7
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1,
+        "fps": [
+         60.1,
+         60.1
+        ],
+        "js": [
+         0.9,
+         0.81
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "things": [
+         16,
+         14
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 172,
+       "fetches": 28,
+       "heads": 9,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "scripts": [
+        {
+         "rel": "char2.js",
+         "guarded": true,
+         "state": "loaded"
+        }
+       ],
+       "ms": 5433,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      },
+      "line": "G4.6 วัดความลื่น v5 · เกม 2.43 · เมือง 100 % · ฟาร์ม 100 % · ปากถ้ำ 100 % → ผ่าน (เกณฑ์ ≥ 90 %) · fps เปิด/ปิด 60.1/60.1 · 60.2/60.1 · 60.1/60.1 · งาน JS ms/เฟรม เปิด/ปิด 1.18/1.04 · 2.21/2.18 · 0.90/0.81 · วาด/เฟรม เปิด/ปิด 18/19 · 247/251 · 16/14 · ตรวจ ✓ ✓ ✓ · ไฟล์ 198 ขาด 0 ผิด 0 · ภาพที่เกมถือ 172 ตรง 172 · fetch 28 · รอโหลด 0.6 วิ · มือถือ 844×390 @3 · Android 10 Chrome/153.0.0.0",
+      "runs": [
+       {
+        "scene": "S1",
+        "on": true,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 24,
+        "real": true,
+        "busy": [],
+        "draws": 18.0,
+        "things": 18.0
+       },
+       {
+        "scene": "S1",
+        "on": false,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 21,
+        "real": true,
+        "busy": [],
+        "draws": 19.0,
+        "things": 19.0
+       },
+       {
+        "scene": "S1",
+        "on": false,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 21,
+        "real": true,
+        "busy": [],
+        "draws": 19.0,
+        "things": 19.0
+       },
+       {
+        "scene": "S1",
+        "on": true,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 21,
+        "real": true,
+        "busy": [],
+        "draws": 18.0,
+        "things": 18.0
+       },
+       {
+        "scene": "S1",
+        "on": true,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 28,
+        "real": true,
+        "busy": [],
+        "draws": 18.0,
+        "things": 18.0
+       },
+       {
+        "scene": "S1",
+        "on": false,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 21,
+        "real": true,
+        "busy": [],
+        "draws": 19.0,
+        "things": 19.0
+       },
+       {
+        "scene": "S2",
+        "on": true,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 23,
+        "real": true,
+        "busy": [],
+        "draws": 246.9,
+        "things": 152.9
+       },
+       {
+        "scene": "S2",
+        "on": false,
+        "fps": 60,
+        "frames": 300,
+        "gap": 28,
+        "real": true,
+        "busy": [],
+        "draws": 257.4,
+        "things": 153.7
+       },
+       {
+        "scene": "S2",
+        "on": false,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 23,
+        "real": true,
+        "busy": [],
+        "draws": 250.8,
+        "things": 153.7
+       },
+       {
+        "scene": "S2",
+        "on": true,
+        "fps": 60.2,
+        "frames": 302,
+        "gap": 24,
+        "real": true,
+        "busy": [],
+        "draws": 216.1,
+        "things": 153.1
+       },
+       {
+        "scene": "S2",
+        "on": true,
+        "fps": 60.2,
+        "frames": 301,
+        "gap": 23,
+        "real": true,
+        "busy": [],
+        "draws": 269.0,
+        "things": 153.9
+       },
+       {
+        "scene": "S2",
+        "on": false,
+        "fps": 60.3,
+        "frames": 302,
+        "gap": 23,
+        "real": true,
+        "busy": [],
+        "draws": 213.0,
+        "things": 153.7
+       },
+       {
+        "scene": "S3",
+        "on": true,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 20,
+        "real": true,
+        "busy": [],
+        "draws": 16.0,
+        "things": 16.0
+       },
+       {
+        "scene": "S3",
+        "on": false,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 20,
+        "real": true,
+        "busy": [],
+        "draws": 14.0,
+        "things": 14.0
+       },
+       {
+        "scene": "S3",
+        "on": false,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 20,
+        "real": true,
+        "busy": [],
+        "draws": 14.0,
+        "things": 14.0
+       },
+       {
+        "scene": "S3",
+        "on": true,
+        "fps": 60.2,
+        "frames": 301,
+        "gap": 20,
+        "real": true,
+        "busy": [],
+        "draws": 16.0,
+        "things": 16.0
+       },
+       {
+        "scene": "S3",
+        "on": true,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 20,
+        "real": true,
+        "busy": [],
+        "draws": 16.0,
+        "things": 16.0
+       },
+       {
+        "scene": "S3",
+        "on": false,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 25,
+        "real": true,
+        "busy": [],
+        "draws": 14.0,
+        "things": 14.0
+       }
+      ]
+     }
+    ]
+   },
+   "selftest_first_run": {
+    "summary": {
+     "cases": 35,
+     "ok": 35,
+     "retried": [
+      "ok×2"
+     ],
+     "noisy": [
+      "nooldbody:unstable"
+     ],
+     "verdict": "pass"
+    },
+    "note": "same build, before the \"revalidate\" case was added; \"ok\" first try: unstable in a 1-second test run; both in the farm scene, where some 1-second runs dropped to 50.8-57.8 fps on this machine"
+   },
+   "mutations": {
+    "removed_guards": 25,
+    "selftest_exit_1": 25,
+    "note": "run with the self-test file before the \"revalidate\" case was added",
+    "each": {
+     "build": {
+      "selftest_exit": 1,
+      "ok": 0,
+      "cases": 1,
+      "said": [
+       {
+        "case": "build",
+        "bench_said": "pass",
+        "reasons": []
+       }
+      ]
+     },
+     "busy": {
+      "selftest_exit": 1,
+      "ok": 0,
+      "cases": 1,
+      "said": [
+       {
+        "case": "lateload",
+        "bench_said": "pass",
+        "reasons": []
+       }
+      ]
+     },
+     "cut": {
+      "selftest_exit": 1,
+      "ok": 0,
+      "cases": 2,
+      "said": [
+       {
+        "case": "hidden",
+        "bench_said": "pass",
+        "reasons": []
+       },
+       {
+        "case": "lowfps",
+        "bench_said": "fail",
+        "reasons": []
+       }
+      ]
+     },
+     "device": {
+      "selftest_exit": 1,
+      "ok": 0,
+      "cases": 1,
+      "said": [
+       {
+        "case": "desktop",
+        "bench_said": "pass",
+        "reasons": []
+       }
+      ]
+     },
+     "draws": {
+      "selftest_exit": 1,
+      "ok": 0,
+      "cases": 1,
+      "said": [
+       {
+        "case": "fewdraws",
+        "bench_said": "pass",
+        "reasons": []
+       }
+      ]
+     },
+     "files": {
+      "selftest_exit": 1,
+      "ok": 0,
+      "cases": 2,
+      "said": [
+       {
+        "case": "nofile",
+        "bench_said": "pass",
+        "reasons": []
+       },
+       {
+        "case": "unlisted",
+        "bench_said": "pass",
+        "reasons": []
+       }
+      ]
+     },
+     "gate": {
+      "selftest_exit": 1,
+      "ok": 0,
+      "cases": 1,
+      "said": [
+       {
+        "case": "slowon",
+        "bench_said": "pass",
+        "reasons": []
+       }
+      ]
+     },
+     "get304": {
+      "selftest_exit": 1,
+      "ok": 0,
+      "cases": 1,
+      "said": [
+       {
+        "case": "first304_nostore",
+        "bench_said": "void",
+        "reasons": [
+         "scene"
+        ]
+       }
+      ]
+     },
+     "headmethod": {
+      "selftest_exit": 1,
+      "ok": 0,
+      "cases": 1,
+      "said": [
+       {
+        "case": "headok",
+        "bench_said": "void",
+        "reasons": [
+         "files"
+        ]
+       }
+      ]
+     },
+     "imgend": {
+      "selftest_exit": 1,
+      "ok": 0,
+      "cases": 1,
+      "said": [
+       {
+        "case": "imgerror",
+        "bench_said": "pass",
+        "reasons": []
+       }
+      ]
+     },
+     "imgreuse": {
+      "selftest_exit": 1,
+      "ok": 0,
+      "cases": 1,
+      "said": [
+       {
+        "case": "imgreuse",
+        "bench_said": "pass",
+        "reasons": []
+       }
+      ]
+     },
+     "lamp": {
+      "selftest_exit": 1,
+      "ok": 0,
+      "cases": 2,
+      "said": [
+       {
+        "case": "nolantern",
+        "bench_said": "pass",
+        "reasons": []
+       },
+       {
+        "case": "nohold",
+        "bench_said": "pass",
+        "reasons": []
+       }
+      ]
+     },
+     "mode": {
+      "selftest_exit": 1,
+      "ok": 0,
+      "cases": 1,
+      "said": [
+       {
+        "case": "ok",
+        "bench_said": "pass",
+        "reasons": []
+       }
+      ]
+     },
+     "oldbody": {
+      "selftest_exit": 1,
+      "ok": 0,
+      "cases": 2,
+      "said": [
+       {
+        "case": "nooldbody",
+        "bench_said": "pass",
+        "reasons": []
+       },
+       {
+        "case": "nooldbody_late",
+        "bench_said": "pass",
+        "reasons": []
+       }
+      ]
+     },
+     "pins": {
+      "selftest_exit": 1,
+      "ok": 0,
+      "cases": 1,
+      "said": [
+       {
+        "case": "lite",
+        "bench_said": "pass",
+        "reasons": []
+       }
+      ]
+     },
+     "pixels": {
+      "selftest_exit": 1,
+      "ok": 0,
+      "cases": 2,
+      "said": [
+       {
+        "case": "firstwrong_nostore",
+        "bench_said": "void",
+        "reasons": [
+         "scene"
+        ]
+       },
+       {
+        "case": "firstsame_nostore",
+        "bench_said": "pass",
+        "reasons": []
+       }
+      ]
+     },
+     "quiet": {
+      "selftest_exit": 1,
+      "ok": 0,
+      "cases": 1,
+      "said": [
+       {
+        "case": "slowjson",
+        "bench_said": "void",
+        "reasons": [
+         "scene",
+         "interrupted"
+        ]
+       }
+      ]
+     },
+     "refhash": {
+      "selftest_exit": 1,
+      "ok": 0,
+      "cases": 1,
+      "said": [
+       {
+        "case": "wrongsame",
+        "bench_said": "pass",
+        "reasons": []
+       }
+      ]
+     },
+     "refsetter": {
+      "selftest_exit": 1,
+      "ok": 0,
+      "cases": 1,
+      "said": [
+       {
+        "case": "ok",
+        "bench_said": "pass",
+        "reasons": []
+       }
+      ]
+     },
+     "refsize": {
+      "selftest_exit": 1,
+      "ok": 0,
+      "cases": 1,
+      "said": [
+       {
+        "case": "wrongimage",
+        "bench_said": "void",
+        "reasons": [
+         "scene"
+        ]
+       }
+      ]
+     },
+     "scene": {
+      "selftest_exit": 1,
+      "ok": 0,
+      "cases": 2,
+      "said": [
+       {
+        "case": "first304_nostore",
+        "bench_said": "void",
+        "reasons": [
+         "files"
+        ]
+       },
+       {
+        "case": "standin",
+        "bench_said": "pass",
+        "reasons": []
+       }
+      ]
+     },
+     "shadow": {
+      "selftest_exit": 1,
+      "ok": 0,
+      "cases": 1,
+      "said": [
+       {
+        "case": "noshadow",
+        "bench_said": "pass",
+        "reasons": []
+       }
+      ]
+     },
+     "shaky": {
+      "selftest_exit": 1,
+      "ok": 0,
+      "cases": 1,
+      "said": [
+       {
+        "case": "slowoff",
+        "bench_said": "pass",
+        "reasons": []
+       }
+      ]
+     },
+     "sri": {
+      "selftest_exit": 1,
+      "ok": 0,
+      "cases": 1,
+      "said": [
+       {
+        "case": "firstscript_nostore",
+        "bench_said": "void",
+        "reasons": [
+         "files"
+        ]
+       }
+      ]
+     },
+     "tee": {
+      "selftest_exit": 1,
+      "ok": 0,
+      "cases": 1,
+      "said": [
+       {
+        "case": "firstjson_nostore",
+        "bench_said": "pass",
+        "reasons": []
+       }
+      ]
+     }
+    }
+   }
   }
  },
  "codex_T47": {
@@ -6738,6 +12333,23 @@
    "without_interception": true,
    "no_store": "v3 passes (false pass)",
    "cacheable": "v3 catches it (force-cache reads the first answer)"
+  }
+ },
+ "codex_T49": {
+  "review": "REVIEW_CODEX_T49_BENCH4.md @2183650",
+  "v4": {
+   "T48-N1": "closed (swapback, no interception, full length: control pass, PNG 1x1 and same-size JPEG void/files)",
+   "full_selftest": "26/26, no retries",
+   "mutations": "3/3",
+   "new": {
+    "T49-N1": "medium: a GET answered 304 with no body was skipped like a HEAD; the farm fell back to its old map (17/18 draw commands a frame instead of 250) and the run said pass",
+    "T49-N2": "low: the 172 reference images were kept in the load record after the check"
+   },
+   "limits_accepted_low": [
+    "pictures shown through CSS",
+    "the hunting-map worker reading files again"
+   ],
+   "wording": "\"not more than 0.6 %\" must not be used as a guarantee (§6.5)"
   }
  }
 }
