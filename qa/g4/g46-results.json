@@ -258,9 +258,9 @@
    "diff": 15.22
   }
  },
- "report": "v1.4",
+ "report": "v1.5",
  "M6_phone": {
-  "status": "no usable result yet: v1 result withdrawn; bench v2, v3 and v4 superseded after Codex T47, T48 and T49; re-measure on v5 after Codex T50",
+  "status": "no usable result yet: v1 result withdrawn; bench v2-v5 superseded after Codex T47-T50; re-measure on v6 after Codex T51",
   "v1_withdrawn": {
    "why": [
     "the published copy lacked 58 game files the real game asks for in a full-length run (199 asked, 140 in the copy; + sw.js left out on purpose) and the bench did not check files",
@@ -6760,40 +6760,217 @@
      "noisy": [],
      "verdict": "pass"
     },
-    "file": "qa/g4/phone_bench_selftest.js as committed",
+    "cases": "see this file at 7051007"
+   },
+   "selftest_first_run": {
+    "summary": {
+     "cases": 35,
+     "ok": 35,
+     "retried": [
+      "ok×2"
+     ],
+     "noisy": [
+      "nooldbody:unstable"
+     ],
+     "verdict": "pass"
+    },
+    "note": "same build, before the \"revalidate\" case was added; \"ok\" first try: unstable in a 1-second test run; both in the farm scene, where some 1-second runs dropped to 50.8-57.8 fps on this machine"
+   },
+   "mutations": {
+    "removed_guards": 25,
+    "selftest_exit_1": 25,
+    "note": "run with the self-test file before the \"revalidate\" case was added",
+    "each": "see this file at 7051007"
+   }
+  },
+  "bench_v6": {
+   "code": "881c6c7",
+   "files": 313,
+   "file_bytes": 26892217,
+   "page_bytes": 1647484,
+   "published": {
+    "version": "1794769325-9e60",
+    "page_equals_tested_build": true,
+    "host_wrapper_bytes": [
+     531,
+     15
+    ],
+    "checked_on_real_host": false
+   },
+   "fixes": {
+    "T50-N1": "the load record keeps th (headers) and t1 (end); for a GET answered well t1 is the end of the body (a copy read to its end, or broken off); waiting and the busy check use t1; a body not ended at the file check or broken off = a file the game did not get; a load given up on is not waited for twice",
+    "T50-N2": "\"things\" removed; scene check outside the player, per frame, medians of 3: rows painted by pictures >= 0.90, objects (grouping that tolerates missing rows) >= 0.90, rows missing inside objects ON <= OFF + 1, rows painted by rectangles >= 0.90, number of rectangle/path/text commands >= 0.80"
+   },
+   "added_by_claude": [
+    "rectangle, path and text commands (70-190 a frame in the three scenes) were not looked at by v2-v5: rect rows + ops",
+    "rows instead of pixels: the painted ground is one command of 91-99 % of all pixels; in rows it is 19-65 %",
+    "the result shows every pair's ratio; a scene within 3 points of the gate asks for a second measurement",
+    "self-test fault \"fewdraws\" no longer uses the bench's own grouping"
+   ],
+   "normal_game_on_vs_off": {
+    "note": "full-length run, scene outside the player, per frame (ON, OFF)",
+    "rows": [
+     [
+      2629,
+      2629
+     ],
+     [
+      5919.1,
+      5919.1
+     ],
+     [
+      1495.5,
+      1495.5
+     ]
+    ],
+    "obj": [
+     [
+      17,
+      17
+     ],
+     [
+      152,
+      152.61
+     ],
+     [
+      12,
+      12
+     ]
+    ],
+    "rowsMissing": [
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      0
+     ]
+    ],
+    "rectRows": [
+     [
+      3501.8,
+      3503.4
+     ],
+     [
+      2785.2,
+      2784.4
+     ],
+     [
+      1882.3,
+      1885.5
+     ]
+    ],
+    "ops": [
+     [
+      106.6,
+      108.5
+     ],
+     [
+      67.1,
+      67.1
+     ],
+     [
+      182,
+      182.5
+     ]
+    ]
+   },
+   "property_test": {
+    "file": "qa/g4/phone_bench_scene_test.js",
+    "scenes": 400,
+    "wind": 2400,
+    "removal": 4800,
+    "inside": 1600,
+    "failed": 0,
+    "broken_counters_caught": {
+     "sy === oe (v5 grouping)": 6225,
+     "placement not checked": 432,
+     "width instead of height": 3968
+    }
+   },
+   "not_covered": [
+    "offscreen canvases (shadow layer, water, the new character's scratch canvas)",
+    "drawing state (globalAlpha, clip, scale)",
+    "losses under the gates (< 10 % of rows/objects, < 20 % of other commands)",
+    "rows missing at the head or tail of an object (seen by rows only)",
+    "the scene's work is not steady in the first ~8 s after entering a map (particles build up)",
+    "wind in the farm (Codex T50 §6: disclosed limit)",
+    "pictures shown through CSS; the hunting-map worker; HUD pictures the game gave up on",
+    "an emulated phone passes the device check",
+    "the wrappers (now 8 more commands) cannot be proven free of bias",
+    "not checked on the real artifact host"
+   ],
+   "selftest": {
+    "summary": {
+     "cases": 47,
+     "ok": 47,
+     "retried": [
+      "ok×2",
+      "hidden×2"
+     ],
+     "noisy": [
+      "firstwrong:unstable",
+      "bodylate:interrupted",
+      "fullbody:interrupted"
+     ],
+     "verdict": "pass"
+    },
+    "file": "qa/g4/phone_bench_selftest.js as committed (881c6c7), one run",
+    "note": "retried: \"ok\" and \"hidden\" passed on the 2nd try (1st: unstable in a 1-second run); \"firstwrong\" passed with unstable beside its own reasons; bodylate and fullbody list \"interrupted\", which is the outcome those cases must have",
     "cases": [
      {
       "name": "ok",
-      "tries": 1,
+      "tries": 2,
       "ok": true,
       "verdict": "void",
       "verdictIfCounted": "pass",
       "reasons": [
        "mode"
       ],
-      "waited": 677,
+      "waited": 607,
       "srv": {
        "n304": 0
       },
       "rows": [
        {
         "id": "S1",
-        "ratio": 0.998,
+        "ratio": 0.999,
         "fps": [
-         60.8,
-         60.8
+         60.7,
+         60.7
         ],
         "js": [
-         1.88,
-         1.52
+         1.64,
+         1.34
         ],
         "draws": [
          18,
          19
         ],
-        "things": [
-         18,
-         19
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3495.8,
+         3494.5
+        ],
+        "ops": [
+         96.9,
+         93.9
         ],
         "shadow": [
          1,
@@ -6807,22 +6984,38 @@
        },
        {
         "id": "S2",
-        "ratio": 0.984,
+        "ratio": 1.003,
         "fps": [
-         59.5,
-         60.4
+         60.6,
+         60.6
         ],
         "js": [
-         2.55,
-         2.48
+         2.3,
+         1.88
         ],
         "draws": [
-         284.7,
-         247.5
+         301.9,
+         242.7
         ],
-        "things": [
-         152.6,
-         152.7
+        "rowsPainted": [
+         5888.3,
+         5871.8
+        ],
+        "obj": [
+         151.67,
+         151.69
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2788.5,
+         2786.4
+        ],
+        "ops": [
+         72.9,
+         73.3
         ],
         "shadow": [
          0,
@@ -6836,22 +7029,38 @@
        },
        {
         "id": "S3",
-        "ratio": 1.002,
+        "ratio": 0.997,
         "fps": [
-         60.6,
-         60.7
+         60.4,
+         60.5
         ],
         "js": [
-         1.61,
-         1.56
+         1.48,
+         1.61
         ],
         "draws": [
          16,
          14
         ],
-        "things": [
-         16,
-         14
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1885.2,
+         1878.6
+        ],
+        "ops": [
+         183.1,
+         180.3
         ],
         "shadow": [
          1,
@@ -6879,14 +7088,7 @@
        "imageLoads": 172,
        "imageErrors": 0,
        "reused": 0,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "loaded"
-        }
-       ],
-       "ms": 5345,
+       "ms": 5532,
        "missing": [],
        "failed": [],
        "wrong": [],
@@ -6903,29 +7105,45 @@
        "mode",
        "device"
       ],
-      "waited": 567,
+      "waited": 536,
       "srv": {
        "n304": 0
       },
       "rows": [
        {
         "id": "S1",
-        "ratio": 0.998,
+        "ratio": 1.005,
         "fps": [
-         60.2,
-         60.3
+         60.5,
+         60.2
         ],
         "js": [
-         1.45,
-         1.26
+         1.28,
+         1.14
         ],
         "draws": [
          18,
          19
         ],
-        "things": [
-         18,
-         19
+        "rowsPainted": [
+         2260,
+         2260
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2852.3,
+         2848.5
+        ],
+        "ops": [
+         102.6,
+         94.9
         ],
         "shadow": [
          1,
@@ -6939,22 +7157,38 @@
        },
        {
         "id": "S2",
-        "ratio": 1.002,
+        "ratio": 1.004,
         "fps": [
-         60.5,
+         60.6,
          60.4
         ],
         "js": [
-         2.86,
-         2.46
+         1.92,
+         2.08
         ],
         "draws": [
-         272.7,
-         204.9
+         270.2,
+         220.6
         ],
-        "things": [
-         124.4,
-         124
+        "rowsPainted": [
+         4683.4,
+         4677.8
+        ],
+        "obj": [
+         123.48,
+         123.05
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2446.1,
+         2444.2
+        ],
+        "ops": [
+         73.4,
+         73.8
         ],
         "shadow": [
          0,
@@ -6968,22 +7202,38 @@
        },
        {
         "id": "S3",
-        "ratio": 1.001,
+        "ratio": 0.997,
         "fps": [
-         60.3,
-         60.2
+         60.2,
+         60.4
         ],
         "js": [
-         1.46,
-         1.52
+         1.03,
+         0.83
         ],
         "draws": [
          16,
          14
         ],
-        "things": [
-         16,
-         14
+        "rowsPainted": [
+         1194,
+         1194
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1412.8,
+         1407.1
+        ],
+        "ops": [
+         180.9,
+         179.9
         ],
         "shadow": [
          1,
@@ -7011,14 +7261,7 @@
        "imageLoads": 172,
        "imageErrors": 0,
        "reused": 0,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "loaded"
-        }
-       ],
-       "ms": 3590,
+       "ms": 3451,
        "missing": [],
        "failed": [],
        "wrong": [],
@@ -7035,29 +7278,45 @@
        "mode",
        "files"
       ],
-      "waited": 710,
+      "waited": 607,
       "srv": {
        "n304": 0
       },
       "rows": [
        {
         "id": "S1",
-        "ratio": 1.007,
+        "ratio": 1.004,
         "fps": [
          60.8,
-         60.6
+         60.4
         ],
         "js": [
-         1.39,
-         1.39
+         1.31,
+         1.25
         ],
         "draws": [
          18,
          19
         ],
-        "things": [
-         18,
-         19
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3496.7,
+         3490.7
+        ],
+        "ops": [
+         98.4,
+         88.3
         ],
         "shadow": [
          1,
@@ -7071,22 +7330,38 @@
        },
        {
         "id": "S2",
-        "ratio": 1.001,
+        "ratio": 0.987,
         "fps": [
-         60.6,
-         60.6
+         55,
+         55.8
         ],
         "js": [
-         2.61,
-         2.56
+         2.63,
+         2.22
         ],
         "draws": [
-         288.8,
-         245.6
+         305.2,
+         238.2
         ],
-        "things": [
-         152.7,
-         152.7
+        "rowsPainted": [
+         5886.5,
+         5887
+        ],
+        "obj": [
+         151.77,
+         151.73
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2788.3,
+         2786.5
+        ],
+        "ops": [
+         73.2,
+         73.2
         ],
         "shadow": [
          0,
@@ -7100,22 +7375,38 @@
        },
        {
         "id": "S3",
-        "ratio": 1.003,
+        "ratio": 1.002,
         "fps": [
-         60.6,
-         60.4
+         60.8,
+         60.5
         ],
         "js": [
-         2.06,
+         2.21,
          1.8
         ],
         "draws": [
          16,
          14
         ],
-        "things": [
-         16,
-         14
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1871.8,
+         1878.8
+        ],
+        "ops": [
+         179.6,
+         180.5
         ],
         "shadow": [
          1,
@@ -7143,14 +7434,7 @@
        "imageLoads": 172,
        "imageErrors": 2,
        "reused": 0,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "loaded"
-        }
-       ],
-       "ms": 5526,
+       "ms": 6261,
        "missing": [],
        "failed": [
         "kit-town.png"
@@ -7169,29 +7453,45 @@
        "mode",
        "files"
       ],
-      "waited": 624,
+      "waited": 716,
       "srv": {
        "n304": 0
       },
       "rows": [
        {
         "id": "S1",
-        "ratio": 0.999,
+        "ratio": 0.985,
         "fps": [
-         60.7,
-         60.7
+         60,
+         60.2
         ],
         "js": [
          1.74,
-         1.54
+         1.3
         ],
         "draws": [
          18,
          19
         ],
-        "things": [
-         18,
-         19
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3487.7,
+         3487.7
+        ],
+        "ops": [
+         82.6,
+         81.9
         ],
         "shadow": [
          1,
@@ -7205,22 +7505,38 @@
        },
        {
         "id": "S2",
-        "ratio": 0.938,
+        "ratio": 1.001,
         "fps": [
-         56.6,
-         60.4
+         60.6,
+         59.8
         ],
         "js": [
-         2.97,
-         2.7
+         2.55,
+         2.15
         ],
         "draws": [
-         287.4,
-         242.9
+         281.9,
+         248
         ],
-        "things": [
-         152.5,
-         152.7
+        "rowsPainted": [
+         5880.9,
+         5886.1
+        ],
+        "obj": [
+         151.62,
+         151.62
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2788.2,
+         2786.1
+        ],
+        "ops": [
+         73,
+         73.2
         ],
         "shadow": [
          0,
@@ -7234,22 +7550,38 @@
        },
        {
         "id": "S3",
-        "ratio": 1.001,
+        "ratio": 0.997,
         "fps": [
-         60.5,
-         60.4
+         60.6,
+         60.7
         ],
         "js": [
-         1.3,
-         1.97
+         2.25,
+         1.86
         ],
         "draws": [
          16,
          14
         ],
-        "things": [
-         16,
-         14
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1866.7,
+         1885.1
+        ],
+        "ops": [
+         175.6,
+         181.6
         ],
         "shadow": [
          1,
@@ -7277,14 +7609,7 @@
        "imageLoads": 172,
        "imageErrors": 0,
        "reused": 0,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "loaded"
-        }
-       ],
-       "ms": 5980,
+       "ms": 4945,
        "missing": [
         "kit-town.png"
        ],
@@ -7310,22 +7635,38 @@
       "rows": [
        {
         "id": "S1",
-        "ratio": 1.002,
+        "ratio": 1.004,
         "fps": [
          60.7,
-         60.7
+         60.6
         ],
         "js": [
-         1.72,
-         1.61
+         1.65,
+         1.56
         ],
         "draws": [
          18,
          19
         ],
-        "things": [
-         18,
-         19
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3496,
+         3493.8
+        ],
+        "ops": [
+         95.4,
+         90.9
         ],
         "shadow": [
          1,
@@ -7339,22 +7680,38 @@
        },
        {
         "id": "S2",
-        "ratio": 0.958,
+        "ratio": 1.03,
         "fps": [
-         57.8,
-         60.6
+         60.2,
+         59.2
         ],
         "js": [
-         2.7,
-         2.68
+         2.05,
+         2.2
         ],
         "draws": [
-         286.7,
-         239.3
+         289.3,
+         238.2
         ],
-        "things": [
-         152.8,
-         152.8
+        "rowsPainted": [
+         5871.8,
+         5876.8
+        ],
+        "obj": [
+         151.61,
+         151.83
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2787.9,
+         2787.4
+        ],
+        "ops": [
+         72.9,
+         73.5
         ],
         "shadow": [
          0,
@@ -7368,22 +7725,38 @@
        },
        {
         "id": "S3",
-        "ratio": 1.001,
+        "ratio": 0.998,
         "fps": [
          60.5,
-         60.4
+         60.6
         ],
         "js": [
-         1.14,
-         1
+         1.3,
+         1.51
         ],
         "draws": [
          16,
          14
         ],
-        "things": [
-         16,
-         14
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1882.3,
+         1903.3
+        ],
+        "ops": [
+         181.9,
+         188.3
         ],
         "shadow": [
          1,
@@ -7411,14 +7784,7 @@
        "imageLoads": 172,
        "imageErrors": 0,
        "reused": 0,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "loaded"
-        }
-       ],
-       "ms": 5981,
+       "ms": 4581,
        "missing": [],
        "failed": [],
        "wrong": [],
@@ -7435,29 +7801,45 @@
        "mode",
        "files"
       ],
-      "waited": 605,
+      "waited": 614,
       "srv": {
        "n304": 0
       },
       "rows": [
        {
         "id": "S1",
-        "ratio": 1.003,
+        "ratio": 1.004,
         "fps": [
-         60.9,
-         60.8
+         60.7,
+         60.6
         ],
         "js": [
-         1.52,
-         1.55
+         1.64,
+         1.56
         ],
         "draws": [
          19,
          19
         ],
-        "things": [
-         19,
-         19
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3501.9,
+         3498.1
+        ],
+        "ops": [
+         105.2,
+         99.9
         ],
         "shadow": [
          0,
@@ -7471,22 +7853,38 @@
        },
        {
         "id": "S2",
-        "ratio": 0.994,
+        "ratio": 1.018,
         "fps": [
-         58,
-         58.7
+         58.7,
+         59.3
         ],
         "js": [
-         2.79,
-         2.73
+         2.26,
+         2.24
         ],
         "draws": [
-         285.6,
-         241.1
+         304.7,
+         251.9
         ],
-        "things": [
-         152.9,
-         152.7
+        "rowsPainted": [
+         5871.6,
+         5868.8
+        ],
+        "obj": [
+         151.59,
+         151.74
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2783.9,
+         2785.8
+        ],
+        "ops": [
+         66.3,
+         66.6
         ],
         "shadow": [
          0,
@@ -7500,22 +7898,38 @@
        },
        {
         "id": "S3",
-        "ratio": 1.002,
+        "ratio": 0.996,
         "fps": [
-         60.4,
+         60.8,
          60.4
         ],
         "js": [
-         0.9,
-         1
+         0.75,
+         1.01
         ],
         "draws": [
          14,
          14
         ],
-        "things": [
-         14,
-         14
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1871.8,
+         1866.3
+        ],
+        "ops": [
+         177.9,
+         175.7
         ],
         "shadow": [
          0,
@@ -7543,14 +7957,7 @@
        "imageLoads": 162,
        "imageErrors": 0,
        "reused": 0,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "loaded"
-        }
-       ],
-       "ms": 4879,
+       "ms": 5249,
        "missing": [],
        "failed": [
         "c2-pack.json"
@@ -7570,29 +7977,45 @@
        "interrupted",
        "unstable"
       ],
-      "waited": 634,
+      "waited": 625,
       "srv": {
        "n304": 0
       },
       "rows": [
        {
         "id": "S1",
-        "ratio": 4.862,
+        "ratio": 5.159,
         "fps": [
-         60.7,
-         12.5
+         60.4,
+         11.8
         ],
         "js": [
-         1.41,
-         1.54
+         1.38,
+         1.34
         ],
         "draws": [
          18,
          19
         ],
-        "things": [
-         18,
-         19
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3489.8,
+         3489.8
+        ],
+        "ops": [
+         85.9,
+         85
         ],
         "shadow": [
          1,
@@ -7606,22 +8029,38 @@
        },
        {
         "id": "S2",
-        "ratio": 0.999,
+        "ratio": 0.991,
         "fps": [
-         59.8,
-         60.3
+         59.3,
+         59.8
         ],
         "js": [
-         2.57,
-         2.59
+         2.12,
+         2.14
         ],
         "draws": [
-         290.5,
-         243.2
+         269.4,
+         250.6
         ],
-        "things": [
-         152.7,
-         152.7
+        "rowsPainted": [
+         5863.6,
+         5867.8
+        ],
+        "obj": [
+         151.61,
+         151.68
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2787.4,
+         2785.1
+        ],
+        "ops": [
+         69.4,
+         66.4
         ],
         "shadow": [
          0,
@@ -7637,20 +8076,36 @@
         "id": "S3",
         "ratio": 1.001,
         "fps": [
-         60.7,
-         60.6
+         60.6,
+         60.5
         ],
         "js": [
-         1.65,
-         1.74
+         1.34,
+         1.23
         ],
         "draws": [
          16,
          14
         ],
-        "things": [
-         16,
-         14
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1878,
+         1883.4
+        ],
+        "ops": [
+         183.5,
+         181
         ],
         "shadow": [
          1,
@@ -7678,14 +8133,7 @@
        "imageLoads": 172,
        "imageErrors": 0,
        "reused": 0,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "loaded"
-        }
-       ],
-       "ms": 5301,
+       "ms": 4441,
        "missing": [],
        "failed": [],
        "wrong": [],
@@ -7694,7 +8142,7 @@
      },
      {
       "name": "hidden",
-      "tries": 1,
+      "tries": 2,
       "ok": true,
       "verdict": "void",
       "verdictIfCounted": "void",
@@ -7702,29 +8150,45 @@
        "mode",
        "interrupted"
       ],
-      "waited": 668,
+      "waited": 616,
       "srv": {
        "n304": 0
       },
       "rows": [
        {
         "id": "S1",
-        "ratio": 0.998,
+        "ratio": 0.997,
         "fps": [
-         60.5,
-         60.6
+         60.3,
+         60.4
         ],
         "js": [
-         1.22,
-         1.49
+         1.3,
+         1.58
         ],
         "draws": [
          18,
          19
         ],
-        "things": [
-         18,
-         19
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3496.1,
+         3496.1
+        ],
+        "ops": [
+         97.6,
+         96.9
         ],
         "shadow": [
          1,
@@ -7738,22 +8202,38 @@
        },
        {
         "id": "S2",
-        "ratio": 0.998,
+        "ratio": 1.014,
         "fps": [
-         60.7,
-         60.5
+         58.2,
+         58.1
         ],
         "js": [
-         2.7,
-         2.2
+         2.39,
+         2.14
         ],
         "draws": [
-         294.2,
-         238.2
+         292.8,
+         240.1
         ],
-        "things": [
-         152.6,
-         152.7
+        "rowsPainted": [
+         5876.4,
+         5870.4
+        ],
+        "obj": [
+         151.57,
+         151.81
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2788.1,
+         2787
+        ],
+        "ops": [
+         72.9,
+         73.3
         ],
         "shadow": [
          0,
@@ -7767,22 +8247,38 @@
        },
        {
         "id": "S3",
-        "ratio": 1,
+        "ratio": 1.001,
         "fps": [
-         60.5,
-         60.6
+         60.4,
+         60.4
         ],
         "js": [
-         1.74,
-         1.79
+         1.37,
+         1.32
         ],
         "draws": [
          16,
          14
         ],
-        "things": [
-         16,
-         14
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1879.8,
+         1883.3
+        ],
+        "ops": [
+         184,
+         182
         ],
         "shadow": [
          1,
@@ -7810,14 +8306,7 @@
        "imageLoads": 172,
        "imageErrors": 0,
        "reused": 0,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "loaded"
-        }
-       ],
-       "ms": 5336,
+       "ms": 4808,
        "missing": [],
        "failed": [],
        "wrong": [],
@@ -7834,29 +8323,45 @@
        "mode",
        "unstable"
       ],
-      "waited": 646,
+      "waited": 630,
       "srv": {
        "n304": 0
       },
       "rows": [
        {
         "id": "S1",
-        "ratio": 0.994,
+        "ratio": 1.013,
         "fps": [
-         60.4,
-         60.5
+         60.7,
+         60.1
         ],
         "js": [
-         1.85,
-         1.47
+         1.52,
+         1.62
         ],
         "draws": [
          18,
          19
         ],
-        "things": [
-         18,
-         19
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3500.7,
+         3492.7
+        ],
+        "ops": [
+         105.1,
+         91.8
         ],
         "shadow": [
          1,
@@ -7870,22 +8375,38 @@
        },
        {
         "id": "S2",
-        "ratio": 2.479,
+        "ratio": 2.44,
         "fps": [
-         60.2,
-         24.4
+         60.9,
+         24.9
         ],
         "js": [
-         2.8,
-         27.96
+         2.46,
+         27.54
         ],
         "draws": [
-         293.1,
-         255
+         296.2,
+         238.8
         ],
-        "things": [
-         153.1,
-         152.8
+        "rowsPainted": [
+         5880.2,
+         5862.1
+        ],
+        "obj": [
+         151.6,
+         151.92
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2788.3,
+         2786.7
+        ],
+        "ops": [
+         73.1,
+         73.6
         ],
         "shadow": [
          0,
@@ -7901,20 +8422,36 @@
         "id": "S3",
         "ratio": 1,
         "fps": [
-         60.3,
-         60.3
+         60.5,
+         60.5
         ],
         "js": [
-         1.79,
-         1.9
+         2.03,
+         1.2
         ],
         "draws": [
          16,
          14
         ],
-        "things": [
-         16,
-         14
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1881.7,
+         1869.5
+        ],
+        "ops": [
+         182.3,
+         177.9
         ],
         "shadow": [
          1,
@@ -7942,14 +8479,7 @@
        "imageLoads": 172,
        "imageErrors": 0,
        "reused": 0,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "loaded"
-        }
-       ],
-       "ms": 4961,
+       "ms": 5440,
        "missing": [],
        "failed": [],
        "wrong": [],
@@ -7965,29 +8495,45 @@
       "reasons": [
        "mode"
       ],
-      "waited": 610,
+      "waited": 718,
       "srv": {
        "n304": 0
       },
       "rows": [
        {
         "id": "S1",
-        "ratio": 0.736,
+        "ratio": 0.67,
         "fps": [
-         44.6,
-         60.6
+         40.7,
+         60.8
         ],
         "js": [
-         10.92,
-         1.5
+         10.85,
+         1.43
         ],
         "draws": [
          18,
          19
         ],
-        "things": [
-         18,
-         19
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3494.9,
+         3492
+        ],
+        "ops": [
+         95.4,
+         89.3
         ],
         "shadow": [
          1,
@@ -8001,22 +8547,38 @@
        },
        {
         "id": "S2",
-        "ratio": 0.653,
+        "ratio": 0.635,
         "fps": [
-         39.6,
-         61.1
+         38.6,
+         60.7
         ],
         "js": [
-         11.99,
-         2.54
+         12.2,
+         2.44
         ],
         "draws": [
-         277.4,
-         246.7
+         258.4,
+         276.5
         ],
-        "things": [
-         152.7,
-         152.7
+        "rowsPainted": [
+         5886.5,
+         5868.3
+        ],
+        "obj": [
+         151.79,
+         151.66
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2788.3,
+         2786.9
+        ],
+        "ops": [
+         73,
+         73.4
         ],
         "shadow": [
          0,
@@ -8030,22 +8592,38 @@
        },
        {
         "id": "S3",
-        "ratio": 0.757,
+        "ratio": 0.758,
         "fps": [
          45.8,
-         60.6
+         60.5
         ],
         "js": [
-         10.81,
-         1.71
+         10.75,
+         1.83
         ],
         "draws": [
          16,
          14
         ],
-        "things": [
-         16,
-         14
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1870.6,
+         1898.2
+        ],
+        "ops": [
+         180,
+         187.6
         ],
         "shadow": [
          1,
@@ -8073,14 +8651,7 @@
        "imageLoads": 172,
        "imageErrors": 0,
        "reused": 0,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "loaded"
-        }
-       ],
-       "ms": 4883,
+       "ms": 6151,
        "missing": [],
        "failed": [],
        "wrong": [],
@@ -8097,7 +8668,7 @@
        "mode",
        "interrupted"
       ],
-      "waited": 535,
+      "waited": 580,
       "srv": {
        "n304": 0
       },
@@ -8110,16 +8681,32 @@
          2.5
         ],
         "js": [
-         2.83,
-         1.5
+         2.4,
+         1.83
         ],
         "draws": [
          18,
          19
         ],
-        "things": [
-         18,
-         19
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3381.7,
+         3381.7
+        ],
+        "ops": [
+         81,
+         80
         ],
         "shadow": [
          1,
@@ -8139,16 +8726,32 @@
          2.5
         ],
         "js": [
-         9.13,
-         5.03
+         5.53,
+         5.4
         ],
         "draws": [
-         231.3,
-         242.7
+         213.3,
+         214
         ],
-        "things": [
-         154,
-         152.7
+        "rowsPainted": [
+         6055.3,
+         5744
+        ],
+        "obj": [
+         153,
+         151.67
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2780,
+         2788
+        ],
+        "ops": [
+         66,
+         66
         ],
         "shadow": [
          0,
@@ -8168,16 +8771,32 @@
          2.5
         ],
         "js": [
-         2.03,
-         1.37
+         5.2,
+         2.03
         ],
         "draws": [
          16,
          14
         ],
-        "things": [
-         16,
-         14
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1839.8,
+         1831.1
+        ],
+        "ops": [
+         167.3,
+         163.7
         ],
         "shadow": [
          1,
@@ -8205,14 +8824,7 @@
        "imageLoads": 172,
        "imageErrors": 0,
        "reused": 0,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "loaded"
-        }
-       ],
-       "ms": 3416,
+       "ms": 3503,
        "missing": [],
        "failed": [],
        "wrong": [],
@@ -8228,29 +8840,45 @@
       "reasons": [
        "mode"
       ],
-      "waited": 701,
+      "waited": 658,
       "srv": {
        "n304": 0
       },
       "rows": [
        {
         "id": "S1",
-        "ratio": 1.003,
+        "ratio": 1,
         "fps": [
-         60.6,
-         60.8
+         60.7,
+         60.9
         ],
         "js": [
-         1.38,
-         1.5
+         1.67,
+         1.57
         ],
         "draws": [
          18,
          19
         ],
-        "things": [
-         18,
-         19
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3501.6,
+         3494.9
+        ],
+        "ops": [
+         106.6,
+         93.9
         ],
         "shadow": [
          1,
@@ -8264,22 +8892,38 @@
        },
        {
         "id": "S2",
-        "ratio": 1.002,
+        "ratio": 0.994,
         "fps": [
-         60.2,
-         60.1
+         57.8,
+         59.3
         ],
         "js": [
-         2.67,
-         2.66
+         2.42,
+         2.3
         ],
         "draws": [
-         275.6,
-         245.5
+         270.6,
+         247.7
         ],
-        "things": [
-         152.7,
-         152.8
+        "rowsPainted": [
+         5872.5,
+         5871.8
+        ],
+        "obj": [
+         151.89,
+         151.73
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2783.7,
+         2785.9
+        ],
+        "ops": [
+         66.6,
+         67.2
         ],
         "shadow": [
          0,
@@ -8293,22 +8937,38 @@
        },
        {
         "id": "S3",
-        "ratio": 1.004,
+        "ratio": 0.996,
         "fps": [
-         60.6,
-         60.4
+         60.4,
+         60.6
         ],
         "js": [
-         1.79,
-         1.61
+         1.68,
+         1.5
         ],
         "draws": [
          13,
          14
         ],
-        "things": [
-         13,
-         14
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1865,
+         1870.8
+        ],
+        "ops": [
+         176.3,
+         176.9
         ],
         "shadow": [
          1,
@@ -8336,14 +8996,7 @@
        "imageLoads": 172,
        "imageErrors": 0,
        "reused": 0,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "loaded"
-        }
-       ],
-       "ms": 5115,
+       "ms": 5209,
        "missing": [],
        "failed": [],
        "wrong": [],
@@ -8359,29 +9012,45 @@
       "reasons": [
        "mode"
       ],
-      "waited": 623,
+      "waited": 605,
       "srv": {
        "n304": 0
       },
       "rows": [
        {
         "id": "S1",
-        "ratio": 1,
+        "ratio": 0.992,
         "fps": [
          60.5,
-         60.5
+         60.7
         ],
         "js": [
-         1.63,
-         1.44
+         1.73,
+         1.55
         ],
         "draws": [
          18,
          19
         ],
-        "things": [
-         18,
-         19
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3503.3,
+         3502.5
+        ],
+        "ops": [
+         106.5,
+         104.7
         ],
         "shadow": [
          1,
@@ -8395,22 +9064,38 @@
        },
        {
         "id": "S2",
-        "ratio": 0.999,
+        "ratio": 1,
         "fps": [
-         60.2,
-         60.4
+         60.8,
+         60.9
         ],
         "js": [
-         2.67,
-         2.47
+         2.36,
+         2.14
         ],
         "draws": [
-         287.8,
-         237.8
+         310.2,
+         250
         ],
-        "things": [
-         152.7,
-         152.6
+        "rowsPainted": [
+         5885.9,
+         5889.9
+        ],
+        "obj": [
+         151.69,
+         151.62
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2788.5,
+         2786.6
+        ],
+        "ops": [
+         72.9,
+         73.1
         ],
         "shadow": [
          0,
@@ -8424,22 +9109,38 @@
        },
        {
         "id": "S3",
-        "ratio": 1.001,
+        "ratio": 1,
         "fps": [
-         60.6,
-         60.6
+         60.5,
+         60.5
         ],
         "js": [
-         1.61,
-         1.61
+         1.12,
+         1.07
         ],
         "draws": [
          13,
          14
         ],
-        "things": [
-         13,
-         14
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1888.3,
+         1878.2
+        ],
+        "ops": [
+         183.4,
+         180.8
         ],
         "shadow": [
          1,
@@ -8467,14 +9168,7 @@
        "imageLoads": 172,
        "imageErrors": 0,
        "reused": 0,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "loaded"
-        }
-       ],
-       "ms": 5234,
+       "ms": 5335,
        "missing": [],
        "failed": [],
        "wrong": [],
@@ -8490,29 +9184,45 @@
       "reasons": [
        "mode"
       ],
-      "waited": 597,
+      "waited": 640,
       "srv": {
        "n304": 0
       },
       "rows": [
        {
         "id": "S1",
-        "ratio": 1,
+        "ratio": 0.994,
         "fps": [
-         60.6,
-         60.5
+         60.4,
+         60.7
         ],
         "js": [
-         1.64,
-         1.5
+         1.46,
+         1.31
         ],
         "draws": [
          18,
          18
         ],
-        "things": [
-         18,
-         18
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3500.3,
+         3497.6
+        ],
+        "ops": [
+         104.8,
+         98.6
         ],
         "shadow": [
          1,
@@ -8526,22 +9236,38 @@
        },
        {
         "id": "S2",
-        "ratio": 1,
+        "ratio": 0.997,
         "fps": [
          60.7,
-         60.6
+         60.8
         ],
         "js": [
-         2.65,
-         2.68
+         2.23,
+         2.24
         ],
         "draws": [
-         299.5,
-         236.5
+         294.2,
+         239.2
         ],
-        "things": [
-         152.6,
-         151.7
+        "rowsPainted": [
+         5881.9,
+         5886.9
+        ],
+        "obj": [
+         151.69,
+         151.62
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2788.3,
+         2786.4
+        ],
+        "ops": [
+         72.9,
+         73.2
         ],
         "shadow": [
          0,
@@ -8555,22 +9281,38 @@
        },
        {
         "id": "S3",
-        "ratio": 1,
+        "ratio": 1.001,
         "fps": [
-         60.6,
-         60.6
+         60.5,
+         60.4
         ],
         "js": [
-         1.7,
-         1.75
+         1.97,
+         1.19
         ],
         "draws": [
          16,
          13
         ],
-        "things": [
-         16,
-         13
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1890.3,
+         1880.8
+        ],
+        "ops": [
+         186.8,
+         182.1
         ],
         "shadow": [
          1,
@@ -8598,14 +9340,7 @@
        "imageLoads": 172,
        "imageErrors": 0,
        "reused": 0,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "loaded"
-        }
-       ],
-       "ms": 5281,
+       "ms": 5198,
        "missing": [],
        "failed": [],
        "wrong": [],
@@ -8621,29 +9356,45 @@
       "reasons": [
        "mode"
       ],
-      "waited": 628,
+      "waited": 660,
       "srv": {
        "n304": 0
       },
       "rows": [
        {
         "id": "S1",
-        "ratio": 0.993,
+        "ratio": 0.998,
         "fps": [
-         60.5,
-         60.8
+         60.6,
+         60.7
         ],
         "js": [
-         1.52,
-         1.59
+         1.5,
+         1.2
         ],
         "draws": [
          18,
          18
         ],
-        "things": [
-         18,
-         18
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3495.3,
+         3494.4
+        ],
+        "ops": [
+         96.4,
+         93.9
         ],
         "shadow": [
          1,
@@ -8657,22 +9408,38 @@
        },
        {
         "id": "S2",
-        "ratio": 0.999,
+        "ratio": 0.997,
         "fps": [
-         60.5,
+         59.5,
          60.6
         ],
         "js": [
-         2.47,
-         2.22
+         2.26,
+         2.2
         ],
         "draws": [
-         302.6,
-         236.2
+         296.1,
+         243
         ],
-        "things": [
-         152.8,
-         151.6
+        "rowsPainted": [
+         5870.9,
+         5880.1
+        ],
+        "obj": [
+         151.88,
+         151.71
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2786.1,
+         2785.7
+        ],
+        "ops": [
+         71.1,
+         66.4
         ],
         "shadow": [
          0,
@@ -8686,22 +9453,38 @@
        },
        {
         "id": "S3",
-        "ratio": 1,
+        "ratio": 1.003,
         "fps": [
-         60.5,
-         60.6
+         60.6,
+         60.3
         ],
         "js": [
-         1.91,
-         1.94
+         1.87,
+         1.64
         ],
         "draws": [
          16,
          13
         ],
-        "things": [
-         16,
-         13
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1878,
+         1886.3
+        ],
+        "ops": [
+         182.4,
+         184
         ],
         "shadow": [
          1,
@@ -8729,14 +9512,7 @@
        "imageLoads": 172,
        "imageErrors": 0,
        "reused": 0,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "loaded"
-        }
-       ],
-       "ms": 5997,
+       "ms": 6349,
        "missing": [],
        "failed": [],
        "wrong": [],
@@ -8752,29 +9528,45 @@
       "reasons": [
        "mode"
       ],
-      "waited": 672,
+      "waited": 683,
       "srv": {
        "n304": 0
       },
       "rows": [
        {
         "id": "S1",
-        "ratio": 0.994,
+        "ratio": 1.004,
         "fps": [
-         60.3,
-         60.7
+         60.8,
+         60.5
         ],
         "js": [
-         2.12,
-         1.52
+         1.38,
+         1.37
         ],
         "draws": [
          18,
          19
         ],
-        "things": [
-         18,
-         19
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3497.2,
+         3494.3
+        ],
+        "ops": [
+         98.4,
+         93.9
         ],
         "shadow": [
          0,
@@ -8788,22 +9580,38 @@
        },
        {
         "id": "S2",
-        "ratio": 1.057,
+        "ratio": 1.002,
         "fps": [
-         60.3,
-         56.6
+         60.7,
+         60.5
         ],
         "js": [
-         2.8,
-         2.74
+         1.93,
+         1.7
         ],
         "draws": [
-         273.4,
-         249.8
+         291.8,
+         242.9
         ],
-        "things": [
-         152.6,
-         152.8
+        "rowsPainted": [
+         5881.9,
+         5882.8
+        ],
+        "obj": [
+         151.69,
+         151.69
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2788.3,
+         2786.4
+        ],
+        "ops": [
+         72.9,
+         73.2
         ],
         "shadow": [
          0,
@@ -8819,20 +9627,36 @@
         "id": "S3",
         "ratio": 1,
         "fps": [
-         60.6,
-         60.6
+         60.5,
+         60.5
         ],
         "js": [
-         2.18,
-         1.66
+         1.05,
+         0.98
         ],
         "draws": [
          16,
          14
         ],
-        "things": [
-         16,
-         14
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1893,
+         1879.9
+        ],
+        "ops": [
+         187,
+         180.2
         ],
         "shadow": [
          0,
@@ -8860,14 +9684,7 @@
        "imageLoads": 172,
        "imageErrors": 0,
        "reused": 0,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "loaded"
-        }
-       ],
-       "ms": 5466,
+       "ms": 5513,
        "missing": [],
        "failed": [],
        "wrong": [],
@@ -8883,29 +9700,45 @@
       "reasons": [
        "mode"
       ],
-      "waited": 623,
+      "waited": 727,
       "srv": {
        "n304": 0
       },
       "rows": [
        {
         "id": "S1",
-        "ratio": 1.001,
+        "ratio": 0.998,
         "fps": [
-         60.8,
+         60.7,
          60.7
         ],
         "js": [
-         1.3,
-         1.49
+         1.72,
+         1.56
         ],
         "draws": [
          18,
          19
         ],
-        "things": [
-         18,
-         19
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3495,
+         3492.4
+        ],
+        "ops": [
+         96.3,
+         90.9
         ],
         "shadow": [
          1,
@@ -8919,22 +9752,38 @@
        },
        {
         "id": "S2",
-        "ratio": 0.996,
+        "ratio": 0.997,
         "fps": [
-         60.5,
-         60.7
+         60.6,
+         60.8
         ],
         "js": [
-         2.25,
-         1.94
+         2.27,
+         2.09
         ],
         "draws": [
-         155.3,
+         157.9,
          155.9
         ],
-        "things": [
-         152.7,
-         152.6
+        "rowsPainted": [
+         5881.9,
+         5876.4
+        ],
+        "obj": [
+         151.69,
+         151.62
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1896.4,
+         1899.2
+        ],
+        "ops": [
+         48.9,
+         50
         ],
         "shadow": [
          0,
@@ -8948,22 +9797,38 @@
        },
        {
         "id": "S3",
-        "ratio": 1.001,
+        "ratio": 1.002,
         "fps": [
-         60.5,
-         60.4
+         60.7,
+         60.5
         ],
         "js": [
-         1.99,
-         1.63
+         1.19,
+         1.11
         ],
         "draws": [
          16,
          14
         ],
-        "things": [
-         16,
-         14
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1872.7,
+         1878.7
+        ],
+        "ops": [
+         181.1,
+         180.7
         ],
         "shadow": [
          1,
@@ -8991,14 +9856,7 @@
        "imageLoads": 172,
        "imageErrors": 0,
        "reused": 0,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "loaded"
-        }
-       ],
-       "ms": 5095,
+       "ms": 4885,
        "missing": [],
        "failed": [],
        "wrong": [],
@@ -9014,29 +9872,45 @@
       "reasons": [
        "mode"
       ],
-      "waited": 618,
+      "waited": 633,
       "srv": {
        "n304": 0
       },
       "rows": [
        {
         "id": "S1",
-        "ratio": 0.995,
+        "ratio": 1.001,
         "fps": [
          60.5,
-         60.9
+         60.7
         ],
         "js": [
-         1.22,
-         1.55
+         1.59,
+         1.45
         ],
         "draws": [
          9.5,
          19
         ],
-        "things": [
-         9.5,
-         19
+        "rowsPainted": [
+         1321.9,
+         2629
+        ],
+        "obj": [
+         8.51,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3497.3,
+         3496.8
+        ],
+        "ops": [
+         100.5,
+         98.9
         ],
         "shadow": [
          1,
@@ -9050,22 +9924,38 @@
        },
        {
         "id": "S2",
-        "ratio": 0.998,
+        "ratio": 0.994,
         "fps": [
-         60.4,
-         60.6
+         60.5,
+         60.9
         ],
         "js": [
-         1.94,
-         1.93
+         2.07,
+         2.1
         ],
         "draws": [
-         152.9,
-         242.3
+         146.3,
+         237.3
         ],
-        "things": [
-         76.9,
-         152.6
+        "rowsPainted": [
+         3086,
+         5863.7
+        ],
+        "obj": [
+         78.3,
+         151.85
+        ],
+        "rowsMissing": [
+         200.9,
+         0
+        ],
+        "rectRows": [
+         2787.9,
+         2787.1
+        ],
+        "ops": [
+         72.9,
+         73.6
         ],
         "shadow": [
          0,
@@ -9079,22 +9969,38 @@
        },
        {
         "id": "S3",
-        "ratio": 1,
+        "ratio": 0.996,
         "fps": [
-         60.5,
-         60.4
+         60.6,
+         60.8
         ],
         "js": [
-         1.87,
-         1.53
+         2.02,
+         2.07
         ],
         "draws": [
          10,
          14
         ],
-        "things": [
-         10,
-         14
+        "rowsPainted": [
+         294,
+         1495.5
+        ],
+        "obj": [
+         6,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1878.8,
+         1880.4
+        ],
+        "ops": [
+         182.1,
+         179.3
         ],
         "shadow": [
          1,
@@ -9122,14 +10028,1039 @@
        "imageLoads": 172,
        "imageErrors": 0,
        "reused": 0,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "loaded"
-        }
+       "ms": 5963,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "fewstrips",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "fail",
+      "reasons": [
+       "mode"
+      ],
+      "waited": 581,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 0.997,
+        "fps": [
+         60.7,
+         60.8
+        ],
+        "js": [
+         1.51,
+         1.36
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3494.6,
+         3492.7
+        ],
+        "ops": [
+         94.7,
+         90.5
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 0.991,
+        "fps": [
+         59.9,
+         60.6
+        ],
+        "js": [
+         2.41,
+         2.17
+        ],
+        "draws": [
+         200.3,
+         242.7
+        ],
+        "rowsPainted": [
+         3868.1,
+         5871
+        ],
+        "obj": [
+         102.84,
+         151.74
+        ],
+        "rowsMissing": [
+         142.18,
+         0
+        ],
+        "rectRows": [
+         2788.4,
+         2786.8
+        ],
+        "ops": [
+         73.1,
+         73.5
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": false,
+        "why": "ฉากวาดไม่ครบตอนเปิด",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.002,
+        "fps": [
+         60.5,
+         60.4
+        ],
+        "js": [
+         1.79,
+         1.59
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1880.9,
+         1880.7
+        ],
+        "ops": [
+         182.3,
+         180.3
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 172,
+       "fetches": 28,
+       "heads": 2,
+       "record": [
+        212,
+        212
        ],
-       "ms": 5098,
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "ms": 5665,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "nobackground",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "fail",
+      "reasons": [
+       "mode"
+      ],
+      "waited": 659,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1.003,
+        "fps": [
+         60.5,
+         60.5
+        ],
+        "js": [
+         1.75,
+         1.51
+        ],
+        "draws": [
+         17,
+         19
+        ],
+        "rowsPainted": [
+         1459,
+         2629
+        ],
+        "obj": [
+         16,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3501.8,
+         3493
+        ],
+        "ops": [
+         105.7,
+         91
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": false,
+        "why": "ฉากวาดไม่ครบตอนเปิด",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1.002,
+        "fps": [
+         60.9,
+         60.8
+        ],
+        "js": [
+         2.77,
+         2.55
+        ],
+        "draws": [
+         295.2,
+         236.3
+        ],
+        "rowsPainted": [
+         4711.9,
+         5889.9
+        ],
+        "obj": [
+         150.69,
+         151.59
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2788.3,
+         2786.4
+        ],
+        "ops": [
+         72.9,
+         73.1
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": false,
+        "why": "ฉากวาดไม่ครบตอนเปิด",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1,
+        "fps": [
+         60.6,
+         60.5
+        ],
+        "js": [
+         1.39,
+         1.73
+        ],
+        "draws": [
+         15,
+         14
+        ],
+        "rowsPainted": [
+         528,
+         1495.5
+        ],
+        "obj": [
+         11,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1881.5,
+         1876
+        ],
+        "ops": [
+         183.1,
+         179.5
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": false,
+        "why": "ฉากวาดไม่ครบตอนเปิด",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 172,
+       "fetches": 28,
+       "heads": 2,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "ms": 5626,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "fewsmall",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "fail",
+      "reasons": [
+       "mode"
+      ],
+      "waited": 685,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1,
+        "fps": [
+         60.7,
+         60.7
+        ],
+        "js": [
+         1.85,
+         1.59
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3493.6,
+         3492
+        ],
+        "ops": [
+         91.5,
+         88.3
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 0.996,
+        "fps": [
+         57,
+         59.9
+        ],
+        "js": [
+         2.55,
+         2.43
+        ],
+        "draws": [
+         235.9,
+         251.6
+        ],
+        "rowsPainted": [
+         5488.3,
+         5876.4
+        ],
+        "obj": [
+         118.55,
+         151.67
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2788,
+         2787.4
+        ],
+        "ops": [
+         72.9,
+         73.3
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": false,
+        "why": "ฉากวาดไม่ครบตอนเปิด",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.001,
+        "fps": [
+         60.8,
+         60.8
+        ],
+        "js": [
+         2.27,
+         2.49
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1875.3,
+         1884.7
+        ],
+        "ops": [
+         179.8,
+         182.3
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 172,
+       "fetches": 28,
+       "heads": 2,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "ms": 6060,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "norects",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "fail",
+      "reasons": [
+       "mode"
+      ],
+      "waited": 749,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 0.996,
+        "fps": [
+         60.6,
+         60.7
+        ],
+        "js": [
+         1.64,
+         1.66
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1289.6,
+         3496.9
+        ],
+        "ops": [
+         101.3,
+         99.8
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": false,
+        "why": "ฉากวาดไม่ครบตอนเปิด",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1.047,
+        "fps": [
+         60.4,
+         56
+        ],
+        "js": [
+         2.78,
+         2.48
+        ],
+        "draws": [
+         289.7,
+         244.4
+        ],
+        "rowsPainted": [
+         5881.9,
+         5876.6
+        ],
+        "obj": [
+         151.69,
+         151.63
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         578.3,
+         2786.2
+        ],
+        "ops": [
+         69.9,
+         73.2
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": false,
+        "why": "ฉากวาดไม่ครบตอนเปิด",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.003,
+        "fps": [
+         60.5,
+         60.4
+        ],
+        "js": [
+         1.8,
+         1.77
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         716.5,
+         1892.8
+        ],
+        "ops": [
+         184.1,
+         186
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": false,
+        "why": "ฉากวาดไม่ครบตอนเปิด",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 172,
+       "fetches": 28,
+       "heads": 2,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "ms": 7869,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "nopaths",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "fail",
+      "reasons": [
+       "mode"
+      ],
+      "waited": 675,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 0.997,
+        "fps": [
+         60.6,
+         60.8
+        ],
+        "js": [
+         1.81,
+         1.39
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3493.1,
+         3489.5
+        ],
+        "ops": [
+         61.7,
+         86.2
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": false,
+        "why": "ฉากวาดไม่ครบตอนเปิด",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1.004,
+        "fps": [
+         60.7,
+         59.6
+        ],
+        "js": [
+         2.44,
+         2.4
+        ],
+        "draws": [
+         281.6,
+         248.9
+        ],
+        "rowsPainted": [
+         5888,
+         5876.4
+        ],
+        "obj": [
+         151.63,
+         151.54
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2788.5,
+         2786.8
+        ],
+        "ops": [
+         32.1,
+         73.3
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": false,
+        "why": "ฉากวาดไม่ครบตอนเปิด",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 0.999,
+        "fps": [
+         60.4,
+         60.5
+        ],
+        "js": [
+         1.02,
+         1.02
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1882.7,
+         1881.4
+        ],
+        "ops": [
+         105.6,
+         182.8
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": false,
+        "why": "ฉากวาดไม่ครบตอนเปิด",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 172,
+       "fetches": 28,
+       "heads": 2,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "ms": 6334,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "gaprows",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "fail",
+      "reasons": [
+       "mode"
+      ],
+      "waited": 719,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 0.997,
+        "fps": [
+         60.7,
+         60.6
+        ],
+        "js": [
+         1.23,
+         1.4
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3492.8,
+         3489.6
+        ],
+        "ops": [
+         90.8,
+         84.9
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1.027,
+        "fps": [
+         60.6,
+         58.9
+        ],
+        "js": [
+         2.29,
+         2.37
+        ],
+        "draws": [
+         265.7,
+         250.1
+        ],
+        "rowsPainted": [
+         5866.5,
+         5876.5
+        ],
+        "obj": [
+         151.66,
+         151.67
+        ],
+        "rowsMissing": [
+         12.48,
+         0
+        ],
+        "rectRows": [
+         2783.7,
+         2785.7
+        ],
+        "ops": [
+         66.4,
+         66.9
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": false,
+        "why": "ฉากวาดไม่ครบตอนเปิด",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.002,
+        "fps": [
+         60.5,
+         60.4
+        ],
+        "js": [
+         1.17,
+         1.1
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1871.8,
+         1888.5
+        ],
+        "ops": [
+         179.6,
+         185.5
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 172,
+       "fetches": 28,
+       "heads": 2,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "ms": 6217,
        "missing": [],
        "failed": [],
        "wrong": [],
@@ -9147,29 +11078,45 @@
        "files",
        "scene"
       ],
-      "waited": 610,
+      "waited": 810,
       "srv": {
        "n304": 0
       },
       "rows": [
        {
         "id": "S1",
-        "ratio": 1.002,
+        "ratio": 1.011,
         "fps": [
-         60.7,
-         60.6
+         60.9,
+         60.2
         ],
         "js": [
-         1.47,
-         1.37
+         1.61,
+         1.5
         ],
         "draws": [
          18,
          19
         ],
-        "things": [
-         18,
-         19
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3496.5,
+         3495.3
+        ],
+        "ops": [
+         97.6,
+         94.7
         ],
         "shadow": [
          1,
@@ -9183,22 +11130,38 @@
        },
        {
         "id": "S2",
-        "ratio": 0.999,
+        "ratio": 0.983,
         "fps": [
-         60.6,
-         60.5
+         59.8,
+         60.9
         ],
         "js": [
-         2.04,
-         1.93
+         2.33,
+         2.08
         ],
         "draws": [
-         286.9,
-         246.7
+         255.2,
+         261.5
         ],
-        "things": [
-         152.6,
-         152.8
+        "rowsPainted": [
+         5871.8,
+         5873.8
+        ],
+        "obj": [
+         151.68,
+         151.72
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2787.9,
+         2787.9
+        ],
+        "ops": [
+         73,
+         73.3
         ],
         "shadow": [
          0,
@@ -9212,22 +11175,38 @@
        },
        {
         "id": "S3",
-        "ratio": 1.001,
+        "ratio": 1.002,
         "fps": [
-         60.5,
-         60.5
+         60.4,
+         60.3
         ],
         "js": [
-         1.16,
-         1.07
+         1.59,
+         1.64
         ],
         "draws": [
          16,
          14
         ],
-        "things": [
-         16,
-         14
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1873,
+         1881.8
+        ],
+        "ops": [
+         179.2,
+         182.3
         ],
         "shadow": [
          1,
@@ -9255,14 +11234,7 @@
        "imageLoads": 172,
        "imageErrors": 0,
        "reused": 0,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "loaded"
-        }
-       ],
-       "ms": 4982,
+       "ms": 5229,
        "missing": [],
        "failed": [],
        "wrong": [
@@ -9281,29 +11253,45 @@
        "mode",
        "files"
       ],
-      "waited": 606,
+      "waited": 610,
       "srv": {
        "n304": 0
       },
       "rows": [
        {
         "id": "S1",
-        "ratio": 1.002,
+        "ratio": 1.005,
         "fps": [
-         60.7,
-         60.6
+         58.9,
+         59.9
         ],
         "js": [
-         1.68,
-         1.63
+         1.6,
+         1.48
         ],
         "draws": [
          18,
          19
         ],
-        "things": [
-         18,
-         19
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3496.2,
+         3491.2
+        ],
+        "ops": [
+         97.1,
+         87.9
         ],
         "shadow": [
          1,
@@ -9317,22 +11305,38 @@
        },
        {
         "id": "S2",
-        "ratio": 0.991,
+        "ratio": 1.007,
         "fps": [
          60.2,
-         60.7
+         59.8
         ],
         "js": [
-         2.71,
-         2.23
+         2.15,
+         2.21
         ],
         "draws": [
-         297.9,
-         237.1
+         272.9,
+         246.2
         ],
-        "things": [
-         152.6,
-         152.6
+        "rowsPainted": [
+         5868.9,
+         5873
+        ],
+        "obj": [
+         151.77,
+         151.75
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2787.6,
+         2787.6
+        ],
+        "ops": [
+         72.9,
+         73.4
         ],
         "shadow": [
          0,
@@ -9346,22 +11350,38 @@
        },
        {
         "id": "S3",
-        "ratio": 0.999,
+        "ratio": 1,
         "fps": [
-         60.4,
-         60.5
+         60.7,
+         60.7
         ],
         "js": [
-         2.04,
-         2
+         1.95,
+         1.88
         ],
         "draws": [
          16,
          14
         ],
-        "things": [
-         16,
-         14
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1888.8,
+         1891.8
+        ],
+        "ops": [
+         184.5,
+         186.5
         ],
         "shadow": [
          1,
@@ -9389,14 +11409,7 @@
        "imageLoads": 172,
        "imageErrors": 0,
        "reused": 0,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "loaded"
-        }
-       ],
-       "ms": 5383,
+       "ms": 5012,
        "missing": [],
        "failed": [],
        "wrong": [
@@ -9414,31 +11427,51 @@
       "reasons": [
        "mode",
        "files",
-       "scene"
+       "scene",
+       "unstable"
       ],
-      "waited": 667,
+      "noise": [
+       "unstable"
+      ],
+      "waited": 547,
       "srv": {
        "n304": 0
       },
       "rows": [
        {
         "id": "S1",
-        "ratio": 1.002,
+        "ratio": 1.001,
         "fps": [
-         60.7,
-         60.6
+         60.6,
+         60.7
         ],
         "js": [
-         1.7,
-         1.79
+         1.56,
+         1.57
         ],
         "draws": [
          18,
          19
         ],
-        "things": [
-         18,
-         19
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3496,
+         3494.2
+        ],
+        "ops": [
+         97.6,
+         93.2
         ],
         "shadow": [
          1,
@@ -9452,22 +11485,38 @@
        },
        {
         "id": "S2",
-        "ratio": 1.005,
+        "ratio": 0.918,
         "fps": [
-         60.5,
-         60.2
+         56.1,
+         60.6
         ],
         "js": [
-         2.69,
-         2.71
+         2.5,
+         2.34
         ],
         "draws": [
-         290.5,
-         242.4
+         288.1,
+         240.6
         ],
-        "things": [
-         152.6,
-         152.7
+        "rowsPainted": [
+         5859.5,
+         5886.4
+        ],
+        "obj": [
+         151.93,
+         151.63
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2787.2,
+         2786.8
+        ],
+        "ops": [
+         72.9,
+         73.2
         ],
         "shadow": [
          0,
@@ -9476,27 +11525,43 @@
         "ok": true,
         "why": "",
         "cut": false,
-        "shaky": false,
+        "shaky": true,
         "standin": false
        },
        {
         "id": "S3",
-        "ratio": 1.003,
+        "ratio": 1.002,
         "fps": [
-         60.7,
-         60.6
+         60.6,
+         60.4
         ],
         "js": [
-         1.66,
-         1.63
+         1.97,
+         1.3
         ],
         "draws": [
          16,
          14
         ],
-        "things": [
-         16,
-         14
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1888,
+         1872.4
+        ],
+        "ops": [
+         183.9,
+         178.4
         ],
         "shadow": [
          1,
@@ -9524,14 +11589,7 @@
        "imageLoads": 172,
        "imageErrors": 0,
        "reused": 0,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "loaded"
-        }
-       ],
-       "ms": 5830,
+       "ms": 7199,
        "missing": [],
        "failed": [],
        "wrong": [
@@ -9551,29 +11609,45 @@
        "files",
        "scene"
       ],
-      "waited": 592,
+      "waited": 644,
       "srv": {
        "n304": 0
       },
       "rows": [
        {
         "id": "S1",
-        "ratio": 1.003,
+        "ratio": 0.989,
         "fps": [
-         60.9,
-         60.5
+         60.1,
+         60.7
         ],
         "js": [
-         1.78,
-         1.78
+         1.44,
+         1.46
         ],
         "draws": [
          18,
          19
         ],
-        "things": [
-         18,
-         19
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3496.8,
+         3496.4
+        ],
+        "ops": [
+         98.2,
+         96.9
         ],
         "shadow": [
          1,
@@ -9587,22 +11661,38 @@
        },
        {
         "id": "S2",
-        "ratio": 0.995,
+        "ratio": 0.987,
         "fps": [
-         59.5,
-         59.3
+         59.7,
+         59.7
         ],
         "js": [
-         2.99,
-         2.81
+         2.33,
+         2.41
         ],
         "draws": [
-         277.1,
-         245.9
+         279.1,
+         244.7
         ],
-        "things": [
-         152.8,
-         152.6
+        "rowsPainted": [
+         5874.5,
+         5866
+        ],
+        "obj": [
+         151.68,
+         151.78
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2788,
+         2787.3
+        ],
+        "ops": [
+         72.9,
+         73.5
         ],
         "shadow": [
          0,
@@ -9616,22 +11706,38 @@
        },
        {
         "id": "S3",
-        "ratio": 1.002,
+        "ratio": 1,
         "fps": [
          60.5,
-         60.4
+         60.5
         ],
         "js": [
-         1.64,
-         1.69
+         1.21,
+         0.95
         ],
         "draws": [
          16,
          14
         ],
-        "things": [
-         16,
-         14
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1885,
+         1869.4
+        ],
+        "ops": [
+         183.3,
+         178.9
         ],
         "shadow": [
          1,
@@ -9659,14 +11765,7 @@
        "imageLoads": 172,
        "imageErrors": 0,
        "reused": 0,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "loaded"
-        }
-       ],
-       "ms": 5608,
+       "ms": 6995,
        "missing": [],
        "failed": [],
        "wrong": [
@@ -9685,29 +11784,45 @@
        "mode",
        "files"
       ],
-      "waited": 611,
+      "waited": 717,
       "srv": {
        "n304": 0
       },
       "rows": [
        {
         "id": "S1",
-        "ratio": 0.999,
+        "ratio": 1.007,
         "fps": [
          60.6,
-         60.7
+         60.1
         ],
         "js": [
-         1.52,
-         1.46
+         1.56,
+         1.56
         ],
         "draws": [
          18,
          19
         ],
-        "things": [
-         18,
-         19
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3501.3,
+         3496.3
+        ],
+        "ops": [
+         106.6,
+         97.4
         ],
         "shadow": [
          1,
@@ -9721,22 +11836,38 @@
        },
        {
         "id": "S2",
-        "ratio": 1,
+        "ratio": 1.027,
         "fps": [
-         60.7,
-         60.7
+         58.6,
+         57.3
         ],
         "js": [
-         2.34,
-         2.44
+         2.3,
+         2.41
         ],
         "draws": [
-         300.2,
-         237.2
+         269.1,
+         251
         ],
-        "things": [
-         152.7,
-         152.7
+        "rowsPainted": [
+         5883.1,
+         5878.3
+        ],
+        "obj": [
+         151.73,
+         151.7
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2788.3,
+         2787.3
+        ],
+        "ops": [
+         72.9,
+         73.4
         ],
         "shadow": [
          0,
@@ -9752,20 +11883,36 @@
         "id": "S3",
         "ratio": 1,
         "fps": [
-         60.4,
-         60.4
+         60.7,
+         60.7
         ],
         "js": [
-         1.67,
-         1.57
+         1.97,
+         1.63
         ],
         "draws": [
          16,
          14
         ],
-        "things": [
-         16,
-         14
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1883,
+         1886.7
+        ],
+        "ops": [
+         183.6,
+         184.4
         ],
         "shadow": [
          1,
@@ -9793,14 +11940,7 @@
        "imageLoads": 172,
        "imageErrors": 0,
        "reused": 0,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "loaded"
-        }
-       ],
-       "ms": 5280,
+       "ms": 5431,
        "missing": [],
        "failed": [],
        "wrong": [
@@ -9819,29 +11959,45 @@
        "mode",
        "files"
       ],
-      "waited": 628,
+      "waited": 703,
       "srv": {
        "n304": 0
       },
       "rows": [
        {
         "id": "S1",
-        "ratio": 1,
+        "ratio": 0.995,
         "fps": [
-         60.6,
-         60.6
+         60.7,
+         61
         ],
         "js": [
-         1.7,
-         1.37
+         1.08,
+         1.22
         ],
         "draws": [
          18,
          19
         ],
-        "things": [
-         18,
-         19
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3501.3,
+         3493.5
+        ],
+        "ops": [
+         103.6,
+         91.3
         ],
         "shadow": [
          1,
@@ -9855,22 +12011,38 @@
        },
        {
         "id": "S2",
-        "ratio": 0.983,
+        "ratio": 0.968,
         "fps": [
-         59.8,
-         60.7
+         56.4,
+         57.7
         ],
         "js": [
-         2.97,
-         2.78
+         2.39,
+         2.29
         ],
         "draws": [
-         296.1,
-         239.1
+         271.6,
+         247.9
         ],
-        "things": [
-         152.7,
-         152.6
+        "rowsPainted": [
+         5869.1,
+         5870.6
+        ],
+        "obj": [
+         151.7,
+         151.71
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2787.6,
+         2787.5
+        ],
+        "ops": [
+         72.9,
+         73.5
         ],
         "shadow": [
          0,
@@ -9884,22 +12056,38 @@
        },
        {
         "id": "S3",
-        "ratio": 0.997,
+        "ratio": 0.999,
         "fps": [
          60.6,
-         60.8
+         60.6
         ],
         "js": [
-         1.79,
-         1.73
+         2.17,
+         1.63
         ],
         "draws": [
          16,
          14
         ],
-        "things": [
-         16,
-         14
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1873.5,
+         1889.2
+        ],
+        "ops": [
+         180.2,
+         186.5
         ],
         "shadow": [
          1,
@@ -9927,14 +12115,7 @@
        "imageLoads": 172,
        "imageErrors": 0,
        "reused": 0,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "loaded"
-        }
-       ],
-       "ms": 5451,
+       "ms": 6302,
        "missing": [],
        "failed": [],
        "wrong": [
@@ -9953,29 +12134,45 @@
        "mode",
        "files"
       ],
-      "waited": 630,
+      "waited": 720,
       "srv": {
        "n304": 0
       },
       "rows": [
        {
         "id": "S1",
-        "ratio": 1.002,
+        "ratio": 0.996,
         "fps": [
-         60.7,
-         60.5
+         60.6,
+         60.8
         ],
         "js": [
-         1.82,
-         1.74
+         1.88,
+         1.86
         ],
         "draws": [
          19,
          19
         ],
-        "things": [
-         19,
-         19
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3498.6,
+         3495.4
+        ],
+        "ops": [
+         100.4,
+         95.5
         ],
         "shadow": [
          0,
@@ -9989,22 +12186,38 @@
        },
        {
         "id": "S2",
-        "ratio": 1.017,
+        "ratio": 0.987,
         "fps": [
-         60.5,
-         58.9
+         59.8,
+         60.7
         ],
         "js": [
-         2.8,
-         2.65
+         2.52,
+         2.41
         ],
         "draws": [
-         299.2,
-         241.7
+         291.1,
+         238.7
         ],
-        "things": [
-         152.6,
-         152.7
+        "rowsPainted": [
+         5880.6,
+         5868.7
+        ],
+        "obj": [
+         151.68,
+         151.72
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2788.3,
+         2787.1
+        ],
+        "ops": [
+         73,
+         73.4
         ],
         "shadow": [
          0,
@@ -10018,22 +12231,38 @@
        },
        {
         "id": "S3",
-        "ratio": 1.004,
+        "ratio": 0.999,
         "fps": [
          60.6,
-         60.4
+         60.6
         ],
         "js": [
-         1.49,
-         1.58
+         1.77,
+         1.85
         ],
         "draws": [
          14,
          14
         ],
-        "things": [
-         14,
-         14
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1887.1,
+         1883.6
+        ],
+        "ops": [
+         183.6,
+         183.1
         ],
         "shadow": [
          0,
@@ -10061,14 +12290,7 @@
        "imageLoads": 162,
        "imageErrors": 0,
        "reused": 0,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "error"
-        }
-       ],
-       "ms": 5480,
+       "ms": 6920,
        "missing": [],
        "failed": [],
        "wrong": [
@@ -10088,29 +12310,45 @@
        "files",
        "scene"
       ],
-      "waited": 594,
+      "waited": 681,
       "srv": {
        "n304": 0
       },
       "rows": [
        {
         "id": "S1",
-        "ratio": 0.998,
+        "ratio": 1.002,
         "fps": [
-         60.5,
-         60.6
+         59.8,
+         60.7
         ],
         "js": [
-         1.72,
-         1.75
+         1.87,
+         1.69
         ],
         "draws": [
          18,
          19
         ],
-        "things": [
-         18,
-         19
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3501.5,
+         3501.5
+        ],
+        "ops": [
+         106.6,
+         105.3
         ],
         "shadow": [
          1,
@@ -10127,19 +12365,35 @@
         "ratio": 1.002,
         "fps": [
          60.8,
-         60.5
+         60.7
         ],
         "js": [
-         1.6,
-         1.55
+         1.49,
+         1.14
         ],
         "draws": [
          19.3,
-         15.5
+         15.8
         ],
-        "things": [
-         19.3,
-         15.5
+        "rowsPainted": [
+         2109.2,
+         1876.5
+        ],
+        "obj": [
+         18.33,
+         13.8
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2966.9,
+         2965.9
+        ],
+        "ops": [
+         115.8,
+         113
         ],
         "shadow": [
          1,
@@ -10153,22 +12407,38 @@
        },
        {
         "id": "S3",
-        "ratio": 1.004,
+        "ratio": 1.001,
         "fps": [
-         60.6,
+         60.5,
          60.4
         ],
         "js": [
-         2.11,
-         1.82
+         1.69,
+         1.71
         ],
         "draws": [
          16,
          14
         ],
-        "things": [
-         16,
-         14
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1873.8,
+         1890.1
+        ],
+        "ops": [
+         179.4,
+         185.3
         ],
         "shadow": [
          1,
@@ -10196,14 +12466,7 @@
        "imageLoads": 172,
        "imageErrors": 0,
        "reused": 0,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "loaded"
-        }
-       ],
-       "ms": 5377,
+       "ms": 5280,
        "missing": [],
        "failed": [
         "g9b-scene.json"
@@ -10223,29 +12486,45 @@
        "files",
        "scene"
       ],
-      "waited": 658,
+      "waited": 671,
       "srv": {
        "n304": 0
       },
       "rows": [
        {
         "id": "S1",
-        "ratio": 1.001,
+        "ratio": 1,
         "fps": [
-         60.7,
-         60.6
+         60.9,
+         60.9
         ],
         "js": [
-         1.65,
-         1.49
+         1.87,
+         1.78
         ],
         "draws": [
          18,
          19
         ],
-        "things": [
-         18,
-         19
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3497.7,
+         3492.9
+        ],
+        "ops": [
+         98.6,
+         89.8
         ],
         "shadow": [
          1,
@@ -10259,22 +12538,38 @@
        },
        {
         "id": "S2",
-        "ratio": 0.997,
+        "ratio": 0.978,
         "fps": [
-         60.3,
-         60.6
+         58.4,
+         60
         ],
         "js": [
-         2.61,
-         2.75
+         2.35,
+         2.22
         ],
         "draws": [
-         281.9,
-         240.7
+         286.5,
+         244
         ],
-        "things": [
-         152.5,
-         152.8
+        "rowsPainted": [
+         5876.2,
+         5872.9
+        ],
+        "obj": [
+         151.56,
+         151.69
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2788.1,
+         2787
+        ],
+        "ops": [
+         73.1,
+         73.3
         ],
         "shadow": [
          0,
@@ -10294,16 +12589,32 @@
          60.5
         ],
         "js": [
-         1.61,
-         1.58
+         2.07,
+         1.65
         ],
         "draws": [
          16,
          14
         ],
-        "things": [
-         16,
-         14
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1885.7,
+         1887
+        ],
+        "ops": [
+         183.4,
+         183.7
         ],
         "shadow": [
          1,
@@ -10331,14 +12642,7 @@
        "imageLoads": 172,
        "imageErrors": 1,
        "reused": 0,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "loaded"
-        }
-       ],
-       "ms": 5375,
+       "ms": 5596,
        "missing": [],
        "failed": [
         "map-cave-mouth.jpg"
@@ -10357,29 +12661,45 @@
        "mode",
        "scene"
       ],
-      "waited": 602,
+      "waited": 614,
       "srv": {
        "n304": 0
       },
       "rows": [
        {
         "id": "S1",
-        "ratio": 0.997,
+        "ratio": 1.004,
         "fps": [
-         60.6,
-         60.8
+         60.7,
+         60.5
         ],
         "js": [
-         1.47,
-         1.55
+         1.86,
+         1.67
         ],
         "draws": [
          18,
          19
         ],
-        "things": [
-         18,
-         19
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3499.3,
+         3497.5
+        ],
+        "ops": [
+         102.6,
+         98.3
         ],
         "shadow": [
          1,
@@ -10393,22 +12713,38 @@
        },
        {
         "id": "S2",
-        "ratio": 0.998,
+        "ratio": 0.999,
         "fps": [
-         60.5,
-         60.6
+         60.7,
+         60.7
         ],
         "js": [
-         1.69,
-         1.42
+         1.68,
+         1.56
         ],
         "draws": [
-         14.6,
+         14.7,
          15.5
         ],
-        "things": [
-         14.6,
-         15.5
+        "rowsPainted": [
+         1919,
+         1912.2
+        ],
+        "obj": [
+         13.72,
+         13.46
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3095.9,
+         3094.8
+        ],
+        "ops": [
+         104.6,
+         102
         ],
         "shadow": [
          1,
@@ -10422,22 +12758,38 @@
        },
        {
         "id": "S3",
-        "ratio": 0.999,
+        "ratio": 0.997,
         "fps": [
-         60.5,
-         60.5
+         60.6,
+         60.7
         ],
         "js": [
-         1.94,
-         1.76
+         2.3,
+         1.99
         ],
         "draws": [
          16,
          14
         ],
-        "things": [
-         16,
-         14
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1877.4,
+         1893.9
+        ],
+        "ops": [
+         180.4,
+         184.5
         ],
         "shadow": [
          1,
@@ -10465,14 +12817,7 @@
        "imageLoads": 172,
        "imageErrors": 0,
        "reused": 0,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "loaded"
-        }
-       ],
-       "ms": 5167,
+       "ms": 6133,
        "missing": [],
        "failed": [],
        "wrong": [],
@@ -10488,10 +12833,10 @@
       "reasons": [
        "mode"
       ],
-      "waited": 5493,
+      "waited": 5673,
       "hold": {
        "how": "waiting",
-       "ms": 3057
+       "ms": 3059
       },
       "srv": {
        "n304": 0
@@ -10499,22 +12844,38 @@
       "rows": [
        {
         "id": "S1",
-        "ratio": 0.999,
+        "ratio": 1.002,
         "fps": [
-         60.7,
-         60.8
+         60.8,
+         60.7
         ],
         "js": [
-         1.5,
-         1.59
+         1.89,
+         1.66
         ],
         "draws": [
          18,
          19
         ],
-        "things": [
-         18,
-         19
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3497.8,
+         3496.2
+        ],
+        "ops": [
+         100.2,
+         96.8
         ],
         "shadow": [
          1,
@@ -10528,22 +12889,38 @@
        },
        {
         "id": "S2",
-        "ratio": 1.004,
+        "ratio": 1.003,
         "fps": [
-         60.1,
-         60.1
+         60.9,
+         60.7
         ],
         "js": [
-         2.84,
-         2.65
+         2.54,
+         2.48
         ],
         "draws": [
-         208.4,
-         274
+         203.3,
+         255.2
         ],
-        "things": [
-         152.7,
-         152.7
+        "rowsPainted": [
+         5880.9,
+         5876.4
+        ],
+        "obj": [
+         151.58,
+         151.69
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2788.3,
+         2787
+        ],
+        "ops": [
+         73.1,
+         73.3
         ],
         "shadow": [
          0,
@@ -10560,19 +12937,35 @@
         "ratio": 1.003,
         "fps": [
          60.7,
-         60.5
+         60.4
         ],
         "js": [
-         1.91,
-         1.79
+         1.65,
+         1.7
         ],
         "draws": [
          16,
          14
         ],
-        "things": [
-         16,
-         14
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1871.6,
+         1879.2
+        ],
+        "ops": [
+         180.1,
+         180.5
         ],
         "shadow": [
          1,
@@ -10600,16 +12993,550 @@
        "imageLoads": 172,
        "imageErrors": 0,
        "reused": 0,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "loaded"
-        }
-       ],
-       "ms": 4898,
+       "ms": 5902,
        "missing": [],
        "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "slowbody",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "pass",
+      "reasons": [
+       "mode"
+      ],
+      "waited": 5614,
+      "hold": {
+       "how": "waiting",
+       "ms": 3076
+      },
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1.01,
+        "fps": [
+         60.5,
+         59.9
+        ],
+        "js": [
+         1.22,
+         1.72
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3498.7,
+         3494.9
+        ],
+        "ops": [
+         101,
+         94.6
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1.021,
+        "fps": [
+         58.8,
+         57.9
+        ],
+        "js": [
+         2.25,
+         2.3
+        ],
+        "draws": [
+         193.8,
+         246.3
+        ],
+        "rowsPainted": [
+         5870.3,
+         5874.4
+        ],
+        "obj": [
+         151.67,
+         151.76
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2788.3,
+         2787.5
+        ],
+        "ops": [
+         73,
+         73.3
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1.002,
+        "fps": [
+         60.6,
+         60.5
+        ],
+        "js": [
+         1.65,
+         1.21
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1883.8,
+         1874.8
+        ],
+        "ops": [
+         183.3,
+         179.7
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 172,
+       "fetches": 28,
+       "heads": 3,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "ms": 5658,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      }
+     },
+     {
+      "name": "bodybreak",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "files",
+       "scene"
+      ],
+      "waited": 5566,
+      "hold": {
+       "how": "waiting",
+       "ms": 3060
+      },
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1.083,
+        "fps": [
+         60.4,
+         55.7
+        ],
+        "js": [
+         1.87,
+         1.71
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3493.2,
+         3491.7
+        ],
+        "ops": [
+         91.5,
+         87.9
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1,
+        "fps": [
+         60.7,
+         60.8
+        ],
+        "js": [
+         1.19,
+         1.26
+        ],
+        "draws": [
+         19.3,
+         15.6
+        ],
+        "rowsPainted": [
+         2109.2,
+         1868.1
+        ],
+        "obj": [
+         18.33,
+         13.64
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2968.2,
+         2966.4
+        ],
+        "ops": [
+         117,
+         112.4
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": false,
+        "why": "ฉากสำรอง",
+        "cut": false,
+        "shaky": false,
+        "standin": true
+       },
+       {
+        "id": "S3",
+        "ratio": 1.006,
+        "fps": [
+         60.7,
+         60.5
+        ],
+        "js": [
+         2.15,
+         1.71
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1877.3,
+         1887.8
+        ],
+        "ops": [
+         179.9,
+         183.6
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": false,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 172,
+       "fetches": 27,
+       "heads": 3,
+       "record": [
+        210,
+        210
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "ms": 5014,
+       "missing": [],
+       "failed": [
+        "g9b-scene.json"
+       ],
+       "wrong": [
+        "g9b-scene.json"
+       ],
+       "why": ""
+      }
+     },
+     {
+      "name": "bodylate",
+      "tries": 1,
+      "ok": true,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "mode",
+       "files",
+       "interrupted"
+      ],
+      "noise": [
+       "interrupted"
+      ],
+      "waited": 20890,
+      "hold": {
+       "how": "run1",
+       "ms": 21389
+      },
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1,
+        "fps": [
+         60.6,
+         60.6
+        ],
+        "js": [
+         1.57,
+         1.45
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3498.3,
+         3495
+        ],
+        "ops": [
+         97.6,
+         91.9
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": true,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 0.936,
+        "fps": [
+         55.3,
+         59.1
+        ],
+        "js": [
+         2.63,
+         2.25
+        ],
+        "draws": [
+         196.3,
+         223.3
+        ],
+        "rowsPainted": [
+         5871.6,
+         5870.9
+        ],
+        "obj": [
+         151.72,
+         151.83
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2787.9,
+         2787.5
+        ],
+        "ops": [
+         72.9,
+         73.5
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 0.999,
+        "fps": [
+         60.5,
+         60.5
+        ],
+        "js": [
+         1.98,
+         1.88
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1887.4,
+         1885.1
+        ],
+        "ops": [
+         183.7,
+         182
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": false,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 172,
+       "fetches": 28,
+       "heads": 4,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "ms": 6933,
+       "missing": [],
+       "failed": [
+        "g9b-scene.json"
+       ],
        "wrong": [],
        "why": ""
       }
@@ -10624,29 +13551,45 @@
        "mode",
        "interrupted"
       ],
-      "waited": 648,
+      "waited": 631,
       "srv": {
        "n304": 0
       },
       "rows": [
        {
         "id": "S1",
-        "ratio": 1.003,
+        "ratio": 1.004,
         "fps": [
-         60.8,
-         60.6
+         61,
+         60.7
         ],
         "js": [
-         1.12,
-         0.94
+         1.76,
+         1.55
         ],
         "draws": [
          18,
          19
         ],
-        "things": [
-         18,
-         19
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3495,
+         3494.7
+        ],
+        "ops": [
+         94.5,
+         93.5
         ],
         "shadow": [
          1,
@@ -10660,22 +13603,38 @@
        },
        {
         "id": "S2",
-        "ratio": 1,
+        "ratio": 1.004,
         "fps": [
-         60.6,
-         60.6
+         60.8,
+         60.5
         ],
         "js": [
-         2.09,
-         1.92
+         2.51,
+         2.12
         ],
         "draws": [
-         292.7,
-         241.7
+         284.6,
+         241.6
         ],
-        "things": [
-         152.6,
-         152.7
+        "rowsPainted": [
+         5882.8,
+         5871.8
+        ],
+        "obj": [
+         151.6,
+         151.72
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2784.3,
+         2785.6
+        ],
+        "ops": [
+         66.2,
+         66.7
         ],
         "shadow": [
          0,
@@ -10689,22 +13648,38 @@
        },
        {
         "id": "S3",
-        "ratio": 1,
+        "ratio": 1.003,
         "fps": [
-         60.3,
+         60.6,
          60.5
         ],
         "js": [
-         1.48,
-         1.55
+         2.03,
+         1.9
         ],
         "draws": [
          16,
          14
         ],
-        "things": [
-         16,
-         14
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1869,
+         1880.8
+        ],
+        "ops": [
+         177.7,
+         181.1
         ],
         "shadow": [
          1,
@@ -10732,14 +13707,7 @@
        "imageLoads": 173,
        "imageErrors": 0,
        "reused": 0,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "loaded"
-        }
-       ],
-       "ms": 4977,
+       "ms": 4407,
        "missing": [],
        "failed": [],
        "wrong": [],
@@ -10756,29 +13724,45 @@
        "mode",
        "files"
       ],
-      "waited": 613,
+      "waited": 589,
       "srv": {
        "n304": 0
       },
       "rows": [
        {
         "id": "S1",
-        "ratio": 1,
+        "ratio": 1.001,
         "fps": [
          60.7,
          60.7
         ],
         "js": [
-         1.31,
-         1.65
+         1.78,
+         1.45
         ],
         "draws": [
          18,
          19
         ],
-        "things": [
-         18,
-         19
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3498.2,
+         3494.2
+        ],
+        "ops": [
+         99.9,
+         93.6
         ],
         "shadow": [
          1,
@@ -10792,22 +13776,38 @@
        },
        {
         "id": "S2",
-        "ratio": 0.993,
+        "ratio": 1.01,
         "fps": [
-         60.5,
-         60.9
+         60.6,
+         60
         ],
         "js": [
-         2.83,
-         2.54
+         2.36,
+         2.21
         ],
         "draws": [
-         307.9,
-         243.6
+         301,
+         251.5
         ],
-        "things": [
-         152.8,
-         152.6
+        "rowsPainted": [
+         5868.7,
+         5870.3
+        ],
+        "obj": [
+         151.66,
+         151.82
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2787.7,
+         2787.5
+        ],
+        "ops": [
+         72.9,
+         73.5
         ],
         "shadow": [
          0,
@@ -10821,22 +13821,38 @@
        },
        {
         "id": "S3",
-        "ratio": 1.005,
+        "ratio": 1.002,
         "fps": [
-         60.7,
-         60.4
+         60.6,
+         60.5
         ],
         "js": [
-         1.32,
-         1.43
+         1.9,
+         1.8
         ],
         "draws": [
          16,
          14
         ],
-        "things": [
-         16,
-         14
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1876,
+         1880.9
+        ],
+        "ops": [
+         180.8,
+         181.2
         ],
         "shadow": [
          1,
@@ -10864,14 +13880,7 @@
        "imageLoads": 173,
        "imageErrors": 1,
        "reused": 0,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "loaded"
-        }
-       ],
-       "ms": 6058,
+       "ms": 4648,
        "missing": [],
        "failed": [
         "gm-c207-g2.png"
@@ -10890,29 +13899,45 @@
        "mode",
        "files"
       ],
-      "waited": 597,
+      "waited": 607,
       "srv": {
        "n304": 0
       },
       "rows": [
        {
         "id": "S1",
-        "ratio": 1.005,
+        "ratio": 1.014,
         "fps": [
-         60.7,
-         60.4
+         60.8,
+         59.9
         ],
         "js": [
-         1.72,
-         1.47
+         1.65,
+         1.35
         ],
         "draws": [
          18,
          19
         ],
-        "things": [
-         18,
-         19
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3495.8,
+         3495.8
+        ],
+        "ops": [
+         94.5,
+         94
         ],
         "shadow": [
          1,
@@ -10926,22 +13951,38 @@
        },
        {
         "id": "S2",
-        "ratio": 1.007,
+        "ratio": 1.006,
         "fps": [
-         60.7,
-         60.4
+         60.9,
+         60.6
         ],
         "js": [
-         2.49,
-         2.19
+         2.26,
+         2.45
         ],
         "draws": [
-         296.5,
-         239.2
+         293.8,
+         241
         ],
-        "things": [
-         152.6,
-         152.6
+        "rowsPainted": [
+         5871.8,
+         5866.2
+        ],
+        "obj": [
+         151.66,
+         151.75
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2787.9,
+         2787.1
+        ],
+        "ops": [
+         72.9,
+         73.5
         ],
         "shadow": [
          0,
@@ -10955,22 +13996,38 @@
        },
        {
         "id": "S3",
-        "ratio": 0.999,
+        "ratio": 1.002,
         "fps": [
-         60.5,
+         60.6,
          60.5
         ],
         "js": [
-         1.88,
-         1.33
+         1.56,
+         1.34
         ],
         "draws": [
          16,
          14
         ],
-        "things": [
-         16,
-         14
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1885.7,
+         1879.9
+        ],
+        "ops": [
+         182.9,
+         180.5
         ],
         "shadow": [
          1,
@@ -10998,14 +14055,7 @@
        "imageLoads": 174,
        "imageErrors": 0,
        "reused": 1,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "loaded"
-        }
-       ],
-       "ms": 4879,
+       "ms": 5992,
        "missing": [],
        "failed": [],
        "wrong": [],
@@ -11021,29 +14071,45 @@
       "reasons": [
        "mode"
       ],
-      "waited": 578,
+      "waited": 660,
       "srv": {
        "n304": 174
       },
       "rows": [
        {
         "id": "S1",
-        "ratio": 0.996,
+        "ratio": 1.001,
         "fps": [
-         60.7,
-         60.8
+         60.6,
+         60.5
         ],
         "js": [
-         1.51,
-         1.28
+         1.59,
+         1.48
         ],
         "draws": [
          18,
          19
         ],
-        "things": [
-         18,
-         19
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3501.6,
+         3500.6
+        ],
+        "ops": [
+         106.6,
+         104.3
         ],
         "shadow": [
          1,
@@ -11057,22 +14123,38 @@
        },
        {
         "id": "S2",
-        "ratio": 0.996,
+        "ratio": 0.998,
         "fps": [
          60.6,
-         60.5
+         60.9
         ],
         "js": [
-         2.51,
-         2.46
+         2.26,
+         1.93
         ],
         "draws": [
-         299.4,
+         296.4,
          240
         ],
-        "things": [
-         152.6,
-         152.6
+        "rowsPainted": [
+         5882.8,
+         5871.8
+        ],
+        "obj": [
+         151.57,
+         151.73
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2788.3,
+         2787
+        ],
+        "ops": [
+         73.1,
+         73.3
         ],
         "shadow": [
          0,
@@ -11086,22 +14168,38 @@
        },
        {
         "id": "S3",
-        "ratio": 1.004,
+        "ratio": 1.002,
         "fps": [
-         60.6,
+         60.5,
          60.4
         ],
         "js": [
-         1.6,
-         1.55
+         1.03,
+         0.86
         ],
         "draws": [
          16,
          14
         ],
-        "things": [
-         16,
-         14
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1895.8,
+         1883.5
+        ],
+        "ops": [
+         186.6,
+         182.2
         ],
         "shadow": [
          1,
@@ -11129,14 +14227,7 @@
        "imageLoads": 172,
        "imageErrors": 0,
        "reused": 0,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "loaded"
-        }
-       ],
-       "ms": 4539,
+       "ms": 4445,
        "missing": [],
        "failed": [],
        "wrong": [],
@@ -11152,29 +14243,45 @@
       "reasons": [
        "mode"
       ],
-      "waited": 632,
+      "waited": 610,
       "srv": {
        "n304": 0
       },
       "rows": [
        {
         "id": "S1",
-        "ratio": 0.999,
+        "ratio": 1.003,
         "fps": [
-         60.7,
-         60.7
+         60.8,
+         60.6
         ],
         "js": [
-         1.49,
-         1.38
+         1.42,
+         1.09
         ],
         "draws": [
          18,
          19
         ],
-        "things": [
-         18,
-         19
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3490.5,
+         3489.1
+        ],
+        "ops": [
+         88.4,
+         85
         ],
         "shadow": [
          1,
@@ -11188,22 +14295,38 @@
        },
        {
         "id": "S2",
-        "ratio": 1,
+        "ratio": 1.028,
         "fps": [
-         60.6,
-         60.6
+         60.8,
+         58.5
         ],
         "js": [
-         2.5,
-         2.66
+         2.43,
+         2.34
         ],
         "draws": [
-         299.6,
-         240.6
+         301.3,
+         248.7
         ],
-        "things": [
-         152.6,
-         152.7
+        "rowsPainted": [
+         5868.3,
+         5870.5
+        ],
+        "obj": [
+         151.72,
+         151.88
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2787.7,
+         2787.4
+        ],
+        "ops": [
+         73,
+         73.6
         ],
         "shadow": [
          0,
@@ -11217,22 +14340,38 @@
        },
        {
         "id": "S3",
-        "ratio": 0.998,
+        "ratio": 0.999,
         "fps": [
-         60.4,
-         60.5
+         60.5,
+         60.4
         ],
         "js": [
-         1.5,
-         1.3
+         1.59,
+         1.75
         ],
         "draws": [
          16,
          14
         ],
-        "things": [
-         16,
-         14
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1885.2,
+         1890.8
+        ],
+        "ops": [
+         184.2,
+         185.4
         ],
         "shadow": [
          1,
@@ -11260,14 +14399,7 @@
        "imageLoads": 172,
        "imageErrors": 0,
        "reused": 0,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "loaded"
-        }
-       ],
-       "ms": 4478,
+       "ms": 5278,
        "missing": [],
        "failed": [],
        "wrong": [],
@@ -11284,29 +14416,45 @@
        "files",
        "scene"
       ],
-      "waited": 587,
+      "waited": 621,
       "srv": {
        "n304": 0
       },
       "rows": [
        {
         "id": "S1",
-        "ratio": 1,
+        "ratio": 0.999,
         "fps": [
-         60.1,
+         59.9,
          60.1
         ],
         "js": [
-         1.27,
-         1.23
+         1.22,
+         1.32
         ],
         "draws": [
          18,
          19
         ],
-        "things": [
-         18,
-         19
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3502.3,
+         3504
+        ],
+        "ops": [
+         106.6,
+         108.7
         ],
         "shadow": [
          1,
@@ -11320,22 +14468,38 @@
        },
        {
         "id": "S2",
-        "ratio": 0.999,
+        "ratio": 1,
         "fps": [
          60.1,
          60.1
         ],
         "js": [
-         0.9,
-         0.95
+         0.98,
+         0.9
         ],
         "draws": [
          17.2,
          18.2
         ],
-        "things": [
-         17.2,
-         18.2
+        "rowsPainted": [
+         2001.8,
+         2001.8
+        ],
+        "obj": [
+         16.24,
+         16.24
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2968.8,
+         2968.8
+        ],
+        "ops": [
+         116,
+         115
         ],
         "shadow": [
          1,
@@ -11355,16 +14519,32 @@
          60.1
         ],
         "js": [
-         0.92,
-         0.78
+         1.19,
+         1.03
         ],
         "draws": [
          16,
          14
         ],
-        "things": [
-         16,
-         14
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1882.5,
+         1881
+        ],
+        "ops": [
+         183.4,
+         181.4
         ],
         "shadow": [
          1,
@@ -11392,14 +14572,7 @@
        "imageLoads": 172,
        "imageErrors": 0,
        "reused": 0,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "loaded"
-        }
-       ],
-       "ms": 4718,
+       "ms": 5044,
        "missing": [],
        "failed": [
         "g9b-scene.json"
@@ -11407,215 +14580,280 @@
        "wrong": [],
        "why": ""
       },
-      "line": "G4.6 วัดความลื่น v5 · เกม 2.43 · เมือง 100 % · ฟาร์ม 100 % · ปากถ้ำ 100 % → ไม่นับ (ไฟล์เกมไม่ครบหรือไม่ตรง 1 ไฟล์ · เกมใช้ฉากสำรอง (ไฟล์ของฉากมาไม่ครบ)) · fps เปิด/ปิด 60.1/60.1 · 60.1/60.1 · 60.1/60.1 · งาน JS ms/เฟรม เปิด/ปิด 1.27/1.23 · 0.90/0.95 · 0.92/0.78 · วาด/เฟรม เปิด/ปิด 18/19 · 17/18 · 16/14 · ตรวจ ✓ ✗ฉากสำรอง ✓ · ไฟล์ 198 ขาด 1 [g9b-scene.json] ผิด 0 · ภาพที่เกมถือ 172 ตรง 172 · fetch 27 · รอโหลด 0.6 วิ · มือถือ 844×390 @3 · Android 10 Chrome/153.0.0.0",
+      "line": "G4.6 วัดความลื่น v6 · เกม 2.43 · เมือง 100 % · ฟาร์ม 100 % · ปากถ้ำ 100 % → ไม่นับ (ไฟล์เกมไม่ครบหรือไม่ตรง 1 ไฟล์ · เกมใช้ฉากสำรอง (ไฟล์ของฉากมาไม่ครบ)) · fps เปิด/ปิด 59.9/60.1 · 60.1/60.1 · 60.1/60.1 · งาน JS ms/เฟรม เปิด/ปิด 1.22/1.32 · 0.98/0.90 · 1.19/1.03 · รายคู่ % 100/99/100 · 100/100/100 · 100/100/100 · วาด/เฟรม เปิด/ปิด 18/19 · 17/18 · 16/14 · ฉากเปิด÷ปิด % (แถวภาพ/ชิ้น/แถวกรอบ/คำสั่งอื่น) 100/100/100/98 · 100/100/100/101 · 100/100/100/101 · ตรวจ ✓ ✗ฉากสำรอง ✓ · ไฟล์ 198 ขาด 1 [g9b-scene.json] ผิด 0 · ภาพที่เกมถือ 172 ตรง 172 · fetch 27 · รอโหลด 0.6 วิ · มือถือ 844×390 @3 · Android 10 Chrome/153.0.0.0",
       "runs": [
        {
         "scene": "S1",
         "on": true,
-        "fps": 60.1,
-        "frames": 301,
-        "gap": 26,
+        "fps": 59.9,
+        "frames": 300,
+        "gap": 0.0,
         "real": true,
         "busy": [],
-        "draws": 18.0,
-        "things": 18.0
+        "all": 18.0,
+        "rows": 2629.0,
+        "obj": 17.0,
+        "rect": 3496.98,
+        "ops": 98.03
+       },
+       {
+        "scene": "S1",
+        "on": false,
+        "fps": 59.8,
+        "frames": 299,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 19.0,
+        "rows": 2629.0,
+        "obj": 17.0,
+        "rect": 3503.98,
+        "ops": 108.66
        },
        {
         "scene": "S1",
         "on": false,
         "fps": 60.1,
         "frames": 301,
-        "gap": 27,
+        "gap": 0.0,
         "real": true,
         "busy": [],
-        "draws": 19.0,
-        "things": 19.0
-       },
-       {
-        "scene": "S1",
-        "on": false,
-        "fps": 60.1,
-        "frames": 301,
-        "gap": 21,
-        "real": true,
-        "busy": [],
-        "draws": 19.0,
-        "things": 19.0
+        "all": 19.0,
+        "rows": 2629.0,
+        "obj": 17.0,
+        "rect": 3504.27,
+        "ops": 109.07
        },
        {
         "scene": "S1",
         "on": true,
-        "fps": 60.1,
-        "frames": 301,
-        "gap": 21,
+        "fps": 59.5,
+        "frames": 298,
+        "gap": 0.0,
         "real": true,
         "busy": [],
-        "draws": 18.0,
-        "things": 18.0
+        "all": 18.0,
+        "rows": 2629.0,
+        "obj": 17.0,
+        "rect": 3502.32,
+        "ops": 106.61
        },
        {
         "scene": "S1",
         "on": true,
         "fps": 60.1,
         "frames": 301,
-        "gap": 21,
+        "gap": 0.0,
         "real": true,
         "busy": [],
-        "draws": 18.0,
-        "things": 18.0
+        "all": 18.0,
+        "rows": 2629.0,
+        "obj": 17.0,
+        "rect": 3502.32,
+        "ops": 106.61
        },
        {
         "scene": "S1",
         "on": false,
-        "fps": 60.1,
-        "frames": 301,
-        "gap": 22,
+        "fps": 60.2,
+        "frames": 302,
+        "gap": 0.0,
         "real": true,
         "busy": [],
-        "draws": 19.0,
-        "things": 19.0
+        "all": 19.0,
+        "rows": 2629.0,
+        "obj": 17.0,
+        "rect": 3502.32,
+        "ops": 105.7
        },
        {
         "scene": "S2",
         "on": true,
-        "fps": 60.1,
+        "fps": 60.2,
         "frames": 301,
-        "gap": 23,
+        "gap": 0.0,
         "real": false,
         "busy": [],
-        "draws": 17.2,
-        "things": 17.2
-       },
-       {
-        "scene": "S2",
-        "on": false,
-        "fps": 60.1,
-        "frames": 301,
-        "gap": 21,
-        "real": false,
-        "busy": [],
-        "draws": 18.2,
-        "things": 18.2
+        "all": 17.24,
+        "rows": 2001.84,
+        "obj": 16.24,
+        "rect": 2963.54,
+        "ops": 107.38
        },
        {
         "scene": "S2",
         "on": false,
         "fps": 60.1,
         "frames": 301,
-        "gap": 21,
+        "gap": 0.0,
         "real": false,
         "busy": [],
-        "draws": 17.9,
-        "things": 17.9
+        "all": 18.24,
+        "rows": 2001.84,
+        "obj": 16.24,
+        "rect": 2968.76,
+        "ops": 115.0
+       },
+       {
+        "scene": "S2",
+        "on": false,
+        "fps": 60.3,
+        "frames": 302,
+        "gap": 0.0,
+        "real": false,
+        "busy": [],
+        "all": 17.86,
+        "rows": 1982.58,
+        "obj": 15.86,
+        "rect": 2969.62,
+        "ops": 116.51
        },
        {
         "scene": "S2",
         "on": true,
         "fps": 60.1,
         "frames": 301,
-        "gap": 20,
+        "gap": 0.0,
         "real": false,
         "busy": [],
-        "draws": 16.9,
-        "things": 16.9
+        "all": 16.9,
+        "rows": 1984.26,
+        "obj": 15.9,
+        "rect": 2971.42,
+        "ops": 120.65
        },
        {
         "scene": "S2",
         "on": true,
         "fps": 60.1,
         "frames": 301,
-        "gap": 22,
+        "gap": 0.0,
         "real": false,
         "busy": [],
-        "draws": 17.2,
-        "things": 17.2
+        "all": 17.24,
+        "rows": 2001.84,
+        "obj": 16.24,
+        "rect": 2968.76,
+        "ops": 116.0
        },
        {
         "scene": "S2",
         "on": false,
         "fps": 60.1,
         "frames": 301,
-        "gap": 21,
+        "gap": 0.0,
         "real": false,
         "busy": [],
-        "draws": 18.2,
-        "things": 18.2
+        "all": 18.24,
+        "rows": 2001.84,
+        "obj": 16.24,
+        "rect": 2968.45,
+        "ops": 114.64
        },
        {
         "scene": "S3",
         "on": true,
         "fps": 60.1,
         "frames": 301,
-        "gap": 19,
+        "gap": 0.0,
         "real": true,
         "busy": [],
-        "draws": 16.0,
-        "things": 16.0
+        "all": 16.0,
+        "rows": 1495.5,
+        "obj": 12.0,
+        "rect": 1882.49,
+        "ops": 183.41
        },
        {
         "scene": "S3",
         "on": false,
         "fps": 60.1,
         "frames": 301,
-        "gap": 27,
+        "gap": 0.0,
         "real": true,
         "busy": [],
-        "draws": 14.0,
-        "things": 14.0
+        "all": 14.0,
+        "rows": 1495.5,
+        "obj": 12.0,
+        "rect": 1881.02,
+        "ops": 181.39
        },
        {
         "scene": "S3",
         "on": false,
         "fps": 60.1,
         "frames": 301,
-        "gap": 22,
+        "gap": 0.0,
         "real": true,
         "busy": [],
-        "draws": 14.0,
-        "things": 14.0
+        "all": 14.0,
+        "rows": 1495.5,
+        "obj": 12.0,
+        "rect": 1877.96,
+        "ops": 180.17
        },
        {
         "scene": "S3",
         "on": true,
         "fps": 60.1,
         "frames": 301,
-        "gap": 20,
+        "gap": 0.0,
         "real": true,
         "busy": [],
-        "draws": 16.0,
-        "things": 16.0
+        "all": 16.0,
+        "rows": 1495.5,
+        "obj": 12.0,
+        "rect": 1874.92,
+        "ops": 180.37
        },
        {
         "scene": "S3",
         "on": true,
         "fps": 60.1,
         "frames": 301,
-        "gap": 28,
+        "gap": 0.0,
         "real": true,
         "busy": [],
-        "draws": 16.0,
-        "things": 16.0
+        "all": 16.0,
+        "rows": 1495.5,
+        "obj": 12.0,
+        "rect": 1889.82,
+        "ops": 185.92
        },
        {
         "scene": "S3",
         "on": false,
         "fps": 60.1,
         "frames": 301,
-        "gap": 26,
+        "gap": 0.0,
         "real": true,
         "busy": [],
-        "draws": 14.0,
-        "things": 14.0
+        "all": 14.0,
+        "rows": 1495.5,
+        "obj": 12.0,
+        "rect": 1884.06,
+        "ops": 182.59
        }
       ]
      },
      {
-      "name": "full",
+      "name": "fullbody",
       "tries": 1,
       "ok": true,
-      "verdict": "pass",
-      "verdictIfCounted": "pass",
-      "waited": 600,
+      "verdict": "void",
+      "verdictIfCounted": "void",
+      "reasons": [
+       "files",
+       "interrupted"
+      ],
+      "noise": [
+       "interrupted"
+      ],
+      "waited": 45610,
+      "hold": {
+       "how": "run1",
+       "ms": 47477
+      },
       "srv": {
        "n304": 0
       },
@@ -11624,20 +14862,36 @@
         "id": "S1",
         "ratio": 1,
         "fps": [
-         60.1,
-         60.1
+         60.2,
+         60.2
         ],
         "js": [
-         1.18,
-         1.04
+         1.44,
+         1.4
         ],
         "draws": [
          18,
          19
         ],
-        "things": [
-         18,
-         19
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3501.6,
+         3503.2
+        ],
+        "ops": [
+         106.6,
+         108.6
         ],
         "shadow": [
          1,
@@ -11645,28 +14899,44 @@
         ],
         "ok": true,
         "why": "",
-        "cut": false,
+        "cut": true,
         "shaky": false,
         "standin": false
        },
        {
         "id": "S2",
-        "ratio": 1.002,
+        "ratio": 0.997,
         "fps": [
-         60.2,
-         60.1
+         59.7,
+         59.4
         ],
         "js": [
-         2.21,
-         2.18
+         2.3,
+         2.16
         ],
         "draws": [
-         246.9,
-         250.8
+         239.5,
+         227.2
         ],
-        "things": [
-         153.1,
-         153.7
+        "rowsPainted": [
+         5919.5,
+         5916.5
+        ],
+        "obj": [
+         151.95,
+         152.69
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2785.1,
+         2784.2
+        ],
+        "ops": [
+         67.1,
+         67.1
         ],
         "shadow": [
          0,
@@ -11680,22 +14950,466 @@
        },
        {
         "id": "S3",
+        "ratio": 1.001,
+        "fps": [
+         60.1,
+         60.1
+        ],
+        "js": [
+         1.5,
+         1.36
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1885,
+         1884.7
+        ],
+        "ops": [
+         183.8,
+         182.4
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": false,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 172,
+       "fetches": 28,
+       "heads": 12,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "ms": 6083,
+       "missing": [],
+       "failed": [
+        "g9b-scene.json"
+       ],
+       "wrong": [],
+       "why": ""
+      },
+      "line": "G4.6 วัดความลื่น v6 · เกม 2.43 · เมือง 100 % · ฟาร์ม 100 % · ปากถ้ำ 100 % → ไม่นับ (ไฟล์เกมไม่ครบหรือไม่ตรง 1 ไฟล์ · ระหว่างวัดมีการสะดุด สลับแอป หรือยังโหลดไฟล์อยู่) · fps เปิด/ปิด 60.2/60.2 · 59.7/59.4 · 60.1/60.1 · งาน JS ms/เฟรม เปิด/ปิด 1.44/1.40 · 2.30/2.16 · 1.50/1.36 · รายคู่ % 100/100/101 · 100/99/101 · 100/100/100 · วาด/เฟรม เปิด/ปิด 18/19 · 240/227 · 16/14 · ฉากเปิด÷ปิด % (แถวภาพ/ชิ้น/แถวกรอบ/คำสั่งอื่น) 100/100/100/98 · 100/100/100/100 · 100/100/100/101 · ตรวจ ✓ ✓ ✓ · ไฟล์ 198 ขาด 1 [g9b-scene.json] ผิด 0 · ภาพที่เกมถือ 172 ตรง 172 · fetch 28 · รอโหลด 45.6 วิ · โหลดระหว่างวัด [g9b-scene.json] · มือถือ 844×390 @3 · Android 10 Chrome/153.0.0.0",
+      "runs": [
+       {
+        "scene": "S1",
+        "on": true,
+        "fps": 60.2,
+        "frames": 301,
+        "gap": 0.0,
+        "real": true,
+        "busy": [
+         "g9b-scene.json"
+        ],
+        "all": 18.0,
+        "rows": 2629.0,
+        "obj": 17.0,
+        "rect": 3495.26,
+        "ops": 97.5
+       },
+       {
+        "scene": "S1",
+        "on": false,
+        "fps": 60.2,
+        "frames": 301,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 19.0,
+        "rows": 2629.0,
+        "obj": 17.0,
+        "rect": 3503.23,
+        "ops": 108.62
+       },
+       {
+        "scene": "S1",
+        "on": false,
+        "fps": 60.2,
+        "frames": 301,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 19.0,
+        "rows": 2629.0,
+        "obj": 17.0,
+        "rect": 3503.56,
+        "ops": 109.1
+       },
+       {
+        "scene": "S1",
+        "on": true,
+        "fps": 60,
+        "frames": 300,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 18.0,
+        "rows": 2629.0,
+        "obj": 17.0,
+        "rect": 3501.6,
+        "ops": 106.61
+       },
+       {
+        "scene": "S1",
+        "on": true,
+        "fps": 60.3,
+        "frames": 302,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 18.0,
+        "rows": 2629.0,
+        "obj": 17.0,
+        "rect": 3501.6,
+        "ops": 106.61
+       },
+       {
+        "scene": "S1",
+        "on": false,
+        "fps": 59.8,
+        "frames": 299,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 19.0,
+        "rows": 2629.0,
+        "obj": 17.0,
+        "rect": 3501.6,
+        "ops": 105.68
+       },
+       {
+        "scene": "S2",
+        "on": true,
+        "fps": 58.8,
+        "frames": 294,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 239.52,
+        "rows": 5913.37,
+        "obj": 151.9,
+        "rect": 2785.14,
+        "ops": 66.6
+       },
+       {
+        "scene": "S2",
+        "on": false,
+        "fps": 58.9,
+        "frames": 295,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 227.24,
+        "rows": 5920.89,
+        "obj": 152.64,
+        "rect": 2784.76,
+        "ops": 67.04
+       },
+       {
+        "scene": "S2",
+        "on": false,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 220.89,
+        "rows": 5907.77,
+        "obj": 152.69,
+        "rect": 2783.91,
+        "ops": 67.11
+       },
+       {
+        "scene": "S2",
+        "on": true,
+        "fps": 59.7,
+        "frames": 299,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 221.44,
+        "rows": 5919.47,
+        "obj": 151.95,
+        "rect": 2789.1,
+        "ops": 73.27
+       },
+       {
+        "scene": "S2",
+        "on": true,
+        "fps": 60,
+        "frames": 301,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 286.21,
+        "rows": 5920.92,
+        "obj": 152.78,
+        "rect": 2784.35,
+        "ops": 67.1
+       },
+       {
+        "scene": "S2",
+        "on": false,
+        "fps": 59.4,
+        "frames": 297,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 235.03,
+        "rows": 5916.46,
+        "obj": 152.8,
+        "rect": 2784.24,
+        "ops": 67.17
+       },
+       {
+        "scene": "S3",
+        "on": true,
+        "fps": 60.2,
+        "frames": 301,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 16.0,
+        "rows": 1495.5,
+        "obj": 12.0,
+        "rect": 1872.47,
+        "ops": 179.86
+       },
+       {
+        "scene": "S3",
+        "on": false,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 14.0,
+        "rows": 1495.5,
+        "obj": 12.0,
+        "rect": 1888.12,
+        "ops": 183.77
+       },
+       {
+        "scene": "S3",
+        "on": false,
+        "fps": 59.9,
+        "frames": 300,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 14.0,
+        "rows": 1495.5,
+        "obj": 12.0,
+        "rect": 1878.39,
+        "ops": 180.97
+       },
+       {
+        "scene": "S3",
+        "on": true,
+        "fps": 59.9,
+        "frames": 300,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 16.0,
+        "rows": 1495.5,
+        "obj": 12.0,
+        "rect": 1887.12,
+        "ops": 184.25
+       },
+       {
+        "scene": "S3",
+        "on": true,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 16.0,
+        "rows": 1495.5,
+        "obj": 12.0,
+        "rect": 1885.01,
+        "ops": 183.83
+       },
+       {
+        "scene": "S3",
+        "on": false,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 14.0,
+        "rows": 1495.5,
+        "obj": 12.0,
+        "rect": 1884.71,
+        "ops": 182.41
+       }
+      ]
+     },
+     {
+      "name": "fullstrips",
+      "tries": 1,
+      "ok": true,
+      "verdict": "fail",
+      "verdictIfCounted": "fail",
+      "waited": 610,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1.004,
+        "fps": [
+         59.9,
+         59.9
+        ],
+        "js": [
+         1.42,
+         1.44
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3500.9,
+         3501.9
+        ],
+        "ops": [
+         106.6,
+         107.8
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1.036,
+        "fps": [
+         59.7,
+         57.2
+        ],
+        "js": [
+         2.43,
+         2.43
+        ],
+        "draws": [
+         165.4,
+         245.7
+        ],
+        "rowsPainted": [
+         3919.6,
+         5917.6
+        ],
+        "obj": [
+         102.43,
+         152.81
+        ],
+        "rowsMissing": [
+         91.3,
+         0
+        ],
+        "rectRows": [
+         2785.1,
+         2784.6
+        ],
+        "ops": [
+         66.6,
+         67.2
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": false,
+        "why": "ฉากวาดไม่ครบตอนเปิด",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
         "ratio": 1,
         "fps": [
          60.1,
          60.1
         ],
         "js": [
-         0.9,
-         0.81
+         1.11,
+         1.35
         ],
         "draws": [
          16,
          14
         ],
-        "things": [
-         16,
-         14
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1885.9,
+         1879.1
+        ],
+        "ops": [
+         184.3,
+         180.8
         ],
         "shadow": [
          1,
@@ -11723,242 +15437,725 @@
        "imageLoads": 172,
        "imageErrors": 0,
        "reused": 0,
-       "scripts": [
-        {
-         "rel": "char2.js",
-         "guarded": true,
-         "state": "loaded"
-        }
-       ],
-       "ms": 5433,
+       "ms": 7065,
        "missing": [],
        "failed": [],
        "wrong": [],
        "why": ""
       },
-      "line": "G4.6 วัดความลื่น v5 · เกม 2.43 · เมือง 100 % · ฟาร์ม 100 % · ปากถ้ำ 100 % → ผ่าน (เกณฑ์ ≥ 90 %) · fps เปิด/ปิด 60.1/60.1 · 60.2/60.1 · 60.1/60.1 · งาน JS ms/เฟรม เปิด/ปิด 1.18/1.04 · 2.21/2.18 · 0.90/0.81 · วาด/เฟรม เปิด/ปิด 18/19 · 247/251 · 16/14 · ตรวจ ✓ ✓ ✓ · ไฟล์ 198 ขาด 0 ผิด 0 · ภาพที่เกมถือ 172 ตรง 172 · fetch 28 · รอโหลด 0.6 วิ · มือถือ 844×390 @3 · Android 10 Chrome/153.0.0.0",
+      "line": "G4.6 วัดความลื่น v6 · เกม 2.43 · เมือง 100 % · ฟาร์ม 104 % · ปากถ้ำ 100 % → ไม่ผ่าน (เกณฑ์ ≥ 90 %) · fps เปิด/ปิด 59.9/59.9 · 59.7/57.2 · 60.1/60.1 · งาน JS ms/เฟรม เปิด/ปิด 1.42/1.44 · 2.43/2.43 · 1.11/1.35 · รายคู่ % 101/100/99 · 105/104/102 · 100/100/100 · วาด/เฟรม เปิด/ปิด 18/19 · 165/246 · 16/14 · ฉากเปิด÷ปิด % (แถวภาพ/ชิ้น/แถวกรอบ/คำสั่งอื่น) 100/100/100/99 · 66/67/100/99 แถวหาย 91 · 100/100/100/102 · ตรวจ ✓ ✗ฉากวาดไม่ครบตอนเปิด ✓ · ไฟล์ 198 ขาด 0 ผิด 0 · ภาพที่เกมถือ 172 ตรง 172 · fetch 28 · รอโหลด 0.6 วิ · มือถือ 844×390 @3 · Android 10 Chrome/153.0.0.0",
+      "runs": [
+       {
+        "scene": "S1",
+        "on": true,
+        "fps": 59.9,
+        "frames": 300,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 18.0,
+        "rows": 2629.0,
+        "obj": 17.0,
+        "rect": 3492.11,
+        "ops": 91.51
+       },
+       {
+        "scene": "S1",
+        "on": false,
+        "fps": 59.2,
+        "frames": 297,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 19.0,
+        "rows": 2629.0,
+        "obj": 17.0,
+        "rect": 3501.93,
+        "ops": 107.83
+       },
+       {
+        "scene": "S1",
+        "on": false,
+        "fps": 59.9,
+        "frames": 300,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 19.0,
+        "rows": 2629.0,
+        "obj": 17.0,
+        "rect": 3502.77,
+        "ops": 108.95
+       },
+       {
+        "scene": "S1",
+        "on": true,
+        "fps": 60.2,
+        "frames": 301,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 18.0,
+        "rows": 2629.0,
+        "obj": 17.0,
+        "rect": 3500.89,
+        "ops": 106.61
+       },
+       {
+        "scene": "S1",
+        "on": true,
+        "fps": 59.3,
+        "frames": 297,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 18.0,
+        "rows": 2629.0,
+        "obj": 17.0,
+        "rect": 3500.89,
+        "ops": 106.62
+       },
+       {
+        "scene": "S1",
+        "on": false,
+        "fps": 60,
+        "frames": 301,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 19.0,
+        "rows": 2629.0,
+        "obj": 17.0,
+        "rect": 3500.89,
+        "ops": 105.68
+       },
+       {
+        "scene": "S2",
+        "on": true,
+        "fps": 59.7,
+        "frames": 299,
+        "gap": 91.3,
+        "real": true,
+        "busy": [],
+        "all": 165.43,
+        "rows": 3919.61,
+        "obj": 102.43,
+        "rect": 2785.14,
+        "ops": 66.57
+       },
+       {
+        "scene": "S2",
+        "on": false,
+        "fps": 57.1,
+        "frames": 286,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 256.96,
+        "rows": 5920.75,
+        "obj": 152.81,
+        "rect": 2784.57,
+        "ops": 67.08
+       },
+       {
+        "scene": "S2",
+        "on": false,
+        "fps": 57.2,
+        "frames": 287,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 245.66,
+        "rows": 5911.34,
+        "obj": 152.73,
+        "rect": 2788.06,
+        "ops": 74.12
+       },
+       {
+        "scene": "S2",
+        "on": true,
+        "fps": 59.3,
+        "frames": 297,
+        "gap": 60.11,
+        "real": true,
+        "busy": [],
+        "all": 143.67,
+        "rows": 3990.56,
+        "obj": 101.99,
+        "rect": 2785.25,
+        "ops": 66.47
+       },
+       {
+        "scene": "S2",
+        "on": true,
+        "fps": 59.9,
+        "frames": 300,
+        "gap": 115.9,
+        "real": true,
+        "busy": [],
+        "all": 183.05,
+        "rows": 3864.66,
+        "obj": 103.25,
+        "rect": 2784.2,
+        "ops": 67.13
+       },
+       {
+        "scene": "S2",
+        "on": false,
+        "fps": 58.7,
+        "frames": 294,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 215.23,
+        "rows": 5917.56,
+        "obj": 152.87,
+        "rect": 2784.12,
+        "ops": 67.17
+       },
+       {
+        "scene": "S3",
+        "on": true,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 16.0,
+        "rows": 1495.5,
+        "obj": 12.0,
+        "rect": 1884.15,
+        "ops": 183.33
+       },
+       {
+        "scene": "S3",
+        "on": false,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 14.0,
+        "rows": 1495.5,
+        "obj": 12.0,
+        "rect": 1877.36,
+        "ops": 179.36
+       },
+       {
+        "scene": "S3",
+        "on": false,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 14.0,
+        "rows": 1495.5,
+        "obj": 12.0,
+        "rect": 1879.15,
+        "ops": 180.77
+       },
+       {
+        "scene": "S3",
+        "on": true,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 16.0,
+        "rows": 1495.5,
+        "obj": 12.0,
+        "rect": 1889.28,
+        "ops": 184.61
+       },
+       {
+        "scene": "S3",
+        "on": true,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 16.0,
+        "rows": 1495.5,
+        "obj": 12.0,
+        "rect": 1885.88,
+        "ops": 184.32
+       },
+       {
+        "scene": "S3",
+        "on": false,
+        "fps": 60.1,
+        "frames": 301,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 14.0,
+        "rows": 1495.5,
+        "obj": 12.0,
+        "rect": 1887.6,
+        "ops": 183.96
+       }
+      ]
+     },
+     {
+      "name": "full",
+      "tries": 1,
+      "ok": true,
+      "verdict": "pass",
+      "verdictIfCounted": "pass",
+      "waited": 598,
+      "srv": {
+       "n304": 0
+      },
+      "rows": [
+       {
+        "id": "S1",
+        "ratio": 1.003,
+        "fps": [
+         60.1,
+         60
+        ],
+        "js": [
+         1.33,
+         1.44
+        ],
+        "draws": [
+         18,
+         19
+        ],
+        "rowsPainted": [
+         2629,
+         2629
+        ],
+        "obj": [
+         17,
+         17
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         3501.8,
+         3503.4
+        ],
+        "ops": [
+         106.6,
+         108.5
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S2",
+        "ratio": 1.008,
+        "fps": [
+         59.6,
+         58.5
+        ],
+        "js": [
+         2.21,
+         2.15
+        ],
+        "draws": [
+         247.9,
+         247.5
+        ],
+        "rowsPainted": [
+         5919.1,
+         5919.1
+        ],
+        "obj": [
+         152,
+         152.61
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         2785.2,
+         2784.4
+        ],
+        "ops": [
+         67.1,
+         67.1
+        ],
+        "shadow": [
+         0,
+         0
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       },
+       {
+        "id": "S3",
+        "ratio": 1,
+        "fps": [
+         60.1,
+         60.1
+        ],
+        "js": [
+         1.34,
+         1.16
+        ],
+        "draws": [
+         16,
+         14
+        ],
+        "rowsPainted": [
+         1495.5,
+         1495.5
+        ],
+        "obj": [
+         12,
+         12
+        ],
+        "rowsMissing": [
+         0,
+         0
+        ],
+        "rectRows": [
+         1882.3,
+         1885.5
+        ],
+        "ops": [
+         182,
+         182.5
+        ],
+        "shadow": [
+         1,
+         1
+        ],
+        "ok": true,
+        "why": "",
+        "cut": false,
+        "shaky": false,
+        "standin": false
+       }
+      ],
+      "files": {
+       "ok": true,
+       "asked": 198,
+       "hashed": 198,
+       "images": 172,
+       "imagesEqual": 172,
+       "fetches": 28,
+       "heads": 9,
+       "record": [
+        212,
+        212
+       ],
+       "imageLoads": 172,
+       "imageErrors": 0,
+       "reused": 0,
+       "ms": 4413,
+       "missing": [],
+       "failed": [],
+       "wrong": [],
+       "why": ""
+      },
+      "line": "G4.6 วัดความลื่น v6 · เกม 2.43 · เมือง 100 % · ฟาร์ม 101 % · ปากถ้ำ 100 % → ผ่าน (เกณฑ์ ≥ 90 %) · fps เปิด/ปิด 60.1/60.0 · 59.6/58.5 · 60.1/60.1 · งาน JS ms/เฟรม เปิด/ปิด 1.33/1.44 · 2.21/2.15 · 1.34/1.16 · รายคู่ % 102/99/100 · 100/103/101 · 100/100/100 · วาด/เฟรม เปิด/ปิด 18/19 · 248/248 · 16/14 · ฉากเปิด÷ปิด % (แถวภาพ/ชิ้น/แถวกรอบ/คำสั่งอื่น) 100/100/100/98 · 100/100/100/100 · 100/100/100/100 · ตรวจ ✓ ✓ ✓ · ไฟล์ 198 ขาด 0 ผิด 0 · ภาพที่เกมถือ 172 ตรง 172 · fetch 28 · รอโหลด 0.6 วิ · มือถือ 844×390 @3 · Android 10 Chrome/153.0.0.0",
       "runs": [
        {
         "scene": "S1",
         "on": true,
         "fps": 60.1,
         "frames": 301,
-        "gap": 24,
+        "gap": 0.0,
         "real": true,
         "busy": [],
-        "draws": 18.0,
-        "things": 18.0
+        "all": 18.0,
+        "rows": 2629.0,
+        "obj": 17.0,
+        "rect": 3500.1,
+        "ops": 104.06
+       },
+       {
+        "scene": "S1",
+        "on": false,
+        "fps": 58.9,
+        "frames": 295,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 19.0,
+        "rows": 2629.0,
+        "obj": 17.0,
+        "rect": 3503.4,
+        "ops": 108.51
        },
        {
         "scene": "S1",
         "on": false,
         "fps": 60.1,
         "frames": 301,
-        "gap": 21,
+        "gap": 0.0,
         "real": true,
         "busy": [],
-        "draws": 19.0,
-        "things": 19.0
-       },
-       {
-        "scene": "S1",
-        "on": false,
-        "fps": 60.1,
-        "frames": 301,
-        "gap": 21,
-        "real": true,
-        "busy": [],
-        "draws": 19.0,
-        "things": 19.0
+        "all": 19.0,
+        "rows": 2629.0,
+        "obj": 17.0,
+        "rect": 3503.86,
+        "ops": 109.22
        },
        {
         "scene": "S1",
         "on": true,
-        "fps": 60.1,
-        "frames": 301,
-        "gap": 21,
+        "fps": 59.8,
+        "frames": 299,
+        "gap": 0.0,
         "real": true,
         "busy": [],
-        "draws": 18.0,
-        "things": 18.0
+        "all": 18.0,
+        "rows": 2629.0,
+        "obj": 17.0,
+        "rect": 3501.84,
+        "ops": 106.61
        },
        {
         "scene": "S1",
         "on": true,
-        "fps": 60.1,
+        "fps": 60.2,
         "frames": 301,
-        "gap": 28,
+        "gap": 0.0,
         "real": true,
         "busy": [],
-        "draws": 18.0,
-        "things": 18.0
+        "all": 18.0,
+        "rows": 2629.0,
+        "obj": 17.0,
+        "rect": 3501.84,
+        "ops": 106.61
        },
        {
         "scene": "S1",
-        "on": false,
-        "fps": 60.1,
-        "frames": 301,
-        "gap": 21,
-        "real": true,
-        "busy": [],
-        "draws": 19.0,
-        "things": 19.0
-       },
-       {
-        "scene": "S2",
-        "on": true,
-        "fps": 60.1,
-        "frames": 301,
-        "gap": 23,
-        "real": true,
-        "busy": [],
-        "draws": 246.9,
-        "things": 152.9
-       },
-       {
-        "scene": "S2",
         "on": false,
         "fps": 60,
         "frames": 300,
-        "gap": 28,
+        "gap": 0.0,
         "real": true,
         "busy": [],
-        "draws": 257.4,
-        "things": 153.7
-       },
-       {
-        "scene": "S2",
-        "on": false,
-        "fps": 60.1,
-        "frames": 301,
-        "gap": 23,
-        "real": true,
-        "busy": [],
-        "draws": 250.8,
-        "things": 153.7
+        "all": 19.0,
+        "rows": 2629.0,
+        "obj": 17.0,
+        "rect": 3501.84,
+        "ops": 105.65
        },
        {
         "scene": "S2",
         "on": true,
-        "fps": 60.2,
-        "frames": 302,
-        "gap": 24,
+        "fps": 59.6,
+        "frames": 299,
+        "gap": 0.0,
         "real": true,
         "busy": [],
-        "draws": 216.1,
-        "things": 153.1
-       },
-       {
-        "scene": "S2",
-        "on": true,
-        "fps": 60.2,
-        "frames": 301,
-        "gap": 23,
-        "real": true,
-        "busy": [],
-        "draws": 269.0,
-        "things": 153.9
+        "all": 247.91,
+        "rows": 5919.12,
+        "obj": 152.0,
+        "rect": 2786.21,
+        "ops": 68.38
        },
        {
         "scene": "S2",
         "on": false,
-        "fps": 60.3,
-        "frames": 302,
-        "gap": 23,
+        "fps": 59.8,
+        "frames": 300,
+        "gap": 0.0,
         "real": true,
         "busy": [],
-        "draws": 213.0,
-        "things": 153.7
+        "all": 256.46,
+        "rows": 5921.04,
+        "obj": 152.61,
+        "rect": 2787.19,
+        "ops": 71.47
+       },
+       {
+        "scene": "S2",
+        "on": false,
+        "fps": 58,
+        "frames": 290,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 247.5,
+        "rows": 5909.32,
+        "obj": 152.51,
+        "rect": 2784.14,
+        "ops": 67.03
+       },
+       {
+        "scene": "S2",
+        "on": true,
+        "fps": 59.8,
+        "frames": 299,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 214.65,
+        "rows": 5920.54,
+        "obj": 151.94,
+        "rect": 2785.22,
+        "ops": 66.44
+       },
+       {
+        "scene": "S2",
+        "on": true,
+        "fps": 59,
+        "frames": 295,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 272.08,
+        "rows": 5916.74,
+        "obj": 152.81,
+        "rect": 2784.19,
+        "ops": 67.13
+       },
+       {
+        "scene": "S2",
+        "on": false,
+        "fps": 58.5,
+        "frames": 293,
+        "gap": 0.0,
+        "real": true,
+        "busy": [],
+        "all": 214.03,
+        "rows": 5919.08,
+        "obj": 152.69,
+        "rect": 2784.38,
+        "ops": 67.1
        },
        {
         "scene": "S3",
         "on": true,
         "fps": 60.1,
         "frames": 301,
-        "gap": 20,
+        "gap": 0.0,
         "real": true,
         "busy": [],
-        "draws": 16.0,
-        "things": 16.0
+        "all": 16.0,
+        "rows": 1495.5,
+        "obj": 12.0,
+        "rect": 1879.91,
+        "ops": 181.73
        },
        {
         "scene": "S3",
         "on": false,
         "fps": 60.1,
         "frames": 301,
-        "gap": 20,
+        "gap": 0.0,
         "real": true,
         "busy": [],
-        "draws": 14.0,
-        "things": 14.0
+        "all": 14.0,
+        "rows": 1495.5,
+        "obj": 12.0,
+        "rect": 1891.0,
+        "ops": 184.73
        },
        {
         "scene": "S3",
         "on": false,
         "fps": 60.1,
         "frames": 301,
-        "gap": 20,
+        "gap": 0.0,
         "real": true,
         "busy": [],
-        "draws": 14.0,
-        "things": 14.0
+        "all": 14.0,
+        "rows": 1495.5,
+        "obj": 12.0,
+        "rect": 1885.55,
+        "ops": 182.53
        },
        {
         "scene": "S3",
         "on": true,
-        "fps": 60.2,
-        "frames": 301,
-        "gap": 20,
+        "fps": 59.9,
+        "frames": 300,
+        "gap": 0.0,
         "real": true,
         "busy": [],
-        "draws": 16.0,
-        "things": 16.0
+        "all": 16.0,
+        "rows": 1495.5,
+        "obj": 12.0,
+        "rect": 1882.27,
+        "ops": 181.96
        },
        {
         "scene": "S3",
         "on": true,
         "fps": 60.1,
         "frames": 301,
-        "gap": 20,
+        "gap": 0.0,
         "real": true,
         "busy": [],
-        "draws": 16.0,
-        "things": 16.0
+        "all": 16.0,
+        "rows": 1495.5,
+        "obj": 12.0,
+        "rect": 1882.77,
+        "ops": 182.76
        },
        {
         "scene": "S3",
         "on": false,
         "fps": 60.1,
         "frames": 301,
-        "gap": 25,
+        "gap": 0.0,
         "real": true,
         "busy": [],
-        "draws": 14.0,
-        "things": 14.0
+        "all": 14.0,
+        "rows": 1495.5,
+        "obj": 12.0,
+        "rect": 1882.56,
+        "ops": 182.13
        }
       ]
      }
     ]
    },
-   "selftest_first_run": {
-    "summary": {
-     "cases": 35,
-     "ok": 35,
-     "retried": [
-      "ok×2"
-     ],
-     "noisy": [
-      "nooldbody:unstable"
-     ],
-     "verdict": "pass"
-    },
-    "note": "same build, before the \"revalidate\" case was added; \"ok\" first try: unstable in a 1-second test run; both in the farm scene, where some 1-second runs dropped to 50.8-57.8 fps on this machine"
-   },
    "mutations": {
-    "removed_guards": 25,
-    "selftest_exit_1": 25,
-    "note": "run with the self-test file before the \"revalidate\" case was added",
+    "removed_guards": 32,
+    "selftest_exit_1": 32,
     "each": {
+     "bodyend": {
+      "selftest_exit": 1,
+      "ok": 0,
+      "cases": 3,
+      "said": [
+       {
+        "case": "slowbody",
+        "bench_said": "void",
+        "reasons": [
+         "scene"
+        ]
+       },
+       {
+        "case": "bodybreak",
+        "bench_said": "void",
+        "reasons": [
+         "files",
+         "scene"
+        ]
+       },
+       {
+        "case": "bodylate",
+        "bench_said": "pass",
+        "reasons": []
+       }
+      ]
+     },
      "build": {
       "selftest_exit": 1,
       "ok": 0,
@@ -12041,6 +16238,18 @@
        }
       ]
      },
+     "gapgate": {
+      "selftest_exit": 1,
+      "ok": 0,
+      "cases": 1,
+      "said": [
+       {
+        "case": "gaprows",
+        "bench_said": "pass",
+        "reasons": []
+       }
+      ]
+     },
      "gate": {
       "selftest_exit": 1,
       "ok": 0,
@@ -12076,7 +16285,8 @@
         "case": "headok",
         "bench_said": "void",
         "reasons": [
-         "files"
+         "files",
+         "unstable"
         ]
        }
       ]
@@ -12134,6 +16344,18 @@
        }
       ]
      },
+     "objgate": {
+      "selftest_exit": 1,
+      "ok": 0,
+      "cases": 1,
+      "said": [
+       {
+        "case": "fewsmall",
+        "bench_said": "pass",
+        "reasons": []
+       }
+      ]
+     },
      "oldbody": {
       "selftest_exit": 1,
       "ok": 0,
@@ -12141,11 +16363,25 @@
       "said": [
        {
         "case": "nooldbody",
-        "bench_said": "pass",
-        "reasons": []
+        "bench_said": "void",
+        "reasons": [
+         "unstable"
+        ]
        },
        {
         "case": "nooldbody_late",
+        "bench_said": "pass",
+        "reasons": []
+       }
+      ]
+     },
+     "opsgate": {
+      "selftest_exit": 1,
+      "ok": 0,
+      "cases": 1,
+      "said": [
+       {
+        "case": "nopaths",
         "bench_said": "pass",
         "reasons": []
        }
@@ -12197,6 +16433,18 @@
        }
       ]
      },
+     "rectgate": {
+      "selftest_exit": 1,
+      "ok": 0,
+      "cases": 1,
+      "said": [
+       {
+        "case": "norects",
+        "bench_said": "pass",
+        "reasons": []
+       }
+      ]
+     },
      "refhash": {
       "selftest_exit": 1,
       "ok": 0,
@@ -12235,6 +16483,18 @@
        }
       ]
      },
+     "rowsgate": {
+      "selftest_exit": 1,
+      "ok": 0,
+      "cases": 1,
+      "said": [
+       {
+        "case": "nobackground",
+        "bench_said": "pass",
+        "reasons": []
+       }
+      ]
+     },
      "scene": {
       "selftest_exit": 1,
       "ok": 0,
@@ -12251,6 +16511,25 @@
         "case": "standin",
         "bench_said": "pass",
         "reasons": []
+       }
+      ]
+     },
+     "scenegates": {
+      "selftest_exit": 1,
+      "ok": 0,
+      "cases": 2,
+      "said": [
+       {
+        "case": "fewdraws",
+        "bench_said": "pass",
+        "reasons": []
+       },
+       {
+        "case": "fewstrips",
+        "bench_said": "void",
+        "reasons": [
+         "unstable"
+        ]
        }
       ]
      },
@@ -12287,7 +16566,8 @@
         "case": "firstscript_nostore",
         "bench_said": "void",
         "reasons": [
-         "files"
+         "files",
+         "unstable"
         ]
        }
       ]
@@ -12350,6 +16630,22 @@
     "the hunting-map worker reading files again"
    ],
    "wording": "\"not more than 0.6 %\" must not be used as a guarantee (§6.5)"
+  }
+ },
+ "codex_T50": {
+  "review": "REVIEW_CODEX_T50_BENCH5.md @8ff7ed6",
+  "v5": {
+   "T49-N1": "closed",
+   "T49-N2": "closed",
+   "full_selftest": "36/36, no retries",
+   "own_304_probes_full_length": "void 3/3 (scene json, cave picture, c2-pack.json)",
+   "cache_revalidation": "pass (174 conditional 304)",
+   "mutations": "4/4",
+   "new": {
+    "T50-N1": "medium: a fetch counted as ended when its headers came; a body still coming in was neither waited for nor seen inside a run (full-length false pass)",
+    "T50-N2": "medium: every third draw command of the farm skipped with the flag on; \"things\" 86.91 % >= 80 % (full-length false pass)"
+   },
+   "wind": "accepted as a disclosed limit once N1/N2 are fixed; a result near 90 % or a shaky one should show its pairs and be measured again"
   }
  }
 }
