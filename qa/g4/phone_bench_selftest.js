@@ -1,10 +1,11 @@
-// G4.6: self-test of the phone bench (qa/g4/phone_bench.js v5) — it must not say "ผ่าน" when the measurement cannot be trusted.
+// G4.6: self-test of the phone bench (qa/g4/phone_bench.js v6) — it must not say "ผ่าน" when the measurement cannot be trusted.
 //   node qa/g4/phone_bench_selftest.js <out dir of build_phone_bench.py> [results.json]      CASES=a,b  FULL=1  CHROME_EXE=…
 // Serves the built copy itself (page.html inside the same skeleton the artifact host adds + exactly the files of files.json; a case
 // can leave a file out or answer 200 with other bytes — the fault is at the server, no request is intercepted in the browser) and runs the bench in test timing
 // (window.__benchTest: settle 300 ms · count 1000 ms — such a run never counts; the self-test reads verdictIfCounted, the verdict the
-// same checks would give in a full-length run). FULL=1 adds two full-length runs on an emulated phone: the normal one, which
-// must say "ผ่าน", and (v5) the farm's scene data answered 304 with no body, which must say "ไม่นับ" as the run's real verdict.
+// same checks would give in a full-length run). FULL=1 adds full-length runs on an emulated phone: the normal one, which
+// must say "ผ่าน"; (v5) the farm's scene data answered 304 with no body, which must say "ไม่นับ"; (v6) Codex's two T50 probes — a
+// body that is still coming in when the run would start ("ไม่นับ") and a third of the farm's draw commands gone ("ไม่ผ่าน").
 // Exit 0 = every case as expected · 1 = a case is wrong · 2 = could not run.
 const http = require('http'), fs = require('fs'), path = require('path'), puppeteer = require('puppeteer');
 const dir = process.argv[2], outFile = process.argv[3];
@@ -26,7 +27,9 @@ const alter = (name, from, to) => { const t = fs.readFileSync(MAP[name], 'latin1
 // hold: GETs of these files are not answered until release() is called (a slow file, v5).
 // etag: every file is sent with an ETag and "Cache-Control: no-cache", and a request that brings the ETag back is answered 304 with
 // no body — the ordinary way a browser checks its own copy; the game then gets a full 200 answer from the browser (v5).
-function serve(deny, swap, first, nostore, hold, etag) {
+// part[name] = n: the first GET of that file gets its headers and its first n bytes at once; the rest of the body waits for release()
+// (v6) — or, with brk, the connection is cut at release() and the rest never comes.
+function serve(deny, swap, first, nostore, hold, etag, part, brk) {
   const served = {}, cc = nostore ? { 'cache-control': 'no-store' } : etag ? { 'cache-control': 'no-cache' } : {}, waiting = [];   // no-store: the browser keeps no copy, so a second read goes to the server again
   let open = false, n304 = 0;
   return new Promise((res) => { const s = http.createServer((q, r) => {
@@ -38,6 +41,9 @@ function serve(deny, swap, first, nostore, hold, etag) {
       if (!Buffer.isBuffer(first[p])) { r.writeHead(first[p].status, cc); return r.end(); }
       r.writeHead(200, Object.assign({ 'content-type': type, 'content-length': first[p].length }, cc)); return r.end(first[p]); }
     if (swap && swap[p]) { r.writeHead(200, { 'content-type': type, 'content-length': swap[p].length }); return r.end(q.method === 'HEAD' ? undefined : swap[p]); }
+    if (part && part[p] && q.method === 'GET' && !served[p]) { served[p] = 1; const buf = fs.readFileSync(MAP[p]);
+      r.writeHead(200, { 'content-type': type, 'content-length': buf.length, 'cache-control': 'no-store' }); r.flushHeaders(); r.write(buf.subarray(0, part[p]));
+      const rest = () => (brk ? r.destroy() : r.end(buf.subarray(part[p]))); if (open) rest(); else waiting.push(rest); return; }
     const tag = etag ? '"' + fs.statSync(MAP[p]).size + '-' + p.length + '"' : null;
     if (tag && q.headers['if-none-match'] === tag) { n304++; r.writeHead(304, Object.assign({ etag: tag }, cc)); return r.end(); }
     const send = () => { r.writeHead(200, Object.assign({ 'content-type': type, 'content-length': fs.statSync(MAP[p]).size }, cc, tag ? { etag: tag } : {}));
@@ -63,14 +69,22 @@ function fault(kind) {
   // the new shadow is not drawn · the game turns its light mode on by itself · half of the scene is not drawn when the flag is on (put outside the bench's wrappers)
   if (kind === 'noshadow') c234Shadow = function () { return c234Use(); };
   if (kind === 'lite') setInterval(() => { if (/ฉาก 2\/3/.test(txt())) LITE = true; }, 40);
-  if (kind === 'fewdraws') { const t = setInterval(() => { if (!txt()) return; clearInterval(t); setTimeout(() => { let inp = 0, k = 0; const dp = drawPlayer, o = ctx.drawImage;
+  // v6: draw commands of the scene taken away while the flag is on. The wrapper is put OUTSIDE the bench's own (it waits until the
+  // bench has put its wrapper on the canvas), so the bench never sees the commands that are dropped; drawPlayer's are left alone.
+  // None of these uses the way the bench groups commands into objects.
+  const cutOps = (names, pick) => { const t = setInterval(() => { if (!Object.prototype.hasOwnProperty.call(ctx, 'drawImage')) return; clearInterval(t); let inp = 0; const dp = drawPlayer;
     drawPlayer = function () { inp++; try { return dp.apply(this, arguments); } finally { inp--; } };
-    // every other THING of the scene (a plant drawn in rows in the wind is one thing: all of its rows go, or none)
-    let ti = null, tx = 0, tw = 0, te = 0, skip = false;
-    ctx.drawImage = function (img, sx, sy, sw, sh) { if (!inp && c234Use()) { const more = arguments.length >= 9 && img === ti && sx === tx && sw === tw && sy === te;
-        if (arguments.length >= 9) { ti = img; tx = sx; tw = sw; te = sy + sh; } else ti = null;
-        if (!more) skip = !!(k++ % 2); if (skip) return; }
-      return o.apply(this, arguments); }; }, 150); }, 20); }
+    for (const k of names) { const o = ctx[k]; ctx[k] = function () { if (!inp && c234Use() && pick.apply(null, arguments)) return; return o.apply(this, arguments); }; } }, 20); };
+  const cut = (pick) => cutOps(['drawImage'], pick);
+  if (kind === 'norects') cutOps(['fillRect'], function (x, y, w, h) { return Math.abs(h) >= 500; });   // the whole-screen rectangles (tint, darkness)
+  if (kind === 'nopaths') cutOps(['fill', 'stroke'], () => true);                                            // every path fill and stroke (the dark scene's light circles, sparkles, outlines)
+  let ck = 0, ci = null, cx = 0, cw = 0, cpos = 0;
+  if (kind === 'fewdraws') cut(() => ck++ % 2 === 1);                                   // every other command, in every scene
+  if (kind === 'fewstrips') cut(() => M.id === 'farm' && ck++ % 3 === 2);               // Codex T50-N2: every third command of the farm (rows go missing inside the plants that lean)
+  if (kind === 'nobackground') cut(function (img, sx, sy, sw, sh, dx, dy, dw, dh) { return arguments.length >= 9 && Math.abs(dw * dh) >= 1e6; });                 // the painted ground: one command, a whole screen
+  if (kind === 'fewsmall') cut(function (img, sx, sy, sw, sh, dx, dy, dw, dh) { return M.id === 'farm' && arguments.length >= 9 && dh > 3 && dh <= 14; });        // the farm's short things, each of them whole
+  if (kind === 'gaprows') cut(function (img, sx, sy, sw, sh) { if (!(M.id === 'farm' && arguments.length >= 9 && sh <= 3)) { ci = null; return false; }           // the second row of every plant that is being drawn in rows
+    if (img === ci && sx === cx && sw === cw) cpos++; else { ci = img; cx = sx; cw = sw; cpos = 0; } return cpos === 1; });
   if (kind === 'stall') { let last = ''; setInterval(() => { const t = txt(); if (/^ฉาก 1\/3.*ตัวใหม่ ปิด/.test(t) && t !== last) { last = t; setTimeout(() => burn(900), 500); } }, 30); }
   if (kind === 'slowoff' || kind === 'slowon') { const re = kind === 'slowoff' ? /^ฉาก 2\/3.*ตัวใหม่ ปิด/ : /ตัวใหม่ เปิด/; let k = 0;
     const f = () => { if (re.test(txt()) && (kind === 'slowoff' || ++k % 3 === 0)) burn(kind === 'slowoff' ? 25 : 28); requestAnimationFrame(f); }; requestAnimationFrame(f); }   // slowon: every 3rd frame is late → 65–80 %
@@ -98,6 +112,7 @@ const CASES = [
   { name: 'ok', want: [], verdict: 'pass', more: (r) => r.files.ok && r.files.asked >= 150 && r.files.hashed >= 150 && !r.files.wrong.length && r.device.phone &&
       r.files.images >= 100 && r.files.imagesEqual === r.files.images && r.files.fetches >= 20 && r.files.scripts.some((x) => x.rel === 'char2.js' && x.guarded && x.state === 'loaded') &&   // what the game holds
       r.rows.every((x) => x.ok && !x.cut && !x.shaky && !x.standin && x.jsOn > 0 && x.jsOff > 0) &&
+      r.rows.every((x) => x.rowsPainted[0] >= 0.97 * x.rowsPainted[1] && x.obj[0] >= x.obj[1] - 1.5 && x.rectRows[0] >= 0.97 * x.rectRows[1] && x.ops[0] >= 0.85 * x.ops[1] && x.rowsMissing[0] === 0 && x.rowsMissing[1] === 0) &&   // v6: the scene outside the player is the same with the flag on and off
       r.files.imageLoads >= 100 && r.files.imageErrors === 0 && r.files.reused === 0 &&                                 // v5: every picture load ended well, no element was given two files
       r.runs.every((x) => x.real && !x.busy.length) && r.files.record[0] > 100 && r.files.record[0] === r.files.record[1] &&   // v5: the real scenes, nothing loading while measuring, the check leaves the load record as it was (T49-N2)
       r.runs.every((x) => x.on ? x.ev.newD >= 0.8 * x.frames && x.ev.oldD === 0 : x.ev.oldD >= 0.8 * x.frames && x.ev.newD === 0) &&      // what was drawn, both ways
@@ -119,7 +134,21 @@ const CASES = [
   { name: 'nooldbody_late', noise: true, fault: 'nooldbody_late', want: [], verdict: 'fail', more: (r) => r.rows.every((x) => !x.ok && x.why === 'ตัวเดิมไม่ถูกวาด') && r.runs.filter((x) => !x.on).every((x) => x.ev.oldD === 0 && x.ev.calls === 0) },
   { name: 'noshadow', noise: true, fault: 'noshadow', want: [], verdict: 'fail', more: (r) => !r.rows[0].ok && r.rows[0].why === 'เงาไม่ตรง' && r.rows[1].ok && !r.rows[2].ok && r.rows[2].why === 'เงาไม่ตรง' },
   { name: 'lite', noise: true, fault: 'lite', want: [], verdict: 'fail', more: (r) => r.rows[0].ok && !r.rows[1].ok && r.rows[1].why === 'เกมเปลี่ยนโหมดกราฟิกเอง' },
-  { name: 'fewdraws', noise: true, fault: 'fewdraws', want: [], verdict: 'fail', more: (r) => r.rows.every((x) => !x.ok && x.why === 'ฉากวาดไม่ครบตอนเปิด' && x.things[0] < 0.8 * x.things[1]) },
+  // v6: the scene outside the player — rows painted, objects, rows missing inside objects (the three numbers of the bench's check)
+  { name: 'fewdraws', noise: true, fault: 'fewdraws', want: [], verdict: 'fail', more: (r) => r.rows.every((x) => !x.ok && x.why === 'ฉากวาดไม่ครบตอนเปิด' && x.rowsPainted[0] < 0.9 * x.rowsPainted[1] && x.obj[0] < 0.9 * x.obj[1]) },
+  // Codex T50-N2: a third of the farm's commands gone. v5's "things" counted the pieces of a cut plant as new things (87 %) and said "ผ่าน"
+  { name: 'fewstrips', noise: true, fault: 'fewstrips', want: [], verdict: 'fail', more: (r) => r.rows[0].ok && r.rows[2].ok && !r.rows[1].ok && r.rows[1].why === 'ฉากวาดไม่ครบตอนเปิด' &&
+      r.rows[1].rowsPainted[0] < 0.9 * r.rows[1].rowsPainted[1] && r.rows[1].obj[0] < 0.9 * r.rows[1].obj[1] && r.rows[1].rowsMissing[0] > r.rows[1].rowsMissing[1] + 1 },
+  // each of the three numbers on its own: the painted ground gone (rows only) · the farm's short things gone (objects only) · one row
+  // cut out of every leaning plant (missing rows only)
+  { name: 'nobackground', noise: true, fault: 'nobackground', want: [], verdict: 'fail', more: (r) => r.rows.every((x) => !x.ok && x.why === 'ฉากวาดไม่ครบตอนเปิด' && x.rowsPainted[0] < 0.9 * x.rowsPainted[1] && x.obj[0] >= 0.9 * x.obj[1] && x.rowsMissing[0] <= x.rowsMissing[1] + 1 && x.rectRows[0] >= 0.9 * x.rectRows[1] && x.ops[0] >= 0.8 * x.ops[1]) },
+  { name: 'fewsmall', noise: true, fault: 'fewsmall', want: [], verdict: 'fail', more: (r) => r.rows[0].ok && r.rows[2].ok && !r.rows[1].ok && r.rows[1].why === 'ฉากวาดไม่ครบตอนเปิด' &&
+      r.rows[1].obj[0] < 0.9 * r.rows[1].obj[1] && r.rows[1].rowsPainted[0] >= 0.9 * r.rows[1].rowsPainted[1] && r.rows[1].rowsMissing[0] <= r.rows[1].rowsMissing[1] + 1 && r.rows[1].rectRows[0] >= 0.9 * r.rows[1].rectRows[1] && r.rows[1].ops[0] >= 0.8 * r.rows[1].ops[1] },
+  // … and what is painted without pictures: the whole-screen rectangles gone (rectangle rows only) · every path fill and stroke gone (number of commands only)
+  { name: 'norects', noise: true, fault: 'norects', want: [], verdict: 'fail', more: (r) => r.rows.every((x) => !x.ok && x.why === 'ฉากวาดไม่ครบตอนเปิด' && x.rectRows[0] < 0.9 * x.rectRows[1] && x.ops[0] >= 0.8 * x.ops[1] && x.rowsPainted[0] >= 0.9 * x.rowsPainted[1] && x.obj[0] >= 0.9 * x.obj[1] && x.rowsMissing[0] <= x.rowsMissing[1] + 1) },
+  { name: 'nopaths', noise: true, fault: 'nopaths', want: [], verdict: 'fail', more: (r) => r.rows.every((x) => !x.ok && x.why === 'ฉากวาดไม่ครบตอนเปิด' && x.ops[0] < 0.8 * x.ops[1] && x.rectRows[0] >= 0.9 * x.rectRows[1] && x.rowsPainted[0] >= 0.9 * x.rowsPainted[1] && x.obj[0] >= 0.9 * x.obj[1] && x.rowsMissing[0] <= x.rowsMissing[1] + 1) },
+  { name: 'gaprows', noise: true, fault: 'gaprows', want: [], verdict: 'fail', more: (r) => r.rows[0].ok && r.rows[2].ok && !r.rows[1].ok && r.rows[1].why === 'ฉากวาดไม่ครบตอนเปิด' &&
+      r.rows[1].rowsMissing[0] > r.rows[1].rowsMissing[1] + 1 && r.rows[1].rowsPainted[0] >= 0.9 * r.rows[1].rowsPainted[1] && r.rows[1].obj[0] >= 0.9 * r.rows[1].obj[1] && r.rows[1].rectRows[0] >= 0.9 * r.rows[1].rectRows[1] && r.rows[1].ops[0] >= 0.8 * r.rows[1].ops[1] },
   // (v5: a 1×1 picture in place of the painted cave mouth is also not the real scene — "files" and "scene"; a picture of the right size with wrong pixels is "files" only)
   { name: 'wrongimage', noise: true, swap: () => ({ 'map-cave-mouth.jpg': PNG1 }), want: ['files', 'scene'], verdict: 'void', more: (r) => r.files.wrong.includes('map-cave-mouth.jpg') && !r.files.missing.length && !r.files.failed.length && r.rows[2].standin && !r.rows[0].standin && !r.rows[1].standin },
   { name: 'wrongsame', noise: true, swap: () => ({ 'map-cave-mouth.jpg': sameSize('map-cave-mouth.jpg') }), want: ['files'], verdict: 'void', more: (r) => r.files.wrong.length === 1 && r.files.wrong[0] === 'map-cave-mouth.jpg' && !r.files.missing.length && !r.files.failed.length },
@@ -145,7 +174,17 @@ const CASES = [
   { name: 'standin', noise: true, fault: 'standin', want: ['scene'], verdict: 'void', more: (r) => r.files.ok && r.rows[0].ok && r.rows[2].ok && !r.rows[1].ok && r.rows[1].standin && r.rows[1].why === 'ฉากสำรอง' },
   // a slow file that is right: the bench waits for it before it starts the game, and the run is a normal one. The server holds the
   // farm's scene data until the page has shown "waiting for files" for 3 s (or, if the bench does not wait, until the farm is being measured).
-  { name: 'slowjson', hold: ['g9b-scene.json'], want: [], verdict: 'pass', more: (r) => r.hold.how === 'waiting' && r.waited >= 2500 && r.files.ok && r.rows.every((x) => x.ok && !x.standin && !x.cut) && r.runs.every((x) => x.real && !x.busy.length) },
+  { name: 'slowjson', hold: ['g9b-scene.json'], release: 'waiting', want: [], verdict: 'pass', more: (r) => r.hold.how === 'waiting' && r.waited >= 2500 && r.files.ok && r.rows.every((x) => x.ok && !x.standin && !x.cut) && r.runs.every((x) => x.real && !x.busy.length) },
+  // Codex T50-N1: the answer's headers and its first 32 bytes come at once, the rest of the body is held. v5 took the headers for the
+  // end of the load. · slowbody: the rest comes once the page has waited 3 s → a normal run. · bodylate: the rest comes only when the
+  // first run is being measured — a bench that waits has by then given up on the file (20 s at test timing: the run does not count)
+  // and sees the body arrive inside that run (interrupted); one that takes the headers for the end starts at once, sees nothing
+  // and says "ผ่าน".
+  { name: 'slowbody', part: { 'g9b-scene.json': 32 }, release: 'waiting', want: [], verdict: 'pass', more: (r) => r.hold.how === 'waiting' && r.waited >= 2500 && r.files.ok && r.rows.every((x) => x.ok && !x.standin && !x.cut) && r.runs.every((x) => x.real && !x.busy.length) },
+  // the body breaks off: 3 s into the wait the connection is cut. The game never gets the farm's scene data (file + stand-in scene)
+  { name: 'bodybreak', noise: true, part: { 'g9b-scene.json': 32 }, partBreak: true, release: 'waiting', want: ['files', 'scene'], verdict: 'void', more: (r) => r.hold.how === 'waiting' && r.waited >= 2500 && r.files.failed.length === 1 && r.files.failed[0] === 'g9b-scene.json' && r.rows[1].standin && !r.rows[0].standin && !r.rows[2].standin },
+  { name: 'bodylate', noise: true, part: { 'g9b-scene.json': 32 }, release: 'run1', releaseAfter: 1500, want: ['files'], verdict: 'void', more: (r) => r.hold.how === 'run1' && r.waited >= 19000 && r.waited < 30000 && r.files.failed.length === 1 && r.files.failed[0] === 'g9b-scene.json' && !r.files.wrong.length &&
+      r.reasons.includes('interrupted') && r.rows[0].cut && r.runs[0].busy.includes('g9b-scene.json') && r.rows.every((x) => !x.standin) },
   // a file of the copy loaded inside a measured run: that run is not a clean one
   { name: 'lateload', fault: 'lateload', want: ['interrupted'], verdict: 'void', more: (r) => r.files.ok && r.rows[0].cut && !r.rows[1].cut && !r.rows[2].cut && r.runs.filter((x) => x.busy.length).length === 1 && r.runs.find((x) => x.busy.length).busy[0] === 'kit-town.png' && r.runs.every((x) => x.gap <= 300) },
   // a picture load that ended with an error although the element shows a fine picture afterwards (gm-c207-g2.png is a file of the
@@ -163,6 +202,10 @@ const CASES = [
 ];
 if (process.env.FULL) CASES.push({ name: 'full304', full: true, noise: true, nostore: true, first: () => ({ 'g9b-scene.json': { status: 304 } }), want: ['files', 'scene'], verdict: 'void', exact: 'void',
   more: (r) => r.files.failed.length === 1 && r.files.failed[0] === 'g9b-scene.json' && r.rows[1].standin && /→ ไม่นับ \(/.test(r.line) && !r.pass });
+if (process.env.FULL) CASES.push({ name: 'fullbody', full: true, noise: true, part: { 'g9b-scene.json': 32 }, release: 'run1', releaseAfter: 2800, want: ['files'], verdict: 'void', exact: 'void',
+  more: (r) => r.hold.how === 'run1' && r.waited >= 44000 && r.waited < 60000 && r.files.failed.length === 1 && r.files.failed[0] === 'g9b-scene.json' && r.reasons.includes('interrupted') && r.runs[0].busy.includes('g9b-scene.json') && /→ ไม่นับ \(/.test(r.line) && !r.pass });
+if (process.env.FULL) CASES.push({ name: 'fullstrips', full: true, fault: 'fewstrips', want: [], verdict: 'fail', exact: 'fail',
+  more: (r) => !r.rows[1].ok && r.rows[1].why === 'ฉากวาดไม่ครบตอนเปิด' && r.rows[1].rowsPainted[0] < 0.9 * r.rows[1].rowsPainted[1] && r.rows[1].obj[0] < 0.9 * r.rows[1].obj[1] && r.rows[0].ok && r.rows[2].ok && /→ ไม่ผ่าน/.test(r.line) && !r.pass });
 if (process.env.FULL) CASES.push({ name: 'full', full: true, want: [], verdict: 'pass', exact: 'pass', more: (r) => r.files.ok && r.device.phone && !r.reasons.length && /→ ผ่าน \(เกณฑ์/.test(r.line) });
 const ONLY = process.env.CASES ? process.env.CASES.split(',') : null;
 (async () => {
@@ -175,7 +218,7 @@ const ONLY = process.env.CASES ? process.env.CASES.split(',') : null;
       // is the bench working, not the case being wrong. A fault the bench misses is missed on every try. "tries" is in the result.
       for (let tries = 1; tries <= 3; tries++) {
       if (tries > 1) out.pop();
-      const srv = await serve(c.deny || [], c.swap ? c.swap() : null, c.first ? c.first() : null, c.nostore, c.hold, c.etag), port = srv.address().port, bc = await browser.createBrowserContext(), p = await bc.newPage(), pe = [];
+      const srv = await serve(c.deny || [], c.swap ? c.swap() : null, c.first ? c.first() : null, c.nostore, c.hold, c.etag, c.part, c.partBreak), port = srv.address().port, bc = await browser.createBrowserContext(), p = await bc.newPage(), pe = [];
       const row = { name: c.name, tries }; out.push(row);
       try {
         p.on('pageerror', (e) => pe.push(String(e.message).slice(0, 120)));
@@ -192,11 +235,14 @@ const ONLY = process.env.CASES ? process.env.CASES.split(',') : null;
         if (c.fault) await p.evaluate(fault, c.fault);
         await sleep(300); const bt = await p.evaluateHandle(() => [...document.querySelectorAll('button')].find((b) => b.textContent === 'เริ่มวัด')); await bt.click();
         await sleep(1500); row.panelHidden = await p.evaluate(() => ![...document.querySelectorAll('button')].some((b) => b.textContent === 'เริ่มวัด' && b.getClientRects().length));
-        if (c.hold) { const t0 = Date.now(); let seen = 0, how = '';   // let the held file go: after the page has waited 3 s for it, or — a bench that does not wait — in the middle of the farm
+        if (c.release) { const t0 = Date.now(); let seen = 0, how = '';   // let the held file (or the rest of its body) go
+          // 'waiting': after the page has waited 3 s for it — or, a bench that does not wait, in the middle of the farm
+          // 'run1':    c.releaseAfter ms after the first run of the first scene is on the screen
           for (;;) { const t = await p.evaluate(() => { for (const d of document.body.children) { const t = d.textContent || ''; if (/^รอให้เกมโหลด|^ฉาก \d\/3/.test(t)) return t; } return ''; });
-            if (/^รอให้เกมโหลด/.test(t)) { if (!seen) seen = Date.now(); if (Date.now() - seen >= 3000) { how = 'waiting'; break; } }
-            else if (/^ฉาก 2\/3.*คู่ 2\/3/.test(t)) { how = 'farm'; break; }
-            if (Date.now() - t0 > 90000) { how = 'timeout'; break; }
+            if (c.release === 'waiting') { if (/^รอให้เกมโหลด/.test(t)) { if (!seen) seen = Date.now(); if (Date.now() - seen >= 3000) { how = 'waiting'; break; } }
+              else if (/^ฉาก 2\/3.*คู่ 2\/3/.test(t)) { how = 'farm'; break; } }
+            else if (/^ฉาก 1\/3.*คู่ 1\/3/.test(t)) { await sleep(c.releaseAfter || 700); how = 'run1'; break; }
+            if (Date.now() - t0 > 120000) { how = 'timeout'; break; }
             await sleep(100); }
           srv.release(); row.hold = { how, ms: Date.now() - t0 }; }
         await p.waitForFunction(() => window.__benchResult, { timeout: c.full ? 400000 : 240000 }); await sleep(200);
@@ -209,14 +255,14 @@ const ONLY = process.env.CASES ? process.env.CASES.split(',') : null;
         row.noise = c.noise ? noise : [];   // only where such reasons were let through
         row.reasons = r.reasons; row.verdict = r.verdict; row.verdictIfCounted = r.verdictIfCounted; row.head = r.head; row.line = r.line;
         row.rows = r.rows.map((x) => ({ id: x.id, ratio: x.ratio === null ? null : +x.ratio.toFixed(3), ok: x.ok, why: x.why, cut: x.cut, shaky: x.shaky, standin: x.standin, fps: [+x.fpsOn.toFixed(1), +x.fpsOff.toFixed(1)], js: [+x.jsOn.toFixed(2), +x.jsOff.toFixed(2)],
-          draws: x.draws.map((v) => +v.toFixed(1)), things: x.things.map((v) => +v.toFixed(1)), shadow: x.shadow.map((v) => +v.toFixed(2)) }));
+          draws: x.draws.map((v) => +v.toFixed(1)), rowsPainted: x.rowsPainted.map((v) => +v.toFixed(1)), obj: x.obj.map((v) => +v.toFixed(2)), rowsMissing: x.rowsMissing.map((v) => +v.toFixed(2)), rectRows: x.rectRows.map((v) => +v.toFixed(1)), ops: x.ops.map((v) => +v.toFixed(1)), shadow: x.shadow.map((v) => +v.toFixed(2)) }));
         row.files = { ok: r.files.ok, asked: r.files.asked, hashed: r.files.hashed, images: r.files.images, imagesEqual: r.files.imagesEqual, fetches: r.files.fetches, heads: r.files.heads, record: r.files.record, imageLoads: r.files.imageLoads, imageErrors: r.files.imageErrors, reused: r.files.reused, scripts: r.files.scripts, ms: r.files.ms, missing: r.files.missing, failed: r.files.failed, wrong: r.files.wrong, why: r.files.why }; row.runs = r.runs; row.phone = r.device.phone; row.pageErrors = pe;
         const checks = {
           reasons: c.wantHas ? c.wantHas.every((x) => counted.includes(x)) : sameSet(firm, c.want),
           verdictIfCounted: r.verdictIfCounted === c.verdict || (!!c.noise && noise.length > 0 && r.verdictIfCounted === 'void'),
           verdict: r.verdict === (c.exact || 'void') && r.pass === (r.verdict === 'pass'),   // a test-timing run never counts
           mode: c.full ? !r.reasons.includes('mode') : r.reasons.includes('mode'),
-          head: c.exact === 'pass' ? /ผ่าน/.test(r.head) && !/ไม่/.test(r.head) : /ไม่นับ/.test(r.head),
+          head: c.exact === 'pass' ? /ผ่าน/.test(r.head) && !/ไม่/.test(r.head) : c.exact === 'fail' ? /ไม่ผ่าน/.test(r.head) : /ไม่นับ/.test(r.head),
           panelHidden: row.panelHidden, noPageError: !pe.length && !r.err, more: c.more ? !!c.more(r) : true };
         row.checks = checks; row.ok = Object.values(checks).every(Boolean);
       } catch (e) { row.ok = false; row.error = String(e && e.message || e).slice(0, 300); }

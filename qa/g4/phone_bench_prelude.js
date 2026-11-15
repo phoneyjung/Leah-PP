@@ -1,4 +1,4 @@
-// G4.6 phone bench v5 — the load record. build_phone_bench.py puts this, after window.__benchBuild, as the FIRST script of the
+// G4.6 phone bench v6 — the load record. build_phone_bench.py puts this, after window.__benchBuild, as the FIRST script of the
 // test copy, so it runs before any script of the game. It changes no request and no answer; it only keeps what the game itself
 // received, so that phone_bench.js can check THAT and not a second read of the file (Codex T48: a server whose first answer is
 // wrong and whose later answers are right passed v3 whenever the browser kept no copy of the first answer).
@@ -11,6 +11,7 @@
 // v5: every load also gets its start and end time (L.time), so the bench can wait until the game has loaded everything before it
 // measures and can see a load that falls inside a measured window; a GET keeps its status whatever it is (a bare 304 with no
 // body reaches the game as a failure — Codex T49-N1); an image load keeps how it ended (load or error) and which element it was.
+// v6: a fetch ends when its body has arrived, not when its headers have (Codex T50-N1).
 // The bench's own reads use fetch0 and imgSrc0, the original fetch and the original src setter, and are not recorded.
 (function () {
   'use strict';
@@ -31,8 +32,13 @@
     const p = L.fetch0.apply(null, arguments); let rec = null;
     try { const r = L.rel(typeof input === 'string' ? input : input && input.url);
       if (r !== null) { rec = { kind: 'fetch', rel: r, method: String((init && init.method) || (input && input.method) || 'GET').toUpperCase(), status: 0, ok: false, body: null, t0: now(), t1: 0 }; L.fetch.push(rec); L.time.push(rec); } } catch (e) {}
-    return rec ? p.then((res) => { rec.status = res.status; rec.ok = res.ok; rec.t1 = now();
-      if (rec.method === 'GET' && res.ok) { try { rec.body = res.clone().arrayBuffer(); rec.body.catch(() => {}); } catch (e) { rec.body = Promise.reject(e); rec.body.catch(() => {}); } }
+    // v6: th = the answer's headers are here (the game gets its Response now, as always); t1 = the load has ENDED — for a GET that
+    // was answered well that is when the whole body has arrived (the copy made here is read to its end; the game reads its own),
+    // for anything else it is th. v5 set t1 with the headers (Codex T50-N1).
+    return rec ? p.then((res) => { rec.status = res.status; rec.ok = res.ok; rec.th = now();
+      if (rec.method === 'GET' && res.ok) { let b; try { b = res.clone().arrayBuffer(); } catch (e) { b = Promise.reject(e); }
+        rec.body = b; b.then(() => { rec.t1 = now(); }, () => { rec.t1 = now(); rec.bodyErr = true; }); }
+      else rec.t1 = rec.th;
       return res; }, (err) => { rec.t1 = now(); throw err; }) : p;
   };
   const sd = Object.getOwnPropertyDescriptor(HTMLScriptElement.prototype, 'src');

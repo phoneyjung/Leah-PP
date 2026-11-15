@@ -1,4 +1,4 @@
-// G4.6 (plan G4_0 §9 G4.6 · D-G4-7 "ค"): smoothness of character v2 on the owner's REAL phone, once, before "รับ G4". Version 5.
+// G4.6 (plan G4_0 §9 G4.6 · D-G4-7 "ค"): smoothness of character v2 on the owner's REAL phone, once, before "รับ G4". Version 6.
 // Added only to the private test copy of the game (built by qa/g4/build_phone_bench.py); the game in the repo never loads it.
 // One button: a synthetic save of its own (this copy has its own storage — no real save is read or written, nothing goes online),
 // then 3 fixed scenes of M6 (qa/g4/m6-scenes.json: town · farm · dark cave mouth with the lantern), the kid walking back and forth
@@ -26,6 +26,8 @@
 //                      been answered 2xx with a body (v5: v4 skipped any fetch without a body as if it were a HEAD)
 //                    · v5: before the game is started, before each scene and before each run the bench waits until every load
 //                      of the copy has ended (a slow file is waited for, up to a limit; one that never ends makes the run not count)
+//                    · v6: a fetch has ended when its BODY has arrived, not when its headers have (Codex T50-N1: v5 took the
+//                      headers for the end, so a body that was still coming in was neither waited for nor seen inside a run)
 //                    · char2.js runs under integrity="sha256-…" — the browser itself refuses any other bytes, and a refused
 //                      script makes the run not count
 //                    · the size the page received (resource log) must be the build's; an image of the game's first table that
@@ -54,8 +56,12 @@
 //         draws must be ≥ 50 % of the draws · lit scene = held in none
 //   lantern, OFF: the old drawing uses the game's own condition (dark map and a little kid) directly; the bench reads that
 //         condition only as the state of the scene, not as proof of a drawing
-//   the scene, both ways (medians of the 3 runs): things drawn per frame on the main canvas, ON ≥ 80 % of OFF (as M6's fps.js; v5
-//         counts things, not commands — up to v4 the farm's wind moved this number by itself, see hook()) ·
+//   the scene outside the player, both ways (medians of the 3 runs, per frame; v6 — see hook()): everything painted on the main
+//         canvas is counted in numbers that cannot go up when a command is taken away. Pictures (drawImage): rows painted and
+//         objects drawn, ON ≥ 90 % of OFF, and rows missing inside objects, ON not more than OFF. Rectangles: rows painted,
+//         ON ≥ 90 % of OFF. Rectangles, path fills and strokes, text: their number, ON ≥ 80 % of OFF. (v3–v4 compared the
+//         number of drawImage commands, which the farm's wind moves by itself; v5 counted "things", and a plant with rows cut
+//         out of it counted as several — Codex T50-N2: a third of the farm's commands gone, things 87 %, "ผ่าน".) ·
 //         the player's shadow on the same share of frames (ON: the 14 × 3 ellipse commands of the new shadow, OFF: the old shadow
 //         sheet blitted) · LITE off, eco off, fpsChecks 6 still so at the end of every run (the game may not change its own graphics mode)
 // Report only (no gate): JS work per frame (ms inside the page's animation-frame callbacks) ON / OFF — it still shows the cost when
@@ -75,6 +81,10 @@
   const SHORT = !!TEST || new URLSearchParams(location.search).has('short');
   const SETTLE = TEST ? TEST.settle : SHORT ? 400 : 1500, MEAS = TEST ? TEST.meas : SHORT ? 1200 : 5000;
   const PAIRS = 3, GATE = 0.90, GAP_MS = 300, MIN_FPS = 10, SPREAD = 0.15, RATIO_MAX = 1.10;
+  // v6: the scene with the flag on must have at least this share of what it has with the flag off. 0.90 for rows and objects: in a
+  // normal game the two sides differ by 0.1 % or less, and one object more or less in the small scenes (17 in the town, 12 at the
+  // cave mouth) must not fail a run. 0.80 for the number of rectangle/path/text commands: sparkles come and go.
+  const SCENE_MIN = 0.90, OPS_MIN = 0.80;
   try { performance.setResourceTimingBufferSize(4000); } catch (e) {}
   const RES0 = (() => { try { return performance.getEntriesByType('resource').length; } catch (e) { return -1; } })();
   // JS work per frame: time inside every animation-frame callback of the page (the game's loop asks for its next frame by the
@@ -82,20 +92,37 @@
   const raf0 = window.requestAnimationFrame.bind(window), JS = { t: 0 };
   window.requestAnimationFrame = (f) => raf0((t) => { const a = performance.now(); try { return f(t); } finally { JS.t += performance.now() - a; } });
   // What is really drawn (v3). EV counts per player draw; measure() takes the difference over a run.
-  const EV = { calls: 0, cmd: 0, newD: 0, oldD: 0, heldCfg: 0, vis: 0, heldCmd: 0, all: 0, things: 0, oldSh: 0, newSh: 0 };
+  const EV = { calls: 0, cmd: 0, newD: 0, oldD: 0, heldCfg: 0, vis: 0, heldCmd: 0, all: 0, rows: 0, obj: 0, gap: 0, rect: 0, ops: 0, oldSh: 0, newSh: 0 };
   let hooked = null;
   function hook() {
     if (hooked) return;   // once: a wrapper put around drawPlayer later stays outside this one, and is seen as draws that never arrive here
     const draw0 = Object.getPrototypeOf(ctx).drawImage; let inP = 0, n = 0, old = false, thin = false;
-    // v5: things, not commands. The farm draws a plant with 1 command when the air is still and with 1 command per 3 px of height
-    // when it leans in the wind (g9bSway), so commands per frame go from 150 to 330 with the gusts — nothing to do with the
-    // character. A command that goes on with the next rows of the same source picture (same image, same sx and sw, sy where the
-    // last one ended) belongs to the thing before it.
-    let ti = null, tx = 0, tw = 0, te = 0;
-    ctx.drawImage = function (img, sx, sy, sw, sh) { EV.all++;
-      if (arguments.length >= 9) { if (!(img === ti && sx === tx && sw === tw && sy === te)) EV.things++; ti = img; tx = sx; tw = sw; te = sy + sh; } else { EV.things++; ti = null; }
+    // v6: how much of the scene is drawn, outside the player (drawPlayer and the old drawing's shadow sheet are the player's and are
+    // checked on their own). Pictures first — three numbers; taking a draw command away can never make rows or obj go UP, and can
+    // only make gap go up:
+    //   rows  rows painted: |dh| of every command. A plant drawn whole and the same plant drawn in 3 px rows (the farm does that
+    //         when it leans in the wind, g9bSway — 150 to 330 commands a frame with the gusts) paint the same rows. (Rows, not
+    //         pixels: the painted ground is one command of a whole screen, 91–99 % of all pixels in these scenes — a third of
+    //         the farm's plants gone would move a pixel count by 3 %. In rows the ground is 19 % of the farm, 44 % of the town.)
+    //   obj   objects: a command that goes on further down the same source picture, placed where the rows before it were placed
+    //         (same image, sx and sw; sy at or below the end of the last one; dy − sy unchanged), belongs to the object before
+    //         it — also when rows between them are missing. So rows cut out of a plant do not make it two (v5 counted it twice).
+    //   gap   source rows missing inside objects: 0 for a plant drawn whole or in all of its rows.
+    let oi = null, ox = 0, ow = 0, oe = 0, oo = 0;
+    ctx.drawImage = function (img, sx, sy, sw, sh, dx, dy, dw, dh) { EV.all++;
+      if (!inP && img !== PS.shS && img !== PS.shW) { const n9 = arguments.length >= 9;
+        EV.rows += Math.abs(n9 ? dh : arguments.length >= 5 ? sh : img.height) || 0;
+        if (n9 && img === oi && sx === ox && sw === ow && sy >= oe && dy - sy === oo) { EV.gap += sy - oe; oe = sy + sh; }
+        else { EV.obj++; if (n9) { oi = img; ox = sx; ow = sw; oe = sy + sh; oo = dy - sy; } else oi = null; } }
       if (inP) { if (!n) thin = this.globalAlpha < 1; n++; if (img === PS.walk || img === PS.stand) old = true; } else if (img === PS.shS || img === PS.shW) EV.oldSh++;
       return draw0.apply(this, arguments); };
+    // … then everything else that paints on the main canvas (v6): the tint and darkness rectangles, the dark scene's light circles,
+    // sparkles, bars, text — 70 to 190 commands a frame in these scenes, none of which v5 looked at.
+    //   rect  rows painted by rectangles (|h|): the three or so whole-screen ones are 60–80 % of it, so it does not move with the sparkles
+    //   ops   how many of these commands (the sparkles come and go: this number moves by itself by up to a tenth)
+    const P0 = Object.getPrototypeOf(ctx);
+    for (const k of ['fillRect', 'strokeRect', 'clearRect']) { const f = P0[k]; ctx[k] = function (x, y, w, h) { if (!inP) { EV.ops++; EV.rect += Math.abs(h) || 0; } return f.apply(this, arguments); }; }
+    for (const k of ['fill', 'stroke', 'fillText', 'strokeText', 'putImageData']) { const f = P0[k]; ctx[k] = function () { if (!inP) EV.ops++; return f.apply(this, arguments); }; }
     const ell0 = Object.getPrototypeOf(ctx).ellipse;   // the new character's shadow is the only 14 × 3 ellipse (c234Shadow, W3): the command itself is counted
     ctx.ellipse = function (x, y, rx, ry) { if (rx === 14 && ry === 3) EV.newSh++; return ell0.apply(this, arguments); };
     const dp = drawPlayer;
@@ -113,7 +140,7 @@
   const STUCK = [], WAIT = { ms: 0 };
   // wait until nothing of the copy is loading and nothing has started for 300 ms; false (and the names kept) when the limit passes
   async function quiet(limit) { const t0 = performance.now();
-    for (;;) { const all = loads(), pend = all.filter((x) => !x.t1), last = all.reduce((m, x) => Math.max(m, x.t0, x.t1), 0);
+    for (;;) { const all = loads(), pend = all.filter((x) => !x.t1 && !STUCK.includes(x.rel)), last = all.reduce((m, x) => Math.max(m, x.t0, x.t1), 0);   // (v6) a load that was given up on is not waited for a second time: the run already does not count
       if (!pend.length && performance.now() - last > 300) { WAIT.ms += performance.now() - t0; return true; }
       if (performance.now() - t0 > limit) { WAIT.ms += performance.now() - t0; for (const x of pend) if (!STUCK.includes(x.rel)) STUCK.push(x.rel); return false; }
       await sleep(100); } }
@@ -191,8 +218,8 @@
     for (const g of gets) { if (absent.has(g.rel) || !g.rel) continue;
       if (!have.has(g.rel)) { if (!fl.missing.includes(g.rel)) fl.missing.push(g.rel); continue; }
       if (g.method === 'HEAD') { if (!g.t1) continue; if (g.ok) heads++; else if (!fl.failed.includes(g.rel)) fl.failed.push(g.rel); continue; }   // the game's ping (every 15 s; one may be on its way right now): answered, nothing to hash
-      if (!g.ok || !g.body) { if (!fl.failed.includes(g.rel)) fl.failed.push(g.rel); continue; }   // a GET the game did not get: 4xx, 5xx, a bare 304, a network error — the game went on without that file
-      try { const buf = await g.body, m = BUILD.meta[g.rel]; teed++; if (buf.byteLength !== m[0] || await sha(buf) !== m[1]) bad(g.rel); } catch (e) { fl.why = fl.why || 'cannot read what a fetch of the game received'; } }
+      if (!g.ok || !g.body || !g.t1) { if (!fl.failed.includes(g.rel)) fl.failed.push(g.rel); continue; }   // a GET the game did not get: 4xx, 5xx, a bare 304, a network error, or (v6) a body that has still not ended — the game went on without that file
+      try { const buf = await g.body, m = BUILD.meta[g.rel]; teed++; if (buf.byteLength !== m[0] || await sha(buf) !== m[1]) bad(g.rel); } catch (e) { if (!fl.failed.includes(g.rel)) fl.failed.push(g.rel); } }   // (v6) a body that broke off on the way
     fl.fetches = teed; fl.heads = heads;
     // the game's own images: the elements themselves against a decode of the reference
     const T = 1024, mk = () => { const c = document.createElement('canvas'); c.width = c.height = T; const g = c.getContext('2d', { willReadFrequently: true }); g.globalCompositeOperation = 'copy'; g.imageSmoothingEnabled = false; return g; };
@@ -299,12 +326,14 @@
       const drewNew = (r) => r.body >= 0.8 * r.frames && r.ev.newD >= 0.8 * r.frames && r.ev.oldD === 0;   // ON: the new character really drawn, the old sheet never
       const drewOld = (r) => r.body === 0 && r.ev.newD === 0 && r.ev.oldD >= 0.8 * r.frames;             // OFF: the old sheet really blitted
       const lamp = (r) => sc.dark ? r.ev.heldCfg === r.ev.newD && r.ev.newD > 0 && r.ev.vis >= 0.5 * r.ev.newD && r.ev.heldCmd === r.ev.vis : r.ev.heldCfg === 0;   // ON: what the renderer was given and what it drew
-      // the scene around the player, both ways (medians of the 3 runs): things drawn per frame on the main canvas (as M6's fps.js:
-      // ON ≥ 80 % of OFF) · the player's shadow (ON: the new shadow's ellipse commands · OFF: the old shadow sheet blitted)
+      // the scene outside the player, both ways (medians of the 3 runs, per frame): pictures — rows painted and objects drawn ON ≥ 90 %
+      // of OFF, rows missing inside objects ON not more than OFF (+1 a frame); rectangles — rows ON ≥ 90 % of OFF; rectangles, path
+      // fills and strokes, text — their number ON ≥ 80 % of OFF · the player's shadow (ON: the new shadow's ellipse commands · OFF: the old shadow sheet blitted)
       const per = (a, f) => a.length ? med(a.map((r) => f(r) / r.frames)) : 0;
       const drawsOn = per(on, (r) => r.ev.all), drawsOff = per(off, (r) => r.ev.all), shOn = per(on, (r) => r.ev.newSh), shOff = per(off, (r) => r.ev.oldSh);
-      const thingsOn = per(on, (r) => r.ev.things), thingsOff = per(off, (r) => r.ev.things);   // v5: the check is on things; commands are only reported
-      const full = thingsOn >= 0.8 * thingsOff && thingsOff > 0, shade = Math.abs(shOn - shOff) <= 0.2, pinned = rs.every((r) => r.pins);
+      const rowOn = per(on, (r) => r.ev.rows), rowOff = per(off, (r) => r.ev.rows), objOn = per(on, (r) => r.ev.obj), objOff = per(off, (r) => r.ev.obj), gapOn = per(on, (r) => r.ev.gap), gapOff = per(off, (r) => r.ev.gap);
+      const rectOn = per(on, (r) => r.ev.rect), rectOff = per(off, (r) => r.ev.rect), opsOn = per(on, (r) => r.ev.ops), opsOff = per(off, (r) => r.ev.ops);
+      const full = rowOff > 0 && objOff > 0 && rowOn >= SCENE_MIN * rowOff && objOn >= SCENE_MIN * objOff && gapOn <= gapOff + 1 && rectOn >= SCENE_MIN * rectOff && opsOn >= OPS_MIN * opsOff, shade = Math.abs(shOn - shOff) <= 0.2, pinned = rs.every((r) => r.pins);
       const cut = rs.some((r) => r.gap > GAP_MS || r.hidden || r.fps < MIN_FPS || r.busy.length > 0);   // v5: … or a file of the copy was loading inside a measured window
       const standin = rs.some((r) => !r.real);                                                           // v5: not the real scene (see realScene)
       const ok = rs.length === 6 && !standin && pinned && rs.every((r) => r.map === sc.map && r.walked > 20 && scene(r)) &&
@@ -313,7 +342,7 @@
       const shaky = pairs.length === 3 && (Math.max(...pairs) - Math.min(...pairs) > SPREAD || ratio > RATIO_MAX);
       return { sc, ratio, pairs, ok, cut, shaky, standin, fpsOn: on.length ? med(on.map((r) => r.fps)) : 0, fpsOff: off.length ? med(off.map((r) => r.fps)) : 0,
         jsOn: on.length ? med(on.map((r) => r.js)) : 0, jsOff: off.length ? med(off.map((r) => r.js)) : 0,
-        draws: [drawsOn, drawsOff], things: [thingsOn, thingsOff], shadow: [shOn, shOff],
+        draws: [drawsOn, drawsOff], rowsPainted: [rowOn, rowOff], obj: [objOn, objOff], rowsMissing: [gapOn, gapOff], rectRows: [rectOn, rectOff], ops: [opsOn, opsOff], shadow: [shOn, shOff],
         why: !rs.length ? 'ไม่ได้วัด' : rs.length !== 6 ? 'วัดไม่ครบ' : !pinned ? 'เกมเปลี่ยนโหมดกราฟิกเอง' : rs.some((r) => r.map !== sc.map) ? 'แผนที่ผิด' : standin ? 'ฉากสำรอง' : rs.some((r) => r.walked <= 20) ? 'ตัวไม่เดิน' : on.some((r) => !only(r, 'ready')) ? 'ตัวใหม่ไม่พร้อม' :
           on.some((r) => !drewNew(r)) ? 'ตัวใหม่วาดไม่ครบ' : off.some((r) => r.body || r.ev.newD || !only(r, 'off')) ? 'ปิดแล้วยังวาดตัวใหม่' : off.some((r) => !drewOld(r)) ? 'ตัวเดิมไม่ถูกวาด' :
           rs.some((r) => !scene(r)) ? 'ตะเกียงไม่ตรง' : on.some((r) => !lamp(r)) ? (sc.dark ? 'ตะเกียงไม่ถูกวาด' : 'วาดตะเกียงในที่สว่าง') : !shade ? 'เงาไม่ตรง' : !full ? 'ฉากวาดไม่ครบตอนเปิด' : '' };
@@ -335,26 +364,29 @@
       files: fl.why ? 'ตรวจไฟล์เกมไม่ได้' : 'ไฟล์เกมไม่ครบหรือไม่ตรง ' + (fl.missing.length + fl.failed.length + fl.wrong.length) + ' ไฟล์', interrupted: 'ระหว่างวัดมีการสะดุด สลับแอป หรือยังโหลดไฟล์อยู่', unstable: 'ผลแต่ละรอบต่างกันมากเกินไป', scene: 'เกมใช้ฉากสำรอง (ไฟล์ของฉากมาไม่ครบ)' };
     const pct = (x) => (x === null ? '–' : Math.round(x * 100) + ' %');
     const lost = fl.missing.concat(fl.failed), wrong = fl.wrong, busy = [...new Set([].concat(...runs.map((r) => r.busy || [])))];
-    const line = 'G4.6 วัดความลื่น v5 · เกม ' + ver.replace('Lantern Academy ', '') + ' · ' +
+    const line = 'G4.6 วัดความลื่น v6 · เกม ' + ver.replace('Lantern Academy ', '') + ' · ' +
       rows.map((r) => r.sc.name.split(' ')[0] + ' ' + pct(r.ratio)).join(' · ') + ' → ' + WORD[verdict] + (reasons.length ? ' (' + reasons.map((x) => SAY[x]).join(' · ') + ')' : ' (เกณฑ์ ≥ 90 %)') +
       ' · fps เปิด/ปิด ' + rows.map((r) => r.fpsOn.toFixed(1) + '/' + r.fpsOff.toFixed(1)).join(' · ') +
       ' · งาน JS ms/เฟรม เปิด/ปิด ' + rows.map((r) => r.jsOn.toFixed(2) + '/' + r.jsOff.toFixed(2)).join(' · ') +
+      ' · รายคู่ % ' + rows.map((r) => r.pairs.map((x) => Math.round(100 * x)).join('/')).join(' · ') +
       ' · วาด/เฟรม เปิด/ปิด ' + rows.map((r) => Math.round(r.draws[0]) + '/' + Math.round(r.draws[1])).join(' · ') +
+      ' · ฉากเปิด÷ปิด % (แถวภาพ/ชิ้น/แถวกรอบ/คำสั่งอื่น) ' + rows.map((r) => [(r.rowsPainted[1] ? Math.round(100 * r.rowsPainted[0] / r.rowsPainted[1]) : '-'), (r.obj[1] ? Math.round(100 * r.obj[0] / r.obj[1]) : '-'), (r.rectRows[1] ? Math.round(100 * r.rectRows[0] / r.rectRows[1]) : '-'), (r.ops[1] ? Math.round(100 * r.ops[0] / r.ops[1]) : '-')].join('/') + (r.rowsMissing[0] > r.rowsMissing[1] + 1 ? ' แถวหาย ' + Math.round(r.rowsMissing[0]) : '')).join(' · ') +
       ' · ตรวจ ' + rows.map((r) => (r.ok ? '✓' : '✗' + r.why)).join(' ') +
       ' · ไฟล์ ' + fl.asked + ' ขาด ' + lost.length + (lost.length ? ' [' + lost.slice(0, 8).join(' ') + (lost.length > 8 ? ' …' : '') + ']' : '') +
       ' ผิด ' + wrong.length + (wrong.length ? ' [' + wrong.slice(0, 8).join(' ') + (wrong.length > 8 ? ' …' : '') + ']' : '') + (fl.why ? ' [' + fl.why + ']' : '') +
       ' · ภาพที่เกมถือ ' + (fl.images || 0) + ' ตรง ' + (fl.imagesEqual || 0) + ' · fetch ' + (fl.fetches || 0) + ' · รอโหลด ' + (WAIT.ms / 1000).toFixed(1) + ' วิ' +
       (busy.length ? ' · โหลดระหว่างวัด [' + busy.slice(0, 6).join(' ') + (busy.length > 6 ? ' …' : '') + ']' : '') +
       ' · ' + (dev.phone ? 'มือถือ' : 'ไม่ใช่มือถือ') + ' ' + dev.screen + ' · ' + dev.ua + (runs.err ? ' · error ' + runs.err : '');
-    window.__benchResult = { v: 5, verdict, verdictIfCounted, pass: verdict === 'pass', reasons, waited: Math.round(WAIT.ms), device: dev, files: fl, build: BUILD && { version: BUILD.version, files: BUILD.files.length },
-      rows: rows.map((r) => ({ id: r.sc.id, ratio: r.ratio, pairs: r.pairs, ok: r.ok, why: r.why, cut: r.cut, shaky: r.shaky, standin: r.standin, fpsOn: r.fpsOn, fpsOff: r.fpsOff, jsOn: r.jsOn, jsOff: r.jsOff, draws: r.draws, things: r.things, shadow: r.shadow })), runs, line };
+    window.__benchResult = { v: 6, verdict, verdictIfCounted, pass: verdict === 'pass', reasons, waited: Math.round(WAIT.ms), device: dev, files: fl, build: BUILD && { version: BUILD.version, files: BUILD.files.length },
+      rows: rows.map((r) => ({ id: r.sc.id, ratio: r.ratio, pairs: r.pairs, ok: r.ok, why: r.why, cut: r.cut, shaky: r.shaky, standin: r.standin, fpsOn: r.fpsOn, fpsOff: r.fpsOff, jsOn: r.jsOn, jsOff: r.jsOff, draws: r.draws, rowsPainted: r.rowsPainted, obj: r.obj, rowsMissing: r.rowsMissing, rectRows: r.rectRows, ops: r.ops, shadow: r.shadow })), runs, line };
     const td = 'padding:4px 8px', tr = rows.map((r) => '<tr><td style="' + td + '">' + r.sc.name + '</td><td style="' + td + ';text-align:right">' + r.fpsOn.toFixed(1) + '</td><td style="' + td + ';text-align:right">' + r.fpsOff.toFixed(1) +
-      '</td><td style="' + td + ';text-align:right;font-weight:700">' + pct(r.ratio) + '</td><td style="' + td + ';text-align:right">' + r.jsOn.toFixed(2) + ' / ' + r.jsOff.toFixed(2) + '</td><td style="' + td + '">' + (r.ok ? '✓' : '✗ ' + r.why) + (r.cut ? ' · สะดุด' : '') + (r.shaky ? ' · แกว่ง' : '') + '</td></tr>').join('');
+      '</td><td style="' + td + ';text-align:right;font-weight:700">' + pct(r.ratio) + '</td><td style="' + td + ';text-align:right">' + r.pairs.map((x) => Math.round(100 * x)).join(' · ') + '</td><td style="' + td + ';text-align:right">' + r.jsOn.toFixed(2) + ' / ' + r.jsOff.toFixed(2) + '</td><td style="' + td + '">' + (r.ok ? '✓' : '✗ ' + r.why) + (r.cut ? ' · สะดุด' : '') + (r.shaky ? ' · แกว่ง' : '') + '</td></tr>').join('');
     const head = verdict === 'pass' ? '<span style="color:#8fd18f">ผ่าน</span>' : verdict === 'fail' ? '<span style="color:#ff9a8a">ไม่ผ่าน</span>' : '<span style="color:#f0c869">ไม่นับ · ต้องวัดใหม่</span>';
     const tell = reasons.length ? '<p style="margin:0 0 8px;color:#f0c869">' + reasons.map((x) => esc(SAY[x])).join(' · ') +
       (reasons.includes('interrupted') || reasons.includes('unstable') ? ' → กด "วัดอีกครั้ง" แล้ววางมือถือนิ่ง ๆ' : reasons.includes('device') ? ' → เปิดลิงก์นี้ในมือถือแล้ววัดใหม่' : ' → ส่งข้อความด้านล่างให้ Claude') + '</p>' : '';
-    const b = panel('<h2 style="margin:0 0 8px;font-size:20px">ผล: ' + head + '</h2>' + tell +
-      '<div style="overflow-x:auto"><table style="border-collapse:collapse;width:100%;font-size:15px"><tr style="color:#d8c8a0"><th style="text-align:left;' + td + '">ฉาก</th><th style="' + td + '">fps เปิด</th><th style="' + td + '">fps ปิด</th><th style="' + td + '">เปิด ÷ ปิด</th><th style="' + td + '">งาน JS ms เปิด / ปิด</th><th style="' + td + '">ตรวจ</th></tr>' + tr + '</table></div>' +
+    const near = verdict !== 'void' && rows.some((r) => r.ratio >= GATE - 0.03 && r.ratio < GATE + 0.03) ? '<p style="margin:0 0 8px;color:#f0c869">มีฉากที่ผลอยู่ใกล้เกณฑ์ 90 % (ห่างไม่เกิน 3 จุด) → ควรกด "วัดอีกครั้ง" อีก 1 รอบแล้วส่งผลทั้งสองรอบ</p>' : '';
+    const b = panel('<h2 style="margin:0 0 8px;font-size:20px">ผล: ' + head + '</h2>' + tell + near +
+      '<div style="overflow-x:auto"><table style="border-collapse:collapse;width:100%;font-size:15px"><tr style="color:#d8c8a0"><th style="text-align:left;' + td + '">ฉาก</th><th style="' + td + '">fps เปิด</th><th style="' + td + '">fps ปิด</th><th style="' + td + '">เปิด ÷ ปิด</th><th style="' + td + '">รายคู่ %</th><th style="' + td + '">งาน JS ms เปิด / ปิด</th><th style="' + td + '">ตรวจ</th></tr>' + tr + '</table></div>' +
       '<p style="margin:8px 0 0;color:#d8c8a0;font-size:14px">ไฟล์เกมที่หน้าเรียก ' + fl.asked + ' ไฟล์ · ขาด ' + lost.length + ' · ไม่ตรง ' + wrong.length + ' · ภาพที่เกมถือ ' + (fl.images || 0) + ' ตรง ' + (fl.imagesEqual || 0) + ' · ' + (dev.phone ? 'มือถือ' : 'ไม่ใช่มือถือ') + ' ' + esc(dev.screen) + '</p>' +
       '<p style="margin:10px 0 4px">กด "คัดลอกผล" แล้วส่งข้อความนี้กลับมาให้ Claude:</p><textarea readonly style="width:100%;min-height:110px;box-sizing:border-box;background:#120d20;color:#f4ecd8;border:1px solid #6b5a8a;border-radius:8px;padding:8px;font-size:13px">' + esc(line) + '</textarea>');
     const row = el('div'), msg = el('span', 'margin-left:6px;color:#8fd18f');

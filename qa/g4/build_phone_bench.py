@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """G4.6 (plan G4_0 §9 · D-G4-7 "ค"): build the private test copy of the game that measures smoothness on the owner's real phone.
-Version 5 (the page is put together as in v4; the two scripts it adds are v5).
+Version 6 (the page is put together as in v4; the two scripts it adds are v6).
 
   python3 qa/g4/build_phone_bench.py <game dir (a checkout of the branch)> <out dir>
 
