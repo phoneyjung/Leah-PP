@@ -3,7 +3,7 @@
 
 ---
 
-## งาน T51 · ตรวจหน้าวัดมือถือฉบับ 6 (ปิด T50-N1 N2) ก่อนให้เจ้าของวัดบนมือถือ · สถานะ: รอ Codex
+## งาน T51 · ตรวจหน้าวัดมือถือฉบับ 6 (ปิด T50-N1 N2) ก่อนให้เจ้าของวัดบนมือถือ · สถานะ: เสร็จ (Codex `codex/t51-review-bench6` @ `af95fa6` · T50-N1 N2 ปิด · FULL selftest 47/47 · ใหม่ สูง 0 กลาง 0 ต่ำ 1: T51-N1 "ชิ้น" เป็นตัวประมาณ ไม่พบในฉากจริง → บันทึกเป็นข้อจำกัด ไม่แก้หน้าวัด · **เสนอให้เจ้าของวัดมือถือด้วยฉบับ 6 ได้** · ไม่มีงานค้างของ Codex — รอผลมือถือของเจ้าของ)
 - **วันที่:** 16 พ.ย. 2569 · ไม่ใช้เครดิต · ไม่เกิน ~2 ชั่วโมง · ต้องรัน Chromium นอก sandbox (ขอสิทธิ์จากเจ้าของ)
 - **โค้ดที่ตรวจ:** `claude/g4-char2` @ `a95729a` (หน้าวัดฉบับ 6 = `881c6c7`) (โค้ดเกมยังเป็น `35b0ac4` เกม 2.43 · เปลี่ยนเฉพาะ `qa/g4/phone_bench.js` v6 · `qa/g4/phone_bench_prelude.js` v6 · `qa/g4/phone_bench_selftest.js` · `qa/g4/phone_bench_scene_test.js` (ใหม่) · คอมเมนต์หัวไฟล์ของ `qa/g4/build_phone_bench.py` · รายงาน + ผล) · **ส่ง:** branch ใหม่ `codex/t51-review-bench6` แตกจาก `claude/g2-pilot` (commit ที่มีงานนี้) · `REVIEW_CODEX_T51_BENCH6.md` + 1 บรรทัด `CODEX_STATUS.md`
 - **อ่านก่อน:** `G4_6_REPORT.md` ฉบับ 1.5 ข้อ 2.9 · หัวไฟล์ `qa/g4/phone_bench.js` + `hook()` · `qa/g4/phone_bench_prelude.js` · `REVIEW_CODEX_T50_BENCH5.md` ข้อ 5–6 ของคุณเอง
