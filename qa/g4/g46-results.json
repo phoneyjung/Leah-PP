@@ -258,9 +258,9 @@
    "diff": 15.22
   }
  },
- "report": "v1.5",
+ "report": "v1.6",
  "M6_phone": {
-  "status": "no usable result yet: v1 result withdrawn; bench v2-v5 superseded after Codex T47-T50; re-measure on v6 after Codex T51",
+  "status": "no usable result yet: bench v6 confirmed by Codex T51 (high 0, medium 0, low 1) — waiting for the owner's one measurement on the real phone",
   "v1_withdrawn": {
    "why": [
     "the published copy lacked 58 game files the real game asks for in a full-length run (199 asked, 140 in the copy; + sw.js left out on purpose) and the bench did not check files",
@@ -6795,7 +6795,8 @@
      531,
      15
     ],
-    "checked_on_real_host": false
+    "checked_on_real_host": false,
+    "rechecked": "2026-11-17: version 1794769325-9e60, page equals the build from a95729a byte for byte"
    },
    "fixes": {
     "T50-N1": "the load record keeps th (headers) and t1 (end); for a GET answered well t1 is the end of the body (a copy read to its end, or broken off); waiting and the busy check use t1; a body not ended at the file check or broken off = a file the game did not get; a load given up on is not waited for twice",
@@ -16585,7 +16586,8 @@
       ]
      }
     }
-   }
+   },
+   "codex_T51": "confirmed for the three pinned scenes"
   }
  },
  "codex_T47": {
@@ -16646,6 +16648,92 @@
     "T50-N2": "medium: every third draw command of the farm skipped with the flag on; \"things\" 86.91 % >= 80 % (full-length false pass)"
    },
    "wind": "accepted as a disclosed limit once N1/N2 are fixed; a result near 90 % or a shaky one should show its pairs and be measured again"
+  }
+ },
+ "codex_T51": {
+  "review": "REVIEW_CODEX_T51_BENCH6.md @af95fa6",
+  "checked": "claude/g4-char2 @a95729a, bench v6 881c6c7, game 2.43 35b0ac4",
+  "build": {
+   "files": 313,
+   "page_bytes": 1647484,
+   "meta_equal": "313/313"
+  },
+  "scene_property_test": "exit 0, 0 failed",
+  "full_selftest": {
+   "cases": 47,
+   "ok": 47,
+   "exit": 0,
+   "retried": [
+    "hidden×3"
+   ],
+   "noisy": [
+    "first304_nostore:unstable"
+   ],
+   "full_length_first_try": "4/4"
+  },
+  "own_full_length_probes_no_interception": {
+   "control": {
+    "verdict": "pass",
+    "ratios": [
+     1.00078,
+     0.993906,
+     0.99369
+    ]
+   },
+   "body_held": {
+    "verdict": "void",
+    "reasons": [
+     "files",
+     "interrupted"
+    ],
+    "waited_s": 46.001
+   },
+   "every_third_farm_command": {
+    "verdict": "fail",
+    "why": "ฉากวาดไม่ครบตอนเปิด",
+    "rows": 0.6623,
+    "obj": 0.6702,
+    "gap": [
+     90.98,
+     0
+    ]
+   },
+   "slow_bodies_3_files_in_time": {
+    "verdict": "pass",
+    "waited_s": 4.714,
+    "ratios": [
+     1.01035,
+     1.007091,
+     1.010228
+    ]
+   }
+  },
+  "short_probes": {
+   "every_fifth_farm_command": "fail (rows 80.10 %, obj 80.51 %)",
+   "head_row_only": "pass (rows 99.74 %): under the 10 % gate, a disclosed limit",
+   "tail_row_only": "rows 99.46 %: under the gate (that run void/unstable)",
+   "no_fill": "cave fails (ops 65.14 %); town 92.23 %, farm 89.24 %: under the 20 % gate",
+   "two_bodies_held": "void: files + interrupted; the file check does not hang"
+  },
+  "mutations": "4/4 caught (body end, rows, gap, ops)",
+  "answers": {
+   "T50-N1": "closed",
+   "T50-N2": "closed",
+   "T47-N4": "closed for the original finding and the three pinned scenes",
+   "new": {
+    "high": 0,
+    "medium": 0,
+    "low": 1
+   },
+   "recommendation": "the owner may measure on the phone with v6, the three pinned scenes",
+   "M6": "not passed by this review: needs the owner's real-phone result"
+  },
+  "T51-N1": {
+   "severity": "low",
+   "what": "\"obj\" is an estimate: two different sprites whose source rows continue and that are placed at the same dy − sy but at a different x count as one (dx is not compared, the wind moves rows sideways)",
+   "fixture": "ground + 10 such pairs: 21 objects counted 11; second sprite of every pair removed: 11 objects, obj still 11, rows 91.83 %, gap 0",
+   "real_scenes": "3,835 traced commands (3 scenes × on/off): 0 found",
+   "claude": "the bench page is not changed (the confirmed version is the one to be measured); recorded as a limit; printed at the end of qa/g4/phone_bench_scene_test.js; to be looked at again when a scene, layout or sheet changes"
   }
  }
 }

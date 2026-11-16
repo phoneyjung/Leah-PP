@@ -8,6 +8,7 @@
 //   2. removal  taking any commands away never makes rows or objects go up
 //   3. inside   cutting a row out of the inside of a sprite that is drawn in rows adds missing rows and leaves the objects as they were
 // It says nothing about the real game's scenes; qa/g4/phone_bench_selftest.js does that part in a browser.
+// Known limit (Codex T51-N1, low): "obj" is an estimate, not the number of objects in every layout — see the end of this file.
 'use strict';
 const fs = require('fs'), path = require('path');
 const src = fs.readFileSync(path.join(__dirname, 'phone_bench.js'), 'utf8');
@@ -55,5 +56,17 @@ for (let t = 0; t < 400; t++) { const sc = scene(), whole = count(flat(sc, () =>
     const parts = sc.map((s, i) => draw(s, i === who)), base = count([].concat(...parts)), at = 1 + int(parts[who].length - 2), gone = parts[who][at][4];
     parts[who].splice(at, 1); const a = count([].concat(...parts)); N.inside++;
     if (!(a.gap === base.gap + gone && a.obj === base.obj && a.rows === base.rows - gone)) bad.push(['inside', t, k, base, a, gone]); } }
-console.log(JSON.stringify({ checked: N, failed: bad.length, first: bad.slice(0, 3) }));
+// Known limit (Codex T51-N1, low). Two different sprites count as ONE object when the second one's source rows go on below the
+// first one's and it is placed at the same dy − sy — wherever it is across the screen (dx is not compared: the wind moves every
+// row of a leaning plant sideways, so "same dx" cannot be the rule). Codex's layout: a ground picture and 10 such pairs are 21
+// objects and count as 11; take the second sprite of every pair away and 11 objects are left, obj is still 11 and rows 91.8 %
+// — the three picture numbers let that through. Codex found no such pair in the three real scenes (3,835 commands traced), so
+// this does not stand in the way of measuring them; it must be looked at again when a scene, a layout or a sheet changes.
+// Nothing passes or fails here: the numbers are printed so that the limit stays in sight and a change of it is noticed.
+const sheet = SHEETS[0], ground = [[SHEETS[1], 0, 0, 400, 1024, 0, 0, 400, 1024]], pairs = [];
+for (let i = 0; i < 10; i++) pairs.push([[sheet, 16 * i, 0, 8, 10, 0, 40 * i, 8, 10], [sheet, 16 * i, 10, 8, 10, 100, 40 * i + 10, 8, 10]]);
+const all = count(ground.concat(...pairs)), half = count(ground.concat(pairs.map((p) => p[0])));
+const limit = { one_pair: { objects: 2, counted: count(pairs[0]).obj }, ground_and_10_pairs: { objects: 21, counted: all.obj, rows: all.rows },
+  second_sprite_of_every_pair_removed: { objects: 11, counted: half.obj, rows: half.rows, rowsShare: +(half.rows / all.rows).toFixed(4), gap: half.gap } };
+console.log(JSON.stringify({ checked: N, failed: bad.length, first: bad.slice(0, 3), knownLimit_T51_N1: limit }));
 process.exit(bad.length ? 1 : 0);
