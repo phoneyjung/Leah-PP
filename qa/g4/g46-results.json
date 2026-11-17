@@ -258,9 +258,9 @@
    "diff": 15.22
   }
  },
- "report": "v1.6",
+ "report": "v1.7",
  "M6_phone": {
-  "status": "no usable result yet: bench v6 confirmed by Codex T51 (high 0, medium 0, low 1) — waiting for the owner's one measurement on the real phone",
+  "status": "no usable result yet: bench v6 confirmed by Codex T51; the owner ran it once on a computer (void: not a phone) which showed the bench works on the real artifact host — waiting for one measurement on the owner's Android phone",
   "v1_withdrawn": {
    "why": [
     "the published copy lacked 58 game files the real game asks for in a full-length run (199 asked, 140 in the copy; + sw.js left out on purpose) and the bench did not check files",
@@ -16588,6 +16588,97 @@
     }
    },
    "codex_T51": "confirmed for the three pinned scenes"
+  },
+  "real_host_desktop_2026_11_18": {
+   "line": "G4.6 วัดความลื่น v6 · เกม 2.43 · เมือง 100 % · ฟาร์ม 100 % · ปากถ้ำ 100 % → ไม่นับ (เครื่องนี้ไม่ใช่มือถือ) · fps เปิด/ปิด 60.0/59.9 · 60.0/60.0 · 60.0/60.0 · งาน JS ms/เฟรม เปิด/ปิด 0.44/0.43 · 0.87/0.85 · 0.55/0.48 · รายคู่ % 100/100/100 · 100/100/100 · 100/100/100 · วาด/เฟรม เปิด/ปิด 17/18 · 201/208 · 16/14 · ฉากเปิด÷ปิด % (แถวภาพ/ชิ้น/แถวกรอบ/คำสั่งอื่น) 101/100/100/101 · 99/98/100/100 · 100/100/100/100 · ตรวจ ✓ ✓ ✓ · ไฟล์ 199 ขาด 0 ผิด 0 · ภาพที่เกมถือ 175 ตรง 175 · fetch 28 · รอโหลด 1.1 วิ · ไม่ใช่มือถือ 2560×1440 @1 · Chrome/156.0.8078.75",
+   "verdict": "void",
+   "reasons": [
+    "device"
+   ],
+   "device": {
+    "screen": "2560x1440",
+    "dpr": 1,
+    "browser": "Chrome 156.0.8078.75",
+    "phone": false
+   },
+   "ratios": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "fps_on_off": [
+    [
+     60.0,
+     59.9
+    ],
+    [
+     60.0,
+     60.0
+    ],
+    [
+     60.0,
+     60.0
+    ]
+   ],
+   "js_ms_on_off": [
+    [
+     0.44,
+     0.43
+    ],
+    [
+     0.87,
+     0.85
+    ],
+    [
+     0.55,
+     0.48
+    ]
+   ],
+   "draws_on_off": [
+    [
+     17,
+     18
+    ],
+    [
+     201,
+     208
+    ],
+    [
+     16,
+     14
+    ]
+   ],
+   "scene_pct_rows_obj_rect_ops": [
+    [
+     101,
+     100,
+     100,
+     101
+    ],
+    [
+     99,
+     98,
+     100,
+     100
+    ],
+    [
+     100,
+     100,
+     100,
+     100
+    ]
+   ],
+   "checks": "3/3",
+   "files": {
+    "asked": 199,
+    "missing": 0,
+    "wrong": 0,
+    "images": 175,
+    "imagesEqual": 175,
+    "fetches": 28,
+    "waited_s": 1.1
+   },
+   "meaning": "not a D-G4-7 result (not a phone; both sides at the 60 fps cap). It closes \"not checked on the real host\" for desktop Chrome: resource log, re-read + SHA-256, SRI on char2.js, blob: decode and pixel compare, fetch tee all work on the artifact host. Android Chrome not yet seen."
   }
  },
  "codex_T47": {
