@@ -3,6 +3,24 @@
 
 ---
 
+## งาน T52 · ตรวจ G4.7 (เกม 2.44 · เปิดตัวใหม่ในเซฟของผู้เล่นเองจากหน้าตั้งค่าเมื่อลิงก์มี `?gm`) ก่อน PR เข้า `main` · สถานะ: รอ Codex
+- **วันที่:** 18 พ.ย. 2569 · ไม่ใช้เครดิต · ไม่เกิน ~3 ชั่วโมง (รวมชุดเต็มที่เหลือ) · ต้องรัน Chromium นอก sandbox (ขอสิทธิ์จากเจ้าของ)
+- **ที่มา:** เจ้าของ "รับ G4" 18 พ.ย. 00:58 → Claude พบว่า 2.43 เปิดธงได้เฉพาะในแผง GM ซึ่งเปิดได้แค่ช่อง GM (แผนข้อ 3.1 เขียน "`S.gm` หรือ `?gm`") → เจ้าของเลือก "แก้ก่อน แล้วค่อยขึ้น" · แผน `G4_0_GAME_INTEGRATION_PLAN.md` ข้อ 15 (branch นี้)
+- **โค้ดที่ตรวจ:** `claude/g4-char2` @ `cbad18d` (เกม 2.44 = `3a7e52f` · ฐาน 2.43 = `35b0ac4`) · เปลี่ยน `index.html` (VERSION · `c234Row(h2, again)` 2 จุด · บล็อกใหม่ท้ายสคริปต์) · `sw.js` (CACHE เท่านั้น) · `test_234_flag.js` (อ่านชื่อ CACHE จาก `sw.js`) · `test_246_settings.js` (ใหม่) · `G4_7_REPORT.md` · **ส่ง:** branch ใหม่ `codex/t52-review-g47` แตกจาก `claude/g2-pilot` (commit ที่มีงานนี้) · `REVIEW_CODEX_T52_G47.md` + 1 บรรทัด `CODEX_STATUS.md`
+- **อ่านก่อน:** `G4_7_REPORT.md` · แผนข้อ 3.1 + 15 · `git diff 35b0ac4 3a7e52f -- index.html sw.js`
+- **ผลในเครื่อง Claude:** `test_246_settings.js` errors 0 (A–H) · ชุดที่เกี่ยว 10/10 errors 0 · ชุดเต็มแบบคู่ `main` ↔ 2.44: **85/115 ชุด ครบสองฝั่ง 170 รอบ exit ≠ 0 = 0 · `suites_cmp.py` bad [] undecided []** · อีก 30 ชุดไม่ได้รัน (เครื่อง Claude รีสตาร์ต แล้วงานเบื้องหลังถึงเพดาน 2 ชั่วโมง · `G4_7_REPORT.md` ข้อ 4)
+- **รัน:**
+  1. diff 2.43 → 2.44: ยืนยันว่าแตะเฉพาะที่รายงานบอก · บรรทัดเดิมของเกม (นอกบล็อก G4) ไม่เปลี่ยน · `FILES` ของ `sw.js` เหมือนเดิม
+  2. `test_246_settings.js` + `test_234_flag.js` + `test_245_gm.js` + `test_240_screens.js` → errors 0
+  3. **probe ของคุณเอง (แตะจริง):** ลิงก์ปกติไม่มีแถว · `?gm` เซฟเด็กหญิง 7 → เปิด → พร้อม → ลิงก์ปกติหน้าใหม่ยังเห็นตัวใหม่ · ช่องอื่นไม่ถูกแตะ · ช่อง GM ทำงานเหมือน 2.43 · `?gm` ใน hash (`#gm`) · `?gmx` ต้องไม่เปิด (`\b`) · สลับเซฟระหว่างโหลด · ภาพหน้าจอมือถือ 844×390 + iPad 1180×820
+  4. ถอดด่าน ≥ 2 ตัวในเครื่องตรวจใหม่ → ต้องตก
+  5. **ชุดเต็มที่ Claude รันไม่ครบ 30 ชุด แบบคู่** (MAIN = `main` @ `eb60c65` · BRANCH = `3a7e52f`): `ONLY="test_213_labels test_214_walks test_215_colours test_216_mapnames test_217_backdrop test_217_icons test_218_panel test_219_paperdoll test_220_local_sprite test_221_tk test_222_tk_pack test_223_kid_no_fight test_226_dress test_226_switch test_227_swipe test_228_rail test_229_pieces test_230_kid8 test_bug_23_ladder test_bug_24_close test_bugs_15_16_quiz test_bugs_17_20_ui test_bugs_7_14_farm test_crystal_step1_barrier test_decor test_decor_demo test_minigames test_questions_9 test_risk_monthly test_water_demo" MAIN_DIR=… BRANCH_DIR=… OUT=/tmp/t52/pair bash qa/g4/suites_pair.sh` แล้ว `python3 qa/g4/suites_cmp.py /tmp/t52/pair` → ต้อง exit 0 (ถ้ารันทั้ง 115 ชุดเองได้ ยิ่งดี)
+- **ตอบ:**
+  1. G4.7 ตรงแผนข้อ 15 ไหม · ทางนี้เปิดให้เด็กเห็นปุ่มโดยไม่ตั้งใจได้ไหม (ลิงก์ปกติ · ลิงก์ที่แชร์)
+  2. ปัญหาใหม่ (สูง/กลาง/ต่ำ) · ใช้ขึ้น `main` ได้ไหม
+- **ห้าม:** แก้ไฟล์ของ Claude หรือไฟล์ภาพ · push `main` · merge PR · force push · ใช้เครดิต · แตะเซฟจริง · ใส่ผลดิบ/ภาพเต็ม/fixture/node_modules ใน repo
+- **หยุดเมื่อ:** push แล้ว ตอบเจ้าของสั้น ๆ
+
 ## งาน T51 · ตรวจหน้าวัดมือถือฉบับ 6 (ปิด T50-N1 N2) ก่อนให้เจ้าของวัดบนมือถือ · สถานะ: เสร็จ (Codex `codex/t51-review-bench6` @ `af95fa6` · T50-N1 N2 ปิด · FULL selftest 47/47 · ใหม่ สูง 0 กลาง 0 ต่ำ 1: T51-N1 "ชิ้น" เป็นตัวประมาณ ไม่พบในฉากจริง → บันทึกเป็นข้อจำกัด ไม่แก้หน้าวัด · **เสนอให้เจ้าของวัดมือถือด้วยฉบับ 6 ได้** · ไม่มีงานค้างของ Codex — รอผลมือถือของเจ้าของ)
 - **วันที่:** 16 พ.ย. 2569 · ไม่ใช้เครดิต · ไม่เกิน ~2 ชั่วโมง · ต้องรัน Chromium นอก sandbox (ขอสิทธิ์จากเจ้าของ)
 - **โค้ดที่ตรวจ:** `claude/g4-char2` @ `a95729a` (หน้าวัดฉบับ 6 = `881c6c7`) (โค้ดเกมยังเป็น `35b0ac4` เกม 2.43 · เปลี่ยนเฉพาะ `qa/g4/phone_bench.js` v6 · `qa/g4/phone_bench_prelude.js` v6 · `qa/g4/phone_bench_selftest.js` · `qa/g4/phone_bench_scene_test.js` (ใหม่) · คอมเมนต์หัวไฟล์ของ `qa/g4/build_phone_bench.py` · รายงาน + ผล) · **ส่ง:** branch ใหม่ `codex/t51-review-bench6` แตกจาก `claude/g2-pilot` (commit ที่มีงานนี้) · `REVIEW_CODEX_T51_BENCH6.md` + 1 บรรทัด `CODEX_STATUS.md`
