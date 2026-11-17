@@ -258,9 +258,9 @@
    "diff": 15.22
   }
  },
- "report": "v1.7",
+ "report": "v1.8",
  "M6_phone": {
-  "status": "no usable result yet: bench v6 confirmed by Codex T51; the owner ran it once on a computer (void: not a phone) which showed the bench works on the real artifact host — waiting for one measurement on the owner's Android phone",
+  "status": "owner accepted G4 on 2026-11-18 00:58 without a real-phone line in the report; the only run on the real host was on a computer (void: device)",
   "v1_withdrawn": {
    "why": [
     "the published copy lacked 58 game files the real game asks for in a full-length run (199 asked, 140 in the copy; + sw.js left out on purpose) and the bench did not check files",
@@ -16826,5 +16826,18 @@
    "real_scenes": "3,835 traced commands (3 scenes × on/off): 0 found",
    "claude": "the bench page is not changed (the confirmed version is the one to be measured); recorded as a limit; printed at the end of qa/g4/phone_bench_scene_test.js; to be looked at again when a scene, layout or sheet changes"
   }
+ },
+ "owner_accepts_G4": {
+  "when": "2026-11-18 00:58 +07",
+  "words": "รับ G4",
+  "phone_line": null,
+  "note": "after the void desktop run (2.11) and Claude asking for the phone line or a screenshot; recorded as the owner's decision, with no real-phone numbers for D-G4-7 \"ค\""
+ },
+ "gap_after_acceptance": {
+  "what": "no way to turn the flag on in a normal save: the c234 row lives in the GM panel, which opens only when S.gm; ?gm only adds a button that creates/enters the GM slot",
+  "plan": "§3.1 says the row shows when gmOn() = S.gm or ?gm",
+  "tests": "test_234_flag.js F used a save that was both a girl of 7 and gm:true",
+  "effect": "A8 in Leah's own save cannot be done with 2.43; the owner can see the new character only in the GM slot after setting its age to 6–9",
+  "proposal": "G4.7: the row in ⚙️ settings when the link has ?gm, for the save being played; new block only; 2.44; tests; Codex; then the PR to main"
  }
 }
