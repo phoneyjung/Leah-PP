@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.43';
+const VERSION='Lantern Academy 2.44';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -7805,15 +7805,15 @@ function c234StText(){if(!S)return '';const tx=(a,b)=>LANG==='en'?b:a,who=c234Wh
   const why=who?tx('ยังไม่มีตัวแบบนี้','No v2 character for this player yet'):(on&&st==='failed')?(C234.why==='save look unreadable'?tx('ลุครุ่น 2 ในเซฟนี้อ่านไม่ได้','The v2 look in this save cannot be read'):C234.why):'';
   return tx('สถานะ: ','State: ')+(on?ST[st]:ST.off)+(why?' · '+why:'')}
 function c234Paint(){const e=document.getElementById('c234st');if(e)e.textContent=c234StText()}
-function c234Row(h2){const tx=(a,b)=>LANG==='en'?b:a,who=c234Who(S),on=S.char2On===true;
+function c234Row(h2,again){const tx=(a,b)=>LANG==='en'?b:a,who=c234Who(S),on=S.char2On===true;   // again (2.44): what opens after a tap — the GM panel unless told
   const d=document.createElement('div');d.className='pn';d.id='c234row';d.style.margin='6px 0';
   d.innerHTML='<b>'+tx('ตัวละครรุ่น 2 (ทดสอบ · เซฟนี้)','Character v2 (trial · this save)')+'</b><div id="c234st" style="margin-top:4px">'+c234StText()+'</div>'+
     '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px"><button id="c234on" style="min-height:44px" aria-pressed="'+on+'"'+(who&&!on?' disabled':'')+'>'+(on?tx('ปิดตัวละครรุ่น 2','Turn v2 off'):tx('เปิดตัวละครรุ่น 2','Turn v2 on'))+'</button>'+
     (on||S.char2!==undefined?'<button id="c234clr" style="min-height:44px">'+tx('ล้างตัวรุ่น 2','Clear v2')+'</button>':'')+'</div>';
   h2.after(d);
-  $('c234on').onclick=()=>{if(!S)return;if(S.char2On===true)S.char2On=false;else if(!c234Who(S))S.char2On=true;else return;save();c234Sync();closeModal();openGM()};
+  $('c234on').onclick=()=>{if(!S)return;if(S.char2On===true)S.char2On=false;else if(!c234Who(S))S.char2On=true;else return;save();c234Sync();closeModal();(again||openGM)()};
   const c=$('c234clr');if(c)c.onclick=()=>{if(!c.dataset.armed){c.dataset.armed='1';c.textContent=tx('แตะอีกครั้งเพื่อยืนยัน · ลบลุครุ่น 2 ของเซฟนี้','Tap again to confirm · removes this save\'s v2 look');return}
-    S.char2On=false;delete S.char2;save();c234Sync();closeModal();openGM()}}
+    S.char2On=false;delete S.char2;save();c234Sync();closeModal();(again||openGM)()}}
 {const _og234=openGM;openGM=function(){const r=_og234.apply(this,arguments);try{const h2=document.querySelector('#modal h2');if(h2&&gmOn())c234Row(h2)}catch(e){}return r}}
 // ================= 2.37 G4.2 (Claude · plan G4_0_GAME_INTEGRATION_PLAN.md v1.2 §4 §5 · table rows W1–W5 + W11 · G4.1 closed 9 Nov after Codex T39) =================
 // The player is drawn with Char2 while C234 is ready for this save. In-place edits in the old code — each calls a helper below that gives the OLD value
@@ -7963,4 +7963,15 @@ function c245Panel(){const row=$('c234row');if(!row||$('c245')||!S||!c234UiOk()|
 // c234Broke) takes the panel away at once; the row's status text already shows the new state. (Back to ready: the panel comes with the next
 // opening of the GM panel, as before.)
 {const o=c234Paint;c234Paint=function(){const r=o.apply(this,arguments);try{const d=document.getElementById('c245');if(d&&!c234UiOk())d.remove()}catch(e){}return r}}
+// ================= 2.44 G4.7 (Claude · plan G4_0_GAME_INTEGRATION_PLAN.md §3.1 "S.gm or ?gm" · owner "รับ G4" 18 Nov 2569 00:58, then chose
+// "แก้ก่อน แล้วค่อยขึ้น") =================
+// The row "Character v2 (trial · this save)" also in ⚙️ settings when the link has ?gm, for the save being played. Up to 2.43 the row was only in
+// the GM panel, and the GM panel opens only on the GM slot (gmOn() = S.gm), so a player's own save — Leah's — could not be switched on at all
+// (?gm only added "create/enter the GM character"). The row is the very same (c234Row): the same rule (a girl of 6–9), the same Thai/English
+// texts, "clear" with a second tap, the colour panel once ready; after a tap it opens settings again. Not on the GM slot (its row stays in the GM
+// panel) and never without ?gm: a child playing from the normal link does not see it. Nothing else in settings moves: the row goes right above the
+// "🛠 GM" button of L3508 (the tools row of the same link), not into the settings header (c234Row puts it after the title, which since 1.55
+// sits in the header next to the close button).
+function c247Gm(){try{return /[?&#]gm\b/.test(location.search+location.hash)}catch(e){return false}}
+{const o=openSettings;openSettings=function(){const r=o.apply(this,arguments);try{if(S&&!gmOn()&&c247Gm()&&!$('c234row')){const h2=document.querySelector('#modal h2');if(h2){c234Row(h2,()=>openSettings());const row=$('c234row'),g=$('gmRow');if(row&&g)g.before(row)}}}catch(e){}return r}}
 </script></body></html>
