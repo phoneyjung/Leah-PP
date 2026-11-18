@@ -1,0 +1,1291 @@
+{
+ "version": "v2 after Codex T34 (6 Nov 2569 evening)",
+ "harness": "qa/g4/replay.js + vclock.js + compare.py (v2: canvas pixels + meta checks + via + stay + tap + intro)",
+ "base": "main eb60c65",
+ "runs": {
+  "intro_A": {
+   "zoom": null,
+   "inject": null,
+   "intro": true,
+   "scenHash": "c9024c4286732911",
+   "expected": 8,
+   "checkpoints": 8,
+   "complete": true,
+   "startV": 600,
+   "endV": 17599.99999999985,
+   "frames": 1056,
+   "pageErrors": [],
+   "vcErrors": {
+    "n": 0,
+    "last": ""
+   },
+   "chromium": "141.0.7390.37",
+   "ms": 5253
+  },
+  "intro_B": {
+   "zoom": null,
+   "inject": null,
+   "intro": true,
+   "scenHash": "c9024c4286732911",
+   "expected": 8,
+   "checkpoints": 8,
+   "complete": true,
+   "startV": 600,
+   "endV": 17599.99999999985,
+   "frames": 1056,
+   "pageErrors": [],
+   "vcErrors": {
+    "n": 0,
+    "last": ""
+   },
+   "chromium": "141.0.7390.37",
+   "ms": 5348
+  },
+  "m5_0.75_A": {
+   "zoom": 0.75,
+   "inject": null,
+   "intro": false,
+   "scenHash": "e6117af0c73a39ac",
+   "expected": 69,
+   "checkpoints": 69,
+   "complete": true,
+   "startV": 600,
+   "endV": 75999.99999999923,
+   "frames": 4560,
+   "pageErrors": [],
+   "vcErrors": {
+    "n": 0,
+    "last": ""
+   },
+   "chromium": "141.0.7390.37",
+   "ms": 27760
+  },
+  "m5_0.75_B": {
+   "zoom": 0.75,
+   "inject": null,
+   "intro": false,
+   "scenHash": "e6117af0c73a39ac",
+   "expected": 69,
+   "checkpoints": 69,
+   "complete": true,
+   "startV": 600,
+   "endV": 75999.99999999923,
+   "frames": 4560,
+   "pageErrors": [],
+   "vcErrors": {
+    "n": 0,
+    "last": ""
+   },
+   "chromium": "141.0.7390.37",
+   "ms": 27658
+  },
+  "m5_0.75_C": {
+   "zoom": 0.75,
+   "inject": null,
+   "intro": false,
+   "scenHash": "e6117af0c73a39ac",
+   "expected": 69,
+   "checkpoints": 69,
+   "complete": true,
+   "startV": 600,
+   "endV": 75999.99999999923,
+   "frames": 4560,
+   "pageErrors": [],
+   "vcErrors": {
+    "n": 0,
+    "last": ""
+   },
+   "chromium": "141.0.7390.37",
+   "ms": 27573
+  },
+  "m5_1_A": {
+   "zoom": 1,
+   "inject": null,
+   "intro": false,
+   "scenHash": "e6117af0c73a39ac",
+   "expected": 69,
+   "checkpoints": 69,
+   "complete": true,
+   "startV": 600,
+   "endV": 75999.99999999923,
+   "frames": 4560,
+   "pageErrors": [],
+   "vcErrors": {
+    "n": 0,
+    "last": ""
+   },
+   "chromium": "141.0.7390.37",
+   "ms": 27256
+  },
+  "m5_1_B": {
+   "zoom": 1,
+   "inject": null,
+   "intro": false,
+   "scenHash": "e6117af0c73a39ac",
+   "expected": 69,
+   "checkpoints": 69,
+   "complete": true,
+   "startV": 600,
+   "endV": 75999.99999999923,
+   "frames": 4560,
+   "pageErrors": [],
+   "vcErrors": {
+    "n": 0,
+    "last": ""
+   },
+   "chromium": "141.0.7390.37",
+   "ms": 27077
+  },
+  "m5_1_C": {
+   "zoom": 1,
+   "inject": null,
+   "intro": false,
+   "scenHash": "e6117af0c73a39ac",
+   "expected": 69,
+   "checkpoints": 69,
+   "complete": true,
+   "startV": 600,
+   "endV": 75999.99999999923,
+   "frames": 4560,
+   "pageErrors": [],
+   "vcErrors": {
+    "n": 0,
+    "last": ""
+   },
+   "chromium": "141.0.7390.37",
+   "ms": 27720
+  },
+  "rp_A": {
+   "zoom": null,
+   "inject": null,
+   "intro": false,
+   "scenHash": "63f76ebdbaa70482",
+   "expected": 24,
+   "checkpoints": 24,
+   "complete": true,
+   "startV": 600,
+   "endV": 124600.00000001337,
+   "frames": 7476,
+   "pageErrors": [],
+   "vcErrors": {
+    "n": 0,
+    "last": ""
+   },
+   "chromium": "141.0.7390.37",
+   "ms": 32204
+  },
+  "rp_B": {
+   "zoom": null,
+   "inject": null,
+   "intro": false,
+   "scenHash": "63f76ebdbaa70482",
+   "expected": 24,
+   "checkpoints": 24,
+   "complete": true,
+   "startV": 600,
+   "endV": 124600.00000001337,
+   "frames": 7476,
+   "pageErrors": [],
+   "vcErrors": {
+    "n": 0,
+    "last": ""
+   },
+   "chromium": "141.0.7390.37",
+   "ms": 30372
+  },
+  "rp_C": {
+   "zoom": null,
+   "inject": null,
+   "intro": false,
+   "scenHash": "63f76ebdbaa70482",
+   "expected": 24,
+   "checkpoints": 24,
+   "complete": true,
+   "startV": 600,
+   "endV": 124600.00000001337,
+   "frames": 7476,
+   "pageErrors": [],
+   "vcErrors": {
+    "n": 0,
+    "last": ""
+   },
+   "chromium": "141.0.7390.37",
+   "ms": 30164
+  },
+  "rp_hud": {
+   "zoom": null,
+   "inject": "hud@13",
+   "intro": false,
+   "scenHash": "63f76ebdbaa70482",
+   "expected": 24,
+   "checkpoints": 24,
+   "complete": true,
+   "startV": 600,
+   "endV": 124600.00000001337,
+   "frames": 7476,
+   "pageErrors": [],
+   "vcErrors": {
+    "n": 0,
+    "last": ""
+   },
+   "chromium": "141.0.7390.37",
+   "ms": 28146
+  },
+  "rp_img": {
+   "zoom": null,
+   "inject": "img@13",
+   "intro": false,
+   "scenHash": "63f76ebdbaa70482",
+   "expected": 24,
+   "checkpoints": 24,
+   "complete": true,
+   "startV": 600,
+   "endV": 124600.00000001337,
+   "frames": 7476,
+   "pageErrors": [],
+   "vcErrors": {
+    "n": 0,
+    "last": ""
+   },
+   "chromium": "141.0.7390.37",
+   "ms": 29863
+  },
+  "rp_pos": {
+   "zoom": null,
+   "inject": "pos@13",
+   "intro": false,
+   "scenHash": "63f76ebdbaa70482",
+   "expected": 24,
+   "checkpoints": 24,
+   "complete": true,
+   "startV": 600,
+   "endV": 124600.00000001337,
+   "frames": 7476,
+   "pageErrors": [],
+   "vcErrors": {
+    "n": 0,
+    "last": ""
+   },
+   "chromium": "141.0.7390.37",
+   "ms": 29458
+  },
+  "rpz1_A": {
+   "zoom": 1,
+   "inject": null,
+   "intro": false,
+   "scenHash": "63f76ebdbaa70482",
+   "expected": 24,
+   "checkpoints": 24,
+   "complete": true,
+   "startV": 600,
+   "endV": 124600.00000001337,
+   "frames": 7476,
+   "pageErrors": [],
+   "vcErrors": {
+    "n": 0,
+    "last": ""
+   },
+   "chromium": "141.0.7390.37",
+   "ms": 26824
+  },
+  "rpz1_B": {
+   "zoom": 1,
+   "inject": null,
+   "intro": false,
+   "scenHash": "63f76ebdbaa70482",
+   "expected": 24,
+   "checkpoints": 24,
+   "complete": true,
+   "startV": 600,
+   "endV": 124600.00000001337,
+   "frames": 7476,
+   "pageErrors": [],
+   "vcErrors": {
+    "n": 0,
+    "last": ""
+   },
+   "chromium": "141.0.7390.37",
+   "ms": 26783
+  }
+ },
+ "compare": {
+  "AB": {
+   "metaOk": true,
+   "meta": [],
+   "checkpoints": 24,
+   "bad": 0,
+   "pxTotal": 0,
+   "canvasPxTotal": 0,
+   "stateTotal": 0,
+   "drawDiff": 0
+  },
+  "AC": {
+   "metaOk": true,
+   "meta": [],
+   "checkpoints": 24,
+   "bad": 0,
+   "pxTotal": 0,
+   "canvasPxTotal": 0,
+   "stateTotal": 0,
+   "drawDiff": 0
+  },
+  "Z1": {
+   "metaOk": true,
+   "meta": [],
+   "checkpoints": 24,
+   "bad": 0,
+   "pxTotal": 0,
+   "canvasPxTotal": 0,
+   "stateTotal": 0,
+   "drawDiff": 0
+  },
+  "inj_hud": {
+   "metaOk": true,
+   "meta": [],
+   "checkpoints": 24,
+   "bad": 1,
+   "pxTotal": 0,
+   "canvasPxTotal": 4,
+   "stateTotal": 0,
+   "drawDiff": 0
+  },
+  "inj_img": {
+   "metaOk": true,
+   "meta": [],
+   "checkpoints": 24,
+   "bad": 1,
+   "pxTotal": 4,
+   "canvasPxTotal": 4,
+   "stateTotal": 0,
+   "drawDiff": 0
+  },
+  "inj_pos": {
+   "metaOk": true,
+   "meta": [],
+   "checkpoints": 24,
+   "bad": 4,
+   "pxTotal": 1981,
+   "canvasPxTotal": 1981,
+   "stateTotal": 7,
+   "drawDiff": 4
+  },
+  "intro": {
+   "metaOk": true,
+   "meta": [],
+   "checkpoints": 8,
+   "bad": 0,
+   "pxTotal": 0,
+   "canvasPxTotal": 0,
+   "stateTotal": 0,
+   "drawDiff": 0
+  },
+  "m5_0.75_AB": {
+   "metaOk": true,
+   "meta": [],
+   "checkpoints": 69,
+   "bad": 0,
+   "pxTotal": 0,
+   "canvasPxTotal": 0,
+   "stateTotal": 0,
+   "drawDiff": 0
+  },
+  "m5_0.75_AC": {
+   "metaOk": true,
+   "meta": [],
+   "checkpoints": 69,
+   "bad": 0,
+   "pxTotal": 0,
+   "canvasPxTotal": 0,
+   "stateTotal": 0,
+   "drawDiff": 0
+  },
+  "m5_1_AB": {
+   "metaOk": true,
+   "meta": [],
+   "checkpoints": 69,
+   "bad": 0,
+   "pxTotal": 0,
+   "canvasPxTotal": 0,
+   "stateTotal": 0,
+   "drawDiff": 0
+  },
+  "m5_1_AC": {
+   "metaOk": true,
+   "meta": [],
+   "checkpoints": 69,
+   "bad": 0,
+   "pxTotal": 0,
+   "canvasPxTotal": 0,
+   "stateTotal": 0,
+   "drawDiff": 0
+  },
+  "neg_norun": {
+   "metaOk": false,
+   "meta": [
+    "B: no run.json (the run did not finish)"
+   ],
+   "checkpoints": 24,
+   "bad": 0,
+   "pxTotal": 0,
+   "canvasPxTotal": 0,
+   "stateTotal": 0,
+   "drawDiff": 0
+  },
+  "neg_otherscen": {
+   "metaOk": false,
+   "meta": [
+    "run field differs: scenHash",
+    "run field differs: zoom",
+    "run field differs: expected",
+    "checkpoint names differ: A 24 B 69"
+   ],
+   "checkpoints": 24,
+   "bad": 24,
+   "pxTotal": 7617934,
+   "canvasPxTotal": 7899475,
+   "stateTotal": 434,
+   "drawDiff": 24
+  },
+  "neg_short": {
+   "metaOk": false,
+   "meta": [
+    "B: incomplete 19/24",
+    "checkpoint names differ: A 24 B 19",
+    "B: 19 checkpoint files, expected 24"
+   ],
+   "checkpoints": 19,
+   "bad": 0,
+   "pxTotal": 0,
+   "canvasPxTotal": 0,
+   "stateTotal": 0,
+   "drawDiff": 0
+  },
+  "neg_vcerr_both_sides": {
+   "metaOk": false,
+   "meta": [
+    "A cp05: virtual-clock errors 1",
+    "B cp05: virtual-clock errors 1"
+   ],
+   "checkpoints": 24,
+   "bad": 0,
+   "pxTotal": 0,
+   "canvasPxTotal": 0,
+   "stateTotal": 0,
+   "drawDiff": 0
+  }
+ },
+ "checkpoints_default": [
+  {
+   "map": "capital",
+   "vnow": 1099.9999999999993,
+   "phase": "day",
+   "dark": false,
+   "lkid": true,
+   "msg": "",
+   "draw": {
+    "n": 19,
+    "hash": "851ec1f8"
+   }
+  },
+  {
+   "map": "capital",
+   "vnow": 3099.999999999994,
+   "phase": "day",
+   "dark": false,
+   "lkid": true,
+   "msg": "นิ้วโป้งซ้ายแตะจอด้านซ้ายล่าง จอยจะมาอยู่ใต้นิ้ว ลากเพื่อเดิน · แตะพื้นหรือแตะคนก็ได้",
+   "draw": {
+    "n": 19,
+    "hash": "4ff2ec2"
+   }
+  },
+  {
+   "map": "capital",
+   "vnow": 4599.9999999999945,
+   "phase": "day",
+   "dark": false,
+   "lkid": true,
+   "msg": "✨ ศิลาแสงตื่นแล้ว · บันทึกจุดวาร์ป",
+   "draw": {
+    "n": 19,
+    "hash": "b699c844"
+   }
+  },
+  {
+   "map": "capital",
+   "vnow": 6100.000000000022,
+   "phase": "day",
+   "dark": false,
+   "lkid": true,
+   "msg": "✨ ศิลาแสงตื่นแล้ว · บันทึกจุดวาร์ป",
+   "draw": {
+    "n": 19,
+    "hash": "3c923426"
+   }
+  },
+  {
+   "map": "capital",
+   "vnow": 9600.00000000001,
+   "phase": "day",
+   "dark": false,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 19,
+    "hash": "25de8df3"
+   }
+  },
+  {
+   "map": "capital",
+   "vnow": 11599.999999999936,
+   "phase": "day",
+   "dark": false,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 19,
+    "hash": "e542b04"
+   }
+  },
+  {
+   "map": "capital",
+   "vnow": 15599.99999999979,
+   "phase": "day",
+   "dark": false,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 19,
+    "hash": "a92cffe0"
+   }
+  },
+  {
+   "map": "capital",
+   "vnow": 17599.99999999985,
+   "phase": "day",
+   "dark": false,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 19,
+    "hash": "e8c43b83"
+   }
+  },
+  {
+   "map": "farm",
+   "vnow": 18099.999999999887,
+   "phase": "day",
+   "dark": false,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 147,
+    "hash": "d92e8c91"
+   }
+  },
+  {
+   "map": "farm",
+   "vnow": 20100.000000000033,
+   "phase": "day",
+   "dark": false,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 237,
+    "hash": "56534f9c"
+   }
+  },
+  {
+   "map": "farm",
+   "vnow": 22100.00000000018,
+   "phase": "day",
+   "dark": false,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 186,
+    "hash": "abd757"
+   }
+  },
+  {
+   "map": "farm",
+   "vnow": 27100.000000000542,
+   "phase": "day",
+   "dark": false,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 321,
+    "hash": "2a1e4e3b"
+   }
+  },
+  {
+   "map": "farm",
+   "vnow": 29100.000000000688,
+   "phase": "day",
+   "dark": false,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 192,
+    "hash": "e82c0c1b"
+   }
+  },
+  {
+   "map": "farm",
+   "vnow": 61099.999999996835,
+   "phase": "dusk",
+   "dark": false,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 247,
+    "hash": "7ef30664"
+   }
+  },
+  {
+   "map": "farm",
+   "vnow": 63099.999999996544,
+   "phase": "dusk",
+   "dark": false,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 153,
+    "hash": "fc08a253"
+   }
+  },
+  {
+   "map": "farm",
+   "vnow": 65099.99999999625,
+   "phase": "dusk",
+   "dark": false,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 153,
+    "hash": "bb18f8ac"
+   }
+  },
+  {
+   "map": "cavemouth",
+   "vnow": 65599.9999999962,
+   "phase": "dusk",
+   "dark": true,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 14,
+    "hash": "b387f793"
+   }
+  },
+  {
+   "map": "cavemouth",
+   "vnow": 67599.99999999678,
+   "phase": "dusk",
+   "dark": true,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 14,
+    "hash": "214b720c"
+   }
+  },
+  {
+   "map": "cavemouth",
+   "vnow": 69599.99999999737,
+   "phase": "dusk",
+   "dark": true,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 14,
+    "hash": "593b8384"
+   }
+  },
+  {
+   "map": "cavemouth",
+   "vnow": 74599.99999999882,
+   "phase": "dusk",
+   "dark": true,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 14,
+    "hash": "62f8eb86"
+   }
+  },
+  {
+   "map": "cavemouth",
+   "vnow": 76599.9999999994,
+   "phase": "dusk",
+   "dark": true,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 14,
+    "hash": "e6ef6faa"
+   }
+  },
+  {
+   "map": "cavemouth",
+   "vnow": 121600.0000000125,
+   "phase": "dusk",
+   "dark": true,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 14,
+    "hash": "b99e5ef6"
+   }
+  },
+  {
+   "map": "cavemouth",
+   "vnow": 123600.00000001308,
+   "phase": "dusk",
+   "dark": true,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 14,
+    "hash": "2ad83ba8"
+   }
+  },
+  {
+   "map": "cavemouth",
+   "vnow": 124600.00000001337,
+   "phase": "dusk",
+   "dark": true,
+   "lkid": true,
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ",
+   "draw": {
+    "n": 14,
+    "hash": "bec3c534"
+   }
+  }
+ ],
+ "intro": [
+  {
+   "vnow": 1600.0000000000016,
+   "dlg": null,
+   "PAUSE": false,
+   "seen": [],
+   "msg": ""
+  },
+  {
+   "vnow": 4099.999999999985,
+   "dlg": {
+    "i": 0,
+    "n": 3,
+    "open": true
+   },
+   "PAUSE": true,
+   "seen": [
+    "intro"
+   ],
+   "msg": "นิ้วโป้งซ้ายแตะจอด้านซ้ายล่าง จอยจะมาอยู่ใต้นิ้ว ลากเพื่อเดิน · แตะพื้นหรือแตะคนก็ได้"
+  },
+  {
+   "vnow": 5600.000000000013,
+   "dlg": {
+    "i": 1,
+    "n": 3,
+    "open": true
+   },
+   "PAUSE": true,
+   "seen": [
+    "intro"
+   ],
+   "msg": "นิ้วโป้งซ้ายแตะจอด้านซ้ายล่าง จอยจะมาอยู่ใต้นิ้ว ลากเพื่อเดิน · แตะพื้นหรือแตะคนก็ได้"
+  },
+  {
+   "vnow": 7100.00000000004,
+   "dlg": {
+    "i": 2,
+    "n": 3,
+    "open": true
+   },
+   "PAUSE": true,
+   "seen": [
+    "intro"
+   ],
+   "msg": "นิ้วโป้งซ้ายแตะจอด้านซ้ายล่าง จอยจะมาอยู่ใต้นิ้ว ลากเพื่อเดิน · แตะพื้นหรือแตะคนก็ได้"
+  },
+  {
+   "vnow": 8600.000000000045,
+   "dlg": null,
+   "PAUSE": false,
+   "seen": [
+    "intro"
+   ],
+   "msg": "นิ้วโป้งซ้ายแตะจอด้านซ้ายล่าง จอยจะมาอยู่ใต้นิ้ว ลากเพื่อเดิน · แตะพื้นหรือแตะคนก็ได้"
+  },
+  {
+   "vnow": 11599.999999999936,
+   "dlg": null,
+   "PAUSE": false,
+   "seen": [
+    "intro"
+   ],
+   "msg": "📜 มีภารกิจใหม่ที่กระดานประกาศ"
+  },
+  {
+   "vnow": 13599.999999999864,
+   "dlg": null,
+   "PAUSE": false,
+   "seen": [
+    "intro"
+   ],
+   "msg": "✨ ศิลาแสงตื่นแล้ว · บันทึกจุดวาร์ป"
+  },
+  {
+   "vnow": 17599.99999999985,
+   "dlg": null,
+   "PAUSE": false,
+   "seen": [
+    "intro"
+   ],
+   "msg": "✨ ศิลาแสงตื่นแล้ว · บันทึกจุดวาร์ป"
+  }
+ ],
+ "m5": {
+  "0.75": [
+   {
+    "id": "X01-capital-n",
+    "from": "capital",
+    "after": "cavemouth",
+    "via": [],
+    "SC": 0.75
+   },
+   {
+    "id": "X02-capital-home",
+    "from": "capital",
+    "after": "room",
+    "via": [],
+    "SC": 0.75
+   },
+   {
+    "id": "X03-room-door-from-capital",
+    "from": "room",
+    "after": "capital",
+    "via": [],
+    "SC": 1
+   },
+   {
+    "id": "X04-capital-w",
+    "from": "capital",
+    "after": "capital",
+    "via": [],
+    "SC": 0.75
+   },
+   {
+    "id": "X05-farm-e",
+    "from": "farm",
+    "after": "capital",
+    "via": [],
+    "SC": 0.75
+   },
+   {
+    "id": "X06-farm-home",
+    "from": "farm",
+    "after": "room",
+    "via": [],
+    "SC": 0.75
+   },
+   {
+    "id": "X07-room-door",
+    "from": "room",
+    "after": "farm",
+    "via": [],
+    "SC": 1
+   },
+   {
+    "id": "X08-room2-down",
+    "from": "room2",
+    "after": "room",
+    "via": [],
+    "SC": 1
+   },
+   {
+    "id": "X09-room3-down",
+    "from": "room3",
+    "after": "room2",
+    "via": [],
+    "SC": 1
+   },
+   {
+    "id": "X10-royal-n",
+    "from": "royal",
+    "after": "cavemouth",
+    "via": [],
+    "SC": 0.75
+   },
+   {
+    "id": "X11-royal-s",
+    "from": "royal",
+    "after": "capital",
+    "via": [],
+    "SC": 0.75
+   },
+   {
+    "id": "X12-cavemouth-s",
+    "from": "cavemouth",
+    "after": "capital",
+    "via": [],
+    "SC": 0.75
+   },
+   {
+    "id": "X13-town2-n",
+    "from": "town2",
+    "after": "cavemouth",
+    "via": [],
+    "SC": 0.75
+   },
+   {
+    "id": "X14-town2-w",
+    "from": "town2",
+    "after": "farm",
+    "via": [],
+    "SC": 0.75
+   },
+   {
+    "id": "X15-town2-e",
+    "from": "town2",
+    "after": "capital",
+    "via": [],
+    "SC": 0.75
+   },
+   {
+    "id": "X16-town2-s",
+    "from": "town2",
+    "after": "capital",
+    "via": [],
+    "SC": 0.75
+   },
+   {
+    "id": "N01-capital-31-17",
+    "from": "capital",
+    "after": "capital",
+    "via": [
+     {
+      "tile": [
+       31,
+       17
+      ],
+      "onPath": true
+     }
+    ],
+    "SC": 0.75
+   },
+   {
+    "id": "N02-capital-31-26",
+    "from": "capital",
+    "after": "capital",
+    "via": [
+     {
+      "tile": [
+       31,
+       26
+      ],
+      "onPath": true
+     }
+    ],
+    "SC": 0.75
+   },
+   {
+    "id": "N03-town2-15-9",
+    "from": "town2",
+    "after": "town2",
+    "via": [
+     {
+      "tile": [
+       15,
+       9
+      ],
+      "onPath": true
+     }
+    ],
+    "SC": 0.75
+   },
+   {
+    "id": "N04-town2-33-9",
+    "from": "town2",
+    "after": "town2",
+    "via": [
+     {
+      "tile": [
+       33,
+       9
+      ],
+      "onPath": true
+     }
+    ],
+    "SC": 0.75
+   },
+   {
+    "id": "N05-farm-46-3",
+    "from": "farm",
+    "after": "farm",
+    "via": [
+     {
+      "tile": [
+       46,
+       3
+      ],
+      "onPath": true
+     }
+    ],
+    "SC": 0.75
+   },
+   {
+    "id": "N06-farm-1-12",
+    "from": "farm",
+    "after": "farm",
+    "via": [
+     {
+      "tile": [
+       1,
+       12
+      ],
+      "onPath": true
+     }
+    ],
+    "SC": 0.75
+   },
+   {
+    "id": "N07-room-11-3",
+    "from": "room",
+    "after": "room",
+    "via": [
+     {
+      "tile": [
+       11,
+       3
+      ],
+      "onPath": true
+     }
+    ],
+    "SC": 1
+   }
+  ],
+  "1": [
+   {
+    "id": "X01-capital-n",
+    "from": "capital",
+    "after": "cavemouth",
+    "via": [],
+    "SC": 1
+   },
+   {
+    "id": "X02-capital-home",
+    "from": "capital",
+    "after": "room",
+    "via": [],
+    "SC": 1
+   },
+   {
+    "id": "X03-room-door-from-capital",
+    "from": "room",
+    "after": "capital",
+    "via": [],
+    "SC": 1
+   },
+   {
+    "id": "X04-capital-w",
+    "from": "capital",
+    "after": "capital",
+    "via": [],
+    "SC": 1
+   },
+   {
+    "id": "X05-farm-e",
+    "from": "farm",
+    "after": "capital",
+    "via": [],
+    "SC": 1
+   },
+   {
+    "id": "X06-farm-home",
+    "from": "farm",
+    "after": "room",
+    "via": [],
+    "SC": 1
+   },
+   {
+    "id": "X07-room-door",
+    "from": "room",
+    "after": "farm",
+    "via": [],
+    "SC": 1
+   },
+   {
+    "id": "X08-room2-down",
+    "from": "room2",
+    "after": "room",
+    "via": [],
+    "SC": 1
+   },
+   {
+    "id": "X09-room3-down",
+    "from": "room3",
+    "after": "room2",
+    "via": [],
+    "SC": 1
+   },
+   {
+    "id": "X10-royal-n",
+    "from": "royal",
+    "after": "cavemouth",
+    "via": [],
+    "SC": 1
+   },
+   {
+    "id": "X11-royal-s",
+    "from": "royal",
+    "after": "capital",
+    "via": [],
+    "SC": 1
+   },
+   {
+    "id": "X12-cavemouth-s",
+    "from": "cavemouth",
+    "after": "capital",
+    "via": [],
+    "SC": 1
+   },
+   {
+    "id": "X13-town2-n",
+    "from": "town2",
+    "after": "cavemouth",
+    "via": [],
+    "SC": 1
+   },
+   {
+    "id": "X14-town2-w",
+    "from": "town2",
+    "after": "farm",
+    "via": [],
+    "SC": 1
+   },
+   {
+    "id": "X15-town2-e",
+    "from": "town2",
+    "after": "capital",
+    "via": [],
+    "SC": 1
+   },
+   {
+    "id": "X16-town2-s",
+    "from": "town2",
+    "after": "capital",
+    "via": [],
+    "SC": 1
+   },
+   {
+    "id": "N01-capital-31-17",
+    "from": "capital",
+    "after": "capital",
+    "via": [
+     {
+      "tile": [
+       31,
+       17
+      ],
+      "onPath": true
+     }
+    ],
+    "SC": 1
+   },
+   {
+    "id": "N02-capital-31-26",
+    "from": "capital",
+    "after": "capital",
+    "via": [
+     {
+      "tile": [
+       31,
+       26
+      ],
+      "onPath": true
+     }
+    ],
+    "SC": 1
+   },
+   {
+    "id": "N03-town2-15-9",
+    "from": "town2",
+    "after": "town2",
+    "via": [
+     {
+      "tile": [
+       15,
+       9
+      ],
+      "onPath": true
+     }
+    ],
+    "SC": 1
+   },
+   {
+    "id": "N04-town2-33-9",
+    "from": "town2",
+    "after": "town2",
+    "via": [
+     {
+      "tile": [
+       33,
+       9
+      ],
+      "onPath": true
+     }
+    ],
+    "SC": 1
+   },
+   {
+    "id": "N05-farm-46-3",
+    "from": "farm",
+    "after": "farm",
+    "via": [
+     {
+      "tile": [
+       46,
+       3
+      ],
+      "onPath": true
+     }
+    ],
+    "SC": 1
+   },
+   {
+    "id": "N06-farm-1-12",
+    "from": "farm",
+    "after": "farm",
+    "via": [
+     {
+      "tile": [
+       1,
+       12
+      ],
+      "onPath": true
+     }
+    ],
+    "SC": 1
+   },
+   {
+    "id": "N07-room-11-3",
+    "from": "room",
+    "after": "room",
+    "via": [
+     {
+      "tile": [
+       11,
+       3
+      ],
+      "onPath": true
+     }
+    ],
+    "SC": 1
+   }
+  ]
+ }
+}

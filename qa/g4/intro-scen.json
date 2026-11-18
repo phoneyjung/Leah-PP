@@ -1,0 +1,6 @@
+{"version": "G4.0 v2 · 6 Nov 2569 (after Codex T34 N2)",
+ "why": "a new save that has NOT seen the intro: the intro starts by itself 2.6 s after startGame (L1439 → playScene('intro')); each line is closed by a tap on the dialog (#dlg onclick = nextLine, L1251), the same as a finger; then the kid walks and the town-road hint that follows the intro (L3274) is given time to show",
+ "intro": true,
+ "cases": [{"id": "I01-capital-intro", "map": "capital", "steps": [
+   {"s": 1}, {"s": 2.5}, {"tap": "#dlg", "s": 1.5}, {"tap": "#dlg", "s": 1.5}, {"tap": "#dlg", "s": 1.5},
+   {"s": 3}, {"walk": [3, 0], "s": 2}, {"s": 4}]}]}

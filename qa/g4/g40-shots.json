@@ -1,0 +1,104 @@
+{
+ "base": "http://127.0.0.1:8780",
+ "tag": "main",
+ "patch": null,
+ "shots": [
+  {
+   "f": "g40-main-phone-z100-S1-capital.png",
+   "dev": "phone",
+   "zoom": 1,
+   "scene": "S1-capital",
+   "ZOOM": 1,
+   "SC": 3
+  },
+  {
+   "f": "g40-main-phone-z100-S2-farm.png",
+   "dev": "phone",
+   "zoom": 1,
+   "scene": "S2-farm",
+   "ZOOM": 1,
+   "SC": 3
+  },
+  {
+   "f": "g40-main-phone-z100-S3-cavemouth.png",
+   "dev": "phone",
+   "zoom": 1,
+   "scene": "S3-cavemouth",
+   "ZOOM": 1,
+   "SC": 3
+  },
+  {
+   "f": "g40-main-phone-z75-S1-capital.png",
+   "dev": "phone",
+   "zoom": 0.75,
+   "scene": "S1-capital",
+   "ZOOM": 0.75,
+   "SC": 2.25
+  },
+  {
+   "f": "g40-main-phone-z75-S2-farm.png",
+   "dev": "phone",
+   "zoom": 0.75,
+   "scene": "S2-farm",
+   "ZOOM": 0.75,
+   "SC": 2.25
+  },
+  {
+   "f": "g40-main-phone-z75-S3-cavemouth.png",
+   "dev": "phone",
+   "zoom": 0.75,
+   "scene": "S3-cavemouth",
+   "ZOOM": 0.75,
+   "SC": 2.25
+  },
+  {
+   "f": "g40-main-ipad-z100-S1-capital.png",
+   "dev": "ipad",
+   "zoom": 1,
+   "scene": "S1-capital",
+   "ZOOM": 1,
+   "SC": 4
+  },
+  {
+   "f": "g40-main-ipad-z100-S2-farm.png",
+   "dev": "ipad",
+   "zoom": 1,
+   "scene": "S2-farm",
+   "ZOOM": 1,
+   "SC": 4
+  },
+  {
+   "f": "g40-main-ipad-z100-S3-cavemouth.png",
+   "dev": "ipad",
+   "zoom": 1,
+   "scene": "S3-cavemouth",
+   "ZOOM": 1,
+   "SC": 4
+  },
+  {
+   "f": "g40-main-ipad-z75-S1-capital.png",
+   "dev": "ipad",
+   "zoom": 0.75,
+   "scene": "S1-capital",
+   "ZOOM": 0.75,
+   "SC": 3
+  },
+  {
+   "f": "g40-main-ipad-z75-S2-farm.png",
+   "dev": "ipad",
+   "zoom": 0.75,
+   "scene": "S2-farm",
+   "ZOOM": 0.75,
+   "SC": 3
+  },
+  {
+   "f": "g40-main-ipad-z75-S3-cavemouth.png",
+   "dev": "ipad",
+   "zoom": 0.75,
+   "scene": "S3-cavemouth",
+   "ZOOM": 0.75,
+   "SC": 3
+  }
+ ],
+ "errors": []
+}

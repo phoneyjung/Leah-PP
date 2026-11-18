@@ -1,0 +1,37 @@
+{
+ "main": "eb60c650922e55c7d81b27b59f180e1f42c367b2",
+ "index.html": {
+  "sha256": "9fdff13ad58a46d8c15d03d5ce7b41ed7f74c6b8579f3a099f8d5cc4f6d22ca6",
+  "bytes": 1527627
+ },
+ "sw.js": {
+  "sha256": "beb6b04db20e84ad968f5b2a465a49e42bf9fc45e88c256dae0b07944b52123a",
+  "CACHE": "lantern-v235"
+ },
+ "database.rules.json": "357b5a78c2ebb1f22ba0f62d3c4d0704724bf6aa2a2645663a3a3a70abf93031",
+ "tests": {
+  "count": 115,
+  "sha256_of_list": "4c59a769c6af98c9795c189484f77e381ec119da34555e7bd66602a664fd38b1",
+  "runner": "node <suite>.js · one at a time · PORT=8780 (python3 http.server at the main checkout) · timeout 300 s · OUT_DIR outside the repo"
+ },
+ "chromium": "141.0.7390.37 (/opt/pw-browsers/chromium-1194) · Playwright 1.56.0 (harness) · puppeteer (suites, CHROME_EXE)",
+ "node": "v22.22.0",
+ "os": "Ubuntu 24.04.5 LTS · Linux 6.18 · 2 CPU · 8 GB",
+ "fonts": "fontconfig 335 faces (md5 38f50711908d) · Thai: Loma, FreeSerif · Google Fonts (Itim) blocked in the harness, allowed in owner screenshots",
+ "harness": {
+  "viewport": "844x390 DPR 1 (replay) · DPR 3 (M6 M9 phone shots) · 1180x820 DPR 2 (iPad shots)",
+  "timezone": "Asia/Bangkok",
+  "locale": "th-TH",
+  "epoch": "2026-11-06 16:59:00 +07 (17:00 crossed at virtual 60 s)",
+  "seed": 20261106,
+  "save": {
+   "name": "P",
+   "kid": 0,
+   "house": 1,
+   "age": 7
+  },
+  "network": "only 127.0.0.1 served; every other host aborted (Firebase gstatic, fonts.googleapis.com)",
+  "serviceWorkers": "blocked",
+  "cache": "new browser + context per run (cold)"
+ }
+}

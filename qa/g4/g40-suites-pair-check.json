@@ -1,0 +1,62 @@
+{
+ "out": "/tmp/claude-0/-home-claude/d3d34840-5e4e-52a0-a344-341c2cb1b80f/scratchpad/g40/v2/pair_smoke",
+ "suites": 4,
+ "bothPass": 3,
+ "mainFails": [
+  "test_167_context_bubble"
+ ],
+ "branchFails": [
+  "test_167_context_bubble"
+ ],
+ "bad": [],
+ "rows": [
+  {
+   "suite": "test_104_lantern",
+   "main": [
+    0
+   ],
+   "branch": [
+    0
+   ],
+   "flaky": false,
+   "verdict": "ok"
+  },
+  {
+   "suite": "test_167_context_bubble",
+   "main": [
+    1,
+    1,
+    1
+   ],
+   "branch": [
+    1,
+    1,
+    1
+   ],
+   "flaky": false,
+   "verdict": "ok (fails on main in this session; no new error line)"
+  },
+  {
+   "suite": "test_170_swordsman",
+   "main": [
+    0
+   ],
+   "branch": [
+    0
+   ],
+   "flaky": false,
+   "verdict": "ok"
+  },
+  {
+   "suite": "test_178_dig_button",
+   "main": [
+    0
+   ],
+   "branch": [
+    0
+   ],
+   "flaky": false,
+   "verdict": "ok"
+  }
+ ]
+}

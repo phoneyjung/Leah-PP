@@ -1,0 +1,840 @@
+{
+ "v2_34": {
+  "stage": "G4.1",
+  "game": "2.34",
+  "branch": "claude/g4-char2",
+  "base": "main eb60c65 (2.33)",
+  "date": "2026-11-08",
+  "env": [
+   "chromium Google Chrome for Testing 153.0.8010.12 ",
+   "node v22.23.4",
+   "main eb60c650922e55c7d81b27b59f180e1f42c367b2",
+   "branch 2e2fc7451cf4cbf9511daadf021bcde2b6f8642b"
+  ],
+  "raw": "outside the repo (scratchpad)",
+  "replay": {
+   "default": {
+    "checkpoints": 24,
+    "bad": 0,
+    "pxTotal": 0,
+    "canvasPxTotal": 0,
+    "stateTotal": 0,
+    "drawDiff": 0,
+    "metaOk": true
+   },
+   "intro": {
+    "checkpoints": 8,
+    "bad": 0,
+    "pxTotal": 0,
+    "canvasPxTotal": 0,
+    "stateTotal": 0,
+    "drawDiff": 0,
+    "metaOk": true
+   },
+   "zoom1": {
+    "checkpoints": 24,
+    "bad": 0,
+    "pxTotal": 0,
+    "canvasPxTotal": 0,
+    "stateTotal": 0,
+    "drawDiff": 0,
+    "metaOk": true
+   }
+  },
+  "suites234": {
+   "test_234_flag": {
+    "tail": "errors 0",
+    "log_sha16": "91dd8a4745684903"
+   },
+   "test_234_files": {
+    "tail": "errors 0",
+    "log_sha16": "834c8bef4816c13d"
+   },
+   "test_234_save": {
+    "tail": "errors 0",
+    "log_sha16": "1cb62280973cc904"
+   },
+   "test_234_net": {
+    "tail": "errors 0",
+    "log_sha16": "01ba522d87787fba",
+    "results": {
+     "off": {
+      "st": "off",
+      "n": 18,
+      "pe": 0
+     },
+     "on": {
+      "st": "ready",
+      "n": 18,
+      "pe": 0
+     },
+     "fields": [
+      "a",
+      "appearance169",
+      "ec",
+      "h",
+      "hc",
+      "k",
+      "lv",
+      "m",
+      "n",
+      "pd",
+      "r",
+      "ti",
+      "w",
+      "x",
+      "y",
+      "z"
+     ],
+     "pd": "1,1,1,1,1,4,3,2",
+     "diff": [],
+     "ps": [
+      {
+       "g": true,
+       "l": true
+      },
+      {
+       "g": true,
+       "l": true
+      }
+     ]
+    }
+   }
+  },
+  "M1": {
+   "judge": "qa/g4/suites_cmp.py v3.2.1",
+   "alldone": "DONE suites=115 runs=250 manifest=a500bd5da5c35d36 suites_sha=dd56bbb3c9293652 env_sha=7aa4ff30ab09f398 target_sha=4d39acb37ac6df80",
+   "summary": {
+    "suites": 115,
+    "legacy": 32,
+    "runs": 250,
+    "bothPass": 111,
+    "bad": [
+     "test_227_swipe"
+    ],
+    "undecided": [],
+    "metaOk": true,
+    "verdict": "regression",
+    "exit": 1
+   },
+   "notPassRuns": [
+    [
+     "test_170_swordsman",
+     "main",
+     "1",
+     "1",
+     "49d9d04966941ee6"
+    ],
+    [
+     "test_222_tk_pack",
+     "branch",
+     "1",
+     "1",
+     "b3ac0ceb584c5ddc"
+    ],
+    [
+     "test_222_tk_pack",
+     "main",
+     "1",
+     "1",
+     "32e786adb320c882"
+    ],
+    [
+     "test_227_swipe",
+     "branch",
+     "1",
+     "1",
+     "ef1bc210004e93c9"
+    ],
+    [
+     "test_170_swordsman",
+     "main",
+     "2",
+     "1",
+     "49d9d04966941ee6"
+    ],
+    [
+     "test_170_swordsman",
+     "branch",
+     "2",
+     "1",
+     "46fa88eacc4d2071"
+    ],
+    [
+     "test_170_swordsman",
+     "branch",
+     "3",
+     "1",
+     "46fa88eacc4d2071"
+    ],
+    [
+     "test_222_tk_pack",
+     "main",
+     "2",
+     "1",
+     "32e786adb320c882"
+    ],
+    [
+     "test_222_tk_pack",
+     "branch",
+     "2",
+     "1",
+     "b3ac0ceb584c5ddc"
+    ],
+    [
+     "test_222_tk_pack",
+     "main",
+     "3",
+     "1",
+     "32e786adb320c882"
+    ],
+    [
+     "test_222_tk_pack",
+     "branch",
+     "3",
+     "1",
+     "b3ac0ceb584c5ddc"
+    ]
+   ],
+   "interrupted": "runner stopped by the 2 h background limit at 71/115 suites (02:19) · resumed with the same OUT and target (accepted, no exit 2)",
+   "diag_test_227": {
+    "loadprobe": {
+     "main": {
+      "n": 30,
+      "hung": 0,
+      "med": 1448,
+      "max": 1573,
+      "over10s": 0
+     },
+     "branch": {
+      "n": 30,
+      "hung": 0,
+      "med": 1431,
+      "max": 1519,
+      "over10s": 0
+     },
+     "stalls": [],
+     "pe": {
+      "main": 0,
+      "branch": 0
+     },
+     "crash": null
+    },
+    "reruns_outside_OUT": [
+     [
+      "main",
+      "1",
+      "0",
+      "39s"
+     ],
+     [
+      "branch",
+      "1",
+      "0",
+      "39s"
+     ],
+     [
+      "branch",
+      "2",
+      "0",
+      "40s"
+     ],
+     [
+      "main",
+      "2",
+      "0",
+      "39s"
+     ],
+     [
+      "main",
+      "3",
+      "0",
+      "39s"
+     ],
+     [
+      "branch",
+      "3",
+      "0",
+      "40s"
+     ],
+     [
+      "branch",
+      "4",
+      "0",
+      "40s"
+     ],
+     [
+      "main",
+      "4",
+      "0",
+      "39s"
+     ],
+     [
+      "main",
+      "5",
+      "0",
+      "40s"
+     ],
+     [
+      "branch",
+      "5",
+      "0",
+      "39s"
+     ],
+     [
+      "branch",
+      "6",
+      "0",
+      "40s"
+     ],
+     [
+      "main",
+      "6",
+      "0",
+      "40s"
+     ],
+     [
+      "main",
+      "7",
+      "0",
+      "40s"
+     ],
+     [
+      "branch",
+      "7",
+      "0",
+      "40s"
+     ],
+     [
+      "branch",
+      "8",
+      "0",
+      "39s"
+     ],
+     [
+      "main",
+      "8",
+      "0",
+      "39s"
+     ]
+    ]
+   }
+  }
+ },
+ "v2_35": {
+  "game": "2.35",
+  "code": "4ba6784",
+  "after": "Codex T39 v0.1 (codex/t39-review-g41 @ cdc4de9)",
+  "suites234": {
+   "test_234_flag": {
+    "tail": "errors 0",
+    "log_sha16": "c297123019ba67e1"
+   },
+   "test_234_files": {
+    "tail": "errors 0",
+    "log_sha16": "748a4843ee1785e9"
+   },
+   "test_234_save": {
+    "tail": "errors 0",
+    "log_sha16": "203a33e1f924f6b6",
+    "K": [
+     [
+      "valid",
+      "ready",
+      true
+     ],
+     [
+      "valid · no from",
+      "ready",
+      true
+     ],
+     [
+      "valid · optional slots left out",
+      "ready",
+      true
+     ],
+     [
+      "future v 3",
+      "failed",
+      true
+     ],
+     [
+      "a string",
+      "failed",
+      true
+     ],
+     [
+      "an array",
+      "failed",
+      true
+     ],
+     [
+      "another set",
+      "failed",
+      true
+     ],
+     [
+      "gender 42",
+      "failed",
+      true
+     ],
+     [
+      "gender left out",
+      "failed",
+      true
+     ],
+     [
+      "gender m on the girl base",
+      "failed",
+      true
+     ],
+     [
+      "base not in the pack",
+      "failed",
+      true
+     ],
+     [
+      "parts an array",
+      "failed",
+      true
+     ],
+     [
+      "parts left out",
+      "failed",
+      true
+     ],
+     [
+      "parts.hair unknown",
+      "failed",
+      true
+     ],
+     [
+      "parts.hair null",
+      "failed",
+      true
+     ],
+     [
+      "parts.head unknown",
+      "failed",
+      true
+     ],
+     [
+      "parts extra key",
+      "failed",
+      true
+     ],
+     [
+      "color null",
+      "failed",
+      true
+     ],
+     [
+      "color.hair an array",
+      "failed",
+      true
+     ],
+     [
+      "color.iris left out",
+      "failed",
+      true
+     ],
+     [
+      "color.skin unknown",
+      "failed",
+      true
+     ],
+     [
+      "color extra key",
+      "failed",
+      true
+     ],
+     [
+      "extra top-level key",
+      "failed",
+      true
+     ],
+     [
+      "from unknown",
+      "failed",
+      true
+     ]
+    ]
+   },
+   "test_234_net": {
+    "tail": "errors 0",
+    "log_sha16": "01ba522d87787fba"
+   }
+  },
+  "K_on_2_34_code": {
+   "errors": 15,
+   "wrongReady": [
+    "gender 42",
+    "gender left out",
+    "parts an array",
+    "parts left out",
+    "parts.hair unknown",
+    "parts.hair null",
+    "parts.head unknown",
+    "parts extra key",
+    "color null",
+    "color.hair an array",
+    "color.iris left out",
+    "color.skin unknown",
+    "color extra key",
+    "extra top-level key",
+    "from unknown"
+   ]
+  },
+  "migration_roundtrip_exact": "7/7 save shapes of M (outside the repo check)",
+  "replay": {
+   "default": {
+    "checkpoints": 24,
+    "bad": 0,
+    "pxTotal": 0,
+    "canvasPxTotal": 0,
+    "stateTotal": 0,
+    "drawDiff": 0,
+    "metaOk": true
+   },
+   "intro": {
+    "checkpoints": 8,
+    "bad": 0,
+    "pxTotal": 0,
+    "canvasPxTotal": 0,
+    "stateTotal": 0,
+    "drawDiff": 0,
+    "metaOk": true
+   },
+   "zoom1": {
+    "checkpoints": 24,
+    "bad": 0,
+    "pxTotal": 0,
+    "canvasPxTotal": 0,
+    "stateTotal": 0,
+    "drawDiff": 0,
+    "metaOk": true
+   }
+  },
+  "test_227_isolated_round2": [
+   [
+    "main",
+    "1",
+    "0",
+    "42s"
+   ],
+   [
+    "branch",
+    "1",
+    "0",
+    "41s"
+   ],
+   [
+    "branch",
+    "2",
+    "0",
+    "38s"
+   ],
+   [
+    "main",
+    "2",
+    "0",
+    "39s"
+   ],
+   [
+    "main",
+    "3",
+    "0",
+    "38s"
+   ],
+   [
+    "branch",
+    "3",
+    "0",
+    "38s"
+   ],
+   [
+    "branch",
+    "4",
+    "0",
+    "39s"
+   ],
+   [
+    "main",
+    "4",
+    "0",
+    "39s"
+   ],
+   [
+    "main",
+    "5",
+    "0",
+    "37s"
+   ],
+   [
+    "branch",
+    "5",
+    "0",
+    "40s"
+   ],
+   [
+    "branch",
+    "6",
+    "0",
+    "37s"
+   ],
+   [
+    "main",
+    "6",
+    "0",
+    "39s"
+   ],
+   [
+    "main",
+    "7",
+    "0",
+    "37s"
+   ],
+   [
+    "branch",
+    "7",
+    "0",
+    "38s"
+   ],
+   [
+    "branch",
+    "8",
+    "0",
+    "38s"
+   ],
+   [
+    "main",
+    "8",
+    "0",
+    "39s"
+   ],
+   [
+    "main",
+    "9",
+    "0",
+    "38s"
+   ],
+   [
+    "branch",
+    "9",
+    "0",
+    "39s"
+   ],
+   [
+    "branch",
+    "10",
+    "0",
+    "38s"
+   ],
+   [
+    "main",
+    "10",
+    "0",
+    "37s"
+   ],
+   [
+    "main",
+    "11",
+    "0",
+    "38s"
+   ],
+   [
+    "branch",
+    "11",
+    "0",
+    "39s"
+   ],
+   [
+    "branch",
+    "12",
+    "0",
+    "40s"
+   ],
+   [
+    "main",
+    "12",
+    "0",
+    "39s"
+   ],
+   [
+    "main",
+    "13",
+    "0",
+    "38s"
+   ],
+   [
+    "branch",
+    "13",
+    "0",
+    "39s"
+   ],
+   [
+    "branch",
+    "14",
+    "0",
+    "38s"
+   ],
+   [
+    "main",
+    "14",
+    "0",
+    "39s"
+   ],
+   [
+    "main",
+    "15",
+    "0",
+    "38s"
+   ],
+   [
+    "branch",
+    "15",
+    "0",
+    "37s"
+   ],
+   [
+    "branch",
+    "16",
+    "0",
+    "39s"
+   ],
+   [
+    "main",
+    "16",
+    "0",
+    "39s"
+   ],
+   [
+    "main",
+    "17",
+    "0",
+    "36s"
+   ],
+   [
+    "branch",
+    "17",
+    "0",
+    "39s"
+   ],
+   [
+    "branch",
+    "18",
+    "0",
+    "38s"
+   ],
+   [
+    "main",
+    "18",
+    "0",
+    "37s"
+   ],
+   [
+    "main",
+    "19",
+    "0",
+    "39s"
+   ],
+   [
+    "branch",
+    "19",
+    "0",
+    "39s"
+   ],
+   [
+    "branch",
+    "20",
+    "0",
+    "39s"
+   ],
+   [
+    "main",
+    "20",
+    "0",
+    "38s"
+   ]
+  ],
+  "M1": {
+   "run": "suites_pair.sh v3.3 + trace · 2026-11-08 11:31:05-15:14:45 · main eb60c65 vs branch 4ba6784 · resumed once at the 2 h limit (13:31, test_201 main run 1 redone)",
+   "judge": {
+    "suites": 115,
+    "legacy": 32,
+    "runs": 242,
+    "bothPass": 112,
+    "bad": [],
+    "undecided": [],
+    "metaOk": true,
+    "verdict": "pass",
+    "exit": 0
+   },
+   "alldone": "manifest=874fcd34d89a68dc suites_sha=dd56bbb3c9293652 env_sha=df418b6bf0d90a60 target_sha=6e0eb8db6aa396f1",
+   "fail_both_sides": {
+    "test_103_village": "main 3/3 = branch 3/3 (planted error)",
+    "test_170_swordsman": "main fail 3/3, branch fail 2/3, same assert !PS.gmSprite170&&!S.gmSprite170",
+    "test_222_tk_pack": "fail 3/3 both, '12 letters at most (online rule)'"
+   },
+   "test_227_swipe": "pass 1/1 both sides (no rerun, no trace file)",
+   "trace_files": {
+    "count": 12,
+    "page_errors": 0,
+    "failed_requests_other_than_google_font_and_manifest_ping": 0,
+    "pending_at_exit": "0 except test_222 main run 2: favicon-32.png"
+   },
+   "machine": {
+    "sys_rows": 243,
+    "max_load1": 3.39,
+    "min_memavailable_kb": 7154512,
+    "max_chrome_procs": 12,
+    "server_log_lines": {
+     "main": 115428,
+     "branch": 116566
+    }
+   },
+   "note": "this pass does not explain the 2.34 test_227 failure; cause still not found. test_227 on branch code overall 31/32, main 32/32"
+  }
+ },
+ "v2_36": {
+  "game": "Lantern Academy 2.36",
+  "code": "715bc84",
+  "after": "Codex T39 v1.0 (ed1ed58): N1-N3 closed, N4 low (GM v2 button hard to read), recommends accepting G4.1",
+  "N4": {
+   "fix": "#c234on uses aria-pressed true/false (game's pressed style / active frame art), no inline colours",
+   "contrast_on_drawn_pixels": {
+    "2.36": 13.77,
+    "2.35_code_with_new_test": 1.09
+   },
+   "shots": "844x390 and 1180x820 checked by eye"
+  },
+  "suites234": {
+   "flag": "errors 0",
+   "files": "errors 0",
+   "save": "errors 0 (MAIN_PORT, part O ran: version 2.33, on true, same true, pe 0)",
+   "net": "errors 0",
+   "K": {
+    "rows": 24,
+    "ready": 3,
+    "failed": 21,
+    "same": 24
+   }
+  },
+  "pair6": {
+   "only": "test_103 test_105 test_109 test_178 test_201 test_227",
+   "judge": {
+    "suites": 6,
+    "legacy": 3,
+    "runs": 16,
+    "bothPass": 5,
+    "bad": [],
+    "undecided": [],
+    "metaOk": true,
+    "verdict": "pass",
+    "exit": 0
+   },
+   "alldone": "manifest=70067c3f88c9bbd3 target_sha=7f72d7407945fdaa"
+  },
+  "note": "main's own GM 'chosen' buttons (age/job/speed) use the same inline style (2 places in main) and are hard to read too; pre-existing, outside the G4 W table, not changed"
+ }
+}

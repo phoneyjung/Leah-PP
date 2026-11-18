@@ -1,0 +1,838 @@
+{
+ "version": "G4.0 v2 · 6 Nov 2569 (after Codex T34 N1)",
+ "base": "main eb60c65 (game 2.33 new world)",
+ "source": "qa/g4/m5_pick.js on main: 32 map ids, 9 reachable (room room2 room3 capital farm royal cavemouth hunt1 town2; the old-world ids land on capital), 1-tile passages by the SOLID rule = 105 in 4 maps (the G0 count 518 in 26/32 maps was made before the new world closed the old maps)",
+ "rule": "every case runs at zoom 75 % and 100 % (ZOOM=0.75 / ZOOM=1) through qa/g4/replay.js SCEN=m5-doors.json · 3 checkpoints per case · a narrow walk fails the run if its path does not cross the passage tile · pass (G4.2): map after = flag off, camera 0 px, canvas + screenshot 0 px with the flag off, draw log (y-sort order) equal",
+ "counts": {
+  "exits": 16,
+  "exitMaps": 8,
+  "narrow": 7,
+  "narrowMaps": 4,
+  "checkpoints": 69
+ },
+ "notCovered": "hunt1 (its ground image is decoded in a Worker the virtual clock does not hold) · stairs up (an action, not an exit)",
+ "cases": [
+  {
+   "id": "X01-capital-n",
+   "kind": "exit",
+   "map": "capital",
+   "exit": "n",
+   "to": "cavemouth",
+   "locked": false,
+   "exitTile": [
+    25,
+    0
+   ],
+   "why": "town square → north road to the cave mouth",
+   "steps": [
+    {
+     "at": [
+      25,
+      4
+     ],
+     "s": 0.4
+    },
+    {
+     "exit": "n",
+     "s": 1.0
+    },
+    {
+     "s": 2.0
+    }
+   ],
+   "start": [
+    25,
+    4
+   ]
+  },
+  {
+   "id": "X02-capital-home",
+   "kind": "exit",
+   "map": "capital",
+   "exit": "home",
+   "to": "room",
+   "locked": false,
+   "exitTile": [
+    44,
+    23
+   ],
+   "why": "house door in town (the kid walks under the house front: head vs roof/door frame)",
+   "steps": [
+    {
+     "at": [
+      45,
+      26
+     ],
+     "s": 0.4
+    },
+    {
+     "exit": "home",
+     "s": 1.0
+    },
+    {
+     "s": 2.0
+    }
+   ],
+   "start": [
+    45,
+    26
+   ]
+  },
+  {
+   "id": "X03-room-door-from-capital",
+   "kind": "exit",
+   "map": "room",
+   "exit": "door",
+   "to": "capital",
+   "locked": false,
+   "exitTile": [
+    4,
+    12
+   ],
+   "why": "leave the house after entering it from capital (stay on the map X02 ended on) → back to capital",
+   "steps": [
+    {
+     "s": 0.4
+    },
+    {
+     "exit": "door",
+     "s": 1.0
+    },
+    {
+     "s": 2.0
+    }
+   ],
+   "stay": true
+  },
+  {
+   "id": "X04-capital-w",
+   "kind": "exit",
+   "map": "capital",
+   "exit": "w",
+   "to": "farm",
+   "locked": true,
+   "exitTile": [
+    0,
+    14
+   ],
+   "why": "LOCKED gate to the farm: the kid must be pushed back, no map change",
+   "steps": [
+    {
+     "at": [
+      1,
+      17
+     ],
+     "s": 0.4
+    },
+    {
+     "exit": "w",
+     "s": 1.0
+    },
+    {
+     "s": 2.0
+    }
+   ],
+   "start": [
+    1,
+    17
+   ]
+  },
+  {
+   "id": "X05-farm-e",
+   "kind": "exit",
+   "map": "farm",
+   "exit": "e",
+   "to": "capital",
+   "locked": false,
+   "exitTile": [
+    59,
+    19
+   ],
+   "why": "farm → town gate (the spawn side of the farm)",
+   "steps": [
+    {
+     "at": [
+      57,
+      21
+     ],
+     "s": 0.4
+    },
+    {
+     "exit": "e",
+     "s": 1.0
+    },
+    {
+     "s": 2.0
+    }
+   ],
+   "start": [
+    57,
+    21
+   ]
+  },
+  {
+   "id": "X06-farm-home",
+   "kind": "exit",
+   "map": "farm",
+   "exit": "home",
+   "to": "room",
+   "locked": false,
+   "exitTile": [
+    24,
+    12
+   ],
+   "why": "farmhouse door (head vs roof/door frame)",
+   "steps": [
+    {
+     "at": [
+      24,
+      16
+     ],
+     "s": 0.4
+    },
+    {
+     "exit": "home",
+     "s": 1.0
+    },
+    {
+     "s": 2.0
+    }
+   ],
+   "start": [
+    24,
+    16
+   ]
+  },
+  {
+   "id": "X07-room-door",
+   "kind": "exit",
+   "map": "room",
+   "exit": "door",
+   "to": "capital",
+   "locked": false,
+   "exitTile": [
+    4,
+    12
+   ],
+   "why": "inside the house → out again; after X06 (farm home) the game sends the kid back to the farm (S.homeFrom), not to capital",
+   "steps": [
+    {
+     "at": [
+      5,
+      9
+     ],
+     "s": 0.4
+    },
+    {
+     "exit": "door",
+     "s": 1.0
+    },
+    {
+     "s": 2.0
+    }
+   ],
+   "start": [
+    5,
+    9
+   ]
+  },
+  {
+   "id": "X08-room2-down",
+   "kind": "exit",
+   "map": "room2",
+   "exit": "down",
+   "to": "room",
+   "locked": false,
+   "exitTile": [
+    2,
+    6
+   ],
+   "why": "upstairs → downstairs (stairs exit inside a house)",
+   "steps": [
+    {
+     "at": [
+      4,
+      8
+     ],
+     "s": 0.4
+    },
+    {
+     "exit": "down",
+     "s": 1.0
+    },
+    {
+     "s": 2.0
+    }
+   ],
+   "start": [
+    4,
+    8
+   ]
+  },
+  {
+   "id": "X09-room3-down",
+   "kind": "exit",
+   "map": "room3",
+   "exit": "down",
+   "to": "room2",
+   "locked": false,
+   "exitTile": [
+    2,
+    6
+   ],
+   "why": "top floor → middle floor (second stairs exit)",
+   "steps": [
+    {
+     "at": [
+      4,
+      8
+     ],
+     "s": 0.4
+    },
+    {
+     "exit": "down",
+     "s": 1.0
+    },
+    {
+     "s": 2.0
+    }
+   ],
+   "start": [
+    4,
+    8
+   ]
+  },
+  {
+   "id": "X10-royal-n",
+   "kind": "exit",
+   "map": "royal",
+   "exit": "n",
+   "to": "cavemouth",
+   "locked": false,
+   "exitTile": [
+    36,
+    1
+   ],
+   "why": "royal grounds → cave mouth",
+   "steps": [
+    {
+     "at": [
+      36,
+      5
+     ],
+     "s": 0.4
+    },
+    {
+     "exit": "n",
+     "s": 1.0
+    },
+    {
+     "s": 2.0
+    }
+   ],
+   "start": [
+    36,
+    5
+   ]
+  },
+  {
+   "id": "X11-royal-s",
+   "kind": "exit",
+   "map": "royal",
+   "exit": "s",
+   "to": "capital",
+   "locked": false,
+   "exitTile": [
+    24,
+    31
+   ],
+   "why": "royal grounds → town",
+   "steps": [
+    {
+     "at": [
+      24,
+      27
+     ],
+     "s": 0.4
+    },
+    {
+     "exit": "s",
+     "s": 1.0
+    },
+    {
+     "s": 2.0
+    }
+   ],
+   "start": [
+    24,
+    27
+   ]
+  },
+  {
+   "id": "X12-cavemouth-s",
+   "kind": "exit",
+   "map": "cavemouth",
+   "exit": "s",
+   "to": "capital",
+   "locked": false,
+   "exitTile": [
+    23,
+    31
+   ],
+   "why": "dark cave mouth → town (lantern held while walking out)",
+   "steps": [
+    {
+     "at": [
+      23,
+      27
+     ],
+     "s": 0.4
+    },
+    {
+     "exit": "s",
+     "s": 1.0
+    },
+    {
+     "s": 2.0
+    }
+   ],
+   "start": [
+    23,
+    27
+   ]
+  },
+  {
+   "id": "X13-town2-n",
+   "kind": "exit",
+   "map": "town2",
+   "exit": "n",
+   "to": "cavemouth",
+   "locked": false,
+   "exitTile": [
+    24,
+    0
+   ],
+   "why": "second town → cave mouth",
+   "steps": [
+    {
+     "at": [
+      24,
+      4
+     ],
+     "s": 0.4
+    },
+    {
+     "exit": "n",
+     "s": 1.0
+    },
+    {
+     "s": 2.0
+    }
+   ],
+   "start": [
+    24,
+    4
+   ]
+  },
+  {
+   "id": "X14-town2-w",
+   "kind": "exit",
+   "map": "town2",
+   "exit": "w",
+   "to": "farm",
+   "locked": false,
+   "exitTile": [
+    0,
+    16
+   ],
+   "why": "second town → farm",
+   "steps": [
+    {
+     "at": [
+      3,
+      17
+     ],
+     "s": 0.4
+    },
+    {
+     "exit": "w",
+     "s": 1.0
+    },
+    {
+     "s": 2.0
+    }
+   ],
+   "start": [
+    3,
+    17
+   ]
+  },
+  {
+   "id": "X15-town2-e",
+   "kind": "exit",
+   "map": "town2",
+   "exit": "e",
+   "to": "scn_east",
+   "locked": false,
+   "exitTile": [
+    47,
+    16
+   ],
+   "why": "second town → east road (the game sends it to capital: redirect kept as is)",
+   "steps": [
+    {
+     "at": [
+      43,
+      16
+     ],
+     "s": 0.4
+    },
+    {
+     "exit": "e",
+     "s": 1.0
+    },
+    {
+     "s": 2.0
+    }
+   ],
+   "start": [
+    43,
+    16
+   ]
+  },
+  {
+   "id": "X16-town2-s",
+   "kind": "exit",
+   "map": "town2",
+   "exit": "s",
+   "to": "plaza",
+   "locked": false,
+   "exitTile": [
+    24,
+    31
+   ],
+   "why": "second town south gate: the exit tile sits next to a 1-tile passage (the game sends it to capital)",
+   "steps": [
+    {
+     "at": [
+      24,
+      27
+     ],
+     "s": 0.4
+    },
+    {
+     "exit": "s",
+     "s": 1.0
+    },
+    {
+     "s": 2.0
+    }
+   ],
+   "start": [
+    24,
+    27
+   ]
+  },
+  {
+   "id": "N01-capital-31-17",
+   "kind": "narrow",
+   "map": "capital",
+   "cell": [
+    31,
+    17
+   ],
+   "dir": "EW",
+   "nearExit": false,
+   "start": [
+    28,
+    17
+   ],
+   "end": [
+    34,
+    17
+   ],
+   "why": "between town buildings: roofs and walls on both sides",
+   "steps": [
+    {
+     "at": [
+      28,
+      17
+     ],
+     "s": 0.4
+    },
+    {
+     "walk": [
+      6,
+      0
+     ],
+     "via": [
+      31,
+      17
+     ],
+     "s": 1.0
+    },
+    {
+     "s": 1.6
+    }
+   ]
+  },
+  {
+   "id": "N02-capital-31-26",
+   "kind": "narrow",
+   "map": "capital",
+   "cell": [
+    31,
+    26
+   ],
+   "dir": "EW",
+   "nearExit": false,
+   "start": [
+    28,
+    26
+   ],
+   "end": [
+    34,
+    26
+   ],
+   "why": "between town buildings: roofs and walls on both sides",
+   "steps": [
+    {
+     "at": [
+      28,
+      26
+     ],
+     "s": 0.4
+    },
+    {
+     "walk": [
+      6,
+      0
+     ],
+     "via": [
+      31,
+      26
+     ],
+     "s": 1.0
+    },
+    {
+     "s": 1.6
+    }
+   ]
+  },
+  {
+   "id": "N03-town2-15-9",
+   "kind": "narrow",
+   "map": "town2",
+   "cell": [
+    15,
+    9
+   ],
+   "dir": "NS",
+   "nearExit": false,
+   "start": [
+    15,
+    6
+   ],
+   "end": [
+    15,
+    12
+   ],
+   "why": "between houses in the second town",
+   "steps": [
+    {
+     "at": [
+      15,
+      6
+     ],
+     "s": 0.4
+    },
+    {
+     "walk": [
+      0,
+      6
+     ],
+     "via": [
+      15,
+      9
+     ],
+     "s": 1.0
+    },
+    {
+     "s": 1.6
+    }
+   ]
+  },
+  {
+   "id": "N04-town2-33-9",
+   "kind": "narrow",
+   "map": "town2",
+   "cell": [
+    33,
+    9
+   ],
+   "dir": "NS",
+   "nearExit": false,
+   "start": [
+    33,
+    6
+   ],
+   "end": [
+    33,
+    12
+   ],
+   "why": "between houses in the second town",
+   "steps": [
+    {
+     "at": [
+      33,
+      6
+     ],
+     "s": 0.4
+    },
+    {
+     "walk": [
+      0,
+      6
+     ],
+     "via": [
+      33,
+      9
+     ],
+     "s": 1.0
+    },
+    {
+     "s": 1.6
+    }
+   ]
+  },
+  {
+   "id": "N05-farm-46-3",
+   "kind": "narrow",
+   "map": "farm",
+   "cell": [
+    46,
+    3
+   ],
+   "dir": "EW",
+   "nearExit": true,
+   "start": [
+    43,
+    3
+   ],
+   "end": [
+    49,
+    3
+   ],
+   "why": "gaps in the farm fences · next to an exit",
+   "steps": [
+    {
+     "at": [
+      43,
+      3
+     ],
+     "s": 0.4
+    },
+    {
+     "walk": [
+      6,
+      0
+     ],
+     "via": [
+      46,
+      3
+     ],
+     "s": 1.0
+    },
+    {
+     "s": 1.6
+    }
+   ]
+  },
+  {
+   "id": "N06-farm-1-12",
+   "kind": "narrow",
+   "map": "farm",
+   "cell": [
+    1,
+    12
+   ],
+   "dir": "NS",
+   "nearExit": false,
+   "start": [
+    1,
+    9
+   ],
+   "end": [
+    1,
+    15
+   ],
+   "why": "gaps in the farm fences",
+   "steps": [
+    {
+     "at": [
+      1,
+      9
+     ],
+     "s": 0.4
+    },
+    {
+     "walk": [
+      0,
+      6
+     ],
+     "via": [
+      1,
+      12
+     ],
+     "s": 1.0
+    },
+    {
+     "s": 1.6
+    }
+   ]
+  },
+  {
+   "id": "N07-room-11-3",
+   "kind": "narrow",
+   "map": "room",
+   "cell": [
+    11,
+    3
+   ],
+   "dir": "EW",
+   "nearExit": false,
+   "start": [
+    8,
+    3
+   ],
+   "end": [
+    14,
+    3
+   ],
+   "why": "between furniture inside the house",
+   "steps": [
+    {
+     "at": [
+      8,
+      3
+     ],
+     "s": 0.4
+    },
+    {
+     "walk": [
+      6,
+      0
+     ],
+     "via": [
+      11,
+      3
+     ],
+     "s": 1.0
+    },
+    {
+     "s": 1.6
+    }
+   ]
+  }
+ ]
+}

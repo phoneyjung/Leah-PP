@@ -1,0 +1,871 @@
+{
+ "base": "main eb60c65 (index.html sha256 9fdff13a…)",
+ "suites": 115,
+ "pass": 112,
+ "fail": [
+  "test_167_context_bubble.js",
+  "test_170_swordsman.js",
+  "test_178_dig_button.js"
+ ],
+ "seconds": 6615.4,
+ "rows": [
+  {
+   "suite": "test_103_village.js",
+   "sha256_16": "5816b7e75f15be57",
+   "exit": 0,
+   "seconds": 47.2
+  },
+  {
+   "suite": "test_104_lantern.js",
+   "sha256_16": "c5d0857673daa1d2",
+   "exit": 0,
+   "seconds": 23.3
+  },
+  {
+   "suite": "test_105_gm.js",
+   "sha256_16": "24e362d4c9d44caa",
+   "exit": 0,
+   "seconds": 53.6
+  },
+  {
+   "suite": "test_106_g9.js",
+   "sha256_16": "ef9fe8bfc3f468fd",
+   "exit": 0,
+   "seconds": 36.3
+  },
+  {
+   "suite": "test_107_h9.js",
+   "sha256_16": "298cec1db6004906",
+   "exit": 0,
+   "seconds": 38.1
+  },
+  {
+   "suite": "test_109_mail.js",
+   "sha256_16": "1c4774f8fd6b04f6",
+   "exit": 0,
+   "seconds": 70.1
+  },
+  {
+   "suite": "test_110_neww.js",
+   "sha256_16": "0c7c54a0a7f4f863",
+   "exit": 0,
+   "seconds": 33.7
+  },
+  {
+   "suite": "test_111_corners.js",
+   "sha256_16": "5b37db7396c6030a",
+   "exit": 0,
+   "seconds": 12.5
+  },
+  {
+   "suite": "test_112_g9b.js",
+   "sha256_16": "eda36f5dc55bac6e",
+   "exit": 0,
+   "seconds": 19.5
+  },
+  {
+   "suite": "test_114_life.js",
+   "sha256_16": "1bffa1b09b5117d2",
+   "exit": 0,
+   "seconds": 38.0
+  },
+  {
+   "suite": "test_115_farmart.js",
+   "sha256_16": "de6d2740e437874e",
+   "exit": 0,
+   "seconds": 22.2
+  },
+  {
+   "suite": "test_116_walkfirst.js",
+   "sha256_16": "b38246808e569027",
+   "exit": 0,
+   "seconds": 24.1
+  },
+  {
+   "suite": "test_117_button.js",
+   "sha256_16": "a21c5469a188d30b",
+   "exit": 0,
+   "seconds": 20.5
+  },
+  {
+   "suite": "test_118_shadow.js",
+   "sha256_16": "e60346f0efff65d0",
+   "exit": 0,
+   "seconds": 33.6
+  },
+  {
+   "suite": "test_119_music.js",
+   "sha256_16": "13d7a7dad936274b",
+   "exit": 0,
+   "seconds": 34.6
+  },
+  {
+   "suite": "test_121_beds.js",
+   "sha256_16": "30e72c12f118e359",
+   "exit": 0,
+   "seconds": 22.7
+  },
+  {
+   "suite": "test_122_spots.js",
+   "sha256_16": "24686871713f7d72",
+   "exit": 0,
+   "seconds": 29.7
+  },
+  {
+   "suite": "test_123_art2.js",
+   "sha256_16": "5e3a5ff61a940d70",
+   "exit": 0,
+   "seconds": 22.9
+  },
+  {
+   "suite": "test_124_sit.js",
+   "sha256_16": "df21f87c48c150a5",
+   "exit": 0,
+   "seconds": 28.0
+  },
+  {
+   "suite": "test_129_layout.js",
+   "sha256_16": "69077b7a161294b6",
+   "exit": 0,
+   "seconds": 31.2
+  },
+  {
+   "suite": "test_132_install.js",
+   "sha256_16": "b41221b4178aa600",
+   "exit": 0,
+   "seconds": 19.1
+  },
+  {
+   "suite": "test_134_context.js",
+   "sha256_16": "caec2d2ee8e8c60f",
+   "exit": 0,
+   "seconds": 20.6
+  },
+  {
+   "suite": "test_135_robot.js",
+   "sha256_16": "89f9787a6c2160bc",
+   "exit": 0,
+   "seconds": 20.8
+  },
+  {
+   "suite": "test_136_house.js",
+   "sha256_16": "54758853bdab6f0b",
+   "exit": 0,
+   "seconds": 25.2
+  },
+  {
+   "suite": "test_137_room.js",
+   "sha256_16": "ce8acfa6477d0c05",
+   "exit": 0,
+   "seconds": 19.3
+  },
+  {
+   "suite": "test_138_deco.js",
+   "sha256_16": "ec4476b738720e1a",
+   "exit": 0,
+   "seconds": 25.4
+  },
+  {
+   "suite": "test_139_levels.js",
+   "sha256_16": "e05b5711a4d277d8",
+   "exit": 0,
+   "seconds": 36.8
+  },
+  {
+   "suite": "test_142_use.js",
+   "sha256_16": "c68ae938e40c3cec",
+   "exit": 0,
+   "seconds": 27.3
+  },
+  {
+   "suite": "test_143_fine.js",
+   "sha256_16": "f58636ff9612e0ad",
+   "exit": 0,
+   "seconds": 15.7
+  },
+  {
+   "suite": "test_144_shop.js",
+   "sha256_16": "763e303fea26df2a",
+   "exit": 0,
+   "seconds": 15.1
+  },
+  {
+   "suite": "test_146_fixes.js",
+   "sha256_16": "021224548a903378",
+   "exit": 0,
+   "seconds": 39.4
+  },
+  {
+   "suite": "test_148_rings.js",
+   "sha256_16": "68cb0c4ed178c0f5",
+   "exit": 0,
+   "seconds": 26.1
+  },
+  {
+   "suite": "test_149_ui.js",
+   "sha256_16": "b795f7d3b36328f2",
+   "exit": 0,
+   "seconds": 34.7
+  },
+  {
+   "suite": "test_150_bugs.js",
+   "sha256_16": "6aed18df3cf42dee",
+   "exit": 0,
+   "seconds": 31.8
+  },
+  {
+   "suite": "test_151_remaining.js",
+   "sha256_16": "ae36ffb830a3b7e6",
+   "exit": 0,
+   "seconds": 64.4
+  },
+  {
+   "suite": "test_152_future_art.js",
+   "sha256_16": "59f4374bd858cd7d",
+   "exit": 0,
+   "seconds": 36.5
+  },
+  {
+   "suite": "test_153_menu_icons.js",
+   "sha256_16": "6b4dc11feaf53bec",
+   "exit": 0,
+   "seconds": 39.2
+  },
+  {
+   "suite": "test_154_equipment.js",
+   "sha256_16": "89bc7cef61298a4e",
+   "exit": 0,
+   "seconds": 36.5
+  },
+  {
+   "suite": "test_155_quiet_gold.js",
+   "sha256_16": "3c13fd9ae6cfad70",
+   "exit": 0,
+   "seconds": 31.8
+  },
+  {
+   "suite": "test_156_art.js",
+   "sha256_16": "b66551bf42591276",
+   "exit": 0,
+   "seconds": 59.8
+  },
+  {
+   "suite": "test_157_equipment.js",
+   "sha256_16": "c1fc6b312cef1a8f",
+   "exit": 0,
+   "seconds": 139.6
+  },
+  {
+   "suite": "test_158_quiz_close.js",
+   "sha256_16": "0c80809a01f4e896",
+   "exit": 0,
+   "seconds": 39.9
+  },
+  {
+   "suite": "test_159_question_loading.js",
+   "sha256_16": "214cbf433786f065",
+   "exit": 0,
+   "seconds": 54.8
+  },
+  {
+   "suite": "test_160_room_drag.js",
+   "sha256_16": "432a15569f10ce10",
+   "exit": 0,
+   "seconds": 44.1
+  },
+  {
+   "suite": "test_162_farm_feedback.js",
+   "sha256_16": "34f068d91246bee7",
+   "exit": 0,
+   "seconds": 58.8
+  },
+  {
+   "suite": "test_163_crystal_boundary.js",
+   "sha256_16": "051d6f3af8bf7586",
+   "exit": 0,
+   "seconds": 21.5
+  },
+  {
+   "suite": "test_164_house_grid.js",
+   "sha256_16": "0524c7678ecc56fd",
+   "exit": 0,
+   "seconds": 34.4
+  },
+  {
+   "suite": "test_165_house_feedback.js",
+   "sha256_16": "ee557ff821ad2379",
+   "exit": 0,
+   "seconds": 19.5
+  },
+  {
+   "suite": "test_166_rotate_drag.js",
+   "sha256_16": "4faa83ca1c5ff829",
+   "exit": 0,
+   "seconds": 19.0
+  },
+  {
+   "suite": "test_167_context_bubble.js",
+   "sha256_16": "fc171caaa5c16e40",
+   "exit": 1,
+   "seconds": 84.6,
+   "errors": null,
+   "tail": [
+    "TimeoutError: Waiting failed: 30000ms exceeded"
+   ]
+  },
+  {
+   "suite": "test_168_piano_glide.js",
+   "sha256_16": "ff018772a18599dd",
+   "exit": 0,
+   "seconds": 63.9
+  },
+  {
+   "suite": "test_169_character_studio.js",
+   "sha256_16": "33cd4ac980c68b11",
+   "exit": 0,
+   "seconds": 77.0
+  },
+  {
+   "suite": "test_170_swordsman.js",
+   "sha256_16": "ba9157f5a5f932bb",
+   "exit": 1,
+   "seconds": 20.3,
+   "errors": null,
+   "tail": [
+    "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:",
+    "  assert(await p.evaluate(()=>!PS.gmSprite170&&!S.gmSprite170))",
+    "{ swError: false, swPending: false, swReady: true, gm: true }"
+   ]
+  },
+  {
+   "suite": "test_171_kid_hud.js",
+   "sha256_16": "0c9addde45b473a5",
+   "exit": 0,
+   "seconds": 66.6
+  },
+  {
+   "suite": "test_172_float_joy.js",
+   "sha256_16": "f6c269b7761a5309",
+   "exit": 0,
+   "seconds": 76.9
+  },
+  {
+   "suite": "test_174_compass_sit.js",
+   "sha256_16": "a8390ee888b98b93",
+   "exit": 0,
+   "seconds": 93.5
+  },
+  {
+   "suite": "test_175_status.js",
+   "sha256_16": "c8f5f749049d215a",
+   "exit": 0,
+   "seconds": 73.6
+  },
+  {
+   "suite": "test_176_steer_and_act.js",
+   "sha256_16": "a74b935403b4664b",
+   "exit": 0,
+   "seconds": 187.4
+  },
+  {
+   "suite": "test_177_question_order.js",
+   "sha256_16": "4f6e19e99351fd35",
+   "exit": 0,
+   "seconds": 77.6
+  },
+  {
+   "suite": "test_178_dig_button.js",
+   "sha256_16": "605aadae8168c659",
+   "exit": 1,
+   "seconds": 85.2,
+   "errors": [
+    "A2: the action button did not start the dig",
+    "A5: the action button did not start the dig",
+    "A8: the action button did not start the dig",
+    "B2: dig did not start",
+    "C0: dig true hp 400 stops 4 after a missed strike",
+    "C1: dig true hp 400 stops 4 after a missed strike",
+    "C2: dig did not start",
+    "D2: dig did not start",
+    "K2: dig did not start"
+   ],
+   "tail": []
+  },
+  {
+   "suite": "test_179_cooldown_sweep.js",
+   "sha256_16": "fbe3ac4fd7f7adca",
+   "exit": 0,
+   "seconds": 46.0
+  },
+  {
+   "suite": "test_180_rov_cluster.js",
+   "sha256_16": "98917691de8b832e",
+   "exit": 0,
+   "seconds": 95.4
+  },
+  {
+   "suite": "test_181_potion_charges.js",
+   "sha256_16": "aac5400e55c580dc",
+   "exit": 0,
+   "seconds": 61.6
+  },
+  {
+   "suite": "test_185_age_line.js",
+   "sha256_16": "1a224fa59ef5411c",
+   "exit": 0,
+   "seconds": 63.6
+  },
+  {
+   "suite": "test_186_world_map.js",
+   "sha256_16": "4f018dac4405c757",
+   "exit": 0,
+   "seconds": 164.5
+  },
+  {
+   "suite": "test_187_main_quest.js",
+   "sha256_16": "a301f8492126fbb4",
+   "exit": 0,
+   "seconds": 107.1
+  },
+  {
+   "suite": "test_187_play_fixes.js",
+   "sha256_16": "e25c7bbaa61afe3a",
+   "exit": 0,
+   "seconds": 68.5
+  },
+  {
+   "suite": "test_188_map_columns.js",
+   "sha256_16": "282c43136e6f6131",
+   "exit": 0,
+   "seconds": 84.9
+  },
+  {
+   "suite": "test_193_character_screens.js",
+   "sha256_16": "ebcdbd1c25cf2344",
+   "exit": 0,
+   "seconds": 115.0
+  },
+  {
+   "suite": "test_195_screen_art.js",
+   "sha256_16": "029e786165032354",
+   "exit": 0,
+   "seconds": 67.2
+  },
+  {
+   "suite": "test_196_cave_music.js",
+   "sha256_16": "8e922711c18677e1",
+   "exit": 0,
+   "seconds": 65.8
+  },
+  {
+   "suite": "test_199_map_grid.js",
+   "sha256_16": "3695fafeeaedd567",
+   "exit": 0,
+   "seconds": 50.6
+  },
+  {
+   "suite": "test_201_adult_trial.js",
+   "sha256_16": "3c56e87833b79446",
+   "exit": 0,
+   "seconds": 64.6
+  },
+  {
+   "suite": "test_202_adult_variant.js",
+   "sha256_16": "3de28b49da18bd87",
+   "exit": 0,
+   "seconds": 34.2
+  },
+  {
+   "suite": "test_203_adult96_zoom.js",
+   "sha256_16": "96499dc5576a6d74",
+   "exit": 0,
+   "seconds": 46.5
+  },
+  {
+   "suite": "test_204_adult72.js",
+   "sha256_16": "a0e34eeb9cf9c7cd",
+   "exit": 0,
+   "seconds": 43.7
+  },
+  {
+   "suite": "test_205_adult_colors.js",
+   "sha256_16": "0bad12b989dbe3ec",
+   "exit": 0,
+   "seconds": 64.6
+  },
+  {
+   "suite": "test_206_adult_walk.js",
+   "sha256_16": "97e57ff82481ef5b",
+   "exit": 0,
+   "seconds": 68.7
+  },
+  {
+   "suite": "test_207_stagec.js",
+   "sha256_16": "e7ffe8dc81487575",
+   "exit": 0,
+   "seconds": 69.8
+  },
+  {
+   "suite": "test_208_skin_tone.js",
+   "sha256_16": "6aeba80d50c8b065",
+   "exit": 0,
+   "seconds": 64.2
+  },
+  {
+   "suite": "test_209_trial_close.js",
+   "sha256_16": "9fe3717ee2bc0110",
+   "exit": 0,
+   "seconds": 26.7
+  },
+  {
+   "suite": "test_210_taps.js",
+   "sha256_16": "91514864eca7558d",
+   "exit": 0,
+   "seconds": 49.6
+  },
+  {
+   "suite": "test_211_h9_gate.js",
+   "sha256_16": "09d6cd7ec30cac1a",
+   "exit": 0,
+   "seconds": 25.7
+  },
+  {
+   "suite": "test_212_cave_picture.js",
+   "sha256_16": "a0b16dc9495fe8de",
+   "exit": 0,
+   "seconds": 54.3
+  },
+  {
+   "suite": "test_213_girl3.js",
+   "sha256_16": "4977b5690f549700",
+   "exit": 0,
+   "seconds": 47.9
+  },
+  {
+   "suite": "test_213_labels.js",
+   "sha256_16": "34e7691eb29b4855",
+   "exit": 0,
+   "seconds": 96.4
+  },
+  {
+   "suite": "test_214_walks.js",
+   "sha256_16": "b981b27f4f59a5d8",
+   "exit": 0,
+   "seconds": 144.8
+  },
+  {
+   "suite": "test_215_colours.js",
+   "sha256_16": "c45a62bbfe8ac3bb",
+   "exit": 0,
+   "seconds": 80.2
+  },
+  {
+   "suite": "test_216_mapnames.js",
+   "sha256_16": "ef137bb199987c97",
+   "exit": 0,
+   "seconds": 217.1
+  },
+  {
+   "suite": "test_217_backdrop.js",
+   "sha256_16": "d4dbbcf55addaefa",
+   "exit": 0,
+   "seconds": 65.7
+  },
+  {
+   "suite": "test_217_icons.js",
+   "sha256_16": "7286ae99a80af4fb",
+   "exit": 0,
+   "seconds": 54.6
+  },
+  {
+   "suite": "test_218_panel.js",
+   "sha256_16": "e36e65669e4e3f9d",
+   "exit": 0,
+   "seconds": 144.8
+  },
+  {
+   "suite": "test_219_paperdoll.js",
+   "sha256_16": "bfc93fc35f27f997",
+   "exit": 0,
+   "seconds": 178.6
+  },
+  {
+   "suite": "test_220_local_sprite.js",
+   "sha256_16": "1339072c721ff913",
+   "exit": 0,
+   "seconds": 90.9
+  },
+  {
+   "suite": "test_221_tk.js",
+   "sha256_16": "f9edbb201ee9cb5c",
+   "exit": 0,
+   "seconds": 132.1
+  },
+  {
+   "suite": "test_222_tk_pack.js",
+   "sha256_16": "f0f78a23d2eb8610",
+   "exit": 0,
+   "seconds": 53.0
+  },
+  {
+   "suite": "test_223_kid_no_fight.js",
+   "sha256_16": "3099758170666951",
+   "exit": 0,
+   "seconds": 60.3
+  },
+  {
+   "suite": "test_226_dress.js",
+   "sha256_16": "e3185574065366b3",
+   "exit": 0,
+   "seconds": 133.3
+  },
+  {
+   "suite": "test_226_switch.js",
+   "sha256_16": "d262c81587995571",
+   "exit": 0,
+   "seconds": 15.5
+  },
+  {
+   "suite": "test_227_swipe.js",
+   "sha256_16": "b7dbe9f1a14669f5",
+   "exit": 0,
+   "seconds": 37.9
+  },
+  {
+   "suite": "test_228_rail.js",
+   "sha256_16": "20ca5d4332b56795",
+   "exit": 0,
+   "seconds": 58.6
+  },
+  {
+   "suite": "test_229_pieces.js",
+   "sha256_16": "5ad0eb8d52cd5dc0",
+   "exit": 0,
+   "seconds": 33.6
+  },
+  {
+   "suite": "test_230_kid8.js",
+   "sha256_16": "c5a49b13d8fc268a",
+   "exit": 0,
+   "seconds": 85.0
+  },
+  {
+   "suite": "test_bug_23_ladder.js",
+   "sha256_16": "bd2bb3aaab303490",
+   "exit": 0,
+   "seconds": 165.0
+  },
+  {
+   "suite": "test_bug_24_close.js",
+   "sha256_16": "5f1ee932e7aff77c",
+   "exit": 0,
+   "seconds": 169.5
+  },
+  {
+   "suite": "test_bugs_15_16_quiz.js",
+   "sha256_16": "244ef8ba67ea098f",
+   "exit": 0,
+   "seconds": 66.0
+  },
+  {
+   "suite": "test_bugs_17_20_ui.js",
+   "sha256_16": "b3627eebd9899634",
+   "exit": 0,
+   "seconds": 32.3
+  },
+  {
+   "suite": "test_bugs_7_14_farm.js",
+   "sha256_16": "272377c81cd29409",
+   "exit": 0,
+   "seconds": 26.1
+  },
+  {
+   "suite": "test_crystal_step1_barrier.js",
+   "sha256_16": "9a4b526eaacab64f",
+   "exit": 0,
+   "seconds": 42.1
+  },
+  {
+   "suite": "test_decor.js",
+   "sha256_16": "d4fad0ca7e1509f4",
+   "exit": 0,
+   "seconds": 0.2
+  },
+  {
+   "suite": "test_decor_demo.js",
+   "sha256_16": "136a505b48bfe263",
+   "exit": 0,
+   "seconds": 3.5
+  },
+  {
+   "suite": "test_minigames.js",
+   "sha256_16": "539d8eeb3b1290cf",
+   "exit": 0,
+   "seconds": 42.3
+  },
+  {
+   "suite": "test_questions_9.js",
+   "sha256_16": "2c7bc7637bda1b0b",
+   "exit": 0,
+   "seconds": 21.7
+  },
+  {
+   "suite": "test_risk_monthly.js",
+   "sha256_16": "83aae671299b6d77",
+   "exit": 0,
+   "seconds": 34.8
+  },
+  {
+   "suite": "test_water_demo.js",
+   "sha256_16": "2b4f11b7c7dbf996",
+   "exit": 0,
+   "seconds": 73.3
+  }
+ ],
+ "reruns": {
+  "how": "each suite alone, 3 more runs, after the full run (server restarted once at 03:28; the 2 runs it touched were deleted and run again)",
+  "results": {
+   "test_157_equipment.js": [
+    {
+     "run": 1,
+     "exit": 0,
+     "seconds": 137.8,
+     "errors": null
+    },
+    {
+     "run": 2,
+     "exit": 0,
+     "seconds": 137.8,
+     "errors": null
+    },
+    {
+     "run": 3,
+     "exit": 0,
+     "seconds": 137.1,
+     "errors": null
+    }
+   ],
+   "test_167_context_bubble.js": [
+    {
+     "run": 1,
+     "exit": 1,
+     "seconds": 45.9,
+     "errors": null
+    },
+    {
+     "run": 2,
+     "exit": 1,
+     "seconds": 45.8,
+     "errors": null
+    },
+    {
+     "run": 3,
+     "exit": 1,
+     "seconds": 64.4,
+     "errors": null
+    }
+   ],
+   "test_170_swordsman.js": [
+    {
+     "run": 1,
+     "exit": 1,
+     "seconds": 20.8,
+     "errors": null
+    },
+    {
+     "run": 2,
+     "exit": 1,
+     "seconds": 19.9,
+     "errors": null
+    },
+    {
+     "run": 3,
+     "exit": 1,
+     "seconds": 20.3,
+     "errors": null
+    }
+   ],
+   "test_176_steer_and_act.js": [
+    {
+     "run": 1,
+     "exit": 0,
+     "seconds": 186.2,
+     "errors": null
+    },
+    {
+     "run": 2,
+     "exit": 0,
+     "seconds": 186.7,
+     "errors": null
+    },
+    {
+     "run": 3,
+     "exit": 0,
+     "seconds": 186.6,
+     "errors": null
+    }
+   ],
+   "test_178_dig_button.js": [
+    {
+     "run": 1,
+     "exit": 1,
+     "seconds": 86.2,
+     "errors": 9
+    },
+    {
+     "run": 2,
+     "exit": 1,
+     "seconds": 86.3,
+     "errors": 9
+    },
+    {
+     "run": 3,
+     "exit": 1,
+     "seconds": 86.3,
+     "errors": 9
+    }
+   ],
+   "test_risk_monthly.js": [
+    {
+     "run": 1,
+     "exit": 0,
+     "seconds": 34.6,
+     "errors": null
+    },
+    {
+     "run": 2,
+     "exit": 0,
+     "seconds": 34.7,
+     "errors": null
+    },
+    {
+     "run": 3,
+     "exit": 0,
+     "seconds": 34.6,
+     "errors": null
+    }
+   ]
+  }
+ },
+ "flaky3": {
+  "test_157_equipment.js": "pass 4/4",
+  "test_176_steer_and_act.js": "pass 4/4",
+  "test_risk_monthly.js": "pass 4/4"
+ },
+ "failOnMain": {
+  "test_167_context_bubble.js": "fail 4/4 · same place every time: inspect() waits 30 s for the context balloon on farm at (1101,783), none appears (suite written for 1.67, 6 Oct)",
+  "test_170_swordsman.js": "fail 4/4 · same assert every time: after switching save in the picker PS.gmSprite170 is still set (suite written for 1.70, last updated 1.93)",
+  "test_178_dig_button.js": "fail 4/4 · the same 9 errors every time (A2 A5 A8 B2 C0 C1 C2 D2 K2: the dig does not start) (suite written for 1.78)"
+ },
+ "M1rule": "G4 branch, flag off: the 112 suites pass, the 3 above fail with the same signature (no new error line), the flaky 3 are run alone and reported apart",
+ "v2_after_T34": {
+  "when": "6 Nov 2569 22:05–22:20, a restarted machine (same 2 CPU / Chromium 141 / Node 22), paired runner qa/g4/suites_pair.sh, main vs main",
+  "results": {
+   "test_104_lantern.js": "pass 1/1 both sides",
+   "test_170_swordsman.js": "PASS 1/1 both sides (failed 4/4 at 01–04 h)",
+   "test_178_dig_button.js": "PASS 1/1 both sides (failed 4/4 at 01–04 h; Codex Chromium 151: pass 2/2)",
+   "test_167_context_bubble.js": "fail 3/3 both sides, at two different places (waiting for #context167 · inspect() on farm)"
+  },
+  "conclusion": "the 3 \"fail on main\" of the first session are environment-sensitive (real-time sleeps on a slow shared machine), not a fixed baseline → M1 is judged only main vs branch in the same session (suites_pair.sh + suites_cmp.py); the table above is history, never a reference"
+ }
+}

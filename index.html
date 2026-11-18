@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.33';
+const VERSION='Lantern Academy 2.44';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -768,7 +768,7 @@ function monHit(mo,dmg,src,type){if(mo.happy)return;if(src!=='net')mo.hitByMe=tr
   if(mo.hp<=0&&mo.kind==='slime'&&!mo.mini&&monMul()>=1.6&&!(Net.coop()&&!Net.isHost())){for(let i=0;i<2;i++){const m2=mkMon('slime',mo.x+(i?-12:12),mo.y+6,monMul()*.35);m2.mini=1;m2.w=18;m2.h=16;m2.st='chase';m2.idx=MONS.length;MONS.push(m2)}}
   if(mo.hp<=0){sfx('kill');mo.happy=1;mo.gone=1.6;if(mo.hitByMe){mission('help');bump('help');if(S.job){S.jp=S.jp||{};S.jp[S.job]=(S.jp[S.job]||0)+(mo.boss?10:1)}gainExp(mo.exp);drop(mo);if(!mo.boss)tryPet(mo.kind)}if(mo.boss&&M.id!=='cave3'){if(mo.hitByMe){S.coins+=100;save()}(M.chests||(M.chests=[])).push({x:mo.x,y:mo.y+20,open:false,id:M.id+'-boss-'+today(),big:1})}else if(mo.boss&&mo.hitByMe){S.boss=true;S.pts=(S.pts||0)+10;Net.addPoints(10);save();bossWin()}}}
 const PEB={on:false,x:0,y:0,row:0,hop:0};
-function gainExp(n){if(M&&M.expMul)n=Math.round(n*M.expMul);if(S.buff2&&S.buff2.until>Date.now())n=Math.round(n*(1+S.buff2.v/100));n=Math.round(n*(1+(petBonus('expP')+buffV('expP'))/100));if(S.cardBook&&CAVE1_SET.every(c=>S.cardBook.includes(c)))n=Math.round(n*1.03);S.exp+=n;TXT.push({x:P.x,y:P.y-72,s:'+'+n+' EXP',c:'#ffe36b',t:0});while(S.exp>=needExp()){S.exp-=needExp();S.lv++;S.hp=hpMax();sfx('lvl');say('⭐ '+t('lvup')+' Lv '+S.lv);for(let i=0;i<24;i++)FX.push({k:'star',x:P.x,y:P.y-30,vx:Math.cos(i/24*6.28)*60,vy:Math.sin(i/24*6.28)*60,t:0,life:.9})}hud()}
+function gainExp(n){if(M&&M.expMul)n=Math.round(n*M.expMul);if(S.buff2&&S.buff2.until>Date.now())n=Math.round(n*(1+S.buff2.v/100));n=Math.round(n*(1+(petBonus('expP')+buffV('expP'))/100));if(S.cardBook&&CAVE1_SET.every(c=>S.cardBook.includes(c)))n=Math.round(n*1.03);S.exp+=n;TXT.push({x:P.x,y:P.y-c234D('head',72),s:'+'+n+' EXP',c:'#ffe36b',t:0});while(S.exp>=needExp()){S.exp-=needExp();S.lv++;S.hp=hpMax();sfx('lvl');say('⭐ '+t('lvup')+' Lv '+S.lv);for(let i=0;i<24;i++)FX.push({k:'star',x:P.x,y:P.y-c234D('body',30),vx:Math.cos(i/24*6.28)*60,vy:Math.sin(i/24*6.28)*60,t:0,life:.9})}hud()}
 function drop(mo){const r=Math.random(),n=Math.random();const f={cave1:1,cave2:2,cave3:3}[M.id]||1;
   {const rate=(mo.boss?.05:.01)*(1+ST('dex')*.01);if(Math.random()<rate)DROPS.push({k:'card',mon:mo.kind,x:mo.x+6,y:mo.y-4})}
   if(mo.boss){DROPS.push({k:'item',item:mkItem(['sw','bow','staff','dag'][Math.floor(Math.random()*4)],3),x:mo.x,y:mo.y+8});DROPS.push({k:'coin',n:60,x:mo.x+14,y:mo.y+4});return}
@@ -786,11 +786,11 @@ function bossWin(){setTimeout(()=>playScene('boss',()=>{showCard(t('ch1done'),t(
 // ---- player actions ----
 function attackTarget(mo){P.target=mo;P.act=null;P.path=null}
 function doAttack(mo){const atkType=weapon().type;const w=weapon(),W=WEP[w.type];P.cd=W.cd/(w.spd||1)/aspdMul();P.atkAnim=.25;P.row=rowFor(mo.x-P.x,mo.y-P.y);const cr=Math.random()<critCh();let dmg=Math.max(1,Math.round(atkPow()*(.85+Math.random()*.3)*(cr?(typeof critMul==='function'?critMul():(S.job==='hunter'?1.65:1.5)):1)));if(cr)TXT.push({x:mo.x,y:mo.y-(mo.h||20)-14,s:t('crit'),c:'#ff9f43',t:0});if(gear().stun&&Math.random()<gear().stun/100)mo.stun=1;
-  if(w.type==='bow'||w.type==='staff'){sfx('shoot');}if(w.type==='bow'||w.type==='staff')SHOTS.push({k:w.type,x:P.x,y:P.y-26,tx:mo,sp:w.type==='bow'?260:170,dmg,from:'p',type:w.type});
+  if(w.type==='bow'||w.type==='staff'){sfx('shoot');}if(w.type==='bow'||w.type==='staff')SHOTS.push({k:w.type,x:P.x,y:P.y-c234D('body',26),tx:mo,sp:w.type==='bow'?260:170,dmg,from:'p',type:w.type});
   else{monHit(mo,dmg,undefined,atkType);FX.push({k:'slash',x:mo.x,y:mo.y-14,t:0,life:.25,a:Math.atan2(mo.y-P.y,mo.x-P.x)})}}
-function hurtPlayer(n){if(isKid()||P.dead)return;if(Math.random()<fleeCh()){TXT.push({x:P.x,y:P.y-66,s:t('miss'),c:'#bfe8ff',t:0});return}n=Math.max(1,Math.round(n*50/(50+defVal())*(effOn('guard')?.6:1)));S.hp-=n;sfx('hurt');P.hurt=.3;TXT.push({x:P.x,y:P.y-66,s:'-'+n,c:'#ff7a6b',t:0});hud();if(S.hp<=0){S.hp=0;faint()}}
+function hurtPlayer(n){if(isKid()||P.dead)return;if(Math.random()<fleeCh()){TXT.push({x:P.x,y:P.y-c234D('head',66),s:t('miss'),c:'#bfe8ff',t:0});return}n=Math.max(1,Math.round(n*50/(50+defVal())*(effOn('guard')?.6:1)));S.hp-=n;sfx('hurt');P.hurt=.3;TXT.push({x:P.x,y:P.y-c234D('head',66),s:'-'+n,c:'#ff7a6b',t:0});hud();if(S.hp<=0){S.hp=0;faint()}}
 function faint(){P.dead=1;const loss=Math.floor(needExp()*.01);S.exp=Math.max(0,S.exp-loss);say(t('fell')+(loss?' · '+t('expLoss')+' '+loss:''));fadeTo(()=>{S.hp=hpMax();P.dead=0;const st=S.lastStone||'plaza';const mapId=st==='plaza'?'plaza':st==='mountain'?'mountain':st;goMap(mapId,null,true)})}
-function usePotion(){if(!S.potions||isKid())return;S.potions--;S.hp=Math.min(hpMax(),S.hp+Math.round(hpMax()*.6));TXT.push({x:P.x,y:P.y-66,s:'+HP',c:'#8ff7a0',t:0});hud();save()}
+function usePotion(){if(!S.potions||isKid())return;S.potions--;S.hp=Math.min(hpMax(),S.hp+Math.round(hpMax()*.6));TXT.push({x:P.x,y:P.y-c234D('head',66),s:'+HP',c:'#8ff7a0',t:0});hud();save()}
 
 const monMul=()=>M.mul||{cave1:1,cave2:1.6,cave3:2.3}[M.id]||1;
 function openChest(c){S.chests=S.chests||[];if(S.chests.includes(c.id)){c.open=true;return}c.open=true;S.chests.push(c.id);if(S.chests.length>200)S.chests.shift();const n=+(M.id.slice(5))||1,big=c.big;
@@ -819,7 +819,7 @@ function useJob(k){if(!S||P.dead||PAUSE||!hasSk(k))return;const [,cd]=SK[k];if(!
   const needT=['bash','shower','fire','ice','bolt','steal'];if(needT.includes(k)&&(!tgt||Math.hypot(tgt.x-P.x,tgt.y-P.y)>200)){say(t('noHit'));return}S.eff=S.eff||{};
   if(k==='bash'){monHit(tgt,critHit(pow*2.8,tgt),undefined,'sw');FX.push({k:'boom',x:tgt.x,y:tgt.y-12,t:0,life:.35})}
   else if(k==='guard'){S.eff.guard=performance.now()+5000}
-  else if(k==='provoke'){for(const o of near(150)){o.taunt=performance.now()+6000;o.st='chase'}FX.push({k:'bonk',x:P.x,y:P.y-50,t:0,life:.5})}
+  else if(k==='provoke'){for(const o of near(150)){o.taunt=performance.now()+6000;o.st='chase'}FX.push({k:'bonk',x:P.x,y:P.y-c234D('body',50),t:0,life:.5})}
   else if(k==='shower'){for(const o of alive)if(Math.hypot(o.x-tgt.x,o.y-tgt.y)<55)monHit(o,critHit(pow*1.3,o),undefined,'bow');for(let i=0;i<14;i++)FX.push({k:'spark',x:tgt.x+(rnd()-.5)*70,y:tgt.y-50,vx:0,vy:160,t:0,life:.35})}
   else if(k==='evade'){S.eff.evade=performance.now()+5000}
   else if(k==='fire'){for(const o of alive)if(Math.hypot(o.x-tgt.x,o.y-tgt.y)<42)monHit(o,critHit(pow*1.8,o),undefined,'fire');FX.push({k:'boom',x:tgt.x,y:tgt.y-12,t:0,life:.5})}
@@ -861,7 +861,7 @@ const ACH=[['wake1','wakeU',1,10],['wake10','wakeU',10,30],['wake18','wakeU',18,
 function achVal(k){switch(k){case 'book':return(S.book||[]).length;case 'fishSp':return Object.keys(S.fish||{}).length;case 'legend':return(S.fish||{})[11]?1:0;case 'cards':return(S.cardBook||[]).length;case 'pets':return(S.pets||[]).length;case 'bond':return Math.max(0,...(S.pets||[]).map(p=>p.aff));case 'lv':return S.lv;case 'boss':return S.boss?1:0;case 'online':return S.room?1:0;case 'dream':return S.dreamBest||0;case 'wakeU':return totalCrystals();case 'fossils':return Object.keys(S.fossils||{}).length;case 'job':return S.job?1:0;case 'masters':return Object.keys(JOBS).filter(mastered).length;case 'helps':return CNT('req');case 'skills':return(S.learn||[]).length;case 'wheelBest':return(S.wheel&&S.wheel.best)||0;default:return CNT(k)}}
 const titleOf=id=>{if(!id)return'';const a=(TX[LANG]||{})['at_'+id];return a!==undefined?a:(TX.th['at_'+id]||'')};
 let achQ=[],achT=0;function achCheck(){if(!S)return;S.ach=S.ach||{};for(const [id,k,n,coins] of ACH)if(!S.ach[id]&&achVal(k)>=n){S.ach[id]=Date.now();S.coins+=coins;achQ.push(id)}if(achQ.length&&achT<=0)achNext()}
-function achNext(){const id=achQ.shift();if(!id)return;achT=3.2;say(t('achGot')+': '+t('an_'+id)+(titleOf(id)?' · '+t('title')+' «'+titleOf(id)+'»':''));msgT=3;sfx('lvl');for(let i=0;i<20;i++)FX.push({k:'star',x:P.x,y:P.y-40,vx:Math.cos(i/20*6.28)*50,vy:Math.sin(i/20*6.28)*50-20,t:0,life:.9});save()}
+function achNext(){const id=achQ.shift();if(!id)return;achT=3.2;say(t('achGot')+': '+t('an_'+id)+(titleOf(id)?' · '+t('title')+' «'+titleOf(id)+'»':''));msgT=3;sfx('lvl');for(let i=0;i<20;i++)FX.push({k:'star',x:P.x,y:P.y-c234D('body',40),vx:Math.cos(i/20*6.28)*50,vy:Math.sin(i/20*6.28)*50-20,t:0,life:.9});save()}
 
 // ---- home garden + kitchen, shared by everyone who plays on this device (Stardew) ----
 const CROPS={cab:{min:5,bed:'cabbageBed',price:5},car:{min:8,bed:'carrotBed',price:6},tom:{min:12,bed:'tomatoBed',price:8},str:{min:15,bed:'strawberryBed',price:10},pum:{min:25,bed:'pumpkinPatch',price:14}};
@@ -925,8 +925,8 @@ function useSkill(){if(!S||P.dead||PAUSE)return;const w=weapon(),k=SKILL[w.type]
   const alive=MONS.filter(o=>!o.happy).sort((a,b)=>Math.hypot(a.x-P.x,a.y-P.y)-Math.hypot(b.x-P.x,b.y-P.y));const tgt=(P.target&&!P.target.happy)?P.target:alive[0];const pow=atkPow();
   if(w.type==='sw'){const near=alive.filter(o=>Math.hypot(o.x-P.x,o.y-P.y)<44);for(const o of near)monHit(o,critHit(pow*1.6,o),undefined,'sw');for(let i=0;i<16;i++)FX.push({k:'slash',x:P.x+Math.cos(i/16*6.28)*18,y:P.y-14+Math.sin(i/16*6.28)*10,t:0,life:.3,a:i/16*6.28})}
   else if(!tgt||Math.hypot(tgt.x-P.x,tgt.y-P.y)>190){say(t('noHit'));return}
-  else if(w.type==='bow'){alive.filter(o=>Math.hypot(o.x-P.x,o.y-P.y)<190).slice(0,3).forEach(o=>SHOTS.push({k:'bow',x:P.x,y:P.y-26,tx:o,sp:300,dmg:critHit(pow*1.2,o),from:'p',type:'bow'}))}
-  else if(w.type==='staff'){SHOTS.push({k:'staff',x:P.x,y:P.y-26,tx:tgt,sp:150,dmg:critHit(pow*2.2,tgt),from:'p',big:1,type:'staff'})}
+  else if(w.type==='bow'){alive.filter(o=>Math.hypot(o.x-P.x,o.y-P.y)<190).slice(0,3).forEach(o=>SHOTS.push({k:'bow',x:P.x,y:P.y-c234D('body',26),tx:o,sp:300,dmg:critHit(pow*1.2,o),from:'p',type:'bow'}))}
+  else if(w.type==='staff'){SHOTS.push({k:'staff',x:P.x,y:P.y-c234D('body',26),tx:tgt,sp:150,dmg:critHit(pow*2.2,tgt),from:'p',big:1,type:'staff'})}
   else{const a=Math.atan2(tgt.y-P.y,tgt.x-P.x),d=Math.max(0,Math.hypot(tgt.x-P.x,tgt.y-P.y)-18);for(let i=0;i<8;i++){const nx=P.x+Math.cos(a)*d*i/8,ny=P.y+Math.sin(a)*d*i/8;if(blockedAt(M,nx,ny))break;FX.push({k:'dust',x:nx,y:ny-20,vx:0,vy:-5,t:0,life:.4});P.x=nx;P.y=ny}monHit(tgt,critHit(pow*.9,tgt),undefined,'dag');setTimeout(()=>{if(!tgt.happy)monHit(tgt,critHit(pow*.9,tgt),undefined,'dag')},160)}
   P.skCd=k.cd*cdrMul();P.atkAnim=.25;sfx('lvl');say('✨ '+t('sk_'+w.type))}
 
@@ -978,7 +978,7 @@ function openQuiz(c){if(c.awake)return;const q=pickQuestion(),L=q[LANG]||q.th;le
       else{fbEl.textContent=t('wrong');speak(t('wrong'))}}})}
 function dimToday(id,aw){const out=new Set();if(aw.length<3)return out;const sorted=[...aw].sort(),r=seeded(Math.floor(Date.now()/864e5)*13+id.length*101+id.charCodeAt(id.length-1));const n=Math.min(3,aw.length-1);while(out.size<n)out.add(sorted[Math.floor(r()*sorted.length)]);return out}
 function wakeCrystal(c,full){if((S.crystals[M.id]||[]).includes(c.id)){c.awake=true;if(!S.rewake||S.rewake.date!==today())S.rewake={date:today(),ids:[]};S.rewake.ids.push(c.id);mission('wake');bump('wake');S.coins+=full?5:2;gainExp(full?10:5);setTimeout(()=>sfx('wake'),300);for(let i=0;i<30;i++)FX.push({k:'spark',x:c.x,y:c.y-12,vx:(rnd()-.5)*70,vy:-30-rnd()*70,t:0,life:1});hud();save();return}
-  c.awake=true;setTimeout(()=>{if(totalCrystals()===1)playScene('first');else if((M.crystals||[]).every(x=>x.awake))playScene('floor')},1400);bump('wake');mission('wake');S.pts=(S.pts||0)+1;Net.addPoints(1);if(!S.peb){S.peb=true;PEB.on=true;PEB.x=P.x;PEB.y=P.y;setTimeout(()=>{say('🪨 '+t('pebJoin'));msgT=5},1600)}setTimeout(()=>sfx('wake'),300);setTimeout(()=>{const f=M.crystals||[];if(f.length&&f.every(x=>x.awake)){say(t('floorDone'));for(let i=0;i<50;i++)FX.push({k:'spark',x:P.x+(rnd()-.5)*80,y:P.y-30+(rnd()-.5)*50,vx:(rnd()-.5)*60,vy:-40-rnd()*50,t:0,life:1.3})}},900);(S.crystals[M.id]||(S.crystals[M.id]=[])).push(c.id);S.coins+=full?5:2;gainExp(full?10:5);setLight();for(let i=0;i<30;i++)FX.push({k:'spark',x:c.x,y:c.y-12,vx:(rnd()-.5)*70,vy:-30-rnd()*70,t:0,life:1});hud();save()}
+  c.awake=true;setTimeout(()=>{if(totalCrystals()===1)playScene('first');else if((M.crystals||[]).every(x=>x.awake))playScene('floor')},1400);bump('wake');mission('wake');S.pts=(S.pts||0)+1;Net.addPoints(1);if(!S.peb){S.peb=true;PEB.on=true;PEB.x=P.x;PEB.y=P.y;setTimeout(()=>{say('🪨 '+t('pebJoin'));msgT=5},1600)}setTimeout(()=>sfx('wake'),300);setTimeout(()=>{const f=M.crystals||[];if(f.length&&f.every(x=>x.awake)){say(t('floorDone'));for(let i=0;i<50;i++)FX.push({k:'spark',x:P.x+(rnd()-.5)*80,y:P.y-c234D('body',30)+(rnd()-.5)*50,vx:(rnd()-.5)*60,vy:-40-rnd()*50,t:0,life:1.3})}},900);(S.crystals[M.id]||(S.crystals[M.id]=[])).push(c.id);S.coins+=full?5:2;gainExp(full?10:5);setLight();for(let i=0;i<30;i++)FX.push({k:'spark',x:c.x,y:c.y-12,vx:(rnd()-.5)*70,vy:-30-rnd()*70,t:0,life:1});hud();save()}
 const totalCrystals=()=>Object.values(S.crystals).reduce((a,b)=>a+b.length,0);
 function setLight(){LIGHT=S.boss?1:Math.min(1,.35+.65*totalCrystals()/12)}
 // digging: a quick timing game (Trickster drill feel). Gold = rare finds incl. fossils. Kids get a wider gold zone.
@@ -1140,7 +1140,7 @@ function openWheel(){const W=S.wheel||{};const ok=canSpin(),yest=new Date(Date.n
     let before=0;for(let i=0;i<idx;i++)before+=WHEEL[i][2];const mid=(before+WHEEL[idx][2]/2)/tot*Math.PI*2,target=Math.PI*2*6-mid,start=performance.now(),dur=3200;let lastTick=0;
     const step=now=>{const p=Math.min(1,(now-start)/dur),e=1-Math.pow(1-p,3);ang=target*e;draw();const seg=Math.floor(ang/(Math.PI/8));if(seg!==lastTick){lastTick=seg;sfx('hit')}
       if(p<1)requestAnimationFrame(step);else{const k=WHEEL[idx][0];S.wheel={date:today(),streak:(W.date===yest?(W.streak||0)+1:1),best:0};S.wheel.best=Math.max(W.best||0,S.wheel.streak);wheelPrize(k);
-        let extra='';if(S.wheel.streak%7===0){S.coins+=150;S.potions+=2;extra=' · 🎉 '+t('streak7')+' +150🪙';}{const wr=$('whRes');if(wr)wr.textContent='🎁 '+t('won')+' '+t(k)+extra;else say('🎁 '+t('won')+' '+t(k)+extra)}sfx('right');for(let i=0;i<30;i++)FX.push({k:'star',x:P.x,y:P.y-40,vx:(rnd()-.5)*120,vy:-60-rnd()*80,t:0,life:1.2});hud();save()}};requestAnimationFrame(step)}}
+        let extra='';if(S.wheel.streak%7===0){S.coins+=150;S.potions+=2;extra=' · 🎉 '+t('streak7')+' +150🪙';}{const wr=$('whRes');if(wr)wr.textContent='🎁 '+t('won')+' '+t(k)+extra;else say('🎁 '+t('won')+' '+t(k)+extra)}sfx('right');for(let i=0;i<30;i++)FX.push({k:'star',x:P.x,y:P.y-c234D('body',40),vx:(rnd()-.5)*120,vy:-60-rnd()*80,t:0,life:1.2});hud();save()}};requestAnimationFrame(step)}}
 function openBackup(){save();const data={v:1,slots:Store.all(),home:HOME.get()},code=btoa(unescape(encodeURIComponent(JSON.stringify(data))));
   modal(`<h2>${t('backup')}</h2><p class="note">${t('backupTip')}</p><textarea id="bkT" style="width:100%;height:90px;font-size:11px">${code}</textarea><div class="row2" style="margin-top:8px"><button id="bkC">📋 ${t('copy')}</button><button id="bkR">♻️ ${t('restore')}</button></div>`);
   $('bkC').onclick=()=>{const el=$('bkT');el.select();try{navigator.clipboard.writeText(el.value)}catch(e){document.execCommand('copy')}say(t('copied'))};
@@ -1343,11 +1343,11 @@ function render(tm){if(!M||!S)return;
   for(const d of M.digs||[])if(!d.done){if(IMG.dprops){const dr=DR.digSpot;ctx.drawImage(IMG.dprops,dr[0],dr[1],64,64,Math.round(d.x-32-camX),Math.round(d.y-40-camY),64,64)}for(let i=0;i<3;i++){const a=tm*2+i*2.1,v=(Math.sin(tm*4+i)+1)/2;ctx.fillStyle=`rgba(255,240,170,${.4+.6*v})`;const x=Math.round(d.x-camX+Math.cos(a)*6),y=Math.round(d.y-camY-2+Math.sin(a)*3);ctx.fillRect(x,y,1,1);if(v>.8){ctx.fillRect(x-1,y,3,1);ctx.fillRect(x,y-1,1,3)}}ctx.fillStyle='rgba(90,60,30,.35)';ctx.fillRect(Math.round(d.x-camX-5),Math.round(d.y-camY),10,2)}
   for(const f of FX)if(f.k==='tele'){const p=f.t/f.life;ctx.save();ctx.globalAlpha=.35+.4*p;ctx.strokeStyle=f.bolt?'#ffe36b':f.el==='ice'?'#8fd8ff':f.el==='fire'?'#ff8a5a':'#ff6b8a';ctx.fillStyle=`rgba(255,90,120,${.12+.25*p})`;ctx.beginPath();ctx.ellipse(f.x-camX,f.y-camY,f.r,f.r*.45,0,0,7);ctx.fill();ctx.stroke();ctx.restore();if(f.t+1/60>=f.life&&!f.hit){f.hit=1;if(!f.vis){for(const g of fighters())if(Math.hypot((g.x-f.x),(g.y-f.y)/.45)<f.r){hitFighter(g,f.dmg);if(f.el==='ice'&&g.me){S.eff=S.eff||{};S.eff.frozen=performance.now()+2000;say('❄️ '+t('frozen'))}}if(f.el==='fire')FX.push({k:'burn',x:f.x,y:f.y,t:0,life:4,dmg:Math.round(f.dmg*.35)})}for(let i=0;i<10;i++)FX.push({k:'dirt',x:f.x,y:f.y,vx:(rnd()-.5)*90,vy:-50-rnd()*40,t:0,life:.6})}}
   // fade tall things when the player walks behind them
-  for(const o of M.objs){let tg=1;if(o.tall&&!o.farmHouse&&P.y<o.y-2){const X=o.x-o.sw/2,Y=o.y-(o.cb||o.sh);if(P.x+12>X+8&&P.x-12<X+o.sw-8&&P.y>Y+6&&P.y-50<o.y)tg=.42}o.a+=(tg-o.a)*.2}
+  for(const o of M.objs){let tg=1;if(o.tall&&!o.farmHouse&&P.y<o.y-2){const X=o.x-o.sw/2,Y=o.y-(o.cb||o.sh);if(P.x+12>X+8&&P.x-12<X+o.sw-8&&P.y>Y+6&&P.y-c234D('top',50)<o.y)tg=.42}o.a+=(tg-o.a)*.2}
   // player shadow
   const F=PS.F||64,lf=P.moving?Math.floor(P.dist/10)%6:0,sx=P.moving?lf*F:P.row*F,sy=P.moving?P.row*F:0;
   {const sh=P.moving?PS.shW:PS.shS,X=Math.round(P.x-F/2-camX),Y=Math.round(P.y-camY);ctx.save();ctx.imageSmoothingEnabled=true;ctx.globalCompositeOperation='multiply';ctx.globalAlpha=.55;softAO(ctx,P.x-camX,P.y-camY,24,1);
-    if(M.g9b){softAO(ctx,P.x-camX+5,P.y-camY+2,26,.9)}else if(sh){ctx.globalAlpha=M.kind==='cave'?.3:.4;ctx.setTransform(1,0,0,.5,SC*(X+.55*(F-2)),SC*(Y-.5*(F-2)));ctx.transform(1,0,-.55,1,0,0);ctx.drawImage(sh,sx*SC,sy*SC,F*SC,(F-2)*SC,0,0,F*SC,(F-2)*SC)}ctx.restore()}
+    if(M.g9b){softAO(ctx,P.x-camX+5,P.y-camY+2,26,.9)}else if(!c234Shadow()&&sh){ctx.globalAlpha=M.kind==='cave'?.3:.4;ctx.setTransform(1,0,0,.5,SC*(X+.55*(F-2)),SC*(Y-.5*(F-2)));ctx.transform(1,0,-.55,1,0,0);ctx.drawImage(sh,sx*SC,sy*SC,F*SC,(F-2)*SC,0,0,F*SC,(F-2)*SC)}ctx.restore()}
   // y-sorted world
   const list=[];for(const o of M.objs)list.push([o.y,0,o]);for(const m of MONS)list.push([m.y,1,m]);for(const c of M.crystals||[])list.push([c.y,2,c]);for(const d of DROPS)list.push([d.y-2,3,d]);list.push([P.y,4,P]);if(PEB.on)list.push([PEB.y,5,PEB]);if(petNow())list.push([PET.y,7,PET]);for(const o of Object.values(Net.others))if(o.p&&o.p.m===mapKey())list.push([o.y,6,o]);list.sort((a,b)=>a[0]-b[0]);
   for(const [,k,o] of list){if(k===0)drawObj(o,tm);else if(k===1)drawMon(o,tm);else if(k===2)drawCrystal(o,tm);else if(k===3)drawDrop(o,tm);else if(k===5)drawPeb();else if(k===6)drawOther(o);else if(k===7)drawPet(tm);else drawPlayer(sx,sy)}
@@ -1381,18 +1381,18 @@ function render(tm){if(!M||!S)return;
   if(M.board&&S.daily&&(!S.daily.seen||canSpin()||S.daily.list.some(q=>q.got>=q.n&&!q.claimed))){const b=M.board,y=Math.round(b.y-camY-58+Math.sin(tm*4)*2);ctx.fillStyle='#ffe36b';ctx.fillRect(Math.round(b.x-camX)-1,y,3,7);ctx.fillRect(Math.round(b.x-camX)-1,y+9,3,3)}
   if(S.job&&!isKid())for(const [i,b] of [[0,'bJ1'],[1,'bJ2']]){const k=(S.slots||[])[i];if(!k)continue;const left=Math.ceil(((JCD[k]||0)-performance.now())/1000);const el=$(b).querySelector('small'),v=left>0?left+'s':t('k_'+k).split(' ')[0];if(el&&el.textContent!==v)el.textContent=v}
   for(const n of M.npcs||[]){const st=REQMARK[n.npc];if(!st||st==='done')continue;const ready=st==='ready';const y=Math.round(n.y-camY-70+Math.sin(tm*4)*2);ctx.fillStyle=ready?'#7df28a':'#ffe36b';ctx.fillRect(Math.round(n.x-camX)-1,y,3,7);ctx.fillRect(Math.round(n.x-camX)-1,y+9,3,3)}
-  label(P.x-camX,P.y-camY-(PS.F||64)-2,(S.title?'«'+titleOf(S.title)+'» ':'')+S.name,HOUSES[S.house].col);if(myEmoteT>0)emoteBubble(P.x-camX,P.y-camY-(PS.F||64)-16,myEmote,myEmoteT);
+  label(P.x-camX,P.y-camY-c234D('label',(PS.F||64)+2),(S.title?'«'+titleOf(S.title)+'» ':'')+S.name,HOUSES[S.house].col);if(myEmoteT>0)emoteBubble(P.x-camX,P.y-camY-c234D('label',(PS.F||64)+16),myEmote,myEmoteT);
   if(typeof drawVFX2==='function')drawVFX2(tm);
   if(typeof drawNumbers==='function')drawNumbers();else for(const x of TXT){ctx.save();ctx.font=x.big?'bold 12px system-ui,sans-serif':'bold 8px system-ui,sans-serif';ctx.textAlign='center';ctx.globalAlpha=1-x.t/1.1;ctx.fillStyle='#1b1330';ctx.fillText(x.s,x.x-camX+1,x.y-camY-x.t*18+1);ctx.fillStyle=x.c;ctx.fillText(x.s,x.x-camX,x.y-camY-x.t*18);ctx.restore()}
   if(M.boss&&M.boss.active&&!M.boss.happy){const w=Math.min(220,VW-120),x=Math.round(VW/2-w/2);label(VW/2,26,t(M.boss.el==='ice'?'bossIce':M.boss.el==='fire'?'bossFire':M.boss.el==='storm'?'bossStorm':'boss'),'#ff6b8a');ctx.fillStyle='#120b22';ctx.fillRect(x-1,30,w+2,6);ctx.fillStyle='#ff6b8a';ctx.fillRect(x,31,Math.round(w*M.boss.hp/M.boss.max),4)}
-  if(FISHING.on&&M.fishSpot){const F=FISHING,fs=M.fishSpot,bx=fs.wx-camX,by=fs.wy-camY+(F.st==='bite'?Math.round(Math.sin(tm*30)*2)+2:Math.round(Math.sin(tm*3))),rx=P.x-camX+10,ry=P.y-camY-40;
+  if(FISHING.on&&M.fishSpot){const F=FISHING,fs=M.fishSpot,bx=fs.wx-camX,by=fs.wy-camY+(F.st==='bite'?Math.round(Math.sin(tm*30)*2)+2:Math.round(Math.sin(tm*3))),rx=P.x-camX+10,ry=P.y-camY-c234D('body',40);
     if(F.st!=='idle'){ctx.strokeStyle='rgba(255,255,255,.7)';ctx.lineWidth=.5;ctx.beginPath();ctx.moveTo(rx,ry);ctx.quadraticCurveTo((rx+bx)/2,Math.max(ry,by)+10,bx,by-2);ctx.stroke();ctx.fillStyle='#e0413b';ctx.fillRect(Math.round(bx)-1,Math.round(by)-3,3,2);ctx.fillStyle='#fff';ctx.fillRect(Math.round(bx)-1,Math.round(by)-1,3,2);
       ctx.strokeStyle='rgba(235,255,255,.6)';ctx.beginPath();ctx.ellipse(bx,by+1,5+((tm*6)%4),2+((tm*6)%4)/3,0,0,7);ctx.stroke();if(F.st==='bite'){ctx.fillStyle='#ffe36b';ctx.fillRect(Math.round(bx)-1,Math.round(by)-16,3,8);ctx.fillRect(Math.round(bx)-1,Math.round(by)-6,3,2)}}
     if(F.st==='reel'){const H=120,zh=36-FISH[F.fish][0]*3,X=VW-46,Y=Math.round(VH/2-H/2);ctx.fillStyle='rgba(27,19,48,.92)';ctx.fillRect(X-4,Y-4,36,H+8);ctx.fillStyle='#a8793a';ctx.fillRect(X-4,Y-4,36,2);ctx.fillRect(X-4,Y+H+2,36,2);
       ctx.fillStyle='#244a6a';ctx.fillRect(X,Y,16,H);ctx.fillStyle=`rgba(120,230,120,${F.fy>F.zy&&F.fy<F.zy+zh?.95:.6})`;ctx.fillRect(X,Y+Math.round(F.zy),16,zh);ctx.drawImage(fishArt(F.fish),X-2,Y+Math.round(F.fy)-6);
       ctx.fillStyle='#120b22';ctx.fillRect(X+20,Y,6,H);ctx.fillStyle=F.prog>.6?'#7df28a':F.prog>.3?'#ffe36b':'#ff7a6b';ctx.fillRect(X+20,Y+Math.round(H*(1-F.prog)),6,Math.round(H*F.prog))}}
   if(M.fishSpot&&!FISHING.on&&Math.hypot(P.x-M.fishSpot.x,P.y-M.fishSpot.y)<90){ring(M.fishSpot.x-camX,M.fishSpot.y-camY,tm,.6,'255,236,150');label(M.fishSpot.x-camX,M.fishSpot.y-camY-24,'🎣 '+t('fishBtn'))}
-  if(DIG){const W=110,X=Math.round(P.x-camX-W/2),Y=Math.round(P.y-camY-92),n=DIG.done?digNeedle():digNeedle();ctx.fillStyle='rgba(27,19,48,.92)';ctx.fillRect(X-4,Y-4,W+8,18);ctx.fillStyle='#5a3c24';ctx.fillRect(X,Y,W,10);
+  if(DIG){const W=110,X=Math.round(P.x-camX-W/2),Y=Math.round(P.y-camY-c234D('head',92)),n=DIG.done?digNeedle():digNeedle();ctx.fillStyle='rgba(27,19,48,.92)';ctx.fillRect(X-4,Y-4,W+8,18);ctx.fillStyle='#5a3c24';ctx.fillRect(X,Y,W,10);
     const gz=DIG.g,c=DIG.c;ctx.fillStyle='#4fbf5a';ctx.fillRect(X+Math.round((c-gz/2-.18)*W),Y,Math.round((gz+.36)*W),10);ctx.fillStyle='#ffd23f';ctx.fillRect(X+Math.round((c-gz/2)*W),Y,Math.round(gz*W),10);ctx.fillStyle='#fff';ctx.fillRect(X+Math.round(n*W)-1,Y-3,3,16);label(P.x-camX,Y-8,'⛏️ '+t('digTap'))}
   if(tapMark){tapMark.t+=1/60;const p=tapMark.t/.45;if(p<1){ctx.strokeStyle=`rgba(255,246,210,${1-p})`;ctx.lineWidth=1;ctx.beginPath();ctx.ellipse(tapMark.x-camX,tapMark.y-camY,4+p*8,2+p*4,0,0,7);ctx.stroke()}else tapMark=null}
   {const g=(S.guide!==false&&(isKid()||S.guide===true))?guideTarget():null;if(g&&!PAUSE){const sx2=g.x-camX,sy2=g.y-camY,on=sx2>20&&sx2<VW-20&&sy2>30&&sy2<VH-20;
@@ -1402,8 +1402,8 @@ function render(tm){if(!M||!S)return;
   if(P.hurt>0){ctx.fillStyle=`rgba(255,60,60,${P.hurt*.5})`;ctx.fillRect(0,0,VW,VH)}
   vig.style.opacity=M.kind==='cave'?1.3:(1.25-.35*LIGHT).toFixed(2);drawMinimap(tm)}
 function drawPlayer(sx,sy){const F=PS.F||64,im=P.moving?PS.walk:PS.stand;const a=DIR_ANG[P.row],l=P.atkAnim>0?Math.round(Math.sin(P.atkAnim/.25*Math.PI)*8):0,wet=inPool();const X=Math.round(P.x-F/2-camX+Math.cos(a)*l),Y=Math.round(P.y-(F-2)-camY+Math.sin(a)*l);
-  if(im){if(wet){const cut=wet==='pool'?22:16;ctx.save();ctx.beginPath();ctx.rect(X,Y,F,F-cut);ctx.clip();ctx.drawImage(im,sx,sy,F,F,X,Y+(wet==='pool'?8:4),F,F);ctx.restore();const wy=Y+F-cut+(wet==='pool'?8:4);if(wet==='pool'){ctx.strokeStyle='rgba(235,255,255,.8)';ctx.lineWidth=1;ctx.beginPath();ctx.ellipse(P.x-camX,wy,12+Math.sin(performance.now()/200)*2,4,0,0,7);ctx.stroke()}else{for(let i=0;i<9;i++){ctx.fillStyle=['#ffb3d9','#ffe36b','#9fd8ff','#a8f0a0','#ffc38a'][i%5];ctx.fillRect(Math.round(P.x-camX-12+i*3),wy-2+(i%3),5,5)}}}else ctx.drawImage(im,sx,sy,F,F,X,Y,F,F)}
-  if(compassT>0&&M.crystals){const c=M.crystals.filter(x=>!x.awake).sort((a,b)=>Math.hypot(a.x-P.x,a.y-P.y)-Math.hypot(b.x-P.x,b.y-P.y))[0];if(c){const an=Math.atan2(c.y-P.y,c.x-P.x),r=28,x=P.x-camX+Math.cos(an)*r,y=P.y-26-camY+Math.sin(an)*r*.7;ctx.save();ctx.translate(x,y);ctx.rotate(an);ctx.fillStyle=`rgba(140,240,255,${Math.min(1,compassT)})`;ctx.beginPath();ctx.moveTo(8,0);ctx.lineTo(-4,-5);ctx.lineTo(-1,0);ctx.lineTo(-4,5);ctx.fill();ctx.restore()}}}
+  if(im){if(wet){const cut=wet==='pool'?22:16;ctx.save();ctx.beginPath();ctx.rect(...c234Clip(X,Y,F,cut));ctx.clip();c234Body(X,Y,F,wet==='pool'?8:4)||ctx.drawImage(im,sx,sy,F,F,X,Y+(wet==='pool'?8:4),F,F);ctx.restore();const wy=Y+F-cut+(wet==='pool'?8:4);if(wet==='pool'){ctx.strokeStyle='rgba(235,255,255,.8)';ctx.lineWidth=1;ctx.beginPath();ctx.ellipse(P.x-camX,wy,12+Math.sin(performance.now()/200)*2,4,0,0,7);ctx.stroke()}else{for(let i=0;i<9;i++){ctx.fillStyle=['#ffb3d9','#ffe36b','#9fd8ff','#a8f0a0','#ffc38a'][i%5];ctx.fillRect(Math.round(P.x-camX-12+i*3),wy-2+(i%3),5,5)}}}else c234Body(X,Y,F,0)||ctx.drawImage(im,sx,sy,F,F,X,Y,F,F)}
+  if(compassT>0&&M.crystals){const c=M.crystals.filter(x=>!x.awake).sort((a,b)=>Math.hypot(a.x-P.x,a.y-P.y)-Math.hypot(b.x-P.x,b.y-P.y))[0];if(c){const an=Math.atan2(c.y-P.y,c.x-P.x),r=28,x=P.x-camX+Math.cos(an)*r,y=P.y-c234D('body',26)-camY+Math.sin(an)*r*.7;ctx.save();ctx.translate(x,y);ctx.rotate(an);ctx.fillStyle=`rgba(140,240,255,${Math.min(1,compassT)})`;ctx.beginPath();ctx.moveTo(8,0);ctx.lineTo(-4,-5);ctx.lineTo(-1,0);ctx.lineTo(-4,5);ctx.fill();ctx.restore()}}}
 function drawPet(tm){const p=petNow(),art=MON_ART[p.kind+'1'];if(!art)return;const im=art[Math.floor(PET.t*4)%2],X=Math.round(PET.x-im.width/2-camX),Y=Math.round(PET.y-im.height-camY-(p.kind==='bat'?6+Math.sin(PET.t*5)*2:0));ctx.save();ctx.imageSmoothingEnabled=true;ctx.globalCompositeOperation='multiply';softAO(ctx,PET.x-camX,PET.y-camY,im.width*.7,.6);ctx.restore();ctx.drawImage(im,X,Y);if(PET.heart>0){ctx.fillStyle='#ff8fbf';const hx=Math.round(PET.x-camX),hy=Y-6-Math.round((1.5-PET.heart)*6);ctx.fillRect(hx-2,hy,2,2);ctx.fillRect(hx+1,hy,2,2);ctx.fillRect(hx-1,hy+2,3,1)}}
 function drawPeb(){const im=IMG.npc_peb;const h=PEB.hop>0?Math.abs(Math.sin(PEB.hop*8))*5:0,X=Math.round(PEB.x-32-camX),Y=Math.round(PEB.y-62-camY-h);ctx.save();ctx.imageSmoothingEnabled=true;ctx.globalCompositeOperation='multiply';softAO(ctx,PEB.x-camX,PEB.y-camY,20,.7);ctx.restore();if(im)ctx.drawImage(im,PEB.row*64,0,64,64,X,Y,64,64);else{ctx.fillStyle='#7a8a6a';ctx.fillRect(X+24,Y+44,16,14)}if(PEB.hop>0){ctx.fillStyle='rgba(170,245,255,.95)';ctx.fillRect(X+31,Y+30,2,4);ctx.fillRect(X+30,Y+31,4,2)}}
 function drawMon(m,tm){if(m.happy&&m.gone<=0)return;const art=MON_ART[m.kind+(m.happy?1:0)];if(!art)return;const f=Math.floor(m.t*(m.fly?8:4))%art.length,im=art[f],w=im.width,h=im.height,X=Math.round(m.x-w/2-camX),Y=Math.round(m.y-h-camY-(m.fly?8+Math.sin(m.t*5)*2:0));
@@ -1429,7 +1429,7 @@ function drawDrop(d,tm){const x=Math.round(d.x-camX),y=Math.round(d.y-camY-3-Mat
   else{ctx.save();ctx.globalCompositeOperation='lighter';glow(x,y-4,10,d.item.rar>=2?'255,210,90':d.item.rar?'120,170,255':'255,255,255',.5);ctx.restore();ctx.drawImage(wepIcon(d.item,1),x-6,y-10)}}
 function drawDark(tm){if(!dark||dark.width!==VW||dark.height!==VH){dark=document.createElement('canvas');dark.width=VW;dark.height=VH;darkG=dark.getContext('2d')}const g=darkG;g.globalCompositeOperation='source-over';g.clearRect(0,0,VW,VH);g.fillStyle=(M&&M.darkA!=null)?`rgba(27,19,48,${M.darkA})`:(S.boss?'rgba(27,19,48,.5)':'rgba(27,19,48,.82)');g.fillRect(0,0,VW,VH);g.globalCompositeOperation='destination-out';
   const hole=(x,y,r,a=1)=>{const gr=g.createRadialGradient(x,y,0,x,y,r);gr.addColorStop(0,`rgba(0,0,0,${a})`);gr.addColorStop(.55,`rgba(0,0,0,${a*.8})`);gr.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=gr;g.fillRect(x-r,y-r,r*2,r*2)};
-  hole(P.x-camX,P.y-26-camY,(M.darkFloor?70:132)+25*((S.lampLv||0)+Math.min(1,S.lamp||0))+16*((typeof tool==='function'?tool('lantern'):1)-1)+Math.sin(tm*6)*2);if(PEB.on)hole(PEB.x-camX,PEB.y-20-camY,40,.6);for(const c of M.crystals)if(c.awake)hole(c.x-camX,c.y-14-camY,70,.9);for(const s of M.stones)hole(s.x-camX,s.y-30-camY,S.stones.includes(s.id)?70:34,.8);for(const [x,y] of M.glows)hole(x-camX,y-camY,50,.8);for(const e of M.exits)hole(e.x-camX,e.y-camY,34,.7);
+  hole(...c234Hole(P.x-camX,P.y-26-camY),(M.darkFloor?70:132)+25*((S.lampLv||0)+Math.min(1,S.lamp||0))+16*((typeof tool==='function'?tool('lantern'):1)-1)+Math.sin(tm*6)*2);if(PEB.on)hole(PEB.x-camX,PEB.y-20-camY,40,.6);for(const c of M.crystals)if(c.awake)hole(c.x-camX,c.y-14-camY,70,.9);for(const s of M.stones)hole(s.x-camX,s.y-30-camY,S.stones.includes(s.id)?70:34,.8);for(const [x,y] of M.glows)hole(x-camX,y-camY,50,.8);for(const e of M.exits)hole(e.x-camX,e.y-camY,34,.7);
   ctx.drawImage(dark,0,0)}
 
 // ===== start =====
@@ -1455,7 +1455,7 @@ function fixLife(){if(!S)return;S.life=S.life||{};for(const [k] of LIFE)S.life[k
 function lifeLv(k){if(!S)return 1;fixLife();return S.life[k].lv}
 function lifeName(k){const d=LIFE.find(x=>x[0]===k);return d?(LANG==='en'?d[2]:d[1]):k}
 function lifeXp(k,n){if(!S)return;fixLife();const L=S.life[k];if(L.lv>=10)return;L.xp+=Math.max(1,Math.round(n));let up=0;while(L.lv<10&&L.xp>=LIFE_NEED(L.lv)){L.xp-=LIFE_NEED(L.lv);L.lv++;up=1}
-  if(up){const d=LIFE.find(x=>x[0]===k),pk=(LIFE_PERK[k]||{})[L.lv];sfx('lvl');say(`${d[3]} ${lifeName(k)} Lv${L.lv}!`+(pk?' · '+(LANG==='en'?pk[1]:pk[0]):''));for(let i=0;i<20;i++)FX.push({k:'star',x:P.x,y:P.y-40,vx:(rnd()-.5)*90,vy:-40-rnd()*60,t:0,life:1});if(L.lv===10)bump&&bump('life10');save()}}
+  if(up){const d=LIFE.find(x=>x[0]===k),pk=(LIFE_PERK[k]||{})[L.lv];sfx('lvl');say(`${d[3]} ${lifeName(k)} Lv${L.lv}!`+(pk?' · '+(LANG==='en'?pk[1]:pk[0]):''));for(let i=0;i<20;i++)FX.push({k:'star',x:P.x,y:P.y-c234D('body',40),vx:(rnd()-.5)*90,vy:-40-rnd()*60,t:0,life:1});if(L.lv===10)bump&&bump('life10');save()}}
 // ---- tools (upgrade with coins; every level helps the matching life activity) ----
 const TOOLS=[['brush','ไม้ปัดฝุ่นแสง','Light brush','🪶'],['lantern','ตะเกียง','Lantern','🏮'],['glass','แว่นขยาย','Magnifier','🔍'],['shovel','พลั่ว','Shovel','⛏️'],['rod','คันเบ็ด','Fishing rod','🎣']];
 const TOOL_COST=[0,60,160,360,720];
@@ -1610,7 +1610,7 @@ function openQi(){if(isKid())return;if(!S.job){say(t('jobNeed'));return}S.qi=S.q
 function promoHtml(){if(!S.job)return'';const tr=S.tier||1;if(tr>=3)return `<div class="pn"><b>👑 ${tierName()}</b> · ${t('tierMax')}</div>`;const q=TIER_Q[tr+1],k=(S.tq&&S.tq.kills)||0,st=S.tq&&S.tq.on===tr+1;
   const okLv=S.lv>=q.lv,okCh=(S.chap||2)>=q.chap,okK=st&&k>=q.kills;return `<div class="pn"><b>⭐ ${t('promo')} ${tr+1}: ${(LANG==='en'?TIER_NAME[S.job][3+tr]:TIER_NAME[S.job][tr])}</b><br><small>${okLv?'✅':'⬜'} Lv${q.lv} · ${okCh?'✅':'⬜'} ${t('chapN')} ${q.chap} · ${st?(okK?'✅':'⬜')+` ${t('calmN')} ${Math.min(k,q.kills)}/${q.kills}`:'⬜ '+t('calmN')+' '+q.kills}</small><br>${!st?`<button id="tqStart" ${okLv?'':'disabled'}>${t('tqStart')}</button>`:`<button id="tqDone" ${okLv&&okCh&&okK?'':'disabled'}>${t('tqDone')}</button>`}</div>`}
 {const _oj=openJobs;openJobs=function(){const r=_oj.apply(this,arguments);if(S&&S.lv>=10&&S.job){const h=document.querySelector('#modal h2')||document.querySelector('.modal h2');if(h){const d=document.createElement('div');d.innerHTML=promoHtml()+`<p><button id="qiOpen">☯️ ${t('qiT')}</button></p>`;h.after(d);
-    const st=$('tqStart');if(st)st.onclick=()=>{S.tq={on:(S.tier||1)+1,kills:0};save();sfx('pick');say('📜 '+t('tqGo'));openJobs()};const dn=$('tqDone');if(dn)dn.onclick=()=>{S.tier=(S.tier||1)+1;S.tq=null;S.hp=hpMax();sfx('lvl');save();hud();say('👑 '+tierName()+'!');for(let i=0;i<50;i++)FX.push({k:'star',x:P.x,y:P.y-40,vx:(rnd()-.5)*120,vy:-60-rnd()*80,t:0,life:1.3});openJobs()};$('qiOpen').onclick=openQi}}return r}}
+    const st=$('tqStart');if(st)st.onclick=()=>{S.tq={on:(S.tier||1)+1,kills:0};save();sfx('pick');say('📜 '+t('tqGo'));openJobs()};const dn=$('tqDone');if(dn)dn.onclick=()=>{S.tier=(S.tier||1)+1;S.tq=null;S.hp=hpMax();sfx('lvl');save();hud();say('👑 '+tierName()+'!');for(let i=0;i<50;i++)FX.push({k:'star',x:P.x,y:P.y-c234D('body',40),vx:(rnd()-.5)*120,vy:-60-rnd()*80,t:0,life:1.3});openJobs()};$('qiOpen').onclick=openQi}}return r}}
 // ---- detailed stats (adults) appended to the stats screen ----
 {const _os=openStats;openStats=function(){const r=_os.apply(this,arguments);if(S&&!isKid()){const h=document.querySelector('#modal h2')||document.querySelector('.modal h2');if(h&&!$('stDetail')){const d=document.createElement('div');d.id='stDetail';d.className='pn';
     const red=Math.round((1-50/(50+defVal()))*100),row=(a,b)=>`<div class="row2" style="justify-content:space-between"><span>${a}</span><b>${b}</b></div>`;
@@ -1763,14 +1763,14 @@ function hitFx(mo,dmg,type,crit){if(!mo)return;const x=mo.x,y=mo.y-(mo.h||20)*.6
   if(mo.happy){burst(mo.x,mo.y-16,isKid()?14:10,isKid()?'255,240,200':'255,255,255',110,.6,'star2');fx({k:'ring2',x:mo.x,y:mo.y-10,life:.4,c:'255,255,230',r:28})}}}catch(e){}return r}}
 // skills: big readable bursts
 const SKFX={bash:p=>{fx({k:'star2',x:p.x,y:p.y,life:.4,c:'255,210,120',s:9});fx({k:'ring2',x:p.x,y:p.y,life:.4,c:'255,200,120',r:48});burst(p.x,p.y,18,'255,220,150',170,.45);SHAKE=Math.max(SHAKE||0,.15)},
-  guard:p=>fx({k:'shield2',x:P.x,y:P.y-24,life:1.2,c:'150,210,255',follow:1}),
+  guard:p=>fx({k:'shield2',x:P.x,y:P.y-c234D('body',24),life:1.2,c:'150,210,255',follow:1}),
   provoke:p=>{for(let i=0;i<3;i++)fx({k:'ring2',x:P.x,y:P.y-10,life:.5+i*.15,c:'255,110,110',r:30+i*22})},
   shower:p=>{for(let i=0;i<fxN(26);i++)fx({k:'rain2',x:p.x+(Math.random()-.5)*150,y:p.y-150-Math.random()*60,vx:-40,vy:520,life:.34+Math.random()*.2,c:'190,255,200'})},
   evade:p=>{for(let i=0;i<5;i++)fx({k:'after',x:P.x,y:P.y,life:.25+i*.07,ox:(Math.random()-.5)*16})},
-  hawk:p=>burst(P.x,P.y-30,16,'230,230,200',120,.6,'feather'),
+  hawk:p=>burst(P.x,P.y-c234D('body',30),16,'230,230,200',120,.6,'feather'),
   fire:p=>{fx({k:'ring2',x:p.x,y:p.y,life:.45,c:'255,140,60',r:54});burst(p.x,p.y,24,'255,150,60',150,.6,'ember');fx({k:'star2',x:p.x,y:p.y,life:.3,c:'255,220,140',s:8});SHAKE=Math.max(SHAKE||0,.12)},
   ice:p=>{for(let i=0;i<fxN(12);i++){const a=i/12*6.283;fx({k:'shard',x:p.x,y:p.y,vx:Math.cos(a)*140,vy:Math.sin(a)*90,life:.5,a,c:'170,235,255'})}fx({k:'ring2',x:p.x,y:p.y,life:.5,c:'180,240,255',r:46})},
-  bolt:p=>{const ts=MONS.filter(o=>!o.happy&&Math.hypot(o.x-P.x,o.y-P.y)<220).slice(0,4);let a={x:P.x,y:P.y-30};for(const o of ts){fx({k:'bolt2',x:a.x,y:a.y,x2:o.x,y2:o.y-16,life:.28,seed:Math.random()*99});a={x:o.x,y:o.y-16}}if(!ts.length)fx({k:'bolt2',x:P.x,y:P.y-160,x2:P.x,y2:P.y-20,life:.25,seed:3});SHAKE=Math.max(SHAKE||0,.1)},
+  bolt:p=>{const ts=MONS.filter(o=>!o.happy&&Math.hypot(o.x-P.x,o.y-P.y)<220).slice(0,4);let a={x:P.x,y:P.y-c234D('body',30)};for(const o of ts){fx({k:'bolt2',x:a.x,y:a.y,x2:o.x,y2:o.y-16,life:.28,seed:Math.random()*99});a={x:o.x,y:o.y-16}}if(!ts.length)fx({k:'bolt2',x:P.x,y:P.y-160,x2:P.x,y2:P.y-20,life:.25,seed:3});SHAKE=Math.max(SHAKE||0,.1)},
   steal:p=>burst(p.x,p.y,12,'255,220,90',100,.6,'star2'),dash:p=>{for(let i=0;i<8;i++)fx({k:'speed',x:P.x,y:P.y-20+(Math.random()-.5)*30,life:.3,a:Math.atan2(lastMove.y,lastMove.x)})}};
 function nearestTarget(){return MONS.filter(o=>!o.happy).sort((a,b)=>Math.hypot(a.x-P.x,a.y-P.y)-Math.hypot(b.x-P.x,b.y-P.y))[0]}
 {const _uj=useJob;useJob=function(k){const before=JCD[k]||0;const r=_uj.apply(this,arguments);try{if((JCD[k]||0)!==before&&SKFX[k]){const mo=P.target&&!P.target.happy?P.target:nearestTarget();SKFX[k](mo&&Math.hypot(mo.x-P.x,mo.y-P.y)<260?{x:mo.x,y:mo.y-14}:{x:P.x,y:P.y-14})}}catch(e){}return r}}
@@ -1792,9 +1792,9 @@ function drawVFX2(tm){const list=FX;if(!list.length)return;
     case'shard':{const c=Math.cos(f.a),s2=Math.sin(f.a);ctx.fillStyle=`rgba(${f.c},${al})`;ctx.beginPath();ctx.moveTo(x+c*6,y+s2*6);ctx.lineTo(x-c*3+s2*2.5,y-s2*3-c*2.5);ctx.lineTo(x-c*3-s2*2.5,y-s2*3+c*2.5);ctx.fill();break}
     case'speed':ctx.strokeStyle=`rgba(255,255,255,${.6*al})`;ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x-Math.cos(f.a)*(10+p*20),y-Math.sin(f.a)*(10+p*20));ctx.lineTo(x-Math.cos(f.a)*(26+p*30),y-Math.sin(f.a)*(26+p*30));ctx.stroke();break;
     case'confetti':ctx.fillStyle=f.c;ctx.globalAlpha=al;ctx.fillRect((x|0)-2,(y|0)-1,(Math.sin(f.t*8+f.s)>0?4:2),2);ctx.globalAlpha=1;break;
-    case'after':{const im=P.moving?PS.walk:PS.stand;if(im){const F=PS.F||64;ctx.globalAlpha=.35*al;ctx.drawImage(im,0,(P.row*F)%(im.height||F),F,F,Math.round(P.x-F/2-camX+f.ox),Math.round(P.y-(F-2)-camY),F,F);ctx.globalAlpha=1}break}}}
+    case'after':{if(c234After(f,al))break;const im=P.moving?PS.walk:PS.stand;if(im){const F=PS.F||64;ctx.globalAlpha=.35*al;ctx.drawImage(im,0,(P.row*F)%(im.height||F),F,F,Math.round(P.x-F/2-camX+f.ox),Math.round(P.y-(F-2)-camY),F,F);ctx.globalAlpha=1}break}}}
   ctx.save();ctx.globalCompositeOperation='lighter';ctx.lineCap='round';
-  for(const f of list){if(!ADD[f.k])continue;const p=f.t/f.life;if(p>=1)continue;let x=f.x-camX,y=f.y-camY;if(f.follow){x=P.x-camX;y=P.y-24-camY}const al=1-p;
+  for(const f of list){if(!ADD[f.k])continue;const p=f.t/f.life;if(p>=1)continue;let x=f.x-camX,y=f.y-camY;if(f.follow){x=P.x-camX;y=P.y-c234D('body',24)-camY}const al=1-p;
     switch(f.k){
     case'arc2':for(let j=0;j<3;j++){ctx.strokeStyle=`rgba(${f.c},${al*(1-j*.3)})`;ctx.lineWidth=5-j*1.5;ctx.beginPath();ctx.arc(x-Math.cos(f.a)*6,y-Math.sin(f.a)*6,f.r+j*3+p*6,f.a-1.3+p*.6,f.a+1.1+p*.6);ctx.stroke()}break;
     case'xcut':{ctx.strokeStyle=`rgba(${f.c},${al})`;ctx.lineWidth=2.5;const L=14+p*6;ctx.beginPath();ctx.moveTo(x-L,y+L*.8);ctx.lineTo(x+L,y-L*.8);ctx.moveTo(x-L,y-L*.8);ctx.lineTo(x+L,y+L*.8);ctx.stroke();break}
@@ -1811,7 +1811,7 @@ function drawNumbers(){for(const x of TXT){if(x.dx===undefined){x.dx=(Math.rando
   ctx.lineWidth=3;ctx.strokeStyle='rgba(20,12,34,.95)';ctx.strokeText(x.s,X,Y);
   if(big&&!miss){const g=ctx.createLinearGradient(0,Y-size,0,Y);g.addColorStop(0,'#fff6c8');g.addColorStop(1,x.c||'#ffb13b');ctx.fillStyle=g}else ctx.fillStyle=x.c;ctx.fillText(x.s,X,Y);ctx.restore()}}
 // chapter complete / guardian calmed: rays + confetti around the player
-function celebrate(){fx({k:'rays',x:P.x,y:P.y-30,life:2.4});const cols=['#ffd23f','#ff7aa8','#7fd8ff','#a8f07a','#c9a0ff'];for(let i=0;i<fxN(70);i++)fx({k:'confetti',x:P.x+(Math.random()-.5)*60,y:P.y-60,vx:(Math.random()-.5)*220,vy:-120-Math.random()*160,life:1.6+Math.random()*.8,c:cols[i%5],s:Math.random()*6})}
+function celebrate(){fx({k:'rays',x:P.x,y:P.y-c234D('body',30),life:2.4});const cols=['#ffd23f','#ff7aa8','#7fd8ff','#a8f07a','#c9a0ff'];for(let i=0;i<fxN(70);i++)fx({k:'confetti',x:P.x+(Math.random()-.5)*60,y:P.y-c234D('head',60),vx:(Math.random()-.5)*220,vy:-120-Math.random()*160,life:1.6+Math.random()*.8,c:cols[i%5],s:Math.random()*6})}
 
 
 function cardSub(m){try{if(m.id==='trial')return t('trSub');const C=CAVE_CFG[m.id]||{};if(C.land)return (LANG==='en'?'Chapter ':'บทที่ ')+C.land+' · '+t(C.theme+'N');if(/^cave[123]$/.test(m.id))return (LANG==='en'?'Chapter ':'บทที่ ')+'2 · '+t('caveN');if(/^dream/.test(m.id))return t('dreamN')}catch(e){}return t('town')}
@@ -2665,7 +2665,7 @@ const CAPA={solid:["111111111111111111111110000111111111111111111111", "11111111
 
 // walking behind a tree: the whole tree fades so the child always sees their character in its own colours
 {const _upT=update;update=function(dt){const r=_upT.apply(this,arguments);try{if(M&&(M.capA||M.royal)&&typeof P!=='undefined'&&P)for(const o of M.objs)if(o.capTree||o.capFade){
-  const hid=P.y<o.y-2&&P.x+12>o.x-o.sw/2+6&&P.x-12<o.x+o.sw/2-6&&P.y>o.y-o.sh+4&&P.y-48<o.y,tgt=hid?.3:1;o.a+=(tgt-o.a)*Math.min(1,dt*10)}}catch(e){}return r}}
+  const hid=P.y<o.y-2&&P.x+12>o.x-o.sw/2+6&&P.x-12<o.x+o.sw/2-6&&P.y>o.y-o.sh+4&&P.y-c234D('top',48)<o.y,tgt=hid?.3:1;o.a+=(tgt-o.a)*Math.min(1,dt*10)}}catch(e){}return r}}
 
 // under each tree canopy the ground picture gets plain lawn (sampled from around the tree), so a faded tree really shows the child behind it
 {const _bgT=buildGround;buildGround=function(m){const r=_bgT.apply(this,arguments);try{if(m&&m.capA&&m.ground){let G=m.ground;if(!(G instanceof HTMLCanvasElement)){const c=document.createElement('canvas');c.width=m.w*T;c.height=m.h*T;c.getContext('2d').drawImage(G,0,0);m.ground=G=c}
@@ -2716,7 +2716,7 @@ MAPS.royal=function(){const m=newMap('royal','town',48,32,98);m.nameKey='royal';
 {const HUDIDS=['hud','topR','mmw','act','btns','joy'];let hudEls=null;
  const _upH=update;update=function(dt){const r=_upH.apply(this,arguments);try{if(!M||typeof P==='undefined'||!P)return r;
    if(!hudEls)hudEls=HUDIDS.map(id=>document.getElementById(id)).filter(Boolean).map(el=>{el.style.transition='opacity .25s';return el});
-   const cr=cv.getBoundingClientRect(),k=cr.width/VW,L=cr.left+(P.x-14-camX)*k,R=cr.left+(P.x+14-camX)*k,Tp=cr.top+(P.y-50-camY)*k,B=cr.top+(P.y+4-camY)*k;
+   const cr=cv.getBoundingClientRect(),k=cr.width/VW,L=cr.left+(P.x-14-camX)*k,R=cr.left+(P.x+14-camX)*k,Tp=cr.top+(P.y-c234D('top',50)-camY)*k,B=cr.top+(P.y+4-camY)*k;
    for(const el of hudEls){if(el.classList.contains('hide')||el.offsetParent===null&&getComputedStyle(el).position!=='fixed')continue;const b=el.getBoundingClientRect();
      const hit=b.width>0&&R>b.left-4&&L<b.right+4&&B>b.top-4&&Tp<b.bottom+4;const want=hit?'0.25':'';if(el.style.opacity!==want)el.style.opacity=want}}catch(e){}return r}}
 
@@ -2838,9 +2838,9 @@ for(const id of ['cavemouth','hunt1']){const _qm=MAPS[id];MAPS[id]=function(){co
   ctx.restore()}}
 // a visible weapon swing (melee) and a digging motion
 {const _rS=render;render=function(tm){const r=_rS.apply(this,arguments);try{if(!M||!P)return r;
-   if(P.atkAnim>0&&typeof weapon==='function'&&!['bow','staff'].includes(weapon().type)){const a=DIR_ANG[P.row],p=1-P.atkAnim/.25,X=(P.x-camX)*SC,Y=(P.y-22-camY)*SC,R=30*SC,s=a-1.2+p*2.4;
+   if(P.atkAnim>0&&typeof weapon==='function'&&!['bow','staff'].includes(weapon().type)){const a=DIR_ANG[P.row],p=1-P.atkAnim/.25,X=(P.x-camX)*SC,Y=(P.y-c234D('body',22)-camY)*SC,R=30*SC,s=a-1.2+p*2.4;
      ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.lineCap='round';ctx.globalCompositeOperation='lighter';for(let i=0;i<5;i++){const aa=s-i*.18;ctx.strokeStyle='rgba(255,236,190,'+(.55-i*.1)*(1-p*.5)+')';ctx.lineWidth=(5-i)*SC;ctx.beginPath();ctx.arc(X,Y,R,aa-.14,aa);ctx.stroke()}ctx.restore()}
-   if(typeof DIG!=='undefined'&&DIG&&!DIG.done){const X=(P.x-camX)*SC,Y=(P.y-66-camY+Math.abs(Math.sin(performance.now()/90))*-6)*SC;ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.font=(16*SC)+'px sans-serif';ctx.textAlign='center';ctx.fillText('⛏️',X+14*SC,Y);ctx.restore()}
+   if(typeof DIG!=='undefined'&&DIG&&!DIG.done){const X=(P.x-camX)*SC,Y=(P.y-c234D('head',66)-camY+Math.abs(Math.sin(performance.now()/90))*-6)*SC;ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.font=(16*SC)+'px sans-serif';ctx.textAlign='center';ctx.fillText('⛏️',X+14*SC,Y);ctx.restore()}
  }catch(e){}return r}}
 {const _uD=update;update=function(dt){const r=_uD.apply(this,arguments);try{if(typeof DIG!=='undefined'&&DIG&&!DIG.done&&Math.random()<dt*14)FX.push({k:'dust',x:DIG.d.x+(Math.random()-.5)*14,y:DIG.d.y-4,vx:(Math.random()-.5)*50,vy:-30-Math.random()*40,t:0,life:.6})}catch(e){}return r}}
 // dig spots move every day; fishing at the cave pools
@@ -3103,8 +3103,8 @@ let mailCool=0;
 {const _uM=update;update=function(dt){const r=_uM.apply(this,arguments);try{if(!S||!M||!(M.capA||M.h9)||PAUSE)return r;mailCool=Math.max(0,mailCool-dt);if(mailCool>0)return r;const mb=mailToday(),near=k=>{const [x,y]=mailDoorPt(k);return Math.hypot(P.x-x,P.y-y)<T*(M.h9?1.7:1.05)};
   if(near('post_office')){
     if(!mb.got){mb.got=true;mb.letters=mailPick().map(k=>({to:k,done:false}));save();sfx('pick');mailShow();mailCool=2.5;hud();return r}
-    if(mb.letters.length&&mb.letters.every(l=>l.done)&&!mb.claimed){mb.claimed=true;S.stamps=(S.stamps||0)+1;S.coins+=20;gainExp(15);sfx('lvl');for(let i=0;i<18;i++)FX.push({k:'star',x:P.x,y:P.y-30,vx:Math.cos(i/18*6.28)*60,vy:Math.sin(i/18*6.28)*60-30,t:0,life:1});say(t('mailPrize')+' · +20🪙');save();hud();mailCool=2.5;try{stampRewards();setTimeout(()=>{if(!document.querySelector('#modal:not(.hide)'))openStampBook()},2600)}catch(e){}return r}}
-  for(const l of mb.letters||[]){if(l.done||!near(l.to))continue;l.done=true;S.coins+=5;gainExp(5);sfx('coin');TXT.push({x:P.x,y:P.y-70,s:'✉️ +5🪙',c:'#ffe36b',t:0});say(t('mailDone').replace('{n}',mailName(l.to))+(mb.letters.every(q=>q.done)?'\n'+t('mailAll'):''));save();hud();mailCool=2;break}
+    if(mb.letters.length&&mb.letters.every(l=>l.done)&&!mb.claimed){mb.claimed=true;S.stamps=(S.stamps||0)+1;S.coins+=20;gainExp(15);sfx('lvl');for(let i=0;i<18;i++)FX.push({k:'star',x:P.x,y:P.y-c234D('body',30),vx:Math.cos(i/18*6.28)*60,vy:Math.sin(i/18*6.28)*60-30,t:0,life:1});say(t('mailPrize')+' · +20🪙');save();hud();mailCool=2.5;try{stampRewards();setTimeout(()=>{if(!document.querySelector('#modal:not(.hide)'))openStampBook()},2600)}catch(e){}return r}}
+  for(const l of mb.letters||[]){if(l.done||!near(l.to))continue;l.done=true;S.coins+=5;gainExp(5);sfx('coin');TXT.push({x:P.x,y:P.y-c234D('head',70),s:'✉️ +5🪙',c:'#ffe36b',t:0});say(t('mailDone').replace('{n}',mailName(l.to))+(mb.letters.every(q=>q.done)?'\n'+t('mailAll'):''));save();hud();mailCool=2;break}
  }catch(e){}return r}}
 // envelopes over the doors that still wait (and a mailbox sign over the post office when there is something to collect)
 {const _rM2=render;render=function(tm){const r=_rM2.apply(this,arguments);try{if(!S||!M||!(M.capA||M.h9))return r;const mb=mailToday(),t2=(tm||0);ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.textAlign='center';ctx.textBaseline='middle';
@@ -3127,7 +3127,7 @@ function stampGivePet(){S.pets=S.pets||[];const k=Object.keys(PETB).find(k=>!S.p
 function stampRewards(){S.stampGot=S.stampGot||[];const out=[];for(const g of STAMP_GOALS){if((S.stamps||0)<g.n||S.stampGot.includes(g.n))continue;S.stampGot.push(g.n);
    if(g.k==='pet'||g.k==='pet2'){if(!stampGivePet())S.coins+=60;if(g.k==='pet2'){S.coins+=100;out.push(t('stampCoins'))}}
    else if(g.k==='item'){const ty=['sw','bow','staff','dag'][Math.floor(Math.random()*4)];if(!isKid()&&(S.inv||[]).length<bagMax()){S.inv.push(mkItem(ty,2));out.push(t('stampItem'))}else{S.coins+=80;out.push('+80 🪙')}}
-   sfx('lvl');for(let i=0;i<24;i++)FX.push({k:'star',x:P.x,y:P.y-30,vx:Math.cos(i/24*6.28)*70,vy:Math.sin(i/24*6.28)*70-30,t:0,life:1.2})}
+   sfx('lvl');for(let i=0;i<24;i++)FX.push({k:'star',x:P.x,y:P.y-c234D('body',30),vx:Math.cos(i/24*6.28)*70,vy:Math.sin(i/24*6.28)*70-30,t:0,life:1.2})}
   if(out.length)setTimeout(()=>say(out.join(' · ')),1500);save();hud()}
 function openStampBook(){const n=Math.min(STAMP_MAX,S.stamps||0),got=S.stampGot||[];let cells='';
   for(let i=1;i<=STAMP_MAX;i++){const g=STAMP_GOALS.find(q=>q.n===i),on=i<=n;
@@ -3804,7 +3804,7 @@ function g9bSeats(){return ((G9B&&G9B.benches)||[]).flatMap(([cx,by,w])=>[{x:Mat
 function g9bSit(seat){if(!P)return;P.x=seat.x;P.y=seat.by+16;P.sit={x:P.x,y:P.y,seatY:seat.by+1,side:seat.side,t0:performance.now()};P.path=null;P.act=null;P.target=null;P.moving=false;try{P.row=rowFor(0,1)}catch(e){}}
 function g9bSitTick(){const s=P&&P.sit;if(!s||typeof s!=='object')return;if(!M||!M.g9b){P.sit=null;return}const fresh=performance.now()-s.t0<300;   // the step that brought the player here still counts as 'moving' for a moment
   if((P.path&&P.path.length)||(!fresh&&(P.moving||Math.hypot(P.x-s.x,P.y-s.y)>.6)))P.sit=null;else{P.x=s.x;P.y=s.y}}
-{const _dpS=drawPlayer;drawPlayer=function(){let s=P&&P.sit;if(typeof s!=='object')s=null;if(s&&s.free&&((P.path&&P.path.length)||(performance.now()-s.t0>300&&P.moving)||Math.hypot(P.x-s.x,P.y-s.y)>6)){P.sit=null;s=null}if(s){ctx.save();ctx.beginPath();ctx.rect(P.x-44-camX,s.seatY-92-camY,88,89);ctx.clip();ctx.translate(0,s.seatY-P.y+G9SIT.drop);try{return _dpS.apply(this,arguments)}finally{ctx.restore()}}return _dpS.apply(this,arguments)}}
+{const _dpS=drawPlayer;drawPlayer=function(){let s=P&&P.sit;if(typeof s!=='object')s=null;if(s&&s.free&&((P.path&&P.path.length)||(performance.now()-s.t0>300&&P.moving)||Math.hypot(P.x-s.x,P.y-s.y)>6)){P.sit=null;s=null}if(s){ctx.save();ctx.beginPath();const t5=c234SitTop(s);ctx.rect(P.x-44-camX,(t5===null?s.seatY-92:t5)-camY,88,t5===null?89:s.seatY-3-t5);ctx.clip();ctx.translate(0,s.seatY-P.y+G9SIT.drop);try{return _dpS.apply(this,arguments)}finally{ctx.restore()}}return _dpS.apply(this,arguments)}}
 {const cv=document.getElementById('c');if(cv)cv.addEventListener('pointerup',ev=>{try{if(!M||!M.g9b||PAUSE||DLG)return;const r=cv.getBoundingClientRect(),dpr=devicePixelRatio||1,wx=(ev.clientX-r.left)*dpr/SC+camX,wy=(ev.clientY-r.top)*dpr/SC+camY;
     for(const [cx,by,w] of (G9B.benches||[])){if(Math.abs(wx-cx)<w/2+4&&wy>by-42&&wy<by+6){ev.stopImmediatePropagation();window._farmTapT=performance.now();const seat=g9bSeats().find(q=>q.cx===cx&&q.by===by&&q.side===(wx<cx?'L':'R'));g9WalkThen(seat.x,seat.by+16,()=>g9bSit(seat));return}}}catch(e){}},true)}
 // ================= 1.28 THUMB CONTROLS like the phone games Thai players know (RoV): stick on the left, round buttons on the right, map top right =================
@@ -4069,7 +4069,7 @@ function openFurnShop(){if(!ROOM2||!IMG.furnFine)return;{const d2=document.getEl
   document.querySelectorAll('[data-buy]').forEach(b=>b.onclick=()=>{if(f2Buy(b.dataset.buy)){openFurnShop();try{deco2UI()}catch(e){}}})}
 {const _cm44=closeModal;closeModal=function(){const r=_cm44.apply(this,arguments);try{const d2=document.getElementById('deco2');if(d2)d2.style.display=''}catch(e){}return r}}
 // ================= 1.46 fixes from the owner's play test (4 Oct, evening) =================
-function charClip(){try{const B=[],add=(x,y,w,h)=>B.push([x-camX,y-camY,w,h]);if(P)add(P.x-20,P.y-64,40,68);try{if(typeof PET!=='undefined'&&PET&&isFinite(PET.x))add(PET.x-18,PET.y-36,36,38)}catch(e){}
+function charClip(){try{const B=[],add=(x,y,w,h)=>B.push([x-camX,y-camY,w,h]);if(P)add(...(c234Box4()||[P.x-20,P.y-64,40,68]));try{if(typeof PET!=='undefined'&&PET&&isFinite(PET.x))add(PET.x-18,PET.y-36,36,38)}catch(e){}
   try{const R=M.robot&&M.robot.o;if(R&&isFinite(R.x))add(R.x-24,R.y-62,48,66)}catch(e){}for(const o of M.objs)if(o.npc)add(o.x-20,o.y-64,40,68);
   for(const b of B){ctx.beginPath();ctx.rect(-9999,-9999,29999,29999);ctx.rect(b[0],b[1],b[2],b[3]);ctx.clip('evenodd')}}catch(e){}}
 try{document.getElementById('bDeco').onclick=()=>openDeco()}catch(e){}   // the button kept a pointer to the old furniture screen: in the new house it showed the old list instead of the arranging bar and the shop
@@ -5098,7 +5098,7 @@ function ctx167Button(){let b=$('context167');if(b)return b;b=document.createEle
  b.addEventListener('pointerdown',e=>e.stopPropagation());b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();ctx167Use()});return b}
 function ctx167Position(b,c){const r=cv.getBoundingClientRect(),q=SC/(devicePixelRatio||1),ax=(c.anchor.x-camX)*q+r.left,ay=(c.anchor.y-camY)*q+r.top;
  if(ax<-50||ay<-80||ax>innerWidth+50||ay>innerHeight+80){b.hidden=true;return}const w=b.offsetWidth,h=b.offsetHeight;
- const player={left:(P.x-camX-20)*q+r.left,top:(P.y-camY-62)*q+r.top,right:(P.x-camX+20)*q+r.left,bottom:(P.y-camY+5)*q+r.top};
+ const player={left:(P.x-camX-20)*q+r.left,top:(P.y-camY-c234D('top',62))*q+r.top,right:(P.x-camX+20)*q+r.left,bottom:(P.y-camY+5)*q+r.top};
  const avoid=[player];for(const selector of ['#hud','#topR','#mmw','#act','#joy','#gmBtn','#bDeco','#dlg']){const el=document.querySelector(selector);if(!el||el.classList.contains('hide'))continue;const st=getComputedStyle(el);if(st.display==='none'||st.visibility==='hidden'||+st.opacity===0)continue;const z=el.getBoundingClientRect();if(z.width&&z.height)avoid.push(z)}
  const overlap=(x,y,z)=>Math.max(0,Math.min(x+w+5,z.right)-Math.max(x-5,z.left))*Math.max(0,Math.min(y+h+5,z.bottom)-Math.max(y-5,z.top));
  // Include obstacle edges: a short phone may have no free space at the six usual anchor offsets.
@@ -5626,7 +5626,7 @@ function potMax181(){return POT181.max+((S&&S.potUp)||0)}
   const n0=S.potions,r=old.apply(this,arguments);try{if(S.potions<n0){P.potCd=POT181.cd*(1-((S.potCdr||0)/100));CD179.pot=P.potCd}}catch(e){}return r}}
 {const old=pickUp;pickUp=function(d){const n0=S?S.potions:0,max=potMax181(),r=old.apply(this,arguments);try{if(d&&d.k==='potion'&&S&&!isKid()&&n0>=max&&S.potions>n0)S.potions=n0}catch(e){}return r}}   // at full charges a picked-up potion fills nothing (as in Diablo 4)
 {const old=update;update=function(dt){const r=old.apply(this,arguments);try{if(S&&P&&!isKid()){if(P.potCd>0)P.potCd=Math.max(0,P.potCd-dt);const max=potMax181();
-  if(S.potions<max){if(!PAUSE&&!P.dead){S.potT=(S.potT||0)+dt;if(S.potT>=POT181.refill){S.potT-=POT181.refill;S.potions++;TXT.push({x:P.x,y:P.y-66,s:'+1 \u{1F9EA}',c:'#ffb3d9',t:0});hud()}}}else S.potT=0;
+  if(S.potions<max){if(!PAUSE&&!P.dead){S.potT=(S.potT||0)+dt;if(S.potT>=POT181.refill){S.potT-=POT181.refill;S.potions++;TXT.push({x:P.x,y:P.y-c234D('head',66),s:'+1 \u{1F9EA}',c:'#ffb3d9',t:0});hud()}}}else S.potT=0;
   const empty=!(S.potions>0);cdShow179('bPot',empty?POT181.refill-(S.potT||0):(P.potCd>0?P.potCd:0),empty?POT181.refill:(CD179.pot||POT181.cd));
   let l=POT181.el;if(!l||!l.isConnected)l=POT181.el=document.querySelector('#bPot small');const v=S.potions+'/'+max;if(l&&l.textContent!==v)l.textContent=v}}catch(e){}return r}}
 // ================= 1.82 · potion charges grow the Renown way (owner, 9 Oct): +1 charge at each of classes 7, 8 and 9, and +1 every 10 levels; no money involved =================
@@ -7742,4 +7742,236 @@ function kid8Iris(r,g,b){const [,s,l]=hslOf(r/255,g/255,b/255);return l>=.18&&l<
 // online: a set-08 look travels with its set
 {const o=pdEnc226;pdEnc226=function(x){const s=o.apply(this,arguments);try{return s&&x&&x.set===8?s+',8':s}catch(e){return s}}}
 {const o=pdDec226;pdDec226=function(s){if(typeof s==='string'&&s.length<=40&&/^(-?\d+,){8}8$/.test(s)){const r=o.call(this,s.slice(0,s.lastIndexOf(',')));if(r)r.set=8;return r}return o.apply(this,arguments)}}
+// ================= 2.34 G4.1 (Claude · plan G4_0_GAME_INTEGRATION_PLAN.md v1.2 · owner "อนุมัติแผน G4" 6 Nov 2569 01:26 · G4.0 closed 7 Nov) =================
+// Character v2 (char2.js) behind a per-save GM flag. G4.1 = the flag + its state + a strict load + the save migration + rollback. NOTHING is drawn with
+// Char2 in G4.1 (the W1–W15 drawing points come in G4.2–G4.4). With the flag off — every save today — nothing here runs: no file is asked for, no timer,
+// no listener, no save field is written. S.char2On===true (only that value: false / 1 / "true" / missing = off) is the save's own choice and is changed
+// only from the GM panel. Who may use it (D-G4-2 ก): a girl (S.gender194, else the look's gender) aged 6–9. Every async step belongs to one owner
+// (the save object S at the start + a generation number): switching save or turning the flag off bumps the generation and late results are dropped.
+// Strict load (plan 3.4): Char2.load() must be ready AND list no failed file (no Char2 fallback modes in G4) within 20 s, else 'failed' = the old character.
+// Save (plan 6): an S.char2 already in the save is only read (a wrong/future one is never overwritten → 'failed'); none yet → once, after PD219 is decided,
+// from a COPY of the save cleaned with the game's own pd219Look / look169Valid → Char2.look → S.char2 (+ from = where the hair colour came from); old fields
+// are never touched; it is written by the next ordinary save(). Rollback: flag off keeps S.char2; "clear v2" (two taps) = flag off + S.char2 removed.
+const C234={st:'off',gen:0,owner:null,why:'',app:null,res:null,script:null,cnt:{script:0,load:0,migrate:0,cleanup:0,fail:0},
+  on(){return this.st==='ready'&&S===this.owner}};
+function c234Who(s){if(!s)return 'nosave';const g=(s.gender194==='f'||s.gender194==='m')?s.gender194:genderOf194(s.kid);if(g!=='f')return 'gender';
+  const a=Number(s.age);return Number.isInteger(a)&&a>=6&&a<=9?'':'age'}
+function c234Off(why){const was=C234.st;C234.gen++;C234.st='off';C234.app=null;C234.res=null;C234.why=why||'';C234.A=null;C234.pack=null;C234.feet=null;
+  if(was==='ready'){C234.cnt.cleanup++;try{if(window.Char2)Char2.trim()}catch(e){}}c234Paint()}
+function c234Fail(g,why){if(g!==C234.gen||C234.st!=='loading')return;C234.st='failed';C234.why=why;C234.app=null;C234.cnt.fail++;c234Paint()}
+function c234Ready(app){C234.app=app;C234.A=Char2.actor();C234.st='ready';C234.why='';c234Paint()}
+function c234Script(){if(C234.script)return C234.script;C234.cnt.script++;   // char2.js is asked for once per page, never again
+  C234.script=new Promise(res=>{if(window.Char2)return res(true);const e=document.createElement('script');e.src='char2.js';e.onload=()=>res(!!window.Char2);e.onerror=()=>res(false);document.head.appendChild(e)});
+  return C234.script}
+function c234Sync(){const s=S;
+  if(!s||s.char2On!==true){if(C234.st!=='off'||C234.owner!==s)c234Off(s?'flag':'nosave');C234.owner=s;return}
+  const who=c234Who(s);if(who){if(C234.st!=='off'||C234.owner!==s)c234Off(who);C234.owner=s;C234.why=who;return}
+  if(C234.owner===s&&C234.st!=='off')return;   // this save is already loading / ready / failed
+  c234Off('');C234.owner=s;C234.st='loading';const g=C234.gen,live=()=>S===s&&C234.owner===s&&C234.gen===g&&C234.st==='loading';
+  setTimeout(()=>{if(live())c234Fail(g,'timeout')},20000);
+  c234Script().then(ok=>{if(!live())return null;if(!ok){c234Fail(g,'script');return null}C234.cnt.load++;return Char2.load('c2-pack.json')})
+    .then(r=>{if(!r||!live())return;const f=Array.isArray(r.failed)?r.failed.slice():['?'];C234.res={ready:r.ready===true,failed:f};
+      if(r.ready!==true||f.length){c234Fail(g,'files: '+(f.join(' ')||'not ready'));return}
+      C234.pack=r.pack;return c234Look(s,g,r.pack,live)})
+    .catch(e=>{if(live())c234Fail(g,'error: '+String(e&&e.message||e).slice(0,80))})}
+// 2.35 (Codex T39-N1): an S.char2 already in the save is used only when it is EXACTLY what Char2 reads back — Char2 (G3) quietly puts a default in
+// for a wrong gender / part / colour; here any such field, an unknown key, or a `from` the migration never writes = "malformed" (plan 6.1) → failed,
+// the save untouched, the original character drawn. Allowed: keys v set base gender parts color from · parts = the base's slots (an optional one may be
+// left out = none) · color = hair iris skin, each a colour of that group · from = pd219 appearance169 hcol hc default, or left out.
+function c234Exact(c,a){const po=o=>!!o&&typeof o==='object'&&!Array.isArray(o),only=(o,L)=>Object.keys(o).every(k=>L.includes(k)),G=['hair','iris','skin'];
+  if(!a||!po(c)||!only(c,['v','set','base','gender','parts','color','from'])||c.base!==a.base||c.gender!==a.gender||!po(c.parts)||!po(c.color))return false;
+  if(c.from!==undefined&&!['pd219','appearance169','hcol','hc','default'].includes(c.from))return false;
+  const P=Object.keys(a.parts);return only(c.parts,P)&&P.every(k=>(c.parts[k]===undefined?null:c.parts[k])===a.parts[k])&&only(c.color,G)&&G.every(k=>c.color[k]===a.color[k])}
+function c234Look(s,g,pack,live){const c=s.char2;
+  if(c!==undefined){const app=(c&&typeof c==='object'&&!Array.isArray(c)&&c.v===2&&c.set===pack.set)?Char2.look(s):null;
+    if(!app||!c234Exact(c,app)){c234Fail(g,'save look unreadable');return}c234Ready(app);return}
+  return ((PD219.ok||PD219.tried)?Promise.resolve():pd219Load().catch(()=>false)).then(()=>{if(!live())return;
+    const m=c234Migrate(s);if(!m){c234Fail(g,'no look');return}
+    s.char2=m.char2;C234.cnt.migrate++;c234Ready(m.app)})}   // the ONLY write to the save in G4.1 (besides char2On / clear in the GM row)
+function c234Migrate(s){   // pure: reads a COPY of the save, never changes s · {char2 (Appearance + from), app} or null
+  const src=JSON.parse(JSON.stringify(s));delete src.char2;
+  if(src.pd219!==undefined&&!pd219Look(src.pd219))delete src.pd219;
+  if(src.appearance169!==undefined&&!look169Valid(src.appearance169))delete src.appearance169;
+  const app=Char2.look(src);if(!app)return null;
+  const okH=v=>Number.isInteger(v)&&v>=0&&v<HAIRC.length;
+  const from=src.pd219&&okH(src.pd219.hc)?'pd219':src.appearance169?'appearance169':okH(src.hcol)?'hcol':okH(src.hc)?'hc':'default';
+  return {char2:Object.assign({},app,{from}),app}}
+{const _sg234=startGame;startGame=function(){const r=_sg234.apply(this,arguments);try{c234Sync()}catch(e){}return r}}
+// GM panel row (TH/EN): the flag, its state (kept current while the row is on screen), and "clear v2" with an in-page second tap (no browser dialog)
+// 2.36 (Codex T39-N4): the on/off button shows "on" the game's own way (aria-pressed → the pressed style / the active frame art) — 2.35 put dark
+// text on an inline gold background that the frame art (border-image … fill) painted over, so the label was hard to read
+function c234StText(){if(!S)return '';const tx=(a,b)=>LANG==='en'?b:a,who=c234Who(S),on=S.char2On===true,st=C234.owner===S?C234.st:'off';
+  const ST={off:tx('ปิด','off'),loading:tx('กำลังโหลด…','loading…'),ready:tx('พร้อม · ใช้ตัวใหม่ในเกม','ready · the new character is in the game'),failed:tx('ใช้ไม่ได้ · ใช้ตัวเดิม','unavailable · original character')};
+  const why=who?tx('ยังไม่มีตัวแบบนี้','No v2 character for this player yet'):(on&&st==='failed')?(C234.why==='save look unreadable'?tx('ลุครุ่น 2 ในเซฟนี้อ่านไม่ได้','The v2 look in this save cannot be read'):C234.why):'';
+  return tx('สถานะ: ','State: ')+(on?ST[st]:ST.off)+(why?' · '+why:'')}
+function c234Paint(){const e=document.getElementById('c234st');if(e)e.textContent=c234StText()}
+function c234Row(h2,again){const tx=(a,b)=>LANG==='en'?b:a,who=c234Who(S),on=S.char2On===true;   // again (2.44): what opens after a tap — the GM panel unless told
+  const d=document.createElement('div');d.className='pn';d.id='c234row';d.style.margin='6px 0';
+  d.innerHTML='<b>'+tx('ตัวละครรุ่น 2 (ทดสอบ · เซฟนี้)','Character v2 (trial · this save)')+'</b><div id="c234st" style="margin-top:4px">'+c234StText()+'</div>'+
+    '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px"><button id="c234on" style="min-height:44px" aria-pressed="'+on+'"'+(who&&!on?' disabled':'')+'>'+(on?tx('ปิดตัวละครรุ่น 2','Turn v2 off'):tx('เปิดตัวละครรุ่น 2','Turn v2 on'))+'</button>'+
+    (on||S.char2!==undefined?'<button id="c234clr" style="min-height:44px">'+tx('ล้างตัวรุ่น 2','Clear v2')+'</button>':'')+'</div>';
+  h2.after(d);
+  $('c234on').onclick=()=>{if(!S)return;if(S.char2On===true)S.char2On=false;else if(!c234Who(S))S.char2On=true;else return;save();c234Sync();closeModal();(again||openGM)()};
+  const c=$('c234clr');if(c)c.onclick=()=>{if(!c.dataset.armed){c.dataset.armed='1';c.textContent=tx('แตะอีกครั้งเพื่อยืนยัน · ลบลุครุ่น 2 ของเซฟนี้','Tap again to confirm · removes this save\'s v2 look');return}
+    S.char2On=false;delete S.char2;save();c234Sync();closeModal();(again||openGM)()}}
+{const _og234=openGM;openGM=function(){const r=_og234.apply(this,arguments);try{const h2=document.querySelector('#modal h2');if(h2&&gmOn())c234Row(h2)}catch(e){}return r}}
+// ================= 2.37 G4.2 (Claude · plan G4_0_GAME_INTEGRATION_PLAN.md v1.2 §4 §5 · table rows W1–W5 + W11 · G4.1 closed 9 Nov after Codex T39) =================
+// The player is drawn with Char2 while C234 is ready for this save. In-place edits in the old code — each calls a helper below that gives the OLD value
+// (or false → the old drawImage runs) when Char2 is not in use, so with the flag off the game is the old one: W1 drawPlayer, the two body draws (normal ·
+// wading) · W2 the wading clip · W3 the blurred-shadow branch → the Pilot ellipse (softAO and the g9b branch unchanged) · W5 the sitting clip (top +
+// height; translate and state unchanged) · W11 the cave light hole. W4 (see-through α .5) is untouched: Char2.draw reads the context's α (one composite).
+// Time (plan 4.1): one Char2.tick per game step in the update wrapper below, not while PAUSE or P.dead · nothing ticks while drawing.
+// Lantern (plan 5): held only when DARK() && LKID() · power 100 (S.lamp > warn) · 10 (0 < S.lamp ≤ warn, glass 35 %) · 0 (S.lamp ≤ 0: still held,
+// glass dark) · no S.lamp = 1 (the game's own default) · no emissive pass in G4 (the glass is y-sorted with the body and can be covered).
+// A Char2 draw that returns false, or a held lantern without a light point, is a bug → 'failed' from that frame on (old character + GM label), never blank.
+// 2.38 (Codex T40-N1): the light point is checked BEFORE anything of the new body is drawn — in every helper of the frame (c234Go), on every map
+// (not only where the dark layer is drawn) — so a null light gives the old shadow, clip and body in the SAME frame. Held = the lantern is wanted
+// (dc.held) AND the actor is in its holding state (A.holding, set by the tick of this step): while paused right after a map change the actor may
+// not hold yet — then Char2 draws it without the lantern and that is not a failure. The light found for the body is kept with the feet for W11.
+C234.A=null;C234.pack=null;C234.feet=null;C234.step=0;C234.n={call:0,body:0,tick:0,shadow:0,hole:0,sit:0,anchor:0,after:0,hud:0,equip:0,pick:0,list:0,trim:0};
+function c234Use(){return C234.on()&&!!C234.A&&!!C234.app&&!!C234.pack&&!!window.Char2}
+function c234Hold(){return DARK()&&LKID()}
+function c234Lamp(){const w=LAMP_CFG(S.age).warn,l=S.lamp===undefined?1:Number(S.lamp);return l>w?100:l>0?10:0}
+function c234DC(){const h=HOUSES[S.house]||HOUSES[0],dc={house:h.id};if(c234Hold())dc.held={id:C234.pack.lantern.id,on:true,lit:true,power:c234Lamp()};return dc}
+function c234Go(){if(!c234Use())return null;const dc=c234DC();let L=null;   // 2.38 (T40-N1): {dc, L} for this frame, or null = the old way
+  if(dc.held&&C234.A.holding){L=Char2.light(C234.A,dc);if(!L){c234Broke('light');return null}}return {dc,L}}
+function c234Broke(why){if(C234.st!=='ready')return;C234.gen++;C234.st='failed';C234.why=why;C234.app=null;C234.A=null;C234.feet=null;C234.cnt.fail++;c234Paint()}
+function c234Body(X,Y,F,yoff){   // W1/W2: feet = (X+F/2, Y+F−2+yoff) = the old sprite's feet (lunge and rounding included) · s = 1 under the game's transform
+  const g=c234Go();if(!g)return false;C234.n.call++;const fx=X+F/2,fy=Y+F-2+yoff,dc=g.dc;
+  if(!Char2.draw(ctx,C234.app,dc,C234.A,fx,fy,1)){c234Broke('draw');return false}
+  const m=ctx.getTransform();C234.feet={x:(m.a*fx+m.c*fy+m.e)/SC,y:(m.b*fx+m.d*fy+m.f)/SC,step:C234.step,dc,L:g.L};C234.n.body++;return true}   // feet on screen (sit translate included)
+function c234Clip(X,Y,F,cut){return c234Go()?[X+F/2-48,Y+F-2-94,96,96-cut]:[X,Y,F,F-cut]}   // W2: the 96 cell, bottom edge Y+F−cut = the old one
+function c234Shadow(){if(!c234Go())return false;const ro=C234.pack.render_offset[C234.A.dir]||0;   // W3 (inside the game's save/restore)
+  ctx.globalCompositeOperation='source-over';ctx.globalAlpha=1;ctx.fillStyle='rgba(20,18,40,.35)';ctx.beginPath();ctx.ellipse(Math.round(P.x-camX)+ro,Math.round(P.y-camY),14,3,0,0,7);ctx.fill();C234.n.shadow++;return true}
+function c234SitTop(s){const g=c234Go();if(!g)return null;const b=Char2.anchor(C234.A,'box',g.dc);if(!b){c234Broke('anchor box');return null}   // W5: top of the clip
+  C234.n.sit++;return s.seatY+G9SIT.drop-(94-b[1])-4}
+function c234Hole(x,y){const f=C234.feet;if(!c234Use()||!f||f.step!==C234.step)return [x,y];   // W11: from the feet the body was drawn at THIS frame
+  if(f.L){C234.n.hole++;return [f.x+f.L.x,f.y+f.L.y]}   // light() includes the offset · checked before the body was drawn (2.38)
+  const b=Char2.anchor(C234.A,'body',f.dc);if(!b){c234Broke('anchor body');return [x,y]}C234.n.hole++;
+  return [f.x+(C234.pack.render_offset[C234.A.dir]||0),f.y-(94-b[1])+4]}   // body, e −4 (the old 26 = 30 − 4)
+{const _u237=update;update=function(dt){const r=_u237.apply(this,arguments);try{if(c234Use()){C234.step++;
+  if(!PAUSE&&!(P&&P.dead)){Char2.tick(C234.A,dt*1000,{dir:C234.pack.dirs[P.row],moving:!!P.moving,holding:c234Hold()});C234.n.tick++}}}catch(e){}return r}}
+
+// ── 2.39 G4.3 (plan G4_0 §4.2–4.3 rows W6 W7 W8 W9 W12): points that hang off the body read the new character's anchors when it is drawn.
+// Distance above the feet: old d = k_old + e → new = k_new + e, k_new = 94 − anchor y of the CURRENT frame (head_top · body · box y0 · label),
+// k_old = head 60 · body 30 · top 60 · label 66 (plan constants). Only the height changes; x stays the old x (P.x, the old offsets) so text and
+// sparks do not sway with the frame — except the line-gap box (L4072) whose x/width the plan takes from box + render offset.
+// Flag off (or Char2 not usable / failed this frame) → c234D returns d unchanged = the old number, the same arithmetic as before.
+// W10 (≤ 20 px from the feet) unchanged by plan. W6: the after-image ghost is the current actor (no tick) at the old ghost's feet, alpha .35·al.
+const C234K={head:60,body:30,top:60,label:66},C234AN={head:'head_top',body:'body',top:'box',label:'label'};
+function c234D(kind,d){const g=c234Go();if(!g)return d;const a=Char2.anchor(C234.A,C234AN[kind],g.dc);if(!a){c234Broke('anchor '+kind);return d}
+  C234.n.anchor++;return 94-a[1]+d-C234K[kind]}
+function c234Box4(){const g=c234Go();if(!g)return null;const b=Char2.anchor(C234.A,'box',g.dc);if(!b){c234Broke('anchor box');return null}C234.n.anchor++;
+  const top=94-b[1]+4,ro=C234.pack.render_offset[C234.A.dir]||0;return [P.x+b[0]-48+ro,P.y-top,b[2]-b[0],top+4]}   // y = P.y − top_new · h = top_new + 4 (bottom +4 as before)
+function c234After(f,al){const g=c234Go();if(!g)return false;const F=PS.F||64,X=Math.round(P.x-F/2-camX+f.ox),Y=Math.round(P.y-(F-2)-camY);
+  ctx.globalAlpha=.35*al;const ok=Char2.draw(ctx,C234.app,g.dc,C234.A,X+F/2,Y+F-2,1);ctx.globalAlpha=1;if(!ok){c234Broke('draw');return false}C234.n.after++;return true}
+
+// ── 2.40 G4.4 (plan G4_0 §7 rows W13 W14 W15 · D-G4-3 = b, the owner 10 Nov): the screens show the new character.
+// HUD + equipment figure = the big face portrait (Char2.sheet(app,{house},'portrait'), 384 px). Whole-number scale (plan §7, M7) without
+// moving anything: the picture keeps its CSS box (no inline size · the HUD layout and its buttons stay put); its backing = that box in
+// device pixels (CSS size × devicePixelRatio × the box's own CSS scale); the face is drawn at 384/q (q = 1 2 3 4 6 8 … divides 384) — the largest that is
+// box within +15 % (phone ×3 → 96 in an 84×88 box · iPad ×2 → 64 in 56×62) — centred, its edge margin cropped when larger than the box.
+// Save picker = the whole body facing S (sheet 'stand8', cell 0): big view on the stand / shadow redrawn at device resolution, the largest
+// whole scale that keeps the head inside (feet where the old feet were); each slot's small picture = the cell's upper part at a whole scale.
+// Every sheet is borrowed, drawn and released in the SAME call (borrows left 0). A slot shows the new look only when ITS save has
+// char2On === true, passes c234Who (girl 6–9), its S.char2 is exact and Char2 is loaded; otherwise the old picture stays.
+// Flag off / save switch / failure → the old pictures come back on the next draw (keys cleared, the canvas back to its old size).
+// The equipment figure is drawn without the old gear painted on the body (that art fits the 64 px body); kids 6–9 reach it only via GM.
+function c234UiOk(){return C234.st==='ready'&&!!C234.app&&!!window.Char2&&!!S&&C234.owner===S}
+// M9 (plan §8 · R6 · memory): the playing save's house or look changed (same save, no cleanup since) → Char2.trim() ONCE: every sheet not
+// borrowed right now goes (the old house's / old look's, and other slots' picker looks); the current look is rebuilt at once by the draw that
+// noticed it (this frame's body · the HUD face). Checked where sheets are asked for (c234DC each frame · c234Face): a compare every frame, a trim
+// only on a change. Save switch / flag off already trim in c234Off (G4.1 · cnt.cleanup) → not trimmed twice; flag off rebuilds nothing.
+function c234Mem(house){const a=C234.app,c=C234.cnt.cleanup;if(C234.ma===a&&C234.mk===house&&C234.mc===c)return;
+  const t=!!C234.ma&&C234.mc===c;C234.ma=a;C234.mk=house;C234.mc=c;if(t){C234.n.trim++;try{Char2.trim()}catch(e){}}}
+{const o=c234DC;c234DC=function(){const dc=o.apply(this,arguments);try{c234Mem(dc.house)}catch(e){}return dc}}
+function c234Sheet(app,house,mode,draw){const sh=Char2.sheet(app,{house},mode);if(!sh)return false;try{draw(sh.canvas)}finally{sh.release()}return true}
+function c234Fit(c){   // the picture's own CSS box (its stylesheet size) in device pixels, and the face size 384/q that fits it best
+  const cs=getComputedStyle(c),w=parseFloat(cs.width)||c.width,h=parseFloat(cs.height)||w,r=c.getBoundingClientRect(),k=r.width&&w?r.width/w:1,dpk=(devicePixelRatio||1)*k;
+  const bw=Math.max(1,Math.round(w*dpk)),bh=Math.max(1,Math.round(h*dpk)),box=Math.min(bw,bh),q=[1,2,3,4,6,8,12,16,24].find(q=>384/q<=box*1.15)||24;return {bw,bh,n:384/q,q,dpk}}
+// 2.41 (T44-N1): every new picture borrows its sheet FIRST and touches the canvas only inside the draw → no sheet = the canvas keeps what it had
+// (the old picture the old code drew, or the caller puts the old one back) — never a cleared box
+function c234Face(c,why){const f=c234Fit(c),h=(HOUSES[S.house]||HOUSES[0]).id;c234Mem(h);const x=Math.floor((f.bw-f.n)/2),y=Math.floor((f.bh-f.n)/2);
+  if(!c234Sheet(C234.app,h,'portrait',cv=>{c.width=f.bw;c.height=f.bh;c.dataset.c2='1';const g=c.getContext('2d');g.imageSmoothingEnabled=false;g.clearRect(0,0,f.bw,f.bh);
+    g.drawImage(cv,0,0,cv.width,cv.height,x,y,f.n,f.n)})){c234Broke('portrait '+why);return false}C234.ui=Object.assign(f,{x,y});return true}
+function c234Unface(c,n){c.width=c.height=n;delete c.dataset.c2}
+function c234SlotApp(s){   // the look of a picker slot (its own save), or null = the old picture
+  try{if(!s||s.char2On!==true||c234Who(s)||!window.Char2)return null;if(S&&(S===s||(s.sid&&s.sid===S.sid))&&c234UiOk())return C234.app;const c=s.char2;   // the playing save: its live look (the stored copy may not hold char2 yet)
+
+    if(!c||typeof c!=='object'||Array.isArray(c)||c.v!==2)return null;const app=Char2.look(s);return app&&c234Exact(c,app)?app:null}catch(e){return null}}
+{const o=ui149Portrait;ui149Portrait=function(){const k0=UI149.portraitKey;const r=o.apply(this,arguments);try{const c=document.getElementById('hudPortrait');if(!c)return r;
+  if(c234UiOk()){const f=c234Fit(c),k=[S.sid,S.char2On,JSON.stringify(S.char2),S.house,f.bw,f.bh,f.n].join('|');
+    if(k!==UI149.c2key||UI149.portraitKey!==k0){if(c234Face(c,'hud')){UI149.c2key=k;C234.n.hud++}else{UI149.c2key=null;c234Unface(c,64);UI149.portraitKey=null;o.apply(this,arguments)}}}
+  else if(UI149.c2key||c.dataset.c2){UI149.c2key=null;c234Unface(c,64);UI149.portraitKey=null;o.apply(this,arguments)}}catch(e){}return r}}
+{const o=ui154Portrait;C234.eqOld=o;ui154Portrait=function(){const c=o.apply(this,arguments);try{if(c&&c234UiOk())requestAnimationFrame(()=>c234Equip(c))}catch(e){}return c}}   // sized once it is on screen
+// equipment face · no sheet: a canvas still holding the old figure stays · one holding an earlier face (a redraw after a resize) is replaced by
+// a fresh old figure with its gear (as the game itself refreshes it, L4784) (T44-N1)
+function c234Equip(c){try{if(!c.isConnected||!c234UiOk())return;if(c234Face(c,'equip')){C234.n.equip++;return}if(c.dataset.c2)c.replaceWith(C234.eqOld())}catch(e){}}
+{const o=pkDraw193;pkDraw193=function(){const r=o.apply(this,arguments);try{const c=$('pkv'),s0=Store.all().slots[C193.pick],app=c&&c234SlotApp(s0);if(!app)return r;
+  const h=(HOUSES[s0.house]||HOUSES[0]).id,stand=c.height!==c.width,cw=parseFloat(c.style.width)||64,sc=Math.max(1,Math.round(cw/64)),D=Math.max(1,Math.round(devicePixelRatio||1)),u=sc*D;
+  let k2=1;if(!c234Sheet(app,h,'stand8',cv=>{c.width=64*u;c.height=(stand?84:64)*u;const g=c.getContext('2d');g.imageSmoothingEnabled=false;g.clearRect(0,0,c.width,c.height);   // T44-N1: no sheet → the old view stays
+    if(stand){const s1=ART195.stC||ART195.stS;glow197(g,32*u,34*u,40*u);g.drawImage(s1===ART195.stC?stand197(s1,s0.house):s1,0,0,64,64,0,20*u,64*u,64*u)}
+    else{g.fillStyle='#00000045';g.beginPath();g.ellipse(c.width/2,c.height*.93,c.width*.26,c.height*.05,0,0,7);g.fill()}
+    const top=c234Top(cv);k2=Math.max(1,Math.floor(62*u/(94-top)));g.drawImage(cv,0,0,96,96,32*u-48*k2,62*u-94*k2,96*k2,96*k2)}))return r;
+  C234.n.pick++;C234.pk={u,k2,stand};if(stand)feet195('p',c,32*u,60*u)}catch(e){}return r}}
+function c234Top(cv){   // the first row of the S cell with a solid pixel (the head) · read each time (the borrowed canvas may be reused)
+  let y=0;try{const d=cv.getContext('2d').getImageData(0,0,96,96).data;for(y=0;y<96;y++){let hit=false;for(let x=0;x<96;x++)if(d[(y*96+x)*4+3]){hit=true;break}if(hit)break}}catch(e){y=11}return y}
+function c234PickList(d){const sl=((d&&d.slots)||Store.all().slots||[]);document.querySelectorAll('#pk .pn').forEach((b,i)=>{try{const s=sl[i],c=b.querySelector('canvas'),app=c&&c234SlotApp(s);if(!app)return;
+  // the picture's CSS size stays (the stylesheet's 44 px): backing n = its device size, a whole scale k, the cell region m = n / k around the body
+  // (old crop ≈ head to knees) · borrowed first: no sheet → the old picture stays (T44-N1) · dataset.c2 marks a new picture
+  const r=c.getBoundingClientRect(),D=devicePixelRatio||1,n0=Math.max(32,Math.round((r.width||64)*D)),k=Math.max(1,Math.round(n0/64)),m=Math.min(96,Math.floor(n0/k)),n=m*k,x0=48-Math.floor(m/2),y0=Math.max(0,Math.min(96-m,6));
+  if(c234Sheet(app,(HOUSES[s.house]||HOUSES[0]).id,'stand8',cv=>{c.width=c.height=n;c.dataset.c2='1';const g=c.getContext('2d');g.clearRect(0,0,n,n);g.imageSmoothingEnabled=false;g.drawImage(cv,x0,y0,m,m,0,0,n,n)})){C234.n.list++;C234.pl={n,k,m}}}catch(e){}})}
+{const o=pd219PickList;pd219PickList=function(d){const r=o.apply(this,arguments);try{c234PickList(d)}catch(e){}return r}}
+{const o=c234Paint;c234Paint=function(){const r=o.apply(this,arguments);if(!C234.uiBusy){C234.uiBusy=true;try{UI149.c2key=null;if(S&&document.getElementById('hudPortrait'))ui149Portrait()}catch(e){}C234.uiBusy=false}return r}}
+// 2.41 (T44-N2): turning the device / a new window size or DPR while a screen is open → the new pictures follow the box's new device size (CSS boxes
+// untouched): the equipment face (its CSS box changes with the media rules) · the HUD face (its key holds the device size) · picker rows (fixed
+// 44 CSS px: only a DPR change moves them). The picker's big view already follows the game's own resize (pkDraw193, L6287). At most once a frame.
+{let t=0;addEventListener('resize',()=>{if(t)return;t=requestAnimationFrame(()=>{t=0;try{if(!c234UiOk())return;const e=document.getElementById('equipPortrait');
+  if(e&&e.isConnected&&e.dataset.c2){const f=c234Fit(e);if(f.bw!==e.width||f.bh!==e.height)c234Equip(e)}
+  if(document.getElementById('hudPortrait'))ui149Portrait();const el=$('cr');if(el&&el.classList.contains('p193')&&!el.classList.contains('hide'))c234PickList()}catch(x){}})})}
+// ── 2.42 G4.5 (plan G4_0 §6.4 · step G4.5 · gates M8 M9 · G4.4 closed 11 Nov after Codex T45): the GM colour panel of character v2.
+// Shown under the v2 row of the GM panel only while this save's new character is ready (S.char2 there, C234.pack loaded). Hair 8 · eyes 5 ·
+// skin 4 = the pack's own palette names (c2-pack.json "palette"), shown in Thai / English, each a ≥ 44 px button with the colour's middle shade
+// (a span inside: the frame art paints over a button's own background) and aria-pressed on the chosen one (the game's pressed style).
+// A tap changes ONLY S.char2.color[group]: a copy with the new name is read back by Char2.look and must pass c234Exact (never writes a look
+// Char2 would read differently) → S.char2 + C234.app replaced → save() (the whole save, as the game always writes it; the old fields untouched)
+// → the HUD face redraws (its key holds S.char2) → the next sheet request sees the new app → c234Mem trims once (M9). The house is S.house
+// (never set here). A preview of the face sits beside the title (same rule as the HUD: whole scale, borrowed and released at once).
+const C245G=[['hair','ผม','Hair'],['iris','ตา','Eyes'],['skin','ผิว','Skin']],
+  C245TH={hair:{black:'ดำ',brown:'น้ำตาล',blonde:'บลอนด์',red:'แดง',pink:'ชมพู',blue:'ฟ้า',silver:'เงิน',green:'เขียว'},
+    iris:{brown:'น้ำตาล',black:'ดำ',green:'เขียว',blue:'ฟ้า',amber:'อำพัน'},skin:{light:'อ่อน',medium:'กลาง',tan:'แทน',deep:'เข้ม'}};
+function c245Name(g,n){return LANG==='en'?String(n):((C245TH[g]&&C245TH[g][n])||String(n))}
+function c245Set(g,n){if(!S||!c234UiOk()||!S.char2||!S.char2.color||!C234.pack||!C234.pack.palette)return false;
+  const pal=C234.pack.palette[g];if(!Array.isArray(pal)||!pal.some(p=>p[0]===n)||!(g in S.char2.color))return false;
+  if(S.char2.color[g]===n)return true;const c=JSON.parse(JSON.stringify(S.char2));c.color[g]=n;
+  const app=Char2.look(Object.assign({},S,{char2:c}));if(!app||!c234Exact(c,app))return false;
+  S.char2=c;C234.app=app;C234.n.color=(C234.n.color||0)+1;try{save()}catch(e){}c234Paint();return true}
+function c245Show(){const d=$('c245');if(!d||!S||!S.char2)return;d.querySelectorAll('button[data-g]').forEach(b=>b.setAttribute('aria-pressed',String(S.char2.color[b.dataset.g]===b.dataset.n)));
+  for(const [g] of C245G){const e=$('c245n_'+g);if(e)e.textContent=c245Name(g,S.char2.color[g])}
+  const c=$('c245pv');if(c)requestAnimationFrame(()=>{try{if(c.isConnected&&c234UiOk())c234Face(c,'gm')}catch(e){}})}
+function c245Panel(){const row=$('c234row');if(!row||$('c245')||!S||!c234UiOk()||!S.char2||!S.char2.color||!C234.pack||!C234.pack.palette)return;
+  const tx=(a,b)=>LANG==='en'?b:a,P=C234.pack.palette,d=document.createElement('div');d.id='c245';d.style.marginTop='8px';
+  let h='<div style="display:flex;gap:8px;align-items:center"><canvas id="c245pv" width="64" height="64" style="width:72px;height:72px;image-rendering:pixelated"></canvas><b>'+tx('สีของตัวรุ่น 2 (เซฟนี้)','v2 colours (this save)')+'</b></div>';
+  for(const [g,t,e] of C245G){if(!Array.isArray(P[g]))continue;
+    h+='<div style="margin-top:6px">'+tx(t,e)+': <span id="c245n_'+g+'"></span></div><div style="display:flex;flex-wrap:wrap;gap:4px">';
+    for(const [n,ramp] of P[g])h+='<button data-g="'+g+'" data-n="'+n+'" aria-pressed="false" aria-label="'+tx(t,e)+' '+c245Name(g,n)+'" style="min-width:44px;min-height:44px;padding:4px">'+
+      '<span style="display:block;width:28px;height:28px;margin:auto;border-radius:50%;border:2px solid #0006;background:'+ramp[Math.floor(ramp.length/2)]+'"></span></button>';
+    h+='</div>'}
+  d.innerHTML=h;row.appendChild(d);d.querySelectorAll('button[data-g]').forEach(b=>b.onclick=()=>{if(c245Set(b.dataset.g,b.dataset.n))c245Show()});c245Show()}
+{const o=c234Row;c234Row=function(){const r=o.apply(this,arguments);try{c245Panel()}catch(e){}return r}}
+// 2.43 (Codex T46-N1): every state change paints (c234Paint) — leaving ready while the panel is open (e.g. the preview's own sheet refused →
+// c234Broke) takes the panel away at once; the row's status text already shows the new state. (Back to ready: the panel comes with the next
+// opening of the GM panel, as before.)
+{const o=c234Paint;c234Paint=function(){const r=o.apply(this,arguments);try{const d=document.getElementById('c245');if(d&&!c234UiOk())d.remove()}catch(e){}return r}}
+// ================= 2.44 G4.7 (Claude · plan G4_0_GAME_INTEGRATION_PLAN.md §3.1 "S.gm or ?gm" · owner "รับ G4" 18 Nov 2569 00:58, then chose
+// "แก้ก่อน แล้วค่อยขึ้น") =================
+// The row "Character v2 (trial · this save)" also in ⚙️ settings when the link has ?gm, for the save being played. Up to 2.43 the row was only in
+// the GM panel, and the GM panel opens only on the GM slot (gmOn() = S.gm), so a player's own save — Leah's — could not be switched on at all
+// (?gm only added "create/enter the GM character"). The row is the very same (c234Row): the same rule (a girl of 6–9), the same Thai/English
+// texts, "clear" with a second tap, the colour panel once ready; after a tap it opens settings again. Not on the GM slot (its row stays in the GM
+// panel) and never without ?gm: a child playing from the normal link does not see it. Nothing else in settings moves: the row goes right above the
+// "🛠 GM" button of L3508 (the tools row of the same link), not into the settings header (c234Row puts it after the title, which since 1.55
+// sits in the header next to the close button).
+function c247Gm(){try{return /[?&#]gm\b/.test(location.search+location.hash)}catch(e){return false}}
+{const o=openSettings;openSettings=function(){const r=o.apply(this,arguments);try{if(S&&!gmOn()&&c247Gm()&&!$('c234row')){const h2=document.querySelector('#modal h2');if(h2){c234Row(h2,()=>openSettings());const row=$('c234row'),g=$('gmRow');if(row&&g)g.before(row)}}}catch(e){}return r}}
 </script></body></html>
