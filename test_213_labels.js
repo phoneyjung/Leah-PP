@@ -1,7 +1,7 @@
 // Claude 2.13 (Codex set 05 A1, owner 10 Oct 12:0x "ผ่าน · เด็กไม่เห็นตัวเลข EXP"): the labels a child reads every day, measured as seen (HUD scale included)
 // ASSET_SPEC_05 §6: every label ≥ 11 px seen (12 recommended: asserted 12) · no label cut or outside its button / the screen · main buttons 44 px+ and not on top of each other
 // · frames not lower than the same page without the new sheet (within 10 %) · plus the owner's choice: a child (< 10) sees the EXP bar without its numbers, a grown-up sees the numbers
-const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),puppeteer=require('puppeteer');
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),puppeteer=require('puppeteer'),F=require('./qa/frames.js');
 const sleep=ms=>new Promise(r=>setTimeout(r,ms)),out=process.env.OUT_DIR||'/tmp/leah-labels-213';fs.mkdirSync(out,{recursive:true});
 const url='http://localhost:'+(process.env.PORT||8775)+'/?rank=1';
 const start=(p,age)=>p.evaluate(age=>{const d=Store.all();d.slots=[newSave({name:'Pim',kid:age<10?0:5,house:1,age})];d.cur=0;Store.put(d);S=d.slots[0];S.seen={intro:1};S.snd=S.mus=false;if(age>=10)S.lv=12;ensureDaily();S.daily.seen=1;
@@ -15,8 +15,9 @@ const LABELS=p=>p.evaluate(()=>{const seen=e=>{const s=getComputedStyle(e);if(s.
 const BUTTONS=p=>p.evaluate(()=>{const bs=[...document.querySelectorAll('#btns button,#act button,#bRest')].filter(b=>{let q=b;while(q){const t=getComputedStyle(q);if(t.display==='none'||t.visibility==='hidden')return false;q=q.parentElement}const r=b.getBoundingClientRect();return r.width>1&&r.height>1});
   const R=bs.map(b=>{const r=b.getBoundingClientRect();return {id:b.id,x:r.left,y:r.top,w:r.width,h:r.height}});let over=[];for(let i=0;i<R.length;i++)for(let j=i+1;j<R.length;j++){const a=R[i],c=R[j],ox=Math.min(a.x+a.w,c.x+c.w)-Math.max(a.x,c.x),oy=Math.min(a.y+a.h,c.y+c.h)-Math.max(a.y,c.y);if(ox>1&&oy>1)over.push(a.id+'/'+c.id)}
   return {n:R.length,small:R.filter(b=>Math.min(b.w,b.h)<44-.5).map(b=>b.id+' '+Math.round(b.w)+'×'+Math.round(b.h)),over}});
-const fps=p=>p.evaluate(async()=>{let last=performance.now(),n=0,hitch=0;const t0=last,pts=[[1,0],[0,1],[-1,0],[0,-1]];let k=0;const iv=setInterval(()=>{const q=pts[k++%4];P.path=[[P.x+q[0]*96,P.y+q[1]*96]]},700);
-  await new Promise(res=>{const f=()=>{const t=performance.now();if(t-last>50)hitch++;last=t;n++;if(t-t0<3000)requestAnimationFrame(f);else res()};requestAnimationFrame(f)});clearInterval(iv);return {fps:+(n/3).toFixed(1),hitch}});
+// 19 Nov 2569 (Codex T52: one frame over 50 ms now and then with the sheet on, on main too): the same 3 s walk, measured by qa/frames.js — a frame
+// over 50 ms the page caused itself fails at once; one the machine caused is walked again (at most 3 walks) and a clean walk is still needed.
+const fps=(p,tries)=>F.walk(p,3000,{tries});
 (async()=>{const browser=await puppeteer.launch({executablePath:process.env.CHROME_EXE,args:['--no-sandbox']}),results=[];let p;
  try{for(const [name,width,height,dpr] of [['phone844',844,390,3],['owner915',915,412,2.625],['ipad',1180,820,2]]){
   const bc=await browser.createBrowserContext();p=await bc.newPage();const errors=[];p.on('pageerror',e=>errors.push(e.message));await p.setViewport({width,height,deviceScaleFactor:dpr,isMobile:true,hasTouch:true});await p.setBypassServiceWorker(true);
@@ -33,11 +34,11 @@ const fps=p=>p.evaluate(async()=>{let last=performance.now(),n=0,hitch=0;const t
   R.expBar=await p.$eval('#xpw',e=>{const r=e.getBoundingClientRect();return r.width>20&&r.height>4&&getComputedStyle(e).visibility!=='hidden'});assert(R.expBar,'the EXP bar is still there');
   R.kidBtn=await BUTTONS(p);assert(R.kidBtn.small.length===0&&R.kidBtn.over.length===0,'kid buttons: '+JSON.stringify(R.kidBtn));
   // frames with the new sheet against the same page without it (CLAUDE.md rule 5: not more than 10 % lower)
-  await fps(p);   // warm-up walk (the first 3 s after a start build the scene: measured 56 vs 59 later, with and without the sheet alike)
+  await fps(p,1);   // warm-up walk (one walk, its frames not judged) (the first 3 s after a start build the scene: measured 56 vs 59 later, with and without the sheet alike)
   // 2.28: with · without · with · without, compared as averages (one each in a row favoured the second: the scene still warms up — seen 41 vs 47 on 2.26–2.28 and 2.25 alike)
   {const on=[],off=[],sw=d=>p.evaluate(d=>{$('ui213').disabled=d},d);for(let i=0;i<2;i++){on.push(await fps(p));await sw(true);off.push(await fps(p));await sw(false)}await sleep(300);
-   const avg=a=>({fps:+(a.reduce((s,x)=>s+x.fps,0)/a.length).toFixed(1),hitch:Math.max(...a.map(x=>x.hitch))});R.kidFps=avg(on);R.fpsWithout=avg(off);R.kidFpsRuns=[on,off]}
-  assert(R.kidFps.fps>=0.9*R.fpsWithout.fps&&R.kidFps.hitch===0,'frames with/without: '+JSON.stringify(R.kidFpsRuns));await p.screenshot({path:path.join(out,name+'-kid.png')});
+   const avg=a=>({fps:+(a.reduce((s,x)=>s+x.fps,0)/a.length).toFixed(1),hitch:Math.max(...a.map(x=>x.hitch)),own:a.reduce((s,x)=>s+x.own,0)});R.kidFps=avg(on);R.fpsWithout=avg(off);R.kidFpsRuns=[on,off]}
+  assert(R.kidFps.fps>=0.9*R.fpsWithout.fps&&R.kidFps.hitch===0&&R.kidFps.own===0,'frames with/without: '+JSON.stringify(R.kidFpsRuns));await p.screenshot({path:path.join(out,name+'-kid.png')});
   // a tap on the bag still opens it
   {const b=await (await p.$('#bBag')).boundingBox();await p.touchscreen.tap(b.x+b.width/2,b.y+b.height/2);await sleep(600);R.bagOpens=await p.evaluate(()=>!$('modal').classList.contains('hide'));assert(R.bagOpens);await p.evaluate(()=>closeModal());await sleep(300)}
   // a grown-up: the EXP numbers show and are big enough
