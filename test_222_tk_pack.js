@@ -50,7 +50,10 @@ async function quiet(p){await p.evaluate(()=>{try{S.snd=S.mus=false;S.joy=true}c
   await sleep(300);await p.screenshot({path:path.join(out,name+'-window.png')});
   await tap(p,'#tk221chars .tkopt[data-id="chrt01"]',touch);await p.waitForFunction(()=>PS.tk221,{timeout:15000});R.applied=await p.evaluate(()=>S.tk221.c);assert.equal(R.applied,'chrt01');
   // a name the other device sees
-  await p.click('#tk222name',{clickCount:3});await p.keyboard.type('แป้งทดสอบชื่อยาวเกิน');await tap(p,'#tk222nameok',touch);R.nameSet=await p.evaluate(()=>S.name);assert.equal(R.nameSet,'แป้งทดสอบชื่อยาวเกิน'.slice(0,12),'12 letters at most (online rule)');
+  // puppeteer 22+ (here 25.8): {clickCount:3} is ONE click whose count is 3 — it never selected the old name, so the typing went after it
+  // ('GMแป้งทดสอบช', every run since). {count:3} is three real clicks; the whole old name must be selected before typing.
+  await p.click('#tk222name',{count:3});R.selected=await p.$eval('#tk222name',e=>[e.selectionStart,e.selectionEnd,e.value.length]);assert(R.selected[0]===0&&R.selected[1]===R.selected[2],'three clicks select the whole old name: '+R.selected);
+  await p.keyboard.type('แป้งทดสอบชื่อยาวเกิน');await tap(p,'#tk222nameok',touch);R.nameSet=await p.evaluate(()=>S.name);assert.equal(R.nameSet,'แป้งทดสอบชื่อยาวเกิน'.slice(0,12),'12 letters at most (online rule)');
   R.sizes=await p.$$eval('#tk222web,#tk222nameok,#tk222name',bs=>bs.map(b=>Math.round(b.getBoundingClientRect().height)));assert(R.sizes.every(h=>h>=44),'44 px+: '+R.sizes);
   await tap(p,'#tk221x',touch);await sleep(600);R.shown=await p.evaluate(()=>TK221.shown&&TK221.shown[0]);assert(/^서있기_|^자동행동_/.test(R.shown||''),'drawn as the Trickster character: '+R.shown);
   await p.screenshot({path:path.join(out,name+'-world.png')});
