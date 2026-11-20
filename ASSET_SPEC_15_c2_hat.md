@@ -1,5 +1,5 @@
 # ASSET_SPEC_15_c2_hat.md — หมวกเบเร่ต์ของตัวละครรุ่น 2 (ชุด 15)
-ฉบับ 1 · 20 พ.ย. 2569 · Claude · แผน `G5_0_HAT_PLAN.md` · ตัวตรวจ `qa/g5/qa_asset15.py`
+ฉบับ 1.1 · 20 พ.ย. 2569 · Claude · แผน `G5_0_HAT_PLAN.md` · ตัวตรวจ `qa/g5/qa_asset15.py` ฉบับ 1.1 · แก้ตาม Codex T54 (`codex/t54-review-g5-1` @ `a5395d5`: R1 R2 N1 N2 + ข้อ 6.4)
 
 ## 0. หัวเรื่อง
 - **ใช้ที่ไหน:** ตัวละครรุ่น 2 (`char2.js` ชั้น "หมวก" หลังตัว · ภาพหน้าใหญ่ในหน้าอุปกรณ์และแผงสี) · Claude เขียนโค้ดเอง (G5.5)
@@ -13,7 +13,7 @@
 | `c2-hat-beret-mask.png` | 768×96 RGBA | หน้ากากสี ตรงกับภาพทุกพิกเซล (ข้อ 4) |
 | `c2-hat-beret-pt.png` | **384×384** RGBA | หมวกอย่างเดียว วางทับ `c2-pilot-kid4-pt.png` แล้วพอดีหัว |
 | `c2-hat-beret-pt-mask.png` | 384×384 RGBA | หน้ากากสีของภาพหน้าใหญ่ |
-| `c2-hat-beret.json` | — | `{"schema":1,"id":"beret","cell":[96,96],"dirs":["S","SE","E","NE","N","NW","W","SW"],"ref":"c2-pilot-kid4-idleanim.png frame 1","pixellab":{"picked":<เลข 1–16>,"file":"<ชื่อไฟล์ที่เจ้าของเลือก>"},"note":"<สิ่งที่ต่างจากสเปก>"}` |
+| `c2-hat-beret.json` | — | `{"schema":1,"id":"beret","cell":[96,96],"dirs":["S","SE","E","NE","N","NW","W","SW"],"ref":"c2-pilot-kid4-idleanim.png frame 1","pixellab":{"picked":<เลข 1–16>,"file":"<ชื่อไฟล์ที่เจ้าของเลือก>"},"tilt":"char_right" หรือ "char_left","light":"top-left","mirrored_views":[],"note":"<สิ่งที่ต่างจากสเปก>"}` · `tilt` = เอียงไปทางขวา/ซ้าย**ของตัวละคร** ตามแบบที่เจ้าของเลือก ใช้ทุกทิศ · `mirrored_views` = ทิศที่ทำโดยกลับด้านภาพ (ต้องว่าง) |
 - ระยะเลื่อนรายเฟรม (เดิน ยืน ถือตะเกียง) **Claude วัดเอง** จากไฟล์ที่ล็อก (`qa/g5/head_fit.py`) — Codex ไม่ต้องทำ
 
 ## 2. ขนาดและมาตราส่วน
@@ -36,17 +36,27 @@
 - ไม่มี ID อื่น · ไม่มีพิกเซลกึ่งใส (alpha 0 หรือ 255 เท่านั้น ทั้งภาพและหน้ากาก) · ตำแหน่งที่ไม่ใสของภาพ = ของหน้ากาก 100 %
 
 ## 5. แนวภาพ + พรอมป์ PixelLab (เจ้าของกด 1 ครั้ง · G5.2)
-- **แนว:** Soft Heroic Pixel (`CHARACTER_ART_DIRECTION_V2.md`) · เบเร่ต์กลมนุ่ม เอียงเล็กน้อย จุกสั้นบนยอด แถบรอบหมวก เข็มกลัดโคมทองแดงเล็ก ๆ ด้านหน้า · เส้นขอบพลัม · แสงซ้ายบน · น่ารักแบบหนังสือนิทาน · ไม่บังหน้า ไม่บังตา คลุมยอดผม
+- **แนว:** Soft Heroic Pixel — [`CHARACTER_ART_DIRECTION_V2.md` @ `200c504`](https://github.com/phoneyjung/Leah-PP/blob/200c504f43fa20082602d293d44ca22ca00ab99e/CHARACTER_ART_DIRECTION_V2.md) (branch PR #7 · ไม่อยู่บน `main`/pilot) · รอบนี้ยึด **ภาพตัวที่ล็อก + ข้อ 4–5 ของสเปกนี้เป็นหลัก** · เบเร่ต์กลมนุ่ม เอียงเล็กน้อย จุกสั้นบนยอด แถบรอบหมวก เข็มกลัดโคมทองแดงเล็ก ๆ ด้านหน้า · เส้นขอบพลัม · แสงซ้ายบน · น่ารักแบบหนังสือนิทาน · ไม่บังหน้า ไม่บังตา คลุมยอดผม
 - **60-30-10 ของหมวก:** สีบ้าน 60 · เงา/เส้น 30 · ทองแดง 10
-- **หน้าจอ PixelLab (Object Creator · เรียงบนลงล่าง):**
-  1. Mode: **Pro**
-  2. Directions: **1 Direction**
-  3. Style Reference Images: อัป **`qa/g5/hat-ref-head-S-64.png`** (64×64 → ได้ภาพ 64×64) · ถ้ามีช่องติ๊กใต้รูป: ติ๊ก **Outline · Detail · Shading** · ไม่ติ๊ก Color palette
-  4. ช่องคำบรรยาย — วางข้อความนี้ทั้งก้อน:
+- **ส่งเจ้าของแบบ LA-PIX 7** (`PIXELLAB_PROMPT_METHOD.md` ข้อ 3) · 1 พรอมป์ = 1 zip: **`g5-hat-refs.zip`** ข้างในมี `1-head-S-64.png` (= `qa/g5/hat-ref-head-S-64.png` ทุกพิกเซล · [ต้นทาง @ `fa66ffa`](https://github.com/phoneyjung/Leah-PP/blob/fa66ffae7fb60f1d7d6d697fc638fe1594706249/qa/g5/hat-ref-head-S-64.png))
+- **หน้าจอ PixelLab Object Creator** 👉 https://www.pixellab.ai (ลำดับตาม `PIXELLAB_GUIDE.md` อัปเดต 17 ต.ค. · ถ้าจอจริงต่างจากนี้ ให้ถ่ายภาพหน้าจอส่งก่อนกด):
+
+| ลำดับ | ช่อง | ตั้งค่า |
+|---|---|---|
+| 1 | Mode | **Pro** |
+| 2 | Directions | **1 Direction** |
+| 3 | Style Reference Images | กด 🗑 **ล้างรูปเก่าทั้งหมด** → อัป **`1-head-S-64.png` รูปเดียว** (ขึ้น `1/… at this size`) · ถ้ามีช่องติ๊กใต้รูป: ติ๊ก Outline · Detail · Shading · ไม่ติ๊ก Color palette |
+| 4 | Size · View | หายไปเองหลังใส่รูป (ปกติ) |
+| 5 | Object Description | วางพรอมป์ด้านล่างทั้งก้อน |
+| 6 | Describe each item | **ปิด และว่าง** (ล้างข้อความที่ค้างจากงานก่อน) |
+| 7 | Color palette (Beta) · Max colours | **None** · **No limit** (รอบเลือกแบบ · สีบ้านทำทีหลังด้วยหน้ากาก) |
+| 8 | Auto-add to | **Off** |
+| 9 | บรรทัด Total ก่อนกด | ต้องขึ้น **16 frames · 64px · 4×4** · เครดิตคาด ~10–20 (ไม่ใช่ราคายืนยัน) · **เกิน 40 หรือจำนวน/ขนาดไม่ตรง → อย่ากด** ส่งภาพหน้าจอมาก่อน |
+| 10 | Generate Object | กด **ครั้งเดียว** → เลือกแบบที่ชอบ 1 แบบ (เลข 1–16) → **Save Individually** → ส่งไฟล์ต้นฉบับ/zip + เลขที่เลือก (ไม่ใช้ภาพจับหน้าจอ) |
+
 ```
-pixel art school beret hat only, soft round felt beret tilted slightly to one side, short stalk on top, a band around the rim, tiny copper lantern badge on the front of the band, royal blue felt in 4 shades, thin dark plum outline, soft light from the top left, cute storybook style, seen from the front and a little from above as if worn on a child's head, sized to sit on a head about 44 pixels wide, no head, no hair, no face, hat only, centered, transparent background
+A soft round school beret for a child character in a cozy fantasy academy game, drawn alone as a separate hat. Felt beret tilted slightly to one side, short stalk on top, a band around the rim, a tiny copper lantern badge on the front of the band, royal blue felt in 4 shades, thin dark plum outline, soft light from the top left. Use the pixel style, outline and shading of the reference exactly; the reference shows the head this hat must fit, about 44 pixels wide. Copy the camera angle of the reference: seen from the front and a little from above, no diagonal angle, no isometric view. Only the hat, centred, fully visible, isolated on a transparent background. Cute and friendly storybook style. No head, no hair, no face, no text, no extra objects, no ground tile, no cast shadow.
 ```
-  5. กด **Generate** (ถ้าเลขเครดิตเกิน 40 ให้หยุดบอกก่อน) · ได้ 16 แบบ → **เจ้าของเลือก 1 แบบ** แล้วดาวน์โหลดส่งให้ Codex (บอกเลขแบบ)
 - ถ้า 16 แบบไม่มีที่ใช้ได้: **อย่ากดซ้ำเอง** — บอก Claude แล้วเลือกระหว่างปรับพรอมป์ครั้งเดียว หรือให้ Codex วาดเอง
 
 ## 6. ภาพสำรองเมื่อไฟล์หาย (Claude เขียนในโค้ด)
@@ -59,14 +69,16 @@ pixel art school beret hat only, soft round felt beret tilted slightly to one si
 | C2 | ความใส | alpha มีแค่ 0/255 · ภาพกับหน้ากากไม่ใสตรงกัน 100 % |
 | C3 | ID และสี | ID ∈ {1,8,9,11} · ID 1 = `#3A1E3F` · ID 8 เฉด 0–3 ความสว่างเฉลี่ยเพิ่มตามเฉด · ID 9 R > B ทุกจุด ไม่ใกล้ฟ้าเรือง · ID 11 สว่าง < 25 % |
 | C4 | ไม่บังตา | ทับพิกเซลตา (ID 2/5 ของเฟรม 1) **0 px** · ขอบล่างหมวกห่างแถวตาบนสุด ≥ 2 แถว (S SE E W SW · ภาพหน้าใหญ่) |
-| C5 | คลุมยอดหัว | 3 แถวบนสุดของหัวถูกหมวกคลุม ≥ 95 % |
-| C6 | ไม่ลอย | ขอบล่างหมวก ≥ 60 % ของคอลัมน์ถึงขอบบนของหัวในคอลัมน์นั้น (ทับหรือชิด) · คอลัมน์ที่ยังไม่ถึง (หัวต่ำกว่าไม่เกิน 6 แถว) เว้นช่องได้ ≤ 1 แถว (ภาพหน้าใหญ่ ≤ 4) |
+| C5 | คลุมยอดหัว | 3 แถวบนสุดของหัว (ภาพหน้าใหญ่ 12 แถว) ถูกหมวกคลุม ≥ 95 % |
+| C6 | ไม่ลอย | ขอบล่างหมวก ≥ 60 % ของคอลัมน์ถึงขอบบนของหัวในคอลัมน์นั้น (ทับหรือชิด) · คอลัมน์ที่ยังไม่ถึง (หัวต่ำกว่าไม่เกิน 6 แถว) เว้นช่องได้ ≤ 1 แถว (ภาพหน้าใหญ่ ≤ 4) · **ผู้ผลิตตั้งเป้า 0 แถว** (แผนข้อ 5: ทุก 128 เฟรมในเกม 0 แถว) |
 | C7 | ขนาดพอดี | กว้าง ≤ หัว + 8 px (ภาพหน้าใหญ่ ≤ หัว + 37) · ยอดหมวก y ≥ 1 (ภาพหน้าใหญ่ ≥ 2) · อยู่ในช่องของตัวเอง |
-| C8 | เข็มกลัด | ID 9: S SE SW ≥ 4 px · NE N NW = 0 px |
-| C9 | แสงซ้ายบน (กันภาพกลับด้าน) | ทุกทิศ + ภาพหน้าใหญ่: เฉดเฉลี่ย (G) ของสีบ้านครึ่งซ้ายของหมวก ≥ ครึ่งขวา |
+| C8 | เข็มกลัด | ID 9: S SE SW ≥ 4 px · NE N NW = 0 px · **ภาพหน้าใหญ่ ≥ 40 px** (หมวกแบบเดียวกับ sprite) |
+| C9 | แสงซ้ายบน (ตัวชี้) | ทุกทิศ + ภาพหน้าใหญ่: เฉดเฉลี่ย (G) ของสีบ้านครึ่งซ้ายของหมวก ≥ ครึ่งขวา · **เป็นตัวชี้เท่านั้น พิสูจน์ว่า “ไม่กลับด้าน” ไม่ได้** → ใช้ `mirrored_views: []` ใน json (C13) + เจ้าของดูภาพ |
 | C10 | สีสัญญาณ | เส้นคงที่ (ID 1, 11) ห่างสีสัญญาณ `#FFC857` `#5FE0FF` ΔE00 ≥ 10 · สีบ้าน (ID 8) เป็น ramp เดียวกับผ้าคลุม ใช้ข้อยกเว้นเดิม (Sun 2–4) · ทองแดงตรวจใน C3 |
 | C11 | ขนาดไฟล์ | 4 ภาพรวม ≤ 80 KB |
-- **ตัวตรวจผ่าน selftest แล้ว:** หมวกทดลองที่สคริปต์วาดเองผ่านครบ C1–C11 · ฉบับเสีย 12 แบบตกตรงข้อทุกแบบ (`python3 -I qa/g5/qa_asset15.py --selftest <โฟลเดอร์ไฟล์ตัว>`)
+| C12 | วัสดุ (T54-R1) | ทุกพิกเซลขอบ (ติดพื้นใส 4 ทิศ) = ID 1 · สีบ้าน ID 8 ≥ 50 % ของหมวกทุกภาพ · เฉดสีบ้าน ≥ 3 (sprite) / 4 (ภาพหน้าใหญ่) · เส้นใน ID 11 ≤ 20 % |
+| C13 | json (T54-N1) | มีไฟล์ · ค่าตามข้อ 1 ครบ (`schema` `id` `cell` `dirs` `ref` `pixellab.picked` 1–16 `pixellab.file` `tilt` `light` `mirrored_views: []` `note`) |
+- **ตัวตรวจผ่าน selftest แล้ว (ฉบับ 1.1):** หมวกทดลองที่สคริปต์วาดเองผ่านครบ C1–C13 · ฉบับเสีย 18 แบบตกตรงข้อทุกแบบ (รวม 6 แบบใหม่จาก T54: ไม่มีขอบ · ไม่มีสีบ้าน · สีเดียว+กลับด้าน · ภาพหน้าใหญ่ไม่มีเข็มกลัด · ไม่มี json · json บอกว่ามีทิศกลับด้าน) (`python3 -I qa/g5/qa_asset15.py --selftest <โฟลเดอร์ไฟล์ตัว>`)
 - แล้ว Claude ทำแผ่นดูภาพ 128 เฟรม × 4 บ้าน + ภาพหน้าใหญ่ ให้เจ้าของให้คะแนน (ของบนหัว ≥ 9.5 ตาม `ART_GUIDE.md`)
 
 ## 8. วิธีส่ง
@@ -75,3 +87,4 @@ pixel art school beret hat only, soft round felt beret tilted slightly to one si
 
 ## ประวัติฉบับ
 - ฉบับ 1 · 20 พ.ย. 2569 · เขียนครั้งแรก
+- ฉบับ 1.1 · 20 พ.ย. 2569 · ตาม Codex T54: R1 ตัวตรวจวัสดุ C12 · R2 หน้าจอ PixelLab ครบทุกช่องแบบ LA-PIX 7 + เติมคำในพรอมป์ (style/camera/fully visible/no text…) · N1 ตรวจ json C13 + ช่อง `tilt` `light` `mirrored_views` · N2 ลิงก์แนวภาพตรึง commit · ข้อ 6.4 เข็มกลัดบนภาพหน้าใหญ่ (C8) · C5/C6 เขียนค่าภาพหน้าใหญ่และเป้า 0 แถว

@@ -1,6 +1,9 @@
-# qa/g5/qa_asset15.py — checks for asset set 15 (the char2 beret), ASSET_SPEC_15_c2_hat.md section 7 (C1–C11).
+# qa/g5/qa_asset15.py — checks for asset set 15 (the char2 beret), ASSET_SPEC_15_c2_hat.md section 7 (C1–C13).
+# v1.1 (Codex T54-R1, N1): C12 materials (every edge pixel is the plum outline, the house colour is most of the hat in every picture with at
+# least 3 shades on a sprite and 4 on the portrait, inner lines are lines) · C13 the JSON · C8 a pin on the portrait too. C9 (light from the
+# top left) is a pointer only: it cannot prove that no view is a mirror — that is the JSON's "mirrored_views": [] plus the owner's eye.
 #   python3 -I qa/g5/qa_asset15.py BASE_DIR HAT_DIR [OUT_JSON]     exit 0 = every check passed
-#   python3 -I qa/g5/qa_asset15.py --selftest BASE_DIR [KEEP_DIR] a made-up hat must pass, and 12 broken copies must each fail their check
+#   python3 -I qa/g5/qa_asset15.py --selftest BASE_DIR [KEEP_DIR] a made-up hat must pass, and 18 broken copies must each fail their check
 # BASE_DIR holds the locked body files (main @ 95d9f7e): c2-pilot-kid4-idleanim.png + -mask.png, c2-pilot-kid4-pt.png + -pt-mask.png
 # HAT_DIR holds c2-hat-beret.png, -mask.png, -pt.png, -pt-mask.png. Masks: R = ID, G = shade, A = 255 on hat pixels.
 import sys, os, json, math, tempfile
@@ -13,6 +16,7 @@ HOUSES = [['#C0900C', '#F0B512', '#F3C546', '#F6D579'], ['#133C72', '#1B56A4', '
           ['#165A19', '#218324', '#2BAB2F', '#3BCE40'], ['#7F1015', '#B0161D', '#E01C25', '#E94951']]   # c2-pack.json palette.house (Sun Wing Leaf Flame)
 SIGNAL = ['#FFC857', '#5FE0FF']
 FILES = ['c2-hat-beret.png', 'c2-hat-beret-mask.png', 'c2-hat-beret-pt.png', 'c2-hat-beret-pt-mask.png']
+JSON = 'c2-hat-beret.json'
 
 def hexrgb(h): return tuple(int(h[i:i + 2], 16) for i in (1, 3, 5))
 def lum(c): return (0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]) / 255
@@ -102,6 +106,14 @@ def check(base, hatdir):
                 if i == 11 and lum(c) >= 0.25: c3['line_too_light'] += 1
                 if i not in (1, 8, 9, 11) or (i == 8 and k[1] > 3): c3.setdefault('bad_id', 0); c3['bad_id'] += 1
         means = [sum(bylvl[g]) / len(bylvl[g]) for g in sorted(bylvl)]
+        # C12 materials: an edge pixel (a 4-neighbour is see-through or outside the picture) must be the outline (ID 1); the house colour
+        # (ID 8) is at least half of the hat, with >= 3 shades on a sprite and all 4 on the portrait; inner lines (ID 11) at most a fifth
+        size_ = 384 if kind == 'portrait' else 96; ids_ = {q: px[q][1][0] for q in px if px[q][0][3] == 255}
+        edge = [q for q in ids_ if any(not (0 <= q[0] + dx < size_ and 0 <= q[1] + dy < size_) or px[(q[0] + dx, q[1] + dy)][0][3] != 255 for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)))]
+        n_ = max(1, len(ids_)); share8 = sum(1 for v in ids_.values() if v == 8) / n_; share11 = sum(1 for v in ids_.values() if v == 11) / n_
+        edge_bad = sum(1 for q in edge if ids_[q] != 1); shades = len(bylvl)
+        rec('C12', bool(ids_) and edge_bad == 0 and share8 >= 0.5 and share11 <= 0.2 and shades >= (4 if kind == 'portrait' else 3),
+            {name: {'edge_px': len(edge), 'edge_not_outline': edge_bad, 'house_share': round(share8, 3), 'line_share': round(share11, 3), 'house_shades': shades}})
         c3['shade_order'][name] = all(a < b2 for a, b2 in zip(means, means[1:]))
         if not hat: rec('C7', False, {name: 'empty'}); continue
         s = b['scale']; xs = [x for x, y in hat]; ys = [y for x, y in hat]
@@ -129,7 +141,8 @@ def check(base, hatdir):
         c3['line_too_light'] == 0 and not c3.get('bad_id') and all(c3['shade_order'].values()), {**c3, 'ids': sorted(ids)})
     # C8 pin
     pc = {d: pins.get(d, 0) for d in DIRS}
-    rec('C8', all(pc[d] >= 4 for d in ('S', 'SE', 'SW')) and all(pc[d] == 0 for d in ('NE', 'N', 'NW')), {'pin_px': pc})
+    pc['portrait'] = pins.get('portrait', 0)
+    rec('C8', all(pc[d] >= 4 for d in ('S', 'SE', 'SW')) and all(pc[d] == 0 for d in ('NE', 'N', 'NW')) and pc['portrait'] >= 40, {'pin_px': pc})
     # C9 light from the top left of the screen in every view (Route K · this is what a left-right mirror breaks): the house-colour pixels of
     # the left half of the hat have on average a shade at least as light as those of the right half
     res9 = {}
@@ -146,6 +159,25 @@ def check(base, hatdir):
     rec('C10', near == 0, {'fixed_px_near_signal': near})
     size = sum(os.path.getsize(p) for p in paths)
     rec('C11', size <= 80 * 1024, {'bytes_4_png': size})
+    # C13 the JSON that comes with the pictures (spec section 1)
+    jp = os.path.join(hatdir, JSON); why = []
+    try:
+        j = json.load(open(jp, encoding='utf-8'))
+        if j.get('schema') != 1: why.append('schema')
+        if j.get('id') != 'beret': why.append('id')
+        if j.get('cell') != [96, 96]: why.append('cell')
+        if j.get('dirs') != DIRS: why.append('dirs')
+        if 'idleanim' not in str(j.get('ref', '')): why.append('ref')
+        pl = j.get('pixellab') or {}
+        if not (isinstance(pl.get('picked'), int) and 1 <= pl['picked'] <= 16): why.append('pixellab.picked')
+        if not (isinstance(pl.get('file'), str) and pl['file'].strip()): why.append('pixellab.file')
+        if j.get('tilt') not in ('char_right', 'char_left'): why.append('tilt')
+        if j.get('light') != 'top-left': why.append('light')
+        if j.get('mirrored_views') != []: why.append('mirrored_views')
+        if not isinstance(j.get('note'), str): why.append('note')
+    except FileNotFoundError: why.append('missing ' + JSON)
+    except Exception as e: why.append('unreadable: %s' % e)
+    rec('C13', not why, {'json_problems': why})
     return R, bad
 
 def selftest(base, keep=None):
@@ -181,9 +213,10 @@ def selftest(base, keep=None):
             shift = 22 if variant == 'down' else (-9 if variant == 'up' and d == 'S' else 0)
             bot = cap(a, m, i * 96, b['head'], cx, b['head_w'] / 2 + 1, 5, 4, low, shift, stalk=3)   # the stalk on the same side in every view
             if d in ('S', 'SE', 'SW', 'E', 'W') and variant != 'nopin':
+                cb = min(max(y for y in range(96) if m[i * 96 + x, y][3]) for x in (int(cx), int(cx) + 1))   # inside the hat, above its outline
                 for dy in (0, 1):
                     for dx in (0, 1):
-                        x, y = int(cx) + dx, bot - 2 + dy; a[i * 96 + x, y] = (0xBB, 0x7A, 0x57, 255); m[i * 96 + x, y] = (9, 0, 0, 255)
+                        x, y = int(cx) + dx, cb - 3 + dy; a[i * 96 + x, y] = (0xBB, 0x7A, 0x57, 255); m[i * 96 + x, y] = (9, 0, 0, 255)
         if variant == 'mirror':
             e = im.crop((2 * 96, 0, 3 * 96, 96)).transpose(Image.FLIP_LEFT_RIGHT); em = mk.crop((2 * 96, 0, 3 * 96, 96)).transpose(Image.FLIP_LEFT_RIGHT)
             im.paste(e, (6 * 96, 0)); mk.paste(em, (6 * 96, 0))
@@ -216,9 +249,36 @@ def selftest(base, keep=None):
         P = B['portrait']; pim = Image.new('RGBA', (384, 384)); pmk = Image.new('RGBA', (384, 384))
         hx = [x for x, y in P['head'] if y <= P['top'] + 12]; cx = (min(hx) + max(hx)) / 2
         cap(pim.load(), pmk.load(), 0, P['head'], cx, P['head_w'] / 2 + 2, 16, 16, P['eye_top'] - 12)
+        pa, pm = pim.load(), pmk.load()
+        if variant != 'pt_nopin':
+            cb = min(max(y for y in range(384) if pm[x, y][3]) for x in range(int(cx) - 3, int(cx) + 4))
+            for dy in range(7):
+                for dx in range(7):
+                    x, y = int(cx) - 3 + dx, cb - 10 + dy; pa[x, y] = (0xBB, 0x7A, 0x57, 255); pm[x, y] = (9, 0, 0, 255)
+        if variant in ('no_outline', 'no_house', 'flat_mirror'):
+            for (img, msk, w) in ((im, mk, 768), (pim, pmk, 384)):
+                ia, ma = img.load(), msk.load()
+                for x in range(w):
+                    for y in range(img.size[1]):
+                        if not ma[x, y][3]: continue
+                        if variant == 'no_outline' and ma[x, y][0] == 1: ia[x, y] = ramp[0] + (255,); ma[x, y] = (8, 0, 0, 255)
+                        if variant == 'no_house' and ma[x, y][0] == 8: ia[x, y] = (20, 10, 25, 255); ma[x, y] = (11, 0, 0, 255)
+                        if variant == 'flat_mirror' and ma[x, y][0] == 8: ia[x, y] = ramp[0] + (255,); ma[x, y] = (8, 0, 0, 255)
+            if variant == 'flat_mirror':
+                e = im.crop((2 * 96, 0, 3 * 96, 96)).transpose(Image.FLIP_LEFT_RIGHT); em = mk.crop((2 * 96, 0, 3 * 96, 96)).transpose(Image.FLIP_LEFT_RIGHT)
+                im.paste(e, (6 * 96, 0)); mk.paste(em, (6 * 96, 0))
+            im.save(os.path.join(tmp, FILES[0])); mk.save(os.path.join(tmp, FILES[1]))
         pim.save(os.path.join(tmp, FILES[2])); pmk.save(os.path.join(tmp, FILES[3]))
+        meta = {'schema': 1, 'id': 'beret', 'cell': [96, 96], 'dirs': DIRS, 'ref': 'c2-pilot-kid4-idleanim.png frame 1', 'pixellab': {'picked': 7, 'file': 'made-up.png'},
+                'tilt': 'char_right', 'light': 'top-left', 'mirrored_views': [], 'note': 'made-up hat of the self-test, not an asset'}
+        if variant == 'bad_json': meta['mirrored_views'] = ['W']
+        jpath = os.path.join(tmp, JSON)
+        if variant == 'no_json':
+            if os.path.exists(jpath): os.remove(jpath)
+        else: json.dump(meta, open(jpath, 'w'))
         return tmp
-    cases = [(None, None), ('down', 'C4'), ('up', 'C6'), ('semi', 'C2'), ('maskgap', 'C2'), ('mirror', 'C9'), ('nopin', 'C8'), ('outline', 'C3'), ('cyan', 'C3'), ('wide', 'C7'), ('gold11', 'C10'), ('big', 'C11'), ('size', 'C1')]
+    cases = [(None, None), ('down', 'C4'), ('up', 'C6'), ('semi', 'C2'), ('maskgap', 'C2'), ('mirror', 'C9'), ('nopin', 'C8'), ('outline', 'C3'), ('cyan', 'C3'), ('wide', 'C7'), ('gold11', 'C10'), ('big', 'C11'), ('size', 'C1'),
+             ('no_outline', 'C12'), ('no_house', 'C12'), ('flat_mirror', 'C12'), ('pt_nopin', 'C8'), ('no_json', 'C13'), ('bad_json', 'C13')]
     out = []; ok_all = True
     for v, want in cases:
         R, bad = check(base, make(v)); failed = sorted({b[0] for b in bad})
@@ -229,7 +289,7 @@ def selftest(base, keep=None):
     print(json.dumps({'selftest': 'pass' if ok_all else 'FAIL', 'cases': len(out)}))
     if keep:   # the made-up hat, for a look (not an asset)
         import shutil; d = make(None)
-        for f in FILES: shutil.copy(os.path.join(d, f), os.path.join(keep, f))
+        for f in FILES + [JSON]: shutil.copy(os.path.join(d, f), os.path.join(keep, f))
     import shutil; shutil.rmtree(tmp, ignore_errors=True)
     return ok_all
 
