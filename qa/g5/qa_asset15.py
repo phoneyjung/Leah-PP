@@ -2,8 +2,9 @@
 # v1.1 (Codex T54-R1, N1): C12 materials (every edge pixel is the plum outline, the house colour is most of the hat in every picture with at
 # least 3 shades on a sprite and 4 on the portrait, inner lines are lines) · C13 the JSON · C8 a pin on the portrait too. C9 (light from the
 # top left) is a pointer only: it cannot prove that no view is a mirror — that is the JSON's "mirrored_views": [] plus the owner's eye.
+# v1.2 (Codex T55-N1): C13 checks types as well as values (picked true, schema true, a ref of another frame or not a string all fail).
 #   python3 -I qa/g5/qa_asset15.py BASE_DIR HAT_DIR [OUT_JSON]     exit 0 = every check passed
-#   python3 -I qa/g5/qa_asset15.py --selftest BASE_DIR [KEEP_DIR] a made-up hat must pass, and 18 broken copies must each fail their check
+#   python3 -I qa/g5/qa_asset15.py --selftest BASE_DIR [KEEP_DIR] a made-up hat must pass, and 22 broken copies must each fail their check
 # BASE_DIR holds the locked body files (main @ 95d9f7e): c2-pilot-kid4-idleanim.png + -mask.png, c2-pilot-kid4-pt.png + -pt-mask.png
 # HAT_DIR holds c2-hat-beret.png, -mask.png, -pt.png, -pt-mask.png. Masks: R = ID, G = shade, A = 255 on hat pixels.
 import sys, os, json, math, tempfile
@@ -17,6 +18,7 @@ HOUSES = [['#C0900C', '#F0B512', '#F3C546', '#F6D579'], ['#133C72', '#1B56A4', '
 SIGNAL = ['#FFC857', '#5FE0FF']
 FILES = ['c2-hat-beret.png', 'c2-hat-beret-mask.png', 'c2-hat-beret-pt.png', 'c2-hat-beret-pt-mask.png']
 JSON = 'c2-hat-beret.json'
+REF = 'c2-pilot-kid4-idleanim.png frame 1'   # spec section 1, exactly
 
 def hexrgb(h): return tuple(int(h[i:i + 2], 16) for i in (1, 3, 5))
 def lum(c): return (0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]) / 255
@@ -163,18 +165,20 @@ def check(base, hatdir):
     jp = os.path.join(hatdir, JSON); why = []
     try:
         j = json.load(open(jp, encoding='utf-8'))
-        if j.get('schema') != 1: why.append('schema')
-        if j.get('id') != 'beret': why.append('id')
-        if j.get('cell') != [96, 96]: why.append('cell')
-        if j.get('dirs') != DIRS: why.append('dirs')
-        if 'idleanim' not in str(j.get('ref', '')): why.append('ref')
-        pl = j.get('pixellab') or {}
-        if not (isinstance(pl.get('picked'), int) and 1 <= pl['picked'] <= 16): why.append('pixellab.picked')
-        if not (isinstance(pl.get('file'), str) and pl['file'].strip()): why.append('pixellab.file')
-        if j.get('tilt') not in ('char_right', 'char_left'): why.append('tilt')
-        if j.get('light') != 'top-left': why.append('light')
-        if j.get('mirrored_views') != []: why.append('mirrored_views')
-        if not isinstance(j.get('note'), str): why.append('note')
+        # exact types as well as values (Codex T55-N1): in Python True == 1 and isinstance(True, int), so a whole number is checked with type() is int
+        isint = lambda v: type(v) is int
+        if not (isint(j.get('schema')) and j['schema'] == 1): why.append('schema')
+        if j.get('id') != 'beret' or type(j.get('id')) is not str: why.append('id')
+        if not (isinstance(j.get('cell'), list) and len(j['cell']) == 2 and all(isint(v) and v == 96 for v in j['cell'])): why.append('cell')
+        if not (isinstance(j.get('dirs'), list) and all(type(v) is str for v in j['dirs']) and j['dirs'] == DIRS): why.append('dirs')
+        if not (type(j.get('ref')) is str and j['ref'] == REF): why.append('ref')
+        pl = j.get('pixellab') if isinstance(j.get('pixellab'), dict) else {}
+        if not (isint(pl.get('picked')) and 1 <= pl['picked'] <= 16): why.append('pixellab.picked')
+        if not (type(pl.get('file')) is str and pl['file'].strip()): why.append('pixellab.file')
+        if type(j.get('tilt')) is not str or j['tilt'] not in ('char_right', 'char_left'): why.append('tilt')
+        if type(j.get('light')) is not str or j['light'] != 'top-left': why.append('light')
+        if not (isinstance(j.get('mirrored_views'), list) and j['mirrored_views'] == []): why.append('mirrored_views')
+        if type(j.get('note')) is not str: why.append('note')
     except FileNotFoundError: why.append('missing ' + JSON)
     except Exception as e: why.append('unreadable: %s' % e)
     rec('C13', not why, {'json_problems': why})
@@ -272,13 +276,18 @@ def selftest(base, keep=None):
         meta = {'schema': 1, 'id': 'beret', 'cell': [96, 96], 'dirs': DIRS, 'ref': 'c2-pilot-kid4-idleanim.png frame 1', 'pixellab': {'picked': 7, 'file': 'made-up.png'},
                 'tilt': 'char_right', 'light': 'top-left', 'mirrored_views': [], 'note': 'made-up hat of the self-test, not an asset'}
         if variant == 'bad_json': meta['mirrored_views'] = ['W']
+        if variant == 'picked_true': meta['pixellab']['picked'] = True
+        if variant == 'ref_frame4': meta['ref'] = 'c2-pilot-kid4-idleanim.png frame 4'
+        if variant == 'ref_object': meta['ref'] = {'idleanim': False}
+        if variant == 'schema_true': meta['schema'] = True
         jpath = os.path.join(tmp, JSON)
         if variant == 'no_json':
             if os.path.exists(jpath): os.remove(jpath)
         else: json.dump(meta, open(jpath, 'w'))
         return tmp
     cases = [(None, None), ('down', 'C4'), ('up', 'C6'), ('semi', 'C2'), ('maskgap', 'C2'), ('mirror', 'C9'), ('nopin', 'C8'), ('outline', 'C3'), ('cyan', 'C3'), ('wide', 'C7'), ('gold11', 'C10'), ('big', 'C11'), ('size', 'C1'),
-             ('no_outline', 'C12'), ('no_house', 'C12'), ('flat_mirror', 'C12'), ('pt_nopin', 'C8'), ('no_json', 'C13'), ('bad_json', 'C13')]
+             ('no_outline', 'C12'), ('no_house', 'C12'), ('flat_mirror', 'C12'), ('pt_nopin', 'C8'), ('no_json', 'C13'), ('bad_json', 'C13'),
+             ('picked_true', 'C13'), ('ref_frame4', 'C13'), ('ref_object', 'C13'), ('schema_true', 'C13')]
     out = []; ok_all = True
     for v, want in cases:
         R, bad = check(base, make(v)); failed = sorted({b[0] for b in bad})
