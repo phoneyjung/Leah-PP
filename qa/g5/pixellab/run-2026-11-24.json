@@ -1,0 +1,11 @@
+{
+  "date": "2026-11-24 00:4x (Asia/Bangkok)",
+  "who": "Claude in the owner's built-in browser, at the owner's request (\"ทำ pixellab ให้หน่อย\")",
+  "tool": "PixelLab Creator > Create from style reference (PRO) - the screen that replaced 'Object Creator Pro' in PIXELLAB_GUIDE.md",
+  "reference": {"file": "1-head-S-64.png", "same_as": "qa/g5/hat-ref-head-S-64.png", "sha256_16": "3197f565567f173a", "size": [64, 64]},
+  "settings": {"description": "ASSET_SPEC_15 section 5 prompt, word for word (787 characters)", "style_description": "(cleared - the default 'vibrant colors, cel-shaded' removed)", "remove_background": true, "output": "64x64 - 4x4 (16 frames)", "color_palette": "None", "max_colours": "No limit", "auto_add_to": "Off"},
+  "cost": "Generate - 10 generations (pressed once)",
+  "result": {"sheet": "256x256, 16 hats, no semi-transparent pixels", "frame_bboxes_w_h": "48-56 x 34-42 px"},
+  "owner_pick": {"number": 3, "when": "2026-11-24 00:5x", "file": "beret-pick-03.png", "pixels": "row 1 col 3 of the sheet, 64x64, 1339 opaque px, 50 colours, checksum checked after transfer"},
+  "preview": "beret-16-choices-preview.png = a screenshot of the 16 hats at 3x with their numbers (for choosing only; not original pixels)"
+}
