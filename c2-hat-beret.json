@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "id": "beret",
+  "cell": [
+    96,
+    96
+  ],
+  "dirs": [
+    "S",
+    "SE",
+    "E",
+    "NE",
+    "N",
+    "NW",
+    "W",
+    "SW"
+  ],
+  "ref": "c2-pilot-kid4-idleanim.png frame 1",
+  "pixellab": {
+    "picked": 3,
+    "file": "beret-pick-03.png"
+  },
+  "tilt": "char_right",
+  "light": "top-left",
+  "mirrored_views": [],
+  "note": "Redrawn at native pixel sizes from selected design 3: soft crown, short stalk, folded rim and copper lantern badge; source is preserved without resizing. Each view and portrait drawn separately. No additional generations."
+}
