@@ -1,0 +1,52 @@
+{
+ "frames": 128,
+ "worst": {
+  "eye_px": 0,
+  "crown_share": 1.0,
+  "gap_rows": 0
+ },
+ "frames_below_plan": 0,
+ "below_plan": [],
+ "crown_lowest_5": [
+  [
+   "idle",
+   "S",
+   0,
+   0,
+   1.0,
+   0
+  ],
+  [
+   "idle",
+   "S",
+   1,
+   0,
+   1.0,
+   0
+  ],
+  [
+   "idle",
+   "S",
+   2,
+   0,
+   1.0,
+   0
+  ],
+  [
+   "idle",
+   "S",
+   3,
+   0,
+   1.0,
+   0
+  ],
+  [
+   "idle",
+   "SE",
+   0,
+   0,
+   1.0,
+   0
+  ]
+ ]
+}

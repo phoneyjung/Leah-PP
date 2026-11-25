@@ -3,8 +3,10 @@
 # least 3 shades on a sprite and 4 on the portrait, inner lines are lines) · C13 the JSON · C8 a pin on the portrait too. C9 (light from the
 # top left) is a pointer only: it cannot prove that no view is a mirror — that is the JSON's "mirrored_views": [] plus the owner's eye.
 # v1.2 (Codex T55-N1): C13 checks types as well as values (picked true, schema true, a ref of another frame or not a string all fail).
+# v1.3 (Claude G5.4, set 15 rev 1): C14 the hat's outline is as thick as the outline of the picture it sits on (sprite: body 1 px; portrait:
+# the portrait's chunky pixels, median 5 px) - the portrait hat of rev 1 had a 1 px outline on a 5 px portrait.
 #   python3 -I qa/g5/qa_asset15.py BASE_DIR HAT_DIR [OUT_JSON]     exit 0 = every check passed
-#   python3 -I qa/g5/qa_asset15.py --selftest BASE_DIR [KEEP_DIR] a made-up hat must pass, and 22 broken copies must each fail their check
+#   python3 -I qa/g5/qa_asset15.py --selftest BASE_DIR [KEEP_DIR] a made-up hat must pass, and 23 broken copies must each fail their check
 # BASE_DIR holds the locked body files (main @ 95d9f7e): c2-pilot-kid4-idleanim.png + -mask.png, c2-pilot-kid4-pt.png + -pt-mask.png
 # HAT_DIR holds c2-hat-beret.png, -mask.png, -pt.png, -pt-mask.png. Masks: R = ID, G = shade, A = 255 on hat pixels.
 import sys, os, json, math, tempfile
@@ -47,6 +49,19 @@ def de00(c1, c2):   # CIEDE2000
     RT = -2 * math.sqrt(Cmp ** 7 / (Cmp ** 7 + 25 ** 7)) * math.sin(math.radians(60 * math.exp(-((hm - 275) / 25) ** 2)))
     return math.sqrt((dL / SL) ** 2 + (dC / SC) ** 2 + (dH / SH) ** 2 + RT * (dC / SC) * (dH / SH))
 
+def outline_median(img, msk):
+    """median length of the horizontal runs of outline (mask ID 1) that start at the picture's outer edge (left neighbour see-through)"""
+    p, m = img.load(), msk.load(); W, H = img.size; rs = []
+    for y in range(H):
+        x = 0
+        while x < W:
+            if m[x, y][3] and m[x, y][0] == 1:
+                x0 = x
+                while x + 1 < W and m[x + 1, y][3] and m[x + 1, y][0] == 1: x += 1
+                if x0 == 0 or p[x0 - 1, y][3] == 0: rs.append(x - x0 + 1)
+            x += 1
+    rs.sort(); return rs[len(rs) // 2] if rs else None
+
 def body(base):
     """per direction (idle frame 1) and for the portrait: head pixels, eye pixels, head top, eye top, head width"""
     out = {}
@@ -64,6 +79,8 @@ def body(base):
     eyes = {(x, y) for y in range(H) for x in range(W) if p[x, y][3] > 0 and pm[x, y][0] in EYES}
     eye_top = min(y for x, y in eyes); head = {(x, y) for (x, y) in hair if y < eye_top + 40}
     out['portrait'] = dict(head=head, eyes=eyes, top=min(y for x, y in head), eye_top=eye_top, head_w=max(x for x, y in head) - min(x for x, y in head) + 1, scale=4)
+    out['outline'] = {'sprite': outline_median(Image.open(os.path.join(base, 'c2-pilot-kid4-idleanim.png')).convert('RGBA'), Image.open(os.path.join(base, 'c2-pilot-kid4-idleanim-mask.png')).convert('RGBA')),
+                      'portrait': outline_median(pi, Image.open(os.path.join(base, 'c2-pilot-kid4-pt-mask.png')).convert('RGBA'))}
     return out
 
 def cells(img, msk, n, size):
@@ -182,13 +199,16 @@ def check(base, hatdir):
     except FileNotFoundError: why.append('missing ' + JSON)
     except Exception as e: why.append('unreadable: %s' % e)
     rec('C13', not why, {'json_problems': why})
+    # C14 outline as thick as the picture the hat sits on (sprite: at most the body's + 1 · portrait: within the portrait's +-1)
+    ms, mp_ = outline_median(im, mk), outline_median(pt, ptm); bs, bp = B['outline']['sprite'], B['outline']['portrait']
+    rec('C14', ms is not None and mp_ is not None and ms <= bs + 1 and abs(mp_ - bp) <= 1, {'hat_outline_median': {'sprite': ms, 'portrait': mp_}, 'base_outline_median': {'sprite': bs, 'portrait': bp}})
     return R, bad
 
 def selftest(base, keep=None):
     """a made-up hat on every head: it must pass; then each broken copy must fail the check named for it"""
     B = body(base); tmp = tempfile.mkdtemp(prefix='qa15-')
     ramp = [hexrgb(h) for h in HOUSES[1]]
-    def cap(a, m, ox, head, cx, w2, dome, sink, low, shift=0, stalk=0):
+    def cap(a, m, ox, head, cx, w2, dome, sink, low, shift=0, stalk=0, ow=1):
         """a cap that sits on the head: in each column over the head, from (top of head - dome) down to (top of head + sink), not below `low`"""
         prof = {}
         for x, y in head: prof[x] = min(prof.get(x, 999), y)
@@ -203,7 +223,7 @@ def selftest(base, keep=None):
         bot = max(y for x, y in pts); topy = min(y for x, y in pts)
         for x, y in pts:
             if y < 0: continue
-            edge = any(q not in pts for q in ((x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1)))
+            edge = any(q not in pts for q in ((x - k, y) for k in range(1, ow + 1))) or any(q not in pts for q in ((x + k, y) for k in range(1, ow + 1))) or any(q not in pts for q in ((x, y - k) for k in range(1, ow + 1))) or any(q not in pts for q in ((x, y + k) for k in range(1, ow + 1)))
             if edge: a[ox + x, y] = OUTLINE + (255,); m[ox + x, y] = (1, 0, 0, 255)
             else:
                 g = max(0, min(3, 3 - (y - topy) * 4 // (bot - topy + 1) + (1 if x < cx - 2 else 0) - (1 if x > cx + 2 else 0)))
@@ -252,7 +272,7 @@ def selftest(base, keep=None):
         im.save(os.path.join(tmp, FILES[0])); mk.save(os.path.join(tmp, FILES[1]))
         P = B['portrait']; pim = Image.new('RGBA', (384, 384)); pmk = Image.new('RGBA', (384, 384))
         hx = [x for x, y in P['head'] if y <= P['top'] + 12]; cx = (min(hx) + max(hx)) / 2
-        cap(pim.load(), pmk.load(), 0, P['head'], cx, P['head_w'] / 2 + 2, 16, 16, P['eye_top'] - 12)
+        cap(pim.load(), pmk.load(), 0, P['head'], cx, P['head_w'] / 2 + 2, 16, 16, P['eye_top'] - 12, ow=(1 if variant == 'pt_thin' else B['outline']['portrait']))
         pa, pm = pim.load(), pmk.load()
         if variant != 'pt_nopin':
             cb = min(max(y for y in range(384) if pm[x, y][3]) for x in range(int(cx) - 3, int(cx) + 4))
@@ -287,7 +307,8 @@ def selftest(base, keep=None):
         return tmp
     cases = [(None, None), ('down', 'C4'), ('up', 'C6'), ('semi', 'C2'), ('maskgap', 'C2'), ('mirror', 'C9'), ('nopin', 'C8'), ('outline', 'C3'), ('cyan', 'C3'), ('wide', 'C7'), ('gold11', 'C10'), ('big', 'C11'), ('size', 'C1'),
              ('no_outline', 'C12'), ('no_house', 'C12'), ('flat_mirror', 'C12'), ('pt_nopin', 'C8'), ('no_json', 'C13'), ('bad_json', 'C13'),
-             ('picked_true', 'C13'), ('ref_frame4', 'C13'), ('ref_object', 'C13'), ('schema_true', 'C13')]
+             ('picked_true', 'C13'), ('ref_frame4', 'C13'), ('ref_object', 'C13'), ('schema_true', 'C13'),
+             ('pt_thin', 'C14')]
     out = []; ok_all = True
     for v, want in cases:
         R, bad = check(base, make(v)); failed = sorted({b[0] for b in bad})
