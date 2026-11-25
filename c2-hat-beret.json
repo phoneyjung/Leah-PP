@@ -23,5 +23,5 @@
   "tilt": "char_right",
   "light": "top-left",
   "mirrored_views": [],
-  "note": "Redrawn at native pixel sizes from selected design 3: soft crown, short stalk, folded rim and copper lantern badge; source is preserved without resizing. Each view and portrait drawn separately. No additional generations."
+  "note": "Revision 2 (T57): portrait only redrawn in native 5px cloth/outline clusters and 4px copper lantern clusters to match the portrait. Shape, top-left light, badge and placement follow revision 1. Sprite, sprite mask and selected source are unchanged. No resizing, mirrored views or additional generations."
 }
