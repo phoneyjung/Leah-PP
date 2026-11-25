@@ -74,7 +74,8 @@ const K2 = [
   ['every file but the pack missing', { '*files': 404 }, false, ['idle', 'walk', 'walkhold']],
   ['every file missing', { '*': 404 }, false, ['pack']],
 ];
-const FULL_FIXED = { images: 576 * 768 * 4 * 2 + 384 * 768 * 4 + 384 * 384 * 4, masks: 576 * 768 * 4 * 2 + 384 * 768 * 4 + 384 * 384 * 4, other: 32 * 32 * 4 * 2 };
+const HAT = 768 * 96 * 4 + 384 * 384 * 4;   // G5.5: pack v2 adds heads.beret (8-cell sprite + portrait layer, image and mask each)
+const FULL_FIXED = { images: 576 * 768 * 4 * 2 + 384 * 768 * 4 + 384 * 384 * 4 + HAT, masks: 576 * 768 * 4 * 2 + 384 * 768 * 4 + 384 * 384 * 4 + HAT, other: 32 * 32 * 4 * 2 };
 
 // ---- K7 samples: the T1-T12 builders of qa/g2-6/test_char2_save.js (same data) ----
 const sb = (o) => Object.assign({ v: 1, snd: true, name: 'Test', kid: 0, house: 'sun', age: 7, lang: 'th', lv: 3, exp: 10, coins: 20, sid: 's1' }, o);

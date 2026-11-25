@@ -1,5 +1,5 @@
-/* char2.js — Lantern Academy character renderer v2 (G3 · Claude · stages G3.2 pack · load · look · fallbacks + G3.3 cache · actor · tick · draw · anchor · light · sheet + G3.4 portrait · encode · decode)
-   Plan: G3_0_RENDERER_PLAN.md v1.4 (owner approved 1 Nov 2569 22:32) · notes: G3_2_LOAD_LOOK.md
+/* char2.js — Lantern Academy character renderer v2 (G3 · Claude · stages G3.2 pack · load · look · fallbacks + G3.3 cache · actor · tick · draw · anchor · light · sheet + G3.4 portrait · encode · decode + G5.5 hats)
+   Plan: G3_0_RENDERER_PLAN.md v1.4 (owner approved 1 Nov 2569 22:32) · notes: G3_2_LOAD_LOOK.md · hats: G5_0_HAT_PLAN.md section 3
    One global, window.Char2. No game state, no save writes, no network beyond the pack files. Not loaded by index.html (G4). */
 (function () {
   'use strict';
@@ -158,6 +158,46 @@
     for (let y = 0; y < b.cut; y++) { const s = ((y0 + y + 1) * W + x0) * 4, t = ((y0 + y) * W + x0) * 4; d.copyWithin(t, s, s + C * 4); }
   }
 
+  // ---------- G5.5 hats (pack.heads): optional · a hat that cannot load is simply not drawn (never in `failed`, so the body is never affected) ----------
+  function headOk(p, h) {   // one pack.heads entry: files, sizes = 8 cells / the portrait, shift [dx,dy] (|v| <= 8) per frame of every sheet
+    try {
+      const C = p.cell, P = p.portrait;
+      if (!isObj(h) || ![h.src, h.mask, h.pt, h.pt_mask].every(isStr) || !isSize(h.size, 8 * C, C) || !isSize(h.pt_size, P.size[0], P.size[1]) || !isObj(h.shift)) return false;
+      return ['idle', 'walk', 'walkhold'].every((an) => isObj(h.shift[an]) && p.dirs.every((d) => { const L = h.shift[an][d];
+        return Array.isArray(L) && L.length === p.sheets[an].frames && L.every((v) => Array.isArray(v) && v.length === 2 && v.every((x) => inR(x, -8, 8))); }));
+    } catch (e) { return false; }
+  }
+  function hatMaskOk(p, A, M) {   // every hat px opaque (255) with mask alpha 255, id 1-11, a recolour id inside its ramp · clear px clear · the house colour present
+    const a = A.data, m = M.data, R = p.materials.recolour, lim = {}; let house = false;
+    for (const id in R) lim[id] = p.palette[R[id]][0][1].length;
+    for (let i = 0; i < a.length; i += 4) {
+      if (a[i + 3] === 0) { if (m[i + 3] !== 0) return false; continue; }
+      const id = m[i]; if (a[i + 3] !== 255 || m[i + 3] !== 255 || id < 1 || id > 11) return false;
+      if (lim[id] !== undefined) { if (m[i + 1] >= lim[id]) return false; if (R[id] === 'house') house = true; }
+    }
+    return house;
+  }
+  function hatBoxes(A, C) {   // [x0,y0,x1,y1) of the hat px in each of the 8 cells (null = empty cell)
+    const out = [];
+    for (let di = 0; di < 8; di++) { const b = [C, C, 0, 0];
+      for (let y = 0; y < C; y++) for (let x = 0; x < C; x++) if (A.data[(y * A.width + di * C + x) * 4 + 3]) { b[0] = Math.min(b[0], x); b[1] = Math.min(b[1], y); b[2] = Math.max(b[2], x + 1); b[3] = Math.max(b[3], y + 1); }
+      out.push(b[2] ? b : null); }
+    return out;
+  }
+  function hatShift(p, id, an, d, k) {   // where the hat cell goes on this frame (cell px) · + the W breathing frame's 1 px lift (the head moves up with it)
+    const v = p.heads[id].shift[an][d][k], b = p.sheets.idle.breathe;
+    return [v[0], v[1] - (an === 'idle' && b && d === b.dir && k === b.frame ? 1 : 0)];
+  }
+  function hatGeo(p, id, box, sh) {   // per anim+dir union of the hat px over its frames (for anchor box) · top row over idle + walk (the label, like the body's)
+    const G = {}; let top = p.cell;
+    for (const an of ['idle', 'walk', 'walkhold']) { if (!sh[an]) continue; G[an] = {};
+      for (let di = 0; di < 8; di++) { const d = p.dirs[di], b = box[di], u = [p.cell, p.cell, -p.cell, -p.cell]; if (!b) { G[an][d] = null; continue; }
+        for (let k = 0; k < p.sheets[an].frames; k++) { const [x, y] = hatShift(p, id, an, d, k);
+          u[0] = Math.min(u[0], b[0] + x); u[1] = Math.min(u[1], b[1] + y); u[2] = Math.max(u[2], b[2] + x); u[3] = Math.max(u[3], b[3] + y); if (an !== 'walkhold') top = Math.min(top, b[1] + y); }
+        G[an][d] = u; } }
+    return { G, top };
+  }
+
   // ---------- load ----------
   function load(packUrl) {
     if (LOADING) return LOADING;   // a second load returns the first result (no old/new pack mix) until release()
@@ -202,12 +242,24 @@
     if (!PA) failed.push('portrait');
     else if (!(PM && isObj(pj.j) && isObj(ps.j) && ptMaskOk(p, PA, PM, pj.j, ps.j))) { PM = null; failed.push('portrait-mask'); }
     if (PA) fixed.images += PA.data.length; if (PM) fixed.masks += PM.data.length;
+    const hats = Object.create(null), hatFailed = [], comp = compBox(p, holdOn ? hold : null, lanA, lanL), geo = geometry(p, sh);
+    if (isObj(p.heads)) await Promise.all(Object.keys(p.heads).map(async (id) => {   // G5.5: each hat on its own · any doubt -> that hat is not drawn
+      const h = p.heads[id]; if (!isName(id) || !headOk(p, h)) { hatFailed.push(id); return; }
+      const [a, m, b, n] = await Promise.all([getImg(at(h.src)), getImg(at(h.mask)), getImg(at(h.pt)), getImg(at(h.pt_mask))]);
+      const A = pixels(a, 8 * C, C), M = pixels(m, 8 * C, C), HA = pixels(b, pw, ph), HM = pixels(n, pw, ph);
+      if (!(A && M && HA && HM && hatMaskOk(p, A, M) && hatMaskOk(p, HA, HM))) { hatFailed.push(id); return; }
+      const box = hatBoxes(A, C), hg = hatGeo(p, id, box, sh);
+      for (const an in hg.G) for (const d in hg.G[an]) { const u = hg.G[an][d]; if (u) { comp[0] = Math.min(comp[0], u[0]); comp[1] = Math.min(comp[1], u[1]); comp[2] = Math.max(comp[2], u[2]); comp[3] = Math.max(comp[3], u[3]); } }
+      hats[id] = { A, M, HA, HM, box, geo: hg.G, label: [geo.label[0], Math.min(geo.label[1], hg.top - 4)] };
+      fixed.images += A.data.length + HA.data.length; fixed.masks += M.data.length + HM.data.length;
+    }));
     if (g !== GEN) return Object.assign({}, GONE, { failed: ['released'] });   // release() was called while this load ran
     ST = { pack: deepFreeze(p), key: p.id + '@' + p.version + '#' + hashText(t), sh, idleFrom, walkFrom, raw: raw.sort(), hold, holdOn,
-           lanC, lanL: lanLC, geo: geometry(p, sh), comp: compBox(p, holdOn ? hold : null, lanA, lanL), portrait: PA ? { A: PA, M: PM, meta: pj.j, smap: ps.j } : null, fixed };
+           lanC, lanL: lanLC, geo, comp, portrait: PA ? { A: PA, M: PM, meta: pj.j, smap: ps.j } : null, hats, fixed };
     CNT.peak = Math.max(CNT.peak, total());
     return { ready: true, failed: failed.sort(), pack: ST.pack,
-             modes: { idle: idleFrom, walk: walkFrom, raw: ST.raw.slice(), hold: holdOn, lantern_light: !!lanL, portrait: PA ? (PM ? 'recolour' : 'raw') : null } };
+             modes: { idle: idleFrom, walk: walkFrom, raw: ST.raw.slice(), hold: holdOn, lantern_light: !!lanL, portrait: PA ? (PM ? 'recolour' : 'raw') : null },
+             hats: Object.keys(hats).sort(), hats_failed: hatFailed.sort() };
   }
   function toCanvas(D) { const c = mk(D.width, D.height); c.getContext('2d').putImageData(D, 0, 0); return c; }
   function compBox(p, hold, lanA, lanL) {   // G3.1 A3 composition box [x0,y0,x1,y1) in cell px = the body cell + every lantern px at every hold anchor
@@ -293,9 +345,10 @@
   function fixedCanvas(w, h) { ST.fixed.other += w * h * 4; return mk(w, h); }
   function opts(app, dc) {   // Appearance + DrawContext -> palette option index per group, or null
     if (!ST || !isObj(app) || !own(ST.pack.bases, app.base) || !isObj(app.color) || !isObj(dc)) return null;
-    const p = ST.pack, o = { hair: colourIx(p, 'hair', app.color.hair), iris: colourIx(p, 'iris', app.color.iris), skin: colourIx(p, 'skin', app.color.skin), house: colourIx(p, 'house', dc.house) };
+    const p = ST.pack, o = { hair: colourIx(p, 'hair', app.color.hair), iris: colourIx(p, 'iris', app.color.iris), skin: colourIx(p, 'skin', app.color.skin), house: colourIx(p, 'house', dc.house), head: hatOf(app) };
     return o.hair >= 0 && o.iris >= 0 && o.skin >= 0 && o.house >= 0 ? o : null;
   }
+  function hatOf(app) { const h = isObj(app) && isObj(app.parts) ? app.parts.head : null; return typeof h === 'string' && own(ST.hats, h) ? h : null; }   // a hat that loaded, or null
   function room(need) {   // evict least-recently-used unpinned entries until fixed + cache + borrowed + scratch + need fits the budget (need = an upper bound)
     while (total() + need > ST.pack.budget.bytes) {
       let v = null; for (const kv of CACHE) if (!kv[1].pins && (!v || kv[1].last < v[1].last)) v = kv;
@@ -304,7 +357,21 @@
     return true;
   }
   function drop(k, e) { kill(e.cv); if (e.fists) for (const r of e.fists) for (const f of r) if (f) kill(f.c); CACHE.delete(k); GONEK.add(k); CNT.evict++; }
-  function build(an, o) {   // one recoloured sheet (idle / walk / walkhold / stand8 / portrait) as a canvas + its fist canvases
+  function direct(o) { const p = ST.pack, R = p.materials.recolour, r = Object.create(null); for (const id of Object.keys(R)) r[id] = p.palette[R[id]][o[R[id]]][1].map(rgbOf); return r; }
+  function paint(d, W, A, M, r, sx, sy, w, h, tx, ty, clip) {   // G5.5: hat px (source rect sx,sy,w,h of A/M, mask G = the ramp index) over d at tx,ty · only inside clip [x0,y0,x1,y1)
+    const a = A.data, m = M.data;
+    for (let y = 0; y < h; y++) { const Y = ty + y; if (Y < clip[1] || Y >= clip[3]) continue;
+      for (let x = 0; x < w; x++) { const X = tx + x, i = ((sy + y) * A.width + sx + x) * 4; if (X < clip[0] || X >= clip[2] || !a[i + 3]) continue;
+        const q = r[m[i]], c = q ? q[m[i + 1]] : a.subarray(i, i + 3), j = (Y * W + X) * 4; d[j] = c[0]; d[j + 1] = c[1]; d[j + 2] = c[2]; d[j + 3] = 255; } }
+  }
+  function hatSheet(o) {   // G5.5: the hat's 8 cells recoloured for this colour set (house cloth = ID 8 by G) · drawn as its own layer, so it can sit above the cell
+    const p = ST.pack, C = p.cell, Hh = ST.hats[o.head], W = 8 * C, b = W * C * 4; if (!room(2 * b)) return null;
+    SCR = b; const out = new ImageData(W, C); paint(out.data, W, Hh.A, Hh.M, direct(o), 0, 0, W, C, 0, 0, [0, 0, W, C]);
+    const e = { cv: mk(W, C), bytes: b, pins: 0, last: 0, fists: null }; e.cv.getContext('2d').putImageData(out, 0, 0);
+    CNT.peak = Math.max(CNT.peak, total() + e.bytes); SCR = 0; return e;
+  }
+  function build(an, o) {   // one recoloured sheet (idle / walk / walkhold / stand8 / portrait) as a canvas + its fist canvases · stand8 / portrait include the hat
+    if (an === 'hat') return o.head ? hatSheet(o) : null;
     const p = ST.pack, C = p.cell, PT = an === 'portrait', S = PT ? ST.portrait : an === 'stand8' ? ST.sh.idle || ST.sh.walk : ST.sh[an]; if (!S) return null;
     const W = an === 'stand8' ? 8 * C : S.A.width, H = an === 'stand8' ? C : S.A.height, b = W * H * 4;
     if (!room(2 * b + 16384)) return null;   // canvas + one scratch ImageData + room for the fists
@@ -317,6 +384,11 @@
       if (!a[i + 3]) continue;
       const r = m && ramp[m[i]], c = r ? r[m[i + 1]] : a.subarray(i, i + 3);
       d[j] = c[0]; d[j + 1] = c[1]; d[j + 2] = c[2]; d[j + 3] = a[i + 3];
+    }
+    const Hh = o.head && (PT || an === 'stand8') ? ST.hats[o.head] : null;
+    if (Hh && PT) paint(d, W, Hh.HA, Hh.HM, direct(o), 0, 0, W, H, 0, 0, [0, 0, W, H]);   // portrait hat layer: same size as the portrait, at 0,0
+    else if (Hh) for (let di = 0; di < 8; di++) {   // stand8 = frame 0 of each dir: the hat at that frame's shift, kept inside the dir's own cell
+      const [x, y] = hatShift(p, o.head, ST.sh.idle ? 'idle' : 'walk', p.dirs[di], 0); paint(d, W, Hh.A, Hh.M, direct(o), di * C, 0, C, C, di * C + x, y, [di * C, 0, di * C + C, C]);
     }
     const e = { cv: mk(W, H), bytes: b, pins: 0, last: 0, fists: null }; e.cv.getContext('2d').putImageData(out, 0, 0);
     if (ST.hold && (an === 'idle' || an === 'walkhold')) e.fists = fists(an, out, e);
@@ -333,13 +405,13 @@
     return out;
   }
   function entry(an, o) {
-    const k = an + '|' + o.hair + '|' + o.iris + '|' + o.skin + '|' + o.house; let e = CACHE.get(k);
+    const k = an + '|' + o.hair + '|' + o.iris + '|' + o.skin + '|' + o.house + (o.head && (an === 'hat' || an === 'stand8' || an === 'portrait') ? '|' + o.head : ''); let e = CACHE.get(k);
     if (e) CNT.hit++; else { CNT.miss++; e = build(an, o); if (!e) return null; if (GONEK.has(k)) CNT.rebuilt++; CACHE.set(k, e); }
     e.last = ++USE; return e;
   }
   function sheet(app, dc, an) {   // borrow handle: the cache's own canvas (read only), pinned until handle.release()
     try {
-      if (!ST || !['idle', 'walk', 'walkhold', 'stand8', 'portrait'].includes(an)) return null;
+      if (!ST || !['idle', 'walk', 'walkhold', 'stand8', 'portrait', 'hat'].includes(an)) return null;
       const o = opts(app, dc), e = o && entry(an, o); if (!e) return null;
       if (!e.pins && sizes().b + e.bytes > ST.pack.budget.borrow_max) { CNT.refused++; return null; }
       e.pins++; const h = { canvas: e.cv, release() { if (h.dead) return; h.dead = true; h.canvas = null; e.pins--; HANDLES.delete(h); } };
@@ -420,6 +492,8 @@
       if (!ST || !ctx || !actorOk(A) || !Number.isFinite(x) || !Number.isFinite(y) || !isInt(s) || s < 1) return false;
       const o = opts(app, dc); if (!o) return false;
       const p = ST.pack, C = p.cell, d = A.dir, di = p.dirs.indexOf(d), H = held(A, dc), [an, kk] = pick(A, H), e = entry(an, o); if (!e || !isInt(kk) || kk < 0 || (kk + 1) * C > e.cv.width) return false;
+      let hb = null; if (o.head) { e.pins++; try { hb = entry('hat', o); } finally { e.pins--; } }   // G5.5: the body sheet stays while the hat is found · no hat canvas (budget) = no hat this frame
+      const hs = hb && hatShift(p, o.head, an, d, kk);
       const t = H ? target(A) : null, lp = t && (A.lpos && A.ldir === d ? A.lpos : t), la = t ? lightA(dc) : 0, fo = t && e.fists ? e.fists[di][kk] : null;
       const emis = isObj(op) && op.only === 'emissive'; if (emis && !(t && la)) return false;
       const G = p.lantern.grip, LN = p.lantern.cell, X0 = Math.round(x - p.feet[0] * s + p.render_offset[d] * s), Y0 = Math.round(y - p.feet[1] * s);
@@ -436,6 +510,7 @@
         let g = ctx, sx = X0, sy = Y0, z = s;
         if (comp) { g = COMP.getContext('2d'); g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.globalCompositeOperation = 'source-over'; g.clearRect(0, 0, COMP.width, COMP.height); g.imageSmoothingEnabled = false; sx = -B[0]; sy = -B[1]; z = 1; }
         g.drawImage(e.cv, kk * C, di * C, C, C, sx, sy, C * z, C * z);
+        if (hs) g.drawImage(hb.cv, di * C, 0, C, C, sx + hs[0] * z, sy + hs[1] * z, C * z, C * z);   // layer order (plan G5 3): body -> hat -> held in front
         if (t) {
           g.drawImage(ST.lanC, 0, 0, LN, LN, sx + lx * z, sy + ly * z, LN * z, LN * z);
           if (la) { g.globalAlpha = la; g.drawImage(ST.lanL, 0, 0, LN, LN, sx + lx * z, sy + ly * z, LN * z, LN * z); g.globalAlpha = 1; }
@@ -446,12 +521,15 @@
       } finally { ctx.restore(); }
     } catch (err) { return false; }
   }
-  function anchor(A, name, dc) {   // cell px BEFORE renderOffset · dc (optional) = the DrawContext of the draw it goes with (no lantern held -> the sheet draw uses)
-    try {
+  function anchor(A, name, dc, app) {   // cell px BEFORE renderOffset · dc (optional) = the DrawContext of the draw it goes with (no lantern held -> the sheet draw uses)
+    try {                                  // app (optional, G5.5) = the Appearance drawn: with a hat that loaded, label / head_top / box reach over the hat
       if (!ST || !actorOk(A)) return null;
       const p = ST.pack, G = ST.geo, H = dc === undefined ? ST.holdOn && A.holding : held(A, dc), [an, kk] = pick(A, H), f = G[an][A.dir], ht = f.fr[kk];
-      if (name === 'feet') return p.feet.slice(); if (name === 'label') return G.label.slice(); if (name === 'head_top') return ht.slice();
-      if (name === 'body') return [p.feet[0], Math.round((ht[1] + p.feet[1]) / 2)]; if (name === 'box') return f.box.slice();
+      const hd = app === undefined ? null : hatOf(app), hh = hd && ST.hats[hd], hu = hh && hh.geo[an] && hh.geo[an][A.dir];
+      if (name === 'feet') return p.feet.slice(); if (name === 'label') return (hh ? hh.label : G.label).slice();
+      if (name === 'head_top') { if (!hu) return ht.slice(); const b = hh.box[p.dirs.indexOf(A.dir)], v = hatShift(p, hd, an, A.dir, kk); return [ht[0], Math.min(ht[1], b[1] + v[1])]; }
+      if (name === 'body') return [p.feet[0], Math.round((ht[1] + p.feet[1]) / 2)];
+      if (name === 'box') return hu ? [Math.min(f.box[0], hu[0]), Math.min(f.box[1], hu[1]), Math.max(f.box[2], hu[2]), Math.max(f.box[3], hu[3])] : f.box.slice();
       const fr = H && ST.hold[A.anim === 'walk' ? 'walk_hold' : 'idle_hold'][A.dir][frame(A)];
       if (name === 'hand_r' || name === 'hand_l') return fr && fr.anchor && fr.hand === (name === 'hand_r' ? 'R' : 'L') ? fr.anchor.slice() : null;
       if (name === 'grip') { const t = H && target(A), lp = t && (A.lpos && A.ldir === A.dir ? A.lpos : t); return lp ? lp.map(Math.round) : null; }
@@ -479,6 +557,6 @@
     ST = null; LOADING = null; CNT = ZERO();
   }
 
-  window.Char2 = Object.freeze({ version: 'g3.4', load, look, actor, tick, draw, anchor, light, sheet, portrait: (app, dc) => sheet(app, dc, 'portrait'), encode, decode, stats, trim, release,
+  window.Char2 = Object.freeze({ version: 'g5.5', hats: () => (ST ? Object.keys(ST.hats).sort() : []), load, look, actor, tick, draw, anchor, light, sheet, portrait: (app, dc) => sheet(app, dc, 'portrait'), encode, decode, stats, trim, release,
     _test: Object.freeze({ packOk, kidMaskOk, holdOk, state: () => (ST ? { key: ST.key, idleFrom: ST.idleFrom, walkFrom: ST.walkFrom, raw: ST.raw.slice(), holdOn: ST.holdOn } : null) }) });
 })();

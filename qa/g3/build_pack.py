@@ -93,6 +93,23 @@ pack = {
     'palette': pal,
     'budget': {'bytes': 40 * 1048576, 'borrow_max': 4718592, 'fixed_other_max': 262144},
 }
+# G5.5 (Claude · 26 Nov 2569): heads = the hats a base may wear. Image files = Codex set 15 (locked) · shift = qa/g5/hat-shift.json (measured on the
+# locked sheets by qa/g5/hat_shift.py, never typed) · each hat id also goes into bases.<id>.parts.head (save field S.char2.parts.head)
+hat = json.loads((ROOT / 'c2-hat-beret.json').read_text(encoding='utf-8'))
+hs = json.loads((ROOT / 'qa/g5/hat-shift.json').read_text(encoding='utf-8'))['shift']
+assert hat['id'] == 'beret' and hat['dirs'] == DIRS and hat['cell'] == [C, C] and hat['mirrored_views'] == [], 'hat json != pack'
+for an in ('idle', 'walk', 'walkhold'):
+    assert sorted(hs[an]) == sorted(DIRS) and all(len(hs[an][d]) == pack['sheets'][an]['frames'] for d in DIRS), 'hat shift frames'
+    assert all(len(v) == 2 and all(isinstance(x, int) and -8 <= x <= 8 for x in v) for d in DIRS for v in hs[an][d]), 'hat shift values'
+H = 'c2-hat-beret'
+pack['heads'] = {'beret': {'src': H + '.png', 'mask': H + '-mask.png', 'size': png_size(H + '.png'), 'pt': H + '-pt.png', 'pt_mask': H + '-pt-mask.png',
+                           'pt_size': png_size(H + '-pt.png'), 'sha256': sha(H + '.png'), 'mask_sha256': sha(H + '-mask.png'),
+                           'pt_sha256': sha(H + '-pt.png'), 'pt_mask_sha256': sha(H + '-pt-mask.png'),
+                           'shift': {an: {d: hs[an][d] for d in DIRS} for an in ('idle', 'walk', 'walkhold')}}}
+assert png_size(H + '-mask.png') == pack['heads']['beret']['size'] and png_size(H + '-pt-mask.png') == pack['heads']['beret']['pt_size']
+pack['bases']['kid4']['parts']['head'] = ['beret']
+pack['version'] = 2
+pack['note'] += ' v2 (G5.5): + heads.beret (Codex set 15) with the measured per-frame hat shift.'
 text = json.dumps(pack, ensure_ascii=False, separators=(',', ':')) + '\n'
 out = ROOT / 'c2-pack.json'
 if CHECK:
