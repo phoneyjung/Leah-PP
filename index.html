@@ -121,7 +121,7 @@ window.DEFER_Q=[];window.DEFER_ON=true;window.DEFER_DONE=new Set();
 
 // ===== Lantern Academy (LA) · index.html · formerly "Leah พาเพลิน 2D" =====
 // Files are loaded by name. If a file is missing the game draws a simple stand-in and keeps running.
-const VERSION='Lantern Academy 2.44';
+const VERSION='Lantern Academy 2.45';
 const T=32;
 const FILES={laLogo:'logo.png',ground:'tiles-village.png',cliff:'tiles-cliff.png',water:'tiles-water.png',cobble:'tiles-cobble.png',cave:'tiles-cave.png',
   props:'props-village.png',mprops:'props-mountain.png',cprops:'props-cave.png',dprops:'props-dungeon.png',farm:'props-farm.png',
@@ -7843,7 +7843,7 @@ function c234Body(X,Y,F,yoff){   // W1/W2: feet = (X+F/2, Y+F−2+yoff) = the ol
 function c234Clip(X,Y,F,cut){return c234Go()?[X+F/2-48,Y+F-2-94,96,96-cut]:[X,Y,F,F-cut]}   // W2: the 96 cell, bottom edge Y+F−cut = the old one
 function c234Shadow(){if(!c234Go())return false;const ro=C234.pack.render_offset[C234.A.dir]||0;   // W3 (inside the game's save/restore)
   ctx.globalCompositeOperation='source-over';ctx.globalAlpha=1;ctx.fillStyle='rgba(20,18,40,.35)';ctx.beginPath();ctx.ellipse(Math.round(P.x-camX)+ro,Math.round(P.y-camY),14,3,0,0,7);ctx.fill();C234.n.shadow++;return true}
-function c234SitTop(s){const g=c234Go();if(!g)return null;const b=Char2.anchor(C234.A,'box',g.dc);if(!b){c234Broke('anchor box');return null}   // W5: top of the clip
+function c234SitTop(s){const g=c234Go();if(!g)return null;const b=Char2.anchor(C234.A,'box',g.dc,C234.app);if(!b){c234Broke('anchor box');return null}   // W5: top of the clip
   C234.n.sit++;return s.seatY+G9SIT.drop-(94-b[1])-4}
 function c234Hole(x,y){const f=C234.feet;if(!c234Use()||!f||f.step!==C234.step)return [x,y];   // W11: from the feet the body was drawn at THIS frame
   if(f.L){C234.n.hole++;return [f.x+f.L.x,f.y+f.L.y]}   // light() includes the offset · checked before the body was drawn (2.38)
@@ -7859,9 +7859,9 @@ function c234Hole(x,y){const f=C234.feet;if(!c234Use()||!f||f.step!==C234.step)r
 // Flag off (or Char2 not usable / failed this frame) → c234D returns d unchanged = the old number, the same arithmetic as before.
 // W10 (≤ 20 px from the feet) unchanged by plan. W6: the after-image ghost is the current actor (no tick) at the old ghost's feet, alpha .35·al.
 const C234K={head:60,body:30,top:60,label:66},C234AN={head:'head_top',body:'body',top:'box',label:'label'};
-function c234D(kind,d){const g=c234Go();if(!g)return d;const a=Char2.anchor(C234.A,C234AN[kind],g.dc);if(!a){c234Broke('anchor '+kind);return d}
+function c234D(kind,d){const g=c234Go();if(!g)return d;const a=Char2.anchor(C234.A,C234AN[kind],g.dc,C234.app);if(!a){c234Broke('anchor '+kind);return d}
   C234.n.anchor++;return 94-a[1]+d-C234K[kind]}
-function c234Box4(){const g=c234Go();if(!g)return null;const b=Char2.anchor(C234.A,'box',g.dc);if(!b){c234Broke('anchor box');return null}C234.n.anchor++;
+function c234Box4(){const g=c234Go();if(!g)return null;const b=Char2.anchor(C234.A,'box',g.dc,C234.app);if(!b){c234Broke('anchor box');return null}C234.n.anchor++;
   const top=94-b[1]+4,ro=C234.pack.render_offset[C234.A.dir]||0;return [P.x+b[0]-48+ro,P.y-top,b[2]-b[0],top+4]}   // y = P.y − top_new · h = top_new + 4 (bottom +4 as before)
 function c234After(f,al){const g=c234Go();if(!g)return false;const F=PS.F||64,X=Math.round(P.x-F/2-camX+f.ox),Y=Math.round(P.y-(F-2)-camY);
   ctx.globalAlpha=.35*al;const ok=Char2.draw(ctx,C234.app,g.dc,C234.A,X+F/2,Y+F-2,1);ctx.globalAlpha=1;if(!ok){c234Broke('draw');return false}C234.n.after++;return true}
@@ -7959,6 +7959,37 @@ function c245Panel(){const row=$('c234row');if(!row||$('c245')||!S||!c234UiOk()|
     h+='</div>'}
   d.innerHTML=h;row.appendChild(d);d.querySelectorAll('button[data-g]').forEach(b=>b.onclick=()=>{if(c245Set(b.dataset.g,b.dataset.n))c245Show()});c245Show()}
 {const o=c234Row;c234Row=function(){const r=o.apply(this,arguments);try{c245Panel()}catch(e){}return r}}
+// ── 2.45 G5.5 (Claude · plan G5_0_HAT_PLAN.md v1.2 §3): the first thing to wear — the school beret in the house colour, on/off in the GM colour panel.
+// Save = S.char2.parts.head ('beret' · null or no key = no hat): char2's own optional slot, which c234Exact already accepts (a new top-level key would make
+// the save "malformed" → the old character). Char2 draws the hat as its own layer after the body (per-frame shift from the pack), recolours it with
+// S.house, puts it on the face portrait, and with C234.app passed to anchor() the name label / emote / box reach over it. A hat whose files did not
+// load is never a load failure: the body draws as before without it, and its button here is dimmed and cannot be chosen.
+const C255H=[[null,'ไม่ใส่','None'],['beret','เบเร่ต์','Beret']];
+function c255Has(id){try{return id===null||(!!window.Char2&&typeof Char2.hats==='function'&&Char2.hats().includes(id))}catch(e){return false}}
+function c255Cur(){const p=S&&S.char2&&S.char2.parts,h=p&&typeof p==='object'?p.head:null;return typeof h==='string'?h:null}
+function c255Set(id){if(!S||!c234UiOk()||!S.char2||!C234.pack||!C234.pack.bases)return false;
+  const B=C234.pack.bases[S.char2.base],L=B&&B.parts&&B.parts.head;if(id!==null&&!(Array.isArray(L)&&L.includes(id)&&c255Has(id)))return false;
+  if(c255Cur()===id)return true;const c=JSON.parse(JSON.stringify(S.char2));if(!c.parts||typeof c.parts!=='object'||Array.isArray(c.parts))return false;
+  c.parts.head=id;   // none = null, as the migration writes it (so on → off gives back the same save)
+  const app=Char2.look(Object.assign({},S,{char2:c}));if(!app||!c234Exact(c,app))return false;
+  S.char2=c;C234.app=app;C234.n.hat=(C234.n.hat||0)+1;try{save()}catch(e){}c234Paint();return true}
+function c255Pic(cv,id){   // the hat's front view in this save's house colour (Char2's own recoloured hat sheet) · no sheet = the button keeps its text only
+  try{const h=(HOUSES[S.house]||HOUSES[0]).id,a=Object.assign({},C234.app,{parts:Object.assign({},C234.app.parts,{head:id})});
+    return c234Sheet(a,h,'hat',src=>{const C=src.height,d=src.getContext('2d').getImageData(0,0,C,C).data;let x0=C,y0=C,x1=-1,y1=-1;
+      for(let y=0;y<C;y++)for(let x=0;x<C;x++)if(d[(y*C+x)*4+3]){x0=Math.min(x0,x);y0=Math.min(y0,y);x1=Math.max(x1,x);y1=Math.max(y1,y)}
+      if(x1<0)return;const w=x1-x0+1,hh=y1-y0+1;cv.width=w;cv.height=hh;const g=cv.getContext('2d');g.imageSmoothingEnabled=false;g.drawImage(src,x0,y0,w,hh,0,0,w,hh)})}catch(e){return false}}
+function c255Row(){const p=$('c245');if(!p||$('c255')||!S||!c234UiOk()||!S.char2)return;const tx=(a,b)=>LANG==='en'?b:a,d=document.createElement('div');d.id='c255';d.style.marginTop='6px';
+  let h='<div>'+tx('หมวก','Hat')+': <span id="c255n"></span></div><div style="display:flex;flex-wrap:wrap;gap:4px">';
+  for(const [id,t,e] of C255H){const ok=c255Has(id);
+    h+='<button data-hat="'+(id||'')+'" aria-pressed="false"'+(ok?'':' disabled aria-disabled="true"')+' aria-label="'+tx('หมวก','Hat')+' '+tx(t,e)+'" style="min-width:44px;min-height:44px;padding:4px 10px;display:flex;align-items:center;gap:6px'+(ok?'':';opacity:.45')+'">'+
+      (id?'<canvas data-hatpic="'+id+'" width="1" height="1" style="width:44px;height:30px;object-fit:contain;image-rendering:pixelated"></canvas>':'<span style="display:block;width:26px;height:26px;border-radius:50%;border:2px dashed #fff9"></span>')+'<span>'+tx(t,e)+'</span></button>'}
+  h+='</div>';if(!c255Has('beret'))h+='<div style="opacity:.8;font-size:.9em;margin-top:2px">'+tx('ภาพหมวกยังโหลดไม่ได้','The hat picture did not load')+'</div>';
+  d.innerHTML=h;p.appendChild(d);d.querySelectorAll('canvas[data-hatpic]').forEach(c=>{if(c255Has(c.dataset.hatpic))c255Pic(c,c.dataset.hatpic)});
+  d.querySelectorAll('button[data-hat]').forEach(b=>b.onclick=()=>{if(b.disabled)return;if(c255Set(b.dataset.hat||null)){c255Show();try{c245Show()}catch(e){}}});c255Show()}
+function c255Show(){const d=$('c255');if(!d||!S||!S.char2)return;const cur=c255Cur(),tx=(a,b)=>LANG==='en'?b:a;
+  d.querySelectorAll('button[data-hat]').forEach(b=>b.setAttribute('aria-pressed',String((b.dataset.hat||null)===cur)));
+  const n=$('c255n'),e=C255H.find(x=>x[0]===cur);if(n)n.textContent=e?tx(e[1],e[2]):String(cur)}
+{const o=c245Panel;c245Panel=function(){const r=o.apply(this,arguments);try{c255Row()}catch(e){}return r}}
 // 2.43 (Codex T46-N1): every state change paints (c234Paint) — leaving ready while the panel is open (e.g. the preview's own sheet refused →
 // c234Broke) takes the panel away at once; the row's status text already shows the new state. (Back to ready: the panel comes with the next
 // opening of the GM panel, as before.)
