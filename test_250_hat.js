@@ -5,6 +5,7 @@
 //    On every frame (cell px, from the drawn pixels): eye px covered 0 · crown (head rows top..top+2) covered ≥ 90 % · gap under the hat 0 (the rule of
 //    qa/g5/hat_shift.py) · exactly one drawImage of the hat sheet per draw with the hat, none without it · anchor box holds every hat px · head_top ≤ the
 //    hat top · label = the highest hat px over idle + walk − 4 (and the old [48,4] without the hat or without app)
+// A3 the same 125 frames drawn at scale 3 (the phone's), one house: each hat px = a 3×3 block → 0 px differ
 // A4 the face portrait and the 8-way stand preview with the hat = the same without it + the hat layer (portrait layer 384 at 0,0 · stand = frame 0 of each
 //    dir at its shift, inside its cell) → 0 px differ, 4 houses
 // B  the GM colour panel (phone 844×390 @3 · iPad 1180×820 @2): a hat row with 2 buttons ≥ 44 × 44 CSS px (ไม่ใส่ / เบเร่ต์ · None / Beret), "none"
@@ -13,11 +14,14 @@
 //    the hat (c234D) · tap none: the stored char2 is byte-identical to before the first tap · house change → the hat sheet's cloth = the new house ramp ·
 //    wrong calls change nothing · a new page in the same storage keeps the hat · "clear v2" removes it
 // F  files: each hat file blocked (404) one at a time and all 4 together, with a save that wears the hat: v2 still ready (body drawn), Char2.hats() [],
-//    the beret button dimmed + a note, S.char2 not rewritten, 0 page errors · a broken mask (wrong size) → the same · sw.js lists the 4 files and the hat
-//    files come into the offline cache once v2 is on; an offline reload still shows the hat
+//    the beret button dimmed + a note, S.char2 not rewritten, 0 page errors · a broken mask (wrong size) → the same · Codex T58: a hat src that is not a
+//    plain file name (`http://[`, N1-A) · the hat sprite never answered (N1-B, ready within 20 s) · one mask px with an id the beret may not use (N2) ·
+//    the S cell empty in image + mask (N2) → the same · sw.js lists the 4 files and the hat files come into the offline cache once v2 is on; an offline
+//    reload still shows the hat · cache: 8 hair colours, same house → 1 hat sheet (T58-N3)
 // P  JS per frame = the time spent inside every requestAnimationFrame callback ÷ frames (CPU 4×, 844×390 @3, the kid walking on the game's own path,
-//    6 rounds × 6 s per side, hat off / on alternating, median of the paired ratios): on ≤ off × 1.10 · fps on ≥ 90 % of off (FPS main 2.44 vs
-//    this branch: qa/g4/fps.js, reported apart)
+//    12 rounds × 4 s per side, hat off / on, the order alternating). Formula (T58-N4): ratio of a round = on ÷ off of THAT round; the result = the
+//    median of the 12 round ratios (not median(on) ÷ median(off)). Pass: JS ≤ 1.10 · fps ≥ 0.90. Also the hat's own cost: Char2.draw with ÷ without
+//    the hat at scale 3 (the phone's), 2,000 draws each in alternating blocks of 100, CPU 4× (reported). FPS main 2.44 vs this branch: qa/g4/fps.js, reported apart
 // Screens: s-phone-*.png / s-ipad-*.png (panel open · hat on in the game).  Prints one JSON line, then `errors N`.
 // Run: PORT=8812 CHROME_EXE=/path/to/chromium node test_250_hat.js   (serve the repo root first)
 const fs = require('node:fs'), path = require('node:path'), puppeteer = require('puppeteer');
@@ -38,7 +42,8 @@ async function open(browser, v, o = {}) {
   await p.setRequestInterception(true);
   p.on('request', async (r) => { try { const u = r.url(), n = decodeURIComponent(u.split('?')[0].split('/').pop());
     if (/firebase|gstatic|googleapis/.test(u)) return r.abort(); if (o.block && o.block(n)) return r.respond({ status: 404, body: 'blocked' });
-    if (o.swap && o.swap[n]) return r.respond({ status: 200, contentType: 'image/png', body: o.swap[n] }); r.continue(); } catch (e) {} });
+    if (o.stall && o.stall(n)) return;   // never answered, never aborted (T58-N1 case B)
+    if (o.swap && o.swap[n]) { const w = o.swap[n]; return r.respond(Buffer.isBuffer(w) ? { status: 200, contentType: 'image/png', body: w } : { status: 200, contentType: w.type, body: w.body }); } r.continue(); } catch (e) {} });
   await p.goto(base + '?rank=1', { waitUntil: 'load' }); await p.waitForFunction(() => !document.getElementById('load'), { timeout: 90000 }); await sleep(500);
   return { bc, p, pe };
 }
@@ -52,7 +57,8 @@ async function start(p, slot, keep) {
 }
 async function helpers(p) {
   await p.evaluate(async () => {
-    const img = (u) => new Promise((r) => { const i = new Image(); i.onload = () => { const c = document.createElement('canvas'); c.width = i.naturalWidth; c.height = i.naturalHeight; const g = c.getContext('2d', { willReadFrequently: true }); g.drawImage(i, 0, 0); r(g.getImageData(0, 0, c.width, c.height)); }; i.onerror = () => r(null); i.src = u; });
+    const img = (u) => new Promise((r) => { const i = new Image(); setTimeout(() => r(null), 4000);   // a stalled file (case N1-B) must not hang the test's own reader
+      i.onload = () => { const c = document.createElement('canvas'); c.width = i.naturalWidth; c.height = i.naturalHeight; const g = c.getContext('2d', { willReadFrequently: true }); g.drawImage(i, 0, 0); r(g.getImageData(0, 0, c.width, c.height)); }; i.onerror = () => r(null); i.src = u; });
     const pack = await (await fetch('c2-pack.json', { cache: 'no-store' })).json(), H = pack.heads && pack.heads.beret;
     window.__T = { pack, HA: H && await img(H.src), HM: H && await img(H.mask), PA: H && await img(H.pt), PM: H && await img(H.pt_mask),
       MK: { idle: await img(pack.sheets.idle.mask), walk: await img(pack.sheets.walk.mask), walkhold: await img(pack.sheets.walkhold.mask) } };
@@ -128,6 +134,24 @@ const placement = (p) => p.evaluate(() => {
   } finally { CanvasRenderingContext2D.prototype.drawImage = DI; }
   res.labelWant = [P.feet[0], Math.min(4, minTop - 4)]; res.worst = res.worst.slice(0, 8); res.crownMin = Math.round(res.crownMin * 1000) / 1000; return res;
 });
+// A3: the same at scale 3 (the phone's): all 125 frames, one house, each hat px = a 3×3 block → 0 px differ
+const placement3 = (p) => p.evaluate(() => {
+  const P = __T.pack, C = P.cell, DIRS = P.dirs, T = P.timing, house = P.palette.house[2][0], s = 3, res = { frames: 0, bad: 0, worst: [] };
+  const cv = document.createElement('canvas'); cv.width = cv.height = 400; const g = cv.getContext('2d', { willReadFrequently: true }), a0 = __appWith(null), a1 = __appWith('beret'), ramp = __ramp(a1, house);
+  for (const d of DIRS) for (const an of ['idle', 'walk', 'walkhold']) for (let k = 0; k < (an === 'idle' ? 4 : 6); k++) {
+    if (an === 'idle' && k === 3 && !T.blink_dirs.includes(d)) continue;
+    const A = Char2.actor({ blinkAt: 1e12 }); A.dir = d; A.anim = an === 'idle' ? 'idle' : 'walk'; A.holding = an === 'walkhold'; A.fi = k; A.blinkNow = an === 'idle' && k === 3;
+    const dc = { house }; if (A.holding) dc.held = { id: P.lantern.id, on: true, lit: false, power: 0 };
+    const fx = 200, fy = 330, X0 = Math.round(fx - P.feet[0] * s + P.render_offset[d] * s), Y0 = Math.round(fy - P.feet[1] * s);
+    g.clearRect(0, 0, 400, 400); Char2.draw(g, a0, dc, A, fx, fy, s); const d0 = g.getImageData(0, 0, 400, 400).data;
+    g.clearRect(0, 0, 400, 400); Char2.draw(g, a1, dc, A, fx, fy, s); const d1 = g.getImageData(0, 0, 400, 400).data;
+    const want = new Uint8ClampedArray(d0), di = DIRS.indexOf(d), [dx, dy] = __shift(an, d, k), HA = __T.HA, HM = __T.HM;
+    for (let y = 0; y < C; y++) for (let x = 0; x < C; x++) { const i = (y * HA.width + di * C + x) * 4; if (!HA.data[i + 3]) continue; const q = ramp[HM.data[i]], c = q ? q[HM.data[i + 1]] : [HA.data[i], HA.data[i + 1], HA.data[i + 2]];
+      for (let v = 0; v < s; v++) for (let u = 0; u < s; u++) { const X = X0 + (x + dx) * s + u, Y = Y0 + (y + dy) * s + v, j = (Y * 400 + X) * 4; want[j] = c[0]; want[j + 1] = c[1]; want[j + 2] = c[2]; want[j + 3] = 255; } }
+    const bad = __diff(want, d1); res.frames++; res.bad += bad; if (bad) res.worst.push([d, an, k, bad]);
+  }
+  res.worst = res.worst.slice(0, 6); return res;
+});
 const sheets = (p) => p.evaluate(() => {
   const P = __T.pack, C = P.cell, out = [];
   for (const house of P.palette.house.map((e) => e[0])) {
@@ -148,13 +172,14 @@ const keysDiff = (a, b) => [...new Set([...Object.keys(a || {}), ...Object.keys(
     // ── A + A4 (phone)
     { const t = await open(browser, VIEWS[0]); await start(t.p, GIRL());
       const st = await t.p.evaluate(() => ({ st: C234.st, why: C234.why, hats: Char2.hats(), version: Char2.version, res: C234.res }));
-      R.A = Object.assign(st, await placement(t.p)); R.A4 = await sheets(t.p); R.A.pe = t.pe.length;
+      R.A = Object.assign(st, await placement(t.p)); R.A3 = await placement3(t.p); R.A4 = await sheets(t.p); R.A.pe = t.pe.length;
       const A = R.A;
       ck(A.st === 'ready' && same(A.hats, ['beret']) && A.version === 'g5.5', 'A ready with the beret ' + JSON.stringify(st));
       ck(A.frames === 500 && A.bad === 0, 'A placement 125 frames x 4 houses, 0 px differ ' + JSON.stringify({ frames: A.frames, bad: A.bad, worst: A.worst }));
       ck(A.eyes === 0 && A.crownMin >= 0.9 && A.gap === 0 && A.hatPx > 500, 'A eyes / crown / gap ' + JSON.stringify({ eyes: A.eyes, crown: A.crownMin, gap: A.gap, hatPx: A.hatPx }));
       ck(A.hatDrawsWith === 500 && A.hatDrawsWithout === 0, 'A one hat drawImage per draw with the hat, none without ' + JSON.stringify([A.hatDrawsWith, A.hatDrawsWithout]));
       ck(A.box === 0 && A.head === 0 && same(A.label, A.labelWant) && A.label[1] < 4 && same(A.labelOld, [48, 4]) && same(A.labelOldApp, [48, 4]), 'A anchors ' + JSON.stringify({ box: A.box, head: A.head, label: A.label, want: A.labelWant, old: A.labelOld, oldApp: A.labelOldApp }));
+      ck(R.A3.frames === 125 && R.A3.bad === 0, 'A3 scale 3: 125 frames, 0 px differ ' + JSON.stringify(R.A3));
       ck(R.A4.length === 4 && R.A4.every((x) => x.stand === 0 && x.portrait === 0 && x.standChanged > 1000 && x.portraitChanged > 5000), 'A4 stand8 + portrait with the hat ' + JSON.stringify(R.A4));
       ck(t.pe.length === 0, 'A page errors ' + t.pe.join(' | '));
       await t.bc.close(); }
@@ -212,19 +237,40 @@ const keysDiff = (a, b) => [...new Set([...Object.keys(a || {}), ...Object.keys(
       await t.bc.close();
     }
     // ── F: files
-    { R.F = [];
-      const cases = HATS.map((f) => [f, { block: (n) => n === f }]).concat([['all 4', { block: (n) => HATS.includes(n) }], ['mask wrong size', { swap: { 'c2-hat-beret-mask.png': fs.readFileSync(path.join(__dirname, 'c2-hat-beret-pt-mask.png')) } }]]);
+    { R.F = []; R.Fx = {};   // R.F = one row per file case · R.Fx = the other numbers (an array's own keys would not print)
+      const fx = await (async () => {   // broken copies made in a page from the real files (canvas keeps exact RGBA where alpha is 255 or 0)
+        const t = await open(browser, VIEWS[0]); const r = await t.p.evaluate(async () => {
+          const load = (u) => new Promise((ok) => { const i = new Image(); i.onload = () => { const c = document.createElement('canvas'); c.width = i.naturalWidth; c.height = i.naturalHeight; const g = c.getContext('2d', { willReadFrequently: true }); g.drawImage(i, 0, 0); ok(c); }; i.src = u + '?fx=' + Date.now(); });
+          const b64 = (c) => c.toDataURL('image/png').split(',')[1], img = await load('c2-hat-beret.png'), mk = await load('c2-hat-beret-mask.png');
+          const m1 = document.createElement('canvas'); m1.width = mk.width; m1.height = mk.height; const g1 = m1.getContext('2d', { willReadFrequently: true }); g1.drawImage(mk, 0, 0);
+          const d = g1.getImageData(0, 0, m1.width, m1.height); let at = -1; for (let i = 0; i < d.data.length; i += 4) if (d.data[i + 3] && d.data[i] === 8) { at = i; break; }
+          d.data[at] = 3; d.data[at + 1] = 0; d.data[at + 2] = 0; g1.putImageData(d, 0, 0);
+          const e1 = document.createElement('canvas'), e2 = document.createElement('canvas'); for (const [c, s] of [[e1, img], [e2, mk]]) { c.width = s.width; c.height = s.height; const g = c.getContext('2d'); g.drawImage(s, 0, 0); g.clearRect(0, 0, 96, 96); }
+          return { wrongId: b64(m1), wrongAt: [(at / 4) % m1.width, Math.floor(at / 4 / m1.width)], emptyImg: b64(e1), emptyMask: b64(e2) }; });
+        await t.bc.close(); return r; })();
+      const pk = JSON.parse(fs.readFileSync(path.join(__dirname, 'c2-pack.json'), 'utf8')); pk.heads.beret.src = 'http://[';
+      R.Fx.fixtures = { wrongAt: fx.wrongAt };
+      const cases = HATS.map((f) => [f, { block: (n) => n === f }]).concat([['all 4', { block: (n) => HATS.includes(n) }], ['mask wrong size', { swap: { 'c2-hat-beret-mask.png': fs.readFileSync(path.join(__dirname, 'c2-hat-beret-pt-mask.png')) } }],
+        ['N1-A src http://[', { swap: { 'c2-pack.json': { type: 'application/json', body: JSON.stringify(pk) } } }], ['N1-B hat sprite never answers', { stall: (n) => n === 'c2-hat-beret.png' }],
+        ['N2 mask id 3 at ' + fx.wrongAt.join(','), { swap: { 'c2-hat-beret-mask.png': Buffer.from(fx.wrongId, 'base64') } }],
+        ['N2 S cell empty', { swap: { 'c2-hat-beret.png': Buffer.from(fx.emptyImg, 'base64'), 'c2-hat-beret-mask.png': Buffer.from(fx.emptyMask, 'base64') } }]]);
       for (const [lab, o] of cases) {
-        const t = await open(browser, VIEWS[0], o); await start(t.p, GIRL({ char2: C2('beret') }));
+        const t = await open(browser, VIEWS[0], o); const t0 = Date.now(); await start(t.p, GIRL({ char2: C2('beret') })); const settleMs = Date.now() - t0;
         const r = await t.p.evaluate(async () => { const c0 = JSON.stringify(S.char2); openGM(); await new Promise((r) => setTimeout(r, 300)); const row = __hatRow(); closeModal(); __hatDraws(); await __frames(10);
           const lit = (() => { const c = document.getElementById('c'), d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data; let n = 0; for (let i = 0; i < d.length; i += 4 * 97) if (d[i + 3]) n++; return n; })();
           return { st: C234.st, why: C234.why, hats: Char2.hats(), failed: C234.res && C234.res.failed, head: S.char2.parts.head, same: JSON.stringify(S.char2) === c0, beret: row && row.btn[1], note: row && row.note, hatDraws: window.__hd, body: C234.n.body || C234.n.call, lit }; });
-        r.label = lab; r.pe = t.pe.length; R.F.push(r); await t.bc.close();
-        ck(r.st === 'ready' && same(r.hats, []) && same(r.failed, []) && r.head === 'beret' && r.same && r.beret && r.beret[5] === true && r.beret[6] === '0.45' && r.note && r.hatDraws === 0 && r.lit > 100 && r.pe === 0,
+        r.label = lab; r.pe = t.pe.length; r.settleMs = settleMs; R.F.push(r); await t.bc.close();
+        ck(r.st === 'ready' && settleMs < 20000 && same(r.hats, []) && same(r.failed, []) && r.head === 'beret' && r.same && r.beret && r.beret[5] === true && r.beret[6] === '0.45' && r.note && r.hatDraws === 0 && r.lit > 100 && r.pe === 0,
           'F ' + lab + ' -> v2 body without the hat ' + JSON.stringify(r));
       }
-      const sw = fs.readFileSync(path.join(__dirname, 'sw.js'), 'utf8'); R.F.sw = { listed: HATS.filter((f) => sw.includes("'" + f + "'")).length, cache: (sw.match(/const CACHE='([^']+)'/) || [])[1] };
-      ck(R.F.sw.listed === 4, 'F sw.js lists the 4 hat files ' + JSON.stringify(R.F.sw));
+      { const t = await open(browser, VIEWS[0]); await start(t.p, GIRL()); await helpers(t.p);   // T58-N3: the hat sheet depends on hat + house only
+        R.Fx.cache = await t.p.evaluate(() => { Char2.trim(); const s0 = Char2.stats(), hairs = __T.pack.palette.hair.map((e) => e[0]), out = [];
+          for (const h of hairs) { const a = Object.assign({}, __appWith('beret'), { color: Object.assign({}, C234.app.color, { hair: h }) }); const x = Char2.sheet(a, { house: 'wing' }, 'hat'); out.push(!!x); if (x) x.release(); }
+          const s1 = Char2.stats(); return { hairs: hairs.length, got: out.filter(Boolean).length, entries: s1.entries.cached - s0.entries.cached, bytes: s1.cache - s0.cache, handles: s1.handles }; });
+        ck(R.Fx.cache.hairs === 8 && R.Fx.cache.got === 8 && R.Fx.cache.entries === 1 && R.Fx.cache.bytes === 768 * 96 * 4 && R.Fx.cache.handles === 0, 'F cache: 8 hair colours -> 1 hat sheet ' + JSON.stringify(R.Fx.cache));
+        ck(t.pe.length === 0, 'F cache page errors ' + t.pe.join(' | ')); await t.bc.close(); }
+      const sw = fs.readFileSync(path.join(__dirname, 'sw.js'), 'utf8'); R.Fx.sw = { listed: HATS.filter((f) => sw.includes("'" + f + "'")).length, cache: (sw.match(/const CACHE='([^']+)'/) || [])[1] };
+      ck(R.Fx.sw.listed === 4, 'F sw.js lists the 4 hat files ' + JSON.stringify(R.Fx.sw));
       // offline: SW on, v2 with the hat → the hat files are cached → offline reload still has the hat
       const bc = await browser.createBrowserContext(); const t = await open(browser, VIEWS[0], { bc, sw: true });
       await t.p.evaluate(() => navigator.serviceWorker.ready); await t.p.reload({ waitUntil: 'load' }); await t.p.waitForFunction(() => !document.getElementById('load'), { timeout: 90000 });
@@ -233,8 +279,8 @@ const keysDiff = (a, b) => [...new Set([...Object.keys(a || {}), ...Object.keys(
       await t.p.setOfflineMode(true); await t.p.reload({ waitUntil: 'load' }).catch(() => {}); await t.p.waitForFunction(() => !document.getElementById('load'), { timeout: 90000 }).catch(() => {});
       await start(t.p, null, true);
       const off = await t.p.evaluate(async () => { __hatDraws(); await __frames(10); return { st: C234.st, hats: Char2.hats(), hatDraws: window.__hd }; });
-      R.F.offline = { cached, off, pe: t.pe.length }; await bc.close();
-      ck(cached.ctl && cached.k === R.F.sw.cache && cached.r.every(Boolean) && off.st === 'ready' && same(off.hats, ['beret']) && off.hatDraws >= 10, 'F offline keeps the hat ' + JSON.stringify(R.F.offline));
+      R.Fx.offline = { cached, off, pe: t.pe.length }; await bc.close();
+      ck(cached.ctl && cached.k === R.Fx.sw.cache && cached.r.every(Boolean) && off.st === 'ready' && same(off.hats, ['beret']) && off.hatDraws >= 10, 'F offline keeps the hat ' + JSON.stringify(R.Fx.offline));
     }
     }
     // ── P: JS per frame, hat off vs on (same build, same save, the kid walking on the game's own path, alternating, paired)
@@ -247,17 +293,21 @@ const keysDiff = (a, b) => [...new Set([...Object.keys(a || {}), ...Object.keys(
         window.requestAnimationFrame = (f) => raw((ts) => { const t0 = performance.now(); try { f(ts); } finally { window.__js += performance.now() - t0; window.__cb++; } });
         window.__nf = 0; const cnt = () => { window.__nf++; raw(cnt); }; raw(cnt); });
       await cdp.send('Emulation.setCPUThrottlingRate', { rate: 4 }); await sleep(4000);
-      const runs = [], ROUNDS = +(process.env.P_ROUNDS || 6), MS = +(process.env.P_MS || 6000);
+      const runs = [], ROUNDS = +(process.env.P_ROUNDS || 12), MS = +(process.env.P_MS || 4000);
       for (let round = 0; round < ROUNDS; round++) { const row = { round: round + 1 };
         for (const k of round % 2 ? ['on', 'off'] : ['off', 'on']) {
           await t.p.evaluate((k) => { c255Set(k === 'on' ? 'beret' : null); }, k); await sleep(2000);
           const a = await t.p.evaluate(() => [window.__js, window.__nf, window.__walk, C234.n.call || 0]); await sleep(MS); const b = await t.p.evaluate(() => [window.__js, window.__nf, window.__walk, C234.n.call || 0]);
           row[k] = { jsms: +((b[0] - a[0]) / Math.max(1, b[1] - a[1])).toFixed(3), fps: +((b[1] - a[1]) / (MS / 1000)).toFixed(2), walked: Math.round(b[2] - a[2]), bodyDraws: b[3] - a[3] }; }
         row.js = +(row.on.jsms / row.off.jsms).toFixed(3); row.fps = +(row.on.fps / row.off.fps).toFixed(3); runs.push(row); }
-      await cdp.send('Emulation.setCPUThrottlingRate', { rate: 1 });
       const med = (a) => { const q = [...a].sort((x, y) => x - y), n = q.length; return n % 2 ? q[(n - 1) / 2] : +((q[n / 2 - 1] + q[n / 2]) / 2).toFixed(3); };
-      R.P = { method: '844x390 @3 · CPU 4x · ' + ROUNDS + ' rounds x ' + MS / 1000 + ' s per side · order alternates · ratio = median of the paired ratios (on / off of the same round)', runs,
+      const micro = await t.p.evaluate(() => { const cv = document.createElement('canvas'); cv.width = cv.height = 400; const g = cv.getContext('2d'), A = Char2.actor({ blinkAt: 1e12 }); A.dir = 'S'; A.anim = 'walk';
+        const dc = { house: (HOUSES[S.house] || HOUSES[0]).id }, a0 = __appWith(null), a1 = __appWith('beret'), T = { off: 0, on: 0 };
+        for (let i = 0; i < 40; i++) for (const [k, a] of i % 2 ? [['on', a1], ['off', a0]] : [['off', a0], ['on', a1]]) { const t0 = performance.now(); for (let j = 0; j < 100; j++) { A.fi = j % 6; Char2.draw(g, a, dc, A, 200, 330, 3); } g.getImageData(0, 0, 1, 1); T[k] += performance.now() - t0; }
+        return { offUs: +(T.off / 2000 * 1000).toFixed(1), onUs: +(T.on / 2000 * 1000).toFixed(1), ratio: +(T.on / T.off).toFixed(3) }; });
+      R.P = { method: '844x390 @3 · CPU 4x · ' + ROUNDS + ' rounds x ' + MS / 1000 + ' s per side · order alternates · ratio = median of the round ratios (on / off of the same round)', runs, micro,
         jsRatio: med(runs.map((r) => r.js)), fpsRatio: med(runs.map((r) => r.fps)), offJs: med(runs.map((r) => r.off.jsms)), onJs: med(runs.map((r) => r.on.jsms)), offFps: med(runs.map((r) => r.off.fps)), onFps: med(runs.map((r) => r.on.fps)) };
+      await cdp.send('Emulation.setCPUThrottlingRate', { rate: 1 });
       ck(R.P.jsRatio <= 1.10 && R.P.fpsRatio >= 0.90 && runs.every((r) => r.on.walked > 50 && r.off.walked > 50 && r.on.bodyDraws > 0 && r.off.bodyDraws > 0), 'P JS per frame hat on <= off x 1.10, fps >= 90 %, kid walking + drawn ' + JSON.stringify(R.P));
       ck(t.pe.length === 0, 'P page errors ' + t.pe.join(' | '));
       await t.bc.close();
