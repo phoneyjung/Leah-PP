@@ -15,8 +15,9 @@
 // F  files: each hat file blocked (404) one at a time and all 4 together, with a save that wears the hat: v2 still ready (body drawn), Char2.hats() [],
 //    the beret button dimmed + a note, S.char2 not rewritten, 0 page errors · a broken mask (wrong size) → the same · sw.js lists the 4 files and the hat
 //    files come into the offline cache once v2 is on; an offline reload still shows the hat
-// P  JS per frame (CDP ScriptDuration ÷ frames, CPU 4×, 844×390 @3, 3 rounds hat off / on alternating, 8 s each, median): on ≤ off × 1.10 (FPS itself:
-//    qa/g4/fps.js, main 2.44 vs this branch, reported apart)
+// P  JS per frame = the time spent inside every requestAnimationFrame callback ÷ frames (CPU 4×, 844×390 @3, the kid walking on the game's own path,
+//    6 rounds × 6 s per side, hat off / on alternating, median of the paired ratios): on ≤ off × 1.10 · fps on ≥ 90 % of off (FPS main 2.44 vs
+//    this branch: qa/g4/fps.js, reported apart)
 // Screens: s-phone-*.png / s-ipad-*.png (panel open · hat on in the game).  Prints one JSON line, then `errors N`.
 // Run: PORT=8812 CHROME_EXE=/path/to/chromium node test_250_hat.js   (serve the repo root first)
 const fs = require('node:fs'), path = require('node:path'), puppeteer = require('puppeteer');
@@ -143,6 +144,7 @@ const keysDiff = (a, b) => [...new Set([...Object.keys(a || {}), ...Object.keys(
 (async () => {
   const browser = await puppeteer.launch({ executablePath: process.env.CHROME_EXE || undefined, args: ['--no-sandbox'] });
   try {
+    if (!process.env.ONLY_P) {   // ONLY_P=1: the timing part alone
     // ── A + A4 (phone)
     { const t = await open(browser, VIEWS[0]); await start(t.p, GIRL());
       const st = await t.p.evaluate(() => ({ st: C234.st, why: C234.why, hats: Char2.hats(), version: Char2.version, res: C234.res }));
@@ -234,22 +236,29 @@ const keysDiff = (a, b) => [...new Set([...Object.keys(a || {}), ...Object.keys(
       R.F.offline = { cached, off, pe: t.pe.length }; await bc.close();
       ck(cached.ctl && cached.k === R.F.sw.cache && cached.r.every(Boolean) && off.st === 'ready' && same(off.hats, ['beret']) && off.hatDraws >= 10, 'F offline keeps the hat ' + JSON.stringify(R.F.offline));
     }
-    // ── P: JS per frame, hat off vs on (same build, same save, alternating)
+    }
+    // ── P: JS per frame, hat off vs on (same build, same save, the kid walking on the game's own path, alternating, paired)
     if (process.env.PERF !== '0') {
-      const t = await open(browser, VIEWS[0]); await start(t.p, GIRL()); const cdp = await t.p.target().createCDPSession(); await cdp.send('Performance.enable'); await cdp.send('Emulation.setCPUThrottlingRate', { rate: 4 });
-      await t.p.evaluate(() => { window.__fr = 0; const f = () => { window.__fr++; requestAnimationFrame(f); }; requestAnimationFrame(f);
-        let dir = 1; setInterval(() => { try { const tx = P.x + dir * 96; if (typeof findPath === 'function') { P.path = findPath(P.x, P.y, tx, P.y) || P.path; } dir = -dir; } catch (e) {} }, 1500); });
-      const m = async () => { const r = await cdp.send('Performance.getMetrics'); const o = {}; for (const x of r.metrics) o[x.name] = x.value; return o; };
-      const runs = { off: [], on: [] };
-      for (let round = 0; round < 3; round++) for (const k of round % 2 ? ['on', 'off'] : ['off', 'on']) {
-        await t.p.evaluate((k) => { c255Set(k === 'on' ? 'beret' : null); }, k); await sleep(2000);
-        const a = await m(), f0 = await t.p.evaluate(() => window.__fr); await sleep(8000); const b = await m(), f1 = await t.p.evaluate(() => window.__fr);
-        runs[k].push({ fps: Math.round((f1 - f0) / 8 * 10) / 10, jsms: Math.round((b.ScriptDuration - a.ScriptDuration) * 1000 / Math.max(1, f1 - f0) * 1000) / 1000 });
-      }
-      const med = (a) => [...a].sort((x, y) => x - y)[1];
-      R.P = { runs, off: { fps: med(runs.off.map((x) => x.fps)), jsms: med(runs.off.map((x) => x.jsms)) }, on: { fps: med(runs.on.map((x) => x.fps)), jsms: med(runs.on.map((x) => x.jsms)) } };
-      R.P.jsRatio = Math.round(R.P.on.jsms / R.P.off.jsms * 1000) / 1000; R.P.fpsRatio = Math.round(R.P.on.fps / R.P.off.fps * 1000) / 1000;
-      ck(R.P.jsRatio <= 1.10 && R.P.fpsRatio >= 0.90, 'P JS per frame hat on <= off x 1.10, fps >= 90 % ' + JSON.stringify(R.P));
+      const t = await open(browser, VIEWS[0]); await start(t.p, GIRL()); const cdp = await t.p.target().createCDPSession();
+      await t.p.evaluate(() => { const T0 = window.T || 32; goMap('capital'); P.path = P.act = null; LITE = false; fpsChecks = 6; S.eco = false;
+        const a = [P.x, P.y], bb = [P.x + 5 * T0, P.y]; let k = 0; window.__walk = 0; let lx = P.x, ly = P.y;
+        setInterval(() => { if (!P.path || !P.path.length) { k ^= 1; const g = k ? bb : a; P.path = findPath(M, P.x, P.y, g[0], g[1]) || [[g[0], g[1]]]; } window.__walk += Math.hypot(P.x - lx, P.y - ly); lx = P.x; ly = P.y; }, 100);
+        const raw = window.requestAnimationFrame.bind(window); window.__raw = raw; window.__js = 0; window.__cb = 0;   // every frame callback timed (the game's loop and anything else on rAF)
+        window.requestAnimationFrame = (f) => raw((ts) => { const t0 = performance.now(); try { f(ts); } finally { window.__js += performance.now() - t0; window.__cb++; } });
+        window.__nf = 0; const cnt = () => { window.__nf++; raw(cnt); }; raw(cnt); });
+      await cdp.send('Emulation.setCPUThrottlingRate', { rate: 4 }); await sleep(4000);
+      const runs = [], ROUNDS = +(process.env.P_ROUNDS || 6), MS = +(process.env.P_MS || 6000);
+      for (let round = 0; round < ROUNDS; round++) { const row = { round: round + 1 };
+        for (const k of round % 2 ? ['on', 'off'] : ['off', 'on']) {
+          await t.p.evaluate((k) => { c255Set(k === 'on' ? 'beret' : null); }, k); await sleep(2000);
+          const a = await t.p.evaluate(() => [window.__js, window.__nf, window.__walk, C234.n.call || 0]); await sleep(MS); const b = await t.p.evaluate(() => [window.__js, window.__nf, window.__walk, C234.n.call || 0]);
+          row[k] = { jsms: +((b[0] - a[0]) / Math.max(1, b[1] - a[1])).toFixed(3), fps: +((b[1] - a[1]) / (MS / 1000)).toFixed(2), walked: Math.round(b[2] - a[2]), bodyDraws: b[3] - a[3] }; }
+        row.js = +(row.on.jsms / row.off.jsms).toFixed(3); row.fps = +(row.on.fps / row.off.fps).toFixed(3); runs.push(row); }
+      await cdp.send('Emulation.setCPUThrottlingRate', { rate: 1 });
+      const med = (a) => { const q = [...a].sort((x, y) => x - y), n = q.length; return n % 2 ? q[(n - 1) / 2] : +((q[n / 2 - 1] + q[n / 2]) / 2).toFixed(3); };
+      R.P = { method: '844x390 @3 · CPU 4x · ' + ROUNDS + ' rounds x ' + MS / 1000 + ' s per side · order alternates · ratio = median of the paired ratios (on / off of the same round)', runs,
+        jsRatio: med(runs.map((r) => r.js)), fpsRatio: med(runs.map((r) => r.fps)), offJs: med(runs.map((r) => r.off.jsms)), onJs: med(runs.map((r) => r.on.jsms)), offFps: med(runs.map((r) => r.off.fps)), onFps: med(runs.map((r) => r.on.fps)) };
+      ck(R.P.jsRatio <= 1.10 && R.P.fpsRatio >= 0.90 && runs.every((r) => r.on.walked > 50 && r.off.walked > 50 && r.on.bodyDraws > 0 && r.off.bodyDraws > 0), 'P JS per frame hat on <= off x 1.10, fps >= 90 %, kid walking + drawn ' + JSON.stringify(R.P));
       ck(t.pe.length === 0, 'P page errors ' + t.pe.join(' | '));
       await t.bc.close();
     }
