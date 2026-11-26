@@ -105,6 +105,7 @@ H = 'c2-hat-beret'
 pack['heads'] = {'beret': {'src': H + '.png', 'mask': H + '-mask.png', 'size': png_size(H + '.png'), 'pt': H + '-pt.png', 'pt_mask': H + '-pt-mask.png',
                            'pt_size': png_size(H + '-pt.png'), 'sha256': sha(H + '.png'), 'mask_sha256': sha(H + '-mask.png'),
                            'pt_sha256': sha(H + '-pt.png'), 'pt_mask_sha256': sha(H + '-pt-mask.png'),
+                           'ids': [1, 8, 9, 11],   # the materials of ASSET_SPEC_15 section 2 (outline · house cloth · copper pin · inner line) · char2 refuses any other id
                            'shift': {an: {d: hs[an][d] for d in DIRS} for an in ('idle', 'walk', 'walkhold')}}}
 assert png_size(H + '-mask.png') == pack['heads']['beret']['size'] and png_size(H + '-pt-mask.png') == pack['heads']['beret']['pt_size']
 pack['bases']['kid4']['parts']['head'] = ['beret']

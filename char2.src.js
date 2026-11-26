@@ -159,23 +159,34 @@
   }
 
   // ---------- G5.5 hats (pack.heads): optional · a hat that cannot load is simply not drawn (never in `failed`, so the body is never affected) ----------
-  function headOk(p, h) {   // one pack.heads entry: files, sizes = 8 cells / the portrait, shift [dx,dy] (|v| <= 8) per frame of every sheet
-    try {
-      const C = p.cell, P = p.portrait;
-      if (!isObj(h) || ![h.src, h.mask, h.pt, h.pt_mask].every(isStr) || !isSize(h.size, 8 * C, C) || !isSize(h.pt_size, P.size[0], P.size[1]) || !isObj(h.shift)) return false;
+  const HAT_FILE = /^[A-Za-z0-9][A-Za-z0-9._-]{0,80}\.png$/, HAT_GRACE = 1500, HAT_END = 12000;   // T58-N1: a hat may wait 1.5 s after the body, never past 12 s from the start (game gives the whole load 20 s)
+  function headOk(p, h) {   // one pack.heads entry: plain .png names next to the pack · sizes = 8 cells / the portrait · ids = the materials it may use
+    try {                   // (T58-N2: only fixed ids + the house group, so the hat's look depends on the house alone) · shift [dx,dy] (|v| <= 8) per frame of every sheet
+      const C = p.cell, P = p.portrait, R = p.materials.recolour;
+      if (!isObj(h) || ![h.src, h.mask, h.pt, h.pt_mask].every((f) => isStr(f) && HAT_FILE.test(f)) || !isSize(h.size, 8 * C, C) || !isSize(h.pt_size, P.size[0], P.size[1]) || !isObj(h.shift)) return false;
+      if (!Array.isArray(h.ids) || !h.ids.length || new Set(h.ids).size !== h.ids.length || !h.ids.every((i) => inR(i, 1, 11) && (R[i] === undefined || R[i] === 'house')) || !h.ids.some((i) => R[i] === 'house')) return false;
       return ['idle', 'walk', 'walkhold'].every((an) => isObj(h.shift[an]) && p.dirs.every((d) => { const L = h.shift[an][d];
         return Array.isArray(L) && L.length === p.sheets[an].frames && L.every((v) => Array.isArray(v) && v.length === 2 && v.every((x) => inR(x, -8, 8))); }));
     } catch (e) { return false; }
   }
-  function hatMaskOk(p, A, M) {   // every hat px opaque (255) with mask alpha 255, id 1-11, a recolour id inside its ramp · clear px clear · the house colour present
-    const a = A.data, m = M.data, R = p.materials.recolour, lim = {}; let house = false;
-    for (const id in R) lim[id] = p.palette[R[id]][0][1].length;
+  function hatMaskOk(p, h, A, M, cells) {   // every hat px opaque (255) with mask alpha 255 and an id of h.ids, a recolour id inside its ramp · clear px clear
+    const a = A.data, m = M.data, R = p.materials.recolour, ok = new Set(h.ids), lim = {}, cw = A.width / cells, n = new Array(cells).fill(0); let house = false;   // T58-N2: every one of the
+    for (const id in R) lim[id] = p.palette[R[id]][0][1].length;                                                                                                   // `cells` columns has hat px
     for (let i = 0; i < a.length; i += 4) {
       if (a[i + 3] === 0) { if (m[i + 3] !== 0) return false; continue; }
-      const id = m[i]; if (a[i + 3] !== 255 || m[i + 3] !== 255 || id < 1 || id > 11) return false;
+      const id = m[i]; if (a[i + 3] !== 255 || m[i + 3] !== 255 || !ok.has(id)) return false;
       if (lim[id] !== undefined) { if (m[i + 1] >= lim[id]) return false; if (R[id] === 'house') house = true; }
+      n[Math.floor(((i >> 2) % A.width) / cw)]++;
     }
-    return house;
+    return house && n.every((x) => x > 0);
+  }
+  async function hatFetch(p, id, at, pw, ph) {   // T58-N1: one hat's 4 files, checked · never throws (a bad name / URL / file = null) · runs alongside the body files
+    try {
+      const h = p.heads[id], C = p.cell; if (!isName(id) || !headOk(p, h)) return null;
+      const [a, m, b, n] = await Promise.all([getImg(at(h.src)), getImg(at(h.mask)), getImg(at(h.pt)), getImg(at(h.pt_mask))]);
+      const A = pixels(a, 8 * C, C), M = pixels(m, 8 * C, C), HA = pixels(b, pw, ph), HM = pixels(n, pw, ph);
+      return A && M && HA && HM && hatMaskOk(p, h, A, M, 8) && hatMaskOk(p, h, HA, HM, 1) ? { A, M, HA, HM } : null;
+    } catch (e) { return null; }
   }
   function hatBoxes(A, C) {   // [x0,y0,x1,y1) of the hat px in each of the 8 cells (null = empty cell)
     const out = [];
@@ -211,6 +222,7 @@
     const { t, j: p } = await getJSON(base.href);
     if (!packOk(p)) return { ready: false, failed: ['pack'], pack: null };
     const at = (f) => new URL(f, base).href, C = p.cell, failed = [], raw = [], fixed = { images: 0, masks: 0, other: 0 };
+    const t0 = Date.now(), hatJobs = isObj(p.heads) ? Object.keys(p.heads).map((id) => { const x = { id, res: undefined }; x.job = hatFetch(p, id, at, p.portrait.size[0], p.portrait.size[1]).then((v) => { x.res = v; }); return x; }) : [];
     const sh = {};
     await Promise.all(['idle', 'walk', 'walkhold'].map(async (k) => {
       const s = p.sheets[k], [w, h] = s.size;
@@ -243,16 +255,17 @@
     else if (!(PM && isObj(pj.j) && isObj(ps.j) && ptMaskOk(p, PA, PM, pj.j, ps.j))) { PM = null; failed.push('portrait-mask'); }
     if (PA) fixed.images += PA.data.length; if (PM) fixed.masks += PM.data.length;
     const hats = Object.create(null), hatFailed = [], comp = compBox(p, holdOn ? hold : null, lanA, lanL), geo = geometry(p, sh);
-    if (isObj(p.heads)) await Promise.all(Object.keys(p.heads).map(async (id) => {   // G5.5: each hat on its own · any doubt -> that hat is not drawn
-      const h = p.heads[id]; if (!isName(id) || !headOk(p, h)) { hatFailed.push(id); return; }
-      const [a, m, b, n] = await Promise.all([getImg(at(h.src)), getImg(at(h.mask)), getImg(at(h.pt)), getImg(at(h.pt_mask))]);
-      const A = pixels(a, 8 * C, C), M = pixels(m, 8 * C, C), HA = pixels(b, pw, ph), HM = pixels(n, pw, ph);
-      if (!(A && M && HA && HM && hatMaskOk(p, A, M) && hatMaskOk(p, HA, HM))) { hatFailed.push(id); return; }
-      const box = hatBoxes(A, C), hg = hatGeo(p, id, box, sh);
+    if (hatJobs.length) {   // G5.5: the body is done · hats still on the way get HAT_GRACE more (never past HAT_END) · late / bad = that hat is not drawn
+      const left = Math.max(0, Math.min(HAT_GRACE, HAT_END - (Date.now() - t0)));
+      await Promise.race([Promise.all(hatJobs.map((x) => x.job)), new Promise((r) => setTimeout(r, left))]);
+    }
+    for (const x of hatJobs) {
+      const id = x.id, r = x.res; if (!r) { hatFailed.push(id); continue; }
+      const { A, M, HA, HM } = r, box = hatBoxes(A, C), hg = hatGeo(p, id, box, sh);
       for (const an in hg.G) for (const d in hg.G[an]) { const u = hg.G[an][d]; if (u) { comp[0] = Math.min(comp[0], u[0]); comp[1] = Math.min(comp[1], u[1]); comp[2] = Math.max(comp[2], u[2]); comp[3] = Math.max(comp[3], u[3]); } }
       hats[id] = { A, M, HA, HM, box, geo: hg.G, label: [geo.label[0], Math.min(geo.label[1], hg.top - 4)] };
       fixed.images += A.data.length + HA.data.length; fixed.masks += M.data.length + HM.data.length;
-    }));
+    }
     if (g !== GEN) return Object.assign({}, GONE, { failed: ['released'] });   // release() was called while this load ran
     ST = { pack: deepFreeze(p), key: p.id + '@' + p.version + '#' + hashText(t), sh, idleFrom, walkFrom, raw: raw.sort(), hold, holdOn,
            lanC, lanL: lanLC, geo, comp, portrait: PA ? { A: PA, M: PM, meta: pj.j, smap: ps.j } : null, hats, fixed };
@@ -405,7 +418,8 @@
     return out;
   }
   function entry(an, o) {
-    const k = an + '|' + o.hair + '|' + o.iris + '|' + o.skin + '|' + o.house + (o.head && (an === 'hat' || an === 'stand8' || an === 'portrait') ? '|' + o.head : ''); let e = CACHE.get(k);
+    const k = an === 'hat' ? 'hat|' + o.head + '|' + o.house   // T58-N3: a hat uses fixed ids + the house only (headOk), so one sheet per hat and house
+      : an + '|' + o.hair + '|' + o.iris + '|' + o.skin + '|' + o.house + (o.head && (an === 'stand8' || an === 'portrait') ? '|' + o.head : ''); let e = CACHE.get(k);
     if (e) CNT.hit++; else { CNT.miss++; e = build(an, o); if (!e) return null; if (GONEK.has(k)) CNT.rebuilt++; CACHE.set(k, e); }
     e.last = ++USE; return e;
   }
@@ -510,7 +524,8 @@
         let g = ctx, sx = X0, sy = Y0, z = s;
         if (comp) { g = COMP.getContext('2d'); g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.globalCompositeOperation = 'source-over'; g.clearRect(0, 0, COMP.width, COMP.height); g.imageSmoothingEnabled = false; sx = -B[0]; sy = -B[1]; z = 1; }
         g.drawImage(e.cv, kk * C, di * C, C, C, sx, sy, C * z, C * z);
-        if (hs) g.drawImage(hb.cv, di * C, 0, C, C, sx + hs[0] * z, sy + hs[1] * z, C * z, C * z);   // layer order (plan G5 3): body -> hat -> held in front
+        if (hs) { const b = ST.hats[o.head].box[di]; if (b) g.drawImage(hb.cv, di * C + b[0], b[1], b[2] - b[0], b[3] - b[1], sx + (hs[0] + b[0]) * z, sy + (hs[1] + b[1]) * z, (b[2] - b[0]) * z, (b[3] - b[1]) * z); }   // body -> hat -> held in front
+                  // (plan G5 3) · only the hat's own box of this dir (≈ 1/7 of the cell: same pixels, less to draw)
         if (t) {
           g.drawImage(ST.lanC, 0, 0, LN, LN, sx + lx * z, sy + ly * z, LN * z, LN * z);
           if (la) { g.globalAlpha = la; g.drawImage(ST.lanL, 0, 0, LN, LN, sx + lx * z, sy + ly * z, LN * z, LN * z); g.globalAlpha = 1; }
