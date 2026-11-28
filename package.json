@@ -21,6 +21,6 @@
     "test:tk-pack": "node test_222_tk_pack.js"
   },
   "devDependencies": {
-    "puppeteer": "^23.0.0"
+    "puppeteer": "25.8.0"
   }
 }

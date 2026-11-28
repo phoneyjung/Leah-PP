@@ -11,7 +11,10 @@
 //    changed · a future one (v 3), a string, an array, another set → failed "unreadable", S.char2 unchanged after save() · 2.35 (Codex T39-N1): a v2 look
 //    whose INSIDE is wrong (gender / base / parts / colours / an unknown key / an unknown `from`: anything Char2 would replace with a default) → the same
 // B  the way back: flag off keeps S.char2 · "clear" (flag off + S.char2 removed) → off · flag on again → migrated again from the old fields
-// O  game 2.33 (main) opens a save holding char2 + char2On, plays and saves → both kept (needs MAIN_PORT = a server of main; without it this part is reported 'skipped')
+// O  the game at MAIN_PORT opens a save holding char2 + char2On, plays and saves → both kept byte-identical (needs MAIN_PORT = a server of the build a
+//    rollback would go back to; without it this part is reported 'skipped'). Any version (testfix-2, 28 Nov 2569 — it pinned "2.33" before, so it failed
+//    against main 2.44+): O1 = a plain v2 look · O2 = the same look wearing the beret (a build before 2.45 cannot draw it and falls back to the old
+//    character, but must not drop or rewrite the save) · the version it ran on is printed
 // Prints one JSON line, then `errors N`.  Run: PORT=8775 [MAIN_PORT=8776] CHROME_EXE=/path/to/chromium node test_234_save.js
 const fs = require('node:fs'), puppeteer = require('puppeteer');
 const out = process.env.OUT_DIR || '/tmp/leah-234-save'; fs.mkdirSync(out, { recursive: true });
@@ -98,17 +101,17 @@ const CASES = [
       R.B = { first: JSON.parse(first).color.hair, off, cleared, again, pe: t.pe.length };
       ck(off.st === 'off' && off.kept === first && cleared.st === 'off' && cleared.gone && again.st === 'ready' && again.hair === 'green' && again.from === 'hc' && t.pe.length === 0, 'B ' + JSON.stringify(R.B));
       await t.bc.close(); }
-    // O: game 2.33 (main) keeps both fields
-    if (mainBase) {
+    // O: the MAIN_PORT build keeps both fields (O1 plain · O2 with the beret)
+    if (mainBase) for (const [tag, look] of [['O1', good], ['O2', Object.assign({}, good, { parts: Object.assign({}, good.parts, { head: 'beret' }) })]]) {
       const t = await open(browser, mainBase);
-      R.O = await t.p.evaluate(async (good) => {
+      const r = await t.p.evaluate(async (good) => {
         const d = Store.all(); d.slots = [Object.assign(newSave({ name: 'Pim', kid: 0, house: 1, age: 7 }), { char2On: true, char2: good })]; d.cur = 0; Store.put(d); S = d.slots[0]; S.seen = { intro: 1 };
         startGame(); document.querySelectorAll('#cr,#title,#picker').forEach((e) => e.classList.add('hide')); DLG = null; try { closeModal(); } catch (e) {}
         await new Promise((r) => setTimeout(r, 2500)); S.coins = (S.coins || 0) + 5; save();
-        const s = Store.all().slots[0]; return { version: VERSION, on: s.char2On === true, same: JSON.stringify(s.char2) === JSON.stringify(good), coins: s.coins };
-      }, good);
-      R.O.pe = t.pe.length;
-      ck(/2\.33/.test(R.O.version) && R.O.on && R.O.same && R.O.coins === 5 && R.O.pe === 0, 'O main keeps char2 + char2On ' + JSON.stringify(R.O));
+        const s = Store.all().slots[0]; return { version: VERSION, st: typeof C234 === 'object' ? C234.st : 'none', on: s.char2On === true, same: JSON.stringify(s.char2) === JSON.stringify(good), coins: s.coins };
+      }, look);
+      r.pe = t.pe.length; (R.O = R.O || {})[tag] = r;
+      ck(/^Lantern Academy \d+\.\d+/.test(r.version) && r.on && r.same && r.coins === 5 && r.pe === 0, 'O ' + tag + ' the MAIN_PORT build keeps char2 + char2On ' + JSON.stringify(r));
       await t.bc.close();
     } else R.O = 'skipped (MAIN_PORT not set)';
   } catch (e) { errors.push('crash: ' + String(e && e.stack || e).slice(0, 300)); }

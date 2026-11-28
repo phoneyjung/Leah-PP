@@ -4,7 +4,9 @@
 // The expected numbers are worked out HERE from the plan's table (k_old head 60 · body 30 · top 60 · label 66 · e per site) and the anchors
 // Char2 gives for the actor's CURRENT frame (Char2 is the oracle only for its own anchors, as the plan says) — never from c234D / c234Box4.
 // S  static: the 37 planned sites, each exactly once in the branch with the planned kind and old distance (and the old literal gone);
-//    the same old literal once in main (MAIN_PORT) · other players' label (P4) untouched · W10 (≤ 20 px from the feet) untouched
+//    MAIN_PORT side (testfix-2, 28 Nov 2569 — it assumed main was still before 2.39, so it failed against main 2.39+): each site either has the old
+//    literal once and no new code (a build before G4.3) or the new code once and no old literal (a build with G4.3), never a mix · other players'
+//    label (P4) untouched · W10 (≤ 20 px from the feet) untouched
 // F  formula: 8 directions × idle / walking × not holding (capital) / holding (cavemouth) × 3 steps × every kind and planned distance:
 //    c234D(kind, d) = 94 − anchor_y + d − k_old (0 px) · c234Box4() = [P.x + x0 − 48 + ro, P.y − (94 − y0 + 4), x1 − x0, 94 − y0 + 8]
 //    flag off: c234D(kind, d) = d · c234Box4() = null
@@ -94,13 +96,15 @@ async function setup(p, o) {
   // ── S static
   {
     const br = await (await fetch(base + 'index.html')).text(), mn = mainBase ? await (await fetch(mainBase + 'index.html')).text() : null;
-    const rows = SITES.map(([w, k, d, nb, om]) => ({ w, k, d, inBranch: count(br, nb), oldInBranch: count(br, om), oldInMain: mn === null ? null : count(mn, om) }));
-    const bad = rows.filter((r) => r.inBranch !== 1 || r.oldInBranch !== 0 || (r.oldInMain !== null && r.oldInMain !== 1));
+    const rows = SITES.map(([w, k, d, nb, om]) => ({ w, k, d, inBranch: count(br, nb), oldInBranch: count(br, om), oldInMain: mn === null ? null : count(mn, om), newInMain: mn === null ? null : count(mn, nb) }));
+    const kindOf = (r) => (r.oldInMain === null ? null : r.oldInMain === 1 && r.newInMain === 0 ? 'pre-G4.3' : r.oldInMain === 0 && r.newInMain === 1 ? 'has-G4.3' : 'mixed');
+    const kinds = [...new Set(rows.map(kindOf))], mainKind = mn === null ? null : kinds.length === 1 ? kinds[0] : 'mixed';
+    const bad = rows.filter((r) => r.inBranch !== 1 || r.oldInBranch !== 0 || (mn !== null && kindOf(r) !== mainKind));
     const helpers = { c234D: count(br, "c234D('"), box4: count(br, 'add(...(c234Box4()'), after: count(br, 'if(c234After(f,al))break') };
     const p4 = { branch: count(br, 'o.y-camY-F-2'), main: mn === null ? null : count(mn, 'o.y-camY-F-2') };
     const w10 = ["y:P.y-10,life:.5+i*.15", 'P.y-20+(Math.random()-.5)*30'].map((x) => [count(br, x), mn === null ? null : count(mn, x)]);
-    R.S = { sites: SITES.length, bad: bad.length, byRow: SITES.reduce((a, s) => ((a[s[0]] = (a[s[0]] || 0) + 1), a), {}), helpers, p4, w10, mainChecked: mn !== null };
-    ck(bad.length === 0, 'S planned sites ' + JSON.stringify(bad));
+    R.S = { sites: SITES.length, bad: bad.length, byRow: SITES.reduce((a, s) => ((a[s[0]] = (a[s[0]] || 0) + 1), a), {}), helpers, p4, w10, mainChecked: mn !== null, mainKind };
+    ck(bad.length === 0 && mainKind !== 'mixed', 'S planned sites ' + JSON.stringify({ bad, mainKind }));
     ck(helpers.c234D === 35 && helpers.box4 === 1 && helpers.after === 1, 'S helper calls in old code ' + JSON.stringify(helpers));   // 35 c234D calls in old lines (2 label + 9 head + 20 body + 4 top)
     ck(p4.branch >= 1 && (p4.main === null || p4.main === p4.branch), 'S other players label untouched ' + JSON.stringify(p4));
     ck(w10.every(([b, m]) => b >= 1 && (m === null || m === b)), 'S W10 near-feet untouched ' + JSON.stringify(w10));
