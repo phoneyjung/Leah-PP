@@ -21,7 +21,7 @@
 // P  JS per frame = the time spent inside every requestAnimationFrame callback ÷ frames (CPU 4×, 844×390 @3, the kid walking on the game's own path,
 //    12 rounds × 4 s per side, hat off / on, the order alternating). Formula (T58-N4): ratio of a round = on ÷ off of THAT round; the result = the
 //    median of the 12 round ratios (not median(on) ÷ median(off)). Pass: JS ≤ 1.10 · fps ≥ 0.90. Also the hat's own cost: Char2.draw with ÷ without
-//    the hat at scale 3 (the phone's), 2,000 draws each in alternating blocks of 100, CPU 4× (reported). FPS main 2.44 vs this branch: qa/g4/fps.js, reported apart
+//    the hat at scale 3 (the phone's), 4,000 draws each in alternating blocks of 100 (40 rounds × both sides), CPU 4×, µs = time ÷ draws counted (reported). FPS main 2.44 vs this branch: qa/g4/fps.js, reported apart
 // Screens: s-phone-*.png / s-ipad-*.png (panel open · hat on in the game).  Prints one JSON line, then `errors N`.
 // Run: PORT=8812 CHROME_EXE=/path/to/chromium node test_250_hat.js   (serve the repo root first)
 const fs = require('node:fs'), path = require('node:path'), puppeteer = require('puppeteer');
@@ -302,9 +302,9 @@ const keysDiff = (a, b) => [...new Set([...Object.keys(a || {}), ...Object.keys(
         row.js = +(row.on.jsms / row.off.jsms).toFixed(3); row.fps = +(row.on.fps / row.off.fps).toFixed(3); runs.push(row); }
       const med = (a) => { const q = [...a].sort((x, y) => x - y), n = q.length; return n % 2 ? q[(n - 1) / 2] : +((q[n / 2 - 1] + q[n / 2]) / 2).toFixed(3); };
       const micro = await t.p.evaluate(() => { const cv = document.createElement('canvas'); cv.width = cv.height = 400; const g = cv.getContext('2d'), A = Char2.actor({ blinkAt: 1e12 }); A.dir = 'S'; A.anim = 'walk';
-        const dc = { house: (HOUSES[S.house] || HOUSES[0]).id }, a0 = __appWith(null), a1 = __appWith('beret'), T = { off: 0, on: 0 };
-        for (let i = 0; i < 40; i++) for (const [k, a] of i % 2 ? [['on', a1], ['off', a0]] : [['off', a0], ['on', a1]]) { const t0 = performance.now(); for (let j = 0; j < 100; j++) { A.fi = j % 6; Char2.draw(g, a, dc, A, 200, 330, 3); } g.getImageData(0, 0, 1, 1); T[k] += performance.now() - t0; }
-        return { offUs: +(T.off / 2000 * 1000).toFixed(1), onUs: +(T.on / 2000 * 1000).toFixed(1), ratio: +(T.on / T.off).toFixed(3) }; });
+        const dc = { house: (HOUSES[S.house] || HOUSES[0]).id }, a0 = __appWith(null), a1 = __appWith('beret'), T = { off: 0, on: 0 }, N = { off: 0, on: 0 };
+        for (let i = 0; i < 40; i++) for (const [k, a] of i % 2 ? [['on', a1], ['off', a0]] : [['off', a0], ['on', a1]]) { const t0 = performance.now(); for (let j = 0; j < 100; j++) { A.fi = j % 6; Char2.draw(g, a, dc, A, 200, 330, 3); N[k]++; } g.getImageData(0, 0, 1, 1); T[k] += performance.now() - t0; }
+        return { draws: N, offUs: +(T.off / N.off * 1000).toFixed(1), onUs: +(T.on / N.on * 1000).toFixed(1), ratio: +(T.on / T.off).toFixed(3) }; });   // T59-N1: divide by the draws counted (4,000 a side)
       R.P = { method: '844x390 @3 · CPU 4x · ' + ROUNDS + ' rounds x ' + MS / 1000 + ' s per side · order alternates · ratio = median of the round ratios (on / off of the same round)', runs, micro,
         jsRatio: med(runs.map((r) => r.js)), fpsRatio: med(runs.map((r) => r.fps)), offJs: med(runs.map((r) => r.off.jsms)), onJs: med(runs.map((r) => r.on.jsms)), offFps: med(runs.map((r) => r.off.fps)), onFps: med(runs.map((r) => r.on.fps)) };
       await cdp.send('Emulation.setCPUThrottlingRate', { rate: 1 });
