@@ -2,9 +2,9 @@
 // A  flag values that are NOT true (missing · false · 1 · "true" · {}) on a girl of 7: state off, Char2 never loaded, 0 requests for char2.js / c2-*, no S.char2      → 5/5
 // B  who may use it (D-G4-2 ก): ages 5–13 × gender194 f / m / none (kid 0 = girl look, kid 3 = boy look) → c234Who '' only for a girl of 6–9 (table 9 × 4 = 36)
 //    + flag on for a boy of 7 and a girl of 10: state off, 0 requests
-// C  flag on, girl 7: ready within 15 s · each of the 15 files asked for once · S.char2 = v 2 set c2 + from · every old field unchanged (deep compare) · written by save()
+// C  flag on, girl 7: ready within 15 s · each of the NF files (15 → 19 in 2.45) asked for once · S.char2 = v 2 set c2 + from · every old field unchanged (deep compare) · written by save()
 // D  turning the flag off while it loads, at 4 seams of Char2.load (pack held · body sheet held · lantern held · portrait held): the late result is dropped (state off,
-//    no S.char2) · after the hold is released 0 new loads and no file asked for twice · turning it on again reuses the first load → ready, still 15 files once each
+//    no S.char2) · after the hold is released 0 new loads and no file asked for twice · turning it on again reuses the first load → ready, still NF files once each
 // E  switching saves A (flag on) → B (flag off) → A while A loads: B never gets char2, A gets it once, no save written across (Store checked after save())
 // F  GM panel (S.gm): the row, the state text, the on/off button (≥ 44 px) and "clear v2" needing a second tap; a boy's row is disabled with "ยังไม่มีตัวแบบนี้"
 //    2.36 (Codex T39-N4): the on/off button is aria-pressed false/true, no inline background, and when on its text reads on the drawn pixels (contrast ≥ 4.5)
@@ -17,6 +17,8 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const errors = [], R = {};
 const ck = (c, m) => { if (!c) errors.push(m); };
 const C2 = /\/(char2\.js|c2-[^/?#]+)(\?|$)/;
+// 2.45 (G5.5): the number of character-v2 files = char2.js + c2-pack.json + every file the pack names (15 up to 2.44 · 19 with the beret's 4 pictures)
+const NF = 2 + new Set(JSON.stringify(JSON.parse(fs.readFileSync(path.join(__dirname, 'c2-pack.json'), 'utf8'))).match(/"[\w.-]+\.(?:png|json)"/g)).size;
 async function open(browser, hold) {   // hold: a file name whose response is held until release()
   const bc = await browser.createBrowserContext(), p = await bc.newPage(), pe = [], req = [];
   let release = null; const gate = new Promise((r) => { release = r; });
@@ -74,7 +76,7 @@ const strip = (o) => { const c = JSON.parse(JSON.stringify(o)); delete c.char2; 
       const uniq = new Set(t.req).size;
       R.C = { ok, st: s.st, why: s.why, char2: s.char2, req: t.req.length, uniq, cnt: s.cnt, oldSame: JSON.stringify(strip(before)) === JSON.stringify(strip(after)), stored: !!(stored.char2 && stored.char2.v === 2 && stored.char2On === true), pe: t.pe };
       ck(ok && s.st === 'ready' && s.char2 && s.char2.v === 2 && s.char2.set === 'c2' && s.char2.from === 'hc' && s.char2.color.hair === 'red' && s.char2.color.iris === 'green', 'C ready + look ' + JSON.stringify(R.C).slice(0, 400));
-      ck(t.req.length === 15 && uniq === 15, 'C 15 files once each: ' + t.req.length + '/' + uniq);
+      ck(t.req.length === NF && uniq === NF, 'C ' + NF + ' files once each: ' + t.req.length + '/' + uniq);
       ck(R.C.oldSame && R.C.stored && t.pe.length === 0, 'C old fields / stored / errors ' + JSON.stringify({ oldSame: R.C.oldSame, stored: R.C.stored, pe: t.pe }));
       await t.p.screenshot({ path: path.join(out, 'c-ready.png') }); await t.bc.close(); }
     // D: off while loading, at 4 seams
@@ -88,7 +90,7 @@ const strip = (o) => { const c = JSON.parse(JSON.stringify(o)); delete c.char2; 
       const uniq = new Set(t.req).size;
       const row = { hold, seen: t.req.includes(hold), mid: mid.st, after: s1.st, char2After: !!s1.char2, reqAfterOff: n1, again: s2.st, loads: s2.cnt.load, scripts: s2.cnt.script, req: t.req.length, uniq, pe: t.pe.length };
       R.D.push(row);
-      ck(row.seen && row.mid === 'off' && row.after === 'off' && !row.char2After && ok2 && row.again === 'ready' && row.loads <= 2 && row.scripts === 1 && row.req === row.uniq && row.uniq === 15 && row.pe === 0, 'D ' + JSON.stringify(row));
+      ck(row.seen && row.mid === 'off' && row.after === 'off' && !row.char2After && ok2 && row.again === 'ready' && row.loads <= 2 && row.scripts === 1 && row.req === row.uniq && row.uniq === NF && row.pe === 0, 'D ' + JSON.stringify(row));
       await t.bc.close();
     }
     // E: A (on) → B (off) → A while A loads

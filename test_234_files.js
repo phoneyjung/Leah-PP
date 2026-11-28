@@ -14,7 +14,8 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const errors = [], R = { cold: [], warm: [], bad: [] };
 const ck = (c, m) => { if (!c) errors.push(m); };
 const pack = JSON.parse(fs.readFileSync(path.join(__dirname, 'c2-pack.json'), 'utf8'));
-const FILES = ['char2.js', 'c2-pack.json'].concat([...new Set(JSON.stringify(pack).match(/"[\w.-]+\.(?:png|json)"/g).map((s) => s.slice(1, -1)))].sort());
+const core = Object.assign({}, pack); delete core.heads;   // 2.45 (G5.5): hat files are optional (a missing hat = no hat, the body still v2) · tested in test_250_hat.js
+const FILES = ['char2.js', 'c2-pack.json'].concat([...new Set(JSON.stringify(core).match(/"[\w.-]+\.(?:png|json)"/g).map((s) => s.slice(1, -1)))].sort());
 const nameOf = (u) => { const m = u.match(/\/(char2\.js|c2-[^/?#]+)(\?|$)/); return m ? m[1] : null; };
 async function page(bc, rule, sw) {   // rule(name) → 'block' | {body,type} | {hold:ms} | undefined
   const p = await bc.newPage(), pe = [];
